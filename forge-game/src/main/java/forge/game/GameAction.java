@@ -685,7 +685,7 @@ public class GameAction {
     }
 
     /** */
-    public final void checkStaticAbilities() {
+    public final void checkStaticAbilities() { // TODO return checkagain in SBA
         if (game.isGameOver()) {
             return;
         }
@@ -875,10 +875,9 @@ public class GameAction {
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
             }
-            
-            boolean yamazaki = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Brothers Yamazaki")).size() ==  2;
+
             for (Player p : game.getPlayers()) {
-                if (this.handleLegendRule(p, yamazaki)) {
+                if (this.handleLegendRule(p)) {
                     checkAgain = true;
                 }
 
@@ -1041,19 +1040,16 @@ public class GameAction {
      */
     private boolean stateBasedAction704_5r(Card c) {
         boolean checkAgain = false;
-        // +1/+1 counters should erase -1/-1 counters
-        if (c.getCounters(CounterType.P1P1) > 0 && c.getCounters(CounterType.M1M1) > 0) {
-            int plusOneCounters = c.getCounters(CounterType.P1P1);
-            int minusOneCounters = c.getCounters(CounterType.M1M1);
-
-            if (plusOneCounters >= minusOneCounters) c.getCounters().remove(CounterType.M1M1);
-            if (plusOneCounters <= minusOneCounters)  c.getCounters().remove(CounterType.P1P1);
-
-            int diff = plusOneCounters - minusOneCounters;
-            if (diff != 0) {
-                CounterType ct = diff > 0 ? CounterType.P1P1 : CounterType.M1M1;
-                c.getCounters().put(ct, Math.abs(diff));
-            }
+        int plusOneCounters = c.getCounters(CounterType.P1P1);
+        int minusOneCounters = c.getCounters(CounterType.M1M1);
+        if (plusOneCounters > 0 && minusOneCounters > 0) {
+            int remove = Math.min(plusOneCounters, minusOneCounters);
+            // If a permanent has both a +1/+1 counter and a -1/-1 counter on it,
+            // N +1/+1 and N -1/-1 counters are removed from it, where N is the
+            // smaller of the number of +1/+1 and -1/-1 counters on it.
+            // This should fire remove counters trigger
+            c.subtractCounter(CounterType.P1P1, remove);
+            c.subtractCounter(CounterType.M1M1, remove);
             checkAgain = true;
         }
         return checkAgain;
@@ -1186,16 +1182,15 @@ public class GameAction {
      * destroyLegendaryCreatures.
      * </p>
      */
-    private boolean handleLegendRule(Player p, boolean yama) {
+    private boolean handleLegendRule(Player p) {
         final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             return false;
         }
         boolean recheck = false;
-        if (yama) {
-            List<Card> yamazaki = CardLists.filter(a, CardPredicates.nameEquals("Brothers Yamazaki"));
-            a.removeAll(yamazaki);
-        }
+        List<Card> yamazaki = CardLists.getKeyword(a, "Legend rule doesn't apply to CARDNAME.");
+        a.removeAll(yamazaki);
+
 
         Multimap<String, Card> uniqueLegends = ArrayListMultimap.create();
         for (Card c : a) {
