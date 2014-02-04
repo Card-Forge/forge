@@ -483,7 +483,8 @@ public enum FControl implements KeyEventDispatcher {
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
 
         Singletons.getModel().getPreferences().actuateMatchPreferences();
-
+        VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
+        
         setCurrentScreen(FScreen.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
@@ -503,7 +504,7 @@ public enum FControl implements KeyEventDispatcher {
             game.subscribeToEvents(playbackControl);
         }
 
-        VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
+        
 
         for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
             field.getDetailsPanel().getLblLibrary().setHoverable(Preferences.DEV_MODE);
