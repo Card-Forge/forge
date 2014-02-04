@@ -294,8 +294,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
     public void setup(final Map<ColumnDef, ItemColumn> cols, GroupDef groupBy, ColumnDef pileBy) {
         this.listView.setup(cols);
-        this.imageView.setGroupBy(groupBy);
-        this.imageView.setPileBy(pileBy);
+        this.imageView.setGroupBy(groupBy, true);
+        this.imageView.setPileBy(pileBy, true);
     }
 
     public void setViewIndex(int index) {

@@ -148,12 +148,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         });
         groups.add(new Group("")); //add default group
+        getScroller().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
     public GroupDef getGroupBy() {
         return groupBy;
     }
     public void setGroupBy(GroupDef groupBy0) {
+        setGroupBy(groupBy, false);
+    }
+    public void setGroupBy(GroupDef groupBy0, boolean forSetup) {
         if (groupBy == groupBy0) { return; }
         groupBy = groupBy0;
 
@@ -168,19 +172,23 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
 
-        refresh(this.getSelectedItems(), this.getSelectedIndex());
+        if (!forSetup) {
+            refresh(this.getSelectedItems(), this.getSelectedIndex());
+        }
     }
 
     public ColumnDef getPileBy() {
         return pileBy;
     }
     public void setPileBy(ColumnDef pileBy0) {
+        setPileBy(pileBy0, false);
+    }
+    public void setPileBy(ColumnDef pileBy0, boolean forSetup) {
+        if (pileBy == pileBy0) { return; }
         pileBy = pileBy0;
-        if (pileBy == null) {
-            getScroller().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        }
-        else {
-            getScroller().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        if (!forSetup) {
+            refresh(this.getSelectedItems(), this.getSelectedIndex());
         }
     }
 
