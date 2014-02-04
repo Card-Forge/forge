@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -39,10 +40,12 @@ import forge.view.arcane.CardPanel;
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
     private static final float GAP_SCALE_FACTOR = 0.04f;
+    private static final float PILE_SPACING_Y = 0.1f;
     private static final int GROUP_HEADER_HEIGHT = 19;
 
     private final CardViewDisplay display;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
+    private int itemsPerRow;
     private int imageScaleFactor = 3;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
@@ -69,7 +72,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                 if (!group.items.isEmpty() && point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
                                     group.isCollapsed = !group.isCollapsed;
                                     clearSelection(); //must clear selection since indices and visible items will be changing
-                                    updateLayout();
+                                    updateLayout(false);
                                     collapsedChanged = true;
                                 }
                                 else {
@@ -194,7 +197,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onResize() {
-        updateLayout(); //need to update layout to adjust wrapping of items
+        updateLayout(false); //need to update layout to adjust wrapping of items
     }
 
     @Override
@@ -235,34 +238,48 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             groups.remove(groups.size() - 1); //remove Other group if empty
         }
 
-        updateLayout();
+        updateLayout(true);
     }
 
-    private void updateLayout() {
-        orderedItems.clear();
-
-        int x, groupY;
+    private void updateLayout(boolean forRefresh) {
+        int x, groupY, pileY, pileHeight, maxPileHeight;
         int y = PADDING;
-        int groupX = PADDING;
+        int groupX = groupBy == null ? 0 : PADDING;
         int itemAreaWidth = getVisibleSize().width;
         int groupWidth = itemAreaWidth - 2 * groupX;
-        int pileX = groupBy == null ? groupX : 2 * groupX + 1;
+        int pileX = groupBy == null ? PADDING : 2 * PADDING + 1;
         int pileWidth = itemAreaWidth - 2 * pileX;
 
-        int itemIndex = 0;
         int itemWidth = 50 * imageScaleFactor;
         int gap = Math.round(itemWidth * GAP_SCALE_FACTOR);
         int dx = itemWidth + gap;
-        int itemsPerRow = (pileWidth + gap) / dx;
+        itemsPerRow = (pileWidth + gap) / dx;
         if (itemsPerRow == 0) {
             itemsPerRow = 1;
             itemWidth = pileWidth;
         }
         int itemHeight = Math.round(itemWidth * CardPanel.ASPECT_RATIO);
-        int dy = itemHeight + gap;
+        int dy = pileBy == null ? itemHeight + gap : Math.round(itemHeight * PILE_SPACING_Y);
 
-        for (Group group : groups) {
-            group.piles.clear();
+        for (int i = 0; i < groups.size(); i++) {
+            Group group = groups.get(i);
+
+            if (forRefresh && pileBy != null) { //refresh piles if needed
+                //use TreeMap to build pile set so iterating below sorts on key
+                ColumnDef groupPileBy = groupBy == null ? pileBy : groupBy.getGroupPileBy(i, pileBy);
+                TreeMap<Comparable<?>, Pile> piles = new TreeMap<Comparable<?>, Pile>();
+                for (ItemInfo itemInfo : group.items) {
+                    Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
+                    if (!piles.containsKey(key)) {
+                        piles.put(key, new Pile());
+                    }
+                    piles.get(key).items.add(itemInfo);
+                }
+                group.piles.clear();
+                for (Pile pile : piles.values()) {
+                    group.piles.add(pile);
+                }
+            }
 
             groupY = y;
             if (groupBy != null) {
@@ -277,35 +294,70 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 continue;
             }
 
-            Pile pile = new Pile(); //use a pile for each row
-            x = pileX;
+            if (pileBy == null) {
+                //if not piling by anything, wrap items using a pile for each row
+                group.piles.clear();
+                Pile pile = new Pile();
+                x = pileX;
 
-            for (ItemInfo itemInfo : group.items) {
-                itemInfo.index = itemIndex++;
-                orderedItems.add(itemInfo);
+                for (ItemInfo itemInfo : group.items) {
+                    if (pile.items.size() == itemsPerRow) {
+                        pile = new Pile();
+                        x = pileX;
+                        y += dy;
+                    }
 
-                if (pile.items.size() == itemsPerRow) {
-                    pile = new Pile();
-                    x = pileX;
-                    y += dy;
+                    itemInfo.setBounds(x, y, itemWidth, itemHeight);
+
+                    if (pile.items.size() == 0) {
+                        pile.setBounds(pileX, y, pileWidth, itemHeight);
+                        group.piles.add(pile);
+                    }
+                    pile.items.add(itemInfo);
+                    x += dx;
                 }
-
-                itemInfo.setBounds(x, y, itemWidth, itemHeight);
-
-                if (pile.items.size() == 0) {
-                    pile.setBounds(pileX, y, pileWidth, itemHeight);
-                    group.piles.add(pile);
+                y += itemHeight;
+            }
+            else {
+                x = pileX - group.scrollValue;
+                pileY = y;
+                maxPileHeight = 0;
+                for (Pile pile : group.piles) {
+                    y = pileY;
+                    for (ItemInfo itemInfo : pile.items) {
+                        itemInfo.setBounds(x, y, itemWidth, itemHeight);
+                        y += dy;
+                    }
+                    pileHeight = y + itemHeight - dy - pileY;
+                    if (pileHeight > maxPileHeight) {
+                        maxPileHeight = pileHeight;
+                    }
+                    pile.setBounds(x, pileY, itemWidth, pileHeight);
+                    x += dx;
                 }
-                pile.items.add(itemInfo);
-                x += dx;
+                y = pileY + maxPileHeight; //update y for setting group height below
             }
 
-            y += itemHeight;
             if (groupBy != null) {
                 y += PADDING + 1; //leave room for group footer
             }
             group.setBounds(groupX, groupY, groupWidth, y - groupY);
             y += PADDING;
+        }
+
+        if (forRefresh) { //refresh ordered items if needed
+            int index = 0;
+            orderedItems.clear();
+            for (Group group : groups) {
+                if (group.isCollapsed || group.items.isEmpty()) { continue; }
+
+                for (Pile pile : group.piles) {
+                    for (ItemInfo itemInfo : pile.items) {
+                        itemInfo.index = index++;
+                        orderedItems.add(itemInfo);
+                    }
+                }
+            }
         }
 
         display.setPreferredSize(new Dimension(itemAreaWidth, y));
@@ -339,12 +391,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         Insets insets = getScroller().getInsets();
         size =  new Dimension(size.width - insets.left - insets.right,
                 size.height - insets.top - insets.bottom);
-        if (scroller.getVerticalScrollBarPolicy() != ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER) {
-            size.width -= scroller.getVerticalScrollBar().getPreferredSize().width;
-        }
-        if (scroller.getHorizontalScrollBarPolicy() != ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
-            size.height -= scroller.getHorizontalScrollBar().getPreferredSize().height;
-        }
+        size.width -= scroller.getVerticalScrollBar().getPreferredSize().width;
         return size;
     }
 
@@ -402,7 +449,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (group.isCollapsed) {
                         group.isCollapsed = false;
                         clearSelection(); //must clear selection since indices and visible items will be changing
-                        updateLayout();
+                        updateLayout(false);
                     }
                     return itemInfo.index;
                 }
@@ -546,6 +593,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final List<Pile> piles = new ArrayList<Pile>();
         private final String name;
         private boolean isCollapsed;
+        private int scrollValue = 0;
 
         public Group(String name0) {
             name = name0;
@@ -563,7 +611,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private class Pile extends DisplayArea {
         private final List<ItemInfo> items = new ArrayList<ItemInfo>();
     }
-    private class ItemInfo extends DisplayArea {
+    private class ItemInfo extends DisplayArea implements Entry<InventoryItem, Integer> {
         private final T item;
         private int index;
         private boolean selected;
@@ -575,6 +623,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         @Override
         public String toString() {
             return item.toString();
+        }
+
+        @Override
+        public InventoryItem getKey() {
+            return item;
+        }
+
+        @Override
+        public Integer getValue() {
+            return 1;
+        }
+
+        @Override
+        public Integer setValue(Integer value) {
+            return 1;
         }
     }
 
@@ -600,12 +663,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final Dimension visibleSize = getVisibleSize();
             final int visibleTop = getScroller().getVerticalScrollBar().getValue();
             final int visibleBottom = visibleTop + visibleSize.height;
-            final int visibleLeft = getScroller().getHorizontalScrollBar().getValue();
-            final int visibleRight = visibleLeft + visibleSize.width;
+            Rectangle bounds = groups.get(0).getBounds();
+            final int visibleLeft = bounds.x + 1; //use first group left and width as defined visible horizontal bounds
+            final int visibleRight = bounds.x + bounds.width - 2;
 
             FSkin.setGraphicsFont(g2d, ItemListView.ROW_FONT);
             FontMetrics fm = g2d.getFontMetrics();
             int fontOffsetY = (GROUP_HEADER_HEIGHT - fm.getHeight()) / 2 + fm.getAscent();
+
+            Rectangle baseClip = g.getClipBounds();
 
             for (Group group : groups) {
                 if (group.getBottom() < visibleTop) {
@@ -614,8 +680,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (group.getTop() >= visibleBottom) {
                     break;
                 }
+                bounds = group.getBounds();
                 if (groupBy != null) {
-                    Rectangle bounds = group.getBounds();
+                    g2d.setClip(baseClip.intersection(bounds)); //set clip region for header
                     FSkin.setGraphicsColor(g2d, ItemListView.HEADER_BACK_COLOR);
                     g2d.fillRect(bounds.x, bounds.y, bounds.width, GROUP_HEADER_HEIGHT - 1);
                     FSkin.setGraphicsColor(g2d, ItemListView.FORE_COLOR);
@@ -655,6 +722,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 else if (group.items.isEmpty()) {
                     continue;
                 }
+
+                //set clip region for piles if needed to prevent appearing them left or right of group borders
+                if (pileBy != null) {
+                    g2d.setClip(baseClip.intersection(new Rectangle(bounds.x + 1, baseClip.y, bounds.width - 2, baseClip.height)));
+                }
+
+                ItemInfo skippedItem = null;
                 for (Pile pile : group.piles) {
                     if (pile.getBottom() < visibleTop || pile.getRight() < visibleLeft) {
                         continue;
@@ -663,21 +737,26 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         break;
                     }
                     for (ItemInfo itemInfo : pile.items) {
-                        if (itemInfo.getBottom() < visibleTop || itemInfo.getRight() < visibleLeft) {
+                        if (itemInfo.getBottom() < visibleTop) {
                             continue;
                         }
-                        if (itemInfo.getTop() >= visibleBottom || itemInfo.getLeft() >= visibleRight) {
+                        if (itemInfo.getTop() >= visibleBottom) {
                             break;
                         }
                         if (itemInfo != hoveredItem) { //save hovered item for last
                             drawItemImage(g2d, itemInfo);
                         }
+                        else {
+                            skippedItem = itemInfo;
+                        }
                     }
                 }
+                if (skippedItem != null) { //draw hovered item on top
+                    drawItemImage(g2d, skippedItem);
+                }
             }
-            if (hoveredItem != null) { //draw hovered item on top
-                drawItemImage(g2d, hoveredItem);
-            }
+
+            g2d.setClip(baseClip);
         }
 
         private void drawItemImage(Graphics2D g, ItemInfo itemInfo) {
