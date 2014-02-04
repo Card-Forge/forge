@@ -59,7 +59,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
             zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         }
 
-        String valid = "";
+        String valid = "Card";
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
@@ -79,13 +79,13 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                List<Card> pool = new ArrayList<Card>();
+                List<Card> pool0 = new ArrayList<Card>();
                 if (sa.hasParam("DefinedCards")) {
-                    pool = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
+                    pool0 = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
                 } else {
-                    pool = p.getCardsIn(zone);
+                    pool0 = p.getCardsIn(zone);
                 }
-                pool = CardLists.getValidCards(pool, valid, card.getController(), card);
+                List<Card> pool = CardLists.getValidCards(pool0, valid, card.getController(), card);
                 int size = pool.size();
 
                 // first, separate the cards into piles
