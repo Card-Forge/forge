@@ -82,8 +82,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
 
                     final Card threatSource = topStack.getSourceCard();
-                    List<? extends GameObject> objects = getTargets(sa);
-
+                    List<? extends GameObject> objects = getTargets(topStack);
                     if (!topStack.usesTargeting() && topStack.hasParam("ValidPlayers") && !topStack.hasParam("Defined")) {
                         objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
                     }
