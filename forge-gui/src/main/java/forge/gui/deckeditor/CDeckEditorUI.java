@@ -89,6 +89,7 @@ public enum CDeckEditorUI implements ICDoc {
             this.childController.resetUIChanges();
             if (isClosing) {
                 screenChildControllers.remove(this.childController.getScreen());
+                this.childController = null;
             }
         }
         return true;
