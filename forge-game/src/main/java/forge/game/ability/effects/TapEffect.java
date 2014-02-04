@@ -29,12 +29,15 @@ public class TapEffect extends SpellAbilityEffect {
             if (tgt != null && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
-
-            if (sa.hasParam("ETB") || tgtC.isInPlay()) {
-                if (tgtC.isUntapped() && (remTapped)) {
+            if (tgtC.isInPlay()) {
+                if (tgtC.isUntapped() && remTapped) {
                     card.addRemembered(tgtC);
                 }
                 tgtC.tap();
+            }
+            if (sa.hasParam("ETB")) {
+                // do not fire Taps triggers
+                tgtC.setTapped(true);
             }
         }
     }

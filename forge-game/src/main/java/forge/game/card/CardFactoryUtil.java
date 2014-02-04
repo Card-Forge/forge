@@ -291,94 +291,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * abilityTransmute.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param transmuteCost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.game.spellability.SpellAbility} object.
-     */
-    public static SpellAbility abilityTransmute(final Card sourceCard, String transmuteCost) {
-        transmuteCost += " Discard<1/CARDNAME>";
-        final Cost abCost = new Cost(transmuteCost, true);
-        class AbilityTransmute extends AbilityActivated {
-            public AbilityTransmute(final Card ca, final Cost co, final TargetRestrictions t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTransmute(getSourceCard(), getPayCosts(), getTargetRestrictions());
-                CardFactory.copySpellAbility(this, res);
-                res.getRestrictions().setZone(ZoneType.Hand);
-                return res;
-            }
-
-            private static final long serialVersionUID = -4960704261761785512L;
-
-            @Override
-            public boolean canPlayAI(Player aiPlayer) {
-                return false;
-            }
-
-            @Override
-            public boolean canPlay() {
-                return super.canPlay() && sourceCard.getController().canCastSorcery();
-            }
-
-            @Override
-            public void resolve() {
-                final List<Card> cards = sourceCard.getController().getCardsIn(ZoneType.Library);
-                final List<Card> sameCost = new ArrayList<Card>();
-
-                for (Card c : cards) {
-                    if (c.isSplitCard() && c.getCurState() == CardCharacteristicName.Original) {
-                        if (c.getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC() == sourceCard.getManaCost().getCMC() ||
-                                c.getState(CardCharacteristicName.RightSplit).getManaCost().getCMC() == sourceCard.getManaCost().getCMC()) {
-                            sameCost.add(c);
-                        }
-                    }
-                    else if (c.getManaCost().getCMC() == sourceCard.getManaCost().getCMC()) {
-                        sameCost.add(c);
-                    }
-                }
-
-                if (sameCost.isEmpty()) {
-                    return;
-                }
-
-                final Card c1 = sourceCard.getController().getController().chooseSingleEntityForEffect(sameCost, this, "Select a card", true);
-                if (c1 != null) {
-                    // ability.setTargetCard((Card)o);
-
-                    sourceCard.getController().discard(sourceCard, this);
-                    sourceCard.getGame().getAction().moveToHand(c1);
-
-                }
-                sourceCard.getController().shuffle(this);
-            }
-        }
-        final SpellAbility transmute = new AbilityTransmute(sourceCard, abCost, null);
-
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Transmute (").append(abCost.toString());
-        sbDesc.append("Search your library for a card with the same converted mana cost as this card, reveal it, ");
-        sbDesc.append("and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)");
-        transmute.setDescription(sbDesc.toString());
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard).append(" Transmute: Search your library ");
-        sbStack.append("for a card with the same converted mana cost.)");
-        transmute.setStackDescription(sbStack.toString());
-
-        transmute.getRestrictions().setZone(ZoneType.Hand);
-        return transmute;
-    } // abilityTransmute()
-
-    /**
-     * <p>
      * abilitySuspendStatic.
      * </p>
      * 
@@ -2231,8 +2143,17 @@ public class CardFactoryUtil {
                 final String parse = card.getKeyword().get(n);
                 card.removeIntrinsicKeyword(parse);
                 final String manacost = parse.split(":")[1];
-
-                card.addSpellAbility(abilityTransmute(card, manacost));
+                final String sbTransmute = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
+                        + " | CostDesc$ Transmute " + ManaCostParser.parse(manacost)+ " | ActivationZone$ Hand"
+                        + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ" + card.getManaCost().getCMC()
+                        + " | ChangeNum$ 1 | SorcerySpeed$ True | References$ TransmuteX | SpellDescription$ ("
+                        + ManaCostParser.parse(manacost) + ", Discard this card: Search your library for a card "
+                        + "with the same converted mana cost as the discarded card, reveal that card, "
+                        + "and put it into your hand. Then shuffle your library. Activate this ability "
+                        + "only any time you could cast a sorcery.)";
+                final SpellAbility abTransmute = AbilityFactory.getAbility(sbTransmute, card);
+                card.addSpellAbility(abTransmute);
+                card.getUnparsedAbilities().add(sbTransmute);
             }
         } // transmute
 
@@ -2285,7 +2206,7 @@ public class CardFactoryUtil {
 
             StringBuilder ab = new StringBuilder();
             ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Champion$ True | ");
-            ab.append("Hidden$ True | Optional$ True | SubAbility$ DBSacrifice | ChangeType$ ").append(changeType);
+            ab.append("Hidden$ True | Optional$ True | SubAbility$ ChampionSacrifice | ChangeType$ ").append(changeType);
 
             StringBuilder subAb = new StringBuilder();
             subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
@@ -2297,7 +2218,7 @@ public class CardFactoryUtil {
             card.addTrigger(parsedTrigReturn);
             card.setSVar("ChampionAbility", ab.toString());
             card.setSVar("ChampionReturn", returnChampion);
-            card.setSVar("DBSacrifice", subAb.toString());
+            card.setSVar("ChampionSacrifice", subAb.toString());
         }
         
         if (card.hasKeyword("If CARDNAME would be put into a graveyard "
@@ -2427,12 +2348,12 @@ public class CardFactoryUtil {
                     + "When this attacks, you may have target creature defending player "
                     + "controls untap and block it if able.";
             final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
-                    + "TgtPrompt$ Select target creature defending player controls | SubAbility$ DBUntap";
+                    + "TgtPrompt$ Select target creature defending player controls | SubAbility$ ProvokeUntap";
             final String dbString = "DB$ Untap | Defined$ Targeted";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
             card.addTrigger(parsedTrigger);
             card.setSVar("ProvokeAbility", abString);
-            card.setSVar("DBUntap", dbString);
+            card.setSVar("ProvokeUntap", dbString);
         }
 
         if (card.hasKeyword("Living Weapon")) {
@@ -3070,22 +2991,6 @@ public class CardFactoryUtil {
      * 
      */
     public static final void parseKeywords(final Card card, final String cardName) {
-        if (card.hasKeyword("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
-            card.addComesIntoPlayCommand(new Command() {
-                private static final long serialVersionUID = 6436821515525468682L;
-
-                @Override
-                public void run() {
-                    final List<Card> lands = card.getController().getLandsInPlay();
-                    lands.remove(card);
-                    if (!(lands.size() <= 2)) {
-                        // it enters the battlefield this way, and should not
-                        // fire triggers
-                        card.setTapped(true);
-                    }
-                }
-            });
-        }
         if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a") != -1) {
             final int n = hasKeyword(card,
                     "CARDNAME enters the battlefield tapped unless you control a");
