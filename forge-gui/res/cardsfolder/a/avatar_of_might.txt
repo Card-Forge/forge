@@ -1,7 +1,6 @@
 Name:Avatar of Might
 ManaCost:6 G G
 Types:Creature Avatar
-Text:
 PT:8/8
 K:Trample
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ LEY | Description$ If an opponent controls at least four more creatures than you, CARDNAME costs {6} less to cast.
