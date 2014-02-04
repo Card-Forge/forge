@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -31,6 +32,8 @@ import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
@@ -41,7 +44,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
     private static final float GAP_SCALE_FACTOR = 0.04f;
     private static final float PILE_SPACING_Y = 0.1f;
+    private static final SkinColor GROUP_HEADER_FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private static final SkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(120);
+    private static final SkinFont GROUP_HEADER_FONT = FSkin.getFont(12);
     private static final int GROUP_HEADER_HEIGHT = 19;
+    private static final int GROUP_HEADER_GLYPH_WIDTH = 6;
 
     private final CardViewDisplay display;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
@@ -107,7 +114,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 focus();
 
                 ItemInfo item = getItemAtPoint(e.getPoint());
-                if (item == null) { return false; }
+                if (item == null) {
+                    if (!e.isControlDown() && !e.isShiftDown()) {
+                        clearSelection();
+                        onSelectionChange();
+                    }
+                    return false;
+                }
 
                 if (item.selected) {
                     //toggle selection off item if Control down and left mouse down, otherwise do nothing
@@ -243,10 +256,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private void updateLayout(boolean forRefresh) {
         int x, groupY, pileY, pileHeight, maxPileHeight;
         int y = PADDING;
-        int groupX = groupBy == null ? 0 : PADDING;
+        int groupX = PADDING;
         int itemAreaWidth = getVisibleSize().width;
         int groupWidth = itemAreaWidth - 2 * groupX;
-        int pileX = groupBy == null ? PADDING : 2 * PADDING + 1;
+        int pileX = PADDING;
         int pileWidth = itemAreaWidth - 2 * pileX;
 
         int itemWidth = 50 * imageScaleFactor;
@@ -345,9 +358,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 y = pileY + maxPileHeight; //update y for setting group height below
             }
 
-            if (groupBy != null) {
-                y += PADDING + 1; //leave room for group footer
-            }
             group.setBounds(groupX, groupY, groupWidth, y - groupY);
             y += PADDING;
         }
@@ -664,7 +674,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final int visibleTop = getScroller().getVerticalScrollBar().getValue();
             final int visibleBottom = visibleTop + visibleSize.height;
 
-            FSkin.setGraphicsFont(g2d, ItemListView.ROW_FONT);
+            FSkin.setGraphicsFont(g2d, GROUP_HEADER_FONT);
             FontMetrics fm = g2d.getFontMetrics();
             int fontOffsetY = (GROUP_HEADER_HEIGHT - fm.getHeight()) / 2 + fm.getAscent();
 
@@ -677,41 +687,45 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 if (groupBy != null) {
                     Rectangle bounds = group.getBounds();
-                    FSkin.setGraphicsColor(g2d, ItemListView.HEADER_BACK_COLOR);
-                    g2d.fillRect(bounds.x, bounds.y, bounds.width, GROUP_HEADER_HEIGHT - 1);
-                    FSkin.setGraphicsColor(g2d, ItemListView.FORE_COLOR);
-                    g2d.drawString(group.name + " (" + group.items.size() + ")", bounds.x + PADDING, bounds.y + fontOffsetY);
+
+                    //draw header background and border if hovered
+                    //TODO: Uncomment
+                    //FSkin.setGraphicsColor(g2d, ItemListView.HEADER_BACK_COLOR);
+                    //g2d.fillRect(bounds.x, bounds.y, bounds.width, GROUP_HEADER_HEIGHT - 1);
+                    //FSkin.setGraphicsColor(g2d, ItemListView.GRID_COLOR);
+                    //g2d.drawRect(bounds.x, bounds.y, bounds.width - 1, GROUP_HEADER_HEIGHT - 1);
+
+                    //draw group name and horizontal line
+                    int x = bounds.x + GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
+                    int y = bounds.y + fontOffsetY;
+                    FSkin.setGraphicsColor(g2d, GROUP_HEADER_FORE_COLOR);
+                    String caption = group.name + " (" + group.items.size() + ")";
+                    g2d.drawString(caption, x, y);
+                    x += fm.stringWidth(caption) + PADDING;
+                    y = bounds.y + GROUP_HEADER_HEIGHT / 2;
+                    FSkin.setGraphicsColor(g2d, GROUP_HEADER_LINE_COLOR);
+                    g2d.drawLine(x, y, bounds.x + bounds.width - 1, y);
+
                     if (!group.items.isEmpty()) { //draw expand/collapse glyph as long as group isn't empty
-                        int offset = GROUP_HEADER_HEIGHT / 4;
-                        int x1 = bounds.x + bounds.width - PADDING;
-                        int x2 = x1 - offset;
-                        int x3 = x2 - offset;
-                        int y2 = bounds.y + GROUP_HEADER_HEIGHT / 2;
-                        if (!group.isCollapsed) {
-                            offset *= -1;
-                            y2++;
-                        }
-                        int y1 = y2 - offset;
-                        g2d.drawLine(x1, y1, x2, y2);
-                        g2d.drawLine(x2, y2, x3, y1);
+                        Polygon glyph = new Polygon();
+                        int offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
+                        x = bounds.x + offset;
                         if (group.isCollapsed) {
-                            offset++;
+                            y++;
+                            glyph.addPoint(x, y - offset);
+                            glyph.addPoint(x + offset, y);
+                            glyph.addPoint(x, y + offset);
                         }
                         else {
-                            offset--;
+                            glyph.addPoint(x - offset + 2, y + offset - 1);
+                            glyph.addPoint(x + offset, y + offset - 1);
+                            glyph.addPoint(x + offset, y - offset + 1);
                         }
-                        y1 += offset;
-                        y2 += offset;
-                        g2d.drawLine(x1, y1, x2, y2);
-                        g2d.drawLine(x2, y2, x3, y1);
+                        g2d.fill(glyph);
                     }
-                    FSkin.setGraphicsColor(g2d, ItemListView.GRID_COLOR);
-                    g2d.drawRect(bounds.x, bounds.y, bounds.width - 1, bounds.height - 1);
                     if (group.isCollapsed || group.items.isEmpty()) {
                         continue;
                     }
-                    int y = bounds.y + GROUP_HEADER_HEIGHT - 1; //draw bottom border of header
-                    g2d.drawLine(bounds.x, y, bounds.x + bounds.width - 1, y);
                 }
                 else if (group.items.isEmpty()) {
                     continue;
