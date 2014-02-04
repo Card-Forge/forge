@@ -66,7 +66,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         }
                         choiceString.append(choice);
                     }
-                    game.action.nofityOfValue(sa, card, activator + " picked" + choiceString, activator);
+                    game.action.nofityOfValue(sa, card, activator + " picked " + choiceString, activator);
                     abMana.setExpressChoice(choiceString.toString());
                 }
             }
