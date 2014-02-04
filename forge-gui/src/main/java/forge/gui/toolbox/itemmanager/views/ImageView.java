@@ -766,22 +766,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private void drawItemImage(Graphics2D g, ItemInfo itemInfo) {
             Rectangle bounds = itemInfo.getBounds();
             final int itemWidth = bounds.width;
-            final int selBorderSize = Math.max(1, Math.round(itemWidth * GAP_SCALE_FACTOR / 2) - 1);
+            final int selBorderSize = 1;
             final int borderSize = Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
             final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
-            if (itemInfo.selected) {
+            if (itemInfo.selected || itemInfo == hoveredItem) {
                 g.setColor(Color.green);
                 g.fillRoundRect(bounds.x - selBorderSize, bounds.y - selBorderSize,
                         bounds.width + 2 * selBorderSize, bounds.height + 2 * selBorderSize,
                         cornerSize + selBorderSize, cornerSize + selBorderSize);
-            }
-            else if (itemInfo == hoveredItem) {
-                int hoverBorderSize = Math.max(1, selBorderSize / 2);
-                g.setColor(Color.green);
-                g.fillRoundRect(bounds.x - hoverBorderSize, bounds.y - hoverBorderSize,
-                        bounds.width + 2 * hoverBorderSize, bounds.height + 2 * hoverBorderSize,
-                        cornerSize + hoverBorderSize, cornerSize + hoverBorderSize);
             }
 
             g.setColor(Color.black);
