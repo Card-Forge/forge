@@ -68,6 +68,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             if (!collapsedChanged && group.getBounds().contains(point)) {
                                 if (point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
                                     group.isCollapsed = !group.isCollapsed;
+                                    clearSelection(); //must clear selection since indices and visible items will be changing
                                     updateLayout();
                                     collapsedChanged = true;
                                 }
@@ -195,6 +196,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         for (Group group : groups) {
             group.items.clear();
         }
+        clearSelection();
 
         for (Entry<T, Integer> itemEntry : model.getOrderedList()) {
             T item = itemEntry.getKey();
@@ -229,7 +231,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateLayout() {
-        clearSelection(); //must clear selection since indices and visible items will be changing
         orderedItems.clear();
 
         int x, groupY;
