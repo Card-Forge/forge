@@ -129,32 +129,32 @@ public class PlayerControllerHuman extends PlayerController {
         boolean hasEnabled = false;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
         for (final SpellAbility ab : abilities) {
-        	enabled = ab.canPlay();
-        	if (enabled) {
-        		hasEnabled = true;
-        	}
-        	GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
-        			shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
+            enabled = ab.canPlay();
+            if (enabled) {
+            	hasEnabled = true;
+            }
+            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
+                    shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
-        				@Override
-        				public void run() {
-        			        CPrompt.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
-        				}
-        			}, enabled);
-        	if (shortcut > 0) {
-	        	shortcut++;
-	        	if (shortcut > KeyEvent.VK_9) {
-	        		shortcut = 0; //stop adding shortcuts after 9
-	        	}
-        	}
+                        @Override
+                        public void run() {
+                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
+                        }
+                    }, enabled);
+            if (shortcut > 0) {
+                shortcut++;
+                if (shortcut > KeyEvent.VK_9) {
+                    shortcut = 0; //stop adding shortcuts after 9
+                }
+            }
         }
         if (hasEnabled) { //only show menu if at least one ability can be played
-        	SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first ability selected by default
-        		public void run() {
-        			MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
+            SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first ability selected by default
+                public void run() {
+                    MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
                 }
             });
-        	menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
+            menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
         }
 
     	return null; //delay ability until choice made
