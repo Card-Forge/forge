@@ -24,6 +24,7 @@ import javax.swing.ScrollPaneConstants;
 
 import forge.ImageCache;
 import forge.gui.deckeditor.DeckProxy;
+import forge.gui.framework.ILocalRepaint;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FMouseAdapter;
@@ -120,7 +121,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             @Override
             public void onMouseExit(MouseEvent e) {
                 if (updateHoveredItem(null, null)) {
-                    display.repaint();
+                    display.repaintSelf();
                 }
             }
         });
@@ -130,7 +131,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 FScrollPane scroller = getScroller();
                 Point hoverScrollPos = new Point(scroller.getHorizontalScrollBar().getValue(), scroller.getVerticalScrollBar().getValue());
                 if (updateHoveredItem(e.getPoint(), hoverScrollPos)) {
-                    display.repaint();
+                    display.repaintSelf();
                 }
             }
         });
@@ -271,7 +272,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         display.setPreferredSize(new Dimension(itemAreaWidth, y));
         display.revalidate();
-        display.repaint();
+        display.repaintSelf();
     }
 
     private ItemInfo getItemAtPoint(Point p) {
@@ -447,7 +448,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected void onSelectionChange() {
         super.onSelectionChange();
-        display.repaint();
+        display.repaintSelf();
     }
 
     @Override
@@ -528,10 +529,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @SuppressWarnings("serial")
-    private class CardViewDisplay extends JPanel {
+    private class CardViewDisplay extends JPanel implements ILocalRepaint {
         private CardViewDisplay() {
             setOpaque(false);
             setFocusable(true);
+        }
+
+        @Override
+        public void repaintSelf() {
+            repaint(getVisibleRect());
         }
 
         @Override
