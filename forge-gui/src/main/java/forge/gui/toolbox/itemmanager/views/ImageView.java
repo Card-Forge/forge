@@ -45,7 +45,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private final CardViewDisplay display;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
-    private int itemsPerRow;
     private int imageScaleFactor = 3;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
@@ -253,7 +252,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         int itemWidth = 50 * imageScaleFactor;
         int gap = Math.round(itemWidth * GAP_SCALE_FACTOR);
         int dx = itemWidth + gap;
-        itemsPerRow = (pileWidth + gap) / dx;
+        int itemsPerRow = (pileWidth + gap) / dx;
         if (itemsPerRow == 0) {
             itemsPerRow = 1;
             itemWidth = pileWidth;
@@ -319,10 +318,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 y += itemHeight;
             }
             else {
-                x = pileX - group.scrollValue;
+                x = pileX;
                 pileY = y;
                 maxPileHeight = 0;
-                for (Pile pile : group.piles) {
+                for (int j = 0; j < group.piles.size(); j++) {
+                    if (j > 0 && j % itemsPerRow == 0) {
+                        //start new row if needed
+                        y = pileY + maxPileHeight + gap;
+                        x = pileX;
+                        pileY = y;
+                        maxPileHeight = 0;
+                    }
+                    Pile pile = group.piles.get(j);
                     y = pileY;
                     for (ItemInfo itemInfo : pile.items) {
                         itemInfo.setBounds(x, y, itemWidth, itemHeight);
@@ -568,14 +575,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             bounds.width = width;
             bounds.height = height;
         }
-        public int getLeft() {
-            return bounds.x;
-        }
         public int getTop() {
             return bounds.y;
-        }
-        public int getRight() {
-            return bounds.x + bounds.width;
         }
         public int getBottom() {
             return bounds.y + bounds.height;
@@ -593,7 +594,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final List<Pile> piles = new ArrayList<Pile>();
         private final String name;
         private boolean isCollapsed;
-        private int scrollValue = 0;
 
         public Group(String name0) {
             name = name0;
@@ -663,15 +663,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final Dimension visibleSize = getVisibleSize();
             final int visibleTop = getScroller().getVerticalScrollBar().getValue();
             final int visibleBottom = visibleTop + visibleSize.height;
-            Rectangle bounds = groups.get(0).getBounds();
-            final int visibleLeft = bounds.x + 1; //use first group left and width as defined visible horizontal bounds
-            final int visibleRight = bounds.x + bounds.width - 2;
 
             FSkin.setGraphicsFont(g2d, ItemListView.ROW_FONT);
             FontMetrics fm = g2d.getFontMetrics();
             int fontOffsetY = (GROUP_HEADER_HEIGHT - fm.getHeight()) / 2 + fm.getAscent();
-
-            Rectangle baseClip = g.getClipBounds();
 
             for (Group group : groups) {
                 if (group.getBottom() < visibleTop) {
@@ -680,9 +675,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (group.getTop() >= visibleBottom) {
                     break;
                 }
-                bounds = group.getBounds();
                 if (groupBy != null) {
-                    g2d.setClip(baseClip.intersection(bounds)); //set clip region for header
+                    Rectangle bounds = group.getBounds();
                     FSkin.setGraphicsColor(g2d, ItemListView.HEADER_BACK_COLOR);
                     g2d.fillRect(bounds.x, bounds.y, bounds.width, GROUP_HEADER_HEIGHT - 1);
                     FSkin.setGraphicsColor(g2d, ItemListView.FORE_COLOR);
@@ -723,17 +717,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     continue;
                 }
 
-                //set clip region for piles if needed to prevent appearing them left or right of group borders
-                if (pileBy != null) {
-                    g2d.setClip(baseClip.intersection(new Rectangle(bounds.x + 1, baseClip.y, bounds.width - 2, baseClip.height)));
-                }
-
                 ItemInfo skippedItem = null;
                 for (Pile pile : group.piles) {
-                    if (pile.getBottom() < visibleTop || pile.getRight() < visibleLeft) {
+                    if (pile.getBottom() < visibleTop) {
                         continue;
                     }
-                    if (pile.getTop() >= visibleBottom || pile.getLeft() >= visibleRight) {
+                    if (pile.getTop() >= visibleBottom) {
                         break;
                     }
                     for (ItemInfo itemInfo : pile.items) {
@@ -755,8 +744,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     drawItemImage(g2d, skippedItem);
                 }
             }
-
-            g2d.setClip(baseClip);
         }
 
         private void drawItemImage(Graphics2D g, ItemInfo itemInfo) {
