@@ -135,13 +135,28 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
         });
+        groups.add(new Group("")); //add default group
     }
 
     public GroupDef getGroupBy() {
         return groupBy;
     }
     public void setGroupBy(GroupDef groupBy0) {
+        if (groupBy == groupBy0) { return; }
         groupBy = groupBy0;
+
+        groups.clear();
+
+        if (groupBy == null) {
+            groups.add(new Group(""));
+        }
+        else {
+            for (String groupName : groupBy.getGroups()) {
+                groups.add(new Group(groupName));
+            }
+        }
+
+        refresh(this.getSelectedItems(), this.getSelectedIndex());
     }
 
     public ColumnDef getPileBy() {
@@ -164,18 +179,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onRefresh() {
-        groups.clear();
+        Group otherItems = groupBy == null ? groups.get(0) : null;
 
-        Group otherItems;
-        if (groupBy == null) { //use single group with all items if not grouping
-            otherItems = new Group("");
-            groups.add(otherItems);
-        }
-        else {
-            otherItems = null;
-            for (String groupName : groupBy.getGroups()) {
-                groups.add(new Group(groupName));
-            }
+        for (Group group : groups) {
+            group.items.clear();
         }
 
         for (Entry<T, Integer> itemEntry : model.getOrderedList()) {
@@ -189,12 +196,22 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 else {
                     if (otherItems == null) {
-                        otherItems = new Group("Other");
-                        groups.add(otherItems);
+                        //reuse existing Other group if possible
+                        if (groups.size() > groupBy.getGroups().length) {
+                            otherItems = groups.get(groups.size() - 1);
+                        }
+                        else {
+                            otherItems = new Group("Other");
+                            groups.add(otherItems);
+                        }
                     }
                     otherItems.add(new ItemInfo(item));
                 }
             }
+        }
+
+        if (otherItems == null && groups.size() > groupBy.getGroups().length) {
+            groups.remove(groups.size() - 1); //remove Other group if empty
         }
 
         updateLayout();

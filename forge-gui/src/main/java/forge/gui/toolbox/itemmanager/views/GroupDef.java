@@ -66,11 +66,11 @@ public enum GroupDef {
                         if (type.isCreature()) {
                             return 0;
                         }
+                        if (type.isLand()) { //make Artifact Lands appear in Lands group
+                            return 2;
+                        }
                         if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery()) {
                             return 1;
-                        }
-                        if (type.isLand()) {
-                            return 2;
                         }
                     }
                     return -1;
@@ -92,14 +92,14 @@ public enum GroupDef {
                 public Integer apply(final InventoryItem item) {
                     if (item instanceof PaperCard) {
                         CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isLand()) {
+                        if (type.isCreature()) { //make Artifact and Land Creatures appear in Creatures group
+                            return 2;
+                        }
+                        if (type.isLand()) { //make Artifact Lands appear in Lands group
                             return 0;
                         }
                         if (type.isArtifact()) {
                             return 1;
-                        }
-                        if (type.isCreature()) {
-                            return 2;
                         }
                         if (type.isEnchantment()) {
                             return 3;
