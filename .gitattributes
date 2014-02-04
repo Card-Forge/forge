@@ -5134,6 +5134,7 @@ forge-gui/res/cardsfolder/g/gigadrowse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gigantiform.txt -text
 forge-gui/res/cardsfolder/g/gigantomancer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gigapede.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/gild.txt -text
 forge-gui/res/cardsfolder/g/gilded_drake.txt -text
 forge-gui/res/cardsfolder/g/gilded_light.txt -text
 forge-gui/res/cardsfolder/g/gilded_lotus.txt svneol=native#text/plain
@@ -10443,6 +10444,7 @@ forge-gui/res/cardsfolder/s/sarkhan_vol.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sarpadian_empires_vol_vii.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/saruli_gatekeepers.txt -text
 forge-gui/res/cardsfolder/s/sasaya_orochi_ascendant_sasayas_essence.txt -text
+forge-gui/res/cardsfolder/s/satyr_firedancer.txt -text
 forge-gui/res/cardsfolder/s/satyr_hedonist.txt -text
 forge-gui/res/cardsfolder/s/satyr_piper.txt -text
 forge-gui/res/cardsfolder/s/satyr_rambler.txt -text
