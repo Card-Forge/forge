@@ -139,11 +139,15 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.model = new ItemManagerModel<T>(genericType0);
 
         this.listView = new ItemListView<T>(this, this.model);
-        this.imageView = new ImageView<T>(this, this.model);
+        this.imageView = createImageView(this.model);
 
         this.views.add(this.listView);
         this.views.add(this.imageView);
         this.currentView = this.listView;
+    }
+
+    protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
+        return new ImageView<T>(this, model0);
     }
 
     /**

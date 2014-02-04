@@ -356,10 +356,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (hoveredItem == item) { return false; }
         hoveredItem = item;
         if (item != null) {
-            CDetail.SINGLETON_INSTANCE.showCard(item.item);
-            CPicture.SINGLETON_INSTANCE.showImage(item.item);
+            showHoveredItem(item.item);
         }
         return true;
+    }
+
+    protected void showHoveredItem(T item) {
+        CDetail.SINGLETON_INSTANCE.showCard(item);
+        CPicture.SINGLETON_INSTANCE.showImage(item);
     }
 
     @Override

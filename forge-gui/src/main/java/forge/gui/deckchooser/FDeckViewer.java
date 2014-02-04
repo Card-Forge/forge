@@ -25,7 +25,9 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
+import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.views.GroupDef;
+import forge.gui.toolbox.itemmanager.views.ImageView;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
@@ -56,7 +58,21 @@ public class FDeckViewer extends FDialog {
     private FDeckViewer(Deck deck0) {
         this.deck = deck0;
         this.setTitle(deck.getName());
-        this.cardManager = new CardManager(false);
+        this.cardManager = new CardManager(false) {
+            @Override //show hovered card in Image View in dialog instead of main Detail/Picture panes
+            protected ImageView<PaperCard> createImageView(final ItemManagerModel<PaperCard> model0) {
+                return new ImageView<PaperCard>(this, model0) {
+                    @Override
+                    protected void showHoveredItem(PaperCard item) {
+                        Card card = Card.getCardForUi(item);
+                        if (card == null) { return; }
+
+                        cardDetail.setCard(card);
+                        cardPicture.setCard(card);
+                    }
+                };
+            }
+        };
         this.cardManager.setPool(deck.getMain());
         this.cardManager.addSelectionListener(new ListSelectionListener() {
             @Override

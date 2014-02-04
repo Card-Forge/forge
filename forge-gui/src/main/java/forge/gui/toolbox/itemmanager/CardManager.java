@@ -27,7 +27,7 @@ import forge.quest.QuestWorld;
  *
  */
 @SuppressWarnings("serial")
-public final class CardManager extends ItemManager<PaperCard> {
+public class CardManager extends ItemManager<PaperCard> {
     public CardManager(boolean wantUnique0) {
         super(PaperCard.class, wantUnique0);
     }
