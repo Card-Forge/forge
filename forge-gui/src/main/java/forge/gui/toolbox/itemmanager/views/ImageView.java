@@ -72,25 +72,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     //if didn't click on item, see if clicked on group header
                     if (groupBy != null) {
                         Point point = e.getPoint();
-                        boolean collapsedChanged = false;
                         for (Group group : groups) {
-                            if (!collapsedChanged && group.getBounds().contains(point)) {
+                            if (group.getBounds().contains(point)) {
                                 if (!group.items.isEmpty() && point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
                                     group.isCollapsed = !group.isCollapsed;
                                     clearSelection(); //must clear selection since indices and visible items will be changing
                                     updateLayout(false);
-                                    collapsedChanged = true;
                                 }
-                                else {
-                                    break;
-                                }
-                            }
-                            if (collapsedChanged) {
-                                //if found group to expand/collapse, select next visible item starting at beginning of group
-                                if (!group.isCollapsed && !group.items.isEmpty()) {
-                                    setSelectedIndex(group.piles.get(0).items.get(0).index);
-                                    break;
-                                }
+                                break;
                             }
                         }
                     }
@@ -188,7 +177,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         if (!forSetup) {
-            refresh(this.getSelectedItems(), this.getSelectedIndex());
+            refresh(null, -1);
         }
     }
 
@@ -203,7 +192,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         pileBy = pileBy0;
 
         if (!forSetup) {
-            refresh(this.getSelectedItems(), this.getSelectedIndex());
+            refresh(null, -1);
+        }
+    }
+
+    @Override
+    protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+        if (itemsToSelect == null) {
+            clearSelection(); //just clear selection if no items to select
+            getScroller().getVerticalScrollBar().setValue(0); //ensure scrolled to top
+            onSelectionChange();
+        }
+        else {
+            if (!setSelectedItems(itemsToSelect)) {
+                setSelectedIndex(backupIndexToSelect);
+            }
         }
     }
 

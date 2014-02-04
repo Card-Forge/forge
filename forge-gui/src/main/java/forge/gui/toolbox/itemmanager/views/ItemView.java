@@ -115,7 +115,7 @@ public abstract class ItemView<T extends InventoryItem> {
     }
     protected abstract void onResize();
     protected abstract void onRefresh();
-    private void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+    protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
         if (itemsToSelect == null) {
             setSelectedIndex(0, false); //select first item if no items to select
             getScroller().getVerticalScrollBar().setValue(0); //ensure scrolled to top
