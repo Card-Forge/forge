@@ -56,8 +56,8 @@ public class ReplaceDraw extends ReplacementEffect {
         if (this.getMapParams().containsKey("NotFirstCardInDrawStep")) {
             final Player p = (Player)runParams.get("Affected");
             if (p.numDrawnThisDrawStep() == 0
-                    && this.getHostCard().getController().getGame().getPhaseHandler().is(PhaseType.DRAW)
-                    && this.getHostCard().getController().getGame().getPhaseHandler().getPlayerTurn().equals(p)) {
+                    && this.getHostCard().getGame().getPhaseHandler().is(PhaseType.DRAW)
+                    && this.getHostCard().getGame().getPhaseHandler().isPlayerTurn(p)) {
                 return false;
             }
         }
