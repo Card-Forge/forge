@@ -395,6 +395,10 @@ public class ComputerUtilCost {
             if (payerCreatures > sourceCreatures + 1) {
                 return false;
             }
+        } else if ("LifeLE2".equals(sa.getParam("UnlessAI"))) {
+            if (payer.getLife() < 3) {
+                return true;
+            }
         }
 
         // AI will only pay when it's not already payed and only opponents abilities
