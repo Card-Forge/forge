@@ -2840,10 +2840,10 @@ public class CardFactoryUtil {
             card.addTrigger(haunterDies);
         } else {
             final String abString = card.getSVar(hauntSVarName).replace("AB$", "SP$")
-                    .replace("Cost$ 0", "Cost$ " + card.getManaCost())
                     + " | SpellDescription$ " + abilityDescription;
 
             final SpellAbility sa = AbilityFactory.getAbility(abString, card);
+            sa.setPayCosts(new Cost(card.getManaCost(), false));
             card.addSpellAbility(sa);
         }
 
