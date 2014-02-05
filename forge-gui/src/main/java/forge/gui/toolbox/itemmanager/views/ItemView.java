@@ -126,6 +126,7 @@ public abstract class ItemView<T extends InventoryItem> {
     protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final int scrollValueToRestore) {
         if (itemsToSelect == null) {
             setSelectedIndex(0, false); //select first item if no items to select
+            setScrollValue(0); //ensure scrolled to top
         }
         else {
             if (!setSelectedItems(itemsToSelect)) {
