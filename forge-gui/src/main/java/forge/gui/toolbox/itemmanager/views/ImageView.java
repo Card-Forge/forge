@@ -144,9 +144,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (e.getButton() != 1) {
                         return true;
                     }
-                    if (e.isControlDown() && allowMultipleSelections) {
+                    if (e.isControlDown()) {
                         item.selected = false;
-                        selectedIndices.remove(item.index);
+                        selectedIndices.remove((Object)item.index);
                         onSelectionChange();
                         item.scrollIntoView();
                         return true;
