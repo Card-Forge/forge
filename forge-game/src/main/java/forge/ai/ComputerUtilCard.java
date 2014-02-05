@@ -504,7 +504,7 @@ public class ComputerUtilCard {
             value -= toughness * 5;
         }
     
-        if (c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
+        if (c.hasSVar("DestroyWhenDamaged")) {
             value -= (toughness - 1) * 9;
         }
     
@@ -524,8 +524,7 @@ public class ComputerUtilCard {
             value -= 50;
         } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
             value -= 30;
-        } else if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")
-                || c.hasStartOfKeyword("Upkeep:")) {
+        } else if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
             value -= 20;
         } else if (c.hasStartOfKeyword("(Echo unpaid)")) {
             value -= 10;
@@ -533,7 +532,7 @@ public class ComputerUtilCard {
     
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value -= 20;
-        }
+        } 
         if (c.hasStartOfKeyword("Fading")) {
             value -= 20;
         }

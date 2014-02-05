@@ -1550,7 +1550,7 @@ public class ComputerUtilCombat {
 
         if (defender.hasKeyword("Double Strike")) {
             if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                        || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (defenderDamage >= attackerLife) {
@@ -1564,7 +1564,7 @@ public class ComputerUtilCombat {
                     return false;
                 }
                 if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                        || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                        || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1582,13 +1582,13 @@ public class ComputerUtilCombat {
                     return false;
                 }
                 if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                        || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                        || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
             if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                        || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -1706,7 +1706,7 @@ public class ComputerUtilCombat {
 
         if (attacker.hasKeyword("Double Strike")) {
             if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                    || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                    || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (attackerDamage >= defenderLife) {
@@ -1720,7 +1720,7 @@ public class ComputerUtilCombat {
                     return false;
                 }
                 if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                        || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1738,13 +1738,13 @@ public class ComputerUtilCombat {
                     return false;
                 }
                 if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                        || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
             if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                    || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
+                    || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -1926,7 +1926,7 @@ public class ComputerUtilCombat {
     public final static int getDamageToKill(final Card c) {
         int killDamage = c.getLethalDamage() + c.getPreventNextDamageTotalShields();
         if ((killDamage > c.getPreventNextDamageTotalShields())
-                && c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
+                && c.hasSVar("DestroyWhenDamaged")) {
             killDamage = 1 + c.getPreventNextDamageTotalShields();
         }
 

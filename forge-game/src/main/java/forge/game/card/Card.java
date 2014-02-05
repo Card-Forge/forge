@@ -7640,33 +7640,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         else {
             final Game game = source.getGame();
 
-            final String s = this + " - destroy";
-
-            final int amount = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
-            if (amount > 0) {
-                final Ability abDestroy = new Ability(source, ManaCost.ZERO){
-                    @Override public void resolve() { game.getAction().destroy(Card.this, this); }
-                };
-                abDestroy.setStackDescription(s + ", it cannot be regenerated.");
-
-                for (int i = 0; i < amount; i++) {
-                    game.getStack().addSimultaneousStackEntry(abDestroy);
-                }
-            }
-
-            final int amount2 = this.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
-            if (amount2 > 0) {
-                final Ability abDestoryNoRegen = new Ability(source, ManaCost.ZERO){
-                    @Override public void resolve() { game.getAction().destroyNoRegeneration(Card.this, this); }
-                };
-                abDestoryNoRegen.setStackDescription(s);
-
-                for (int i = 0; i < amount2; i++) {
-                    game.getStack().addSimultaneousStackEntry(abDestoryNoRegen);
-                }
-            }
-
-            boolean wither = (getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
+            boolean wither = (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
                     || source.hasKeyword("Wither") || source.hasKeyword("Infect"));
 
             if (this.isInPlay()) {
@@ -7678,7 +7652,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             if (source.hasKeyword("Deathtouch") && this.isCreature()) {
-                getGame().getAction().destroy(this, null);
+                game.getAction().destroy(this, null);
                 damageType = DamageType.Deathtouch;
             }
 
