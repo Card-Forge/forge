@@ -56,6 +56,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final Card hostCard = sa.getSourceCard();
         final Game game = hostCard.getGame();
         final ArrayList<String> keywords = new ArrayList<String>();
+        final List<String> types = new ArrayList<String>();
         if (sa.hasParam("Optional")) {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Copy this permanent?")) {
                 return;
@@ -63,6 +64,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+        }
+        if (sa.hasParam("AddTypes")) {
+            types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
         }
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(hostCard,
                 sa.getParam("NumCopies"), sa) : 1;
@@ -236,7 +240,9 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
                     }
-
+                    for (final String type : types) {
+                        copy.addType(type);
+                    }
                     copy = game.getAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
@@ -272,6 +278,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                                 }
                             }
                         };
+                        sac.setTrigger(true);
+                        sac.setDescription(location + " - " + source);
 
                         final Command atEOT = new Command() {
                             private static final long serialVersionUID = -4184510100801568140L;

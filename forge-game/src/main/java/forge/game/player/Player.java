@@ -1812,7 +1812,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // **** Check for land play limit per turn ****
         // Dev Mode
-        if (this.canCheatPlayUnlimitedLands || this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya")) {
+        if (this.canCheatPlayUnlimitedLands || this.hasKeyword("You may play any number of additional lands on each of your turns.")) {
             return true;
         }
 
