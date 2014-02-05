@@ -32,6 +32,7 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
@@ -148,6 +149,8 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         if (this.isVisible() == visible) { return; }
 
         if (visible) {
+            FMouseAdapter.forceMouseUp(); //ensure mouse up handled if dialog shown between mouse down and mouse up
+
             if (openModals.isEmpty()) {
                 setLocationRelativeTo(JOptionPane.getRootFrame());
             }

@@ -48,19 +48,56 @@ public abstract class FMouseAdapter extends MouseAdapter {
         isCompDraggable = isCompDraggable0;
     }
 
+    private static FMouseAdapter mouseDownAdapter;
+    private static MouseEvent mouseDownEvent;
+
+    public static void forceMouseUp() {
+        setMouseDownAdapter(null);
+    }
+
+    private static void setMouseDownAdapter(FMouseAdapter mouseDownAdapter0) {
+        if (mouseDownAdapter == mouseDownAdapter0) { return; }
+        if (mouseDownAdapter != null) {
+            //ensure mouse up handled for mouse down adapter if needed
+            switch (mouseDownAdapter.downButton) {
+            case 1:
+                mouseDownAdapter.onLeftMouseUp(mouseDownEvent);
+                break;
+            case 2:
+                mouseDownAdapter.onMiddleMouseUp(mouseDownEvent);
+                break;
+            case 3:
+                mouseDownAdapter.onRightMouseUp(mouseDownEvent);
+                break;
+            }
+            //reset all fields on previous mouse down adapter
+            mouseDownAdapter.resetMouseDownLoc();
+            mouseDownAdapter.firstClickLoc = null;
+            mouseDownAdapter.downButton = 0;
+            mouseDownAdapter.buttonsDown = 0;
+            mouseDownAdapter.firstClickButton = 0;
+            mouseDownAdapter.hovered = false;
+            mouseDownEvent = null;
+        }
+        mouseDownAdapter = mouseDownAdapter0;
+    }
+
     private final boolean isCompDraggable;
     private boolean hovered;
-    private Point mouseDownLoc;
-    private Point firstClickLoc;
+    private Point mouseDownLoc, firstClickLoc;
     private int downButton, buttonsDown, firstClickButton;
     private Component tempMotionListenerComp;
 
     @Override
     public final void mousePressed(final MouseEvent e) {
+        setMouseDownAdapter(this);
+        mouseDownEvent = e;
+
         final int button = e.getButton();
         if (button < 1 || button > 3) {
             return;
         }
+
         if (downButton == 0) {
             downButton = button;
             switch (button) {
@@ -167,7 +204,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
     @Override
     public final void mouseReleased(MouseEvent e) {
         int button = e.getButton();
-        if (button < 1 || button > 3 || downButton == 0) {
+        if (button < 1 || button > 3 || downButton == 0 || mouseDownAdapter != this) {
             return;
         }
         buttonsDown -= button;
@@ -175,6 +212,8 @@ public abstract class FMouseAdapter extends MouseAdapter {
 
         button = downButton;
         downButton = 0;
+        mouseDownAdapter = null;
+        mouseDownEvent = null;
 
         switch (button) {
         case 1:
