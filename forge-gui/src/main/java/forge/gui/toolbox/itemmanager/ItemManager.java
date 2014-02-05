@@ -39,6 +39,8 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -1135,6 +1137,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     public void showContextMenu(MouseEvent e) {
+        showContextMenu(e, null);
+    }
+    public void showContextMenu(MouseEvent e, final Runnable onClose) {
         //ensure the item manager has focus
         this.focus();
 
@@ -1155,6 +1160,24 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         JPopupMenu menu = new JPopupMenu("ItemManagerContextMenu");
         this.contextMenuBuilder.buildContextMenu(menu);
+
+        if (onClose != null) {
+            menu.addPopupMenuListener(new PopupMenuListener() {
+                @Override
+                public void popupMenuCanceled(PopupMenuEvent arg0) {
+                    onClose.run();
+                }
+
+                @Override
+                public void popupMenuWillBecomeInvisible(PopupMenuEvent arg0) {
+                    onClose.run();
+                }
+
+                @Override
+                public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
+                }
+            });
+        }
 
         menu.show(e.getComponent(), e.getX(), e.getY());
     }

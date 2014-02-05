@@ -59,6 +59,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
+    private boolean lockHoveredItem = false;
     private Point hoverPoint;
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
@@ -101,6 +102,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             public void onMiddleMouseDown(MouseEvent e) {
                 ItemInfo item = getItemAtPoint(e.getPoint());
                 if (item != null && item.item instanceof IPaperCard) {
+                    setLockHoveredItem(true); //lock hoveredItem while zoomer open
                     Card card = Card.getCardForUi((IPaperCard) item.item);
                     CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(card);
                 }
@@ -109,12 +111,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             @Override
             public void onMiddleMouseUp(MouseEvent e) {
                 CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+                setLockHoveredItem(false);
             }
 
             @Override
             public void onRightClick(MouseEvent e) {
-                selectItem(e);
-                itemManager.showContextMenu(e);
+                if (selectItem(e)) {
+                    setLockHoveredItem(true); //lock hoveredItem while context menu open
+                    itemManager.showContextMenu(e, new Runnable() {
+                        @Override
+                        public void run() {
+                            setLockHoveredItem(false);
+                        }
+                    });
+                }
             }
 
             private boolean selectItem(MouseEvent e) {
@@ -433,9 +443,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         return size;
     }
 
+    private void setLockHoveredItem(boolean lockHoveredItem0) {
+        if (lockHoveredItem == lockHoveredItem0) { return; }
+        lockHoveredItem = lockHoveredItem0;
+        if (!lockHoveredItem && updateHoveredItem(hoverPoint, hoverScrollPos)) {
+            display.repaintSelf(); //redraw hover effect immediately if needed
+        }
+    }
+
     private boolean updateHoveredItem(Point hoverPoint0, Point hoverScrollPos0) {
         hoverPoint = hoverPoint0;
         hoverScrollPos = hoverScrollPos0;
+
+        if (lockHoveredItem) { return false; }
 
         ItemInfo item = null;
         FScrollPane scroller = getScroller();
