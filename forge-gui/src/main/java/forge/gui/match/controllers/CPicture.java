@@ -17,7 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -31,6 +30,7 @@ import forge.game.card.Card;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -118,46 +118,23 @@ public enum CPicture implements ICDoc {
      * <li>Displays the alternate image for applicable cards on mouse click.
      */
     private void setMouseButtonListener() {
-        this.picturePanel.addMouseListener(new MouseAdapter() {
-            private final boolean[] buttonsDown = new boolean[4];
+        this.picturePanel.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                flipCard();
+            }
 
             @Override
-            public void mousePressed(final MouseEvent e) {
+            public void onMiddleMouseDown(MouseEvent e) {
                 if (isCardDisplayed()) {
-                    final int button = e.getButton();
-                    if (button < 1 || button > 3) {
-                        return;
-                    }
-                    this.buttonsDown[button] = true;
-                    if (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3])) {
-                        zoomer.doMouseButtonZoom(currentCard, displayedState);
-                    }
+                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(currentCard, displayedState);
                 }
             }
 
             @Override
-            public void mouseReleased(final MouseEvent e) {
+            public void onMiddleMouseUp(MouseEvent e) {
                 if (isCardDisplayed()) {
-                    final int button = e.getButton();
-                    if (button < 1 || button > 3) {
-                        return;
-                    }
-                    if (!this.buttonsDown[button]) {
-                        return;
-                    }
-                    this.buttonsDown[button] = false;
-
-                    if (zoomer.isZoomerOpen()) {
-                        if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
-                            //don't stop zooming until all mouse buttons released
-                            zoomer.closeZoomer();
-                        }
-                        return; //don't handle click event below if zoom was open
-                    }
-
-                    if (button == 1) {
-                        flipCard();
-                    }
+                    CardZoomer.SINGLETON_INSTANCE.closeZoomer();
                 }
             }
         });
@@ -219,10 +196,10 @@ public enum CPicture implements ICDoc {
     }
 
     private boolean isCurrentCardFlippable() {
-        boolean isFlippableMorph =
-                currentCard.isFaceDown() && isAuthorizedToViewFaceDownCard(currentCard);
-        return (currentCard != null) &
-               (currentCard.isDoubleFaced() || currentCard.isFlipCard() || isFlippableMorph);
+        if (currentCard == null) { return false; }
+
+        return currentCard.isDoubleFaced() || currentCard.isFlipCard() ||
+                (currentCard.isFaceDown() && isAuthorizedToViewFaceDownCard(currentCard));
     }
 
     /**

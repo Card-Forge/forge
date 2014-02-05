@@ -36,14 +36,14 @@ public abstract class FMouseAdapter extends MouseAdapter {
 
     public void onMouseEnter(MouseEvent e) {}
     public void onMouseExit(MouseEvent e) {}
-    
+
     /**
      * Forge Mouse Adapter with infinite click tolerance (so long as mouse doesn't leave component)
      */
     public FMouseAdapter() {
         this(false);
     }
-    
+
     public FMouseAdapter(boolean isCompDraggable0) {
         isCompDraggable = isCompDraggable0;
     }
@@ -52,25 +52,38 @@ public abstract class FMouseAdapter extends MouseAdapter {
     private boolean hovered;
     private Point mouseDownLoc;
     private Point firstClickLoc;
-    private int firstClickButton;
+    private int downButton, buttonsDown, firstClickButton;
     private Component tempMotionListenerComp;
 
     @Override
     public final void mousePressed(final MouseEvent e) {
-        switch (e.getButton()) {
-        case 1:
-            onLeftMouseDown(e);
-            break;
-        case 2:
-            onMiddleMouseDown(e);
-            break;
-        case 3:
-            onRightMouseDown(e);
-            break;
+        final int button = e.getButton();
+        if (button < 1 || button > 3) {
+            return;
+        }
+        if (downButton == 0) {
+            downButton = button;
+            switch (button) {
+            case 1:
+                onLeftMouseDown(e);
+                break;
+            case 2:
+                onMiddleMouseDown(e);
+                break;
+            case 3:
+                onRightMouseDown(e);
+                break;
+            }
+        }
+
+        buttonsDown += button;
+        if (buttonsDown == 4 && downButton != 2) {
+            downButton = 2;
+            onMiddleMouseDown(e); //treat left and right together as equivalent of middle
         }
 
         mouseDownLoc = e.getLocationOnScreen();
-        
+
         //if component is draggable, ensure this adapter added as mouse motion listener to component while mouse down
         if (isCompDraggable) {
             tempMotionListenerComp = e.getComponent();
@@ -90,7 +103,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
         if (firstClickLoc != null) {
             //if first mouse down resulted in click and second mouse down with same button in close proximity,
             //handle double click event (don't wait until second mouse up to improve responsiveness)
-            if (e.getClickCount() % 2 == 0 && e.getButton() == firstClickButton &&
+            if (e.getClickCount() % 2 == 0 && downButton == firstClickButton &&
                     e.getLocationOnScreen().distance(firstClickLoc) <= 3) {
                 switch (firstClickButton) {
                 case 1:
@@ -108,7 +121,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
             firstClickButton = 0;
         }
     }
-    
+
     @Override
     public final void mouseDragged(MouseEvent e) {
         //clear mouse down location if component begins being dragged
@@ -117,7 +130,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
             resetMouseDownLoc();
         }
         if (tempMotionListenerComp == null) { //don't raise drag event if only a temporary motion listener
-            switch (e.getButton()) {
+            switch (downButton) {
             case 1:
                 onLeftMouseDragging(e);
                 break;
@@ -130,19 +143,19 @@ public abstract class FMouseAdapter extends MouseAdapter {
             }
         }
     }
-    
+
     @Override
     public final void mouseEntered(MouseEvent e) {
         hovered = true;
         onMouseEnter(e);
     }
-    
+
     @Override
     public final void mouseExited(MouseEvent e) {
         hovered = false;
         onMouseExit(e);
     }
-    
+
     private void resetMouseDownLoc() {
         mouseDownLoc = null;
         if (tempMotionListenerComp != null) {
@@ -153,7 +166,17 @@ public abstract class FMouseAdapter extends MouseAdapter {
 
     @Override
     public final void mouseReleased(MouseEvent e) {
-        switch (e.getButton()) {
+        int button = e.getButton();
+        if (button < 1 || button > 3 || downButton == 0) {
+            return;
+        }
+        buttonsDown -= button;
+        if (buttonsDown > 0) { return; } //don't handle mouse up until all mouse buttons up
+
+        button = downButton;
+        downButton = 0;
+
+        switch (button) {
         case 1:
             onLeftMouseUp(e);
             break;
@@ -164,7 +187,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
             onRightMouseUp(e);
             break;
         }
-        
+
         if (!hovered) { //reset mouse down location and don't handle click if mouse up outside component
             resetMouseDownLoc();
         }
@@ -173,13 +196,13 @@ public abstract class FMouseAdapter extends MouseAdapter {
         if (mouseDownLoc != null) {
             //if first click, cache button and mouse down location for determination of double click later
             if (e.getClickCount() % 2 == 1) {
-                firstClickButton = e.getButton();
+                firstClickButton = button;
                 firstClickLoc = mouseDownLoc;
             }
 
             resetMouseDownLoc();
 
-            switch (e.getButton()) {
+            switch (button) {
             case 1:
                 onLeftClick(e);
                 break;
@@ -192,7 +215,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
             }
         }
         else if (isCompDraggable) { //handle drag drop if click not handled and component is draggable
-            switch (e.getButton()) {
+            switch (button) {
             case 1:
                 onLeftMouseDragDrop(e);
                 break;
@@ -205,7 +228,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
             }
         }
     }
-    
+
     @Override
     public final void mouseClicked(MouseEvent e) {
         //override mouseClicked as final to prevent it being used since it doesn't fire

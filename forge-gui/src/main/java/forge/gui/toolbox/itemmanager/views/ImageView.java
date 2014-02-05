@@ -25,6 +25,7 @@ import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 
 import forge.ImageCache;
+import forge.game.card.Card;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.match.controllers.CDetail;
@@ -37,6 +38,8 @@ import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
+import forge.gui.toolbox.special.CardZoomer;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.view.arcane.CardPanel;
 
@@ -88,9 +91,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
-                if (hoveredItem != null && hoveredItem.selected) {
+                ItemInfo item = getItemAtPoint(e.getPoint());
+                if (item != null && item.selected) {
                     itemManager.activateSelectedItems();
                 }
+            }
+
+            @Override
+            public void onMiddleMouseDown(MouseEvent e) {
+                ItemInfo item = getItemAtPoint(e.getPoint());
+                if (item != null && item.item instanceof IPaperCard) {
+                    Card card = Card.getCardForUi((IPaperCard) item.item);
+                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(card);
+                }
+            }
+
+            @Override
+            public void onMiddleMouseUp(MouseEvent e) {
+                CardZoomer.SINGLETON_INSTANCE.closeZoomer();
             }
 
             @Override
