@@ -157,7 +157,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setColumnModel(colmodel);
 
         this.tableModel.setup();
-        this.refresh(selectedItemsBefore, 0);
+        this.refresh(selectedItemsBefore, 0, 0);
     }
 
     public JTable getTable() {
@@ -517,6 +517,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         };
 
         private final FMouseAdapter headerMouseAdapter = new FMouseAdapter(true) {
+            @Override
+            public void onLeftMouseDown(MouseEvent e) {
+                focus();
+            }
+
             @Override
             public void onLeftClick(MouseEvent e) {
                 if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {

@@ -205,7 +205,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         if (!forSetup) {
-            refresh(null, -1);
+            refresh(null, -1, 0);
         }
     }
 
@@ -220,15 +220,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         pileBy = pileBy0;
 
         if (!forSetup) {
-            refresh(null, -1);
+            refresh(null, -1, 0);
         }
     }
 
     @Override
-    protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+    protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final int scrollValueToRestore) {
         if (itemsToSelect == null) {
             clearSelection(); //just clear selection if no items to select
-            getScroller().getVerticalScrollBar().setValue(0); //ensure scrolled to top
+            setScrollValue(scrollValueToRestore); //ensure scroll value restored
             onSelectionChange();
         }
         else {

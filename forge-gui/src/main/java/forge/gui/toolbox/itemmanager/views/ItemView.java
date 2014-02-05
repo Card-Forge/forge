@@ -104,21 +104,28 @@ public abstract class ItemView<T extends InventoryItem> {
         return this.scroller;
     }
 
+    public int getScrollValue() {
+        return scroller.getVerticalScrollBar().getValue();
+    }
+
+    public void setScrollValue(int value) {
+        scroller.getVerticalScrollBar().setValue(value);
+    }
+
     public boolean isIncrementalSearchActive() {
         return this.isIncrementalSearchActive;
     }
 
-    public void refresh(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+    public void refresh(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final int scrollValueToRestore) {
         this.model.refreshSort();
         onRefresh();
-        fixSelection(itemsToSelect, backupIndexToSelect);
+        fixSelection(itemsToSelect, backupIndexToSelect, scrollValueToRestore);
     }
     protected abstract void onResize();
     protected abstract void onRefresh();
-    protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+    protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final int scrollValueToRestore) {
         if (itemsToSelect == null) {
             setSelectedIndex(0, false); //select first item if no items to select
-            getScroller().getVerticalScrollBar().setValue(0); //ensure scrolled to top
         }
         else {
             if (!setSelectedItems(itemsToSelect)) {

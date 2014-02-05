@@ -286,7 +286,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.initialized = true; //must set flag just before applying filters
         if (!applyFilters()) {
             if (this.pool != null) { //ensure view updated even if filter predicate didn't change
-                this.updateView(true, null, 0);
+                this.updateView(true, null);
             }
         }
     }
@@ -319,7 +319,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         this.currentView = view;
         this.currentView.getButton().setSelected(true);
-        this.currentView.refresh(itemsToSelect, backupIndexToSelect);
+        this.currentView.refresh(itemsToSelect, backupIndexToSelect, 0);
 
         this.add(currentView.getScroller());
         this.revalidate();
@@ -463,7 +463,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.pool = pool0;
         this.model.addItems(this.pool);
         this.model.setInfinite(infinite);
-        this.updateView(true, null, 0);
+        this.updateView(true, null);
     }
 
     public ItemView<T> getCurrentView() {
@@ -664,14 +664,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param qty
      */
     public void addItem(final T item, int qty) {
-        int selectedIndexBefore = this.getSelectedIndex();
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
         }
         List<T> items = new ArrayList<T>();
         items.add(item);
-        this.updateView(false, items, selectedIndexBefore);
+        this.updateView(false, items);
     }
 
     /**
@@ -681,7 +680,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param itemsToAdd
      */
     public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
-        int selectedIndexBefore = this.getSelectedIndex();
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
@@ -691,7 +689,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         for (Map.Entry<T, Integer> item : itemsToAdd) {
             items.add(item.getKey());
         }
-        this.updateView(false, items, selectedIndexBefore);
+        this.updateView(false, items);
     }
 
     /**
@@ -702,14 +700,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param qty
      */
     public void removeItem(final T item, int qty) {
-        final int selectedIndexBefore = this.getSelectedIndex();
-        final Iterable<T> selectedItemsBefore = this.getSelectedItems();
+        final Iterable<T> itemsToSelect = this.currentView == this.listView ? this.getSelectedItems() : null;
 
         this.pool.remove(item, qty);
         if (this.isUnfiltered()) {
             this.model.removeItem(item, qty);
         }
-        this.updateView(false, selectedItemsBefore, selectedIndexBefore);
+        this.updateView(false, itemsToSelect);
     }
 
     /**
@@ -719,8 +716,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param itemsToRemove
      */
     public void removeItems(Iterable<Map.Entry<T, Integer>> itemsToRemove) {
-        final int selectedIndexBefore = this.getSelectedIndex();
-        final Iterable<T> selectedItemsBefore = this.getSelectedItems();
+        final Iterable<T> itemsToSelect = this.currentView == this.listView ? this.getSelectedItems() : null;
 
         for (Map.Entry<T, Integer> item : itemsToRemove) {
             this.pool.remove(item.getKey(), item.getValue());
@@ -728,7 +724,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 this.model.removeItem(item.getKey(), item.getValue());
             }
         }
-        this.updateView(false, selectedItemsBefore, selectedIndexBefore);
+        this.updateView(false, itemsToSelect);
     }
 
     /**
@@ -739,7 +735,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void removeAllItems() {
         this.pool.clear();
         this.model.clear();
-        this.updateView(false, null, 0);
+        this.updateView(false, null);
     }
 
     /**
@@ -869,7 +865,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         this.filterPredicate = newFilterPredicate;
         if (this.pool != null) {
-            this.updateView(true, this.getSelectedItems(), 0);
+            this.updateView(true, this.getSelectedItems());
         }
         return true;
     }
@@ -948,7 +944,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param bForceFilter
      */
-    public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+    public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         final boolean useFilter = (forceFilter && (this.filterPredicate != null)) || !isUnfiltered();
 
         if (useFilter || this.wantUnique || forceFilter) {
@@ -972,7 +968,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.model.addItems(this.pool);
         }
 
-        this.currentView.refresh(itemsToSelect, backupIndexToSelect);
+        this.currentView.refresh(itemsToSelect, this.getSelectedIndex(), forceFilter ? 0 : this.currentView.getScrollValue());
 
         for (ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.afterFiltersApplied();
