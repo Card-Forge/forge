@@ -1803,6 +1803,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         if( land != null && !ignoreZoneAndTiming) {
             if (land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
                 return false;
+            
+            if (land.getOwner() == this && land.hasKeyword("May be played by your opponent") && !land.hasKeyword("May be played"))
+                return false;
 
             final Zone zone = game.getZoneOf(land);
             if(zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !land.hasStartOfKeyword("May be played"))) {
