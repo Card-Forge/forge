@@ -1,0 +1,9 @@
+Name:Forlorn Pseudamma
+ManaCost:3 B
+Types:Creature Zombie
+K:Intimidate
+PT:2/1
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired - Whenever CARDNAME becomes untapped, you may pay {2}{B}. If you do, put a 2/2 black Zombie enchantment creature token onto the battlefield.
+SVar:GFGToken:AB$ Token | Cost$ 2 B | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Enchantment,Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forlorn_pseudamma.txt
+Oracle:Intimidate\nInspired - Whenever Forlorn Pseudamma becomes untapped, you may pay {2}{B}. If you do, put a 2/2 black Zombie enchantment creature token onto the battlefield.

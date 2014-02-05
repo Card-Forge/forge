@@ -731,6 +731,7 @@ forge-gui/res/cardsfolder/a/aerial_maneuver.txt -text
 forge-gui/res/cardsfolder/a/aerial_predation.txt -text
 forge-gui/res/cardsfolder/a/aerie_mystics.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aerie_ouphes.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/aerie_worshippers.txt -text
 forge-gui/res/cardsfolder/a/aesthir_glider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aether_adept.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/aether_barrier.txt -text
@@ -4800,6 +4801,7 @@ forge-gui/res/cardsfolder/f/fork.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/forked_bolt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/forked_branch_garami.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/forked_lightning.txt -text
+forge-gui/res/cardsfolder/f/forlorn_pseudamma.txt -text
 forge-gui/res/cardsfolder/f/form_of_the_dragon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/formation.txt -text
 forge-gui/res/cardsfolder/f/forsaken_city.txt svneol=native#text/plain
@@ -9058,6 +9060,7 @@ forge-gui/res/cardsfolder/p/pharikas_mender.txt -text
 forge-gui/res/cardsfolder/p/phelddagrif.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/phenax_god_of_deception.txt -text
 forge-gui/res/cardsfolder/p/pheres_band_centaurs.txt -text
+forge-gui/res/cardsfolder/p/pheres_band_raiders.txt -text
 forge-gui/res/cardsfolder/p/pheres_band_tromper.txt -text
 forge-gui/res/cardsfolder/p/phobian_phantasm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/phosphorescent_feast.txt -text
@@ -10446,6 +10449,7 @@ forge-gui/res/cardsfolder/s/saruli_gatekeepers.txt -text
 forge-gui/res/cardsfolder/s/sasaya_orochi_ascendant_sasayas_essence.txt -text
 forge-gui/res/cardsfolder/s/satyr_firedancer.txt -text
 forge-gui/res/cardsfolder/s/satyr_hedonist.txt -text
+forge-gui/res/cardsfolder/s/satyr_nyx_smith.txt -text
 forge-gui/res/cardsfolder/s/satyr_piper.txt -text
 forge-gui/res/cardsfolder/s/satyr_rambler.txt -text
 forge-gui/res/cardsfolder/s/satyr_wayfinder.txt -text
