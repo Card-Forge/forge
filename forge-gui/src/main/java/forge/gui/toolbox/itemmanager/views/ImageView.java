@@ -68,6 +68,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverPoint;
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
+    private ItemInfo focalItem;
     private ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private ArrayList<Group> groups = new ArrayList<Group>();
 
@@ -266,7 +267,50 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
         if (imageSizeOption == imageSizeOption0) { return; }
         imageSizeOption = imageSizeOption0;
+
+        //determine item to retain scroll position of following image size change
+        ItemInfo focalItem0 = getFocalItem();
+        if (focalItem0 == null) {
+            updateLayout(false);
+            return;
+        }
+
+        int offsetTop = focalItem0.getTop() - getScrollValue();
         updateLayout(false);
+        setScrollValue(focalItem0.getTop() - offsetTop);
+        focalItem = focalItem0; //cache focal item so consecutive image size changes use the same item
+    }
+
+    private ItemInfo getFocalItem() {
+        if (focalItem != null) { //use cached focalItem if one
+            return focalItem;
+        }
+
+        if (hoveredItem != null) {
+            return hoveredItem;
+        }
+
+        //if not item hovered, use first fully visible item as focal point
+        final int visibleTop = getScrollValue();
+        for (Group group : groups) {
+            if (group.getBottom() < visibleTop) {
+                continue;
+            }
+            for (Pile pile : group.piles) {
+                if (group.getBottom() < visibleTop) {
+                    continue;
+                }
+                for (ItemInfo item : pile.items) {
+                    if (item.getTop() >= visibleTop) {
+                        return item;
+                    }
+                }
+            }
+        }
+        if (orderedItems.isEmpty()) {
+            return null;
+        }
+        return orderedItems.get(0);
     }
 
     @Override
@@ -316,6 +360,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateLayout(boolean forRefresh) {
+        focalItem = null; //clear cached focalItem when layout changes
+
         int x, groupY, pileY, pileHeight, maxPileHeight;
         int y = PADDING;
         int groupX = PADDING;
@@ -484,7 +530,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private boolean updateHoveredItem(Point hoverPoint0, Point hoverScrollPos0) {
         hoverPoint = hoverPoint0;
-        hoverScrollPos = hoverScrollPos0;
+        if (hoverScrollPos != hoverScrollPos0) {
+            hoverScrollPos = hoverScrollPos0;
+            focalItem = null; //clear cached focalItem when scroll changes
+        }
 
         if (lockHoveredItem) { return false; }
 
@@ -743,7 +792,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
             final Dimension visibleSize = getVisibleSize();
-            final int visibleTop = getScroller().getVerticalScrollBar().getValue();
+            final int visibleTop = getScrollValue();
             final int visibleBottom = visibleTop + visibleSize.height;
 
             FSkin.setGraphicsFont(g2d, GROUP_HEADER_FONT);
