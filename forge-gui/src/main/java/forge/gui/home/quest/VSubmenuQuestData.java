@@ -509,7 +509,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
                 || stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem())) {
             return MagicColor.ALL_COLORS;
         }
-        return MagicColor.fromName("" + cbxPreferredColor.getSelectedItem().charAt(0));
+        return MagicColor.fromName(cbxPreferredColor.getSelectedItem().split(" ")[0]);
     }
 
     public GameFormat getRotatingFormat() {
