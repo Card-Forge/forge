@@ -46,6 +46,8 @@ public enum TriggerType {
     NewGame(TriggerNewGame.class),
     PayCumulativeUpkeep(TriggerPayCumulativeUpkeep.class),
     Phase(TriggerPhase.class),
+    PhaseIn(TriggerPhaseIn.class),
+    PhaseOut(TriggerPhaseOut.class),
     PlanarDice(TriggerPlanarDice.class),
     PlaneswalkedFrom(TriggerPlaneswalkedFrom.class),
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),

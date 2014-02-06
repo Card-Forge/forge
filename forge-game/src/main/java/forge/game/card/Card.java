@@ -4879,7 +4879,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final boolean phasingIn = this.isPhasedOut();
 
         if (!this.switchPhaseState()) {
-            // Switch Phase State returns False if the Permanent can't Phase Out
+            // Switch Phase State bails early if the Permanent can't Phase Out
             return;
         }
 
@@ -4913,6 +4913,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Card", this);
+
+        if (!this.isPhasedOut()) {
+            // If this is currently PhasedIn, it's about to phase out.
+            // Run trigger before it does because triggers don't work with phased out objects
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
+        }
+
         this.phasedOut = !this.phasedOut;
         final Combat combat = this.getGame().getPhaseHandler().getCombat();
         if (combat != null && this.phasedOut) {
@@ -4934,6 +4943,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             getGame().getAction().exile(this);
             getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
+
+        if (!this.phasedOut) {
+            // Just phased in, time to run the phased in trigger
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
+        }
+
         return true;
     }
 

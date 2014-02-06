@@ -590,6 +590,8 @@ forge-game/src/main/java/forge/game/trigger/TriggerLosesGame.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerNewGame.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPayCumulativeUpkeep.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPhase.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerPhaseIn.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerPhaseOut.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlanarDice.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlaneswalkedFrom.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlaneswalkedTo.java -text
@@ -12328,6 +12330,7 @@ forge-gui/res/cardsfolder/t/teferis_care.txt -text
 forge-gui/res/cardsfolder/t/teferis_curse.txt -text
 forge-gui/res/cardsfolder/t/teferis_drake.txt -text
 forge-gui/res/cardsfolder/t/teferis_honor_guard.txt -text
+forge-gui/res/cardsfolder/t/teferis_imp.txt -text
 forge-gui/res/cardsfolder/t/teferis_isle.txt -text
 forge-gui/res/cardsfolder/t/teferis_moat.txt -text
 forge-gui/res/cardsfolder/t/teferis_puzzle_box.txt svneol=native#text/plain
