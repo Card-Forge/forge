@@ -22,9 +22,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -115,13 +117,14 @@ public final class CardDb implements ICardDatabase {
         }
     }
     
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, boolean logMissingCards) {
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, boolean logMissingPerEdition, boolean logMissingSummary) {
         this.rulesByName = rules;
         this.editions = editions0;
+        Set<String> allMissingCards = new LinkedHashSet<String>();
         List<String> missingCards = new ArrayList<String>();
         for(CardEdition e : editions.getOrderedEditions()) {
-            boolean worthLogging = logMissingCards && ( e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT );
-            if(worthLogging)
+            boolean isCoreExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT; 
+            if(logMissingPerEdition && isCoreExpSet)
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             String lastCardName = null;
             int artIdx = 1;
@@ -135,18 +138,24 @@ public final class CardDb implements ICardDatabase {
                 CardRules cr = rulesByName.get(lastCardName);
                 if( cr != null )
                     addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
-                else if (worthLogging)
+                else
                     missingCards.add(cis.name);
             }
-            if(worthLogging) {
+            if(isCoreExpSet && logMissingPerEdition) {
                 if(missingCards.isEmpty())
                     System.out.println(" ... 100% ");
                 else {
                     int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
                     System.out.printf(" ... %.2f%% (%s missing: %s )%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | ") );
                 }
-                missingCards.clear();
             }
+            if( isCoreExpSet && logMissingSummary )
+                allMissingCards.addAll(missingCards);
+            missingCards.clear();
+        }
+        
+        if( logMissingSummary ) {
+            System.out.printf("Totally %d cards not implemented: %s\n", allMissingCards.size(), StringUtils.join(allMissingCards, " | "));
         }
 
         for(CardRules cr : rulesByName.values()) {
