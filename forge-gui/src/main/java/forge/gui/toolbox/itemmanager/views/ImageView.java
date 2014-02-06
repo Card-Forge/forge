@@ -53,10 +53,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final SkinFont GROUP_HEADER_FONT = FSkin.getFont(12);
     private static final int GROUP_HEADER_HEIGHT = 19;
     private static final int GROUP_HEADER_GLYPH_WIDTH = 6;
+    private static final int MIN_IMAGE_SIZE = 50;
+    private static final int MAX_IMAGE_SIZE = 300;
+    private static final int IMAGE_SIZE_OPTION_COUNT = 10;
+    private static final int IMAGE_SIZE_STEP = (MAX_IMAGE_SIZE - MIN_IMAGE_SIZE) / IMAGE_SIZE_OPTION_COUNT;
 
     private final CardViewDisplay display;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
-    private int imageScaleFactor = 5;
+    private int imageSizeOption = 4;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
@@ -242,26 +246,26 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected void onMouseWheelZoom(MouseWheelEvent e) {
         if (e.getWheelRotation() > 0) {
-            setImageScaleFactor(imageScaleFactor - 1);
+            setImageSizeOption(imageSizeOption - 1);
         }
         else {
-            setImageScaleFactor(imageScaleFactor + 1);
+            setImageSizeOption(imageSizeOption + 1);
         }
     }
 
-    public int getImageScaleFactor() {
-        return imageScaleFactor;
+    public int getImageSizeOption() {
+        return imageSizeOption;
     }
 
-    public void setImageScaleFactor(int imageScaleFactor0) {
-        if (imageScaleFactor0 < 1) {
-            imageScaleFactor0 = 1;
+    public void setImageSizeOption(int imageSizeOption0) {
+        if (imageSizeOption0 < 0) {
+            imageSizeOption0 = 0;
         }
-        else if (imageScaleFactor0 > 10) {
-            imageScaleFactor0 = 10;
+        else if (imageSizeOption0 > IMAGE_SIZE_OPTION_COUNT) {
+            imageSizeOption0 = IMAGE_SIZE_OPTION_COUNT;
         }
-        if (imageScaleFactor == imageScaleFactor0) { return; }
-        imageScaleFactor = imageScaleFactor0;
+        if (imageSizeOption == imageSizeOption0) { return; }
+        imageSizeOption = imageSizeOption0;
         updateLayout(false);
     }
 
@@ -320,7 +324,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         int pileX = PADDING;
         int pileWidth = itemAreaWidth - 2 * pileX;
 
-        int itemWidth = 50 + 25 * (imageScaleFactor - 1);
+        int itemWidth = MIN_IMAGE_SIZE + IMAGE_SIZE_STEP * imageSizeOption;
         int gap = Math.round(itemWidth * GAP_SCALE_FACTOR);
         int dx = itemWidth + gap;
         int itemsPerRow = (pileWidth + gap) / dx;
