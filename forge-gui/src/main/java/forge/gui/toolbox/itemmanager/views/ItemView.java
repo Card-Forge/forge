@@ -13,6 +13,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,10 +51,20 @@ public abstract class ItemView<T extends InventoryItem> {
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 
+    @SuppressWarnings("serial")
     protected ItemView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         this.itemManager = itemManager0;
         this.model = model0;
-        this.scroller = new FScrollPane(false);
+        this.scroller = new FScrollPane(false) {
+            @Override
+            protected void processMouseWheelEvent(MouseWheelEvent e) {
+                if (e.isControlDown()) {
+                    onMouseWheelZoom(e);
+                    return;
+                }
+                super.processMouseWheelEvent(e);
+            }
+        };
         this.scroller.setBorder(new FSkin.LineSkinBorder(BORDER_COLOR));
         this.button = new FLabel.Builder().hoverable().selectable(true)
             .icon(getIcon()).iconScaleAuto(false)
@@ -110,6 +121,9 @@ public abstract class ItemView<T extends InventoryItem> {
 
     public void setScrollValue(int value) {
         scroller.getVerticalScrollBar().setValue(value);
+    }
+
+    protected void onMouseWheelZoom(MouseWheelEvent e) {
     }
 
     public boolean isIncrementalSearchActive() {

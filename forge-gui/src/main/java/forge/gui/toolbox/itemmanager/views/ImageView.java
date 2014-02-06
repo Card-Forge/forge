@@ -13,6 +13,7 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private final CardViewDisplay display;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
-    private int imageScaleFactor = 3;
+    private int imageScaleFactor = 5;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
@@ -239,6 +240,32 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    protected void onMouseWheelZoom(MouseWheelEvent e) {
+        if (e.getWheelRotation() > 0) {
+            setImageScaleFactor(imageScaleFactor - 1);
+        }
+        else {
+            setImageScaleFactor(imageScaleFactor + 1);
+        }
+    }
+
+    public int getImageScaleFactor() {
+        return imageScaleFactor;
+    }
+
+    public void setImageScaleFactor(int imageScaleFactor0) {
+        if (imageScaleFactor0 < 1) {
+            imageScaleFactor0 = 1;
+        }
+        else if (imageScaleFactor0 > 10) {
+            imageScaleFactor0 = 10;
+        }
+        if (imageScaleFactor == imageScaleFactor0) { return; }
+        imageScaleFactor = imageScaleFactor0;
+        updateLayout(false);
+    }
+
+    @Override
     protected void onResize() {
         updateLayout(false); //need to update layout to adjust wrapping of items
     }
@@ -293,7 +320,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         int pileX = PADDING;
         int pileWidth = itemAreaWidth - 2 * pileX;
 
-        int itemWidth = 50 * imageScaleFactor;
+        int itemWidth = 50 + 25 * (imageScaleFactor - 1);
         int gap = Math.round(itemWidth * GAP_SCALE_FACTOR);
         int dx = itemWidth + gap;
         int itemsPerRow = (pileWidth + gap) / dx;
