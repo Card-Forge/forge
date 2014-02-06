@@ -198,7 +198,7 @@ public class ManaPool {
     private List<Pair<Mana, Integer>> selectManaToPayFor(final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
         for (final Byte manaKey : this.floatingMana.keySet()) {
-            if (!shard.canBePaidWithManaOfColor(manaKey.byteValue())) {
+            if (!canPayForShardWithColor(shard, manaKey.byteValue())) {
                 continue;
             }
 
@@ -207,7 +207,7 @@ public class ManaPool {
                     continue;
                 }
 
-                boolean canPay = shard.canBePaidWithManaOfColor(thisMana.getColorCode());
+                boolean canPay = canPayForShardWithColor(shard, thisMana.getColorCode());
                 if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
                     continue;
                 }
@@ -414,5 +414,10 @@ public class ManaPool {
         // update battlefield of activating player - to redraw cards used to pay mana as untapped
         Player p = sa.getActivatingPlayer();
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
+    }
+    
+    public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
+        // add color changing manipulations here
+        return shard.canBePaidWithManaOfColor(color);
     }
 }

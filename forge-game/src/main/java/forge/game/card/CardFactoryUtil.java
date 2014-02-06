@@ -1100,7 +1100,7 @@ public class CardFactoryUtil {
             byte colorCode = MagicColor.fromName(colorAbb);
             for(Card c0 : cards) {
                 for(ManaCostShard sh : c0.getManaCost()){
-                    if (sh.canBePaidWithManaOfColor(colorCode)) 
+                    if ((sh.getColorMask() & colorCode) != 0) 
                         colorOcurrencices++;
                 }
             }
@@ -1112,7 +1112,7 @@ public class CardFactoryUtil {
             byte color2 = MagicColor.fromName(sq[2]);
             for(Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
                 for (ManaCostShard sh : c0.getManaCost()) {
-                    if (sh.canBePaidWithManaOfColor(color1) || sh.canBePaidWithManaOfColor(color2)) {
+                    if ((sh.getColorMask() & (color1 | color2)) != 0) {
                         colorOcurrencices++;
                     }
                 }

@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -42,7 +41,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-import forge.util.TextUtil;
 import forge.util.maps.EnumMapToAmount;
 import forge.util.maps.MapToAmount;
 
@@ -215,7 +213,7 @@ public class ManaCostBeingPaid {
                     return true;
                 }
             }
-            else if (shard.canBePaidWithManaOfColor(colorMask)) {
+            else if (shardCanBePaidWithColor(shard, colorMask)) {
                 return true;
             }
         }
@@ -225,7 +223,7 @@ public class ManaCostBeingPaid {
     // isNeeded(String) still used by the Computer, might have problems activating Snow abilities
     public final boolean isAnyPartPayableWith(byte colorMask) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
-            if (shard.canBePaidWithManaOfColor(colorMask)) {
+            if (shardCanBePaidWithColor(shard, colorMask)) {
                 return true;
             }
         }
@@ -243,38 +241,6 @@ public class ManaCostBeingPaid {
 
     public final boolean isPaid() {
         return unpaidShards.isEmpty();
-    }
-
-    /**
-     * <p>
-     * payMultipleMana.
-     * </p>
-     * 
-     * @param mana
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public final String payMultipleMana(String mana) {
-        List<String> unused = new ArrayList<String>(4);
-        for (String manaPart : TextUtil.split(mana, ' ')) {
-            if (StringUtils.isNumeric(manaPart)) {
-                for (int i = Integer.parseInt(manaPart); i > 0; i--) {
-                    boolean wasNeeded = this.payMana("1");
-                    if (!wasNeeded) {
-                        unused.add(Integer.toString(i));
-                        break;
-                    }
-                }
-            }
-            else {
-                String color = MagicColor.toShortString(manaPart);
-                boolean wasNeeded = this.payMana(color);
-                if (!wasNeeded) {
-                    unused.add(color);
-                }
-            }
-        }
-        return unused.isEmpty() ? null : StringUtils.join(unused, ' ');
     }
 
     public final void increaseColorlessMana(final int manaToAdd) {
@@ -314,7 +280,7 @@ public class ManaCostBeingPaid {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public final boolean payMana(final String mana) {
+    public final boolean ai_payMana(final String mana) {
         final byte colorMask = MagicColor.fromName(mana);
         if (!this.isAnyPartPayableWith(colorMask)) {
             //System.out.println("ManaCost : addMana() error, mana not needed - " + mana);
@@ -325,7 +291,7 @@ public class ManaCostBeingPaid {
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
             @Override
             public boolean apply(ManaCostShard ms) {
-                return ms.canBePaidWithManaOfColor(colorMask);
+                return shardCanBePaidWithColor(ms, colorMask);
             }
         };
 
@@ -408,9 +374,14 @@ public class ManaCostBeingPaid {
         }
 
         byte color = mana.getColorCode();
-        return shard.canBePaidWithManaOfColor(color);
+        return shardCanBePaidWithColor(shard, color);
     }
 
+    private boolean shardCanBePaidWithColor(ManaCostShard shard, byte manaColor) {
+        // add color changing matrix here to support Daxos of Melethis 
+        return shard.canBePaidWithManaOfColor(manaColor);
+    }
+    
     public final void combineManaCost(final ManaCost extra) {
         for (ManaCostShard shard : extra) {
             if (shard == ManaCostShard.X) {

@@ -38,6 +38,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
+import forge.util.TextUtil;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -144,7 +145,6 @@ public class ComputerUtilMana {
 
         List<String> paymentPlan = new ArrayList<String>();
 
-        String originalCost = cost.toString(false);
         ManaCostShard toPay = null;
         // Loop over mana needed
         while (!cost.isPaid()) {
@@ -194,7 +194,7 @@ public class ComputerUtilMana {
                 String manaProduced = toPay.isSnow() ? "S" : GameActionUtil.generatedMana(saPayment);
                 manaProduced = AbilityManaPart.applyManaReplacement(saPayment, manaProduced);
                 //System.out.println(manaProduced);
-                cost.payMultipleMana(manaProduced);
+                payMultipleMana(cost, manaProduced);
 
                 // remove from available lists
                 for (Collection<SpellAbility> kv : sourcesForShards.values()) {
@@ -267,7 +267,7 @@ public class ComputerUtilMana {
             Set<String> reflected = CardUtil.getReflectableManaColors(saPayment);
 
             for (byte c : MagicColor.WUBRG) {
-                if (toPay.canBePaidWithManaOfColor(c) && reflected.contains(MagicColor.toLongString(c))) {
+                if (ai.getManaPool().canPayForShardWithColor(toPay, c) && reflected.contains(MagicColor.toLongString(c))) {
                     m.setExpressChoice(MagicColor.toShortString(c));
                     return;
                 }
@@ -278,7 +278,7 @@ public class ComputerUtilMana {
                 colorChoice = toPay.getColorMask();
             else {
                 for (byte c : MagicColor.WUBRG) {
-                    if (toPay.canBePaidWithManaOfColor(c)) {
+                    if (ai.getManaPool().canPayForShardWithColor(toPay, c)) {
                         colorChoice = c;
                         break;
                     }
@@ -312,7 +312,7 @@ public class ComputerUtilMana {
 
         if (m.isComboMana()) {
             for (String s : m.getComboColors().split(" ")) {
-                if ("Any".equals(s) || toPay.canBePaidWithManaOfColor(MagicColor.fromName(s)))
+                if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, MagicColor.fromName(s)))
                     return true;
             }
             return false;
@@ -321,7 +321,7 @@ public class ComputerUtilMana {
             Set<String> reflected = CardUtil.getReflectableManaColors(ma);
 
             for (byte c : MagicColor.WUBRG) {
-                if (toPay.canBePaidWithManaOfColor(c) && reflected.contains(MagicColor.toLongString(c))) {
+                if (ai.getManaPool().canPayForShardWithColor(toPay, c) && reflected.contains(MagicColor.toLongString(c))) {
                     m.setExpressChoice(MagicColor.toShortString(c));
                     return true;
                 }
@@ -392,7 +392,7 @@ public class ComputerUtilMana {
                     byte colorMask = MagicColor.fromName(choice);
                     if (abMana.canProduce(choice, manaAb) && testCost.isAnyPartPayableWith(colorMask)) {
                         choiceString.append(choice);
-                        testCost.payMultipleMana(choice);
+                        payMultipleMana(testCost, choice);
                         continue;
                     }
                 }
@@ -401,7 +401,7 @@ public class ComputerUtilMana {
                     // Loop over combo colors
                     for (String color : comboColors) {
                         if (testCost.isAnyPartPayableWith(MagicColor.fromName(color))) {
-                            testCost.payMultipleMana(color);
+                            payMultipleMana(testCost, color);
                             if (nMana != 1) {
                                 choiceString.append(" ");
                             }
@@ -438,6 +438,39 @@ public class ComputerUtilMana {
     }
 
     /**
+     * <p>
+     * payMultipleMana.
+     * </p>
+     * @param testCost 
+     * 
+     * @param mana
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    private final static String payMultipleMana(ManaCostBeingPaid testCost, String mana) {
+        List<String> unused = new ArrayList<String>(4);
+        for (String manaPart : TextUtil.split(mana, ' ')) {
+            if (StringUtils.isNumeric(manaPart)) {
+                for (int i = Integer.parseInt(manaPart); i > 0; i--) {
+                    boolean wasNeeded = testCost.ai_payMana("1");
+                    if (!wasNeeded) {
+                        unused.add(Integer.toString(i));
+                        break;
+                    }
+                }
+            }
+            else {
+                String color = MagicColor.toShortString(manaPart);
+                boolean wasNeeded = testCost.ai_payMana(color);
+                if (!wasNeeded) {
+                    unused.add(color);
+                }
+            }
+        }
+        return unused.isEmpty() ? null : StringUtils.join(unused, ' ');
+    }
+    
+    /**
      * Find all mana sources.
      * @param manaAbilityMap
      * @param partSources
@@ -467,7 +500,8 @@ public class ComputerUtilMana {
             }
 
             for (Entry<Integer, SpellAbility> kv : manaAbilityMap.entries()) {
-                if (shard.canBePaidWithManaOfColor(kv.getKey().byteValue())) {
+                // apply mana color change matrix here
+                if (ai.getManaPool().canPayForShardWithColor(shard, kv.getKey().byteValue())) {
                     res.add(shard, kv.getValue());
                 }
             }
