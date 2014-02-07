@@ -162,7 +162,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void update() {
-        this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns(), getScreen() == FScreen.DECK_EDITOR_DRAFT ? GroupDef.CREATURE_SPELL_LAND : GroupDef.COLOR, ColumnDef.CMC, 1);
         this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
 
         SItemManagerUtil.resetUI(this);

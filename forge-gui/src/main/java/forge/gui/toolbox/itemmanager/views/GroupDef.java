@@ -152,30 +152,30 @@ public enum GroupDef {
 
     private static String[] getColorGroups() {
         //TODO: Support breaking up Multicolor into separate groups for each color combination
-        return new String[] { "Colorless", "White", "Blue", "Black", "Red", "Green", "Multicolor" };
+        return new String[] { "White", "Blue", "Black", "Red", "Green", "Multicolor", "Colorless" };
     }
 
     private static Integer getColorGroup(ColorSet color) {
         if (color.isColorless()) {
-            return 0;
-        }
-        if (color.isMulticolor()) {
             return 6;
         }
+        if (color.isMulticolor()) {
+            return 5;
+        }
         if (color.hasWhite()) {
-            return 1;
+            return 0;
         }
         if (color.hasBlue()) {
-            return 2;
+            return 1;
         }
         if (color.hasBlack()) {
-            return 3;
+            return 2;
         }
         if (color.hasRed()) {
-            return 4;
+            return 3;
         }
         if (color.hasGreen()) {
-            return 5;
+            return 4;
         }
         return -1; //shouldn't happen
     }
