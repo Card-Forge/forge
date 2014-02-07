@@ -150,11 +150,14 @@ public enum CSubmenuDraft implements ICDoc {
         final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
         if (poolType == null) { return; }
 
-        final CEditorDraftingProcess draft = new CEditorDraftingProcess();
-        draft.showGui(new BoosterDraft(poolType));
+        BoosterDraft draft = BoosterDraft.createDraft(poolType);
+        if (draft == null) { return; }
+
+        final CEditorDraftingProcess draftController = new CEditorDraftingProcess();
+        draftController.showGui(draft);
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draft);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draftController);
     }
 
     /* (non-Javadoc)

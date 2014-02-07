@@ -36,7 +36,6 @@ import forge.item.SealedProduct;
 import forge.model.CardBlock;
 import forge.model.UnOpenedMeta;
 import forge.util.FileUtil;
-import forge.util.ItemPool;
 import forge.util.TextUtil;
 
 /**
@@ -155,7 +154,8 @@ public class SealedCardPoolGenerator {
                     return;
                 }
 
-                final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool", customs);
+                final CustomLimited draft = GuiChoose.oneOrNone("Choose Custom Sealed Pool", customs);
+                if (draft == null) { return; }
 
                 UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
                 toAdd.setLimitedPool(draft.isSingleton());
@@ -185,7 +185,7 @@ public class SealedCardPoolGenerator {
      * 
      * @return an ArrayList of the set choices.
      */
-    private ArrayList<String> getSetCombos(final List<String> setz, final int nPacks) {
+    private static ArrayList<String> getSetCombos(final List<String> setz, final int nPacks) {
         String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         ArrayList<String> setCombos = new ArrayList<String>();
 
@@ -335,12 +335,16 @@ public class SealedCardPoolGenerator {
      *      boolean, get pool for human (possible choices)
      * @return a {@link forge.CardList} object.
      */
-    public ItemPool<PaperCard> getCardpool(final boolean isHuman) {
+    public CardPool getCardPool(final boolean isHuman) {
         final CardPool pool = new CardPool();
 
         for (IUnOpenedProduct prod : product) {
             if (prod instanceof UnOpenedMeta) {
-                pool.addAllFlat(((UnOpenedMeta) prod).open(isHuman));
+                List<PaperCard> cards = ((UnOpenedMeta) prod).open(isHuman, true);
+                if (cards == null) {
+                    return null; //return null if user canceled
+                }
+                pool.addAllFlat(cards);
             }
             else {
                 pool.addAllFlat(prod.get());

@@ -20,7 +20,9 @@ public class BoosterDraft1Test {
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 1000, enabled = false)
     public void boosterDraft1Test1() throws Exception {
-        final BoosterDraft draft = new BoosterDraft(LimitedPoolType.Full);
+        final BoosterDraft draft = BoosterDraft.createDraft(LimitedPoolType.Full);
+        if (draft == null) { return; }
+
         while (draft.hasNextChoice()) {
             final CardPool list = draft.nextChoice();
             System.out.println(list.countAll());

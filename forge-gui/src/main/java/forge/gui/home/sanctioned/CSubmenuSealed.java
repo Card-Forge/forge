@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Command;
 import forge.Singletons;
 import forge.card.MagicColor;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
@@ -36,7 +37,6 @@ import forge.limited.ReadDraftRankings;
 import forge.limited.SealedCardPoolGenerator;
 import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.ItemPool;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
@@ -151,7 +151,8 @@ public enum CSubmenuSealed implements ICDoc {
         SealedCardPoolGenerator sd = new SealedCardPoolGenerator(poolType);
         if (sd.isEmpty()) { return; }
 
-        final ItemPool<PaperCard> humanPool = sd.getCardpool(true);
+        final CardPool humanPool = sd.getCardPool(true);
+        if (humanPool == null) { return; }
 
         // System.out.println(humanPool);
 
@@ -208,7 +209,10 @@ public enum CSubmenuSealed implements ICDoc {
         sealed.setHumanDeck(deck);
         for (int i = 0; i < rounds; i++) {
             // Generate other decks for next N opponents
-            sealed.addAiDeck(new SealedDeckBuilder(sd.getCardpool(false).toFlatList()).buildDeck());
+            final CardPool aiPool = sd.getCardPool(false);
+            if (aiPool == null) { return; }
+
+            sealed.addAiDeck(new SealedDeckBuilder(aiPool.toFlatList()).buildDeck());
         }
 
         // Rank the AI decks
