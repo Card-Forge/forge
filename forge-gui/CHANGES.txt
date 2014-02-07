@@ -20,6 +20,10 @@ You can use Ctrl+MouseWheel to zoom in to maximum card width of 300px or out to 
 Forge will no longer crash when there are decks with unsupported cards. These cards will appear in decks and games player starts as a dummy without cost, types, abilities, but with explanation in card's text. The unsupported cards will be listed in the console window as Forge is loading. Unfortunately, it is currently impossible to pinpoint which decks exactly include these unsupported cards in order to list them. However, depending on your operating system, you should be able to either use your operating system utilities or third party software to make a search inside deck files for the offending card name, locate the problematic decks and either update or remove them.
 
 
+- Deck Conformance fix -
+Toggling off Deck Conformance in Preferences now properly allows adding more than 4 cards to deck in editor
+
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
