@@ -94,5 +94,6 @@ public enum FAbsolutePositioner {
      */
     public void hideAll() {
         panel.removeAll();
+        FMouseAdapter.forceMouseUp(); //ensure mouse not stuck down somewhere
     }
 }
