@@ -28,7 +28,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    COLOR_IDENTITY("Color", getColorGroups(),
+    COLOR_IDENTITY("Color Identity", getColorGroups(),
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
@@ -77,11 +77,11 @@ public enum GroupDef {
                 }
             }),
     CARD_TYPE("Card Type",
-            new String[] { "Lands", "Artifacts", "Creatures", "Enchantments", "Planeswalkers", "Instants", "Sorceries" },
+            new String[] { "Creatures", "Artifacts", "Enchantments", "Planeswalkers", "Instants", "Sorceries", "Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override
                 public ColumnDef apply(final Integer groupIndex) {
-                    if (groupIndex == 0) {
+                    if (groupIndex == 6) {
                         return ColumnDef.NAME; //pile lands by name regardless
                     }
                     return null;
@@ -93,25 +93,25 @@ public enum GroupDef {
                     if (item instanceof PaperCard) {
                         CardType type = ((PaperCard) item).getRules().getType();
                         if (type.isCreature()) { //make Artifact and Land Creatures appear in Creatures group
-                            return 2;
+                            return 0;
                         }
                         if (type.isLand()) { //make Artifact Lands appear in Lands group
-                            return 0;
+                            return 6;
                         }
                         if (type.isArtifact()) {
                             return 1;
                         }
                         if (type.isEnchantment()) {
-                            return 3;
+                            return 2;
                         }
                         if (type.isPlaneswalker()) {
-                            return 4;
+                            return 3;
                         }
                         if (type.isInstant()) {
-                            return 5;
+                            return 4;
                         }
                         if (type.isSorcery()) {
-                            return 6;
+                            return 5;
                         }
                     }
                     return -1;
@@ -131,6 +131,11 @@ public enum GroupDef {
     private final Function<InventoryItem, Integer> fnGroupItem;
 
     public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String toString() {
         return this.name;
     }
 

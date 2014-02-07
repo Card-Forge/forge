@@ -342,7 +342,7 @@ public enum ColumnDef {
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return toDeck(from.getKey()).getEdition().getCode();
                 }
-            }),            
+            }),
     DECK_MAIN("Main", "Main Deck", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
@@ -390,6 +390,11 @@ public enum ColumnDef {
     final ItemCellRenderer cellRenderer;
     final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort;
     final Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay;
+
+    @Override
+    public String toString() {
+        return this.longName;
+    }
 
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 

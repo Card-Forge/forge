@@ -11,6 +11,8 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseWheelEvent;
@@ -31,6 +33,8 @@ import forge.gui.deckeditor.DeckProxy;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
+import forge.gui.toolbox.FComboBoxWrapper;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -58,6 +62,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int IMAGE_SIZE_OPTION_COUNT = 10;
     private static final int IMAGE_SIZE_STEP = (MAX_IMAGE_SIZE - MIN_IMAGE_SIZE) / IMAGE_SIZE_OPTION_COUNT;
 
+    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.CREATURE_SPELL_LAND, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
+    private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
+    private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
+    private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
+
     private final CardViewDisplay display;
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
     private int imageSizeOption = 4;
@@ -71,9 +80,57 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final ArrayList<Group> groups = new ArrayList<Group>();
+    private final FComboBoxWrapper<Object> cbGroupByOptions = new FComboBoxWrapper<Object>();
+    private final FComboBoxWrapper<Object> cbPileByOptions = new FComboBoxWrapper<Object>();
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
+        //setup options
+        boolean isDeckManager = itemManager0.getGenericType().equals(DeckProxy.class);
+        GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
+        ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
+        cbGroupByOptions.addItem("(none)");
+        cbPileByOptions.addItem("(none)");
+        for (GroupDef option : groupByOptions) {
+            cbGroupByOptions.addItem(option);
+        }
+        for (ColumnDef option : pileByOptions) {
+            cbPileByOptions.addItem(option);
+        }
+        cbGroupByOptions.setSelectedIndex(0);
+        cbPileByOptions.setSelectedIndex(0);
+
+        cbGroupByOptions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                focus();
+                if (cbGroupByOptions.getSelectedIndex() > 0) {
+                    setGroupBy((GroupDef) cbGroupByOptions.getSelectedItem());
+                }
+                else {
+                    setGroupBy(null);
+                }
+            }
+        });
+        cbPileByOptions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                focus();
+                if (cbPileByOptions.getSelectedIndex() > 0) {
+                    setPileBy((ColumnDef) cbPileByOptions.getSelectedItem());
+                }
+                else {
+                    setPileBy(null);
+                }
+            }
+        });
+
+        getPnlOptions().add(new FLabel.Builder().text("Group by:").fontSize(12).build());
+        cbGroupByOptions.addTo(getPnlOptions(), "pushx, growx");
+        getPnlOptions().add(new FLabel.Builder().text("Pile by:").fontSize(12).build());
+        cbPileByOptions.addTo(getPnlOptions(), "pushx, growx");
+
+        //setup display
         display = new CardViewDisplay();
         display.addMouseListener(new FMouseAdapter() {
             @Override
@@ -193,11 +250,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         return groupBy;
     }
     public void setGroupBy(GroupDef groupBy0) {
-        setGroupBy(groupBy, false);
+        setGroupBy(groupBy0, false);
     }
     public void setGroupBy(GroupDef groupBy0, boolean forSetup) {
         if (groupBy == groupBy0) { return; }
         groupBy = groupBy0;
+
+        if (groupBy == null) {
+            cbGroupByOptions.setSelectedIndex(0);
+        }
+        else {
+            cbGroupByOptions.setSelectedItem(groupBy);
+        }
 
         groups.clear();
 
@@ -224,6 +288,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     public void setPileBy(ColumnDef pileBy0, boolean forSetup) {
         if (pileBy == pileBy0) { return; }
         pileBy = pileBy0;
+
+        if (pileBy == null) {
+            cbPileByOptions.setSelectedIndex(0);
+        }
+        else {
+            cbPileByOptions.setSelectedItem(pileBy);
+        }
 
         if (!forSetup) {
             refresh(null, -1, 0);

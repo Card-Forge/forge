@@ -411,7 +411,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         helper.include(this.btnViewOptions, viewButtonWidth, FTextField.HEIGHT);
         helper.newLine(-1);
         if (this.currentView.getPnlOptions().isVisible()) {
-            helper.fillLine(this.currentView.getPnlOptions(), FTextField.HEIGHT + helper.getGapY());
+            helper.fillLine(this.currentView.getPnlOptions(), FTextField.HEIGHT + 4);
         }
         helper.fill(this.currentView.getScroller());
     }
