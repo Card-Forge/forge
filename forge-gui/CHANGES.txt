@@ -1,7 +1,7 @@
-Forge Beta: 02-##-2014 ver 1.5.12
+Forge Beta: 02-07-2014 ver 1.5.12
 
 
-13### cards in total.
+13579 cards in total.
 
 
 -------------
@@ -36,15 +36,15 @@ Forge now includes many of the new Born of the Gods cards. It may take a few day
 New Cards
 ---------
 
-God-Favored General
-Gild
-Satyr Firedancer
+Aerie Worshippers
 Felhide Spiritbinder
+Forlorn Pseudamma
+Gild
+God-Favored General
 Hunter's Prowess
 Lightning Volley
-Aerie Worshippers
-Forlorn Pseudamma
 Pheres-Band Raiders
+Satyr Firedancer
 Satyr Nyx-Smith
 Teferi's Imp
 
@@ -73,7 +73,16 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+Gos
+Marc
+Max
+RumbleBBU
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
