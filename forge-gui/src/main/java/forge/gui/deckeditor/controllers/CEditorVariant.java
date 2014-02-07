@@ -39,6 +39,7 @@ import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
@@ -91,7 +92,10 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
 
     @Override
     protected CardLimit getCardLimit() {
-        return CardLimit.Default;
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            return CardLimit.Default;
+        }
+        return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
     }
 
     /* (non-Javadoc)
