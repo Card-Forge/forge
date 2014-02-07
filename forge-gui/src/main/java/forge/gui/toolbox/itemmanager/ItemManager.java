@@ -1153,7 +1153,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.setSelectedIndex(index);
         }
 
-        if (this.contextMenuBuilder == null) { return; }
+        if (this.contextMenuBuilder == null) {
+            if (onClose != null) {
+                onClose.run(); //run onClose immediately even if no context menu shown
+            }
+            return;
+        }
 
         JPopupMenu menu = new JPopupMenu("ItemManagerContextMenu");
         this.contextMenuBuilder.buildContextMenu(menu);
