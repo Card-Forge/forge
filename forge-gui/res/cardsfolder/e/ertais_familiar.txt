@@ -1,0 +1,11 @@
+Name:Ertai's Familiar
+ManaCost:1 U
+Types:Creature Illusion
+PT:2/2
+K:Phasing
+T:Mode$ PhaseOut | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME phases out or leaves the battlefield, put the top three cards of your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigMill | TriggerDescription$ When CARDNAME phases out or leaves the battlefield, put the top three cards of your library into your graveyard.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ CARDNAME can't phase out. | UntilYourNextUpkeep$ True | SpellDescription$ Until your next upkeep, CARDNAME can't phase out.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ertais_familiar.jpg
+Oracle:Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nWhen Ertai's Familiar phases out or leaves the battlefield, put the top three cards of your library into your graveyard.\n{U}: Until your next upkeep, Ertai's Familiar can't phase out.

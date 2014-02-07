@@ -4174,6 +4174,7 @@ forge-gui/res/cardsfolder/e/ersatz_gnomes.txt -text
 forge-gui/res/cardsfolder/e/ertai.txt -text
 forge-gui/res/cardsfolder/e/ertai_the_corrupted.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ertai_wizard_adept.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/ertais_familiar.txt -text
 forge-gui/res/cardsfolder/e/ertais_trickery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/escape_artist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/escape_routes.txt svneol=native#text/plain
@@ -10923,6 +10924,7 @@ forge-gui/res/cardsfolder/s/shimian_specter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shimmer.txt -text
 forge-gui/res/cardsfolder/s/shimmer_myr.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shimmering_barrier.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shimmering_efreet.txt -text
 forge-gui/res/cardsfolder/s/shimmering_glasskite.txt -text
 forge-gui/res/cardsfolder/s/shimmering_grotto.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shimmering_mirage.txt -text
