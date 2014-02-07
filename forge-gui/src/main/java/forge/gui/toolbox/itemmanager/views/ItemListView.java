@@ -105,6 +105,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         super(itemManager0, model0);
         this.tableModel = new ItemTableModel(model0);
         this.setAllowMultipleSelections(false);
+        this.getPnlOptions().setVisible(false); //hide options panel by default
 
         // use different selection highlight colors for focused vs. unfocused tables
         this.table.addMouseListener(new FMouseAdapter() {

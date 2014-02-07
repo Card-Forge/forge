@@ -53,6 +53,7 @@ import forge.gui.GuiUtils;
 import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.gui.toolbox.FSkin.SkinnedCheckBox;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextField;
@@ -119,6 +120,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .tooltip("Number of cards shown / Total available cards")
         .fontAlign(SwingConstants.LEFT)
         .fontSize(12)
+        .build();
+
+    private static final SkinIcon VIEW_OPTIONS_ICON = FSkin.getIcon(FSkin.DockIcons.ICO_SETTINGS).resize(20, 20);
+    private final FLabel btnViewOptions = new FLabel.Builder()
+        .hoverable().selectable(true)
+        .icon(VIEW_OPTIONS_ICON).iconScaleAuto(false)
+        .tooltip("Toggle to show/hide options for current view")
         .build();
 
     private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
@@ -200,6 +208,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.add(view.getButton());
             view.getButton().setSelected(view == this.currentView);
         }
+        this.add(this.btnViewOptions);
+        this.btnViewOptions.setSelected(this.currentView.getPnlOptions().isVisible());
+        this.add(this.currentView.getPnlOptions());
         this.add(this.currentView.getScroller());
 
         final Runnable cmdAddCurrentSearch = new Runnable() {
@@ -280,6 +291,14 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.btnFilters.setCommand(cmdBuildFilterMenu);
         this.btnFilters.setRightClickCommand(cmdBuildFilterMenu); //show menu on right-click too
 
+        this.btnViewOptions.setCommand(new Runnable() {
+            @Override
+            public void run() {
+                currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
+                revalidate();
+            }
+        });
+
         //setup initial filters
         addDefaultFilters();
 
@@ -316,13 +335,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
 
         this.currentView.getButton().setSelected(false);
+        this.remove(this.currentView.getPnlOptions());
         this.remove(this.currentView.getScroller());
 
         this.currentView = view;
-        this.currentView.getButton().setSelected(true);
-        this.currentView.refresh(itemsToSelect, backupIndexToSelect, 0);
 
-        this.add(currentView.getScroller());
+        this.btnViewOptions.setSelected(view.getPnlOptions().isVisible());
+        view.getButton().setSelected(true);
+        view.refresh(itemsToSelect, backupIndexToSelect, 0);
+
+        this.add(view.getPnlOptions());
+        this.add(view.getScroller());
         this.revalidate();
         this.repaint();
         this.focus();
@@ -370,7 +393,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         int ratioWidth = this.lblRatio.getAutoSizeWidth();
         int viewButtonWidth = FTextField.HEIGHT;
-        int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * this.views.size() - ratioWidth - helper.getX() - (this.views.size() + 2) * helper.getGapX();
+        int viewButtonCount = this.views.size() + 1;
+        int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 2) * helper.getGapX();
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
             this.lblCaption.setToolTipText(this.lblCaption.getText());
             captionWidth = availableCaptionWidth;
@@ -379,10 +403,15 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.lblCaption.setToolTipText(null);
         }
         helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
-        helper.fillLine(this.lblRatio, FTextField.HEIGHT, (viewButtonWidth + helper.getGapX()) * this.views.size() - 1); //leave room for view buttons
+        helper.fillLine(this.lblRatio, FTextField.HEIGHT, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
         for (ItemView<T> view : this.views) {
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
+        }
+        helper.include(this.btnViewOptions, viewButtonWidth, FTextField.HEIGHT);
+        helper.newLine(-1);
+        if (this.currentView.getPnlOptions().isVisible()) {
+            helper.fillLine(this.currentView.getPnlOptions(), FTextField.HEIGHT + helper.getGapY());
         }
         helper.fill(this.currentView.getScroller());
     }

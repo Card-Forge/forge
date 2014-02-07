@@ -59,7 +59,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int IMAGE_SIZE_STEP = (MAX_IMAGE_SIZE - MIN_IMAGE_SIZE) / IMAGE_SIZE_OPTION_COUNT;
 
     private final CardViewDisplay display;
-    private List<Integer> selectedIndices = new ArrayList<Integer>();
+    private final List<Integer> selectedIndices = new ArrayList<Integer>();
     private int imageSizeOption = 4;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
@@ -69,8 +69,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
-    private ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
-    private ArrayList<Group> groups = new ArrayList<Group>();
+    private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
+    private final ArrayList<Group> groups = new ArrayList<Group>();
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);

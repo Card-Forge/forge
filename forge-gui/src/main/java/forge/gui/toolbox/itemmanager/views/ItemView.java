@@ -28,6 +28,8 @@ import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,6 +38,7 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
@@ -48,6 +51,7 @@ public abstract class ItemView<T extends InventoryItem> {
     protected final ItemManagerModel<T> model;
     private final FScrollPane scroller;
     private final FLabel button;
+    private final SkinnedPanel pnlOptions = new SkinnedPanel(new MigLayout("insets 0, gap 0, hidemode 3"));
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 
@@ -65,6 +69,8 @@ public abstract class ItemView<T extends InventoryItem> {
                 super.processMouseWheelEvent(e);
             }
         };
+        this.pnlOptions.setOpaque(false);
+        this.pnlOptions.setBorder(new FSkin.MatteSkinBorder(1, 0, 0, 0, BORDER_COLOR));
         this.scroller.setBorder(new FSkin.LineSkinBorder(BORDER_COLOR));
         this.button = new FLabel.Builder().hoverable().selectable(true)
             .icon(getIcon()).iconScaleAuto(false)
@@ -113,6 +119,10 @@ public abstract class ItemView<T extends InventoryItem> {
 
     public FScrollPane getScroller() {
         return this.scroller;
+    }
+
+    public SkinnedPanel getPnlOptions() {
+        return pnlOptions;
     }
 
     public int getScrollValue() {
