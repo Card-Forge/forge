@@ -367,8 +367,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         int groupX = PADDING;
         int itemAreaWidth = getVisibleSize().width;
         int groupWidth = itemAreaWidth - 2 * groupX;
-        if (groupWidth <= 0) { return; }
-
         int pileX = PADDING;
         int pileWidth = itemAreaWidth - 2 * pileX;
 
@@ -788,7 +786,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public final void paintComponent(final Graphics g) {
-            if (groups.get(0).getBounds().height <= 0) { return; }
+            if (groups.isEmpty() || groups.get(0).getBounds().width <= 0) {
+                return; //don't render anything until first group has width
+            }
 
             updateHoveredItem(hoverPoint, hoverScrollPos); //ensure hovered item up to date
 
