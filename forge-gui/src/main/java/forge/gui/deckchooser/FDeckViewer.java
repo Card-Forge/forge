@@ -149,7 +149,7 @@ public class FDeckViewer extends FDialog {
         ItemColumn qtyColumn = new ItemColumn(ColumnDef.QUANTITY);
         qtyColumn.setIndex(0);
         columns.put(ColumnDef.QUANTITY, qtyColumn);
-        this.cardManager.setup(columns, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
+        this.cardManager.setup(columns, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
     }
 
     private void changeSection() {

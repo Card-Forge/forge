@@ -165,7 +165,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         lstCatalogCols.remove(ColumnDef.QUANTITY);
 
         this.getCatalogManager().setup(lstCatalogCols);
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
 
         SItemManagerUtil.resetUI(this);
 
