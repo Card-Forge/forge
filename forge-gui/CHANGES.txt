@@ -8,7 +8,7 @@ Forge Beta: 02-##-2014 ver 1.5.12
 Release Notes
 -------------
 
-- Extended foil cards support -
+- Extended foil card support -
 Forge now generates foil cards in booster packs, which will be apparent in sealed deck, booster draft, and quest modes. Also, foil cards are now correctly displayed in the deck editor including the new pile view mode. The display of foil overlay can be disabled in user preferences in case you dislike the visual foil effect. Please note that this option is visual only and does not affect the internal foil generation as such. Foil support is a work in progress and will be extended over time.
 
 
