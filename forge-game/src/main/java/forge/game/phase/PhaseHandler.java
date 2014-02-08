@@ -964,16 +964,21 @@ public class PhaseHandler implements java.io.Serializable {
                 SpellAbility chosenSa = null;
 
                 do {
-                    // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
-                    game.getAction().checkStateEffects();
-                    if (game.isGameOver())
-                        return; // state-based effects check could lead to game over
-
-                    Player whoAddsToStack = pPlayerPriority;
-                    do {
-                        game.getStack().chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
-                        whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
-                    } while( whoAddsToStack != null && whoAddsToStack != pPlayerPriority);
+                    
+                    boolean addedAnythingToStack;
+                    do { 
+                        addedAnythingToStack = false;
+                        // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
+                        game.getAction().checkStateEffects();
+                        if (game.isGameOver())
+                            return; // state-based effects check could lead to game over
+    
+                        Player whoAddsToStack = playerTurn;
+                        do {
+                            addedAnythingToStack |= game.getStack().chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
+                            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
+                        } while( whoAddsToStack != null && whoAddsToStack != pPlayerPriority);
+                    } while(!addedAnythingToStack);
 
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
                     if( null == chosenSa )
