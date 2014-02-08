@@ -41,6 +41,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.special.CardZoomer;
@@ -77,6 +78,80 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final ArrayList<Group> groups = new ArrayList<Group>();
+
+    @SuppressWarnings("serial")
+    private class ExpandCollapseButton extends FLabel {
+        private boolean isAllCollapsed;
+
+        private ExpandCollapseButton() {
+            super(new FLabel.ButtonBuilder());
+            setFocusable(false);
+            updateToolTip();
+            setCommand(new Runnable() {
+                @Override
+                public void run() {
+                    if (groupBy == null || model.getItems().isEmpty()) { return; }
+
+                    boolean collapsed = !isAllCollapsed;
+                    for (Group group : groups) {
+                        group.isCollapsed = collapsed;
+                    }
+
+                    updateIsAllCollapsed();
+                    clearSelection(); //must clear selection since indices and visible items will be changing
+                    updateLayout(false);
+                }
+            });
+        }
+
+        private void updateIsAllCollapsed() {
+            boolean isAllCollapsed0 = true;
+            for (Group group : groups) {
+                if (!group.isCollapsed) {
+                    isAllCollapsed0 = false;
+                    break;
+                }
+            }
+            if (isAllCollapsed != isAllCollapsed0) {
+                isAllCollapsed = isAllCollapsed0;
+                updateToolTip();
+                repaintSelf();
+            }
+        }
+
+        private void updateToolTip() {
+            setToolTipText(isAllCollapsed ? "Expand all groups" : "Collapse all groups");
+        }
+
+        @Override
+        protected void paintContent(final Graphics2D g, int w, int h, final boolean paintPressedState) {
+            int squareSize = w / 2 - 2;
+            int offset = 2;
+            int x = (w - squareSize) / 2 - offset;
+            int y = (h - squareSize) / 2 - offset;
+            if (!paintPressedState) {
+                x--;
+                y--;
+            }
+
+            FSkin.setGraphicsColor(g, GROUP_HEADER_FORE_COLOR);
+            for (int i = 0; i < 2; i++) {
+                g.drawLine(x, y, x + squareSize, y);
+                g.drawLine(x + squareSize, y, x + squareSize, y + offset);
+                g.drawLine(x, y, x, y + squareSize);
+                g.drawLine(x, y + squareSize, x + offset, y + squareSize);
+                x += offset;
+                y += offset;
+            }
+            g.drawRect(x, y, squareSize, squareSize);
+            g.drawLine(x + offset + 1, y + squareSize / 2, x + squareSize - 2 * offset + 1, y + squareSize / 2);
+            if (isAllCollapsed) {
+                g.drawLine(x + squareSize / 2, y + offset + 1, x + squareSize / 2, y + squareSize - 2 * offset + 1);
+            }
+        }
+    }
+    private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
+
     private final FComboBoxWrapper<Object> cbGroupByOptions = new FComboBoxWrapper<Object>();
     private final FComboBoxWrapper<Object> cbPileByOptions = new FComboBoxWrapper<Object>();
     private final FComboBoxWrapper<Integer> cbColumnCount = new FComboBoxWrapper<Integer>();
@@ -137,6 +212,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         });
 
+        getPnlOptions().add(btnExpandCollapseAll, "w " + FTextField.HEIGHT + "px, h " + FTextField.HEIGHT + "px");
         getPnlOptions().add(new FLabel.Builder().text("Group by:").fontSize(12).build());
         cbGroupByOptions.addTo(getPnlOptions(), "pushx, growx");
         getPnlOptions().add(new FLabel.Builder().text("Pile by:").fontSize(12).build());
@@ -157,6 +233,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             if (group.getBounds().contains(point)) {
                                 if (!group.items.isEmpty() && point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
                                     group.isCollapsed = !group.isCollapsed;
+                                    btnExpandCollapseAll.updateIsAllCollapsed();
                                     clearSelection(); //must clear selection since indices and visible items will be changing
                                     updateLayout(false);
                                 }
@@ -287,6 +364,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 groups.add(new Group(groupName));
             }
         }
+        btnExpandCollapseAll.updateIsAllCollapsed();
 
         if (!forSetup) {
             refresh(null, -1, 0);
@@ -667,6 +745,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     //if group containing item is collapsed, expand it so the item can be selected and has a valid index
                     if (group.isCollapsed) {
                         group.isCollapsed = false;
+                        btnExpandCollapseAll.updateIsAllCollapsed();
                         clearSelection(); //must clear selection since indices and visible items will be changing
                         updateLayout(false);
                     }
