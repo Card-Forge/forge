@@ -50,17 +50,14 @@ import forge.view.arcane.CardPanel;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
-    private static final float GAP_SCALE_FACTOR = 0.04f;
     private static final float PILE_SPACING_Y = 0.1f;
     private static final SkinColor GROUP_HEADER_FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final SkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(120);
     private static final SkinFont GROUP_HEADER_FONT = FSkin.getFont(12);
     private static final int GROUP_HEADER_HEIGHT = 19;
     private static final int GROUP_HEADER_GLYPH_WIDTH = 6;
-    private static final int MIN_IMAGE_SIZE = 50;
-    private static final int MAX_IMAGE_SIZE = 300;
-    private static final int IMAGE_SIZE_OPTION_COUNT = 10;
-    private static final int IMAGE_SIZE_STEP = (MAX_IMAGE_SIZE - MIN_IMAGE_SIZE) / IMAGE_SIZE_OPTION_COUNT;
+    private static final int MIN_COLUMN_COUNT = 1;
+    private static final int MAX_COLUMN_COUNT = 10;
 
     private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.CREATURE_SPELL_LAND, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
     private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
@@ -69,7 +66,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private final CardViewDisplay display;
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
-    private int imageSizeOption = 4;
+    private int columnCount = 4;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
@@ -318,28 +315,28 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected void onMouseWheelZoom(MouseWheelEvent e) {
         if (e.getWheelRotation() > 0) {
-            setImageSizeOption(imageSizeOption - 1);
+            setColumnCount(columnCount + 1);
         }
         else {
-            setImageSizeOption(imageSizeOption + 1);
+            setColumnCount(columnCount - 1);
         }
     }
 
-    public int getImageSizeOption() {
-        return imageSizeOption;
+    public int getColumnCount() {
+        return columnCount;
     }
 
-    public void setImageSizeOption(int imageSizeOption0) {
-        if (imageSizeOption0 < 0) {
-            imageSizeOption0 = 0;
+    public void setColumnCount(int columnCount0) {
+        if (columnCount0 < MIN_COLUMN_COUNT) {
+            columnCount0 = MIN_COLUMN_COUNT;
         }
-        else if (imageSizeOption0 > IMAGE_SIZE_OPTION_COUNT) {
-            imageSizeOption0 = IMAGE_SIZE_OPTION_COUNT;
+        else if (columnCount0 > MAX_COLUMN_COUNT) {
+            columnCount0 = MAX_COLUMN_COUNT;
         }
-        if (imageSizeOption == imageSizeOption0) { return; }
-        imageSizeOption = imageSizeOption0;
+        if (columnCount == columnCount0) { return; }
+        columnCount = columnCount0;
 
-        //determine item to retain scroll position of following image size change
+        //determine item to retain scroll position of following column count change
         ItemInfo focalItem0 = getFocalItem();
         if (focalItem0 == null) {
             updateLayout(false);
@@ -349,7 +346,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         int offsetTop = focalItem0.getTop() - getScrollValue();
         updateLayout(false);
         setScrollValue(focalItem0.getTop() - offsetTop);
-        focalItem = focalItem0; //cache focal item so consecutive image size changes use the same item
+        focalItem = focalItem0; //cache focal item so consecutive column count changes use the same item
     }
 
     private ItemInfo getFocalItem() {
@@ -441,15 +438,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         int pileX = PADDING;
         int pileWidth = itemAreaWidth - 2 * pileX;
 
-        int itemWidth = MIN_IMAGE_SIZE + IMAGE_SIZE_STEP * imageSizeOption;
-        int gap = Math.round(itemWidth * GAP_SCALE_FACTOR);
-        int dx = itemWidth + gap;
-        int itemsPerRow = (pileWidth + gap) / dx;
-        if (itemsPerRow == 0) {
-            itemsPerRow = 1;
-            itemWidth = pileWidth;
-        }
+        int gap = (MAX_COLUMN_COUNT - columnCount) / 2 + 2; //more items per row == less gap between them
+        int itemWidth = Math.round((pileWidth + gap) / columnCount - gap);
         int itemHeight = Math.round(itemWidth * CardPanel.ASPECT_RATIO);
+        int dx = itemWidth + gap;
         int dy = pileBy == null ? itemHeight + gap : Math.round(itemHeight * PILE_SPACING_Y);
 
         for (int i = 0; i < groups.size(); i++) {
@@ -492,7 +484,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 x = pileX;
 
                 for (ItemInfo itemInfo : group.items) {
-                    if (pile.items.size() == itemsPerRow) {
+                    if (pile.items.size() == columnCount) {
                         pile = new Pile();
                         x = pileX;
                         y += dy;
@@ -514,7 +506,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 pileY = y;
                 maxPileHeight = 0;
                 for (int j = 0; j < group.piles.size(); j++) {
-                    if (j > 0 && j % itemsPerRow == 0) {
+                    if (j > 0 && j % columnCount == 0) {
                         //start new row if needed
                         y = pileY + maxPileHeight + gap;
                         x = pileX;
