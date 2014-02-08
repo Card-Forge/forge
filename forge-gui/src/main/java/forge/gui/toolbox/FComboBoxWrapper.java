@@ -30,101 +30,105 @@ public class FComboBoxWrapper<E> {
 
     private FComboBox<E> comboBox;
     private Object constraints;
-    
+
     public FComboBoxWrapper() {
         super();
         this.comboBox = new FComboBox<E>();
         allWrappers.add(this);
     }
-    
+
     public FComboBoxWrapper(E[] items) {
         super();
         this.comboBox = new FComboBox<E>(items);
         allWrappers.add(this);
     }
-    
+
     public FComboBoxWrapper(Vector<E> items) {
         super();
         this.comboBox = new FComboBox<E>(items);
         allWrappers.add(this);
     }
-    
+
     public FComboBoxWrapper(ComboBoxModel<E> aModel) {
         super();
         this.comboBox = new FComboBox<E>(aModel);
         allWrappers.add(this);
     }
-    
+
     public void addItem(E item) {
         this.comboBox.addItem(item);
     }
-    
+
     public void removeItem(E item) {
         this.comboBox.removeItem(item);
     }
-    
+
     public void removeAllItems() {
         this.comboBox.removeAllItems();
     }
-    
+
     @SuppressWarnings("unchecked")
     public E getSelectedItem() {
         Object res = this.comboBox.getSelectedItem();
         return res == null ? null : (E) res;
     }
-    
+
     public void setSelectedItem(Object item) {
         this.comboBox.setSelectedItem(item);
     }
-    
+
     public int getSelectedIndex() {
         return this.comboBox.getSelectedIndex();
     }
-    
+
     public void setSelectedIndex(int index) {
         this.comboBox.setSelectedIndex(index);
     }
-    
+
+    public void setMaximumRowCount(int count) {
+        this.comboBox.setMaximumRowCount(count);
+    }
+
     public int getItemCount() {
         return this.comboBox.getItemCount();
     }
-    
+
     public E getItemAt(int index) {
         return this.comboBox.getItemAt(index);
     }
-    
+
     public void addActionListener(ActionListener l) {
         this.comboBox.addActionListener(l);
     }
-    
+
     public void addItemListener(ItemListener l) {
         this.comboBox.addItemListener(l);
     }
-    
+
     public void addKeyListener(KeyListener l) {
         this.comboBox.addKeyListener(l);
     }
-    
+
     public void setRenderer(ListCellRenderer<? super E> aRenderer) {
         this.comboBox.setRenderer(aRenderer);
     }
-    
+
     public void setModel(ComboBoxModel<E> aModel) {
         this.comboBox.setModel(aModel);
     }
-    
+
     public void setTextAlignment(TextAlignment align) {
         this.comboBox.setTextAlignment(align);
     }
-    
+
     public void setSkinFont(SkinFont skinFont) {
         this.comboBox.setSkinFont(skinFont);
     }
-    
+
     public void setVisible(boolean aFlag) {
         this.comboBox.setVisible(aFlag);
     }
-    
+
     public void setEnabled(boolean aFlag) {
         this.comboBox.setEnabled(aFlag);
     }
@@ -146,11 +150,11 @@ public class FComboBoxWrapper<E> {
     public JComponent getComponent() {
         return this.comboBox;
     }
-    
+
     private void refreshSkin() {
         this.comboBox = refreshComboBoxSkin(this.comboBox, this.constraints);
     }
-    
+
     //refresh combo box skin by replacing it with a copy of itself
     //TODO: Figure out if there's a better way, as calling updateUI doesn't seem to work
     public static <E> FComboBox<E> refreshComboBoxSkin(FComboBox<E> comboBox) {
@@ -167,14 +171,14 @@ public class FComboBoxWrapper<E> {
                 break;
             }
         }
-        
+
         //create copy of combo box
         FComboBox<E> newComboBox = new FComboBox<E>();
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             newComboBox.addItem(comboBox.getItemAt(i));
         }
         newComboBox.setSelectedIndex(comboBox.getSelectedIndex());
-        
+
         ActionListener[] actionListeners = newComboBox.getActionListeners();
         for (ActionListener l : actionListeners) {
             newComboBox.removeActionListener(l); //remove default action listeners to prevent duplicates

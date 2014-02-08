@@ -51,7 +51,7 @@ public abstract class ItemView<T extends InventoryItem> {
     protected final ItemManagerModel<T> model;
     private final FScrollPane scroller;
     private final FLabel button;
-    private final SkinnedPanel pnlOptions = new SkinnedPanel(new MigLayout("insets 3 1 0 1, gap 3, hidemode 3"));
+    private final SkinnedPanel pnlOptions = new SkinnedPanel(new MigLayout("insets 3 1 0 1, gap 3 4, hidemode 3"));
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 

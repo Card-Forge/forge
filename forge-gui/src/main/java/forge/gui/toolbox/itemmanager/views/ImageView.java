@@ -79,6 +79,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private final ArrayList<Group> groups = new ArrayList<Group>();
     private final FComboBoxWrapper<Object> cbGroupByOptions = new FComboBoxWrapper<Object>();
     private final FComboBoxWrapper<Object> cbPileByOptions = new FComboBoxWrapper<Object>();
+    private final FComboBoxWrapper<Integer> cbColumnCount = new FComboBoxWrapper<Integer>();
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -94,8 +95,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         for (ColumnDef option : pileByOptions) {
             cbPileByOptions.addItem(option);
         }
+        for (Integer i = MIN_COLUMN_COUNT; i <= MAX_COLUMN_COUNT; i++) {
+            cbColumnCount.addItem(i);
+        }
+        cbGroupByOptions.setMaximumRowCount(cbGroupByOptions.getItemCount());
+        cbPileByOptions.setMaximumRowCount(cbPileByOptions.getItemCount());
+        cbColumnCount.setMaximumRowCount(cbColumnCount.getItemCount());
         cbGroupByOptions.setSelectedIndex(0);
         cbPileByOptions.setSelectedIndex(0);
+        cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
 
         cbGroupByOptions.addActionListener(new ActionListener() {
             @Override
@@ -121,11 +129,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
         });
+        cbColumnCount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                focus();
+                setColumnCount(cbColumnCount.getSelectedItem());
+            }
+        });
 
         getPnlOptions().add(new FLabel.Builder().text("Group by:").fontSize(12).build());
         cbGroupByOptions.addTo(getPnlOptions(), "pushx, growx");
         getPnlOptions().add(new FLabel.Builder().text("Pile by:").fontSize(12).build());
         cbPileByOptions.addTo(getPnlOptions(), "pushx, growx");
+        getPnlOptions().add(new FLabel.Builder().text("Columns:").fontSize(12).build());
+        cbColumnCount.addTo(getPnlOptions(), "w 38px!");
 
         //setup display
         display = new CardViewDisplay();
@@ -335,6 +352,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
         if (columnCount == columnCount0) { return; }
         columnCount = columnCount0;
+        cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
 
         //determine item to retain scroll position of following column count change
         ItemInfo focalItem0 = getFocalItem();
