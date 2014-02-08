@@ -52,7 +52,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
 
             byte chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, CardUtil.getColors(card));
             
-            if (remainingCost.getColorlessManaAmount() > 0 && (chosenColor == 0 || !remainingCost.needsColor(chosenColor))) {
+            if (remainingCost.getColorlessManaAmount() > 0 && (chosenColor == 0 || !remainingCost.needsColor(chosenColor, player.getManaPool()))) {
                 registerConvoked(card, ManaCostShard.COLORLESS, chosenColor);
             } else {
                 for (ManaCostShard shard : remainingCost.getDistinctShards()) {

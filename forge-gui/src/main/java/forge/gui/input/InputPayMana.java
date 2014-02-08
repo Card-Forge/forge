@@ -107,10 +107,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         byte colorNeeded = 0;
 
         for (final byte color : MagicColor.WUBRG) {
-            if (manaCost.isAnyPartPayableWith(color)) { colorCanUse |= color; }
-            if (manaCost.needsColor(color))           { colorNeeded |= color; }
+            if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
+            if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
         }
-        boolean canUseColorless = manaCost.isAnyPartPayableWith((byte)0);
+        boolean canUseColorless = manaCost.isAnyPartPayableWith((byte)0, player.getManaPool());
 
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for (am:abilities) loop :(

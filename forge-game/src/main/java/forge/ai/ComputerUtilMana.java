@@ -96,7 +96,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, boolean clearManaPaid) {
-        adjustManaCostToAvoidNegEffects(cost, sa.getSourceCard());
+        adjustManaCostToAvoidNegEffects(cost, sa.getSourceCard(), ai);
 
         final ManaPool manapool = ai.getManaPool();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
@@ -194,7 +194,7 @@ public class ComputerUtilMana {
                 String manaProduced = toPay.isSnow() ? "S" : GameActionUtil.generatedMana(saPayment);
                 manaProduced = AbilityManaPart.applyManaReplacement(saPayment, manaProduced);
                 //System.out.println(manaProduced);
-                payMultipleMana(cost, manaProduced);
+                payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
                 for (Collection<SpellAbility> kv : sourcesForShards.values()) {
@@ -346,14 +346,14 @@ public class ComputerUtilMana {
         return null;
     }
 
-    private static void adjustManaCostToAvoidNegEffects(ManaCostBeingPaid cost, final Card card) {
+    private static void adjustManaCostToAvoidNegEffects(ManaCostBeingPaid cost, final Card card, Player ai) {
         // Make mana needed to avoid negative effect a mandatory cost for the AI
         for (String manaPart : card.getSVar("ManaNeededToAvoidNegativeEffect").split(",")) {
             // convert long color strings to short color strings
             byte mask = MagicColor.fromName(manaPart);
 
             // make mana mandatory for AI
-            if (!cost.needsColor(mask) && cost.getColorlessManaAmount() > 0) {
+            if (!cost.needsColor(mask, ai.getManaPool()) && cost.getColorlessManaAmount() > 0) {
                 ManaCostShard shard = ManaCostShard.valueOf(mask);
                 cost.increaseShard(shard, 1);
                 cost.decreaseColorlessMana(1);
@@ -390,9 +390,9 @@ public class ComputerUtilMana {
                     choice = abMana.getExpressChoice();
                     abMana.clearExpressChoice();
                     byte colorMask = MagicColor.fromName(choice);
-                    if (abMana.canProduce(choice, manaAb) && testCost.isAnyPartPayableWith(colorMask)) {
+                    if (abMana.canProduce(choice, manaAb) && testCost.isAnyPartPayableWith(colorMask, ai.getManaPool())) {
                         choiceString.append(choice);
-                        payMultipleMana(testCost, choice);
+                        payMultipleMana(testCost, choice, ai);
                         continue;
                     }
                 }
@@ -400,8 +400,8 @@ public class ComputerUtilMana {
                 if (!testCost.isPaid()) {
                     // Loop over combo colors
                     for (String color : comboColors) {
-                        if (testCost.isAnyPartPayableWith(MagicColor.fromName(color))) {
-                            payMultipleMana(testCost, color);
+                        if (testCost.isAnyPartPayableWith(MagicColor.fromName(color), ai.getManaPool())) {
+                            payMultipleMana(testCost, color, ai);
                             if (nMana != 1) {
                                 choiceString.append(" ");
                             }
@@ -447,12 +447,12 @@ public class ComputerUtilMana {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    private final static String payMultipleMana(ManaCostBeingPaid testCost, String mana) {
+    private final static String payMultipleMana(ManaCostBeingPaid testCost, String mana, final Player p) {
         List<String> unused = new ArrayList<String>(4);
         for (String manaPart : TextUtil.split(mana, ' ')) {
             if (StringUtils.isNumeric(manaPart)) {
                 for (int i = Integer.parseInt(manaPart); i > 0; i--) {
-                    boolean wasNeeded = testCost.ai_payMana("1");
+                    boolean wasNeeded = testCost.ai_payMana("1", p.getManaPool());
                     if (!wasNeeded) {
                         unused.add(Integer.toString(i));
                         break;
@@ -461,7 +461,7 @@ public class ComputerUtilMana {
             }
             else {
                 String color = MagicColor.toShortString(manaPart);
-                boolean wasNeeded = testCost.ai_payMana(color);
+                boolean wasNeeded = testCost.ai_payMana(color, p.getManaPool());
                 if (!wasNeeded) {
                     unused.add(color);
                 }

@@ -187,7 +187,7 @@ public class ManaCostBeingPaid {
 
     // takes a Short Color and returns true if it exists in the mana cost.
     // Easier for split costs
-    public final boolean needsColor(final byte colorMask) {
+    public final boolean needsColor(final byte colorMask, final ManaPool pool) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
             if (shard == ManaCostShard.COLORLESS) {
                 continue;
@@ -197,7 +197,7 @@ public class ManaCostBeingPaid {
                     return true;
                 }
             }
-            else if (shardCanBePaidWithColor(shard, colorMask)) {
+            else if (pool.canPayForShardWithColor(shard, colorMask)) {
                 return true;
             }
         }
@@ -205,9 +205,9 @@ public class ManaCostBeingPaid {
     }
 
     // isNeeded(String) still used by the Computer, might have problems activating Snow abilities
-    public final boolean isAnyPartPayableWith(byte colorMask) {
+    public final boolean isAnyPartPayableWith(byte colorMask, final ManaPool pool) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
-            if (shardCanBePaidWithColor(shard, colorMask)) {
+            if (pool.canPayForShardWithColor(shard, colorMask)) {
                 return true;
             }
         }
@@ -264,9 +264,9 @@ public class ManaCostBeingPaid {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public final boolean ai_payMana(final String mana) {
+    public final boolean ai_payMana(final String mana, final ManaPool pool) {
         final byte colorMask = MagicColor.fromName(mana);
-        if (!this.isAnyPartPayableWith(colorMask)) {
+        if (!this.isAnyPartPayableWith(colorMask, pool)) {
             //System.out.println("ManaCost : addMana() error, mana not needed - " + mana);
             return false;
             //throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
@@ -275,7 +275,7 @@ public class ManaCostBeingPaid {
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
             @Override
             public boolean apply(ManaCostShard ms) {
-                return shardCanBePaidWithColor(ms, colorMask);
+                return pool.canPayForShardWithColor(ms, colorMask);
             }
         };
 
@@ -361,10 +361,6 @@ public class ManaCostBeingPaid {
         return pool.canPayForShardWithColor(shard, color);
     }
 
-    private boolean shardCanBePaidWithColor(ManaCostShard shard, byte manaColor) {
-        // add color changing matrix here to support Daxos of Melethis 
-        return shard.canBePaidWithManaOfColor(manaColor);
-    }
     
     public final void combineManaCost(final ManaCost extra) {
         for (ManaCostShard shard : extra) {
