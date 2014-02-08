@@ -371,6 +371,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 helper.offset(0, -4);
                 helper.fillLine(this.pnlButtons, buttonPanelHeight);
             }
+            else {
+                this.pnlButtons.setBounds(0, 0, 0, 0); //prevent horizontal line appearing
+            }
         }
         else {
             int number = 0;
