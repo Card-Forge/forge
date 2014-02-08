@@ -26,6 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 
 import forge.ImageCache;
 import forge.game.card.Card;
@@ -72,6 +73,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
     private boolean lockHoveredItem = false;
+    private boolean lockInput = false;
     private Point hoverPoint;
     private Point hoverScrollPos;
     private ItemInfo hoveredItem;
@@ -225,6 +227,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         display.addMouseListener(new FMouseAdapter() {
             @Override
             public void onLeftMouseDown(MouseEvent e) {
+                if (lockInput) { return; }
+
                 if (!selectItem(e)) {
                     //if didn't click on item, see if clicked on group header
                     if (groupBy != null) {
@@ -246,6 +250,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
+                if (lockInput) { return; }
+
                 ItemInfo item = getItemAtPoint(e.getPoint());
                 if (item != null && item.selected) {
                     itemManager.activateSelectedItems();
@@ -254,6 +260,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onMiddleMouseDown(MouseEvent e) {
+                if (lockInput) { return; }
+
                 ItemInfo item = getItemAtPoint(e.getPoint());
                 if (item != null && item.item instanceof IPaperCard) {
                     setLockHoveredItem(true); //lock hoveredItem while zoomer open
@@ -264,12 +272,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onMiddleMouseUp(MouseEvent e) {
+                if (lockInput) { return; }
+
                 CardZoomer.SINGLETON_INSTANCE.closeZoomer();
                 setLockHoveredItem(false);
             }
 
             @Override
             public void onRightClick(MouseEvent e) {
+                if (lockInput) { return; }
+
                 if (selectItem(e)) {
                     setLockHoveredItem(true); //lock hoveredItem while context menu open
                     itemManager.showContextMenu(e, new Runnable() {
@@ -524,6 +536,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateLayout(boolean forRefresh) {
+        lockInput = true; //lock input until next repaint finishes
         focalItem = null; //clear cached focalItem when layout changes
 
         int x, groupY, pileY, pileHeight, maxPileHeight;
@@ -1042,6 +1055,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (skippedItem != null) { //draw hovered item on top
                     drawItemImage(g2d, skippedItem);
                 }
+            }
+
+            if (lockInput) { //unlock input after repaint finishes if needed
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        lockInput = false;
+                    }
+                });
             }
         }
 
