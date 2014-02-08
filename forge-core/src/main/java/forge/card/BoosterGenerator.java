@@ -35,9 +35,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
+import forge.card.CardEdition.FoilType;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.SealedProduct;
+import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 /**
@@ -58,8 +61,33 @@ public class BoosterGenerator {
         return cachedSheets.get(key);
     }
 
+    private static final String getFoilSlot(SealedProduct.Template booster) {
+        String setCode = booster.getEdition() != null ? booster.getEdition() : null;
+        CardEdition set = setCode != null ? StaticData.instance().getEditions().getEditionByCodeOrThrow(setCode) : null;
+        String foilSlot;
+
+        if (set == null || set.getFoilType() == FoilType.NOT_SUPPORTED) {
+            foilSlot = null; // null == no foil is generated 
+        }
+        else if (set.getFoilAlwaysInCommonSlot()) {
+            foilSlot = BoosterSlots.COMMON;
+        } else {
+            foilSlot = Aggregates.random(booster.getSlots()).getKey();
+        }
+
+        return foilSlot; 
+    }
+    
+    private static final PaperCard generateFoilCard(PrintSheet sheet) {
+        return StaticData.instance().getCommonCards().getFoiled(sheet.random(1, true).get(0));
+    }
+    
     public static final List<PaperCard> getBoosterPack(SealedProduct.Template booster) {
         List<PaperCard> result = new ArrayList<PaperCard>();
+        List<PrintSheet> sheetsUsed = new ArrayList<PrintSheet>();
+        String foilSlot = getFoilSlot(booster);
+        boolean hasFoil = MyRandom.getRandom().nextInt(100) <= StaticData.instance().getEditions().getEditionByCodeOrThrow(booster.getEdition()).getFoilChanceInBooster();
+
         for(Pair<String, Integer> slot : booster.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
             int numCards = slot.getRight().intValue();
@@ -69,8 +97,18 @@ public class BoosterGenerator {
             String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
 
             PrintSheet ps = getPrintSheet(sheetKey);
-            result.addAll(ps.random(numCards, true));
+            boolean foilInSheet = hasFoil && foilSlot != null && foilSlot.equals(slotType);
+
+            result.addAll(ps.random(foilInSheet ? numCards - 1 : numCards, true));
+
+            sheetsUsed.add(ps);
         }
+
+        if (hasFoil) {
+            PrintSheet foilSheet = Aggregates.random(sheetsUsed);
+            result.add(generateFoilCard(foilSheet));
+        }
+
         return result;
     }
 
