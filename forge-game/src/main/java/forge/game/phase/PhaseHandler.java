@@ -969,7 +969,11 @@ public class PhaseHandler implements java.io.Serializable {
                     if (game.isGameOver())
                         return; // state-based effects check could lead to game over
 
-                    game.getStack().chooseOrderOfSimultaneousStackEntry(pPlayerPriority);
+                    Player whoAddsToStack = pPlayerPriority;
+                    do {
+                        game.getStack().chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
+                        whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
+                    } while( whoAddsToStack != null && whoAddsToStack != pPlayerPriority);
 
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
                     if( null == chosenSa )
