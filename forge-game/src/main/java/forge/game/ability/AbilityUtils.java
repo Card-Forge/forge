@@ -1227,7 +1227,7 @@ public class AbilityUtils {
             // check for X costs (stored in SVars
             int xCost = calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa);
             //Check for XColor
-            ManaCostBeingPaid toPay = new ManaCostBeingPaid("0");
+            ManaCostBeingPaid toPay = new ManaCostBeingPaid(ManaCost.ZERO);
             byte xColor = MagicColor.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
             cost = new Cost(toPay.toManaCost(), true);

@@ -43,7 +43,7 @@ public class InputPayManaSimple extends InputPayMana {
         this.originalCard = sa.getSourceCard();
 
         if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-            this.manaCost = new ManaCostBeingPaid("0");
+            this.manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
             game.getStack().add(this.saPaidFor);
         }
         else {

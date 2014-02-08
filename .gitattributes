@@ -15882,7 +15882,6 @@ forge-gui/src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/p
 forge-gui/src/test/java/forge/PanelTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/RunTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/TinyTest.java svneol=native#text/plain
-forge-gui/src/test/java/forge/card/mana/ManaPartTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/deck/generate/Generate2ColorDeckTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/deck/generate/Generate3ColorDeckTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/deck/generate/Generate5ColorDeckTest.java svneol=native#text/plain

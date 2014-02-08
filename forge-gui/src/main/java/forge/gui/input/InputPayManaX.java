@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
@@ -16,30 +18,31 @@ public class InputPayManaX extends InputPayMana {
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
     private byte colorsPaid;
-    private final String manaCostStr;
+    private final ManaCost manaCostPerX;
     private final boolean xCanBe0;
     private boolean canceled = false;
 
     public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0) {
         super(sa0);
         xPaid = 0;
+        
         if (saPaidFor.hasParam("XColor")) {
             String xColor = saPaidFor.getParam("XColor");
             if (amountX == 1) {
-                manaCostStr = xColor;
+                manaCostPerX = new ManaCost(new ManaCostParser(xColor));
             }
             else {
                 List<String> list = new ArrayList<String>(amountX);
                 for (int i = 0; i < amountX; i++) {
                     list.add(xColor);
                 }
-                manaCostStr = StringUtils.join(list, ' ');
+                manaCostPerX = new ManaCost(new ManaCostParser(StringUtils.join(list, ' ')));
             }
         }
         else {
-            manaCostStr = Integer.toString(amountX);
+            manaCostPerX = ManaCost.get(amountX);
         }
-        manaCost = new ManaCostBeingPaid(manaCostStr);
+        manaCost = new ManaCostBeingPaid(manaCostPerX);
 
         this.xCanBe0 = xCanBe0;
         colorsPaid = saPaidFor.getSourceCard().getColorsPaid(); // for effects like sunburst
@@ -97,7 +100,7 @@ public class InputPayManaX extends InputPayMana {
     protected void onManaAbilityPaid() {
         if (this.manaCost.isPaid()) {
             this.colorsPaid |= manaCost.getColorsPaid();
-            this.manaCost = new ManaCostBeingPaid(manaCostStr);
+            this.manaCost = new ManaCostBeingPaid(manaCostPerX);
             this.xPaid++;
         }
     }

@@ -293,8 +293,8 @@ public class ManaPool {
     }
 
     private void tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana) {
-        if (manaCost.isNeeded(mana)) {
-            manaCost.payMana(mana);
+        if (manaCost.isNeeded(mana, this)) {
+            manaCost.payMana(mana, this);
             sa.getPayingMana().add(mana);
             this.removeMana(mana);
             if (mana.addsNoCounterMagic(sa) && sa.getSourceCard() != null) {

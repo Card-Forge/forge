@@ -31,7 +31,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -126,21 +125,6 @@ public class ManaCostBeingPaid {
         cntX = manaCostBeingPaid.cntX;
     }
 
-    // manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
-    // or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
-    // "GW" can be paid with either G or W
-    /**
-     * <p>
-     * Constructor for ManaCost.
-     * </p>
-     * 
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     */
-    public ManaCostBeingPaid(String sCost) {
-        this("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty() ? ManaCost.ZERO : new ManaCost(new ManaCostParser(sCost)));
-    }
-
     public ManaCostBeingPaid(ManaCost manaCost) {
         this(manaCost, null);
     }
@@ -230,9 +214,9 @@ public class ManaCostBeingPaid {
         return false;
     }
 
-    public final boolean isNeeded(final Mana paid) {
+    public final boolean isNeeded(final Mana paid, final ManaPool pool) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
-            if (canBePaidWith(shard, paid)) {
+            if (canBePaidWith(shard, paid, pool)) {
                 return true;
             }
         }
@@ -307,15 +291,15 @@ public class ManaCostBeingPaid {
      *            a {@link forge.game.mana.Mana} object.
      * @return a boolean.
      */
-    public final boolean payMana(final Mana mana) {
-        if (!this.isNeeded(mana)) {
+    public final boolean payMana(final Mana mana, final ManaPool pool) {
+        if (!this.isNeeded(mana, pool)) {
             throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
             @Override
             public boolean apply(ManaCostShard ms) {
-                return canBePaidWith(ms, mana);
+                return canBePaidWith(ms, mana, pool);
             }
         };
 
@@ -368,13 +352,13 @@ public class ManaCostBeingPaid {
         return 5;
     }
 
-    private boolean canBePaidWith(ManaCostShard shard, Mana mana) {
+    private boolean canBePaidWith(ManaCostShard shard, Mana mana, ManaPool pool) {
         if (shard.isSnow() && !mana.isSnow()) {
             return false;
         }
 
         byte color = mana.getColorCode();
-        return shardCanBePaidWithColor(shard, color);
+        return pool.canPayForShardWithColor(shard, color);
     }
 
     private boolean shardCanBePaidWithColor(ManaCostShard shard, byte manaColor) {
