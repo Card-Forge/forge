@@ -281,7 +281,7 @@ public class ManaCostBeingPaid {
             }
         };
 
-        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPosibleColorUses(colorMask));
+        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask));
     }
 
     /**
@@ -306,7 +306,7 @@ public class ManaCostBeingPaid {
         };
 
         byte inColor = mana.getColorCode();
-        byte outColor = pool.getPosibleColorUses(inColor);
+        byte outColor = pool.getPossibleColorUses(inColor);
         return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor);
     }
 
