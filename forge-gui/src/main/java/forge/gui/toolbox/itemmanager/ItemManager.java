@@ -321,9 +321,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.setViewIndex(viewIndex);
     }
 
-    public void setViewIndex(int index) {
-        if (index < 0 || index >= this.views.size()) { return; }
-        ItemView<T> view = this.views.get(index);
+    public void setViewIndex(int viewIndex) {
+        if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
+        ItemView<T> view = this.views.get(viewIndex);
         if (this.currentView == view) { return; }
 
         final int backupIndexToSelect = this.currentView.getSelectedIndex();
@@ -350,6 +350,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.revalidate();
         this.repaint();
         this.focus();
+    }
+
+    public void setHideViewOptions(int viewIndex, boolean hideViewOptions) {
+        if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
+        this.views.get(viewIndex).getPnlOptions().setVisible(!hideViewOptions);
     }
 
     @Override

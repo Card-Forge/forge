@@ -69,7 +69,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final CardManager catalogManager = new CardManager(false);
         final CardManager deckManager = new CardManager(false);
 
-        catalogManager.setHideFilters(true); //hide filters so more of pack is visible by default
+        //hide filters and options panel so more of pack is visible by default
+        catalogManager.setHideFilters(true);
+        catalogManager.setHideViewOptions(1, true);
+
         deckManager.setCaption("Draft Picks");
 
         catalogManager.setAlwaysNonUnique(true);
@@ -264,7 +267,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
 
         ccAddLabel = this.getBtnAdd().getText();
-        this.getBtnAdd().setText("Choose Card");
 
         if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
             this.showChoices(this.boosterDraft.nextChoice());
@@ -275,6 +277,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
 
         //Remove buttons
+        this.getBtnAdd().setVisible(false);
         this.getBtnAdd4().setVisible(false);
         this.getBtnRemove().setVisible(false);
         this.getBtnRemove4().setVisible(false);
