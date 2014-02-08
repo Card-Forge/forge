@@ -768,9 +768,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.simultaneousStackEntryList.add(sa);
     }
 
-    public final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
+    public final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
         if (this.simultaneousStackEntryList.isEmpty()) {
-            return;
+            return false;
         }
 
         final List<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
@@ -792,10 +792,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         if (activePlayerSAs.isEmpty()) {
-            return;
+            return false;
         }
 
         activePlayer.getController().orderAndPlaySimultaneousSa(activePlayerSAs);
+        return true;
     }
 
     /**
