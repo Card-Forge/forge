@@ -1099,8 +1099,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             //draw foil effect if needed
             if (item instanceof IPaperCard) {
-                CardPanel.drawFoilEffect(g, Card.getCardForUi((IPaperCard)item),
-                        bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
+                IPaperCard paperCard = (IPaperCard)item;
+                if (paperCard.isFoil()) {
+                    Card card = Card.getCardForUi(paperCard);
+                    if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
+                        card.setRandomFoil();
+                    }
+                    CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
+                }
             }
         }
     }
