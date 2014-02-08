@@ -76,6 +76,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
+    private final JCheckBox cbDisplayFoil = new OptionsCheckBox("Display Foil Overlay");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbRandomArtInPools = new OptionsCheckBox("Randomize Card Art in Generated Card Pools");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
@@ -184,6 +185,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
+
+        pnlPrefs.add(cbDisplayFoil, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), regularConstraints);
 
         pnlPrefs.add(cbRandomFoil, regularConstraints);
         pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
@@ -419,6 +423,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableAICheats() {
         return cbEnableAICheats;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbDisplayFoil() {
+        return cbDisplayFoil;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
