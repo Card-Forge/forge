@@ -697,7 +697,7 @@ public class Cost {
         for (final CostPart part : cost1.getCostParts()) {
             if (part instanceof CostPartMana && costPart2 != null) {
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
-                oldManaCost.combineManaCost(costPart2.getMana());
+                oldManaCost.addManaCost(costPart2.getMana());
                 String r2 = costPart2.getRestiction();
                 String r1 = ((CostPartMana) part).getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);

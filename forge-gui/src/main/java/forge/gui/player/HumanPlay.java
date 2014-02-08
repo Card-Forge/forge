@@ -726,7 +726,7 @@ public class HumanPlay {
         if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
             ManaCost mkCost = ability.getMultiKickerManaCost();
             for(int i = 0; i < timesMultikicked; i++)
-                toPay.combineManaCost(mkCost);
+                toPay.addManaCost(mkCost);
         }
 
         InputPayMana inpPayment;

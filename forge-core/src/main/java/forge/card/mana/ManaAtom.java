@@ -4,7 +4,7 @@ import forge.card.MagicColor;
 
 /** A bitmask to represent any mana symbol as an integer. */
 public abstract class ManaAtom {
-    public static final int COLORLESS = 1 << 7;
+    public static final int COLORLESS = 1 << 6;
 
     /** The Constant WHITE. */
     public static final int WHITE = MagicColor.WHITE; 

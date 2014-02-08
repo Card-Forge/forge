@@ -11,6 +11,7 @@ import forge.FThreads;
 import forge.ai.ComputerUtilMana;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.ApiType;
@@ -110,8 +111,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
             if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
         }
-        if (manaCost.isAnyPartPayableWith(MagicColor.COLORLESS, player.getManaPool())) 
-            colorCanUse |= MagicColor.COLORLESS;
+        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) 
+            colorCanUse |= ManaAtom.COLORLESS;
 
         if ( 0 == colorCanUse ) // no mana cost or something 
             return;
@@ -266,6 +267,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 if (0 != (neededColor & MagicColor.fromName(color))) {
                     return true;
                 }
+                if( (neededColor & ManaAtom.COLORLESS) != 0)
+                    return true;
             }
         }
         return false;

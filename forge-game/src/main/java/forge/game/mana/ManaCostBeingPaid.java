@@ -18,10 +18,12 @@
 package forge.game.mana;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -279,7 +281,7 @@ public class ManaCostBeingPaid {
             }
         };
 
-        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid));
+        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPosibleColorUses(colorMask));
     }
 
     /**
@@ -303,27 +305,31 @@ public class ManaCostBeingPaid {
             }
         };
 
-        return tryPayMana(mana.getColorCode(), Iterables.filter(unpaidShards.keySet(), predCanBePaid));
+        byte inColor = mana.getColorCode();
+        byte outColor = pool.getPosibleColorUses(inColor);
+        return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor);
     }
 
-    private boolean tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards) {
-        ManaCostShard choice = null;
+    private boolean tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {
+        Set<ManaCostShard> choice = EnumSet.noneOf(ManaCostShard.class);
+        int priority = Integer.MIN_VALUE;
         for (ManaCostShard toPay : payableShards) {
             // if m is a better to pay than choice
-            if (choice == null) {
-                choice = toPay;
-                continue;
+            int toPayPriority = getPayPriority(toPay, possibleUses);
+            if (toPayPriority > priority) {
+                priority = toPayPriority;
+                choice.clear();
             }
-            if (isFirstChoiceBetter(toPay, choice, colorMask)) {
-                choice = toPay;
-            }
+            if ( toPayPriority == priority )
+                choice.add(toPay);
         } // for
-        if (choice == null) {
+        if (choice.isEmpty()) {
             return false;
         }
 
-        decreaseShard(choice, 1);
-        if (choice.isOr2Colorless() && choice.getColorMask() != colorMask) {
+        ManaCostShard chosenShard = Iterables.getFirst(choice, null);
+        decreaseShard(chosenShard, 1);
+        if (chosenShard.isOr2Colorless() && ( 0 != (chosenShard.getColorMask() & possibleUses) )) {
             this.increaseColorlessMana(1);
         }
 
@@ -331,9 +337,6 @@ public class ManaCostBeingPaid {
         return true;
     }
 
-    private boolean isFirstChoiceBetter(ManaCostShard s1, ManaCostShard s2, byte colorMask) {
-        return getPayPriority(s1, colorMask) > getPayPriority(s2, colorMask);
-    }
 
     private int getPayPriority(ManaCostShard bill, byte paymentColor) {
         if (bill == ManaCostShard.COLORLESS) {
@@ -342,7 +345,7 @@ public class ManaCostBeingPaid {
 
         if (bill.isMonoColor()) {
             if (bill.isOr2Colorless()) {
-                return bill.getColorMask() == paymentColor ? 9 : 4;
+                return (bill.getColorMask() & paymentColor & MagicColor.ALL_COLORS) != 0? 9 : 4;
             }
             if (!bill.isPhyrexian()) {
                 return 10;
@@ -362,7 +365,7 @@ public class ManaCostBeingPaid {
     }
 
     
-    public final void combineManaCost(final ManaCost extra) {
+    public final void addManaCost(final ManaCost extra) {
         for (ManaCostShard shard : extra) {
             if (shard == ManaCostShard.X) {
                 cntX++;
@@ -374,7 +377,7 @@ public class ManaCostBeingPaid {
         increaseColorlessMana(extra.getGenericCost());
     }
 
-    public final void determineManaCostDifference(final ManaCost subThisManaCost) {
+    public final void subtractManaCost(final ManaCost subThisManaCost) {
         for (ManaCostShard shard : subThisManaCost) {
             if (shard == ManaCostShard.X) {
                 cntX--;
@@ -607,7 +610,7 @@ public class ManaCostBeingPaid {
             return;
         }
 
-        determineManaCostDifference(toSac.getManaCost());
+        subtractManaCost(toSac.getManaCost());
 
         sa.setSacrificedAsOffering(toSac);
         toSac.setUsedToPay(true); //stop it from interfering with mana input
