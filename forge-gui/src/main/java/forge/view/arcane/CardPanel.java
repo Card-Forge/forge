@@ -412,11 +412,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }
 
-        if (card.getFoil() > 0) {
-            final String fl = String.format("foil%02d", card.getFoil());
-            final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-            CardFaceSymbols.drawOther(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
-                    this.cardHeight - (2 * z));
+        drawFoilEffect(g, card, this.cardXOffset, this.cardYOffset,
+                this.cardWidth, this.cardHeight, Math.round(this.cardWidth * BLACK_BORDER_SIZE));
+    }
+
+    public static void drawFoilEffect(Graphics g, Card card, int x, int y, int width, int height, int borderSize) {
+        if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
+            int foil = card.getFoil();
+            if (foil > 0) {
+                CardFaceSymbols.drawOther(g, String.format("foil%02d", foil),
+                        x + borderSize, y + borderSize, width - 2 * borderSize, height - 2 * borderSize);
+            }
         }
     }
 
@@ -781,7 +787,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return BLACK_BORDER_SIZE;
     }
 
-    private boolean isPreferenceEnabled(FPref preferenceName) {
+    private static boolean isPreferenceEnabled(FPref preferenceName) {
         return Singletons.getModel().getPreferences().getPrefBoolean(preferenceName);
     }
 

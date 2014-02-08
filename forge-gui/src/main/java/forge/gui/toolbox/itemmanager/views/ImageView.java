@@ -1062,6 +1062,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             g.setColor(Color.black);
             g.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
 
+            InventoryItem item = itemInfo.item;
             BufferedImage img = ImageCache.getImage(itemInfo.item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize);
             if (img != null) {
                 g.drawImage(img, null, bounds.x + borderSize, bounds.y + borderSize);
@@ -1072,6 +1073,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 g.setClip(bounds);
                 g.drawString(itemInfo.item.getName(), bounds.x + 10, bounds.y + 20);
                 g.setClip(clip);
+            }
+
+            //draw foil effect if needed
+            if (item instanceof IPaperCard) {
+                CardPanel.drawFoilEffect(g, Card.getCardForUi((IPaperCard)item),
+                        bounds.x, bounds.y, bounds.width, bounds.height, borderSize);
             }
         }
     }
