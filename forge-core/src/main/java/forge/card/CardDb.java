@@ -375,6 +375,9 @@ public final class CardDb implements ICardDatabase {
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
         sb.append(card.getName());
+        if(card.isFoil()) {
+            sb.append(CardDb.foilSuffix);
+        }
 
         if (!hasBadSetInfo) {
             int artCount = getArtCount(card.getName(), card.getEdition());
@@ -383,9 +386,7 @@ public final class CardDb implements ICardDatabase {
                 sb.append(CardDb.NameSetSeparator).append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
             }
         }
-        if(card.isFoil()) {
-            sb.append(CardDb.foilSuffix);
-        }
+
         return sb;
     }
     
