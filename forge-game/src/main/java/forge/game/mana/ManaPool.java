@@ -418,24 +418,22 @@ public class ManaPool {
     }
     
     
-    private byte[] colorConversionMatrix = new byte[6];
-    
+    private final byte[] colorConversionMatrix = new byte[6];
     private static final byte[] identityMatrix = { MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, 0 };
-    
+
     public void restoreColorReplacements() {
         for(int i = 0; i < colorConversionMatrix.length; i++)
             colorConversionMatrix[i] = identityMatrix[i];
     }
-    
+
     public byte getPosibleColorUses(byte color) {
         int rowIdx = MagicColor.getIndexOfFirstColor(color);
         return colorConversionMatrix[rowIdx < 0 ? identityMatrix.length - 1 : rowIdx];
     }
-    
+
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
         byte line = getPosibleColorUses(color);
-        for(int i = 0; i < MagicColor.NUMBER_OR_COLORS; i++)
-        {
+        for(int i = 0; i < MagicColor.NUMBER_OR_COLORS; i++) {
             byte outColor = MagicColor.WUBRG[i];
             if (( line & outColor) != 0  && shard.canBePaidWithManaOfColor(outColor))
                 return true;
