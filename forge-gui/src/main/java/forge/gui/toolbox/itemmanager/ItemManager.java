@@ -389,6 +389,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             helper.newLine(-3);
             helper.fillLine(this.pnlButtons, showButtonPanel ? buttonPanelHeight : 1); //just show border if no buttons
         }
+        helper.newLine();
+        helper.offset(1, 0); //align filters button with expand/collapse all button
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         int ratioWidth = this.lblRatio.getAutoSizeWidth();
