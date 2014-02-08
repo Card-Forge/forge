@@ -102,7 +102,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .readonly() //TODO: Support editing filter logic
         .build();
 
-    private ItemFilter<? extends T> mainSearchFilter;
+    private final ItemFilter<? extends T> mainSearchFilter;
     private final SkinnedPanel pnlButtons = new SkinnedPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
     private final FLabel btnFilters = new FLabel.ButtonBuilder()
@@ -147,6 +147,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(genericType0);
+
+        this.mainSearchFilter = createSearchFilter();
 
         this.listView = new ItemListView<T>(this, this.model);
         this.imageView = createImageView(this.model);
@@ -196,7 +198,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.setLayout(null);
         this.add(this.chkEnableFilters);
         this.add(this.txtFilterLogic);
-        this.mainSearchFilter = createSearchFilter();
         this.add(mainSearchFilter.getWidget());
         this.pnlButtons.setOpaque(false);
         this.pnlButtons.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT)));
@@ -832,8 +833,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         classFilters.add(filter);
         orderedFilters.add(filter);
         this.add(filter.getPanel());
-        this.revalidate();
-        this.applyNewOrModifiedFilter(filter);
+
+        boolean visible = !this.hideFilters;
+        filter.getPanel().setVisible(visible);
+        if (visible && this.initialized) {
+            this.revalidate();
+            this.applyNewOrModifiedFilter(filter);
+        }
     }
 
     //apply filters and focus existing filter's main component if filtering not locked
@@ -941,13 +947,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.chkEnableFilters.setVisible(visible);
         this.txtFilterLogic.setVisible(visible);
         this.mainSearchFilter.getWidget().setVisible(visible);
-        this.revalidate();
 
-        if (hideFilters0) {
-            this.resetFilters(); //reset filters when they're hidden
-        }
-        else {
-            this.applyFilters();
+        if (this.initialized) {
+            this.revalidate();
+    
+            if (hideFilters0) {
+                this.resetFilters(); //reset filters when they're hidden
+            }
+            else {
+                this.applyFilters();
+            }
         }
     }
 

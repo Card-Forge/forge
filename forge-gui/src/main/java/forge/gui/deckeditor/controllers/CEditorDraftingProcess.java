@@ -69,6 +69,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final CardManager catalogManager = new CardManager(false);
         final CardManager deckManager = new CardManager(false);
 
+        catalogManager.setHideFilters(true); //hide filters so more of pack is visible by default
         deckManager.setCaption("Draft Picks");
 
         catalogManager.setAlwaysNonUnique(true);
