@@ -1033,6 +1033,22 @@ Forge now fully supports the distinction between cards with different art, which
 A deck may explicitly define the edition and art variant of each card it includes. If a deck specifies those for no card, Forge uses a special algorithm to determine which card printings were the latest by the moment all of deck's had been printed. These very editions of cards are used when loading deck into memory to reflect the flavour of the season when the deck was built.
 
 
+- Image View (i.e. Card View / Pile View) for View Deck dialog, Deck Editors, Quest Spell Shop, and Draft Screen -
+The "List View" combo box that had no other options has been replaced with two buttons, one for "List View" and one for the new "Image View"
+In Image View, each card in the pool or deck has its card image displayed, with multiple copies of the same card each having its own image displayed.
+Card images support the same hover, selection, right-click and double-click behavior as rows in list view
+Card images can be arranged in groups and/or piles based on different configurable criteria, with groups being collapsible if you click on their header.
+You can use Ctrl+MouseWheel to zoom in to maximum card width of 300px or out to a minimum card width of 50px.
+
+
+- Loading decks with unsupported cards was causing Forge to crash -
+Forge will no longer crash when there are decks with unsupported cards. These cards will appear in decks and games player starts as a dummy without cost, types, abilities, but with explanation in card's text. The unsupported cards will be listed in the console window as Forge is loading. Unfortunately, it is currently impossible to pinpoint which decks exactly include these unsupported cards in order to list them. However, depending on your operating system, you should be able to either use your operating system utilities or third party software to make a search inside deck files for the offending card name, locate the problematic decks and either update or remove them.
+
+
+- Deck Conformance fix -
+Toggling off Deck Conformance in Preferences now properly allows adding more than 4 cards to deck in editor
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
