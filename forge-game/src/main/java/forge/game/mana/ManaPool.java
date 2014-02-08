@@ -65,6 +65,7 @@ public class ManaPool {
      */
     public ManaPool(final Player player) {
         owner = player;
+        restoreColorReplacements();
     }
 
     public final int getAmountOfColor(final byte color) {
@@ -416,8 +417,25 @@ public class ManaPool {
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
     
+    
+    private byte[] colorConversionMatrix = new byte[6];
+    
+    private static final byte[] identityMatrix = { MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, 0 };
+    
+    public void restoreColorReplacements() {
+        for(int i = 0; i < colorConversionMatrix.length; i++)
+            colorConversionMatrix[i] = identityMatrix[i];
+    }
+    
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
-        // add color changing manipulations here
-        return shard.canBePaidWithManaOfColor(color);
+        int rowIdx = MagicColor.getIndexOfFirstColor(color);
+        byte line = colorConversionMatrix[rowIdx < 0 ? identityMatrix.length - 1 : rowIdx];
+        for(int i = 0; i < MagicColor.NUMBER_OR_COLORS; i++)
+        {
+            byte outColor = MagicColor.WUBRG[i];
+            if (( line & outColor) != 0  && shard.canBePaidWithManaOfColor(outColor))
+                return true;
+        }
+        return shard.canBePaidWithManaOfColor((byte)0);
     }
 }

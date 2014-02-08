@@ -110,8 +110,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
             if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
         }
-        boolean canUseColorless = manaCost.isAnyPartPayableWith((byte)0, player.getManaPool());
+        if (manaCost.isAnyPartPayableWith(MagicColor.COLORLESS, player.getManaPool())) 
+            colorCanUse |= MagicColor.COLORLESS;
 
+        if ( 0 == colorCanUse ) // no mana cost or something 
+            return;
+        
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for (am:abilities) loop :(
 
@@ -125,10 +129,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             ma.setActivatingPlayer(player);
 
             AbilityManaPart m = ma.getManaPartRecursive();
-            if (m == null || !ma.canPlay())                                        { continue; }
-            if (!canUseColorless && !abilityProducesManaColor(ma, m, colorCanUse)) { continue; }
-            if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())           { continue; }
-            if (!m.meetsManaRestrictions(saPaidFor))                               { continue; }
+            if (m == null || !ma.canPlay())                                 { continue; }
+            if (!abilityProducesManaColor(ma, m, colorCanUse))              { continue; }
+            if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())    { continue; }
+            if (!m.meetsManaRestrictions(saPaidFor))                        { continue; }
 
             abilities.add(ma);
 
@@ -216,7 +220,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * @return a boolean.
      */
     private static boolean abilityProducesManaColor(final SpellAbility am, AbilityManaPart m, final byte neededColor) {
-        if (neededColor == 0) {
+        if (0 != (neededColor & MagicColor.COLORLESS)) {
             return true;
         }
 

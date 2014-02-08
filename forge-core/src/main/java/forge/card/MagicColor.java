@@ -85,6 +85,14 @@ public class MagicColor {
         }
     }
     
+    public static int getIndexOfFirstColor(byte color){
+        for(int i = 0; i < NUMBER_OR_COLORS; i++) {
+            if ((color & WUBRG[i]) != 0)
+                return i;
+        }
+        return -1; // colorless
+    }
+    
     /**
      * The Interface Color.
      */
