@@ -14858,6 +14858,7 @@ forge-gui/res/quest/precons/Dead[!!-~]Ahead.dck -text
 forge-gui/res/quest/precons/Deadspread.dck -text
 forge-gui/res/quest/precons/Death[!!-~]March.dck -text
 forge-gui/res/quest/precons/Death[!!-~]Reaper.dck -text
+forge-gui/res/quest/precons/Death's[!!-~]Beginning.dck -text
 forge-gui/res/quest/precons/Death's[!!-~]Minions.dck -text
 forge-gui/res/quest/precons/Deathfed.dck -text
 forge-gui/res/quest/precons/Deathly[!!-~]Dominion.dck -text
@@ -14891,6 +14892,8 @@ forge-gui/res/quest/precons/Fiery[!!-~]Dawn.dck -text
 forge-gui/res/quest/precons/Fire[!!-~]Surge.dck -text
 forge-gui/res/quest/precons/Firebomber.dck -text
 forge-gui/res/quest/precons/Flyover.dck -text
+forge-gui/res/quest/precons/Forged[!!-~]in[!!-~]Battle.dck -text
+forge-gui/res/quest/precons/Gifts[!!-~]of[!!-~]the[!!-~]Gods.dck -text
 forge-gui/res/quest/precons/Gleeful[!!-~]Flames.dck -text
 forge-gui/res/quest/precons/Going[!!-~]Rogue.dck -text
 forge-gui/res/quest/precons/Golgari[!!-~]Deathcreep.dck -text
@@ -14907,6 +14910,7 @@ forge-gui/res/quest/precons/Heavy[!!-~]Hitters.dck -text
 forge-gui/res/quest/precons/Hold[!!-~]the[!!-~]Line.dck -text
 forge-gui/res/quest/precons/Infect[!!-~]and[!!-~]Defile.dck -text
 forge-gui/res/quest/precons/Infestation.dck -text
+forge-gui/res/quest/precons/Inspiration-Struck.dck -text
 forge-gui/res/quest/precons/Into[!!-~]the[!!-~]Breach.dck -text
 forge-gui/res/quest/precons/Invading[!!-~]Spawn.dck -text
 forge-gui/res/quest/precons/Izzet[!!-~]Gizmometry.dck -text
