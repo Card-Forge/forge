@@ -342,6 +342,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
          */
         @Override
         public CardEdition get(final String code) {
+            if (code == null) {
+                return null;
+            }
+
             CardEdition baseResult = super.get(code);
             return baseResult == null ? aliasToEdition.get(code) : baseResult;
         }
