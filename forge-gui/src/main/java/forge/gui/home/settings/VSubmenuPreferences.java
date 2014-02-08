@@ -190,7 +190,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Displays foil cards with the visual foil overlay effect."), regularConstraints);
 
         pnlPrefs.add(cbRandomFoil, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Adds foil effect to random cards."), regularConstraints);
 
         pnlPrefs.add(cbScaleLarger, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
