@@ -357,6 +357,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
     // Must be public.
     @Override
     public void setEnabled(final boolean b0) {
+        if (this.isEnabled() == b0) { return; }
         super.setEnabled(b0);
         if (!this.hoverable) { return; }
         if (!b0) { this.removeMouseListener(madEvents); }
@@ -366,6 +367,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
     /** @param b0 &emsp; boolean */
     // Must be public.
     public void setHoverable(final boolean b0) {
+        if (this.hoverable == b0) { return; }
         this.hoverable = b0;
         if (!this.isEnabled()) { return; }
         if (!b0) { this.removeMouseListener(madEvents); }
