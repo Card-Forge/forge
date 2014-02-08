@@ -70,7 +70,7 @@ public class BoosterGenerator {
         List<PrintSheet> sheetsUsed = new ArrayList<PrintSheet>();
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
-        boolean hasFoil = edition != null && MyRandom.getRandom().nextInt(100) <= edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED;
+        boolean hasFoil = edition != null && MyRandom.getRandom().nextInt(10000) <= edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED; // FoilChanceInBooster is given with 1/10000th precision for a closer 1:6 (16.67%) approximation.
         String foilSlot = !hasFoil ? null : edition.getFoilAlwaysInCommonSlot() ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
         
         for(Pair<String, Integer> slot : template.getSlots()) {
