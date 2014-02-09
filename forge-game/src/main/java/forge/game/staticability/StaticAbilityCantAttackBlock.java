@@ -23,6 +23,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -39,7 +40,7 @@ public class StaticAbilityCantAttackBlock {
      * @return a Cost
      */
     public static boolean applyCantAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
@@ -65,7 +66,7 @@ public class StaticAbilityCantAttackBlock {
      * @return a Cost
      */
     public static Cost getAttackCost(final StaticAbility stAb, final Card card, final GameEntity target) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
@@ -101,7 +102,7 @@ public class StaticAbilityCantAttackBlock {
      * @return a Cost
      */
     public static Cost getBlockCost(final StaticAbility stAb, final Card blocker, final GameEntity attacker) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")

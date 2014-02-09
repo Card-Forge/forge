@@ -24,6 +24,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -42,7 +43,7 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantBeCastAbility(final StaticAbility stAb, final Card card, final Player activator) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")
@@ -82,7 +83,7 @@ public class StaticAbilityCantBeCast {
      */
     public static boolean applyCantBeActivatedAbility(final StaticAbility staticAbility, final Card card,
             final SpellAbility spellAbility) {
-        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
@@ -119,7 +120,7 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantPlayLandAbility(final StaticAbility stAb, final Card card, final Player player) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")

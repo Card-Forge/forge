@@ -1,8 +1,8 @@
 package forge.game.ability.effects;
 
 import forge.Command;
+import forge.game.CardTraitBase;
 import forge.game.Game;
-import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -237,7 +237,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     }
 
                     // give back suppressed replacement effects
-                    for (final TriggerReplacementBase re : removedReplacements) {
+                    for (final CardTraitBase re : removedReplacements) {
                         re.setTemporarilySuppressed(false);
                     }
                 }

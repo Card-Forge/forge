@@ -30,6 +30,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -47,7 +48,7 @@ public class StaticAbilityCostChange {
      *            a ManaCost
      */
     public static void applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
-        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
@@ -198,7 +199,7 @@ public class StaticAbilityCostChange {
         if (manaCost.toString().equals("{0}")) {
             return;
         }
-        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();

@@ -45,7 +45,7 @@ public class PermanentCreatureAi extends SpellAbilityAi {
             for(Card c : cards) {
                 ArrayList<StaticAbility> statics = c.getStaticAbilities();
                 for(StaticAbility s : statics) {
-                    final Map<String, String> stabMap = s.getMapParams();
+                    final Map<String, String> stabMap = s.parseParams();
 
                     if (!stabMap.get("Mode").equals("Continuous")) {
                         continue;

@@ -1201,7 +1201,7 @@ public class ComputerUtil {
         for (final Card c : all) {
             if (c.isEquipment()) {
                 for (StaticAbility stAb : c.getStaticAbilities()) {
-                    HashMap<String, String> params = stAb.getMapParams();
+                    Map<String, String> params = stAb.getMapParams();
                     if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
                             && params.get("AddKeyword").contains("Haste") && c.getEquippingCard() == null) {
                         return true;

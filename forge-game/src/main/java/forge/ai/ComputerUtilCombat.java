@@ -18,10 +18,10 @@
 package forge.ai;
 
 import com.google.common.base.Predicate;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
-import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -628,9 +628,9 @@ public class ComputerUtilCombat {
                 return false; // The trigger should have triggered already
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
-                        && !(combat.isAttacking(source) && TriggerReplacementBase.matchesValid(source,
-                                trigParams.get("ValidCard").split(","), source)
+                if (!CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
+                        && !(combat.isAttacking(source) && CardTraitBase.matchesValid(source,
+                        trigParams.get("ValidCard").split(","), source)
                             && !trigParams.containsKey("Alone"))) {
                     return false;
                 }
@@ -641,7 +641,7 @@ public class ComputerUtilCombat {
         if ((defender == null) && mode == TriggerType.AttackerUnblocked) {
             willTrigger = true;
             if (trigParams.containsKey("ValidCard")) {
-                if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
+                if (!CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
                     return false;
                 }
             }
@@ -663,7 +663,7 @@ public class ComputerUtilCombat {
                         return false;
                     }
                 }
-                if (!TriggerReplacementBase.matchesValid(attacker, validBlocked.split(","), source)) {
+                if (!CardTraitBase.matchesValid(attacker, validBlocked.split(","), source)) {
                     return false;
                 }
             }
@@ -677,35 +677,35 @@ public class ComputerUtilCombat {
                         return false;
                     }
                 }
-                if (!TriggerReplacementBase.matchesValid(defender, validBlocker.split(","), source)) {
+                if (!CardTraitBase.matchesValid(defender, validBlocker.split(","), source)) {
                     return false;
                 }
             }
         } else if (mode == TriggerType.AttackerBlocked) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocker")) {
-                if (!TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
+                if (!CardTraitBase.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source)) {
                     return false;
                 }
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
+                if (!CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)) {
                     return false;
                 }
             }
         } else if (mode == TriggerType.DamageDone) {
             willTrigger = true;
             if (trigParams.containsKey("ValidSource")) {
-                if (TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
+                if (CardTraitBase.matchesValid(defender, trigParams.get("ValidSource").split(","), source)
                         && defender.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                                || TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source))) {
+                                || CardTraitBase.matchesValid(attacker, trigParams.get("ValidTarget").split(","), source))) {
                     return true;
                 }
-                if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
+                if (CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), source)
                         && attacker.getNetCombatDamage() > 0
                         && (!trigParams.containsKey("ValidTarget")
-                                || TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source))) {
+                                || CardTraitBase.matchesValid(defender, trigParams.get("ValidTarget").split(","), source))) {
                     return true;
                 }
             }
@@ -759,7 +759,7 @@ public class ComputerUtilCombat {
         final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final HashMap<String, String> params = stAb.getMapParams();
+                final Map<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
                 }
@@ -1054,7 +1054,7 @@ public class ComputerUtilCombat {
         final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final HashMap<String, String> params = stAb.getMapParams();
+                final Map<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
                 }
@@ -1220,7 +1220,7 @@ public class ComputerUtilCombat {
         final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final HashMap<String, String> params = stAb.getMapParams();
+                final Map<String, String> params = stAb.getMapParams();
                 if (!params.get("Mode").equals("Continuous")) {
                     continue;
                 }

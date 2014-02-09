@@ -20,7 +20,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
         if (o instanceof Card) {
             final Card c = (Card) o;
             if (cardToUnattach.isAura()) {
-                //final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
+                //final boolean gainControl = "GainControl".equals(af.parseParams().get("AILogic"));
                 //AbilityFactoryAttach.handleUnattachAura(cardToUnattach, c, gainControl);
             } else if (cardToUnattach.isEquipment()) {
                 if (cardToUnattach.isEquipping() && c.getEquippedBy().contains(cardToUnattach)) {

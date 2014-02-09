@@ -153,7 +153,7 @@ public class GameAction {
                 for (final Trigger trigger : copied.getTriggers()) {
                     trigger.setHostCard(copied);
                 }
-                for (final TriggerReplacementBase repl : copied.getReplacementEffects()) {
+                for (final CardTraitBase repl : copied.getReplacementEffects()) {
                     repl.setHostCard(copied);
                 }
                 if (c.getName().equals("Skullbriar, the Walking Grave")) {

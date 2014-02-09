@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -40,7 +41,7 @@ public class StaticAbilityMayLookAt {
      * @return true, if successful
      */
     public static boolean applyMayLookAtAbility(final StaticAbility stAb, final Card card, final Player player) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("Affected")

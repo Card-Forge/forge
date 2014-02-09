@@ -23,6 +23,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class StaticAbilityCantTarget.
@@ -42,7 +43,7 @@ public class StaticAbilityCantTarget {
      */
     public static boolean applyCantTargetAbility(final StaticAbility staticAbility, final Card card,
             final SpellAbility spellAbility) {
-        final HashMap<String, String> params = staticAbility.getMapParams();
+        final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Card source = spellAbility.getSourceCard();
         final Player activator = spellAbility.getActivatingPlayer();

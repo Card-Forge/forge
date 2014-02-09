@@ -41,10 +41,7 @@ import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * The Class StaticAbility_Continuous.
@@ -61,7 +58,7 @@ public class StaticAbilityContinuous {
      * 
      */
     public static List<Card> applyContinuousAbility(final StaticAbility stAb) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         final StaticEffect se = new StaticEffect(hostCard);
@@ -515,7 +512,7 @@ public class StaticAbilityContinuous {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
                         s = s.replace("ConvertedManaCost", costcmc);
                     }
-                    affectedCard.addStaticAbility(s).setTemporarily(true);
+                    affectedCard.addStaticAbility(s).setTemporary(true);
                 }
             }
 
@@ -534,7 +531,7 @@ public class StaticAbilityContinuous {
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(true);
                 }
-                for (final TriggerReplacementBase rE : affectedCard.getReplacementEffects()) {
+                for (final CardTraitBase rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(true);
                 }
             }
@@ -544,7 +541,7 @@ public class StaticAbilityContinuous {
     }
 
     private static ArrayList<Player> getAffectedPlayers(final StaticAbility stAb) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
 
@@ -566,7 +563,7 @@ public class StaticAbilityContinuous {
     }
 
     private static List<Card> getAffectedCards(final StaticAbility stAb) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = hostCard.getController();

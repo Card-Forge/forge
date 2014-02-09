@@ -22,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class StaticAbility_PreventDamage.
@@ -45,7 +46,7 @@ public class StaticAbilityPreventDamage {
      */
     public static int applyPreventDamageAbility(final StaticAbility stAb, final Card source, final GameEntity target,
             final int damage, final boolean isCombat, final boolean isTest) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         int restDamage = damage;
 

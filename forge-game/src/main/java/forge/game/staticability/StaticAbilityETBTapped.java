@@ -20,6 +20,7 @@ package forge.game.staticability;
 import forge.game.card.Card;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -36,7 +37,7 @@ public class StaticAbilityETBTapped {
      * @return true, if successful
      */
     public static boolean applyETBTappedAbility(final StaticAbility stAb, final Card card) {
-        final HashMap<String, String> params = stAb.getMapParams();
+        final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         if (params.containsKey("ValidCard")

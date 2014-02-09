@@ -19,7 +19,7 @@ import java.util.*;
  * Provides the matchesValid function to both classes.
  * 
  */
-public abstract class TriggerReplacementBase {
+public abstract class CardTraitBase {
 
     /** The host card. */
     protected Card hostCard;
@@ -73,6 +73,11 @@ public abstract class TriggerReplacementBase {
      */
     public final Map<String, String> getMapParams() {
         return this.mapParams;
+    }
+
+    public final void setMapParams(Map<String,String> params) {
+        this.mapParams.clear();
+        this.mapParams.putAll(params);
     }
 
     /**

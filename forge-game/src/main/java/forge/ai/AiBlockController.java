@@ -19,8 +19,8 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import forge.game.CardTraitBase;
 import forge.game.GameEntity;
-import forge.game.TriggerReplacementBase;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -235,14 +235,14 @@ public class AiBlockController {
                         
                         if (mode == TriggerType.DamageDone) {
                             if ((!trigParams.containsKey("ValidSource")
-                                        || TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), attacker))
+                                        || CardTraitBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), attacker))
                                     && attacker.getNetCombatDamage() > 0
                                     && (!trigParams.containsKey("ValidTarget")
-                                            || TriggerReplacementBase.matchesValid(combat.getDefenderByAttacker(attacker), trigParams.get("ValidTarget").split(","), attacker))) {
+                                            || CardTraitBase.matchesValid(combat.getDefenderByAttacker(attacker), trigParams.get("ValidTarget").split(","), attacker))) {
                                 value += 50;
                             }
                         } else if (mode == TriggerType.AttackerUnblocked) {
-                            if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker)) {
+                            if (CardTraitBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker)) {
                                 value += 50;
                             }
                         }

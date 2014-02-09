@@ -80,7 +80,7 @@ public class StaticEffects {
     private final List<Card> removeStaticEffect(final StaticEffect se) {
         final List<Card> affectedCards = se.getAffectedCards();
         final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
-        final HashMap<String, String> params = se.getParams();
+        final Map<String, String> params = se.getParams();
 
         int powerBonus = 0;
         String addP = "";
@@ -223,7 +223,7 @@ public class StaticEffects {
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(false);
                 }
-                for (final TriggerReplacementBase rE : affectedCard.getReplacementEffects()) {
+                for (final CardTraitBase rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(false);
                 }
             }

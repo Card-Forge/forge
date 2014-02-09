@@ -24,6 +24,7 @@ import forge.game.spellability.SpellAbility;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -44,7 +45,7 @@ public class StaticEffect {
     private HashMap<Card, Integer> xValueMap = new HashMap<Card, Integer>();
 
     private String chosenType;
-    private HashMap<String, String> mapParams = new HashMap<String, String>();
+    private Map<String, String> mapParams = new HashMap<String, String>();
 
     // for P/T
     private final HashMap<Card, String> originalPT = new HashMap<Card, String>();
@@ -845,7 +846,7 @@ public class StaticEffect {
      * @param params
      *            a HashMap
      */
-    public final void setParams(final HashMap<String, String> params) {
+    public final void setParams(final Map<String, String> params) {
         this.mapParams = params;
     }
 
@@ -854,7 +855,7 @@ public class StaticEffect {
      * 
      * @return the params
      */
-    public final HashMap<String, String> getParams() {
+    public final Map<String, String> getParams() {
         return this.mapParams;
     }
 

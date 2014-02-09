@@ -154,7 +154,7 @@ public class AttachAi extends SpellAbilityAi {
         String type = "";
 
         for (final StaticAbility stAb : attachSource.getStaticAbilities()) {
-            final HashMap<String, String> stab = stAb.getMapParams();
+            final Map<String, String> stab = stAb.getMapParams();
             if (stab.get("Mode").equals("Continuous") && stab.containsKey("AddType")) {
                 type = stab.get("AddType");
             }

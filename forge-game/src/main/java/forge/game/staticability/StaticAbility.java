@@ -18,6 +18,7 @@
 package forge.game.staticability;
 
 import forge.card.MagicColor;
+import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -36,43 +37,9 @@ import java.util.Map;
 /**
  * The Class StaticAbility.
  */
-public class StaticAbility {
-
-    private Card hostCard = null;
-
-    private HashMap<String, String> params = new HashMap<String, String>();
+public class StaticAbility extends CardTraitBase {
 
     private int layer = 0;
-
-    /** The temporarily suppressed. */
-    private boolean temporarilySuppressed = false;
-
-    /** The suppressed. */
-    private final boolean suppressed = false;
-
-    private boolean temporary = false;
-
-    /**
-     * <p>
-     * getHostCard.
-     * </p>
-     * 
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public final Card getHostCard() {
-        return this.hostCard;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>mapParams</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final HashMap<String, String> getMapParams() {
-        return this.params;
-    }
 
     // *******************************************************
 
@@ -87,7 +54,7 @@ public class StaticAbility {
      *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.HashMap} object.
      */
-    public final HashMap<String, String> getMapParams(final String abString, final Card hostCard) {
+    public final HashMap<String, String> parseParams(final String abString, final Card hostCard) {
         final HashMap<String, String> mapParameters = new HashMap<String, String>();
 
         if (!(abString.length() > 0)) {
@@ -134,41 +101,41 @@ public class StaticAbility {
      */
     public final int generateLayer() {
 
-        if (!this.params.get("Mode").equals("Continuous")) {
+        if (!this.mapParams.get("Mode").equals("Continuous")) {
             return 0;
         }
 
-        if (this.params.containsKey("GainControl")) {
+        if (this.mapParams.containsKey("GainControl")) {
             return 2;
         }
 
-        if (this.params.containsKey("AddType") || this.params.containsKey("RemoveType")
-                || this.params.containsKey("RemoveCardTypes") || this.params.containsKey("RemoveSubTypes")
-                || this.params.containsKey("RemoveSuperTypes") || this.params.containsKey("RemoveCreatureTypes")) {
+        if (this.mapParams.containsKey("AddType") || this.mapParams.containsKey("RemoveType")
+                || this.mapParams.containsKey("RemoveCardTypes") || this.mapParams.containsKey("RemoveSubTypes")
+                || this.mapParams.containsKey("RemoveSuperTypes") || this.mapParams.containsKey("RemoveCreatureTypes")) {
             return 4;
         }
 
-        if (this.params.containsKey("AddColor") || this.params.containsKey("RemoveColor")
-                || this.params.containsKey("SetColor")) {
+        if (this.mapParams.containsKey("AddColor") || this.mapParams.containsKey("RemoveColor")
+                || this.mapParams.containsKey("SetColor")) {
             return 5;
         }
 
-        if (this.params.containsKey("RemoveAllAbilities") || this.params.containsKey("GainsAbilitiesOf")) {
+        if (this.mapParams.containsKey("RemoveAllAbilities") || this.mapParams.containsKey("GainsAbilitiesOf")) {
             return 6; // Layer 6
         }
 
-        if (this.params.containsKey("AddKeyword") || this.params.containsKey("AddAbility")
-                || this.params.containsKey("AddTrigger") || this.params.containsKey("RemoveTriggers")
-                || this.params.containsKey("RemoveKeyword") || this.params.containsKey("AddReplacementEffects")) {
+        if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
+                || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
+                || this.mapParams.containsKey("RemoveKeyword") || this.mapParams.containsKey("AddReplacementEffects")) {
             return 7; // Layer 6 (dependent)
         }
 
-        if (this.params.containsKey("CharacteristicDefining")) {
+        if (this.mapParams.containsKey("CharacteristicDefining")) {
             return 8; // Layer 7a
         }
 
-        if (this.params.containsKey("AddPower") || this.params.containsKey("AddToughness")
-                || this.params.containsKey("SetPower") || this.params.containsKey("SetToughness")) {
+        if (this.mapParams.containsKey("AddPower") || this.mapParams.containsKey("AddToughness")
+                || this.mapParams.containsKey("SetPower") || this.mapParams.containsKey("SetToughness")) {
             return 9; // This is the collection of 7b and 7c
         }
 
@@ -184,8 +151,8 @@ public class StaticAbility {
      */
     @Override
     public final String toString() {
-        if (this.params.containsKey("Description") && !this.isSuppressed()) {
-            return this.params.get("Description").replace("CARDNAME", this.hostCard.getName());
+        if (this.mapParams.containsKey("Description") && !this.isSuppressed()) {
+            return this.mapParams.get("Description").replace("CARDNAME", this.hostCard.getName());
         } else {
             return "";
         }
@@ -201,7 +168,7 @@ public class StaticAbility {
      *            the host
      */
     public StaticAbility(final String params, final Card host) {
-        this.params = this.getMapParams(params, host);
+        this.mapParams.putAll(this.parseParams(params, host));
         this.hostCard = host;
         this.layer = this.generateLayer();
     }
@@ -215,9 +182,8 @@ public class StaticAbility {
      *            the host
      */
     public StaticAbility(final HashMap<String, String> params, final Card host) {
-        this.params = new HashMap<String, String>();
         for (final Map.Entry<String, String> entry : params.entrySet()) {
-            this.params.put(entry.getKey(), entry.getValue());
+            this.mapParams.put(entry.getKey(), entry.getValue());
         }
         this.layer = this.generateLayer();
         this.hostCard = host;
@@ -234,7 +200,7 @@ public class StaticAbility {
     public final List<Card> applyAbility(final String mode) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return null;
         }
 
@@ -269,7 +235,7 @@ public class StaticAbility {
             final boolean isCombat, final boolean isTest) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return in;
         }
 
@@ -299,7 +265,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final Player player) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -336,7 +302,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -369,7 +335,7 @@ public class StaticAbility {
     public final void applyAbility(final String mode, final SpellAbility sa, final ManaCostBeingPaid originalCost) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return;
         }
 
@@ -400,7 +366,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -433,7 +399,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final GameEntity target) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.params.get("Mode").equals(mode)) {
+        if (!this.mapParams.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -449,14 +415,14 @@ public class StaticAbility {
     }
 
     public final Cost getAttackCost(final Card attacker, final GameEntity target) {
-        if (this.isSuppressed() || !params.get("Mode").equals("CantAttackUnless") || !this.checkConditions()) {
+        if (this.isSuppressed() || !mapParams.get("Mode").equals("CantAttackUnless") || !this.checkConditions()) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, target);
     }
 
     public final Cost getBlockCost(final Card blocker, final Card attacker) {
-        if (this.isSuppressed() || !params.get("Mode").equals("CantBlockUnless") || !this.checkConditions()) {
+        if (this.isSuppressed() || !mapParams.get("Mode").equals("CantBlockUnless") || !this.checkConditions()) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
@@ -474,9 +440,9 @@ public class StaticAbility {
             return false;
         }
 
-        if (this.params.containsKey("EffectZone")) {
-            if (!this.params.get("EffectZone").equals("All")
-                    && !ZoneType.listValueOf(this.params.get("EffectZone"))
+        if (this.mapParams.containsKey("EffectZone")) {
+            if (!this.mapParams.get("EffectZone").equals("All")
+                    && !ZoneType.listValueOf(this.mapParams.get("EffectZone"))
                         .contains(controller.getGame().getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
@@ -486,7 +452,7 @@ public class StaticAbility {
             }
         }
 
-        String condition = params.get("Condition");
+        String condition = mapParams.get("Condition");
         if (null != condition) {
             if (condition.equals("Threshold") && !controller.hasThreshold()) return false;
             if (condition.equals("Hellbent") && !controller.hasHellbent()) return false;
@@ -515,33 +481,33 @@ public class StaticAbility {
             }
         }
 
-        if (this.params.containsKey("OpponentAttackedWithCreatureThisTurn")
+        if (this.mapParams.containsKey("OpponentAttackedWithCreatureThisTurn")
                 && !controller.getOpponent().getAttackedWithCreatureThisTurn()) {
             return false;
         }
 
-        if (this.params.containsKey("Phases")) {
-            List<PhaseType> phases = PhaseType.parseRange(this.params.get("Phases"));
+        if (this.mapParams.containsKey("Phases")) {
+            List<PhaseType> phases = PhaseType.parseRange(this.mapParams.get("Phases"));
             if (!phases.contains(controller.getGame().getPhaseHandler().getPhase())) {
                 return false;
             }
         }
 
-        if (this.params.containsKey("TopCardOfLibraryIs")) {
+        if (this.mapParams.containsKey("TopCardOfLibraryIs")) {
             if (controller.getCardsIn(ZoneType.Library).isEmpty()) {
                 return false;
             }
             final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
-            if (!topCard.isValid(this.params.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
+            if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
                 return false;
             }
         }
 
-        if (this.params.containsKey("CheckSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckSVar"), null);
+        if (this.mapParams.containsKey("CheckSVar")) {
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSVar"), null);
             String comparator = "GE1";
-            if (this.params.containsKey("SVarCompare")) {
-                comparator = this.params.get("SVarCompare");
+            if (this.mapParams.containsKey("SVarCompare")) {
+                comparator = this.mapParams.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -553,11 +519,11 @@ public class StaticAbility {
             return true;
         }
 
-        if (this.params.containsKey("CheckSecondSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckSecondSVar"), null);
+        if (this.mapParams.containsKey("CheckSecondSVar")) {
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSecondSVar"), null);
             String comparator = "GE1";
-            if (this.params.containsKey("SecondSVarCompare")) {
-                comparator = this.params.get("SecondSVarCompare");
+            if (this.mapParams.containsKey("SecondSVarCompare")) {
+                comparator = this.mapParams.get("SecondSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -569,11 +535,11 @@ public class StaticAbility {
             return true;
         }
 
-        if (this.params.containsKey("CheckThirdSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckThirdSVar"), null);
+        if (this.mapParams.containsKey("CheckThirdSVar")) {
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckThirdSVar"), null);
             String comparator = "GE1";
-            if (this.params.containsKey("ThirdSVarCompare")) {
-                comparator = this.params.get("ThirdSVarCompare");
+            if (this.mapParams.containsKey("ThirdSVarCompare")) {
+                comparator = this.mapParams.get("ThirdSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -585,11 +551,11 @@ public class StaticAbility {
             return true;
         }
 
-        if (this.params.containsKey("CheckFourthSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckFourthSVar"), null);
+        if (this.mapParams.containsKey("CheckFourthSVar")) {
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckFourthSVar"), null);
             String comparator = "GE1";
-            if (this.params.containsKey("FourthSVarCompare")) {
-                comparator = this.params.get("FourthSVarCompare");
+            if (this.mapParams.containsKey("FourthSVarCompare")) {
+                comparator = this.mapParams.get("FourthSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -602,24 +568,6 @@ public class StaticAbility {
         return true;
     }
 
-    /**
-     * Sets the temporarily suppressed.
-     * 
-     * @param supp
-     *            the new temporarily suppressed
-     */
-    public final void setTemporarilySuppressed(final boolean supp) {
-        this.temporarilySuppressed = supp;
-    }
-
-    /**
-     * Checks if is suppressed.
-     * 
-     * @return true, if is suppressed
-     */
-    public final boolean isSuppressed() {
-        return (this.suppressed || this.temporarilySuppressed);
-    }
 
     /**
      * @return the layer
@@ -633,13 +581,6 @@ public class StaticAbility {
      */
     public void setLayer(int layer) {
         this.layer = layer;
-    }
-
-    public void setTemporarily(boolean b) {
-        this.temporary = b;
-    }
-    public boolean isTemporary() {
-        return this.temporary;
     }
 
 } // end class StaticEffectFactory

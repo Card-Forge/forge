@@ -17,8 +17,8 @@
  */
 package forge.game.replacement;
 
+import forge.game.CardTraitBase;
 import forge.game.Game;
-import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -35,7 +35,7 @@ import java.util.Map;
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class ReplacementEffect extends TriggerReplacementBase {
+public abstract class ReplacementEffect extends CardTraitBase {
 
     private ReplacementLayer layer = ReplacementLayer.None;
 

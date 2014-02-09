@@ -245,6 +245,7 @@ forge-game/src/main/java/forge/ai/ability/UnattachAllAi.java -text
 forge-game/src/main/java/forge/ai/ability/UntapAi.java -text
 forge-game/src/main/java/forge/ai/ability/UntapAllAi.java -text
 forge-game/src/main/java/forge/ai/ability/ZoneExchangeAi.java -text
+forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/Game.java -text
 forge-game/src/main/java/forge/game/GameAction.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
@@ -265,7 +266,6 @@ forge-game/src/main/java/forge/game/Match.java -text
 forge-game/src/main/java/forge/game/PlanarDice.java -text
 forge-game/src/main/java/forge/game/StaticEffect.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/StaticEffects.java svneol=native#text/plain
-forge-game/src/main/java/forge/game/TriggerReplacementBase.java -text
 forge-game/src/main/java/forge/game/ability/AbilityApiBased.java -text
 forge-game/src/main/java/forge/game/ability/AbilityFactory.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/ability/AbilityUtils.java -text
