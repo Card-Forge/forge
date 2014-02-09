@@ -136,7 +136,7 @@ public class AiBlockController {
 
 
         // Begin with the attackers that pose the biggest threat
-        CardLists.sortByEvaluateCreature(firstAttacker);
+        ComputerUtilCard.sortByEvaluateCreature(firstAttacker);
         CardLists.sortByPowerDesc(firstAttacker);
 
         // If I don't have any planeswalkers than sorting doesn't really matter
@@ -762,7 +762,7 @@ public class AiBlockController {
     public static List<Card> orderBlockers(Card attacker, List<Card> blockers) {
         // ordering of blockers, sort by evaluate, then try to kill the best
         int damage = attacker.getNetCombatDamage();
-        CardLists.sortByEvaluateCreature(blockers);
+        ComputerUtilCard.sortByEvaluateCreature(blockers);
         final List<Card> first = new ArrayList<Card>();
         final List<Card> last = new ArrayList<Card>();
         for (Card blocker : blockers) {
@@ -786,7 +786,7 @@ public class AiBlockController {
         // This shouldn't really take trample into account, but otherwise should be pretty similar to orderBlockers
         // ordering of blockers, sort by evaluate, then try to kill the best
         int damage = blocker.getNetCombatDamage();
-        CardLists.sortByEvaluateCreature(attackers);
+        ComputerUtilCard.sortByEvaluateCreature(attackers);
         final List<Card> first = new ArrayList<Card>();
         final List<Card> last = new ArrayList<Card>();
         for (Card attacker : attackers) {

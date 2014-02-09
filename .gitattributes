@@ -136,6 +136,8 @@ forge-game/src/main/java/forge/ai/ComputerUtilCard.java -text
 forge-game/src/main/java/forge/ai/ComputerUtilCombat.java -text
 forge-game/src/main/java/forge/ai/ComputerUtilCost.java -text
 forge-game/src/main/java/forge/ai/ComputerUtilMana.java -text
+forge-game/src/main/java/forge/ai/LobbyPlayerAi.java -text
+forge-game/src/main/java/forge/ai/PlayerControllerAi.java -text
 forge-game/src/main/java/forge/ai/SpellAbilityAi.java -text
 forge-game/src/main/java/forge/ai/ability/AddPhaseAi.java -text
 forge-game/src/main/java/forge/ai/ability/AddTurnAi.java svneol=native#text/plain
@@ -501,11 +503,9 @@ forge-game/src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/player/GameLossReason.java -text
 forge-game/src/main/java/forge/game/player/LobbyPlayer.java -text
-forge-game/src/main/java/forge/game/player/LobbyPlayerAi.java -text
 forge-game/src/main/java/forge/game/player/Player.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/player/PlayerActionConfirmMode.java -text
 forge-game/src/main/java/forge/game/player/PlayerController.java -text
-forge-game/src/main/java/forge/game/player/PlayerControllerAi.java -text
 forge-game/src/main/java/forge/game/player/PlayerOutcome.java -text
 forge-game/src/main/java/forge/game/player/PlayerStatistics.java -text
 forge-game/src/main/java/forge/game/player/RegisteredPlayer.java -text

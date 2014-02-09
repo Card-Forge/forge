@@ -1,7 +1,8 @@
-package forge.game.player;
+package forge.ai;
 
-import forge.ai.AiProfileUtil;
 import forge.game.Game;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
 
 public class LobbyPlayerAi extends LobbyPlayer {
     public LobbyPlayerAi(String name) {

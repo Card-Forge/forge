@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -18,6 +19,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -57,6 +59,20 @@ public class ComputerUtilCard {
         return ComputerUtilCard.getMostExpensivePermanentAI(all);
     }
 
+    
+    /**
+     * <p>
+     * Sorts a List<Card> by "best" using the EvaluateCreature function.
+     * the best creatures will be first in the list.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     */
+    public static void sortByEvaluateCreature(final List<Card> list) {
+        Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
+    } // sortByEvaluateCreature()
+    
     // The AI doesn't really pick the best artifact, just the most expensive.
     /**
      * <p>

@@ -134,7 +134,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                     return false;
                 }
                 final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
-                CardLists.sortByEvaluateCreature(combatants);
+                ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.getNumTargeted() < tgt.getMaxTargets(hostCard, sa)) {
@@ -198,7 +198,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         if (!compTargetables.isEmpty()) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
-            CardLists.sortByEvaluateCreature(combatants);
+            ComputerUtilCard.sortByEvaluateCreature(combatants);
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 Combat combat = game.getCombat();
                 for (final Card c : combatants) {

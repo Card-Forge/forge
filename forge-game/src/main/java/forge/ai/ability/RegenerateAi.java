@@ -141,7 +141,7 @@ public class RegenerateAi extends SpellAbilityAi {
             } else {
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
-                    CardLists.sortByEvaluateCreature(combatants);
+                    ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
                         if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
@@ -196,7 +196,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
-            CardLists.sortByEvaluateCreature(combatants);
+            ComputerUtilCard.sortByEvaluateCreature(combatants);
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 Combat combat = game.getCombat();
                 for (final Card c : combatants) {

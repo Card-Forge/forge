@@ -509,7 +509,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // need something AI can cast now
-            CardLists.sortByEvaluateCreature(list);
+            ComputerUtilCard.sortByEvaluateCreature(list);
             for (Card c : list) {
                 if (ComputerUtilMana.hasEnoughManaSourcesToCast(c.getFirstSpellAbility(), ai))
                    return c;
@@ -749,7 +749,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     Combat combat = game.getCombat();
                     final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
-                    CardLists.sortByEvaluateCreature(combatants);
+                    ComputerUtilCard.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
                         if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {

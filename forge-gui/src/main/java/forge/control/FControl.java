@@ -21,6 +21,7 @@ import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.ai.LobbyPlayerAi;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
 import forge.game.GameRules;
@@ -28,7 +29,6 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.LobbyPlayerAi;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
@@ -59,9 +59,11 @@ import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
 import forge.view.FFrame;
 import forge.view.FView;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;

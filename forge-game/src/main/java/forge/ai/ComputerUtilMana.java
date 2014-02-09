@@ -666,7 +666,7 @@ public class ComputerUtilMana {
         sortedManaSources.addAll(fiveManaSources);
         sortedManaSources.addAll(anyColorManaSources);
         //use better creatures later
-        CardLists.sortByEvaluateCreature(otherManaSources);
+        ComputerUtilCard.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
         sortedManaSources.addAll(otherManaSources);
         return sortedManaSources;

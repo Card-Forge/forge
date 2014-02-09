@@ -2,6 +2,7 @@ package forge.gui.input;
 
 import forge.FThreads;
 import forge.ai.ComputerUtilMana;
+import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -12,7 +13,6 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
-import forge.game.player.PlayerControllerAi;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
@@ -20,6 +20,7 @@ import forge.gui.GuiChoose;
 import forge.gui.player.HumanPlay;
 import forge.util.Evaluator;
 import forge.view.ButtonUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.event.MouseEvent;

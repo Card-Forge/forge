@@ -18,9 +18,9 @@
 package forge.ai;
 
 import forge.game.player.LobbyPlayer;
-import forge.game.player.LobbyPlayerAi;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;

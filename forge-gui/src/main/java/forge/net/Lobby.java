@@ -1,11 +1,12 @@
 package forge.net;
 
 import com.google.common.base.Supplier;
+
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
+import forge.ai.LobbyPlayerAi;
 import forge.control.ChatArea;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.LobbyPlayerAi;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.client.INetClient;

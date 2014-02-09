@@ -22,7 +22,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
@@ -91,19 +90,6 @@ public class CardLists {
     };
     
     public static final List<Card> emptyList = ImmutableList.of();
-
-    /**
-     * <p>
-     * Sorts a List<Card> by "best" using the EvaluateCreature function.
-     * the best creatures will be first in the list.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortByEvaluateCreature(final List<Card> list) {
-        Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
-    } // sortByEvaluateCreature()
 
     /**
      * <p>

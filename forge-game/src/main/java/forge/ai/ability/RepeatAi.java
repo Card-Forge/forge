@@ -2,11 +2,11 @@ package forge.ai.ability;
 
 
 import forge.ai.AiController;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;

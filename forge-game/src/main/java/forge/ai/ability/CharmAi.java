@@ -2,10 +2,10 @@ package forge.ai.ability;
 
 import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.player.Player;
-import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
