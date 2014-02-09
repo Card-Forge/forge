@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.ai.ability.ChangeZoneAi;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -735,10 +734,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("Defined")) {
                 c = Iterables.getFirst(fetchList, null);
             } else {
-                if (decider.getController().getLobbyPlayer().isHuman())
-                    c = decider.getController().chooseSingleEntityForEffect(fetchList, sa, selectPrompt, !sa.hasParam("Mandatory"), decider);
-                else
-                    c = ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
+                c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, selectPrompt, !sa.hasParam("Mandatory"), decider);
             }
 
             if (c == null) {

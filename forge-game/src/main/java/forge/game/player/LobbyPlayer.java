@@ -17,9 +17,6 @@ public abstract class LobbyPlayer implements IHasIcon {
     
     protected abstract PlayerType getType();
     
-    @Deprecated
-    public boolean isHuman() { return getType() == PlayerType.HUMAN; }
-
     protected final String name;
     protected String imageKey;
     private int avatarIndex = -1;

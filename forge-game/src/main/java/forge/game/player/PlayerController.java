@@ -2,6 +2,7 @@ package forge.game.player;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
+
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -29,6 +30,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -226,6 +228,9 @@ public abstract class PlayerController {
     public abstract Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats);
 
     public abstract String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message);
+
+    // better to have this odd method than those if playerType comparison in ChangeZone  
+    public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean b, Player decider);
 
     
     

@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
 import forge.Singletons;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -53,12 +54,14 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -1086,5 +1089,10 @@ public class PlayerControllerHuman extends PlayerController {
             if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard()))
                 return cp.getName();
         }
+    }
+
+    @Override
+    public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean b, Player decider) {
+        return chooseSingleEntityForEffect(fetchList, sa, selectPrompt, b, decider);
     }
 }

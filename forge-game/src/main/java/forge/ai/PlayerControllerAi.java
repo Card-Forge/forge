@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
+import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.CharmAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -752,6 +753,14 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         return "Morphling";
+    }
+
+    @Override
+    public Card chooseSingleCardForZoneChange(ZoneType destination,
+            List<ZoneType> origin, SpellAbility sa, List<Card> fetchList,
+            String selectPrompt, boolean b, Player decider) {
+
+        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
 
 }

@@ -3,6 +3,7 @@ package forge.gamesimulationtests.util;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.ability.ChangeZoneAi;
@@ -45,6 +46,7 @@ import forge.gamesimulationtests.util.playeractions.*;
 import forge.gui.player.HumanPlay;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -585,5 +587,13 @@ public class PlayerControllerForTests extends PlayerController {
             String valid, String message) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public Card chooseSingleCardForZoneChange(ZoneType destination,
+            List<ZoneType> origin, SpellAbility sa, List<Card> fetchList,
+            String selectPrompt, boolean b, Player decider) {
+        // TODO Auto-generated method stub
+        return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
 }
