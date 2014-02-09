@@ -13546,6 +13546,7 @@ forge-gui/res/cardsfolder/v/vorinclex_voice_of_hunger.txt svneol=native#text/pla
 forge-gui/res/cardsfolder/v/vorosh_the_hunter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vorrac_battlehorns.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vorstclaw.txt -text
+forge-gui/res/cardsfolder/v/vortex_elemental.txt -text
 forge-gui/res/cardsfolder/v/votary_of_the_conclave.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vow_of_duty.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/vow_of_flight.txt svneol=native#text/plain
