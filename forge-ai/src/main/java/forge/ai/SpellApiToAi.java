@@ -13,7 +13,36 @@ public enum SpellApiToAi {
     private final EnumMap<ApiType, SpellAbilityAi> apiToInstance = new EnumMap<>(ApiType.class);
     
     static {
+        apiToClass.put(ApiType.Abandon, AlwaysPlayAi.class);
+        apiToClass.put(ApiType.AddOrRemoveCounter, CountersPutOrRemoveAi.class);
+        apiToClass.put(ApiType.AddPhase, AddPhaseAi.class);
+        apiToClass.put(ApiType.AddTurn, AddTurnAi.class);
+        apiToClass.put(ApiType.Animate, AnimateAi.class);
+        apiToClass.put(ApiType.AnimateAll, AnimateAllAi.class);
+        apiToClass.put(ApiType.Attach, AttachAi.class);
+        apiToClass.put(ApiType.Balance, BalanceAi.class);
+        apiToClass.put(ApiType.BecomesBlocked, BecomesBlockedAi.class);
+        apiToClass.put(ApiType.Bond, BondAi.class);
+        apiToClass.put(ApiType.ChangeTargets, ChangeTargetsAi.class);
+        apiToClass.put(ApiType.ChangeZone, ChangeZoneAi.class);
+        apiToClass.put(ApiType.ChangeZoneAll, ChangeZoneAllAi.class);
+        
+        apiToClass.put(ApiType.Charm, CharmAi.class);
+        apiToClass.put(ApiType.ChooseCard, ChooseCardAi.class);
+        apiToClass.put(ApiType.ChooseColor, ChooseColorAi.class);
+        apiToClass.put(ApiType.ChooseNumber, CannotPlayAi.class);
+        apiToClass.put(ApiType.ChoosePlayer, ChoosePlayerAi.class);
+        apiToClass.put(ApiType.ChooseSource, ChooseSourceAi.class);
+        apiToClass.put(ApiType.ChooseType, ChooseTypeAi.class);
+        apiToClass.put(ApiType.Clash, ClashAi.class);
+        apiToClass.put(ApiType.Cleanup, AlwaysPlayAi.class);
+        apiToClass.put(ApiType.Clone, CloneAi.class);
+        apiToClass.put(ApiType.CopyPermanent, CopyPermanentAi.class);
+        apiToClass.put(ApiType.CopySpellAbility, CanPlayAsDrawbackAi.class);
+        apiToClass.put(ApiType.ControlPlayer, CannotPlayAi.class);
+        apiToClass.put(ApiType.Counter, CounterAi.class);
         apiToClass.put(ApiType.DamageAll, DamageAllAi.class);
+
         apiToClass.put(ApiType.DealDamage, DamageDealAi.class);
         apiToClass.put(ApiType.Debuff, DebuffAi.class);
         apiToClass.put(ApiType.DebuffAll, DebuffAllAi.class);
