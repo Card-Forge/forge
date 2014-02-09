@@ -17,6 +17,7 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.Singletons;
@@ -35,6 +36,8 @@ import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.GroupDef;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
@@ -263,7 +266,14 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void update() {
-        this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns(), null, null, 1);
+        Map<ColumnDef, ItemColumn> catalogColumns = SColumnUtil.getCatalogDefaultColumns();
+        catalogColumns.get(ColumnDef.FAVORITE).setSortPriority(0);
+        catalogColumns.get(ColumnDef.RARITY).setSortPriority(1); //sort rares to top
+        catalogColumns.get(ColumnDef.RARITY).setSortState(SortState.DESC);
+        catalogColumns.get(ColumnDef.COLOR).setSortPriority(2);
+        catalogColumns.get(ColumnDef.NAME).setSortPriority(3);
+
+        this.getCatalogManager().setup(catalogColumns, null, null, 1);
         this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
 
         ccAddLabel = this.getBtnAdd().getText();
