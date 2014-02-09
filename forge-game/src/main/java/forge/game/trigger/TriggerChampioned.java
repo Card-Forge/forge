@@ -51,6 +51,7 @@ public class TriggerChampioned extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card championed = (Card) runParams2.get("Championed");
+        final Card source = (Card) runParams2.get("Card");
 
         if (this.mapParams.containsKey("ValidCard")) {
             if (!championed.isValid(this.mapParams.get("ValidCard").split(","),
@@ -58,7 +59,12 @@ public class TriggerChampioned extends Trigger {
                 return false;
             }
         }
-
+        if (this.mapParams.containsKey("ValidSource")) {
+            if (!source.isValid(this.mapParams.get("ValidSource").split(","),
+                    this.getHostCard().getController(), this.getHostCard())) {
+                return false;
+            }
+        }
         return true;
     }
 

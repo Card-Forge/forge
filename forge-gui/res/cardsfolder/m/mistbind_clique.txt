@@ -5,7 +5,7 @@ PT:4/4
 K:Flash
 K:Flying
 K:Champion:Faerie
-T:Mode$ Championed | ValidCard$ Faerie | TriggerZones$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When a Faerie is championed with CARDNAME, tap all lands target player controls.
+T:Mode$ Championed | ValidCard$ Faerie | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When a Faerie is championed with CARDNAME, tap all lands target player controls.
 SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistbind_clique.jpg
