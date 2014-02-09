@@ -61,7 +61,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
-    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.CREATURE_SPELL_LAND, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
+    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.CREATURE_SPELL_LAND, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.CARD_RARITY };
     private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
     private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
     private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
@@ -370,13 +370,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         if (groupBy == null) {
             groups.add(new Group(""));
+            btnExpandCollapseAll.updateIsAllCollapsed();
         }
         else {
             for (String groupName : groupBy.getGroups()) {
                 groups.add(new Group(groupName));
             }
+
+            //collapse all groups by default if all previous groups were collapsed
+            if (btnExpandCollapseAll.isAllCollapsed) {
+                for (Group group : groups) {
+                    group.isCollapsed = true;
+                }
+            }
         }
-        btnExpandCollapseAll.updateIsAllCollapsed();
 
         if (!forSetup) {
             refresh(null, -1, 0);
@@ -520,6 +527,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         }
                         else {
                             otherItems = new Group("Other");
+                            otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                             groups.add(otherItems);
                         }
                     }
@@ -530,6 +538,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         if (otherItems == null && groups.size() > groupBy.getGroups().length) {
             groups.remove(groups.size() - 1); //remove Other group if empty
+            btnExpandCollapseAll.updateIsAllCollapsed();
         }
 
         updateLayout(true);

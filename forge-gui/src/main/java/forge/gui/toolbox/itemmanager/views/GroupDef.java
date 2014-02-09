@@ -76,7 +76,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    CARD_TYPE("Card Type",
+    CARD_TYPE("Type",
             new String[] { "Creatures", "Artifacts", "Enchantments", "Planeswalkers", "Instants", "Sorceries", "Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override
@@ -112,6 +112,36 @@ public enum GroupDef {
                         }
                         if (type.isSorcery()) {
                             return 5;
+                        }
+                    }
+                    return -1;
+                }
+            }),
+    CARD_RARITY("Rarity",
+            new String[] { "Mythic Rares", "Rares", "Uncommons", "Commons", "Basic Lands" },
+            new Function<Integer, ColumnDef>() {
+                @Override
+                public ColumnDef apply(final Integer groupIndex) {
+                    return null;
+                }
+            },
+            new Function<InventoryItem, Integer>() {
+                @Override
+                public Integer apply(final InventoryItem item) {
+                    if (item instanceof PaperCard) {
+                        switch (((PaperCard) item).getRarity()) {
+                        case MythicRare:
+                            return 0;
+                        case Rare:
+                            return 1;
+                        case Uncommon:
+                            return 2;
+                        case Common:
+                            return 3;
+                        case BasicLand:
+                            return 4;
+                        default:
+                            return -1; //show Special and Unknown in "Other" group
                         }
                     }
                     return -1;
