@@ -58,7 +58,7 @@ public class DeckProxy implements InventoryItem {
     public DeckProxy(IHasName deck, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<? extends IHasName> storage) {
         this(deck, type, "", storage, fnGetDeck);
     }
-    
+
     private DeckProxy(IHasName deck, GameType type, String path, IStorage<? extends IHasName> storage, Function<IHasName, Deck> fnGetDeck) {
         this.deck = deck;
         this.storage = storage;
@@ -85,13 +85,15 @@ public class DeckProxy implements InventoryItem {
     public String getPath() {
         return path;
     }
-    
+
     public CardEdition getEdition() {
-        if ( null == edition ) {
-            if ( deck instanceof PreconDeck )
+        if (edition == null) {
+            if (deck instanceof PreconDeck) {
                 edition = StaticData.instance().getEditions().get(((PreconDeck) deck).getEdition());
-            if ( !isGeneratedDeck() )
+            }
+            else if (!isGeneratedDeck()) {
                 edition = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getDeck().getAllCardsInASinglePool());
+            }
         }
         return edition;
     }
@@ -228,26 +230,26 @@ public class DeckProxy implements InventoryItem {
             }
         };
     }
-    
+
     public void reloadFromStorage() {
         if (storage != null) {
             deck = storage.get(getName());
         }
         invalidateCache();
     }
-    
+
     @SuppressWarnings("unchecked")
     public void updateInStorage() {
         if (storage instanceof StorageImmediatelySerialized<?>) {
             ((StorageImmediatelySerialized<IHasName>)storage).add(deck);
         }
     }
-    
-    public void deleteFromStorage() { 
-        if (storage instanceof StorageImmediatelySerialized<?>) {
+
+    public void deleteFromStorage() {
+        if (storage != null) {
             storage.delete(getName());
         }
-    }    
+    }
 
     private static class ThemeDeckGenerator extends DeckProxy {
         private final String name;
@@ -340,5 +342,4 @@ public class DeckProxy implements InventoryItem {
         }
         return decks;
     }
-    
 }
