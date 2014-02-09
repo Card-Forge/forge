@@ -538,7 +538,7 @@ public class StaticAbilityContinuous {
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(true);
                 }
-                for (final CardTraitBase rE : affectedCard.getReplacementEffects()) {
+                for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(true);
                 }
             }

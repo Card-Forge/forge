@@ -272,7 +272,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     }
 
                     // give back suppressed replacement effects
-                    for (final CardTraitBase re : removedReplacements) {
+                    for (final ReplacementEffect re : removedReplacements) {
                         re.setTemporarilySuppressed(false);
                     }
                 }

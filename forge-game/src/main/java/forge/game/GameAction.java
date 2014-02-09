@@ -32,6 +32,7 @@ import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -153,7 +154,7 @@ public class GameAction {
                 for (final Trigger trigger : copied.getTriggers()) {
                     trigger.setHostCard(copied);
                 }
-                for (final CardTraitBase repl : copied.getReplacementEffects()) {
+                for (final ReplacementEffect repl : copied.getReplacementEffects()) {
                     repl.setHostCard(copied);
                 }
                 if (c.getName().equals("Skullbriar, the Walking Grave")) {
