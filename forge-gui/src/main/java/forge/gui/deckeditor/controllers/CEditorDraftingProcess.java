@@ -60,6 +60,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private String ccAddLabel = "Add card";
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
+    private boolean saved = false;
 
     //========== Constructor
 
@@ -217,6 +218,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             }
         }
 
+        saved = true;
+
         // Construct computer's decks and save draft
         final Deck[] computer = this.boosterDraft.getDecks();
 
@@ -226,11 +229,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         Singletons.getModel().getDecks().getDraft().add(finishedDraft);
         CSubmenuDraft.SINGLETON_INSTANCE.update();
+        FScreen.DRAFTING_PROCESS.close();
 
+        //open draft pool in Draft Deck Editor right away
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(Singletons.getModel().getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT));
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(null, s);
-        FScreen.DRAFTING_PROCESS.close();
     }
 
     //========== Overridden from ACEditorBase
@@ -308,7 +312,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public boolean canSwitchAway(boolean isClosing) {
-        if (isClosing) {
+        if (isClosing && !saved) {
             String userPrompt =
                     "This will end the current draft and you will not be able to resume.\n\n" +
                             "Leave anyway?";
