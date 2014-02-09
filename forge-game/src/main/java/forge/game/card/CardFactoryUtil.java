@@ -2991,46 +2991,6 @@ public class CardFactoryUtil {
      * 
      */
     public static final void parseKeywords(final Card card, final String cardName) {
-        if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a") != -1) {
-            final int n = hasKeyword(card,
-                    "CARDNAME enters the battlefield tapped unless you control a");
-            final String parse = card.getKeyword().get(n).toString();
-
-            String splitString;
-            if (parse.contains(" or a ")) {
-                splitString = " or a ";
-            } else {
-                splitString = " or an ";
-            }
-
-            final String[] types = parse.substring(60, parse.length() - 1).split(splitString);
-
-            card.addComesIntoPlayCommand(new Command() {
-                private static final long serialVersionUID = 403635232455049834L;
-
-                @Override
-                public void run() {
-                    final List<Card> clICtrl = card.getOwner().getCardsIn(ZoneType.Battlefield);
-
-                    boolean fnd = false;
-
-                    for (int i = 0; i < clICtrl.size(); i++) {
-                        final Card c = clICtrl.get(i);
-                        for (final String type : types) {
-                            if (c.isType(type.trim())) {
-                                fnd = true;
-                            }
-                        }
-                    }
-
-                    if (!fnd) {
-                        // it enters the battlefield this way, and should not
-                        // fire triggers
-                        card.setTapped(true);
-                    }
-                }
-            });
-        }
         if (hasKeyword(card, "Sunburst") != -1) {
             final Command sunburstCIP = new Command() {
                 private static final long serialVersionUID = 1489845860231758299L;

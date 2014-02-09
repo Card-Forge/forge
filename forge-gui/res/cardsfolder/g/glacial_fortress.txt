@@ -1,7 +1,10 @@
 Name:Glacial Fortress
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped unless you control a Plains or an Island.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control a Plains or an Island.
+SVar:LandTapped:AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar | ConditionSVarCompare$ EQ0 | References$ ETBCheckSVar | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:ETBCheckSVar:Count$Valid Island.YouCtrl,Plains.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_fortress.jpg
