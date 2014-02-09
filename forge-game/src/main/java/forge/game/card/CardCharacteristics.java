@@ -17,14 +17,7 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import com.google.common.collect.Lists;
-
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.mana.ManaCost;
@@ -32,6 +25,12 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * TODO: Write javadoc for this type.

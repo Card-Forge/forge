@@ -17,10 +17,10 @@
  */
 package forge.gui.toolbox.itemmanager;
 
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-
 import forge.gui.toolbox.FSkin.SkinnedScrollPane;
+
+import javax.swing.*;
+import javax.swing.border.Border;
 
 
 /**

@@ -1,35 +1,6 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Vector;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.DeckSection;
@@ -40,41 +11,34 @@ import forge.gui.CardDetailPanel;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckchooser.DecksComboBoxEvent;
 import forge.gui.deckchooser.FDeckChooser;
-import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckchooser.IDecksComboBoxListener;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.controllers.CEditorVariant;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
-import forge.gui.home.EMenuGroup;
-import forge.gui.home.IVSubmenu;
-import forge.gui.home.LblHeader;
-import forge.gui.home.StartButton;
-import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBox;
-import forge.gui.toolbox.FComboBoxWrapper;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FMouseAdapter;
-import forge.gui.toolbox.FOptionPane;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FScrollPanel;
-import forge.gui.toolbox.FSkin;
+import forge.gui.home.*;
+import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
-import forge.gui.toolbox.FTextField;
-
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Assembles Swing components of constructed submenu singleton.

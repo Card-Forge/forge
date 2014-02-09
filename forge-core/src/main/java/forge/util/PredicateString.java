@@ -17,9 +17,8 @@
  */
 package forge.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Special predicate class to perform string operations.

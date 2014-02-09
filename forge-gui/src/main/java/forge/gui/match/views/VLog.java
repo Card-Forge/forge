@@ -17,15 +17,7 @@
  */
 package forge.gui.match.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
@@ -39,6 +31,11 @@ import forge.gui.match.controllers.CLog;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
 import forge.properties.ForgePreferences.FPref;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Assembles Swing components of game log report.

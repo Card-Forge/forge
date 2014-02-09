@@ -1,22 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.awt.BasicStroke;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import com.google.common.base.Predicate;
-
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
@@ -27,6 +11,13 @@ import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /** 
  * TODO: Write javadoc for this type.

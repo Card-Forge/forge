@@ -17,23 +17,6 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Element;
-import javax.swing.text.ElementIterator;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -41,18 +24,25 @@ import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBox;
-import forge.gui.toolbox.FHtmlViewer;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOptionPane;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextArea;
-import forge.item.PaperCard;
+import forge.gui.toolbox.*;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.view.FDialog;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.ElementIterator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * 

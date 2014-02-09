@@ -1,13 +1,13 @@
 package forge.gui.match.controllers;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import forge.Command;
 import forge.FThreads;
 import forge.game.GameLog;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VLog;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /** 
  * Controls the combat panel in the match UI.

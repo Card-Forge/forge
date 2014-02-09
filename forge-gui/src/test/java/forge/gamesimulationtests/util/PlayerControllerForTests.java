@@ -1,20 +1,8 @@
 package forge.gamesimulationtests.util;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
 import forge.ai.ability.ChangeZoneAi;
@@ -40,17 +28,12 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
-import forge.gui.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
@@ -58,13 +41,15 @@ import forge.gamesimulationtests.util.card.CardSpecification;
 import forge.gamesimulationtests.util.card.CardSpecificationHandler;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
-import forge.gamesimulationtests.util.playeractions.ActivateAbilityAction;
-import forge.gamesimulationtests.util.playeractions.CastSpellFromHandAction;
-import forge.gamesimulationtests.util.playeractions.DeclareAttackersAction;
-import forge.gamesimulationtests.util.playeractions.DeclareBlockersAction;
-import forge.gamesimulationtests.util.playeractions.PlayerActions;
+import forge.gamesimulationtests.util.playeractions.*;
+import forge.gui.player.HumanPlay;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.awt.event.MouseEvent;
+import java.util.*;
 
 /**
  * Default harmless implementation for tests.

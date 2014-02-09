@@ -1,10 +1,9 @@
 package forge.card;
 
-import java.util.List;
-
 import com.google.common.base.Supplier;
-
 import forge.item.PaperCard;
+
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

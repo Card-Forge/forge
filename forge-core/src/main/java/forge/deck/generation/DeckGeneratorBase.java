@@ -17,32 +17,21 @@
  */
 package forge.deck.generation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.ColorSet;
-import forge.card.ICardDatabase;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

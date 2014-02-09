@@ -1,13 +1,5 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -27,6 +19,12 @@ import forge.limited.LimitedPoolType;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Controls the draft submenu in the home UI.

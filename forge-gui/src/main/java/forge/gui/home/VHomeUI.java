@@ -17,37 +17,13 @@
  */
 package forge.gui.home;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.gui.framework.ILocalRepaint;
-import forge.gui.framework.IVTopLevelUI;
+import forge.gui.framework.*;
 import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
 import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
-import forge.gui.home.quest.VSubmenuChallenges;
-import forge.gui.home.quest.VSubmenuDuels;
-import forge.gui.home.quest.VSubmenuQuestData;
-import forge.gui.home.quest.VSubmenuQuestDecks;
-import forge.gui.home.quest.VSubmenuQuestPrefs;
+import forge.gui.home.quest.*;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.home.sanctioned.VSubmenuDraft;
 import forge.gui.home.sanctioned.VSubmenuSealed;
@@ -57,16 +33,23 @@ import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.settings.VSubmenuReleaseNotes;
 import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuCommander;
-//import forge.gui.home.variant.VSubmenuPlanechase;
-//import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
-import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.NewConstants;
 import forge.view.FView;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
+//import forge.gui.home.variant.VSubmenuPlanechase;
+//import forge.gui.home.variant.VSubmenuVanguard;
 
 /**
  * Top level view class for home UI drag layout.<br>

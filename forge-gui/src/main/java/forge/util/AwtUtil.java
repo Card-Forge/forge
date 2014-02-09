@@ -1,7 +1,6 @@
 package forge.util;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class AwtUtil {

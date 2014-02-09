@@ -17,17 +17,15 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import forge.gui.SOverlayUtils;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import forge.gui.SOverlayUtils;
-import forge.gui.toolbox.FSkin.SkinnedPanel;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.

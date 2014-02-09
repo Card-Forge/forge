@@ -1,16 +1,5 @@
 package forge.gui.home.settings;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JCheckBox;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Command;
 import forge.Constant.Preferences;
 import forge.Singletons;
@@ -26,6 +15,14 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controls the preferences submenu in the home UI.

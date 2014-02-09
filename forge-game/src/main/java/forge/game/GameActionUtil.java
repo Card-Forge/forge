@@ -17,34 +17,27 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.MagicColor;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
-import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**

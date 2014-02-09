@@ -1,39 +1,23 @@
 package forge.limited;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
-
-import forge.card.CardAiHints;
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.ColorSet;
-import forge.card.DeckHints;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
 
 /**
  * Limited format deck.

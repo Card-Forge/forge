@@ -1,19 +1,5 @@
 package forge.gui.home.quest;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
@@ -21,6 +7,13 @@ import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextArea;
 import forge.quest.QuestEvent;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /** 
  * Panels for displaying duels and challenges.<br>

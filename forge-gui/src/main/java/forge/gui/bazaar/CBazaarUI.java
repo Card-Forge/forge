@@ -1,13 +1,12 @@
 package forge.gui.bazaar;
 
-import javax.swing.SwingUtilities;
-
 import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
 import forge.quest.bazaar.QuestBazaarManager;
+
+import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

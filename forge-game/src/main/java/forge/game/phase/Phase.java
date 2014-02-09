@@ -17,14 +17,13 @@
  */
 package forge.game.phase;
 
+import com.google.common.collect.Lists;
+import forge.Command;
+import forge.game.player.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.google.common.collect.Lists;
-
-import forge.Command;
-import forge.game.player.Player;
 
 
 /**

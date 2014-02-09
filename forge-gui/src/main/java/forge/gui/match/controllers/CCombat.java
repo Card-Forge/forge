@@ -1,7 +1,5 @@
 package forge.gui.match.controllers;
 
-import java.util.List;
-
 import forge.Command;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -11,6 +9,8 @@ import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VCombat;
 import forge.util.Lang;
+
+import java.util.List;
 
 /** 
  * Controls the combat panel in the match UI.

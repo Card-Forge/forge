@@ -1,9 +1,5 @@
 package forge.gui.home;
 
-import java.util.List;
-
-import javax.swing.JMenu;
-
 import forge.Command;
 import forge.Singletons;
 import forge.gui.FNetOverlay;
@@ -18,6 +14,9 @@ import forge.net.NetServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
+
+import javax.swing.*;
+import java.util.List;
 
 /**
  * Assembles Swing components of exit submenu option singleton.

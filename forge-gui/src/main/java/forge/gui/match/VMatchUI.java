@@ -1,25 +1,14 @@
 package forge.gui.match;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-
 import forge.Singletons;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.IVTopLevelUI;
-import forge.gui.framework.SRearrangingUtil;
-import forge.gui.framework.VEmptyDoc;
-import forge.gui.match.views.VCommand;
-import forge.gui.match.views.VDev;
-import forge.gui.match.views.VField;
-import forge.gui.match.views.VHand;
-import forge.gui.match.views.VPrompt;
+import forge.gui.framework.*;
+import forge.gui.match.views.*;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Top level view class for match UI drag layout.<br>

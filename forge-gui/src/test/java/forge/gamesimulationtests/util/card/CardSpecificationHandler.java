@@ -1,13 +1,13 @@
 package forge.gamesimulationtests.util.card;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.gamesimulationtests.util.IntegerConstraint;
 import forge.gamesimulationtests.util.SpecificationHandler;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
+
+import java.util.List;
 
 public class CardSpecificationHandler extends SpecificationHandler<Card, CardSpecification> {
 	public static final CardSpecificationHandler INSTANCE = new CardSpecificationHandler();

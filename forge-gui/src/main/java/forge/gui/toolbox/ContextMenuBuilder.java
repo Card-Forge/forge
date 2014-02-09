@@ -1,6 +1,6 @@
 package forge.gui.toolbox;
 
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 
 public interface ContextMenuBuilder {
     void buildContextMenu(JPopupMenu menu);

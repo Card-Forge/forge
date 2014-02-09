@@ -17,16 +17,15 @@
  */
 package forge.game.zone;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+
+import java.util.List;
 
 /**
  * <p>

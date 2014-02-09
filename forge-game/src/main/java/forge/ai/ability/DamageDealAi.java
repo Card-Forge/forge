@@ -1,17 +1,8 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -29,6 +20,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class DamageDealAi extends DamageAiBase {
     @Override

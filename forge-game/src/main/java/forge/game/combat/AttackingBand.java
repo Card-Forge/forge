@@ -1,11 +1,11 @@
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

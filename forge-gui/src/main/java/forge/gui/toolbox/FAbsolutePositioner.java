@@ -17,12 +17,8 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Rectangle;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Utility to manage absolutely positioned components

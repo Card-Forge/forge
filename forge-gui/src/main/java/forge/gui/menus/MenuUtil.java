@@ -1,15 +1,13 @@
 package forge.gui.menus;
 
-import java.awt.Toolkit;
-import java.io.IOException;
-
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
-
 import forge.Singletons;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
 import forge.gui.toolbox.imaging.ImageUtil;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public final class MenuUtil {
     private MenuUtil() { }

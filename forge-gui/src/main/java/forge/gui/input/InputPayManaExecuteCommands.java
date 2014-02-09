@@ -17,13 +17,13 @@
  */
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.awt.event.MouseEvent;
 
 //if cost is paid, Command.execute() is called
 

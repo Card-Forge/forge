@@ -17,20 +17,8 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JPanel;
-
 import forge.Command;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.DragTab;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.ILocalRepaint;
-import forge.gui.framework.IVDoc;
+import forge.gui.framework.*;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
@@ -38,6 +26,10 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * Assembles Swing components of button dock area.

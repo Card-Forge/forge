@@ -1,11 +1,10 @@
 package forge.gamesimulationtests.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public abstract class SpecificationHandler<TYPE, SPECIFICATION extends Specification<TYPE>> {
 	public final TYPE find( Collection<TYPE> items, final SPECIFICATION specification ) {

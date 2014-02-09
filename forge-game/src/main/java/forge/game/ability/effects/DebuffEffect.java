@@ -1,15 +1,15 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import forge.Command;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class DebuffEffect extends SpellAbilityEffect {
 

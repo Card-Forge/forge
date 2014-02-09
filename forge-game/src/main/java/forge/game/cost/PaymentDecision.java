@@ -1,13 +1,13 @@
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -3,7 +3,6 @@ package forge.gui.deckeditor.controllers;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardDb;
@@ -11,17 +10,13 @@ import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.deck.generation.DeckGenerator2Color;
-import forge.deck.generation.DeckGenerator3Color;
-import forge.deck.generation.DeckGenerator5Color;
-import forge.deck.generation.DeckGeneratorBase;
-import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.deck.generation.*;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.ICDoc;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 

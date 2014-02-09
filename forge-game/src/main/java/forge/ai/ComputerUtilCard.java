@@ -1,22 +1,9 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -24,17 +11,18 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /** 
  * TODO: Write javadoc for this type.

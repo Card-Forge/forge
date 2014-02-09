@@ -1,34 +1,19 @@
 package forge.game;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.google.common.eventbus.Subscribe;
-
 import forge.game.card.Card;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardDamaged;
+import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventMulligan;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPlayerDamaged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnPhase;
-import forge.game.event.IGameEventVisitor;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     private final GameLog log;

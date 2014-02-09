@@ -1,14 +1,13 @@
 package forge.gui.toolbox;
 
-import java.awt.Insets;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import forge.gui.toolbox.FSkin.SkinnedScrollPane;
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 import javax.swing.border.Border;
 import javax.swing.event.DocumentListener;
-
-import forge.gui.toolbox.FSkin.SkinnedScrollPane;
-import forge.gui.toolbox.FSkin.SkinnedTextArea;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class FTextEditor extends SkinnedScrollPane {

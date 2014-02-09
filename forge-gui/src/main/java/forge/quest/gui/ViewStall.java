@@ -17,20 +17,6 @@
  */
 package forge.quest.gui;
 
-import java.awt.Component;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.bazaar.VBazaarUI;
 import forge.gui.toolbox.FLabel;
@@ -41,6 +27,16 @@ import forge.quest.QuestController;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestStallDefinition;
 import forge.quest.data.QuestAssets;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

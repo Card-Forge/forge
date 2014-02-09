@@ -1,26 +1,9 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Command;
 import forge.Singletons;
 import forge.card.MagicColor;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckBase;
-import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
+import forge.deck.*;
 import forge.game.GameType;
 import forge.gui.GuiChoose;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -30,8 +13,8 @@ import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FOptionPane;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.limited.LimitedPoolType;
 import forge.limited.ReadDraftRankings;
 import forge.limited.SealedCardPoolGenerator;
@@ -39,6 +22,16 @@ import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /** 
  * Controls the sealed submenu in the home UI.

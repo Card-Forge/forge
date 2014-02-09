@@ -1,36 +1,16 @@
 package forge.gui.toolbox;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
+
+import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.

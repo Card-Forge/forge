@@ -17,13 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Dimension;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import net.miginfocom.swing.MigLayout;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -36,6 +29,12 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CAntes;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /** 
  * Assembles Swing components of card ante area.

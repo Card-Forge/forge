@@ -1,11 +1,11 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.awt.event.MouseEvent;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
     public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility) {

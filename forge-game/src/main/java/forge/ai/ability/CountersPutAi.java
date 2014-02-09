@@ -1,18 +1,8 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -27,6 +17,11 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 public class CountersPutAi extends SpellAbilityAi {
     @Override

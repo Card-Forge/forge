@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Collection;
-import java.util.Random;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -14,6 +11,9 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Collection;
+import java.util.Random;
 
 
 public class DigAi extends SpellAbilityAi {

@@ -17,11 +17,11 @@
  */
 package forge.game.staticability;
 
-import java.util.HashMap;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+
+import java.util.HashMap;
 
 /**
  * The Class StaticAbility_PreventDamage.

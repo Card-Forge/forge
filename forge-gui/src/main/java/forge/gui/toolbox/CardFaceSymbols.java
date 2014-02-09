@@ -17,16 +17,15 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Graphics;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.FSkin.SkinImage;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * <p>

@@ -1,9 +1,9 @@
 package forge.game;
 
-import java.util.HashMap;
-
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
+
+import java.util.HashMap;
 
 /** 
  * Represents the planar dice for Planechase games.

@@ -18,31 +18,23 @@
 
 package forge.gui;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.Collection;
-import java.util.List;
-
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
-import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import forge.FThreads;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FScrollPane;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties

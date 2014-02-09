@@ -17,18 +17,9 @@
  */
 package forge.game.zone;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
@@ -37,6 +28,10 @@ import forge.game.player.Player;
 import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <p>

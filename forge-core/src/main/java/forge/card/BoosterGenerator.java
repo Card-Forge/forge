@@ -17,31 +17,22 @@
  */
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardEdition.FoilType;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
 
 /**
  * <p>

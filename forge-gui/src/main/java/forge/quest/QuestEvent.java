@@ -17,15 +17,14 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.base.Function;
-
 import forge.deck.Deck;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>

@@ -17,11 +17,11 @@
  */
 package forge.view;
 
-import javax.swing.JButton;
-
 import forge.FThreads;
 import forge.gui.SOverlayUtils;
 import forge.gui.match.VMatchUI;
+
+import javax.swing.*;
 
 /**
  * Manages match UI OK/Cancel button enabling and focus

@@ -1,15 +1,13 @@
 package forge.game.ability;
 
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
-
-import org.apache.commons.lang3.StringUtils;
-
-
 import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * <p>

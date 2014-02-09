@@ -17,17 +17,15 @@
  */
 package forge.deck.generation;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.collect.Lists;
-
 import forge.card.ColorSet;
 import forge.card.ICardDatabase;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.List;
 
 /**
  * <p>

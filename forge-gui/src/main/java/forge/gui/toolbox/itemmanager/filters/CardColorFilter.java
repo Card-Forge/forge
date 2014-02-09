@@ -1,13 +1,13 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import javax.swing.JPanel;
-
 import com.google.common.base.Predicate;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
-import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
+import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.item.PaperCard;
+
+import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

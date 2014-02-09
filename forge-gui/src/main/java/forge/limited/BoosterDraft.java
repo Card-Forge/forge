@@ -17,20 +17,7 @@
  */
 package forge.limited;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.NoSuchElementException;
-import java.util.Stack;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.google.common.base.Supplier;
-
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardEdition;
@@ -41,8 +28,8 @@ import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.gui.GuiChoose;
 import forge.gui.toolbox.FOptionPane;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
 import forge.properties.NewConstants;
@@ -50,6 +37,11 @@ import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.File;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * 

@@ -17,14 +17,14 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class CostReturn.

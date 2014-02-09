@@ -1,9 +1,8 @@
 package forge.gui.toolbox;
 
-import javax.swing.JEditorPane;
-import javax.swing.SwingUtilities;
-
 import forge.gui.toolbox.FSkin.SkinnedEditorPane;
+
+import javax.swing.*;
 
 /** 
  * Viewer for HTML

@@ -1,13 +1,13 @@
 package forge.quest;
 
+import forge.Singletons;
+import forge.item.PaperCard;
+import forge.util.ItemPool;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import forge.Singletons;
-import forge.item.PaperCard;
-import forge.util.ItemPool;
 
 /** 
  * Allows the player to choose a duplicate copy of a currently owned card.

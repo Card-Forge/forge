@@ -1,17 +1,5 @@
 package forge.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.FocusManager;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.toolbox.FLabel;
@@ -20,6 +8,13 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedButton;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.FocusManager;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
  * All overlay interaction is handled here.

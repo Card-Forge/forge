@@ -1,9 +1,8 @@
 package forge.gui.game;
 
+import forge.gui.CardDetailPanel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import forge.gui.CardDetailPanel;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson

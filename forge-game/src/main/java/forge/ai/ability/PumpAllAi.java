@@ -1,11 +1,6 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -20,6 +15,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PumpAllAi extends PumpAiBase {
 

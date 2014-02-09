@@ -1,8 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -11,6 +8,9 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ZoneExchangeEffect extends SpellAbilityEffect {

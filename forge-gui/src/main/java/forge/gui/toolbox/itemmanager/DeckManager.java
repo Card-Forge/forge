@@ -1,22 +1,5 @@
 package forge.gui.toolbox.itemmanager;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.swing.JMenu;
-import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.DeckBase;
@@ -33,20 +16,22 @@ import forge.gui.framework.FScreen;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.itemmanager.filters.DeckColorFilter;
-import forge.gui.toolbox.itemmanager.filters.DeckFolderFilter;
-import forge.gui.toolbox.itemmanager.filters.DeckFormatFilter;
-import forge.gui.toolbox.itemmanager.filters.DeckQuestWorldFilter;
-import forge.gui.toolbox.itemmanager.filters.DeckSearchFilter;
-import forge.gui.toolbox.itemmanager.filters.DeckSetFilter;
-import forge.gui.toolbox.itemmanager.filters.ItemFilter;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.ItemCellRenderer;
-import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.ItemListView;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.toolbox.itemmanager.filters.*;
+import forge.gui.toolbox.itemmanager.views.*;
 import forge.item.InventoryItem;
 import forge.quest.QuestWorld;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /** 
  * ItemManager for cards

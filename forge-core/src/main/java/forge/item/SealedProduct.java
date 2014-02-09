@@ -18,19 +18,11 @@
 
 package forge.item;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.BoosterGenerator;
 import forge.card.BoosterSlots;
@@ -38,6 +30,12 @@ import forge.card.CardRulesPredicates;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class SealedProduct implements InventoryItemFromSet {
     protected final Template contents;

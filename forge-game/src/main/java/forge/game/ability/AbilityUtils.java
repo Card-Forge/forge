@@ -1,23 +1,12 @@
 package forge.game.ability;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.collect.Iterables;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -26,6 +15,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

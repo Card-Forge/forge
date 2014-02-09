@@ -1,26 +1,15 @@
 package forge.gui.toolbox.itemmanager;
 
-import java.util.List;
-
-import javax.swing.JMenu;
-
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;
 import forge.gui.home.quest.DialogChooseSets;
-import forge.gui.toolbox.itemmanager.filters.CardCMCFilter;
-import forge.gui.toolbox.itemmanager.filters.CardCMCRangeFilter;
-import forge.gui.toolbox.itemmanager.filters.CardColorFilter;
-import forge.gui.toolbox.itemmanager.filters.CardFormatFilter;
-import forge.gui.toolbox.itemmanager.filters.CardPowerFilter;
-import forge.gui.toolbox.itemmanager.filters.CardQuestWorldFilter;
-import forge.gui.toolbox.itemmanager.filters.CardSearchFilter;
-import forge.gui.toolbox.itemmanager.filters.CardSetFilter;
-import forge.gui.toolbox.itemmanager.filters.CardToughnessFilter;
-import forge.gui.toolbox.itemmanager.filters.CardTypeFilter;
-import forge.gui.toolbox.itemmanager.filters.ItemFilter;
+import forge.gui.toolbox.itemmanager.filters.*;
 import forge.item.PaperCard;
 import forge.quest.QuestWorld;
+
+import javax.swing.*;
+import java.util.List;
 
 /** 
  * ItemManager for cards

@@ -1,7 +1,5 @@
 package forge.game.ability;
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
@@ -10,6 +8,8 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.TargetRestrictions;
+
+import java.util.Map;
 
 public class StaticAbilityApiBased extends AbilityStatic {
 

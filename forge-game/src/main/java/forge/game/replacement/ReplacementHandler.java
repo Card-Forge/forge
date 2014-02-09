@@ -17,14 +17,6 @@
  */
 package forge.game.replacement;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
@@ -35,6 +27,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 /**
  * TODO: Write javadoc for this type.

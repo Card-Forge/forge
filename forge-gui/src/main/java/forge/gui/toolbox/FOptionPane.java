@@ -1,19 +1,14 @@
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
+import forge.gui.toolbox.FSkin.SkinImage;
+import forge.view.FDialog;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import forge.gui.toolbox.FSkin.SkinImage;
-import forge.view.FDialog;
 
 /**
  * Class to replace JOptionPane using skinned dialogs

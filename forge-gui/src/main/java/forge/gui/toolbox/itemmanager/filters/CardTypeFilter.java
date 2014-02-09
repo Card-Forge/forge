@@ -1,19 +1,17 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.card.CardRules;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
+import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.item.PaperCard;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

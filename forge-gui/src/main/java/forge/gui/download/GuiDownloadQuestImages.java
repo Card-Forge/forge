@@ -17,10 +17,10 @@
  */
 package forge.gui.download;
 
+import forge.properties.NewConstants;
+
 import java.util.Map;
 import java.util.TreeMap;
-
-import forge.properties.NewConstants;
 
 /** */
 @SuppressWarnings("serial")

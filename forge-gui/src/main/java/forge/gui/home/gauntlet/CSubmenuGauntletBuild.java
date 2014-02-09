@@ -1,16 +1,5 @@
 package forge.gui.home.gauntlet;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JFileChooser;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileFilter;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import forge.Command;
 import forge.deck.Deck;
 import forge.gauntlet.GauntletData;
@@ -18,6 +7,13 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FOptionPane;
 import forge.properties.NewConstants;
+import org.apache.commons.lang3.ArrayUtils;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Controls the "build gauntlet" submenu in the home UI.

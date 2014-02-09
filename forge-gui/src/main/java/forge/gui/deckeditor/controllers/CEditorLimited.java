@@ -17,10 +17,7 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.util.Map.Entry;
-
 import com.google.common.base.Supplier;
-
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -39,6 +36,8 @@ import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.util.storage.IStorage;
+
+import java.util.Map.Entry;
 
 /**
  * Child controller for limited deck editor UI.

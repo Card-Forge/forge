@@ -17,15 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.GameType;
@@ -41,6 +32,13 @@ import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences.FPref;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /** 
  * Assembles Swing components of players report.

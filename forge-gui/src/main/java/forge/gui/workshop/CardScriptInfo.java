@@ -17,17 +17,16 @@
  */
 package forge.gui.workshop;
 
+import forge.CardStorageReader;
+import forge.card.CardRules;
+import forge.gui.toolbox.FOptionPane;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.lang3.StringUtils;
-
-import forge.CardStorageReader;
-import forge.card.CardRules;
-import forge.gui.toolbox.FOptionPane;
 
 public final class CardScriptInfo {
     private String text;

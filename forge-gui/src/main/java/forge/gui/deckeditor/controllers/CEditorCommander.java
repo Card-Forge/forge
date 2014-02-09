@@ -17,14 +17,8 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardRulesPredicates;
@@ -39,10 +33,15 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.

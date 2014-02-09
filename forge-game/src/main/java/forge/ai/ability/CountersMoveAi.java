@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -15,6 +12,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class CountersMoveAi extends SpellAbilityAi {
     @Override

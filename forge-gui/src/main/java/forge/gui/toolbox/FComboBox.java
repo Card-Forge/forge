@@ -1,28 +1,15 @@
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.util.Vector;
+import forge.gui.toolbox.FSkin.SkinFont;
+import forge.gui.toolbox.FSkin.SkinnedComboBox;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
-
-import forge.gui.toolbox.FSkin.SkinFont;
-import forge.gui.toolbox.FSkin.SkinnedComboBox;
+import java.awt.*;
+import java.util.Vector;
 
 @SuppressWarnings("serial")
 public class FComboBox<E> extends SkinnedComboBox<E> {

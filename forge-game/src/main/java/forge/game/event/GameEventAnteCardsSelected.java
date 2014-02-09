@@ -1,7 +1,6 @@
 package forge.game.event;
 
 import com.google.common.collect.Multimap;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 

@@ -17,11 +17,6 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map.Entry;
-
 import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRules;
@@ -35,17 +30,17 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * <p>

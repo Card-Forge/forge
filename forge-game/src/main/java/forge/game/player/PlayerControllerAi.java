@@ -1,32 +1,12 @@
 package forge.game.player;
 
-import java.awt.event.MouseEvent;
-import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-
-import forge.ai.AiBlockController;
-import forge.ai.AiController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
+import forge.ai.*;
 import forge.ai.ability.CharmAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -39,12 +19,7 @@ import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.ai.AiProps;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardShields;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -53,19 +28,20 @@ import forge.game.cost.CostPartMana;
 import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.awt.event.MouseEvent;
+import java.security.InvalidParameterException;
+import java.util.*;
 
 
 /** 

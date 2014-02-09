@@ -17,8 +17,6 @@
  */
 package forge.gui.match.views;
 
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -29,6 +27,9 @@ import forge.gui.match.controllers.CCommand;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.view.arcane.PlayArea;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /** 
  * Assembles Swing components of a player command instance.

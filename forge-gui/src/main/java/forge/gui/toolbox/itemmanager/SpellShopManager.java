@@ -1,9 +1,9 @@
 package forge.gui.toolbox.itemmanager;
 
-import javax.swing.JMenu;
-
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.item.InventoryItem;
+
+import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

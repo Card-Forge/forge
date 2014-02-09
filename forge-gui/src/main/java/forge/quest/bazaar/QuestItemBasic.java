@@ -17,14 +17,12 @@
  */
 package forge.quest.bazaar;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.QuestIcons;
 import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.quest.data.QuestAssets;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>

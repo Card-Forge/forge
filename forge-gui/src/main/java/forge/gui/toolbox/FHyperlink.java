@@ -1,15 +1,12 @@
 package forge.gui.toolbox;
 
-import java.awt.Cursor;
-import java.awt.Desktop;
-import java.awt.Toolkit;
+import forge.Command;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javax.swing.SwingWorker;
-
-import forge.Command;
 
 
 @SuppressWarnings("serial")

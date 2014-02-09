@@ -1,24 +1,5 @@
 package forge.gui.framework;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.swing.JPanel;
-
 import forge.gui.FNetOverlay;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
@@ -26,6 +7,12 @@ import forge.view.FDialog;
 import forge.view.FFrame;
 import forge.view.FNavigationBar;
 import forge.view.FView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Package-private utilities for resizing drag behavior using

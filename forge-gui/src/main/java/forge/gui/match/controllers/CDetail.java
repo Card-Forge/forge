@@ -17,8 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.event.MouseEvent;
-
 import forge.Command;
 import forge.Singletons;
 import forge.game.card.Card;
@@ -28,6 +26,8 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
+
+import java.awt.event.MouseEvent;
 
 /**
  * Controls the card detail area in the match UI.

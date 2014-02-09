@@ -17,19 +17,17 @@
  */
 package forge.gui.download;
 
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
 @SuppressWarnings("serial")
 public class GuiDownloadSetPicturesLQ extends GuiDownloader {

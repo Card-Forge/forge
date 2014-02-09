@@ -17,13 +17,8 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.LayoutManager;
-import java.awt.MenuComponent;
-import java.awt.PopupMenu;
-
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
+import java.awt.*;
 
 /** 
  * An extension of FScrollPane that can be used as a panel

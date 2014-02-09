@@ -1,12 +1,12 @@
 package forge.gui.home.quest;
 
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.quest.VSubmenuQuestPrefs.PrefInput;
 import forge.quest.data.QuestPreferences;
+
+import javax.swing.*;
 
 /** 
  * Controls the quest preferences submenu in the home UI.

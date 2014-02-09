@@ -17,16 +17,15 @@
  */
 package forge.game.card;
 
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.PredicateString;
+
+import java.util.List;
 
 
 /**

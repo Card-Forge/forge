@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Random;
-
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -9,6 +7,8 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
+
+import java.util.Random;
 
 public class RevealAi extends RevealAiBase {
     @Override

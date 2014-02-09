@@ -1,13 +1,13 @@
 package forge.game.ability.effects;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DelayedTriggerEffect extends SpellAbilityEffect {
 

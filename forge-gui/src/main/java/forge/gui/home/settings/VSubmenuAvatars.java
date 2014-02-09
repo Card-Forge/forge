@@ -1,12 +1,5 @@
 package forge.gui.home.settings;
 
-import java.awt.Dimension;
-import java.util.Map;
-
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.WrapLayout;
@@ -21,6 +14,11 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.properties.ForgePreferences.FPref;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Map;
 
 /** 
  * Assembles Swing components of avatars submenu singleton.

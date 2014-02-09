@@ -17,15 +17,14 @@
  */
 package forge.gui.workshop;
 
-import java.util.List;
-
-import javax.swing.JMenu;
-
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.workshop.menus.CWorkshopUIMenus;
+
+import javax.swing.*;
+import java.util.List;
 
 /**
  * Constructs instance of workshop UI controller, used as a single point of

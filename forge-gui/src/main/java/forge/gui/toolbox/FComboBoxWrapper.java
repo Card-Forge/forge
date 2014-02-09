@@ -1,18 +1,15 @@
 package forge.gui.toolbox;
 
-import java.awt.Container;
+import forge.gui.toolbox.FComboBox.TextAlignment;
+import forge.gui.toolbox.FSkin.SkinFont;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Vector;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.JComponent;
-import javax.swing.ListCellRenderer;
-
-import forge.gui.toolbox.FComboBox.TextAlignment;
-import forge.gui.toolbox.FSkin.SkinFont;
 
 /** 
  * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)

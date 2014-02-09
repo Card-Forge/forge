@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -11,6 +9,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+
+import java.util.List;
 
 public class TapAi extends TapAiBase {
     @Override

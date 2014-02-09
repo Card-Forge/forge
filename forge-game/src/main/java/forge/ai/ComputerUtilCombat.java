@@ -17,13 +17,7 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
@@ -46,6 +40,11 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -605,7 +604,7 @@ public class ComputerUtilCombat {
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
             Combat combat) {
         final Game game = attacker.getGame();
-        final HashMap<String, String> trigParams = trigger.getMapParams();
+        final Map<String, String> trigParams = trigger.getMapParams();
         boolean willTrigger = false;
         final Card source = trigger.getHostCard();
         if (combat == null) {
@@ -789,7 +788,7 @@ public class ComputerUtilCombat {
         }
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
-            final HashMap<String, String> trigParams = trigger.getMapParams();
+            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)
@@ -902,7 +901,7 @@ public class ComputerUtilCombat {
         }
         theTriggers.addAll(attacker.getTriggers());
         for (final Trigger trigger : theTriggers) {
-            final HashMap<String, String> trigParams = trigger.getMapParams();
+            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)
@@ -1079,7 +1078,7 @@ public class ComputerUtilCombat {
         }
 
         for (final Trigger trigger : theTriggers) {
-            final HashMap<String, String> trigParams = trigger.getMapParams();
+            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, combat)
@@ -1245,7 +1244,7 @@ public class ComputerUtilCombat {
         }
 
         for (final Trigger trigger : theTriggers) {
-            final HashMap<String, String> trigParams = trigger.getMapParams();
+            final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, combat)
@@ -1376,7 +1375,7 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            HashMap<String, String> trigParams = trigger.getMapParams();
+            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)) {
@@ -1431,7 +1430,7 @@ public class ComputerUtilCombat {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            HashMap<String, String> trigParams = trigger.getMapParams();
+            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
             if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)) {

@@ -1,21 +1,15 @@
 package forge.gui.framework;
 
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
 import forge.view.FView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Package-private utilities for rearranging drag behavior using

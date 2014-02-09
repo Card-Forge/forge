@@ -1,14 +1,13 @@
 package forge.gauntlet;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import forge.deck.Deck;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import forge.deck.Deck;
 
 
 /**

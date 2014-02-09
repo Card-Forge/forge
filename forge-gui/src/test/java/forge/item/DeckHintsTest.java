@@ -1,18 +1,16 @@
 package forge.item;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import junit.framework.Assert;
-
-import org.testng.annotations.Test;
-
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.DeckHints;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
+import junit.framework.Assert;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tests for DeckHints.

@@ -17,13 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.io.File;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -52,6 +45,13 @@ import forge.item.PaperCard;
 import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
+
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.io.File;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * Controls the dock panel in the match UI.

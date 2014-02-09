@@ -17,13 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -31,6 +24,12 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>

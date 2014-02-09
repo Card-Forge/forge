@@ -1,10 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import forge.Command;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
@@ -18,6 +13,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method

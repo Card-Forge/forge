@@ -17,17 +17,6 @@
  */
 package forge.deck.io;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.gui.toolbox.FOptionPane;
@@ -35,6 +24,16 @@ import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 /**
  * TODO: Write javadoc for this type.

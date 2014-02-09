@@ -1,10 +1,10 @@
 package forge.util;
 
+import com.google.common.base.Supplier;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
-
-import com.google.common.base.Supplier;
 
 /** 
  * TODO: Write javadoc for this type.

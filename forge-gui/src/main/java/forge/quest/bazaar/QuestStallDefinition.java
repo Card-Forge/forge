@@ -17,13 +17,12 @@
  */
 package forge.quest.bazaar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-
 import forge.gui.toolbox.FSkin.QuestIcons;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

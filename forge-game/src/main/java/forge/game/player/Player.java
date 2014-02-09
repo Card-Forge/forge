@@ -17,29 +17,13 @@
  */
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.GlobalRuleChange;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -47,13 +31,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventMulligan;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPlayerDamaged;
-import forge.game.event.GameEventPlayerLivesChanged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventShuffle;
+import forge.game.event.*;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -73,6 +51,8 @@ import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.util.Lang;
 import forge.util.MyRandom;
+
+import java.util.*;
 
 /**
  * <p>

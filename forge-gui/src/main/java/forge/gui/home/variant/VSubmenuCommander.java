@@ -1,34 +1,20 @@
 package forge.gui.home.variant;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.ScrollPaneConstants;
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.home.EMenuGroup;
-import forge.gui.home.IVSubmenu;
-import forge.gui.home.LblHeader;
-import forge.gui.home.StartButton;
-import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTabbedPane;
+import forge.gui.home.*;
+import forge.gui.toolbox.*;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.

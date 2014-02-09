@@ -17,10 +17,7 @@
  */
 package forge.game.phase;
 
-import java.util.HashMap;
-import java.util.List;
 import com.google.common.base.Predicate;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -35,6 +32,9 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>

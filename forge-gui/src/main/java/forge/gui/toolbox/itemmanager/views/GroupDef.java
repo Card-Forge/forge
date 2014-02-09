@@ -1,7 +1,6 @@
 package forge.gui.toolbox.itemmanager.views;
 
 import com.google.common.base.Function;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.gui.deckeditor.DeckProxy;

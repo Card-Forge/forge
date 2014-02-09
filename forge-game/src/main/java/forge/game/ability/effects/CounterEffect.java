@@ -1,10 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -14,6 +9,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override

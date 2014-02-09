@@ -18,25 +18,22 @@
 
 package forge.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.AbstractListModel;
-import javax.swing.Icon;
-import javax.swing.JList;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import forge.game.card.Card;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.item.PaperCard;
 import forge.view.FDialog;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A simple class that shows a list of cards in a dialog with preview in its

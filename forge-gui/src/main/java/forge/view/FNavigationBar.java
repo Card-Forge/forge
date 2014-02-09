@@ -1,28 +1,5 @@
 package forge.view;
 
-import java.awt.BasicStroke;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.MouseInfo;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
-
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
@@ -35,6 +12,15 @@ import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ReflectionUtil;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {

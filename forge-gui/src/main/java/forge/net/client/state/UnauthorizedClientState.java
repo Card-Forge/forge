@@ -1,12 +1,11 @@
 package forge.net.client.state;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.net.client.INetClient;
 import forge.net.client.InvalidFieldInPacketException;
 import forge.net.protocol.toclient.AuthResultPacketClt;
 import forge.net.protocol.toserver.AuthorizePacketSrv;
 import forge.net.protocol.toserver.IPacketSrv;
+import org.apache.commons.lang3.StringUtils;
 
 /** 
  * TODO: Write javadoc for this type.

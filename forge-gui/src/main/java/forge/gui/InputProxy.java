@@ -17,11 +17,6 @@
  */
 package forge.gui;
 
-import java.awt.event.MouseEvent;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.concurrent.atomic.AtomicReference;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.game.Game;
@@ -31,6 +26,11 @@ import forge.game.spellability.SpellAbility;
 import forge.gui.input.Input;
 import forge.gui.input.InputPassPriority;
 import forge.gui.toolbox.FOptionPane;
+
+import java.awt.event.MouseEvent;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <p>

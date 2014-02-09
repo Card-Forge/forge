@@ -17,21 +17,20 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 /**

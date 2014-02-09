@@ -17,56 +17,33 @@
  */
 package forge.gui.download;
 
-import java.awt.EventQueue;
+import com.esotericsoftware.minlog.Log;
+import forge.Command;
+import forge.ImageCache;
+import forge.error.BugReporter;
+import forge.gui.SOverlayUtils;
+import forge.gui.toolbox.*;
+import forge.util.FileUtil;
+import forge.util.MyRandom;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URL;
+import java.net.*;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-
-import javax.swing.AbstractButton;
-import javax.swing.DefaultBoundedRangeModel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.esotericsoftware.minlog.Log;
-
-import forge.Command;
-import forge.ImageCache;
-import forge.error.BugReporter;
-import forge.gui.SOverlayUtils;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FProgressBar;
-import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.JXButtonPanel;
-import forge.util.FileUtil;
-import forge.util.MyRandom;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable {

@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Random;
-
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -12,6 +10,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
+
+import java.util.Random;
 
 public class LifeSetAi extends SpellAbilityAi {
 

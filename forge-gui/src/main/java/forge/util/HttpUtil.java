@@ -17,18 +17,13 @@
  */
 package forge.util;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import forge.Constant.Preferences;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
-
-import forge.Constant.Preferences;
 
 public class HttpUtil {
 

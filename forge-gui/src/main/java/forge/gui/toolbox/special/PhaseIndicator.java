@@ -1,10 +1,9 @@
 package forge.gui.toolbox.special;
 
-import javax.swing.JPanel;
-
+import forge.game.phase.PhaseType;
 import net.miginfocom.swing.MigLayout;
 
-import forge.game.phase.PhaseType;
+import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

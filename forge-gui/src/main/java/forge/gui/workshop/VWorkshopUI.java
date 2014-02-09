@@ -1,12 +1,12 @@
 package forge.gui.workshop;
 
-import javax.swing.SwingUtilities;
-
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.workshop.controllers.CCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
+
+import javax.swing.*;
 
 /** 
 /** 

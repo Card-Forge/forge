@@ -1,21 +1,18 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-
 import forge.gui.WrapLayout;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.view.FDialog;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class AvatarSelector extends FDialog {

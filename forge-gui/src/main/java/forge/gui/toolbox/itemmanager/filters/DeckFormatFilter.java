@@ -1,7 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
 import com.google.common.base.Predicate;
-
 import forge.game.GameFormat;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.itemmanager.ItemManager;

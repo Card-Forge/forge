@@ -17,9 +17,6 @@
  */
 package forge.game.staticability;
 
-import java.util.HashMap;
-import java.util.List;
-
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -30,6 +27,9 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The Class StaticAbility_CantBeCast.

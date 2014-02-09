@@ -1,10 +1,6 @@
 package forge.ai.ability;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
@@ -23,6 +19,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
+import java.util.Collection;
+import java.util.List;
 
 public class ChooseSourceAi extends SpellAbilityAi {
 

@@ -17,21 +17,9 @@
  */
 package forge.gui.match;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.swing.JMenu;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-
 import forge.Command;
 import forge.FThreads;
 import forge.ImageCache;
@@ -49,22 +37,10 @@ import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEvent;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.controllers.CAntes;
-import forge.gui.match.controllers.CCombat;
-import forge.gui.match.controllers.CDetail;
-import forge.gui.match.controllers.CPrompt;
-import forge.gui.match.controllers.CPicture;
+import forge.gui.framework.*;
+import forge.gui.match.controllers.*;
 import forge.gui.match.menus.CMatchUIMenus;
-import forge.gui.match.views.VCommand;
-import forge.gui.match.views.VField;
-import forge.gui.match.views.VHand;
-import forge.gui.match.views.VPlayers;
-import forge.gui.match.views.VStack;
+import forge.gui.match.views.*;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FOverlay;
@@ -76,6 +52,10 @@ import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.util.*;
 
 /**
  * Constructs instance of match UI controller, used as a single point of

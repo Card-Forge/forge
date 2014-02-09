@@ -1,12 +1,7 @@
 package forge.net;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-
-import javax.servlet.http.HttpServletRequest;
-
+import forge.error.BugReporter;
+import forge.net.client.NetClient;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
@@ -15,9 +10,11 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 
-
-import forge.error.BugReporter;
-import forge.net.client.NetClient;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /** 
  * TODO: Write javadoc for this type.

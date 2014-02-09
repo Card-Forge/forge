@@ -1,13 +1,13 @@
 package forge.gui.input;
 
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.player.Player;
+
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import forge.game.GameEntity;
-import forge.game.card.Card;
-import forge.game.player.Player;
 
 public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSelectManyBase<T> {
     private static final long serialVersionUID = -6609493252672573139L;

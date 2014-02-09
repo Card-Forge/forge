@@ -1,13 +1,12 @@
 package forge.util;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collection;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

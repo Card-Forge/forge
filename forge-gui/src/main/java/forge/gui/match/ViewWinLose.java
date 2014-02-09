@@ -1,31 +1,17 @@
 package forge.gui.match;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
-import forge.game.Game;
-import forge.game.GameLog;
-import forge.game.GameLogEntry;
-import forge.game.GameLogEntryType;
-import forge.game.GameOutcome;
+import forge.game.*;
 import forge.game.player.Player;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
-import forge.gui.toolbox.FTextArea;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 
 /**
  * TODO: Write javadoc for this type.

@@ -1,13 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Iterables;
-
 import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
@@ -16,6 +9,11 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

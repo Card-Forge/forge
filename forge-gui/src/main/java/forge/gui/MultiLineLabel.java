@@ -17,10 +17,8 @@
  */
 package forge.gui;
 
-import java.awt.Rectangle;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A {@link JLabel} with support for multi-line text that wraps when the line

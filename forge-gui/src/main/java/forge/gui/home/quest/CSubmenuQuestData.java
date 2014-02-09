@@ -1,17 +1,5 @@
 package forge.gui.home.quest;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -21,15 +9,17 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
-import forge.quest.QuestController;
-import forge.quest.QuestMode;
-import forge.quest.QuestWorld;
-import forge.quest.StartingPoolPreferences;
-import forge.quest.StartingPoolType;
+import forge.quest.*;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.*;
+import java.util.Map.Entry;
 
 /** 
  * Controls the quest data submenu in the home UI.

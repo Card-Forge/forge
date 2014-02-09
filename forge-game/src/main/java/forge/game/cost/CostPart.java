@@ -18,11 +18,10 @@
 package forge.game.cost;
 
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The Class CostPart.

@@ -1,17 +1,6 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
-
-import javax.swing.JMenu;
-import javax.swing.SwingUtilities;
-
 import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.CardPool;
@@ -24,7 +13,6 @@ import forge.gui.GuiDialog;
 import forge.gui.deckchooser.DeckgenUtil;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
-//import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FList;
@@ -36,6 +24,16 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.storage.IStorage;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+
+//import forge.gui.home.variant.VSubmenuVanguard;
 
 /**
  * Controls the constructed submenu in the home UI.

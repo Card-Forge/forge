@@ -17,14 +17,13 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>

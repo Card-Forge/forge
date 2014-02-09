@@ -1,13 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -19,6 +12,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MultiplePilesEffect extends SpellAbilityEffect {
 

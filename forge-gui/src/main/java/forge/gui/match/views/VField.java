@@ -17,17 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
-import net.miginfocom.swing.MigLayout;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -44,6 +33,14 @@ import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.special.PhaseIndicator;
 import forge.gui.toolbox.special.PlayerDetailsPanel;
 import forge.view.arcane.PlayArea;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /** 
  * Assembles Swing components of a player field instance.

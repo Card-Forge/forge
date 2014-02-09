@@ -1,11 +1,5 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -13,6 +7,11 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
 import forge.view.ButtonUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputPayManaX extends InputPayMana {
     private static final long serialVersionUID = -6900234444347364050L;

@@ -17,23 +17,6 @@
  */
 package forge.view.arcane;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JRootPane;
-import javax.swing.SwingUtilities;
-
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
@@ -49,6 +32,14 @@ import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.IDisposable;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.util.OutlinedLabel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

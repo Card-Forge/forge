@@ -1,17 +1,5 @@
 package forge.gui.home.quest;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -19,6 +7,15 @@ import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FSkin.SkinnedTextField;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /** 
  * TODO: Write javadoc for this type.

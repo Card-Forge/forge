@@ -1,17 +1,14 @@
 package forge;
 
+import com.google.common.cache.CacheLoader;
+import forge.error.BugReporter;
+import forge.properties.NewConstants;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.cache.CacheLoader;
-
-import forge.error.BugReporter;
-import forge.properties.NewConstants;
 
 final class ImageLoader extends CacheLoader<String, BufferedImage> {
     // image file extensions for various formats in order of likelihood

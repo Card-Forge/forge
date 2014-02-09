@@ -17,8 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
@@ -31,6 +29,8 @@ import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+
+import java.util.Map;
 
 /**
  * <p>

@@ -1,8 +1,5 @@
 package forge.gui.home.gauntlet;
 
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -13,6 +10,9 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /** 
  * Assembles Swing components of "quick gauntlet" submenu singleton.

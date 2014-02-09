@@ -1,21 +1,16 @@
 package forge.gui.toolbox;
 
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import forge.gui.toolbox.FSkin.SkinnedTextField;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
-import forge.gui.toolbox.FSkin.SkinnedTextField;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /** 
  * A custom instance of JTextArea using Forge skin properties.

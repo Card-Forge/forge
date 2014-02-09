@@ -1,11 +1,11 @@
 package forge.gui.deckeditor;
 
-import javax.swing.SwingUtilities;
-
 import forge.Singletons;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
+
+import javax.swing.*;
 
 /** 
 /** 

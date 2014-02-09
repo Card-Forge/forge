@@ -17,9 +17,9 @@
  */
 package forge.game.staticability;
 
-import java.util.HashMap;
-
 import forge.game.card.Card;
+
+import java.util.HashMap;
 
 /**
  * The Class StaticAbility_CantBeCast.

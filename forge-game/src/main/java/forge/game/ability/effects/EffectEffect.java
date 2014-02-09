@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.Command;
 import forge.ImageKeys;
 import forge.game.Game;
@@ -17,6 +15,8 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
 
 public class EffectEffect extends SpellAbilityEffect {
 

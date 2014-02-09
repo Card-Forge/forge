@@ -17,14 +17,6 @@
  */
 package forge.game.mana;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -39,6 +31,13 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>

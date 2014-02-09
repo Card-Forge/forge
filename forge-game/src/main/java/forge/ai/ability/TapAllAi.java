@@ -1,11 +1,7 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -18,6 +14,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class TapAllAi extends SpellAbilityAi {
 

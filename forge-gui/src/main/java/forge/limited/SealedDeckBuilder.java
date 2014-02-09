@@ -1,20 +1,18 @@
 package forge.limited;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Deck builder for Sealed Deck Format.

@@ -17,9 +17,7 @@
  */
 package forge.gui;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public abstract class ForgeAction extends AbstractAction {

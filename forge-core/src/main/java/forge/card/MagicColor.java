@@ -1,8 +1,8 @@
 package forge.card;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
+
+import java.util.List;
 
 /** 
  * Holds byte values for each color magic has.

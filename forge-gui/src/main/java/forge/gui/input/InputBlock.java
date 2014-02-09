@@ -17,8 +17,6 @@
  */
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -28,6 +26,8 @@ import forge.gui.GuiDialog;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+
+import java.awt.event.MouseEvent;
 
 /**
  * <p>

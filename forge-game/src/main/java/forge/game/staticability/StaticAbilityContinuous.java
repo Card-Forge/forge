@@ -17,25 +17,12 @@
  */
 package forge.game.staticability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
-import forge.game.GlobalRuleChange;
-import forge.game.StaticEffect;
-import forge.game.StaticEffects;
-import forge.game.TriggerReplacementBase;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -51,6 +38,13 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The Class StaticAbility_Continuous.

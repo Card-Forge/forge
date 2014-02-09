@@ -3,22 +3,12 @@
  */
 package forge.gui.framework;
 
-import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.deckeditor.views.VCurrentDeck;
-import forge.gui.deckeditor.views.VDeckgen;
-import forge.gui.deckeditor.views.VEditorPreferences;
-import forge.gui.deckeditor.views.VProbabilities;
-import forge.gui.deckeditor.views.VStatistics;
+import forge.gui.deckeditor.views.*;
 import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
 import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
-import forge.gui.home.quest.VSubmenuChallenges;
-import forge.gui.home.quest.VSubmenuDuels;
-import forge.gui.home.quest.VSubmenuQuestData;
-import forge.gui.home.quest.VSubmenuQuestDecks;
-import forge.gui.home.quest.VSubmenuQuestPrefs;
+import forge.gui.home.quest.*;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.home.sanctioned.VSubmenuDraft;
 import forge.gui.home.sanctioned.VSubmenuSealed;
@@ -28,21 +18,13 @@ import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.settings.VSubmenuReleaseNotes;
 import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuCommander;
-//import forge.gui.home.variant.VSubmenuPlanechase;
-//import forge.gui.home.variant.VSubmenuVanguard;
-import forge.gui.match.views.VAntes;
-import forge.gui.match.views.VCombat;
-import forge.gui.match.views.VDetail;
-import forge.gui.match.views.VDev;
-import forge.gui.match.views.VDock;
-import forge.gui.match.views.VLog;
-import forge.gui.match.views.VPrompt;
-import forge.gui.match.views.VPicture;
-import forge.gui.match.views.VPlayers;
-import forge.gui.match.views.VStack;
+import forge.gui.match.views.*;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
+
+//import forge.gui.home.variant.VSubmenuPlanechase;
+//import forge.gui.home.variant.VSubmenuVanguard;
 
 /**
  * These are the identifiers for tabs found in the drag layout.

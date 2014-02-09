@@ -1,14 +1,5 @@
 package forge.gui.deckeditor.controllers;
 
-import java.awt.Dialog.ModalityType;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.File;
-
-import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileFilter;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -24,6 +15,13 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.properties.NewConstants;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.awt.Dialog.ModalityType;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
 
 /** 
  * Controls the "current deck" panel in the deck editor UI.

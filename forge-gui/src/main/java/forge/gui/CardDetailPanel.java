@@ -18,23 +18,6 @@
 
 package forge.gui;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
@@ -46,17 +29,22 @@ import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FHtmlViewer;
+import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
-import forge.item.SealedProduct;
 import forge.item.PreconDeck;
+import forge.item.SealedProduct;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.

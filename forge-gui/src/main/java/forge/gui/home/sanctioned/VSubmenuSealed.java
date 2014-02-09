@@ -1,29 +1,11 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.home.EMenuGroup;
-import forge.gui.home.IVSubmenu;
-import forge.gui.home.LblHeader;
-import forge.gui.home.StartButton;
-import forge.gui.home.VHomeUI;
+import forge.gui.home.*;
 import forge.gui.home.VHomeUI.PnlDisplay;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -32,6 +14,16 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedTextPane;
 import forge.gui.toolbox.itemmanager.DeckManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
  * Assembles Swing components of sealed submenu singleton.

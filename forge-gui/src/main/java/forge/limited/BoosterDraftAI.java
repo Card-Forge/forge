@@ -17,17 +17,16 @@
  */
 package forge.limited;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Constant.Preferences;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

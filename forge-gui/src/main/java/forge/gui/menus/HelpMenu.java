@@ -1,19 +1,16 @@
 package forge.gui.menus;
 
-import java.awt.Desktop;
+import forge.gui.toolbox.FOptionPane;
+import forge.util.BuildInfo;
+import forge.util.FileUtil;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
-
-import forge.gui.toolbox.FOptionPane;
-import forge.util.BuildInfo;
-import forge.util.FileUtil;
 
 public final class HelpMenu {
     private HelpMenu() { }

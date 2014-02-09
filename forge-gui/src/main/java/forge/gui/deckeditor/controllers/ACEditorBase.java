@@ -17,17 +17,6 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -37,11 +26,7 @@ import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
-import forge.gui.framework.SRearrangingUtil;
+import forge.gui.framework.*;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FLabel;
@@ -53,6 +38,13 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.view.FView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Maintains a generically typed architecture for various editing

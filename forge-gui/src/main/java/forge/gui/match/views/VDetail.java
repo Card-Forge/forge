@@ -17,9 +17,6 @@
  */
 package forge.gui.match.views;
 
-import javax.swing.JLabel;
-
-import net.miginfocom.swing.MigLayout;
 import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -28,6 +25,9 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /** 
  * Assembles Swing components of card detail area.

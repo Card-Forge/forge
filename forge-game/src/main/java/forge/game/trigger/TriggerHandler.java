@@ -17,12 +17,6 @@
  */
 package forge.game.trigger;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -37,6 +31,8 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+
+import java.util.*;
 
 public class TriggerHandler {
     private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
@@ -327,8 +323,8 @@ public class TriggerHandler {
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
     private void runSingleTrigger(final Trigger regtrig, final Map<String, Object> runParams) {
-        final Map<String, String> triggerParams = regtrig.mapParams;
-        
+        final Map<String, String> triggerParams = regtrig.getMapParams();
+
         // Any trigger should cause the phase not to skip
         for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();

@@ -18,14 +18,9 @@
 package forge.gui.deckeditor.controllers;
 
 // import java.awt.Font;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -41,15 +36,19 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.item.PaperCard;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 //import forge.quest.data.QuestBoosterPack;
 

@@ -1,11 +1,5 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -15,6 +9,12 @@ import forge.game.spellability.TargetRestrictions;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /** 
  * TODO: Write javadoc for this type.

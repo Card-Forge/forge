@@ -1,15 +1,5 @@
 package forge.gui.deckchooser;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.swing.JPanel;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -26,6 +16,13 @@ import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {

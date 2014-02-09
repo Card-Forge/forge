@@ -1,10 +1,5 @@
 package forge.quest.gui;
 
-import java.awt.Font;
-
-import javax.swing.SwingUtilities;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.bazaar.VBazaarUI;
@@ -14,6 +9,10 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.data.QuestAssets;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
 
 /** An update-able panel instance representing a single item. */
 @SuppressWarnings("serial")

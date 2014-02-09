@@ -17,16 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -41,6 +31,13 @@ import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseAdapter;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 
 /**
  * Controls Swing components of a player's hand instance.

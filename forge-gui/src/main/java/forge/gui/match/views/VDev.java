@@ -17,18 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 import forge.gui.MultiLineLabelUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -38,6 +26,15 @@ import forge.gui.match.controllers.CDev;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Assembles Swing components of players report.

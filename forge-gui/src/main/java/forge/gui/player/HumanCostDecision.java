@@ -1,18 +1,8 @@
 package forge.gui.player;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -20,35 +10,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.cost.CostAddMana;
-import forge.game.cost.CostChooseCreatureType;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDecisionMakerBase;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostDraw;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostExiledMoveToGrave;
-import forge.game.cost.CostFlipCoin;
-import forge.game.cost.CostGainControl;
-import forge.game.cost.CostGainLife;
-import forge.game.cost.CostMill;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPutCardToLib;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveAnyCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostReturn;
-import forge.game.cost.CostReveal;
-import forge.game.cost.CostSacrifice;
-import forge.game.cost.CostTap;
-import forge.game.cost.CostTapType;
-import forge.game.cost.CostUnattach;
-import forge.game.cost.CostUntap;
-import forge.game.cost.CostUntapType;
-import forge.game.cost.PaymentDecision;
+import forge.game.card.CounterType;
+import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -58,6 +22,10 @@ import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputSelectManyBase;
 import forge.util.Aggregates;
 import forge.util.Lang;
+
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
 

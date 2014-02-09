@@ -17,14 +17,13 @@
  */
 package forge.quest;
 
+import com.google.common.base.Function;
+import forge.quest.data.GameFormatQuest;
+import forge.util.storage.StorageReaderFile;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.common.base.Function;
-
-import forge.quest.data.GameFormatQuest;
-import forge.util.storage.StorageReaderFile;
 
 /** 
  * This function holds the "world info" for the current quest.

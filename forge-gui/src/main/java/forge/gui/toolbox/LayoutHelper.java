@@ -1,6 +1,6 @@
 package forge.gui.toolbox;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /** 
  * Helper class for doing custom layout

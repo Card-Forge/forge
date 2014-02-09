@@ -17,25 +17,6 @@
  */
 package forge.control;
 
-import java.awt.Component;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.ImageCache;
@@ -48,19 +29,12 @@ import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
-import forge.gui.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.InvalidLayoutFileException;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.framework.SLayoutIO;
-import forge.gui.framework.SOverflowUtil;
-import forge.gui.framework.SResizingUtil;
+import forge.gui.framework.*;
 import forge.gui.home.settings.GamePlayerUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
@@ -71,6 +45,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.views.VAntes;
 import forge.gui.match.views.VField;
 import forge.gui.menus.ForgeMenu;
+import forge.gui.player.LobbyPlayerHuman;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -84,6 +59,14 @@ import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
 import forge.view.FFrame;
 import forge.view.FView;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

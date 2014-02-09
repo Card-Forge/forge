@@ -17,16 +17,8 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.card.CardType.Constant;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -39,6 +31,9 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

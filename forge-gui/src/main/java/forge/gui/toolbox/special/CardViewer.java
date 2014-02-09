@@ -17,20 +17,17 @@
  */
 package forge.gui.toolbox.special;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.AbstractListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import forge.game.card.Card;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.item.PaperCard;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..

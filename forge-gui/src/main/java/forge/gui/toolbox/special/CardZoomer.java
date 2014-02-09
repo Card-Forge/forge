@@ -18,19 +18,6 @@
 
 package forge.gui.toolbox.special;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import net.miginfocom.swing.MigLayout;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.gui.SOverlayUtils;
@@ -39,8 +26,12 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.gui.toolbox.imaging.FImagePanel;
-import forge.gui.toolbox.imaging.FImageUtil;
 import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
+import forge.gui.toolbox.imaging.FImageUtil;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.event.*;
 
 /** 
  * Displays card image at its original size and correct orientation.

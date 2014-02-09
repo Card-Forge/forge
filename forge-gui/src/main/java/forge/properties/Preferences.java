@@ -20,11 +20,7 @@ package forge.properties;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * A collection of name/value pairs with sorted keys and utility methods.

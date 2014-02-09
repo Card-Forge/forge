@@ -17,20 +17,18 @@
  */
 package forge.deck;
 
+import forge.StaticData;
+import forge.card.CardType;
+import forge.card.ColorSet;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.util.Aggregates;
+import org.apache.commons.lang3.Range;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
-
-
-import org.apache.commons.lang3.Range;
-
-import forge.StaticData;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.util.Aggregates;
 
 /**
  * GameType is an enum to determine the type of current game. :)

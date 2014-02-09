@@ -17,14 +17,13 @@
  */
 package forge.card;
 
-import java.util.List;
-import java.util.StringTokenizer;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * A collection of methods containing full

@@ -16,18 +16,6 @@
  */
 package forge.gui.match;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.BorderFactory;
-import javax.swing.SwingConstants;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
@@ -36,11 +24,7 @@ import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
-import forge.game.player.GameLossReason;
-import forge.game.player.LobbyPlayer;
-import forge.game.player.Player;
-import forge.game.player.PlayerOutcome;
-import forge.game.player.PlayerStatistics;
+import forge.game.player.*;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
@@ -49,23 +33,23 @@ import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
-import forge.item.BoosterPack;
-import forge.item.PaperCard;
-import forge.item.InventoryItem;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.IQuestRewardCard;
-import forge.quest.QuestController;
-import forge.quest.QuestEvent;
-import forge.quest.QuestEventChallenge;
-import forge.quest.QuestEventDifficulty;
+import forge.quest.*;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * <p>

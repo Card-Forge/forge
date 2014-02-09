@@ -18,11 +18,6 @@
 
 package forge.gui.home.settings;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -32,6 +27,9 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /** 
  * Displays contents of CHANGES.txt file.

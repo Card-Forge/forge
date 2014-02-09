@@ -1,20 +1,15 @@
 package forge.gui;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.HashMap;
-
-import javax.xml.stream.XMLEventFactory;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLEventWriter;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.*;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /** 
  * Preferences associated with individual cards

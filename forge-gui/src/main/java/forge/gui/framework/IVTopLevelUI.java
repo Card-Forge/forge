@@ -1,8 +1,6 @@
 package forge.gui.framework;
 
-import forge.gui.framework.FScreen;
-
-/** 
+/**
  * This interface provides a unifying type for all top-level
  * UI components.
  * 

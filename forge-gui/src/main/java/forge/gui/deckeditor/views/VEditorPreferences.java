@@ -1,8 +1,5 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CEditorPreferences;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -12,6 +9,9 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /** 
  * Assembles Swing components of deck editor analysis tab.

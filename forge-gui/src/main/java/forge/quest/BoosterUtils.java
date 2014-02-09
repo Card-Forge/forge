@@ -17,30 +17,24 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.card.PrintSheet;
-import forge.item.BoosterPack;
-import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 /**

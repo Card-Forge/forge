@@ -17,12 +17,12 @@
  */
 package forge.game.staticability;
 
-import java.util.HashMap;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.HashMap;
 
 /**
  * The Class StaticAbilityCantTarget.

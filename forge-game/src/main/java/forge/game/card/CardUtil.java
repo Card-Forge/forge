@@ -17,11 +17,6 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import forge.Constant;
 import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
@@ -35,6 +30,11 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public final class CardUtil {
     // disable instantiation

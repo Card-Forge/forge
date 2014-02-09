@@ -18,19 +18,17 @@
 
 package forge.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-
 import forge.StaticData;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FatPack extends SealedProduct {
     public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {

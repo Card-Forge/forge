@@ -17,13 +17,8 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.game.GameEntity;
 import forge.game.TriggerReplacementBase;
 import forge.game.card.Card;
@@ -35,6 +30,10 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -227,7 +226,7 @@ public class AiBlockController {
                     
                     // check for triggers when unblocked
                     for (Trigger trigger : attacker.getTriggers()) {
-                        final HashMap<String, String> trigParams = trigger.getMapParams();
+                        final Map<String, String> trigParams = trigger.getMapParams();
                         TriggerType mode = trigger.getMode();
 
                         if (!trigger.requirementsCheck(attacker.getGame())) {

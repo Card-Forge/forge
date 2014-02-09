@@ -1,13 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.awt.Component;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import com.google.common.base.Predicate;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.gui.toolbox.FLabel;
@@ -18,6 +11,11 @@ import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
 import forge.item.InventoryItem;
 import forge.util.ComparableOp;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 
 /** 
  * TODO: Write javadoc for this type.

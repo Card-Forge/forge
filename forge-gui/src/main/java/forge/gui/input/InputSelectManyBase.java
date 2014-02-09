@@ -1,13 +1,12 @@
 package forge.gui.input;
 
-import java.util.Collection;
-
 import com.google.common.collect.Iterables;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+
+import java.util.Collection;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;

@@ -17,23 +17,8 @@
  */
 package forge.gui;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JFileChooser;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
@@ -44,17 +29,22 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
-import forge.gui.player.HumanPlay;
-import forge.gui.toolbox.FOptionPane;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.player.HumanPlay;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 public final class GuiDisplayUtil {
     private GuiDisplayUtil() {

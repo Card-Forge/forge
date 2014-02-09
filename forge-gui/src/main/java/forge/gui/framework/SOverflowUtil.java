@@ -1,15 +1,12 @@
 package forge.gui.framework;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import forge.view.FView;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import forge.view.FView;
 
 /**
  * Package-private utilities for generic overflow behavior

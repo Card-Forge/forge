@@ -17,23 +17,10 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-
-import org.apache.commons.lang3.time.StopWatch;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-
 import forge.card.mana.ManaCost;
-import forge.game.GameEntity;
-import forge.game.GameStage;
-import forge.game.Game;
-import forge.game.GameType;
-import forge.game.GlobalRuleChange;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -42,15 +29,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
-import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCombatEnded;
-import forge.game.event.GameEventPlayerPriority;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnEnded;
-import forge.game.event.GameEventGameRestarted;
-import forge.game.event.GameEventManaBurn;
-import forge.game.event.GameEventTurnPhase;
+import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
@@ -61,6 +40,9 @@ import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.util.*;
 
 
 /**

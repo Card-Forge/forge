@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -13,6 +10,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
 
 public abstract class DamageAiBase extends SpellAbilityAi {
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {

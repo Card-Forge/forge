@@ -17,31 +17,21 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Font;
-import java.awt.Insets;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CPrompt;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FHtmlViewer;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Assembles Swing components of message report.

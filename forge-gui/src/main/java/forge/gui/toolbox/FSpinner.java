@@ -1,13 +1,10 @@
 package forge.gui.toolbox;
 
-import java.awt.Insets;
-
-import javax.swing.JFormattedTextField;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.text.NumberFormatter;
-
 import forge.gui.toolbox.FSkin.SkinnedSpinner;
+
+import javax.swing.*;
+import javax.swing.text.NumberFormatter;
+import java.awt.*;
 
 /** 
  * A custom instance of JSpinner using Forge skin properties.  Only numeric

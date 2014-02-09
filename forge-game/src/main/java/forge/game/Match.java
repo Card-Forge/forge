@@ -1,19 +1,6 @@
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.Map.Entry;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-
+import com.google.common.collect.*;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -28,6 +15,9 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class Match {
     private final List<RegisteredPlayer> players;

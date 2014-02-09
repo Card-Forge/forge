@@ -1,9 +1,5 @@
 package forge;
 
-import java.util.List;
-
-import org.testng.annotations.Test;
-
 import forge.card.BoosterGenerator;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -11,6 +7,9 @@ import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.limited.IBoosterDraft;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * <p>

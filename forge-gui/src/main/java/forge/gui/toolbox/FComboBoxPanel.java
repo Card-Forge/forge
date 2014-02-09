@@ -1,12 +1,12 @@
 package forge.gui.toolbox;
 
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
 import forge.Singletons;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /** 
  * Panel with combo box and caption (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)

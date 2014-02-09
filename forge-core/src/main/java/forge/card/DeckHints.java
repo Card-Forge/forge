@@ -1,17 +1,16 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.item.PaperCard;
 import forge.util.PredicateString.StringOp;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * DeckHints provides the ability for a Card to "want" another Card or type of

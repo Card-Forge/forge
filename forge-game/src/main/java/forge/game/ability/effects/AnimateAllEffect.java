@@ -1,10 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import forge.Command;
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
@@ -21,6 +16,11 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class AnimateAllEffect extends AnimateEffectBase {
 

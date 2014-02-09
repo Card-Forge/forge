@@ -1,29 +1,7 @@
 package forge.sound;
 
-import java.util.Collection;
-
 import forge.game.card.Card;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardChangeZone;
-import forge.game.event.GameEventCardDamaged;
-import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardAttachment;
-import forge.game.event.GameEventCardPhased;
-import forge.game.event.GameEventCardRegenerated;
-import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventCardCounters;
-import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventTurnEnded;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventFlipCoin;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventPlayerLivesChanged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventCardTapped;
-import forge.game.event.GameEventShuffle;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventTokenCreated;
-import forge.game.event.IGameEventVisitor;
+import forge.game.event.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
@@ -31,6 +9,8 @@ import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.net.FServer;
 import forge.util.maps.MapOfLists;
+
+import java.util.Collection;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.

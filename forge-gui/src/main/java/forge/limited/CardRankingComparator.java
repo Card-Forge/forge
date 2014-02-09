@@ -1,10 +1,9 @@
 package forge.limited;
 
-import java.util.Comparator;
-
+import forge.item.PaperCard;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.item.PaperCard;
+import java.util.Comparator;
 
 /**
  * Sorts cards by rank.

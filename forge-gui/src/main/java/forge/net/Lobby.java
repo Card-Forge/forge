@@ -1,10 +1,6 @@
 package forge.net;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.google.common.base.Supplier;
-
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
 import forge.control.ChatArea;
@@ -16,6 +12,9 @@ import forge.net.client.INetClient;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * TODO: Write javadoc for this type.

@@ -1,29 +1,12 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
@@ -36,6 +19,8 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.MyRandom;
+
+import java.util.*;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -778,7 +763,7 @@ public class AttachAi extends SpellAbilityAi {
                 for (Card target : list) {
                     for (Trigger t : target.getTriggers()) {
                         if (t.getMode() == TriggerType.SpellCast) {
-                            final HashMap<String, String> params = t.getMapParams();
+                            final Map<String, String> params = t.getMapParams();
                             if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
                                 magnetList.add(target);
                                 break;

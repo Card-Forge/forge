@@ -17,9 +17,8 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.awt.Component;
-
-import javax.swing.JTable;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A quick converter to avoid -1 being displayed for unapplicable values.

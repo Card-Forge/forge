@@ -17,12 +17,6 @@ package forge.gui.match;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.SwingConstants;
-
 import forge.Singletons;
 import forge.game.Game;
 import forge.gui.SOverlayUtils;
@@ -30,6 +24,9 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.limited.GauntletMini;
 import forge.net.FServer;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament

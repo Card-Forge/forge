@@ -17,17 +17,15 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.awt.Component;
-import java.awt.event.MouseEvent;
+import forge.gui.toolbox.FSkin;
+import forge.item.InventoryItem;
 
-import javax.swing.JLabel;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-
-import forge.gui.toolbox.FSkin;
-import forge.item.InventoryItem;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * Base cell renderer class for item tables

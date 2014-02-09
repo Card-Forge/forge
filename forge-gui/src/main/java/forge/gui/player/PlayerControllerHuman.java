@@ -1,31 +1,10 @@
 package forge.gui.player;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.MenuElement;
-import javax.swing.MenuSelectionManager;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-
 import forge.Singletons;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -65,15 +44,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
-import forge.gui.input.InputAttack;
-import forge.gui.input.InputBlock;
-import forge.gui.input.InputConfirmMulligan;
-import forge.gui.input.InputPassPriority;
-import forge.gui.input.InputProliferate;
-import forge.gui.input.InputSelectCardsForConvoke;
-import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputConfirm;
-import forge.gui.input.InputSelectEntitiesFromList;
+import forge.gui.input.*;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FOptionPane;
@@ -82,6 +53,15 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.*;
 
 
 /** 

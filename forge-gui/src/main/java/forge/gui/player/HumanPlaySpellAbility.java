@@ -17,12 +17,7 @@
  */
 package forge.gui.player;
 
-import java.util.ArrayList;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -37,6 +32,9 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 
 /**
  * <p>

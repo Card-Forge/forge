@@ -1,9 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.util.Map;
-
 import com.google.common.base.Predicates;
-
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -11,6 +8,8 @@ import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
+
+import java.util.Map;
 
 public abstract class DeckStatTypeFilter extends StatTypeFilter<DeckProxy> {
     public DeckStatTypeFilter(ItemManager<? super DeckProxy> itemManager0) {

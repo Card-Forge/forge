@@ -1,12 +1,11 @@
 package forge.game.event;
 
-import java.util.Arrays;
-import java.util.Collection;
+import com.google.common.collect.Iterables;
+import forge.game.card.Card;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
-
-import forge.game.card.Card;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * This means card's characteristics have changed on server, clients must re-request them

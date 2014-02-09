@@ -1,10 +1,5 @@
 package forge.quest.io;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.List;
-import java.util.Map;
-
 import forge.ImageKeys;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
@@ -14,6 +9,11 @@ import forge.quest.QuestEventDuel;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFolder;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.List;
+import java.util.Map;
 
 public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
     public QuestDuelReader(File deckDir0) {

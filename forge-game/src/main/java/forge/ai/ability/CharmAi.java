@@ -1,10 +1,5 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.player.Player;
@@ -12,6 +7,11 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 public class CharmAi extends SpellAbilityAi {
 

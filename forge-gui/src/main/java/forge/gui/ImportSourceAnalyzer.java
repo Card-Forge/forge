@@ -17,25 +17,24 @@
  */
 package forge.gui;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import forge.ImageCache;
+import forge.Singletons;
+import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.properties.NewConstants;
+import forge.util.FileUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
-import forge.ImageCache;
-import forge.Singletons;
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.properties.NewConstants;
-import forge.util.FileUtil;
 
 public class ImportSourceAnalyzer {
     public static enum OpType {

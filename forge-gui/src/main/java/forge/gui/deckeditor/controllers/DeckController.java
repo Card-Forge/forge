@@ -17,14 +17,12 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Supplier;
-
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.menus.DeckFileMenu;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * TODO: Write javadoc for this type.

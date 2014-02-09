@@ -1,9 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import forge.Command;
 import forge.card.CardType;
 import forge.game.Game;
@@ -20,6 +16,10 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PumpEffect extends SpellAbilityEffect {
 

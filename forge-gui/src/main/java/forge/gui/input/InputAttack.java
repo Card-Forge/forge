@@ -17,11 +17,7 @@
  */
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.List;
-
 import com.google.common.collect.Iterables;
-
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -34,6 +30,9 @@ import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
  * <p>

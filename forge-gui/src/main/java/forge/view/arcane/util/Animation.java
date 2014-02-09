@@ -17,17 +17,12 @@
  */
 package forge.view.arcane.util;
 
-import java.awt.Container;
-import java.awt.EventQueue;
-import java.awt.Frame;
-import java.awt.Point;
+import forge.view.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-
-import forge.view.arcane.CardPanel;
 
 
 /**

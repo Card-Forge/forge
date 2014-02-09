@@ -1,30 +1,20 @@
 package forge.gui.match;
 
-import java.awt.AWTEvent;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JComponent;
-import javax.swing.JLayer;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.Scrollable;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.LayerUI;
-
-import net.miginfocom.swing.MigLayout;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.LayerUI;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {

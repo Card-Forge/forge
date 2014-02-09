@@ -18,13 +18,10 @@
 
 package forge.gui.toolbox;
 
-import java.io.File;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
 
 /** 
  * A class for showing open or save dialogs in Forge.

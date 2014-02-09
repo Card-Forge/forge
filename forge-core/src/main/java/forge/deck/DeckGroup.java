@@ -17,12 +17,12 @@
  */
 package forge.deck;
 
+import com.google.common.base.Function;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.google.common.base.Function;
 
 /**
  * TODO: Write javadoc for this type.

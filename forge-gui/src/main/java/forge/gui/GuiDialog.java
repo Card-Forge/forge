@@ -1,16 +1,14 @@
 package forge.gui;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
-
-import javax.swing.UIManager;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FOptionPane;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /** 
  * Holds player interactions using standard windows 

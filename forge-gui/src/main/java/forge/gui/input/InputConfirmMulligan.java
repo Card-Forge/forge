@@ -17,10 +17,6 @@
  */
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -30,6 +26,10 @@ import forge.gui.match.CMatchUI;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 import forge.view.ButtonUtil;
+
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
  
 /**
   * <p>

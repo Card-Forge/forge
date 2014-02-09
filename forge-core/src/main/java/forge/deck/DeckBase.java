@@ -17,9 +17,9 @@
  */
 package forge.deck;
 
-import java.io.Serializable;
-
 import forge.item.InventoryItem;
+
+import java.io.Serializable;
 
 /**
  * TODO: Write javadoc for this type.

@@ -17,14 +17,13 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.Iterables;
-
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.player.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

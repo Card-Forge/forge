@@ -1,14 +1,10 @@
 package forge.view;
 
-import java.awt.Dimension;
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.SpringLayout;
-
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
+
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class FTitleBar extends FTitleBarBase {

@@ -1,16 +1,9 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.Command;
 import forge.StaticData;
 import forge.card.CardCharacteristicName;
@@ -32,6 +25,11 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.PredicateString.StringOp;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CopyPermanentEffect extends SpellAbilityEffect {
 

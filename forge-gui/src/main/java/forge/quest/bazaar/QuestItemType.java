@@ -18,7 +18,6 @@
 package forge.quest.bazaar;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import forge.quest.data.QuestItemCondition;
 
 /**

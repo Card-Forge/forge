@@ -17,16 +17,15 @@
  */
 package forge.properties;
 
+import forge.util.FileSection;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import forge.util.FileSection;
 
 /**
  * Determines the user data and cache dirs, first looking at the specified file for overrides

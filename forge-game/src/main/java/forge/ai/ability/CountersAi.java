@@ -17,15 +17,14 @@
  */
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.util.Aggregates;
+
+import java.util.List;
 
 
 /**

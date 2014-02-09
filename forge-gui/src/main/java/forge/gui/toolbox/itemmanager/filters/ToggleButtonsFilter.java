@@ -1,11 +1,5 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.awt.Graphics;
-import java.util.ArrayList;
-
-import javax.swing.Icon;
-import javax.swing.JPanel;
-
 import forge.Command;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -14,6 +8,10 @@ import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /** 
  * TODO: Write javadoc for this type.

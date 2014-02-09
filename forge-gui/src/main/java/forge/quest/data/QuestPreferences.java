@@ -17,10 +17,10 @@
  */
 package forge.quest.data;
 
-import java.io.Serializable;
-
 import forge.properties.NewConstants;
 import forge.properties.PreferencesStore;
+
+import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> implements Serializable {

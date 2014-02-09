@@ -17,8 +17,6 @@
  */
 package forge.properties;
 
-import java.util.List;
-
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.ai.AiProfileUtil;
@@ -29,6 +27,8 @@ import forge.gui.match.VMatchUI;
 import forge.gui.match.views.VDev;
 import forge.gui.match.views.VField;
 import forge.gui.toolbox.special.PhaseIndicator;
+
+import java.util.List;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /**

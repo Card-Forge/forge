@@ -18,13 +18,12 @@
 
 package forge.game;
 
+import forge.game.event.IGameEventVisitor;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
-import org.apache.commons.lang3.StringUtils;
-
-import forge.game.event.IGameEventVisitor;
 
 
 /**

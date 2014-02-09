@@ -17,16 +17,9 @@
  */
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -51,6 +44,11 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**

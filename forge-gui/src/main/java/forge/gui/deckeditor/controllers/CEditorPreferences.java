@@ -1,13 +1,12 @@
 package forge.gui.deckeditor.controllers;
 
-import java.util.HashMap;
-
-import javax.swing.JCheckBox;
-
 import forge.Command;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
+
+import javax.swing.*;
+import java.util.HashMap;
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.

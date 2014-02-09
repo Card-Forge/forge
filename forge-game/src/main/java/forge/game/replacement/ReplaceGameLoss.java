@@ -1,8 +1,8 @@
     package forge.game.replacement;
 
-import java.util.Map;
+    import forge.game.card.Card;
 
-import forge.game.card.Card;
+    import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.

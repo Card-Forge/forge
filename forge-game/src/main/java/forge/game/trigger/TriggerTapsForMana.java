@@ -17,12 +17,12 @@
  */
 package forge.game.trigger;
 
-import java.util.List;
-
 import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
 
 /**
  * <p>

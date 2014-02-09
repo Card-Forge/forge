@@ -1,19 +1,13 @@
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JScrollBar;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.Timer;
-import javax.swing.border.Border;
-
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinnedScrollPane;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
  * An extension of JScrollPane to centralize common styling changes

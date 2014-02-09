@@ -17,21 +17,14 @@
  */
 package forge.deck;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
-
 import com.google.common.base.Function;
 import forge.StaticData;
-
-import forge.card.CardEdition;
 import forge.card.CardDb.SetPreference;
+import forge.card.CardEdition;
 import forge.item.PaperCard;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 
 

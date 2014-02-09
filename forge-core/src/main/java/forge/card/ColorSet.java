@@ -17,13 +17,12 @@
  */
 package forge.card;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import com.google.common.collect.UnmodifiableIterator;
-
 import forge.card.mana.ManaCost;
 import forge.util.BinaryUtil;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * <p>CardColor class.</p>

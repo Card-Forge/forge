@@ -19,17 +19,10 @@
 package forge.sound;
 
 
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.MissingResourceException;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 

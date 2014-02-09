@@ -18,11 +18,7 @@
  */
 package forge.ai.ability;
 
-import forge.ai.AiCostDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;

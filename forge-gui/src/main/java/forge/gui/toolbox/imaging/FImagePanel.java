@@ -18,23 +18,17 @@
 
 package forge.gui.toolbox.imaging;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import com.mortennobel.imagescaling.DimensionConstrain;
+import com.mortennobel.imagescaling.ResampleOp;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import com.mortennobel.imagescaling.DimensionConstrain;
-import com.mortennobel.imagescaling.ResampleOp;
 
 /**
  * Displays a {@code BufferedImage} at its center.

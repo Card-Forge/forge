@@ -1,14 +1,14 @@
 package forge.gui.match;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.Match;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
  * Default controller for a ViewWinLose object. This class can

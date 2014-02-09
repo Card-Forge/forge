@@ -17,10 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
-
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.card.Card;
@@ -28,6 +24,10 @@ import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * <p>

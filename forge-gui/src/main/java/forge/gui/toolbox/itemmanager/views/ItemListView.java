@@ -17,56 +17,29 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.KeyboardFocusManager;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import forge.gui.toolbox.FMouseAdapter;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.*;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerModel;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
+import forge.item.InventoryItem;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JViewport;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
-import forge.gui.toolbox.FMouseAdapter;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.SkinBorder;
-import forge.gui.toolbox.FSkin.SkinColor;
-import forge.gui.toolbox.FSkin.SkinFont;
-import forge.gui.toolbox.FSkin.SkinImage;
-import forge.gui.toolbox.FSkin.SkinnedTable;
-import forge.gui.toolbox.FSkin.SkinnedTableHeader;
-import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.gui.toolbox.itemmanager.ItemManagerModel;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.item.InventoryItem;
+import javax.swing.table.*;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 
 /**

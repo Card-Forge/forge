@@ -17,11 +17,11 @@
  */
 package forge.game.trigger;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>

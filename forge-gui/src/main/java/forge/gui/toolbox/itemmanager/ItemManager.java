@@ -17,59 +17,33 @@
  */
 package forge.gui.toolbox.itemmanager;
 
-import java.awt.Component;
-import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.gui.GuiUtils;
-import forge.gui.toolbox.ContextMenuBuilder;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
+import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.gui.toolbox.FSkin.SkinnedCheckBox;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
-import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.LayoutHelper;
-import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.ImageView;
-import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.ItemListView;
-import forge.gui.toolbox.itemmanager.views.ItemView;
+import forge.gui.toolbox.itemmanager.views.*;
 import forge.item.InventoryItem;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ReflectionUtil;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 
 /**

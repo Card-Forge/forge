@@ -1,14 +1,7 @@
 package forge.gui.deckeditor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-
 import forge.Singletons;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -30,6 +23,11 @@ import forge.quest.QuestEvent;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {

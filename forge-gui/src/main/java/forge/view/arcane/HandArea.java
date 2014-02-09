@@ -17,11 +17,11 @@
  */
 package forge.view.arcane;
 
-import java.awt.event.MouseEvent;
-
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FScrollPane;
+
+import java.awt.event.MouseEvent;
 
 
 /**

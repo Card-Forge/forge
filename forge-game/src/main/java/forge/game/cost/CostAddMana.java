@@ -17,9 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.GameType;
@@ -27,6 +24,9 @@ import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 
 /**
  * The Class CostAddMana.

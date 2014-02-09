@@ -17,16 +17,14 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.awt.Component;
-import java.awt.Graphics;
-
-import javax.swing.JTable;
-
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Displays mana cost as symbols.

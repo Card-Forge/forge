@@ -17,20 +17,12 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
-
 import com.google.common.base.Function;
-
 import forge.Command;
-import forge.Singletons;
 import forge.Constant.Preferences;
+import forge.Singletons;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.gui.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -41,6 +33,13 @@ import forge.gui.input.Input;
 import forge.gui.input.InputPayMana;
 import forge.gui.match.ZoneAction;
 import forge.gui.match.views.VField;
+import forge.gui.player.HumanPlay;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
 
 /**
  * Controls Swing components of a player's field instance.

@@ -1,14 +1,14 @@
 package forge.ai.ability;
 
-import java.util.Collection;
-import java.util.List;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Collection;
+import java.util.List;
 
 public class HauntAi extends SpellAbilityAi {
 

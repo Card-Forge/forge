@@ -1,10 +1,10 @@
 package forge.gui.input;
 
-import java.util.concurrent.CountDownLatch;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.error.BugReporter;
+
+import java.util.concurrent.CountDownLatch;
 
 public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized {
     private static final long serialVersionUID = 8756177361251703052L;

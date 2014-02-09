@@ -1,12 +1,10 @@
 package forge.gui;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.AbstractListModel;
-import javax.swing.ListModel;
 
 
 @SuppressWarnings("serial")

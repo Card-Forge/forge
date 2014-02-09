@@ -1,10 +1,5 @@
 package forge.gui.workshop.controllers;
 
-import java.util.Arrays;
-
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardDb;
@@ -22,6 +17,10 @@ import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.item.PaperCard;
+
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.util.Arrays;
 
 
 /** 

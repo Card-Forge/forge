@@ -1,20 +1,19 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.awt.event.MouseEvent;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /** 
  * TODO: Write javadoc for this type.

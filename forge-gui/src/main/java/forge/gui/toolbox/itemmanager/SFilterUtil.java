@@ -1,23 +1,22 @@
 package forge.gui.toolbox.itemmanager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.card.MagicColor;
 import forge.card.CardRulesPredicates.Presets;
+import forge.card.MagicColor;
 import forge.game.GameFormat;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.PredicateString.StringOp;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** 
  * Static factory; holds blocks of form elements and predicates

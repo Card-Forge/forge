@@ -17,17 +17,16 @@
  */
 package forge.quest.bazaar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.item.PaperToken;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestAssets;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

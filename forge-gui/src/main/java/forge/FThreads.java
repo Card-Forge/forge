@@ -1,11 +1,10 @@
 package forge;
 
+import forge.util.ThreadUtil;
+
+import javax.swing.*;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.SwingUtilities;
-
-import forge.util.ThreadUtil;
 
 /** 
  * TODO: Write javadoc for this type.

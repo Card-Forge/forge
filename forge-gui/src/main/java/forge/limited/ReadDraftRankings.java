@@ -1,14 +1,13 @@
 package forge.limited;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.card.MagicColor;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ReadDraftRankings class.

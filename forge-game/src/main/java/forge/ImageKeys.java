@@ -1,13 +1,7 @@
 package forge;
 
 import forge.card.CardDb;
-import forge.item.BoosterPack;
-import forge.item.FatPack;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.PaperToken;
-import forge.item.PreconDeck;
-import forge.item.TournamentPack;
+import forge.item.*;
 
 public class ImageKeys {
     public static final String CARD_PREFIX           = "c:";

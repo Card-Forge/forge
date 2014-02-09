@@ -17,19 +17,7 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JLabel;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.CardPool;
@@ -37,33 +25,31 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.gui.CardListViewer;
-import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.deckeditor.views.VCurrentDeck;
-import forge.gui.deckeditor.views.VDeckgen;
-import forge.gui.deckeditor.views.VProbabilities;
+import forge.gui.deckeditor.views.*;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.item.BoosterPack;
-import forge.item.PaperCard;
-import forge.item.FatPack;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.SealedProduct;
-import forge.item.PreconDeck;
-import forge.item.TournamentPack;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.item.*;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
 import forge.util.ItemPool;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Child controller for quest card shop UI.

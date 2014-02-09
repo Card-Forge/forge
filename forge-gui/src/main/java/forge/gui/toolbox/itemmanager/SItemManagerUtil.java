@@ -1,12 +1,6 @@
 package forge.gui.toolbox.itemmanager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -16,6 +10,11 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.InventoryItem;
 import forge.util.ComparableOp;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map.Entry;
 
 
 /** 

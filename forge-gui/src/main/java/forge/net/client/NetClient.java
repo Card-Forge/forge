@@ -1,15 +1,12 @@
 package forge.net.client;
 
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import forge.game.player.LobbyPlayer;
 import forge.net.FServer;
 import forge.net.IClientSocket;
 import forge.net.IConnectionObserver;
 import forge.net.client.state.ConnectedClientState;
-import forge.net.client.state.UnauthorizedClientState;
 import forge.net.client.state.IClientState;
+import forge.net.client.state.UnauthorizedClientState;
 import forge.net.protocol.ClientProtocol;
 import forge.net.protocol.ClientProtocolJson;
 import forge.net.protocol.toclient.ErrorIncorrectPacketClt;
@@ -17,6 +14,9 @@ import forge.net.protocol.toclient.ErrorNoStateForPacketClt;
 import forge.net.protocol.toclient.IPacketClt;
 import forge.net.protocol.toclient.WelcomePacketClt;
 import forge.net.protocol.toserver.IPacketSrv;
+
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class NetClient implements IConnectionObserver, INetClient{
 

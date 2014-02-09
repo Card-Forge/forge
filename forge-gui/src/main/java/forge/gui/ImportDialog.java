@@ -17,7 +17,22 @@
  */
 package forge.gui;
 
-import java.awt.Font;
+import forge.Command;
+import forge.error.BugReporter;
+import forge.gui.ImportSourceAnalyzer.OpType;
+import forge.gui.toolbox.*;
+import forge.properties.NewConstants;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -25,51 +40,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import forge.Command;
-import forge.error.BugReporter;
-import forge.gui.ImportSourceAnalyzer.OpType;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBoxWrapper;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOptionPane;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.SmartScroller;
-import forge.properties.NewConstants;
 
 /**
  * This class implements an overlay-based dialog that imports data from a user-selected directory

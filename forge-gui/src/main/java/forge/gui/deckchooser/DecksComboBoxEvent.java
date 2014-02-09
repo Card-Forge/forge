@@ -1,8 +1,8 @@
 package forge.gui.deckchooser;
 
-import java.util.EventObject;
-
 import forge.gui.deckchooser.DecksComboBox.DeckType;
+
+import java.util.EventObject;
 
 @SuppressWarnings("serial")
 public class DecksComboBoxEvent extends EventObject {

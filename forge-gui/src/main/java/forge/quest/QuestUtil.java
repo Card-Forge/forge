@@ -17,17 +17,17 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Singletons;
+import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
 import forge.card.CardRules;
-import forge.card.CardDb.SetPreference;
 import forge.game.card.Card;
-import forge.item.PaperToken;
 import forge.item.IPaperCard;
+import forge.item.PaperToken;
 import forge.quest.bazaar.QuestPetController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

@@ -1,7 +1,5 @@
 package forge.gui.home.settings;
 
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.error.BugReporter;
 import forge.gui.ImportDialog;
@@ -10,6 +8,8 @@ import forge.gui.download.GuiDownloadPrices;
 import forge.gui.download.GuiDownloadQuestImages;
 import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.framework.ICDoc;
+
+import javax.swing.*;
 
 /** 
  * Controls the utilities submenu in the home UI.

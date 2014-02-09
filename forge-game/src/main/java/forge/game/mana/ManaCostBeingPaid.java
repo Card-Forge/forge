@@ -17,18 +17,9 @@
  */
 package forge.game.mana;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.IParserManaCost;
@@ -44,6 +35,9 @@ import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.maps.EnumMapToAmount;
 import forge.util.maps.MapToAmount;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

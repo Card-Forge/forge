@@ -1,9 +1,9 @@
 package forge.game.card;
 
+import forge.game.player.Player;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import forge.game.player.Player;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -1,18 +1,17 @@
 package forge.item;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.util.PredicateString;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-
 //import forge.Card;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.util.PredicateString;
 
 public interface IPaperCard extends InventoryItem {
 

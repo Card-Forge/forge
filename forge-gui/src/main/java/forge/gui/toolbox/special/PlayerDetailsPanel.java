@@ -1,21 +1,6 @@
 package forge.gui.toolbox.special;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
-
 import forge.Constant.Preferences;
 import forge.card.MagicColor;
 import forge.game.mana.ManaPool;
@@ -27,6 +12,15 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

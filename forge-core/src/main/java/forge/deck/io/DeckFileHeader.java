@@ -17,13 +17,12 @@
  */
 package forge.deck.io;
 
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.deck.DeckFormat;
 import forge.util.FileSection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * TODO: Write javadoc for this type.

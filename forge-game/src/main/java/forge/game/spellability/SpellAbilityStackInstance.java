@@ -17,13 +17,13 @@
  */
 package forge.game.spellability;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * <p>

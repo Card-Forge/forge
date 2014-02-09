@@ -17,10 +17,10 @@
  */
 package forge.gui.download;
 
+import forge.properties.NewConstants;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import forge.properties.NewConstants;
 
 @SuppressWarnings("serial")
 public class GuiDownloadPrices extends GuiDownloader {

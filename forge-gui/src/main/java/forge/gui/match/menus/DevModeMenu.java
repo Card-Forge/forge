@@ -1,17 +1,15 @@
 package forge.gui.match.menus;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import forge.Singletons;
 import forge.gui.match.controllers.CDev;
 import forge.gui.menus.MenuUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Gets a menu that replicates all the DevMode options.

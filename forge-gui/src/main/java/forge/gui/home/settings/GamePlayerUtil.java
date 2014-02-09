@@ -1,11 +1,10 @@
 package forge.gui.home.settings;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.gui.toolbox.FOptionPane;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import org.apache.commons.lang3.StringUtils;
 
 public final class GamePlayerUtil {
     private GamePlayerUtil() { };

@@ -1,11 +1,5 @@
 package forge.gui.home.quest;
 
-import java.awt.Font;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -19,6 +13,10 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.DeckManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
 
 /** 
  * Assembles Swing components of quest decks submenu singleton.

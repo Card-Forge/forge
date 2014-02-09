@@ -17,9 +17,8 @@
  */
 package forge.view.arcane;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>

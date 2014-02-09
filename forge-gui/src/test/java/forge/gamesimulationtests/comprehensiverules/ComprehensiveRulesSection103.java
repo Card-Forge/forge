@@ -1,7 +1,5 @@
 package forge.gamesimulationtests.comprehensiverules;
 
-import org.testng.annotations.Test;
-
 import forge.game.phase.PhaseType;
 import forge.gamesimulationtests.BaseGameSimulationTest;
 import forge.gamesimulationtests.util.GameWrapper;
@@ -14,6 +12,7 @@ import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.gamesimulationtests.util.playeractions.testactions.CardAssertAction;
 import forge.gamesimulationtests.util.playeractions.testactions.EndTestAction;
 import forge.gamesimulationtests.util.playeractions.testactions.PlayerAssertAction;
+import org.testng.annotations.Test;
 
 public class ComprehensiveRulesSection103 extends BaseGameSimulationTest {
 	@Test

@@ -1,14 +1,10 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
-import forge.game.GameActionUtil;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -17,6 +13,9 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 public class ManaEffect extends SpellAbilityEffect {
 

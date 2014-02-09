@@ -1,7 +1,5 @@
 package forge.game.ability;
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
@@ -13,6 +11,8 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.Spell;
 import forge.game.spellability.TargetRestrictions;
+
+import java.util.Map;
 
 public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;

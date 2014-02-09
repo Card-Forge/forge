@@ -1,18 +1,17 @@
 package forge.card;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.google.common.base.Function;
-
-import forge.util.ItemPool;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
+import forge.util.ItemPool;
 import forge.util.MyRandom;
 import forge.util.storage.StorageReaderFileSections;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map.Entry;
 
 
 /** 

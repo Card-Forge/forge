@@ -1,28 +1,19 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostSacrifice;
+import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

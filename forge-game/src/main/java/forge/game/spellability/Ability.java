@@ -18,7 +18,6 @@
 package forge.game.spellability;
 
 import com.esotericsoftware.minlog.Log;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;

@@ -1,22 +1,6 @@
 package forge.gui.framework;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
@@ -24,6 +8,14 @@ import forge.gui.toolbox.FSkin.SkinImage;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Top-level container in drag layout.  A cell holds

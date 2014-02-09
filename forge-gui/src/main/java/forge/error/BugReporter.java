@@ -17,45 +17,25 @@
  */
 package forge.error;
 
-import java.awt.Desktop;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.FThreads;
 import forge.gui.WrapLayout;
 import forge.gui.toolbox.FHyperlink;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
 import forge.util.BuildInfo;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.*;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * The class ErrorViewer. Enables showing and saving error messages that

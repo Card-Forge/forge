@@ -1,36 +1,5 @@
 package forge.view;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
-import java.awt.Point;
-import java.awt.PopupMenu;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.GraphicsDevice.WindowTranslucency;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.awt.geom.RoundRectangle2D;
-import java.util.Stack;
-
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FPanel;
@@ -38,6 +7,14 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinnedDialog;
 import forge.util.OperatingSystem;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.GraphicsDevice.WindowTranslucency;
+import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Stack;
 
 @SuppressWarnings("serial")
 public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDispatcher {

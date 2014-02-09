@@ -1,10 +1,5 @@
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
 import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -17,6 +12,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
+import java.util.*;
+
 /** 
  * Base class for Triggers and ReplacementEffects.
  * Provides the matchesValid function to both classes.
@@ -24,8 +21,57 @@ import forge.util.Expressions;
  */
 public abstract class TriggerReplacementBase {
 
+    /** The temporary. */
+    private boolean temporary = false;
+
+    /**
+     * Sets the temporary.
+     *
+     * @param temp
+     *            the new temporary
+     */
+    public final void setTemporary(final boolean temp) {
+        this.temporary = temp;
+    }
+
+    /**
+     * Checks if is temporary.
+     *
+     * @return true, if is temporary
+     */
+    public final boolean isTemporary() {
+        return this.temporary;
+    }
+
+    /** The map params. */
+    protected final Map<String, String> mapParams = new HashMap<String, String>();
+
+    /**
+     * <p>
+     * Getter for the field <code>mapParams</code>.
+     * </p>
+     *
+     * @return a {@link java.util.HashMap} object.
+     */
+    public final Map<String, String> getMapParams() {
+        return this.mapParams;
+    }
+
+    /**
+     * Checks if is intrinsic.
+     *
+     * @return the isIntrinsic
+     */
+    public boolean isIntrinsic() {
+        return this.intrinsic;
+    }
+
     /** The host card. */
     protected Card hostCard;
+
+
+    /** The is intrinsic. */
+    protected boolean intrinsic;
 
     /**
      * <p>

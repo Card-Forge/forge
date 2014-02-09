@@ -17,21 +17,10 @@
  */
 package forge;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-
-import javax.imageio.ImageIO;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
-
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -39,11 +28,20 @@ import forge.game.card.Card;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.util.Base64Coder;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means

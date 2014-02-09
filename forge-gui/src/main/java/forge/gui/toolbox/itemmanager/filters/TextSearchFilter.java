@@ -1,21 +1,19 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
 import forge.item.InventoryItem;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -1,13 +1,14 @@
 package forge.gui.workshop.views;
 
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FTextEditor;
 import forge.gui.workshop.controllers.CCardScript;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /** 
  * Assembles Swing components of workshop card script tab.

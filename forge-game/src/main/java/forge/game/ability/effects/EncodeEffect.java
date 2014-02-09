@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -11,6 +9,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
 
 public class EncodeEffect extends SpellAbilityEffect {
     @Override

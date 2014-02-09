@@ -1,20 +1,5 @@
 package forge.gui.deckchooser;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import net.miginfocom.swing.MigLayout;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -26,13 +11,22 @@ import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
-import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.ImageView;
-import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.*;
 import forge.item.PaperCard;
 import forge.view.FDialog;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @SuppressWarnings("serial")
 public class FDeckViewer extends FDialog {

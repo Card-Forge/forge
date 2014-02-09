@@ -1,10 +1,10 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.awt.event.MouseEvent;
 
 /** 
  * TODO: Write javadoc for this type.

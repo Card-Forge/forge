@@ -1,11 +1,12 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RunSVarAbilityEffect extends SpellAbilityEffect {
 

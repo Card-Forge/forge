@@ -1,14 +1,5 @@
 package forge.gui.home.variant;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
-
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -27,6 +18,14 @@ import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
 
 /** 
  * Controls the commander submenu in the home UI.

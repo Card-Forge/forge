@@ -1,14 +1,14 @@
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class RegisteredPlayer {

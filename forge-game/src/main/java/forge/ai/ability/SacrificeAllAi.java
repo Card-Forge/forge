@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -14,6 +11,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class SacrificeAllAi extends SpellAbilityAi {
 

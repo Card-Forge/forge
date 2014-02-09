@@ -1,14 +1,14 @@
 package forge.game.ability.effects;
 
-import java.util.Iterator;
-import java.util.List;
-
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class SetStateEffect extends SpellAbilityEffect {
 

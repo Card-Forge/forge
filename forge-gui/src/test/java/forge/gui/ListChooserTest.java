@@ -1,8 +1,8 @@
 package forge.gui;
 
-import java.util.Arrays;
-
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson

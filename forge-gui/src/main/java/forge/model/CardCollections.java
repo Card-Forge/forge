@@ -17,10 +17,6 @@
  */
 package forge.model;
 
-import java.io.File;
-
-import org.apache.commons.lang3.time.StopWatch;
-
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckGroupSerializer;
@@ -29,6 +25,9 @@ import forge.deck.io.OldDeckParser;
 import forge.properties.NewConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.io.File;
 
 /**
  * Holds editable maps of decks saved to disk. Adding or removing items to(from)

@@ -17,14 +17,14 @@
  */
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.awt.event.MouseEvent;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid

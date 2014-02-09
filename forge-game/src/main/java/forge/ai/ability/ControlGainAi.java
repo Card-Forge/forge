@@ -17,12 +17,7 @@
  */
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -36,6 +31,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx

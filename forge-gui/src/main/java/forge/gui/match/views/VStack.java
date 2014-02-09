@@ -17,27 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.game.card.CardUtil;
 import forge.game.player.LobbyPlayer;
@@ -59,6 +38,18 @@ import forge.view.arcane.CardArea;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.CardPanelContainer;
 import forge.view.arcane.util.Animation;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Assembles Swing components of stack report.

@@ -17,15 +17,15 @@
  */
 package forge.quest.data;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.properties.NewConstants;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
 //you have to call one of these two methods below

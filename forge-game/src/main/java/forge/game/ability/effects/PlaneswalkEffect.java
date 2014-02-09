@@ -1,13 +1,13 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

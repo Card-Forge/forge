@@ -1,15 +1,6 @@
 package forge.gui.home.variant;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.SwingUtilities;
-
 import com.google.common.base.Predicate;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -31,6 +22,13 @@ import forge.net.Lobby;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 /** 
  * Controls the constructed submenu in the home UI.

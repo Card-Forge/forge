@@ -1,18 +1,17 @@
 package forge.gui.deckchooser;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.DefaultComboBoxModel;
-
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.toolbox.FComboBox.TextAlignment;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FSkin;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DecksComboBox extends FComboBoxWrapper<DeckType> {
 

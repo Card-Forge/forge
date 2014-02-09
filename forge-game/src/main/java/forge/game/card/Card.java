@@ -17,46 +17,17 @@
  */
 package forge.game.card;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
 import forge.Command;
 import forge.StaticData;
-import forge.card.CardCharacteristicName;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.CardDb.SetPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameLogEntryType;
-import forge.game.GlobalRuleChange;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -64,24 +35,14 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.event.GameEventCardDamaged;
+import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.event.GameEventCardAttachment;
-import forge.game.event.GameEventCardCounters;
-import forge.game.event.GameEventCardPhased;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCardTapped;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityTriggered;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -94,6 +55,13 @@ import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <p>
@@ -8470,7 +8438,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean hasETBTrigger() {
         for (final Trigger tr : this.getTriggers()) {
-            final HashMap<String, String> params = tr.getMapParams();
+            final Map<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }

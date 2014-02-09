@@ -1,25 +1,20 @@
 package forge.net;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import org.apache.commons.lang3.time.StopWatch;
-
 import com.google.common.base.Supplier;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
-import forge.game.Game;
-import forge.game.GameLogEntry;
-import forge.game.GameRules;
-import forge.game.GameType;
-import forge.game.Match;
+import forge.game.*;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.player.LobbyPlayerHuman;
 import forge.util.Lang;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /** 

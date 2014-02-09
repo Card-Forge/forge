@@ -17,13 +17,6 @@
  */
 package forge.model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.List;
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.Singletons;
@@ -44,6 +37,9 @@ import forge.util.MultiplexOutputStream;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 import forge.view.FView;
+
+import java.io.*;
+import java.util.List;
 
 /**
  * The default Model implementation for Forge.

@@ -17,11 +17,11 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

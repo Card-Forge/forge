@@ -1,13 +1,12 @@
 package forge.gui.match.menus;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JMenu;
-
 import forge.Singletons;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Gets the menus associated with the Game screen.

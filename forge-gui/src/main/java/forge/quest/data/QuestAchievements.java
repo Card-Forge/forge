@@ -1,10 +1,10 @@
 package forge.quest.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Singletons;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

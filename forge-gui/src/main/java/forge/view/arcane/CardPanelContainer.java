@@ -17,18 +17,6 @@
  */
 package forge.view.arcane;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.SwingUtilities;
-
 import forge.Constant;
 import forge.FThreads;
 import forge.game.card.Card;
@@ -37,6 +25,12 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.view.arcane.util.CardPanelMouseListener;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manages mouse events and common functionality for CardPanel containing

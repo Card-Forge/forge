@@ -17,31 +17,19 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
-
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.phase.EndOfTurn;
-import forge.game.phase.Phase;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
-import forge.game.phase.Untap;
-import forge.game.phase.Upkeep;
+import forge.game.phase.*;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
@@ -52,6 +40,8 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.*;
 
     /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.

@@ -1,20 +1,12 @@
 package forge.gui.deckchooser;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.generation.DeckGenerator2Color;
-import forge.deck.generation.DeckGenerator3Color;
-import forge.deck.generation.DeckGenerator5Color;
-import forge.deck.generation.DeckGeneratorBase;
-import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.deck.generation.*;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.DeckManager;
 import forge.item.PaperCard;
@@ -27,6 +19,10 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /** 
  * Utility collection for various types of decks.

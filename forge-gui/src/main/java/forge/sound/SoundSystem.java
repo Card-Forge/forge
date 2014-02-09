@@ -1,15 +1,14 @@
 package forge.sound;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.eventbus.Subscribe;
-
 import forge.Singletons;
 import forge.game.event.GameEvent;
 import forge.gui.events.UiEvent;
 import forge.properties.ForgePreferences.FPref;
+
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /** 
  * Manages playback of all sounds for the client.

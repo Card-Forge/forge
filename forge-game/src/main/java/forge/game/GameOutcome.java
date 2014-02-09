@@ -17,20 +17,15 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

@@ -21,14 +21,13 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Holds default AI personality profile values in an enum.

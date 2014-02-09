@@ -1,37 +1,22 @@
 package forge.gui;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
+import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
+import forge.gui.match.CMatchUI;
+import forge.gui.toolbox.*;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.view.FDialog;
 
-import javax.swing.JPanel;
-import javax.swing.ListModel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import forge.game.card.Card;
-import forge.game.spellability.SpellAbility;
-import forge.gui.match.CMatchUI;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
-import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.view.FDialog;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // An input box for handling the order of choices.
 // Left box has the original choices

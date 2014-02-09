@@ -17,20 +17,10 @@
  */
 package forge.game.combat;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -38,6 +28,10 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

@@ -17,11 +17,6 @@
  */
 package forge.game.trigger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
 import forge.game.card.Card;
@@ -32,6 +27,11 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -70,20 +70,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = id;
     }
 
-    /** The map params. */
-    protected final HashMap<String, String> mapParams = new HashMap<String, String>();
-
-    /**
-     * <p>
-     * Getter for the field <code>mapParams</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final HashMap<String, String> getMapParams() {
-        return this.mapParams;
-    }
-
     /** The run params. */
     private Map<String, Object> runParams;
 
@@ -116,8 +102,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         return this.storedTriggeredObjects;
     }
 
-    /** The is intrinsic. */
-    private final boolean intrinsic;
 
     private List<PhaseType> validPhases;
 
@@ -134,11 +118,11 @@ public abstract class Trigger extends TriggerReplacementBase {
      *            the intrinsic
      */
     public Trigger(final Map<String, String> params, final Card host, final boolean intrinsic) {
+        this.intrinsic = intrinsic;
+
         this.setRunParams(new HashMap<String, Object>());
         this.mapParams.putAll(params);
         this.setHostCard(host);
-
-        this.intrinsic = intrinsic;
     }
 
     /**
@@ -216,7 +200,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * </p>
      * @param game 
      * 
-     * @param runParams2
+     * @param runParams
      *            a {@link java.util.HashMap} object.
      * @return a boolean.
      */
@@ -352,38 +336,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public abstract void setTriggeringObjects(SpellAbility sa);
-
-    /** The temporary. */
-    private boolean temporary = false;
-
-    /**
-     * Sets the temporary.
-     * 
-     * @param temp
-     *            the new temporary
-     */
-    public final void setTemporary(final boolean temp) {
-        this.temporary = temp;
-    }
-
-    /**
-     * Checks if is temporary.
-     * 
-     * @return true, if is temporary
-     */
-    public final boolean isTemporary() {
-        return this.temporary;
-    }
-
-    /**
-     * Checks if is intrinsic.
-     * 
-     * @return the isIntrinsic
-     */
-    public boolean isIntrinsic() {
-        return this.intrinsic;
-    }
-
 
     /**
      * Gets the run params.

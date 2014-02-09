@@ -1,19 +1,13 @@
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.FontMetrics;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListModel;
-import javax.swing.border.EmptyBorder;
-
 import forge.Singletons;
 import forge.gui.toolbox.FSkin.SkinnedList;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 /** 
  * A JList object using Forge skin properties.

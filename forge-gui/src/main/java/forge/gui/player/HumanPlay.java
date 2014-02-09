@@ -1,54 +1,20 @@
 package forge.gui.player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
-
 import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.GameActionUtil;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.FlipCoinEffect;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.cost.Cost;
-import forge.game.cost.CostAddMana;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostDraw;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostFlipCoin;
-import forge.game.cost.CostGainControl;
-import forge.game.cost.CostGainLife;
-import forge.game.cost.CostMill;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPartWithList;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCardToLib;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveAnyCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostReturn;
-import forge.game.cost.CostReveal;
-import forge.game.cost.CostSacrifice;
-import forge.game.cost.CostTapType;
-import forge.game.cost.PaymentDecision;
+import forge.game.cost.*;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -56,13 +22,13 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.input.InputPayMana;
-import forge.gui.input.InputPayManaExecuteCommands;
-import forge.gui.input.InputPayManaOfCostPayment;
-import forge.gui.input.InputPayManaSimple;
-import forge.gui.input.InputPayManaX;
-import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.input.*;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.

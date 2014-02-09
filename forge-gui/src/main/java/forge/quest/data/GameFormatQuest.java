@@ -17,14 +17,13 @@
  */
 package forge.quest.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**

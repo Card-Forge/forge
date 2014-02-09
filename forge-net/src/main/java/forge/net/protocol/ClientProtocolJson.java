@@ -1,26 +1,14 @@
 package forge.net.protocol;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-
-import forge.net.protocol.toclient.AuthResultPacketClt;
-import forge.net.protocol.toclient.ChatPacketClt;
-import forge.net.protocol.toclient.EchoPacketClt;
-import forge.net.protocol.toclient.ErrorIncorrectPacketClt;
-import forge.net.protocol.toclient.ErrorNoStateForPacketClt;
-import forge.net.protocol.toclient.IPacketClt;
-import forge.net.protocol.toclient.WelcomePacketClt;
-import forge.net.protocol.toserver.AuthorizePacketSrv;
-import forge.net.protocol.toserver.ChatPacketSrv;
-import forge.net.protocol.toserver.EchoPacketSrv;
-import forge.net.protocol.toserver.IPacketSrv;
-import forge.net.protocol.toserver.IncorrectPacketSrv;
+import forge.net.protocol.toclient.*;
+import forge.net.protocol.toserver.*;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /** 
  * The expected incoming message format is: /{opcode} {json-object}, where opcode is a string among keys of headerToClassInbound

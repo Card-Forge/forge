@@ -17,25 +17,17 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.SwingConstants;
-
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin.FPanelBase;
 import forge.gui.toolbox.FSkin.SkinColor;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Core panel used in UI.

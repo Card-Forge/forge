@@ -1,21 +1,5 @@
 package forge.control;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -24,6 +8,15 @@ import forge.gui.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.properties.ForgePreferences.FPref;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /** 
  * Consolidates keyboard shortcut assembly into one location

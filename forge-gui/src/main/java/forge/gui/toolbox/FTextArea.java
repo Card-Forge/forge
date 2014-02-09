@@ -1,8 +1,8 @@
 package forge.gui.toolbox;
 
-import java.awt.FontMetrics;
-
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
+
+import java.awt.*;
 
 /** 
  * A custom instance of JTextArea using Forge skin properties.

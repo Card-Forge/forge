@@ -17,13 +17,13 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>

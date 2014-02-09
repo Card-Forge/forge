@@ -1,9 +1,5 @@
 package forge.gui.home.quest;
 
-import java.util.Map.Entry;
-
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -16,6 +12,9 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
+
+import javax.swing.*;
+import java.util.Map.Entry;
 
 /** 
  * Controls the quest decks submenu in the home UI.

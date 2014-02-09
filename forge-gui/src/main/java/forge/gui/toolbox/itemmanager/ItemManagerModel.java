@@ -17,18 +17,14 @@
  */
 package forge.gui.toolbox.itemmanager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

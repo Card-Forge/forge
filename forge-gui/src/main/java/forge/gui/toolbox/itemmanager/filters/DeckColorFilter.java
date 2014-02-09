@@ -1,9 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import javax.swing.JPanel;
-
 import com.google.common.base.Predicate;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.gui.deckeditor.DeckProxy;
@@ -11,6 +8,8 @@ import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.util.BinaryUtil;
 import forge.util.ItemPool;
+
+import javax.swing.*;
 
 /** 
  * TODO: Write javadoc for this type.

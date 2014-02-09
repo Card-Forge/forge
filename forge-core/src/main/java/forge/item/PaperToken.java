@@ -1,10 +1,10 @@
 package forge.item;
 
-import java.util.Locale;
-
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+
+import java.util.Locale;
 
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {

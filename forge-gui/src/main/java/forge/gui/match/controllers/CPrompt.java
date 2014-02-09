@@ -17,15 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
-import javax.swing.JButton;
-
 import forge.Command;
 import forge.FThreads;
 import forge.game.Game;
@@ -36,6 +27,10 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VPrompt;
 import forge.gui.toolbox.FSkin;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Controls the prompt panel in the match UI.

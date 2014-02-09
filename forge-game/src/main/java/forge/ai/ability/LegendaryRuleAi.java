@@ -1,13 +1,12 @@
 package forge.ai.ability;
 
-import java.util.Collection;
-
 import com.google.common.collect.Iterables;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Collection;
 
 /** 
  * TODO: Write javadoc for this type.

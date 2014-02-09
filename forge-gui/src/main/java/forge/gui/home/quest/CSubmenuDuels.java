@@ -1,16 +1,5 @@
 package forge.gui.home.quest;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
-
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
@@ -20,6 +9,10 @@ import forge.gui.toolbox.JXButtonPanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
 import forge.quest.bazaar.QuestPetController;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.List;
 
 /** 
  * Controls the quest duels submenu in the home UI.

@@ -17,11 +17,11 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.util.Map.Entry;
-import javax.swing.table.TableColumn;
-
 import com.google.common.base.Function;
 import forge.item.InventoryItem;
+
+import javax.swing.table.TableColumn;
+import java.util.Map.Entry;
 
 /**
  * A column object in a EditorTableModel in the card editor.

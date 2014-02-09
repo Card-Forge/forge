@@ -1,27 +1,24 @@
 package forge.quest.bazaar;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import com.thoughtworks.xstream.XStream;
+import forge.quest.data.QuestAssets;
+import forge.util.IgnoringXStream;
+import forge.util.XmlUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.thoughtworks.xstream.XStream;
-
-import forge.quest.data.QuestAssets;
-import forge.util.IgnoringXStream;
-import forge.util.XmlUtil;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * TODO: Write javadoc for this type.

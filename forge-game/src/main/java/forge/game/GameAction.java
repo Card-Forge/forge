@@ -17,21 +17,10 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-
 import forge.Command;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
@@ -39,20 +28,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
-import forge.game.card.Card;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
-import forge.game.event.GameEventCardChangeZone;
-import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardRegenerated;
-import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventFlipCoin;
-import forge.game.event.GameEventGameStarted;
+import forge.game.card.*;
+import forge.game.event.*;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
@@ -74,6 +51,9 @@ import forge.util.Expressions;
 import forge.util.ThreadUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Methods for common actions performed during a game.

@@ -1,9 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -16,6 +12,11 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class DigEffect extends SpellAbilityEffect {
 

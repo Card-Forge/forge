@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -14,6 +11,9 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class DigUntilAi extends SpellAbilityAi {
 

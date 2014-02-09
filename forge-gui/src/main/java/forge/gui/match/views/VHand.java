@@ -17,8 +17,6 @@
  */
 package forge.gui.match.views;
 
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -27,6 +25,9 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CHand;
 import forge.gui.toolbox.FScrollPane;
 import forge.view.arcane.HandArea;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /**
  * Assembles Swing components of hand area.

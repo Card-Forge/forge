@@ -1,16 +1,15 @@
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.Singletons;
 import forge.card.CardRules;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

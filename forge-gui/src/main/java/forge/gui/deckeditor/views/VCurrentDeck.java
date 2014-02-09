@@ -1,8 +1,5 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CCurrentDeck;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -14,6 +11,9 @@ import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.item.InventoryItem;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 
 /** 

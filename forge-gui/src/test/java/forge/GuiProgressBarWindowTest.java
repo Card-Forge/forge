@@ -1,11 +1,10 @@
 package forge;
 
-import javax.swing.WindowConstants;
-
+import forge.gui.GuiProgressBarWindow;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import forge.gui.GuiProgressBarWindow;
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson

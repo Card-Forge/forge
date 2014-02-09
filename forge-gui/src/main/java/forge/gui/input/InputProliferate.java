@@ -1,18 +1,14 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.Map.Entry;
 
 /** 
  * TODO: Write javadoc for this type.

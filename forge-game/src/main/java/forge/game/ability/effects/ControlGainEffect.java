@@ -1,8 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
-import java.util.List;
-
 import forge.Command;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -14,6 +11,9 @@ import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ControlGainEffect extends SpellAbilityEffect {
     /* (non-Javadoc)

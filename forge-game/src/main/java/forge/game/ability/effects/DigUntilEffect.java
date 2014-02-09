@@ -1,11 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -16,6 +10,8 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.*;
 
 public class DigUntilEffect extends SpellAbilityEffect {
 

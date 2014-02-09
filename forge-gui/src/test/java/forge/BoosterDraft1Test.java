@@ -1,10 +1,9 @@
 package forge;
 
-import org.testng.annotations.Test;
-
 import forge.deck.CardPool;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
+import org.testng.annotations.Test;
 
 /**
  * Unit test for simple App.

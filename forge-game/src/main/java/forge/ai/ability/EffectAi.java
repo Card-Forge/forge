@@ -1,11 +1,7 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -22,6 +18,9 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class EffectAi extends SpellAbilityAi {
     @Override

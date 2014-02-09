@@ -1,11 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
-
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -14,6 +9,10 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.MyRandom;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class ReorderZoneEffect extends SpellAbilityEffect {
 

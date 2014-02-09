@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.common.collect.Iterables;
-
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -14,6 +11,9 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
 

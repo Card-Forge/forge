@@ -17,27 +17,26 @@
  */
 package forge.game;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import forge.StaticData;
+import forge.card.CardEdition;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.util.FileSection;
+import forge.util.storage.StorageBase;
+import forge.util.storage.StorageReaderFileSections;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-
-import forge.StaticData;
-import forge.card.CardEdition;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.util.FileSection;
-import forge.util.storage.StorageBase;
-import forge.util.storage.StorageReaderFileSections;
 
 
 /**

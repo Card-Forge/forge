@@ -17,20 +17,16 @@
  */
 package forge.game.ability;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityCondition;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>

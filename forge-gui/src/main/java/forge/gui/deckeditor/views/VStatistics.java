@@ -1,20 +1,19 @@
 package forge.gui.deckeditor.views;
 
-import java.awt.Font;
-
-import forge.gui.toolbox.FLabel;
-
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
 
 /** 
  * Assembles Swing components of deck editor analysis tab.

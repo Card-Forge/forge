@@ -1,11 +1,11 @@
 package forge.control;
 
+import forge.Singletons;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.List;
-
-import forge.Singletons;
 
 /** 
  * Restarts a java app.

@@ -17,10 +17,6 @@
  */
 package forge.game.staticability;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.card.MagicColor;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -32,6 +28,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The Class StaticAbility.

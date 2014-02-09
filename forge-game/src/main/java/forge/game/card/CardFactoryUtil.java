@@ -17,14 +17,8 @@
  */
 package forge.game.card;
 
-import java.util.*;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-
 import forge.Command;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
@@ -50,22 +44,17 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

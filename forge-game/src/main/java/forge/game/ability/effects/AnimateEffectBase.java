@@ -17,14 +17,14 @@
  */
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+
+import java.util.ArrayList;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
 

@@ -17,12 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-
-import javax.swing.JLabel;
-
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
@@ -34,6 +28,11 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 /**
  * Singleton controller for VPicture.

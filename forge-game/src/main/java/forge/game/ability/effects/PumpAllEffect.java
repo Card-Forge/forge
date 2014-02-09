@@ -1,9 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import forge.Command;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -14,6 +10,10 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PumpAllEffect extends SpellAbilityEffect {
     private void applyPumpAll(final SpellAbility sa, final List<Card> list, final int a, 

@@ -1,20 +1,5 @@
 package forge.gui.home.quest;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
@@ -26,6 +11,13 @@ import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Controls the quest challenges submenu in the home UI.

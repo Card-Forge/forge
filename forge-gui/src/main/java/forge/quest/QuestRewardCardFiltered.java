@@ -1,14 +1,13 @@
 package forge.quest;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import forge.Singletons;
+import forge.item.PaperCard;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
-import forge.Singletons;
-import forge.item.PaperCard;
 
 /** 
  * Allows the player to choose a card from a predicate-filtered list of cards.

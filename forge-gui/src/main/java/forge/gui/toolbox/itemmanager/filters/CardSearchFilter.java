@@ -1,12 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.swing.JPanel;
-
 import com.google.common.base.Predicate;
-
 import forge.Command;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
@@ -16,6 +10,10 @@ import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+
+import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /** 
  * TODO: Write javadoc for this type.

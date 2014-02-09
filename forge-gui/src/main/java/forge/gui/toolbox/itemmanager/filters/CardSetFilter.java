@@ -1,13 +1,13 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import forge.game.GameFormat;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.PaperCard;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /** 
  * TODO: Write javadoc for this type.

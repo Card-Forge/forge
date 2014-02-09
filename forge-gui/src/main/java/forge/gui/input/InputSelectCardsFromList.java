@@ -1,8 +1,8 @@
 package forge.gui.input;
 
-import java.util.Collection;
-
 import forge.game.card.Card;
+
+import java.util.Collection;
 
 public class InputSelectCardsFromList extends InputSelectEntitiesFromList<Card> {
     private static final long serialVersionUID = 6230360322294805986L;

@@ -1,20 +1,5 @@
 package forge.gui.home.quest;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.text.WordUtils;
-
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.deck.Deck;
@@ -26,19 +11,23 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBoxWrapper;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.JXButtonPanel;
+import forge.gui.toolbox.*;
 import forge.item.PreconDeck;
 import forge.model.CardCollections;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
 import forge.util.storage.IStorage;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.text.WordUtils;
+
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Assembles Swing components of quest data submenu singleton.

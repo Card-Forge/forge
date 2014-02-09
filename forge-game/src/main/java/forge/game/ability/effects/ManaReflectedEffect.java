@@ -1,8 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Collection;
-import java.util.List;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
@@ -11,6 +8,9 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Collection;
+import java.util.List;
 
 public class ManaReflectedEffect extends SpellAbilityEffect {
 

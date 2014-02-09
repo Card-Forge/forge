@@ -18,18 +18,18 @@
 
 package forge.model;
 
-import java.io.File;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import forge.Singletons;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.limited.CustomLimited;
 import forge.util.FileUtil;
+
+import java.io.File;
+import java.util.List;
 
 /** 
  * The class MetaSet. This class is used to define 'special'

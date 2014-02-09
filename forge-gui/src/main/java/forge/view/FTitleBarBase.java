@@ -1,27 +1,17 @@
 package forge.view;
 
-import java.awt.BasicStroke;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-
-import javax.swing.SpringLayout;
-import javax.swing.SwingUtilities;
-
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.gui.toolbox.FSkin.SkinnedMenuBar;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 
 @SuppressWarnings("serial")
 public abstract class FTitleBarBase extends SkinnedMenuBar {

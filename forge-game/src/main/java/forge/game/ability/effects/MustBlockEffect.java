@@ -1,13 +1,13 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MustBlockEffect extends SpellAbilityEffect {
 

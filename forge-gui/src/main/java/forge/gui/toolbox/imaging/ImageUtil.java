@@ -18,8 +18,9 @@
 
 package forge.gui.toolbox.imaging;
 
-import java.awt.Dimension;
 import forge.gui.toolbox.FSkin.SkinIcon;
+
+import java.awt.*;
 
 /**
  * Useful general imaging routines. 

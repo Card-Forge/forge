@@ -17,9 +17,6 @@
  */
 package forge.game.replacement;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityUtils;
@@ -30,6 +27,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * TODO: Write javadoc for this type.
@@ -42,9 +42,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     /** The has run. */
     private boolean hasRun = false;
 
-    /** The is intrinsic. */
-    private final boolean intrinsic;
-
     /**
      * Checks for run.
      * 
@@ -53,9 +50,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public final boolean hasRun() {
         return this.hasRun;
     }
-
-    /** The map params, denoting what to replace. */
-    protected final Map<String, String> mapParams;
 
     /**
      * Instantiates a new replacement effect.
@@ -66,9 +60,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *            the host
      */
     public ReplacementEffect(final Map<String, String> map, final Card host, final boolean intrinsic) {
-        mapParams = map;
-        this.setHostCard(host);
         this.intrinsic = intrinsic;
+        mapParams.putAll(map);
+        this.setHostCard(host);
     }
 
     /**
@@ -139,18 +133,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.hasRun = hasRun;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>mapParams</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final Map<String, String> getMapParams() {
-        return this.mapParams;
-    }
-
-    /**
+     /**
      * Can replace.
      * 
      * @param runParams
@@ -257,33 +240,5 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
 
-    /** The temporary. */
-    private boolean temporary = false;
 
-    /**
-     * Sets the temporary.
-     * 
-     * @param temp
-     *            the new temporary
-     */
-    public final void setTemporary(final boolean temp) {
-        this.temporary = temp;
-    }
-
-    /**
-     * Checks if is temporary.
-     * 
-     * @return true, if is temporary
-     */
-    public final boolean isTemporary() {
-        return this.temporary;
-    }
-    /**
-     * Checks if is intrinsic.
-     * 
-     * @return the isIntrinsic
-     */
-    public boolean isIntrinsic() {
-        return this.intrinsic;
-    }
 }

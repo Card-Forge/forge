@@ -1,24 +1,15 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.ability.ChangeZoneAi;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -31,6 +22,10 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override

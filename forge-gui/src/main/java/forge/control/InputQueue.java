@@ -17,14 +17,14 @@
  */
 package forge.control;
 
-import java.util.Observable;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import forge.game.Game;
 import forge.gui.input.Input;
 import forge.gui.input.InputLockUI;
 import forge.gui.input.InputSynchronized;
+
+import java.util.Observable;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * <p>

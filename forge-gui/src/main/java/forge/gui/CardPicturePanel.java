@@ -18,11 +18,6 @@
 
 package forge.gui;
 
-import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
-
-import javax.swing.JPanel;
-
 import forge.ImageCache;
 import forge.ImageKeys;
 import forge.Singletons;
@@ -33,6 +28,10 @@ import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.gui.toolbox.imaging.FImageUtil;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Displays image associated with a card or inventory item.

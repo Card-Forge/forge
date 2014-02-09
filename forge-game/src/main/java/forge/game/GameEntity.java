@@ -17,13 +17,13 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-
 import forge.game.card.Card;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * <p>

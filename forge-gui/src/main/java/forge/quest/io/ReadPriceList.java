@@ -17,17 +17,16 @@
  */
 package forge.quest.io;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.card.MagicColor;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * <p>

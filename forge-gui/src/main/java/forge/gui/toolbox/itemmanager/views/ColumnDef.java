@@ -17,20 +17,10 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.util.Map.Entry;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-
 import forge.Singletons;
-import forge.card.CardAiHints;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.GameFormat;
 import forge.gui.CardPreferences;
@@ -41,6 +31,10 @@ import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
 import forge.limited.DraftRankCache;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 public enum ColumnDef {
     STRING("", "", 0, -1, -1, SortState.ASC, new ItemCellRenderer(),

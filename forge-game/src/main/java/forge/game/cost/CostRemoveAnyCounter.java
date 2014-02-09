@@ -17,10 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
@@ -30,6 +26,10 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The Class CostRemoveAnyCounter.

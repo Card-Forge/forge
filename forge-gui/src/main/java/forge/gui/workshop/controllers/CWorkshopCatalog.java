@@ -1,13 +1,13 @@
 package forge.gui.workshop.controllers;
 
-import java.util.Map;
-
 import forge.Command;
-import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.workshop.views.VWorkshopCatalog;
+
+import java.util.Map;
 
 /** 
  * Controls the "card catalog" panel in the workshop UI.

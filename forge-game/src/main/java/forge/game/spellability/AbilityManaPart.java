@@ -17,15 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.GameType;
@@ -38,6 +29,14 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementResult;
 import forge.game.trigger.TriggerType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>

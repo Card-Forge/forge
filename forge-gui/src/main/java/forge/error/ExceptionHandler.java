@@ -18,9 +18,9 @@
 
 package forge.error;
 
-import java.lang.Thread.UncaughtExceptionHandler;
-
 import com.esotericsoftware.minlog.Log;
+
+import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
  * This class handles all exceptions that weren't caught by showing the error to

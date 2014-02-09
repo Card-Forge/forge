@@ -17,10 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -31,6 +27,9 @@ import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

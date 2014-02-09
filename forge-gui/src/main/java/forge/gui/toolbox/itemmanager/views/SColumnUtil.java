@@ -17,13 +17,12 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
+import javax.swing.*;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.JTable;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 /**
  * A collection of methods pertaining to columns in card catalog and

@@ -17,17 +17,9 @@
  */
 package forge.quest;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.eventbus.Subscribe;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameFormat;
@@ -48,6 +40,9 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * TODO: Write javadoc for this type.

@@ -17,20 +17,20 @@
  */
 package forge.quest.data;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.quest.QuestDeckMap;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtilCards;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.ItemPool;
+
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /** */
 public class QuestAssets {

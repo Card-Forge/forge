@@ -17,54 +17,38 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.GameActionUtil;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>

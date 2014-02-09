@@ -1,12 +1,5 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.FThreads;
 import forge.ai.ComputerUtilMana;
 import forge.card.ColorSet;
@@ -18,15 +11,21 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.gui.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.gui.GuiChoose;
+import forge.gui.player.HumanPlay;
 import forge.util.Evaluator;
 import forge.view.ButtonUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.

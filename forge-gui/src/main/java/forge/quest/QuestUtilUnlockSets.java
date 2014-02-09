@@ -17,19 +17,9 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
@@ -40,6 +30,9 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.quest.io.ReadPriceList;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited

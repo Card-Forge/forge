@@ -1,14 +1,5 @@
 package forge.gui.deckeditor.views;
 
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import net.miginfocom.swing.MigLayout;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -20,8 +11,15 @@ import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 /** 
  * Assembles Swing components of deck editor analysis tab.

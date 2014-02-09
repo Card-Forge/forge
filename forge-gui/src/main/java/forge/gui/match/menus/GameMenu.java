@@ -1,26 +1,18 @@
 package forge.gui.match.menus;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-
 import forge.Singletons;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.SkinIcon;
-import forge.gui.toolbox.FSkin.SkinProp;
-import forge.gui.toolbox.FSkin.SkinnedCheckBoxMenuItem;
-import forge.gui.toolbox.FSkin.SkinnedMenu;
-import forge.gui.toolbox.FSkin.SkinnedMenuItem;
-import forge.gui.toolbox.FSkin.SkinnedRadioButtonMenuItem;
+import forge.gui.toolbox.FSkin.*;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Returns a JMenu containing options associated with current game.

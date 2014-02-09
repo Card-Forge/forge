@@ -17,13 +17,6 @@
  */
 package forge.limited;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
@@ -37,6 +30,12 @@ import forge.model.CardBlock;
 import forge.model.UnOpenedMeta;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * <p>

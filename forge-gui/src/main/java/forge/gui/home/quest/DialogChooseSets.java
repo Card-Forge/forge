@@ -1,27 +1,18 @@
 package forge.gui.home.quest;
 
+import forge.Singletons;
+import forge.card.CardEdition;
+import forge.gui.SOverlayUtils;
+import forge.gui.toolbox.*;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
-import forge.card.CardEdition;
-import forge.gui.SOverlayUtils;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FCheckBoxList;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
 
 public class DialogChooseSets {
     private final List<String> selectedSets = new ArrayList<String>();

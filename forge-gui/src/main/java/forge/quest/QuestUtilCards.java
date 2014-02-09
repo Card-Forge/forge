@@ -17,36 +17,17 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
-import forge.card.BoosterSlots;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.ICardDatabase;
-import forge.card.MagicColor;
-import forge.card.UnOpenedProduct;
+import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
-import forge.item.BoosterPack;
-import forge.item.PaperCard;
-import forge.item.FatPack;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.SealedProduct;
-import forge.item.PreconDeck;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.GameFormatQuest;
@@ -57,6 +38,11 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been

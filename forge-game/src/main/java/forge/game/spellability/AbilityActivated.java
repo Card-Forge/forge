@@ -17,8 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
@@ -27,6 +25,8 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
 
 /**
  * <p>

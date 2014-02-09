@@ -1,9 +1,9 @@
 package forge.gui.home.settings;
 
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.gui.framework.ICDoc;
+
+import javax.swing.*;
 
 /** 
  * Controls the avatars submenu in the home UI.

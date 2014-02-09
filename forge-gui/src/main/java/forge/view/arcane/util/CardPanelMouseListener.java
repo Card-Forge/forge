@@ -18,9 +18,9 @@
 package forge.view.arcane.util;
 
 
-import java.awt.event.MouseEvent;
-
 import forge.view.arcane.CardPanel;
+
+import java.awt.event.MouseEvent;
 
 /**
  * <p>CardPanelMouseListener interface.</p>

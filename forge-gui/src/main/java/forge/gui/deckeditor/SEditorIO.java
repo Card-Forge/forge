@@ -1,7 +1,5 @@
 package forge.gui.deckeditor;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.gui.deckeditor.controllers.CAllDecks;
 import forge.gui.deckeditor.controllers.DeckController;
@@ -9,6 +7,7 @@ import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FOptionPane;
+import org.apache.commons.lang3.StringUtils;
 
 /** 
  * Handles editor preferences saving and loading.

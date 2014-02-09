@@ -1,9 +1,5 @@
 package forge.game.trigger;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -11,13 +7,11 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.ISpellAbility;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.

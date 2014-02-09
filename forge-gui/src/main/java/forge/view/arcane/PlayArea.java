@@ -17,14 +17,6 @@
  */
 package forge.view.arcane;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
@@ -32,6 +24,12 @@ import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FScrollPane;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>

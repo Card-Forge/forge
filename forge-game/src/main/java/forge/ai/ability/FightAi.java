@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Random;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -13,6 +10,9 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Random;
 
 public class FightAi extends SpellAbilityAi {
 

@@ -1,8 +1,5 @@
 package forge.gui.input;
 
-import java.awt.event.MouseEvent;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.InputQueue;
@@ -12,6 +9,9 @@ import forge.game.spellability.SpellAbility;
 import forge.gui.match.CMatchUI;
 import forge.util.ThreadUtil;
 import forge.view.ButtonUtil;
+
+import java.awt.event.MouseEvent;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /** 
  * TODO: Write javadoc for this type.

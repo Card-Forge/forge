@@ -1,14 +1,14 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /** 
  * TODO: Write javadoc for this type.

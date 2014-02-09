@@ -17,17 +17,17 @@
  */
 package forge.gui.deckchooser;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import forge.Singletons;
 import forge.deck.CardPool;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.error.BugReporter;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * <p>

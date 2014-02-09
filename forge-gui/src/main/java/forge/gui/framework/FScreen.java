@@ -1,7 +1,5 @@
 package forge.gui.framework;
 
-import java.io.File;
-
 import forge.Singletons;
 import forge.gui.bazaar.CBazaarUI;
 import forge.gui.bazaar.VBazaarUI;
@@ -18,6 +16,8 @@ import forge.gui.workshop.CWorkshopUI;
 import forge.gui.workshop.VWorkshopUI;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
+
+import java.io.File;
 
 /** 
  * Definitions for Forge screens

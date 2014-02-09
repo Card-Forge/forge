@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -14,6 +11,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
 
 /** 
  * AbilityFactory for Creature Spells.

@@ -1,8 +1,8 @@
 package forge.game.event;
 
-import java.util.List;
-
 import forge.game.GameOutcome;
+
+import java.util.List;
 
 public class GameEventGameOutcome extends GameEvent {
     public final GameOutcome result;

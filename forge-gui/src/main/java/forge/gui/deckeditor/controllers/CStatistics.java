@@ -1,12 +1,7 @@
 package forge.gui.deckeditor.controllers;
 
-import java.util.Map.Entry;
-
-import javax.swing.JLabel;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.Command;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -16,9 +11,12 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.util.ItemPool;
+
+import javax.swing.*;
+import java.util.Map.Entry;
 
 
 /** 

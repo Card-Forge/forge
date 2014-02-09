@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -12,6 +10,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override

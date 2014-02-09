@@ -17,11 +17,10 @@
  */
 package forge.util.storage;
 
-import java.util.Collection;
-
 import com.google.common.base.Predicate;
-
 import forge.util.IHasName;
+
+import java.util.Collection;
 
 /**
  * TODO: Write javadoc for this type.

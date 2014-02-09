@@ -17,12 +17,12 @@
  */
 package forge.card;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>

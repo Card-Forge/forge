@@ -17,19 +17,9 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.ToolTipManager;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 // based on code from http://tips4java.wordpress.com/2009/11/08/tooltips-and-scrollpanes/
 

@@ -17,25 +17,18 @@
  */
 package forge.gui;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
+import forge.game.card.Card;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.views.VField;
+import forge.view.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.KeyStroke;
-
-import forge.game.card.Card;
-import forge.gui.match.VMatchUI;
-import forge.gui.match.views.VField;
-import forge.view.arcane.CardPanel;
 
 /**
  * <p>

@@ -1,12 +1,11 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.google.common.base.Predicate;
-
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.itemmanager.ItemManager;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /** 
  * TODO: Write javadoc for this type.

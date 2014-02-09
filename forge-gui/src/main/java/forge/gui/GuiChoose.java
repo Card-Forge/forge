@@ -1,30 +1,21 @@
 package forge.gui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
-
-import javax.swing.JList;
-import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-
 import forge.FThreads;
 import forge.Singletons;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FOptionPane;
 import forge.item.InventoryItem;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /** 
  * TODO: Write javadoc for this type.

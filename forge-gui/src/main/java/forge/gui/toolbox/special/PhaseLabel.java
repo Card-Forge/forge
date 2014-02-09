@@ -1,14 +1,11 @@
 package forge.gui.toolbox.special;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
+import forge.gui.toolbox.FSkin;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import forge.gui.toolbox.FSkin;
 
 /**
  * Shows phase labels, handles repainting and on/off states. A PhaseLabel

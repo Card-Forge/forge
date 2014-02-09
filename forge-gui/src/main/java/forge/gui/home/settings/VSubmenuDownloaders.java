@@ -1,16 +1,5 @@
 package forge.gui.home.settings;
 
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
@@ -19,15 +8,15 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextArea;
+import forge.gui.toolbox.*;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /** 
  * Assembles Swing components of utilities submenu singleton.

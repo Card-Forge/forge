@@ -18,7 +18,6 @@
 package forge.item;
 
 import com.google.common.base.Function;
-
 import forge.card.CardRarity;
 import forge.card.CardRules;
 

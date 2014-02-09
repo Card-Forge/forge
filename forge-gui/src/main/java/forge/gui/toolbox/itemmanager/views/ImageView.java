@@ -1,54 +1,30 @@
 package forge.gui.toolbox.itemmanager.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JViewport;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-
 import forge.ImageCache;
 import forge.game.card.Card;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
-import forge.gui.toolbox.FComboBoxWrapper;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FMouseAdapter;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinImage;
-import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.view.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;

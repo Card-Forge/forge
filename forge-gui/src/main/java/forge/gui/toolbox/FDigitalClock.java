@@ -1,14 +1,13 @@
 package forge.gui.toolbox;
 
+import forge.gui.toolbox.FSkin.SkinnedLabel;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import javax.swing.Timer;
-
-import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /**
  * Digital clock label that displays current time

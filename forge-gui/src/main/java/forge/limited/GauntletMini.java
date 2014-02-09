@@ -17,11 +17,6 @@
  */
 package forge.limited;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.SwingUtilities;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -29,6 +24,10 @@ import forge.game.player.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 import forge.net.FServer;
 import forge.net.Lobby;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

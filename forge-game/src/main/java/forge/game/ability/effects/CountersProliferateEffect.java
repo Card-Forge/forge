@@ -1,14 +1,14 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import forge.game.GameEntity;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CountersProliferateEffect extends SpellAbilityEffect {
     @Override

@@ -17,12 +17,8 @@
  */
 package forge.gui.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -36,6 +32,9 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectTargets;
 import forge.util.Aggregates;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

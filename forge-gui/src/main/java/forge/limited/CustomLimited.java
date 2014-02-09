@@ -17,13 +17,6 @@
  */
 package forge.limited;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.deck.Deck;
@@ -34,6 +27,12 @@ import forge.util.FileSection;
 import forge.util.ItemPool;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>

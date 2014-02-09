@@ -1,9 +1,5 @@
 package forge;
 
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
-
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -12,6 +8,10 @@ import forge.item.FatPack;
 import forge.item.SealedProduct;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
+
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
 
  /**

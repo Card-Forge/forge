@@ -1,21 +1,16 @@
 package forge.gui.deckeditor.controllers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import forge.Command;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.ICDoc;
-import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+
+import java.util.*;
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.

@@ -1,26 +1,14 @@
 package forge.gui.home.quest;
 
-import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.home.EMenuGroup;
-import forge.gui.home.IVSubmenu;
-import forge.gui.home.LblHeader;
-import forge.gui.home.StartButton;
-import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBoxWrapper;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPanel;
-import forge.gui.toolbox.FSkin;
+import forge.gui.home.*;
+import forge.gui.toolbox.*;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Assembles Swing components of quest duels submenu singleton.

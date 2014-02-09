@@ -1,14 +1,13 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with

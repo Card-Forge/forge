@@ -1,13 +1,12 @@
 package forge.game.ability;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
 
 // Class contains all that methods that are used by both effects and AI to fetch their targets.
 // {SA}Effect and {SA}Ai now inherit from this class to use these routines, though they should not.

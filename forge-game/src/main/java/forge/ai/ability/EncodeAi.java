@@ -17,11 +17,7 @@
  */
 package forge.ai.ability;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -30,6 +26,9 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>

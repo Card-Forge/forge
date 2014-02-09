@@ -1,26 +1,5 @@
 package forge.gui.home.settings;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.Singletons;
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
@@ -32,14 +11,21 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBoxPanel;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.gui.toolbox.FSkin.SkinnedTextField;
 import forge.properties.ForgePreferences.FPref;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  * Assembles Swing components of preferences submenu singleton.

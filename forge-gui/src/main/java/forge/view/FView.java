@@ -1,35 +1,6 @@
 package forge.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.control.RestartUtil;
 import forge.gui.FNetOverlay;
@@ -37,26 +8,26 @@ import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.bazaar.VBazaarUI;
 import forge.gui.deckeditor.VDeckEditorUI;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.FScreen;
-import forge.gui.framework.SLayoutConstants;
-import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.*;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
-import forge.gui.toolbox.CardFaceSymbols;
-import forge.gui.toolbox.FAbsolutePositioner;
-import forge.gui.toolbox.FButton;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FOverlay;
-import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FProgressBar;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
 import forge.properties.NewConstants;
 import forge.util.BuildInfo;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.*;
+import java.util.List;
 
 public enum FView {
     SINGLETON_INSTANCE;

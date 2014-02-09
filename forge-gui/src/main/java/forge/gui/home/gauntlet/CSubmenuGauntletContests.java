@@ -1,13 +1,5 @@
 package forge.gui.home.gauntlet;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.SwingUtilities;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -19,6 +11,13 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.net.FServer;
 import forge.net.Lobby;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * Controls the "gauntlet contests" submenu in the home UI.

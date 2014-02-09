@@ -1,8 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Command;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -16,6 +13,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
 

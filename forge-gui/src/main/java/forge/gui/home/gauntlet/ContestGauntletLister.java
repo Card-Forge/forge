@@ -1,25 +1,22 @@
 package forge.gui.home.gauntlet;
 
 
-
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /** 
  * Creates file list/table for quick deleting, editing, and basic info.

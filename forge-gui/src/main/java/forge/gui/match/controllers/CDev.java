@@ -1,9 +1,5 @@
 package forge.gui.match.controllers;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import forge.Command;
 import forge.Singletons;
 import forge.game.player.Player;
@@ -13,6 +9,10 @@ import forge.gui.match.views.VDev;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Controls the combat panel in the match UI.

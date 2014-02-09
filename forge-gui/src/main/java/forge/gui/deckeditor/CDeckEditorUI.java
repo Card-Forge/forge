@@ -17,23 +17,10 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import forge.Command;
 import forge.Singletons;
 import forge.deck.DeckBase;
-import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.gui.deckeditor.controllers.CEditorConstructed;
-import forge.gui.deckeditor.controllers.CProbabilities;
-import forge.gui.deckeditor.controllers.CStatistics;
-import forge.gui.deckeditor.controllers.DeckController;
+import forge.gui.deckeditor.controllers.*;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
@@ -43,6 +30,14 @@ import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of

@@ -1,11 +1,11 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+
+import java.util.List;
 
 /**
  * TODO: Write javadoc for this type.

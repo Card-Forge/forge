@@ -1,31 +1,23 @@
 package forge.gauntlet;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-
 import forge.Singletons;
 import forge.deck.CardPool;
 import forge.error.BugReporter;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
 import forge.util.IgnoringXStream;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.*;
+import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class GauntletIO {
     /** Prompt in text field for new (unsaved) built gauntlets. */

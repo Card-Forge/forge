@@ -20,25 +20,13 @@
 // move from original package (org.jdesktop.swinghelper.buttonpanel) to keep with other gui widgets
 package forge.gui.toolbox;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FocusTraversalPolicy;
-import java.awt.KeyboardFocusManager;
-import java.awt.LayoutManager;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.DefaultButtonModel;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.LayoutFocusTraversalPolicy;
-
-import net.miginfocom.swing.MigLayout;
 
 /**
  * This is a JPanel subclass which provides a special functionality

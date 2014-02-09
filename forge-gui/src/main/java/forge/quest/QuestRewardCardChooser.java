@@ -1,17 +1,16 @@
 package forge.quest;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import forge.Singletons;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.util.ItemPool;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
-import forge.Singletons;
-import forge.item.PaperCard;
-import forge.item.InventoryItem;
-import forge.util.ItemPool;
 
 /** 
  * Resolves a card chooser InventoryItem into a CardPrinted.

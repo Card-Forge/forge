@@ -1,24 +1,12 @@
 package forge.gui.framework;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
-import java.awt.KeyboardFocusManager;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import forge.FThreads;
 import forge.view.FFrame;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /** 
  * Experimental static factory for generic operations carried out

@@ -17,41 +17,22 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.card.CardType;
-import forge.card.MagicColor;
 import forge.card.CardType.Constant;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostSacrifice;
+import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -67,6 +48,9 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 
 /**
@@ -1754,7 +1738,7 @@ public class ComputerUtil {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
-            HashMap<String, String> trigParams = trigger.getMapParams();
+            Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
 

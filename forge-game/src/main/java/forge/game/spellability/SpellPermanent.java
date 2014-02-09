@@ -17,15 +17,7 @@
  */
 package forge.game.spellability;
 
-import java.security.InvalidParameterException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -45,6 +37,11 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.security.InvalidParameterException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -227,7 +224,7 @@ public class SpellPermanent extends Spell {
         for (final Trigger tr : card.getTriggers()) {
             // These triggers all care for ETB effects
 
-            final HashMap<String, String> params = tr.getMapParams();
+            final Map<String, String> params = tr.getMapParams();
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }

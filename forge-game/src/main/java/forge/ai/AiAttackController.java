@@ -17,13 +17,8 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -34,6 +29,10 @@ import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 //doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()

@@ -17,9 +17,6 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.deck.Deck;
@@ -45,6 +42,9 @@ import forge.limited.IBoosterDraft;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.

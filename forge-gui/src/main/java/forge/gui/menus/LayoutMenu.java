@@ -1,17 +1,5 @@
 package forge.gui.menus;
 
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
-
 import forge.Singletons;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
@@ -24,6 +12,12 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FFrame;
 import forge.view.FView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Returns a JMenu containing options associated with game screen layout.

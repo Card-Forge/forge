@@ -1,26 +1,19 @@
 package forge.gui;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import forge.control.ChatArea;
+import forge.gui.toolbox.*;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
+import forge.net.FServer;
+import forge.net.Lobby;
+import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.ScrollPaneConstants;
-import org.apache.commons.lang3.StringUtils;
-
-import net.miginfocom.swing.MigLayout;
-import forge.control.ChatArea;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.SkinnedPanel;
-import forge.gui.toolbox.FTextArea;
-import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.SmartScroller;
-import forge.net.FServer;
-import forge.net.Lobby;
 
 /** 
  * TODO: Write javadoc for this type.
