@@ -119,6 +119,7 @@ public class MagicColor {
 
         /** The only colors. */
         public static final ImmutableList<String> ONLY_COLORS = ImmutableList.of(WHITE, BLUE, BLACK, RED, GREEN);
+        public static final ImmutableList<String> COLORS_AND_COLORLESS = ImmutableList.of(WHITE, BLUE, BLACK, RED, GREEN, COLORLESS);
 
         /** The Snow. */
         public static final String SNOW = "snow";

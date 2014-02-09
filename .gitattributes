@@ -8211,6 +8211,7 @@ forge-gui/res/cardsfolder/m/mycologist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mycoloth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mycosynth_fiend.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mycosynth_golem.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/mycosynth_lattice.txt -text
 forge-gui/res/cardsfolder/m/mycosynth_wellspring.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/myojin_of_cleansing_fire.txt -text
 forge-gui/res/cardsfolder/m/myojin_of_infinite_rage.txt -text

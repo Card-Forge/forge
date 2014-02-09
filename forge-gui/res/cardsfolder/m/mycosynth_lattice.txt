@@ -1,0 +1,10 @@
+Name:Mycosynth Lattice
+ManaCost:6
+Types:Artifact
+S:Mode$ Continuous | Affected$ Permanent | AddType$ Artifact | Description$ All permanents are artifact in addition to their other types.
+S:Mode$ Continuous| Affected$ Card | SetColor$ Colorless | AffectedZone$ Battlefield,Hand,Library,Graveyard,Exile,Stack,Command | Description$ All cards that aren't on the battlefield, spells, and permanents are colorless.
+S:Mode$ Continuous | Affected$ Player | ManaColorConversion$ Additive | WhiteConversion$ All | BlueConversion$ All | BlackConversion$ All | RedConversion$ All | GreenConversion$ All | ColorlessConversion$ All | Description$ Players may spend mana as though it were mana of any color.
+SVar:NonStackingEffect:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_lattice.jpg
+Oracle:All permanents are artifacts in addition to their other types.\nAll cards that aren't on the battlefield, spells, and permanents are colorless.\nPlayers may spend mana as though it were mana of any color.

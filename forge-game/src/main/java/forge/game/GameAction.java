@@ -695,6 +695,10 @@ public class GameAction {
         game.getTriggerHandler().cleanUpTemporaryTriggers();
         game.getReplacementHandler().cleanUpTemporaryReplacements();
 
+        for(Player p : game.getPlayers()) {
+            p.getManaPool().restoreColorReplacements();
+        }
+
         // search for cards with static abilities
         final List<Card> allCards = game.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();

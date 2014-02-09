@@ -23,11 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -40,6 +42,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -343,6 +346,37 @@ public class StaticAbilityContinuous {
                 String rmhs = params.get("RaiseMaxHandSize");
                 int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, null);
                 p.setMaxHandSize(p.getMaxHandSize() + rmax);
+            }
+
+            if (params.containsKey("ManaColorConversion")) {
+                String conversionType = params.get("ManaColorConversion");
+
+                // Choices are Additives(OR) or Restrictive(AND)
+                boolean additive = "Additive".equals(conversionType);
+                ManaPool pool = p.getManaPool();
+
+                for(String c : MagicColor.Constant.COLORS_AND_COLORLESS) {
+                    // Use the strings from MagicColor, since that's how the Script will be coming in as
+                    String key = WordUtils.capitalize(c) + "Conversion";
+                    if (params.containsKey(key)) {
+                        String convertTo = params.get(key);
+                        byte convertByte = 0;
+                        if ("All".equals(convertTo)) {
+                            convertByte = MagicColor.ALL_COLORS;
+                        } else{
+                            for(String convertColor : convertTo.split(",")) {
+                                convertByte |= MagicColor.fromName(convertColor);
+                            }
+                        }
+
+                        // Celestial Dawn won't be 100% correct with this implementation
+                        // Since all the additives need to happen first
+                        // And all the restrictions need to happen second
+                        // But this would mostly work unless a conflicting mana conversion card
+                        // Is also out in play CD + Mycosynth Lattice depending on timestamps might be incorrect
+                        pool.adjustColorReplacement(MagicColor.fromName(c), convertByte, additive);
+                    }
+                }
             }
         }
 
