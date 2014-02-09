@@ -21,8 +21,29 @@ import java.util.*;
  */
 public abstract class TriggerReplacementBase {
 
+    /** The host card. */
+    protected Card hostCard;
+
+    /** The map params. */
+    protected final Map<String, String> mapParams = new HashMap<String, String>();
+
+    /** The is intrinsic. */
+    protected boolean intrinsic;
+
     /** The temporary. */
     private boolean temporary = false;
+
+    /** The suppressed. */
+    private boolean suppressed = false;
+
+    /** The temporarily suppressed. */
+    private boolean temporarilySuppressed = false;
+
+    protected EnumSet<ZoneType> validHostZones;
+
+    /** The overriding ability. */
+    private SpellAbility overridingAbility = null;
+
 
     /**
      * Sets the temporary.
@@ -42,9 +63,6 @@ public abstract class TriggerReplacementBase {
     public final boolean isTemporary() {
         return this.temporary;
     }
-
-    /** The map params. */
-    protected final Map<String, String> mapParams = new HashMap<String, String>();
 
     /**
      * <p>
@@ -66,12 +84,7 @@ public abstract class TriggerReplacementBase {
         return this.intrinsic;
     }
 
-    /** The host card. */
-    protected Card hostCard;
 
-
-    /** The is intrinsic. */
-    protected boolean intrinsic;
 
     /**
      * <p>
@@ -100,8 +113,6 @@ public abstract class TriggerReplacementBase {
         }
     }
 
-    protected EnumSet<ZoneType> validHostZones;
-
     public void setActiveZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
     }
@@ -119,9 +130,6 @@ public abstract class TriggerReplacementBase {
                 || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
               );
     }
-
-    /** The overriding ability. */
-    private SpellAbility overridingAbility = null;
 
     /**
      * Gets the overriding ability.
@@ -163,12 +171,6 @@ public abstract class TriggerReplacementBase {
 
         return false;
     }
-
-    /** The suppressed. */
-    private boolean suppressed = false;
-
-    /** The temporarily suppressed. */
-    private boolean temporarilySuppressed = false;
 
     /**
      * Sets the suppressed.
