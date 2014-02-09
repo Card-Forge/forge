@@ -78,6 +78,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else if (sa.hasParam("UntilHostLeavesPlay")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
+            } else if (sa.hasParam("UntilHostLeavesPlayOrEOT")) {
+                sa.getSourceCard().addLeavesPlayCommand(untilEOT);
+                game.getEndOfTurn().addUntil(untilEOT);
             } else if (sa.hasParam("UntilLoseControlOfHost")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
@@ -200,12 +203,16 @@ public class PumpEffect extends SpellAbilityEffect {
         tgts.addAll(tgtCards);
         tgts.addAll(tgtPlayers);
 
-        if (sa.hasParam("DefinedChosenKW")) {
-            if (sa.getParam("DefinedChosenKW").equals("Type")) {
-                final String t = host.getChosenType();
-                for (int i = 0; i < keywords.size(); i++) {
-                    keywords.set(i, keywords.get(i).replaceAll("ChosenType", t));
-                }
+        if (sa.hasParam("DefinedKW")) {
+            String defined = sa.getParam("DefinedKW");
+            String replaced = "";
+            if (defined.equals("ChosenType")) {
+                replaced = host.getChosenType();
+            } else if (defined.equals("CardUIDSource")) {
+                replaced = "CardUID_" + String.valueOf(host.getUniqueNumber());
+            }
+            for (int i = 0; i < keywords.size(); i++) {
+                keywords.set(i, keywords.get(i).replaceAll(defined, replaced));
             }
         }
         if (sa.hasParam("DefinedLandwalk")) {

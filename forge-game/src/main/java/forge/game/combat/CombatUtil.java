@@ -600,19 +600,6 @@ public class CombatUtil {
             return false;
         }
 
-//        if (blocker.hasStartOfKeyword("CARDNAME can't block ")) {
-//            for (final String kw : blocker.getKeyword()) {
-//                if (kw.startsWith("CARDNAME can't block ")) {
-//                    final String unblockableCard = kw.substring(21);
-//                    final int id = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1,
-//                            unblockableCard.length() - 1));
-//                    if (attacker.getUniqueNumber() == id) {
-//                        return false;
-//                    }
-//                }
-//            }
-//        }
-
         // rare case:
         if (blocker.hasKeyword("Shadow")
                 && blocker.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) {
@@ -645,10 +632,18 @@ public class CombatUtil {
         if (blocker.hasStartOfKeyword("CantBlock")) {
             final int keywordPosition = blocker.getKeywordPosition("CantBlock");
             final String parse = blocker.getKeyword().get(keywordPosition).toString();
-            final String[] k = parse.split(" ", 2);
-            final String[] restrictions = k[1].split(",");
-            if (attacker.isValid(restrictions, blocker.getController(), blocker)) {
-                return false;
+            if (parse.startsWith("CantBlockCardUID")) {
+                final String[] k = parse.split("_", 2);
+                if (attacker.getUniqueNumber() == Integer.parseInt(k[1])) {
+                    return false;
+                }
+            } else {
+                final String[] parse0 = parse.split(":");
+                final String[] k = parse0[0].split(" ", 2);
+                final String[] restrictions = k[1].split(",");
+                if (attacker.isValid(restrictions, blocker.getController(), blocker)) {
+                    return false;
+                }
             }
         }
 

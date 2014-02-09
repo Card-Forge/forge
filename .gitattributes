@@ -4438,6 +4438,7 @@ forge-gui/res/cardsfolder/f/favorable_destiny.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/favorable_winds.txt -text
 forge-gui/res/cardsfolder/f/favored_hoplite.txt -text
 forge-gui/res/cardsfolder/f/fear.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/fearsome_temper.txt -text
 forge-gui/res/cardsfolder/f/feast_of_blood.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/feast_of_flesh.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/feast_of_the_unicorn.txt svneol=native#text/plain

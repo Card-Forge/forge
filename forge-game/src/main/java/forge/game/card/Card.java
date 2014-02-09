@@ -1918,13 +1918,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final String keywordsToText(final ArrayList<String> keywords) {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
-        final StringBuilder sbMana = new StringBuilder();
 
         for (int i = 0; i < keywords.size(); i++) {
             String keyword = keywords.get(i);
             if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
                     || keyword.startsWith("PreventAllDamageBy")
-                    || keyword.startsWith("CantBlock")
                     || keyword.startsWith("CantEquip")
                     || keyword.startsWith("SpellCantTarget")) {
                 continue;
@@ -2020,8 +2018,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
                 sbLong.append(keyword.toString()).append("\r\n");
-            } else if (keyword.toString().contains("tap: add ")) {
-                sbMana.append(keyword.toString()).append("\r\n");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
                 continue;
@@ -2070,6 +2066,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
                 else
                     sbLong.append(getTextForKwCantBeBlockedByType(keyword));
+            } else if (keyword.startsWith("CantBlock")) {
+                sbLong.append(this.getName()).append(" can't block ");
+                if (keyword.contains("CardUID")) {
+                    sbLong.append("CardID (").append(Integer.valueOf(keyword.split("CantBlockCardUID_")[1])).append(")");
+                } else {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k.length > 1 ? k[1] + ".\r\n" : "");
+                }
             } else if (keyword.equals("Unblockable")) {
                 sbLong.append(this.getName()).append(" can't be blocked.\r\n");
             }
@@ -2090,7 +2094,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             sbLong.append("\r\n");
         }
         sb.append(sbLong);
-        sb.append(sbMana);
 
         return sb.toString();
     }

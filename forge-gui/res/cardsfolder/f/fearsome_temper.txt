@@ -1,0 +1,9 @@
+Name:Fearsome Temper
+ManaCost:2 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddAbility$ CantBlockFT | Description$ Enchanted creature gets +2/+2 and has "{2}{R}: Target creature can't block this creature this turn."
+SVar:CantBlockFT:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | KW$ HIDDEN CantBlockCardUIDSource | DefinedKW$ CardUIDSource | UntilHostLeavesPlayOrEOT$ True | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fearsome_temper.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{2}{R}: Target creature can't block this creature this turn."

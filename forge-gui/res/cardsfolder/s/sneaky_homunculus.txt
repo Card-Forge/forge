@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Homunculus Illusion
 PT:1/1
 K:CantBeBlockedBy Creature.powerGE2
-K:CantBlock Creature.powerGE2
+K:CantBlock Creature.powerGE2:creatures with power 2 or greater
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
 Oracle:Sneaky Homunculus can't block or be blocked by creatures with power 2 or greater.

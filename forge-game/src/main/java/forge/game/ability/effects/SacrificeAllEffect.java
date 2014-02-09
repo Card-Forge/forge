@@ -49,15 +49,13 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("Defined")) {
             list = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
         } else {
-            list = game.getCardsIn(ZoneType.Battlefield);
+            list = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), valid, sa);
         }
 
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         if (remSacrificed) {
             card.clearRemembered();
         }
-
-        list = AbilityUtils.filterListByType(list, valid, sa);
 
         for (int i = 0; i < list.size(); i++) {
             if (game.getAction().sacrifice(list.get(i), sa) && remSacrificed) {
