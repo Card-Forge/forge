@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import com.google.common.base.Predicate;
 
-import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -138,12 +137,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         Card valid = decision.cards.get(0);
-        for (CounterType c1 : valid.getCounters().keySet()) {
-            if (valid.getCounters(c1) >= c && ComputerUtil.isNegativeCounter(c1, valid)) {
-                counterType = c1;
-                break;
-            }
-        }
+        counterType = decision.ct;
         for (int i = 0; i < c; i++) {
             executePayment(ability, valid);
         }

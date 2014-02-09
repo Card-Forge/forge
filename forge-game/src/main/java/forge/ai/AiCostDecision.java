@@ -480,9 +480,21 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
                 return false;
             }
         });
+
+        if(hperms.isEmpty())
+            return null;
+        
+        PaymentDecision result = PaymentDecision.card(hperms);
+        Card valid = hperms.get(0);
+        for (CounterType c1 : valid.getCounters().keySet()) {
+            if (valid.getCounters(c1) >= c && ComputerUtil.isNegativeCounter(c1, valid)) {
+                result.ct = c1;
+                break;
+            }
+        }
         // Only find cards with enough negative counters
         // TODO: add ai for Chisei, Heart of Oceans
-        return hperms.isEmpty() ? null : PaymentDecision.card(hperms);
+        return result;
     }
 
     @Override
