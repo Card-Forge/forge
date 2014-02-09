@@ -978,7 +978,7 @@ public class PhaseHandler implements java.io.Serializable {
                             addedAnythingToStack |= game.getStack().chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
                             whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
                         } while( whoAddsToStack != null && whoAddsToStack != playerTurn);
-                    } while(!addedAnythingToStack);
+                    } while(addedAnythingToStack);
 
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
                     if( null == chosenSa )
