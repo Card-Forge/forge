@@ -1,6 +1,5 @@
 package forge.game.ability;
 
-import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.ability.effects.ManaEffect;
@@ -8,7 +7,6 @@ import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
-import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.TargetRestrictions;
@@ -17,7 +15,6 @@ import java.util.Map;
 
 public class AbilityApiBased extends AbilityActivated {
     private final SpellAbilityEffect effect;
-    private final SpellAbilityAi ai;
 
     private static final long serialVersionUID = -4183793555528531978L;
 
@@ -26,7 +23,6 @@ public class AbilityApiBased extends AbilityActivated {
         mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();
-        ai = api.getAi();
 
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
 
@@ -61,15 +57,5 @@ public class AbilityApiBased extends AbilityActivated {
     @Override
     public void resolve() {
         effect.resolve(this);
-    }
-
-    @Override
-    public boolean canPlayAI(Player aiPlayer) {
-        return ai.canPlayAIWithSubs(aiPlayer, this);
-    }
-
-    @Override
-    public boolean doTrigger(final boolean mandatory, Player aiPlayer) {
-        return ai.doTriggerAI(aiPlayer, this, mandatory);
     }
 }

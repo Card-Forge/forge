@@ -91,9 +91,6 @@ public class CostPayLife extends CostPart {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         // TODO Auto-generated method stub

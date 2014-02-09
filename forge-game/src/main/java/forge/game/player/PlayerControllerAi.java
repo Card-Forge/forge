@@ -6,6 +6,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
 import forge.ai.*;
 import forge.ai.ability.CharmAi;
 import forge.card.ColorSet;
@@ -35,6 +36,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -175,7 +177,7 @@ public class PlayerControllerAi extends PlayerController {
         }
         // There is no way this doTrigger here will have the same target as stored above
         // So it's possible it's making a different decision here than will actually happen
-        if (!sa.doTrigger(isMandatory, player)) {
+        if (!brains.doTrigger(sa, isMandatory)) {
             ret = false;
         }
         if (storeChoices) {
@@ -265,12 +267,12 @@ public class PlayerControllerAi extends PlayerController {
         if (mayChooseNewTargets) {
             if (copySA instanceof Spell) {
                 Spell spell = (Spell) copySA;
-                if (!spell.canPlayFromEffectAI(player, true, true)) {
+                if (AiPlayDecision.WillPlay != ((PlayerControllerAi)player.getController()).getAi().canPlayFromEffectAI(spell, true, true)) {
                     return; // is this legal at all?
                 }
             }
             else {
-                copySA.canPlayAI(player);
+                getAi().canPlaySa(copySA);
             }
         }
         ComputerUtil.playSpellAbilityForFree(player, copySA);
@@ -279,7 +281,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
         if (canSetupTargets)
-            effectSA.doTrigger(true, player); // first parameter does not matter, since return value won't be used
+            brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
         ComputerUtil.playNoStack(player, effectSA, game);
     }
 
@@ -344,7 +346,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
-        return ReplacementEffect.aiShouldRun(replacementEffect, effectSA, player);
+        return brains.aiShouldRun(replacementEffect, effectSA);
     }
 
     @Override
@@ -629,7 +631,7 @@ public class PlayerControllerAi extends PlayerController {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
-            sa.doTrigger(isMandatory, player);
+            brains.doTrigger(sa, isMandatory);
         }
     }
 
@@ -645,7 +647,7 @@ public class PlayerControllerAi extends PlayerController {
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
             Spell spell = (Spell) tgtSA;
-            if (spell.canPlayFromEffectAI(player, !optional, noManaCost) || !optional) {
+            if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 if (noManaCost) {
                     ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
                 } else {
@@ -664,7 +666,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
-        return currentAbility.doTrigger(true, player);
+        return brains.doTrigger(currentAbility, true);
     }
 
     @Override

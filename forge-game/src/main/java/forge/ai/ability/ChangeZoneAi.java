@@ -307,7 +307,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
+        return subAb == null || subAb.getApi().getAi().chkDrawbackWithSubs(ai, subAb);
     }
 
     /**
@@ -645,7 +645,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
+        chance &= subAb == null || subAb.getApi().getAi().chkDrawbackWithSubs(ai, subAb);
 
         return chance;
     }

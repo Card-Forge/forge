@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
@@ -28,7 +27,6 @@ import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
-import forge.game.player.Player;
 
 import java.util.Map;
 
@@ -81,14 +79,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
 
     
     private final SpellAbilityEffect effect;
-    private final SpellAbilityAi ai;
 
-    /**
-     * @return the ai
-     */
-    public SpellAbilityAi getAi() {
-        return ai;
-    }
 
     public AbilitySub(ApiType api0, final Card ca, final TargetRestrictions tgt, Map<String, String> params0) {
         super(ca, Cost.Zero);
@@ -96,7 +87,6 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
 
         api = api0;
         mapParams.putAll(params0);
-        ai = api.getAi();
         effect = api.getSpellEffect();
 
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
@@ -121,17 +111,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     @Override
-    public boolean canPlayAI(Player aiPlayer) {
-        return ai.canPlayAIWithSubs(aiPlayer, this);
-    }
-
-    @Override
     public void resolve() {
         effect.resolve(this);
-    }
-
-    @Override
-    public boolean doTrigger(final boolean mandatory, Player aiPlayer) {
-        return ai.doTriggerAI(aiPlayer, this, mandatory);
     }
 }

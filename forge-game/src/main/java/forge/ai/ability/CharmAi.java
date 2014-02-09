@@ -1,8 +1,11 @@
 package forge.ai.ability;
 
+import forge.ai.AiController;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
@@ -45,18 +48,18 @@ public class CharmAi extends SpellAbilityAi {
             return choices.subList(1, choices.size());
         }
         
-        
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         for (int i = 0; i < num; i++) {
             AbilitySub thisPick = null;
             for (SpellAbility sub : choices) {
                 sub.setActivatingPlayer(ai);
-                if (!playNow && sub.canPlayAI(ai)) {
+                if (!playNow && AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     thisPick = (AbilitySub) sub;
                     choices.remove(sub);
                     playNow = true;
                     break;
                 }
-                if ((playNow || i < num - 1) && sub.doTrigger(false, ai)) {
+                if ((playNow || i < num - 1) && aic.doTrigger(sub, false)) {
                     thisPick = (AbilitySub) sub;
                     choices.remove(sub);
                     break;
@@ -71,7 +74,7 @@ public class CharmAi extends SpellAbilityAi {
                 AbilitySub thisPick = null;
                 for (SpellAbility sub : choices) {
                     sub.setActivatingPlayer(ai);
-                    if (sub.doTrigger(true, ai)) {
+                    if (aic.doTrigger(sub, true)) {
                         thisPick = (AbilitySub) sub;
                         choices.remove(sub);
                         break;

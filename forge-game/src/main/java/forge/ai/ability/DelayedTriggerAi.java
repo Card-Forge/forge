@@ -1,8 +1,11 @@
 package forge.ai.ability;
 
+import forge.ai.AiController;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 
@@ -15,9 +18,9 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
-            return ((AbilitySub) trigsa).getAi().chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
+            return ((AbilitySub) trigsa).getApi().getAi().chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
         } else {
-            return trigsa.canPlayAI(ai);
+            return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
         }
     }
 
@@ -25,12 +28,13 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         trigsa.setActivatingPlayer(ai);
 
         if (!sa.hasParam("OptionalDecider")) {
-            return trigsa.doTrigger(true, ai);
+            return aic.doTrigger(trigsa, true);
         } else {
-            return trigsa.doTrigger(!sa.getParam("OptionalDecider").equals("You"), ai);
+            return aic.doTrigger(trigsa, !sa.getParam("OptionalDecider").equals("You"));
         }
     }
 
@@ -39,7 +43,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
         trigsa.setActivatingPlayer(ai);
-        return trigsa.canPlayAI(ai);
+        return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
     }
 
 }

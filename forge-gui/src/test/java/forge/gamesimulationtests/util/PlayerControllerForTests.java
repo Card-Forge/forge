@@ -488,7 +488,8 @@ public class PlayerControllerForTests extends PlayerController {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
-            sa.doTrigger(isMandatory, player);
+            // this code is no longer possible!
+            // sa.doTrigger(isMandatory, player);
         }
     }
 
@@ -505,7 +506,8 @@ public class PlayerControllerForTests extends PlayerController {
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
             Spell spell = (Spell) tgtSA;
-            if (spell.canPlayFromEffectAI(player, !optional, noManaCost) || !optional) {
+            // if (spell.canPlayFromEffectAI(player, !optional, noManaCost) || !optional) {  -- could not save this part
+            if (spell.canPlay() || !optional) {
                 if (noManaCost) {
                     ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
                 } else {
@@ -526,7 +528,9 @@ public class PlayerControllerForTests extends PlayerController {
     
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
-        return currentAbility.doTrigger(true, player);
+        // no longer possible to run AI's methods on SpellAbility
+        // return currentAbility.doTrigger(true, player);
+        return false;
     }
 
     @Override

@@ -153,9 +153,6 @@ public class CostRemoveCounter extends CostPartWithList {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         Card source = ability.getHostCard();

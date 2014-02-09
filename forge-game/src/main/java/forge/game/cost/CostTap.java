@@ -42,42 +42,23 @@ public class CostTap extends CostPart {
     @Override
     public boolean isRenewable() { return true; }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
         return "{T}";
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
     @Override
     public final void refund(final Card source) {
         source.setTapped(false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.Player, forge.card.cost.Cost)
-     */
+
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Card source = ability.getHostCard();
         return source.isUntapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         ability.getHostCard().tap();

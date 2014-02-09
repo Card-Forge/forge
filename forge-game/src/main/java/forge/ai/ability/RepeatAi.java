@@ -1,10 +1,12 @@
 package forge.ai.ability;
 
 
+import forge.ai.AiController;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -54,6 +56,7 @@ public class RepeatAi extends SpellAbilityAi {
 
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
-        return repeat.doTrigger(mandatory, ai);
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        return aic.doTrigger(repeat, mandatory);
     }
 }

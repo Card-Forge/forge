@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -128,9 +129,6 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         final String amount = this.getAmount();

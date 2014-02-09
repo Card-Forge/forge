@@ -630,7 +630,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
-                    if (!sub.getAi().chkDrawbackWithSubs(ai, sub)) {
+                    if (!sub.getApi().getAi().chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                     needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
@@ -688,7 +688,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null) {
-                    if (!sub.getAi().chkDrawbackWithSubs(ai, sub)) {
+                    if (!sub.getApi().getAi().chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                 }

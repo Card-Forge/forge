@@ -75,9 +75,6 @@ public class CostUntap extends CostPart {
         return source.isTapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         ability.getHostCard().untap();

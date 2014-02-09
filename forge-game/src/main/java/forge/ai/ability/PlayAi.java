@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -10,6 +12,7 @@ import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -120,7 +123,9 @@ public class PlayAi extends SpellAbilityAi {
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai);
                     // timing restrictions still apply
-                    if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(ai, false, true)) {
+                    if (!s.getRestrictions().checkTimingRestrictions(c, s))
+                        continue;
+                    if( AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, false, true)) {
                         return true;
                     }
                 }

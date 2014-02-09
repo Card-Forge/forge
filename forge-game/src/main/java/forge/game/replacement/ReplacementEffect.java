@@ -19,14 +19,9 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
-import forge.util.Expressions;
 
 import java.util.List;
 import java.util.Map;
@@ -75,55 +70,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
     /**
-     * Ai should run.
-     *
-     * @param sa the sa
-     * @param ai 
-     * @return true, if successful
-     */
-    public final static boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa, Player ai) {
-        if (effect.getMapParams().containsKey("AICheckSVar")) {
-            System.out.println("aiShouldRun?" + sa);
-            final String svarToCheck = effect.getMapParams().get("AICheckSVar");
-            String comparator = "GE";
-            int compareTo = 1;
-
-            if (effect.getMapParams().containsKey("AISVarCompare")) {
-                final String fullCmp = effect.getMapParams().get("AISVarCompare");
-                comparator = fullCmp.substring(0, 2);
-                final String strCmpTo = fullCmp.substring(2);
-                try {
-                    compareTo = Integer.parseInt(strCmpTo);
-                } catch (final Exception ignored) {
-                    if (sa == null) {
-                        compareTo = CardFactoryUtil.xCount(effect.hostCard, effect.hostCard.getSVar(strCmpTo));
-                    } else {
-                        compareTo = AbilityUtils.calculateAmount(effect.hostCard, effect.hostCard.getSVar(strCmpTo), sa);
-                    }
-                }
-            }
-
-            int left = 0;
-
-            if (sa == null) {
-                left = CardFactoryUtil.xCount(effect.hostCard, effect.hostCard.getSVar(svarToCheck));
-            } else {
-                left = AbilityUtils.calculateAmount(effect.hostCard, svarToCheck, sa);
-            }
-            System.out.println("aiShouldRun?" + left + comparator + compareTo);
-            if (Expressions.compare(left, comparator, compareTo)) {
-                return true;
-            }
-        } else if (effect.getMapParams().containsKey("AICheckDredge")) {
-            return ai.getCardsIn(ZoneType.Library).size() > 8 || ai.isCardInPlay("Laboratory Maniac");
-        } else if (sa != null && sa.doTrigger(false, ai)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Sets the checks for run.
      * 
      * @param hasRun
@@ -133,7 +79,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         this.hasRun = hasRun;
     }
 
-     /**
+    /**
      * Can replace.
      * 
      * @param runParams

@@ -20,8 +20,6 @@ package forge.game.card;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.Command;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -39,12 +37,19 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.*;
+import forge.game.spellability.Ability;
+import forge.game.spellability.AbilityActivated;
+import forge.game.spellability.AbilityStatic;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
@@ -106,15 +111,6 @@ public class CardFactoryUtil {
                 card.addHiddenExtrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
                 card.addIntrinsicKeyword("Haste");
                 card.setUnearthed(true);
-            }
-
-            @Override
-            public boolean canPlayAI(Player aiPlayer) {
-                PhaseHandler phase = sourceCard.getGame().getPhaseHandler();
-                if (phase.getPhase().isAfter(PhaseType.MAIN1) || !phase.isPlayerTurn(getActivatingPlayer())) {
-                    return false;
-                }
-                return ComputerUtilCost.canPayCost(this, getActivatingPlayer());
             }
         }
         final AbilityActivated unearth = new AbilityUnearth(sourceCard, cost, null);
@@ -306,13 +302,6 @@ public class CardFactoryUtil {
                 }
 
                 return sourceCard.getOwner().canCastSorcery();
-            }
-
-            @Override
-            public boolean canPlayAI(Player aiPlayer) {
-                return true;
-                // Suspend currently not functional for the AI,
-                // seems to be an issue with regaining Priority after Suspension
             }
 
             @Override
@@ -2887,23 +2876,6 @@ public class CardFactoryUtil {
                 final Game game = card.getGame();
                 card.setEvoked(true);
                 game.getAction().moveToPlay(card);
-            }
-
-            @Override
-            public boolean canPlayAI(Player aiPlayer) {
-                final Game game = card.getGame();
-                if (!SpellPermanent.checkETBEffects(card, aiPlayer)) {
-                    return false;
-                }
-                // Wait for Main2 if possible
-                if (game.getPhaseHandler().is(PhaseType.MAIN1)
-                        && game.getPhaseHandler().isPlayerTurn(aiPlayer)
-                        && aiPlayer.getManaPool().totalMana() <= 0
-                        && !ComputerUtil.castPermanentInMain1(aiPlayer, this)) {
-                    return false;
-                }
-
-                return super.canPlayAI(aiPlayer);
             }
         };
         card.removeIntrinsicKeyword(evokeKeyword);

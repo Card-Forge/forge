@@ -212,32 +212,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /**
      * <p>
-     * canPlayAI.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public /*final*/ boolean canPlayAI(Player aiPlayer) {
-        return true;
-    }
-
-    // This should be overridden by ALL AFs
-    /**
-     * <p>
-     * doTrigger.
-     * </p>
-     * 
-     * @param mandatory
-     *            a boolean.
-     * @param ai TODO
-     * @return a boolean.
-     */
-    public boolean doTrigger(final boolean mandatory, Player ai) {
-        return false;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>multiKickerManaCost</code>.
      * </p>
      * 

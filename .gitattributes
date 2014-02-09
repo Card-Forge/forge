@@ -128,6 +128,7 @@ forge-game/src/main/java/forge/ai/AiAttackController.java svneol=native#text/pla
 forge-game/src/main/java/forge/ai/AiBlockController.java svneol=native#text/plain
 forge-game/src/main/java/forge/ai/AiController.java svneol=native#text/plain
 forge-game/src/main/java/forge/ai/AiCostDecision.java -text
+forge-game/src/main/java/forge/ai/AiPlayDecision.java -text
 forge-game/src/main/java/forge/ai/AiProfileUtil.java -text
 forge-game/src/main/java/forge/ai/AiProps.java -text
 forge-game/src/main/java/forge/ai/ComputerUtil.java svneol=native#text/plain

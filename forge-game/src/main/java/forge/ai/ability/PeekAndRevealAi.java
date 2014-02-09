@@ -32,7 +32,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         AbilitySub subAb = sa.getSubAbility();
-        return subAb != null && subAb.getAi().chkDrawbackWithSubs(player, subAb);
+        return subAb != null && subAb.getApi().getAi().chkDrawbackWithSubs(player, subAb);
     }
 
 }

@@ -19,14 +19,11 @@ package forge.game.spellability;
 
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Expressions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,46 +123,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     /** {@inheritDoc} */
     @Override
-    public boolean canPlayAI(Player aiPlayer) {
-        final Card card = this.getHostCard();
-        final Game game = getActivatingPlayer().getGame();
-        if (card.getSVar("NeedsToPlay").length() > 0) {
-            final String needsToPlay = card.getSVar("NeedsToPlay");
-            List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-
-            list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card);
-            if (list.isEmpty()) {
-                return false;
-            }
-        }
-        if (card.getSVar("NeedsToPlayVar").length() > 0) {
-            final String needsToPlay = card.getSVar("NeedsToPlayVar");
-            int x = 0;
-            int y = 0;
-            String sVar = needsToPlay.split(" ")[0];
-            String comparator = needsToPlay.split(" ")[1];
-            String compareTo = comparator.substring(2);
-            try {
-                x = Integer.parseInt(sVar);
-            } catch (final NumberFormatException e) {
-                x = CardFactoryUtil.xCount(card, card.getSVar(sVar));
-            }
-            try {
-                y = Integer.parseInt(compareTo);
-            } catch (final NumberFormatException e) {
-                y = CardFactoryUtil.xCount(card, card.getSVar(compareTo));
-            }
-            if (!Expressions.compare(x, comparator, y)) {
-                return false;
-            }
-        }
-
-        return super.canPlayAI(aiPlayer);
-    }
-
-
-    /** {@inheritDoc} */
-    @Override
     public final Object clone() {
         try {
             return super.clone();
@@ -179,21 +136,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean isAbility() { return false; }
 
-
-    /**
-     * <p>
-     * canPlayFromEffectAI.
-     * </p>
-     *
-     * @param mandatory
-     *            can the controller chose not to play the spell
-     * @param withOutManaCost
-     *            is the spell cast without paying mana
-     * @return a boolean.
-     */
-    public boolean canPlayFromEffectAI(Player aiPlayer, boolean mandatory, boolean withOutManaCost) {
-        return canPlayAI(aiPlayer);
-    }
 
     /**
      * @return the castFaceDown

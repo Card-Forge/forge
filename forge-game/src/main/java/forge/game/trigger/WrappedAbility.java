@@ -33,6 +33,10 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         sa = sa0;
         decider = decider0;
     }
+    
+    public SpellAbility getWrappedAbility() { 
+        return sa;
+    }
 
 
     @Override
@@ -132,18 +136,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public boolean canPlayAI(Player aiPlayer) {
-        return sa.canPlayAI(aiPlayer);
-    }
-
-    @Override
     public SpellAbility copy() {
         return sa.copy();
-    }
-
-    @Override
-    public boolean doTrigger(final boolean mandatory, Player ai) {
-        return sa.doTrigger(mandatory, ai);
     }
 
     @Override
