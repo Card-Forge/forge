@@ -40,9 +40,9 @@ public class InputPayManaSimple extends InputPayMana {
     public InputPayManaSimple(final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
         super(sa);
         this.originalManaCost = manaCostToPay.toManaCost();
-        this.originalCard = sa.getSourceCard();
+        this.originalCard = sa.getHostCard();
 
-        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+        if (sa.getHostCard().isCopiedSpell() && sa.isSpell()) {
             this.manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
             game.getStack().add(this.saPaidFor);
         }
@@ -81,11 +81,11 @@ public class InputPayManaSimple extends InputPayMana {
         if (this.phyLifeToLose > 0) {
             player.payLife(this.phyLifeToLose, this.originalCard);
         }
-        if (!this.saPaidFor.getSourceCard().isCopiedSpell()) {
+        if (!this.saPaidFor.getHostCard().isCopiedSpell()) {
             player.getManaPool().clearManaPaid(this.saPaidFor, false);
 
             if (this.saPaidFor.isSpell()) {
-                this.saPaidFor.setSourceCard(game.getAction().moveToStack(this.originalCard));
+                this.saPaidFor.setHostCard(game.getAction().moveToStack(this.originalCard));
             }
         }
     }

@@ -83,7 +83,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         List<Card> validCards = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         validCards = CardLists.getValidCards(validCards, this.getType().split(";"), activator, source);
         validCards = CardLists.filter(validCards, new Predicate<Card>() {
@@ -134,7 +134,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);

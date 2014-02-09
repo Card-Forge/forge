@@ -24,7 +24,7 @@ public class StoreSVarAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         //Tree of Redemption
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();

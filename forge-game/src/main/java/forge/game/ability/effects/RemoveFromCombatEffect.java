@@ -38,7 +38,7 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
             if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
             	combat.removeFromCombat(c);
                 if (rem) {
-                    sa.getSourceCard().addRemembered(c);
+                    sa.getHostCard().addRemembered(c);
                 }
             }
         }

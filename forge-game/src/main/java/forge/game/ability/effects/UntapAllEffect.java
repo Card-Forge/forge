@@ -27,7 +27,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
 
         String valid = "";
         List<Card> list = null;

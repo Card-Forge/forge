@@ -80,7 +80,7 @@ public class CostPayment {
             return true;
         }
 
-        final Card card = ability.getSourceCard();
+        final Card card = ability.getHostCard();
 
         Player activator = ability.getActivatingPlayer();
         if (activator == null) {
@@ -119,7 +119,7 @@ public class CostPayment {
      * </p>
      */
     public final void refundPayment() {
-        Card sourceCard = this.ability.getSourceCard();
+        Card sourceCard = this.ability.getHostCard();
         for (final CostPart part : this.paidCostParts) {
             if (part.isUndoable()) {
                 part.refund(sourceCard);

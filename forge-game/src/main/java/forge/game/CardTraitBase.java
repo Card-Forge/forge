@@ -15,11 +15,10 @@ import forge.util.Expressions;
 import java.util.*;
 
 /** 
- * Base class for Triggers and ReplacementEffects.
- * Provides the matchesValid function to both classes.
+ * Base class for Triggers,ReplacementEffects and StaticAbilities.
  * 
  */
-public abstract class CardTraitBase {
+public abstract class CardTraitBase extends GameObject {
 
     /** The host card. */
     protected Card hostCard;
@@ -31,19 +30,13 @@ public abstract class CardTraitBase {
     protected boolean intrinsic;
 
     /** The temporary. */
-    private boolean temporary = false;
+    protected boolean temporary = false;
 
     /** The suppressed. */
-    private boolean suppressed = false;
+    protected boolean suppressed = false;
 
     /** The temporarily suppressed. */
-    private boolean temporarilySuppressed = false;
-
-    protected EnumSet<ZoneType> validHostZones;
-
-    /** The overriding ability. */
-    private SpellAbility overridingAbility = null;
-
+    protected boolean temporarilySuppressed = false;
 
     /**
      * Sets the temporary.
@@ -89,7 +82,9 @@ public abstract class CardTraitBase {
         return this.intrinsic;
     }
 
-
+    public void setIntrinsic(boolean i) {
+        this.intrinsic = i;
+    }
 
     /**
      * <p>
@@ -98,7 +93,7 @@ public abstract class CardTraitBase {
      * 
      * @return a {@link forge.game.card.Card} object.
      */
-    public final Card getHostCard() {
+    public Card getHostCard() {
         return this.hostCard;
     }
 
@@ -106,53 +101,12 @@ public abstract class CardTraitBase {
      * <p>
      * Setter for the field <code>hostCard</code>.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      */
-    public final void setHostCard(final Card c) {
+    public void setHostCard(final Card c) {
         this.hostCard = c;
-
-        if (overridingAbility != null) {
-            CardFactoryUtil.correctAbilityChainSourceCard(overridingAbility, c);
-        }
-    }
-
-    public void setActiveZone(EnumSet<ZoneType> zones) {
-        validHostZones = zones;
-    }
-
-    /**
-     * <p>
-     * zonesCheck.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean zonesCheck(Zone hostCardZone) {
-        return !this.hostCard.isPhasedOut()
-                && (validHostZones == null || validHostZones.isEmpty()
-                || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
-              );
-    }
-
-    /**
-     * Gets the overriding ability.
-     * 
-     * @return the overridingAbility
-     */
-    public SpellAbility getOverridingAbility() {
-        return this.overridingAbility;
-    }
-
-    /**
-     * Sets the overriding ability.
-     * 
-     * @param overridingAbility0
-     *            the overridingAbility to set
-     */
-    public void setOverridingAbility(final SpellAbility overridingAbility0) {
-        this.overridingAbility = overridingAbility0;
     }
 
     /**

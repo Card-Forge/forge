@@ -21,7 +21,7 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
@@ -46,13 +46,13 @@ public class LifeLoseAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final String amountStr = sa.getParam("LifeAmount");
 
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
-        int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -146,7 +146,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             }
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {

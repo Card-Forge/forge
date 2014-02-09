@@ -38,7 +38,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");

@@ -13,7 +13,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         List<Card> tgtCards = getTargetCards(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -21,7 +21,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {
-            cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
+            cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
         } else {
             cards = new ArrayList<Card>();
             cards.add(host);
@@ -43,7 +43,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
         // end standard pre-
@@ -52,7 +52,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         String attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
             attacker = cards.get(0).toString();
         } else {
             attacker = host.toString();

@@ -54,12 +54,12 @@ public class HumanPlay {
         FThreads.assertExecutedByEdt(false);
 
         if (sa == Ability.PLAY_LAND_SURROGATE) {
-            p.playLand(sa.getSourceCard(), false);
+            p.playLand(sa.getHostCard(), false);
             return;
         }
 
         sa.setActivatingPlayer(p);
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         source.setSplitStateToPlayAbility(sa);
 
         sa = chooseOptionalAdditionalCosts(p, sa);
@@ -85,7 +85,7 @@ public class HumanPlay {
             ability = ability.getSubAbility();
         }
 
-        // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
+        // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getHostCard() +  " new = " + newAbility);
         if (newAbility) {
             Cost abCost = sa.getPayCosts() == null ? new Cost("0", sa.isAbility()) : sa.getPayCosts();
             CostPayment payment = new CostPayment(abCost, sa);
@@ -95,7 +95,7 @@ public class HumanPlay {
         }
         else if (payManaCostIfNeeded(p, sa)) {
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(p.getGame().getAction().moveToStack(source));
+                sa.setHostCard(p.getGame().getAction().moveToStack(source));
             }
             p.getGame().getStack().add(sa);
         }
@@ -119,7 +119,7 @@ public class HumanPlay {
 
     private static boolean payManaCostIfNeeded(final Player p, final SpellAbility sa) {
         final ManaCostBeingPaid manaCost;
-        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+        if (sa.getHostCard().isCopiedSpell() && sa.isSpell()) {
             manaCost = new ManaCostBeingPaid(ManaCost.ZERO);
         }
         else {
@@ -147,7 +147,7 @@ public class HumanPlay {
      */
     public static final void playSaWithoutPayingManaCost(final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
         FThreads.assertExecutedByEdt(false);
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         source.setSplitStateToPlayAbility(sa);
 
@@ -162,9 +162,9 @@ public class HumanPlay {
         }
         else {
             if (sa.isSpell()) {
-                final Card c = sa.getSourceCard();
+                final Card c = sa.getHostCard();
                 if (!c.isCopiedSpell()) {
-                    sa.setSourceCard(game.getAction().moveToStack(c));
+                    sa.setHostCard(game.getAction().moveToStack(c));
                 }
             }
             game.getStack().add(sa);
@@ -659,7 +659,7 @@ public class HumanPlay {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (done) {
-                ability.getSourceCard().getGame().getAction().sacrifice(offering, ability);
+                ability.getHostCard().getGame().getAction().sacrifice(offering, ability);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -676,7 +676,7 @@ public class HumanPlay {
     }
     
     public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
         boolean xWasBilled = false;
@@ -688,7 +688,7 @@ public class HumanPlay {
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
             xWasBilled = true;
         }
-        int timesMultikicked = ability.getSourceCard().getKickerMagnitude();
+        int timesMultikicked = ability.getHostCard().getKickerMagnitude();
         if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
             ManaCost mkCost = ability.getMultiKickerManaCost();
             for(int i = 0; i < timesMultikicked; i++)

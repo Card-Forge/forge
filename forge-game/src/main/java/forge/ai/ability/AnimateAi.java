@@ -32,7 +32,7 @@ public class AnimateAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         

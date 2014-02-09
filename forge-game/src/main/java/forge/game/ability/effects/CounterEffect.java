@@ -31,7 +31,7 @@ public class CounterEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (sa.hasParam("AllValid")) {
-                    if (!spell.getSourceCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard())) {
                         continue;
                     }
                 }
@@ -46,7 +46,7 @@ public class CounterEffect extends SpellAbilityEffect {
         boolean isAbility = false;
         for (final SpellAbility tgtSA : sas) {
             sb.append(" ");
-            sb.append(tgtSA.getSourceCard());
+            sb.append(tgtSA.getHostCard());
             isAbility = tgtSA.isAbility();
             if (isAbility) {
                 sb.append("'s ability");
@@ -76,7 +76,7 @@ public class CounterEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (sa.hasParam("AllValid")) {
-                    if (!spell.getSourceCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard())) {
                         continue;
                     }
                 }
@@ -88,12 +88,12 @@ public class CounterEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ForgetOtherTargets")) {
             if (sa.getParam("ForgetOtherTargets").equals("True")) {
-                sa.getSourceCard().clearRemembered();
+                sa.getHostCard().clearRemembered();
             }
         }
 
         for (final SpellAbility tgtSA : sas) {
-            final Card tgtSACard = tgtSA.getSourceCard();
+            final Card tgtSACard = tgtSA.getHostCard();
 
             if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {
                 continue;
@@ -113,13 +113,13 @@ public class CounterEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("RememberCountered")) {
                 if (sa.getParam("RememberCountered").equals("True")) {
-                    sa.getSourceCard().addRemembered(tgtSACard);
+                    sa.getHostCard().addRemembered(tgtSACard);
                 }
             }
 
             if (sa.hasParam("RememberSplicedOntoCounteredSpell")) {
                 if (tgtSA.getSplicedCards() != null) {
-                    sa.getSourceCard().getRemembered().addAll(tgtSA.getSplicedCards());
+                    sa.getHostCard().getRemembered().addAll(tgtSA.getSplicedCards());
                 }
             }
         }
@@ -145,8 +145,8 @@ public class CounterEffect extends SpellAbilityEffect {
         final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "Counter");
         repParams.put("TgtSA", tgtSA);
-        repParams.put("Affected", tgtSA.getSourceCard());
-        repParams.put("Cause", srcSA.getSourceCard());
+        repParams.put("Affected", tgtSA.getHostCard());
+        repParams.put("Cause", srcSA.getHostCard());
         if (game.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return;
         }
@@ -161,39 +161,39 @@ public class CounterEffect extends SpellAbilityEffect {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (tgtSA.isFlashBackAbility())  {
-            game.getAction().exile(tgtSA.getSourceCard());
+            game.getAction().exile(tgtSA.getHostCard());
         } else if (destination.equals("Graveyard")) {
-            game.getAction().moveToGraveyard(tgtSA.getSourceCard());
+            game.getAction().moveToGraveyard(tgtSA.getHostCard());
         } else if (destination.equals("Exile")) {
-            game.getAction().exile(tgtSA.getSourceCard());
+            game.getAction().exile(tgtSA.getHostCard());
         } else if (destination.equals("TopOfLibrary")) {
-            game.getAction().moveToLibrary(tgtSA.getSourceCard());
+            game.getAction().moveToLibrary(tgtSA.getHostCard());
         } else if (destination.equals("Hand")) {
-            game.getAction().moveToHand(tgtSA.getSourceCard());
+            game.getAction().moveToHand(tgtSA.getHostCard());
         } else if (destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
-                Card c = tgtSA.getSourceCard();
+                Card c = tgtSA.getHostCard();
                 System.out.println(c + " is SpellPermanent");
                 c.setController(srcSA.getActivatingPlayer(), 0);
                 game.getAction().moveToPlay(c, srcSA.getActivatingPlayer());
             } else {
-                Card c = game.getAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
+                Card c = game.getAction().moveToPlay(tgtSA.getHostCard(), srcSA.getActivatingPlayer());
                 c.setController(srcSA.getActivatingPlayer(), 0);
             }
         } else if (destination.equals("BottomOfLibrary")) {
-            game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
         } else if (destination.equals("ShuffleIntoLibrary")) {
-            game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
-            tgtSA.getSourceCard().getController().shuffle(srcSA);
+            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
+            tgtSA.getHostCard().getController().shuffle(srcSA);
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
-                    + srcSA.getSourceCard().getName());
+                    + srcSA.getHostCard().getName());
         }
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", tgtSA.getActivatingPlayer());
-        runParams.put("Card", tgtSA.getSourceCard());
-        runParams.put("Cause", srcSA.getSourceCard());
+        runParams.put("Card", tgtSA.getHostCard());
+        runParams.put("Cause", srcSA.getHostCard());
         srcSA.getActivatingPlayer().getGame().getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
         
 

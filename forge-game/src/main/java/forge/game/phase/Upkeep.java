@@ -164,7 +164,7 @@ public class Upkeep extends Phase {
                             boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
                             final HashMap<String, Object> runParams = new HashMap<String, Object>();
                             runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
-                            runParams.put("Card", this.getSourceCard());
+                            runParams.put("Card", this.getHostCard());
                             game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
                             if(!isPaid)
                                 game.getAction().sacrifice(c, null);

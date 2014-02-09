@@ -1628,7 +1628,7 @@ public class GameAction {
             }
 
             for (final SpellAbility sa : usableFromOpeningHand) {
-                if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard())) {
+                if (!takesAction.getZone(ZoneType.Hand).contains(sa.getHostCard())) {
                     continue;
                 }
 

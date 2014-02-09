@@ -32,7 +32,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         List<Card> list;
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -120,9 +120,9 @@ public class CountersPutAi extends SpellAbilityAi {
             if (list.size() < abTgt.getMinTargets(source, sa)) {
                 return false;
             }
-            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -139,7 +139,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -158,7 +158,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
             }
         } else {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
             // on my opponents
             if (cards.isEmpty() || !cards.get(0).getController().equals(player)) {
@@ -197,12 +197,12 @@ public class CountersPutAi extends SpellAbilityAi {
     public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
         boolean chance = true;
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
@@ -216,7 +216,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
             sa.resetTargets();
             // target loop
-            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -224,7 +224,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 });
                 if (list.size() == 0) {
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -240,7 +240,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -264,7 +264,7 @@ public class CountersPutAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         // boolean chance = true;
         boolean preferred = true;
         List<Card> list;
@@ -273,7 +273,7 @@ public class CountersPutAi extends SpellAbilityAi {
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
         if (abTgt == null) {
             // No target. So must be defined
@@ -348,7 +348,7 @@ public class CountersPutAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         if (mode == PlayerActionConfirmMode.Tribute) {
             // add counter if that opponent has a giant creature
             final List<Card> creats = player.getCreaturesInPlay();

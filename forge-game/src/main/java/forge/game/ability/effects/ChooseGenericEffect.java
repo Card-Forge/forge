@@ -29,7 +29,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final String[] choices = sa.getParam("Choices").split(",");
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
          
@@ -59,7 +59,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowChoice")) {
                 p.getGame().getAction().nofityOfValue(sa, p, abilities.get(idxChosen).getDescription(), null);
             }
-            chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
+            chosenSA.setActivatingPlayer(sa.getHostCard().getController());
             ((AbilitySub) chosenSA).setParent(sa);
             AbilityUtils.resolve(chosenSA);
         }

@@ -64,7 +64,7 @@ public class EffectAi extends SpellAbilityAi {
                 if (tgt != null) {
                     sa.resetTargets();
                     List<Card> list = game.getCombat().getAttackers();
-                    list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                    list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
                     list = CardLists.getTargetableCards(list, sa);
                     Card target = ComputerUtilCard.getBestCreatureAI(list);
                     if (target == null) {
@@ -123,7 +123,7 @@ public class EffectAi extends SpellAbilityAi {
         if ("False".equals(sa.getParam("Stackable"))) {
             String name = sa.getParam("Name");
             if (name == null) {
-                name = sa.getSourceCard().getName() + "'s Effect";
+                name = sa.getHostCard().getName() + "'s Effect";
             }
             final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Command, name);
             if (!list.isEmpty()) {

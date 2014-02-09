@@ -36,7 +36,7 @@ public class TapAi extends TapAiBase {
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (tgt == null) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);

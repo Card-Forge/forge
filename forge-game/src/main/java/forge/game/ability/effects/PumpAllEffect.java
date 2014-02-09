@@ -64,7 +64,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RememberAllPumped")) {
-                sa.getSourceCard().addRemembered(tgtC);
+                sa.getHostCard().addRemembered(tgtC);
             }
         
             if (!sa.hasParam("Permanent")) {
@@ -86,7 +86,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     }
                 };
                 if (sa.hasParam("UntilUntaps")) {
-                    sa.getSourceCard().addUntapCommand(untilEOT);
+                    sa.getHostCard().addUntapCommand(untilEOT);
                 } else if (sa.hasParam("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(untilEOT);
                 } else if (sa.hasParam("UntilYourNextTurn")) {
@@ -110,7 +110,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("PumpAllDescription")) {
             desc = sa.getParam("PumpAllDescription");
         } else if (sa.hasParam("SpellDescription")) {
-            desc = sa.getParam("SpellDescription").replace("CARDNAME", sa.getSourceCard().getName());
+            desc = sa.getParam("SpellDescription").replace("CARDNAME", sa.getHostCard().getName());
         }
 
         sb.append(desc);
@@ -154,13 +154,13 @@ public class PumpAllEffect extends SpellAbilityEffect {
         list = AbilityUtils.filterListByType(list, valid, sa);
 
         List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-        final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+        final int a = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
+        final int d = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
         
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[] {"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(sa.getParam("KW").split(" & "), restrictions, zones, sa.getSourceCard());
+            keywords = CardFactoryUtil.sharedKeywords(sa.getParam("KW").split(" & "), restrictions, zones, sa.getHostCard());
         }
         this.applyPumpAll(sa, list, a, d, keywords, affectedZones);
     } // pumpAllResolve()

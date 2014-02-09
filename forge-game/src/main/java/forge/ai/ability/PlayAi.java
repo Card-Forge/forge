@@ -26,7 +26,7 @@ public class PlayAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final Random r = MyRandom.getRandom();
 
@@ -67,7 +67,7 @@ public class PlayAi extends SpellAbilityAi {
             }
             sa.getTargets().add(ComputerUtilCard.getBestAI(cards));
         } else if (!sa.hasParam("Valid")) {
-            cards = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
+            cards = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
             if (cards.isEmpty()) {
                 return false;
             }

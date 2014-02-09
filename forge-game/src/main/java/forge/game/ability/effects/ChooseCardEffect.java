@@ -32,7 +32,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         List<Card> chosen = new ArrayList<Card>();

@@ -50,7 +50,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
-        final Card sourceCard = sa.getSourceCard();
+        final Card sourceCard = sa.getHostCard();
 
         for (final Card tgtC : getTargetCards(sa)) {
             final Command untilEOT = new Command() {
@@ -65,7 +65,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
             if (tgtC.isInPlay() && (tgt == null || tgt.canTgtPlayer() || tgtC.canBeTargetedBy(sa))) {
             	SpellAbility triggerSA = null;
             	if (sa.hasParam("RegenerationTrigger")) {
-            		String abString = sa.getSourceCard().getSVar(sa.getParam("RegenerationTrigger"));
+            		String abString = sa.getHostCard().getSVar(sa.getParam("RegenerationTrigger"));
             		if (sa.hasParam("ReplacePlayerName")) { // Soldevi Sentry
             			String def = sa.getParam("ReplacePlayerName");
             			List<Player> replaced = AbilityUtils.getDefinedPlayers(sourceCard, def, sa);
@@ -78,7 +78,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
             		triggerSA = AbilityFactory.getAbility(abString, sourceCard);
             		triggerSA.setActivatingPlayer(sa.getActivatingPlayer());
             		triggerSA.setTrigger(true);
-            		triggerSA.setSourceCard(sourceCard);
+            		triggerSA.setHostCard(sourceCard);
             	}
             	CardShields shield = new CardShields(sa, triggerSA);
                 tgtC.addShield(shield);

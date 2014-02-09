@@ -28,7 +28,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class StaticAbilityCostChange {
         final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final String amount = params.get("Amount");
 
 
@@ -124,7 +123,7 @@ public class StaticAbilityCostChange {
             }
             boolean targetValid = false;
             for (SpellAbility target : sa.getTargets().getTargetSpells()) {
-                Card targetCard = target.getSourceCard();
+                Card targetCard = target.getHostCard();
                 if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard)) {
                     targetValid = true;
                 }
@@ -202,7 +201,7 @@ public class StaticAbilityCostChange {
         final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final String amount = params.get("Amount");
 
 

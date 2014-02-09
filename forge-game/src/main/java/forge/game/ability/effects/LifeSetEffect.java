@@ -17,7 +17,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final boolean redistribute = sa.hasParam("Redistribute");
-        final int lifeAmount = redistribute ? 20 : AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int lifeAmount = redistribute ? 20 : AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Integer> lifetotals = new ArrayList<Integer>();
         
@@ -32,10 +32,10 @@ public class LifeSetEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (!redistribute) {
-                    p.setLife(lifeAmount, sa.getSourceCard());
+                    p.setLife(lifeAmount, sa.getHostCard());
                 } else {
                     int life = sa.getActivatingPlayer().getController().chooseNumber(sa, "Life Total: " + p, lifetotals, p);
-                    p.setLife(life, sa.getSourceCard());
+                    p.setLife(life, sa.getHostCard());
                     lifetotals.remove((Integer) life);
                 }
             }
@@ -48,7 +48,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
         final boolean redistribute = sa.hasParam("Redistribute");
 
         List<Player> tgtPlayers = getTargetPlayers(sa);

@@ -25,16 +25,16 @@ public class RepeatEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
 
         // setup subability to repeat
-        final SpellAbility repeat = AbilityFactory.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
+        final SpellAbility repeat = AbilityFactory.getAbility(sa.getHostCard().getSVar(sa.getParam("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
-            maxRepeat = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
+            maxRepeat = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRepeat"), sa);
             if (maxRepeat.intValue() == 0) return; // do nothing if maxRepeat is 0. the next loop will execute at least once
         }
 
@@ -46,7 +46,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             if (maxRepeat != null && maxRepeat <= count) {
                 // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
                 // Helm of Obedience vs Graveyard to Library replacement effect
-                StringBuilder infLoop = new StringBuilder(sa.getSourceCard().toString());
+                StringBuilder infLoop = new StringBuilder(sa.getHostCard().toString());
                 infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
                 infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
                 infLoop.append("Once Draws are available this probably should change to a Draw.");
@@ -83,12 +83,12 @@ public class RepeatEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RepeatDefined")) {
-                list.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("RepeatDefined"), sa));
+                list.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RepeatDefined"), sa));
             } else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
 
-            list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard());
 
             int right;
             final String rightString = repeatCompare.substring(2);
@@ -97,7 +97,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             } catch (final NumberFormatException e) { // Otherwise, grab it from
                                                       // the
                 // SVar
-                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
+                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar(rightString));
             }
 
             final int left = list.size();
@@ -114,8 +114,8 @@ public class RepeatEffect extends SpellAbilityEffect {
                 sVarOperator = sa.getParam("RepeatSVarCompare").substring(0, 2);
                 sVarOperand = sa.getParam("RepeatSVarCompare").substring(2);
             }
-            final int svarValue = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatCheckSVar"), sa);
-            final int operandValue = AbilityUtils.calculateAmount(sa.getSourceCard(), sVarOperand, sa);
+            final int svarValue = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("RepeatCheckSVar"), sa);
+            final int operandValue = AbilityUtils.calculateAmount(sa.getHostCard(), sVarOperand, sa);
 
             if (!Expressions.compare(svarValue, sVarOperator, operandValue)) {
                 return false;

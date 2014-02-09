@@ -67,7 +67,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final Card card = this.getSourceCard();
+        final Card card = this.getHostCard();
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
@@ -107,7 +107,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     } // canPlay()
     
     public boolean checkOtherRestrictions() {
-        final Card source = this.getSourceCard();
+        final Card source = this.getHostCard();
         Player activator = getActivatingPlayer();
         final Game game = activator.getGame();
         // CantBeCast static abilities
@@ -127,7 +127,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlayAI(Player aiPlayer) {
-        final Card card = this.getSourceCard();
+        final Card card = this.getHostCard();
         final Game game = getActivatingPlayer().getGame();
         if (card.getSVar("NeedsToPlay").length() > 0) {
             final String needsToPlay = card.getSVar("NeedsToPlay");

@@ -25,10 +25,10 @@ public class RepeatEachEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
 
         // setup subability to repeat
-        final SpellAbility repeat = AbilityFactory.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
+        final SpellAbility repeat = AbilityFactory.getAbility(sa.getHostCard().getSVar(sa.getParam("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 

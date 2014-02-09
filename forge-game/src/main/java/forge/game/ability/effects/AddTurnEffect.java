@@ -14,7 +14,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        final int numTurns = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
+        final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
@@ -36,7 +36,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final int numTurns = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
+        final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 

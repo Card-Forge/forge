@@ -95,7 +95,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.spell.getSourceCard()); } });
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.spell.getHostCard()); } });
         pauseForEvent(resolveDelay);
         return null;
     }
@@ -105,7 +105,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.sa.getSourceCard()); } });
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.sa.getHostCard()); } });
         pauseForEvent(castDelay);
         return null;
     }

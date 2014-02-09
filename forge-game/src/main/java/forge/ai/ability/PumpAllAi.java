@@ -28,12 +28,12 @@ public class PumpAllAi extends PumpAiBase {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
 
-        final int power = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-        final int defense = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+        final int power = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
+        final int defense = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
 
         final PhaseType phase = game.getPhaseHandler().getPhase();

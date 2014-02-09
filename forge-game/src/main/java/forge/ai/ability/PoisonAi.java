@@ -26,7 +26,7 @@ public class PoisonAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         // int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();
         // int humanLife = AllZone.getHumanPlayer().getLife();
         // int aiPoison = AllZone.getComputerPlayer().getPoisonCounters();
@@ -75,7 +75,7 @@ public class PoisonAi extends SpellAbilityAi {
         if (tgt != null) {
             sa.getTargets().add(ai.getOpponent());
         } else {
-            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
             for (final Player p : players) {
                 if (!mandatory && p == ai && (p.getPoisonCounters() > p.getOpponent().getPoisonCounters())) {
                     return false;

@@ -16,7 +16,7 @@ public class LifeLoseEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         int affected = getTargetPlayers(sa).size();
         for (int i = 0; i < affected; i++) {
@@ -39,7 +39,7 @@ public class LifeLoseEffect extends SpellAbilityEffect {
 
         int lifeLost = 0;
 
-        final int lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Player p : getTargetPlayers(sa)) {
@@ -47,7 +47,7 @@ public class LifeLoseEffect extends SpellAbilityEffect {
                 lifeLost += p.loseLife(lifeAmount);
             }
         }
-        sa.getSourceCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
+        sa.getHostCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
     }
 
 }

@@ -47,7 +47,7 @@ public class DrawAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
         final Game game = ai.getGame();
 
@@ -126,7 +126,7 @@ public class DrawAi extends SpellAbilityAi {
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final boolean drawback = (sa instanceof AbilitySub);
         final Game game = ai.getGame();
         Player opp = ai.getOpponent();
@@ -143,7 +143,7 @@ public class DrawAi extends SpellAbilityAi {
 
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
-            numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+            numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
         }
 
         boolean xPaid = false;
@@ -261,7 +261,7 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+        int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         // AI shouldn't mill itself
         return numCards < player.getZone(ZoneType.Library).size();
     }

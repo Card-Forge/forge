@@ -71,7 +71,7 @@ public class CostUntap extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability) {
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         return source.isTapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
     }
 
@@ -80,7 +80,7 @@ public class CostUntap extends CostPart {
      */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        ability.getSourceCard().untap();
+        ability.getHostCard().untap();
         return true;
     }
     

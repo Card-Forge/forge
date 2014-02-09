@@ -19,7 +19,7 @@ public class CounterAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         boolean toReturn = true;
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         if (game.getStack().isEmpty()) {
             return false;
@@ -39,12 +39,12 @@ public class CounterAi extends SpellAbilityAi {
         if (tgt != null) {
 
             final SpellAbility topSA = game.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer() == ai) { 
+            if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai) {
                 // might as well check for player's friendliness
                 return false;
             }
-            if (sa.hasParam("AITgts") && (topSA.getSourceCard() == null
-                    || !topSA.getSourceCard().isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), source))) {
+            if (sa.hasParam("AITgts") && (topSA.getHostCard() == null
+                    || !topSA.getHostCard().isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), source))) {
                 return false;
             }
 
@@ -115,7 +115,7 @@ public class CounterAi extends SpellAbilityAi {
                 return false;
             }
             final SpellAbility topSA = game.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer() == ai) {
+            if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai) {
                 return false;
             }
 
@@ -128,7 +128,7 @@ public class CounterAi extends SpellAbilityAi {
 
             String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
 
-            final Card source = sa.getSourceCard();
+            final Card source = sa.getHostCard();
             if (unlessCost != null) {
                 // Is this Usable Mana Sources? Or Total Available Mana?
                 final int usableManaSources = ComputerUtilMana.getAvailableMana(ai.getOpponent(), true).size();

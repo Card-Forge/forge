@@ -61,13 +61,13 @@ public class HumanPlaySpellAbility {
         Zone fromZone = null;
         int zonePosition = 0;
 
-        final Card c = this.ability.getSourceCard();
+        final Card c = this.ability.getHostCard();
         if (this.ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             if (fromZone != null) {
             	zonePosition = fromZone.getCards().indexOf(c);
             }
-            this.ability.setSourceCard(game.getAction().moveToStack(c));
+            this.ability.setHostCard(game.getAction().moveToStack(c));
         }
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
@@ -78,7 +78,7 @@ public class HumanPlaySpellAbility {
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
                 && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
-                && (isFree || this.payment.payCost(new HumanCostDecision(human, ability, ability.getSourceCard())));
+                && (isFree || this.payment.payCost(new HumanCostDecision(human, ability, ability.getHostCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
@@ -87,8 +87,8 @@ public class HumanPlaySpellAbility {
                     // if a player failed to play madness cost, move the card to graveyard
                     game.getAction().moveToGraveyard(c);
                     ability.setMadness(false);
-                } else if (ability.getSourceCard().isBestowed()) {
-                    ability.getSourceCard().unanimateBestow();
+                } else if (ability.getHostCard().isBestowed()) {
+                    ability.getHostCard().unanimateBestow();
                 }
             }
             return;
@@ -116,7 +116,7 @@ public class HumanPlaySpellAbility {
         // Skip to paying if parent ability doesn't target and has no subAbilities.
         // (or trigger case where its already targeted)
         SpellAbility currentAbility = ability;
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         do {
             TargetRestrictions tgt = currentAbility.getTargetRestrictions();
             if (tgt != null && tgt.doesTarget()) {
@@ -141,7 +141,7 @@ public class HumanPlaySpellAbility {
         TargetRestrictions tg = ability.getTargetRestrictions();
         if (tg != null) {
             ability.resetTargets();
-            tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getSourceCard(), ability);
+            tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getHostCard(), ability);
         }
     }
 
@@ -151,7 +151,7 @@ public class HumanPlaySpellAbility {
 
         if (fromZone != null) { // and not a copy
             // add back to where it came from
-            game.getAction().moveTo(fromZone, ability.getSourceCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            game.getAction().moveTo(fromZone, ability.getHostCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
         }
 
         clearTargets(ability);
@@ -180,10 +180,10 @@ public class HumanPlaySpellAbility {
 
                 ability.setSVar(varName, value.toString());
                 if ("Multikicker".equals(varName)) {
-                    ability.getSourceCard().setKickerMagnitude(value);
+                    ability.getHostCard().setKickerMagnitude(value);
                 }
                 else {
-                    ability.getSourceCard().setSVar(varName, value.toString());
+                    ability.getHostCard().setSVar(varName, value.toString());
                 }
             }
         }
@@ -199,14 +199,14 @@ public class HumanPlaySpellAbility {
                 String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
                     String choice = pc.chooseSomeType("Creature", ability, CardType.getCreatureTypes(), new ArrayList<String>());
-                    ability.getSourceCard().setChosenType(choice);
+                    ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {
                     int min = Integer.parseInt(ability.getParam("Min"));
                     int max = Integer.parseInt(ability.getParam("Max"));
                     int i = ability.getActivatingPlayer().getController().chooseNumber(ability,
                             "Choose a number", min, max);
-                    ability.getSourceCard().setChosenNumber(i);
+                    ability.getHostCard().setChosenNumber(i);
                 }
             }
         }
@@ -220,7 +220,7 @@ public class HumanPlaySpellAbility {
 
         // For older abilities that don't setStackDescription set it here
         final StringBuilder sb = new StringBuilder();
-        sb.append(ability.getSourceCard().getName());
+        sb.append(ability.getHostCard().getName());
         if (ability.getTargetRestrictions() != null) {
             final Iterable<GameObject> targets = ability.getTargets().getTargets();
             if (!Iterables.isEmpty(targets)) {

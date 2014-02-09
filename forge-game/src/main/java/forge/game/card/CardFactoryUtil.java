@@ -87,7 +87,7 @@ public class CardFactoryUtil {
 
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityUnearth(getSourceCard(),
+                AbilityActivated res = new AbilityUnearth(getHostCard(),
                         getPayCosts(), getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions()));
                 CardFactory.copySpellAbility(this, res);
                 final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
@@ -484,13 +484,13 @@ public class CardFactoryUtil {
             return false; // for tokens that disappeared
         }
 
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         final TargetRestrictions tgt = ability.getTargetRestrictions();
         if (tgt != null) {
             // Reconfirm the Validity of a TgtValid, or if the Creature is still
             // a Creature
             if (tgt.doesTarget()
-                    && !target.isValid(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard())) {
+                    && !target.isValid(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard())) {
                 return false;
             }
 
@@ -564,7 +564,7 @@ public class CardFactoryUtil {
         }
         // Autumn's Veil
         if (c.hasKeyword("CARDNAME can't be countered by blue or black spells.") && sa.isSpell() 
-                && (sa.getSourceCard().isBlack() || sa.getSourceCard().isBlue())) {
+                && (sa.getHostCard().isBlack() || sa.getHostCard().isBlue())) {
             return false;
         }
         return true;
@@ -1963,7 +1963,7 @@ public class CardFactoryUtil {
 
     public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
 
-        sa.setSourceCard(card);
+        sa.setHostCard(card);
 
         if (sa.getSubAbility() != null) {
             correctAbilityChainSourceCard(sa.getSubAbility(), card);
@@ -2923,8 +2923,8 @@ public class CardFactoryUtil {
 
     private static final Map<String,String> emptyMap = new TreeMap<String,String>();
     public static void setupETBReplacementAbility(SpellAbility sa) {
-        sa.appendSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getSourceCard(), null, emptyMap));
-        // ETBReplacementMove(sa.getSourceCard(), null));
+        sa.appendSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap));
+        // ETBReplacementMove(sa.getHostCard(), null));
     }
 
     /**

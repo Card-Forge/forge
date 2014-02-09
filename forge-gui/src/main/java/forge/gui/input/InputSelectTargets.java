@@ -62,9 +62,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
            sb.append("\n");
         }
 
-        sb.append(sa.getSourceCard() + " - " + tgt.getVTSelection());
+        sb.append(sa.getHostCard() + " - " + tgt.getVTSelection());
         
-        int maxTargets = tgt.getMaxTargets(sa.getSourceCard(), sa);
+        int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);
         int targeted = sa.getTargets().getNumTargeted();
         if(maxTargets > 1)
             sb.append("\n(").append(maxTargets - targeted).append(" more can be targeted)");
@@ -72,7 +72,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         showMessage(sb.toString());
 
         // If reached Minimum targets, enable OK button
-        if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {
+        if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
                 ButtonUtil.disableAll();
@@ -110,14 +110,14 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // leave this in temporarily, there some seriously wrong things going on here
         // Can be targeted doesn't check if the target is a valid type, only if a card is generally "targetable"
         if (!card.canBeTargetedBy(sa)) {
-            showMessage(sa.getSourceCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
+            showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
             return;
         } 
         if (!choices.contains(card)) {
             if (card.isPlaneswalker() && sa.getApi() == ApiType.DealDamage) {
-                showMessage(sa.getSourceCard() + " - To deal an opposing Planeswalker direct damage, target its controller and then redirect the damage on resolution.");
+                showMessage(sa.getHostCard() + " - To deal an opposing Planeswalker direct damage, target its controller and then redirect the damage on resolution.");
             } else {
-                showMessage(sa.getSourceCard() + " - The selected card is not a valid choice to be targeted.");
+                showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
             }
             return;
         }
@@ -126,7 +126,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
+            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa))
                     && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final Integer[] choices = new Integer[stillToDivide];
                 for (int i = 1; i <= stillToDivide; i++) {
@@ -164,7 +164,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!sa.canTarget(player)) {
-            showMessage(sa.getSourceCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
+            showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
         }
         
@@ -172,7 +172,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final int stillToDivide = tgt.getStillToDivide();
             int allocatedPortion = 0;
             // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+            if ((sa.getTargets().getNumTargeted() + 1 < tgt.getMaxTargets(sa.getHostCard(), sa)) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
                 final Integer[] choices = new Integer[stillToDivide];
                 for (int i = 1; i <= stillToDivide; i++) {
                     choices[i - 1] = i;
@@ -225,6 +225,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
     
     private boolean hasAllTargets() {
-        return tgt.isMaxTargetsChosen(sa.getSourceCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
+        return tgt.isMaxTargetsChosen(sa.getHostCard(), sa) || ( tgt.getStillToDivide() == 0 && tgt.isDividedAsYouChoose());
     }
 }

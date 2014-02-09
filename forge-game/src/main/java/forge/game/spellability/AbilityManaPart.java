@@ -181,7 +181,7 @@ public class AbilityManaPart implements java.io.Serializable {
         if (null == cannotCounterSpell) return false;
         if ("True".equalsIgnoreCase(cannotCounterSpell)) return true;
 
-        Card source = saBeingPaid.getSourceCard();
+        Card source = saBeingPaid.getHostCard();
         if (source == null) return false;
         return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard);
     }
@@ -300,8 +300,8 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
             }
 
-            if (sa.getSourceCard() != null) {
-                if (sa.getSourceCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard())) {
+            if (sa.getHostCard() != null) {
+                if (sa.getHostCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard())) {
                     return true;
                 }
             }

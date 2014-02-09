@@ -24,7 +24,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         boolean chance = false;
@@ -52,7 +52,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            final List<GameObject> objects = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<GameObject> objects = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             // react to threats on the stack
             if (!game.getStack().isEmpty()) {
@@ -145,7 +145,7 @@ public class DamagePreventAi extends SpellAbilityAi {
             }
         }
         if (sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
-            tgt.addDividedAllocation(sa.getTargets().getTargets().get(0), AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa));
+            tgt.addDividedAllocation(sa.getTargets().getTargets().get(0), AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
         }
 
         return chance;
@@ -184,7 +184,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         // filter AIs battlefield by what I can target
         final Game game = ai.getGame();
         List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getSourceCard());
+        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getHostCard());
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
         Card target = null;
 
@@ -216,7 +216,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         }
         sa.getTargets().add(target);
         if (sa.hasParam("DividedAsYouChoose")) {
-            tgt.addDividedAllocation(target, AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa));
+            tgt.addDividedAllocation(target, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa));
         }
         return true;
     }

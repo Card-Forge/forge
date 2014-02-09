@@ -22,7 +22,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
@@ -101,12 +101,12 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         String num = sa.getParam("Amount");
         num = (num == null) ? "1" : num;
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
-            sb.append("Sacrifice ").append(sa.getSourceCard().toString());
+            sb.append("Sacrifice ").append(sa.getHostCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
-            final Card toSac = sa.getSourceCard().getEnchantingCard();
+            final Card toSac = sa.getHostCard().getEnchantingCard();
             sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
         } else {
             for (final Player p : tgts) {

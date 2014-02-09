@@ -30,7 +30,7 @@ public class TapAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final boolean remTapped = sa.hasParam("RememberTapped");
         if (remTapped) {
             card.clearRemembered();

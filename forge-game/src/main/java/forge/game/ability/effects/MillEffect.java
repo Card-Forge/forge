@@ -15,8 +15,8 @@ public class MillEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
-        final int numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+        final Card source = sa.getHostCard();
+        final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
         final boolean bottom = sa.hasParam("FromBottom");
 
         if (sa.hasParam("ForgetOtherRemembered")) {
@@ -61,7 +61,7 @@ public class MillEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+        final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player p : tgtPlayers) {

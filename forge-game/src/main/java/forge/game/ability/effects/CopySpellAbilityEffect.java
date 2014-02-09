@@ -26,14 +26,14 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         // TODO Someone fix this Description when Copying Charms
         final Iterator<SpellAbility> it = tgtSpells.iterator();
         while (it.hasNext()) {
-            sb.append(it.next().getSourceCard());
+            sb.append(it.next().getHostCard());
             if (it.hasNext()) {
                 sb.append(", ");
             }
         }
         int amount = 1;
         if (sa.hasParam("Amount")) {
-            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
         if (amount > 1) {
             sb.append(amount).append(" times");
@@ -48,7 +48,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         Player controller = sa.getActivatingPlayer();
 
         int amount = 1;
@@ -76,7 +76,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             for (int multi = 0; multi < spellCount && !tgtSpells.isEmpty(); multi++) {
                 String prompt = "Select " + Lang.getOrdinal(multi) + " spell to copy to stack";
                 SpellAbility chosen = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, prompt);
-                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosen.getSourceCard(), chosen, true));
+                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosen.getHostCard(), chosen, true));
                 tgtSpells.remove(chosen);
             }
         }
@@ -100,7 +100,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 
                 mayChoseNewTargets = false;
                 for (GameObject o : candidates) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     copy.resetFirstTarget(o);
                     copies.add(copy);
                 }
@@ -112,12 +112,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         valid.add((Card) o);
                     }
                 }
-                valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getSourceCard());
+                valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getHostCard());
                 Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                 valid.remove(originalTarget);
                 mayChoseNewTargets = false;
                 for (Card c : valid) {
-                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
+                    SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     copy.resetFirstTarget(c);
                     copies.add(copy);
                 }
@@ -127,7 +127,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true));
+                copies.add(CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true));
             }
         }
         

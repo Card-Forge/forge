@@ -381,7 +381,7 @@ public class PlayerControllerAi extends PlayerController {
     {
         // System.out.println("Playing sa: " + sa);
         if ( sa == Ability.PLAY_LAND_SURROGATE )
-            player.playLand(sa.getSourceCard(), false);
+            player.playLand(sa.getHostCard(), false);
         else
             ComputerUtil.handlePlayingSpellAbility(player, sa, game);
     }    
@@ -606,7 +606,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player);
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player)) {
@@ -619,7 +619,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : activePlayerSAs) {
-            prepareSingleSa(sa.getSourceCard(),sa,true);
+            prepareSingleSa(sa.getHostCard(),sa,true);
             ComputerUtil.playStack(sa, player, game);
         }
     }

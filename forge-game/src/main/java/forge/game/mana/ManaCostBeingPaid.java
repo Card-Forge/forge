@@ -491,7 +491,7 @@ public class ManaCostBeingPaid {
     public final void applySpellCostChange(final SpellAbility sa, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
         // Beached
-        final Card originalCard = sa.getSourceCard();
+        final Card originalCard = sa.getHostCard();
         final SpellAbility spell = sa;
 
         if (sa.isXCost() && !originalCard.isCopiedSpell()) {
@@ -514,7 +514,7 @@ public class ManaCostBeingPaid {
                     }
                 }
             }
-            else if (spell.getSourceCard().hasKeyword("Convoke")) {
+            else if (spell.getHostCard().hasKeyword("Convoke")) {
                 adjustCostByConvoke(sa);
             }
         } // isSpell
@@ -583,7 +583,7 @@ public class ManaCostBeingPaid {
 
     private void adjustCostByOffering(final SpellAbility sa, final SpellAbility spell) {
         String offeringType = "";
-        for (String kw : sa.getSourceCard().getKeyword()) {
+        for (String kw : sa.getHostCard().getKeyword()) {
             if (kw.endsWith(" offering")) {
                 offeringType = kw.split(" ")[0];
                 break;
@@ -594,7 +594,7 @@ public class ManaCostBeingPaid {
         List<Card> canOffer = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
                 CardPredicates.isType(offeringType));
 
-        final List<Card> toSacList = sa.getSourceCard().getController().getController().choosePermanentsToSacrifice(spell, 0, 1, canOffer,
+        final List<Card> toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(spell, 0, 1, canOffer,
                 offeringType);
 
         if (!toSacList.isEmpty()) {

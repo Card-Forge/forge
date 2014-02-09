@@ -159,14 +159,14 @@ public class AbilityTriggered extends Ability implements Command {
             return false;
         }
         final AbilityTriggered tmp = (AbilityTriggered) o;
-        return tmp.getSourceCard().equals(this.getSourceCard()) && tmp.trigger.equals(this.trigger)
+        return tmp.getHostCard().equals(this.getHostCard()) && tmp.trigger.equals(this.trigger)
                 && tmp.todo.equals(this.todo) && Arrays.equals(tmp.restrictions, this.restrictions);
     }
 
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return (41 * (41 + this.getSourceCard().hashCode() + this.trigger.hashCode() + this.todo.hashCode() + this.restrictions
+        return (41 * (41 + this.getHostCard().hashCode() + this.trigger.hashCode() + this.todo.hashCode() + this.restrictions
                 .hashCode()));
     }
 
@@ -179,7 +179,7 @@ public class AbilityTriggered extends Ability implements Command {
      */
     public final boolean isBasic() {
         return (this.restrictions.length == 1)
-                && this.restrictions[0].equals("named " + this.getSourceCard().getName());
+                && this.restrictions[0].equals("named " + this.getHostCard().getName());
     }
 
     @Override

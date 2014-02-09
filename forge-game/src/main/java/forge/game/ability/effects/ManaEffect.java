@@ -21,7 +21,7 @@ public class ManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
 
         AbilityManaPart abMana = sa.getManaPart();
 
@@ -128,7 +128,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
 
                     if (abMana.getExpressChoice().isEmpty()) {
-                        System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getSourceCard().getName());
+                        System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getHostCard().getName());
                     }
                 }
             }    

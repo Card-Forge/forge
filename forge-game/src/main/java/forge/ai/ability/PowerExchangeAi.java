@@ -29,7 +29,7 @@ public class PowerExchangeAi extends SpellAbilityAi {
         sa.resetTargets();
 
         List<Card> list =
-                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getSourceCard());
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -42,10 +42,10 @@ public class PowerExchangeAi extends SpellAbilityAi {
         CardLists.sortByPowerAsc(list);
         c1 = list.isEmpty() ? null : list.get(0);
         if (sa.hasParam("Defined")) {
-            c2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
-        } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
+            c2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
+        } else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
             List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
-            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getSourceCard());
+            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getHostCard());
             CardLists.sortByPowerAsc(list2);
             Collections.reverse(list2);
             c2 = list2.isEmpty() ? null : list2.get(0);

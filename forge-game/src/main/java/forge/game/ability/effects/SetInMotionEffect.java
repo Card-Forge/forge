@@ -15,14 +15,14 @@ public class SetInMotionEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         System.out.println("AF_SIM");
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         Player controller = source.getController();
 
         int repeats = 1;
 
         if (sa.hasParam("RepeatNum")) {
 
-            repeats = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatNum"), sa);
+            repeats = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("RepeatNum"), sa);
         }
 
         for (int i = 0; i < repeats; i++) {

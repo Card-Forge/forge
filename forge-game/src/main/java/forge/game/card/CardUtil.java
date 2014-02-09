@@ -151,7 +151,7 @@ public final class CardUtil {
         newCopy.setTriggers(in.getTriggers(), false);
         for (SpellAbility sa : in.getManaAbility()) {
             newCopy.addSpellAbility(sa);
-            sa.setSourceCard(in);
+            sa.setHostCard(in);
         }
         
         // lock in the current P/T without boni from counters
@@ -233,7 +233,7 @@ public final class CardUtil {
         // they need to Reflect each other,
         // so we basically need to have a recursive list that send the parents
         // so we don't infinite recurse.
-        final Card card = abMana.getSourceCard();
+        final Card card = abMana.getHostCard();
         
         if (abMana.getApi() != ApiType.ManaReflected) {
             return colors;
@@ -313,17 +313,17 @@ public final class CardUtil {
                 }
 
                 if (ab.getApi() == ApiType.ManaReflected) {
-                    if (!parents.contains(ab.getSourceCard())) {
+                    if (!parents.contains(ab.getHostCard())) {
                         // Recursion! Set Activator to controller for appropriate valid comparison
-                        ab.setActivatingPlayer(ab.getSourceCard().getController());
+                        ab.setActivatingPlayer(ab.getHostCard().getController());
                         reflectAbilities.add(ab);
-                        parents.add(ab.getSourceCard());
+                        parents.add(ab.getHostCard());
                     }
                     continue;
                 }
                 colors = canProduce(maxChoices, ab.getManaPart(), colors);
-                if (!parents.contains(ab.getSourceCard())) {
-                    parents.add(ab.getSourceCard());
+                if (!parents.contains(ab.getHostCard())) {
+                    parents.add(ab.getHostCard());
                 }
             }
 

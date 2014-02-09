@@ -159,15 +159,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if ((ability.getRestrictions().getActivationNumberSacrifice() != -1)
                 && (ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions()
                         .getActivationNumberSacrifice())) {
-            ability.getSourceCard().addHiddenExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+            ability.getHostCard().addHiddenExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
         }
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
-            final Card source = ability.getSourceCard();
+            final Card source = ability.getHostCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setSourceCard(game.getAction().moveToStack(source));
+                ability.setHostCard(game.getAction().moveToStack(source));
             }
         }
         
@@ -254,7 +254,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      */
     public final void add(final SpellAbility sp) {
         SpellAbilityStackInstance si = null;
-        final Card source = sp.getSourceCard();
+        final Card source = sp.getHostCard();
         Player activator = sp.getActivatingPlayer();
 
         // if activating player slips through the cracks, assign activating
@@ -383,7 +383,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
             runParams.put("Cost", sp.getPayCosts());
-            runParams.put("Player", sp.getSourceCard().getController());
+            runParams.put("Player", sp.getHostCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
             runParams.put("CastSA", si.getSpellAbility());
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -401,7 +401,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
-                runParams.put("Card", sp.getSourceCard());
+                runParams.put("Card", sp.getHostCard());
                 game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
             }
         }
@@ -471,8 +471,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     // Push should only be used by add.
     private SpellAbilityStackInstance push(final SpellAbility sp) {
         if (null == sp.getActivatingPlayer()) {
-            sp.setActivatingPlayer(sp.getSourceCard().getController());
-            System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
+            sp.setActivatingPlayer(sp.getHostCard().getController());
+            System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
@@ -488,9 +488,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isSpell() && !sp.isCopied()) {
-            this.thisTurnCast.add(sp.getSourceCard());
+            this.thisTurnCast.add(sp.getHostCard());
 
-            /*final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getSourceCard());
+            /*final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getHostCard());
             ripple.run();*/
         }
         return si;
@@ -516,7 +516,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // ActivePlayer gains priority first after Resolve
         game.getPhaseHandler().resetPriority(); 
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         curResolvingCard = source;
         
         boolean thisHasFizzled = this.hasFizzled(sa, source, false);
@@ -528,7 +528,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // It continues resolving as a creature spell.
                 source.unanimateBestow();
                 game.fireEvent(new GameEventCardStatsChanged(source));
-                AbilityUtils.resolve(sa.getSourceCard().getFirstSpellAbility());
+                AbilityUtils.resolve(sa.getHostCard().getFirstSpellAbility());
             } else {
                 // TODO: Spell fizzles, what's the best way to alert player?
                 Log.debug(source.getName() + " ability fizzles.");
@@ -550,7 +550,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private void handleHauntForNonPermanents(final SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
         final Ability haunterDiesWork = new Ability(source, ManaCost.ZERO) {
             @Override
@@ -601,7 +601,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // TODO: this is a huge hack. Why is this necessary?
         // hostCard in AF is not the same object that's on the battlefield
         // verified by System.identityHashCode(card);
-        final Card tmp = sa.getSourceCard();
+        final Card tmp = sa.getHostCard();
         tmp.setCanCounter(true); // reset mana pumped counter magic flag
         if (tmp.getClones().size() > 0) {
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -611,14 +611,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         
-        sa.getSourceCard().setXManaCostPaid(0);
+        sa.getHostCard().setXManaCostPaid(0);
     }
 
     private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
 
         // do nothing
-        if (sa.getSourceCard().isCopiedSpell() || sa.isAbility()) {
+        if (sa.getHostCard().isCopiedSpell() || sa.isAbility()) {
         }
         // Handle cards that need to be moved differently
         else if (sa.isBuyBackAbility() && !fizzle) {
@@ -764,7 +764,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             SpellAbility sa = this.simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
             if (activator == null) {
-                if (sa.getSourceCard().getController().equals(activePlayer)) {
+                if (sa.getHostCard().getController().equals(activePlayer)) {
                     activePlayerSAs.add(sa);
                     this.simultaneousStackEntryList.remove(i);
                     i--;

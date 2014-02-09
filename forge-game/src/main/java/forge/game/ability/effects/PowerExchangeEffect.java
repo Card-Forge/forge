@@ -20,7 +20,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
 
 
         if (tgtCards.size() == 1) {
-            sb.append(sa.getSourceCard()).append(" exchanges power with ");
+            sb.append(sa.getHostCard()).append(" exchanges power with ");
             sb.append(tgtCards.get(0));
         } else if (tgtCards.size() > 1) {
             sb.append(tgtCards.get(0)).append(" exchanges power with ");
@@ -35,7 +35,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Card c1;
         final Card c2;
@@ -79,7 +79,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
             if (sa.hasParam("UntilEndOfCombat")) {
                 game.getEndOfCombat().addUntil(untilEOT);
             } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                sa.getSourceCard().addLeavesPlayCommand(untilEOT);
+                sa.getHostCard().addLeavesPlayCommand(untilEOT);
             } else {
                 game.getEndOfTurn().addUntil(untilEOT);
             }

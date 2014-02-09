@@ -41,7 +41,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             List<Card> filteredCards = null;
             if (leaveZone != null) {
                 filteredCards = CardLists.filter(p.getCardsIn(leaveZone),
-                        CardPredicates.restriction(leaveRestriction.split(","), p, sa.getSourceCard()));
+                        CardPredicates.restriction(leaveRestriction.split(","), p, sa.getHostCard()));
             }
 
             newLibrary.addAll(filteredCards);
@@ -68,7 +68,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
             
             player.setStartingLife(psc.getStartingLife());
-            player.setPoisonCounters(0, sa.getSourceCard());
+            player.setPoisonCounters(0, sa.getHostCard());
             player.setNumLandsPlayed(0);
             player.initVariantsZones(psc);
 
@@ -102,7 +102,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             desc = "Restart the game.";
         }
 
-        return desc.replace("CARDNAME", sa.getSourceCard().getName());
+        return desc.replace("CARDNAME", sa.getHostCard().getName());
     }
 }
 

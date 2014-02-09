@@ -15,7 +15,7 @@ public class TapEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final boolean remTapped = sa.hasParam("RememberTapped");
         if (remTapped) {
             card.clearRemembered();

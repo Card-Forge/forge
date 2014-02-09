@@ -18,7 +18,7 @@ public class RevealEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final boolean anyNumber = sa.hasParam("AnyNumber");
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
 
@@ -46,7 +46,7 @@ public class RevealEffect extends SpellAbilityEffect {
                     }
                     
                 } else if (sa.hasParam("RevealDefined")) {
-                    revealed.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("RevealDefined"), sa));
+                    revealed.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RevealDefined"), sa));
                 } else {
                     List<Card> valid = new ArrayList<Card>(cardsInHand);
 

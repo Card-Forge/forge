@@ -14,7 +14,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         final Game game = source.getGame();
 
         if (sa.hasParam("ClearRemembered")) {

@@ -2519,7 +2519,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addSpellAbility(final SpellAbility a) {
 
-        a.setSourceCard(this);
+        a.setHostCard(this);
         if (a.isManaAbility()) {
             this.getCharacteristics().getManaAbility().add(a);
         } else {
@@ -5405,7 +5405,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
                 for (final SpellAbility s : sas) {
-                    final Player p = s.getSourceCard().getController();
+                    final Player p = s.getHostCard().getController();
                     if (!this.getController().equals(p)) {
                         return false;
                     }
@@ -8177,7 +8177,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if (this.hasProtectionFrom(sa.getSourceCard())) {
+        if (this.hasProtectionFrom(sa.getHostCard())) {
             return false;
         }
 
@@ -8185,7 +8185,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (this.getKeyword() != null) {
             for (String kw : this.getKeyword()) {
@@ -8607,7 +8607,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return;
             }
         }
-        if (sa.getSourceCard().hasKeyword("Fuse")) // it's ok that such card won't change its side
+        if (sa.getHostCard().hasKeyword("Fuse")) // it's ok that such card won't change its side
             return;
 
         throw new RuntimeException("Not found which part to choose for ability " + sa + " from card " + this);
@@ -8665,7 +8665,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (isLand() && player.canPlayLand(this)) {
-            Ability.PLAY_LAND_SURROGATE.setSourceCard(this);
+            Ability.PLAY_LAND_SURROGATE.setHostCard(this);
             abilities.add(Ability.PLAY_LAND_SURROGATE);
         }
 

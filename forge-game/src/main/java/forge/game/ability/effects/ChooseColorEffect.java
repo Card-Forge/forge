@@ -32,7 +32,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
 
         List<String> colorChoices = new ArrayList<String>(MagicColor.Constant.ONLY_COLORS);
         if (sa.hasParam("Choices")) {

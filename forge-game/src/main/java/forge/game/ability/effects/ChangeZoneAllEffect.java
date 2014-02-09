@@ -40,7 +40,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);
@@ -75,7 +75,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("ForgetOtherRemembered")) {
-            sa.getSourceCard().clearRemembered();
+            sa.getHostCard().clearRemembered();
         }
 
         final String remember = sa.getParam("RememberChanged");

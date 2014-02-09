@@ -23,7 +23,7 @@ public class BalanceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         Game game = activator.getGame();
         String valid = sa.hasParam("Valid") ? sa.getParam("Valid") : "Card";
         ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;

@@ -20,7 +20,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         String valid = "";
 

@@ -29,7 +29,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
-            untilAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+            untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
 
         for (final Player pl : getTargetPlayers(sa)) {
@@ -42,7 +42,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             sb.append("s");
         }
         if (sa.hasParam("MaxRevealed")) {
-            untilAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRevealed"), sa);
+            untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRevealed"), sa);
             sb.append(" or ").append(untilAmount).append(" card/s");
         }
         sb.append(". Put ");
@@ -74,7 +74,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         String[] type = new String[]{"Card"};
         if (sa.hasParam("Valid")) {

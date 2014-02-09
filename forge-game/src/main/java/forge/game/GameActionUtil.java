@@ -150,7 +150,7 @@ public final class GameActionUtil {
      */
     public static final ArrayList<SpellAbility> getAlternativeCosts(SpellAbility sa) {
         ArrayList<SpellAbility> alternatives = new ArrayList<SpellAbility>();
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         if (!sa.isBasicSpell()) {
             return alternatives;
         }
@@ -208,7 +208,7 @@ public final class GameActionUtil {
                 newSA.setBasicSpell(false);
                 String kw = keyword;
                 if (keyword.contains("ConvertedManaCost")) {
-                    final String cmc = Integer.toString(sa.getSourceCard().getCMC());
+                    final String cmc = Integer.toString(sa.getHostCard().getCMC());
                     kw = keyword.replace("ConvertedManaCost", cmc);
                 }
                 final Cost cost = new Cost(kw.substring(17), false).add(newSA.getPayCosts().copyWithNoMana());
@@ -232,7 +232,7 @@ public final class GameActionUtil {
             }
             if (sa.isSpell() && keyword.endsWith(" offering")) {
                 final String offeringType = keyword.split(" ")[0];
-                List<Card> canOffer = CardLists.filter(sa.getSourceCard().getController().getCardsIn(ZoneType.Battlefield),
+                List<Card> canOffer = CardLists.filter(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield),
                         CardPredicates.isType(offeringType));
                 if (source.getController().hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                     canOffer = CardLists.getNotType(canOffer, "Creature");
@@ -274,7 +274,7 @@ public final class GameActionUtil {
     public static List<SpellAbility> getOptionalCosts(final SpellAbility original) {
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
 
-        final Card source = original.getSourceCard();
+        final Card source = original.getHostCard();
         abilities.add(original);
         if (!original.isSpell()) {
             return abilities;
@@ -389,7 +389,7 @@ public final class GameActionUtil {
         // Splice
         final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : abilities) {
-            if (sa.isSpell() && sa.getSourceCard().isType("Arcane") && sa.getApi() != null ) {
+            if (sa.isSpell() && sa.getHostCard().isType("Arcane") && sa.getApi() != null ) {
                 newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
             }
         }
@@ -411,7 +411,7 @@ public final class GameActionUtil {
         ArrayList<SpellAbility> newSAs = new ArrayList<SpellAbility>();
         ArrayList<SpellAbility> allSaCombinations = new ArrayList<SpellAbility>();
         allSaCombinations.add(sa);
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
 
         for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
             if (c.equals(source)) {
@@ -458,7 +458,7 @@ public final class GameActionUtil {
                 //set correct source and activating player to all the spliced abilities
                 child = subAbility;
                 while (child != null) {
-                    child.setSourceCard(source);
+                    child.setHostCard(source);
                     child.setActivatingPlayer(newSA.getActivatingPlayer());
                     child = child.getSubAbility();
                 }
@@ -497,7 +497,7 @@ public final class GameActionUtil {
     public static String generatedMana(final SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
 
-        int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
+        int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
 
         AbilityManaPart abMana = sa.getManaPart();
         String baseMana;

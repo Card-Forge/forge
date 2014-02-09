@@ -22,7 +22,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String type = sa.getParam("Type");
         if (sa.hasParam("Object")) {
             object1 = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa).get(0);

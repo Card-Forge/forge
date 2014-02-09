@@ -16,7 +16,7 @@ public class MustAttackEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
 
@@ -48,7 +48,7 @@ public class MustAttackEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 GameEntity entity;
                 if (sa.getParam("Defender").equals("Self")) {
-                    entity = sa.getSourceCard();
+                    entity = sa.getHostCard();
                 } else {
                     entity = p.getOpponent();
                 }

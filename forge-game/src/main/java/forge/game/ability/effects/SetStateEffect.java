@@ -44,7 +44,7 @@ public class SetStateEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final List<Card> tgtCards = getTargetCards(sa);
 

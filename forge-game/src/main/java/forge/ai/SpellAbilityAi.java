@@ -86,7 +86,7 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
      * @return a boolean.
      */
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
-        return ( sa.isSpell() &&  sa.getSourceCard().isSorcery() ) 
+        return ( sa.isSpell() &&  sa.getHostCard().isSorcery() )
             || ( sa.isAbility() && sa.getRestrictions().isSorcerySpeed() );
     }
 

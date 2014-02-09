@@ -27,7 +27,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
             p.leaveCurrentPlane();
         }
         if(sa.hasParam("Defined")) {
-            List<Card> destinations = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            List<Card> destinations = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             sa.getActivatingPlayer().planeswalkTo(destinations);
         }
         else

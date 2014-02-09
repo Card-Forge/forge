@@ -25,7 +25,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         }
         final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
         final String countername = sa.getParam("CounterType");
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
 
         sb.append("Move ");
         if ("Any".matches(countername)) {
@@ -49,7 +49,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final String counterName = sa.getParam("CounterType");
         int cntToMove = 0;
         if (!sa.getParam("CounterNum").equals("All")) {

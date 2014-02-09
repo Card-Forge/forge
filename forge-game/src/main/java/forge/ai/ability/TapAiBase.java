@@ -38,7 +38,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      * @return a boolean.
      */
     private boolean tapTargetList(final Player ai, final SpellAbility sa, final List<Card> tapList, final boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Card c : sa.getTargets().getTargetCards()) {
@@ -74,7 +74,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -174,7 +174,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                             return CombatUtil.canAttack(c, opp);
                         }
                     });
-                    attackers.remove(sa.getSourceCard());
+                    attackers.remove(sa.getHostCard());
                 }
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
                 List<Card> creatureList = CardLists.filter(tapList, findBlockers);
@@ -204,7 +204,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
 
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -238,7 +238,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      * @return a boolean.
      */
     protected  boolean tapUnpreferredTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = ai.getGame();
 
@@ -252,7 +252,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return true;
         }
         
-        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getHostCard(), sa)) {
             return true;
         }
 
@@ -271,7 +271,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             return true;
         }
         
-        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getHostCard(), sa)) {
             return true;
         }
 
@@ -289,7 +289,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (tgt == null) {
             if (mandatory) {
@@ -315,7 +315,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         boolean randomReturn = true;
 

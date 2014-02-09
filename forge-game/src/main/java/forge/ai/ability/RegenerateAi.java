@@ -55,7 +55,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -176,7 +176,7 @@ public class RegenerateAi extends SpellAbilityAi {
     }
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();

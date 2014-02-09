@@ -25,19 +25,19 @@ public class AttachEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        if (sa.getSourceCard().isAura() && sa.isSpell()) {
+        if (sa.getHostCard().isAura() && sa.isSpell()) {
 
             final Player ap = sa.getActivatingPlayer();
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching
             
-            sa.getSourceCard().setController(ap, 0);
-            final Card c = ap.getGame().getAction().moveTo(ap.getZone(ZoneType.Battlefield), sa.getSourceCard());
-            sa.setSourceCard(c);
+            sa.getHostCard().setController(ap, 0);
+            final Card c = ap.getGame().getAction().moveTo(ap.getZone(ZoneType.Battlefield), sa.getHostCard());
+            sa.setHostCard(c);
         }
 
-        Card source = sa.getSourceCard();
-        Card card = sa.getSourceCard();
+        Card source = sa.getHostCard();
+        Card card = sa.getHostCard();
 
         final List<GameObject> targets = getTargets(sa);
 

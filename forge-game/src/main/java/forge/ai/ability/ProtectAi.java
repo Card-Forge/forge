@@ -109,7 +109,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTargetRestrictions() == null) && !hostCard.isInPlay()) {
@@ -149,7 +149,7 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
                 return false;
@@ -175,13 +175,13 @@ public class ProtectAi extends SpellAbilityAi {
             return false;
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         List<Card> list = getProtectCreatures(ai, sa);
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
         /*
          * TODO - What this should probably do is if it's time for instants and
@@ -200,11 +200,11 @@ public class ProtectAi extends SpellAbilityAi {
             if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
-                    list.remove(sa.getSourceCard());
+                    list.remove(sa.getHostCard());
                 }
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
-                    list.remove(sa.getSourceCard());
+                    list.remove(sa.getHostCard());
                 }
             }
         }
@@ -247,9 +247,9 @@ public class ProtectAi extends SpellAbilityAi {
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
-        if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }
@@ -274,7 +274,7 @@ public class ProtectAi extends SpellAbilityAi {
             }
         });
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
@@ -327,7 +327,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }
@@ -350,7 +350,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
             if (host.isCreature()) {
                 // TODO

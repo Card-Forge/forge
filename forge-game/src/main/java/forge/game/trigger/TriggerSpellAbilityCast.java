@@ -60,7 +60,7 @@ public class TriggerSpellAbilityCast extends Trigger {
             System.out.println("TriggerSpellAbilityCast performTest encountered spellAbility == null. runParams2 = " + runParams2);
             return false;
         }
-        final Card cast = spellAbility.getSourceCard();
+        final Card cast = spellAbility.getHostCard();
         final Game game = cast.getGame();
         final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spellAbility);
 
@@ -185,7 +185,7 @@ public class TriggerSpellAbilityCast extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
-        sa.setTriggeringObject("Card", ((SpellAbility) this.getRunParams().get("CastSA")).getSourceCard());
+        sa.setTriggeringObject("Card", ((SpellAbility) this.getRunParams().get("CastSA")).getHostCard());
         sa.setTriggeringObject("SpellAbility", this.getRunParams().get("CastSA"));
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
         sa.setTriggeringObject("Activator", this.getRunParams().get("Activator"));

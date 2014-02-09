@@ -23,7 +23,7 @@ public class PhasesAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // This still needs to be fleshed out
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -100,7 +100,7 @@ public class PhasesAi extends SpellAbilityAi {
      */
     private boolean phasesPrefTargeting(final TargetRestrictions tgt, final SpellAbility sa,
             final boolean mandatory) {
-        // Card source = sa.getSourceCard();
+        // Card source = sa.getHostCard();
 
         // List<Card> phaseList =
         // AllZoneUtil.getCardsIn(Zone.Battlefield).getTargetableCards(source)
@@ -134,7 +134,7 @@ public class PhasesAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean phasesUnpreferredTargeting(final Game game, final SpellAbility sa, final boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);

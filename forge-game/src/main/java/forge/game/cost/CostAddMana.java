@@ -68,7 +68,7 @@ public class CostAddMana extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         
         ColorSet cid = null;
         if (ai.getGame().getRules().getGameType() == GameType.Commander) {

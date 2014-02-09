@@ -16,7 +16,7 @@ public class DamagePreventAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         boolean chance = false;
 
         final Cost cost = sa.getPayCosts();

@@ -58,7 +58,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // added
 
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(" -");
@@ -69,13 +69,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // Player whose cards will change zones
         List<Player> fetchers = null;
         if (sa.hasParam("DefinedPlayer")) {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
         }
         if (fetchers == null && sa.hasParam("ValidTgts") && sa.usesTargeting()) {
             fetchers = Lists.newArrayList(sa.getTargets().getTargetPlayers());
         }
         if (fetchers == null) {
-            fetchers = Lists.newArrayList(sa.getSourceCard().getController());
+            fetchers = Lists.newArrayList(sa.getHostCard().getController());
         }
 
         final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
@@ -83,7 +83,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // Player who chooses the cards to move
         List<Player> choosers = new ArrayList<Player>();
         if (sa.hasParam("Chooser")) {
-            choosers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Chooser"), sa);
+            choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
         }
         if (choosers.isEmpty()) {
             choosers.add(sa.getActivatingPlayer());
@@ -222,7 +222,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     private static String changeKnownOriginStackDescription(final SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
@@ -365,7 +365,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Iterable<Card> tgtCards = getTargetCards(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player player = sa.getActivatingPlayer();
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = player.getGame();
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -555,14 +555,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         List<Player> fetchers;
 
         if (sa.hasParam("DefinedPlayer")) {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
         } else {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
         }
 
         // handle case when Defined is for a Card
         if (fetchers.isEmpty()) {
-            fetchers.add(sa.getSourceCard().getController());
+            fetchers.add(sa.getHostCard().getController());
         }
 
         Player chooser = null;
@@ -571,7 +571,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
                 chooser = sa.getTargets().getFirstTargetedPlayer();
             } else {
-                chooser = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
+                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
             }
         }
 
@@ -600,7 +600,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         // this needs to be zero indexed. Top = 0, Third = 2
         int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
@@ -777,7 +777,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("GainControl")) {
                     Player newController = sa.getActivatingPlayer();
                     if (sa.hasParam("NewController")) {
-                        newController = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
+                        newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
                     } 
                     c.setController(newController, game.getNextTimestamp());
                 }
@@ -929,29 +929,29 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
             } else if (tgtSA.isFlashBackAbility())  {
-                game.getAction().exile(tgtSA.getSourceCard());
+                game.getAction().exile(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
-                game.getAction().moveToGraveyard(tgtSA.getSourceCard());
+                game.getAction().moveToGraveyard(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Exile")) {
-                game.getAction().exile(tgtSA.getSourceCard());
+                game.getAction().exile(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
-                game.getAction().moveToLibrary(tgtSA.getSourceCard());
+                game.getAction().moveToLibrary(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Hand")) {
-                game.getAction().moveToHand(tgtSA.getSourceCard());
+                game.getAction().moveToHand(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
             } else if (srcSA.getParam("Destination").equals("Library")) {
-                game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+                game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard());
                 if (srcSA.hasParam("Shuffle")) {
-                    tgtSA.getSourceCard().getOwner().shuffle(srcSA);
+                    tgtSA.getHostCard().getOwner().shuffle(srcSA);
                 }
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
-                        + srcSA.getSourceCard().getName());
+                        + srcSA.getHostCard().getName());
             }
 
             if (remember) {
-                srcSA.getSourceCard().addRemembered(tgtSA.getSourceCard());
+                srcSA.getHostCard().addRemembered(tgtSA.getHostCard());
             }
 
             if (!tgtSA.isAbility()) {

@@ -46,7 +46,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
             // Redirect rules read 'you MAY choose new targets' ... okay!
             boolean isOptional = sa.hasParam("Optional");
-            if( isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getSourceCard() + "?"))
+            if( isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getHostCard() + "?"))
                  continue;
 
             if( changesOneTarget ) {
@@ -103,10 +103,10 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         if (null != newTarget) {
                             if (sa.hasParam("TargetRestriction")) {
                                 if (newTarget.getFirstTargetedCard() != null && newTarget.getFirstTargetedCard().
-                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getSourceCard())) {
+                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard())) {
                                     changingTgtSI.updateTarget(newTarget);
                                 } else if (newTarget.getFirstTargetedPlayer() != null && newTarget.getFirstTargetedPlayer().
-                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getSourceCard())) {
+                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard())) {
                                     changingTgtSI.updateTarget(newTarget);
                                 }
                             } else {
@@ -118,7 +118,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 }
             }
             if (remember) {
-                sa.getSourceCard().addRemembered(tgtSA.getSourceCard());
+                sa.getHostCard().addRemembered(tgtSA.getHostCard());
             }
         }
     }

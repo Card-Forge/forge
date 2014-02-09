@@ -18,7 +18,7 @@ public class DrainManaAi extends SpellAbilityAi {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Player opp = ai.getOpponent();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -45,7 +45,7 @@ public class DrainManaAi extends SpellAbilityAi {
         final Player opp = ai.getOpponent();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (null == tgt) {
             if (mandatory) {
@@ -71,7 +71,7 @@ public class DrainManaAi extends SpellAbilityAi {
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         boolean randomReturn = true;
 

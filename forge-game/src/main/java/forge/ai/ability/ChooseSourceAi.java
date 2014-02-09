@@ -35,9 +35,9 @@ public class ChooseSourceAi extends SpellAbilityAi {
         //       to be prevented (e.g. so the AI doesn't attack with a creature that will not deal any damage
         //       to the player because a CoP was pre-activated on it - unless, of course, there's another
         //       possible reason to attack with that creature).
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -72,7 +72,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
                 if (!game.getStack().isEmpty()) {
                     final SpellAbility topStack = game.getStack().peekAbility();
-                    if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, source)) {
+                    if (sa.hasParam("Choices") && !topStack.getHostCard().isValid(sa.getParam("Choices"), ai, source)) {
                         return false;
                     }
                     final ApiType threatApi = topStack.getApi();
@@ -80,7 +80,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                         return false;
                     }
 
-                    final Card threatSource = topStack.getSourceCard();
+                    final Card threatSource = topStack.getHostCard();
                     List<? extends GameObject> objects = getTargets(topStack);
                     if (!topStack.usesTargeting() && topStack.hasParam("ValidPlayers") && !topStack.hasParam("Defined")) {
                         objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
@@ -159,7 +159,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             final Card source = si.getSourceCard();
             final SpellAbility abilityOnStack = si.getSpellAbility();
             
-            if (sa.hasParam("Choices") && !abilityOnStack.getSourceCard().isValid(sa.getParam("Choices"), ai, sa.getSourceCard())) {
+            if (sa.hasParam("Choices") && !abilityOnStack.getHostCard().isValid(sa.getParam("Choices"), ai, sa.getHostCard())) {
                 continue;
             }
             final ApiType threatApi = abilityOnStack.getApi();

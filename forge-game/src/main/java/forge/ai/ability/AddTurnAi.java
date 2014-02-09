@@ -50,14 +50,14 @@ public class AddTurnAi extends SpellAbilityAi {
                     	break;
                     }
             	}
-                if (!sa.getTargetRestrictions().isMinTargetsChosen(sa.getSourceCard(), sa) && sa.canTarget(opp)) {
+                if (!sa.getTargetRestrictions().isMinTargetsChosen(sa.getHostCard(), sa) && sa.canTarget(opp)) {
                     sa.getTargets().add(opp);
                 } else {
                     return false;
                 }
             }
         } else {
-            final List<Player> tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Player> tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
                 if (p.isOpponentOf(ai) && !mandatory) {
                     return false;

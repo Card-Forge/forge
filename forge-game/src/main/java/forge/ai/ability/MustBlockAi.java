@@ -33,7 +33,7 @@ public class MustBlockAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
 
         // only use on creatures that can attack
@@ -43,7 +43,7 @@ public class MustBlockAi extends SpellAbilityAi {
 
         Card attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
                 return false;
             }

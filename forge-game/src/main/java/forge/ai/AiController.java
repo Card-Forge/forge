@@ -498,9 +498,9 @@ public class AiController {
             int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
 
             // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
-            if (ApiType.RollPlanarDice == a.getApi() && a.getSourceCard().hasSVar("AIRollPlanarDieParams") && a.getSourceCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+            if (ApiType.RollPlanarDice == a.getApi() && a.getHostCard().hasSVar("AIRollPlanarDieParams") && a.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                 return 1;
-            } else if (ApiType.RollPlanarDice == b.getApi() && b.getSourceCard().hasSVar("AIRollPlanarDieParams") && b.getSourceCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+            } else if (ApiType.RollPlanarDice == b.getApi() && b.getHostCard().hasSVar("AIRollPlanarDieParams") && b.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                 return -1;
             }
     
@@ -519,13 +519,13 @@ public class AiController {
         
         private int getSpellAbilityPriority(SpellAbility sa) {
             int p = 0;
-            Card source = sa.getSourceCard();
+            Card source = sa.getHostCard();
             // puts creatures in front of spells
             if (source.isCreature()) {
                 p += 1;
             }
             // don't play equipments before having any creatures
-            if (source.isEquipment() && sa.getSourceCard().getController().getCreaturesInPlay().isEmpty()) {
+            if (source.isEquipment() && sa.getHostCard().getController().getCreaturesInPlay().isEmpty()) {
                 p -= 9;
             }
             // artifacts and enchantments with effects that do not stack
@@ -566,7 +566,7 @@ public class AiController {
 
     
         if ((uTypes != null) && (sa != null)) {
-            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
+            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getHostCard());
         }
         return getCardsToDiscard(numDiscard, numDiscard, hand, sa);
     }
@@ -581,7 +581,7 @@ public class AiController {
         final List<Card> discardList = new ArrayList<Card>();
         int count = 0;
         if (sa != null) {
-            sourceCard = sa.getSourceCard();
+            sourceCard = sa.getHostCard();
         }
     
         // look for good discards
@@ -729,7 +729,7 @@ public class AiController {
             if(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
                 Card land = chooseBestLandToPlay(landsWannaPlay);
                 if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife()) {
-                    Ability.PLAY_LAND_SURROGATE.setSourceCard(land);
+                    Ability.PLAY_LAND_SURROGATE.setHostCard(land);
                     return Ability.PLAY_LAND_SURROGATE;
                 }
             }
@@ -835,7 +835,7 @@ public class AiController {
         for(int i = 0; i < result.size(); i++) {
             SpellAbility sa = result.get(i);
             
-            String srcName = sa.getSourceCard().getName();
+            String srcName = sa.getHostCard().getName();
             if("Gemstone Caverns".equals(srcName)) {
                 if(saGemstones == null)
                     saGemstones = sa;
@@ -1042,9 +1042,9 @@ public class AiController {
         switch(sa.getApi())
         {
             case SetLife:
-                if (relatedPlayer.equals(sa.getSourceCard().getController())) {
+                if (relatedPlayer.equals(sa.getHostCard().getController())) {
                     return Collections.max(options);
-                } else if (relatedPlayer.isOpponentOf(sa.getSourceCard().getController())) {
+                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
                     return Collections.min(options);
                 } else {
                     return options.get(0);

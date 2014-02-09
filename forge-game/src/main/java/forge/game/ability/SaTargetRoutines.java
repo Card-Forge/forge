@@ -23,7 +23,7 @@ public class SaTargetRoutines {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam))
                 && sa.getTargets() != null && (sa.getTargets().isTargetingAnyCard() || sa.getTargets().getTargets().isEmpty());
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetCards()) 
-                : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam(definedParam), sa);
+                : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
     // Players
@@ -35,7 +35,7 @@ public class SaTargetRoutines {
     private List<Player> getPlayers(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetPlayers()) 
-                : AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam(definedParam), sa);
+                : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
     // Spells
@@ -46,7 +46,7 @@ public class SaTargetRoutines {
     private List<SpellAbility> getSpells(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetSpells()) 
-                : AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam(definedParam), sa);
+                : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 
     // Targets of unspecified type
@@ -57,6 +57,6 @@ public class SaTargetRoutines {
     private List<GameObject> getTargetables(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
-                : AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam(definedParam), sa);
+                : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
 }

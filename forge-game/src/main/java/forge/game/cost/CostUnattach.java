@@ -64,7 +64,7 @@ public class CostUnattach extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
 
         final String type = this.getType();
         if (type.equals("CARDNAME")) {

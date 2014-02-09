@@ -76,7 +76,7 @@ public class CostPayLife extends CostPart {
             String sAmount = getAmount();
             String sVar = ability.getSVar(sAmount);
             if (!sVar.startsWith("XChoice")) {
-                amount = AbilityUtils.calculateAmount(ability.getSourceCard(), getAmount(), ability);
+                amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
             }
         }
 

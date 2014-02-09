@@ -11,7 +11,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
+        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
@@ -24,7 +24,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
+        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
         trigsa.setActivatingPlayer(ai);
 
         if (!sa.hasParam("OptionalDecider")) {
@@ -37,7 +37,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
+        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
         trigsa.setActivatingPlayer(ai);
         return trigsa.canPlayAI(ai);
     }

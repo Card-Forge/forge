@@ -99,7 +99,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
 
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String type = this.getType();

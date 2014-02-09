@@ -42,7 +42,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
             int numCards = 1;
             if (sa.hasParam("NumCards")) {
-                numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+                numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
             }
 
             if (mode.equals("Hand")) {
@@ -85,7 +85,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String mode = sa.getParam("Mode");
         //final boolean anyNumber = sa.hasParam("AnyNumber");
 
@@ -140,7 +140,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                 int numCards = 1;
                 if (sa.hasParam("NumCards")) {
-                    numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+                    numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
                     if (p.getCardsIn(ZoneType.Hand).size() > 0
                             && p.getCardsIn(ZoneType.Hand).size() < numCards) {
                         // System.out.println("Scale down discard from " + numCards + " to " + p.getCardsIn(ZoneType.Hand).size());
@@ -154,7 +154,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
-                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
+                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, sa.getHostCard().getController(), sa.getHostCard());
                         list = CardLists.filter(list, Presets.NON_TOKEN);
                         for (int i = 0; i < numCards; i++) {
                             if (list.isEmpty())

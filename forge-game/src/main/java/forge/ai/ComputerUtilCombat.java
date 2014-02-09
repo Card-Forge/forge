@@ -848,7 +848,7 @@ public class ComputerUtilCombat {
                 }
     
                 if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -859,7 +859,7 @@ public class ComputerUtilCombat {
                 }
                 
                 if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -977,7 +977,7 @@ public class ComputerUtilCombat {
 
             if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
                 if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
@@ -988,7 +988,7 @@ public class ComputerUtilCombat {
                 }
                 
                 if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
@@ -1154,7 +1154,7 @@ public class ComputerUtilCombat {
                 }
     
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -1165,7 +1165,7 @@ public class ComputerUtilCombat {
                 }
                 
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
@@ -1335,7 +1335,7 @@ public class ComputerUtilCombat {
 
             if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
@@ -1346,7 +1346,7 @@ public class ComputerUtilCombat {
                 }
                 
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }

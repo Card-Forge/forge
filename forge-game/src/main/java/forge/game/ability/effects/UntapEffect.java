@@ -71,7 +71,7 @@ public class UntapEffect extends SpellAbilityEffect {
         final int num = Integer.parseInt(sa.getParam("Amount"));
         final String valid = sa.getParam("UntapType");
 
-        final List<Player> definedPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        final List<Player> definedPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         for (final Player p : definedPlayers) {
             List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), valid);

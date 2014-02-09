@@ -23,7 +23,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         final StringBuilder sb = new StringBuilder();
         final boolean noRegen = sa.hasParam("NoRegen");
-        sb.append(sa.getSourceCard().getName()).append(" - Destroy permanents.");
+        sb.append(sa.getHostCard().getName()).append(" - Destroy permanents.");
 
         if (noRegen) {
             sb.append(" They can't be regenerated");
@@ -39,7 +39,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
 
         final boolean noRegen = sa.hasParam("NoRegen");
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();

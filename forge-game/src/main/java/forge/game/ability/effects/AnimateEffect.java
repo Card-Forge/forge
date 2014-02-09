@@ -27,14 +27,14 @@ public class AnimateEffect extends AnimateEffectBase {
      */
     @Override
     public void resolve(final SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Map<String, String> svars = source.getSVars();
 
         String animateRemembered = null;
 
         //if host is not on the battlefield don't apply
         if (sa.hasParam("UntilHostLeavesPlay")
-                && !sa.getSourceCard().isInPlay()) {
+                && !sa.getHostCard().isInPlay()) {
             return;
         }
 
@@ -303,7 +303,7 @@ public class AnimateEffect extends AnimateEffectBase {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Map<String, String> svars = host.getSVars();
 
         int power = -1;

@@ -72,8 +72,8 @@ public class TargetSelection {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
         
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect) 
-        final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getSourceCard(), ability);
-        final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getSourceCard(), ability);
+        final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);
+        final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().getNumTargeted();
 
         boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
@@ -140,14 +140,14 @@ public class TargetSelection {
         final List<ZoneType> zone = tgt.getZone();
 
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
-        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard());
+        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getHostCard());
         List<Card> choices = CardLists.getTargetableCards(validCards, this.ability);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
-            Card activatingCard = ability.getSourceCard();
+            Card activatingCard = ability.getHostCard();
             if (activatingCard.isInZone(ZoneType.Stack)) {
-                choices.remove(ability.getSourceCard());
+                choices.remove(ability.getHostCard());
             }
         }
         List<GameObject> targetedObjects = this.ability.getUniqueTargets();
@@ -302,7 +302,7 @@ public class TargetSelection {
         }
 
         final String msgDone = "[FINISH TARGETING]";
-        if (this.getTgt().isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
+        if (this.getTgt().isMinTargetsChosen(this.ability.getHostCard(), this.ability)) {
             // is there a more elegant way of doing this?
             choicesFiltered.add(msgDone);
         }
@@ -353,12 +353,12 @@ public class TargetSelection {
         }
 
         while(!bTargetingDone) {
-            if (tgt.isMaxTargetsChosen(this.ability.getSourceCard(), this.ability)) {
+            if (tgt.isMaxTargetsChosen(this.ability.getHostCard(), this.ability)) {
                 bTargetingDone = true;
                 return true;
             }
 
-            if (!selectOptions.contains("[FINISH TARGETING]") && tgt.isMinTargetsChosen(this.ability.getSourceCard(), this.ability)) {
+            if (!selectOptions.contains("[FINISH TARGETING]") && tgt.isMinTargetsChosen(this.ability.getHostCard(), this.ability)) {
                 selectOptions.add("[FINISH TARGETING]");
             }
 

@@ -75,10 +75,10 @@ public class ComputerUtil {
     public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final Game game) {
 
         game.getStack().freezeStack();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(game.getAction().moveToStack(source));
+            sa.setHostCard(game.getAction().moveToStack(source));
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
@@ -86,7 +86,7 @@ public class ComputerUtil {
         }
 
         if (sa.hasParam("Bestow")) {
-            sa.getSourceCard().animateBestow();
+            sa.getHostCard().animateBestow();
         }
 
         final Cost cost = sa.getPayCosts();
@@ -109,7 +109,7 @@ public class ComputerUtil {
             }
         }
         //Should not arrive here
-        System.out.println("AI failed to play " + sa.getSourceCard());
+        System.out.println("AI failed to play " + sa.getHostCard());
         return false;
     }
 
@@ -143,7 +143,7 @@ public class ComputerUtil {
 
         int restrict = 0;
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
 
@@ -212,9 +212,9 @@ public class ComputerUtil {
         if (!ComputerUtilCost.canPayCost(sa, ai)) 
             return;
             
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(game.getAction().moveToStack(source));
+            sa.setHostCard(game.getAction().moveToStack(source));
         }
         final Cost cost = sa.getPayCosts();
         if (cost == null) {
@@ -239,9 +239,9 @@ public class ComputerUtil {
     public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
         sa.setActivatingPlayer(ai);
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(ai.getGame().getAction().moveToStack(source));
+            sa.setHostCard(ai.getGame().getAction().moveToStack(source));
         }
 
         ai.getGame().getStack().add(sa);
@@ -263,9 +263,9 @@ public class ComputerUtil {
             return;
         }
 
-        final Card source = newSA.getSourceCard();
+        final Card source = newSA.getHostCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
-            newSA.setSourceCard(game.getAction().moveToStack(source));
+            newSA.setHostCard(game.getAction().moveToStack(source));
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
@@ -286,9 +286,9 @@ public class ComputerUtil {
         sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
-            final Card source = sa.getSourceCard();
+            final Card source = sa.getHostCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(game.getAction().moveToStack(source));
+                sa.setHostCard(game.getAction().moveToStack(source));
             }
 
             final Cost cost = sa.getPayCosts();
@@ -795,10 +795,10 @@ public class ComputerUtil {
 
                     final TargetRestrictions tgt = sa.getTargetRestrictions();
                     if (tgt != null) {
-                        if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                        if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard()).contains(card)) {
                             return true;
                         }
-                    } else if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
+                    } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
                         return true;
                     }
 
@@ -838,13 +838,13 @@ public class ComputerUtil {
 
                     if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
                             && ComputerUtilCost.canPayCost(sa, controller)) {
-                        if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
-                            prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+                        if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
+                            prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
                         }
                         final TargetRestrictions tgt = sa.getTargetRestrictions();
                         if (tgt != null) {
-                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
-                                prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard()).contains(card)) {
+                                prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
                             }
 
                         }
@@ -867,7 +867,7 @@ public class ComputerUtil {
      * @return a boolean.
      */
     public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         if ("True".equals(card.getSVar("NonStackingEffect")) && card.getController().isCardInPlay(card.getName())) {
             return false;
         }
@@ -1038,12 +1038,12 @@ public class ComputerUtil {
         final Game game = sa.getActivatingPlayer().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
-        return (sa.getSourceCard().isCreature()
+        return (sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         || !ph.getNextTurn().equals(sa.getActivatingPlayer()))
-                && !sa.getSourceCard().hasKeyword("At the beginning of the end step, exile CARDNAME.")
-                && !sa.getSourceCard().hasKeyword("At the beginning of the end step, sacrifice CARDNAME."));
+                && !sa.getHostCard().hasKeyword("At the beginning of the end step, exile CARDNAME.")
+                && !sa.getHostCard().hasKeyword("At the beginning of the end step, sacrifice CARDNAME."));
     }
     
     /**
@@ -1056,7 +1056,7 @@ public class ComputerUtil {
      * @return a boolean (returns true if it's better to wait until blockers are declared).
      */
     public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final SpellAbility sub = sa.getSubAbility();
 
         // Cipher spells
@@ -1073,7 +1073,7 @@ public class ComputerUtil {
             }
         }
         final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
-        boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !sa.getSourceCard().isInZone(ZoneType.Graveyard);
+        boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !sa.getHostCard().isInZone(ZoneType.Graveyard);
         for (Card buffedCard : buffed) {
             if (buffedCard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedCard.getSVar("BuffedBy");
@@ -1144,7 +1144,7 @@ public class ComputerUtil {
      */
     public static boolean activateForCost(SpellAbility sa, final Player ai) {
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         if (abCost == null) {
             return false;
         }
@@ -1240,7 +1240,7 @@ public class ComputerUtil {
                     continue;
                 }
                 final String numDam = sa.getParam("NumDmg");
-                int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), numDam, sa);
+                int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), numDam, sa);
                 if (dmg <= damage) {
                     continue;
                 }
@@ -1307,7 +1307,7 @@ public class ComputerUtil {
             return objects;
         }
     
-        final Card source = topStack.getSourceCard();
+        final Card source = topStack.getHostCard();
         final ApiType threatApi = topStack.getApi();
     
         // Can only Predict things from AFs
@@ -1333,7 +1333,7 @@ public class ComputerUtil {
         // Lethal Damage => prevent damage/regeneration/bounce/shroud
         if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
             // If PredictDamage is >= Lethal Damage
-            final int dmg = AbilityUtils.calculateAmount(topStack.getSourceCard(),
+            final int dmg = AbilityUtils.calculateAmount(topStack.getHostCard(),
                     topStack.getParam("NumDmg"), topStack);
             for (final Object o : objects) {
                 if (o instanceof Card) {
@@ -1452,7 +1452,7 @@ public class ComputerUtil {
     }
     
     public static boolean playImmediately(Player ai, SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Zone zone = source.getZone();
  
         if (zone.getZoneType() == ZoneType.Battlefield) {

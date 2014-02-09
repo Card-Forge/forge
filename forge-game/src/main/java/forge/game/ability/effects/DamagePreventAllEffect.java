@@ -18,9 +18,9 @@ public class DamagePreventAllEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final int numDam = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+        final int numDam = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
 
         String players = "";
         List<Card> list = new ArrayList<Card>();

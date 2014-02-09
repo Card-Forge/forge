@@ -21,7 +21,7 @@ public class ClashEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return sa.getSourceCard().getName() + " - Clash with an opponent.";
+        return sa.getHostCard().getName() + " - Clash with an opponent.";
     }
 
     /* (non-Javadoc)
@@ -33,13 +33,13 @@ public class ClashEffect extends SpellAbilityEffect {
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Player", sa.getSourceCard().getController());
+        runParams.put("Player", sa.getHostCard().getController());
 
         if (victory) {
             if (sa.hasParam("WinSubAbility")) {
                 final SpellAbility win = AbilityFactory.getAbility(
-                        sa.getSourceCard().getSVar(sa.getParam("WinSubAbility")), sa.getSourceCard());
-                win.setActivatingPlayer(sa.getSourceCard().getController());
+                        sa.getHostCard().getSVar(sa.getParam("WinSubAbility")), sa.getHostCard());
+                win.setActivatingPlayer(sa.getHostCard().getController());
                 ((AbilitySub) win).setParent(sa);
 
                 AbilityUtils.resolve(win);
@@ -48,8 +48,8 @@ public class ClashEffect extends SpellAbilityEffect {
         } else {
             if (sa.hasParam("OtherwiseSubAbility")) {
                 final SpellAbility otherwise = AbilityFactory.getAbility(
-                        sa.getSourceCard().getSVar(sa.getParam("OtherwiseSubAbility")), sa.getSourceCard());
-                otherwise.setActivatingPlayer(sa.getSourceCard().getController());
+                        sa.getHostCard().getSVar(sa.getParam("OtherwiseSubAbility")), sa.getHostCard());
+                otherwise.setActivatingPlayer(sa.getHostCard().getController());
                 ((AbilitySub) otherwise).setParent(sa);
 
                 AbilityUtils.resolve(otherwise);
@@ -58,7 +58,7 @@ public class ClashEffect extends SpellAbilityEffect {
         }
 
         
-        sa.getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
+        sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
     }
 
     /**
@@ -78,7 +78,7 @@ public class ClashEffect extends SpellAbilityEffect {
          * 
          * Clash you win or win you don't. There is no tie.
          */
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Player player = source.getController();
         final Player opponent = player.getOpponent();
         final ZoneType lib = ZoneType.Library;

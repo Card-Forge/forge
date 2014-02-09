@@ -152,7 +152,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameObject> targets = getTargets(sa);
 

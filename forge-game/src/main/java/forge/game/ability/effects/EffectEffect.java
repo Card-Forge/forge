@@ -37,7 +37,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
 
         String[] effectAbilities = null;
@@ -85,7 +85,7 @@ public class EffectEffect extends SpellAbilityEffect {
         // Effect eff = new Effect();
         String name = sa.getParam("Name");
         if (name == null) {
-            name = sa.getSourceCard().getName() + "'s Effect";
+            name = sa.getHostCard().getName() + "'s Effect";
         }
 
         // Unique Effects shouldn't be duplicated
@@ -94,7 +94,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("EffectOwner")) {
-            List<Player> effectOwner = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("EffectOwner"), sa);
+            List<Player> effectOwner = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("EffectOwner"), sa);
             ownerEff = effectOwner.get(0);
         }
 

@@ -313,7 +313,7 @@ public class DualListBox<T> extends FDialog {
         if (obj instanceof Card) {
             card = (Card) obj;
         } else if (obj instanceof SpellAbility) {
-            card = ((SpellAbility) obj).getSourceCard();
+            card = ((SpellAbility) obj).getHostCard();
         } else if (obj instanceof PaperCard) {
             card = Card.getCardForUi((IPaperCard) obj);
         }

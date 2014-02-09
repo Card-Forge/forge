@@ -75,7 +75,7 @@ public abstract class Ability extends SpellAbility {
             return false;
         }
 
-        return this.getSourceCard().isInPlay() && !this.getSourceCard().isFaceDown();
+        return this.getHostCard().isInPlay() && !this.getHostCard().isFaceDown();
     }
     
     public static final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost)null){

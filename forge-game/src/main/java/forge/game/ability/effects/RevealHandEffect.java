@@ -33,7 +33,7 @@ public class RevealHandEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean optional = sa.hasParam("Optional");

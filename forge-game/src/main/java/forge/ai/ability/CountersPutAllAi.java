@@ -29,7 +29,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         // the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         List<Card> hList;
         List<Card> cList;
         final String type = sa.getParam("CounterType");
@@ -72,7 +72,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         } else {
-            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true

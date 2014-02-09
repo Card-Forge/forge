@@ -13,7 +13,7 @@ import java.util.List;
 public class CharmEffect extends SpellAbilityEffect {
 
     public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final String[] saChoices = sa.getParam("Choices").split(",");
         List<AbilitySub> choices = new ArrayList<AbilitySub>();
@@ -45,7 +45,7 @@ public class CharmEffect extends SpellAbilityEffect {
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
 
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
         Player chooser = sa.getActivatingPlayer();
 

@@ -51,7 +51,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(final SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final ArrayList<String> keywords = new ArrayList<String>();
         final List<String> types = new ArrayList<String>();
@@ -244,7 +244,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     copy = game.getAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
-                    sa.getSourceCard().addClone(copy);
+                    sa.getHostCard().addClone(copy);
                     crds[i] = copy;
                     if (sa.hasParam("RememberCopied")) {
                         hostCard.addRemembered(copy);

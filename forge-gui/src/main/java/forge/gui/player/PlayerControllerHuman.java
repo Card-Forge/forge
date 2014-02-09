@@ -250,7 +250,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Integer announceRequirements(SpellAbility ability, String announce, boolean canChooseZero) {
         int min = canChooseZero ? 0 : 1;
-        return GuiChoose.getInteger("Choose " + announce + " for " + ability.getSourceCard().getName(),
+        return GuiChoose.getInteger("Choose " + announce + " for " + ability.getHostCard().getName(),
                 min, Integer.MAX_VALUE, min + 9);
     }
 
@@ -291,7 +291,7 @@ public class PlayerControllerHuman extends PlayerController {
             Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional);
             return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
         }
-        GuiUtils.setPanelSelection(sa.getSourceCard());
+        GuiUtils.setPanelSelection(sa.getHostCard());
         
         // try to use InputSelectCardsFromList when possible 
         boolean cardsAreInMyHandOrBattlefield = true;
@@ -311,7 +311,7 @@ public class PlayerControllerHuman extends PlayerController {
             return Lists.newArrayList(sc.getSelected());
         }
 
-        return GuiChoose.many(title, "Chosen Cards", min, max, sourceList, sa.getSourceCard());
+        return GuiChoose.many(title, "Chosen Cards", min, max, sourceList, sa.getHostCard());
     }
 
     @Override
@@ -373,7 +373,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        return GuiDialog.confirm(sa.getSourceCard(), message);
+        return GuiDialog.confirm(sa.getHostCard(), message);
     }
 
     @Override
@@ -721,7 +721,7 @@ public class PlayerControllerHuman extends PlayerController {
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         List<Card> srcCards = new ArrayList<Card>();
         for (SpellAbility sa : usableFromOpeningHand) {
-            srcCards.add(sa.getSourceCard());
+            srcCards.add(sa.getHostCard());
         }
         List<SpellAbility> result = new ArrayList<SpellAbility>();
         if (srcCards.isEmpty()) {
@@ -730,7 +730,7 @@ public class PlayerControllerHuman extends PlayerController {
         List<Card> chosen = GuiChoose.many("Choose cards to activate from opening hand and their order", "Activate first", -1, srcCards, null);
         for (Card c : chosen) {
             for (SpellAbility sa : usableFromOpeningHand) {
-                if (sa.getSourceCard() == c) {
+                if (sa.getHostCard() == c) {
                     result.add(sa);
                     break;
                 }
@@ -755,7 +755,7 @@ public class PlayerControllerHuman extends PlayerController {
             case UntapTimeVault: labels = new String[]{"Untap (and skip this turn)", "Leave tapped"}; break;
             case PlayOrDraw:    labels = new String[]{"Play", "Draw"}; break;
         }
-        return GuiDialog.confirm(sa.getSourceCard(), question, defaultVal == null || defaultVal.booleanValue(), labels);
+        return GuiDialog.confirm(sa.getHostCard(), question, defaultVal == null || defaultVal.booleanValue(), labels);
     }
 
     @Override
@@ -765,7 +765,7 @@ public class PlayerControllerHuman extends PlayerController {
         for (int i = 0; i < results.length; i++) {
             strResults[i] = labelsSrc[results[i] ? 0 : 1];
         }
-        return GuiChoose.one(sa.getSourceCard().getName() + " - Choose a result", strResults) == labelsSrc[0];
+        return GuiChoose.one(sa.getHostCard().getName() + " - Choose a result", strResults) == labelsSrc[0];
     }
 
     @Override
@@ -805,14 +805,14 @@ public class PlayerControllerHuman extends PlayerController {
             }
         };
 
-        List<Pair<SpellAbilityStackInstance, GameObject>> chosen = GuiChoose.getChoices(saSpellskite.getSourceCard().getName(), 1, 1, allTargets, null, fnToString);
+        List<Pair<SpellAbilityStackInstance, GameObject>> chosen = GuiChoose.getChoices(saSpellskite.getHostCard().getName(), 1, 1, allTargets, null, fnToString);
         return Iterables.getFirst(chosen, null);
     }
 
     @Override
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
         String message = formatNotificationMessage(sa, realtedTarget, value);
-        GuiDialog.message(message, sa.getSourceCard() == null ? "" : sa.getSourceCard().getName());
+        GuiDialog.message(message, sa.getHostCard() == null ? "" : sa.getHostCard().getName());
     }
 
     private String formatMessage(String message, Object related) {
@@ -824,7 +824,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     // These are not much related to PlayerController
     private String formatNotificationMessage(SpellAbility sa, GameObject target, String value) {
-        if (sa.getApi() == null || sa.getSourceCard() == null) {
+        if (sa.getApi() == null || sa.getHostCard() == null) {
             return ("Result: " + value);
         }
         switch(sa.getApi()) {
@@ -840,7 +840,7 @@ public class PlayerControllerHuman extends PlayerController {
                 String choser = StringUtils.capitalize(mayBeYou(target));
                 return String.format("%s %s protection from %s", choser, Lang.joinVerb(choser, "choose"), value);
             default:
-                return String.format("%s effect's value for %s is %s", sa.getSourceCard().getName(), mayBeYou(target), value);
+                return String.format("%s effect's value for %s is %s", sa.getHostCard().getName(), mayBeYou(target), value);
         }
     }
 
@@ -856,7 +856,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num) {
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
-        String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(), sa.getSourceCard());
+        String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(), sa.getHostCard());
         List<AbilitySub> chosen = new ArrayList<AbilitySub>();
         for (int i = 0; i < num; i++) {
             AbilitySub a;
@@ -887,7 +887,7 @@ public class PlayerControllerHuman extends PlayerController {
         switch (cntColors) {
             case 0: return 0;
             case 1: return colors.getColor();
-            default: return chooseColorCommon(message, sa == null ? null : sa.getSourceCard(), colors, false);
+            default: return chooseColorCommon(message, sa == null ? null : sa.getHostCard(), colors, false);
         }
     }
     
@@ -955,7 +955,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         return HumanPlay.payCostDuringAbilityResolve(player, source, cost, sa, null);
     }
 
@@ -1010,7 +1010,7 @@ public class PlayerControllerHuman extends PlayerController {
             final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
             final String[] possibleValues = { p1Str , p2Str };
-            return GuiDialog.confirm(sa.getSourceCard(), "Choose a Pile", possibleValues);
+            return GuiDialog.confirm(sa.getHostCard(), "Choose a Pile", possibleValues);
         } else {
             final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
             disp[0] = new Card(-1);
@@ -1081,9 +1081,9 @@ public class PlayerControllerHuman extends PlayerController {
     public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message) {
         PaperCard cp = null;
         while(true) {
-            cp = chooseSinglePaperCard(sa, message, cpp, sa.getSourceCard().getName());
+            cp = chooseSinglePaperCard(sa, message, cpp, sa.getHostCard().getName());
             Card instanceForPlayer = Card.fromPaperCard(cp, player); // the Card instance for test needs a game to be tested
-            if (instanceForPlayer.isValid(valid, sa.getSourceCard().getController(), sa.getSourceCard()))
+            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard()))
                 return cp.getName();
         }
     }

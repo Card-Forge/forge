@@ -25,7 +25,7 @@ public class CloneEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         Card tgtCard = host;
 
         Card cardToCopy = host;
@@ -52,7 +52,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         Card tgtCard = host;
         Map<String, String> origSVars = host.getSVars();
 

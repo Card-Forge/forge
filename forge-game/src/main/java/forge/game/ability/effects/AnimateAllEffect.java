@@ -31,7 +31,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
     @Override
     public void resolve(final SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Map<String, String> svars = host.getSVars();
 
         // AF specific sa

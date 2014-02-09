@@ -20,7 +20,7 @@ public class MillAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
@@ -94,7 +94,7 @@ public class MillAi extends SpellAbilityAi {
                 return false;
             }
 
-            final int numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+            final int numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
 
             final List<Card> pLibrary = opp.getCardsIn(ZoneType.Library);
 
@@ -135,7 +135,7 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, aiPlayer), aiPlayer.getOpponent()

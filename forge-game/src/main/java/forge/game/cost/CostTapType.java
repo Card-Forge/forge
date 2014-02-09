@@ -106,7 +106,7 @@ public class CostTapType extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         
         List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         String type = this.getType();

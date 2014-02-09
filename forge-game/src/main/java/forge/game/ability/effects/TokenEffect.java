@@ -119,7 +119,7 @@ public class TokenEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         readParameters(sa);
 
@@ -147,7 +147,7 @@ public class TokenEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         readParameters(sa);
 
         String cost = "";
@@ -302,10 +302,10 @@ public class TokenEffect extends SpellAbilityEffect {
                         }
                     }
                     if (remember) {
-                        game.getCardState(sa.getSourceCard()).addRemembered(c);
+                        game.getCardState(sa.getHostCard()).addRemembered(c);
                     }
                     if (imprint) {
-                        game.getCardState(sa.getSourceCard()).addImprinted(c);
+                        game.getCardState(sa.getHostCard()).addImprinted(c);
                     }
                     if (sa.hasParam("RememberSource")) {
                         game.getCardState(c).addRemembered(host);

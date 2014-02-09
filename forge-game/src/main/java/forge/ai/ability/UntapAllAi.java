@@ -14,7 +14,7 @@ public class UntapAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {

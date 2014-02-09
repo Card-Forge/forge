@@ -13,7 +13,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
             if (ComputerUtil.waitForBlocking(sa)) {

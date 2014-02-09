@@ -19,7 +19,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final boolean dividedAsYouChoose = sa.hasParam("DividedAsYouChoose");
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
@@ -63,7 +63,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
 
         CounterType counterType;
@@ -76,7 +76,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         final boolean remember = sa.hasParam("RememberCounters");
-        int counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
         if (sa.hasParam("UpTo")) {

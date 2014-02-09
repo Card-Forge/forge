@@ -130,7 +130,7 @@ public class TokenAi extends SpellAbilityAi {
 
         // prevent run-away activations - first time will always return true
         final Random r = MyRandom.getRandom();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -169,7 +169,7 @@ public class TokenAi extends SpellAbilityAi {
         }
 
         if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
-            int x = AbilityUtils.calculateAmount(sa.getSourceCard(), this.tokenAmount, sa);
+            int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 x = ComputerUtilMana.determineLeftoverMana(sa, ai);
@@ -197,7 +197,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         readParameters(sa);
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();

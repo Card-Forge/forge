@@ -25,17 +25,17 @@ public class DamageDealEffect extends SpellAbilityEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
 
         List<GameObject> tgts = getTargets(sa);
         if (tgts.isEmpty()) 
             return "";
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
         Card source = definedSources.isEmpty() ? new Card(0) : definedSources.get(0);
 
-        if (source != sa.getSourceCard()) {
+        if (source != sa.getHostCard()) {
             sb.append(source.toString()).append(" deals");
         } else {
             sb.append("Deals");
@@ -67,7 +67,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean combatDmg = sa.hasParam("CombatDamage");
@@ -96,7 +96,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
             }
             // Can't radiate from a player
             if (origin != null) {
-                for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), origin,
+                for (final Card c : CardUtil.getRadiance(sa.getHostCard(), origin,
                         sa.getParam("ValidTgts").split(","))) {
                     tgts.add(c);
                 }
@@ -105,7 +105,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
 
         final boolean remember = sa.hasParam("RememberDamaged");
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
         if (definedSources == null) {
             return;
         }
@@ -114,7 +114,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         if (divideOnResolution) {
             // Dividing Damage up to multiple targets using combat damage box
             // Currently only used for Master of the Wild Hunt
-            List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DividerOnResolution"), sa);
+            List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DividerOnResolution"), sa);
             if (players.isEmpty()) {
                 return;
             }

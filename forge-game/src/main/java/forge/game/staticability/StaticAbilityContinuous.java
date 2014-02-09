@@ -302,6 +302,7 @@ public class StaticAbilityContinuous {
                     for (SpellAbility sa : c.getSpellAbilities()) {
                         if (sa instanceof AbilityActivated) {
                             SpellAbility newSA = ((AbilityActivated) sa).getCopy();
+                            newSA.setIntrinsic(false);
                             newSA.setTemporary(true);
                             CardFactoryUtil.correctAbilityChainSourceCard(newSA, hostCard);
                             addFullAbs.add(newSA);
@@ -471,6 +472,7 @@ public class StaticAbilityContinuous {
                     if (abilty.startsWith("AB")) { // grant the ability
                         final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
                         sa.setTemporary(true);
+                        sa.setIntrinsic(false);
                         sa.setOriginalHost(hostCard);
                         affectedCard.addSpellAbility(sa);
                     }
@@ -481,6 +483,7 @@ public class StaticAbilityContinuous {
             if (addReplacements != null) {
                 for (String rep : addReplacements) {
                     final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false);
+                    actualRep.setIntrinsic(false);
                     affectedCard.addReplacementEffect(actualRep).setTemporary(true);;
                 }
             }
@@ -501,6 +504,7 @@ public class StaticAbilityContinuous {
             if (addTriggers != null) {
                 for (final String trigger : addTriggers) {
                     final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
+                    actualTrigger.setIntrinsic(false);
                     affectedCard.addTrigger(actualTrigger).setTemporary(true);
                 }
             }
@@ -512,7 +516,10 @@ public class StaticAbilityContinuous {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
                         s = s.replace("ConvertedManaCost", costcmc);
                     }
-                    affectedCard.addStaticAbility(s).setTemporary(true);
+
+                    StaticAbility stat = affectedCard.addStaticAbility(s);
+                    stat.setTemporary(true);
+                    stat.setIntrinsic(false);
                 }
             }
 

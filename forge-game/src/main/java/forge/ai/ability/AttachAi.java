@@ -31,7 +31,7 @@ public class AttachAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -319,7 +319,7 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Animate.
         List<Card> betterList = CardLists.getNotType(list, "Creature");
-        if (sa.getSourceCard().getName().equals("Animate Artifact")) {
+        if (sa.getHostCard().getName().equals("Animate Artifact")) {
             betterList = CardLists.filter(betterList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -385,7 +385,7 @@ public class AttachAi extends SpellAbilityAi {
         // I know this isn't much better than Hardcoding, but some cards need it for now
         final Player ai = sa.getActivatingPlayer();
         Card chosen = null;
-        if ("Guilty Conscience".equals(sa.getSourceCard().getName())) {
+        if ("Guilty Conscience".equals(sa.getHostCard().getName())) {
             List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -611,12 +611,12 @@ public class AttachAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<GameObject>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
-            targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
             targets = sa.getTargets().getTargets();
@@ -930,7 +930,7 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachToCardAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card attachSource = sa.getSourceCard();
+        final Card attachSource = sa.getHostCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
         // at some point can support attaching a different card
 

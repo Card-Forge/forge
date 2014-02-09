@@ -11,7 +11,7 @@ public class StoreSVarEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         //SVar$ OldToughness | Type$ Count | Expression$ CardToughness
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
 
         String key = null;
         String type = null;

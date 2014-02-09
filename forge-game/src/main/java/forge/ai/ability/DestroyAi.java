@@ -41,7 +41,7 @@ public class DestroyAi extends SpellAbilityAi {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         List<Card> list;
 
@@ -112,9 +112,9 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
             // target loop
-            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.size() == 0) {
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -135,7 +135,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -175,7 +175,7 @@ public class DestroyAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         if (tgt != null) {
             List<Card> list;
@@ -183,7 +183,7 @@ public class DestroyAi extends SpellAbilityAi {
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
-            if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;
             }
 
@@ -209,10 +209,10 @@ public class DestroyAi extends SpellAbilityAi {
                 list.remove(c);
             }
 
-            while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (preferred.isEmpty()) {
                     if ((sa.getTargets().getNumTargeted() == 0)
-                            || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+                            || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa))) {
                         if (!mandatory) {
                             sa.resetTargets();
                             return false;
@@ -236,7 +236,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
                     break;
                 } else {
@@ -251,7 +251,7 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 return false;
             }
         } else {

@@ -22,9 +22,9 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         Card object1;
         if (sa.hasParam("Object")) {
-            object1 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Object"), sa).get(0);
+            object1 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa).get(0);
         } else {
-            object1 = sa.getSourceCard();
+            object1 = sa.getHostCard();
         }
         return "Exchange a " + sa.getParam("Type") + " in " + sa.getParam("Zone2") + " with " + object1;
     }
@@ -34,7 +34,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
         final Game game = p.getGame();
         final String type = sa.getParam("Type");

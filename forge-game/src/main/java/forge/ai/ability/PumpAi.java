@@ -49,23 +49,23 @@ public class PumpAi extends PumpAiBase {
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getSourceCard(), 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getHostCard(), 4, null)) {
             return false;
         }
 
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, sa.getSourceCard())) {
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, sa.getHostCard())) {
             return false;
         }
 
-        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, sa.getSourceCard())) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, sa.getHostCard())) {
             return false;
         }
 
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, sa.getSourceCard())) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, sa.getHostCard())) {
             return false;
         }
 
-        if (game.getStack().isEmpty() && hasTapCost(cost, sa.getSourceCard())) {
+        if (game.getStack().isEmpty() && hasTapCost(cost, sa.getHostCard())) {
                 if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                     return false;
                 }
@@ -98,7 +98,7 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         if (source.getSVar("X").equals("Count$xPaid")) {
             source.setSVar("PayX", "");
         }
@@ -113,7 +113,7 @@ public class PumpAi extends PumpAiBase {
                 defense = -xPay;
             }
         } else {
-            defense = AbilityUtils.calculateAmount(sa.getSourceCard(), numDefense, sa);
+            defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
         }
 
         int attack;
@@ -129,7 +129,7 @@ public class PumpAi extends PumpAiBase {
                 attack = Integer.parseInt(toPay);
             }
         } else {
-            attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
+            attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
         if ((numDefense.contains("X") && defense == 0)
@@ -139,7 +139,7 @@ public class PumpAi extends PumpAiBase {
 
         //Untargeted
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(),
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(),
                     sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
@@ -177,7 +177,7 @@ public class PumpAi extends PumpAiBase {
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final Game game = ai.getGame();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (!mandatory
                 && !sa.isTrigger()
@@ -232,11 +232,11 @@ public class PumpAi extends PumpAiBase {
             if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
-                    list.remove(sa.getSourceCard());
+                    list.remove(sa.getHostCard());
                 }
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && game.getPhaseHandler().isPlayerTurn(opp)) {
-                    list.remove(sa.getSourceCard());
+                    list.remove(sa.getHostCard());
                 }
             }
         }
@@ -281,10 +281,10 @@ public class PumpAi extends PumpAiBase {
         List<Card> list = game.getCardsIn(ZoneType.Battlefield);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getOpponent();
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
         list = CardLists.getTargetableCards(list, sa);
 
-        if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }
@@ -296,7 +296,7 @@ public class PumpAi extends PumpAiBase {
 
         List<Card> pref;
         List<Card> forced;
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (sa.isCurse()) {
             pref = CardLists.filterControlledBy(list, opp);
@@ -350,7 +350,7 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
@@ -361,7 +361,7 @@ public class PumpAi extends PumpAiBase {
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
         } else {
-            defense = AbilityUtils.calculateAmount(sa.getSourceCard(), numDefense, sa);
+            defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
         }
 
         int attack;
@@ -377,7 +377,7 @@ public class PumpAi extends PumpAiBase {
                 attack = Integer.parseInt(toPay);
             }
         } else {
-            attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
+            attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
         if (sa.getTargetRestrictions() == null) {
@@ -394,7 +394,7 @@ public class PumpAi extends PumpAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
@@ -403,7 +403,7 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             defense = Integer.parseInt(source.getSVar("PayX"));
         } else {
-            defense = AbilityUtils.calculateAmount(sa.getSourceCard(), numDefense, sa);
+            defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
         }
 
         int attack;
@@ -417,7 +417,7 @@ public class PumpAi extends PumpAiBase {
                 attack = Integer.parseInt(source.getSVar("PayX"));
             }
         } else {
-            attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
+            attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
         }
 
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {

@@ -49,7 +49,7 @@ public class SacrificeAi extends SpellAbilityAi {
 
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean destroy = sa.hasParam("Destroy");
 
@@ -63,10 +63,10 @@ public class SacrificeAi extends SpellAbilityAi {
             final String valid = sa.getParam("SacValid");
             String num = sa.getParam("Amount");
             num = (num == null) ? "1" : num;
-            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
+            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
             List<Card> list =
-                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
             if (!destroy) {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
             } else {
@@ -115,7 +115,7 @@ public class SacrificeAi extends SpellAbilityAi {
             }
 
             List<Card> humanList =
-                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
 
             // Since all of the cards have remAIDeck:True, I enabled 1 for 1
             // (or X for X) trades for special decks
@@ -124,7 +124,7 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         } else if (defined.equals("You")) {
             List<Card> computerList =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
             for (Card c : computerList) {
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;

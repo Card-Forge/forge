@@ -124,7 +124,7 @@ public class CostRemoveCounter extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability) {
         final CounterType cntrs = this.counter;
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         final String type = this.getType();
 
         final Integer amount = this.convertAmount();
@@ -158,7 +158,7 @@ public class CostRemoveCounter extends CostPartWithList {
      */
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        Card source = ability.getSourceCard();
+        Card source = ability.getHostCard();
         cntRemoved = decision.c;
         for (final Card card : decision.cards) {
             executePayment(ability, card);

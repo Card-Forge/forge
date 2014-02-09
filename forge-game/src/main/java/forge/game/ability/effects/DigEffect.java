@@ -22,7 +22,7 @@ public class DigEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -44,7 +44,7 @@ public class DigEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
         Player chooser = player;
@@ -91,7 +91,7 @@ public class DigEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("Choser")) {
-            final List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Choser"), sa);
+            final List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Choser"), sa);
             if (!choosers.isEmpty()) {
                 chooser = choosers.get(0);
             }

@@ -16,7 +16,7 @@ public class AbandonEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         Player controller = source.getController();
 
         final Game game = controller.getGame();

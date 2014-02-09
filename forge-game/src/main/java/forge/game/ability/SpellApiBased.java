@@ -23,23 +23,23 @@ public class SpellApiBased extends Spell {
         super(sourceCard, abCost);
         this.setTargetRestrictions(tgt);
         
-        params = params0;
+        mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();
         ai = api.getAi();
 
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
-            this.setManaPart(new AbilityManaPart(sourceCard, params));
+            this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
         }
 
         if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
-            AbilityFactory.adjustChangeZoneTarget(params, this);
+            AbilityFactory.adjustChangeZoneTarget(mapParams, this);
         }
     }
 
     @Override
     public String getStackDescription() {
-        return effect.getStackDescriptionWithSubs(params, this);
+        return effect.getStackDescriptionWithSubs(mapParams, this);
     }
 
     /* (non-Javadoc)

@@ -349,7 +349,7 @@ public class ComputerUtilCost {
     } // canPayCost()
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, List<Player> payers) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
         boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
         boolean payNever = "Never".equals(sa.getParam("UnlessAI"));

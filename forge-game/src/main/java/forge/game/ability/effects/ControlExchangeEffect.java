@@ -27,7 +27,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
             object1 = tgts.get(0);
         }
         if (sa.hasParam("Defined")) {
-            List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             object2 = cards.isEmpty() ? null : cards.get(0);
             if (cards.size() > 1 && sa.hasParam("BothDefined")) {
                 object1 = cards.get(1);
@@ -52,7 +52,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
             object1 = tgts.get(0);
         }
         if (sa.hasParam("Defined")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             object2 = cards.isEmpty() ? null : cards.get(0);
             if (cards.size() > 1 && sa.hasParam("BothDefined")) {
                 object1 = cards.get(1);

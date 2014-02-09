@@ -21,7 +21,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final String damage = sa.getParam("NumDmg");
-        final int iDmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         String desc = sa.getParam("ValidCards");
         if (sa.hasParam("ValidDescription")) {
@@ -58,7 +58,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
 
         List<Card> sources = card.getGame().getCardsIn(ZoneType.Battlefield);
         if (sa.hasParam("ValidCards")) {
@@ -100,7 +100,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
                 for (final Card source : sources) {
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     Card rememberedcard;
-                    for (final Object o : sa.getSourceCard().getRemembered()) {
+                    for (final Object o : sa.getHostCard().getRemembered()) {
                         if (o instanceof Card) {
                             rememberedcard = (Card) o;
                             // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);

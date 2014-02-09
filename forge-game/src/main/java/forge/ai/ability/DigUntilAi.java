@@ -19,7 +19,7 @@ public class DigUntilAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         double chance = .4; // 40 percent chance with instant speed stuff
         if (SpellAbilityAi.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will

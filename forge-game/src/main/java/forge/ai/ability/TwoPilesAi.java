@@ -19,7 +19,7 @@ public class TwoPilesAi extends SpellAbilityAi  {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         ZoneType zone = null;
 
         if (sa.hasParam("Zone")) {
@@ -47,7 +47,7 @@ public class TwoPilesAi extends SpellAbilityAi  {
         final Player p = tgtPlayers.get(0);
         List<Card> pool = new ArrayList<Card>();
         if (sa.hasParam("DefinedCards")) {
-            pool = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
+            pool = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa));
         } else {
             pool = p.getCardsIn(zone);
         }

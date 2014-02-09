@@ -87,7 +87,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, boolean clearManaPaid) {
-        adjustManaCostToAvoidNegEffects(cost, sa.getSourceCard(), ai);
+        adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
 
         final ManaPool manapool = ai.getManaPool();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
@@ -129,7 +129,7 @@ public class ComputerUtilMana {
 //            for (Entry<ManaCostShard, Collection<SpellAbility>> src : sourcesForShards.entrySet()) {
 //                System.out.println("\t" +src.getKey() + " : " + src.getValue().size() + " source(s)");
 //                for (SpellAbility sss : src.getValue()) {
-//                    System.out.printf("\t\t%s - %s%n", sss.getSourceCard(), sss);
+//                    System.out.printf("\t\t%s - %s%n", sss.getHostCard(), sss);
 //                }
 //            }
 //        }
@@ -145,12 +145,12 @@ public class ComputerUtilMana {
             SpellAbility saPayment = null;
             if (saList != null) {
                 for (final SpellAbility ma : saList) {
-                    if (ma.getSourceCard() == sa.getSourceCard()) {
+                    if (ma.getHostCard() == sa.getHostCard()) {
                         continue;
                     }
 
                     final String typeRes = cost.getSourceRestriction();
-                    if (StringUtils.isNotBlank(typeRes) && !ma.getSourceCard().isType(typeRes)) {
+                    if (StringUtils.isNotBlank(typeRes) && !ma.getHostCard().isType(typeRes)) {
                         continue;
                     }
 
@@ -164,7 +164,7 @@ public class ComputerUtilMana {
             }
 
             if (DEBUG_MANA_PAYMENT) {
-                paymentPlan.add(String.format("%s : (%s) %s", toPay, saPayment == null ? "LIFE" : saPayment.getSourceCard(), saPayment));
+                paymentPlan.add(String.format("%s : (%s) %s", toPay, saPayment == null ? "LIFE" : saPayment.getHostCard(), saPayment));
             }
 
             if (saPayment == null) {
@@ -174,7 +174,7 @@ public class ComputerUtilMana {
 
                 cost.payPhyrexian();
                 if (!test) {
-                    ai.payLife(2, sa.getSourceCard());
+                    ai.payLife(2, sa.getHostCard());
                 }
                 continue;
             }
@@ -192,7 +192,7 @@ public class ComputerUtilMana {
                     Iterator<SpellAbility> itSa = kv.iterator();
                     while (itSa.hasNext()) {
                         SpellAbility srcSa = itSa.next();
-                        if (srcSa.getSourceCard().equals(saPayment.getSourceCard())) {
+                        if (srcSa.getHostCard().equals(saPayment.getHostCard())) {
                             itSa.remove();
                         }
                     }
@@ -207,8 +207,8 @@ public class ComputerUtilMana {
                     }
                 }
                 else {
-                    System.err.println("Ability " + saPayment + " from " + saPayment.getSourceCard() + "  had NULL as payCost");
-                    saPayment.getSourceCard().tap();
+                    System.err.println("Ability " + saPayment + " from " + saPayment.getHostCard() + "  had NULL as payCost");
+                    saPayment.getHostCard().tap();
                 }
 
                 ai.getGame().getStack().addAndUnfreeze(saPayment);
@@ -228,7 +228,7 @@ public class ComputerUtilMana {
 //        if (DEBUG_MANA_PAYMENT) {
 //            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n",
 //                    FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost,
-//                    extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t"));
+//                    extraMana, sa.getHostCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t"));
 //        }
 
         if (!cost.isPaid()) {
@@ -236,14 +236,14 @@ public class ComputerUtilMana {
                 return false;
             }
             else {
-                System.out.println("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName() + ". Didn't find what to pay for " + toPay);
+                System.out.println("ComputerUtil : payManaCost() cost was not paid for " + sa.getHostCard().getName() + ". Didn't find what to pay for " + toPay);
                 return false;
             }
         }
 
-        sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
+        sa.getHostCard().setColorsPaid(cost.getColorsPaid());
         // if (sa instanceof Spell_Permanent) // should probably add this
-        sa.getSourceCard().setSunburstValue(cost.getSunburst());
+        sa.getHostCard().setSunburstValue(cost.getSunburst());
         return true;
     } // payManaCost()
 
@@ -254,7 +254,7 @@ public class ComputerUtilMana {
         if (m.isComboMana())
             getComboManaChoice(ai, saPayment, sa, cost);
         else if (saPayment.getApi() == ApiType.ManaReflected) {
-            System.out.println("Evaluate reflected mana of: " + saPayment.getSourceCard());
+            System.out.println("Evaluate reflected mana of: " + saPayment.getHostCard());
             Set<String> reflected = CardUtil.getReflectableManaColors(saPayment);
 
             for (byte c : MagicColor.WUBRG) {
@@ -280,7 +280,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, boolean checkCosts) {
-        final Card sourceCard = ma.getSourceCard();
+        final Card sourceCard = ma.getHostCard();
 
         if (toPay.isSnow() && !sourceCard.isSnow()) { return false; }
 
@@ -367,7 +367,7 @@ public class ComputerUtilMana {
      */
     private static void getComboManaChoice(final Player ai, final SpellAbility manaAb, final SpellAbility saRoot, final ManaCostBeingPaid cost) {
         final StringBuilder choiceString = new StringBuilder();
-        final Card source = manaAb.getSourceCard();
+        final Card source = manaAb.getHostCard();
         final AbilityManaPart abMana = manaAb.getManaPart();
 
         if (abMana.isComboMana()) {
@@ -515,8 +515,8 @@ public class ComputerUtilMana {
     private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
         ZoneType castFromBackup = null;
         if (test && sa.isSpell()) {
-            castFromBackup = sa.getSourceCard().getCastFrom();
-            sa.getSourceCard().setCastFrom(sa.getSourceCard().getZone().getZoneType());
+            castFromBackup = sa.getHostCard().getCastFrom();
+            sa.getHostCard().setCastFrom(sa.getHostCard().getZone().getZoneType());
         }
 
         Cost payCosts = sa.getPayCosts();
@@ -529,7 +529,7 @@ public class ComputerUtilMana {
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
         cost.applySpellCostChange(sa, test);
 
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         // Tack xMana Payments into mana here if X is a set value
         if ((sa.getPayCosts() != null) && (cost.getXcounter() > 0 || extraMana > 0)) {
             int manaToAdd = 0;
@@ -559,7 +559,7 @@ public class ComputerUtilMana {
         }
 
         if (test && sa.isSpell()) {
-            sa.getSourceCard().setCastFrom(castFromBackup);
+            sa.getHostCard().setCastFrom(castFromBackup);
         }
 
         return cost;
@@ -797,7 +797,7 @@ public class ComputerUtilMana {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getSourceCard().getController().getGame().getAction().sacrifice(offering, sa);
+                sa.getHostCard().getController().getGame().getAction().sacrifice(offering, sa);
             }
             sa.resetSacrificedAsOffering();
         }

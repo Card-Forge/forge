@@ -364,7 +364,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getColorToCheck() != null) {
-            if (!sa.getSourceCard().getChosenColor().contains(this.getColorToCheck())) {
+            if (!sa.getHostCard().getChosenColor().contains(this.getColorToCheck())) {
                 return false;
             }
         }
@@ -423,7 +423,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             int right = 1;
             final String rightString = this.getLifeAmount().substring(2);
             if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar("X"));
             } else {
                 right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
@@ -456,8 +456,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getsVarToCheck() != null) {
-            final int svarValue = AbilityUtils.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
-            final int operandValue = AbilityUtils.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
+            final int svarValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarToCheck(), sa);
+            final int operandValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarOperand(), sa);
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;

@@ -24,12 +24,12 @@ public class  DamageAllAi extends SpellAbilityAi {
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
@@ -99,11 +99,11 @@ public class  DamageAllAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -161,7 +161,7 @@ public class  DamageAllAi extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     private List<Card> getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         String validC = sa.hasParam("ValidCards") ? sa.getParam("ValidCards") : "";
 
         // TODO: X may be something different than X paid
@@ -183,11 +183,11 @@ public class  DamageAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.

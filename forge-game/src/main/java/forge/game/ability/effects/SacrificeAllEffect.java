@@ -24,7 +24,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
          * 
          * Target tgt = af.getAbTgt(); if (tgt != null) tgtPlayers =
          * tgt.getTargetPlayers(); else tgtPlayers =
-         * AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+         * AbilityFactory.getDefinedPlayers(sa.getHostCard(),
          * sa.get("Defined"), sa);
          */
 
@@ -34,7 +34,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
@@ -47,7 +47,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         List<Card> list;
         if (sa.hasParam("Defined")) {
-            list = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
+            list = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa));
         } else {
             list = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), valid, sa);
         }

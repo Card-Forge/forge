@@ -78,8 +78,8 @@ public class SpellPermanent extends Spell {
 
         this.setDescription(this.getStackDescription());
 
-        if (this.getPayCosts().getTotalMana().countX() > 0 && StringUtils.isNotBlank(getSourceCard().getSVar("X"))) {
-            this.setSVar("X", this.getSourceCard().getSVar("X"));
+        if (this.getPayCosts().getTotalMana().countX() > 0 && StringUtils.isNotBlank(getHostCard().getSVar("X"))) {
+            this.setSVar("X", this.getHostCard().getSVar("X"));
         }
 
     } // Spell_Permanent()
@@ -88,7 +88,7 @@ public class SpellPermanent extends Spell {
     @Override
     public boolean canPlayAI(Player aiPlayer) {
 
-        final Card card = this.getSourceCard();
+        final Card card = this.getHostCard();
         ManaCost mana = this.getPayCosts().getTotalMana();
         final Game game = aiPlayer.getGame();
         if (mana.countX() > 0) {
@@ -139,7 +139,7 @@ public class SpellPermanent extends Spell {
         if (mandatory) {
             return true;
         }
-        final Card card = this.getSourceCard();
+        final Card card = this.getHostCard();
         ManaCost mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
 
@@ -363,7 +363,7 @@ public class SpellPermanent extends Spell {
     /** {@inheritDoc} */
     @Override
     public void resolve() {
-        Card c = this.getSourceCard();
+        Card c = this.getHostCard();
         c.setController(this.getActivatingPlayer(), 0);
         this.getActivatingPlayer().getGame().getAction().moveTo(ZoneType.Battlefield, c);
     }

@@ -26,7 +26,7 @@ public class PumpEffect extends SpellAbilityEffect {
     private void applyPump(final SpellAbility sa, final Card applyTo, final int a, final int d, final List<String> keywords) {
         //if host is not on the battlefield don't apply
         if (sa.hasParam("UntilLoseControlOfHost")
-                && !sa.getSourceCard().isInPlay()) {
+                && !sa.getHostCard().isInPlay()) {
             return;
         }
         final Game game = sa.getActivatingPlayer().getGame();
@@ -77,17 +77,17 @@ public class PumpEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                sa.getSourceCard().addLeavesPlayCommand(untilEOT);
+                sa.getHostCard().addLeavesPlayCommand(untilEOT);
             } else if (sa.hasParam("UntilHostLeavesPlayOrEOT")) {
-                sa.getSourceCard().addLeavesPlayCommand(untilEOT);
+                sa.getHostCard().addLeavesPlayCommand(untilEOT);
                 game.getEndOfTurn().addUntil(untilEOT);
             } else if (sa.hasParam("UntilLoseControlOfHost")) {
-                sa.getSourceCard().addLeavesPlayCommand(untilEOT);
-                sa.getSourceCard().addChangeControllerCommand(untilEOT);
+                sa.getHostCard().addLeavesPlayCommand(untilEOT);
+                sa.getHostCard().addChangeControllerCommand(untilEOT);
             } else if (sa.hasParam("UntilYourNextTurn")) {
                 game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else if (sa.hasParam("UntilUntaps")) {
-                sa.getSourceCard().addUntapCommand(untilEOT);
+                sa.getHostCard().addUntapCommand(untilEOT);
             } else {
                 game.getEndOfTurn().addUntil(untilEOT);
             }
@@ -151,8 +151,8 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-            final int atk = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-            final int def = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+            final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa);
+            final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa);
 
             sb.append("gains ");
             if ((atk != 0) || (def != 0)) {
@@ -187,7 +187,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         String pumpRemembered = null;
         String pumpForget = null;

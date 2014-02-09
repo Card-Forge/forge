@@ -95,9 +95,9 @@ public class PlayerControllerForTests extends PlayerController {
 			return;
 		}
 		if (
-				(effectSA.getSourceCard().getName().equals("Nefarious Lich") && effectSA.getApi().getAi() instanceof DrawAi) ||
-				(effectSA.getSourceCard().getName().equals("Laboratory Maniac") && effectSA.getApi().getAi() instanceof GameWinAi) ||
-				(effectSA.getSourceCard().getName().equals("Nefarious Lich") && effectSA.getApi().getAi() instanceof ChangeZoneAi)
+				(effectSA.getHostCard().getName().equals("Nefarious Lich") && effectSA.getApi().getAi() instanceof DrawAi) ||
+				(effectSA.getHostCard().getName().equals("Laboratory Maniac") && effectSA.getApi().getAi() instanceof GameWinAi) ||
+				(effectSA.getHostCard().getName().equals("Nefarious Lich") && effectSA.getApi().getAi() instanceof ChangeZoneAi)
 		) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
 			HumanPlay.playSpellAbilityNoStack(player, effectSA, !mayChoseNewTargets);
 			return;
@@ -478,7 +478,7 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : activePlayerSAs) {
-            prepareSingleSa(sa.getSourceCard(),sa,true);
+            prepareSingleSa(sa.getHostCard(),sa,true);
             ComputerUtil.playStack(sa, player, game);
         }
     }

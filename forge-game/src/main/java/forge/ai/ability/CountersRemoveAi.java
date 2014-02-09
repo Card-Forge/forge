@@ -20,7 +20,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         // the expected targets could be
         final Cost abCost = sa.getPayCosts();
         TargetRestrictions abTgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         // List<Card> list;
         // Card choice = null;
 
@@ -59,7 +59,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         }
 
         // TODO handle proper calculation of X values based on Cost
-        // final int amount = calculateAmount(sa.getSourceCard(), amountStr, sa);
+        // final int amount = calculateAmount(sa.getHostCard(), amountStr, sa);
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
@@ -77,7 +77,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         }
 
         if (!type.matches("Any")) {
-            final int currCounters = sa.getSourceCard().getCounters(CounterType.valueOf(type));
+            final int currCounters = sa.getHostCard().getCounters(CounterType.valueOf(type));
             if (currCounters < 1) {
                 return false;
             }

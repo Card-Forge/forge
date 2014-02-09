@@ -149,7 +149,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         ZoneType origin = null;
         final Player opponent = ai.getOpponent();
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
@@ -241,9 +241,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             pDefined = sa.getTargets().getTargetPlayers();
         } else {
             if (sa.hasParam("DefinedPlayer")) {
-                pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
+                pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
             } else {
-                pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+                pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
             }
         }
 
@@ -357,7 +357,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
 
         List<ZoneType> origin = new ArrayList<ZoneType>();
@@ -404,7 +404,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (mandatory) {
                 return true;
             }
-            pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            pDefined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
         }
 
         for (final Player p : pDefined) {
@@ -540,7 +540,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private static boolean knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -683,7 +683,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static boolean isPreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -709,7 +709,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }
 
-        if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             return false;
         }
 
@@ -724,7 +724,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // if it's blink or bounce, try to save my about to die stuff
             if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
                     && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered")))))
-                    && (tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)) {
+                    && (tgt.getMinTargets(sa.getHostCard(), sa) <= 1)) {
 
                 // check stack for something on the stack that will kill
                 // anything i control
@@ -784,7 +784,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             // counters TODO check good and
                             // bad counters
                             // checks only if there is a dangerous ETB effect
-                            return !c.equals(sa.getSourceCard()) && SpellPermanent.checkETBEffects(c, ai);
+                            return !c.equals(sa.getHostCard()) && SpellPermanent.checkETBEffects(c, ai);
                         }
                     });
                     if (!aiPermanents.isEmpty()) {
@@ -855,12 +855,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!mandatory && list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (!mandatory && list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             return false;
         }
 
         // target loop
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
@@ -909,7 +909,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+                if (sa.getTargets().getNumTargeted() == 0 || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -948,7 +948,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -978,7 +978,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // target loop
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // AI Targeting
             Card choice = null;
 
@@ -1020,7 +1020,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if ((sa.getTargets().getNumTargeted() == 0) || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+                if ((sa.getTargets().getNumTargeted() == 0) || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa))) {
                     sa.resetTargets();
                     return false;
                 } else {
@@ -1057,7 +1057,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.getTargetRestrictions() == null) {
             // Just in case of Defined cases
             if (!mandatory && sa.hasParam("AttachedTo")) {
-                final List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("AttachedTo"), sa);
+                final List<Card> list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("AttachedTo"), sa);
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
@@ -1132,7 +1132,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // Don't fetch another tutor with the same name
-            List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(sa.getSourceCard().getName())));
+            List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
             if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                 fetchList = sameNamed;
             }

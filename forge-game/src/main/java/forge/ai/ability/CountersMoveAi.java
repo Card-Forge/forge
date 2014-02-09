@@ -28,7 +28,7 @@ public class CountersMoveAi extends SpellAbilityAi {
         // TODO handle proper calculation of X values based on Cost
         int amount = 0;
         if (!sa.getParam("CounterNum").equals("All")) {
-            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
         // don't use it if no counters to add
         if (amount <= 0) {
@@ -47,13 +47,13 @@ public class CountersMoveAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
         int amount = 0;
         if (!sa.getParam("CounterNum").equals("All")) {
-            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
         boolean chance = false;
         boolean preferred = true;

@@ -171,7 +171,7 @@ public final class AbilityFactory {
         }
 
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
-            spellAbility.setDescription(spellAbility.getSourceCard().getName());
+            spellAbility.setDescription(spellAbility.getHostCard().getName());
         } else if (mapParams.containsKey("SpellDescription")) {
             final StringBuilder sb = new StringBuilder();
 
@@ -363,7 +363,7 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility buildEntwineAbility(final SpellAbility sa) {
-    	final Card source = sa.getSourceCard();
+    	final Card source = sa.getHostCard();
         final String[] saChoices = sa.getParam("Choices").split(",");
         if (sa.getApi() != ApiType.Charm || saChoices.length != 2) 
             throw new IllegalStateException("Entwine ability may be built only on charm cards");

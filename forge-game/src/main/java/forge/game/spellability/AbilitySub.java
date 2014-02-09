@@ -95,29 +95,29 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
         this.setTargetRestrictions(tgt);
 
         api = api0;
-        params = params0;
+        mapParams.putAll(params0);
         ai = api.getAi();
         effect = api.getSpellEffect();
 
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
-            this.setManaPart(new AbilityManaPart(ca, params));
+            this.setManaPart(new AbilityManaPart(ca, mapParams));
         }
 
         if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
-            AbilityFactory.adjustChangeZoneTarget(params, this);
+            AbilityFactory.adjustChangeZoneTarget(mapParams, this);
         }
     }
 
     public AbilitySub getCopy() {
         TargetRestrictions t = getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions());
-        AbilitySub res = new AbilitySub(api, getSourceCard(), t, params);
+        AbilitySub res = new AbilitySub(api, getHostCard(), t, mapParams);
         CardFactory.copySpellAbility(this, res);
         return res;
     }
 
     @Override
     public String getStackDescription() {
-        return effect.getStackDescriptionWithSubs(params, this);
+        return effect.getStackDescriptionWithSubs(mapParams, this);
     }
 
     @Override

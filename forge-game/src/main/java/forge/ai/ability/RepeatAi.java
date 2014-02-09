@@ -46,7 +46,7 @@ public class RepeatAi extends SpellAbilityAi {
          }
 
     	// setup subability to repeat
-        final SpellAbility repeat = AbilityFactory.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), sa.getSourceCard());
+        final SpellAbility repeat = AbilityFactory.getAbility(sa.getHostCard().getSVar(sa.getParam("RepeatSubAbility")), sa.getHostCard());
 
         if (repeat == null) {
         	return false;

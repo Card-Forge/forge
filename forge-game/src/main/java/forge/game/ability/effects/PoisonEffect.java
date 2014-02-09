@@ -21,12 +21,12 @@ import java.util.List;
          */
         @Override
         public void resolve(SpellAbility sa) {
-            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
+            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Num"), sa);
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();
             for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    p.addPoisonCounters(amount, sa.getSourceCard());
+                    p.addPoisonCounters(amount, sa.getHostCard());
                 }
             }
         }
@@ -37,7 +37,7 @@ import java.util.List;
         @Override
         protected String getStackDescription(SpellAbility sa) {
             final StringBuilder sb = new StringBuilder();
-            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
+            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Num"), sa);
 
             final List<Player> tgtPlayers = getTargetPlayers(sa);
 

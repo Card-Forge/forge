@@ -25,7 +25,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        // Card source = sa.getSourceCard();
+        // Card source = sa.getHostCard();
         // TODO - I'm sure someone can do this AI better
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -41,7 +41,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         // ////
         // Targeting
@@ -61,9 +61,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }); 
             sa.resetTargets();
             // target loop
-            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
+            while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;
@@ -87,7 +87,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa))
+                    if ((sa.getTargets().getNumTargeted() < abTgt.getMinTargets(sa.getHostCard(), sa))
                             || (sa.getTargets().getNumTargeted() == 0)) {
                         sa.resetTargets();
                         return false;

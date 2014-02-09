@@ -64,7 +64,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
          */
         @Override
     public void resolve(SpellAbility sa) {
-        Card host = sa.getSourceCard();
+        Card host = sa.getHostCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         final List<GameObject> tgts = getTargets(sa);

@@ -22,7 +22,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Card hostCard = sa.getSourceCard();
+        final Card hostCard = sa.getHostCard();
         boolean chance = false;
         final Cost abCost = sa.getPayCosts();
         final Game game = ai.getGame();

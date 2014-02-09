@@ -356,7 +356,7 @@ public class TriggerHandler {
             }
         }
         host = game.getCardState(regtrig.getHostCard());
-        sa.setSourceCard(host);
+        sa.setHostCard(host);
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa);

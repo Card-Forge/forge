@@ -43,7 +43,7 @@ public class PhasesEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         List<Card> tgtCards = new ArrayList<Card>();
         final Game game = sa.getActivatingPlayer().getGame();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final boolean phaseInOrOut = sa.hasParam("PhaseInOrOutAll");
 
         if (sa.hasParam("AllValid")) {

@@ -19,8 +19,8 @@ public class DebuffAllAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
-        // final Card source = sa.getSourceCard();
-        final Card hostCard = sa.getSourceCard();
+        // final Card source = sa.getHostCard();
+        final Card hostCard = sa.getHostCard();
         final Player opp = ai.getOpponent();
 
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to

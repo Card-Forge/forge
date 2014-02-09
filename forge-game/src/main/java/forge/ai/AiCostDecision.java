@@ -29,7 +29,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
     public AiCostDecision(Player ai0, SpellAbility sa) {
         super(ai0);
         ability = sa;
-        source = ability.getSourceCard();
+        source = ability.getHostCard();
     }
 
     @Override
@@ -362,7 +362,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 List<Card> typeList =
-                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getHostCard());
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
@@ -534,7 +534,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 List<Card> typeList = player.getGame().getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), player, ability.getSourceCard());
+                typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), player, ability.getHostCard());
                 if (!cost.canUntapSource) {
                     typeList.remove(source);
                 }

@@ -7,7 +7,7 @@ public class FogEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return sa.getSourceCard().getController() + " prevents all combat damage this turn.";
+        return sa.getHostCard().getController() + " prevents all combat damage this turn.";
     }
 
 

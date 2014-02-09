@@ -15,7 +15,7 @@ public class ShuffleAi extends SpellAbilityAi {
         /*
          * if (!ComputerUtil.canPayCost(sa)) return false;
          * 
-         * Card source = sa.getSourceCard();
+         * Card source = sa.getHostCard();
          * 
          * Random r = MyRandom.random; boolean randomReturn = r.nextFloat() <=
          * Math.pow(.667, sa.getActivationsThisTurn()+1);

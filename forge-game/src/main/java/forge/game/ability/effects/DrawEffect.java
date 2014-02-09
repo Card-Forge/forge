@@ -19,7 +19,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
         if (!tgtPlayers.isEmpty()) {
 
-            int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+            int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
             
             sb.append(Lang.joinHomogenous(tgtPlayers));
 
@@ -36,8 +36,8 @@ public class DrawEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
-        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) : 1;
+        final Card source = sa.getHostCard();
+        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

@@ -23,7 +23,7 @@ public class DiscardAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
 
         if (abCost != null) {
@@ -54,7 +54,7 @@ public class DiscardAi extends SpellAbilityAi {
             }
         } else {
             // TODO: Add appropriate restrictions
-            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(),
+            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(),
                     sa.getParam("Defined"), sa);
 
             if (players.size() == 1) {
@@ -85,7 +85,7 @@ public class DiscardAi extends SpellAbilityAi {
                 }
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
             } else {
-                if (AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) < 1) {
+                if (AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) < 1) {
                     return false;
                 }
             }
@@ -144,11 +144,11 @@ public class DiscardAi extends SpellAbilityAi {
                 }
             }
         } else {
-            if ("X".equals(sa.getParam("RevealNumber")) && sa.getSourceCard().getSVar("X").equals("Count$xPaid")) {
+            if ("X".equals(sa.getParam("RevealNumber")) && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getOpponent()
                         .getCardsIn(ZoneType.Hand).size());
-                sa.getSourceCard().setSVar("PayX", Integer.toString(cardsToDiscard));
+                sa.getHostCard().setSVar("PayX", Integer.toString(cardsToDiscard));
             }
         }
 

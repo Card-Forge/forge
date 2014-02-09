@@ -36,7 +36,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);

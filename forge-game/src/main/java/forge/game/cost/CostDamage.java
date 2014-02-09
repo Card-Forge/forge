@@ -55,7 +55,7 @@ public class CostDamage extends CostPart {
     
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa) {
-        return payer.addDamage(decision.c, sa.getSourceCard());
+        return payer.addDamage(decision.c, sa.getHostCard());
     }
 
     @Override

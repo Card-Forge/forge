@@ -55,10 +55,10 @@ public abstract class AbilityStatic extends Ability {
     public boolean canPlay() {
         Player player = getActivatingPlayer();
         if (player == null) {
-            player = this.getSourceCard().getController();
+            player = this.getHostCard().getController();
         }
 
-        final Card c = this.getSourceCard();
+        final Card c = this.getHostCard();
 
         return this.getRestrictions().canPlay(c, this);
     }

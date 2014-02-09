@@ -29,7 +29,7 @@ public class TapAllAi extends SpellAbilityAi {
         // turn
         // or during upkeep/begin combat?
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
 
@@ -114,7 +114,7 @@ public class TapAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         String valid = "";
         if (sa.hasParam("ValidCards")) {

@@ -50,7 +50,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
         final boolean randomChosen = sa.hasParam("RandomChosen");
         final int piles = Integer.parseInt(sa.getParam("Piles"));

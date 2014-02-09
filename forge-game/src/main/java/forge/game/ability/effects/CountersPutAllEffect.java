@@ -20,7 +20,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final StringBuilder sb = new StringBuilder();
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
@@ -40,13 +40,13 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
     @Override
     public void resolve(SpellAbility sa) {
         final String type = sa.getParam("CounterType");
-        final int counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
         final Game game = sa.getActivatingPlayer().getGame();
 
         List<Card> cards = game.getCardsIn(zone);
-        cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
+        cards = CardLists.getValidCards(cards, valid, sa.getHostCard().getController(), sa.getHostCard());
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {

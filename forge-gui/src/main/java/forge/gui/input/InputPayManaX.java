@@ -44,7 +44,7 @@ public class InputPayManaX extends InputPayMana {
         manaCost = new ManaCostBeingPaid(manaCostPerX);
 
         this.xCanBe0 = xCanBe0;
-        colorsPaid = saPaidFor.getSourceCard().getColorsPaid(); // for effects like sunburst
+        colorsPaid = saPaidFor.getHostCard().getColorsPaid(); // for effects like sunburst
     }
 
     /* (non-Javadoc)
@@ -72,7 +72,7 @@ public class InputPayManaX extends InputPayMana {
     @Override
     protected String getMessage() {
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
-        msg.append(saPaidFor.getSourceCard().getName()).append("\n").append(this.xPaid);
+        msg.append(saPaidFor.getHostCard().getName()).append("\n").append(this.xPaid);
         msg.append(" Paid so far.");
         if (!xCanBe0) {
             msg.append(" X Can't be 0.");
@@ -124,7 +124,7 @@ public class InputPayManaX extends InputPayMana {
 
     @Override
     protected void done() {
-        final Card card = saPaidFor.getSourceCard();
+        final Card card = saPaidFor.getHostCard();
         card.setXManaCostPaid(this.xPaid);
         card.setColorsPaid(this.colorsPaid);
         card.setSunburstValue(ColorSet.fromMask(this.colorsPaid).countColors());

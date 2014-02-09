@@ -18,7 +18,7 @@ public class TapOrUntapAi extends TapAiBase {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());

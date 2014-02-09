@@ -28,7 +28,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final String type = sa.getParam("Type");
         final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<String>();
 
@@ -63,7 +63,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 }
             }
         } else 
-            throw new InvalidParameterException(sa.getSourceCard() + "'s ability resulted in no types to choose from");
+            throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");
     }
 
 }

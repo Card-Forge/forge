@@ -50,7 +50,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         ZoneType zone = null;
         boolean pile1WasChosen = true;
 
@@ -68,19 +68,19 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         Player separator = card.getController();
         if (sa.hasParam("Separator")) {
-            separator = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Separator"), sa).get(0);
+            separator = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Separator"), sa).get(0);
         }
 
         Player chooser = tgtPlayers.get(0);
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Chooser"), sa).get(0);
+            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 List<Card> pool0 = new ArrayList<Card>();
                 if (sa.hasParam("DefinedCards")) {
-                    pool0 = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
+                    pool0 = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa));
                 } else {
                     pool0 = p.getCardsIn(zone);
                 }

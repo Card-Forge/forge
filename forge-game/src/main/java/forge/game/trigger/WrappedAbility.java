@@ -167,8 +167,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public Card getSourceCard() {
-        return sa.getSourceCard();
+    public Card getHostCard() {
+        return sa.getHostCard();
     }
 
     @Override
@@ -283,8 +283,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setSourceCard(final Card c) {
-        sa.setSourceCard(c);
+    public void setHostCard(final Card c) {
+        sa.setHostCard(c);
     }
 
     @Override

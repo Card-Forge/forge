@@ -29,7 +29,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
 
     @Override
     protected void done() {
-        final Card source = saPaidFor.getSourceCard();
+        final Card source = saPaidFor.getHostCard();
         if (this.phyLifeToLose > 0) {
             player.payLife(this.phyLifeToLose, source);
         }

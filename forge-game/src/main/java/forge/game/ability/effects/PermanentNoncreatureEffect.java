@@ -18,14 +18,14 @@ public class PermanentNoncreatureEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player p = sa.getActivatingPlayer();
-        sa.getSourceCard().setController(p, 0);
-        final Card c = p.getGame().getAction().moveTo(p.getZone(ZoneType.Battlefield), sa.getSourceCard());
-        sa.setSourceCard(c);
+        sa.getHostCard().setController(p, 0);
+        final Card c = p.getGame().getAction().moveTo(p.getZone(ZoneType.Battlefield), sa.getHostCard());
+        sa.setHostCard(c);
     }
 
     @Override
     public String getStackDescription(final SpellAbility sa) {
-        final Card sourceCard = sa.getSourceCard();
+        final Card sourceCard = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         sb.append(sourceCard.getName());
         return sb.toString();

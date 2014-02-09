@@ -22,7 +22,7 @@ public class FightAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         sa.resetTargets();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         List<Card> aiCreatures = ai.getCreaturesInPlay();
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
@@ -107,7 +107,7 @@ public class FightAi extends SpellAbilityAi {
         }
         
         //try to make a good trade or no trade
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
         if (humCreatures.isEmpty()) {

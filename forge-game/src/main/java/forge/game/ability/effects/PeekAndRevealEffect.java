@@ -28,15 +28,15 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         //RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
         String revealValid = sa.hasParam("RevealValid") ? sa.getParam("RevealValid") : "Card";
         String peekAmount = sa.hasParam("PeekAmount") ? sa.getParam("PeekAmount") : "1";
-        int numPeek = AbilityUtils.calculateAmount(sa.getSourceCard(), peekAmount, sa);
+        int numPeek = AbilityUtils.calculateAmount(sa.getHostCard(), peekAmount, sa);
         
         // Right now, this is only used on your own library.
-        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
         for(Player libraryToPeek : libraryPlayers) {
@@ -48,7 +48,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 peekCards.add(library.get(i));
             }
             
-            List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getSourceCard());
+            List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard());
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, source + " - Revealing cards from ");

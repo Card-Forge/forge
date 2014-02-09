@@ -15,7 +15,7 @@ public class RevealAi extends RevealAiBase {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (abCost != null) {
             // AI currently disabled for these costs

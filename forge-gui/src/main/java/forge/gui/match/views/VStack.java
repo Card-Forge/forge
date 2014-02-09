@@ -192,7 +192,7 @@ public enum VStack implements IVDoc<CStack> {
                  * TODO - we should figure out how to display cards on the stack in
                  * the Picture/Detail panel The problem not is that when a computer
                  * casts a Morph, the real card shows because Picture/Detail checks
-                 * isFaceDown() which will be false on for spell.getSourceCard() on
+                 * isFaceDown() which will be false on for spell.getHostCard() on
                  * the stack.
                  */
 
@@ -201,7 +201,7 @@ public enum VStack implements IVDoc<CStack> {
                     @Override
                     public void mouseEntered(final MouseEvent e) {
                         if (!spell.getStackDescription().startsWith("Morph ")) {
-                            CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getSourceCard());
+                            CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getHostCard());
                         }
                     }
                 });

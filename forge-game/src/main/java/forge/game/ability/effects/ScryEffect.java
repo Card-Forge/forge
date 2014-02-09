@@ -30,7 +30,7 @@ public class ScryEffect extends SpellAbilityEffect {
 
         int num = 1;
         if (sa.hasParam("ScryNum")) {
-            num = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
+            num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("ScryNum"), sa);
         }
 
         sb.append("scrys (").append(num).append(").");
@@ -42,7 +42,7 @@ public class ScryEffect extends SpellAbilityEffect {
 
         int num = 1;
         if (sa.hasParam("ScryNum")) {
-            num = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
+            num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("ScryNum"), sa);
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

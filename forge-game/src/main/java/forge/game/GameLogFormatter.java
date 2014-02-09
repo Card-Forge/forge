@@ -37,7 +37,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
      */
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
-        String messageForLog = ev.hasFizzled ? ev.spell.getSourceCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
+        String messageForLog = ev.hasFizzled ? ev.spell.getHostCard().getName() + " ability fizzles." : ev.spell.getStackDescription();
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
     }
 
@@ -46,7 +46,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventSpellAbilityCast event) {
         String who = event.sa.getActivatingPlayer().getName();
         String action = event.sa.isSpell() ? " cast " : " activated ";
-        String what = event.sa.getStackDescription().startsWith("Morph ") ? "Morph" : event.sa.getSourceCard().toString();
+        String what = event.sa.getStackDescription().startsWith("Morph ") ? "Morph" : event.sa.getHostCard().toString();
 
         StringBuilder sb = new StringBuilder();
         sb.append(who).append(action).append(what);

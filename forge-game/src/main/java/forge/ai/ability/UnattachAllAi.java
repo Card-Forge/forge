@@ -26,7 +26,7 @@ public class UnattachAllAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (abCost != null) {
             // No Aura spells have Additional Costs
@@ -65,13 +65,13 @@ public class UnattachAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final Player opp = ai.getOpponent();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<GameObject>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
-            targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {

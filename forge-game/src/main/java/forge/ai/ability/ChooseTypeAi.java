@@ -21,7 +21,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
             sa.resetTargets();
             sa.getTargets().add(ai);
         } else {
-            for (final Player p : AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa)) {
+            for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
                 if (p.isOpponentOf(ai) && !mandatory) {
                     return false;
                 }

@@ -84,7 +84,7 @@ public class CostGainLife extends CostPart {
         if ( amount == null ) return false;
 
         int cntAbleToGainLife = 0;
-        List<Player> possibleTargets = getPotentialTargets(ability.getActivatingPlayer(), ability.getSourceCard());
+        List<Player> possibleTargets = getPotentialTargets(ability.getActivatingPlayer(), ability.getHostCard());
 
         for (final Player opp : possibleTargets) {
             if (opp.canGainLife()) {

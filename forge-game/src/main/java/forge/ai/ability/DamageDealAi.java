@@ -28,9 +28,9 @@ public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -47,10 +47,10 @@ public class DamageDealAi extends DamageAiBase {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -140,7 +140,7 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source);
 
         final List<GameObject> objects = Lists.newArrayList(sa.getTargets().getTargets());
@@ -231,7 +231,7 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageChoosingTargets(final Player ai, final SpellAbility sa, final TargetRestrictions tgt, int dmg,
             final boolean isTrigger, final boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final Game game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
@@ -368,14 +368,14 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageChooseNontargeted(Player ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
-        final List<GameObject> objects = AbilityUtils.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
+        final List<GameObject> objects = AbilityUtils.getDefinedObjects(saMe.getHostCard(), saMe.getParam("Defined"), saMe);
         boolean urgent = false; // can it wait?
         boolean positive = false;
 
         for (final Object o : objects) {
             if (o instanceof Card) {
                 Card c = (Card) o;
-                final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getSourceCard(), false);
+                final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getHostCard(), false);
                 if (!c.hasKeyword("Indestructible") && ComputerUtilCombat.getDamageToKill(c) <= restDamage) {
                     if (c.getController().equals(ai)) {
                         return false;
@@ -388,7 +388,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
-                final int restDamage = ComputerUtilCombat.predictDamageTo(p, dmg, saMe.getSourceCard(), false);
+                final int restDamage = ComputerUtilCombat.predictDamageTo(p, dmg, saMe.getHostCard(), false);
                 if (!p.isOpponentOf(ai) && p.canLoseLife() && restDamage + 3 >= p.getLife() && restDamage > 0) {
                     // from this spell will kill me
                     return false;
@@ -431,7 +431,7 @@ public class DamageDealAi extends DamageAiBase {
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             // TODO: Consider targeting the planeswalker
             if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, mandatory);
@@ -465,7 +465,7 @@ public class DamageDealAi extends DamageAiBase {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 

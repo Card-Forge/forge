@@ -13,7 +13,7 @@ public class GameWinEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
 
         for (final Player p : getTargetPlayers(sa)) {
             p.altWinBySpellEffect(card.getName());

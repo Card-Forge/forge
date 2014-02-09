@@ -18,7 +18,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = aiPlayer.getGame();
         

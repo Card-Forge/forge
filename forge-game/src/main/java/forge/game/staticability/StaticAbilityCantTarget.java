@@ -22,7 +22,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,7 +44,7 @@ public class StaticAbilityCantTarget {
             final SpellAbility spellAbility) {
         final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
-        final Card source = spellAbility.getSourceCard();
+        final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
         if (params.containsKey("AffectedZone")) {

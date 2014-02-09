@@ -19,6 +19,7 @@ package forge.game.trigger;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.TriggerReplacementBase;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -41,7 +42,7 @@ import java.util.Map;
  * @author Forge
  * @version $Id$
  */
-public abstract class Trigger extends CardTraitBase {
+public abstract class Trigger extends TriggerReplacementBase {
 
     /** Constant <code>nextID=0</code>. */
     private static int nextID = 0;

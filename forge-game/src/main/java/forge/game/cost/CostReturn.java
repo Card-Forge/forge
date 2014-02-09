@@ -88,7 +88,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         if (!this.payCostFromSource()) {
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
             

@@ -23,7 +23,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         int numCards = 0;
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         boolean shuffle = false;
-        Card host = sa.getSourceCard();
+        Card host = sa.getHostCard();
 
         numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
         shuffle = sa.hasParam("MayShuffle");
@@ -68,7 +68,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         int numCards = 0;
-        Card host = sa.getSourceCard();
+        Card host = sa.getHostCard();
         boolean shuffle = false;
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

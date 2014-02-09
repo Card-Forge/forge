@@ -49,7 +49,7 @@ import java.util.StringTokenizer;
 
             // prelude for when this is root ability
             if (!(sa instanceof AbilitySub)) {
-                sb.append(sa.getSourceCard()).append(" -");
+                sb.append(sa.getHostCard()).append(" -");
             }
             sb.append(" ");
 
@@ -57,7 +57,7 @@ import java.util.StringTokenizer;
             String stackDesc = params.get("StackDescription");
             if (stackDesc != null) {
                 if ("SpellDescription".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
-                    sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getSourceCard().getName()));
+                    sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getHostCard().getName()));
                     if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
                         sb.append(" (Targeting: " + sa.getTargets().getTargets() + ")");
                     }
@@ -81,7 +81,7 @@ import java.util.StringTokenizer;
             
             if (sa.hasParam("Announce")) {
                 String svar = sa.getParam("Announce");
-                int amount = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSVar(svar));
+                int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar(svar));
                 sb.append(String.format(" (%s=%d)", svar, amount));
             }
 
@@ -103,17 +103,17 @@ import java.util.StringTokenizer;
                 if ( "{".equals(t) ) { isPlainText = false; continue; }
                 if ( "}".equals(t) ) { isPlainText = true; continue; }
                 if ( isPlainText ) 
-                    sb.append(t.replace("CARDNAME", sa.getSourceCard().getName()));
+                    sb.append(t.replace("CARDNAME", sa.getHostCard().getName()));
                 else {
                     List<?> objs = null;
                     if ( t.startsWith("p:") )
-                        objs = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), t.substring(2), sa);
+                        objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
                     else if ( t.startsWith("s:"))
-                        objs = AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), t.substring(2), sa);
+                        objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
                     else if ( t.startsWith("c:"))
-                        objs = AbilityUtils.getDefinedCards(sa.getSourceCard(), t.substring(2), sa);
+                        objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
                     else 
-                        objs = AbilityUtils.getDefinedObjects(sa.getSourceCard(), t, sa);
+                        objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
                             
                     sb.append(StringUtils.join(objs, ", "));
                 }

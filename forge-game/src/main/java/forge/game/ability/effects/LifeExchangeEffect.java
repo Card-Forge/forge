@@ -45,7 +45,7 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         Player p1;
         Player p2;
 

@@ -73,7 +73,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             return null;
         }
 
-        Card source = evt.spell.getSourceCard();
+        Card source = evt.spell.getHostCard();
         if (evt.spell.isSpell()) {
             // if there's a specific effect for this particular card, play it and
             // we're done.
@@ -171,7 +171,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         Card c = null;
 
         if (evt instanceof GameEventSpellResolved) {
-            c = ((GameEventSpellResolved) evt).spell.getSourceCard();
+            c = ((GameEventSpellResolved) evt).spell.getHostCard();
         } else if (evt instanceof GameEventLandPlayed) {
             c = ((GameEventLandPlayed) evt).land;
         }

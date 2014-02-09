@@ -65,7 +65,7 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
         if (this.mapParams.containsKey("ValidSource")) {
-            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getSourceCard(), this.mapParams
+            if (!matchesValid(((SpellAbility) runParams2.get("SourceSA")).getHostCard(), this.mapParams
                     .get("ValidSource").split(","), this.getHostCard())) {
                 return false;
             }
@@ -89,7 +89,7 @@ public class TriggerBecomesTarget extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("SourceSA", this.getRunParams().get("SourceSA"));
-        sa.setTriggeringObject("Source", ((SpellAbility) this.getRunParams().get("SourceSA")).getSourceCard());
+        sa.setTriggeringObject("Source", ((SpellAbility) this.getRunParams().get("SourceSA")).getHostCard());
         sa.setTriggeringObject("Target", this.getRunParams().get("Target"));
     }
 }

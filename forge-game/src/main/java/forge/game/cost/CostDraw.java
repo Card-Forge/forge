@@ -75,7 +75,7 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability) {
-        List<Player> potentials = getPotentialPlayers(ability.getActivatingPlayer(), ability.getSourceCard());
+        List<Player> potentials = getPotentialPlayers(ability.getActivatingPlayer(), ability.getHostCard());
         return !potentials.isEmpty();
     }
 
@@ -87,7 +87,7 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
-        for (final Player p : getPotentialPlayers(ai, ability.getSourceCard())) {
+        for (final Player p : getPotentialPlayers(ai, ability.getHostCard())) {
             p.drawCards(decision.c);
         }
         return true;

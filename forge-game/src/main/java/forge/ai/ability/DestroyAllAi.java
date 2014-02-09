@@ -30,7 +30,7 @@ public class DestroyAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         String valid = "";
         if (mandatory) {
             return true;
@@ -80,7 +80,7 @@ public class DestroyAllAi extends SpellAbilityAi {
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         String valid = "";
 
         if (sa.hasParam("ValidCards")) {

@@ -148,8 +148,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         // Store some information about color costs to help with any mana choices
         if (colorNeeded == 0) {  // only colorless left
-            if (saPaidFor.getSourceCard() != null && saPaidFor.getSourceCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
-                String[] negEffects = saPaidFor.getSourceCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
+            if (saPaidFor.getHostCard() != null && saPaidFor.getHostCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
+                String[] negEffects = saPaidFor.getHostCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                 for (String negColor : negEffects) {
                     byte col = MagicColor.fromName(negColor);
                     colorCanUse |= col;
@@ -196,7 +196,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
         chosen.getManaPartRecursive().setExpressChoice(colors);
 
-        // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
+        // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
         Runnable proc = new Runnable() {
             @Override
             public void run() {
@@ -229,7 +229,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         // check for produce mana replacement effects - they mess this up, so just use the mana ability
-        final Card source = am.getSourceCard();
+        final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
         final Game g = source.getGame();
         final HashMap<String, Object> repParams = new HashMap<String, Object>();

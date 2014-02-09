@@ -30,7 +30,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

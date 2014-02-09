@@ -186,8 +186,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {
-            activator = sa.getSourceCard().getController();
-            System.out.println(sa.getSourceCard().getName()
+            activator = sa.getHostCard().getController();
+            System.out.println(sa.getHostCard().getName()
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
         final Game game = activator.getGame();
@@ -252,7 +252,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getColorToCheck() != null) {
-            if (!sa.getSourceCard().getChosenColor().contains(this.getColorToCheck())) {
+            if (!sa.getHostCard().getChosenColor().contains(this.getColorToCheck())) {
                 return false;
             }
         }
@@ -260,12 +260,12 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getIsPresent() != null) {
             List<Card> list = new ArrayList<Card>();
             if (this.getPresentDefined() != null) {
-                list.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
+                list.addAll(AbilityUtils.getDefinedCards(sa.getHostCard(), this.getPresentDefined(), sa));
             } else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
 
-            list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getHostCard());
 
             int right;
             final String rightString = this.getPresentCompare().substring(2);
@@ -274,7 +274,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             } catch (final NumberFormatException e) { // Otherwise, grab it from
                                                       // the
                 // SVar
-                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
+                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar(rightString));
             }
 
             final int left = list.size();
@@ -287,9 +287,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getPlayerContains() != null) {
             List<Player> list = new ArrayList<Player>();
             if (this.getPlayerDefined() != null) {
-                list.addAll(AbilityUtils.getDefinedPlayers(sa.getSourceCard(), this.getPlayerDefined(), sa));
+                list.addAll(AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerDefined(), sa));
             }
-            List<Player> contains = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), this.getPlayerContains(), sa);
+            List<Player> contains = AbilityUtils.getDefinedPlayers(sa.getHostCard(), this.getPlayerContains(), sa);
             if (!list.containsAll(contains)) {
                 return false;
             }
@@ -307,7 +307,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             int right = 1;
             final String rightString = this.getLifeAmount().substring(2);
             if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar("X"));
+                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar("X"));
             } else {
                 right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
@@ -326,7 +326,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             boolean result = false;
     
             for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets().getTargets()) {
-                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getHostCard())) {
                     result = true;
                     break;
                 }
@@ -347,13 +347,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (StringUtils.isNotEmpty(this.getManaSpent())) {
             byte manaSpent = MagicColor.fromName(getManaSpent()); // they always check for single color
-            if( 0 == (manaSpent & sa.getSourceCard().getColorsPaid())) // no match of colors
+            if( 0 == (manaSpent & sa.getHostCard().getColorsPaid())) // no match of colors
                 return false;
         }
 
         if (this.getsVarToCheck() != null) {
-            final int svarValue = AbilityUtils.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
-            final int operandValue = AbilityUtils.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
+            final int svarValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarToCheck(), sa);
+            final int operandValue = AbilityUtils.calculateAmount(sa.getHostCard(), this.getsVarOperand(), sa);
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;

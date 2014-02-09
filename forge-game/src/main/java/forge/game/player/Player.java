@@ -1133,7 +1133,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
         if (this.hasKeyword("Shroud") || (!this.equals(sa.getActivatingPlayer()) && this.hasKeyword("Hexproof"))
-                || this.hasProtectionFrom(sa.getSourceCard())) {
+                || this.hasProtectionFrom(sa.getHostCard())) {
             return false;
         }
 
@@ -1558,7 +1558,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
         }*/
-        final Card source = sa != null ? sa.getSourceCard() : null;
+        final Card source = sa != null ? sa.getHostCard() : null;
 
         // Replacement effects
         final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
@@ -1587,7 +1587,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Run triggers
         Card cause = null;
         if (sa != null) {
-            cause = sa.getSourceCard();
+            cause = sa.getHostCard();
         }
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
@@ -2795,7 +2795,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public boolean couldCastSorcery(final SpellAbility sa) {
 
-        final Card source = sa.getRootAbility().getSourceCard();
+        final Card source = sa.getRootAbility().getHostCard();
         boolean onlyThis = true;
 
         for (final Card card : game.getCardsIn(ZoneType.Stack)) {
@@ -3068,9 +3068,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         @Override
         public void resolve() {
-            miracle.setActivatingPlayer(getSourceCard().getOwner());
+            miracle.setActivatingPlayer(getHostCard().getOwner());
             // pay miracle cost here.
-            getSourceCard().getOwner().getController().playMiracle(miracle, getSourceCard());
+            getHostCard().getOwner().getController().playMiracle(miracle, getHostCard());
         }
     }
 

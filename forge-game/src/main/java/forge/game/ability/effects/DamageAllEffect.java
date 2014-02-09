@@ -23,13 +23,13 @@ public class DamageAllEffect extends SpellAbilityEffect {
         }
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
 
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
         final Card source = definedSources.get(0);
 
-        if (source != sa.getSourceCard()) {
+        if (source != sa.getHostCard()) {
             sb.append(source.toString()).append(" deals");
         } else {
             sb.append("Deals");
@@ -42,13 +42,13 @@ public class DamageAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 

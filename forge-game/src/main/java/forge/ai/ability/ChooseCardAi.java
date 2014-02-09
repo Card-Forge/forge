@@ -26,7 +26,7 @@ public class ChooseCardAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Game game = ai.getGame();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -100,7 +100,7 @@ public class ChooseCardAi extends SpellAbilityAi {
      */
     @Override
     public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final String logic = sa.getParam("AILogic");
         Card choice = null;
         if (logic == null) {

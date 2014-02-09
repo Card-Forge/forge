@@ -12,7 +12,7 @@ public class BondEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // find card that triggered pairing first
-        List<Card> trigCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        List<Card> trigCards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         // Check that this card hasn't already become paired by an earlier trigger
         if (trigCards.get(0).isPaired() || !trigCards.get(0).isInZone(ZoneType.Battlefield)) {
@@ -39,7 +39,7 @@ public class BondEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        List<Card> tgts = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        List<Card> tgts = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
         final StringBuilder sb = new StringBuilder();
 

@@ -189,7 +189,7 @@ public class CardFactory {
         if(sa instanceof AbilityActivated)
         {
             copySA = ((AbilityActivated)sa).getCopy();
-            copySA.setSourceCard(original);
+            copySA.setHostCard(original);
         }
         else if (sa.isTrigger()) {
             copySA = getCopiedTriggeredAbility(sa);
@@ -197,14 +197,14 @@ public class CardFactory {
         else
         {
             copySA = sa.copy();
-            copySA.setSourceCard(c);
+            copySA.setHostCard(c);
             SpellAbility parentSA = copySA;
             SpellAbility subSA = copySA.getSubAbility();
             while (subSA != null) {
                 AbilitySub copySubSA = ((AbilitySub) subSA).getCopy();
                 parentSA.setSubAbility(copySubSA);
                 copySubSA.setParent(parentSA);
-                copySubSA.setSourceCard(c);
+                copySubSA.setHostCard(c);
                 copySubSA.setCopied(true);
                 parentSA = copySubSA;
                 subSA = copySubSA.getSubAbility();
@@ -620,9 +620,9 @@ public class CardFactory {
         // set up copied wrapped ability
         SpellAbility trig = t.getOverridingAbility();
         if (trig == null) {
-            trig = AbilityFactory.getAbility(sa.getSourceCard().getSVar(t.getMapParams().get("Execute")), sa.getSourceCard());
+            trig = AbilityFactory.getAbility(sa.getHostCard().getSVar(t.getMapParams().get("Execute")), sa.getHostCard());
         }
-        trig.setSourceCard(sa.getSourceCard());
+        trig.setHostCard(sa.getHostCard());
         trig.setTrigger(true);
         trig.setSourceTrigger(t.getId());
         t.setTriggeringObjects(trig);

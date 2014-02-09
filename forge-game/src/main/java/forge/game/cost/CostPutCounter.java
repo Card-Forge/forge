@@ -125,7 +125,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
-        final Card source = ability.getSourceCard();
+        final Card source = ability.getHostCard();
         if (this.payCostFromSource()) {
             if (!source.canReceiveCounters(this.counter)) {
                 return false;
@@ -153,12 +153,12 @@ public class CostPutCounter extends CostPartWithList {
         Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
-            executePayment(ability, ability.getSourceCard(), c);
+            executePayment(ability, ability.getHostCard(), c);
         } else {
             // Put counter on chosen card
             for (int i = 0; i < c; i++)
                 executePayment(ability, decision.cards);
-            ability.getSourceCard().setSVar("CostCountersAdded", Integer.toString(Math.min(decision.cards.size(), c)));
+            ability.getHostCard().setSVar("CostCountersAdded", Integer.toString(Math.min(decision.cards.size(), c)));
         }
         return true;
     }
@@ -166,7 +166,7 @@ public class CostPutCounter extends CostPartWithList {
     public Integer getNumberOfCounters(final SpellAbility ability) {
         Integer c = this.convertAmount();
         if (c == null) {
-            c = AbilityUtils.calculateAmount(ability.getSourceCard(), this.getAmount(), ability);
+            c = AbilityUtils.calculateAmount(ability.getHostCard(), this.getAmount(), ability);
         }
         return c;
     }

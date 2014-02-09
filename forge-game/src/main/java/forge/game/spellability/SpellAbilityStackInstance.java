@@ -97,7 +97,7 @@ public class SpellAbilityStackInstance {
         this.splicedCards = sa.getSplicedCards();
 
         // TODO getXManaCostPaid should be on the SA, not the Card
-        this.xManaPaid = sa.getSourceCard().getXManaCostPaid();
+        this.xManaPaid = sa.getHostCard().getXManaCostPaid();
 
         // Triggering info
         this.triggeringObjects = sa.getTriggeringObjects();
@@ -115,7 +115,7 @@ public class SpellAbilityStackInstance {
             this.ability.resetTargets();
         }
 
-        final Card source = this.ability.getSourceCard();
+        final Card source = this.ability.getHostCard();
 
         // Store SVars and Clear
         for (final String store : Card.getStorableSVars()) {
@@ -148,13 +148,13 @@ public class SpellAbilityStackInstance {
         this.ability.resetPaidHash();
         this.ability.setPaidHash(this.paidHash);
         this.ability.setSplicedCards(splicedCards);
-        this.ability.getSourceCard().setXManaCostPaid(this.xManaPaid);
+        this.ability.getHostCard().setXManaCostPaid(this.xManaPaid);
 
         // Triggered
         this.ability.setAllTriggeringObjects(this.triggeringObjects);
 
         // Add SVars back in
-        final Card source = this.ability.getSourceCard();
+        final Card source = this.ability.getHostCard();
         for (final String store : this.storedSVars.keySet()) {
             final String value = this.storedSVars.get(store);
             if (value.length() > 0) {
@@ -179,13 +179,13 @@ public class SpellAbilityStackInstance {
 
     /**
      * <p>
-     * getSourceCard.
+     * getHostCard.
      * </p>
      * 
      * @return a {@link forge.game.card.Card} object.
      */
     public final Card getSourceCard() {
-        return this.ability.getSourceCard();
+        return this.ability.getHostCard();
     }
 
     /**

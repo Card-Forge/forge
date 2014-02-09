@@ -67,7 +67,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getSourceCard();
+        Card source = sa.getHostCard();
 
         final boolean bUntap = sa.hasParam("Untap");
         final boolean bTapOnLose = sa.hasParam("TapOnLose");
@@ -107,8 +107,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (!tgtC.equals(sa.getSourceCard()) && !sa.getSourceCard().getGainControlTargets().contains(tgtC)) {
-                sa.getSourceCard().addGainControlTarget(tgtC);
+            if (!tgtC.equals(sa.getHostCard()) && !sa.getHostCard().getGainControlTargets().contains(tgtC)) {
+                sa.getHostCard().addGainControlTarget(tgtC);
             }
 
             long tStamp = game.getNextTimestamp();
@@ -128,23 +128,23 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (remember && !sa.getSourceCard().getRemembered().contains(tgtC)) {
-                sa.getSourceCard().addRemembered(tgtC);
+            if (remember && !sa.getHostCard().getRemembered().contains(tgtC)) {
+                sa.getHostCard().addRemembered(tgtC);
             }
 
-            if (forget && sa.getSourceCard().getRemembered().contains(tgtC)) {
-                sa.getSourceCard().removeRemembered(tgtC);
+            if (forget && sa.getHostCard().getRemembered().contains(tgtC)) {
+                sa.getHostCard().removeRemembered(tgtC);
             }
 
             if (lose != null) {
                 if (lose.contains("LeavesPlay")) {
-                    sa.getSourceCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("Untap")) {
-                    sa.getSourceCard().addUntapCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addUntapCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("LoseControl")) {
-                    sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    sa.getHostCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("EOT")) {
                     game.getEndOfTurn().addUntil(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
@@ -153,20 +153,20 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
-                    sa.getSourceCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC,
+                    sa.getHostCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC,
                             this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws)});
                 }
             }
 
             if (destroyOn != null) {
                 if (destroyOn.contains("LeavesPlay")) {
-                    sa.getSourceCard().addLeavesPlayCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
+                    sa.getHostCard().addLeavesPlayCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
                 }
                 if (destroyOn.contains("Untap")) {
-                    sa.getSourceCard().addUntapCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
+                    sa.getHostCard().addUntapCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
                 }
                 if (destroyOn.contains("LoseControl")) {
-                    sa.getSourceCard().addChangeControllerCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
+                    sa.getHostCard().addChangeControllerCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
                 }
             }
 

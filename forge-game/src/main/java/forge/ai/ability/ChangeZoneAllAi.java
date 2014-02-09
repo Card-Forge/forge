@@ -26,7 +26,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 

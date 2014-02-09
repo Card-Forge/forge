@@ -22,7 +22,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Player player = host.getController();
 
         final StringBuilder sb = new StringBuilder();
@@ -36,7 +36,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Player player = host.getController();
         int flipMultiplier = 1; // For multiple copies of Krark's Thumb
 
@@ -154,7 +154,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
         boolean [] results = new boolean [multiplier];
         for (int i = 0; i < multiplier; i++) {
-            final boolean choice = caller.getController().chooseBinary(sa, sa.getSourceCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
+            final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
             // Play the Flip A Coin sound
             caller.getGame().fireEvent(new GameEventFlipCoin());
             final boolean flip = MyRandom.getRandom().nextBoolean();

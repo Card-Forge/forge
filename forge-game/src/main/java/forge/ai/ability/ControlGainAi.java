@@ -106,7 +106,7 @@ public class ControlGainAi extends SpellAbilityAi {
         }
 
         List<Card> list =
-                CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
         
         // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -130,7 +130,7 @@ public class ControlGainAi extends SpellAbilityAi {
             return false;
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card t = null;
             for (final Card c : list) {
                 if (c.isCreature()) {
@@ -148,7 +148,7 @@ public class ControlGainAi extends SpellAbilityAi {
             }
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     sa.resetTargets();
                     return false;
                 } else {

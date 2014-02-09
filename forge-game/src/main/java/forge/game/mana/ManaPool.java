@@ -297,16 +297,16 @@ public class ManaPool {
             manaCost.payMana(mana, this);
             sa.getPayingMana().add(mana);
             this.removeMana(mana);
-            if (mana.addsNoCounterMagic(sa) && sa.getSourceCard() != null) {
-                sa.getSourceCard().setCanCounter(false);
+            if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
+                sa.getHostCard().setCanCounter(false);
             }
-            if (sa.isSpell() && sa.getSourceCard() != null) {
-                if (sa.getSourceCard().isCreature() && mana.addsKeywords(sa)) {
-                    final long timestamp = sa.getSourceCard().getGame().getNextTimestamp();
-                    sa.getSourceCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
+            if (sa.isSpell() && sa.getHostCard() != null) {
+                if (sa.getHostCard().isCreature() && mana.addsKeywords(sa)) {
+                    final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
+                    sa.getHostCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
                 }
                 if (mana.addsCounters(sa)) {
-                    mana.getManaAbility().createETBCounters(sa.getSourceCard());
+                    mana.getManaAbility().createETBCounters(sa.getHostCard());
                 }
             }
         }
@@ -338,8 +338,8 @@ public class ManaPool {
         ability.getPayingManaAbilities().clear();
         // move non-undoable paying mana back to floating
         if (refund) {
-            if (ability.getSourceCard() != null) {
-                ability.getSourceCard().setCanCounter(true);
+            if (ability.getHostCard() != null) {
+                ability.getHostCard().setCanCounter(true);
             }
             for (final Mana m : manaPaid) {
                 this.addMana(m);
@@ -390,8 +390,8 @@ public class ManaPool {
         final List<Mana> manaPaid = sa.getPayingMana();
 
         // move non-undoable paying mana back to floating
-        if (sa.getSourceCard() != null) {
-            sa.getSourceCard().setCanCounter(true);
+        if (sa.getHostCard() != null) {
+            sa.getHostCard().setCanCounter(true);
         }
         for (final Mana m : manaPaid) {
             this.addMana(m);

@@ -48,7 +48,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         boolean optional = sa.hasParam("Optional");
@@ -222,7 +222,7 @@ public class PlayEffect extends SpellAbilityEffect {
             
             remember = controller.getController().playSaFromPlayEffect(tgtSA);
             if (remember) {
-                source.addRemembered(tgtSA.getSourceCard());
+                source.addRemembered(tgtSA.getHostCard());
             }
        
         }

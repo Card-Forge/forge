@@ -19,7 +19,7 @@ public class LifeGainAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final int life = ai.getLife();
         final String amountStr = sa.getParam("LifeAmount");
@@ -31,7 +31,7 @@ public class LifeGainAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
             lifeAmount = xPay;
         } else {
-            lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
         // don't use it if no life to gain
@@ -148,7 +148,7 @@ public class LifeGainAi extends SpellAbilityAi {
             }
         }
 
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.

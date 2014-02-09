@@ -74,6 +74,6 @@ public class CardShields {
     @Override
     public String toString() {
     	String suffix = this.triggerSA != null ? " - " + triggerSA.getDescription() : "";
-        return this.sourceSA.getSourceCard().getName() + suffix;
+        return this.sourceSA.getHostCard().getName() + suffix;
     }
 }

@@ -19,7 +19,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        Card plane = sa.getSourceCard();
+        Card plane = sa.getHostCard();
 
         boolean decideToRoll = false;
         boolean rollInMain1 = false;

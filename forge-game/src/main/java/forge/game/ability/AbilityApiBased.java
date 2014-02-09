@@ -23,25 +23,25 @@ public class AbilityApiBased extends AbilityActivated {
 
     public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
-        params = params0;
+        mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();
         ai = api.getAi();
 
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
 
-            this.setManaPart(new AbilityManaPart(sourceCard, params));
+            this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
             this.setUndoable(true); // will try at least
         }
 
         if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
-            AbilityFactory.adjustChangeZoneTarget(params, this);
+            AbilityFactory.adjustChangeZoneTarget(mapParams, this);
         }
     }
 
     @Override
     public String getStackDescription() {
-        return effect.getStackDescriptionWithSubs(params, this);
+        return effect.getStackDescriptionWithSubs(mapParams, this);
     }
 
     /* (non-Javadoc)
@@ -50,7 +50,7 @@ public class AbilityApiBased extends AbilityActivated {
     @Override
     public AbilityActivated getCopy() {
         TargetRestrictions tgt = getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions());
-        AbilityActivated res = new AbilityApiBased(api, getSourceCard(), getPayCosts(), tgt, params);
+        AbilityActivated res = new AbilityApiBased(api, getHostCard(), getPayCosts(), tgt, mapParams);
         CardFactory.copySpellAbility(this, res);
         return res;
     }

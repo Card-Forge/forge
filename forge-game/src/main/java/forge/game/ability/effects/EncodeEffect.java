@@ -27,7 +27,7 @@ public class EncodeEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
 

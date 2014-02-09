@@ -17,7 +17,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         for (final Player player : getDefinedPlayersOrTargeted(sa)) {
             sb.append(player).append(" ");
@@ -33,7 +33,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final int lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
@@ -43,7 +43,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.gainLife(lifeAmount, sa.getSourceCard());
+                p.gainLife(lifeAmount, sa.getHostCard());
             }
         }
     }

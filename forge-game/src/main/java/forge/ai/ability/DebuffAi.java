@@ -32,7 +32,7 @@ public class DebuffAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final Game game = ai.getGame(); 
         if ((sa.getTargetRestrictions() == null) && !source.isInPlay()) {
             return false;
@@ -75,7 +75,7 @@ public class DebuffAi extends SpellAbilityAi {
         }
 
         if (!sa.usesTargeting() || !sa.getTargetRestrictions().doesTarget()) {
-            List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
 
             final Combat combat = game.getCombat();
@@ -134,7 +134,7 @@ public class DebuffAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         List<Card> list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
         // several uses here:
         // 1. make human creatures lose evasion when they are attacking
@@ -147,12 +147,12 @@ public class DebuffAi extends SpellAbilityAi {
             return mandatory && debuffMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (mandatory) {
                         return debuffMandatoryTarget(ai, sa, mandatory);
                     }
@@ -220,9 +220,9 @@ public class DebuffAi extends SpellAbilityAi {
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         List<Card> list = ai.getGame().getCardsIn(ZoneType.Battlefield);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
-        if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }
@@ -234,7 +234,7 @@ public class DebuffAi extends SpellAbilityAi {
 
         final List<Card> pref = CardLists.filterControlledBy(list, ai.getOpponent());
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (pref.isEmpty()) {
@@ -253,7 +253,7 @@ public class DebuffAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             if (forced.isEmpty()) {
                 break;
             }
@@ -272,7 +272,7 @@ public class DebuffAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
             return false;
         }

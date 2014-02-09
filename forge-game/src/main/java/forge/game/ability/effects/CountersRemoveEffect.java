@@ -20,7 +20,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         final String counterName = sa.getParam("CounterType");
 
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
 
         sb.append("Remove ");
         if (sa.hasParam("UpTo")) {
@@ -52,12 +52,12 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        final Card card = sa.getSourceCard();
+        final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final String type = sa.getParam("CounterType");
         int cntToRemove = 0;
         if (!sa.getParam("CounterNum").equals("All") && !sa.getParam("CounterNum").equals("Remembered")) {
-            cntToRemove = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+            cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         }
 
         CounterType counterType = null;

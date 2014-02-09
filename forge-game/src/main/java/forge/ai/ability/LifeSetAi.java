@@ -19,7 +19,7 @@ public class LifeSetAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
         final int myLife = ai.getLife();
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
@@ -45,7 +45,7 @@ public class LifeSetAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -105,7 +105,7 @@ public class LifeSetAi extends SpellAbilityAi {
         final int myLife = ai.getLife();
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
-        final Card source = sa.getSourceCard();
+        final Card source = sa.getHostCard();
 
         final String amountStr = sa.getParam("LifeAmount");
 
@@ -116,7 +116,7 @@ public class LifeSetAi extends SpellAbilityAi {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
         if (source.getName().equals("Eternity Vessel")

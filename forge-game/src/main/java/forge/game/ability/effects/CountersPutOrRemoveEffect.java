@@ -34,7 +34,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final int counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
 
         List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 

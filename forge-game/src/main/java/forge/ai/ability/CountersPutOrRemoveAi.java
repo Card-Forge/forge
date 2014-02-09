@@ -51,7 +51,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
         List<ZoneType> zones = ZoneType.listValueOf(sa.getParamOrDefault("TgtZones", "Battlefield"));
         List<Card> validCards = CardLists.getValidCards(ai.getGame().getCardsIn(zones),
-                tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
 
         if (validCards.isEmpty()) {
             return false;
@@ -72,9 +72,9 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             }
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card targetCard = null;
-            if (cWithCounters.isEmpty() && ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))
+            if (cWithCounters.isEmpty() && ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa))
                     || (sa.getTargets().getNumTargeted() == 0))) {
                 sa.resetTargets();
                 return false;

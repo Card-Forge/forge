@@ -35,7 +35,7 @@ public class ScryAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        // Card source = sa.getSourceCard();
+        // Card source = sa.getHostCard();
 
         double chance = .4; // 40 percent chance of milling with instant speed
                             // stuff

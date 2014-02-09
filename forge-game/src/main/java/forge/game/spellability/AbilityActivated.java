@@ -82,7 +82,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     public boolean canPlay() {
         Player player = getActivatingPlayer();
         if (player == null) {
-            player = this.getSourceCard().getController();
+            player = this.getHostCard().getController();
         }
         
         final Game game = player.getGame();
@@ -90,7 +90,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        final Card c = this.getSourceCard();
+        final Card c = this.getHostCard();
 
         // CantBeActivated static abilities
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
@@ -123,8 +123,8 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     public boolean isPossible() {
     	//consider activated abilities possible always and simply disable if not currently playable
     	//the exception is to consider them not possible if there's a zone or activator restriction that's not met
-    	return this.getRestrictions().checkZoneRestrictions(this.getSourceCard(), this) && 
-    		   this.getRestrictions().checkActivatorRestrictions(this.getSourceCard(), this);
+    	return this.getRestrictions().checkZoneRestrictions(this.getHostCard(), this) &&
+    		   this.getRestrictions().checkActivatorRestrictions(this.getHostCard(), this);
     }
     
     /** {@inheritDoc} */

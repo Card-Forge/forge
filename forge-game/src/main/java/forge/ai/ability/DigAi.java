@@ -24,7 +24,7 @@ public class DigAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         Player opp = ai.getOpponent();
-        final Card host = sa.getSourceCard();
+        final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
         if (sa.usesTargeting()) {
