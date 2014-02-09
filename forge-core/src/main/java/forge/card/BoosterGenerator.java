@@ -71,7 +71,7 @@ public class BoosterGenerator {
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
         boolean hasFoil = edition != null && MyRandom.getRandom().nextInt(10000) <= edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED; // FoilChanceInBooster is given with 1/10000th precision for a closer 1:6 (16.67%) approximation.
-        boolean foilAlwaysCommon = !hasFoil ? false : edition.getFoilAlwaysInCommonSlot();
+        boolean commonSlotFoil = !hasFoil ? false : edition.getFoilAlwaysInCommonSlot();
         String foilSlot = !hasFoil ? null : edition.getFoilAlwaysInCommonSlot() ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
         
         for(Pair<String, Integer> slot : template.getSlots()) {
@@ -89,12 +89,12 @@ public class BoosterGenerator {
             result.addAll(ps.random(numCards, true));
             sheetsUsed.add(ps);
 
-            if (hasFoil && !foilAlwaysCommon && slotType.equals(foilSlot)) {
+            if (hasFoil && !commonSlotFoil && slotType.equals(foilSlot)) {
                 result.add(generateFoilCard(ps));
             }
         }
 
-        if (hasFoil && foilAlwaysCommon) {
+        if (hasFoil && commonSlotFoil) {
             PrintSheet foilSheet = Aggregates.random(sheetsUsed);
             result.add(generateFoilCard(foilSheet));
         }
