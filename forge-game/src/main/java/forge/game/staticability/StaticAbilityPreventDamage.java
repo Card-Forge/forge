@@ -21,7 +21,6 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

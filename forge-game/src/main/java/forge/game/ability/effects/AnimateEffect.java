@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import forge.Command;
-import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;

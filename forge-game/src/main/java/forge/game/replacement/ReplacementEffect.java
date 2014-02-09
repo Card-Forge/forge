@@ -17,7 +17,6 @@
  */
 package forge.game.replacement;
 
-import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityUtils;

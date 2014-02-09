@@ -22,7 +22,6 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

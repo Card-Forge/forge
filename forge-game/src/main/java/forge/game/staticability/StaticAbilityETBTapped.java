@@ -19,7 +19,6 @@ package forge.game.staticability;
 
 import forge.game.card.Card;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
