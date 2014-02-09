@@ -329,7 +329,7 @@ public class ManaCostBeingPaid {
 
         ManaCostShard chosenShard = Iterables.getFirst(choice, null);
         decreaseShard(chosenShard, 1);
-        if (chosenShard.isOr2Colorless() && ( 0 != (chosenShard.getColorMask() & possibleUses) )) {
+        if (chosenShard.isOr2Colorless() && ( 0 == (chosenShard.getColorMask() & possibleUses) )) {
             this.increaseColorlessMana(1);
         }
 

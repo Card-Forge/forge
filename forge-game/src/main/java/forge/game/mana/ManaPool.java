@@ -418,12 +418,13 @@ public class ManaPool {
     }
     
     
-    private final byte[] colorConversionMatrix = new byte[6];
+    private final byte[] colorConversionMatrix = new byte[MagicColor.WUBRG.length + 1];
     private static final byte[] identityMatrix = { MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, 0 };
 
     public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
-        // Fix the index based on a 6 length array with colorless in the last slot
-        int rowIdx = (MagicColor.getIndexOfFirstColor(originalColor) + 6) % 6;
+        // Fix the index without hardcodes
+        int rowIdx = MagicColor.getIndexOfFirstColor(originalColor);
+        rowIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
         if (additive)
             colorConversionMatrix[rowIdx] |= replacementColor;
         else
