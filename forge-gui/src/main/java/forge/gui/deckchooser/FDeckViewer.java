@@ -87,7 +87,6 @@ public class FDeckViewer extends FDialog {
                 cardPicture.setCard(card);
             }
         });
-        this.setDefaultFocus(this.cardManager.getCurrentView().getComponent());
 
         for (Entry<DeckSection, CardPool> entry : deck) {
             this.sections.add(entry.getKey());
@@ -150,6 +149,7 @@ public class FDeckViewer extends FDialog {
         qtyColumn.setIndex(0);
         columns.put(ColumnDef.QUANTITY, qtyColumn);
         this.cardManager.setup(columns, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.setDefaultFocus(this.cardManager.getCurrentView().getComponent());
     }
 
     private void changeSection() {
