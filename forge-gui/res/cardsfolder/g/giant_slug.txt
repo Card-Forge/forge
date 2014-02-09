@@ -5,7 +5,7 @@ PT:1/1
 A:AB$ Effect | Cost$ 5 | Duration$ Permanent | Triggers$ ChooseBasicTrig | AILogic$ EndOfOppTurn | Stackable$ False | SVars$ ChooseB,ExileEffect,DBPump | RememberObjects$ Self | SpellDescription$ At the beginning of your next upkeep, choose a basic land type. CARDNAME gains landwalk of the chosen type until the end of that turn.
 SVar:ChooseBasicTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ ChooseB | TriggerDescription$ At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn.
 SVar:ChooseB:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Basic Land | AILogic$ ChosenLandwalk | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ ChosenTypewalk | DefinedChosenKW$ Type | SubAbility$ ExileEffect
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ ChosenTypewalk | DefinedKW$ ChosenType | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_slug.jpg
 Oracle:{5}: At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn.

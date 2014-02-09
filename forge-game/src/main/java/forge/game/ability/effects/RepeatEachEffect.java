@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -88,9 +89,13 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RepeatPlayers")) {
             final List<Player> repeatPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
-            boolean optional = false;
-            if (sa.hasParam("RepeatOptionalForEachPlayer")) {
-                optional = true;
+            boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
+            if (sa.hasParam("StartingWithActivator")) {
+                int size = repeatPlayers.size();
+                Player activator = sa.getActivatingPlayer();
+                while (!activator.equals(Iterables.getFirst(repeatPlayers, null))) {
+                    repeatPlayers.add(size - 1, repeatPlayers.remove(0));
+                }
             }
             for (Player p : repeatPlayers) {
                 if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {

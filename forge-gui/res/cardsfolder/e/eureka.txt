@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Sorcery
 A:SP$ Repeat | Cost$ 2 G G | RepeatSubAbility$ ResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBChangeZoneAll | StackDescription$ SpellDescription | SpellDescription$ Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
 SVar:ResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
-SVar:DBRepeatChoice:DB$ RepeatEach | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
+SVar:DBRepeatChoice:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
 SVar:DBChoice:DB$ GenericChoice | Choices$ DBCheckHand,DBNoChange | Defined$ Player.IsRemembered
 SVar:DBCheckHand:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose | SpellDescription$ Choose a permanent to put onto the battlefield
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.IsNotRemembered+RememberedPlayerCtrl | ChoiceZone$ Hand | Amount$ 1 | RememberChosen$ True | Mandatory$ True | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ GE1
