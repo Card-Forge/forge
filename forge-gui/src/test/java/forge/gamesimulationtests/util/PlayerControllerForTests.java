@@ -6,6 +6,8 @@ import com.google.common.collect.Multimap;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
+import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameWinAi;
@@ -96,10 +98,11 @@ public class PlayerControllerForTests extends PlayerController {
 			HumanPlay.playSpellAbilityNoStack(player, effectSA, !mayChoseNewTargets);
 			return;
 		}
+		SpellAbilityAi sai = SpellApiToAi.Converter.get(effectSA.getApi());
 		if (
-				(effectSA.getHostCard().getName().equals("Nefarious Lich") && effectSA.getApi().getAi() instanceof DrawAi) ||
-				(effectSA.getHostCard().getName().equals("Laboratory Maniac") && effectSA.getApi().getAi() instanceof GameWinAi) ||
-				(effectSA.getHostCard().getName().equals("Nefarious Lich") && effectSA.getApi().getAi() instanceof ChangeZoneAi)
+				(effectSA.getHostCard().getName().equals("Nefarious Lich") && sai instanceof DrawAi) ||
+				(effectSA.getHostCard().getName().equals("Laboratory Maniac") && sai instanceof GameWinAi) ||
+				(effectSA.getHostCard().getName().equals("Nefarious Lich") && sai instanceof ChangeZoneAi)
 		) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
 			HumanPlay.playSpellAbilityNoStack(player, effectSA, !mayChoseNewTargets);
 			return;

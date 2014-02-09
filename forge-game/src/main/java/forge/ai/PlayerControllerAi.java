@@ -134,7 +134,7 @@ public class PlayerControllerAi extends PlayerController {
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return api.getAi().chooseSingleEntity(player, sa, options, isOptional, targetedPlayer);
+        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, options, isOptional, targetedPlayer);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class PlayerControllerAi extends PlayerController {
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return api.getAi().chooseSingleSpellAbility(player, sa, spells);
+        return SpellApiToAi.Converter.get(api).chooseSingleSpellAbility(player, sa, spells);
     }
 
     @Override

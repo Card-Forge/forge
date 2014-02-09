@@ -4,6 +4,7 @@ import forge.ai.AiController;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -18,7 +19,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
-            return ((AbilitySub) trigsa).getApi().getAi().chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
+            return SpellApiToAi.Converter.get(((AbilitySub) trigsa).getApi()).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
         } else {
             return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
         }

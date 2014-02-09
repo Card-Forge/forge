@@ -3,6 +3,7 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -28,6 +29,7 @@ import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -630,7 +632,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
-                    if (!sub.getApi().getAi().chkDrawbackWithSubs(ai, sub)) {
+                    if (!SpellApiToAi.Converter.get(sub.getApi()).chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                     needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
@@ -688,7 +690,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null) {
-                    if (!sub.getApi().getAi().chkDrawbackWithSubs(ai, sub)) {
+                    if (!SpellApiToAi.Converter.get(sub.getApi()).chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                 }

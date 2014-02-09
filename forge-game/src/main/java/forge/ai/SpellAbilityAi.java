@@ -2,6 +2,7 @@ package forge.ai;
 
 
 import com.google.common.collect.Iterables;
+
 import forge.game.GameEntity;
 import forge.game.ability.SaTargetRoutines;
 import forge.game.card.Card;
@@ -136,7 +137,7 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
      */
     public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        return ab.getApi().getAi().chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
+        return SpellApiToAi.Converter.get(ab.getApi()).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
     }
     
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {

@@ -616,7 +616,7 @@ public class AiController {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
         if( sa.getApi() != null ) {
-            boolean canPlay = sa.getApi().getAi().canPlayAIWithSubs(player, sa);
+            boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
             if(!canPlay) 
                 return AiPlayDecision.CantPlayAi;
         }
@@ -876,7 +876,7 @@ public class AiController {
             throw new IllegalArgumentException(exMsg);
 
         } else 
-            return api.getAi().confirmAction(player, sa, mode, message);
+            return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
     }
 
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
@@ -940,9 +940,9 @@ public class AiController {
         {
             boolean chance = false;
             if (withoutPayingManaCost) {
-                chance = spell.getApi().getAi().doTriggerNoCostWithSubs(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerNoCostWithSubs(player, spell, mandatory);
             } else {
-                chance = spell.getApi().getAi().doTriggerAI(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
             }
             if (!chance)
                 return AiPlayDecision.TargetingFailed;
@@ -1148,7 +1148,7 @@ public class AiController {
     public boolean doTrigger(SpellAbility spell, boolean mandatory) {
         
         if ( spell.getApi() != null )
-            return spell.getApi().getAi().doTriggerAI(player, spell, mandatory);
+            return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if ( spell instanceof WrappedAbility )
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
         

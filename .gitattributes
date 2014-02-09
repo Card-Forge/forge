@@ -139,6 +139,7 @@ forge-game/src/main/java/forge/ai/ComputerUtilMana.java -text
 forge-game/src/main/java/forge/ai/LobbyPlayerAi.java -text
 forge-game/src/main/java/forge/ai/PlayerControllerAi.java -text
 forge-game/src/main/java/forge/ai/SpellAbilityAi.java -text
+forge-game/src/main/java/forge/ai/SpellApiToAi.java -text
 forge-game/src/main/java/forge/ai/ability/AddPhaseAi.java -text
 forge-game/src/main/java/forge/ai/ability/AddTurnAi.java svneol=native#text/plain
 forge-game/src/main/java/forge/ai/ability/AlwaysPlayAi.java -text

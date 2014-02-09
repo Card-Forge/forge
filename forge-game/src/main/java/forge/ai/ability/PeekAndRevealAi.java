@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilityStatic;
@@ -32,7 +33,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         AbilitySub subAb = sa.getSubAbility();
-        return subAb != null && subAb.getApi().getAi().chkDrawbackWithSubs(player, subAb);
+        return subAb != null && SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(player, subAb);
     }
 
 }

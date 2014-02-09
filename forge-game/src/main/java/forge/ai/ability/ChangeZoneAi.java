@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -307,7 +308,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || subAb.getApi().getAi().chkDrawbackWithSubs(ai, subAb);
+        return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
     }
 
     /**
@@ -645,7 +646,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        chance &= subAb == null || subAb.getApi().getAi().chkDrawbackWithSubs(ai, subAb);
+        chance &= subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
 
         return chance;
     }
