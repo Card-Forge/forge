@@ -2770,6 +2770,7 @@ forge-gui/res/cardsfolder/c/contagion_engine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/contagious_nim.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/contaminated_bond.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/contaminated_ground.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/contamination.txt -text
 forge-gui/res/cardsfolder/c/contemplation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/contempt.txt -text
 forge-gui/res/cardsfolder/c/contested_cliffs.txt -text
