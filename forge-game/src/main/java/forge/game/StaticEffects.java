@@ -20,6 +20,7 @@ package forge.game;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 
@@ -223,7 +224,7 @@ public class StaticEffects {
                 for (final StaticAbility stA : affectedCard.getStaticAbilities()) {
                     stA.setTemporarilySuppressed(false);
                 }
-                for (final CardTraitBase rE : affectedCard.getReplacementEffects()) {
+                for (final ReplacementEffect rE : affectedCard.getReplacementEffects()) {
                     rE.setTemporarilySuppressed(false);
                 }
             }
