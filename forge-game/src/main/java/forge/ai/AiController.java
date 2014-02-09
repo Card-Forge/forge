@@ -960,7 +960,7 @@ public class AiController {
                 if (max >= 3 && !result.contains(smallest)) {
                     result.add(smallest);
                 }
-
+                break;
             case MultiplePiles:
                 // Whims of the Fates {all, 0, 0}
                 result.addAll(pool);
