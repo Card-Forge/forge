@@ -6,6 +6,7 @@ Border=White
 Code2=S2K
 Type=Starter
 Foil=OldStyle
+FoilAlwaysInCommonSlot=False
 
 [cards]
 C Angelic Blessing

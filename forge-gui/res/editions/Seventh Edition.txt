@@ -8,6 +8,7 @@ Border=White
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 Foil=OldStyle
+FoilAlwaysInCommonSlot=False
 
 [cards]
 U AEther Flash

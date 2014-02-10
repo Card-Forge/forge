@@ -3,7 +3,6 @@ Code=DDK
 Date=2013-03-15
 Name=Duel Decks: Sorin vs. Tibalt
 Type=Duel_Decks
-FoilAlwaysInCommonSlot=True
 
 [cards]
 C Absorb Vis

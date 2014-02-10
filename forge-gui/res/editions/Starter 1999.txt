@@ -6,6 +6,7 @@ Border=White
 Code2=ST
 Type=Starter
 Foil=OldStyle
+FoilAlwaysInCommonSlot=False
 
 [cards]
 R Abyssal Horror

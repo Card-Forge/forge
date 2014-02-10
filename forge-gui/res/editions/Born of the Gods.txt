@@ -5,7 +5,6 @@ Name=Born of the Gods
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
-FoilAlwaysInCommonSlot=True
 
 [cards]
 U Acolyte's Reward

@@ -2,7 +2,6 @@
 Code=CM1
 Date=2012-11-02
 Name=Commander's Arsenal
-FoilAlwaysInCommonSlot=True
 
 [cards]
 R Chaos Warp

@@ -4,7 +4,6 @@ Date=2013-11-01
 Name=Commander 2013
 Code2=C13
 Type=Other
-FoilAlwaysInCommonSlot=True
 
 [cards]
 R Act of Authority

@@ -6,6 +6,7 @@ Code2=BOK
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+FoilAlwaysInCommonSlot=False
 
 [cards]
 C Akki Blizzard-Herder

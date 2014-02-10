@@ -6,7 +6,6 @@ Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic
 FoilChanceInBooster=100
-FoilAlwaysInCommonSlot=True
 
 [cards]
 R Adarkar Valkyrie
