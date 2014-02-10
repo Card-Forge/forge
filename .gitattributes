@@ -2336,6 +2336,7 @@ forge-gui/res/cardsfolder/c/celestial_ancient.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/celestial_archon.txt -text
 forge-gui/res/cardsfolder/c/celestial_colonnade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/celestial_crusader.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/celestial_dawn.txt -text
 forge-gui/res/cardsfolder/c/celestial_flare.txt -text
 forge-gui/res/cardsfolder/c/celestial_force.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/celestial_gatekeeper.txt svneol=native#text/plain

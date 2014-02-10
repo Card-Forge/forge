@@ -1,0 +1,12 @@
+Name:Celestial Dawn
+ManaCost:1 W W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ Plains | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Lands you control are Plains.
+S:Mode$ Continuous | Affected$ Card.YouOwn+nonLand | SetColor$ White | AffectedZone$ Hand,Library,Graveyard,Exile,Command | Description$ Nonland cards you own that aren't on the battlefield, spells you control, and nonland permanents you control are white.
+S:Mode$ Continuous | Affected$ Card.YouCtrl+nonLand | SetColor$ White | AffectedZone$ Battlefield,Stack
+S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Additive | WhiteConversion$ All | Description$ You may spend white mana as though it were mana of any color.
+S:Mode$ Continuous | Affected$ You | ManaColorConversion$ Restrictive | BlueConversion$ Colorless | BlackConversion$ Colorless | RedConversion$ Colorless | GreenConversion$ Colorless | ColorlessConversion$ Colorless | Description$ You may spend other mana only as though it were colorless mana.
+SVar:NonStackingEffect:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_dawn.jpg
+Oracle:Lands you control are Plains.\nNonland cards you own that aren't on the battlefield, spells you control, and nonland permanents you control are white.\nYou may spend white mana as though it were mana of any color. You may spend other mana only as though it were colorless mana.

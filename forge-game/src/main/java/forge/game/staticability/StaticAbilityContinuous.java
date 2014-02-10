@@ -360,12 +360,7 @@ public class StaticAbilityContinuous {
                                 convertByte |= MagicColor.fromName(convertColor);
                             }
                         }
-
-                        // Celestial Dawn won't be 100% correct with this implementation
-                        // Since all the additives need to happen first
-                        // And all the restrictions need to happen second
-                        // But this would mostly work unless a conflicting mana conversion card
-                        // Is also out in play CD + Mycosynth Lattice depending on timestamps might be incorrect
+                        // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
                         pool.adjustColorReplacement(MagicColor.fromName(c), convertByte, additive);
                     }
                 }

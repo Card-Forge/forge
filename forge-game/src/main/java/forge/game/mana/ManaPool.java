@@ -142,11 +142,7 @@ public class ManaPool {
      * <p>
      * getManaFrom.
      * </p>
-     * 
-     * @param pool
-     *            a {@link java.util.ArrayList} object.
-     * @param manaStr
-     *            a {@link java.lang.String} object.
+     *
      * @param saBeingPaidFor
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link forge.game.mana.Mana} object.
@@ -239,10 +235,8 @@ public class ManaPool {
      * <p>
      * removeManaFrom.
      * </p>
-     * 
-     * @param pool
-     *            a {@link java.util.ArrayList} object.
-     * @param choice
+     *
+     * @param mana
      *            a {@link forge.game.mana.Mana} object.
      */
     private void removeMana(final Mana mana) {
@@ -276,8 +270,6 @@ public class ManaPool {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param manaCost
      *            a {@link forge.game.mana.ManaCostBeingPaid} object.
-     * @param saPayment
-     *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
      */
     public final void payManaFromAbility(final SpellAbility saPaidFor, ManaCostBeingPaid manaCost, final SpellAbility saPayment) {
@@ -416,8 +408,10 @@ public class ManaPool {
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
     
-    
+    // Conversion matrix ORs byte values to make mana more payable
+    // Restrictive matrix ANDs byte values to make mana less payable
     private final byte[] colorConversionMatrix = new byte[MagicColor.WUBRG.length + 1];
+    private final byte[] colorRestrictionMatrix = new byte[MagicColor.WUBRG.length + 1];
     private static final byte[] identityMatrix = { MagicColor.WHITE, MagicColor.BLUE, MagicColor.BLACK, MagicColor.RED, MagicColor.GREEN, 0 };
 
     public void adjustColorReplacement(byte originalColor, byte replacementColor, boolean additive) {
@@ -427,17 +421,25 @@ public class ManaPool {
         if (additive)
             colorConversionMatrix[rowIdx] |= replacementColor;
         else
-            colorConversionMatrix[rowIdx] &= replacementColor;
+            colorRestrictionMatrix[rowIdx] &= replacementColor;
     }
     
     public void restoreColorReplacements() {
         for(int i = 0; i < colorConversionMatrix.length; i++)
             colorConversionMatrix[i] = identityMatrix[i];
+
+        for(int i = 0; i < colorRestrictionMatrix.length; i++)
+            colorRestrictionMatrix[i] = MagicColor.ALL_COLORS;
     }
 
     public byte getPossibleColorUses(byte color) {
+        // Take the current conversion value, AND with restrictions to get mana usage
         int rowIdx = MagicColor.getIndexOfFirstColor(color);
-        return colorConversionMatrix[rowIdx < 0 ? identityMatrix.length - 1 : rowIdx];
+        int matrixIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
+
+        byte colorUse = colorConversionMatrix[matrixIdx];
+        colorUse &= colorRestrictionMatrix[matrixIdx];
+        return colorUse;
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
