@@ -108,26 +108,11 @@ public class RegisteredPlayer {
     }
 
 
-    public static RegisteredPlayer forVanguard(final Deck deck, final PaperCard avatar) {
-        RegisteredPlayer start = new RegisteredPlayer(deck);
-        start.setStartingLife(start.getStartingLife() + avatar.getRules().getLife());
-        start.setStartingHand(start.getStartingHand() + avatar.getRules().getHand());
-        start.addCardsInCommand(avatar);
-        return start;
-    }
-
-
     public static RegisteredPlayer forArchenemy(final Deck deck, final Iterable<PaperCard> schemes) {
         RegisteredPlayer start = new RegisteredPlayer(deck);
         start.schemes = schemes;
         return start;
     }
-    
-    /*public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<PaperCard> planes) {
-        RegisteredPlayer start = new RegisteredPlayer(deck);
-        start.planes = planes;
-        return start;
-    }*/
     
     public static RegisteredPlayer forCommander(final Deck deck) {
         RegisteredPlayer start = new RegisteredPlayer(deck);

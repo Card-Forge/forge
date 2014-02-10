@@ -23,9 +23,6 @@ import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
 
-//import forge.gui.home.variant.VSubmenuPlanechase;
-//import forge.gui.home.variant.VSubmenuVanguard;
-
 /**
  * These are the identifiers for tabs found in the drag layout.
  * These IDs are used in the save XML and card layouts.
@@ -66,8 +63,6 @@ public enum EDocID { /** */
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
     HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE), /** */
     HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE), /** */
-  //HOME_VANGUARD (VSubmenuVanguard.SINGLETON_INSTANCE), /** */
-  //HOME_PLANECHASE (VSubmenuPlanechase.SINGLETON_INSTANCE), /** */
     HOME_RELEASE_NOTES (VSubmenuReleaseNotes.SINGLETON_INSTANCE),
 
     REPORT_MESSAGE (VPrompt.SINGLETON_INSTANCE), /** */

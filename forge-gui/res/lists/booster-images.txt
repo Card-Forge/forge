@@ -220,6 +220,11 @@ http://www.cardforge.org/fpics/products/boosters/SOM_3.jpg
 http://www.cardforge.org/fpics/products/boosters/SOM_4.jpg
 http://www.cardforge.org/fpics/products/boosters/SOM_5.jpg
 http://www.cardforge.org/fpics/products/boosters/STH.jpg
+http://www.cardforge.org/fpics/products/boosters/THS_1.jpg
+http://www.cardforge.org/fpics/products/boosters/THS_2.jpg
+http://www.cardforge.org/fpics/products/boosters/THS_3.jpg
+http://www.cardforge.org/fpics/products/boosters/THS_4.jpg
+http://www.cardforge.org/fpics/products/boosters/THS_5.jpg
 http://www.cardforge.org/fpics/products/boosters/TMP_1.jpg
 http://www.cardforge.org/fpics/products/boosters/TMP_2.jpg
 http://www.cardforge.org/fpics/products/boosters/TMP_3.jpg
