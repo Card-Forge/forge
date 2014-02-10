@@ -30,7 +30,6 @@ import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IItemReader;
-import forge.util.TextUtil;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
@@ -287,15 +286,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
             }
-
-            // Internally foil chance in booster is represented with 1:10000 precision
-            // to represent ratios like 1:6 more accurately (16.67%).
-            String foilChanceInBoosterStr = section.get("FoilChanceInBooster", "1:6");
-            String[] foilChanceElems = TextUtil.split(foilChanceInBoosterStr, ':');
-            int numerator = Integer.parseInt(foilChanceElems[0]);
-            int denominator = Integer.parseInt(foilChanceElems[1]);
-            res.foilChanceInBooster = Math.round((float)numerator / denominator * 10000);
-            
+            res.foilChanceInBooster = section.getInt("FoilChanceInBooster", 2143); // uses 1:10000 precision, 21.43% is roughly every 70th card foiled
             res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", false);
             
             return res;
