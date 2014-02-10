@@ -17,10 +17,15 @@
  */
 package forge.util;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -111,6 +116,38 @@ public class FileSection {
 
     public boolean contains(String keyName) { 
         return lines.containsKey(keyName);
+    }
+
+    /**
+     * Gets the double.
+     *
+     * @param fieldName the field name
+     * @return the int
+     */
+    public double getDouble(final String fieldName) {
+        return this.getDouble(fieldName, 0.0F);
+    }
+
+    /**
+     * Gets the double.
+     *
+     * @param fieldName the field name
+     * @param defaultValue the default value
+     * @return the int
+     */
+    public double getDouble(final String fieldName, final double defaultValue) {
+        try {
+            if (this.get(fieldName) == null) {
+                return defaultValue;
+            }
+
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+            Number number = format.parse(this.get(fieldName));
+
+            return number.doubleValue();
+        } catch (final NumberFormatException | ParseException ex) {
+            return defaultValue;
+        }
     }
 
     /**
