@@ -31,6 +31,8 @@ Warping Wurm
 Vortex Elemental
 Contamination
 Fearsome Temper
+Celestial Dawn
+False Dawn
 
 
 ------------
