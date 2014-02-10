@@ -99,7 +99,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String alias = null;
     private boolean whiteBorder = false;
     private FoilType foilType = FoilType.NOT_SUPPORTED;
-    private int foilChanceInBooster = 0;
+    private double foilChanceInBooster = 0;
     private boolean foilAlwaysInCommonSlot = false;
     private final CardInSet[] cards;
     
@@ -151,7 +151,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
     public FoilType getFoilType() { return foilType; }
-    public int getFoilChanceInBooster() { return foilChanceInBooster; }
+    public double getFoilChanceInBooster() { return foilChanceInBooster; }
     public boolean getFoilAlwaysInCommonSlot() { return foilAlwaysInCommonSlot; }
     public CardInSet[] getCards() { return cards; }
 
@@ -286,7 +286,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
             }
-            res.foilChanceInBooster = section.getInt("FoilChanceInBooster", 2143); // uses 1:10000 precision, 21.43% is roughly every 70th card foiled
+            res.foilChanceInBooster = section.getInt("FoilChanceInBooster", 2143) / 10000.0F;
+            System.out.println("chance = " + res.foilChanceInBooster);
             res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", false);
             
             return res;
