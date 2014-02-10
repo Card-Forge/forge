@@ -1,6 +1,6 @@
 package forge.gui.home.variant;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -85,7 +85,7 @@ public enum CSubmenuCommander implements ICDoc {
             }
         });
 
-        VSubmenuCommander.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
+        VSubmenuCommander.SINGLETON_INSTANCE.getLblEditor().setCommand(new UiCommand() {
             private static final long serialVersionUID = -4548064747843903896L;
 
             @Override
@@ -154,7 +154,7 @@ public enum CSubmenuCommander implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

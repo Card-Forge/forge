@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -32,7 +32,7 @@ public class RegenerateAllEffect extends SpellAbilityEffect {
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {
-            final Command untilEOT = new Command() {
+            final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = 259368227093961103L;
 
                 @Override

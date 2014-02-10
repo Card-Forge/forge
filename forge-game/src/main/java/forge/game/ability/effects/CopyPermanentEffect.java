@@ -4,7 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.Command;
+import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
@@ -279,7 +279,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         sac.setTrigger(true);
                         sac.setDescription(location + " - " + source);
 
-                        final Command atEOT = new Command() {
+                        final GameCommand atEOT = new GameCommand() {
                             private static final long serialVersionUID = -4184510100801568140L;
     
                             @Override

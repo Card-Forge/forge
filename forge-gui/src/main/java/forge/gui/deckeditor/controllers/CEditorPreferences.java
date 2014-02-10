@@ -1,6 +1,6 @@
 package forge.gui.deckeditor.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
@@ -24,7 +24,7 @@ public enum CEditorPreferences implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

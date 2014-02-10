@@ -1,6 +1,6 @@
 package forge.gui.home.sanctioned;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.deck.*;
@@ -46,7 +46,7 @@ public enum CSubmenuSealed implements ICDoc {
 
     private Map<String, Deck> aiDecks;
 
-    private final Command cmdDeckSelect = new Command() {
+    private final UiCommand cmdDeckSelect = new UiCommand() {
         @Override
         public void run() {
             VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
@@ -62,7 +62,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        view.getBtnBuildDeck().setCommand(new Command() {
+        view.getBtnBuildDeck().setCommand(new UiCommand() {
             @Override
             public void run() {
                 setupSealed();
@@ -76,7 +76,7 @@ public enum CSubmenuSealed implements ICDoc {
             }
         });
 
-        view.getBtnDirections().setCommand(new Command() {
+        view.getBtnDirections().setCommand(new UiCommand() {
             @Override
             public void run() {
                 view.showDirections();
@@ -225,7 +225,7 @@ public enum CSubmenuSealed implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

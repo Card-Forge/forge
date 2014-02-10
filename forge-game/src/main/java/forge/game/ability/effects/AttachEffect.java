@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -131,7 +131,7 @@ public class AttachEffect extends SpellAbilityEffect {
             card.clearTriggers(); // not sure if cleartriggers is needed?
         }
 
-        final Command onLeavesPlay = new Command() {
+        final GameCommand onLeavesPlay = new GameCommand() {
             private static final long serialVersionUID = -639204333673364477L;
 
             @Override

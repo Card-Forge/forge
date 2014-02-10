@@ -1,6 +1,6 @@
 package forge.gui.home.gauntlet;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -61,9 +61,9 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     public void initialize() {
         view.getBtnStart().addActionListener(actStartGame);
 
-        view.getGauntletLister().setCmdDelete(new Command() { @Override
+        view.getGauntletLister().setCmdDelete(new UiCommand() { @Override
             public void run() { enableStartButton(); } });
-        view.getGauntletLister().setCmdSelect(new Command() { @Override
+        view.getGauntletLister().setCmdSelect(new UiCommand() { @Override
             public void run() { enableStartButton(); } });
     }
 
@@ -116,8 +116,8 @@ public enum CSubmenuGauntletLoad implements ICDoc {
      */
     @SuppressWarnings("serial")
     @Override
-    public Command getCommandOnSelect() {
-        return new Command() {
+    public UiCommand getCommandOnSelect() {
+        return new UiCommand() {
             @Override
             public void run() {
                 updateData();

@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -217,7 +217,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
                 }
             }
 
-            final Command unanimate = new Command() {
+            final GameCommand unanimate = new GameCommand() {
                 private static final long serialVersionUID = -5861759814760561373L;
 
                 @Override

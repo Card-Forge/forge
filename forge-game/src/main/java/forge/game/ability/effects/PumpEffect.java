@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -52,7 +52,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
-            final Command untilEOT = new Command() {
+            final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -42244224L;
 
                 @Override
@@ -103,7 +103,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
-            final Command untilEOT = new Command() {
+            final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -32453460L;
 
                 @Override

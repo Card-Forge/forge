@@ -1,6 +1,6 @@
 package forge.gui.deckeditor.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 
 /** 
@@ -22,7 +22,7 @@ public enum CCardCatalog implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

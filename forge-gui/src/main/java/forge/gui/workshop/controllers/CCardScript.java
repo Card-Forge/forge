@@ -1,6 +1,6 @@
 package forge.gui.workshop.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -153,7 +153,7 @@ public enum CCardScript implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package forge.gui.home;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.FNetOverlay;
 import forge.gui.framework.EDocID;
@@ -116,7 +116,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
      * @see forge.view.home.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.DeckProxy;
@@ -24,7 +24,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final Command cmdDeckSelect = new Command() {
+    private final UiCommand cmdDeckSelect = new UiCommand() {
         @Override
         public void run() {
             DeckProxy deck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
@@ -38,7 +38,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         }
     };
 
-    private final Command cmdDeckDelete = new Command() {
+    private final UiCommand cmdDeckDelete = new UiCommand() {
         @Override
         public void run() {
             update();
@@ -50,7 +50,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
+        VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new UiCommand() {
             @Override
             public void run() {
                 if (!SSubmenuQuestUtil.checkActiveQuest("Create a Deck.")) {
@@ -103,9 +103,9 @@ public enum CSubmenuQuestDecks implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         final QuestController qc = Singletons.getModel().getQuest();
-        return new Command() {
+        return new UiCommand() {
             @Override
             public void run() {
                 if (qc.getAchievements() == null) {

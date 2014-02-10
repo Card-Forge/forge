@@ -1,7 +1,7 @@
 package forge.gui.home.sanctioned;
 
 import com.google.common.collect.Iterables;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -260,7 +260,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -38,10 +38,10 @@ public enum CSubmenuQuestData implements ICDoc {
     private final List<String> customFormatCodes = new ArrayList<String>();
     private final List<String> customPrizeFormatCodes = new ArrayList<String>();
 
-    private final Command cmdQuestSelect = new Command() { @Override
+    private final UiCommand cmdQuestSelect = new UiCommand() { @Override
         public void run() { changeQuest(); } };
 
-    private final Command cmdQuestUpdate = new Command() { @Override
+    private final UiCommand cmdQuestUpdate = new UiCommand() { @Override
         public void run() { update(); } };
 
     /* (non-Javadoc)
@@ -50,7 +50,7 @@ public enum CSubmenuQuestData implements ICDoc {
     @Override
     public void initialize() {
         view.getBtnEmbark().setCommand(
-                new Command() { @Override public void run() { newQuest(); } });
+                new UiCommand() { @Override public void run() { newQuest(); } });
 
         // disable the very powerful sets -- they can be unlocked later for a high price
         final List<String> unselectableSets = new ArrayList<String>();
@@ -61,7 +61,7 @@ public enum CSubmenuQuestData implements ICDoc {
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 
-        view.getBtnCustomFormat().setCommand(new Command() { @Override public void run() {
+        view.getBtnCustomFormat().setCommand(new UiCommand() { @Override public void run() {
             final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
             dialog.setOkCallback(new Runnable() {
                 @Override
@@ -72,7 +72,7 @@ public enum CSubmenuQuestData implements ICDoc {
             });
         } });
 
-        view.getBtnPrizeCustomFormat().setCommand(new Command() { @Override public void run() {
+        view.getBtnPrizeCustomFormat().setCommand(new UiCommand() { @Override public void run() {
             final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
             dialog.setOkCallback(new Runnable() {
                 @Override
@@ -292,7 +292,7 @@ public enum CSubmenuQuestData implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

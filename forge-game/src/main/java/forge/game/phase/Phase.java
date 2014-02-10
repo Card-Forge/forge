@@ -18,7 +18,7 @@
 package forge.game.phase;
 
 import com.google.common.collect.Lists;
-import forge.Command;
+import forge.GameCommand;
 import forge.game.player.Player;
 
 import java.util.ArrayList;
@@ -45,16 +45,16 @@ public class Phase implements java.io.Serializable {
     }
 
     /** The at. */
-    protected final List<Command> at = new ArrayList<Command>();
+    protected final List<GameCommand> at = new ArrayList<GameCommand>();
     /**
      * <p>
      * Add a hardcoded trigger that will execute "at <phase>".
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addAt(final Command c) {
+    public final void addAt(final GameCommand c) {
         this.at.add(0, c);
     }
 
@@ -68,7 +68,7 @@ public class Phase implements java.io.Serializable {
     }
 
     /** The until. */
-    private final List<Command> until = new ArrayList<Command>();
+    private final List<GameCommand> until = new ArrayList<GameCommand>();
 
     /**
      * <p>
@@ -76,9 +76,9 @@ public class Phase implements java.io.Serializable {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addUntil(final Command c) {
+    public final void addUntil(final GameCommand c) {
         this.until.add(0, c);
     }
 
@@ -92,14 +92,14 @@ public class Phase implements java.io.Serializable {
     }
 
     /** The until map. */
-    private final HashMap<Player, List<Command>> untilMap = new HashMap<Player, List<Command>>();
+    private final HashMap<Player, List<GameCommand>> untilMap = new HashMap<Player, List<GameCommand>>();
 
     /**
      * <p>
      * Add a Command that will terminate an effect with "until <Player's> next <phase>".
      * Use cleanup phase to terminate an effect with "until <Player's> next turn"
      */
-    public final void addUntil(Player p, final Command c) {
+    public final void addUntil(Player p, final GameCommand c) {
         if (this.untilMap.containsKey(p)) {
             this.untilMap.get(p).add(0, c);
         } else {
@@ -129,7 +129,7 @@ public class Phase implements java.io.Serializable {
      * @param c
      *            a {@link forge.CommandList} object.
      */
-    protected void execute(final List<Command> c) {
+    protected void execute(final List<GameCommand> c) {
         final int length = c.size();
 
         for (int i = 0; i < length; i++) {

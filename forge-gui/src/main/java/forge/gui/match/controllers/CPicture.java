@@ -17,7 +17,7 @@
  */
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
@@ -99,7 +99,7 @@ public enum CPicture implements ICDoc {
     }
 
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

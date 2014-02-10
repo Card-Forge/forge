@@ -1,6 +1,6 @@
 package forge.gui.home.settings;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.error.BugReporter;
 import forge.gui.ImportDialog;
 import forge.gui.download.GuiDownloadPicturesLQ;
@@ -21,21 +21,21 @@ import javax.swing.*;
 public enum CSubmenuDownloaders implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final Command cmdLicensing = new Command() { @Override
+    private final UiCommand cmdLicensing = new UiCommand() { @Override
         public void run() { VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing(); } };
-    private final Command cmdPicDownload  = new Command() { @Override
+    private final UiCommand cmdPicDownload  = new UiCommand() { @Override
         public void run() { new GuiDownloadPicturesLQ(); } };
-    private final Command cmdSetDownload = new Command() { @Override
+    private final UiCommand cmdSetDownload = new UiCommand() { @Override
         public void run() { new GuiDownloadSetPicturesLQ(); } };
-    private final Command cmdQuestImages = new Command() { @Override
+    private final UiCommand cmdQuestImages = new UiCommand() { @Override
         public void run() { new GuiDownloadQuestImages(); } };
-    private final Command cmdDownloadPrices = new Command() { @Override
+    private final UiCommand cmdDownloadPrices = new UiCommand() { @Override
         public void run() { new GuiDownloadPrices(); } };
-    private final Command cmdHowToPlay = new Command() { @Override
+    private final UiCommand cmdHowToPlay = new UiCommand() { @Override
         public void run() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
-    private final Command cmdImportPictures = new Command() { @Override
+    private final UiCommand cmdImportPictures = new UiCommand() { @Override
         public void run() { new ImportDialog(null, null); } };
-    private final Command cmdReportBug = new Command() { @Override
+    private final UiCommand cmdReportBug = new UiCommand() { @Override
         public void run() { BugReporter.reportBug(null); }
     };
 
@@ -72,7 +72,7 @@ public enum CSubmenuDownloaders implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

@@ -1,6 +1,6 @@
 package forge.gui.home.gauntlet;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -115,8 +115,8 @@ public enum CSubmenuGauntletContests implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
-        return new Command() {
+    public UiCommand getCommandOnSelect() {
+        return new UiCommand() {
             @Override
             public void run() {
                 updateData();

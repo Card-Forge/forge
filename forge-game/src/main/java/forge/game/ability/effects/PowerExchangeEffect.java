@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -63,7 +63,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
 
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
-            final Command untilEOT = new Command() {
+            final GameCommand untilEOT = new GameCommand() {
 
                 private static final long serialVersionUID = -4890579038956651232L;
 

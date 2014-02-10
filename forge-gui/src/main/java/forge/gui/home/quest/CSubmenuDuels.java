@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
@@ -33,19 +33,19 @@ public enum CSubmenuDuels implements ICDoc {
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
         view.getBtnSpellShop().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.showBazaar(); } });
 
         view.getBtnTravel().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.travelWorld(); CSubmenuDuels.this.update(); } });
 
         view.getBtnUnlock().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuDuels.this.update(); } });
 
         view.getBtnStart().addActionListener(
@@ -138,9 +138,9 @@ public enum CSubmenuDuels implements ICDoc {
      */
     @SuppressWarnings("serial")
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         final QuestController qc = Singletons.getModel().getQuest();
-        return new Command() {
+        return new UiCommand() {
             @Override
             public void run() {
                 if (qc.getAchievements() == null) {

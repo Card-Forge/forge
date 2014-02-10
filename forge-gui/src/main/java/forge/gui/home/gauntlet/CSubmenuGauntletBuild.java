@@ -1,6 +1,6 @@
 package forge.gui.home.gauntlet;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.deck.Deck;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
@@ -50,25 +50,25 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     //private final KeyAdapter kadSearch = new KeyAdapter() { @Override
         //public void keyPressed(final KeyEvent e) { search(); } };
 
-    private final Command cmdAddDeck = new Command() { @Override
+    private final UiCommand cmdAddDeck = new UiCommand() { @Override
         public void run() { addDeck(); } };
 
-    private final Command cmdRemoveDeck = new Command() { @Override
+    private final UiCommand cmdRemoveDeck = new UiCommand() { @Override
         public void run() { removeDeck(); } };
 
-    private final Command cmdDeckUp = new Command() { @Override
+    private final UiCommand cmdDeckUp = new UiCommand() { @Override
         public void run() { deckUp(); } };
 
-    private final Command cmdDeckDown = new Command() { @Override
+    private final UiCommand cmdDeckDown = new UiCommand() { @Override
         public void run() { deckDown(); } };
 
-    private final Command cmdSave = new Command() { @Override
+    private final UiCommand cmdSave = new UiCommand() { @Override
         public void run() { saveGauntlet(); } };
 
-    private final Command cmdNew = new Command() { @Override
+    private final UiCommand cmdNew = new UiCommand() { @Override
         public void run() { newGauntlet(); } };
 
-    private final Command cmdOpen = new Command() { @Override
+    private final UiCommand cmdOpen = new UiCommand() { @Override
         public void run() { openGauntlet(); } };
 
     /* (non-Javadoc)
@@ -105,7 +105,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

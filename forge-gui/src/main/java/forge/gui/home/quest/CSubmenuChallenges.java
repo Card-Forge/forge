@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
@@ -38,19 +38,19 @@ public enum CSubmenuChallenges implements ICDoc {
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
 
         view.getBtnSpellShop().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.showBazaar(); } });
 
         view.getBtnUnlock().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
 
         view.getBtnTravel().setCommand(
-                new Command() { @Override
+                new UiCommand() { @Override
                     public void run() { SSubmenuQuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
 
         view.getBtnStart().addActionListener(
@@ -58,7 +58,7 @@ public enum CSubmenuChallenges implements ICDoc {
             public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
 
         ((FLabel) view.getLblZep()).setCommand(
-                new Command() {
+                new UiCommand() {
                     @Override
                     public void run() {
                         if (!SSubmenuQuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
@@ -180,9 +180,9 @@ public enum CSubmenuChallenges implements ICDoc {
      */
     @SuppressWarnings("serial")
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         final QuestController qc = Singletons.getModel().getQuest();
-        return new Command() {
+        return new UiCommand() {
             @Override
             public void run() {
                 if (qc.getAchievements() == null) {

@@ -1,6 +1,6 @@
 package forge.gui.workshop.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
@@ -28,7 +28,7 @@ public enum CWorkshopCatalog implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

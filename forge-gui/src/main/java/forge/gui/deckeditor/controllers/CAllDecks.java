@@ -1,6 +1,6 @@
 package forge.gui.deckeditor.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.views.VAllDecks;
@@ -22,7 +22,7 @@ public enum CAllDecks implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

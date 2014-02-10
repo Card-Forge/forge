@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -63,7 +63,7 @@ public class DebuffAllEffect extends SpellAbilityEffect {
                 }
             }
             if (!sa.hasParam("Permanent")) {
-                game.getEndOfTurn().addUntil(new Command() {
+                game.getEndOfTurn().addUntil(new GameCommand() {
                     private static final long serialVersionUID = 7486231071095628674L;
 
                     @Override

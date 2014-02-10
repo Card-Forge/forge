@@ -246,7 +246,7 @@ forge-game/.settings/org.eclipse.core.resources.prefs -text
 forge-game/.settings/org.eclipse.jdt.core.prefs -text
 forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
-forge-game/src/main/java/forge/Command.java svneol=native#text/plain
+forge-game/src/main/java/forge/GameCommand.java svneol=native#text/plain
 forge-game/src/main/java/forge/ImageKeys.java -text
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/Game.java -text
@@ -15401,6 +15401,7 @@ forge-gui/src/main/java/forge/FThreads.java -text
 forge-gui/src/main/java/forge/ImageCache.java svneol=native#text/plain
 forge-gui/src/main/java/forge/ImageLoader.java -text
 forge-gui/src/main/java/forge/Singletons.java svneol=native#text/plain
+forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControl.java -text
 forge-gui/src/main/java/forge/control/FControlGameEventHandler.java -text

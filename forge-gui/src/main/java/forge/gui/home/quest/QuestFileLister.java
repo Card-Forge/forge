@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
@@ -30,7 +30,7 @@ public class QuestFileLister extends JPanel {
     private FSkin.SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
-    private Command cmdRowSelect, cmdRowDelete, cmdRowEdit;
+    private UiCommand cmdRowSelect, cmdRowDelete, cmdRowEdit;
     private final Color clrDefault;
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
@@ -273,18 +273,18 @@ public class QuestFileLister extends JPanel {
         return false;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on row select. */
-    public void setSelectCommand(Command c0) {
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    public void setSelectCommand(UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on row edit. */
-    public void setEditCommand(Command c0) {
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row edit. */
+    public void setEditCommand(UiCommand c0) {
         this.cmdRowEdit = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on delete. */
-    public void setDeleteCommand(Command c0) {
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on delete. */
+    public void setDeleteCommand(UiCommand c0) {
         this.cmdRowDelete = c0;
     }
 

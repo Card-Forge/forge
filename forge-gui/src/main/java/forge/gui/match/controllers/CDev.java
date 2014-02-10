@@ -1,6 +1,6 @@
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
@@ -148,7 +148,7 @@ public enum CDev implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

@@ -21,7 +21,7 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import forge.Command;
+import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.SetPreference;
@@ -205,8 +205,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final List<Card> gainControlTargets = new ArrayList<Card>();
 
     private final List<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
-    private final List<Command> untapCommandList = new ArrayList<Command>();
-    private final List<Command> changeControllerCommandList = new ArrayList<Command>();
+    private final List<GameCommand> untapCommandList = new ArrayList<GameCommand>();
+    private final List<GameCommand> changeControllerCommandList = new ArrayList<GameCommand>();
     private final List<Object[]> staticCommandList = new ArrayList<Object[]>();
 
     private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
@@ -2813,11 +2813,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      * @param typeIn
      *            a {@link forge.game.trigger.ZCTrigger} object.
      */
-    public final void addTrigger(final Command c, final ZCTrigger typeIn) {
+    public final void addTrigger(final GameCommand c, final ZCTrigger typeIn) {
         this.zcTriggers.add(new AbilityTriggered(this, c, typeIn));
     }
 
@@ -2827,11 +2827,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      * @param typeIn
      *            a {@link forge.game.trigger.ZCTrigger} object.
      */
-    public final void removeTrigger(final Command c, final ZCTrigger typeIn) {
+    public final void removeTrigger(final GameCommand c, final ZCTrigger typeIn) {
         this.zcTriggers.remove(new AbilityTriggered(this, c, typeIn));
     }
 
@@ -2866,9 +2866,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addComesIntoPlayCommand(final Command c) {
+    public final void addComesIntoPlayCommand(final GameCommand c) {
         this.addTrigger(c, ZCTrigger.ENTERFIELD);
     }
 
@@ -2880,9 +2880,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addDestroyCommand(final Command c) {
+    public final void addDestroyCommand(final GameCommand c) {
         this.addTrigger(c, ZCTrigger.DESTROY);
     }
 
@@ -2893,9 +2893,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addLeavesPlayCommand(final Command c) {
+    public final void addLeavesPlayCommand(final GameCommand c) {
         this.addTrigger(c, ZCTrigger.LEAVEFIELD);
     }
 
@@ -2905,9 +2905,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addUntapCommand(final Command c) {
+    public final void addUntapCommand(final GameCommand c) {
         this.untapCommandList.add(c);
     }
 
@@ -2917,14 +2917,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      */
-    public final void addChangeControllerCommand(final Command c) {
+    public final void addChangeControllerCommand(final GameCommand c) {
         this.changeControllerCommandList.add(c);
     }
 
     public final void runChangeControllerCommands() {
-        for (final Command c : this.changeControllerCommandList) {
+        for (final GameCommand c : this.changeControllerCommandList) {
             c.run();
         }
     }
@@ -4186,7 +4186,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
 
-        for (final Command var : this.untapCommandList) {
+        for (final GameCommand var : this.untapCommandList) {
             var.run();
         }
         this.setTapped(false);

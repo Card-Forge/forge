@@ -1,7 +1,7 @@
 package forge.gui.toolbox.itemmanager.filters;
 
 import com.google.common.base.Predicates;
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
@@ -41,7 +41,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         buttonMap.put(st, button);
 
         //hook so right-clicking a button toggles itself on and toggles off all other buttons
-        button.setRightClickCommand(new Command() {
+        button.setRightClickCommand(new UiCommand() {
             @Override
             public void run() {
                 lockFiltering = true;

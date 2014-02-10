@@ -1,6 +1,6 @@
 package forge.gui.workshop.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.workshop.views.VCardDesigner;
 
@@ -30,7 +30,7 @@ public enum CCardDesigner implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

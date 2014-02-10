@@ -1,6 +1,6 @@
 package forge.gui.deckchooser;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -42,7 +42,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     public FDeckChooser(boolean forAi) {
         setOpaque(false);
         isAi = forAi;
-        Command cmdViewDeck = new Command() {
+        UiCommand cmdViewDeck = new UiCommand() {
             @Override
             public void run() {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
@@ -79,7 +79,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.update();
 
         btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new Command() {
+        btnRandom.setCommand(new UiCommand() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -148,7 +148,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.update(true);
 
         btnRandom.setText("Random Colors");
-        btnRandom.setCommand(new Command() {
+        btnRandom.setCommand(new UiCommand() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelectColors(lstDecks);
@@ -166,7 +166,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.update(true);
 
         btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new Command() {
+        btnRandom.setCommand(new UiCommand() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -183,7 +183,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.update(false, true);
 
         btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new Command() {
+        btnRandom.setCommand(new UiCommand() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -200,7 +200,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.update(false, true);
 
         btnRandom.setText("Random Deck");
-        btnRandom.setCommand(new Command() {
+        btnRandom.setCommand(new UiCommand() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);

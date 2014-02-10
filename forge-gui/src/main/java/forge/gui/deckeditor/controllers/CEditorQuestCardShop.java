@@ -18,7 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Function;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -70,7 +70,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             .build();
     @SuppressWarnings("serial")
     private final JLabel fullCatalogToggle = new FLabel.Builder().text("See full catalog")
-            .fontSize(14).hoverable(true).cmdClick(new Command() {
+            .fontSize(14).hoverable(true).cmdClick(new UiCommand() {
                 @Override
                 public void run() {
                     toggleFullCatalog();
@@ -535,7 +535,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         this.getBtnRemove4().setText("Sell all extras");
         this.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
-        this.getBtnRemove4().setCommand(new Command() {
+        this.getBtnRemove4().setCommand(new UiCommand() {
             @Override
             public void run() {
                 List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();

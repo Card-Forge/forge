@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -86,7 +86,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
                     if (!sa.hasParam("Permanent")) {
                         // If not Permanent, remove protection at EOT
-                        final Command untilEOT = new Command() {
+                        final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -6573962672873853565L;
 
                             @Override
@@ -122,7 +122,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
                 if (!sa.hasParam("Permanent")) {
                     // If not Permanent, remove protection at EOT
-                    final Command untilEOT = new Command() {
+                    final GameCommand untilEOT = new GameCommand() {
                         private static final long serialVersionUID = -6573962672873853565L;
 
                         @Override

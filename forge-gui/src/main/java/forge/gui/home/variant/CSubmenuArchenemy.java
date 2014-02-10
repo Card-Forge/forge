@@ -1,7 +1,7 @@
 package forge.gui.home.variant;
 
 import com.google.common.base.Predicate;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -77,7 +77,7 @@ public enum CSubmenuArchenemy implements ICDoc {
     @Override
     public void initialize() {
 
-        VSubmenuArchenemy.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
+        VSubmenuArchenemy.SINGLETON_INSTANCE.getLblEditor().setCommand(new UiCommand() {
             private static final long serialVersionUID = -4548064747843903896L;
 
             @Override
@@ -237,7 +237,7 @@ public enum CSubmenuArchenemy implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

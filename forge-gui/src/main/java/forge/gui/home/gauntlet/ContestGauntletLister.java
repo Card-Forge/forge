@@ -1,7 +1,7 @@
 package forge.gui.home.gauntlet;
 
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
@@ -26,7 +26,7 @@ import java.util.List;
 public class ContestGauntletLister extends JPanel {
     private RowPanel previousSelect;
     private RowPanel[] rows;
-    private Command cmdRowSelect;
+    private UiCommand cmdRowSelect;
     private final Color clrDefault;
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
@@ -199,8 +199,8 @@ public class ContestGauntletLister extends JPanel {
         return false;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on row select. */
-    public void setSelectCommand(Command c0) {
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    public void setSelectCommand(UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 

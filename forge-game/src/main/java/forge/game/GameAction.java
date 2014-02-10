@@ -21,7 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import forge.Command;
+import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
@@ -739,7 +739,7 @@ public class GameAction {
                 final String svarOperand = rightVar.substring(2);
                 final int operandValue = AbilityUtils.calculateAmount(c, svarOperand, null);
                 if (Expressions.compare(sVar, svarOperator, operandValue)) {
-                    ((Command) staticCheck[3]).run();
+                    ((GameCommand) staticCheck[3]).run();
                     c.getStaticCommandList().remove(i);
                     i--;
                     affectedCards.add(c);
@@ -1320,7 +1320,7 @@ public class GameAction {
         }
         c.setSVar("HasteFromSuspend", "True");
 
-        final Command intoPlay = new Command() {
+        final GameCommand intoPlay = new GameCommand() {
             private static final long serialVersionUID = -4514610171270596654L;
 
             @Override
@@ -1333,7 +1333,7 @@ public class GameAction {
 
         c.addComesIntoPlayCommand(intoPlay);
 
-        final Command loseControl = new Command() {
+        final GameCommand loseControl = new GameCommand() {
             private static final long serialVersionUID = -4514610171270596654L;
 
             @Override

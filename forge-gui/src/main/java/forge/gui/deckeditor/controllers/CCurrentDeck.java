@@ -1,6 +1,6 @@
 package forge.gui.deckeditor.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -65,7 +65,7 @@ public enum CCurrentDeck implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 
@@ -75,38 +75,38 @@ public enum CCurrentDeck implements ICDoc {
     @Override
     @SuppressWarnings("serial")
     public void initialize() {
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setCommand(new Command() {
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setCommand(new UiCommand() {
             @Override
             public void run() {
                 SEditorIO.saveDeck();
             }
         });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setCommand(new Command() {
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setCommand(new UiCommand() {
             @Override
             public void run() {
                 exportDeck();
             }
         });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setCommand(new Command() {
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setCommand(new UiCommand() {
             @Override
             public void run() {
                 printProxies();
             }
         });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setCommand(new Command() {
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setCommand(new UiCommand() {
             @Override
             public void run() {
                 openDeck();
             }
         });
 
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setCommand(new Command() {
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setCommand(new UiCommand() {
             @Override
             public void run() {
                 newDeck();
             }
         });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setCommand(new Command() {
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setCommand(new UiCommand() {
             @Override
             public void run() {
                 importDeck();

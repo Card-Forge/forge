@@ -1,6 +1,6 @@
 package forge.gui.toolbox;
 
-import forge.Command;
+import forge.UiCommand;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +43,7 @@ public class FHyperlink extends FLabel {
             }
             
             // overwrite whatever command is there -- we could chain them if we wanted to, though
-            cmdClick(new Command() {
+            cmdClick(new UiCommand() {
                 @Override
                 public void run() {
                     if (browsingSupported) {

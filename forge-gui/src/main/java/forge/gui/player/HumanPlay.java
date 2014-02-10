@@ -227,9 +227,9 @@ public class HumanPlay {
      * @param cost
      *            a {@link forge.game.cost.Cost} object.
      * @param paid
-     *            a {@link forge.Command} object.
+     *            a {@link forge.UiCommand} object.
      * @param unpaid
-     *            a {@link forge.Command} object.
+     *            a {@link forge.UiCommand} object.
      * @param sourceAbility TODO
      */
     public static boolean payCostDuringAbilityResolve(final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {

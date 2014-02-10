@@ -19,7 +19,7 @@ package forge.gui.match.controllers;
 
 import com.google.common.base.Function;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -165,7 +165,7 @@ public class CField implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 } // End class CField

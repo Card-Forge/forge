@@ -17,7 +17,7 @@
  */
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -271,7 +271,7 @@ public enum CDock implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 
@@ -296,55 +296,55 @@ public enum CDock implements ICDoc {
 
         refreshArcStateDisplay();
 
-        VDock.SINGLETON_INSTANCE.getBtnConcede().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnConcede().setCommand(new UiCommand() {
             @Override
             public void run() {
                 CMatchUI.SINGLETON_INSTANCE.concede();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnSettings().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnSettings().setCommand(new UiCommand() {
             @Override
             public void run() {
                 SOverlayUtils.showOverlay();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnEndTurn().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnEndTurn().setCommand(new UiCommand() {
             @Override
             public void run() {
                 endTurn();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnViewDeckList().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnViewDeckList().setCommand(new UiCommand() {
             @Override
             public void run() {
                 viewDeckList();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnRevertLayout().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnRevertLayout().setCommand(new UiCommand() {
             @Override
             public void run() {
                 revertLayout();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnOpenLayout().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnOpenLayout().setCommand(new UiCommand() {
             @Override
             public void run() {
                 openLayout();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnSaveLayout().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnSaveLayout().setCommand(new UiCommand() {
             @Override
             public void run() {
                 saveLayout();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new UiCommand() {
             @Override
             public void run() {
                 alphaStrike();
             }
         });
-        VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new Command() {
+        VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new UiCommand() {
             @Override
             public void run() {
                 toggleTargeting();

@@ -1,6 +1,6 @@
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.combat.AttackingBand;
@@ -28,7 +28,7 @@ public enum CCombat implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

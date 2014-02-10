@@ -3,7 +3,7 @@ package forge.gui.deckeditor.controllers;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
@@ -37,7 +37,7 @@ public enum CDeckgen implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 
@@ -47,25 +47,25 @@ public enum CDeckgen implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand(new Command() {
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand(new UiCommand() {
             @Override
             public void run() {
                 newRandomConstructed();
             }
         });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand(new Command() {
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand(new UiCommand() {
             @Override
             public void run() {
                 newGenerateConstructed(2);
             }
         });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand(new Command() {
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand(new UiCommand() {
             @Override
             public void run() {
                 newGenerateConstructed(3);
             }
         });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand(new Command() {
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand(new UiCommand() {
             @Override
             public void run() {
                 newGenerateConstructed(5);

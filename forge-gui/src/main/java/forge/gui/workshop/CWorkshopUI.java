@@ -17,7 +17,7 @@
  */
 package forge.gui.workshop;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
@@ -53,7 +53,7 @@ public enum CWorkshopUI implements ICDoc, IMenuProvider {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

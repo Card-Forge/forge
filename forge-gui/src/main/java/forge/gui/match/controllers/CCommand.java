@@ -17,7 +17,7 @@
  */
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VCommand;
@@ -61,7 +61,7 @@ public class CCommand implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 } // End class CCommand

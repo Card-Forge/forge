@@ -17,7 +17,7 @@
  */
 package forge.game.spellability;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
@@ -34,7 +34,7 @@ import java.util.Arrays;
  * @author Forge
  * @version $Id$
  */
-public class AbilityTriggered extends Ability implements Command {
+public class AbilityTriggered extends Ability implements GameCommand {
 
     /**
      *
@@ -67,7 +67,7 @@ public class AbilityTriggered extends Ability implements Command {
     }
 
     /** The todo. */
-    private final Command todo;
+    private final GameCommand todo;
 
     /**
      * <p>
@@ -77,11 +77,11 @@ public class AbilityTriggered extends Ability implements Command {
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      * @param sourceCommand
-     *            a {@link forge.Command} object.
+     *            a {@link forge.GameCommand} object.
      * @param situation
      *            a {@link forge.game.trigger.ZCTrigger} object.
      */
-    public AbilityTriggered(final Card sourceCard, final Command sourceCommand, final ZCTrigger situation) {
+    public AbilityTriggered(final Card sourceCard, final GameCommand sourceCommand, final ZCTrigger situation) {
         super(sourceCard, ManaCost.ZERO);
         this.todo = sourceCommand;
         this.trigger = situation;

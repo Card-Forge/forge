@@ -1,6 +1,6 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
@@ -34,7 +34,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
                 .hoverable().selectable(true).selected(true)
                 .build();
 
-        button.setCommand(new Command() {
+        button.setCommand(new UiCommand() {
             @Override
             public void run() {
                 if (lockFiltering) { return; }

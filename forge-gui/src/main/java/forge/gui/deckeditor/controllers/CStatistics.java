@@ -2,7 +2,7 @@ package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import forge.Command;
+import forge.UiCommand;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
@@ -35,7 +35,7 @@ public enum CStatistics implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

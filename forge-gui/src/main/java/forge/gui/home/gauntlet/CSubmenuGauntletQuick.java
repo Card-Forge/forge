@@ -1,6 +1,6 @@
 package forge.gui.home.gauntlet;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -149,7 +149,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

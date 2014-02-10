@@ -20,7 +20,7 @@ package forge.gui.match;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import forge.Command;
+import forge.UiCommand;
 import forge.FThreads;
 import forge.ImageCache;
 import forge.Singletons;
@@ -421,7 +421,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

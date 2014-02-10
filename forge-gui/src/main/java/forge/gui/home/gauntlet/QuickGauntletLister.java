@@ -1,6 +1,6 @@
 package forge.gui.home.gauntlet;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
@@ -31,7 +31,7 @@ public class QuickGauntletLister extends JPanel {
     private SkinIcon icoDelete, icoDeleteOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
-    private Command cmdRowSelect, cmdRowDelete;
+    private UiCommand cmdRowSelect, cmdRowDelete;
     private final Color clrDefault;
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
@@ -238,13 +238,13 @@ public class QuickGauntletLister extends JPanel {
         return false;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on row select. */
-    public void setCmdSelect(Command c0) {
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row select. */
+    public void setCmdSelect(UiCommand c0) {
         this.cmdRowSelect = c0;
     }
 
-    /** @param c0 &emsp; {@link forge.Command} command executed on row delete. */
-    public void setCmdDelete(Command c0) {
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row delete. */
+    public void setCmdDelete(UiCommand c0) {
         this.cmdRowDelete = c0;
     }
 

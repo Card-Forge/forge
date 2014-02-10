@@ -17,7 +17,7 @@
  */
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.game.card.Card;
 import forge.gui.framework.ICDoc;
@@ -65,7 +65,7 @@ public enum CDetail implements ICDoc {
     }
 
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

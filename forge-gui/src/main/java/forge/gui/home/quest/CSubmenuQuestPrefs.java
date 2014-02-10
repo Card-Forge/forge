@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.quest.VSubmenuQuestPrefs.PrefInput;
@@ -98,7 +98,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

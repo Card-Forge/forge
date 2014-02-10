@@ -17,7 +17,7 @@
  */
 package forge.gui.deckeditor;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.controllers.*;
@@ -231,13 +231,13 @@ public enum CDeckEditorUI implements ICDoc {
                 }
             });
 
-            catView.setItemActivateCommand(new Command() {
+            catView.setItemActivateCommand(new UiCommand() {
                 @Override
                 public void run() {
                     addSelectedCards(false, 1);
                 }
             });
-            deckView.setItemActivateCommand(new Command() {
+            deckView.setItemActivateCommand(new UiCommand() {
                 @Override
                 public void run() {
                     removeSelectedCards(false, 1);
@@ -284,7 +284,7 @@ public enum CDeckEditorUI implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

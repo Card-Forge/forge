@@ -17,7 +17,7 @@
  */
 package forge.gui.match.views;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.*;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FLabel;
@@ -174,7 +174,7 @@ public enum VDock implements IVDoc<CDock> {
         private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
         private final Color defaultBorderColor = new Color(0, 0, 0, 0);
-        private Command command;
+        private UiCommand command;
         private int w, h;
 
         /**
@@ -217,7 +217,7 @@ public enum VDock implements IVDoc<CDock> {
             });
         }
 
-        public void setCommand(Command command0) {
+        public void setCommand(UiCommand command0) {
             this.command = command0;
         }
 

@@ -1,6 +1,6 @@
 package forge.gui.home.settings;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
@@ -100,10 +100,10 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pnlAvatars.add(scroller, "w 90%!, pushy, growy, gap 5% 0 0 0");
 
-        final Command cmdHuman = new Command() { @Override
+        final UiCommand cmdHuman = new UiCommand() { @Override
             public void run() { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); } };
 
-        final Command cmdAI = new Command() { @Override
+        final UiCommand cmdAI = new UiCommand() { @Override
             public void run() { lblAvatarHuman.setSelected(false); lblAvatarAI.requestFocusInWindow(); } };
 
         lblAvatarHuman.setCommand(cmdHuman);
@@ -135,7 +135,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         lbl.setMaximumSize(size);
         lbl.setMinimumSize(size);
 
-        final Command cmd = new Command() {
+        final UiCommand cmd = new UiCommand() {
             @Override
             public void run() {
                 String[] indices = Singletons.getModel().getPreferences()

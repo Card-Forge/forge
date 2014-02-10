@@ -18,7 +18,7 @@
 
 package forge.gui.home.settings;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.util.FileUtil;
 
@@ -66,7 +66,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {       
+    public UiCommand getCommandOnSelect() {       
         return null;
     }
 

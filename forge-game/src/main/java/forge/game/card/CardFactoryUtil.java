@@ -19,7 +19,7 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import forge.Command;
+import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -2217,7 +2217,7 @@ public class CardFactoryUtil {
 
             card.setEchoCost(manacost);
 
-            final Command intoPlay = new Command() {
+            final GameCommand intoPlay = new GameCommand() {
 
                 private static final long serialVersionUID = -7913835645603984242L;
 
@@ -2953,7 +2953,7 @@ public class CardFactoryUtil {
      */
     public static final void parseKeywords(final Card card, final String cardName) {
         if (hasKeyword(card, "Sunburst") != -1) {
-            final Command sunburstCIP = new Command() {
+            final GameCommand sunburstCIP = new GameCommand() {
                 private static final long serialVersionUID = 1489845860231758299L;
 
                 @Override
@@ -2967,7 +2967,7 @@ public class CardFactoryUtil {
                 }
             };
 
-            final Command sunburstLP = new Command() {
+            final GameCommand sunburstLP = new GameCommand() {
                 private static final long serialVersionUID = -7564420917490677427L;
 
                 @Override
@@ -2982,7 +2982,7 @@ public class CardFactoryUtil {
 
         // Enforce the "World rule"
         if (card.isType("World")) {
-            final Command intoPlay = new Command() {
+            final GameCommand intoPlay = new GameCommand() {
                 private static final long serialVersionUID = 6536398032388958127L;
 
                 @Override

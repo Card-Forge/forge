@@ -1,6 +1,6 @@
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.FThreads;
 import forge.game.GameLog;
 import forge.gui.framework.ICDoc;
@@ -24,7 +24,7 @@ public enum CLog implements ICDoc, Observer {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

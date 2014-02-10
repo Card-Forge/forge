@@ -1,6 +1,6 @@
 package forge.gui.match;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.game.*;
 import forge.game.player.Player;
@@ -95,7 +95,7 @@ public class ViewWinLose {
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
         FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
-        btnCopyLog.setCommand(new Command() {
+        btnCopyLog.setCommand(new UiCommand() {
             @Override
             public void run() {
                 StringSelection ss = new StringSelection(txtLog.getText());

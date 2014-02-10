@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -45,7 +45,7 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
             if( attackers ) ph.setPlayerDeclaresAttackers(p);
             if( blockers ) ph.setPlayerDeclaresBlockers(p);
             
-            Command removeOverrides = new Command() {
+            GameCommand removeOverrides = new GameCommand() {
                 private static final long serialVersionUID = -8064627517852651016L;
 
                 @Override

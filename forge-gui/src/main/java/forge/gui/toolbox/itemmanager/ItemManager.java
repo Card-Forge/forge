@@ -20,7 +20,7 @@ package forge.gui.toolbox.itemmanager;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.GuiUtils;
 import forge.gui.toolbox.*;
 import forge.gui.toolbox.FSkin.Colors;
@@ -64,7 +64,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
-    private Command itemActivateCommand;
+    private UiCommand itemActivateCommand;
     private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
@@ -237,7 +237,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         });
 
         //setup command for btnFilters
-        final Command cmdBuildFilterMenu = new Command() {
+        final UiCommand cmdBuildFilterMenu = new UiCommand() {
             @Override
             public void run() {
                 JPopupMenu menu = new JPopupMenu("FilterMenu");
@@ -1141,7 +1141,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     	return selectionListeners;
     }
 
-    public void setItemActivateCommand(Command itemActivateCommand0) {
+    public void setItemActivateCommand(UiCommand itemActivateCommand0) {
         this.itemActivateCommand = itemActivateCommand0;
     }
 

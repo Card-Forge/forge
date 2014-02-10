@@ -1,6 +1,6 @@
 package forge.gui.toolbox.itemmanager;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.game.GameFormat;
@@ -46,7 +46,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
 
     private final GameType gametype;
     private boolean stringOnly, preventEdit;
-    private Command cmdDelete, cmdSelect;
+    private UiCommand cmdDelete, cmdSelect;
     private final Map<ColumnDef, ItemColumn> columns = SColumnUtil.getColumns(
             ColumnDef.DECK_ACTIONS,
             ColumnDef.DECK_FOLDER,
@@ -80,7 +80,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             }
         });
 
-        this.setItemActivateCommand(new Command() {
+        this.setItemActivateCommand(new UiCommand() {
             @Override
             public void run() {
                 editDeck(getSelectedItem());
@@ -120,18 +120,18 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     /**
      * Sets the delete command.
      *
-     * @param c0 &emsp; {@link forge.Command} command executed on delete.
+     * @param c0 &emsp; {@link forge.UiCommand} command executed on delete.
      */
-    public void setDeleteCommand(final Command c0) {
+    public void setDeleteCommand(final UiCommand c0) {
         this.cmdDelete = c0;
     }
 
     /**
      * Sets the select command.
      *
-     * @param c0 &emsp; {@link forge.Command} command executed on row select.
+     * @param c0 &emsp; {@link forge.UiCommand} command executed on row select.
      */
-    public void setSelectCommand(final Command c0) {
+    public void setSelectCommand(final UiCommand c0) {
         this.cmdSelect = c0;
     }
 

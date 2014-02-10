@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
@@ -33,13 +33,13 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
         for(final Player pTarget: tgtPlayers) {
             
             // on next untap gain control
-            game.getUntap().addUntil(pTarget, new Command() {
+            game.getUntap().addUntil(pTarget, new GameCommand() {
                 @Override
                 public void run() {
                     pTarget.setControllingPlayerController(activator.getLobbyPlayer().createControllerFor(pTarget));
                     
                     // on following cleanup release control
-                    game.getEndOfTurn().addUntil(new Command() {
+                    game.getEndOfTurn().addUntil(new GameCommand() {
                         @Override
                         public void run() {
                             pTarget.releaseControl();

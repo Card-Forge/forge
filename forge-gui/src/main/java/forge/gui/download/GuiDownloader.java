@@ -18,7 +18,7 @@
 package forge.gui.download;
 
 import com.esotericsoftware.minlog.Log;
-import forge.Command;
+import forge.UiCommand;
 import forge.ImageCache;
 import forge.error.BugReporter;
 import forge.gui.SOverlayUtils;
@@ -67,7 +67,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         }
     };
 
-    private final Command cmdClose = new Command() { @Override
+    private final UiCommand cmdClose = new UiCommand() { @Override
         public void run() { close(); } };
 
     // Swing components

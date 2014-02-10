@@ -1,7 +1,7 @@
 package forge.gui.bazaar;
 
 import com.google.common.collect.Iterables;
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
 import forge.quest.bazaar.QuestBazaarManager;
@@ -45,7 +45,7 @@ public enum CBazaarUI implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         // TODO Auto-generated method stub
         return null;
     }

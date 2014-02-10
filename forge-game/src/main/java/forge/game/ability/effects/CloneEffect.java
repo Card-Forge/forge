@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -180,7 +180,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Duration")) {
             final Card cloneCard = tgtCard;
-            final Command unclone = new Command() {
+            final GameCommand unclone = new GameCommand() {
                 private static final long serialVersionUID = -78375985476256279L;
 
                 @Override

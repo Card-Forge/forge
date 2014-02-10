@@ -1,7 +1,7 @@
 package forge.gui.toolbox.itemmanager.filters;
 
 import com.google.common.base.Predicate;
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FTextField;
@@ -86,7 +86,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     private FLabel addButton(JPanel widget, String text) {
         FLabel button = new FLabel.Builder().text(text).hoverable().selectable().selected().build();
 
-        button.setCommand(new Command() {
+        button.setCommand(new UiCommand() {
             @Override
             public void run() {
                 applyChange();

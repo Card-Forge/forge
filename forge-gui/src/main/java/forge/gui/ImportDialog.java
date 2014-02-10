@@ -17,7 +17,7 @@
  */
 package forge.gui;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.error.BugReporter;
 import forge.gui.ImportSourceAnalyzer.OpType;
 import forge.gui.toolbox.*;
@@ -116,7 +116,7 @@ public class ImportDialog {
         final JFileChooser _fileChooser = new JFileChooser();
         _fileChooser.setMultiSelectionEnabled(false);
         _fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        _btnChooseDir.setCommand(new Command() {
+        _btnChooseDir.setCommand(new UiCommand() {
             @Override public void run() {
                 // bring up a file open dialog and, if the OK button is selected, apply the filename
                 // to the import source text field

@@ -19,7 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
@@ -171,7 +171,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         this.getBtnRemove4().setVisible(false);
         this.getBtnAdd4().setVisible(false);
         this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new Command() {
+        this.getBtnCycleSection().setCommand(new UiCommand() {
             private static final long serialVersionUID = -9082606944024479599L;
 
             @Override

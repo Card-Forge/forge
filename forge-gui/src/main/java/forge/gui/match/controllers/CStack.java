@@ -1,6 +1,6 @@
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.game.player.LobbyPlayer;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.EDocID;
@@ -25,7 +25,7 @@ public enum CStack implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

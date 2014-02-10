@@ -1,6 +1,6 @@
 package forge.gui.toolbox;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
@@ -58,7 +58,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
         protected String  bldText, bldToolTip;
         private SkinImage bldIcon;
         private int bldFontAlign;
-        protected Command bldCmd;
+        protected UiCommand bldCmd;
 
         // Build!
         /** @return {@link forge.gui.toolbox.FLabel} */
@@ -110,9 +110,9 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder useSkinColors(final boolean b0) { bldUseSkinColors = b0; return this; }
 
-        /**@param c0 &emsp; {@link forge.Command} to execute if clicked
+        /**@param c0 &emsp; {@link forge.UiCommand} to execute if clicked
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder cmdClick(final Command c0) { this.bldCmd = c0; return this; }
+        public Builder cmdClick(final UiCommand c0) { this.bldCmd = c0; return this; }
 
         /**@param i0 &emsp; int
          * @return {@link forge.gui.toolbox.Builder} */
@@ -438,12 +438,12 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
         return this.resizeTimer;
     }
 
-    /** @return {@link forge.Command} */
+    /** @return {@link forge.UiCommand} */
     public Runnable getCommand() {
         return this.cmdClick;
     }
 
-	/** @return {@link forge.Command} */
+	/** @return {@link forge.UiCommand} */
     public Runnable getRightClickCommand() {
         return this.cmdRightClick;
     }
@@ -472,12 +472,12 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
         }
     }
 
-    /** @param c0 &emsp; {@link forge.Command} on click */
+    /** @param c0 &emsp; {@link forge.UiCommand} on click */
     public void setCommand(final Runnable c0) {
         this.cmdClick = c0;
     }
 
-	/** @param c0 &emsp; {@link forge.Command} on right-click */
+	/** @param c0 &emsp; {@link forge.UiCommand} on right-click */
     public void setRightClickCommand(final Runnable c0) {
         this.cmdRightClick = c0;
     }

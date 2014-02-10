@@ -1,6 +1,6 @@
 package forge.gui.home.settings;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -101,14 +101,14 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         return EMenuGroup.SETTINGS;
     }
 
-    public void setDownloadPicsCommand(Command command)        { btnDownloadPics.setCommand(command);        }
-    public void setDownloadSetPicsCommand(Command command)     { btnDownloadSetPics.setCommand(command);     }
-    public void setDownloadQuestImagesCommand(Command command) { btnDownloadQuestImages.setCommand(command); }
-    public void setReportBugCommand(Command command)           { btnReportBug.setCommand(command);           }
-    public void setImportPicturesCommand(Command command)      { btnImportPictures.setCommand(command);      }
-    public void setHowToPlayCommand(Command command)           { btnHowToPlay.setCommand(command);           }
-    public void setDownloadPricesCommand(Command command)      { btnDownloadPrices.setCommand(command);      }
-    public void setLicensingCommand(Command command)           { btnLicensing.setCommand(command);           }
+    public void setDownloadPicsCommand(UiCommand command)        { btnDownloadPics.setCommand(command);        }
+    public void setDownloadSetPicsCommand(UiCommand command)     { btnDownloadSetPics.setCommand(command);     }
+    public void setDownloadQuestImagesCommand(UiCommand command) { btnDownloadQuestImages.setCommand(command); }
+    public void setReportBugCommand(UiCommand command)           { btnReportBug.setCommand(command);           }
+    public void setImportPicturesCommand(UiCommand command)      { btnImportPictures.setCommand(command);      }
+    public void setHowToPlayCommand(UiCommand command)           { btnHowToPlay.setCommand(command);           }
+    public void setDownloadPricesCommand(UiCommand command)      { btnDownloadPrices.setCommand(command);      }
+    public void setLicensingCommand(UiCommand command)           { btnLicensing.setCommand(command);           }
 
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();

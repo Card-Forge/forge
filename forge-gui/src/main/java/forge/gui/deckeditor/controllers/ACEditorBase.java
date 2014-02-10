@@ -17,7 +17,7 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -276,13 +276,13 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public void setDeckManager(final ItemManager<TItem> itemManager) {
         this.deckManager = itemManager;
 
-        btnRemove.setCommand(new Command() {
+        btnRemove.setCommand(new UiCommand() {
             @Override
             public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
             }
         });
-        btnRemove4.setCommand(new Command() {
+        btnRemove4.setCommand(new UiCommand() {
             @Override
             public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
@@ -311,13 +311,13 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public void setCatalogManager(final ItemManager<TItem> itemManager) {
         this.catalogManager = itemManager;
 
-        btnAdd.setCommand(new Command() {
+        btnAdd.setCommand(new UiCommand() {
             @Override
             public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 1);
             }
         });
-        btnAdd4.setCommand(new Command() {
+        btnAdd4.setCommand(new UiCommand() {
             @Override
             public void run() {
                 CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 4);

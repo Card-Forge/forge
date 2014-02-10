@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.Command;
+import forge.GameCommand;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -182,10 +182,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
      * 
      * @param i
      *            a int.
-     * @return a {@link forge.Command} object.
+     * @return a {@link forge.GameCommand} object.
      */
-    private Command getDestroyCommand(final Card c, final Card hostCard, final boolean bNoRegen) {
-        final Command destroy = new Command() {
+    private GameCommand getDestroyCommand(final Card c, final Card hostCard, final boolean bNoRegen) {
+        final GameCommand destroy = new GameCommand() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
@@ -225,11 +225,11 @@ public class ControlGainEffect extends SpellAbilityEffect {
      *            a int.
      * @param originalController
      *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.Command} object.
+     * @return a {@link forge.GameCommand} object.
      */
-    private Command getLoseControlCommand(final Card c, final long tStamp,
+    private GameCommand getLoseControlCommand(final Card c, final long tStamp,
             final boolean bTapOnLose, final Card hostCard, final List<String> kws) {
-        final Command loseControl = new Command() {
+        final GameCommand loseControl = new GameCommand() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override

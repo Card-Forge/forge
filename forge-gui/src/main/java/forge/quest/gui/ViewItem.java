@@ -1,6 +1,6 @@
 package forge.quest.gui;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.bazaar.VBazaarUI;
 import forge.gui.toolbox.FLabel;
@@ -42,7 +42,7 @@ public class ViewItem extends FPanel {
         this.add(this.tarDesc, "w 60%!, gap 0 0 0 10px, wrap");
         this.add(this.lblPrice, "w 60%!, h 20px!, gap 0 0 0 5px");
 
-        this.btnPurchase.setCommand(new Command() {
+        this.btnPurchase.setCommand(new UiCommand() {
             @Override
             public void run() {
                 final QuestAssets qA = Singletons.getModel().getQuest().getAssets();

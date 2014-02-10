@@ -1,6 +1,6 @@
 package forge.gui.framework;
 
-import forge.Command;
+import forge.UiCommand;
 
 /**
  * Dictates methods required for any controller
@@ -16,8 +16,8 @@ public interface ICDoc {
      * initialized, be wary of NPEs created by referring to
      * non-existent components.
      * 
-     * @return {@link forge.Command} */
-    Command getCommandOnSelect();
+     * @return {@link forge.UiCommand} */
+    UiCommand getCommandOnSelect();
 
     /**
      * This method is called once, after the view singleton has been fully realized

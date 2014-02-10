@@ -1,6 +1,6 @@
 package forge.gui.deckeditor.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VProbabilities;
@@ -28,7 +28,7 @@ public enum CProbabilities implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 
@@ -38,7 +38,7 @@ public enum CProbabilities implements ICDoc {
     @Override
     @SuppressWarnings("serial")
     public void initialize() {
-        VProbabilities.SINGLETON_INSTANCE.getLblReshuffle().setCommand(new Command() {
+        VProbabilities.SINGLETON_INSTANCE.getLblReshuffle().setCommand(new UiCommand() {
             @Override
             public void run() {
                 update();

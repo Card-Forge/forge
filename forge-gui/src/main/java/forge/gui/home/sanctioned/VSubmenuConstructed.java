@@ -1,7 +1,7 @@
 package forge.gui.home.sanctioned;
 
 import com.google.common.base.Predicate;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckSection;
 import forge.game.GameType;
@@ -247,7 +247,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         // Main deck
         final FDeckChooser mainChooser = new FDeckChooser(isPlayerAI(playerIndex));
         mainChooser.initialize();
-        mainChooser.getLstDecks().setSelectCommand(new Command() {
+        mainChooser.getLstDecks().setSelectCommand(new UiCommand() {
             @Override
             public void run() {
                 VSubmenuConstructed.this.onDeckClicked(playerIndex, mainChooser.getSelectedDeckType(), mainChooser.getLstDecks().getSelectedItems());
@@ -534,7 +534,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
                 final AvatarSelector aSel = new AvatarSelector(getPlayerName(), avatarIndex, getUsedAvatars());
                 for (final FLabel lbl : aSel.getSelectables()) {
-                    lbl.setCommand(new Command() {
+                    lbl.setCommand(new UiCommand() {
                         @Override
                         public void run() {
                             setAvatar(Integer.valueOf(lbl.getName().substring(11)));
@@ -611,7 +611,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 }
             });
 
-            pchDeckEditor.setCommand(new Command() {
+            pchDeckEditor.setCommand(new UiCommand() {
                 @Override
                 public void run() {
                     currentGameMode = GameType.Planechase;
@@ -676,7 +676,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
                     .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT)).hoverable(true).opaque(false)
                     .unhoveredAlpha(0.9f).build();
-            newNameBtn.setCommand(new Command() {
+            newNameBtn.setCommand(new UiCommand() {
                 @Override
                 public void run() {
                     String newName = getNewName();

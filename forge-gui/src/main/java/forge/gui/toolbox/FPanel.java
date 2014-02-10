@@ -17,7 +17,7 @@
  */
 package forge.gui.toolbox;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin.FPanelBase;
 import forge.gui.toolbox.FSkin.SkinColor;
@@ -60,7 +60,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
 
     // Mouse handling
     private boolean selected, hovered;
-    private Command cmdClick;
+    private UiCommand cmdClick;
     // Width/height of panel, bg img, scaled bg img, texture img. Coords.
     private int pnlW, pnlH, imgW, imgH, scaledW, scaledH, textureW, textureH, tempX, tempY;
     // Image aspect ratio (width / height)
@@ -107,13 +107,13 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
         this.cornerDiameter = (int0 <= 0 ? 0 : int0);
     }
 
-    /** @param cmd0 &emsp; {@link forge.Command} on click */
-    public void setCommand(final Command cmd0) {
+    /** @param cmd0 &emsp; {@link forge.UiCommand} on click */
+    public void setCommand(final UiCommand cmd0) {
         this.cmdClick = cmd0;
     }
 
-    /** @return {@link forge.Command} */
-    public Command getCommand() {
+    /** @return {@link forge.UiCommand} */
+    public UiCommand getCommand() {
         return this.cmdClick;
     }
 

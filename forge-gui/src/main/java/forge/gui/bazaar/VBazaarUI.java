@@ -1,6 +1,6 @@
 package forge.gui.bazaar;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
@@ -44,7 +44,7 @@ public enum VBazaarUI implements IVTopLevelUI {
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
 
-            lbl.setCommand(new Command() {
+            lbl.setCommand(new UiCommand() {
                 @Override
                 public void run() {
                     if (previousSelected != null) { previousSelected.setSelected(false); }

@@ -21,7 +21,7 @@ package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -267,7 +267,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(false);
 
         this.getBtnCycleSection().setVisible(true);
-        this.getBtnCycleSection().setCommand(new Command() {
+        this.getBtnCycleSection().setCommand(new UiCommand() {
             @Override
             public void run() {
                 cycleEditorMode();

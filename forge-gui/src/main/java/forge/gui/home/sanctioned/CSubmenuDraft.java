@@ -1,6 +1,6 @@
 package forge.gui.home.sanctioned;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -37,7 +37,7 @@ public enum CSubmenuDraft implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final Command cmdDeckSelect = new Command() {
+    private final UiCommand cmdDeckSelect = new UiCommand() {
         @Override
         public void run() {
             VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
@@ -53,7 +53,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        view.getBtnBuildDeck().setCommand(new Command() {
+        view.getBtnBuildDeck().setCommand(new UiCommand() {
             @Override
             public void run() {
                 setupDraft();
@@ -162,7 +162,7 @@ public enum CSubmenuDraft implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }

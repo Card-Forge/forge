@@ -17,7 +17,7 @@
  */
 package forge.gui.match.controllers;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.FThreads;
 import forge.game.Game;
 import forge.game.GameRules;
@@ -105,7 +105,7 @@ public enum CPrompt implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 

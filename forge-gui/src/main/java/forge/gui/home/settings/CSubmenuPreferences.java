@@ -1,6 +1,6 @@
 package forge.gui.home.settings;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
@@ -93,28 +93,28 @@ public enum CSubmenuPreferences implements ICDoc {
             });
         }
 
-        view.getBtnReset().setCommand(new Command() {
+        view.getBtnReset().setCommand(new UiCommand() {
             @Override
             public void run() {
                 CSubmenuPreferences.this.resetForgeSettingsToDefault();
             }
         });
 
-        view.getBtnDeleteEditorUI().setCommand(new Command() {
+        view.getBtnDeleteEditorUI().setCommand(new UiCommand() {
             @Override
             public void run() {
                 CSubmenuPreferences.this.resetDeckEditorLayout();
             }
         });
         
-        view.getBtnDeleteWorkshopUI().setCommand(new Command() {
+        view.getBtnDeleteWorkshopUI().setCommand(new UiCommand() {
             @Override
             public void run() {
                 CSubmenuPreferences.this.resetWorkshopLayout();
             }
         });
 
-        view.getBtnDeleteMatchUI().setCommand(new Command() {
+        view.getBtnDeleteMatchUI().setCommand(new UiCommand() {
             @Override
             public void run() {
                 CSubmenuPreferences.this.resetMatchScreenLayout();
@@ -153,7 +153,7 @@ public enum CSubmenuPreferences implements ICDoc {
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 
@@ -266,8 +266,8 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     @SuppressWarnings("serial")
-    private Command getPlayerNameButtonCommand() {
-        return new Command() {
+    private UiCommand getPlayerNameButtonCommand() {
+        return new UiCommand() {
             @Override
             public void run() {
                 GamePlayerUtil.setPlayerName();

@@ -1,6 +1,6 @@
 package forge.gui.home.settings;
 
-import forge.Command;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public enum CSubmenuAvatars implements ICDoc {
     }
 
     @Override
-    public Command getCommandOnSelect() {
+    public UiCommand getCommandOnSelect() {
         return null;
     }
 }
