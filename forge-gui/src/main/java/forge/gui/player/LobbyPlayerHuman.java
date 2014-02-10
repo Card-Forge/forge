@@ -1,6 +1,5 @@
 package forge.gui.player;
 
-import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.player.LobbyPlayer;
@@ -8,6 +7,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.gui.FNetOverlay;
 import forge.gui.GuiDisplayUtil;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 public class LobbyPlayerHuman extends LobbyPlayer {
@@ -30,7 +30,7 @@ public class LobbyPlayerHuman extends LobbyPlayer {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
         player.setFirstController(new PlayerControllerHuman(game, player, this));
         
-        if( Preferences.DEV_MODE && Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND))
+        if( ForgePreferences.DEV_MODE && Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND))
             player.canCheatPlayUnlimitedLands = true;
 
         return player;

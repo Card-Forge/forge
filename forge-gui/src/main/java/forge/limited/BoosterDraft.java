@@ -18,7 +18,7 @@
 package forge.limited;
 
 import com.google.common.base.Supplier;
-import forge.Constant.Preferences;
+
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
@@ -32,11 +32,13 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
+import forge.properties.ForgePreferences;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
@@ -313,7 +315,7 @@ public final class BoosterDraft implements IBoosterDraft {
                     + " - booster pack = " + thisBooster);
         }
 
-        if (Preferences.UPLOAD_DRAFT) {
+        if (ForgePreferences.UPLOAD_DRAFT) {
             for (int i = 0; i < thisBooster.size(); i++) {
                 final PaperCard cc = thisBooster.get(i);
                 final String cnBk = cc.getName() + "|" + cc.getEdition();
@@ -345,7 +347,7 @@ public final class BoosterDraft implements IBoosterDraft {
     /** This will upload drafting picks to cardforge HQ. */
     @Override
     public void finishedDrafting() {
-        if (!Preferences.UPLOAD_DRAFT || 1 >= draftPicks.size()) {
+        if (!ForgePreferences.UPLOAD_DRAFT || 1 >= draftPicks.size()) {
             return;
         }
 

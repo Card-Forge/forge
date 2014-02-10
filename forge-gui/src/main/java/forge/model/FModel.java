@@ -17,13 +17,12 @@
  */
 package forge.model;
 
-import forge.Constant;
-import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
 import forge.card.CardType;
 import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
+import forge.game.card.CardUtil;
 import forge.gauntlet.GauntletData;
 import forge.limited.GauntletMini;
 import forge.properties.ForgePreferences;
@@ -140,7 +139,7 @@ public class FModel {
         this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader("res/blockdata/fantasyblocks.txt", Singletons.getMagicDb().getEditions()));
         this.worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader("res/quest/world/worlds.txt"));
         // TODO - there's got to be a better place for this...oblivion?
-        Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        ForgePreferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
         this.loadDynamicGamedata();
 
@@ -161,6 +160,9 @@ public class FModel {
         return quest;
     }
 
+    
+    private static boolean KeywordsLoaded = false;
+    
     /**
      * Load dynamic gamedata.
      */
@@ -235,17 +237,17 @@ public class FModel {
              */
         }
 
-        if (!Constant.Keywords.LOADED[0]) {
+        if (!KeywordsLoaded) {
             final List<String> nskwListFile = FileUtil.readFile(NewConstants.KEYWORD_LIST_FILE);
 
             if (nskwListFile.size() > 1) {
                 for (String s : nskwListFile) {
                     if (s.length() > 1) {
-                        Constant.Keywords.NON_STACKING_LIST.add(s);
+                        CardUtil.NON_STACKING_LIST.add(s);
                     }
                 }
             }
-            Constant.Keywords.LOADED[0] = true;
+            KeywordsLoaded = true;
             /*
              * if (Constant.Runtime.DevMode[0]) {
              * System.out.println(Constant.Keywords.NonStackingList[0].list); }

@@ -17,11 +17,12 @@
  */
 package forge.limited;
 
-import forge.Constant.Preferences;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.properties.ForgePreferences;
 import forge.util.Aggregates;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -66,7 +67,7 @@ public class BoosterDraftAI {
      * @return a {@link forge.CardList} object.
      */
     public PaperCard choose(final List<PaperCard> chooseFrom, final int player) {
-        if (Preferences.DEV_MODE) {
+        if (ForgePreferences.DEV_MODE) {
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
         }
 
@@ -153,7 +154,7 @@ public class BoosterDraftAI {
         final Deck[] out = new Deck[this.deck.size()];
 
         for (int i = 0; i < this.deck.size(); i++) {
-            if (Preferences.DEV_MODE) {
+            if (ForgePreferences.DEV_MODE) {
                 System.out.println("Deck[" + i + "]");
             }
 

@@ -247,7 +247,6 @@ forge-game/.settings/org.eclipse.jdt.core.prefs -text
 forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
 forge-game/src/main/java/forge/Command.java svneol=native#text/plain
-forge-game/src/main/java/forge/Constant.java svneol=native#text/plain
 forge-game/src/main/java/forge/ImageKeys.java -text
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
 forge-game/src/main/java/forge/game/Game.java -text

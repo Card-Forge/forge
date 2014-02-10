@@ -17,7 +17,7 @@
  */
 package forge.util;
 
-import forge.Constant.Preferences;
+import forge.properties.ForgePreferences;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -145,7 +145,7 @@ public class HttpUtil {
         } catch (final IOException e) {
             return;
         }
-        if (Preferences.DEV_MODE) {
+        if (ForgePreferences.DEV_MODE) {
             System.out.println(response.toString());
         }
     }

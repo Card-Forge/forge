@@ -17,7 +17,6 @@
  */
 package forge.view.arcane;
 
-import forge.Constant;
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
@@ -59,7 +58,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      */
     private int cardWidthMin = 50;
 
-    private int cardWidthMax = Constant.Runtime.WIDTH;
+    private int cardWidthMax = 300;
     /**
      * 
      */

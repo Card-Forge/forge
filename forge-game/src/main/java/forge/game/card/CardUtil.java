@@ -17,7 +17,6 @@
  */
 package forge.game.card;
 
-import forge.Constant;
 import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
@@ -40,6 +39,8 @@ public final class CardUtil {
     // disable instantiation
     private CardUtil() { }
 
+    public static final List<String> NON_STACKING_LIST = new ArrayList<String>();
+    
     public static ColorSet getColors(final Card c) {
         return c.determineColor();
     }
@@ -51,7 +52,7 @@ public final class CardUtil {
         }
         
         return !kw.startsWith("Protection") && !kw.startsWith("CantBeBlockedBy") 
-                && !Constant.Keywords.NON_STACKING_LIST.contains(kw);
+                && !NON_STACKING_LIST.contains(kw);
     }
 
     public static String getShortColorsString(final Iterable<String> colors) {

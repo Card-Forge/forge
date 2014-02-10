@@ -18,8 +18,8 @@
 package forge.gui.match.controllers;
 
 import com.google.common.base.Function;
+
 import forge.Command;
-import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -34,6 +34,7 @@ import forge.gui.input.InputPayMana;
 import forge.gui.match.ZoneAction;
 import forge.gui.match.views.VField;
 import forge.gui.player.HumanPlay;
+import forge.properties.ForgePreferences;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -72,7 +73,7 @@ public class CField implements ICDoc {
         ZoneAction handAction = new ZoneAction(player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ( player.getLobbyPlayer() == viewer || Preferences.DEV_MODE || player.hasKeyword("Play with your hand revealed."))
+                if ( player.getLobbyPlayer() == viewer || ForgePreferences.DEV_MODE || player.hasKeyword("Play with your hand revealed."))
                     super.actionPerformed(e);
             }
         };
@@ -80,7 +81,7 @@ public class CField implements ICDoc {
         ZoneAction libraryAction = new ZoneAction(player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Preferences.DEV_MODE)
+                if (ForgePreferences.DEV_MODE)
                     super.actionPerformed(e);
             }
         };

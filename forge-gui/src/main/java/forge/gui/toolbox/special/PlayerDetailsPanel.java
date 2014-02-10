@@ -1,7 +1,7 @@
 package forge.gui.toolbox.special;
 
 import com.google.common.base.Function;
-import forge.Constant.Preferences;
+
 import forge.card.MagicColor;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -12,10 +12,13 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
+import forge.properties.ForgePreferences;
 import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -210,7 +213,7 @@ public class PlayerDetailsPanel extends JPanel {
         lblExile.setHoverable(true);
         lblExile.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } } );
     
-        if (Preferences.DEV_MODE) {
+        if (ForgePreferences.DEV_MODE) {
             lblLibrary.setHoverable(true);
             lblLibrary.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { libraryAction.actionPerformed(null); } } );
         }

@@ -17,8 +17,6 @@
  */
 package forge.properties;
 
-import forge.Constant;
-import forge.Constant.Preferences;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.game.GameLogEntryType;
@@ -214,6 +212,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         this.setPref(FPref.DEV_UNLIMITED_LAND, v.getLblUnlimitedLands().getEnabled());
     }
 
+    
+    
+    // was not used anywhere else
+    private final boolean NET_CONN = false;
+    
     /**
      * TODO: Needs to be reworked for efficiency with rest of prefs saves in
      * codebase.
@@ -221,8 +224,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     public void actuateMatchPreferences() {
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-        Preferences.DEV_MODE = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        Preferences.UPLOAD_DRAFT = Constant.Runtime.NET_CONN && this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
+        DEV_MODE = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        UPLOAD_DRAFT = NET_CONN; // && this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
 
         // AI field is at index [0]
         PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
@@ -273,4 +276,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     protected String getPrefDefault(FPref key) {
         return key.getDefault();
     }
+    
+
+    /** The Constant DevMode. */
+    // one for normal mode, one for quest mode
+    public static boolean DEV_MODE;
+    /** The Constant UpldDrft. */
+    public static boolean UPLOAD_DRAFT;
 }

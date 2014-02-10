@@ -1,7 +1,6 @@
 package forge.gui.home.settings;
 
 import forge.Command;
-import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
@@ -55,7 +54,7 @@ public enum CSubmenuPreferences implements ICDoc {
             public void itemStateChanged(final ItemEvent arg0) {
                 final boolean toggle = view.getCbDevMode().isSelected();
                 prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
-                Preferences.DEV_MODE = toggle;
+                ForgePreferences.DEV_MODE = toggle;
                 prefs.save();
             }
         });

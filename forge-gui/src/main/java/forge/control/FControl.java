@@ -17,7 +17,6 @@
  */
 package forge.control;
 
-import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.ImageCache;
 import forge.Singletons;
@@ -492,7 +491,7 @@ public enum FControl implements KeyEventDispatcher {
         
 
         for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            field.getDetailsPanel().getLblLibrary().setHoverable(Preferences.DEV_MODE);
+            field.getDetailsPanel().getLblLibrary().setHoverable(ForgePreferences.DEV_MODE);
         }
 
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
