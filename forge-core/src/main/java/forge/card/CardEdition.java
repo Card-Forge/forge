@@ -287,7 +287,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     break;
             }
             res.foilChanceInBooster = section.getDouble("FoilChanceInBooster", 21.43F) / 100.0F;
-            System.out.println("chance = " + res.foilChanceInBooster);
             res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", false);
             
             return res;
