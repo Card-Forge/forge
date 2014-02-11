@@ -4908,10 +4908,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Zone-change triggers don't trigger when a permanent phases in or
             // out.
 
-            // Suppressed Exiling is as close as we can get to
-            // "ceasing to exist"
+            // Just remove it's zone, so we don't run through the exile stuff
+            // This allows auras on phased out tokens to just phase out permanently
             getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            getGame().getAction().exile(this);
+            this.getZone().remove(this);
             getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
 
