@@ -1078,6 +1078,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     public static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, Player player, final Player decider) {
 
+        if( fetchList.isEmpty() )
+            return null;
+        
         String type = sa.getParam("ChangeType");
         if (type == null) {
             type = "Card";
