@@ -3,6 +3,7 @@ package forge.gui.toolbox.itemmanager;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckBase;
+import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
@@ -20,11 +21,13 @@ import forge.gui.toolbox.itemmanager.filters.*;
 import forge.gui.toolbox.itemmanager.views.*;
 import forge.item.InventoryItem;
 import forge.quest.QuestWorld;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
@@ -243,6 +246,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 break;
             case Constructed:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+                DeckPreferences.setCurrentDeck(deck.toString());
                 //re-use constructed controller
                 break;
             case Sealed:

@@ -81,6 +81,7 @@ public final class NewConstants {
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
     public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
     public static final String CARD_PREFS_FILE      = USER_PREFS_DIR + "card.preferences";
+    public static final String DECK_PREFS_FILE      = USER_PREFS_DIR + "deck.preferences";
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
 
     // data that has defaults in the program dir but overrides/additions in the user dir

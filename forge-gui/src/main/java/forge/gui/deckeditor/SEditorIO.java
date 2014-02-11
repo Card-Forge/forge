@@ -1,12 +1,14 @@
 package forge.gui.deckeditor;
 
 import forge.Singletons;
+import forge.deck.io.DeckPreferences;
 import forge.gui.deckeditor.controllers.CAllDecks;
 import forge.gui.deckeditor.controllers.DeckController;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FOptionPane;
+
 import org.apache.commons.lang3.StringUtils;
 
 /** 
@@ -24,6 +26,7 @@ public class SEditorIO {
     public static boolean saveDeck() {
         final DeckController<?> controller = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
         final String name = VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().getText();
+        final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
 
         // Warn if no name
         if (name == null || name.isEmpty()) {
@@ -42,7 +45,7 @@ public class SEditorIO {
 
             if (confirmResult) {
                 controller.save();
-                DeckProxy deck = VAllDecks.SINGLETON_INSTANCE.getLstDecks().stringToItem(controller.getModelPath() + "/" + name);
+                DeckProxy deck = VAllDecks.SINGLETON_INSTANCE.getLstDecks().stringToItem(deckStr);
                 if (deck != null) { //reload DeckProxy to pull changes into deck list
                     deck.reloadFromStorage();
                     VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedItem(deck);
@@ -55,7 +58,11 @@ public class SEditorIO {
                 name + "'. Continue?", "Create Deck?")) {
             controller.saveAs(name);
             CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
-            VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(controller.getModelPath() + "/" + name);
+            VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+        }
+
+        if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_CONSTRUCTED) {
+            DeckPreferences.setCurrentDeck(deckStr);
         }
 
         return true;

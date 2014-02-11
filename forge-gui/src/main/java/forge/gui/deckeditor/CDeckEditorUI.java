@@ -20,7 +20,9 @@ package forge.gui.deckeditor;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckBase;
+import forge.deck.io.DeckPreferences;
 import forge.gui.deckeditor.controllers.*;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
@@ -34,6 +36,7 @@ import forge.util.ItemPool;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
@@ -301,6 +304,15 @@ public enum CDeckEditorUI implements ICDoc {
         }
         else if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
             setEditorController(new CEditorConstructed()); //ensure Constructed deck editor controller initialized
+
+            String currentDeckStr = DeckPreferences.getCurrentDeck();
+            if (currentDeckStr != null) {
+                DeckProxy deck = VAllDecks.SINGLETON_INSTANCE.getLstDecks().stringToItem(currentDeckStr);
+                if (deck != null) {
+                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedItem(deck);
+                    childController.getDeckController().load(deck.getPath(), deck.getName());
+                }
+            }
         }
     }
 

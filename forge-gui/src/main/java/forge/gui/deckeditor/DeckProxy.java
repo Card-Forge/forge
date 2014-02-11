@@ -100,10 +100,14 @@ public class DeckProxy implements InventoryItem {
 
     @Override
     public String toString() {
+        return getDeckString(path, deck.getName());
+    }
+
+    public static String getDeckString(String path, String name) {
         if (StringUtils.isEmpty(path)) {
-            return deck.getName();
+            return name;
         }
-        return path + "/" + deck.getName();
+        return path + "/" + name;
     }
 
     public void invalidateCache() {

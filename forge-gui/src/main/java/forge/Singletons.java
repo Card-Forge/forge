@@ -18,6 +18,7 @@
 package forge;
 
 import forge.control.FControl;
+import forge.deck.io.DeckPreferences;
 import forge.gui.CardPreferences;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.workshop.CardScriptInfo;
@@ -46,9 +47,9 @@ public final class Singletons {
 
     public static void initializeOnce(boolean withUi) {
         FThreads.assertExecutedByEdt(false);
-        
+
         synchronized (Singletons.class) {
-            if(initialized) 
+            if(initialized)
                 throw new IllegalStateException("Singletons.initializeOnce really cannot be called again");
             initialized = true;
         }
@@ -57,17 +58,17 @@ public final class Singletons {
             view = FView.SINGLETON_INSTANCE;
         }
 
-        CardStorageReader.ProgressObserver progressBarBridge = view == null 
+        CardStorageReader.ProgressObserver progressBarBridge = view == null
                 ? CardStorageReader.ProgressObserver.emptyObserver : new CardStorageReader.ProgressObserver() {
             FProgressBar bar = view.getSplash().getProgressBar();
             @Override
-            public void setOperationName(final String name, final boolean usePercents) { 
+            public void setOperationName(final String name, final boolean usePercents) {
                 FThreads.invokeInEdtLater(new Runnable() { @Override public void run() {
-                    bar.setDescription(name); 
-                    bar.setPercentMode(usePercents); 
+                    bar.setDescription(name);
+                    bar.setPercentMode(usePercents);
                 } });
             }
-            
+
             @Override
             public void report(int current, int total) {
                 if ( total != bar.getMaximum())
@@ -75,19 +76,20 @@ public final class Singletons {
                 bar.setValueThreadSafe(current);
             }
         };
-        
+
         // Loads all cards (using progress bar).
         final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, progressBarBridge, CardScriptInfo.readerObserver);
         magicDb = new StaticData(reader, "res/editions", "res/blockdata");
         model = FModel.getInstance(withUi);
-        
+
         if (withUi) {
             control = FControl.instance;
-            
+
             CardPreferences.load(NewConstants.CARD_PREFS_FILE);
+            DeckPreferences.load(NewConstants.DECK_PREFS_FILE);
         }
     }
-    
+
     // disallow instantiation
     private Singletons() { }
 }
