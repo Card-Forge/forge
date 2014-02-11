@@ -62,8 +62,8 @@ public class BoosterGenerator {
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
         boolean hasFoil = edition != null && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster() && edition.getFoilType() != FoilType.NOT_SUPPORTED; 
-        boolean commonSlotFoil = !hasFoil ? false : edition.getFoilAlwaysInCommonSlot();
-        String foilSlot = !hasFoil ? null : edition.getFoilAlwaysInCommonSlot() ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
+        boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
+        String foilSlot = !hasFoil ? null : foilAtEndOfPack ? BoosterSlots.COMMON : Aggregates.random(template.getSlots()).getKey();
         
         for(Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
@@ -73,19 +73,20 @@ public class BoosterGenerator {
             String setCode = sType.length == 1 && template.getEdition() != null ?  template.getEdition() : null;
             String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
 
-            if ( slotType.equals(foilSlot))
+            boolean foilInThisSlot = slotType.startsWith(foilSlot);
+            if (foilInThisSlot)
                 numCards--;
 
             PrintSheet ps = getPrintSheet(sheetKey);
             result.addAll(ps.random(numCards, true));
             sheetsUsed.add(ps);
 
-            if (hasFoil && !commonSlotFoil && slotType.equals(foilSlot)) {
+            if (hasFoil && foilInThisSlot && !foilAtEndOfPack) {
                 result.add(generateFoilCard(ps));
             }
         }
 
-        if (hasFoil && commonSlotFoil) {
+        if (hasFoil && foilAtEndOfPack) {
             PrintSheet foilSheet = Aggregates.random(sheetsUsed);
             result.add(generateFoilCard(foilSheet));
         }
