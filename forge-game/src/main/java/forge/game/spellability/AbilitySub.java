@@ -86,7 +86,8 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
         this.setTargetRestrictions(tgt);
 
         api = api0;
-        mapParams.putAll(params0);
+        if (params0 != null)
+            mapParams.putAll(params0);
         effect = api.getSpellEffect();
 
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
