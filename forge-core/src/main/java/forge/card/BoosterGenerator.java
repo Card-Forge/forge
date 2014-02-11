@@ -73,7 +73,7 @@ public class BoosterGenerator {
             String setCode = sType.length == 1 && template.getEdition() != null ?  template.getEdition() : null;
             String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
 
-            boolean foilInThisSlot = slotType.startsWith(foilSlot);
+            boolean foilInThisSlot = hasFoil && slotType.startsWith(foilSlot);
             if (foilInThisSlot)
                 numCards--;
 
@@ -81,7 +81,7 @@ public class BoosterGenerator {
             result.addAll(ps.random(numCards, true));
             sheetsUsed.add(ps);
 
-            if (hasFoil && foilInThisSlot && !foilAtEndOfPack) {
+            if (foilInThisSlot && !foilAtEndOfPack) {
                 result.add(generateFoilCard(ps));
             }
         }
