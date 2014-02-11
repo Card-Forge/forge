@@ -1199,6 +1199,10 @@ public class CardFactoryUtil {
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
             final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
+            if (origin == null) { // Remove cards on the battlefield that changed controller
+                List<Card> sameDest = CardUtil.getThisTurnEntered(destination, destination, validFilter, c);
+                res.removeAll(sameDest);
+            }
             return doXMath(res.size(), m, c);
         }
 
@@ -1212,6 +1216,10 @@ public class CardFactoryUtil {
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
             final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c);
+            if (origin == null) { // Remove cards on the battlefield that changed controller
+                List<Card> sameDest = CardUtil.getLastTurnEntered(destination, destination, validFilter, c);
+                res.removeAll(sameDest);
+            }
             return doXMath(res.size(), m, c);
         }
 
