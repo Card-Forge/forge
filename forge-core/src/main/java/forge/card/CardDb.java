@@ -257,7 +257,7 @@ public final class CardDb implements ICardDatabase {
             for(int i = 0 ; i < sz ; i++) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
-                if(!fromSet.accept(ed))
+                if(fromSet != null && !fromSet.accept(ed))
                     continue;
 
                 if((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
