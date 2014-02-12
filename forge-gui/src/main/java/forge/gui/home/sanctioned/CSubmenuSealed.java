@@ -101,7 +101,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
         view.getLstDecks().setPool(DeckProxy.getAllSealedDecks(Singletons.getModel().getDecks().getSealed()));
-        view.getLstDecks().update();
+        view.getLstDecks().update(false, false, true);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {

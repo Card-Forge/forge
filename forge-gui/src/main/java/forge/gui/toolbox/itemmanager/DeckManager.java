@@ -48,7 +48,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
 
     private final GameType gametype;
-    private boolean stringOnly, preventEdit;
+    private boolean stringOnly, preventEdit, hideFolderColumn;
     private UiCommand cmdDelete, cmdSelect;
     private final Map<ColumnDef, ItemColumn> columns = SColumnUtil.getColumns(
             ColumnDef.DECK_FAVORITE,
@@ -97,22 +97,30 @@ public final class DeckManager extends ItemManager<DeckProxy> {
      * Update table columns
      */
     public void update() {
-        update(false, false);
+        update(false, false, false);
     }
     public void update(boolean stringOnly0) {
-        update(stringOnly0, stringOnly0);
+        update(stringOnly0, stringOnly0, stringOnly0);
     }
     public void update(boolean stringOnly0, boolean preventEdit0) {
+        update(stringOnly0, preventEdit0, stringOnly0);
+    }
+    public void update(boolean stringOnly0, boolean preventEdit0, boolean hideFolderColumn0) {
         if (this.stringOnly != stringOnly0) {
             this.stringOnly = stringOnly0;
             this.restoreDefaultFilters();
         }
         if (stringOnly0) {
-            preventEdit0 = true; //if name only, always prevent edit
+            preventEdit0 = true; //if name only, always prevent edit and hide folder column
+            hideFolderColumn0 = true;
         }
         if (this.preventEdit != preventEdit0) {
             this.preventEdit = preventEdit0;
             columns.get(ColumnDef.DECK_ACTIONS).setVisible(!preventEdit0);
+        }
+        if (this.hideFolderColumn != hideFolderColumn0) {
+            this.hideFolderColumn = hideFolderColumn0;
+            columns.get(ColumnDef.DECK_FOLDER).setVisible(!hideFolderColumn0);
         }
         if (stringOnly0) {
             this.setup(SColumnUtil.getStringColumn());

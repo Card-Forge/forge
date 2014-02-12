@@ -77,7 +77,7 @@ public enum CSubmenuDraft implements ICDoc {
         final JButton btnStart = view.getBtnStart();
 
         view.getLstDecks().setPool(DeckProxy.getDraftDecks(Singletons.getModel().getDecks().getDraft()));
-        view.getLstDecks().update();
+        view.getLstDecks().update(false, false, true);
 
         if (!view.getLstDecks().getPool().isEmpty()) {
             btnStart.setEnabled(true);

@@ -76,7 +76,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
         view.getLstDecks().setPool(DeckProxy.getAllQuestDecks(hasQuest ? qData.getMyDecks() : null));
-        view.getLstDecks().update();
+        view.getLstDecks().update(false, false, true);
 
         // Look through list for preferred deck from prefs
         final DeckProxy deck = hasQuest ? view.getLstDecks().stringToItem(Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_DECK)) : null;

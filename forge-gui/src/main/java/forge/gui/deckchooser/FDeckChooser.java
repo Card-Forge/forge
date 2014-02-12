@@ -180,7 +180,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
-        lstDecks.update(false, true);
+        lstDecks.update(false, true, true);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {
@@ -197,7 +197,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
-        lstDecks.update(false, true);
+        lstDecks.update(false, true, true);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {
