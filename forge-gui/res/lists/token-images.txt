@@ -7,6 +7,7 @@ b_1_1_bat.jpg                          http://www.cardforge.org/fpics/tokens/b_1
 b_1_1_faerie_rogue.jpg                 http://www.cardforge.org/fpics/tokens/b_1_1_faerie_rogue.jpg
 b_1_1_festering_goblin.jpg             http://www.cardforge.org/fpics/tokens/b_1_1_festering_goblin.jpg
 b_1_1_goblin_rogue.jpg                 http://www.cardforge.org/fpics/tokens/b_1_1_goblin_rogue.jpg
+b_1_1_harpy_ths.jpg                    http://www.cardforge.org/fpics/tokens/THS/b_1_1_harpy_ths.jpg
 b_1_1_minion.jpg                       http://www.cardforge.org/fpics/tokens/b_1_1_minion.jpg
 b_1_1_rat.jpg                          http://www.cardforge.org/fpics/tokens/b_1_1_rat.jpg
 b_1_1_rat_gtc.jpg                      http://www.cardforge.org/fpics/tokens/GTC/b_1_1_rat_gtc.jpg
@@ -39,6 +40,8 @@ br_1_1_minor_demon.jpg                 http://www.cardforge.org/fpics/tokens/br_
 br_3_1_graveborn.jpg                   http://www.cardforge.org/fpics/tokens/br_3_1_graveborn.jpg
 br_5_5_elemental.jpg                   http://www.cardforge.org/fpics/tokens/br_5_5_elemental.jpg
 c_0_1_eldrazi_spawn.jpg                http://www.cardforge.org/fpics/tokens/c_0_1_eldrazi_spawn.jpg
+c_0_1_eldrazi_spawn2.jpg               http://www.cardforge.org/fpics/tokens/c_0_1_eldrazi_spawn2.jpg
+c_0_1_eldrazi_spawn3.jpg               http://www.cardforge.org/fpics/tokens/c_0_1_eldrazi_spawn3.jpg
 c_0_1_pest.jpg                         http://www.cardforge.org/fpics/tokens/c_0_1_pest.jpg
 c_0_1_prism.jpg                        http://www.cardforge.org/fpics/tokens/c_0_1_prism.jpg
 c_0_2_wall.jpg                         http://www.cardforge.org/fpics/tokens/c_0_2_wall.jpg
@@ -62,6 +65,7 @@ c_2_2_spawn.jpg                        http://www.cardforge.org/fpics/tokens/c_2
 c_2_2_volraths_laboratory.jpg          http://www.cardforge.org/fpics/tokens/c_2_2_volraths_laboratory.jpg
 c_2_2_wirefly.jpg                      http://www.cardforge.org/fpics/tokens/c_2_2_wirefly.jpg
 c_3_3_golem.jpg                        http://www.cardforge.org/fpics/tokens/c_3_3_golem.jpg
+c_3_3_golem_ths.jpg                    http://www.cardforge.org/fpics/tokens/THS/c_3_3_golem_ths.jpg
 c_3_3_wurm_deathtouch.jpg              http://www.cardforge.org/fpics/tokens/c_3_3_wurm_deathtouch.jpg
 c_3_3_wurm_lifelink.jpg                http://www.cardforge.org/fpics/tokens/c_3_3_wurm_lifelink.jpg
 c_3_4_gargoyle.jpg                     http://www.cardforge.org/fpics/tokens/c_3_4_gargoyle.jpg
@@ -98,6 +102,7 @@ g_1_2_spider.jpg                       http://www.cardforge.org/fpics/tokens/g_1
 g_2_2_ape.jpg                          http://www.cardforge.org/fpics/tokens/g_2_2_ape.jpg
 g_2_2_bear.jpg                         http://www.cardforge.org/fpics/tokens/g_2_2_bear.jpg
 g_2_2_beast.jpg                        http://www.cardforge.org/fpics/tokens/g_2_2_beast.jpg
+g_2_2_boar_ths.jpg                     http://www.cardforge.org/fpics/tokens/THS/g_2_2_boar_ths.jpg
 g_2_2_cat_warrior.jpg                  http://www.cardforge.org/fpics/tokens/g_2_2_cat_warrior.jpg
 g_2_2_lizard.jpg                       http://www.cardforge.org/fpics/tokens/g_2_2_lizard.jpg
 g_2_2_ooze.jpg                         http://www.cardforge.org/fpics/tokens/g_2_2_ooze.jpg
@@ -138,7 +143,8 @@ r_1_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_1
 r_1_1_goblin.jpg                       http://www.cardforge.org/fpics/tokens/r_1_1_goblin.jpg
 r_1_1_goblin_rtr.jpg                   http://www.cardforge.org/fpics/tokens/RTR/r_1_1_goblin_rtr.jpg
 r_1_1_goblin_scout.jpg                 http://www.cardforge.org/fpics/tokens/r_1_1_goblin_scout.jpg
-r_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/r_1_1_human_avr.jpg 
+r_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/r_1_1_human_avr.jpg
+r_1_1_soldier_ths.jpg                  http://www.cardforge.org/fpics/tokens/THS/r_1_1_soldier_ths.jpg
 r_1_1_survivor.jpg                     http://www.cardforge.org/fpics/tokens/r_1_1_survivor.jpg
 r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg
 r_2_1_goblin.jpg                       http://www.cardforge.org/fpics/tokens/r_2_1_goblin.jpg
@@ -157,6 +163,7 @@ r_6_6_dragon_rtr.jpg                   http://www.cardforge.org/fpics/tokens/RTR
 r_7_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_7_1_elemental.jpg
 r_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_x_x_elemental.jpg
 rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg
+rg_2_2_satyr_ths.jpg                   http://www.cardforge.org/fpics/tokens/THS/r_2_2_satyr_ths.jpg
 rg_3_4_stangg_twin.jpg                 http://www.cardforge.org/fpics/tokens/rg_3_4_stangg_twin.jpg
 rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg
 rw_1_1_goblin_soldier.jpg              http://www.cardforge.org/fpics/tokens/rw_1_1_goblin_soldier.jpg
@@ -164,6 +171,7 @@ rw_1_1_soldier.jpg                     http://www.cardforge.org/fpics/tokens/GTC
 u_0_1_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_homunculus.jpg
 u_0_1_plant_wall.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_plant_wall.jpg
 u_0_1_starfish.jpg                     http://www.cardforge.org/fpics/tokens/u_0_1_starfish.jpg
+u_1_0_elemental_ths.jpg                http://www.cardforge.org/fpics/tokens/THS/u_1_0_elemental_ths.jpg
 u_1_1_bird.jpg                         http://www.cardforge.org/fpics/tokens/u_1_1_bird.jpg
 u_1_1_camarid.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_camarid.jpg
 u_1_1_cloud_sprite.jpg                 http://www.cardforge.org/fpics/tokens/u_1_1_cloud_sprite.jpg
@@ -173,6 +181,7 @@ u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1
 u_1_1_merfolk_wizard.jpg               http://www.cardforge.org/fpics/tokens/u_1_1_merfolk_wizard.jpg
 u_1_1_thopter.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_thopter.jpg
 u_1_1_spirit_avr.jpg                   http://www.cardforge.org/fpics/tokens/u_1_1_spirit_avr.jpg
+u_2_2_bird_ths.jpg                     http://www.cardforge.org/fpics/tokens/THS/u_2_2_bird_ths.jpg
 u_2_2_drake.jpg                        http://www.cardforge.org/fpics/tokens/u_2_2_drake.jpg
 u_2_2_elemental_flying.jpg             http://www.cardforge.org/fpics/tokens/u_2_2_elemental_flying.jpg
 u_2_2_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_2_2_homunculus.jpg
@@ -203,8 +212,11 @@ w_1_1_pegasus.jpg                      http://www.cardforge.org/fpics/tokens/w_1
 w_1_1_soldier.jpg                      http://www.cardforge.org/fpics/tokens/w_1_1_soldier.jpg
 w_1_1_soldier_ally.jpg                 http://www.cardforge.org/fpics/tokens/w_1_1_soldier_ally.jpg
 w_1_1_soldier_rtr.jpg                  http://www.cardforge.org/fpics/tokens/RTR/w_1_1_soldier_rtr.jpg
+w_1_1_soldier_ths.jpg                  http://www.cardforge.org/fpics/tokens/THS/w_1_1_soldier_ths.jpg
+w_1_1_soldier2_ths.jpg                 http://www.cardforge.org/fpics/tokens/THS/w_1_1_soldier2_ths.jpg
 w_1_1_spirit.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_spirit.jpg
 w_1_1_spirit_avr.jpg                   http://www.cardforge.org/fpics/tokens/w_1_1_spirit_avr.jpg
+w_2_1_cleric_ths.jpg                   http://www.cardforge.org/fpics/tokens/THS/w_2_1_cleric_ths.jpg
 w_2_2_cat.jpg                          http://www.cardforge.org/fpics/tokens/w_2_2_cat.jpg
 w_2_2_griffin.jpg                      http://www.cardforge.org/fpics/tokens/w_2_2_griffin.jpg
 w_2_2_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_2_2_knight.jpg
@@ -231,6 +243,8 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 chandra_the_firebrand_effect.jpg       http://www.cardforge.org/fpics/effects/chandra_the_firebrand_effect.jpg
 domri_rade_emblem.jpg                  http://www.cardforge.org/fpics/effects/domri_rade_emblem.jpg
 elspeth_knight_errant_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_knight_errant_emblem.jpg
+elspeth_suns_champion_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_suns_champion_emblem.jpg
+garruk_caller_of_beasts_emblem.jpg     http://www.cardforge.org/fpics/effects/garruk_caller_of_beasts_emblem.jpg
 koth_of_the_hammer_emblem.jpg          http://www.cardforge.org/fpics/effects/koth_of_the_hammer_emblem.jpg
 liliana_of_the_dark_realms_emblem.jpg  http://www.cardforge.org/fpics/effects/liliana_of_the_dark_realms_emblem.jpg
 sorin_lord_of_innistrad_emblem.jpg     http://www.cardforge.org/fpics/effects/sorin_lord_of_innistrad_effect.jpg

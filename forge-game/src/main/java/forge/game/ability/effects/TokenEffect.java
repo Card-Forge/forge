@@ -18,6 +18,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
@@ -32,7 +33,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.item.PaperToken;
+import forge.util.MyRandom;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +44,7 @@ public class TokenEffect extends SpellAbilityEffect {
     private String tokenOwner;
     private String[] tokenColors;
     private String tokenImage;
+    private String[] tokenAltImages;
     private String[] tokenAbilities;
     private String[] tokenTriggers;
     private String[] tokenSVars;
@@ -75,6 +79,15 @@ public class TokenEffect extends SpellAbilityEffect {
             image = PaperToken.makeTokenFileName(mapParams.getParam("TokenImage"));
         } else {
             image = "";
+        }
+
+        if (mapParams.hasParam("TokenAltImages")) {
+            this.tokenAltImages = mapParams.getParam("TokenAltImages").split(",");
+            for (int i = 0; i < tokenAltImages.length; i++) {
+            	this.tokenAltImages[i] = PaperToken.makeTokenFileName(this.tokenAltImages[i]);
+            }
+        } else {
+            this.tokenAltImages = null;
         }
 
         this.tokenTapped = mapParams.hasParam("TokenTapped") && mapParams.getParam("TokenTapped").equals("True");
@@ -176,13 +189,15 @@ public class TokenEffect extends SpellAbilityEffect {
             }
         }
         
-        final String imageName;
+        final List<String> imageNames = new ArrayList<String>(1);
         if (this.tokenImage.equals("")) {
-            imageName = PaperToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName);
+            imageNames.add(PaperToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName));
         } else {
-            imageName = this.tokenImage;
+            imageNames.add(0, this.tokenImage);
         }
-        // System.out.println("AF_Token imageName = " + imageName);
+        if (this.tokenAltImages != null) {
+        	imageNames.addAll(Arrays.asList(this.tokenAltImages));
+        }
 
         for (final char c : colorDesc.toCharArray()) {
             cost += c + ' ';
@@ -206,8 +221,9 @@ public class TokenEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintTokens");
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             for (int i = 0; i < finalAmount; i++) {
-                final List<Card> tokens = CardFactory.makeToken(substitutedName, imageName, controller, cost,
-                        substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
+                final List<Card> tokens = CardFactory.makeToken(substitutedName,
+                		imageNames.get(MyRandom.getRandom().nextInt(imageNames.size())),
+                        controller, cost, substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
                 for(Card tok : tokens) {
                     if (this.tokenTapped) {
                         tok.setTapped(true);
