@@ -17,6 +17,7 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
+import forge.gui.MouseUtil;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.*;
@@ -32,11 +33,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.*;
+
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
@@ -502,6 +505,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     if (index >= 0) {
                         resizeColumn = (ItemColumn) colModel.getColumn(index);
                         resizeColumn.startResize();
+                        MouseUtil.lockCursor(); //lock resize cursor during resize
                     }
                 }
             }
@@ -509,6 +513,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             @Override
             public void onLeftMouseUp(MouseEvent e) {
                 if (resizeColumn != null) {
+                    MouseUtil.unlockCursor();
                     resizeColumn.endResize();
                     resizeColumn = null;
                 }
@@ -542,6 +547,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
                 SItemManagerIO.savePreferences(itemManager);
             }
+
+            @Override
+            public void onMouseExit(MouseEvent e) {
+                MouseUtil.setCursor(Cursor.getDefaultCursor());
+            }
+        };
+
+        private final MouseMotionAdapter headerMouseMotionAdapter = new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent arg0) {
+                MouseUtil.setCursor(table.getTableHeader().getCursor());
+            }
         };
 
         /**
@@ -559,6 +576,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             table.getTableHeader().removeMouseListener(headerMouseAdapter); //ensure listener not added multiple times
             table.getTableHeader().addMouseListener(headerMouseAdapter);
+
+            table.getTableHeader().removeMouseMotionListener(headerMouseMotionAdapter); //ensure listener not added multiple times
+            table.getTableHeader().addMouseMotionListener(headerMouseMotionAdapter);
         }
 
         //========== Overridden from AbstractTableModel

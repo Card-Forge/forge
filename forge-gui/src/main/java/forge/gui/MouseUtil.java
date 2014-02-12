@@ -25,13 +25,36 @@ public final class MouseUtil {
             throw new IllegalArgumentException("No Enum specified for this int");
         }
     };
+    
+    private static Cursor cursor;
+    private static int cursorLockCount;
+
+    /**
+     * Lock cursor as it is currently displayed until unlockCursor called
+     */
+    public static void lockCursor() {
+        cursorLockCount++;
+    }
+    public static void unlockCursor() {
+        if (cursorLockCount == 0) { return; }
+        if (--cursorLockCount == 0) {
+            //update displayed cursor after cursor unlocked
+            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(cursor);
+        }
+    }
 
     /**
      * The only reliable way to ensure the mouse cursor is set properly in Forge.
      * 
      * @param mouseCursor one of the predefined {@code Cursor} types.
      */
-    public static void setMouseCursor(MouseCursor cursor) {
-        FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(cursor.toInt()));
+    public static void setMouseCursor(MouseCursor cursor0) {
+        setCursor(Cursor.getPredefinedCursor(cursor0.toInt()));
+    }
+    public static void setCursor(Cursor cursor0) {
+        if (cursor == cursor0) { return; }
+        cursor = cursor0;
+        if (cursorLockCount > 0) { return; }
+        FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(cursor);
     }
 }
