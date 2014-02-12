@@ -1156,6 +1156,8 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword("Shroud") || card.hasKeyword("Hexproof")) {
                 return false;
             }
+        } else if (keyword.equals("Defender")) {
+        	return false;
         }
         return true;
     }
