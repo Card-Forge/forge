@@ -1,5 +1,6 @@
 package forge.gui.toolbox;
 
+import forge.gui.MouseUtil;
 import forge.gui.toolbox.FSkin.SkinnedTextField;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -70,6 +72,9 @@ public class FTextField extends SkinnedTextField {
         this.setText(builder.text);
         this.setToolTipText(builder.toolTip);
         this.setFocusable(true);
+        if (this.isEditable()) {
+            MouseUtil.setComponentCursor(this, Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+        }
 
         addFocusListener(new FocusAdapter() {
             @Override

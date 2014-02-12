@@ -3,6 +3,8 @@ package forge.gui;
 import forge.view.FView;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public final class MouseUtil {
     private MouseUtil() { }
@@ -56,5 +58,19 @@ public final class MouseUtil {
         cursor = cursor0;
         if (cursorLockCount > 0) { return; }
         FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(cursor);
+    }
+
+    public static void setComponentCursor(final Component comp, final Cursor cursor0) {
+        comp.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(cursor0);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
     }
 }
