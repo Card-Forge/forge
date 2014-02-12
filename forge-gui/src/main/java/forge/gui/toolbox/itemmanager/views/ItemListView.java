@@ -491,9 +491,27 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         };
 
         private final FMouseAdapter headerMouseAdapter = new FMouseAdapter(true) {
+            private ItemColumn resizeColumn;
+
             @Override
             public void onLeftMouseDown(MouseEvent e) {
                 focus();
+                if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {
+                    final TableColumnModel colModel = table.getColumnModel();
+                    int index = colModel.getColumnIndexAtX(e.getX() - 3); //-3 to ensure we get column left of resizer
+                    if (index >= 0) {
+                        resizeColumn = (ItemColumn) colModel.getColumn(index);
+                        resizeColumn.startResize();
+                    }
+                }
+            }
+
+            @Override
+            public void onLeftMouseUp(MouseEvent e) {
+                if (resizeColumn != null) {
+                    resizeColumn.endResize();
+                    resizeColumn = null;
+                }
             }
 
             @Override

@@ -38,7 +38,7 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 public enum ColumnDef {
-    STRING("", "", 0, -1, -1, SortState.ASC, new ItemCellRenderer(),
+    STRING("", "", 0, false, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -51,7 +51,7 @@ public enum ColumnDef {
                     return from.getKey().toString();
                 }
             }),
-    NAME("Name", "Name", 180, -1, -1, SortState.ASC, new ItemCellRenderer(),
+    NAME("Name", "Name", 180, false, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -65,7 +65,7 @@ public enum ColumnDef {
                     return name.contains("AE") ? AE_FINDER.matcher(name).replaceAll("\u00C6") : name;
                 }
             }),
-    TYPE("Type", "Type", 100, -1, -1, SortState.ASC, new ItemCellRenderer(),
+    TYPE("Type", "Type", 100, false, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -78,7 +78,7 @@ public enum ColumnDef {
                     return toType(from.getKey());
                 }
             }),
-    COST("Cost", "Cost", 70, -1, 140, SortState.ASC, new ManaCostRenderer(),
+    COST("Cost", "Cost", 70, true, SortState.ASC, new ManaCostRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -91,7 +91,7 @@ public enum ColumnDef {
                     return toCardRules(from.getKey());
                 }
             }),
-    COLOR("Color", "Color", 46, -1, 60, SortState.ASC, new ItemCellRenderer(),
+    COLOR("Color", "Color", 46, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -104,7 +104,7 @@ public enum ColumnDef {
                     return toColor(from.getKey());
                 }
             }),
-    POWER("Power", "Power", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
+    POWER("Power", "Power", 20, true, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -117,7 +117,7 @@ public enum ColumnDef {
                     return toPower(from.getKey());
                 }
             }),
-    TOUGHNESS("Toughness", "Toughness", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
+    TOUGHNESS("Toughness", "Toughness", 20, true, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -130,7 +130,7 @@ public enum ColumnDef {
                     return toToughness(from.getKey());
                 }
             }),
-    CMC("CMC", "CMC", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
+    CMC("CMC", "CMC", 20, true, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -143,7 +143,7 @@ public enum ColumnDef {
                     return toCMC(from.getKey());
                 }
             }),
-    RARITY("Rarity", "Rarity", 20, 20, 20, SortState.ASC, new ItemCellRenderer(),
+    RARITY("Rarity", "Rarity", 20, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -156,7 +156,7 @@ public enum ColumnDef {
                     return toRarity(from.getKey());
                 }
             }),
-    SET("Set", "Set", 38, 38, 38, SortState.DESC, new SetCodeRenderer(),
+    SET("Set", "Set", 38, true, SortState.DESC, new SetCodeRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -172,7 +172,7 @@ public enum ColumnDef {
                     return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
                 }
             }),
-    AI("AI", "AI Status", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+    AI("AI", "AI Status", 30, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -194,7 +194,7 @@ public enum ColumnDef {
                             : (ai.getRemRandomDecks() ? "?" : "");
                 }
             }),
-    RANKING("Ranking", "Ranking", 30, -1, -1, SortState.ASC, new ItemCellRenderer(),
+    RANKING("Ranking", "Ranking", 30, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -207,7 +207,7 @@ public enum ColumnDef {
                     return String.valueOf(toRanking(from.getKey()));
                 }
             }),
-    QUANTITY("Qty", "Quantity", 25, 25, 25, SortState.ASC, new ItemCellRenderer(),
+    QUANTITY("Qty", "Quantity", 25, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -220,7 +220,7 @@ public enum ColumnDef {
                     return from.getValue();
                 }
             }),
-    DECK_QUANTITY("Quantity", "Quantity", 50, 50, 50, SortState.ASC, new DeckQuantityRenderer(),
+    DECK_QUANTITY("Quantity", "Quantity", 50, true, SortState.ASC, new DeckQuantityRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -233,15 +233,15 @@ public enum ColumnDef {
                     return from.getValue();
                 }
             }),
-    NEW("New", "New", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+    NEW("New", "New", 30, true, SortState.ASC, new ItemCellRenderer(),
             null, null), //functions will be set later
-    PRICE("Price", "Price", 35, 35, 35, SortState.ASC, new ItemCellRenderer(),
+    PRICE("Price", "Price", 35, true, SortState.ASC, new ItemCellRenderer(),
             null, null),
-    OWNED("Owned", "Owned", 20, 20, 45, SortState.ASC, new ItemCellRenderer(),
+    OWNED("Owned", "Owned", 20, true, SortState.ASC, new ItemCellRenderer(),
             null, null),
-    DECKS("Decks", "Decks Containing Card", 20, 20, 45, SortState.ASC, new ItemCellRenderer(),
+    DECKS("Decks", "Decks Containing Card", 20, true, SortState.ASC, new ItemCellRenderer(),
             null, null),
-    FAVORITE("", "Favorite", 18, 18, 18, SortState.DESC, new StarRenderer(),
+    FAVORITE("", "Favorite", 18, true, SortState.DESC, new StarRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -258,7 +258,7 @@ public enum ColumnDef {
                     return toCard(from.getKey());
                 }
             }), 
-    DECK_FAVORITE("", "Favorite", 18, 18, 18, SortState.DESC, new DeckStarRenderer(),
+    DECK_FAVORITE("", "Favorite", 18, true, SortState.DESC, new DeckStarRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -275,7 +275,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey());
                 }
             }),
-    DECK_ACTIONS("", "", 40, 40, 40, SortState.DESC, new ItemCellRenderer(),
+    DECK_ACTIONS("", "", 40, true, SortState.DESC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -288,7 +288,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey());
                 }
             }),
-    DECK_FOLDER("Folder", "Folder", 80, -1, -1, SortState.ASC, new ItemCellRenderer(),
+    DECK_FOLDER("Folder", "Folder", 80, false, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -301,7 +301,7 @@ public enum ColumnDef {
                     return toDeckFolder(from.getKey());
                 }
             }),
-    DECK_COLOR("Color", "Color", 70, 70, 70, SortState.ASC, new ColorSetRenderer(),
+    DECK_COLOR("Color", "Color", 70, true, SortState.ASC, new ColorSetRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -314,7 +314,7 @@ public enum ColumnDef {
                     return toDeckColor(from.getKey());
                 }
             }),
-    DECK_FORMAT("Format", "Formats deck is legal in", 60, -1, -1, SortState.DESC, new ItemCellRenderer(),
+    DECK_FORMAT("Format", "Formats deck is legal in", 60, false, SortState.DESC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -342,7 +342,7 @@ public enum ColumnDef {
                     return StringUtils.join(Iterables.transform(deck.getFormats(), GameFormat.FN_GET_NAME) , ", ");
                 }
             }),
-    DECK_EDITION("Set", "Set of oldest card in deck", 38, 38, 38, SortState.DESC, new SetCodeRenderer(),
+    DECK_EDITION("Set", "Set of oldest card in deck", 38, true, SortState.DESC, new SetCodeRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -355,7 +355,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey()).getEdition().getCode();
                 }
             }),
-    DECK_MAIN("Main", "Main Deck", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
+    DECK_MAIN("Main", "Main Deck", 30, true, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -368,7 +368,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey()).getMainSize();
                 }
             }),
-    DECK_SIDE("Side", "Sideboard", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
+    DECK_SIDE("Side", "Sideboard", 30, true, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -382,14 +382,13 @@ public enum ColumnDef {
                 }
             });
 
-    ColumnDef(String shortName0, String longName0, int preferredWidth0, int minWidth0, int maxWidth0, SortState sortState0, ItemCellRenderer cellRenderer0,
+    ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0, ItemCellRenderer cellRenderer0,
             Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
             Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
         this.shortName = shortName0;
         this.longName = longName0;
         this.preferredWidth = preferredWidth0;
-        this.minWidth = minWidth0;
-        this.maxWidth = maxWidth0;
+        this.isWidthFixed = isWidthFixed0;
         this.sortState = sortState0;
         this.fnSort = fnSort0;
         this.fnDisplay = fnDisplay0;
@@ -397,7 +396,8 @@ public enum ColumnDef {
     }
 
     final String shortName, longName;
-    final int preferredWidth, minWidth, maxWidth;
+    final int preferredWidth;
+    final boolean isWidthFixed;
     final SortState sortState;
     final ItemCellRenderer cellRenderer;
     final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort;

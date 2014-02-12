@@ -18,9 +18,11 @@
 package forge.gui.toolbox.itemmanager.views;
 
 import com.google.common.base.Function;
+
 import forge.item.InventoryItem;
 
 import javax.swing.table.TableColumn;
+
 import java.util.Map.Entry;
 
 /**
@@ -67,11 +69,9 @@ public class ItemColumn extends TableColumn {
         this.setHeaderValue(def.shortName);
 
         this.setPreferredWidth(def.preferredWidth);
-        if (def.minWidth > 0) {
-            this.setMinWidth(def.minWidth);
-        }
-        if (def.maxWidth > 0) {
-            this.setMaxWidth(def.maxWidth);
+        if (def.isWidthFixed) {
+            this.setMinWidth(def.preferredWidth);
+            this.setMaxWidth(def.preferredWidth);
         }
         this.fnSort = fnSort0;
         this.fnDisplay = fnDisplay0;
@@ -135,6 +135,23 @@ public class ItemColumn extends TableColumn {
 
     public Function<Entry<? extends InventoryItem, Integer>, Object> getFnDisplay() {
         return this.fnDisplay;
+    }
+
+    public void startResize() {
+        //if width fixed, temporarily clear min/max width to allow resize
+        if (def.isWidthFixed) {
+            this.setMinWidth(0);
+            this.setMaxWidth(Integer.MAX_VALUE);
+        }
+    }
+
+    public void endResize() {
+        //restore min/max width after resize to prevent table auto-scaling fixed width columns
+        if (def.isWidthFixed) {
+            int width = this.getWidth();
+            this.setMinWidth(width);
+            this.setMaxWidth(width);
+        }
     }
 
     @Override
