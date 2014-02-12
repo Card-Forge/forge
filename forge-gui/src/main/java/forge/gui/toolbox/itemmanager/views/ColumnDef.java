@@ -156,7 +156,7 @@ public enum ColumnDef {
                     return toRarity(from.getKey());
                 }
             }),
-    SET("Set", "Set", 38, 38, 38, SortState.ASC, new SetCodeRenderer(),
+    SET("Set", "Set", 38, 38, 38, SortState.DESC, new SetCodeRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -314,7 +314,7 @@ public enum ColumnDef {
                     return toDeckColor(from.getKey());
                 }
             }),
-    DECK_FORMAT("Format", "Format", 60, -1, -1, SortState.DESC, new ItemCellRenderer(),
+    DECK_FORMAT("Format", "Formats deck is legal in", 60, -1, -1, SortState.DESC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -342,7 +342,7 @@ public enum ColumnDef {
                     return StringUtils.join(Iterables.transform(deck.getFormats(), GameFormat.FN_GET_NAME) , ", ");
                 }
             }),
-    DECK_EDITION("Min.Set", "Min.Set", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+    DECK_EDITION("Set", "Set of oldest card in deck", 38, 38, 38, SortState.DESC, new SetCodeRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
