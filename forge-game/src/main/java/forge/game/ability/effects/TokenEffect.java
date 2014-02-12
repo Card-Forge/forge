@@ -209,6 +209,9 @@ public class TokenEffect extends SpellAbilityEffect {
                 final List<Card> tokens = CardFactory.makeToken(substitutedName, imageName, controller, cost,
                         substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
                 for(Card tok : tokens) {
+                    if (this.tokenTapped) {
+                        tok.setTapped(true);
+                    }
                     controller.getGame().getAction().moveToPlay(tok);
                 }
                 controller.getGame().fireEvent(new GameEventTokenCreated());
@@ -280,9 +283,6 @@ public class TokenEffect extends SpellAbilityEffect {
 
                 final Game game = controller.getGame();
                 for (final Card c : tokens) {
-                    if (this.tokenTapped) {
-                        c.setTapped(true);
-                    }
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
                         Combat combat = game.getPhaseHandler().getCombat();
                         final List<GameEntity> defs = combat.getDefenders();
