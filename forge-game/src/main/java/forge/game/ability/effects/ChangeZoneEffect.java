@@ -892,7 +892,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined)
+        if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
                 || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
             game.getAction().reveal(movedCards, player);
         }
