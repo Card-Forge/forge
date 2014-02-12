@@ -103,6 +103,10 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         }
 
+        if (sa.getConditions() != null && !sa.getConditions().areMet(sa) && sa.getSubAbility() == null) {
+        	return false;
+        }
+
         // Don't use draw abilities before main 2 if possible
         if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
@@ -161,8 +165,7 @@ public class DrawAi extends SpellAbilityAi {
         //if (n)
 
         // TODO: if xPaid and one of the below reasons would fail, instead of
-        // bailing
-        // reduce toPay amount to acceptable level
+        // bailing reduce toPay amount to acceptable level
 
         if (tgt != null) {
             // ability is targeted
