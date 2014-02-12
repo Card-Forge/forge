@@ -7,27 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public final class MouseUtil {
-    private MouseUtil() { }
-
-    // Add existing Cursor values as needed.
-    public enum MouseCursor {
-        WAIT_CURSOR (Cursor.WAIT_CURSOR),
-        DEFAULT_CURSOR (Cursor.DEFAULT_CURSOR),
-        HAND_CURSOR (Cursor.HAND_CURSOR);
-        // Scaffolding...
-        private int value;
-        private MouseCursor(int value) { this.value = value; }
-        public int toInt() { return value; }
-        public static MouseCursor fromInt(int value){
-            for (final MouseCursor c : MouseCursor.values()) {
-                if (c.value == value) {
-                    return c;
-                }
-            }
-            throw new IllegalArgumentException("No Enum specified for this int");
-        }
-    };
-    
     private static Cursor cursor;
     private static int cursorLockCount;
 
@@ -50,8 +29,11 @@ public final class MouseUtil {
      * 
      * @param mouseCursor one of the predefined {@code Cursor} types.
      */
-    public static void setMouseCursor(MouseCursor cursor0) {
-        setCursor(Cursor.getPredefinedCursor(cursor0.toInt()));
+    public static void resetCursor() {
+        setCursor(Cursor.getDefaultCursor());
+    }
+    public static void setCursor(int cursorType) {
+        setCursor(Cursor.getPredefinedCursor(cursorType));
     }
     public static void setCursor(Cursor cursor0) {
         if (cursor == cursor0) { return; }
@@ -60,6 +42,9 @@ public final class MouseUtil {
         FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(cursor);
     }
 
+    public static void setComponentCursor(final Component comp, final int cursorType) {
+        setComponentCursor(comp, Cursor.getPredefinedCursor(cursorType));
+    }
     public static void setComponentCursor(final Component comp, final Cursor cursor0) {
         comp.addMouseListener(new MouseAdapter() {
             @Override
@@ -69,7 +54,7 @@ public final class MouseUtil {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                setCursor(Cursor.getDefaultCursor());
+                resetCursor();
             }
         });
     }

@@ -73,7 +73,7 @@ public class FTextField extends SkinnedTextField {
         this.setToolTipText(builder.toolTip);
         this.setFocusable(true);
         if (this.isEditable()) {
-            MouseUtil.setComponentCursor(this, Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+            MouseUtil.setComponentCursor(this, Cursor.TEXT_CURSOR);
         }
 
         addFocusListener(new FocusAdapter() {

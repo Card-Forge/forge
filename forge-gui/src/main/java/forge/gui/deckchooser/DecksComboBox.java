@@ -1,13 +1,14 @@
 package forge.gui.deckchooser;
 
 import forge.gui.MouseUtil;
-import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.toolbox.FComboBox.TextAlignment;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FSkin;
 
 import javax.swing.*;
+
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -58,13 +59,13 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MouseUtil.setMouseCursor(MouseCursor.WAIT_CURSOR);
+                MouseUtil.setCursor(Cursor.WAIT_CURSOR);
                 DeckType newDeckType = (DeckType)getSelectedItem();
                 if (newDeckType != selectedDeckType) {
                     notifyDeckTypeSelected(newDeckType);
                     selectedDeckType = newDeckType;
                 }
-                MouseUtil.setMouseCursor(MouseCursor.DEFAULT_CURSOR);
+                MouseUtil.resetCursor();
             }
         };
     }

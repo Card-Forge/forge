@@ -1,11 +1,13 @@
 package forge.gui.framework;
 
+import forge.gui.MouseUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
 import forge.view.FView;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -188,7 +190,7 @@ public final class SRearrangingUtil {
         }
         else if (cellTarget.equals(cellSrc)) {
             dropzone = Dropzone.NONE;
-            pnlDocument.setCursor(Cursor.getDefaultCursor());
+            MouseUtil.resetCursor();
             pnlPreview.setBounds(0, 0, 0, 0);
         }
         else {
@@ -210,7 +212,7 @@ public final class SRearrangingUtil {
      */
     private static void endRearrange() {
         // Resize preview panel in preparation for next event.
-        pnlDocument.setCursor(Cursor.getDefaultCursor());
+        MouseUtil.resetCursor();
         pnlPreview.setVisible(false);
         pnlPreview.setBounds(0, 0, 0, 0);
 

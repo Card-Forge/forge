@@ -550,7 +550,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onMouseExit(MouseEvent e) {
-                MouseUtil.setCursor(Cursor.getDefaultCursor());
+                MouseUtil.resetCursor();
             }
         };
 

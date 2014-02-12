@@ -1,6 +1,7 @@
 package forge.gui.framework;
 
 import forge.gui.FNetOverlay;
+import forge.gui.MouseUtil;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
 import forge.view.FDialog;
@@ -9,6 +10,7 @@ import forge.view.FNavigationBar;
 import forge.view.FView;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -39,12 +41,12 @@ public final class SResizingUtil {
     private static final MouseListener MAD_RESIZE_X = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent e) {
-            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+            MouseUtil.setCursor(Cursor.E_RESIZE_CURSOR);
         }
 
         @Override
         public void mouseExited(final MouseEvent e) {
-            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            MouseUtil.resetCursor();
         }
 
         @Override
@@ -61,12 +63,12 @@ public final class SResizingUtil {
     private static final MouseListener MAD_RESIZE_Y = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent e) {
-            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+            MouseUtil.setCursor(Cursor.N_RESIZE_CURSOR);
         }
 
         @Override
         public void mouseExited(final MouseEvent e) {
-            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            MouseUtil.resetCursor();
         }
 
         @Override
@@ -252,6 +254,8 @@ public final class SResizingUtil {
 
     /** @param e &emsp; {@link java.awt.event.MouseEvent} */
     public static void startResizeX(final MouseEvent e) {
+        MouseUtil.lockCursor(); //lock cursor while resizing
+
         evtX = (int) e.getLocationOnScreen().getX();
         LEFT_PANELS.clear();
         RIGHT_PANELS.clear();
@@ -317,6 +321,8 @@ public final class SResizingUtil {
 
     /** @param e &emsp; {@link java.awt.event.MouseEvent} */
     public static void startResizeY(final MouseEvent e) {
+        MouseUtil.lockCursor(); //lock cursor while resizing
+
         evtY = (int) e.getLocationOnScreen().getY();
         TOP_PANELS.clear();
         BOTTOM_PANELS.clear();
@@ -380,6 +386,7 @@ public final class SResizingUtil {
 
     /** */
     public static void endResize() {
+        MouseUtil.unlockCursor();
         SLayoutIO.saveLayout(null);
     }
 

@@ -1,7 +1,6 @@
 package forge.gui.match;
 
 import forge.gui.MouseUtil;
-import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
@@ -204,11 +203,11 @@ public class GameLogPanel extends JPanel {
             switch (e.getID()) {
             case MouseEvent.MOUSE_ENTERED:
                 if (isScrollBarRequired && isHoveringOverLogEntry) {
-                    MouseUtil.setMouseCursor(MouseCursor.HAND_CURSOR);
+                    MouseUtil.setCursor(Cursor.HAND_CURSOR);
                 }
                 break;
             case MouseEvent.MOUSE_EXITED:
-                MouseUtil.setMouseCursor(MouseCursor.DEFAULT_CURSOR);
+                MouseUtil.resetCursor();
                 break;
             case MouseEvent.MOUSE_RELEASED:
                 if (e.getButton() == 1 && isHoveringOverLogEntry) {
@@ -217,9 +216,6 @@ public class GameLogPanel extends JPanel {
                 }
                 break;
             }
-
         }
-
     }
-
 }
