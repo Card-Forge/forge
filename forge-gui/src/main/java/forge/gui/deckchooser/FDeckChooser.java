@@ -94,7 +94,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         private int index;
 
         public ColorDeckGenerator(String name0, int index0) {
-            super(null, null, null);
+            super();
             name = name0;
             this.index = index0;
         }

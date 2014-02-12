@@ -4,6 +4,9 @@ import javax.xml.stream.*;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
+
+import forge.gui.deckeditor.DeckProxy;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -32,7 +35,8 @@ public class DeckPreferences {
         save();
     }
 
-    public static DeckPreferences getPrefs(String key) {
+    public static DeckPreferences getPrefs(DeckProxy deck) {
+        String key = deck.getUniqueKey();
         DeckPreferences prefs = allPrefs.get(key);
         if (prefs == null) {
             prefs = new DeckPreferences();
@@ -100,7 +104,7 @@ public class DeckPreferences {
         }
     }
 
-    public static void save() {
+    private static void save() {
         try {
             final XMLOutputFactory out = XMLOutputFactory.newInstance();
             final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(filename));
@@ -142,6 +146,8 @@ public class DeckPreferences {
     }
 
     public void setStarCount(int starCount0) {
+        if (this.starCount == starCount0) { return; }
         this.starCount = starCount0;
+        save();
     }
 }

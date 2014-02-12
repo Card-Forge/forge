@@ -32,6 +32,7 @@ import java.util.Map.Entry;
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
     protected IHasName deck;
+    protected final String deckType;
     protected final IStorage<? extends IHasName> storage;
 
     public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
@@ -51,16 +52,21 @@ public class DeckProxy implements InventoryItem {
     private final Function<IHasName, Deck> fnGetDeck;
     private CardEdition edition;
 
-    public DeckProxy(Deck deck, GameType type, IStorage<? extends IHasName> storage) {
-        this(deck, type, "", storage, null);
+    protected DeckProxy() {
+        this(null, "", null, "", null, null);
     }
 
-    public DeckProxy(IHasName deck, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<? extends IHasName> storage) {
-        this(deck, type, "", storage, fnGetDeck);
+    public DeckProxy(Deck deck, String deckType, GameType type, IStorage<? extends IHasName> storage) {
+        this(deck, deckType, type, "", storage, null);
     }
 
-    private DeckProxy(IHasName deck, GameType type, String path, IStorage<? extends IHasName> storage, Function<IHasName, Deck> fnGetDeck) {
+    public DeckProxy(IHasName deck, String deckType, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<? extends IHasName> storage) {
+        this(deck, deckType, type, "", storage, fnGetDeck);
+    }
+
+    private DeckProxy(IHasName deck, String deckType, GameType type, String path, IStorage<? extends IHasName> storage, Function<IHasName, Deck> fnGetDeck) {
         this.deck = deck;
+        this.deckType = deckType;
         this.storage = storage;
         this.path = path;
         this.fnGetDeck = fnGetDeck;
@@ -98,8 +104,14 @@ public class DeckProxy implements InventoryItem {
         return edition;
     }
 
+    public String getUniqueKey() {
+        if (deck == null) { return ""; }
+        return deckType + "|" + path + "|" + deck.getName();
+    }
+
     @Override
     public String toString() {
+        if (deck == null) { return ""; }
         return getDeckString(path, deck.getName());
     }
 
@@ -198,18 +210,18 @@ public class DeckProxy implements InventoryItem {
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
     public static Iterable<DeckProxy> getAllConstructedDecks(IStorage<Deck> storageRoot) {
         List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly(result, "", storageRoot);
+        addDecksRecursivelly("Constructed", GameType.Constructed, result, "", storageRoot);
         return result;
     }
 
-    private static void addDecksRecursivelly(List<DeckProxy> list, String path, IStorage<Deck> folder) {
+    private static void addDecksRecursivelly(String deckType, GameType gameType, List<DeckProxy> list, String path, IStorage<Deck> folder) {
         for (IStorage<Deck> f : folder.getFolders()) {
             String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
-            addDecksRecursivelly(list, subPath, f);
+            addDecksRecursivelly(deckType, gameType, list, subPath, f);
         }
 
         for (Deck d : folder) {
-            list.add(new DeckProxy(d, GameType.Constructed, path, folder, null));
+            list.add(new DeckProxy(d, deckType, gameType, path, folder, null));
         }
     }
 
@@ -261,7 +273,7 @@ public class DeckProxy implements InventoryItem {
     private static class ThemeDeckGenerator extends DeckProxy {
         private final String name;
         public ThemeDeckGenerator(String name0) {
-            super(null, null, null);
+            super();
             name = name0;
         }
 
@@ -302,7 +314,7 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getAllPreconstructedDecks(IStorage<PreconDeck> iStorage) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final PreconDeck preconDeck : iStorage) {
-            decks.add(new DeckProxy(preconDeck, (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
+            decks.add(new DeckProxy(preconDeck, "Precon", (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
         }
         return decks;
     }
@@ -311,10 +323,10 @@ public class DeckProxy implements InventoryItem {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         QuestController quest = Singletons.getModel().getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
-            decks.add(new DeckProxy(e.getEventDeck(), null, null));
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         for (QuestEvent e : quest.getChallenges()) {
-            decks.add(new DeckProxy(e.getEventDeck(), null, null));
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
     }
@@ -326,7 +338,7 @@ public class DeckProxy implements InventoryItem {
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
         for (final DeckGroup d : sealed) {
-            humanDecks.add(new DeckProxy(d, (Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK, GameType.Sealed, sealed));
+            humanDecks.add(new DeckProxy(d, "Sealed", (Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK, GameType.Sealed, sealed));
         }
         return humanDecks;
     }
@@ -334,8 +346,8 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getAllQuestDecks(IStorage<Deck> storage) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         if (storage != null) {
-            for (final Deck preconDeck : storage) {
-                decks.add(new DeckProxy(preconDeck, GameType.Quest, storage));
+            for (final Deck deck : storage) {
+                decks.add(new DeckProxy(deck, "Quest", GameType.Quest, storage));
             }
         }
         return decks;
@@ -345,7 +357,7 @@ public class DeckProxy implements InventoryItem {
     public static Iterable<DeckProxy> getDraftDecks(IStorage<DeckGroup> draft) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (DeckGroup d : draft) {
-            decks.add(new DeckProxy(d, ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
+            decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
         }
         return decks;
     }

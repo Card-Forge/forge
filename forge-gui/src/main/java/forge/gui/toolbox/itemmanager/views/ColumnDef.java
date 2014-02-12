@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import forge.Singletons;
 import forge.card.*;
+import forge.deck.io.DeckPreferences;
 import forge.card.mana.ManaCost;
 import forge.game.GameFormat;
 import forge.gui.CardPreferences;
@@ -255,6 +256,23 @@ public enum ColumnDef {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
                     return toCard(from.getKey());
+                }
+            }), 
+    DECK_FAVORITE("", "Favorite", 18, 18, 18, SortState.DESC, new DeckStarRenderer(),
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    DeckProxy deck = toDeck(from.getKey());
+                    if (deck == null) {
+                        return -1;
+                    }
+                    return DeckPreferences.getPrefs(deck).getStarCount();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toDeck(from.getKey());
                 }
             }),
     DECK_ACTIONS("", "", 40, 40, 40, SortState.DESC, new ItemCellRenderer(),
