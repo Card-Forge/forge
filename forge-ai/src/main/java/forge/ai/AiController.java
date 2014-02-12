@@ -619,6 +619,17 @@ public class AiController {
             boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
             if(!canPlay) 
                 return AiPlayDecision.CantPlayAi;
+        } else if (sa.getPayCosts() != null){
+            Cost payCosts = sa.getPayCosts();
+            ManaCost mana = payCosts.getTotalMana();
+            if (mana!= null && mana.countX() > 0) {
+                // Set PayX here to maximum value.
+                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, player);
+                if (xPay <= 0) {
+                    return AiPlayDecision.CantAffordX;
+                }
+                card.setSVar("PayX", Integer.toString(xPay));
+            }
         }
         if( sa instanceof SpellPermanent ) {
             ManaCost mana = sa.getPayCosts().getTotalMana();
