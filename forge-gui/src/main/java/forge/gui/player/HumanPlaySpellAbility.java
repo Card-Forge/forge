@@ -18,13 +18,16 @@
 package forge.gui.player;
 
 import com.google.common.collect.Iterables;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
+import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.AbilitySub;
@@ -32,9 +35,11 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * <p>
@@ -60,8 +65,13 @@ public class HumanPlaySpellAbility {
         // used to rollback
         Zone fromZone = null;
         int zonePosition = 0;
+        final ManaPool manapool = human.getManaPool();
 
         final Card c = this.ability.getHostCard();
+        boolean manaConversion = (ability.isSpell() && c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME"));
+
+        Map<String, String> params = AbilityFactory.getMapParams(c.getSVar("ManaConversionMatrix"));
+
         if (this.ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             if (fromZone != null) {
@@ -73,6 +83,9 @@ public class HumanPlaySpellAbility {
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
+        if (manaConversion) {
+            AbilityUtils.applyManaColorConvertion(human, params);
+        }
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         boolean prerequisitesMet = this.announceValuesLikeX()
@@ -91,6 +104,9 @@ public class HumanPlaySpellAbility {
                     ability.getHostCard().unanimateBestow();
                 }
             }
+            if (manaConversion) {
+                manapool.restoreColorReplacements();
+            }
             return;
         }
 
@@ -108,6 +124,9 @@ public class HumanPlaySpellAbility {
             // Triggers haven't resolved yet ??
             if (mayChooseTargets) {
                 clearTargets(ability);
+            }
+            if (manaConversion) {
+                manapool.restoreColorReplacements();
             }
         }
     }

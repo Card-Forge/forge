@@ -20,7 +20,6 @@ package forge.game.staticability;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -29,7 +28,6 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
-import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -39,8 +37,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-
 import java.util.*;
 
 /**
@@ -341,29 +337,7 @@ public class StaticAbilityContinuous {
             }
 
             if (params.containsKey("ManaColorConversion")) {
-                String conversionType = params.get("ManaColorConversion");
-
-                // Choices are Additives(OR) or Restrictive(AND)
-                boolean additive = "Additive".equals(conversionType);
-                ManaPool pool = p.getManaPool();
-
-                for(String c : MagicColor.Constant.COLORS_AND_COLORLESS) {
-                    // Use the strings from MagicColor, since that's how the Script will be coming in as
-                    String key = WordUtils.capitalize(c) + "Conversion";
-                    if (params.containsKey(key)) {
-                        String convertTo = params.get(key);
-                        byte convertByte = 0;
-                        if ("All".equals(convertTo)) {
-                            convertByte = MagicColor.ALL_COLORS;
-                        } else{
-                            for(String convertColor : convertTo.split(",")) {
-                                convertByte |= MagicColor.fromName(convertColor);
-                            }
-                        }
-                        // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
-                        pool.adjustColorReplacement(MagicColor.fromName(c), convertByte, additive);
-                    }
-                }
+                AbilityUtils.applyManaColorConvertion(p, params);
             }
         }
 

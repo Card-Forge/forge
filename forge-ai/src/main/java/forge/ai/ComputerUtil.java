@@ -91,7 +91,7 @@ public class ComputerUtil {
         }
 
         final Cost cost = sa.getPayCosts();
-
+        // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
             if (ComputerUtilMana.payManaCost(ai, sa)) {
                 game.getStack().addAndUnfreeze(sa);
@@ -105,8 +105,6 @@ public class ComputerUtil {
                     game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
                 }
                 return true;
-                // TODO: solve problems with TapsForMana triggers by adding
-                // sources tapped here if possible (ArsenalNut)
             }
         }
         //Should not arrive here

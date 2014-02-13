@@ -1,6 +1,7 @@
 package forge.game.ability;
 
 import com.google.common.collect.Iterables;
+
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -15,10 +16,13 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -1353,5 +1357,30 @@ public class AbilityUtils {
             }
         }
         return CardFactoryUtil.xCount(c, s);
+    }
+
+    public static final void applyManaColorConvertion(final Player p, final Map<String, String> params) {
+        String conversionType = params.get("ManaColorConversion");
+
+        // Choices are Additives(OR) or Restrictive(AND)
+        boolean additive = "Additive".equals(conversionType);
+
+        for(String c : MagicColor.Constant.COLORS_AND_COLORLESS) {
+            // Use the strings from MagicColor, since that's how the Script will be coming in as
+            String key = WordUtils.capitalize(c) + "Conversion";
+            if (params.containsKey(key)) {
+                String convertTo = params.get(key);
+                byte convertByte = 0;
+                if ("All".equals(convertTo)) {
+                    convertByte = MagicColor.ALL_COLORS;
+                } else{
+                    for(String convertColor : convertTo.split(",")) {
+                        convertByte |= MagicColor.fromName(convertColor);
+                    }
+                }
+                // AdjustColorReplacement has two different matrices handling final mana conversion under the covers
+                p.getManaPool().adjustColorReplacement(MagicColor.fromName(c), convertByte, additive);
+            }
+        }
     }
 }

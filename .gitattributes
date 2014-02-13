@@ -3219,6 +3219,7 @@ forge-gui/res/cardsfolder/d/dawns_reflection.txt -text
 forge-gui/res/cardsfolder/d/dawnstrider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dawnstrike_paladin.txt -text
 forge-gui/res/cardsfolder/d/dawntreader_elk.txt -text
+forge-gui/res/cardsfolder/d/daxos_of_meletis.txt -text
 forge-gui/res/cardsfolder/d/day_of_destiny.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/day_of_judgment.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain
@@ -9433,6 +9434,7 @@ forge-gui/res/cardsfolder/p/psychatog.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/psychic_allergy.txt -text
 forge-gui/res/cardsfolder/p/psychic_barrier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/psychic_drain.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/psychic_intrusion.txt -text
 forge-gui/res/cardsfolder/p/psychic_membrane.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/psychic_miasma.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/psychic_overload.txt svneol=native#text/plain
