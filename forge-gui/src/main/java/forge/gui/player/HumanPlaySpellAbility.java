@@ -84,7 +84,7 @@ public class HumanPlaySpellAbility {
         game.getStack().freezeStack();
 
         if (manaConversion) {
-            AbilityUtils.applyManaColorConvertion(human, params);
+            AbilityUtils.applyManaColorConversion(human, params);
         }
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression

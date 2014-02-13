@@ -1359,7 +1359,7 @@ public class AbilityUtils {
         return CardFactoryUtil.xCount(c, s);
     }
 
-    public static final void applyManaColorConvertion(final Player p, final Map<String, String> params) {
+    public static final void applyManaColorConversion(final Player p, final Map<String, String> params) {
         String conversionType = params.get("ManaColorConversion");
 
         // Choices are Additives(OR) or Restrictive(AND)

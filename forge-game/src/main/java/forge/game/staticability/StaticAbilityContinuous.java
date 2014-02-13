@@ -337,7 +337,7 @@ public class StaticAbilityContinuous {
             }
 
             if (params.containsKey("ManaColorConversion")) {
-                AbilityUtils.applyManaColorConvertion(p, params);
+                AbilityUtils.applyManaColorConversion(p, params);
             }
         }
 
