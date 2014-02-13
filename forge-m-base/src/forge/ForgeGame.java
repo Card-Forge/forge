@@ -2,9 +2,13 @@ package forge;
 
 import com.badlogic.gdx.ApplicationListener;
 
+import forge.gui.toolbox.FSkin;
+
 public class ForgeGame implements ApplicationListener {
     @Override
     public void create () {
+        FSkin.loadLight("default", true);
+        FSkin.loadFull(true);
     }
 
     @Override

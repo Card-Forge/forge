@@ -18,7 +18,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<locationURI>PARENT_LOC/trunk/forge-m-android/assets</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/forge-m-android/assets</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
