@@ -33,6 +33,8 @@ Contamination
 Fearsome Temper
 Celestial Dawn
 False Dawn
+Daxos of Meletis
+Psychic Intrusion
 
 
 ------------
