@@ -1463,9 +1463,6 @@ public enum FSkin {
         // Assemble avatar images
         FSkin.assembleAvatars();
 
-        // Table zebra striping
-        UIManager.put("Table.alternateRowColor", new Color(240, 240, 240));
-
         // Images loaded; can start UI init.
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
         loaded = true;
