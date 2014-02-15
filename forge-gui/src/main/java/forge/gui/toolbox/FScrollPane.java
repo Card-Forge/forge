@@ -100,14 +100,15 @@ public class FScrollPane extends SkinnedScrollPane {
 
         //determine bounds of button
         int x, y, w, h;
+        final Insets insets = getInsets();
         final int panelWidth = getWidth();
         final int panelHeight = getHeight();
         final int arrowButtonSize = 18;
         final int cornerSize = arrowButtonSize - 1; //make borders line up
 
         if (dir < 2) { //if button for horizontal scrolling
-            y = 0;
-            h = panelHeight;
+            y = insets.top;
+            h = panelHeight - y - insets.bottom;
             if (visible[2]) {
                 y += cornerSize;
                 h -= cornerSize;
@@ -115,12 +116,12 @@ public class FScrollPane extends SkinnedScrollPane {
             if (visible[3]) {
                 h -= cornerSize;
             }
-            x = (dir == 0 ? 0 : panelWidth - arrowButtonSize);
+            x = (dir == 0 ? insets.left : panelWidth - arrowButtonSize - insets.right);
             w = arrowButtonSize;
         }
         else { //if button for vertical scrolling
-            x = 0;
-            w = panelWidth;
+            x = insets.left;
+            w = panelWidth - x - insets.right;
             if (visible[0]) {
                 x += cornerSize;
                 w -= cornerSize;
@@ -128,7 +129,7 @@ public class FScrollPane extends SkinnedScrollPane {
             if (visible[1]) {
                 w -= cornerSize;
             }
-            y = (dir == 2 ? 0 : panelHeight - arrowButtonSize);
+            y = (dir == 2 ? insets.top : panelHeight - arrowButtonSize - insets.bottom);
             h = arrowButtonSize;
         }
 
