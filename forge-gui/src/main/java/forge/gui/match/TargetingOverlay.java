@@ -357,13 +357,14 @@ public enum TargetingOverlay {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+            // Get arrow colors from the theme or use default colors if the theme does not have them defined
             Color colorOther = FSkin.getColor(FSkin.Colors.CLR_NORMAL_TARGETING_ARROW).getColor();
             if (colorOther.getAlpha() == 0) {
                 colorOther = FSkin.getColor(FSkin.Colors.CLR_ACTIVE).alphaColor(153).getColor();
             }
             Color colorCombat = FSkin.getColor(FSkin.Colors.CLR_COMBAT_TARGETING_ARROW).getColor();
             if (colorCombat.getAlpha() == 0) {
-                colorCombat = new Color(255, 0, 0, 153); // default color if the theme does not have it defined
+                colorCombat = new Color(255, 0, 0, 153); 
             }
 
             drawArcs(g2d, colorOther, arcsOther);
