@@ -197,7 +197,7 @@ public enum ColumnDef {
                             : (ai.getRemRandomDecks() ? "?" : "");
                 }
             }),
-    RANKING("Ranking", "Ranking", 50, true, SortState.ASC, new ItemCellRenderer(),
+    RANKING("Ranking", "Draft Ranking", 50, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
