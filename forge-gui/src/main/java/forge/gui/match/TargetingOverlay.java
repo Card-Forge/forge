@@ -50,7 +50,8 @@ public enum TargetingOverlay {
 
     private final OverlayPanel pnl = new OverlayPanel();
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-    private final List<Point[]> arcs = new ArrayList<Point[]>();
+    private final List<Point[]> arcsCombat = new ArrayList<Point[]>();
+    private final List<Point[]> arcsOther = new ArrayList<Point[]>();
 
     private CardPanel activePanel = null;
 
@@ -74,7 +75,10 @@ public enum TargetingOverlay {
     // it checked for a state change.  Doublestrike 28-09-12
     private void assembleArcs(Combat combat) {
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-
+        arcsCombat.clear();
+        arcsOther.clear();
+        cardPanels.clear();
+            
         switch (CDock.SINGLETON_INSTANCE.getArcState()) {
             case 0:
                 return;
@@ -112,162 +116,147 @@ public enum TargetingOverlay {
 	            cardLocOnScreen = c.getCardLocationOnScreen();
 	            endpoints.put(c.getCard().getUniqueNumber(), new Point(
 	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + c.getWidth() / 4),
-	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + c.getHeight() / 4)
+	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + c.getHeight() / 2)
 	            ));
             }
         }
 
-        List<Card> temp = new ArrayList<Card>();
-
         if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
             // Only work with the active panel
             Card c = activePanel.getCard();
-
-            Card enchanting = c.getEnchantingCard();
-            Card equipping = c.getEquippingCard();
-            Card fortifying = c.getFortifyingCard();
-            List<Card> enchantedBy = c.getEnchantedBy();
-            List<Card> equippedBy = c.getEquippedBy();
-            List<Card> fortifiedBy = c.getFortifiedBy();
-            Card paired = c.getPairedWith();
-
-            if (null != enchanting) {
-                if (!enchanting.getController().equals(c.getController())) {
-                    arcs.add(new Point[] {
-                        endpoints.get(enchanting.getUniqueNumber()),
-                        endpoints.get(c.getUniqueNumber())
-                    });
-                }
-            }
-
-            if (null != equipping) {
-                if (!equipping.getController().equals(c.getController())) {
-                    arcs.add(new Point[] {
-                        endpoints.get(equipping.getUniqueNumber()),
-                        endpoints.get(c.getUniqueNumber())
-                    });
-                }
-            }
-
-            if (null != fortifying) {
-                if (!fortifying.getController().equals(c.getController())) {
-                    arcs.add(new Point[] {
-                        endpoints.get(fortifying.getUniqueNumber()),
-                        endpoints.get(c.getUniqueNumber())
-                    });
-                }
-            }
-
-            if (null != enchantedBy) {
-                for (Card enc : enchantedBy) {
-                    if (!enc.getController().equals(c.getController())) {
-                    arcs.add(new Point[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(enc.getUniqueNumber())
-                    });
-                    }
-                }
-            }
-
-            if (null != equippedBy) {
-                for (Card eq : equippedBy) {
-                    if (!eq.getController().equals(c.getController())) {
-                    arcs.add(new Point[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(eq.getUniqueNumber())
-                    });
-                    }
-                }
-            }
-
-            if (null != fortifiedBy) {
-                for (Card eq : fortifiedBy) {
-                    if (!eq.getController().equals(c.getController())) {
-                    arcs.add(new Point[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(eq.getUniqueNumber())
-                    });
-                    }
-                }
-            }
-
-            if (null != paired) {
-                arcs.add(new Point[] {
-                    endpoints.get(paired.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
-                });
-            }
-
-            if ( null != combat ) { 
-                for (Card attackingCard : combat.getAttackers()) {
-                    temp = combat.getBlockers(attackingCard);
-                    for (Card blockingCard : temp) {
-                        if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                        arcs.add(new Point[] {
-                            endpoints.get(attackingCard.getUniqueNumber()),
-                            endpoints.get(blockingCard.getUniqueNumber())
-                        });
-                    }
-                }
-            }
+            addArcsForCard(c, endpoints, combat);
         } else {
             // Work with all card panels currently visible
-
-            // Global cards
+            List<Card> visualized = new ArrayList<Card>();
             for (CardPanel c : cardPanels) {
                 if (!c.isShowing()) {
                     continue;
                 }
                 Card card = c.getCard();
+                if (visualized.contains(card)) { continue; }
 
-                // Enchantments
-                Card enchanting = card.getEnchantingCard();
-                if (enchanting != null) {
-                    if (enchanting.getController().equals(card.getController())) {
-                        continue;
-                    }
-                    arcs.add(new Point[]{
-                                endpoints.get(enchanting.getUniqueNumber()),
-                                endpoints.get(card.getUniqueNumber())
-                            });
+                visualized.addAll(addArcsForCard(card, endpoints, combat));
+            }
+        }
+    }
+
+    private List<Card> addArcsForCard(final Card c, final Map<Integer, Point> endpoints, final Combat combat) {
+        List<Card> cardsVisualized = new ArrayList<Card>();
+        cardsVisualized.add(c);
+
+        Card enchanting = c.getEnchantingCard();
+        Card equipping = c.getEquippingCard();
+        Card fortifying = c.getFortifyingCard();
+        List<Card> enchantedBy = c.getEnchantedBy();
+        List<Card> equippedBy = c.getEquippedBy();
+        List<Card> fortifiedBy = c.getFortifiedBy();
+        Card paired = c.getPairedWith();
+
+        if (null != enchanting) {
+            if (!enchanting.getController().equals(c.getController())) {
+                arcsOther.add(new Point[] {
+                    endpoints.get(enchanting.getUniqueNumber()),
+                    endpoints.get(c.getUniqueNumber())
+                });
+                cardsVisualized.add(enchanting);
+            }
+        }
+        if (null != equipping) {
+            if (!equipping.getController().equals(c.getController())) {
+                arcsOther.add(new Point[] {
+                    endpoints.get(equipping.getUniqueNumber()),
+                    endpoints.get(c.getUniqueNumber())
+                });
+                cardsVisualized.add(equipping);
+            }
+        }
+        if (null != fortifying) {
+            if (!fortifying.getController().equals(c.getController())) {
+                arcsOther.add(new Point[] {
+                    endpoints.get(fortifying.getUniqueNumber()),
+                    endpoints.get(c.getUniqueNumber())
+                });
+                cardsVisualized.add(fortifying);
+            }
+        }
+        if (null != enchantedBy) {
+            for (Card enc : enchantedBy) {
+                if (!enc.getController().equals(c.getController())) {
+                    arcsOther.add(new Point[] {
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(enc.getUniqueNumber())
+                    });
+                    cardsVisualized.add(enc);
                 }
             }
-
-            // Combat cards
-            if ( null != combat ) 
-                for (Card attackingCard : combat.getAttackers()) {
-                    temp = combat.getBlockers(attackingCard);
-                    for (Card blockingCard : temp) {
-                        arcs.add(new Point[]{
-                            endpoints.get(attackingCard.getUniqueNumber()),
-                            endpoints.get(blockingCard.getUniqueNumber())
-                        });
-                    }
+        }
+        if (null != equippedBy) {
+            for (Card eq : equippedBy) {
+                if (!eq.getController().equals(c.getController())) {
+                    arcsOther.add(new Point[] {
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(eq.getUniqueNumber())
+                    });
+                    cardsVisualized.add(eq);
                 }
+            }
+        }
+        if (null != fortifiedBy) {
+            for (Card eq : fortifiedBy) {
+                if (!eq.getController().equals(c.getController())) {
+                    arcsOther.add(new Point[] {
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(eq.getUniqueNumber())
+                    });
+                    cardsVisualized.add(eq);
+                }
+            }
+        }
+        if (null != paired) {
+            arcsOther.add(new Point[] {
+                endpoints.get(paired.getUniqueNumber()),
+                endpoints.get(c.getUniqueNumber())
+            });
+            cardsVisualized.add(paired);
+        }
+        if ( null != combat ) {
+            for (Card planeswalker : combat.getDefendingPlaneswalkers()) {
+                List<Card> cards = combat.getAttackersOf(planeswalker);
+                for (Card pwAttacker : cards) {
+                    if (!planeswalker.equals(c) && !pwAttacker.equals(c)) { continue; }
+                    arcsCombat.add(new Point[] {
+                        endpoints.get(planeswalker.getUniqueNumber()),
+                        endpoints.get(pwAttacker.getUniqueNumber())
+                    });
+                }
+                cardsVisualized.add(planeswalker);
+            }
+            for (Card attackingCard : combat.getAttackers()) {
+                List<Card> cards = combat.getBlockers(attackingCard);
+                for (Card blockingCard : cards) {
+                    if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
+                    arcsCombat.add(new Point[] {
+                        endpoints.get(attackingCard.getUniqueNumber()),
+                        endpoints.get(blockingCard.getUniqueNumber())
+                    });
+                    cardsVisualized.add(blockingCard);
+                }
+                cardsVisualized.add(attackingCard);
+            }
         }
 
-        temp.clear();
-        endpoints.clear();
+        return cardsVisualized;
     }
 
     private class OverlayPanel extends SkinnedPanel {
-        /**
-         * For some reason, the alpha channel background doesn't work properly on
-         * Windows 7, so the paintComponent override is required for a
-         * semi-transparent overlay.
-         * 
-         * @param g
-         *            &emsp; Graphics object
-         */
-
         // Arrow drawing code by the MAGE team, used with permission.
         private Area getArrow(float length, float bendPercent) {
             float p1x = 0, p1y = 0;
             float p2x = length, p2y = 0;
             float cx = length / 2, cy = length / 8f * bendPercent;
 
-            int bodyWidth = 10;
-            float headSize = 17;
+            int bodyWidth = 15;
+            float headSize = 20;
 
             float adjSize, ex, ey, abs_e;
             adjSize = (float) (bodyWidth / 2 / Math.sqrt(2));
@@ -291,7 +280,7 @@ public enum TargetingOverlay {
             ey /= abs_e;
             GeneralPath headPath = new GeneralPath();
             headPath.moveTo(p2x - (ey + ex) * adjSize, p2y + (ex - ey) * adjSize);
-            headPath.lineTo(p2x, p2y);
+            headPath.lineTo(p2x + headSize / 2, p2y);
             headPath.lineTo(p2x + (ey - ex) * adjSize, p2y - (ex + ey) * adjSize);
             headPath.closePath();
 
@@ -300,7 +289,7 @@ public enum TargetingOverlay {
             return area;
         }
 
-        private void drawArrow(Graphics2D g2d, int startX, int startY, int endX, int endY, FSkin.SkinColor skinColor) {
+        private void drawArrow(Graphics2D g2d, int startX, int startY, int endX, int endY, Color color) {
             float ex = endX - startX;
             float ey = endY - startY;
             if (ex == 0 && ey == 0) { return; }
@@ -317,8 +306,8 @@ public enum TargetingOverlay {
 
             g2d.translate(startX, startY);
             g2d.rotate(Math.atan2(ey, ex));
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f));
-            FSkin.setGraphicsColor(g2d, skinColor);
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.60f));
+            g2d.setColor(color); 
             g2d.fill(arrow);
             g2d.setColor(Color.BLACK);
             g2d.draw(arrow);
@@ -326,6 +315,30 @@ public enum TargetingOverlay {
             g2d.setTransform(af);
         }
 
+        public void drawArcs(Graphics2D g2d, Color color, List<Point[]> arcs) {
+            for (Point[] p : arcs) {
+                if (p[0] == null || p[1] == null) {
+                    continue;
+                }
+
+                int endX = (int) p[0].getX();
+                int endY = (int) p[0].getY();
+                int startX = (int) p[1].getX();
+                int startY = (int) p[1].getY();
+
+                drawArrow(g2d, startX, startY, endX, endY, color);
+            }
+
+        }
+
+        /**
+         * For some reason, the alpha channel background doesn't work properly on
+         * Windows 7, so the paintComponent override is required for a
+         * semi-transparent overlay.
+         * 
+         * @param g
+         *            &emsp; Graphics object
+         */
         @Override
         public void paintComponent(final Graphics g) {
             final Combat combat = Singletons.getControl().getObservedGame().getCombat(); // this will get deprecated too
@@ -339,28 +352,18 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            arcs.clear();
-            cardPanels.clear();
-            
             assembleArcs(combat);
-            if (arcs.isEmpty()) { return; }
+
+            if (arcsCombat.isEmpty() && arcsOther.isEmpty()) { return; }
 
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
 
-            for (Point[] p : arcs) {
-                if (p[0] == null || p[1] == null) {
-                    continue;
-                }
+            Color colorOther = FSkin.getColor(FSkin.Colors.CLR_ACTIVE).getColor();
+            Color colorCombat = Color.RED;
 
-                int endX = (int) p[0].getX();
-                int endY = (int) p[0].getY();
-                int startX = (int) p[1].getX();
-                int startY = (int) p[1].getY();
-
-                drawArrow(g2d, startX, startY, endX, endY, skinColor);
-            }
+            drawArcs(g2d, colorOther, arcsOther);
+            drawArcs(g2d, colorCombat, arcsCombat);
 
             FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
         }
