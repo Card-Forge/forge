@@ -18,6 +18,7 @@
 package forge.gui.toolbox.itemmanager.views;
 
 import forge.gui.MouseUtil;
+import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.*;
@@ -29,10 +30,14 @@ import forge.item.InventoryItem;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.*;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.awt.event.FocusAdapter;
@@ -107,7 +112,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
-        List<Entry<ColumnDef, ItemColumn>> list = new LinkedList<Entry<ColumnDef, ItemColumn>>(cols.entrySet());
+        final List<Entry<ColumnDef, ItemColumn>> list = new LinkedList<Entry<ColumnDef, ItemColumn>>(cols.entrySet());
         Collections.sort(list, new Comparator<Entry<ColumnDef, ItemColumn>>() {
             @Override
             public int compare(Entry<ColumnDef, ItemColumn> arg0, Entry<ColumnDef, ItemColumn> arg1) {
@@ -115,14 +120,55 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
         });
 
+        //hide table header if only showing single string column
+        boolean hideHeader = (cols.size() == 1 && cols.containsKey(ColumnDef.STRING));
+
+        getPnlOptions().removeAll();
+
+        int modelIndex = 0;
         for (Entry<ColumnDef, ItemColumn> entry : list) {
-            ItemColumn col = entry.getValue();
-            col.setModelIndex(colmodel.getColumnCount());
+            final ColumnDef colDef = entry.getKey();
+            final ItemColumn col = entry.getValue();
+            col.setModelIndex(modelIndex++);
             if (col.isVisible()) { colmodel.addColumn(col); }
+
+            if (!hideHeader) {
+                final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(colDef.shortName) ?
+                        colDef.longName : colDef.shortName, col.isVisible());
+                chkBox.setFont(ROW_FONT);
+                chkBox.setToolTipText(colDef.longName);
+                chkBox.addChangeListener(new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent arg0) {
+                        boolean visible = chkBox.isSelected();
+                        if (col.isVisible() != visible) {
+                            col.setVisible(visible);
+                            if (col.isVisible()) {
+                                colmodel.addColumn(col);
+
+                                //move column into proper position
+                                int oldIndex = colmodel.getColumnCount() - 1;
+                                int newIndex = col.getModelIndex();
+                                for (int i = 0; i < col.getModelIndex(); i++) {
+                                    if (!list.get(i).getValue().isVisible()) {
+                                        newIndex--;
+                                    }
+                                }
+                                if (newIndex < oldIndex) {
+                                    colmodel.moveColumn(oldIndex, newIndex);
+                                }
+                            }
+                            else {
+                                colmodel.removeColumn(col);
+                            }
+                        }
+                    }
+                });
+                getPnlOptions().add(chkBox);
+            }
         }
 
-        //hide table header if only showing single string column
-        if (cols.size() == 1 && cols.containsKey(ColumnDef.STRING)) {
+        if (hideHeader) {
             this.table.getTableHeader().setPreferredSize(new Dimension(0, 0));
         }
         else {

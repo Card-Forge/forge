@@ -19,6 +19,7 @@ package forge.gui.toolbox.itemmanager.views;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+
 import forge.Singletons;
 import forge.card.*;
 import forge.deck.io.DeckPreferences;
@@ -32,8 +33,10 @@ import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
 import forge.limited.DraftRankCache;
+
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
@@ -194,17 +197,17 @@ public enum ColumnDef {
                             : (ai.getRemRandomDecks() ? "?" : "");
                 }
             }),
-    RANKING("Ranking", "Ranking", 30, true, SortState.ASC, new ItemCellRenderer(),
+    RANKING("Ranking", "Ranking", 50, true, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toRanking(from.getKey());
+                    return toRanking(from.getKey(), false);
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return String.valueOf(toRanking(from.getKey()));
+                    return toRanking(from.getKey(), true);
                 }
             }),
     QUANTITY("Qty", "Quantity", 25, true, SortState.ASC, new ItemCellRenderer(),
@@ -275,7 +278,7 @@ public enum ColumnDef {
                     return toDeck(from.getKey());
                 }
             }),
-    DECK_ACTIONS("", "", 40, true, SortState.DESC, new ItemCellRenderer(),
+    DECK_ACTIONS("", "Delete/Edit", 40, true, SortState.DESC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -451,16 +454,18 @@ public enum ColumnDef {
         return i instanceof PaperCard ? ((IPaperCard) i).getRarity() : CardRarity.Unknown;
     }
 
-    private static Double toRanking(final InventoryItem i) {
-        Double ranking = 500D;
-        if (i != null && i instanceof PaperCard){
-            PaperCard cp = (PaperCard) i;
-            ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
-            if (ranking == null) {
-                ranking = 500D;
+    private static Double toRanking(final InventoryItem i, boolean truncate) {
+        if (i instanceof IPaperCard){
+            IPaperCard cp = (IPaperCard) i;
+            Double ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
+            if (ranking != null) {
+                if (truncate) {
+                    return new BigDecimal(ranking).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
+                }
+                return ranking;
             }
         }
-        return ranking;
+        return 500D;
     }
 
     private static DeckProxy toDeck(final InventoryItem i) {
