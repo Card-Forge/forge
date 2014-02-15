@@ -364,7 +364,9 @@ public enum FSkin {
         CLR_PHASE_ACTIVE_ENABLED    (new int[] {70, 190}),
         CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210}),
         CLR_THEME2                  (new int[] {70, 230}),
-        CLR_OVERLAY                 (new int[] {70, 250});
+        CLR_OVERLAY                 (new int[] {70, 250}),
+        CLR_COMBAT_TARGETING_ARROW  (new int[] {70, 270}),
+        CLR_NORMAL_TARGETING_ARROW  (new int[] {70, 290});
 
         private Color color;
         private int[] coords;

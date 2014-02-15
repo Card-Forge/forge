@@ -229,7 +229,6 @@ public enum TargetingOverlay {
                         endpoints.get(pwAttacker.getUniqueNumber())
                     });
                 }
-                cardsVisualized.add(planeswalker);
             }
             for (Card attackingCard : combat.getAttackers()) {
                 List<Card> cards = combat.getBlockers(attackingCard);
@@ -306,7 +305,6 @@ public enum TargetingOverlay {
 
             g2d.translate(startX, startY);
             g2d.rotate(Math.atan2(ey, ex));
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.60f));
             g2d.setColor(color); 
             g2d.fill(arrow);
             g2d.setColor(Color.BLACK);
@@ -359,8 +357,14 @@ public enum TargetingOverlay {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            Color colorOther = FSkin.getColor(FSkin.Colors.CLR_ACTIVE).getColor();
-            Color colorCombat = Color.RED;
+            Color colorOther = FSkin.getColor(FSkin.Colors.CLR_NORMAL_TARGETING_ARROW).getColor();
+            if (colorOther.getAlpha() == 0) {
+                colorOther = FSkin.getColor(FSkin.Colors.CLR_ACTIVE).alphaColor(153).getColor();
+            }
+            Color colorCombat = FSkin.getColor(FSkin.Colors.CLR_COMBAT_TARGETING_ARROW).getColor();
+            if (colorCombat.getAlpha() == 0) {
+                colorCombat = new Color(255, 0, 0, 153); // default color if the theme does not have it defined
+            }
 
             drawArcs(g2d, colorOther, arcsOther);
             drawArcs(g2d, colorCombat, arcsCombat);
