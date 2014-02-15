@@ -284,13 +284,13 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         switch(sectionMode) {
         case Main:
             lstCatalogCols.remove(ColumnDef.QUANTITY);
-            this.getCatalogManager().setup(lstCatalogCols);
+            this.getCatalogManager().setup(lstCatalogCols, true);
             this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getMain());
             break;
         case Sideboard:
             lstCatalogCols.remove(ColumnDef.QUANTITY);
-            this.getCatalogManager().setup(lstCatalogCols);
+            this.getCatalogManager().setup(lstCatalogCols, true);
             this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
             break;
@@ -301,7 +301,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             lstCatalogCols.remove(ColumnDef.CMC);
             lstCatalogCols.remove(ColumnDef.POWER);
             lstCatalogCols.remove(ColumnDef.TOUGHNESS);
-            this.getCatalogManager().setup(lstCatalogCols);
+            this.getCatalogManager().setup(lstCatalogCols, true);
             this.getCatalogManager().setPool(avatarPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
             break;
@@ -312,7 +312,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             lstCatalogCols.remove(ColumnDef.COLOR);
             lstCatalogCols.remove(ColumnDef.POWER);
             lstCatalogCols.remove(ColumnDef.TOUGHNESS);
-            this.getCatalogManager().setup(lstCatalogCols);
+            this.getCatalogManager().setup(lstCatalogCols, true);
             this.getCatalogManager().setPool(planePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
             break;
@@ -323,7 +323,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             lstCatalogCols.remove(ColumnDef.COLOR);
             lstCatalogCols.remove(ColumnDef.POWER);
             lstCatalogCols.remove(ColumnDef.TOUGHNESS);
-            this.getCatalogManager().setup(lstCatalogCols);
+            this.getCatalogManager().setup(lstCatalogCols, true);
             this.getCatalogManager().setPool(schemePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
             break;
@@ -343,7 +343,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(ColumnDef.QUANTITY);
 
-        this.getCatalogManager().setup(lstCatalogCols);
+        this.getCatalogManager().setup(lstCatalogCols, true);
         this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
 
         SItemManagerUtil.resetUI(this);

@@ -107,7 +107,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
     }
 
-    public void setup(final Map<ColumnDef, ItemColumn> cols) {
+    public void setup(final Map<ColumnDef, ItemColumn> cols, final boolean showUniqueCardsOption) {
         final Iterable<T> selectedItemsBefore = getSelectedItems();
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
@@ -125,6 +125,22 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         getPnlOptions().removeAll();
 
+        if (showUniqueCardsOption) {
+            final FCheckBox chkBox = new FCheckBox("Unique Cards Only", this.itemManager.getWantUnique());
+            chkBox.setFont(ROW_FONT);
+            chkBox.setToolTipText("Toggle whether to show unique cards only");
+            chkBox.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent arg0) {
+                    boolean wantUnique = chkBox.isSelected();
+                    if (itemManager.getWantUnique() == wantUnique) { return; }
+                    itemManager.setWantUnique(wantUnique);
+                    itemManager.refresh();
+                }
+            });
+            getPnlOptions().add(chkBox);
+        }
+
         int modelIndex = 0;
         for (Entry<ColumnDef, ItemColumn> entry : list) {
             final ColumnDef colDef = entry.getKey();
@@ -141,26 +157,26 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     @Override
                     public void stateChanged(ChangeEvent arg0) {
                         boolean visible = chkBox.isSelected();
-                        if (col.isVisible() != visible) {
-                            col.setVisible(visible);
-                            if (col.isVisible()) {
-                                colmodel.addColumn(col);
+                        if (col.isVisible() == visible) { return; }
+                        col.setVisible(visible);
 
-                                //move column into proper position
-                                int oldIndex = colmodel.getColumnCount() - 1;
-                                int newIndex = col.getModelIndex();
-                                for (int i = 0; i < col.getModelIndex(); i++) {
-                                    if (!list.get(i).getValue().isVisible()) {
-                                        newIndex--;
-                                    }
-                                }
-                                if (newIndex < oldIndex) {
-                                    colmodel.moveColumn(oldIndex, newIndex);
+                        if (col.isVisible()) {
+                            colmodel.addColumn(col);
+
+                            //move column into proper position
+                            int oldIndex = colmodel.getColumnCount() - 1;
+                            int newIndex = col.getModelIndex();
+                            for (int i = 0; i < col.getModelIndex(); i++) {
+                                if (!list.get(i).getValue().isVisible()) {
+                                    newIndex--;
                                 }
                             }
-                            else {
-                                colmodel.removeColumn(col);
+                            if (newIndex < oldIndex) {
+                                colmodel.moveColumn(oldIndex, newIndex);
                             }
+                        }
+                        else {
+                            colmodel.removeColumn(col);
                         }
                     }
                 });

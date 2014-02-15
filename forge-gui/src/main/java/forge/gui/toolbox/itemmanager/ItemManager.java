@@ -286,10 +286,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     public void setup(final Map<ColumnDef, ItemColumn> cols) {
-        this.setup(cols, null, null, 0);
+        this.setup(cols, false, null, null, 0);
+    }
+    public void setup(final Map<ColumnDef, ItemColumn> cols, boolean showUniqueCardsOption) {
+        this.setup(cols, showUniqueCardsOption, null, null, 0);
     }
     public void setup(final Map<ColumnDef, ItemColumn> cols, GroupDef groupBy, ColumnDef pileBy, int viewIndex) {
-        this.listView.setup(cols);
+        this.setup(cols, false, groupBy, pileBy, viewIndex);
+    }
+    public void setup(final Map<ColumnDef, ItemColumn> cols, boolean showUniqueCardsOption, GroupDef groupBy, ColumnDef pileBy, int viewIndex) {
+        this.listView.setup(cols, showUniqueCardsOption);
         this.imageView.setGroupBy(groupBy, true);
         this.imageView.setPileBy(pileBy, true);
         this.setViewIndex(viewIndex);
@@ -959,6 +965,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         else {
             chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
         }
+    }
+
+    /**
+     * Refresh displayed items
+     */
+    public void refresh() {
+        this.updateView(true, this.getSelectedItems());
     }
 
     /**
