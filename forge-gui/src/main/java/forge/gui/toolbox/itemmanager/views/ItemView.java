@@ -2,21 +2,23 @@ package forge.gui.toolbox.itemmanager.views;
 
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
-import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.item.InventoryItem;
 import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -30,7 +32,11 @@ public abstract class ItemView<T extends InventoryItem> {
     protected final ItemManagerModel<T> model;
     private final FScrollPane scroller;
     private final FLabel button;
-    private final SkinnedPanel pnlOptions = new SkinnedPanel(new MigLayout("insets 3 1 0 1, gap 3 4, hidemode 3"));
+    private final FScrollPanel pnlOptions = new FScrollPanel(
+            new MigLayout("insets 3 1 0 1, gap 3 4, hidemode 3"), true,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 
@@ -105,7 +111,7 @@ public abstract class ItemView<T extends InventoryItem> {
         return this.scroller;
     }
 
-    public SkinnedPanel getPnlOptions() {
+    public FScrollPanel getPnlOptions() {
         return pnlOptions;
     }
 

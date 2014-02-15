@@ -56,6 +56,18 @@ public class FScrollPane extends SkinnedScrollPane {
     }
 
     @Override
+    public void setVisible(boolean visible0) {
+        super.setVisible(visible0);
+        if (arrowButtons != null && !visible0) { //ensure arrow buttons hidden if scroll pane hidden
+            for (ArrowButton arrowButton : arrowButtons) {
+                if (arrowButton != null) {
+                    FAbsolutePositioner.SINGLETON_INSTANCE.hide(arrowButton);
+                }
+            }
+        }
+    }
+
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
         if (arrowButtons == null) { return; }
