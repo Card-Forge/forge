@@ -7442,12 +7442,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        if (this.hasKeyword("If damage would be dealt to CARDNAME, "
-                + "prevent that damage. Remove a +1/+1 counter from CARDNAME.")) {
-            restDamage = 0;
-            this.subtractCounter(CounterType.P1P1, 1);
-        }
-
         if (restDamage >= this.getPreventNextDamage()) {
             restDamage = restDamage - this.getPreventNextDamage();
             this.setPreventNextDamage(0);
