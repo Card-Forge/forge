@@ -72,7 +72,12 @@ public abstract class ItemView<T extends InventoryItem> {
         this.button.setCommand(new Runnable() {
             @Override
             public void run() {
-                itemManager.setViewIndex(index);
+                if (button.getSelected()) {
+                    itemManager.setViewIndex(index);
+                }
+                else {
+                    button.setSelected(true); //prevent toggling off button
+                }
             }
         });
 
