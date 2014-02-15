@@ -15465,7 +15465,6 @@ forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorCommander.java -
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorConstructed.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorDraftingProcess.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorLimited.java -text
-forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorPreferences.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorQuest.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorQuestCardShop.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorVariant.java -text
@@ -15479,7 +15478,6 @@ forge-gui/src/main/java/forge/gui/deckeditor/views/VAllDecks.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VCardCatalog.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VCurrentDeck.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VDeckgen.java -text
-forge-gui/src/main/java/forge/gui/deckeditor/views/VEditorPreferences.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VProbabilities.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VStatistics.java -text
 forge-gui/src/main/java/forge/gui/download/GuiDownloadPicturesLQ.java svneol=native#text/plain
