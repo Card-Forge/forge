@@ -185,16 +185,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             @Override
             public void run() {
                 HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
-
-                // Mana restriction must be checked before this method is called
-                final List<SpellAbility> paidAbs = saPaidFor.getPayingManaAbilities();
-                AbilityManaPart abManaPart = chosen.getManaPartRecursive();
-
-                paidAbs.add(chosen); // assumes some part on the mana produced by the ability will get used
-                for (final Mana mana : abManaPart.getLastManaProduced()) {
-                    player.getManaPool().tryPayCostWithMana(saPaidFor, InputPayMana.this.manaCost, mana);
-                }
-
+                player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
+                
                 onManaAbilityPaid();
                 onStateChanged();
             }
