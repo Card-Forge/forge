@@ -271,9 +271,7 @@ public class PlayerControllerAi extends PlayerController {
         if (mayChooseNewTargets) {
             if (copySA instanceof Spell) {
                 Spell spell = (Spell) copySA;
-                if (AiPlayDecision.WillPlay != ((PlayerControllerAi)player.getController()).getAi().canPlayFromEffectAI(spell, true, true)) {
-                    return; // is this legal at all?
-                }
+                ((PlayerControllerAi) player.getController()).getAi().canPlayFromEffectAI(spell, true, true);
             }
             else {
                 getAi().canPlaySa(copySA);
