@@ -402,7 +402,7 @@ public enum FSkin {
             x0 = tempCoords[0];
             y0 = tempCoords[1];
 
-            color = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0));
+            color = bimPreferredSprite.getData().getBounds().contains(x0, y0) ? FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)) : new Color(0, 0, 0, 0);
         }
     }
 
