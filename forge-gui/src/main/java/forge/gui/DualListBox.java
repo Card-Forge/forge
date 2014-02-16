@@ -428,7 +428,7 @@ public class DualListBox<T> extends FDialog {
 
         boolean anySize = targetRemainingSourcesMax < 0;
         boolean canAdd = sourceListModel.getSize() != 0 && (anySize || targetRemainingSourcesMin <= sourceListModel.getSize());
-        boolean canRemove = destListModel.getSize() != 0 && (anySize || targetRemainingSourcesMax >= sourceListModel.getSize());
+        boolean canRemove = destListModel.getSize() != 0;
         boolean targetReached = anySize || targetRemainingSourcesMin <= sourceListModel.getSize() && targetRemainingSourcesMax >= sourceListModel.getSize();
 
         autoButton.setEnabled(targetRemainingSourcesMax == 0 && !targetReached && !sideboardingMode);
