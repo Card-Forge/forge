@@ -119,6 +119,7 @@ public class CostPartMana extends CostPart {
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub
+        sa.getManaPaid().clear();
         return payer.getController().payManaCost(this, pd, sa);
     }
 

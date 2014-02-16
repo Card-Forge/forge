@@ -6,11 +6,11 @@ import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -61,27 +61,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         activateManaAbility(card, this.manaCost);
     }
 
-    public void selectManaPool(byte colorCode) {
-        useManaFromPool(colorCode);
-    }
-
-    /**
-     * <p>
-     * activateManaAbility.
-     * </p>
-     * @param color a String that represents the Color the mana is coming from
-     * @param saBeingPaidFor a SpellAbility that is being paid for
-     * @param manaCost the amount of mana remaining to be paid
-     * 
-     * @return ManaCost the amount of mana remaining to be paid after the mana is activated
-     */
-    protected void useManaFromPool(byte colorCode) { useManaFromPool(colorCode, manaCost); }
-    protected void useManaFromPool(byte colorCode, ManaCostBeingPaid manaCost) {
-        // Convert Color to short String
-        player.getManaPool().payManaFromPool(saPaidFor, manaCost,
-                ManaCostShard.parseNonGeneric(MagicColor.toShortString(colorCode)));
-
-        onManaAbilityPlayed(null);
+    public void useManaFromPool(byte colorCode) {
+        // find the matching mana in pool.
+        player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost);
+        onManaAbilityPaid();
         showMessage();
     }
 
@@ -202,7 +185,17 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             @Override
             public void run() {
                 HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
-                onManaAbilityPlayed(chosen);
+
+                // Mana restriction must be checked before this method is called
+                final List<SpellAbility> paidAbs = saPaidFor.getPayingManaAbilities();
+                AbilityManaPart abManaPart = chosen.getManaPartRecursive();
+
+                paidAbs.add(chosen); // assumes some part on the mana produced by the ability will get used
+                for (final Mana mana : abManaPart.getLastManaProduced()) {
+                    player.getManaPool().tryPayCostWithMana(saPaidFor, InputPayMana.this.manaCost, mana);
+                }
+
+                onManaAbilityPaid();
                 onStateChanged();
             }
         };
@@ -272,14 +265,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
         return false;
-    }
-
-    public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) {
-        if (saPaymentSrc != null) { // null comes when they've paid from pool
-            player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
-        }
-
-        onManaAbilityPaid();
     }
 
     protected boolean isAlreadyPaid() {

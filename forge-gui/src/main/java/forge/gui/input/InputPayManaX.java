@@ -118,11 +118,6 @@ public class InputPayManaX extends InputPayMana {
     }
 
     @Override
-    public void selectManaPool(byte colorCode) {
-        useManaFromPool(colorCode, this.manaCost);
-    }
-
-    @Override
     protected void done() {
         final Card card = saPaidFor.getHostCard();
         card.setXManaCostPaid(this.xPaid);

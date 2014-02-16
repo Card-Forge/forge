@@ -20,6 +20,7 @@ package forge.game.mana;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.GlobalRuleChange;
@@ -31,6 +32,7 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -73,7 +75,7 @@ public class ManaPool {
     }
 
     private void addMana(final Mana mana) {
-        floatingMana.put(mana.getColorCode(), mana);
+        floatingMana.put(mana.getColor(), mana);
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
     }
 
@@ -138,6 +140,7 @@ public class ManaPool {
         return numRemoved;
     }
 
+   
     /**
      * <p>
      * getManaFrom.
@@ -203,7 +206,7 @@ public class ManaPool {
                     continue;
                 }
 
-                boolean canPay = canPayForShardWithColor(shard, thisMana.getColorCode());
+                boolean canPay = canPayForShardWithColor(shard, thisMana.getColor());
                 if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
                     continue;
                 }
@@ -240,7 +243,7 @@ public class ManaPool {
      *            a {@link forge.game.mana.Mana} object.
      */
     private void removeMana(final Mana mana) {
-        Collection<Mana> cm = floatingMana.get(mana.getColorCode());
+        Collection<Mana> cm = floatingMana.get(mana.getColor());
         if (cm.remove(mana)) {
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
         }
@@ -284,24 +287,50 @@ public class ManaPool {
         }
     }
 
-    private void tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana) {
-        if (manaCost.isNeeded(mana, this)) {
-            manaCost.payMana(mana, this);
-            sa.getPayingMana().add(mana);
-            this.removeMana(mana);
-            if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
-                sa.getHostCard().setCanCounter(false);
+    public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost) {
+        Mana manaFound = null;
+        String restriction = manaCost.getSourceRestriction();
+        Collection<Mana> coloredMana = this.floatingMana.get(colorCode);
+
+        for (final Mana mana : coloredMana) {
+            if (mana.getManaAbility() != null && !mana.getManaAbility().meetsManaRestrictions(saPaidFor)) {
+                continue;
             }
-            if (sa.isSpell() && sa.getHostCard() != null) {
-                if (sa.getHostCard().isCreature() && mana.addsKeywords(sa)) {
-                    final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
-                    sa.getHostCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
-                }
-                if (mana.addsCounters(sa)) {
-                    mana.getManaAbility().createETBCounters(sa.getHostCard());
-                }
+
+            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().isType(restriction)) {
+                continue;
+            }
+
+            manaFound = mana;
+            break;
+        }
+        
+        
+        return manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound);
+    }
+
+    
+    public boolean tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana) {
+        if (!manaCost.isNeeded(mana, this)) {
+            return false;
+        }
+        manaCost.payMana(mana, this);
+        sa.getPayingMana().add(mana);
+        this.removeMana(mana);
+        if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
+            sa.getHostCard().setCanCounter(false);
+        }
+        if (sa.isSpell() && sa.getHostCard() != null) {
+            if (sa.getHostCard().isCreature() && mana.addsKeywords(sa)) {
+                final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
+                sa.getHostCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
+            }
+            if (mana.addsCounters(sa)) {
+                mana.getManaAbility().createETBCounters(sa.getHostCard());
             }
         }
+        sa.getManaPaid().add(mana);
+        return true;
     }
 
     /**
@@ -354,7 +383,7 @@ public class ManaPool {
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
         for (Mana mana : ma.getLastManaProduced()) {
-            Collection<Mana> poolLane = this.floatingMana.get(mana.getColorCode());
+            Collection<Mana> poolLane = this.floatingMana.get(mana.getColor());
 
             if (poolLane != null && poolLane.contains(mana)) {
                 removeFloating.add(mana);

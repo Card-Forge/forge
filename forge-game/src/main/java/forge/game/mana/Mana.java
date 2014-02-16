@@ -37,7 +37,6 @@ public class Mana {
         final int prime = 31;
         int result = 1;
         result = prime * result + color;
-        result = prime * result + (hasRestrictions ? 1231 : 1237);
         result = prime * result + ((manaAbility == null) ? 0 : manaAbility.hashCode());
         result = prime * result + ((sourceCard == null) ? 0 : sourceCard.hashCode());
         return result;
@@ -68,165 +67,56 @@ public class Mana {
     private byte color;
     private Card sourceCard = null;
     private AbilityManaPart manaAbility = null;
-    private boolean hasRestrictions = false;
 
-    /**
-     * <p>
-     * Constructor for Mana.
-     * </p>
-     * 
-     * @param col
-     *            a {@link java.lang.String} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @param manaAbility
-     *            a {@link forge.card.spellability.AbilityMana} object
-     */
+
     public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
         this.color = color;
-        if (manaAbility != null) {
-          this.manaAbility = manaAbility;
-          if (!manaAbility.getManaRestrictions().isEmpty()) {
-              this.hasRestrictions = true;
-          }
-        }
-        if (source == null) {
-            return;
-        }
-
-
+        this.manaAbility = manaAbility;
         this.sourceCard = source;
     }
 
-
-    /**
-     * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     public final String toString() {
         return MagicColor.toShortString(color);
     }
 
-    /**
-     * <p>
-     * isSnow.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isSnow() {
         return this.sourceCard.isSnow();
     }
 
-    /**
-     * <p>
-     * isRestricted.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean isRestricted() {
-        return this.hasRestrictions;
+        return this.manaAbility != null && !manaAbility.getManaRestrictions().isEmpty();
     }
 
-    /**
-     * <p>
-     * isRestricted.
-     * </p>
-     * 
-     * @return a boolean.
-     */
+
     public final boolean addsNoCounterMagic(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.cannotCounterPaidWith(saBeingPaid);
     }
 
-    /**
-     * <p>
-     * addsCounters.
-     * </p>
-     * 
-     * @return a boolean.
-     */
+
     public final boolean addsCounters(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.addsCounters(saBeingPaid);
     }
 
-
-    /**
-     * <p>
-     * addsKeywords.
-     * </p>
-     * 
-     * @return a boolean.
-     */
     public final boolean addsKeywords(SpellAbility saBeingPaid) {
         return this.manaAbility != null && manaAbility.addKeywords(saBeingPaid);
     }
 
-    /**
-     * <p>
-     * getAddedKeywords.
-     * </p>
-     * @return a String.
-     */
     public final String getAddedKeywords() {
         return this.manaAbility.getKeywords();
     }
 
-    /**
-     * <p>
-     * isColor.
-     * </p>
-     * 
-     * @param col
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public final boolean isColor(final String col) {
-        return this.getColor().equals(col);
+    public final byte getColor() {
+        return this.color;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>color</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getColor() {
-        return MagicColor.toLongString(this.color);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>sourceCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.card.Card} object.
-     */
     public final Card getSourceCard() {
         return this.sourceCard;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>sourceCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.AbilityMana} object.
-     */
     public final AbilityManaPart getManaAbility() {
         return this.manaAbility;
     }
-
-    public byte getColorCode() {
-        return color;
-    }
-
 
     public boolean isColorless() {
         return color == 0;

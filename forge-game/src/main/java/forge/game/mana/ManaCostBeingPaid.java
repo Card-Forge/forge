@@ -299,7 +299,7 @@ public class ManaCostBeingPaid {
             }
         };
 
-        byte inColor = mana.getColorCode();
+        byte inColor = mana.getColor();
         byte outColor = pool.getPossibleColorUses(inColor);
         return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor);
     }
@@ -354,7 +354,7 @@ public class ManaCostBeingPaid {
             return false;
         }
 
-        byte color = mana.getColorCode();
+        byte color = mana.getColor();
         return pool.canPayForShardWithColor(shard, color);
     }
 

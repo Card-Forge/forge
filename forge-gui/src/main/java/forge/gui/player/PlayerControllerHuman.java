@@ -608,7 +608,7 @@ public class PlayerControllerHuman extends PlayerController {
         List<String> options = new ArrayList<String>();
         for (int i = 0; i < manaChoices.size(); i++) {
             Mana m = manaChoices.get(i);
-            options.add(String.format("%d. %s mana from %s", 1+i, m.getColor(), m.getSourceCard()));
+            options.add(String.format("%d. %s mana from %s", 1+i, MagicColor.toLongString(m.getColor()), m.getSourceCard()));
         }
         String chosen = GuiChoose.one("Pay Mana from Mana Pool", options);
         String idx = TextUtil.split(chosen, '.')[0];

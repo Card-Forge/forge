@@ -20,6 +20,7 @@ package forge.game.spellability;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -33,6 +34,7 @@ import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -487,6 +489,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public List<SpellAbility> getPayingManaAbilities() {
         return this.paidAbilities;
+    }
+    
+    List<Mana> paidMana = new ArrayList<>();
+    public List<Mana> getManaPaid() {
+        return paidMana;
     }
 
     // Combined PaidLists

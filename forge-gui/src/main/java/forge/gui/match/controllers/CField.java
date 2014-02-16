@@ -120,7 +120,7 @@ public class CField implements ICDoc {
                     final Input in = Singletons.getControl().getInputQueue().getInput();
                     if (in instanceof InputPayMana) {
                         // Do something
-                        ((InputPayMana) in).selectManaPool(colorCode);
+                        ((InputPayMana) in).useManaFromPool(colorCode);
                     }
                 }
                 return null;
