@@ -42,19 +42,16 @@ public class SpellAbilityStackInstance {
     // gets cleared from the base SI
     // Coming off the Stack would work similarly, except it would just add the
     // full active SI instead of each of the parts
-    /** The ability. */
+
     private SpellAbility ability = null;
 
-    /** The sub instace. */
     private SpellAbilityStackInstance subInstace = null;
-    private final Player activator;
+    private Player activator;
 
     // When going to a SubAbility that SA has a Instance Choice object
-    /** The tc. */
     private TargetChoices tc = new TargetChoices();
     private List<Card> splicedCards = null;
 
-    /** The stack description. */
     private String stackDescription = null;
 
     // Adjusted Mana Cost
@@ -297,7 +294,15 @@ public class SpellAbilityStackInstance {
 
         return true;
     }
-    
+
+    public Player getActivator() {
+        return activator;
+    }
+
+    public void setActivator(Player activator) {
+        this.activator = activator;
+    }
+
     @Override
     public String toString() {
         return String.format("%s->%s", getSourceCard(), stackDescription);

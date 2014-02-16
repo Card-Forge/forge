@@ -45,6 +45,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             Player chooser = sa.getActivatingPlayer();
 
             // Redirect rules read 'you MAY choose new targets' ... okay!
+            // TODO: Don't even ask to change targets, if the SA and subs don't actually have targets
             boolean isOptional = sa.hasParam("Optional");
             if( isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getHostCard() + "?"))
                  continue;
@@ -90,8 +91,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         GameObject choice = Aggregates.random(candidates);
                         changingTgtSA.getTargets().add(choice);
                         changingTgtSI.updateTarget(changingTgtSA.getTargets());
-                    } else if (sa.hasParam("Defined")){
-                        GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
+                    } else if (sa.hasParam("DefinedMagnet")){
+                        GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
                         if(changingTgtSA.canTarget(newTarget)) {
                             changingTgtSA.resetTargets();
                             changingTgtSA.getTargets().add(newTarget);

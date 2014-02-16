@@ -38,6 +38,7 @@ public enum ApiType {
     Clone (CloneEffect.class),
     CopyPermanent (CopyPermanentEffect.class),
     CopySpellAbility (CopySpellAbilityEffect.class),
+    ControlSpell (ControlSpellEffect.class),
     ControlPlayer (ControlPlayerEffect.class),
     Counter (CounterEffect.class),
     DamageAll (DamageAllEffect.class),
