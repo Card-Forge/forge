@@ -263,7 +263,7 @@ public enum ItemManagerConfig {
                                 colConfig.setSortPriority(Integer.parseInt(attrMap.get("sortPriority")));
                             }
                             if (attrMap.containsKey("sortState")) {
-                                colConfig.setSortState(Enum.valueOf(SortState.class, attrMap.get("sortPriority")));
+                                colConfig.setSortState(Enum.valueOf(SortState.class, attrMap.get("sortState")));
                             }
                             if (attrMap.containsKey("index")) {
                                 colConfig.setIndex(Integer.parseInt(attrMap.get("index")));
