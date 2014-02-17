@@ -40,8 +40,6 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
     private Iterable<PaperCard> onColorCreatures;
     private Iterable<PaperCard> onColorNonCreatures;
 
-    private static ReadDraftRankings draftRankings = new ReadDraftRankings();
-
     private static final boolean logToConsole = false;
     
     /**
@@ -677,7 +675,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
     protected List<Pair<Double, PaperCard>> rankCards(Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> ranked = new ArrayList<Pair<Double, PaperCard>>();
         for (PaperCard card : cards) {
-            Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
+            Double rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
                 ranked.add(Pair.of(rkg, card));
             } else {

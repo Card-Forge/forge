@@ -16,8 +16,8 @@ import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.limited.DraftRankCache;
 import forge.limited.LimitedPoolType;
-import forge.limited.ReadDraftRankings;
 import forge.limited.SealedCardPoolGenerator;
 import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
@@ -233,8 +233,6 @@ public enum CSubmenuSealed implements ICDoc {
     }
 
     static class DeckComparer implements java.util.Comparator<Deck> {
-        ReadDraftRankings ranker = new ReadDraftRankings();
-
         public double getDraftValue(Deck d) {
             double value = 0;
             double divider = 0;
@@ -248,8 +246,8 @@ public enum CSubmenuSealed implements ICDoc {
             for (Entry<PaperCard, Integer> kv : d.getMain()) {
                 PaperCard evalCard = kv.getKey();
                 int count = kv.getValue();
-                if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
-                    double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());
+                if (DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
+                    double add = DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition());
                     // System.out.println(evalCard.getName() + " is worth " + add);
                     value += add * count;
                     divider += count;

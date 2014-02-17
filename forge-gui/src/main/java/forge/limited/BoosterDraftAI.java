@@ -51,7 +51,6 @@ public class BoosterDraftAI {
     private final List<List<PaperCard>> deck = new ArrayList<List<PaperCard>>();
     private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
-    private ReadDraftRankings draftRankings;
     // roughly equivalent to 25 ranks in a core set, or 15 ranks in a small set
     private static final double TAKE_BEST_THRESHOLD = 0.1;
 
@@ -132,7 +131,7 @@ public class BoosterDraftAI {
     private List<Pair<PaperCard, Double>> rankCards(final Iterable<PaperCard> chooseFrom) {
         List<Pair<PaperCard, Double>> rankedCards = new ArrayList<Pair<PaperCard,Double>>();
         for (PaperCard card : chooseFrom) {
-            Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
+            Double rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
                 rankedCards.add(MutablePair.of(card, rkg));
             } else {
@@ -174,9 +173,6 @@ public class BoosterDraftAI {
             this.deck.add(new ArrayList<PaperCard>());
             this.playerColors.add(new DeckColors());
         }
-
-        // Initialize card rankings
-        this.draftRankings = new ReadDraftRankings();
     } // BoosterDraftAI()
 
     /**
