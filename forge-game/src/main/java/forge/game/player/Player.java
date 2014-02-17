@@ -323,18 +323,18 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public final Player getWeakestOpponent() {
-        List<Player> opponnets = this.getOpponents();
-        Player weakest = opponnets.get(0);
-        for (int i = 1; i < opponnets.size(); i++) {
-            if (weakest.getLife() > opponnets.get(i).getLife()) {
-                weakest = opponnets.get(i);
+        List<Player> opponents = this.getOpponents();
+        Player weakest = opponents.get(0);
+        for (int i = 1; i < opponents.size(); i++) {
+            if (weakest.getLife() > opponents.get(i).getLife()) {
+                weakest = opponents.get(i);
             }
         }
         return weakest;
     }
 
     public boolean isOpponentOf(Player other) {
-        return other != this && other != null && ( other.teamNumber < 0 || other.teamNumber != this.teamNumber );
+    	return other != this && other != null && ( other.teamNumber < 0 || other.teamNumber != this.teamNumber );
     }
 
 

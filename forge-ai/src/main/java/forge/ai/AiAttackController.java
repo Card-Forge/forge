@@ -19,6 +19,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -29,6 +30,7 @@ import forge.game.player.Player;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,7 @@ public class AiAttackController {
     private List<Card> myList; // holds computer creatures
     
     private final Player ai;
+	private Player defendingOpponent;
     
     private int aiAggression = 0; // added by Masher, how aggressive the ai is
                                   // attack will be depending on circumstances
@@ -74,21 +77,33 @@ public class AiAttackController {
      */
     public AiAttackController(final Player ai) {
         this.ai = ai;
-        Player opponent = ai.getOpponent();
+        this.defendingOpponent = choosePreferredDefenderPlayer();
         
         this.oppList = Lists.newArrayList();
-        this.oppList.addAll(opponent.getCreaturesInPlay());
+        this.oppList.addAll(this.defendingOpponent.getCreaturesInPlay());
         this.myList = ai.getCreaturesInPlay();
         
 
         this.attackers = new ArrayList<Card>();
         for (Card c : myList) {
-            if (CombatUtil.canAttack(c, opponent)) {
+            if (CombatUtil.canAttack(c, this.defendingOpponent)) {
                 attackers.add(c);
             }
         }
         this.blockers = this.getPossibleBlockers(oppList, this.attackers);
     } // constructor
+
+    /** Choose opponent for AI to attack here. Expand as necessary. */
+    private Player choosePreferredDefenderPlayer() {
+        Player defender = ai.getWeakestOpponent(); //Gets opponent with the least life
+
+        if (defender.getLife() < 8) { //Concentrate on opponent within easy kill range
+            return defender;
+        } else { //Otherwise choose a random opponent to ensure no ganging up on players
+        	defender = ai.getOpponents().get(MyRandom.getRandom().nextInt(ai.getOpponents().size()));
+        }
+        return defender;
+    }
 
     /**
      * <p>
@@ -140,7 +155,7 @@ public class AiAttackController {
             return false;
         }
 
-        final Player opp = ai.getOpponent();
+        final Player opp = this.defendingOpponent;
         if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat) > 0) {
             return true;
         }
@@ -276,7 +291,7 @@ public class AiAttackController {
             return notNeededAsBlockers;
         }
 
-        final Player opp = ai.getOpponent();
+        final Player opp = this.defendingOpponent;
 
         // Increase the total number of blockers needed by 1 if Finest Hour in
         // play
@@ -384,7 +399,7 @@ public class AiAttackController {
         final List<Card> unblockedAttackers = new ArrayList<Card>();
         final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
         final List<Card> remainingBlockers = new ArrayList<Card>(this.blockers);
-        final Player opp = ai.getOpponent();
+        final Player opp = this.defendingOpponent;
 
 
         for (Card attacker : attackers) {
@@ -448,27 +463,28 @@ public class AiAttackController {
         if (defs.size() == 1) {
             return defs.get(0);
         }
+        Player prefDefender = (Player) (defs.contains(this.defendingOpponent) ? this.defendingOpponent : defs.get(0));
 
         final GameEntity entity = ai.getMustAttackEntity();
         if (null != entity) {
             int n = defs.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
-                return defs.get(0);
+                return prefDefender;
             } else {
                 return entity;
             }
         } else {
             // 1. assault the opponent if you can kill him
             if (bAssault) {
-                return getDefendingPlayers(c).get(0);
+                return prefDefender;
             }
             // 2. attack planeswalkers
             List<Card> pwDefending = c.getDefendingPlaneswalkers();
             if (!pwDefending.isEmpty()) {
                 return pwDefending.get(0);
             } else {
-                return defs.get(0);
+                return prefDefender;
             }
         }
     }
@@ -622,7 +638,7 @@ public class AiAttackController {
             aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
         }
 
-        final Player opp = ai.getOpponent();
+        final Player opp = this.defendingOpponent;
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<Card>();
         int candidateUnblockedDamage = 0;
@@ -791,7 +807,7 @@ public class AiAttackController {
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
             if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
-                    && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, ai.getOpponent())
+                    && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, this.defendingOpponent)
                     >= ComputerUtilCombat.getDamageToKill(attacker)) {
                 continue;
             }
