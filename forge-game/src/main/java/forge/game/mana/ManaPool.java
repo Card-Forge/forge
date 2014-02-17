@@ -34,11 +34,10 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -49,7 +48,7 @@ import java.util.List;
  * @author Forge
  * @version $Id$
  */
-public class ManaPool {
+public class ManaPool implements Iterable<Mana> {
 
     private final Multimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
 
@@ -91,9 +90,6 @@ public class ManaPool {
         for (final Mana m : manaList) {
             this.addMana(m);
         }
-
-        // check state effects replaced by checkStaticAbilities
-        //owner.getGame().getAction().checkStaticAbilities();
     }
 
     /**
@@ -140,100 +136,6 @@ public class ManaPool {
         return numRemoved;
     }
 
-   
-    /**
-     * <p>
-     * getManaFrom.
-     * </p>
-     *
-     * @param saBeingPaidFor
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a {@link forge.game.mana.Mana} object.
-     */
-    private Mana getMana(final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
-        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(shard, saBeingPaidFor, restriction);
-
-        // Exclude border case
-        if (weightedOptions.isEmpty()) {
-            return null; // There is no matching mana in the pool
-        }
-
-        // select equal weight possibilities
-        List<Mana> manaChoices = new ArrayList<Mana>();
-        int bestWeight = Integer.MIN_VALUE;
-        for (Pair<Mana, Integer> option : weightedOptions) {
-            int thisWeight = option.getRight();
-            Mana thisMana = option.getLeft();
-
-            if (thisWeight > bestWeight) {
-                manaChoices.clear();
-                bestWeight = thisWeight;
-            }
-
-            if (thisWeight == bestWeight) {
-                // add only distinct Mana-s
-                boolean haveDuplicate = false;
-                for (Mana m : manaChoices) {
-                    if (m.equals(thisMana)) {
-                        haveDuplicate = true;
-                        break;
-                    }
-                }
-                if (!haveDuplicate) {
-                    manaChoices.add(thisMana);
-                }
-            }
-        }
-
-        // got an only one best option?
-        if (manaChoices.size() == 1) {
-            return manaChoices.get(0);
-        }
-
-        // Let them choose then
-        return owner.getController().chooseManaFromPool(manaChoices);
-    }
-
-    private List<Pair<Mana, Integer>> selectManaToPayFor(final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
-        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
-        for (final Byte manaKey : this.floatingMana.keySet()) {
-            if (!canPayForShardWithColor(shard, manaKey.byteValue())) {
-                continue;
-            }
-
-            for (final Mana thisMana : this.floatingMana.get(manaKey)) {
-                if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
-                    continue;
-                }
-
-                boolean canPay = canPayForShardWithColor(shard, thisMana.getColor());
-                if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
-                    continue;
-                }
-
-                if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction)) {
-                    continue;
-                }
-
-                // prefer colorless mana to spend
-                int weight = thisMana.isColorless() ? 5 : 0;
-
-                // prefer restricted mana to spend
-                if (thisMana.isRestricted()) {
-                    weight += 2;
-                }
-
-                // Spend non-snow mana first
-                if (!thisMana.isSnow()) {
-                    weight += 1;
-                }
-
-                weightedOptions.add(Pair.of(thisMana, weight));
-            }
-        }
-        return weightedOptions;
-    }
-
     /**
      * <p>
      * removeManaFrom.
@@ -248,22 +150,7 @@ public class ManaPool {
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
         }
     }
-
-    public final void payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCostBeingPaid manaCost, final ManaCostShard manaShard) {
-        if (manaCost.isPaid()) {
-            return;
-        }
-
-        // get a mana of this type from floating, bail if none available
-        final Mana mana = this.getMana(manaShard, saBeingPaidFor, manaCost.getSourceRestriction());
-        if (mana == null) {
-            return; // no matching mana in the pool
-        }
-        else {
-            tryPayCostWithMana(saBeingPaidFor, manaCost, mana);
-        }
-    }
-
+    
     /**
      * <p>
      * subtractManaFromAbility.
@@ -283,7 +170,8 @@ public class ManaPool {
 
         paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
         for (final Mana mana : abManaPart.getLastManaProduced()) {
-            tryPayCostWithMana(saPaidFor, manaCost, mana);
+            if( tryPayCostWithMana(saPaidFor, manaCost, mana) )
+                saPaidFor.getManaPaid().add(mana);
         }
     }
 
@@ -306,7 +194,10 @@ public class ManaPool {
         }
         
         
-        return manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound);
+        boolean result = manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound);
+        if(result)
+            saPaidFor.getManaPaid().add(manaFound);
+        return result;
     }
 
     
@@ -329,7 +220,6 @@ public class ManaPool {
                 mana.getManaAbility().createETBCounters(sa.getHostCard());
             }
         }
-        sa.getManaPaid().add(mana);
         return true;
     }
 
@@ -479,5 +369,10 @@ public class ManaPool {
                 return true;
         }
         return shard.canBePaidWithManaOfColor((byte)0);
+    }
+
+    @Override
+    public Iterator<Mana> iterator() {
+        return floatingMana.values().iterator();
     }
 }

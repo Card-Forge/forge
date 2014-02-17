@@ -17,6 +17,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -31,6 +32,7 @@ import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -96,7 +98,19 @@ public class ComputerUtilMana {
         Collections.sort(unpaidShards); // most difficult shards must come first
         for (ManaCostShard part : unpaidShards) {
             if (part != ManaCostShard.X) {
-                manapool.payManaFromPool(sa, cost, part);
+                if (cost.isPaid()) {
+                    continue;
+                }
+
+                // get a mana of this type from floating, bail if none available
+                final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction());
+                if (mana == null) {
+                    continue; // no matching mana in the pool
+                }
+                else {
+                    if ( ai.getManaPool().tryPayCostWithMana(sa, cost, mana) && !test)
+                        sa.getManaPaid().add(mana);
+                }
             }
         }
 
@@ -249,6 +263,97 @@ public class ComputerUtilMana {
         return true;
     } // payManaCost()
 
+    /**
+     * <p>
+     * getManaFrom.
+     * </p>
+     *
+     * @param saBeingPaidFor
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @return a {@link forge.game.mana.Mana} object.
+     */
+    private static Mana getMana(final Player ai, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
+        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(ai.getManaPool(), shard, saBeingPaidFor, restriction);
+
+        // Exclude border case
+        if (weightedOptions.isEmpty()) {
+            return null; // There is no matching mana in the pool
+        }
+
+        // select equal weight possibilities
+        List<Mana> manaChoices = new ArrayList<Mana>();
+        int bestWeight = Integer.MIN_VALUE;
+        for (Pair<Mana, Integer> option : weightedOptions) {
+            int thisWeight = option.getRight();
+            Mana thisMana = option.getLeft();
+
+            if (thisWeight > bestWeight) {
+                manaChoices.clear();
+                bestWeight = thisWeight;
+            }
+
+            if (thisWeight == bestWeight) {
+                // add only distinct Mana-s
+                boolean haveDuplicate = false;
+                for (Mana m : manaChoices) {
+                    if (m.equals(thisMana)) {
+                        haveDuplicate = true;
+                        break;
+                    }
+                }
+                if (!haveDuplicate) {
+                    manaChoices.add(thisMana);
+                }
+            }
+        }
+
+        // got an only one best option?
+        if (manaChoices.size() == 1) {
+            return manaChoices.get(0);
+        }
+
+        // Let them choose then
+        return ai.getController().chooseManaFromPool(manaChoices);
+    }
+
+    private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
+        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
+        for (final Mana thisMana : manapool) {
+            if (!manapool.canPayForShardWithColor(shard, thisMana.getColor())) {
+                continue;
+            }
+
+            if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
+                continue;
+            }
+
+            boolean canPay = manapool.canPayForShardWithColor(shard, thisMana.getColor());
+            if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
+                continue;
+            }
+
+            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction)) {
+                continue;
+            }
+
+            // prefer colorless mana to spend
+            int weight = thisMana.isColorless() ? 5 : 0;
+
+            // prefer restricted mana to spend
+            if (thisMana.isRestricted()) {
+                weight += 2;
+            }
+
+            // Spend non-snow mana first
+            if (!thisMana.isSnow()) {
+                weight += 1;
+            }
+
+            weightedOptions.add(Pair.of(thisMana, weight));
+        }
+        return weightedOptions;
+    }
+    
     private static void setExpressColorChoice(final SpellAbility sa, final Player ai, ManaCostBeingPaid cost,
             ManaCostShard toPay, SpellAbility saPayment) {
 
