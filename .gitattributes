@@ -9022,6 +9022,7 @@ forge-gui/res/cardsfolder/p/perish_the_thought.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/permafrost_trap.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pernicious_deed.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/perplex.txt -text
+forge-gui/res/cardsfolder/p/perplexing_chimera.txt -text
 forge-gui/res/cardsfolder/p/persecute.txt -text
 forge-gui/res/cardsfolder/p/personal_incarnation.txt -text
 forge-gui/res/cardsfolder/p/personal_sanctuary.txt -text

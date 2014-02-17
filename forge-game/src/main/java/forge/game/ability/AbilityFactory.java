@@ -124,7 +124,7 @@ public final class AbilityFactory {
     public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
-        if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets) {
+        if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets || api == ApiType.ControlSpell) {
             // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
             // Since all "Counter" or "ChangeTargets" abilities only target the Stack Zone
             // No need to have each of those scripts have that info

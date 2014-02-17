@@ -52,7 +52,7 @@ public class SaTargetRoutines {
     // Targets of unspecified type
     protected List<GameObject> getTargets(SpellAbility sa) {                                   return getTargetables(false, "Defined", sa); }
     protected List<GameObject> getTargets(SpellAbility sa, String definedParam) {              return getTargetables(false, definedParam, sa); }
-    protected List<GameObject> getDefinedOrTargeteded(SpellAbility sa, String definedParam) {  return getTargetables(true, definedParam, sa); }
+    protected List<GameObject> getDefinedOrTargeted(SpellAbility sa, String definedParam) {  return getTargetables(true, definedParam, sa); }
 
     private List<GameObject> getTargetables(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
