@@ -145,6 +145,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     if (itemManager.getWantUnique() == wantUnique) { return; }
                     itemManager.setWantUnique(wantUnique);
                     itemManager.refresh();
+
+                    if (itemManager.getConfig() != null) {
+                        itemManager.getConfig().setUniqueCardsOnly(wantUnique);
+                    }
                 }
             });
             getPnlOptions().add(chkBox);

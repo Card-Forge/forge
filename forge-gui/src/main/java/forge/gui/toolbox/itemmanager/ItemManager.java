@@ -299,6 +299,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
     public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemColumn> colOverrides) {
         this.config = config0;
+        this.setWantUnique(config0.getUniqueCardsOnly());
         for (ItemView<T> view : this.views) {
             view.setup(config0, colOverrides);
         }
