@@ -35,6 +35,8 @@ Celestial Dawn
 False Dawn
 Daxos of Meletis
 Psychic Intrusion
+Commandeer
+Perplexing Chimera
 
 
 ------------
