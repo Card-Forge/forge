@@ -1,6 +1,7 @@
 package forge.gui.home.sanctioned;
 
 import com.google.common.base.Predicate;
+
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.DeckSection;
@@ -30,11 +31,13 @@ import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -64,6 +67,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private PlayerPanel playerPanelWithFocus;
     private GameType currentGameMode = GameType.Constructed;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
+    private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
@@ -78,7 +82,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final FCheckBox vntArchenemy = new FCheckBox("Archenemy");
     private String archenemyType = "Classic";
     private final FComboBoxWrapper<String> comboArchenemy = new FComboBoxWrapper<String>(new String[]{
-    		"Classic Archenemy (player 1 is Archenemy)", "Archenemy Rumble (All players are Archenemies)"});
+    		"Archenemy (Classic - One player is the Archenemy)", "Supervillan Rumble (All players are Archenemies)"});
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -95,6 +99,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
 
     // Variants
+    private final List<FList<Object>> schemeDeckLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+    private int lastArchenemy = 0;
+
     private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
 
@@ -121,7 +129,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         vntCommander.setEnabled(false);
         vntPlanechase.addItemListener(iListenerVariants);
         vntArchenemy.addItemListener(iListenerVariants);
-        vntArchenemy.setEnabled(false);
         comboArchenemy.setSelectedIndex(0);
         comboArchenemy.setEnabled(vntArchenemy.isSelected());
         comboArchenemy.addActionListener(aeComboListener);
@@ -146,6 +153,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         String constraints = "pushx, growx, wrap, hidemode 3";
         for (int i = 0; i < MAX_PLAYERS; i++) {
         	teams.add(i+1);
+        	archenemyTeams.add(i == 0 ? 1 : 2);
 
             PlayerPanel player = new PlayerPanel(i);
             playerPanels.add(player);
@@ -255,6 +263,20 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         });
         deckChoosers.add(mainChooser);
 
+        // Scheme deck list
+        FPanel schemeDeckPanel = new FPanel();
+        schemeDeckPanel.setBorderToggle(false);
+        schemeDeckPanel.setLayout(new MigLayout(sectionConstraints));
+        schemeDeckPanel.add(new FLabel.Builder().text("Select Scheme deck:").build(), labelConstraints);
+        FList<Object> schemeDeckList = new FList<Object>();
+        schemeDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        FScrollPane scrSchemes = new FScrollPane(schemeDeckList, true,
+        		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        schemeDeckPanel.add(scrSchemes, "grow, push");
+        schemeDeckLists.add(schemeDeckList);
+        schemeDeckPanels.add(schemeDeckPanel);
+
         // Planar deck list
         FPanel planarDeckPanel = new FPanel();
         planarDeckPanel.setBorderToggle(false);
@@ -308,11 +330,18 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     			decksFrame.add(cbSingletons, strCheckboxConstraints);
     			decksFrame.add(cbArtifacts, strCheckboxConstraints);
     		}
-    	}
+        }
+        else if (GameType.Archenemy == forGameType || GameType.ArchenemyRumble == forGameType) {
+            if (isPlayerArchenemy(playerWithFocus)) {
+                decksFrame.add(schemeDeckPanels.get(playerWithFocus), "grow, push");
+            } else {
+            	populateDeckPanel(GameType.Constructed);
+            }
+        }
     	else if (GameType.Planechase == forGameType) {
-    		decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
-    	}
-    	else if (GameType.Vanguard == forGameType) {
+            decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
+        }
+        else if (GameType.Vanguard == forGameType) {
     		updateVanguardList(playerWithFocus);
     		decksFrame.add(vgdPanels.get(playerWithFocus), "grow, push");
     	}
@@ -432,9 +461,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         private FRadioButton radioHuman;
         private FRadioButton radioAi;
 
+        private FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<Object>();
+        private FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
+
         private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
 
         private final String variantBtnConstraints = "height 30px, hidemode 3";
+
+        private boolean playerIsArchenemy = false;
+        private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a scheme deck").build();
+        private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text("Scheme Deck Editor").build();
+        private final FLabel scmLabel = newLabel("Scheme deck:");
 
         private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
         private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
@@ -446,6 +483,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         public PlayerPanel(final int index) {
             super();
             this.index = index;
+            playerIsArchenemy = index == 0;
 
             setLayout(new MigLayout("insets 10px, gap 5px"));
 
@@ -469,17 +507,28 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             this.add(radioHuman, "gapright 5px");
             this.add(radioAi, "wrap");
 
-            this.add(newLabel("Deck:"), "w 40px, h 30px");
-            this.add(deckBtn, "pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+            this.add(newLabel("Team:"), "w 40px, h 30px");
+        	populateTeamsComboBoxes();
+            teamComboBox.addActionListener(teamListener);
+            aeTeamComboBox.addActionListener(teamListener);
+            teamComboBox.addTo(this, "h 30px, pushx, growx, gaptop 5px, hidemode 3");
+            aeTeamComboBox.addTo(this, "h 30px, pushx, growx, gaptop 5px, hidemode 3");
+
+            this.add(newLabel("Deck:"), variantBtnConstraints + ", cell 0 2, sx 2, ax right");
+            this.add(deckBtn, variantBtnConstraints + ", cell 2 2, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
             addHandlersDeckSelector();
 
-            this.add(pchLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
-            this.add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, growx, pushx");
-            this.add(pchDeckEditor, variantBtnConstraints + ", cell 3 2, sx 3, growx, wrap");
+            this.add(scmLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+            this.add(scmDeckSelectorBtn, variantBtnConstraints + ", cell 2 3, growx, pushx");
+            this.add(scmDeckEditor, variantBtnConstraints + ", cell 3 3, sx 3, growx, wrap");
 
-            this.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 3, sx 4, growx, wrap");
-            this.add(vgdLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+            this.add(pchLabel, variantBtnConstraints + ", cell 0 4, sx 2, ax right");
+            this.add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 4, growx, pushx");
+            this.add(pchDeckEditor, variantBtnConstraints + ", cell 3 4, sx 3, growx, wrap");
+
+            this.add(vgdLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
+            this.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 5, sx 4, growx, wrap");
 
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
@@ -564,6 +613,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         };
 
         public void updateVariantControlsVisibility() {
+        	boolean archenemyVisiblity = appliedVariants.contains(GameType.ArchenemyRumble)
+        			|| (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy);
+        	scmDeckSelectorBtn.setVisible(archenemyVisiblity);
+            scmDeckEditor.setVisible(archenemyVisiblity);
+            scmLabel.setVisible(archenemyVisiblity);
+
+            teamComboBox.setVisible(!appliedVariants.contains(GameType.Archenemy));
+            aeTeamComboBox.setVisible(appliedVariants.contains(GameType.Archenemy));
+            aeTeamComboBox.setEnabled(!(appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy));
+
             pchDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Planechase));
             pchDeckEditor.setVisible(appliedVariants.contains(GameType.Planechase));
             pchLabel.setVisible(appliedVariants.contains(GameType.Planechase));
@@ -597,10 +656,90 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             avatarLabel.requestFocusInWindow();
         }
 
+        private void populateTeamsComboBoxes() {
+        	aeTeamComboBox.addItem("Archenemy");
+        	aeTeamComboBox.addItem("Heroes");
+        	aeTeamComboBox.setSelectedIndex(archenemyTeams.get(index) - 1);
+        	aeTeamComboBox.setEnabled(playerIsArchenemy);
+
+        	for (int i = 1; i <= MAX_PLAYERS; i++) {
+        		teamComboBox.addItem(i);
+        	}
+        	teamComboBox.setSelectedIndex(teams.get(index) - 1);
+        	teamComboBox.setEnabled(true);
+        }
+
+        private ActionListener teamListener = new ActionListener() {
+        	@SuppressWarnings("unchecked")
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		FComboBox<Object> cb = (FComboBox<Object>)e.getSource();
+        		cb.requestFocusInWindow();
+        		Object selection = cb.getSelectedItem();
+
+        		if (null == selection) {
+        			return;
+        		}
+        		if (appliedVariants.contains(GameType.Archenemy)) {
+        			String sel = (String) selection;
+        			if (sel.contains("Archenemy")) {
+        				lastArchenemy = index;
+        				for (PlayerPanel pp : playerPanels) {
+        					int i = pp.index;
+        					archenemyTeams.set(i, i == lastArchenemy ? 1 : 2);
+        					pp.aeTeamComboBox.setSelectedIndex(i == lastArchenemy ? 0 : 1);
+        					pp.toggleIsPlayerArchenemy();
+        				}
+        			}
+        		} else {
+        			Integer sel = (Integer) selection;
+        			teams.set(index, sel);
+        		}
+
+        		changePlayerFocus(index);
+        	}
+        };
+
+        public void toggleIsPlayerArchenemy() {
+        	if (appliedVariants.contains(GameType.Archenemy)) {
+        		playerIsArchenemy = lastArchenemy == index;
+        	} else {
+        		playerIsArchenemy = appliedVariants.contains(GameType.ArchenemyRumble);
+        	}
+    		updateVariantControlsVisibility();
+        }
+
         /**
          * @param index
          */
         private void addHandlersToVariantsControls() {
+        	// Archenemy buttons
+            scmDeckSelectorBtn.setCommand(new Runnable() {
+                @Override
+                public void run() {
+                	currentGameMode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+                    scmDeckSelectorBtn.requestFocusInWindow();
+                    changePlayerFocus(index, currentGameMode);
+                }
+            });
+
+            scmDeckEditor.setCommand(new UiCommand() {
+                @Override
+                public void run() {
+                    currentGameMode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+                    Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
+                        @Override
+                        public boolean apply(PaperCard arg0) {
+                            return arg0.getRules().getType().isScheme();
+                        }
+                    };
+
+                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                            new CEditorVariant(Singletons.getModel().getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));
+                }
+            });
+
             // Planechase buttons
             pchDeckSelectorBtn.setCommand(new Runnable() {
                 @Override
@@ -742,12 +881,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             else {
                 setRandomAvatar();
             }
-            this.addMouseListener(new FMouseAdapter() {
-                @Override
-                public void onLeftClick(MouseEvent e) {
-                    avatarLabel.requestFocusInWindow();
-                }
-            });
 
             avatarLabel.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
             avatarLabel.addFocusListener(avatarFocusListener);
@@ -878,9 +1011,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         return newName;
     }
 
-    /////////////////////////////////////////////
-    //========== Various listeners in build order
-
     private List<String> getPlayerNames() {
         List<String> names = new ArrayList<String>();
         for (PlayerPanel pp : playerPanels) {
@@ -888,6 +1018,32 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         }
         return names;
     }
+
+    public String getPlayerName(int i) {
+        return playerPanels.get(i).getPlayerName();
+    }
+
+    public int getPlayerAvatar(int i) {
+        return playerPanels.get(i).getAvatarIndex();
+    }
+
+    public boolean isEnoughTeams() {
+    	int lastTeam = -1;
+    	final List<Integer> teamList = appliedVariants.contains(GameType.Archenemy) ? archenemyTeams : teams;
+    	System.out.println(teamList);
+    			
+    	for (final int i : getParticipants()) {
+    		if (lastTeam == -1) {
+    			lastTeam = teamList.get(i);
+    		} else if (lastTeam != teamList.get(i)) {
+    			return true;
+    		}
+        }
+        return false;
+    }
+
+    /////////////////////////////////////////////
+    //========== Various listeners in build order
 
     /** This listener unlocks the relevant buttons for players
      * and enables/disables archenemy combobox as appropriate. */
@@ -929,6 +1085,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
 
             for (PlayerPanel pp : playerPanels) {
+        		pp.toggleIsPlayerArchenemy();
                 pp.updateVariantControlsVisibility();
             }
             changePlayerFocus(playerWithFocus, currentGameMode);
@@ -942,10 +1099,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		public void actionPerformed(ActionEvent e) {
 			FComboBox<String> cb = (FComboBox<String>)e.getSource();
 			archenemyType = (String)cb.getSelectedItem();
+			GameType mode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
 			appliedVariants.remove(GameType.Archenemy);
     		appliedVariants.remove(GameType.ArchenemyRumble);
-    		appliedVariants.add(archenemyType.contains("Classic")
-    				? GameType.Archenemy : GameType.ArchenemyRumble);
+    		appliedVariants.add(mode);
+
+    		currentGameMode = mode;
+            for (PlayerPanel pp : playerPanels) {
+        		pp.toggleIsPlayerArchenemy();
+                pp.updateVariantControlsVisibility();
+            }
+            changePlayerFocus(playerWithFocus, currentGameMode);
 		}
     };
 
@@ -1032,12 +1196,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     public int getTeam(final int playerIndex) {
-    	return teams.get(playerIndex);
+    	return appliedVariants.contains(GameType.Archenemy) ? archenemyTeams.get(playerIndex) : teams.get(playerIndex);
     }
 
     /** Gets the list of planar deck lists. */
     public List<FList<Object>> getPlanarDeckLists() {
     	return planarDeckLists;
+    }
+
+    /** Gets the list of planar deck lists. */
+    public List<FList<Object>> getSchemeDeckLists() {
+    	return schemeDeckLists;
+    }
+
+    public boolean isPlayerArchenemy(final int playernum) {
+        return playerPanels.get(playernum).playerIsArchenemy;
     }
 
     /** Gets the list of Vanguard avatar lists. */
@@ -1105,13 +1278,5 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		if (-1 == vgdList.getSelectedIndex()) {
 			vgdList.setSelectedIndex(0);
 		}
-    }
-
-    public String getPlayerName(int i) {
-        return playerPanels.get(i).getPlayerName();
-    }
-
-    public int getPlayerAvatar(int i) {
-        return playerPanels.get(i).getAvatarIndex();
     }
 }

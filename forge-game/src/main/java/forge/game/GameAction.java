@@ -783,7 +783,8 @@ public class GameAction {
         }
 
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
-        if (game.getRules().getGameType() == GameType.Archenemy) {
+        if (game.getRules().hasAppliedVariant(GameType.Archenemy)
+                || game.getRules().hasAppliedVariant(GameType.ArchenemyRumble)) {
             game.archenemy904_10();
         }
 
@@ -1507,7 +1508,7 @@ public class GameAction {
         Player goesFirst = null;
 
         // 904.6: in Archenemy games the Archenemy goes first
-        if (game != null && game.getRules().getGameType() == GameType.Archenemy) {
+        if (game != null && game.getRules().hasAppliedVariant(GameType.Archenemy)) {
             for (Player p : game.getPlayers()) {
                 if (p.isArchenemy()) {
                     return p;

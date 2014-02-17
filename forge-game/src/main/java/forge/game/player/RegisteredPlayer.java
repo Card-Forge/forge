@@ -106,13 +106,6 @@ public class RegisteredPlayer {
     public void setTeamNumber(int teamNumber0) {
         this.teamNumber = teamNumber0;
     }
-
-
-    public static RegisteredPlayer forArchenemy(final Deck deck, final Iterable<PaperCard> schemes) {
-        RegisteredPlayer start = new RegisteredPlayer(deck);
-        start.schemes = schemes;
-        return start;
-    }
     
     public static RegisteredPlayer forCommander(final Deck deck) {
         RegisteredPlayer start = new RegisteredPlayer(deck);
@@ -122,23 +115,23 @@ public class RegisteredPlayer {
     }
 
     public static RegisteredPlayer forVariants(
-    		final List<GameType> appliedVariants, final Deck deck, final int team,	//General vars
-    		final Iterable<PaperCard> schemes, final boolean isPlayerArchenemy, 	//Archenemy specific vars
-    		final Iterable<PaperCard> planes, final PaperCard vanguardAvatar) {		//Planechase and Vanguard
+    		final List<GameType> appliedVariants, final Deck deck,	              //General vars
+    		final Iterable<PaperCard> schemes, final boolean playerIsArchenemy,   //Archenemy specific vars
+    		final Iterable<PaperCard> planes, final PaperCard vanguardAvatar) {   //Planechase and Vanguard
+        
     	RegisteredPlayer start = new RegisteredPlayer(deck);
-    	if (appliedVariants.contains(GameType.Archenemy)) {
-    		if (isPlayerArchenemy) {
-    			start.setStartingLife(40); // 904.5: The Archenemy has 40 life.
-    		}
+    	if (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy) {
+    		start.setStartingLife(40); // 904.5: The Archenemy has 40 life.
     		start.schemes = schemes;
     	}
     	if (appliedVariants.contains(GameType.ArchenemyRumble)) {
-    		start.setStartingLife(start.getStartingLife() + 20); // Allow
+    		start.setStartingLife(40);
     		start.schemes = schemes;
     	}
     	if (appliedVariants.contains(GameType.Commander)) {
             start.commander = deck.get(DeckSection.Commander).get(0);
-    		start.setStartingLife(40); // 903.7: ...each player sets his or her life total to 40
+    		start.setStartingLife(start.getStartingLife() + 20); // 903.7: ...each player sets his or her life total to 40
+    		                                                     // Modified for layering of variants to life +20
     	}
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;

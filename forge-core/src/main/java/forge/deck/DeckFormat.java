@@ -104,7 +104,6 @@ public enum DeckFormat {
 
 
 
-    @SuppressWarnings("incomplete-switch")
     public String getDeckConformanceProblem(Deck deck) {
         if(deck == null) {
             return "is not selected";
@@ -123,63 +122,47 @@ public enum DeckFormat {
             return String.format("should not exceed a maximum of %d cards", max);
         }
 
-        switch(this) {
-            case Commander: //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
+        if (this == Commander) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
 
-                final CardPool cmd = deck.get(DeckSection.Commander);
-                if (null == cmd || cmd.isEmpty()) {
-                    return "is missing a commander";
-                }
-                if (!cmd.get(0).getRules().getType().isLegendary()
-                    || !cmd.get(0).getRules().getType().isCreature()) {
-                    return "has a commander that is not a legendary creature";
-                }
-                
-                ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
-                List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
-                                
-                for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
-                    if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
-                    {
-                        erroneousCI.add(cp.getKey());
-                    }
-                }
-                if(deck.has(DeckSection.Sideboard))
-                {
-                    for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
-                        if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
-                        {
-                            erroneousCI.add(cp.getKey());
-                        }
-                    }
-                }
-                
-                if(erroneousCI.size() > 0)
-                {
-                    StringBuilder sb = new StringBuilder("contains card that do not match the commanders color identity:");
-                    
-                    for(PaperCard cp : erroneousCI)
-                    {
-                        sb.append("\n").append(cp.getName());
-                    }
-                    
-                    return sb.toString();
-                }
-                
-                break;
+        	final CardPool cmd = deck.get(DeckSection.Commander);
+        	if (null == cmd || cmd.isEmpty()) {
+        		return "is missing a commander";
+        	}
+        	if (!cmd.get(0).getRules().getType().isLegendary()
+        			|| !cmd.get(0).getRules().getType().isCreature()) {
+        		return "has a commander that is not a legendary creature";
+        	}
 
-            case Archenemy:  //Must contain at least 20 schemes, max 2 of each.
-                final CardPool schemes = deck.get(DeckSection.Schemes);
-                if (schemes == null || schemes.countAll() < 20) {
-                    return "must contain at least 20 schemes";
-                }
+        	ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
+        	List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
-                for (Entry<PaperCard, Integer> cp : schemes) {
-                    if (cp.getValue() > 2) {
-                        return String.format("must not contain more than 2 copies of any Scheme, but has %d of '%s'", cp.getValue(), cp.getKey().getName());
-                    }
-                }
-                break;
+        	for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+        		if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
+        		{
+        			erroneousCI.add(cp.getKey());
+        		}
+        	}
+        	if(deck.has(DeckSection.Sideboard))
+        	{
+        		for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
+        			if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
+        			{
+        				erroneousCI.add(cp.getKey());
+        			}
+        		}
+        	}
+
+        	if(erroneousCI.size() > 0)
+        	{
+        		StringBuilder sb = new StringBuilder("contains card that do not match the commanders color identity:");
+
+        		for(PaperCard cp : erroneousCI)
+        		{
+        			sb.append("\n").append(cp.getName());
+        		}
+
+        		return sb.toString();
+        	}
         }
 
         int maxCopies = getMaxCardCopies();
@@ -238,6 +221,20 @@ public enum DeckFormat {
     	if (phenoms > 2) {
     		return "must not contain more than 2 Phenomena";
     	}
+        return null;
+    }
+
+    public String getSchemeSectionConformanceProblem(CardPool schemes) {
+        //Must contain at least 20 schemes, max 2 of each.
+        if (schemes == null || schemes.countAll() < 20) {
+            return "must contain at least 20 schemes";
+        }
+
+        for (Entry<PaperCard, Integer> cp : schemes) {
+            if (cp.getValue() > 2) {
+                return String.format("must not contain more than 2 copies of any Scheme, but has %d of '%s'", cp.getValue(), cp.getKey().getName());
+            }
+        }
         return null;
     }
 }

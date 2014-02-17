@@ -1,6 +1,7 @@
 package forge.gui.home.sanctioned;
 
 import com.google.common.collect.Iterables;
+
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.CardPool;
@@ -18,6 +19,7 @@ import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
+import forge.model.CardCollections;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences;
@@ -26,6 +28,7 @@ import forge.util.Aggregates;
 import forge.util.storage.IStorage;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -57,31 +60,53 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
 
         SwingUtilities.invokeLater(new Runnable() {
         	@Override public void run() {
-        		// Planechase: reinit deck lists and restore last selections (if any)
-        		for (FList<Object> deckList : view.getPlanarDeckLists()) {
-        			Vector<Object> listData = new Vector<Object>();            
+        		final CardCollections cColl = Singletons.getModel().getDecks();
+        		FList<Object> deckList;
 
-        			listData.add("Use deck's planes section (random if unavailable)");
-        			listData.add("Generate");
-        			if (Singletons.getModel().getDecks().getPlane().size() > 0) {
-        				listData.add("Random");
-        				for (Deck planarDeck : Singletons.getModel().getDecks().getPlane()) {
-        					listData.add(planarDeck);
-        				}                
-        			}
+				for (int i = 0; i < 8; i++) {
+					// Archenemy: reinit deck list and restore last selections (if any)
+					deckList = view.getSchemeDeckLists().get(i);
+					Vector<Object> listData = new Vector<Object>();
+					listData.add("Use deck's scheme section (random if unavailable)");
+					listData.add("Generate");
+					if (cColl.getScheme().size() > 0) {
+						listData.add("Random");
+						for (Deck schemeDeck : cColl.getScheme()) {
+							listData.add(schemeDeck);
+						}
+					}
+					Object val = deckList.getSelectedValue();
+					deckList.setListData(listData);
+					if (null != val) {
+						deckList.setSelectedValue(val, true);
+					}
+					if (-1 == deckList.getSelectedIndex()) {
+						deckList.setSelectedIndex(0);
+					} // End Archenemy
 
-        			Object val = deckList.getSelectedValue();
-        			deckList.setListData(listData);
-        			if (null != val) {
-        				deckList.setSelectedValue(val, true);
-        			}
+	        		// Planechase: reinit deck lists and restore last selections (if any)
+	        		deckList = view.getPlanarDeckLists().get(i);
+	        		listData = new Vector<Object>();            
 
-        			if (-1 == deckList.getSelectedIndex()) {
-        				deckList.setSelectedIndex(0);
-        			}
-        		} // End Planechase
+	        		listData.add("Use deck's planes section (random if unavailable)");
+	        		listData.add("Generate");
+	        		if (cColl.getPlane().size() > 0) {
+	        			listData.add("Random");
+	        			for (Deck planarDeck : cColl.getPlane()) {
+	        				listData.add(planarDeck);
+	        			}                
+	        		}
 
-        		for (int i = 0; i < 8; i++) {
+	        		val = deckList.getSelectedValue();
+	        		deckList.setListData(listData);
+	        		if (null != val) {
+	        			deckList.setSelectedValue(val, true);
+	        		}
+
+	        		if (-1 == deckList.getSelectedIndex()) {
+	        			deckList.setSelectedIndex(0);
+	        		} // End Planechase
+
         			view.updateVanguardList(i);
         		}
 
@@ -141,15 +166,17 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
 
     /** Starts a match with the applied variants. */
     private void startGame(final List<GameType> variantTypes) {
-    	if (variantTypes.contains(GameType.Archenemy) || variantTypes.contains(GameType.ArchenemyRumble)
-    			|| variantTypes.contains(GameType.Commander)) {
-            FOptionPane.showMessageDialog("Archenemy and Commander matches cannot currently be started via the "
-            		+ "Constructed match setup screen. Please disable any of those variants then restart the match");
+    	if (variantTypes.contains(GameType.Commander)) {
+            FOptionPane.showMessageDialog("Commander matches cannot currently be started via the "
+            		+ "Constructed match setup screen. Please this variant then restart the match");
             return;
         }
 
-    	boolean checkLegality = Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-    
+    	if (!view.isEnoughTeams()) {
+    	    FOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
+    	    return;
+    	}
+
         for (final int i : view.getParticipants()) {
         	if (view.getDeckChooser(i).getPlayer() == null) {
                 FOptionPane.showMessageDialog("Please specify a deck for " + view.getPlayerName(i));
@@ -157,6 +184,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             }
         } // Is it even possible anymore? I think current implementation assigns decks automatically.
 
+    	boolean checkLegality = Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
         if (checkLegality) {
         	for (final int i : view.getParticipants()) {
         		String name = view.getPlayerName(i);
@@ -175,16 +203,52 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             LobbyPlayer lobbyPlayer = view.isPlayerAI(i) ? lobby.getAiPlayer(name,
             		view.getPlayerAvatar(i)) : lobby.getGuiPlayer();
         	RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
+        	rp.setTeamNumber(view.getTeam(i));
+
         	if (variantTypes.isEmpty()) {
         		players.add(rp.setPlayer(lobbyPlayer));
         	} else {
         		// Initialise Variant variables
         		Deck deck = rp.getDeck();
         		Iterable<PaperCard> schemes = null;
-        		boolean isPlayerArchenemy = false;
+        		boolean playerIsArchenemy = view.isPlayerArchenemy(i);
         		Iterable<PaperCard> planes = null;
         		PaperCard vanguardAvatar = null;
                 Random randomSeed = new Random();
+
+        		//Archenemy
+        		if (variantTypes.contains(GameType.ArchenemyRumble)
+                        || (variantTypes.contains(GameType.Archenemy) && playerIsArchenemy)) {
+                    Object selected = view.getSchemeDeckLists().get(i).getSelectedValue();
+                    CardPool schemePool = null;
+                    if (selected instanceof String) {
+                        String sel = (String) selected;
+                        if (sel.contains("Use deck's scheme section")) {
+                        	if (deck.has(DeckSection.Schemes)) {
+                        		schemePool = deck.get(DeckSection.Schemes);
+                        	} else {
+                        		sel = "Random";
+                        	}
+                        }
+                        IStorage<Deck> sDecks = Singletons.getModel().getDecks().getScheme();
+                        if (sel.equals("Random") && sDecks.size() != 0) {
+                        	schemePool = Aggregates.random(sDecks).get(DeckSection.Schemes);                            
+                        }
+                    } else {
+                    	schemePool = ((Deck) selected).get(DeckSection.Schemes);
+                    }
+                    if (schemePool == null) { //Can be null if player deselects the list selection or chose Generate
+                    	schemePool = DeckgenUtil.generateSchemeDeck();
+                    }
+                    if (checkLegality) {
+                    	String errMsg = GameType.Archenemy.getDecksFormat().getSchemeSectionConformanceProblem(schemePool);
+                        if (null != errMsg) {
+                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
+                            return;
+                        }
+                    }
+                    schemes = schemePool.toFlatList();
+        		}
 
         		//Planechase
         		if (variantTypes.contains(GameType.Planechase)) {
@@ -202,16 +266,12 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                         IStorage<Deck> pDecks = Singletons.getModel().getDecks().getPlane();
                         if (sel.equals("Random") && pDecks.size() != 0) {
                         	planePool = Aggregates.random(pDecks).get(DeckSection.Planes);                            
-                        } else if (planePool == null) {
-                        	planePool = DeckgenUtil.generatePlanarDeck();
                         }
                     } else {
                     	planePool = ((Deck) selected).get(DeckSection.Planes);
                     }
-                    if (planePool == null) { //ERROR! Can be null if player deselects the list selection
-                        GuiDialog.message("No Planar deck selected for " + name
-                        		+ ". Please choose one or disable the Planechase variant");
-                        return;
+                    if (planePool == null) { //Can be null if player deselects the list selection or chose Generate
+                    	planePool = DeckgenUtil.generatePlanarDeck();
                     }
                     if (checkLegality) {
                     	String errMsg = GameType.Planechase.getDecksFormat().getPlaneSectionConformanceProblem(planePool);
@@ -240,15 +300,15 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     } else {
                     	vanguardAvatar = (PaperCard)selected;
                     }
-                    if (vanguardAvatar == null) { //ERROR!
+                    if (vanguardAvatar == null) { //ERROR! null if avatar deselected on list
                         GuiDialog.message("No Vanguard avatar selected for " + name
                         		+ ". Please choose one or disable the Vanguard variant");
                         return;
                     }
         		}
 
-        		players.add(RegisteredPlayer.forVariants(variantTypes, rp.getDeck(), view.getTeam(i),
-        				schemes, isPlayerArchenemy, planes, vanguardAvatar).setPlayer(lobbyPlayer));
+        		players.add(RegisteredPlayer.forVariants(variantTypes, rp.getDeck(), schemes,
+        				playerIsArchenemy, planes, vanguardAvatar).setPlayer(lobbyPlayer));
         	}
         	view.getDeckChooser(i).saveState();
         }

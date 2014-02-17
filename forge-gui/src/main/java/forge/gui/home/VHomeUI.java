@@ -31,7 +31,6 @@ import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.settings.VSubmenuReleaseNotes;
-import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuCommander;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPanel;
@@ -47,9 +46,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
-//import forge.gui.home.variant.VSubmenuPlanechase;
-//import forge.gui.home.variant.VSubmenuVanguard;
 
 /**
  * Top level view class for home UI drag layout.<br>
@@ -134,9 +130,6 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuArchenemy.SINGLETON_INSTANCE);
-      //allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);        
-      //allSubmenus.add(VSubmenuPlanechase.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuCommander.SINGLETON_INSTANCE);
 
         // For each group: init its panel
