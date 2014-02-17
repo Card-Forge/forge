@@ -128,6 +128,15 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
         return null;
     }
 
+    public int getWinningTeam() {
+        for (Player p: players) {
+            if (p.getOutcome().hasWon() && winCondition == GameEndReason.AllOpposingTeamsLost) {
+                return p.getTeam();
+            }
+        }
+        return -1;
+    }
+
     /**
      * Gets the win condition.
      * 

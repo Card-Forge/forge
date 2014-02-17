@@ -172,6 +172,7 @@ public class ViewWinLose {
 
     private String composeTitle(GameOutcome outcome) {
         Player winner = outcome.getWinningPlayer();
+        int winningTeam = outcome.getWinningTeam();
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
