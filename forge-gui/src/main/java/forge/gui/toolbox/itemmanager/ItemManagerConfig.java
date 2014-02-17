@@ -28,61 +28,62 @@ import java.util.Map.Entry;
  *
  */
 public enum ItemManagerConfig {
-    STRING_ONLY(SColumnUtil.getStringColumn(), false, false,
+    STRING_ONLY(SColumnUtil.getStringColumn(), false, false, true,
             null, null, 1, 0),
-    CARD_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, false,
+    CARD_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, false, false,
             null, null, 4, 0),
-    DECK_EDITOR(SColumnUtil.getDeckEditorDefaultColumns(), false, false,
+    DECK_EDITOR(SColumnUtil.getDeckEditorDefaultColumns(), false, false, false,
             GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 4, 1),
-    DRAFT_PACK(SColumnUtil.getDraftPackDefaultColumns(), false, false,
+    DRAFT_PACK(SColumnUtil.getDraftPackDefaultColumns(), false, false, true,
             null, null, 4, 1),
-    DRAFT_POOL(SColumnUtil.getCatalogDefaultColumns(false), false, false,
+    DRAFT_POOL(SColumnUtil.getCatalogDefaultColumns(false), false, false, false,
             GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 4, 1),
-    SEALED_POOL(SColumnUtil.getCatalogDefaultColumns(false), false, false,
+    SEALED_POOL(SColumnUtil.getCatalogDefaultColumns(false), false, false, false,
             GroupDef.COLOR, ColumnDef.CMC, 4, 1),
-    SPELL_SHOP(SColumnUtil.getSpellShopDefaultColumns(), false, false,
+    SPELL_SHOP(SColumnUtil.getSpellShopDefaultColumns(), false, false, false,
             null, null, 4, 0),
-    QUEST_INVENTORY(SColumnUtil.getQuestInventoryDefaultColumns(), false, false,
+    QUEST_INVENTORY(SColumnUtil.getQuestInventoryDefaultColumns(), false, false, false,
             null, null, 4, 0),
-    QUEST_EDITOR_POOL(SColumnUtil.getQuestEditorPoolDefaultColumns(), false, false,
+    QUEST_EDITOR_POOL(SColumnUtil.getQuestEditorPoolDefaultColumns(), false, false, false,
             null, null, 4, 0),
-    QUEST_DECK_EDITOR(SColumnUtil.getQuestDeckEditorDefaultColumns(), false, false,
+    QUEST_DECK_EDITOR(SColumnUtil.getQuestDeckEditorDefaultColumns(), false, false, false,
             GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 4, 1),
-    AVATAR_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false,
+    AVATAR_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false, false,
             null, null, 4, 0),
-    SCHEME_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false,
+    SCHEME_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false, false,
             null, null, 4, 0),
-    PLANAR_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false,
+    PLANAR_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false, false,
             null, null, 4, 0),
-    COMMANDER_POOL(SColumnUtil.getCatalogDefaultColumns(true), true, false,
+    COMMANDER_POOL(SColumnUtil.getCatalogDefaultColumns(true), true, false, false,
             null, null, 4, 0),
-    WORKSHOP_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, true,
+    WORKSHOP_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, true, false,
             null, null, 4, 0),
-    DECK_VIEWER(SColumnUtil.getDeckViewerDefaultColumns(), false, false,
+    DECK_VIEWER(SColumnUtil.getDeckViewerDefaultColumns(), false, false, false,
             GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 4, 1),
-    CONSTRUCTED_DECKS(SColumnUtil.getDecksDefaultColumns(true, true), false, false,
+    CONSTRUCTED_DECKS(SColumnUtil.getDecksDefaultColumns(true, true), false, false, false,
             null, null, 3, 0),
-    DRAFT_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false,
+    DRAFT_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
-    SEALED_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false,
+    SEALED_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
-    QUEST_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false,
+    QUEST_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
-    PRECON_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false,
+    PRECON_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
-    QUEST_EVENT_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false,
+    QUEST_EVENT_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0);
 
     private Map<ColumnDef, ItemColumnConfig> cols;
     private boolean showUniqueCardsOption;
 
     private Prop<Boolean> uniqueCardsOnly;
+    private Prop<Boolean> hideFilters;
     private Prop<GroupDef> groupBy;
     private Prop<ColumnDef> pileBy;
     private Prop<Integer> imageColumnCount;
     private Prop<Integer> viewIndex;
 
-    private ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
+    private ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, boolean hideFilters0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
         cols = cols0;
         for (ItemColumnConfig colConfig : cols.values()) {
             colConfig.establishDefaults();
@@ -90,6 +91,7 @@ public enum ItemManagerConfig {
         showUniqueCardsOption = showUniqueCardsOption0;
 
         uniqueCardsOnly = new Prop<Boolean>(uniqueCardsOnly0);
+        hideFilters = new Prop<Boolean>(hideFilters0);
         groupBy = new Prop<GroupDef>(groupBy0);
         pileBy = new Prop<ColumnDef>(pileBy0);
         imageColumnCount = new Prop<Integer>(imageColumnCount0);
@@ -158,6 +160,13 @@ public enum ItemManagerConfig {
         uniqueCardsOnly.setValue(value0);
     }
 
+    public boolean getHideFilters() {
+        return hideFilters.getValue();
+    }
+    public void setHideFilters(boolean value0) {
+        hideFilters.setValue(value0);
+    }
+
     public GroupDef getGroupBy() {
         return groupBy.getValue();
     }
@@ -222,6 +231,9 @@ public enum ItemManagerConfig {
                             config = Enum.valueOf(ItemManagerConfig.class, attrMap.get("name"));
                             if (attrMap.containsKey("uniqueCardsOnly")) {
                                 config.uniqueCardsOnly.value = Boolean.parseBoolean(attrMap.get("uniqueCardsOnly"));
+                            }
+                            if (attrMap.containsKey("hideFilters")) {
+                                config.hideFilters.value = Boolean.parseBoolean(attrMap.get("hideFilters"));
                             }
                             if (attrMap.containsKey("groupBy")) {
                                 String value = attrMap.get("groupBy");
@@ -304,6 +316,7 @@ public enum ItemManagerConfig {
                 writer.add(EVENT_FACTORY.createStartElement("", "", "config"));
                 writer.add(EVENT_FACTORY.createAttribute("name", config.name()));
                 config.uniqueCardsOnly.writeValue(writer, "uniqueCardsOnly");
+                config.hideFilters.writeValue(writer, "hideFilters");
                 config.groupBy.writeValue(writer, "groupBy");
                 config.pileBy.writeValue(writer, "pileBy");
                 config.imageColumnCount.writeValue(writer, "imageColumnCount");

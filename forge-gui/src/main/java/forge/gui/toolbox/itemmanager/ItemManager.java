@@ -243,8 +243,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         final UiCommand cmdBuildFilterMenu = new UiCommand() {
             @Override
             public void run() {
-                if (config == ItemManagerConfig.STRING_ONLY) { return; }
-
                 JPopupMenu menu = new JPopupMenu("FilterMenu");
                 if (hideFilters) {
                     GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
@@ -255,7 +253,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                         GuiUtils.addMenuItem(addMenu, "Current text search",
                                 KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
                                 cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
-                        buildAddFilterMenu(addMenu);
+                        if (config != ItemManagerConfig.STRING_ONLY) {
+                            buildAddFilterMenu(addMenu);
+                        }
                     }
                     else {
                         addMenu.setEnabled(false);
@@ -303,6 +303,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             view.setup(config0, colOverrides);
         }
         this.setViewIndex(config0.getViewIndex());
+        this.setHideFilters(config0.getHideFilters());
     }
 
     public void setViewIndex(int viewIndex) {
@@ -949,6 +950,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             }
             else {
                 this.applyFilters();
+            }
+
+            if (this.config != null) {
+                this.config.setHideFilters(hideFilters0);
             }
         }
     }
