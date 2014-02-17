@@ -11,12 +11,14 @@ import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemColumnConfig;
+import forge.gui.toolbox.itemmanager.views.ItemColumnConfig.SortState;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.InventoryItem;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -82,6 +84,9 @@ public enum ItemManagerConfig {
 
     private ItemManagerConfig(final Map<ColumnDef, ItemColumnConfig> cols0, boolean showUniqueCardsOption0, boolean uniqueCardsOnly0, GroupDef groupBy0, ColumnDef pileBy0, int imageColumnCount0, int viewIndex0) {
         cols = cols0;
+        for (ItemColumnConfig colConfig : cols.values()) {
+            colConfig.establishDefaults();
+        }
         showUniqueCardsOption = showUniqueCardsOption0;
 
         uniqueCardsOnly = new Prop<Boolean>(uniqueCardsOnly0);
@@ -108,6 +113,23 @@ public enum ItemManagerConfig {
             if (value == value0) { return; }
             value = value0;
             save();
+        }
+
+        @SuppressWarnings("rawtypes")
+        private void writeValue(final XMLEventWriter writer, String localName) throws XMLStreamException {
+            if (value == null) {
+                if (defaultValue != null) {
+                    writer.add(EVENT_FACTORY.createAttribute(localName, ""));
+                }
+            }
+            else if (!value.equals(defaultValue)) {
+                if (value instanceof Enum) { //use Enum.name to prevent issues with toString() overrides
+                    writer.add(EVENT_FACTORY.createAttribute(localName, ((Enum)value).name()));
+                }
+                else {
+                    writer.add(EVENT_FACTORY.createAttribute(localName, String.valueOf(value)));
+                }
+            }
         }
     }
 
@@ -172,75 +194,157 @@ public enum ItemManagerConfig {
     public static void load(String filename0) {
         filename = filename0;
 
-        /*try {
+        try {
             final XMLInputFactory in = XMLInputFactory.newInstance();
             final XMLEventReader reader = in.createXMLEventReader(new FileInputStream(filename));
 
             XMLEvent event;
             StartElement element;
             Iterator<?> attributes;
-            Attribute attribute;
-            ItemManagerConfig config;
+            Attribute attr;
+            ItemManagerConfig config = null;
+            Map<String, String> attrMap = new HashMap<String, String>();
 
             while (reader.hasNext()) {
                 event = reader.nextEvent();
 
                 if (event.isStartElement()) {
                     element = event.asStartElement();
-                    try {
-                        config = Enum.valueOf(ItemManagerConfig.class, element.getName().getLocalPart());
-
-                        attributes = element.getAttributes();
-
-                        while (attributes.hasNext()) {
-                            attribute = (Attribute) attributes.next();
-                            switch (attribute.getName().toString()) {
-                            case "name":
-                                break;
-                            case "stars":
-                                break;
+                    attrMap.clear();
+                    attributes = element.getAttributes();
+                    while (attributes.hasNext()) {
+                        attr = (Attribute) attributes.next();
+                        attrMap.put(attr.getName().toString(), attr.getValue());
+                    }
+                    switch (element.getName().getLocalPart()) {
+                    case "config":
+                        try {
+                            config = Enum.valueOf(ItemManagerConfig.class, attrMap.get("name"));
+                            if (attrMap.containsKey("uniqueCardsOnly")) {
+                                config.uniqueCardsOnly.value = Boolean.parseBoolean(attrMap.get("uniqueCardsOnly"));
+                            }
+                            if (attrMap.containsKey("groupBy")) {
+                                String value = attrMap.get("groupBy");
+                                if (value.isEmpty()) {
+                                    config.groupBy.value = null;
+                                }
+                                else {
+                                    config.groupBy.value = Enum.valueOf(GroupDef.class, value);
+                                }
+                            }
+                            if (attrMap.containsKey("pileBy")) {
+                                String value = attrMap.get("pileBy");
+                                if (value.isEmpty()) {
+                                    config.pileBy.value = null;
+                                }
+                                else {
+                                    config.pileBy.value = Enum.valueOf(ColumnDef.class, value);
+                                }
+                            }
+                            if (attrMap.containsKey("imageColumnCount")) {
+                                config.imageColumnCount.value = Integer.parseInt(attrMap.get("imageColumnCount"));
+                            }
+                            if (attrMap.containsKey("viewIndex")) {
+                                config.viewIndex.value = Integer.parseInt(attrMap.get("viewIndex"));
                             }
                         }
-                    }
-                    catch (Exception ex) {
-                        config = null;
+                        catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case "col":
+                        if (config == null) { break; }
+                        try {
+                            ItemColumnConfig colConfig = config.cols.get(Enum.valueOf(ColumnDef.class, attrMap.get("name")));
+                            if (attrMap.containsKey("width")) {
+                                colConfig.setPreferredWidth(Integer.parseInt(attrMap.get("width")));
+                            }
+                            if (attrMap.containsKey("sortPriority")) {
+                                colConfig.setSortPriority(Integer.parseInt(attrMap.get("sortPriority")));
+                            }
+                            if (attrMap.containsKey("sortState")) {
+                                colConfig.setSortState(Enum.valueOf(SortState.class, attrMap.get("sortPriority")));
+                            }
+                            if (attrMap.containsKey("index")) {
+                                colConfig.setIndex(Integer.parseInt(attrMap.get("index")));
+                            }
+                            if (attrMap.containsKey("visible")) {
+                                colConfig.setVisible(Boolean.parseBoolean(attrMap.get("visible")));
+                            }
+                        }
+                        catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
                     }
                 }
             }
         }
         catch (final FileNotFoundException e) {
-             ignore; it's ok if this file doesn't exist 
+            //ignore; it's ok if this file doesn't exist 
         }
         catch (final Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public static void save() {
-        /*try {
+        try {
             final XMLOutputFactory out = XMLOutputFactory.newInstance();
             final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(filename));
     
             writer.add(EVENT_FACTORY.createStartDocument());
             writer.add(NEWLINE);
             writer.add(EVENT_FACTORY.createStartElement("", "", "preferences"));
-            writer.add(EVENT_FACTORY.createAttribute("type", "cards"));
+            writer.add(EVENT_FACTORY.createAttribute("type", "item_view"));
             writer.add(NEWLINE);
     
             for (ItemManagerConfig config : ItemManagerConfig.values()) {
                 writer.add(TAB);
-                writer.add(EVENT_FACTORY.createStartElement("", "", config.name()));
-                writer.add(EVENT_FACTORY.createAttribute("name", "TODO"));
-                writer.add(EVENT_FACTORY.createEndElement("", "", "card"));
+                writer.add(EVENT_FACTORY.createStartElement("", "", "config"));
+                writer.add(EVENT_FACTORY.createAttribute("name", config.name()));
+                config.uniqueCardsOnly.writeValue(writer, "uniqueCardsOnly");
+                config.groupBy.writeValue(writer, "groupBy");
+                config.pileBy.writeValue(writer, "pileBy");
+                config.imageColumnCount.writeValue(writer, "imageColumnCount");
+                config.viewIndex.writeValue(writer, "viewIndex");
+                writer.add(NEWLINE);
+                for (ItemColumnConfig colConfig : config.cols.values()) {
+                    writer.add(TAB);
+                    writer.add(TAB);
+                    writer.add(EVENT_FACTORY.createStartElement("", "", "col"));
+
+                    writer.add(EVENT_FACTORY.createAttribute("name", colConfig.getDef().name()));
+                    if (colConfig.getPreferredWidth() != colConfig.getDefaults().getPreferredWidth()) {
+                        writer.add(EVENT_FACTORY.createAttribute("width", String.valueOf(colConfig.getPreferredWidth())));
+                    }
+                    if (colConfig.getSortPriority() != colConfig.getDefaults().getSortPriority()) {
+                        writer.add(EVENT_FACTORY.createAttribute("sortPriority", String.valueOf(colConfig.getSortPriority())));
+                    }
+                    if (colConfig.getSortState() != colConfig.getDefaults().getSortState()) {
+                        writer.add(EVENT_FACTORY.createAttribute("sortState", String.valueOf(colConfig.getSortState())));
+                    }
+                    if (colConfig.getIndex() != colConfig.getDefaults().getIndex()) {
+                        writer.add(EVENT_FACTORY.createAttribute("index", String.valueOf(colConfig.getIndex())));
+                    }
+                    if (colConfig.isVisible() != colConfig.getDefaults().isVisible()) {
+                        writer.add(EVENT_FACTORY.createAttribute("visible", String.valueOf(colConfig.isVisible())));
+                    }
+
+                    writer.add(EVENT_FACTORY.createEndElement("", "", "col"));
+                    writer.add(NEWLINE);
+                }
+                writer.add(TAB);
+                writer.add(EVENT_FACTORY.createEndElement("", "", "config"));
                 writer.add(NEWLINE);
             }
-    
+
             writer.add(EVENT_FACTORY.createEndDocument());
             writer.flush();
             writer.close();
         }
         catch (final Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 }

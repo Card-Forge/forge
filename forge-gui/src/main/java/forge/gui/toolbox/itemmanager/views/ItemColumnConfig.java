@@ -19,12 +19,19 @@ public class ItemColumnConfig {
     private int sortPriority = 0;
     private boolean visible = true;
     private int index = 0;
+    private ItemColumnConfig defaults;
 
     public ItemColumnConfig(ColumnDef def0) {
-        super();
-
         this.def = def0;
         this.preferredWidth = def0.preferredWidth;
+    }
+    private ItemColumnConfig(ItemColumnConfig from) {
+        this.def = from.def;
+        this.sortState = from.sortState;
+        this.preferredWidth = from.preferredWidth;
+        this.sortPriority = from.sortPriority;
+        this.visible = from.visible;
+        this.index = from.index;
     }
 
     public ColumnDef getDef() {
@@ -101,5 +108,13 @@ public class ItemColumnConfig {
     @Override
     public String toString() {
         return this.getLongName();
+    }
+
+    public void establishDefaults() {
+        this.defaults = new ItemColumnConfig(this);
+    }
+
+    public ItemColumnConfig getDefaults() {
+        return this.defaults;
     }
 }

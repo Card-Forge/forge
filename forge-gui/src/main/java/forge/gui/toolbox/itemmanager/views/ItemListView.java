@@ -185,6 +185,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         else {
                             colmodel.removeColumn(col);
                         }
+                        ItemManagerConfig.save();
                     }
                 });
                 getPnlOptions().add(chkBox);
