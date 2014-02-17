@@ -69,7 +69,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                 GameObject obj = Iterables.getFirst(getDefinedOrTargeted(sa, "DefinedExchange"), null);
                 if (obj instanceof Card) {
                     Card c = (Card)obj;
-                    if (!(c.isInZone(ZoneType.Battlefield))) {
+                    if (!(c.isInZone(ZoneType.Battlefield)) || si == null) {
                         // Exchanging object isn't available, continue
                         continue;
                     }
