@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -11,10 +13,8 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class DestroyAllAi extends SpellAbilityAi {
 
@@ -78,7 +78,6 @@ public class DestroyAllAi extends SpellAbilityAi {
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         String valid = "";
@@ -114,29 +113,31 @@ public class DestroyAllAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
-        if ((CardLists.getNotType(humanlist, "Creature").size() == 0) && (CardLists.getNotType(computerlist, "Creature").size() == 0)) {
-            if ((ComputerUtilCard.evaluateCreatureList(computerlist) + 200) >= ComputerUtilCard
-                    .evaluateCreatureList(humanlist)) {
+        if (CardLists.getNotType(humanlist, "Creature").isEmpty() && CardLists.getNotType(computerlist, "Creature").isEmpty()) {
+            if (ComputerUtilCard.evaluateCreatureList(computerlist) + 200 >= ComputerUtilCard.evaluateCreatureList(humanlist)) {
                 return false;
             }
         } // only lands involved
-        else if ((CardLists.getNotType(humanlist, "Land").size() == 0) && (CardLists.getNotType(computerlist, "Land").size() == 0)) {
-            if ((ComputerUtilCard.evaluatePermanentList(computerlist) + 1) >= ComputerUtilCard
-                    .evaluatePermanentList(humanlist)) {
+        else if (CardLists.getNotType(humanlist, "Land").isEmpty() && CardLists.getNotType(computerlist, "Land").isEmpty()) {
+        	if (ai.isCardInPlay("Crucible of Worlds") && !ai.getOpponent().isCardInPlay("Crucible of Worlds") && !humanlist.isEmpty()) {
+        		return true;
+        	}
+            if (ComputerUtilCard.evaluatePermanentList(computerlist) + 1 >= ComputerUtilCard.evaluatePermanentList(humanlist)) {
                 return false;
             }
-        } // otherwise evaluate both lists by CMC and pass only if human
-          // permanents are more valuable
+        } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
         else if ((ComputerUtilCard.evaluatePermanentList(computerlist) + 3) >= ComputerUtilCard
                 .evaluatePermanentList(humanlist)) {
             return false;
         }
 
-        return chance;
+        return true;
     }
 
 }
