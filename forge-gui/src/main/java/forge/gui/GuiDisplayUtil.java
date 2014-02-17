@@ -404,7 +404,7 @@ public final class GuiDisplayUtil {
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa, true);
                 }
-                game.getStack().chooseOrderOfSimultaneousStackEntry(p); // playSa could fire some triggers
+                game.getStack().addAllTirggeredAbilitiesToStack(); // playSa could fire some triggers
             }
         });
     }

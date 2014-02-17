@@ -754,7 +754,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.simultaneousStackEntryList.add(sa);
     }
 
-    public final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
+    public boolean addAllTirggeredAbilitiesToStack() {
+        boolean result = false;
+        Player playerTurn = game.getPhaseHandler().getPlayerTurn();
+        Player whoAddsToStack = playerTurn;
+        do {
+            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
+            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
+        } while( whoAddsToStack != null && whoAddsToStack != playerTurn);
+        return result;
+    }
+
+    private final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
         if (this.simultaneousStackEntryList.isEmpty()) {
             return false;
         }
