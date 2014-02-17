@@ -1056,7 +1056,8 @@ public class GameAction {
     public void checkGameOverCondition() {
         // award loses as SBE
         List<Player> losers = null;
-        for (Player p : this.game.getPlayers()) {
+        List<Player> allPlayers = this.game.getPlayers();
+        for (Player p : allPlayers) {
             if (p.checkLoseCondition()) { // this will set appropriate outcomes
                 // Run triggers
                 if (losers == null) {
@@ -1100,12 +1101,23 @@ public class GameAction {
         }
 
         if (reason == null) {
-            int cntNotLost = Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST));
+        	List<Player> notLost = new ArrayList<Player>();
+        	Set<Integer> teams = new HashSet<Integer>();
+        	for (Player p : allPlayers) {
+                if (p.getOutcome() == null || p.getOutcome().hasWon()) {
+                	notLost.add(p);
+                	teams.add(p.getTeam());
+                }
+        	}
+            int cntNotLost = notLost.size();
             if (cntNotLost == 1) {
                 reason = GameEndReason.AllOpponentsLost;
             }
             else if (cntNotLost == 0) {
                 reason = GameEndReason.Draw;
+            }
+            else if (teams.size() == 1) {
+                reason = GameEndReason.AllOpposingTeamsLost;
             }
             else {
                 return;

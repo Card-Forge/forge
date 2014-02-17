@@ -174,6 +174,8 @@ public class ViewWinLose {
         Player winner = outcome.getWinningPlayer();
         if (winner == null) {
             return "It's a draw!";
+        } else if (winningTeam != -1) {
+            return "Team " + winner.getTeam() + " Won!";
         } else {
             return winner.getName() + " Won!";
         }
