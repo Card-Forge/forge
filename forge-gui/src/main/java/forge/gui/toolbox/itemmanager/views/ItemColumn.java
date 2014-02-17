@@ -61,10 +61,11 @@ public class ItemColumn extends TableColumn {
         this.setIdentifier(def);
         this.setHeaderValue(def.shortName);
 
-        this.setPreferredWidth(def.preferredWidth);
+        int width = config0.getPreferredWidth();
+        this.setPreferredWidth(width);
         if (def.isWidthFixed) {
-            this.setMinWidth(def.preferredWidth);
-            this.setMaxWidth(def.preferredWidth);
+            this.setMinWidth(width);
+            this.setMaxWidth(width);
         }
         this.setCellRenderer(def.cellRenderer);
     }
@@ -136,6 +137,10 @@ public class ItemColumn extends TableColumn {
             this.setMinWidth(width);
             this.setMaxWidth(width);
         }
+    }
+
+    public void updatePreferredWidth() {
+        this.config.setPreferredWidth(this.getWidth());
     }
 
     @Override

@@ -615,6 +615,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    ItemColumn column = (ItemColumn) table.getColumnModel().getColumn(i);
+                    column.updatePreferredWidth();
+                    column.setIndex(i);
+                }
                 ItemManagerConfig.save();
             }
 
