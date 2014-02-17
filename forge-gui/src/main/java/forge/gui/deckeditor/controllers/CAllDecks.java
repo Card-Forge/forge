@@ -5,6 +5,7 @@ import forge.Singletons;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 
 /** 
  * Controls the "all decks" panel in the deck editor UI.
@@ -43,6 +44,6 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void update() {
-        VAllDecks.SINGLETON_INSTANCE.getLstDecks().update();
+        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setup(ItemManagerConfig.CONSTRUCTED_DECKS);
     }
 }

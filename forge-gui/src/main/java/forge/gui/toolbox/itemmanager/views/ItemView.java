@@ -8,6 +8,7 @@ import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.item.InventoryItem;
 import net.miginfocom.swing.MigLayout;
@@ -24,6 +25,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public abstract class ItemView<T extends InventoryItem> {
     private static final SkinColor BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
@@ -278,6 +280,7 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public abstract JComponent getComponent();
+    public abstract void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides);
     public abstract void setAllowMultipleSelections(boolean allowMultipleSelections);
     public abstract T getItemAtIndex(int index);
     public abstract int getIndexOfItem(T item);

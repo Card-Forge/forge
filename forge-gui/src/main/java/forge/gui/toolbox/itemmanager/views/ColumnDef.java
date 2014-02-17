@@ -27,7 +27,7 @@ import forge.card.mana.ManaCost;
 import forge.game.GameFormat;
 import forge.gui.CardPreferences;
 import forge.gui.deckeditor.DeckProxy;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
+import forge.gui.toolbox.itemmanager.views.ItemColumnConfig.SortState;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
@@ -238,7 +238,7 @@ public enum ColumnDef {
             }),
     NEW("New", "New", 30, true, SortState.ASC, new ItemCellRenderer(),
             null, null), //functions will be set later
-    PRICE("Price", "Price", 35, true, SortState.ASC, new ItemCellRenderer(),
+    PRICE("Price", "Price", 35, true, SortState.DESC, new ItemCellRenderer(),
             null, null),
     OWNED("Owned", "Owned", 20, true, SortState.ASC, new ItemCellRenderer(),
             null, null),

@@ -13,6 +13,7 @@ import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FOptionPane;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.limited.LimitedPoolType;
@@ -22,9 +23,11 @@ import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -101,7 +104,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
         view.getLstDecks().setPool(DeckProxy.getAllSealedDecks(Singletons.getModel().getDecks().getSealed()));
-        view.getLstDecks().update(false, false, true);
+        view.getLstDecks().setup(ItemManagerConfig.SEALED_DECKS);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {

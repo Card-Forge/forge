@@ -17,10 +17,9 @@
  */
 package forge.gui.deckeditor.controllers;
 
-// import java.awt.Font;
-
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
+
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -33,11 +32,10 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.itemmanager.CardManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
@@ -246,20 +244,17 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     @SuppressWarnings("serial")
     @Override
     public void update() {
-        final Map<ColumnDef, ItemColumn> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
-        final Map<ColumnDef, ItemColumn> columnsDeck = SColumnUtil.getDeckDefaultColumns();
-
         this.decksUsingMyCards = this.countDecksForEachCard();
 
-        // Add "new" column in catalog and deck
-        columnsCatalog.put(ColumnDef.NEW, new ItemColumn(ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet()));
+        final Map<ColumnDef, ItemColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemColumn>();
+        final Map<ColumnDef, ItemColumn> colOverridesDeck = new HashMap<ColumnDef, ItemColumn>();
 
-        columnsDeck.put(ColumnDef.NEW, new ItemColumn(ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet()));
+        ItemManagerConfig.QUEST_EDITOR_POOL.addColOverride(colOverridesCatalog, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+        ItemManagerConfig.QUEST_DECK_EDITOR.addColOverride(colOverridesDeck, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+        ItemManagerConfig.QUEST_DECK_EDITOR.addColOverride(colOverridesDeck, ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet);
 
-        columnsDeck.put(ColumnDef.DECKS, new ItemColumn(ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet));
-
-        this.getCatalogManager().setup(columnsCatalog);
-        this.getDeckManager().setup(columnsDeck, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.getCatalogManager().setup(ItemManagerConfig.QUEST_EDITOR_POOL, colOverridesCatalog);
+        this.getDeckManager().setup(ItemManagerConfig.QUEST_DECK_EDITOR, colOverridesDeck);
 
         SItemManagerUtil.resetUI(this);
 

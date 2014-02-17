@@ -11,6 +11,7 @@ import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
@@ -18,11 +19,13 @@ import forge.item.InventoryItem;
 import forge.view.arcane.CardPanel;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -325,13 +328,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getScroller().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
+    @Override
+    public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
+        setGroupBy(config.getGroupBy(), true);
+        setPileBy(config.getPileBy(), true);
+        setColumnCount(config.getImageColumnCount(), true);
+    }
+
     public GroupDef getGroupBy() {
         return groupBy;
     }
     public void setGroupBy(GroupDef groupBy0) {
         setGroupBy(groupBy0, false);
     }
-    public void setGroupBy(GroupDef groupBy0, boolean forSetup) {
+    private void setGroupBy(GroupDef groupBy0, boolean forSetup) {
         if (groupBy == groupBy0) { return; }
         groupBy = groupBy0;
 
@@ -362,6 +372,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         if (!forSetup) {
+            if (itemManager.getConfig() != null) {
+                itemManager.getConfig().setGroupBy(groupBy);
+            }
             refresh(null, -1, 0);
         }
     }
@@ -372,7 +385,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     public void setPileBy(ColumnDef pileBy0) {
         setPileBy(pileBy0, false);
     }
-    public void setPileBy(ColumnDef pileBy0, boolean forSetup) {
+    private void setPileBy(ColumnDef pileBy0, boolean forSetup) {
         if (pileBy == pileBy0) { return; }
         pileBy = pileBy0;
 
@@ -384,6 +397,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         if (!forSetup) {
+            if (itemManager.getConfig() != null) {
+                itemManager.getConfig().setPileBy(pileBy);
+            }
             refresh(null, -1, 0);
         }
     }
@@ -417,6 +433,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     public void setColumnCount(int columnCount0) {
+        setColumnCount(columnCount0, false);
+    }
+    private void setColumnCount(int columnCount0, boolean forSetup) {
         if (columnCount0 < MIN_COLUMN_COUNT) {
             columnCount0 = MIN_COLUMN_COUNT;
         }
@@ -426,18 +445,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (columnCount == columnCount0) { return; }
         columnCount = columnCount0;
         cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
+        
+        if (!forSetup) {
+            if (itemManager.getConfig() != null) {
+                itemManager.getConfig().setImageColumnCount(columnCount);
+            }
 
-        //determine item to retain scroll position of following column count change
-        ItemInfo focalItem0 = getFocalItem();
-        if (focalItem0 == null) {
+            //determine item to retain scroll position of following column count change
+            ItemInfo focalItem0 = getFocalItem();
+            if (focalItem0 == null) {
+                updateLayout(false);
+                return;
+            }
+    
+            int offsetTop = focalItem0.getTop() - getScrollValue();
             updateLayout(false);
-            return;
+            setScrollValue(focalItem0.getTop() - offsetTop);
+            focalItem = focalItem0; //cache focal item so consecutive column count changes use the same item
         }
-
-        int offsetTop = focalItem0.getTop() - getScrollValue();
-        updateLayout(false);
-        setScrollValue(focalItem0.getTop() - offsetTop);
-        focalItem = focalItem0; //cache focal item so consecutive column count changes use the same item
     }
 
     private ItemInfo getFocalItem() {

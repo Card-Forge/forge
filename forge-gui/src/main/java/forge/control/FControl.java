@@ -22,6 +22,7 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.ai.LobbyPlayerAi;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.deck.io.DeckPreferences;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -30,6 +31,7 @@ import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.gui.CardPreferences;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -47,7 +49,7 @@ import forge.gui.menus.ForgeMenu;
 import forge.gui.player.LobbyPlayerHuman;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -188,7 +190,9 @@ public enum FControl implements KeyEventDispatcher {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
-        SItemManagerIO.loadPreferences();
+        CardPreferences.load(NewConstants.CARD_PREFS_FILE);
+        DeckPreferences.load(NewConstants.DECK_PREFS_FILE);
+        ItemManagerConfig.load(NewConstants.ITEM_VIEW_PREFS_FILE);
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();

@@ -14,6 +14,7 @@ import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FOptionPane;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.net.FServer;
@@ -21,6 +22,7 @@ import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
 
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public enum CSubmenuDraft implements ICDoc {
         final JButton btnStart = view.getBtnStart();
 
         view.getLstDecks().setPool(DeckProxy.getDraftDecks(Singletons.getModel().getDecks().getDraft()));
-        view.getLstDecks().update(false, false, true);
+        view.getLstDecks().setup(ItemManagerConfig.DRAFT_DECKS);
 
         if (!view.getLstDecks().getPool().isEmpty()) {
             btnStart.setEnabled(true);

@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Function;
+
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.CardPool;
@@ -32,20 +33,23 @@ import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.*;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
 import forge.util.ItemPool;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -479,27 +483,19 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     @SuppressWarnings("serial")
     @Override
     public void update() {
-        final Map<ColumnDef, ItemColumn> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
-        final Map<ColumnDef, ItemColumn> columnsDeck = SColumnUtil.getDeckDefaultColumns();
+        final Map<ColumnDef, ItemColumn> colOverridesCatalog = new HashMap<ColumnDef, ItemColumn>();
+        final Map<ColumnDef, ItemColumn> colOverridesDeck = new HashMap<ColumnDef, ItemColumn>();
 
         // Add spell shop-specific columns
-        columnsCatalog.put(ColumnDef.PRICE, new ItemColumn(ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceGet));
-
-        columnsCatalog.put(ColumnDef.OWNED, new ItemColumn(ColumnDef.OWNED, questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet()));
-
-        columnsDeck.put(ColumnDef.PRICE, new ItemColumn(ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceSellGet));
-
-        columnsDeck.put(ColumnDef.NEW, new ItemColumn(ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet()));
-
-        columnsDeck.put(ColumnDef.DECKS, new ItemColumn(ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet));
-
-        // don't need AI column for either table
-        columnsCatalog.remove(new ItemColumn(ColumnDef.AI));
-        columnsDeck.remove(new ItemColumn(ColumnDef.AI));
+        ItemManagerConfig.SPELL_SHOP.addColOverride(colOverridesCatalog, ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceGet);
+        ItemManagerConfig.SPELL_SHOP.addColOverride(colOverridesCatalog, ColumnDef.OWNED, questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet());
+        ItemManagerConfig.QUEST_INVENTORY.addColOverride(colOverridesDeck, ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceSellGet);
+        ItemManagerConfig.QUEST_INVENTORY.addColOverride(colOverridesDeck, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+        ItemManagerConfig.QUEST_INVENTORY.addColOverride(colOverridesDeck, ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet);
 
         // Setup with current column set
-        this.getCatalogManager().setup(columnsCatalog);
-        this.getDeckManager().setup(columnsDeck);
+        this.getCatalogManager().setup(ItemManagerConfig.SPELL_SHOP, colOverridesCatalog);
+        this.getDeckManager().setup(ItemManagerConfig.QUEST_INVENTORY, colOverridesDeck);
 
         SItemManagerUtil.resetUI(this);
 

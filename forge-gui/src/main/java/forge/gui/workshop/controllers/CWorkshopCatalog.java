@@ -2,12 +2,8 @@ package forge.gui.workshop.controllers;
 
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.workshop.views.VWorkshopCatalog;
-
-import java.util.Map;
 
 /** 
  * Controls the "card catalog" panel in the workshop UI.
@@ -44,9 +40,7 @@ public enum CWorkshopCatalog implements ICDoc {
      */
     @Override
     public void update() {
-        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-        lstCatalogCols.remove(ColumnDef.QUANTITY);
-        VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setup(lstCatalogCols);
+        VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setup(ItemManagerConfig.WORKSHOP_CATALOG);
         //TODO: Restore previously selected card
     }
 }

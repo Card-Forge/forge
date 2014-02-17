@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -30,10 +31,8 @@ import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
 import forge.gui.toolbox.itemmanager.CardManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.util.storage.IStorage;
 
@@ -161,8 +160,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void update() {
-        this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns(), getScreen() == FScreen.DECK_EDITOR_DRAFT ? GroupDef.CREATURE_SPELL_LAND : GroupDef.COLOR, ColumnDef.CMC, 1);
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);
+        this.getDeckManager().setup(ItemManagerConfig.DECK_EDITOR);
 
         SItemManagerUtil.resetUI(this);
 

@@ -31,11 +31,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
@@ -43,7 +39,6 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
-import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -270,15 +265,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void update() {
-        Map<ColumnDef, ItemColumn> catalogColumns = SColumnUtil.getCatalogDefaultColumns();
-        catalogColumns.get(ColumnDef.FAVORITE).setSortPriority(0);
-        catalogColumns.get(ColumnDef.RARITY).setSortPriority(1); //sort rares to top
-        catalogColumns.get(ColumnDef.RARITY).setSortState(SortState.DESC);
-        catalogColumns.get(ColumnDef.COLOR).setSortPriority(2);
-        catalogColumns.get(ColumnDef.NAME).setSortPriority(3);
-
-        this.getCatalogManager().setup(catalogColumns, null, null, 1);
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
+        this.getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
 
         ccAddLabel = this.getBtnAdd().getText();
 

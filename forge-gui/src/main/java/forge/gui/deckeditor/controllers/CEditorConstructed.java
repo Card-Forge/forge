@@ -19,6 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
+
 import forge.UiCommand;
 import forge.Singletons;
 import forge.card.CardRulesPredicates;
@@ -27,18 +28,14 @@ import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.views.ColumnDef;
-import forge.gui.toolbox.itemmanager.views.GroupDef;
-import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -279,51 +276,29 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         curindex = (curindex + 1) % allSections.size();
         sectionMode = allSections.get(curindex);
 
-        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-
         switch(sectionMode) {
         case Main:
-            lstCatalogCols.remove(ColumnDef.QUANTITY);
-            this.getCatalogManager().setup(lstCatalogCols, true);
+            this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
             this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getMain());
             break;
         case Sideboard:
-            lstCatalogCols.remove(ColumnDef.QUANTITY);
-            this.getCatalogManager().setup(lstCatalogCols, true);
+            this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
             this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
             break;
         case Avatar:
-            lstCatalogCols.remove(ColumnDef.QUANTITY);
-            lstCatalogCols.remove(ColumnDef.COST);
-            lstCatalogCols.remove(ColumnDef.COLOR);
-            lstCatalogCols.remove(ColumnDef.CMC);
-            lstCatalogCols.remove(ColumnDef.POWER);
-            lstCatalogCols.remove(ColumnDef.TOUGHNESS);
-            this.getCatalogManager().setup(lstCatalogCols, true);
+            this.getCatalogManager().setup(ItemManagerConfig.AVATAR_POOL);
             this.getCatalogManager().setPool(avatarPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
             break;
         case Planes:
-            lstCatalogCols.remove(ColumnDef.QUANTITY);
-            lstCatalogCols.remove(ColumnDef.COST);
-            lstCatalogCols.remove(ColumnDef.CMC);
-            lstCatalogCols.remove(ColumnDef.COLOR);
-            lstCatalogCols.remove(ColumnDef.POWER);
-            lstCatalogCols.remove(ColumnDef.TOUGHNESS);
-            this.getCatalogManager().setup(lstCatalogCols, true);
+            this.getCatalogManager().setup(ItemManagerConfig.PLANAR_POOL);
             this.getCatalogManager().setPool(planePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
             break;
         case Schemes:
-            lstCatalogCols.remove(ColumnDef.QUANTITY);
-            lstCatalogCols.remove(ColumnDef.CMC);
-            lstCatalogCols.remove(ColumnDef.COST);
-            lstCatalogCols.remove(ColumnDef.COLOR);
-            lstCatalogCols.remove(ColumnDef.POWER);
-            lstCatalogCols.remove(ColumnDef.TOUGHNESS);
-            this.getCatalogManager().setup(lstCatalogCols, true);
+            this.getCatalogManager().setup(ItemManagerConfig.SCHEME_POOL);
             this.getCatalogManager().setPool(schemePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
             break;
@@ -340,11 +315,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     @SuppressWarnings("serial")
     @Override
     public void update() {
-        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-        lstCatalogCols.remove(ColumnDef.QUANTITY);
-
-        this.getCatalogManager().setup(lstCatalogCols, true);
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);
+        this.getDeckManager().setup(ItemManagerConfig.DECK_EDITOR);
 
         SItemManagerUtil.resetUI(this);
 

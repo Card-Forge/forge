@@ -14235,7 +14235,6 @@ forge-gui/res/cardsfolder/z/zuran_enchanter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zuran_orb.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zuran_spellcaster.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/z/zurs_weirding.txt -text
-forge-gui/res/defaults/editor.preferences svneol=native#text/xml
 forge-gui/res/defaults/editor.xml svneol=native#text/xml
 forge-gui/res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
 forge-gui/res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
@@ -15690,10 +15689,10 @@ forge-gui/src/main/java/forge/gui/toolbox/imaging/ImageUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/CardManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/DeckManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManager.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerConfig.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerContainer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerModel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SFilterUtil.java -text
-forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SItemManagerIO.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SItemManagerUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SpellShopManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardCMCFilter.java -text
@@ -15730,6 +15729,7 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ImageView.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/IntegerRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemCellRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemColumn.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemColumnConfig.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemListView.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemView.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ManaCostRenderer.java -text

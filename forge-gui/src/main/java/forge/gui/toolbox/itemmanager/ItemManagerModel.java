@@ -18,7 +18,7 @@
 package forge.gui.toolbox.itemmanager;
 
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
+import forge.gui.toolbox.itemmanager.views.ItemColumnConfig.SortState;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;

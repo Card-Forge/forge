@@ -18,8 +18,6 @@
 package forge;
 
 import forge.control.FControl;
-import forge.deck.io.DeckPreferences;
-import forge.gui.CardPreferences;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.workshop.CardScriptInfo;
 import forge.model.FModel;
@@ -84,9 +82,6 @@ public final class Singletons {
 
         if (withUi) {
             control = FControl.instance;
-
-            CardPreferences.load(NewConstants.CARD_PREFS_FILE);
-            DeckPreferences.load(NewConstants.DECK_PREFS_FILE);
         }
     }
 

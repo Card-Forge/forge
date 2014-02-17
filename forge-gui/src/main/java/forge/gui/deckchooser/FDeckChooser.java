@@ -9,6 +9,7 @@ import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.DeckManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -17,9 +18,11 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +79,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(DeckProxy.getAllConstructedDecks(Singletons.getModel().getDecks().getConstructed()));
-        lstDecks.update();
+        lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {
@@ -145,7 +148,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         lstDecks.setPool(decks);
-        lstDecks.update(true);
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnRandom.setText("Random Colors");
         btnRandom.setCommand(new UiCommand() {
@@ -163,7 +166,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(DeckProxy.getAllThemeDecks());
-        lstDecks.update(true);
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {
@@ -180,7 +183,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
-        lstDecks.update(false, true, true);
+        lstDecks.setup(ItemManagerConfig.PRECON_DECKS);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {
@@ -197,7 +200,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
-        lstDecks.update(false, true, true);
+        lstDecks.setup(ItemManagerConfig.QUEST_EVENT_DECKS);
 
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new UiCommand() {

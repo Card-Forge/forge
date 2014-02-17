@@ -23,8 +23,8 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.*;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.item.InventoryItem;
 
 import javax.swing.*;
@@ -107,25 +107,34 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
     }
 
-    public void setup(final Map<ColumnDef, ItemColumn> cols, final boolean showUniqueCardsOption) {
+    @Override
+    public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
         final Iterable<T> selectedItemsBefore = getSelectedItems();
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
-        final List<Entry<ColumnDef, ItemColumn>> list = new LinkedList<Entry<ColumnDef, ItemColumn>>(cols.entrySet());
-        Collections.sort(list, new Comparator<Entry<ColumnDef, ItemColumn>>() {
+        final List<ItemColumn> columns = new LinkedList<ItemColumn>();
+        for (ItemColumnConfig colConfig : config.getCols().values()) {
+            if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
+                columns.add(new ItemColumn(colConfig));
+            }
+            else {
+                columns.add(colOverrides.get(colConfig.getDef()));
+            }
+        }
+        Collections.sort(columns, new Comparator<ItemColumn>() {
             @Override
-            public int compare(Entry<ColumnDef, ItemColumn> arg0, Entry<ColumnDef, ItemColumn> arg1) {
-                return Integer.compare(arg0.getValue().getIndex(), arg1.getValue().getIndex());
+            public int compare(ItemColumn arg0, ItemColumn arg1) {
+                return Integer.compare(arg0.getIndex(), arg1.getIndex());
             }
         });
 
         //hide table header if only showing single string column
-        boolean hideHeader = (cols.size() == 1 && cols.containsKey(ColumnDef.STRING));
+        boolean hideHeader = (config.getCols().size() == 1 && config.getCols().containsKey(ColumnDef.STRING));
 
         getPnlOptions().removeAll();
 
-        if (showUniqueCardsOption) {
+        if (config.getShowUniqueCardsOption()) {
             final FCheckBox chkBox = new FCheckBox("Unique Cards Only", this.itemManager.getWantUnique());
             chkBox.setFont(ROW_FONT);
             chkBox.setToolTipText("Toggle whether to show unique cards only");
@@ -142,17 +151,15 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         int modelIndex = 0;
-        for (Entry<ColumnDef, ItemColumn> entry : list) {
-            final ColumnDef colDef = entry.getKey();
-            final ItemColumn col = entry.getValue();
+        for (final ItemColumn col : columns) {
             col.setModelIndex(modelIndex++);
             if (col.isVisible()) { colmodel.addColumn(col); }
 
             if (!hideHeader) {
-                final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(colDef.shortName) ?
-                        colDef.longName : colDef.shortName, col.isVisible());
+                final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
+                        col.getLongName() : col.getShortName(), col.isVisible());
                 chkBox.setFont(ROW_FONT);
-                chkBox.setToolTipText(colDef.longName);
+                chkBox.setToolTipText(col.getLongName());
                 chkBox.addChangeListener(new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent arg0) {
@@ -165,9 +172,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                             //move column into proper position
                             int oldIndex = colmodel.getColumnCount() - 1;
-                            int newIndex = col.getModelIndex();
-                            for (int i = 0; i < col.getModelIndex(); i++) {
-                                if (!list.get(i).getValue().isVisible()) {
+                            int newIndex = col.getIndex();
+                            for (int i = 0; i < col.getIndex(); i++) {
+                                if (!columns.get(i).isVisible()) {
                                     newIndex--;
                                 }
                             }
@@ -602,12 +609,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 table.tableChanged(new TableModelEvent(ItemTableModel.this));
                 table.repaint();
                 ItemListView.this.setSelectedIndex(0);
-                SItemManagerIO.savePreferences(itemManager);
+                ItemManagerConfig.save();
             }
 
             @Override
             public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
-                SItemManagerIO.savePreferences(itemManager);
+                ItemManagerConfig.save();
             }
 
             @Override

@@ -9,6 +9,7 @@ import forge.gui.CardPicturePanel;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.views.*;
@@ -19,13 +20,13 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 @SuppressWarnings("serial")
@@ -137,12 +138,7 @@ public class FDeckViewer extends FDialog {
         this.add(buttonPanel);
         this.add(this.btnClose, "w 120px!, h 26px!, ax right");
 
-        Map<ColumnDef, ItemColumn> columns = SColumnUtil.getDeckDefaultColumns();
-        columns.remove(ColumnDef.DECK_QUANTITY); //prevent displaying +/- buttons
-        ItemColumn qtyColumn = new ItemColumn(ColumnDef.QUANTITY);
-        qtyColumn.setIndex(0);
-        columns.put(ColumnDef.QUANTITY, qtyColumn);
-        this.cardManager.setup(columns, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC, 1);
+        this.cardManager.setup(ItemManagerConfig.DECK_VIEWER);
         this.setDefaultFocus(this.cardManager.getCurrentView().getComponent());
     }
 

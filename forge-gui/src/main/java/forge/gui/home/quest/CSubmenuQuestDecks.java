@@ -9,6 +9,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
+import forge.gui.toolbox.itemmanager.ItemManagerConfig;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -76,7 +77,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
         view.getLstDecks().setPool(DeckProxy.getAllQuestDecks(hasQuest ? qData.getMyDecks() : null));
-        view.getLstDecks().update(false, false, true);
+        view.getLstDecks().setup(ItemManagerConfig.QUEST_DECKS);
 
         // Look through list for preferred deck from prefs
         final DeckProxy deck = hasQuest ? view.getLstDecks().stringToItem(Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_DECK)) : null;

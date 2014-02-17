@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionListener;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -48,18 +49,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
 
     private final GameType gametype;
-    private boolean stringOnly, preventEdit, hideFolderColumn;
     private UiCommand cmdDelete, cmdSelect;
-    private final Map<ColumnDef, ItemColumn> columns = SColumnUtil.getColumns(
-            ColumnDef.DECK_FAVORITE,
-            ColumnDef.DECK_ACTIONS,
-            ColumnDef.DECK_FOLDER,
-            ColumnDef.NAME,
-            ColumnDef.DECK_COLOR,
-            ColumnDef.DECK_FORMAT,
-            ColumnDef.DECK_EDITION,
-            ColumnDef.DECK_MAIN,
-            ColumnDef.DECK_SIDE);
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -70,11 +60,6 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     public DeckManager(final GameType gt) {
         super(DeckProxy.class, true);
         this.gametype = gt;
-
-        columns.get(ColumnDef.DECK_ACTIONS).setCellRenderer(new DeckActionsRenderer());
-        columns.get(ColumnDef.DECK_FAVORITE).setSortPriority(1);
-        columns.get(ColumnDef.DECK_FOLDER).setSortPriority(2);
-        columns.get(ColumnDef.NAME).setSortPriority(3);
 
         this.addSelectionListener(new ListSelectionListener() {
             @Override
@@ -93,40 +78,22 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         });
     }
 
-    /**
-     * Update table columns
-     */
-    public void update() {
-        update(false, false, false);
-    }
-    public void update(boolean stringOnly0) {
-        update(stringOnly0, stringOnly0, stringOnly0);
-    }
-    public void update(boolean stringOnly0, boolean preventEdit0) {
-        update(stringOnly0, preventEdit0, stringOnly0);
-    }
-    public void update(boolean stringOnly0, boolean preventEdit0, boolean hideFolderColumn0) {
-        if (this.stringOnly != stringOnly0) {
-            this.stringOnly = stringOnly0;
+    @Override
+    public void setup(ItemManagerConfig config0) {
+        boolean wasStringOnly = (this.getConfig() == ItemManagerConfig.STRING_ONLY);
+        boolean isStringOnly = (config0 == ItemManagerConfig.STRING_ONLY);
+
+        Map<ColumnDef, ItemColumn> colOverrides = null;
+        if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
+            ItemColumn column = new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS));
+            column.setCellRenderer(new DeckActionsRenderer());
+            colOverrides = new HashMap<ColumnDef, ItemColumn>();
+            colOverrides.put(ColumnDef.DECK_ACTIONS, column);
+        }
+        super.setup(config0, colOverrides);
+
+        if (isStringOnly != wasStringOnly) {
             this.restoreDefaultFilters();
-        }
-        if (stringOnly0) {
-            preventEdit0 = true; //if name only, always prevent edit and hide folder column
-            hideFolderColumn0 = true;
-        }
-        if (this.preventEdit != preventEdit0) {
-            this.preventEdit = preventEdit0;
-            columns.get(ColumnDef.DECK_ACTIONS).setVisible(!preventEdit0);
-        }
-        if (this.hideFolderColumn != hideFolderColumn0) {
-            this.hideFolderColumn = hideFolderColumn0;
-            columns.get(ColumnDef.DECK_FOLDER).setVisible(!hideFolderColumn0);
-        }
-        if (stringOnly0) {
-            this.setup(SColumnUtil.getStringColumn());
-        }
-        else {
-            this.setup(columns);
         }
     }
 
@@ -150,9 +117,9 @@ public final class DeckManager extends ItemManager<DeckProxy> {
 
     @Override
     protected void addDefaultFilters() {
-        if (!this.stringOnly) {
-            addFilter(new DeckColorFilter(this));
-        }
+        if (this.getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
+
+        addFilter(new DeckColorFilter(this));
     }
 
     @Override
@@ -162,8 +129,6 @@ public final class DeckManager extends ItemManager<DeckProxy> {
 
     @Override
     protected void buildAddFilterMenu(JMenu menu) {
-        if (this.stringOnly) { return; }
-
         GuiUtils.addSeparator(menu); //separate from current search item
 
         Set<String> folders = new HashSet<String>();
@@ -244,7 +209,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     }
 
     private void editDeck(final DeckProxy deck) {
-        if (deck == null || this.preventEdit) { return; }
+        if (deck == null) { return; }
 
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
@@ -284,7 +249,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     }
 
     public boolean deleteDeck(DeckProxy deck) {
-        if (deck == null || this.preventEdit) { return false; }
+        if (deck == null) { return false; }
 
         if (!FOptionPane.showConfirmDialog(
                 "Are you sure you want to delete '" + deck.getName() + "'?",

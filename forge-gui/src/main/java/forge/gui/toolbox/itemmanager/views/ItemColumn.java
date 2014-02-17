@@ -19,6 +19,7 @@ package forge.gui.toolbox.itemmanager.views;
 
 import com.google.common.base.Function;
 
+import forge.gui.toolbox.itemmanager.views.ItemColumnConfig.SortState;
 import forge.item.InventoryItem;
 
 import javax.swing.table.TableColumn;
@@ -29,30 +30,18 @@ import java.util.Map.Entry;
  * A column object in a EditorTableModel in the card editor.
  * Requires a sorting function and a display function
  * (to extract information as appropriate for table row data).
- * 
- * @param <T> a generic type
  */
 public class ItemColumn extends TableColumn {
     private static final long serialVersionUID = 3749431834643427572L;
 
-    public static enum SortState {
-        NONE,
-        ASC,
-        DESC
-    }
-
-    private final ColumnDef def;
-    private SortState sortState = SortState.NONE;
-    private int sortPriority = 0;
-    private boolean visible = true;
-    private int index = 0;
+    private ItemColumnConfig config;
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort;
     private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay;
 
-    public ItemColumn(ColumnDef def0) {
-        this(def0, def0.fnSort, def0.fnDisplay);
+    public ItemColumn(ItemColumnConfig config0) {
+        this(config0, config0.getFnSort(), config0.getFnDisplay());
     }
-    public ItemColumn(ColumnDef def0,
+    public ItemColumn(ItemColumnConfig config0,
             Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
             Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
         super();
@@ -64,8 +53,12 @@ public class ItemColumn extends TableColumn {
             throw new NullPointerException("A display function hasn't been set for Column " + this);
         }
 
-        this.def = def0;
-        this.setIdentifier(def0);
+        this.config = config0;
+        this.fnSort = fnSort0;
+        this.fnDisplay = fnDisplay0;
+
+        ColumnDef def = config0.getDef();
+        this.setIdentifier(def);
         this.setHeaderValue(def.shortName);
 
         this.setPreferredWidth(def.preferredWidth);
@@ -73,60 +66,51 @@ public class ItemColumn extends TableColumn {
             this.setMinWidth(def.preferredWidth);
             this.setMaxWidth(def.preferredWidth);
         }
-        this.fnSort = fnSort0;
-        this.fnDisplay = fnDisplay0;
         this.setCellRenderer(def.cellRenderer);
     }
 
     public String getShortName() {
-        return this.def.shortName;
+        return this.config.getShortName();
     }
 
     public String getLongName() {
-        return this.def.longName;
+        return this.config.getLongName();
     }
 
     public int getIndex() {
-        return this.index;
+        return this.config.getIndex();
     }
 
     public void setIndex(final int index0) {
-        this.index = index0;
+        this.config.setIndex(index0);
     }
 
     public int getSortPriority() {
-        return sortPriority;
+        return this.config.getSortPriority();
     }
 
     public void setSortPriority(final int sortPriority0) {
-        int oldSortPriority = this.sortPriority;
-        this.sortPriority = sortPriority0;
-        if (sortPriority0 == 0) {
-            this.sortState = SortState.NONE;
-        }
-        else if (oldSortPriority == 0) {
-            this.sortState = def.sortState;
-        }
+        this.config.setSortPriority(sortPriority0);
     }
 
     public SortState getSortState() {
-        return this.sortState;
+        return this.config.getSortState();
     }
 
     public void setSortState(final SortState state0) {
-        this.sortState = state0;
+        this.config.setSortState(state0);
     }
 
     public SortState getDefaultSortState() {
-        return this.def.sortState;
+        return this.config.getDefaultSortState();
     }
 
     public boolean isVisible() {
-        return this.visible;
+        return this.config.isVisible();
     }
 
     public void setVisible(boolean visible0) {
-        this.visible = visible0;
+        this.config.setVisible(visible0);
     }
 
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnSort() {
@@ -139,7 +123,7 @@ public class ItemColumn extends TableColumn {
 
     public void startResize() {
         //if width fixed, temporarily clear min/max width to allow resize
-        if (def.isWidthFixed) {
+        if (this.config.getDef().isWidthFixed) {
             this.setMinWidth(0);
             this.setMaxWidth(Integer.MAX_VALUE);
         }
@@ -147,7 +131,7 @@ public class ItemColumn extends TableColumn {
 
     public void endResize() {
         //restore min/max width after resize to prevent table auto-scaling fixed width columns
-        if (def.isWidthFixed) {
+        if (this.config.getDef().isWidthFixed) {
             int width = this.getWidth();
             this.setMinWidth(width);
             this.setMaxWidth(width);
@@ -156,6 +140,6 @@ public class ItemColumn extends TableColumn {
 
     @Override
     public String toString() {
-        return this.getLongName();
+        return this.config.getLongName();
     }
 }

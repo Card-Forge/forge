@@ -20,6 +20,7 @@ package forge.gui.toolbox.itemmanager;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.UiCommand;
 import forge.gui.GuiUtils;
 import forge.gui.toolbox.*;
@@ -39,6 +40,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -67,6 +69,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private UiCommand itemActivateCommand;
     private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
+    private ItemManagerConfig config;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
     private final SkinnedCheckBox chkEnableFilters = new SkinnedCheckBox();
@@ -240,6 +243,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         final UiCommand cmdBuildFilterMenu = new UiCommand() {
             @Override
             public void run() {
+                if (config == ItemManagerConfig.STRING_ONLY) { return; }
+
                 JPopupMenu menu = new JPopupMenu("FilterMenu");
                 if (hideFilters) {
                     GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
@@ -285,26 +290,29 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
     }
 
-    public void setup(final Map<ColumnDef, ItemColumn> cols) {
-        this.setup(cols, false, null, null, 0);
+    public ItemManagerConfig getConfig() {
+        return this.config;
     }
-    public void setup(final Map<ColumnDef, ItemColumn> cols, boolean showUniqueCardsOption) {
-        this.setup(cols, showUniqueCardsOption, null, null, 0);
+
+    public void setup(ItemManagerConfig config0) {
+        this.setup(config0, null);
     }
-    public void setup(final Map<ColumnDef, ItemColumn> cols, GroupDef groupBy, ColumnDef pileBy, int viewIndex) {
-        this.setup(cols, false, groupBy, pileBy, viewIndex);
-    }
-    public void setup(final Map<ColumnDef, ItemColumn> cols, boolean showUniqueCardsOption, GroupDef groupBy, ColumnDef pileBy, int viewIndex) {
-        this.listView.setup(cols, showUniqueCardsOption);
-        this.imageView.setGroupBy(groupBy, true);
-        this.imageView.setPileBy(pileBy, true);
-        this.setViewIndex(viewIndex);
+    public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemColumn> colOverrides) {
+        this.config = config0;
+        for (ItemView<T> view : this.views) {
+            view.setup(config0, colOverrides);
+        }
+        this.setViewIndex(config0.getViewIndex());
     }
 
     public void setViewIndex(int viewIndex) {
         if (viewIndex < 0 || viewIndex >= this.views.size()) { return; }
         ItemView<T> view = this.views.get(viewIndex);
         if (this.currentView == view) { return; }
+
+        if (this.config != null) {
+            this.config.setViewIndex(viewIndex);
+        }
 
         final int backupIndexToSelect = this.currentView.getSelectedIndex();
         final Iterable<T> itemsToSelect; //only retain selected items if not single selection of first item
