@@ -238,10 +238,10 @@ public class FSkin {
         }
     }
 
-    public static void drawImage(SpriteBatch batch, SkinImage skinImage, int x, int y) {
+    public static void drawImage(SpriteBatch batch, SkinImage skinImage, float x, float y) {
         batch.draw(skinImage.image, x, y);
     }
-    public static void drawImage(SpriteBatch batch, SkinImage skinImage, int x, int y, int w, int h) {
+    public static void drawImage(SpriteBatch batch, SkinImage skinImage, float x, float y, float w, float h) {
         batch.draw(skinImage.image, x, y, w, h);
     }
 
