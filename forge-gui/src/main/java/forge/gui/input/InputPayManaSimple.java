@@ -38,7 +38,7 @@ public class InputPayManaSimple extends InputPayMana {
     private final ManaCost originalManaCost;
 
     public InputPayManaSimple(final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
-        super(sa);
+        super(sa, sa.getActivatingPlayer());
         this.originalManaCost = manaCostToPay.toManaCost();
         this.originalCard = sa.getHostCard();
 

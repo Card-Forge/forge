@@ -116,7 +116,6 @@ public class HumanPlaySpellAbility {
             }
             else {
                 this.enusureAbilityHasDescription(this.ability);
-                this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
                 game.getStack().addAndUnfreeze(this.ability);
             }
 

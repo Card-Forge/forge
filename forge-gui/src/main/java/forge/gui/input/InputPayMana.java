@@ -44,8 +44,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     private boolean bPaid = false;
     private Boolean canPayManaCost = null;
 
-    protected InputPayMana(SpellAbility saToPayFor) {
-        this.player = saToPayFor.getActivatingPlayer();
+    private boolean locked = false;
+
+    protected InputPayMana(SpellAbility saToPayFor, Player payer) {
+        this.player = payer;
         this.game = player.getGame();
         this.saPaidFor = saToPayFor;
     }
@@ -81,6 +83,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
      */
     protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
+        if ( locked ) {
+            System.err.print("Should wait till previous call to playAbility finishes.");
+            return;
+        }
+        
         // make sure computer's lands aren't selected
         if (card.getController() != player) {
             return;
@@ -190,6 +197,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 onStateChanged();
             }
         };
+        locked = true;
         game.getAction().invoke(proc);
     }
 
@@ -303,6 +311,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     protected final void updateMessage() {
+        locked = false;
         if (supportAutoPay()) {
             if (canPayManaCost == null) {
                 //use AI utility to determine if mana cost can be paid if that hasn't been determined yet

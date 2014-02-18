@@ -15580,7 +15580,6 @@ forge-gui/src/main/java/forge/gui/input/InputConfirmMulligan.java svneol=native#
 forge-gui/src/main/java/forge/gui/input/InputLockUI.java -text
 forge-gui/src/main/java/forge/gui/input/InputPassPriority.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/input/InputPayMana.java -text
-forge-gui/src/main/java/forge/gui/input/InputPayManaExecuteCommands.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/input/InputPayManaOfCostPayment.java -text
 forge-gui/src/main/java/forge/gui/input/InputPayManaSimple.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/input/InputPayManaX.java -text

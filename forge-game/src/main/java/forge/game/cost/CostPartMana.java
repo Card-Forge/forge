@@ -115,12 +115,20 @@ public class CostPartMana extends CostPart {
         return visitor.visit(this);
     }
 
-
+    public ManaCost getManaCostFor(SpellAbility sa) {
+        if ( isExiledCreatureCost() && !sa.getPaidList(CostExile.HashListKey).isEmpty()) // back from the brink
+            return sa.getPaidList(CostExile.HashListKey).get(0).getManaCost();
+        else
+            return getManaToPay();
+    }
+    
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub
-        sa.getManaPaid().clear();
-        return payer.getController().payManaCost(this, pd, sa);
+        payer.getManaPool().clearManaPaid(sa, false);
+
+        // decision not used here, the whole payment is interactive!
+        return payer.getController().payManaCost(this, sa);
     }
 
 }

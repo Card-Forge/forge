@@ -18,7 +18,6 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
-import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
@@ -223,7 +222,10 @@ public abstract class PlayerController {
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
-    public abstract boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa);
+    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa) {
+        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa);
+    }
+    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa);
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats);
 

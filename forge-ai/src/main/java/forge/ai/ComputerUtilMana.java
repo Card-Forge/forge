@@ -109,7 +109,7 @@ public class ComputerUtilMana {
                 }
                 else {
                     if ( ai.getManaPool().tryPayCostWithMana(sa, cost, mana) && !test)
-                        sa.getManaPaid().add(mana);
+                        sa.getPayingMana().add(mana);
                 }
             }
         }

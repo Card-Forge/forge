@@ -171,7 +171,7 @@ public class ManaPool implements Iterable<Mana> {
         paidAbs.add(saPayment); // assumes some part on the mana produced by the ability will get used
         for (final Mana mana : abManaPart.getLastManaProduced()) {
             if( tryPayCostWithMana(saPaidFor, manaCost, mana) )
-                saPaidFor.getManaPaid().add(mana);
+                saPaidFor.getPayingMana().add(mana);
         }
     }
 
@@ -196,7 +196,7 @@ public class ManaPool implements Iterable<Mana> {
         
         boolean result = manaFound != null && tryPayCostWithMana(saPaidFor, manaCost, manaFound);
         if(result)
-            saPaidFor.getManaPaid().add(manaFound);
+            saPaidFor.getPayingMana().add(manaFound);
         return result;
     }
 
@@ -206,7 +206,6 @@ public class ManaPool implements Iterable<Mana> {
             return false;
         }
         manaCost.payMana(mana, this);
-        sa.getPayingMana().add(mana);
         this.removeMana(mana);
         if (mana.addsNoCounterMagic(sa) && sa.getHostCard() != null) {
             sa.getHostCard().setCanCounter(false);

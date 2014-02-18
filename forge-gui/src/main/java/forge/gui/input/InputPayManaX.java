@@ -22,7 +22,7 @@ public class InputPayManaX extends InputPayMana {
     private boolean canceled = false;
 
     public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0) {
-        super(sa0);
+        super(sa0, sa0.getActivatingPlayer());
         xPaid = 0;
         
         if (saPaidFor.hasParam("XColor")) {

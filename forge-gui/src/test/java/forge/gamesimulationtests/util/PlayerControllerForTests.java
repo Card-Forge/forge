@@ -29,8 +29,8 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
-import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -566,9 +566,9 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa) {
         // TODO Auto-generated method stub
-        return ComputerUtilMana.payManaCost(player, sa);
+        return ComputerUtilMana.payManaCost(new ManaCostBeingPaid(toPay), sa, player);
     }
 
     @Override

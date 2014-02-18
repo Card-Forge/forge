@@ -8,8 +8,8 @@ import forge.game.spellability.SpellAbility;
 import java.awt.event.MouseEvent;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
-    public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility) {
-        super(spellAbility);
+    public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer) {
+        super(spellAbility, payer);
         manaCost = cost;
     }
 

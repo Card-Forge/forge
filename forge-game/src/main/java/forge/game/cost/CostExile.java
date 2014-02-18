@@ -216,14 +216,17 @@ public class CostExile extends CostPartWithList {
         }
     }
 
+    public static final String HashListKey = "Exiled";
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
     public String getHashForList() {
         // TODO Auto-generated method stub
-        return "Exiled";
+        return HashListKey;
     }
+    
+    
 
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

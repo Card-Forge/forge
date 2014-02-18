@@ -626,9 +626,13 @@ public class HumanPlay {
             String promptCurrent = current == null ? "" : "Current Card: " + current;
             prompt = source + "\n" + promptCurrent;
         }
-        InputPayMana toSet = new InputPayManaExecuteCommands(source, p, prompt, cost.getCostMana().getManaToPay());
-        toSet.showAndWait();
-        return toSet.isPaid();
+        
+        p.getManaPool().clearManaPaid(sourceAbility, false);
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility);
+        if (!paid) {
+            p.getManaPool().refundManaPaid(sourceAbility);
+        }
+        return paid;
     }
 
     private static boolean payCostPart(SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
@@ -704,7 +708,7 @@ public class HumanPlay {
             return false;
         }
         if (!toPay.isPaid()) {
-            inpPayment = new InputPayManaOfCostPayment(toPay, ability);
+            inpPayment = new InputPayManaOfCostPayment(toPay, ability, activator);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
                 return handleOfferingAndConvoke(ability, true, false);

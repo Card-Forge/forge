@@ -26,7 +26,6 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
-import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
@@ -1063,13 +1062,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
-        ManaCost toPay;
-        if ( costPartMana.isExiledCreatureCost() ) // back from the brink
-            toPay = sa.getPaidList("Exiled").get(0).getManaCost();
-        else
-            toPay = costPartMana.getManaToPay();
-
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa) {
         return HumanPlay.payManaCost(toPay, costPartMana, sa, player);
     }
 

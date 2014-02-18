@@ -476,7 +476,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<Mana> getPayingMana() {
+    public List<Mana> getPayingMana() {
         return this.payingMana;
     }
 
@@ -489,11 +489,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public List<SpellAbility> getPayingManaAbilities() {
         return this.paidAbilities;
-    }
-    
-    List<Mana> paidMana = new ArrayList<>();
-    public List<Mana> getManaPaid() {
-        return paidMana;
     }
 
     // Combined PaidLists
