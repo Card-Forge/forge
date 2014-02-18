@@ -26,16 +26,29 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
-import forge.util.maps.EnumMapOfLists;
-import forge.util.maps.MapOfLists;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+
+
+
+
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -150,7 +163,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        MapOfLists<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
 //        if (DEBUG_MANA_PAYMENT) {
 //            System.out.println((test ? "test -- " : "PROD -- ") + FThreads.debugGetStackTraceItem(5, true));
@@ -216,13 +229,11 @@ public class ComputerUtilMana {
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
-                for (Collection<SpellAbility> kv : sourcesForShards.values()) {
-                    Iterator<SpellAbility> itSa = kv.iterator();
-                    while (itSa.hasNext()) {
-                        SpellAbility srcSa = itSa.next();
-                        if (srcSa.getHostCard().equals(saPayment.getHostCard())) {
-                            itSa.remove();
-                        }
+                Iterator<SpellAbility> itSa = sourcesForShards.values().iterator();
+                while (itSa.hasNext()) {
+                    SpellAbility srcSa = itSa.next();
+                    if (srcSa.getHostCard().equals(saPayment.getHostCard())) {
+                        itSa.remove();
                     }
                 }
             }
@@ -443,7 +454,7 @@ public class ComputerUtilMana {
     }
 
 
-    private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Map<ManaCostShard, Collection<SpellAbility>> sourcesForShards) {
+    private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
         // mind the priorities
         // * Pay mono-colored first,
         // * Pay 2/C with matching colors
@@ -590,36 +601,36 @@ public class ComputerUtilMana {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static MapOfLists<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final Multimap<Integer, SpellAbility> manaAbilityMap,
+    private static Multimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final Multimap<Integer, SpellAbility> manaAbilityMap,
             final ManaCostBeingPaid cost) {
-        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>arrayLists());
+        Multimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
 
         // loop over cost parts
         for (ManaCostShard shard : cost.getDistinctShards()) {
             if (shard == ManaCostShard.S) {
-                res.put(shard, manaAbilityMap.get(ManaAtom.IS_SNOW));
+                res.putAll(shard, manaAbilityMap.get(ManaAtom.IS_SNOW));
                 continue;
             }
 
             if (shard.isOr2Colorless()) {
                 Integer colorKey = Integer.valueOf(shard.getColorMask());
                 if (manaAbilityMap.containsKey(colorKey))
-                    res.addAll(shard, manaAbilityMap.get(colorKey));
+                    res.putAll(shard, manaAbilityMap.get(colorKey));
                 if (manaAbilityMap.containsKey(ManaAtom.COLORLESS))
-                    res.addAll(shard, manaAbilityMap.get(ManaAtom.COLORLESS));
+                    res.putAll(shard, manaAbilityMap.get(ManaAtom.COLORLESS));
                 continue;
             }
 
             for (Entry<Integer, SpellAbility> kv : manaAbilityMap.entries()) {
                 // apply mana color change matrix here
                 if (ai.getManaPool().canPayForShardWithColor(shard, kv.getKey().byteValue())) {
-                    res.add(shard, kv.getValue());
+                    res.put(shard, kv.getValue());
                 }
             }
         }
 
         if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS)) {
-            res.addAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
+            res.putAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
         }
 
         return res;
@@ -817,7 +828,7 @@ public class ComputerUtilMana {
                 AbilityManaPart mp = m.getManaPart();
 
                 // setup produce mana replacement effects
-                final HashMap<String, Object> repParams = new HashMap<String, Object>();
+                final Map<String, Object> repParams = new HashMap<String, Object>();
                 repParams.put("Event", "ProduceMana");
                 repParams.put("Mana", mp.getOrigProduced());
                 repParams.put("Affected", sourceCard);
