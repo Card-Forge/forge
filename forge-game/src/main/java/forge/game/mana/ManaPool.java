@@ -73,7 +73,7 @@ public class ManaPool implements Iterable<Mana> {
         return ofColor == null ? 0 : ofColor.size();
     }
 
-    private void addMana(final Mana mana) {
+    public void addMana(final Mana mana) {
         floatingMana.put(mana.getColor(), mana);
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
     }
@@ -231,31 +231,6 @@ public class ManaPool implements Iterable<Mana> {
      */
     public final int totalMana() {
         return floatingMana.values().size();
-    }
-
-    /**
-     * <p>
-     * clearPay.
-     * </p>
-     * 
-     * @param ability
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param refund
-     *            a boolean.
-     */
-    public final void clearManaPaid(final SpellAbility ability, final boolean refund) {
-        final List<Mana> manaPaid = ability.getPayingMana();
-        ability.getPayingManaAbilities().clear();
-        // move non-undoable paying mana back to floating
-        if (refund) {
-            if (ability.getHostCard() != null) {
-                ability.getHostCard().setCanCounter(true);
-            }
-            for (final Mana m : manaPaid) {
-                this.addMana(m);
-            }
-        }
-        manaPaid.clear();
     }
 
     //Account for mana part of ability when undoing it

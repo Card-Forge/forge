@@ -82,8 +82,6 @@ public class InputPayManaSimple extends InputPayMana {
             player.payLife(this.phyLifeToLose, this.originalCard);
         }
         if (!this.saPaidFor.getHostCard().isCopiedSpell()) {
-            player.getManaPool().clearManaPaid(this.saPaidFor, false);
-
             if (this.saPaidFor.isSpell()) {
                 this.saPaidFor.setHostCard(game.getAction().moveToStack(this.originalCard));
             }

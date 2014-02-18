@@ -480,6 +480,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.payingMana;
     }
 
+    public final void clearManaPaid() {
+        payingMana.clear();
+    }    
+    
     /**
      * <p>
      * getPayingManaAbilities.

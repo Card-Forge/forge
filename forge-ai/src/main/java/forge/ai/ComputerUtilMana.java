@@ -46,11 +46,11 @@ public class ComputerUtilMana {
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
         cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
-        return payManaCost(cost, sa, ai, true, 0, true, true);
+        return payManaCost(cost, sa, ai, true, 0, true);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        return payManaCost(cost, sa, ai, false, 0, true, false);
+        return payManaCost(cost, sa, ai, false, 0, true);
     }
 
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
@@ -66,6 +66,17 @@ public class ComputerUtilMana {
     public static boolean payManaCost(final Player ai, final SpellAbility sa) {
         return payManaCost(sa, ai, false, 0, true);
     }
+
+    private static void refundMana(List<Mana> manaSpent, Player ai, SpellAbility sa) {
+        if (sa.getHostCard() != null) {
+            sa.getHostCard().setCanCounter(true);
+        }
+        for (final Mana m : manaSpent) {
+            ai.getManaPool().addMana(m);
+        }
+        manaSpent.clear();
+    }
+    
 
     /**
      * <p>
@@ -87,12 +98,13 @@ public class ComputerUtilMana {
      */
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
-        return payManaCost(cost, sa, ai, test, extraMana, checkPlayable, true);
+        return payManaCost(cost, sa, ai, test, extraMana, checkPlayable);
     }
 
-    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, boolean clearManaPaid) {
+    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
-
+        List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
+        
         final ManaPool manapool = ai.getManaPool();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
         Collections.sort(unpaidShards); // most difficult shards must come first
@@ -108,17 +120,18 @@ public class ComputerUtilMana {
                     continue; // no matching mana in the pool
                 }
                 else {
-                    if ( ai.getManaPool().tryPayCostWithMana(sa, cost, mana) && !test)
-                        sa.getPayingMana().add(mana);
+                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
+                        manaSpentToPay.add(mana);
+                    }
                 }
             }
         }
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            if (clearManaPaid) {
-                manapool.clearManaPaid(sa, test);
-            }
+            if(test)
+                refundMana(manaSpentToPay, ai, sa);
+
             handleOfferingsAI(sa, test, cost.isPaid());
             return true;
         }
@@ -126,9 +139,8 @@ public class ComputerUtilMana {
         // arrange all mana abilities by color produced.
         final Multimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
-            if (clearManaPaid) {
-                manapool.clearManaPaid(sa, test);
-            }
+            refundMana(manaSpentToPay, ai, sa);
+
             handleOfferingsAI(sa, test, cost.isPaid());
             return false;
         }
@@ -236,9 +248,6 @@ public class ComputerUtilMana {
             }
         }
 
-        if (clearManaPaid) {
-            manapool.clearManaPaid(sa, test);
-        }
         handleOfferingsAI(sa, test, cost.isPaid());
 
 //        if (DEBUG_MANA_PAYMENT) {
@@ -248,6 +257,7 @@ public class ComputerUtilMana {
 //        }
 
         if (!cost.isPaid()) {
+            refundMana(manaSpentToPay, ai, sa);
             if (test) {
                 return false;
             }
@@ -257,6 +267,9 @@ public class ComputerUtilMana {
             }
         }
 
+        if (test)
+            refundMana(manaSpentToPay, ai, sa);
+        
         sa.getHostCard().setColorsPaid(cost.getColorsPaid());
         // if (sa instanceof Spell_Permanent) // should probably add this
         sa.getHostCard().setSunburstValue(cost.getSunburst());
