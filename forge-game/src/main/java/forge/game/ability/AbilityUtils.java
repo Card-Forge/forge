@@ -1273,6 +1273,11 @@ public class AbilityUtils {
             }
         }
 
+        if (sa.hasParam("RememberCostMana")) {
+            host.clearRemembered();
+            host.getRemembered().addAll(sa.getPayingMana());
+        }
+
         if (sa.hasParam("RememberCostCards")) {
             if (sa.getParam("Cost").contains("Exile")) {
                 final List<Card> paidListExiled = sa.getPaidList("Exiled");

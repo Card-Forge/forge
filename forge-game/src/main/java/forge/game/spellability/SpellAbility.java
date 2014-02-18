@@ -1628,12 +1628,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect
     public boolean tracksManaSpent() {
         if (this.hostCard == null) { return false; }
-        if (!this.isSpell()) { return false; }
 
         if (this.hostCard.hasKeyword("Sunburst")) {
             return true;
         }
-        if (this.hostCard.getRules().getOracleText().contains("was spent to cast")) {
+        String text = this.hostCard.getRules().getOracleText();
+        if (this.isSpell() && text.contains("was spent to cast")) {
+            return true;
+        }
+        if (this.isAbility() && text.contains("mana spent to pay")) {
             return true;
         }
         return false;

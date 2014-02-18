@@ -121,7 +121,7 @@ public class ComputerUtilMana {
                 }
                 else {
                     if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
-                        manaSpentToPay.add(mana);
+                        manaSpentToPay.add(0, mana);
                     }
                 }
             }

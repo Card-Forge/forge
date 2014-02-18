@@ -9,11 +9,14 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Iterables;
 
 import java.util.List;
 
@@ -125,6 +128,13 @@ public class ManaEffect extends SpellAbilityEffect {
                             }
                         }
                         abMana.setExpressChoice(sb.toString().trim());
+                    } else if (type.equals("LastNotedType")) {
+                        Mana manaType = (Mana) Iterables.getFirst(card.getRemembered(), null);
+                        if (manaType == null) {
+                            return;
+                        }
+                        String  cs = manaType.toString();
+                        abMana.setExpressChoice(cs);
                     }
 
                     if (abMana.getExpressChoice().isEmpty()) {
