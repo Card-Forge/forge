@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
@@ -616,7 +617,7 @@ public class ComputerUtilMana {
      * @param extraMana
      * @return ManaCost
      */
-    private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+    static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
         ZoneType castFromBackup = null;
         if (test && sa.isSpell()) {
             castFromBackup = sa.getHostCard().getCastFrom();
@@ -624,7 +625,8 @@ public class ComputerUtilMana {
         }
 
         Cost payCosts = sa.getPayCosts();
-        final ManaCost mana = payCosts != null ? payCosts.getTotalMana() : ManaCost.NO_COST;
+        CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
+        final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
         String restriction = null;
         if (payCosts != null && payCosts.getCostMana() != null) {

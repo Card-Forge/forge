@@ -719,7 +719,8 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */ ) {
         // TODO Auto-generated method stub
-        return ComputerUtilMana.payManaCost(new ManaCostBeingPaid(toPay), sa, player);
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, false, 0);
+        return ComputerUtilMana.payManaCost(cost, sa, player);
     }
 
     @Override
