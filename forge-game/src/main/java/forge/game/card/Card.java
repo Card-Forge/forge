@@ -38,6 +38,7 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
@@ -181,6 +182,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int semiPermanentDefenseBoost = 0;
 
     private int xManaCostPaid = 0;
+    private ArrayList<Mana> xManaCostPaidByColor = new ArrayList<>();
 
     private int sunburstValue = 0;
     private byte colorsPaid = 0;
@@ -867,6 +869,60 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setXManaCostPaid(final int n) {
         this.xManaCostPaid = n;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>xManaCostPaidByColor</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final ArrayList<Mana> getXManaCostPaidByColor() {
+        return this.xManaCostPaidByColor;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>xManaCostPaidByColor</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getXManaCostPaidCount(final String colors) {
+        int count = 0;
+
+        for (Mana m : this.xManaCostPaidByColor) {
+            if (colors.contains(m.toString())) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * <p>
+     * Setter or the field <code>xManaCostPaidByColor</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     */
+    public final void setXManaCostPaidByColor(final ArrayList<Mana> xByColor) {
+        this.xManaCostPaidByColor = xByColor;
+    }
+
+    /**
+     * <p>
+     * addXManaCostPaidByColor.
+     * </p>
+     * 
+     * @param xByColor
+     *            an ArrayList<Mana>.
+     */
+    public final void addXManaCostPaidByColor(final ArrayList<Mana> xByColor) {
+        this.xManaCostPaidByColor.addAll(xByColor);
     }
 
     /**

@@ -4,6 +4,7 @@ import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.card.Card;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
 import forge.view.ButtonUtil;
@@ -16,6 +17,7 @@ import java.util.List;
 public class InputPayManaX extends InputPayMana {
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
+    private ArrayList<Mana> xPaidByColor = new ArrayList<>();
     private byte colorsPaid;
     private final ManaCost manaCostPerX;
     private final boolean xCanBe0;
@@ -101,6 +103,7 @@ public class InputPayManaX extends InputPayMana {
             this.colorsPaid |= manaCost.getColorsPaid();
             this.manaCost = new ManaCostBeingPaid(manaCostPerX);
             this.xPaid++;
+            this.xPaidByColor.add(saPaidFor.getPayingMana().get(0));
         }
     }
 
@@ -121,6 +124,7 @@ public class InputPayManaX extends InputPayMana {
     protected void done() {
         final Card card = saPaidFor.getHostCard();
         card.setXManaCostPaid(this.xPaid);
+        card.setXManaCostPaidByColor(this.xPaidByColor);
         card.setColorsPaid(this.colorsPaid);
         card.setSunburstValue(ColorSet.fromMask(this.colorsPaid).countColors());
     }

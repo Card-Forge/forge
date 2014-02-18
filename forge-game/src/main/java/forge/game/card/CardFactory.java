@@ -223,6 +223,7 @@ public class CardFactory {
 
         if (bCopyDetails) {
             c.addXManaCostPaid(original.getXManaCostPaid());
+            c.addXManaCostPaidByColor(original.getXManaCostPaidByColor());
             c.setKickerMagnitude(original.getKickerMagnitude());
 
             for (OptionalCost cost : original.getOptionalCostsPaid()) {

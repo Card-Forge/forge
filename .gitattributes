@@ -11462,6 +11462,7 @@ forge-gui/res/cardsfolder/s/sosuke_son_of_seshiro.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sosukes_summons.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_barrier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_bleed.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/soul_burn.txt -text
 forge-gui/res/cardsfolder/s/soul_channeling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_charmer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_collector.txt svneol=native#text/plain
