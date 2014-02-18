@@ -128,7 +128,7 @@ public class CostPartMana extends CostPart {
         sa.clearManaPaid();
 
         // decision not used here, the whole payment is interactive!
-        return payer.getController().payManaCost(this, sa);
+        return payer.getController().payManaCost(this, sa, null);
     }
 
 }

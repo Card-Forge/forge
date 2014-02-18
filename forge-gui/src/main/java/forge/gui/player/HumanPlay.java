@@ -628,7 +628,7 @@ public class HumanPlay {
         }
         
         sourceAbility.clearManaPaid();
-        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility);
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt);
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
         }
@@ -679,7 +679,7 @@ public class HumanPlay {
         return done;
     }
     
-    public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator) {
+    public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt) {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
@@ -699,16 +699,17 @@ public class HumanPlay {
                 toPay.addManaCost(mkCost);
         }
 
-        InputPayMana inpPayment;
+        
         toPay.applySpellCostChange(ability, false);
         
-        
+        InputPayMana inpPayment;
         if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
             System.out.println("Sacrifice input for Offering cancelled");
             return false;
         }
         if (!toPay.isPaid()) {
             inpPayment = new InputPayManaOfCostPayment(toPay, ability, activator);
+            inpPayment.setMessagePrefix(prompt);
             inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
                 return handleOfferingAndConvoke(ability, true, false);

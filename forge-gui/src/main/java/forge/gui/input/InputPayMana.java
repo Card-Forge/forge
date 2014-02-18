@@ -372,4 +372,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     public boolean isPaid() { return bPaid; }
+
+    protected String messagePrefix;
+    public void setMessagePrefix(String prompt) {
+        // TODO Auto-generated method stub
+        messagePrefix = prompt;
+    }
 }

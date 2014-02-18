@@ -44,7 +44,10 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     protected String getMessage() { 
         final String displayMana = manaCost.toString(false);
 
-        final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
+        final StringBuilder msg = new StringBuilder();
+        if( messagePrefix != null )
+            msg.append(messagePrefix).append("\n");
+        msg.append("Pay Mana Cost: ").append(displayMana);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
             msg.append(this.phyLifeToLose);
