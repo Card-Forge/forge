@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -1051,15 +1052,22 @@ public class FSkin {
     public static ArrayList<String> getSkinDirectoryNames() {
         final ArrayList<String> mySkins = new ArrayList<String>();
 
-        final FileHandle dir = Gdx.files.internal(FILE_SKINS_DIR);
-        final String[] children = dir.file().list();
-        if (children == null) {
+        final FileHandle dir;
+        if (Gdx.app.getType() == ApplicationType.Desktop) {
+            dir = Gdx.files.internal("./bin/" + FILE_SKINS_DIR); //needed to iterate over directory for Desktop
+        }
+        else {
+            dir = Gdx.files.internal(FILE_SKINS_DIR);
+        }
+        if (!dir.exists() || !dir.isDirectory()) {
             System.err.println("FSkin > can't find skins directory!");
-        } else {
-            for (int i = 0; i < children.length; i++) {
-                if (children[i].equalsIgnoreCase(".svn")) { continue; }
-                if (children[i].equalsIgnoreCase(".DS_Store")) { continue; }
-                mySkins.add(children[i]);
+        }
+        else {
+            for (FileHandle skinFile : dir.list()) {
+                String skinName = skinFile.name();
+                if (skinName.equalsIgnoreCase(".svn")) { continue; }
+                if (skinName.equalsIgnoreCase(".DS_Store")) { continue; }
+                mySkins.add(skinName);
             }
         }
 
