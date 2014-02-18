@@ -315,7 +315,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                             source.addMultiKickerMagnitude(1);
                     } while( hasPaid );
                 }
-                if (source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
+                if (sp.isSpell() && source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
                         CardPredicates.hasKeyword("As an additional cost to cast creature spells," +
                         		" you may pay any amount of mana. If you do, that creature enters " +
                         		"the battlefield with that many additional +1/+1 counters on it."))) {
