@@ -56,7 +56,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -977,7 +976,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("xPaid"))            return doXMath(c.getXManaCostPaid(), m, c);
         if (sq[0].contains("xColorPaid")) {
-            String[] attrs = TextUtil.split(sq[0], ' ');
+            String[] attrs = sq[0].split(" ");
             String colors = "";
             for (int i = 1; i < attrs.length; i++) {
                 colors += attrs[i];
