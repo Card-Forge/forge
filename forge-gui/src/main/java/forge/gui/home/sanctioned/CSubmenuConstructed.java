@@ -203,9 +203,9 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             LobbyPlayer lobbyPlayer = view.isPlayerAI(i) ? lobby.getAiPlayer(name,
             		view.getPlayerAvatar(i)) : lobby.getGuiPlayer();
         	RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
-        	rp.setTeamNumber(view.getTeam(i));
 
         	if (variantTypes.isEmpty()) {
+            	rp.setTeamNumber(view.getTeam(i));
         		players.add(rp.setPlayer(lobbyPlayer));
         	} else {
         		// Initialise Variant variables
@@ -307,8 +307,9 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     }
         		}
 
-        		players.add(RegisteredPlayer.forVariants(variantTypes, rp.getDeck(), schemes,
-        				playerIsArchenemy, planes, vanguardAvatar).setPlayer(lobbyPlayer));
+            	rp = RegisteredPlayer.forVariants(variantTypes, rp.getDeck(), schemes, playerIsArchenemy, planes, vanguardAvatar);
+            	rp.setTeamNumber(view.getTeam(i));
+        		players.add(rp.setPlayer(lobbyPlayer));
         	}
         	view.getDeckChooser(i).saveState();
         }

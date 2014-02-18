@@ -1030,7 +1030,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public boolean isEnoughTeams() {
     	int lastTeam = -1;
     	final List<Integer> teamList = appliedVariants.contains(GameType.Archenemy) ? archenemyTeams : teams;
-    	System.out.println(teamList);
     			
     	for (final int i : getParticipants()) {
     		if (lastTeam == -1) {
