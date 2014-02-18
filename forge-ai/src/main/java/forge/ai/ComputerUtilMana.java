@@ -31,15 +31,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-
-
-
-
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -91,24 +82,6 @@ public class ComputerUtilMana {
     }
     
 
-    /**
-     * <p>
-     * payManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param ai
-     *            a {@link forge.game.player.Player} object.
-     * @param test
-     *            (is for canPayCost, if true does not change the game state)
-     * @param extraMana
-     *            a int.
-     * @param checkPlayable
-     *            should we check if playable? use for hypothetical "can AI play this"
-     * @return a boolean.
-     * @since 1.0.15
-     */
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
         return payManaCost(cost, sa, ai, test, extraMana, checkPlayable);
