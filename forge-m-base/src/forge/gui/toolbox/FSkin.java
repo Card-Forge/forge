@@ -2,17 +2,15 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -236,7 +234,7 @@ public class FSkin {
 
         private void updateColor() {
             int[] coords = this.getCoords();
-            color = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(coords[0], coords[1]));
+            color = FSkin.getColorFromPixel(pxPreferredSprite.getPixel(coords[0], coords[1]));
         }
     }
 
@@ -267,7 +265,7 @@ public class FSkin {
         private static Texture getTexture(SkinProp s0, int x0, int y0, int w0, int h0) {
          // Test if requested sub-image in inside bounds of preferred sprite.
             // (Height and width of preferred sprite were set in loadFontAndImages.)
-            if (x0 + w0 > bimPreferredSprite.getWidth() || y0 + h0 > bimPreferredSprite.getHeight()) {
+            if (x0 + w0 > pxPreferredSprite.getWidth() || y0 + h0 > pxPreferredSprite.getHeight()) {
                 return txDefaultSprite;
             }
 
@@ -279,24 +277,24 @@ public class FSkin {
             // Center
             x = (x0 + w0 / 2);
             y = (y0 + h0 / 2);
-            c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            c = FSkin.getColorFromPixel(pxPreferredSprite.getPixel(x, y));
             if (c.getAlpha() != 0) { return txPreferredSprite; }
 
             x += 2;
             y += 2;
-            c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            c = FSkin.getColorFromPixel(pxPreferredSprite.getPixel(x, y));
             if (c.getAlpha() != 0) { return txPreferredSprite; }
 
             x -= 4;
-            c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            c = FSkin.getColorFromPixel(pxPreferredSprite.getPixel(x, y));
             if (c.getAlpha() != 0) { return txPreferredSprite; }
 
             y -= 4;
-            c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            c = FSkin.getColorFromPixel(pxPreferredSprite.getPixel(x, y));
             if (c.getAlpha() != 0) { return txPreferredSprite; }
 
             x += 4;
-            c = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x, y));
+            c = FSkin.getColorFromPixel(pxPreferredSprite.getPixel(x, y));
             if (c.getAlpha() != 0) { return txPreferredSprite; }
 
             return txDefaultSprite;
@@ -804,7 +802,7 @@ public class FSkin {
     private static int currentSkinIndex;
     private static String preferredDir;
     private static String preferredName;
-    private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimDefaultAvatars, bimPreferredAvatars;
+    private static Pixmap pxDefaultSprite, pxPreferredSprite, pxDefaultAvatars, pxPreferredAvatars;
     private static Texture txDefaultSprite, txPreferredSprite, txFoils, txOldFoils, txDefaultAvatars, txPreferredAvatars;
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
@@ -908,21 +906,21 @@ public class FSkin {
         final FileHandle f6 = Gdx.files.internal(DEFAULT_DIR + FILE_OLD_FOIL_SPRITE);
 
         try {
-            bimDefaultSprite = ImageIO.read(f1.file());
+            pxDefaultSprite = new Pixmap(f1);
             txDefaultSprite = new Texture(f1);
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
-            bimPreferredSprite = ImageIO.read(f2.file());
+            pxPreferredSprite = new Pixmap(f2);
             txPreferredSprite = new Texture(f2);
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             txFoils = new Texture(f3);
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             txOldFoils = f6.exists() ? new Texture(f6) : new Texture(f3);
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
-            bimDefaultAvatars = ImageIO.read(f4.file());
+            pxDefaultAvatars = new Pixmap(f4);
             txDefaultAvatars = new Texture(f4);
 
             if (f5.exists()) {
-                bimDefaultAvatars = ImageIO.read(f5.file());
+                pxDefaultAvatars = new Pixmap(f5);
                 txPreferredAvatars = new Texture(f5);
             }
 
@@ -973,16 +971,16 @@ public class FSkin {
         //FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
         loaded = true;
 
-        // Clear references to buffered images
-        bimDefaultSprite.flush();
-        bimDefaultSprite = null;
-        bimPreferredSprite.flush();
-        bimPreferredSprite = null;
-        bimDefaultAvatars.flush();
-        bimDefaultAvatars = null;
-        if (bimPreferredAvatars != null) {
-            bimPreferredAvatars.flush();
-            bimPreferredAvatars = null;
+        // Clear references to pixmap
+        pxDefaultSprite.dispose();
+        pxDefaultSprite = null;
+        pxPreferredSprite.dispose();
+        pxPreferredSprite = null;
+        pxDefaultAvatars.dispose();
+        pxDefaultAvatars = null;
+        if (pxPreferredAvatars != null) {
+            pxPreferredAvatars.dispose();
+            pxPreferredAvatars = null;
         }
 
         //establish encoding symbols
@@ -1106,27 +1104,27 @@ public class FSkin {
         int counter = 0;
         Color pxTest;
 
-        if (txPreferredAvatars != null) {
-            final int pw = txPreferredAvatars.getWidth();
-            final int ph = txPreferredAvatars.getHeight();
+        if (pxPreferredAvatars != null) {
+            final int pw = pxPreferredAvatars.getWidth();
+            final int ph = pxPreferredAvatars.getHeight();
 
             for (int j = 0; j < ph; j += 100) {
                 for (int i = 0; i < pw; i += 100) {
                     if (i == 0 && j == 0) { continue; }
-                    pxTest = FSkin.getColorFromPixel(bimPreferredAvatars.getRGB(i + 50, j + 50));
+                    pxTest = FSkin.getColorFromPixel(pxPreferredAvatars.getPixel(i + 50, j + 50));
                     if (pxTest.getAlpha() == 0) { continue; }
                     FSkin.avatars.put(counter++, new SkinImage(new TextureRegion(txPreferredAvatars, i, j, 100, 100)));
                 }
             }
         }
 
-        final int aw = txDefaultAvatars.getWidth();
-        final int ah = txDefaultAvatars.getHeight();
+        final int aw = pxDefaultAvatars.getWidth();
+        final int ah = pxDefaultAvatars.getHeight();
 
         for (int j = 0; j < ah; j += 100) {
             for (int i = 0; i < aw; i += 100) {
                 if (i == 0 && j == 0) { continue; }
-                pxTest = FSkin.getColorFromPixel(bimDefaultAvatars.getRGB(i + 50, j + 50));
+                pxTest = FSkin.getColorFromPixel(pxDefaultAvatars.getPixel(i + 50, j + 50));
                 if (pxTest.getAlpha() == 0) { continue; }
                 FSkin.avatars.put(counter++, new SkinImage(new TextureRegion(txDefaultAvatars, i, j, 100, 100)));
             }

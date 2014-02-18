@@ -8,7 +8,7 @@ public class ForgeGame implements ApplicationListener {
     @Override
     public void create () {
         FSkin.loadLight("default", true);
-        //FSkin.loadFull(true);
+        FSkin.loadFull(true);
     }
 
     @Override
