@@ -86,6 +86,14 @@ public class Game {
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
 
+        int highestTeam = -1;
+        for (RegisteredPlayer psc : players0) {
+            // Track highest team number for auto assigning unassigned teams
+            int teamNum = psc.getTeamNumber();
+            if (teamNum > highestTeam)
+                highestTeam = teamNum;
+        }
+
         for (RegisteredPlayer psc : players0) {
             Player pl = psc.getPlayer().createIngamePlayer(this);
             players.add(pl);
@@ -94,7 +102,15 @@ public class Game {
             pl.setStartingLife(psc.getStartingLife());
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());
-            pl.setTeam(psc.getTeamNumber());
+
+            int teamNum = psc.getTeamNumber();
+            if (teamNum == -1) {
+                // RegisteredPlayer doesn't have an assigned team, set it to 1 higher than the highest found team number
+                teamNum = ++highestTeam;
+                psc.setTeamNumber(teamNum);
+            }
+
+            pl.setTeam(teamNum);
         }
 
         action = new GameAction(this);
