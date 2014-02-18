@@ -876,7 +876,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Getter for the field <code>xManaCostPaidByColor</code>.
      * </p>
      * 
-     * @return a int.
+     * @return an ArrayList<Mana>.
      */
     public final ArrayList<Mana> getXManaCostPaidByColor() {
         return this.xManaCostPaidByColor;
@@ -884,7 +884,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Getter for the field <code>xManaCostPaidByColor</code>.
+     * Returns the amount of specific color mana spent on paying X.
      * </p>
      * 
      * @return a int.
@@ -907,7 +907,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param n
-     *            a int.
+     *            an ArrayList<Mana>.
      */
     public final void setXManaCostPaidByColor(final ArrayList<Mana> xByColor) {
         this.xManaCostPaidByColor = xByColor;
