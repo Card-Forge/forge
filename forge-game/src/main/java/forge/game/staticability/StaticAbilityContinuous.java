@@ -18,6 +18,8 @@
 package forge.game.staticability;
 
 import com.google.common.collect.Lists;
+
+import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCostShard;
@@ -28,10 +30,12 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityActivated;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -308,6 +312,11 @@ public class StaticAbilityContinuous {
             }
         }
 
+        if (params.containsKey("IgnoreEffectCost")) {
+            String cost = params.get("IgnoreEffectCost");
+            buildIgnorEffectAbility(stAb, cost, affectedPlayers, affectedCards);
+        }
+
         // modify players
         for (final Player p : affectedPlayers) {
 
@@ -516,6 +525,44 @@ public class StaticAbilityContinuous {
         return affectedCards;
     }
 
+    private static void buildIgnorEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final List<Card> cards) {
+        final List<Player> validActivator = new ArrayList<Player>(players);
+        for (final Card c : cards) {
+            validActivator.add(c.getController());
+        }
+        final Card sourceCard = stAb.getHostCard();
+        Cost cost = new Cost(costString, true);
+        final AbilityStatic addIgnore = new AbilityStatic(sourceCard, cost, null) {
+
+            @Override
+            public void resolve() {
+                stAb.addIgnoreEffectPlayers(this.getActivatingPlayer());
+                stAb.setIgnoreEffectCards(cards);
+            }
+
+            @Override
+            public boolean canPlay() {
+                return validActivator.contains(this.getActivatingPlayer())
+                        && sourceCard.isInPlay();
+            }
+
+        };
+        addIgnore.setTemporary(true);
+        addIgnore.setIntrinsic(false);
+        addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
+        sourceCard.addSpellAbility(addIgnore);
+
+        final GameCommand removeIgnore = new GameCommand() {
+            private static final long serialVersionUID = -5415775215053216360L;
+            @Override
+            public void run() {
+                stAb.clearIgnoreEffects();
+            }
+        };
+        sourceCard.getGame().getEndOfTurn().addUntil(removeIgnore);
+        sourceCard.addLeavesPlayCommand(removeIgnore);
+    }
+
     private static ArrayList<Player> getAffectedPlayers(final StaticAbility stAb) {
         final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
@@ -534,6 +581,7 @@ public class StaticAbilityContinuous {
                 players.add(p);
             }
         }
+        players.removeAll(stAb.getIgnoreEffectPlayers());
 
         return players;
     }
@@ -573,7 +621,7 @@ public class StaticAbilityContinuous {
         if (params.containsKey("Affected")) {
             affectedCards = CardLists.getValidCards(affectedCards, params.get("Affected").split(","), controller, hostCard);
         }
-
+        affectedCards.removeAll(stAb.getIgnoreEffectCards());
         return affectedCards;
     }
 

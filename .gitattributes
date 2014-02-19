@@ -7123,6 +7123,7 @@ forge-gui/res/cardsfolder/l/legion_loyalist.txt -text
 forge-gui/res/cardsfolder/l/legions_initiative.txt -text
 forge-gui/res/cardsfolder/l/legions_of_lim_dul.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/leonin_abunas.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/leonin_arbiter.txt -text
 forge-gui/res/cardsfolder/l/leonin_armorguard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/leonin_battlemage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/leonin_bladetrap.txt svneol=native#text/plain

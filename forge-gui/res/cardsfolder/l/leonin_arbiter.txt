@@ -1,0 +1,9 @@
+Name:Leonin Arbiter
+ManaCost:1 W
+Types:Creature Cat Cleric
+PT:2/2
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ CantSearchLibrary | IgnoreEffectCost$ 2 | Description$ Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_arbiter.jpg
+Oracle:Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.

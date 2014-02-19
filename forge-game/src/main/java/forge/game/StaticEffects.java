@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 
@@ -147,6 +148,14 @@ public class StaticEffects {
                 addColors = CardUtil.getShortColorsString(se.getSource().getChosenColor());
             } else {
                 addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+            }
+        }
+
+        if (params.containsKey("IgnoreEffectCost")) {
+            for (final SpellAbility s : se.getSource().getSpellAbilities()) {
+                if (s instanceof AbilityStatic && s.isTemporary()) {
+                    se.getSource().removeSpellAbility(s);
+                }
             }
         }
 

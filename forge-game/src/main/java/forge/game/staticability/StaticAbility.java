@@ -30,6 +30,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,8 @@ import java.util.Map;
 public class StaticAbility extends CardTraitBase {
 
     private int layer = 0;
+    private List<Card> ignoreEffectCards = new ArrayList<Card>();
+    private List<Player> ignoreEffectPlayers = new ArrayList<Player>();
 
     // *******************************************************
 
@@ -568,6 +571,38 @@ public class StaticAbility extends CardTraitBase {
         return true;
     }
 
+    /**
+     * @return the ignoreEffectCards
+     */
+    public List<Card> getIgnoreEffectCards() {
+        return ignoreEffectCards;
+    }
+
+    /**
+     * @param c the ignoreEffectCards to set
+     */
+    public void setIgnoreEffectCards(List<Card> cards) {
+        this.ignoreEffectCards = cards;
+    }
+
+    /**
+     * @return the ignoreEffectPlayers
+     */
+    public List<Player> getIgnoreEffectPlayers() {
+        return ignoreEffectPlayers;
+    }
+
+    /**
+     * @param p the ignoreEffectPlayers to add
+     */
+    public void addIgnoreEffectPlayers(Player p) {
+        this.ignoreEffectPlayers.add(p);
+    }
+
+    public void clearIgnoreEffects() {
+        this.ignoreEffectPlayers.clear();
+        this.ignoreEffectCards.clear();
+    }
 
     /**
      * @return the layer
