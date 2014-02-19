@@ -22,8 +22,8 @@ public class Forge extends Game {
     public void create() {
         //Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
 
-        FSkin.loadLight("journeyman", true);
-        FSkin.loadFull(true);
+        /*FSkin.loadLight("journeyman", true);
+        FSkin.loadFull(true);*/
         openScreen(new HomeScreen());
     }
 

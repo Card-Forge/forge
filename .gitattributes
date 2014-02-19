@@ -15985,6 +15985,7 @@ forge-m-base/libs/gdx-sources.jar -text
 forge-m-base/libs/gdx.jar -text
 forge-m-base/src/forge/FScreen.java -text
 forge-m-base/src/forge/Forge.java -text
+forge-m-base/src/forge/gui/shared/FSkinImage.java -text
 forge-m-base/src/forge/screens/home/HomeScreen.java -text
 forge-m-base/src/forge/toolbox/FButton.java -text
 forge-m-base/src/forge/toolbox/FSkin.java -text
