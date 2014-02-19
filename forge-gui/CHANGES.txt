@@ -38,6 +38,8 @@ Psychic Intrusion
 Commandeer
 Perplexing Chimera
 Jeweled Amulet
+Soul Burn
+Leonin Arbiter
 
 
 ------------
