@@ -1,4 +1,4 @@
-package forge.gui.toolbox;
+package forge.toolbox;
 
 import java.awt.AlphaComposite;
 
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 
-import forge.gui.toolbox.FSkin.SkinImage;
+import forge.toolbox.FSkin.SkinImage;
 
 public class FButton extends Widget {
     private SkinImage imgL, imgM, imgR;

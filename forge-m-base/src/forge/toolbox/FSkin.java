@@ -1,4 +1,4 @@
-package forge.gui.toolbox;
+package forge.toolbox;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -33,7 +33,7 @@ public class FSkin {
      * Retrieves a color from this skin's color map.
      * 
      * @param c0 &emsp; Colors property (from enum)
-     * @return {@link forge.gui.toolbox.FSkin.SkinColor}
+     * @return {@link forge.toolbox.FSkin.SkinColor}
      */
     public static SkinColor getColor(final Colors c0) {
         return SkinColor.baseColors.get(c0);
@@ -249,7 +249,7 @@ public class FSkin {
      * Gets an image.
      *
      * @param s0 &emsp; SkinProp enum
-     * @return {@link forge.gui.toolbox.FSkin.SkinImage}
+     * @return {@link forge.toolbox.FSkin.SkinImage}
      */
     public static SkinImage getImage(final SkinProp s0) {
         SkinImage image = SkinImage.images.get(s0);
@@ -673,7 +673,7 @@ public class FSkin {
     }
 
     /**
-     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getFont() {
         return FSkin.getFont(FSkin.defaultFontSize);
@@ -681,14 +681,14 @@ public class FSkin {
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getFont(final int size) {
         return SkinFont.get(Font.PLAIN, size);
     }
 
     /**
-     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getBoldFont() {
         return FSkin.getBoldFont(FSkin.defaultFontSize);
@@ -696,14 +696,14 @@ public class FSkin {
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getBoldFont(final int size) {
         return SkinFont.get(Font.BOLD, size);
     }
 
     /**
-     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getItalicFont() {
         return FSkin.getItalicFont(FSkin.defaultFontSize);
@@ -711,7 +711,7 @@ public class FSkin {
 
     /**
      * @param size - integer, pixel size
-     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     * @return {@link forge.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getItalicFont(final int size) {
         return SkinFont.get(Font.ITALIC, size);

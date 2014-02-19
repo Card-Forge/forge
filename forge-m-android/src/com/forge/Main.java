@@ -4,12 +4,12 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
-import forge.ForgeGame;
+import forge.Forge;
 
 public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialize(new ForgeGame(), false);
+        initialize(new Forge(), false);
     }
 }
