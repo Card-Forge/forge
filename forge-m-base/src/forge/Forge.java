@@ -2,7 +2,7 @@ package forge;
 
 import java.util.Stack;
 
-import com.badlogic.gdx.Game;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
@@ -13,7 +13,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
 import forge.assets.FSkin;
@@ -23,12 +26,13 @@ import forge.assets.FSkinImage;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDisplayObject;
 
-public class Forge extends Game {
+public class Forge implements ApplicationListener {
     private static Forge game;
     private static int screenWidth;
     private static int screenHeight;
     private static SpriteBatch batch;
     private static ShapeRenderer shapeRenderer;
+    private static FScreen currentScreen;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public Forge() {
@@ -43,6 +47,7 @@ public class Forge extends Game {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
+        Gdx.input.setInputProcessor(new GestureDetector(new FGestureListener()));
 
         FSkin.loadLight("journeyman", true);
         FSkin.loadFull(true);
@@ -51,46 +56,111 @@ public class Forge extends Game {
 
     public static void back() {
         if (screens.size() < 2) { return; } //don't allow going back from initial screen
-        screens.pop().dispose();
-        game.setScreen(screens.lastElement());
+        screens.pop();
+        setCurrentScreen(screens.lastElement());
     }
 
     public static void openScreen(FScreen screen0) {
-        if (game.getScreen() == screen0) { return; }
+        if (currentScreen == screen0) { return; }
         screens.push(screen0);
-        game.setScreen(screen0);
+        setCurrentScreen(screen0);
+        screen0.onOpen();
+    }
+
+    private static void setCurrentScreen(FScreen screen0) {
+        currentScreen = screen0;
+        currentScreen.setSize(screenWidth, screenHeight);
     }
 
     @Override
     public void render () {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); // Clear the screen.
-        batch.begin();
-        super.render();
-        batch.end();
+        if (currentScreen != null) {
+            batch.begin();
+            Graphics g = new Graphics();
+            currentScreen.draw(g);
+            batch.end();
+        }
     }
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
         screenWidth = width;
         screenHeight = height;
+        if (currentScreen != null) {
+            currentScreen.setSize(width, height);
+        }
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
     }
 
     @Override
     public void dispose () {
-        super.dispose();
+        currentScreen = null;
+        screens.clear();
         batch.dispose();
         shapeRenderer.dispose();
+    }
+
+    private class FGestureListener implements GestureListener {
+        @Override
+        public boolean touchDown(float x, float y, int pointer, int button) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count, int button) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean fling(float velocityX, float velocityY, int button) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean pan(float x, float y, float deltaX, float deltaY) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean panStop(float x, float y, int pointer, int button) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean zoom(float initialDistance, float distance) {
+            // TODO Auto-generated method stub
+            return true;
+        }
+
+        @Override
+        public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+            // TODO Auto-generated method stub
+            return true;
+        }
     }
 
     public static class Graphics {
         private Rectangle bounds;
         private int failedClipCount;
-
-        public static void drawScreen(FScreen screen) {
-            Graphics g = new Graphics();
-            g.draw(screen);
-        }
 
         private Graphics() {
             bounds = new Rectangle(0, 0, screenWidth, screenHeight);
