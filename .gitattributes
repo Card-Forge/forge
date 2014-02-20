@@ -15575,8 +15575,6 @@ forge-gui/src/main/java/forge/gui/home/settings/VSubmenuDownloaders.java -text
 forge-gui/src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
 forge-gui/src/main/java/forge/gui/home/settings/VSubmenuReleaseNotes.java -text
 forge-gui/src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
-forge-gui/src/main/java/forge/gui/home/variant/CSubmenuCommander.java -text
-forge-gui/src/main/java/forge/gui/home/variant/VSubmenuCommander.java -text
 forge-gui/src/main/java/forge/gui/input/Input.java -text
 forge-gui/src/main/java/forge/gui/input/InputAttack.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/input/InputBase.java svneol=native#text/plain
