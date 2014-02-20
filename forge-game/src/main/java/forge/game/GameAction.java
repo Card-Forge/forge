@@ -419,6 +419,7 @@ public class GameAction {
         if (oldBattlefield == null || oldBattlefield.getZoneType() == ZoneType.Stack) {
             return;
         }
+        final Player original = oldBattlefield.getPlayer();
         final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
 
         if (newBattlefield == null || oldBattlefield.equals(newBattlefield)) {
@@ -446,6 +447,7 @@ public class GameAction {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
+        runParams.put("OriginalController", original);
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);

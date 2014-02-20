@@ -40,6 +40,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.CopyPermanent, CopyPermanentAi.class);
         apiToClass.put(ApiType.CopySpellAbility, CanPlayAsDrawbackAi.class);
         apiToClass.put(ApiType.ControlPlayer, CannotPlayAi.class);
+        apiToClass.put(ApiType.ControlSpell, CannotPlayAi.class);
         apiToClass.put(ApiType.Counter, CounterAi.class);
         apiToClass.put(ApiType.DamageAll, DamageAllAi.class);
 
@@ -125,6 +126,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.TapOrUntapAll, TapOrUntapAllAi.class);
         apiToClass.put(ApiType.Token, TokenAi.class);
         apiToClass.put(ApiType.TwoPiles, TwoPilesAi.class);
+        apiToClass.put(ApiType.Unattach, CannotPlayAi.class);
         apiToClass.put(ApiType.UnattachAll, UnattachAllAi.class);
         apiToClass.put(ApiType.Untap, UntapAi.class);
         apiToClass.put(ApiType.UntapAll, UntapAllAi.class);

@@ -392,6 +392,7 @@ forge-game/src/main/java/forge/game/ability/effects/TapOrUntapEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/TokenEffect.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/ability/effects/TwoPilesEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/UnattachAllEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/UnattachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/UntapAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/UntapEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ZoneExchangeEffect.java -text
@@ -8654,6 +8655,7 @@ forge-gui/res/cardsfolder/o/ogre_arsonist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/ogre_battledriver.txt -text
 forge-gui/res/cardsfolder/o/ogre_berserker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/ogre_gatecrasher.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/ogre_geargrabber.txt -text
 forge-gui/res/cardsfolder/o/ogre_jailbreaker.txt -text
 forge-gui/res/cardsfolder/o/ogre_leadfoot.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/ogre_marauder.txt -text svneol=unset#text/plain

@@ -124,6 +124,7 @@ public enum ApiType {
     TapOrUntapAll (TapOrUntapAllEffect.class),
     Token (TokenEffect.class, false),
     TwoPiles (TwoPilesEffect.class),
+    Unattach (UnattachEffect.class),
     UnattachAll (UnattachAllEffect.class),
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
