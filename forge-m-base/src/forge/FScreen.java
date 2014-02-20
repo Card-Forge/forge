@@ -19,9 +19,13 @@ public abstract class FScreen extends FDisplayObject implements Screen {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.drawImage(FSkinImage.BG_TEXTURE, 0, 0, getWidth(), getHeight());
+    public final void draw(Graphics g) {
+        drawBackground(g);
         super.draw(g);
+    }
+
+    protected void drawBackground(Graphics g) {
+        g.drawImage(FSkinImage.BG_TEXTURE, 0, 0, getWidth(), getHeight());
     }
 
     @Override
