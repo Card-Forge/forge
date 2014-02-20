@@ -4,8 +4,8 @@ import java.util.Stack;
 
 import com.badlogic.gdx.Game;
 
+import forge.assets.FSkin;
 import forge.screens.home.HomeScreen;
-import forge.toolbox.FSkin;
 
 public class Forge extends Game {
     private static Forge game;
@@ -22,8 +22,8 @@ public class Forge extends Game {
     public void create() {
         //Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
 
-        /*FSkin.loadLight("journeyman", true);
-        FSkin.loadFull(true);*/
+        FSkin.loadLight("journeyman", true);
+        FSkin.loadFull(true);
         openScreen(new HomeScreen());
     }
 
