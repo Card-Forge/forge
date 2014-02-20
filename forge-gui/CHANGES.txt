@@ -40,6 +40,7 @@ Perplexing Chimera
 Jeweled Amulet
 Soul Burn
 Leonin Arbiter
+Ogre Geargrabber
 
 
 ------------
