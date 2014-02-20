@@ -13,15 +13,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.screens.home.HomeScreen;
+import forge.toolbox.FDisplayObject;
 
 public class Forge extends Game {
     private static Forge game;
+    private static int screenWidth;
     private static int screenHeight;
     private static SpriteBatch batch;
     private static ShapeRenderer shapeRenderer;
@@ -68,6 +72,7 @@ public class Forge extends Game {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        screenWidth = width;
         screenHeight = height;
     }
 
@@ -79,16 +84,47 @@ public class Forge extends Game {
     }
 
     public static class Graphics {
-        private final float offsetX, offsetY;
+        private Rectangle bounds;
+        private int failedClipCount;
 
-        public Graphics() {
-            offsetX = 0;
-            offsetY = 0;
+        public static void drawScreen(FScreen screen) {
+            Gdx.gl.glEnable(GL10.GL_SCISSOR_TEST);
+            Graphics g = new Graphics();
+            g.draw(screen);
+            Gdx.gl.glDisable(GL10.GL_SCISSOR_TEST);
         }
 
-        public Graphics(Graphics g, float x, float y) {
-            offsetX = g.offsetX + x;
-            offsetY = g.offsetY + y;
+        private Graphics() {
+            bounds = new Rectangle(0, 0, screenWidth, screenHeight);
+        }
+
+        public void startClip() {
+            startClip(0, 0, bounds.width, bounds.height);
+        }
+        public void startClip(float x, float y, float w, float h) {
+            batch.flush(); //must flush batch to prevent other things not rendering
+            if (!ScissorStack.pushScissors(new Rectangle(adjustX(0), adjustY(0, h), w, h))) {
+                failedClipCount++; //tracked failed clips to prevent calling popScissors on endClip
+            }
+        }
+        public void endClip() {
+            if (failedClipCount == 0) {
+                ScissorStack.popScissors();
+            }
+            else {
+                failedClipCount--;
+            }
+        }
+
+        public void draw(FDisplayObject displayObj) {
+            final Rectangle parentBounds = bounds;
+            bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
+
+            if (bounds.overlaps(parentBounds)) { //avoid drawing object if it's not within visible region
+                displayObj.draw(this);
+            }
+
+            bounds = parentBounds;
         }
 
         public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
@@ -147,11 +183,11 @@ public class Forge extends Game {
         }
 
         private float adjustX(float x) {
-            return x + offsetX;
+            return x + bounds.x;
         }
 
         private float adjustY(float y, float height) {
-            return screenHeight - y - offsetY - height; //flip y-axis
+            return screenHeight - y - bounds.y - height; //flip y-axis
         }
     }
 }

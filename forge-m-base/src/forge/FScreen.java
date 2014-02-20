@@ -18,7 +18,7 @@ public abstract class FScreen extends FContainer implements Screen {
 
     @Override
     public final void render(float delta) {
-        draw(new Graphics());
+        Graphics.drawScreen(this);
     }
 
     @Override
