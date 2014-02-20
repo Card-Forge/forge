@@ -81,10 +81,6 @@ public class FButton extends FDisplayObject {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
-    }
-
-    @Override
     public void draw(Graphics g) {
         float w = getWidth();
         float h = getHeight();
