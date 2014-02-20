@@ -5,10 +5,14 @@ import java.util.Stack;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.assets.FSkin;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.screens.home.HomeScreen;
 
@@ -91,6 +95,31 @@ public class Forge extends Game {
         }
         public void drawImage(TextureRegion image, float x, float y, float w, float h) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
+
+        public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, boolean centerHorizontally, boolean centerVertically) {
+            BitmapFont font = skinFont.getFont();
+            font.setColor(skinColor.getColor());
+            if (wrap) {
+                float textHeight = font.getWrappedBounds(text, w).height;
+                if (h > textHeight && centerVertically) {
+                    y += (h - textHeight) / 2;
+                }
+                else if (h == 0) {
+                    h = textHeight;
+                }
+                font.drawWrapped(batch, text, adjustX(x), adjustY(y, h), w, centerHorizontally ? HAlignment.CENTER : HAlignment.LEFT);
+            }
+            else {
+                float textHeight = font.getMultiLineBounds(text).height;
+                if (h > textHeight && centerVertically) {
+                    y += (h - textHeight) / 2;
+                }
+                else if (h == 0) {
+                    h = textHeight;
+                }
+                font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, centerHorizontally ? HAlignment.CENTER : HAlignment.LEFT);
+            }
         }
 
         private float adjustX(float x) {

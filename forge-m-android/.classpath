@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/forge-m-base/libs/gdx.jar" sourcepath="/forge-m-base/libs/gdx-sources.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/forge-m-base"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/forge-m-base/libs/gdx-freetype.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

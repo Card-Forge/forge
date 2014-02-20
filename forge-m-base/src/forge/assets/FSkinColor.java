@@ -1,7 +1,8 @@
 package forge.assets;
 
-import java.awt.Color;
 import java.util.HashMap;
+
+import com.badlogic.gdx.graphics.Color;
 
 public class FSkinColor {
     public enum Colors {
@@ -120,12 +121,12 @@ public class FSkinColor {
         if (this.brightnessDelta != NO_BRIGHTNESS_DELTA) {
             if (this.brightnessDelta < 0) {
                 for (int i = 0; i > this.brightnessDelta; i--) {
-                    this.color = this.color.darker();
+                    this.color = FSkinColor.stepColor(this.color, 10);
                 }
             }
             else {
                 for (int i = 0; i < this.brightnessDelta; i++) {
-                    this.color = this.color.brighter();
+                    this.color = FSkinColor.stepColor(this.color, -10);
                 }
             }
         }
@@ -149,9 +150,9 @@ public class FSkinColor {
      * @return {@link java.awt.Color}
      */
     public static Color stepColor(Color clr0, int step) {
-        int r = clr0.getRed();
-        int g = clr0.getGreen();
-        int b = clr0.getBlue();
+        float r = clr0.r;
+        float g = clr0.g;
+        float b = clr0.b;
 
         // Darker
         if (step < 0) {
@@ -165,7 +166,7 @@ public class FSkinColor {
             b =  ((b + step < 255) ? b + step : 255);
         }
 
-        return new Color(r, g, b);
+        return new Color(r, g, b, 0);
     }
 
     /** Returns RGB components of a color, with a new
@@ -176,7 +177,7 @@ public class FSkinColor {
      * @return {@link java.awt.Color}
      */
     public static Color alphaColor(Color clr0, int alpha) {
-        return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
+        return new Color(clr0.r, clr0.g, clr0.b, alpha);
     }
 
     /**
@@ -184,9 +185,9 @@ public class FSkinColor {
      */
     public static boolean isColorBright(Color c) {
         int v = (int)Math.sqrt(
-                c.getRed() * c.getRed() * 0.241 +
-                c.getGreen() * c.getGreen() * 0.691 +
-                c.getBlue() * c.getBlue() * 0.068);
+                c.r * c.r * 0.241 +
+                c.g * c.g * 0.691 +
+                c.b * c.b * 0.068);
         return v >= 130;
     }
 

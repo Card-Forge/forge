@@ -1,10 +1,9 @@
 package forge.toolbox;
 
-import java.awt.AlphaComposite;
-
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 
 public class FButton extends FDisplayObject {
@@ -13,9 +12,9 @@ public class FButton extends FDisplayObject {
 
     private FSkinImage imgL, imgM, imgR;
     private String caption;
+    private FSkinFont font;
     private boolean enabled = true;
     private boolean toggled = false;
-    private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
 
     /**
      * Instantiates a new FButton.
@@ -26,7 +25,7 @@ public class FButton extends FDisplayObject {
 
     public FButton(final String caption0) {
         caption = caption0;
-        //setFont(FSkin.getBoldFont(14));
+        font = FSkinFont.get(14);
         resetImg();
     }
 
@@ -93,5 +92,8 @@ public class FButton extends FDisplayObject {
         g.drawImage(imgL, 0, 0, h, h);
         g.drawImage(imgM, h, 0, w - (2 * h), h);
         g.drawImage(imgR, w - h, 0, h, h);
+        if (!caption.isEmpty()) {
+            g.drawText(caption, font, foreColor, insetX, 0, w - 2 * insetX, h, false, true, true);
+        }
     }
 }

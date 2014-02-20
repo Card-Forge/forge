@@ -1,6 +1,5 @@
 package forge.assets;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import java.util.Map;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,17 +19,14 @@ public class FSkin {
     private static final String
         FILE_SKINS_DIR = "skins/",
         FILE_AVATAR_SPRITE = "sprite_avatars.png",
-        FILE_FONT = "font1.ttf",
         DEFAULT_DIR = FILE_SKINS_DIR + "default/";
 
     private static final Map<FSkinImage, TextureRegion> images = new HashMap<FSkinImage, TextureRegion>();
     private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
 
     private static ArrayList<String> allSkins;
-    private static int currentSkinIndex;
     private static String preferredDir;
     private static String preferredName;
-    private static int defaultFontSize = 12;
     private static boolean loaded = false;
 
     public static void changeSkin(final String skinName) {
@@ -68,8 +65,6 @@ public class FSkin {
 
         images.clear();
 
-        currentSkinIndex = allSkins.indexOf(skinName);
-
         // Non-default (preferred) skin name and dir.
         preferredName = skinName.toLowerCase().replace(' ', '_');
         preferredDir = FILE_SKINS_DIR + preferredName + "/";
@@ -93,10 +88,10 @@ public class FSkin {
                 images.put(FSkinImage.BG_SPLASH, new TextureRegion(texture, image.getX(), image.getY(),
                         image.getWidth(w), image.getHeight(h)));
 
-                /*UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
-                UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
-                UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
-                UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
+                /*UIManager.put("ProgressBar.background", new Color(img.getRGB(25, h - 75)));
+                UIManager.put("ProgressBar.selectionBackground", new Color(img.getRGB(75, h - 75)));
+                UIManager.put("ProgressBar.foreground", new Color(img.getRGB(25, h - 25)));
+                UIManager.put("ProgressBar.selectionForeground", new Color(img.getRGB(75, h - 25)));
                 UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));*/
             }
             catch (final Exception e) {
@@ -167,7 +162,7 @@ public class FSkin {
 
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
-                c.setColor(FSkin.getColorFromPixel(preferredIcons.getPixel(c.getX(), c.getY())));
+                c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));
             }
 
             //add images besides splash background
@@ -199,8 +194,8 @@ public class FSkin {
                 for (int j = 0; j < ph; j += 100) {
                     for (int i = 0; i < pw; i += 100) {
                         if (i == 0 && j == 0) { continue; }
-                        pxTest = FSkin.getColorFromPixel(pxPreferredAvatars.getPixel(i + 50, j + 50));
-                        if (pxTest.getAlpha() == 0) { continue; }
+                        pxTest = new Color(pxPreferredAvatars.getPixel(i + 50, j + 50));
+                        if (pxTest.a == 0) { continue; }
                         FSkin.avatars.put(counter++, new TextureRegion(txPreferredAvatars, i, j, 100, 100));
                     }
                 }
@@ -213,8 +208,8 @@ public class FSkin {
             for (int j = 0; j < ah; j += 100) {
                 for (int i = 0; i < aw; i += 100) {
                     if (i == 0 && j == 0) { continue; }
-                    pxTest = FSkin.getColorFromPixel(pxDefaultAvatars.getPixel(i + 50, j + 50));
-                    if (pxTest.getAlpha() == 0) { continue; }
+                    pxTest = new Color(pxDefaultAvatars.getPixel(i + 50, j + 50));
+                    if (pxTest.a == 0) { continue; }
                     FSkin.avatars.put(counter++, new TextureRegion(txDefaultAvatars, i, j, 100, 100));
                 }
             }
@@ -232,11 +227,13 @@ public class FSkin {
             e.printStackTrace();
         }
 
-        // Initialize fonts
-        //SkinFont.setBaseFont(GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT));
+        // Update fonts if needed
+        if (!onInit) {
+            FSkinFont.updateAll();
+        }
 
         // Run through enums and load their coords.
-        //Colors.updateAll();
+        FSkinColor.updateAll();
 
         // Images loaded; can start UI init.
         //FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
@@ -283,11 +280,8 @@ public class FSkin {
     private static TextureRegion loadTextureRegion(FSkinImage image, Map<String, Texture> textures, Map<String, Pixmap> pixmaps) {
         String filename = image.getSourceFile().getFilename();
         String preferredFile = preferredDir + filename;
-        Texture texture = null;
-        if (textures.containsKey(preferredFile)) {
-            texture = textures.get(preferredFile);
-        }
-        else {
+        Texture texture = textures.get(preferredFile);
+        if (texture == null) {
             FileHandle file = Gdx.files.internal(preferredFile);
             if (file.exists()) {
                 try {
@@ -307,9 +301,11 @@ public class FSkin {
             int w0 = image.getWidth(fullWidth);
             int h0 = image.getHeight(fullHeight);
 
-            if (pixmaps.containsKey(preferredFile)) {
-                Pixmap pixmap = pixmaps.get(preferredFile);
-    
+            Pixmap pixmap = pixmaps.get(preferredFile);
+            if (pixmap == null) { //return region for preferred file if no pixmap
+                return new TextureRegion(texture, x0, y0, w0, h0);
+            }
+            else {
                 // Test if requested sub-image in inside bounds of preferred sprite.
                 // (Height and width of preferred sprite were set in loadFontAndImages.)
                 if (x0 + w0 <= fullWidth && y0 + h0 <= fullHeight) {
@@ -321,38 +317,33 @@ public class FSkin {
                     // Center
                     x = (x0 + w0 / 2);
                     y = (y0 + h0 / 2);
-                    c = FSkin.getColorFromPixel(pixmap.getPixel(x, y));
-                    if (c.getAlpha() != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
+                    c = new Color(pixmap.getPixel(x, y));
+                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     x += 2;
                     y += 2;
-                    c = FSkin.getColorFromPixel(pixmap.getPixel(x, y));
-                    if (c.getAlpha() != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
+                    c = new Color(pixmap.getPixel(x, y));
+                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     x -= 4;
-                    c = FSkin.getColorFromPixel(pixmap.getPixel(x, y));
-                    if (c.getAlpha() != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
+                    c = new Color(pixmap.getPixel(x, y));
+                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     y -= 4;
-                    c = FSkin.getColorFromPixel(pixmap.getPixel(x, y));
-                    if (c.getAlpha() != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
+                    c = new Color(pixmap.getPixel(x, y));
+                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     x += 4;
-                    c = FSkin.getColorFromPixel(pixmap.getPixel(x, y));
-                    if (c.getAlpha() != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
+                    c = new Color(pixmap.getPixel(x, y));
+                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
                 }
-            }
-            else {
-                return new TextureRegion(texture, x0, y0, w0, h0);
             }
         }
 
         //use default file if can't use preferred file
         String defaultFile = DEFAULT_DIR + filename;
-        if (textures.containsKey(defaultFile)) {
-            texture = textures.get(defaultFile);
-        }
-        else {
+        texture = textures.get(defaultFile);
+        if (texture == null) {
             FileHandle file = Gdx.files.internal(defaultFile);
             if (file.exists()) {
                 try {
@@ -378,6 +369,15 @@ public class FSkin {
      */
     public static String getName() {
         return FSkin.preferredName;
+    }
+
+    /**
+     * Gets the directory.
+     * 
+     * @return Path of directory for the current skin.
+     */
+    public static String getDir() {
+        return FSkin.preferredDir;
     }
 
     /**
@@ -423,13 +423,4 @@ public class FSkin {
     }
 
     public static boolean isLoaded() { return loaded; }
-
-    private static Color getColorFromPixel(final int pixel) {
-        int r, g, b, a;
-        a = (pixel >> 24) & 0x000000ff;
-        r = (pixel >> 16) & 0x000000ff;
-        g = (pixel >> 8) & 0x000000ff;
-        b = (pixel) & 0x000000ff;
-        return new Color(r, g, b, a);
-    }
 }
