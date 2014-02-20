@@ -15,6 +15,7 @@ import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.deckchooser.IDecksComboBoxListener;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.DeckProxy;
+import forge.gui.deckeditor.controllers.CEditorCommander;
 import forge.gui.deckeditor.controllers.CEditorVariant;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -103,6 +104,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<FPanel> schemeDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
     private int lastArchenemy = 0;
 
+    private final List<FList<Object>> commanderDeckLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> commanderDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
+
     private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
     private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
 
@@ -126,7 +130,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         // Populate and add variants panel
         vntVanguard.addItemListener(iListenerVariants);
         vntCommander.addItemListener(iListenerVariants);
-        vntCommander.setEnabled(false);
         vntPlanechase.addItemListener(iListenerVariants);
         vntArchenemy.addItemListener(iListenerVariants);
         comboArchenemy.setSelectedIndex(0);
@@ -277,6 +280,20 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         schemeDeckLists.add(schemeDeckList);
         schemeDeckPanels.add(schemeDeckPanel);
 
+        // Commander deck list
+        FPanel commanderDeckPanel = new FPanel();
+        commanderDeckPanel.setBorderToggle(false);
+        commanderDeckPanel.setLayout(new MigLayout(sectionConstraints));
+        commanderDeckPanel.add(new FLabel.Builder().text("Select Commander deck:").build(), labelConstraints);
+        FList<Object> commanderDeckList = new FList<Object>();
+        commanderDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        FScrollPane scrCommander = new FScrollPane(commanderDeckList, true,
+        		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        commanderDeckPanel.add(scrCommander, "grow, push");
+        commanderDeckLists.add(commanderDeckList);
+        commanderDeckPanels.add(commanderDeckPanel);
+
         // Planar deck list
         FPanel planarDeckPanel = new FPanel();
         planarDeckPanel.setBorderToggle(false);
@@ -337,6 +354,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             } else {
             	populateDeckPanel(GameType.Constructed);
             }
+        }
+    	else if (GameType.Commander == forGameType) {
+            decksFrame.add(commanderDeckPanels.get(playerWithFocus), "grow, push");
         }
     	else if (GameType.Planechase == forGameType) {
             decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
@@ -465,6 +485,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         private FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<Object>();
 
         private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
+        private final FLabel deckLabel = newLabel("Deck:");
 
         private final String variantBtnConstraints = "height 30px, hidemode 3";
 
@@ -472,6 +493,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a scheme deck").build();
         private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text("Scheme Deck Editor").build();
         private final FLabel scmLabel = newLabel("Scheme deck:");
+
+        private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a Commander deck").build();
+        private final FLabel cmdDeckEditor = new FLabel.ButtonBuilder().text("Commander Deck Editor").build();
+        private final FLabel cmdLabel = newLabel("Commander deck:");
 
         private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
         private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
@@ -511,24 +536,28 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	populateTeamsComboBoxes();
             teamComboBox.addActionListener(teamListener);
             aeTeamComboBox.addActionListener(teamListener);
-            teamComboBox.addTo(this, "h 30px, pushx, growx, gaptop 5px, hidemode 3");
-            aeTeamComboBox.addTo(this, "h 30px, pushx, growx, gaptop 5px, hidemode 3");
+            teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
+            aeTeamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
 
-            this.add(newLabel("Deck:"), variantBtnConstraints + ", cell 0 2, sx 2, ax right");
+            this.add(deckLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
             this.add(deckBtn, variantBtnConstraints + ", cell 2 2, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
             addHandlersDeckSelector();
 
-            this.add(scmLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
-            this.add(scmDeckSelectorBtn, variantBtnConstraints + ", cell 2 3, growx, pushx");
-            this.add(scmDeckEditor, variantBtnConstraints + ", cell 3 3, sx 3, growx, wrap");
+            this.add(cmdLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+            this.add(cmdDeckSelectorBtn, variantBtnConstraints + ", cell 2 3, growx, pushx");
+            this.add(cmdDeckEditor, variantBtnConstraints + ", cell 3 3, sx 3, growx, wrap");
 
-            this.add(pchLabel, variantBtnConstraints + ", cell 0 4, sx 2, ax right");
-            this.add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 4, growx, pushx");
-            this.add(pchDeckEditor, variantBtnConstraints + ", cell 3 4, sx 3, growx, wrap");
+            this.add(scmLabel, variantBtnConstraints + ", cell 0 4, sx 2, ax right");
+            this.add(scmDeckSelectorBtn, variantBtnConstraints + ", cell 2 4, growx, pushx");
+            this.add(scmDeckEditor, variantBtnConstraints + ", cell 3 4, sx 3, growx, wrap");
 
-            this.add(vgdLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
-            this.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 5, sx 4, growx, wrap");
+            this.add(pchLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
+            this.add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 5, growx, pushx");
+            this.add(pchDeckEditor, variantBtnConstraints + ", cell 3 5, sx 3, growx, wrap");
+
+            this.add(vgdLabel, variantBtnConstraints + ", cell 0 6, sx 2, ax right");
+            this.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 6, sx 4, growx, wrap");
 
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
@@ -613,7 +642,14 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         };
 
         public void updateVariantControlsVisibility() {
-        	boolean archenemyVisiblity = appliedVariants.contains(GameType.ArchenemyRumble)
+        	// Commander deck replaces basic deck, so hide that
+            deckLabel.setVisible(!appliedVariants.contains(GameType.Commander));
+            deckBtn.setVisible(!appliedVariants.contains(GameType.Commander));
+            cmdDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Commander));
+            cmdDeckEditor.setVisible(appliedVariants.contains(GameType.Commander));
+            cmdLabel.setVisible(appliedVariants.contains(GameType.Commander));
+
+            boolean archenemyVisiblity = appliedVariants.contains(GameType.ArchenemyRumble)
         			|| (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy);
         	scmDeckSelectorBtn.setVisible(archenemyVisiblity);
             scmDeckEditor.setVisible(archenemyVisiblity);
@@ -736,7 +772,26 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                            new CEditorVariant(Singletons.getModel().getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));
+                    		new CEditorVariant(Singletons.getModel().getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));
+                }
+            });
+
+            // Commander buttons
+            cmdDeckSelectorBtn.setCommand(new Runnable() {
+            	@Override
+            	public void run() {
+            		currentGameMode = GameType.Commander;
+            		cmdDeckSelectorBtn.requestFocusInWindow();
+            		changePlayerFocus(index, currentGameMode);
+            	}
+            });
+
+            cmdDeckEditor.setCommand(new UiCommand() {
+            	@Override
+            	public void run() {
+            		currentGameMode = GameType.Commander;
+                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander());
                 }
             });
 
@@ -1203,7 +1258,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	return planarDeckLists;
     }
 
-    /** Gets the list of planar deck lists. */
+    /** Gets the list of commander deck lists. */
+    public List<FList<Object>> getCommanderDeckLists() {
+    	return commanderDeckLists;
+    }
+
+    /** Gets the list of scheme deck lists. */
     public List<FList<Object>> getSchemeDeckLists() {
     	return schemeDeckLists;
     }

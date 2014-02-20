@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.*;
@@ -2112,8 +2113,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return this.loseConditionMet(GameLossReason.Poisoned, null);
         }
 
-        if(game.getRules().getGameType() == GameType.Commander)
-        {
+        if (game.getRules().hasAppliedVariant(GameType.Commander)) {
             Map<Card,Integer> cmdDmg = getCommanderDamage();
             for(Card c : cmdDmg.keySet())
             {

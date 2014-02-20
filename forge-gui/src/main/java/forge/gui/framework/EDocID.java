@@ -16,7 +16,6 @@ import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.settings.VSubmenuReleaseNotes;
-import forge.gui.home.variant.VSubmenuCommander;
 import forge.gui.match.views.*;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
@@ -53,7 +52,6 @@ public enum EDocID { /** */
     HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
-    HOME_COMMANDER (VSubmenuCommander.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
     HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE), /** */

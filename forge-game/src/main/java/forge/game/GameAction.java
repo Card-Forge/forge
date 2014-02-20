@@ -21,6 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+
 import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
@@ -1481,7 +1482,7 @@ public class GameAction {
                 p1.drawCards(p1.getMaxHandSize());
             }
 
-            performMulligans(first, gameType == GameType.Commander);
+            performMulligans(first, game.getRules().hasAppliedVariant(GameType.Commander));
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
             game.setAge(GameStage.Play);

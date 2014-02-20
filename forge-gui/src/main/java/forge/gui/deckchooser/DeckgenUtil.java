@@ -1,11 +1,17 @@
 package forge.gui.deckchooser;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.Singletons;
 import forge.card.CardDb;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.deck.generation.*;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.DeckManager;
@@ -79,7 +85,6 @@ public class DeckgenUtil {
 
         return deck;
     }
-
 
     public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = Singletons.getModel().getQuest();
@@ -246,5 +251,45 @@ public class DeckgenUtil {
         }
 
         return res;
+    }
+
+    /** Generate a 2-color Commander deck. */
+    public static Deck generateCommanderDeck(boolean forAi) {
+        final Deck deck;
+        CardDb cardDb = Singletons.getMagicDb().getCommonCards();
+        PaperCard commander;
+        ColorSet colorID;
+
+        // Get random multicolor Legendary creature
+        Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
+        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.compose(Predicates.and
+                (CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES));
+        legends = Iterables.filter(legends, Predicates.compose(Predicates.and
+        		(CardRulesPredicates.Presets.IS_MULTICOLOR, canPlay), PaperCard.FN_GET_RULES));
+        
+        do {
+            commander = Aggregates.random(legends);
+            colorID = commander.getRules().getColorIdentity();
+        } while (colorID.countColors() != 2);
+
+        List<String> comColors = new ArrayList<String>(2);
+        if (colorID.hasWhite()) {	comColors.add("White"); }
+        if (colorID.hasBlue()) {	comColors.add("Blue"); }
+        if (colorID.hasBlack()) {	comColors.add("Black"); }
+        if (colorID.hasRed()) {		comColors.add("Red"); }
+        if (colorID.hasGreen()) {	comColors.add("Green"); }
+        
+        DeckGeneratorBase gen = null;
+        gen = new DeckGenerator2Color(cardDb, comColors.get(0), comColors.get(1));
+        gen.setSingleton(true);
+        gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+        CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
+
+        // After generating card lists, build deck.
+        deck = new Deck("Generated Commander deck (" + commander.getName() + ")");
+        deck.getMain().addAll(cards);
+        deck.getOrCreate(DeckSection.Commander).add(commander);
+
+        return deck;
     }
 }
