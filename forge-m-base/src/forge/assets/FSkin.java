@@ -342,6 +342,9 @@ public class FSkin {
                     if (c.getAlpha() != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
                 }
             }
+            else {
+                return new TextureRegion(texture, x0, y0, w0, h0);
+            }
         }
 
         //use default file if can't use preferred file
