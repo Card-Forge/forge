@@ -88,10 +88,8 @@ public class Forge extends Game {
         private int failedClipCount;
 
         public static void drawScreen(FScreen screen) {
-            Gdx.gl.glEnable(GL10.GL_SCISSOR_TEST);
             Graphics g = new Graphics();
             g.draw(screen);
-            Gdx.gl.glDisable(GL10.GL_SCISSOR_TEST);
         }
 
         private Graphics() {
