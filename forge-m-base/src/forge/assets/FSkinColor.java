@@ -37,14 +37,14 @@ public class FSkinColor {
         public int getY() {
             return y;
         }
-    
-        public Color getColor() {
-            return color;
-        }
-    
+
         public void setColor(Color color0) {
             color = color0;
         }
+    }
+
+    public static FSkinColor get(final Colors c0) {
+        return baseColors.get(c0);
     }
 
     private static final HashMap<Colors, FSkinColor> baseColors = new HashMap<Colors, FSkinColor>();

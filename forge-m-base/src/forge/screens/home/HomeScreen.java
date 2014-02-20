@@ -1,61 +1,38 @@
 package forge.screens.home;
 
+import java.util.ArrayList;
+
 import forge.FScreen;
 import forge.toolbox.FButton;
 
 public class HomeScreen extends FScreen {
-    private final FButton btnConstructed = new FButton("Constructed");
-    private final FButton btnDraft = new FButton("Draft");
-    private final FButton btnSealed = new FButton("Sealed");
-    private final FButton btnQuest = new FButton("Quest");
-    private final FButton btnGuantlet = new FButton("Guantlet");
-    private final FButton btnSettings = new FButton("Settings");
-
-    @Override
-    public void render(float delta) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void show() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void hide() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void pause() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void resume() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void dispose() {
-        // TODO Auto-generated method stub
-        
+    private final ArrayList<FButton> buttons = new ArrayList<FButton>();
+    
+    public HomeScreen() {
+        addButton("Constructed");
+        addButton("Draft");
+        addButton("Sealed");
+        addButton("Quest");
+        addButton("Guantlet");
+        addButton("Settings");
     }
 
     @Override
     protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
+        float x = width / 20;
+        float y = height / 2;
+        float dy = height / 100;
+        float buttonWidth = width - 2 * x;
+        float buttonHeight = (height - y) / buttons.size() - dy;
+        dy += buttonHeight;
+
+        for (FButton button : buttons) {
+            button.setBounds(x, y, buttonWidth, buttonHeight);
+            y += dy;
+        }
+    }
+
+    private void addButton(String caption) {
+        buttons.add(this.add(new FButton(caption)));
     }
 }

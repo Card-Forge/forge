@@ -411,6 +411,10 @@ public class FSkin {
         return allSkins;
     }
 
+    public static Map<FSkinImage, TextureRegion> getImages() {
+        return images;
+    }
+
     public static Map<Integer, TextureRegion> getAvatars() {
         return avatars;
     }
