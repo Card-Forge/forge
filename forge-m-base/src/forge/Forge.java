@@ -4,11 +4,15 @@ import java.util.Stack;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -20,6 +24,7 @@ public class Forge extends Game {
     private static Forge game;
     private static int screenHeight;
     private static SpriteBatch batch;
+    private static ShapeRenderer shapeRenderer;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public Forge() {
@@ -32,7 +37,8 @@ public class Forge extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        //Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
+        shapeRenderer = new ShapeRenderer();
+        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
 
         FSkin.loadLight("journeyman", true);
         FSkin.loadFull(true);
@@ -69,6 +75,7 @@ public class Forge extends Game {
     public void dispose () {
         super.dispose();
         batch.dispose();
+        shapeRenderer.dispose();
     }
 
     public static class Graphics {
@@ -82,6 +89,23 @@ public class Forge extends Game {
         public Graphics(Graphics g, float x, float y) {
             offsetX = g.offsetX + x;
             offsetY = g.offsetY + y;
+        }
+
+        public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
+            fillRect(skinColor.getColor(), x, y, w, h);
+        }
+        public void fillRect(Color color, float x, float y, float w, float h) {
+            batch.end(); //must pause batch while rendering shapes
+
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
+            shapeRenderer.begin(ShapeType.Filled);
+            shapeRenderer.setColor(color);
+            shapeRenderer.rect(x, y, w, h);
+            shapeRenderer.end();
+
+            batch.begin();
         }
 
         public void drawImage(FSkinImage image, float x, float y) {

@@ -130,7 +130,6 @@ public class FSkin {
         avatars.clear();
 
         final Map<String, Texture> textures = new HashMap<String, Texture>();
-        final Map<String, Pixmap> pixmaps = new HashMap<String, Pixmap>();
 
         //FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 5);
 
@@ -144,11 +143,9 @@ public class FSkin {
 
         try {
             textures.put(f1.path(), new Texture(f1));
-            Pixmap preferredIcons = new Pixmap(f1);
-            pixmaps.put(f1.path(), preferredIcons);
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             textures.put(f2.path(), new Texture(f2));
-            pixmaps.put(f2.path(), new Pixmap(f2));
+            Pixmap preferredIcons = new Pixmap(f2);
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             textures.put(f3.path(), new Texture(f3));
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -168,7 +165,7 @@ public class FSkin {
             //add images besides splash background
             for (FSkinImage image : FSkinImage.values()) {
                 if (image != FSkinImage.BG_SPLASH) {
-                    TextureRegion textureRegion = loadTextureRegion(image, textures, pixmaps);
+                    TextureRegion textureRegion = loadTextureRegion(image, textures, preferredIcons);
                     if (textureRegion != null) {
                         images.put(image, textureRegion);
                     }
@@ -214,9 +211,7 @@ public class FSkin {
                 }
             }
 
-            for (Pixmap pixmap : pixmaps.values()) {
-                pixmap.dispose();
-            }
+            preferredIcons.dispose();
             pxDefaultAvatars.dispose();
 
             //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -277,8 +272,9 @@ public class FSkin {
         addEncodingSymbol("T", GameplayImages.IMG_TAP);*/
     }
 
-    private static TextureRegion loadTextureRegion(FSkinImage image, Map<String, Texture> textures, Map<String, Pixmap> pixmaps) {
-        String filename = image.getSourceFile().getFilename();
+    private static TextureRegion loadTextureRegion(FSkinImage image, Map<String, Texture> textures, Pixmap preferredIcons) {
+        SourceFile sourceFile = image.getSourceFile();
+        String filename = sourceFile.getFilename();
         String preferredFile = preferredDir + filename;
         Texture texture = textures.get(preferredFile);
         if (texture == null) {
@@ -301,8 +297,7 @@ public class FSkin {
             int w0 = image.getWidth(fullWidth);
             int h0 = image.getHeight(fullHeight);
 
-            Pixmap pixmap = pixmaps.get(preferredFile);
-            if (pixmap == null) { //return region for preferred file if no pixmap
+            if (sourceFile != SourceFile.ICONS) { //just return region for preferred file if not icons file
                 return new TextureRegion(texture, x0, y0, w0, h0);
             }
             else {
@@ -317,24 +312,24 @@ public class FSkin {
                     // Center
                     x = (x0 + w0 / 2);
                     y = (y0 + h0 / 2);
-                    c = new Color(pixmap.getPixel(x, y));
+                    c = new Color(preferredIcons.getPixel(x, y));
                     if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     x += 2;
                     y += 2;
-                    c = new Color(pixmap.getPixel(x, y));
+                    c = new Color(preferredIcons.getPixel(x, y));
                     if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     x -= 4;
-                    c = new Color(pixmap.getPixel(x, y));
+                    c = new Color(preferredIcons.getPixel(x, y));
                     if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     y -= 4;
-                    c = new Color(pixmap.getPixel(x, y));
+                    c = new Color(preferredIcons.getPixel(x, y));
                     if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
         
                     x += 4;
-                    c = new Color(pixmap.getPixel(x, y));
+                    c = new Color(preferredIcons.getPixel(x, y));
                     if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
                 }
             }

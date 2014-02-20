@@ -58,7 +58,7 @@ public class FSkinColor {
     private final int brightnessDelta;
     private final int step;
     private final int contrastStep;
-    private final int alpha;
+    private final float alpha;
     protected Color color;
 
     public Color getColor() { return color; }
@@ -67,7 +67,7 @@ public class FSkinColor {
     private FSkinColor(Colors baseColor0) {
         this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
     }
-    private FSkinColor(Colors baseColor0, int brightnessDelta0, int step0, int contrastStep0, int alpha0) {
+    private FSkinColor(Colors baseColor0, int brightnessDelta0, int step0, int contrastStep0, float alpha0) {
         this.baseColor = baseColor0;
         this.brightnessDelta = brightnessDelta0;
         this.step = step0;
@@ -76,7 +76,7 @@ public class FSkinColor {
         this.updateColor();
     }
 
-    private FSkinColor getDerivedColor(int brightnessDelta0, int step0, int contrastStep0, int alpha0) {
+    private FSkinColor getDerivedColor(int brightnessDelta0, int step0, int contrastStep0, float alpha0) {
         String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
         FSkinColor derivedColor = derivedColors.get(key);
         if (derivedColor == null) {
@@ -112,7 +112,7 @@ public class FSkinColor {
         return getContrastColor(255);
     }
 
-    public FSkinColor alphaColor(int alpha0) {
+    public FSkinColor alphaColor(float alpha0) {
         return getDerivedColor(this.brightnessDelta, this.step, this.contrastStep, alpha0);
     }
 
@@ -150,9 +150,9 @@ public class FSkinColor {
      * @return {@link java.awt.Color}
      */
     public static Color stepColor(Color clr0, int step) {
-        float r = clr0.r;
-        float g = clr0.g;
-        float b = clr0.b;
+        float r = clr0.r * 255;
+        float g = clr0.g * 255;
+        float b = clr0.b * 255;
 
         // Darker
         if (step < 0) {
@@ -166,17 +166,14 @@ public class FSkinColor {
             b =  ((b + step < 255) ? b + step : 255);
         }
 
-        return new Color(r, g, b, 0);
+        return new Color(r / 255, g / 255, b / 255, 0);
     }
 
-    /** Returns RGB components of a color, with a new
-     * value for alpha. 0 = transparent, 255 = opaque.
-     *
-     * @param clr0 {@link java.awt.Color}
-     * @param alpha int
-     * @return {@link java.awt.Color}
+    /**
+     * Returns RGB components of a color, with a new
+     * value for alpha. 0f = transparent, 1f = opaque.
      */
-    public static Color alphaColor(Color clr0, int alpha) {
+    public static Color alphaColor(Color clr0, float alpha) {
         return new Color(clr0.r, clr0.g, clr0.b, alpha);
     }
 
@@ -184,11 +181,11 @@ public class FSkinColor {
      * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
      */
     public static boolean isColorBright(Color c) {
-        int v = (int)Math.sqrt(
+        double v = Math.sqrt(
                 c.r * c.r * 0.241 +
                 c.g * c.g * 0.691 +
                 c.b * c.b * 0.068);
-        return v >= 130;
+        return v > 0.5;
     }
 
     public static Color getHighContrastColor(Color c) {
