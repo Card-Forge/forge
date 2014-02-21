@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.5.13-SNAPSHOT</version>
+        <version>1.5.13</version>
     </parent>
 
     <artifactId>forge-gui</artifactId>
