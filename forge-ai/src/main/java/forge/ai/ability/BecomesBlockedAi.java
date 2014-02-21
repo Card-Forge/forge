@@ -26,28 +26,31 @@ public class BecomesBlockedAi extends SpellAbilityAi {
                 || !game.getPhaseHandler().getPlayerTurn().isOpponentOf(aiPlayer)) {
             return false;
         }
-
-        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
-        list = CardLists.getTargetableCards(list, sa);
-        list = CardLists.getNotKeyword(list, "Trample");
-
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
-            Card choice = null;
-
-            if (list.isEmpty()) {
-                return false;
-            }
-
-            choice = ComputerUtilCard.getBestCreatureAI(list);
-
-            if (choice == null) { // can't find anything left
-                return false;
-            }
-
-            list.remove(choice);
-            sa.getTargets().add(choice);
+        
+        if (tgt != null) {
+        	sa.resetTargets();
+	        List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+	        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
+	        list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
+	        list = CardLists.getTargetableCards(list, sa);
+	        list = CardLists.getNotKeyword(list, "Trample");
+	
+	        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+	            Card choice = null;
+	
+	            if (list.isEmpty()) {
+	                return false;
+	            }
+	
+	            choice = ComputerUtilCard.getBestCreatureAI(list);
+	
+	            if (choice == null) { // can't find anything left
+	                return false;
+	            }
+	
+	            list.remove(choice);
+	            sa.getTargets().add(choice);
+	        }
         }
         return true;
     }
