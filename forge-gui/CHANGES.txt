@@ -1,7 +1,7 @@
-Forge Beta: 02-##-2014 ver 1.5.13
+Forge Beta: 02-21-2014 ver 1.5.13
 
 
-13### cards in total.
+13596 cards in total.
 
 
 -------------
@@ -24,23 +24,23 @@ Forge now includes many of the new Born of the Gods cards. It may take a few day
 New Cards
 ---------
 
-Ertai's Familiar
-Shimmering Efreet
-Mycosynth Lattice
-Warping Wurm
-Vortex Elemental
-Contamination
-Fearsome Temper
 Celestial Dawn
-False Dawn
-Daxos of Meletis
-Psychic Intrusion
 Commandeer
-Perplexing Chimera
+Contamination
+Daxos of Meletis
+Ertai's Familiar
+False Dawn
+Fearsome Temper
 Jeweled Amulet
-Soul Burn
 Leonin Arbiter
+Mycosynth Lattice
 Ogre Geargrabber
+Perplexing Chimera
+Psychic Intrusion
+Shimmering Efreet
+Soul Burn
+Vortex Elemental
+Warping Wurm
 
 
 ------------
@@ -67,7 +67,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Asepetci
+DrDev
+Gos
+Hellfish
+Max
+Marc
+Sloth
+Sol
+squee1968
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
