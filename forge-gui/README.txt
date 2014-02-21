@@ -1049,6 +1049,10 @@ Forge will no longer crash when there are decks with unsupported cards. These ca
 Toggling off Deck Conformance in Preferences now properly allows adding more than 4 cards to deck in editor
 
 
+- Extended foil card support -
+Forge now generates foil cards in booster packs, which will be apparent in sealed deck, booster draft, and quest modes. Also, foil cards are now correctly displayed in the deck editor including the new pile view mode. The display of foil overlay can be disabled in user preferences in case you dislike the visual foil effect. Please note that this option is visual only and does not affect the internal foil generation as such. Foil support is a work in progress and will be extended over time.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
