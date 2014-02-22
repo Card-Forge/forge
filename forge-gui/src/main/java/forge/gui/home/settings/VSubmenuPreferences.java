@@ -49,6 +49,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
     private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Workshop Layout").build();
+    private final FLabel btnUserProfileUI = new FLabel.Builder().opaque(true).hoverable(true).text("Open User Directory").build();
+    private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text("Open Content Directory").build();
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
@@ -104,6 +106,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints2);
         pnlPrefs.add(btnDeleteEditorUI, twoButtonConstraints1);
         pnlPrefs.add(btnDeleteWorkshopUI, twoButtonConstraints2);
+        pnlPrefs.add(btnUserProfileUI, twoButtonConstraints1);
+        pnlPrefs.add(btnContentDirectoryUI, twoButtonConstraints2);
 
         // General Configuration
         pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
@@ -526,6 +530,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final FLabel getBtnDeleteWorkshopUI() {
         return btnDeleteWorkshopUI;
     }
+
+    public final FLabel getBtnContentDirectoryUI() { return btnContentDirectoryUI; }
+
+    public final FLabel getBtnUserProfileUI() { return btnUserProfileUI; }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.IVDoc#getDocumentID()

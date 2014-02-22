@@ -14,12 +14,15 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.NewConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
+import java.awt.Desktop;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +124,20 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        view.getBtnUserProfileUI().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.openUserProfileDirectory();
+            }
+        });
+
+        view.getBtnContentDirectoryUI().setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.openContentDirectory();
+            }
+        });
+
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeAiProfilesComboBox();
@@ -204,6 +221,28 @@ public enum CSubmenuPreferences implements ICDoc {
             if (FScreen.MATCH_SCREEN.deleteLayoutFile()) {
                 FOptionPane.showMessageDialog("Match Screen layout has been reset.");
             }
+        }
+    }
+
+    private void openUserProfileDirectory() {
+        try{
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File(NewConstants.USER_DIR));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Unable to open Directory: " + e.toString());
+        }
+    }
+
+    private void openContentDirectory() {
+        try{
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File(NewConstants.CACHE_DIR));
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Unable to open Directory: " + e.toString());
         }
     }
 
