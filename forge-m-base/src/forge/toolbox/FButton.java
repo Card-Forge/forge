@@ -81,6 +81,30 @@ public class FButton extends FDisplayObject {
     }
 
     @Override
+    public boolean touchDown(float x, float y) {
+        if (isToggled() || !isEnabled()) { return true; }
+        imgL = FSkinImage.BTN_DOWN_LEFT;
+        imgM = FSkinImage.BTN_DOWN_CENTER;
+        imgR = FSkinImage.BTN_DOWN_RIGHT;
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(float x, float y) {
+        if (isToggled() || !isEnabled()) { return true; }
+        resetImg();
+        return true;
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        if (count == 1) {
+            //TODO: Run command
+        }
+        return true;
+    }
+
+    @Override
     public void draw(Graphics g) {
         float w = getWidth();
         float h = getHeight();

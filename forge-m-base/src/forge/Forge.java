@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -14,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
@@ -47,7 +47,7 @@ public class Forge implements ApplicationListener {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
-        Gdx.input.setInputProcessor(new GestureDetector(new FGestureListener()));
+        Gdx.input.setInputProcessor(new FGestureDetector());
 
         FSkin.loadLight("journeyman", true);
         FSkin.loadFull(true);
@@ -108,53 +108,105 @@ public class Forge implements ApplicationListener {
         shapeRenderer.dispose();
     }
 
-    private class FGestureListener implements GestureListener {
-        @Override
-        public boolean touchDown(float x, float y, int pointer, int button) {
-            // TODO Auto-generated method stub
-            return true;
-        }
+    private static class FGestureDetector extends GestureDetector {
+        private static final ArrayList<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
 
         @Override
-        public boolean tap(float x, float y, int count, int button) {
-            // TODO Auto-generated method stub
-            return true;
+        public boolean touchUp(float x, float y, int pointer, int button) {
+            for (FDisplayObject listener : potentialListeners) {
+                if (listener.touchUp(x, y)) {
+                    break;
+                }
+            }
+            return super.touchUp(x, y, pointer, button);
         }
 
-        @Override
-        public boolean longPress(float x, float y) {
-            // TODO Auto-generated method stub
-            return true;
-        }
+        private FGestureDetector() {
+            super(new GestureListener() {
+                @Override
+                public boolean touchDown(float x, float y, int pointer, int button) {
+                    potentialListeners.clear();
+                    if (currentScreen != null) { //base potential listeners on object containing touch down point
+                        currentScreen.buildObjectsContainingPoint(x, y, potentialListeners);
+                    }
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.touchDown(x, y)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
 
-        @Override
-        public boolean fling(float velocityX, float velocityY, int button) {
-            // TODO Auto-generated method stub
-            return true;
-        }
+                @Override
+                public boolean tap(float x, float y, int count, int button) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.tap(x, y, count)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
 
-        @Override
-        public boolean pan(float x, float y, float deltaX, float deltaY) {
-            // TODO Auto-generated method stub
-            return true;
-        }
+                @Override
+                public boolean longPress(float x, float y) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.longPress(x, y)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
 
-        @Override
-        public boolean panStop(float x, float y, int pointer, int button) {
-            // TODO Auto-generated method stub
-            return true;
-        }
+                @Override
+                public boolean fling(float velocityX, float velocityY, int button) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.fling(velocityX, velocityY)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
 
-        @Override
-        public boolean zoom(float initialDistance, float distance) {
-            // TODO Auto-generated method stub
-            return true;
-        }
+                @Override
+                public boolean pan(float x, float y, float deltaX, float deltaY) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.pan(x, y, deltaX, deltaY)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
 
-        @Override
-        public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-            // TODO Auto-generated method stub
-            return true;
+                @Override
+                public boolean panStop(float x, float y, int pointer, int button) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.panStop(x, y)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean zoom(float initialDistance, float distance) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.zoom(initialDistance, distance)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+                    for (FDisplayObject listener : potentialListeners) {
+                        if (listener.pinch(initialPointer1, initialPointer2, pointer1, pointer2)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
         }
     }
 
