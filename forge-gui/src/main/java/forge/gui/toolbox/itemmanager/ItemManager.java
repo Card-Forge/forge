@@ -326,6 +326,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
 
         this.currentView.getButton().setSelected(false);
+        this.currentView.getPnlOptions().hideArrowButtons(); //ensure arrow buttons hidden for previous options panel
         this.remove(this.currentView.getPnlOptions());
         this.remove(this.currentView.getScroller());
 

@@ -5,6 +5,7 @@ import forge.gui.toolbox.FSkin.SkinnedScrollPane;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,11 +59,17 @@ public class FScrollPane extends SkinnedScrollPane {
     @Override
     public void setVisible(boolean visible0) {
         super.setVisible(visible0);
-        if (arrowButtons != null && !visible0) { //ensure arrow buttons hidden if scroll pane hidden
-            for (ArrowButton arrowButton : arrowButtons) {
-                if (arrowButton != null) {
-                    FAbsolutePositioner.SINGLETON_INSTANCE.hide(arrowButton);
-                }
+        if (!visible0) { //ensure arrow buttons hidden if scroll pane hidden
+            hideArrowButtons();
+        }
+    }
+
+    public void hideArrowButtons() {
+        if (arrowButtons == null) { return; }
+
+        for (ArrowButton arrowButton : arrowButtons) {
+            if (arrowButton != null) {
+                FAbsolutePositioner.SINGLETON_INSTANCE.hide(arrowButton);
             }
         }
     }
