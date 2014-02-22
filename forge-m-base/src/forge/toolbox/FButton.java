@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -119,7 +121,7 @@ public class FButton extends FDisplayObject {
         g.drawImage(imgM, h, 0, w - (2 * h), h);
         g.drawImage(imgR, w - h, 0, h, h);
         if (!caption.isEmpty()) {
-            g.drawText(caption, font, foreColor, insetX, 0, w - 2 * insetX, h, false, true, true);
+            g.drawText(caption, font, foreColor, insetX, 0, w - 2 * insetX, h, false, HAlignment.CENTER, true);
         }
     }
 }

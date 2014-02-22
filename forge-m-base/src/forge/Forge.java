@@ -247,19 +247,72 @@ public class Forge implements ApplicationListener {
             bounds = parentBounds;
         }
 
+        public void drawRect(FSkinColor skinColor, float x, float y, float w, float h) {
+            drawRect(skinColor.getColor(), x, y, w, h);
+        }
+        public void drawRect(Color color, float x, float y, float w, float h) {
+            batch.end(); //must pause batch while rendering shapes
+
+            shapeRenderer.begin(ShapeType.Line);
+            shapeRenderer.setColor(color);
+            shapeRenderer.rect(x, y, w, h);
+            shapeRenderer.end();
+
+            batch.begin();
+        }
+
         public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
             fillRect(skinColor.getColor(), x, y, w, h);
         }
         public void fillRect(Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+            boolean needBlending = (color.a != 0);
+            if (needBlending) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
+
             shapeRenderer.begin(ShapeType.Filled);
             shapeRenderer.setColor(color);
             shapeRenderer.rect(x, y, w, h);
             shapeRenderer.end();
+
+            if (needBlending) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+
+            batch.begin();
+        }
+
+        public void fillGradientRect(FSkinColor skinColor1, FSkinColor skinColor2, boolean vertical, float x, float y, float w, float h) {
+            fillGradientRect(skinColor1.getColor(), skinColor2.getColor(), vertical, x, y, w, h);
+        }
+        public void fillGradientRect(FSkinColor skinColor1, Color color2, boolean vertical, float x, float y, float w, float h) {
+            fillGradientRect(skinColor1.getColor(), color2, vertical, x, y, w, h);
+        }
+        public void fillGradientRect(Color color1, FSkinColor skinColor2, boolean vertical, float x, float y, float w, float h) {
+            fillGradientRect(color1, skinColor2.getColor(), vertical, x, y, w, h);
+        }
+        public void fillGradientRect(Color color1, Color color2, boolean vertical, float x, float y, float w, float h) {
+            batch.end(); //must pause batch while rendering shapes
+
+            boolean needBlending = (color1.a != 0 || color2.a != 0);
+            if (needBlending) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
+
+            Color topLeftColor = color1;
+            Color topRightColor = vertical ? color1 : color2;
+            Color bottomLeftColor = vertical ? color2 : color1;
+            Color bottomRightColor = color2;
+
+            shapeRenderer.begin(ShapeType.Filled);
+            shapeRenderer.rect(x, y, w, h, bottomLeftColor, bottomRightColor, topRightColor, topLeftColor);
+            shapeRenderer.end();
+
+            if (needBlending) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
 
             batch.begin();
         }
@@ -277,7 +330,7 @@ public class Forge implements ApplicationListener {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
 
-        public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, boolean centerHorizontally, boolean centerVertically) {
+        public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
             BitmapFont font = skinFont.getFont();
             font.setColor(skinColor.getColor());
             if (wrap) {
@@ -288,7 +341,7 @@ public class Forge implements ApplicationListener {
                 else if (h == 0) {
                     h = textHeight;
                 }
-                font.drawWrapped(batch, text, adjustX(x), adjustY(y, h), w, centerHorizontally ? HAlignment.CENTER : HAlignment.LEFT);
+                font.drawWrapped(batch, text, adjustX(x), adjustY(y, h), w, horzAlignment);
             }
             else {
                 float textHeight = font.getMultiLineBounds(text).height;
@@ -298,7 +351,7 @@ public class Forge implements ApplicationListener {
                 else if (h == 0) {
                     h = textHeight;
                 }
-                font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, centerHorizontally ? HAlignment.CENTER : HAlignment.LEFT);
+                font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
             }
         }
 

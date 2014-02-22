@@ -1,5 +1,8 @@
 package forge.assets;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+
 import forge.Forge.Graphics;
 
 /** Properties of various components that make up the skin.
@@ -278,6 +281,12 @@ public enum FSkinImage implements FImage {
 
     public SourceFile getSourceFile() {
         return sourceFile;
+    }
+
+    @Override
+    public Vector2 getSize() {
+        TextureRegion tr = FSkin.getImages().get(this);
+        return new Vector2(tr.getRegionWidth(), tr.getRegionHeight());
     }
 
 	@Override
