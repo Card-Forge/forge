@@ -300,7 +300,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public T getItemAtIndex(int index) {
-        return this.tableModel.rowToItem(index).getKey();
+        Entry<T, Integer> itemEntry = this.tableModel.rowToItem(index);
+        return itemEntry != null ? itemEntry.getKey() : null;
     }
 
     @Override

@@ -152,14 +152,16 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public final T getSelectedItem() {
-        int index = getSelectedIndex();
-        return index >= 0 ? getItemAtIndex(index) : null;
+        return getItemAtIndex(getSelectedIndex());
     }
 
     public final Collection<T> getSelectedItems() {
         List<T> items = new ArrayList<T>();
         for (Integer i : getSelectedIndices()) {
-            items.add(getItemAtIndex(i));
+            T item = getItemAtIndex(i);
+            if (item != null) {
+                items.add(item);
+            }
         }
         return items;
     }
@@ -329,7 +331,12 @@ public abstract class ItemView<T extends InventoryItem> {
             String searchStr = str.toString();
             boolean found = false;
             for (int idx = startIdx;; idx = (idx + increment) % numItems) {
-                if (StringUtils.containsIgnoreCase(ItemView.this.getItemAtIndex(idx).getName(), searchStr)) {
+                T item = ItemView.this.getItemAtIndex(idx);
+                if (item == null) {
+                    break;
+                }
+
+                if (StringUtils.containsIgnoreCase(item.getName(), searchStr)) {
                     ItemView.this.setSelectedIndex(idx);
                     found = true;
                     break;
