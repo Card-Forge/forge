@@ -283,7 +283,7 @@ public class DeckgenUtil {
         gen = new DeckGenerator2Color(cardDb, comColors.get(0), comColors.get(1));
         gen.setSingleton(true);
         gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
+        CardPool cards = gen == null ? null : gen.getDeck(99, forAi);
 
         // After generating card lists, build deck.
         deck = new Deck("Generated Commander deck (" + commander.getName() + ")");
