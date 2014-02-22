@@ -18,7 +18,9 @@ public abstract class FContainer extends FDisplayObject {
     public final void draw(Graphics g) {
         drawBackground(g);
         for (FDisplayObject child : children) {
-            g.draw(child);
+        	if (child.isVisible()) {
+        		g.draw(child);
+        	}
         }
         drawOverlay(g);
     }
@@ -46,12 +48,13 @@ public abstract class FContainer extends FDisplayObject {
 
     protected abstract void doLayout(float width, float height);
 
-    public final void buildObjectsContainingPoint(float x, float y, ArrayList<FDisplayObject> objs) {
-        if (contains(x, y)) {
+    @Override
+    public final void buildTouchListeners(float x, float y, ArrayList<FDisplayObject> listeners) {
+        if (isEnabled() && contains(x, y)) {
             for (FDisplayObject child : children) {
-                child.buildObjectsContainingPoint(x, y, objs);
+                child.buildTouchListeners(x, y, listeners);
             }
-            objs.add(this);
+            listeners.add(this);
         }
     }
 }

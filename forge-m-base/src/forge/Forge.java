@@ -22,7 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
+import forge.assets.FImage;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDisplayObject;
 
@@ -127,7 +127,7 @@ public class Forge implements ApplicationListener {
                 public boolean touchDown(float x, float y, int pointer, int button) {
                     potentialListeners.clear();
                     if (currentScreen != null) { //base potential listeners on object containing touch down point
-                        currentScreen.buildObjectsContainingPoint(x, y, potentialListeners);
+                        currentScreen.buildTouchListeners(x, y, potentialListeners);
                     }
                     for (FDisplayObject listener : potentialListeners) {
                         if (listener.touchDown(x, y)) {
@@ -264,14 +264,14 @@ public class Forge implements ApplicationListener {
             batch.begin();
         }
 
-        public void drawImage(FSkinImage image, float x, float y) {
-            drawImage(FSkin.getImages().get(image), x, y);
+        public void drawImage(FImage image, float x, float y) {
+        	image.draw(this, x, y);
         }
         public void drawImage(TextureRegion image, float x, float y) {
             batch.draw(image, adjustX(x), adjustY(y, image.getRegionHeight()));
         }
-        public void drawImage(FSkinImage image, float x, float y, float w, float h) {
-            drawImage(FSkin.getImages().get(image), x, y, w, h);
+        public void drawImage(FImage image, float x, float y, float w, float h) {
+        	image.draw(this, x, y, w, h);
         }
         public void drawImage(TextureRegion image, float x, float y, float w, float h) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);

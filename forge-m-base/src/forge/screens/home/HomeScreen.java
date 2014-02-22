@@ -3,8 +3,15 @@ package forge.screens.home;
 import java.util.ArrayList;
 
 import forge.FScreen;
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.screens.constructed.ConstructedScreen;
+import forge.screens.draft.DraftScreen;
+import forge.screens.guantlet.GuantletScreen;
+import forge.screens.quest.QuestScreen;
+import forge.screens.sealed.SealedScreen;
+import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 
 public class HomeScreen extends FScreen {
@@ -14,12 +21,42 @@ public class HomeScreen extends FScreen {
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
     
     public HomeScreen() {
-        addButton("Constructed");
-        addButton("Draft");
-        addButton("Sealed");
-        addButton("Quest");
-        addButton("Guantlet");
-        addButton("Settings");
+        addButton("Constructed", new Runnable() {
+			@Override
+			public void run() {
+				Forge.openScreen(new ConstructedScreen());
+			}
+        });
+        addButton("Draft", new Runnable() {
+			@Override
+			public void run() {
+				Forge.openScreen(new DraftScreen());
+			}
+        });
+        addButton("Sealed", new Runnable() {
+			@Override
+			public void run() {
+				Forge.openScreen(new SealedScreen());
+			}
+        });
+        addButton("Quest", new Runnable() {
+			@Override
+			public void run() {
+				Forge.openScreen(new QuestScreen());
+			}
+        });
+        addButton("Guantlet", new Runnable() {
+			@Override
+			public void run() {
+				Forge.openScreen(new GuantletScreen());
+			}
+        });
+        addButton("Settings", new Runnable() {
+			@Override
+			public void run() {
+				Forge.openScreen(new SettingsScreen());
+			}
+        });
     }
 
     @Override
@@ -47,7 +84,7 @@ public class HomeScreen extends FScreen {
         }
     }
 
-    private void addButton(String caption) {
-        buttons.add(this.add(new FButton(caption)));
+    private void addButton(String caption, Runnable command) {
+        buttons.add(this.add(new FButton(caption, command)));
     }
 }

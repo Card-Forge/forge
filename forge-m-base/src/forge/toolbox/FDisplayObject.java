@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Forge.Graphics;
 
 public abstract class FDisplayObject {
+	private boolean visible = true;
+	private boolean enabled = true;
     private final Rectangle bounds = new Rectangle();
 
     public void setPosition(float x, float y) {
@@ -38,14 +40,28 @@ public abstract class FDisplayObject {
         return bounds.height;
     }
     public boolean contains(float x, float y) {
-        return bounds.contains(x, y);
+        return visible && bounds.contains(x, y);
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public void setEnabled(boolean b0) {
+        enabled = b0;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+    public void setVisible(boolean b0) {
+    	visible = b0;
     }
 
     public abstract void draw(Graphics g);
 
-    public void buildObjectsContainingPoint(float x, float y, ArrayList<FDisplayObject> objs) {
-        if (contains(x, y)) {
-            objs.add(this);
+    public void buildTouchListeners(float x, float y, ArrayList<FDisplayObject> listeners) {
+        if (enabled && contains(x, y)) {
+            listeners.add(this);
         }
     }
 

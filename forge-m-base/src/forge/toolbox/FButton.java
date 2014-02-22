@@ -13,18 +13,23 @@ public class FButton extends FDisplayObject {
     private FSkinImage imgL, imgM, imgR;
     private String caption;
     private FSkinFont font;
-    private boolean enabled = true;
     private boolean toggled = false;
+    private Runnable command;
 
     /**
      * Instantiates a new FButton.
      */
     public FButton() {
-        this("");
+        this("", null);
     }
 
     public FButton(final String caption0) {
+        this(caption0, null);
+    }
+
+    public FButton(final String caption0, Runnable command0) {
         caption = caption0;
+        command = command0;
         font = FSkinFont.get(14);
         resetImg();
     }
@@ -35,15 +40,12 @@ public class FButton extends FDisplayObject {
         imgR = FSkinImage.BTN_UP_RIGHT;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
+    @Override
     public void setEnabled(boolean b0) {
-        if (enabled == b0) { return; }
-        enabled = b0;
+        if (isEnabled() == b0) { return; }
+        super.setEnabled(b0);
 
-        if (enabled) {
+        if (b0) {
             resetImg();
         }
         else {
@@ -80,6 +82,10 @@ public class FButton extends FDisplayObject {
         }
     }
 
+    public void setCommand(Runnable command0) {
+    	command = command0;
+    }
+
     @Override
     public boolean touchDown(float x, float y) {
         if (isToggled() || !isEnabled()) { return true; }
@@ -98,8 +104,8 @@ public class FButton extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        if (count == 1) {
-            //TODO: Run command
+        if (count == 1 && command != null) {
+        	command.run();
         }
         return true;
     }

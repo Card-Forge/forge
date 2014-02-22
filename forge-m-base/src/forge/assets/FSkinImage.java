@@ -1,9 +1,11 @@
 package forge.assets;
 
+import forge.Forge.Graphics;
+
 /** Properties of various components that make up the skin.
  * This interface allows all enums to be under the same roof.
  * It also enforces a getter for coordinate locations in sprites. */
-public enum FSkinImage {
+public enum FSkinImage implements FImage {
     //Backgrounds
     BG_SPLASH (0, 0, 0, -100, SourceFile.SPLASH), //treat 0 and negative as offset from full width/height
     BG_TEXTURE (0, 0, 0, 0, SourceFile.TEXTURE),
@@ -277,4 +279,13 @@ public enum FSkinImage {
     public SourceFile getSourceFile() {
         return sourceFile;
     }
+
+	@Override
+	public void draw(Graphics g, float x, float y) {
+		g.drawImage(FSkin.getImages().get(this), x, y);
+	}
+	@Override
+	public void draw(Graphics g, float x, float y, float w, float h) {
+		g.drawImage(FSkin.getImages().get(this), x, y, w, h);
+	}
 }
