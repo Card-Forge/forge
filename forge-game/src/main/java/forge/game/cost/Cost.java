@@ -545,7 +545,7 @@ public class Cost {
         boolean first = true;
 
         if (bFlag) {
-            cost.append("As an additional cost to cast selected card, ");
+            cost.append("As an additional cost to cast CARDNAME, ");
         } else {
             // usually no additional mana cost for spells
             // only three Alliances cards have additional mana costs, but they
