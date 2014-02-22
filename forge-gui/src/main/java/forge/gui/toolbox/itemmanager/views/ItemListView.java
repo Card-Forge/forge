@@ -93,7 +93,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
                 if (e.isConsumed()) { return; } //don't activate if inline button double clicked
+
+                int clickedIndex = table.rowAtPoint(e.getPoint());
+
                 itemManager.activateSelectedItems();
+
+                if (clickedIndex >= table.getRowCount()) {
+                    FMouseAdapter.forceMouseUp(); //prevent mouse getting stuck if final row removed from double click handling 
+                }
             }
 
             @Override
