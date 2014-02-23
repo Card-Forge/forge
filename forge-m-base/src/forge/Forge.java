@@ -258,15 +258,25 @@ public class Forge implements ApplicationListener {
         public void drawRect(Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
-            //adjust y/height so rectangle covers equivalent filled area
-            h--;
-            y++;
+            //adjust width/height/y so rectangle covers equivalent filled area
+            w = Math.round(w - 1);
+            h = Math.round(h - 1);
+            y = Math.round(y + 1);
 
             shapeRenderer.begin(ShapeType.Line);
             shapeRenderer.setColor(color);
-            shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
-            shapeRenderer.end();
 
+            //must user 4 line() calls rather than rect() since rect() leaves corner unfilled
+            x = adjustX(x);
+            float y2 = adjustY(y, h);
+            float x2 = x + w;
+            y = y2 + h;
+            shapeRenderer.line(x, y, x, y2);
+            shapeRenderer.line(x, y2, x2, y2);
+            shapeRenderer.line(x2, y2, x2, y);
+            shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
+
+            shapeRenderer.end();
             batch.begin();
         }
 
