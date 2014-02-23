@@ -39,9 +39,8 @@ import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,7 +51,7 @@ import java.util.Iterator;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public class CardDetailPanel extends FPanel {
+public class CardDetailPanel extends SkinnedPanel {
     /** Constant <code>serialVersionUID=-8461473263764812323L</code>. */
     private static final long serialVersionUID = -8461473263764812323L;
 
@@ -68,82 +67,62 @@ public class CardDetailPanel extends FPanel {
 
     public CardDetailPanel(final Card card) {
         super();
-        this.setLayout(new GridBagLayout());
-        this.setBorder(new EtchedBorder());
-        this.setBorderToggle(false);
+        this.setLayout(null);
+        this.setOpaque(false);
 
-        GridBagConstraints labelConstrains = new GridBagConstraints();
-        labelConstrains.fill = GridBagConstraints.BOTH;
-        labelConstrains.gridx = 0;
-        labelConstrains.gridy = 0;
-        labelConstrains.weightx = 1.0;
-
-        final SkinnedPanel cdLabels = new SkinnedPanel(new GridLayout(0, 1, 0, 5));
-        cdLabels.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        cdLabels.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.nameCostLabel = new FLabel.Builder().build();
-        this.typeLabel = new FLabel.Builder().build();
-        this.powerToughnessLabel = new FLabel.Builder().build();
-        cdLabels.add(this.nameCostLabel);
-        cdLabels.add(this.typeLabel);
-        cdLabels.add(this.powerToughnessLabel);
-
-        final SkinnedPanel idr = new SkinnedPanel(new GridBagLayout());
-        idr.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        idr.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        final GridBagConstraints c1 = new GridBagConstraints();
-        final GridBagConstraints c2 = new GridBagConstraints();
-
-        c1.fill = GridBagConstraints.HORIZONTAL;
-
-        c1.gridwidth = 2;
-        c1.weightx = 1.0;
-        this.idLabel = new FLabel.Builder().build();
-        idr.add(this.idLabel, c1);
-
-        c2.gridwidth = 1;
-        c2.weightx = 0.3;
-        c2.fill = GridBagConstraints.HORIZONTAL;
+        this.nameCostLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).build();
+        this.typeLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).build();
+        this.idLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).tooltip("Card ID").build();
+        this.powerToughnessLabel = new FLabel.Builder().fontAlign(SwingConstants.CENTER).build();
         this.setInfoLabel = new JLabel();
-        idr.add(this.setInfoLabel, c2);
-
-        cdLabels.add(idr);
-
-        this.add(cdLabels, labelConstrains);
-        this.nameCostLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        this.typeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        this.powerToughnessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        // cdLabel7.setSize(100, cdLabel7.getHeight());
-
         this.setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        //4, 12
+        Font font = new Font("Dialog", 0, 14);
+        this.nameCostLabel.setFont(font);
+        this.typeLabel.setFont(font);
+        this.idLabel.setFont(font);
+        this.powerToughnessLabel.setFont(font);
+
         this.cdArea = new FHtmlViewer();
-        this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
-        this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
+        this.cdArea.setBorder(new EmptyBorder(2, 6, 2, 6));
         this.cdArea.setOpaque(false);
-        this.scrArea = new FScrollPane(this.cdArea, true);
+        this.scrArea = new FScrollPane(this.cdArea, false);
 
-        GridBagConstraints areaConstraints = new GridBagConstraints();
-        areaConstraints.fill = GridBagConstraints.BOTH;
-        areaConstraints.gridx = 0;
-        areaConstraints.gridy = 1;
-        areaConstraints.weightx = 1.0;
-        areaConstraints.weighty = 1.0;
-        this.add(scrArea, areaConstraints);
-
-        this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        this.powerToughnessLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        this.idLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-
-        java.awt.Font f = new java.awt.Font("Dialog", 0, 14);
-        f = f.deriveFont(java.awt.Font.BOLD);
-        this.setInfoLabel.setFont(f);
+        this.add(this.nameCostLabel);
+        this.add(this.typeLabel);
+        this.add(this.idLabel);
+        this.add(this.powerToughnessLabel);
+        this.add(this.setInfoLabel);
+        this.add(this.scrArea);
 
         this.setCard(card);
     }
-    
+
+    @Override
+    public void doLayout() {
+    	int insets = 3;
+    	int gap = 3;
+    	int setInfoWidth = 40;
+    	int x = insets;
+    	int y = insets;
+    	int lineWidth = getWidth() - 2 * insets;
+    	int lineHeight = this.nameCostLabel.getPreferredSize().height;
+    	int dy = lineHeight + gap;
+
+    	this.nameCostLabel.setBounds(x, y, lineWidth, lineHeight);
+    	y += dy;
+
+    	this.typeLabel.setBounds(x, y, lineWidth, lineHeight);
+    	y += dy;
+
+    	this.idLabel.setBounds(x, y, this.idLabel.getAutoSizeWidth(), lineHeight);
+    	this.powerToughnessLabel.setBounds(x, y, lineWidth, lineHeight);
+    	this.setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y, setInfoWidth, lineHeight);
+    	y += lineHeight;
+
+    	this.scrArea.setBounds(0, y, getWidth(), getHeight() - y);
+    }
+
     public String getItemDescription(InventoryItemFromSet i) {
         if( i instanceof SealedProduct )
             return ((SealedProduct)i).getDescription();
@@ -156,9 +135,9 @@ public class CardDetailPanel extends FPanel {
         nameCostLabel.setText(item.getName());
         typeLabel.setVisible(false);
         powerToughnessLabel.setVisible(false);
-        idLabel.setText(null);
+        idLabel.setText("");
         cdArea.setText(getItemDescription(item));
-        setBorder(getBorder(item instanceof IPaperCard ? ((IPaperCard)item).getRules().getColor() : null, false));
+        this.updateBorder(item instanceof IPaperCard ? ((IPaperCard)item).getRules().getColor() : null, false);
 
         String set = item.getEdition();
         setInfoLabel.setText(set);
@@ -200,12 +179,12 @@ public class CardDetailPanel extends FPanel {
         this.setInfoLabel.setBorder(null);
         this.cdArea.setText("");
         if( card == null ) {
-            this.setBorder(getBorder(null, false));
+            this.updateBorder(null, false);
             return;
         }
 
-        this.setBorder(getBorder(CardUtil.getColors(card), card.isFaceDown()));
-            
+        this.updateBorder(CardUtil.getColors(card), card.isFaceDown());
+
         final boolean canShowThis = Singletons.getControl().mayShowCard(card);
         if (canShowThis) {
             if (card.getManaCost().isNoCost()) {
@@ -290,7 +269,7 @@ public class CardDetailPanel extends FPanel {
 
         this.powerToughnessLabel.setText(ptText.toString());
 
-        this.idLabel.setText(card.getUniqueNumber() > 0 ? "Card ID  " + card.getUniqueNumber() : null);
+        this.idLabel.setText(card.getUniqueNumber() > 0 ? "[" + card.getUniqueNumber() + "]" : "");
 
         // fill the card text
         this.cdArea.setText(composeCardText(card, canShowThis));
@@ -589,18 +568,18 @@ public class CardDetailPanel extends FPanel {
         return FSkin.encodeSymbols(area.toString(), true);
     }
 
-    /** @return JLabel */
-    public JLabel getNameCostLabel() {
+    /** @return FLabel */
+    public FLabel getNameCostLabel() {
         return this.nameCostLabel;
     }
 
-    /** @return JLabel */
-    public JLabel getTypeLabel() {
+    /** @return FLabel */
+    public FLabel getTypeLabel() {
         return this.typeLabel;
     }
 
-    /** @return JLabel */
-    public JLabel getPowerToughnessLabel() {
+    /** @return FLabel */
+    public FLabel getPowerToughnessLabel() {
         return this.powerToughnessLabel;
     }
 
@@ -609,7 +588,7 @@ public class CardDetailPanel extends FPanel {
         return this.setInfoLabel;
     }
 
-    /** @return JLabel */
+    /** @return FHtmlViewer */
     public FHtmlViewer getCDArea() {
         return this.cdArea;
     }
@@ -656,15 +635,16 @@ public class CardDetailPanel extends FPanel {
     
         return sb.toString();
     }
-    
 
-    public static Border getBorder(ColorSet list, boolean faceDown) {
+    private void updateBorder(ColorSet list, boolean faceDown) {
         // color info
         if (list == null) {
-            return BorderFactory.createEmptyBorder(2, 2, 2, 2);
+            this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+            scrArea.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
+            return;
         }
-        java.awt.Color color;
 
+        Color color;
         if (faceDown) {
             color = Color.gray;
         } else if (list.isMulticolor()) {
@@ -682,12 +662,10 @@ public class CardDetailPanel extends FPanel {
         } else if (list.isColorless()) {
             color = Color.gray;
         } else {
-            color = new Color(200, 0, 230); // If your card has a violet border,
-                                            // something is wrong
+            color = new Color(200, 0, 230); // If your card has a violet border, something is wrong
         }
 
         if (color != Color.gray) {
-
             int r = color.getRed();
             int g = color.getGreen();
             int b = color.getBlue();
@@ -703,11 +681,8 @@ public class CardDetailPanel extends FPanel {
             b = Math.max(0, b);
 
             color = new Color(r, g, b);
-
-            return BorderFactory.createLineBorder(color, 2);
-        } else {
-            return BorderFactory.createLineBorder(Color.gray, 2);
         }
+        this.setBorder(BorderFactory.createLineBorder(color, 2));
+        scrArea.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, color));
     }
-
 }
