@@ -15996,6 +15996,7 @@ forge-m-base/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-m-base/src/forge/screens/draft/DraftScreen.java -text
 forge-m-base/src/forge/screens/guantlet/GuantletScreen.java -text
 forge-m-base/src/forge/screens/home/HomeScreen.java -text
+forge-m-base/src/forge/screens/match/MatchScreen.java -text
 forge-m-base/src/forge/screens/quest/QuestScreen.java -text
 forge-m-base/src/forge/screens/sealed/SealedScreen.java -text
 forge-m-base/src/forge/screens/settings/SettingsScreen.java -text

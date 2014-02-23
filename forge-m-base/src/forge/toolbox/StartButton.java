@@ -1,10 +1,14 @@
 package forge.toolbox;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.game.Match;
+import forge.screens.match.MatchScreen;
 
 public abstract class StartButton extends FDisplayObject {
 	private boolean pressed;
+	private boolean creatingMatch;
 
     /**
      * Instantiates a new FButton.
@@ -12,7 +16,7 @@ public abstract class StartButton extends FDisplayObject {
     public StartButton() {
     }
 
-    public abstract void start();
+    public abstract Match createMatch();
 
     @Override
     public final boolean touchDown(float x, float y) {
@@ -28,8 +32,12 @@ public abstract class StartButton extends FDisplayObject {
 
     @Override
     public final boolean tap(float x, float y, int count) {
-        if (count == 1) {
-        	start();
+        if (count == 1 && !creatingMatch) {
+        	creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
+        	Match match = createMatch();
+        	if (match != null) {
+        		Forge.openScreen(new MatchScreen(match));
+        	}
         }
         return true;
     }

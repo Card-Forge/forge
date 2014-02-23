@@ -1,6 +1,7 @@
 package forge.screens.constructed;
 
 import forge.FScreen;
+import forge.game.Match;
 import forge.toolbox.StartButton;
 
 public class ConstructedScreen extends FScreen {
@@ -10,8 +11,8 @@ public class ConstructedScreen extends FScreen {
     	super(true, "Constructed", true);
     	btnStart = add(new StartButton() {
 			@Override
-			public void start() {
-				//TODO: Start match
+			public Match createMatch() {
+				return null; //TODO: Start match
 			}
     	});
     }
