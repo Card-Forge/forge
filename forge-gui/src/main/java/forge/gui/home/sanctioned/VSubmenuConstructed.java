@@ -561,6 +561,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
+
+            this.addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftMouseDown(MouseEvent e) {
+                    avatarLabel.requestFocusInWindow();
+                }
+            });
         }
 
         private final FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
