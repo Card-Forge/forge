@@ -16002,6 +16002,7 @@ forge-m-base/src/forge/toolbox/FButton.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
+forge-m-base/src/forge/toolbox/StartButton.java -text
 forge-m-base/src/forge/utils/Utils.java -text
 forge-m-desktop/.classpath -text
 forge-m-desktop/.project -text

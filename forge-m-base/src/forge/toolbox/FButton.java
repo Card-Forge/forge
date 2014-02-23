@@ -90,7 +90,7 @@ public class FButton extends FDisplayObject {
 
     @Override
     public final boolean touchDown(float x, float y) {
-        if (isToggled() || !isEnabled()) { return true; }
+        if (isToggled()) { return true; }
         imgL = FSkinImage.BTN_DOWN_LEFT;
         imgM = FSkinImage.BTN_DOWN_CENTER;
         imgR = FSkinImage.BTN_DOWN_RIGHT;
@@ -99,7 +99,7 @@ public class FButton extends FDisplayObject {
 
     @Override
     public final boolean touchUp(float x, float y) {
-        if (isToggled() || !isEnabled()) { return true; }
+        if (isToggled()) { return true; }
         resetImg();
         return true;
     }

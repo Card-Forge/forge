@@ -85,14 +85,14 @@ public abstract class FScreen extends FContainer {
     	if (lblHeader != null) {
     		lblHeader.setBounds(headerX, 0, headerWidth, headerHeight);
 
-        	doLayout(0, headerHeight, width, height - headerHeight);
+        	doLayout(headerHeight, width, height);
     	}
     	else {
-        	doLayout(0, 0, width, height);
+        	doLayout(0, width, height);
     	}
     }
 
-    protected abstract void doLayout(float x, float y, float width, float height);
+    protected abstract void doLayout(float startY, float width, float height);
 
     @Override
     protected void drawBackground(Graphics g) {

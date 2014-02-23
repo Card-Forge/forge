@@ -72,9 +72,9 @@ public class HomeScreen extends FScreen {
     }
 
     @Override
-    protected void doLayout(float x, float y, float width, float height) {
-        x = width * INSETS_FACTOR;
-        y = width * LOGO_SIZE_FACTOR + 2 * x; //start below background logo
+    protected void doLayout(float startY, float width, float height) {
+        float x = width * INSETS_FACTOR;
+        float y = width * LOGO_SIZE_FACTOR + 2 * x; //start below background logo
         float dy = height * GAP_Y_FACTOR;
         float buttonWidth = width - 2 * x;
         float buttonHeight = (height - y - x) / buttons.size() - dy;

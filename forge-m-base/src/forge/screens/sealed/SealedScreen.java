@@ -9,6 +9,6 @@ public class SealedScreen extends FScreen {
     }
 
     @Override
-    protected void doLayout(float x, float y, float width, float height) {
+    protected void doLayout(float startY, float width, float height) {
     }
 }
