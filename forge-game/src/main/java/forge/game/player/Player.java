@@ -556,6 +556,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!this.canPayLife(lifePayment)) {
             return false;
         }
+        
+        if (lifePayment <= 0) 
+        	return true;
+        
         // rule 118.8
         if (this.life >= lifePayment) {
             return (this.loseLife(lifePayment) > 0);
