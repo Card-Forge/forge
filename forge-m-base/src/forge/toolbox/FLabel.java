@@ -186,9 +186,8 @@ public class FLabel extends FDisplayObject {
         }
 
         if (icon != null) {
-            Vector2 iconSize = icon.getSize();
-            float iconWidth = iconSize.x;
-            float iconHeight = iconSize.y;
+            float iconWidth = icon.getSourceWidth();
+            float iconHeight = icon.getSourceHeight();
             float aspectRatio = iconWidth / iconHeight;
 
             if (iconInBackground || iconScaleAuto) {

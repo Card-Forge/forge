@@ -1,7 +1,5 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.math.Vector2;
-
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
 
@@ -37,10 +35,11 @@ public abstract class StartButton extends FDisplayObject {
     }
 
     public float updateLayout(float parentWidth, float parentHeight) {
-    	Vector2 size = FSkinImage.BTN_START_UP.getSize();
-    	float padding = size.y * 0.1f;
-    	setBounds((parentWidth - size.x) / 2, parentHeight - size.y - padding, size.x, size.y);
-    	return parentHeight - size.y - 2 * padding; //indicate to caller how much space is taken up by StartButton
+    	float width = FSkinImage.BTN_START_UP.getSourceWidth();
+    	float height = FSkinImage.BTN_START_UP.getSourceHeight();
+    	float padding = height * 0.1f;
+    	setBounds((parentWidth - width) / 2, parentHeight - height - padding, width, height);
+    	return parentHeight - height - 2 * padding; //indicate to caller how much space is taken up by StartButton
     }
 
     @Override
