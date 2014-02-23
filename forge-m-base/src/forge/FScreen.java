@@ -28,7 +28,7 @@ public abstract class FScreen extends FContainer {
     		btnBack = null; 
     	}
     	if (headerCaption != null) {
-    		lblHeader = add(new FLabel.Builder().text(headerCaption).align(HAlignment.CENTER).build());
+    		lblHeader = add(new FLabel.Builder().text(headerCaption).fontSize(16).align(HAlignment.CENTER).build());
     	}
     	else {
     		lblHeader = null;
