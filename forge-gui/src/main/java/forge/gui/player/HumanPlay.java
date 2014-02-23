@@ -1,6 +1,7 @@
 package forge.gui.player;
 
 import com.google.common.base.Predicate;
+
 import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -15,6 +16,7 @@ import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.*;
+import forge.game.mana.ManaCostAdjustment;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -24,6 +26,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.*;
 import forge.util.Lang;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -124,7 +127,7 @@ public class HumanPlay {
         }
         else {
             manaCost = new ManaCostBeingPaid(sa.getPayCosts().getTotalMana());
-            manaCost.applySpellCostChange(sa, false);
+            ManaCostAdjustment.adjust(manaCost, sa, false);
         }
 
         boolean isPaid = manaCost.isPaid();
@@ -627,8 +630,9 @@ public class HumanPlay {
             prompt = source + "\n" + promptCurrent;
         }
         
-        sourceAbility.clearManaPaid();
-        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt);
+        if( sourceAbility != null )
+            sourceAbility.clearManaPaid();
+        boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, false);
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
         }
@@ -679,7 +683,7 @@ public class HumanPlay {
         return done;
     }
     
-    public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt) {
+    public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, boolean isActivatedSa) {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
@@ -699,8 +703,8 @@ public class HumanPlay {
                 toPay.addManaCost(mkCost);
         }
 
-        
-        toPay.applySpellCostChange(ability, false);
+        if( isActivatedSa )
+           ManaCostAdjustment.adjust(toPay, ability, false);
         
         InputPayMana inpPayment;
         if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {

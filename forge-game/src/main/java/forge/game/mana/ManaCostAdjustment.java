@@ -1,41 +1,182 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package forge.game.staticability;
+package forge.game.mana;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import com.google.common.collect.Lists;
 
 import forge.card.mana.ManaCostShard;
+import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
-import forge.game.mana.ManaCostBeingPaid;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
-import java.util.Map;
+public class ManaCostAdjustment {
 
-/**
- * The Class StaticAbility_CantBeCast.
- */
-public class StaticAbilityCostChange {
+    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
+        final Game game = sa.getActivatingPlayer().getGame();
+        // Beached
+        final Card originalCard = sa.getHostCard();
+        if (sa.isXCost() && !originalCard.isCopiedSpell()) {
+            originalCard.setXManaCostPaid(0);
+        }
+    
+        if (sa.isTrigger()) {
+            return;
+        }
+    
+        if (sa.isSpell()) {
+            if (sa.isDelve()) {
+                final Player pc = originalCard.getController();
+                final List<Card> mutableGrave = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
+                final List<Card> toExile = pc.getController().chooseCardsToDelve(cost.getColorlessManaAmount(), mutableGrave);
+                for (final Card c : toExile) {
+                    cost.decreaseColorlessMana(1);
+                    if (!test) {
+                        pc.getGame().getAction().exile(c);
+                    }
+                }
+            }
+            else if (sa.getHostCard().hasKeyword("Convoke")) {
+                adjustCostByConvoke(cost, sa);
+            }
+        } // isSpell
+    
+        List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
+        if (!cardsOnBattlefield.contains(originalCard)) {
+            cardsOnBattlefield.add(originalCard);
+        }
+        final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
+        final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
+        final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
+    
+        // Sort abilities to apply them in proper order
+        for (Card c : cardsOnBattlefield) {
+            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
+                    raiseAbilities.add(stAb);
+                }
+                else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
+                    reduceAbilities.add(stAb);
+                }
+                else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
+                    setAbilities.add(stAb);
+                }
+            }
+        }
+        // Raise cost
+        for (final StaticAbility stAb : raiseAbilities) {
+            applyAbility(stAb, "RaiseCost", sa, cost);
+        }
+    
+        // Reduce cost
+        for (final StaticAbility stAb : reduceAbilities) {
+            applyAbility(stAb, "ReduceCost", sa, cost);
+        }
+        if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
+            adjustCostByOffering(cost, sa);
+        }
+    
+        // Set cost (only used by Trinisphere) is applied last
+        for (final StaticAbility stAb : setAbilities) {
+            applyAbility(stAb, "SetCost", sa, cost);
+        }
+    } // GetSpellCostChange
 
+
+    /**
+     * Apply ability.
+     * 
+     * @param mode
+     *            the mode
+     * @param sa
+     *            the SpellAbility
+     * @param originalCost
+     *            the originalCost
+     * @return the modified ManaCost
+     */
+    private static final void applyAbility(StaticAbility stAb, final String mode, final SpellAbility sa, final ManaCostBeingPaid originalCost) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!stAb.getMapParams().get("Mode").equals(mode)) {
+            return;
+        }
+
+        if (stAb.isSuppressed() || !stAb.checkConditions()) {
+            return;
+        }
+
+        if (mode.equals("RaiseCost")) {
+            applyRaiseCostAbility(stAb, sa, originalCost);
+        }
+        if (mode.equals("ReduceCost")) {
+            applyReduceCostAbility(stAb, sa, originalCost);
+        }
+        if (mode.equals("SetCost")) { //Set cost is only used by Trinisphere
+            applyRaiseCostAbility(stAb, sa, originalCost);
+        }
+    }    
+    
+    private static void adjustCostByConvoke(ManaCostBeingPaid cost, final SpellAbility sa) {
+    
+        List<Card> untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
+    
+        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvoke(sa, cost.toManaCost(), untappedCreats);
+        
+        // Convoked creats are tapped here with triggers suppressed,
+        // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
+        // This is to make sure that triggers go off at the right time
+        // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
+        for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
+            sa.addTappedForConvoke(conv.getKey());
+            cost.decreaseShard(conv.getValue(), 1);
+            conv.getKey().setTapped(true);
+        }
+    }
+
+    private static void adjustCostByOffering(final ManaCostBeingPaid cost, final SpellAbility sa) {
+        String offeringType = "";
+        for (String kw : sa.getHostCard().getKeyword()) {
+            if (kw.endsWith(" offering")) {
+                offeringType = kw.split(" ")[0];
+                break;
+            }
+        }
+    
+        Card toSac = null;
+        List<Card> canOffer = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+                CardPredicates.isType(offeringType));
+    
+        final List<Card> toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer,
+                offeringType);
+    
+        if (!toSacList.isEmpty()) {
+            toSac = toSacList.get(0);
+        }
+        else {
+            return;
+        }
+    
+        cost.subtractManaCost(toSac.getManaCost());
+    
+        sa.setSacrificedAsOffering(toSac);
+        toSac.setUsedToPay(true); //stop it from interfering with mana input
+    }
+    
     /**
      * Applies applyRaiseCostAbility ability.
      * 
@@ -46,7 +187,7 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static void applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
+    private  static void applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
         final Map<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
@@ -193,7 +334,7 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
+    private static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
         //Can't reduce zero cost
         if (manaCost.toString().equals("{0}")) {
             return;
@@ -292,5 +433,6 @@ public class StaticAbilityCostChange {
                 manaCost.decreaseShard(ManaCostShard.GREEN, value);
             }
         }
-    }
+    }    
+    
 }

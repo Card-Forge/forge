@@ -222,10 +222,10 @@ public abstract class PlayerController {
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
-    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt) {
-        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt);
+    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility) {
+        return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, isActivatedAbility);
     }
-    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt);
+    public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility);
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats);
 

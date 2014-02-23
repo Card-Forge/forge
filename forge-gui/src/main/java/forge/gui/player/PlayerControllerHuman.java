@@ -957,8 +957,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        final Card source = sa.getHostCard();
-        return HumanPlay.payCostDuringAbilityResolve(player, source, cost, sa, null);
+        return HumanPlay.payCostDuringAbilityResolve(player, sa.getHostCard(), cost, sa, null);
     }
 
     @Override
@@ -1062,8 +1061,8 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */ ) {
-        return HumanPlay.payManaCost(toPay, costPartMana, sa, player, prompt);
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedSa) {
+        return HumanPlay.payManaCost(toPay, costPartMana, sa, player, prompt, isActivatedSa);
     }
 
     @Override

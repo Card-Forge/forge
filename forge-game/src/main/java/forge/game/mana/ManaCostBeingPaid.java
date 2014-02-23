@@ -19,20 +19,12 @@ package forge.game.mana;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbility;
-import forge.game.zone.ZoneType;
 import forge.util.maps.EnumMapToAmount;
 import forge.util.maps.MapToAmount;
 
@@ -486,128 +478,6 @@ public class ManaCostBeingPaid {
      */
     public final void removeColorlessMana() {
         unpaidShards.remove(ManaCostShard.COLORLESS);
-    }
-
-    public final void applySpellCostChange(final SpellAbility sa, boolean test) {
-        final Game game = sa.getActivatingPlayer().getGame();
-        // Beached
-        final Card originalCard = sa.getHostCard();
-        final SpellAbility spell = sa;
-
-        if (sa.isXCost() && !originalCard.isCopiedSpell()) {
-            originalCard.setXManaCostPaid(0);
-        }
-
-        if (sa.isTrigger()) {
-            return;
-        }
-
-        if (spell.isSpell()) {
-            if (spell.isDelve()) {
-                final Player pc = originalCard.getController();
-                final List<Card> mutableGrave = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
-                final List<Card> toExile = pc.getController().chooseCardsToDelve(this.getColorlessManaAmount(), mutableGrave);
-                for (final Card c : toExile) {
-                    decreaseColorlessMana(1);
-                    if (!test) {
-                        pc.getGame().getAction().exile(c);
-                    }
-                }
-            }
-            else if (spell.getHostCard().hasKeyword("Convoke")) {
-                adjustCostByConvoke(sa);
-            }
-        } // isSpell
-
-        List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
-        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
-        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
-        if (!cardsOnBattlefield.contains(originalCard)) {
-            cardsOnBattlefield.add(originalCard);
-        }
-        final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
-        final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
-        final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
-
-        // Sort abilities to apply them in proper order
-        for (Card c : cardsOnBattlefield) {
-            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
-                    raiseAbilities.add(stAb);
-                }
-                else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
-                    reduceAbilities.add(stAb);
-                }
-                else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
-                    setAbilities.add(stAb);
-                }
-            }
-        }
-        // Raise cost
-        for (final StaticAbility stAb : raiseAbilities) {
-            stAb.applyAbility("RaiseCost", spell, this);
-        }
-
-        // Reduce cost
-        for (final StaticAbility stAb : reduceAbilities) {
-            stAb.applyAbility("ReduceCost", spell, this);
-        }
-        if (spell.isSpell() && spell.isOffering()) { // cost reduction from offerings
-            adjustCostByOffering(sa, spell);
-        }
-
-        // Set cost (only used by Trinisphere) is applied last
-        for (final StaticAbility stAb : setAbilities) {
-            stAb.applyAbility("SetCost", spell, this);
-        }
-    } // GetSpellCostChange
-
-    private void adjustCostByConvoke(final SpellAbility sa) {
-
-        List<Card> untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
-
-        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvoke(sa, this.toManaCost(), untappedCreats);
-        
-        // Convoked creats are tapped here with triggers suppressed,
-        // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
-        // This is to make sure that triggers go off at the right time
-        // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
-        for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
-            sa.addTappedForConvoke(conv.getKey());
-            this.decreaseShard(conv.getValue(), 1);
-            conv.getKey().setTapped(true);
-        }
-    }
-
-    private void adjustCostByOffering(final SpellAbility sa, final SpellAbility spell) {
-        String offeringType = "";
-        for (String kw : sa.getHostCard().getKeyword()) {
-            if (kw.endsWith(" offering")) {
-                offeringType = kw.split(" ")[0];
-                break;
-            }
-        }
-
-        Card toSac = null;
-        List<Card> canOffer = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                CardPredicates.isType(offeringType));
-
-        final List<Card> toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(spell, 0, 1, canOffer,
-                offeringType);
-
-        if (!toSacList.isEmpty()) {
-            toSac = toSacList.get(0);
-        }
-        else {
-            return;
-        }
-
-        subtractManaCost(toSac.getManaCost());
-
-        sa.setSacrificedAsOffering(toSac);
-        toSac.setUsedToPay(true); //stop it from interfering with mana input
     }
 
     public String getSourceRestriction() {

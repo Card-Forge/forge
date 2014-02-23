@@ -23,7 +23,6 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -324,38 +323,6 @@ public class StaticAbility extends CardTraitBase {
         return false;
     }
 
-    /**
-     * Apply ability.
-     * 
-     * @param mode
-     *            the mode
-     * @param sa
-     *            the SpellAbility
-     * @param originalCost
-     *            the originalCost
-     * @return the modified ManaCost
-     */
-    public final void applyAbility(final String mode, final SpellAbility sa, final ManaCostBeingPaid originalCost) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
-            return;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return;
-        }
-
-        if (mode.equals("RaiseCost")) {
-            StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
-        }
-        if (mode.equals("ReduceCost")) {
-            StaticAbilityCostChange.applyReduceCostAbility(this, sa, originalCost);
-        }
-        if (mode.equals("SetCost")) { //Set cost is only used by Trinisphere
-            StaticAbilityCostChange.applyRaiseCostAbility(this, sa, originalCost);
-        }
-    }
 
     /**
      * Apply ability.
