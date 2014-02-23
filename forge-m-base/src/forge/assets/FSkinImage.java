@@ -146,6 +146,7 @@ public enum FSkinImage implements FImage {
     SAVE            (660, 560, 20, 20, SourceFile.ICONS),
     SAVEAS          (660, 580, 20, 20, SourceFile.ICONS),
     CLOSE           (640, 640, 20, 20, SourceFile.ICONS),
+    BACK            (360, 760, 40, 40, SourceFile.ICONS),
     LIST            (640, 660, 20, 20, SourceFile.ICONS),
     CARD_IMAGE      (660, 660, 20, 20, SourceFile.ICONS),
     UNKNOWN         (0, 720, 80, 80, SourceFile.ICONS),

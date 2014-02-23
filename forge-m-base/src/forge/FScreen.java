@@ -17,7 +17,7 @@ public abstract class FScreen extends FContainer {
 
     protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
     	if (showBackButton) {
-    		btnBack = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new Runnable() {
+    		btnBack = add(new FLabel.ButtonBuilder().icon(FSkinImage.BACK).command(new Runnable() {
 				@Override
 				public void run() {
 					Forge.back();

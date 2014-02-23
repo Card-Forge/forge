@@ -25,6 +25,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.view.FView;
+
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.imageio.ImageIO;
@@ -36,6 +37,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.JTextComponent;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -1028,8 +1030,9 @@ public enum FSkin {
         ICO_SAVE            (new int[] {660, 560, 20, 20}),
         ICO_SAVEAS          (new int[] {660, 580, 20, 20}),
         ICO_CLOSE           (new int[] {640, 640, 20, 20}),
+        ICO_BACK            (new int[] {360, 760, 40, 40}),
         ICO_LIST            (new int[] {640, 660, 20, 20}),
-        ICO_CARD_IMAGE           (new int[] {660, 660, 20, 20}),
+        ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}),
         ICO_UNKNOWN         (new int[] {0, 720, 80, 80}),
         ICO_LOGO            (new int[] {480, 0, 200, 200}),
         ICO_FLIPCARD        (new int[] {400, 0, 80, 120}),
