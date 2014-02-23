@@ -117,8 +117,8 @@ public class CardDetailPanel extends SkinnedPanel {
 
     	this.idLabel.setBounds(x, y, this.idLabel.getAutoSizeWidth(), lineHeight);
     	this.powerToughnessLabel.setBounds(x, y, lineWidth, lineHeight);
-    	this.setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y, setInfoWidth, lineHeight);
-    	y += lineHeight;
+    	this.setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, lineHeight);
+    	y += lineHeight + 1;
 
     	this.scrArea.setBounds(0, y, getWidth(), getHeight() - y);
     }
