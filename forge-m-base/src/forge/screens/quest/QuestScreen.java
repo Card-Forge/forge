@@ -5,9 +5,10 @@ import forge.FScreen;
 public class QuestScreen extends FScreen {
 
     public QuestScreen() {
+    	super(true, "Quest", true);
     }
 
     @Override
-    protected void doLayout(float width, float height) {
+    protected void doLayout(float x, float y, float width, float height) {
     }
 }

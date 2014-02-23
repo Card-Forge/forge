@@ -54,6 +54,11 @@ public class Forge implements ApplicationListener {
         openScreen(new HomeScreen());
     }
 
+    public static void showMenu() {
+    	if (currentScreen == null) { return; }
+    	currentScreen.showMenu();
+    }
+
     public static void back() {
         if (screens.size() < 2) { return; } //don't allow going back from initial screen
         screens.pop();
@@ -253,9 +258,13 @@ public class Forge implements ApplicationListener {
         public void drawRect(Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
+            //adjust y/height so rectangle covers equivalent filled area
+            h--;
+            y++;
+
             shapeRenderer.begin(ShapeType.Line);
             shapeRenderer.setColor(color);
-            shapeRenderer.rect(x, y, w, h);
+            shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
             shapeRenderer.end();
 
             batch.begin();
@@ -274,7 +283,7 @@ public class Forge implements ApplicationListener {
 
             shapeRenderer.begin(ShapeType.Filled);
             shapeRenderer.setColor(color);
-            shapeRenderer.rect(x, y, w, h);
+            shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
             shapeRenderer.end();
 
             if (needBlending) {
@@ -307,7 +316,7 @@ public class Forge implements ApplicationListener {
             Color bottomRightColor = color2;
 
             shapeRenderer.begin(ShapeType.Filled);
-            shapeRenderer.rect(x, y, w, h, bottomLeftColor, bottomRightColor, topRightColor, topLeftColor);
+            shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h, bottomLeftColor, bottomRightColor, topRightColor, topLeftColor);
             shapeRenderer.end();
 
             if (needBlending) {
