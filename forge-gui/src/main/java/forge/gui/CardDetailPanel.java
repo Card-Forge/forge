@@ -101,13 +101,12 @@ public class CardDetailPanel extends SkinnedPanel {
     @Override
     public void doLayout() {
     	int insets = 3;
-    	int gap = 3;
     	int setInfoWidth = 40;
     	int x = insets;
     	int y = insets;
     	int lineWidth = getWidth() - 2 * insets;
     	int lineHeight = this.nameCostLabel.getPreferredSize().height;
-    	int dy = lineHeight + gap;
+    	int dy = lineHeight + 1;
 
     	this.nameCostLabel.setBounds(x, y, lineWidth, lineHeight);
     	y += dy;
@@ -117,8 +116,10 @@ public class CardDetailPanel extends SkinnedPanel {
 
     	this.idLabel.setBounds(x, y, this.idLabel.getAutoSizeWidth(), lineHeight);
     	this.powerToughnessLabel.setBounds(x, y, lineWidth, lineHeight);
+
+    	//+1 to x,y so set info label right up against border and the baseline matches ID and P/T
     	this.setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, lineHeight);
-    	y += lineHeight + 1;
+    	y += dy;
 
     	this.scrArea.setBounds(0, y, getWidth(), getHeight() - y);
     }
