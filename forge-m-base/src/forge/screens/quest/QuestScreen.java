@@ -1,24 +1,22 @@
 package forge.screens.quest;
 
-import forge.FScreen;
+import forge.screens.LaunchScreen;
 import forge.game.Match;
-import forge.toolbox.StartButton;
 
-public class QuestScreen extends FScreen {
-	private final StartButton btnStart;
-
+public class QuestScreen extends LaunchScreen {
     public QuestScreen() {
-    	super(true, "Quest", true);
-    	btnStart = add(new StartButton() {
-			@Override
-			public Match createMatch() {
-				return null; //TODO: Start match
-			}
-    	});
+    	super("Quest");
     }
 
-    @Override
-    protected void doLayout(float startY, float width, float height) {
-    	height = btnStart.updateLayout(width, height); //update height to exclude area taken up by StartButton
-    }
+	@Override
+	public Match createMatch() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void doLayoutAboveBtnStart(float startY, float width, float height) {
+		// TODO Auto-generated method stub
+		
+	}
 }

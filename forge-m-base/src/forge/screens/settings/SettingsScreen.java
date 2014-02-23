@@ -1,6 +1,6 @@
 package forge.screens.settings;
 
-import forge.FScreen;
+import forge.screens.FScreen;
 
 public class SettingsScreen extends FScreen {
 

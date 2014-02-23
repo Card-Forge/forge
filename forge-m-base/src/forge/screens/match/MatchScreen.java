@@ -1,6 +1,6 @@
 package forge.screens.match;
 
-import forge.FScreen;
+import forge.screens.FScreen;
 import forge.game.Match;
 
 public class MatchScreen extends FScreen {

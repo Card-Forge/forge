@@ -23,6 +23,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
+import forge.screens.FScreen;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDisplayObject;
 

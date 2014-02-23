@@ -2,7 +2,7 @@ package forge.screens.home;
 
 import java.util.ArrayList;
 
-import forge.FScreen;
+import forge.screens.FScreen;
 import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
