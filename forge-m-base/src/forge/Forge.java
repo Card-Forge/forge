@@ -326,12 +326,6 @@ public class Forge implements ApplicationListener {
             batch.begin();
         }
 
-        public void drawImage(FImage image, float x, float y) {
-        	image.draw(this, x, y);
-        }
-        public void drawImage(TextureRegion image, float x, float y) {
-            batch.draw(image, adjustX(x), adjustY(y, image.getRegionHeight()));
-        }
         public void drawImage(FImage image, float x, float y, float w, float h) {
         	image.draw(this, x, y, w, h);
         }

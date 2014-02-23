@@ -290,10 +290,6 @@ public enum FSkinImage implements FImage {
     }
 
 	@Override
-	public void draw(Graphics g, float x, float y) {
-		g.drawImage(FSkin.getImages().get(this), x, y);
-	}
-	@Override
 	public void draw(Graphics g, float x, float y, float w, float h) {
 		g.drawImage(FSkin.getImages().get(this), x, y, w, h);
 	}
