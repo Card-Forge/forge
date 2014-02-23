@@ -1,7 +1,7 @@
 package forge.screens.quest;
 
+import forge.game.GameType;
 import forge.screens.LaunchScreen;
-import forge.game.Match;
 
 public class QuestScreen extends LaunchScreen {
     public QuestScreen() {
@@ -9,14 +9,14 @@ public class QuestScreen extends LaunchScreen {
     }
 
 	@Override
-	public Match createMatch() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected void doLayoutAboveBtnStart(float startY, float width, float height) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected boolean buildLaunchParams(LaunchParams launchParams) {
+		launchParams.gameType = GameType.Quest;
+		return false; //TODO: Support launching match
 	}
 }
