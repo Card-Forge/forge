@@ -6,7 +6,7 @@ import forge.toolbox.FProgressBar;
 public abstract class SplashScreen extends FScreen {
     private static SplashScreen splashScreen;
 
-    public static FProgressBar getProgressBar(String desc) {
+    public static FProgressBar getProgressBar() {
         return splashScreen.progressBar;
     }
 

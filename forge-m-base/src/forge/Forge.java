@@ -23,12 +23,12 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
-import forge.gui.toolbox.FProgressBar;
-import forge.gui.workshop.CardScriptInfo;
-import forge.properties.NewConstants;
 import forge.screens.FScreen;
+import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FProgressBar;
+import forge.utils.Constants;
 
 public class Forge implements ApplicationListener {
     private static Forge game;
@@ -55,25 +55,26 @@ public class Forge implements ApplicationListener {
         Gdx.input.setInputProcessor(new FGestureDetector());
 
         CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
-            FProgressBar bar = view.getSplash().getProgressBar();
+            final FProgressBar bar = SplashScreen.getProgressBar();
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
-                FThreads.invokeInEdtLater(new Runnable() { @Override public void run() {
+                Gdx.app.postRunnable(new Runnable() { @Override public void run() {
                     bar.setDescription(name);
                     bar.setPercentMode(usePercents);
-                } });
+                }});
             }
 
             @Override
             public void report(int current, int total) {
-                if ( total != bar.getMaximum())
+                if (total != bar.getMaximum()) {
                     bar.setMaximum(total);
+                }
                 bar.setValueThreadSafe(current);
             }
         };
 
         // Loads all cards (using progress bar).
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, progressBarBridge, CardScriptInfo.readerObserver);
+        final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
         magicDb = new StaticData(reader, "res/editions", "res/blockdata");
 
         FSkin.loadLight("journeyman", true);

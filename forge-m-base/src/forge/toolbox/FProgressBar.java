@@ -17,7 +17,7 @@ public class FProgressBar extends FDisplayObject {
     /** */
     public FProgressBar() {
         super();
-        this.reset();
+        reset();
     }
 
     /**
@@ -26,7 +26,7 @@ public class FProgressBar extends FDisplayObject {
      * @param s0 &emsp; A description to prepend before statistics.
      */
     public void setDescription(final String s0) {
-        this.desc = s0;
+        desc = s0;
     }
 
     private final Runnable barIncrementor = new Runnable() {
@@ -66,34 +66,42 @@ public class FProgressBar extends FDisplayObject {
     /** Resets the various values required for this class. Must be called from EDT. */
     public void reset() {
         //FThreads.assertExecutedByEdt(true);
-        this.startMillis = new Date().getTime();
-        this.setShowETA(true);
-        this.setShowCount(true);
+        startMillis = new Date().getTime();
+        setShowETA(true);
+        setShowCount(true);
     }
 
     /** @param b0 &emsp; Boolean, show the ETA statistic or not */
     public void setShowETA(boolean b0) {
-        this.showETA = b0;
+        showETA = b0;
     }
 
     /** @param b0 &emsp; Boolean, show the ETA statistic or not */
     public void setShowCount(boolean b0) {
-        this.showCount = b0;
+        showCount = b0;
     }
 
     /** */
     private void calculateETA(int v0) {
         float tempMillis = new Date().getTime();
         float timePerUnit = (tempMillis - startMillis) / v0;
-        etaSecs = (int) ((this.maximum - v0) * timePerUnit) / 1000;
+        etaSecs = (int) ((maximum - v0) * timePerUnit) / 1000;
     }
 
     public boolean isPercentMode() {
         return percentMode;
     }
 
-    public void setPercentMode(boolean value) {
-        this.percentMode = value;
+    public void setPercentMode(boolean percentMode0) {
+        percentMode = percentMode0;
+    }
+    
+    public int getMaximum() {
+        return maximum;
+    }
+    
+    public void setMaximum(int maximum0) {
+        maximum = maximum0;
     }
 
     @Override
