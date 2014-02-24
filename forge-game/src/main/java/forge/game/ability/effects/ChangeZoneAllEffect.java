@@ -93,7 +93,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         if (destination.equals(ZoneType.Library) && random) {
             CardLists.shuffle(cards);
         }
-
+        // movedCards should have same timestamp
+        long ts = game.getNextTimestamp();
         for (final Card c : cards) {
             if (destination == ZoneType.Battlefield) {
                 // Auras without Candidates stay in their current location
@@ -132,6 +133,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
             if (imprint != null) {
                 game.getCardState(source).addImprinted(movedCard);
+            }
+            if (destination == ZoneType.Battlefield) {
+                movedCard.setTimestamp(ts);
             }
         }
 

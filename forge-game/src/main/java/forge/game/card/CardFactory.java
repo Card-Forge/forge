@@ -637,6 +637,10 @@ public class CardFactory {
             trig.setActivatingPlayer(p);
         }
 
+        if (t.getMapParams().containsKey("RememberController")) {
+            sa.getHostCard().addRemembered(sa.getActivatingPlayer());
+        }
+
         trig.setStackDescription(trig.toString());
         if (trig.getApi() == ApiType.Charm && !trig.isWrapper()) {
             CharmEffect.makeChoices(trig);

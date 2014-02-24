@@ -2996,24 +2996,6 @@ public class CardFactoryUtil {
             card.addLeavesPlayCommand(sunburstLP);
         }
 
-        // Enforce the "World rule"
-        if (card.isType("World")) {
-            final GameCommand intoPlay = new GameCommand() {
-                private static final long serialVersionUID = 6536398032388958127L;
-
-                @Override
-                public void run() {
-                    final Game game = card.getGame();
-                    final List<Card> cardsInPlay = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
-                    cardsInPlay.remove(card);
-                    for (int i = 0; i < cardsInPlay.size(); i++) {
-                        game.getAction().sacrificeDestroy(cardsInPlay.get(i));
-                    }
-                } // execute()
-            }; // Command
-            card.addComesIntoPlayCommand(intoPlay);
-        }
-
         if (hasKeyword(card, "Morph") != -1) {
             final int n = hasKeyword(card, "Morph");
             if (n != -1) {

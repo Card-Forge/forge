@@ -398,6 +398,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         boolean optional = sa.hasParam("Optional");
 
+        long ts = game.getNextTimestamp();
 
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
@@ -509,6 +510,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         tgtC.setTapped(true);
                     }
+                    movedCard.setTimestamp(ts);
                 } else {
                     movedCard = game.getAction().moveTo(destination, tgtC);
                     // If a card is Exiled from the stack, remove its spells from the stack
@@ -757,6 +759,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         
         List<Card> movedCards = new ArrayList<Card>();
+        long ts = game.getNextTimestamp();
         for(Card c : chosenCards) {
             Card movedCard = null;
             if (destination.equals(ZoneType.Library)) {
@@ -862,6 +865,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
+                movedCard.setTimestamp(ts);
             } else if (destination.equals(ZoneType.Exile)) {
                 movedCard = game.getAction().exile(c);
                 if (sa.hasParam("ExileFaceDown")) {

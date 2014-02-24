@@ -272,6 +272,7 @@ public class GameAction {
             }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
+            // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
@@ -874,6 +875,8 @@ public class GameAction {
                     checkAgain = true;
                 }
             }
+            // 704.5m World rule
+            checkAgain |= this.handleWorldRule();
 
             if (!checkAgain) {
                 break; // do not continue the loop
@@ -1220,6 +1223,37 @@ public class GameAction {
         return recheck;
     } // destroyLegendaryCreatures()
 
+    private boolean handleWorldRule() {
+        final List<Card> worlds = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
+        if (worlds.size() <= 1) {
+            return false;
+        }
+
+        List<Card> toKeep = new ArrayList<Card>();
+        long ts = 0;
+
+        for (final Card crd : worlds) {
+            long crdTs = crd.getTimestamp();
+            if (crdTs > ts) {
+                ts = crdTs;
+                toKeep.clear();
+            }
+            if (crdTs == ts) {
+                toKeep.add(crd);
+            }
+        }
+
+        if (toKeep.size() == 1) {
+            worlds.removeAll(toKeep);
+        }
+
+        for (Card c : worlds) {
+            sacrificeDestroy(c);
+            game.fireEvent(new GameEventCardDestroyed());
+        }
+
+        return true;
+    }
 
     public final boolean sacrifice(final Card c, final SpellAbility source) {
         if (!c.canBeSacrificedBy(source)) {
