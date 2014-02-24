@@ -15313,6 +15313,11 @@ forge-gui/res/quest/world/shandalar/duels/Witch[!!-~]3.dck -text
 forge-gui/res/quest/world/worlds.txt -text
 forge-gui/res/sealed/ArabianExtended.sealed -text
 forge-gui/res/sealed/juzamjedi.sealed -text
+forge-gui/res/skins/arabian_nights/bg_match.jpg -text
+forge-gui/res/skins/arabian_nights/bg_splash.png -text
+forge-gui/res/skins/arabian_nights/bg_texture.jpg -text
+forge-gui/res/skins/arabian_nights/font1.ttf -text
+forge-gui/res/skins/arabian_nights/sprite_icons.png -text
 forge-gui/res/skins/dark_ascension/bg_match.jpg -text
 forge-gui/res/skins/dark_ascension/bg_splash.png -text
 forge-gui/res/skins/dark_ascension/bg_texture.jpg -text
