@@ -34,6 +34,7 @@ public class Forge implements ApplicationListener {
     private static SpriteBatch batch;
     private static ShapeRenderer shapeRenderer;
     private static FScreen currentScreen;
+    private static StaticData magicDb;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public Forge() {
@@ -76,6 +77,10 @@ public class Forge implements ApplicationListener {
     private static void setCurrentScreen(FScreen screen0) {
         currentScreen = screen0;
         currentScreen.setSize(screenWidth, screenHeight);
+    }
+
+    public static StaticData getMagicDb() {
+    	return magicDb;
     }
 
     @Override
