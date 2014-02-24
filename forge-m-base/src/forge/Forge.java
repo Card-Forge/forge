@@ -24,7 +24,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
 import forge.screens.FScreen;
-import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FProgressBar;
@@ -38,6 +37,7 @@ public class Forge implements ApplicationListener {
     private static ShapeRenderer shapeRenderer;
     private static FScreen currentScreen;
     private static StaticData magicDb;
+    private static FProgressBar splashProgressBar;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public Forge() {
@@ -54,14 +54,19 @@ public class Forge implements ApplicationListener {
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
         Gdx.input.setInputProcessor(new FGestureDetector());
 
+        splashProgressBar = new FProgressBar();
+
         CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
-            final FProgressBar bar = SplashScreen.getProgressBar();
+            final FProgressBar bar = splashProgressBar;
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
-                Gdx.app.postRunnable(new Runnable() { @Override public void run() {
-                    bar.setDescription(name);
-                    bar.setPercentMode(usePercents);
-                }});
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        bar.setDescription(name);
+                        bar.setPercentMode(usePercents);
+                    }
+                });
             }
 
             @Override
@@ -74,8 +79,8 @@ public class Forge implements ApplicationListener {
         };
 
         // Loads all cards (using progress bar).
-        final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
-        magicDb = new StaticData(reader, "res/editions", "res/blockdata");
+        /*final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
+        magicDb = new StaticData(reader, "res/editions", "res/blockdata");*/
 
         FSkin.loadLight("journeyman", true);
         FSkin.loadFull(true);
