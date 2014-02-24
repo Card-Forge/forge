@@ -10,32 +10,32 @@ import forge.utils.Utils;
 
 public class ConstructedScreen extends LaunchScreen {
     public ConstructedScreen() {
-    	super("Constructed");
+        super("Constructed");
     }
 
-	@Override
-	protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
+        // TODO Auto-generated method stub
+        
+    }
 
-	@Override
-	protected boolean buildLaunchParams(LaunchParams launchParams) {
-		launchParams.gameType = GameType.Constructed;
+    @Override
+    protected boolean buildLaunchParams(LaunchParams launchParams) {
+        launchParams.gameType = GameType.Constructed;
 
-		//TODO: Allow picking decks
-		Deck humanDeck = Utils.generateRandomDeck(2);
-		LobbyPlayerHuman humanLobbyPlayer = new LobbyPlayerHuman("Human");
-		RegisteredPlayer humanRegisteredPlayer = new RegisteredPlayer(humanDeck);
-		humanRegisteredPlayer.setPlayer(humanLobbyPlayer);
-		launchParams.players.add(humanRegisteredPlayer);
+        //TODO: Allow picking decks
+        Deck humanDeck = Utils.generateRandomDeck(2);
+        LobbyPlayerHuman humanLobbyPlayer = new LobbyPlayerHuman("Human");
+        RegisteredPlayer humanRegisteredPlayer = new RegisteredPlayer(humanDeck);
+        humanRegisteredPlayer.setPlayer(humanLobbyPlayer);
+        launchParams.players.add(humanRegisteredPlayer);
 
-		Deck aiDeck = Utils.generateRandomDeck(2);
-		LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi("AI Player");
-		RegisteredPlayer aiRegisteredPlayer = new RegisteredPlayer(aiDeck);
-		aiRegisteredPlayer.setPlayer(aiLobbyPlayer);
-		launchParams.players.add(aiRegisteredPlayer);
+        Deck aiDeck = Utils.generateRandomDeck(2);
+        LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi("AI Player");
+        RegisteredPlayer aiRegisteredPlayer = new RegisteredPlayer(aiDeck);
+        aiRegisteredPlayer.setPlayer(aiLobbyPlayer);
+        launchParams.players.add(aiRegisteredPlayer);
 
-		return false; //TODO: Support launching match
-	}
+        return false; //TODO: Support launching match
+    }
 }

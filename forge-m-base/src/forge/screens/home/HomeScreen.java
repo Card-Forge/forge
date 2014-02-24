@@ -21,43 +21,43 @@ public class HomeScreen extends FScreen {
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
     
     public HomeScreen() {
-    	super(false, null, false);
+        super(false, null, false);
 
         addButton("Constructed", new Runnable() {
-			@Override
-			public void run() {
-				Forge.openScreen(new ConstructedScreen());
-			}
+            @Override
+            public void run() {
+                Forge.openScreen(new ConstructedScreen());
+            }
         });
         addButton("Draft", new Runnable() {
-			@Override
-			public void run() {
-				Forge.openScreen(new DraftScreen());
-			}
+            @Override
+            public void run() {
+                Forge.openScreen(new DraftScreen());
+            }
         });
         addButton("Sealed", new Runnable() {
-			@Override
-			public void run() {
-				Forge.openScreen(new SealedScreen());
-			}
+            @Override
+            public void run() {
+                Forge.openScreen(new SealedScreen());
+            }
         });
         addButton("Quest", new Runnable() {
-			@Override
-			public void run() {
-				Forge.openScreen(new QuestScreen());
-			}
+            @Override
+            public void run() {
+                Forge.openScreen(new QuestScreen());
+            }
         });
         addButton("Guantlet", new Runnable() {
-			@Override
-			public void run() {
-				Forge.openScreen(new GuantletScreen());
-			}
+            @Override
+            public void run() {
+                Forge.openScreen(new GuantletScreen());
+            }
         });
         addButton("Settings", new Runnable() {
-			@Override
-			public void run() {
-				Forge.openScreen(new SettingsScreen());
-			}
+            @Override
+            public void run() {
+                Forge.openScreen(new SettingsScreen());
+            }
         });
     }
 

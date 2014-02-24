@@ -5,18 +5,18 @@ import forge.screens.LaunchScreen;
 
 public class SealedScreen extends LaunchScreen {
     public SealedScreen() {
-    	super("Sealed");
+        super("Sealed");
     }
 
-	@Override
-	protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
+        // TODO Auto-generated method stub
+        
+    }
 
-	@Override
-	protected boolean buildLaunchParams(LaunchParams launchParams) {
-		launchParams.gameType = GameType.Sealed;
-		return false; //TODO: Support launching match
-	}
+    @Override
+    protected boolean buildLaunchParams(LaunchParams launchParams) {
+        launchParams.gameType = GameType.Sealed;
+        return false; //TODO: Support launching match
+    }
 }

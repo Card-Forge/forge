@@ -12,21 +12,21 @@ import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
 
 public class Utils {
-	private final static float ppcX = Gdx.graphics.getPpcX();
-	private final static float ppcY = Gdx.graphics.getPpcY();
-	private final static float AVG_FINGER_SIZE_CM = 1.1f;
+    private final static float ppcX = Gdx.graphics.getPpcX();
+    private final static float ppcY = Gdx.graphics.getPpcY();
+    private final static float AVG_FINGER_SIZE_CM = 1.1f;
 
-	public final static float AVG_FINGER_WIDTH = cmToPixelsX(AVG_FINGER_SIZE_CM);
-	public final static float AVG_FINGER_HEIGHT = cmToPixelsY(AVG_FINGER_SIZE_CM);
+    public final static float AVG_FINGER_WIDTH = cmToPixelsX(AVG_FINGER_SIZE_CM);
+    public final static float AVG_FINGER_HEIGHT = cmToPixelsY(AVG_FINGER_SIZE_CM);
 
-	public static float cmToPixelsX(float cm) {
-		return ppcX * cm;
-	}
-	public static float cmToPixelsY(float cm) {
-		return ppcY * cm;
-	}
+    public static float cmToPixelsX(float cm) {
+        return ppcX * cm;
+    }
+    public static float cmToPixelsY(float cm) {
+        return ppcY * cm;
+    }
 
-	public static Deck generateRandomDeck(final int colorCount0) {
+    public static Deck generateRandomDeck(final int colorCount0) {
         CardDb cardDb = Forge.getMagicDb().getCommonCards();
         DeckGeneratorBase gen = null;
         switch (colorCount0) {
@@ -37,12 +37,12 @@ public class Utils {
         }
 
         if (gen != null) {
-    		final Deck deck = new Deck();
+            final Deck deck = new Deck();
             gen.setSingleton(false);
             gen.setUseArtifacts(false);
             deck.getMain().addAll(gen.getDeck(60, false));
             return deck;
         }
         return null;
-	}
+    }
 }

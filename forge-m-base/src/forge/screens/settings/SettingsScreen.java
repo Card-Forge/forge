@@ -5,7 +5,7 @@ import forge.screens.FScreen;
 public class SettingsScreen extends FScreen {
 
     public SettingsScreen() {
-    	super(true, "Settings", true);
+        super(true, "Settings", true);
     }
 
     @Override

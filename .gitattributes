@@ -15996,6 +15996,7 @@ forge-m-base/src/forge/player/LobbyPlayerHuman.java -text
 forge-m-base/src/forge/player/PlayerControllerHuman.java -text
 forge-m-base/src/forge/screens/FScreen.java -text
 forge-m-base/src/forge/screens/LaunchScreen.java -text
+forge-m-base/src/forge/screens/SplashScreen.java -text
 forge-m-base/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-m-base/src/forge/screens/draft/DraftScreen.java -text
 forge-m-base/src/forge/screens/guantlet/GuantletScreen.java -text
@@ -16008,6 +16009,7 @@ forge-m-base/src/forge/toolbox/FButton.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
+forge-m-base/src/forge/toolbox/FProgressBar.java -text
 forge-m-base/src/forge/utils/Utils.java -text
 forge-m-desktop/.classpath -text
 forge-m-desktop/.project -text

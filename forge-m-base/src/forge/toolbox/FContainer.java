@@ -18,9 +18,9 @@ public abstract class FContainer extends FDisplayObject {
     public final void draw(Graphics g) {
         drawBackground(g);
         for (FDisplayObject child : children) {
-        	if (child.isVisible()) {
-        		g.draw(child);
-        	}
+            if (child.isVisible()) {
+                g.draw(child);
+            }
         }
         drawOverlay(g);
     }

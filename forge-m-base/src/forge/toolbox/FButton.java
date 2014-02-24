@@ -85,7 +85,7 @@ public class FButton extends FDisplayObject {
     }
 
     public void setCommand(Runnable command0) {
-    	command = command0;
+        command = command0;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class FButton extends FDisplayObject {
     @Override
     public final boolean tap(float x, float y, int count) {
         if (count == 1 && command != null) {
-        	command.run();
+            command.run();
         }
         return true;
     }

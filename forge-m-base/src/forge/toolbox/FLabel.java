@@ -10,7 +10,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 
 public class FLabel extends FDisplayObject {
-	public static class Builder {
+    public static class Builder {
         //========== Default values for FLabel are set here.
         private float      bldIconScaleFactor = 0.8f;
         private int        bldFontSize        = 14;
@@ -79,18 +79,18 @@ public class FLabel extends FDisplayObject {
 
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
-    	iconScaleFactor = b0.bldIconScaleFactor;
-    	font = FSkinFont.get(b0.bldFontSize);
-    	alignment = b0.bldAlignment;
-    	insets = b0.bldInsets;
-    	selectable = b0.bldSelectable;
-    	selected = b0.bldSelected;
-    	opaque = b0.bldOpaque;
-    	iconInBackground = b0.bldIconInBackground;
-    	iconScaleAuto = b0.bldIconScaleAuto;
-    	text = b0.bldText != null ? b0.bldText : "";
+        iconScaleFactor = b0.bldIconScaleFactor;
+        font = FSkinFont.get(b0.bldFontSize);
+        alignment = b0.bldAlignment;
+        insets = b0.bldInsets;
+        selectable = b0.bldSelectable;
+        selected = b0.bldSelected;
+        opaque = b0.bldOpaque;
+        iconInBackground = b0.bldIconInBackground;
+        iconScaleAuto = b0.bldIconScaleAuto;
+        text = b0.bldText != null ? b0.bldText : "";
         icon = b0.bldIcon;
-    	command = b0.bldCommand;
+        command = b0.bldCommand;
         setEnabled(b0.bldEnabled);
     }
 
@@ -135,45 +135,45 @@ public class FLabel extends FDisplayObject {
 
     @Override
     public final boolean tap(float x, float y, int count) {
-    	boolean handled = false;
-    	if (selectable) {
-    		setSelected(!selected);
-    		handled = true;
-    	}
-        if (command != null) {
-        	command.run();
-    		handled = true;
+        boolean handled = false;
+        if (selectable) {
+            setSelected(!selected);
+            handled = true;
         }
-    	return handled;
+        if (command != null) {
+            command.run();
+            handled = true;
+        }
+        return handled;
     }
 
-	@Override
-	public void draw(Graphics g) {
-	    float w = getWidth();
-	    float h = getHeight();
+    @Override
+    public void draw(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
 
-		if (pressed) {
-	        g.drawRect(d50, 0, 0, w, h);
-	        g.drawRect(d10, 1, 1, w - 2, h - 2);
-	        g.fillGradientRect(d50, d10, true, 2, 2, w - 4, h - 4);
-		}
-		else if (selected && (opaque || selectable)) {
-	        g.drawRect(d30, 0, 0, w, h);
-	        g.drawRect(l10, 1, 1, w - 2, h - 2);
-		    g.fillGradientRect(d30, l10, true, 2, 2, w - 4, h - 4);
+        if (pressed) {
+            g.drawRect(d50, 0, 0, w, h);
+            g.drawRect(d10, 1, 1, w - 2, h - 2);
+            g.fillGradientRect(d50, d10, true, 2, 2, w - 4, h - 4);
         }
-		else if (opaque) {
+        else if (selected && (opaque || selectable)) {
+            g.drawRect(d30, 0, 0, w, h);
+            g.drawRect(l10, 1, 1, w - 2, h - 2);
+            g.fillGradientRect(d30, l10, true, 2, 2, w - 4, h - 4);
+        }
+        else if (opaque) {
             g.drawRect(d50, 0, 0, w, h);
             g.drawRect(l10, 1, 1, w - 2, h - 2);
             g.fillGradientRect(d10, l20, true, 2, 2, w - 4, h - 4);
-		}
+        }
         else if (selectable) {
             g.drawRect(l10, 0, 0, w, h);
             g.drawRect(l30, 1, 1, w - 2, h - 2);
         }
 
-		drawContent(g, w, h, pressed);
-	}
+        drawContent(g, w, h, pressed);
+    }
 
     protected void drawContent(Graphics g, float w, float h, final boolean pressed) {
         float x = insets.x;
@@ -181,8 +181,8 @@ public class FLabel extends FDisplayObject {
         w -= 2 * x;
         h -= 2 * x;
         if (pressed) { //while pressed, translate graphics so icon and text appear shifted down and to the right
-        	x++;
-        	y++;
+            x++;
+            y++;
         }
 
         if (icon != null) {
@@ -195,9 +195,9 @@ public class FLabel extends FDisplayObject {
                 iconWidth = iconHeight * aspectRatio;
             }
             if (iconInBackground || text.isEmpty()) {
-            	if (alignment == HAlignment.CENTER) {
-            		x += (w - iconWidth) / 2;
-            	}
+                if (alignment == HAlignment.CENTER) {
+                    x += (w - iconWidth) / 2;
+                }
                 y += (h - iconHeight) / 2;
             }
             else {
@@ -208,14 +208,14 @@ public class FLabel extends FDisplayObject {
             g.drawImage(icon, x, y, iconWidth, iconHeight);
 
             if (!text.isEmpty()) {
-            	x += iconWidth;
-            	g.startClip(x, y, w, h);
+                x += iconWidth;
+                g.startClip(x, y, w, h);
                 g.drawText(text, font, clrText, x, y, w, h, false, HAlignment.LEFT, true);
                 g.endClip();
             }
         }
         else if (!text.isEmpty()) {
-        	g.startClip(x, y, w, h);
+            g.startClip(x, y, w, h);
             g.drawText(text, font, clrText, x, y, w, h, false, alignment, true);
             g.endClip();
         }

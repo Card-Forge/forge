@@ -23,6 +23,9 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
+import forge.gui.toolbox.FProgressBar;
+import forge.gui.workshop.CardScriptInfo;
+import forge.properties.NewConstants;
 import forge.screens.FScreen;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDisplayObject;
@@ -50,6 +53,28 @@ public class Forge implements ApplicationListener {
         shapeRenderer = new ShapeRenderer();
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
         Gdx.input.setInputProcessor(new FGestureDetector());
+
+        CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
+            FProgressBar bar = view.getSplash().getProgressBar();
+            @Override
+            public void setOperationName(final String name, final boolean usePercents) {
+                FThreads.invokeInEdtLater(new Runnable() { @Override public void run() {
+                    bar.setDescription(name);
+                    bar.setPercentMode(usePercents);
+                } });
+            }
+
+            @Override
+            public void report(int current, int total) {
+                if ( total != bar.getMaximum())
+                    bar.setMaximum(total);
+                bar.setValueThreadSafe(current);
+            }
+        };
+
+        // Loads all cards (using progress bar).
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, progressBarBridge, CardScriptInfo.readerObserver);
+        magicDb = new StaticData(reader, "res/editions", "res/blockdata");
 
         FSkin.loadLight("journeyman", true);
         FSkin.loadFull(true);
