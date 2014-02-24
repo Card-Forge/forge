@@ -16,6 +16,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.effects.CharmEffect;
@@ -814,7 +815,11 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
         String message = formatNotificationMessage(sa, realtedTarget, value);
-        GuiDialog.message(message, sa.getHostCard() == null ? "" : sa.getHostCard().getName());
+        if (sa.isManaAbility()) {
+            game.getGameLog().add(GameLogEntryType.LAND, message);
+        } else {
+            GuiDialog.message(message, sa.getHostCard() == null ? "" : sa.getHostCard().getName());
+        }
     }
 
     private String formatMessage(String message, Object related) {
