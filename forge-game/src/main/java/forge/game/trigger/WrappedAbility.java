@@ -8,7 +8,6 @@ import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -335,8 +334,19 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         Map<String, String> triggerParams = regtrig.getMapParams();
 
         if (!(regtrig instanceof TriggerAlways) && !triggerParams.containsKey("NoResolvingCheck")) {
-            // State triggers don't have "Intervening If"
+            // Most State triggers don't have "Intervening If"
             if (!regtrig.requirementsCheck(game)) {
+                return;
+            }
+        }
+        
+        if (triggerParams.containsKey("ResolvingCheck")) {
+            // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
+            Map<String, String> recheck = new HashMap<String, String>();
+            String key = triggerParams.get("ResolvingCheck");
+            String value = regtrig.getMapParams().get(key);
+            recheck.put(key, value);
+            if (!meetsCommonRequirements(recheck)) {
                 return;
             }
         }
