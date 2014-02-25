@@ -763,6 +763,9 @@ public class GameAction {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
 
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+
     }
 
     /**
@@ -801,9 +804,6 @@ public class GameAction {
             boolean checkAgain = false;
 
             this.checkStaticAbilities();
-
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
             for (Player p : game.getPlayers()) {
                 for (Card c : p.getCardsIn(ZoneType.Battlefield)) {

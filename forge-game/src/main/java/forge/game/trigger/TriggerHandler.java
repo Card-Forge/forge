@@ -155,13 +155,29 @@ public class TriggerHandler {
         }
 
         //runWaitingTrigger(new TriggerWaiting(mode, runParams));
-        
-        if (game.getStack().isFrozen() || holdTrigger) {
+        if (mode == TriggerType.Always) {
+            runStateTrigger(runParams);
+        } else if (game.getStack().isFrozen() || holdTrigger) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));
         }
         // Tell auto stop to stop
+    }
+
+    public final boolean runStateTrigger(Map<String, Object> runParams) {
+        boolean checkStatics = false;
+        // only cards in play can run state triggers
+        List<Card> allCards = new ArrayList<Card>(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        for (final Card c : allCards) {
+            for (final Trigger t : c.getTriggers()) {
+                if (canRunTrigger(t, TriggerType.Always, runParams)) {
+                    this.runSingleTrigger(t, runParams);
+                    checkStatics = true;
+                }
+            }
+        }
+        return checkStatics;
     }
 
     public final boolean runWaitingTriggers() {
