@@ -6,7 +6,7 @@ petape_lvl4.jpg                        http://www.cardforge.org/fpics/pets/2012p
 petbird_lvl1.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL1.jpg
 petbird_lvl2.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL2.jpg
 petbird_lvl3.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL3.jpg
-petbird_lvl4.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL4.jpg
+petbird_lvl4_r1.jpg                    http://www.cardforge.org/fpics/pets/2012pets/PetBird_LVL4_r1.jpg
 petcrocodile_lvl1.jpg                  http://www.cardforge.org/fpics/pets/2012pets/PetCrocodile_LVL1.jpg
 petcrocodile_lvl2.jpg                  http://www.cardforge.org/fpics/pets/2012pets/PetCrocodile_LVL2.jpg
 petcrocodile_lvl3.jpg                  http://www.cardforge.org/fpics/pets/2012pets/PetCrocodile_LVL3.jpg
@@ -16,9 +16,9 @@ pethound_lvl2.jpg                      http://www.cardforge.org/fpics/pets/2012p
 pethound_lvl3.jpg                      http://www.cardforge.org/fpics/pets/2012pets/PetHound_LVL3.jpg
 pethound_lvl4.jpg                      http://www.cardforge.org/fpics/pets/2012pets/PetHound_LVL4.jpg
 petwolf_lvl1.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL1.jpg
-petwolf_lvl2.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL2.jpg
-petwolf_lvl3.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL3.jpg
-petwolf_lvl4.jpg                       http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL4.jpg
+petwolf_lvl2_r1.jpg                    http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL2_r1.jpg
+petwolf_lvl3_r1.jpg                    http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL3_r1.jpg
+petwolf_lvl4_r1.jpg                    http://www.cardforge.org/fpics/pets/2012pets/PetWolf_LVL4_r1.jpg
 plantwall_lvl1.jpg                     http://www.cardforge.org/fpics/pets/2012pets/PlantWall_LVL1.jpg
 plantwall_lvl2.jpg                     http://www.cardforge.org/fpics/pets/2012pets/PlantWall_LVL2.jpg
 plantwall_lvl3.jpg                     http://www.cardforge.org/fpics/pets/2012pets/PlantWall_LVL3.jpg
