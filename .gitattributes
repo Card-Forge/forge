@@ -13290,6 +13290,7 @@ forge-gui/res/cardsfolder/v/veil_of_birds.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/veil_of_secrecy.txt -text
 forge-gui/res/cardsfolder/v/veilborn_ghoul.txt -text
 forge-gui/res/cardsfolder/v/veiled_apparition.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/veiled_crocodile.txt -text
 forge-gui/res/cardsfolder/v/veiled_sentry.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/v/veiled_serpent.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/veiling_oddity.txt -text
