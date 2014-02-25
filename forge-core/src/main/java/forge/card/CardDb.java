@@ -239,8 +239,18 @@ public final class CardDb implements ICardDatabase {
     
     @Override
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
-        List<PaperCard> cards = this.allCardsByName.get(cardName);
+        final CardRequest cr = CardRequest.fromString(cardName);
+        List<PaperCard> cards = this.allCardsByName.get(cr.cardName);
 
+        if ( StringUtils.isNotBlank(cr.edition) ) {
+            cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
+                @Override public boolean apply(PaperCard input) { return input.getEdition().equalsIgnoreCase(cr.edition); }
+            }));
+        }
+        if(artIndex == -1 && cr.artIndex > 0) {
+            artIndex = cr.artIndex;
+        }
+        
         int sz = cards.size();
         if( fromSet == SetPreference.Earliest || fromSet == SetPreference.EarliestCoreExp) {
             for(int i = sz - 1 ; i >= 0 ; i--) {
