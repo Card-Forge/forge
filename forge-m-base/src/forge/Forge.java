@@ -24,7 +24,9 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
 import forge.screens.FScreen;
+import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
+import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FProgressBar;
 import forge.utils.Constants;
@@ -37,7 +39,7 @@ public class Forge implements ApplicationListener {
     private static ShapeRenderer shapeRenderer;
     private static FScreen currentScreen;
     private static StaticData magicDb;
-    private static FProgressBar splashProgressBar;
+    private static SplashScreen splashScreen;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public Forge() {
@@ -54,10 +56,11 @@ public class Forge implements ApplicationListener {
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
         Gdx.input.setInputProcessor(new FGestureDetector());
 
-        splashProgressBar = new FProgressBar();
+        splashScreen = new SplashScreen();
+        FSkin.loadLight("journeyman", splashScreen);
 
         CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
-            final FProgressBar bar = splashProgressBar;
+            final FProgressBar bar = splashScreen.getProgressBar();
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
                 Gdx.app.postRunnable(new Runnable() {
@@ -82,9 +85,8 @@ public class Forge implements ApplicationListener {
         /*final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
         magicDb = new StaticData(reader, "res/editions", "res/blockdata");*/
 
-        FSkin.loadLight("journeyman", true);
-        FSkin.loadFull(true);
-        openScreen(new HomeScreen());
+        //FSkin.loadFull(true);
+        //openScreen(new HomeScreen());
     }
 
     public static void showMenu() {
@@ -117,12 +119,19 @@ public class Forge implements ApplicationListener {
     @Override
     public void render () {
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); // Clear the screen.
-        if (currentScreen != null) {
-            batch.begin();
-            Graphics g = new Graphics();
-            currentScreen.draw(g);
-            batch.end();
+
+        FContainer screen = currentScreen;
+        if (screen == null) {
+            screen = splashScreen;
+            if (screen == null) { 
+                return;
+            }
         }
+
+        batch.begin();
+        Graphics g = new Graphics();
+        screen.draw(g);
+        batch.end();
     }
 
     @Override
@@ -131,6 +140,9 @@ public class Forge implements ApplicationListener {
         screenHeight = height;
         if (currentScreen != null) {
             currentScreen.setSize(width, height);
+        }
+        else if (splashScreen != null) {
+            splashScreen.setSize(width, height);
         }
     }
 
@@ -279,6 +291,10 @@ public class Forge implements ApplicationListener {
         }
 
         public void draw(FDisplayObject displayObj) {
+            if (displayObj.getWidth() <= 0 || displayObj.getHeight() <= 0) {
+                return;
+            }
+
             final Rectangle parentBounds = bounds;
             bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
 

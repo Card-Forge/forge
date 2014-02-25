@@ -7,7 +7,6 @@ import forge.Forge.Graphics;
  * It also enforces a getter for coordinate locations in sprites. */
 public enum FSkinImage implements FImage {
     //Backgrounds
-    BG_SPLASH (0, 0, 0, -100, SourceFile.SPLASH), //treat 0 and negative as offset from full width/height
     BG_TEXTURE (0, 0, 0, 0, SourceFile.TEXTURE),
     BG_MATCH (0, 0, 0, 0, SourceFile.MATCH),
 

@@ -2,9 +2,13 @@ package forge.toolbox;
 
 import java.util.Date;
 
+import com.badlogic.gdx.graphics.Color;
+
 import forge.Forge.Graphics;
 
 public class FProgressBar extends FDisplayObject {
+    public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;
+
     private long startMillis = 0;
     private int tempVal = 0, etaSecs = 0, maximum = 0, value = 0;
     private String desc = "";

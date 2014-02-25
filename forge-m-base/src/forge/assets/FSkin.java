@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.assets.FSkinImage.SourceFile;
+import forge.screens.SplashScreen;
+import forge.toolbox.FProgressBar;
 
 public class FSkin {
     private static final String
@@ -39,8 +41,8 @@ public class FSkin {
 
         //load skin
         loaded = false; //reset this temporarily until end of loadFull()
-        loadLight(skinName, false);
-        loadFull(false);
+        loadLight(skinName, null);
+        loadFull(null);
     }
 
     /*
@@ -51,8 +53,8 @@ public class FSkin {
      * @param skinName
      *            the skin name
      */
-    public static void loadLight(final String skinName, final boolean onInit) {
-        if (onInit) {
+    public static void loadLight(final String skinName, final SplashScreen splashScreen) {
+        if (splashScreen != null) {
             if (allSkins == null) { //initialize
                 allSkins = new ArrayList<String>();
                 ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
@@ -69,30 +71,27 @@ public class FSkin {
         preferredName = skinName.toLowerCase().replace(' ', '_');
         preferredDir = FILE_SKINS_DIR + preferredName + "/";
 
-        if (onInit) {
+        if (splashScreen != null) {
             final FileHandle f = Gdx.files.internal(preferredDir + SourceFile.SPLASH.getFilename());
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
-                    FSkin.loadLight("default", onInit);
+                    FSkin.loadLight("default", splashScreen);
                 }
                 return;
             }
 
             try {
-                FSkinImage image = FSkinImage.BG_SPLASH;
-                Texture texture = new Texture(f);
+                Texture txSplash = new Texture(f);
+                final int w = txSplash.getWidth();
+                final int h = txSplash.getHeight();
 
-                final int h = texture.getHeight();
-                final int w = texture.getWidth();
+                splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
 
-                images.put(FSkinImage.BG_SPLASH, new TextureRegion(texture, image.getX(), image.getY(),
-                        image.getWidth(w), image.getHeight(h)));
-
-                /*UIManager.put("ProgressBar.background", new Color(img.getRGB(25, h - 75)));
-                UIManager.put("ProgressBar.selectionBackground", new Color(img.getRGB(75, h - 75)));
-                UIManager.put("ProgressBar.foreground", new Color(img.getRGB(25, h - 25)));
-                UIManager.put("ProgressBar.selectionForeground", new Color(img.getRGB(75, h - 25)));
-                UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));*/
+                Pixmap pxSplash = new Pixmap(f);
+                FProgressBar.BACK_COLOR = new Color(pxSplash.getPixel(25, h - 75));
+                FProgressBar.SEL_BACK_COLOR = new Color(pxSplash.getPixel(75, h - 75));
+                FProgressBar.FORE_COLOR = new Color(pxSplash.getPixel(25, h - 25));
+                FProgressBar.SEL_FORE_COLOR = new Color(pxSplash.getPixel(75, h - 25));
             }
             catch (final Exception e) {
                 e.printStackTrace();
@@ -120,11 +119,11 @@ public class FSkin {
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
      */
-    public static void loadFull(final boolean onInit) {
-        if (onInit) {
+    public static void loadFull(final SplashScreen splashScreen) {
+        if (splashScreen != null) {
             // Preferred skin name must be called via loadLight() method,
             // which does some cleanup and init work.
-            if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", onInit); }
+            if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", splashScreen); }
         }
 
         avatars.clear();
@@ -162,13 +161,11 @@ public class FSkin {
                 c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));
             }
 
-            //add images besides splash background
+            //add images
             for (FSkinImage image : FSkinImage.values()) {
-                if (image != FSkinImage.BG_SPLASH) {
-                    TextureRegion textureRegion = loadTextureRegion(image, textures, preferredIcons);
-                    if (textureRegion != null) {
-                        images.put(image, textureRegion);
-                    }
+                TextureRegion textureRegion = loadTextureRegion(image, textures, preferredIcons);
+                if (textureRegion != null) {
+                    images.put(image, textureRegion);
                 }
             }
 
@@ -223,7 +220,7 @@ public class FSkin {
         }
 
         // Update fonts if needed
-        if (!onInit) {
+        if (splashScreen == null) {
             FSkinFont.updateAll();
         }
 
