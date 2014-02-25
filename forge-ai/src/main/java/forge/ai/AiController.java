@@ -958,7 +958,7 @@ public class AiController {
             if (!chance)
                 return AiPlayDecision.TargetingFailed;
 
-            return AiPlayDecision.WillPlay;
+            return canPlaySpellBasic(card);
         }
         
         if ( spell instanceof SpellPermanent) {
