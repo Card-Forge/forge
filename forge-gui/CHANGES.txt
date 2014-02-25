@@ -8,6 +8,14 @@ Forge Beta: 0#-##-2014 ver 1.5.14
 Release Notes
 -------------
 
+- New ItemManager Preferences -
+The editor.preferences file has been deprecated, and the Preferences pane of Deck Editor screens has been removed. Instead, each CardManager and DeckManager (in deck editors, game launch screens, and deck viewer) can have its own options configured individually on its View Options panel.
+
+To show/hide columns, simply go to the List View of any CardManager or DeckManager and click the View Options button (to the right of the Image View toggle button). This will show a panel containing checkboxes for each column, along with a "Unique Cards Only" checkbox on the Constructed Deck Editor Catalog. Your choices will be remembered between sessions, as will any column sorting, repositioning, and resizing. You can toggle the View Options button again to hide this panel.
+
+For Image View, this options panel is visible by default and contains a button to expand/collapse all groups along with combo boxes to configure the "Group By", "Pile By", "Columns" properties that are also saved between sessions. Note that even if this panel is hidden, Ctrl+MouseWheel can be used to adjust the "Columns" property to essentially zoom in and out.
+
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
