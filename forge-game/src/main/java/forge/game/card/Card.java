@@ -6395,10 +6395,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isEnchanted()) {
                 return false;
             }
-        } else if (property.startsWith("enchanted")) {
-            if (!this.isEnchanted()) {
-                return false;
-            }
         } else if (property.startsWith("unenchanted")) {
             if (this.isEnchanted()) {
                 return false;
