@@ -71,6 +71,16 @@ public class StaticAbilityPreventDamage {
             return restDamage;
         }
 
+        if (params.containsKey("SourceSharesColorWithTarget")) {
+            if (!(target instanceof Card) || source.equals(target)) {
+                return restDamage;
+            }
+            Card targetCard = (Card) target;
+            if (!source.sharesColorWith(targetCard)) {
+                return restDamage;
+            }
+        }
+
         if (params.containsKey("Optional")) { //Assume if param is present it should be optional
             if (!isTest) {
                 final String logic = params.containsKey("AILogic") ? params.get("AILogic") : "";
