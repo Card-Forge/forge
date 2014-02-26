@@ -7381,17 +7381,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
         }
-
-        // specific Cards
-        if (this.isCreature()) { // and not a planeswalker
-
-            if (source.isCreature() && getGame().isCardInPlay("Well-Laid Plans")
-                    && source.sharesColorWith(this)) {
-                return 0;
-            }
-        } // Creature end
-
-
         return restDamage > 0 ? restDamage : 0;
     }
 
