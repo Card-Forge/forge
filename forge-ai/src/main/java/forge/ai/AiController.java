@@ -178,12 +178,11 @@ public class AiController {
 
     private boolean checkCurseEffects() {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            for (Trigger t : c.getTriggers()) {
-                if (t.getMapParams().containsKey("CurseNonActive")
-                        && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
-                    return true;
-                }
+            if (c.hasSVar("CurseNonActiveEffect")
+                    && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+                return true;
             }
+
         }
         return false;
     }
