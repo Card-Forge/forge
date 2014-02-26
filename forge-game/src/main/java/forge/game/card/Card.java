@@ -5608,6 +5608,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                             }
                         }
                     }
+                } else { // EnchantedBy Aura.Other
+                    for (final Card aura : this.getEnchantedBy()){
+                        if (aura.isValid(restriction, sourceController, source)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
         } else if (property.startsWith("NotEnchantedBy")) {
@@ -6383,6 +6390,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                 }
+            }
+        } else if (property.startsWith("enchanted")) {
+            if (!this.isEnchanted()) {
+                return false;
             }
         } else if (property.startsWith("enchanted")) {
             if (!this.isEnchanted()) {
