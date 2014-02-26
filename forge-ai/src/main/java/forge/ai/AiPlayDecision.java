@@ -16,5 +16,6 @@ public enum AiPlayDecision {
     WouldDestroyOtherPlaneswalker,
     WouldBecomeZeroToughnessCreature,
     WouldDestroyWorldEnchantment,
-    BadEtbEffects;
+    BadEtbEffects,
+    CurseEffects;
 }

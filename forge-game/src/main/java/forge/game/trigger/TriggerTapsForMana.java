@@ -77,6 +77,15 @@ public class TriggerTapsForMana extends Trigger {
             }
         }
 
+        if (this.mapParams.containsKey("Activator")) {
+            final SpellAbility sa = (SpellAbility) runParams2.get("AbilityMana");
+            if (sa == null) return false;
+            final Player activator = sa.getActivatingPlayer();
+            if (!activator.isValid(this.mapParams.get("Activator").split(","), this.getHostCard().getController(), this.getHostCard())) {
+                return false;
+            }
+        }
+
         if (this.mapParams.containsKey("Produced")) {
             Object prod = runParams2.get("Produced");
             if (prod == null || !(prod instanceof String)) {

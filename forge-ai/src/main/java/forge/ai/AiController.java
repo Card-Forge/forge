@@ -176,6 +176,17 @@ public class AiController {
         return spellAbilities;
     }
 
+    private boolean checkCurseEffects() {
+        for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            for (Trigger t : c.getTriggers()) {
+                if (t.getMapParams().containsKey("CurseNonActive")
+                        && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api) {
         boolean rightapi = false;
@@ -630,6 +641,9 @@ public class AiController {
                 }
                 card.setSVar("PayX", Integer.toString(xPay));
             }
+        }
+        if (checkCurseEffects()) {
+            return AiPlayDecision.CurseEffects;
         }
         if( sa instanceof SpellPermanent ) {
             ManaCost mana = sa.getPayCosts().getTotalMana();
