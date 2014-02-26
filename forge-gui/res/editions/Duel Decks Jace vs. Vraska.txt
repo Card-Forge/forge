@@ -1,0 +1,95 @@
+[metadata]
+Code=DDM
+Date=2014-03-14
+Name=Duel Decks: Jace vs. Vraska
+Type=Duel_Decks
+
+[cards]
+M Jace, Architect of Thought
+U Chronomaton
+U Jace's Phantasm
+C Phantasmal Bear
+U AEther Figment
+C Crosstown Courier
+C Dream Stalker
+C Krovikan Mist
+U Merfolk Wayfinder
+C Sea Gate Oracle
+C Stealer of Secrets
+C AEther Adept
+C Archaeomancer
+U Phantasmal Dragon
+R Body Double
+C Leyline Phantom
+R Aeon Chronicler
+U Riftwing Cloudskate
+R Jace's Mindseeker
+C Errant Ephemeron
+C Thought Scour
+U Agoraphobia
+C Into the Roil
+C Memory Lapse
+C Prohibit
+U Remand
+C Claustrophobia
+C Griptide
+C Ray of Command
+U Control Magic
+U Summoner's Bane
+U Jace's Ingenuity
+R Future Sight
+R Spelltwine
+U Dread Statuary
+C Halimar Depths
+L Island
+L Island
+L Island
+L Island
+L Island
+M Vraska the Unseen
+C Pulse Tracker
+C Shadow Alley Denizen
+U Tavern Swindler
+U Wight of Precinct Six
+C Death-Hood Cobra
+C Gatecreeper Vine
+U River Boa
+R Vinelasher Kudzu
+C Putrid Leech
+C Sadistic Augermage
+C Slate Street Ruffian
+C Oran-Rief Recluse
+R Spawnwrithe
+C Stonefare Crocodile
+R Ohran Viper
+U Corpse Traders
+C Festerhide Boar
+C Mold Shambler
+C Highway Robber
+U Nekrataal
+R Reaper of the Wilds
+U Acidic Slime
+U Drooling Groodion
+C Tragic Slip
+C Hypnotic Cloud
+U Night's Whisper
+U Marsh Casualties
+U Treasured Find
+C Last Kiss
+C Stab Wound
+R Underworld Connections
+C Consume Strength
+C Grisly Spectacle
+C Golgari Guildgate
+U Rogue's Passage
+U Tainted Wood
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Forest
+L Forest
+L Forest
+L Forest
+L Forest
