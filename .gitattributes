@@ -7339,6 +7339,7 @@ forge-gui/res/cardsfolder/l/lost_hours.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lost_in_a_labyrinth.txt -text
 forge-gui/res/cardsfolder/l/lost_in_the_mist.txt -text
 forge-gui/res/cardsfolder/l/lost_in_the_woods.txt -text
+forge-gui/res/cardsfolder/l/lost_in_thought.txt -text
 forge-gui/res/cardsfolder/l/lost_leonin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lost_order_of_jarkeld.txt -text
 forge-gui/res/cardsfolder/l/lost_soul.txt svneol=native#text/plain
@@ -13544,6 +13545,7 @@ forge-gui/res/cardsfolder/v/volition_reins.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volley_of_boulders.txt -text
 forge-gui/res/cardsfolder/v/volrath.txt -text
 forge-gui/res/cardsfolder/v/volrath_the_fallen.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/v/volraths_curse.txt -text
 forge-gui/res/cardsfolder/v/volraths_dungeon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volraths_gardens.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/v/volraths_laboratory.txt -text

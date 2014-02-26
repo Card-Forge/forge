@@ -135,6 +135,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.InternalEtbReplacement, CanPlayAsDrawbackAi.class);
         apiToClass.put(ApiType.InternalLegendaryRule, LegendaryRuleAi.class);
         apiToClass.put(ApiType.InternalHaunt, HauntAi.class);
+        apiToClass.put(ApiType.InternalIgnoreEffect, CannotPlayAi.class);
     }
     
     public SpellAbilityAi get(ApiType api) {

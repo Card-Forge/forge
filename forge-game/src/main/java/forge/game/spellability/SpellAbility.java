@@ -380,6 +380,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return api;
     }
 
+    public void setApi(ApiType apiType) {
+        api = apiType;
+    }
+
     public final boolean isCurse() {
         return this.hasParam("IsCurse");
     }

@@ -1,0 +1,10 @@
+Name:Lost in Thought
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | IgnoreEffectCost$ ExileFromGrave<3/Card> | Description$ Enchanted creature can't attack or block, and its activated abilities can't be activated. Its controller may exile three cards from his or her graveyard for that player to ignore this effect until end of turn.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_in_thought.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated. Its controller may exile three cards from his or her graveyard for that player to ignore this effect until end of turn.

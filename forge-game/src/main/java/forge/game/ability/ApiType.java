@@ -133,7 +133,8 @@ public enum ApiType {
 
     InternalEtbReplacement (ETBReplacementEffect.class),
     InternalLegendaryRule (CharmEffect.class),
-    InternalHaunt (CharmEffect.class);
+    InternalHaunt (CharmEffect.class),
+    InternalIgnoreEffect (CharmEffect.class);
 
 
     private final SpellAbilityEffect instanceEffect;

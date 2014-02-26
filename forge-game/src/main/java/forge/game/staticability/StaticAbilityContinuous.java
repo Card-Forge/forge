@@ -26,6 +26,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
@@ -40,7 +41,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.*;
 
 /**
@@ -549,6 +552,7 @@ public class StaticAbilityContinuous {
         };
         addIgnore.setTemporary(true);
         addIgnore.setIntrinsic(false);
+        addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
         sourceCard.addSpellAbility(addIgnore);
 

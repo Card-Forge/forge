@@ -1,0 +1,9 @@
+Name:Volrath's Curse
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse | AITgts$ Creature.powerLT4
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | IgnoreEffectCost$ Sac<1/Permanent> | Description$ Enchanted creature can't attack or block, and its activated abilities can't be activated. That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn.
+A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_curse.jpg
+Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated. That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn.\n{1}{U}: Return Volrath's Curse to its owner's hand.
