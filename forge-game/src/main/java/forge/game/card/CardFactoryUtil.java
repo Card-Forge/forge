@@ -49,6 +49,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -2884,7 +2885,7 @@ public class CardFactoryUtil {
         final String[] k = evokeKeyword.split(":");
         final Cost evokedCost = new Cost(k[1], false);
         
-        final SpellAbility evokedSpell = new Spell(card, evokedCost) {
+        final SpellAbility evokedSpell = new SpellPermanent(card) {
             private static final long serialVersionUID = -1598664196463358630L;
 
             @Override
@@ -2906,6 +2907,7 @@ public class CardFactoryUtil {
         sb.append(card.getName()).append(" (Evoked)");
         evokedSpell.setStackDescription(sb.toString());
         evokedSpell.setBasicSpell(false);
+        evokedSpell.setPayCosts(evokedCost);
         return evokedSpell;
     }
 
