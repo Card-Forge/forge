@@ -28,6 +28,7 @@ Veiled Crocodile
 Price of Glory
 Lost in Thought
 Volrath's Curse
+Lethal Vapors
 
 
 ------------
