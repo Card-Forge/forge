@@ -14,7 +14,8 @@ public class SplashScreen extends FContainer {
     private FSkinFont disclaimerFont;
 
     public SplashScreen() {
-        progressBar = add(new FProgressBar());
+        progressBar = new FProgressBar();
+        progressBar.setDescription("Welcome to Forge");
     }
 
     public FProgressBar getProgressBar() {
@@ -52,7 +53,7 @@ public class SplashScreen extends FContainer {
         }
         g.drawImage(background, x, y, w, h);
         
-        y += h * 2 / 3;
+        y += h * 300f / 450f;
         if (disclaimerFont == null) {
             disclaimerFont = FSkinFont.get(9);
         }
@@ -60,5 +61,11 @@ public class SplashScreen extends FContainer {
                 + "Forge is open source software, released under the GNU Public License.";
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,
                 x, y, w, 0, true, HAlignment.CENTER, false);
+
+        float padding = 20f / 450f * w;
+        float pbHeight = 57f / 450f * h;
+        y += 73f / 450f * h;
+        progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
+        g.draw(progressBar);
     }
 }

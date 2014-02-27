@@ -89,8 +89,8 @@ public class FSkin {
 
                 Pixmap pxSplash = new Pixmap(f);
                 FProgressBar.BACK_COLOR = new Color(pxSplash.getPixel(25, h - 75));
-                FProgressBar.SEL_BACK_COLOR = new Color(pxSplash.getPixel(75, h - 75));
-                FProgressBar.FORE_COLOR = new Color(pxSplash.getPixel(25, h - 25));
+                FProgressBar.FORE_COLOR = new Color(pxSplash.getPixel(75, h - 75));
+                FProgressBar.SEL_BACK_COLOR = new Color(pxSplash.getPixel(25, h - 25));
                 FProgressBar.SEL_FORE_COLOR = new Color(pxSplash.getPixel(75, h - 25));
             }
             catch (final Exception e) {

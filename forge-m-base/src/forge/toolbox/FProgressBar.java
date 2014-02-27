@@ -110,7 +110,9 @@ public class FProgressBar extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
-        // TODO Auto-generated method stub
-        
+        float w = getWidth();
+        float h = getHeight();
+        g.fillRect(BACK_COLOR, 0, 0, w, h);
+        g.drawRect(Color.BLACK, 0, 0, w, h);
     }
 }
