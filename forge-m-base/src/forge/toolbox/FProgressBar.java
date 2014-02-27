@@ -13,9 +13,9 @@ public class FProgressBar extends FDisplayObject {
     private static FSkinFont MSG_FONT;
 
     private long startMillis = 0;
-    private int tempVal = 0, etaSecs = 0, maximum = 0, value = 0;
+    private int etaSecs = 0, maximum = 0, value = 0;
     private String desc = "";
-    private String tempMsg, message;
+    private String message;
     private boolean showETA = true;
     private boolean showCount = true;
     
@@ -37,50 +37,35 @@ public class FProgressBar extends FDisplayObject {
         message = s0;
     }
 
-    private final Runnable barIncrementor = new Runnable() {
-        @Override
-        public void run() {
-            value = tempVal;
-            message = tempMsg;
-        }
-    };
-
-    /** Increments bar, thread safe. Calculations executed on separate thread. */
-    public void setValueThreadSafe(int value) {
-        //GuiUtils.checkEDT("FProgressBar$increment", false);
-        tempVal = value;
+    /** Increments bar. */
+    public void setValue(int value0) {
+        value = value0;
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
         StringBuilder sb = new StringBuilder(desc);
         if (showCount) {
             sb.append(" ");
             if (percentMode) {
-                sb.append(100 * tempVal / maximum).append("%");
+                sb.append(100 * value / maximum).append("%");
             }
             else {
-                sb.append(tempVal).append(" of ").append(maximum);
+                sb.append(value).append(" of ").append(maximum);
             }
         }
 
         if (showETA) {
-            calculateETA(tempVal);
+            calculateETA(value);
             sb.append(", ETA").append(String.format("%02d:%02d:%02d", etaSecs / 3600, (etaSecs % 3600) / 60, etaSecs % 60 + 1));
         }
-        tempMsg = sb.toString();
-
-        // When calculations finished; EDT can be used.
-        //SwingUtilities.invokeLater(barIncrementor);
-        barIncrementor.run();
+        message = sb.toString();
     }
 
     /** Resets the various values required for this class. Must be called from EDT. */
     public void reset() {
-        //FThreads.assertExecutedByEdt(true);
+        value = 0;
         startMillis = new Date().getTime();
         setShowETA(true);
         setShowCount(true);
-        value = 100;
-        maximum = 200;
     }
 
     /** @param b0 &emsp; Boolean, show the ETA statistic or not */
@@ -130,7 +115,7 @@ public class FProgressBar extends FDisplayObject {
 
         //draw message
         if (MSG_FONT == null) { //must wait to initialize until after FSkin initialized
-            MSG_FONT = FSkinFont.get(12);
+            MSG_FONT = FSkinFont.get(11);
         }
         g.drawText(message, MSG_FONT, FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
         if (selWidth > 0 && !SEL_FORE_COLOR.equals(FORE_COLOR)) {

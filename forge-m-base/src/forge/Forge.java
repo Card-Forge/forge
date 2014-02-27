@@ -3,8 +3,6 @@ package forge;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import javax.swing.GroupLayout.Alignment;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -55,40 +53,58 @@ public class Forge implements ApplicationListener {
     public void create() {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering
-        Gdx.input.setInputProcessor(new FGestureDetector());
 
         splashScreen = new SplashScreen();
         FSkin.loadLight("journeyman", splashScreen);
 
-        CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
-            final FProgressBar bar = splashScreen.getProgressBar();
+        // Loads card database on background thread (using progress bar to report progress)
+        new Thread(new Runnable() {
             @Override
-            public void setOperationName(final String name, final boolean usePercents) {
+            public void run() {
+                final CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
+                    final FProgressBar bar = splashScreen.getProgressBar();
+                    @Override
+                    public void setOperationName(final String name, final boolean usePercents) {
+                        Gdx.app.postRunnable(new Runnable() {
+                            @Override
+                            public void run() {
+                                bar.setDescription(name);
+                                bar.setPercentMode(usePercents);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void report(final int current, final int total) {
+                        Gdx.app.postRunnable(new Runnable() {
+                            @Override
+                            public void run() {
+                                bar.setMaximum(total);
+                                bar.setValue(current);
+                            }
+                        });
+                    }
+                };
+                final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
+                magicDb = new StaticData(reader, "res/editions", "res/blockdata");
+
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        bar.setDescription(name);
-                        bar.setPercentMode(usePercents);
+                        afterDbLoaded();
                     }
                 });
             }
+        }).start();
+    }
 
-            @Override
-            public void report(int current, int total) {
-                if (total != bar.getMaximum()) {
-                    bar.setMaximum(total);
-                }
-                bar.setValueThreadSafe(current);
-            }
-        };
+    private void afterDbLoaded() {
+        FSkin.loadFull(splashScreen);
 
-        // Loads all cards (using progress bar).
-        /*final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
-        magicDb = new StaticData(reader, "res/editions", "res/blockdata");*/
-
-        //FSkin.loadFull(true);
-        //openScreen(new HomeScreen());
+        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
+        Gdx.input.setInputProcessor(new FGestureDetector());
+        openScreen(new HomeScreen());
+        splashScreen = null;
     }
 
     public static void showMenu() {

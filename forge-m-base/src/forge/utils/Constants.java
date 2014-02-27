@@ -17,12 +17,15 @@
  */
 package forge.utils;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
+
 public final class Constants {
     public static final String PROFILE_FILE          = "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     // data that is only in the program dir
-    private static final String _ASSETS_ROOT = "assets/";
+    private static final String _ASSETS_ROOT = Gdx.app.getType() == ApplicationType.Desktop ? "bin/" : "assets/";
     private static final String _LIST_DIR = _ASSETS_ROOT + "lists/";
     public static final String KEYWORD_LIST_FILE                     = _LIST_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = _LIST_DIR + "TypeLists.txt";
