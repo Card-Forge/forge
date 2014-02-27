@@ -3,6 +3,8 @@ package forge;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javax.swing.GroupLayout.Alignment;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -397,25 +399,24 @@ public class Forge implements ApplicationListener {
         }
 
         public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
-            BitmapFont font = skinFont.getFont();
-            font.setColor(skinColor.getColor());
+            drawText(text, skinFont.getFont(), skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
+        }
+        public void drawText(String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
+            drawText(text, skinFont.getFont(), color, x, y, w, h, wrap, horzAlignment, centerVertically);
+        }
+        public void drawText(String text, BitmapFont font, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
+            font.setColor(color);
             if (wrap) {
                 float textHeight = font.getWrappedBounds(text, w).height;
                 if (h > textHeight && centerVertically) {
                     y += (h - textHeight) / 2;
                 }
-                else if (h == 0) {
-                    h = textHeight;
-                }
-                font.drawWrapped(batch, text, adjustX(x), adjustY(y, h), w, horzAlignment);
+                font.drawWrapped(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
             }
             else {
                 float textHeight = font.getMultiLineBounds(text).height;
                 if (h > textHeight && centerVertically) {
                     y += (h - textHeight) / 2;
-                }
-                else if (h == 0) {
-                    h = textHeight;
                 }
                 font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
             }
