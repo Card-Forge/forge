@@ -279,12 +279,13 @@ public class Forge implements ApplicationListener {
         }
         public void startClip(float x, float y, float w, float h) {
             batch.flush(); //must flush batch to prevent other things not rendering
-            if (!ScissorStack.pushScissors(new Rectangle(adjustX(0), adjustY(0, h), w, h))) {
+            if (!ScissorStack.pushScissors(new Rectangle(adjustX(x), adjustY(y, h), w, h))) {
                 failedClipCount++; //tracked failed clips to prevent calling popScissors on endClip
             }
         }
         public void endClip() {
             if (failedClipCount == 0) {
+                batch.flush(); //must flush batch to ensure stuffed rendered during clip respects that clip
                 ScissorStack.popScissors();
             }
             else {

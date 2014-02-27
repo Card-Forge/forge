@@ -3,11 +3,14 @@ package forge.toolbox;
 import java.util.Date;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
+import forge.assets.FSkinFont;
 
 public class FProgressBar extends FDisplayObject {
     public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;
+    private static FSkinFont MSG_FONT;
 
     private long startMillis = 0;
     private int tempVal = 0, etaSecs = 0, maximum = 0, value = 0;
@@ -31,6 +34,7 @@ public class FProgressBar extends FDisplayObject {
      */
     public void setDescription(final String s0) {
         desc = s0;
+        message = s0;
     }
 
     private final Runnable barIncrementor = new Runnable() {
@@ -50,10 +54,12 @@ public class FProgressBar extends FDisplayObject {
         StringBuilder sb = new StringBuilder(desc);
         if (showCount) {
             sb.append(" ");
-            if (percentMode)
+            if (percentMode) {
                 sb.append(100 * tempVal / maximum).append("%");
-            else
+            }
+            else {
                 sb.append(tempVal).append(" of ").append(maximum);
+            }
         }
 
         if (showETA) {
@@ -73,6 +79,8 @@ public class FProgressBar extends FDisplayObject {
         startMillis = new Date().getTime();
         setShowETA(true);
         setShowCount(true);
+        value = 100;
+        maximum = 200;
     }
 
     /** @param b0 &emsp; Boolean, show the ETA statistic or not */
@@ -112,7 +120,26 @@ public class FProgressBar extends FDisplayObject {
     public void draw(Graphics g) {
         float w = getWidth();
         float h = getHeight();
+
+        //draw background and progress
         g.fillRect(BACK_COLOR, 0, 0, w, h);
+        float selWidth = w * (float)value / (float)maximum;
+        if (selWidth > 0) {
+            g.fillRect(SEL_BACK_COLOR, 0, 0, selWidth, h);
+        }
+
+        //draw message
+        if (MSG_FONT == null) { //must wait to initialize until after FSkin initialized
+            MSG_FONT = FSkinFont.get(12);
+        }
+        g.drawText(message, MSG_FONT, FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
+        if (selWidth > 0 && !SEL_FORE_COLOR.equals(FORE_COLOR)) {
+            g.startClip(0, 0, selWidth, h);
+            g.drawText(message, MSG_FONT, SEL_FORE_COLOR, 0, 0, w, h, false, HAlignment.CENTER, true);
+            g.endClip();
+        }
+
+        //draw border
         g.drawRect(Color.BLACK, 0, 0, w, h);
     }
 }
