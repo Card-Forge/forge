@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -161,6 +162,14 @@ public class DestroyAi extends SpellAbilityAi {
         } else {
             if (sa.hasParam("Defined")) {
                 list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+                if (sa.hasParam("AILogic")) {
+                    String logic = sa.getParam("AILogic");
+                    if ("WillSkipTurn".equals(logic) && !sa.getHostCard().getController().equals(ai)
+                            && (ai.getCreaturesInPlay().size() >= ai.getOpponent().getCreaturesInPlay().size() || ai.getLife() > 5)) {
+                        // Basic ai logic for Lethal Vapors
+                        return true;
+                    }
+                }
                 if (list.isEmpty()
                         || !CardLists.filterControlledBy(list, ai).isEmpty()
                         || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {

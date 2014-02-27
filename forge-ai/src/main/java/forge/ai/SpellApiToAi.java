@@ -118,7 +118,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.SetLife, LifeSetAi.class);
         apiToClass.put(ApiType.SetState, SetStateAi.class);
         apiToClass.put(ApiType.Shuffle, ShuffleAi.class);
-        apiToClass.put(ApiType.SkipTurn, CannotPlayAi.class);
+        apiToClass.put(ApiType.SkipTurn, SkipTurnAi.class);
         apiToClass.put(ApiType.StoreSVar, StoreSVarAi.class);
         apiToClass.put(ApiType.Tap, TapAi.class);
         apiToClass.put(ApiType.TapAll, TapAllAi.class);

@@ -1,0 +1,12 @@
+Name:Lethal Vapors
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Creature | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, destroy it.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard
+A:AB$ Destroy | Cost$ 0 | Defined$ Self | SubAbility$ DBSkipTurn | AnyPlayer$ True | AILogic$ WillSkipTurn | SpellDescription$ Destroy CARDNAME. You skip your next turn. Any player may activate this ability.
+SVar:DBSkipTurn:DB$ SkipTurn | Defined$ You | NumTurns$ 1 | AILogic$ Always
+SVar:CurseEffect:DestroyCreature
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lethal_vapors.jpg
+Oracle:Whenever a creature enters the battlefield, destroy it.\n{0}: Destroy Lethal Vapors. You skip your next turn. Any player may activate this ability.

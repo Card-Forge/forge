@@ -176,13 +176,17 @@ public class AiController {
         return spellAbilities;
     }
 
-    private boolean checkCurseEffects() {
+    private boolean checkCurseEffects(final SpellAbility sa) {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            if (c.hasSVar("CurseNonActiveEffect")
-                    && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
-                return true;
+            if (c.hasSVar("CurseEffect")) {
+                final String curse = c.getSVar("CurseEffect");
+                if ("NonActive".equals(curse) && !player.equals(game.getPhaseHandler().getPlayerTurn())) {
+                    return true;
+                } else if ("DestroyCreature".equals(curse) && sa.isSpell() && sa.getHostCard().isCreature()
+                        && !sa.getHostCard().hasKeyword("Indestructible")) {
+                    return true;
+                }
             }
-
         }
         return false;
     }
@@ -641,7 +645,7 @@ public class AiController {
                 card.setSVar("PayX", Integer.toString(xPay));
             }
         }
-        if (checkCurseEffects()) {
+        if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
         }
         if( sa instanceof SpellPermanent ) {

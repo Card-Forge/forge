@@ -125,6 +125,7 @@ forge-ai/src/main/java/forge/ai/ability/SacrificeAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ScryAi.java -text
 forge-ai/src/main/java/forge/ai/ability/SetStateAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ShuffleAi.java -text
+forge-ai/src/main/java/forge/ai/ability/SkipTurnAi.java -text
 forge-ai/src/main/java/forge/ai/ability/StoreSVarAi.java -text
 forge-ai/src/main/java/forge/ai/ability/TapAi.java -text
 forge-ai/src/main/java/forge/ai/ability/TapAiBase.java -text
@@ -7142,6 +7143,7 @@ forge-gui/res/cardsfolder/l/leshracs_rite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/leshracs_sigil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lesser_gargadon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lesser_werewolf.txt -text svneol=unset#text/plain
+forge-gui/res/cardsfolder/l/lethal_vapors.txt -text
 forge-gui/res/cardsfolder/l/lethargy_trap.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lethe_lake.txt -text
 forge-gui/res/cardsfolder/l/leveler.txt svneol=native#text/plain
