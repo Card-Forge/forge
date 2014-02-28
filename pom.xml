@@ -177,9 +177,9 @@
         <module>forge-core</module>
         <module>forge-game</module>
         <module>forge-gui</module>
-        <!--module>forge-m-android</module>
+        <module>forge-m-android</module>
         <module>forge-m-base</module>
-        <module>forge-m-desktop</module-->
+        <module>forge-m-desktop</module>
 		<module>forge-net</module>        
     </modules>
 

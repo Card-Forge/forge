@@ -90,9 +90,13 @@ forge-gui/target
 forge-gui/tools/PerSetTrackingResults
 forge-gui/tools/oracleScript.log
 forge-m-android/bin
+forge-m-android/target
 forge-m-base/bin
+forge-m-base/target
 forge-m-desktop/bin
+forge-m-desktop/libs
 forge-m-desktop/res
+forge-m-desktop/target
 forge-net/target
 /forge.profile.properties
 /nbactions.xml

@@ -9,17 +9,17 @@
         <version>1.5.14-SNAPSHOT</version>
     </parent>
 
-    <artifactId>forge-core</artifactId>
-    <name>Forge Core</name>
+    <artifactId>forge-m-desktop</artifactId>
+    <name>Forge Mobile Desktop</name>
 
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>forge</groupId>
+            <artifactId>forge-m-base</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-backend-lwjgl</artifactId>
+		</dependency>
     </dependencies>
 </project>

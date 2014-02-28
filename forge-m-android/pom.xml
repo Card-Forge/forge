@@ -9,17 +9,21 @@
         <version>1.5.14-SNAPSHOT</version>
     </parent>
 
-    <artifactId>forge-core</artifactId>
-    <name>Forge Core</name>
+    <artifactId>forge-m-android</artifactId>
+    <name>Forge Mobile Android</name>
 
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>forge</groupId>
+            <artifactId>forge-m-base</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+		<dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-android</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
         </dependency>
     </dependencies>
 </project>
