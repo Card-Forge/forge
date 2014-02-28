@@ -61,8 +61,8 @@ public class Forge implements ApplicationListener {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                final FProgressBar bar = splashScreen.getProgressBar();
                 final CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
-                    final FProgressBar bar = splashScreen.getProgressBar();
                     @Override
                     public void setOperationName(final String name, final boolean usePercents) {
                         Gdx.app.postRunnable(new Runnable() {
@@ -87,6 +87,8 @@ public class Forge implements ApplicationListener {
                 };
                 final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
                 magicDb = new StaticData(reader, "res/editions", "res/blockdata");
+                
+                bar.setDescription("Opening main window...");
 
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
@@ -99,9 +101,10 @@ public class Forge implements ApplicationListener {
     }
 
     private void afterDbLoaded() {
+        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
+
         FSkin.loadFull(splashScreen);
 
-        Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
         Gdx.input.setInputProcessor(new FGestureDetector());
         openScreen(new HomeScreen());
         splashScreen = null;
