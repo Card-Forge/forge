@@ -115,14 +115,15 @@ public class AbilityUtils {
                 // we don't want this to fall through and return the "Self"
                 return cards;
             }
-        }
-
-        else if (defined.equals("Targeted")) {
+        } else if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingCard();
             if (saTargeting != null) {
                 Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
             }
-
+        } else if (defined.equals("ThisTargetedCard")) { // do not add parent targeted
+            if (sa != null && sa.getTargets() != null) {
+                Iterables.addAll(cards, sa.getTargets().getTargetCards());
+            }
         } else if (defined.equals("ParentTarget")) {
             final SpellAbility parent = sa.getParentTargetingCard();
             if (parent != null) {
@@ -746,7 +747,7 @@ public class AbilityUtils {
         final String defined = (def == null) ? "You" : def;
         final Game game = card == null ? null : card.getGame();
 
-        if (defined.equals("Targeted")) {
+        if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (saTargeting != null) {
                 Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());

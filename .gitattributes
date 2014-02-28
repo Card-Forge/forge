@@ -10930,6 +10930,7 @@ forge-gui/res/cardsfolder/s/shield_sphere.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shield_wall.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shielded_passage.txt -text
 forge-gui/res/cardsfolder/s/shielding_plax.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shieldmage_advocate.txt -text
 forge-gui/res/cardsfolder/s/shieldmage_elder.txt -text
 forge-gui/res/cardsfolder/s/shieldmates_blessing.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shields_of_velis_vel.txt -text
