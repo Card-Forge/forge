@@ -25,7 +25,7 @@ public final class NewConstants {
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     // data that is only in the program dir
-    private static final String _RES_ROOT = "res/";
+    private static final String _RES_ROOT = NewConstants.class.getResource("/").getFile();
     private static final String _LIST_DIR = _RES_ROOT + "lists/";
     public static final String KEYWORD_LIST_FILE                     = _LIST_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = _LIST_DIR + "TypeLists.txt";

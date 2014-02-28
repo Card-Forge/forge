@@ -1,0 +1,13 @@
+Name:Crown of Empires
+ManaCost:2
+Types:Artifact
+A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ M12Complete | ConditionSVarCompare$ EQ0 | SubAbility$ DBControl | SpellDescription$ Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
+SVar:DBControl:DB$ GainControl | Defined$ Targeted | ConditionCheckSVar$ M12Complete
+SVar:RemRandomDeck:True
+DeckHints:Name$Scepter of Empires|Throne of Empires
+SVar:M12Complete:Count$Compare AllM12Empires GT0.1.0
+SVar:AllM12Empires:SVar$X/Times.Y
+SVar:X:Count$Valid Artifact.namedScepter of Empires+YouCtrl
+SVar:Y:Count$Valid Artifact.namedThrone of Empires+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_empires.jpg
+Oracle:{3}, {T}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.

@@ -55,9 +55,6 @@
 									<mainClass>forge.view.Main</mainClass>
 									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 								</manifest>
-								<manifestEntries>
-									<Implementation-Version>${fullversionstring}</Implementation-Version>
-								</manifestEntries>
 							</archive>
 						</configuration>
 					</execution>

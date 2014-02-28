@@ -139,6 +139,16 @@ forge-ai/src/main/java/forge/ai/ability/UntapAi.java -text
 forge-ai/src/main/java/forge/ai/ability/UntapAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ZoneExchangeAi.java -text
 forge-bundle/pom.xml svneol=native#text/xml
+forge-bundle/src/main/conf/cardsfolder.xml svneol=native#text/xml
+forge-bundle/src/main/conf/forge.ico -text svneol=unset#image/ico
+forge-bundle/src/main/conf/windows-linux.xml svneol=native#text/xml
+forge-bundle/src/main/resources/CHANGES.txt -text
+forge-bundle/src/main/resources/LICENSE.txt -text
+forge-bundle/src/main/resources/README.txt -text
+forge-bundle/src/main/resources/forge.bat svneol=native#text/plain
+forge-bundle/src/main/resources/forge.command svneol=native#text/x-sh
+forge-bundle/src/main/resources/forge.profile.properties.example -text
+forge-bundle/src/main/resources/forge.sh svneol=native#text/x-sh
 forge-bundle/src/main/resources/res/ai/Default.ai -text
 forge-bundle/src/main/resources/res/ai/Reckless.ai -text
 forge-bundle/src/main/resources/res/blockdata/blocks.txt svneol=native#text/plain
@@ -15402,18 +15412,11 @@ forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
 forge-gui/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui/.settings/org.eclipse.m2e.core.prefs -text
-forge-gui/CHANGES.txt -text
-forge-gui/LICENSE.txt -text
-forge-gui/README.txt -text
-forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
 forge-gui/src/main/config/Forge.icns -text
 forge-gui/src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
 forge-gui/src/main/config/builder/create-dmg.builder -text
 forge-gui/src/main/config/create-dmg -text
-forge-gui/src/main/config/forge.command svneol=native#text/x-sh
-forge-gui/src/main/config/forge.ico -text svneol=unset#image/ico
-forge-gui/src/main/config/forge.sh svneol=native#text/x-sh
 forge-gui/src/main/config/forge_checks.xml svneol=native#text/xml
 forge-gui/src/main/config/support/dmg-license.py svneol=native#text/x-python
 forge-gui/src/main/config/support/template.applescript -text
@@ -15955,6 +15958,18 @@ forge-gui/src/test/java/forge/gui/ListChooserTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
 forge-gui/src/test/java/forge/item/DeckHintsTest.java -text
 forge-gui/src/test/java/forge/model/FModelTest.java -text
+forge-gui/src/test/resources/cardsfolder/acidic_slime.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/ajanis_sunstriker.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/assault_griffin.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/auramancer.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/crown_of_empires.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/griffin_rider.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/llanowar_elves.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/mwonvuli_beast_tracker.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/scepter_of_empires.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/throne_of_empires.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/unsummon.txt svneol=native#text/plain
+forge-gui/src/test/resources/cardsfolder/wurms_tooth.txt svneol=native#text/plain
 forge-gui/tools/PerSetTracking.py svneol=native#text/x-python
 forge-gui/tools/assignSetInfo.py svneol=native#text/x-python
 forge-gui/tools/cardTemplateScript.py svneol=native#text/x-python

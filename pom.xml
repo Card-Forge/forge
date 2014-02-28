@@ -173,7 +173,7 @@
 
     <modules>
         <module>forge-ai</module>
-		<!--module>forge-bundle</module-->
+		<module>forge-bundle</module>
         <module>forge-core</module>
         <module>forge-game</module>
         <module>forge-gui</module>

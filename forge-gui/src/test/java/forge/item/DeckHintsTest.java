@@ -127,8 +127,7 @@ public class DeckHintsTest {
      * @return the CardPrinted
      */
     protected PaperCard readCard(String filename) {
-        String firstLetter = filename.substring(0, 1);
-        File dir = new File(NewConstants.CARD_DATA_DIR, firstLetter);
+        File dir = new File(NewConstants.CARD_DATA_DIR);
         File txtFile = new File(dir, filename);
 
         CardRules.Reader crr = new CardRules.Reader();

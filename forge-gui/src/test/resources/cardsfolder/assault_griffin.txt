@@ -1,0 +1,7 @@
+Name:Assault Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:3/2
+K:Flying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_griffin.jpg
+Oracle:Flying

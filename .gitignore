@@ -81,6 +81,7 @@ forge-bundle/src/main/resources/res/skins/the_simpsons/decks
 forge-bundle/src/main/resources/res/skins/the_simpsons/layouts
 forge-bundle/src/main/resources/res/skins/the_simpsons/pics*
 forge-bundle/src/main/resources/res/skins/the_simpsons/pics_product
+forge-bundle/target
 forge-core/forge-core.iml
 forge-core/target
 forge-game/target

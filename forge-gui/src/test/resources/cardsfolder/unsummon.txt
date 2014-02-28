@@ -1,0 +1,6 @@
+Name:Unsummon
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unsummon.jpg
+Oracle:Return target creature to its owner's hand.
