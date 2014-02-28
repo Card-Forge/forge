@@ -118,7 +118,7 @@ public enum CDeckgen implements ICDoc {
         
         if( null != gen ) {
             gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-            gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            gen.setUseArtifacts(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
             genConstructed.getMain().addAll(gen.getDeck(60, false));
         }
 

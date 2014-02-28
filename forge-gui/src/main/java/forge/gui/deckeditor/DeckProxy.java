@@ -282,7 +282,7 @@ public class DeckProxy implements InventoryItem {
             final GenerateThemeDeck gen = new GenerateThemeDeck();
             final Deck deck = new Deck();
             gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-            gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            gen.setUseArtifacts(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60));
             return deck;
         }

@@ -72,7 +72,7 @@ public class DeckgenUtil {
             deckName = "5 colors";
         }
         gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+        gen.setUseArtifacts(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
 
         if (null == deckName) {
@@ -282,7 +282,7 @@ public class DeckgenUtil {
         DeckGeneratorBase gen = null;
         gen = new DeckGenerator2Color(cardDb, comColors.get(0), comColors.get(1));
         gen.setSingleton(true);
-        gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+        gen.setUseArtifacts(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         CardPool cards = gen == null ? null : gen.getDeck(99, forAi);
 
         // After generating card lists, build deck.
