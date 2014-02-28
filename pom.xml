@@ -21,8 +21,12 @@
         <url>http://cardforge.org/bugz</url>
     </issueManagement>
     <properties>
+		<android.version>4.1.1.4</android.version>
+		<android.maven.version>3.8.2</android.maven.version>
         <cobertura.version>2.6</cobertura.version>
 		<gdx.version>0.9.9</gdx.version>
+		<gwt.maven.version>2.5.0</gwt.maven.version>
+		<gwt.version>2.5.0</gwt.version>
 		<jettyVersion>8.1.14.v20131031</jettyVersion>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -354,6 +358,24 @@
 			</dependency>
 			<dependency>
 				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-platform</artifactId>
+				<version>${gdx.version}</version>
+				<classifier>natives-armeabi</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-platform</artifactId>
+				<version>${gdx.version}</version>
+				<classifier>natives-armeabi-v7a</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-platform</artifactId>
+				<version>${gdx.version}</version>
+				<classifier>natives-desktop</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.badlogicgames.gdx</groupId>
 				<artifactId>gdx-backend-android</artifactId>
 				<version>${gdx.version}</version>
 			</dependency>
@@ -593,6 +615,12 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
 					<version>${versions.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<version>${android.maven.version}</version>
+					<extensions>true</extensions>
 				</plugin>
             </plugins>
         </pluginManagement>

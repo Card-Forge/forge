@@ -12,6 +12,9 @@
     <artifactId>forge-m-desktop</artifactId>
     <name>Forge Mobile Desktop</name>
 
+	<properties>
+		<mainClass>forge.view.Main</mainClass>
+	</properties>
     <dependencies>
         <dependency>
             <groupId>forge</groupId>
@@ -21,5 +24,37 @@
 			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-backend-lwjgl</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-platform</artifactId>
+			<classifier>natives-desktop</classifier>
+		</dependency>
     </dependencies>
+	<build>
+		<plugins>
+			<!-- this builds a totally standalone jar file when you invoke: mvn package -Pdesktop -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>${mainClass}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

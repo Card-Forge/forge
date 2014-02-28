@@ -15986,10 +15986,10 @@ forge-gui/tools/packdata.xlsx -text
 forge-m-android/.classpath -text
 forge-m-android/.project -text
 forge-m-android/.settings/org.eclipse.jdt.core.prefs -text
-forge-m-android/AndroidManifest.xml -text
 forge-m-android/ic_launcher-web.png -text
 forge-m-android/pom.xml svneol=native#text/xml
 forge-m-android/project.properties -text
+forge-m-android/src/main/conf/AndroidManifest.xml -text
 forge-m-android/src/main/java/com/forge/Main.java -text
 forge-m-android/src/main/resources/drawable-hdpi/ic_launcher.png -text
 forge-m-android/src/main/resources/drawable-mdpi/ic_launcher.png -text
