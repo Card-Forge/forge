@@ -36,6 +36,6 @@ public class ConstructedScreen extends LaunchScreen {
         aiRegisteredPlayer.setPlayer(aiLobbyPlayer);
         launchParams.players.add(aiRegisteredPlayer);
 
-        return false; //TODO: Support launching match
+        return true;
     }
 }
