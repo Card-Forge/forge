@@ -1344,6 +1344,9 @@ public enum FSkin {
         if (onInit) {
             final File f = new File(preferredDir + FILE_SPLASH);
             if (!f.exists()) {
+                if (skinName.equals("default")) {
+                    throw new RuntimeException("Cannot find default skin.");
+                }
                 FSkin.loadLight("default", onInit);
                 return;
             }
