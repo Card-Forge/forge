@@ -6,7 +6,7 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>${project.basedir}/src/main/resources/res/cardsfolder</directory>
+			<directory>${project.basedir}/src/main/resources/cardsfolder</directory>
 			<outputDirectory>/</outputDirectory>
 		</fileSet>
 	</fileSets>

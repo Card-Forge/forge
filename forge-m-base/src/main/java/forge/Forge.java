@@ -86,7 +86,7 @@ public class Forge implements ApplicationListener {
                     }
                 };
                 final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
-                magicDb = new StaticData(reader, "res/editions", "res/blockdata");
+                magicDb = new StaticData(reader, Forge.class.getResource("/").getFile()+"editions", Forge.class.getResource("/").getFile()+"blockdata");
                 
                 bar.setDescription("Opening main window...");
 

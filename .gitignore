@@ -99,6 +99,7 @@ forge-m-desktop/libs
 forge-m-desktop/res
 forge-m-desktop/target
 forge-net/target
+forge-resources/target
 /forge.profile.properties
 /nbactions.xml
 /pom.xml.next

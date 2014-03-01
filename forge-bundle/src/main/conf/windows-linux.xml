@@ -4,6 +4,13 @@
 		<format>tar.bz2</format>
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+			<scope>provided</scope>
+			<unpack>true</unpack>
+			<outputDirectory>/res</outputDirectory>
+		</dependencySet>
+	</dependencySets>
 	<fileSets>
 		<fileSet>
 			<directory>${project.basedir}/src/main/resources</directory>
@@ -18,7 +25,7 @@
 		<fileSet>
 			<directory>${project.basedir}/src/main/resources</directory>
 			<excludes>
-				<exclude>res/cardsfolder/**</exclude>
+				<!--exclude>res/cardsfolder/**</exclude-->
 				<exclude>forge.sh</exclude>
 				<exclude>forge.command</exclude>
 				<exclude>forge.bat</exclude>
@@ -27,16 +34,10 @@
 		</fileSet>
 		<fileSet>
 			<directory>${project.build.directory}</directory>
-			<includes>
-				<include>cardsfolder.zip</include>
-			</includes>
-			<outputDirectory>/res/cardsfolder</outputDirectory>
-		</fileSet>
-		<fileSet>
-			<directory>${project.build.directory}</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>forge.exe</include>
+				<!--include>res/**</include-->
 				<include>${project.build.finalName}-jar-with-dependencies.jar</include>
 			</includes>
 		</fileSet>

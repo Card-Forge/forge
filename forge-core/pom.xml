@@ -13,6 +13,11 @@
     <name>Forge Core</name>
 
     <dependencies>
+		<dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-resources</artifactId>
+			<scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>

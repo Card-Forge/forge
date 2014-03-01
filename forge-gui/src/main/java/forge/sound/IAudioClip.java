@@ -1,7 +1,9 @@
 package forge.sound;
 
+import forge.properties.NewConstants;
+
 public interface IAudioClip {
-    public static final String PathToSound = "res/sound";
+    public static final String PathToSound = NewConstants._RES_ROOT+"sound";
 
     public void play();
     public boolean isDone();

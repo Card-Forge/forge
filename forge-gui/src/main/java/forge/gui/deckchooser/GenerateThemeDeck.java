@@ -21,6 +21,7 @@ import forge.Singletons;
 import forge.deck.CardPool;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.error.BugReporter;
+import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 
@@ -61,7 +62,7 @@ public class GenerateThemeDeck extends DeckGeneratorBase {
     public static final ArrayList<String> getThemeNames() {
         final ArrayList<String> ltNames = new ArrayList<String>();
 
-        final File file = new File("res/quest/themes/");
+        final File file = new File(NewConstants._QUEST_DIR+"themes/");
 
         if (!file.exists()) {
             throw new RuntimeException("GenerateThemeDeck : getThemeNames error -- file not found -- filename is "
@@ -98,7 +99,7 @@ public class GenerateThemeDeck extends DeckGeneratorBase {
         String s = "";
 
         // read theme file
-        final String tFileName = "res/quest/themes/" + themeName + ".thm";
+        final String tFileName = NewConstants._QUEST_DIR+"themes/" + themeName + ".thm";
         List<String> lines = FileUtil.readFile(tFileName);
 
         final List<Grp> groups = readGroups(lines);

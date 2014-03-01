@@ -1,6 +1,7 @@
 package forge.gui.menus;
 
 import forge.gui.toolbox.FOptionPane;
+import forge.properties.NewConstants;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 
@@ -72,7 +73,7 @@ public final class HelpMenu {
 
     private static JMenuItem getMenuItem_HowToPlayFile() {
         JMenuItem menuItem = new JMenuItem("How to Play");
-        menuItem.addActionListener(getOpenFileAction(getFile("res\\howto.txt")));
+        menuItem.addActionListener(getOpenFileAction(getFile(NewConstants._RES_ROOT+"howto.txt")));
         return menuItem;
     }
 

@@ -67,6 +67,11 @@
             <groupId>forge</groupId>
             <artifactId>forge-net</artifactId>
         </dependency>
+		<dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-resources</artifactId>
+			<scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout</artifactId>

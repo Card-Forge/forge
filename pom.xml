@@ -185,6 +185,7 @@
         <module>forge-m-base</module>
         <module>forge-m-desktop</module>
 		<module>forge-net</module>        
+		<module>forge-resources</module>        
     </modules>
 
     <distributionManagement>
@@ -269,6 +270,11 @@
 			<dependency>
 				<groupId>forge</groupId>
 				<artifactId>forge-m-desktop</artifactId>
+				<version>1.5.14-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>forge</groupId>
+				<artifactId>forge-resources</artifactId>
 				<version>1.5.14-SNAPSHOT</version>
 			</dependency>
 			<dependency>

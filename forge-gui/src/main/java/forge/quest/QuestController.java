@@ -396,7 +396,7 @@ public class QuestController {
      */
     public void resetDuelsManager() {
         QuestWorld world = getWorld();
-        String path = world == null || world.getDuelsDir() == null ? NewConstants.DEFAULT_DUELS_DIR : "res/quest/world/" + world.getDuelsDir();
+        String path = world == null || world.getDuelsDir() == null ? NewConstants.DEFAULT_DUELS_DIR : NewConstants._RES_ROOT+"quest/world/" + world.getDuelsDir();
         this.duelManager = new QuestEventDuelManager(new File(path));
     }
 
@@ -406,7 +406,7 @@ public class QuestController {
      */
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
-        String path = world == null || world.getChallengesDir() == null ? NewConstants.DEFAULT_CHALLENGES_DIR : "res/quest/world/" + world.getChallengesDir();
+        String path = world == null || world.getChallengesDir() == null ? NewConstants.DEFAULT_CHALLENGES_DIR : NewConstants._RES_ROOT+"quest/world/" + world.getChallengesDir();
         this.allChallenges = new StorageBase<QuestEventChallenge>("Quest Challenges", new QuestChallengeReader(new File(path)));
     }
 

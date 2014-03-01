@@ -25,7 +25,7 @@ public final class NewConstants {
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     // data that is only in the program dir
-    private static final String _RES_ROOT = NewConstants.class.getResource("/").getFile();
+    public static final String _RES_ROOT = NewConstants.class.getResource("/").getFile();
     private static final String _LIST_DIR = _RES_ROOT + "lists/";
     public static final String KEYWORD_LIST_FILE                     = _LIST_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = _LIST_DIR + "TypeLists.txt";
@@ -38,7 +38,7 @@ public final class NewConstants {
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
 
-    private static final String _QUEST_DIR      = _RES_ROOT + "quest/";
+    public static final String _QUEST_DIR      = _RES_ROOT + "quest/";
     public static final String TEXT_HOWTO_FILE     = _RES_ROOT + "howto.txt";
     public static final String DRAFT_RANKINGS_FILE = _RES_ROOT + "draft/rankings.txt";
     public static final String PRICES_BOOSTER_FILE = _QUEST_DIR + "booster-prices.txt";
@@ -47,7 +47,10 @@ public final class NewConstants {
     public static final String DECK_CUBE_DIR       = _RES_ROOT + "cube";
     public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "worlds/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
-
+	public static final String EDITIONS_DIR    = _RES_ROOT + "editions/";
+	public static final String BLOCKDATA_DIR    = _RES_ROOT + "blockdata/";
+	public static final String IMAGES_DIR    = _RES_ROOT + "images/";
+	
     public static final String CARD_DATA_PETS_DIR     = _QUEST_DIR + "bazaar/";
     public static final String DEFAULT_DUELS_DIR      = _QUEST_DIR + "duels";
     public static final String DEFAULT_CHALLENGES_DIR = _QUEST_DIR + "challenges";

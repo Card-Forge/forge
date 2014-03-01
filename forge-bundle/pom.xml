@@ -18,6 +18,11 @@
             <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
         </dependency>
+		<dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-resources</artifactId>
+			<scope>provided</scope>
+        </dependency>
     </dependencies>
 	
 	<build>
@@ -34,6 +39,21 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!--plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>resources</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -58,7 +78,7 @@
 							</archive>
 						</configuration>
 					</execution>
-					<execution>
+					<!--execution>
 						<id>cardsfolder</id>
 						<phase>generate-resources</phase>
 						<goals>
@@ -72,7 +92,7 @@
 							</descriptors>
 							<finalName>cardsfolder</finalName>
 						</configuration>						
-					</execution>
+					</execution-->
 					<execution>
 						<id>windows-linux</id>
 						<phase>package</phase>

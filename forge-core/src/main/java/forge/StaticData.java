@@ -56,7 +56,7 @@ public class StaticData {
         this.boosters = new StorageBase<SealedProduct.Template>("Boosters", editions.getBoosterGenerator());
         this.specialBoosters = new StorageBase<SealedProduct.Template>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
         this.tournaments = new StorageBase<SealedProduct.Template>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
-        this.fatPacks = new StorageBase<FatPack.Template>("Fat packs", new FatPack.Template.Reader("res/blockdata/fatpacks.txt"));
+        this.fatPacks = new StorageBase<FatPack.Template>("Fat packs", new FatPack.Template.Reader(StaticData.class.getResource("/").getFile()+"/blockdata/fatpacks.txt"));
         this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
     }
 

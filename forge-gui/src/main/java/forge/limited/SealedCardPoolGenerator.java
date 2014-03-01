@@ -28,6 +28,7 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
 import forge.model.UnOpenedMeta;
+import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.ArrayUtils;
@@ -125,7 +126,7 @@ public class SealedCardPoolGenerator {
                 final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
                 // get list of custom draft files
-                final File dFolder = new File("res/sealed/");
+                final File dFolder = new File(NewConstants._RES_ROOT+"sealed/");
                 if (!dFolder.exists()) {
                     throw new RuntimeException("GenerateSealed : folder not found -- folder is "
                             + dFolder.getAbsolutePath());
@@ -139,7 +140,7 @@ public class SealedCardPoolGenerator {
 
                 for (final String element : dList) {
                     if (element.endsWith(".sealed")) {
-                        final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
+                        final List<String> dfData = FileUtil.readFile(NewConstants._RES_ROOT+"sealed/" + element);
                         final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
                         if (cs.getSealedProductTemplate().getNumberOfCardsExpected() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
                             customs.add(cs);

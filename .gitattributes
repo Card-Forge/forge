@@ -139,7 +139,6 @@ forge-ai/src/main/java/forge/ai/ability/UntapAi.java -text
 forge-ai/src/main/java/forge/ai/ability/UntapAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ZoneExchangeAi.java -text
 forge-bundle/pom.xml svneol=native#text/xml
-forge-bundle/src/main/conf/cardsfolder.xml svneol=native#text/xml
 forge-bundle/src/main/conf/forge.ico -text svneol=unset#image/ico
 forge-bundle/src/main/conf/windows-linux.xml svneol=native#text/xml
 forge-bundle/src/main/resources/CHANGES.txt -text
@@ -16064,4 +16063,6 @@ forge-net/src/main/java/forge/net/protocol/toserver/EchoPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/IPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/IncorrectPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/package-info.java -text
+forge-resources/pom.xml -text
+forge-resources/src/main/conf/cardsfolder.xml svneol=native#text/xml
 /pom.xml svneol=native#text/xml
