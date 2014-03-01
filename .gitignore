@@ -23,12 +23,6 @@ forge-m-desktop/res
 forge-m-desktop/target
 forge-net/target
 forge-resources/src/main/resources/cardsfolder/*.bat
-forge-resources/src/main/resources/res/*.log
-forge-resources/src/main/resources/res/PerSetTrackingResults
-forge-resources/src/main/resources/res/decks
-forge-resources/src/main/resources/res/layouts
-forge-resources/src/main/resources/res/pics*
-forge-resources/src/main/resources/res/pics_product
 forge-resources/src/main/resources/skins/*.log
 forge-resources/src/main/resources/skins/PerSetTrackingResults
 forge-resources/src/main/resources/skins/Thumbs.db
