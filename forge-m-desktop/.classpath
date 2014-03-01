@@ -1,28 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar"/>
-  <classpathentry kind="src" path="/forge-ai"/>
-  <classpathentry kind="src" path="/forge-core"/>
-  <classpathentry kind="src" path="/forge-game"/>
   <classpathentry kind="src" path="/forge-m-base"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx/0.9.9/gdx-0.9.9.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-backend-lwjgl/0.9.9/gdx-backend-lwjgl-0.9.9.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-freetype/0.9.9/gdx-freetype-0.9.9.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-openal/0.9.9/gdx-openal-0.9.9.jar"/>
+  <classpathentry kind="src" path="/forge-core"/>
+  <classpathentry kind="src" path="/forge-resources"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/15.0/guava-15.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput/2.0.5/jinput-2.0.5.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-linux.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-osx.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-windows.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/jlayer/jlayer/1.0.1-gdx/jlayer-1.0.1-gdx.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jcraft/jorbis/0.0.17/jorbis-0.0.17.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/java/jutils/jutils/1.0.0/jutils-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar"/>
+  <classpathentry kind="src" path="/forge-game"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/minlog/1.2/minlog-1.2.jar"/>
+  <classpathentry kind="src" path="/forge-ai"/>
+  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx/0.9.9/gdx-0.9.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-freetype/0.9.9/gdx-freetype-0.9.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-backend-lwjgl/0.9.9/gdx-backend-lwjgl-0.9.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-openal/0.9.9/gdx-openal-0.9.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/lwjgl/lwjgl/lwjgl/2.9.0/lwjgl-2.9.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/lwjgl/lwjgl/lwjgl-platform/2.9.0/lwjgl-platform-2.9.0-natives-windows.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/lwjgl/lwjgl/lwjgl-platform/2.9.0/lwjgl-platform-2.9.0-natives-linux.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/lwjgl/lwjgl/lwjgl-platform/2.9.0/lwjgl-platform-2.9.0-natives-osx.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/lwjgl/lwjgl/lwjgl-platform/2.9.0/lwjgl-platform-2.9.0-natives-windows.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput/2.0.5/jinput-2.0.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/java/jutils/jutils/1.0.0/jutils-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-linux.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-windows.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/java/jinput/jinput-platform/2.0.5/jinput-platform-2.0.5-natives-osx.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/jlayer/jlayer/1.0.1-gdx/jlayer-1.0.1-gdx.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jcraft/jorbis/0.0.17/jorbis-0.0.17.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/lwjgl/lwjgl/lwjgl_util/2.9.0/lwjgl_util-2.9.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/googlecode/minlog/1.2/minlog-1.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-platform/0.9.9/gdx-platform-0.9.9-natives-desktop.jar"/>
 </classpath>

@@ -1,12 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
   <name>forge-m-desktop</name>
   <comment>Forge lets you play the card game Magic: The Gathering against a computer opponent
-        using all of the rules.</comment>
+        using all of the rules. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects>
-    <project>forge-ai</project>
-    <project>forge-core</project>
-    <project>forge-game</project>
     <project>forge-m-base</project>
+    <project>forge-core</project>
+    <project>forge-resources</project>
+    <project>forge-game</project>
+    <project>forge-ai</project>
   </projects>
   <buildSpec>
     <buildCommand>

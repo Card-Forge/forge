@@ -1292,6 +1292,9 @@ forge-net/src/main/java/forge/net/protocol/toserver/EchoPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/IPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/IncorrectPacketSrv.java -text
 forge-net/src/main/java/forge/net/protocol/toserver/package-info.java -text
+forge-resources/.classpath -text
+forge-resources/.project -text
+forge-resources/.settings/org.eclipse.jdt.core.prefs -text
 forge-resources/pom.xml -text
 forge-resources/src/main/conf/cardsfolder.xml svneol=native#text/xml
 forge-resources/src/main/resources/ai/Default.ai -text
