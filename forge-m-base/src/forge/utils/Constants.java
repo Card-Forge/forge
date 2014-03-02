@@ -44,6 +44,8 @@ public final class Constants {
     public static final String PRICES_BOOSTER_FILE = _QUEST_DIR + "booster-prices.txt";
     public static final String BAZAAR_FILE         = _QUEST_DIR + "bazaar/index.xml";
     public static final String CARD_DATA_DIR       = _ASSETS_ROOT + "cardsfolder/";
+    public static final String EDITIONS_DIR        = _ASSETS_ROOT + "editions/";
+    public static final String BLOCK_DATA_DIR      = _ASSETS_ROOT + "blockdata/";
     public static final String DECK_CUBE_DIR       = _ASSETS_ROOT + "cube";
     public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "worlds/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
