@@ -18,7 +18,7 @@ public abstract class FScreen extends FContainer {
     private static final FSkinColor d40 = clr.stepColor(-40);
     private static final FSkinColor d80 = clr.stepColor(-80);
 
-    private final FLabel btnBack, lblHeader, btnMenu;
+    protected final FLabel btnBack, lblHeader, btnMenu;
 
     protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
         if (showBackButton) {
