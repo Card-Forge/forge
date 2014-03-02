@@ -27,7 +27,7 @@ public class CardDatabaseHelper {
 	
 	private static void initialize() {
 		final CardStorageReader reader = new CardStorageReader( NewConstants.CARD_DATA_DIR, null, null );
-        staticData = new StaticData( reader, NewConstants._RES_ROOT+"editions", NewConstants._RES_ROOT+"blockdata" );
+        staticData = new StaticData( reader, "res/editions", "res/blockdata" );
 	}
 	
 	private static boolean hasBeenInitialized() {

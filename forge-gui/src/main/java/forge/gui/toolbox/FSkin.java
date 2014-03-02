@@ -1268,7 +1268,7 @@ public enum FSkin {
     }
 
     private static final String
-        FILE_SKINS_DIR = NewConstants._RES_ROOT+"skins/",
+        FILE_SKINS_DIR = "res/skins/",
         FILE_ICON_SPRITE = "sprite_icons.png",
         FILE_FOIL_SPRITE = "sprite_foils.png",
         FILE_OLD_FOIL_SPRITE = "sprite_old_foils.png",

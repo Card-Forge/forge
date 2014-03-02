@@ -133,7 +133,7 @@ public final class BoosterDraft implements IBoosterDraft {
             break;
 
         case Custom:
-            final List<CustomLimited> myDrafts = draft.loadCustomDrafts(NewConstants._RES_ROOT+"draft/", ".draft");
+            final List<CustomLimited> myDrafts = draft.loadCustomDrafts("res/draft/", ".draft");
 
             if (myDrafts.isEmpty()) {
                 FOptionPane.showMessageDialog("No custom draft files found.");

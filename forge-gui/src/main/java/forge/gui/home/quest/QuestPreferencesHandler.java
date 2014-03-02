@@ -5,7 +5,6 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FSkin.SkinnedTextField;
-import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import net.miginfocom.swing.MigLayout;
@@ -62,7 +61,7 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlRewards.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         pnlRewards.add(new FLabel.Builder().text("Rewards")
-                .icon(new FSkin.UnskinnedIcon(NewConstants.IMAGES_DIR+"icons/CoinIcon.png")).build(),
+                .icon(new FSkin.UnskinnedIcon("res/images/icons/CoinIcon.png")).build(),
                 "w 100%!, h 30px!, span 2 1");
         pnlRewards.add(lblErrRewards, "w 100%!, h 30px!, span 2 1");
 
@@ -103,7 +102,7 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlDifficulty.setOpaque(false);
         pnlDifficulty.setLayout(new MigLayout("insets 0, gap 0, wrap 5"));
 
-        pnlDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments").icon(new FSkin.UnskinnedIcon(NewConstants.IMAGES_DIR+"icons/NotesIcon.png")).build(), "w 100%!, h 30px!, span 5 1");
+        pnlDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments").icon(new FSkin.UnskinnedIcon("res/images/icons/NotesIcon.png")).build(), "w 100%!, h 30px!, span 5 1");
         pnlDifficulty.add(lblErrDifficulty, "w 100%!, h 30px!, span 5 1");
 
         constraints1 = "w 60px!, h 26px!";
@@ -186,7 +185,7 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlBooster.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         pnlBooster.add(new FLabel.Builder().text("Booster Pack Ratios")
-                .icon(new FSkin.UnskinnedIcon(NewConstants.IMAGES_DIR+"icons/BookIcon.png")).build(),
+                .icon(new FSkin.UnskinnedIcon("res/images/icons/BookIcon.png")).build(),
                 "w 100%!, h 30px!, span 2 1");
         pnlBooster.add(lblErrBooster, "w 100%!, h 30px!, span 2 1");
 
@@ -206,7 +205,7 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlShop.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         pnlShop.add(new FLabel.Builder().text("Shop Preferences")
-                .icon(new FSkin.UnskinnedIcon(NewConstants.IMAGES_DIR+"icons/CoinIcon.png")).build(), "w 100%!, h 30px!, span 2 1");
+                .icon(new FSkin.UnskinnedIcon("res/images/icons/CoinIcon.png")).build(), "w 100%!, h 30px!, span 2 1");
         pnlShop.add(lblErrShop, "w 100%!, h 30px!, span 2 1");
 
         constraints1 = "w 60px, h 26px!";

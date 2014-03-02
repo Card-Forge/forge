@@ -40,7 +40,7 @@ import java.util.Map;
 public class AiProfileUtil {
     private static Map<String, Map<AiProps, String>> loadedProfiles = new HashMap<String, Map<AiProps, String>>();
 
-    private static final String AI_PROFILE_DIR = AiProfileUtil.class.getResource("/").getFile()+"ai";
+    private static final String AI_PROFILE_DIR = "res/ai";
     private static final String AI_PROFILE_EXT = ".ai";
 
     public static final String AI_PROFILE_RANDOM_MATCH = "* Random (Match) *";

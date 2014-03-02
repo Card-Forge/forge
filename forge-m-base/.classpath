@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
-  <classpathentry kind="output" path="target/classes"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="src" path="/forge-core"/>
-  <classpathentry kind="src" path="/forge-resources"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/15.0/guava-15.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar"/>
-  <classpathentry kind="src" path="/forge-game"/>
-  <classpathentry kind="var" path="M2_REPO/com/googlecode/minlog/1.2/minlog-1.2.jar"/>
-  <classpathentry kind="src" path="/forge-ai"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx/0.9.9/gdx-0.9.9.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/badlogicgames/gdx/gdx-freetype/0.9.9/gdx-freetype-0.9.9.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx.jar" sourcepath="libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-freetype.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/forge-ai"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/forge-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/forge-game"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/forge-net"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -16,22 +16,13 @@
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-game</artifactId>
+            <version>${project.version}</version>
         </dependency>
-		<dependency>
-            <groupId>com.googlecode</groupId>
-            <artifactId>minlog</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
+
     </dependencies>
 </project>

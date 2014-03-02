@@ -26,7 +26,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.limited.CustomLimited;
-import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
 import java.io.File;
@@ -185,7 +184,7 @@ public class MetaSet {
             case Combo:  return UnOpenedMeta.selectAll(data);
 
             case Cube:
-                final File dFolder = new File(NewConstants._RES_ROOT+"sealed/");
+                final File dFolder = new File("res/sealed/");
 
                 if (!dFolder.exists()) {
                     throw new RuntimeException("GenerateSealed : folder not found -- folder is " + dFolder.getAbsolutePath());
@@ -195,7 +194,7 @@ public class MetaSet {
                     throw new RuntimeException("GenerateSealed : not a folder -- " + dFolder.getAbsolutePath());
                 }
 
-                List<String> dfData = FileUtil.readFile(NewConstants._RES_ROOT+"sealed/" + data + ".sealed");
+                List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
                 final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
 
                 SealedProduct.Template fnPick = myCube.getSealedProductTemplate();

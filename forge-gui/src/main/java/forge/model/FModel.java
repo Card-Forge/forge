@@ -128,16 +128,16 @@ public class FModel {
             throw new RuntimeException(exn);
         }
         
-        this.formats = new GameFormat.Collection(new GameFormat.Reader(new File(NewConstants._RES_ROOT+"blockdata", "formats.txt")));
+        this.formats = new GameFormat.Collection(new GameFormat.Reader(new File("res/blockdata", "formats.txt")));
 
-        this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(NewConstants._RES_ROOT+"blockdata/blocks.txt", Singletons.getMagicDb().getEditions()));
+        this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader("res/blockdata/blocks.txt", Singletons.getMagicDb().getEditions()));
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
         
         
-        this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(NewConstants._RES_ROOT+"blockdata/fantasyblocks.txt", Singletons.getMagicDb().getEditions()));
-        this.worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(NewConstants._RES_ROOT+"quest/world/worlds.txt"));
+        this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader("res/blockdata/fantasyblocks.txt", Singletons.getMagicDb().getEditions()));
+        this.worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader("res/quest/world/worlds.txt"));
         // TODO - there's got to be a better place for this...oblivion?
         ForgePreferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
@@ -256,7 +256,7 @@ public class FModel {
 
         /*
          * if (!MagicColor.Constant.loaded[0]) { ArrayList<String> lcListFile =
-         * FileUtil.readFile(NewConstants._RES_ROOT+"gamedata/LandColorList");
+         * FileUtil.readFile("res/gamedata/LandColorList");
          * 
          * if (lcListFile.size() > 1) { for (int i=0; i<lcListFile.size(); i++)
          * { String s = lcListFile.get(i); if (s.length() > 1)
