@@ -282,16 +282,16 @@ public enum FSkinImage implements FImage {
 
     @Override
     public float getSourceWidth() {
-    	return w;
+        return w;
     }
 
     @Override
     public float getSourceHeight() {
-    	return h;
+        return h;
     }
 
-	@Override
-	public void draw(Graphics g, float x, float y, float w, float h) {
-		g.drawImage(FSkin.getImages().get(this), x, y, w, h);
-	}
+    @Override
+    public void draw(Graphics g, float x, float y, float w, float h) {
+        g.drawImage(FSkin.getImages().get(this), x, y, w, h);
+    }
 }

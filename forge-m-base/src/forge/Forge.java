@@ -111,8 +111,8 @@ public class Forge implements ApplicationListener {
     }
 
     public static void showMenu() {
-    	if (currentScreen == null) { return; }
-    	currentScreen.showMenu();
+        if (currentScreen == null) { return; }
+        currentScreen.showMenu();
     }
 
     public static void back() {
@@ -134,7 +134,7 @@ public class Forge implements ApplicationListener {
     }
 
     public static StaticData getMagicDb() {
-    	return magicDb;
+        return magicDb;
     }
 
     @Override
@@ -411,7 +411,7 @@ public class Forge implements ApplicationListener {
         }
 
         public void drawImage(FImage image, float x, float y, float w, float h) {
-        	image.draw(this, x, y, w, h);
+            image.draw(this, x, y, w, h);
         }
         public void drawImage(TextureRegion image, float x, float y, float w, float h) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
