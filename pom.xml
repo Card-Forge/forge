@@ -22,7 +22,7 @@
     </issueManagement>
     <properties>
 		<android.version>4.1.1.4</android.version>
-		<android.maven.version>3.8.2</android.maven.version>
+		<android.maven.version>3.9.0-rc.1</android.maven.version>
         <cobertura.version>2.6</cobertura.version>
 		<gdx.version>0.9.9</gdx.version>
 		<gwt.maven.version>2.5.0</gwt.maven.version>
