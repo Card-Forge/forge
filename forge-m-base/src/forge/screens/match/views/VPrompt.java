@@ -39,7 +39,6 @@ public class VPrompt extends FContainer {
         float h = getHeight();
 
         g.fillRect(backColor, 0, 0, w, h);
-        g.drawLine(foreColor, 0, 0, w, 0);
         g.drawText(message, font, foreColor, BTN_WIDTH, 0, w - 2 * BTN_WIDTH, h,
                 true, HAlignment.CENTER, true);
     }
