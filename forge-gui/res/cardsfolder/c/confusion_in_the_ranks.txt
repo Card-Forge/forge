@@ -1,0 +1,9 @@
+Name:Confusion in the Ranks
+ManaCost:3 R R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact,Creature,Enchantment | TriggerZones$ Battlefield | Execute$ TrigExchangeControl | TriggerDescription$ Whenever an artifact, creature, or enchantment enters the battlefield, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.
+SVar:TrigExchangeControl:AB$ ExchangeControl | Cost$ 0 | Defined$ TriggeredCard | TargetingPlayer$ TriggeredCardController | TargetsWithDefinedController$ NonTriggeredCardController | ValidTgts$ Permanent | TargetsWithSharedCardType$ TriggeredCard
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/confusion_in_the_ranks.jpg
+Oracle:Whenever an artifact, creature, or enchantment enters the battlefield, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.

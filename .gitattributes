@@ -2745,6 +2745,7 @@ forge-gui/res/cardsfolder/c/confiscate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conflagrate.txt -text
 forge-gui/res/cardsfolder/c/conflux.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/confound.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/confusion_in_the_ranks.txt -text
 forge-gui/res/cardsfolder/c/congregate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/congregation_at_dawn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/conjured_currency.txt -text

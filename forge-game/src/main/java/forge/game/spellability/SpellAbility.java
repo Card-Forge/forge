@@ -1022,6 +1022,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     return false;
                 }
             }
+            if (hasParam("TargetsWithSharedCardType") && entity instanceof Card) {
+                final Card c = (Card) entity;
+                List<Card> pl = AbilityUtils.getDefinedCards(getHostCard(), getParam("TargetsWithSharedCardType"), this);
+                for (final Card crd : pl) {
+                    if (!c.sharesCardTypeWith(crd)) {
+                        return false;
+                    }
+                }
+            }
 
             String[] validTgt = tr.getValidTgts();
             if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, this.getActivatingPlayer(), this.getHostCard()))

@@ -62,12 +62,27 @@ public class ControlExchangeAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if (sa.getTargetRestrictions() == null) {
+        TargetRestrictions tgt = sa.getTargetRestrictions();
+        if (tgt == null) {
             if (mandatory) {
                 return true;
             }
         } else {
-            return canPlayAI(aiPlayer, sa);
+            if (mandatory) {
+                List<Card> list2 = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
+                list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), aiPlayer, sa.getHostCard());
+                while (!list2.isEmpty()) {
+                    Card best = ComputerUtilCard.getBestAI(list2);
+                    if (sa.canTarget(best)) {
+                        sa.getTargets().add(best);
+                        return true;
+                    }
+                    list2.remove(best);
+                }
+                return false;
+            } else {
+                return canPlayAI(aiPlayer, sa);
+            }
         }
         return true;
     }
