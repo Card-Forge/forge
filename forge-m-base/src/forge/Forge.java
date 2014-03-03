@@ -329,7 +329,7 @@ public class Forge implements ApplicationListener {
         }
 
         public void drawLine(FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-            drawRect(skinColor.getColor(), x1, y1, x2, y2);
+            drawLine(skinColor.getColor(), x1, y1, x2, y2);
         }
         public void drawLine(Color color, float x1, float y1, float x2, float y2) {
             batch.end(); //must pause batch while rendering shapes
@@ -383,6 +383,29 @@ public class Forge implements ApplicationListener {
             shapeRenderer.begin(ShapeType.Filled);
             shapeRenderer.setColor(color);
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
+            shapeRenderer.end();
+
+            if (needBlending) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+
+            batch.begin();
+        }
+
+        public void fillTriangle(FSkinColor skinColor, float x1, float y1, float x2, float y2, float x3, float y3) {
+            fillTriangle(skinColor.getColor(), x1, y1, x2, y2, x2, y3);
+        }
+        public void fillTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3) {
+            batch.end(); //must pause batch while rendering shapes
+
+            boolean needBlending = (color.a != 0);
+            if (needBlending) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
+
+            shapeRenderer.begin(ShapeType.Filled);
+            shapeRenderer.setColor(color);
+            shapeRenderer.triangle(x1, y1, x2, y2, x3, y3);
             shapeRenderer.end();
 
             if (needBlending) {
