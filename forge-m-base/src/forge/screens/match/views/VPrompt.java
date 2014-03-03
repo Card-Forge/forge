@@ -6,6 +6,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FLabel;
 import forge.utils.Utils;
@@ -18,12 +19,12 @@ public class VPrompt extends FContainer {
     private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinFont font = FSkinFont.get(11);
 
-    private final FLabel btnOk, btnCancel;
+    private final FButton btnOk, btnCancel;
     private String message = "This is where the prompt would be.\nLine 2 of the prompt.\nLine 3 of the prompt.";
 
     public VPrompt() {
-        btnOk = add(new FLabel.ButtonBuilder().text("Yes").build());
-        btnCancel = add(new FLabel.ButtonBuilder().text("No").build());
+        btnOk = add(new FButton("Yes"));
+        btnCancel = add(new FButton("No"));
         btnOk.setSize(BTN_WIDTH, HEIGHT);
         btnCancel.setSize(BTN_WIDTH, HEIGHT);
     }

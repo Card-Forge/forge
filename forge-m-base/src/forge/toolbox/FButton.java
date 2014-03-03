@@ -117,9 +117,16 @@ public class FButton extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
 
-        g.drawImage(imgL, 0, 0, h, h);
-        g.drawImage(imgM, h, 0, w - (2 * h), h);
-        g.drawImage(imgR, w - h, 0, h, h);
+        if (w > 2 * h) {
+            g.drawImage(imgL, 0, 0, h, h);
+            g.drawImage(imgM, h, 0, w - (2 * h), h);
+            g.drawImage(imgR, w - h, 0, h, h);
+        }
+        else {
+            float buttonWidth = w / 2;
+            g.drawImage(imgL, 0, 0, buttonWidth, h);
+            g.drawImage(imgR, buttonWidth, 0, w - buttonWidth, h);
+        }
         if (!caption.isEmpty()) {
             g.drawText(caption, font, foreColor, insetX, 0, w - 2 * insetX, h, false, HAlignment.CENTER, true);
         }
