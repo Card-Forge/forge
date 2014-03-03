@@ -328,6 +328,20 @@ public class Forge implements ApplicationListener {
             bounds = parentBounds;
         }
 
+        public void drawLine(FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+            drawRect(skinColor.getColor(), x1, y1, x2, y2);
+        }
+        public void drawLine(Color color, float x1, float y1, float x2, float y2) {
+            batch.end(); //must pause batch while rendering shapes
+
+            shapeRenderer.begin(ShapeType.Line);
+            shapeRenderer.setColor(color);
+            shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+            shapeRenderer.end();
+
+            batch.begin();
+        }
+
         public void drawRect(FSkinColor skinColor, float x, float y, float w, float h) {
             drawRect(skinColor.getColor(), x, y, w, h);
         }
