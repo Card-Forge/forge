@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -412,6 +413,9 @@ public class Forge implements ApplicationListener {
 
         public void drawImage(FImage image, float x, float y, float w, float h) {
             image.draw(this, x, y, w, h);
+        }
+        public void drawImage(Texture image, float x, float y, float w, float h) {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
         public void drawImage(TextureRegion image, float x, float y, float w, float h) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);

@@ -4,8 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 
 import forge.Forge.Graphics;
 import forge.toolbox.FContainer;
+import forge.utils.Utils;
 
 public class VPrompt extends FContainer {
+    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
 
     @Override
     protected void doLayout(float width, float height) {

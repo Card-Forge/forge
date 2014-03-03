@@ -1,15 +1,20 @@
 package forge.assets;
 
+import java.util.Map;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import forge.Forge.Graphics;
 
 /** Properties of various components that make up the skin.
  * This interface allows all enums to be under the same roof.
  * It also enforces a getter for coordinate locations in sprites. */
 public enum FSkinImage implements FImage {
-    //Backgrounds
-    BG_TEXTURE (0, 0, 0, 0, SourceFile.TEXTURE),
-    BG_MATCH (0, 0, 0, 0, SourceFile.MATCH),
-
     //Zones
     HAND        (280, 40, 40, 40, SourceFile.ICONS),
     LIBRARY     (280, 0, 40, 40, SourceFile.ICONS),
@@ -227,10 +232,7 @@ public enum FSkinImage implements FImage {
     public enum SourceFile {
         ICONS("sprite_icons.png"),
         FOILS("sprite_foils.png"),
-        OLD_FOILS("sprite_old_foils.png"),
-        SPLASH("bg_splash.png"),
-        MATCH("bg_match.jpg"),
-        TEXTURE("bg_texture.jpg");
+        OLD_FOILS("sprite_old_foils.png");
 
         private final String filename;
 
@@ -245,6 +247,7 @@ public enum FSkinImage implements FImage {
 
     private final int x, y, w, h;
     private final SourceFile sourceFile;
+    private TextureRegion textureRegion;
 
     FSkinImage(int x0, int y0, int w0, int h0, SourceFile sourceFile0) {
         x = x0;
@@ -254,44 +257,111 @@ public enum FSkinImage implements FImage {
         sourceFile = sourceFile0;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getWidth(int fullWidth) {
-        if (w > 0) {
-            return w;
+    public void load(String preferredDir, String defaultDir, Map<String, Texture> textures, Pixmap preferredIcons) {
+        String filename = sourceFile.getFilename();
+        String preferredFile = preferredDir + filename;
+        Texture texture = textures.get(preferredFile);
+        if (texture == null) {
+            FileHandle file = Gdx.files.internal(preferredFile);
+            if (file.exists()) {
+                try {
+                    texture = new Texture(file);
+                }
+                catch (final Exception e) {
+                    System.err.println("Failed to load skin file: " + preferredFile);
+                    e.printStackTrace();
+                }
+            }
         }
-        return fullWidth + w;
-    }
+        if (texture != null) {
+            if (sourceFile != SourceFile.ICONS) { //just return region for preferred file if not icons file
+                textureRegion = new TextureRegion(texture, x, y, w, h);
+                return;
+            }
 
-    public int getHeight(int fullHeight) {
-        if (h > 0) {
-            return h;
+            int fullWidth = texture.getWidth();
+            int fullHeight = texture.getHeight();
+
+            // Test if requested sub-image in inside bounds of preferred sprite.
+            // (Height and width of preferred sprite were set in loadFontAndImages.)
+            if (x + w <= fullWidth && y + h <= fullHeight) {
+                // Test if various points of requested sub-image are transparent.
+                // If any return true, image exists.
+                int x0 = 0, y0 = 0;
+                Color c;
+    
+                // Center
+                x0 = (x + w / 2);
+                y0 = (y + h / 2);
+                c = new Color(preferredIcons.getPixel(x0, y0));
+                if (c.a != 0) {
+                    textureRegion = new TextureRegion(texture, x, y, w, h);
+                    return;
+                }
+    
+                x0 += 2;
+                y0 += 2;
+                c = new Color(preferredIcons.getPixel(x0, y0));
+                if (c.a != 0) {
+                    textureRegion = new TextureRegion(texture, x, y, w, h);
+                    return;
+                }
+    
+                x0 -= 4;
+                c = new Color(preferredIcons.getPixel(x0, y0));
+                if (c.a != 0) {
+                    textureRegion = new TextureRegion(texture, x, y, w, h);
+                    return;
+                }
+    
+                y0 -= 4;
+                c = new Color(preferredIcons.getPixel(x0, y0));
+                if (c.a != 0) {
+                    textureRegion = new TextureRegion(texture, x, y, w, h);
+                    return;
+                }
+    
+                x0 += 4;
+                c = new Color(preferredIcons.getPixel(x0, y0));
+                if (c.a != 0) {
+                    textureRegion = new TextureRegion(texture, x, y, w, h);
+                    return;
+                }
+            }
         }
-        return fullHeight + h;
-    }
 
-    public SourceFile getSourceFile() {
-        return sourceFile;
+        //use default file if can't use preferred file
+        String defaultFile = defaultDir + filename;
+        texture = textures.get(defaultFile);
+        if (texture == null) {
+            FileHandle file = Gdx.files.internal(defaultFile);
+            if (file.exists()) {
+                try {
+                    texture = new Texture(file);
+                }
+                catch (final Exception e) {
+                    System.err.println("Failed to load skin file: " + defaultFile);
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (texture != null) {
+            textureRegion = new TextureRegion(texture, x, y, w, h);
+        }
     }
 
     @Override
-    public float getSourceWidth() {
+    public float getWidth() {
         return w;
     }
 
     @Override
-    public float getSourceHeight() {
+    public float getHeight() {
         return h;
     }
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
-        g.drawImage(FSkin.getImages().get(this), x, y, w, h);
+        g.drawImage(this.textureRegion, x, y, w, h);
     }
 }

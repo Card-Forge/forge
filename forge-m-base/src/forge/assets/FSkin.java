@@ -23,7 +23,6 @@ public class FSkin {
         FILE_AVATAR_SPRITE = "sprite_avatars.png",
         DEFAULT_DIR = FILE_SKINS_DIR + "default/";
 
-    private static final Map<FSkinImage, TextureRegion> images = new HashMap<FSkinImage, TextureRegion>();
     private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
 
     private static ArrayList<String> allSkins;
@@ -65,14 +64,12 @@ public class FSkin {
             }
         }
 
-        images.clear();
-
         // Non-default (preferred) skin name and dir.
         preferredName = skinName.toLowerCase().replace(' ', '_');
         preferredDir = FILE_SKINS_DIR + preferredName + "/";
 
         if (splashScreen != null) {
-            final FileHandle f = Gdx.files.internal(preferredDir + SourceFile.SPLASH.getFilename());
+            final FileHandle f = Gdx.files.internal(preferredDir + "bg_splash.png");
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
                     FSkin.loadLight("default", splashScreen);
@@ -161,12 +158,12 @@ public class FSkin {
                 c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));
             }
 
-            //add images
+            //load images
             for (FSkinImage image : FSkinImage.values()) {
-                TextureRegion textureRegion = loadTextureRegion(image, textures, preferredIcons);
-                if (textureRegion != null) {
-                    images.put(image, textureRegion);
-                }
+                image.load(preferredDir, DEFAULT_DIR, textures, preferredIcons);
+            }
+            for (FSkinTexture image : FSkinTexture.values()) {
+                image.load(preferredDir, DEFAULT_DIR);
             }
 
             //assemble avatar textures
@@ -269,91 +266,6 @@ public class FSkin {
         addEncodingSymbol("T", GameplayImages.IMG_TAP);*/
     }
 
-    private static TextureRegion loadTextureRegion(FSkinImage image, Map<String, Texture> textures, Pixmap preferredIcons) {
-        SourceFile sourceFile = image.getSourceFile();
-        String filename = sourceFile.getFilename();
-        String preferredFile = preferredDir + filename;
-        Texture texture = textures.get(preferredFile);
-        if (texture == null) {
-            FileHandle file = Gdx.files.internal(preferredFile);
-            if (file.exists()) {
-                try {
-                    texture = new Texture(file);
-                }
-                catch (final Exception e) {
-                    System.err.println("Failed to load skin file: " + preferredFile);
-                    e.printStackTrace();
-                }
-            }
-        }
-        if (texture != null) {
-            int fullWidth = texture.getWidth();
-            int fullHeight = texture.getHeight();
-            int x0 = image.getX();
-            int y0 = image.getY();
-            int w0 = image.getWidth(fullWidth);
-            int h0 = image.getHeight(fullHeight);
-
-            if (sourceFile != SourceFile.ICONS) { //just return region for preferred file if not icons file
-                return new TextureRegion(texture, x0, y0, w0, h0);
-            }
-            else {
-                // Test if requested sub-image in inside bounds of preferred sprite.
-                // (Height and width of preferred sprite were set in loadFontAndImages.)
-                if (x0 + w0 <= fullWidth && y0 + h0 <= fullHeight) {
-                    // Test if various points of requested sub-image are transparent.
-                    // If any return true, image exists.
-                    int x = 0, y = 0;
-                    Color c;
-        
-                    // Center
-                    x = (x0 + w0 / 2);
-                    y = (y0 + h0 / 2);
-                    c = new Color(preferredIcons.getPixel(x, y));
-                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
-        
-                    x += 2;
-                    y += 2;
-                    c = new Color(preferredIcons.getPixel(x, y));
-                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
-        
-                    x -= 4;
-                    c = new Color(preferredIcons.getPixel(x, y));
-                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
-        
-                    y -= 4;
-                    c = new Color(preferredIcons.getPixel(x, y));
-                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
-        
-                    x += 4;
-                    c = new Color(preferredIcons.getPixel(x, y));
-                    if (c.a != 0) { return new TextureRegion(texture, x0, y0, w0, h0); }
-                }
-            }
-        }
-
-        //use default file if can't use preferred file
-        String defaultFile = DEFAULT_DIR + filename;
-        texture = textures.get(defaultFile);
-        if (texture == null) {
-            FileHandle file = Gdx.files.internal(defaultFile);
-            if (file.exists()) {
-                try {
-                    texture = new Texture(file);
-                }
-                catch (final Exception e) {
-                    System.err.println("Failed to load skin file: " + defaultFile);
-                    e.printStackTrace();
-                }
-            }
-        }
-        if (texture != null) {
-            return new TextureRegion(texture, image.getX(), image.getY(),
-                    image.getWidth(texture.getWidth()), image.getHeight(texture.getHeight()));
-        }
-        return null;
-    }
-
     /**
      * Gets the name.
      * 
@@ -404,10 +316,6 @@ public class FSkin {
 
     public static Iterable<String> getAllSkins() {
         return allSkins;
-    }
-
-    public static Map<FSkinImage, TextureRegion> getImages() {
-        return images;
     }
 
     public static Map<Integer, TextureRegion> getAvatars() {

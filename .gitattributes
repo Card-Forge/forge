@@ -16005,6 +16005,7 @@ forge-m-base/src/forge/assets/FSkin.java -text
 forge-m-base/src/forge/assets/FSkinColor.java -text
 forge-m-base/src/forge/assets/FSkinFont.java -text
 forge-m-base/src/forge/assets/FSkinImage.java -text
+forge-m-base/src/forge/assets/FSkinTexture.java -text
 forge-m-base/src/forge/player/LobbyPlayerHuman.java -text
 forge-m-base/src/forge/player/PlayerControllerHuman.java -text
 forge-m-base/src/forge/screens/FScreen.java -text

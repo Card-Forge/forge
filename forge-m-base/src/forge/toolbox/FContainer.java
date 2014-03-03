@@ -12,6 +12,10 @@ public abstract class FContainer extends FDisplayObject {
         return child;
     }
 
+    public Iterable<FDisplayObject> getChildren() {
+        return children;
+    }
+
     protected void drawBackground(Graphics g) {
     }
 

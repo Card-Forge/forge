@@ -1,7 +1,6 @@
 package forge.screens.match;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import forge.screens.FScreen;
@@ -9,9 +8,7 @@ import forge.screens.match.views.VLog;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
-import forge.utils.Utils;
 import forge.game.Match;
-import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 
 public class MatchScreen extends FScreen {
@@ -46,16 +43,12 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float logHeight = btnMenu.getHeight();
-        float stackWidth = Utils.AVG_FINGER_WIDTH;
-        float stackHeight = stackWidth * Utils.CARD_ASPECT_RATIO;
-        float promptHeight = Utils.AVG_FINGER_HEIGHT;
-        float playerPanelHeight = (height - startY - promptHeight - logHeight) / 2f;
+        float playerPanelHeight = (height - startY - VPrompt.HEIGHT - VLog.HEIGHT) / 2f;
 
-        log.setBounds(0, startY, width - btnMenu.getWidth(), logHeight);
-        topPlayerPanel.setBounds(0, startY + logHeight, width, playerPanelHeight);
-        stack.setBounds(0, startY + logHeight + playerPanelHeight - stackHeight / 2, stackWidth, stackHeight);
-        bottomPlayerPanel.setBounds(0, height - promptHeight - playerPanelHeight, width, playerPanelHeight);
-        prompt.setBounds(0, height - promptHeight, width, promptHeight);
+        log.setBounds(0, startY, width - FScreen.BTN_WIDTH, VLog.HEIGHT);
+        topPlayerPanel.setBounds(0, startY + VLog.HEIGHT, width, playerPanelHeight);
+        stack.setBounds(0, startY + VLog.HEIGHT + playerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
+        bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - playerPanelHeight, width, playerPanelHeight);
+        prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }
 }

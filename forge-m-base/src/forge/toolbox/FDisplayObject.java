@@ -24,11 +24,17 @@ public abstract class FDisplayObject {
     public float getLeft() {
         return bounds.x;
     }
+    public void setLeft(float x) {
+        bounds.x = x;
+    }
     public float getRight() {
         return bounds.x + bounds.width;
     }
     public float getTop() {
         return bounds.y;
+    }
+    public void setTop(float y) {
+        bounds.y = y;
     }
     public float getBottom() {
         return bounds.y + bounds.height;
@@ -36,8 +42,14 @@ public abstract class FDisplayObject {
     public float getWidth() {
         return bounds.width;
     }
+    public void setWidth(float width) {
+        bounds.width = width;
+    }
     public float getHeight() {
         return bounds.height;
+    }
+    public void setHeight(float height) {
+        bounds.height = height;
     }
     public boolean contains(float x, float y) {
         return visible && bounds.contains(x, y);

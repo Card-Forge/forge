@@ -7,18 +7,22 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
 import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public abstract class FScreen extends FContainer {
+    public static final float BTN_WIDTH = Utils.AVG_FINGER_WIDTH;
+    public static final float BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT;
+
     private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
     private static final FSkinColor clr = clrTheme.stepColor(0);
     private static final FSkinColor a100 = clr.alphaColor(100f / 255f);
     private static final FSkinColor d40 = clr.stepColor(-40);
     private static final FSkinColor d80 = clr.stepColor(-80);
 
-    protected final FLabel btnBack, lblHeader, btnMenu;
+    private final FLabel btnBack, lblHeader, btnMenu;
 
     protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
         if (showBackButton) {
@@ -75,16 +79,15 @@ public abstract class FScreen extends FContainer {
         float headerX = 0;
         float insets = 0;
         float headerWidth = width;
-        float buttonWidth = Utils.AVG_FINGER_WIDTH;
-        float headerHeight = Utils.AVG_FINGER_HEIGHT;
+        float headerHeight = BTN_HEIGHT;
 
         if (btnBack != null) {
-            btnBack.setBounds(insets, insets, buttonWidth, headerHeight);
+            btnBack.setBounds(insets, insets, BTN_WIDTH, BTN_HEIGHT);
             headerX = btnBack.getWidth();
             headerWidth -= headerX;
         }
         if (btnMenu != null) {
-            btnMenu.setBounds(width - buttonWidth - insets, insets, buttonWidth, headerHeight);
+            btnMenu.setBounds(width - BTN_WIDTH - insets, insets, BTN_WIDTH, BTN_HEIGHT);
             headerWidth -= btnMenu.getWidth();
         }
         if (lblHeader != null) {
@@ -103,7 +106,7 @@ public abstract class FScreen extends FContainer {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.drawImage(FSkinImage.BG_TEXTURE, 0, 0, w, h);
+        g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
         g.fillRect(clrTheme, 0, 0, w, h);
 
         if (lblHeader != null) { //draw custom background behind header label

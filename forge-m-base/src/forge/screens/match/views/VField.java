@@ -1,8 +1,22 @@
 package forge.screens.match.views;
 
+import forge.Forge.Graphics;
+import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
 
 public class VField extends FContainer {
+
+    private boolean flipped;
+
+    public VField() {
+    }
+
+    public boolean isFlipped() {
+        return flipped;
+    }
+    public void setFlipped(boolean flipped0) {
+        flipped = flipped0;
+    }
 
     @Override
     protected void doLayout(float width, float height) {
@@ -10,4 +24,10 @@ public class VField extends FContainer {
         
     }
 
+    @Override
+    protected void drawBackground(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.drawImage(FSkinTexture.BG_MATCH, 0, 0, w, h);
+    }
 }

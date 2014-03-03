@@ -1,10 +1,8 @@
 package forge.screens.match.views;
 
-import com.badlogic.gdx.graphics.Color;
-
-import forge.Forge.Graphics;
 import forge.game.player.RegisteredPlayer;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 
 public class VPlayerPanel extends FContainer {
     private final RegisteredPlayer player;
@@ -12,32 +10,33 @@ public class VPlayerPanel extends FContainer {
     private final VField field;
     private final VAvatar avatar;
 
-    private boolean flipped;
-
     public VPlayerPanel(RegisteredPlayer player0) {
         player = player0;
-        phases = new VPhases();
-        field = new VField();
-        avatar = new VAvatar();
+        phases = add(new VPhases());
+        field = add(new VField());
+        avatar = add(new VAvatar(player.getPlayer().getAvatarIndex()));
     }
 
     public boolean isFlipped() {
-        return flipped;
+        return field.isFlipped();
     }
     public void setFlipped(boolean flipped0) {
-        flipped = flipped0;
+        field.setFlipped(flipped0);
     }
 
     @Override
     protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
-    }
+        //layout for bottom panel by default
+        float phasesTop = VStack.HEIGHT / 2;
+        float phasesWidth = VStack.WIDTH;
+        phases.setBounds(0, phasesTop, phasesWidth, height - VAvatar.HEIGHT - phasesTop);
+        field.setBounds(phasesWidth, 0, width - phasesWidth, height - VAvatar.HEIGHT);
+        avatar.setPosition(0, height - VAvatar.HEIGHT);
 
-    @Override
-    protected void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
-        g.fillRect(flipped ? Color.LIGHT_GRAY : Color.GRAY, 0, 0, w, h);
+        if (isFlipped()) { //flip all positions across x-axis if needed
+            for (FDisplayObject child : getChildren()) {
+                child.setTop(height - child.getBottom());
+            }
+        }
     }
 }
