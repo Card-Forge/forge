@@ -757,7 +757,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 totcmc -= c.getCMC();
             }
         }
-        
+
+        if (sa.hasParam("ShuffleChangedPile")) {
+            CardLists.shuffle(chosenCards);
+        }
+
         List<Card> movedCards = new ArrayList<Card>();
         long ts = game.getNextTimestamp();
         for(Card c : chosenCards) {

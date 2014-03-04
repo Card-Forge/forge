@@ -71,8 +71,8 @@ public class DebuffEffect extends SpellAbilityEffect {
                     }
                     tgtC.removeIntrinsicKeyword(kw);
                     tgtC.removeAllExtrinsicKeyword(kw);
-                    tgtC.addChangedCardKeywords(new ArrayList<String>(), kws, false, timestamp);
                 }
+                tgtC.addChangedCardKeywords(new ArrayList<String>(), kws, false, timestamp);
             }
             if (!sa.hasParam("Permanent")) {
                 game.getEndOfTurn().addUntil(new GameCommand() {

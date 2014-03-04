@@ -102,8 +102,10 @@ public class GameAction {
      * @return a {@link forge.game.card.Card} object.
      */
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
-        if (c.isCopiedSpell()) {
-            if ((zoneFrom != null)) {
+        if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
+            // Remove Effect from command immediately, this is essential when some replacement
+            // effects happen during the resolving of a spellability ("the next time ..." effect)
+            if (zoneFrom != null) {
                 zoneFrom.remove(c);
             }
             return c;

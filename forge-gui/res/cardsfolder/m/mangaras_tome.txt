@@ -1,0 +1,18 @@
+Name:Mangara's Tome
+ManaCost:5
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | ChangeNum$ 5 | ChangeType$ Card | Origin$ Library | Destination$ Exile | ShuffleChangedPile$ True | ExileFaceDown$ True | RememberChanged$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | Static$ True | Execute$ TrigForget
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ 2 | RememberObjects$ FirstRemembered | Triggers$ TrigLeavePlay | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,RepMangarasTome | ImprintCards$ Self | SpellDescription$ The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.
+SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ RepMangarasTome | Description$ The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.
+SVar:TrigLeavePlay:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ ExileEffect | Static$ True
+SVar:RepMangarasTome:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mangaras_tome.jpg
+Oracle:When Mangara's Tome enters the battlefield, search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.\n{2}: The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.

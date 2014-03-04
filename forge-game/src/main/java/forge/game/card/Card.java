@@ -1864,13 +1864,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isFaceDown()) {
-                        sb.append("Face Down ");
+                        sb.append("Face Down");
+                        // face-down cards don't show unique number to avoid cheating
                     } else {
                         sb.append(c.getName());
+                        sb.append(" (");
+                        sb.append(c.getUniqueNumber());
+                        sb.append(")");
                     }
-                    sb.append("(");
-                    sb.append(c.getUniqueNumber());
-                    sb.append(")");
                 } else if (o != null) {
                     sb.append(o.toString());
                 }
