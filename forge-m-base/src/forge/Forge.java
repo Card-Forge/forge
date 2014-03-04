@@ -393,7 +393,7 @@ public class Forge implements ApplicationListener {
         }
 
         public void fillTriangle(FSkinColor skinColor, float x1, float y1, float x2, float y2, float x3, float y3) {
-            fillTriangle(skinColor.getColor(), x1, y1, x2, y2, x2, y3);
+            fillTriangle(skinColor.getColor(), x1, y1, x2, y2, x3, y3);
         }
         public void fillTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3) {
             batch.end(); //must pause batch while rendering shapes
@@ -405,7 +405,7 @@ public class Forge implements ApplicationListener {
 
             shapeRenderer.begin(ShapeType.Filled);
             shapeRenderer.setColor(color);
-            shapeRenderer.triangle(x1, y1, x2, y2, x3, y3);
+            shapeRenderer.triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
             shapeRenderer.end();
 
             if (needBlending) {
