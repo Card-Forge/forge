@@ -40,7 +40,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 /** 
@@ -125,7 +124,7 @@ public class ComputerUtilMana {
         }
 
         // arrange all mana abilities by color produced.
-        final Multimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
+        final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
             refundMana(manaSpentToPay, ai, sa);
 
@@ -138,17 +137,11 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        ArrayListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
-//        if (DEBUG_MANA_PAYMENT) {
-//            System.out.println((test ? "test -- " : "PROD -- ") + FThreads.debugGetStackTraceItem(5, true));
-//            for (Entry<ManaCostShard, Collection<SpellAbility>> src : sourcesForShards.entrySet()) {
-//                System.out.println("\t" +src.getKey() + " : " + src.getValue().size() + " source(s)");
-//                for (SpellAbility sss : src.getValue()) {
-//                    System.out.printf("\t\t%s - %s%n", sss.getHostCard(), sss);
-//                }
-//            }
-//        }
+        if (DEBUG_MANA_PAYMENT) {
+        	System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
+        }
 
         List<String> paymentPlan = new ArrayList<String>();
 
@@ -576,12 +569,19 @@ public class ComputerUtilMana {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static Multimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final Multimap<Integer, SpellAbility> manaAbilityMap,
+    private static ArrayListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap,
             final ManaCostBeingPaid cost) {
-        Multimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
+    	ArrayListMultimap<ManaCostShard, SpellAbility> res = ArrayListMultimap.create();
+    	
+        if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS)) {
+            res.putAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
+        }
 
         // loop over cost parts
         for (ManaCostShard shard : cost.getDistinctShards()) {
+            if (DEBUG_MANA_PAYMENT) {
+            	System.out.println("DEBUG_MANA_PAYMENT: shard = " + shard);
+            }
             if (shard == ManaCostShard.S) {
                 res.putAll(shard, manaAbilityMap.get(ManaAtom.IS_SNOW));
                 continue;
@@ -595,17 +595,21 @@ public class ComputerUtilMana {
                     res.putAll(shard, manaAbilityMap.get(ManaAtom.COLORLESS));
                 continue;
             }
+            
+            if (shard == ManaCostShard.COLORLESS) {
+            	continue;
+            }
 
-            for (Entry<Integer, SpellAbility> kv : manaAbilityMap.entries()) {
+            for (Integer colorint : manaAbilityMap.keySet()) {
                 // apply mana color change matrix here
-                if (ai.getManaPool().canPayForShardWithColor(shard, kv.getKey().byteValue())) {
-                    res.put(shard, kv.getValue());
+                if (ai.getManaPool().canPayForShardWithColor(shard, colorint.byteValue())) {
+                	for (SpellAbility sa : manaAbilityMap.get(colorint)) {
+                		if (!res.get(shard).contains(sa)) {
+                			res.get(shard).add(res.get(shard).size(), sa);
+                		}
+                	}
                 }
             }
-        }
-
-        if (cost.getColorlessManaAmount() > 0 && manaAbilityMap.containsKey(ManaAtom.COLORLESS)) {
-            res.putAll(ManaCostShard.COLORLESS, manaAbilityMap.get(ManaAtom.COLORLESS));
         }
 
         return res;
@@ -673,8 +677,9 @@ public class ComputerUtilMana {
     }
 
     //This method is currently used by AI to estimate available mana
-    public static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
-        final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
+    public static ArrayList<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
+        final ArrayList<Card> list = new ArrayList<Card>();
+        list.addAll(ai.getCardsIn(ZoneType.Battlefield));
         list.addAll(ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -689,15 +694,15 @@ public class ComputerUtilMana {
             }
         }); // CardListFilter
 
-        final List<Card> sortedManaSources = new ArrayList<Card>();
-        final List<Card> otherManaSources = new ArrayList<Card>();
-        final List<Card> colorlessManaSources = new ArrayList<Card>();
-        final List<Card> oneManaSources = new ArrayList<Card>();
-        final List<Card> twoManaSources = new ArrayList<Card>();
-        final List<Card> threeManaSources = new ArrayList<Card>();
-        final List<Card> fourManaSources = new ArrayList<Card>();
-        final List<Card> fiveManaSources = new ArrayList<Card>();
-        final List<Card> anyColorManaSources = new ArrayList<Card>();
+        final ArrayList<Card> sortedManaSources = new ArrayList<Card>();
+        final ArrayList<Card> otherManaSources = new ArrayList<Card>();
+        final ArrayList<Card> colorlessManaSources = new ArrayList<Card>();
+        final ArrayList<Card> oneManaSources = new ArrayList<Card>();
+        final ArrayList<Card> twoManaSources = new ArrayList<Card>();
+        final ArrayList<Card> threeManaSources = new ArrayList<Card>();
+        final ArrayList<Card> fourManaSources = new ArrayList<Card>();
+        final ArrayList<Card> fiveManaSources = new ArrayList<Card>();
+        final ArrayList<Card> anyColorManaSources = new ArrayList<Card>();
 
         // Sort mana sources
         // 1. Use lands that can only produce colorless mana without
@@ -765,28 +770,38 @@ public class ComputerUtilMana {
                 fiveManaSources.add(card);
             }
         }
-        sortedManaSources.addAll(colorlessManaSources);
-        sortedManaSources.addAll(oneManaSources);
-        sortedManaSources.addAll(twoManaSources);
-        sortedManaSources.addAll(threeManaSources);
-        sortedManaSources.addAll(fourManaSources);
-        sortedManaSources.addAll(fiveManaSources);
-        sortedManaSources.addAll(anyColorManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), colorlessManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), oneManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), twoManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), threeManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), fourManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), fiveManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), anyColorManaSources);
         //use better creatures later
         ComputerUtilCard.sortByEvaluateCreature(otherManaSources);
         Collections.reverse(otherManaSources);
-        sortedManaSources.addAll(otherManaSources);
+        sortedManaSources.addAll(sortedManaSources.size(), otherManaSources);
+
+        if (DEBUG_MANA_PAYMENT) {
+            System.out.println("DEBUG_MANA_PAYMENT: manaAbilityMap = " + sortedManaSources);
+        }
         return sortedManaSources;
     } // getAvailableMana()
 
     //This method is currently used by AI to estimate mana available
-    private static Multimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
-        final Multimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
+    private static ArrayListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
+        final ArrayListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
         final Game game = ai.getGame();
 
         // Loop over all current available mana sources
         for (final Card sourceCard : getAvailableMana(ai, checkPlayable)) {
+            if (DEBUG_MANA_PAYMENT) {
+                System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor sourceCard = " + sourceCard);
+            }
             for (final SpellAbility m : getAIPlayableMana(sourceCard)) {
+                if (DEBUG_MANA_PAYMENT) {
+                    System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor m = " + m);
+                }
                 m.setActivatingPlayer(ai);
                 if (checkPlayable && !m.canPlay()) {
                     continue;
@@ -800,7 +815,7 @@ public class ComputerUtilMana {
                     }
                 }
 
-                manaMap.put(ManaAtom.COLORLESS, m); // add to colorless source list
+                manaMap.get(ManaAtom.COLORLESS).add(manaMap.get(ManaAtom.COLORLESS).size(), m); // add to colorless source list
                 AbilityManaPart mp = m.getManaPart();
 
                 // setup produce mana replacement effects
@@ -831,22 +846,25 @@ public class ComputerUtilMana {
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
                 if (mp.canProduce("W", m) || reflectedColors.contains(MagicColor.Constant.WHITE)) {
-                    manaMap.put(ManaAtom.WHITE, m);
+                    manaMap.get(ManaAtom.WHITE).add(manaMap.get(ManaAtom.WHITE).size(), m);
                 }
                 if (mp.canProduce("U", m) || reflectedColors.contains(MagicColor.Constant.BLUE)) {
-                    manaMap.put(ManaAtom.BLUE, m);
+                	manaMap.get(ManaAtom.BLUE).add(manaMap.get(ManaAtom.BLUE).size(), m);
                 }
                 if (mp.canProduce("B", m) || reflectedColors.contains(MagicColor.Constant.BLACK)) {
-                    manaMap.put(ManaAtom.BLACK, m);
+                	manaMap.get(ManaAtom.BLACK).add(manaMap.get(ManaAtom.BLACK).size(), m);
                 }
                 if (mp.canProduce("R", m) || reflectedColors.contains(MagicColor.Constant.RED)) {
-                    manaMap.put(ManaAtom.RED, m);
+                	manaMap.get(ManaAtom.RED).add(manaMap.get(ManaAtom.RED).size(), m);
                 }
                 if (mp.canProduce("G", m) || reflectedColors.contains(MagicColor.Constant.GREEN)) {
-                    manaMap.put(ManaAtom.GREEN, m);
+                	manaMap.get(ManaAtom.GREEN).add(manaMap.get(ManaAtom.GREEN).size(), m);
                 }
                 if (mp.isSnow()) {
-                    manaMap.put(ManaAtom.IS_SNOW, m);
+                	manaMap.get(ManaAtom.IS_SNOW).add(manaMap.get(ManaAtom.IS_SNOW).size(), m);
+                }
+                if (DEBUG_MANA_PAYMENT) {
+                    System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor manaMap  = " + manaMap);
                 }
             } // end of mana abilities loop
         } // end of mana sources loop
@@ -893,7 +911,9 @@ public class ComputerUtilMana {
             }
 
             if (!res.contains(a)) {
-                res.add(a);
+            	if (cost.isReusuableResource()) {
+            		res.add(0, a);
+            	}
             }
         }
         return res;
