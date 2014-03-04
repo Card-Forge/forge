@@ -67,7 +67,9 @@ public class CostPutCounter extends CostPartWithList {
     }
     
     @Override
-    public boolean isReusable() { return true; }
+    public boolean isReusable() {
+        return counter != CounterType.M1M1;
+    }
 
     /*
      * (non-Javadoc)

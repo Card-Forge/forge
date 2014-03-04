@@ -64,9 +64,6 @@ public class CostRemoveCounter extends CostPartWithList {
     }
 
     @Override
-    public boolean isReusable() { return true; }
-
-    @Override
     public boolean isUndoable() { return true; }
 
     /*
