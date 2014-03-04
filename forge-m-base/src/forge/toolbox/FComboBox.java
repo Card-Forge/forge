@@ -7,15 +7,18 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 
 public class FComboBox<E> extends FDisplayObject {
-    private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor backColor = FSkinColor.get(Colors.CLR_THEME2);
+    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
+    private static final FSkinColor BORDER_COLOR = BACK_COLOR.getContrastColor(10);
 
     private final List<E> items = new ArrayList<E>();
     private int selectedIndex;
     private HAlignment alignment;
+    private FSkinFont font;
 
     public FComboBox() {
         initialize();
@@ -35,6 +38,8 @@ public class FComboBox<E> extends FDisplayObject {
 
     private void initialize() {
         selectedIndex = items.isEmpty() ? -1 : 0;
+        font = FSkinFont.get(12);
+        alignment = HAlignment.LEFT;
     }
 
     public void addItem(E item) {
@@ -73,16 +78,27 @@ public class FComboBox<E> extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+
+        g.fillRect(BACK_COLOR, 0, 0, w, h);
+        g.drawRect(BORDER_COLOR, 0, 0, w, h);
+
         float shapeWidth = 8;
         float shapeHeight = 8;
-        float x = getWidth() - shapeWidth - 6;
-        float y = getHeight() / 2 - 1;
+        float x = w - shapeWidth - 6;
+        float y = h / 2 - 1;
         if (getHeight() > 26) { //increase arrow size if taller combo box
             shapeWidth += 2;
             shapeHeight += 2;
             x -= 4;
             y--;
         }
-        g.fillTriangle(foreColor, x, y, x + shapeWidth, y, x + (shapeWidth / 2), y + (shapeHeight / 2));
+        g.fillTriangle(FORE_COLOR, x, y, x + shapeWidth, y, x + (shapeWidth / 2), y + (shapeHeight / 2));
+
+        E selectedItem = getSelectedItem();
+        if (selectedItem != null) {
+            g.drawText(selectedItem.toString(), font, FORE_COLOR, 3, 0, x - 6, h, false, alignment, true);
+        }
     }
 }
