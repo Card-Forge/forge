@@ -15,6 +15,6 @@ public class SettingsScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        cmbTheme.setBounds(20, 20, width, 25);
+        cmbTheme.setBounds(20, startY + 20, width, 25);
     }
 }
