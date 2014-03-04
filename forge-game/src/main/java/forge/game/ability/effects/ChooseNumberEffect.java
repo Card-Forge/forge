@@ -56,6 +56,9 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     // don't notify here, because most scripts I've seen don't store that number in a long term
                 }
                 card.setChosenNumber(chosen);
+                if (sa.hasParam("Notify")) {
+                    p.getGame().getAction().nofityOfValue(sa, card, p.getName() + " picked " + chosen, p);
+                }
             }
         }
     }

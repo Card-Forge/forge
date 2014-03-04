@@ -47,6 +47,7 @@ forge-ai/src/main/java/forge/ai/ability/ChooseCardAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseCardNameAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseColorAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseGenericEffectAi.java -text
+forge-ai/src/main/java/forge/ai/ability/ChooseNumberAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChoosePlayerAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseSourceAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseTypeAi.java -text
@@ -2507,6 +2508,7 @@ forge-gui/res/cardsfolder/c/cho_arrim_bruiser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cho_arrim_legate.txt -text
 forge-gui/res/cardsfolder/c/cho_manno_revolutionary.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cho_mannos_blessing.txt -text
+forge-gui/res/cardsfolder/c/choice_of_damnations.txt -text
 forge-gui/res/cardsfolder/c/choke.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choking_fumes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/choking_sands.txt svneol=native#text/plain

@@ -1276,8 +1276,7 @@ public class AiController {
     }
 
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
-        //TODO: AILogic
-    	final String logic = sa.getParam("AILogic");
+        final String logic = sa.getParam("AILogic");
         if ("GainLife".equals(logic)) {
             if (player.getLife() < 5 || player.getCardsIn(ZoneType.Hand).size() >= player.getMaxHandSize()) {
                 return min;
@@ -1287,12 +1286,17 @@ public class AiController {
             return min;
         }
         else if ("DigACard".equals(logic)) {
-        	int random = MyRandom.getRandom().nextInt(Math.min(4, max)) + 1;
-        	if (player.getLife() < random + 5) {
-        		return min;
-        	} else {
-        		return random;
-        	}
+            int random = MyRandom.getRandom().nextInt(Math.min(4, max)) + 1;
+            if (player.getLife() < random + 5) {
+                return min;
+            } else {
+                return random;
+            }
+        }
+        else if ("Damnation".equals(logic)) {
+            int chosenMax = player.getLife() - 1;
+            int cardsInPlay = player.getCardsIn(ZoneType.Battlefield).size();
+            return Math.min(chosenMax, cardsInPlay);
         }
         return max;
     }
