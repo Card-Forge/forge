@@ -39,6 +39,7 @@ import forge.game.zone.Zone;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -139,9 +140,16 @@ public class HumanPlaySpellAbility {
             TargetRestrictions tgt = currentAbility.getTargetRestrictions();
             if (tgt != null && tgt.doesTarget()) {
                 clearTargets(currentAbility);
-                Player targetingPlayer = ability.hasParam("TargetingPlayer") ?
-                        AbilityUtils.getDefinedPlayers(source, ability.getParam("TargetingPlayer"), currentAbility).get(0) : ability.getActivatingPlayer();
-                        
+                Player targetingPlayer;
+                if (currentAbility.hasParam("TargetingPlayer")) {
+                    List<Player> candidates = AbilityUtils.getDefinedPlayers(source, currentAbility.getParam("TargetingPlayer"), currentAbility);
+                    // activator chooses targeting player
+                    targetingPlayer = ability.getActivatingPlayer().getController().chooseSingleEntityForEffect(
+                            candidates, currentAbility, "Choose the targeting player");
+                } else {
+                    targetingPlayer = ability.getActivatingPlayer();
+                }
+
                 if (!targetingPlayer.getController().chooseTargetsFor(currentAbility))
                     return false;
             }

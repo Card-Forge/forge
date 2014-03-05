@@ -61,7 +61,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 sb.append(" (").append(o.getValue()).append(" times)");
            sb.append("\n");
         }
-
+        if (!sa.getUniqueTargets().isEmpty()) {
+            sb.append("Parent Targeted:");
+            sb.append(sa.getUniqueTargets()).append("\n");
+        }
         sb.append(sa.getHostCard() + " - " + tgt.getVTSelection());
         
         int maxTargets = tgt.getMaxTargets(sa.getHostCard(), sa);

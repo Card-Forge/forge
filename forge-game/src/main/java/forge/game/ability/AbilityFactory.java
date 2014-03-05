@@ -258,6 +258,9 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithRelatedProperty")) {
             abTgt.setRelatedProperty(mapParams.get("TargetsWithRelatedProperty"));
         }
+        if (mapParams.containsKey("TargetingPlayer")) {
+            abTgt.setMandatory(true);
+        }
         return abTgt;
     }
 

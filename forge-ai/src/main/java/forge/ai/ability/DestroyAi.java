@@ -7,6 +7,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -44,6 +45,7 @@ public class DestroyAi extends SpellAbilityAi {
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
+        final String logic = sa.getParam("AILogic");
         List<Card> list;
 
         if (abCost != null) {
@@ -66,6 +68,10 @@ public class DestroyAi extends SpellAbilityAi {
         // Targeting
         if (abTgt != null) {
             sa.resetTargets();
+            if (sa.hasParam("TargetingPlayer")) {
+                Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+                return targetingPlayer.getController().chooseTargetsFor(sa);
+            }
             list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (sa.hasParam("AITgts")) {
@@ -129,6 +135,12 @@ public class DestroyAi extends SpellAbilityAi {
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(list);
+                    if ("OppDestroyYours".equals(logic)) {
+                        Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
+                        if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {
+                            return false;
+                        }
+                    }
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandAI(list);
                 } else {
@@ -162,14 +174,12 @@ public class DestroyAi extends SpellAbilityAi {
         } else {
             if (sa.hasParam("Defined")) {
                 list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
-                if (sa.hasParam("AILogic")) {
-                    String logic = sa.getParam("AILogic");
-                    if ("WillSkipTurn".equals(logic) && !sa.getHostCard().getController().equals(ai)
-                            && (ai.getCreaturesInPlay().size() >= ai.getOpponent().getCreaturesInPlay().size() || ai.getLife() > 5)) {
-                        // Basic ai logic for Lethal Vapors
-                        return true;
-                    }
+                if ("WillSkipTurn".equals(logic) && !sa.getHostCard().getController().equals(ai)
+                        && (ai.getCreaturesInPlay().size() >= ai.getOpponent().getCreaturesInPlay().size() || ai.getLife() > 5)) {
+                    // Basic ai logic for Lethal Vapors
+                    return true;
                 }
+
                 if (list.isEmpty()
                         || !CardLists.filterControlledBy(list, ai).isEmpty()
                         || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
@@ -251,7 +261,13 @@ public class DestroyAi extends SpellAbilityAi {
                 } else {
                     Card c;
                     if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                        c = ComputerUtilCard.getWorstCreatureAI(list);
+                        if (!sa.getUniqueTargets().isEmpty() && sa.getParent().getApi() == ApiType.Destroy
+                                && sa.getUniqueTargets().get(0) instanceof Card) {
+                            // basic ai for Diaochan 
+                            c = (Card) sa.getUniqueTargets().get(0);
+                        } else {
+                            c = ComputerUtilCard.getWorstCreatureAI(list);
+                        }
                     } else {
                         c = ComputerUtilCard.getCheapestPermanentAI(list, sa, false);
                     }

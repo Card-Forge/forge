@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -49,6 +50,11 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
 
         if (abTgt != null) {
+            sa.resetTargets();
+            if (sa.hasParam("TargetingPlayer")) {
+                Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+                return targetingPlayer.getController().chooseTargetsFor(sa);
+            }
             List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
@@ -59,7 +65,6 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     return !vars.containsKey("RemAIDeck");
                 }
             }); 
-            sa.resetTargets();
             // target loop
             while (sa.getTargets().getNumTargeted() < abTgt.getMaxTargets(sa.getHostCard(), sa)) {
                 if (list.isEmpty()) {
