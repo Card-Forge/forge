@@ -20,7 +20,7 @@ public class SettingsScreen extends FScreen {
     public SettingsScreen() {
         super(true, "Settings", false);
 
-        addPanel(new ComboBoxPanel<String>("Theme:", FSkin.getAllSkins()));
+        addPanel(new ComboBoxPanel<String>("Theme:", FSkin.getAllSkins(), FSkin.getName()));
     }
 
     private void addPanel(SettingPanel panel) {
@@ -53,21 +53,19 @@ public class SettingsScreen extends FScreen {
         private final FLabel label;
         private final FComboBox<E> comboBox;
 
-        public ComboBoxPanel(String labelText) {
-            this(labelText, new FComboBox<E>());
+        public ComboBoxPanel(String labelText, E[] items, E selectedItem) {
+            this(labelText, new FComboBox<E>(items), selectedItem);
         }
-        public ComboBoxPanel(String labelText, E[] items) {
-            this(labelText, new FComboBox<E>(items));
-        }
-        public ComboBoxPanel(String labelText, Iterable<E> items) {
-            this(labelText, new FComboBox<E>(items));
+        public ComboBoxPanel(String labelText, Iterable<E> items, E selectedItem) {
+            this(labelText, new FComboBox<E>(items), selectedItem);
         }
 
-        private ComboBoxPanel(String labelText, FComboBox<E> comboBox0) {
+        private ComboBoxPanel(String labelText, FComboBox<E> comboBox0, E selectedItem) {
             label = add(new FLabel.Builder().text(labelText).build());
             comboBox = add(comboBox0);
             label.setHeight(FComboBox.PREFERRED_HEIGHT - 6);
             comboBox.setHeight(FComboBox.PREFERRED_HEIGHT);
+            comboBox.setSelectedItem(selectedItem);
         }
 
         @Override

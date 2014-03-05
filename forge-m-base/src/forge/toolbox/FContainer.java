@@ -12,6 +12,14 @@ public abstract class FContainer extends FDisplayObject {
         return child;
     }
 
+    public <T extends FDisplayObject> boolean remove(T child) {
+        return children.remove(child);
+    }
+
+    public void clear() {
+        children.clear();
+    }
+
     public Iterable<FDisplayObject> getChildren() {
         return children;
     }

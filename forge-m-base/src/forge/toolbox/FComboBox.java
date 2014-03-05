@@ -70,12 +70,23 @@ public class FComboBox<E> extends FDisplayObject {
         return null;
     }
 
+    public void setSelectedItem(E item) {
+        int index = items.indexOf(item);
+        if (index >= 0) {
+            selectedIndex = index;
+        }
+    }
+
     public HAlignment getAlignment() {
         return alignment;
     }
 
     public void setAlignment(HAlignment alignment0) {
         alignment = alignment0;
+    }
+
+    public boolean tap(float x, float y, int count) {
+        return true;
     }
 
     @Override
@@ -90,11 +101,12 @@ public class FComboBox<E> extends FDisplayObject {
         float shapeHeight = shapeWidth;
         float x = w - 2 * (shapeWidth - 1);
         float y = h / 2 - 1;
+        float insetX = 4;
         g.fillTriangle(FORE_COLOR, x, y, x + shapeWidth, y, x + (shapeWidth / 2), y + (shapeHeight / 2));
 
         E selectedItem = getSelectedItem();
         if (selectedItem != null) {
-            g.drawText(selectedItem.toString(), font, FORE_COLOR, 3, 0, x - 6, h, false, alignment, true);
+            g.drawText(selectedItem.toString(), font, FORE_COLOR, insetX, 0, x - 2 * insetX, h, false, alignment, true);
         }
     }
 }

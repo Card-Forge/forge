@@ -342,6 +342,33 @@ public class Forge implements ApplicationListener {
             batch.begin();
         }
 
+        public void drawRoundRect(FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
+            drawRoundRect(skinColor.getColor(), x, y, w, h, cornerRadius);
+        }
+        public void drawRoundRect(Color color, float x, float y, float w, float h, float cornerRadius) {
+            batch.end(); //must pause batch while rendering shapes
+
+            //adjust width/height so rectangle covers equivalent filled area
+            w = Math.round(w - 1);
+            h = Math.round(h - 1);
+
+            shapeRenderer.begin(ShapeType.Line);
+            shapeRenderer.setColor(color);
+
+            x = adjustX(x);
+            float y2 = adjustY(y, h);
+            float x2 = x + w;
+            y = y2 + h;
+            //TODO: draw arcs at corners
+            shapeRenderer.line(x, y, x, y2);
+            shapeRenderer.line(x, y2, x2 + 1, y2); //+1 prevents corner not being filled
+            shapeRenderer.line(x2, y2, x2, y);
+            shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
+
+            shapeRenderer.end();
+            batch.begin();
+        }
+
         public void drawRect(FSkinColor skinColor, float x, float y, float w, float h) {
             drawRect(skinColor.getColor(), x, y, w, h);
         }

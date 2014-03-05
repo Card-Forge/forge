@@ -16036,6 +16036,8 @@ forge-m-base/src/forge/toolbox/FComboBox.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
+forge-m-base/src/forge/toolbox/FList.java -text
+forge-m-base/src/forge/toolbox/FOverlay.java -text
 forge-m-base/src/forge/toolbox/FProgressBar.java -text
 forge-m-base/src/forge/toolbox/FScrollPane.java -text
 forge-m-base/src/forge/utils/Constants.java -text
