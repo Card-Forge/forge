@@ -16037,6 +16037,7 @@ forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
 forge-m-base/src/forge/toolbox/FProgressBar.java -text
+forge-m-base/src/forge/toolbox/FScrollPane.java -text
 forge-m-base/src/forge/utils/Constants.java -text
 forge-m-base/src/forge/utils/FileLocation.java -text
 forge-m-base/src/forge/utils/Utils.java -text

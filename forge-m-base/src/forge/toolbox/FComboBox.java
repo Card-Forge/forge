@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.utils.Utils;
 
 public class FComboBox<E> extends FDisplayObject {
+    public static final float PREFERRED_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.7f;
+
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor BORDER_COLOR = BACK_COLOR.getContrastColor(10);
@@ -84,16 +86,10 @@ public class FComboBox<E> extends FDisplayObject {
         g.fillRect(BACK_COLOR, 0, 0, w, h);
         g.drawRect(BORDER_COLOR, 0, 0, w, h);
 
-        float shapeWidth = 8;
-        float shapeHeight = 8;
-        float x = w - shapeWidth - 6;
+        float shapeWidth = PREFERRED_HEIGHT / 3;
+        float shapeHeight = shapeWidth;
+        float x = w - 2 * (shapeWidth - 1);
         float y = h / 2 - 1;
-        if (getHeight() > 26) { //increase arrow size if taller combo box
-            shapeWidth += 2;
-            shapeHeight += 2;
-            x -= 4;
-            y--;
-        }
         g.fillTriangle(FORE_COLOR, x, y, x + shapeWidth, y, x + (shapeWidth / 2), y + (shapeHeight / 2));
 
         E selectedItem = getSelectedItem();
