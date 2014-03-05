@@ -149,17 +149,14 @@ public class FModel {
 
         this.decks = new CardCollections();
         this.quest = new QuestController();
-        
-        
-        
+
         // Preload AI profiles
-        AiProfileUtil.loadAllProfiles();
+        AiProfileUtil.loadAllProfiles(NewConstants.AI_PROFILE_DIR);
     }
 
     public final QuestController getQuest() {
         return quest;
     }
-
     
     private static boolean KeywordsLoaded = false;
     

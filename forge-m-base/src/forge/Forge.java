@@ -24,6 +24,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
+import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
@@ -37,7 +38,6 @@ public class Forge implements ApplicationListener {
     private static SpriteBatch batch;
     private static ShapeRenderer shapeRenderer;
     private static FScreen currentScreen;
-    private static StaticData magicDb;
     private static SplashScreen splashScreen;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
@@ -56,38 +56,13 @@ public class Forge implements ApplicationListener {
         splashScreen = new SplashScreen();
         FSkin.loadLight("journeyman", splashScreen);
 
-        // Loads card database on background thread (using progress bar to report progress)
-        /*new Thread(new Runnable() {
+        //load model on background thread (using progress bar to report progress)
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                final FProgressBar bar = splashScreen.getProgressBar();
-                final CardStorageReader.ProgressObserver progressBarBridge = new CardStorageReader.ProgressObserver() {
-                    @Override
-                    public void setOperationName(final String name, final boolean usePercents) {
-                        Gdx.app.postRunnable(new Runnable() {
-                            @Override
-                            public void run() {
-                                bar.setDescription(name);
-                                bar.setPercentMode(usePercents);
-                            }
-                        });
-                    }
+                FModel.initialize(splashScreen.getProgressBar());
 
-                    @Override
-                    public void report(final int current, final int total) {
-                        Gdx.app.postRunnable(new Runnable() {
-                            @Override
-                            public void run() {
-                                bar.setMaximum(total);
-                                bar.setValue(current);
-                            }
-                        });
-                    }
-                };
-                final CardStorageReader reader = new CardStorageReader(Constants.CARD_DATA_DIR, progressBarBridge, null);
-                magicDb = new StaticData(reader, Constants.EDITIONS_DIR, Constants.BLOCK_DATA_DIR);
-                
-                bar.setDescription("Opening main window...");
+                splashScreen.getProgressBar().setDescription("Opening main window...");
 
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
@@ -96,8 +71,7 @@ public class Forge implements ApplicationListener {
                     }
                 });
             }
-        }).start();*/
-        afterDbLoaded();
+        }).start();
     }
 
     private void afterDbLoaded() {
@@ -131,10 +105,6 @@ public class Forge implements ApplicationListener {
     private static void setCurrentScreen(FScreen screen0) {
         currentScreen = screen0;
         currentScreen.setSize(screenWidth, screenHeight);
-    }
-
-    public static StaticData getMagicDb() {
-        return magicDb;
     }
 
     @Override

@@ -47,7 +47,8 @@ public final class Constants {
     public static final String EDITIONS_DIR        = _ASSETS_ROOT + "editions/";
     public static final String BLOCK_DATA_DIR      = _ASSETS_ROOT + "blockdata/";
     public static final String DECK_CUBE_DIR       = _ASSETS_ROOT + "cube";
-    public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "worlds/";
+    public static final String AI_PROFILE_DIR      = _ASSETS_ROOT + "ai";
+    public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "world/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
 
     public static final String CARD_DATA_PETS_DIR     = _QUEST_DIR + "bazaar/";
@@ -77,14 +78,6 @@ public final class Constants {
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
 
-    // data that has defaults in the program dir but overrides/additions in the user dir
-    private static final String _DEFAULTS_DIR                = _ASSETS_ROOT + "defaults/";
-    public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
-    public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
-    public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");
-    public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
-    public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet/");
-
     // data that is only in the cached dir
     private static final String _PICS_DIR                    = CACHE_DIR + "pics/";
     public static final String DB_DIR                        = CACHE_DIR + "db/";
@@ -101,7 +94,6 @@ public final class Constants {
             USER_DIR,
             CACHE_DIR,
             USER_PREFS_DIR,
-            GAUNTLET_DIR.userPrefLoc,
             DB_DIR,
             DECK_CONSTRUCTED_DIR,
             DECK_DRAFT_DIR,

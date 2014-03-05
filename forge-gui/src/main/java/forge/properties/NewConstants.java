@@ -45,6 +45,7 @@ public final class NewConstants {
     public static final String BAZAAR_FILE         = _QUEST_DIR + "bazaar/index.xml";
     public static final String CARD_DATA_DIR       = _RES_ROOT + "cardsfolder/";
     public static final String DECK_CUBE_DIR       = _RES_ROOT + "cube";
+    public static final String AI_PROFILE_DIR      = _RES_ROOT + "ai";
     public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "worlds/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
 

@@ -40,7 +40,7 @@ import java.util.Map;
 public class AiProfileUtil {
     private static Map<String, Map<AiProps, String>> loadedProfiles = new HashMap<String, Map<AiProps, String>>();
 
-    private static final String AI_PROFILE_DIR = "res/ai";
+    private static String AI_PROFILE_DIR;
     private static final String AI_PROFILE_EXT = ".ai";
 
     public static final String AI_PROFILE_RANDOM_MATCH = "* Random (Match) *";
@@ -58,7 +58,9 @@ public class AiProfileUtil {
     /**
      * Load all profiles
      */
-    public static final void loadAllProfiles() {
+    public static final void loadAllProfiles(String aiProfileDir) {
+        AI_PROFILE_DIR = aiProfileDir;
+
         loadedProfiles.clear();
         ArrayList<String> availableProfiles = getAvailableProfiles();
         for (String profile : availableProfiles) {

@@ -2,7 +2,6 @@ package forge.utils;
 
 import com.badlogic.gdx.Gdx;
 
-import forge.Forge;
 import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.deck.generation.DeckGenerator2Color;
@@ -10,6 +9,7 @@ import forge.deck.generation.DeckGenerator3Color;
 import forge.deck.generation.DeckGenerator5Color;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.model.FModel;
 
 public class Utils {
     private final static float ppcX = Gdx.graphics.getPpcX();
@@ -29,7 +29,7 @@ public class Utils {
     }
 
     public static Deck generateRandomDeck(final int colorCount0) {
-        CardDb cardDb = Forge.getMagicDb().getCommonCards();
+        CardDb cardDb = FModel.getMagicDb().getCommonCards();
         DeckGeneratorBase gen = null;
         switch (colorCount0) {
             case 1: gen = new DeckGeneratorMonoColor(cardDb, null);             break;
