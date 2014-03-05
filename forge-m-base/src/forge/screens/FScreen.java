@@ -67,7 +67,8 @@ public abstract class FScreen extends FContainer {
     }
 
     public void showMenu() {
-        buildMenu();
+        Forge.openScreen(new forge.screens.settings.SettingsScreen()); //TODO: Build menu containing settings item
+        //buildMenu();
     }
 
     protected void buildMenu() {

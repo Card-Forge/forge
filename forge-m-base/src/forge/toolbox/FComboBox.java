@@ -15,7 +15,7 @@ public class FComboBox<E> extends FDisplayObject {
 
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
-    private static final FSkinColor BORDER_COLOR = BACK_COLOR.getContrastColor(10);
+    private static final FSkinColor BORDER_COLOR = FORE_COLOR.getContrastColor(40);
 
     private final List<E> items = new ArrayList<E>();
     private int selectedIndex;

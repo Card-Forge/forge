@@ -20,7 +20,7 @@ public class SettingsScreen extends FScreen {
     public SettingsScreen() {
         super(true, "Settings", false);
 
-        addPanel(new ComboBoxPanel<String>("Theme", FSkin.getAllSkins()));
+        addPanel(new ComboBoxPanel<String>("Theme:", FSkin.getAllSkins()));
     }
 
     private void addPanel(SettingPanel panel) {
