@@ -58,13 +58,17 @@ public abstract class FContainer extends FDisplayObject {
         }
     }
 
+    public void revalidate() {
+        doLayout(getWidth(), getHeight());
+    }
+
     protected abstract void doLayout(float width, float height);
 
     @Override
-    public final void buildTouchListeners(float x, float y, ArrayList<FDisplayObject> listeners) {
-        if (isEnabled() && contains(x, y)) {
+    public final void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+        if (isEnabled() && contains(screenToLocalX(screenX), screenToLocalY(screenY))) {
             for (FDisplayObject child : children) {
-                child.buildTouchListeners(x, y, listeners);
+                child.buildTouchListeners(screenX, screenY, listeners);
             }
             listeners.add(this);
         }

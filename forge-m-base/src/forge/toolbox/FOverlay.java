@@ -7,7 +7,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 
 public class FOverlay extends FContainer {
-    private static final FSkinColor BACKDROP_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(120);
+    private static final FSkinColor BACKDROP_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     private static final float CORNER_RADIUS = 10;
     private static final Stack<FOverlay> overlays = new Stack<FOverlay>();

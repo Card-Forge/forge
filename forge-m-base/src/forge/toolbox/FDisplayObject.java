@@ -11,6 +11,7 @@ public abstract class FDisplayObject {
     private boolean visible = true;
     private boolean enabled = true;
     private final Rectangle bounds = new Rectangle();
+    private final Vector2 screenPosition = new Vector2();
 
     public void setPosition(float x, float y) {
         bounds.setPosition(x, y);
@@ -55,6 +56,26 @@ public abstract class FDisplayObject {
         return visible && bounds.contains(x, y);
     }
 
+    public Vector2 getScreenPosition() {
+        return screenPosition;
+    }
+    public void setScreenPosition(float x, float y) { //only call from Graphics when drawn
+        screenPosition.set(x, y);
+    }
+
+    public float screenToLocalX(float x) {
+        return x - screenPosition.x + bounds.x;
+    }
+    public float screenToLocalY(float y) {
+        return y - screenPosition.y + bounds.y;
+    }
+    public float localToScreenX(float x) {
+        return x - bounds.x + screenPosition.x;
+    }
+    public float localToScreenY(float y) {
+        return y - bounds.y + screenPosition.y;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -71,8 +92,8 @@ public abstract class FDisplayObject {
 
     public abstract void draw(Graphics g);
 
-    public void buildTouchListeners(float x, float y, ArrayList<FDisplayObject> listeners) {
-        if (enabled && contains(x, y)) {
+    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+        if (enabled && contains(screenToLocalX(screenX), screenToLocalY(screenY))) {
             listeners.add(this);
         }
     }

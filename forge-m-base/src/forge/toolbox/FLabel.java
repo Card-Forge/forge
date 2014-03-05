@@ -13,7 +13,7 @@ public class FLabel extends FDisplayObject {
     public static class Builder {
         //========== Default values for FLabel are set here.
         private float      bldIconScaleFactor = 0.8f;
-        private int        bldFontSize        = 12;
+        private int        bldFontSize        = 14;
         private HAlignment bldAlignment       = HAlignment.LEFT;
         private Vector2    bldInsets          = new Vector2(0, 0);
 

@@ -29,8 +29,6 @@ import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FProgressBar;
-import forge.utils.Constants;
 
 public class Forge implements ApplicationListener {
     private static Forge game;
@@ -59,7 +57,7 @@ public class Forge implements ApplicationListener {
         FSkin.loadLight("journeyman", splashScreen);
 
         // Loads card database on background thread (using progress bar to report progress)
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 final FProgressBar bar = splashScreen.getProgressBar();
@@ -98,7 +96,8 @@ public class Forge implements ApplicationListener {
                     }
                 });
             }
-        }).start();
+        }).start();*/
+        afterDbLoaded();
     }
 
     private void afterDbLoaded() {
@@ -190,7 +189,7 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean touchUp(float x, float y, int pointer, int button) {
             for (FDisplayObject listener : potentialListeners) {
-                if (listener.touchUp(x, y)) {
+                if (listener.touchUp(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
                     break;
                 }
             }
@@ -206,7 +205,7 @@ public class Forge implements ApplicationListener {
                         currentScreen.buildTouchListeners(x, y, potentialListeners);
                     }
                     for (FDisplayObject listener : potentialListeners) {
-                        if (listener.touchDown(x, y)) {
+                        if (listener.touchDown(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
                             return true;
                         }
                     }
@@ -216,7 +215,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean tap(float x, float y, int count, int button) {
                     for (FDisplayObject listener : potentialListeners) {
-                        if (listener.tap(x, y, count)) {
+                        if (listener.tap(listener.screenToLocalX(x), listener.screenToLocalY(y), count)) {
                             return true;
                         }
                     }
@@ -226,7 +225,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean longPress(float x, float y) {
                     for (FDisplayObject listener : potentialListeners) {
-                        if (listener.longPress(x, y)) {
+                        if (listener.longPress(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
                             return true;
                         }
                     }
@@ -246,7 +245,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean pan(float x, float y, float deltaX, float deltaY) {
                     for (FDisplayObject listener : potentialListeners) {
-                        if (listener.pan(x, y, deltaX, deltaY)) {
+                        if (listener.pan(listener.screenToLocalX(x), listener.screenToLocalY(y), deltaX, deltaY)) {
                             return true;
                         }
                     }
@@ -256,7 +255,7 @@ public class Forge implements ApplicationListener {
                 @Override
                 public boolean panStop(float x, float y, int pointer, int button) {
                     for (FDisplayObject listener : potentialListeners) {
-                        if (listener.panStop(x, y)) {
+                        if (listener.panStop(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
                             return true;
                         }
                     }
@@ -320,6 +319,7 @@ public class Forge implements ApplicationListener {
 
             final Rectangle parentBounds = bounds;
             bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
+            displayObj.setScreenPosition(bounds.x, bounds.y);
 
             if (bounds.overlaps(parentBounds)) { //avoid drawing object if it's not within visible region
                 displayObj.draw(this);
