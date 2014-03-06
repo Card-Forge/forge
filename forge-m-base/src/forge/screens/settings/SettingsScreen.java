@@ -77,6 +77,7 @@ public class SettingsScreen extends FScreen {
         @Override
         public void select() {
             FModel.getPreferences().setPref(pref, !FModel.getPreferences().getPrefBoolean(pref));
+            FModel.getPreferences().save();
         }
 
         @Override
