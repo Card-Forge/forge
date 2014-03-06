@@ -2655,14 +2655,15 @@ public class CardFactoryUtil {
                 if (splitkw.length > 4) {
                     desc = !splitkw[4].equals("no desc") ? splitkw[4] : "";
                 }
-                String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                        + "| Defined$ ReplacedCard | SubAbility$ ETBCounterDBSVar";
-                String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
+                String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
+                        + " | CounterNum$ " + amount +  " | SubAbility$ ETBCounterDBSVar";
+                String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                        + "| Defined$ ReplacedCard";
                 try {
                     Integer.parseInt(amount);
                 }
                 catch (NumberFormatException ignored) {
-                    dbStr += " | References$ " + amount;
+                    abStr += " | References$ " + amount;
                 }
                 card.setSVar("ETBCounterSVar", abStr);
                 card.setSVar("ETBCounterDBSVar", dbStr);
