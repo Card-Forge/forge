@@ -2487,17 +2487,17 @@ public class CardFactoryUtil {
             }
             // Setup ETB replacement effects
             final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-            		+ " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
-            		+ "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
-            		+ " on it for each " + ampTypes.replace(",", " and/or ") 
-            		+ " card you reveal in your hand.)";
+                    + " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
+                    + "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
+                    + " on it for each " + ampTypes.replace(",", " and/or ") 
+                    + " card you reveal in your hand.)";
             final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
-                    + types.toString() + " | RememberRevealed$ True | SubAbility$ AmplifyMoveToPlay";
-            final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
-            		+ "Defined$ ReplacedCard | Hidden$ True | SubAbility$ Amplify";
+                    + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
             final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
                     + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$"
-                    + " DBCleanup";
+                    + " AmplifyMoveToPlay";
+            final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
+                    + "Defined$ ReplacedCard | Hidden$ True | SubAbility$ DBCleanup";
             card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
             card.setSVar("AmplifyReveal", abString);
             card.setSVar("AmplifyMoveToPlay", moveToPlay);
