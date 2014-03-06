@@ -8929,6 +8929,7 @@ forge-gui/res/cardsfolder/p/parallax_wave.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/parallectric_feedback.txt -text
 forge-gui/res/cardsfolder/p/parallel_evolution.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/parallel_lives.txt -text
+forge-gui/res/cardsfolder/p/parallel_thoughts.txt -text
 forge-gui/res/cardsfolder/p/paralyze.txt -text
 forge-gui/res/cardsfolder/p/paralyzing_grasp.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/paranoid_delusions.txt -text
