@@ -2,11 +2,14 @@ package forge.screens.match;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import forge.Forge;
 import forge.game.Game;
 import forge.game.Match;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.model.FModel;
+import forge.utils.ForgePreferences.FPref;
 
 public class MatchController {
     private final MatchScreen view;
@@ -58,7 +61,7 @@ public class MatchController {
     public void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
         // TODO fix for use with multiplayer
 
-        final String[] indices = new String[] { "1", "2" }; //Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         // Instantiate all required field slots (user at 0)
         sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);

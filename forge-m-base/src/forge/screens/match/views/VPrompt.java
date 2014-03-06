@@ -8,7 +8,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
-import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public class VPrompt extends FContainer {

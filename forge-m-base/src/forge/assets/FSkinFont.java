@@ -44,24 +44,13 @@ public class FSkinFont {
 
     private void updateFont() {
         String dir = FSkin.getDir();
-        String fntFilename = "font" + this.size;
-
-        //attempt to use existing .fnt and .png files
-        FileHandle fntFile = Gdx.files.internal(dir + fntFilename + ".fnt");
-        if (fntFile.exists()) {
-            FileHandle pngFile = Gdx.files.internal(dir + fntFilename + ".png");
-            if (pngFile.exists()) {
-                font = new BitmapFont(fntFile, pngFile, false);
-                return;
-            }
-        }
 
         //generate .fnt and .png files from .ttf if needed
         FileHandle ttfFile = Gdx.files.internal(dir + TTF_FILE);
         if (ttfFile.exists()) {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
             font = generator.generateFont(this.size);
-            //TODO: Save font to .fnt and .png files for faster loading
+            font.setUseIntegerPositions(true); //prevent parts of text getting cut off at times
             generator.dispose();
         }
     }

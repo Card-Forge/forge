@@ -16,8 +16,8 @@ public class Utils {
     private final static float ppcY = Gdx.graphics.getPpcY();
     private final static float AVG_FINGER_SIZE_CM = 1.1f;
 
-    public final static float AVG_FINGER_WIDTH = cmToPixelsX(AVG_FINGER_SIZE_CM);
-    public final static float AVG_FINGER_HEIGHT = cmToPixelsY(AVG_FINGER_SIZE_CM);
+    public final static float AVG_FINGER_WIDTH = Math.round(cmToPixelsX(AVG_FINGER_SIZE_CM)); //round to nearest int to reduce floating point display issues
+    public final static float AVG_FINGER_HEIGHT = Math.round(cmToPixelsY(AVG_FINGER_SIZE_CM));
 
     public final static float CARD_ASPECT_RATIO = 3.5f / 2.5f;
 

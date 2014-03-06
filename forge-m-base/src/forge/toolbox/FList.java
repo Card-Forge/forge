@@ -13,7 +13,7 @@ import forge.utils.Utils;
 
 public class FList<E> extends FScrollPane {
     private static final float INSETS_FACTOR = 0.025f;
-    private static final float GROUP_HEADER_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.6f;
+    private static final float GROUP_HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     private static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
@@ -183,10 +183,9 @@ public class FList<E> extends FScrollPane {
                 g.fillRect(PRESSED_COLOR, 0, 0, w, h);
             }
 
-            renderer.drawValue(g, value, font, FORE_COLOR, w, h);
+            renderer.drawValue(g, value, font, FORE_COLOR, w, h); //-1 to not account for border
 
-            float y = h + 1;
-            g.drawLine(1, LINE_COLOR, 0, y, w, y);
+            g.drawLine(1, LINE_COLOR, 0, h, w, h);
         }
     }
 

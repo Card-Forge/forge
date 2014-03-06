@@ -14,7 +14,7 @@ import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public abstract class FScreen extends FContainer {
-    public static final float BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+    public static final float BTN_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
     public static final float BTN_WIDTH = BTN_HEIGHT;
 
     private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
@@ -90,7 +90,7 @@ public abstract class FScreen extends FContainer {
         if (lblHeader != null) {
             lblHeader.setBounds(headerX, 0, headerWidth, headerHeight);
 
-            doLayout(headerHeight, width, height);
+            doLayout(headerHeight + 1, width, height); //+1 to account for bottom border of header
         }
         else {
             doLayout(0, width, height);

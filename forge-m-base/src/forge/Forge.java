@@ -393,26 +393,14 @@ public class Forge implements ApplicationListener {
             if (color.a != 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
-
-            //adjust width/height so rectangle covers equivalent filled area
-            w = Math.round(w - 1);
-            h = Math.round(h - 1);
+            Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
 
             shapeRenderer.begin(ShapeType.Line);
             shapeRenderer.setColor(color);
-
-            //must user 4 line() calls rather than rect() since rect() leaves corner unfilled
-            x = adjustX(x);
-            float y2 = adjustY(y, h);
-            float x2 = x + w;
-            y = y2 + h;
-            shapeRenderer.line(x, y, x, y2);
-            shapeRenderer.line(x, y2, x2 + 1, y2); //+1 prevents corner not being filled
-            shapeRenderer.line(x2, y2, x2, y);
-            shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
-
+            shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
             shapeRenderer.end();
 
+            Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
             if (color.a != 0) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }

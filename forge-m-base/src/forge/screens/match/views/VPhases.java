@@ -1,13 +1,7 @@
 package forge.screens.match.views;
 
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;

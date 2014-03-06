@@ -67,7 +67,6 @@ public class FLabel extends FDisplayObject {
     private static final FSkinColor d10 = clrMain.stepColor(-10);
     private static final FSkinColor l10 = clrMain.stepColor(10);
     private static final FSkinColor l20 = clrMain.stepColor(20);
-    private static final FSkinColor l30 = clrMain.stepColor(30);
 
     private float iconScaleFactor;
     private FSkinFont font;
@@ -156,32 +155,32 @@ public class FLabel extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
 
+        g.startClip(0, 0, w, h); //start clip to ensure nothing escapes bounds
+
         if (pressed) {
             if (pressedColor != null) {
                 g.fillRect(pressedColor, 0, 0, w, h);
             }
             else {
+                g.fillGradientRect(d50, d10, true, 0, 0, w, h);
                 g.drawRect(1, d50, 0, 0, w, h);
-                g.drawRect(1, d10, 1, 1, w - 2, h - 2);
-                g.fillGradientRect(d50, d10, true, 2, 2, w - 4, h - 4);
             }
         }
         else if (selected && (opaque || selectable)) {
+            g.fillGradientRect(d30, l10, true, 0, 0, w, h);
             g.drawRect(1, d30, 0, 0, w, h);
-            g.drawRect(1, l10, 1, 1, w - 2, h - 2);
-            g.fillGradientRect(d30, l10, true, 2, 2, w - 4, h - 4);
         }
         else if (opaque) {
+            g.fillGradientRect(d10, l20, true, 0, 0, w, h);
             g.drawRect(1, d50, 0, 0, w, h);
-            g.drawRect(1, l10, 1, 1, w - 2, h - 2);
-            g.fillGradientRect(d10, l20, true, 2, 2, w - 4, h - 4);
         }
         else if (selectable) {
             g.drawRect(1, l10, 0, 0, w, h);
-            g.drawRect(1, l30, 1, 1, w - 2, h - 2);
         }
 
         drawContent(g, w, h, pressed);
+
+        g.endClip();
     }
 
     protected void drawContent(Graphics g, float w, float h, final boolean pressed) {
