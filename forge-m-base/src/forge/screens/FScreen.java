@@ -133,10 +133,8 @@ public abstract class FScreen extends FContainer {
             float offsetX = h / 8;
             float offsetY = w / 4;
 
-            g.startClip(xMid - offsetX - 1, y, 2 * offsetX + 1, h); //use clip to square off end of each line
             g.drawLine(THICKNESS, COLOR, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
             g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid  - 1, xMid + offsetX, yMid + offsetY);
-            g.endClip();
         }
     }
 }
