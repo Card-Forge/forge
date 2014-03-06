@@ -2891,27 +2891,42 @@ public enum FSkin {
             return skin;
         }
 
-        private final JFormattedTextField textField;
+        private JFormattedTextField textField;
         public JFormattedTextField getTextField() { return textField; }
 
         public SkinnedSpinner() {
-            textField = ((JSpinner.NumberEditor)this.getEditor()).getTextField();
+            updateTextField();
+        }
+
+        @Override
+        public void setEditor(JComponent editor) {
+            super.setEditor(editor);
+            updateTextField();
+        }
+
+        private void updateTextField() {
+            try {
+                textField = ((JSpinner.NumberEditor)this.getEditor()).getTextField();
+            }
+            catch (Exception ex) {
+                textField = null;
+            }
         }
 
         public void setForeground(SkinColor skinColor) { getSkin().setForeground(textField, skinColor); }
-        @Override public void setForeground(Color color) { getSkin().resetForeground(); textField.setForeground(color); }
+        @Override public void setForeground(Color color) { if (textField == null) { super.setForeground(color); return; } getSkin().resetForeground(); textField.setForeground(color); }
 
         public void setBackground(SkinColor skinColor) { getSkin().setBackground(textField, skinColor); }
-        @Override public void setBackground(Color color) { getSkin().resetBackground(); textField.setBackground(color); }
+        @Override public void setBackground(Color color) { if (textField == null) { super.setBackground(color); return; } getSkin().resetBackground(); textField.setBackground(color); }
 
         public void setFont(SkinFont skinFont) { getSkin().setFont(textField, skinFont); }
-        @Override public void setFont(Font font) { getSkin().resetFont(); textField.setFont(font); }
+        @Override public void setFont(Font font) { if (textField == null) { super.setFont(font); return; } getSkin().resetFont(); textField.setFont(font); }
 
         public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(textField, skinCursor); }
-        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); textField.setCursor(cursor); }
+        @Override public void setCursor(Cursor cursor) { if (textField == null) { super.setCursor(cursor); return; } getSkin().resetCursor(); textField.setCursor(cursor); }
 
         public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(textField, skinColor); }
-        public void setCaretColor(Color color) { getSkin().resetCaretColor(); textField.setCaretColor(color); }
+        public void setCaretColor(Color color) { if (textField == null) { return; } getSkin().resetCaretColor(); textField.setCaretColor(color); }
 
         @Override
         protected void paintComponent(Graphics g) {
