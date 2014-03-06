@@ -54,7 +54,6 @@ public class Forge implements ApplicationListener {
         shapeRenderer = new ShapeRenderer();
 
         splashScreen = new SplashScreen();
-        FSkin.loadLight("journeyman", splashScreen);
 
         //load model on background thread (using progress bar to report progress)
         new Thread(new Runnable() {

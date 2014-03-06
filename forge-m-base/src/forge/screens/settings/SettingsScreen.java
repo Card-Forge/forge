@@ -38,7 +38,12 @@ public class SettingsScreen extends FScreen {
 
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
                 "Sets the theme that determines how display components are skinned.",
-                FSkin.getAllSkins()), 0);
+                FSkin.getAllSkins()) {
+            @Override
+            public void valueChanged(String newValue) {
+                FSkin.changeSkin(newValue);
+            }
+        }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.DEV_MODE_ENABLED, "Developer Mode",
                 "Enables menu with functions for testing during development."), 3);
     }
@@ -109,6 +114,11 @@ public class SettingsScreen extends FScreen {
             }
         }
 
+        public void valueChanged(String newValue) {
+            FModel.getPreferences().setPref(pref, newValue);
+            FModel.getPreferences().save();
+        }
+
         @Override
         public void select() {
             Forge.openScreen(new CustomSelectScreen());
@@ -120,6 +130,19 @@ public class SettingsScreen extends FScreen {
             private CustomSelectScreen() {
                 super(true, "Select " + label.substring(0, label.length() - 1), false);
                 lstOptions = add(new FList<String>(options));
+                lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
+                    @Override
+                    public boolean tap(String value, float x, float y, int count) {
+                        valueChanged(value);
+                        Forge.back();
+                        return true;
+                    }
+
+                    @Override
+                    public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                        super.drawValue(g, value, font, foreColor, width, height);
+                    }
+                });
             }
 
             @Override

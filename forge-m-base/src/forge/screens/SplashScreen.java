@@ -4,9 +4,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import forge.utils.ForgePreferences;
+import forge.utils.ForgePreferences.FPref;
 
 public class SplashScreen extends FContainer {
     private TextureRegion background;
@@ -16,6 +19,9 @@ public class SplashScreen extends FContainer {
     public SplashScreen() {
         progressBar = new FProgressBar();
         progressBar.setDescription("Welcome to Forge");
+
+        final ForgePreferences prefs = new ForgePreferences();
+        FSkin.loadLight(prefs.getPref(FPref.UI_SKIN), this);
     }
 
     public FProgressBar getProgressBar() {

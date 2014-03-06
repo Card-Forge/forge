@@ -16000,6 +16000,7 @@ forge-m-android/src/com/forge/Main.java -text
 forge-m-base/.classpath -text
 forge-m-base/.project -text
 forge-m-base/.settings/org.eclipse.jdt.core.prefs -text
+forge-m-base/.settings/org.eclipse.m2e.core.prefs -text
 forge-m-base/libs/gdx-freetype.jar -text
 forge-m-base/libs/gdx-sources.jar -text
 forge-m-base/libs/gdx.jar -text

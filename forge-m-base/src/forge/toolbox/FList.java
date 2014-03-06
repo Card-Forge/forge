@@ -40,7 +40,7 @@ public class FList<E> extends FScrollPane {
 
     private void initialize() {
         font = FSkinFont.get(14);
-        renderer = new DefaultListItemRenderer();
+        renderer = new DefaultListItemRenderer<E>();
     }
 
     public void addGroup(String groupName) {
@@ -196,19 +196,19 @@ public class FList<E> extends FScrollPane {
         public abstract void drawValue(Graphics g, V value, FSkinFont font, FSkinColor foreColor, float width, float height);
     }
 
-    public class DefaultListItemRenderer extends ListItemRenderer<E> {
+    public static class DefaultListItemRenderer<V> extends ListItemRenderer<V> {
         @Override
         public float getItemHeight() {
             return Utils.AVG_FINGER_HEIGHT;
         }
 
         @Override
-        public boolean tap(E value, float x, float y, int count) {
+        public boolean tap(V value, float x, float y, int count) {
             return false;
         }
 
         @Override
-        public void drawValue(Graphics g, E value, FSkinFont font, FSkinColor color, float width, float height) {
+        public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, float width, float height) {
             float x = width * INSETS_FACTOR;
             g.drawText(value.toString(), font, color, x, 0, width - 2 * x, height, false, HAlignment.LEFT, true);
         }

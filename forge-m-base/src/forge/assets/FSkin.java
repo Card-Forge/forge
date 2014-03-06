@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -14,8 +16,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.assets.FSkinImage.SourceFile;
+import forge.model.FModel;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
+import forge.utils.ForgePreferences;
+import forge.utils.ForgePreferences.FPref;
 
 public class FSkin {
     private static final String
@@ -31,12 +36,12 @@ public class FSkin {
     private static boolean loaded = false;
 
     public static void changeSkin(final String skinName) {
-        /*final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        final ForgePreferences prefs = FModel.getPreferences();
         if (skinName.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
 
         //save skin preference
         prefs.setPref(FPref.UI_SKIN, skinName);
-        prefs.save();*/
+        prefs.save();
 
         //load skin
         loaded = false; //reset this temporarily until end of loadFull()
@@ -58,7 +63,7 @@ public class FSkin {
                 allSkins = new ArrayList<String>();
                 ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
                 for (int i = 0; i < skinDirectoryNames.size(); i++) {
-                    allSkins.add(skinDirectoryNames.get(i).replace('_', ' '));
+                    allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
                 }
                 Collections.sort(allSkins);
             }
