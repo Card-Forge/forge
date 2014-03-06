@@ -21,7 +21,6 @@ import forge.utils.Utils;
 
 public class SettingsScreen extends FScreen {
     private static final float INSETS_FACTOR = 0.025f;
-    private static final float GAP_Y_FACTOR = 0.01f;
     private static final FSkinFont DESC_FONT = FSkinFont.get(11);
     private static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
 
@@ -139,8 +138,7 @@ public class SettingsScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float dy = height * GAP_Y_FACTOR;
-        lstSettings.setBounds(0, startY + dy, width, height - startY - dy);
+        lstSettings.setBounds(0, startY, width, height - startY);
     }
 
     private abstract class Setting {
@@ -259,8 +257,7 @@ public class SettingsScreen extends FScreen {
 
             @Override
             protected void doLayout(float startY, float width, float height) {
-                float dy = height * GAP_Y_FACTOR;
-                lstOptions.setBounds(0, startY + dy, width, height - startY - dy);
+                lstOptions.setBounds(0, startY, width, height - startY);
             }
         }
 
