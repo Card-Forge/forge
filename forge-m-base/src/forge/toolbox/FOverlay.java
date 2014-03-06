@@ -18,7 +18,7 @@ public class FOverlay extends FContainer {
     @Override
     public void drawBackground(Graphics g) {
         g.fillRect(BACKDROP_COLOR, 0, 0, this.getWidth(), this.getHeight());
-        g.drawRoundRect(BORDER_COLOR, 0, 0, this.getWidth(), this.getHeight(), CORNER_RADIUS);
+        g.drawRoundRect(1, BORDER_COLOR, 0, 0, this.getWidth(), this.getHeight(), CORNER_RADIUS);
     }
 
     @Override

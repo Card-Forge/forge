@@ -117,7 +117,7 @@ public abstract class FScreen extends FContainer {
             h = lblHeader.getHeight() - 2;
             g.fillRect(d80, x, y + 5, w, h - 5);
             g.fillRect(a100, x + 5, y, w - 5, h - 5);
-            g.drawRect(d40, x + 5, y, w - 5, h - 5);
+            g.drawRect(1, d40, x + 5, y, w - 5, h - 5);
         }
     }
 }

@@ -125,6 +125,6 @@ public class FProgressBar extends FDisplayObject {
         }
 
         //draw border
-        g.drawRect(Color.BLACK, 0, 0, w, h);
+        g.drawRect(1, Color.BLACK, 0, 0, w, h);
     }
 }

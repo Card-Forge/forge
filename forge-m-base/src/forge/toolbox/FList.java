@@ -2,8 +2,6 @@ package forge.toolbox;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -15,14 +13,14 @@ import forge.utils.Utils;
 
 public class FList<E> extends FScrollPane {
     private static final float INSETS_FACTOR = 0.025f;
-    private static final float GROUP_HEADER_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.7f;
+    private static final float GROUP_HEADER_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.6f;
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_THEME2).alphaColor(0.75f);
     private static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
 
-    private final Map<String, ListGroup> groups = new TreeMap<String, ListGroup>();
+    private final List<ListGroup> groups = new ArrayList<ListGroup>();
     private FSkinFont font;
-    private ListItemRenderer renderer;
+    private ListItemRenderer<E> renderer;
 
     public FList() {
         initialize();
@@ -45,25 +43,30 @@ public class FList<E> extends FScrollPane {
         renderer = new DefaultListItemRenderer();
     }
 
-    public void addItem(E item) {
-        addItem(item, "");
+    public void addGroup(String groupName) {
+        groups.add(add(new ListGroup(groupName)));
     }
-    public void addItem(E item, String groupName) {
-        ListGroup group = groups.get(groupName);
-        if (group == null) {
-            group = add(new ListGroup(groupName));
-            groups.put(groupName, group);
+
+    public void addItem(E item) {
+        addItem(item, 0);
+    }
+    public void addItem(E item, int groupIndex) {
+        if (groups.isEmpty()) {
+            addGroup(null);
         }
-        group.addItem(new ListItem(item));
+        if (groupIndex > groups.size()) {
+            groupIndex = groups.size() - 1;
+        }
+        groups.get(groupIndex).addItem(new ListItem(item));
     }
 
     public void removeItem(E item) {
-        for (ListGroup group : groups.values()) {
+        for (ListGroup group : groups) {
             for (ListItem groupItem : group.items) {
                 if (groupItem.value == item) {
                     group.removeItem(groupItem);
                     if (group.items.isEmpty()) {
-                        groups.remove(group.getName());
+                        groups.remove(group);
                     }
                     return;
                 }
@@ -71,7 +74,7 @@ public class FList<E> extends FScrollPane {
         }
     }
 
-    public void setListItemRenderer(ListItemRenderer renderer0) {
+    public void setListItemRenderer(ListItemRenderer<E> renderer0) {
         renderer = renderer0;
     }
 
@@ -80,7 +83,7 @@ public class FList<E> extends FScrollPane {
         float y = 0;
         float groupHeight;
 
-        for (ListGroup group : groups.values()) {
+        for (ListGroup group : groups) {
             groupHeight = group.getPreferredHeight();
             group.setBounds(0, y, width, groupHeight);
             y += groupHeight;
@@ -94,22 +97,18 @@ public class FList<E> extends FScrollPane {
         private boolean isCollapsed;
 
         private ListGroup(String name0) {
-            if (name0.isEmpty()) {
+            if (name0 == null) {
                 header = null;
             }
             else {
-                header = new FLabel.ButtonBuilder().text(name0).command(new Runnable() {
+                header = add(new FLabel.ButtonBuilder().text(name0).command(new Runnable() {
                     @Override
                     public void run() {
                         isCollapsed = !isCollapsed;
                         FList.this.revalidate();
                     }
-                }).build();
+                }).build());
             }
-        }
-
-        public String getName() {
-            return header == null ? null : header.getText();
         }
 
         public void addItem(ListItem item) {
@@ -187,17 +186,17 @@ public class FList<E> extends FScrollPane {
             renderer.drawValue(g, value, font, FORE_COLOR, w, h);
 
             float y = h + 1;
-            g.drawLine(LINE_COLOR, 0, y, w, y);
+            g.drawLine(1, LINE_COLOR, 0, y, w, y);
         }
     }
 
-    public abstract class ListItemRenderer {
+    public static abstract class ListItemRenderer<V> {
         public abstract float getItemHeight();
-        public abstract boolean tap(E value, float x, float y, int count);
-        public abstract void drawValue(Graphics g, E value, FSkinFont font, FSkinColor foreColor, float width, float height);
+        public abstract boolean tap(V value, float x, float y, int count);
+        public abstract void drawValue(Graphics g, V value, FSkinFont font, FSkinColor foreColor, float width, float height);
     }
 
-    public class DefaultListItemRenderer extends ListItemRenderer {
+    public class DefaultListItemRenderer extends ListItemRenderer<E> {
         @Override
         public float getItemHeight() {
             return Utils.AVG_FINGER_HEIGHT;

@@ -298,25 +298,46 @@ public class Forge implements ApplicationListener {
             bounds = parentBounds;
         }
 
-        public void drawLine(FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-            drawLine(skinColor.getColor(), x1, y1, x2, y2);
+        public void drawLine(float thickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+            drawLine(thickness, skinColor.getColor(), x1, y1, x2, y2);
         }
-        public void drawLine(Color color, float x1, float y1, float x2, float y2) {
+        public void drawLine(float thickness, Color color, float x1, float y1, float x2, float y2) {
             batch.end(); //must pause batch while rendering shapes
+
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(thickness);
+            }
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
 
             shapeRenderer.begin(ShapeType.Line);
             shapeRenderer.setColor(color);
             shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
             shapeRenderer.end();
 
+            if (color.a != 0) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+
             batch.begin();
         }
 
-        public void drawRoundRect(FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
-            drawRoundRect(skinColor.getColor(), x, y, w, h, cornerRadius);
+        public void drawRoundRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {
+            drawRoundRect(thickness, skinColor.getColor(), x, y, w, h, cornerRadius);
         }
-        public void drawRoundRect(Color color, float x, float y, float w, float h, float cornerRadius) {
+        public void drawRoundRect(float thickness, Color color, float x, float y, float w, float h, float cornerRadius) {
             batch.end(); //must pause batch while rendering shapes
+
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(thickness);
+            }
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
 
             //adjust width/height so rectangle covers equivalent filled area
             w = Math.round(w - 1);
@@ -336,14 +357,29 @@ public class Forge implements ApplicationListener {
             shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
 
             shapeRenderer.end();
+
+            if (color.a != 0) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+
             batch.begin();
         }
 
-        public void drawRect(FSkinColor skinColor, float x, float y, float w, float h) {
-            drawRect(skinColor.getColor(), x, y, w, h);
+        public void drawRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h) {
+            drawRect(thickness, skinColor.getColor(), x, y, w, h);
         }
-        public void drawRect(Color color, float x, float y, float w, float h) {
+        public void drawRect(float thickness, Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
+
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(thickness);
+            }
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
 
             //adjust width/height so rectangle covers equivalent filled area
             w = Math.round(w - 1);
@@ -363,6 +399,14 @@ public class Forge implements ApplicationListener {
             shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
 
             shapeRenderer.end();
+
+            if (color.a != 0) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+
             batch.begin();
         }
 
@@ -372,8 +416,7 @@ public class Forge implements ApplicationListener {
         public void fillRect(Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
-            boolean needBlending = (color.a != 0);
-            if (needBlending) { //enable blending so alpha colored shapes work properly
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
@@ -382,7 +425,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
             shapeRenderer.end();
 
-            if (needBlending) {
+            if (color.a != 0) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
 
@@ -395,8 +438,7 @@ public class Forge implements ApplicationListener {
         public void fillTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3) {
             batch.end(); //must pause batch while rendering shapes
 
-            boolean needBlending = (color.a != 0);
-            if (needBlending) { //enable blending so alpha colored shapes work properly
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
@@ -405,7 +447,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
             shapeRenderer.end();
 
-            if (needBlending) {
+            if (color.a != 0) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
 

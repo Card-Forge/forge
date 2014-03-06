@@ -153,23 +153,23 @@ public class FLabel extends FDisplayObject {
         float h = getHeight();
 
         if (pressed) {
-            g.drawRect(d50, 0, 0, w, h);
-            g.drawRect(d10, 1, 1, w - 2, h - 2);
+            g.drawRect(1, d50, 0, 0, w, h);
+            g.drawRect(1, d10, 1, 1, w - 2, h - 2);
             g.fillGradientRect(d50, d10, true, 2, 2, w - 4, h - 4);
         }
         else if (selected && (opaque || selectable)) {
-            g.drawRect(d30, 0, 0, w, h);
-            g.drawRect(l10, 1, 1, w - 2, h - 2);
+            g.drawRect(1, d30, 0, 0, w, h);
+            g.drawRect(1, l10, 1, 1, w - 2, h - 2);
             g.fillGradientRect(d30, l10, true, 2, 2, w - 4, h - 4);
         }
         else if (opaque) {
-            g.drawRect(d50, 0, 0, w, h);
-            g.drawRect(l10, 1, 1, w - 2, h - 2);
+            g.drawRect(1, d50, 0, 0, w, h);
+            g.drawRect(1, l10, 1, 1, w - 2, h - 2);
             g.fillGradientRect(d10, l20, true, 2, 2, w - 4, h - 4);
         }
         else if (selectable) {
-            g.drawRect(l10, 0, 0, w, h);
-            g.drawRect(l30, 1, 1, w - 2, h - 2);
+            g.drawRect(1, l10, 0, 0, w, h);
+            g.drawRect(1, l30, 1, 1, w - 2, h - 2);
         }
 
         drawContent(g, w, h, pressed);
