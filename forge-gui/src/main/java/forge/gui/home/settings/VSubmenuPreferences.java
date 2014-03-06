@@ -138,13 +138,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
 
         pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)"), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."), regularConstraints);
 
         pnlPrefs.add(cbCloneImgSource, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art."), regularConstraints);
 
         pnlPrefs.add(cbPromptFreeBlocks, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt"), regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
@@ -207,7 +207,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
 
         pnlPrefs.add(cbAltSoundSystem, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use in case your have issues with sound not playing or disappearing)"), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), regularConstraints);
 
 
         // Keyboard shortcuts

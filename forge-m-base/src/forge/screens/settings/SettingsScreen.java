@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
 import forge.Forge.Graphics;
+import forge.ai.AiProfileUtil;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.game.GameLogEntryType;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FList;
@@ -36,6 +38,7 @@ public class SettingsScreen extends FScreen {
         lstSettings.addGroup("Graphic Options");
         lstSettings.addGroup("Sound Options");
 
+        //General Settings
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
                 "Sets the theme that determines how display components are skinned.",
                 FSkin.getAllSkins()) {
@@ -44,8 +47,94 @@ public class SettingsScreen extends FScreen {
                 FSkin.changeSkin(newValue);
             }
         }, 0);
-        lstSettings.addItem(new BooleanSetting(FPref.DEV_MODE_ENABLED, "Developer Mode",
-                "Enables menu with functions for testing during development."), 3);
+
+        //Gameplay Options
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
+                "AI Personality",
+                "Choose your AI opponent.",
+                AiProfileUtil.getProfilesArray()),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE,
+                "Play for Ante",
+                "Determines whether or not the game is played for ante."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
+                "Upload Draft Picks",
+                "Sends draft picks to Forge servers for analysis, to improve draft AI."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
+                "Allow AI Cheating",
+                "Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_MANABURN,
+                "Mana Burn",
+                "Play with mana burn (from pre-Magic 2010 rules)."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.ENFORCE_DECK_LEGALITY,
+                "Deck Conformance",
+                "Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_CLONE_MODE_SOURCE,
+                "Clones Use Original Card Art",
+                "When enabled clones will use their original art instead of the cloned card's art."),
+                1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCHPREF_PROMPT_FREE_BLOCKS,
+                "Free Block Handling",
+                "When enabled, if you would have to pay 0 to block, pay automatically without prompt."),
+                1);
+
+        //Random Deck Generation
+        lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
+                "Remove Small Creatures",
+                "Disables 1/1 and 0/X creatures in generated decks."),
+                2);
+        lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_SINGLETONS,
+                "Singleton Mode",
+                "Disables non-land duplicates in generated decks."),
+                2);
+        lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_ARTIFACTS,
+                "Remove Artifacts",
+                "Disables artifact cards in generated decks."),
+                2);
+
+        //Advanced Settings
+        lstSettings.addItem(new BooleanSetting(FPref.DEV_MODE_ENABLED,
+                "Developer Mode",
+                "Enables menu with functions for testing during development."),
+                3);
+        lstSettings.addItem(new CustomSelectSetting(FPref.DEV_LOG_ENTRY_TYPE,
+                "Game Log Verbosity",
+                "Changes how much information is displayed in the game log. Sorted by least to most verbose.",
+                GameLogEntryType.class),
+                3);
+
+        //Graphic Options
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
+                "Display Foil Overlay",
+                "Displays foil cards with the visual foil overlay effect."),
+                4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_RANDOM_FOIL,
+                "Random Foil",
+                "Adds foil effect to random cards."),
+                4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_RANDOM_ART_IN_POOLS,
+                "Randomize Card Art",
+                "Generates cards with random art in generated limited mode card pools."),
+                4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
+                "Hide Reminder Text",
+                "Hide reminder text in Card Detail pane."),
+                4);
+
+        //Sound Options
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
+                "Enable Sounds",
+                "Enable sound effects during the game."),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
+                "Use Alternate Sound System",
+                "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
+                5);
     }
 
     @Override
@@ -112,6 +201,13 @@ public class SettingsScreen extends FScreen {
 
             for (String option : options0) {
                 options.add(option);
+            }
+        }
+        public <E extends Enum<E>> CustomSelectSetting(FPref pref0, String label0, String description0, Class<E> enumData) {
+            super(pref0, label0 + ":", description0);
+
+            for (E option : enumData.getEnumConstants()) {
+                options.add(option.toString());
             }
         }
 
