@@ -16038,6 +16038,7 @@ forge-m-base/src/forge/screens/settings/SettingsScreen.java -text
 forge-m-base/src/forge/toolbox/FButton.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
+forge-m-base/src/forge/toolbox/FGestureAdapter.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
 forge-m-base/src/forge/toolbox/FList.java -text
 forge-m-base/src/forge/toolbox/FOverlay.java -text

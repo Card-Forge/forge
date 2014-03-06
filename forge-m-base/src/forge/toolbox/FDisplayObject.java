@@ -98,20 +98,20 @@ public abstract class FDisplayObject {
         }
     }
 
-    public boolean touchDown(float x, float y) {
+    public boolean press(float x, float y) {
         return false;
     }
 
-    public boolean touchUp(float x, float y) {
+    public boolean longPress(float x, float y) {
+        return false;
+    }
+
+    public boolean release(float x, float y) {
         return false;
     }
 
     public boolean tap(float x, float y, int count) {
         return false;
-    }
-
-    public boolean longPress(float x, float y) {
-        return tap(x, y, 1); //treat longPress the same as a tap by default
     }
 
     public boolean fling(float velocityX, float velocityY) {

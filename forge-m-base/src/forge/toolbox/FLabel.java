@@ -116,7 +116,7 @@ public class FLabel extends FDisplayObject {
     }
 
     @Override
-    public final boolean touchDown(float x, float y) {
+    public final boolean press(float x, float y) {
         if (opaque || selectable) {
             pressed = true;
             return true;
@@ -125,7 +125,7 @@ public class FLabel extends FDisplayObject {
     }
 
     @Override
-    public final boolean touchUp(float x, float y) {
+    public final boolean release(float x, float y) {
         if (pressed) {
             pressed = false;
             return true;

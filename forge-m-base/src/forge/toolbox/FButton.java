@@ -89,7 +89,7 @@ public class FButton extends FDisplayObject {
     }
 
     @Override
-    public final boolean touchDown(float x, float y) {
+    public final boolean press(float x, float y) {
         if (isToggled()) { return true; }
         imgL = FSkinImage.BTN_DOWN_LEFT;
         imgM = FSkinImage.BTN_DOWN_CENTER;
@@ -98,7 +98,7 @@ public class FButton extends FDisplayObject {
     }
 
     @Override
-    public final boolean touchUp(float x, float y) {
+    public final boolean release(float x, float y) {
         if (isToggled()) { return true; }
         resetImg();
         return true;

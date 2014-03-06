@@ -160,12 +160,12 @@ public class FList<E> extends FScrollPane {
             value = value0;
         }
 
-        public boolean touchDown(float x, float y) {
+        public boolean press(float x, float y) {
             pressed = true;
             return true;
         }
 
-        public boolean touchUp(float x, float y) {
+        public boolean release(float x, float y) {
             pressed = false;
             return true;
         }

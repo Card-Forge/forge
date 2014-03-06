@@ -53,13 +53,13 @@ public abstract class LaunchScreen extends FScreen {
         }
 
         @Override
-        public final boolean touchDown(float x, float y) {
+        public final boolean press(float x, float y) {
             pressed = true;
             return true;
         }
 
         @Override
-        public final boolean touchUp(float x, float y) {
+        public final boolean release(float x, float y) {
             pressed = false;
             return true;
         }
