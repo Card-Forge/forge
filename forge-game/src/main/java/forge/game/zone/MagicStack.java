@@ -330,9 +330,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         }
                     } while (hasPaid);
                     if (source.getPseudoKickerMagnitude() > 0) {
-                        String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                                + "| Defined$ ReplacedCard | SubAbility$ ChorusDBETBCounters";
-                        String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + source.getPseudoKickerMagnitude();
+                        String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ "
+                                + source.getPseudoKickerMagnitude() + " | SubAbility$ ChorusDBETBCounters";
+                        String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                                + "| Defined$ ReplacedCard";
                         
                         source.setSVar("ChorusETBCounters", abStr);
                         source.setSVar("ChorusDBETBCounters", dbStr);

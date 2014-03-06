@@ -229,9 +229,10 @@ public class AbilityManaPart implements java.io.Serializable {
         String[] parse = this.addsCounters.split("_");
         // Convert random SVars if there are other cards with this effect
         if (c.isValid(parse[0], c.getController(), c)) {
-            String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
-                    + "| Defined$ ReplacedCard | SubAbility$ ManaDBETBCounters";
-            String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + parse[1] + " | CounterNum$ " + parse[2];
+            String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + parse[1]
+                    + " | CounterNum$ " + parse[2] + " | SubAbility$ ManaDBETBCounters";
+            String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                    + " | Defined$ ReplacedCard";
             try {
                 Integer.parseInt(parse[2]);
             } catch (NumberFormatException ignored) {
