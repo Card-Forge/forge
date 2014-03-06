@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
 import forge.Forge.Graphics;
+import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
@@ -13,12 +14,11 @@ import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public abstract class FScreen extends FContainer {
-    public static final float BTN_WIDTH = Utils.AVG_FINGER_WIDTH;
-    public static final float BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    public static final float BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+    public static final float BTN_WIDTH = BTN_HEIGHT;
 
     private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
     private static final FSkinColor clr = clrTheme.stepColor(0);
-    private static final FSkinColor a100 = clr.alphaColor(100f / 255f);
     private static final FSkinColor d40 = clr.stepColor(-40);
     private static final FSkinColor d80 = clr.stepColor(-80);
 
@@ -26,7 +26,7 @@ public abstract class FScreen extends FContainer {
 
     protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
         if (showBackButton) {
-            btnBack = add(new FLabel.ButtonBuilder().icon(FSkinImage.BACK).command(new Runnable() {
+            btnBack = add(new FLabel.Builder().icon(new BackIcon()).pressedColor(clr).align(HAlignment.CENTER).command(new Runnable() {
                 @Override
                 public void run() {
                     Forge.back();
@@ -43,7 +43,7 @@ public abstract class FScreen extends FContainer {
             lblHeader = null;
         }
         if (showMenuButton) {
-            btnMenu = add(new FLabel.ButtonBuilder().icon(FSkinImage.FAVICON).command(new Runnable() {
+            btnMenu = add(new FLabel.Builder().icon(FSkinImage.FAVICON).pressedColor(clr).align(HAlignment.CENTER).command(new Runnable() {
                 @Override
                 public void run() {
                     showMenu();
@@ -77,19 +77,15 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected final void doLayout(float width, float height) {
-        float headerX = 0;
-        float insets = 0;
-        float headerWidth = width;
+        float headerX = BTN_WIDTH;
+        float headerWidth = width - 2 * headerX;
         float headerHeight = BTN_HEIGHT;
 
         if (btnBack != null) {
-            btnBack.setBounds(insets, insets, BTN_WIDTH, BTN_HEIGHT);
-            headerX = btnBack.getWidth();
-            headerWidth -= headerX;
+            btnBack.setBounds(0, 0, BTN_WIDTH, BTN_HEIGHT);
         }
         if (btnMenu != null) {
-            btnMenu.setBounds(width - BTN_WIDTH - insets, insets, BTN_WIDTH, BTN_HEIGHT);
-            headerWidth -= btnMenu.getWidth();
+            btnMenu.setBounds(width - BTN_WIDTH, 0, BTN_WIDTH, BTN_HEIGHT);
         }
         if (lblHeader != null) {
             lblHeader.setBounds(headerX, 0, headerWidth, headerHeight);
@@ -111,13 +107,36 @@ public abstract class FScreen extends FContainer {
         g.fillRect(clrTheme, 0, 0, w, h);
 
         if (lblHeader != null) { //draw custom background behind header label
-            float x = lblHeader.getLeft() + 6;
-            float y = lblHeader.getTop() + 1;
-            w -= x;
-            h = lblHeader.getHeight() - 2;
-            g.fillRect(d80, x, y + 5, w, h - 5);
-            g.fillRect(a100, x + 5, y, w - 5, h - 5);
-            g.drawRect(1, d40, x + 5, y, w - 5, h - 5);
+            g.fillRect(d80, 0, 0, w, BTN_HEIGHT);
+            g.drawLine(1, d40, 0, BTN_HEIGHT, w, BTN_HEIGHT);
+        }
+    }
+
+    private static class BackIcon implements FImage {
+        private static final float THICKNESS = 3;
+        private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
+
+        @Override
+        public float getWidth() {
+            return BTN_WIDTH;
+        }
+
+        @Override
+        public float getHeight() {
+            return BTN_HEIGHT;
+        }
+
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            float xMid = x + w / 3; 
+            float yMid = y + h / 2;
+            float offsetX = h / 8;
+            float offsetY = w / 4;
+
+            g.startClip(xMid - offsetX - 1, y, 2 * offsetX + 1, h); //use clip to square off end of each line
+            g.drawLine(THICKNESS, COLOR, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
+            g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid  - 1, xMid + offsetX, yMid + offsetY);
+            g.endClip();
         }
     }
 }

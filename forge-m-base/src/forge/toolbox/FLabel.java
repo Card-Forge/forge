@@ -26,6 +26,7 @@ public class FLabel extends FDisplayObject {
 
         private String bldText;
         private FImage bldIcon;
+        private FSkinColor bldPressedColor;
         private Runnable bldCommand;
 
         public FLabel build() { return new FLabel(this); }
@@ -48,6 +49,7 @@ public class FLabel extends FDisplayObject {
         public Builder iconScaleFactor(final float f0) { this.bldIconScaleFactor = f0; return this; }
         public Builder iconInBackground(final boolean b0) { this.bldIconInBackground = b0; return this; }
         public Builder iconInBackground() { iconInBackground(true); return this; }
+        public Builder pressedColor(final FSkinColor c0) { this.bldPressedColor = c0; return this; }
     }
 
     // sets better defaults for button labels
@@ -75,6 +77,7 @@ public class FLabel extends FDisplayObject {
 
     private String text;
     private FImage icon;
+    private FSkinColor pressedColor;
     private Runnable command;
 
     // Call this using FLabel.Builder()...
@@ -90,6 +93,7 @@ public class FLabel extends FDisplayObject {
         iconScaleAuto = b0.bldIconScaleAuto;
         text = b0.bldText != null ? b0.bldText : "";
         icon = b0.bldIcon;
+        pressedColor = b0.bldPressedColor;
         command = b0.bldCommand;
         setEnabled(b0.bldEnabled);
     }
@@ -117,7 +121,7 @@ public class FLabel extends FDisplayObject {
 
     @Override
     public final boolean press(float x, float y) {
-        if (opaque || selectable) {
+        if (opaque || selectable || pressedColor != null) {
             pressed = true;
             return true;
         }
@@ -153,9 +157,14 @@ public class FLabel extends FDisplayObject {
         float h = getHeight();
 
         if (pressed) {
-            g.drawRect(1, d50, 0, 0, w, h);
-            g.drawRect(1, d10, 1, 1, w - 2, h - 2);
-            g.fillGradientRect(d50, d10, true, 2, 2, w - 4, h - 4);
+            if (pressedColor != null) {
+                g.fillRect(pressedColor, 0, 0, w, h);
+            }
+            else {
+                g.drawRect(1, d50, 0, 0, w, h);
+                g.drawRect(1, d10, 1, 1, w - 2, h - 2);
+                g.fillGradientRect(d50, d10, true, 2, 2, w - 4, h - 4);
+            }
         }
         else if (selected && (opaque || selectable)) {
             g.drawRect(1, d30, 0, 0, w, h);

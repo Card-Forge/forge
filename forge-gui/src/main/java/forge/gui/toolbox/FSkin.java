@@ -1032,7 +1032,6 @@ public enum FSkin {
         ICO_CLOSE           (new int[] {640, 640, 20, 20}),
         ICO_LIST            (new int[] {640, 660, 20, 20}),
         ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}),
-        ICO_BACK            (new int[] {640, 680, 20, 20}),
         ICO_UNKNOWN         (new int[] {0, 720, 80, 80}),
         ICO_LOGO            (new int[] {480, 0, 200, 200}),
         ICO_FLIPCARD        (new int[] {400, 0, 80, 120}),
