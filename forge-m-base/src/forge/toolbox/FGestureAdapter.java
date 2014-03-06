@@ -18,7 +18,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean zoom(float initialDistance, float distance);
     public abstract boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2);
 
-    private float tapSquareSize, pressDelay, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
+    private float tapSquareSize, pressDelay, longPressDelay, quickTapDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
     private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime;
     private int tapCount, lastTapButton, lastTapPointer;
     private boolean inTapSquare, pressed, longPressed, quickTapped, pinching, panning;
@@ -59,7 +59,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     };
 
     public FGestureAdapter() {
-        this(20f, 0.4f, 0.1f, 1.1f, 0.15f);
+        this(20f, 0.4f, 0.1f, 1.1f, 0.05f, 0.15f);
     }
 
     /** @param tapSquareSize0 half width in pixels of the square around an initial touch event
@@ -67,11 +67,12 @@ public abstract class FGestureAdapter extends InputAdapter {
      * @param pressDelay0 time in seconds that must pass for a press event to be fired.
      * @param longPressDelay0 time in seconds that must pass for a long press event to be fired.
      * @param flingDelay0 time in seconds the finger must have been dragged for a fling event to be fired. */
-    public FGestureAdapter(float tapSquareSize0, float tapCountInterval0, float pressDelay0, float longPressDelay0, float flingDelay0) {
+    public FGestureAdapter(float tapSquareSize0, float tapCountInterval0, float pressDelay0, float longPressDelay0, float quickTapDelay0, float flingDelay0) {
         tapSquareSize = tapSquareSize0;
         tapCountInterval = (long)(tapCountInterval0 * 1000000000l);
         pressDelay = pressDelay0;
         longPressDelay = longPressDelay0;
+        quickTapDelay = quickTapDelay0;
         flingDelay = (long)(flingDelay0 * 1000000000l);
     }
 
@@ -196,7 +197,7 @@ public abstract class FGestureAdapter extends InputAdapter {
 
             pressTask.run(); //allow pressed and released to fire if quick tapping
             quickTapped = true;
-            Timer.schedule(quickTapTask, pressDelay);
+            Timer.schedule(quickTapTask, quickTapDelay);
             return false;
         }
 
