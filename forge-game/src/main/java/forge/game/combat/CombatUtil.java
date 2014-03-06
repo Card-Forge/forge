@@ -988,17 +988,7 @@ public class CombatUtil {
 
         // Not a great solution, but prevents a crash by passing a fake SA for Propaganda payments
         // If there's a better way of handling this somewhere deeper in the code, feel free to remove
-        SpellAbility fakeSA = new SpellAbility(c, attackCost) {
-            @Override
-            public boolean canPlay() {
-                return false;
-            }
-
-            @Override
-            public void resolve() {
-
-            }
-        };
+        SpellAbility fakeSA = new SpellAbility.EmptySa(c, c.getController());
 
         boolean isFree = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
         return isFree || c.getController().getController().payManaOptional(c, attackCost, fakeSA, "Pay additional cost to declare " + c + " an attacker", ManaPaymentPurpose.DeclareAttacker);
