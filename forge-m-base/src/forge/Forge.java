@@ -108,7 +108,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void render () {
-        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); // Clear the screen.
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
         FContainer screen = currentScreen;
         if (screen == null) {
@@ -309,12 +309,19 @@ public class Forge implements ApplicationListener {
             if (color.a != 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
+            boolean needSmoothing = (x1 != x2 && y1 != y2);
+            if (needSmoothing) {
+                Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
+            }
 
             shapeRenderer.begin(ShapeType.Line);
             shapeRenderer.setColor(color);
             shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
             shapeRenderer.end();
 
+            if (needSmoothing) {
+                Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
+            }
             if (color.a != 0) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
@@ -337,6 +344,9 @@ public class Forge implements ApplicationListener {
             if (color.a != 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
+            if (cornerRadius > 0) {
+                Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
+            }
 
             //adjust width/height so rectangle covers equivalent filled area
             w = Math.round(w - 1);
@@ -357,6 +367,9 @@ public class Forge implements ApplicationListener {
 
             shapeRenderer.end();
 
+            if (cornerRadius > 0) {
+                Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
+            }
             if (color.a != 0) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
@@ -422,6 +435,58 @@ public class Forge implements ApplicationListener {
             shapeRenderer.begin(ShapeType.Filled);
             shapeRenderer.setColor(color);
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
+            shapeRenderer.end();
+
+            if (color.a != 0) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+
+            batch.begin();
+        }
+
+        public void drawCircle(float thickness, FSkinColor skinColor, float x, float y, float radius) {
+            drawCircle(thickness, skinColor.getColor(), x, y, radius);
+        }
+        public void drawCircle(float thickness, Color color, float x, float y, float radius) {
+            batch.end(); //must pause batch while rendering shapes
+
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(thickness);
+            }
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
+            Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
+
+            shapeRenderer.begin(ShapeType.Line);
+            shapeRenderer.setColor(color);
+            shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius);
+            shapeRenderer.end();
+
+            Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
+            if (color.a != 0) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+            }
+            if (thickness > 1) {
+                Gdx.gl.glLineWidth(1);
+            }
+
+            batch.begin();
+        }
+
+        public void fillCircle(FSkinColor skinColor, float x, float y, float radius) {
+            fillCircle(skinColor.getColor(), x, y, radius);
+        }
+        public void fillCircle(Color color, float x, float y, float radius) {
+            batch.end(); //must pause batch while rendering shapes
+
+            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
+
+            shapeRenderer.begin(ShapeType.Filled);
+            shapeRenderer.setColor(color);
+            shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius); //TODO: Make smoother
             shapeRenderer.end();
 
             if (color.a != 0) {

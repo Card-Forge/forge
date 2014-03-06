@@ -15,7 +15,7 @@ public class FList<E> extends FScrollPane {
     private static final float INSETS_FACTOR = 0.025f;
     private static final float GROUP_HEADER_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.6f;
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_THEME2).alphaColor(0.75f);
+    private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     private static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
 
     private final List<ListGroup> groups = new ArrayList<ListGroup>();

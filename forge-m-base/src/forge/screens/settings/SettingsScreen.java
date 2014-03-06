@@ -126,6 +126,7 @@ public class SettingsScreen extends FScreen {
 
         private class CustomSelectScreen extends FScreen {
             private final FList<String> lstOptions;
+            private final String currentValue = FModel.getPreferences().getPref(pref);
 
             private CustomSelectScreen() {
                 super(true, "Select " + label.substring(0, label.length() - 1), false);
@@ -133,14 +134,28 @@ public class SettingsScreen extends FScreen {
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
                     public boolean tap(String value, float x, float y, int count) {
-                        valueChanged(value);
+                        if (!value.equals(currentValue)) {
+                            valueChanged(value);
+                        }
                         Forge.back();
                         return true;
                     }
 
                     @Override
                     public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, float width, float height) {
-                        super.drawValue(g, value, font, foreColor, width, height);
+                        float x = width * INSETS_FACTOR;
+                        float y = 0;
+                        width -= 2 * x;
+
+                        g.drawText(value, font, foreColor, x, y, width, height, false, HAlignment.LEFT, true);
+
+                        float radius = height / 5;
+                        x += width - radius;
+                        y = height / 2;
+                        g.drawCircle(1, DESC_COLOR, x, y, radius);
+                        if (value.equals(currentValue)) {
+                            g.fillCircle(foreColor, x, y, radius / 2);
+                        }
                     }
                 });
             }
