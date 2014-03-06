@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -110,6 +111,22 @@ public class SettingsScreen extends FScreen {
 
         @Override
         public void select() {
+            Forge.openScreen(new CustomSelectScreen());
+        }
+
+        private class CustomSelectScreen extends FScreen {
+            private final FList<String> lstOptions;
+
+            private CustomSelectScreen() {
+                super(true, "Select " + label.substring(0, label.length() - 1), false);
+                lstOptions = add(new FList<String>(options));
+            }
+
+            @Override
+            protected void doLayout(float startY, float width, float height) {
+                float dy = height * GAP_Y_FACTOR;
+                lstOptions.setBounds(0, startY + dy, width, height - startY - dy);
+            }
         }
 
         @Override
