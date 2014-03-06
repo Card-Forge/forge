@@ -93,6 +93,21 @@ public class RepeatEachAi extends SpellAbilityAi {
                     return false;
                 }
             }
+        } else if ("GainControlOwns".equals(logic)) {
+            List<Card> list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card crd) {
+                    return crd.isCreature() && !crd.getController().equals(crd.getOwner());
+                }
+            });
+            if (list.isEmpty()) {
+                return false;
+            }
+            for (final Card c : list) {
+                if (aiPlayer.equals(c.getController())) {
+                    return false;
+                }
+            }
         }
 
         // TODO Add some normal AI variability here
