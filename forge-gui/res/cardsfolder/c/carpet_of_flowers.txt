@@ -2,9 +2,9 @@ Name:Carpet of Flowers
 ManaCost:G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | CheckSVar$ CarpetX | SVarCompare$ EQ0 | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
-SVar:TrigMana:AB$ Pump | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent, you may add X mana, where X is the number of Islands target opponent controls | RememberObjects$ Targeted | SubAbility$ ChooseNumber
+SVar:TrigMana:AB$ Pump | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent, you may add X mana, where X is the number of Islands target opponent controls | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ ChooseNumber
 SVar:ChooseNumber:DB$ ChooseNumber | Min$ 0 | Max$ NumManaMax | References$ NumManaMax | ListTitle$ Choose the amount of mana | SubAbility$ DBMana
-SVar:DBMana:DB$ Mana | Amount$ X | Produced$ Any | SubAbility$ CheckPlus
+SVar:DBMana:DB$ Mana | Amount$ X | References$ X | Produced$ Any | SubAbility$ CheckPlus
 SVar:CheckPlus:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
