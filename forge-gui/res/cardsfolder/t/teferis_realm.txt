@@ -1,0 +1,12 @@
+Name:Teferi's Realm
+ManaCost:1 U U
+Types:World Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during his or her next untap step.)
+SVar:TrigChoose:AB$ GenericChoice | Cost$ 0 | Choices$ ChooseCreature,ChooseArtifact,ChooseLand,ChooseEnchant | Defined$ TriggeredPlayer | ShowChoice$ True | AILogic$ Phasing
+SVar:ChooseCreature:DB$ Phases | AllValid$ Creature.nonToken | SpellDescription$ Creature
+SVar:ChooseArtifact:DB$ Phases | AllValid$ Artifact.nonToken | SpellDescription$ Artifact
+SVar:ChooseLand:DB$ Phases | AllValid$ Land.nonToken | SpellDescription$ Land
+SVar:ChooseEnchant:DB$ Phases | AllValid$ Enchantment.nonAura+nonToken | SpellDescription$ non-Aura Enchantment
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_realm.jpg
+Oracle:At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during his or her next untap step.)

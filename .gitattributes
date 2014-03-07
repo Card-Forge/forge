@@ -12364,6 +12364,7 @@ forge-gui/res/cardsfolder/t/teferis_imp.txt -text
 forge-gui/res/cardsfolder/t/teferis_isle.txt -text
 forge-gui/res/cardsfolder/t/teferis_moat.txt -text
 forge-gui/res/cardsfolder/t/teferis_puzzle_box.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/teferis_realm.txt -text
 forge-gui/res/cardsfolder/t/teferis_response.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/teferis_veil.txt.txt -text
 forge-gui/res/cardsfolder/t/tek.txt svneol=native#text/plain

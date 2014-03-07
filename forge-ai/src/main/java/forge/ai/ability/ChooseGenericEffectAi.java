@@ -7,6 +7,10 @@ import forge.util.Aggregates;
 
 import java.util.List;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 /**
  * TODO: Write javadoc for this type.
  *
@@ -27,8 +31,17 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     }    
     
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
-        if ("Random".equals(sa.getParam("AILogic"))) {
+        final String logic = sa.getParam("AILogic");
+        if ("Random".equals(logic)) {
             return Aggregates.random(spells);
+        } else if ("Phasing".equals(logic)){ // Teferi's Realm : keep aggressive 
+            List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, new Predicate<SpellAbility>() {
+                @Override
+                public boolean apply(final SpellAbility sp) {
+                    return !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land");
+                }
+            }));
+            return Aggregates.random(filtered);
         } else {
             return spells.get(0);
         }
