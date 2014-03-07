@@ -90,7 +90,7 @@ public abstract class FScreen extends FContainer {
         if (lblHeader != null) {
             lblHeader.setBounds(headerX, 0, headerWidth, headerHeight);
 
-            doLayout(headerHeight + 1, width, height); //+1 to account for bottom border of header
+            doLayout(headerHeight, width, height);
         }
         else {
             doLayout(0, width, height);

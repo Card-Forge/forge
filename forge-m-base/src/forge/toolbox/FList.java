@@ -130,7 +130,7 @@ public class FList<E> extends FScrollPane {
                 height += GROUP_HEADER_HEIGHT;
             }
             if (!isCollapsed) {
-                height += (renderer.getItemHeight() + 1) * items.size();
+                height += renderer.getItemHeight() * items.size();
             }
             return height;
         }
@@ -143,7 +143,7 @@ public class FList<E> extends FScrollPane {
                 y += GROUP_HEADER_HEIGHT;
             }
 
-            float itemHeight = renderer.getItemHeight() + 1; //account for bottom border
+            float itemHeight = renderer.getItemHeight();
 
             for (ListItem item : items) {
                 item.setBounds(0, y, width, itemHeight);
