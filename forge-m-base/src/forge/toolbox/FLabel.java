@@ -172,7 +172,7 @@ public class FLabel extends FDisplayObject {
         }
         else if (opaque) {
             g.fillGradientRect(d10, l20, true, 0, 0, w, h);
-            g.drawRect(1, d50, 0, 0, w, h);
+            g.drawRect(1, d10, 0, 0, w, h);
         }
         else if (selectable) {
             g.drawRect(1, l10, 0, 0, w, h);
