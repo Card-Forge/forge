@@ -1,7 +1,5 @@
 package forge.screens.match.views;
 
-import com.badlogic.gdx.graphics.Color;
-
 import forge.Forge.Graphics;
 import forge.toolbox.FContainer;
 import forge.utils.Utils;
@@ -22,8 +20,5 @@ public class VStack extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
-        g.fillRect(Color.BLUE, 0, 0, w, h);
     }
 }

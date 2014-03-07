@@ -15,7 +15,7 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 
 public class VPhases extends FContainer {
-    private static final FSkinFont labelFont = FSkinFont.get(12);
+    private static final FSkinFont labelFont = FSkinFont.get(11);
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<PhaseType, PhaseLabel>();
 
@@ -23,15 +23,15 @@ public class VPhases extends FContainer {
         addPhaseLabel("UP", PhaseType.UPKEEP);
         addPhaseLabel("DR", PhaseType.DRAW);
         addPhaseLabel("M1", PhaseType.MAIN1);
+        addPhaseLabel("M2", PhaseType.MAIN2);
+        addPhaseLabel("ET", PhaseType.END_OF_TURN);
+        addPhaseLabel("CL", PhaseType.CLEANUP);
         addPhaseLabel("BC", PhaseType.COMBAT_BEGIN);
         addPhaseLabel("DA", PhaseType.COMBAT_DECLARE_ATTACKERS);
         addPhaseLabel("DB", PhaseType.COMBAT_DECLARE_BLOCKERS);
         addPhaseLabel("FS", PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         addPhaseLabel("CD", PhaseType.COMBAT_DAMAGE);
         addPhaseLabel("EC", PhaseType.COMBAT_END);
-        addPhaseLabel("M2", PhaseType.MAIN2);
-        addPhaseLabel("ET", PhaseType.END_OF_TURN);
-        addPhaseLabel("CL", PhaseType.CLEANUP);
     }
 
     private void addPhaseLabel(String caption, PhaseType phaseType) {
@@ -47,18 +47,12 @@ public class VPhases extends FContainer {
     @Override
     protected void doLayout(float width, float height) {
         float y = 0;
+        float w = width - 2; w/=2;
         float labelHeight = height / phaseLabels.size();
         for (FDisplayObject lbl : getChildren()) {
-            lbl.setBounds(0, y, width, labelHeight);
+            lbl.setBounds(1, y + 1, w, labelHeight - 1);
             y += labelHeight;
         }
-    }
-
-    @Override
-    protected void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
-        g.fillRect(Color.CYAN, 0, 0, w, h);
     }
 
     private class PhaseLabel extends FDisplayObject {
@@ -113,8 +107,8 @@ public class VPhases extends FContainer {
             }
 
             // Center vertically and horizontally. Show border if active.
-            //g.fillRoundRect(1, 1, w - 2, h - 2, 5, 5);
-            g.fillRect(c, 1, 1, w - 2, h - 2);
+            //g.fillRoundRect(0, 0, w, h, 5, 5);
+            g.fillRect(c, 0, 0, w, h);
             g.drawText(caption, labelFont, Color.BLACK, 0, 0, w, h, false, HAlignment.CENTER, true);
         }
     }

@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.screens.FScreen;
-import forge.screens.match.views.VLog;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
+import forge.Forge.Graphics;
+import forge.assets.FSkinTexture;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 
@@ -15,14 +16,14 @@ public class MatchScreen extends FScreen {
     private final Match match;
     private final MatchController controller;
     private final Map<RegisteredPlayer, VPlayerPanel> playerPanels;
-    private final VLog log;
+    //private final VLog log;
     private final VStack stack;
     private final VPrompt prompt;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
     public MatchScreen(Match match0) {
-        super(false, null, true);
+        super(true, "Game 1 Turn 1", true);
         match = match0;
         controller = new MatchController(this);
 
@@ -34,7 +35,7 @@ public class MatchScreen extends FScreen {
         topPlayerPanel = playerPanels.get(match.getPlayers().get(1));
         topPlayerPanel.setFlipped(true);
 
-        log = add(new VLog());
+        //log = add(new VLog());
         stack = add(new VStack());
         prompt = add(new VPrompt());
 
@@ -42,12 +43,18 @@ public class MatchScreen extends FScreen {
     }
 
     @Override
-    protected void doLayout(float startY, float width, float height) {
-        float playerPanelHeight = (height - startY - VPrompt.HEIGHT - VLog.HEIGHT) / 2f;
+    public void drawBackground(Graphics g) {
+        super.drawBackground(g);
+        g.drawImage(FSkinTexture.BG_MATCH, 0, topPlayerPanel.getTop(), getWidth(), bottomPlayerPanel.getBottom() - topPlayerPanel.getTop());
+    }
 
-        log.setBounds(0, startY, width - FScreen.BTN_WIDTH, VLog.HEIGHT);
-        topPlayerPanel.setBounds(0, startY + VLog.HEIGHT, width, playerPanelHeight);
-        stack.setBounds(0, startY + VLog.HEIGHT + playerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        float playerPanelHeight = (height - startY - VPrompt.HEIGHT) / 2f;
+
+        //log.setBounds(0, startY, width - FScreen.HEADER_HEIGHT, VLog.HEIGHT);
+        topPlayerPanel.setBounds(0, startY, width, playerPanelHeight);
+        stack.setBounds(0, startY + playerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - playerPanelHeight, width, playerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }

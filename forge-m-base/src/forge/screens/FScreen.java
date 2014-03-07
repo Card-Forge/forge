@@ -14,8 +14,7 @@ import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public abstract class FScreen extends FContainer {
-    public static final float BTN_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
-    public static final float BTN_WIDTH = BTN_HEIGHT;
+    public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
     private static final FSkinColor clr = clrTheme.stepColor(0);
@@ -77,20 +76,19 @@ public abstract class FScreen extends FContainer {
 
     @Override
     protected final void doLayout(float width, float height) {
-        float headerX = BTN_WIDTH;
+        float headerX = HEADER_HEIGHT;
         float headerWidth = width - 2 * headerX;
-        float headerHeight = BTN_HEIGHT;
 
         if (btnBack != null) {
-            btnBack.setBounds(0, 0, BTN_WIDTH, BTN_HEIGHT);
+            btnBack.setBounds(0, 0, HEADER_HEIGHT, HEADER_HEIGHT);
         }
         if (btnMenu != null) {
-            btnMenu.setBounds(width - BTN_WIDTH, 0, BTN_WIDTH, BTN_HEIGHT);
+            btnMenu.setBounds(width - HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT);
         }
         if (lblHeader != null) {
-            lblHeader.setBounds(headerX, 0, headerWidth, headerHeight);
+            lblHeader.setBounds(headerX, 0, headerWidth, HEADER_HEIGHT);
 
-            doLayout(headerHeight, width, height);
+            doLayout(HEADER_HEIGHT, width, height);
         }
         else {
             doLayout(0, width, height);
@@ -107,8 +105,8 @@ public abstract class FScreen extends FContainer {
         g.fillRect(clrTheme, 0, 0, w, h);
 
         if (lblHeader != null) { //draw custom background behind header label
-            g.fillRect(d80, 0, 0, w, BTN_HEIGHT);
-            g.drawLine(1, d40, 0, BTN_HEIGHT, w, BTN_HEIGHT);
+            g.fillRect(d80, 0, 0, w, HEADER_HEIGHT);
+            g.drawLine(1, d40, 0, HEADER_HEIGHT, w, HEADER_HEIGHT);
         }
     }
 
@@ -118,12 +116,12 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public float getWidth() {
-            return BTN_WIDTH;
+            return HEADER_HEIGHT;
         }
 
         @Override
         public float getHeight() {
-            return BTN_HEIGHT;
+            return HEADER_HEIGHT;
         }
 
         @Override

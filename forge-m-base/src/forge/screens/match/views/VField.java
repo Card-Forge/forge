@@ -26,8 +26,5 @@ public class VField extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
-        g.drawImage(FSkinTexture.BG_MATCH, 0, 0, w, h);
     }
 }
