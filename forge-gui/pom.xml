@@ -196,7 +196,7 @@
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.5</version>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -207,13 +207,13 @@
 	   <dependency>
 	      	<groupId>org.powermock</groupId>
 	      	<artifactId>powermock-module-testng</artifactId>
-	      	<version>1.5.2</version>
+	      	<version>1.5.4</version>
 	      	<scope>test</scope>
 	   </dependency>
 	   <dependency>
 	      	<groupId>org.powermock</groupId>
 	      	<artifactId>powermock-api-mockito</artifactId>
-	      	<version>1.5.2</version>
+	      	<version>1.5.4</version>
 	      	<scope>test</scope>
 	   </dependency>  
         <dependency>
@@ -251,7 +251,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.1</version>
+            <version>3.3</version>
         </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
