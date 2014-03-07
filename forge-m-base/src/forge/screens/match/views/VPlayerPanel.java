@@ -27,10 +27,8 @@ public class VPlayerPanel extends FContainer {
     @Override
     protected void doLayout(float width, float height) {
         //layout for bottom panel by default
-        float phasesTop = VStack.HEIGHT / 2;
-        float phasesWidth = VStack.WIDTH;
-        phases.setBounds(0, phasesTop, phasesWidth, height - VAvatar.HEIGHT - phasesTop);
-        field.setBounds(phasesWidth, 0, width - phasesWidth, height - VAvatar.HEIGHT);
+        field.setBounds(0, 0, width, height - VAvatar.HEIGHT);
+        phases.setBounds(VAvatar.WIDTH, height - VPhases.HEIGHT, width - VAvatar.WIDTH, VPhases.HEIGHT);
         avatar.setPosition(0, height - VAvatar.HEIGHT);
 
         if (isFlipped()) { //flip all positions across x-axis if needed

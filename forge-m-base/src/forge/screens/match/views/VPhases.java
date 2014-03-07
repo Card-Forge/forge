@@ -13,8 +13,10 @@ import forge.assets.FSkinColor.Colors;
 import forge.game.phase.PhaseType;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.utils.Utils;
 
 public class VPhases extends FContainer {
+    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.3f;
     private static final FSkinFont labelFont = FSkinFont.get(11);
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<PhaseType, PhaseLabel>();
@@ -46,12 +48,15 @@ public class VPhases extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
-        float y = 0;
-        float w = width - 2; w/=2;
-        float labelHeight = height / phaseLabels.size();
+        float x = 0;
+        float padding = 1;
+        float dx = width / phaseLabels.size();
+        float w = dx - 2 * padding;
+        float h = height - 2 * padding;
+
         for (FDisplayObject lbl : getChildren()) {
-            lbl.setBounds(1, y + 1, w, labelHeight - 1);
-            y += labelHeight;
+            lbl.setBounds(x + padding, padding, w, h);
+            x += dx;
         }
     }
 
