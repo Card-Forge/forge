@@ -5,6 +5,8 @@ import java.util.List;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinTexture;
+import forge.game.card.Card;
+import forge.model.FModel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FScrollPane;
@@ -17,10 +19,18 @@ public class VField extends FScrollPane {
     private final List<FCardPanel> otherPermanents = new ArrayList<FCardPanel>();
 
     public VField() {
-        for (int i = 0; i < 7; i++) {
-            creatures.add(add(new FCardPanel()));
-            lands.add(add(new FCardPanel()));
-            otherPermanents.add(add(new FCardPanel()));
+        Card creature = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Llanowar Elves"));
+        Card land = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Forest"));
+        Card artifact = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Coat of Arms"));
+
+        for (int i = 0; i < 6; i++) {
+            creatures.add(add(new FCardPanel(creature)));
+        }
+        for (int i = 0; i < 3; i++) {
+            lands.add(add(new FCardPanel(land)));
+        }
+        for (int i = 0; i < 2; i++) {
+            otherPermanents.add(add(new FCardPanel(artifact)));
         }
     }
 
@@ -35,7 +45,7 @@ public class VField extends FScrollPane {
     protected void doLayout(float width, float height) {
         float x = 0;
         float y = 0;
-        float cardSize = height / 3;
+        float cardSize = height / 2;
 
         for (FCardPanel cardPanel : creatures) {
             cardPanel.setBounds(x, y, cardSize, cardSize);
@@ -47,9 +57,7 @@ public class VField extends FScrollPane {
             cardPanel.setBounds(x, y, cardSize, cardSize);
             x += cardSize;
         }
-        x = 0;
-        y += cardSize;
-        for (FCardPanel cardPanel : otherPermanents) { //TODO: Move to right of lands right-aligned if enough room
+        for (FCardPanel cardPanel : otherPermanents) {
             cardPanel.setBounds(x, y, cardSize, cardSize);
             x += cardSize;
         }

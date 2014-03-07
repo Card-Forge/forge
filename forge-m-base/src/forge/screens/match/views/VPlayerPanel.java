@@ -1,5 +1,8 @@
 package forge.screens.match.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.player.RegisteredPlayer;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -9,6 +12,7 @@ public class VPlayerPanel extends FContainer {
     private final VPhases phases;
     private final VField field;
     private final VAvatar avatar;
+    private final List<VZoneDisplay> zones = new ArrayList<VZoneDisplay>();
 
     public VPlayerPanel(RegisteredPlayer player0) {
         player = player0;

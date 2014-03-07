@@ -16034,6 +16034,7 @@ forge-m-base/src/forge/screens/match/views/VPhases.java -text
 forge-m-base/src/forge/screens/match/views/VPlayerPanel.java -text
 forge-m-base/src/forge/screens/match/views/VPrompt.java -text
 forge-m-base/src/forge/screens/match/views/VStack.java -text
+forge-m-base/src/forge/screens/match/views/VZoneDisplay.java -text
 forge-m-base/src/forge/screens/quest/QuestScreen.java -text
 forge-m-base/src/forge/screens/sealed/SealedScreen.java -text
 forge-m-base/src/forge/screens/settings/SettingsScreen.java -text
