@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.screens.FScreen;
+import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
@@ -45,7 +46,8 @@ public class MatchScreen extends FScreen {
     @Override
     public void drawBackground(Graphics g) {
         super.drawBackground(g);
-        g.drawImage(FSkinTexture.BG_MATCH, 0, topPlayerPanel.getTop(), getWidth(), bottomPlayerPanel.getBottom() - topPlayerPanel.getTop());
+        float y = topPlayerPanel.getTop() + VAvatar.HEIGHT;
+        g.drawImage(FSkinTexture.BG_MATCH, 0, y, getWidth(), bottomPlayerPanel.getBottom() - VAvatar.HEIGHT - y);
     }
 
     @Override
