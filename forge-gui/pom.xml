@@ -25,6 +25,11 @@
                 </executions>
                 <configuration>
                     <failOnError>false</failOnError>
+                    <entries>
+                        <entry>
+                            <prefix>forge</prefix>
+                        </entry>
+                    </entries>
                 </configuration>
             </plugin>
             <plugin>
@@ -35,12 +40,6 @@
                         <groupId>org.apache.ant</groupId>
                         <artifactId>ant-nodeps</artifactId>
                         <version>1.8.1</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.oracle.appbundler</groupId>
-                        <artifactId>appbundler</artifactId>
-                        <version>1.0</version>
-                        <classifier>ea</classifier>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -215,7 +214,7 @@
 	      	<artifactId>powermock-api-mockito</artifactId>
 	      	<version>1.5.4</version>
 	      	<scope>test</scope>
-	   </dependency>  
+	   </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-websocket</artifactId>
@@ -427,12 +426,6 @@
                                 <artifactId>ant-nodeps</artifactId>
                                 <version>1.8.1</version>
                             </dependency>
-                            <dependency>
-                                <groupId>com.oracle.appbundler</groupId>
-                                <artifactId>appbundler</artifactId>
-                                <version>1.0</version>
-                                <classifier>ea</classifier>
-                            </dependency>
                         </dependencies>
                         <executions>
                             <execution>
@@ -446,14 +439,9 @@
                                             <fileset dir="${basedir}" includes="README.txt" />
                                             <fileset dir="${basedir}" includes="CHANGES.txt" />
                                         </copy>
-                                        <mkdir dir="${project.build.directory}/res/cardsfolder" />
-                                        <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
-                                        <taskdef name="bundleapp" classpathref="maven.runtime.classpath" classname="com.oracle.appbundler.AppBundlerTask" />
+                                        <taskdef name="bundleapp" classpath="${basedir}/${configSourceDirectory}/appbundler-1.0-custom.jar" classname="com.oracle.appbundler.AppBundlerTask" />
                                         <bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" displayname="${project.name}" shortversion="${project.version}" identifier="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" applicationCategory="public.app-category.games" mainclassname="forge.view.Main">
-                                            <runtime dir="${env.JAVA_HOME}" />
                                             <classpath file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar" />
-                                            <classpath file="${basedir}/res/cardsfolder" />
-                                            <classpath file="${project.build.directory}/res/cardsfolder/cardsfolder.zip" />
                                             <classpath file="${basedir}/forge.profile.properties.example" />
                                             <option value="-Dapple.laf.useScreenMenuBar=true" />
                                             <option value="-Dcom.apple.macos.use-file-dialog-packages=true" />
@@ -463,6 +451,11 @@
                                             <option value="-Xmx1024M" />
                                             <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
                                         </bundleapp>
+                                        <copy todir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res">
+                                            <fileset dir="${basedir}/res" excludes="**/cardsfolder/**" />
+                                        </copy>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}-osx/Forge.app/Contents/Resources/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
                                         <symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />
                                         <exec executable="${basedir}/${configSourceDirectory}/create-dmg" failonerror="false">
                                             <arg line="--volname ${project.name}-${project.version} --background ${basedir}/${configSourceDirectory}/backgroundImage.jpg --window-size 700 419 --icon-size 64 --icon ${forge.file.name} 141 283 --icon ${applications.file.name} 452 283 --icon ${changes.file.name} 645 80 --icon ${license.file.name} 645 200 --icon ${readme.file.name} 645 320 ${project.build.directory}/${project.build.finalName}.dmg ${project.build.directory}/${project.build.finalName}-osx" />

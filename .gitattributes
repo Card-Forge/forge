@@ -15414,6 +15414,7 @@ forge-gui/res/sound/untap.wav -text
 forge-gui/res/sound/white_land.wav -text
 forge-gui/res/sound/win_duel.wav -text
 forge-gui/src/main/config/Forge.icns -text
+forge-gui/src/main/config/appbundler-1.0-custom.jar -text
 forge-gui/src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
 forge-gui/src/main/config/builder/create-dmg.builder -text
 forge-gui/src/main/config/create-dmg -text

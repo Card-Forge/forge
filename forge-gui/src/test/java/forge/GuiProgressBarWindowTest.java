@@ -1,6 +1,7 @@
 package forge;
 
 import forge.gui.GuiProgressBarWindow;
+import forge.gui.toolbox.FSkin;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,6 +19,7 @@ public class GuiProgressBarWindowTest {
     @Test(groups = { "UnitTest", "fast" })
     public void guiProgressBarWindowTest1() {
         try {
+            FSkin.Colors.updateAll();
             final GuiProgressBarWindow dialog = new GuiProgressBarWindow();
             dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
