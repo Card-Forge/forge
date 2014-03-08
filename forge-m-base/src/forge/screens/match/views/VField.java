@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.model.FModel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
 public class VField extends FScrollPane {
@@ -60,6 +61,12 @@ public class VField extends FScrollPane {
         for (FCardPanel cardPanel : otherPermanents) {
             cardPanel.setBounds(x, y, cardSize, cardSize);
             x += cardSize;
+        }
+
+        if (flipped) { //flip all positions across x-axis if needed
+            for (FDisplayObject child : getChildren()) {
+                child.setTop(height - child.getBottom());
+            }
         }
     }
 }

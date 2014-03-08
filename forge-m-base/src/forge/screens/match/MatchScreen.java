@@ -51,7 +51,16 @@ public class MatchScreen extends FScreen {
         super.drawBackground(g);
         float midField = topPlayerPanel.getBottom();
         float y = midField - topPlayerPanel.getField().getHeight();
-        g.drawImage(FSkinTexture.BG_MATCH, 0, y, getWidth(), midField + bottomPlayerPanel.getField().getHeight() - y);
+        float w = getWidth();
+
+        g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+
+        //field separator lines
+        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+        y = midField;
+        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+        y += bottomPlayerPanel.getField().getHeight();
+        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
     }
 
     @Override
