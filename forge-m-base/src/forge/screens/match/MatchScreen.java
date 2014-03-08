@@ -26,7 +26,7 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
     public MatchScreen(Match match0) {
-        super(true, "Game 1 Turn 1", true);
+        super(true, "Game", true);
         match = match0;
 
         playerPanels = new HashMap<RegisteredPlayer, VPlayerPanel>();
