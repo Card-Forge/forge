@@ -30,12 +30,12 @@ public class FSkinFont {
     private BitmapFont font;
 
     private FSkinFont(final int size0) {
-        this.size = size0;
-        this.updateFont();
+        size = size0;
+        updateFont();
     }
 
     public int getSize() {
-        return this.size;
+        return size;
     }
 
     public BitmapFont getFont() {
@@ -49,7 +49,7 @@ public class FSkinFont {
         FileHandle ttfFile = Gdx.files.internal(dir + TTF_FILE);
         if (ttfFile.exists()) {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
-            font = generator.generateFont(this.size);
+            font = generator.generateFont(size);
             font.setUseIntegerPositions(true); //prevent parts of text getting cut off at times
             generator.dispose();
         }
