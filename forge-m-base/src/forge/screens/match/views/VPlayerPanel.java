@@ -17,10 +17,10 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 
 public class VPlayerPanel extends FContainer {
-    private static final FSkinFont LIFE_FONT = FSkinFont.get(16);
+    private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor ZONE_BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
+    private static final FSkinColor ZONE_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
 
     private final RegisteredPlayer player;
     private final VPhases phases;
@@ -120,13 +120,27 @@ public class VPlayerPanel extends FContainer {
             float w = getWidth();
             g.fillRect(ZONE_BACK_COLOR, 0, selectedZone.getTop(), w, selectedZone.getHeight());
 
+            InfoLabel selectedZoneTab = null;;
+            for (InfoLabel label : infoLabels) {
+                if (label instanceof ZoneInfoTab) {
+                    if (((ZoneInfoTab)label).zoneToOpen == selectedZone) {
+                        selectedZoneTab = label;
+                        break;
+                    }
+                }
+            }
             float y = isFlipped() ? selectedZone.getTop() + 1 : selectedZone.getBottom();
-            g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, w, y);
+            if (selectedZoneTab == null) {
+                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, w, y);
+            }
+            else { //leave gap at selected zone tab
+                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedZoneTab.getLeft(), y);
+                g.drawLine(1, MatchScreen.BORDER_COLOR, selectedZoneTab.getRight(), y, w, y);
+            }
         }
     }
 
     private abstract class InfoLabel extends FDisplayObject {
-        protected static final float PADDING = 2;
         protected String value;
         public abstract float getPreferredWidth();
     }
@@ -143,7 +157,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
-            g.drawText(value, LIFE_FONT, INFO_FORE_COLOR, PADDING, 0, getWidth(), getHeight(), false, HAlignment.LEFT, true);
+            g.drawText(value, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
         }
     }
 
@@ -185,8 +199,8 @@ public class VPlayerPanel extends FContainer {
                     y--;
                     h += 2;
                 }
+                g.fillRect(ZONE_BACK_COLOR, 0, isFlipped() ? paddingY : 0, w, getHeight() - paddingY);
                 g.startClip(-1, y, w + 2, h); //use clip to ensure all corners connect
-                g.fillRect(ZONE_BACK_COLOR, 0, y, w, h);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
@@ -200,7 +214,7 @@ public class VPlayerPanel extends FContainer {
             g.drawImage(icon, x, y, w, h);
 
             x += w * 1.05f;
-            g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, paddingY, getWidth() - x, getHeight(), false, HAlignment.LEFT, true);
+            g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x, getHeight(), false, HAlignment.LEFT, true);
         }
     }
 }
