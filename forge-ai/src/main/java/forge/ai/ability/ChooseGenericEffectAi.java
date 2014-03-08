@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
@@ -34,7 +36,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         final String logic = sa.getParam("AILogic");
         if ("Random".equals(logic)) {
             return Aggregates.random(spells);
-        } else if ("Phasing".equals(logic)){ // Teferi's Realm : keep aggressive 
+        } else if ("Phasing".equals(logic)) { // Teferi's Realm : keep aggressive 
             List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, new Predicate<SpellAbility>() {
                 @Override
                 public boolean apply(final SpellAbility sp) {
@@ -42,6 +44,19 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
                 }
             }));
             return Aggregates.random(filtered);
+        } else if ("PayUnlessCost".equals(logic)) {
+            for (final SpellAbility sp : spells) {
+                String unlessCost = sp.getParam("UnlessCost");
+                sp.setActivatingPlayer(sa.getActivatingPlayer());
+                Cost unless = new Cost(unlessCost, false);
+                SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
+                paycost.setPayCosts(unless);
+                if (ComputerUtilCost.willPayUnlessCost(sp, player, unless, false, Lists.newArrayList(player))
+                        && ComputerUtilCost.canPayCost(paycost, player)) {
+                    return sp;
+                }
+            }
+            return spells.get(0);
         } else {
             return spells.get(0);
         }

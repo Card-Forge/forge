@@ -4785,6 +4785,7 @@ forge-gui/res/cardsfolder/f/forbidden_alchemy.txt -text
 forge-gui/res/cardsfolder/f/forbidden_crypt.txt -text
 forge-gui/res/cardsfolder/f/forbidden_lore.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/forbidden_orchard.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/forbidden_ritual.txt -text
 forge-gui/res/cardsfolder/f/forbidding_watchtower.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/force_bubble.txt -text
 forge-gui/res/cardsfolder/f/force_of_nature.txt svneol=native#text/plain
