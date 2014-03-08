@@ -15,7 +15,7 @@ import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 
 public class MatchScreen extends FScreen {
-    private static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+    public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Match match;
     private final Map<RegisteredPlayer, VPlayerPanel> playerPanels;

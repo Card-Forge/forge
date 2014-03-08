@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.card.Card;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.toolbox.FCardPanel;
@@ -22,6 +21,10 @@ public class VZoneDisplay extends FScrollPane {
         for (int i = 0; i < 7; i++) {
             cards.add(add(new FCardPanel(card)));
         }
+    }
+
+    public ZoneType getZoneType() {
+        return zoneType;
     }
 
     @Override
