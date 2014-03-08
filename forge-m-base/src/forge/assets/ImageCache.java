@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Base64Coder;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
+import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 
 import forge.ImageKeys;
 import forge.card.CardDb;
@@ -40,6 +41,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -81,7 +83,8 @@ public class ImageCache {
         final String key;
         if (!FControl.mayShowCard(card) || card.isFaceDown()) {
             key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
-        } else {
+        }
+        else {
             key = card.getImageKey();
         }
         return getImage(key, true);
@@ -129,10 +132,22 @@ public class ImageCache {
                 return _defaultImage;
             }
         }
-        
-        // Load from file and add to cache if not found in cache initially. 
-        Texture image = ImageCache._CACHE.getIfPresent(imageKey);
-        
+
+        // Load from file and add to cache if not found in cache initially.
+        Texture image;
+        try {
+            image = ImageCache._CACHE.get(imageKey);
+        }
+        catch (final ExecutionException ex) {
+            if (!(ex.getCause() instanceof NullPointerException)) {
+                ex.printStackTrace();
+            }
+            image = null;
+        }
+        catch (final InvalidCacheLoadException ex) {
+            image = null;
+        }
+
         // No image file exists for the given key so optionally associate with
         // a default "not available" image and add to cache for given key.
         if (image == null) {
