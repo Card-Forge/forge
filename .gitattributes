@@ -12846,6 +12846,7 @@ forge-gui/res/cardsfolder/t/tracker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/trackers_instincts.txt -text
 forge-gui/res/cardsfolder/t/trade_caravan.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/trade_routes.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/trade_secrets.txt -text
 forge-gui/res/cardsfolder/t/tradewind_rider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tradewind_rider_avatar.txt -text
 forge-gui/res/cardsfolder/t/trading_post.txt -text

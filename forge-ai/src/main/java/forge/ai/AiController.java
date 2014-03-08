@@ -1298,6 +1298,17 @@ public class AiController {
             int cardsInPlay = player.getCardsIn(ZoneType.Battlefield).size();
             return Math.min(chosenMax, cardsInPlay);
         }
+        else if ("OptionalDraw".equals(logic)) {
+            int cardsInHand = player.getCardsIn(ZoneType.Hand).size();
+            int maxDraw = Math.min(player.getMaxHandSize() + 2 - cardsInHand, max);
+            int maxCheckLib = Math.min(maxDraw, player.getCardsIn(ZoneType.Library).size());
+            return Math.max(min, maxCheckLib);
+        }
+        else if ("RepeatDraw".equals(logic)) {
+            int remaining = player.getMaxHandSize() - player.getCardsIn(ZoneType.Hand).size()
+                    + MyRandom.getRandom().nextInt(3);
+            return Math.max(remaining, min) / 2;
+        }
         return max;
     }
 

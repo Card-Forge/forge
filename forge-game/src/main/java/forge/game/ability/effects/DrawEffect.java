@@ -53,7 +53,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
                 int actualNum = numCards; 
                 if (upto) {
-                    actualNum = p.getController().chooseNumber(sa, "Choose a number", 0, numCards);
+                    actualNum = p.getController().chooseNumber(sa, "How may cards do you want to draw?", 0, numCards);
                 }
 
                 final List<Card> drawn = p.drawCards(actualNum);
