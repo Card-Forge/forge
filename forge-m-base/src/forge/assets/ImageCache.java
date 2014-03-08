@@ -62,9 +62,9 @@ public class ImageCache {
     private static final LoadingCache<String, Texture> _CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
     private static final Texture _defaultImage;
     static {
-        Texture defImage = new Texture(Gdx.files.internal(Constants.DEFAULT_DUELS_DIR));
+        Texture defImage = null;
         try {
-            defImage = new Texture(Gdx.files.internal(Constants.DEFAULT_DUELS_DIR));
+            defImage = new Texture(Gdx.files.internal(Constants.NO_CARD_FILE));
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {

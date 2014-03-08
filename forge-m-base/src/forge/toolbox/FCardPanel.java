@@ -1,8 +1,7 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.Color;
-
 import forge.Forge.Graphics;
+import forge.assets.ImageCache;
 import forge.game.card.Card;
 
 public class FCardPanel extends FDisplayObject {
@@ -25,14 +24,6 @@ public class FCardPanel extends FDisplayObject {
             w = h / ASPECT_RATIO;
         }
 
-        if (card.isCreature()) { //TODO: Render actual card image
-            g.fillRect(Color.BLUE, x, y, w, h);
-        }
-        else if (card.isLand()) {
-            g.fillRect(Color.GREEN, x, y, w, h);
-        }
-        else {
-            g.fillRect(Color.RED, x, y, w, h);
-        }
+        g.drawImage(ImageCache.getImage(card), x, y, w, h);
     }
 }
