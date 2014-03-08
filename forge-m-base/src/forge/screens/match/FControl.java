@@ -6,23 +6,20 @@ import java.util.List;
 import forge.Forge;
 import forge.game.Game;
 import forge.game.Match;
+import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.model.FModel;
 import forge.utils.ForgePreferences.FPref;
 
-public class MatchController {
-    private final MatchScreen view;
+public class FControl {
+    private static Game game;
+    private static MatchScreen view;
+    private static List<Player> sortedPlayers;
 
-    private Game game;
-    private List<Player> sortedPlayers;
-
-    public MatchController(MatchScreen view0) {
+    public static void startGame(final Match match0, final MatchScreen view0) {
+        game = match0.createGame();
         view = view0;
-    }
-
-    public final void startGameWithUi(final Match match) {
-        game = match.createGame();
 
         /*if (game.getRules().getGameType() == GameType.Quest) {
             QuestController qc = Singletons.getModel().getQuest();
@@ -51,14 +48,14 @@ public class MatchController {
         });*/
     }
 
-    public final void endCurrentGame() {
-        if (this.game == null) { return; }
+    public static void endCurrentGame() {
+        if (game == null) { return; }
 
         Forge.back();
-        this.game = null;
+        game = null;
     }
 
-    public void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
+    public static void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
         // TODO fix for use with multiplayer
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -94,7 +91,7 @@ public class MatchController {
         initHandViews(localPlayer);
     }
 
-    public void initHandViews(LobbyPlayer localPlayer) {
+    public static void initHandViews(LobbyPlayer localPlayer) {
         /*final List<VHand> hands = new ArrayList<VHand>();
 
         int i = 0;
@@ -115,7 +112,7 @@ public class MatchController {
         view.setHandViews(hands);*/
     }
 
-    private List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
+    private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
         // get an arranged list so that the first local player is at index 0
         List<Player> sortedPlayers = new ArrayList<Player>(players);
         int ixFirstHuman = -1;
@@ -129,5 +126,9 @@ public class MatchController {
             sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
         }
         return sortedPlayers;
+    }
+
+    public static boolean mayShowCard(Card c) {
+        return true;// game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
     }
 }

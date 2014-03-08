@@ -17,12 +17,14 @@
  */
 package forge.utils;
 
+import java.util.Collections;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 
 public final class Constants {
-    public static final String PROFILE_FILE          = "forge.profile.properties";
-    public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
+    private static final String PROFILE_FILE          = "forge.profile.properties";
 
     // data that is only in the program dir
     private static final String _ASSETS_ROOT = Gdx.app.getType() == ApplicationType.Desktop ? "bin/" : "assets/";
@@ -41,28 +43,40 @@ public final class Constants {
     private static final String _QUEST_DIR      = _ASSETS_ROOT + "quest/";
     public static final String TEXT_HOWTO_FILE     = _ASSETS_ROOT + "howto.txt";
     public static final String DRAFT_RANKINGS_FILE = _ASSETS_ROOT + "draft/rankings.txt";
-    public static final String PRICES_BOOSTER_FILE = _QUEST_DIR + "booster-prices.txt";
-    public static final String BAZAAR_FILE         = _QUEST_DIR + "bazaar/index.xml";
     public static final String CARD_DATA_DIR       = _ASSETS_ROOT + "cardsfolder/";
     public static final String EDITIONS_DIR        = _ASSETS_ROOT + "editions/";
     public static final String BLOCK_DATA_DIR      = _ASSETS_ROOT + "blockdata/";
     public static final String DECK_CUBE_DIR       = _ASSETS_ROOT + "cube";
     public static final String AI_PROFILE_DIR      = _ASSETS_ROOT + "ai";
+    public static final String NO_CARD_FILE        = _ASSETS_ROOT + "defaults/no_card.jpg";
     public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "world/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
+    public static final String PRICES_BOOSTER_FILE = _QUEST_DIR + "booster-prices.txt";
+    public static final String BAZAAR_FILE         = _QUEST_DIR + "bazaar/index.xml";
 
     public static final String CARD_DATA_PETS_DIR     = _QUEST_DIR + "bazaar/";
     public static final String DEFAULT_DUELS_DIR      = _QUEST_DIR + "duels";
     public static final String DEFAULT_CHALLENGES_DIR = _QUEST_DIR + "challenges";
 
     // data tree roots
-    public static final String USER_DIR = "userData/";
-    public static final String CACHE_DIR = "cache/";
-    public static final int SERVER_PORT_NUMBER = 0;
+    public static final String USER_DIR;
+    public static final String CACHE_DIR;
+    public static final String CACHE_CARD_PICS_DIR;
+    public static final Map<String, String> CACHE_CARD_PICS_SUBDIR;
+    public static final int SERVER_PORT_NUMBER;
+    static {
+        ForgeProfileProperties profileProps = new ForgeProfileProperties(PROFILE_FILE);
+        USER_DIR           = profileProps.userDir;
+        CACHE_DIR          = profileProps.cacheDir;
+        CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;
+        CACHE_CARD_PICS_SUBDIR = Collections.unmodifiableMap(profileProps.cardPicsSubDir);
+        SERVER_PORT_NUMBER = profileProps.serverPort;
+    }
 
     // data that is only in the profile dirs
     public static final String USER_QUEST_DIR       = USER_DIR + "quest/";
     public static final String USER_PREFS_DIR       = USER_DIR + "preferences/";
+    public static final String USER_GUANTLET_DIR    = USER_DIR + "gauntlet/";
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String DECK_BASE_DIR        = USER_DIR + "decks/";
     public static final String DECK_CONSTRUCTED_DIR = DECK_BASE_DIR + "constructed/";
@@ -72,7 +86,7 @@ public final class Constants {
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar/";
     public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander/";
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
-    public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
+    public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.m.preferences";
     public static final String CARD_PREFS_FILE      = USER_PREFS_DIR + "card.preferences";
     public static final String DECK_PREFS_FILE      = USER_PREFS_DIR + "deck.preferences";
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
@@ -93,7 +107,9 @@ public final class Constants {
     public static final String[] PROFILE_DIRS = {
             USER_DIR,
             CACHE_DIR,
+            CACHE_CARD_PICS_DIR,
             USER_PREFS_DIR,
+            USER_GUANTLET_DIR,
             DB_DIR,
             DECK_CONSTRUCTED_DIR,
             DECK_DRAFT_DIR,

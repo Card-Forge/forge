@@ -46,6 +46,7 @@ public final class NewConstants {
     public static final String CARD_DATA_DIR       = _RES_ROOT + "cardsfolder/";
     public static final String DECK_CUBE_DIR       = _RES_ROOT + "cube";
     public static final String AI_PROFILE_DIR      = _RES_ROOT + "ai";
+    public static final String NO_CARD_FILE        = _RES_ROOT + "defaults/no_card.jpg";
     public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "worlds/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
 

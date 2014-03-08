@@ -18,7 +18,6 @@ public class MatchScreen extends FScreen {
     private static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Match match;
-    private final MatchController controller;
     private final Map<RegisteredPlayer, VPlayerPanel> playerPanels;
     //private final VLog log;
     private final VStack stack;
@@ -29,7 +28,6 @@ public class MatchScreen extends FScreen {
     public MatchScreen(Match match0) {
         super(true, "Game 1 Turn 1", true);
         match = match0;
-        controller = new MatchController(this);
 
         playerPanels = new HashMap<RegisteredPlayer, VPlayerPanel>();
         for (RegisteredPlayer player : match.getPlayers()) {
@@ -43,7 +41,7 @@ public class MatchScreen extends FScreen {
         stack = add(new VStack());
         prompt = add(new VPrompt());
 
-        controller.startGameWithUi(match0);
+        FControl.startGame(match0, this);
     }
 
     @Override

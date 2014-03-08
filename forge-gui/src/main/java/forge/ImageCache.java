@@ -38,7 +38,6 @@ import org.apache.commons.lang3.StringUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -66,16 +65,9 @@ public class ImageCache {
     static {
         BufferedImage defImage = null;
         try {
-            ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            InputStream isNoCardJpg = cl.getResourceAsStream("no_card.jpg");
-            defImage = ImageIO.read(isNoCardJpg);
-        } catch (Exception e) {
-            // resource not found; perhaps we're running straight from source
-            try {
-                defImage = ImageIO.read(new File("src/main/resources/no_card.jpg"));
-            } catch (Exception ex) {
-                System.err.println("could not load default card image");
-            }
+            defImage = ImageIO.read(new File(NewConstants.NO_CARD_FILE));
+        } catch (Exception ex) {
+            System.err.println("could not load default card image");
         } finally {
             _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
         }

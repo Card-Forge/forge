@@ -14260,6 +14260,7 @@ forge-gui/res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
 forge-gui/res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
 forge-gui/res/defaults/home.xml svneol=native#text/xml
 forge-gui/res/defaults/match.xml svneol=native#text/xml
+forge-gui/res/defaults/no_card.jpg -text
 forge-gui/res/defaults/window.xml -text
 forge-gui/res/defaults/workshop.xml -text
 forge-gui/res/draft/cube_juzamjedi.draft -text
@@ -15915,7 +15916,6 @@ forge-gui/src/main/java/forge/view/arcane/util/CardPanelMouseListener.java svneo
 forge-gui/src/main/java/forge/view/arcane/util/OutlinedLabel.java svneol=native#text/plain
 forge-gui/src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/view/package-info.java svneol=native#text/plain
-forge-gui/src/main/resources/no_card.jpg -text
 forge-gui/src/main/resources/proxy-template.ftl -text
 forge-gui/src/site/apt/index.apt -text
 forge-gui/src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain
@@ -16016,6 +16016,11 @@ forge-m-base/src/forge/assets/FSkinColor.java -text
 forge-m-base/src/forge/assets/FSkinFont.java -text
 forge-m-base/src/forge/assets/FSkinImage.java -text
 forge-m-base/src/forge/assets/FSkinTexture.java -text
+forge-m-base/src/forge/assets/FTextureImage.java -text
+forge-m-base/src/forge/assets/ImageCache.java -text
+forge-m-base/src/forge/assets/ImageLoader.java -text
+forge-m-base/src/forge/error/BugReporter.java -text
+forge-m-base/src/forge/error/ExceptionHandler.java -text
 forge-m-base/src/forge/model/FModel.java -text
 forge-m-base/src/forge/player/LobbyPlayerHuman.java -text
 forge-m-base/src/forge/player/PlayerControllerHuman.java -text
@@ -16026,7 +16031,7 @@ forge-m-base/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-m-base/src/forge/screens/draft/DraftScreen.java -text
 forge-m-base/src/forge/screens/guantlet/GuantletScreen.java -text
 forge-m-base/src/forge/screens/home/HomeScreen.java -text
-forge-m-base/src/forge/screens/match/MatchController.java -text
+forge-m-base/src/forge/screens/match/FControl.java -text
 forge-m-base/src/forge/screens/match/MatchScreen.java -text
 forge-m-base/src/forge/screens/match/views/VAvatar.java -text
 forge-m-base/src/forge/screens/match/views/VField.java -text
@@ -16046,11 +16051,13 @@ forge-m-base/src/forge/toolbox/FDisplayObject.java -text
 forge-m-base/src/forge/toolbox/FGestureAdapter.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
 forge-m-base/src/forge/toolbox/FList.java -text
+forge-m-base/src/forge/toolbox/FOptionPane.java -text
 forge-m-base/src/forge/toolbox/FOverlay.java -text
 forge-m-base/src/forge/toolbox/FProgressBar.java -text
 forge-m-base/src/forge/toolbox/FScrollPane.java -text
 forge-m-base/src/forge/utils/Constants.java -text
 forge-m-base/src/forge/utils/ForgePreferences.java -text
+forge-m-base/src/forge/utils/ForgeProfileProperties.java -text
 forge-m-base/src/forge/utils/Preferences.java -text
 forge-m-base/src/forge/utils/PreferencesStore.java -text
 forge-m-base/src/forge/utils/Utils.java -text
