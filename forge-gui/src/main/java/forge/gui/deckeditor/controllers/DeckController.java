@@ -256,7 +256,7 @@ public class DeckController<T extends DeckBase> {
 
     public void updateCaptions() {
         String tabCaption = "Current Deck";
-        String title = this.model.getName();
+        String title = this.getModelName();
         String itemManagerCaption = title.isEmpty() ? "[Untitled]" : title;
 
         if (!saved) {
