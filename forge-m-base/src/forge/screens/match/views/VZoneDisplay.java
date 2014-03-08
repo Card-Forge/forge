@@ -5,16 +5,17 @@ import java.util.List;
 
 import forge.game.card.Card;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FScrollPane;
 
 public class VZoneDisplay extends FScrollPane {
-    private Zone zone;
+    private ZoneType zoneType;
     private final List<FCardPanel> cards = new ArrayList<FCardPanel>();
 
-    public VZoneDisplay(Zone zone0) {
-        zone = zone0;
+    public VZoneDisplay(ZoneType zoneType0) {
+        zoneType = zoneType0;
 
         Card card = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Forest"));
 

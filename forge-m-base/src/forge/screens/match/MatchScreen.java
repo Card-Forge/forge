@@ -4,16 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.screens.FScreen;
-import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
 import forge.Forge.Graphics;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
+import forge.assets.FSkinColor.Colors;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 
 public class MatchScreen extends FScreen {
+    private static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+
     private final Match match;
     private final MatchController controller;
     private final Map<RegisteredPlayer, VPlayerPanel> playerPanels;
@@ -46,8 +49,9 @@ public class MatchScreen extends FScreen {
     @Override
     public void drawBackground(Graphics g) {
         super.drawBackground(g);
-        float y = topPlayerPanel.getTop() + VAvatar.HEIGHT;
-        g.drawImage(FSkinTexture.BG_MATCH, 0, y, getWidth(), bottomPlayerPanel.getBottom() - VAvatar.HEIGHT - y);
+        float midField = topPlayerPanel.getBottom();
+        float y = midField - topPlayerPanel.getField().getHeight();
+        g.drawImage(FSkinTexture.BG_MATCH, 0, y, getWidth(), midField + bottomPlayerPanel.getField().getHeight() - y);
     }
 
     @Override
