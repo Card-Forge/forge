@@ -4176,6 +4176,7 @@ forge-gui/res/cardsfolder/e/erhnam_djinn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/erhnam_djinn_avatar.txt -text
 forge-gui/res/cardsfolder/e/erithizon.txt -text
 forge-gui/res/cardsfolder/e/eron_the_relentless.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/erosion.txt -text
 forge-gui/res/cardsfolder/e/errand_of_duty.txt -text
 forge-gui/res/cardsfolder/e/errant_doomsayers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/errant_ephemeron.txt svneol=native#text/plain
@@ -7245,6 +7246,7 @@ forge-gui/res/cardsfolder/l/lilianas_specter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lilting_refrain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lim_dul_the_necromancer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lim_duls_cohort.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/lim_duls_hex.txt -text
 forge-gui/res/cardsfolder/l/lim_duls_high_guard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lim_duls_paladin.txt -text
 forge-gui/res/cardsfolder/l/lim_duls_vault.txt -text

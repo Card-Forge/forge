@@ -1,0 +1,10 @@
+Name:Lim-Dul's Hex
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, for each player, CARDNAME deals 1 damage to that player unless he or she pays {B} or {3}.
+SVar:TrigRepeat:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ PayB,Pay3 | AILogic$ PayUnlessCost
+SVar:PayB:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ 1 | UnlessCost$ B | UnlessPayer$ Player.IsRemembered | SpellDescription$ CARDNAME deals 1 damage to you unless you pay {B}
+SVar:Pay3:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ 1 | UnlessCost$ 3 | UnlessPayer$ Player.IsRemembered | SpellDescription$ CARDNAME deals 1 damage to you unless you pay {3}
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_hex.jpg
+Oracle:At the beginning of your upkeep, for each player, Lim-Dul's Hex deals 1 damage to that player unless he or she pays {B} or {3}.
