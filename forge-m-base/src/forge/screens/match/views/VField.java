@@ -3,12 +3,9 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Forge.Graphics;
-import forge.assets.FSkinTexture;
 import forge.game.card.Card;
 import forge.model.FModel;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
