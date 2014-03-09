@@ -24,7 +24,7 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinColor ZONE_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
 
     private final RegisteredPlayer player;
-    private final VPhases phases;
+    private final VPhaseIndicator phaseIndicator;
     private final VField field;
     private final VAvatar avatar;
     private final List<InfoLabel> infoLabels = new ArrayList<InfoLabel>();
@@ -33,7 +33,7 @@ public class VPlayerPanel extends FContainer {
 
     public VPlayerPanel(RegisteredPlayer player0) {
         player = player0;
-        phases = add(new VPhases());
+        phaseIndicator = add(new VPhaseIndicator());
         field = add(new VField());
         avatar = add(new VAvatar(player.getPlayer().getAvatarIndex()));
         infoLabels.add(add(new LifeLabel()));
@@ -96,11 +96,19 @@ public class VPlayerPanel extends FContainer {
         return field;
     }
 
+    public VPhaseIndicator getPhaseIndicator() {
+        return phaseIndicator;
+    }
+
+    public VAvatar getAvatar() {
+        return avatar;
+    }
+
     @Override
     protected void doLayout(float width, float height) {
         //layout for bottom panel by default
         float x = VAvatar.WIDTH;
-        phases.setBounds(x, height - VPhases.HEIGHT, width - VAvatar.WIDTH, VPhases.HEIGHT);
+        phaseIndicator.setBounds(x, height - VPhaseIndicator.HEIGHT, width - VAvatar.WIDTH, VPhaseIndicator.HEIGHT);
 
         float y, zoneHeight;
         if (selectedZone != null) {
@@ -118,7 +126,7 @@ public class VPlayerPanel extends FContainer {
         y = height - VAvatar.HEIGHT;
         avatar.setPosition(0, y);
         float infoLabelWidth;
-        float infoLabelHeight = VAvatar.HEIGHT - VPhases.HEIGHT;
+        float infoLabelHeight = VAvatar.HEIGHT - VPhaseIndicator.HEIGHT;
         for (InfoLabel infoLabel : infoLabels) {
             infoLabelWidth = infoLabel.getPreferredWidth();
             infoLabel.setBounds(x, y, infoLabelWidth, infoLabelHeight);

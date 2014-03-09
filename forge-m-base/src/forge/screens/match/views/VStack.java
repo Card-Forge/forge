@@ -13,6 +13,10 @@ public class VStack extends FContainer {
         setSize(WIDTH, HEIGHT);
     }
 
+    public void update() {
+        //TODO
+    }
+
     @Override
     protected void doLayout(float width, float height) {
         // TODO Auto-generated method stub

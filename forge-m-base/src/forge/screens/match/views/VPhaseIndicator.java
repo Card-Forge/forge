@@ -15,13 +15,13 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.utils.Utils;
 
-public class VPhases extends FContainer {
+public class VPhaseIndicator extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.3f;
     private static final FSkinFont labelFont = FSkinFont.get(11);
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<PhaseType, PhaseLabel>();
 
-    public VPhases() {
+    public VPhaseIndicator() {
         addPhaseLabel("UP", PhaseType.UPKEEP);
         addPhaseLabel("DR", PhaseType.DRAW);
         addPhaseLabel("M1", PhaseType.MAIN1);
@@ -38,6 +38,10 @@ public class VPhases extends FContainer {
 
     private void addPhaseLabel(String caption, PhaseType phaseType) {
         phaseLabels.put(phaseType, add(new PhaseLabel(caption, phaseType)));
+    }
+
+    public PhaseLabel getLabel(PhaseType phaseType) {
+        return phaseLabels.get(phaseType);
     }
 
     public void resetPhaseButtons() {
@@ -60,7 +64,7 @@ public class VPhases extends FContainer {
         }
     }
 
-    private class PhaseLabel extends FDisplayObject {
+    public class PhaseLabel extends FDisplayObject {
         private final String caption;
         private final PhaseType phaseType;
         private boolean stopAtPhase = false;
@@ -76,6 +80,10 @@ public class VPhases extends FContainer {
         }
         public void setActive(boolean active0) {
             active = active0;
+        }
+
+        public PhaseType getPhaseType() {
+            return phaseType;
         }
 
         public boolean getStopAtPhase() {

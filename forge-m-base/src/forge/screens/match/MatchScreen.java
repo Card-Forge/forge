@@ -1,8 +1,7 @@
 package forge.screens.match;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
+import java.util.List;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VPlayerPanel;
@@ -20,7 +19,7 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Match match;
-    private final Map<RegisteredPlayer, VPlayerPanel> playerPanels;
+    private final List<VPlayerPanel> playerPanels;
     //private final VLog log;
     private final VStack stack;
     private final VPrompt prompt;
@@ -31,12 +30,12 @@ public class MatchScreen extends FScreen {
         super(true, "Game", true);
         match = match0;
 
-        playerPanels = new HashMap<RegisteredPlayer, VPlayerPanel>();
+        playerPanels = new ArrayList<VPlayerPanel>();
         for (RegisteredPlayer player : match.getPlayers()) {
-            playerPanels.put(player, add(new VPlayerPanel(player)));
+            playerPanels.add(add(new VPlayerPanel(player)));
         }
-        bottomPlayerPanel = playerPanels.get(match.getPlayers().get(0));
-        topPlayerPanel = playerPanels.get(match.getPlayers().get(1));
+        bottomPlayerPanel = playerPanels.get(0);
+        topPlayerPanel = playerPanels.get(1);
         topPlayerPanel.setFlipped(true);
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
@@ -45,6 +44,18 @@ public class MatchScreen extends FScreen {
         prompt = add(new VPrompt());
 
         FControl.startGame(match0, this);
+    }
+
+    public VPrompt getPrompt() {
+        return prompt;
+    }
+
+    public VStack getStack() {
+        return stack;
+    }
+
+    public List<VPlayerPanel> getPlayerPanels() {
+        return playerPanels;
     }
 
     @Override

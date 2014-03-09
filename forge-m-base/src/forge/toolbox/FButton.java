@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
@@ -13,7 +15,7 @@ public class FButton extends FDisplayObject {
     private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
 
     private FSkinImage imgL, imgM, imgR;
-    private String caption;
+    private String text;
     private FSkinFont font;
     private boolean toggled = false;
     private Runnable command;
@@ -25,12 +27,12 @@ public class FButton extends FDisplayObject {
         this("", null);
     }
 
-    public FButton(final String caption0) {
-        this(caption0, null);
+    public FButton(final String text0) {
+        this(text0, null);
     }
 
-    public FButton(final String caption0, Runnable command0) {
-        caption = caption0;
+    public FButton(final String text0, Runnable command0) {
+        text = text0;
         command = command0;
         font = FSkinFont.get(14);
         resetImg();
@@ -40,6 +42,13 @@ public class FButton extends FDisplayObject {
         imgL = FSkinImage.BTN_UP_LEFT;
         imgM = FSkinImage.BTN_UP_CENTER;
         imgR = FSkinImage.BTN_UP_RIGHT;
+    }
+
+    public String getText() {
+        return text;
+    }
+    public void setText(String text0) {
+        text = text0;
     }
 
     @Override
@@ -127,8 +136,8 @@ public class FButton extends FDisplayObject {
             g.drawImage(imgL, 0, 0, buttonWidth, h);
             g.drawImage(imgR, buttonWidth, 0, w - buttonWidth, h);
         }
-        if (!caption.isEmpty()) {
-            g.drawText(caption, font, foreColor, insetX, 0, w - 2 * insetX, h, false, HAlignment.CENTER, true);
+        if (!StringUtils.isEmpty(text)) {
+            g.drawText(text, font, foreColor, insetX, 0, w - 2 * insetX, h, false, HAlignment.CENTER, true);
         }
     }
 }

@@ -45,6 +45,8 @@ import com.badlogic.gdx.Gdx;
  * this class must be either private or public static final.
  */
 public class FModel {
+    private FModel() { } //don't allow creating instance
+
     private static StaticData magicDb;
 
     private static PrintStream oldSystemOut;
