@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import forge.screens.FScreen;
+import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
@@ -68,20 +69,29 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float topPlayerPanelHeight = (height - startY - VPrompt.HEIGHT) / 2f;
-        float bottomPlayerPanelHeight = topPlayerPanelHeight;
-        if (topPlayerPanel.getSelectedZone() == null) { //adjust heights based on visibility of zone displays
+        //determine player panel heights based on visibility of zone displays
+        float topPlayerPanelHeight, bottomPlayerPanelHeight;
+        float cardRowsHeight = height - startY - VPrompt.HEIGHT - 2 * VAvatar.HEIGHT;
+        if (topPlayerPanel.getSelectedZone() == null) {
             if (bottomPlayerPanel.getSelectedZone() != null) {
-                float offset = topPlayerPanelHeight / 6;
-                topPlayerPanelHeight -= offset;
-                bottomPlayerPanelHeight += offset;
+                topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
+                bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+            }
+            else {
+                topPlayerPanelHeight = cardRowsHeight / 2f;
+                bottomPlayerPanelHeight = topPlayerPanelHeight;
             }
         }
         else if (bottomPlayerPanel.getSelectedZone() == null) {
-            float offset = bottomPlayerPanelHeight / 6;
-            bottomPlayerPanelHeight -= offset;
-            topPlayerPanelHeight += offset;
+            topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+            bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
         }
+        else {
+            topPlayerPanelHeight = cardRowsHeight / 2f;
+            bottomPlayerPanelHeight = topPlayerPanelHeight;
+        }
+        topPlayerPanelHeight += VAvatar.HEIGHT;
+        bottomPlayerPanelHeight += VAvatar.HEIGHT;
 
         //log.setBounds(0, startY, width - FScreen.HEADER_HEIGHT, VLog.HEIGHT);
         topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
