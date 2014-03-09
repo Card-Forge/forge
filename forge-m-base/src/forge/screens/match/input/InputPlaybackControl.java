@@ -3,10 +3,6 @@ package forge.screens.match.input;
 import forge.screens.match.FControl;
 import forge.screens.match.FControlGamePlayback;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public class InputPlaybackControl extends InputSyncronizedBase implements InputSynchronized {
     private static final long serialVersionUID = 7979208993306642072L;
 

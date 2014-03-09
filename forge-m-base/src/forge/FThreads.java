@@ -2,6 +2,8 @@ package forge;
 
 import java.io.PrintStream;
 
+import com.badlogic.gdx.Gdx;
+
 import forge.util.ThreadUtil;
 
 /** 
@@ -16,7 +18,7 @@ public class FThreads {
     }
 
     public static void invokeInEdtLater(Runnable runnable) {
-        //SwingUtilities.invokeLater(runnable);
+        Gdx.app.postRunnable(runnable);
     }
 
     public static void invokeInEdtNowOrLater(Runnable proc) {

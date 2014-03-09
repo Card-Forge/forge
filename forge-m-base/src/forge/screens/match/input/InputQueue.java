@@ -69,7 +69,7 @@ public class InputQueue extends Observable {
             return topMost;
         }
         return inputLock;
-    } // getInput()
+    }
 
     // only for debug purposes
     public String printInputStack() {
@@ -88,9 +88,6 @@ public class InputQueue extends Observable {
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public void onGameOver(boolean releaseAllInputs) {
         for (InputSynchronized inp : inputStack) {
             inp.relaseLatchWhenGameIsOver();
@@ -99,4 +96,4 @@ public class InputQueue extends Observable {
             }
         }
     }
-} // InputControl
+}
