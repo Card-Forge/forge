@@ -16110,6 +16110,7 @@ forge-m-base/src/forge/toolbox/FButton.java -text
 forge-m-base/src/forge/toolbox/FCardPanel.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
+forge-m-base/src/forge/toolbox/FFileChooser.java -text
 forge-m-base/src/forge/toolbox/FGestureAdapter.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text
 forge-m-base/src/forge/toolbox/FList.java -text
@@ -16123,8 +16124,6 @@ forge-m-base/src/forge/utils/Constants.java -text
 forge-m-base/src/forge/utils/Evaluator.java -text
 forge-m-base/src/forge/utils/ForgePreferences.java -text
 forge-m-base/src/forge/utils/ForgeProfileProperties.java -text
-forge-m-base/src/forge/utils/GuiDisplayUtil.java -text
-forge-m-base/src/forge/utils/GuiUtils.java -text
 forge-m-base/src/forge/utils/Preferences.java -text
 forge-m-base/src/forge/utils/PreferencesStore.java -text
 forge-m-base/src/forge/utils/Utils.java -text
