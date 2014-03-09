@@ -7,6 +7,7 @@ import forge.FThreads;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FScrollPane;
 
@@ -42,7 +43,7 @@ public class VZoneDisplay extends FScrollPane {
             clear();
             cardPanels.clear();
             for (Card card : player.getZone(zoneType).getCards()) {
-                cardPanels.add(add(new FCardPanel(card)));
+                cardPanels.add(add(new ZoneCardPanel(card)));
             }
             revalidate();
         }
@@ -62,6 +63,18 @@ public class VZoneDisplay extends FScrollPane {
         for (FCardPanel cardPanel : cardPanels) {
             cardPanel.setBounds(x, y, cardWidth, cardHeight);
             x += cardWidth;
+        }
+    }
+
+    private class ZoneCardPanel extends FCardPanel {
+        private ZoneCardPanel(Card card0) {
+            super(card0);
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            FControl.getInputProxy().selectCard(getCard());
+            return true;
         }
     }
 }

@@ -30,6 +30,7 @@ import forge.screens.match.events.IUiEventVisitor;
 import forge.screens.match.events.UiEvent;
 import forge.screens.match.events.UiEventAttackerDeclared;
 import forge.screens.match.events.UiEventBlockerAssigned;
+import forge.screens.match.input.InputProxy;
 import forge.screens.match.input.InputQueue;
 import forge.screens.match.views.VAssignDamage;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
@@ -43,6 +44,7 @@ public class FControl {
     private static Game game;
     private static MatchScreen view;
     private static InputQueue inputQueue;
+    private static InputProxy inputProxy;
     private static List<Player> sortedPlayers;
     private static final EventBus uiEvents;
     private static boolean gameHasHumanPlayer;
@@ -69,6 +71,7 @@ public class FControl {
         }*/
 
         inputQueue = new InputQueue();
+        inputProxy = new InputProxy();
 
         //game.subscribeToEvents(Singletons.getControl().getSoundSystem());
 
@@ -77,7 +80,7 @@ public class FControl {
         initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
 
         FModel.getPreferences().actuateMatchPreferences();
-        view.getPrompt().getInputProxy().setGame(game);
+        inputProxy.setGame(game);
 
         // Listen to DuelOutcome event to show ViewWinLose
         game.subscribeToEvents(fcVisitor);
@@ -115,6 +118,10 @@ public class FControl {
 
     public static InputQueue getInputQueue() {
         return inputQueue;
+    }
+
+    public static InputProxy getInputProxy() {
+        return inputProxy;
     }
 
     public static boolean stopAtPhase(final Player turn, final PhaseType phase) {

@@ -109,7 +109,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         for (final SpellAbility ab : abilities) {
             if (ab.canPlay()) {
-                FControl.getView().getPrompt().getInputProxy().selectAbility(ab);
+                FControl.getInputProxy().selectAbility(ab);
                 return ab;
             }
         }

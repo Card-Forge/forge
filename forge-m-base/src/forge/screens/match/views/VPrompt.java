@@ -9,7 +9,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
-import forge.screens.match.input.InputProxy;
+import forge.screens.match.FControl;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.utils.Utils;
@@ -23,20 +23,19 @@ public class VPrompt extends FContainer {
     private static final FSkinFont font = FSkinFont.get(11);
 
     private final FButton btnOk, btnCancel;
-    private final InputProxy inputProxy = new InputProxy();
     private String message;
 
     public VPrompt() {
         btnOk = add(new FButton("Yes", new Runnable() {
             @Override
             public void run() {
-                inputProxy.selectButtonOK();
+                FControl.getInputProxy().selectButtonOK();
             }
         }));
         btnCancel = add(new FButton("No", new Runnable() {
             @Override
             public void run() {
-                inputProxy.selectButtonCancel();
+                FControl.getInputProxy().selectButtonCancel();
             }
         }));
         btnOk.setSize(BTN_WIDTH, HEIGHT);
@@ -56,10 +55,6 @@ public class VPrompt extends FContainer {
     }
     public void setMessage(String message0) {
         message = message0;
-    }
-
-    public InputProxy getInputProxy() {
-        return inputProxy;
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */

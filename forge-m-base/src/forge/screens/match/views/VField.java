@@ -1,6 +1,5 @@
 package forge.screens.match.views;
 
-import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
