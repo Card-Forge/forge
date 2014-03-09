@@ -16053,6 +16053,7 @@ forge-m-base/src/forge/player/HumanPlay.java -text
 forge-m-base/src/forge/player/HumanPlaySpellAbility.java -text
 forge-m-base/src/forge/player/LobbyPlayerHuman.java -text
 forge-m-base/src/forge/player/PlayerControllerHuman.java -text
+forge-m-base/src/forge/player/TargetSelection.java -text
 forge-m-base/src/forge/screens/FScreen.java -text
 forge-m-base/src/forge/screens/LaunchScreen.java -text
 forge-m-base/src/forge/screens/SplashScreen.java -text
@@ -16092,6 +16093,7 @@ forge-m-base/src/forge/screens/match/input/InputSelectManyBase.java -text
 forge-m-base/src/forge/screens/match/input/InputSelectTargets.java -text
 forge-m-base/src/forge/screens/match/input/InputSynchronized.java -text
 forge-m-base/src/forge/screens/match/input/InputSyncronizedBase.java -text
+forge-m-base/src/forge/screens/match/views/VAssignDamage.java -text
 forge-m-base/src/forge/screens/match/views/VAvatar.java -text
 forge-m-base/src/forge/screens/match/views/VField.java -text
 forge-m-base/src/forge/screens/match/views/VGameDetails.java -text
@@ -16121,6 +16123,8 @@ forge-m-base/src/forge/utils/Constants.java -text
 forge-m-base/src/forge/utils/Evaluator.java -text
 forge-m-base/src/forge/utils/ForgePreferences.java -text
 forge-m-base/src/forge/utils/ForgeProfileProperties.java -text
+forge-m-base/src/forge/utils/GuiDisplayUtil.java -text
+forge-m-base/src/forge/utils/GuiUtils.java -text
 forge-m-base/src/forge/utils/Preferences.java -text
 forge-m-base/src/forge/utils/PreferencesStore.java -text
 forge-m-base/src/forge/utils/Utils.java -text

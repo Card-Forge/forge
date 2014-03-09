@@ -6,12 +6,24 @@ import forge.game.card.Card;
 
 public class FCardPanel extends FDisplayObject {
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
-    public static final float PADDING = 3; //scale to leave vertical space between
+    public static final float PADDING = 2; //scale to leave vertical space between
 
     private final Card card;
+    private boolean highlighted;
 
     public FCardPanel(Card card0) {
         card = card0;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+    
+    public boolean isHighlighted() {
+        return highlighted;
+    }
+    public void setHighlighted(boolean highlighted0) {
+        highlighted = highlighted0;
     }
 
     @Override

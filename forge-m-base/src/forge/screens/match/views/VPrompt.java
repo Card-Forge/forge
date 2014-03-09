@@ -4,14 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
-import forge.FThreads;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.Match;
 import forge.screens.match.input.InputProxy;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;

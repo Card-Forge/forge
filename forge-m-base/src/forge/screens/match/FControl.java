@@ -1,8 +1,10 @@
 package forge.screens.match;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -13,6 +15,7 @@ import com.google.common.eventbus.Subscribe;
 import forge.FThreads;
 import forge.Forge;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
@@ -28,8 +31,10 @@ import forge.screens.match.events.UiEvent;
 import forge.screens.match.events.UiEventAttackerDeclared;
 import forge.screens.match.events.UiEventBlockerAssigned;
 import forge.screens.match.input.InputQueue;
+import forge.screens.match.views.VAssignDamage;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
+import forge.toolbox.FCardPanel;
 import forge.utils.ForgePreferences.FPref;
 
 public class FControl {
@@ -92,12 +97,12 @@ public class FControl {
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
-        /*game.getAction().invoke(new Runnable() {
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 match.startGame(game);
             }
-        });*/
+        });
     }
 
     public static Game getGame() {
@@ -187,6 +192,25 @@ public class FControl {
         return view.getPlayerPanels().get(p);
     }
 
+    public static void highlightCard(final Card c) {
+        for (VPlayerPanel playerPanel : FControl.getView().getPlayerPanels().values()) {
+            for (FCardPanel p : playerPanel.getField().getCardPanels()) {
+                if (p.getCard().equals(c)) {
+                    p.setHighlighted(true);
+                    return;
+                }
+            }
+        }
+    }
+
+    public static void clearCardHighlights() {
+        for (VPlayerPanel playerPanel : FControl.getView().getPlayerPanels().values()) {
+            for (FCardPanel p : playerPanel.getField().getCardPanels()) {
+                p.setHighlighted(false);
+            }
+        }
+    }
+
     public static boolean mayShowCard(Card c) {
         return true;// game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
     }
@@ -212,7 +236,31 @@ public class FControl {
         }
         CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();*/
-    } // showBlockers()
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender, final boolean overrideOrder) {
+        if (damage <= 0) {
+            return new HashMap<Card, Integer>();
+        }
+
+        // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
+        Card firstBlocker = blockers.get(0);
+        if (!overrideOrder && !attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
+            Map<Card, Integer> res = new HashMap<Card, Integer>();
+            res.put(firstBlocker, damage);
+            return res;
+        }
+
+        final Object[] result = { null }; // how else can I extract a value from EDT thread?
+        FThreads.invokeInEdtAndWait(new Runnable() {
+            @Override
+            public void run() {
+                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
+                result[0] = v.getDamageMap();
+            }});
+        return (Map<Card, Integer>)result[0];
+    }
 
     private static Set<Player> highlightedPlayers = new HashSet<Player>();
     public static void setHighlighted(Player ge, boolean b) {

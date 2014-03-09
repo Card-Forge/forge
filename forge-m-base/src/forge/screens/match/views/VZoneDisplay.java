@@ -9,7 +9,7 @@ import forge.toolbox.FScrollPane;
 
 public class VZoneDisplay extends FScrollPane {
     private ZoneType zoneType;
-    private final List<FCardPanel> cards = new ArrayList<FCardPanel>();
+    protected final List<FCardPanel> cardPanels = new ArrayList<FCardPanel>();
 
     public VZoneDisplay(ZoneType zoneType0) {
         zoneType = zoneType0;
@@ -19,8 +19,12 @@ public class VZoneDisplay extends FScrollPane {
         return zoneType;
     }
 
+    public Iterable<FCardPanel> getCardPanels() {
+        return cardPanels;
+    }
+
     public int getCount() {
-        return 99; //TODO
+        return cardPanels.size();
     }
 
     public void update() {
@@ -34,7 +38,7 @@ public class VZoneDisplay extends FScrollPane {
         float cardHeight = height;
         float cardWidth = ((cardHeight - 2 * FCardPanel.PADDING) / FCardPanel.ASPECT_RATIO) + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
 
-        for (FCardPanel cardPanel : cards) {
+        for (FCardPanel cardPanel : cardPanels) {
             cardPanel.setBounds(x, y, cardWidth, cardHeight);
             x += cardWidth;
         }

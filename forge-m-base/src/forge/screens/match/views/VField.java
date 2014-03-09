@@ -1,21 +1,14 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.card.Card;
+import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FScrollPane;
 
-public class VField extends FScrollPane {
+public class VField extends VZoneDisplay {
     private boolean flipped;
 
-    private final List<FCardPanel> creatures = new ArrayList<FCardPanel>();
-    private final List<FCardPanel> lands = new ArrayList<FCardPanel>();
-    private final List<FCardPanel> otherPermanents = new ArrayList<FCardPanel>();
-
     public VField() {
+        super(ZoneType.Battlefield);
     }
 
     public boolean isFlipped() {
@@ -35,29 +28,29 @@ public class VField extends FScrollPane {
 
     @Override
     protected void doLayout(float width, float height) {
-        float x = 0;
-        float y = 0;
+        float x, y;
+        float x1 = 0;
+        float x2 = 0;
+        float y1 = 0;
         float cardSize = height / 2;
-
-        for (FCardPanel cardPanel : creatures) {
-            cardPanel.setBounds(x, y, cardSize, cardSize);
-            x += cardSize;
-        }
-        x = 0;
-        y += cardSize;
-        for (FCardPanel cardPanel : lands) {
-            cardPanel.setBounds(x, y, cardSize, cardSize);
-            x += cardSize;
-        }
-        for (FCardPanel cardPanel : otherPermanents) {
-            cardPanel.setBounds(x, y, cardSize, cardSize);
-            x += cardSize;
+        float y2 = cardSize;
+        if (flipped) {
+            y1 = y2;
+            y2 = 0;
         }
 
-        if (flipped) { //flip all positions across x-axis if needed
-            for (FDisplayObject child : getChildren()) {
-                child.setTop(height - child.getBottom());
+        for (FCardPanel cardPanel : cardPanels) {
+            if (cardPanel.getCard().isCreature()) {
+                x = x1;
+                y = y1;
+                x1 += cardSize;
             }
+            else {
+                x = x2;
+                y = y2;
+                x2 += cardSize;
+            }
+            cardPanel.setBounds(x, y, cardSize, cardSize);
         }
     }
 }
