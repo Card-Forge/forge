@@ -4057,6 +4057,7 @@ forge-gui/res/cardsfolder/e/embersmith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/emberstrike_duo.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/emberwilde_augur.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/emberwilde_caliph.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/emberwilde_djinn.txt -text
 forge-gui/res/cardsfolder/e/emblem_of_the_warmind.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/embolden.txt -text
 forge-gui/res/cardsfolder/e/embrace_my_diabolical_vision.txt -text

@@ -350,18 +350,23 @@ public class ComputerUtilCost {
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, List<Player> payers) {
         final Card source = sa.getHostCard();
-        boolean payForOwnOnly = "OnlyOwn".equals(sa.getParam("UnlessAI"));
-        boolean payOwner = sa.hasParam("UnlessAI") ? sa.getParam("UnlessAI").startsWith("Defined") : false;
-        boolean payNever = "Never".equals(sa.getParam("UnlessAI"));
-        boolean shockland = "Shockland".equals(sa.getParam("UnlessAI"));
+        final String aiLogic = sa.getParam("UnlessAI");
+        boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
+        boolean payOwner = sa.hasParam("UnlessAI") ? aiLogic.startsWith("Defined") : false;
+        boolean payNever = "Never".equals(aiLogic);
+        boolean shockland = "Shockland".equals(aiLogic);
         boolean isMine = sa.getActivatingPlayer().equals(payer);
     
         if (payNever) { return false; }
         if (payForOwnOnly && !isMine) { return false; }
         if (payOwner) {
-            final String defined = sa.getParam("UnlessAI").substring(7);
+            final String defined = aiLogic.substring(7);
             final Player player = AbilityUtils.getDefinedPlayers(source, defined, sa).get(0);
             if (!payer.equals(player)) {
+                return false;
+            }
+        } else if ("OnlyDontControl".equals(aiLogic)) {
+            if (sa.getHostCard() == null || payer.equals(sa.getHostCard().getController())) {
                 return false;
             }
         } else if (shockland) {
@@ -375,18 +380,18 @@ public class ComputerUtilCost {
                 }
             }
             return false;
-        } else if ("Paralyze".equals(sa.getParam("UnlessAI"))) {
+        } else if ("Paralyze".equals(aiLogic)) {
             final Card c = source.getEnchantingCard();
             if (c == null || c.isUntapped()) {
                 return false;
             }
-        } else if ("MorePowerful".equals(sa.getParam("UnlessAI"))) {
+        } else if ("MorePowerful".equals(aiLogic)) {
             final int sourceCreatures = sa.getActivatingPlayer().getCreaturesInPlay().size();
             final int payerCreatures = payer.getCreaturesInPlay().size();
             if (payerCreatures > sourceCreatures + 1) {
                 return false;
             }
-        } else if ("LifeLE2".equals(sa.getParam("UnlessAI"))) {
+        } else if ("LifeLE2".equals(aiLogic)) {
             if (payer.getLife() < 3) {
                 return true;
             }

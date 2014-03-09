@@ -1,0 +1,11 @@
+Name:Emberwilde Djinn
+ManaCost:2 R R
+Types:Creature Djinn
+PT:5/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each player's upkeep, that player may pay {R}{R} or 2 life. If he or she does, the player gains control of CARDNAME.
+SVar:TrigChoose:DB$ GenericChoice | Defined$ TriggeredPlayer | AILogic$ PayUnlessCost | Choices$ PayRR,Pay2Life
+SVar:PayRR:DB$ GainControl | Defined$ Self | NewController$ TriggeredPlayer | UnlessCost$ R R | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | UnlessAI$  OnlyDontControl | SpellDescription$ Pay R R to gain control of CARDNAME
+SVar:Pay2Life:DB$ GainControl | Defined$ Self | NewController$ TriggeredPlayer | UnlessCost$ PayLife<2> | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | UnlessAI$  OnlyDontControl | SpellDescription$ Pay 2 life to gain control of CARDNAME
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emberwilde_djinn.jpg
+Oracle:Flying\nAt the beginning of each player's upkeep, that player may pay {R}{R} or 2 life. If he or she does, the player gains control of Emberwilde Djinn.
