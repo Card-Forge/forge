@@ -108,8 +108,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
 
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            FControl.initHandViews(FServer.getLobby().getGuiPlayer());
-            /*SLayoutIO.loadLayout(null);
+            /*FControl.initHandViews(FServer.getLobby().getGuiPlayer());
+            SLayoutIO.loadLayout(null);
             VMatchUI.SINGLETON_INSTANCE.populate();
             for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
                 h.getLayoutControl().updateHand();

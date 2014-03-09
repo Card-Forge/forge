@@ -19,6 +19,9 @@ package forge.utils;
 
 import forge.ai.AiProfileUtil;
 import forge.game.GameLogEntryType;
+import forge.game.phase.PhaseType;
+import forge.screens.match.FControl;
+import forge.screens.match.views.VPhaseIndicator;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /**
@@ -134,5 +137,74 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
     protected String getPrefDefault(FPref key) {
         return key.getDefault();
+    }
+
+    public void writeMatchPreferences() {
+        VPhaseIndicator fvAi = FControl.getView().getTopPlayerPanel().getPhaseIndicator();
+        this.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLabel(PhaseType.DRAW).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLabel(PhaseType.MAIN1).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_BEGIN).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DAMAGE).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_END).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fvAi.getLabel(PhaseType.MAIN2).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLabel(PhaseType.END_OF_TURN).getStopAtPhase()));
+        this.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLabel(PhaseType.CLEANUP).getStopAtPhase()));
+
+        VPhaseIndicator fvHuman = FControl.getView().getBottomPlayerPanel().getPhaseIndicator();
+        this.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLabel(PhaseType.DRAW).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLabel(PhaseType.MAIN1).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_BEGIN).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DAMAGE).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_END).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLabel(PhaseType.MAIN2).getStopAtPhase()));
+        this.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLabel(PhaseType.END_OF_TURN).getStopAtPhase());
+        this.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLabel(PhaseType.CLEANUP).getStopAtPhase());
+
+        /*final VDev v = VDev.SINGLETON_INSTANCE;
+
+        // this.setPref(FPref.DEV_MILLING_LOSS, v.getLblMilling().getEnabled());
+        this.setPref(FPref.DEV_UNLIMITED_LAND, v.getLblUnlimitedLands().getEnabled());*/
+    }
+
+    /**
+     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
+     * codebase.
+     */
+    public void actuateMatchPreferences() {
+        VPhaseIndicator fvAi = FControl.getView().getTopPlayerPanel().getPhaseIndicator();
+        fvAi.getLabel(PhaseType.UPKEEP).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
+        fvAi.getLabel(PhaseType.DRAW).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_DRAW));
+        fvAi.getLabel(PhaseType.MAIN1).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_MAIN1));
+        fvAi.getLabel(PhaseType.COMBAT_BEGIN).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
+        fvAi.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
+        fvAi.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
+        fvAi.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
+        fvAi.getLabel(PhaseType.COMBAT_DAMAGE).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
+        fvAi.getLabel(PhaseType.COMBAT_END).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
+        fvAi.getLabel(PhaseType.MAIN2).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_MAIN2));
+        fvAi.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_EOT));
+        fvAi.getLabel(PhaseType.CLEANUP).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+
+        VPhaseIndicator fvHuman = FControl.getView().getBottomPlayerPanel().getPhaseIndicator();
+        fvHuman.getLabel(PhaseType.UPKEEP).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
+        fvHuman.getLabel(PhaseType.DRAW).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
+        fvHuman.getLabel(PhaseType.MAIN1).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
+        fvHuman.getLabel(PhaseType.COMBAT_BEGIN).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
+        fvHuman.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
+        fvHuman.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
+        fvHuman.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
+        fvHuman.getLabel(PhaseType.COMBAT_DAMAGE).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
+        fvHuman.getLabel(PhaseType.COMBAT_END).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
+        fvHuman.getLabel(PhaseType.MAIN2).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
+        fvHuman.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
+        fvHuman.getLabel(PhaseType.CLEANUP).setStopAtPhase(this.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
     }
 }

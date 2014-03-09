@@ -3,9 +3,8 @@ package forge.screens;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Forge;
 import forge.screens.FScreen;
-import forge.screens.match.MatchScreen;
+import forge.screens.match.FControl;
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.game.GameRules;
@@ -91,7 +90,7 @@ public abstract class LaunchScreen extends FScreen {
                     rules.setManaBurn(false); //Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
                     rules.canCloneUseTargetsImage = false; //Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
 
-                    Forge.openScreen(new MatchScreen(new Match(rules, launchParams.players)));
+                    FControl.startGame(new Match(rules, launchParams.players));
                 }
 
                 creatingMatch = false;

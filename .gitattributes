@@ -16094,6 +16094,7 @@ forge-m-base/src/forge/screens/match/input/InputSynchronized.java -text
 forge-m-base/src/forge/screens/match/input/InputSyncronizedBase.java -text
 forge-m-base/src/forge/screens/match/views/VAvatar.java -text
 forge-m-base/src/forge/screens/match/views/VField.java -text
+forge-m-base/src/forge/screens/match/views/VGameDetails.java -text
 forge-m-base/src/forge/screens/match/views/VLog.java -text
 forge-m-base/src/forge/screens/match/views/VPhaseIndicator.java -text
 forge-m-base/src/forge/screens/match/views/VPlayerPanel.java -text

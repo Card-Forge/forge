@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
+import forge.net.FServer;
 import forge.screens.match.events.IUiEventVisitor;
 import forge.screens.match.events.UiEvent;
 import forge.screens.match.events.UiEventAttackerDeclared;
@@ -39,7 +40,10 @@ public class FControl {
     private static InputQueue inputQueue;
     private static List<Player> sortedPlayers;
     private static final EventBus uiEvents;
-    private static MatchUiEventVisitor visitor = new MatchUiEventVisitor();
+    private static boolean gameHasHumanPlayer;
+    private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
+    private static final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
+    private static final FControlGamePlayback playbackControl = new FControlGamePlayback();
 
     static {
         uiEvents = new EventBus("ui events");
@@ -47,9 +51,8 @@ public class FControl {
         uiEvents.register(visitor);
     }
 
-    public static void startGame(final Match match, final MatchScreen view0) {
+    public static void startGame(final Match match) {
         game = match.createGame();
-        view = view0;
 
         /*if (game.getRules().getGameType() == GameType.Quest) {
             QuestController qc = Singletons.getModel().getQuest();
@@ -67,6 +70,25 @@ public class FControl {
         LobbyPlayer humanLobbyPlayer = game.getRegisteredPlayers().get(0).getLobbyPlayer(); //FServer.instance.getLobby().getGuiPlayer();
         // The UI controls should use these game data as models
         initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
+
+        FModel.getPreferences().actuateMatchPreferences();
+        view.getPrompt().getInputProxy().setGame(game);
+
+        // Listen to DuelOutcome event to show ViewWinLose
+        game.subscribeToEvents(fcVisitor);
+
+        // Add playback controls to match if needed
+        gameHasHumanPlayer = false;
+        for (Player p :  game.getPlayers()) {
+            if (p.getController().getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+                gameHasHumanPlayer = true;
+            }
+        }
+        if (!gameHasHumanPlayer) {
+            game.subscribeToEvents(playbackControl);
+        }
+
+        Forge.openScreen(view);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
@@ -104,10 +126,6 @@ public class FControl {
         //TODO
     }
 
-    private static int getPlayerIndex(Player player) {
-        return sortedPlayers.indexOf(player);
-    }
-
     public static void endCurrentGame() {
         if (game == null) { return; }
 
@@ -116,60 +134,27 @@ public class FControl {
     }
 
     public static void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
-        // TODO fix for use with multiplayer
-
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         // Instantiate all required field slots (user at 0)
         sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
 
-        /*final List<VField> fields = new ArrayList<VField>();
-        final List<VCommand> commands = new ArrayList<VCommand>();
+        List<VPlayerPanel> playerPanels = new ArrayList<VPlayerPanel>();
 
         int i = 0;
+        int avatarIndex = 0;
         for (Player p : sortedPlayers) {
-            // A field must be initialized after it's instantiated, to update player info.
-            // No player, no init.
-            VField f = new VField(EDocID.Fields[i], p, localPlayer);
-            VCommand c = new VCommand(EDocID.Commands[i], p);
-            fields.add(f);
-            commands.add(c);
-
-            //setAvatar(f, new ImageIcon(FSkin.getAvatars().get()));
-            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
-            f.getLayoutControl().initialize();
-            c.getLayoutControl().initialize();
-            i++;
-        }
-
-        // Replace old instances
-        view.setCommandViews(commands);
-        view.setFieldViews(fields);
-
-        VPlayers.SINGLETON_INSTANCE.init(players);*/
-
-        initHandViews(localPlayer);
-    }
-
-    public static void initHandViews(LobbyPlayer localPlayer) {
-        /*final List<VHand> hands = new ArrayList<VHand>();
-
-        int i = 0;
-        for (Player p : sortedPlayers) {
-            if (p.getLobbyPlayer() == localPlayer) {
-                VHand newHand = new VHand(EDocID.Hands[i], p);
-                newHand.getLayoutControl().initialize();
-                hands.add(newHand);
+            if (i < indices.length) {
+                avatarIndex = Integer.parseInt(indices[i]);
+                i++;
             }
-            i++;
+            localPlayer.setAvatarIndex(avatarIndex);
+            playerPanels.add(new VPlayerPanel(p, localPlayer));
         }
 
-        if (hands.isEmpty()) { // add empty hand for matches without human
-            VHand newHand = new VHand(EDocID.Hands[0], null);
-            newHand.getLayoutControl().initialize();
-            hands.add(newHand);
-        }
-        view.setHandViews(hands);*/
+        view = new MatchScreen(playerPanels);
+
+        view.getGameDetails().init(players);
     }
 
     private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
@@ -189,7 +174,7 @@ public class FControl {
     }
 
     public static void resetAllPhaseButtons() {
-        for (final VPlayerPanel panel : view.getPlayerPanels()) {
+        for (final VPlayerPanel panel : view.getPlayerPanels().values()) {
             panel.getPhaseIndicator().resetPhaseButtons();
         }
     }
@@ -199,8 +184,7 @@ public class FControl {
     }
 
     public static VPlayerPanel getPlayerPanel(Player p) {
-        int idx = getPlayerIndex(p);
-        return idx < 0 ? null : view.getPlayerPanels().get(idx);
+        return view.getPlayerPanels().get(p);
     }
 
     public static boolean mayShowCard(Card c) {
@@ -257,27 +241,11 @@ public class FControl {
 
     public static void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
         //System.out.println("updateZones " + zonesToUpdate);
-        /*for (Pair<Player, ZoneType> kv : zonesToUpdate) {
+        for (Pair<Player, ZoneType> kv : zonesToUpdate) {
             Player owner = kv.getKey();
             ZoneType zt = kv.getValue();
-
-            if (zt == ZoneType.Command)
-                getCommandFor(owner).getTabletop().setupPlayZone();
-            else if (zt == ZoneType.Hand) {
-                VHand vHand = getHandFor(owner);
-                if (null != vHand)
-                    vHand.getLayoutControl().updateHand();
-                getFieldViewFor(owner).getDetailsPanel().updateZones();
-            }
-            else if (zt == ZoneType.Battlefield) {
-                getFieldViewFor(owner).getTabletop().setupPlayZone();
-            } else if (zt == ZoneType.Ante) {
-                CAntes.SINGLETON_INSTANCE.update();
-            }
-            else {
-                getFieldViewFor(owner).getDetailsPanel().updateZones();
-            }
-        }*/
+            getPlayerPanel(owner).updateZone(zt);
+        }
     }
 
     // Player's mana pool changes
@@ -289,9 +257,9 @@ public class FControl {
 
     // Player's lives and poison counters
     public static void updateLives(List<Player> livesUpdate) {
-        /*for (Player p : livesUpdate) {
-            getFieldViewFor(p).updateDetails();
-        }*/
+        for (Player p : livesUpdate) {
+            getPlayerPanel(p).updateLife();
+        }
     }
 
     public static void updateCards(Set<Card> cardsToUpdate) {
@@ -303,8 +271,7 @@ public class FControl {
     public static void updateSingleCard(Card c) {
         Zone zone = c.getZone();
         if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
-            /*PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
-            pa.updateSingleCard(c);*/
+            getPlayerPanel(zone.getPlayer()).getField().updateSingleCard(c);
         }
     }
 

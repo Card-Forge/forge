@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.card.Card;
-import forge.model.FModel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
@@ -17,19 +16,6 @@ public class VField extends FScrollPane {
     private final List<FCardPanel> otherPermanents = new ArrayList<FCardPanel>();
 
     public VField() {
-        Card creature = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Llanowar Elves"));
-        Card land = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Forest"));
-        Card artifact = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Coat of Arms"));
-
-        for (int i = 0; i < 6; i++) {
-            creatures.add(add(new FCardPanel(creature)));
-        }
-        for (int i = 0; i < 3; i++) {
-            lands.add(add(new FCardPanel(land)));
-        }
-        for (int i = 0; i < 2; i++) {
-            otherPermanents.add(add(new FCardPanel(artifact)));
-        }
     }
 
     public boolean isFlipped() {
@@ -37,6 +23,14 @@ public class VField extends FScrollPane {
     }
     public void setFlipped(boolean flipped0) {
         flipped = flipped0;
+    }
+
+    public void update() {
+        
+    }
+
+    public void updateSingleCard(Card card) {
+        
     }
 
     @Override

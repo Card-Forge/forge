@@ -3,9 +3,7 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.card.Card;
 import forge.game.zone.ZoneType;
-import forge.model.FModel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FScrollPane;
 
@@ -15,16 +13,18 @@ public class VZoneDisplay extends FScrollPane {
 
     public VZoneDisplay(ZoneType zoneType0) {
         zoneType = zoneType0;
-
-        Card card = Card.getCardForUi(FModel.getMagicDb().getCommonCards().getCard("Forest"));
-
-        for (int i = 0; i < 7; i++) {
-            cards.add(add(new FCardPanel(card)));
-        }
     }
 
     public ZoneType getZoneType() {
         return zoneType;
+    }
+
+    public int getCount() {
+        return 99; //TODO
+    }
+
+    public void update() {
+        
     }
 
     @Override

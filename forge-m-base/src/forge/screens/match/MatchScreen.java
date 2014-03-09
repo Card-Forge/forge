@@ -1,9 +1,13 @@
 package forge.screens.match;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
+import forge.screens.match.views.VGameDetails;
+import forge.screens.match.views.VLog;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
@@ -11,39 +15,39 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
-import forge.game.Match;
-import forge.game.player.RegisteredPlayer;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
-    private final Match match;
-    private final List<VPlayerPanel> playerPanels;
-    //private final VLog log;
+    private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
+    private final VLog log;
     private final VStack stack;
     private final VPrompt prompt;
+    private final VGameDetails gameDetails;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
-    public MatchScreen(Match match0) {
+    public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(true, "Game", true);
-        match = match0;
 
-        playerPanels = new ArrayList<VPlayerPanel>();
-        for (RegisteredPlayer player : match.getPlayers()) {
-            playerPanels.add(add(new VPlayerPanel(player)));
+        for (VPlayerPanel playerPanel : playerPanels0) {
+            playerPanels.put(playerPanel.getPlayer(), add(playerPanel));
         }
-        bottomPlayerPanel = playerPanels.get(0);
-        topPlayerPanel = playerPanels.get(1);
+        bottomPlayerPanel = playerPanels0.get(0);
+        topPlayerPanel = playerPanels0.get(1);
         topPlayerPanel.setFlipped(true);
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
-        //log = add(new VLog());
-        stack = add(new VStack());
         prompt = add(new VPrompt());
 
-        FControl.startGame(match0, this);
+        log = add(new VLog());
+        stack = add(new VStack());
+        gameDetails = add(new VGameDetails());
+        log.setVisible(false);
+        stack.setVisible(false);
+        gameDetails.setVisible(false);
     }
 
     public VPrompt getPrompt() {
@@ -54,7 +58,23 @@ public class MatchScreen extends FScreen {
         return stack;
     }
 
-    public List<VPlayerPanel> getPlayerPanels() {
+    public VLog getLog() {
+        return log;
+    }
+
+    public VGameDetails getGameDetails() {
+        return gameDetails;
+    }
+
+    public VPlayerPanel getTopPlayerPanel() {
+        return topPlayerPanel;
+    }
+
+    public VPlayerPanel getBottomPlayerPanel() {
+        return bottomPlayerPanel;
+    }
+
+    public Map<Player, VPlayerPanel> getPlayerPanels() {
         return playerPanels;
     }
 
