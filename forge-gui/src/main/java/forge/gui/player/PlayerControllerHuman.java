@@ -300,7 +300,7 @@ public class PlayerControllerHuman extends PlayerController {
         boolean cardsAreInMyHandOrBattlefield = true;
         for(Card c : sourceList) {
             Zone z = c.getZone();
-            if ( z != null && ( z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player)))
+            if (z != null && (z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player)))
                 continue;
             cardsAreInMyHandOrBattlefield = false;
             break;
@@ -448,7 +448,7 @@ public class PlayerControllerHuman extends PlayerController {
             message = "Looking at cards in {player's} " + zone.name();
         }
         String fm = formatMessage(message, owner);
-        if ( !cards.isEmpty() )
+        if (!cards.isEmpty())
             GuiChoose.reveal(fm, cards);
         else
             GuiDialog.message("There are no cards in the named location", fm);
@@ -710,7 +710,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
-        if ( sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
+        if (sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
                 && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS))
             return true;
         
@@ -909,7 +909,7 @@ public class PlayerControllerHuman extends PlayerController {
     
     private byte chooseColorCommon(String message, Card c, ColorSet colors, boolean withColorless) {
         int cntColors = colors.countColors();
-        if( withColorless ) cntColors++;
+        if(withColorless) cntColors++;
         String[] colorNames = new String[cntColors];
         int i = 0;
         if(withColorless)
@@ -998,8 +998,9 @@ public class PlayerControllerHuman extends PlayerController {
         InputProliferate inp = new InputProliferate();
         inp.setCancelAllowed(true);
         inp.showAndWait();
-        if ( inp.hasCancelled() )
+        if (inp.hasCancelled()) {
             return null;
+        }
         return inp.getProliferationMap();
     }
 
@@ -1007,7 +1008,6 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         final TargetSelection select = new TargetSelection(currentAbility);
         return select.chooseTargets(null);
-        
     }
 
     @Override

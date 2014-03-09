@@ -1,5 +1,8 @@
 package forge.player;
 
+import java.awt.event.MouseEvent;
+import java.util.*;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -65,12 +68,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.swing.*;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.*;
-
 
 /** 
  * A prototype for player controller class
@@ -119,16 +116,6 @@ public class PlayerControllerHuman extends PlayerController {
     	return null; //TODO: delay ability until choice made
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     */
-    /**public void playFromSuspend(Card c) {
-        c.setSuspendCast(true);
-        HumanPlay.playCardWithoutPayingManaCost(player, c);
-    }**/
-
-
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
      */
@@ -154,7 +141,6 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         CardPool main = deck.get(DeckSection.Main);
-
 
         int mainSize = main.countAll();
         int sbSize = sideboard.countAll();
@@ -258,7 +244,6 @@ public class PlayerControllerHuman extends PlayerController {
         return Lists.newArrayList(inp.getSelected());
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseCardsForEffect(java.util.Collection, forge.card.spellability.SpellAbility, java.lang.String, int, boolean)
      */
@@ -274,15 +259,16 @@ public class PlayerControllerHuman extends PlayerController {
         
         // try to use InputSelectCardsFromList when possible 
         boolean cardsAreInMyHandOrBattlefield = true;
-        for(Card c : sourceList) {
+        for (Card c : sourceList) {
             Zone z = c.getZone();
-            if ( z != null && ( z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player)))
+            if (z != null && (z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player))) {
                 continue;
+            }
             cardsAreInMyHandOrBattlefield = false;
             break;
         }
         
-        if(cardsAreInMyHandOrBattlefield) {
+        if (cardsAreInMyHandOrBattlefield) {
             InputSelectCardsFromList sc = new InputSelectCardsFromList(min, max, sourceList);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
@@ -418,7 +404,7 @@ public class PlayerControllerHuman extends PlayerController {
             message = "Looking at cards in {player's} " + zone.name();
         }
         String fm = formatMessage(message, owner);
-        if ( !cards.isEmpty() )
+        if (!cards.isEmpty())
             GuiChoose.reveal(fm, cards);
         else
             GuiDialog.message("There are no cards in the named location", fm);
@@ -590,7 +576,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
-        if(isOptional)
+        if (isOptional)
             return GuiChoose.oneOrNone("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
         else
             return GuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
@@ -680,7 +666,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
-        if ( sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
+        if (sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
                 && !FModel.getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS))
             return true;
         
@@ -793,7 +779,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     private String formatMessage(String message, Object related) {
-        if(related instanceof Player && message.indexOf("{player") >= 0)
+        if (related instanceof Player && message.indexOf("{player") >= 0)
             message = message.replace("{player}", mayBeYou(related)).replace("{player's}", Lang.getPossesive(mayBeYou(related)));
         
         return message;
@@ -879,10 +865,10 @@ public class PlayerControllerHuman extends PlayerController {
     
     private byte chooseColorCommon(String message, Card c, ColorSet colors, boolean withColorless) {
         int cntColors = colors.countColors();
-        if( withColorless ) cntColors++;
+        if (withColorless) { cntColors++; }
         String[] colorNames = new String[cntColors];
         int i = 0;
-        if(withColorless)
+        if (withColorless)
             colorNames[i++] = MagicColor.toLongString((byte)0);
         for (byte b : colors) {
             colorNames[i++] = MagicColor.toLongString(b);
@@ -919,7 +905,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams) {
-        if(possibleReplacers.size() == 1)
+        if (possibleReplacers.size() == 1)
             return possibleReplacers.get(0);
         return GuiChoose.one(prompt, possibleReplacers);
     }
@@ -987,7 +973,8 @@ public class PlayerControllerHuman extends PlayerController {
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
             final String[] possibleValues = { p1Str , p2Str };
             return GuiDialog.confirm(sa.getHostCard(), "Choose a Pile", possibleValues);
-        } else {
+        }
+        else {
             final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
             disp[0] = new Card(-1);
             disp[0].setName("Pile 1");
@@ -1053,8 +1040,9 @@ public class PlayerControllerHuman extends PlayerController {
         while(true) {
             cp = chooseSinglePaperCard(sa, message, cpp, sa.getHostCard().getName());
             Card instanceForPlayer = Card.fromPaperCard(cp, player); // the Card instance for test needs a game to be tested
-            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard()))
+            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard())) {
                 return cp.getName();
+            }
         }
     }
 
