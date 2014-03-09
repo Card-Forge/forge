@@ -12,6 +12,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.game.player.RegisteredPlayer;
 import forge.game.zone.ZoneType;
+import forge.screens.match.FControl;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -40,8 +41,6 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
         addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
         addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
-
-        setSelectedZone(ZoneType.Hand);
     }
 
     public void addZoneDisplay(ZoneType zoneType, FSkinImage tabIcon) {
@@ -65,6 +64,10 @@ public class VPlayerPanel extends FContainer {
             }
             selectedZone.setVisible(false);
         }
+        else if (zoneType == null) {
+            return;
+        }
+
         if (zoneType == null) {
             selectedZone = null;
         }
@@ -73,9 +76,12 @@ public class VPlayerPanel extends FContainer {
                 if (zone.getZoneType() == zoneType) {
                     selectedZone = zone;
                     selectedZone.setVisible(true);
-                    return;
+                    break;
                 }
             }
+        }
+        if (FControl.getView() != null) { //must revalidate entire screen so panel heights updated
+            FControl.getView().revalidate();
         }
     }
 
@@ -96,11 +102,17 @@ public class VPlayerPanel extends FContainer {
         float x = VAvatar.WIDTH;
         phases.setBounds(x, height - VPhases.HEIGHT, width - VAvatar.WIDTH, VPhases.HEIGHT);
 
-        float y = height - VAvatar.HEIGHT;
-        float zoneHeight = y / 3;
-        y -= zoneHeight;
-        for (VZoneDisplay zone : zones) {
-            zone.setBounds(0, y, width, zoneHeight);
+        float y, zoneHeight;
+        if (selectedZone != null) {
+            y = height - VAvatar.HEIGHT;
+            zoneHeight = y / 3;
+            y -= zoneHeight;
+            for (VZoneDisplay zone : zones) {
+                zone.setBounds(0, y, width, zoneHeight);
+            }
+        }
+        else {
+            zoneHeight = 0;
         }
 
         y = height - VAvatar.HEIGHT;

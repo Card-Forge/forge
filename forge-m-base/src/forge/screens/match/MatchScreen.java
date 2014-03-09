@@ -13,6 +13,7 @@ import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
+import forge.game.zone.ZoneType;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
@@ -36,6 +37,7 @@ public class MatchScreen extends FScreen {
         bottomPlayerPanel = playerPanels.get(match.getPlayers().get(0));
         topPlayerPanel = playerPanels.get(match.getPlayers().get(1));
         topPlayerPanel.setFlipped(true);
+        bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
         //log = add(new VLog());
         stack = add(new VStack());
@@ -54,6 +56,9 @@ public class MatchScreen extends FScreen {
         g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
 
         //field separator lines
+        if (topPlayerPanel.getSelectedZone() == null) {
+            y++; //ensure border goes all the way across under avatar
+        }
         g.drawLine(1, BORDER_COLOR, 0, y, w, y);
         y = midField;
         g.drawLine(1, BORDER_COLOR, 0, y, w, y);
@@ -63,12 +68,25 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float playerPanelHeight = (height - startY - VPrompt.HEIGHT) / 2f;
+        float topPlayerPanelHeight = (height - startY - VPrompt.HEIGHT) / 2f;
+        float bottomPlayerPanelHeight = topPlayerPanelHeight;
+        if (topPlayerPanel.getSelectedZone() == null) { //adjust heights based on visibility of zone displays
+            if (bottomPlayerPanel.getSelectedZone() != null) {
+                float offset = topPlayerPanelHeight / 6;
+                topPlayerPanelHeight -= offset;
+                bottomPlayerPanelHeight += offset;
+            }
+        }
+        else if (bottomPlayerPanel.getSelectedZone() == null) {
+            float offset = bottomPlayerPanelHeight / 6;
+            bottomPlayerPanelHeight -= offset;
+            topPlayerPanelHeight += offset;
+        }
 
         //log.setBounds(0, startY, width - FScreen.HEADER_HEIGHT, VLog.HEIGHT);
-        topPlayerPanel.setBounds(0, startY, width, playerPanelHeight);
-        stack.setBounds(0, startY + playerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
-        bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - playerPanelHeight, width, playerPanelHeight);
+        topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
+        stack.setBounds(0, startY + topPlayerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
+        bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }
 }

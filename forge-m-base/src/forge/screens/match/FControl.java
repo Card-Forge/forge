@@ -48,6 +48,10 @@ public class FControl {
         });*/
     }
 
+    public static MatchScreen getView() {
+        return view;
+    }
+
     public static void endCurrentGame() {
         if (game == null) { return; }
 
