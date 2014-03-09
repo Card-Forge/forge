@@ -3,15 +3,20 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.FThreads;
+import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FScrollPane;
 
 public class VZoneDisplay extends FScrollPane {
-    private ZoneType zoneType;
+    private final Player player;
+    private final ZoneType zoneType;
     protected final List<FCardPanel> cardPanels = new ArrayList<FCardPanel>();
 
-    public VZoneDisplay(ZoneType zoneType0) {
+    public VZoneDisplay(Player player0, ZoneType zoneType0) {
+        player = player0;
         zoneType = zoneType0;
     }
 
@@ -28,6 +33,22 @@ public class VZoneDisplay extends FScrollPane {
     }
 
     public void update() {
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
+    }
+
+    private final Runnable updateRoutine = new Runnable() {
+        @Override
+        public void run() {
+            clear();
+            cardPanels.clear();
+            for (Card card : player.getZone(zoneType).getCards()) {
+                cardPanels.add(add(new FCardPanel(card)));
+            }
+            revalidate();
+        }
+    };
+
+    public void updateSingleCard(Card card) {
         
     }
 

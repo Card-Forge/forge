@@ -6,15 +6,16 @@ import com.badlogic.gdx.Gdx;
 
 import forge.util.ThreadUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public class FThreads {
     private FThreads() { } //don't allow creating instance
 
     public static void assertExecutedByEdt(final boolean mustBeEDT) {
-        //TODO
+        if (isGuiThread() != mustBeEDT) {
+            StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+            final String methodName = trace[2].getClassName() + "." + trace[2].getMethodName();
+            String modalOperator = mustBeEDT ? " must be" : " may not be";
+            throw new IllegalStateException(methodName + modalOperator + " accessed from the event dispatch thread.");
+        }
     }
 
     public static void invokeInEdtLater(Runnable runnable) {
@@ -31,27 +32,17 @@ public class FThreads {
     }
 
     public static void invokeInEdtAndWait(final Runnable proc) {
-        proc.run();
-        /*if (SwingUtilities.isEventDispatchThread()) {
+        if (isGuiThread()) {
             // Just run in the current thread.
             proc.run();
         }
         else {
-            try {
-                SwingUtilities.invokeAndWait(proc);
-            }
-            catch (final InterruptedException exn) {
-                throw new RuntimeException(exn);
-            }
-            catch (final InvocationTargetException exn) {
-                throw new RuntimeException(exn);
-            }
-        }*/
+            //TODO
+        }
     }
 
     public static boolean isGuiThread() {
-        return true;
-        //return SwingUtilities.isEventDispatchThread();
+        return !ThreadUtil.isGameThread();
     }
 
     public static void delayInEDT(int milliseconds, final Runnable inputUpdater) {

@@ -1,14 +1,15 @@
 package forge.screens.match.views;
 
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
 
 public class VField extends VZoneDisplay {
     private boolean flipped;
 
-    public VField() {
-        super(ZoneType.Battlefield);
+    public VField(Player player0) {
+        super(player0, ZoneType.Battlefield);
     }
 
     public boolean isFlipped() {
@@ -16,14 +17,6 @@ public class VField extends VZoneDisplay {
     }
     public void setFlipped(boolean flipped0) {
         flipped = flipped0;
-    }
-
-    public void update() {
-        
-    }
-
-    public void updateSingleCard(Card card) {
-        
     }
 
     @Override

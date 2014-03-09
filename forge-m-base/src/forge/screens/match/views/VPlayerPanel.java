@@ -40,7 +40,7 @@ public class VPlayerPanel extends FContainer {
         player = player0;
         localPlayer = localPlayer0;
         phaseIndicator = add(new VPhaseIndicator());
-        field = add(new VField());
+        field = add(new VField(player));
         avatar = add(new VAvatar(localPlayer.getAvatarIndex()));
         lblLife = add(new LifeLabel());
         addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
@@ -58,7 +58,7 @@ public class VPlayerPanel extends FContainer {
     }
 
     public void addZoneDisplay(ZoneType zoneType, FSkinImage tabIcon) {
-        VZoneDisplay zone = add(new VZoneDisplay(zoneType));
+        VZoneDisplay zone = add(new VZoneDisplay(player, zoneType));
         zone.setVisible(false);
         zoneDisplays.put(zoneType, zone);
         zoneTabs.add(add(new ZoneInfoTab(tabIcon, zone)));
