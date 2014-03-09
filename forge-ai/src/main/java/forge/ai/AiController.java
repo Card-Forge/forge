@@ -1282,6 +1282,11 @@ public class AiController {
                 return min;
             }
         }
+        else if ("LoseLife".equals(logic)) {
+            if (player.getLife() > 5) {
+                return min;
+            }
+        }
         else if ("Min".equals(logic)) {
             return min;
         }

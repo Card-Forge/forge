@@ -1,0 +1,12 @@
+Name:Well of Lost Dreams
+ManaCost:4
+Types:Artifact
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigStore | TriggerDescription$ Whenever you gain life, you may pay X, where X is less than or equal to the amount of life you gained. If you do, draw X cards.
+SVar:TrigStore:DB$ ChooseNumber | Defined$ You | Min$ 0 | Max$ Y | References$ Y | ListTitle$ Pay X | AILogic$ OptionalDraw | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True
+SVar:Y:TriggerCount$LifeAmount
+SVar:X:Count$ChosenNumber
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_lost_dreams.jpg
+Oracle:Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards.

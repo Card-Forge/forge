@@ -1,8 +1,8 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -36,9 +36,9 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         final boolean random = sa.hasParam("Random");
 
         final String sMin = sa.getParamOrDefault("Min", "0");
-        final int min = StringUtils.isNumeric(sMin) ? Integer.parseInt(sMin) : CardFactoryUtil.xCount(card, card.getSVar(sMin));
+        final int min = AbilityUtils.calculateAmount(card, sMin, sa); 
         final String sMax = sa.getParamOrDefault("Max", "99");
-        final int max = StringUtils.isNumeric(sMax) ? Integer.parseInt(sMax) : CardFactoryUtil.xCount(card, card.getSVar(sMax)); 
+        final int max = AbilityUtils.calculateAmount(card, sMax, sa); 
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();

@@ -7849,6 +7849,7 @@ forge-gui/res/cardsfolder/m/minamo_school_at_waters_edge.txt svneol=native#text/
 forge-gui/res/cardsfolder/m/minamo_scrollkeeper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/minamo_sightbender.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/minamos_meddling.txt -text
+forge-gui/res/cardsfolder/m/mind_bomb.txt -text
 forge-gui/res/cardsfolder/m/mind_burst.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mind_control.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mind_extraction.txt -text
@@ -13818,6 +13819,7 @@ forge-gui/res/cardsfolder/w/well_laid_plans.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/well_of_discovery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/well_of_knowledge.txt -text
 forge-gui/res/cardsfolder/w/well_of_life.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/well_of_lost_dreams.txt -text
 forge-gui/res/cardsfolder/w/wellgabber_apothecary.txt -text
 forge-gui/res/cardsfolder/w/wellspring.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wellwisher.txt svneol=native#text/plain
