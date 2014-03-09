@@ -59,14 +59,22 @@ public class VPlayerPanel extends FContainer {
     }
 
     public void setSelectedZone(ZoneType zoneType) {
-        for (VZoneDisplay zone : zones) {
-            if (zone.getZoneType() == zoneType) {
-                if (selectedZone != null) {
-                    selectedZone.setVisible(false);
-                }
-                selectedZone = zone;
-                selectedZone.setVisible(true);
+        if (selectedZone != null) {
+            if (selectedZone.getZoneType() == zoneType) {
                 return;
+            }
+            selectedZone.setVisible(false);
+        }
+        if (zoneType == null) {
+            selectedZone = null;
+        }
+        else {
+            for (VZoneDisplay zone : zones) {
+                if (zone.getZoneType() == zoneType) {
+                    selectedZone = zone;
+                    selectedZone.setVisible(true);
+                    return;
+                }
             }
         }
     }
@@ -169,6 +177,17 @@ public class VPlayerPanel extends FContainer {
             icon = icon0;
             zoneToOpen = zoneToOpen0;
             value = "99";
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (selectedZone == zoneToOpen) {
+                setSelectedZone(null);
+            }
+            else {
+                setSelectedZone(zoneToOpen.getZoneType());
+            }
+            return true;
         }
 
         @Override
