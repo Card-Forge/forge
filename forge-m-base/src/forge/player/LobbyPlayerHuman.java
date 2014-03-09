@@ -1,10 +1,11 @@
 package forge.player;
 
-import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.model.FModel;
+import forge.utils.ForgePreferences.FPref;
 
 public class LobbyPlayerHuman extends LobbyPlayer {
     public LobbyPlayerHuman(String name) {
@@ -18,17 +19,18 @@ public class LobbyPlayerHuman extends LobbyPlayer {
 
     @Override
     public PlayerController createControllerFor(Player human) {
-        return new PlayerControllerAi(human.getGame(), human, this); //TODO new PlayerControllerHuman(human.getGame(), human, this);
+        return new PlayerControllerHuman(human.getGame(), human, this);
     }
 
     @Override
     public Player createIngamePlayer(Game game) { //TODO
         Player player = new Player(/*GuiDisplayUtil.personalizeHuman(*/getName()/*)*/, game);
-        player.setFirstController(new PlayerControllerAi(game, player, this)/*new PlayerControllerHuman(game, player, this)*/);
+        player.setFirstController(new PlayerControllerHuman(game, player, this));
 
-        /*if (ForgePreferences.DEV_MODE && Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED) &&
+                FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
             player.canCheatPlayUnlimitedLands = true;
-        }*/
+        }
 
         return player;
     }

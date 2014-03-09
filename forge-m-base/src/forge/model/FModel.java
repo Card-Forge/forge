@@ -25,6 +25,8 @@ import forge.game.GameFormat;
 import forge.game.card.CardUtil;
 import forge.toolbox.FProgressBar;
 import forge.util.FileUtil;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageBase;
 import forge.utils.Constants;
 import forge.utils.ForgePreferences;
 
@@ -53,15 +55,15 @@ public class FModel {
     private static ForgePreferences preferences;
 
     // Someone should take care of 2 gauntlets here
-    /*private static GauntletData gauntletData;
-    private static GauntletMini gauntlet;
+    //private static GauntletData gauntletData;
+    //private static GauntletMini gauntlet;
 
-    private static QuestController quest;
+    //private static QuestController quest;
     private static CardCollections decks;
 
     private static IStorage<CardBlock> blocks;
     private static IStorage<CardBlock> fantasyBlocks;
-    private static IStorage<QuestWorld> worlds;*/
+    //private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
 
     public static void initialize(final FProgressBar progressBar) {
@@ -138,18 +140,18 @@ public class FModel {
         }
         
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(Constants.BLOCK_DATA_DIR + "formats.txt")));
-        /*blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(Constants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
-        questPreferences = new QuestPreferences();
-        gauntletData = new GauntletData();
+        blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(Constants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
+        //questPreferences = new QuestPreferences();
+        //gauntletData = new GauntletData();
         fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(Constants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
-        worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(Constants.QUEST_WORLD_DIR + "worlds.txt"));*/
+        //worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(Constants.QUEST_WORLD_DIR + "worlds.txt"));
 
         loadDynamicGamedata();
 
         progressBar.setDescription("Loading decks");
 
-        /*decks = new CardCollections();
-        quest = new QuestController();*/
+        decks = new CardCollections();
+        //quest = new QuestController();
         
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(Constants.AI_PROFILE_DIR);
@@ -272,28 +274,32 @@ public class FModel {
         return preferences;
     }
 
-    /*public static IStorage<CardBlock> getBlocks() {
+    public static IStorage<CardBlock> getBlocks() {
         return blocks;
     }    
 
-    public static QuestPreferences getQuestPreferences() {
+    /*public static QuestPreferences getQuestPreferences() {
         return questPreferences;
     }
 
     public static GauntletData getGauntletData() {
         return gauntletData;
-    }
+    }*/
 
     public static CardCollections getDecks() {
         return decks;
     }
 
-    public static IStorage<QuestWorld> getWorlds() {
+    /*public static IStorage<QuestWorld> getWorlds() {
         return worlds;
     }*/
  
     public static GameFormat.Collection getFormats() {
         return formats;
+    }
+
+    public static IStorage<CardBlock> getFantasyBlocks() {
+        return fantasyBlocks;
     }
 
     /**
@@ -308,13 +314,9 @@ public class FModel {
 
     /*public static void setGauntletData(GauntletData data0) {
         gauntletData = data0;
-    }
+    }*/
 
-    public static IStorage<CardBlock> getFantasyBlocks() {
-        return fantasyBlocks;
-    }
-
-    public static GauntletMini getGauntletMini() {
+    /*public static GauntletMini getGauntletMini() {
         if (gauntlet == null) {
             gauntlet = new GauntletMini();
         }

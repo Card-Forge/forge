@@ -1,20 +1,16 @@
 package forge.player;
 
-/*import com.google.common.base.Predicate;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
@@ -23,7 +19,6 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
-import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -35,25 +30,20 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Lang;
-import forge.util.TextUtil;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
 
-*//** 
+/** 
  * A prototype for player controller class
  * 
  * Handles phase skips for now.
- *//*
+ */
 public class PlayerControllerHuman extends PlayerController {
     public PlayerControllerHuman(Game game0, Player p, LobbyPlayer lp) {
         super(game0, p, lp);
@@ -523,4 +513,4 @@ public class PlayerControllerHuman extends PlayerController {
         // TODO Auto-generated method stub
         return null;
     }
-}*/
+}
