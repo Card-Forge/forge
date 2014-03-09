@@ -195,7 +195,9 @@ public class ReplacementHandler {
             }
 
             String effectDesc = replacementEffect.toString().replace("CARDNAME", replacementEffect.getHostCard().getName());
-            final String question = String.format("Apply replacement effect of %s?\r\n(%s)", replacementEffect.getHostCard(), effectDesc);
+            final String question = replacementEffect instanceof ReplaceDiscard
+                ? String.format("Apply replacement effect of %s to %s?\r\n(%s)", replacementEffect.getHostCard(), runParams.get("Card").toString(), effectDesc)
+                : String.format("Apply replacement effect of %s?\r\n(%s)", replacementEffect.getHostCard(), effectDesc);
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;
