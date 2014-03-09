@@ -359,7 +359,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     // TODO: convert multikicker/replicate support in abCost so this
                     // doesn't happen here
                     
-                    final Cost costReplicate = new Cost(sp.getPayCosts().getTotalMana(), false);
+                    final Cost costReplicate = new Cost(source.getManaCost(), false);
                     boolean hasPaid = false;
                     
                     do {
