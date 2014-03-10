@@ -1,8 +1,7 @@
 Name:Choke
 ManaCost:2 G
 Types:Enchantment
-Text:Islands don't untap during their controllers' untap steps.
-K:Permanents don't untap during their controllers' untap steps:Island
+S:Mode$ Continuous | Affected$ Island | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Islands don't untap during their controllers' untap steps.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choke.jpg

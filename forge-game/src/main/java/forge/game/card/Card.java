@@ -1946,8 +1946,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         for (int i = 0; i < keywords.size(); i++) {
             String keyword = keywords.get(i);
-            if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
-                    || keyword.startsWith("PreventAllDamageBy")
+            if (keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantEquip")
                     || keyword.startsWith("SpellCantTarget")) {
                 continue;

@@ -1,8 +1,7 @@
 Name:Root Cage
 ManaCost:1 G
 Types:Enchantment
-Text:Mercenaries don't untap during their controllers' untap steps.
-K:Permanents don't untap during their controllers' untap steps:Mercenary
+S:Mode$ Continuous | Affected$ Mercenary | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Mercenaries don't untap during their controllers' untap steps.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_cage.jpg

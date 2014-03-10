@@ -85,21 +85,6 @@ public class Untap extends Phase {
                 || c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
             return false;
         }
-
-        for (final Card ca : c.getGame().getCardsIn(ZoneType.Battlefield)) {
-            if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
-                final int keywordPosition = ca
-                        .getKeywordPosition("Permanents don't untap during their controllers' untap steps");
-                final String parse = ca.getKeyword().get(keywordPosition).toString();
-                final String[] k = parse.split(":");
-                final String[] restrictions = k[1].split(",");
-                final Card card = ca;
-                if (c.isValid(restrictions, card.getController(), card)) {
-                    return false;
-                }
-            }
-        } // end of Permanents don't untap during their controllers' untap steps
-
         return true;
     }
 

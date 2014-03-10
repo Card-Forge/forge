@@ -3739,6 +3739,7 @@ forge-gui/res/cardsfolder/d/dream_salvage.txt -text
 forge-gui/res/cardsfolder/d/dream_stalker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dream_thief.txt -text
 forge-gui/res/cardsfolder/d/dream_thrush.txt -text
+forge-gui/res/cardsfolder/d/dream_tides.txt -text
 forge-gui/res/cardsfolder/d/dream_twist.txt -text
 forge-gui/res/cardsfolder/d/dreamborn_muse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dreamcatcher.txt svneol=native#text/plain
@@ -7484,6 +7485,7 @@ forge-gui/res/cardsfolder/m/magmatic_force.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magmaw.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnetic_flux.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnetic_mine.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/magnetic_mountain.txt -text
 forge-gui/res/cardsfolder/m/magnetic_theft.txt -text
 forge-gui/res/cardsfolder/m/magnify.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnigoth_treefolk.txt svneol=native#text/plain
@@ -8189,6 +8191,7 @@ forge-gui/res/cardsfolder/m/mudbutton_clanger.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mudbutton_torchrunner.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/muddle_the_mixture.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mudhole.txt -text
+forge-gui/res/cardsfolder/m/mudslide.txt -text
 forge-gui/res/cardsfolder/m/mugging.txt -text
 forge-gui/res/cardsfolder/m/mul_daya_channelers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mulch.txt svneol=native#text/plain
@@ -12532,6 +12535,7 @@ forge-gui/res/cardsfolder/t/thelonite_druid.txt -text
 forge-gui/res/cardsfolder/t/thelonite_hermit.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thelonite_monk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thelons_chant.txt -text
+forge-gui/res/cardsfolder/t/thelons_curse.txt -text
 forge-gui/res/cardsfolder/t/thermal_blast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thermal_flux.txt -text
 forge-gui/res/cardsfolder/t/thermal_glider.txt svneol=native#text/plain
