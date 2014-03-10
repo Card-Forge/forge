@@ -25,6 +25,9 @@ For Image View, this options panel is visible by default and contains a button t
 All variants can now be applied via the constructed match setup. While moving Commander across, a basic experimental Commander deck generator was implemented. It will select a random two-color identity commander, and use those colors to build a two-color singleton deck. It is at least a starting point if someone doesn't have any Commander decks and doesn't want to or doesn't have time to build one.
 
 
+- Quest Mode Pet Balancing
+Two quest mode pets have had their power reduced to reflect their strength relative to the rest of the other pets. The white Wolf Pet now has Lifelink instead of Vigilance, and the blue Bird Pet now scries for 1 instead of loots for 1 on combat damage. This change is immediate, so make sure to download Quest Images to get the new pictures.
+
 ---------
 New Cards
 ---------
@@ -65,6 +68,7 @@ It may take a few days/weeks before these new card pictures become available for
 
 - Born of the Gods cards -
 It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
+
 There is a known issue with the timing of Leaves the Battlefield triggers and multiple permanents Leaving the Battlefield. As an example, when Blood Artist died at the same time as a lot of other creatures due to a Wrath of God, the Blood Artist should trigger for every creature but does not do so.
 
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
