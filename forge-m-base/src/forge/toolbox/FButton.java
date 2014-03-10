@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
@@ -12,7 +13,9 @@ import forge.assets.FSkinImage;
 
 public class FButton extends FDisplayObject {
     private static final int insetX = 25;
-    private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final Color DISABLED_COMPOSITE = new Color(1, 1, 1, 0.25f);
+    private static final FSkinColor DISABLED_FORE_COLOR = FORE_COLOR.alphaColor(DISABLED_COMPOSITE.a);
 
     private FSkinImage imgL, imgM, imgR;
     private String text;
@@ -126,6 +129,13 @@ public class FButton extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
 
+        FSkinColor foreColor = FORE_COLOR;
+        boolean disabled = !isEnabled();
+        if (disabled) {
+            g.setImageTint(DISABLED_COMPOSITE);
+            foreColor = DISABLED_FORE_COLOR;
+        }
+
         if (w > 2 * h) {
             g.drawImage(imgL, 0, 0, h, h);
             g.drawImage(imgM, h, 0, w - (2 * h), h);
@@ -136,6 +146,11 @@ public class FButton extends FDisplayObject {
             g.drawImage(imgL, 0, 0, buttonWidth, h);
             g.drawImage(imgR, buttonWidth, 0, w - buttonWidth, h);
         }
+
+        if (disabled) {
+            g.clearImageTint();
+        }
+
         if (!StringUtils.isEmpty(text)) {
             g.drawText(text, font, foreColor, insetX, 0, w - 2 * insetX, h, false, HAlignment.CENTER, true);
         }

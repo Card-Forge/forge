@@ -547,6 +547,13 @@ public class Forge implements ApplicationListener {
             batch.begin();
         }
 
+        public void setImageTint(Color color) {
+            batch.setColor(color);
+        }
+        public void clearImageTint() {
+            batch.setColor(Color.WHITE);
+        }
+
         public void drawImage(FImage image, float x, float y, float w, float h) {
             image.draw(this, x, y, w, h);
         }
