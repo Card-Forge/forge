@@ -37,7 +37,7 @@ public class VField extends VZoneDisplay {
         return cardPanel;
     }
 
-    private void updateCard(final Card card) {
+    public void updateCard(final Card card) {
         final FCardPanel toPanel = getCardPanel(card.getUniqueNumber());
         if (toPanel == null) { return; }
 

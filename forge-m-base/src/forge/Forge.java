@@ -289,26 +289,6 @@ public class Forge implements ApplicationListener {
             }
         }
 
-        public void startRotateTransform(float axisX, float axisY, float degrees) {
-            batch.end(); //must end batch then restart after adjusting transform matrix
-
-            axisX = adjustX(axisX);
-            axisY = adjustY(axisY, 0);
-
-            batch.getTransformMatrix().rotate(axisX, axisY, 0, degrees);
-            shapeRenderer.getTransformMatrix().rotate(axisX, axisY, 0, degrees);
-
-            batch.begin();
-        }
-        public void endTransform() {
-            batch.end(); //must end batch then restart after adjusting transform matrix
-
-            batch.getTransformMatrix().idt();
-            shapeRenderer.getTransformMatrix().idt();
-
-            batch.begin();
-        }
-
         public void draw(FDisplayObject displayObj) {
             if (displayObj.getWidth() <= 0 || displayObj.getHeight() <= 0) {
                 return;
@@ -575,6 +555,10 @@ public class Forge implements ApplicationListener {
         }
         public void drawImage(TextureRegion image, float x, float y, float w, float h) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        }
+
+        public void drawRotatedImage(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {
+            batch.draw(image, adjustX(x), adjustY(y, h), originX - x, h - (originY - y), w, h, 1, 1, rotation, 0, 0, image.getWidth(), image.getHeight(), false, false);
         }
 
         public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {

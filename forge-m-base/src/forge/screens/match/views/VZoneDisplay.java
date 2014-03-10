@@ -86,10 +86,6 @@ public class VZoneDisplay extends FScrollPane {
         cardPanels.clear();
     }
 
-    public void updateSingleCard(Card card) {
-        
-    }
-
     @Override
     protected void doLayout(float width, float height) {
         float x = 0;

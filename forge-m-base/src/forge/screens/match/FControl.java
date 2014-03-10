@@ -326,7 +326,7 @@ public class FControl {
     public static void updateSingleCard(Card c) {
         Zone zone = c.getZone();
         if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
-            getPlayerPanel(zone.getPlayer()).getField().updateSingleCard(c);
+            getPlayerPanel(zone.getPlayer()).getField().updateCard(c);
         }
     }
 

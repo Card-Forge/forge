@@ -3,12 +3,14 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import forge.Forge.Graphics;
 import forge.assets.ImageCache;
 import forge.game.card.Card;
 
 public class FCardPanel extends FDisplayObject {
-    public static final float TAPPED_ANGLE = 90;
+    public static final float TAPPED_ANGLE = -90;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float PADDING = 2; //scale to leave vertical space between
 
@@ -75,14 +77,13 @@ public class FCardPanel extends FDisplayObject {
             w = h / ASPECT_RATIO;
         }
 
+        Texture image = ImageCache.getImage(card);
         if (tapped) {
-            //g.startRotateTransform(0, 0, tappedAngle);
+            float edgeOffset = w / 2f;
+            g.drawRotatedImage(image, x, y, w, h, x + edgeOffset, y + h - edgeOffset, tappedAngle);
         }
-
-        g.drawImage(ImageCache.getImage(card), x, y, w, h);
-
-        if (tapped) {
-            //g.endTransform();
+        else {
+            g.drawImage(image, x, y, w, h);
         }
     }
 }
