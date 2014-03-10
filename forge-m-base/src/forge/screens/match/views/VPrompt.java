@@ -18,6 +18,7 @@ import forge.utils.Utils;
 public class VPrompt extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
+    public static final float PADDING = 2;
 
     private static final FSkinColor backColor = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
@@ -86,8 +87,9 @@ public class VPrompt extends FContainer {
 
         g.fillRect(backColor, 0, 0, w, h);
         if (!StringUtils.isEmpty(message)) {
-            g.drawText(message, font, foreColor, BTN_WIDTH, 0, w - 2 * BTN_WIDTH, h,
-                    true, HAlignment.CENTER, true);
+            float x = BTN_WIDTH + PADDING;
+            float y = PADDING;
+            g.drawText(message, font, foreColor, x, y, w - 2 * x, h - 2 * y, true, HAlignment.CENTER, true);
         }
     }
 }
