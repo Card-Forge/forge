@@ -491,6 +491,7 @@ public class PlayerControllerForTests extends PlayerController {
     private void prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
+            sa.setTargetingPlayer(targetingPlayer);
             targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
             // this code is no longer possible!

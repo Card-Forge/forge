@@ -65,6 +65,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private String stackDescription = "";
     private ManaCost multiKickerManaCost = null;
     private Player activatingPlayer = null;
+    private Player targetingPlayer = null;
 
     private boolean basicLandAbility; // granted by basic land type
 
@@ -261,6 +262,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (this.subAbility != null) {
             this.subAbility.setActivatingPlayer(player);
         }
+    }
+
+    /**
+     * @return the targetingPlayer
+     */
+    public Player getTargetingPlayer() {
+        return targetingPlayer;
+    }
+
+    /**
+     * @param targetingPlayer the targetingPlayer to set
+     */
+    public void setTargetingPlayer(Player targetingPlayer) {
+        this.targetingPlayer = targetingPlayer;
     }
 
     /**
@@ -1029,6 +1044,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     if (!c.sharesCardTypeWith(crd)) {
                         return false;
                     }
+                }
+            }
+            if (hasParam("TargetingPlayerControls") && entity instanceof Card) {
+                final Card c = (Card) entity;
+                if (!c.getController().equals(targetingPlayer)) {
+                    return false;
                 }
             }
 

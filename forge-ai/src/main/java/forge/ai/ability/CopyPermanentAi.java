@@ -53,6 +53,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             sa.resetTargets();
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+                sa.setTargetingPlayer(targetingPlayer);
                 return targetingPlayer.getController().chooseTargetsFor(sa);
             }
             List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);

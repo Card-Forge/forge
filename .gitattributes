@@ -4249,6 +4249,7 @@ forge-gui/res/cardsfolder/e/eureka.txt -text
 forge-gui/res/cardsfolder/e/evacuation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/evanescent_intellect.txt -text
 forge-gui/res/cardsfolder/e/evangel_of_heliod.txt -text
+forge-gui/res/cardsfolder/e/evangelize.txt -text
 forge-gui/res/cardsfolder/e/evaporate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/evasive_action.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/even_the_odds.txt svneol=native#text/plain

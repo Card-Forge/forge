@@ -6,8 +6,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 import java.util.Random;
 

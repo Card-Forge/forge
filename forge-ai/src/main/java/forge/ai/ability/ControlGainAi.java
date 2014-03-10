@@ -18,6 +18,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -32,7 +34,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +89,11 @@ public class ControlGainAi extends SpellAbilityAi {
             return true;
         } else {
             sa.resetTargets();
+            if (sa.hasParam("TargetingPlayer")) {
+                Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
+                sa.setTargetingPlayer(targetingPlayer);
+                return targetingPlayer.getController().chooseTargetsFor(sa);
+            }
             if (tgt.canOnlyTgtOpponent()) {
                 if (!opp.canBeTargetedBy(sa)) {
                     return false;
@@ -189,7 +198,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 return true;
             }
         } else {
-            if(!this.canPlayAI(ai, sa) && mandatory) {
+            if(sa.hasParam("TargetingPlayer") || (!this.canPlayAI(ai, sa) && mandatory)) {
                 List<Card> list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
                     return false;
@@ -225,4 +234,14 @@ public class ControlGainAi extends SpellAbilityAi {
 
         return true;
     } // pumpDrawbackAI()
+
+    @Override
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+        final List<Card> cards = new ArrayList<Card>();
+        for (Player p : options) {
+            cards.addAll(p.getCreaturesInPlay());
+        }
+        Card chosen = ComputerUtilCard.getBestCreatureAI(cards);
+        return chosen != null ? chosen.getController() : Iterables.getFirst(options, null);
+    }
 }

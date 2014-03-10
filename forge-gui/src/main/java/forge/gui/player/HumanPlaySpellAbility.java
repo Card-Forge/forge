@@ -149,7 +149,7 @@ public class HumanPlaySpellAbility {
                 } else {
                     targetingPlayer = ability.getActivatingPlayer();
                 }
-
+                currentAbility.setTargetingPlayer(targetingPlayer);
                 if (!targetingPlayer.getController().chooseTargetsFor(currentAbility))
                     return false;
             }
