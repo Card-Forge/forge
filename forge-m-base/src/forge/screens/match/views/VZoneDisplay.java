@@ -40,14 +40,51 @@ public class VZoneDisplay extends FScrollPane {
     private final Runnable updateRoutine = new Runnable() {
         @Override
         public void run() {
-            clear();
-            cardPanels.clear();
-            for (Card card : player.getZone(zoneType).getCards()) {
-                cardPanels.add(add(new ZoneCardPanel(card)));
-            }
-            revalidate();
+            refreshCardPanels(player.getZone(zoneType).getCards());
         }
     };
+
+    protected void refreshCardPanels(List<Card> model) {
+        clear();
+        for (Card card : model) {
+            addCard(card);
+        }
+        revalidate();
+    }
+
+    public ZoneCardPanel addCard(final Card card) {
+        ZoneCardPanel cardPanel = add(new ZoneCardPanel(card));
+        cardPanels.add(cardPanel);
+        return cardPanel;
+    }
+
+    public final FCardPanel getCardPanel(final int gameCardID) {
+        for (final FCardPanel panel : cardPanels) {
+            if (panel.getCard().getUniqueNumber() == gameCardID) {
+                return panel;
+            }
+        }
+        return null;
+    }
+
+    public final void removeCardPanel(final FCardPanel fromPanel) {
+        FThreads.assertExecutedByEdt(true);
+        /*if (CardPanelContainer.this.getMouseDragPanel() != null) {
+            CardPanel.getDragAnimationPanel().setVisible(false);
+            CardPanel.getDragAnimationPanel().repaint();
+            CardPanelContainer.this.getCardPanels().remove(CardPanel.getDragAnimationPanel());
+            CardPanelContainer.this.remove(CardPanel.getDragAnimationPanel());
+            CardPanelContainer.this.setMouseDragPanel(null);
+        }*/
+        cardPanels.remove(fromPanel);
+        remove(fromPanel);
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        cardPanels.clear();
+    }
 
     public void updateSingleCard(Card card) {
         
@@ -66,7 +103,7 @@ public class VZoneDisplay extends FScrollPane {
         }
     }
 
-    private class ZoneCardPanel extends FCardPanel {
+    protected class ZoneCardPanel extends FCardPanel {
         private ZoneCardPanel(Card card0) {
             super(card0);
         }

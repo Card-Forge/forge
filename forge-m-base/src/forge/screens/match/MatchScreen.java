@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VGameDetails;
@@ -76,6 +77,13 @@ public class MatchScreen extends FScreen {
 
     public Map<Player, VPlayerPanel> getPlayerPanels() {
         return playerPanels;
+    }
+
+    @Override
+    public boolean onClose(boolean canCancel) {
+        FModel.getPreferences().writeMatchPreferences();
+        FModel.getPreferences().save();
+        return true;
     }
 
     @Override

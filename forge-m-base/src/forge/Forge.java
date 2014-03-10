@@ -90,6 +90,9 @@ public class Forge implements ApplicationListener {
 
     public static void back() {
         if (screens.size() < 2) { return; } //don't allow going back from initial screen
+        if (!currentScreen.onClose(true)) {
+            return;
+        }
         screens.pop();
         setCurrentScreen(screens.lastElement());
     }
@@ -104,6 +107,7 @@ public class Forge implements ApplicationListener {
     private static void setCurrentScreen(FScreen screen0) {
         currentScreen = screen0;
         currentScreen.setSize(screenWidth, screenHeight);
+        currentScreen.onOpen();
     }
 
     @Override
@@ -146,7 +150,10 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void dispose () {
-        currentScreen = null;
+        if (currentScreen != null) {
+            currentScreen.onClose(false);
+            currentScreen = null;
+        }
         screens.clear();
         batch.dispose();
         shapeRenderer.dispose();
@@ -280,6 +287,26 @@ public class Forge implements ApplicationListener {
             else {
                 failedClipCount--;
             }
+        }
+
+        public void startRotateTransform(float axisX, float axisY, float degrees) {
+            batch.end(); //must end batch then restart after adjusting transform matrix
+
+            axisX = adjustX(axisX);
+            axisY = adjustY(axisY, 0);
+
+            batch.getTransformMatrix().rotate(axisX, axisY, 0, degrees);
+            shapeRenderer.getTransformMatrix().rotate(axisX, axisY, 0, degrees);
+
+            batch.begin();
+        }
+        public void endTransform() {
+            batch.end(); //must end batch then restart after adjusting transform matrix
+
+            batch.getTransformMatrix().idt();
+            shapeRenderer.getTransformMatrix().idt();
+
+            batch.begin();
         }
 
         public void draw(FDisplayObject displayObj) {

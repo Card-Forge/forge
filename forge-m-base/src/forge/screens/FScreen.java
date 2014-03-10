@@ -61,7 +61,7 @@ public abstract class FScreen extends FContainer {
         return true;
     }
 
-    public boolean onClose() {
+    public boolean onClose(boolean canCancel) {
         return true;
     }
 

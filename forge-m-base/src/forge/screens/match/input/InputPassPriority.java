@@ -34,7 +34,6 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-581477682214137181L</code>. */
     private static final long serialVersionUID = -581477682214137181L;
     private final Player player;
-    
     private SpellAbility chosenSa;
     
     public InputPassPriority(Player human) {
@@ -55,8 +54,9 @@ public class InputPassPriority extends InputSyncronizedBase {
         stop();
     }
     
-    public SpellAbility getChosenSa() { return chosenSa; }
-
+    public SpellAbility getChosenSa() {
+        return chosenSa;
+    }
 
     @Override
     protected void onCardSelected(final Card card) {

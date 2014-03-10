@@ -1,14 +1,22 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.Forge.Graphics;
 import forge.assets.ImageCache;
 import forge.game.card.Card;
 
 public class FCardPanel extends FDisplayObject {
+    public static final float TAPPED_ANGLE = 90;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float PADDING = 2; //scale to leave vertical space between
 
-    private final Card card;
+    private Card card;
+    private FCardPanel attachedToPanel;
+    private List<FCardPanel> attachedPanels = new ArrayList<FCardPanel>();
+    private boolean tapped;
+    private float tappedAngle = 0;
     private boolean highlighted;
 
     public FCardPanel(Card card0) {
@@ -18,12 +26,43 @@ public class FCardPanel extends FDisplayObject {
     public Card getCard() {
         return card;
     }
-    
+    public void setCard(Card card0) {
+        card = card0;
+    }
+
     public boolean isHighlighted() {
         return highlighted;
     }
     public void setHighlighted(boolean highlighted0) {
         highlighted = highlighted0;
+    }
+
+    public FCardPanel getAttachedToPanel() {
+        return attachedToPanel;
+    }
+    public void setAttachedToPanel(final FCardPanel attachedToPanel0) {
+        attachedToPanel = attachedToPanel0;
+    }
+
+    public List<FCardPanel> getAttachedPanels() {
+        return attachedPanels;
+    }
+    public void setAttachedPanels(final List<FCardPanel> attachedPanels0) {
+        attachedPanels = attachedPanels0;
+    }
+
+    public boolean isTapped() {
+        return tapped;
+    }
+    public void setTapped(final boolean tapped0) {
+        tapped = tapped0;
+    }
+
+    public float getTappedAngle() {
+        return tappedAngle;
+    }
+    public void setTappedAngle(float tappedAngle0) {
+        tappedAngle = tappedAngle0;
     }
 
     @Override
@@ -36,6 +75,14 @@ public class FCardPanel extends FDisplayObject {
             w = h / ASPECT_RATIO;
         }
 
+        if (tapped) {
+            //g.startRotateTransform(0, 0, tappedAngle);
+        }
+
         g.drawImage(ImageCache.getImage(card), x, y, w, h);
+
+        if (tapped) {
+            //g.endTransform();
+        }
     }
 }
