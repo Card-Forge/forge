@@ -10,14 +10,14 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
 import forge.screens.match.FControl;
-import forge.screens.match.input.ButtonUtil;
 import forge.toolbox.FButton;
+import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
 import forge.utils.Utils;
 
 public class VPrompt extends FContainer {
-    public static final float BTN_WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    public static final float BTN_WIDTH = HEIGHT * 1.5f;
 
     private static final FSkinColor backColor = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
@@ -41,6 +41,8 @@ public class VPrompt extends FContainer {
         }));
         btnOk.setSize(BTN_WIDTH, HEIGHT);
         btnCancel.setSize(BTN_WIDTH, HEIGHT);
+        btnOk.setCorner(Corner.BottomLeft);
+        btnCancel.setCorner(Corner.BottomRight);
     }
 
     public FButton getBtnOk() {

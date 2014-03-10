@@ -12,7 +12,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 
 public class FButton extends FDisplayObject {
-    private static final int insetX = 25;
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final Color DISABLED_COMPOSITE = new Color(1, 1, 1, 0.25f);
     private static final FSkinColor DISABLED_FORE_COLOR = FORE_COLOR.alphaColor(DISABLED_COMPOSITE.a);
@@ -22,6 +21,13 @@ public class FButton extends FDisplayObject {
     private FSkinFont font;
     private boolean toggled = false;
     private Runnable command;
+    
+    public enum Corner {
+        None,
+        BottomLeft,
+        BottomRight
+    }
+    private Corner corner = Corner.None;
 
     /**
      * Instantiates a new FButton.
@@ -96,6 +102,13 @@ public class FButton extends FDisplayObject {
         }
     }
 
+    public Corner getCorner() {
+        return corner;
+    }
+    public void setCorner(Corner corner0) {
+        corner = corner0;
+    }
+
     public void setCommand(Runnable command0) {
         command = command0;
     }
@@ -129,6 +142,11 @@ public class FButton extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
 
+        float cornerButtonWidth = w / 2;
+        float cornerButtonHeight = h * 1.5f;
+        float cornerTextOffsetX = cornerButtonWidth / 2;
+        float cornerTextOffsetY = (cornerButtonHeight - h) / 2;
+
         FSkinColor foreColor = FORE_COLOR;
         boolean disabled = !isEnabled();
         if (disabled) {
@@ -136,15 +154,31 @@ public class FButton extends FDisplayObject {
             foreColor = DISABLED_FORE_COLOR;
         }
 
-        if (w > 2 * h) {
-            g.drawImage(imgL, 0, 0, h, h);
-            g.drawImage(imgM, h, 0, w - (2 * h), h);
-            g.drawImage(imgR, w - h, 0, h, h);
-        }
-        else {
-            float buttonWidth = w / 2;
-            g.drawImage(imgL, 0, 0, buttonWidth, h);
-            g.drawImage(imgR, buttonWidth, 0, w - buttonWidth, h);
+        //determine images to draw and text alignment based on which corner button is in (if any)
+        switch (corner) {
+        case None:
+            if (w > 2 * h) {
+                g.drawImage(imgL, 0, 0, h, h);
+                g.drawImage(imgM, h, 0, w - (2 * h), h);
+                g.drawImage(imgR, w - h, 0, h, h);
+            }
+            else {
+                g.drawImage(imgL, 0, 0, cornerButtonWidth, h);
+                g.drawImage(imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
+            }
+            break;
+        case BottomLeft:
+            g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
+            g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+            w -= cornerTextOffsetX;
+            h += cornerTextOffsetY;
+            break;
+        case BottomRight:
+            g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+            g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+            w += cornerTextOffsetX;
+            h += cornerTextOffsetY;
+            break;
         }
 
         if (disabled) {
@@ -152,7 +186,7 @@ public class FButton extends FDisplayObject {
         }
 
         if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, foreColor, insetX, 0, w - 2 * insetX, h, false, HAlignment.CENTER, true);
+            g.drawText(text, font, foreColor, 0, 0, w, h, false, HAlignment.CENTER, true);
         }
     }
 }
