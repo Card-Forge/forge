@@ -66,7 +66,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         FControl.getView().getCardZoom().show("Select a spell/ability", card, orderedCardOptions, new ZoomController<SpellAbility>() {
             @Override
             public List<SpellAbility> getOptions(Card card) {
-                return card.getAllPossibleAbilities(player, false);
+                return card.getAllPossibleAbilities(player, true);
             }
 
             @Override

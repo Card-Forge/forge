@@ -25,6 +25,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.screens.match.FControl;
+import forge.toolbox.VCardZoom.ZoomController;
 
 /**
  * <p>
@@ -77,7 +78,20 @@ public abstract class InputBase implements java.io.Serializable, Input {
         onCardSelected(card, orderedCardOptions);
     }
 
-    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {}
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
+        FControl.getView().getCardZoom().show("", card, orderedCardOptions, new ZoomController<SpellAbility>() {
+            @Override
+            public List<SpellAbility> getOptions(Card card) {
+                return null;
+            }
+
+            @Override
+            public boolean selectOption(Card card, SpellAbility option) {
+                return true;
+            }
+        });
+    }
+
     protected void onPlayerSelected(final Player p) {}
     protected void onCancel() {}
     protected void onOk() {}

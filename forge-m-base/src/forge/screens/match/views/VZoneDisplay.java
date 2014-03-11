@@ -89,6 +89,10 @@ public class VZoneDisplay extends FScrollPane {
         cardPanels.clear();
     }
 
+    protected void startLayout() {
+        orderedCards.clear();
+    }
+
     protected final float layoutCardPanel(FCardPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
         int count = addCards(cardPanel, x, y, cardWidth, cardHeight);
         return cardWidth + (count - 1) * cardWidth * CARD_STACK_OFFSET;
@@ -110,7 +114,7 @@ public class VZoneDisplay extends FScrollPane {
 
     @Override
     protected void doLayout(float width, float height) {
-        orderedCards.clear();
+        startLayout();
 
         float x = 0;
         float y = 0;

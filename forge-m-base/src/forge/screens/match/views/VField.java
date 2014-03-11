@@ -99,6 +99,8 @@ public class VField extends VZoneDisplay {
 
     @Override
     protected void doLayout(float width, float height) {
+        startLayout();
+
         List<FCardPanel> creatures = new ArrayList<FCardPanel>();
         List<FCardPanel> lands = new ArrayList<FCardPanel>();
         List<FCardPanel> otherPermanents = new ArrayList<FCardPanel>();

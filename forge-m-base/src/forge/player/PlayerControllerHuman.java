@@ -87,33 +87,13 @@ public class PlayerControllerHuman extends PlayerController {
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
-        if (triggerEvent == null) {
-        	if (abilities.isEmpty()) {
-                return null;
-            }
-            if (abilities.size() == 1) {
-                return abilities.get(0);
-            }
-        	return GuiChoose.oneOrNone("Choose ability to play", abilities);
-        }
-
     	if (abilities.isEmpty()) {
             return null;
         }
-        if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
-        	if (abilities.get(0).canPlay()) {
-        		return abilities.get(0); //only return ability if it's playable, otherwise return null
-        	}
-        	return null;
+        if (abilities.size() == 1) {
+            return abilities.get(0);
         }
-
-        for (final SpellAbility ab : abilities) {
-            if (ab.canPlay()) {
-                FControl.getInputProxy().selectAbility(ab);
-                return ab;
-            }
-        }
-    	return null; //TODO: delay ability until choice made
+    	return GuiChoose.oneOrNone("Choose ability to play", abilities);
     }
 
     /* (non-Javadoc)
