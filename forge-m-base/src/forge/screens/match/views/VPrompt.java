@@ -9,7 +9,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
-import forge.screens.match.FControl;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
@@ -27,19 +26,9 @@ public class VPrompt extends FContainer {
     private final FButton btnOk, btnCancel;
     private String message;
 
-    public VPrompt() {
-        btnOk = add(new FButton("", new Runnable() {
-            @Override
-            public void run() {
-                FControl.getInputProxy().selectButtonOK();
-            }
-        }));
-        btnCancel = add(new FButton("", new Runnable() {
-            @Override
-            public void run() {
-                FControl.getInputProxy().selectButtonCancel();
-            }
-        }));
+    public VPrompt(String okText, String cancelText, Runnable okCommand, Runnable cancelCommand) {
+        btnOk = add(new FButton(okText, okCommand));
+        btnCancel = add(new FButton(cancelText, cancelCommand));
         btnOk.setSize(BTN_WIDTH, HEIGHT);
         btnCancel.setSize(BTN_WIDTH, HEIGHT);
         btnOk.setCorner(Corner.BottomLeft);

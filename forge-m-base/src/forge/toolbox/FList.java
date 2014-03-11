@@ -80,6 +80,18 @@ public class FList<E> extends FScrollPane {
         groups.clear();
     }
 
+    public boolean isEmpty() {
+        return groups.isEmpty();
+    }
+
+    public int getCount() {
+        int count = 0;
+        for (ListGroup group : groups) {
+            count += group.items.size();
+        }
+        return count;
+    }
+
     public void setListItemRenderer(ListItemRenderer<E> renderer0) {
         renderer = renderer0;
     }

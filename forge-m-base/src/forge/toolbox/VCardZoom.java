@@ -9,13 +9,18 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.card.Card;
+import forge.screens.match.views.VPrompt;
 import forge.toolbox.FList.ListItemRenderer;
 
 public class VCardZoom extends FOverlay {
-    private final static FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.9f);
+    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.9f);
+    private static final float LIST_OPTION_HEIGHT = VPrompt.HEIGHT;
+    private static final float CARD_DETAILS_HEIGHT = VPrompt.HEIGHT * 2f;
 
     private final CardSlider slider;
     private final FList<Object> optionList;
+    private boolean optionListExpanded;
+    private final VPrompt prompt;
     private List<Card> orderedCards;
     private int selectedIndex = -1;
 
@@ -47,7 +52,7 @@ public class VCardZoom extends FOverlay {
 
             @Override
             public float getItemHeight() {
-                return optionList.getHeight();
+                return LIST_OPTION_HEIGHT;
             }
 
             @Override
@@ -59,6 +64,22 @@ public class VCardZoom extends FOverlay {
                 g.endClip();
             }
         });
+        prompt = add(new VPrompt("Back", "More",
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        hide();
+                    }
+                },
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        optionListExpanded = !optionListExpanded;
+                        prompt.getBtnCancel().setText(optionListExpanded ? "Less" : "More");
+                        revalidate();
+                    }
+                }));
+        prompt.getBtnCancel().setEnabled(false);
     }
 
     public static abstract class ZoomController<T> {
@@ -66,11 +87,12 @@ public class VCardZoom extends FOverlay {
         public abstract boolean selectOption(Card card, T option);
     }
 
-    public <T> void show(final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {
+    public <T> void show(String message0, final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {
         if (orderedCards0.isEmpty()) {
             return;
         }
 
+        prompt.setMessage(message0);
         orderedCards = orderedCards0;
         controller = controller0;
 
@@ -84,10 +106,14 @@ public class VCardZoom extends FOverlay {
 
     public void hide() {
         if (isVisible()) {
-            orderedCards = null; //clear when hidden
+            orderedCards = null; //reset fields when hidden
             controller = null;
             selectedIndex = -1;
             optionList.clear();
+            optionListExpanded = false;
+            prompt.setMessage(null);
+            prompt.getBtnCancel().setText("More");
+            prompt.getBtnCancel().setEnabled(false);
             setVisible(false);
         }
     }
@@ -119,15 +145,24 @@ public class VCardZoom extends FOverlay {
             }
         }
         optionList.revalidate();
+        optionListExpanded = false;
+        prompt.getBtnCancel().setText("More");
+        prompt.getBtnCancel().setEnabled(optionList.getCount() > 1);
     }
 
     @Override
     protected void doLayout(float width, float height) {
-        float y = height * 0.2f;
-        float h = height * 0.7f;
-        slider.setBounds(0, y, width, h);
-        y += h;
-        optionList.setBounds(0, y, width, height - y);
+        float y = height - VPrompt.HEIGHT;
+        prompt.setBounds(0, y, width, VPrompt.HEIGHT);
+        
+        float optionListHeight = LIST_OPTION_HEIGHT * (optionListExpanded ? optionList.getCount() : 1);
+        if (optionListHeight > y) {
+            optionListHeight = y;
+        }
+        y -= optionListHeight;
+        optionList.setBounds(0, y, width, optionListHeight);
+
+        slider.setBounds(0, CARD_DETAILS_HEIGHT, width, height - VPrompt.HEIGHT - LIST_OPTION_HEIGHT - CARD_DETAILS_HEIGHT);
     }
 
     private class CardSlider extends FContainer {

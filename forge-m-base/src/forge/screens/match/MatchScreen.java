@@ -43,7 +43,19 @@ public class MatchScreen extends FScreen {
         topPlayerPanel.setFlipped(true);
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
-        prompt = add(new VPrompt());
+        prompt = add(new VPrompt("", "",
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        FControl.getInputProxy().selectButtonOK();
+                    }
+                },
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        FControl.getInputProxy().selectButtonCancel();
+                    }
+                }));
         cardZoom = add(new VCardZoom());
 
         log = add(new VLog());
@@ -144,6 +156,6 @@ public class MatchScreen extends FScreen {
         stack.setBounds(0, startY + topPlayerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
-        cardZoom.setBounds(0, 0, width, height - VPrompt.HEIGHT);
+        cardZoom.setBounds(0, 0, width, height);
     }
 }
