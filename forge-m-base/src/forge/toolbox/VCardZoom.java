@@ -2,16 +2,63 @@ package forge.toolbox;
 
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
+import forge.Forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinColor.Colors;
 import forge.game.card.Card;
+import forge.toolbox.FList.ListItemRenderer;
 
 public class VCardZoom extends FOverlay {
+    private final static FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.9f);
+
     private final CardSlider slider;
+    private final FList<Object> optionList;
     private List<Card> orderedCards;
-    private int selectedIndex;
-    private ZoomController<?> controller;
+    private int selectedIndex = -1;
+
+    @SuppressWarnings("rawtypes")
+    private ZoomController controller;
 
     public VCardZoom() {
         slider = add(new CardSlider());
+        optionList = add(new FList<Object>() {
+            @Override
+            protected void drawBackground(Graphics g) {
+                g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+            }
+
+            @Override
+            protected void drawOverlay(Graphics g) { //draw top border
+                g.drawLine(1, FList.LINE_COLOR, 0, 0, getWidth(), 0);
+            }
+        });
+        optionList.setListItemRenderer(new ListItemRenderer<Object>() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public boolean tap(Object value, float x, float y, int count) {
+                if (controller.selectOption(orderedCards.get(selectedIndex), value)) {
+                    hide();
+                }
+                return true;
+            }
+
+            @Override
+            public float getItemHeight() {
+                return optionList.getHeight();
+            }
+
+            @Override
+            public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                float x = width * FList.INSETS_FACTOR;
+                float y = 3;
+                g.startClip(0, 0, width, height);
+                g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.LEFT, true);
+                g.endClip();
+            }
+        });
     }
 
     public static abstract class ZoomController<T> {
@@ -19,7 +66,7 @@ public class VCardZoom extends FOverlay {
         public abstract boolean selectOption(Card card, T option);
     }
 
-    public void show(final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {
+    public <T> void show(final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {
         if (orderedCards0.isEmpty()) {
             return;
         }
@@ -39,6 +86,8 @@ public class VCardZoom extends FOverlay {
         if (isVisible()) {
             orderedCards = null; //clear when hidden
             controller = null;
+            selectedIndex = -1;
+            optionList.clear();
             setVisible(false);
         }
     }
@@ -58,6 +107,18 @@ public class VCardZoom extends FOverlay {
         slider.frontPanel.setCard(selectedCard);
         slider.leftPanel.setCard(selectedIndex > 0 ? orderedCards.get(selectedIndex - 1) : null);
         slider.rightPanel.setCard(selectedIndex < orderedCards.size() - 1 ? orderedCards.get(selectedIndex + 1) : null);
+
+        optionList.clear();
+        List<?> options = controller.getOptions(selectedCard);
+        if (options == null || options.isEmpty()) {
+            
+        }
+        else {
+            for (Object option : options) {
+                optionList.addItem(option);
+            }
+        }
+        optionList.revalidate();
     }
 
     @Override
@@ -65,6 +126,8 @@ public class VCardZoom extends FOverlay {
         float y = height * 0.2f;
         float h = height * 0.7f;
         slider.setBounds(0, y, width, h);
+        y += h;
+        optionList.setBounds(0, y, width, height - y);
     }
 
     private class CardSlider extends FContainer {
