@@ -25,6 +25,7 @@ import forge.game.spellability.SpellAbility;
 import forge.screens.match.FControl;
 import forge.toolbox.FOptionPane;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
@@ -133,12 +134,12 @@ public class InputProxy implements Observer {
      * 
      * @param card
      *            a {@link forge.game.card.Card} object.
-     * @param triggerEvent
+     * @param orderedCardOptions
      */
-    public final void selectCard(final Card card) {
+    public final void selectCard(Card card, List<Card> orderedCardOptions) {
         Input inp = getInput();
         if (inp != null) {
-            inp.selectCard(card);
+            inp.selectCard(card, orderedCardOptions);
         }
     }
 

@@ -17,6 +17,8 @@
  */
 package forge.screens.match.input;
 
+import java.util.List;
+
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -97,7 +99,7 @@ public class InputBlock extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void onCardSelected(final Card card) {
+    public final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         if (/*triggerEvent.getButton() == 3 &&*/ card.getController() == defender) {
             combat.removeFromCombat(card);
             FControl.fireEvent(new UiEventBlockerAssigned(card, (Card)null));

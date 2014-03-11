@@ -111,7 +111,7 @@ public class Forge implements ApplicationListener {
     }
 
     @Override
-    public void render () {
+    public void render() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
         FContainer screen = currentScreen;

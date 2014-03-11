@@ -12,6 +12,7 @@ import forge.screens.match.views.VLog;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
+import forge.toolbox.VCardZoom;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
@@ -27,6 +28,7 @@ public class MatchScreen extends FScreen {
     private final VStack stack;
     private final VPrompt prompt;
     private final VGameDetails gameDetails;
+    private final VCardZoom cardZoom;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
@@ -42,6 +44,7 @@ public class MatchScreen extends FScreen {
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
         prompt = add(new VPrompt());
+        cardZoom = add(new VCardZoom());
 
         log = add(new VLog());
         stack = add(new VStack());
@@ -53,6 +56,10 @@ public class MatchScreen extends FScreen {
 
     public VPrompt getPrompt() {
         return prompt;
+    }
+
+    public VCardZoom getCardZoom() {
+        return cardZoom;
     }
 
     public VStack getStack() {
@@ -137,5 +144,6 @@ public class MatchScreen extends FScreen {
         stack.setBounds(0, startY + topPlayerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+        cardZoom.setBounds(0, 0, width, height - VPrompt.HEIGHT);
     }
 }

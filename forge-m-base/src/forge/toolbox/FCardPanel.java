@@ -21,6 +21,9 @@ public class FCardPanel extends FDisplayObject {
     private float tappedAngle = 0;
     private boolean highlighted;
 
+    public FCardPanel() {
+        this(null);
+    }
     public FCardPanel(Card card0) {
         card = card0;
     }
@@ -69,6 +72,8 @@ public class FCardPanel extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        if (card == null) { return; }
+
         float x = PADDING;
         float y = PADDING;
         float w = getWidth() - 2 * PADDING;

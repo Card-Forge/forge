@@ -7,6 +7,7 @@ import forge.game.spellability.SpellAbility;
 import forge.screens.match.FControl;
 import forge.util.ThreadUtil;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputLockUI implements Input  {
@@ -57,7 +58,7 @@ public class InputLockUI implements Input  {
         FControl.showMessage(message);
     }
 
-    @Override public void selectCard(Card c) {}
+    @Override public void selectCard(final Card card, final List<Card> orderedCardOptions) {}
     @Override public void selectAbility(SpellAbility ab) {}
     @Override public void selectPlayer(Player player) {}
     @Override public void selectButtonOK() {}

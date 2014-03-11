@@ -252,4 +252,10 @@ public class FOptionPane extends FOverlay {
     public void setButtonEnabled(int index, boolean enabled) {
         buttons[index].setEnabled(enabled);
     }
+
+    @Override
+    protected void doLayout(float width, float height) {
+        // TODO Auto-generated method stub
+        
+    }
 }

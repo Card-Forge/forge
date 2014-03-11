@@ -2,23 +2,23 @@ package forge.toolbox;
 
 import java.util.Stack;
 
+import com.badlogic.gdx.math.Vector2;
+
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 
-public class FOverlay extends FContainer {
-    private static final FSkinColor BACKDROP_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
-    private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-    private static final float CORNER_RADIUS = 10;
+public abstract class FOverlay extends FContainer {
+    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
     private static final Stack<FOverlay> overlays = new Stack<FOverlay>();
 
     public FOverlay() {
+        super.setVisible(false); //hide by default
     }
 
     @Override
     public void drawBackground(Graphics g) {
-        g.fillRect(BACKDROP_COLOR, 0, 0, this.getWidth(), this.getHeight());
-        g.drawRoundRect(1, BORDER_COLOR, 0, 0, this.getWidth(), this.getHeight(), CORNER_RADIUS);
+        g.fillRect(BACK_COLOR, 0, 0, this.getWidth(), this.getHeight());
     }
 
     @Override
@@ -34,12 +34,49 @@ public class FOverlay extends FContainer {
         super.setVisible(visible0);
     }
 
-    public void setTitle(String title0) {
+    //override all gesture listeners to prevent passing to display objects behind it
+    @Override
+    public boolean press(float x, float y) {
+        return true;
     }
 
     @Override
-    protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
+    public boolean longPress(float x, float y) {
+        return true;
+    }
+
+    @Override
+    public boolean release(float x, float y) {
+        return true;
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        return true;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        return true;
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
+        return true;
+    }
+
+    @Override
+    public boolean panStop(float x, float y) {
+        return true;
+    }
+
+    @Override
+    public boolean zoom(float initialDistance, float distance) {
+        return true;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+        return true;
     }
 }

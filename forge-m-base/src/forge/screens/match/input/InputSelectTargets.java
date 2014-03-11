@@ -99,7 +99,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCardSelected(final Card card) {
+    protected final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return;
         }

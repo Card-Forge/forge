@@ -40,7 +40,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected void onCardSelected(final Card card) {
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         if (!card.hasCounters()) {
             return;
         }

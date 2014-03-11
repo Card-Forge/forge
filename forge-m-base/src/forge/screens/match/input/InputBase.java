@@ -17,6 +17,8 @@
  */
 package forge.screens.match.input;
 
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
@@ -70,12 +72,12 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public final void selectCard(final Card c) {
+    public final void selectCard(final Card card, final List<Card> orderedCardOptions) {
         if (isFinished()) { return; }
-        onCardSelected(c);
+        onCardSelected(card, orderedCardOptions);
     }
 
-    protected void onCardSelected(final Card c) {}
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {}
     protected void onPlayerSelected(final Player p) {}
     protected void onCancel() {}
     protected void onOk() {}

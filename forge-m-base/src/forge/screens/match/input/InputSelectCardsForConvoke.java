@@ -6,6 +6,7 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.Collection;
@@ -34,8 +35,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     }
 
     @Override
-    protected void onCardSelected(final Card card) {
-
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         boolean entityWasSelected = chosenCards.containsKey(card);
         if (entityWasSelected) {
             ImmutablePair<Byte, ManaCostShard> color = this.chosenCards.remove(card);

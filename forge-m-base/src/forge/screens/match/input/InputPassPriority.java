@@ -20,6 +20,9 @@ package forge.screens.match.input;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.screens.match.FControl;
+import forge.toolbox.VCardZoom.ZoomController;
+
 import java.util.List;
 
 /**
@@ -59,16 +62,21 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     @Override
-    protected void onCardSelected(final Card card) {
-    	List<SpellAbility> abilities = card.getAllPossibleAbilities(player, false);
-    	if (abilities.isEmpty()) {
-            flashIncorrectAction();
-            return;
-    	}
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
+        FControl.getView().getCardZoom().show(card, orderedCardOptions, new ZoomController<SpellAbility>() {
+            @Override
+            public List<SpellAbility> getOptions(Card card) {
+                return card.getAllPossibleAbilities(player, false);
+            }
 
-    	selectAbility(player.getController().getAbilityToPlay(abilities));
+            @Override
+            public boolean selectOption(Card card, SpellAbility option) {
+                selectAbility(option);
+                return true; //TODO: Avoid hiding card zoom when selecting mana abilities
+            }
+        });
     }
-    
+
     @Override
     public void selectAbility(final SpellAbility ab) {
     	if (ab != null) {

@@ -99,29 +99,38 @@ public class VField extends VZoneDisplay {
 
     @Override
     protected void doLayout(float width, float height) {
-        float x, y;
-        float x1 = 0;
-        float x2 = 0;
-        float y1 = 0;
-        float cardSize = height / 2;
-        float y2 = cardSize;
-        if (flipped) {
-            y1 = y2;
-            y2 = 0;
-        }
+        List<FCardPanel> creatures = new ArrayList<FCardPanel>();
+        List<FCardPanel> lands = new ArrayList<FCardPanel>();
+        List<FCardPanel> otherPermanents = new ArrayList<FCardPanel>();
 
-        for (FCardPanel cardPanel : cardPanels) {
+        for (FCardPanel cardPanel : getCardPanels()) {
             if (cardPanel.getCard().isCreature()) {
-                x = x1;
-                y = y1;
-                x1 += cardSize;
+                creatures.add(cardPanel);
+            }
+            else if (cardPanel.getCard().isLand()) {
+                lands.add(cardPanel);
             }
             else {
-                x = x2;
-                y = y2;
-                x2 += cardSize;
+                otherPermanents.add(cardPanel);
             }
-            cardPanel.setBounds(x, y, cardSize, cardSize);
+        }
+
+        float cardSize = height / 2;
+        float x = 0;
+        float y = flipped ? cardSize : 0;
+
+        for (FCardPanel cardPanel : creatures) {
+            x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
+        }
+
+        x = 0;
+        y = flipped ? 0 : cardSize;
+
+        for (FCardPanel cardPanel : lands) {
+            x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
+        }
+        for (FCardPanel cardPanel : otherPermanents) {
+            x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
         }
     }
 }

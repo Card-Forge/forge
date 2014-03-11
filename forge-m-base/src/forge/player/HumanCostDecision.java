@@ -712,12 +712,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 private static final long serialVersionUID = 8338626212893374798L;
 
                 @Override
-                protected void onCardSelected(Card c) {
+                protected void onCardSelected(final Card c, final List<Card> orderedCardOptions) {
                     Card firstCard = Iterables.getFirst(this.selected, null);
                     if (firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c)) {
                         return;
                     }
-                    super.onCardSelected(c);
+                    super.onCardSelected(c, orderedCardOptions);
                 }
             };
             inp.setMessage("Select " + Lang.nounWithAmount(num, "card" ) + " of same color to reveal.");
@@ -803,7 +803,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         @Override
-        protected void onCardSelected(Card c) {
+        protected void onCardSelected(final Card c, final List<Card> orderedCardOptions) {
             if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
                 return;
             }

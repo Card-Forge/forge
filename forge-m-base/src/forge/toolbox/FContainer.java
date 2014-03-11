@@ -67,8 +67,8 @@ public abstract class FContainer extends FDisplayObject {
     @Override
     public final void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
         if (isEnabled() && contains(screenToLocalX(screenX), screenToLocalY(screenY))) {
-            for (FDisplayObject child : children) {
-                child.buildTouchListeners(screenX, screenY, listeners);
+            for (int i = children.size() - 1; i >= 0; i--) {
+                children.get(i).buildTouchListeners(screenX, screenY, listeners);
             }
             listeners.add(this);
         }

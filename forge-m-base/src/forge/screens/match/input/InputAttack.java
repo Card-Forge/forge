@@ -122,7 +122,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    protected final void onCardSelected(final Card card) {
+    protected final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         final List<Card> att = combat.getAttackers();
         if (/*triggerEvent.getButton() == 3 && */att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
                 && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {

@@ -47,7 +47,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     @Override
-    protected void onCardSelected(final Card card) {
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         if (card.getManaAbility().isEmpty()) {
             flashIncorrectAction();
             return;

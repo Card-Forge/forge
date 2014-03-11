@@ -24,7 +24,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
  
     @Override
-    protected void onCardSelected(final Card c) {
+    protected void onCardSelected(final Card c, final List<Card> orderedCardOptions) {
         if (!selectEntity(c)) {
             return;
         }
