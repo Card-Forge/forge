@@ -17,6 +17,7 @@ public class TapEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final boolean remTapped = sa.hasParam("RememberTapped");
+        final boolean alwaysRem = sa.hasParam("AlwaysRemember");
         if (remTapped) {
             card.clearRemembered();
         }
@@ -29,7 +30,7 @@ public class TapEffect extends SpellAbilityEffect {
                 continue;
             }
             if (tgtC.isInPlay()) {
-                if (tgtC.isUntapped() && remTapped) {
+                if (tgtC.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(tgtC);
                 }
                 tgtC.tap();

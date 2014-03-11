@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -15,6 +17,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +39,14 @@ public class CopyPermanentAi extends SpellAbilityAi {
         if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
             return false;
         } else {
-        	return this.doTriggerAINoCost(aiPlayer, sa, false);
+            if (sa.getTargetRestrictions() != null && sa.hasParam("TargetingPlayer")) {
+                sa.resetTargets();
+                Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
+                sa.setTargetingPlayer(targetingPlayer);
+                return targetingPlayer.getController().chooseTargetsFor(sa);
+            } else {
+                return this.doTriggerAINoCost(aiPlayer, sa, false);
+            }
         }
     }
 
@@ -51,11 +61,6 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
         if (abTgt != null) {
             sa.resetTargets();
-            if (sa.hasParam("TargetingPlayer")) {
-                Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
-                sa.setTargetingPlayer(targetingPlayer);
-                return targetingPlayer.getController().chooseTargetsFor(sa);
-            }
             List<Card> list = aiPlayer.getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
@@ -87,7 +92,11 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 });
                 Card choice;
                 if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
-                    choice = ComputerUtilCard.getBestCreatureAI(list);
+                    if (sa.hasParam("TargetingPlayer")) {
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
+                    } else {
+                        choice = ComputerUtilCard.getBestCreatureAI(list);
+                    }
                 } else {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
@@ -128,6 +137,16 @@ public class CopyPermanentAi extends SpellAbilityAi {
     public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         // Select a card to attach to
         return ComputerUtilCard.getBestAI(options);
+    }
+
+    @Override
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+        final List<Card> cards = new ArrayList<Card>();
+        for (Player p : options) {
+            cards.addAll(p.getCreaturesInPlay());
+        }
+        Card chosen = ComputerUtilCard.getBestCreatureAI(cards);
+        return chosen != null ? chosen.getController() : Iterables.getFirst(options, null);
     }
 
 }

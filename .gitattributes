@@ -1127,6 +1127,7 @@ forge-gui/res/cardsfolder/a/ardent_militia.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ardent_plea.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ardent_recruit.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/ardent_soldier.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/arena.txt -text
 forge-gui/res/cardsfolder/a/arena_athlete.txt -text
 forge-gui/res/cardsfolder/a/arena_of_the_ancients.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arensons_aura.txt svneol=native#text/plain
@@ -3921,6 +3922,7 @@ forge-gui/res/cardsfolder/e/ebony_horse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ebony_owl_netsuke.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ebony_rhino.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/ebony_treefolk.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/e/echo_chamber.txt -text
 forge-gui/res/cardsfolder/e/echo_circlet.txt -text
 forge-gui/res/cardsfolder/e/echo_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/e/echo_tracer.txt svneol=native#text/plain
@@ -7493,6 +7495,7 @@ forge-gui/res/cardsfolder/m/magnigoth_treefolk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magnivore.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magosi_the_waterveil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magus_of_the_abyss.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/magus_of_the_arena.txt -text
 forge-gui/res/cardsfolder/m/magus_of_the_bazaar.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magus_of_the_candelabra.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magus_of_the_coffers.txt svneol=native#text/plain
