@@ -191,6 +191,12 @@ public class PumpAi extends PumpAiBase {
         final Player opp = ai.getOpponent();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
+        if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai)) {
+            Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+            sa.setTargetingPlayer(targetingPlayer);
+            return targetingPlayer.getController().chooseTargetsFor(sa);
+        }
+
         List<Card> list = new ArrayList<Card>();
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower")) {

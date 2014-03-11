@@ -8027,6 +8027,7 @@ forge-gui/res/cardsfolder/m/mobile_fort.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mobilization.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mobilize.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mogg_alarm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/mogg_assassin.txt -text
 forge-gui/res/cardsfolder/m/mogg_bombers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mogg_cannon.txt -text
 forge-gui/res/cardsfolder/m/mogg_conscripts.txt -text
