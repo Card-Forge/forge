@@ -236,6 +236,7 @@ public class DamageDealAi extends DamageAiBase {
         final Game game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = sa.hasParam("DividedAsYouChoose");
+        final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
         // target loop
         sa.resetTargets();
@@ -247,6 +248,12 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+            if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai)) {
+                // canPlayAI (sa activated by ai)
+                Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
+                sa.setTargetingPlayer(targetingPlayer);
+                return targetingPlayer.getController().chooseTargetsFor(sa);
+            }
 
             if (tgt.canTgtCreatureAndPlayer()) {
 
