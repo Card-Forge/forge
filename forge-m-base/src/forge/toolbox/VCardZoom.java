@@ -63,7 +63,7 @@ public class VCardZoom extends FOverlay {
                 g.endClip();
             }
         });
-        prompt = add(new VPrompt("Back", "More",
+        prompt = add(new VPrompt("Hide", "More",
                 new Runnable() {
                     @Override
                     public void run() {
