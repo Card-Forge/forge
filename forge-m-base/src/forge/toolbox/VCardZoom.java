@@ -3,6 +3,8 @@ package forge.toolbox;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
@@ -98,8 +100,22 @@ public class VCardZoom extends FOverlay {
             index = 0;
         }
         setSelectedIndex(index);
-        setVisible(true);
+
+        if (showTask.isScheduled()) { //select first option without showing zoom if called a second time in quick succession
+            showTask.cancel();
+            selectFirstOption();
+        }
+        else { //delay showing briefly to give time for a double-tap to auto-select the first ability
+            Timer.schedule(showTask, FGestureAdapter.DOUBLE_TAP_INTERVAL);
+        }
     }
+
+    private final Task showTask = new Task() {
+        @Override
+        public void run () {
+            setVisible(true);
+        }
+    };
 
     public void hide() {
         if (isVisible()) {
@@ -113,6 +129,10 @@ public class VCardZoom extends FOverlay {
             prompt.getBtnCancel().setEnabled(false);
             setVisible(false);
         }
+    }
+
+    private void selectFirstOption() {
+        selectOption(optionList.getItemAt(0));
     }
 
     @SuppressWarnings("unchecked")
@@ -192,7 +212,7 @@ public class VCardZoom extends FOverlay {
             frontPanel = add(new FCardPanel() {
                 @Override
                 public boolean tap(float x, float y, int count) {
-                    selectOption(optionList.getItemAt(0));
+                    selectFirstOption();
                     return true;
                 }
             });

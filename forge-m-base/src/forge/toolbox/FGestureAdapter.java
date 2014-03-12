@@ -7,7 +7,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import forge.utils.Utils;
+
 public abstract class FGestureAdapter extends InputAdapter {
+    public static final float DOUBLE_TAP_INTERVAL = 0.25f;
+
     public abstract boolean press(float x, float y);
     public abstract boolean longPress(float x, float y);
     public abstract boolean release(float x, float y);
@@ -62,7 +66,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     };
 
     public FGestureAdapter() {
-        this(20f, 0.4f, 0.1f, 1.1f, 0.05f, 0.15f);
+        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.1f, 1.1f, 0.05f, 0.15f);
     }
 
     /** @param tapSquareSize0 half width in pixels of the square around an initial touch event
