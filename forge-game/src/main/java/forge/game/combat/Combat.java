@@ -124,6 +124,12 @@ public class Combat {
             return;
         }
 
+        // This is trying to fix the issue of an attacker existing in two bands at once
+        AttackingBand existingBand = getBandOfAttacker(c);
+        if (existingBand != null) {
+            existingBand.removeAttacker(c);
+        }
+
         if (band == null || !attackersOfDefender.contains(band)) {
             band = new AttackingBand(c, defender);
             attackersOfDefender.add(band);
