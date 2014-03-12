@@ -32,6 +32,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         //final int min = sa.containsKey("Min") ? Integer.parseInt(sa.get("Min")) : 0;
         //final int max = sa.containsKey("Max") ? Integer.parseInt(sa.get("Max")) : 99;
         final boolean random = sa.hasParam("Random");
+        final boolean anyNumber = sa.hasParam("ChooseAnyNumber");
 
         final String sMin = sa.getParamOrDefault("Min", "0");
         final int min = AbilityUtils.calculateAmount(card, sMin, sa); 
@@ -50,7 +51,11 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     p.getGame().getAction().nofityOfValue(sa, p, Integer.toString(chosen), null);
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : "Choose a number";
-                    chosen = p.getController().chooseNumber(sa, title, min, max);
+                    if (anyNumber) {
+                        chosen = p.getController().announceRequirements(sa, title, true);
+                    } else {
+                        chosen = p.getController().chooseNumber(sa, title, min, max);
+                    }
                     // don't notify here, because most scripts I've seen don't store that number in a long term
                 }
                 card.setChosenNumber(chosen);

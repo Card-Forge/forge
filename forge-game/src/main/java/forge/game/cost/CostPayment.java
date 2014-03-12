@@ -153,7 +153,9 @@ public class CostPayment {
     public final boolean payComputerCosts(final CostDecisionMakerBase decisionMaker) {
         // Just in case it wasn't set, but honestly it shouldn't have gotten
         // here without being set
-        this.ability.setActivatingPlayer(decisionMaker.getPlayer());
+        if (this.ability.getActivatingPlayer() == null) {
+            this.ability.setActivatingPlayer(decisionMaker.getPlayer());
+        }
 
         Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();
 

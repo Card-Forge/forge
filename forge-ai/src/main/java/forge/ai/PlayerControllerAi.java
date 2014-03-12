@@ -110,6 +110,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
+        if (ability.getApi() != null) {
+            switch (ability.getApi()) {
+                case ChooseNumber:
+                    return ability.getActivatingPlayer().isOpponentOf(player) ? 0 : ComputerUtilMana.determineLeftoverMana(ability, player);
+                default:
+                    return null;   
+            }
+        }
         return null; // return incorrect value to indicate that
     }
 
