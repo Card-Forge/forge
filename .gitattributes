@@ -4822,6 +4822,7 @@ forge-gui/res/cardsfolder/f/forget.txt -text
 forge-gui/res/cardsfolder/f/forgotten_ancient.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/forgotten_cave.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/forgotten_harvest.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/forgotten_lore.txt -text
 forge-gui/res/cardsfolder/f/foriysian_brigade.txt -text
 forge-gui/res/cardsfolder/f/foriysian_interceptor.txt -text
 forge-gui/res/cardsfolder/f/foriysian_totem.txt -text

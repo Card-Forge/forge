@@ -8,5 +8,6 @@ SVar:DBDraw:DB$ Draw | Defined$ Each | NumCards$ JoinForcesAmount | SubAbility$ 
 SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
 SVar:X:Count$ChosenNumber
 SVar:JoinForcesAmount:Number$0
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_aglow.jpg
 Oracle:Join forces - Starting with you, each player may pay any amount of mana. Each player draws X cards, where X is the total amount of mana paid this way.
