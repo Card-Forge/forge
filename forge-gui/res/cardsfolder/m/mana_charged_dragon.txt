@@ -1,0 +1,17 @@
+Name:Mana-Charged Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigJoinForces | TriggerDescription$ Join forces - Whenever CARDNAME attacks or blocks, each player starting with you may pay any amount of mana. CARDNAME gets +X/+0 until end of turn, where X is the total amount of mana paid this way.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigJoinForces | Secondary$ True | TriggerDescription$ Join forces - Whenever CARDNAME attacks or blocks, each player starting with you may pay any amount of mana. CARDNAME gets +X/+0 until end of turn, where X is the total amount of mana paid this way.
+SVar:TrigJoinForces:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBPump
+SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana |SubAbility$ DBStore
+SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn | References$ X,JoinForcesAmount
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ JoinForcesAmount | SubAbility$ DBReset | References$ JoinForcesAmount
+SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
+SVar:X:Count$ChosenNumber
+SVar:JoinForcesAmount:Number$0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_charged_dragon.jpg
+Oracle:Flying, trample\nJoin forces - Whenever Mana-Charged Dragon attacks or blocks, each player starting with you may pay any amount of mana. Mana-Charged Dragon gets +X/+0 until end of turn, where X is the total amount of mana paid this way.

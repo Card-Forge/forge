@@ -7534,6 +7534,7 @@ forge-gui/res/cardsfolder/m/man_o_war.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mana_bloom.txt -text
 forge-gui/res/cardsfolder/m/mana_breach.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mana_chains.txt -text
+forge-gui/res/cardsfolder/m/mana_charged_dragon.txt -text
 forge-gui/res/cardsfolder/m/mana_clash.txt -text
 forge-gui/res/cardsfolder/m/mana_crypt.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mana_cylix.txt svneol=native#text/plain

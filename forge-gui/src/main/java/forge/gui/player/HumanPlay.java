@@ -1,6 +1,7 @@
 package forge.gui.player;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.FThreads;
 import forge.card.MagicColor;
@@ -238,13 +239,8 @@ public class HumanPlay {
     public static boolean payCostDuringAbilityResolve(final Player p, final Card source, final Cost cost, SpellAbility sourceAbility, String prompt) {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
-        if (!source.getRemembered().isEmpty()) {
-            if (source.getRemembered().get(0) instanceof Card) {
-                current = (Card) source.getRemembered().get(0);
-            }
-        }
-        if (!source.getImprinted().isEmpty()) {
-            current = source.getImprinted().get(0);
+        if (sourceAbility.hasParam("ShowCurrentCard")) {
+            current = Iterables.getFirst(AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility), null);
         }
 
         final List<CostPart> parts = cost.getCostParts();
