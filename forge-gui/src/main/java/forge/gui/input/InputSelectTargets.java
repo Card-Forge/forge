@@ -4,7 +4,6 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -18,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.common.base.Predicate;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -153,11 +150,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have different controllers)");
                 return;
             }
-        }
-
-        // If all cards must have different controllers
-        if (tgt.isDifferentControllers()) {
-            
         }
 
         if (!choices.contains(card)) {
