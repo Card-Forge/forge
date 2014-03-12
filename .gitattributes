@@ -11042,6 +11042,7 @@ forge-gui/res/cardsfolder/s/shrine_of_piercing_vision.txt svneol=native#text/pla
 forge-gui/res/cardsfolder/s/shrink.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shrivel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shriveling_rot.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shrouded_lore.txt -text
 forge-gui/res/cardsfolder/s/shrouded_serpent.txt -text
 forge-gui/res/cardsfolder/s/shu_cavalry.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shu_defender.txt -text
