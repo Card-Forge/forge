@@ -163,17 +163,24 @@ public class VCardZoom extends FOverlay {
         optionList.clear();
         List<?> options = controller.getOptions(selectedCard);
         if (options == null || options.isEmpty()) {
-            
+            optionList.setVisible(false);
         }
         else {
             for (Object option : options) {
                 optionList.addItem(option);
             }
+            optionList.setVisible(true);
         }
         optionList.revalidate();
         optionListExpanded = false;
         prompt.getBtnCancel().setText("More");
         prompt.getBtnCancel().setEnabled(optionList.getCount() > 1);
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        hide(); //hide if uncovered area tapped
+        return true;
     }
 
     @Override
@@ -216,12 +223,6 @@ public class VCardZoom extends FOverlay {
                     return true;
                 }
             });
-        }
-
-        @Override
-        public boolean tap(float x, float y, int count) {
-            hide(); //hide if area around panels tapped
-            return true;
         }
 
         @Override
