@@ -24,7 +24,6 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -191,61 +190,7 @@ public class TargetSelection {
                 });
             }
         }
-        // If second target has properties related to the first
-        if (tgt.getRelatedProperty() != null && !targetedObjects.isEmpty()) {
-            final List<Card> list = new ArrayList<Card>();
-            final String related = tgt.getRelatedProperty();
-            for (final Object o : targetedObjects) {
-                if (o instanceof Card) {
-                    list.add((Card) o);
-                }
-            }
-            if (!list.isEmpty()) {
-                final Card card = list.get(0);
-                if ("LEPower".equals(related)) {
-                    choices = CardLists.filter(choices, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.getNetAttack() <= card.getNetAttack();
-                        }
-                    });
-                } 
-                if ("LECMC".equals(related)) {
-                    choices = CardLists.filter(choices, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.getCMC() <= card.getCMC();
-                        }
-                    });
-                }
-            }
-        }
-        // If all cards must be from the same zone
-        if (tgt.isSingleZone() && !targeted.isEmpty()) {
-            choices = CardLists.filterControlledBy(choices, targeted.get(0).getController());
-        }
-        // If all cards must be from different zones
-        if (tgt.isDifferentZone() && !targeted.isEmpty()) {
-            choices = CardLists.filterControlledBy(choices, targeted.get(0).getController().getOpponent());
-        }
-        // If all cards must have different controllers
-        if (tgt.isDifferentControllers() && !targeted.isEmpty()) {
-            final List<Player> availableControllers = new ArrayList<Player>(game.getPlayers());
-            for (int i = 0; i < targeted.size(); i++) {
-                availableControllers.remove(targeted.get(i).getController());
-            }
-            choices = CardLists.filterControlledBy(choices, availableControllers);
-        }
-        // If the cards can't share a creature type
-        if (tgt.isWithoutSameCreatureType() && !targeted.isEmpty()) {
-            final Card card = targeted.get(0);
-            choices = CardLists.filter(choices, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !c.sharesCreatureTypeWith(card);
-                }
-            });
-        }
+
         return choices;
     }
 
