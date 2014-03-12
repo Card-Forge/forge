@@ -1,8 +1,10 @@
 package forge.gui.input;
 
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -11,10 +13,13 @@ import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.base.Predicate;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -26,6 +31,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private final Map<GameEntity, Integer> targetDepth = new HashMap<GameEntity, Integer>();
     private final TargetRestrictions tgt;
     private final SpellAbility sa;
+    private Card lastTarget = null;
     private boolean bCancel = false;
     private boolean bOk = false;
     private final boolean mandatory;
@@ -115,7 +121,45 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (!card.canBeTargetedBy(sa)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
             return;
-        } 
+        }
+        // If all cards must be from the same zone
+        if (tgt.isSingleZone() && lastTarget != null && !card.getController().equals(lastTarget.getController())) {
+            showMessage(sa.getHostCard() + " - Cannot target this card (not in the same zone)");
+            return;
+        }
+
+        // If all cards must be from different zones
+        if (tgt.isDifferentZone() && lastTarget != null && !card.getController().equals(lastTarget.getController().getOpponent())) {
+            showMessage(sa.getHostCard() + " - Cannot target this card (not in different zones)");
+            return;
+        }
+
+        // If the cards can't share a creature type
+        if (tgt.isWithoutSameCreatureType() && lastTarget != null && card.sharesCreatureTypeWith(lastTarget)) {
+            showMessage(sa.getHostCard() + " - Cannot target this card (should not share a creature type)");
+            return;
+        }
+
+        // If all cards must have different controllers
+        if (tgt.isDifferentControllers()) {
+            final List<Player> targetedControllers = new ArrayList<Player>();
+            for (GameObject o : targetDepth.keySet()) {
+                if (o instanceof Card) {
+                    Player p = ((Card) o).getController();
+                    targetedControllers.add(p);
+                }
+            }
+            if (targetedControllers.contains(card.getController())) {
+                showMessage(sa.getHostCard() + " - Cannot target this card (must have different controllers)");
+                return;
+            }
+        }
+
+        // If all cards must have different controllers
+        if (tgt.isDifferentControllers()) {
+            
+        }
+
         if (!choices.contains(card)) {
             if (card.isPlaneswalker() && sa.getApi() == ApiType.DealDamage) {
                 showMessage(sa.getHostCard() + " - To deal an opposing Planeswalker direct damage, target its controller and then redirect the damage on resolution.");
@@ -207,6 +251,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         sa.getTargets().add(ge);
         if(ge instanceof Card) {
             CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card) ge, true);
+            lastTarget = (Card) ge;
         }
         Integer val = targetDepth.get(ge);
         targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
