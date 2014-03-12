@@ -63,7 +63,6 @@ public class TargetRestrictions {
     private boolean withoutSameCreatureType = false;
     private boolean singleTarget = false;
     private boolean randomTarget = false;
-    private String relatedProperty = null;
 
     // How many can be targeted?
     private String minTargets;
@@ -100,7 +99,6 @@ public class TargetRestrictions {
         this.differentZone = target.isDifferentZone();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
-        this.relatedProperty = target.getRelatedProperty();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
     }
@@ -629,20 +627,6 @@ public class TargetRestrictions {
      */
     public final void setSameController(final boolean same) {
         this.sameController = same;
-    }
-    
-    /**
-     * @return the relatedProperty
-     */
-    public String getRelatedProperty() {
-        return relatedProperty;
-    }
-
-    /**
-     * @param related the relatedProperty to set
-     */
-    public void setRelatedProperty(String related) {
-        this.relatedProperty = related;
     }
 
     /**

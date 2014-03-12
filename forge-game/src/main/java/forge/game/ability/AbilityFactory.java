@@ -255,9 +255,6 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsAtRandom")) {
             abTgt.setRandomTarget(true);
         }
-        if (mapParams.containsKey("TargetsWithRelatedProperty")) {
-            abTgt.setRelatedProperty(mapParams.get("TargetsWithRelatedProperty"));
-        }
         if (mapParams.containsKey("TargetingPlayer")) {
             abTgt.setMandatory(true);
         }

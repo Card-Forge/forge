@@ -1046,6 +1046,27 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     }
                 }
             }
+            if (hasParam("TargetsWithRelatedProperty") && entity instanceof Card) {
+                final String related = getParam("TargetsWithRelatedProperty");
+                final Card c = (Card) entity;
+                Card parentTarget = null;
+                for (GameObject o : this.getUniqueTargets()) {
+                    if (o instanceof Card) {
+                        parentTarget = (Card) o;
+                        break;
+                    }
+                }
+                if (parentTarget == null) {
+                    return false;
+                }
+                switch (related) {
+                    case "LEPower" :
+                        return c.getNetAttack() <= parentTarget.getNetAttack();
+                    case "LECMC" :
+                        return c.getCMC() <= parentTarget.getCMC();
+                }
+            }
+
             if (hasParam("TargetingPlayerControls") && entity instanceof Card) {
                 final Card c = (Card) entity;
                 if (!c.getController().equals(targetingPlayer)) {
