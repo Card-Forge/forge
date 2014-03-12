@@ -152,14 +152,6 @@ public class TargetSelection {
         }
         List<GameObject> targetedObjects = this.ability.getUniqueTargets();
 
-        if (tgt.isUniqueTargets()) {
-            for (final Object o : targetedObjects) {
-                if ((o instanceof Card) && targetedObjects.contains(o)) {
-                    choices.remove(o);
-                }
-            }
-        }
-
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
         for (final Card c : targeted) {
