@@ -42,11 +42,8 @@ public class VCardZoom extends FOverlay {
         });
         optionList.setListItemRenderer(new ListItemRenderer<Object>() {
             @Override
-            @SuppressWarnings("unchecked")
             public boolean tap(Object value, float x, float y, int count) {
-                if (controller.selectOption(orderedCards.get(selectedIndex), value)) {
-                    hide();
-                }
+                selectOption(value);
                 return true;
             }
 
@@ -118,6 +115,13 @@ public class VCardZoom extends FOverlay {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    private void selectOption(Object option) {
+        if (option == null || controller.selectOption(orderedCards.get(selectedIndex), option)) {
+            hide();
+        }
+    }
+
     private void setSelectedIndex(int selectedIndex0) {
         if (selectedIndex0 < 0) {
             selectedIndex0 = 0;
@@ -133,6 +137,8 @@ public class VCardZoom extends FOverlay {
         slider.frontPanel.setCard(selectedCard);
         slider.leftPanel.setCard(selectedIndex > 0 ? orderedCards.get(selectedIndex - 1) : null);
         slider.rightPanel.setCard(selectedIndex < orderedCards.size() - 1 ? orderedCards.get(selectedIndex + 1) : null);
+        slider.leftPanel.setVisible(slider.leftPanel.getCard() != null);
+        slider.rightPanel.setVisible(slider.rightPanel.getCard() != null);
 
         optionList.clear();
         List<?> options = controller.getOptions(selectedCard);
@@ -186,10 +192,16 @@ public class VCardZoom extends FOverlay {
             frontPanel = add(new FCardPanel() {
                 @Override
                 public boolean tap(float x, float y, int count) {
-                    hide();
+                    selectOption(optionList.getItemAt(0));
                     return true;
                 }
             });
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            hide(); //hide if area around panels tapped
+            return true;
         }
 
         @Override

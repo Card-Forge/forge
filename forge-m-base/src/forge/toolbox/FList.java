@@ -92,6 +92,19 @@ public class FList<E> extends FScrollPane {
         return count;
     }
 
+    public Object getItemAt(int index) {
+        int count = 0;
+        for (ListGroup group : groups) {
+            for (ListItem item : group.items) {
+                if (index == count) {
+                    return item.value;
+                }
+                count++;
+            }
+        }
+        return null;
+    }
+
     public void setListItemRenderer(ListItemRenderer<E> renderer0) {
         renderer = renderer0;
     }
