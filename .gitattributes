@@ -871,6 +871,7 @@ forge-gui/res/cardsfolder/a/all_shall_smolder_in_my_wake.txt -text
 forge-gui/res/cardsfolder/a/all_suns_dawn.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/allay.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/alley_grifters.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/alliance_of_arms.txt -text
 forge-gui/res/cardsfolder/a/allied_strategies.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/allosaurus_rider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/alloy_golem.txt -text

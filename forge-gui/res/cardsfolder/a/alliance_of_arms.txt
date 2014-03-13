@@ -1,0 +1,13 @@
+Name:Alliance of Arms
+ManaCost:W
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ W | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Join forces - Starting with you, each player may pay any amount of mana. Each player puts X 1/1 white Soldier creature tokens onto the battlefield, where X is the total amount of mana paid this way.
+SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | SubAbility$ DBStore
+SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn | References$ X,JoinForcesAmount
+SVar:DBToken:DB$ Token | TokenAmount$ JoinForcesAmount  | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ Each | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | References$ JoinForcesAmount | StackDescription$ None
+SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
+SVar:X:Count$ChosenNumber
+SVar:JoinForcesAmount:Number$0
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alliance_of_arms.jpg
+Oracle:Join forces - Starting with you, each player may pay any amount of mana. Each player puts X 1/1 white Soldier creature tokens onto the battlefield, where X is the total amount of mana paid this way.
