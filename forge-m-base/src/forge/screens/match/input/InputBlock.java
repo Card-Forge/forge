@@ -143,8 +143,6 @@ public class InputBlock extends InputSyncronizedBase {
 
             @Override
             public boolean selectOption(final Card card, final Option option) {
-                boolean hideZoomView = false; //keep zoom open while declaring blockers by default
-
                 switch (option) {
                 case DECLARE_AS_BLOCKER:
                     combat.addBlocker(currentAttacker, card);
@@ -156,11 +154,10 @@ public class InputBlock extends InputSyncronizedBase {
                     break;
                 case BLOCK_THIS_ATTACKER:
                     setCurrentAttacker(card);
-                    hideZoomView = true; //don't keep zoom open if choosing attacker
                     break;
                 }
                 showMessage();
-                return hideZoomView; //keep zoom open while declaring blockers
+                return true; //hide zoom view after declaring blocker
             }
         });
     }
