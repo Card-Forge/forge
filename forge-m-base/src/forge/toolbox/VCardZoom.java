@@ -59,7 +59,7 @@ public class VCardZoom extends FOverlay {
                 float x = width * FList.INSETS_FACTOR;
                 float y = 3;
                 g.startClip(0, 0, width, height);
-                g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.LEFT, true);
+                g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.CENTER, true);
                 g.endClip();
             }
         });
