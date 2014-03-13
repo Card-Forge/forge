@@ -188,6 +188,11 @@ public class EffectEffect extends SpellAbilityEffect {
             eff.setChosenColor(hostCard.getChosenColor());
         }
 
+        // Set Chosen name
+        if (!hostCard.getNamedCard().isEmpty()) {
+            eff.setNamedCard(hostCard.getNamedCard());
+        }
+
         // Duration
         final String duration = sa.getParam("Duration");
         if ((duration == null) || !duration.equals("Permanent")) {
