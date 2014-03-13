@@ -28,6 +28,7 @@ All variants can now be applied via the constructed match setup. While moving Co
 - Quest Mode Pet Balancing
 Two quest mode pets have had their power reduced to reflect their strength relative to the rest of the other pets. The white Wolf Pet now has Lifelink instead of Vigilance, and the blue Bird Pet now scries for 1 instead of loots for 1 on combat damage. This change is immediate, so make sure to download Quest Images to get the new pictures.
 
+
 ---------
 New Cards
 ---------
@@ -63,6 +64,19 @@ Magus of the Arena
 Preacher
 Cuombajj Witches
 Mogg Assassin
+Minds Aglow
+Mana-Charged Dragon
+Shrouded Lore
+Forgotten Lore
+Shared Trauma
+Alliance of Arms
+
+
+--------------------
+New Vanguard Avatars
+--------------------
+
+Dakkon Blackblade Avatar
 
 
 ------------
