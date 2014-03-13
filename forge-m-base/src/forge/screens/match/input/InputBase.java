@@ -40,7 +40,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final long serialVersionUID = -6539552513871194081L;
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
-    protected final void setFinished() { finished = true; }
+    protected final void setFinished() {
+        FControl.getView().getCardZoom().hide(); //ensure zoom hidden when input finished
+        finished = true;
+    }
 
     // showMessage() is always the first method called
     @Override

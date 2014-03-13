@@ -31,7 +31,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         FControl.getInputQueue().setInput(this);
         awaitLatchRelease();
     }
-    
+
     protected final void stop() {
         onStop();
 

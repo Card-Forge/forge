@@ -16,7 +16,8 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.player.HumanPlay;
-import forge.toolbox.GuiChoose;
+import forge.screens.match.FControl;
+import forge.toolbox.VCardZoom.ZoomController;
 import forge.utils.Evaluator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,13 +48,128 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     @Override
-    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
-        if (card.getManaAbility().isEmpty()) {
-            flashIncorrectAction();
+    protected final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
+        if (locked) {
+            System.err.print("Should wait till previous call to playAbility finishes.");
             return;
         }
-        // only tap card if the mana is needed
-        activateManaAbility(card, this.manaCost);
+
+        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+                card, orderedCardOptions, new ZoomController<SpellAbility>() {
+            private byte colorCanUse, colorNeeded;
+
+            @Override
+            public List<SpellAbility> getOptions(final Card card) {
+                if (card.getController() != player || card.getManaAbility().isEmpty()) {
+                    return null;
+                }
+
+                colorCanUse = 0;
+                colorNeeded = 0;
+
+                for (final byte color : MagicColor.WUBRG) {
+                    if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
+                    if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
+                }
+                if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) 
+                    colorCanUse |= ManaAtom.COLORLESS;
+
+                if (colorCanUse == 0) { // no mana cost or something 
+                    return null;
+                }
+
+                // you can't remove unneeded abilities inside a for (am:abilities) loop :(
+                final String typeRes = manaCost.getSourceRestriction();
+                if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
+                    return null;
+                }
+
+                boolean guessAbilityWithRequiredColors = true;
+                List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+
+                for (SpellAbility ma : card.getManaAbility()) {
+                    ma.setActivatingPlayer(player);
+
+                    AbilityManaPart m = ma.getManaPartRecursive();
+                    if (m == null || !ma.canPlay())                                 { continue; }
+                    if (!abilityProducesManaColor(ma, m, colorCanUse))              { continue; }
+                    if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())    { continue; }
+                    if (!m.meetsManaRestrictions(saPaidFor))                        { continue; }
+
+                    abilities.add(ma);
+
+                    // skip express mana if the ability is not undoable or reusable
+                    if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null) {
+                        guessAbilityWithRequiredColors = false;
+                    }
+                }
+
+                if (abilities.isEmpty()) {
+                    return abilities;
+                }
+
+                // Store some information about color costs to help with any mana choices
+                if (colorNeeded == 0) {  // only colorless left
+                    if (saPaidFor.getHostCard() != null && saPaidFor.getHostCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
+                        String[] negEffects = saPaidFor.getHostCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
+                        for (String negColor : negEffects) {
+                            byte col = MagicColor.fromName(negColor);
+                            colorCanUse |= col;
+                        }
+                    }
+                }
+
+                // If the card has any ability that tracks mana spent, skip express Mana choice
+                if (saPaidFor.tracksManaSpent()) {
+                    colorCanUse = MagicColor.ALL_COLORS;
+                    guessAbilityWithRequiredColors = false;
+                }
+
+                if (guessAbilityWithRequiredColors) {
+                    // express Mana Choice
+                    if (colorNeeded == 0) {
+                        //avoid unnecessary prompt by pretending we need White
+                        //for the sake of "Add one mana of any color" effects
+                        colorNeeded = MagicColor.WHITE;
+                    }
+                    else {
+                        final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
+                        for (SpellAbility sa : abilities) {
+                            if (abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
+                                colorMatches.add(sa);
+                            }
+                        }
+
+                        if (!colorMatches.isEmpty() && colorMatches.size() < abilities.size()) {
+                            // leave behind only color matches
+                            abilities = colorMatches;
+                        }
+                    }
+                }
+
+                return abilities;
+            }
+
+            @Override
+            public boolean selectOption(final Card card, final SpellAbility option) {
+                ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
+                option.getManaPartRecursive().setExpressChoice(colors);
+
+                Runnable proc = new Runnable() {
+                    @Override
+                    public void run() {
+                        HumanPlay.playSpellAbility(option.getActivatingPlayer(), option);
+                        player.getManaPool().payManaFromAbility(saPaidFor, manaCost, option);
+
+                        onManaAbilityPaid();
+                        onStateChanged();
+                    }
+                };
+                locked = true;
+                game.getAction().invoke(proc);
+                return false;
+            }
+        });
     }
 
     public void useManaFromPool(byte colorCode) {
@@ -61,138 +177,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost);
         onManaAbilityPaid();
         showMessage();
-    }
-
-    /**
-     * <p>
-     * activateManaAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @param manaCost
-     *            a {@link forge.game.mana.ManaCostBeingPaid} object.
-     * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
-     */
-    protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
-        if ( locked ) {
-            System.err.print("Should wait till previous call to playAbility finishes.");
-            return;
-        }
-        
-        // make sure computer's lands aren't selected
-        if (card.getController() != player) {
-            return;
-        }
-
-        byte colorCanUse = 0;
-        byte colorNeeded = 0;
-
-        for (final byte color : MagicColor.WUBRG) {
-            if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
-            if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
-        }
-        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) 
-            colorCanUse |= ManaAtom.COLORLESS;
-
-        if ( 0 == colorCanUse ) // no mana cost or something 
-            return;
-        
-        List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        // you can't remove unneeded abilities inside a for (am:abilities) loop :(
-
-        final String typeRes = manaCost.getSourceRestriction();
-        if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
-            return;
-        }
-
-        boolean guessAbilityWithRequiredColors = true;
-        for (SpellAbility ma : card.getManaAbility()) {
-            ma.setActivatingPlayer(player);
-
-            AbilityManaPart m = ma.getManaPartRecursive();
-            if (m == null || !ma.canPlay())                                 { continue; }
-            if (!abilityProducesManaColor(ma, m, colorCanUse))              { continue; }
-            if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())    { continue; }
-            if (!m.meetsManaRestrictions(saPaidFor))                        { continue; }
-
-            abilities.add(ma);
-
-            // skip express mana if the ability is not undoable or reusable
-            if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null) {
-                guessAbilityWithRequiredColors = false;
-            }
-        }
-
-        if (abilities.isEmpty()) {
-            return;
-        }
-
-        // Store some information about color costs to help with any mana choices
-        if (colorNeeded == 0) {  // only colorless left
-            if (saPaidFor.getHostCard() != null && saPaidFor.getHostCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
-                String[] negEffects = saPaidFor.getHostCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
-                for (String negColor : negEffects) {
-                    byte col = MagicColor.fromName(negColor);
-                    colorCanUse |= col;
-                }
-            }
-        }
-
-        // If the card has any ability that tracks mana spent, skip express Mana choice
-        if (saPaidFor.tracksManaSpent()) {
-            colorCanUse = MagicColor.ALL_COLORS;
-            guessAbilityWithRequiredColors = false;
-        }
-
-        boolean choice = true;
-        if (guessAbilityWithRequiredColors) {
-            // express Mana Choice
-            if (colorNeeded == 0) {
-                choice = false;
-                //avoid unnecessary prompt by pretending we need White
-                //for the sake of "Add one mana of any color" effects
-                colorNeeded = MagicColor.WHITE;
-            }
-            else {
-                final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
-                for (SpellAbility sa : abilities) {
-                    if (abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
-                        colorMatches.add(sa);
-                    }
-                }
-    
-                if (colorMatches.isEmpty()) {
-                    // can only match colorless just grab the first and move on.
-                    // This is wrong. Sometimes all abilities aren't created equal
-                    choice = false;
-                }
-                else if (colorMatches.size() < abilities.size()) {
-                    // leave behind only color matches
-                    abilities = colorMatches;
-                }
-            }
-        }
-
-        final SpellAbility chosen = abilities.size() > 1 && choice ? GuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
-        ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
-        chosen.getManaPartRecursive().setExpressChoice(colors);
-
-        // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
-        Runnable proc = new Runnable() {
-            @Override
-            public void run() {
-                HumanPlay.playSpellAbility(chosen.getActivatingPlayer(), chosen);
-                player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
-                
-                onManaAbilityPaid();
-                onStateChanged();
-            }
-        };
-        locked = true;
-        game.getAction().invoke(proc);
     }
 
     /**
