@@ -248,7 +248,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
-            if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai)) {
+            if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);

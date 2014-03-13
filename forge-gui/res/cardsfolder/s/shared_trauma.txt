@@ -1,0 +1,14 @@
+Name:Shared Trauma
+ManaCost:B
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ B | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBMill | StackDescription$ SpellDescription | SpellDescription$ Join forces - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of his or her library into his or her graveyard, where X is the total amount of mana paid this way.
+SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | SubAbility$ DBStore
+SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn | References$ X,JoinForcesAmount
+SVar:DBMill:DB$ Mill | Defined$ Each | NumCards$ JoinForcesAmount | SubAbility$ DBReset | References$ JoinForcesAmount | StackDescription$ None
+SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
+SVar:X:Count$ChosenNumber
+SVar:JoinForcesAmount:Number$0
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_trauma.jpg
+Oracle:Join forces - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of his or her library into his or her graveyard, where X is the total amount of mana paid this way.

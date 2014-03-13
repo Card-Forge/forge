@@ -10915,6 +10915,7 @@ forge-gui/res/cardsfolder/s/sharding_sphinx.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shardless_agent.txt -text
 forge-gui/res/cardsfolder/s/shared_animosity.txt -text
 forge-gui/res/cardsfolder/s/shared_discovery.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shared_trauma.txt -text
 forge-gui/res/cardsfolder/s/shared_triumph.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sharpened_pitchfork.txt -text
 forge-gui/res/cardsfolder/s/sharuum_the_hegemon.txt svneol=native#text/plain
