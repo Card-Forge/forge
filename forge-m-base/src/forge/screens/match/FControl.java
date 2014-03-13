@@ -223,8 +223,25 @@ public class FControl {
         }
     }
 
+    public static Player getCurrentPlayer() {
+        // try current priority
+        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
+        if (null != currentPriority && currentPriority.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+            return currentPriority;
+        }
+
+        // otherwise find just any player, belonging to this lobbyplayer
+        for (Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
     public static boolean mayShowCard(Card c) {
-        return true;// game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
+        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
     }
 
     public static void showCombat(Combat combat) {
