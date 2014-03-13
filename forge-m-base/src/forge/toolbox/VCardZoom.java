@@ -137,8 +137,15 @@ public class VCardZoom extends FOverlay {
 
     @SuppressWarnings("unchecked")
     private void selectOption(Object option) {
-        if (option == null || controller.selectOption(orderedCards.get(selectedIndex), option)) {
+        if (option == null ||
+                controller.selectOption(orderedCards.get(selectedIndex), option) ||
+                selectedIndex == orderedCards.size() - 1) {
             hide();
+        }
+        else {
+            //select next card instead of hiding if input wants to keep zoom open
+            //after selecting option and there's another card to select
+            setSelectedIndex(selectedIndex + 1);
         }
     }
 

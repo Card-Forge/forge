@@ -30,7 +30,9 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
 import forge.screens.match.events.UiEventAttackerDeclared;
+import forge.toolbox.VCardZoom.ZoomController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -120,74 +122,100 @@ public class InputAttack extends InputSyncronizedBase {
         }
     }
 
+    public enum Option {
+        DECLARE_AS_ATTACKER("Declare as Attacker"),
+        REMOVE_FROM_COMBAT("Remove from Combat"),
+        CHOOSE_AS_DEFENDER("Choose as Defender"),
+        ACTIVATE_BAND("Activate Band"),
+        JOIN_BAND("Join Band");
+
+        private String text;
+
+        private Option(String text0) {
+            text = text0;
+        }
+
+        public String toString() {
+            return text;
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     protected final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
-        final List<Card> att = combat.getAttackers();
-        if (/*triggerEvent.getButton() == 3 && */att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
-                && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-            // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
-            combat.removeFromCombat(card);
-            FControl.setUsedToPay(card, false);
-            showCombat();
-            // When removing an attacker clear the attacking band
-            this.activateBand(null);
+        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+                card, orderedCardOptions, new ZoomController<Option>() {
+            @Override
+            public List<Option> getOptions(Card card) {
+                List<Option> options = new ArrayList<Option>();
 
-            FControl.fireEvent(new UiEventAttackerDeclared(card, null));
-            return;
-        }
+                if (card.getController().isOpponentOf(playerAttacks)) {
+                    if (defenders.contains(card)) { // planeswalker?
+                        options.add(Option.CHOOSE_AS_DEFENDER);
+                    }
+                }
+                else if (combat.getAttackers().contains(card)) {
+                    if (!card.hasKeyword("CARDNAME attacks each turn if able.") &&
+                            !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+                        options.add(Option.REMOVE_FROM_COMBAT);
+                    }
 
-        if (combat.isAttacking(card, currentDefender)) {
-            // Activate band by selecting/deselecting a band member
-            if (this.activeBand == null) {
-                this.activateBand(combat.getBandOfAttacker(card));
-            } else if (this.activeBand.getAttackers().contains(card)) {
-                this.activateBand(null);
-            } else { // Join a band by selecting a non-active band member after activating a band
-                if (this.activeBand.canJoinBand(card)) {
+                    if (combat.isAttacking(card, currentDefender)) {
+                        // Activate band by selecting/deselecting a band member
+                        if (activeBand == null) {
+                            options.add(Option.ACTIVATE_BAND);
+                        }
+                        else if (!activeBand.getAttackers().contains(card) && activeBand.canJoinBand(card)) {
+                            options.add(Option.JOIN_BAND);
+                        }
+                    }
+                }
+                else if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) &&
+                        CombatUtil.canAttack(card, currentDefender, combat)) {
+                    options.add(Option.DECLARE_AS_ATTACKER);
+
+                    if (activeBand != null && activeBand.canJoinBand(card)) {
+                        options.add(Option.JOIN_BAND);
+                    }
+                }
+
+                return options;
+            }
+
+            @Override
+            public boolean selectOption(Card card, Option option) {
+                switch (option) {
+                case DECLARE_AS_ATTACKER:
+                    if (combat.isAttacking(card)) {
+                        combat.removeFromCombat(card);
+                    }
+
+                    declareAttacker(card);
+                    showCombat();
+                    break;
+                case REMOVE_FROM_COMBAT:
+                    combat.removeFromCombat(card);
+                    FControl.setUsedToPay(card, false);
+                    showCombat();
+                    activateBand(null); //When removing an attacker clear the attacking band
+                    FControl.fireEvent(new UiEventAttackerDeclared(card, null));
+                    break;
+                case CHOOSE_AS_DEFENDER:
+                    setCurrentDefender(card);
+                    return true; //don't keep zoom open if choosing defender
+                case ACTIVATE_BAND:
+                    activateBand(combat.getBandOfAttacker(card));
+                    break;
+                case JOIN_BAND: //Join a band by selecting a non-active band member after activating a band
                     combat.removeFromCombat(card);
                     declareAttacker(card);
-                } else {
-                    flashIncorrectAction();
+                    break;
                 }
+                return false; //keep zoom open while declaring attackers
             }
+        });
+    }
 
-            updateMessage();
-            return;
-        }
-
-        if ( card.getController().isOpponentOf(playerAttacks) ) {
-            if ( defenders.contains(card) ) { // planeswalker?
-                setCurrentDefender(card);
-                return;
-            }
-        }
-
-        if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
-            if (this.activeBand != null && !this.activeBand.canJoinBand(card)) {
-                this.activateBand(null);
-                updateMessage();
-                flashIncorrectAction();
-                return;
-            }
-
-            if(combat.isAttacking(card)) {
-                combat.removeFromCombat(card);
-            }
-
-            declareAttacker(card);
-            showCombat();
-        }
-        else {
-            flashIncorrectAction();
-        }
-    } // selectCard()
-
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     */
     private void declareAttacker(final Card card) {
         combat.addAttacker(card, currentDefender, this.activeBand);
         this.activateBand(this.activeBand);
