@@ -82,14 +82,16 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
-        FControl.getView().getCardZoom().show("", card, orderedCardOptions, new ZoomController<SpellAbility>() {
+        //for base input, just show zoom view with no options
+        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+                card, orderedCardOptions, new ZoomController<Object>() {
             @Override
-            public List<SpellAbility> getOptions(Card card) {
+            public List<Object> getOptions(Card card) {
                 return null;
             }
 
             @Override
-            public boolean selectOption(Card card, SpellAbility option) {
+            public boolean selectOption(Card card, Object option) {
                 return true;
             }
         });
