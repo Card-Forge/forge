@@ -82,8 +82,8 @@ public class VCardZoom extends FOverlay {
     }
 
     public static abstract class ZoomController<T> {
-        public abstract List<T> getOptions(Card card);
-        public abstract boolean selectOption(Card card, T option);
+        public abstract List<T> getOptions(final Card card);
+        public abstract boolean selectOption(final Card card, final T option);
     }
 
     public <T> void show(String message0, final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {

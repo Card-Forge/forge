@@ -23,6 +23,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
 import forge.toolbox.GuiDialog;
+import forge.toolbox.VCardZoom.ZoomController;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 
@@ -110,46 +111,71 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     volatile boolean cardSelectLocked = false;
 
     @Override
-    protected void onCardSelected(final Card c0, final List<Card> orderedCardOptions) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
-        boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
-        boolean isSerumPowder = c0.getName().equals("Serum Powder");
-        boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
-        if (!isLegalChoice || cardSelectLocked) {
-            flashIncorrectAction();
-            return;
-        }
+    protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
+        if (cardSelectLocked) { return; }
 
-        if (isSerumPowder && GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
-            cardSelectLocked = true;
-            ThreadUtil.invokeInGameThread(new Runnable() {
-                public void run() {
-                    List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
-                    for (Card c : hand) {
-                        player.getGame().getAction().exile(c);
+        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+                card, orderedCardOptions, new ZoomController<String>() {
+            @Override
+            public List<String> getOptions(final Card card) {
+                List<String> options = new ArrayList<String>();
+
+                if (player.getZone(ZoneType.Hand).contains(card)) {
+                    if (card.getName().equals("Serum Powder")) {
+                        options.add("Exile all the cards from your hand, then draw that many cards.");
                     }
-                    c0.getController().drawCards(hand.size());
-                    cardSelectLocked = false;
+                    else if (isCommander) {
+                        if (selected.contains(card)) {
+                            options.add("Select Card");
+                        }
+                        else {
+                            options.add("Unselect Card");
+                        }
+                    }
                 }
-            });
-            return;
-        }
+                return options;
+            }
 
-        if (isCommander) { // allow to choose cards for partial paris
-            if (selected.contains(c0)) {
-                FControl.setUsedToPay(c0, false);
-                selected.remove(c0);
+            @Override
+            public boolean selectOption(final Card card, final String option) {
+                if (option == "Exile all the cards from your hand, then draw that many cards.") {
+                    if (GuiDialog.confirm(card, "This action cannot be undone. Proceed?")) {
+                        cardSelectLocked = true;
+                        ThreadUtil.invokeInGameThread(new Runnable() {
+                            public void run() {
+                                List<Card> hand = new ArrayList<Card>(card.getController().getCardsIn(ZoneType.Hand));
+                                for (Card c : hand) {
+                                    player.getGame().getAction().exile(c);
+                                }
+                                card.getController().drawCards(hand.size());
+                                cardSelectLocked = false;
+                            }
+                        });
+                    }
+                    return true;
+                }
+                if (isCommander) { // allow to choose cards for partial paris
+                    if (selected.contains(card)) {
+                        FControl.setUsedToPay(card, false);
+                        selected.remove(card);
+                    }
+                    else {
+                        FControl.setUsedToPay(card, true);
+                        selected.add(card);
+                    }
+                    if (selected.isEmpty()) {
+                        ButtonUtil.enableOnlyOk();
+                    }
+                    else {
+                        ButtonUtil.enableAll();
+                    }
+                    return false; //keep zoom view open
+                }
+                return true;
             }
-            else {
-                FControl.setUsedToPay(c0, true);
-                selected.add(c0);
-            }
-            if (selected.isEmpty()) {
-                ButtonUtil.enableOnlyOk();
-            }
-            else {
-                ButtonUtil.enableAll();
-            }
-        }
+        });
+
+        
     }
 
     public final boolean isKeepHand() {

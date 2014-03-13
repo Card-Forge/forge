@@ -146,7 +146,7 @@ public class InputAttack extends InputSyncronizedBase {
         FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
                 card, orderedCardOptions, new ZoomController<Option>() {
             @Override
-            public List<Option> getOptions(Card card) {
+            public List<Option> getOptions(final Card card) {
                 List<Option> options = new ArrayList<Option>();
 
                 if (card.getController().isOpponentOf(playerAttacks)) {
@@ -183,7 +183,7 @@ public class InputAttack extends InputSyncronizedBase {
             }
 
             @Override
-            public boolean selectOption(Card card, Option option) {
+            public boolean selectOption(final Card card, final Option option) {
                 switch (option) {
                 case DECLARE_AS_ATTACKER:
                     if (combat.isAttacking(card)) {

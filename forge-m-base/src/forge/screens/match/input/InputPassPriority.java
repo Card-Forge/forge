@@ -65,12 +65,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         FControl.getView().getCardZoom().show("Select a spell/ability", card, orderedCardOptions, new ZoomController<SpellAbility>() {
             @Override
-            public List<SpellAbility> getOptions(Card card) {
+            public List<SpellAbility> getOptions(final Card card) {
                 return card.getAllPossibleAbilities(player, true);
             }
 
             @Override
-            public boolean selectOption(Card card, SpellAbility option) {
+            public boolean selectOption(final Card card, final SpellAbility option) {
                 selectAbility(option);
                 return true; //TODO: Avoid hiding card zoom when selecting mana abilities
             }
