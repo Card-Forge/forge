@@ -87,6 +87,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.Phases, PhasesAi.class);
         apiToClass.put(ApiType.Planeswalk, AlwaysPlayAi.class);
         apiToClass.put(ApiType.Play, PlayAi.class);
+        apiToClass.put(ApiType.PlayLandVariant, CannotPlayAi.class);
         apiToClass.put(ApiType.Poison, PoisonAi.class);
         apiToClass.put(ApiType.PreventDamage, DamagePreventAi.class);
         apiToClass.put(ApiType.PreventDamageAll, DamagePreventAllAi.class);

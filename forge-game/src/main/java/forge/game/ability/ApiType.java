@@ -85,6 +85,7 @@ public enum ApiType {
     Phases (PhasesEffect.class),
     Planeswalk (PlaneswalkEffect.class),
     Play (PlayEffect.class),
+    PlayLandVariant (PlayLandVariantEffect.class),
     Poison (PoisonEffect.class),
     PreventDamage (DamagePreventEffect.class),
     PreventDamageAll (DamagePreventAllEffect.class),

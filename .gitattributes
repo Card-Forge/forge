@@ -362,6 +362,7 @@ forge-game/src/main/java/forge/game/ability/effects/PermanentNoncreatureEffect.j
 forge-game/src/main/java/forge/game/ability/effects/PhasesEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PlaneswalkEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PlayEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/PlayLandVariantEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PoisonEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/PowerExchangeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ProtectAllEffect.java -text
@@ -3108,6 +3109,7 @@ forge-gui/res/cardsfolder/d/daggerclaw_imp.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/daggerdrome_imp.txt -text
 forge-gui/res/cardsfolder/d/daily_regimen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dakkon_blackblade.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/dakkon_blackblade_avatar.txt -text
 forge-gui/res/cardsfolder/d/dakmor_bat.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dakmor_ghoul.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dakmor_lancer.txt svneol=native#text/plain

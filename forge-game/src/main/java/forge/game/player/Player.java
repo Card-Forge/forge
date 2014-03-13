@@ -1732,6 +1732,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.game.card.Card} object.
      */
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
+        // Dakkon Blackblade Avatar will use a similar effect
         if (this.canPlayLand(land, ignoreZoneAndTiming)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
@@ -1793,7 +1794,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
 
             final Zone zone = game.getZoneOf(land);
-            if(zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !land.hasStartOfKeyword("May be played"))) {
+            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !land.hasStartOfKeyword("May be played")))) {
                 return false;
             }
         }

@@ -450,7 +450,7 @@ public class StaticAbilityContinuous {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
                         abilty = abilty.replace("ConvertedManaCost", costcmc);
                     }
-                    if (abilty.startsWith("AB")) { // grant the ability
+                    if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
                         final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
                         sa.setTemporary(true);
                         sa.setIntrinsic(false);
