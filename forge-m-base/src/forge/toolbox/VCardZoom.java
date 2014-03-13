@@ -184,6 +184,10 @@ public class VCardZoom extends FOverlay {
         prompt.getBtnCancel().setEnabled(optionList.getCount() > 1);
     }
 
+    public VPrompt getPrompt() {
+        return prompt;
+    }
+
     @Override
     public boolean tap(float x, float y, int count) {
         hide(); //hide if uncovered area tapped

@@ -192,6 +192,11 @@ public class FControl {
     }
 
     public static void showMessage(final String s0) {
+        if (view.getCardZoom().isVisible() &&
+                view.getCardZoom().getPrompt().getMessage().equals(view.getPrompt().getMessage())) {
+            //update zoom view's prompt message if it's shared with main view's prompt's message
+            view.getCardZoom().getPrompt().setMessage(s0);
+        }
         view.getPrompt().setMessage(s0);
     }
 
