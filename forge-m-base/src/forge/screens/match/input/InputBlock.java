@@ -17,6 +17,7 @@
  */
 package forge.screens.match.input;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.card.Card;
@@ -27,6 +28,7 @@ import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
 import forge.screens.match.events.UiEventBlockerAssigned;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.VCardZoom.ZoomController;
 
 /**
  * <p>
@@ -97,37 +99,71 @@ public class InputBlock extends InputSyncronizedBase {
         }
     }
 
+    public enum Option {
+        DECLARE_AS_BLOCKER("Declare as Blocker"),
+        REMOVE_FROM_COMBAT("Remove from Combat"),
+        BLOCK_THIS_ATTACKER("Block this Attacker"),;
+
+        private String text;
+
+        private Option(String text0) {
+            text = text0;
+        }
+
+        public String toString() {
+            return text;
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
-        if (/*triggerEvent.getButton() == 3 &&*/ card.getController() == defender) {
-            combat.removeFromCombat(card);
-            FControl.fireEvent(new UiEventBlockerAssigned(card, (Card)null));
-        } else {
-            // is attacking?
-            boolean isCorrectAction = false;
+        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+                card, orderedCardOptions, new ZoomController<Option>() {
+            @Override
+            public List<Option> getOptions(final Card card) {
+                List<Option> options = new ArrayList<Option>();
 
-            if (combat.isAttacking(card)) {
-                setCurrentAttacker(card);
-                isCorrectAction = true;
-            } else {
-                // Make sure this card is valid to even be a blocker
-                if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
-                    isCorrectAction = CombatUtil.canBlock(this.currentAttacker, card, combat);
-                    if ( isCorrectAction ) {
-                        combat.addBlocker(this.currentAttacker, card);
-                        FControl.fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
+                if (combat.isAttacking(card)) {
+                    options.add(Option.BLOCK_THIS_ATTACKER);
+                }
+                else if (card.getController() == defender) {
+                    if (combat.isBlocking(card)) {
+                        options.add(Option.REMOVE_FROM_COMBAT);
+                    }
+                    else if (currentAttacker != null && card.isCreature() &&
+                            defender.getZone(ZoneType.Battlefield).contains(card) &&
+                            CombatUtil.canBlock(currentAttacker, card, combat)) {
+                        options.add(Option.DECLARE_AS_BLOCKER);
                     }
                 }
+
+                return options;
             }
 
-            if (!isCorrectAction) {
-                flashIncorrectAction();
-            }
-        }
-        this.showMessage();
-    } // selectCard()
+            @Override
+            public boolean selectOption(final Card card, final Option option) {
+                boolean hideZoomView = false; //keep zoom open while declaring blockers by default
 
+                switch (option) {
+                case DECLARE_AS_BLOCKER:
+                    combat.addBlocker(currentAttacker, card);
+                    FControl.fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
+                    break;
+                case REMOVE_FROM_COMBAT:
+                    combat.removeFromCombat(card);
+                    FControl.fireEvent(new UiEventBlockerAssigned(card, (Card)null));
+                    break;
+                case BLOCK_THIS_ATTACKER:
+                    setCurrentAttacker(card);
+                    hideZoomView = true; //don't keep zoom open if choosing attacker
+                    break;
+                }
+                showMessage();
+                return hideZoomView; //keep zoom open while declaring blockers
+            }
+        });
+    }
 
     private void setCurrentAttacker(Card card) {
         currentAttacker = card;

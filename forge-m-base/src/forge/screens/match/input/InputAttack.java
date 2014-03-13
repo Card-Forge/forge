@@ -125,7 +125,7 @@ public class InputAttack extends InputSyncronizedBase {
     public enum Option {
         DECLARE_AS_ATTACKER("Declare as Attacker"),
         REMOVE_FROM_COMBAT("Remove from Combat"),
-        CHOOSE_AS_DEFENDER("Choose as Defender"),
+        ATTACK_THIS_DEFENDER("Attack this Defender"),
         ACTIVATE_BAND("Activate Band"),
         JOIN_BAND("Join Band");
 
@@ -151,7 +151,7 @@ public class InputAttack extends InputSyncronizedBase {
 
                 if (card.getController().isOpponentOf(playerAttacks)) {
                     if (defenders.contains(card)) { // planeswalker?
-                        options.add(Option.CHOOSE_AS_DEFENDER);
+                        options.add(Option.ATTACK_THIS_DEFENDER);
                     }
                 }
                 else if (combat.getAttackers().contains(card)) {
@@ -184,12 +184,13 @@ public class InputAttack extends InputSyncronizedBase {
 
             @Override
             public boolean selectOption(final Card card, final Option option) {
+                boolean hideZoomView = false; //keep zoom open while declaring attackers by default
+
                 switch (option) {
                 case DECLARE_AS_ATTACKER:
                     if (combat.isAttacking(card)) {
                         combat.removeFromCombat(card);
                     }
-
                     declareAttacker(card);
                     showCombat();
                     break;
@@ -200,9 +201,10 @@ public class InputAttack extends InputSyncronizedBase {
                     activateBand(null); //When removing an attacker clear the attacking band
                     FControl.fireEvent(new UiEventAttackerDeclared(card, null));
                     break;
-                case CHOOSE_AS_DEFENDER:
+                case ATTACK_THIS_DEFENDER:
                     setCurrentDefender(card);
-                    return true; //don't keep zoom open if choosing defender
+                    hideZoomView = true; //don't keep zoom open if choosing defender
+                    break;
                 case ACTIVATE_BAND:
                     activateBand(combat.getBandOfAttacker(card));
                     break;
@@ -211,7 +213,8 @@ public class InputAttack extends InputSyncronizedBase {
                     declareAttacker(card);
                     break;
                 }
-                return false; //keep zoom open while declaring attackers
+                showMessage();
+                return hideZoomView;
             }
         });
     }
