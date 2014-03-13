@@ -48,6 +48,7 @@ public class FControl {
     private static List<Player> sortedPlayers;
     private static final EventBus uiEvents;
     private static boolean gameHasHumanPlayer;
+    private static boolean devMode;
     private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private static final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
     private static final FControlGamePlayback playbackControl = new FControlGamePlayback();
@@ -164,7 +165,13 @@ public class FControl {
             playerPanels.add(new VPlayerPanel(p, localPlayer));
         }
 
-        view = new MatchScreen(playerPanels);
+        view = new MatchScreen(playerPanels) {
+            @Override
+            public void onActivate() {
+                devMode = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED); //cache devMode for performance when match screen opened
+                super.onActivate();
+            }
+        };
 
         view.getGameDetails().init(players);
     }
@@ -241,7 +248,7 @@ public class FControl {
     }
 
     public static boolean mayShowCard(Card c) {
-        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
+        return game == null || !gameHasHumanPlayer || devMode || c.canBeShownTo(getCurrentPlayer());
     }
 
     public static void showCombat(Combat combat) {

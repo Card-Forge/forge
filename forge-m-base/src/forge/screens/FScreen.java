@@ -54,10 +54,10 @@ public abstract class FScreen extends FContainer {
         }
     }
 
-    public void onOpen() {
+    public void onActivate() {
     }
 
-    public boolean onSwitch() {
+    public boolean onSwitchAway() {
         return true;
     }
 

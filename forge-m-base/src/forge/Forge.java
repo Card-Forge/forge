@@ -99,15 +99,17 @@ public class Forge implements ApplicationListener {
 
     public static void openScreen(FScreen screen0) {
         if (currentScreen == screen0) { return; }
+        if (currentScreen != null && !currentScreen.onSwitchAway()) {
+            return;
+        }
         screens.push(screen0);
         setCurrentScreen(screen0);
-        screen0.onOpen();
     }
 
     private static void setCurrentScreen(FScreen screen0) {
         currentScreen = screen0;
         currentScreen.setSize(screenWidth, screenHeight);
-        currentScreen.onOpen();
+        currentScreen.onActivate();
     }
 
     @Override
