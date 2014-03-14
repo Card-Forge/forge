@@ -18,10 +18,12 @@
 package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
+
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.menus.DeckFileMenu;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.util.storage.IStorage;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -85,11 +87,18 @@ public class DeckController<T extends DeckBase> {
         CStatistics.SINGLETON_INSTANCE.update();
         CProbabilities.SINGLETON_INSTANCE.update();
 
-        if (this.isModelInSyncWithFolder()) {
-            this.setSaved(true);
+        if (isStored) {
+            if (this.isModelInSyncWithFolder()) {
+                this.setSaved(true);
+            }
+            else {
+                this.notifyModelChanged();
+            }
         }
-        else {
-            this.notifyModelChanged();
+        else { //TODO: Make this smarter
+            this.currentFolder = this.rootFolder;
+            this.modelPath = "";
+            this.setSaved(true);
         }
     }
 

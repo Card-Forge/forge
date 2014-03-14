@@ -18,6 +18,7 @@ import forge.properties.NewConstants;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+
 import java.awt.Dialog.ModalityType;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -33,7 +34,7 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private static File previousDirectory = null;
+    private static File previousDirectory;
 
     private JFileChooser fileChooser = new JFileChooser(NewConstants.DECK_BASE_DIR);
 
@@ -183,6 +184,10 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     private File getImportFilename() {
         fileChooser.setDialogTitle("Import Deck");
+        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+        if (previousDirectory != null) {
+            fileChooser.setCurrentDirectory(previousDirectory);
+        }
 
         final int returnVal = fileChooser.showOpenDialog(null);
 
@@ -197,15 +202,22 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void exportDeck() {
+        DeckController<Deck> controller = (DeckController<Deck>)
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
+
         final File filename = this.getExportFilename();
         if (filename == null) {
             return;
         }
 
+        //create copy of deck to save under new name
+        String name = filename.getName();
+        name = name.substring(0, name.lastIndexOf(".")); //remove extension
+        Deck deck = (Deck)controller.getModel().copyTo(name);
+
         try {
-            DeckSerializer.writeDeck(
-                ((DeckController<Deck>) CDeckEditorUI.SINGLETON_INSTANCE
-                .getCurrentEditorController().getDeckController()).getModel(), filename);
+            DeckSerializer.writeDeck(deck, filename);
+            controller.setModel(DeckSerializer.fromFile(filename)); //reload deck from file so everything is in sync
         } catch (final Exception ex) {
             BugReporter.reportException(ex);
             throw new RuntimeException("Error exporting deck." + ex);
@@ -233,7 +245,9 @@ public enum CCurrentDeck implements ICDoc {
     private File getExportFilename() {
         fileChooser.setDialogTitle("Export Deck");
         fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
-        fileChooser.setCurrentDirectory(previousDirectory);
+        if (previousDirectory != null) {
+            fileChooser.setCurrentDirectory(previousDirectory);
+        }
 
         if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = fileChooser.getSelectedFile();
