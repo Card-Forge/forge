@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.14
+Forge Beta: 03-14-2014 ver 1.5.14
 
 
-13### cards in total.
+13635 cards in total.
 
 
 -------------
@@ -33,44 +33,44 @@ Two quest mode pets have had their power reduced to reflect their strength relat
 New Cards
 ---------
 
-Veiled Crocodile
-Price of Glory
-Lost in Thought
-Volrath's Curse
-Lethal Vapors
-Shieldmage Advocate
-Confusion in the Ranks
-Choice of Damnations
-Mangara's Tome
-Diaochan, Artful Beauty
-Parallel Thoughts
-Teferi's Realm
-Trade Secrets
-Forbidden Ritual
-Lim-Dul's Hex
-Erosion
-Mind Bomb
-Well of Lost Dreams
-Emberwilde Djinn
-Winter's Chill
-Dream Tides
-Magnetic Mountain
-Mudslide
-Thelon's Curse
-Evangelize
-Arena
-Echo Chamber
-Magus of the Arena
-Preacher
-Cuombajj Witches
-Mogg Assassin
-Minds Aglow
-Mana-Charged Dragon
-Shrouded Lore
-Forgotten Lore
-Shared Trauma
 Alliance of Arms
+Arena
+Choice of Damnations
 Collective Voyage
+Confusion in the Ranks
+Cuombajj Witches
+Diaochan, Artful Beauty
+Dream Tides
+Echo Chamber
+Emberwilde Djinn
+Erosion
+Evangelize
+Forbidden Ritual
+Forgotten Lore
+Lethal Vapors
+Lim-Dul's Hex
+Lost in Thought
+Magnetic Mountain
+Magus of the Arena
+Mana-Charged Dragon
+Mangara's Tome
+Mind Bomb
+Minds Aglow
+Mogg Assassin
+Mudslide
+Parallel Thoughts
+Preacher
+Price of Glory
+Shared Trauma
+Shieldmage Advocate
+Shrouded Lore
+Teferi's Realm
+Thelon's Curse
+Trade Secrets
+Veiled Crocodile
+Volrath's Curse
+Well of Lost Dreams
+Winter's Chill
 
 
 --------------------
@@ -115,7 +115,21 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+1224Deko
+abbcdfin
+Agetian
+Dave
+DrDev
+Gos
+Juzamjedi
+Marc
+Max
+Nordos
+Sloth
+Sol
+Swordshine
+Teferi
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
