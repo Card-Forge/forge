@@ -25,7 +25,7 @@ For Image View, this options panel is visible by default and contains a button t
 All variants can now be applied via the constructed match setup. While moving Commander across, a basic experimental Commander deck generator was implemented. It will select a random two-color identity commander, and use those colors to build a two-color singleton deck. It is at least a starting point if someone doesn't have any Commander decks and doesn't want to or doesn't have time to build one.
 
 
-- Quest Mode Pet Balancing
+- Quest Mode Pet Balancing -
 Two quest mode pets have had their power reduced to reflect their strength relative to the rest of the other pets. The white Wolf Pet now has Lifelink instead of Vigilance, and the blue Bird Pet now scries for 1 instead of loots for 1 on combat damage. This change is immediate, so make sure to download Quest Images to get the new pictures.
 
 
@@ -70,6 +70,7 @@ Shrouded Lore
 Forgotten Lore
 Shared Trauma
 Alliance of Arms
+Collective Voyage
 
 
 --------------------
