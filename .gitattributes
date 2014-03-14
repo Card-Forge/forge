@@ -2708,6 +2708,7 @@ forge-gui/res/cardsfolder/c/collapsing_borders.txt -text
 forge-gui/res/cardsfolder/c/collective_blessing.txt -text
 forge-gui/res/cardsfolder/c/collective_restraint.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/collective_unconscious.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/collective_voyage.txt -text
 forge-gui/res/cardsfolder/c/colos_yearling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/colossal_might.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/colossal_whale.txt -text

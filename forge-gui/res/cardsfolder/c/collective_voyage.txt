@@ -1,0 +1,13 @@
+Name:Collective Voyage
+ManaCost:G
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ G | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBSearch | StackDescription$ SpellDescription | SpellDescription$ Join forces - Starting with you, each player may pay any amount of mana. Each player searches his or her library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles his or her library.
+SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | SubAbility$ DBStore
+SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn | References$ X,JoinForcesAmount
+SVar:DBSearch:DB$ ChangeZone | DefinedPlayer$ Each | ChangeType$ Land.Basic | ChangeNum$ JoinForcesAmount | Origin$ Library | Destination$ Battlefield | Tapped$ True | SubAbility$ DBReset | References$ JoinForcesAmount | StackDescription$ None
+SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0 | References$ JoinForcesAmount
+SVar:X:Count$ChosenNumber
+SVar:JoinForcesAmount:Number$0
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_voyage.jpg
+Oracle:Join forces - Starting with you, each player may pay any amount of mana. Each player searches his or her library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles his or her library.
