@@ -312,6 +312,10 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
     private static final Stack<FDialog> openModals = new Stack<FDialog>();
     private static final BackdropPanel backdropPanel = new BackdropPanel();
 
+    public static boolean isModalOpen() {
+        return !openModals.isEmpty();
+    }
+
     public static JPanel getBackdropPanel() {
         return backdropPanel;
     }

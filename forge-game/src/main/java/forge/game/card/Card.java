@@ -8528,19 +8528,43 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean canBeShownTo(final Player viewer) {
-        if (!isFaceDown()) {
+        Zone zone = this.getZone();
+        if (zone == null) { return true; } //cards outside any zone are visible to all
+
+        switch (zone.getZoneType()) {
+        case Ante:
+        case Command:
+        case Exile:
+        case Battlefield:
+        case Graveyard:
+        case Stack:
+            //cards in these zones are visible to all
+            if (isFaceDown() && getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
+                break; //exception is face down cards controlled by opponents
+            }
             return true;
-        }
-        if (getController() == viewer && isInZone(ZoneType.Battlefield)) {
+        case Hand:
+        case Sideboard:
+            //face-up cards in these zones are hidden to opponents unless they specify otherwise
+            if (getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
+                break;
+            }
             return true;
+        case Library:
+        case PlanarDeck:
+        case SchemeDeck:
+            //cards in these zones are hidden to all unless they specify otherwise
+            if (getController() == viewer && hasKeyword("You may look at this card.")) {
+                return true;
+            }
+            if (getController().isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
+                return true;
+            }
+            break;
         }
+
+        //one last check to see if card can be shown
         final Game game = this.getGame();
-        if (getController() == viewer && hasKeyword("You may look at this card.")) {
-            return true;
-        }
-        if (getController().isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
-            return true;
-        }
         for (Card host : game.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = host.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {

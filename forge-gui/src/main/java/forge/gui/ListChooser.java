@@ -20,6 +20,7 @@ package forge.gui;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
 import forge.FThreads;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FMouseAdapter;
@@ -29,6 +30,7 @@ import forge.gui.toolbox.FScrollPane;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -156,18 +158,23 @@ public class ListChooser<T> {
      * @param index0 index to select when shown
      * @return a boolean.
      */
-    public boolean show(T item) {
+    public boolean show(final T item) {
         if (this.called) {
             throw new IllegalStateException("Already shown");
         }
         int result;
         do {
-            if (list.contains(item)) {
-                lstChoices.setSelectedValue(item, true);
-            }
-            else {
-                lstChoices.setSelectedIndex(0);
-            }
+            SwingUtilities.invokeLater(new Runnable() { //invoke later so selected item not set until dialog open
+                @Override
+                public void run() {
+                    if (list.contains(item)) {
+                        lstChoices.setSelectedValue(item, true);
+                    }
+                    else {
+                        lstChoices.setSelectedIndex(0);
+                    }
+                }
+            });
             this.optionPane.setVisible(true);
             result = this.optionPane.getResult();
             if (result != 0) {

@@ -58,6 +58,7 @@ import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
+import forge.view.FDialog;
 import forge.view.FFrame;
 import forge.view.FView;
 
@@ -363,8 +364,8 @@ public enum FControl implements KeyEventDispatcher {
         return null;
     }
 
-    public boolean mayShowCard(Card c) {
-        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
+    public boolean mayShowCard(Card c) { //allow showing cards while modal open to account for revealing, picking, and ordering cards
+        return game == null || !gameHasHumanPlayer || FDialog.isModalOpen() || c.canBeShownTo(getCurrentPlayer());
     }
 
     /**

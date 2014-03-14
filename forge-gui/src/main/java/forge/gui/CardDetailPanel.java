@@ -184,13 +184,21 @@ public class CardDetailPanel extends SkinnedPanel {
             return;
         }
 
-        this.updateBorder(CardUtil.getColors(card), card.isFaceDown());
+        boolean canShowThis = false;
 
-        final boolean canShowThis = Singletons.getControl().mayShowCard(card);
-        if (canShowThis) {
+        if (card.isFaceDown()) {
+            if (card.isInZone(ZoneType.Battlefield)) {
+                this.nameCostLabel.setText("Morph");
+                this.typeLabel.setText("Creature");
+            }
+        }
+        else if (Singletons.getControl().mayShowCard(card)) {
+            canShowThis = true;
+
             if (card.getManaCost().isNoCost()) {
                 this.nameCostLabel.setText(card.getName());
-            } else {
+            }
+            else {
                 String manaCost = card.getManaCost().toString();
                 if ( card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
                     manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
@@ -205,7 +213,8 @@ public class CardDetailPanel extends SkinnedPanel {
                 CardEdition edition = Singletons.getMagicDb().getEditions().get(set);
                 if (null == edition) {
                     setInfoLabel.setToolTipText(card.getRarity().name());
-                } else {
+                }
+                else {
                     setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), card.getRarity().name()));
                 }
                 
@@ -243,11 +252,10 @@ public class CardDetailPanel extends SkinnedPanel {
                     break;
                 }
             }
-        } else {
-            this.nameCostLabel.setText("Morph");
-            this.typeLabel.setText("Creature");
         }
-        
+
+        this.updateBorder(CardUtil.getColors(card), canShowThis);
+
         StringBuilder ptText = new StringBuilder();
         if (card.isCreature()) {
             ptText.append(card.getNetAttack()).append(" / ").append(card.getNetDefense());
@@ -637,7 +645,7 @@ public class CardDetailPanel extends SkinnedPanel {
         return sb.toString();
     }
 
-    private void updateBorder(ColorSet list, boolean faceDown) {
+    private void updateBorder(ColorSet list, final boolean canShow) {
         // color info
         if (list == null) {
             this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -646,7 +654,7 @@ public class CardDetailPanel extends SkinnedPanel {
         }
 
         Color color;
-        if (faceDown) {
+        if (!canShow) {
             color = Color.gray;
         } else if (list.isMulticolor()) {
             color = Color.orange;
