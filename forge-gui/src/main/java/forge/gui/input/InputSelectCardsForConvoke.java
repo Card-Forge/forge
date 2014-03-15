@@ -25,8 +25,8 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     private final ManaCostBeingPaid remainingCost;
     private final Player player;
     
-    public InputSelectCardsForConvoke(Player p, ManaCost cost, List<Card> untapped) {
-        super(1, Math.min(cost.getCMC(), untapped.size()));
+    public InputSelectCardsForConvoke(Player p, ManaCost cost, List<Card> untapped) { 
+        super(0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
         allowUnselect = true;
