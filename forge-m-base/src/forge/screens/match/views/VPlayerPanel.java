@@ -12,7 +12,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
@@ -27,7 +26,6 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinColor ZONE_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
 
     private final Player player;
-    private final LobbyPlayer localPlayer;
     private final VPhaseIndicator phaseIndicator;
     private final VField field;
     private final VAvatar avatar;
@@ -37,12 +35,11 @@ public class VPlayerPanel extends FContainer {
     private final List<InfoTab> tabs = new ArrayList<InfoTab>();
     private InfoTab selectedTab;
 
-    public VPlayerPanel(Player player0, LobbyPlayer localPlayer0) {
+    public VPlayerPanel(Player player0) {
         player = player0;
-        localPlayer = localPlayer0;
         phaseIndicator = add(new VPhaseIndicator());
         field = add(new VField(player));
-        avatar = add(new VAvatar(localPlayer.getAvatarIndex()));
+        avatar = add(new VAvatar(player));
         lblLife = add(new LifeLabel());
         addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
         addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
@@ -58,10 +55,6 @@ public class VPlayerPanel extends FContainer {
 
     public Player getPlayer() {
         return player;
-    }
-
-    public LobbyPlayer getLocalPlayer() {
-        return localPlayer;
     }
 
     public void addZoneDisplay(ZoneType zoneType, FSkinImage tabIcon) {

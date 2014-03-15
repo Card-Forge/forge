@@ -161,8 +161,8 @@ public class FControl {
                 avatarIndex = Integer.parseInt(indices[i]);
                 i++;
             }
-            localPlayer.setAvatarIndex(avatarIndex);
-            playerPanels.add(new VPlayerPanel(p, localPlayer));
+            p.getLobbyPlayer().setAvatarIndex(avatarIndex);
+            playerPanels.add(new VPlayerPanel(p));
         }
 
         view = new MatchScreen(playerPanels) {
