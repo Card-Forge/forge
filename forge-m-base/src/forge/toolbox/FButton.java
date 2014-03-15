@@ -139,6 +139,8 @@ public class FButton extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        float x = 0;
+        float y = 0;
         float w = getWidth();
         float h = getHeight();
 
@@ -171,13 +173,16 @@ public class FButton extends FDisplayObject {
             g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
             g.drawImage(imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
             w -= cornerTextOffsetX;
-            h += cornerTextOffsetY;
+            y += cornerTextOffsetY;
+            h -= cornerTextOffsetY;
             break;
         case BottomRight:
             g.drawImage(imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
             g.drawImage(imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
-            w += cornerTextOffsetX;
-            h += cornerTextOffsetY;
+            x += cornerTextOffsetX;
+            w -= cornerTextOffsetX;
+            y += cornerTextOffsetY;
+            h -= cornerTextOffsetY;
             break;
         }
 
@@ -186,7 +191,7 @@ public class FButton extends FDisplayObject {
         }
 
         if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, foreColor, 0, 0, w, h, false, HAlignment.CENTER, true);
+            g.drawText(text, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
 }
