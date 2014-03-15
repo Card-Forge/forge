@@ -324,7 +324,6 @@ public class FControl {
     }
 
     public static void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
-        //System.out.println("updateZones " + zonesToUpdate);
         for (Pair<Player, ZoneType> kv : zonesToUpdate) {
             Player owner = kv.getKey();
             ZoneType zt = kv.getValue();
@@ -334,9 +333,9 @@ public class FControl {
 
     // Player's mana pool changes
     public static void updateManaPool(List<Player> manaPoolUpdate) {
-        /*for (Player p : manaPoolUpdate) {
-            getFieldViewFor(p).getDetailsPanel().updateManaPool();
-        }*/
+        for (Player p : manaPoolUpdate) {
+            getPlayerPanel(p).updateManaPool();
+        }
     }
 
     // Player's lives and poison counters

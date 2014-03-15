@@ -115,7 +115,7 @@ public class MatchScreen extends FScreen {
         g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
 
         //field separator lines
-        if (topPlayerPanel.getSelectedZone() == null) {
+        if (topPlayerPanel.getSelectedTab() == null) {
             y++; //ensure border goes all the way across under avatar
         }
         g.drawLine(1, BORDER_COLOR, 0, y, w, y);
@@ -130,8 +130,8 @@ public class MatchScreen extends FScreen {
         //determine player panel heights based on visibility of zone displays
         float topPlayerPanelHeight, bottomPlayerPanelHeight;
         float cardRowsHeight = height - startY - VPrompt.HEIGHT - 2 * VAvatar.HEIGHT;
-        if (topPlayerPanel.getSelectedZone() == null) {
-            if (bottomPlayerPanel.getSelectedZone() != null) {
+        if (topPlayerPanel.getSelectedTab() == null) {
+            if (bottomPlayerPanel.getSelectedTab() != null) {
                 topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
                 bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
             }
@@ -140,7 +140,7 @@ public class MatchScreen extends FScreen {
                 bottomPlayerPanelHeight = topPlayerPanelHeight;
             }
         }
-        else if (bottomPlayerPanel.getSelectedZone() == null) {
+        else if (bottomPlayerPanel.getSelectedTab() == null) {
             topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
             bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
         }

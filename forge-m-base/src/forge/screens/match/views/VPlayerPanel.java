@@ -32,9 +32,10 @@ public class VPlayerPanel extends FContainer {
     private final VField field;
     private final VAvatar avatar;
     private final LifeLabel lblLife;
-    private final List<ZoneInfoTab> zoneTabs = new ArrayList<ZoneInfoTab>();
-    private final Map<ZoneType, VZoneDisplay> zoneDisplays = new HashMap<ZoneType, VZoneDisplay>();
-    private VZoneDisplay selectedZone;
+    private final InfoTab tabManaPool;
+    private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<ZoneType, InfoTab>();
+    private final List<InfoTab> tabs = new ArrayList<InfoTab>();
+    private InfoTab selectedTab;
 
     public VPlayerPanel(Player player0, LobbyPlayer localPlayer0) {
         player = player0;
@@ -46,6 +47,12 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Hand, FSkinImage.HAND);
         addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
         addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
+
+        VManaPool manaPool = add(new VManaPool(player));
+        manaPool.setVisible(false);
+        tabManaPool = add(new InfoTab(FSkinImage.MANA_X, manaPool));
+        tabs.add(tabManaPool);
+
         addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
     }
 
@@ -58,39 +65,36 @@ public class VPlayerPanel extends FContainer {
     }
 
     public void addZoneDisplay(ZoneType zoneType, FSkinImage tabIcon) {
-        VZoneDisplay zone = add(new VZoneDisplay(player, zoneType));
-        zone.setVisible(false);
-        zoneDisplays.put(zoneType, zone);
-        zoneTabs.add(add(new ZoneInfoTab(tabIcon, zone)));
+        VZoneDisplay zoneDisplay = add(new VZoneDisplay(player, zoneType));
+        zoneDisplay.setVisible(false);
+        InfoTab zoneTab = add(new InfoTab(tabIcon, zoneDisplay));
+        zoneTabs.put(zoneType, zoneTab);
+        tabs.add(zoneTab);
     }
 
-    public ZoneType getSelectedZone() {
-        if (selectedZone != null) {
-            return selectedZone.getZoneType();
-        }
-        return null;
+    public InfoTab getSelectedTab() {
+        return selectedTab;
     }
 
     public void setSelectedZone(ZoneType zoneType) {
-        if (selectedZone != null) {
-            if (selectedZone.getZoneType() == zoneType) {
-                return;
-            }
-            selectedZone.setVisible(false);
-        }
-        else if (zoneType == null) {
+        setSelectedTab(zoneTabs.get(zoneType));
+    }
+
+    private void setSelectedTab(InfoTab selectedTab0) {
+        if (selectedTab == selectedTab0) {
             return;
         }
 
-        if (zoneType == null) {
-            selectedZone = null;
+        if (selectedTab != null) {
+            selectedTab.displayArea.setVisible(false);
         }
-        else {
-            selectedZone = zoneDisplays.get(zoneType);
-            if (selectedZone != null) {
-                selectedZone.setVisible(true);
-            }
+
+        selectedTab = selectedTab0;
+
+        if (selectedTab != null) {
+            selectedTab.displayArea.setVisible(true);
         }
+
         if (FControl.getView() != null) { //must revalidate entire screen so panel heights updated
             FControl.getView().revalidate();
         }
@@ -119,17 +123,16 @@ public class VPlayerPanel extends FContainer {
         lblLife.update();
     }
 
+    public void updateManaPool() {
+        tabManaPool.update();
+    }
+
     public void updateZone(ZoneType zoneType) {
         if (zoneType == ZoneType.Battlefield) {
             field.update();
         }
         else {
-            for (ZoneInfoTab tab : zoneTabs) {
-                if (tab.zoneToOpen.getZoneType() == zoneType) {
-                    tab.update();
-                    return;
-                }
-            }
+            zoneTabs.get(zoneType).update();
         }
     }
 
@@ -139,17 +142,11 @@ public class VPlayerPanel extends FContainer {
         float x = VAvatar.WIDTH;
         phaseIndicator.setBounds(x, height - VPhaseIndicator.HEIGHT, width - VAvatar.WIDTH, VPhaseIndicator.HEIGHT);
 
-        float y, zoneHeight;
-        if (selectedZone != null) {
-            y = height - VAvatar.HEIGHT;
-            zoneHeight = y / 3;
-            y -= zoneHeight;
-            for (VZoneDisplay zone : zoneDisplays.values()) {
-                zone.setBounds(0, y, width, zoneHeight);
-            }
-        }
-        else {
-            zoneHeight = 0;
+        float y = height - VAvatar.HEIGHT;
+        float displayAreaHeight = y / 3;
+        y -= displayAreaHeight;
+        for (InfoTab tab : tabs) {
+            tab.displayArea.setBounds(0, y, width, displayAreaHeight);
         }
 
         y = height - VAvatar.HEIGHT;
@@ -158,12 +155,15 @@ public class VPlayerPanel extends FContainer {
         float infoLabelHeight = VAvatar.HEIGHT - VPhaseIndicator.HEIGHT;
         lblLife.setBounds(x, y, lblLife.getWidth(), infoLabelHeight);
         x += lblLife.getWidth();
-        for (ZoneInfoTab tab : zoneTabs) {
+        for (InfoTab tab : tabs) {
             tab.setBounds(x, y, tab.getWidth(), infoLabelHeight);
             x += tab.getWidth();
         }
 
-        field.setBounds(0, 0, width, y - zoneHeight);
+        if (selectedTab != null) {
+            y -= displayAreaHeight;
+        }
+        field.setBounds(0, 0, width, y);
 
         if (isFlipped()) { //flip all positions across x-axis if needed
             for (FDisplayObject child : getChildren()) {
@@ -174,25 +174,15 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
-        if (selectedZone != null) { //draw background and border for selected zone if needed 
+        if (selectedTab != null) { //draw background and border for selected zone if needed 
             float w = getWidth();
-            g.fillRect(ZONE_BACK_COLOR, 0, selectedZone.getTop(), w, selectedZone.getHeight());
+            VDisplayArea selectedDisplayArea = selectedTab.displayArea;
+            g.fillRect(ZONE_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
-            ZoneInfoTab selectedZoneTab = null;
-            for (ZoneInfoTab tab : zoneTabs) {
-                if (tab.zoneToOpen == selectedZone) {
-                    selectedZoneTab = tab;
-                    break;
-                }
-            }
-            float y = isFlipped() ? selectedZone.getTop() + 1 : selectedZone.getBottom();
-            if (selectedZoneTab == null) {
-                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, w, y);
-            }
-            else { //leave gap at selected zone tab
-                g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedZoneTab.getLeft(), y);
-                g.drawLine(1, MatchScreen.BORDER_COLOR, selectedZoneTab.getRight(), y, w, y);
-            }
+            float y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
+            //leave gap at selected zone tab
+            g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedTab.getLeft(), y);
+            g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
         }
     }
 
@@ -213,31 +203,31 @@ public class VPlayerPanel extends FContainer {
         }
     }
 
-    private class ZoneInfoTab extends FDisplayObject {
+    public class InfoTab extends FDisplayObject {
         private String value = "0";
         private final FSkinImage icon;
-        private final VZoneDisplay zoneToOpen;
+        private final VDisplayArea displayArea;
 
-        private ZoneInfoTab(FSkinImage icon0, VZoneDisplay zoneToOpen0) {
+        private InfoTab(FSkinImage icon0, VDisplayArea displayArea0) {
             icon = icon0;
-            zoneToOpen = zoneToOpen0;
+            displayArea = displayArea0;
             setWidth(VAvatar.HEIGHT * 1.05f);
         }
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (selectedZone == zoneToOpen) {
-                setSelectedZone(null);
+            if (selectedTab == this) {
+                setSelectedTab(null);
             }
             else {
-                setSelectedZone(zoneToOpen.getZoneType());
+                setSelectedTab(this);
             }
             return true;
         }
 
-        private void update() {
-            zoneToOpen.update();
-            value = String.valueOf(zoneToOpen.getCount());
+        public void update() {
+            displayArea.update();
+            value = String.valueOf(displayArea.getCount());
         }
 
         @Override
@@ -246,7 +236,7 @@ public class VPlayerPanel extends FContainer {
             float paddingX = 4;
             float paddingY = 2;
 
-            if (selectedZone == zoneToOpen) {
+            if (selectedTab == this) {
                 y = 0;
                 w = getWidth();
                 h = getHeight();
@@ -271,7 +261,7 @@ public class VPlayerPanel extends FContainer {
                 g.endClip();
             }
 
-            h = getHeight() * 0.7f;
+            h = Math.round(getHeight() * 0.7f / 20f) * 20f; //round to nearest 20 so images look ok
             w = h;
             x = paddingX;
             y = (getHeight() - h) / 2;

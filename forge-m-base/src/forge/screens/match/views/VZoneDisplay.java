@@ -9,9 +9,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FScrollPane;
 
-public class VZoneDisplay extends FScrollPane {
+public class VZoneDisplay extends VDisplayArea {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
     private final Player player;
@@ -32,10 +31,12 @@ public class VZoneDisplay extends FScrollPane {
         return cardPanels;
     }
 
+    @Override
     public int getCount() {
         return cardPanels.size();
     }
 
+    @Override
     public void update() {
         FThreads.invokeInEdtNowOrLater(updateRoutine);
     }
