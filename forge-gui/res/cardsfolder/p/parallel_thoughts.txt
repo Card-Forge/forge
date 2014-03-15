@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination
 SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
-R:Event$ Draw | ValidPlayer$ You | ReplaceWith$ RepParallelThoughts | Optional$ True | OptionalDecider$ You | Description$ If you would draw a card, you may instead put the top card of the pile you exiled into your hand.
+R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ RepParallelThoughts | Optional$ True | OptionalDecider$ You | Description$ If you would draw a card, you may instead put the top card of the pile you exiled into your hand.
 SVar:RepParallelThoughts:DB$ ChangeZone | Defined$ FirstRemembered | Origin$ Exile | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
