@@ -31,6 +31,7 @@ public class VPlayerPanel extends FContainer {
     private final VAvatar avatar;
     private final LifeLabel lblLife;
     private final InfoTab tabManaPool;
+    private final InfoTab tabFlashbackZone;
     private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<ZoneType, InfoTab>();
     private final List<InfoTab> tabs = new ArrayList<InfoTab>();
     private InfoTab selectedTab;
@@ -45,12 +46,18 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Graveyard, FSkinImage.GRAVEYARD);
         addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
 
+        VFlashbackZone flashbackZone = add(new VFlashbackZone(player0));
+        flashbackZone.setVisible(false);
+        tabFlashbackZone = add(new InfoTab(FSkinImage.FLASHBACK, flashbackZone));
+        tabs.add(tabFlashbackZone);
+
         VManaPool manaPool = add(new VManaPool(player));
         manaPool.setVisible(false);
         tabManaPool = add(new InfoTab(FSkinImage.MANA_X, manaPool));
         tabs.add(tabManaPool);
 
         addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
+        addZoneDisplay(ZoneType.Command, FSkinImage.PLANESWALKER);
     }
 
     public Player getPlayer() {
@@ -148,9 +155,11 @@ public class VPlayerPanel extends FContainer {
         float infoLabelHeight = VAvatar.HEIGHT - VPhaseIndicator.HEIGHT;
         lblLife.setBounds(x, y, lblLife.getWidth(), infoLabelHeight);
         x += lblLife.getWidth();
+
+        float infoTabWidth = (getWidth() - x) / tabs.size();
         for (InfoTab tab : tabs) {
-            tab.setBounds(x, y, tab.getWidth(), infoLabelHeight);
-            x += tab.getWidth();
+            tab.setBounds(x, y, infoTabWidth, infoLabelHeight);
+            x += infoTabWidth;
         }
 
         if (selectedTab != null) {
@@ -183,7 +192,7 @@ public class VPlayerPanel extends FContainer {
         private String life = "20";
 
         private LifeLabel() {
-            setWidth(VAvatar.HEIGHT * 2f / 3f);
+            setWidth(LIFE_FONT.getFont().getBounds("99").width * 1.2f); //make just wide enough for 2-digit life totals
         }
 
         private void update() {
@@ -204,7 +213,6 @@ public class VPlayerPanel extends FContainer {
         private InfoTab(FSkinImage icon0, VDisplayArea displayArea0) {
             icon = icon0;
             displayArea = displayArea0;
-            setWidth(VAvatar.HEIGHT * 1.05f);
         }
 
         @Override
@@ -226,7 +234,7 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             float x, y, w, h;
-            float paddingX = 4;
+            float paddingX = 2;
             float paddingY = 2;
 
             if (selectedTab == this) {
