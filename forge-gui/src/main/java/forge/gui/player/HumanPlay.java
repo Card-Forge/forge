@@ -577,10 +577,21 @@ public class HumanPlay {
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
-                List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
-                int amount = getAmountFromPartX(part, source, sourceAbility);
-                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
-                if (!hasPaid) { return false; }
+                if ("Hand".equals(part.getType())) {
+                    if (!p.getController().confirmPayment(part, "Do you want to discard your hand?")) {
+                        return false;
+                    }
+
+                    List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                    for (final Card card : cards) {
+                        p.discard(card, sourceAbility);
+                    }
+                } else {
+                    List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
+                    int amount = getAmountFromPartX(part, source, sourceAbility);
+                    boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "discard." + orString);
+                    if (!hasPaid) { return false; }
+                }
             }
             else if (part instanceof CostReveal) {
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source);
