@@ -152,9 +152,10 @@ public class VPlayerPanel extends FContainer {
         y = height - VAvatar.HEIGHT;
         avatar.setPosition(0, y);
 
+        float lifeLabelWidth = LIFE_FONT.getFont().getBounds("99").width * 1.2f; //make just wide enough for 2-digit life totals
         float infoLabelHeight = VAvatar.HEIGHT - VPhaseIndicator.HEIGHT;
-        lblLife.setBounds(x, y, lblLife.getWidth(), infoLabelHeight);
-        x += lblLife.getWidth();
+        lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
+        x += lifeLabelWidth;
 
         float infoTabWidth = (getWidth() - x) / tabs.size();
         for (InfoTab tab : tabs) {
@@ -192,7 +193,6 @@ public class VPlayerPanel extends FContainer {
         private String life = "20";
 
         private LifeLabel() {
-            setWidth(LIFE_FONT.getFont().getBounds("99").width * 1.2f); //make just wide enough for 2-digit life totals
         }
 
         private void update() {
@@ -268,8 +268,8 @@ public class VPlayerPanel extends FContainer {
             y = (getHeight() - h) / 2;
             g.drawImage(icon, x, y, w, h);
 
-            x += w * 1.05f;
-            g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x, getHeight(), false, HAlignment.LEFT, true);
+            x += w * 1.1f;
+            g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, HAlignment.LEFT, true);
         }
     }
 }

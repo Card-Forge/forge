@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class FSkinFont {
+    public static final int MIN_FONT_SIZE = 8;
+
     private static final String TTF_FILE = "font1.ttf";
     private static final int defaultFontSize = 12;
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -571,25 +572,35 @@ public class Forge implements ApplicationListener {
         }
 
         public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
-            drawText(text, skinFont.getFont(), skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
         }
         public void drawText(String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
-            drawText(text, skinFont.getFont(), color, x, y, w, h, wrap, horzAlignment, centerVertically);
-        }
-        public void drawText(String text, BitmapFont font, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
-            font.setColor(color);
+            int fontSize = skinFont.getSize();
+            BitmapFont font = skinFont.getFont();
             if (wrap) {
-                float textHeight = font.getWrappedBounds(text, w).height;
+                TextBounds bounds = font.getWrappedBounds(text, w);
+                while ((bounds.width > w || bounds.height > h) && fontSize > FSkinFont.MIN_FONT_SIZE) {
+                    font = FSkinFont.get(--fontSize).getFont(); //shrink font to fit if possible
+                    bounds = font.getWrappedBounds(text, w);
+                }
+                float textHeight = bounds.height;
                 if (h > textHeight && centerVertically) {
                     y += (h - textHeight) / 2;
                 }
+                font.setColor(color);
                 font.drawWrapped(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
             }
             else {
-                float textHeight = font.getMultiLineBounds(text).height;
+                TextBounds bounds = font.getMultiLineBounds(text);
+                while ((bounds.width > w || bounds.height > h) && fontSize > FSkinFont.MIN_FONT_SIZE) {
+                    font = FSkinFont.get(--fontSize).getFont(); //shrink font to fit if possible
+                    bounds = font.getMultiLineBounds(text);
+                }
+                float textHeight = bounds.height;
                 if (h > textHeight && centerVertically) {
                     y += (h - textHeight) / 2;
                 }
+                font.setColor(color);
                 font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
             }
         }
