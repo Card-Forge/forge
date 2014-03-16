@@ -2951,6 +2951,7 @@ forge-gui/res/cardsfolder/c/crocanura.txt -text
 forge-gui/res/cardsfolder/c/cromat.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crookclaw_elder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crookclaw_transmuter.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/crooked_scales.txt -text
 forge-gui/res/cardsfolder/c/crookshank_kobolds.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crop_rotation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/crosis_the_purger.txt -text

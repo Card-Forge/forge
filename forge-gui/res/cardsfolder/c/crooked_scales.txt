@@ -1,0 +1,12 @@
+Name:Crooked Scales
+ManaCost:4
+Types:Artifact
+A:AB$ Pump | Cost$ 4 T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberObjects$ ThisTargetedCard | IsCurse$ True | StackDescription$ SpellDescription | SubAbility$ DBPump | SpellDescription$ Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ImprintCards$ ThisTargetedCard | StackDescription$ None | SubAbility$ DBFlip
+SVar:DBFlip:DB$ FlipACoin | Caller$ You | WinSubAbility$ DestroyOpp | LoseSubAbility$ DestroyYours | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DestroyOpp:DB$ Destroy | Defined$ Remembered
+SVar:DestroyYours:DB$ Destroy | Defined$ Imprinted | UnlessCost$ 3 | UnlessPayer$ You | SubAbility$ DBFlip | UnlessResolveSubs$ WhenPaid
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crooked_scales.jpg
+Oracle:{4}, {T}: Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process.
