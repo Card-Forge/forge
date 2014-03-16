@@ -21,6 +21,7 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
@@ -56,6 +57,7 @@ import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -3560,6 +3562,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         this.enchanting = null;
         entity.removeEnchantedBy(this);
+        if (this.isBestowed()) {
+            this.unanimateBestow();
+        }
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null, AttachMethod.Enchant));
     }
 

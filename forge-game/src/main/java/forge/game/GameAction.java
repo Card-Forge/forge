@@ -724,12 +724,6 @@ public class GameAction {
             }
         }
 
-        // card state effects like Glorious Anthem
-//        for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
-//            final Function<Game, ?> com = GameActionUtil.getCommands().get(effect);
-//            com.apply(game);
-//        }
-
         List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
         GameActionUtil.grantBasicLandsManaAbilities(CardLists.filter(lands, CardPredicates.Presets.LANDS));
 
@@ -927,14 +921,7 @@ public class GameAction {
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
-                if (c.isBestowed()) {
-                    c.unanimateBestow();
-                    game.fireEvent(new GameEventCardStatsChanged(c));
-                    return true;
-                }
-                else {
-                    this.moveToGraveyard(c);
-                }
+                this.moveToGraveyard(c);
                 checkAgain = true;
             }
         } else if (entity instanceof Player) {
@@ -955,11 +942,6 @@ public class GameAction {
         }
 
         if (c.isInPlay() && !c.isEnchanting()) {
-            if (c.isBestowed()) {
-                c.unanimateBestow();
-                game.fireEvent(new GameEventCardStatsChanged(c));
-                return true;
-            }
             this.moveToGraveyard(c);
             checkAgain = true;
         }
