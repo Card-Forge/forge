@@ -497,7 +497,7 @@ public class CardFactoryUtil {
         }
 
         // Make sure it's still targetable as well
-        return target.canBeTargetedBy(ability);
+        return ability.canTarget(target);
     }
 
     // does "target" have protection from "card"?

@@ -5025,6 +5025,7 @@ forge-gui/res/cardsfolder/g/gatherer_of_graces.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gatstaf_shepherd_gatstaf_howler.txt -text
 forge-gui/res/cardsfolder/g/gauntlet_of_might.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gauntlet_of_power.txt -text
+forge-gui/res/cardsfolder/g/gauntlets_of_chaos.txt -text
 forge-gui/res/cardsfolder/g/gavony.txt -text
 forge-gui/res/cardsfolder/g/gavony_ironwright.txt -text
 forge-gui/res/cardsfolder/g/gavony_township.txt -text
@@ -7140,6 +7141,7 @@ forge-gui/res/cardsfolder/l/leering_gargoyle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/leery_fogbeast.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/l/legacy_weapon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/legacys_allure.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/legerdemain.txt -text
 forge-gui/res/cardsfolder/l/legion_loyalist.txt -text
 forge-gui/res/cardsfolder/l/legions_initiative.txt -text
 forge-gui/res/cardsfolder/l/legions_of_lim_dul.txt svneol=native#text/plain

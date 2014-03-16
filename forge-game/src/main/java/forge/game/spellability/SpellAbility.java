@@ -33,6 +33,8 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -138,6 +140,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (this.usesTargeting()) return false;
         if (getRestrictions() != null && getRestrictions().getPlaneswalker())
             return false; //Loyalty ability, not a mana ability.
+        if (this.isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana)
+            return false;
 
         return getManaPartRecursive() != null;
     }
@@ -1044,6 +1048,24 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     if (!c.sharesCardTypeWith(crd)) {
                         return false;
                     }
+                }
+            }
+            if (hasParam("TargetsWithSharedTypes") && entity instanceof Card) {
+                final Card c = (Card) entity;
+                final SpellAbility parent = this.getParentTargetingCard();
+                final Card parentTargeted = parent != null ? parent.getTargetCard() : null;
+                if (parentTargeted == null) {
+                    return false;
+                }
+                boolean flag = false;
+                for (final String type : getParam("TargetsWithSharedTypes").split(",")) {
+                    if (c.isType(type) && parentTargeted.isType(type)) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    return false;
                 }
             }
             if (hasParam("TargetsWithRelatedProperty") && entity instanceof Card) {
