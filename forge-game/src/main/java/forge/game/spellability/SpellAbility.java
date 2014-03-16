@@ -81,6 +81,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean trigger = false;
     private boolean optionalTrigger = false;
     private int sourceTrigger = -1;
+    private List<Object> triggerRemembered = new ArrayList<Object>();
 
     private boolean flashBackAbility = false;
     private boolean cycling = false;
@@ -692,6 +693,19 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.triggeringObjects = new HashMap<String, Object>();
     }
 
+
+    public List<Object> getTriggerRemembered() {
+        return this.triggerRemembered;
+    }
+
+    public void setTriggerRemembered(List<Object> list) {
+        this.triggerRemembered = list;
+    }
+
+    public void resetTriggerRemembered() {
+        this.triggerRemembered = new ArrayList<Object>();
+    }
+    
     /**
      * Gets the replacing objects.
      * 
@@ -735,6 +749,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.resetPaidHash();
         this.resetTargets();
         this.resetTriggeringObjects();
+        this.resetTriggerRemembered();
+        
 
         // Clear SVars
         for (final String store : Card.getStorableSVars()) {

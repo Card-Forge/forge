@@ -627,6 +627,7 @@ public class CardFactory {
         trig.setTrigger(true);
         trig.setSourceTrigger(t.getId());
         t.setTriggeringObjects(trig);
+        trig.setTriggerRemembered(t.getTriggerRemembered());
         if (t.getStoredTriggeredObjects() != null) {
             trig.setAllTriggeringObjects(t.getStoredTriggeredObjects());
         }

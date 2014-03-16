@@ -76,6 +76,8 @@ public abstract class Trigger extends TriggerReplacementBase {
     private TriggerType mode;
 
     private HashMap<String, Object> storedTriggeredObjects = null;
+    
+    private List<Object> triggerRemembered = new ArrayList<Object>();
 
     /**
      * <p>
@@ -393,6 +395,14 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.triggeredSA = sa;
     }
 
+    public void addRemembered(Object o) {
+        this.triggerRemembered.add(o);
+    }
+    
+    public List<Object> getTriggerRemembered() {
+        return this.triggerRemembered;
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @return the mode
@@ -435,4 +445,5 @@ public abstract class Trigger extends TriggerReplacementBase {
     public void setTriggerPhases(List<PhaseType> phases) {
         validPhases = phases;
     }
+
 }

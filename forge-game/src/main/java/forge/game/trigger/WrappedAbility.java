@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,6 +128,21 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void resetTriggeringObjects() {
         sa.resetTriggeringObjects();
+    }
+
+    @Override
+    public List<Object> getTriggerRemembered() {
+        return sa.getTriggerRemembered();
+    }
+
+    @Override
+    public void resetTriggerRemembered() {
+        sa.resetTriggerRemembered();
+    }
+
+    @Override
+    public void setTriggerRemembered(List<Object> list) {
+        sa.setTriggerRemembered(list);
     }
 
     @Override

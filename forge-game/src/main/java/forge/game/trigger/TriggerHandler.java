@@ -376,6 +376,7 @@ public class TriggerHandler {
         sa.setTrigger(true);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa);
+        sa.setTriggerRemembered(regtrig.getTriggerRemembered());
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa.setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }

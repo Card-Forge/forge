@@ -173,6 +173,14 @@ public class AbilityUtils {
                     cards.add(game.getCardState((Card) o));
                 }
             }
+        } else if (defined.equals("DelayTriggerRemembered")) {
+            if (sa.isTrigger()) {
+               for (Object o : sa.getTriggerRemembered()) {
+                   if (o instanceof Card) {
+                       cards.add(game.getCardState((Card) o));
+                   }
+               }
+            }
         } else if (defined.equals("FirstRemembered")) {
             Object o = Iterables.getFirst(hostCard.getRemembered(), null);
             if (o != null && o instanceof Card) {
@@ -819,6 +827,15 @@ public class AbilityUtils {
             for (final Object rem : card.getRemembered()) {
                 if (rem instanceof Player) {
                     players.add((Player) rem);
+                }
+            }
+        }
+        else if (defined.equals("DelayTriggerRemembered")) {
+            if (sa.isTrigger()) {
+                for (Object o : sa.getTriggerRemembered()) {
+                    if (o instanceof Player) {
+                        players.add((Player) o);
+                    }
                 }
             }
         }

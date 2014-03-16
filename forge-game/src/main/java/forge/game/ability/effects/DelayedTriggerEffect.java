@@ -45,13 +45,13 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             triggerRemembered = sa.getParam("RememberObjects");
         }
 
+        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), true);
+
         if (triggerRemembered != null) {
             for (final Object o : AbilityUtils.getDefinedObjects(sa.getHostCard(), triggerRemembered, sa)) {
-                sa.getHostCard().addRemembered(o);
+                delTrig.addRemembered(o);
             }
         }
-
-        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, sa.getHostCard(), true);
 
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(delTrig);
     }
