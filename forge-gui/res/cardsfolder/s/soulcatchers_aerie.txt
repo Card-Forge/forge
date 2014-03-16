@@ -2,7 +2,7 @@ Name:Soulcatchers' Aerie
 ManaCost:1 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Bird | AddPower$ X | AddToughness$ X | Description$ Bird creatures get +1/+1 for each feather counter on CARDNAME.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Bird | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Bird is put into your graveyard from the battlefield, put a feather counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Bird.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Bird is put into your graveyard from the battlefield, put a feather counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FEATHER | CounterNum$ 1
 SVar:X:Count$CardCounters.FEATHER
 SVar:RemRandomDeck:True
