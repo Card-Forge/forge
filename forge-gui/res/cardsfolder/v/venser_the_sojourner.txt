@@ -2,9 +2,9 @@ Name:Venser, the Sojourner
 ManaCost:3 W U
 Types:Planeswalker Venser
 Loyalty:3
-A:AB$ ChangeZone | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DelTrig | SpellDescription$  Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return exiled card to the battlefield.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
+A:AB$ ChangeZone | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$  Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ Return exiled card to the battlefield. | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Effect | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Name$ Venser, the Sojourner Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures are unblockable this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ Unblockable | Description$ creatures are unblockable this turn.

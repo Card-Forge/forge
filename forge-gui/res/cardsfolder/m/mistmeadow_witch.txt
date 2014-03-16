@@ -2,9 +2,9 @@ Name:Mistmeadow Witch
 ManaCost:1 WU
 Types:Creature Kithkin Wizard
 PT:1/1
-A:AB$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return the exiled creature to the battlefield.
-SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Return the exiled creature to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmeadow_witch.jpg
 Oracle:{2}{W}{U}: Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.

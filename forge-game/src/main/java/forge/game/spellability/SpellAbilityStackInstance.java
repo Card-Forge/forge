@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -71,6 +72,7 @@ public class SpellAbilityStackInstance {
 
     // Triggers
     private HashMap<String, Object> triggeringObjects = new HashMap<String, Object>();
+    private List<Object> triggerRemembered = new ArrayList<Object>();
 
     private final HashMap<String, String> storedSVars = new HashMap<String, String>();
 
@@ -98,6 +100,7 @@ public class SpellAbilityStackInstance {
 
         // Triggering info
         this.triggeringObjects = sa.getTriggeringObjects();
+        this.triggerRemembered = sa.getTriggerRemembered();
 
         final AbilitySub subAb = this.ability.getSubAbility();
         if (subAb != null) {
@@ -149,6 +152,7 @@ public class SpellAbilityStackInstance {
 
         // Triggered
         this.ability.setAllTriggeringObjects(this.triggeringObjects);
+        this.ability.setTriggerRemembered(this.triggerRemembered);
 
         // Add SVars back in
         final Card source = this.ability.getHostCard();

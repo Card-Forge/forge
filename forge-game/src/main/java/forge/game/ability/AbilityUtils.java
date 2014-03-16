@@ -175,7 +175,7 @@ public class AbilityUtils {
             }
         } else if (defined.equals("DelayTriggerRemembered")) {
             if (sa.isTrigger()) {
-               for (Object o : sa.getTriggerRemembered()) {
+               for (Object o : sa.getRootAbility().getTriggerRemembered()) {
                    if (o instanceof Card) {
                        cards.add(game.getCardState((Card) o));
                    }
@@ -832,7 +832,7 @@ public class AbilityUtils {
         }
         else if (defined.equals("DelayTriggerRemembered")) {
             if (sa.isTrigger()) {
-                for (Object o : sa.getTriggerRemembered()) {
+                for (Object o : sa.getRootAbility().getTriggerRemembered()) {
                     if (o instanceof Player) {
                         players.add((Player) o);
                     }
