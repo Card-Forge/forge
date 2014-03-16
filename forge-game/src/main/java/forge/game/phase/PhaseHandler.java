@@ -677,8 +677,8 @@ public class PhaseHandler implements java.io.Serializable {
                 }
             }
         }
-
-        return !noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
+        SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
+        return !noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
     /**
