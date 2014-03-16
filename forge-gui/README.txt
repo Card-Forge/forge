@@ -1053,6 +1053,22 @@ Toggling off Deck Conformance in Preferences now properly allows adding more tha
 Forge now generates foil cards in booster packs, which will be apparent in sealed deck, booster draft, and quest modes. Also, foil cards are now correctly displayed in the deck editor including the new pile view mode. The display of foil overlay can be disabled in user preferences in case you dislike the visual foil effect. Please note that this option is visual only and does not affect the internal foil generation as such. Foil support is a work in progress and will be extended over time.
 
 
+- New ItemManager Preferences -
+The editor.preferences file has been deprecated, and the Preferences pane of Deck Editor screens has been removed. Instead, each CardManager and DeckManager (in deck editors, game launch screens, and deck viewer) can have its own options configured individually on its View Options panel.
+
+To show/hide columns, simply go to the List View of any CardManager or DeckManager and click the View Options button (to the right of the Image View toggle button). This will show a panel containing checkboxes for each column, along with a "Unique Cards Only" checkbox on the Constructed Deck Editor Catalog. Your choices will be remembered between sessions, as will any column sorting, repositioning, and resizing. You can toggle the View Options button again to hide this panel.
+
+For Image View, this options panel is visible by default and contains a button to expand/collapse all groups along with combo boxes to configure the "Group By", "Pile By", "Columns" properties that are also saved between sessions. Note that even if this panel is hidden, Ctrl+MouseWheel can be used to adjust the "Columns" property to essentially zoom in and out.
+
+
+- Variant game modes -
+All variants can now be applied via the constructed match setup. While moving Commander across, a basic experimental Commander deck generator was implemented. It will select a random two-color identity commander, and use those colors to build a two-color singleton deck. It is at least a starting point if someone doesn't have any Commander decks and doesn't want to or doesn't have time to build one.
+
+
+- Quest Mode Pet Balancing -
+Two quest mode pets have had their power reduced to reflect their strength relative to the rest of the other pets. The white Wolf Pet now has Lifelink instead of Vigilance, and the blue Bird Pet now scries for 1 instead of loots for 1 on combat damage. This change is immediate, so make sure to download Quest Images to get the new pictures.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

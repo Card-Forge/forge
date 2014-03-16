@@ -1,7 +1,7 @@
-Forge Beta: 03-14-2014 ver 1.5.14
+Forge Beta: 0#-##-2014 ver 1.5.15
 
 
-13635 cards in total.
+13### cards in total.
 
 
 -------------
@@ -13,81 +13,16 @@ Release Notes
 We can now package Forge as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
 
-- New ItemManager Preferences -
-The editor.preferences file has been deprecated, and the Preferences pane of Deck Editor screens has been removed. Instead, each CardManager and DeckManager (in deck editors, game launch screens, and deck viewer) can have its own options configured individually on its View Options panel.
-
-To show/hide columns, simply go to the List View of any CardManager or DeckManager and click the View Options button (to the right of the Image View toggle button). This will show a panel containing checkboxes for each column, along with a "Unique Cards Only" checkbox on the Constructed Deck Editor Catalog. Your choices will be remembered between sessions, as will any column sorting, repositioning, and resizing. You can toggle the View Options button again to hide this panel.
-
-For Image View, this options panel is visible by default and contains a button to expand/collapse all groups along with combo boxes to configure the "Group By", "Pile By", "Columns" properties that are also saved between sessions. Note that even if this panel is hidden, Ctrl+MouseWheel can be used to adjust the "Columns" property to essentially zoom in and out.
-
-
-- Variant game modes -
-All variants can now be applied via the constructed match setup. While moving Commander across, a basic experimental Commander deck generator was implemented. It will select a random two-color identity commander, and use those colors to build a two-color singleton deck. It is at least a starting point if someone doesn't have any Commander decks and doesn't want to or doesn't have time to build one.
-
-
-- Quest Mode Pet Balancing -
-Two quest mode pets have had their power reduced to reflect their strength relative to the rest of the other pets. The white Wolf Pet now has Lifelink instead of Vigilance, and the blue Bird Pet now scries for 1 instead of loots for 1 on combat damage. This change is immediate, so make sure to download Quest Images to get the new pictures.
-
-
 ---------
 New Cards
 ---------
 
-Alliance of Arms
-Arena
-Choice of Damnations
-Collective Voyage
-Confusion in the Ranks
-Cuombajj Witches
-Diaochan, Artful Beauty
-Dream Tides
-Echo Chamber
-Emberwilde Djinn
-Erosion
-Evangelize
-Forbidden Ritual
-Forgotten Lore
-Lethal Vapors
-Lim-Dul's Hex
-Lost in Thought
-Magnetic Mountain
-Magus of the Arena
-Mana-Charged Dragon
-Mangara's Tome
-Mind Bomb
-Minds Aglow
-Mogg Assassin
-Mudslide
-Parallel Thoughts
-Preacher
-Price of Glory
-Shared Trauma
-Shieldmage Advocate
-Shrouded Lore
-Teferi's Realm
-Thelon's Curse
-Trade Secrets
-Veiled Crocodile
-Volrath's Curse
-Well of Lost Dreams
-Winter's Chill
 
-
---------------------
-New Vanguard Avatars
---------------------
-
-Dakkon Blackblade Avatar
 
 
 ------------
 Known Issues
 ------------
-
-- The Mac OS application version -
-
-We are now able to release the Forge version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
-
 
 - Commander 2013 cards -
 It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
@@ -115,21 +50,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-1224Deko
-abbcdfin
-Agetian
-Dave
-DrDev
-Gos
-Juzamjedi
-Marc
-Max
-Nordos
-Sloth
-Sol
-Swordshine
-Teferi
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
