@@ -1,6 +1,6 @@
 package forge.screens.match.views;
 
-public class VLog extends VDisplayArea {
+public class VMenu extends VDisplayArea {
     @Override
     protected void doLayout(float width, float height) {
         // TODO Auto-generated method stub
@@ -9,7 +9,8 @@ public class VLog extends VDisplayArea {
 
     @Override
     public int getCount() {
-        return -1;
+        // TODO Auto-generated method stub
+        return 0;
     }
 
     @Override

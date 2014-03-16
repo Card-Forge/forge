@@ -13,6 +13,7 @@ public class VField extends VZoneDisplay {
 
     public VField(Player player0) {
         super(player0, ZoneType.Battlefield);
+        setVisible(true); //unlike other display areas, show by default
     }
 
     public boolean isFlipped() {

@@ -59,7 +59,10 @@ public abstract class FContainer extends FDisplayObject {
     }
 
     public void revalidate() {
-        doLayout(getWidth(), getHeight());
+        float w = getWidth();
+        float h = getHeight();
+        if (w == 0 || h == 0) { return; } //don't revalidate if size not set yet
+        doLayout(w, h);
     }
 
     protected abstract void doLayout(float width, float height);

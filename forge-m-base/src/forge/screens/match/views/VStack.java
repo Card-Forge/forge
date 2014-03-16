@@ -2,10 +2,9 @@ package forge.screens.match.views;
 
 import forge.Forge.Graphics;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FContainer;
 import forge.utils.Utils;
 
-public class VStack extends FContainer {
+public class VStack extends VDisplayArea {
     public static final float WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float HEIGHT = WIDTH * FCardPanel.ASPECT_RATIO;
 
@@ -13,8 +12,16 @@ public class VStack extends FContainer {
         setSize(WIDTH, HEIGHT);
     }
 
+    @Override
+    public int getCount() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
     public void update() {
-        //TODO
+        // TODO Auto-generated method stub
+        
     }
 
     @Override

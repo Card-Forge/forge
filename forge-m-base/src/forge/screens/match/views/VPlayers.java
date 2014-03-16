@@ -5,25 +5,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import forge.game.Game;
 import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
-import forge.toolbox.FContainer;
+import forge.screens.match.FControl;
 import forge.toolbox.FLabel;
 import forge.utils.ForgePreferences.FPref;
 
-public class VGameDetails extends FContainer {
+public class VPlayers extends VDisplayArea {
     private Map<Player, InfoLabel[]> infoLabels;
     private InfoLabel stormLabel;
 
-    public void init(final Iterable<Player> players) {
-        clear();
+    public VPlayers() {
         infoLabels = new HashMap<Player, InfoLabel[]>();
-        for (final Player p : players) {
+        for (final Player p : FControl.getSortedPlayers()) {
             // Create and store labels detailing various non-critical player info.
             final InfoLabel name = add(new InfoLabel());
             final InfoLabel life = add(new InfoLabel());
@@ -41,9 +39,8 @@ public class VGameDetails extends FContainer {
         stormLabel = add(new InfoLabel());
     }
 
+    @Override
     public void update() {
-        if (!isVisible()) { return; } //No need to update if this panel isn't showing
-
         for (Entry<Player, InfoLabel[]> rr : infoLabels.entrySet()) {
             Player p0 = rr.getKey();
             final InfoLabel[] temp = rr.getValue();
@@ -74,14 +71,7 @@ public class VGameDetails extends FContainer {
                 temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }
-    }
-
-    /**
-     * @param game  */
-    public void updateStormLabel(Game game) {
-        if (!isVisible()) { return; } //No need to update if this panel isn't showing
-
-        stormLabel.setText("Storm count: " + game.getStack().getCardsCastThisTurn().size());
+        stormLabel.setText("Storm count: " + FControl.getGame().getStack().getCardsCastThisTurn().size());
     }
 
     @Override
@@ -94,5 +84,10 @@ public class VGameDetails extends FContainer {
         private InfoLabel() {
             super(new FLabel.Builder());
         }
+    }
+
+    @Override
+    public int getCount() {
+        return infoLabels.size();
     }
 }

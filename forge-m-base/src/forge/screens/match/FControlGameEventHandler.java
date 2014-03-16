@@ -148,7 +148,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             stackUpdPlanned.set(false);
-            FControl.getView().getStack().update();
+            FControl.getView().updateStack();
         }
     };
 

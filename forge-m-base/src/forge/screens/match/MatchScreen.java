@@ -7,11 +7,9 @@ import java.util.Map;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
-import forge.screens.match.views.VGameDetails;
-import forge.screens.match.views.VLog;
+import forge.screens.match.views.VHeader;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
-import forge.screens.match.views.VStack;
 import forge.toolbox.VCardZoom;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
@@ -24,16 +22,14 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
-    private final VLog log;
-    private final VStack stack;
+    private final VHeader header;
     private final VPrompt prompt;
-    private final VGameDetails gameDetails;
     private final VCardZoom cardZoom;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
-        super(true, "Game", true);
+        super(false, null, false); //match screen has custom header
 
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), add(playerPanel));
@@ -42,6 +38,8 @@ public class MatchScreen extends FScreen {
         topPlayerPanel = playerPanels0.get(1);
         topPlayerPanel.setFlipped(true);
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
+
+        header = add(new VHeader());
 
         prompt = add(new VPrompt("", "",
                 new Runnable() {
@@ -57,13 +55,22 @@ public class MatchScreen extends FScreen {
                     }
                 }));
         cardZoom = add(new VCardZoom());
+    }
 
-        log = add(new VLog());
-        stack = add(new VStack());
-        gameDetails = add(new VGameDetails());
-        log.setVisible(false);
-        stack.setVisible(false);
-        gameDetails.setVisible(false);
+    public void updatePlayers() {
+        header.getTabPlayers().update();
+    }
+
+    public void updateLog() {
+        header.getTabLog().update();
+    }
+
+    public void updateCombat() {
+        header.getTabCombat().update();
+    }
+
+    public void updateStack() {
+        header.getTabStack().update();
     }
 
     public VPrompt getPrompt() {
@@ -72,18 +79,6 @@ public class MatchScreen extends FScreen {
 
     public VCardZoom getCardZoom() {
         return cardZoom;
-    }
-
-    public VStack getStack() {
-        return stack;
-    }
-
-    public VLog getLog() {
-        return log;
-    }
-
-    public VGameDetails getGameDetails() {
-        return gameDetails;
     }
 
     public VPlayerPanel getTopPlayerPanel() {
@@ -127,6 +122,9 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
+        header.setBounds(0, 0, width, VHeader.HEIGHT);
+        startY = FScreen.HEADER_HEIGHT;
+
         //determine player panel heights based on visibility of zone displays
         float topPlayerPanelHeight, bottomPlayerPanelHeight;
         float cardRowsHeight = height - startY - VPrompt.HEIGHT - 2 * VAvatar.HEIGHT;
@@ -151,9 +149,7 @@ public class MatchScreen extends FScreen {
         topPlayerPanelHeight += VAvatar.HEIGHT;
         bottomPlayerPanelHeight += VAvatar.HEIGHT;
 
-        //log.setBounds(0, startY, width - FScreen.HEADER_HEIGHT, VLog.HEIGHT);
         topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
-        stack.setBounds(0, startY + topPlayerPanelHeight - VStack.HEIGHT / 2, VStack.WIDTH, VStack.HEIGHT);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
         cardZoom.setBounds(0, 0, width, height);

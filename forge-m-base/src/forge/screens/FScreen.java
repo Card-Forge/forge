@@ -14,18 +14,18 @@ import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public abstract class FScreen extends FContainer {
-    public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    public static final FSkinColor TEXTURE_OVERLAY_COLOR = FSkinColor.get(Colors.CLR_THEME);
+    public static final FSkinColor HEADER_BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.stepColor(0);
+    public static final FSkinColor HEADER_LINE_COLOR = HEADER_BTN_PRESSED_COLOR.stepColor(-40);
+    public static final FSkinColor HEADER_BACK_COLOR = HEADER_BTN_PRESSED_COLOR.stepColor(-80);
 
-    private static final FSkinColor clrTheme = FSkinColor.get(Colors.CLR_THEME);
-    private static final FSkinColor clr = clrTheme.stepColor(0);
-    private static final FSkinColor d40 = clr.stepColor(-40);
-    private static final FSkinColor d80 = clr.stepColor(-80);
+    public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     private final FLabel btnBack, lblHeader, btnMenu;
 
     protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
         if (showBackButton) {
-            btnBack = add(new FLabel.Builder().icon(new BackIcon()).pressedColor(clr).align(HAlignment.CENTER).command(new Runnable() {
+            btnBack = add(new FLabel.Builder().icon(new BackIcon()).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new Runnable() {
                 @Override
                 public void run() {
                     Forge.back();
@@ -42,7 +42,7 @@ public abstract class FScreen extends FContainer {
             lblHeader = null;
         }
         if (showMenuButton) {
-            btnMenu = add(new FLabel.Builder().icon(FSkinImage.FAVICON).pressedColor(clr).align(HAlignment.CENTER).command(new Runnable() {
+            btnMenu = add(new FLabel.Builder().icon(FSkinImage.FAVICON).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new Runnable() {
                 @Override
                 public void run() {
                     showMenu();
@@ -102,11 +102,11 @@ public abstract class FScreen extends FContainer {
         float w = getWidth();
         float h = getHeight();
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-        g.fillRect(clrTheme, 0, 0, w, h);
+        g.fillRect(TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
 
         if (lblHeader != null) { //draw custom background behind header label
-            g.fillRect(d80, 0, 0, w, HEADER_HEIGHT);
-            g.drawLine(1, d40, 0, HEADER_HEIGHT, w, HEADER_HEIGHT);
+            g.fillRect(HEADER_BACK_COLOR, 0, 0, w, HEADER_HEIGHT);
+            g.drawLine(1, HEADER_LINE_COLOR, 0, HEADER_HEIGHT, w, HEADER_HEIGHT);
         }
     }
 

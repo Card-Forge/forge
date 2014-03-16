@@ -1,6 +1,6 @@
 package forge.screens.match.views;
 
-public class VLog extends VDisplayArea {
+public class VDev extends VDisplayArea {
     @Override
     protected void doLayout(float width, float height) {
         // TODO Auto-generated method stub

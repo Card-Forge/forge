@@ -23,7 +23,7 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor ZONE_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
+    private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
 
     private final Player player;
     private final VPhaseIndicator phaseIndicator;
@@ -47,12 +47,10 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Library, FSkinImage.LIBRARY);
 
         VFlashbackZone flashbackZone = add(new VFlashbackZone(player0));
-        flashbackZone.setVisible(false);
         tabFlashbackZone = add(new InfoTab(FSkinImage.FLASHBACK, flashbackZone));
         tabs.add(tabFlashbackZone);
 
         VManaPool manaPool = add(new VManaPool(player));
-        manaPool.setVisible(false);
         tabManaPool = add(new InfoTab(FSkinImage.MANA_X, manaPool));
         tabs.add(tabManaPool);
 
@@ -66,7 +64,6 @@ public class VPlayerPanel extends FContainer {
 
     public void addZoneDisplay(ZoneType zoneType, FSkinImage tabIcon) {
         VZoneDisplay zoneDisplay = add(new VZoneDisplay(player, zoneType));
-        zoneDisplay.setVisible(false);
         InfoTab zoneTab = add(new InfoTab(tabIcon, zoneDisplay));
         zoneTabs.put(zoneType, zoneTab);
         tabs.add(zoneTab);
@@ -180,7 +177,7 @@ public class VPlayerPanel extends FContainer {
         if (selectedTab != null) { //draw background and border for selected zone if needed 
             float w = getWidth();
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
-            g.fillRect(ZONE_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
+            g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
             float y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
             //leave gap at selected zone tab
@@ -254,7 +251,7 @@ public class VPlayerPanel extends FContainer {
                     y--;
                     h += 2;
                 }
-                g.fillRect(ZONE_BACK_COLOR, 0, isFlipped() ? paddingY : 0, w, getHeight() - paddingY);
+                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? paddingY : 0, w, getHeight() - paddingY);
                 g.startClip(-1, y, w + 2, h); //use clip to ensure all corners connect
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);

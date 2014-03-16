@@ -172,8 +172,6 @@ public class FControl {
                 super.onActivate();
             }
         };
-
-        view.getGameDetails().init(players);
     }
 
     private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
@@ -228,6 +226,10 @@ public class FControl {
                 p.setHighlighted(false);
             }
         }
+    }
+
+    public static Iterable<Player> getSortedPlayers() {
+        return sortedPlayers;
     }
 
     public static Player getCurrentPlayer() {
