@@ -21,6 +21,8 @@ import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -55,6 +57,8 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final Game game = hostCard.getGame();
         final ArrayList<String> keywords = new ArrayList<String>();
         final List<String> types = new ArrayList<String>();
+        final List<String> svars = new ArrayList<String>();
+        final List<String> triggers = new ArrayList<String>();
         if (sa.hasParam("Optional")) {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, "Copy this permanent?")) {
                 return;
@@ -65,6 +69,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("AddTypes")) {
             types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
+        }
+        if (sa.hasParam("AddSVars")) {
+            svars.addAll(Arrays.asList(sa.getParam("AddSVars").split(" & ")));
+        }
+        if (sa.hasParam("Triggers")) {
+            triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(" & ")));
         }
         final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(hostCard,
                 sa.getParam("NumCopies"), sa) : 1;
@@ -240,6 +250,15 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     }
                     for (final String type : types) {
                         copy.addType(type);
+                    }
+                    for (final String svar : svars) {
+                        final String actualsVar = hostCard.getSVar(svar);
+                        copy.setSVar(svar, actualsVar);
+                    }
+                    for (final String s : triggers) {
+                        final String actualTrigger = hostCard.getSVar(s);
+                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, copy, false);
+                        copy.addTrigger(parsedTrigger);
                     }
                     copy = game.getAction().moveToPlay(copy);
 
