@@ -524,7 +524,8 @@ public class ComputerUtilCard {
         }
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")
                || c.hasKeyword("At the beginning of the end step, exile CARDNAME.")
-               || c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
+               || c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
+               || c.hasSVar("EndOfTurnLeavePlay")) {
             value -= 50;
         } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
             value -= 30;

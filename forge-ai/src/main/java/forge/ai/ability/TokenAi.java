@@ -98,7 +98,7 @@ public class TokenAi extends SpellAbilityAi {
             }
             if (kw.equals("At the beginning of the end step, exile CARDNAME.")
                     || kw.equals("At the beginning of the end step, sacrifice CARDNAME.")) {
-                oneShot = true;
+                oneShot = true; // need rework this
             }
         }
 

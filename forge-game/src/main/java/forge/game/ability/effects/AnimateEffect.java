@@ -218,8 +218,14 @@ public class AnimateEffect extends AnimateEffectBase {
             // give sVars
             if (sVars.size() > 0) {
                 for (final String s : sVars) {
-                    final String actualsVar = source.getSVar(s);
-                    c.setSVar(s, actualsVar);
+                    String actualsVar = source.getSVar(s);
+                    String name = s;
+                    if (actualsVar.startsWith("SVar:")) {
+                        actualsVar = actualsVar.split("SVar:")[1];
+                        name = actualsVar.split(":")[0];
+                        actualsVar = actualsVar.split(":")[1];
+                    }
+                    c.setSVar(name, actualsVar);
                 }
             }
 

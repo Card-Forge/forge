@@ -14,6 +14,10 @@ public class DelayedTriggerAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        if ("Always".equals(sa.getParam("AILogic"))) {
+            // TODO: improve ai
+            return true;
+        }
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
         trigsa.setActivatingPlayer(ai);

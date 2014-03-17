@@ -548,7 +548,8 @@ public class AiAttackController {
                 }
             }
             if (mustAttack || attacker.getController().getMustAttackEntity() != null
-                    || attacker.getSVar("MustAttack").equals("True")) {
+                    || attacker.getSVar("MustAttack").equals("True")
+                    || attacker.getSVar("EndOfTurnLeavePlay").equals("True")) {
                 combat.addAttacker(attacker, defender);
                 attackersLeft.remove(attacker);
             }

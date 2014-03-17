@@ -1042,7 +1042,8 @@ public class ComputerUtil {
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         || !ph.getNextTurn().equals(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasKeyword("At the beginning of the end step, exile CARDNAME.")
-                && !sa.getHostCard().hasKeyword("At the beginning of the end step, sacrifice CARDNAME."));
+                && !sa.getHostCard().hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
+                && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay"));
     }
     
     /**
