@@ -26,6 +26,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -35,6 +36,7 @@ import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
+import forge.util.Expressions;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1733,6 +1735,19 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return true;
         }
         return false;
+    }
+
+    public void checkActivationResloveSubs() {
+        if (hasParam("ActivationNumberSacrifice")) {
+            String comp = this.getParam("ActivationNumberSacrifice");
+            int right = Integer.parseInt(comp.substring(2));
+            int activationNum =  this.getRestrictions().getNumberTurnActivations();
+            if (Expressions.compare(activationNum, comp, right)) {
+                SpellAbility deltrig = AbilityFactory.getAbility(hostCard.getSVar(this.getParam("ActivationResolveSub")), hostCard);
+                deltrig.setActivatingPlayer(activatingPlayer);
+                AbilityUtils.resolve(deltrig);
+            }
+        }
     }
 
 }

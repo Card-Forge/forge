@@ -6,6 +6,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
@@ -91,13 +92,13 @@ public class TokenAi extends SpellAbilityAi {
         }
 
         boolean haste = false;
-        boolean oneShot = false;
+        boolean oneShot = sa.getSubAbility() != null
+                && sa.getSubAbility().getApi() == ApiType.DelayedTrigger;
         for (final String kw : this.tokenKeywords) {
             if (kw.equals("Haste")) {
                 haste = true;
             }
-            if (kw.equals("At the beginning of the end step, exile CARDNAME.")
-                    || kw.equals("At the beginning of the end step, sacrifice CARDNAME.")) {
+            if (kw.equals("At the beginning of the end step, exile CARDNAME.")) {
                 oneShot = true; // need rework this
             }
         }

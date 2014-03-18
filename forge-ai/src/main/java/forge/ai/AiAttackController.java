@@ -540,8 +540,7 @@ public class AiAttackController {
                     break;
                 }
                 if ((s.equals("At the beginning of the end step, destroy CARDNAME.")
-                        || s.equals("At the beginning of the end step, exile CARDNAME.")
-                        || s.equals("At the beginning of the end step, sacrifice CARDNAME."))
+                        || s.equals("At the beginning of the end step, exile CARDNAME."))
                         && isEffectiveAttacker(ai, attacker, combat)) {
                     mustAttack = true;
                     break;

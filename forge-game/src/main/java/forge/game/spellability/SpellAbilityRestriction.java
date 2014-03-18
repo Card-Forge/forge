@@ -133,10 +133,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setGameLimitToCheck(params.get("GameActivationLimit"));
         }
 
-        if (params.containsKey("ActivationNumberSacrifice")) {
-            this.setActivationNumberSacrifice(Integer.parseInt(params.get("ActivationNumberSacrifice")));
-        }
-
         if (params.containsKey("ActivationPhases")) {
             this.setPhases(PhaseType.parseRange(params.get("ActivationPhases")));
         }

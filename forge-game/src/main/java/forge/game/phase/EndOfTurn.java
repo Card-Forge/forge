@@ -56,24 +56,6 @@ public class EndOfTurn extends Phase {
         game.getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
-                final Card card = c;
-                String sb = "Sacrifice CARDNAME.";
-                String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self";
-
-                SpellAbility ability = AbilityFactory.getAbility(effect, card);
-                ability.setActivatingPlayer(card.getController());
-                ability.setDescription(sb);
-                ability.setStackDescription(sb);
-                ability.setTrigger(true);
-                final int amount = card.getKeywordAmount("At the beginning of the end step, sacrifice CARDNAME.");
-                for (int i = 0; i < amount; i++) {
-                    game.getStack().addSimultaneousStackEntry(ability);
-                }
-                // Trigger once: sacrifice at the beginning of the next end step 
-                c.removeAllExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-                c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, sacrifice CARDNAME.");
-            }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
                 final Card card = c;
                 String sb = "Exile CARDNAME.";

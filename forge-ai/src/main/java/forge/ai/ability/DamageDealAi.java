@@ -297,8 +297,9 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                    if (sa.getRestrictions().getPlaneswalker() || source.hasKeyword("At the beginning of the end step, exile CARDNAME.")
-                            || source.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.") || source.hasSVar("EndOfTurnLeavePlay"))
+                    if (sa.getRestrictions().getPlaneswalker()
+                            || source.hasKeyword("At the beginning of the end step, exile CARDNAME.")
+                            || source.hasSVar("EndOfTurnLeavePlay"))
                         freePing = true;
                 }
 

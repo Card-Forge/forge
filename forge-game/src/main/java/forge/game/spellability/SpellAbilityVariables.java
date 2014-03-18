@@ -66,7 +66,6 @@ public class SpellAbilityVariables {
         this.gameActivationLimit = sav.getGameActivationLimit();
         this.numberTurnActivations = sav.getNumberTurnActivations();
         this.numberGameActivations = sav.getNumberGameActivations();
-        this.activationNumberSacrifice = sav.getActivationNumberSacrifice();
         this.cardsInHand = sav.getCardsInHand();
         this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
@@ -136,9 +135,6 @@ public class SpellAbilityVariables {
 
     /** The number game activations. */
     private int numberGameActivations = 0;
-
-    /** The activation number sacrifice. */
-    private int activationNumberSacrifice = -1;
 
     /** The n cards in hand. */
     private int cardsInHand = -1;
@@ -419,29 +415,6 @@ public class SpellAbilityVariables {
      */
     public final void resetTurnActivations() {
         this.numberTurnActivations = 0;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>activationNumberSacrifice</code>.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     */
-    public final void setActivationNumberSacrifice(final int num) {
-        this.activationNumberSacrifice = num;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>activationNumberSacrifice</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getActivationNumberSacrifice() {
-        return this.activationNumberSacrifice;
     }
 
     /**

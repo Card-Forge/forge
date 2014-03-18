@@ -90,12 +90,14 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        final SpellAbilityRestriction restrict = sa.getRestrictions();
-        final int activations = restrict.getNumberTurnActivations();
-        final int sacActivations = restrict.getActivationNumberSacrifice();
-        // don't risk sacrificing a creature just to pump it
-        if ((sacActivations != -1) && (activations >= (sacActivations - 1))) {
-            return false;
+        if (sa.hasParam("ActivationNumberSacrifice")) {
+            final SpellAbilityRestriction restrict = sa.getRestrictions();
+            final int sacActivations = Integer.parseInt(sa.getParam("ActivationNumberSacrifice").substring(2));
+            final int activations = restrict.getNumberTurnActivations();
+            // don't risk sacrificing a creature just to pump it
+            if (activations >= sacActivations - 1) {
+                return false;
+            }
         }
 
         final Card source = sa.getHostCard();

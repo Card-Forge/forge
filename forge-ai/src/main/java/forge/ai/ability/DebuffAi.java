@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -16,7 +17,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -53,7 +53,6 @@ public class DebuffAi extends SpellAbilityAi {
             return false;
         }
 
-        final SpellAbilityRestriction restrict = sa.getRestrictions();
         final PhaseHandler ph =  game.getPhaseHandler();
 
         // Phase Restrictions
@@ -65,13 +64,6 @@ public class DebuffAi extends SpellAbilityAi {
             if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        }
-
-        final int activations = restrict.getNumberTurnActivations();
-        final int sacActivations = restrict.getActivationNumberSacrifice();
-        // don't risk sacrificing a creature just to pump it
-        if ((sacActivations != -1) && (activations >= (sacActivations - 1))) {
-            return false;
         }
 
         if (!sa.usesTargeting() || !sa.getTargetRestrictions().doesTarget()) {

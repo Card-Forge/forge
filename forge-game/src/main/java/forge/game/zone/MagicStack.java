@@ -156,11 +156,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      */
     public final void addAndUnfreeze(final SpellAbility ability) {
         ability.getRestrictions().abilityActivated();
-        if ((ability.getRestrictions().getActivationNumberSacrifice() != -1)
-                && (ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions()
-                        .getActivationNumberSacrifice())) {
-            ability.getHostCard().addHiddenExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-        }
+        ability.checkActivationResloveSubs();
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there

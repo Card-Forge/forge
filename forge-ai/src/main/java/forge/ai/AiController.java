@@ -665,7 +665,7 @@ public class AiController {
                 card.setSVar("PayX", Integer.toString(xPay));
             }
             // Prevent the computer from summoning Ball Lightning type creatures after attacking
-            if ((card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.") || card.hasSVar("EndOfTurnLeavePlay"))
+            if (card.hasSVar("EndOfTurnLeavePlay")
                     && (game.getPhaseHandler().isPlayerTurn(player.getOpponent())
                          || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
                 return AiPlayDecision.AnotherTime;
