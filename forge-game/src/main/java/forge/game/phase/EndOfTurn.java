@@ -75,31 +75,6 @@ public class EndOfTurn extends Phase {
                 c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, exile CARDNAME.");
 
             }
-            // Berserk is using this, so don't check isFaceDown()
-            if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
-                if (c.getDamageHistory().getCreatureAttackedThisTurn()) {
-                    final Card card = c;
-                    final SpellAbility sac = new Ability(card, ManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            final Card current = game.getCardState(card);
-                            if (current.isInPlay()) {
-                                game.getAction().destroy(current, this);
-                            }
-                        }
-                    };
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Destroy ").append(card);
-                    sac.setStackDescription(sb.toString());
-                    sac.setDescription(sb.toString());
-
-                    game.getStack().addSimultaneousStackEntry(sac);
-
-                } else {
-                    c.removeAllExtrinsicKeyword("At the beginning of the next end step, "
-                            + "destroy CARDNAME if it attacked this turn.");
-                }
-            }
 
         }
         Player activePlayer = game.getPhaseHandler().getPlayerTurn();
