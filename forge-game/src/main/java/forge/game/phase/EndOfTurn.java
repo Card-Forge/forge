@@ -75,24 +75,6 @@ public class EndOfTurn extends Phase {
                 c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, exile CARDNAME.");
 
             }
-            if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
-                final Card card = c;
-                String sb = "Destroy CARDNAME.";
-                String effect = "AB$ Destroy | Cost$ 0 | Defined$ Self";
-
-                SpellAbility ability = AbilityFactory.getAbility(effect, card);
-                ability.setActivatingPlayer(card.getController());
-                ability.setDescription(sb);
-                ability.setStackDescription(sb);
-                ability.setTrigger(true);
-                final int amount = card.getKeywordAmount("At the beginning of the end step, destroy CARDNAME.");
-                for (int i = 0; i < amount; i++) {
-                    game.getStack().addSimultaneousStackEntry(ability);
-                }
-                // Trigger once: destroy at the beginning of the next end step 
-                c.removeAllExtrinsicKeyword("At the beginning of the end step, destroy CARDNAME.");
-                c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, destroy CARDNAME.");
-            }
             // Berserk is using this, so don't check isFaceDown()
             if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
                 if (c.getDamageHistory().getCreatureAttackedThisTurn()) {

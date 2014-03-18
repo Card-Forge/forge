@@ -1,7 +1,8 @@
 Name:Blood Frenzy
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat,Declare Attackers,Declare Blockers | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature |  NumAtt$ +4 | NumDef$ +0 | SubAbility$ DBPump | SpellDescription$ Cast CARDNAME only before the combat damage step. Target attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME. | Permanent$ True
+A:SP$ Pump | Cost$ 1 R | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat,Declare Attackers,Declare Blockers | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature |  NumAtt$ +4 | NumDef$ +0 | SubAbility$ DBDelayTrig | SpellDescription$ Cast CARDNAME only before the combat damage step. Target attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigDestroy | RememberObjects$ Targeted | TriggerDescription$ Destroy that creature at the beginning of the next end step. | AILogic$ Always
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_frenzy.jpg
 Oracle:Cast Blood Frenzy only before the combat damage step.\nTarget attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.

@@ -1,8 +1,9 @@
 Name:Puffer Extract
 ManaCost:5
 Types:Artifact
-A:AB$ Pump | Cost$ X T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SubAbility$ DBPump | SpellDescription$ Target creature you control gets +X/+X until end of turn. Destroy it at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME. | Permanent$ True
+A:AB$ Pump | Cost$ X T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SubAbility$ DelTrig | SpellDescription$ Target creature you control gets +X/+X until end of turn. Destroy it at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigDestroy | RememberObjects$ Targeted | TriggerDescription$ Destroy that creature at the beginning of the next end step. | AILogic$ Always
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ DelayTriggerRemembered
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puffer_extract.jpg

@@ -539,16 +539,15 @@ public class AiAttackController {
                     mustAttack = true;
                     break;
                 }
-                if ((s.equals("At the beginning of the end step, destroy CARDNAME.")
-                        || s.equals("At the beginning of the end step, exile CARDNAME."))
+                if ((s.equals("At the beginning of the end step, exile CARDNAME.")
+                        || attacker.getSVar("EndOfTurnLeavePlay").equals("True"))
                         && isEffectiveAttacker(ai, attacker, combat)) {
                     mustAttack = true;
                     break;
                 }
             }
             if (mustAttack || attacker.getController().getMustAttackEntity() != null
-                    || attacker.getSVar("MustAttack").equals("True")
-                    || attacker.getSVar("EndOfTurnLeavePlay").equals("True")) {
+                    || attacker.getSVar("MustAttack").equals("True")) {
                 combat.addAttacker(attacker, defender);
                 attackersLeft.remove(attacker);
             }
