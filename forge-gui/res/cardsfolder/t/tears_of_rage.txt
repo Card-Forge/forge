@@ -2,8 +2,9 @@ Name:Tears of Rage
 ManaCost:2 R R
 Types:Instant
 Text:Cast CARDNAME only during the declare attackers step.\r\n
-A:SP$ PumpAll | Cost$ 2 R R | ActivationPhases$ Declare Attackers | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | References$ X | SubAbility$ DBPump | SpellDescription$ Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
-SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Permanent$ True
+A:SP$ PumpAll | Cost$ 2 R R | ActivationPhases$ Declare Attackers | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | References$ X | SubAbility$ DelTrig | SpellDescription$ Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Valid Creature.attacking+YouCtrl | TriggerDescription$ CARDNAME - Sacrifice those creature at the beginning of the next end step. | AILogic$ Always
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tears_of_rage.jpg
