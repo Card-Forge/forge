@@ -515,6 +515,12 @@ public class AiController {
                 byte color = MagicColor.WUBRG[i];
                 if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
                     for (Card land : landList) {
+                        // Don't play ETB Tapped land if you have a 1 drop can be played
+                        // Is this the best way to check if a land ETB Tapped?
+                        if (land.hasSVar("ETBTappedSVar")) {
+                            continue;
+                        }
+
                         if (land.isType(MagicColor.Constant.BASIC_LANDS.get(i)))
                             return land;
                         
