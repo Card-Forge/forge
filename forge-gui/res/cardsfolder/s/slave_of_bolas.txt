@@ -1,7 +1,9 @@
 Name:Slave of Bolas
 ManaCost:3 UR B
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 UR B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+A:SP$ GainControl | Cost$ 3 UR B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste | SubAbility$ DelTrig | SpellDescription$ Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ Sacrifice the creature at the beginning of the next end step. | AILogic$ Always
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ DelayTriggerRemembered | Controller$ You
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slave_of_bolas.jpg
 Oracle:Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
