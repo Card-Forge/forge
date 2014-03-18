@@ -123,7 +123,7 @@ public class MatchScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         header.setBounds(0, 0, width, VHeader.HEIGHT);
-        startY = FScreen.HEADER_HEIGHT;
+        startY = VHeader.HEIGHT;
 
         //determine player panel heights based on visibility of zone displays
         float topPlayerPanelHeight, bottomPlayerPanelHeight;
