@@ -23,6 +23,8 @@ import forge.ai.AiProfileUtil;
 import forge.card.CardType;
 import forge.game.GameFormat;
 import forge.game.card.CardUtil;
+import forge.guantlet.GauntletData;
+import forge.limited.GauntletMini;
 import forge.toolbox.FProgressBar;
 import forge.util.FileUtil;
 import forge.util.storage.IStorage;
@@ -57,8 +59,8 @@ public class FModel {
     private static ForgePreferences preferences;
 
     // Someone should take care of 2 gauntlets here
-    //private static GauntletData gauntletData;
-    //private static GauntletMini gauntlet;
+    private static GauntletData gauntletData;
+    private static GauntletMini gauntlet;
 
     //private static QuestController quest;
     private static CardCollections decks;
@@ -144,7 +146,7 @@ public class FModel {
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(Constants.BLOCK_DATA_DIR + "formats.txt")));
         blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(Constants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         //questPreferences = new QuestPreferences();
-        //gauntletData = new GauntletData();
+        gauntletData = new GauntletData();
         fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(Constants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
         //worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(Constants.QUEST_WORLD_DIR + "worlds.txt"));
 
@@ -282,11 +284,22 @@ public class FModel {
 
     /*public static QuestPreferences getQuestPreferences() {
         return questPreferences;
-    }
+    }*/
 
     public static GauntletData getGauntletData() {
         return gauntletData;
-    }*/
+    }
+
+    public static void setGauntletData(GauntletData data0) {
+        gauntletData = data0;
+    }
+
+    public static GauntletMini getGauntletMini() {
+        if (gauntlet == null) {
+            gauntlet = new GauntletMini();
+        }
+        return gauntlet;
+    }
 
     public static CardCollections getDecks() {
         return decks;
@@ -313,15 +326,4 @@ public class FModel {
         System.setErr(oldSystemErr);
         logFileStream.close();
     }
-
-    /*public static void setGauntletData(GauntletData data0) {
-        gauntletData = data0;
-    }*/
-
-    /*public static GauntletMini getGauntletMini() {
-        if (gauntlet == null) {
-            gauntlet = new GauntletMini();
-        }
-        return gauntlet;
-    }*/
 }

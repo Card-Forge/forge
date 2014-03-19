@@ -39,8 +39,6 @@ public class MatchScreen extends FScreen {
         topPlayerPanel.setFlipped(true);
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
-        header = add(new VHeader());
-
         prompt = add(new VPrompt("", "",
                 new Runnable() {
                     @Override
@@ -54,6 +52,9 @@ public class MatchScreen extends FScreen {
                         FControl.getInputProxy().selectButtonCancel();
                     }
                 }));
+
+        header = add(new VHeader(this)); //add header just before zoom so drop downs appear on top
+
         cardZoom = add(new VCardZoom());
     }
 
@@ -75,6 +76,10 @@ public class MatchScreen extends FScreen {
 
     public VPrompt getPrompt() {
         return prompt;
+    }
+
+    public VHeader getHeader() {
+        return header;
     }
 
     public VCardZoom getCardZoom() {
@@ -153,5 +158,6 @@ public class MatchScreen extends FScreen {
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
         cardZoom.setBounds(0, 0, width, height);
+        header.setDropDownHeight(topPlayerPanel.getBottom() - header.getHeight()); //make header drop downs go to bottom of top player panel
     }
 }

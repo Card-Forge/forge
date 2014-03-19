@@ -16,12 +16,19 @@ import forge.FThreads;
 import forge.Forge;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameRules;
+import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
@@ -36,6 +43,7 @@ import forge.screens.match.views.VAssignDamage;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FOptionPane;
 import forge.utils.ForgePreferences.FPref;
 
 public class FControl {
@@ -57,6 +65,26 @@ public class FControl {
         uiEvents = new EventBus("ui events");
         //uiEvents.register(Singletons.getControl().getSoundSystem());
         uiEvents.register(visitor);
+    }
+
+    public static void startMatch(GameType gameType, List<RegisteredPlayer> players) {
+        startMatch(gameType, null, players);
+    }
+    public static void startMatch(GameType gameType, List<GameType> appliedVariants, List<RegisteredPlayer> players) {
+        boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        for (RegisteredPlayer rp : players) {
+            rp.setRandomFoil(useRandomFoil);
+        }
+
+        GameRules rules = new GameRules(gameType);
+        if (appliedVariants != null && !appliedVariants.isEmpty()) {
+            rules.setAppliedVariants(appliedVariants);
+        }
+        rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
+        rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
+
+        startGame(new Match(rules, players));
     }
 
     public static void startGame(final Match match) {
@@ -130,6 +158,17 @@ public class FControl {
         return label == null || label.getStopAtPhase();
     }
 
+    public static void endCurrentTurn() {
+        Player p = getCurrentPlayer();
+
+        if (p != null) {
+            p.getController().autoPassUntil(PhaseType.CLEANUP);
+            if (!inputProxy.passPriority()) {
+                p.getController().autoPassCancel();
+            }
+        }
+    }
+
     public static void setCard(final Card c) {
         FThreads.assertExecutedByEdt(true);
         setCard(c, false);
@@ -137,13 +176,6 @@ public class FControl {
 
     public static void setCard(final Card c, final boolean showFlipped) {
         //TODO
-    }
-
-    public static void endCurrentGame() {
-        if (game == null) { return; }
-
-        Forge.back();
-        game = null;
     }
 
     public static void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
@@ -253,6 +285,32 @@ public class FControl {
         return game == null || !gameHasHumanPlayer || devMode || c.canBeShownTo(getCurrentPlayer());
     }
 
+    public static void alphaStrike() {
+        final PhaseHandler ph = game.getPhaseHandler();
+
+        final Player p = getCurrentPlayer();
+        final Game game = p.getGame();
+        Combat combat = game.getCombat();
+        if (combat == null) { return; }
+
+        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p)) {
+            List<Player> defenders = p.getOpponents();
+
+            for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+                if (combat.isAttacking(c)) {
+                    continue;
+                }
+
+                for (Player defender : defenders) {
+                    if (CombatUtil.canAttack(c, defender, combat)) {
+                        combat.addAttacker(c, defender);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     public static void showCombat(Combat combat) {
         /*if (combat != null && combat.getAttackers().size() > 0 && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
             if (selectedDocBeforeCombat == null) {
@@ -358,6 +416,61 @@ public class FControl {
         if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
             getPlayerPanel(zone.getPlayer()).getField().updateCard(c);
         }
+    }
+    public static void undoLastAction() {
+        Game game = getGame();
+        Player player = game.getPhaseHandler().getPriorityPlayer();
+        if (player != null && player.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+            game.stack.undo();
+        }
+    }
+
+    /** Concede game, bring up WinLose UI. */
+    public static void concede() {
+        String userPrompt =
+                "This will end the current game and you will not be able to resume.\n\n" +
+                        "Concede anyway?";
+        if (FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel", false)) {
+            stopGame();
+        }
+    }
+
+    public static void stopGame() {
+        List<Player> pp = new ArrayList<Player>();
+        for (Player p : game.getPlayers()) {
+            if (p.getOriginalLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+                pp.add(p);
+            }
+        }
+        boolean hasHuman = !pp.isEmpty();
+
+        if (pp.isEmpty()) {
+            pp.addAll(game.getPlayers()); // no human? then all players surrender!
+        }
+
+        for (Player p: pp) {
+            p.concede();
+        }
+
+        Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
+        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == FServer.getLobby().getGuiPlayer();
+
+        if (hasHuman && humanHasPriority) {
+            game.getAction().checkGameOverCondition();
+        }
+        else {
+            game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
+            inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
+        }
+
+        playbackControl.onGameStopRequested();
+    }
+
+    public static void endCurrentGame() {
+        if (game == null) { return; }
+
+        Forge.back();
+        game = null;
     }
 
     private final static boolean LOG_UIEVENTS = false;

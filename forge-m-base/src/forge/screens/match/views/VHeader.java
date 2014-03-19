@@ -11,8 +11,11 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.model.FModel;
 import forge.screens.FScreen;
+import forge.screens.match.FControl;
+import forge.screens.match.MatchScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FScrollPane;
 import forge.utils.ForgePreferences.FPref;
 import forge.utils.Utils;
 
@@ -22,22 +25,21 @@ public class VHeader extends FContainer {
     private static final FSkinFont TAB_FONT = FSkinFont.get(12);
     private static final FSkinColor TAB_SEL_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor TAB_FORE_COLOR = TAB_SEL_FORE_COLOR.alphaColor(0.5f);
-    private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
 
     private final List<HeaderTab> tabs = new ArrayList<HeaderTab>();
     private HeaderTab selectedTab;
 
-    public VHeader() {
-        addTab("Game", new VLog());
-        addTab("Players", new VPlayers());
-        addTab("Log", new VLog());
-        addTab("Combat", new VCombat());
-        addTab("Dev", new VDev());
-        addTab("Stack", new VStack());
+    public VHeader(MatchScreen screen) {
+        addTab("Game", new VGameMenu(), screen);
+        addTab("Players", new VPlayers(), screen);
+        addTab("Log", new VLog(), screen);
+        addTab("Combat", new VCombat(), screen);
+        addTab("Dev", new VDev(), screen);
+        addTab("Stack", new VStack(), screen);
     }
 
-    private void addTab(String text, VDisplayArea displayArea) {
-        tabs.add(add(new HeaderTab(text, displayArea)));
+    private void addTab(String text, HeaderDropDown dropDown, MatchScreen screen) {
+        tabs.add(add(new HeaderTab(text, screen.add(dropDown))));
     }
 
     public HeaderTab getTabGame() {
@@ -68,19 +70,25 @@ public class VHeader extends FContainer {
         return selectedTab;
     }
 
-    private void setSelectedTab(HeaderTab selectedTab0) {
+    public void setSelectedTab(HeaderTab selectedTab0) {
         if (selectedTab == selectedTab0) {
             return;
         }
 
         if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(false);
+            selectedTab.dropDown.setVisible(false);
         }
 
         selectedTab = selectedTab0;
 
         if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(true);
+            selectedTab.dropDown.setVisible(true);
+        }
+    }
+
+    public void setDropDownHeight(float height) {
+        for (HeaderTab tab : tabs) {
+            tab.dropDown.setBounds(0, getHeight(), getWidth(), height);
         }
     }
 
@@ -118,9 +126,6 @@ public class VHeader extends FContainer {
             g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, h, w, h);
         }
         else { //draw background and border for selected zone if needed
-            VDisplayArea selectedDisplayArea = selectedTab.displayArea;
-            g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
-
             //leave gap at selected zone tab
             g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, h, selectedTab.getLeft(), h);
             g.drawLine(1, FScreen.HEADER_LINE_COLOR, selectedTab.getRight(), h, w, h);
@@ -129,14 +134,17 @@ public class VHeader extends FContainer {
 
     public class HeaderTab extends FDisplayObject {
         private String text;
+        private int count;
         private String caption;
         private float minWidth;
-        private final VDisplayArea displayArea;
+        private final HeaderDropDown dropDown;
 
-        private HeaderTab(String text0, VDisplayArea displayArea0) {
+        private HeaderTab(String text0, HeaderDropDown dropDown0) {
             text = text0;
-            displayArea = displayArea0;
-            update();
+            dropDown = dropDown0;
+            dropDown.update();
+            count = dropDown.getCount();
+            updateCaption();
         }
 
         @Override
@@ -151,8 +159,17 @@ public class VHeader extends FContainer {
         }
 
         public void update() {
-            displayArea.update();
-            int count = displayArea.getCount();
+            dropDown.update();
+
+            int newCount = dropDown.getCount();
+            if (count == newCount) { return; }
+
+            count = newCount;
+            updateCaption();
+            VHeader.this.revalidate();
+        }
+
+        private void updateCaption() {
             if (count >= 0) {
                 caption = text + " (" + String.valueOf(count) + ")";
             }
@@ -160,7 +177,6 @@ public class VHeader extends FContainer {
                 caption = text;
             }
             minWidth = TAB_FONT.getFont().getBounds(caption).width;
-            VHeader.this.revalidate();
         }
 
         @Override
@@ -179,7 +195,7 @@ public class VHeader extends FContainer {
                 yAcross = y;
                 y--;
                 h++;
-                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, paddingY, w, getHeight() - paddingY);
+                g.fillRect(HeaderDropDown.BACK_COLOR, 0, paddingY, w, getHeight() - paddingY);
                 g.startClip(-1, y, w + 2, h); //use clip to ensure all corners connect
                 g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, yAcross, w, yAcross);
                 g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, y, 0, h);
@@ -201,6 +217,47 @@ public class VHeader extends FContainer {
             w = getWidth() - 2 * paddingX;
             h = getHeight() - 2 * paddingY;
             g.drawText(caption, TAB_FONT, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        }
+    }
+
+    public static abstract class HeaderDropDown extends FScrollPane {
+        private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
+
+        protected HeaderDropDown() {
+            setVisible(false); //hide by default
+        }
+        public abstract int getCount();
+        public abstract void update();
+
+        public void hide() {
+            FControl.getView().getHeader().setSelectedTab(null);
+        }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+        }
+
+        //override certain gesture listeners to prevent passing to display objects behind it
+        @Override
+        public boolean press(float x, float y) {
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            return true;
+        }
+
+        @Override
+        public boolean release(float x, float y) {
+            return true;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            hide(); //hide drop down when tapped
+            return true;
         }
     }
 }

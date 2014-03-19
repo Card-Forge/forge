@@ -1,15 +1,14 @@
 package forge.screens.match.views;
 
-import forge.Forge.Graphics;
+import forge.screens.match.views.VHeader.HeaderDropDown;
 
-public class VStack extends VDisplayArea {
+public class VStack extends HeaderDropDown {
 
     public VStack() {
     }
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -23,9 +22,5 @@ public class VStack extends VDisplayArea {
     protected void doLayout(float width, float height) {
         // TODO Auto-generated method stub
         
-    }
-
-    @Override
-    protected void drawBackground(Graphics g) {
     }
 }

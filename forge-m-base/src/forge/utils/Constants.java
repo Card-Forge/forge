@@ -40,7 +40,7 @@ public final class Constants {
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
 
-    private static final String _QUEST_DIR      = _ASSETS_ROOT + "quest/";
+    private static final String _QUEST_DIR         = _ASSETS_ROOT + "quest/";
     public static final String TEXT_HOWTO_FILE     = _ASSETS_ROOT + "howto.txt";
     public static final String DRAFT_RANKINGS_FILE = _ASSETS_ROOT + "draft/rankings.txt";
     public static final String CARD_DATA_DIR       = _ASSETS_ROOT + "cardsfolder/";
@@ -57,6 +57,8 @@ public final class Constants {
     public static final String CARD_DATA_PETS_DIR     = _QUEST_DIR + "bazaar/";
     public static final String DEFAULT_DUELS_DIR      = _QUEST_DIR + "duels";
     public static final String DEFAULT_CHALLENGES_DIR = _QUEST_DIR + "challenges";
+
+    public static final String DEFAULT_GUANTLET_DIR = _ASSETS_ROOT + "gauntlet/";
 
     // data tree roots
     public static final String USER_DIR;

@@ -16,9 +16,12 @@ public abstract class FOverlay extends FContainer {
         super.setVisible(false); //hide by default
     }
 
-    @Override
-    public void drawBackground(Graphics g) {
-        g.fillRect(BACK_COLOR, 0, 0, this.getWidth(), this.getHeight());
+    public void show() {
+        setVisible(true);
+    }
+
+    public void hide() {
+        setVisible(false);
     }
 
     @Override
@@ -32,6 +35,11 @@ public abstract class FOverlay extends FContainer {
             overlays.pop();
         }
         super.setVisible(visible0);
+    }
+
+    @Override
+    public void drawBackground(Graphics g) {
+        g.fillRect(BACK_COLOR, 0, 0, this.getWidth(), this.getHeight());
     }
 
     //override all gesture listeners to prevent passing to display objects behind it

@@ -61,14 +61,8 @@ public class HomeScreen extends FScreen {
         });
     }
 
-    @Override
-    protected void drawBackground(Graphics g) {
-        super.drawBackground(g);
-
-        float size = getWidth() * LOGO_SIZE_FACTOR;
-        float x = (getWidth() - size) / 2f;
-        float y = getWidth() * INSETS_FACTOR;
-        g.drawImage(FSkinImage.LOGO, x, y, size, size);
+    private void addButton(String caption, Runnable command) {
+        buttons.add(add(new FButton(caption, command)));
     }
 
     @Override
@@ -86,7 +80,13 @@ public class HomeScreen extends FScreen {
         }
     }
 
-    private void addButton(String caption, Runnable command) {
-        buttons.add(this.add(new FButton(caption, command)));
+    @Override
+    protected void drawBackground(Graphics g) {
+        super.drawBackground(g);
+
+        float size = getWidth() * LOGO_SIZE_FACTOR;
+        float x = (getWidth() - size) / 2f;
+        float y = getWidth() * INSETS_FACTOR;
+        g.drawImage(FSkinImage.LOGO, x, y, size, size);
     }
 }

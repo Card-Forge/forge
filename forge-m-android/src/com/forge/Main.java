@@ -10,6 +10,6 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialize(new Forge(), false);
+        initialize(new Forge(getClipboard()), false);
     }
 }

@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
+import com.badlogic.gdx.utils.Clipboard;
 
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -34,6 +35,7 @@ import forge.toolbox.FGestureAdapter;
 
 public class Forge implements ApplicationListener {
     private static Forge game;
+    private static Clipboard clipboard;
     private static int screenWidth;
     private static int screenHeight;
     private static SpriteBatch batch;
@@ -42,7 +44,7 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public Forge() {
+    public Forge(Clipboard clipboard) {
         if (game != null) {
             throw new RuntimeException("Cannot initialize Forge more than once");
         }
@@ -82,6 +84,10 @@ public class Forge implements ApplicationListener {
         Gdx.input.setInputProcessor(new MainInputProcessor());
         openScreen(new HomeScreen());
         splashScreen = null;
+    }
+
+    public static Clipboard getClipboard() {
+        return clipboard;
     }
 
     public static void showMenu() {

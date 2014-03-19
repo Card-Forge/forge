@@ -60,6 +60,10 @@ public class FButton extends FDisplayObject {
         text = text0;
     }
 
+    public void setFontSize(int fontSize0) {
+        font = FSkinFont.get(fontSize0);
+    }
+
     @Override
     public void setEnabled(boolean b0) {
         if (isEnabled() == b0) { return; }

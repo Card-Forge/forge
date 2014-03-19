@@ -48,6 +48,10 @@ public class FSkinColor {
         return baseColors.get(c0);
     }
 
+    public static FSkinColor getStandardColor(final Color c0) {
+        return new FSkinColor(c0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
+    }
+
     private static final HashMap<Colors, FSkinColor> baseColors = new HashMap<Colors, FSkinColor>();
     private static final HashMap<String, FSkinColor> derivedColors = new HashMap<String, FSkinColor>();
     private static final int NO_BRIGHTNESS_DELTA = 0;
@@ -63,49 +67,60 @@ public class FSkinColor {
 
     public Color getColor() { return color; }
 
-    //private constructors for color that changes with skin (use FSkin.getColor())
     private FSkinColor(Colors baseColor0) {
         this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
     }
     private FSkinColor(Colors baseColor0, int brightnessDelta0, int step0, int contrastStep0, float alpha0) {
-        this.baseColor = baseColor0;
-        this.brightnessDelta = brightnessDelta0;
-        this.step = step0;
-        this.contrastStep = contrastStep0;
-        this.alpha = alpha0;
-        this.updateColor();
+        baseColor = baseColor0;
+        brightnessDelta = brightnessDelta0;
+        step = step0;
+        contrastStep = contrastStep0;
+        alpha = alpha0;
+        updateColor();
+    }
+    private FSkinColor(Color color0, int brightnessDelta0, int step0, int contrastStep0, float alpha0) {
+        color = color0;
+        baseColor = null;
+        brightnessDelta = brightnessDelta0;
+        step = step0;
+        contrastStep = contrastStep0;
+        alpha = alpha0;
+        updateColor();
     }
 
     private FSkinColor getDerivedColor(int brightnessDelta0, int step0, int contrastStep0, float alpha0) {
-        String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
+        if (baseColor == null) { //handle deriving from standard color
+            return new FSkinColor(baseColor, brightnessDelta0, step0, contrastStep0, alpha0);
+        }
+        String key = baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
         FSkinColor derivedColor = derivedColors.get(key);
         if (derivedColor == null) {
-            derivedColor = new FSkinColor(this.baseColor, brightnessDelta0, step0, contrastStep0, alpha0);
+            derivedColor = new FSkinColor(baseColor, brightnessDelta0, step0, contrastStep0, alpha0);
             derivedColors.put(key, derivedColor);
         }
         return derivedColor;
     }
 
     public FSkinColor brighter() {
-        return getDerivedColor(this.brightnessDelta + 1, this.step, this.contrastStep, this.alpha);
+        return getDerivedColor(brightnessDelta + 1, step, contrastStep, alpha);
     }
 
     public FSkinColor darker() {
-        return getDerivedColor(this.brightnessDelta - 1, this.step, this.contrastStep, this.alpha);
+        return getDerivedColor(brightnessDelta - 1, step, contrastStep, alpha);
     }
 
     public FSkinColor stepColor(int step0) {
-        if (this.step != NO_STEP) {
-            step0 += this.step;
+        if (step != NO_STEP) {
+            step0 += step;
         }
-        return getDerivedColor(this.brightnessDelta, step0, this.contrastStep, this.alpha);
+        return getDerivedColor(brightnessDelta, step0, contrastStep, alpha);
     }
 
     public FSkinColor getContrastColor(int contrastStep0) {
-        if (this.contrastStep != NO_STEP) {
-            contrastStep0 += this.contrastStep;
+        if (contrastStep != NO_STEP) {
+            contrastStep0 += contrastStep;
         }
-        return getDerivedColor(this.brightnessDelta, this.step, contrastStep0, this.alpha);
+        return getDerivedColor(brightnessDelta, step, contrastStep0, alpha);
     }
 
     public FSkinColor getHighContrastColor() {
@@ -113,31 +128,33 @@ public class FSkinColor {
     }
 
     public FSkinColor alphaColor(float alpha0) {
-        return getDerivedColor(this.brightnessDelta, this.step, this.contrastStep, alpha0);
+        return getDerivedColor(brightnessDelta, step, contrastStep, alpha0);
     }
 
     protected void updateColor() {
-        this.color = this.baseColor.color;
-        if (this.brightnessDelta != NO_BRIGHTNESS_DELTA) {
-            if (this.brightnessDelta < 0) {
-                for (int i = 0; i > this.brightnessDelta; i--) {
-                    this.color = FSkinColor.stepColor(this.color, 10);
+        if (baseColor != null) {
+            color = baseColor.color;
+        }
+        if (brightnessDelta != NO_BRIGHTNESS_DELTA) {
+            if (brightnessDelta < 0) {
+                for (int i = 0; i > brightnessDelta; i--) {
+                    color = FSkinColor.stepColor(color, 10);
                 }
             }
             else {
-                for (int i = 0; i < this.brightnessDelta; i++) {
-                    this.color = FSkinColor.stepColor(this.color, -10);
+                for (int i = 0; i < brightnessDelta; i++) {
+                    color = FSkinColor.stepColor(color, -10);
                 }
             }
         }
-        if (this.step != NO_STEP) {
-            this.color = FSkinColor.stepColor(this.color, this.step);
+        if (step != NO_STEP) {
+            color = FSkinColor.stepColor(color, step);
         }
-        if (this.contrastStep != NO_STEP) {
-            this.color = FSkinColor.stepColor(this.color, FSkinColor.isColorBright(this.color) ? -this.contrastStep : this.contrastStep);
+        if (contrastStep != NO_STEP) {
+            color = FSkinColor.stepColor(color, FSkinColor.isColorBright(color) ? -contrastStep : contrastStep);
         }
-        if (this.alpha != NO_ALPHA) {
-            this.color = FSkinColor.alphaColor(this.color, this.alpha);
+        if (alpha != NO_ALPHA) {
+            color = FSkinColor.alphaColor(color, alpha);
         }
     }
 

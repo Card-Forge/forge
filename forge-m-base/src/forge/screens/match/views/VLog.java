@@ -1,6 +1,8 @@
 package forge.screens.match.views;
 
-public class VLog extends VDisplayArea {
+import forge.screens.match.views.VHeader.HeaderDropDown;
+
+public class VLog extends HeaderDropDown {
     @Override
     protected void doLayout(float width, float height) {
         // TODO Auto-generated method stub

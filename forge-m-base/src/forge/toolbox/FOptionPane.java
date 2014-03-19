@@ -117,6 +117,7 @@ public class FOptionPane extends FOverlay {
 
     public FOptionPane(String message, String title, FSkinImage icon, FDisplayObject displayObj, String[] options, int defaultOption) {
         buttons = new FButton[options.length]; //TODO: Remove this line when below uncommented
+        result = 0;
         /*this.setTitle(title);
 
         float padding = 10;
@@ -225,9 +226,6 @@ public class FOptionPane extends FOverlay {
     public void setVisible(boolean visible) {
         if (this.isVisible() == visible) { return; }
 
-        if (visible) {
-            result = -1; //default result to -1 when shown, indicating dialog closed without choosing option
-        }
         super.setVisible(visible);
     }
 

@@ -26,6 +26,7 @@ public class FLabel extends FDisplayObject {
 
         private String bldText;
         private FImage bldIcon;
+        private FSkinColor bldTextColor = DEFAULT_TEXT_COLOR;
         private FSkinColor bldPressedColor;
         private Runnable bldCommand;
 
@@ -49,6 +50,7 @@ public class FLabel extends FDisplayObject {
         public Builder iconScaleFactor(final float f0) { this.bldIconScaleFactor = f0; return this; }
         public Builder iconInBackground(final boolean b0) { this.bldIconInBackground = b0; return this; }
         public Builder iconInBackground() { iconInBackground(true); return this; }
+        public Builder textColor(final FSkinColor c0) { this.bldTextColor = c0; return this; }
         public Builder pressedColor(final FSkinColor c0) { this.bldPressedColor = c0; return this; }
     }
 
@@ -60,7 +62,7 @@ public class FLabel extends FDisplayObject {
         }
     }
 
-    private static final FSkinColor clrText = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor DEFAULT_TEXT_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor clrMain = FSkinColor.get(Colors.CLR_INACTIVE);
     private static final FSkinColor d50 = clrMain.stepColor(-50);
     private static final FSkinColor d30 = clrMain.stepColor(-30);
@@ -76,7 +78,7 @@ public class FLabel extends FDisplayObject {
 
     private String text;
     private FImage icon;
-    private FSkinColor pressedColor;
+    private FSkinColor textColor, pressedColor;
     private Runnable command;
 
     // Call this using FLabel.Builder()...
@@ -92,6 +94,7 @@ public class FLabel extends FDisplayObject {
         iconScaleAuto = b0.bldIconScaleAuto;
         text = b0.bldText != null ? b0.bldText : "";
         icon = b0.bldIcon;
+        textColor = b0.bldTextColor;
         pressedColor = b0.bldPressedColor;
         command = b0.bldCommand;
         setEnabled(b0.bldEnabled);
@@ -109,6 +112,17 @@ public class FLabel extends FDisplayObject {
     }
     public void setText(final String text0) {
         text = text0;
+    }
+
+    public FSkinColor getTextColor() {
+        return textColor;
+    }
+    public void setTextColor(final FSkinColor textColor0) {
+        textColor = textColor0;
+    }
+
+    public void setFontSize(int fontSize0) {
+        font = FSkinFont.get(fontSize0);
     }
 
     public FImage getIcon() {
@@ -218,13 +232,13 @@ public class FLabel extends FDisplayObject {
             if (!text.isEmpty()) {
                 x += iconWidth;
                 g.startClip(x, y, w, h);
-                g.drawText(text, font, clrText, x, y, w, h, false, HAlignment.LEFT, true);
+                g.drawText(text, font, textColor, x, y, w, h, false, HAlignment.LEFT, true);
                 g.endClip();
             }
         }
         else if (!text.isEmpty()) {
             g.startClip(x, y, w, h);
-            g.drawText(text, font, clrText, x, y, w, h, false, alignment, true);
+            g.drawText(text, font, textColor, x, y, w, h, false, alignment, true);
             g.endClip();
         }
     }

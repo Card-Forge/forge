@@ -7,9 +7,7 @@ import forge.screens.FScreen;
 import forge.screens.match.FControl;
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
-import forge.game.GameRules;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.toolbox.FDisplayObject;
 
@@ -76,21 +74,8 @@ public abstract class LaunchScreen extends FScreen {
                     if (launchParams.players.isEmpty()) {
                         throw new RuntimeException("Must add at least one player to launchParams.players");
                     }
-
-                    boolean useRandomFoil = false; //Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
-                    for (RegisteredPlayer rp : launchParams.players) {
-                        rp.setRandomFoil(useRandomFoil);
-                    }
-
-                    GameRules rules = new GameRules(launchParams.gameType);
-                    if (!launchParams.appliedVariants.isEmpty()) {
-                        rules.setAppliedVariants(launchParams.appliedVariants);
-                    }
-                    rules.setPlayForAnte(false); //Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
-                    rules.setManaBurn(false); //Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
-                    rules.canCloneUseTargetsImage = false; //Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
-
-                    FControl.startGame(new Match(rules, launchParams.players));
+                    
+                    FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
                 }
 
                 creatingMatch = false;

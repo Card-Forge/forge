@@ -1,11 +1,8 @@
 package forge.screens.match.views;
 
-public class VDev extends VDisplayArea {
-    @Override
-    protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
-    }
+import forge.screens.match.views.VHeader.HeaderDropDown;
+
+public class VDev extends HeaderDropDown {
 
     @Override
     public int getCount() {
@@ -14,6 +11,12 @@ public class VDev extends VDisplayArea {
 
     @Override
     public void update() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void doLayout(float width, float height) {
         // TODO Auto-generated method stub
         
     }

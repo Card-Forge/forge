@@ -12,10 +12,11 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.screens.match.FControl;
+import forge.screens.match.views.VHeader.HeaderDropDown;
 import forge.toolbox.FLabel;
 import forge.utils.ForgePreferences.FPref;
 
-public class VPlayers extends VDisplayArea {
+public class VPlayers extends HeaderDropDown {
     private Map<Player, InfoLabel[]> infoLabels;
     private InfoLabel stormLabel;
 
