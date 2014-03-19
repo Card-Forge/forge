@@ -378,26 +378,27 @@ public class Combat {
 
     public final void removeAbsentCombatants() {
         // iterate all attackers and remove them
+        List<Card> missingCombatants = new ArrayList<>();
         for(Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
             List<Card> atk = ee.getValue().getAttackers();
             for(int i = atk.size() - 1; i >= 0; i--) { // might remove items from collection, so no iterators
                 Card c = atk.get(i);
-                if ( !c.isInPlay() ) {
-                    unregisterAttacker(c, ee.getValue());
+                if ( !c.isInPlay() || !c.isCreature() ) {
+                    missingCombatants.add(c);
                 }
             }
         }
 
         Collection<Card> toRemove = Lists.newArrayList();
         for(Entry<AttackingBand, Card> be : blockedBands.entries()) {
-            if ( !be.getValue().isInPlay() ) {
-                unregisterDefender(be.getValue(), be.getKey());
-                toRemove.add(be.getValue());
+            Card blocker = be.getValue();
+            if ( !blocker.isInPlay() || !blocker.isCreature() ) {
+                missingCombatants.add(blocker);
             }
         }
-        blockedBands.values().removeAll(toRemove);
-        
-    } // verifyCreaturesInPlay()
+        for (Card c : missingCombatants)
+            removeFromCombat(c);
+    }
 
     
     // Call this method right after turn-based action of declare blockers has been performed

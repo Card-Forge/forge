@@ -874,6 +874,9 @@ public class GameAction {
             // 704.5m World rule
             checkAgain |= this.handleWorldRule();
 
+            if (game.getCombat() != null)
+                game.getCombat().removeAbsentCombatants();
+
             if (!checkAgain) {
                 break; // do not continue the loop
             }
