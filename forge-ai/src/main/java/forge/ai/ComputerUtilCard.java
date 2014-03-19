@@ -522,8 +522,7 @@ public class ComputerUtilCard {
                 value -= 50;
             }
         }
-        if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")
-               || c.hasSVar("EndOfTurnLeavePlay")) {
+        if (c.hasSVar("EndOfTurnLeavePlay")) {
             value -= 50;
         } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
             value -= 30;

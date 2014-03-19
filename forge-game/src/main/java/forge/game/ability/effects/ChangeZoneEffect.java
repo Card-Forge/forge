@@ -496,7 +496,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     movedCard = game.getAction().moveTo(tgtC.getController().getZone(destination), tgtC);
-
+                    if (sa.hasParam("Unearth")) {
+                        movedCard.setUnearthed(true);
+                    }
                     if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
                         // What should they attack?
                         // TODO Ninjutsu needs to actually select the Defender, instead of auto selecting player

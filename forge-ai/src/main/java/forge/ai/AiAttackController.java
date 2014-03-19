@@ -539,8 +539,7 @@ public class AiAttackController {
                     mustAttack = true;
                     break;
                 }
-                if ((s.equals("At the beginning of the end step, exile CARDNAME.")
-                        || attacker.getSVar("EndOfTurnLeavePlay").equals("True"))
+                if (attacker.getSVar("EndOfTurnLeavePlay").equals("True")
                         && isEffectiveAttacker(ai, attacker, combat)) {
                     mustAttack = true;
                     break;

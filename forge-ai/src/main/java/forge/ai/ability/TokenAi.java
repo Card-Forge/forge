@@ -98,9 +98,6 @@ public class TokenAi extends SpellAbilityAi {
             if (kw.equals("Haste")) {
                 haste = true;
             }
-            if (kw.equals("At the beginning of the end step, exile CARDNAME.")) {
-                oneShot = true; // need rework this
-            }
         }
 
         PhaseHandler ph = game.getPhaseHandler();

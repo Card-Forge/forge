@@ -1987,7 +1987,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(k).append("\r\n");
             } else if (keyword.startsWith("Fading") || keyword.startsWith("Ripple") || keyword.startsWith("Vanishing")) {
                 sbLong.append(keyword.replace(":", " ")).append("\r\n");
-            } else if (keyword.startsWith("Unearth") || keyword.startsWith("Madness")) {
+            } else if (keyword.startsWith("Madness")) {
                 String[] parts = keyword.split(":");
                 sbLong.append(parts[0] + " " + ManaCostParser.parse(parts[1])).append("\r\n");
             } else if (keyword.startsWith("Devour")) {

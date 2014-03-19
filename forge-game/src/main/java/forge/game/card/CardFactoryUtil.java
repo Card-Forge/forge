@@ -42,7 +42,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
@@ -71,62 +70,6 @@ import java.util.Map.Entry;
  * @version $Id$
  */
 public class CardFactoryUtil {
-
-    /**
-     * <p>
-     * abilityUnearth.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.game.spellability.AbilityActivated} object.
-     */
-    public static AbilityActivated abilityUnearth(final Card sourceCard, final String manaCost) {
-
-        final Cost cost = new Cost(manaCost, true);
-        class AbilityUnearth extends AbilityActivated {
-            public AbilityUnearth(final Card ca, final Cost co, final TargetRestrictions t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityUnearth(getHostCard(),
-                        getPayCosts(), getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions()));
-                CardFactory.copySpellAbility(this, res);
-                final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
-                restrict.setZone(ZoneType.Graveyard);
-                restrict.setSorcerySpeed(true);
-                res.setRestrictions(restrict);
-                return res;
-            }
-
-            private static final long serialVersionUID = -5633945565395478009L;
-
-            @Override
-            public void resolve() {
-                final Card card = sourceCard.getGame().getAction().moveToPlay(sourceCard);
-
-                card.addHiddenExtrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
-                card.addIntrinsicKeyword("Haste");
-                card.setUnearthed(true);
-            }
-        }
-        final AbilityActivated unearth = new AbilityUnearth(sourceCard, cost, null);
-
-        final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
-        restrict.setZone(ZoneType.Graveyard);
-        restrict.setSorcerySpeed(true);
-        unearth.setRestrictions(restrict);
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append("Unearth: ").append(sourceCard.getName());
-        unearth.setStackDescription(sbStack.toString());
-
-        return unearth;
-    } // abilityUnearth()
 
     /**
      * <p>
@@ -2076,6 +2019,41 @@ public class CardFactoryUtil {
             card.getUnparsedAbilities().add(effect);
         }
 
+        if (hasKeyword(card, "Unearth") != -1) {
+            final int n = hasKeyword(card, "Unearth");
+            if (n != -1) {
+                final String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+
+                final String[] k = parse.split(":");
+
+                final String manacost = k[1];
+
+                String effect = "AB$ ChangeZone | Cost$ " + manacost + " | Defined$ Self" +
+                        " | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$" +
+                        " True | ActivationZone$ Graveyard | Unearth$ True | SubAbility$" +
+                        " UnearthPumpSVar | PrecostDesc$ Unearth | StackDescription$ " +
+                        "Unearth: Return CARDNAME to the battlefield. | SpellDescription$" +
+                        " (" + ManaCostParser.parse(manacost) + ": Return CARDNAME to the " +
+                        "battlefield. It gains haste. Exile it at the beginning of the next" +
+                        " end step or if it would leave the battlefield. Unearth only as a sorcery.)";
+                String dbpump = "DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME" +
+                        " would leave the battlefield, exile it instead of putting it " +
+                        "anywhere else. | Permanent$ True | SubAbility$ UnearthDelayTrigger";
+                String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn" +
+                        " | Execute$ UnearthTrueDeath | TriggerDescription$ Exile " +
+                        "CARDNAME at the beginning of the next end step.";
+                String truedeath = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield" +
+                        " | Destination$ Exile";
+                card.setSVar("UnearthPumpSVar", dbpump);
+                card.setSVar("UnearthDelayTrigger", delTrig);
+                card.setSVar("UnearthTrueDeath", truedeath);
+                card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getUnparsedAbilities().add(effect);
+            }
+        } // unearth
+
         final int iLvlUp = hasKeyword(card, "Level up");
         final int iLvlMax = hasKeyword(card, "maxLevel");
         
@@ -3016,20 +2994,6 @@ public class CardFactoryUtil {
                 card.setState(CardCharacteristicName.Original);
             }
         } // Morph
-
-        if (hasKeyword(card, "Unearth") != -1) {
-            final int n = hasKeyword(card, "Unearth");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                // card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-
-                final String manacost = k[1];
-
-                card.addSpellAbility(abilityUnearth(card, manacost));
-            }
-        } // unearth
 
         if (hasKeyword(card, "Madness") != -1) {
             final int n = hasKeyword(card, "Madness");
