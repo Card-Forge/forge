@@ -9,11 +9,22 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 
 public abstract class FOverlay extends FContainer {
-    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
+    private static FSkinColor BACK_COLOR;
     private static final Stack<FOverlay> overlays = new Stack<FOverlay>();
 
     public FOverlay() {
         super.setVisible(false); //hide by default
+    }
+
+    public static FOverlay getTopOverlay() {
+        if (overlays.isEmpty()) {
+            return null;
+        }
+        return overlays.peek();
+    }
+
+    public static Iterable<FOverlay> getOverlays() {
+        return overlays;
     }
 
     public void show() {
@@ -29,6 +40,9 @@ public abstract class FOverlay extends FContainer {
         if (this.isVisible() == visible0) { return; }
 
         if (visible0) {
+            if (BACK_COLOR == null) { //wait to initialize back color until first overlay shown
+                BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
+            }
             overlays.push(this);
         }
         else {

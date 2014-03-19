@@ -22,8 +22,9 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
+import forge.toolbox.FCardZoom;
 import forge.toolbox.GuiDialog;
-import forge.toolbox.VCardZoom.ZoomController;
+import forge.toolbox.FCardZoom.ZoomController;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 
@@ -114,7 +115,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
         if (cardSelectLocked) { return; }
 
-        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+        FCardZoom.show(FControl.getView().getPrompt().getMessage(),
                 card, orderedCardOptions, new ZoomController<String>() {
             @Override
             public List<String> getOptions(final Card card) {

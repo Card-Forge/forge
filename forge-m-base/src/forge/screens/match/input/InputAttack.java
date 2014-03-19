@@ -30,7 +30,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.screens.match.FControl;
 import forge.screens.match.events.UiEventAttackerDeclared;
-import forge.toolbox.VCardZoom.ZoomController;
+import forge.toolbox.FCardZoom;
+import forge.toolbox.FCardZoom.ZoomController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +144,7 @@ public class InputAttack extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
-        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+        FCardZoom.show(FControl.getView().getPrompt().getMessage(),
                 card, orderedCardOptions, new ZoomController<Option>() {
             @Override
             public List<Option> getOptions(final Card card) {

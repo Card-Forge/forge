@@ -16146,6 +16146,7 @@ forge-m-base/src/forge/screens/sealed/SealedScreen.java -text
 forge-m-base/src/forge/screens/settings/SettingsScreen.java -text
 forge-m-base/src/forge/toolbox/FButton.java -text
 forge-m-base/src/forge/toolbox/FCardPanel.java -text
+forge-m-base/src/forge/toolbox/FCardZoom.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
 forge-m-base/src/forge/toolbox/FFileChooser.java -text
@@ -16160,7 +16161,6 @@ forge-m-base/src/forge/toolbox/FScrollPane.java -text
 forge-m-base/src/forge/toolbox/FTextArea.java -text
 forge-m-base/src/forge/toolbox/GuiChoose.java -text
 forge-m-base/src/forge/toolbox/GuiDialog.java -text
-forge-m-base/src/forge/toolbox/VCardZoom.java -text
 forge-m-base/src/forge/utils/Constants.java -text
 forge-m-base/src/forge/utils/Evaluator.java -text
 forge-m-base/src/forge/utils/ForgePreferences.java -text

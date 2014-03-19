@@ -14,6 +14,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.net.FServer;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
+import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.GuiChoose;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
@@ -136,8 +137,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                /*new ViewWinLose(FControl.getGame());
-                SOverlayUtils.showOverlay();*/
+                new ViewWinLose(FControl.getGame()).setVisible(true);
             }
         });
         return null;

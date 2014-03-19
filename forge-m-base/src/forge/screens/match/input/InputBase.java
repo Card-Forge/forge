@@ -25,7 +25,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.screens.match.FControl;
-import forge.toolbox.VCardZoom.ZoomController;
+import forge.toolbox.FCardZoom;
+import forge.toolbox.FCardZoom.ZoomController;
 
 /**
  * <p>
@@ -41,7 +42,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
     protected final void setFinished() {
-        FControl.getView().getCardZoom().hide(); //ensure zoom hidden when input finished
+        FCardZoom.hideZoom(); //ensure zoom hidden when input finished
         finished = true;
     }
 
@@ -83,7 +84,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
         //for base input, just show zoom view with no options
-        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+        FCardZoom.show(FControl.getView().getPrompt().getMessage(),
                 card, orderedCardOptions, new ZoomController<Object>() {
             @Override
             public List<Object> getOptions(Card card) {

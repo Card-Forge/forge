@@ -10,7 +10,6 @@ import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VHeader;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPrompt;
-import forge.toolbox.VCardZoom;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
@@ -24,7 +23,6 @@ public class MatchScreen extends FScreen {
     private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
     private final VHeader header;
     private final VPrompt prompt;
-    private final VCardZoom cardZoom;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
@@ -54,8 +52,6 @@ public class MatchScreen extends FScreen {
                 }));
 
         header = add(new VHeader(this)); //add header just before zoom so drop downs appear on top
-
-        cardZoom = add(new VCardZoom());
     }
 
     public void updatePlayers() {
@@ -80,10 +76,6 @@ public class MatchScreen extends FScreen {
 
     public VHeader getHeader() {
         return header;
-    }
-
-    public VCardZoom getCardZoom() {
-        return cardZoom;
     }
 
     public VPlayerPanel getTopPlayerPanel() {
@@ -157,7 +149,6 @@ public class MatchScreen extends FScreen {
         topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
-        cardZoom.setBounds(0, 0, width, height);
         header.setDropDownHeight(topPlayerPanel.getBottom() - header.getHeight()); //make header drop downs go to bottom of top player panel
     }
 }

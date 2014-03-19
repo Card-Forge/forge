@@ -32,6 +32,7 @@ import forge.screens.home.HomeScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
+import forge.toolbox.FOverlay;
 
 public class Forge implements ApplicationListener {
     private static Forge game;
@@ -134,6 +135,10 @@ public class Forge implements ApplicationListener {
         batch.begin();
         Graphics g = new Graphics();
         screen.draw(g);
+        for (FOverlay overlay : FOverlay.getOverlays()) {
+            overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
+            overlay.draw(g);
+        }
         batch.end();
     }
 
@@ -160,6 +165,11 @@ public class Forge implements ApplicationListener {
     @Override
     public void dispose () {
         if (currentScreen != null) {
+            FOverlay overlay = FOverlay.getTopOverlay();
+            while (overlay != null) {
+                overlay.hide();
+                overlay = FOverlay.getTopOverlay();
+            }
             currentScreen.onClose(false);
             currentScreen = null;
         }
@@ -175,7 +185,13 @@ public class Forge implements ApplicationListener {
         public boolean touchDown(int x, int y, int pointer, int button) {
             potentialListeners.clear();
             if (currentScreen != null) { //base potential listeners on object containing touch down point
-                currentScreen.buildTouchListeners(x, y, potentialListeners);
+                FOverlay overlay = FOverlay.getTopOverlay();
+                if (overlay != null) { //let top overlay handle gestures if any is open
+                    overlay.buildTouchListeners(x, y, potentialListeners);
+                }
+                else {
+                    currentScreen.buildTouchListeners(x, y, potentialListeners);
+                }
             }
             return super.touchDown(x, y, pointer, button);
         }

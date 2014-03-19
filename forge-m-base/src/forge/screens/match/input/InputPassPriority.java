@@ -20,8 +20,8 @@ package forge.screens.match.input;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.screens.match.FControl;
-import forge.toolbox.VCardZoom.ZoomController;
+import forge.toolbox.FCardZoom;
+import forge.toolbox.FCardZoom.ZoomController;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected void onCardSelected(final Card card, final List<Card> orderedCardOptions) {
-        FControl.getView().getCardZoom().show("Select a spell/ability", card, orderedCardOptions, new ZoomController<SpellAbility>() {
+        FCardZoom.show("Select a spell/ability", card, orderedCardOptions, new ZoomController<SpellAbility>() {
             @Override
             public List<SpellAbility> getOptions(final Card card) {
                 return card.getAllPossibleAbilities(player, true);

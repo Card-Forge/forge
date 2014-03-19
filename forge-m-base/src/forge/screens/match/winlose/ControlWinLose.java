@@ -1,6 +1,5 @@
 package forge.screens.match.winlose;
 
-import forge.Forge;
 import forge.game.Game;
 import forge.game.Match;
 import forge.model.FModel;
@@ -73,7 +72,6 @@ public class ControlWinLose {
         // Reset other stuff
         saveOptions();
         FControl.endCurrentGame();
-        Forge.back();
         view.hide();
     }
 

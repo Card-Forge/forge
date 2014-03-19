@@ -17,7 +17,8 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.player.HumanPlay;
 import forge.screens.match.FControl;
-import forge.toolbox.VCardZoom.ZoomController;
+import forge.toolbox.FCardZoom;
+import forge.toolbox.FCardZoom.ZoomController;
 import forge.utils.Evaluator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +55,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return;
         }
 
-        FControl.getView().getCardZoom().show(FControl.getView().getPrompt().getMessage(),
+        FCardZoom.show(FControl.getView().getPrompt().getMessage(),
                 card, orderedCardOptions, new ZoomController<SpellAbility>() {
             private byte colorCanUse, colorNeeded;
 

@@ -14,10 +14,65 @@ import forge.game.card.Card;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FList.ListItemRenderer;
 
-public class VCardZoom extends FOverlay {
+public class FCardZoom extends FOverlay {
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.9f);
     private static final float LIST_OPTION_HEIGHT = VPrompt.HEIGHT;
     private static final float CARD_DETAILS_HEIGHT = VPrompt.HEIGHT * 2f;
+    private static final FCardZoom cardZoom = new FCardZoom();
+
+    public static abstract class ZoomController<T> {
+        public abstract List<T> getOptions(final Card card);
+        public abstract boolean selectOption(final Card card, final T option);
+    }
+
+    public static <T> void show(String message0, final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {
+        if (cardZoom.isVisible()) { return; } //don't support showing if already shown
+
+        if (orderedCards0.isEmpty()) {
+            return;
+        }
+
+        cardZoom.prompt.setMessage(message0);
+        cardZoom.orderedCards = orderedCards0;
+        cardZoom.controller = controller0;
+
+        int index = orderedCards0.indexOf(card0);
+        if (index == -1) {
+            index = 0;
+        }
+        cardZoom.setSelectedIndex(index);
+
+        if (showTask.isScheduled()) { //select first option without showing zoom if called a second time in quick succession
+            showTask.cancel();
+            cardZoom.selectFirstOption();
+        }
+        else { //delay showing briefly to give time for a double-tap to auto-select the first ability
+            Timer.schedule(showTask, FGestureAdapter.DOUBLE_TAP_INTERVAL);
+        }
+    }
+
+    private static final Task showTask = new Task() {
+        @Override
+        public void run () {
+            cardZoom.show();
+        }
+    };
+
+    public static boolean isOpen() {
+        return cardZoom.isVisible();
+    }
+
+    public static String getMessage() {
+        return cardZoom.getPrompt().getMessage();
+    }
+
+    public static void setMessage(String message0) {
+        cardZoom.getPrompt().setMessage(message0);
+    }
+
+    public static void hideZoom() {
+        cardZoom.hide();
+    }
 
     private final CardSlider slider;
     private final FList<Object> optionList;
@@ -29,7 +84,7 @@ public class VCardZoom extends FOverlay {
     @SuppressWarnings("rawtypes")
     private ZoomController controller;
 
-    public VCardZoom() {
+    private FCardZoom() {
         slider = add(new CardSlider());
         optionList = add(new FList<Object>() {
             @Override
@@ -81,42 +136,7 @@ public class VCardZoom extends FOverlay {
         prompt.getBtnCancel().setEnabled(false);
     }
 
-    public static abstract class ZoomController<T> {
-        public abstract List<T> getOptions(final Card card);
-        public abstract boolean selectOption(final Card card, final T option);
-    }
-
-    public <T> void show(String message0, final Card card0, final List<Card> orderedCards0, ZoomController<?> controller0) {
-        if (orderedCards0.isEmpty()) {
-            return;
-        }
-
-        prompt.setMessage(message0);
-        orderedCards = orderedCards0;
-        controller = controller0;
-
-        int index = orderedCards.indexOf(card0);
-        if (index == -1) {
-            index = 0;
-        }
-        setSelectedIndex(index);
-
-        if (showTask.isScheduled()) { //select first option without showing zoom if called a second time in quick succession
-            showTask.cancel();
-            selectFirstOption();
-        }
-        else { //delay showing briefly to give time for a double-tap to auto-select the first ability
-            Timer.schedule(showTask, FGestureAdapter.DOUBLE_TAP_INTERVAL);
-        }
-    }
-
-    private final Task showTask = new Task() {
-        @Override
-        public void run () {
-            setVisible(true);
-        }
-    };
-
+    @Override
     public void hide() {
         if (isVisible()) {
             orderedCards = null; //reset fields when hidden
@@ -127,7 +147,7 @@ public class VCardZoom extends FOverlay {
             prompt.setMessage(null);
             prompt.getBtnCancel().setText("More");
             prompt.getBtnCancel().setEnabled(false);
-            setVisible(false);
+            super.hide();
         }
     }
 

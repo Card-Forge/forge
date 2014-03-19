@@ -389,17 +389,16 @@ public class Combat {
             }
         }
 
-        Collection<Card> toRemove = Lists.newArrayList();
         for(Entry<AttackingBand, Card> be : blockedBands.entries()) {
             Card blocker = be.getValue();
             if ( !blocker.isInPlay() || !blocker.isCreature() ) {
                 missingCombatants.add(blocker);
             }
         }
-        for (Card c : missingCombatants)
+        for (Card c : missingCombatants) {
             removeFromCombat(c);
+        }
     }
-
     
     // Call this method right after turn-based action of declare blockers has been performed
     public final void fireTriggersForUnblockedAttackers() {
