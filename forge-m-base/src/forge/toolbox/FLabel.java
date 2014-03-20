@@ -101,7 +101,7 @@ public class FLabel extends FDisplayObject {
         setEnabled(b0.bldEnabled);
     }
 
-    public boolean getSelected() {
+    public boolean isSelected() {
         return selected;
     }
     public void setSelected(final boolean b0) {
