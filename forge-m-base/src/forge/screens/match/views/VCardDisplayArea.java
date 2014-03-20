@@ -89,17 +89,19 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         startLayout();
 
         float x = 0;
         float y = 0;
-        float cardHeight = height;
+        float cardHeight = visibleHeight;
         float cardWidth = ((cardHeight - 2 * FCardPanel.PADDING) / FCardPanel.ASPECT_RATIO) + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
 
         for (FCardPanel cardPanel : cardPanels) {
             x += layoutCardPanel(cardPanel, x, y, cardWidth, cardHeight);
         }
+
+        return new ScrollBounds(x, visibleHeight);
     }
 
     protected class CardAreaPanel extends FCardPanel {

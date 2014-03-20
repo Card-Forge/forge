@@ -76,9 +76,8 @@ public class VPlayers extends HeaderDropDown {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        return new ScrollBounds(visibleWidth, visibleHeight);
     }
 
     private class InfoLabel extends FLabel {

@@ -9,10 +9,15 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 
 public abstract class FOverlay extends FContainer {
-    private static FSkinColor BACK_COLOR;
     private static final Stack<FOverlay> overlays = new Stack<FOverlay>();
 
+    private FSkinColor backColor;
+
     public FOverlay() {
+        this(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f));
+    }
+    public FOverlay(FSkinColor backColor0) {
+        backColor = backColor0;
         super.setVisible(false); //hide by default
     }
 
@@ -40,9 +45,6 @@ public abstract class FOverlay extends FContainer {
         if (this.isVisible() == visible0) { return; }
 
         if (visible0) {
-            if (BACK_COLOR == null) { //wait to initialize back color until first overlay shown
-                BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
-            }
             overlays.push(this);
         }
         else {
@@ -53,7 +55,7 @@ public abstract class FOverlay extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
-        g.fillRect(BACK_COLOR, 0, 0, this.getWidth(), this.getHeight());
+        g.fillRect(backColor, 0, 0, this.getWidth(), this.getHeight());
     }
 
     //override all gesture listeners to prevent passing to display objects behind it

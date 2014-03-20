@@ -16,8 +16,7 @@ public class VDev extends HeaderDropDown {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        return new ScrollBounds(visibleWidth, visibleHeight);
     }
 }

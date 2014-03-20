@@ -20,6 +20,10 @@ public abstract class FContainer extends FDisplayObject {
         children.clear();
     }
 
+    public int getChildCount() {
+        return children.size();
+    }
+
     public Iterable<FDisplayObject> getChildren() {
         return children;
     }
@@ -27,7 +31,7 @@ public abstract class FContainer extends FDisplayObject {
     protected void drawBackground(Graphics g) {
     }
 
-    public final void draw(Graphics g) {
+    public void draw(Graphics g) {
         drawBackground(g);
         for (FDisplayObject child : children) {
             if (child.isVisible()) {

@@ -59,16 +59,18 @@ public class VManaPool extends VDisplayArea {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         float x = 0;
         float y = 0;
-        float labelWidth = width / manaLabels.size();
-        float labelHeight = height;
+        float labelWidth = visibleWidth / manaLabels.size();
+        float labelHeight = visibleHeight;
 
         for (ManaLabel label : manaLabels) {
             label.setBounds(x, y, labelWidth, labelHeight);
             x += labelWidth;
         }
+
+        return new ScrollBounds(visibleWidth, visibleHeight);
     }
 
     private class ManaLabel extends FDisplayObject {

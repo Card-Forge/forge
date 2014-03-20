@@ -110,15 +110,17 @@ public class FList<E> extends FScrollPane {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         float y = 0;
         float groupHeight;
 
         for (ListGroup group : groups) {
             groupHeight = group.getPreferredHeight();
-            group.setBounds(0, y, width, groupHeight);
+            group.setBounds(0, y, visibleWidth, groupHeight);
             y += groupHeight;
         }
+
+        return new ScrollBounds(visibleWidth, y);
     }
 
     private class ListGroup extends FContainer {

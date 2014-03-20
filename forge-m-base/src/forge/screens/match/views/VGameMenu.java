@@ -55,18 +55,20 @@ public class VGameMenu extends HeaderDropDown {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
-        float x = width * INSETS_FACTOR;
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        float x = visibleWidth * INSETS_FACTOR;
         float y = x;
-        float dy = height * GAP_Y_FACTOR;
-        float buttonWidth = width - 2 * x;
-        float buttonHeight = (height - y - x) / buttons.size() - dy;
+        float dy = visibleHeight * GAP_Y_FACTOR;
+        float buttonWidth = visibleWidth - 2 * x;
+        float buttonHeight = (visibleHeight - y - x) / buttons.size() - dy;
         dy += buttonHeight;
 
         for (FButton button : buttons) {
             button.setBounds(x, y, buttonWidth, buttonHeight);
             y += dy;
         }
+
+        return new ScrollBounds(visibleWidth, visibleHeight);
     }
 
     @Override

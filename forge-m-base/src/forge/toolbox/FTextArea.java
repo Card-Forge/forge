@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
@@ -31,6 +32,7 @@ public class FTextArea extends FScrollPane {
     }
     public void setText(String text0) {
         text = text0;
+        revalidate();
     }
 
     public HAlignment getAlignment() {
@@ -42,10 +44,17 @@ public class FTextArea extends FScrollPane {
 
     public void setFontSize(int fontSize0) {
         font = FSkinFont.get(fontSize0);
+        revalidate();
+    }
+
+    @Override
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        TextBounds bounds = font.getFont().getWrappedBounds(text, visibleWidth - 2 * insets.x);
+        return new ScrollBounds(visibleWidth, bounds.height + 2 * insets.y);
     }
 
     @Override
     public void drawBackground(Graphics g) {
-        g.drawText(text, font, FORE_COLOR, insets.x, insets.y, getWidth() - 2 * insets.x, getHeight() - 2 * insets.y, true, alignment, false);
+        g.drawText(text, font, FORE_COLOR, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, true, alignment, false);
     }
 }

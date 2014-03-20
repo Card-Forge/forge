@@ -99,7 +99,7 @@ public class VField extends VZoneDisplay {
     }
 
     @Override
-    protected void doLayout(float width, float height) {
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         startLayout();
 
         List<FCardPanel> creatures = new ArrayList<FCardPanel>();
@@ -118,13 +118,15 @@ public class VField extends VZoneDisplay {
             }
         }
 
-        float cardSize = height / 2;
+        float cardSize = visibleHeight / 2;
         float x = 0;
         float y = flipped ? cardSize : 0;
 
         for (FCardPanel cardPanel : creatures) {
             x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
         }
+
+        ScrollBounds bounds = new ScrollBounds(x, visibleHeight);
 
         x = 0;
         y = flipped ? 0 : cardSize;
@@ -135,5 +137,8 @@ public class VField extends VZoneDisplay {
         for (FCardPanel cardPanel : otherPermanents) {
             x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
         }
+        
+        bounds.increaseWidthTo(x); //increase scroll width if needed
+        return bounds;
     }
 }

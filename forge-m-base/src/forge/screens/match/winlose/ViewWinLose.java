@@ -3,6 +3,8 @@ package forge.screens.match.winlose;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
@@ -19,6 +21,9 @@ import forge.toolbox.FPanel;
 import forge.toolbox.FTextArea;
 
 public class ViewWinLose extends FOverlay {
+    private static final float INSETS_FACTOR = 0.025f;
+    private static final float GAP_Y_FACTOR = 0.02f;
+
     private final FButton btnContinue, btnRestart, btnQuit;
     private final FLabel lblTitle, lblLog, lblStats, btnCopyLog;
     private final FTextArea txtLog;
@@ -27,10 +32,12 @@ public class ViewWinLose extends FOverlay {
     private final Game game;
 
     public ViewWinLose(final Game game0) {
+        super(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.75f));
+
         game = game0;
         
-        lblTitle = add(new FLabel.Builder().build());
-        lblStats = add(new FLabel.Builder().build());
+        lblTitle = add(new FLabel.Builder().fontSize(30).align(HAlignment.CENTER).build());
+        lblStats = add(new FLabel.Builder().fontSize(26).align(HAlignment.CENTER).build());
         pnlOutcomes = add(new OutcomesPanel());
         pnlCustom = new FPanel();
 
@@ -139,18 +146,50 @@ public class ViewWinLose extends FOverlay {
 
     @Override
     protected void doLayout(float width, float height) {
-        // TODO Auto-generated method stub
-        
+        float x = width * INSETS_FACTOR;
+        float y = x;
+        float w = width - 2 * x;
+        float dy = height * GAP_Y_FACTOR;
+
+        float h = height / 10;
+        lblTitle.setBounds(x, y, w, h);
+        y += h + dy;
+
+        h = OutcomesPanel.LBL_HEIGHT * pnlOutcomes.getChildCount();
+        pnlOutcomes.setBounds(x, y, w, h);
+        y += h + dy;
+
+        h = height / 10;
+        lblStats.setBounds(x, y, w, h);
+        y += h + dy;
+
+        h = height / 12;
+        btnContinue.setBounds(x, y, w, h);
+        y += h + dy;
+        btnRestart.setBounds(x, y, w, h);
+        y += h + dy;
+        btnQuit.setBounds(x, y, w, h);
+        y += h + dy;
+
+        h = lblLog.getAutoSizeBounds().height + dy;
+        lblLog.setBounds(x, y, w, h);
+        y += h;
+
+        h = height / 16;
+        float y2 = height - dy - h;
+        btnCopyLog.setBounds(width / 4, y2, width / 2, h);
+        txtLog.setBounds(x, y, w, y2 - y - dy);
     }
 
-    private class OutcomesPanel extends FContainer {
+    private static class OutcomesPanel extends FContainer {
+        private static final float LBL_HEIGHT = 20;
+ 
         @Override
         protected void doLayout(float width, float height) {
             float y = 0;
-            float lblHeight = 20;
             for (FDisplayObject lbl : getChildren()) {
-                lbl.setBounds(0, y, width, lblHeight);
-                y += lblHeight;
+                lbl.setBounds(0, y, width, LBL_HEIGHT);
+                y += LBL_HEIGHT;
             }
         }
     }

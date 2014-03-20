@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
@@ -162,6 +163,25 @@ public class FLabel extends FDisplayObject {
             handled = true;
         }
         return handled;
+    }
+
+    public TextBounds getAutoSizeBounds() {
+        TextBounds bounds;
+        if (text.isEmpty()) {
+            bounds = new TextBounds();
+        }
+        else {
+            bounds = font.getFont().getMultiLineBounds(text);
+            bounds.height += font.getFont().getLineHeight() - font.getFont().getCapHeight(); //account for height below baseline of final line
+        }
+        bounds.width += 2 * insets.x;
+        bounds.height += 2 * insets.y;
+
+        if (icon != null) {
+            bounds.width += icon.getWidth();
+        }
+        
+        return bounds;
     }
 
     @Override

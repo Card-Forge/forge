@@ -19,4 +19,9 @@ public class FPanel extends FScrollPane {
             g.fillRect(backColor, 0, 0, getWidth(), getHeight());
         }
     }
+
+    @Override
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        return new ScrollBounds(visibleWidth, visibleHeight);
+    }
 }
