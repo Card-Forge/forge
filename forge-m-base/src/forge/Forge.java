@@ -45,11 +45,12 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public Forge(Clipboard clipboard) {
+    public Forge(Clipboard clipboard0) {
         if (game != null) {
             throw new RuntimeException("Cannot initialize Forge more than once");
         }
         game = this;
+        clipboard = clipboard0;
     }
 
     @Override
