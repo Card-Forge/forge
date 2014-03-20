@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -12,6 +13,7 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -48,7 +50,7 @@ public class CountersPutAi extends SpellAbilityAi {
         if ("Never".equals(sa.getParam("AILogic"))) {
             return false;
         }
-
+        
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
@@ -92,6 +94,34 @@ public class CountersPutAi extends SpellAbilityAi {
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
+        if (sa.getParam("AILogic").equals("Fight")) {
+        	int nPump = 0;
+        	if (type.equals("P1P1")) {
+        		nPump = amount;
+        	}
+        	final AbilitySub tgtFight = sa.getSubAbility();
+            List<Card> aiCreatures = ai.getCreaturesInPlay();
+            aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
+            aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
+            CardLists.sortByPowerDesc(aiCreatures);
+
+            List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+            humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
+            CardLists.sortByCmcDesc(humCreatures);
+            if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
+            	return false;
+            }
+            for (Card humanCreature : humCreatures) {
+            	for (Card aiCreature : aiCreatures) {
+            		if (FightAi.shouldFight(aiCreature, humanCreature, nPump, nPump)) {
+            			sa.getTargets().add(aiCreature);
+            			tgtFight.getTargets().add(humanCreature);
+            			return true;
+            		}
+            	}
+            }
+        }
+        
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);

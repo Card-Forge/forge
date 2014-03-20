@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilityStatic;
@@ -22,6 +23,11 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         if (sa instanceof AbilityStatic) {
             return false;
         }
+        if (sa.getParam("AILogic").equals("Main2")) {
+        	if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+        		return false;
+    		}
+    	}
         // So far this only appears on Triggers, but will expand
         // once things get converted from Dig + NoMove
         return true;

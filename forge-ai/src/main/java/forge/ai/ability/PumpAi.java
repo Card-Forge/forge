@@ -13,6 +13,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
@@ -211,9 +212,31 @@ public class PumpAi extends PumpAiBase {
                 } else {
                     return false;
                 }
-            } else {
-                return false;
             }
+            if (sa.getParam("AILogic").equals("Fight")) {
+            	final AbilitySub tgtFight = sa.getSubAbility();
+                List<Card> aiCreatures = ai.getCreaturesInPlay();
+                aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
+                aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
+                CardLists.sortByPowerDesc(aiCreatures);
+
+                List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+                humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
+                CardLists.sortByCmcDesc(humCreatures);
+                if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
+                	return false;
+                }
+                for (Card humanCreature : humCreatures) {
+                	for (Card aiCreature : aiCreatures) {
+                		if (FightAi.shouldFight(aiCreature, humanCreature, attack, defense)) {
+                			sa.getTargets().add(aiCreature);
+                			tgtFight.getTargets().add(humanCreature);
+                			return true;
+                		}
+                	}
+                }
+            }
+            return false;
         } else if (sa.isCurse()) {
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);

@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -13,6 +15,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -120,6 +123,29 @@ public class EffectAi extends SpellAbilityAi {
                     }
                 }
                 randomReturn = threatened;
+            } else if (logic.equals("Fight")) {
+            	List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+                humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+                CardLists.sortByCmcDesc(humCreatures);
+                
+                final AbilitySub tgtFight = sa.getSubAbility();
+                List<Card> aiCreatures = ai.getCreaturesInPlay();
+                aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
+                aiCreatures =  ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
+                CardLists.sortByPowerDesc(aiCreatures);
+                
+                if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
+                	return false;
+                }
+                for (Card humanCreature : humCreatures) {
+                	for (Card aiCreature : aiCreatures) {
+                		if (FightAi.shouldFight(aiCreature, humanCreature, 0, 0)) {
+                			tgtFight.getTargets().add(aiCreature);
+                			sa.getTargets().add(humanCreature);
+                			return true;
+                		}
+                	}
+                }
             }
         } else { //no AILogic
             return false;

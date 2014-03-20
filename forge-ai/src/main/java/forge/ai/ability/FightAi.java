@@ -53,7 +53,7 @@ public class FightAi extends SpellAbilityAi {
         }
 
         if (sa.hasParam("TargetsFromDifferentZone")) {
-            if (humCreatures.isEmpty() && aiCreatures.isEmpty()) {
+            if (!(humCreatures.isEmpty() && aiCreatures.isEmpty())) {
                 for (Card humanCreature : humCreatures) {
                     for (Card aiCreature : aiCreatures) {
                         if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetAttack()
@@ -135,5 +135,29 @@ public class FightAi extends SpellAbilityAi {
         
         return true;
     }
-
+    public static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
+    	if (canKill(fighter, opponent, pumpAttack)) {
+    		if (!canKill(opponent, fighter, -pumpDefense)) {
+    			return true;
+    		} else {
+    			final Random r = MyRandom.getRandom();
+    			if (r.nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+    public static boolean canKill(Card fighter, Card opponent, int pumpAttack) {
+    	if (opponent.getSVar("Targeting").equals("Dies")) {
+    		return true;
+    	}
+    	if (opponent.hasProtectionFrom(fighter) || !opponent.canBeDestroyed()) {
+    		return false;
+    	}
+    	if (fighter.hasKeyword("Deathtouch") || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetAttack() + pumpAttack) {
+    		return true;
+    	}
+    	return false;
+    }
 }
