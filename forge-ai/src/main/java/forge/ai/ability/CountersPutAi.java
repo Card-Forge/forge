@@ -94,7 +94,7 @@ public class CountersPutAi extends SpellAbilityAi {
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
-        if (sa.getParam("AILogic").equals("Fight")) {
+        if ("Fight".equals(sa.getParam("AILogic"))) {
         	int nPump = 0;
         	if (type.equals("P1P1")) {
         		nPump = amount;

@@ -23,7 +23,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         if (sa instanceof AbilityStatic) {
             return false;
         }
-        if (sa.getParam("AILogic").equals("Main2")) {
+        if ("Main2".equals(sa.getParam("AILogic"))) {
         	if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
         		return false;
     		}
