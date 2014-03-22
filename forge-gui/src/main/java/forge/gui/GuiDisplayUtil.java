@@ -19,6 +19,7 @@ package forge.gui;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
@@ -42,6 +43,7 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 
 import javax.swing.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
@@ -52,8 +54,11 @@ public final class GuiDisplayUtil {
     }
 
     public static void devModeGenerateMana() {
+        Player player = getGame().getPhaseHandler().getPriorityPlayer();
+        if (player == null) { return; }
+
         final Card dummy = new Card(-777777);
-        dummy.setOwner(getGame().getPhaseHandler().getPriorityPlayer());
+        dummy.setOwner(player);
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);

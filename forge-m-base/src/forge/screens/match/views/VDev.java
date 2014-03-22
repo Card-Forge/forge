@@ -192,8 +192,11 @@ public class VDev extends HeaderDropDown {
     }
 
     private static void generateMana() {
+        Player player = FControl.getGame().getPhaseHandler().getPriorityPlayer();
+        if (player == null) { return; }
+
         final Card dummy = new Card(-777777);
-        dummy.setOwner(FControl.getGame().getPhaseHandler().getPriorityPlayer());
+        dummy.setOwner(player);
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
