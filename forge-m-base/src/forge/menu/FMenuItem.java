@@ -17,6 +17,9 @@ import forge.utils.Utils;
 
 public class FMenuItem extends FDisplayObject {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+    private static final float GAP_X = HEIGHT * 0.1f;
+    private static final float ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20; //round down to nearest multiple of 20
+
     private static final FSkinFont FONT = FSkinFont.get(12);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
@@ -26,7 +29,7 @@ public class FMenuItem extends FDisplayObject {
     private final FImage icon;
     private final FEventHandler handler;
     private boolean pressed;
-    private float iconSize;
+    private boolean allowForIcon;
     private float textWidth;
 
     public FMenuItem(String text0, FEventHandler handler0) {
@@ -37,25 +40,21 @@ public class FMenuItem extends FDisplayObject {
         icon = icon0;
         handler = handler0;
 
-        if (icon != null) {
-            iconSize = FONT.getFont().getLineHeight();
-        }
         textWidth = FONT.getFont().getBounds(text).width;
     }
 
-    public float getIconSize() {
-        return iconSize;
+    public boolean hasIcon() {
+        return icon != null;
     }
 
-    public void setIconSize(float iconSize0) {
-        iconSize = iconSize0;
+    public void setAllowForIcon(boolean allowForIcon0) {
+        allowForIcon = allowForIcon0;
     }
 
     public float getMinWidth() {
-        float gapX = getGapX();
-        float width = textWidth + 2 * gapX;
-        if (iconSize > 0) {
-            width += iconSize + gapX;
+        float width = textWidth + 2 * GAP_X;
+        if (allowForIcon) {
+            width += ICON_SIZE + GAP_X;
         }
         return width;
     }
@@ -85,10 +84,6 @@ public class FMenuItem extends FDisplayObject {
         return false; //return false so parent can use event to hide menu
     }
 
-    public float getGapX() {
-        return (HEIGHT - FONT.getFont().getLineHeight()) / 2;
-    }
-
     @Override
     public final void draw(Graphics g) {
         float w = getWidth();
@@ -98,17 +93,17 @@ public class FMenuItem extends FDisplayObject {
             g.fillRect(PRESSED_COLOR, 0, 0, w, h);
         }
 
-        float gapX = getGapX();
-        float x = gapX;
+        float x = GAP_X;
 
-        if (icon != null) {
-            g.drawImage(icon, x, (h - iconSize) / 2, iconSize, iconSize);
-        }
-        if (iconSize > 0) { //account for not having icon but having been given icon size for alignment with other items
-            x += iconSize + gapX;
+        if (allowForIcon) {
+            if (icon != null) {
+                g.drawImage(icon, x, (h - ICON_SIZE) / 2, ICON_SIZE, ICON_SIZE);
+            }
+            //account for not having icon but having been given icon size for alignment with other items
+            x += ICON_SIZE + GAP_X;
         }
 
-        g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - gapX, h, false, HAlignment.LEFT, true);
+        g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, HAlignment.LEFT, true);
 
         //draw separator line
         g.drawLine(1, SEPARATOR_COLOR, 0, h, w, h);

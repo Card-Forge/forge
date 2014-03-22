@@ -24,16 +24,15 @@ public abstract class FDropDownMenu extends FDropDown {
         buildMenu();
 
         //ensure text is all aligned if some items have icons and others don't
-        float maxIconSize = 0;
+        boolean allowForIcon = false;
         for (FMenuItem item : items) {
-            if (item.getIconSize() > maxIconSize) {
-                maxIconSize = item.getIconSize();
+            if (item.hasIcon()) {
+                allowForIcon = true;
+                break;
             }
         }
-        if (maxIconSize > 0) {
-            for (FMenuItem item : items) {
-                item.setIconSize(maxIconSize);
-            }
+        for (FMenuItem item : items) {
+            item.setAllowForIcon(allowForIcon);
         }
 
         //determine needed width of menu
