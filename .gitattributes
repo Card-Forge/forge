@@ -16057,6 +16057,11 @@ forge-m-base/src/forge/guantlet/GauntletData.java -text
 forge-m-base/src/forge/guantlet/GauntletIO.java -text
 forge-m-base/src/forge/limited/CustomLimited.java -text
 forge-m-base/src/forge/limited/GauntletMini.java -text
+forge-m-base/src/forge/menu/FDropDown.java -text
+forge-m-base/src/forge/menu/FDropDownMenu.java -text
+forge-m-base/src/forge/menu/FMenuBar.java -text
+forge-m-base/src/forge/menu/FMenuItem.java -text
+forge-m-base/src/forge/menu/FMenuTab.java -text
 forge-m-base/src/forge/model/CardBlock.java -text
 forge-m-base/src/forge/model/CardCollections.java -text
 forge-m-base/src/forge/model/FModel.java -text
@@ -16149,6 +16154,7 @@ forge-m-base/src/forge/toolbox/FCardPanel.java -text
 forge-m-base/src/forge/toolbox/FCardZoom.java -text
 forge-m-base/src/forge/toolbox/FContainer.java -text
 forge-m-base/src/forge/toolbox/FDisplayObject.java -text
+forge-m-base/src/forge/toolbox/FEvent.java -text
 forge-m-base/src/forge/toolbox/FFileChooser.java -text
 forge-m-base/src/forge/toolbox/FGestureAdapter.java -text
 forge-m-base/src/forge/toolbox/FLabel.java -text

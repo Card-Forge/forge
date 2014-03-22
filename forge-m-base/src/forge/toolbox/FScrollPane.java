@@ -46,6 +46,14 @@ public abstract class FScrollPane extends FContainer {
             height = height0;
         }
 
+        public float getWidth() {
+            return width;
+        }
+
+        public float getHeight() {
+            return height;
+        }
+
         //increase width the given value if it's higher
         public void increaseWidthTo(float width0) {
             if (width0 > width) {

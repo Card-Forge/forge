@@ -115,6 +115,10 @@ public class Forge implements ApplicationListener {
         setCurrentScreen(screen0);
     }
 
+    public static FScreen getCurrentScreen() {
+        return currentScreen;
+    }
+
     private static void setCurrentScreen(FScreen screen0) {
         currentScreen = screen0;
         currentScreen.setSize(screenWidth, screenHeight);
