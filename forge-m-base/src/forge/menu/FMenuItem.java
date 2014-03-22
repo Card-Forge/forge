@@ -1,6 +1,8 @@
 package forge.menu;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Forge.Graphics;
 import forge.assets.FImage;
@@ -70,9 +72,16 @@ public class FMenuItem extends FDisplayObject {
         return true;
     }
 
+    private final Task handleTapTask = new Task() {
+        @Override
+        public void run () {
+            handler.handleEvent(new FEvent(FMenuItem.this, FEventType.TAP));
+        }
+    };
+
     @Override
     public boolean tap(float x, float y, int count) {
-        handler.handleEvent(new FEvent(this, FEventType.TAP));
+        Timer.schedule(handleTapTask, 0.1f); //delay handling tap just long enough for menu to be hidden
         return false; //return false so parent can use event to hide menu
     }
 
