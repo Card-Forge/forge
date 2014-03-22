@@ -54,11 +54,14 @@ public final class GuiDisplayUtil {
     }
 
     public static void devModeGenerateMana() {
-        Player player = getGame().getPhaseHandler().getPriorityPlayer();
-        if (player == null) { return; }
+        Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
+        if (pPriority == null) {
+            GuiDialog.message("No player has priority at the moment, so mana cannot be added to their pool.");
+            return;
+        }
 
         final Card dummy = new Card(-777777);
-        dummy.setOwner(player);
+        dummy.setOwner(pPriority);
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, produced);
@@ -237,9 +240,10 @@ public final class GuiDisplayUtil {
     public static void devModeTutor() {
         Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
         if (pPriority == null) {
-            GuiDialog.message("No player has priority now, can't tutor from their deck at the moment");
+            GuiDialog.message("No player has priority at the moment, so their deck can't be tutored from.");
             return;
         }
+
         final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
         final Card card = GuiChoose.oneOrNone("Choose a card", lib);
         if (card == null) { return; }
