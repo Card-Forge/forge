@@ -1,21 +1,23 @@
 package forge.screens.match.views;
 
-import forge.screens.match.views.VHeader.HeaderDropDown;
+import forge.game.GameLog;
+import forge.menu.FDropDown;
 
-public class VLog extends HeaderDropDown {
-    @Override
-    public int getCount() {
-        return -1;
+public class VLog extends FDropDown {
+    private final GameLog model;
+    
+    public VLog(GameLog model0) {
+        model = model0;
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
+    protected boolean autoHide() {
+        return false;
+    }
+
+    @Override
+    protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         
-    }
-
-    @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        return new ScrollBounds(visibleWidth, visibleHeight);
+        return new ScrollBounds(maxWidth, maxVisibleHeight);
     }
 }

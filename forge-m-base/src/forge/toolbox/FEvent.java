@@ -30,7 +30,7 @@ public class FEvent {
         return args;
     }
 
-    public static abstract class FEventHandler {
-        public abstract void handleEvent(FEvent e);
+    public static interface FEventHandler {
+        void handleEvent(FEvent e);
     }
 }

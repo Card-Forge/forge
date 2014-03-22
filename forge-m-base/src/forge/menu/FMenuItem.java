@@ -58,19 +58,22 @@ public class FMenuItem extends FDisplayObject {
         return width;
     }
 
+    @Override
     public boolean press(float x, float y) {
         pressed = true;
         return true;
     }
 
+    @Override
     public boolean release(float x, float y) {
         pressed = false;
         return true;
     }
 
+    @Override
     public boolean tap(float x, float y, int count) {
         handler.handleEvent(new FEvent(this, FEventType.TAP));
-        return true;
+        return false; //return false so parent can use event to hide menu
     }
 
     public float getGapX() {

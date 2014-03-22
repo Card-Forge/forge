@@ -1,22 +1,17 @@
 package forge.screens.match.views;
 
-import forge.screens.match.views.VHeader.HeaderDropDown;
+import forge.menu.FDropDown;
 
-public class VCombat extends HeaderDropDown {
+public class VCombat extends FDropDown {
 
     @Override
-    public int getCount() {
-        return -1;
+    protected boolean autoHide() {
+        return false;
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
+    protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         
-    }
-
-    @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        return new ScrollBounds(visibleWidth, visibleHeight);
+        return new ScrollBounds(maxWidth, maxVisibleHeight);
     }
 }

@@ -208,7 +208,7 @@ public class FControl {
             playerPanels.add(new VPlayerPanel(p));
         }
 
-        view = new MatchScreen(playerPanels) {
+        view = new MatchScreen(game, localPlayer, playerPanels) {
             @Override
             public void onActivate() {
                 devMode = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED); //cache devMode for performance when match screen opened

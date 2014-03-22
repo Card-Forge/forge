@@ -1,84 +1,50 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-
 import forge.Forge;
+import forge.assets.FSkinImage;
+import forge.menu.FDropDownMenu;
+import forge.menu.FMenuItem;
 import forge.screens.match.FControl;
-import forge.screens.match.views.VHeader.HeaderDropDown;
-import forge.toolbox.FButton;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 
-public class VGameMenu extends HeaderDropDown {
-    private static final float INSETS_FACTOR = 0.025f;
-    private static final float GAP_Y_FACTOR = 0.01f;
-
-    private final ArrayList<FButton> buttons = new ArrayList<FButton>();
-
-    public VGameMenu() {
-        addButton("Concede Game", new Runnable() {
+public class VGameMenu extends FDropDownMenu {
+    @Override
+    protected void buildMenu() {
+        addItem(new FMenuItem("Undo", new FEventHandler() {
             @Override
-            public void run() {
-                hide();
+            public void handleEvent(FEvent e) {
+                FControl.undoLastAction();
+            }
+        }));
+        addItem(new FMenuItem("Concede", FSkinImage.CONCEDE, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
                 FControl.concede();
             }
-        });
-        addButton("End Turn", new Runnable() {
+        }));
+        addItem(new FMenuItem("End Turn", FSkinImage.ENDTURN, new FEventHandler() {
             @Override
-            public void run() {
-                hide();
+            public void handleEvent(FEvent e) {
                 FControl.endCurrentTurn();
             }
-        });
-        addButton("Alpha Strike", new Runnable() {
+        }));
+        addItem(new FMenuItem("Alpha Strike", FSkinImage.ALPHASTRIKE, new FEventHandler() {
             @Override
-            public void run() {
-                hide();
+            public void handleEvent(FEvent e) {
                 FControl.alphaStrike();
             }
-        });
-        addButton("View Deck List", new Runnable() {
+        }));
+        addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
-            public void run() {
-                hide();
+            public void handleEvent(FEvent e) {
             }
-        });
-        addButton("Settings", new Runnable() {
+        }));
+        addItem(new FMenuItem("Settings", FSkinImage.SETTINGS, new FEventHandler() {
             @Override
-            public void run() {
-                hide();
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new forge.screens.settings.SettingsScreen());
             }
-        });
-    }
-
-    private void addButton(String caption, Runnable command) {
-        buttons.add(add(new FButton(caption, command)));
-    }
-
-    @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        float x = visibleWidth * INSETS_FACTOR;
-        float y = x;
-        float dy = visibleHeight * GAP_Y_FACTOR;
-        float buttonWidth = visibleWidth - 2 * x;
-        float buttonHeight = (visibleHeight - y - x) / buttons.size() - dy;
-        dy += buttonHeight;
-
-        for (FButton button : buttons) {
-            button.setBounds(x, y, buttonWidth, buttonHeight);
-            y += dy;
-        }
-
-        return new ScrollBounds(visibleWidth, visibleHeight);
-    }
-
-    @Override
-    public int getCount() {
-        return -1;
-    }
-
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        
+        }));
     }
 }

@@ -1,25 +1,37 @@
 package forge.screens.match.views;
 
-import forge.screens.match.views.VHeader.HeaderDropDown;
+import forge.game.player.LobbyPlayer;
+import forge.game.zone.MagicStack;
+import forge.menu.FDropDown;
 
-public class VStack extends HeaderDropDown {
+public class VStack extends FDropDown {
+    private final MagicStack model;
+    private final LobbyPlayer localPlayer;
 
-    public VStack() {
+    private int stackSize;
+
+    public VStack(MagicStack model0, LobbyPlayer localPlayer0) {
+        model = model0;
+        localPlayer = localPlayer0;
     }
 
     @Override
-    public int getCount() {
-        return 0;
+    protected boolean autoHide() {
+        return false;
     }
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        
+        if (stackSize != model.size()) {
+            stackSize = model.size();
+            getMenuTab().setText("Stack (" + stackSize + ")");
+        }
+        super.update();
     }
 
     @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        return new ScrollBounds(visibleWidth, visibleHeight);
+    protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
+
+        return new ScrollBounds(maxWidth, maxVisibleHeight);
     }
 }

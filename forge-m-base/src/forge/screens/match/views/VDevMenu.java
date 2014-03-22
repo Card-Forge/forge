@@ -22,59 +22,57 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.menu.FDropDownMenu;
+import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.net.FServer;
 import forge.player.HumanPlay;
 import forge.screens.match.FControl;
 import forge.screens.match.input.InputSelectCardsFromList;
-import forge.screens.match.views.VHeader.HeaderDropDown;
+import forge.toolbox.FEvent;
 import forge.toolbox.FFileChooser;
-import forge.toolbox.FLabel;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.GuiDialog;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.utils.ForgePreferences;
 import forge.utils.ForgePreferences.FPref;
 
-public class VDev extends HeaderDropDown {
-    private static final float INSETS_FACTOR = 0.025f;
-    private static final float GAP_FACTOR = 0.01f;
-
-    private List<DevLabel> devLabels = new ArrayList<DevLabel>();
-
-    public VDev() {
-        addDevLabel("Generate Mana", new Runnable() {
+public class VDevMenu extends FDropDownMenu {
+    @Override
+    protected void buildMenu() {
+        addItem(new FMenuItem("Generate Mana", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 generateMana();
             }
-        });
-        addDevLabel("Tutor for Card", new Runnable() {
+        }));
+        addItem(new FMenuItem("Tutor for Card", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 tutorForCard();
             }
-        });
-        addDevLabel("Add card to play", new Runnable() {
+        }));
+        addItem(new FMenuItem("Add card to hand", new FEventHandler() {
             @Override
-            public void run() {
-                addCardToBattlefield();
-            }
-        });
-        addDevLabel("Add card to hand", new Runnable() {
-            @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 addCardToHand();
             }
-        });
-        addDevLabel("Set Player Life", new Runnable() {
+        }));
+        addItem(new FMenuItem("Add card to play", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
+                addCardToBattlefield();
+            }
+        }));
+        addItem(new FMenuItem("Set Player Life", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
                 setPlayerLife();
             }
-        });
-        addDevLabel("Setup Game State", new Runnable() {
+        }));
+        addItem(new FMenuItem("Setup Game State", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 final FFileChooser fc = new FFileChooser();
                 if (!fc.show("Select Game State File")) {
                     return;
@@ -82,18 +80,13 @@ public class VDev extends HeaderDropDown {
                 
                 FControl.setupGameState(fc.getSelectedFile().getAbsolutePath());
             }
-        });
+        }));
 
         final ForgePreferences prefs = FModel.getPreferences();
-        boolean unlimitedLands = prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND);
-        final DevLabel lblUnlimitedLands = addDevLabel("Play Unlimited Lands: " +
-                (unlimitedLands ? "On" : "Off"), null, true, unlimitedLands);
-        lblUnlimitedLands.setCommand(new Runnable() {
+        addItem(new FMenuItem("Play Unlimited Lands", new FEventHandler() {
             @Override
-            public void run() {
-                boolean unlimitedLands = lblUnlimitedLands.isSelected();
-                lblUnlimitedLands.setText("Play Unlimited Lands: " +
-                        (unlimitedLands ? "On" : "Off"));
+            public void handleEvent(FEvent e) {
+                boolean unlimitedLands = !prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND);
 
                 for (Player p : FControl.getGame().getPlayers()) {
                     if (p.getLobbyPlayer() == FServer.getLobby().getGuiPlayer() ) {
@@ -105,90 +98,37 @@ public class VDev extends HeaderDropDown {
                 prefs.setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(unlimitedLands));
                 prefs.save();
             }
-        });
-
-        addDevLabel("Add Counter to Permanent", new Runnable() {
+        }));
+        addItem(new FMenuItem("Add Counter to Permanent", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 addCounterToPermanent();
             }
-        });
-        addDevLabel("Tap Permanent", new Runnable() {
+        }));
+        addItem(new FMenuItem("Tap Permanent", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 tapPermanent();
             }
-        });
-        addDevLabel("Untap Permanent", new Runnable() {
+        }));
+        addItem(new FMenuItem("Untap Permanent", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 untapPermanent();
             }
-        });
-        addDevLabel("Rigged planar roll", new Runnable() {
+        }));
+        addItem(new FMenuItem("Rigged planar roll", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 riggedPlanarRoll();
             }
-        });
-        addDevLabel("Planeswalk to", new Runnable() {
+        }));
+        addItem(new FMenuItem("Planeswalk to", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 planeswalkTo();
             }
-        });
-    }
-
-    private DevLabel addDevLabel(final String text0, final Runnable command0) {
-        return addDevLabel(text0, command0, false, false);
-    }
-    private DevLabel addDevLabel(final String text0, final Runnable command0, boolean selectable0, boolean selected0) {
-        DevLabel devLabel = add(new DevLabel(text0, command0, selectable0, selected0));
-        devLabels.add(devLabel);
-        return devLabel;
-    }
-
-    @Override
-    public int getCount() {
-        return -1;
-    }
-
-    @Override
-    public void update() {
-    }
-
-    @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        float x = visibleWidth * INSETS_FACTOR;
-        float y = x;
-        float dy = visibleHeight * GAP_FACTOR;
-
-        int rowCount = (int)(devLabels.size() / 2);
-        float labelWidth = (visibleWidth - 2 * x - dy) / 2;
-        float labelHeight = (visibleHeight - y - x) / rowCount - dy;
-
-        float startX = x;
-        float dx = labelWidth + dy;
-        dy += labelHeight;
-
-        for (int i = 0; i < devLabels.size(); i++) {
-            devLabels.get(i).setBounds(x, y, labelWidth, labelHeight);
-            if (i % 2 == 0) {
-                x += dx;
-            }
-            else {
-                x = startX;
-                y += dy;
-            }
-        }
-        return new ScrollBounds(visibleWidth, visibleHeight);
-    }
-
-    private class DevLabel extends FLabel {
-        public DevLabel(final String text0, final Runnable command0, boolean selectable0, boolean selected0) {
-            super(new ButtonBuilder().text(text0).command(command0).fontSize(12)
-                    .selectable(selectable0).selected(selected0));
-        }
+        }));
     }
 
     private static void generateMana() {

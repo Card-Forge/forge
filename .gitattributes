@@ -16128,12 +16128,11 @@ forge-m-base/src/forge/screens/match/views/VAssignDamage.java -text
 forge-m-base/src/forge/screens/match/views/VAvatar.java -text
 forge-m-base/src/forge/screens/match/views/VCardDisplayArea.java -text
 forge-m-base/src/forge/screens/match/views/VCombat.java -text
-forge-m-base/src/forge/screens/match/views/VDev.java -text
+forge-m-base/src/forge/screens/match/views/VDevMenu.java -text
 forge-m-base/src/forge/screens/match/views/VDisplayArea.java -text
 forge-m-base/src/forge/screens/match/views/VField.java -text
 forge-m-base/src/forge/screens/match/views/VFlashbackZone.java -text
 forge-m-base/src/forge/screens/match/views/VGameMenu.java -text
-forge-m-base/src/forge/screens/match/views/VHeader.java -text
 forge-m-base/src/forge/screens/match/views/VLog.java -text
 forge-m-base/src/forge/screens/match/views/VManaPool.java -text
 forge-m-base/src/forge/screens/match/views/VPhaseIndicator.java -text

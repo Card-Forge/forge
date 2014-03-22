@@ -19,10 +19,10 @@ public class FMenuTab extends FDisplayObject {
     private String text;
     private float minWidth;
 
-    private FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0) {
-        setText(text0);
+    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0) {
         menuBar = menuBar0;
         dropDown = dropDown0;
+        setText(text0);
     }
 
     @Override

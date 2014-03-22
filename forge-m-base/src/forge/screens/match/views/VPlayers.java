@@ -10,13 +10,13 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.menu.FDropDown;
 import forge.model.FModel;
 import forge.screens.match.FControl;
-import forge.screens.match.views.VHeader.HeaderDropDown;
 import forge.toolbox.FLabel;
 import forge.utils.ForgePreferences.FPref;
 
-public class VPlayers extends HeaderDropDown {
+public class VPlayers extends FDropDown {
     private Map<Player, InfoLabel[]> infoLabels;
     private InfoLabel stormLabel;
 
@@ -40,8 +40,19 @@ public class VPlayers extends HeaderDropDown {
         stormLabel = add(new InfoLabel());
     }
 
+    private class InfoLabel extends FLabel {
+        private InfoLabel() {
+            super(new FLabel.Builder());
+        }
+    }
+
     @Override
-    public void update() {
+    protected boolean autoHide() {
+        return true;
+    }
+
+    @Override
+    protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         for (Entry<Player, InfoLabel[]> rr : infoLabels.entrySet()) {
             Player p0 = rr.getKey();
             final InfoLabel[] temp = rr.getValue();
@@ -73,21 +84,7 @@ public class VPlayers extends HeaderDropDown {
             }
         }
         stormLabel.setText("Storm count: " + FControl.getGame().getStack().getCardsCastThisTurn().size());
-    }
 
-    @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        return new ScrollBounds(visibleWidth, visibleHeight);
-    }
-
-    private class InfoLabel extends FLabel {
-        private InfoLabel() {
-            super(new FLabel.Builder());
-        }
-    }
-
-    @Override
-    public int getCount() {
-        return infoLabels.size();
+        return new ScrollBounds(maxWidth, maxVisibleHeight);
     }
 }

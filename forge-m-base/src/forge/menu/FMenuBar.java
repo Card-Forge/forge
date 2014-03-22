@@ -11,7 +11,9 @@ public class FMenuBar extends FContainer {
 
     private final List<FMenuTab> tabs = new ArrayList<FMenuTab>();
 
-    public void addTab(FMenuTab tab) {
+    public void addTab(String text0, FDropDown dropDown0) {
+        FMenuTab tab = new FMenuTab(text0, this, dropDown0);
+        dropDown0.setMenuTab(tab);
         tabs.add(add(tab));
     }
 

@@ -4,16 +4,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.menu.FMenuBar;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
-import forge.screens.match.views.VHeader;
+import forge.screens.match.views.VCombat;
+import forge.screens.match.views.VDevMenu;
+import forge.screens.match.views.VGameMenu;
+import forge.screens.match.views.VLog;
 import forge.screens.match.views.VPlayerPanel;
+import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
+import forge.screens.match.views.VStack;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
+import forge.game.Game;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -21,12 +29,15 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
-    private final VHeader header;
+    private final FMenuBar menuBar;
     private final VPrompt prompt;
+    private final VLog log;
+    private final VCombat combat;
+    private final VStack stack;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
-    public MatchScreen(List<VPlayerPanel> playerPanels0) {
+    public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
         super(false, null, false); //match screen has custom header
 
         for (VPlayerPanel playerPanel : playerPanels0) {
@@ -51,31 +62,33 @@ public class MatchScreen extends FScreen {
                     }
                 }));
 
-        header = add(new VHeader(this)); //add header just before zoom so drop downs appear on top
+        log = new VLog(game.getGameLog());
+        combat = new VCombat();
+        stack = new VStack(game.getStack(), localPlayer);
+
+        menuBar = add(new FMenuBar());
+        menuBar.addTab("Game", new VGameMenu());
+        menuBar.addTab("Players (" + playerPanels.size() + ")", new VPlayers());
+        menuBar.addTab("Log", log);
+        menuBar.addTab("Combat", combat);
+        menuBar.addTab("Dev", new VDevMenu());
+        menuBar.addTab("Stack (0)", stack);
     }
 
-    public void updatePlayers() {
-        header.getTabPlayers().update();
+    public VLog getLog() {
+        return log;
     }
 
-    public void updateLog() {
-        header.getTabLog().update();
+    public VCombat getCombat() {
+        return combat;
     }
 
-    public void updateCombat() {
-        header.getTabCombat().update();
-    }
-
-    public void updateStack() {
-        header.getTabStack().update();
+    public VStack getStack() {
+        return stack;
     }
 
     public VPrompt getPrompt() {
         return prompt;
-    }
-
-    public VHeader getHeader() {
-        return header;
     }
 
     public VPlayerPanel getTopPlayerPanel() {
@@ -119,8 +132,8 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        header.setBounds(0, 0, width, VHeader.HEIGHT);
-        startY = VHeader.HEIGHT;
+        menuBar.setBounds(0, 0, width, FMenuBar.HEIGHT);
+        startY = FMenuBar.HEIGHT;
 
         //determine player panel heights based on visibility of zone displays
         float topPlayerPanelHeight, bottomPlayerPanelHeight;
@@ -149,6 +162,5 @@ public class MatchScreen extends FScreen {
         topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
-        header.setDropDownHeight(topPlayerPanel.getBottom() - header.getHeight()); //make header drop downs go to bottom of top player panel
     }
 }

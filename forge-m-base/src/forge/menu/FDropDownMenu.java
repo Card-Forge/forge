@@ -6,8 +6,7 @@ import java.util.List;
 public abstract class FDropDownMenu extends FDropDown {
     private final List<FMenuItem> items = new ArrayList<FMenuItem>();
 
-    public FDropDownMenu(FMenuTab menuTab0) {
-        super(menuTab0);
+    public FDropDownMenu() {
     }
 
     @Override
@@ -61,5 +60,11 @@ public abstract class FDropDownMenu extends FDropDown {
     
     public void addItem(FMenuItem item) {
         items.add(add(item));
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        hide(); //hide when item tapped
+        return true;
     }
 }

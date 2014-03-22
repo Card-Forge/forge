@@ -11,19 +11,21 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
 public abstract class FDropDown extends FScrollPane {
-    public static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
+    public static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2).alphaColor(0.9f);
 
     private Backdrop backdrop;
-    private final FMenuTab menuTab;
+    private FMenuTab menuTab;
     private ScrollBounds paneSize;
 
-    public FDropDown(FMenuTab menuTab0) {
-        menuTab = menuTab0;
+    public FDropDown() {
         setVisible(false); //hide by default
     }
 
     public FMenuTab getMenuTab() {
         return menuTab;
+    }
+    public void setMenuTab(FMenuTab menuTab0) {
+        menuTab = menuTab0;
     }
 
     public void update() {
@@ -94,13 +96,24 @@ public abstract class FDropDown extends FScrollPane {
         return paneSize;
     }
 
+    public void drawBackground(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+        g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, 0, 0, h);
+        g.drawLine(1, FScreen.HEADER_LINE_COLOR, w, 0, w, h);
+        g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, h, w, h);
+    }
+
     private class Backdrop extends FDisplayObject {
         private Backdrop() {
         }
 
         @Override
         public boolean press(float x, float y) {
-            hide(); //auto-hide when backdrop pressed
+            if (!menuTab.contains(menuTab.screenToLocalX(x), menuTab.screenToLocalY(y))) {
+                hide(); //auto-hide when backdrop pressed unless over menu tab
+            }
             return false; //allow press to pass through to object behind backdrop
         }
 
