@@ -1,11 +1,18 @@
 package forge.screens.match;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -14,6 +21,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameRules;
@@ -21,6 +29,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -29,6 +38,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
@@ -500,5 +510,179 @@ public class FControl {
         public void receiveEvent(UiEvent evt) {
             evt.visit(this);
         }
+    }
+
+    public static void setupGameState(String filename) {
+        int humanLife = -1;
+        int aiLife = -1;
+
+        final Map<ZoneType, String> humanCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+        final Map<ZoneType, String> aiCardTexts = new EnumMap<ZoneType, String>(ZoneType.class);
+
+        String tChangePlayer = "NONE";
+        String tChangePhase = "NONE";
+
+        try {
+            final FileInputStream fstream = new FileInputStream(filename);
+            final DataInputStream in = new DataInputStream(fstream);
+            final BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String temp = "";
+
+            while ((temp = br.readLine()) != null) {
+                final String[] tempData = temp.split("=");
+                if (tempData.length < 2 || temp.charAt(0) == '#') {
+                    continue;
+                }
+
+                final String categoryName = tempData[0].toLowerCase();
+                final String categoryValue = tempData[1];
+
+                switch (categoryName) {
+                case "humanlife":
+                    humanLife = Integer.parseInt(categoryValue);
+                    break;
+                case "ailife":
+                    aiLife = Integer.parseInt(categoryValue);
+                    break;
+                case "activeplayer":
+                    tChangePlayer = categoryValue.trim().toLowerCase();
+                    break;
+                case "activephase":
+                    tChangePhase = categoryValue;
+                    break;
+                case "humancardsinplay":
+                    humanCardTexts.put(ZoneType.Battlefield, categoryValue);
+                    break;
+                case "aicardsinplay":
+                    aiCardTexts.put(ZoneType.Battlefield, categoryValue);
+                    break;
+                case "humancardsinhand":
+                    humanCardTexts.put(ZoneType.Hand, categoryValue);
+                    break;
+                case "aicardsinhand":
+                    aiCardTexts.put(ZoneType.Hand, categoryValue);
+                    break;
+                case "humancardsingraveyard":
+                    humanCardTexts.put(ZoneType.Graveyard, categoryValue);
+                    break;
+                case "aicardsingraveyard":
+                    aiCardTexts.put(ZoneType.Graveyard, categoryValue);
+                    break;
+                case "humancardsinlibrary":
+                    humanCardTexts.put(ZoneType.Library, categoryValue);
+                    break;
+                case "aicardsinlibrary":
+                    aiCardTexts.put(ZoneType.Library, categoryValue);
+                    break;
+                case "humancardsinexile":
+                    humanCardTexts.put(ZoneType.Exile, categoryValue);
+                    break;
+                case "aicardsinexile":
+                    aiCardTexts.put(ZoneType.Exile, categoryValue);
+                    break;
+                }
+            }
+
+            in.close();
+        }
+        catch (final FileNotFoundException fnfe) {
+            FOptionPane.showErrorDialog("File not found: " + filename);
+        }
+        catch (final Exception e) {
+            FOptionPane.showErrorDialog("Error loading battle setup file!");
+            return;
+        }
+
+        setupGameState(humanLife, aiLife, humanCardTexts, aiCardTexts, tChangePlayer, tChangePhase);
+    }
+
+    public static void setupGameState(final int humanLife, final int aiLife, final Map<ZoneType, String> humanCardTexts,
+            final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
+
+        game.getAction().invoke(new Runnable() {
+            @Override
+            public void run() {
+                final Player human = game.getPlayers().get(0);
+                final Player ai = game.getPlayers().get(1);
+
+                Player newPlayerTurn = tChangePlayer.equals("human") ? newPlayerTurn = human : tChangePlayer.equals("ai") ? newPlayerTurn = ai : null;
+                PhaseType newPhase = tChangePhase.trim().equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
+
+                game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
+
+                game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+
+                setupPlayerState(humanLife, humanCardTexts, human);
+                setupPlayerState(aiLife, aiCardTexts, ai);
+
+                game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+
+                game.getAction().checkStaticAbilities();
+            }
+        });
+    }
+
+    private static void setupPlayerState(int life, Map<ZoneType, String> cardTexts, final Player p) {
+        Map<ZoneType, List<Card>> humanCards = new EnumMap<ZoneType, List<Card>>(ZoneType.class);
+        for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
+            humanCards.put(kv.getKey(), processCardsForZone(kv.getValue().split(";"), p));
+        }
+
+        if (life > 0) {
+            p.setLife(life, null);
+        }
+
+        for (Entry<ZoneType, List<Card>> kv : humanCards.entrySet()) {
+            if (kv.getKey() == ZoneType.Battlefield) {
+                for (final Card c : kv.getValue()) {
+                    p.getZone(ZoneType.Hand).add(c);
+                    p.getGame().getAction().moveToPlay(c);
+                    c.setSickness(false);
+                }
+            }
+            else {
+                p.getZone(kv.getKey()).setCards(kv.getValue());
+            }
+        }
+    }
+
+    private static List<Card> processCardsForZone(final String[] data, final Player player) {
+        final List<Card> cl = new ArrayList<Card>();
+        for (final String element : data) {
+            final String[] cardinfo = element.trim().split("\\|");
+
+            final Card c = Card.fromPaperCard(FModel.getMagicDb().getCommonCards().getCard(cardinfo[0]), player);
+
+            boolean hasSetCurSet = false;
+            for (final String info : cardinfo) {
+                if (info.startsWith("Set:")) {
+                    c.setCurSetCode(info.substring(info.indexOf(':') + 1));
+                    hasSetCurSet = true;
+                }
+                else if (info.equalsIgnoreCase("Tapped:True")) {
+                    c.tap();
+                }
+                else if (info.startsWith("Counters:")) {
+                    final String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
+                    for (final String counter : counterStrings) {
+                        c.addCounter(CounterType.valueOf(counter), 1, true);
+                    }
+                }
+                else if (info.equalsIgnoreCase("SummonSick:True")) {
+                    c.setSickness(true);
+                }
+                else if (info.equalsIgnoreCase("FaceDown:True")) {
+                    c.setState(CardCharacteristicName.FaceDown);
+                }
+            }
+
+            if (!hasSetCurSet) {
+                c.setCurSetCode(c.getMostRecentSet());
+            }
+
+            cl.add(c);
+        }
+        return cl;
     }
 }

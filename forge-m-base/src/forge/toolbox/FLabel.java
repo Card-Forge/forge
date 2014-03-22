@@ -16,7 +16,7 @@ public class FLabel extends FDisplayObject {
         private float      bldIconScaleFactor = 0.8f;
         private int        bldFontSize        = 14;
         private HAlignment bldAlignment       = HAlignment.LEFT;
-        private Vector2    bldInsets          = new Vector2(0, 0);
+        private Vector2    bldInsets          = new Vector2(3, 3);
 
         private boolean bldSelectable       = false;
         private boolean bldSelected         = false;
@@ -131,6 +131,10 @@ public class FLabel extends FDisplayObject {
     }
     public void setIcon(final FImage icon0) {
         icon = icon0;
+    }
+
+    public void setCommand(final Runnable command0) {
+        command = command0;
     }
 
     @Override
