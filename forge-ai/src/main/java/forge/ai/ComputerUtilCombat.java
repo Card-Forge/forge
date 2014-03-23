@@ -724,34 +724,34 @@ public class ComputerUtilCombat {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param defender
+     * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public static int predictPowerBonusOfBlocker(final Card attacker, final Card defender, boolean withoutAbilities) {
+    public static int predictPowerBonusOfBlocker(final Card attacker, final Card blocker, boolean withoutAbilities) {
         int power = 0;
 
-        if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
+        if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
             power -= attacker.getAmountOfKeyword("Flanking");
         }
         
         // Serene Master switches power with attacker
-        if (defender.getName().equals("Serene Master")) {
-            power += attacker.getNetAttack() - defender.getNetAttack();
-        } else if (defender.getName().equals("Shape Stealer")) {
-            power += attacker.getNetAttack() - defender.getNetAttack();
+        if (blocker.getName().equals("Serene Master")) {
+            power += attacker.getNetAttack() - blocker.getNetAttack();
+        } else if (blocker.getName().equals("Shape Stealer")) {
+            power += attacker.getNetAttack() - blocker.getNetAttack();
         } 
 
         // if the attacker has first strike and wither the blocker will deal
         // less damage than expected
         if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
                 && (attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))
-                && !(defender.hasKeyword("First Strike") || defender.hasKeyword("Double Strike") || defender
+                && !(blocker.hasKeyword("First Strike") || blocker.hasKeyword("Double Strike") || blocker
                         .hasKeyword("CARDNAME can't have counters placed on it."))) {
             power -= attacker.getNetCombatDamage();
         }
 
-        power += defender.getKeywordMagnitude("Bushido");
+        power += blocker.getKeywordMagnitude("Bushido");
 
         final Game game = attacker.getGame();
         // look out for continuous static abilities that only care for blocking
@@ -767,7 +767,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 final String valid = params.get("Affected").replace("blocking", "Creature");
-                if (!defender.isValid(valid, card.getController(), card)) {
+                if (!blocker.isValid(valid, card.getController(), card)) {
                     continue;
                 }
                 if (params.containsKey("AddPower")) {
@@ -791,7 +791,7 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)
                     || !trigParams.containsKey("Execute")) {
                 continue;
             }
@@ -808,12 +808,12 @@ public class ComputerUtilCombat {
             }
             final List<Card> list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
-                list.add(defender);
+                list.add(blocker);
             }
             if (list.isEmpty()) {
                 continue;
             }
-            if (!list.contains(defender)) {
+            if (!list.contains(blocker)) {
                 continue;
             }
             if (!abilityParams.containsKey("NumAtt")) {
@@ -834,7 +834,7 @@ public class ComputerUtilCombat {
         if (withoutAbilities) {
             return power;
         }
-        for (SpellAbility ability : defender.getAllSpellAbilities()) {
+        for (SpellAbility ability : blocker.getAllSpellAbilities()) {
             if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
                 continue;
             }                
@@ -847,7 +847,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
     
-                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
@@ -858,11 +858,11 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 
-                if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
+                if (ability.hasParam("Monstrosity") && blocker.isMonstrous()) {
                 	continue;
                 }
                 
-                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
@@ -883,22 +883,22 @@ public class ComputerUtilCombat {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param defender
+     * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
-    public static int predictToughnessBonusOfBlocker(final Card attacker, final Card defender, boolean withoutAbilities) {
+    public static int predictToughnessBonusOfBlocker(final Card attacker, final Card blocker, boolean withoutAbilities) {
         int toughness = 0;
 
-        if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
+        if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
             toughness -= attacker.getAmountOfKeyword("Flanking");
         }
         
-        if (defender.getName().equals("Shape Stealer")) {
-            toughness += attacker.getNetDefense() - defender.getNetDefense();
+        if (blocker.getName().equals("Shape Stealer")) {
+            toughness += attacker.getNetDefense() - blocker.getNetDefense();
         } 
 
-        toughness += defender.getKeywordMagnitude("Bushido");
+        toughness += blocker.getKeywordMagnitude("Bushido");
         final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
@@ -909,7 +909,7 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, null)
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, null)
                     || !trigParams.containsKey("Execute")) {
                 continue;
             }
@@ -929,7 +929,7 @@ public class ComputerUtilCombat {
                     // can't parse the number (X for example)
                     continue;
                 }
-                toughness -= predictDamageTo(defender, damage, 0, source, false);
+                toughness -= predictDamageTo(blocker, damage, 0, source, false);
                 continue;
             }
 
@@ -945,12 +945,12 @@ public class ComputerUtilCombat {
             }
             final List<Card> list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
-                list.add(defender);
+                list.add(blocker);
             }
             if (list.isEmpty()) {
                 continue;
             }
-            if (!list.contains(defender)) {
+            if (!list.contains(blocker)) {
                 continue;
             }
             if (!abilityParams.containsKey("NumDef")) {
@@ -971,7 +971,7 @@ public class ComputerUtilCombat {
         if (withoutAbilities) {
             return toughness;
         }
-        for (SpellAbility ability : defender.getAllSpellAbilities()) {
+        for (SpellAbility ability : blocker.getAllSpellAbilities()) {
             if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
                 continue;
             }
@@ -980,8 +980,12 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
-                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+            if (ability.getApi() == ApiType.Pump) {
+                if (!ability.hasParam("NumDef")) {
+                    continue;
+                }
+                
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
@@ -992,11 +996,11 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 
-                if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
+                if (ability.hasParam("Monstrosity") && blocker.isMonstrous()) {
                 	continue;
                 }
                 
-                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, blocker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
@@ -1016,13 +1020,13 @@ public class ComputerUtilCombat {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param defender
+     * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int predictPowerBonusOfAttacker(final Card attacker, final Card defender, final Combat combat
+    public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat
             , boolean withoutAbilities) {
         int power = 0;
 
@@ -1035,10 +1039,10 @@ public class ComputerUtilCombat {
         }
 
         // Serene Master switches power with attacker
-        if (defender!= null && defender.getName().equals("Serene Master")) {
-            power += defender.getNetAttack() - attacker.getNetAttack();
-        } else if (defender != null && attacker.getName().equals("Shape Stealer")) {
-            power += defender.getNetAttack() - attacker.getNetAttack();
+        if (blocker!= null && blocker.getName().equals("Serene Master")) {
+            power += blocker.getNetAttack() - attacker.getNetAttack();
+        } else if (blocker != null && attacker.getName().equals("Shape Stealer")) {
+            power += blocker.getNetAttack() - attacker.getNetAttack();
         }
 
         final Game game = attacker.getGame();
@@ -1048,14 +1052,14 @@ public class ComputerUtilCombat {
         }
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
-        if (null != defender) {
-            if ((defender.hasKeyword("First Strike") || defender.hasKeyword("Double Strike"))
-                    && (defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))
+        if (null != blocker) {
+            if ((blocker.hasKeyword("First Strike") || blocker.hasKeyword("Double Strike"))
+                    && (blocker.hasKeyword("Wither") || blocker.hasKeyword("Infect"))
                     && !(attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike") || attacker
                             .hasKeyword("CARDNAME can't have counters placed on it."))) {
-                power -= defender.getNetCombatDamage();
+                power -= blocker.getNetCombatDamage();
             }
-            theTriggers.addAll(defender.getTriggers());
+            theTriggers.addAll(blocker.getTriggers());
         }
 
         // look out for continuous static abilities that only care for attacking
@@ -1090,7 +1094,7 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, combat)
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)
                     || !trigParams.containsKey("Execute")) {
                 continue;
             }
@@ -1197,13 +1201,13 @@ public class ComputerUtilCombat {
      * 
      * @param attacker
      *            a {@link forge.game.card.Card} object.
-     * @param defender
+     * @param blocker
      *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat
+    public static int predictToughnessBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat
             , boolean withoutAbilities) {
         int toughness = 0;
 
@@ -1214,8 +1218,8 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (defender != null && attacker.getName().equals("Shape Stealer")) {
-            toughness += defender.getNetDefense() - attacker.getNetDefense();
+        if (blocker != null && attacker.getName().equals("Shape Stealer")) {
+            toughness += blocker.getNetDefense() - attacker.getNetDefense();
         }
 
         final Game game = attacker.getGame();
@@ -1223,9 +1227,9 @@ public class ComputerUtilCombat {
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
-        if (defender != null) {
+        if (blocker != null) {
             toughness += attacker.getKeywordMagnitude("Bushido");
-            theTriggers.addAll(defender.getTriggers());
+            theTriggers.addAll(blocker.getTriggers());
         }
 
         // look out for continuous static abilities that only care for attacking
@@ -1260,7 +1264,7 @@ public class ComputerUtilCombat {
             final Map<String, String> trigParams = trigger.getMapParams();
             final Card source = trigger.getHostCard();
 
-            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, defender, trigger, combat)
+            if (!ComputerUtilCombat.combatTriggerWillTrigger(attacker, blocker, trigger, combat)
                     || !trigParams.containsKey("Execute")) {
                 continue;
             }
@@ -1346,7 +1350,11 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
+            if (ability.getApi() == ApiType.Pump) {
+                if (!ability.hasParam("NumDef")) {
+                    continue;
+                }
+
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
                     if (tBonus > 0) {
