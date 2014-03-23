@@ -66,6 +66,10 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
 
+        if (!ComputerUtilCost.checkTapTypeCost(ai, cost, sa.getHostCard())) {
+            return false;
+        }
+
         if (game.getStack().isEmpty() && hasTapCost(cost, sa.getHostCard())) {
                 if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                     return false;

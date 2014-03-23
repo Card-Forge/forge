@@ -258,6 +258,28 @@ public class ComputerUtilCost {
         }
         return true;
     }
+    
+
+    /**
+     * Check creature sacrifice cost.
+     * 
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @return true, if successful
+     */
+    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostTapType) {
+            	return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Check sacrifice cost.
