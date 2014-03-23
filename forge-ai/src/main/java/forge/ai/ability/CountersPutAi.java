@@ -103,11 +103,11 @@ public class CountersPutAi extends SpellAbilityAi {
             List<Card> aiCreatures = ai.getCreaturesInPlay();
             aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
             aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
-            CardLists.sortByPowerDesc(aiCreatures);
+            ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
 
             List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
             humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
-            CardLists.sortByCmcDesc(humCreatures);
+            ComputerUtilCard.sortByEvaluateCreature(humCreatures);
             if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
             	return false;
             }

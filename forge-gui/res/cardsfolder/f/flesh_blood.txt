@@ -3,19 +3,16 @@ ManaCost:3 B G
 AlternateMode: Split
 Types:Sorcery
 K:Fuse
-A:SP$ ChangeZone | Cost$ 3 B G | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | RememberChanged$ True | SubAbility$ DBPutCounter | SpellDescription$ Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
-SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ X | Referneces$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardPower
+A:SP$ ChangeZone | Cost$ 3 B G | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ X | References$ X
+SVar:X:ParentTargeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_blood.jpg
 Oracle:Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.\nFuse (You may cast one or both halves of this card from your hand.)
 ALTERNATE
 Name:Blood
 ManaCost:R G
 Types:Sorcery
-A:SP$ Pump | Cost$ R G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ BloodDamage | ImprintCards$ Targeted | SpellDescription$ Target creature you control deals damage equal to its power to target creature or player.
-SVar:BloodDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ Y | References$ Y | DamageSource$ Imprinted | SubAbility$ DBCleanup2
-SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
-SVar:Y:Imprinted$CardPower
-SVar:RemAIDeck:True
+A:SP$ Pump | Cost$ R G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ BloodDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature or player.
+SVar:BloodDamage:DB$ DealDamage | ValidTgts$ Creature,Player | AILogic$ PowerDmg | TgtPrompt$ Select target creature or player | NumDmg$ Y | References$ Y | DamageSource$ ParentTarget
+SVar:Y:ParentTargeted$CardPower
 Oracle:Target creature you control deals damage equal to its power to target creature or player.\nFuse (You may cast one or both halves of this card from your hand.)

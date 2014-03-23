@@ -126,13 +126,13 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("Fight")) {
             	List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
                 humCreatures = CardLists.getTargetableCards(humCreatures, sa);
-                CardLists.sortByCmcDesc(humCreatures);
+                ComputerUtilCard.sortByEvaluateCreature(humCreatures);
                 
                 final AbilitySub tgtFight = sa.getSubAbility();
                 List<Card> aiCreatures = ai.getCreaturesInPlay();
                 aiCreatures = CardLists.getTargetableCards(aiCreatures, tgtFight);
                 aiCreatures =  ComputerUtil.getSafeTargets(ai, tgtFight, aiCreatures);
-                CardLists.sortByPowerDesc(aiCreatures);
+                ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
                 
                 if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
                 	return false;

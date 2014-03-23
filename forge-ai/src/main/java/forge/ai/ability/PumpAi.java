@@ -213,25 +213,38 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
             }
-            if (sa.getParam("AILogic").equals("Fight")) {
+            if (sa.getParam("AILogic").equals("Fight") || sa.getParam("AILogic").equals("PowerDmg")) {
             	final AbilitySub tgtFight = sa.getSubAbility();
                 List<Card> aiCreatures = ai.getCreaturesInPlay();
                 aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
                 aiCreatures =  ComputerUtil.getSafeTargets(ai, sa, aiCreatures);
-                CardLists.sortByPowerDesc(aiCreatures);
+                ComputerUtilCard.sortByEvaluateCreature(aiCreatures);
+                //sort is suboptimal due to conflicting needs depending on game state:
+                //  -deathtouch for deal damage
+                //  -max power for damage to player
+                //  -survivability for generic "fight"
+                //  -no support for "heroic"
 
                 List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
                 humCreatures = CardLists.getTargetableCards(humCreatures, tgtFight);
-                CardLists.sortByCmcDesc(humCreatures);
+                ComputerUtilCard.sortByEvaluateCreature(humCreatures);
                 if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
                 	return false;
                 }
                 for (Card humanCreature : humCreatures) {
                 	for (Card aiCreature : aiCreatures) {
-                		if (FightAi.shouldFight(aiCreature, humanCreature, attack, defense)) {
-                			sa.getTargets().add(aiCreature);
-                			tgtFight.getTargets().add(humanCreature);
-                			return true;
+                		if (sa.getParam("AILogic").equals("PowerDmg")) {
+                			if (FightAi.canKill(aiCreature, humanCreature, attack)) {
+	                			sa.getTargets().add(aiCreature);
+	                			tgtFight.getTargets().add(humanCreature);
+	                			return true;
+	                		}
+                		} else {
+	                		if (FightAi.shouldFight(aiCreature, humanCreature, attack, defense)) {
+	                			sa.getTargets().add(aiCreature);
+	                			tgtFight.getTargets().add(humanCreature);
+	                			return true;
+	                		}
                 		}
                 	}
                 }
