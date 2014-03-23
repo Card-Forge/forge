@@ -858,15 +858,16 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 
+                if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
+                	continue;
+                }
+                
                 if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
                 }
-            }
-            if (ability.hasParam("Monstrosity") && !defender.isMonstrous() && ComputerUtilCost.canPayCost(ability, defender.getController())) {
-            	power += AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
             }
         }
         
@@ -991,16 +992,16 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 
+                if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
+                	continue;
+                }
+                
                 if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
                 }
-            }
-            
-            if (ability.hasParam("Monstrosity") && !defender.isMonstrous() && ComputerUtilCost.canPayCost(ability, defender.getController())) {
-            	toughness += AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
             }
         }
         return toughness;
@@ -1172,15 +1173,16 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 
+                if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
+                	continue;
+                }
+                
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (pBonus > 0) {
                         power += pBonus;
                     }
                 }
-            }
-            if (ability.hasParam("Monstrosity") && !attacker.isMonstrous() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-            	power += AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
             }
         }
         return power;
@@ -1356,15 +1358,16 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 
+                if (ability.hasParam("Monstrosity") && attacker.isMonstrous()) {
+                	continue;
+                }
+                
                 if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                     int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
                     if (tBonus > 0) {
                         toughness += tBonus;
                     }
                 }
-            }
-            if (ability.hasParam("Monstrosity") && !attacker.isMonstrous() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-            	toughness += AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("CounterNum"), ability);
             }
         }
         return toughness;
