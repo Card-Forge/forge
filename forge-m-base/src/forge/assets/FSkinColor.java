@@ -48,6 +48,13 @@ public class FSkinColor {
         return baseColors.get(c0);
     }
 
+    public static FSkinColor getStandardColor(int r, int g, int b) {
+        return getStandardColor(r, g, b, 1);
+    }
+    public static FSkinColor getStandardColor(int r, int g, int b, float a) {
+        float div = 255f;
+        return getStandardColor(new Color((float)r / div, (float)g / div, (float)b / div, a));
+    }
     public static FSkinColor getStandardColor(final Color c0) {
         return new FSkinColor(c0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
     }
@@ -90,7 +97,7 @@ public class FSkinColor {
 
     private FSkinColor getDerivedColor(int brightnessDelta0, int step0, int contrastStep0, float alpha0) {
         if (baseColor == null) { //handle deriving from standard color
-            return new FSkinColor(baseColor, brightnessDelta0, step0, contrastStep0, alpha0);
+            return new FSkinColor(color, brightnessDelta0, step0, contrastStep0, alpha0);
         }
         String key = baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
         FSkinColor derivedColor = derivedColors.get(key);

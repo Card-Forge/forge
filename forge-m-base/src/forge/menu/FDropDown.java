@@ -35,9 +35,6 @@ public abstract class FDropDown extends FScrollPane {
     }
 
     public void show() {
-        if (this.isVisible()) { return; }
-
-        revalidate();
         this.setVisible(true);
     }
 
@@ -94,15 +91,6 @@ public abstract class FDropDown extends FScrollPane {
     @Override
     protected final ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         return paneSize;
-    }
-
-    public void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
-        g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
-        g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, 0, 0, h);
-        g.drawLine(1, FScreen.HEADER_LINE_COLOR, w, 0, w, h);
-        g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, h, w, h);
     }
 
     private class Backdrop extends FDisplayObject {

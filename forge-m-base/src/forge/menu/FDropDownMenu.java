@@ -3,6 +3,9 @@ package forge.menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.Forge.Graphics;
+import forge.screens.FScreen;
+
 public abstract class FDropDownMenu extends FDropDown {
     private final List<FMenuItem> items = new ArrayList<FMenuItem>();
 
@@ -15,6 +18,16 @@ public abstract class FDropDownMenu extends FDropDown {
     }
 
     protected abstract void buildMenu();
+
+    @Override
+    public void drawBackground(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+        g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, 0, 0, h);
+        g.drawLine(1, FScreen.HEADER_LINE_COLOR, w, 0, w, h);
+        g.drawLine(1, FScreen.HEADER_LINE_COLOR, 0, h, w, h);
+    }
 
     @Override
     protected final ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
