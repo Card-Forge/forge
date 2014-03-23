@@ -417,6 +417,15 @@ public class AiController {
         landList = CardLists.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
+                if (!c.getSVar("NeedsToPlay").isEmpty()) {
+                    final String needsToPlay = c.getSVar("NeedsToPlay");
+                    List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+
+                    list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
+                    if (list.isEmpty()) {
+                        return false;
+                    }
+                }
                 return player.canPlayLand(c);
             }
         });
