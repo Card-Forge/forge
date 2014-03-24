@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Goblin
 PT:2/2
 K:Islandwalk
-T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ AnimateDB | TriggerDescription$ At the beginning of each combat, unless you pay R, whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ AnimateDB | TriggerDescription$ At the beginning of each combat, unless you pay {R}, whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
 SVar:AnimateDB:DB$Animate | Triggers$ AttackerBlocked,Blocks | UnlessCost$ R | UnlessPayer$ You
 SVar:AttackerBlocked:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ PumpOthers | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
 SVar:Blocks:Mode$ Blocks | ValidCard$ Card.Self | Execute$ PumpOthers | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.
