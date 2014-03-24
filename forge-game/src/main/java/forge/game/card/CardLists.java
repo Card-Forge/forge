@@ -204,6 +204,14 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isType(cardType));
     }
 
+    public static List<Card> getNotColor(Iterable<Card> cardList, byte color) {
+        return CardLists.filter(cardList, Predicates.not(CardPredicates.isColor(color)));
+    }
+
+    public static List<Card> getColor(Iterable<Card> cardList, byte color) {
+        return CardLists.filter(cardList, CardPredicates.isColor(color));
+    }
+
     /**
      * Create a new list of cards by applying a filter to this one.
      * 

@@ -7,6 +7,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -166,9 +167,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
-                || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow")
-                || keyword.startsWith("CantBeBlockedBy"));
+        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Shadow") || keyword.startsWith("CantBeBlockedBy"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
@@ -209,6 +208,22 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                             "Horsemanship").isEmpty()) {
                 return false;
             }
+        } else if (keyword.endsWith("Intimidate")) {
+        	if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    || newPower <= 0
+                    || CardLists.getNotType(CardLists.filter(
+                    		opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)), "Artifact").isEmpty()) {
+                return false;
+            }
+        } else if (keyword.endsWith("Fear")) {
+        	if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
+                    || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    || newPower <= 0
+                    || CardLists.getNotColor(CardLists.getNotType(CardLists.filter(
+                    		opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)), "Artifact"), MagicColor.BLACK).isEmpty()) {
+                return false;
+            }
         } else if (keyword.endsWith("Haste")) {
             if (!card.hasSickness() || ph.isPlayerTurn(opp) || card.isTapped()
                     || newPower <= 0
@@ -247,6 +262,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("First Strike")) {
+        	if (card.hasKeyword("Double Strike")) {
+        		return false;
+        	}
             if (ph.isPlayerTurn(ai) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     && newPower > 0
                     && ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
@@ -294,7 +312,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (newPower <= 0) {
                 return false;
             }
-            if (combat != null && combat.isBlocking(card)) {
+            if (combat != null && combat.isBlocking(card) && !card.hasKeyword("Wither")) {
                 return true;
             }
             if ((ph.isPlayerTurn(opp))
@@ -303,12 +321,12 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.endsWith("Wither")) {
-            if (newPower <= 0) {
+            if (newPower <= 0 || card.hasKeyword("Infect")) {
                 return false;
             }
             return combat != null && ( combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)) );
         } else if (keyword.equals("Lifelink")) {
-            if (newPower <= 0) {
+            if (newPower <= 0 || ai.canGainLife()) {
                 return false;
             }
             return combat != null && ( combat.isAttacking(card) || combat.isBlocking(card) );
@@ -347,6 +365,10 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(card)) {
+                return false;
+            }
+        } else if (keyword.equals("Persist")) {
+            if (card.getBaseDefense() <= 1 || card.hasKeyword("Undying")) {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {
