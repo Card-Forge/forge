@@ -138,17 +138,15 @@ public class FCardZoom extends FOverlay {
 
     @Override
     public void hide() {
-        if (isVisible()) {
-            orderedCards = null; //reset fields when hidden
-            controller = null;
-            selectedIndex = -1;
-            optionList.clear();
-            optionListExpanded = false;
-            prompt.setMessage(null);
-            prompt.getBtnCancel().setText("More");
-            prompt.getBtnCancel().setEnabled(false);
-            super.hide();
-        }
+        orderedCards = null; //reset fields when hidden
+        controller = null;
+        selectedIndex = -1;
+        optionList.clear();
+        optionListExpanded = false;
+        prompt.setMessage(null);
+        prompt.getBtnCancel().setText("More");
+        prompt.getBtnCancel().setEnabled(false);
+        super.hide();
     }
 
     private void selectFirstOption() {
@@ -159,6 +157,7 @@ public class FCardZoom extends FOverlay {
     private void selectOption(Object option) {
         if (option == null ||
                 controller.selectOption(orderedCards.get(selectedIndex), option) ||
+                !isVisible() ||
                 selectedIndex == orderedCards.size() - 1) {
             hide();
         }
