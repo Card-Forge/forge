@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 import forge.game.card.Card;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -173,14 +174,28 @@ public class GuiChoose {
     }
 
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
-        /*if (choices == null || choices.isEmpty()) {
+        if (choices == null || choices.isEmpty()) {
             if (min == 0) {
                 return new ArrayList<T>();
             }
             throw new RuntimeException("choice required from empty list");
         }
 
-        Callable<List<T>> showChoice = new Callable<List<T>>() {
+        //TODO: Remove this temporary code and uncomment below
+        int resultCount = min;
+        if (resultCount == 0 && max > 0) {
+            resultCount = 1;
+        }
+        List<T> result = new ArrayList<T>();
+        for (T choice : choices) {
+            result.add(choice);
+            if (result.size() == resultCount) {
+                break;
+            }
+        }
+        return result;
+
+        /*Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
             public List<T> call() {
                 ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display);
@@ -225,7 +240,6 @@ public class GuiChoose {
         } catch (Exception e) { // should be no exception here
             e.printStackTrace();
         }*/
-        return null;
     }
 
     public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
@@ -303,15 +317,14 @@ public class GuiChoose {
         }
         final List<T> choice = GuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
         return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
-
+    }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOne(final String message, final T[] choices, Comparator<T> comparer) {
         final List<T> choice = GuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
         assert choice.size() == 1;
         return choice.get(0);
-    } // getChoice()
+    }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOne(final String message, final List<T> choices, Comparator<T> comparer) {
@@ -341,6 +354,5 @@ public class GuiChoose {
         Collections.sort(choices, comparer);
         return getChoices(message, min, max, choices);
     }
-
 }
 

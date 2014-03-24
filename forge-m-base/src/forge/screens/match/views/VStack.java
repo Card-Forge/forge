@@ -1,5 +1,8 @@
 package forge.screens.match.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -66,13 +69,25 @@ public class VStack extends FDropDown {
         float y = 0;
         float width = maxWidth / 2;
         StackInstanceDisplay display;
-        float height;
+        float height = 0;
+        float scale = 1; //scale size down as you go from top to bottom
+        List<StackInstanceDisplay> displays = new ArrayList<StackInstanceDisplay>();
 
         for (final SpellAbilityStackInstance stackInstance : stack) {
-            display = add(new StackInstanceDisplay(stackInstance));
+            if (y > 0) {
+                y -= CARD_HEIGHT * scale / 4; //allow partial overlap between layers of stack
+            }
+            display = new StackInstanceDisplay(stackInstance);
+            display.scale = scale;
             height = display.getMinHeight(width);
-            display.setBounds(0, y, width, height);
+            display.setBounds(width - width * scale, y, width * scale, height);
             y += height;
+            scale *= 0.85f;
+            displays.add(display);
+        }
+        //add in reverse order so top of stack appears on top
+        for (int i = displays.size() - 1; i >= 0; i--) {
+            add(displays.get(i));
         }
         return new ScrollBounds(width, y);
     }
@@ -80,6 +95,7 @@ public class VStack extends FDropDown {
     private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private FSkinColor foreColor, backColor;
+        private float scale;
         private String text;
 
         private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0) {
@@ -130,13 +146,15 @@ public class VStack extends FDropDown {
             }
 
             foreColor = foreColor.alphaColor(0.9f);
-            backColor = backColor.alphaColor(0.8f);
+            backColor = backColor.alphaColor(0.9f);
         }
 
         private float getMinHeight(float width) {
             width -= CARD_WIDTH; //account for card picture
             width -= 3 * PADDING; //account for left and right insets and gap between picture and text
-            return Math.max(CARD_HEIGHT, FONT.getFont().getWrappedBounds(text, width).height) + 2 * PADDING;
+            float height = Math.max(CARD_HEIGHT, FONT.getFont().getWrappedBounds(text, width).height);
+            height += 2 * PADDING;
+            return height * scale;
         }
 
         @Override
@@ -148,13 +166,17 @@ public class VStack extends FDropDown {
             g.fillRect(backColor, 0, 0, w, h);
             g.drawRect(2, foreColor, 0, 0, w, h);
 
-            float x = PADDING;
-            float y = PADDING;
-            g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, CARD_WIDTH, CARD_HEIGHT);
+            float padding = PADDING * scale;
+            float cardWidth = CARD_WIDTH * scale;
+            float cardHeight = CARD_HEIGHT * scale;
+
+            float x = padding;
+            float y = padding;
+            g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
             
-            x += CARD_WIDTH + PADDING;
-            w -= x + PADDING;
-            h -= y + PADDING;
+            x += cardWidth + padding;
+            w -= x + padding;
+            h -= y + padding;
 
             g.drawText(text, FONT, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
 
