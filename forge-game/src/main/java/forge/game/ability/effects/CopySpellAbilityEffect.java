@@ -63,7 +63,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         final List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
 
-        if (tgtSpells.size() == 0) {
+        if (tgtSpells.size() == 0 || amount == 0) {
             return;
         }
 

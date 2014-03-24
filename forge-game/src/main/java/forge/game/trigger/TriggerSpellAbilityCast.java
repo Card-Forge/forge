@@ -189,5 +189,6 @@ public class TriggerSpellAbilityCast extends Trigger {
         sa.setTriggeringObject("SpellAbility", this.getRunParams().get("CastSA"));
         sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
         sa.setTriggeringObject("Activator", this.getRunParams().get("Activator"));
+        sa.setTriggeringObject("CurrentStormCount", this.getRunParams().get("CurrentStormCount"));
     }
 }

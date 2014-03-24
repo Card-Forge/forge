@@ -3151,7 +3151,7 @@ public class CardFactoryUtil {
                             + "copy it for each spell cast before it this turn.)");
 
             card.setSVar("Storm", "AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ StormCount | References$ StormCount");
-            card.setSVar("StormCount", "Count$StormCount");
+            card.setSVar("StormCount", "TriggerCount$CurrentStormCount/Minus.1");
             final Trigger stormTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
 
             card.addTrigger(stormTrigger);
