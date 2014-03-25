@@ -1,9 +1,11 @@
 package forge.ai;
 
+import forge.ai.AiAttackController;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
+import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
@@ -418,6 +420,13 @@ public class ComputerUtilCost {
         } else if ("LifeLE2".equals(aiLogic)) {
             if (payer.getLife() < 3) {
                 return true;
+            }
+        } else if ("WillAttack".equals(aiLogic)) {
+            AiAttackController aiAtk = new AiAttackController(payer);
+            Combat combat = new Combat(payer);
+            aiAtk.declareAttackers(combat);
+            if (combat.getAttackers().isEmpty()) {
+                return false;
             }
         }
 
