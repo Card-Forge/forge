@@ -118,9 +118,6 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         tapList = CardLists.filterControlledBy(tapList, ai.getOpponents());
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
-        // filter out enchantments and planeswalkers, their tapped state doesn't matter.
-        final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
-        tapList = CardLists.getValidCards(tapList, tappablePermanents, source.getController(), source);
         tapList = CardLists.getTargetableCards(tapList, sa);
         tapList = CardLists.filter(tapList, new Predicate<Card>() {
             @Override
@@ -138,8 +135,31 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
         });
 
+        //use broader approach when the cost is a positive thing
+        if (tapList.isEmpty() && ComputerUtil.activateForCost(sa, ai)) { 
+        	tapList = game.getCardsIn(ZoneType.Battlefield);
+    		tapList = CardLists.filterControlledBy(tapList, ai.getOpponents());
+            tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
+            tapList = CardLists.getTargetableCards(tapList, sa);
+    		tapList = CardLists.filter(tapList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if (c.isCreature()) {
+                        return true;
+                    }
+
+                    for (final SpellAbility sa : c.getSpellAbilities()) {
+                        if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+        
         if (tapList.isEmpty()) {
-            return false;
+        	return false;
         }
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
