@@ -29,6 +29,7 @@ public class VStack extends FDropDown {
 
     private final MagicStack stack;
     private final LobbyPlayer localPlayer;
+    private SpellAbilityStackInstance selectedStackInstance;
 
     private int stackSize;
 
@@ -49,12 +50,14 @@ public class VStack extends FDropDown {
             getMenuTab().setText("Stack (" + stackSize + ")");
 
             if (stackSize > 0) {
+                selectedStackInstance = stack.iterator().next(); //select top of stack by default
                 if (!isVisible()) {
                     show();
                     return; //don't call super.update() since show handles this
                 }
             }
             else {
+                selectedStackInstance = null;
                 hide();
                 return; //super.update() isn't needed if hidden
             }
@@ -65,29 +68,23 @@ public class VStack extends FDropDown {
     @Override
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
+        if (stack.isEmpty()) {
+            return new ScrollBounds(0, 0);
+        }
 
         float y = 0;
         float width = maxWidth / 2;
+        float unselectedHeight = CARD_HEIGHT * 0.4f;
         StackInstanceDisplay display;
         float height = 0;
-        float scale = 1; //scale size down as you go from top to bottom
         List<StackInstanceDisplay> displays = new ArrayList<StackInstanceDisplay>();
 
         for (final SpellAbilityStackInstance stackInstance : stack) {
-            if (y > 0) {
-                y -= CARD_HEIGHT * scale / 4; //allow partial overlap between layers of stack
-            }
-            display = new StackInstanceDisplay(stackInstance);
-            display.scale = scale;
-            height = display.getMinHeight(width);
-            display.setBounds(width - width * scale, y, width * scale, height);
+            display = add(new StackInstanceDisplay(stackInstance));
+            height = (stackInstance == selectedStackInstance) ? display.getMinHeight(width) : unselectedHeight;
+            display.setBounds(0, y, width, height);
             y += height;
-            scale *= 0.85f;
             displays.add(display);
-        }
-        //add in reverse order so top of stack appears on top
-        for (int i = displays.size() - 1; i >= 0; i--) {
-            add(displays.get(i));
         }
         return new ScrollBounds(width, y);
     }
@@ -95,7 +92,6 @@ public class VStack extends FDropDown {
     private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private FSkinColor foreColor, backColor;
-        private float scale;
         private String text;
 
         private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0) {
@@ -144,9 +140,6 @@ public class VStack extends FDropDown {
                 backColor = FSkinColor.get(Colors.CLR_OVERLAY);
                 foreColor = FSkinColor.get(Colors.CLR_TEXT);
             }
-
-            foreColor = foreColor.alphaColor(0.9f);
-            backColor = backColor.alphaColor(0.9f);
         }
 
         private float getMinHeight(float width) {
@@ -154,7 +147,7 @@ public class VStack extends FDropDown {
             width -= 3 * PADDING; //account for left and right insets and gap between picture and text
             float height = Math.max(CARD_HEIGHT, FONT.getFont().getWrappedBounds(text, width).height);
             height += 2 * PADDING;
-            return height * scale;
+            return height;
         }
 
         @Override
@@ -162,23 +155,27 @@ public class VStack extends FDropDown {
             float w = getWidth();
             float h = getHeight();
             g.startClip(0, 0, w, h);
+            
+            float alpha = selectedStackInstance == stackInstance ? 0.9f : 0.5f;
+            Color fc = FSkinColor.alphaColor(foreColor.getColor(), alpha);
+            Color bc = FSkinColor.alphaColor(backColor.getColor(), alpha);
 
-            g.fillRect(backColor, 0, 0, w, h);
-            g.drawRect(2, foreColor, 0, 0, w, h);
+            g.fillRect(bc, 0, 0, w, h);
 
-            float padding = PADDING * scale;
-            float cardWidth = CARD_WIDTH * scale;
-            float cardHeight = CARD_HEIGHT * scale;
-
+            float padding = PADDING;
+            float cardWidth = CARD_WIDTH;
+            float cardHeight = CARD_HEIGHT;
             float x = padding;
             float y = padding;
-            g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
-            
-            x += cardWidth + padding;
-            w -= x + padding;
-            h -= y + padding;
 
-            g.drawText(text, FONT, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
+            g.setImageTint(new Color(1, 1, 1, alpha));
+            g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
+            g.clearImageTint();
+
+            x += cardWidth + padding;
+            g.drawText(text, FONT, fc, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
+
+            g.drawRect(2, fc, 0, 0, w, h); //ensure border not covered by card image or text
 
             g.endClip();
         }
