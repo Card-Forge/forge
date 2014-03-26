@@ -881,7 +881,7 @@ public class AbilityUtils {
                     o = ((Card) c).getController();
                 }
                 if (c instanceof SpellAbility) {
-                    o = ((SpellAbility) c).getHostCard().getController();
+                    o = ((SpellAbility) c).getActivatingPlayer();
                 }
             }
             else if (defined.endsWith("Opponent")) {
@@ -892,7 +892,7 @@ public class AbilityUtils {
                     o = ((Card) c).getController().getOpponents();
                 }
                 if (c instanceof SpellAbility) {
-                    o = ((SpellAbility) c).getHostCard().getController().getOpponents();
+                    o = ((SpellAbility) c).getActivatingPlayer().getOpponents();
                 }
             }
             else if (defined.endsWith("Owner")) {
