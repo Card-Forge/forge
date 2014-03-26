@@ -25,12 +25,14 @@ public class ConstructedScreen extends LaunchScreen {
 
         //TODO: Allow picking decks
         Deck humanDeck = Utils.generateRandomDeck(2);
+        if (humanDeck == null) { return false; }
         LobbyPlayer humanLobbyPlayer = FServer.getLobby().getGuiPlayer();
         RegisteredPlayer humanRegisteredPlayer = new RegisteredPlayer(humanDeck);
         humanRegisteredPlayer.setPlayer(humanLobbyPlayer);
         launchParams.players.add(humanRegisteredPlayer);
 
         Deck aiDeck = Utils.generateRandomDeck(2);
+        if (aiDeck == null) { return false; }
         LobbyPlayer aiLobbyPlayer = FServer.getLobby().getAiPlayer();
         RegisteredPlayer aiRegisteredPlayer = new RegisteredPlayer(aiDeck);
         aiRegisteredPlayer.setPlayer(aiLobbyPlayer);

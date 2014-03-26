@@ -1,6 +1,7 @@
 package forge.utils;
 
 import com.badlogic.gdx.Gdx;
+
 import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.deck.generation.DeckGenerator2Color;
@@ -9,6 +10,7 @@ import forge.deck.generation.DeckGenerator5Color;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.model.FModel;
+import forge.toolbox.FOptionPane;
 import forge.utils.ForgePreferences.FPref;
 
 public class Utils {
@@ -27,21 +29,26 @@ public class Utils {
     }
 
     public static Deck generateRandomDeck(final int colorCount0) {
-        CardDb cardDb = FModel.getMagicDb().getCommonCards();
-        DeckGeneratorBase gen = null;
-        switch (colorCount0) {
-            case 1: gen = new DeckGeneratorMonoColor(cardDb, null);             break;
-            case 2: gen = new DeckGenerator2Color(cardDb, null, null);          break;
-            case 3: gen = new DeckGenerator3Color(cardDb, null, null, null);    break;
-            case 5: gen = new DeckGenerator5Color(cardDb);                      break;
+        try {
+            CardDb cardDb = FModel.getMagicDb().getCommonCards();
+            DeckGeneratorBase gen = null;
+            switch (colorCount0) {
+                case 1: gen = new DeckGeneratorMonoColor(cardDb, null);             break;
+                case 2: gen = new DeckGenerator2Color(cardDb, null, null);          break;
+                case 3: gen = new DeckGenerator3Color(cardDb, null, null, null);    break;
+                case 5: gen = new DeckGenerator5Color(cardDb);                      break;
+            }
+    
+            if (gen != null) {
+                final Deck deck = new Deck();
+                gen.setSingleton(false);
+                gen.setUseArtifacts(false);
+                deck.getMain().addAll(gen.getDeck(60, false));
+                return deck;
+            }
         }
-
-        if (gen != null) {
-            final Deck deck = new Deck();
-            gen.setSingleton(false);
-            gen.setUseArtifacts(false);
-            deck.getMain().addAll(gen.getDeck(60, false));
-            return deck;
+        catch (Exception ex) {
+            FOptionPane.showErrorDialog(ex.toString());
         }
         return null;
     }
