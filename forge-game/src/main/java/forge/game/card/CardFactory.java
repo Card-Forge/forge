@@ -210,6 +210,7 @@ public class CardFactory {
                 subSA = copySubSA.getSubAbility();
             }
         }
+        c.getCharacteristics().setSpellAbility(copySA);
         copySA.setCopied(true);
         //remove all costs
         if (!copySA.isTrigger()) {

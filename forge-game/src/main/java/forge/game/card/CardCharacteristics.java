@@ -209,6 +209,10 @@ public class CardCharacteristics {
         return this.spellAbility;
     }
 
+    public final void setSpellAbility(SpellAbility sa) {
+    	this.spellAbility.clear();
+    	this.spellAbility.add(sa);
+    }
 
     /**
      * Gets the intrinsic ability.

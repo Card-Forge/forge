@@ -203,17 +203,18 @@ public class CostExile extends CostPartWithList {
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
         Game game = targetCard.getGame();
-        game.getAction().exile(targetCard);
-        
+
         if (this.from.equals(ZoneType.Stack)) {
             ArrayList<SpellAbility> spells = targetCard.getSpellAbilities();
             for (SpellAbility spell : spells) {
-                if (targetCard.isInZone(ZoneType.Exile)) {
-                    final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
-                    game.getStack().remove(si);
-                }
+            	final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
+            	if (si != null) {
+            		game.getStack().remove(si);
+            	}
             }
         }
+
+        game.getAction().exile(targetCard);
     }
 
     public static final String HashListKey = "Exiled";
