@@ -1452,10 +1452,15 @@ public class ComputerUtil {
     public static boolean playImmediately(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Zone zone = source.getZone();
+        final Game game = source.getGame();
  
         if (zone.getZoneType() == ZoneType.Battlefield) {
             if (predictThreatenedObjects(ai, null).contains(source)) {
                 return true;
+            }
+            if (game.getPhaseHandler().inCombat() && 
+            		ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, game.getCombat())) {
+            	return true;
             }
         }
         return false;

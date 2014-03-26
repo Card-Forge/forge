@@ -307,6 +307,8 @@ public class DamageDealAi extends DamageAiBase {
                     if (sa.getRestrictions().getPlaneswalker() || source.hasSVar("EndOfTurnLeavePlay"))
                         freePing = true;
                 }
+                
+                freePing |= ComputerUtil.playImmediately(ai, sa);
 
                 if (freePing && sa.canTarget(enemy)) {
                     tcs.add(enemy);
