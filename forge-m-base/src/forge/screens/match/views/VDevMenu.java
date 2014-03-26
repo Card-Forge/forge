@@ -30,10 +30,10 @@ import forge.player.HumanPlay;
 import forge.screens.match.FControl;
 import forge.screens.match.input.InputSelectCardsFromList;
 import forge.toolbox.FEvent;
-import forge.toolbox.FFileChooser;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.GuiDialog;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.utils.Constants;
 import forge.utils.ForgePreferences;
 import forge.utils.ForgePreferences.FPref;
 
@@ -73,12 +73,15 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Setup Game State", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final FFileChooser fc = new FFileChooser();
+                FControl.setupGameState(Constants.USER_GAMES_DIR + "Test.fgs");
+                //TODO: Support picking file
+
+                /*final FFileChooser fc = new FFileChooser();
                 if (!fc.show("Select Game State File")) {
                     return;
                 }
                 
-                FControl.setupGameState(fc.getSelectedFile().getAbsolutePath());
+                FControl.setupGameState(fc.getSelectedFile().getAbsolutePath());*/
             }
         }));
 

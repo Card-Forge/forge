@@ -81,6 +81,7 @@ public final class Constants {
     public static final String USER_GUANTLET_DIR    = USER_DIR + "gauntlet/";
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String DECK_BASE_DIR        = USER_DIR + "decks/";
+    public static final String USER_GAMES_DIR       = USER_DIR + "games/";
     public static final String DECK_CONSTRUCTED_DIR = DECK_BASE_DIR + "constructed/";
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft/";
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed/";
