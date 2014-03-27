@@ -8,6 +8,15 @@ Forge Beta: 0#-##-2014 ver 1.5.15
 Release Notes
 -------------
 
+- Card Images on Stack -
+Each spell/ability on the stack now displays the image for its source card
+
+
+- Layout fixes - 
+Fixed issue where field would disappear on match screen
+Fixed issue where hand pane for player's you've MindSlaved wouldn't be removed after the effect ended
+
+
 - The Mac OS application version -
 
 We can now package Forge as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.

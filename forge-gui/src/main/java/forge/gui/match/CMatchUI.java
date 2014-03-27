@@ -456,7 +456,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         for (VCommand c : view.getCommandViews()) {
             panels.addAll(c.getTabletop().getCardPanels());
         }
-        panels.addAll(VStack.SINGLETON_INSTANCE.getStackArea().getCardPanels());
         return panels;
     }
     

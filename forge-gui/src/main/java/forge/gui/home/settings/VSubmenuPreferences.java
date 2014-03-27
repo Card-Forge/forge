@@ -74,7 +74,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
-    private final JCheckBox cbStackCardView = new OptionsCheckBox("Card View for Stack");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
@@ -493,10 +492,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbCompactPrompt() {
         return cbCompactPrompt;
-    }
-
-    public final JCheckBox getCbStackCardView() {
-        return cbStackCardView;
     }
 
     public final JCheckBox getCbHideReminderText() {
