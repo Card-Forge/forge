@@ -36,6 +36,8 @@ import forge.item.InventoryItemFromSet;
 import forge.item.PreconDeck;
 import forge.item.SealedProduct;
 import forge.util.Lang;
+import forge.view.FDialog;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
@@ -192,7 +194,7 @@ public class CardDetailPanel extends SkinnedPanel {
                 this.typeLabel.setText("Creature");
             }
         }
-        else if (Singletons.getControl().mayShowCard(card)) {
+        else if (Singletons.getControl().mayShowCard(card) || FDialog.isModalOpen()) { //allow showing cards while modal open to account for revealing, picking, and ordering cards
             canShowThis = true;
 
             if (card.getManaCost().isNoCost()) {

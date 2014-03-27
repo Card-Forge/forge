@@ -28,8 +28,10 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.view.FDialog;
 
 import javax.swing.*;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -57,6 +59,12 @@ public enum CPicture implements ICDoc {
     private Card currentCard = null;
     private CardCharacteristicName displayedState = CardCharacteristicName.Original;
 
+    private boolean mayShowCurrentCard() {
+        if (currentCard == null) { return false; }
+        if (FDialog.isModalOpen()) { return true; } //allow showing cards while modal open to account for revealing, picking, and ordering cards
+        return Singletons.getControl().mayShowCard(currentCard);
+    }
+
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
@@ -70,7 +78,7 @@ public enum CPicture implements ICDoc {
         displayedState = c.getCurState();
         boolean isFlippable = isCurrentCardFlippable();
         flipIndicator.setVisible(isFlippable);
-        picturePanel.setCard(c);
+        picturePanel.setCard(c, mayShowCurrentCard());
         if (showFlipped && isFlippable) {
             flipCard();
         }
@@ -196,10 +204,9 @@ public enum CPicture implements ICDoc {
     }
 
     private boolean isCurrentCardFlippable() {
-        if (currentCard == null || !Singletons.getControl().mayShowCard(currentCard)) { return false; }
+        if (!mayShowCurrentCard()) { return false; }
 
-        return currentCard.isDoubleFaced() || currentCard.isFlipCard() ||
-                (currentCard.isFaceDown() && isAuthorizedToViewFaceDownCard(currentCard));
+        return currentCard.isDoubleFaced() || currentCard.isFlipCard() || currentCard.isFaceDown();
     }
 
     /**

@@ -47,6 +47,7 @@ public final class CardPicturePanel extends JPanel {
 
     private final FImagePanel panel;
     private BufferedImage currentImage;
+    private boolean mayShowCard;
 
     public CardPicturePanel() {
         super(new BorderLayout());
@@ -57,12 +58,14 @@ public final class CardPicturePanel extends JPanel {
 
     public void setCard(final InventoryItem cp) {
         this.displayed = cp;
+        this.mayShowCard = true;
         this.setImage();
     }
 
     //@Override
-    public void setCard(final Card c) {
+    public void setCard(final Card c, boolean mayShowCard) {
         this.displayed = c;
+        this.mayShowCard = mayShowCard;
         this.setImage();
     }
 
@@ -83,17 +86,17 @@ public final class CardPicturePanel extends JPanel {
     }
 
     public BufferedImage getImage() {
-        BufferedImage image = null;
-
         if (displayed instanceof InventoryItem) {
             InventoryItem item = (InventoryItem) displayed;
-            image = ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);
-
-        } else if (displayed instanceof Card) {
-            image = FImageUtil.getImage((Card)displayed);
+            return ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);
         }
-
-        return image;
+        else if (displayed instanceof Card) {
+            if (mayShowCard) {
+                return FImageUtil.getImage((Card)displayed);
+            }
+            return ImageCache.getOriginalImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
+        }
+        return null;
     }
 
     private AutoSizeImageMode getAutoSizeImageMode() {
