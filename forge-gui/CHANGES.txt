@@ -10,6 +10,7 @@ Release Notes
 
 - Card Images on Stack -
 Each spell/ability on the stack now displays the image for its source card
+Stack now supports scrolling if there are enough items on it
 
 
 - Layout fixes - 
