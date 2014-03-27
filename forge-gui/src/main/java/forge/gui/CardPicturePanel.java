@@ -83,7 +83,6 @@ public final class CardPicturePanel extends JPanel {
     }
 
     public BufferedImage getImage() {
-
         BufferedImage image = null;
 
         if (displayed instanceof InventoryItem) {

@@ -19,6 +19,7 @@
 package forge.gui.toolbox.imaging;
 
 import forge.ImageCache;
+import forge.ImageKeys;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
@@ -55,6 +56,9 @@ public final class FImageUtil {
      * For flip cards, returns the un-flipped image. 
      */
     public static BufferedImage getImage(Card card) {
+        if (!Singletons.getControl().mayShowCard(card)) {
+            return ImageCache.getOriginalImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
+        }
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
         int foilIndex = card.getFoil();
         if (image != null && foilIndex > 0) { 

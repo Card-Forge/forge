@@ -318,7 +318,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (this.getCard() != null && !this.getCard().isFaceDown()) {
+        if (this.getCard() != null && Singletons.getControl().mayShowCard(this.getCard()) && !this.getCard().isFaceDown()) {
             CardEdition ed = Singletons.getMagicDb().getEditions().get(this.getCard().getCurSetCode());
             if (ed != null && ed.isWhiteBorder() && this.getCard().getFoil() == 0) {
                 g2d.setColor(Color.white);
@@ -783,7 +783,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private boolean isShowingOverlays() {
-        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS);
+        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS) && this.card != null && Singletons.getControl().mayShowCard(this.card);
     }
 
     private boolean showCardNameOverlay() {

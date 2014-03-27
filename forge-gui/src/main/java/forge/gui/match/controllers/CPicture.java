@@ -68,9 +68,10 @@ public enum CPicture implements ICDoc {
 
         currentCard = c;
         displayedState = c.getCurState();
-        flipIndicator.setVisible(isCurrentCardFlippable());
+        boolean isFlippable = isCurrentCardFlippable();
+        flipIndicator.setVisible(isFlippable);
         picturePanel.setCard(c);
-        if (showFlipped && isCurrentCardFlippable()) {
+        if (showFlipped && isFlippable) {
             flipCard();
         }
     }
@@ -195,7 +196,7 @@ public enum CPicture implements ICDoc {
     }
 
     private boolean isCurrentCardFlippable() {
-        if (currentCard == null) { return false; }
+        if (currentCard == null || !Singletons.getControl().mayShowCard(currentCard)) { return false; }
 
         return currentCard.isDoubleFaced() || currentCard.isFlipCard() ||
                 (currentCard.isFaceDown() && isAuthorizedToViewFaceDownCard(currentCard));
