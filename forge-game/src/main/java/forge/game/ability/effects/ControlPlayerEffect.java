@@ -30,24 +30,22 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        for(final Player pTarget: tgtPlayers) {
-            
+        for (final Player pTarget: tgtPlayers) {
             // on next untap gain control
             game.getUntap().addUntil(pTarget, new GameCommand() {
                 @Override
                 public void run() {
-                    pTarget.setControllingPlayerController(activator.getLobbyPlayer().createControllerFor(pTarget));
+                    pTarget.setMindSlaveMaster(activator);
                     
                     // on following cleanup release control
                     game.getEndOfTurn().addUntil(new GameCommand() {
                         @Override
                         public void run() {
-                            pTarget.releaseControl();
+                            pTarget.setMindSlaveMaster(null);
                         }
                     });
                 }
             });
-            
         }
     }
 }

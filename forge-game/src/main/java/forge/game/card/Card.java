@@ -8578,6 +8578,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         }
+
+        //if viewer is controlled by another player, also check if card can be shown to that player
+        if (viewer.isMindSlaved()) {
+            return canBeShownTo(viewer.getMindSlaveMaster());
+        }
+
         return false;
     }
 
