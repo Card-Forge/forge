@@ -119,6 +119,15 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
+        // Remove any hand panels that aren't needed anymore
+        for (int i = EDocID.Hands.length - 1; i >= lstHands.size(); i--) {
+            DragCell cellWithHand = EDocID.Hands[i].getDoc().getParentCell();
+            if (cellWithHand != null) {
+                cellWithHand.removeDoc(EDocID.Hands[i].getDoc());
+                EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
+            }
+        }
+
         // Fill in gaps
         SwingUtilities.invokeLater(new Runnable() {
             @Override

@@ -1,6 +1,7 @@
 package forge.control;
 
 import com.google.common.eventbus.Subscribe;
+
 import forge.FThreads;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -26,6 +27,7 @@ import forge.gui.toolbox.special.PhaseLabel;
 import forge.net.FServer;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -118,14 +120,17 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             return null;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.instance.getLobby().getGuiPlayer());
-            SLayoutIO.loadLayout(null);
-            VMatchUI.SINGLETON_INSTANCE.populate();
-            for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
-                h.getLayoutControl().updateHand();
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.instance.getLobby().getGuiPlayer());
+                SLayoutIO.loadLayout(null);
+                VMatchUI.SINGLETON_INSTANCE.populate();
+                for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
+                    h.getLayoutControl().updateHand();
+                }
             }
-        } });
+        });
         return null;
     }
 
