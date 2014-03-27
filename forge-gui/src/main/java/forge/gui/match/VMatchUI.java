@@ -70,10 +70,9 @@ public enum VMatchUI implements IVTopLevelUI {
 
         //Clear previous match views if screen was previously closed
         if (wasClosed) {
-            createEmptyDocs();
             wasClosed = false;
         }
-        else { //focus first enabled Prompt button if returng to match screen
+        else { //focus first enabled Prompt button if returning to match screen
             if (getBtnOK().isEnabled()) {
                 getBtnOK().requestFocusInWindow();
             }
