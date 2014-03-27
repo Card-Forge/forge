@@ -127,6 +127,21 @@ public class CountersPutAi extends SpellAbilityAi {
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         }
+        if ("Polukranos".equals(sa.getParam("AILogic"))) {
+            List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+            //TODO how to grab target restrictions from subsequent triggered ability?
+            if (!humCreatures.isEmpty()){
+                boolean canSurvive = false;
+                for (Card humanCreature : humCreatures) {
+                    if (!FightAi.canKill(humanCreature, source, 0)){
+                        canSurvive = true;
+                    }
+				}
+                if (!canSurvive){
+                    return false;
+                }
+            }
+        }
 
         // don't use it if no counters to add
         if (amount <= 0) {

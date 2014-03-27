@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -254,6 +255,37 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
+        if ("Polukranos".equals(sa.getParam("AILogic"))) {
+            int dmgTaken = 0;
+            List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
+            Card lastTgt = null;
+            humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+            ComputerUtilCard.sortByEvaluateCreature(humCreatures);
+            for (Card humanCreature : humCreatures) {
+                if (FightAi.canKill(humanCreature, source, dmgTaken)) {
+                    continue;
+                }
+                final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(humanCreature, dmg, source, false, noPrevention);
+                if (assignedDamage <= dmg) {
+                    tcs.add(humanCreature);
+                    tgt.addDividedAllocation(humanCreature, assignedDamage);
+                    lastTgt = humanCreature;
+                }
+                dmg -= assignedDamage;
+                if (!source.hasProtectionFrom(humanCreature)) {
+                    dmgTaken += humanCreature.getNetAttack();
+                }
+                if (dmg <= 0) {
+                    break;
+                }
+            }
+            if (dmg > 0 && lastTgt != null) {
+                tgt.addDividedAllocation(lastTgt, tgt.getDividedValue(lastTgt) + dmg);
+                dmg = 0;
+                return true;
+            }
+            //fall back into generic targeting due to failure to restrict targets in CountersPutAi or change in board state
+        }
         while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             if (oppTargetsChoice && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
                 // canPlayAI (sa activated by ai)
