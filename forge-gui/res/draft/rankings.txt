@@ -1,184 +1,184 @@
 //Rank|Name|Rarity|Set
 #1|Kiora the Crashing Wave|M|BNG
-#2|Xenagos God of Revels|M|BNG
-#3|Phenax God of Deception|M|BNG
+#2|Phenax God of Deception|M|BNG
+#3|Xenagos God of Revels|M|BNG
 #4|Brimaz King of Oreskos|M|BNG
 #5|Mogis God of Slaughter|M|BNG
-#6|Karametra God of Harvests|M|BNG
-#7|Flame Wreathed Phoenix|M|BNG
+#6|Flame Wreathed Phoenix|M|BNG
+#7|Karametra God of Harvests|M|BNG
 #8|Ephara God of the Polis|M|BNG
 #9|Champion of Stray Souls|M|BNG
 #10|Chromanticore|M|BNG
 #11|Eidolon of Countless Battles|R|BNG
 #12|Herald of Torment|R|BNG
-#13|Hero of Iroas|R|BNG
-#14|Courser of Kruphix|R|BNG
-#15|Nessian Wilds Ravager|R|BNG
-#16|Forgestoker Dragon|R|BNG
+#13|Courser of Kruphix|R|BNG
+#14|Hero of Iroas|R|BNG
+#15|Forgestoker Dragon|R|BNG
+#16|Nessian Wilds Ravager|R|BNG
 #17|Arbiter of the Ideal|R|BNG
 #18|Gild|R|BNG
 #19|Felhide Spiritbinder|R|BNG
-#20|Fated Intervention|R|BNG
-#21|Hero of Leina Tower|R|BNG
-#22|Tromokratis|R|BNG
-#23|Hunters Prowess|R|BNG
-#24|Fate Unraveler|R|BNG
+#20|Fate Unraveler|R|BNG
+#21|Fated Intervention|R|BNG
+#22|Hunters Prowess|R|BNG
+#23|Hero of Leina Tower|R|BNG
+#24|Tromokratis|R|BNG
 #25|Scourge of Skola Vale|R|BNG
-#26|Pain Seer|R|BNG
-#27|Eater of Hope|R|BNG
-#28|Silent Sentinel|R|BNG
-#29|Fated Conflagration|R|BNG
-#30|Oracle of Bones|R|BNG
-#31|Spirit of the Labyrinth|R|BNG
-#32|Ornitharch|U|BNG
-#33|Archetype of Courage|U|BNG
+#26|Eater of Hope|R|BNG
+#27|Fated Conflagration|R|BNG
+#28|Pain Seer|R|BNG
+#29|Ornitharch|U|BNG
+#30|Archetype of Courage|U|BNG
+#31|Silent Sentinel|R|BNG
+#32|Spirit of the Labyrinth|R|BNG
+#33|Oracle of Bones|R|BNG
 #34|Whelming Wave|R|BNG
 #35|Fated Retribution|R|BNG
-#36|Archetype of Imagination|U|BNG
-#37|Bile Blight|U|BNG
-#38|Ghostblade Eidolon|U|BNG
-#39|Fanatic of Xenagos|U|BNG
+#36|Bile Blight|U|BNG
+#37|Ghostblade Eidolon|U|BNG
+#38|Archetype of Imagination|U|BNG
+#39|Siren of the Fanged Coast|U|BNG
 #40|Raised by Wolves|U|BNG
-#41|Perplexing Chimera|R|BNG
-#42|Siren of the Fanged Coast|U|BNG
-#43|Fated Return|R|BNG
-#44|Aerie Worshippers|U|BNG
-#45|Drown in Sorrow|U|BNG
-#46|Searing Blood|U|BNG
-#47|Akroan Conscriptor|U|BNG
-#48|Archetype of Aggression|U|BNG
-#49|Fated Infatuation|R|BNG
-#50|Satyr Firedancer|R|BNG
-#51|Spiteful Returned|U|BNG
-#52|Thunder Brute|U|BNG
-#53|Vanguard of Brimaz|U|BNG
-#54|Temple of Enlightenment|R|BNG
-#55|Pheres Band Raiders|U|BNG
-#56|Kioras Follower|U|BNG
-#57|Siren of the Silent Song|U|BNG
-#58|Everflame Eidolon|U|BNG
-#59|Glimpse the Sun God|U|BNG
-#60|Satyr Nyx Smith|U|BNG
-#61|Epharas Enlightenment|U|BNG
-#62|Temple of Plenty|R|BNG
-#63|Flitterstep Eidolon|U|BNG
-#64|Shrike Harpy|U|BNG
-#65|Akroan Skyguard|C|BNG
-#66|Forlorn Pseudamma|U|BNG
+#41|Aerie Worshippers|U|BNG
+#42|Fanatic of Xenagos|U|BNG
+#43|Spiteful Returned|U|BNG
+#44|Akroan Conscriptor|U|BNG
+#45|Searing Blood|U|BNG
+#46|Akroan Skyguard|C|BNG
+#47|Vanguard of Brimaz|U|BNG
+#48|Fated Infatuation|R|BNG
+#49|Drown in Sorrow|U|BNG
+#50|Archetype of Aggression|U|BNG
+#51|Satyr Firedancer|R|BNG
+#52|Temple of Enlightenment|R|BNG
+#53|Everflame Eidolon|U|BNG
+#54|Shrike Harpy|U|BNG
+#55|Perplexing Chimera|R|BNG
+#56|Fated Return|R|BNG
+#57|Thunder Brute|U|BNG
+#58|Epharas Enlightenment|U|BNG
+#59|Satyr Nyx Smith|U|BNG
+#60|Kioras Follower|U|BNG
+#61|Flitterstep Eidolon|U|BNG
+#62|Siren of the Silent Song|U|BNG
+#63|Glimpse the Sun God|U|BNG
+#64|Pheres Band Raiders|U|BNG
+#65|Temple of Plenty|R|BNG
+#66|Akroan Phalanx|U|BNG
 #67|Temple of Malice|R|BNG
-#68|Nessian Demolok|U|BNG
-#69|Reap What Is Sown|U|BNG
-#70|Archetype of Finality|U|BNG
-#71|Noble Quarry|U|BNG
-#72|Bolt of Keranos|C|BNG
-#73|God Favored General|U|BNG
-#74|Graverobber Spider|U|BNG
-#75|Vortex Elemental|U|BNG
-#76|Oracles Insight|U|BNG
-#77|Ragemonger|U|BNG
-#78|Akroan Phalanx|U|BNG
-#79|Acolytes Reward|U|BNG
-#80|Fall of the Hammer|C|BNG
-#81|Pheres Band Tromper|C|BNG
-#82|Asphyxiate|C|BNG
-#83|Mischief and Mayhem|U|BNG
-#84|Swordwise Centaur|C|BNG
+#68|Bolt of Keranos|C|BNG
+#69|Nessian Demolok|U|BNG
+#70|Forlorn Pseudamma|U|BNG
+#71|Reap What Is Sown|U|BNG
+#72|Graverobber Spider|U|BNG
+#73|Fall of the Hammer|C|BNG
+#74|Oracles Insight|U|BNG
+#75|God Favored General|U|BNG
+#76|Noble Quarry|U|BNG
+#77|Archetype of Finality|U|BNG
+#78|Vortex Elemental|U|BNG
+#79|Ragemonger|U|BNG
+#80|Acolytes Reward|U|BNG
+#81|Asphyxiate|C|BNG
+#82|Nyxborn Triton|C|BNG
+#83|Pheres Band Tromper|C|BNG
+#84|Mischief and Mayhem|U|BNG
 #85|Nyxborn Wolf|C|BNG
-#86|Nyxborn Triton|C|BNG
+#86|Retraction Helix|C|BNG
 #87|Chorus of the Tides|C|BNG
-#88|Setessan Oathsworn|C|BNG
-#89|Ashioks Adept|U|BNG
+#88|Kragma Butcher|C|BNG
+#89|Swordwise Centaur|C|BNG
 #90|Nyxborn Shieldmate|C|BNG
-#91|Kragma Butcher|C|BNG
-#92|Retraction Helix|C|BNG
-#93|Astral Cornucopia|R|BNG
+#91|Setessan Oathsworn|C|BNG
+#92|Ashioks Adept|U|BNG
+#93|Springleaf Drum|U|BNG
 #94|Odunos River Trawler|U|BNG
-#95|Springleaf Drum|U|BNG
-#96|Archetype of Endurance|U|BNG
-#97|Kraken of the Straits|U|BNG
-#98|Divination|C|BNG
-#99|Pinnacle of Rage|U|BNG
-#100|Stormcaller of Keranos|U|BNG
-#101|Meletis Astronomer|U|BNG
+#95|Oreskos Sun Guide|C|BNG
+#96|Sudden Storm|C|BNG
+#97|Meletis Astronomer|U|BNG
+#98|Stormcaller of Keranos|U|BNG
+#99|Elite Skirmisher|C|BNG
+#100|Pinnacle of Rage|U|BNG
+#101|Divination|C|BNG
 #102|Excoriate|C|BNG
-#103|Peregrination|U|BNG
-#104|Eternity Snare|U|BNG
-#105|Oreskos Sun Guide|C|BNG
-#106|Elite Skirmisher|C|BNG
-#107|Thunderous Might|U|BNG
-#108|Gorgons Head|U|BNG
-#109|Snake of the Golden Grove|C|BNG
-#110|Sudden Storm|C|BNG
-#111|Mindreaver|R|BNG
-#112|Black Oak of Odunos|U|BNG
-#113|Mortals Resolve|C|BNG
-#114|Weight of the Underworld|C|BNG
-#115|Loyal Pegasus|C|BNG
-#116|Lightning Volley|U|BNG
-#117|Sphinxs Disciple|C|BNG
-#118|Pharagax Giant|C|BNG
-#119|Stratus Walk|C|BNG
-#120|Siren Song Lyre|U|BNG
-#121|Servant of Tymaret|C|BNG
-#122|Nyxborn Rollicker|C|BNG
+#103|Loyal Pegasus|C|BNG
+#104|Archetype of Endurance|U|BNG
+#105|Snake of the Golden Grove|C|BNG
+#106|Kraken of the Straits|U|BNG
+#107|Servant of Tymaret|C|BNG
+#108|Black Oak of Odunos|U|BNG
+#109|Nyxborn Rollicker|C|BNG
+#110|Gorgons Head|U|BNG
+#111|Mortals Resolve|C|BNG
+#112|Pharagax Giant|C|BNG
+#113|Eternity Snare|U|BNG
+#114|Peregrination|U|BNG
+#115|Nyxborn Eidolon|C|BNG
+#116|Weight of the Underworld|C|BNG
+#117|Stratus Walk|C|BNG
+#118|Fearsome Temper|C|BNG
+#119|Nullify|C|BNG
+#120|Deepwater Hypnotist|C|BNG
+#121|Sphinxs Disciple|C|BNG
+#122|Thunderous Might|U|BNG
 #123|Dawn to Dusk|U|BNG
-#124|Unravel the AEther|U|BNG
-#125|Nullify|C|BNG
-#126|Nyxborn Eidolon|C|BNG
-#127|Revoke Existence|C|BNG
-#128|Aspect of Hydra|C|BNG
-#129|Mortals Ardor|C|BNG
-#130|Karametras Favor|C|BNG
-#131|Rise to the Challenge|C|BNG
-#132|Deepwater Hypnotist|C|BNG
-#133|Fearsome Temper|C|BNG
-#134|Pillar of War|U|BNG
-#135|Crypsis|C|BNG
-#136|Impetuous Sunchaser|C|BNG
-#137|Marshmist Titan|C|BNG
-#138|Warchanter of Mogis|C|BNG
-#139|Floodtide Serpent|C|BNG
-#140|Setessan Starbreaker|C|BNG
-#141|Cyclops of One Eyed Pass|C|BNG
-#142|Necrobite|C|BNG
-#143|Satyr Wayfinder|C|BNG
-#144|Thassas Rebuff|U|BNG
+#124|Mortals Ardor|C|BNG
+#125|Astral Cornucopia|R|BNG
+#126|Revoke Existence|C|BNG
+#127|Rise to the Challenge|C|BNG
+#128|Siren Song Lyre|U|BNG
+#129|Karametras Favor|C|BNG
+#130|Aspect of Hydra|C|BNG
+#131|Unravel the AEther|U|BNG
+#132|Crypsis|C|BNG
+#133|Pillar of War|U|BNG
+#134|Impetuous Sunchaser|C|BNG
+#135|Mindreaver|R|BNG
+#136|Cyclops of One Eyed Pass|C|BNG
+#137|Floodtide Serpent|C|BNG
+#138|Lightning Volley|U|BNG
+#139|Necrobite|C|BNG
+#140|Reckless Reveler|C|BNG
+#141|Marshmist Titan|C|BNG
+#142|Warchanter of Mogis|C|BNG
+#143|Setessan Starbreaker|C|BNG
+#144|Satyr Wayfinder|C|BNG
 #145|Griffin Dreamfinder|C|BNG
-#146|Reckless Reveler|C|BNG
+#146|Felhide Brawler|C|BNG
 #147|Grisly Transformation|C|BNG
-#148|Felhide Brawler|C|BNG
-#149|Plea for Guidance|R|BNG
-#150|Sanguimancy|U|BNG
+#148|Eye Gouge|C|BNG
+#149|Thassas Rebuff|U|BNG
+#150|Scouring Sands|C|BNG
 #151|Claim of Erebos|C|BNG
-#152|Eye Gouge|C|BNG
-#153|Sunbond|U|BNG
-#154|Skyreaping|U|BNG
-#155|Scouring Sands|C|BNG
+#152|Hold at Bay|C|BNG
+#153|Great Hart|C|BNG
+#154|Charging Badger|C|BNG
+#155|Skyreaping|U|BNG
 #156|Forsaken Drifters|C|BNG
-#157|Charging Badger|C|BNG
+#157|Sunbond|U|BNG
 #158|Epharas Radiance|C|BNG
-#159|Hold at Bay|C|BNG
-#160|Great Hart|C|BNG
-#161|Evanescent Intellect|C|BNG
-#162|Epiphany Storm|C|BNG
-#163|Culling Mark|C|BNG
+#159|Sanguimancy|U|BNG
+#160|Evanescent Intellect|C|BNG
+#161|Epiphany Storm|C|BNG
+#162|Culling Mark|C|BNG
+#163|Plea for Guidance|R|BNG
 #164|Whims of the Fates|R|BNG
 #165|Heroes Podium|R|BNG
 #166|Forest|L|BNG
-#167|Swamp|L|BNG
-#168|Plains|L|BNG
-#169|Mountain|L|BNG
+#167|Plains|L|BNG
+#168|Mountain|L|BNG
+#169|Swamp|L|BNG
 #170|Island|L|BNG
 //Rank|Name|Rarity|Set
 #1|Elspeth Sun's Champion|M|THS
 #2|Stormbreath Dragon|M|THS
 #3|Thassa God of the Sea|M|THS
 #4|Polukranos World Eater|M|THS
-#5|Heliod God of the Sun|M|THS
-#6|Ashiok Nightmare Weaver|M|THS
-#7|Purphoros God of the Forge|M|THS
-#8|Nylea God of the Hunt|M|THS
-#9|Xenagos the Reveler|M|THS
+#5|Purphoros God of the Forge|M|THS
+#6|Heliod God of the Sun|M|THS
+#7|Ashiok Nightmare Weaver|M|THS
+#8|Xenagos the Reveler|M|THS
+#9|Nylea God of the Hunt|M|THS
 #10|Hythonia the Cruel|M|THS
 #11|Erebos God of the Dead|M|THS
 #12|Master of Waves|M|THS
@@ -187,16 +187,16 @@
 #15|Ashen Rider|M|THS
 #16|Bow of Nylea|R|THS
 #17|Celestial Archon|R|THS
-#18|Spear of Heliod|R|THS
-#19|Fabled Hero|R|THS
+#18|Fabled Hero|R|THS
+#19|Spear of Heliod|R|THS
 #20|Whip of Erebos|R|THS
 #21|Agent of the Fates|R|THS
 #22|Hero's Downfall|R|THS
 #23|Prognostic Sphinx|R|THS
 #24|Boon Satyr|R|THS
-#25|Abhorrent Overlord|R|THS
-#26|Bident of Thassa|R|THS
-#27|Arbor Colossus|R|THS
+#25|Bident of Thassa|R|THS
+#26|Arbor Colossus|R|THS
+#27|Abhorrent Overlord|R|THS
 #28|Shipbreaker Kraken|R|THS
 #29|Fleecemane Lion|R|THS
 #30|Reaper of the Wilds|R|THS
@@ -205,203 +205,203 @@
 #33|Hundred-Handed One|R|THS
 #34|Ember Swallower|R|THS
 #35|Prophet of Kruphix|R|THS
-#36|Anax and Cymede|R|THS
-#37|Polis Crusher|R|THS
-#38|Anger of the Gods|R|THS
-#39|Thoughtseize|R|THS
+#36|Polis Crusher|R|THS
+#37|Thoughtseize|R|THS
+#38|Anax and Cymede|R|THS
+#39|Anger of the Gods|R|THS
 #40|Sylvan Caryatid|R|THS
 #41|Nighthowler|R|THS
 #42|Daxos of Meletis|R|THS
 #43|Phalanx Leader|U|THS
-#44|Reverent Hunter|R|THS
-#45|Thassa's Emissary|U|THS
+#44|Thassa's Emissary|U|THS
+#45|Reverent Hunter|R|THS
 #46|Keepsake Gorgon|U|THS
-#47|Rageblood Shaman|R|THS
-#48|Sea God's Revenge|U|THS
-#49|Anthousa Setessan Hero|R|THS
-#50|Labyrinth Champion|R|THS
+#47|Sea God's Revenge|U|THS
+#48|Anthousa Setessan Hero|R|THS
+#49|Labyrinth Champion|R|THS
+#50|Rageblood Shaman|R|THS
 #51|Curse of the Swine|R|THS
 #52|Heliod's Emissary|U|THS
 #53|Nemesis of Mortals|U|THS
 #54|Nykthos Shrine to Nyx|R|THS
 #55|Magma Jet|U|THS
 #56|Soldier of the Pantheon|R|THS
-#57|Nylea's Emissary|U|THS
+#57|Ordeal of Purphoros|U|THS
 #58|Favored Hoplite|U|THS
-#59|Ordeal of Purphoros|U|THS
+#59|Nylea's Emissary|U|THS
 #60|Ordeal of Thassa|U|THS
 #61|Dauntless Onslaught|U|THS
-#62|Centaur Battlemaster|U|THS
-#63|Purphoros's Emissary|U|THS
+#62|Purphoros's Emissary|U|THS
+#63|Centaur Battlemaster|U|THS
 #64|Gift of Immortality|R|THS
-#65|Erebos's Emissary|U|THS
-#66|Insatiable Harpy|U|THS
-#67|Fanatic of Mogis|U|THS
+#65|Fanatic of Mogis|U|THS
+#66|Erebos's Emissary|U|THS
+#67|Insatiable Harpy|U|THS
 #68|Ordeal of Heliod|U|THS
 #69|Artisan of Forms|R|THS
-#70|Triad of Fates|R|THS
+#70|Triton Tactics|U|THS
 #71|Ordeal of Nylea|U|THS
-#72|Triton Tactics|U|THS
-#73|Chained to the Rocks|R|THS
-#74|Titan of Eternal Fire|R|THS
-#75|Mogis's Marauder|U|THS
-#76|Triton Fortune Hunter|U|THS
-#77|Lightning Strike|C|THS
-#78|Horizon Scholar|U|THS
-#79|Tymaret the Murder King|R|THS
-#80|Gray Merchant of Asphodel|C|THS
-#81|Coordinated Assault|U|THS
-#82|Wingsteed Rider|C|THS
+#72|Chained to the Rocks|R|THS
+#73|Triton Fortune Hunter|U|THS
+#74|Triad of Fates|R|THS
+#75|Lightning Strike|C|THS
+#76|Mogis's Marauder|U|THS
+#77|Horizon Scholar|U|THS
+#78|Titan of Eternal Fire|R|THS
+#79|Coordinated Assault|U|THS
+#80|Wingsteed Rider|C|THS
+#81|Gray Merchant of Asphodel|C|THS
+#82|Tymaret the Murder King|R|THS
 #83|Temple of Deceit|R|THS
-#84|Ordeal of Erebos|U|THS
-#85|Temple of Mystery|R|THS
-#86|Karametra's Acolyte|U|THS
+#84|Temple of Mystery|R|THS
+#85|Ordeal of Erebos|U|THS
+#86|Temple of Silence|R|THS
 #87|Battlewise Hoplite|U|THS
-#88|Horizon Chimera|U|THS
-#89|Temple of Silence|R|THS
-#90|Temple of Triumph|R|THS
-#91|Stoneshock Giant|U|THS
-#92|Nimbus Naiad|C|THS
-#93|Akroan Horse|R|THS
-#94|Temple of Abandon|R|THS
-#95|Meletis Charlatan|R|THS
-#96|Tormented Hero|U|THS
-#97|Firedrinker Satyr|R|THS
-#98|Nessian Asp|C|THS
-#99|Colossus of Akros|R|THS
-#100|Pharika's Mender|U|THS
-#101|Shipwreck Singer|U|THS
-#102|Voyage's End|C|THS
-#103|Arena Athlete|U|THS
-#104|Sealock Monster|U|THS
-#105|Dissolve|U|THS
-#106|Griptide|C|THS
-#107|Flamespeaker Adept|U|THS
-#108|Leafcrown Dryad|C|THS
+#88|Temple of Triumph|R|THS
+#89|Horizon Chimera|U|THS
+#90|Temple of Abandon|R|THS
+#91|Nimbus Naiad|C|THS
+#92|Karametra's Acolyte|U|THS
+#93|Stoneshock Giant|U|THS
+#94|Akroan Horse|R|THS
+#95|Firedrinker Satyr|R|THS
+#96|Meletis Charlatan|R|THS
+#97|Nessian Asp|C|THS
+#98|Tormented Hero|U|THS
+#99|Shipwreck Singer|U|THS
+#100|Voyage's End|C|THS
+#101|Colossus of Akros|R|THS
+#102|Arena Athlete|U|THS
+#103|Griptide|C|THS
+#104|Pharika's Mender|U|THS
+#105|Sealock Monster|U|THS
+#106|Dissolve|U|THS
+#107|Leafcrown Dryad|C|THS
+#108|Flamespeaker Adept|U|THS
 #109|Burnished Hart|U|THS
 #110|Voyaging Satyr|C|THS
 #111|Rescue from the Underworld|U|THS
-#112|Evangel of Heliod|U|THS
+#112|Hopeful Eidolon|C|THS
 #113|Vaporkin|C|THS
-#114|Hopeful Eidolon|C|THS
+#114|Evangel of Heliod|U|THS
 #115|Divine Verdict|C|THS
 #116|Baleful Eidolon|C|THS
-#117|Cutthroat Maneuver|U|THS
-#118|Observant Alseid|C|THS
+#117|Observant Alseid|C|THS
+#118|Akroan Hoplite|U|THS
 #119|Time to Feed|C|THS
-#120|Lash of the Whip|C|THS
-#121|Warriors' Lesson|U|THS
-#122|Akroan Hoplite|U|THS
-#123|Omenspeaker|C|THS
-#124|Kragma Warcaller|U|THS
+#120|Cutthroat Maneuver|U|THS
+#121|Omenspeaker|C|THS
+#122|Lash of the Whip|C|THS
+#123|Kragma Warcaller|U|THS
+#124|Warriors' Lesson|U|THS
 #125|Sedge Scorpion|C|THS
-#126|Read the Bones|C|THS
-#127|Gods Willing|C|THS
-#128|Prescient Chimera|C|THS
-#129|Nessian Courser|C|THS
-#130|Pharika's Cure|C|THS
-#131|Spearpoint Oread|C|THS
-#132|Nylea's Disciple|C|THS
-#133|Chronicler of Heroes|U|THS
+#126|Gods Willing|C|THS
+#127|Chronicler of Heroes|U|THS
+#128|Nessian Courser|C|THS
+#129|Spearpoint Oread|C|THS
+#130|Read the Bones|C|THS
+#131|Prescient Chimera|C|THS
+#132|Pharika's Cure|C|THS
+#133|Nylea's Disciple|C|THS
 #134|Staunch-Hearted Warrior|C|THS
-#135|Steam Augury|R|THS
+#135|Minotaur Skullcleaver|C|THS
 #136|Sip of Hemlock|C|THS
-#137|Minotaur Skullcleaver|C|THS
-#138|Cavern Lampad|C|THS
-#139|Disciple of Phenax|C|THS
-#140|Ill-Tempered Cyclops|C|THS
-#141|Feral Invocation|C|THS
-#142|Wavecrash Triton|C|THS
-#143|Battlewise Valor|C|THS
-#144|Titan's Strength|C|THS
+#137|Ill-Tempered Cyclops|C|THS
+#138|Wavecrash Triton|C|THS
+#139|Feral Invocation|C|THS
+#140|Disciple of Phenax|C|THS
+#141|Cavern Lampad|C|THS
+#142|Battlewise Valor|C|THS
+#143|Titan's Strength|C|THS
+#144|Steam Augury|R|THS
 #145|Blood-Toll Harpy|C|THS
 #146|Rage of Purphoros|C|THS
-#147|Swan Song|R|THS
-#148|Deathbellow Raider|C|THS
-#149|Opaline Unicorn|C|THS
+#147|Deathbellow Raider|C|THS
+#148|Swan Song|R|THS
+#149|Dragon Mantle|C|THS
 #150|Savage Surge|C|THS
 #151|Aqueous Form|C|THS
-#152|Dragon Mantle|C|THS
-#153|Sentry of the Underworld|U|THS
-#154|Borderland Minotaur|C|THS
+#152|Sentry of the Underworld|U|THS
+#153|Borderland Minotaur|C|THS
+#154|Opaline Unicorn|C|THS
 #155|Two-Headed Cerberus|C|THS
 #156|Akroan Crusader|C|THS
-#157|Cavalry Pegasus|C|THS
+#157|Chosen by Heliod|C|THS
 #158|Lagonna-Band Elder|C|THS
-#159|Returned Phalanx|C|THS
-#160|Chosen by Heliod|C|THS
-#161|Agent of Horizons|C|THS
-#162|Psychic Intrusion|R|THS
-#163|Leonin Snarecaster|C|THS
+#159|Cavalry Pegasus|C|THS
+#160|Leonin Snarecaster|C|THS
+#161|Returned Phalanx|C|THS
+#162|Agent of Horizons|C|THS
+#163|Psychic Intrusion|R|THS
 #164|Vulpine Goliath|C|THS
-#165|Felhide Minotaur|C|THS
-#166|Vanquish the Foul|U|THS
-#167|Traveler's Amulet|C|THS
-#168|Portent of Betrayal|C|THS
+#165|Traveler's Amulet|C|THS
+#166|Felhide Minotaur|C|THS
+#167|Portent of Betrayal|C|THS
+#168|Vanquish the Foul|U|THS
 #169|Fate Foretold|C|THS
 #170|Breaching Hippocamp|C|THS
 #171|Nylea's Presence|C|THS
 #172|Unknown Shores|C|THS
-#173|Scourgemark|C|THS
-#174|Boon of Erebos|C|THS
-#175|Traveling Philosopher|C|THS
-#176|Last Breath|C|THS
-#177|Returned Centaur|C|THS
-#178|Benthic Giant|C|THS
-#179|Mnemonic Wall|C|THS
-#180|Setessan Battle Priest|C|THS
+#173|Traveling Philosopher|C|THS
+#174|Last Breath|C|THS
+#175|Boon of Erebos|C|THS
+#176|Scourgemark|C|THS
+#177|Setessan Battle Priest|C|THS
+#178|Mnemonic Wall|C|THS
+#179|Benthic Giant|C|THS
+#180|Returned Centaur|C|THS
 #181|Coastline Chimera|C|THS
-#182|Satyr Rambler|C|THS
-#183|Spark Jolt|C|THS
-#184|Crackling Triton|C|THS
-#185|Fade into Antiquity|C|THS
+#182|Crackling Triton|C|THS
+#183|Satyr Rambler|C|THS
+#184|Fade into Antiquity|C|THS
+#185|Spark Jolt|C|THS
 #186|Scholar of Athreos|C|THS
-#187|Fleshmad Steed|C|THS
-#188|Viper's Kiss|C|THS
-#189|Pheres-Band Centaurs|C|THS
-#190|Shredding Winds|C|THS
-#191|Ray of Dissolution|C|THS
-#192|Satyr Hedonist|C|THS
-#193|Artisan's Sorrow|U|THS
-#194|Asphodel Wanderer|C|THS
+#187|Ray of Dissolution|C|THS
+#188|Artisan's Sorrow|U|THS
+#189|Destructive Revelry|U|THS
+#190|Pheres-Band Centaurs|C|THS
+#191|Viper's Kiss|C|THS
+#192|Fleshmad Steed|C|THS
+#193|Shredding Winds|C|THS
+#194|Satyr Hedonist|C|THS
 #195|Annul|C|THS
-#196|Spellheart Chimera|U|THS
-#197|Destructive Revelry|U|THS
-#198|Stymied Hopes|C|THS
-#199|Setessan Griffin|C|THS
-#200|Wild Celebrants|C|THS
-#201|March of the Returned|C|THS
-#202|Thassa's Bounty|C|THS
-#203|Ephara's Warden|C|THS
+#196|Setessan Griffin|C|THS
+#197|Asphodel Wanderer|C|THS
+#198|Wild Celebrants|C|THS
+#199|Spellheart Chimera|U|THS
+#200|Stymied Hopes|C|THS
+#201|Bronze Sable|C|THS
+#202|Ephara's Warden|C|THS
+#203|March of the Returned|C|THS
 #204|Lost in a Labyrinth|C|THS
-#205|Bronze Sable|C|THS
+#205|Thassa's Bounty|C|THS
 #206|Guardians of Meletis|C|THS
-#207|Yoked Ox|C|THS
-#208|Fleetfeather Sandals|C|THS
-#209|Silent Artisan|C|THS
-#210|Anvilwrought Raptor|U|THS
-#211|Commune with the Gods|C|THS
-#212|Prowler's Helm|U|THS
-#213|Loathsome Catoblepas|C|THS
+#207|Anvilwrought Raptor|U|THS
+#208|Silent Artisan|C|THS
+#209|Yoked Ox|C|THS
+#210|Fleetfeather Sandals|C|THS
+#211|Prowler's Helm|U|THS
+#212|Commune with the Gods|C|THS
+#213|Glare of Heresy|U|THS
 #214|Dark Betrayal|U|THS
-#215|Glare of Heresy|U|THS
-#216|Decorated Griffin|U|THS
-#217|Priest of Iroas|C|THS
-#218|Hunt the Hunter|U|THS
+#215|Hunt the Hunter|U|THS
+#216|Loathsome Catoblepas|C|THS
+#217|Decorated Griffin|U|THS
+#218|Priest of Iroas|C|THS
 #219|Defend the Hearth|C|THS
-#220|Triton Shorethief|C|THS
-#221|Messenger's Speed|C|THS
-#222|Boulderfall|C|THS
-#223|Demolish|C|THS
-#224|Gainsay|U|THS
+#220|Gainsay|U|THS
+#221|Triton Shorethief|C|THS
+#222|Messenger's Speed|C|THS
+#223|Boulderfall|C|THS
+#224|Demolish|C|THS
 #225|Satyr Piper|U|THS
 #226|Flamecast Wheel|U|THS
 #227|Peak Eruption|U|THS
 #228|Witches' Eye|U|THS
 #229|Pyxis of Pandemonium|R|THS
 #230|Mountain|L|THS
-#231|Forest|L|THS
-#232|Island|L|THS
+#231|Island|L|THS
+#232|Forest|L|THS
 #233|Swamp|L|THS
 #234|Plains|L|THS
 //Rank|Name|Rarity|Set
@@ -420,27 +420,27 @@
 #13|Rise of the Dark Realms|M|M14
 #14|Scavenging Ooze|R|M14
 #15|Megantic Sliver|R|M14
-#16|Ogre Battledriver|R|M14
-#17|Seraph of the Sword|R|M14
-#18|Shivan Dragon|R|M14
+#16|Seraph of the Sword|R|M14
+#17|Shivan Dragon|R|M14
+#18|Ogre Battledriver|R|M14
 #19|Liliana's Reaver|R|M14
 #20|Fiendslayer Paladin|R|M14
 #21|Haunted Plate Mail|R|M14
-#22|Bonescythe Sliver|R|M14
-#23|Witchstalker|R|M14
+#22|Witchstalker|R|M14
+#23|Bonescythe Sliver|R|M14
 #24|Mutavault|R|M14
 #25|Jace's Mindseeker|R|M14
-#26|Ring of Three Wishes|M|M14
-#27|Doom Blade|U|M14
-#28|Lifebane Zombie|R|M14
+#26|Doom Blade|U|M14
+#27|Lifebane Zombie|R|M14
+#28|Ring of Three Wishes|M|M14
 #29|Vastwood Hydra|R|M14
 #30|Xathrid Necromancer|R|M14
 #31|Serra Angel|U|M14
 #32|Colossal Whale|R|M14
 #33|Garruk's Horde|R|M14
 #34|Thorncaster Sliver|R|M14
-#35|Flames of the Firebrand|U|M14
-#36|Sengir Vampire|U|M14
+#35|Sengir Vampire|U|M14
+#36|Flames of the Firebrand|U|M14
 #37|Clone|R|M14
 #38|Mindsparker|R|M14
 #39|Chandra's Phoenix|R|M14
@@ -451,35 +451,35 @@
 #44|Syphon Sliver|R|M14
 #45|Domestication|R|M14
 #46|Briarpack Alpha|U|M14
-#47|Bogbrew Witch|R|M14
-#48|Banisher Priest|U|M14
+#47|Banisher Priest|U|M14
+#48|Bogbrew Witch|R|M14
 #49|Planar Cleansing|R|M14
 #50|Path of Bravery|R|M14
 #51|Manaweft Sliver|U|M14
 #52|Kalonian Tusker|U|M14
 #53|Volcanic Geyser|U|M14
 #54|Young Pyromancer|U|M14
-#55|Trading Post|R|M14
-#56|Opportunity|U|M14
+#55|Opportunity|U|M14
+#56|Trading Post|R|M14
 #57|Galerider Sliver|R|M14
 #58|Enlarge|U|M14
 #59|Ratchet Bomb|R|M14
 #60|Warden of Evos Isle|U|M14
-#61|Battle Sliver|U|M14
-#62|Awaken the Ancient|R|M14
-#63|Water Servant|U|M14
-#64|Goblin Diplomats|R|M14
-#65|Tidebinder Mage|R|M14
+#61|Water Servant|U|M14
+#62|Battle Sliver|U|M14
+#63|Awaken the Ancient|R|M14
+#64|Tidebinder Mage|R|M14
+#65|Goblin Diplomats|R|M14
 #66|Corrupt|U|M14
-#67|Grim Return|R|M14
-#68|Blightcaster|U|M14
-#69|Fireshrieker|U|M14
+#67|Blightcaster|U|M14
+#68|Fireshrieker|U|M14
+#69|Grim Return|R|M14
 #70|Woodborn Behemoth|U|M14
 #71|Pacifism|C|M14
 #72|Chandra's Outrage|C|M14
-#73|Guardian of the Ages|R|M14
-#74|Elite Arcanist|R|M14
-#75|Phantom Warrior|U|M14
+#73|Phantom Warrior|U|M14
+#74|Guardian of the Ages|R|M14
+#75|Elite Arcanist|R|M14
 #76|Shiv's Embrace|U|M14
 #77|Door of Destinies|R|M14
 #78|Predatory Sliver|C|M14
@@ -487,8 +487,8 @@
 #80|Steelform Sliver|U|M14
 #81|Shock|C|M14
 #82|Tenacious Dead|U|M14
-#83|Liturgy of Blood|C|M14
-#84|Rumbling Baloth|C|M14
+#83|Rumbling Baloth|C|M14
+#84|Liturgy of Blood|C|M14
 #85|Dark Prophecy|R|M14
 #86|Wall of Frost|U|M14
 #87|Sanguine Bond|R|M14
@@ -497,130 +497,130 @@
 #90|Elvish Mystic|C|M14
 #91|Quag Sickness|C|M14
 #92|Deadly Recluse|C|M14
-#93|Savage Summoning|R|M14
+#93|Traumatize|R|M14
 #94|Gnawing Zombie|U|M14
-#95|Traumatize|R|M14
-#96|Voracious Wurm|U|M14
-#97|Molten Birth|U|M14
-#98|Indestructibility|R|M14
-#99|Angelic Accord|U|M14
+#95|Savage Summoning|R|M14
+#96|Angelic Accord|U|M14
+#97|Voracious Wurm|U|M14
+#98|Molten Birth|U|M14
+#99|Indestructibility|R|M14
 #100|Howl of the Night Pack|U|M14
 #101|Nephalia Seakite|C|M14
 #102|Marauding Maulhorn|C|M14
-#103|Wild Ricochet|R|M14
-#104|Messenger Drake|C|M14
-#105|Advocate of the Beast|C|M14
-#106|Dragon Egg|U|M14
-#107|Celestial Flare|C|M14
-#108|Master of Diversion|C|M14
-#109|Trained Condor|C|M14
-#110|Deathgaze Cockatrice|C|M14
+#103|Messenger Drake|C|M14
+#104|Advocate of the Beast|C|M14
+#105|Celestial Flare|C|M14
+#106|Wild Ricochet|R|M14
+#107|Master of Diversion|C|M14
+#108|Dragon Egg|U|M14
+#109|Deathgaze Cockatrice|C|M14
+#110|Trained Condor|C|M14
 #111|Oath of the Ancient Wood|R|M14
 #112|Rootwalla|C|M14
 #113|Accursed Spirit|C|M14
 #114|Child of Night|C|M14
-#115|Mark of the Vampire|C|M14
-#116|Sentinel Sliver|C|M14
+#115|Sentinel Sliver|C|M14
+#116|Mark of the Vampire|C|M14
 #117|Blur Sliver|C|M14
 #118|Hunt the Weak|C|M14
 #119|Wall of Swords|U|M14
-#120|Pitchburn Devils|C|M14
+#120|Essence Scatter|C|M14
 #121|Giant Spider|C|M14
-#122|Charging Griffin|C|M14
-#123|Shimmering Grotto|U|M14
-#124|Essence Scatter|C|M14
+#122|Divination|C|M14
+#123|Pitchburn Devils|C|M14
+#124|Charging Griffin|C|M14
 #125|Darksteel Ingot|U|M14
 #126|Act of Treason|C|M14
-#127|Divination|C|M14
+#127|Time Ebb|C|M14
 #128|Hive Stirrings|C|M14
 #129|Archaeomancer|C|M14
-#130|Time Ebb|C|M14
+#130|Shimmering Grotto|U|M14
 #131|Giant Growth|C|M14
 #132|Trollhide|C|M14
 #133|Scroll Thief|C|M14
 #134|Corpse Hauler|C|M14
 #135|Festering Newt|C|M14
 #136|Blood Bairn|C|M14
-#137|Striking Sliver|C|M14
-#138|Disperse|C|M14
-#139|Goblin Shortcutter|C|M14
+#137|Disperse|C|M14
+#138|Striking Sliver|C|M14
+#139|Seacoast Drake|C|M14
 #140|Sporemound|C|M14
-#141|Diabolic Tutor|U|M14
-#142|Seacoast Drake|C|M14
-#143|Frost Breath|C|M14
+#141|Goblin Shortcutter|C|M14
+#142|Diabolic Tutor|U|M14
+#143|Dismiss into Dream|R|M14
 #144|Elixir of Immortality|U|M14
-#145|Dawnstrike Paladin|C|M14
-#146|Vampire Warlord|U|M14
-#147|Auramancer|C|M14
-#148|Griffin Sentinel|C|M14
-#149|Sliver Construct|C|M14
-#150|Dismiss into Dream|R|M14
-#151|Regathan Firecat|C|M14
-#152|Brindle Boar|C|M14
-#153|Verdant Haven|C|M14
+#145|Frost Breath|C|M14
+#146|Dawnstrike Paladin|C|M14
+#147|Vampire Warlord|U|M14
+#148|Auramancer|C|M14
+#149|Griffin Sentinel|C|M14
+#150|Sliver Construct|C|M14
+#151|Brindle Boar|C|M14
+#152|Verdant Haven|C|M14
+#153|Regathan Firecat|C|M14
 #154|Strionic Resonator|R|M14
-#155|Academy Raider|C|M14
-#156|Wring Flesh|C|M14
-#157|Cancel|C|M14
+#155|Cancel|C|M14
+#156|Academy Raider|C|M14
+#157|Wring Flesh|C|M14
 #158|Lightning Talons|C|M14
 #159|Barrage of Expendables|U|M14
-#160|Capashen Knight|C|M14
-#161|Illusionary Armor|U|M14
-#162|Windstorm|U|M14
-#163|Sensory Deprivation|C|M14
-#164|Undead Minotaur|C|M14
-#165|Silence|R|M14
+#160|Sensory Deprivation|C|M14
+#161|Silence|R|M14
+#162|Capashen Knight|C|M14
+#163|Undead Minotaur|C|M14
+#164|Illusionary Armor|U|M14
+#165|Windstorm|U|M14
 #166|Plummet|C|M14
 #167|Nightwing Shade|C|M14
 #168|Ranger's Guile|C|M14
-#169|Dark Favor|C|M14
+#169|Congregate|U|M14
 #170|Groundshaker Sliver|C|M14
-#171|Lay of the Land|C|M14
-#172|Congregate|U|M14
-#173|Canyon Minotaur|C|M14
-#174|Gladecover Scout|C|M14
+#171|Dark Favor|C|M14
+#172|Lay of the Land|C|M14
+#173|Gladecover Scout|C|M14
+#174|Canyon Minotaur|C|M14
 #175|Fortify|C|M14
-#176|Angelic Wall|C|M14
-#177|Divine Favor|C|M14
+#176|Divine Favor|C|M14
+#177|Angelic Wall|C|M14
 #178|Thunder Strike|C|M14
 #179|Lava Axe|C|M14
 #180|Negate|C|M14
 #181|Altar's Reap|C|M14
-#182|Dragon Hatchling|C|M14
-#183|Rod of Ruin|U|M14
-#184|Mind Rot|C|M14
+#182|Mind Rot|C|M14
+#183|Dragon Hatchling|C|M14
+#184|Rod of Ruin|U|M14
 #185|Show of Valor|C|M14
 #186|Suntail Hawk|C|M14
-#187|Minotaur Abomination|C|M14
-#188|Soulmender|C|M14
-#189|Solemn Offering|C|M14
-#190|Duress|C|M14
-#191|Naturalize|C|M14
-#192|Quicken|R|M14
-#193|Siege Mastodon|C|M14
-#194|Coral Merfolk|C|M14
-#195|Stonehorn Chanter|U|M14
+#187|Quicken|R|M14
+#188|Minotaur Abomination|C|M14
+#189|Soulmender|C|M14
+#190|Solemn Offering|C|M14
+#191|Stonehorn Chanter|U|M14
+#192|Duress|C|M14
+#193|Naturalize|C|M14
+#194|Siege Mastodon|C|M14
+#195|Coral Merfolk|C|M14
 #196|Accorder's Shield|U|M14
 #197|Shrivel|C|M14
-#198|Pyromancer's Gauntlet|R|M14
+#198|Bramblecrush|U|M14
 #199|Vile Rebirth|C|M14
-#200|Pillarfield Ox|C|M14
-#201|Bramblecrush|U|M14
-#202|Brave the Elements|U|M14
-#203|Fog|C|M14
-#204|Armored Cancrix|C|M14
+#200|Brave the Elements|U|M14
+#201|Pillarfield Ox|C|M14
+#202|Fog|C|M14
+#203|Armored Cancrix|C|M14
+#204|Pyromancer's Gauntlet|R|M14
 #205|Zephyr Charge|C|M14
-#206|Cyclops Tyrant|C|M14
+#206|Tome Scour|C|M14
 #207|Pay No Heed|C|M14
-#208|Tome Scour|C|M14
-#209|Seismic Stomp|C|M14
-#210|Wild Guess|C|M14
-#211|Merfolk Spy|C|M14
-#212|Millstone|U|M14
+#208|Cyclops Tyrant|C|M14
+#209|Millstone|U|M14
+#210|Seismic Stomp|C|M14
+#211|Wild Guess|C|M14
+#212|Merfolk Spy|C|M14
 #213|Shadowborn Apostle|C|M14
-#214|Demolish|C|M14
-#215|Smelt|C|M14
-#216|Blessing|U|M14
+#214|Blessing|U|M14
+#215|Demolish|C|M14
+#216|Smelt|C|M14
 #217|Spell Blast|U|M14
 #218|Glimpse the Future|U|M14
 #219|Fleshpulper Giant|U|M14
@@ -637,8 +637,8 @@
 #230|Island|L|M14
 #231|Forest|L|M14
 #232|Swamp|L|M14
-#233|Plains|L|M14
-#234|Mountain|L|M14
+#233|Mountain|L|M14
+#234|Plains|L|M14
 //Rank|Name|Rarity|Set
 #1|Sword of Fire and Ice|M|MMA
 #2|Sword of Light and Shadow|M|MMA
