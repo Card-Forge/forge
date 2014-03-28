@@ -117,6 +117,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /** The num discarded this turn. */
     private int numDiscardedThisTurn = 0;
+    
+    private int numCardsInHandStartedThisTurnWith = 0;
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -1620,6 +1622,20 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+	 * @return the numCardsInHandStartedThisTurnWith
+	 */
+	public int getNumCardsInHandStartedThisTurnWith() {
+		return numCardsInHandStartedThisTurnWith;
+	}
+
+	/**
+	 * @param numCardsInHandStartedThisTurnWith the numCardsInHandStartedThisTurnWith to set
+	 */
+	public void setNumCardsInHandStartedThisTurnWith(int num) {
+		this.numCardsInHandStartedThisTurnWith = num;
+	}
+
+	/**
      * <p>
      * mill.
      * </p>
@@ -2355,6 +2371,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (this.attackersDeclaredThisTurn <= 0) {
                 return false;
             }
+        } else if (property.startsWith("NoCardsInHandAtBeginningOfTurn")) {
+            if (this.numCardsInHandStartedThisTurnWith > 0) {
+                return false;
+            }
+        } else if (property.startsWith("CardsInHandAtBeginningOfTurn")) {
+            if (this.numCardsInHandStartedThisTurnWith <= 0) {
+                return false;
+            }
         } else if (property.equals("IsRemembered")) {
             if (!source.getRemembered().contains(this)) {
                 return false;
@@ -2768,6 +2792,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetPreventNextDamageWithEffect();
         resetNumDrawnThisTurn();
         resetNumDiscardedThisTurn();
+        setNumCardsInHandStartedThisTurnWith(this.getCardsIn(ZoneType.Hand).size());
         setAttackedWithCreatureThisTurn(false);
         setNumLandsPlayed(0);
         clearAssignedDamage();

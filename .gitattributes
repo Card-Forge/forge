@@ -7916,6 +7916,7 @@ forge-gui/res/cardsfolder/m/mindsparker.txt -text
 forge-gui/res/cardsfolder/m/mindstab.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mindstab_thrull.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mindstatic.txt -text
+forge-gui/res/cardsfolder/m/mindstorm_crown.txt -text
 forge-gui/res/cardsfolder/m/mindwarper.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mindwhip_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mindwrack_liege.txt svneol=native#text/plain
