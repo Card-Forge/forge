@@ -61,7 +61,8 @@ public enum VStack implements IVDoc<CStack> {
     private final DragTab tab = new DragTab("Stack");
 
     // Top-level containers
-    private final FScrollPanel scroller = new FScrollPanel(new MigLayout("insets 1%, gap 1%, wrap"), true);
+    private final FScrollPanel scroller = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap"), true,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Other fields
     private static OptionalTriggerMenu otMenu = new OptionalTriggerMenu();
@@ -76,8 +77,8 @@ public enum VStack implements IVDoc<CStack> {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(scroller, "w 100%, h 100%!");
+        parentCell.getBody().setLayout(new MigLayout("insets 3px, gap 0"));
+        parentCell.getBody().add(scroller, "grow, push");
     }
 
     /* (non-Javadoc)
@@ -137,7 +138,7 @@ public enum VStack implements IVDoc<CStack> {
         for (final SpellAbilityStackInstance spell : stack) {
             StackInstanceTextArea tar = new StackInstanceTextArea(spell, viewer);
 
-            scroller.add(tar, "w 98%!");
+            scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
 
             //update the Card Picture/Detail when the spell is added to the stack
             if (isFirst) {
@@ -148,6 +149,13 @@ public enum VStack implements IVDoc<CStack> {
 
         scroller.revalidate();
         scroller.repaint();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scroller.scrollToTop();
+            }
+        });
     }
 
     @SuppressWarnings("serial")
@@ -173,6 +181,7 @@ public enum VStack implements IVDoc<CStack> {
             setFocusable(false);
             setEditable(false);
             setLineWrap(true);
+            setFont(FSkin.getFont(12));
             setWrapStyleWord(true);
             setMinimumSize(new Dimension(CARD_WIDTH + 2 * PADDING, CARD_HEIGHT + 2 * PADDING));
 

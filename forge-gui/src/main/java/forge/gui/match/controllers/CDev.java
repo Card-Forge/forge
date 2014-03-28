@@ -59,7 +59,6 @@ public enum CDev implements ICDoc {
     };
     public void generateMana() {
         GuiDisplayUtil.devModeGenerateMana();
-        Singletons.getModel().getPreferences().save();
     }
 
     private final MouseListener madSetup = new MouseAdapter() { @Override

@@ -41,6 +41,7 @@ import forge.gui.toolbox.FOptionPane;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.NewConstants;
 
 import javax.swing.*;
 
@@ -80,8 +81,11 @@ public final class GuiDisplayUtil {
         String tChangePlayer = "NONE";
         String tChangePhase = "NONE";
 
-        final String wd = ".";
-        final JFileChooser fc = new JFileChooser(wd);
+        File gamesDir = new File(NewConstants.USER_GAMES_DIR);
+        if (!gamesDir.exists()) { // if the directory does not exist, try to create it
+            gamesDir.mkdir();
+        }
+        final JFileChooser fc = new JFileChooser(NewConstants.USER_GAMES_DIR);
         final int rc = fc.showDialog(null, "Select Game State File");
         if (rc != JFileChooser.APPROVE_OPTION) {
             return;

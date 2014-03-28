@@ -74,6 +74,10 @@ public class FScrollPane extends SkinnedScrollPane {
         }
     }
 
+    public void scrollToTop() {
+        this.getVerticalScrollBar().setValue(0);
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
