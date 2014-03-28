@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Lambik 1
+Title=Lambik
+Difficulty=easy
+Description="Miljaar!"
+Icon=Lambik.png
+Deck Type=constructed
+[Main]
+2 Adventuring Gear|ZEN
+1 Baloth Woodcrasher|ZEN
+2 Eternity Vessel|ZEN
+4 Explore|WWK
+9 Forest|ZEN|1
+4 Grazing Gladehart|ZEN
+2 Hedron Rover|WWK
+3 Hedron Scrabbler|ZEN
+2 Ior Ruin Expedition|ZEN
+8 Island|ZEN|1
+4 Khalni Heart Expedition|ZEN
+1 Living Tsunami|ZEN
+4 Misty Rainforest|ZEN
+1 Rampaging Baloths|ZEN
+1 Roil Elemental|ZEN
+1 Shoal Serpent|ZEN
+4 Snapping Creeper|WWK
+4 Evolving Wilds|ROE
+1 Territorial Baloth|ZEN
+2 Windrider Eel|ZEN
+[sideboard]

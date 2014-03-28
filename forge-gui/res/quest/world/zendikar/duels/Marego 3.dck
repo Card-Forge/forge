@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Marego 3
+Title=Marego
+Difficulty=hard
+Description="Until then, may you find a mirror and spend some time enjoying the view"
+Icon=Marego.png
+Deck Type=constructed
+[Main]
+4 Akoum Refuge|ZEN
+2 Arid Mesa|ZEN
+4 Bloodchief Ascension|ZEN
+4 Bloodghast|ZEN
+4 Burst Lightning|ZEN
+4 Lavaclaw Reaches|WWK
+4 Mindcrank|NPH
+4 Mountain|ZEN|1
+2 Night's Whisper|5DN
+4 Ob Nixilis, the Fallen|ZEN
+2 Guul Draz Specter|ZEN
+4 Blightning|ALA
+4 Staggershock|ROE
+6 Swamp|ZEN|1
+4 Vampire Nighthawk|ZEN
+4 Verdant Catacombs|ZEN
+[sideboard]

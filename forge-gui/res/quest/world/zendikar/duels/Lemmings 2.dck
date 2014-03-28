@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Lemmings 2
+Title=Lemmings
+Difficulty=medium
+Description=“There's a whiff of the lynch mob or the lemming migration about any overlarge concentration of like-thinking individuals, no matter how virtuous their cause.”
+Icon=Lemmings.png
+Deck Type=constructed
+[Main]
+4 Akoum Refuge|ZEN
+4 Awakening Zone|ROE
+4 Brood Birthing|ROE
+4 Broodwarden|ROE
+1 Evolving Wilds|ROE
+2 Confusion in the Ranks|MRD
+2 Eldrazi Monument|ZEN
+4 Death Match|ONS
+2 Emrakul's Hatcher|ROE
+1 Forest|ZEN|1
+4 Kazandu Refuge|ZEN
+4 Khalni Garden|WWK
+2 Kozilek's Predator|ROE
+3 Mountain|ZEN|1
+4 Nest Invader|ROE
+2 Pawn of Ulamog|ROE
+4 Spawning Breath|ROE
+2 Spellskite|NPH
+3 Swamp|ZEN|1
+4 Verdant Catacombs|ZEN
+[sideboard]

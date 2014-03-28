@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=JC 3
+Title=JC
+Difficulty=hard
+Description="I'm not religious. In Spain all 22 players make the sign of the cross before they enter the pitch. If it works all matches must therefore end in a draw."
+Icon=JC.png
+Deck Type=constructed
+[Main]
+4 Avenger of Zendikar|WWK
+3 Burst Lightning|ZEN
+2 Cancel|ZEN
+2 Comet Storm|WWK
+4 Explore|WWK
+4 Flame Slash|ROE
+4 Forest|ZEN|1
+3 Island|ZEN|1
+4 Jace, the Mind Sculptor|WWK
+2 Kazandu Refuge|ZEN
+4 Lotus Cobra|ZEN
+4 Misty Rainforest|ZEN
+2 Tropical Island|LEB
+3 Mountain|ZEN|1
+4 Oracle of Mul Daya|ZEN
+4 Raging Ravine|WWK
+4 Scalding Tarn|ZEN
+1 Spell Pierce|ZEN
+2 Sphinx of Lost Truths|ZEN
+[sideboard]

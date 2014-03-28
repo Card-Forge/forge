@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Kamsa 2
+Title=Kamsa
+Difficulty=medium
+Description="No more shall the righteous cower before evil."
+Icon=Kamsa.png
+Deck Type=constructed
+[Main]
+4 Armament Master|ZEN
+1 Basilisk Collar|WWK
+2 Cliff Threader|ZEN
+2 Conqueror's Pledge|ZEN
+4 Emeria, the Sky Ruin|ZEN
+2 Kitesail|WWK
+4 Kitesail Apprentice|WWK
+4 Kor Duelist|ZEN
+2 Kor Firewalker|WWK
+4 Lone Missionary|ROE
+2 Nomads' Assembly|ROE
+1 Ogre's Cleaver|ROE
+20 Plains|ZEN|1
+4 Stoneforge Mystic|WWK
+2 Trusty Machete|ZEN
+2 Emeria Angel|ZEN
+[sideboard]

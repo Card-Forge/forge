@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Nissa 2
+Title=Nissa revane
+Difficulty=medium
+Description="Don't fool yourself thinking i'm the worst Planeswalker ever! I can beat Tibalt with my hands tied any day!"
+Icon=Nissa.png
+Deck Type=constructed
+[Main]
+2 Daggerback Basilisk|ROE
+24 Forest|ZEN|1
+2 Joraga Warcaller|WWK
+2 Khalni Hydra|ROE
+2 Leatherback Baloth|WWK
+4 Nissa Revane|ZEN
+4 Nissa's Chosen|ZEN
+4 River Boa|ZEN
+2 Mul Daya Channelers|ROE
+2 Oracle of Mul Daya|ZEN
+2 Scute Mob|ZEN
+4 Scythe Tiger|ZEN
+4 Tajuru Preserver|ROE
+2 Timbermaw Larva|ZEN
+[sideboard]
+
+
+	

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Axis 1
+Title=Axis
+Difficulty=easy
+Description="In the absence of orders, go find something and kill it."
+Icon=Axis.png
+Deck Type=constructed
+[Main]
+2 Akoum Battlesinger|WWK
+4 Arid Mesa|ZEN
+2 Changeling Sentinel|MOR
+4 Hada Freeblade|WWK
+2 Highland Berserker|ZEN
+4 Hyena Umbra|ROE
+2 Join the Ranks|WWK
+1 Kabira Evangel|ZEN
+3 Kazandu Blademaster|ZEN
+1 Kazuul Warlord|ZEN
+2 Makindi Shieldmate|ZEN
+8 Mountain|ZEN|1
+2 Murasa Pyromancer|ZEN
+8 Plains|ZEN|1
+4 Stonework Puma|ZEN
+2 Talus Paladin|WWK
+4 Evolving Wilds|ROE
+3 Tuktuk Grunts|ZEN
+2 Veteran's Reflexes|WWK
+[sideboard]
+

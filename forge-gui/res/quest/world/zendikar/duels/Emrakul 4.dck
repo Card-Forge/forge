@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Emrakul 4
+Title=Emrakul, the Aeons Torn
+Difficulty=very hard
+Description="I know not with what weapons World War III will be fought, but World War IV will be fought with sticks and stones."
+Icon=Emrakul.png
+Deck Type=constructed
+[Main]
+4 Burst Lightning|ZEN
+4 Emrakul, the Aeons Torn|ROE
+4 Flame Slash|ROE
+9 Island|ZEN|1
+2 Kozilek, Butcher of Truth|ROE
+9 Mountain|ZEN|1
+2 Novablast Wurm|WWK
+4 Scalding Tarn|ZEN
+4 Show and Tell|USG
+4 Sneak Attack|USG
+4 Spell Pierce|ZEN
+4 Spreading Seas|ZEN
+2 Terastodon|WWK
+2 Evolving Wilds|ROE
+2 Ulamog, the Infinite Gyre|ROE
+[sideboard]

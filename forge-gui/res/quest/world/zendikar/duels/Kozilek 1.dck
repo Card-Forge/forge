@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kozilek 1
+Title=Kozilek
+Difficulty=easy
+Description="If everyone is thinking alike, someone isn't thinking." 
+Icon=Kozilek.png
+Deck Type=constructed
+[Main]
+2 Artisan of Kozilek|ROE
+2 Awakening Zone|ROE
+2 Brink of Disaster|WWK
+2 Cadaver Imp|ROE
+2 Corpsehatch|ROE
+2 Dread Drone|ROE
+2 Essence Feed|ROE
+10 Forest|ZEN|1
+2 Gigantomancer|ROE
+2 Greenweaver Druid|ZEN
+2 Growth Spasm|ROE
+1 It That Betrays|ROE
+2 Leaf Arrow|ROE
+2 Nest Invader|ROE
+1 Pathrazer of Ulamog|ROE
+2 Pawn of Ulamog|ROE
+2 Pelakka Wurm|ROE
+2 Pilgrim's Eye|WWK
+10 Swamp|ZEN|1
+2 Terra Stomper|ZEN
+4 Evolving Wilds|ROE
+1 Ulamog's Crusher|ROE
+1 Kozilek, Butcher of Truth|ROE
+[sideboard]

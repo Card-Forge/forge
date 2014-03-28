@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Tuktuk 3
+Title=Tuktuk the explorer
+Difficulty=hard
+Description=Remade by Eldrazi magic, Tuktuk inspired an entire clan of misguided goblins
+Icon=Tuktuk.png
+Deck Type=constructed
+[Main]
+4 Arid Mesa|ZEN
+4 Burst Lightning|ZEN
+2 Dragonmaster Outcast|WWK
+4 Goblin Bushwhacker|ZEN
+4 Goblin Guide|ZEN
+3 Kargan Dragonlord|ROE
+2 Mark of Mutiny|ZEN
+10 Mountain|ZEN|1
+4 Plated Geopede|ZEN
+4 Scalding Tarn|ZEN
+4 Searing Blaze|WWK
+1 Smoldering Spires|WWK
+2 Staggershock|ROE
+4 Sulfuric Vortex|SCG
+4 Teetering Peaks|ZEN
+1 Tuktuk the Explorer|ROE
+1 Valakut, the Molten Pinnacle|ZEN
+2 Zektar Shrine Expedition|ZEN
+[sideboard]

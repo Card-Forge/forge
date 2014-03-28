@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=LSV 3
+Title=Luis Scotch Vollgas
+Difficulty=hard
+Description="I dare you to find a better combination of magic cards"
+Icon=LSV.png
+Deck Type=constructed
+[Main]
+4 Cancel|ZEN
+4 Celestial Colonnade|WWK
+4 Day of Judgment|ZEN
+4 Halimar Depths|WWK
+4 Island|LEB
+4 Jace, the Mind Sculptor|WWK
+4 Journey to Nowhere|ZEN
+2 Kraken Hatchling|ZEN
+2 Linvala, Keeper of Silence|ROE
+4 Luminarch Ascension|ZEN
+4 Oust|ROE
+4 Plains|LEB
+4 Sejiri Refuge|ZEN
+2 Sphinx of Jwar Isle|ZEN
+2 Sphinx of Lost Truths|ZEN
+4 Tectonic Edge|WWK
+4 Wall of Omens|ROE
+[sideboard]
