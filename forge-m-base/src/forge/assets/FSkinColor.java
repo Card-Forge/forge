@@ -190,7 +190,7 @@ public class FSkinColor {
             b =  ((b + step < 255) ? b + step : 255);
         }
 
-        return new Color(r / 255, g / 255, b / 255, 0);
+        return new Color(r / 255, g / 255, b / 255, clr0.a);
     }
 
     /**

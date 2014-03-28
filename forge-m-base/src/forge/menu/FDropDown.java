@@ -5,13 +5,14 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
 public abstract class FDropDown extends FScrollPane {
-    public static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2).alphaColor(0.9f);
+    public static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private Backdrop backdrop;
     private FMenuTab menuTab;
@@ -91,6 +92,17 @@ public abstract class FDropDown extends FScrollPane {
     @Override
     protected final ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
         return paneSize;
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.startClip(0, 0, w, h);
+        g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+        g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+        g.drawRect(1.5f, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
+        g.endClip();
     }
 
     private class Backdrop extends FDisplayObject {

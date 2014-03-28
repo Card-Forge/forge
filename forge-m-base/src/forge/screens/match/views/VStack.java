@@ -1,8 +1,5 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -72,21 +69,21 @@ public class VStack extends FDropDown {
             return new ScrollBounds(0, 0);
         }
 
-        float y = 0;
-        float width = maxWidth / 2;
-        float unselectedHeight = CARD_HEIGHT * 0.4f;
+        float outerPadding = 3;
+        float x = outerPadding;
+        float y = outerPadding;
+        float totalWidth = maxWidth / 2;
+        float width = totalWidth - 2 * outerPadding;
         StackInstanceDisplay display;
-        float height = 0;
-        List<StackInstanceDisplay> displays = new ArrayList<StackInstanceDisplay>();
+        float height;
 
         for (final SpellAbilityStackInstance stackInstance : stack) {
             display = add(new StackInstanceDisplay(stackInstance));
-            height = (stackInstance == selectedStackInstance) ? display.getMinHeight(width) : unselectedHeight;
-            display.setBounds(0, y, width, height);
-            y += height;
-            displays.add(display);
+            height = display.getMinHeight(width);
+            display.setBounds(x, y, width, height);
+            y += height + outerPadding;
         }
-        return new ScrollBounds(width, y);
+        return new ScrollBounds(totalWidth, y);
     }
 
     private class StackInstanceDisplay extends FDisplayObject {
@@ -154,9 +151,8 @@ public class VStack extends FDropDown {
         public void draw(Graphics g) {
             float w = getWidth();
             float h = getHeight();
-            g.startClip(0, 0, w, h);
             
-            float alpha = selectedStackInstance == stackInstance ? 0.9f : 0.5f;
+            float alpha = selectedStackInstance == stackInstance ? 1f : 0.5f;
             Color fc = FSkinColor.alphaColor(foreColor.getColor(), alpha);
             Color bc = FSkinColor.alphaColor(backColor.getColor(), alpha);
 
@@ -174,10 +170,6 @@ public class VStack extends FDropDown {
 
             x += cardWidth + padding;
             g.drawText(text, FONT, fc, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
-
-            g.drawRect(2, fc, 0, 0, w, h); //ensure border not covered by card image or text
-
-            g.endClip();
         }
     }
 }

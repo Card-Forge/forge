@@ -15,7 +15,7 @@ import forge.utils.Utils;
 
 public abstract class FScreen extends FContainer {
     public static final FSkinColor TEXTURE_OVERLAY_COLOR = FSkinColor.get(Colors.CLR_THEME);
-    public static final FSkinColor HEADER_BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.stepColor(0);
+    public static final FSkinColor HEADER_BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.alphaColor(1f);
     public static final FSkinColor HEADER_LINE_COLOR = HEADER_BTN_PRESSED_COLOR.stepColor(-40);
     public static final FSkinColor HEADER_BACK_COLOR = HEADER_BTN_PRESSED_COLOR.stepColor(-80);
 
