@@ -913,7 +913,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (apiIsEffect) {
                 List<Card> newCardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
                 newCardsInCommand.removeAll(cardsInCommand);
-                newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
+                if (!newCardsInCommand.isEmpty()) {
+                	newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
+                }
             }
             this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
             restDamage = restDamage - dmgToBePrevented;
