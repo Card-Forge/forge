@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.15
+Forge Beta: 03-28-2014 ver 1.5.15
 
 
-13### cards in total.
+13638 cards in total.
 
 
 -------------
@@ -9,14 +9,14 @@ Release Notes
 -------------
 
 - Card Images on Stack -
-Each spell/ability on the stack now displays the image for its source card
-Stack now supports vertical scrolling if there are enough items on it
-Text for stack descriptions now displays with skin font
+Each spell/ability on the stack now displays the image for its source card.
+Stack now supports vertical scrolling if there are enough items on it.
+Text for stack descriptions now displays with skin font.
 
 
 - Layout fixes - 
-Fixed issue where field would disappear on match screen
-Fixed issue where hand pane for player's you've MindSlaved wouldn't be removed after the effect ended
+Fixed issue where field would disappear on match screen.
+Fixed issue where hand pane for player's you've MindSlaved wouldn't be removed after the effect ended.
 
 
 - The Mac OS application version -
@@ -31,8 +31,8 @@ New Cards
 ---------
 
 Crooked Scales
-Legerdemain
 Gauntlets of Chaos
+Legerdemain
 
 
 ------------
@@ -65,7 +65,14 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Asepetci
+DrDev
+excessum
+Gos
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
