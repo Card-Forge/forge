@@ -72,6 +72,7 @@ public class VStack extends FDropDown {
         float outerPadding = 3;
         float x = outerPadding;
         float y = outerPadding;
+        float dy = outerPadding - 1;
         float totalWidth = maxWidth / 2;
         float width = totalWidth - 2 * outerPadding;
         StackInstanceDisplay display;
@@ -81,7 +82,7 @@ public class VStack extends FDropDown {
             display = add(new StackInstanceDisplay(stackInstance));
             height = display.getMinHeight(width);
             display.setBounds(x, y, width, height);
-            y += height + outerPadding;
+            y += height + dy;
         }
         return new ScrollBounds(totalWidth, y);
     }

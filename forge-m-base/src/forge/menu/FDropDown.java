@@ -8,6 +8,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
+import forge.screens.match.views.VPrompt;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
@@ -80,7 +81,7 @@ public abstract class FDropDown extends FScrollPane {
         float x = tabScreenPos.x;
         float y = tabScreenPos.y + menuTab.getHeight();
 
-        float maxVisibleHeight = screenHeight - y;
+        float maxVisibleHeight = screenHeight - VPrompt.HEIGHT - y; //prevent covering prompt
         paneSize = updateAndGetPaneSize(screenWidth, maxVisibleHeight);
         if (x + paneSize.getWidth() > screenWidth) {
             x = screenWidth - paneSize.getWidth();
@@ -98,9 +99,15 @@ public abstract class FDropDown extends FScrollPane {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.startClip(0, 0, w, h);
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
         g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.startClip(0, 0, w, h);
         g.drawRect(1.5f, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
         g.endClip();
     }
