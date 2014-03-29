@@ -2,6 +2,8 @@ package forge.toolbox;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Vector2;
+
 import forge.Forge.Graphics;
 
 public abstract class FContainer extends FDisplayObject {
@@ -73,5 +75,26 @@ public abstract class FContainer extends FDisplayObject {
             }
             listeners.add(this);
         }
+    }
+
+    public Vector2 getChildRelativePosition(FDisplayObject child) {
+        return getChildRelativePosition(child, 0, 0);
+    }
+
+    private Vector2 getChildRelativePosition(FDisplayObject child, float offsetX, float offsetY) {
+        for (FDisplayObject c : children) { //check direct children first
+            if (child == c) {
+                return new Vector2(c.getLeft() + offsetX, c.getTop() + offsetY);
+            }
+        }
+        for (FDisplayObject c : children) { //check each child's children next if possible
+            if (c instanceof FContainer) {
+                Vector2 pos = ((FContainer)c).getChildRelativePosition(child, c.getLeft() + offsetX, c.getTop() + offsetY);
+                if (pos != null) {
+                    return pos;
+                }
+            }
+        }
+        return null;
     }
 }

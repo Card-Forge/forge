@@ -25,13 +25,22 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
     protected void refreshCardPanels(List<Card> model) {
         clear();
+
+        CardAreaPanel newCardPanel = null;
         for (Card card : model) {
-            addCard(card);
+            CardAreaPanel panel = addCard(card);
+            if (newCardPanel == null && !orderedCards.contains(card)) {
+                newCardPanel = panel;
+            }
         }
         revalidate();
+
+        if (newCardPanel != null) { //if new cards added, ensure first new card is scrolled into view
+            scrollIntoView(newCardPanel);
+        }
     }
 
-    public CardAreaPanel addCard(final Card card) {
+    protected CardAreaPanel addCard(final Card card) {
         CardAreaPanel cardPanel = add(new CardAreaPanel(card));
         cardPanels.add(cardPanel);
         return cardPanel;

@@ -53,36 +53,32 @@ public abstract class FScrollPane extends FContainer {
     }
 
     public void scrollIntoView(FDisplayObject child) {
-        Vector2 screenPos = getScreenPosition();
-        float screenLeft = screenPos.x;
-        float screenRight = screenLeft + getWidth();
-        float screenTop = screenPos.y;
-        float screenBottom = screenTop + getHeight();
+        Vector2 childPos = getChildRelativePosition(child);
+        if (childPos == null) { return; } //do nothing if not a valid child
 
-        Vector2 childScreenPos = child.getScreenPosition();
-        float childScreenLeft = childScreenPos.x;
-        float childScreenRight = childScreenLeft + child.getWidth();
-        float childScreenTop = childScreenPos.y;
-        float childScreenBottom = childScreenTop + child.getHeight();
+        float childLeft = childPos.x;
+        float childRight = childLeft + child.getWidth();
+        float childTop = childPos.y;
+        float childBottom = childTop + child.getHeight();
 
         float dx = 0;
-        if (childScreenLeft < screenLeft) {
-            dx = screenLeft - childScreenLeft;
+        if (childLeft < 0) {
+            dx = childLeft;
         }
-        else if (childScreenRight > screenRight) {
-            dx = screenRight - childScreenRight;
+        else if (childRight > getWidth()) {
+            dx = childRight - getWidth();
         }
         float dy = 0;
-        if (childScreenTop < screenTop) {
-            dy = screenTop - childScreenTop;
+        if (childTop < 0) {
+            dy = childTop;
         }
-        else if (childScreenBottom > screenBottom) {
-            dy = screenBottom - childScreenBottom;
+        else if (childBottom > getHeight()) {
+            dy = childBottom - getHeight();
         }
 
         if (dx == 0 && dy == 0) { return; }
 
-        setScrollPositions(scrollLeft - dx, scrollTop - dy);
+        setScrollPositions(scrollLeft + dx, scrollTop + dy);
     }
 
     private void setScrollPositions(float scrollLeft0, float scrollTop0) {

@@ -32,7 +32,7 @@ public class VField extends VZoneDisplay {
     }
 
     @Override
-    public CardAreaPanel addCard(final Card card) {
+    protected CardAreaPanel addCard(final Card card) {
         CardAreaPanel cardPanel = super.addCard(card);
         //cardPanel.setVisible(false); //hide placeholder until card arrives //TODO: Uncomment when animation set up
         return cardPanel;
