@@ -20,9 +20,9 @@ import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public class VStack extends FDropDown {
-    private static final float PADDING = Utils.AVG_FINGER_WIDTH * 0.1f;
+    private static final float PADDING = 3;
     private static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
-    private static final float CARD_HEIGHT = CARD_WIDTH * FCardPanel.ASPECT_RATIO;
+    private static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final Color ALPHA_COMPOSITE = new Color(1, 1, 1, 0.5f);
 
@@ -66,19 +66,18 @@ public class VStack extends FDropDown {
         clear();
 
         float height;
-        float outerPadding = 3;
-        float x = outerPadding;
-        float y = outerPadding;
-        float dy = outerPadding - 1;
-        float totalWidth = maxWidth / 2;
-        float width = totalWidth - 2 * outerPadding;
+        float x = PADDING;
+        float y = PADDING;
+        float dy = PADDING - 1;
+        float totalWidth = Math.round(maxWidth / 2);
+        float width = totalWidth - 2 * PADDING;
 
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").fontSize(FONT.getSize()).align(HAlignment.CENTER).build());
 
-            height = label.getAutoSizeBounds().height + 2 * PADDING;
+            height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);
-            return new ScrollBounds(totalWidth, y + height + outerPadding);
+            return new ScrollBounds(totalWidth, y + height + PADDING);
         }
         else {
             StackInstanceDisplay display;
@@ -91,7 +90,7 @@ public class VStack extends FDropDown {
                 isTop = false;
             }
         }
-        return new ScrollBounds(totalWidth, y);
+        return new ScrollBounds(totalWidth, y + 1);
     }
 
     private class StackInstanceDisplay extends FDisplayObject {
@@ -159,7 +158,7 @@ public class VStack extends FDropDown {
             width -= 3 * PADDING; //account for left and right insets and gap between picture and text
             float height = Math.max(CARD_HEIGHT, FONT.getFont().getWrappedBounds(text, width).height);
             height += 2 * PADDING;
-            return height;
+            return Math.round(height);
         }
 
         @Override
