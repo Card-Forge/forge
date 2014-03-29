@@ -5,15 +5,15 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
-import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 
 public class FMenuTab extends FDisplayObject {
     private static final FSkinFont FONT = FSkinFont.get(12);
-    private static final FSkinColor SEL_GRADIENT_BOTTOM = FDropDown.BORDER_COLOR;
-    private static final FSkinColor SEL_GRADIENT_TOP = SEL_GRADIENT_BOTTOM.stepColor(30);
-    private static final FSkinColor SEL_FORE_COLOR = SEL_GRADIENT_BOTTOM.getHighContrastColor();
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
+    private static final FSkinColor SEL_BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
+    private static final FSkinColor SEL_BORDER_COLOR = FDropDown.BORDER_COLOR;
+    private static final FSkinColor SEL_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor FORE_COLOR = SEL_FORE_COLOR.alphaColor(0.5f);
+    private static final FSkinColor SEPARATOR_COLOR = SEL_FORE_COLOR.alphaColor(0.3f);
 
     private final FMenuBar menuBar;
     private final FDropDown dropDown;
@@ -66,7 +66,16 @@ public class FMenuTab extends FDisplayObject {
 
         FSkinColor foreColor;
         if (dropDown.isVisible()) {
-            g.fillGradientRect(SEL_GRADIENT_TOP, SEL_GRADIENT_BOTTOM, true, paddingX, paddingY, getWidth() - 2 * paddingX, getHeight() - paddingY);
+            x = paddingX; //round so lines show up reliably
+            y = paddingY;
+            w = getWidth() - 2 * x;
+            h = getHeight() - y;
+
+            g.fillRect(SEL_BACK_COLOR, x, y, w, h);
+            g.drawLine(1, SEL_BORDER_COLOR, x, y, x + w, y);
+            g.drawLine(1, SEL_BORDER_COLOR, x, y, x, y + h);
+            g.drawLine(1, SEL_BORDER_COLOR, x + w, y, x + w, y + h);
+
             foreColor = SEL_FORE_COLOR;
         }
         else { 
@@ -76,7 +85,7 @@ public class FMenuTab extends FDisplayObject {
         //draw right separator
         x = getWidth();
         y = getHeight() / 4;
-        g.drawLine(1, FScreen.HEADER_LINE_COLOR, x, y, x, getHeight() - y);
+        g.drawLine(1, SEPARATOR_COLOR, x, y, x, getHeight() - y);
 
         x = paddingX;
         y = paddingY;

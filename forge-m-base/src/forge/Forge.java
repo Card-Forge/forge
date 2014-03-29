@@ -344,10 +344,10 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+            boolean needSmoothing = (x1 != x2 && y1 != y2);
+            if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
-            boolean needSmoothing = (x1 != x2 && y1 != y2);
             if (needSmoothing) {
                 Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
             }
@@ -360,7 +360,7 @@ public class Forge implements ApplicationListener {
             if (needSmoothing) {
                 Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
             }
-            if (color.a != 0) {
+            if (color.a < 1 || needSmoothing) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
             if (thickness > 1) {
@@ -379,7 +379,7 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+            if (color.a < 1 || cornerRadius > 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
             if (cornerRadius > 0) {
@@ -408,7 +408,7 @@ public class Forge implements ApplicationListener {
             if (cornerRadius > 0) {
                 Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
             }
-            if (color.a != 0) {
+            if (color.a < 1 || cornerRadius > 0) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
             if (thickness > 1) {
@@ -427,9 +427,7 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
-                Gdx.gl.glEnable(GL20.GL_BLEND);
-            }
+            Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
 
             shapeRenderer.begin(ShapeType.Line);
@@ -438,9 +436,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.end();
 
             Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
-            if (color.a != 0) {
-                Gdx.gl.glDisable(GL20.GL_BLEND);
-            }
+            Gdx.gl.glDisable(GL20.GL_BLEND);
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(1);
             }
@@ -454,7 +450,7 @@ public class Forge implements ApplicationListener {
         public void fillRect(Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+            if (color.a < 1) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
@@ -463,7 +459,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
             shapeRenderer.end();
 
-            if (color.a != 0) {
+            if (color.a < 1) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
 
@@ -479,9 +475,7 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
-                Gdx.gl.glEnable(GL20.GL_BLEND);
-            }
+            Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
 
             shapeRenderer.begin(ShapeType.Line);
@@ -490,9 +484,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.end();
 
             Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
-            if (color.a != 0) {
-                Gdx.gl.glDisable(GL20.GL_BLEND);
-            }
+            Gdx.gl.glDisable(GL20.GL_BLEND);
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(1);
             }
@@ -506,7 +498,7 @@ public class Forge implements ApplicationListener {
         public void fillCircle(Color color, float x, float y, float radius) {
             batch.end(); //must pause batch while rendering shapes
 
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+            if (color.a < 1) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
@@ -515,7 +507,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius); //TODO: Make smoother
             shapeRenderer.end();
 
-            if (color.a != 0) {
+            if (color.a < 1) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
 
@@ -528,7 +520,7 @@ public class Forge implements ApplicationListener {
         public void fillTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3) {
             batch.end(); //must pause batch while rendering shapes
 
-            if (color.a != 0) { //enable blending so alpha colored shapes work properly
+            if (color.a < 1) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
@@ -537,7 +529,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
             shapeRenderer.end();
 
-            if (color.a != 0) {
+            if (color.a < 1) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
 
@@ -556,7 +548,7 @@ public class Forge implements ApplicationListener {
         public void fillGradientRect(Color color1, Color color2, boolean vertical, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
-            boolean needBlending = (color1.a != 0 || color2.a != 0);
+            boolean needBlending = (color1.a < 1 || color2.a < 1);
             if (needBlending) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }

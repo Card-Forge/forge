@@ -3,11 +3,13 @@ package forge.menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.Forge.Graphics;
+import forge.screens.FScreen;
 import forge.toolbox.FContainer;
 import forge.utils.Utils;
 
 public class FMenuBar extends FContainer {
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.6f;
+    public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
 
     private final List<FMenuTab> tabs = new ArrayList<FMenuTab>();
 
@@ -27,15 +29,22 @@ public class FMenuBar extends FContainer {
                 visibleTabCount++;
             }
         }
-        float tabWidth;
-        float x = 0;
+        int tabWidth;
+        int x = 0;
         float dx = (width - minWidth) / visibleTabCount;
         for (FMenuTab tab : tabs) {
             if (tab.isVisible()) {
-                tabWidth = tab.getMinWidth() + dx;
+                tabWidth = (int)(tab.getMinWidth() + dx);
                 tab.setBounds(x, 0, tabWidth, height);
                 x += tabWidth;
             }
         }
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.fillRect(FScreen.HEADER_BACK_COLOR, 0, 0, w, h);
     }
 }

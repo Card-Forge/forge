@@ -87,7 +87,7 @@ public abstract class FDropDown extends FScrollPane {
             x = screenWidth - paneSize.getWidth();
         }
 
-        setBounds(x, y, paneSize.getWidth(), Math.min(paneSize.getHeight(), maxVisibleHeight));
+        setBounds(Math.round(x), Math.round(y), Math.round(paneSize.getWidth()), Math.round(Math.min(paneSize.getHeight(), maxVisibleHeight)));
     }
 
     @Override
@@ -107,9 +107,7 @@ public abstract class FDropDown extends FScrollPane {
     protected void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.startClip(0, 0, w, h);
-        g.drawRect(1.5f, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
-        g.endClip();
+        g.drawRect(1, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
     }
 
     private class Backdrop extends FDisplayObject {
