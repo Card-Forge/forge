@@ -93,6 +93,11 @@ public class VStack extends FDropDown {
         return new ScrollBounds(totalWidth, y + 1);
     }
 
+    @Override
+    protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+        super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
+    }
+
     private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private final boolean isTop;

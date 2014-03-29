@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.math.Vector2;
+
 import forge.Forge.Graphics;
 
 public abstract class FScrollPane extends FContainer {
@@ -34,7 +36,56 @@ public abstract class FScrollPane extends FContainer {
         return getScrollHeight() - getHeight();
     }
 
-    public void setScrollPositions(float scrollLeft0, float scrollTop0) {
+    public void scrollToLeft() {
+        setScrollPositions(0, scrollTop);
+    }
+
+    public void scrollToRight() {
+        setScrollPositions(getMaxScrollLeft(), scrollTop);
+    }
+
+    public void scrollToTop() {
+        setScrollPositions(scrollLeft, 0);
+    }
+
+    public void scrollToBottom() {
+        setScrollPositions(scrollLeft, getMaxScrollTop());
+    }
+
+    public void scrollIntoView(FDisplayObject child) {
+        Vector2 screenPos = getScreenPosition();
+        float screenLeft = screenPos.x;
+        float screenRight = screenLeft + getWidth();
+        float screenTop = screenPos.y;
+        float screenBottom = screenTop + getHeight();
+
+        Vector2 childScreenPos = child.getScreenPosition();
+        float childScreenLeft = childScreenPos.x;
+        float childScreenRight = childScreenLeft + child.getWidth();
+        float childScreenTop = childScreenPos.y;
+        float childScreenBottom = childScreenTop + child.getHeight();
+
+        float dx = 0;
+        if (childScreenLeft < screenLeft) {
+            dx = screenLeft - childScreenLeft;
+        }
+        else if (childScreenRight > screenRight) {
+            dx = screenRight - childScreenRight;
+        }
+        float dy = 0;
+        if (childScreenTop < screenTop) {
+            dy = screenTop - childScreenTop;
+        }
+        else if (childScreenBottom > screenBottom) {
+            dy = screenBottom - childScreenBottom;
+        }
+
+        if (dx == 0 && dy == 0) { return; }
+
+        setScrollPositions(scrollLeft - dx, scrollTop - dy);
+    }
+
+    private void setScrollPositions(float scrollLeft0, float scrollTop0) {
         if (scrollLeft0 < 0) {
             scrollLeft0 = 0;
         }
@@ -77,7 +128,12 @@ public abstract class FScrollPane extends FContainer {
         float oldScrollTop = scrollTop;
         scrollLeft = 0;
         scrollTop = 0;
-        setScrollPositions(oldScrollLeft, oldScrollTop);
+        setScrollPositionsAfterLayout(oldScrollLeft, oldScrollTop);
+    }
+
+    //allow overriding to adjust what scroll positions are restored after layout
+    protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+        setScrollPositions(scrollLeft0, scrollTop0);
     }
 
     protected abstract ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight);

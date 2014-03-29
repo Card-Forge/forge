@@ -31,7 +31,7 @@ public class VLog extends FDropDown {
 
     @Override
     protected boolean autoHide() {
-        return false;
+        return true;
     }
 
     @Override
@@ -71,6 +71,11 @@ public class VLog extends FDropDown {
         }
 
         return new ScrollBounds(width, y + 1);
+    }
+
+    @Override
+    protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+        super.setScrollPositionsAfterLayout(0, getMaxScrollTop()); //always scroll to bottom after layout
     }
 
     private class LogEntryDisplay extends FDisplayObject {

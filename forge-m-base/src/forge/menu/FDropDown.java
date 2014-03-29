@@ -44,6 +44,19 @@ public abstract class FDropDown extends FScrollPane {
         this.setVisible(false);
     }
 
+    @Override
+    public boolean press(float x, float y) {
+        return true; //prevent auto-hiding when drop down pressed
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        if (autoHide()) {
+            hide(); //hide when tapped by default if configured for auto-hide
+        }
+        return true;
+    }
+
     public void setVisible(boolean visible0) {
         if (this.isVisible() == visible0) { return; }
 
