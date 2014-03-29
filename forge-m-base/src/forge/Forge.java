@@ -594,6 +594,19 @@ public class Forge implements ApplicationListener {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
         }
 
+        public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {
+            startClip(x, y, w, h);
+
+            int tilesW = (int)(w / image.getWidth()) + 1;
+            int tilesH = (int)(h / image.getHeight()) + 1;  
+            batch.draw(image, adjustX(x), adjustY(y, h),
+                    image.getWidth() * tilesW, 
+                    image.getHeight() * tilesH, 
+                    0, tilesH, tilesW, 0);
+
+            endClip();
+        }
+
         public void drawRotatedImage(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {
             batch.draw(image, adjustX(x), adjustY(y, h), originX - x, h - (originY - y), w, h, 1, 1, rotation, 0, 0, image.getWidth(), image.getHeight(), false, false);
         }

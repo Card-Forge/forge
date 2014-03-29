@@ -3,17 +3,21 @@ package forge.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
+
 import forge.Forge.Graphics;
 
 public enum FSkinTexture implements FImage {
-    BG_TEXTURE("bg_texture.jpg"),
-    BG_MATCH("bg_match.jpg");
-    
-    private final String filename;
-    private Texture texture; 
+    BG_TEXTURE("bg_texture.jpg", true),
+    BG_MATCH("bg_match.jpg", false);
 
-    FSkinTexture(String filename0) {
+    private final String filename;
+    private final boolean repeat;
+    private Texture texture;
+
+    FSkinTexture(String filename0, boolean repeat0) {
         filename = filename0;
+        repeat = repeat0;
     }
 
     public void load(String preferredDir, String defaultDir) {
@@ -42,6 +46,9 @@ public enum FSkinTexture implements FImage {
                 }
             }
         }
+        if (repeat) {
+            texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+        }
     }
 
     @Override
@@ -56,6 +63,11 @@ public enum FSkinTexture implements FImage {
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
-        g.drawImage(texture, x, y, w, h);
+        if (repeat) {
+            g.drawRepeatingImage(texture, x, y, w, h);
+        }
+        else {
+            g.drawImage(texture, x, y, w, h);
+        }
     }
 }
