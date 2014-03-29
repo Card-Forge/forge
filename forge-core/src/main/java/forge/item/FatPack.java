@@ -62,6 +62,7 @@ public class FatPack extends SealedProduct {
         for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }
+        // Add any extra cards that may come in the fatpack after Boosters
         result.addAll(BoosterGenerator.getBoosterPack(fpData));
         return result;
     }
