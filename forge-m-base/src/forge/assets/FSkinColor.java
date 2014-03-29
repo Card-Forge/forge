@@ -145,12 +145,12 @@ public class FSkinColor {
         if (brightnessDelta != NO_BRIGHTNESS_DELTA) {
             if (brightnessDelta < 0) {
                 for (int i = 0; i > brightnessDelta; i--) {
-                    color = FSkinColor.stepColor(color, 10);
+                    color = FSkinColor.stepColor(color, -20);
                 }
             }
             else {
                 for (int i = 0; i < brightnessDelta; i++) {
-                    color = FSkinColor.stepColor(color, -10);
+                    color = FSkinColor.stepColor(color, 20);
                 }
             }
         }
