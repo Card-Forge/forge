@@ -16,6 +16,7 @@ import forge.game.zone.MagicStack;
 import forge.menu.FDropDown;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
 public class VStack extends FDropDown {
@@ -23,10 +24,10 @@ public class VStack extends FDropDown {
     private static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
     private static final float CARD_HEIGHT = CARD_WIDTH * FCardPanel.ASPECT_RATIO;
     private static final FSkinFont FONT = FSkinFont.get(11);
+    private static final Color ALPHA_COMPOSITE = new Color(1, 1, 1, 0.5f);
 
     private final MagicStack stack;
     private final LobbyPlayer localPlayer;
-    private SpellAbilityStackInstance selectedStackInstance;
 
     private int stackSize;
 
@@ -47,14 +48,12 @@ public class VStack extends FDropDown {
             getMenuTab().setText("Stack (" + stackSize + ")");
 
             if (stackSize > 0) {
-                selectedStackInstance = stack.iterator().next(); //select top of stack by default
                 if (!isVisible()) {
                     show();
                     return; //don't call super.update() since show handles this
                 }
             }
             else {
-                selectedStackInstance = null;
                 hide();
                 return; //super.update() isn't needed if hidden
             }
@@ -65,35 +64,45 @@ public class VStack extends FDropDown {
     @Override
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
-        if (stack.isEmpty()) {
-            return new ScrollBounds(0, 0);
-        }
 
+        float height;
         float outerPadding = 3;
         float x = outerPadding;
         float y = outerPadding;
         float dy = outerPadding - 1;
         float totalWidth = maxWidth / 2;
         float width = totalWidth - 2 * outerPadding;
-        StackInstanceDisplay display;
-        float height;
 
-        for (final SpellAbilityStackInstance stackInstance : stack) {
-            display = add(new StackInstanceDisplay(stackInstance));
-            height = display.getMinHeight(width);
-            display.setBounds(x, y, width, height);
-            y += height + dy;
+        if (stack.isEmpty()) { //show label if stack empty
+            FLabel label = add(new FLabel.Builder().text("[Empty]").fontSize(FONT.getSize()).align(HAlignment.CENTER).build());
+
+            height = label.getAutoSizeBounds().height + 2 * PADDING;
+            label.setBounds(x, y, width, height);
+            return new ScrollBounds(totalWidth, y + height + outerPadding);
+        }
+        else {
+            StackInstanceDisplay display;
+            boolean isTop = true;
+            for (final SpellAbilityStackInstance stackInstance : stack) {
+                display = add(new StackInstanceDisplay(stackInstance, isTop));
+                height = display.getMinHeight(width);
+                display.setBounds(x, y, width, height);
+                y += height + dy;
+                isTop = false;
+            }
         }
         return new ScrollBounds(totalWidth, y);
     }
 
     private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
+        private final boolean isTop;
         private FSkinColor foreColor, backColor;
         private String text;
 
-        private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0) {
+        private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0, boolean isTop0) {
             stackInstance = stackInstance0;
+            isTop = isTop0;
             Card card = stackInstance0.getSourceCard();
 
             text = stackInstance.getStackDescription();
@@ -138,6 +147,11 @@ public class VStack extends FDropDown {
                 backColor = FSkinColor.get(Colors.CLR_OVERLAY);
                 foreColor = FSkinColor.get(Colors.CLR_TEXT);
             }
+
+            if (!isTop) {
+                backColor = backColor.alphaColor(ALPHA_COMPOSITE.a);
+                foreColor = foreColor.alphaColor(ALPHA_COMPOSITE.a);
+            }
         }
 
         private float getMinHeight(float width) {
@@ -152,12 +166,8 @@ public class VStack extends FDropDown {
         public void draw(Graphics g) {
             float w = getWidth();
             float h = getHeight();
-            
-            float alpha = selectedStackInstance == stackInstance ? 1f : 0.5f;
-            Color fc = FSkinColor.alphaColor(foreColor.getColor(), alpha);
-            Color bc = FSkinColor.alphaColor(backColor.getColor(), alpha);
 
-            g.fillRect(bc, 0, 0, w, h);
+            g.fillRect(backColor, 0, 0, w, h);
 
             float padding = PADDING;
             float cardWidth = CARD_WIDTH;
@@ -165,12 +175,16 @@ public class VStack extends FDropDown {
             float x = padding;
             float y = padding;
 
-            g.setImageTint(new Color(1, 1, 1, alpha));
+            if (!isTop) {
+                g.setImageTint(ALPHA_COMPOSITE);
+            }
             g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
-            g.clearImageTint();
+            if (!isTop) {
+                g.clearImageTint();
+            }
 
             x += cardWidth + padding;
-            g.drawText(text, FONT, fc, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
+            g.drawText(text, FONT, foreColor, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
         }
     }
 }
