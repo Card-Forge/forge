@@ -73,6 +73,8 @@ public class FSkin {
         preferredName = skinName.toLowerCase().replace(' ', '_');
         preferredDir = FILE_SKINS_DIR + preferredName + "/";
 
+        FSkinTexture.BG_TEXTURE.load(preferredDir, DEFAULT_DIR); //load background texture early for splash screen
+
         if (splashScreen != null) {
             final FileHandle f = Gdx.files.internal(preferredDir + "bg_splash.png");
             if (!f.exists()) {
@@ -167,9 +169,7 @@ public class FSkin {
             for (FSkinImage image : FSkinImage.values()) {
                 image.load(preferredDir, DEFAULT_DIR, textures, preferredIcons);
             }
-            for (FSkinTexture image : FSkinTexture.values()) {
-                image.load(preferredDir, DEFAULT_DIR);
-            }
+            FSkinTexture.BG_MATCH.load(preferredDir, DEFAULT_DIR);
 
             //assemble avatar textures
             int counter = 0;

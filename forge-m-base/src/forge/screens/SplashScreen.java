@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
 import forge.utils.ForgePreferences;
@@ -40,7 +41,7 @@ public class SplashScreen extends FContainer {
     protected void drawBackground(Graphics g) {
         if (background == null) { return; }
 
-        g.fillRect(FProgressBar.SEL_BACK_COLOR, 0, 0, getWidth(), getHeight());
+        g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
  
         float x, y, w, h;
         float backgroundRatio = background.getRegionWidth() / background.getRegionHeight();
