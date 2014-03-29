@@ -44,13 +44,16 @@ public class VStack extends FDropDown {
     @Override
     public void update() {
         if (stackSize != stack.size()) {
+            int oldStackSize = stackSize;
             stackSize = stack.size();
             getMenuTab().setText("Stack (" + stackSize + ")");
 
             if (stackSize > 0) {
                 if (!isVisible()) {
-                    show();
-                    return; //don't call super.update() since show handles this
+                    if (stackSize > oldStackSize) { //don't re-show stack if user hid it and then resolved an item on the stack
+                        show();
+                    }
+                    return; //don't call super.update() either way since show handles this
                 }
             }
             else {
