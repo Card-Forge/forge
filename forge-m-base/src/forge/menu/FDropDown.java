@@ -107,7 +107,7 @@ public abstract class FDropDown extends FScrollPane {
     protected void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.drawRect(1, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
+        g.drawRect(2, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
     }
 
     private class Backdrop extends FDisplayObject {

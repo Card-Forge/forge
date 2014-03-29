@@ -34,7 +34,10 @@ public class FMenuBar extends FContainer {
         float dx = (width - minWidth) / visibleTabCount;
         for (FMenuTab tab : tabs) {
             if (tab.isVisible()) {
-                tabWidth = (int)(tab.getMinWidth() + dx);
+                tabWidth = Math.round(tab.getMinWidth() + dx);
+                if (x + tabWidth > width) {
+                    tabWidth = Math.round(width - x); //prevent final tab extending off screen
+                }
                 tab.setBounds(x, 0, tabWidth, height);
                 x += tabWidth;
             }

@@ -68,13 +68,13 @@ public class FMenuTab extends FDisplayObject {
         if (dropDown.isVisible()) {
             x = paddingX; //round so lines show up reliably
             y = paddingY;
-            w = getWidth() - 2 * x;
-            h = getHeight() - y;
+            w = getWidth() - 2 * x + 1;
+            h = getHeight() - y + 1;
 
+            g.startClip(x, y, w, h);
             g.fillRect(SEL_BACK_COLOR, x, y, w, h);
-            g.drawLine(1, SEL_BORDER_COLOR, x, y, x + w, y);
-            g.drawLine(1, SEL_BORDER_COLOR, x, y, x, y + h);
-            g.drawLine(1, SEL_BORDER_COLOR, x + w, y, x + w, y + h);
+            g.drawRect(2, SEL_BORDER_COLOR, x, y, w, h);
+            g.endClip();
 
             foreColor = SEL_FORE_COLOR;
         }
