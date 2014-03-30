@@ -1069,6 +1069,17 @@ All variants can now be applied via the constructed match setup. While moving Co
 Two quest mode pets have had their power reduced to reflect their strength relative to the rest of the other pets. The white Wolf Pet now has Lifelink instead of Vigilance, and the blue Bird Pet now scries for 1 instead of loots for 1 on combat damage. This change is immediate, so make sure to download Quest Images to get the new pictures.
 
 
+- Card Images on Stack -
+Each spell/ability on the stack now displays the image for its source card.
+Stack now supports vertical scrolling if there are enough items on it.
+Text for stack descriptions now displays with skin font.
+
+
+- Layout fixes - 
+Fixed issue where field would disappear on match screen.
+Fixed issue where hand pane for player's you've MindSlaved wouldn't be removed after the effect ended.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
