@@ -118,6 +118,10 @@ public abstract class FDisplayObject {
         return false;
     }
 
+    public boolean flingStop(float x, float y) {
+        return false;
+    }
+
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         return false;
     }

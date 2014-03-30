@@ -17,6 +17,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean release(float x, float y);
     public abstract boolean tap(float x, float y, int count);
     public abstract boolean fling(float velocityX, float velocityY);
+    public abstract boolean flingStop(float x, float y);
     public abstract boolean pan(float x, float y, float deltaX, float deltaY);
     public abstract boolean panStop(float x, float y);
     public abstract boolean zoom(float initialDistance, float distance);
@@ -25,7 +26,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     private float tapSquareSize, pressDelay, longPressDelay, quickTapDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
     private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime;
     private int tapCount, lastTapButton, lastTapPointer;
-    private boolean inTapSquare, pressed, longPressed, longPressHandled, quickTapped, pinching, panning;
+    private boolean inTapSquare, pressed, longPressed, longPressHandled, quickTapped, pinching, panning, flinging;
 
     private final VelocityTracker tracker = new VelocityTracker();
     Vector2 pointer1 = new Vector2();
@@ -90,9 +91,18 @@ public abstract class FGestureAdapter extends InputAdapter {
     private boolean touchDown(float x, float y, int pointer, int button) {
         if (pointer > 1) { return false; }
 
+        boolean allowPress = !flinging; //don't allow handling press, release, or tap events for this touch if it was to stop a fling action
+
+        if (flinging) { //stop active fling action on next touch down
+            flinging = false;
+            flingStop(x, y);
+        }
+
         if (quickTapped) { //finish quick tap immediately if another touchDown event is received
             quickTapTask.cancel();
-            quickTapTask.run();
+            if (allowPress) {
+                quickTapTask.run();
+            }
         }
 
         if (pointer == 0) {
@@ -107,7 +117,7 @@ public abstract class FGestureAdapter extends InputAdapter {
                 initialPointer2.set(pointer2);
                 endPress(x, y);
             }
-            else {
+            else if (allowPress) {
                 // Normal touch down.
                 inTapSquare = true;
                 pinching = false;
@@ -229,20 +239,21 @@ public abstract class FGestureAdapter extends InputAdapter {
             return false;
         }
 
-        // handle no longer panning
-        boolean handled = false;
-        if (wasPanning && !panning) {
-            handled = panStop(x, y);
+        if (wasPanning) { // handle no longer panning
+            gestureStartTime = 0;
+            long time = Gdx.input.getCurrentEventTime();
+            if (time - tracker.lastTime < flingDelay) { // handle fling if needed
+                tracker.update(x, y, time);
+                if (fling(tracker.getVelocityX(), tracker.getVelocityY())) {
+                    flinging = true;
+                    return true;
+                }
+            }
+
+            return panStop(x, y);
         }
 
-        // handle fling
-        gestureStartTime = 0;
-        long time = Gdx.input.getCurrentEventTime();
-        if (time - tracker.lastTime < flingDelay) {
-            tracker.update(x, y, time);
-            handled = fling(tracker.getVelocityX(), tracker.getVelocityY()) || handled;
-        }
-        return handled;
+        return false;
     }
 
     private void startPress() {
@@ -315,14 +326,14 @@ public abstract class FGestureAdapter extends InputAdapter {
         public float getVelocityX() {
             float meanX = getAverage(this.meanX, numSamples);
             float meanTime = getAverage(this.meanTime, numSamples) / 1000000000.0f;
-            if (meanTime == 0) return 0;
+            if (meanTime == 0) { return 0; }
             return meanX / meanTime;
         }
 
         public float getVelocityY() {
             float meanY = getAverage(this.meanY, numSamples);
             float meanTime = getAverage(this.meanTime, numSamples) / 1000000000.0f;
-            if (meanTime == 0) return 0;
+            if (meanTime == 0) { return 0; }
             return meanY / meanTime;
         }
 

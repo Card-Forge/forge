@@ -16251,6 +16251,7 @@ forge-m-base/src/forge/utils/Evaluator.java -text
 forge-m-base/src/forge/utils/ForgePreferences.java -text
 forge-m-base/src/forge/utils/ForgeProfileProperties.java -text
 forge-m-base/src/forge/utils/IgnoringXStream.java -text
+forge-m-base/src/forge/utils/PhysicsObject.java -text
 forge-m-base/src/forge/utils/Preferences.java -text
 forge-m-base/src/forge/utils/PreferencesStore.java -text
 forge-m-base/src/forge/utils/Utils.java -text

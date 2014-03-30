@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -120,6 +121,8 @@ public class Forge implements ApplicationListener {
     }
 
     private static void setCurrentScreen(FScreen screen0) {
+        Animation.endAll(); //end all active animations before switching screens
+
         currentScreen = screen0;
         currentScreen.setSize(screenWidth, screenHeight);
         currentScreen.onActivate();
@@ -127,6 +130,8 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void render() {
+        Animation.advanceAll();
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
         FContainer screen = currentScreen;
@@ -188,6 +193,8 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
+            boolean result = super.touchDown(x, y, pointer, button); //let gesture adapter handle touchDown first before updating potential listeners
+
             potentialListeners.clear();
             if (currentScreen != null) { //base potential listeners on object containing touch down point
                 FOverlay overlay = FOverlay.getTopOverlay();
@@ -198,7 +205,8 @@ public class Forge implements ApplicationListener {
                     currentScreen.buildTouchListeners(x, y, potentialListeners);
                 }
             }
-            return super.touchDown(x, y, pointer, button);
+
+            return result;
         }
 
         @Override
@@ -252,6 +260,16 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
+        public boolean flingStop(float x, float y) {
+            for (FDisplayObject listener : potentialListeners) {
+                if (listener.flingStop(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
         public boolean pan(float x, float y, float deltaX, float deltaY) {
             for (FDisplayObject listener : potentialListeners) {
                 if (listener.pan(listener.screenToLocalX(x), listener.screenToLocalY(y), deltaX, deltaY)) {
@@ -290,6 +308,45 @@ public class Forge implements ApplicationListener {
             }
             return false;
         }
+    }
+
+    public static abstract class Animation {
+        private static final List<Animation> activeAnimations = new ArrayList<Animation>();
+
+        public void start() {
+            if (activeAnimations.contains(this)) { return; } //prevent starting the same animation multiple times
+
+            activeAnimations.add(this);
+            if (activeAnimations.size() == 1) { //if first animation being started, ensure continuous rendering turned on
+                Gdx.graphics.setContinuousRendering(true);
+            }
+        }
+
+        private static void advanceAll() {
+            if (activeAnimations.isEmpty()) { return; }
+
+            float dt = Gdx.graphics.getDeltaTime();
+            for (int i = 0; i < activeAnimations.size(); i++) {
+                if (!activeAnimations.get(i).advance(dt)) {
+                    activeAnimations.remove(i);
+                    i--;
+                }
+            }
+
+            if (activeAnimations.isEmpty()) { //when all animations have ended, turn continuous rendering back off
+                Gdx.graphics.setContinuousRendering(false);
+            }
+        }
+
+        private static void endAll() {
+            if (activeAnimations.isEmpty()) { return; }
+
+            activeAnimations.clear();
+            Gdx.graphics.setContinuousRendering(false);
+        }
+
+        //return true if animation should continue, false to stop the animation
+        protected abstract boolean advance(float dt);
     }
 
     public static class Graphics {

@@ -2,9 +2,13 @@ package forge.toolbox;
 
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge.Animation;
 import forge.Forge.Graphics;
+import forge.utils.PhysicsObject;
 
 public abstract class FScrollPane extends FContainer {
+    private static float FLING_DECEL = 750f;
+
     private float scrollLeft, scrollTop;
     private ScrollBounds scrollBounds;
 
@@ -81,7 +85,7 @@ public abstract class FScrollPane extends FContainer {
         setScrollPositions(scrollLeft + dx, scrollTop + dy);
     }
 
-    private void setScrollPositions(float scrollLeft0, float scrollTop0) {
+    private boolean setScrollPositions(float scrollLeft0, float scrollTop0) {
         if (scrollLeft0 < 0) {
             scrollLeft0 = 0;
         }
@@ -102,7 +106,7 @@ public abstract class FScrollPane extends FContainer {
         }
         float dx = scrollLeft - scrollLeft0;
         float dy = scrollTop - scrollTop0;
-        if (dx == 0 && dy == 0) { return; } //do nothing if scroll didn't change
+        if (dx == 0 && dy == 0) { return false; } //do nothing if scroll didn't change
 
         scrollLeft = scrollLeft0;
         scrollTop = scrollTop0;
@@ -111,6 +115,7 @@ public abstract class FScrollPane extends FContainer {
         for (FDisplayObject obj : getChildren()) {
             obj.setPosition(obj.getLeft() + dx, obj.getTop() + dy);
         }
+        return true;
     }
 
     @Override
@@ -168,8 +173,50 @@ public abstract class FScrollPane extends FContainer {
         }
     }
 
+    private FlingAnimation activeFlingAnimation;
+
+    private class FlingAnimation extends Animation {
+        private final PhysicsObject physicsObj;
+
+        private FlingAnimation(float velocityX, float velocityY) {
+            physicsObj = new PhysicsObject(new Vector2(scrollLeft, scrollTop), new Vector2(velocityX, velocityY));
+            physicsObj.setDecel(FLING_DECEL, FLING_DECEL);
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            physicsObj.advance(dt);
+            Vector2 pos = physicsObj.getPosition();
+            if (setScrollPositions(pos.x, pos.y) && physicsObj.isMoving()) {
+                return true;
+            }
+
+            //end fling animation if can't scroll anymore or physics object is no longer moving
+            activeFlingAnimation = null;
+            return false;
+        }
+    }
+
     @Override
     public boolean fling(float velocityX, float velocityY) {
+        velocityX = -velocityX; //reverse velocities to account for scroll moving in opposite direction
+        velocityY = -velocityY;
+
+        if (activeFlingAnimation == null) {
+            activeFlingAnimation = new FlingAnimation(velocityX, velocityY);
+            activeFlingAnimation.start();
+        }
+        else { //update existing animation with new velocity if needed
+            activeFlingAnimation.physicsObj.getVelocity().set(velocityX, velocityY);
+            activeFlingAnimation.physicsObj.setDecel(FLING_DECEL, FLING_DECEL);
+        }
+        return true;
+    }
+
+    public boolean flingStop(float x, float y) {
+        if (activeFlingAnimation != null) {
+            activeFlingAnimation.physicsObj.stop(); //stop fling animation if currently active
+        }
         return true;
     }
 
