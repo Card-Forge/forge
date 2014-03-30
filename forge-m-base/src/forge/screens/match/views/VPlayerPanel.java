@@ -129,7 +129,10 @@ public class VPlayerPanel extends FContainer {
             field.update();
         }
         else {
-            zoneTabs.get(zoneType).update();
+            InfoTab zoneTab = zoneTabs.get(zoneType);
+            if (zoneTab != null) { //TODO: Support Ante somehow
+                zoneTab.update();
+            }
         }
     }
 
