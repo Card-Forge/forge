@@ -311,11 +311,11 @@ public class AnimateEffect extends AnimateEffectBase {
         final Card host = sa.getHostCard();
         final Map<String, String> svars = host.getSVars();
 
-        int power = -1;
+        Integer power = null;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(host, sa.getParam("Power"), sa);
         }
-        int toughness = -1;
+        Integer toughness = null;
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
@@ -349,13 +349,23 @@ public class AnimateEffect extends AnimateEffectBase {
         for (final Card c : tgts) {
             sb.append(c).append(" ");
         }
-        sb.append("become");
-        if (tgts.size() == 1) {
-            sb.append("s ");
-        }
+
         // if power is -1, we'll assume it's not just setting toughness
-        if (power != -1) {
+        if (power != null && toughness != null) {
+            sb.append("become");
+            if (tgts.size() == 1) {
+                sb.append("s ");
+            }
             sb.append(" ").append(power).append("/").append(toughness);
+        } else if (power != null) {
+            sb.append("power becomes ").append(power);
+        } else if (toughness != null) {
+            sb.append("toughness becomes ").append(toughness);
+        } else{
+            sb.append("become");
+            if (tgts.size() == 1) {
+                sb.append("s ");
+            }
         }
 
         if (colors.size() > 0) {
