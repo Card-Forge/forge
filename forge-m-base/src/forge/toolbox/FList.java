@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
+import forge.screens.FScreen;
 import forge.utils.Utils;
 
 public class FList<E> extends FScrollPane {
@@ -107,6 +109,13 @@ public class FList<E> extends FScrollPane {
 
     public void setListItemRenderer(ListItemRenderer<E> renderer0) {
         renderer = renderer0;
+    }
+
+    @Override
+    protected void drawBackground(Graphics g) {
+        //support scrolling texture with list
+        g.drawImage(FSkinTexture.BG_TEXTURE, -getScrollLeft(), -getScrollTop(), getScrollWidth(), getScrollHeight());
+        g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, getWidth(), getHeight());
     }
 
     @Override
