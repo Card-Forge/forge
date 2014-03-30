@@ -1,8 +1,5 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.Texture;
 
 import forge.Forge.Graphics;
@@ -15,8 +12,6 @@ public class FCardPanel extends FDisplayObject {
     public static final float PADDING = 2; //scale to leave vertical space between
 
     private Card card;
-    private FCardPanel attachedToPanel;
-    private List<FCardPanel> attachedPanels = new ArrayList<FCardPanel>();
     private boolean tapped;
     private float tappedAngle = 0;
     private boolean highlighted;
@@ -40,20 +35,6 @@ public class FCardPanel extends FDisplayObject {
     }
     public void setHighlighted(boolean highlighted0) {
         highlighted = highlighted0;
-    }
-
-    public FCardPanel getAttachedToPanel() {
-        return attachedToPanel;
-    }
-    public void setAttachedToPanel(final FCardPanel attachedToPanel0) {
-        attachedToPanel = attachedToPanel0;
-    }
-
-    public List<FCardPanel> getAttachedPanels() {
-        return attachedPanels;
-    }
-    public void setAttachedPanels(final List<FCardPanel> attachedPanels0) {
-        attachedPanels = attachedPanels0;
     }
 
     public boolean isTapped() {

@@ -1,7 +1,9 @@
 package forge.screens.match.views;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.FThreads;
 import forge.game.card.Card;
@@ -12,9 +14,9 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
     private final List<Card> orderedCards = new ArrayList<Card>();
-    private final List<FCardPanel> cardPanels = new ArrayList<FCardPanel>();
+    private final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
 
-    public Iterable<FCardPanel> getCardPanels() {
+    public Iterable<CardAreaPanel> getCardPanels() {
         return cardPanels;
     }
 
@@ -28,9 +30,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         CardAreaPanel newCardPanel = null;
         for (Card card : model) {
-            CardAreaPanel panel = addCard(card);
+            CardAreaPanel cardPanel = add(CardAreaPanel.get(card));
+            cardPanel.displayArea = this;
+            cardPanels.add(cardPanel);
             if (newCardPanel == null && !orderedCards.contains(card)) {
-                newCardPanel = panel;
+                newCardPanel = cardPanel;
             }
         }
         revalidate();
@@ -40,22 +44,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         }
     }
 
-    protected CardAreaPanel addCard(final Card card) {
-        CardAreaPanel cardPanel = add(new CardAreaPanel(card));
-        cardPanels.add(cardPanel);
-        return cardPanel;
-    }
-
-    public final FCardPanel getCardPanel(final int gameCardID) {
-        for (final FCardPanel panel : cardPanels) {
-            if (panel.getCard().getUniqueNumber() == gameCardID) {
-                return panel;
-            }
-        }
-        return null;
-    }
-
-    public final void removeCardPanel(final FCardPanel fromPanel) {
+    public final void removeCardPanel(final CardAreaPanel fromPanel) {
         FThreads.assertExecutedByEdt(true);
         /*if (CardPanelContainer.this.getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
@@ -71,21 +60,19 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     @Override
     public void clear() {
         super.clear();
-        cardPanels.clear();
+        if (!cardPanels.isEmpty()) {
+            for (CardAreaPanel panel : cardPanels) {
+                panel.attachedPanels.clear();
+                panel.attachedToPanel = null;
+                panel.displayArea = null;
+            }
+            cardPanels.clear();
+        }
     }
 
-    protected void startLayout() {
-        orderedCards.clear();
-    }
-
-    protected final float layoutCardPanel(FCardPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
-        int count = addCards(cardPanel, x, y, cardWidth, cardHeight);
-        return cardWidth + (count - 1) * cardWidth * CARD_STACK_OFFSET;
-    }
-
-    private final int addCards(FCardPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
+    private final int addCards(CardAreaPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
         int count = 0;
-        List<FCardPanel> attachedPanels = cardPanel.getAttachedPanels();
+        List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
         if (!attachedPanels.isEmpty()) {
             for (int i = attachedPanels.size() - 1; i >= 0; i--) {
                 count += addCards(attachedPanels.get(i), x, y, cardWidth, cardHeight);
@@ -97,30 +84,71 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         return count + 1;
     }
 
+    protected float getCardWidth(float cardHeight) {
+        return (cardHeight - 2 * CardAreaPanel.PADDING) / CardAreaPanel.ASPECT_RATIO + 2 * CardAreaPanel.PADDING; //ensure aspect ratio maintained after padding applied
+    }
+
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        startLayout();
+        orderedCards.clear();
 
         float x = 0;
         float y = 0;
         float cardHeight = visibleHeight;
-        float cardWidth = ((cardHeight - 2 * FCardPanel.PADDING) / FCardPanel.ASPECT_RATIO) + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
+        float cardWidth = getCardWidth(cardHeight);
 
-        for (FCardPanel cardPanel : cardPanels) {
-            x += layoutCardPanel(cardPanel, x, y, cardWidth, cardHeight);
+        for (CardAreaPanel cardPanel : cardPanels) {
+            int count = addCards(cardPanel, x, y, cardWidth, cardHeight);
+            x += cardWidth + (count - 1) * cardWidth * CARD_STACK_OFFSET;
         }
 
         return new ScrollBounds(x, visibleHeight);
     }
 
-    protected class CardAreaPanel extends FCardPanel {
+    public static class CardAreaPanel extends FCardPanel {
+        private static final Map<Integer, CardAreaPanel> allCardPanels = new HashMap<Integer, CardAreaPanel>();
+
+        public static CardAreaPanel get(Card card0) {
+            CardAreaPanel cardPanel = allCardPanels.get(card0.getUniqueNumber());
+            if (cardPanel == null) {
+                cardPanel = new CardAreaPanel(card0);
+                allCardPanels.put(card0.getUniqueNumber(), cardPanel);
+            }
+            return cardPanel;
+        }
+
+        private VCardDisplayArea displayArea;
+        private CardAreaPanel attachedToPanel;
+        private final List<CardAreaPanel> attachedPanels = new ArrayList<CardAreaPanel>();
+
+        //use static get(card) function instead
         private CardAreaPanel(Card card0) {
             super(card0);
         }
 
+        public VCardDisplayArea getDisplayArea() {
+            return displayArea;
+        }
+
+        public void setDisplayArea(VCardDisplayArea displayArea0) {
+            displayArea = displayArea0;
+        }
+
+        public CardAreaPanel getAttachedToPanel() {
+            return attachedToPanel;
+        }
+        public void setAttachedToPanel(final CardAreaPanel attachedToPanel0) {
+            attachedToPanel = attachedToPanel0;
+        }
+        public List<CardAreaPanel> getAttachedPanels() {
+            return attachedPanels;
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
-            FControl.getInputProxy().selectCard(getCard(), new ArrayList<Card>(orderedCards)); //copy list to allow it being modified
+            if (displayArea != null) {
+                FControl.getInputProxy().selectCard(getCard(), new ArrayList<Card>(displayArea.orderedCards)); //copy list to allow it being modified
+            }
             return true;
         }
     }

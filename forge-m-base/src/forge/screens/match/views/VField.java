@@ -3,17 +3,22 @@ package forge.screens.match.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.FThreads;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.toolbox.FCardPanel;
+import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
+import forge.toolbox.FContainer;
 
-public class VField extends VZoneDisplay {
+public class VField extends FContainer {
+    private final Player player;
+    private final FieldRow row1, row2;
     private boolean flipped;
 
     public VField(Player player0) {
-        super(player0, ZoneType.Battlefield);
-        setVisible(true); //unlike other display areas, show by default
+        player = player0;
+        row1 = add(new FieldRow());
+        row2 = add(new FieldRow());
     }
 
     public boolean isFlipped() {
@@ -23,28 +28,96 @@ public class VField extends VZoneDisplay {
         flipped = flipped0;
     }
 
-    protected void refreshCardPanels(List<Card> model) {
-        super.refreshCardPanels(model);
-
-        for (final Card card : model) {
-            updateCard(card);
+    public Iterable<CardAreaPanel> getCardPanels() {
+        List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
+        for (CardAreaPanel cardPanel : row1.getCardPanels()) {
+            cardPanels.add(cardPanel);
         }
+        for (CardAreaPanel cardPanel : row2.getCardPanels()) {
+            cardPanels.add(cardPanel);
+        }
+        return cardPanels;
     }
 
-    @Override
-    protected CardAreaPanel addCard(final Card card) {
-        CardAreaPanel cardPanel = super.addCard(card);
-        //cardPanel.setVisible(false); //hide placeholder until card arrives //TODO: Uncomment when animation set up
-        return cardPanel;
+    public void update() {
+        FThreads.invokeInEdtNowOrLater(updateRoutine);
+    }
+
+    private final Runnable updateRoutine = new Runnable() {
+        @Override
+        public void run() {
+            clear();
+
+            List<Card> model = player.getZone(ZoneType.Battlefield).getCards();
+            for (Card card : model) {
+                updateCard(card);
+            }
+
+            List<Card> creatures = new ArrayList<Card>();
+            List<Card> lands = new ArrayList<Card>();
+            List<Card> otherPermanents = new ArrayList<Card>();
+
+            for (Card card : model) {
+                CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                if (cardPanel.getAttachedToPanel() == null) { //skip attached panels
+                    if (card.isCreature()) {
+                        if (!tryStackCard(card, creatures)) {
+                            creatures.add(card);
+                        }
+                    }
+                    else if (card.isLand()) {
+                        if (!tryStackCard(card, lands)) {
+                            lands.add(card);
+                        }
+                    }
+                    else {
+                        if (!tryStackCard(card, otherPermanents)) {
+                            otherPermanents.add(card);
+                        }
+                    }
+                }
+            }
+
+            if (creatures.isEmpty()) {
+                row1.refreshCardPanels(otherPermanents);
+                row2.refreshCardPanels(lands);
+            }
+            else {
+                row1.refreshCardPanels(creatures);
+                lands.addAll(otherPermanents);
+                row2.refreshCardPanels(lands);
+            }
+        }
+    };
+
+    private boolean tryStackCard(Card card, List<Card> cardsOfType) {
+        if (card.isEnchanted() || card.isEquipped()) {
+            return false; //can stack with enchanted or equipped card
+        }
+        if (card.isCreature() && !card.isToken()) {
+            return false; //don't stack non-token creatures
+        }
+        for (Card c : cardsOfType) {
+            if (!c.isEnchanted() && !c.isEquipped() &&
+                    card.getName().equals(c.getName()) &&
+                    card.getCounters().equals(card.getCounters())) {
+                CardAreaPanel cPanel = CardAreaPanel.get(c);
+                CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                cPanel.getAttachedPanels().add(cardPanel);
+                cardPanel.setAttachedToPanel(cPanel);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateCard(final Card card) {
-        final FCardPanel toPanel = getCardPanel(card.getUniqueNumber());
+        final CardAreaPanel toPanel = CardAreaPanel.get(card);
         if (toPanel == null) { return; }
 
         if (card.isTapped()) {
             toPanel.setTapped(true);
-            toPanel.setTappedAngle(FCardPanel.TAPPED_ANGLE);
+            toPanel.setTappedAngle(CardAreaPanel.TAPPED_ANGLE);
         }
         else {
             toPanel.setTapped(false);
@@ -55,7 +128,7 @@ public class VField extends VZoneDisplay {
         if (card.isEnchanted()) {
             final ArrayList<Card> enchants = card.getEnchantedBy();
             for (final Card e : enchants) {
-                final FCardPanel cardE = getCardPanel(e.getUniqueNumber());
+                final CardAreaPanel cardE = CardAreaPanel.get(e);
                 if (cardE != null) {
                     toPanel.getAttachedPanels().add(cardE);
                 }
@@ -65,7 +138,7 @@ public class VField extends VZoneDisplay {
         if (card.isEquipped()) {
             final ArrayList<Card> enchants = card.getEquippedBy();
             for (final Card e : enchants) {
-                final FCardPanel cardE = getCardPanel(e.getUniqueNumber());
+                final CardAreaPanel cardE = CardAreaPanel.get(e);
                 if (cardE != null) {
                     toPanel.getAttachedPanels().add(cardE);
                 }
@@ -75,7 +148,7 @@ public class VField extends VZoneDisplay {
         if (card.isFortified()) {
             final ArrayList<Card> fortifications = card.getFortifiedBy();
             for (final Card e : fortifications) {
-                final FCardPanel cardE = getCardPanel(e.getUniqueNumber());
+                final CardAreaPanel cardE = CardAreaPanel.get(e);
                 if (cardE != null) {
                     toPanel.getAttachedPanels().add(cardE);
                 }
@@ -83,13 +156,13 @@ public class VField extends VZoneDisplay {
         }
 
         if (card.isEnchantingCard()) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
+            toPanel.setAttachedToPanel(CardAreaPanel.get(card.getEnchantingCard()));
         }
         else if (card.isEquipping()) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
+            toPanel.setAttachedToPanel(CardAreaPanel.get(card.getEquipping().get(0)));
         }
         else if (card.isFortifying()) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().get(0).getUniqueNumber()));
+            toPanel.setAttachedToPanel(CardAreaPanel.get(card.getFortifying().get(0)));
         }
         else {
             toPanel.setAttachedToPanel(null);
@@ -99,46 +172,39 @@ public class VField extends VZoneDisplay {
     }
 
     @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        startLayout();
+    public void clear() {
+        row1.clear(); //clear rows instead of removing the rows
+        row2.clear();
+    }
 
-        List<FCardPanel> creatures = new ArrayList<FCardPanel>();
-        List<FCardPanel> lands = new ArrayList<FCardPanel>();
-        List<FCardPanel> otherPermanents = new ArrayList<FCardPanel>();
+    @Override
+    protected void doLayout(float width, float height) {
+        float cardSize = height / 2;
+        float y1, y2;
+        if (flipped) {
+            y1 = cardSize;
+            y2 = 0;
+        }
+        else {
+            y1 = 0;
+            y2 = cardSize;
+        }
+        row1.setBounds(0, y1, width, cardSize);
+        row2.setBounds(0, y2, width, cardSize);
+    }
 
-        for (FCardPanel cardPanel : getCardPanels()) {
-            if (cardPanel.getCard().isCreature()) {
-                creatures.add(cardPanel);
-            }
-            else if (cardPanel.getCard().isLand()) {
-                lands.add(cardPanel);
-            }
-            else {
-                otherPermanents.add(cardPanel);
-            }
+    private class FieldRow extends VCardDisplayArea {
+        private FieldRow() {
+            setVisible(true); //make visible by default unlike other display areas
         }
 
-        float cardSize = visibleHeight / 2;
-        float x = 0;
-        float y = flipped ? cardSize : 0;
-
-        for (FCardPanel cardPanel : creatures) {
-            x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
+        @Override
+        protected float getCardWidth(float cardHeight) {
+            return cardHeight; //allow cards room to tap
         }
 
-        ScrollBounds bounds = new ScrollBounds(x, visibleHeight);
-
-        x = 0;
-        y = flipped ? 0 : cardSize;
-
-        for (FCardPanel cardPanel : lands) {
-            x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
+        @Override
+        public void update() { //no logic needed
         }
-        for (FCardPanel cardPanel : otherPermanents) {
-            x += layoutCardPanel(cardPanel, x, y, cardSize, cardSize);
-        }
-        
-        bounds.increaseWidthTo(x); //increase scroll width if needed
-        return bounds;
     }
 }
