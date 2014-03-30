@@ -307,7 +307,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             int right = 1;
             final String rightString = this.getLifeAmount().substring(2);
             if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar("X"));
+                right = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getHostCard().getSVar("X"), sa);
             } else {
                 right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
