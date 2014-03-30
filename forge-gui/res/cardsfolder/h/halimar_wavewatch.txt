@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Merfolk Soldier
 PT:0/3
 K:Level up:2
-K:maxLevel:5
+SVar:maxLevel:5
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 0 | SetToughness$ 6 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-4 0/6
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Islandwalk | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 5+ 6/6 CARDNAME has Islandwalk
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL

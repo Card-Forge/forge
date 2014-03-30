@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Human Wizard
 PT:2/3
 K:Level up:1 U
-K:maxLevel:4
+SVar:maxLevel:4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | AddAbility$ CopyOnce | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2-3 2/4 CARDNAME gets U U,tap: Copy target instant or sorcery spell. You may choose new targets for the copy.
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 5 | AddAbility$ CopyTwice | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 2/5 CARDNAME gets U U,tap:Copy target instant or sorcery spell twice. You may choose new targets for the copies.
 SVar:CopyOnce:AB$CopySpellAbility | Cost$ U U T | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.

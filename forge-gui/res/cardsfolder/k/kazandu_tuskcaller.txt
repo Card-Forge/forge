@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Human Shaman
 PT:1/1
 K:Level up:1 G
-K:maxLevel:6
+SVar:maxLevel:6
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddAbility$ TokenLow | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2-5 1/1 {T}: Put a 3/3 green Elephant creature token onto the battlefield.
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddAbility$ TokenHigh | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 6+ 1/1 {T}: Put two 3/3 green Elephant creature tokens onto the battlefield.
 SVar:TokenLow:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Elephant creature token onto the battlefield.
