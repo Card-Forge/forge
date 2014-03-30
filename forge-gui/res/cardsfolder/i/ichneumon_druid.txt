@@ -4,7 +4,7 @@ Types:Creature Human Druid
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Instant | ValidActivatingPlayer$ Opponent | CheckSVar$ X | SVarCompare$ GT1 | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, CARDNAME deals 4 damage to him or her.
 SVar:TrigDmg:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 4
-SVar:X:Count$ThisTurnCast_Instant
+SVar:X:Count$ThisTurnCast_Instant.OppCtrl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichneumon_druid.jpg
 Oracle:Whenever an opponent casts an instant spell other than the first instant spell that player casts each turn, Ichneumon Druid deals 4 damage to him or her.
