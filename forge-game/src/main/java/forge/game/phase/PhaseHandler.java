@@ -759,12 +759,20 @@ public class PhaseHandler implements java.io.Serializable {
                 this.setPlayerTurn(nextPlayer);
             return getNextActivePlayer();
         }
-    
+
+        // TODO: This shouldn't filter by Time Vault, just in case Time Vault doesn't have it's normal ability.
         List<Card> vaults = CardLists.filter(nextPlayer.getCardsIn(ZoneType.Battlefield, "Time Vault"), Presets.TAPPED);
         if(!vaults.isEmpty()) {
-            final Card crd = vaults.get(0);
-            boolean untapTimeVault = nextPlayer.getController().chooseBinary(new SpellAbility.EmptySa(crd, nextPlayer), "Untap " + crd + "?", BinaryChoiceType.UntapTimeVault, false);
+            Card crd = vaults.get(0);
+            SpellAbility fakeSA = new SpellAbility.EmptySa(crd, nextPlayer);
+            boolean untapTimeVault = nextPlayer.getController().chooseBinary(fakeSA, "Skip a turn to untap a Time Vault?", BinaryChoiceType.UntapTimeVault, false);
             if (untapTimeVault) {
+                if (vaults.size() > 1) {
+                    Card c = nextPlayer.getController().chooseSingleEntityForEffect(vaults, fakeSA, "Which Time Vault do you want to Untap?");
+                    if (c != null)
+                        crd = c;
+                }
+                crd.untap();
                 if( null == extraTurn ) 
                     this.setPlayerTurn(nextPlayer);
                 return getNextActivePlayer();
