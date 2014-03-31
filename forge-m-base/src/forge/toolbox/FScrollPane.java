@@ -3,6 +3,7 @@ package forge.toolbox;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import forge.Forge.Animation;
 import forge.Forge.Graphics;
@@ -10,6 +11,7 @@ import forge.utils.PhysicsObject;
 
 public abstract class FScrollPane extends FContainer {
     private static float FLING_DECEL = 750f;
+    private static long FLING_STOP_DELAY = 500000000l; //half a second
 
     private float scrollLeft, scrollTop;
     private ScrollBounds scrollBounds;
@@ -176,6 +178,7 @@ public abstract class FScrollPane extends FContainer {
     }
 
     private FlingAnimation activeFlingAnimation;
+    private long lastFlingStopTime;
 
     private class FlingAnimation extends Animation {
         private final PhysicsObject physicsObj;
@@ -187,13 +190,16 @@ public abstract class FScrollPane extends FContainer {
 
         @Override
         protected boolean advance(float dt) {
-            physicsObj.advance(dt);
-            Vector2 pos = physicsObj.getPosition();
-            if (setScrollPositions(pos.x, pos.y) && physicsObj.isMoving()) {
-                return true;
+            if (physicsObj.isMoving()) { //avoid storing last fling stop time if scroll manually stopped
+                physicsObj.advance(dt);
+                Vector2 pos = physicsObj.getPosition();
+                if (setScrollPositions(pos.x, pos.y) && physicsObj.isMoving()) {
+                    return true;
+                }
+    
+                //end fling animation if can't scroll anymore or physics object is no longer moving
+                lastFlingStopTime = TimeUtils.nanoTime();
             }
-
-            //end fling animation if can't scroll anymore or physics object is no longer moving
             activeFlingAnimation = null;
             return false;
         }
@@ -222,6 +228,16 @@ public abstract class FScrollPane extends FContainer {
             activeFlingAnimation.physicsObj.stop();
             listeners.add(this);
             return;
+        }
+
+        //if fling ended just shortly before, still prevent touch events on child controls
+        //in case user tapped just to late to stop scrolling before scroll bounds reached
+        if (lastFlingStopTime > 0) {
+            if (TimeUtils.nanoTime() - lastFlingStopTime < FLING_STOP_DELAY) {
+                listeners.add(this);
+                return;
+            }
+            lastFlingStopTime = 0; //don't need to hold onto this after it has elapsed
         }
         super.buildTouchListeners(screenX, screenY, listeners);
     }
