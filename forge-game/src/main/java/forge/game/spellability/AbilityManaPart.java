@@ -593,7 +593,15 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         if (manaReplace.startsWith("Any")) {
             // Replace any type and amount
-            return manaReplace.split("->")[1];
+        	String replaced = manaReplace.split("->")[1];
+        	if (replaced.equals("Any")) {
+                byte rs = MagicColor.GREEN;
+                if (act != null) {
+                    rs = act.getController().chooseColor("Choose a color", sa, ColorSet.fromMask(MagicColor.ALL_COLORS));
+                }
+                replaced = MagicColor.toShortString(rs);
+        	}
+            return replaced;
         }
         final Pattern splitter = Pattern.compile("->");
         // Replace any type

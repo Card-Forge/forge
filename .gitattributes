@@ -5782,6 +5782,7 @@ forge-gui/res/cardsfolder/h/harsh_justice.txt -text
 forge-gui/res/cardsfolder/h/harsh_mercy.txt -text
 forge-gui/res/cardsfolder/h/haru_onna.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/harvest_gwyllion.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/harvest_mage.txt -text
 forge-gui/res/cardsfolder/h/harvest_pyre.txt -text
 forge-gui/res/cardsfolder/h/harvest_wurm.txt -text
 forge-gui/res/cardsfolder/h/harvester_druid.txt svneol=native#text/plain
