@@ -9596,6 +9596,7 @@ forge-gui/res/cardsfolder/q/quagmire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quagmire_druid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quagmire_lamprey.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quagnoth.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/q/quarum_trench_gnomes.txt -text
 forge-gui/res/cardsfolder/q/quash.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quenchable_fire.txt -text
 forge-gui/res/cardsfolder/q/quest_for_ancient_secrets.txt svneol=native#text/plain

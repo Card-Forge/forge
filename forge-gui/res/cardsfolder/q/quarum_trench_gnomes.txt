@@ -1,0 +1,11 @@
+Name:Quarum Trench Gnomes
+ManaCost:3 R
+Types:Creature Gnome
+PT:1/1
+A:AB$ Animate | Cost$ T | ValidTgts$ Plains | TgtPrompt$ Choose target plains | Replacements$ QuarumReplacement | sVars$ QuarumProduce | Permanent$ True | StackDescription$ If target {c:Targeted} is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.) | SpellDescription$ If target Plains is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.)
+SVar:QuarumReplacement:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Card.Plains+Self | ManaReplacement$ QuarumProduce | Description$ If CARDNAME is tapped for mana, it produces colorless mana instead of white mana.
+SVar:QuarumProduce:W->1
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quarum_trench_gnomes.jpg
+Oracle:{T}: If target Plains is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.)
