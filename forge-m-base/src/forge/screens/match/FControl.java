@@ -50,6 +50,7 @@ import forge.screens.match.events.UiEventBlockerAssigned;
 import forge.screens.match.input.InputProxy;
 import forge.screens.match.input.InputQueue;
 import forge.screens.match.views.VAssignDamage;
+import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
@@ -99,6 +100,8 @@ public class FControl {
     }
 
     public static void startGame(final Match match) {
+        CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
+
         game = match.createGame();
 
         /*if (game.getRules().getGameType() == GameType.Quest) {

@@ -117,6 +117,15 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             return cardPanel;
         }
 
+        public static void resetForNewGame() {
+            for (CardAreaPanel cardPanel : allCardPanels.values()) {
+                cardPanel.displayArea = null;
+                cardPanel.attachedToPanel = null;
+                cardPanel.attachedPanels.clear();
+            }
+            allCardPanels.clear();
+        }
+
         private VCardDisplayArea displayArea;
         private CardAreaPanel attachedToPanel;
         private final List<CardAreaPanel> attachedPanels = new ArrayList<CardAreaPanel>();
