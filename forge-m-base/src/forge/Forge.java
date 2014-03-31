@@ -193,8 +193,6 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
-            boolean result = super.touchDown(x, y, pointer, button); //let gesture adapter handle touchDown first before updating potential listeners
-
             potentialListeners.clear();
             if (currentScreen != null) { //base potential listeners on object containing touch down point
                 FOverlay overlay = FOverlay.getTopOverlay();
@@ -205,8 +203,7 @@ public class Forge implements ApplicationListener {
                     currentScreen.buildTouchListeners(x, y, potentialListeners);
                 }
             }
-
-            return result;
+            return super.touchDown(x, y, pointer, button);
         }
 
         @Override
@@ -253,16 +250,6 @@ public class Forge implements ApplicationListener {
         public boolean fling(float velocityX, float velocityY) {
             for (FDisplayObject listener : potentialListeners) {
                 if (listener.fling(velocityX, velocityY)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public boolean flingStop(float x, float y) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.flingStop(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
                     return true;
                 }
             }

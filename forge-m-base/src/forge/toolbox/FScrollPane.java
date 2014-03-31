@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Animation;
@@ -213,21 +215,20 @@ public abstract class FScrollPane extends FContainer {
         return true;
     }
 
-    public boolean flingStop(float x, float y) {
+    @Override
+    public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
+        //if fling animation active, stop it and prevent child controls handling touch events before next touch down
         if (activeFlingAnimation != null) {
-            activeFlingAnimation.physicsObj.stop(); //stop fling animation if currently active
+            activeFlingAnimation.physicsObj.stop();
+            listeners.add(this);
+            return;
         }
-        return true;
+        super.buildTouchListeners(screenX, screenY, listeners);
     }
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         setScrollPositions(scrollLeft - deltaX, scrollTop - deltaY);
-        return true;
-    }
-
-    @Override
-    public boolean panStop(float x, float y) {
         return true;
     }
 
