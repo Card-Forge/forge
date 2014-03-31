@@ -30,8 +30,8 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         CardAreaPanel newCardPanel = null;
         for (Card card : model) {
-            CardAreaPanel cardPanel = add(CardAreaPanel.get(card));
-            cardPanel.displayArea = this;
+            CardAreaPanel cardPanel = CardAreaPanel.get(card);
+            addCardPanelToDisplayArea(cardPanel);
             cardPanels.add(cardPanel);
             if (newCardPanel == null && !orderedCards.contains(card)) {
                 newCardPanel = cardPanel;
@@ -42,6 +42,18 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         if (newCardPanel != null) { //if new cards added, ensure first new card is scrolled into view
             scrollIntoView(newCardPanel);
         }
+    }
+
+    //support adding card panel and attached panels to display area recursively
+    private void addCardPanelToDisplayArea(CardAreaPanel cardPanel) {
+        List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
+        if (!attachedPanels.isEmpty()) {
+            for (int i = attachedPanels.size() - 1; i >= 0; i--) {
+                addCardPanelToDisplayArea(attachedPanels.get(i));
+            }
+        }
+        cardPanel.displayArea = this;
+        add(cardPanel);
     }
 
     public final void removeCardPanel(final CardAreaPanel fromPanel) {
@@ -71,17 +83,18 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     }
 
     private final int addCards(CardAreaPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
-        int count = 0;
+        int totalCount = 0;
         List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
         if (!attachedPanels.isEmpty()) {
             for (int i = attachedPanels.size() - 1; i >= 0; i--) {
-                count += addCards(attachedPanels.get(i), x, y, cardWidth, cardHeight);
+                int count = addCards(attachedPanels.get(i), x, y, cardWidth, cardHeight);
                 x += count * cardWidth * CARD_STACK_OFFSET;
+                totalCount += count;
             }
         }
         orderedCards.add(cardPanel.getCard());
         cardPanel.setBounds(x, y, cardWidth, cardHeight);
-        return count + 1;
+        return totalCount + 1;
     }
 
     protected float getCardWidth(float cardHeight) {
