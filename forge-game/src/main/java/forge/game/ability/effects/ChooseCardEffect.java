@@ -77,7 +77,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                 }
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (sa.hasParam("AtRandom")) {
+                if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     chosen = Aggregates.random(choices, validAmount);
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
