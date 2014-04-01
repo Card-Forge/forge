@@ -20,13 +20,17 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import forge.ai.ability.AnimateAi;
 import forge.game.GameEntity;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -82,7 +86,23 @@ public class AiAttackController {
         this.oppList = Lists.newArrayList();
         this.oppList.addAll(this.defendingOpponent.getCreaturesInPlay());
         this.myList = ai.getCreaturesInPlay();
-        
+        Predicate<Card> canAnimate = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return !c.isCreature() && !c.isPlaneswalker();
+            }
+        };
+        for (Card c : CardLists.filter(this.defendingOpponent.getCardsIn(ZoneType.Battlefield), canAnimate)) {
+            for (SpellAbility sa : c.getSpellAbilities()) {
+                if (sa.getApi() == ApiType.Animate) {
+                    if (ComputerUtilCost.canPayCost(sa, this.defendingOpponent)) {
+                        Card animatedCopy = CardFactory.getCard(c.getPaperCard(), this.defendingOpponent);
+                        AnimateAi.becomeAnimated(animatedCopy, sa);
+                        this.oppList.add(animatedCopy);
+                    }
+                }
+            }
+        }
 
         this.attackers = new ArrayList<Card>();
         for (Card c : myList) {
