@@ -11,6 +11,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.utils.Utils;
 
 public class FList<E> extends FScrollPane {
@@ -143,9 +144,9 @@ public class FList<E> extends FScrollPane {
                 header = null;
             }
             else {
-                header = add(new FLabel.ButtonBuilder().text(name0).command(new Runnable() {
+                header = add(new FLabel.ButtonBuilder().text(name0).command(new FEventHandler() {
                     @Override
-                    public void run() {
+                    public void handleEvent(FEvent e) {
                         isCollapsed = !isCollapsed;
                         FList.this.revalidate();
                     }

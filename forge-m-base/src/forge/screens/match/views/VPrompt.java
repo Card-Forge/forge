@@ -12,6 +12,7 @@ import forge.game.Game;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.utils.Utils;
 
 public class VPrompt extends FContainer {
@@ -26,7 +27,7 @@ public class VPrompt extends FContainer {
     private final FButton btnOk, btnCancel;
     private String message;
 
-    public VPrompt(String okText, String cancelText, Runnable okCommand, Runnable cancelCommand) {
+    public VPrompt(String okText, String cancelText, FEventHandler okCommand, FEventHandler cancelCommand) {
         btnOk = add(new FButton(okText, okCommand));
         btnCancel = add(new FButton(cancelText, cancelCommand));
         btnOk.setSize(BTN_WIDTH, HEIGHT);

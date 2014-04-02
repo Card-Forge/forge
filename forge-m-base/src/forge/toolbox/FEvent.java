@@ -2,24 +2,25 @@ package forge.toolbox;
 
 public class FEvent {
     public enum FEventType {
-        TAP
+        TAP,
+        CHANGE
     }
 
-    private FDisplayObject owner;
+    private FDisplayObject source;
     private FEventType type;
     private Object args;
 
-    public FEvent(FDisplayObject owner0, FEventType type0) {
-        this(owner0, type0, null);
+    public FEvent(FDisplayObject source0, FEventType type0) {
+        this(source0, type0, null);
     }
-    public FEvent(FDisplayObject owner0, FEventType type0, Object args0) {
-        owner = owner0;
+    public FEvent(FDisplayObject source0, FEventType type0, Object args0) {
+        source = source0;
         type = type0;
         args = args0;
     }
 
-    public FDisplayObject getOwner() {
-        return owner;
+    public FDisplayObject getSource() {
+        return source;
     }
 
     public FEventType getType() {

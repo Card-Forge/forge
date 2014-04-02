@@ -9,6 +9,8 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 
 public class FLabel extends FDisplayObject {
     public static class Builder {
@@ -29,7 +31,7 @@ public class FLabel extends FDisplayObject {
         private FImage bldIcon;
         private FSkinColor bldTextColor = DEFAULT_TEXT_COLOR;
         private FSkinColor bldPressedColor;
-        private Runnable bldCommand;
+        private FEventHandler bldCommand;
 
         public FLabel build() { return new FLabel(this); }
 
@@ -44,7 +46,7 @@ public class FLabel extends FDisplayObject {
         public Builder selectable() { selectable(true); return this; }
         public Builder selected(final boolean b0) { this.bldSelected = b0; return this; }
         public Builder selected() { selected(true); return this; }
-        public Builder command(final Runnable c0) { this.bldCommand = c0; return this; }
+        public Builder command(final FEventHandler c0) { this.bldCommand = c0; return this; }
         public Builder fontSize(final int i0) { this.bldFontSize = i0; return this; }
         public Builder enabled(final boolean b0) { this.bldEnabled = b0; return this; }
         public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
@@ -80,7 +82,7 @@ public class FLabel extends FDisplayObject {
     private String text;
     private FImage icon;
     private FSkinColor textColor, pressedColor;
-    private Runnable command;
+    private FEventHandler command;
 
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
@@ -133,7 +135,7 @@ public class FLabel extends FDisplayObject {
         icon = icon0;
     }
 
-    public void setCommand(final Runnable command0) {
+    public void setCommand(final FEventHandler command0) {
         command = command0;
     }
 
@@ -163,7 +165,7 @@ public class FLabel extends FDisplayObject {
             handled = true;
         }
         if (command != null) {
-            command.run();
+            command.handleEvent(new FEvent(this, FEventType.TAP));
             handled = true;
         }
         return handled;

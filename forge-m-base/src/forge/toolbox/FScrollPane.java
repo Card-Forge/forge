@@ -16,7 +16,7 @@ public abstract class FScrollPane extends FContainer {
     private float scrollLeft, scrollTop;
     private ScrollBounds scrollBounds;
 
-    protected FScrollPane() {
+    public FScrollPane() {
         scrollBounds = new ScrollBounds();
     }
 

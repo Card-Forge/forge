@@ -10,6 +10,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 
 public class FButton extends FDisplayObject {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
@@ -20,8 +22,8 @@ public class FButton extends FDisplayObject {
     private String text;
     private FSkinFont font;
     private boolean toggled = false;
-    private Runnable command;
-    
+    private FEventHandler command;
+
     public enum Corner {
         None,
         BottomLeft,
@@ -40,7 +42,7 @@ public class FButton extends FDisplayObject {
         this(text0, null);
     }
 
-    public FButton(final String text0, Runnable command0) {
+    public FButton(final String text0, FEventHandler command0) {
         text = text0;
         command = command0;
         font = FSkinFont.get(14);
@@ -113,7 +115,7 @@ public class FButton extends FDisplayObject {
         corner = corner0;
     }
 
-    public void setCommand(Runnable command0) {
+    public void setCommand(FEventHandler command0) {
         command = command0;
     }
 
@@ -136,7 +138,7 @@ public class FButton extends FDisplayObject {
     @Override
     public final boolean tap(float x, float y, int count) {
         if (count == 1 && command != null) {
-            command.run();
+            command.handleEvent(new FEvent(this, FEventType.TAP));
         }
         return true;
     }

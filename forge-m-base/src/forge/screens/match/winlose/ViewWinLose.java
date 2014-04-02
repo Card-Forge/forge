@@ -15,6 +15,8 @@ import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
@@ -81,9 +83,9 @@ public class ViewWinLose extends FOverlay {
         txtLog = add(new FTextArea(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")));
         txtLog.setFontSize(14);
 
-        btnCopyLog = add(new FLabel.ButtonBuilder().text("Copy to clipboard").command(new Runnable() {
+        btnCopyLog = add(new FLabel.ButtonBuilder().text("Copy to clipboard").command(new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.getClipboard().setContents(txtLog.getText());
             }
         }).build());

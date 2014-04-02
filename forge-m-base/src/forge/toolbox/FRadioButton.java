@@ -1,24 +1,60 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 
 public class FRadioButton extends FLabel {
-    private static final FSkinColor CHECK_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor BOX_COLOR = CHECK_COLOR.alphaColor(0.5f);
+    private static final FSkinColor INNER_CIRCLE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor OUTER_CIRCLE_COLOR = INNER_CIRCLE_COLOR.alphaColor(0.5f);
+    
+    private RadioButtonGroup group;
 
     public FRadioButton() {
-        this("");
+        this("", false);
     }
     public FRadioButton(String text0) {
-        super(new Builder().align(HAlignment.LEFT).selectable());
-        this.setIcon(new CheckBoxIcon());
+        this(text0, false);
+    }
+    public FRadioButton(String text0, boolean selected0) {
+        super(new Builder().align(HAlignment.LEFT).selectable().selected(selected0));
+        setIcon(new RadioButtonIcon());
+    }
+    
+    public RadioButtonGroup getGroup() {
+        return group;
+    }
+    public void setGroup(RadioButtonGroup group0) {
+        if (group != null) {
+            group.buttons.remove(this);
+        }
+        group = group0;
+        if (group != null) {
+            group.buttons.add(this);
+        }
     }
 
-    private class CheckBoxIcon implements FImage {
+    @Override
+    public void setSelected(final boolean b0) {
+        if (isSelected() == b0) { return; }
+
+        if (b0 && group != null) { //if selecting and in group, unselect all other radio buttons in group
+            for (FRadioButton button : group.buttons) {
+                if (button != this) {
+                    button.setSelected(false);
+                }
+            }
+        }
+        super.setSelected(b0);
+    }
+
+    private class RadioButtonIcon implements FImage {
         @Override
         public float getWidth() {
             return FRadioButton.this.getHeight();
@@ -31,16 +67,17 @@ public class FRadioButton extends FLabel {
 
         @Override
         public void draw(Graphics g, float x, float y, float w, float h) {
-            g.drawRect(1, BOX_COLOR, x, y, w, h);
+            float radius = h / 5;
+            x += w - radius;
+            y = h / 2;
+            g.drawCircle(1, OUTER_CIRCLE_COLOR, x, y, radius);
             if (isSelected()) {
-                //draw check mark
-                x += 3;
-                y++;
-                w -= 6;
-                h -= 3;
-                g.drawLine(2, CHECK_COLOR, x, y + h / 2, x + w / 2, y + h);
-                g.drawLine(2, CHECK_COLOR, x + w / 2, y + h, x + w, y);
+                g.fillCircle(INNER_CIRCLE_COLOR, x, y, radius / 2);
             }
         }
+    }
+
+    public static class RadioButtonGroup {
+        private final List<FRadioButton> buttons = new ArrayList<FRadioButton>();
     }
 }

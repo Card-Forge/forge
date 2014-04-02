@@ -223,6 +223,7 @@ forge-core/src/main/java/forge/util/ItemPool.java -text
 forge-core/src/main/java/forge/util/ItemPoolSorter.java -text
 forge-core/src/main/java/forge/util/Lang.java -text
 forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
+forge-core/src/main/java/forge/util/NameGenerator.java -text
 forge-core/src/main/java/forge/util/PredicateString.java -text
 forge-core/src/main/java/forge/util/ReflectionUtil.java -text
 forge-core/src/main/java/forge/util/TextUtil.java -text
@@ -15999,7 +16000,6 @@ forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
-forge-gui/src/main/java/forge/util/NameGenerator.java -text
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
@@ -16130,6 +16130,7 @@ forge-m-base/src/forge/assets/FSkinFont.java -text
 forge-m-base/src/forge/assets/FSkinImage.java -text
 forge-m-base/src/forge/assets/FSkinTexture.java -text
 forge-m-base/src/forge/assets/FTextureImage.java -text
+forge-m-base/src/forge/assets/FTextureRegionImage.java -text
 forge-m-base/src/forge/assets/ImageCache.java -text
 forge-m-base/src/forge/assets/ImageLoader.java -text
 forge-m-base/src/forge/deck/io/OldDeckParser.java -text

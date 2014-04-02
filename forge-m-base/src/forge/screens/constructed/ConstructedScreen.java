@@ -1,28 +1,26 @@
 package forge.screens.constructed;
 
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-
 import org.apache.commons.lang3.StringUtils;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.base.Predicate;
 
 import forge.assets.FSkin;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
@@ -34,24 +32,29 @@ import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FRadioButton;
+import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.MyRandom;
+import forge.util.NameGenerator;
 import forge.utils.ForgePreferences;
 import forge.utils.ForgePreferences.FPref;
 import forge.utils.Utils;
 
 public class ConstructedScreen extends LaunchScreen {
+    private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.8f);
     private static final ForgePreferences prefs = FModel.getPreferences();
 
     private static final int MAX_PLAYERS = 8;
 
     // General variables
     private int activePlayersNum = 2;
-    private int playerWithFocus = 0; // index of the player that currently has focus
-    private PlayerPanel playerPanelWithFocus;
+    private int lastArchenemy = 0;
     private GameType currentGameMode = GameType.Constructed;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
     private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
@@ -67,6 +70,13 @@ public class ConstructedScreen extends LaunchScreen {
             "Archenemy (Classic - One player is the Archenemy)", "Supervillan Rumble (All players are Archenemies)"});
 
     private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
+    private final FScrollPane playersScroll = new FScrollPane() {
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            //TODO
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+    };
 
     private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
     private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
@@ -80,6 +90,124 @@ public class ConstructedScreen extends LaunchScreen {
 
     public ConstructedScreen() {
         super("Constructed");
+        
+        /*lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
+        ////////////////////////////////////////////////////////
+        //////////////////// Variants Panel ////////////////////
+
+        // Populate and add variants panel
+        vntVanguard.addItemListener(iListenerVariants);
+        vntCommander.addItemListener(iListenerVariants);
+        vntPlanechase.addItemListener(iListenerVariants);
+        vntArchenemy.addItemListener(iListenerVariants);
+        comboArchenemy.setSelectedIndex(0);
+        comboArchenemy.setEnabled(vntArchenemy.isSelected());
+        comboArchenemy.addActionListener(aeComboListener);
+
+        variantsPanel.setOpaque(false);
+        variantsPanel.add(newLabel("Variants:"));
+        variantsPanel.add(vntVanguard);
+        variantsPanel.add(vntCommander);
+        variantsPanel.add(vntPlanechase);
+        variantsPanel.add(vntArchenemy);
+        comboArchenemy.addTo(variantsPanel);
+
+        constructedFrame.add(new FScrollPane(variantsPanel, false, true,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
+                "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");*/
+
+        ////////////////////////////////////////////////////////
+        ///////////////////// Player Panel /////////////////////
+
+        // Construct individual player panels
+        String constraints = "pushx, growx, wrap, hidemode 3";
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            teams.add(i+1);
+            archenemyTeams.add(i == 0 ? 1 : 2);
+
+            PlayerPanel player = new PlayerPanel(i);
+            playerPanels.add(player);
+
+            // Populate players panel
+            player.setVisible(i < activePlayersNum);
+
+            playersScroll.add(player);
+
+            if (i == 0) {
+                constraints += ", gaptop 5px";
+            }
+        }
+        
+        add(playersScroll);
+
+        addPlayerBtn.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                addPlayer();
+            }
+        });
+        add(addPlayerBtn);
+    }
+    
+    private void addPlayer() {
+        if (activePlayersNum >= MAX_PLAYERS) {
+            return;
+        }
+
+        int freeIndex = -1;
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            if (!playerPanels.get(i).isVisible()) {
+                freeIndex = i;
+                break;
+            }
+        }
+
+        playerPanels.get(freeIndex).setVisible(true);
+
+        activePlayersNum++;
+        addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
+
+        playerPanels.get(freeIndex).setVisible(true);
+    }
+
+    private void removePlayer(int playerIndex) {
+        activePlayersNum--;
+        PlayerPanel player = playerPanels.get(playerIndex);
+        player.setVisible(false);
+        addPlayerBtn.setEnabled(true);
+
+        //find closest player still in game and give focus
+        int min = MAX_PLAYERS;
+        int closest = 2;
+
+        for (int participantIndex : getParticipants()) {
+            final int diff = Math.abs(playerIndex - participantIndex);
+
+            if (diff < min) {
+                min = diff;
+                closest = participantIndex;
+            }
+        }
+    }
+
+    public boolean isPlayerAI(int playernum) {
+        return playerPanels.get(playernum).getPlayerType() == PlayerType.COMPUTER;
+    }
+
+    public int getNumPlayers() {
+        return activePlayersNum;
+    }
+
+    public final List<Integer> getParticipants() {
+        final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
+        for (final PlayerPanel panel : playerPanels) {
+            if (panel.isVisible()) {
+                participants.add(playerPanels.indexOf(panel));
+            }
+        }
+        return participants;
     }
 
     @Override
@@ -109,7 +237,7 @@ public class ConstructedScreen extends LaunchScreen {
     }
 
     private class PlayerPanel extends FContainer {
-        /*private final int index;
+        private final int index;
 
         private final FLabel nameRandomiser;
         private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).iconInBackground(true).build();
@@ -124,8 +252,6 @@ public class ConstructedScreen extends LaunchScreen {
 
         private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
         private final FLabel deckLabel = newLabel("Deck:");
-
-        private final String variantBtnConstraints = "height 30px, hidemode 3";
 
         private boolean playerIsArchenemy = false;
         private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a scheme deck").build();
@@ -143,9 +269,9 @@ public class ConstructedScreen extends LaunchScreen {
         private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
         private final FLabel vgdLabel = newLabel("Vanguard:");
 
-        public PlayerPanel(final int index) {
+        public PlayerPanel(final int index0) {
             super();
-            index = index;
+            index = index0;
             playerIsArchenemy = index == 0;
 
             // Add a button to players 3+ to remove them from the setup
@@ -165,65 +291,52 @@ public class ConstructedScreen extends LaunchScreen {
             add(nameRandomiser);
 
             createPlayerTypeOptions();
-            add(radioHuman, "gapright 5px");
-            add(radioAi, "wrap");
+            add(radioHuman);
+            add(radioAi);
 
-            add(newLabel("Team:"), "w 40px, h 30px");
+            add(newLabel("Team:"));
             populateTeamsComboBoxes();
-            teamComboBox.addActionListener(teamListener);
-            aeTeamComboBox.addActionListener(teamListener);
-            teamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
-            aeTeamComboBox.addTo(this, variantBtnConstraints + ", pushx, growx, gaptop 5px");
+            teamComboBox.setChangedHandler(teamChangedHandler);
+            aeTeamComboBox.setChangedHandler(teamChangedHandler);
+            add(teamComboBox);
+            add(aeTeamComboBox);
 
-            add(deckLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
-            add(deckBtn, variantBtnConstraints + ", cell 2 2, pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+            add(deckLabel);
+            add(deckBtn);
 
             addHandlersDeckSelector();
 
-            add(cmdLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
-            add(cmdDeckSelectorBtn, variantBtnConstraints + ", cell 2 3, growx, pushx");
-            add(cmdDeckEditor, variantBtnConstraints + ", cell 3 3, sx 3, growx, wrap");
+            add(cmdLabel);
+            add(cmdDeckSelectorBtn);
+            add(cmdDeckEditor);
 
-            add(scmLabel, variantBtnConstraints + ", cell 0 4, sx 2, ax right");
-            add(scmDeckSelectorBtn, variantBtnConstraints + ", cell 2 4, growx, pushx");
-            add(scmDeckEditor, variantBtnConstraints + ", cell 3 4, sx 3, growx, wrap");
+            add(scmLabel);
+            add(scmDeckSelectorBtn);
+            add(scmDeckEditor);
 
-            add(pchLabel, variantBtnConstraints + ", cell 0 5, sx 2, ax right");
-            add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 5, growx, pushx");
-            add(pchDeckEditor, variantBtnConstraints + ", cell 3 5, sx 3, growx, wrap");
+            add(pchLabel);
+            add(pchDeckSelectorBtn);
+            add(pchDeckEditor);
 
-            add(vgdLabel, variantBtnConstraints + ", cell 0 6, sx 2, ax right");
-            add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 6, sx 4, growx, wrap");
+            add(vgdLabel);
+            add(vgdSelectorBtn);
 
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
+        }
 
-            addMouseListener(new FMouseAdapter() {
-                @Override
-                public void onLeftMouseDown(MouseEvent e) {
-                    avatarLabel.requestFocusInWindow();
-                }
-            });
-        }*/
-
-        /*private final FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
+        private final FEventHandler radioMouseAdapter = new FEventHandler() {
             @Override
-            public void onLeftClick(MouseEvent e) {
-                avatarLabel.requestFocusInWindow();
+            public void handleEvent(FEvent e) {
                 updateVanguardList(index);
             }
         };
 
         //Listens to name text fields and gives the appropriate player focus.
         //Also saves the name preference when leaving player one's text field. */
-        /*private FocusAdapter nameFocusListener = new FocusAdapter() {
+        private FEventHandler nameChangedHandler = new FEventHandler() {
             @Override
-            public void focusGained(FocusEvent e) {
-                changePlayerFocus(index);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
+            public void handleEvent(FEvent e) {
                 final Object source = e.getSource();
                 if (source instanceof FTextField) { // the text box
                     FTextField nField = (FTextField)source;
@@ -237,52 +350,34 @@ public class ConstructedScreen extends LaunchScreen {
             }
         };
 
-        // Listens to avatar buttons and gives the appropriate player focus.
-        private FocusAdapter avatarFocusListener = new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                changePlayerFocus(index);
-            }
-        };*/
-
         @Override
         protected void doLayout(float width, float height) {
             // TODO Auto-generated method stub
             
         }
 
-        /*private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
+        private FEventHandler avatarCommand = new FEventHandler() {
             @Override
-            public void onLeftClick(MouseEvent e) {
-                final FLabel avatar = (FLabel)e.getSource();
+            public void handleEvent(FEvent e) {
+                setRandomAvatar();
 
-                changePlayerFocus(index);
-                avatar.requestFocusInWindow();
+                //TODO: Support selecting avatar with option at top or bottom to select a random avatar
+                
+                /*final FLabel avatar = (FLabel)e.getSource();
 
                 final AvatarSelector aSel = new AvatarSelector(getPlayerName(), avatarIndex, getUsedAvatars());
                 for (final FLabel lbl : aSel.getSelectables()) {
-                    lbl.setCommand(new UiCommand() {
+                    lbl.setCommand(new FEventHandler() {
                         @Override
-                        public void run() {
+                        public void handleEvent(FEvent e) {
                             setAvatar(Integer.valueOf(lbl.getName().substring(11)));
                             aSel.setVisible(false);
                         }
                     });
                 }
-
+                
                 aSel.setVisible(true);
-                aSel.dispose();
-
-                if (index < 2) {
-                    updateAvatarPrefs();
-                }
-            }
-            @Override
-            public void onRightClick(MouseEvent e) {
-                changePlayerFocus(index);
-                avatarLabel.requestFocusInWindow();
-
-                setRandomAvatar();
+                aSel.dispose();*/
 
                 if (index < 2) {
                     updateAvatarPrefs();
@@ -341,12 +436,10 @@ public class ConstructedScreen extends LaunchScreen {
             teamComboBox.setEnabled(true);
         }
 
-        private ActionListener teamListener = new ActionListener() {
-            @SuppressWarnings("unchecked")
+        private FEventHandler teamChangedHandler = new FEventHandler() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void handleEvent(FEvent e) {
                 FComboBox<Object> cb = (FComboBox<Object>)e.getSource();
-                cb.requestFocusInWindow();
                 Object selection = cb.getSelectedItem();
 
                 if (null == selection) {
@@ -363,41 +456,36 @@ public class ConstructedScreen extends LaunchScreen {
                             pp.toggleIsPlayerArchenemy();
                         }
                     }
-                } else {
+                }
+                else {
                     Integer sel = (Integer) selection;
                     teams.set(index, sel);
                 }
-
-                changePlayerFocus(index);
             }
         };
 
         public void toggleIsPlayerArchenemy() {
             if (appliedVariants.contains(GameType.Archenemy)) {
                 playerIsArchenemy = lastArchenemy == index;
-            } else {
+            }
+            else {
                 playerIsArchenemy = appliedVariants.contains(GameType.ArchenemyRumble);
             }
             updateVariantControlsVisibility();
         }
 
-        *//**
-         * @param index
-         *//*
         private void addHandlersToVariantsControls() {
             // Archenemy buttons
-            scmDeckSelectorBtn.setCommand(new Runnable() {
+            scmDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
-                    scmDeckSelectorBtn.requestFocusInWindow();
-                    changePlayerFocus(index, currentGameMode);
                 }
             });
 
-            scmDeckEditor.setCommand(new UiCommand() {
+            scmDeckEditor.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
                     Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
                         @Override
@@ -406,109 +494,89 @@ public class ConstructedScreen extends LaunchScreen {
                         }
                     };
 
-                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
+                    /*Forge.setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                            new CEditorVariant(Singletons.getModel().getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));
+                            new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));*/
                 }
             });
 
             // Commander buttons
-            cmdDeckSelectorBtn.setCommand(new Runnable() {
+            cmdDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = GameType.Commander;
-                    cmdDeckSelectorBtn.requestFocusInWindow();
-                    changePlayerFocus(index, currentGameMode);
                 }
             });
 
-            cmdDeckEditor.setCommand(new UiCommand() {
+            cmdDeckEditor.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = GameType.Commander;
-                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander());
+                    //Forge.setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
                 }
             });
 
             // Planechase buttons
-            pchDeckSelectorBtn.setCommand(new Runnable() {
+            pchDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = GameType.Planechase;
-                    pchDeckSelectorBtn.requestFocusInWindow();
-                    changePlayerFocus(index, GameType.Planechase);
                 }
             });
 
-            pchDeckEditor.setCommand(new UiCommand() {
+            pchDeckEditor.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = GameType.Planechase;
-                    Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
+                    /*Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
                         @Override
                         public boolean apply(PaperCard arg0) {
                             return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
                         }
                     };
 
-                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
+                    Forge.setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                            new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
+                            new CEditorVariant(FModel.getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));*/
                 }
             });
 
             // Vanguard buttons
-            vgdSelectorBtn.setCommand(new Runnable() {
+            vgdSelectorBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = GameType.Vanguard;
-                    vgdSelectorBtn.requestFocusInWindow();
-                    changePlayerFocus(index, GameType.Vanguard);
                 }
             });
         }
 
-        /**
-         * @param index
-         *//*
         private void createPlayerTypeOptions() {
             radioHuman = new FRadioButton("Human", index == 0);
             radioAi = new FRadioButton("AI", index != 0);
 
-            radioHuman.addMouseListener(radioMouseAdapter);
-            radioAi.addMouseListener(radioMouseAdapter);
+            radioHuman.setCommand(radioMouseAdapter);
+            radioAi.setCommand(radioMouseAdapter);
 
-            ButtonGroup tempBtnGroup = new ButtonGroup();
-            tempBtnGroup.add(radioHuman);
-            tempBtnGroup.add(radioAi);
+            RadioButtonGroup radioButtonGroup = new RadioButtonGroup();
+            radioHuman.setGroup(radioButtonGroup);
+            radioAi.setGroup(radioButtonGroup);
         }
 
-        *//**
-         * @param index
-         *//*
         private void addHandlersDeckSelector() {
-            deckBtn.setCommand(new Runnable() {
+            deckBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     currentGameMode = GameType.Constructed;
-                    deckBtn.requestFocusInWindow();
-                    changePlayerFocus(index, GameType.Constructed);
                 }
             });
         }
 
-        *//**
-         * @param index
-         * @return
-         *//*
         private FLabel createNameRandomizer() {
-            final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
-                    .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT)).hoverable(true).opaque(false)
-                    .unhoveredAlpha(0.9f).build();
-            newNameBtn.setCommand(new UiCommand() {
+            final FLabel newNameBtn = new FLabel.Builder().iconInBackground(false)
+                    .icon(FSkinImage.EDIT).opaque(false).build();
+            newNameBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     String newName = getNewName();
                     if (null == newName) {
                         return;
@@ -519,22 +587,15 @@ public class ConstructedScreen extends LaunchScreen {
                         prefs.setPref(FPref.PLAYER_NAME, newName);
                         prefs.save();
                     }
-                    txtPlayerName.requestFocus();
-                    changePlayerFocus(index);
                 }
             });
-            newNameBtn.addFocusListener(nameFocusListener);
             return newNameBtn;
         }
 
-        *//**
-         * @param index
-         * @return
-         *//*
         private void createNameEditor() {
             String name;
             if (index == 0) {
-                name = Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
+                name = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
                 if (name.isEmpty()) {
                     name = "Human";
                 }
@@ -544,18 +605,16 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             txtPlayerName.setText(name);
-            txtPlayerName.setFocusable(true);
-            txtPlayerName.setFont(FSkin.getFont(14));
-            txtPlayerName.addActionListener(nameListener);
-            txtPlayerName.addFocusListener(nameFocusListener);
+            txtPlayerName.setFontSize(14);
+            txtPlayerName.setChangedHandler(nameChangedHandler);
         }
 
         private FLabel createCloseButton() {
             final FLabel closeBtn = new FLabel.Builder().iconInBackground(false)
-                    .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_CLOSE)).hoverable(true).build();
-            closeBtn.setCommand(new Runnable() {
+                    .icon(FSkinImage.CLOSE).build();
+            closeBtn.setCommand(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     removePlayer(closePlayerBtnList.indexOf(closeBtn) + 2);
                 }
             });
@@ -567,19 +626,16 @@ public class ConstructedScreen extends LaunchScreen {
             String[] currentPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
             if (index < currentPrefs.length) {
                 avatarIndex = Integer.parseInt(currentPrefs[index]);
-                avatarLabel.setIcon(FSkin.getAvatars().get(avatarIndex));
+                avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(avatarIndex)));
             }
             else {
                 setRandomAvatar();
             }
 
-            avatarLabel.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
-            avatarLabel.addFocusListener(avatarFocusListener);
-            avatarLabel.addMouseListener(avatarMouseListener);
+            avatarLabel.setCommand(avatarCommand);
         }
 
-        *//** Applies a random avatar, avoiding avatars already used.
-         * @param playerIndex *//*
+        //Applies a random avatar, avoiding avatars already used.
         public void setRandomAvatar() {
             int random = 0;
 
@@ -592,13 +648,8 @@ public class ConstructedScreen extends LaunchScreen {
 
         public void setAvatar(int newAvatarIndex) {
             avatarIndex = newAvatarIndex;
-            TextureRegion icon = FSkin.getAvatars().get(newAvatarIndex);
-            avatarLabel.setIcon(icon);
-            avatarLabel.repaintSelf();
+            avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(newAvatarIndex)));
         }
-
-        private final FSkin.LineSkinBorder focusedBorder = new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3);
-        private final FSkin.LineSkinBorder defaultBorder = new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(200), 2);
 
         public int getAvatarIndex() {
             return avatarIndex;
@@ -610,6 +661,290 @@ public class ConstructedScreen extends LaunchScreen {
 
         public String getPlayerName() {
             return txtPlayerName.getText();
+        }
+    }
+
+    /** Saves avatar prefs for players one and two. */
+    private void updateAvatarPrefs() {
+        int pOneIndex = playerPanels.get(0).getAvatarIndex();
+        int pTwoIndex = playerPanels.get(1).getAvatarIndex();
+
+        prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
+        prefs.save();
+    }
+
+    /** Updates the avatars from preferences on update. */
+    public void updatePlayersFromPrefs() {
+        ForgePreferences prefs = FModel.getPreferences();
+
+        // Avatar
+        String[] avatarPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
+        for (int i = 0; i < avatarPrefs.length; i++) {
+            int avatarIndex = Integer.parseInt(avatarPrefs[i]);
+            playerPanels.get(i).setAvatar(avatarIndex);
+        }
+
+        // Name
+        String prefName = prefs.getPref(FPref.PLAYER_NAME);
+        playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? "Human" : prefName);
+    }
+
+    /** Adds a pre-styled FLabel component with the specified title. */
+    private FLabel newLabel(String title) {
+        return new FLabel.Builder().text(title).fontSize(14).build();
+    }
+
+    private List<Integer> getUsedAvatars() {
+        List<Integer> usedAvatars = Arrays.asList(-1,-1,-1,-1,-1,-1,-1,-1);
+        int i = 0;
+        for (PlayerPanel pp : playerPanels) {
+            usedAvatars.set(i++, pp.avatarIndex);
+        }
+        return usedAvatars;
+    }
+
+    private final String getNewName() {
+        final String title = "Get new random name";
+        final String message = "What type of name do you want to generate?";
+        final FSkinImage icon = FOptionPane.QUESTION_ICON;
+        final String[] genderOptions = new String[]{ "Male", "Female", "Any" };
+        final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
+
+        final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
+        if (genderIndex < 0) {
+            return null;
+        }
+        final int typeIndex = FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2);
+        if (typeIndex < 0) {
+            return null;
+        }
+
+        final String gender = genderOptions[genderIndex];
+        final String type = typeOptions[typeIndex];
+
+        String confirmMsg, newName;
+        List<String> usedNames = getPlayerNames();
+        do {
+            newName = NameGenerator.getRandomName(gender, type, usedNames);
+            confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
+        } while (!FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true));
+
+        return newName;
+    }
+
+    private List<String> getPlayerNames() {
+        List<String> names = new ArrayList<String>();
+        for (PlayerPanel pp : playerPanels) {
+            names.add(pp.getPlayerName());
+        }
+        return names;
+    }
+
+    public String getPlayerName(int i) {
+        return playerPanels.get(i).getPlayerName();
+    }
+
+    public int getPlayerAvatar(int i) {
+        return playerPanels.get(i).getAvatarIndex();
+    }
+
+    public boolean isEnoughTeams() {
+        int lastTeam = -1;
+        final List<Integer> teamList = appliedVariants.contains(GameType.Archenemy) ? archenemyTeams : teams;
+
+        for (final int i : getParticipants()) {
+            if (lastTeam == -1) {
+                lastTeam = teamList.get(i);
+            }
+            else if (lastTeam != teamList.get(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /////////////////////////////////////////////
+    //========== Various listeners in build order
+
+    /** This listener unlocks the relevant buttons for players
+     * and enables/disables archenemy combobox as appropriate. */
+    private ItemListener iListenerVariants = new ItemListener() {
+        @Override
+        public void itemStateChanged(ItemEvent arg0) {
+            FCheckBox cb = (FCheckBox) arg0.getSource();
+            GameType variantType = null;
+
+            if (cb == vntVanguard) {
+                variantType = GameType.Vanguard;
+            }
+            else if (cb == vntCommander) {
+                variantType = GameType.Commander;
+            }
+            else if (cb == vntPlanechase) {
+                variantType = GameType.Planechase;
+            }
+            else if (cb == vntArchenemy) {
+                variantType = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+                comboArchenemy.setEnabled(vntArchenemy.isSelected());
+                if (arg0.getStateChange() != ItemEvent.SELECTED) {
+                    appliedVariants.remove(GameType.Archenemy);
+                    appliedVariants.remove(GameType.ArchenemyRumble);
+                }
+            }
+
+            if (null != variantType) {
+                if (arg0.getStateChange() == ItemEvent.SELECTED) {
+                    appliedVariants.add(variantType);
+                    currentGameMode = variantType;
+                }
+                else {
+                    appliedVariants.remove(variantType);
+                    if (currentGameMode == variantType) {
+                        currentGameMode = GameType.Constructed;
+                    }
+                }
+            }
+
+            for (PlayerPanel pp : playerPanels) {
+                pp.toggleIsPlayerArchenemy();
+                pp.updateVariantControlsVisibility();
+            }
+        }
+    };
+
+    // Listens to the archenemy combo box
+    private ActionListener aeComboListener = new ActionListener() {
+        @SuppressWarnings("unchecked")
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            FComboBox<String> cb = (FComboBox<String>)e.getSource();
+            archenemyType = (String)cb.getSelectedItem();
+            GameType mode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+            appliedVariants.remove(GameType.Archenemy);
+            appliedVariants.remove(GameType.ArchenemyRumble);
+            appliedVariants.add(mode);
+
+            currentGameMode = mode;
+            for (PlayerPanel pp : playerPanels) {
+                pp.toggleIsPlayerArchenemy();
+                pp.updateVariantControlsVisibility();
+            }
+        }
+    };
+
+    //This listener will look for a vanguard avatar being selected in the lists
+    //and update the corresponding detail panel.
+    /*private ListSelectionListener vgdLSListener = new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            int index = vgdAvatarLists.indexOf(e.getSource());
+            Object obj = vgdAvatarLists.get(index).getSelectedValue();
+            PlayerPanel pp = playerPanels.get(index);
+            CardDetailPanel cdp = vgdAvatarDetails.get(index);
+
+            if (obj instanceof PaperCard) {
+                pp.setVanguardButtonText(((PaperCard) obj).getName());
+                cdp.setCard(Card.getCardForUi((PaperCard) obj));
+                cdp.setVisible(true);
+                refreshPanels(false, true);
+            }
+            else {
+                pp.setVanguardButtonText((String) obj);
+                cdp.setVisible(false);
+            }
+        }
+    };*/
+
+    /////////////////////////////////////
+    //========== METHODS FOR VARIANTS
+
+    public Set<GameType> getAppliedVariants() {
+        return appliedVariants;
+    }
+
+    public int getTeam(final int playerIndex) {
+        return appliedVariants.contains(GameType.Archenemy) ? archenemyTeams.get(playerIndex) : teams.get(playerIndex);
+    }
+    
+    /*public List<FList<Object>> getPlanarDeckLists() {
+        return planarDeckLists;
+    }
+
+    public List<FList<Object>> getCommanderDeckLists() {
+        return commanderDeckLists;
+    }
+
+    public List<FList<Object>> getSchemeDeckLists() {
+        return schemeDeckLists;
+    }
+
+    public List<FList<Object>> getVanguardLists() {
+        return vgdAvatarLists;
+    }*/
+
+    public boolean isPlayerArchenemy(final int playernum) {
+        return playerPanels.get(playernum).playerIsArchenemy;
+    }
+
+    /** Return all the Vanguard avatars. */
+    public Iterable<PaperCard> getAllAvatars() {
+        if (vgdAllAvatars.isEmpty()) {
+            for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
+                if (c.getRules().getType().isVanguard()) {
+                    vgdAllAvatars.add(c);
+                }
+            }
+        }
+        return vgdAllAvatars;
+    }
+
+    /** Return the Vanguard avatars not flagged RemAIDeck. */
+    public List<PaperCard> getAllAiAvatars() {
+        return vgdAllAiAvatars;
+    }
+
+    /** Return the Vanguard avatars not flagged RemRandomDeck. */
+    public List<PaperCard> getNonRandomHumanAvatars() {
+        return nonRandomHumanAvatars;
+    }
+
+    /** Return the Vanguard avatars not flagged RemAIDeck or RemRandomDeck. */
+    public List<PaperCard> getNonRandomAiAvatars() {
+        return nonRandomAiAvatars;
+    }
+
+    /** Populate vanguard lists. */
+    private void populateVanguardLists() {
+        humanListData.add("Use deck's default avatar (random if unavailable)");
+        humanListData.add("Random");
+        aiListData.add("Use deck's default avatar (random if unavailable)");
+        aiListData.add("Random");
+        for (PaperCard cp : getAllAvatars()) {
+            humanListData.add(cp);
+            if (!cp.getRules().getAiHints().getRemRandomDecks()) {
+                nonRandomHumanAvatars.add(cp);
+            }
+            if (!cp.getRules().getAiHints().getRemAIDecks()) {
+                aiListData.add(cp);
+                vgdAllAiAvatars.add(cp);
+                if (!cp.getRules().getAiHints().getRemRandomDecks()) {
+                    nonRandomAiAvatars.add(cp);
+                }
+            }
+        }
+    }
+
+    /** update vanguard list. */
+    public void updateVanguardList(int playerIndex) {
+        /*FList<Object> vgdList = getVanguardLists().get(playerIndex);
+        Object lastSelection = vgdList.getSelectedValue();
+        vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
+        if (null != lastSelection) {
+            vgdList.setSelectedValue(lastSelection, true);
+        }
+
+        if (-1 == vgdList.getSelectedIndex()) {
+            vgdList.setSelectedIndex(0);
         }*/
     }
 }

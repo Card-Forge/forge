@@ -12,6 +12,8 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.card.Card;
 import forge.screens.match.views.VPrompt;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList.ListItemRenderer;
 
 public class FCardZoom extends FOverlay {
@@ -119,15 +121,15 @@ public class FCardZoom extends FOverlay {
             }
         });
         prompt = add(new VPrompt("Hide", "More",
-                new Runnable() {
+                new FEventHandler() {
                     @Override
-                    public void run() {
+                    public void handleEvent(FEvent e) {
                         hide();
                     }
                 },
-                new Runnable() {
+                new FEventHandler() {
                     @Override
-                    public void run() {
+                    public void handleEvent(FEvent e) {
                         optionListExpanded = !optionListExpanded;
                         prompt.getBtnCancel().setText(optionListExpanded ? "Less" : "More");
                         revalidate();

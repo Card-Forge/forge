@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -11,11 +12,14 @@ public class FCheckBox extends FLabel {
     private static final FSkinColor BOX_COLOR = CHECK_COLOR.alphaColor(0.5f);
 
     public FCheckBox() {
-        this("");
+        this("", false);
     }
     public FCheckBox(String text0) {
-        super(new Builder().align(HAlignment.LEFT).selectable());
-        this.setIcon(new CheckBoxIcon());
+        this(text0, false);
+    }
+    public FCheckBox(String text0, boolean selected0) {
+        super(new Builder().align(HAlignment.LEFT).selectable().selected(selected0));
+        setIcon(new CheckBoxIcon());
     }
 
     private class CheckBoxIcon implements FImage {

@@ -13,6 +13,8 @@ import forge.screens.quest.QuestScreen;
 import forge.screens.sealed.SealedScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 
 public class HomeScreen extends FScreen {
     private static final float LOGO_SIZE_FACTOR = 0.7f;
@@ -23,45 +25,45 @@ public class HomeScreen extends FScreen {
     public HomeScreen() {
         super(false, null, false);
 
-        addButton("Constructed", new Runnable() {
+        addButton("Constructed", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new ConstructedScreen());
             }
         });
-        addButton("Draft", new Runnable() {
+        addButton("Draft", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new DraftScreen());
             }
         });
-        addButton("Sealed", new Runnable() {
+        addButton("Sealed", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new SealedScreen());
             }
         });
-        addButton("Quest", new Runnable() {
+        addButton("Quest", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new QuestScreen());
             }
         });
-        addButton("Guantlet", new Runnable() {
+        addButton("Guantlet", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new GuantletScreen());
             }
         });
-        addButton("Settings", new Runnable() {
+        addButton("Settings", new FEventHandler() {
             @Override
-            public void run() {
+            public void handleEvent(FEvent e) {
                 Forge.openScreen(new SettingsScreen());
             }
         });
     }
 
-    private void addButton(String caption, Runnable command) {
+    private void addButton(String caption, FEventHandler command) {
         buttons.add(add(new FButton(caption, command)));
     }
 

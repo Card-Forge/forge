@@ -24,6 +24,8 @@ import forge.game.Game;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
@@ -49,15 +51,15 @@ public class MatchScreen extends FScreen {
         bottomPlayerPanel.setSelectedZone(ZoneType.Hand);
 
         prompt = add(new VPrompt("", "",
-                new Runnable() {
+                new FEventHandler() {
                     @Override
-                    public void run() {
+                    public void handleEvent(FEvent e) {
                         FControl.getInputProxy().selectButtonOK();
                     }
                 },
-                new Runnable() {
+                new FEventHandler() {
                     @Override
-                    public void run() {
+                    public void handleEvent(FEvent e) {
                         FControl.getInputProxy().selectButtonCancel();
                     }
                 }));

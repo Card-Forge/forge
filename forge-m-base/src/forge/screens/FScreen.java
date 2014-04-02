@@ -10,6 +10,8 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.utils.Utils;
 
@@ -25,9 +27,9 @@ public abstract class FScreen extends FContainer {
 
     protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
         if (showBackButton) {
-            btnBack = add(new FLabel.Builder().icon(new BackIcon()).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new Runnable() {
+            btnBack = add(new FLabel.Builder().icon(new BackIcon()).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     Forge.back();
                 }
             }).build());
@@ -42,9 +44,9 @@ public abstract class FScreen extends FContainer {
             lblHeader = null;
         }
         if (showMenuButton) {
-            btnMenu = add(new FLabel.Builder().icon(FSkinImage.FAVICON).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new Runnable() {
+            btnMenu = add(new FLabel.Builder().icon(FSkinImage.FAVICON).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
-                public void run() {
+                public void handleEvent(FEvent e) {
                     showMenu();
                 }
             }).build());
