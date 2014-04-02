@@ -98,7 +98,8 @@ public class AiAttackController {
         	}
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
-                    if (ComputerUtilCost.canPayCost(sa, this.defendingOpponent)) {
+                    if (ComputerUtilCost.canPayCost(sa, this.defendingOpponent) 
+                    		&& sa.getRestrictions().checkOtherRestrictions(c, sa, this.defendingOpponent)) {
                         Card animatedCopy = CardFactory.getCard(c.getPaperCard(), this.defendingOpponent);
                         AnimateAi.becomeAnimated(animatedCopy, sa);
                         this.oppList.add(animatedCopy);

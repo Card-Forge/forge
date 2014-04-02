@@ -291,67 +291,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         
         return false;
     }
-
-    /**
-     * <p>
-     * canPlay.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public final boolean canPlay(final Card c, final SpellAbility sa) {
-        if (c.isPhasedOut() || c.isUsedToPay()) {
-            return false;
-        }
-
-        Player activator = sa.getActivatingPlayer();
-        if (activator == null) {
-            activator = c.getController();
-            sa.setActivatingPlayer(activator);
-            System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
-        }
+    
+    public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
 
         final Game game = activator.getGame();
-
-        if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
-            return false;
-        }
-
-        if (!checkTimingRestrictions(c, sa)) {
-            return false;
-        }
-
-        if (!checkActivatorRestrictions(c, sa)) {
-            return false;
-        }
-
-        if (!checkZoneRestrictions(c, sa)) {
-            return false;
-        }
-
-        if (this.getLimitToCheck() != null) {
-            String limit = this.getLimitToCheck();
-            int activationLimit = AbilityUtils.calculateAmount(c, limit, sa);
-            this.setActivationLimit(activationLimit);
-
-            if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
-                return false;
-            }
-        }
-
-        if (this.getGameLimitToCheck() != null) {
-            String limit = this.getGameLimitToCheck();
-            int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
-            this.setGameActivationLimit(gameActivationLimit);
-
-            if ((this.getGameActivationLimit() != -1) && (this.getNumberGameActivations() >= this.getGameActivationLimit())) {
-                return false;
-            }
-        }
 
         if (this.getCardsInHand() != -1) {
             if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
@@ -430,7 +373,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.isPwAbility()) {
-
             for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {
                 // check all abilities on card that have their planeswalker
                 // restriction set to confirm they haven't been activated
@@ -459,6 +401,71 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
 
+        }
+    	return true;
+    }
+
+    /**
+     * <p>
+     * canPlay.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.game.card.Card} object.
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    public final boolean canPlay(final Card c, final SpellAbility sa) {
+        if (c.isPhasedOut() || c.isUsedToPay()) {
+            return false;
+        }
+
+        Player activator = sa.getActivatingPlayer();
+        if (activator == null) {
+            activator = c.getController();
+            sa.setActivatingPlayer(activator);
+            System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
+        }
+
+        if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
+            return false;
+        }
+
+        if (!checkTimingRestrictions(c, sa)) {
+            return false;
+        }
+
+        if (!checkActivatorRestrictions(c, sa)) {
+            return false;
+        }
+
+        if (!checkZoneRestrictions(c, sa)) {
+            return false;
+        }
+        
+        if (!checkOtherRestrictions(c, sa, activator)) {
+            return false;
+        }
+
+        if (this.getLimitToCheck() != null) {
+            String limit = this.getLimitToCheck();
+            int activationLimit = AbilityUtils.calculateAmount(c, limit, sa);
+            this.setActivationLimit(activationLimit);
+
+            if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
+                return false;
+            }
+        }
+
+        if (this.getGameLimitToCheck() != null) {
+            String limit = this.getGameLimitToCheck();
+            int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
+            this.setGameActivationLimit(gameActivationLimit);
+
+            if ((this.getGameActivationLimit() != -1) && (this.getNumberGameActivations() >= this.getGameActivationLimit())) {
+                return false;
+            }
         }
 
         return true;
