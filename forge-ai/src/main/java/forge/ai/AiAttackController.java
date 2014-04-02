@@ -93,6 +93,9 @@ public class AiAttackController {
             }
         };
         for (Card c : CardLists.filter(this.defendingOpponent.getCardsIn(ZoneType.Battlefield), canAnimate)) {
+        	if (c.isToken() && !c.isCopiedToken()) {
+        		continue;
+        	}
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
                     if (ComputerUtilCost.canPayCost(sa, this.defendingOpponent)) {
