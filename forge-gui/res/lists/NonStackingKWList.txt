@@ -1,4 +1,5 @@
 All creatures able to block CARDNAME do so.
+Banding
 CantBeBlockedByAmount LT2
 CantBeBlockedByAmount LT3
 CARDNAME's activated abilities can't be activated.

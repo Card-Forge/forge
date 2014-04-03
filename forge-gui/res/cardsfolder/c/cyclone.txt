@@ -6,5 +6,6 @@ SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ WIND
 SVar:SacSelf:DB$ Sacrifice | Defined$ Card.Self | UnlessCost$ X | UnlessXColor$ G | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDamageAll | References$ X
 SVar:DBDamageAll:DB$ DamageAll | NumDmg$ X |  ValidCards$ Creature | ValidPlayers$ Each | References$ X
 SVar:X:Count$CardCounters.WIND
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclone.jpg
 Oracle:At the beginning of your upkeep, put a wind counter on Cyclone, then sacrifice Cyclone unless you pay {G} for each wind counter on it. If you pay, Cyclone deals damage equal to the number of wind counters on it to each creature and each player.
