@@ -5308,6 +5308,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+        } else if (property.equals("Permanent")) {
+            if (this.isInstant() || this.isSorcery()) {
+                return false;
+            }
         } else if (property.equals("ChosenCard")) {
             if (!source.getChosenCard().contains(this)) {
                 return false;
