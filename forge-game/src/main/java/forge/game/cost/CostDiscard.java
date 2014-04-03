@@ -124,7 +124,8 @@ public class CostDiscard extends CostPartWithList {
                     sameName = true;
                     type = type.replace("+WithSameName", "");
                 }
-                if (!type.equals("Random")) {
+                if (!type.equals("Random") && !type.contains("X")) {
+                    // Knollspine Invocation fails to activate without the above conditional
                     handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
                 }
                 if (sameName) {
