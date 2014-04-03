@@ -763,17 +763,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("ShuffleChangedPile")) {
             CardLists.shuffle(chosenCards);
         }
+        // do not shuffle the library once we have placed a fetched
+        // card on top.
+        if (origin.contains(ZoneType.Library) && (destination == ZoneType.Library) && !"False".equals(sa.getParam("Shuffle"))) {
+            player.shuffle(sa);
+        }
 
         List<Card> movedCards = new ArrayList<Card>();
         long ts = game.getNextTimestamp();
         for(Card c : chosenCards) {
             Card movedCard = null;
             if (destination.equals(ZoneType.Library)) {
-                // do not shuffle the library once we have placed a fetched
-                // card on top.
-                if (origin.contains(ZoneType.Library) && !"False".equals(sa.getParam("Shuffle"))) {
-                    player.shuffle(sa);
-                }
                 movedCard = game.getAction().moveToLibrary(c, libraryPos);
             } else if (destination.equals(ZoneType.Battlefield)) {
                 if (sa.hasParam("Tapped")) {
