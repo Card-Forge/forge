@@ -18,6 +18,7 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -422,7 +423,12 @@ public class AnimateAi extends SpellAbilityAi {
         if (stAbs.size() > 0) {
             for (final String s : stAbs) {
                 final String actualAbility = source.getSVar(s);
-                source.addStaticAbility(actualAbility);
+                StaticAbility stAb = source.addStaticAbility(actualAbility);
+                if ("Continuous".equals(stAb.getMapParams().get("Mode"))) {
+                	List<Card> list = new ArrayList<Card>();
+                	list.add(source);
+                	list = StaticAbilityContinuous.applyContinuousAbility(stAb, list);
+                } 
             }
         }
 

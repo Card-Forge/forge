@@ -50,6 +50,11 @@ import java.util.*;
  * The Class StaticAbility_Continuous.
  */
 public class StaticAbilityContinuous {
+	
+	public static List<Card> applyContinuousAbility(final StaticAbility stAb) {
+        final List<Card> affectedCards = StaticAbilityContinuous.getAffectedCards(stAb);
+		return applyContinuousAbility(stAb, affectedCards);
+	}
 
     /**
      * 
@@ -60,12 +65,11 @@ public class StaticAbilityContinuous {
      * @return 
      * 
      */
-    public static List<Card> applyContinuousAbility(final StaticAbility stAb) {
+    public static List<Card> applyContinuousAbility(final StaticAbility stAb, List<Card> affectedCards) {
         final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
         final StaticEffect se = new StaticEffect(hostCard);
-        final List<Card> affectedCards = StaticAbilityContinuous.getAffectedCards(stAb);
         final ArrayList<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
         final Game game = hostCard.getGame();
 
