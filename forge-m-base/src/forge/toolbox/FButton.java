@@ -2,7 +2,6 @@ package forge.toolbox;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
@@ -15,8 +14,7 @@ import forge.toolbox.FEvent.FEventType;
 
 public class FButton extends FDisplayObject {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final Color DISABLED_COMPOSITE = new Color(1, 1, 1, 0.25f);
-    private static final FSkinColor DISABLED_FORE_COLOR = FORE_COLOR.alphaColor(DISABLED_COMPOSITE.a);
+    private static final float DISABLED_COMPOSITE = 0.25f;
 
     private FSkinImage imgL, imgM, imgR;
     private String text;
@@ -155,11 +153,9 @@ public class FButton extends FDisplayObject {
         float cornerTextOffsetX = cornerButtonWidth / 2;
         float cornerTextOffsetY = (cornerButtonHeight - h) / 2;
 
-        FSkinColor foreColor = FORE_COLOR;
         boolean disabled = !isEnabled();
         if (disabled) {
-            g.setImageTint(DISABLED_COMPOSITE);
-            foreColor = DISABLED_FORE_COLOR;
+            g.setAlphaComposite(DISABLED_COMPOSITE);
         }
 
         //determine images to draw and text alignment based on which corner button is in (if any)
@@ -192,12 +188,12 @@ public class FButton extends FDisplayObject {
             break;
         }
 
-        if (disabled) {
-            g.clearImageTint();
+        if (!StringUtils.isEmpty(text)) {
+            g.drawText(text, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
         }
 
-        if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        if (disabled) {
+            g.resetAlphaComposite();
         }
     }
 }

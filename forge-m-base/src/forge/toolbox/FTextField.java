@@ -9,8 +9,9 @@ import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FEvent.FEventHandler;
 
 public class FTextField extends FDisplayObject {
-    private static final float PADDING = 3;
+    private static final float PADDING = 5;
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private FEventHandler changedHandler;
 
     private String text;
@@ -22,7 +23,7 @@ public class FTextField extends FDisplayObject {
     }
     public FTextField(String text0) {
         text = text0;
-        font = FSkinFont.get(14);
+        setFontSize(14);
         alignment = HAlignment.LEFT;
     }
 
@@ -42,6 +43,7 @@ public class FTextField extends FDisplayObject {
 
     public void setFontSize(int fontSize0) {
         font = FSkinFont.get(fontSize0);
+        setHeight(font.getFont().getCapHeight() * 3);
     }
 
     public FEventHandler getChangedHandler() {
@@ -59,6 +61,10 @@ public class FTextField extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
-        g.drawText(text, font, FORE_COLOR, PADDING, 0, getWidth() - 2 * PADDING, getHeight(), false, alignment, true);
+        float w = getWidth();
+        float h = getHeight();
+        g.fillRect(BACK_COLOR, 0, 0, w, h);
+        g.drawText(text, font, FORE_COLOR, PADDING, 0, w - 2 * PADDING, h, false, alignment, true);
+        g.drawRect(1, FORE_COLOR, 1, 1, w - 2, h - 2); //allow smooth border to fully display within bounds
     }
 }

@@ -13,8 +13,10 @@ import java.util.Vector;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 
+import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -49,7 +51,7 @@ import forge.utils.Utils;
 public class ConstructedScreen extends LaunchScreen {
     private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.8f);
     private static final ForgePreferences prefs = FModel.getPreferences();
-
+    private static final float PADDING = 5;
     private static final int MAX_PLAYERS = 8;
 
     // General variables
@@ -73,7 +75,13 @@ public class ConstructedScreen extends LaunchScreen {
     private final FScrollPane playersScroll = new FScrollPane() {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            //TODO
+            float y = 0;
+            float height;
+            for (int i = 0; i < activePlayersNum; i++) {
+                height = playerPanels.get(i).getPreferredHeight();
+                playerPanels.get(i).setBounds(0, y, visibleWidth, height);
+                y += height;
+            }
             return new ScrollBounds(visibleWidth, visibleHeight);
         }
     };
@@ -122,9 +130,8 @@ public class ConstructedScreen extends LaunchScreen {
         ///////////////////// Player Panel /////////////////////
 
         // Construct individual player panels
-        String constraints = "pushx, growx, wrap, hidemode 3";
         for (int i = 0; i < MAX_PLAYERS; i++) {
-            teams.add(i+1);
+            teams.add(i + 1);
             archenemyTeams.add(i == 0 ? 1 : 2);
 
             PlayerPanel player = new PlayerPanel(i);
@@ -134,12 +141,8 @@ public class ConstructedScreen extends LaunchScreen {
             player.setVisible(i < activePlayersNum);
 
             playersScroll.add(player);
-
-            if (i == 0) {
-                constraints += ", gaptop 5px";
-            }
         }
-        
+
         add(playersScroll);
 
         addPlayerBtn.setCommand(new FEventHandler() {
@@ -149,6 +152,11 @@ public class ConstructedScreen extends LaunchScreen {
             }
         });
         add(addPlayerBtn);
+    }
+
+    @Override
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
+        playersScroll.setBounds(0, startY, width, height - startY);
     }
     
     private void addPlayer() {
@@ -177,19 +185,6 @@ public class ConstructedScreen extends LaunchScreen {
         PlayerPanel player = playerPanels.get(playerIndex);
         player.setVisible(false);
         addPlayerBtn.setEnabled(true);
-
-        //find closest player still in game and give focus
-        int min = MAX_PLAYERS;
-        int closest = 2;
-
-        for (int participantIndex : getParticipants()) {
-            final int diff = Math.abs(playerIndex - participantIndex);
-
-            if (diff < min) {
-                min = diff;
-                closest = participantIndex;
-            }
-        }
     }
 
     public boolean isPlayerAI(int playernum) {
@@ -208,10 +203,6 @@ public class ConstructedScreen extends LaunchScreen {
             }
         }
         return participants;
-    }
-
-    @Override
-    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
     }
 
     @Override
@@ -325,6 +316,61 @@ public class ConstructedScreen extends LaunchScreen {
             updateVariantControlsVisibility();
         }
 
+        @Override
+        protected void doLayout(float width, float height) {
+            float x = PADDING;
+            float y = PADDING;
+            float fieldHeight = txtPlayerName.getHeight();
+            float avatarSize = 2 * fieldHeight + PADDING;
+
+            avatarLabel.setBounds(x, y, avatarSize, avatarSize);
+            x += avatarSize + PADDING;
+            float w = width - x - fieldHeight - 2 * PADDING;
+            txtPlayerName.setBounds(x, y, w, fieldHeight);
+            x += w + PADDING;
+            nameRandomiser.setBounds(x, y, fieldHeight, fieldHeight);
+
+            y += fieldHeight + PADDING;
+            radioHuman.setHeight(fieldHeight); //must set height before width so icon is correct size
+            radioAi.setHeight(fieldHeight);
+            radioHuman.setWidth(radioHuman.getAutoSizeBounds().width);
+            radioAi.setWidth(radioAi.getAutoSizeBounds().width);
+            x = width - radioAi.getWidth();
+            radioAi.setPosition(x, y);
+            x -= radioHuman.getWidth() - PADDING;
+            radioHuman.setPosition(x, y);
+            w = x - avatarSize - 2 * PADDING;
+            x = avatarSize + 2 * PADDING;
+            teamComboBox.setBounds(x, y, w, fieldHeight);
+
+            y += fieldHeight + PADDING;
+            x = PADDING;
+            deckLabel.setBounds(x, y, avatarSize, fieldHeight);
+            x += avatarSize + PADDING;
+            w = width - x - PADDING;
+            deckBtn.setBounds(x, y, w, fieldHeight);
+        }
+
+        private float getPreferredHeight() {
+            int rows = 3;
+            if (vntArchenemy.isSelected()) {
+                rows++;
+            }
+            if (vntPlanechase.isSelected()) {
+                rows++;
+            }
+            if (vntVanguard.isSelected()) {
+                rows++;
+            }
+            return rows * (txtPlayerName.getHeight() + PADDING) + PADDING;
+        }
+
+        @Override
+        protected void drawOverlay(Graphics g) {
+            float y = getHeight();
+            g.drawLine(1, PLAYER_BORDER_COLOR, 0, y, getWidth(), y);
+        }
+
         private final FEventHandler radioMouseAdapter = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -349,12 +395,6 @@ public class ConstructedScreen extends LaunchScreen {
                 }
             }
         };
-
-        @Override
-        protected void doLayout(float width, float height) {
-            // TODO Auto-generated method stub
-            
-        }
 
         private FEventHandler avatarCommand = new FEventHandler() {
             @Override
@@ -430,7 +470,7 @@ public class ConstructedScreen extends LaunchScreen {
             aeTeamComboBox.setEnabled(playerIsArchenemy);
 
             for (int i = 1; i <= MAX_PLAYERS; i++) {
-                teamComboBox.addItem(i);
+                teamComboBox.addItem("Team " + i);
             }
             teamComboBox.setSelectedIndex(teams.get(index) - 1);
             teamComboBox.setEnabled(true);
@@ -691,7 +731,7 @@ public class ConstructedScreen extends LaunchScreen {
 
     /** Adds a pre-styled FLabel component with the specified title. */
     private FLabel newLabel(String title) {
-        return new FLabel.Builder().text(title).fontSize(14).build();
+        return new FLabel.Builder().text(title).fontSize(14).align(HAlignment.RIGHT).build();
     }
 
     private List<Integer> getUsedAvatars() {

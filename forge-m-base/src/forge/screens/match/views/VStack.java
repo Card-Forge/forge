@@ -24,7 +24,7 @@ public class VStack extends FDropDown {
     private static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
     private static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
     private static final FSkinFont FONT = FSkinFont.get(11);
-    private static final Color ALPHA_COMPOSITE = new Color(1, 1, 1, 0.5f);
+    private static final float ALPHA_COMPOSITE = 0.5f;
 
     private final MagicStack stack;
     private final LobbyPlayer localPlayer;
@@ -104,7 +104,7 @@ public class VStack extends FDropDown {
     private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private final boolean isTop;
-        private FSkinColor foreColor, backColor;
+        private final FSkinColor foreColor, backColor;
         private String text;
 
         private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0, boolean isTop0) {
@@ -154,11 +154,6 @@ public class VStack extends FDropDown {
                 backColor = FSkinColor.get(Colors.CLR_OVERLAY);
                 foreColor = FSkinColor.get(Colors.CLR_TEXT);
             }
-
-            if (!isTop) {
-                backColor = backColor.alphaColor(ALPHA_COMPOSITE.a);
-                foreColor = foreColor.alphaColor(ALPHA_COMPOSITE.a);
-            }
         }
 
         private float getMinHeight(float width) {
@@ -174,6 +169,10 @@ public class VStack extends FDropDown {
             float w = getWidth();
             float h = getHeight();
 
+            if (!isTop) {
+                g.setAlphaComposite(ALPHA_COMPOSITE);
+            }
+
             g.fillRect(backColor, 0, 0, w, h);
 
             float padding = PADDING;
@@ -182,16 +181,14 @@ public class VStack extends FDropDown {
             float x = padding;
             float y = padding;
 
-            if (!isTop) {
-                g.setImageTint(ALPHA_COMPOSITE);
-            }
             g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
-            if (!isTop) {
-                g.clearImageTint();
-            }
 
             x += cardWidth + padding;
             g.drawText(text, FONT, foreColor, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
+
+            if (!isTop) {
+                g.resetAlphaComposite();
+            }
         }
     }
 }

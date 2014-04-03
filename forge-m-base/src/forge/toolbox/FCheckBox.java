@@ -18,7 +18,7 @@ public class FCheckBox extends FLabel {
         this(text0, false);
     }
     public FCheckBox(String text0, boolean selected0) {
-        super(new Builder().align(HAlignment.LEFT).selectable().selected(selected0));
+        super(new Builder().text(text0).align(HAlignment.LEFT).selectable().selected(selected0));
         setIcon(new CheckBoxIcon());
     }
 
@@ -46,5 +46,10 @@ public class FCheckBox extends FLabel {
                 g.drawLine(2, CHECK_COLOR, x + w / 2, y + h, x + w, y);
             }
         }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        drawContent(g, getWidth(), getHeight(), false);
     }
 }

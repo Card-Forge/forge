@@ -17,6 +17,7 @@ public class FLabel extends FDisplayObject {
         //========== Default values for FLabel are set here.
         private float      bldIconScaleFactor = 0.8f;
         private int        bldFontSize        = 14;
+        private float      bldAlphaComposite  = 0.7f;
         private HAlignment bldAlignment       = HAlignment.LEFT;
         private Vector2    bldInsets          = new Vector2(3, 3);
 
@@ -48,6 +49,7 @@ public class FLabel extends FDisplayObject {
         public Builder selected() { selected(true); return this; }
         public Builder command(final FEventHandler c0) { this.bldCommand = c0; return this; }
         public Builder fontSize(final int i0) { this.bldFontSize = i0; return this; }
+        public Builder alphaComposite(final float a0) { this.bldAlphaComposite = a0; return this; }
         public Builder enabled(final boolean b0) { this.bldEnabled = b0; return this; }
         public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
         public Builder iconScaleFactor(final float f0) { this.bldIconScaleFactor = f0; return this; }
@@ -75,6 +77,7 @@ public class FLabel extends FDisplayObject {
 
     private float iconScaleFactor;
     private FSkinFont font;
+    private float alphaComposite;
     private HAlignment alignment;
     private Vector2 insets;
     private boolean selectable, selected, opaque, iconInBackground, iconScaleAuto, pressed;
@@ -88,6 +91,7 @@ public class FLabel extends FDisplayObject {
     protected FLabel(final Builder b0) {
         iconScaleFactor = b0.bldIconScaleFactor;
         font = FSkinFont.get(b0.bldFontSize);
+        alphaComposite = b0.bldAlphaComposite;
         alignment = b0.bldAlignment;
         insets = b0.bldInsets;
         selectable = b0.bldSelectable;
@@ -184,7 +188,7 @@ public class FLabel extends FDisplayObject {
         bounds.height += 2 * insets.y;
 
         if (icon != null) {
-            bounds.width += icon.getWidth();
+            bounds.width += icon.getWidth() + insets.x;
         }
         
         return bounds;
@@ -196,6 +200,11 @@ public class FLabel extends FDisplayObject {
         float h = getHeight();
 
         g.startClip(0, 0, w, h); //start clip to ensure nothing escapes bounds
+        
+        boolean applyAlphaComposite = (opaque && !pressed);
+        if (applyAlphaComposite) {
+            g.setAlphaComposite(alphaComposite);
+        }
 
         if (pressed) {
             if (pressedColor != null) {
@@ -219,6 +228,10 @@ public class FLabel extends FDisplayObject {
         }
 
         drawContent(g, w, h, pressed);
+
+        if (applyAlphaComposite) {
+            g.resetAlphaComposite();
+        }
 
         g.endClip();
     }
@@ -249,14 +262,19 @@ public class FLabel extends FDisplayObject {
                 y += (h - iconHeight) / 2;
             }
             else {
-                x = 0; //TODO: calculation these
-                y = 0;
+                //TODO: Calculate these for center/right alignment
+                y += (h - iconHeight) / 2;
             }
 
             g.drawImage(icon, x, y, iconWidth, iconHeight);
 
             if (!text.isEmpty()) {
-                x += iconWidth;
+                y = insets.y;
+                if (pressed) {
+                    y++;
+                }
+                x += iconWidth + insets.x;
+                w -= iconWidth + insets.x;
                 g.startClip(x, y, w, h);
                 g.drawText(text, font, textColor, x, y, w, h, false, HAlignment.LEFT, true);
                 g.endClip();

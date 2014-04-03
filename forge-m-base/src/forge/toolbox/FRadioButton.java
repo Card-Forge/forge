@@ -23,7 +23,7 @@ public class FRadioButton extends FLabel {
         this(text0, false);
     }
     public FRadioButton(String text0, boolean selected0) {
-        super(new Builder().align(HAlignment.LEFT).selectable().selected(selected0));
+        super(new Builder().text(text0).align(HAlignment.LEFT).selectable().selected(selected0));
         setIcon(new RadioButtonIcon());
     }
     
@@ -67,14 +67,19 @@ public class FRadioButton extends FLabel {
 
         @Override
         public void draw(Graphics g, float x, float y, float w, float h) {
-            float radius = h / 5;
-            x += w - radius;
-            y = h / 2;
+            float radius = h / 3;
+            x += w / 2;
+            y += h / 2;
             g.drawCircle(1, OUTER_CIRCLE_COLOR, x, y, radius);
             if (isSelected()) {
                 g.fillCircle(INNER_CIRCLE_COLOR, x, y, radius / 2);
             }
         }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        drawContent(g, getWidth(), getHeight(), false);
     }
 
     public static class RadioButtonGroup {

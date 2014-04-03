@@ -339,6 +339,7 @@ public class Forge implements ApplicationListener {
     public static class Graphics {
         private Rectangle bounds;
         private int failedClipCount;
+        private float alphaComposite = 1;
 
         private Graphics() {
             bounds = new Rectangle(0, 0, screenWidth, screenHeight);
@@ -388,6 +389,9 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
             boolean needSmoothing = (x1 != x2 && y1 != y2);
             if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -422,6 +426,9 @@ public class Forge implements ApplicationListener {
 
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
+            }
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
             }
             if (color.a < 1 || cornerRadius > 0) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -471,6 +478,9 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
 
@@ -494,6 +504,9 @@ public class Forge implements ApplicationListener {
         public void fillRect(Color color, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
             if (color.a < 1) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
@@ -519,6 +532,9 @@ public class Forge implements ApplicationListener {
             if (thickness > 1) {
                 Gdx.gl.glLineWidth(thickness);
             }
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
 
@@ -542,6 +558,9 @@ public class Forge implements ApplicationListener {
         public void fillCircle(Color color, float x, float y, float radius) {
             batch.end(); //must pause batch while rendering shapes
 
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
             if (color.a < 1) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
@@ -564,6 +583,9 @@ public class Forge implements ApplicationListener {
         public void fillTriangle(Color color, float x1, float y1, float x2, float y2, float x3, float y3) {
             batch.end(); //must pause batch while rendering shapes
 
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
             if (color.a < 1) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
@@ -592,6 +614,10 @@ public class Forge implements ApplicationListener {
         public void fillGradientRect(Color color1, Color color2, boolean vertical, float x, float y, float w, float h) {
             batch.end(); //must pause batch while rendering shapes
 
+            if (alphaComposite < 1) {
+                color1 = FSkinColor.alphaColor(color1, color1.a * alphaComposite);
+                color2 = FSkinColor.alphaColor(color2, color2.a * alphaComposite);
+            }
             boolean needBlending = (color1.a < 1 || color2.a < 1);
             if (needBlending) { //enable blending so alpha colored shapes work properly
                 Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -613,10 +639,12 @@ public class Forge implements ApplicationListener {
             batch.begin();
         }
 
-        public void setImageTint(Color color) {
-            batch.setColor(color);
+        public void setAlphaComposite(float alphaComposite0) {
+            alphaComposite = alphaComposite0;
+            batch.setColor(new Color(1, 1, 1, alphaComposite));
         }
-        public void clearImageTint() {
+        public void resetAlphaComposite() {
+            alphaComposite = 1;
             batch.setColor(Color.WHITE);
         }
 
@@ -651,6 +679,13 @@ public class Forge implements ApplicationListener {
             drawText(text, skinFont, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
         }
         public void drawText(String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
+            if (color.a < 1) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+            }
+
             int fontSize = skinFont.getSize();
             BitmapFont font = skinFont.getFont();
             if (wrap) {
@@ -678,6 +713,10 @@ public class Forge implements ApplicationListener {
                 }
                 font.setColor(color);
                 font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
+            }
+
+            if (color.a < 1) {
+                Gdx.gl.glDisable(GL20.GL_BLEND);
             }
         }
 
