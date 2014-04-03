@@ -231,7 +231,7 @@ public class ConstructedScreen extends LaunchScreen {
         private final int index;
 
         private final FLabel nameRandomiser;
-        private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).iconInBackground(true).build();
+        private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).alphaComposite(1).iconInBackground(true).build();
         private int avatarIndex;
 
         private final FTextField txtPlayerName = new FTextField("Player name");

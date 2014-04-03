@@ -109,5 +109,24 @@ public class FComboBox<E> extends FTextField {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
+
+        float divotWidth = getDivotWidth();
+        float divotHeight = divotWidth * 0.5f;
+        float x3 = getWidth() - PADDING - 1;
+        float x1 = x3 - divotWidth;
+        float x2 = x1 + divotWidth / 2;
+        float y1 = getHeight() / 2 - 1;
+        float y2 = y1 + divotHeight;
+        float y3 = y1;
+        g.fillTriangle(FORE_COLOR, x1, y1, x2, y2, x3, y3);
+    }
+
+    private float getDivotWidth() {
+        return getHeight() / 3 + 1;
+    }
+
+    @Override
+    protected float getRightPadding() {
+        return getDivotWidth() + 2 * PADDING;
     }
 }
