@@ -296,10 +296,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-        if(typeList.size() < nNeeded)
+        int count = typeList.size();
+        if(count < nNeeded)
             return null;
         
-        List<Card> toExile = GuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", nNeeded, typeList, null);
+        List<Card> toExile = GuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", count - nNeeded, typeList, null);
         return PaymentDecision.card(toExile);
     }
 
