@@ -265,20 +265,23 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         	if (card.hasKeyword("Double Strike")) {
         		return false;
         	}
-            if (ph.isPlayerTurn(ai) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
-                    && newPower > 0
-                    && ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
-                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty()) {
-                return true;
+            if (combat != null && combat.isBlocked(card) && !combat.getBlockers(card).isEmpty()) {
+                Card blocker = combat.getBlockers(card).get(0);
+                if (ComputerUtilCombat.canDestroyAttacker(ai, card, blocker, combat, true) 
+                        && !ComputerUtilCombat.canDestroyAttacker(ai, card, blocker, combat, false))
+                	return true;
+                if (!ComputerUtilCombat.canDestroyBlocker(ai, blocker, card, combat, true) 
+                        && ComputerUtilCombat.canDestroyBlocker(ai, blocker, card, combat, false))
+                	return true;
             }
             if (combat != null && combat.isBlocking(card) && !combat.getAttackersBlockedBy(card).isEmpty()) {
                 Card attacker = combat.getAttackersBlockedBy(card).get(0);
                 if (!ComputerUtilCombat.canDestroyAttacker(ai, attacker, card, combat, true) 
                         && ComputerUtilCombat.canDestroyAttacker(ai, attacker, card, combat, false))
-                return true;
+                	return true;
                 if (ComputerUtilCombat.canDestroyBlocker(ai, card, attacker, combat, true) 
                         && !ComputerUtilCombat.canDestroyBlocker(ai, card, attacker, combat, false))
-                return true;
+                	return true;
             }
             return false;
         } else if (keyword.equals("Double Strike")) {
@@ -289,12 +292,14 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         } else if (keyword.startsWith("Rampage")) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
+            		|| newPower <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).size() < 2) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
+            		|| newPower <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || CardLists.getNotKeyword(CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)),
                             "Flanking").isEmpty()) {
@@ -332,8 +337,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return combat != null && ( combat.isAttacking(card) || combat.isBlocking(card) );
         } else if (keyword.equals("Vigilance")) {
             if (ph.isPlayerTurn(opp) || !CombatUtil.canAttack(card, opp)
+            		|| newPower <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || CardLists.getNotKeyword(opp.getCreaturesInPlay(), "Defender").size() < 1) {
+                    || CardLists.getNotKeyword(opp.getCreaturesInPlay(), "Defender").isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Reach")) {
