@@ -81,11 +81,33 @@ public class AiAttackController {
      */
     public AiAttackController(final Player ai) {
         this.ai = ai;
-        this.defendingOpponent = choosePreferredDefenderPlayer();
-        
+        this.defendingOpponent = choosePreferredDefenderPlayer();       
+        getOpponentCreatures();
+        this.myList = ai.getCreaturesInPlay();
+        this.attackers = new ArrayList<Card>();
+        for (Card c : myList) {
+            if (CombatUtil.canAttack(c, this.defendingOpponent)) {
+                attackers.add(c);
+            }
+        }
+        this.blockers = this.getPossibleBlockers(oppList, this.attackers);
+    } // constructor
+
+    public AiAttackController(final Player ai, Card attacker) {
+        this.ai = ai;
+        this.defendingOpponent = choosePreferredDefenderPlayer();       
+        getOpponentCreatures();
+        this.myList = ai.getCreaturesInPlay();
+        this.attackers = new ArrayList<Card>();
+        if (CombatUtil.canAttack(attacker, this.defendingOpponent)) {
+            attackers.add(attacker);
+        }
+        this.blockers = this.getPossibleBlockers(oppList, this.attackers);
+    } // overloaded constructor to evaluate single specified attacker
+    
+    private void getOpponentCreatures() {
         this.oppList = Lists.newArrayList();
         this.oppList.addAll(this.defendingOpponent.getCreaturesInPlay());
-        this.myList = ai.getCreaturesInPlay();
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -107,15 +129,7 @@ public class AiAttackController {
                 }
             }
         }
-
-        this.attackers = new ArrayList<Card>();
-        for (Card c : myList) {
-            if (CombatUtil.canAttack(c, this.defendingOpponent)) {
-                attackers.add(c);
-            }
-        }
-        this.blockers = this.getPossibleBlockers(oppList, this.attackers);
-    } // constructor
+    }
 
     /** Choose opponent for AI to attack here. Expand as necessary. */
     private Player choosePreferredDefenderPlayer() {
@@ -1053,6 +1067,17 @@ public class AiAttackController {
             break;
         }
         return false; // don't attack
+    }
+    
+    private final boolean shouldAttack(final Player ai, final Card attacker, final Combat combat) {
+        aiAggression = 3;
+        return shouldAttack(ai, attacker, oppList, combat);
+    }
+    
+    public static boolean shouldThisAttack(final Player ai, Card attacker) {
+        AiAttackController aiAtk = new AiAttackController(ai, attacker);
+        Combat combat = ai.getGame().getCombat();
+        return aiAtk.shouldAttack(ai, attacker, combat);
     }
 
 } // end class ComputerUtil_Attack2

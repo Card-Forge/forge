@@ -2,11 +2,13 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 
+import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -118,6 +120,13 @@ public class AnimateAi extends SpellAbilityAi {
                     }
                 }
 
+                if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+                    Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
+                    AnimateAi.becomeAnimated(animatedCopy, sa);
+                    if (!AiAttackController.shouldThisAttack(aiPlayer, animatedCopy)) {
+                        return false;
+                    }
+                }
             }
 
             if (!bFlag) { // All of the defined stuff is animated, not very
@@ -212,6 +221,7 @@ public class AnimateAi extends SpellAbilityAi {
         final Game game = sa.getActivatingPlayer().getGame();
         final Map<String, String> svars = source.getSVars();
         final long timestamp = game.getNextTimestamp();
+        source.setSickness(sa.getHostCard().hasSickness());
 
      // AF specific sa
         int power = -1;
