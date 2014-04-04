@@ -35,11 +35,10 @@ import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
+import forge.toolbox.FToggleSwitch;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FRadioButton;
-import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.MyRandom;
@@ -235,8 +234,7 @@ public class ConstructedScreen extends LaunchScreen {
         private int avatarIndex;
 
         private final FTextField txtPlayerName = new FTextField("Player name");
-        private FRadioButton radioHuman;
-        private FRadioButton radioAi;
+        private final FToggleSwitch humanAiSwitch = new FToggleSwitch("Human", "AI");
 
         private FComboBox<Object> teamComboBox = new FComboBox<Object>();
         private FComboBox<Object> aeTeamComboBox = new FComboBox<Object>();
@@ -281,9 +279,9 @@ public class ConstructedScreen extends LaunchScreen {
             nameRandomiser = createNameRandomizer();
             add(nameRandomiser);
 
-            createPlayerTypeOptions();
-            add(radioHuman);
-            add(radioAi);
+            humanAiSwitch.setToggled(index == 0);
+            humanAiSwitch.setChangedHandler(humanAiSwitched);
+            add(humanAiSwitch);
 
             add(newLabel("Team:"));
             populateTeamsComboBoxes();
@@ -331,14 +329,9 @@ public class ConstructedScreen extends LaunchScreen {
             nameRandomiser.setBounds(x, y, fieldHeight, fieldHeight);
 
             y += fieldHeight + PADDING;
-            radioHuman.setHeight(fieldHeight); //must set height before width so icon is correct size
-            radioAi.setHeight(fieldHeight);
-            radioHuman.setWidth(radioHuman.getAutoSizeBounds().width);
-            radioAi.setWidth(radioAi.getAutoSizeBounds().width);
-            x = width - radioAi.getWidth();
-            radioAi.setPosition(x, y);
-            x -= radioHuman.getWidth() - PADDING;
-            radioHuman.setPosition(x, y);
+            humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(), fieldHeight);
+            x = width - humanAiSwitch.getWidth();
+            humanAiSwitch.setPosition(x, y);
             w = x - avatarSize - 2 * PADDING;
             x = avatarSize + 2 * PADDING;
             teamComboBox.setBounds(x, y, w, fieldHeight);
@@ -371,7 +364,7 @@ public class ConstructedScreen extends LaunchScreen {
             g.drawLine(1, PLAYER_BORDER_COLOR, 0, y, getWidth(), y);
         }
 
-        private final FEventHandler radioMouseAdapter = new FEventHandler() {
+        private final FEventHandler humanAiSwitched = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 updateVanguardList(index);
@@ -452,7 +445,7 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         public PlayerType getPlayerType() {
-            return radioAi.isSelected() ? PlayerType.COMPUTER : PlayerType.HUMAN;
+            return humanAiSwitch.isToggled() ? PlayerType.HUMAN : PlayerType.COMPUTER;
         }
 
         public void setVanguardButtonText(String text) {
@@ -588,18 +581,6 @@ public class ConstructedScreen extends LaunchScreen {
                     currentGameMode = GameType.Vanguard;
                 }
             });
-        }
-
-        private void createPlayerTypeOptions() {
-            radioHuman = new FRadioButton("Human", index == 0);
-            radioAi = new FRadioButton("AI", index != 0);
-
-            radioHuman.setCommand(radioMouseAdapter);
-            radioAi.setCommand(radioMouseAdapter);
-
-            RadioButtonGroup radioButtonGroup = new RadioButtonGroup();
-            radioHuman.setGroup(radioButtonGroup);
-            radioAi.setGroup(radioButtonGroup);
         }
 
         private void addHandlersDeckSelector() {

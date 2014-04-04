@@ -42,15 +42,19 @@ public class FRadioButton extends FLabel {
 
     @Override
     public void setSelected(final boolean b0) {
-        if (isSelected() == b0) { return; }
+        if (isSelected() == b0 || !b0) { return; } //don't support unselecting radio button
 
         if (b0 && group != null) { //if selecting and in group, unselect all other radio buttons in group
             for (FRadioButton button : group.buttons) {
                 if (button != this) {
-                    button.setSelected(false);
+                    button.superSetSelected(false);
                 }
             }
         }
+        superSetSelected(b0);
+    }
+
+    private void superSetSelected(final boolean b0) {
         super.setSelected(b0);
     }
 
