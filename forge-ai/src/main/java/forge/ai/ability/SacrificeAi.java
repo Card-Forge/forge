@@ -67,6 +67,11 @@ public class SacrificeAi extends SpellAbilityAi {
 
             List<Card> list =
                     CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard());
+            for (Card c : list) {
+                if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
+                	return false;
+                }
+            }
             if (!destroy) {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
             } else {
@@ -76,7 +81,7 @@ public class SacrificeAi extends SpellAbilityAi {
                 }
             }
 
-            if (list.size() == 0) {
+            if (list.isEmpty()) {
                 return false;
             }
 

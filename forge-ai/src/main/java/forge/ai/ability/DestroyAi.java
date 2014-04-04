@@ -98,6 +98,9 @@ public class DestroyAi extends SpellAbilityAi {
                                 }
                             }
                         }
+                        if (c.hasSVar("SacMe")) {
+                        	return false;
+                        }
                         //Check for undying
                         return (!c.hasKeyword("Undying") || c.getCounters(CounterType.P1P1) > 0);
                     }
@@ -116,7 +119,7 @@ public class DestroyAi extends SpellAbilityAi {
                 });
             }
 
-            if (list.size() == 0) {
+            if (list.isEmpty()) {
                 return false;
             }
             // target loop
