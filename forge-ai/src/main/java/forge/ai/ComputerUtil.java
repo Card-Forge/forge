@@ -1444,6 +1444,21 @@ public class ComputerUtil {
                 }
             }
         }
+        //GainControl
+        else if (threatApi == ApiType.GainControl
+                && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == null)) {
+            for (final Object o : objects) {
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    // give Shroud to targeted creatures
+                    if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                            && (saviour.getParam("KW").endsWith("Shroud") || saviour.getParam("KW").endsWith("Hexproof"))) {
+                        continue;
+                    }
+                    threatened.add(c);
+                }
+            }
+        }
     
         Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;

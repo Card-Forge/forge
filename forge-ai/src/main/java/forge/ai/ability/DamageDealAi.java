@@ -20,10 +20,8 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 
 import java.util.List;
-import java.util.Random;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
@@ -89,12 +87,8 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if (sa.isAbility()) {
-            final Random r = MyRandom.getRandom(); // prevent run-away
-                                                   // activations
-            if (r.nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
-                return false;
-            }
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+        	return false;
         }
 
         if (!this.damageTargetAI(ai, sa, dmg)) {
