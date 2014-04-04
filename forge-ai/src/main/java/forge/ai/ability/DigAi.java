@@ -42,6 +42,11 @@ public class DigAi extends SpellAbilityAi {
             return false;
         }
 
+        // return false if nothing to dig into
+        if ("Never".equals(sa.getParam("AILogic"))) {
+            return false;
+        }
+
         // don't deck yourself
         if (sa.hasParam("DestinationZone2") && !"Library".equals(sa.getParam("DestinationZone2"))) {
             int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);

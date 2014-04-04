@@ -1180,7 +1180,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")
                 || keyword.endsWith("CARDNAME can't attack or block.")) {
-            if (!CombatUtil.canAttackNextTurn(card)) {
+            if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
