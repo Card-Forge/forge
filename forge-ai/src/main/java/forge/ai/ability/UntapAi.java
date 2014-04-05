@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -12,11 +13,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 public class UntapAi extends SpellAbilityAi {
 
@@ -37,8 +36,9 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+        	return false;
+        }
 
         if (tgt == null) {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
@@ -51,7 +51,7 @@ public class UntapAi extends SpellAbilityAi {
             }
         }
 
-        return randomReturn;
+        return true;
     }
 
     @Override
@@ -133,14 +133,14 @@ public class UntapAi extends SpellAbilityAi {
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source);
 
-        if (untapList.size() == 0) {
+        if (untapList.isEmpty()) {
             return false;
         }
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
             Card choice = null;
 
-            if (untapList.size() == 0) {
+            if (untapList.isEmpty()) {
                 if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     sa.resetTargets();
                     return false;
@@ -150,13 +150,8 @@ public class UntapAi extends SpellAbilityAi {
                 }
             }
 
-            if (CardLists.getNotType(untapList, "Creature").size() == 0) {
-                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if
-                                                                       // only
-                                                                       // creatures
-                                                                       // take
-                                                                       // the
-                                                                       // best
+            if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
+                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
             } else {
                 choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
             }

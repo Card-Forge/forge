@@ -198,7 +198,7 @@ public class AiBlockController {
             final List<Card> safeBlockers = getSafeBlockers(combat, attacker, blockers);
             List<Card> killingBlockers;
 
-            if (safeBlockers.size() > 0) {
+            if (!safeBlockers.isEmpty()) {
                 // 1.Blockers that can destroy the attacker but won't get
                 // destroyed
                 killingBlockers = getKillingBlockers(combat, attacker, safeBlockers);
@@ -213,13 +213,19 @@ public class AiBlockController {
                 // 3.Blockers that can destroy the attacker and have an upside when dying
                 killingBlockers = getKillingBlockers(combat, attacker, blockers);
                 for (Card b : killingBlockers) {
-                    if ((b.hasKeyword("Undying") && b.getCounters(CounterType.P1P1) == 0)
-                            || !b.getSVar("SacMe").equals("")) {
+                    if ((b.hasKeyword("Undying") && b.getCounters(CounterType.P1P1) == 0) || b.hasSVar("SacMe")) {
                         blocker = b;
                         break;
                     }
                 }
-                // 4.Blockers that can destroy the attacker and are worth less
+                // 4.Blockers that have a big upside when dying
+                for (Card b : blockers) {
+                    if (b.hasSVar("SacMe") && Integer.parseInt(b.getSVar("SacMe")) > 3) {
+                        blocker = b;
+                        break;
+                    }
+                }
+                // 5.Blockers that can destroy the attacker and are worth less
                 if (blocker == null && !killingBlockers.isEmpty()) {
                     final Card worst = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                     int value = ComputerUtilCard.evaluateCreature(attacker);
