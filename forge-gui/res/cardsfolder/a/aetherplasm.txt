@@ -8,5 +8,6 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Cha
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
+SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherplasm.jpg
 Oracle:Whenever AEtherplasm blocks a creature, you may return AEtherplasm to its owner's hand. If you do, you may put a creature card from your hand onto the battlefield blocking that creature.

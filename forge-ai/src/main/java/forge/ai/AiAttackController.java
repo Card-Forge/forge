@@ -729,7 +729,7 @@ public class AiAttackController {
         }
         // until the attackers are used up or the player would run out of life
         int attackRounds = 1;
-        while (attritionalAttackers.size() > 0 && humanLife > 0 && attackRounds < 99) {
+        while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
             // sum attacker damage
             int damageThisRound = 0;
             for (int y = 0; y < attritionalAttackers.size(); y++) {
@@ -740,7 +740,7 @@ public class AiAttackController {
             // shorten attacker list by the length of the blockers - assuming
             // all blocked are killed for convenience
             for (int z = 0; z < humanForcesForAttritionalAttack; z++) {
-                if (attritionalAttackers.size() > 0) {
+                if (!attritionalAttackers.isEmpty()) {
                     attritionalAttackers.remove(attritionalAttackers.size() - 1);
                 }
             }
@@ -806,9 +806,9 @@ public class AiAttackController {
         // variable names
         if (ratioDiff > 0 && doAttritionalAttack) {
             this.aiAggression = 5; // attack at all costs
-        } else if (ratioDiff >= 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
+        } else if (ratioDiff >= 1 && computerForces > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
             this.aiAggression = 4; // attack expecting to trade or damage player.
-        } else if (ratioDiff >= 0) {
+        } else if (ratioDiff >= 0 && computerForces > 1) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.
         } else if (ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
                 || ratioDiff * -1 < turnsUntilDeathByUnblockable) {
@@ -988,7 +988,7 @@ public class AiAttackController {
                     if (!canKillAllDangerous) {
                         continue;
                     }
-                    if (defender.getSVar("HasCombatEffect").equals("TRUE")) {
+                    if (defender.getSVar("HasCombatEffect").equals("TRUE") || defender.getSVar("HasBlockEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {
                         for (String keyword : defender.getKeyword()) {
@@ -1070,7 +1070,7 @@ public class AiAttackController {
     }
     
     private final boolean shouldAttack(final Player ai, final Card attacker, final Combat combat) {
-        aiAggression = 3;
+        aiAggression = 2;
         return shouldAttack(ai, attacker, oppList, combat);
     }
     

@@ -6,6 +6,6 @@ K:Defender
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME blocks a creature, tap that creature. That creature doesn't untap during its controller's next untap step.
 SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
-SVar:HasCombatEffect:TRUE
+SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vertigo_spawn.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Vertigo Spawn blocks a creature, tap that creature. That creature doesn't untap during its controller's next untap step.
