@@ -757,6 +757,7 @@ public class ComputerUtilCombat {
         // look out for continuous static abilities that only care for blocking
         // creatures
         final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
+        cardList.addAll(game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
@@ -784,6 +785,9 @@ public class ComputerUtilCombat {
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
+        for (Card card : game.getCardsIn(ZoneType.Command)) {
             theTriggers.addAll(card.getTriggers());
         }
         theTriggers.addAll(attacker.getTriggers());
@@ -902,6 +906,9 @@ public class ComputerUtilCombat {
         final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
+        for (Card card : game.getCardsIn(ZoneType.Command)) {
             theTriggers.addAll(card.getTriggers());
         }
         theTriggers.addAll(attacker.getTriggers());
@@ -1050,6 +1057,9 @@ public class ComputerUtilCombat {
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
+        for (Card card : game.getCardsIn(ZoneType.Command)) {
+            theTriggers.addAll(card.getTriggers());
+        }
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
         if (null != blocker) {
@@ -1065,6 +1075,7 @@ public class ComputerUtilCombat {
         // look out for continuous static abilities that only care for attacking
         // creatures
         final List<Card> cardList = game.getCardsIn(ZoneType.Battlefield);
+        cardList.addAll(game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final Map<String, String> params = stAb.getMapParams();
@@ -1225,6 +1236,9 @@ public class ComputerUtilCombat {
         final Game game = attacker.getGame();
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
+        for (Card card : game.getCardsIn(ZoneType.Command)) {
             theTriggers.addAll(card.getTriggers());
         }
         if (blocker != null) {
