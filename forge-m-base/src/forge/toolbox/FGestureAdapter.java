@@ -229,20 +229,18 @@ public abstract class FGestureAdapter extends InputAdapter {
             return false;
         }
 
+        boolean handled = false;
         if (wasPanning) { // handle no longer panning
+            handled = panStop(x, y);
+
             gestureStartTime = 0;
             long time = Gdx.input.getCurrentEventTime();
             if (time - tracker.lastTime < flingDelay) { // handle fling if needed
                 tracker.update(x, y, time);
-                if (fling(tracker.getVelocityX(), tracker.getVelocityY())) {
-                    return true;
-                }
+                handled = fling(tracker.getVelocityX(), tracker.getVelocityY()) || handled;
             }
-
-            return panStop(x, y);
         }
-
-        return false;
+        return handled;
     }
 
     private void startPress() {

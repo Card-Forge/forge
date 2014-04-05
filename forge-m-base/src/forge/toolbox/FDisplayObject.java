@@ -64,16 +64,16 @@ public abstract class FDisplayObject {
     }
 
     public float screenToLocalX(float x) {
-        return x - screenPosition.x + bounds.x;
+        return x - screenPosition.x;
     }
     public float screenToLocalY(float y) {
-        return y - screenPosition.y + bounds.y;
+        return y - screenPosition.y;
     }
     public float localToScreenX(float x) {
-        return x - bounds.x + screenPosition.x;
+        return x + screenPosition.x;
     }
     public float localToScreenY(float y) {
-        return y - bounds.y + screenPosition.y;
+        return y + screenPosition.y;
     }
 
     public boolean isEnabled() {
@@ -91,9 +91,8 @@ public abstract class FDisplayObject {
     }
 
     public abstract void draw(Graphics g);
-
     public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
-        if (enabled && contains(screenToLocalX(screenX), screenToLocalY(screenY))) {
+        if (enabled && contains(getLeft() + screenToLocalX(screenX), getTop() + screenToLocalY(screenY))) {
             listeners.add(this);
         }
     }

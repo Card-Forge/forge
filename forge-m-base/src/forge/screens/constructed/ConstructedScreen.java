@@ -279,7 +279,7 @@ public class ConstructedScreen extends LaunchScreen {
             nameRandomiser = createNameRandomizer();
             add(nameRandomiser);
 
-            humanAiSwitch.setToggled(index == 0);
+            humanAiSwitch.setToggled(index != 0);
             humanAiSwitch.setChangedHandler(humanAiSwitched);
             add(humanAiSwitch);
 
@@ -445,7 +445,7 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         public PlayerType getPlayerType() {
-            return humanAiSwitch.isToggled() ? PlayerType.HUMAN : PlayerType.COMPUTER;
+            return humanAiSwitch.isToggled() ? PlayerType.COMPUTER : PlayerType.HUMAN;
         }
 
         public void setVanguardButtonText(String text) {

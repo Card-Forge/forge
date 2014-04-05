@@ -1,34 +1,34 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.utils.Utils;
 
 public class FToggleSwitch extends FDisplayObject {
     private static final FSkinColor ACTIVE_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
+    private static final FSkinColor PRESSED_COLOR = ACTIVE_COLOR.stepColor(-30);
     private static final FSkinColor INACTIVE_COLOR = FSkinColor.get(Colors.CLR_INACTIVE);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static float MIN_PAN_DELTA = Utils.AVG_FINGER_WIDTH / 2f;
     private static final float INSETS = 2;
     private static final float PADDING = 3;
 
     private FSkinFont font;
-    private final String onText, offText;
-    private boolean toggled = false;
+    private final String offText, onText;
+    private boolean toggled, pressed;
     private FEventHandler changedHandler;
 
     public FToggleSwitch() {
-        this("On", "Off");
+        this("Off", "On");
     }
 
-    public FToggleSwitch(final String onText0, final String offText0) {
-        onText = onText0;
+    public FToggleSwitch(final String offText0, final String onText0) {
         offText = offText0;
+        onText = onText0;
         font = FSkinFont.get(14);
     }
 
@@ -74,6 +74,18 @@ public class FToggleSwitch extends FDisplayObject {
     }
 
     @Override
+    public final boolean press(float x, float y) {
+        pressed = true;
+        return true;
+    }
+
+    @Override
+    public final boolean release(float x, float y) {
+        pressed = false;
+        return true;
+    }
+
+    @Override
     public final boolean tap(float x, float y, int count) {
         setToggled(!toggled, true);
         return true;
@@ -82,15 +94,35 @@ public class FToggleSwitch extends FDisplayObject {
     //support dragging finger left or right to toggle on/off
     @Override
     public final boolean pan(float x, float y, float deltaX, float deltaY) {
-        if (deltaX < -MIN_PAN_DELTA && x < getWidth() / 2) {
-            setToggled(true, true);
-            return true;
+        if (contains(getLeft() + x, getTop() + y)) {
+            if (x < getHeight()) {
+                setToggled(false, true);
+                return true;
+            }
+            if (x > getWidth() - getHeight()) {
+                setToggled(true, true);
+                return true;
+            }
+            pressed = true;
         }
-        if (deltaX > MIN_PAN_DELTA && x > getWidth() / 2) {
-            setToggled(false, true);
+        else {
+            pressed = false;
+        }
+        return false;
+    }
+
+    @Override
+    public final boolean panStop(float x, float y) {
+        if (pressed) {
+            pressed = false;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY) {
+        return Math.abs(velocityX) > Math.abs(velocityY); //handle fling if more horizontal than vertical
     }
 
     @Override
@@ -106,17 +138,17 @@ public class FToggleSwitch extends FDisplayObject {
         final String text;
         float switchWidth = w - h + PADDING;
         if (toggled) {
+            x = w - switchWidth + 1;
             text = onText;
         }
         else {
-            x = w - switchWidth + 1;
             text = offText;
         }
         x += INSETS;
         y += INSETS;
         h -= 2 * INSETS;
         w = switchWidth - 2 * INSETS;
-        g.fillRect(ACTIVE_COLOR, x, y, w, h);
+        g.fillRect(pressed ? PRESSED_COLOR : ACTIVE_COLOR, x, y, w, h);
 
         x += PADDING;
         w -= 2 * PADDING;

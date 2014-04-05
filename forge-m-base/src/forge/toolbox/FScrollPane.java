@@ -196,10 +196,10 @@ public abstract class FScrollPane extends FContainer {
                 if (setScrollPositions(pos.x, pos.y) && physicsObj.isMoving()) {
                     return true;
                 }
-    
-                //end fling animation if can't scroll anymore or physics object is no longer moving
-                lastFlingStopTime = TimeUtils.nanoTime();
             }
+
+            //end fling animation if can't scroll anymore or physics object is no longer moving
+            lastFlingStopTime = TimeUtils.nanoTime();
             activeFlingAnimation = null;
             return false;
         }
@@ -231,7 +231,7 @@ public abstract class FScrollPane extends FContainer {
         }
 
         //if fling ended just shortly before, still prevent touch events on child controls
-        //in case user tapped just to late to stop scrolling before scroll bounds reached
+        //in case user tapped just too late to stop scrolling before scroll bounds reached
         if (lastFlingStopTime > 0) {
             if (TimeUtils.nanoTime() - lastFlingStopTime < FLING_STOP_DELAY) {
                 listeners.add(this);
