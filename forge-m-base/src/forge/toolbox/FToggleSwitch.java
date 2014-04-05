@@ -13,9 +13,9 @@ public class FToggleSwitch extends FDisplayObject {
     private static final FSkinColor ACTIVE_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     private static final FSkinColor INACTIVE_COLOR = FSkinColor.get(Colors.CLR_INACTIVE);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor BORDER_COLOR = INACTIVE_COLOR.stepColor(-30);
     private static float MIN_PAN_DELTA = Utils.AVG_FINGER_WIDTH / 2f;
-    private static final float PADDING = 5;
+    private static final float INSETS = 2;
+    private static final float PADDING = 3;
 
     private FSkinFont font;
     private final String onText, offText;
@@ -58,7 +58,7 @@ public class FToggleSwitch extends FDisplayObject {
         changedHandler = changedHandler0;
     }
 
-    public float getAutoSizeWidth() {
+    public float getAutoSizeWidth(float height) {
         float width;
         float onTextWidth = font.getFont().getBounds(onText).width;
         float offTextWidth = font.getFont().getBounds(offText).width;
@@ -68,8 +68,8 @@ public class FToggleSwitch extends FDisplayObject {
         else {
             width = offTextWidth;
         }
-        width += 2 * PADDING;
-        width *= 1.5f; //leave room for switch to move
+        width += 2 * (PADDING + INSETS + 1);
+        width += height - PADDING; //leave room for switch to move
         return width;
     }
 
@@ -95,27 +95,31 @@ public class FToggleSwitch extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
+        float x = 1; //leave a pixel so border displays in full
+        float y = 1;
+        float w = getWidth() - 2 * x;
+        float h = getHeight() - 2 * x;
 
-        g.startClip(0, 0, w, h); //start clip to ensure nothing escapes bounds
-        g.fillRect(INACTIVE_COLOR, 0, 0, w, h);
+        g.fillRect(INACTIVE_COLOR, x, y, w, h);
+        g.drawRect(1, FORE_COLOR, x, y, w, h);
 
-        final float x;
         final String text;
-        float switchWidth = w * 0.66f;
+        float switchWidth = w - h + PADDING;
         if (toggled) {
-            x = 0;
             text = onText;
         }
         else {
-            x = w - switchWidth;
+            x = w - switchWidth + 1;
             text = offText;
         }
-        g.fillRect(ACTIVE_COLOR, x, 0, switchWidth, h);
-        g.drawText(text, font, FORE_COLOR, x + PADDING, 0, switchWidth - 2 * PADDING, h, false, HAlignment.CENTER, true);
+        x += INSETS;
+        y += INSETS;
+        h -= 2 * INSETS;
+        w = switchWidth - 2 * INSETS;
+        g.fillRect(ACTIVE_COLOR, x, y, w, h);
 
-        g.drawRect(1, BORDER_COLOR, 0, 0, w, h);
-        g.endClip();
+        x += PADDING;
+        w -= 2 * PADDING;
+        g.drawText(text, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
     }
 }

@@ -329,10 +329,10 @@ public class ConstructedScreen extends LaunchScreen {
             nameRandomiser.setBounds(x, y, fieldHeight, fieldHeight);
 
             y += fieldHeight + PADDING;
-            humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(), fieldHeight);
-            x = width - humanAiSwitch.getWidth();
+            humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
+            x = width - humanAiSwitch.getWidth() - PADDING;
             humanAiSwitch.setPosition(x, y);
-            w = x - avatarSize - 2 * PADDING;
+            w = x - avatarSize - 3 * PADDING;
             x = avatarSize + 2 * PADDING;
             teamComboBox.setBounds(x, y, w, fieldHeight);
 
