@@ -4992,6 +4992,7 @@ forge-gui/res/cardsfolder/g/galvanic_juggernaut.txt -text
 forge-gui/res/cardsfolder/g/galvanic_key.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/galvanoth.txt -text
 forge-gui/res/cardsfolder/g/gamble.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/game_of_chaos.txt -text
 forge-gui/res/cardsfolder/g/game_preserve.txt -text
 forge-gui/res/cardsfolder/g/game_trail_changeling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gamekeeper.txt -text

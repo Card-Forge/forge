@@ -1,0 +1,18 @@
+Name:Game of Chaos
+ManaCost:R R R
+Types:Sorcery
+A:SP$ Repeat | Cost$ R R R | ValidTgts$ Opponent | IsCurse$ True | StackDescription$ SpellDescription | RepeatOptional$ True | RepeatSubAbility$ DBCleanup | RepeatOptionalDecider$ Remembered | SubAbility$ DBRestore | SpellDescription$ Flip a coin. If you win the flip, you gain 1 life and target opponent loses 1 life, and you decide whether to flip again. If you lose the flip, you lose 1 life and that opponent gains 1 life, and that player decides whether to flip again. Double the life stakes with each flip.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBFlip
+SVar:DBFlip:DB$ FlipACoin | Caller$ You | WinSubAbility$ GainlifeYou | LoseSubAbility$ GainlifeOpp | SubAbility$ DoubleLifeStake
+SVar:GainlifeYou:DB$ GainLife | Defined$ You | LifeAmount$ NumLife | SubAbility$ LoseLifeOpp
+SVar:LoseLifeOpp:DB$ LoseLife | Defined$ Targeted | LifeAmount$ NumLife | SubAbility$ RememberYou
+SVar:RememberYou:DB$ Pump | RememberObjects$ You
+SVar:GainlifeOpp:DB$ GainLife | Defined$ Targeted | LifeAmount$ NumLife | SubAbility$ LoseLifeYou
+SVar:LoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ NumLife | SubAbility$ RememberOpp
+SVar:RememberOpp:DB$ Pump | RememberObjects$ Targeted
+SVar:DoubleLifeStake:DB$ StoreSVar | SVar$ NumLife | References$ NumLife | Type$ CountSVar | Expression$ NumLife/Times.2
+SVar:DBRestore:DB$ StoreSVar | SVar$ NumLife | References$ NumLife | Type$ Number | Expression$ 1
+SVar:NumLife:Number$1
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/game_of_chaos.jpg
+Oracle:Flip a coin. If you win the flip, you gain 1 life and target opponent loses 1 life, and you decide whether to flip again. If you lose the flip, you lose 1 life and that opponent gains 1 life, and that player decides whether to flip again. Double the life stakes with each flip.

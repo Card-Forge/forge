@@ -123,7 +123,10 @@ public class RepeatEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RepeatOptional")) {
-            return sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to repeat this process again?");
+            Player decider = sa.hasParam("RepeatOptionalDecider")
+                    ? AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("RepeatOptionalDecider"), sa).get(0)
+                    : sa.getActivatingPlayer();
+            return decider.getController().confirmAction(sa, null, "Do you want to repeat this process again?");
         }
 
         return true;
