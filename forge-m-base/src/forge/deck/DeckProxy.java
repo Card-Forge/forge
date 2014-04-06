@@ -1,9 +1,8 @@
-package forge.gui.deckeditor;
+package forge.deck;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
-import forge.Singletons;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -19,12 +18,11 @@ import forge.game.GameType;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
-import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
-import forge.quest.QuestEvent;
+import forge.model.FModel;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
+import forge.utils.ForgePreferences.FPref;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -178,7 +176,7 @@ public class DeckProxy implements InventoryItem {
 
     public Iterable<GameFormat> getFormats() {
         if (formats == null) {
-            formats = Singletons.getModel().getFormats().getAllFormatsOfDeck(getDeck());
+            formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
         }
         return formats;
     }
@@ -282,10 +280,10 @@ public class DeckProxy implements InventoryItem {
 
         @Override
         public Deck getDeck() {
-            final DeckGeneratorTheme gen = new DeckGeneratorTheme(Singletons.getMagicDb().getCommonCards());
+            final DeckGeneratorTheme gen = new DeckGeneratorTheme(FModel.getMagicDb().getCommonCards());
             final Deck deck = new Deck();
-            gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-            gen.setUseArtifacts(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+            gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
             StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
             if (errorBuilder.length() > 0) {
@@ -326,9 +324,9 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static Iterable<DeckProxy> getAllQuestEventAndChallenges() {
+   /* public static Iterable<DeckProxy> getAllQuestEventAndChallenges() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        QuestController quest = Singletons.getModel().getQuest();
+        QuestController quest = FModel.getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
@@ -336,7 +334,7 @@ public class DeckProxy implements InventoryItem {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     public static Iterable<DeckProxy> getAllSealedDecks(IStorage<DeckGroup> sealed) {

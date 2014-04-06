@@ -24,8 +24,16 @@ public abstract class FScrollPane extends FContainer {
         return scrollLeft;
     }
 
+    public void setScrollLeft(float scrollLeft0) {
+        setScrollPositions(scrollLeft0, scrollTop);
+    }
+
     public float getScrollTop() {
         return scrollTop;
+    }
+
+    public void setScrollTop(float scrollTop0) {
+        setScrollPositions(scrollLeft, scrollTop0);
     }
 
     public float getScrollWidth() {

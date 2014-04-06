@@ -43,6 +43,10 @@ public class FComboBox<E> extends FTextField {
         return false;
     }
 
+    public int getItemCount() {
+        return items.size();
+    }
+
     public int getSelectedIndex() {
         if (selectedItem == null) { return -1; }
         return items.indexOf(selectedItem);

@@ -22,7 +22,11 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.DeckgenUtil;
+import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
@@ -30,19 +34,23 @@ import forge.game.player.LobbyPlayer.PlayerType;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.net.FServer;
+import forge.net.Lobby;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
+import forge.toolbox.FList;
 import forge.toolbox.FToggleSwitch;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+import forge.util.storage.IStorage;
 import forge.utils.ForgePreferences;
 import forge.utils.ForgePreferences.FPref;
 import forge.utils.Utils;
@@ -55,7 +63,6 @@ public class ConstructedScreen extends LaunchScreen {
 
     // General variables
     private int activePlayersNum = 2;
-    private int lastArchenemy = 0;
     private GameType currentGameMode = GameType.Constructed;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
     private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
@@ -87,11 +94,21 @@ public class ConstructedScreen extends LaunchScreen {
 
     private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
     private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
+    
+    private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
+    private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
+    private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
 
+    // Variants
+    private final List<DeckList> schemeDeckLists = new ArrayList<DeckList>();
+    private final List<DeckList> commanderDeckLists = new ArrayList<DeckList>();
+    private final List<DeckList> planarDeckLists = new ArrayList<DeckList>();
+    private final List<DeckList> vgdAvatarLists = new ArrayList<DeckList>();
     private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
     private final List<PaperCard> vgdAllAiAvatars = new ArrayList<PaperCard>();
     private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
     private final List<PaperCard> nonRandomAiAvatars = new ArrayList<PaperCard>();
+    private int lastArchenemy = 0;
     private Vector<Object> humanListData = new Vector<Object>();
     private Vector<Object> aiListData = new Vector<Object>();
 
@@ -186,6 +203,18 @@ public class ConstructedScreen extends LaunchScreen {
         addPlayerBtn.setEnabled(true);
     }
 
+    public final FDeckChooser getDeckChooser(int playernum) {
+        return deckChoosers.get(playernum);
+    }
+
+    private class DeckList extends FList<Object> {
+        Object selectedValue;
+
+        public Object getSelectedValue() {
+            return selectedValue;
+        }
+    }
+
     public boolean isPlayerAI(int playernum) {
         return playerPanels.get(playernum).getPlayerType() == PlayerType.COMPUTER;
     }
@@ -208,20 +237,182 @@ public class ConstructedScreen extends LaunchScreen {
     protected boolean buildLaunchParams(LaunchParams launchParams) {
         launchParams.gameType = GameType.Constructed;
 
-        //TODO: Allow picking decks
-        Deck humanDeck = Utils.generateRandomDeck(2);
-        if (humanDeck == null) { return false; }
-        LobbyPlayer humanLobbyPlayer = FServer.getLobby().getGuiPlayer();
-        RegisteredPlayer humanRegisteredPlayer = new RegisteredPlayer(humanDeck);
-        humanRegisteredPlayer.setPlayer(humanLobbyPlayer);
-        launchParams.players.add(humanRegisteredPlayer);
+        if (!isEnoughTeams()) {
+            FOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
+            return false;
+        }
 
-        Deck aiDeck = Utils.generateRandomDeck(2);
-        if (aiDeck == null) { return false; }
-        LobbyPlayer aiLobbyPlayer = FServer.getLobby().getAiPlayer();
-        RegisteredPlayer aiRegisteredPlayer = new RegisteredPlayer(aiDeck);
-        aiRegisteredPlayer.setPlayer(aiLobbyPlayer);
-        launchParams.players.add(aiRegisteredPlayer);
+        for (final int i : getParticipants()) {
+            if (getDeckChooser(i).getPlayer() == null) {
+                FOptionPane.showMessageDialog("Please specify a deck for " + getPlayerName(i));
+                return false;
+            }
+        } // Is it even possible anymore? I think current implementation assigns decks automatically.
+
+        final List<GameType> variantTypes = new ArrayList<GameType>();
+        variantTypes.addAll(appliedVariants);
+
+        boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
+        if (checkLegality && !variantTypes.contains(GameType.Commander)) { //Commander deck replaces regular deck and is checked later
+            for (final int i : getParticipants()) {
+                String name = getPlayerName(i);
+                String errMsg = GameType.Constructed.getDecksFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer().getDeck());
+                if (errMsg != null) {
+                    FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
+                    return false;
+                }
+            }
+        }
+
+        Lobby lobby = FServer.getLobby();
+        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
+        for (final int i : getParticipants()) {
+            String name = getPlayerName(i);
+            LobbyPlayer lobbyPlayer = isPlayerAI(i) ? lobby.getAiPlayer(name,
+                    getPlayerAvatar(i)) : lobby.getGuiPlayer();
+            RegisteredPlayer rp = getDeckChooser(i).getPlayer();
+
+            if (variantTypes.isEmpty()) {
+                rp.setTeamNumber(getTeam(i));
+                players.add(rp.setPlayer(lobbyPlayer));
+            }
+            else {
+                Deck deck = null;
+                boolean isCommanderMatch = variantTypes.contains(GameType.Commander);
+                if (isCommanderMatch) {
+                    Object selected = commanderDeckLists.get(i).getSelectedValue();
+                    if (selected instanceof String) {
+                        String sel = (String) selected;
+                        IStorage<Deck> comDecks = FModel.getDecks().getCommander();
+                        if (sel.equals("Random") && comDecks.size() > 0) {
+                            deck = Aggregates.random(comDecks);                            
+                        }
+                    }
+                    else {
+                        deck = (Deck) selected;
+                    }
+                    if (deck == null) { //Can be null if player deselects the list selection or chose Generate
+                        deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(i));
+                    }
+                    if (checkLegality) {
+                        String errMsg = GameType.Commander.getDecksFormat().getDeckConformanceProblem(deck);
+                        if (errMsg != null) {
+                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Commander Deck");
+                            return false;
+                        }
+                    }
+                }
+
+                // Initialise variables for other variants
+                deck = deck == null ? rp.getDeck() : deck;
+                Iterable<PaperCard> schemes = null;
+                boolean playerIsArchenemy = isPlayerArchenemy(i);
+                Iterable<PaperCard> planes = null;
+                PaperCard vanguardAvatar = null;
+
+                //Archenemy
+                if (variantTypes.contains(GameType.ArchenemyRumble)
+                        || (variantTypes.contains(GameType.Archenemy) && playerIsArchenemy)) {
+                    Object selected = schemeDeckLists.get(i).getSelectedValue();
+                    CardPool schemePool = null;
+                    if (selected instanceof String) {
+                        String sel = (String) selected;
+                        if (sel.contains("Use deck's scheme section")) {
+                            if (deck.has(DeckSection.Schemes)) {
+                                schemePool = deck.get(DeckSection.Schemes);
+                            }
+                            else {
+                                sel = "Random";
+                            }
+                        }
+                        IStorage<Deck> sDecks = FModel.getDecks().getScheme();
+                        if (sel.equals("Random") && sDecks.size() != 0) {
+                            schemePool = Aggregates.random(sDecks).get(DeckSection.Schemes);                            
+                        }
+                    }
+                    else {
+                        schemePool = ((Deck) selected).get(DeckSection.Schemes);
+                    }
+                    if (schemePool == null) { //Can be null if player deselects the list selection or chose Generate
+                        schemePool = DeckgenUtil.generateSchemeDeck();
+                    }
+                    if (checkLegality) {
+                        String errMsg = GameType.Archenemy.getDecksFormat().getSchemeSectionConformanceProblem(schemePool);
+                        if (errMsg != null) {
+                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
+                            return false;
+                        }
+                    }
+                    schemes = schemePool.toFlatList();
+                }
+
+                //Planechase
+                if (variantTypes.contains(GameType.Planechase)) {
+                    Object selected = planarDeckLists.get(i).getSelectedValue();
+                    CardPool planePool = null;
+                    if (selected instanceof String) {
+                        String sel = (String) selected;
+                        if (sel.contains("Use deck's planes section")) {
+                            if (deck.has(DeckSection.Planes)) {
+                                planePool = deck.get(DeckSection.Planes);
+                            } else {
+                                sel = "Random";
+                            }
+                        }
+                        IStorage<Deck> pDecks = FModel.getDecks().getPlane();
+                        if (sel.equals("Random") && pDecks.size() != 0) {
+                            planePool = Aggregates.random(pDecks).get(DeckSection.Planes);                            
+                        }
+                    }
+                    else {
+                        planePool = ((Deck) selected).get(DeckSection.Planes);
+                    }
+                    if (planePool == null) { //Can be null if player deselects the list selection or chose Generate
+                        planePool = DeckgenUtil.generatePlanarDeck();
+                    }
+                    if (checkLegality) {
+                        String errMsg = GameType.Planechase.getDecksFormat().getPlaneSectionConformanceProblem(planePool);
+                        if (null != errMsg) {
+                            FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
+                            return false;
+                        }
+                    }
+                    planes = planePool.toFlatList();
+                }
+
+                //Vanguard
+                if (variantTypes.contains(GameType.Vanguard)) {
+                    Object selected = vgdAvatarLists.get(i).getSelectedValue();
+                    if (selected instanceof String) {
+                        String sel = (String) selected;
+                        if (sel.contains("Use deck's default avatar") && deck.has(DeckSection.Avatar)) {
+                            vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
+                        }
+                        else { //Only other string is "Random"
+                            if (!isPlayerAI(i)) { //Human
+                                vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
+                            }
+                            else { //AI
+                                vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
+                            }
+                        }
+                    }
+                    else {
+                        vanguardAvatar = (PaperCard)selected;
+                    }
+                    if (vanguardAvatar == null) {
+                        FOptionPane.showErrorDialog("No Vanguard avatar selected for " + name
+                                + ". Please choose one or disable the Vanguard variant");
+                        return false;
+                    }
+                }
+
+                rp = RegisteredPlayer.forVariants(variantTypes, deck, schemes, playerIsArchenemy, planes, vanguardAvatar);
+                rp.setTeamNumber(getTeam(i));
+                players.add(rp.setPlayer(lobbyPlayer));
+            }
+            getDeckChooser(i).saveState();
+        }
 
         return true;
     }

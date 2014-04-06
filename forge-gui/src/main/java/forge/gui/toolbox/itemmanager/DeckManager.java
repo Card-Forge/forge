@@ -38,7 +38,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /** 
- * ItemManager for cards
+ * ItemManager for decks
  *
  */
 @SuppressWarnings("serial")

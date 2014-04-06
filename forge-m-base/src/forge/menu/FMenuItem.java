@@ -33,12 +33,19 @@ public class FMenuItem extends FDisplayObject {
     private float textWidth;
 
     public FMenuItem(String text0, FEventHandler handler0) {
-        this(text0, null, handler0);
+        this(text0, null, handler0, true);
+    }
+    public FMenuItem(String text0, FEventHandler handler0, boolean enabled0) {
+        this(text0, null, handler0, enabled0);
     }
     public FMenuItem(String text0, FImage icon0, FEventHandler handler0) {
+        this(text0, icon0, handler0, true);
+    }
+    public FMenuItem(String text0, FImage icon0, FEventHandler handler0, boolean enabled0) {
         text = text0;
         icon = icon0;
         handler = handler0;
+        setEnabled(enabled0);
 
         textWidth = FONT.getFont().getBounds(text).width;
     }

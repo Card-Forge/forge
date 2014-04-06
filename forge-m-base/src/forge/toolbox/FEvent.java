@@ -3,7 +3,10 @@ package forge.toolbox;
 public class FEvent {
     public enum FEventType {
         TAP,
-        CHANGE
+        LONG_PRESS,
+        CHANGE,
+        ACTIVATE,
+        DELETE
     }
 
     private FDisplayObject source;

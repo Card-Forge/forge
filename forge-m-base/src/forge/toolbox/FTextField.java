@@ -9,12 +9,25 @@ import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FEvent.FEventHandler;
 
 public class FTextField extends FDisplayObject {
+    private static final int DEFAULT_FONT_SIZE = 14;
     protected static final float PADDING = 5;
     protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     protected static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
+    protected static final FSkinColor GHOST_TEXT_COLOR = FORE_COLOR.alphaColor(0.7f);
     private FEventHandler changedHandler;
 
+    public static float getDefaultHeight() {
+        return getDefaultHeight(DEFAULT_FONT_SIZE);
+    }
+    public static float getDefaultHeight(int fontSize) {
+        return getDefaultHeight(FSkinFont.get(fontSize));
+    }
+    public static float getDefaultHeight(FSkinFont font0) {
+        return font0.getFont().getCapHeight() * 3;
+    }
+
     private String text;
+    private String ghostText;
     private FSkinFont font;
     private HAlignment alignment;
 
@@ -23,7 +36,8 @@ public class FTextField extends FDisplayObject {
     }
     public FTextField(String text0) {
         text = text0;
-        setFontSize(14);
+        ghostText = "";
+        setFontSize(DEFAULT_FONT_SIZE);
         alignment = HAlignment.LEFT;
     }
 
@@ -32,6 +46,17 @@ public class FTextField extends FDisplayObject {
     }
     public void setText(String text0) {
         text = text0;
+    }
+
+    public String getGhostText() {
+        return ghostText;
+    }
+    public void setGhostText(String ghostText0) {
+        ghostText = ghostText0;
+    }
+
+    public boolean isEmpty() {
+        return text.isEmpty();
     }
 
     public HAlignment getAlignment() {
@@ -43,7 +68,7 @@ public class FTextField extends FDisplayObject {
 
     public void setFontSize(int fontSize0) {
         font = FSkinFont.get(fontSize0);
-        setHeight(font.getFont().getCapHeight() * 3);
+        setHeight(getDefaultHeight(font));
     }
 
     public FEventHandler getChangedHandler() {
@@ -51,6 +76,10 @@ public class FTextField extends FDisplayObject {
     }
     public void setChangedHandler(FEventHandler changedHandler0) {
         changedHandler = changedHandler0;
+    }
+
+    public float getAutoSizeWidth() {
+        return font.getFont().getBounds(text).width + 2 * PADDING;
     }
 
     @Override
@@ -64,7 +93,12 @@ public class FTextField extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
         g.fillRect(BACK_COLOR, 0, 0, w, h);
-        g.drawText(text, font, FORE_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+        if (!text.isEmpty()) {
+            g.drawText(text, font, FORE_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+        }
+        else if (!ghostText.isEmpty()) {
+            g.drawText(ghostText, font, GHOST_TEXT_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+        }
         g.drawRect(1, FORE_COLOR, 1, 1, w - 2, h - 2); //allow smooth border to fully display within bounds
     }
 

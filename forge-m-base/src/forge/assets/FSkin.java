@@ -269,6 +269,10 @@ public class FSkin {
         addEncodingSymbol("Q", GameplayImages.IMG_UNTAP);
         addEncodingSymbol("S", GameplayImages.IMG_SNOW);
         addEncodingSymbol("T", GameplayImages.IMG_TAP);*/
+
+        if (splashScreen != null) {
+            CardFaceSymbols.loadImages();
+        }
     }
 
     /**

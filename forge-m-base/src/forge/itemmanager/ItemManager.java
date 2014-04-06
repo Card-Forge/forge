@@ -1,0 +1,1067 @@
+/*
+ * Forge: Play Magic: the Gathering.
+ * Copyright (C) 2011  Forge Team
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package forge.itemmanager;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+
+import forge.assets.FSkinImage;
+import forge.item.InventoryItem;
+import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.views.ColumnDef;
+import forge.itemmanager.views.ImageView;
+import forge.itemmanager.views.ItemColumn;
+import forge.itemmanager.views.ItemListView;
+import forge.itemmanager.views.ItemView;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
+import forge.menu.FSubMenu;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FContainer;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
+import forge.toolbox.FLabel;
+import forge.toolbox.FTextField;
+import forge.util.Aggregates;
+import forge.util.ItemPool;
+import forge.util.ReflectionUtil;
+import forge.utils.LayoutHelper;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+
+public abstract class ItemManager<T extends InventoryItem> extends FContainer {
+    private ItemPool<T> pool;
+    private final ItemManagerModel<T> model;
+    private Predicate<? super T> filterPredicate = null;
+    private final Map<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>> filters =
+            new HashMap<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>>();
+    private final List<ItemFilter<? extends T>> orderedFilters = new ArrayList<ItemFilter<? extends T>>();
+    private boolean wantUnique = false;
+    private boolean alwaysNonUnique = false;
+    private boolean allowMultipleSelections = false;
+    private boolean hideFilters = false;
+    private FEventHandler itemActivateHandler;
+    private final Class<T> genericType;
+    private ItemManagerConfig config;
+
+    private final FCheckBox chkEnableFilters = new FCheckBox();
+
+    private final FTextField txtFilterLogic = new FTextField();
+
+    private final ItemFilter<? extends T> mainSearchFilter;
+
+    private final FLabel btnFilters = new FLabel.ButtonBuilder()
+        .text("Filters")
+        .build();
+
+    private final FLabel lblCaption = new FLabel.Builder()
+        .align(HAlignment.LEFT)
+        .fontSize(12)
+        .build();
+
+    private final FLabel lblRatio = new FLabel.Builder()
+        .align(HAlignment.LEFT)
+        .fontSize(12)
+        .build();
+
+    private static final FSkinImage VIEW_OPTIONS_ICON = FSkinImage.SETTINGS;
+    private final FLabel btnViewOptions = new FLabel.Builder()
+        .selectable(true)
+        .icon(VIEW_OPTIONS_ICON).iconScaleAuto(false)
+        .build();
+
+    private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
+    private final ItemListView<T> listView;
+    private final ImageView<T> imageView;
+    private ItemView<T> currentView;
+    private boolean initialized;
+    protected boolean lockFiltering;
+
+    /**
+     * ItemManager Constructor.
+     * 
+     * @param genericType0 the class of item that this table will contain
+     * @param statLabels0 stat labels for this item manager
+     * @param wantUnique0 whether this table should display only one item with the same name
+     */
+    protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
+        genericType = genericType0;
+        wantUnique = wantUnique0;
+        model = new ItemManagerModel<T>(genericType0);
+
+        mainSearchFilter = createSearchFilter();
+
+        listView = new ItemListView<T>(this, model);
+        imageView = createImageView(model);
+
+        views.add(listView);
+        views.add(imageView);
+        currentView = listView;
+    }
+
+    protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
+        return new ImageView<T>(this, model0);
+    }
+
+    /**
+     * Initialize item manager if needed
+     */
+    public void initialize() {
+        if (initialized) { return; } //avoid initializing more than once
+
+        //initialize views
+        for (int i = 0; i < views.size(); i++) {
+            views.get(i).initialize(i);
+        }
+
+        //build enable filters checkbox
+        chkEnableFilters.setText("(*)");
+        chkEnableFilters.setSelected(true);
+        chkEnableFilters.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                lockFiltering = true;
+                boolean enabled = chkEnableFilters.isSelected();
+                for (ItemFilter<? extends T> filter : orderedFilters) {
+                    filter.setEnabled(enabled);
+                }
+                txtFilterLogic.setEnabled(enabled);
+                mainSearchFilter.setEnabled(enabled);
+                mainSearchFilter.updateEnabled(); //need to call updateEnabled since no listener for filter checkbox
+                lockFiltering = false;
+                applyFilters();
+            }
+        });
+
+        //build display
+        add(chkEnableFilters);
+        add(txtFilterLogic);
+        add(mainSearchFilter.getWidget());
+        add(btnFilters);
+        add(lblCaption);
+        add(lblRatio);
+        for (ItemView<T> view : views) {
+            add(view.getButton());
+            view.getButton().setSelected(view == currentView);
+        }
+        add(btnViewOptions);
+        btnViewOptions.setSelected(currentView.getPnlOptions().isVisible());
+        add(currentView.getPnlOptions());
+        add(currentView.getScroller());
+
+        final FEventHandler cmdAddCurrentSearch = new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
+                if (searchFilter != null) {
+                    lockFiltering = true; //prevent updating filtering from this change
+                    addFilter(searchFilter);
+                    mainSearchFilter.reset();
+                    lockFiltering = false;
+                }
+            }
+        };
+        final FEventHandler cmdResetFilters = new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                resetFilters();
+            }
+        };
+        final FEventHandler cmdHideFilters = new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                setHideFilters(!getHideFilters());
+            }
+        };
+        final FSubMenu addMenu = new FSubMenu("Add", new FPopupMenu() {
+            @Override
+            protected void buildMenu() {
+                FMenuItem currentTextSearch = new FMenuItem("Current text search", cmdAddCurrentSearch);
+                currentTextSearch.setEnabled(!mainSearchFilter.isEmpty());
+                addItem(currentTextSearch);
+
+                if (config != ItemManagerConfig.STRING_ONLY) {
+                    buildAddFilterMenu(this);
+                }
+            }
+        });
+
+        //setup command for btnFilters
+        btnFilters.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        if (hideFilters) {
+                            addItem(new FMenuItem("Show Filters", cmdHideFilters));
+                        }
+                        else {
+                            addMenu.setEnabled(mainSearchFilter.isEnabled());
+                            addItem(addMenu);
+                            addItem(new FMenuItem("Reset Filters", cmdResetFilters));
+                            addItem(new FMenuItem("Hide Filters", cmdHideFilters));
+                        }
+                    }
+                };
+                
+                menu.show(btnFilters, 0, btnFilters.getHeight());
+            }
+        });
+
+        btnViewOptions.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
+                revalidate();
+            }
+        });
+
+        //setup initial filters
+        addDefaultFilters();
+
+        initialized = true; //must set flag just before applying filters
+        if (!applyFilters()) {
+            if (pool != null) { //ensure view updated even if filter predicate didn't change
+                updateView(true, null);
+            }
+        }
+    }
+
+    public ItemManagerConfig getConfig() {
+        return config;
+    }
+
+    public void setup(ItemManagerConfig config0) {
+        setup(config0, null);
+    }
+    public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemColumn> colOverrides) {
+        config = config0;
+        setWantUnique(config0.getUniqueCardsOnly());
+        for (ItemView<T> view : views) {
+            view.setup(config0, colOverrides);
+        }
+        setViewIndex(config0.getViewIndex());
+        setHideFilters(config0.getHideFilters());
+    }
+
+    public void setViewIndex(int viewIndex) {
+        if (viewIndex < 0 || viewIndex >= views.size()) { return; }
+        ItemView<T> view = views.get(viewIndex);
+        if (currentView == view) { return; }
+
+        if (config != null) {
+            config.setViewIndex(viewIndex);
+        }
+
+        final int backupIndexToSelect = currentView.getSelectedIndex();
+        final Iterable<T> itemsToSelect; //only retain selected items if not single selection of first item
+        if (backupIndexToSelect > 0 || getSelectionCount() > 1) {
+            itemsToSelect = currentView.getSelectedItems();
+        }
+        else {
+            itemsToSelect = null;
+        }
+
+        currentView.getButton().setSelected(false);
+        remove(currentView.getPnlOptions());
+        remove(currentView.getScroller());
+
+        currentView = view;
+
+        btnViewOptions.setSelected(view.getPnlOptions().isVisible());
+        view.getButton().setSelected(true);
+        view.refresh(itemsToSelect, backupIndexToSelect, 0);
+
+        add(view.getPnlOptions());
+        add(view.getScroller());
+        revalidate();
+    }
+
+    public void setHideViewOptions(int viewIndex, boolean hideViewOptions) {
+        if (viewIndex < 0 || viewIndex >= views.size()) { return; }
+        views.get(viewIndex).getPnlOptions().setVisible(!hideViewOptions);
+    }
+
+    @Override
+    public void doLayout(float width, float height) {
+        LayoutHelper helper = new LayoutHelper(this);
+        float fieldHeight = txtFilterLogic.getHeight();
+        if (!hideFilters) {
+            int number = 0;
+            StringBuilder logicBuilder = new StringBuilder();
+            for (ItemFilter<? extends T> filter : orderedFilters) {
+                filter.setNumber(++number);
+                logicBuilder.append(number + "&");
+                helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
+            }
+            txtFilterLogic.setText(logicBuilder.toString());
+            helper.newLine();
+            helper.include(chkEnableFilters, 41, fieldHeight);
+            helper.offset(-1, 0); //ensure widgets line up
+            helper.include(txtFilterLogic, txtFilterLogic.getAutoSizeWidth(), fieldHeight);
+            helper.fillLine(mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
+            helper.newLine(-3);
+        }
+        helper.newLine();
+        helper.offset(1, 0); //align filters button with expand/collapse all button
+        helper.include(btnFilters, 61, fieldHeight);
+        float captionWidth = lblCaption.getAutoSizeBounds().width;
+        float ratioWidth = lblRatio.getAutoSizeBounds().width;
+        float viewButtonWidth = fieldHeight;
+        float viewButtonCount = views.size() + 1;
+        float availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 2) * helper.getGapX();
+        if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
+            captionWidth = availableCaptionWidth;
+        }
+        helper.include(lblCaption, captionWidth, fieldHeight);
+        helper.fillLine(lblRatio, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
+        for (ItemView<T> view : views) {
+            helper.include(view.getButton(), viewButtonWidth, fieldHeight);
+            helper.offset(-1, 0);
+        }
+        helper.include(btnViewOptions, viewButtonWidth, fieldHeight);
+        helper.newLine(-1);
+        if (currentView.getPnlOptions().isVisible()) {
+            helper.fillLine(currentView.getPnlOptions(), fieldHeight + 4);
+        }
+        helper.fill(currentView.getScroller());
+    }
+
+    /**
+     * 
+     * getGenericType.
+     * 
+     * @return generic type of items
+     */
+    public Class<T> getGenericType() {
+        return genericType;
+    }
+
+    /**
+     * 
+     * getCaption.
+     * 
+     * @return caption to display before ratio
+     */
+    public String getCaption() {
+        return lblCaption.getText();
+    }
+
+    /**
+     * 
+     * setCaption.
+     * 
+     * @param caption - caption to display before ratio
+     */
+    public void setCaption(String caption) {
+        lblCaption.setText(caption);
+    }
+
+    /**
+     * 
+     * Gets the item pool.
+     * 
+     * @return ItemPoolView
+     */
+    public ItemPool<T> getPool() {
+        return pool;
+    }
+
+    /**
+     * 
+     * Sets the item pool.
+     * 
+     * @param items
+     */
+    public void setPool(final Iterable<T> items) {
+        setPool(ItemPool.createFrom(items, genericType), false);
+    }
+
+    /**
+     * 
+     * Sets the item pool.
+     * 
+     * @param poolView
+     * @param infinite
+     */
+    public void setPool(final ItemPool<T> poolView, boolean infinite) {
+        setPoolImpl(ItemPool.createFrom(poolView, genericType), infinite);
+    }
+
+    public void setPool(final ItemPool<T> pool0) {
+        setPoolImpl(pool0, false);
+    }
+
+    /**
+     * 
+     * Sets the item pool.
+     * 
+     * @param pool0
+     * @param infinite
+     */
+    private void setPoolImpl(final ItemPool<T> pool0, boolean infinite) {
+        model.clear();
+        pool = pool0;
+        model.addItems(pool);
+        model.setInfinite(infinite);
+        updateView(true, null);
+    }
+
+    public ItemView<T> getCurrentView() {
+        return currentView;
+    }
+
+    /**
+     * 
+     * getItemCount.
+     * 
+     * @return int
+     */
+    public int getItemCount() {
+        return currentView.getCount();
+    }
+
+    /**
+     * 
+     * getSelectionCount.
+     * 
+     * @return int
+     */
+    public int getSelectionCount() {
+        return currentView.getSelectionCount();
+    }
+
+    /**
+     * 
+     * getSelectedItem.
+     * 
+     * @return T
+     */
+    public T getSelectedItem() {
+        return currentView.getSelectedItem();
+    }
+
+    /**
+     * 
+     * getSelectedItems.
+     * 
+     * @return Iterable<T>
+     */
+    public Collection<T> getSelectedItems() {
+        return currentView.getSelectedItems();
+    }
+
+    /**
+     * 
+     * getSelectedItems.
+     * 
+     * @return ItemPool<T>
+     */
+    public ItemPool<T> getSelectedItemPool() {
+        ItemPool<T> selectedItemPool = new ItemPool<T>(genericType);
+        for (T item : getSelectedItems()) {
+            selectedItemPool.add(item, getItemCount(item));
+        }
+        return selectedItemPool;
+    }
+
+    /**
+     * 
+     * setSelectedItem.
+     * 
+     * @param item - Item to select
+     */
+    public boolean setSelectedItem(T item) {
+    	return currentView.setSelectedItem(item);
+    }
+
+    /**
+     * 
+     * setSelectedItems.
+     * 
+     * @param items - Items to select
+     */
+    public boolean setSelectedItems(Iterable<T> items) {
+        return currentView.setSelectedItems(items);
+    }
+
+    /**
+     * 
+     * stringToItem.
+     * 
+     * @param str - String to get item corresponding to
+     */
+    public T stringToItem(String str) {
+        for (Entry<T, Integer> itemEntry : pool) {
+            if (itemEntry.getKey().toString().equals(str)) {
+                return itemEntry.getKey();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * setSelectedString.
+     * 
+     * @param str - String to select
+     */
+    public boolean setSelectedString(String str) {
+        T item = stringToItem(str);
+        if (item != null) {
+            return setSelectedItem(item);
+        }
+        return false;
+    }
+
+    /**
+     * 
+     * setSelectedStrings.
+     * 
+     * @param strings - Strings to select
+     */
+    public boolean setSelectedStrings(Iterable<String> strings) {
+        List<T> items = new ArrayList<T>();
+        for (String str : strings) {
+            T item = stringToItem(str);
+            if (item != null) {
+                items.add(item);
+            }
+        }
+        return setSelectedItems(items);
+    }
+
+    /**
+     * 
+     * selectItemEntrys.
+     * 
+     * @param itemEntrys - Item entrys to select
+     */
+    public boolean selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
+        List<T> items = new ArrayList<T>();
+        for (Entry<T, Integer> itemEntry : itemEntrys) {
+            items.add(itemEntry.getKey());
+        }
+        return setSelectedItems(items);
+    }
+
+    /**
+     * 
+     * selectAll.
+     * 
+     */
+    public void selectAll() {
+        currentView.selectAll();
+    }
+
+    /**
+     * 
+     * getSelectedItem.
+     * 
+     * @return T
+     */
+    public int getSelectedIndex() {
+        return currentView.getSelectedIndex();
+    }
+
+    /**
+     * 
+     * getSelectedItems.
+     * 
+     * @return Iterable<Integer>
+     */
+    public Iterable<Integer> getSelectedIndices() {
+        return currentView.getSelectedIndices();
+    }
+
+    /**
+     * 
+     * setSelectedIndex.
+     * 
+     * @param index - Index to select
+     */
+    public void setSelectedIndex(int index) {
+        currentView.setSelectedIndex(index);
+    }
+
+    /**
+     * 
+     * setSelectedIndices.
+     * 
+     * @param indices - Indices to select
+     */
+    public void setSelectedIndices(Integer[] indices) {
+        currentView.setSelectedIndices(Arrays.asList(indices));
+    }
+    public void setSelectedIndices(Iterable<Integer> indices) {
+        currentView.setSelectedIndices(indices);
+    }
+
+    /**
+     * 
+     * addItem.
+     * 
+     * @param item
+     * @param qty
+     */
+    public void addItem(final T item, int qty) {
+        pool.add(item, qty);
+        if (isUnfiltered()) {
+            model.addItem(item, qty);
+        }
+        List<T> items = new ArrayList<T>();
+        items.add(item);
+        updateView(false, items);
+    }
+
+    /**
+     * 
+     * addItems.
+     * 
+     * @param itemsToAdd
+     */
+    public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
+        pool.addAll(itemsToAdd);
+        if (isUnfiltered()) {
+            model.addItems(itemsToAdd);
+        }
+
+        List<T> items = new ArrayList<T>();
+        for (Map.Entry<T, Integer> item : itemsToAdd) {
+            items.add(item.getKey());
+        }
+        updateView(false, items);
+    }
+
+    /**
+     * 
+     * removeItem.
+     * 
+     * @param item
+     * @param qty
+     */
+    public void removeItem(final T item, int qty) {
+        final Iterable<T> itemsToSelect = currentView == listView ? getSelectedItems() : null;
+
+        pool.remove(item, qty);
+        if (isUnfiltered()) {
+            model.removeItem(item, qty);
+        }
+        updateView(false, itemsToSelect);
+    }
+
+    /**
+     * 
+     * removeItems.
+     * 
+     * @param itemsToRemove
+     */
+    public void removeItems(Iterable<Map.Entry<T, Integer>> itemsToRemove) {
+        final Iterable<T> itemsToSelect = currentView == listView ? getSelectedItems() : null;
+
+        for (Map.Entry<T, Integer> item : itemsToRemove) {
+            pool.remove(item.getKey(), item.getValue());
+            if (isUnfiltered()) {
+                model.removeItem(item.getKey(), item.getValue());
+            }
+        }
+        updateView(false, itemsToSelect);
+    }
+
+    /**
+     * 
+     * removeAllItems.
+     * 
+     */
+    public void removeAllItems() {
+        pool.clear();
+        model.clear();
+        updateView(false, null);
+    }
+
+    /**
+     * 
+     * scrollSelectionIntoView.
+     * 
+     */
+    public void scrollSelectionIntoView() {
+        currentView.scrollSelectionIntoView();
+    }
+
+    /**
+     * 
+     * getItemCount.
+     * 
+     * @param item
+     */
+    public int getItemCount(final T item) {
+        return model.isInfinite() ? Integer.MAX_VALUE : pool.count(item);
+    }
+
+    /**
+     * Gets all filtered items in the model.
+     * 
+     * @return ItemPoolView<T>
+     */
+    public ItemPool<T> getFilteredItems() {
+        return model.getItems();
+    }
+
+    protected abstract void addDefaultFilters();
+    protected abstract ItemFilter<? extends T> createSearchFilter();
+    protected abstract void buildAddFilterMenu(FPopupMenu menu);
+
+    protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
+        return ReflectionUtil.safeCast(filters.get(filterClass), filterClass);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void addFilter(final ItemFilter<? extends T> filter) {
+        final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
+        List<ItemFilter<? extends T>> classFilters = filters.get(filterClass);
+        if (classFilters == null) {
+            classFilters = new ArrayList<ItemFilter<? extends T>>();
+            filters.put(filterClass, classFilters);
+        }
+        if (classFilters.size() > 0) {
+            //if filter with the same class already exists, try to merge if allowed
+            //NOTE: can always use first filter for these checks since if
+            //merge is supported, only one will ever exist
+            final ItemFilter<? extends T> existingFilter = classFilters.get(0);
+            if (existingFilter.merge(filter)) {
+                //if new filter merged with existing filter, just refresh the widget
+                existingFilter.refreshWidget();
+                applyNewOrModifiedFilter(existingFilter);
+                return;
+            }
+        }
+        classFilters.add(filter);
+        orderedFilters.add(filter);
+        add(filter.getPanel());
+
+        boolean visible = !hideFilters;
+        filter.getPanel().setVisible(visible);
+        if (visible && initialized) {
+            revalidate();
+            applyNewOrModifiedFilter(filter);
+        }
+    }
+
+    //apply filters and focus existing filter's main component if filtering not locked
+    private void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
+        if (lockFiltering) {
+            filter.afterFiltersApplied(); //ensure this called even if filters currently locked
+            return;
+        }
+
+        if (!applyFilters()) {
+            filter.afterFiltersApplied(); //ensure this called even if filters didn't need to be updated
+        }
+    }
+
+    public void restoreDefaultFilters() {
+        lockFiltering = true;
+        for (ItemFilter<? extends T> filter : orderedFilters) {
+            remove(filter.getPanel());
+        }
+        filters.clear();
+        orderedFilters.clear();
+        addDefaultFilters();
+        lockFiltering = false;
+        revalidate();
+        applyFilters();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void removeFilter(ItemFilter<? extends T> filter) {
+        final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
+        final List<ItemFilter<? extends T>> classFilters = filters.get(filterClass);
+        if (classFilters != null && classFilters.remove(filter)) {
+            if (classFilters.size() == 0) {
+                filters.remove(filterClass);
+            }
+            orderedFilters.remove(filter);
+            remove(filter.getPanel());
+            revalidate();
+            applyFilters();
+        }
+    }
+
+    public boolean applyFilters() {
+        if (lockFiltering || !initialized) { return false; }
+
+        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        for (ItemFilter<? extends T> filter : orderedFilters) { //TODO: Support custom filter logic
+            if (filter.isEnabled() && !filter.isEmpty()) {
+                predicates.add(filter.buildPredicate(genericType));
+            }
+        }
+        if (!mainSearchFilter.isEmpty()) {
+            predicates.add(mainSearchFilter.buildPredicate(genericType));
+        }
+
+        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        if (filterPredicate == newFilterPredicate) { return false; }
+
+        filterPredicate = newFilterPredicate;
+        if (pool != null) {
+            updateView(true, getSelectedItems());
+        }
+        return true;
+    }
+
+    /**
+     * 
+     * isUnfiltered.
+     * 
+     */
+    private boolean isUnfiltered() {
+        return filterPredicate == null;
+    }
+
+    /**
+     * 
+     * getHideFilters.
+     * 
+     * @return true if filters are hidden, false otherwise
+     */
+    public boolean getHideFilters() {
+        return hideFilters;
+    }
+
+    /**
+     * 
+     * setHideFilters.
+     * 
+     * @param hideFilters0 - if true, hide the filters, otherwise show them
+     */
+    public void setHideFilters(boolean hideFilters0) {
+        if (hideFilters == hideFilters0) { return; }
+        hideFilters = hideFilters0;
+
+        boolean visible = !hideFilters0;
+        for (ItemFilter<? extends T> filter : orderedFilters) {
+            filter.getPanel().setVisible(visible);
+        }
+        chkEnableFilters.setVisible(visible);
+        txtFilterLogic.setVisible(visible);
+        mainSearchFilter.getWidget().setVisible(visible);
+
+        if (initialized) {
+            revalidate();
+    
+            if (hideFilters0) {
+                resetFilters(); //reset filters when they're hidden
+            }
+            else {
+                applyFilters();
+            }
+
+            if (config != null) {
+                config.setHideFilters(hideFilters0);
+            }
+        }
+    }
+
+    /**
+     * 
+     * resetFilters.
+     * 
+     */
+    public void resetFilters() {
+        lockFiltering = true; //prevent updating filtering from this change until all filters reset
+        for (ItemFilter<? extends T> filter : orderedFilters) {
+            filter.setEnabled(true);
+            filter.reset();
+        }
+        mainSearchFilter.reset();
+        lockFiltering = false;
+
+        if (mainSearchFilter.isEnabled()) {
+            applyFilters();
+        }
+        else {
+            chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
+        }
+    }
+
+    /**
+     * Refresh displayed items
+     */
+    public void refresh() {
+        updateView(true, getSelectedItems());
+    }
+
+    /**
+     * 
+     * updateView.
+     * 
+     * @param bForceFilter
+     */
+    public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
+        final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
+
+        if (useFilter || wantUnique || forceFilter) {
+            model.clear();
+        }
+
+        if (useFilter && wantUnique) {
+            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(pool, filterForPool), pool.FN_GET_NAME);
+            model.addItems(items);
+        }
+        else if (useFilter) {
+            Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+            model.addItems(Iterables.filter(pool, pred));
+        }
+        else if (wantUnique) {
+            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
+            model.addItems(items);
+        }
+        else if (!useFilter && forceFilter) {
+            model.addItems(pool);
+        }
+
+        currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
+
+        for (ItemFilter<? extends T> filter : orderedFilters) {
+            filter.afterFiltersApplied();
+        }
+
+        //update ratio of # in filtered pool / # in total pool
+        int total;
+        if (!useFilter) {
+            total = getFilteredItems().countAll();
+        }
+        else if (wantUnique) {
+            total = 0;
+            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
+            for (Entry<T, Integer> entry : items) {
+                total += entry.getValue();
+            }
+        }
+        else {
+            total = pool.countAll();
+        }
+        lblRatio.setText("(" + getFilteredItems().countAll() + " / " + total + ")");
+    }
+
+    /**
+     * 
+     * isIncrementalSearchActive.
+     * 
+     * @return true if an incremental search is currently active
+     */
+    public boolean isIncrementalSearchActive() {
+        return currentView.isIncrementalSearchActive();
+    }
+
+    /**
+     * 
+     * getWantUnique.
+     * 
+     * @return true if the editor is in "unique item names only" mode.
+     */
+    public boolean getWantUnique() {
+        return wantUnique;
+    }
+
+    /**
+     * 
+     * setWantUnique.
+     * 
+     * @param unique - if true, the editor will be set to the "unique item names only" mode.
+     */
+    public void setWantUnique(boolean unique) {
+        wantUnique = alwaysNonUnique ? false : unique;
+    }
+
+    /**
+     * 
+     * getAlwaysNonUnique.
+     * 
+     * @return if true, this editor must always show non-unique items (e.g. quest editor).
+     */
+    public boolean getAlwaysNonUnique() {
+        return alwaysNonUnique;
+    }
+
+    /**
+     * 
+     * setAlwaysNonUnique.
+     * 
+     * @param nonUniqueOnly - if true, this editor must always show non-unique items (e.g. quest editor).
+     */
+    public void setAlwaysNonUnique(boolean nonUniqueOnly) {
+        alwaysNonUnique = nonUniqueOnly;
+    }
+
+    /**
+     * 
+     * getAllowMultipleSelections.
+     * 
+     * @return if true, multiple items can be selected at once
+     */
+    public boolean getAllowMultipleSelections() {
+    	return allowMultipleSelections;
+    }
+
+    /**
+     * 
+     * setAllowMultipleSelections.
+     * 
+     * @return allowMultipleSelections0 - if true, multiple items can be selected at once
+     */
+    public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
+    	if (allowMultipleSelections == allowMultipleSelections0) { return; }
+    	allowMultipleSelections = allowMultipleSelections0;
+    	for (ItemView<T> view : views) {
+    	    view.setAllowMultipleSelections(allowMultipleSelections0);
+    	}
+    }
+
+    /**
+     * 
+     * isInfinite.
+     * 
+     * @return whether item manager's pool of items is in infinite supply
+     */
+    public boolean isInfinite() {
+        return model.isInfinite();
+    }
+
+    public void focusSearch() {
+        setHideFilters(false); //ensure filters shown
+    }
+
+    public void setItemActivateCommand(FEventHandler itemActivateHandler0) {
+        itemActivateHandler = itemActivateHandler0;
+    }
+
+    public void activateSelectedItems() {
+        if (itemActivateHandler != null) {
+            itemActivateHandler.handleEvent(new FEvent(this, FEventType.ACTIVATE));
+        }
+    }
+}

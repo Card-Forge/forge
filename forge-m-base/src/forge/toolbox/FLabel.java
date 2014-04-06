@@ -143,6 +143,10 @@ public class FLabel extends FDisplayObject {
         command = command0;
     }
 
+    public boolean isPressed() {
+        return pressed;
+    }
+
     @Override
     public final boolean press(float x, float y) {
         if (opaque || selectable || pressedColor != null) {
@@ -162,7 +166,7 @@ public class FLabel extends FDisplayObject {
     }
 
     @Override
-    public final boolean tap(float x, float y, int count) {
+    public boolean tap(float x, float y, int count) {
         boolean handled = false;
         if (selectable) {
             setSelected(!selected);

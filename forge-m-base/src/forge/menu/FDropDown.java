@@ -17,7 +17,7 @@ public abstract class FDropDown extends FScrollPane {
 
     private Backdrop backdrop;
     private FMenuTab menuTab;
-    private ScrollBounds paneSize;
+    protected ScrollBounds paneSize;
 
     public FDropDown() {
         setVisible(false); //hide by default
@@ -85,7 +85,9 @@ public abstract class FDropDown extends FScrollPane {
     protected abstract boolean autoHide();
     protected abstract ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight);
 
-    private void updateSizeAndPosition() {
+    protected void updateSizeAndPosition() {
+        if (menuTab == null) { return; }
+
         FScreen screen = Forge.getCurrentScreen();
         float screenWidth = screen.getWidth();
         float screenHeight = screen.getHeight();
@@ -129,7 +131,7 @@ public abstract class FDropDown extends FScrollPane {
 
         @Override
         public boolean press(float x, float y) {
-            if (!menuTab.contains(menuTab.screenToLocalX(x), menuTab.screenToLocalY(y))) {
+            if (menuTab == null || !menuTab.contains(menuTab.screenToLocalX(x), menuTab.screenToLocalY(y))) {
                 hide(); //auto-hide when backdrop pressed unless over menu tab
             }
             return false; //allow press to pass through to object behind backdrop
