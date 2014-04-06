@@ -53,7 +53,6 @@ import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
 import forge.utils.ForgePreferences;
 import forge.utils.ForgePreferences.FPref;
-import forge.utils.Utils;
 
 public class ConstructedScreen extends LaunchScreen {
     private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.8f);
@@ -663,14 +662,13 @@ public class ConstructedScreen extends LaunchScreen {
         private FEventHandler teamChangedHandler = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                @SuppressWarnings("unchecked")
                 FComboBox<Object> cb = (FComboBox<Object>)e.getSource();
-                Object selection = cb.getSelectedItem();
-
-                if (null == selection) {
+                if (cb.getSelectedIndex() == -1) {
                     return;
                 }
                 if (appliedVariants.contains(GameType.Archenemy)) {
-                    String sel = (String) selection;
+                    String sel = (String) cb.getSelectedItem();
                     if (sel.contains("Archenemy")) {
                         lastArchenemy = index;
                         for (PlayerPanel pp : playerPanels) {
@@ -682,8 +680,7 @@ public class ConstructedScreen extends LaunchScreen {
                     }
                 }
                 else {
-                    Integer sel = (Integer) selection;
-                    teams.set(index, sel);
+                    teams.set(index, cb.getSelectedIndex() + 1);
                 }
             }
         };

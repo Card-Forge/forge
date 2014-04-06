@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FDropDownMenu extends FDropDown {
-    private final List<FMenuItem> items = new ArrayList<FMenuItem>();
+    protected final List<FMenuItem> items = new ArrayList<FMenuItem>();
 
     public FDropDownMenu() {
     }
@@ -17,7 +17,7 @@ public abstract class FDropDownMenu extends FDropDown {
     protected abstract void buildMenu();
 
     @Override
-    protected final ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
+    protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
         items.clear();
 

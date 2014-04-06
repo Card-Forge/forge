@@ -3,12 +3,17 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.Forge;
 import forge.Forge.Graphics;
-import forge.toolbox.FEvent.FEventType;
+import forge.menu.FDropDownMenu;
+import forge.menu.FMenuItem;
+import forge.screens.FScreen;
+import forge.toolbox.FEvent.*;
 
 public class FComboBox<E> extends FTextField {
     private final List<E> items = new ArrayList<E>();
     private E selectedItem;
+    private final DropDown dropDown = new DropDown();
 
     public FComboBox() {
         initialize();
@@ -107,6 +112,7 @@ public class FComboBox<E> extends FTextField {
 
     @Override
     public boolean tap(float x, float y, int count) {
+        dropDown.setVisible(!dropDown.isVisible());
         return true;
     }
 
@@ -132,5 +138,57 @@ public class FComboBox<E> extends FTextField {
     @Override
     protected float getRightPadding() {
         return getDivotWidth() + 2 * PADDING;
+    }
+
+    private class DropDown extends FDropDownMenu {
+        @Override
+        protected void buildMenu() {
+            for (final E item : FComboBox.this.items) {
+                addItem(new FMenuItem(item.toString(), new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        setSelectedItem(item);
+                    }
+                }));
+            }
+        }
+
+        @Override
+        protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
+            clear();
+            items.clear();
+
+            buildMenu();
+
+            //determine needed width of menu
+            float width = FComboBox.this.getWidth();
+
+            //set bounds for each item
+            float y = 0;
+            for (FMenuItem item : items) {
+                item.setBounds(0, y, width, FMenuItem.HEIGHT);
+                y += FMenuItem.HEIGHT;
+            }
+
+            return new ScrollBounds(width, y);
+        }
+
+        @Override
+        protected void updateSizeAndPosition() {
+            FScreen screen = Forge.getCurrentScreen();
+            float screenHeight = screen.getHeight();
+
+            float x = FComboBox.this.localToScreenX(0);
+            float y = FComboBox.this.localToScreenY(FComboBox.this.getHeight());
+
+            paneSize = updateAndGetPaneSize(FComboBox.this.getWidth(), screenHeight - y);
+
+            setBounds(Math.round(x), Math.round(y), Math.round(FComboBox.this.getWidth()), Math.round(paneSize.getHeight()));
+        }
+
+        @Override
+        protected FDisplayObject getDropDownOwner() {
+            return FComboBox.this;
+        }
     }
 }

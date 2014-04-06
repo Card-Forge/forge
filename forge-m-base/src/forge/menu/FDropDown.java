@@ -125,13 +125,18 @@ public abstract class FDropDown extends FScrollPane {
         g.drawRect(2, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
     }
 
+    protected FDisplayObject getDropDownOwner() {
+        return menuTab;
+    }
+
     private class Backdrop extends FDisplayObject {
         private Backdrop() {
         }
 
         @Override
         public boolean press(float x, float y) {
-            if (menuTab == null || !menuTab.contains(menuTab.screenToLocalX(x), menuTab.screenToLocalY(y))) {
+            FDisplayObject owner = getDropDownOwner();
+            if (owner == null || !owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
                 hide(); //auto-hide when backdrop pressed unless over menu tab
             }
             return false; //allow press to pass through to object behind backdrop
