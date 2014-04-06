@@ -1,7 +1,7 @@
 Name:Twincast
 ManaCost:U U
 Types:Instant
-A:SP$ CopySpellAbility | Cost$ U U | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | Cost$ U U | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twincast.jpg
 Oracle:Copy target instant or sorcery spell. You may choose new targets for the copy.
