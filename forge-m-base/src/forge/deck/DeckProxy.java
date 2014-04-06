@@ -19,6 +19,8 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.model.FModel;
+import forge.quest.QuestController;
+import forge.quest.QuestEvent;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
@@ -324,7 +326,7 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-   /* public static Iterable<DeckProxy> getAllQuestEventAndChallenges() {
+    public static Iterable<DeckProxy> getAllQuestEventAndChallenges() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         QuestController quest = FModel.getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
@@ -334,7 +336,7 @@ public class DeckProxy implements InventoryItem {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
-    }*/
+    }
 
     @SuppressWarnings("unchecked")
     public static Iterable<DeckProxy> getAllSealedDecks(IStorage<DeckGroup> sealed) {

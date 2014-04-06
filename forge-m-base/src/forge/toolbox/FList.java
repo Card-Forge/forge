@@ -83,6 +83,13 @@ public class FList<E> extends FScrollPane {
         groups.clear();
     }
 
+    public void setListData(Iterable<E> items0) {
+        clear();
+        for (E item : items0) {
+            addItem(item);
+        }
+    }
+
     public boolean isEmpty() {
         return groups.isEmpty();
     }
@@ -95,7 +102,7 @@ public class FList<E> extends FScrollPane {
         return count;
     }
 
-    public Object getItemAt(int index) {
+    public E getItemAt(int index) {
         int count = 0;
         for (ListGroup group : groups) {
             for (ListItem item : group.items) {
@@ -106,6 +113,19 @@ public class FList<E> extends FScrollPane {
             }
         }
         return null;
+    }
+
+    public int getIndexOf(E value) {
+        int count = 0;
+        for (ListGroup group : groups) {
+            for (ListItem item : group.items) {
+                if (item.value == value) {
+                    return count;
+                }
+                count++;
+            }
+        }
+        return -1;
     }
 
     public void setListItemRenderer(ListItemRenderer<E> renderer0) {

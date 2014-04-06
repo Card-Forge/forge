@@ -15,6 +15,10 @@ import forge.deck.generation.*;
 import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.model.FModel;
+import forge.quest.QuestController;
+import forge.quest.QuestEvent;
+import forge.quest.QuestEventChallenge;
+import forge.quest.QuestEventDuel;
 import forge.toolbox.FOptionPane;
 import forge.util.Aggregates;
 import forge.util.Lang;
@@ -82,7 +86,7 @@ public class DeckgenUtil {
         return deck;
     }
 
-    /*public static QuestEvent getQuestEvent(final String name) {
+    public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = FModel.getQuest();
         for (QuestEventChallenge challenge : qCtrl.getChallenges()) {
             if (challenge.getTitle().equals(name)) {
@@ -94,7 +98,7 @@ public class DeckgenUtil {
             @Override public boolean apply(QuestEventDuel in) { return in.getName().equals(name); }
         });
         return duel;
-    }*/
+    }
 
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomColorDeck(boolean forAi) {
@@ -116,7 +120,7 @@ public class DeckgenUtil {
         return allDecks.get(name);
     }
 
-    /*public static Deck getRandomQuestDeck() {
+    public static Deck getRandomQuestDeck() {
         final List<Deck> allQuestDecks = new ArrayList<Deck>();
         QuestController qCtrl = FModel.getQuest();
 
@@ -130,7 +134,7 @@ public class DeckgenUtil {
 
         final int rand = (int) (Math.floor(Math.random() * allQuestDecks.size()));
         return allQuestDecks.get(rand);
-    }*/
+    }
 
     public static void randomSelectColors(final DeckManager deckManager) {
         final int size = deckManager.getItemCount();

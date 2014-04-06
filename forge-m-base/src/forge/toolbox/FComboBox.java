@@ -31,8 +31,17 @@ public class FComboBox<E> extends FTextField {
         initialize();
     }
 
+    private void initialize() {
+        if (!items.isEmpty()) {
+            setSelectedItem(items.get(0)); //select first item by default
+        }
+    }
+
     public void addItem(E item) {
         items.add(item);
+        if (items.size() == 1) {
+            setSelectedItem(item); //select first item by default
+        }
     }
 
     public boolean removeItem(E item) {
@@ -81,6 +90,7 @@ public class FComboBox<E> extends FTextField {
                 selectedItem = item;
                 super.setText(item.toString());
             }
+            else { return; }
         }
         else {
             selectedItem = null;
@@ -102,12 +112,6 @@ public class FComboBox<E> extends FTextField {
         }
         selectedItem = null;
         setText(text0);
-    }
-
-    private void initialize() {
-        if (!items.isEmpty()) {
-            setSelectedItem(items.get(0)); //select first item by default
-        }
     }
 
     @Override

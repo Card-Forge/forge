@@ -6,6 +6,10 @@ import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
+import forge.quest.QuestController;
+import forge.quest.QuestEvent;
+import forge.quest.QuestEventChallenge;
+import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
@@ -57,6 +61,25 @@ public class FDeckChooser extends FScreen {
     public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
         stateSetting = savedStateSetting;
         selectedDeckType = defaultDeckType;
+
+        if (decksComboBox == null) { //initialize components with delayed initialization the first time this is populated
+            decksComboBox = new FComboBox<DeckType>();
+            restoreSavedState();
+            decksComboBox.setChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    refreshDecksList(decksComboBox.getSelectedItem(), false, e);
+                }
+            });
+        }
+        else {
+            clear();
+            restoreSavedState(); //ensure decks refreshed and state restored in case any deleted or added since last loaded
+        }
+        add(decksComboBox);
+        add(lstDecks);
+        add(btnViewDeck);
+        add(btnRandom);
     }
 
     public DeckType getSelectedDeckType() { return selectedDeckType; }
@@ -125,7 +148,6 @@ public class FDeckChooser extends FScreen {
         public boolean isGeneratedDeck() {
             return true;
         }
-        
     }
 
     private void updateColors() {
@@ -173,7 +195,7 @@ public class FDeckChooser extends FScreen {
     private void updatePrecons() {
         lstDecks.setAllowMultipleSelections(false);
 
-        //lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
+        lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
         lstDecks.setup(ItemManagerConfig.PRECON_DECKS);
 
         btnRandom.setText("Random Deck");
@@ -190,7 +212,7 @@ public class FDeckChooser extends FScreen {
     private void updateQuestEvents() {
         lstDecks.setAllowMultipleSelections(false);
 
-        //lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
+        lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
         lstDecks.setup(ItemManagerConfig.QUEST_EVENT_DECKS);
 
         btnRandom.setText("Random Deck");
@@ -215,37 +237,16 @@ public class FDeckChooser extends FScreen {
 
         // Special branch for quest events
         if (selectedDeckType == DeckType.QUEST_OPPONENT_DECK) {
-            /*QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
+            QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
             RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
             if (event instanceof QuestEventChallenge) {
                 result.setStartingLife(((QuestEventChallenge) event).getAiLife());
             }
             result.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
-            return result;*/
+            return result;
         }
 
         return new RegisteredPlayer(getDeck());
-    }
-
-    public void populate() {
-        if (decksComboBox == null) { //initialize components with delayed initialization the first time this is populated
-            decksComboBox = new FComboBox<DeckType>();
-            restoreSavedState();
-            decksComboBox.setChangedHandler(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    refreshDecksList(decksComboBox.getSelectedItem(), false, e);
-                }
-            });
-        }
-        else {
-            clear();
-            restoreSavedState(); //ensure decks refreshed and state restored in case any deleted or added since last loaded
-        }
-        add(decksComboBox);
-        add(lstDecks);
-        add(btnViewDeck);
-        add(btnRandom);
     }
 
     public final boolean isAi() {
@@ -263,6 +264,8 @@ public class FDeckChooser extends FScreen {
         if (e == null) {
             decksComboBox.setSelectedItem(deckType);
         }
+        if (deckType == null) { return; }
+
         lstDecks.setCaption(deckType.toString());
 
         switch (deckType) {

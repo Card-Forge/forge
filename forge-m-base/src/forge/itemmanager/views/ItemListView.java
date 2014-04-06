@@ -52,7 +52,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     private final ItemTable table = new ItemTable();
     private final ItemTableModel tableModel;
     private boolean allowMultipleSelections;
-    private List<Integer> selectedIndices;
+    private List<Integer> selectedIndices = new ArrayList<Integer>();
 
     public ItemTableModel getTableModel() {
         return tableModel;

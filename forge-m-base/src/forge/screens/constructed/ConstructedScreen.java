@@ -1,21 +1,13 @@
 package forge.screens.constructed;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -24,17 +16,20 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
+import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
-import forge.game.player.LobbyPlayer.PlayerType;
 import forge.item.PaperCard;
+import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.net.FServer;
 import forge.net.Lobby;
+import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -48,6 +43,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
@@ -93,16 +89,11 @@ public class ConstructedScreen extends LaunchScreen {
 
     private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
     private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
-    
-    private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
+
     private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
 
     // Variants
-    private final List<DeckList> schemeDeckLists = new ArrayList<DeckList>();
-    private final List<DeckList> commanderDeckLists = new ArrayList<DeckList>();
-    private final List<DeckList> planarDeckLists = new ArrayList<DeckList>();
-    private final List<DeckList> vgdAvatarLists = new ArrayList<DeckList>();
     private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
     private final List<PaperCard> vgdAllAiAvatars = new ArrayList<PaperCard>();
     private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
@@ -113,7 +104,7 @@ public class ConstructedScreen extends LaunchScreen {
 
     public ConstructedScreen() {
         super("Constructed");
-        
+
         /*lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         ////////////////////////////////////////////////////////
@@ -160,13 +151,36 @@ public class ConstructedScreen extends LaunchScreen {
 
         add(playersScroll);
 
-        addPlayerBtn.setCommand(new FEventHandler() {
+        getDeckChooser(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+        getDeckChooser(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
+
+        // Checkbox event handling
+        cbSingletons.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                addPlayer();
+                prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(cbSingletons.isSelected()));
+                prefs.save();
             }
         });
-        add(addPlayerBtn);
+        cbArtifacts.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(cbArtifacts.isSelected()));
+                prefs.save();
+            }
+        });
+
+        // Pre-select checkboxes
+        cbSingletons.setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+        cbArtifacts.setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+
+        updatePlayersFromPrefs();
     }
 
     @Override
@@ -203,33 +217,11 @@ public class ConstructedScreen extends LaunchScreen {
     }
 
     public final FDeckChooser getDeckChooser(int playernum) {
-        return deckChoosers.get(playernum);
-    }
-
-    private class DeckList extends FList<Object> {
-        Object selectedValue;
-
-        public Object getSelectedValue() {
-            return selectedValue;
-        }
-    }
-
-    public boolean isPlayerAI(int playernum) {
-        return playerPanels.get(playernum).getPlayerType() == PlayerType.COMPUTER;
+        return playerPanels.get(playernum).deckChooser;
     }
 
     public int getNumPlayers() {
         return activePlayersNum;
-    }
-
-    public final List<Integer> getParticipants() {
-        final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
-        for (final PlayerPanel panel : playerPanels) {
-            if (panel.isVisible()) {
-                participants.add(playerPanels.indexOf(panel));
-            }
-        }
-        return participants;
     }
 
     @Override
@@ -241,7 +233,7 @@ public class ConstructedScreen extends LaunchScreen {
             return false;
         }
 
-        for (final int i : getParticipants()) {
+        for (int i = 0; i < activePlayersNum; i++) {
             if (getDeckChooser(i).getPlayer() == null) {
                 FOptionPane.showMessageDialog("Please specify a deck for " + getPlayerName(i));
                 return false;
@@ -253,7 +245,7 @@ public class ConstructedScreen extends LaunchScreen {
 
         boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
         if (checkLegality && !variantTypes.contains(GameType.Commander)) { //Commander deck replaces regular deck and is checked later
-            for (final int i : getParticipants()) {
+            for (int i = 0; i < activePlayersNum; i++) {
                 String name = getPlayerName(i);
                 String errMsg = GameType.Constructed.getDecksFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer().getDeck());
                 if (errMsg != null) {
@@ -265,11 +257,12 @@ public class ConstructedScreen extends LaunchScreen {
 
         Lobby lobby = FServer.getLobby();
         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-        for (final int i : getParticipants()) {
+        for (int i = 0; i < activePlayersNum; i++) {
+            PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
-            LobbyPlayer lobbyPlayer = isPlayerAI(i) ? lobby.getAiPlayer(name,
+            LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? lobby.getAiPlayer(name,
                     getPlayerAvatar(i)) : lobby.getGuiPlayer();
-            RegisteredPlayer rp = getDeckChooser(i).getPlayer();
+            RegisteredPlayer rp = playerPanel.deckChooser.getPlayer();
 
             if (variantTypes.isEmpty()) {
                 rp.setTeamNumber(getTeam(i));
@@ -279,7 +272,7 @@ public class ConstructedScreen extends LaunchScreen {
                 Deck deck = null;
                 boolean isCommanderMatch = variantTypes.contains(GameType.Commander);
                 if (isCommanderMatch) {
-                    Object selected = commanderDeckLists.get(i).getSelectedValue();
+                    Object selected = playerPanel.commanderDeckList.getSelectedValue();
                     if (selected instanceof String) {
                         String sel = (String) selected;
                         IStorage<Deck> comDecks = FModel.getDecks().getCommander();
@@ -312,7 +305,7 @@ public class ConstructedScreen extends LaunchScreen {
                 //Archenemy
                 if (variantTypes.contains(GameType.ArchenemyRumble)
                         || (variantTypes.contains(GameType.Archenemy) && playerIsArchenemy)) {
-                    Object selected = schemeDeckLists.get(i).getSelectedValue();
+                    Object selected = playerPanel.schemeDeckList.getSelectedValue();
                     CardPool schemePool = null;
                     if (selected instanceof String) {
                         String sel = (String) selected;
@@ -347,7 +340,7 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Planechase
                 if (variantTypes.contains(GameType.Planechase)) {
-                    Object selected = planarDeckLists.get(i).getSelectedValue();
+                    Object selected = playerPanel.planarDeckList.getSelectedValue();
                     CardPool planePool = null;
                     if (selected instanceof String) {
                         String sel = (String) selected;
@@ -381,7 +374,7 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Vanguard
                 if (variantTypes.contains(GameType.Vanguard)) {
-                    Object selected = vgdAvatarLists.get(i).getSelectedValue();
+                    Object selected = playerPanel.vgdAvatarList.getSelectedValue();
                     if (selected instanceof String) {
                         String sel = (String) selected;
                         if (sel.contains("Use deck's default avatar") && deck.has(DeckSection.Avatar)) {
@@ -448,10 +441,26 @@ public class ConstructedScreen extends LaunchScreen {
         private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
         private final FLabel vgdLabel = newLabel("Vanguard:");
 
+        private final FDeckChooser deckChooser;
+        private final DeckList schemeDeckList, commanderDeckList, planarDeckList, vgdAvatarList;
+
         public PlayerPanel(final int index0) {
             super();
             index = index0;
             playerIsArchenemy = index == 0;
+            deckChooser = new FDeckChooser(isPlayerAI());
+            deckChooser.initialize();
+            deckChooser.getLstDecks().setSelectCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    String text = deckChooser.getSelectedDeckType().toString() + ": " + Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME);
+                    setDeckSelectorButtonText(text);
+                }
+            });
+            schemeDeckList = new DeckList();
+            commanderDeckList = new DeckList();
+            planarDeckList = new DeckList();
+            vgdAvatarList = new DeckList();
 
             // Add a button to players 3+ to remove them from the setup
             if (index >= 2) {
@@ -502,6 +511,39 @@ public class ConstructedScreen extends LaunchScreen {
 
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
+
+            final CardCollections decks = FModel.getDecks();
+            
+            commanderDeckList.list.addItem("Generate");
+            if (decks.getCommander().size() > 0) {
+                commanderDeckList.list.addItem("Random");
+                for (Deck comDeck : decks.getCommander()) {
+                    commanderDeckList.list.addItem(comDeck);
+                }
+            }
+            commanderDeckList.setSelectedIndex(0);
+
+            schemeDeckList.list.addItem("Use deck's scheme section (random if unavailable)");
+            schemeDeckList.list.addItem("Generate");
+            if (decks.getScheme().size() > 0) {
+                schemeDeckList.list.addItem("Random");
+                for (Deck schemeDeck : decks.getScheme()) {
+                    schemeDeckList.list.addItem(schemeDeck);
+                }
+            }
+            schemeDeckList.setSelectedIndex(0);
+
+            planarDeckList.list.addItem("Use deck's planes section (random if unavailable)");
+            planarDeckList.list.addItem("Generate");
+            if (decks.getPlane().size() > 0) {
+                planarDeckList.list.addItem("Random");
+                for (Deck planarDeck : decks.getPlane()) {
+                    planarDeckList.list.addItem(planarDeck);
+                }                
+            }
+            planarDeckList.setSelectedIndex(0);
+
+            updateVanguardList();
         }
 
         @Override
@@ -557,7 +599,7 @@ public class ConstructedScreen extends LaunchScreen {
         private final FEventHandler humanAiSwitched = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                updateVanguardList(index);
+                updateVanguardList();
             }
         };
 
@@ -634,8 +676,8 @@ public class ConstructedScreen extends LaunchScreen {
             vgdLabel.setVisible(appliedVariants.contains(GameType.Vanguard));
         }
 
-        public PlayerType getPlayerType() {
-            return humanAiSwitch.isToggled() ? PlayerType.COMPUTER : PlayerType.HUMAN;
+        public boolean isPlayerAI() {
+            return humanAiSwitch.isToggled();
         }
 
         public void setVanguardButtonText(String text) {
@@ -871,6 +913,79 @@ public class ConstructedScreen extends LaunchScreen {
         public String getPlayerName() {
             return txtPlayerName.getText();
         }
+
+        private void changeDeck(final GameType forGameType) {
+            switch (forGameType) {
+            case Constructed:
+                Forge.openScreen(deckChooser);
+                break;
+            case Archenemy:
+            case ArchenemyRumble:
+                if (playerIsArchenemy) {
+                    Forge.openScreen(schemeDeckList);
+                }
+                else {
+                    Forge.openScreen(deckChooser);
+                }
+                break;
+            case Commander:
+                Forge.openScreen(commanderDeckList);
+                break;
+            case Planechase:
+                Forge.openScreen(planarDeckList);
+                break;
+            case Vanguard:
+                updateVanguardList();
+                Forge.openScreen(vgdAvatarList);
+                break;
+            default:
+                break;
+            }
+        }
+
+        /** update vanguard list. */
+        public void updateVanguardList() {
+            Object lastSelection = vgdAvatarList.getSelectedValue();
+            vgdAvatarList.setSelectedIndex(-1);
+            vgdAvatarList.list.setListData(isPlayerAI() ? aiListData : humanListData);
+            if (lastSelection != null) {
+                vgdAvatarList.setSelectedValue(lastSelection);
+            }
+            if (vgdAvatarList.getSelectedIndex() == -1) {
+                vgdAvatarList.setSelectedIndex(0);
+            }
+        }
+
+        private class DeckList extends FScreen {
+            private final FList<Object> list;
+            private int selectedIndex;
+
+            private DeckList() {
+                super(true, "", false);
+                list = new FList<Object>();
+            }
+
+            public int getSelectedIndex() {
+                return selectedIndex;
+            }
+
+            public void setSelectedIndex(int index) {
+                selectedIndex = index;
+            }
+
+            public Object getSelectedValue() {
+                return list.getItemAt(selectedIndex);
+            }
+
+            public void setSelectedValue(Object value) {
+                selectedIndex = list.getIndexOf(value);
+            }
+
+            @Override
+            protected void doLayout(float startY, float width, float height) {
+                list.setBounds(0, startY, width, height - startY);
+            }
+        }
     }
 
     /** Saves avatar prefs for players one and two. */
@@ -961,7 +1076,7 @@ public class ConstructedScreen extends LaunchScreen {
         int lastTeam = -1;
         final List<Integer> teamList = appliedVariants.contains(GameType.Archenemy) ? archenemyTeams : teams;
 
-        for (final int i : getParticipants()) {
+        for (int i = 0; i < activePlayersNum; i++) {
             if (lastTeam == -1) {
                 lastTeam = teamList.get(i);
             }
@@ -977,7 +1092,7 @@ public class ConstructedScreen extends LaunchScreen {
 
     /** This listener unlocks the relevant buttons for players
      * and enables/disables archenemy combobox as appropriate. */
-    private ItemListener iListenerVariants = new ItemListener() {
+    /*private ItemListener iListenerVariants = new ItemListener() {
         @Override
         public void itemStateChanged(ItemEvent arg0) {
             FCheckBox cb = (FCheckBox) arg0.getSource();
@@ -1043,7 +1158,7 @@ public class ConstructedScreen extends LaunchScreen {
 
     //This listener will look for a vanguard avatar being selected in the lists
     //and update the corresponding detail panel.
-    /*private ListSelectionListener vgdLSListener = new ListSelectionListener() {
+    private ListSelectionListener vgdLSListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             int index = vgdAvatarLists.indexOf(e.getSource());
@@ -1074,22 +1189,10 @@ public class ConstructedScreen extends LaunchScreen {
     public int getTeam(final int playerIndex) {
         return appliedVariants.contains(GameType.Archenemy) ? archenemyTeams.get(playerIndex) : teams.get(playerIndex);
     }
-    
-    /*public List<FList<Object>> getPlanarDeckLists() {
-        return planarDeckLists;
-    }
 
-    public List<FList<Object>> getCommanderDeckLists() {
-        return commanderDeckLists;
+    public boolean isPlayerAI(final int playernum) {
+        return playerPanels.get(playernum).isPlayerAI();
     }
-
-    public List<FList<Object>> getSchemeDeckLists() {
-        return schemeDeckLists;
-    }
-
-    public List<FList<Object>> getVanguardLists() {
-        return vgdAvatarLists;
-    }*/
 
     public boolean isPlayerArchenemy(final int playernum) {
         return playerPanels.get(playernum).playerIsArchenemy;
@@ -1141,19 +1244,5 @@ public class ConstructedScreen extends LaunchScreen {
                 }
             }
         }
-    }
-
-    /** update vanguard list. */
-    public void updateVanguardList(int playerIndex) {
-        /*FList<Object> vgdList = getVanguardLists().get(playerIndex);
-        Object lastSelection = vgdList.getSelectedValue();
-        vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
-        if (null != lastSelection) {
-            vgdList.setSelectedValue(lastSelection, true);
-        }
-
-        if (-1 == vgdList.getSelectedIndex()) {
-            vgdList.setSelectedIndex(0);
-        }*/
     }
 }
