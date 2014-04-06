@@ -744,7 +744,7 @@ public class ComputerUtilCombat {
 
         // if the attacker has first strike and wither the blocker will deal
         // less damage than expected
-        if ((attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike"))
+        if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities)
                 && (attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))
                 && !(blocker.hasKeyword("First Strike") || blocker.hasKeyword("Double Strike") || blocker
                         .hasKeyword("CARDNAME can't have counters placed on it."))) {
@@ -1063,7 +1063,7 @@ public class ComputerUtilCombat {
         // if the defender has first strike and wither the attacker will deal
         // less damage than expected
         if (null != blocker) {
-            if ((blocker.hasKeyword("First Strike") || blocker.hasKeyword("Double Strike"))
+            if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities)
                     && (blocker.hasKeyword("Wither") || blocker.hasKeyword("Infect"))
                     && !(attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike") || attacker
                             .hasKeyword("CARDNAME can't have counters placed on it."))) {
