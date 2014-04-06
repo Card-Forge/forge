@@ -7,7 +7,7 @@ Description=GW Deck with Knight of New Alara, Wilt-Leaf Liege, Bant Sureblade an
 Icon=Hercules.jpg
 Deck Type=constructed
 [main]
-1 Dryad Militant
+4 Dryad Militant
 4 Bant Sureblade
 4 Naya Hushblade
 4 Kitchen Finks
@@ -17,6 +17,7 @@ Deck Type=constructed
 4 Knight of New Alara
 1 Gaddock Teeg
 4 Path to Exile
+1 Shield of the Oversoul
 1 Mox Emerald
 1 Mox Pearl
 4 Savannah
