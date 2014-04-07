@@ -1,23 +1,28 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {
@@ -50,6 +55,38 @@ public class ProtectAi extends SpellAbilityAi {
         }
         return protect && !isEmpty;
     }
+    
+    /**
+     * \brief Find a choice for a Protect SpellAbility that protects from a specific threat card.
+     * @param threat Card to protect against
+     * @param sa Protect SpellAbility
+     * @return choice that can protect against the given threat, null if no such choice exists
+     */
+    public static String toProtectFrom(final Card threat, SpellAbility sa) {
+        if (sa.getApi() != ApiType.Protection) {
+            return null;
+        }
+        final List<String> choices = ProtectEffect.getProtectionList(sa);
+        if (threat.isArtifact() && choices.contains("artifacts")) {
+            return "artifacts";
+        }
+        if (threat.isBlack() && choices.contains("black")) {
+            return "black";
+        }
+        if (threat.isBlue() && choices.contains("blue")) {
+            return "blue";
+        }
+        if (threat.isGreen() && choices.contains("green")) {
+            return "green";
+        }
+        if (threat.isRed() && choices.contains("red")) {
+            return "red";
+        }
+        if (threat.isWhite() && choices.contains("white")) {
+            return "white";
+        }
+        return null;
+    }
 
     /**
      * <p>
@@ -64,6 +101,7 @@ public class ProtectAi extends SpellAbilityAi {
         final List<String> gains = ProtectEffect.getProtectionList(sa);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
+        final PhaseHandler ph = game.getPhaseHandler();
         
         List<Card> list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -85,22 +123,51 @@ public class ProtectAi extends SpellAbilityAi {
                     return true;
                 }
 
-                if( combat != null ) {
-                    // is the creature blocking and unable to destroy the attacker
-                    // or would be destroyed itself?
-                    if (combat.isBlocking(c) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c, combat)) {
-                        return true;
-                    }
-    
-                    // is the creature in blocked and the blocker would survive
-                    // TODO Potential NPE here if no blockers are actually left
-                    if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                            && combat.isAttacking(c) && combat.isBlocked(c)
-                            && ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0), combat)) {
-                        return true;
+                if (!game.stack.isEmpty()) {
+                    //counter bad effect on stack
+                    if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(c)) {
+                        Card threat = game.getStack().peekAbility().getHostCard();
+                        //check to see if threat has already been countered by resolved protect
+                        if (!c.hasProtectionFrom(threat) && (ProtectAi.toProtectFrom(threat, sa) != null)) {
+                            return true;
+                        }
                     }
                 }
-
+                
+                if (combat != null) {
+                    //creature is blocking and would be destroyed itself
+                    if (combat.isBlocking(c) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c, combat)) {
+                        List<Card> threats = combat.getAttackersBlockedBy(c);
+                        return (true && (ProtectAi.toProtectFrom(threats.get(0), sa) != null));
+                    }
+    
+                    //creature is attacking and would be destroyed itself
+                    if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                            && combat.isAttacking(c) && combat.isBlocked(c) ) {
+                        List<Card> blockers = combat.getBlockers(c);
+                        if (!blockers.isEmpty() && ComputerUtilCombat.blockerWouldBeDestroyed(ai, blockers.get(0), combat)) {
+                            List<Card> threats = combat.getBlockers(c);
+                            ComputerUtilCard.sortByEvaluateCreature(threats);
+                            return (true && (ProtectAi.toProtectFrom(threats.get(0), sa) != null));
+                        }
+                        
+                    }
+                }
+                
+                //make unblockable
+                if (ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1) {
+                    AiAttackController aiAtk = new AiAttackController(ai, c);
+                    String s = aiAtk.toProtectAttacker(sa);
+                    if (s==null) {
+                        return false;
+                    } else {
+                        Combat combat = ai.getGame().getCombat();
+                        int dmg = ComputerUtilCombat.damageIfUnblocked(c, ai.getOpponent(), combat);
+                        float ratio = 1.0f * dmg / ai.getOpponent().getLife();
+                        Random r = MyRandom.getRandom();
+                        return r.nextFloat() < ratio;
+                    }
+                }
                 return false;
             }
         });
@@ -111,6 +178,7 @@ public class ProtectAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTargetRestrictions() == null) && !hostCard.isInPlay()) {
             return false;
@@ -136,16 +204,27 @@ public class ProtectAi extends SpellAbilityAi {
         }
 
         // Phase Restrictions
-        if (game.getStack().isEmpty() && game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
-            // Instant-speed protections should not be cast outside of combat
-            // when the stack is empty
-            if (!SpellAbilityAi.isSorcerySpeed(sa)) {
+        boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
+        if (SpellAbilityAi.isSorcerySpeed(sa)) {
+            //only non-instants are Floating Shield, Midvast Protector, Sejiri Steppe
+            //sorceries can only give protection in order to create an unblockable attacker
+            if (notAiMain1) {
                 return false;
             }
-        } else if (!game.getStack().isEmpty()) {
-            // TODO protection something only if the top thing on the stack will
-            // kill it via damage or destroy
-            return false;
+        } else {
+            if (game.getStack().isEmpty()) {
+                //try to save attacker or blocker
+                if (ph.getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
+                    if (notAiMain1) {
+                        return false;
+                    }
+                }
+            } else {
+                //prevent repeated protects
+                if (game.getStack().peekAbility().getApi() == ApiType.Protection) {
+                    return false;
+                }
+            }
         }
 
         if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {

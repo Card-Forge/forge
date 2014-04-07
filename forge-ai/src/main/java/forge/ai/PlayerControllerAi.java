@@ -9,6 +9,7 @@ import com.google.common.collect.Multimap;
 
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.CharmAi;
+import forge.ai.ability.ProtectAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -28,6 +29,8 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -600,6 +603,41 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
+        if (game.stack.size() > 1) {
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                SpellAbility spell = si.getSpellAbility();
+                if (sa != spell) {
+                    String s = ProtectAi.toProtectFrom(spell.getHostCard(), sa);
+                    if (s != null) {
+                        return s;
+                    }
+                    break;
+                }
+            }
+        }
+        final Combat combat = game.getCombat();
+        if (combat != null ) {
+            Card toSave = sa.getTargetCard();
+            List<Card> threats = null;
+            if (combat.isBlocked(toSave)) {
+                threats = combat.getBlockers(toSave);
+            }
+            if (combat.isBlocking(toSave)) {
+                threats = combat.getAttackersBlockedBy(toSave);
+            }
+            if (threats != null) {
+                ComputerUtilCard.sortByEvaluateCreature(threats);
+                String s = ProtectAi.toProtectFrom(threats.get(0), sa);
+                if (s != null) {
+                    return s;
+                }
+            }
+        }
+        final PhaseHandler ph = game.getPhaseHandler();
+        if (ph.getPlayerTurn() == sa.getActivatingPlayer() && ph.getPhase() == PhaseType.MAIN1) {
+            AiAttackController aiAtk = new AiAttackController(sa.getActivatingPlayer(), sa.getTargetCard());
+            return aiAtk.toProtectAttacker(sa);
+        }
         final String logic = sa.getParam("AILogic");
         if (logic == null || logic.equals("MostProminentHumanCreatures")) {
             List<Card> list = new ArrayList<Card>();

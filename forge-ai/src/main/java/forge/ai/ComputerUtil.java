@@ -20,6 +20,7 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.ability.ProtectAi;
 import forge.card.CardType;
 import forge.card.CardType.Constant;
 import forge.card.MagicColor;
@@ -1358,6 +1359,11 @@ public class ComputerUtil {
                                     || saviour.getParam("KW").endsWith("Hexproof"))) {
                         continue;
                     }
+                    
+                    // cannot protect against source
+                    if (saviourApi == ApiType.Protection && (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                        continue;
+                    }
 
                     // don't bounce or blink a permanent that the human
                     // player owns or is a token
@@ -1385,7 +1391,7 @@ public class ComputerUtil {
         else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
                 && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump
-                        || saviourApi == null)) {
+                        || saviourApi == ApiType.Protection || saviourApi == null)) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1405,6 +1411,11 @@ public class ComputerUtil {
                                     || saviour.getParam("KW").endsWith("Hexproof"))) {
                         continue;
                     }
+                    if (saviourApi == ApiType.Protection) {
+                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                            continue;
+                        }
+                    }
 
                     // don't bounce or blink a permanent that the human
                     // player owns or is a token
@@ -1422,7 +1433,8 @@ public class ComputerUtil {
         }
         // Exiling => bounce/shroud
         else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
-                && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == null)
+                && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump 
+                || saviourApi == ApiType.Protection || saviourApi == null)
                 && topStack.hasParam("Destination")
                 && topStack.getParam("Destination").equals("Exile")) {
             for (final Object o : objects) {
@@ -1432,6 +1444,11 @@ public class ComputerUtil {
                     if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
                             && (saviour.getParam("KW").endsWith("Shroud") || saviour.getParam("KW").endsWith("Hexproof"))) {
                         continue;
+                    }
+                    if (saviourApi == ApiType.Protection) {
+                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                            continue;
+                        }
                     }
 
                     // don't bounce or blink a permanent that the human
@@ -1446,7 +1463,8 @@ public class ComputerUtil {
         }
         //GainControl
         else if (threatApi == ApiType.GainControl
-                && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == null)) {
+                && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.Protection 
+                || saviourApi == null)) {
             for (final Object o : objects) {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
@@ -1454,6 +1472,11 @@ public class ComputerUtil {
                     if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
                             && (saviour.getParam("KW").endsWith("Shroud") || saviour.getParam("KW").endsWith("Hexproof"))) {
                         continue;
+                    }
+                    if (saviourApi == ApiType.Protection) {
+                        if (tgt == null || (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                            continue;
+                        }
                     }
                     threatened.add(c);
                 }

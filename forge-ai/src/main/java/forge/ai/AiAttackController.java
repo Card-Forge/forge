@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
@@ -82,7 +83,7 @@ public class AiAttackController {
     public AiAttackController(final Player ai) {
         this.ai = ai;
         this.defendingOpponent = choosePreferredDefenderPlayer();       
-        getOpponentCreatures();
+        this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.attackers = new ArrayList<Card>();
         for (Card c : myList) {
@@ -96,7 +97,7 @@ public class AiAttackController {
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
         this.defendingOpponent = choosePreferredDefenderPlayer();       
-        getOpponentCreatures();
+        this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.attackers = new ArrayList<Card>();
         if (CombatUtil.canAttack(attacker, this.defendingOpponent)) {
@@ -105,30 +106,31 @@ public class AiAttackController {
         this.blockers = this.getPossibleBlockers(oppList, this.attackers);
     } // overloaded constructor to evaluate single specified attacker
     
-    private void getOpponentCreatures() {
-        this.oppList = Lists.newArrayList();
-        this.oppList.addAll(this.defendingOpponent.getCreaturesInPlay());
+    public static List<Card> getOpponentCreatures(final Player defender) {
+        List<Card> defenders = Lists.newArrayList();
+        defenders.addAll(defender.getCreaturesInPlay());
         Predicate<Card> canAnimate = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 return !c.isCreature() && !c.isPlaneswalker();
             }
         };
-        for (Card c : CardLists.filter(this.defendingOpponent.getCardsIn(ZoneType.Battlefield), canAnimate)) {
+        for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
         	if (c.isToken() && !c.isCopiedToken()) {
         		continue;
         	}
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
-                    if (ComputerUtilCost.canPayCost(sa, this.defendingOpponent) 
-                    		&& sa.getRestrictions().checkOtherRestrictions(c, sa, this.defendingOpponent)) {
-                        Card animatedCopy = CardFactory.getCard(c.getPaperCard(), this.defendingOpponent);
+                    if (ComputerUtilCost.canPayCost(sa, defender) 
+                    		&& sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                        Card animatedCopy = CardFactory.getCard(c.getPaperCard(), defender);
                         AnimateAi.becomeAnimated(animatedCopy, sa);
-                        this.oppList.add(animatedCopy);
+                        defenders.add(animatedCopy);
                     }
                 }
             }
         }
+        return defenders;
     }
 
     /** Choose opponent for AI to attack here. Expand as necessary. */
@@ -1072,6 +1074,62 @@ public class AiAttackController {
     private final boolean shouldAttack(final Player ai, final Card attacker, final Combat combat) {
         aiAggression = 2;
         return shouldAttack(ai, attacker, oppList, combat);
+    }
+    
+    public String toProtectAttacker(SpellAbility sa) {
+        if (sa.getApi() != ApiType.Protection || oppList.isEmpty()) {
+            return null;
+        }
+        final List<String> choices = ProtectEffect.getProtectionList(sa);
+        String color = ComputerUtilCard.getMostProminentColor(oppList), artifact = null;
+        if (choices.contains("artifacts")) {
+            artifact = "artifacts";
+        }
+        if (!choices.contains(color)) {
+            color = null;
+        }
+        for (Card c : oppList) {
+            if (!c.isArtifact()) {
+                artifact = null;
+            }
+            switch (color) {
+            case "black":
+                if (!c.isBlack()) {
+                    color = null;
+                }
+                break;
+            case "blue":
+                if (!c.isBlue()) {
+                    color = null;
+                }
+                break;
+            case "green":
+                if (!c.isGreen()) {
+                    color = null;
+                }
+                break;
+            case "red":
+                if (!c.isRed()) {
+                    color = null;
+                }
+                break;
+            case "white":
+                if (!c.isWhite()) {
+                    color = null;
+                }
+                break;
+            }
+            if (color == null && artifact == null) {
+                return null;
+            }
+        }
+        if (color != null) {
+            return color;
+        }
+        if (artifact != null) {
+            return artifact;
+        }
+        return null;
     }
     
     public static boolean shouldThisAttack(final Player ai, Card attacker) {
