@@ -636,7 +636,10 @@ public class PlayerControllerAi extends PlayerController {
         final PhaseHandler ph = game.getPhaseHandler();
         if (ph.getPlayerTurn() == sa.getActivatingPlayer() && ph.getPhase() == PhaseType.MAIN1) {
             AiAttackController aiAtk = new AiAttackController(sa.getActivatingPlayer(), sa.getTargetCard());
-            return aiAtk.toProtectAttacker(sa);
+            String s = aiAtk.toProtectAttacker(sa);
+            if (s != null) {
+                return s;
+            }
         }
         final String logic = sa.getParam("AILogic");
         if (logic == null || logic.equals("MostProminentHumanCreatures")) {
