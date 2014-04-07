@@ -70,7 +70,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     c1.addTempAttackBoost(power1 - power2);
-                    c2.addTempDefenseBoost(power2 - power1);
+                    c2.addTempAttackBoost(power2 - power1);
                     game.fireEvent(new GameEventCardStatsChanged(c1));
                     game.fireEvent(new GameEventCardStatsChanged(c2));
                 }
