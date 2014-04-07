@@ -6,5 +6,6 @@ A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CantBeBlockedBy Spirit | Description$ Enchanted creature can't be blocked by Spirits.
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemRandomDeck:True
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_reality.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked by Spirits.\n{1}{U}: Return Field of Reality to its owner's hand.
