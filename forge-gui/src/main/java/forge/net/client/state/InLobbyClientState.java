@@ -22,7 +22,7 @@ public class InLobbyClientState implements IClientState {
         if( data instanceof ChatPacketSrv) {
             ChatPacketSrv cp = (ChatPacketSrv) data;
             // if ( not muted ) 
-            FServer.instance.getLobby().speak(ChatArea.Room, client.getPlayer(), cp.getMessage());
+            FServer.getLobby().speak(ChatArea.Room, client.getPlayer(), cp.getMessage());
             // else 
             //   client.send("You are banned and cannot speak");
             return true;

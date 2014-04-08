@@ -18,17 +18,20 @@
 package forge.quest.bazaar;
 
 import com.thoughtworks.xstream.XStream;
-import forge.Singletons;
+
+import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 import forge.util.IgnoringXStream;
 import forge.util.XmlUtil;
+
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -159,7 +162,7 @@ public class QuestBazaarManager {
 
         final List<IQuestBazaarItem> ret = new ArrayList<IQuestBazaarItem>();
 
-        QuestAssets qA = Singletons.getModel().getQuest().getAssets();
+        QuestAssets qA = FModel.getQuest().getAssets();
         for (final IQuestBazaarItem purchasable : itemsOnStalls.get(stallName)) {
             if (purchasable.isAvailableForPurchase(qA)) {
                 ret.add(purchasable);

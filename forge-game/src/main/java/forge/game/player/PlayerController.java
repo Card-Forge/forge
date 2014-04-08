@@ -33,7 +33,6 @@ import forge.item.PaperCard;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -108,12 +107,8 @@ public abstract class PlayerController {
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
     public final SpellAbility getAbilityToPlay(List<SpellAbility> abilities) { return getAbilityToPlay(abilities, null); }
-    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent);
+    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent);
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     */
     //public abstract void playFromSuspend(Card c);
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);

@@ -1,25 +1,23 @@
 package forge.control;
 
 import com.google.common.eventbus.Subscribe;
+
 import forge.FThreads;
+import forge.GuiBase;
 import forge.game.event.*;
-import forge.gui.input.InputPlaybackControl;
-import forge.gui.match.CMatchUI;
+import forge.match.input.InputPlaybackControl;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
-    private final FControl fc;
-
     private final InputPlaybackControl inputPlayback = new InputPlaybackControl(this);
     private final AtomicBoolean paused = new AtomicBoolean(false);
 
     private final CyclicBarrier gameThreadPauser = new CyclicBarrier(2);
 
-    public FControlGamePlayback(FControl fc) {
-        this.fc = fc;
+    public FControlGamePlayback() {
     }
 
     @Subscribe
@@ -52,13 +50,13 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventTurnPhase ev) {
-        boolean isUiToStop = CMatchUI.SINGLETON_INSTANCE.stopAtPhase(ev.playerTurn, ev.phase);
+        boolean isUiToStop = GuiBase.getInterface().stopAtPhase(ev.playerTurn, ev.phase);
 
         switch(ev.phase) {
             case COMBAT_END:
             case COMBAT_DECLARE_ATTACKERS:
             case COMBAT_DECLARE_BLOCKERS:
-                if (fc.getObservedGame().getPhaseHandler().inCombat()) {
+                if (GuiBase.getInterface().getGame().getPhaseHandler().inCombat()) {
                     pauseForEvent(combatDelay);
                 }
                 break;
@@ -77,13 +75,13 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventGameFinished event) {
-        fc.getInputQueue().removeInput(inputPlayback);
+        GuiBase.getInterface().getInputQueue().removeInput(inputPlayback);
         return null;
     }
 
     @Override
     public Void visit(GameEventGameStarted event) {
-        fc.getInputQueue().setInput(inputPlayback);
+        GuiBase.getInterface().getInputQueue().setInput(inputPlayback);
         return null;
     }
 
@@ -95,7 +93,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.spell.getHostCard()); } });
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { GuiBase.getInterface().setCard(event.spell.getHostCard()); } });
         pauseForEvent(resolveDelay);
         return null;
     }
@@ -105,7 +103,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { CMatchUI.SINGLETON_INSTANCE.setCard(event.sa.getHostCard()); } });
+        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { GuiBase.getInterface().setCard(event.sa.getHostCard()); } });
         pauseForEvent(castDelay);
         return null;
     }
@@ -139,7 +137,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private void releaseGameThread() {
         // just need to run another thread through the barrier... not edt preferrably :)
 
-        fc.getObservedGame().getAction().invoke(new Runnable() {
+        GuiBase.getInterface().getGame().getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 try {

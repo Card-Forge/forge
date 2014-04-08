@@ -18,8 +18,8 @@
 
 package forge.model;
 
+import forge.SGuiChoose;
 import forge.card.IUnOpenedProduct;
-import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -88,13 +88,13 @@ public class UnOpenedMeta implements IUnOpenedProduct {
                 if (isHuman) {
                     final MetaSet ms;
                     if (allowCancel) {
-                        ms = GuiChoose.oneOrNone("Choose Booster", metaSets);
+                        ms = SGuiChoose.oneOrNone("Choose Booster", metaSets);
                         if (ms == null) {
                             return null;
                         }
                     }
                     else {
-                        ms = GuiChoose.one("Choose Booster", metaSets);
+                        ms = SGuiChoose.one("Choose Booster", metaSets);
                     }
                     return ms.getBooster().get();
                 }

@@ -21,15 +21,17 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.Singletons;
+
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.card.PrintSheet;
 import forge.item.*;
+import forge.model.FModel;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -74,7 +76,7 @@ public final class BoosterUtils {
         final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
         final boolean preferred = (userPrefs != null && userPrefs.getPreferredColor() != MagicColor.ALL_COLORS);
         final boolean randomized = userPrefs != null && userPrefs.useRandomPool();
-        final int colorBias =  (preferred && !randomized) ? Singletons.getModel().getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
+        final int colorBias =  (preferred && !randomized) ? FModel.getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
         final int biasAdjustedCommons = (((colorBias * numCommon) / 25) > 0 ? numCommon - (colorBias * numCommon) / 25 : numCommon);
         final int biasAdjustedUncommons = (((colorBias * numUncommon) / 25) > 0 ? numUncommon - (colorBias * numUncommon) / 25 : numUncommon);
         final int biasAdjustedRares = (((colorBias * numRare) / 25) > 0 ? numRare - (colorBias * numRare) / 25 : numRare);
@@ -104,7 +106,7 @@ public final class BoosterUtils {
         }
 
         // This will save CPU time when sets are limited
-        final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), filter));
+        final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
 
         final Predicate<PaperCard> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, biasAdjustedCommons, colorFilters));
@@ -243,13 +245,13 @@ public final class BoosterUtils {
                 }
             }
 
-            if (Singletons.getModel().getQuest().getFormat() != null) {
-                preds.add(Singletons.getModel().getQuest().getFormat().getFilterPrinted());
+            if (FModel.getQuest().getFormat() != null) {
+                preds.add(FModel.getQuest().getFormat().getFilterPrinted());
             }
 
             PrintSheet ps = new PrintSheet("Quest rewards");
             Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
-            ps.addAll(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), predicate));
+            ps.addAll(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), predicate));
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
@@ -259,14 +261,14 @@ public final class BoosterUtils {
             rewards.add(new QuestRewardCardFiltered(temp));
         } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("booster") && temp[1].equalsIgnoreCase("pack")) {
             // Type 4: a predetermined extra booster pack
-            rewards.add(BoosterPack.FN_FROM_SET.apply(Singletons.getMagicDb().getEditions().get(temp[2])));
+            rewards.add(BoosterPack.FN_FROM_SET.apply(FModel.getMagicDb().getEditions().get(temp[2])));
         } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("tournament") && temp[1].equalsIgnoreCase("pack")) {
             // Type 5: a predetermined extra tournament ("starter") pack
-            rewards.add(TournamentPack.FN_FROM_SET.apply(Singletons.getMagicDb().getEditions().get(temp[2])));
+            rewards.add(TournamentPack.FN_FROM_SET.apply(FModel.getMagicDb().getEditions().get(temp[2])));
         }
         else if (temp.length > 0) {
             // default: assume we are asking for a single copy of a specific card
-            final PaperCard specific = Singletons.getMagicDb().getCommonCards().getCard(s);
+            final PaperCard specific = FModel.getMagicDb().getCommonCards().getCard(s);
             if (specific != null) {
                 rewards.add(specific);
             }

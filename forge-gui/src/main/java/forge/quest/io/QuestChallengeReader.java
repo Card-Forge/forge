@@ -3,7 +3,7 @@ package forge.quest.io;
 import forge.ImageKeys;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDifficulty;
 import forge.util.FileSection;
@@ -49,7 +49,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
 
         String humanDeck = sectionQuest.get("HumanDeck", null);
         if (humanDeck != null) {
-            File humanFile = new File(NewConstants.DEFAULT_CHALLENGES_DIR, humanDeck); // Won't work in other worlds!
+            File humanFile = new File(ForgeConstants.DEFAULT_CHALLENGES_DIR, humanDeck); // Won't work in other worlds!
             qc.setHumanDeck(DeckSerializer.fromFile(humanFile));
         }
 

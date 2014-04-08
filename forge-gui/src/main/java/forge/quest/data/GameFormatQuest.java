@@ -18,9 +18,10 @@
 package forge.quest.data;
 
 import com.google.common.base.Predicate;
-import forge.Singletons;
+
 import forge.card.CardEdition;
 import forge.game.GameFormat;
+import forge.model.FModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +82,7 @@ public final class GameFormatQuest extends GameFormat {
             return exSets;
         }
 
-        for (CardEdition ce : Singletons.getMagicDb().getEditions()) {
+        for (CardEdition ce : FModel.getMagicDb().getEditions()) {
             if (!isSetLegal(ce.getCode())) {
                 exSets.add(ce.getCode());
             }

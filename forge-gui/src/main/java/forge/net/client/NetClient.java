@@ -45,7 +45,7 @@ public class NetClient implements IConnectionObserver, INetClient{
     public void onConnectionClosed() {
         // Tell the game, the client is gone.
         if ( player != null ) {
-            FServer.instance.getLobby().disconnectPlayer(player);
+            FServer.getLobby().disconnectPlayer(player);
         }
     }
 
@@ -83,7 +83,7 @@ public class NetClient implements IConnectionObserver, INetClient{
      */
     @Override
     public final void createPlayer(String name) {
-        player = FServer.instance.getLobby().findOrCreateRemotePlayer(name, this);
+        player = FServer.getLobby().findOrCreateRemotePlayer(name, this);
     }
 
     /* (non-Javadoc)

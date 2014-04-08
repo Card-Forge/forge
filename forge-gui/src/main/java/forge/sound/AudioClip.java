@@ -20,6 +20,9 @@ package forge.sound;
 
 
 import javax.sound.sampled.*;
+
+import forge.properties.ForgeConstants;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.MissingResourceException;
@@ -37,12 +40,12 @@ public class AudioClip implements IAudioClip {
     private final int SOUND_SYSTEM_DELAY = 30;
 
     public static boolean fileExists(String fileName) {
-        File fSound = new File(PathToSound, fileName);
+        File fSound = new File(ForgeConstants.SOUND_DIR, fileName);
         return fSound.exists();
     }
 
     public AudioClip(final String filename) {
-        File fSound = new File(PathToSound, filename);
+        File fSound = new File(ForgeConstants.SOUND_DIR, filename);
         if (!fSound.exists()) {
             throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
         }

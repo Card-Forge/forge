@@ -22,12 +22,13 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.Singletons;
+
 import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.item.*;
+import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.GameFormatQuest;
@@ -38,6 +39,7 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public final class QuestUtilCards {
     public QuestUtilCards(final QuestController qd) {
         this.qc = qd;
         this.qa = qc.getAssets();
-        this.qpref = Singletons.getModel().getQuestPreferences();
+        this.qpref = FModel.getQuestPreferences();
     }
 
     /**
@@ -74,7 +76,7 @@ public final class QuestUtilCards {
      * @return the item pool view
      */
     public static ItemPool<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
-        final ICardDatabase db = Singletons.getMagicDb().getCommonCards();
+        final ICardDatabase db = FModel.getMagicDb().getCommonCards();
         final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
 
         List<String> landCodes = new ArrayList<String>();
@@ -84,7 +86,7 @@ public final class QuestUtilCards {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
 
             for (String edCode : availableEditions) {
-                CardEdition ed = Singletons.getMagicDb().getEditions().get(edCode);
+                CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
                 if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
                     landCodes.add(edCode);
@@ -97,7 +99,7 @@ public final class QuestUtilCards {
                 snowLandCodes.add("CSP");
             }
         } else {
-            Iterable<CardEdition> allEditions = Singletons.getMagicDb().getEditions();
+            Iterable<CardEdition> allEditions = FModel.getMagicDb().getEditions();
             for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
                 landCodes.add(edition.getCode());
             }
@@ -116,7 +118,7 @@ public final class QuestUtilCards {
         for (String landName : MagicColor.Constant.BASIC_LANDS) {
             int artCount = db.getArtCount(landName, landCode);
 
-            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
                 int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, isZendikarSet ? 4 : artCount);
 
                 for (int i = 1; i <= artGroups.length; i++) {
@@ -201,7 +203,7 @@ public final class QuestUtilCards {
 
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final PaperCard card = Aggregates.random(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), myFilter));
+        final PaperCard card = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter));
         this.addSingleCard(card, 1);
         return card;
     }
@@ -216,7 +218,7 @@ public final class QuestUtilCards {
     public List<PaperCard> addRandomRare(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
         return newCards;
     }
@@ -427,7 +429,7 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    private final GameFormat.Collection formats = Singletons.getModel().getFormats();
+    private final GameFormat.Collection formats = FModel.getFormats();
     private final Predicate<CardEdition> filterExt = this.formats.getExtended().editionLegalPredicate;
 
     /** The filter t2booster. */
@@ -468,7 +470,7 @@ public final class QuestUtilCards {
             if (qc.getFormat() != null) {
                 filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
             }
-            Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), filter);
+            Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
         }
     }
@@ -484,7 +486,7 @@ public final class QuestUtilCards {
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
-        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), formatFilter);
+        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
     }
 
@@ -499,7 +501,7 @@ public final class QuestUtilCards {
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
-        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), formatFilter);
+        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
 
@@ -651,7 +653,7 @@ public final class QuestUtilCards {
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
         Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
-        Iterable<PaperCard> editionCards = Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), filter);
+        Iterable<PaperCard> editionCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);
 
         ItemPool<PaperCard> ownedCards = qa.getCardPool();
         // 100% means at least one of every basic land and at least 4 of every other card in the set
@@ -677,7 +679,7 @@ public final class QuestUtilCards {
                 return QuestUtilCards.this.qa.getCardPool().count((PaperCard) i);
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck) i;
-                return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? -1 : -2;
+                return FModel.getQuest().getMyDecks().contains(pDeck.getName()) ? -1 : -2;
             } else if (i instanceof SealedProduct) {
                 SealedProduct oPack = (SealedProduct) i;
                 return getCompletionPercent(oPack.getEdition()) - 103;
@@ -695,7 +697,7 @@ public final class QuestUtilCards {
                 return QuestUtilCards.this.qa.getCardPool().count((PaperCard) i);
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck) i;
-                return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
+                return FModel.getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
             } else if (i instanceof SealedProduct) {
                 SealedProduct oPack = (SealedProduct) i;
                 return String.format("%d%%", getCompletionPercent(oPack.getEdition()));

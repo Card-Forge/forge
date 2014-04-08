@@ -23,14 +23,15 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import forge.Singletons;
+
+import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.error.BugReporter;
 import forge.item.*;
-import forge.properties.NewConstants;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
 import forge.quest.bazaar.QuestItemType;
@@ -38,6 +39,7 @@ import forge.quest.data.*;
 import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 import forge.util.XmlUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
@@ -46,6 +48,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -118,14 +121,14 @@ public class QuestDataIO {
                 try {
                     QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
                 } catch (final Exception e) {
-                    forge.error.BugReporter.reportException(e);
+                    GuiBase.getInterface().reportException(e);
                 }
             }
 
             return data;
         }
         catch (final Exception ex) {
-            BugReporter.reportException(ex, "Error loading Quest Data");
+            GuiBase.getInterface().reportException(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
     }
@@ -349,13 +352,13 @@ public class QuestDataIO {
         try {
             final XStream xStream = QuestDataIO.getSerializer(false);
 
-            final File f = new File(NewConstants.QUEST_SAVE_DIR, qd.getName());
+            final File f = new File(ForgeConstants.QUEST_SAVE_DIR, qd.getName());
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
             // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
         }
         catch (final Exception ex) {
-            BugReporter.reportException(ex, "Error saving Quest Data.");
+            GuiBase.getInterface().reportException(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }
     }
@@ -521,7 +524,7 @@ public class QuestDataIO {
                     final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
                     final String nodename = reader.getNodeName();
                     if ("string".equals(nodename)) {
-                        pool.add(Singletons.getMagicDb().getCommonCards().getCard(reader.getValue()));
+                        pool.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
                     } else if ("card".equals(nodename)) { // new format
                         pool.add(this.readCardPrinted(reader), cnt);
                     }
@@ -613,7 +616,7 @@ public class QuestDataIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(Singletons.getMagicDb().getCommonCards().getCard(reader.getValue()));
+                    result.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 } else if ("booster".equals(nodename)) {
@@ -642,17 +645,17 @@ public class QuestDataIO {
         }
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
-            final CardEdition ed = Singletons.getMagicDb().getEditions().get(reader.getAttribute("s"));
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return BoosterPack.FN_FROM_SET.apply(ed);
         }
 
         protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {
-            final CardEdition ed = Singletons.getMagicDb().getEditions().get(reader.getAttribute("s"));
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return TournamentPack.FN_FROM_SET.apply(ed);
         }
 
         protected FatPack readFatPack(final HierarchicalStreamReader reader) {
-            final CardEdition ed = Singletons.getMagicDb().getEditions().get(reader.getAttribute("s"));
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return FatPack.FN_FROM_SET.apply(ed);
         }
 
@@ -662,9 +665,9 @@ public class QuestDataIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            PaperCard c = Singletons.getMagicDb().getCommonCards().getCard(name, set, index);
-            if ( null == c ) c = Singletons.getMagicDb().getCommonCards().getCard(name);
-            return foil ? Singletons.getMagicDb().getCommonCards().getFoiled(c) : c;
+            PaperCard c = FModel.getMagicDb().getCommonCards().getCard(name, set, index);
+            if ( null == c ) c = FModel.getMagicDb().getCommonCards().getCard(name);
+            return foil ? FModel.getMagicDb().getCommonCards().getFoiled(c) : c;
         }
     }
 }

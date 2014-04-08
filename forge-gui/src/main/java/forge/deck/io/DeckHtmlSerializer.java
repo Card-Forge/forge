@@ -1,9 +1,9 @@
 package forge.deck.io;
 
-import forge.ImageCache;
+import forge.assets.ImageUtil;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -71,7 +71,7 @@ public class DeckHtmlSerializer {
                     // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                     for (int i = card.getValue().intValue(); i > 0; --i ) {
                         PaperCard r = card.getKey();
-                        String url = NewConstants.URL_PIC_DOWNLOAD + ImageCache.getDownloadUrl(r, false);
+                        String url = ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(r, false);
                         list.add(url);
                     }
                 }

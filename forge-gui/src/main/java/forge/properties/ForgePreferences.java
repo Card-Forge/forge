@@ -18,15 +18,7 @@
 package forge.properties;
 
 import forge.ai.AiProfileUtil;
-import forge.control.FControl.CloseAction;
 import forge.game.GameLogEntryType;
-import forge.gui.home.EMenuItem;
-import forge.gui.match.VMatchUI;
-import forge.gui.match.views.VDev;
-import forge.gui.match.views.VField;
-import forge.gui.toolbox.special.PhaseIndicator;
-
-import java.util.List;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /**
@@ -74,13 +66,13 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_THEMED_COMBOBOX ("true"),                // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"),                // Visibility of tabs in match screen.
-        UI_CLOSE_ACTION (CloseAction.NONE.toString()),
+        UI_CLOSE_ACTION ("NONE"),
 
         UI_FOR_TOUCHSCREN("false"),
 
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
-        SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()),
+        SUBMENU_CURRENTMENU ("CONSTRUCTED"),
         SUBMENU_SANCTIONED ("true"),
         SUBMENU_GAUNTLET ("false"),
         SUBMENU_VARIANT ("false"),
@@ -165,98 +157,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
-        super(NewConstants.MAIN_PREFS_FILE, FPref.class);
-    }
-
-    /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
-     * codebase.
-     */
-    public void writeMatchPreferences() {
-        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-
-        // AI field is at index [1]
-        PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
-        this.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLblUpkeep().getEnabled()));
-        this.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLblDraw().getEnabled()));
-        this.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLblMain1().getEnabled()));
-        this.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fvAi.getLblBeginCombat().getEnabled()));
-        this.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fvAi.getLblDeclareAttackers().getEnabled()));
-        this.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fvAi.getLblDeclareBlockers().getEnabled()));
-        this.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fvAi.getLblFirstStrike().getEnabled()));
-        this.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fvAi.getLblCombatDamage().getEnabled()));
-        this.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fvAi.getLblEndCombat().getEnabled()));
-        this.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fvAi.getLblMain2().getEnabled()));
-        this.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLblEndTurn().getEnabled()));
-        this.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLblCleanup().getEnabled()));
-
-        // Human field is at index [0]
-        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        this.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLblUpkeep().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLblDraw().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLblMain1().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fvHuman.getLblBeginCombat().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fvHuman.getLblDeclareAttackers().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fvHuman.getLblDeclareBlockers().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fvHuman.getLblFirstStrike().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fvHuman.getLblCombatDamage().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fvHuman.getLblEndCombat().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLblMain2().getEnabled()));
-        this.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLblEndTurn().getEnabled());
-        this.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLblCleanup().getEnabled());
-
-        final VDev v = VDev.SINGLETON_INSTANCE;
-
-        // this.setPref(FPref.DEV_MILLING_LOSS, v.getLblMilling().getEnabled());
-        this.setPref(FPref.DEV_UNLIMITED_LAND, v.getLblUnlimitedLands().getEnabled());
-    }
-
-    
-    
-    // was not used anywhere else
-    private final boolean NET_CONN = false;
-    
-    /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in
-     * codebase.
-     */
-    public void actuateMatchPreferences() {
-        final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-
-        DEV_MODE = this.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        UPLOAD_DRAFT = NET_CONN; // && this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
-
-        // AI field is at index [0]
-        PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
-        fvAi.getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
-        fvAi.getLblDraw().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DRAW));
-        fvAi.getLblMain1().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_MAIN1));
-        fvAi.getLblBeginCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
-        fvAi.getLblDeclareAttackers().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
-        fvAi.getLblDeclareBlockers().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
-        fvAi.getLblFirstStrike().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
-        fvAi.getLblCombatDamage().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
-        fvAi.getLblEndCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
-        fvAi.getLblMain2().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_MAIN2));
-        fvAi.getLblEndTurn().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_EOT));
-        fvAi.getLblCleanup().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
-
-        // Human field is at index [1]
-        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        fvHuman.getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
-        fvHuman.getLblDraw().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
-        fvHuman.getLblMain1().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
-        fvHuman.getLblBeginCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
-        fvHuman.getLblDeclareAttackers().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
-        fvHuman.getLblDeclareBlockers().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
-        fvHuman.getLblFirstStrike().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
-        fvHuman.getLblCombatDamage().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
-        fvHuman.getLblEndCombat().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
-        fvHuman.getLblMain2().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
-        fvHuman.getLblEndTurn().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
-        fvHuman.getLblCleanup().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
-
-        //Singletons.getView().getViewMatch().setLayoutParams(this.getPref(FPref.UI_LAYOUT_PARAMS));
+        super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
     }
 
     protected FPref[] getEnumValues() {
@@ -275,7 +176,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     protected String getPrefDefault(FPref key) {
         return key.getDefault();
     }
-    
+
+    // was not used anywhere else
+    public static boolean NET_CONN = false;
 
     /** The Constant DevMode. */
     // one for normal mode, one for quest mode

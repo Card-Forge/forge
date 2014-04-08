@@ -20,6 +20,8 @@ package forge.error;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.GuiBase;
+
 import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
@@ -48,7 +50,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     /** {@inheritDoc} */
     @Override
     public final void uncaughtException(final Thread t, final Throwable ex) {
-        BugReporter.reportException(ex);
+        GuiBase.getInterface().reportException(ex);
     }
 
     /**
@@ -59,6 +61,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      *            a {@link java.lang.Throwable} object.
      */
     public final void handle(final Throwable ex) {
-        BugReporter.reportException(ex);
+        GuiBase.getInterface().reportException(ex);
     }
 }

@@ -2,14 +2,9 @@ package forge;
 
 import forge.util.ThreadUtil;
 
-import javax.swing.*;
 import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class FThreads {
     private FThreads() { } // no instances supposed
 
@@ -29,17 +24,10 @@ public class FThreads {
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param runnable
-     */
     public static void invokeInEdtLater(Runnable runnable) {
-        SwingUtilities.invokeLater(runnable);
+        GuiBase.getInterface().invokeInEdtLater(runnable);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public static void invokeInEdtNowOrLater(Runnable proc) {
         if (isGuiThread()) {
             proc.run();
@@ -59,32 +47,14 @@ public class FThreads {
      * 
      * @param proc
      *            the Runnable to run
-     * @see javax.swing.SwingUtilities#invokeLater(Runnable)
+     * @see fgd.SwingUtilities#invokeLater(Runnable)
      */
     public static void invokeInEdtAndWait(final Runnable proc) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            // Just run in the current thread.
-            proc.run();
-        }
-        else {
-            try {
-                SwingUtilities.invokeAndWait(proc);
-            }
-            catch (final InterruptedException exn) {
-                throw new RuntimeException(exn);
-            }
-            catch (final InvocationTargetException exn) {
-                throw new RuntimeException(exn);
-            }
-        }
+        GuiBase.getInterface().invokeInEdtAndWait(proc);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public static boolean isGuiThread() {
-        return SwingUtilities.isEventDispatchThread();
+        return GuiBase.getInterface().isGuiThread();
     }
 
     public static void delayInEDT(int milliseconds, final Runnable inputUpdater) {

@@ -17,16 +17,17 @@
  */
 package forge.limited;
 
-import forge.Singletons;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.model.FModel;
 import forge.util.FileSection;
 import forge.util.ItemPool;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -64,7 +65,7 @@ public class CustomLimited extends DeckBase {
     private transient ItemPool<PaperCard> cardPool;
 
     /** The Land set code. */
-    private String landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions()).getCode();
+    private String landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
 
     private boolean singleton; 
 
@@ -111,7 +112,7 @@ public class CustomLimited extends DeckBase {
         cd.numPacks = data.getInt("NumPacks");
         cd.singleton = data.getBoolean("Singleton");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
-        cd.cardPool = deckCube == null ? ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
+        cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
 
         return cd;
     }

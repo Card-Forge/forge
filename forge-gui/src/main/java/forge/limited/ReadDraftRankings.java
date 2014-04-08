@@ -2,7 +2,7 @@ package forge.limited;
 
 import com.esotericsoftware.minlog.Log;
 import forge.card.MagicColor;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class ReadDraftRankings {
      */
     public ReadDraftRankings() {
         this.setSizes = new HashMap<String, Integer>();
-        this.draftRankings = this.readFile(FileUtil.readFile(NewConstants.DRAFT_RANKINGS_FILE));
+        this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_RANKINGS_FILE));
     } // setup()
 
     /**

@@ -20,16 +20,18 @@ package forge.quest;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.Singletons;
+
+import forge.SOptionPane;
+import forge.GuiBase;
+import forge.SGuiChoose;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
-import forge.gui.CardListViewer;
-import forge.gui.GuiChoose;
-import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.model.FModel;
 import forge.quest.io.ReadPriceList;
 import forge.util.storage.IStorage;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
@@ -75,7 +77,7 @@ public class QuestUtilUnlockSets {
             options.add(String.format("%s [PRICE: %d credits]",  ee.left.getName(), ee.right));
         }
 
-        int index = options.indexOf(GuiChoose.oneOrNone(setPrompt, options));
+        int index = options.indexOf(SGuiChoose.oneOrNone(setPrompt, options));
         if (index < 0 || index >= options.size()) {
             return null;
         }
@@ -86,7 +88,7 @@ public class QuestUtilUnlockSets {
         CardEdition choosenEdition = toBuy.left;
 
         if (qData.getAssets().getCredits() < price) {
-            FOptionPane.showMessageDialog("Unfortunately, you cannot afford that set yet.\n"
+            SOptionPane.showMessageDialog("Unfortunately, you cannot afford that set yet.\n"
                     + "To unlock " + choosenEdition.getName() + ", you need " + price + " credits.\n"
                     + "You have only " + qData.getAssets().getCredits() + " credits.",
                     "Failed to unlock " + choosenEdition.getName(),
@@ -94,7 +96,7 @@ public class QuestUtilUnlockSets {
             return null;
         }
 
-        if (!FOptionPane.showConfirmDialog(
+        if (!SOptionPane.showConfirmDialog(
                 "Unlocking " + choosenEdition.getName() + " will cost you " + price + " credits.\n"
                 + "You have " + qData.getAssets().getCredits() + " credits.\n\n"
                 + "Are you sure you want to unlock " + choosenEdition.getName() + "?",
@@ -124,11 +126,11 @@ public class QuestUtilUnlockSets {
         List<CardEdition> options = new ArrayList<CardEdition>();
 
         // Sort current sets by date
-        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getMagicDb().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
         Collections.sort(allowedSets);
         
         // Sort unlockable sets by date
-        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getMagicDb().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
         Collections.sort(excludedSets);
         
         // get a number of sets between an excluded and any included set
@@ -172,9 +174,8 @@ public class QuestUtilUnlockSets {
      * @param unlockedSet the edition to unlock
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
-
-        IStorage<SealedProduct.Template> starters = Singletons.getMagicDb().getTournamentPacks();
-        IStorage<SealedProduct.Template> boosters = Singletons.getMagicDb().getBoosters();
+        IStorage<SealedProduct.Template> starters = FModel.getMagicDb().getTournamentPacks();
+        IStorage<SealedProduct.Template> boosters = FModel.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         List<PaperCard> cardsWon = new ArrayList<PaperCard>();
@@ -191,9 +192,7 @@ public class QuestUtilUnlockSets {
         }
 
         qData.getCards().addAllCards(cardsWon);
-        final CardListViewer cardView = new CardListViewer(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
-        cardView.setVisible(true);
-        cardView.dispose();
+        GuiBase.getInterface().showCardList(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
         qData.save();
     }
 }

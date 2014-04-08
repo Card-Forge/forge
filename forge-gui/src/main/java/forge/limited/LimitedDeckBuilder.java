@@ -4,7 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.Singletons;
+
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -14,7 +14,9 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.MyRandom;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -52,7 +54,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      *            Chosen colors.
      */
     public LimitedDeckBuilder(List<PaperCard> dList, DeckColors pClrs) {
-        super(Singletons.getMagicDb().getCommonCards());
+        super(FModel.getMagicDb().getCommonCards());
         this.availableList = dList;
         this.deckColors = pClrs;
         this.colors = pClrs.getChosenColors();
@@ -257,7 +259,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
     private void findBasicLandSets() {
         Set<String> sets = new HashSet<String>();
         for (PaperCard cp : aiPlayables) {
-            CardEdition ee = Singletons.getMagicDb().getEditions().get(cp.getEdition());
+            CardEdition ee = FModel.getMagicDb().getEditions().get(cp.getEdition());
             if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee))
                 sets.add(cp.getEdition());
         }
@@ -328,7 +330,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
         } else {
             set = setsWithBasicLands.get(0);
         }
-        return Singletons.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
+        return FModel.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
     }
 
     /**

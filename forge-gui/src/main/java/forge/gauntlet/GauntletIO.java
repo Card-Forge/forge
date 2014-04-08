@@ -6,12 +6,14 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import forge.Singletons;
+
+import forge.GuiBase;
 import forge.deck.CardPool;
-import forge.error.BugReporter;
 import forge.item.PaperCard;
-import forge.properties.NewConstants;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.util.IgnoringXStream;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
@@ -37,7 +39,7 @@ public class GauntletIO {
     }
 
     public static File getGauntletFile(String name) {
-        return new File(NewConstants.GAUNTLET_DIR.userPrefLoc, name + SUFFIX_DATA);
+        return new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, name + SUFFIX_DATA);
     }
 
     public static File getGauntletFile(GauntletData gd) {
@@ -52,7 +54,7 @@ public class GauntletIO {
             }
         };
 
-        File folder = new File(NewConstants.GAUNTLET_DIR.userPrefLoc);
+        File folder = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
@@ -64,7 +66,7 @@ public class GauntletIO {
             }
         };
 
-        File folder = new File(NewConstants.GAUNTLET_DIR.userPrefLoc);
+        File folder = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
@@ -76,7 +78,7 @@ public class GauntletIO {
             }
         };
 
-        File folder = new File(NewConstants.GAUNTLET_DIR.defaultLoc);
+        File folder = new File(ForgeConstants.GAUNTLET_DIR.defaultLoc);
         return folder.listFiles(filter);
     }
 
@@ -93,7 +95,7 @@ public class GauntletIO {
             
             return data;
         } catch (final Exception ex) {
-            BugReporter.reportException(ex, "Error loading Gauntlet Data");
+            GuiBase.getInterface().reportException(ex, "Error loading Gauntlet Data");
             throw new RuntimeException(ex);
         } finally {
             if (null != zin) {
@@ -108,7 +110,7 @@ public class GauntletIO {
             final XStream xStream = GauntletIO.getSerializer(false);
             GauntletIO.savePacked(xStream, gd0);
         } catch (final Exception ex) {
-            BugReporter.reportException(ex, "Error saving Gauntlet Data.");
+            GuiBase.getInterface().reportException(ex, "Error saving Gauntlet Data.");
             throw new RuntimeException(ex);
         }
     }
@@ -145,7 +147,7 @@ public class GauntletIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(Singletons.getMagicDb().getCommonCards().getCard(reader.getValue()));
+                    result.add(FModel.getMagicDb().getCommonCards().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 }
@@ -173,12 +175,12 @@ public class GauntletIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            PaperCard card = Singletons.getMagicDb().getCommonCards().getCard(name, set, index);
+            PaperCard card = FModel.getMagicDb().getCommonCards().getCard(name, set, index);
             if ( null == card )
-                card = Singletons.getMagicDb().getCommonCards().getCard(name, set, -1);
+                card = FModel.getMagicDb().getCommonCards().getCard(name, set, -1);
             if ( null == card ) 
                 throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
-            return foil ? Singletons.getMagicDb().getCommonCards().getFoiled(card) : card;
+            return foil ? FModel.getMagicDb().getCommonCards().getFoiled(card) : card;
         }
     }
 }

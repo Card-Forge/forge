@@ -1,6 +1,5 @@
 package forge.player;
 
-import java.awt.event.MouseEvent;
 import java.util.*;
 
 import com.google.common.base.Function;
@@ -86,7 +85,7 @@ public class PlayerControllerHuman extends PlayerController {
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
     	if (abilities.isEmpty()) {
             return null;
         }

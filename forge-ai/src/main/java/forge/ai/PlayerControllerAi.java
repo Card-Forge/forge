@@ -48,7 +48,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.awt.event.MouseEvent;
 import java.security.InvalidParameterException;
 import java.util.*;
 
@@ -72,7 +71,7 @@ public class PlayerControllerAi extends PlayerController {
     }
     
 
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
         if (abilities.size() == 0) {
             return null;
         }

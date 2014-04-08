@@ -19,7 +19,7 @@ package forge.quest.io;
 
 import com.esotericsoftware.minlog.Log;
 import forge.card.MagicColor;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 
@@ -58,8 +58,8 @@ public class ReadPriceList {
      * </p>
      */
     private void setup() {
-        this.priceMap = this.readFile(NewConstants.QUEST_CARD_PRICE_FILE);
-        this.priceMap.putAll(this.readFile(NewConstants.PRICES_BOOSTER_FILE));
+        this.priceMap = this.readFile(ForgeConstants.QUEST_CARD_PRICE_FILE);
+        this.priceMap.putAll(this.readFile(ForgeConstants.PRICES_BOOSTER_FILE));
 
     } // setup()
 

@@ -5,7 +5,8 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import forge.gui.deckeditor.DeckProxy;
+import forge.deck.DeckProxy;
+import forge.properties.ForgeConstants;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,7 +20,7 @@ import java.util.Map;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck, filename;
+    private static String currentDeck;
     private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EVENT_FACTORY.createDTD("\n");
     private static final XMLEvent TAB = EVENT_FACTORY.createDTD("\t");
@@ -45,13 +46,12 @@ public class DeckPreferences {
         return prefs;
     }
 
-    public static void load(String filename0) {
-        filename = filename0;
+    public static void load() {
         allPrefs.clear();
 
         try {
             final XMLInputFactory in = XMLInputFactory.newInstance();
-            final XMLEventReader reader = in.createXMLEventReader(new FileInputStream(filename));
+            final XMLEventReader reader = in.createXMLEventReader(new FileInputStream(ForgeConstants.DECK_PREFS_FILE));
 
             XMLEvent event;
             StartElement element;
@@ -107,7 +107,7 @@ public class DeckPreferences {
     private static void save() {
         try {
             final XMLOutputFactory out = XMLOutputFactory.newInstance();
-            final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(filename));
+            final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(ForgeConstants.DECK_PREFS_FILE));
 
             writer.add(EVENT_FACTORY.createStartDocument());
             writer.add(NEWLINE);

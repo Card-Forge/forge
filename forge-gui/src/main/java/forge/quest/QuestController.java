@@ -20,15 +20,16 @@ package forge.quest;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.eventbus.Subscribe;
-import forge.Singletons;
+
 import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
+import forge.model.FModel;
 import forge.net.FServer;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetStorage;
@@ -179,7 +180,7 @@ public class QuestController {
     public static IStorage<PreconDeck> getPrecons() {
         if (null == preconManager) {
             // read with a special class, that will fill sell rules as it processes each PreconDeck
-            preconManager = new StorageBase<PreconDeck>("Quest shop decks", new PreconDeck.Reader(new File(NewConstants.QUEST_PRECON_DIR)){
+            preconManager = new StorageBase<PreconDeck>("Quest shop decks", new PreconDeck.Reader(new File(ForgeConstants.QUEST_PRECON_DIR)){
                 @Override
                 protected PreconDeck getPreconDeckFromSections(java.util.Map<String,java.util.List<String>> sections) {
                     PreconDeck result = super.getPreconDeckFromSections(sections);
@@ -260,7 +261,7 @@ public class QuestController {
             this.myCards.setupNewGameCardPool(filter, difficulty, userPrefs);
         }
 
-        this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
+        this.getAssets().setCredits(FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
     }
 
     /**
@@ -291,7 +292,7 @@ public class QuestController {
      * @return QuestWorld or null, if using regular duels and challenges.
      */
     public QuestWorld getWorld() {
-        return this.model == null || this.model.getWorldId() == null ? null : Singletons.getModel().getWorlds().get(this.model.getWorldId());
+        return this.model == null || this.model.getWorldId() == null ? null : FModel.getWorlds().get(this.model.getWorldId());
     }
 
     /**
@@ -318,7 +319,7 @@ public class QuestController {
             return null;
         }
 
-        final QuestWorld curQw = Singletons.getModel().getWorlds().get(this.model.getWorldId());
+        final QuestWorld curQw = FModel.getWorlds().get(this.model.getWorldId());
 
         if (curQw == null) {
             return null;
@@ -361,7 +362,7 @@ public class QuestController {
      */
     public final QuestBazaarManager getBazaar() {
         if (null == this.bazaar) {
-            this.bazaar = new QuestBazaarManager(new File(NewConstants.BAZAAR_FILE));
+            this.bazaar = new QuestBazaarManager(new File(ForgeConstants.BAZAAR_INDEX_FILE));
         }
         return this.bazaar;
     }
@@ -396,7 +397,7 @@ public class QuestController {
      */
     public void resetDuelsManager() {
         QuestWorld world = getWorld();
-        String path = world == null || world.getDuelsDir() == null ? NewConstants.DEFAULT_DUELS_DIR : "res/quest/world/" + world.getDuelsDir();
+        String path = world == null || world.getDuelsDir() == null ? ForgeConstants.DEFAULT_DUELS_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getDuelsDir();
         this.duelManager = new QuestEventDuelManager(new File(path));
     }
 
@@ -406,7 +407,7 @@ public class QuestController {
      */
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
-        String path = world == null || world.getChallengesDir() == null ? NewConstants.DEFAULT_CHALLENGES_DIR : "res/quest/world/" + world.getChallengesDir();
+        String path = world == null || world.getChallengesDir() == null ? ForgeConstants.DEFAULT_CHALLENGES_DIR : ForgeConstants.QUEST_WORLD_DIR + world.getChallengesDir();
         this.allChallenges = new StorageBase<QuestEventChallenge>("Quest Challenges", new QuestChallengeReader(new File(path)));
     }
 
@@ -417,7 +418,7 @@ public class QuestController {
      */
     public QuestPetStorage getPetsStorage() {
         if (this.pets == null) {
-            this.pets = new QuestPetStorage(new File(NewConstants.BAZAAR_FILE));
+            this.pets = new QuestPetStorage(new File(ForgeConstants.BAZAAR_INDEX_FILE));
         }
 
         return this.pets;
@@ -446,7 +447,7 @@ public class QuestController {
         if (ev instanceof GameEventMulligan) {
             GameEventMulligan mev = (GameEventMulligan) ev;
             // First mulligan is free
-            if (mev.player.getLobbyPlayer() == FServer.instance.getLobby().getQuestPlayer()
+            if (mev.player.getLobbyPlayer() == FServer.getLobby().getQuestPlayer()
                     && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
                 mev.player.drawCard();
             }
@@ -455,11 +456,11 @@ public class QuestController {
 
 
     public int getTurnsToUnlockChallenge() {
-        if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+        if (FModel.getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
             return 8;
         }
         // User may have MAP and ZEPPELIN, so MAP must be tested second.
-        else if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.MAP)) {
+        else if (FModel.getQuest().getAssets().hasItem(QuestItemType.MAP)) {
             return 9;
         }
 

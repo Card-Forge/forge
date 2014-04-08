@@ -2,9 +2,10 @@ package forge.quest;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import forge.Singletons;
+
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
     @Override
     public final List<PaperCard> getChoices() {
         if (type == poolType.playerCards) {
-            final ItemPool<PaperCard> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
+            final ItemPool<PaperCard> playerCards = FModel.getQuest().getAssets().getCardPool();
             if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
                 List<PaperCard> cardChoices = new ArrayList<PaperCard>();
@@ -110,7 +111,7 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
         } else if (type == poolType.predicateFilter) {
             List<PaperCard> cardChoices = new ArrayList<PaperCard>();
 
-            for (final PaperCard card : Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), predicates)) {
+            for (final PaperCard card : Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), predicates)) {
                 cardChoices.add(card);
             }
             Collections.sort(cardChoices);

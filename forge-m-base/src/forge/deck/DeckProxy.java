@@ -11,8 +11,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.deck.generation.DeckGeneratorTheme;
-import forge.error.BugReporter;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
@@ -24,8 +22,6 @@ import forge.quest.QuestEvent;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
-import forge.utils.ForgePreferences.FPref;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -282,7 +278,7 @@ public class DeckProxy implements InventoryItem {
 
         @Override
         public Deck getDeck() {
-            final DeckGeneratorTheme gen = new DeckGeneratorTheme(FModel.getMagicDb().getCommonCards());
+            /*final DeckGeneratorTheme gen = new DeckGeneratorTheme(FModel.getMagicDb().getCommonCards());
             final Deck deck = new Deck();
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
@@ -291,7 +287,8 @@ public class DeckProxy implements InventoryItem {
             if (errorBuilder.length() > 0) {
                 BugReporter.reportBug(errorBuilder.toString());
             }
-            return deck;
+            return deck;*/
+            return null;
         }
 
         @Override
@@ -311,9 +308,9 @@ public class DeckProxy implements InventoryItem {
 
     public static Iterable<DeckProxy> getAllThemeDecks() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        for (final String s : DeckGeneratorTheme.getThemeNames()) {
+        /*for (final String s : DeckGeneratorTheme.getThemeNames()) {
             decks.add(new ThemeDeckGenerator(s));
-        }
+        }*/
         return decks;
     }
 

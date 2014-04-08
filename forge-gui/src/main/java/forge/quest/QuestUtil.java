@@ -17,13 +17,13 @@
  */
 package forge.quest;
 
-import forge.Singletons;
 import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.game.card.Card;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
+import forge.model.FModel;
 import forge.quest.bazaar.QuestPetController;
 
 import java.util.ArrayList;
@@ -168,7 +168,7 @@ public class QuestUtil {
             return tempcard;
         }
         // Standard card creation
-        return Singletons.getMagicDb().getCommonCards().getCardFromEdition(name, SetPreference.Latest);
+        return FModel.getMagicDb().getCommonCards().getCardFromEdition(name, SetPreference.Latest);
     }
 
 } // QuestUtil

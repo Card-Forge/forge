@@ -17,17 +17,23 @@
  */
 package forge.model;
 
-import forge.Singletons;
+import forge.CardStorageReader;
+import forge.CardStorageReader.ProgressObserver;
+import forge.FThreads;
+import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.card.CardPreferences;
 import forge.card.CardType;
+import forge.deck.io.DeckPreferences;
 import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
 import forge.game.card.CardUtil;
 import forge.gauntlet.GauntletData;
+import forge.interfaces.IProgressBar;
+import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
-import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
@@ -35,7 +41,6 @@ import forge.util.FileUtil;
 import forge.util.MultiplexOutputStream;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-import forge.view.FView;
 
 import java.io.*;
 import java.util.List;
@@ -50,47 +55,64 @@ import java.util.List;
  * this class must be either private or public static final.
  */
 public class FModel {
+    private FModel() { } //don't allow creating instance
 
-    private final PrintStream oldSystemOut;
-    private final PrintStream oldSystemErr;
-    private OutputStream logFileStream;
+    private static StaticData magicDb;
 
-    private final QuestPreferences questPreferences;
-    private final ForgePreferences preferences;
+    private static PrintStream oldSystemOut;
+    private static PrintStream oldSystemErr;
+    private static OutputStream logFileStream;
+
+    private static QuestPreferences questPreferences;
+    private static ForgePreferences preferences;
 
     // Someone should take care of 2 gauntlets here
-    private GauntletData gauntletData;
-    private GauntletMini gauntlet;
+    private static GauntletData gauntletData;
+    private static GauntletMini gauntlet;
 
-    private final QuestController quest;
-    private final CardCollections decks;
+    private static QuestController quest;
+    private static CardCollections decks;
 
-    private final IStorage<CardBlock> blocks;
-    private final IStorage<CardBlock> fantasyBlocks;
-    private final IStorage<QuestWorld> worlds;
-    private final GameFormat.Collection formats;
-    
+    private static IStorage<CardBlock> blocks;
+    private static IStorage<CardBlock> fantasyBlocks;
+    private static IStorage<QuestWorld> worlds;
+    private static GameFormat.Collection formats;
 
-    
-    private static FModel instance = null;
-    public synchronized final static FModel getInstance(boolean initWithUi) {
-        if (instance == null)
-            instance = new FModel(initWithUi);
-        return instance;
-    }
-    
-    /**
-     * Constructor.
-     * 
-     * @throws FileNotFoundException
-     *             if we could not find or write to the log file.
-     */
-    private FModel(boolean initWithUi) {
+    public static void initialize(final IProgressBar progressBar) {
         // install our error reporter
         ExceptionHandler.registerErrorHandling();
 
-        // create profile dirs if they don't already exist
-        for (String dname : NewConstants.PROFILE_DIRS) {
+        //load card database
+        final ProgressObserver progressBarBridge = (progressBar == null) ?
+                ProgressObserver.emptyObserver : new ProgressObserver() {
+            @Override
+            public void setOperationName(final String name, final boolean usePercents) {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setDescription(name);
+                        progressBar.setPercentMode(usePercents);
+                    }
+                });
+            }
+
+            @Override
+            public void report(final int current, final int total) {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setMaximum(total);
+                        progressBar.setValue(current);
+                    }
+                });
+            }
+        };
+
+        final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge, null);
+        magicDb = new StaticData(reader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
+
+        //create profile dirs if they don't already exist
+        for (String dname : ForgeConstants.PROFILE_DIRS) {
             File path = new File(dname);
             if (path.isDirectory()) {
                 // already exists
@@ -101,8 +123,8 @@ public class FModel {
             }
         }
         
-        // initialize log file
-        File logFile = new File(NewConstants.LOG_FILE);
+        //initialize log file
+        File logFile = new File(ForgeConstants.LOG_FILE);
 
         int i = 0;
         while (logFile.exists() && !logFile.delete()) {
@@ -111,61 +133,66 @@ public class FModel {
         }
 
         try {
-            this.logFileStream = new FileOutputStream(logFile);
-        } catch (final FileNotFoundException e) {
+            logFileStream = new FileOutputStream(logFile);
+        }
+        catch (final FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        this.oldSystemOut = System.out;
-        System.setOut(new PrintStream(new MultiplexOutputStream(System.out, this.logFileStream), true));
-        this.oldSystemErr = System.err;
-        System.setErr(new PrintStream(new MultiplexOutputStream(System.err, this.logFileStream), true));
+        oldSystemOut = System.out;
+        System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
+        oldSystemErr = System.err;
+        System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
 
         // Instantiate preferences: quest and regular
         try {
-            this.preferences = new ForgePreferences();
-        } catch (final Exception exn) {
+            preferences = new ForgePreferences();
+        }
+        catch (final Exception exn) {
             throw new RuntimeException(exn);
         }
-        
-        this.formats = new GameFormat.Collection(new GameFormat.Reader(new File("res/blockdata", "formats.txt")));
 
-        this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader("res/blockdata/blocks.txt", Singletons.getMagicDb().getEditions()));
-        this.questPreferences = new QuestPreferences();
-        this.gauntletData = new GauntletData();
+        formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
+        blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
+        questPreferences = new QuestPreferences();
+        gauntletData = new GauntletData();
+        fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
+        worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
 
-        
-        
-        this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader("res/blockdata/fantasyblocks.txt", Singletons.getMagicDb().getEditions()));
-        this.worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader("res/quest/world/worlds.txt"));
-        // TODO - there's got to be a better place for this...oblivion?
-        ForgePreferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        loadDynamicGamedata();
 
-        this.loadDynamicGamedata();
-
-        if (initWithUi) {
-            FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Loading decks");
+        if (progressBar != null) {
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setDescription("Loading decks");
+                }
+            });
         }
 
-        this.decks = new CardCollections();
-        this.quest = new QuestController();
+        decks = new CardCollections();
+        quest = new QuestController();
 
-        // Preload AI profiles
-        AiProfileUtil.loadAllProfiles(NewConstants.AI_PROFILE_DIR);
+        CardPreferences.load();
+        DeckPreferences.load();
+        ItemManagerConfig.load();
+        
+        //preload AI profiles
+        AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
     }
 
-    public final QuestController getQuest() {
+    public static QuestController getQuest() {
         return quest;
     }
     
-    private static boolean KeywordsLoaded = false;
+    private static boolean keywordsLoaded = false;
     
     /**
      * Load dynamic gamedata.
      */
-    public void loadDynamicGamedata() {
+    public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED[0]) {
-            final List<String> typeListFile = FileUtil.readFile(NewConstants.TYPE_LIST_FILE);
+            final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
             List<String> tList = null;
 
@@ -219,23 +246,10 @@ public class FModel {
                 }
             }
             CardType.Constant.LOADED[0] = true;
-            /*
-             * if (Constant.Runtime.DevMode[0]) {
-             * System.out.println(CardType.Constant.cardTypes[0].list);
-             * System.out.println(CardType.Constant.superTypes[0].list);
-             * System.out.println(CardType.Constant.basicTypes[0].list);
-             * System.out.println(CardType.Constant.landTypes[0].list);
-             * System.out.println(CardType.Constant.creatureTypes[0].list);
-             * System.out.println(CardType.Constant.instantTypes[0].list);
-             * System.out.println(CardType.Constant.sorceryTypes[0].list);
-             * System.out.println(CardType.Constant.enchantmentTypes[0].list);
-             * System.out.println(CardType.Constant.artifactTypes[0].list);
-             * System.out.println(CardType.Constant.walkerTypes[0].list); }
-             */
         }
 
-        if (!KeywordsLoaded) {
-            final List<String> nskwListFile = FileUtil.readFile(NewConstants.KEYWORD_LIST_FILE);
+        if (!keywordsLoaded) {
+            final List<String> nskwListFile = FileUtil.readFile(ForgeConstants.KEYWORD_LIST_FILE);
 
             if (nskwListFile.size() > 1) {
                 for (String s : nskwListFile) {
@@ -244,100 +258,64 @@ public class FModel {
                     }
                 }
             }
-            KeywordsLoaded = true;
-            /*
-             * if (Constant.Runtime.DevMode[0]) {
-             * System.out.println(Constant.Keywords.NonStackingList[0].list); }
-             */
+            keywordsLoaded = true;
         }
-
-        /*
-         * if (!MagicColor.Constant.loaded[0]) { ArrayList<String> lcListFile =
-         * FileUtil.readFile("res/gamedata/LandColorList");
-         * 
-         * if (lcListFile.size() > 1) { for (int i=0; i<lcListFile.size(); i++)
-         * { String s = lcListFile.get(i); if (s.length() > 1)
-         * MagicColor.Constant.LandColor[0].map.add(s); } }
-         * Constant.Keywords.loaded[0] = true; if (Constant.Runtime.DevMode[0])
-         * { System.out.println(Constant.Keywords.NonStackingList[0].list); } }
-         */
     }
 
-    /**
-     * Gets the preferences.
-     * 
-     * @return {@link forge.properties.ForgePreferences}
-     */
-    public final ForgePreferences getPreferences() {
-        return this.preferences;
+    public static StaticData getMagicDb() {
+        return magicDb;
     }
 
+    public static ForgePreferences getPreferences() {
+        return preferences;
+    }
 
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.model.CardBlock}> */
-    public IStorage<CardBlock> getBlocks() {
+    public static IStorage<CardBlock> getBlocks() {
         return blocks;
     }    
-    /**
-     * Gets the quest preferences.
-     * 
-     * @return {@link forge.quest.data.QuestPreferences}
-     */
-    public final QuestPreferences getQuestPreferences() {
-        return this.questPreferences;
+
+    public static QuestPreferences getQuestPreferences() {
+        return questPreferences;
     }
 
-    /** @return {@link forge.gui.home.gauntlet} */
-    public GauntletData getGauntletData() {
-        return this.gauntletData;
-    }
-    /**
-     * Returns all player's decks for constructed, sealed and whatever.
-     * 
-     * @return {@link forge.model.CardCollections}
-     */
-    public final CardCollections getDecks() {
-        return this.decks;
+    public static GauntletData getGauntletData() {
+        return gauntletData;
     }
 
-    /**
-     * Gets the game worlds.
-     *
-     * @return the worlds
-     */
-    public final IStorage<QuestWorld> getWorlds() {
-        return this.worlds;
-    }
-    public final GameFormat.Collection getFormats() {
-        return this.formats;
-    }
-    /**
-     * Finalizer, generally should be avoided, but here closes the log file
-     * stream and resets the system output streams.
-     */
-    public final void close() throws IOException {
-        System.setOut(this.oldSystemOut);
-        System.setErr(this.oldSystemErr);
-        logFileStream.close();
+    public static void setGauntletData(GauntletData data0) {
+        gauntletData = data0;
     }
 
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param data0 {@link forge.gauntlet.GauntletData}
-     */
-    public void setGauntletData(GauntletData data0) {
-        this.gauntletData = data0;
-    }
-
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.model.CardBlock}> */
-    public IStorage<CardBlock> getFantasyBlocks() {
-        return fantasyBlocks;
-    }
-
-    public GauntletMini getGauntletMini() {
+    public static GauntletMini getGauntletMini() {
         if (gauntlet == null) {
             gauntlet = new GauntletMini();
         }
         return gauntlet;
+    }
+
+    public static CardCollections getDecks() {
+        return decks;
+    }
+
+    public static IStorage<QuestWorld> getWorlds() {
+        return worlds;
+    }
+ 
+    public static GameFormat.Collection getFormats() {
+        return formats;
+    }
+
+    public static IStorage<CardBlock> getFantasyBlocks() {
+        return fantasyBlocks;
+    }
+
+    /**
+     * Finalizer, generally should be avoided, but here closes the log file
+     * stream and resets the system output streams.
+     */
+    public static void close() throws IOException {
+        System.setOut(oldSystemOut);
+        System.setErr(oldSystemErr);
+        logFileStream.close();
     }
 }

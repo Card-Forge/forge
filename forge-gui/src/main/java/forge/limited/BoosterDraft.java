@@ -19,21 +19,21 @@ package forge.limited;
 
 import com.google.common.base.Supplier;
 
-import forge.Singletons;
+import forge.SOptionPane;
+import forge.SGuiChoose;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
-import forge.gui.GuiChoose;
-import forge.gui.toolbox.FOptionPane;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
+import forge.model.FModel;
 import forge.properties.ForgePreferences;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.ItemPool;
@@ -53,6 +53,7 @@ import java.util.Map.Entry;
 public final class BoosterDraft implements IBoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
     private static final int N_PLAYERS = 8;
+    public static final String FILE_EXT = ".draft";
 
     private int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
@@ -75,14 +76,14 @@ public final class BoosterDraft implements IBoosterDraft {
             for (int i = 0; i < 3; i++) {
                 draft.product.add(s);
             }
-            IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions());
+            IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
             break;
 
         case Block: // Draft from cards by block or set
         case FantasyBlock:
             List<CardBlock> blocks = new ArrayList<CardBlock>();
             IStorage<CardBlock> storage = draftType == LimitedPoolType.Block
-                    ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
+                    ? FModel.getBlocks() : FModel.getFantasyBlocks();
 
             for (CardBlock b : storage) {
                 if (b.getCntBoostersDraft() > 0) {
@@ -90,12 +91,12 @@ public final class BoosterDraft implements IBoosterDraft {
                 }
             }
 
-            final CardBlock block = GuiChoose.oneOrNone("Choose Block", blocks);
+            final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
             if (block == null) { return null; }
 
             final CardEdition[] cardSets = block.getSets();
             if (cardSets.length == 0) {
-                FOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
+                SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
                 return null;
             }
 
@@ -113,7 +114,7 @@ public final class BoosterDraft implements IBoosterDraft {
             final int nPacks = block.getCntBoostersDraft();
 
             if (sets.size() > 1) {
-                final Object p = GuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
+                final Object p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
                 if (p == null) { return null; }
 
                 final String[] pp = p.toString().split("/");
@@ -133,13 +134,13 @@ public final class BoosterDraft implements IBoosterDraft {
             break;
 
         case Custom:
-            final List<CustomLimited> myDrafts = draft.loadCustomDrafts("res/draft/", ".draft");
+            final List<CustomLimited> myDrafts = draft.loadCustomDrafts();
 
             if (myDrafts.isEmpty()) {
-                FOptionPane.showMessageDialog("No custom draft files found.");
+                SOptionPane.showMessageDialog("No custom draft files found.");
             }
             else {
-                final CustomLimited customDraft = GuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
+                final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
                 if (customDraft == null) { return null; }
 
                 draft.setupCustomDraft(customDraft);
@@ -181,16 +182,16 @@ public final class BoosterDraft implements IBoosterDraft {
             this.product.add(toAdd);
         }
 
-        IBoosterDraft.LAND_SET_CODE[0] = Singletons.getMagicDb().getEditions().get(draft.getLandSetCode());
+        IBoosterDraft.LAND_SET_CODE[0] = FModel.getMagicDb().getEditions().get(draft.getLandSetCode());
     }
 
-    /** Looks for res/draft/*.draft files, reads them, returns a list. */
-    private List<CustomLimited> loadCustomDrafts(final String lookupFolder, final String fileExtension) {
+    /** Looks for draft files, reads them, returns a list. */
+    private List<CustomLimited> loadCustomDrafts() {
         String[] dList;
         final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
         // get list of custom draft files
-        final File dFolder = new File(lookupFolder);
+        final File dFolder = new File(ForgeConstants.DRAFT_DIR);
         if (!dFolder.exists()) {
             throw new RuntimeException("BoosterDraft : folder not found -- folder is " + dFolder.getAbsolutePath());
         }
@@ -202,9 +203,9 @@ public final class BoosterDraft implements IBoosterDraft {
         dList = dFolder.list();
 
         for (final String element : dList) {
-            if (element.endsWith(fileExtension)) {
-                final List<String> dfData = FileUtil.readFile(lookupFolder + element);
-                customs.add(CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes()));
+            if (element.endsWith(FILE_EXT)) {
+                final List<String> dfData = FileUtil.readFile(ForgeConstants.DRAFT_DIR + element);
+                customs.add(CustomLimited.parse(dfData, FModel.getDecks().getCubes()));
             }
         }
         return customs;
@@ -356,7 +357,7 @@ public final class BoosterDraft implements IBoosterDraft {
             outDraftData.add(key.getValue() + "|" + key.getKey());
         }
         Collections.sort(outDraftData);
-        HttpUtil.upload(NewConstants.URL_DRAFT_UPLOAD + "?fmt=" + draftFormat, outDraftData);
+        HttpUtil.upload(ForgeConstants.URL_DRAFT_UPLOAD + "?fmt=" + draftFormat, outDraftData);
     }
 
     private static List<String> getSetCombos(final List<String> setz) {

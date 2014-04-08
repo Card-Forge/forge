@@ -2,11 +2,12 @@ package forge.quest;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import forge.Singletons;
+
 import forge.card.CardRules;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.model.FModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
             return null;
         }
     
-        Predicate<PaperCard> filters = Singletons.getModel().getQuest().getFormat().getFilterPrinted();
+        Predicate<PaperCard> filters = FModel.getQuest().getFormat().getFilterPrinted();
         Predicate<CardRules> filterRules = null;
         Predicate<PaperCard> filterRarity = null;
     
@@ -65,7 +66,7 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
                     if (setcodes.length > 0) {
                         List<String> sets = new ArrayList<String>();
                         for (String code : setcodes) {
-                            if (Singletons.getMagicDb().getEditions().contains(code)) {
+                            if (FModel.getMagicDb().getEditions().contains(code)) {
                                 // System.out.println("Set " + code + " was found!");
                                 sets.add(code);
                             }

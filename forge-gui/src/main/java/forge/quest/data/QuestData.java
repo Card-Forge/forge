@@ -17,9 +17,9 @@
  */
 package forge.quest.data;
 
-import forge.Singletons;
 import forge.game.GameFormat;
-import forge.properties.NewConstants;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 
@@ -164,8 +164,8 @@ public final class QuestData {
      *            the new name to set
      */
     public void rename(final String newName) {
-        File newpath = new File(NewConstants.QUEST_SAVE_DIR, newName + ".dat");
-        File oldpath = new File(NewConstants.QUEST_SAVE_DIR, this.name + ".dat");
+        File newpath = new File(ForgeConstants.QUEST_SAVE_DIR, newName + ".dat");
+        File oldpath = new File(ForgeConstants.QUEST_SAVE_DIR, this.name + ".dat");
         oldpath.renameTo(newpath);
 
         this.name = newName;
@@ -194,7 +194,7 @@ public final class QuestData {
      *      String, the world id to set (must be null or legal).
      */
     public void setWorldId(final String newId) {
-        if (newId != null && Singletons.getModel().getWorlds().get(newId) == null) {
+        if (newId != null && FModel.getWorlds().get(newId) == null) {
             throw new RuntimeException("Tried to set illegal (unknown) world id: " + newId);
         }
 

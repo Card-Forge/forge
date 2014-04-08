@@ -3,27 +3,15 @@ package forge.control;
 import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
+import forge.GuiBase;
+import forge.SGuiChoose;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.*;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.SOverlayUtils;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.framework.SLayoutIO;
-import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
-import forge.gui.match.ViewWinLose;
-import forge.gui.match.controllers.CPrompt;
-import forge.gui.match.controllers.CStack;
-import forge.gui.match.views.VField;
-import forge.gui.match.views.VHand;
-import forge.gui.toolbox.special.PhaseLabel;
 import forge.net.FServer;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
@@ -35,9 +23,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
-    private final FControl fc;
-    public FControlGameEventHandler(FControl fc) {
-        this.fc = fc;
+    public FControlGameEventHandler() {
     }
 
     @Subscribe
@@ -50,19 +36,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventTurnPhase ev) {
         if (phaseUpdPlanned.getAndSet(true)) return null;
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            PhaseHandler pH = fc.getObservedGame().getPhaseHandler();
-            Player p = pH.getPlayerTurn();
-            PhaseType ph = pH.getPhase();
-
-            phaseUpdPlanned.set(false);
-
-            final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
-            PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
-
-            matchUi.resetAllPhaseButtons();
-            if (lbl != null) lbl.setActive(true);
-        } });
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                phaseUpdPlanned.set(false);
+                GuiBase.getInterface().updatePhase();
+            }
+        });
         return null;
     }
 
@@ -77,7 +57,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             @Override
             public void run() {
                 combatUpdPlanned.set(false);
-                CMatchUI.SINGLETON_INSTANCE.showCombat(fc.getObservedGame().getCombat());
+                GuiBase.getInterface().showCombat(GuiBase.getInterface().getGame().getCombat());
             }
         });
         return null;
@@ -88,15 +68,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventTurnBegan event) {
         if (turnUpdPlanned.getAndSet(true)) { return null; }
 
-        final Game game = fc.getObservedGame(); // to make sure control gets a correct game instance
+        final Game game = GuiBase.getInterface().getGame(); // to make sure control gets a correct game instance
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(event.turnOwner);
-                SDisplayUtil.showTab(nextField);
-
                 turnUpdPlanned.set(false);
-                CPrompt.SINGLETON_INSTANCE.updateText(game);
+                GuiBase.getInterface().updateTurn(event, game);
             }
         });
         return null;
@@ -110,32 +87,27 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             options.add("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(kv.getValue());
         }
-        GuiChoose.one("These cards were chosen to ante", options);
+        SGuiChoose.one("These cards were chosen to ante", options);
         return null;
     }
 
     @Override
     public Void visit(GameEventPlayerControl ev) {
-        if (fc.getObservedGame().isGameOver()) {
+        if (GuiBase.getInterface().getGame().isGameOver()) {
             return null;
         }
 
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.instance.getLobby().getGuiPlayer());
-                SLayoutIO.loadLayout(null);
-                VMatchUI.SINGLETON_INSTANCE.populate();
-                for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
-                    h.getLayoutControl().updateHand();
-                }
+                GuiBase.getInterface().updatePlayerControl();
             }
         });
         return null;
     }
 
     private final Runnable unlockGameThreadOnGameOver = new Runnable() { @Override public void run() {
-        fc.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+        GuiBase.getInterface().getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
     } };
 
     @Override
@@ -146,17 +118,21 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventGameFinished ev) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            new ViewWinLose(fc.getObservedGame());
-            SOverlayUtils.showOverlay();
-        } });
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                GuiBase.getInterface().finishGame();
+            }
+        });
         return null;
     }
 
     private final AtomicBoolean stackUpdPlanned = new AtomicBoolean(false);
-    private final Runnable updStack = new Runnable() { @Override public void run() {
+    private final Runnable updStack = new Runnable() {
+        @Override
+        public void run() {
             stackUpdPlanned.set(false);
-            CStack.SINGLETON_INSTANCE.update();
+            GuiBase.getInterface().updateStack();
         }
     };
 
@@ -184,9 +160,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     private final List<Pair<Player, ZoneType>> zonesToUpdate = new Vector<Pair<Player, ZoneType>>();
     private final Runnable updZones = new Runnable() {
-        @Override public void run() {
+        @Override
+        public void run() {
             synchronized (zonesToUpdate) {
-                CMatchUI.SINGLETON_INSTANCE.updateZones(zonesToUpdate);
+                GuiBase.getInterface().updateZones(zonesToUpdate);
                 zonesToUpdate.clear();
             }
         }
@@ -238,7 +215,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         @Override
         public void run() {
             synchronized (cardsToUpdate) {
-                CMatchUI.SINGLETON_INSTANCE.updateCards(cardsToUpdate);
+                GuiBase.getInterface().updateCards(cardsToUpdate);
                 cardsToUpdate.clear();
             }
         }
@@ -277,7 +254,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventAttackersDeclared event) {
         // Skip redraw for GUI player?
-        if (event.player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
+        if (event.player.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
             return null;
         }
 
@@ -336,7 +313,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable updManaPool = new Runnable() {
         @Override public void run() {
             synchronized (manaPoolUpdate) {
-                CMatchUI.SINGLETON_INSTANCE.updateManaPool(manaPoolUpdate);
+                GuiBase.getInterface().updateManaPool(manaPoolUpdate);
                 manaPoolUpdate.clear();
             }
         }
@@ -361,7 +338,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Runnable updLives = new Runnable() {
         @Override public void run() {
             synchronized (livesUpdate) {
-                CMatchUI.SINGLETON_INSTANCE.updateLives(livesUpdate);
+                GuiBase.getInterface().updateLives(livesUpdate);
                 livesUpdate.clear();
             }
         }

@@ -2,15 +2,15 @@ package forge.net;
 
 import com.google.common.base.Supplier;
 
-import forge.Singletons;
+import forge.GuiBase;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
 import forge.control.ChatArea;
 import forge.game.player.LobbyPlayer;
-import forge.gui.GuiDisplayUtil;
-import forge.gui.toolbox.FSkin;
+import forge.model.FModel;
 import forge.net.client.INetClient;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 
@@ -39,25 +39,22 @@ public class Lobby {
 
     public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
     public final LobbyPlayer getAiPlayer(String name) {
-        return getAiPlayer(name, FSkin.isLoaded() ? MyRandom.getRandom().nextInt(FSkin.getAvatars().size()) : 0);
+        return getAiPlayer(name, MyRandom.getRandom().nextInt(GuiBase.getInterface().getAvatarCount()));
     }
     public final LobbyPlayer getAiPlayer(String name, int avatarIndex) {
         LobbyPlayerAi player = new LobbyPlayerAi(name);
 
         // TODO: implement specific AI profiles for quest mode.
-        String lastProfileChosen = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+        String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
         player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
         if(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
             lastProfileChosen = AiProfileUtil.getRandomProfile();
             System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
         }
         player.setAiProfile(lastProfileChosen);
-        
-        if(FSkin.isLoaded())
-            player.setAvatarIndex(avatarIndex);
+        player.setAvatarIndex(avatarIndex);
         return player;
     }
-
 
     /** Returns a random name from the supplied list. */
     private String getRandomName() {

@@ -19,7 +19,8 @@ package forge.quest.bazaar;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import forge.gui.toolbox.FSkin.QuestIcons;
+
+import forge.assets.ISkinImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class QuestStallDefinition {
     private final String displayName;
 
     @XStreamAsAttribute
-    private final QuestIcons icon;
+    private final ISkinImage icon;
 
     private final String description;
 
@@ -62,7 +63,7 @@ public class QuestStallDefinition {
      * @param description
      *            a {@link java.lang.String} object.
      * @param icon0
-     *            a {@link javax.swing.ImageIcon} object.
+     *            a {@link fgd.ImageIcon} object.
      */
     private QuestStallDefinition() {
         name = null;
@@ -82,11 +83,11 @@ public class QuestStallDefinition {
     }
 
     /**
-     * Gets the icon name.
+     * Gets the icon.
      * 
-     * @return the iconName
+     * @return the icon
      */
-    public QuestIcons getIcon() {
+    public ISkinImage getIcon() {
         return icon;
     }
 

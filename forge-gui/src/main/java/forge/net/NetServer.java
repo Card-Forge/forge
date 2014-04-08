@@ -1,7 +1,8 @@
 package forge.net;
 
-import forge.error.BugReporter;
+import forge.GuiBase;
 import forge.net.client.NetClient;
+
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
@@ -11,15 +12,13 @@ import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.net.URI;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class NetServer {
 
     private final Server srv = new Server();
@@ -71,7 +70,7 @@ public class NetServer {
             try {
                 _connection.sendMessage(data);
             } catch (IOException e) {
-                BugReporter.reportException(e);
+                GuiBase.getInterface().reportException(e);
             }
         }
 
@@ -110,7 +109,7 @@ public class NetServer {
                 String host = connector.getHost();
                 serverUri = new URI(String.format("ws://%s:%d/", host == null ? "localhost" : host ,port));
             } catch (Exception e) {
-                BugReporter.reportException(e);
+                GuiBase.getInterface().reportException(e);
             }
             
             System.out.println("Server started @ " + serverUri);
@@ -125,7 +124,7 @@ public class NetServer {
             srv.stop();
             portNumber = -1;
         } catch (Exception e) {
-            BugReporter.reportException(e);
+            GuiBase.getInterface().reportException(e);
         }
     }
     

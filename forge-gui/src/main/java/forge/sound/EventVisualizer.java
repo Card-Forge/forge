@@ -1,12 +1,12 @@
 package forge.sound;
 
+import forge.events.IUiEventVisitor;
+import forge.events.UiEventAttackerDeclared;
+import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
 import forge.game.event.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.events.IUiEventVisitor;
-import forge.gui.events.UiEventAttackerDeclared;
-import forge.gui.events.UiEventBlockerAssigned;
 import forge.net.FServer;
 import forge.util.maps.MapOfLists;
 
@@ -41,7 +41,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
     public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }
     public SoundEffectType visit(GameEventBlockersDeclared event) {
-        boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer();
+        boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == FServer.getLobby().getGuiPlayer();
         if (isLocalHuman)
             return null; // already played sounds in interactive mode
         
@@ -60,7 +60,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
      * Plays the sound corresponding to the outcome of the duel.
      */
     public SoundEffectType visit(GameEventGameOutcome event) {
-        boolean humanWonTheDuel = event.result.getWinningLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer();
+        boolean humanWonTheDuel = event.result.getWinningLobbyPlayer() == FServer.getLobby().getGuiPlayer();
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }
 

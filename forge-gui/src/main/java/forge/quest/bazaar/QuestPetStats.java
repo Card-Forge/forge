@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.item.PaperToken;
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.io.File;
@@ -56,7 +56,7 @@ public class QuestPetStats {
 
     public final PaperToken getCard() {
         if (null == petCard) {
-            List<String> cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_PETS_DIR, cardFile));
+            List<String> cardLines = FileUtil.readFile(new File(ForgeConstants.BAZAAR_DIR, cardFile));
             CardRules rules = CardRules.fromScript(cardLines);
             petCard = new PaperToken(rules, CardEdition.UNKNOWN, picture);
         }

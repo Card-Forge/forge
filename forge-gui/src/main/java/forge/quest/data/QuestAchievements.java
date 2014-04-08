@@ -1,6 +1,6 @@
 package forge.quest.data;
 
-import forge.Singletons;
+import forge.model.FModel;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 
 import java.util.ArrayList;
@@ -127,7 +127,7 @@ public class QuestAchievements {
      * @return the level
      */
     public int getLevel() {
-        final int winsToLvlUp = Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_RANKUP, difficulty);
+        final int winsToLvlUp = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_RANKUP, difficulty);
         return this.win / winsToLvlUp;
     }
     // Wins & Losses

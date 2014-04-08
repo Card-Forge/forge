@@ -17,19 +17,21 @@
  */
 package forge.limited;
 
-import forge.Singletons;
+import forge.SOptionPane;
+import forge.SGuiChoose;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
-import forge.gui.GuiChoose;
-import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
+import forge.model.FModel;
 import forge.model.UnOpenedMeta;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
@@ -47,6 +49,8 @@ import java.util.Stack;
  * @since 1.0.15
  */
 public class SealedCardPoolGenerator {
+    public static final String FILE_EXT = ".sealed";
+
     private final ArrayList<IUnOpenedProduct> product = new ArrayList<IUnOpenedProduct>();
 
     /** The Land set code. */
@@ -67,18 +71,18 @@ public class SealedCardPoolGenerator {
                 if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericBooster))) {
                     return;
                 }
-                landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions()).getCode();
+                landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
                 break;
 
             case Block:
             case FantasyBlock:
                 List<CardBlock> blocks = new ArrayList<CardBlock>();
-                Iterable<CardBlock> src = poolType == LimitedPoolType.Block ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
+                Iterable<CardBlock> src = poolType == LimitedPoolType.Block ? FModel.getBlocks() : FModel.getFantasyBlocks();
                 for (CardBlock b : src) {
                     blocks.add(b);
                 }
 
-                final CardBlock block = GuiChoose.oneOrNone("Choose Block", blocks);
+                final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
                 if (block == null) { return; }
 
                 final int nPacks = block.getCntBoostersSealed();
@@ -98,7 +102,7 @@ public class SealedCardPoolGenerator {
                         throw new RuntimeException("Unsupported amount of packs (" + nPacks + ") in a Sealed Deck block!");
                     }
 
-                    final String p = setCombos.size() > 1 ? GuiChoose.oneOrNone("Choose packs to play with", setCombos) : setCombos.get(0);
+                    final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone("Choose packs to play with", setCombos) : setCombos.get(0);
                     if (p == null) { return; }
 
                     for (String pz : TextUtil.split(p, ',')) {
@@ -125,7 +129,7 @@ public class SealedCardPoolGenerator {
                 final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
 
                 // get list of custom draft files
-                final File dFolder = new File("res/sealed/");
+                final File dFolder = new File(ForgeConstants.SEALED_DIR);
                 if (!dFolder.exists()) {
                     throw new RuntimeException("GenerateSealed : folder not found -- folder is "
                             + dFolder.getAbsolutePath());
@@ -138,9 +142,9 @@ public class SealedCardPoolGenerator {
                 dList = dFolder.list();
 
                 for (final String element : dList) {
-                    if (element.endsWith(".sealed")) {
-                        final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
-                        final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
+                    if (element.endsWith(FILE_EXT)) {
+                        final List<String> dfData = FileUtil.readFile(ForgeConstants.SEALED_DIR + element);
+                        final CustomLimited cs = CustomLimited.parse(dfData, FModel.getDecks().getCubes());
                         if (cs.getSealedProductTemplate().getNumberOfCardsExpected() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
                             customs.add(cs);
                         }
@@ -149,11 +153,11 @@ public class SealedCardPoolGenerator {
 
                 // present list to user
                 if (customs.isEmpty()) {
-                    FOptionPane.showMessageDialog("No custom sealed files found.");
+                    SOptionPane.showMessageDialog("No custom sealed files found.");
                     return;
                 }
 
-                final CustomLimited draft = GuiChoose.oneOrNone("Choose Custom Sealed Pool", customs);
+                final CustomLimited draft = SGuiChoose.oneOrNone("Choose Custom Sealed Pool", customs);
                 if (draft == null) { return; }
 
                 UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
@@ -168,7 +172,7 @@ public class SealedCardPoolGenerator {
     }
 
     private boolean chooseNumberOfBoosters(final IUnOpenedProduct product1) {
-        Integer boosterCount = GuiChoose.getInteger("How many booster packs?", 3, 12);
+        Integer boosterCount = SGuiChoose.getInteger("How many booster packs?", 3, 12);
         if (boosterCount == null) { return false; }
 
         for (int i = 0; i < boosterCount; i++) {

@@ -19,13 +19,15 @@
 package forge.model;
 
 import com.google.common.base.Predicate;
-import forge.Singletons;
+
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.limited.CustomLimited;
+import forge.limited.SealedCardPoolGenerator;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 import java.io.File;
@@ -167,13 +169,13 @@ public class MetaSet {
                 return new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
             case Booster:
-                return new UnOpenedProduct(Singletons.getMagicDb().getBoosters().get(data));
+                return new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(data));
 
             case SpecialBooster:
-                return new UnOpenedProduct(Singletons.getMagicDb().getSpecialBoosters().get(data));
+                return new UnOpenedProduct(FModel.getMagicDb().getSpecialBoosters().get(data));
 
             case Pack:
-                return new UnOpenedProduct(Singletons.getMagicDb().getTournamentPacks().get(data));
+                return new UnOpenedProduct(FModel.getMagicDb().getTournamentPacks().get(data));
 
             case JoinedSet:
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
@@ -184,7 +186,7 @@ public class MetaSet {
             case Combo:  return UnOpenedMeta.selectAll(data);
 
             case Cube:
-                final File dFolder = new File("res/sealed/");
+                final File dFolder = new File(ForgeConstants.SEALED_DIR);
 
                 if (!dFolder.exists()) {
                     throw new RuntimeException("GenerateSealed : folder not found -- folder is " + dFolder.getAbsolutePath());
@@ -194,8 +196,8 @@ public class MetaSet {
                     throw new RuntimeException("GenerateSealed : not a folder -- " + dFolder.getAbsolutePath());
                 }
 
-                List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
-                final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
+                List<String> dfData = FileUtil.readFile(ForgeConstants.SEALED_DIR + data + SealedCardPoolGenerator.FILE_EXT);
+                final CustomLimited myCube = CustomLimited.parse(dfData, FModel.getDecks().getCubes());
 
                 SealedProduct.Template fnPick = myCube.getSealedProductTemplate();
                 return new UnOpenedProduct(fnPick, myCube.getCardPool());

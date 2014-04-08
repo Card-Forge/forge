@@ -1,14 +1,16 @@
 package forge.net;
 
 import com.google.common.base.Supplier;
-import forge.Singletons;
+
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.game.*;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
-import forge.gui.player.LobbyPlayerHuman;
+import forge.model.FModel;
+import forge.player.LobbyPlayerHuman;
 import forge.util.Lang;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.File;
@@ -17,17 +19,15 @@ import java.util.Collections;
 import java.util.List;
 
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public enum FServer {
-    instance();
+public class FServer {
+    private FServer() {
+        
+    }
+
+    private static boolean interactiveMode = true;
+    private static Lobby lobby = null;
     
-    private boolean interactiveMode = true;
-    private Lobby lobby = null;
-    
-    public Lobby getLobby() {
+    public static Lobby getLobby() {
         if (lobby == null) {
             //not a very good solution still
             lobby = new Lobby(new Supplier<LobbyPlayer>() {
@@ -45,20 +45,15 @@ public enum FServer {
      * TODO: Write javadoc for this method.
      * @return
      */
-    private final NetServer server = new NetServer();
-    public NetServer getServer() {
+    private static final NetServer server = new NetServer();
+    public static NetServer getServer() {
         // TODO Auto-generated method stub
         return server;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param args
-     */
-    public void simulateMatches(String[] args) {
-        
-        Singletons.initializeOnce(false);
-        
+    public static void simulateMatches(String[] args) {
+        FModel.initialize(null);
+
         interactiveMode = false;
         System.out.println("Simulation mode");
         if(args.length < 3 ) {
@@ -81,8 +76,8 @@ public enum FServer {
         System.out.println(String.format("Ai-%s vs Ai_%s - %s", d1.getName(), d2.getName(), Lang.nounWithNumeral(nGames, "game")));
         
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
-        pp.add(new RegisteredPlayer(d1).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai-" + d1.getName())));
-        pp.add(new RegisteredPlayer(d2).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai_" + d2.getName())));
+        pp.add(new RegisteredPlayer(d1).setPlayer(getLobby().getAiPlayer("Ai-" + d1.getName())));
+        pp.add(new RegisteredPlayer(d2).setPlayer(getLobby().getAiPlayer("Ai_" + d2.getName())));
         GameRules rules = new GameRules(GameType.Constructed);
         Match mc = new Match(rules, pp);
         for(int iGame = 0; iGame < nGames; iGame++)
@@ -94,7 +89,7 @@ public enum FServer {
      * @param sw
      * @param pp
      */
-    private void simulateSingleMatch(Match mc, int iGame) {
+    private static void simulateSingleMatch(Match mc, int iGame) {
         StopWatch sw = new StopWatch();
         sw.start();
 
@@ -113,17 +108,17 @@ public enum FServer {
     }
 
 
-    private Deck deckFromCommandLineParameter(String deckname) {
+    private static Deck deckFromCommandLineParameter(String deckname) {
         int dotpos = deckname.lastIndexOf('.');
         if(dotpos > 0 && dotpos == deckname.length()-4)
             return DeckSerializer.fromFile(new File(deckname));
-        return Singletons.getModel().getDecks().getConstructed().get(deckname);
+        return FModel.getDecks().getConstructed().get(deckname);
     }
     /**
      * TODO: Write javadoc for this method.
      * @return
      */
-    public boolean isInteractiveMode() {
+    public static boolean isInteractiveMode() {
         return interactiveMode;
     }
 }

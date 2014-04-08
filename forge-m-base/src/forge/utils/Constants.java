@@ -24,7 +24,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 
 public final class Constants {
-    private static final String PROFILE_FILE          = "forge.profile.properties";
+    public static final String PROFILE_FILE         = "forge.profile.properties";
+    public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     // data that is only in the program dir
     private static final String _ASSETS_ROOT = Gdx.app.getType() == ApplicationType.Desktop ? "bin/" : "assets/";

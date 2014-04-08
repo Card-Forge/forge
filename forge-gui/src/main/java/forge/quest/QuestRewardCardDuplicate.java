@@ -1,7 +1,7 @@
 package forge.quest;
 
-import forge.Singletons;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.ItemPool;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
      * @return a List<CardPrinted> or null if could not create a list.
      */
     public final List<PaperCard> getChoices() {
-        final ItemPool<PaperCard> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
+        final ItemPool<PaperCard> playerCards = FModel.getQuest().getAssets().getCardPool();
         if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
             List<PaperCard> cardChoices = new ArrayList<PaperCard>();

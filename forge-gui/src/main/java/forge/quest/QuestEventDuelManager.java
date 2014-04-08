@@ -17,7 +17,7 @@
  */
 package forge.quest;
 
-import forge.Singletons;
+import forge.model.FModel;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.io.QuestDuelReader;
@@ -94,12 +94,12 @@ public class QuestEventDuelManager {
      * @return an array of {@link java.lang.String} objects.
      */
     public final List<QuestEventDuel> generateDuels() {
-        final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
-        if (Singletons.getModel().getQuest().getAchievements() == null) {
+        final QuestPreferences qpref = FModel.getQuestPreferences();
+        if (FModel.getQuest().getAchievements() == null) {
             return null;
         }
 
-        final QuestController qCtrl = Singletons.getModel().getQuest();
+        final QuestController qCtrl = FModel.getQuest();
         final int cntWins = qCtrl.getAchievements().getWin();
 
         final int index = qCtrl.getAchievements().getDifficulty();

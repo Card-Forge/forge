@@ -17,10 +17,10 @@
  */
 package forge.quest.data;
 
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.quest.QuestDeckMap;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtilCards;
@@ -165,7 +165,7 @@ public class QuestAssets {
      * Instantiates a new quest assets.
      */
     public QuestAssets(GameFormatQuest useFormat) {
-        final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
+        final QuestPreferences prefs = FModel.getQuestPreferences();
         int snowLands = prefs.getPrefInt(QPref.STARTING_SNOW_LANDS);
         if (useFormat != null && !useFormat.hasSnowLands()) {
             snowLands = 0;

@@ -17,7 +17,7 @@
  */
 package forge.quest.data;
 
-import forge.properties.NewConstants;
+import forge.properties.ForgeConstants;
 import forge.properties.PreferencesStore;
 
 import java.io.Serializable;
@@ -177,7 +177,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     
     /** Instantiates a QuestPreferences object. */
     public QuestPreferences() {
-        super(NewConstants.QUEST_PREFS_FILE, QPref.class);
+        super(ForgeConstants.QUEST_PREFS_FILE, QPref.class);
     }
 
     protected QPref[] getEnumValues() {

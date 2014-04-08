@@ -1,9 +1,11 @@
 package forge.sound;
 
 import com.google.common.eventbus.Subscribe;
-import forge.Singletons;
+
+import forge.events.UiEvent;
 import forge.game.event.GameEvent;
-import forge.gui.events.UiEvent;
+import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 
 import java.util.EnumMap;
@@ -23,7 +25,7 @@ public class SoundSystem {
     private final EventVisualizer visualizer = new EventVisualizer();
 
     private boolean isUsingAltSystem() {
-	return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);
     }
 
     /**
@@ -34,8 +36,7 @@ public class SoundSystem {
      *         was unavailable or failed to load.
      */
     protected IAudioClip fetchResource(SoundEffectType type) {
-
-        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
             return emptySound;
         }
 
@@ -55,7 +56,7 @@ public class SoundSystem {
      *         was unavailable or failed to load.
      */
     protected IAudioClip fetchResource(String fileName) {
-        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
             return emptySound;
         }
 
@@ -73,7 +74,7 @@ public class SoundSystem {
      */
     public void play(String resourceFileName, boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), isSynchronized).start();
+            new AltSoundSystem(ForgeConstants.SOUND_DIR + resourceFileName, isSynchronized).start();
         } else {
             IAudioClip snd = fetchResource(resourceFileName);
             if (!isSynchronized || snd.isDone()) {
@@ -87,7 +88,7 @@ public class SoundSystem {
      */
     public void play(SoundEffectType type, boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), isSynchronized).start();
+            new AltSoundSystem(ForgeConstants.SOUND_DIR + type.getResourceFileName(), isSynchronized).start();
         } else {
             IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {

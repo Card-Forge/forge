@@ -17,15 +17,14 @@
  */
 package forge.limited;
 
-import forge.Singletons;
+import forge.GuiBase;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
-import forge.gui.SOverlayUtils;
+import forge.model.FModel;
 import forge.net.FServer;
 import forge.net.Lobby;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,7 +106,7 @@ public class GauntletMini {
         }
 
         currentRound++;
-        Singletons.getControl().endCurrentGame();
+        GuiBase.getInterface().endCurrentGame();
         startRound();
     }
 
@@ -129,11 +128,11 @@ public class GauntletMini {
         gauntletType = gType;
         List<Deck> aiDecks;
         if (gauntletType == GameType.Sealed) {
-            aiDecks = Singletons.getModel().getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
+            aiDecks = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
         }
         else if (gauntletType == GameType.Draft) {
             gauntletDraft = true;
-            aiDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
+            aiDecks = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks();
         }
         else {
             throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
@@ -152,22 +151,13 @@ public class GauntletMini {
      * Starts the tournament.
      */
     private void startRound() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
-        });
-
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = FServer.instance.getLobby();
+        Lobby lobby = FServer.getLobby();
         starter.add(new RegisteredPlayer(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
-        
-        Singletons.getControl().startMatch(gauntletType, starter);
-    }
 
+        GuiBase.getInterface().startMatch(gauntletType, starter);
+    }
 
     /**
      * Returns the total number of rounds in the tournament.
