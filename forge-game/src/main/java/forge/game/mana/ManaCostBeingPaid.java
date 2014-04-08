@@ -233,7 +233,7 @@ public class ManaCostBeingPaid {
         }
 
         if (!unpaidShards.containsKey(shard)) {
-            System.err.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
+            System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
         unpaidShards.substract(shard, manaToSubtract);

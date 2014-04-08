@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
@@ -285,24 +288,9 @@ public class ManaCostAdjustment {
                 }
             }
             else {
-                value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
+                value = AbilityUtils.calculateAmount(hostCard, amount, sa);
             }
         }
-        /*
-        if ("X".equals(amount)) {
-            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-        } else if ("Y".equals(amount)) {
-            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
-        } else if ("Min3".equals(amount)) {
-            int cmc = manaCost.getConvertedManaCost();
-            if (cmc < 3) {
-                value = 3 - cmc;
-            }
-        } else {
-            value = AbilityUtils.calculateAmount(card, amount, sa);
-            //value = Integer.valueOf(amount);
-        }
-        */
 
         if (!params.containsKey("Color")) {
             manaCost.increaseColorlessMana(value);
@@ -310,16 +298,13 @@ public class ManaCostAdjustment {
                 manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
             }
         } else {
-            if (params.get("Color").equals("W")) {
-                manaCost.increaseShard(ManaCostShard.WHITE, value);
-            } else if (params.get("Color").equals("B")) {
-                manaCost.increaseShard(ManaCostShard.BLACK, value);
-            } else if (params.get("Color").equals("U")) {
-                manaCost.increaseShard(ManaCostShard.BLUE, value);
-            } else if (params.get("Color").equals("R")) {
-                manaCost.increaseShard(ManaCostShard.RED, value);
-            } else if (params.get("Color").equals("G")) {
-                manaCost.increaseShard(ManaCostShard.GREEN, value);
+            final String color = params.get("Color");
+            for (final String cost : color.split(" ")) {
+                if (StringUtils.isNumeric(cost)) {
+                    manaCost.increaseColorlessMana(Integer.parseInt(cost) * value);
+                } else {
+                    manaCost.increaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                }
             }
         }
     }
@@ -423,14 +408,13 @@ public class ManaCostAdjustment {
                 manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
             }
         } else {
-            if (params.get("Color").equals("W")) {
-                manaCost.decreaseShard(ManaCostShard.WHITE, value);
-            } else if (params.get("Color").equals("B")) {
-                manaCost.decreaseShard(ManaCostShard.BLACK, value);
-            } else if (params.get("Color").equals("R")) {
-                manaCost.decreaseShard(ManaCostShard.RED, value);
-            } else if (params.get("Color").equals("G")) {
-                manaCost.decreaseShard(ManaCostShard.GREEN, value);
+            final String color = params.get("Color");
+            for (final String cost : color.split(" ")) {
+                if (StringUtils.isNumeric(cost)) {
+                    manaCost.decreaseColorlessMana(Integer.parseInt(cost) * value);
+                } else {
+                    manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                }
             }
         }
     }    

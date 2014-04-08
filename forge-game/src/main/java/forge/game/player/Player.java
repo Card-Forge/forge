@@ -1317,7 +1317,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             // Miracle draws
             if (this.numDrawnThisTurn == 1
-                    && game.getPhaseHandler().getTurn() != 1
                     && game.getAge() != GameStage.Mulligan) {
                 drawMiracle(c);
             }
