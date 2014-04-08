@@ -1077,7 +1077,7 @@ public class AiAttackController {
     }
     
     public String toProtectAttacker(SpellAbility sa) {
-        if (sa.getApi() != ApiType.Protection || oppList.isEmpty()) {
+        if (sa.getApi() != ApiType.Protection || oppList.isEmpty() || getPossibleBlockers(oppList, attackers).isEmpty()) {
             return null;
         }
         final List<String> choices = ProtectEffect.getProtectionList(sa);

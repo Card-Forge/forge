@@ -116,13 +116,6 @@ public class ProtectAi extends SpellAbilityAi {
                     return false;
                 }
 
-                // will the creature attack (only relevant for sorcery speed)?
-                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && game.getPhaseHandler().isPlayerTurn(ai)
-                        && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
-                    return true;
-                }
-
                 if (!game.stack.isEmpty()) {
                     //counter bad effect on stack
                     if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(c)) {
@@ -142,15 +135,10 @@ public class ProtectAi extends SpellAbilityAi {
                     }
     
                     //creature is attacking and would be destroyed itself
-                    if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                            && combat.isAttacking(c) && combat.isBlocked(c) ) {
-                        List<Card> blockers = combat.getBlockers(c);
-                        if (!blockers.isEmpty() && ComputerUtilCombat.blockerWouldBeDestroyed(ai, blockers.get(0), combat)) {
-                            List<Card> threats = combat.getBlockers(c);
-                            ComputerUtilCard.sortByEvaluateCreature(threats);
-                            return (true && (ProtectAi.toProtectFrom(threats.get(0), sa) != null));
-                        }
-                        
+                    if (combat.isAttacking(c) && combat.isBlocked(c) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, c, combat)) {
+                        List<Card> threats = combat.getBlockers(c);
+                        ComputerUtilCard.sortByEvaluateCreature(threats);
+                        return (true && (ProtectAi.toProtectFrom(threats.get(0), sa) != null));
                     }
                 }
                 
