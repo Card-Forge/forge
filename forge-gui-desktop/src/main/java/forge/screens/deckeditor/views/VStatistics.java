@@ -261,6 +261,6 @@ public enum VStatistics implements IVDoc<CStatistics> {
     }
     
     private FLabel buildLabel(StatTypes statType, boolean zebra) {
-        return buildLabel(FSkin.getImage(statType.skinProp), zebra);
+        return buildLabel(FSkin.getImage(statType.skinProp, 18, 18), zebra);
     }
 }
