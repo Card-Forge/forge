@@ -132,7 +132,7 @@ public class GuiDesktop implements IGuiBase {
 
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
-        return GuiChoose.order(title, top, sourceChoices, referenceCard);
+        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
     }
 
     public void showCardList(final String title, final String message, final List<PaperCard> list) {

@@ -260,7 +260,7 @@ public class GuiChoose {
         return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
     }
 
-    private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+    public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
         // An input box for handling the order of choices.
 

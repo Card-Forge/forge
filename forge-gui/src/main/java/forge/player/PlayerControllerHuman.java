@@ -117,7 +117,6 @@ public class PlayerControllerHuman extends PlayerController {
 
         CardPool main = deck.get(DeckSection.Main);
 
-
         int mainSize = main.countAll();
         int sbSize = sideboard.countAll();
         int combinedDeckSize = mainSize + sbSize;
