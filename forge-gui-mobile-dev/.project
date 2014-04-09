@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>forge-m-desktop</name>
+	<name>forge-gui-mobile-dev</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -18,7 +18,13 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/forge-gui/res</locationURI>
+			<locationURI>copy_PARENT/forge-gui/res</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D/trunk</value>
+		</variable>
+	</variableList>
 </projectDescription>
