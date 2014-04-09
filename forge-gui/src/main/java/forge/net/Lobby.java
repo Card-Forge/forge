@@ -39,7 +39,8 @@ public class Lobby {
 
     public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
     public final LobbyPlayer getAiPlayer(String name) {
-        return getAiPlayer(name, MyRandom.getRandom().nextInt(GuiBase.getInterface().getAvatarCount()));
+        int avatarCount = GuiBase.getInterface().getAvatarCount();
+        return getAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount));
     }
     public final LobbyPlayer getAiPlayer(String name, int avatarIndex) {
         LobbyPlayerAi player = new LobbyPlayerAi(name);
