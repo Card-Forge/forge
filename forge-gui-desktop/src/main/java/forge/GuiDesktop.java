@@ -302,7 +302,7 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public int getAvatarCount() {
         if (FSkin.isLoaded()) {
-            FSkin.getAvatars().size();
+            return FSkin.getAvatars().size();
         }
         return 0;
     }
