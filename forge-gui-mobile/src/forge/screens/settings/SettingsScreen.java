@@ -14,10 +14,10 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.GameLogEntryType;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FList;
-import forge.utils.ForgePreferences.FPref;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class SettingsScreen extends FScreen {
     private static final float INSETS_FACTOR = 0.025f;

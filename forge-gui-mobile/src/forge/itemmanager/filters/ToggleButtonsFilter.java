@@ -7,7 +7,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
-import forge.utils.LayoutHelper;
+import forge.util.LayoutHelper;
 
 import java.util.ArrayList;
 

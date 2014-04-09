@@ -17,17 +17,9 @@
  */
 package forge.error;
 
-import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.*;
-import java.net.URI;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -219,7 +211,7 @@ public class BugReporter {
         dialogShown = false;*/
     }
 
-    @SuppressWarnings("serial")
+    /*@SuppressWarnings("serial")
     private static class _CopyAndGo extends AbstractAction {
         private final String url;
         private final JTextArea text;
@@ -303,7 +295,7 @@ public class BugReporter {
         public void actionPerformed(final ActionEvent e) {
             System.exit(0);
         }
-    }
+    }*/
     
     // disable instantiation
     private BugReporter() { }

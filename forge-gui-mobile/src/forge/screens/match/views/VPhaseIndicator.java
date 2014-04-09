@@ -13,7 +13,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.game.phase.PhaseType;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class VPhaseIndicator extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.3f;

@@ -19,7 +19,7 @@ import forge.player.HumanPlay;
 import forge.screens.match.FControl;
 import forge.toolbox.FCardZoom;
 import forge.toolbox.FCardZoom.ZoomController;
-import forge.utils.Evaluator;
+import forge.util.Evaluator;
 
 import org.apache.commons.lang3.StringUtils;
 

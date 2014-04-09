@@ -2,6 +2,7 @@ package forge.itemmanager.filters;
 
 import com.google.common.base.Predicates;
 
+import forge.assets.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.item.PaperCard;
@@ -25,7 +26,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
     }
 
     protected void addToggleButton(Widget widget, final StatTypes st) {
-        final ToggleButton button = addToggleButton(widget, st.img);
+        final ToggleButton button = addToggleButton(widget, FSkin.getImages().get(st.skinProp));
         buttonMap.put(st, button);
 
         //hook so long-pressing a button toggles itself on and toggles off all other buttons

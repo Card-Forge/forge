@@ -7,8 +7,8 @@ import forge.itemmanager.ItemManager;
 import forge.menu.FTooltip;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
+import forge.util.LayoutHelper;
 import forge.util.TextUtil;
-import forge.utils.LayoutHelper;
 
 
 public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilter<T> {

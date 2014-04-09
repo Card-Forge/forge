@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public abstract class FGestureAdapter extends InputAdapter {
     public static final float DOUBLE_TAP_INTERVAL = 0.25f;

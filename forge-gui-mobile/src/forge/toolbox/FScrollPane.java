@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import forge.Forge.Animation;
 import forge.Forge.Graphics;
-import forge.utils.PhysicsObject;
+import forge.util.PhysicsObject;
 
 public abstract class FScrollPane extends FContainer {
     private static float FLING_DECEL = 750f;

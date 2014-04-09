@@ -13,7 +13,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class FMenuItem extends FDisplayObject {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;

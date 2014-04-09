@@ -10,7 +10,7 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.utils.LayoutHelper;
+import forge.util.LayoutHelper;
 
 
 public class CardSearchFilter extends TextSearchFilter<PaperCard> {

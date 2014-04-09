@@ -20,8 +20,8 @@ package forge.itemmanager.views;
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
+import forge.card.CardPreferences;
 import forge.item.IPaperCard;
-import forge.utils.CardPreferences;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -40,7 +40,7 @@ public class StarRenderer extends ItemCellRenderer {
         }
 
         FImage image;
-        if (CardPreferences.getPrefs(card.getName()).getStarCount() == 0) {
+        if (CardPreferences.getPrefs(card).getStarCount() == 0) {
             image = FSkinImage.STAR_OUTINE;
         }
         else { //TODO: consider supporting more than 1 star

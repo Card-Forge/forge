@@ -1,4 +1,4 @@
-package forge.utils;
+package forge.util;
 
 import com.badlogic.gdx.Gdx;
 
@@ -10,8 +10,8 @@ import forge.deck.generation.DeckGenerator5Color;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FOptionPane;
-import forge.utils.ForgePreferences.FPref;
 
 public class Utils {
     private final static float ppcX = Gdx.graphics.getPpcX();

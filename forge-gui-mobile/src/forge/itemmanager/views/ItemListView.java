@@ -23,6 +23,9 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
+import forge.itemmanager.ColumnDef;
+import forge.itemmanager.ItemColumn;
+import forge.itemmanager.ItemColumnConfig;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
@@ -88,7 +91,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         Collections.sort(columns, new Comparator<ItemColumn>() {
             @Override
             public int compare(ItemColumn arg0, ItemColumn arg1) {
-                return Integer.compare(arg0.getIndex(), arg1.getIndex());
+                return Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex());
             }
         });
 
@@ -118,28 +121,28 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         int modelIndex = 0;
         for (final ItemColumn col : columns) {
-            col.setIndex(modelIndex++);
-            if (col.isVisible()) { table.columns.add(col); }
+            col.getConfig().setIndex(modelIndex++);
+            if (col.getConfig().isVisible()) { table.columns.add(col); }
 
             if (!hideHeader) {
-                final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
-                        col.getLongName() : col.getShortName(), col.isVisible());
+                final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getConfig().getShortName()) ?
+                        col.getConfig().getLongName() : col.getConfig().getShortName(), col.getConfig().isVisible());
                 chkBox.setFontSize(ROW_FONT.getSize());
                 chkBox.setCommand(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         boolean visible = chkBox.isSelected();
-                        if (col.isVisible() == visible) { return; }
-                        col.setVisible(visible);
+                        if (col.getConfig().isVisible() == visible) { return; }
+                        col.getConfig().setVisible(visible);
 
-                        if (col.isVisible()) {
+                        if (col.getConfig().isVisible()) {
                             table.columns.add(col);
 
                             //move column into proper position
                             int oldIndex = table.getColumnCount() - 1;
-                            int newIndex = col.getIndex();
-                            for (int i = 0; i < col.getIndex(); i++) {
-                                if (!columns.get(i).isVisible()) {
+                            int newIndex = col.getConfig().getIndex();
+                            for (int i = 0; i < col.getConfig().getIndex(); i++) {
+                                if (!columns.get(i).getConfig().isVisible()) {
                                     newIndex--;
                                 }
                             }
@@ -289,8 +292,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             // Assemble priority sort.
             for (ItemColumn col : table.getColumns()) {
-                if (col.getSortPriority() > 0 && col.getSortPriority() <= sortcols.length) {
-                    sortcols[col.getSortPriority() - 1] = col;
+                if (col.getConfig().getSortPriority() > 0 && col.getConfig().getSortPriority() <= sortcols.length) {
+                    sortcols[col.getConfig().getSortPriority() - 1] = col;
                 }
             }
 

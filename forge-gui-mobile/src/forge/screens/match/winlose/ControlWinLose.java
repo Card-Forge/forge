@@ -2,7 +2,6 @@ package forge.screens.match.winlose;
 
 import forge.game.Game;
 import forge.game.Match;
-import forge.model.FModel;
 import forge.screens.match.FControl;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -82,8 +81,7 @@ public class ControlWinLose {
      * with other game modes.
      */
     public void saveOptions() {
-        FModel.getPreferences().writeMatchPreferences();
-        FModel.getPreferences().save();
+        FControl.writeMatchPreferences();
     }
 
     /**

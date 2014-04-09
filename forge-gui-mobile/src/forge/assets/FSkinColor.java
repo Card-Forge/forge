@@ -6,35 +6,35 @@ import com.badlogic.gdx.graphics.Color;
 
 public class FSkinColor {
     public enum Colors {
-        CLR_THEME                   (70, 10),
-        CLR_BORDERS                 (70, 30),
-        CLR_ZEBRA                   (70, 50),
-        CLR_HOVER                   (70, 70),
-        CLR_ACTIVE                  (70, 90),
-        CLR_INACTIVE                (70, 110),
-        CLR_TEXT                    (70, 130),
-        CLR_PHASE_INACTIVE_ENABLED  (70, 150),
-        CLR_PHASE_INACTIVE_DISABLED (70, 170),
-        CLR_PHASE_ACTIVE_ENABLED    (70, 190),
-        CLR_PHASE_ACTIVE_DISABLED   (70, 210),
-        CLR_THEME2                  (70, 230),
-        CLR_OVERLAY                 (70, 250),
-        CLR_COMBAT_TARGETING_ARROW  (70, 270),
-        CLR_NORMAL_TARGETING_ARROW  (70, 290);
+        CLR_THEME                   (FSkinProp.CLR_THEME),
+        CLR_BORDERS                 (FSkinProp.CLR_BORDERS),
+        CLR_ZEBRA                   (FSkinProp.CLR_ZEBRA),
+        CLR_HOVER                   (FSkinProp.CLR_HOVER),
+        CLR_ACTIVE                  (FSkinProp.CLR_ACTIVE),
+        CLR_INACTIVE                (FSkinProp.CLR_INACTIVE),
+        CLR_TEXT                    (FSkinProp.CLR_TEXT),
+        CLR_PHASE_INACTIVE_ENABLED  (FSkinProp.CLR_PHASE_INACTIVE_ENABLED),
+        CLR_PHASE_INACTIVE_DISABLED (FSkinProp.CLR_PHASE_INACTIVE_DISABLED),
+        CLR_PHASE_ACTIVE_ENABLED    (FSkinProp.CLR_PHASE_ACTIVE_ENABLED),
+        CLR_PHASE_ACTIVE_DISABLED   (FSkinProp.CLR_PHASE_ACTIVE_DISABLED),
+        CLR_THEME2                  (FSkinProp.CLR_THEME2),
+        CLR_OVERLAY                 (FSkinProp.CLR_OVERLAY),
+        CLR_COMBAT_TARGETING_ARROW  (FSkinProp.CLR_COMBAT_TARGETING_ARROW),
+        CLR_NORMAL_TARGETING_ARROW  (FSkinProp.CLR_NORMAL_TARGETING_ARROW);
 
         private Color color;
         private final int x, y;
-    
-        /** @param xy &emsp; int[] coordinates */
-        Colors(final int x0, final int y0) {
-            x = x0;
-            y = y0;
+
+        Colors(final FSkinProp skinProp) {
+            int[] coords = skinProp.getCoords();
+            x = coords[0];
+            y = coords[1];
         }
-    
+
         public int getX() {
             return x;
         }
-    
+
         public int getY() {
             return y;
         }

@@ -12,7 +12,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

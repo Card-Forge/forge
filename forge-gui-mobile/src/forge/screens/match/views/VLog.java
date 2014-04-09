@@ -13,8 +13,8 @@ import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.menu.FDropDown;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FDisplayObject;
-import forge.utils.ForgePreferences.FPref;
 
 public class VLog extends FDropDown {
     private static final float PADDING = 5;

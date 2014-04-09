@@ -6,7 +6,7 @@ import java.util.List;
 import forge.Forge.Graphics;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class FMenuBar extends FContainer {
     public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);

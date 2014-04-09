@@ -25,9 +25,7 @@ import com.google.common.collect.Iterables;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.views.ColumnDef;
 import forge.itemmanager.views.ImageView;
-import forge.itemmanager.views.ItemColumn;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FMenuItem;
@@ -42,14 +40,14 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
+import forge.util.LayoutHelper;
 import forge.util.ReflectionUtil;
-import forge.utils.LayoutHelper;
 
 import java.util.*;
 import java.util.Map.Entry;
 
 
-public abstract class ItemManager<T extends InventoryItem> extends FContainer {
+public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T> {
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;

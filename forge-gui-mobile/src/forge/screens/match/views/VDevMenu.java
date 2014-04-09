@@ -27,15 +27,15 @@ import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.net.FServer;
 import forge.player.HumanPlay;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
 import forge.screens.match.input.InputSelectCardsFromList;
 import forge.toolbox.FEvent;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.GuiDialog;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.utils.Constants;
-import forge.utils.ForgePreferences;
-import forge.utils.ForgePreferences.FPref;
 
 public class VDevMenu extends FDropDownMenu {
     @Override
@@ -73,7 +73,7 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Setup Game State", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FControl.setupGameState(Constants.USER_GAMES_DIR + "Test.fgs");
+                FControl.setupGameState(ForgeConstants.USER_GAMES_DIR + "Test.fgs");
                 //TODO: Support picking file
 
                 /*final FFileChooser fc = new FFileChooser();

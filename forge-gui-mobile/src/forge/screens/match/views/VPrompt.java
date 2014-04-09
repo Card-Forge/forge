@@ -13,7 +13,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class VPrompt extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;

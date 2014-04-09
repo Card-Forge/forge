@@ -7,8 +7,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinFont;
+import forge.interfaces.IProgressBar;
 
-public class FProgressBar extends FDisplayObject {
+public class FProgressBar extends FDisplayObject implements IProgressBar {
     public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;
     private static FSkinFont MSG_FONT;
 

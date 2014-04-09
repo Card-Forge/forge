@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.menu.FMenuBar;
-import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VCombat;
@@ -107,8 +106,7 @@ public class MatchScreen extends FScreen {
 
     @Override
     public boolean onClose(boolean canCancel) {
-        FModel.getPreferences().writeMatchPreferences();
-        FModel.getPreferences().save();
+        FControl.writeMatchPreferences();
         return true;
     }
 

@@ -9,10 +9,11 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.interfaces.IButton;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 
-public class FButton extends FDisplayObject {
+public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final float DISABLED_COMPOSITE = 0.25f;
 
@@ -195,5 +196,15 @@ public class FButton extends FDisplayObject {
         if (disabled) {
             g.resetAlphaComposite();
         }
+    }
+
+    @Override
+    public boolean isSelected() {
+        return isToggled();
+    }
+
+    @Override
+    public void setSelected(boolean b0) {
+        setToggled(b0);
     }
 }

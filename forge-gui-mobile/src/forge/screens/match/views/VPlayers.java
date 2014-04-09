@@ -12,9 +12,9 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.menu.FDropDown;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
 import forge.toolbox.FLabel;
-import forge.utils.ForgePreferences.FPref;
 
 public class VPlayers extends FDropDown {
     private Map<Player, InfoLabel[]> infoLabels;

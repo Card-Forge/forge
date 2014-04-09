@@ -17,10 +17,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.assets.FSkinImage.SourceFile;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
-import forge.utils.ForgePreferences;
-import forge.utils.ForgePreferences.FPref;
 
 public class FSkin {
     private static final String
@@ -28,6 +28,7 @@ public class FSkin {
         FILE_AVATAR_SPRITE = "sprite_avatars.png",
         DEFAULT_DIR = FILE_SKINS_DIR + "default/";
 
+    private static final Map<FSkinProp, FSkinImage> images = new HashMap<FSkinProp, FSkinImage>();
     private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
 
     private static ArrayList<String> allSkins;
@@ -325,6 +326,10 @@ public class FSkin {
 
     public static Iterable<String> getAllSkins() {
         return allSkins;
+    }
+
+    public static Map<FSkinProp, FSkinImage> getImages() {
+        return images;
     }
 
     public static Map<Integer, TextureRegion> getAvatars() {

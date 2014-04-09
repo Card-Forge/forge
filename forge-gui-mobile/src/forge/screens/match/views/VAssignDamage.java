@@ -30,15 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Assembles Swing components of assign damage dialog.
- * 
- * This needs a JDialog to maintain a modal state.
- * Without the modal state, the PhaseHandler automatically
- * moves forward to phase Main2 without assigning damage.
- *
- * <br><br><i>(V at beginning of class name denotes a view class.)</i>
- */
+
 public class VAssignDamage {
     // Width and height of blocker dialog
     private final int wDlg = 700;

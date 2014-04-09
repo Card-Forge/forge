@@ -24,6 +24,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.itemmanager.ColumnDef;
 
 /**
  * Base cell renderer class for item tables
@@ -31,6 +32,27 @@ import forge.assets.FSkinColor.Colors;
 public class ItemCellRenderer {
     public static final FSkinFont FONT = FSkinFont.get(14);
     public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+
+    public static ItemCellRenderer getColumnDefRenderer(ColumnDef columnDef) {
+        switch (columnDef) {
+        case POWER:
+        case TOUGHNESS:
+        case CMC:
+        case DECK_MAIN:
+        case DECK_SIDE:
+            return new IntegerRenderer();
+        case COST:
+            return new ManaCostRenderer();
+        case DECK_COLOR:
+            return new ColorSetRenderer();
+        case FAVORITE:
+            return new StarRenderer();
+        case DECK_FAVORITE:
+            return new DeckStarRenderer();
+        default:
+            return new ItemCellRenderer();
+        }
+    }
 
     public void draw(Graphics g, Object value, Vector2 loc, float itemWidth, float itemHeight) {
         String text = value.toString();

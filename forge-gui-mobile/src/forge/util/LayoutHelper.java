@@ -1,4 +1,4 @@
-package forge.utils;
+package forge.util;
 
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;

@@ -630,7 +630,7 @@ public enum FControl implements KeyEventDispatcher {
      * TODO: Needs to be reworked for efficiency with rest of prefs saves in
      * codebase.
      */
-    public void actuateMatchPreferences() {
+    private void actuateMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 

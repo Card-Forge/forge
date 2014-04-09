@@ -13,7 +13,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSpinner;
 import forge.util.ComparableOp;
-import forge.utils.LayoutHelper;
+import forge.util.LayoutHelper;
 
 
 public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilter<T> {

@@ -7,7 +7,7 @@ import forge.assets.FSkin;
 import forge.game.player.Player;
 import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class VAvatar extends FDisplayObject {
     public static final float WIDTH = Utils.AVG_FINGER_WIDTH;

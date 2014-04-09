@@ -30,14 +30,15 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
-import forge.guantlet.GauntletData;
-import forge.guantlet.GauntletIO;
+import forge.gauntlet.GauntletData;
+import forge.gauntlet.GauntletIO;
 import forge.model.FModel;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.screens.match.FControl;
 import forge.toolbox.FLabel;
 import forge.toolbox.FPanel;
+
 import java.util.List;
 
 /**

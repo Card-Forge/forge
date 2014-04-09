@@ -13,7 +13,7 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public abstract class FScreen extends FContainer {
     public static final FSkinColor TEXTURE_OVERLAY_COLOR = FSkinColor.get(Colors.CLR_THEME);

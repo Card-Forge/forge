@@ -9,6 +9,9 @@ import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.deck.DeckProxy;
 import forge.item.InventoryItem;
+import forge.itemmanager.ColumnDef;
+import forge.itemmanager.GroupDef;
+import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
@@ -19,6 +22,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+
 import java.awt.Point;
 import java.util.*;
 import java.util.Map.Entry;
@@ -57,7 +61,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final ArrayList<Group> groups = new ArrayList<Group>();
 
-    @SuppressWarnings("serial")
     private class ExpandCollapseButton extends FLabel {
         private boolean isAllCollapsed;
 

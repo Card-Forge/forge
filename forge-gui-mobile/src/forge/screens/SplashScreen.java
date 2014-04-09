@@ -7,10 +7,10 @@ import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
-import forge.utils.ForgePreferences;
-import forge.utils.ForgePreferences.FPref;
 
 public class SplashScreen extends FContainer {
     private TextureRegion background;

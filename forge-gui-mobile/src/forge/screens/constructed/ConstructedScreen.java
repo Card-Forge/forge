@@ -29,6 +29,8 @@ import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.net.FServer;
 import forge.net.Lobby;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
@@ -47,8 +49,6 @@ import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
-import forge.utils.ForgePreferences;
-import forge.utils.ForgePreferences.FPref;
 
 public class ConstructedScreen extends LaunchScreen {
     private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_THEME).alphaColor(0.8f);

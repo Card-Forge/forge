@@ -9,10 +9,11 @@ import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.interfaces.IButton;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 
-public class FLabel extends FDisplayObject {
+public class FLabel extends FDisplayObject implements IButton {
     public static class Builder {
         //========== Default values for FLabel are set here.
         private float      bldIconScaleFactor = 0.8f;

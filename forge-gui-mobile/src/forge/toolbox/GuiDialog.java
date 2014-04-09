@@ -4,8 +4,6 @@ import forge.FThreads;
 import forge.game.card.Card;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.swing.*;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -57,7 +55,7 @@ public class GuiDialog {
      *            a {@link java.lang.String} object.
      */
     public static void message(final String message) {
-        message(message, UIManager.getString("OptionPane.messageDialogTitle"));
+        message(message, "Forge");
     }
 
     public static void message(final String message, final String title) {

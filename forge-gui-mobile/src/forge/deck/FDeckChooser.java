@@ -6,6 +6,8 @@ import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -15,8 +17,6 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.utils.ForgePreferences;
-import forge.utils.ForgePreferences.FPref;
 
 import org.apache.commons.lang3.StringUtils;
 

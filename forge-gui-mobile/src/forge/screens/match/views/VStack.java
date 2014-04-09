@@ -17,7 +17,7 @@ import forge.menu.FDropDown;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class VStack extends FDropDown {
     private static final float PADDING = 3;

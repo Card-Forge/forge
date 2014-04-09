@@ -10,7 +10,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
-import forge.utils.LayoutHelper;
+import forge.util.LayoutHelper;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {

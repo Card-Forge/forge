@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>forge-mobile</groupId>
-  <artifactId>forge-mobile</artifactId>
-  <version>1.5.14-SNAPSHOT</version>
+  <groupId>forge</groupId>
+  <artifactId>forge-gui-mobile</artifactId>
+  <version>1.5.16-SNAPSHOT</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -18,6 +18,31 @@
   </build>
 
   <dependencies>
+      <dependency>
+          <groupId>forge</groupId>
+          <artifactId>forge-core</artifactId>
+          <version>${project.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>forge</groupId>
+          <artifactId>forge-game</artifactId>
+          <version>${project.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>forge</groupId>
+          <artifactId>forge-ai</artifactId>
+          <version>${project.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>forge</groupId>
+          <artifactId>forge-net</artifactId>
+          <version>${project.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>forge</groupId>
+          <artifactId>forge-gui</artifactId>
+          <version>${project.version}</version>
+      </dependency>
       <dependency>
           <groupId>com.google.guava</groupId>
           <artifactId>guava</artifactId>

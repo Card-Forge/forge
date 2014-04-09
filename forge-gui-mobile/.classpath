@@ -13,10 +13,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="libs/gdx.jar" sourcepath="libs/gdx-sources.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-freetype.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/forge-ai"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/forge-core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/forge-game"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/forge-net"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

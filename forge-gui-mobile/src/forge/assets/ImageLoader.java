@@ -6,7 +6,7 @@ import com.google.common.cache.CacheLoader;
 
 import forge.ImageKeys;
 import forge.error.BugReporter;
-import forge.utils.Constants;
+import forge.properties.ForgeConstants;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,34 +27,34 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         final String filename;
         if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
             filename = key.substring(ImageKeys.TOKEN_PREFIX.length());
-            path = Constants.CACHE_TOKEN_PICS_DIR;
+            path = ForgeConstants.CACHE_TOKEN_PICS_DIR;
         } else if (key.startsWith(ImageKeys.ICON_PREFIX)) {
             filename = key.substring(ImageKeys.ICON_PREFIX.length());
-            path = Constants.CACHE_ICON_PICS_DIR;
+            path = ForgeConstants.CACHE_ICON_PICS_DIR;
         } else if (key.startsWith(ImageKeys.BOOSTER_PREFIX)) {
             filename = key.substring(ImageKeys.BOOSTER_PREFIX.length());
-            path = Constants.CACHE_BOOSTER_PICS_DIR;
+            path = ForgeConstants.CACHE_BOOSTER_PICS_DIR;
         } else if (key.startsWith(ImageKeys.FATPACK_PREFIX)) {
             filename = key.substring(ImageKeys.FATPACK_PREFIX.length());
-            path = Constants.CACHE_FATPACK_PICS_DIR;
+            path = ForgeConstants.CACHE_FATPACK_PICS_DIR;
         } else if (key.startsWith(ImageKeys.PRECON_PREFIX)) {
             filename = key.substring(ImageKeys.PRECON_PREFIX.length());
-            path = Constants.CACHE_PRECON_PICS_DIR;
+            path = ForgeConstants.CACHE_PRECON_PICS_DIR;
         } else if (key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
             filename = key.substring(ImageKeys.TOURNAMENTPACK_PREFIX.length());
-            path = Constants.CACHE_TOURNAMENTPACK_PICS_DIR;
+            path = ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR;
         } else {
             filename = key;
-            path = Constants.CACHE_CARD_PICS_DIR;
+            path = ForgeConstants.CACHE_CARD_PICS_DIR;
         }
 
         Texture ret = _findFile(key, path, filename);
         
         // some S00 cards are really part of 6ED
         if (null == ret ) {
-            String s2kAlias = ImageCache.getSetFolder("S00");
+            String s2kAlias = ImageUtil.getSetFolder("S00");
             if ( filename.startsWith(s2kAlias) ) {
-                ret = _findFile(key, path, filename.replace(s2kAlias, ImageCache.getSetFolder("6ED")));
+                ret = _findFile(key, path, filename.replace(s2kAlias, ImageUtil.getSetFolder("6ED")));
             }
         }
 

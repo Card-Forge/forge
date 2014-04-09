@@ -12,7 +12,7 @@ import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.utils.Utils;
+import forge.util.Utils;
 
 public class FList<E> extends FScrollPane {
     public static final float INSETS_FACTOR = 0.025f;
