@@ -87,12 +87,12 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     private SkinImage getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
-        if (null != lp.getIconImageKey()) {
+        if (lp.getIconImageKey() != null) {
             return ImageCache.getIcon(lp);
         }
 
         int avatarIdx = lp.getAvatarIndex();
-        return FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex);
+        return FSkin.getAvatars().get(avatarIdx >= 0 ? avatarIdx : defaultIndex);
     }
 
     private void setAvatar(VField view, SkinImage img) {
