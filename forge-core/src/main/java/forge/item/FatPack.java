@@ -35,6 +35,7 @@ public class FatPack extends SealedProduct {
         @Override
         public FatPack apply(final CardEdition arg1) {
             FatPack.Template d = StaticData.instance().getFatPacks().get(arg1.getCode());
+            if (d == null) { return null; }
             return new FatPack(arg1.getName(), d);
         }
     };

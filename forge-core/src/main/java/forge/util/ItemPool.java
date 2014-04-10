@@ -147,7 +147,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
      * @return int
      */
     public final int count(final T item) {
-        if (this.items == null) {
+        if (this.items == null || item == null) {
             return 0;
         }
         final Integer boxed = this.items.get(item);
@@ -261,7 +261,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
      *            a int
      */
     public void add(final T item, final int amount) {
-        if (amount <= 0) {
+        if (item == null || amount <= 0) {
             return;
         }
         this.items.put(item, Integer.valueOf(this.count(item) + amount));
