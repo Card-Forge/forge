@@ -94,9 +94,14 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public String getAssetsRoot() {
+    public String getInstallRoot() {
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
-                "../forge-gui/res/" : "res/";
+                "../forge-gui/" : "";
+    }
+
+    @Override
+    public String getAssetsDir() {
+        return "res/";
     }
 
     @Override
@@ -126,12 +131,12 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption) {
-        return FOptionPane.showOptionDialog(message, title, FSkin.getImage(icon), options, defaultOption);
+        return FOptionPane.showOptionDialog(message, title, icon == null ? null : FSkin.getImage(icon), options, defaultOption);
     }
 
     @Override
     public <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
-        return FOptionPane.showInputDialog(message, title, FSkin.getImage(icon), initialInput, inputOptions);
+        return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }
 
     @Override
