@@ -7546,6 +7546,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (this.isCreature()) {
                     restDamage += restDamage;
                 }
+            } else if (c.getName().equals("Dictate of the Twin Gods")) {
+                restDamage += restDamage;
             } else if (c.getName().equals("Gratuitous Violence")) {
                 if (c.getController().equals(source.getController()) && source.isCreature() && this.isCreature()) {
                     restDamage += restDamage;

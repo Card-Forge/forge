@@ -756,7 +756,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                         && (source.isInstant() || source.isSorcery() || source.isPlaneswalker())) {
                     restDamage += 2;
                 }
-            } else if (c.getName().equals("Furnace of Rath")) {
+            } else if (c.getName().equals("Furnace of Rath") || c.getName().equals("Dictate of the Twin Gods")) {
                 restDamage += restDamage;
             } else if (c.getName().equals("Gratuitous Violence")) {
                 if (c.getController().equals(source.getController()) && source.isCreature()) {
