@@ -32,7 +32,8 @@ public interface IGuiBase {
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();
-    String getAssetsRoot();
+    String getInstallRoot();
+    String getAssetsDir();
     boolean mayShowCard(Card card);
     void reportBug(String details);
     void reportException(Throwable ex);

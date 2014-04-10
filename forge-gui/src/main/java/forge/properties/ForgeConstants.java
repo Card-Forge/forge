@@ -23,11 +23,12 @@ import java.util.Map;
 import forge.GuiBase;
 
 public final class ForgeConstants {
-    public static final String PROFILE_FILE          = "forge.profile.properties";
+    private static final String _INSTALL_ROOT        = GuiBase.getInterface().getInstallRoot();
+    public static final String PROFILE_FILE          = _INSTALL_ROOT + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     // data that is only in the program dir
-    private static final String _ASSETS_ROOT = GuiBase.getInterface().getAssetsRoot();
+    private static final String _ASSETS_ROOT = _INSTALL_ROOT + GuiBase.getInterface().getAssetsDir();
 
     private static final String _LIST_DIR = _ASSETS_ROOT + "lists/";
     public static final String KEYWORD_LIST_FILE                     = _LIST_DIR + "NonStackingKWList.txt";
@@ -41,7 +42,11 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
 
-    public static final String TEXT_HOWTO_FILE     = _ASSETS_ROOT + "howto.txt";
+    public static final String CHANGES_FILE = _INSTALL_ROOT + "CHANGES.txt";
+    public static final String LICENSE_FILE = _INSTALL_ROOT + "LICENSE.txt";
+    public static final String README_FILE  = _INSTALL_ROOT + "README.txt";
+    public static final String HOWTO_FILE   = _ASSETS_ROOT + "howto.txt";
+
     public static final String DRAFT_DIR           = _ASSETS_ROOT + "draft/";
     public static final String DRAFT_RANKINGS_FILE = DRAFT_DIR + "rankings.txt";
     public static final String SEALED_DIR          = _ASSETS_ROOT + "sealed/";
