@@ -1,5 +1,6 @@
 package forge.menus;
 
+import forge.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
@@ -73,25 +74,25 @@ public final class HelpMenu {
 
     private static JMenuItem getMenuItem_HowToPlayFile() {
         JMenuItem menuItem = new JMenuItem("How to Play");
-        menuItem.addActionListener(getOpenFileAction(getFile("res\\howto.txt")));
+        menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.HOWTO_FILE)));
         return menuItem;
     }
 
     private static JMenuItem getMenuItem_ReadMeFile() {
         JMenuItem menuItem = new JMenuItem("README.txt");
-        menuItem.addActionListener(getOpenFileAction(getFile("README.txt")));
+        menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.README_FILE)));
         return menuItem;
     }
 
     private static JMenuItem getMenuItem_License() {
         JMenuItem menuItem = new JMenuItem("Forge License");
-        menuItem.addActionListener(getOpenFileAction(getFile("LICENSE.txt")));
+        menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.LICENSE_FILE)));
         return menuItem;
     }
 
     private static JMenuItem getMenuItem_ReleaseNotes() {
         JMenuItem menuItem = new JMenuItem("Release Notes");
-        menuItem.addActionListener(getOpenFileAction(getFile("CHANGES.txt")));
+        menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.CHANGES_FILE)));
         return menuItem;
     }
 

@@ -163,7 +163,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     }
 
     public void showHowToPlay() {
-        FTextArea directions = new FTextArea(FileUtil.readFileToString(ForgeConstants.TEXT_HOWTO_FILE));
+        FTextArea directions = new FTextArea(FileUtil.readFileToString(ForgeConstants.HOWTO_FILE));
         final FScrollPane scr = new FScrollPane(directions, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

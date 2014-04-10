@@ -20,6 +20,7 @@ package forge.screens.home.settings;
 
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
+import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 
 /** 
@@ -74,9 +75,8 @@ public enum CSubmenuReleaseNotes implements ICDoc {
      * Returns content of CHANGES.txt.
      */
     private String getReleaseNotes() {
-         
         // !! Linux is case-sensitive so file name and extension need to match exactly !!
-        String filename = "CHANGES.txt";
+        String filename = ForgeConstants.CHANGES_FILE;
         String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);        
         String notes;
                 
@@ -88,5 +88,4 @@ public enum CSubmenuReleaseNotes implements ICDoc {
 
         return notes;
     }
-    
 }
