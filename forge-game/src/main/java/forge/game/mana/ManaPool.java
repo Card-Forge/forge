@@ -109,10 +109,14 @@ public class ManaPool implements Iterable<Mana> {
 
         int numRemoved = 0;
         boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.");
+        boolean convertToColorless = owner.hasKeyword("Convert unused mana to Colorless");
 
         List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
         if (keepGreenMana) {
             keys.remove(Byte.valueOf(MagicColor.GREEN));
+        }
+        if (convertToColorless) {
+            keys.remove(Byte.valueOf(MagicColor.COLORLESS));
         }
 
         for (Byte b : keys) {
@@ -123,17 +127,36 @@ public class ManaPool implements Iterable<Mana> {
                         pMana.add(mana);
                     }
                 }
-                numRemoved += floatingMana.get(b).size() - pMana.size();
-                floatingMana.get(b).clear();
-                floatingMana.putAll(b, pMana);
+                if (convertToColorless) {
+                    floatingMana.get(b).removeAll(pMana);
+                    ConvertManaColor(b, MagicColor.COLORLESS);
+                } else {
+                    numRemoved += floatingMana.get(b).size() - pMana.size();
+                    floatingMana.get(b).clear();
+                    floatingMana.putAll(b, pMana);
+                }
             }
             else {
-                numRemoved += floatingMana.get(b).size();
-                floatingMana.get(b).clear();
+                if (convertToColorless) {
+                    ConvertManaColor(b, MagicColor.COLORLESS);
+                } else {
+                    numRemoved += floatingMana.get(b).size();
+                    floatingMana.get(b).clear();
+                }
             }
         }
+
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Cleared, null));
         return numRemoved;
+    }
+
+    private void ConvertManaColor(final byte originalColor, final byte toColor) {
+        List<Mana> convert = new ArrayList<Mana>();
+        for (Mana m : floatingMana.get(originalColor)) {
+            convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility()));
+        }
+        floatingMana.get(originalColor).clear();
+        floatingMana.putAll(toColor, convert);
     }
 
     /**
