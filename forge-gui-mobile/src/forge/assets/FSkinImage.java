@@ -256,7 +256,7 @@ public enum FSkinImage implements FImage {
         String preferredFile = preferredDir + filename;
         Texture texture = textures.get(preferredFile);
         if (texture == null) {
-            FileHandle file = Gdx.files.internal(preferredFile);
+            FileHandle file = Gdx.files.local(preferredFile);
             if (file.exists()) {
                 try {
                     texture = new Texture(file);
@@ -328,7 +328,7 @@ public enum FSkinImage implements FImage {
         String defaultFile = defaultDir + filename;
         texture = textures.get(defaultFile);
         if (texture == null) {
-            FileHandle file = Gdx.files.internal(defaultFile);
+            FileHandle file = Gdx.files.local(defaultFile);
             if (file.exists()) {
                 try {
                     texture = new Texture(file);

@@ -71,13 +71,7 @@ public class GuiMobile implements IGuiBase {
         case Desktop:
             return "../forge-gui/";
         case Android:
-            break;
-        case Applet:
-            break;
-        case WebGL:
-            break;
-        case iOS:
-            break;
+            break; //TODO
         default:
             break;
         }
