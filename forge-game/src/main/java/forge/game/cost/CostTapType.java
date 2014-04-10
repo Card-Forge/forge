@@ -112,9 +112,9 @@ public class CostTapType extends CostPartWithList {
         String type = this.getType();
         boolean sameType = false;
         
-        if (type.contains("sharesCreatureTypeWith")) {
+        if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
-            type = type.replace("sharesCreatureTypeWith", "");
+            type = type.replace(".sharesCreatureTypeWith", "");
         }
         boolean totalPower = false;
         String totalP = "";

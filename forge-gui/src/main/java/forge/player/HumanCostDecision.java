@@ -991,9 +991,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         Integer c = cost.convertAmount();
 
         boolean sameType = false;
-        if (type.contains("sharesCreatureTypeWith")) {
+        if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
-            type = type.replace("sharesCreatureTypeWith", "");
+            type = type.replace(".sharesCreatureTypeWith", "");
         }
 
         boolean totalPower = false;
