@@ -52,6 +52,7 @@ public class Forge implements ApplicationListener {
         }
         game = this;
         clipboard = clipboard0;
+        GuiBase.setInterface(new GuiMobile());
     }
 
     @Override

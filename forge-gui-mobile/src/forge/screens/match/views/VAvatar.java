@@ -24,7 +24,7 @@ public class VAvatar extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        FControl.getInputProxy().selectPlayer(player);
+        FControl.getInputProxy().selectPlayer(player, null);
         return true;
     }
 

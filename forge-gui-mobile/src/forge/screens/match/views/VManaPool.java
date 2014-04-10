@@ -13,10 +13,10 @@ import forge.assets.FSkinColor.Colors;
 import forge.card.MagicColor;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
+import forge.match.input.Input;
+import forge.match.input.InputPayMana;
 import forge.net.FServer;
 import forge.screens.match.FControl;
-import forge.screens.match.input.Input;
-import forge.screens.match.input.InputPayMana;
 import forge.toolbox.FDisplayObject;
 
 public class VManaPool extends VDisplayArea {
