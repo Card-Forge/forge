@@ -27,7 +27,7 @@ public class CardDatabaseHelper {
 	
 	private static void initialize() {
 		final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, null, null);
-        staticData = new StaticData(reader, "res/editions", "res/blockdata");
+        staticData = new StaticData(reader, ForgeConstants.EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR);
 	}
 	
 	private static boolean hasBeenInitialized() {
