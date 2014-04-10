@@ -24,6 +24,8 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * <p>
  * AbilityFactory_Turns class.
@@ -62,6 +64,10 @@ public class AddTurnAi extends SpellAbilityAi {
                 if (p.isOpponentOf(ai) && !mandatory) {
                     return false;
                 }
+            }
+            if (!StringUtils.isNumeric(sa.getParam("NumTurns"))) {
+                // TODO: improve ai for Sage of Hours
+                return false;
             }
             // not sure if the AI should be playing with cards that give the
             // Human more turns.

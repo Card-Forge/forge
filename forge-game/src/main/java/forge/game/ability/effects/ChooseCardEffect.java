@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.card.CardType;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -50,6 +51,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("TargetControls")) {
             choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));
+        }
+        if (sa.hasParam("DefinedCards")) {
+            choices = AbilityUtils.getDefinedCards(host, sa.getParam("DefinedCards"), sa);
         }
 
         final String numericAmount = sa.getParamOrDefault("Amount", "1");

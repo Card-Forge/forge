@@ -90,5 +90,6 @@ public class TriggerBlocks extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
+        sa.setTriggeringObject("Attackers", this.getRunParams().get("Attackers"));
     }
 }
