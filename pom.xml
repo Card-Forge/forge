@@ -144,6 +144,13 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>drdev</id>
+            <name>Dan</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <licenses>
@@ -184,6 +191,7 @@
         <module>forge-ai</module>
         <module>forge-net</module>
         <module>forge-gui</module>
+        <module>forge-gui-desktop</module>
     </modules>
 
     <distributionManagement>
