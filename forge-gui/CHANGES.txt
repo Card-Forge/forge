@@ -8,7 +8,11 @@ Forge Beta: 0#-##-2014 ver 1.5.16
 Release Notes
 -------------
 
-
+The token images are now specific to each set (where possible). It is recommended that users delete the contents of their token image folder and download them again using the game's content downloaders.
+The default locations by operating system are:
+- Windows: <your local application data directory>/Forge/Cache/pics/tokens/ (usually C:/Users/<your username>/Application Data/Local/Forge/Cache/pics/tokens/)
+- OSX: <your home directory>/Library/Caches/Forge/pics/tokens/
+- Linux: <your home directory>/.cache/forge/pics/tokens/
 
 
 ---------

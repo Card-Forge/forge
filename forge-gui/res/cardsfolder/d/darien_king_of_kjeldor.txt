@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Legendary Creature Human Soldier
 PT:3/3
 T:Mode$ DamageDone | Execute$ TrigToken | ValidTarget$ You | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you're dealt damage, you may put that many 1/1 white Soldier creature tokens onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | References$ X
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ w 1 1 soldier CSP | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darien_king_of_kjeldor.jpg
 Oracle:Whenever you're dealt damage, you may put that many 1/1 white Soldier creature tokens onto the battlefield.

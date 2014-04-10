@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted creature has "{T}: Put a 1/1 green Elf Warrior creature token onto the battlefield."
-SVar:Token:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | SpellDescription$ Put a 1/1 green Elf Warrior creature token onto the battlefield.
+SVar:Token:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 elf warrior SHM | TokenOwner$ You | SpellDescription$ Put a 1/1 green Elf Warrior creature token onto the battlefield.
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_gond.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Put a 1/1 green Elf Warrior creature token onto the battlefield."

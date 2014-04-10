@@ -2,7 +2,7 @@ Name:Necrogenesis
 ManaCost:B G
 Types:Enchantment
 A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature from a graveyard | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Put a 1/1 green Saproling creature token onto the battlefield.
-SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling ALA
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
 Oracle:{2}: Exile target creature card from a graveyard. Put a 1/1 green Saproling creature token onto the battlefield.
