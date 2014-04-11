@@ -185,9 +185,10 @@ public class FComboBox<E> extends FTextField {
             float x = FComboBox.this.localToScreenX(0);
             float y = FComboBox.this.localToScreenY(FComboBox.this.getHeight());
 
-            paneSize = updateAndGetPaneSize(FComboBox.this.getWidth(), screenHeight - y);
+            float maxVisibleHeight = screenHeight - y;
+            paneSize = updateAndGetPaneSize(FComboBox.this.getWidth(), maxVisibleHeight);
 
-            setBounds(Math.round(x), Math.round(y), Math.round(FComboBox.this.getWidth()), Math.round(paneSize.getHeight()));
+            setBounds(Math.round(x), Math.round(y), Math.round(FComboBox.this.getWidth()), Math.min(Math.round(paneSize.getHeight()), maxVisibleHeight));
         }
 
         @Override
