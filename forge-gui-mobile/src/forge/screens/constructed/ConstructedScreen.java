@@ -48,6 +48,7 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+import forge.util.Utils;
 import forge.util.storage.IStorage;
 
 public class ConstructedScreen extends LaunchScreen {
@@ -55,14 +56,18 @@ public class ConstructedScreen extends LaunchScreen {
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final float PADDING = 5;
     private static final int MAX_PLAYERS = 8;
+    private static final int VARIANTS_FONT_SIZE = 12;
 
     // General variables
-    private int activePlayersNum = 2;
+    private final FLabel lblPlayers = new FLabel.Builder().text("Players:").fontSize(VARIANTS_FONT_SIZE).build();
+    private final FComboBox<Integer> cmbPlayerCount;
     private GameType currentGameMode = GameType.Constructed;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
     private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
 
     // Variants frame and variables
+    private final FLabel lblVariants = new FLabel.Builder().text("Variants:").fontSize(VARIANTS_FONT_SIZE).build();
+    private final FComboBox<Object> cmbVariants;
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
     private final FCheckBox vntVanguard = new FCheckBox("Vanguard");
     private final FCheckBox vntCommander = new FCheckBox("Commander");
@@ -78,17 +83,19 @@ public class ConstructedScreen extends LaunchScreen {
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float y = 0;
             float height;
-            for (int i = 0; i < activePlayersNum; i++) {
+            for (int i = 0; i < getNumPlayers(); i++) {
                 height = playerPanels.get(i).getPreferredHeight();
                 playerPanels.get(i).setBounds(0, y, visibleWidth, height);
                 y += height;
             }
-            return new ScrollBounds(visibleWidth, visibleHeight);
+            return new ScrollBounds(visibleWidth, y);
+        }
+
+        @Override
+        protected void drawOverlay(Graphics g) {
+            g.drawLine(1.5f, PLAYER_BORDER_COLOR, 0, 0, getWidth(), 0);
         }
     };
-
-    private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
-    private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
 
     private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
@@ -104,6 +111,34 @@ public class ConstructedScreen extends LaunchScreen {
 
     public ConstructedScreen() {
         super("Constructed");
+
+        add(lblPlayers);
+        cmbPlayerCount = add(new FComboBox<Integer>());
+        cmbPlayerCount.setFontSize(VARIANTS_FONT_SIZE);
+        for (int i = 2; i <= MAX_PLAYERS; i++) {
+            cmbPlayerCount.addItem(i);
+        }
+        cmbPlayerCount.setSelectedItem(2);
+        cmbPlayerCount.setChangedHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                int numPlayers = getNumPlayers();
+                for (int i = 0; i < MAX_PLAYERS; i++) {
+                    playerPanels.get(i).setVisible(i < numPlayers);
+                }
+                playersScroll.revalidate();
+            }
+        });
+
+        add(lblVariants);
+        cmbVariants = add(new FComboBox<Object>());
+        cmbVariants.setFontSize(VARIANTS_FONT_SIZE);
+        cmbVariants.addItem("(None)");
+        cmbVariants.addItem(GameType.Vanguard);
+        cmbVariants.addItem(GameType.Commander);
+        cmbVariants.addItem(GameType.Planechase);
+        cmbVariants.addItem(GameType.Archenemy);
+        cmbVariants.addItem(GameType.ArchenemyRumble);
 
         /*lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -144,7 +179,7 @@ public class ConstructedScreen extends LaunchScreen {
             playerPanels.add(player);
 
             // Populate players panel
-            player.setVisible(i < activePlayersNum);
+            player.setVisible(i < getNumPlayers());
 
             playersScroll.add(player);
         }
@@ -185,35 +220,19 @@ public class ConstructedScreen extends LaunchScreen {
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        playersScroll.setBounds(0, startY, width, height - startY);
-    }
-    
-    private void addPlayer() {
-        if (activePlayersNum >= MAX_PLAYERS) {
-            return;
-        }
+        float x = PADDING;
+        float y = startY + PADDING;
+        float fieldHeight = cmbPlayerCount.getHeight();
+        lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+        x += lblPlayers.getWidth();
+        cmbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        x += cmbPlayerCount.getWidth() + PADDING;
+        lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+        x += lblVariants.getWidth();
+        cmbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
 
-        int freeIndex = -1;
-        for (int i = 0; i < MAX_PLAYERS; i++) {
-            if (!playerPanels.get(i).isVisible()) {
-                freeIndex = i;
-                break;
-            }
-        }
-
-        playerPanels.get(freeIndex).setVisible(true);
-
-        activePlayersNum++;
-        addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
-
-        playerPanels.get(freeIndex).setVisible(true);
-    }
-
-    private void removePlayer(int playerIndex) {
-        activePlayersNum--;
-        PlayerPanel player = playerPanels.get(playerIndex);
-        player.setVisible(false);
-        addPlayerBtn.setEnabled(true);
+        y += cmbPlayerCount.getHeight() + PADDING;
+        playersScroll.setBounds(0, y, width, height - y);
     }
 
     public final FDeckChooser getDeckChooser(int playernum) {
@@ -221,7 +240,10 @@ public class ConstructedScreen extends LaunchScreen {
     }
 
     public int getNumPlayers() {
-        return activePlayersNum;
+        return cmbPlayerCount.getSelectedItem();
+    }
+    public void setNumPlayers(int numPlayers) {
+        cmbPlayerCount.setSelectedItem(numPlayers);
     }
 
     @Override
@@ -233,7 +255,7 @@ public class ConstructedScreen extends LaunchScreen {
             return false;
         }
 
-        for (int i = 0; i < activePlayersNum; i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             if (getDeckChooser(i).getPlayer() == null) {
                 FOptionPane.showMessageDialog("Please specify a deck for " + getPlayerName(i));
                 return false;
@@ -245,7 +267,7 @@ public class ConstructedScreen extends LaunchScreen {
 
         boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
         if (checkLegality && !variantTypes.contains(GameType.Commander)) { //Commander deck replaces regular deck and is checked later
-            for (int i = 0; i < activePlayersNum; i++) {
+            for (int i = 0; i < getNumPlayers(); i++) {
                 String name = getPlayerName(i);
                 String errMsg = GameType.Constructed.getDecksFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer().getDeck());
                 if (errMsg != null) {
@@ -257,7 +279,7 @@ public class ConstructedScreen extends LaunchScreen {
 
         Lobby lobby = FServer.getLobby();
         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-        for (int i = 0; i < activePlayersNum; i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
             LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? lobby.getAiPlayer(name,
@@ -461,12 +483,6 @@ public class ConstructedScreen extends LaunchScreen {
             commanderDeckList = new DeckList();
             planarDeckList = new DeckList();
             vgdAvatarList = new DeckList();
-
-            // Add a button to players 3+ to remove them from the setup
-            if (index >= 2) {
-                FLabel closeBtn = createCloseButton();
-                add(closeBtn);
-            }
 
             createAvatar();
             add(avatarLabel);
@@ -860,19 +876,6 @@ public class ConstructedScreen extends LaunchScreen {
             txtPlayerName.setChangedHandler(nameChangedHandler);
         }
 
-        private FLabel createCloseButton() {
-            final FLabel closeBtn = new FLabel.Builder().iconInBackground(false)
-                    .icon(FSkinImage.CLOSE).build();
-            closeBtn.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    removePlayer(closePlayerBtnList.indexOf(closeBtn) + 2);
-                }
-            });
-            closePlayerBtnList.add(closeBtn);
-            return closeBtn;
-        }
-
         private void createAvatar() {
             String[] currentPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
             if (index < currentPrefs.length) {
@@ -1076,7 +1079,7 @@ public class ConstructedScreen extends LaunchScreen {
         int lastTeam = -1;
         final List<Integer> teamList = appliedVariants.contains(GameType.Archenemy) ? archenemyTeams : teams;
 
-        for (int i = 0; i < activePlayersNum; i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             if (lastTeam == -1) {
                 lastTeam = teamList.get(i);
             }

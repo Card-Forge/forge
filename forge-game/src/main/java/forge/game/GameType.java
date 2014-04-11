@@ -9,27 +9,29 @@ import forge.deck.DeckFormat;
 public enum GameType {
 
     //            deck composition rules, isPoolRestricted, can sideboard between matches
-    Sealed          ( DeckFormat.Limited, true, true, true ),
-    Draft           ( DeckFormat.Limited, true, true, true ),
-    Gauntlet        ( DeckFormat.Limited, true, true, true ),
-    Quest           ( DeckFormat.QuestDeck, true, true, false ),
-    Constructed     ( DeckFormat.Constructed, false, true, true ),
-    Archenemy       ( DeckFormat.Archenemy, false, false, true ),
-    ArchenemyRumble ( DeckFormat.Archenemy, false, false, true ),
-    Planechase      ( DeckFormat.Planechase, false, false, true ),
-    Vanguard        ( DeckFormat.Vanguard, true, true, true ),
-    Commander       ( DeckFormat.Commander, false, false, false);
+    Sealed          (DeckFormat.Limited, true, true, true, "Sealed"),
+    Draft           (DeckFormat.Limited, true, true, true, "Draft"),
+    Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet"),
+    Quest           (DeckFormat.QuestDeck, true, true, false, "Quest"),
+    Constructed     (DeckFormat.Constructed, false, true, true, "Constructed"),
+    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy"),
+    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble"),
+    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase"),
+    Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard"),
+    Commander       (DeckFormat.Commander, false, false, false, "Commander");
 
     private final DeckFormat decksFormat;
     private final boolean bCardpoolLimited;
     private final boolean canSideboard;
     private final boolean addWonCardsMidgame;
+    private final String name;
 
-    GameType(DeckFormat formatType, boolean isDeckBuilderLimited, boolean sideboardingAllowed, boolean addAnteMidGame ) {
+    GameType(DeckFormat formatType, boolean isDeckBuilderLimited, boolean sideboardingAllowed, boolean addAnteMidGame, String name0) {
         bCardpoolLimited = isDeckBuilderLimited;
         decksFormat = formatType;
         canSideboard = sideboardingAllowed;
         addWonCardsMidgame = addAnteMidGame;
+        name = name0;
     }
 
     /**
@@ -66,5 +68,9 @@ public enum GameType {
         default:
             return false;
         }*/
+    }
+
+    public String toString() {
+        return name;
     }
 }
