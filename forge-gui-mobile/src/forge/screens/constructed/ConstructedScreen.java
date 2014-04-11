@@ -33,6 +33,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
+import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
@@ -69,13 +70,6 @@ public class ConstructedScreen extends LaunchScreen {
     private final FLabel lblVariants = new FLabel.Builder().text("Variants:").fontSize(VARIANTS_FONT_SIZE).build();
     private final FComboBox<Object> cmbVariants;
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
-    private final FCheckBox vntVanguard = new FCheckBox("Vanguard");
-    private final FCheckBox vntCommander = new FCheckBox("Commander");
-    private final FCheckBox vntPlanechase = new FCheckBox("Planechase");
-    private final FCheckBox vntArchenemy = new FCheckBox("Archenemy");
-    private String archenemyType = "Classic";
-    private final FComboBox<String> comboArchenemy = new FComboBox<String>(new String[]{
-            "Archenemy (Classic - One player is the Archenemy)", "Supervillan Rumble (All players are Archenemies)"});
 
     private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
@@ -140,6 +134,23 @@ public class ConstructedScreen extends LaunchScreen {
         cmbVariants.addItem(GameType.Archenemy);
         cmbVariants.addItem(GameType.ArchenemyRumble);
         cmbVariants.addItem("Advanced....");
+        cmbVariants.setChangedHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                if (cmbVariants.getSelectedIndex() <= 0) {
+                    appliedVariants.clear();
+                    playersScroll.revalidate();
+                }
+                else if (cmbVariants.getSelectedIndex() == cmbVariants.getItemCount() - 1) {
+                    Forge.openScreen(new AdvancedVariants());
+                }
+                else {
+                    appliedVariants.clear();
+                    appliedVariants.add((GameType)cmbVariants.getSelectedItem());
+                    playersScroll.revalidate();
+                }
+            }
+        });
 
         /*lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -595,14 +606,19 @@ public class ConstructedScreen extends LaunchScreen {
 
         private float getPreferredHeight() {
             int rows = 3;
-            if (vntArchenemy.isSelected()) {
-                rows++;
-            }
-            if (vntPlanechase.isSelected()) {
-                rows++;
-            }
-            if (vntVanguard.isSelected()) {
-                rows++;
+            if (!appliedVariants.isEmpty()) {
+                if (appliedVariants.contains(GameType.Archenemy)) {
+                    rows++;
+                }
+                else if (appliedVariants.contains(GameType.ArchenemyRumble)) {
+                    rows++;
+                }
+                if (appliedVariants.contains(GameType.Planechase)) {
+                    rows++;
+                }
+                if (appliedVariants.contains(GameType.Vanguard)) {
+                    rows++;
+                }
             }
             return rows * (txtPlayerName.getHeight() + PADDING) + PADDING;
         }
@@ -759,14 +775,14 @@ public class ConstructedScreen extends LaunchScreen {
             scmDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+                    currentGameMode = appliedVariants.contains(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble;
                 }
             });
 
             scmDeckEditor.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+                    currentGameMode = appliedVariants.contains(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble;
                     Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
                         @Override
                         public boolean apply(PaperCard arg0) {
@@ -1093,6 +1109,87 @@ public class ConstructedScreen extends LaunchScreen {
 
     /////////////////////////////////////////////
     //========== Various listeners in build order
+    
+    private class AdvancedVariants extends FScreen {
+        private final FCheckBox vntVanguard = add(new FCheckBox("Vanguard"));
+        private final FCheckBox vntCommander = add(new FCheckBox("Commander"));
+        private final FCheckBox vntPlanechase = add(new FCheckBox("Planechase"));
+        private final FCheckBox vntArchenemy = add(new FCheckBox("Archenemy"));
+        private final FCheckBox vntArchenemyRumble = add(new FCheckBox("Archenemy Rumble"));
+
+        private FButton btnApply = add(new FButton("Apply Variants", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                appliedVariants.clear();
+                if (vntVanguard.isSelected()) {
+                    appliedVariants.add(GameType.Vanguard);
+                }
+                if (vntCommander.isSelected()) {
+                    appliedVariants.add(GameType.Commander);
+                }
+                if (vntPlanechase.isSelected()) {
+                    appliedVariants.add(GameType.Planechase);
+                }
+                if (vntArchenemy.isSelected()) {
+                    appliedVariants.add(GameType.Archenemy);
+                }
+                else if (vntArchenemyRumble.isSelected()) {
+                    appliedVariants.add(GameType.ArchenemyRumble);
+                }
+                Forge.back();
+                playersScroll.revalidate();
+            }
+        }));
+
+        private AdvancedVariants() {
+            super(true, "Variants - Advanced", false);
+            vntVanguard.setSelected(appliedVariants.contains(GameType.Vanguard));
+            vntCommander.setSelected(appliedVariants.contains(GameType.Vanguard));
+            vntPlanechase.setSelected(appliedVariants.contains(GameType.Vanguard));
+            vntArchenemy.setSelected(appliedVariants.contains(GameType.Archenemy));
+            vntArchenemyRumble.setSelected(appliedVariants.contains(GameType.ArchenemyRumble));
+
+            //prevent selecting both archenemy types
+            vntArchenemy.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    if (vntArchenemy.isSelected()) {
+                        vntArchenemyRumble.setSelected(false);
+                    }
+                }
+            });
+            vntArchenemyRumble.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    if (vntArchenemyRumble.isSelected()) {
+                        vntArchenemy.setSelected(false);
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected void doLayout(float startY, float width, float height) {
+            float x = PADDING;
+            float y = startY + PADDING;
+            width -= 2 * x;
+
+            float checkBoxHeight = vntVanguard.getAutoSizeBounds().height * 1.5f;
+            vntVanguard.setBounds(x, y, width, checkBoxHeight);
+            y += checkBoxHeight + PADDING;
+            vntCommander.setBounds(x, y, width, checkBoxHeight);
+            y += checkBoxHeight + PADDING;
+            vntPlanechase.setBounds(x, y, width, checkBoxHeight);
+            y += checkBoxHeight + PADDING;
+            vntArchenemy.setBounds(x, y, width, checkBoxHeight);
+            y += checkBoxHeight + PADDING;
+            vntArchenemyRumble.setBounds(x, y, width, checkBoxHeight);
+
+            float buttonHeight = Utils.AVG_FINGER_HEIGHT;
+            btnApply.setBounds(x, height - buttonHeight - PADDING, width, buttonHeight);
+        }
+    }
+    
 
     /** This listener unlocks the relevant buttons for players
      * and enables/disables archenemy combobox as appropriate. */
