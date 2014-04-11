@@ -7,11 +7,13 @@ import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRulesPredicates.Presets;
 import forge.card.MagicColor;
+import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
+import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
 
 import java.util.ArrayList;
@@ -136,6 +138,103 @@ public class SFilterUtil {
             };
         }
         return Predicates.compose(preFinal, PaperCard.FN_GET_RULES);
+    }
+
+    public static Predicate<DeckProxy> buildDeckColorFilter(final Map<StatTypes, ? extends IButton> buttonMap) {
+        return new Predicate<DeckProxy>() {
+            @Override
+            public boolean apply(DeckProxy input) {
+                byte colorProfile = input.getColor().getColor();
+                if (colorProfile == 0) {
+                    return buttonMap.get(StatTypes.DECK_COLORLESS).isSelected();
+                }
+
+                boolean wantMulticolor = buttonMap.get(StatTypes.DECK_MULTICOLOR).isSelected();
+                if (!wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
+                    return false;
+                }
+
+                byte colors = 0;
+                if (buttonMap.get(StatTypes.DECK_WHITE).isSelected()) {
+                    colors |= MagicColor.WHITE;
+                }
+                if (buttonMap.get(StatTypes.DECK_BLUE).isSelected()) {
+                    colors |= MagicColor.BLUE;
+                }
+                if (buttonMap.get(StatTypes.DECK_BLACK).isSelected()) {
+                    colors |= MagicColor.BLACK;
+                }
+                if (buttonMap.get(StatTypes.DECK_RED).isSelected()) {
+                    colors |= MagicColor.RED;
+                }
+                if (buttonMap.get(StatTypes.DECK_GREEN).isSelected()) {
+                    colors |= MagicColor.GREEN;
+                }
+
+                if (colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
+                    return true;
+                }
+
+                return (colorProfile & colors) == colorProfile;
+            }
+        };
+    }
+
+    public static void showOnlyStat(StatTypes clickedStat, IButton clickedButton, Map<StatTypes, ? extends IButton> buttonMap) {
+        boolean foundSelected = false;
+        for (Map.Entry<StatTypes, ? extends IButton> btn : buttonMap.entrySet()) {
+            if (btn.getKey() != clickedStat) {
+                if (btn.getKey() == StatTypes.MULTICOLOR) {
+                    switch (clickedStat) {
+                    case WHITE:
+                    case BLUE:
+                    case BLACK:
+                    case RED:
+                    case GREEN:
+                        //ensure multicolor filter selected after right-clicking a color filter
+                        if (!btn.getValue().isSelected()) {
+                            btn.getValue().setSelected(true);
+                        }
+                        continue;
+                    default:
+                        break;
+                    }
+                }
+                else if (btn.getKey() == StatTypes.DECK_MULTICOLOR) {
+                    switch (clickedStat) {
+                    case DECK_WHITE:
+                    case DECK_BLUE:
+                    case DECK_BLACK:
+                    case DECK_RED:
+                    case DECK_GREEN:
+                        //ensure multicolor filter selected after right-clicking a color filter
+                        if (!btn.getValue().isSelected()) {
+                            btn.getValue().setSelected(true);
+                        }
+                        continue;
+                    default:
+                        break;
+                    }
+                }
+                if (btn.getValue().isSelected()) {
+                    foundSelected = true;
+                    btn.getValue().setSelected(false);
+                }
+            }
+        }
+        if (!clickedButton.isSelected()) {
+            clickedButton.setSelected(true);
+        }
+        else if (!foundSelected) {
+            //if statLabel only label in group selected, re-select all other labels in group
+            for (Map.Entry<StatTypes, ? extends IButton> btn : buttonMap.entrySet()) {
+                if (btn.getKey() != clickedStat) {
+                    if (!btn.getValue().isSelected()) {
+                        btn.getValue().setSelected(true);
+                    }
+                }
+            }
+        }
     }
 
     public static Predicate<PaperCard> buildFormatFilter(Set<GameFormat> formats, boolean allowReprints) {

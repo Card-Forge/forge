@@ -7,6 +7,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
+import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.toolbox.FEvent;
@@ -34,60 +35,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
             @Override
             public void handleEvent(FEvent e) {
                 lockFiltering = true;
-                boolean foundSelected = false;
-                for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
-                    if (btn.getKey() != st) {
-                        if (btn.getKey() == StatTypes.MULTICOLOR) {
-                            switch (st) {
-                            case WHITE:
-                            case BLUE:
-                            case BLACK:
-                            case RED:
-                            case GREEN:
-                                //ensure multicolor filter selected after right-clicking a color filter
-                                if (!btn.getValue().isSelected()) {
-                                    btn.getValue().setSelected(true);
-                                }
-                                continue;
-                            default:
-                                break;
-                            }
-                        }
-                        else if (btn.getKey() == StatTypes.DECK_MULTICOLOR) {
-                            switch (st) {
-                            case DECK_WHITE:
-                            case DECK_BLUE:
-                            case DECK_BLACK:
-                            case DECK_RED:
-                            case DECK_GREEN:
-                                //ensure multicolor filter selected after right-clicking a color filter
-                                if (!btn.getValue().isSelected()) {
-                                    btn.getValue().setSelected(true);
-                                }
-                                continue;
-                            default:
-                                break;
-                            }
-                        }
-                        if (btn.getValue().isSelected()) {
-                            foundSelected = true;
-                            btn.getValue().setSelected(false);
-                        }
-                    }
-                }
-                if (!button.isSelected()) {
-                    button.setSelected(true);
-                }
-                else if (!foundSelected) {
-                    //if statLabel only label in group selected, re-select all other labels in group
-                    for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
-                        if (btn.getKey() != st) {
-                            if (!btn.getValue().isSelected()) {
-                                btn.getValue().setSelected(true);
-                            }
-                        }
-                    }
-                }
+                SFilterUtil.showOnlyStat(st, button, buttonMap);
                 lockFiltering = false;
                 applyChange();
             }
