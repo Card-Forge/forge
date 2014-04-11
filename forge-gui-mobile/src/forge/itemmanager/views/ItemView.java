@@ -13,6 +13,7 @@ import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 
@@ -171,6 +172,7 @@ public abstract class ItemView<T extends InventoryItem> {
             if (scrollIntoView) {
                 scrollSelectionIntoView();
             }
+            onSelectionChange();
             return true;
         }
         return false;
@@ -194,6 +196,8 @@ public abstract class ItemView<T extends InventoryItem> {
         if (scrollIntoView) {
             scrollSelectionIntoView();
         }
+
+        onSelectionChange();
     }
 
     public void setSelectedIndices(Iterable<Integer> indices) {
@@ -222,15 +226,16 @@ public abstract class ItemView<T extends InventoryItem> {
         if (scrollIntoView) {
             scrollSelectionIntoView();
         }
+
+        onSelectionChange();
     }
 
     protected void onSelectionChange() {
         final int index = getSelectedIndex();
         if (index != -1) {
-            /*ListSelectionEvent event = new ListSelectionEvent(itemManager, index, index, false);
-            for (ListSelectionListener listener : itemManager.getSelectionListeners()) {
-                listener.valueChanged(event);
-            }*/
+            if (itemManager.getSelectionChangedHandler() != null) {
+                itemManager.getSelectionChangedHandler().handleEvent(new FEvent(itemManager, FEventType.CHANGE));
+            }
         }
     }
 

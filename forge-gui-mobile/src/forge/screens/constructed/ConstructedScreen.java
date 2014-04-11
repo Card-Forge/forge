@@ -62,7 +62,6 @@ public class ConstructedScreen extends LaunchScreen {
     // General variables
     private final FLabel lblPlayers = new FLabel.Builder().text("Players:").fontSize(VARIANTS_FONT_SIZE).build();
     private final FComboBox<Integer> cmbPlayerCount;
-    private GameType currentGameMode = GameType.Constructed;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
     private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
 
@@ -90,9 +89,6 @@ public class ConstructedScreen extends LaunchScreen {
             g.drawLine(1.5f, PLAYER_BORDER_COLOR, 0, 0, getWidth(), 0);
         }
     };
-
-    private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
-    private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
 
     // Variants
     private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
@@ -152,36 +148,6 @@ public class ConstructedScreen extends LaunchScreen {
             }
         });
 
-        /*lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
-        ////////////////////////////////////////////////////////
-        //////////////////// Variants Panel ////////////////////
-
-        // Populate and add variants panel
-        vntVanguard.addItemListener(iListenerVariants);
-        vntCommander.addItemListener(iListenerVariants);
-        vntPlanechase.addItemListener(iListenerVariants);
-        vntArchenemy.addItemListener(iListenerVariants);
-        comboArchenemy.setSelectedIndex(0);
-        comboArchenemy.setEnabled(vntArchenemy.isSelected());
-        comboArchenemy.addActionListener(aeComboListener);
-
-        variantsPanel.setOpaque(false);
-        variantsPanel.add(newLabel("Variants:"));
-        variantsPanel.add(vntVanguard);
-        variantsPanel.add(vntCommander);
-        variantsPanel.add(vntPlanechase);
-        variantsPanel.add(vntArchenemy);
-        comboArchenemy.addTo(variantsPanel);
-
-        constructedFrame.add(new FScrollPane(variantsPanel, false, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
-                "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");*/
-
-        ////////////////////////////////////////////////////////
-        ///////////////////// Player Panel /////////////////////
-
         // Construct individual player panels
         for (int i = 0; i < MAX_PLAYERS; i++) {
             teams.add(i + 1);
@@ -206,26 +172,6 @@ public class ConstructedScreen extends LaunchScreen {
         getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
         getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
         getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
-
-        // Checkbox event handling
-        cbSingletons.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                prefs.setPref(FPref.DECKGEN_SINGLETONS, String.valueOf(cbSingletons.isSelected()));
-                prefs.save();
-            }
-        });
-        cbArtifacts.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                prefs.setPref(FPref.DECKGEN_ARTIFACTS, String.valueOf(cbArtifacts.isSelected()));
-                prefs.save();
-            }
-        });
-
-        // Pre-select checkboxes
-        cbSingletons.setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        cbArtifacts.setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
 
         updatePlayersFromPrefs();
     }
@@ -483,14 +429,14 @@ public class ConstructedScreen extends LaunchScreen {
             index = index0;
             playerIsArchenemy = index == 0;
             deckChooser = new FDeckChooser(isPlayerAI());
-            deckChooser.initialize();
-            deckChooser.getLstDecks().setSelectCommand(new FEventHandler() {
+            deckChooser.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    String text = deckChooser.getSelectedDeckType().toString() + ": " + Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME);
-                    setDeckSelectorButtonText(text);
+                    deckBtn.setText(deckChooser.getSelectedDeckType().toString() + ": " +
+                            Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME));
                 }
             });
+            deckChooser.initialize();
             schemeDeckList = new DeckList();
             commanderDeckList = new DeckList();
             planarDeckList = new DeckList();
@@ -519,8 +465,11 @@ public class ConstructedScreen extends LaunchScreen {
 
             add(deckLabel);
             add(deckBtn);
-
-            addHandlersDeckSelector();
+            deckBtn.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                }
+            });
 
             add(cmdLabel);
             add(cmdDeckSelectorBtn);
@@ -595,6 +544,7 @@ public class ConstructedScreen extends LaunchScreen {
             w = x - avatarSize - 3 * PADDING;
             x = avatarSize + 2 * PADDING;
             teamComboBox.setBounds(x, y, w, fieldHeight);
+            aeTeamComboBox.setBounds(x, y, width, fieldHeight);
 
             y += fieldHeight + PADDING;
             x = PADDING;
@@ -717,10 +667,6 @@ public class ConstructedScreen extends LaunchScreen {
             vgdSelectorBtn.setText(text);
         }
 
-        public void setDeckSelectorButtonText(String text) {
-            deckBtn.setText(text);
-        }
-
         private void populateTeamsComboBoxes() {
             aeTeamComboBox.addItem("Archenemy");
             aeTeamComboBox.addItem("Heroes");
@@ -775,14 +721,12 @@ public class ConstructedScreen extends LaunchScreen {
             scmDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = appliedVariants.contains(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble;
                 }
             });
 
             scmDeckEditor.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = appliedVariants.contains(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble;
                     Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
                         @Override
                         public boolean apply(PaperCard arg0) {
@@ -800,14 +744,12 @@ public class ConstructedScreen extends LaunchScreen {
             cmdDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = GameType.Commander;
                 }
             });
 
             cmdDeckEditor.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = GameType.Commander;
                     //Forge.setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
                 }
             });
@@ -816,14 +758,12 @@ public class ConstructedScreen extends LaunchScreen {
             pchDeckSelectorBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = GameType.Planechase;
                 }
             });
 
             pchDeckEditor.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = GameType.Planechase;
                     /*Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
                         @Override
                         public boolean apply(PaperCard arg0) {
@@ -841,16 +781,6 @@ public class ConstructedScreen extends LaunchScreen {
             vgdSelectorBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    currentGameMode = GameType.Vanguard;
-                }
-            });
-        }
-
-        private void addHandlersDeckSelector() {
-            deckBtn.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    currentGameMode = GameType.Constructed;
                 }
             });
         }

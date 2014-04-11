@@ -58,7 +58,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
-    private FEventHandler itemActivateHandler;
+    private FEventHandler selectionChangedHandler, itemActivateHandler;
     private final Class<T> genericType;
     private ItemManagerConfig config;
 
@@ -1053,7 +1053,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setHideFilters(false); //ensure filters shown
     }
 
-    public void setItemActivateCommand(FEventHandler itemActivateHandler0) {
+    public FEventHandler getSelectionChangedHandler() {
+        return selectionChangedHandler;
+    }
+    public void setSelectionChangedHandler(FEventHandler selectionChangedHandler0) {
+        selectionChangedHandler = selectionChangedHandler0;
+    }
+
+    public void setItemActivateHandler(FEventHandler itemActivateHandler0) {
         itemActivateHandler = itemActivateHandler0;
     }
 

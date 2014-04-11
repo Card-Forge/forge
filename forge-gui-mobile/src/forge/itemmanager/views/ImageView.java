@@ -391,7 +391,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (itemsToSelect == null) {
             clearSelection(); //just clear selection if no items to select
             setScrollValue(scrollValueToRestore); //ensure scroll value restored
-            onSelectionChange();
         }
         else {
             if (!setSelectedItems(itemsToSelect)) {
@@ -810,7 +809,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         for (Integer i : selectedIndices) {
             orderedItems.get(i).selected = true;
         }
-        onSelectionChange();
     }
 
     @Override

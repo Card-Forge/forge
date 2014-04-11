@@ -48,7 +48,7 @@ public class FDeckChooser extends FScreen {
                 }
             }
         };
-        lstDecks.setItemActivateCommand(cmdViewDeck);
+        lstDecks.setItemActivateHandler(cmdViewDeck);
         btnViewDeck.setCommand(cmdViewDeck);
     }
 

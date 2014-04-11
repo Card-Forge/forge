@@ -30,7 +30,7 @@ import java.util.Set;
  */
 public final class DeckManager extends ItemManager<DeckProxy> {
     private final GameType gametype;
-    private FEventHandler cmdDelete, cmdSelect;
+    private FEventHandler cmdDelete;
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -42,7 +42,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         super(DeckProxy.class, true);
         this.gametype = gt;
 
-        this.setItemActivateCommand(new FEventHandler() {
+        this.setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 editDeck(getSelectedItem());
@@ -64,10 +64,6 @@ public final class DeckManager extends ItemManager<DeckProxy> {
 
     public void setDeleteCommand(final FEventHandler c0) {
         this.cmdDelete = c0;
-    }
-
-    public void setSelectCommand(final FEventHandler c0) {
-        this.cmdSelect = c0;
     }
 
     @Override
