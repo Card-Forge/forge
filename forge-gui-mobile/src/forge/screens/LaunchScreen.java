@@ -23,7 +23,7 @@ public abstract class LaunchScreen extends FScreen {
     protected final void doLayout(float startY, float width, float height) {
         float imageWidth = FSkinImage.BTN_START_UP.getWidth();
         float imageHeight = FSkinImage.BTN_START_UP.getHeight();
-        float padding = imageHeight * 0.1f;
+        float padding = imageHeight * 0.025f;
 
         btnStart.setBounds((width - imageWidth) / 2, height - imageHeight - padding, imageWidth, imageHeight);
 
