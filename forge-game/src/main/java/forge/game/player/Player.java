@@ -1298,7 +1298,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 boolean reveal = false;
                 final List<Card> cards = this.getCardsIn(ZoneType.Battlefield);
                 for (final Card card : cards) {
-                    if (card.hasKeyword("Reveal the first card you draw each turn")) {
+                    if (card.hasKeyword("Reveal the first card you draw each turn")
+                            || (card.hasKeyword("Reveal the first card you draw on each of your turns") && game.getPhaseHandler().isPlayerTurn(this))) {
                         reveal = true;
                         break;
                     }
