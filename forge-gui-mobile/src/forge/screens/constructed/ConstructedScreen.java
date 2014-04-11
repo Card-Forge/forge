@@ -139,6 +139,7 @@ public class ConstructedScreen extends LaunchScreen {
         cmbVariants.addItem(GameType.Planechase);
         cmbVariants.addItem(GameType.Archenemy);
         cmbVariants.addItem(GameType.ArchenemyRumble);
+        cmbVariants.addItem("Advanced....");
 
         /*lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
