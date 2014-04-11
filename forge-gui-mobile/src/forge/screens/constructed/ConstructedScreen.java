@@ -466,6 +466,8 @@ public class ConstructedScreen extends LaunchScreen {
             deckBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    deckChooser.setHeaderCaption("Select Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(deckChooser);
                 }
             });
 

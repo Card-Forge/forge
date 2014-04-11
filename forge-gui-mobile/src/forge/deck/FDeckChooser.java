@@ -1,5 +1,7 @@
 package forge.deck;
 
+import forge.Forge;
+import forge.Forge.Graphics;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -13,10 +15,10 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
+import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,12 +27,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FDeckChooser extends FScreen {
-    private FComboBox<DeckType> decksComboBox;
+    private static final float PADDING = 5;
+
+    private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;
 
     private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
-    private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text("View Deck").fontSize(14).build();
-    private final FLabel btnRandom = new FLabel.ButtonBuilder().fontSize(14).build();
+    private final FButton btnViewDeck = new FButton("View Deck");
+    private final FButton btnRandom = new FButton("Random Deck");
 
     private boolean isAi;
 
@@ -40,16 +44,29 @@ public class FDeckChooser extends FScreen {
     public FDeckChooser(boolean isAi0) {
         super(true, "", false);
         isAi = isAi0;
-        FEventHandler cmdViewDeck = new FEventHandler() {
+        
+        lstDecks.setItemActivateHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                Forge.back();
+            }
+        });
+        btnViewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                     FDeckViewer.show(getDeck());
                 }
             }
-        };
-        lstDecks.setItemActivateHandler(cmdViewDeck);
-        btnViewDeck.setCommand(cmdViewDeck);
+        });
+        btnRandom.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
+                    FDeckViewer.show(getDeck());
+                }
+            }
+        });
     }
 
     public void initialize() {
@@ -62,24 +79,47 @@ public class FDeckChooser extends FScreen {
         stateSetting = savedStateSetting;
         selectedDeckType = defaultDeckType;
 
-        if (decksComboBox == null) { //initialize components with delayed initialization the first time this is populated
-            decksComboBox = new FComboBox<DeckType>(DeckType.values());
+        if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
+            cmbDeckTypes = new FComboBox<DeckType>(DeckType.values());
             restoreSavedState();
-            decksComboBox.setChangedHandler(new FEventHandler() {
+            cmbDeckTypes.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    refreshDecksList(decksComboBox.getSelectedItem(), false, e);
+                    refreshDecksList(cmbDeckTypes.getSelectedItem(), false, e);
                 }
             });
+            add(cmbDeckTypes);
+            add(lstDecks);
+            add(btnViewDeck);
+            add(btnRandom);
         }
         else {
-            clear();
             restoreSavedState(); //ensure decks refreshed and state restored in case any deleted or added since last loaded
         }
-        add(decksComboBox);
-        add(lstDecks);
-        add(btnViewDeck);
-        add(btnRandom);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+    }
+
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        float x = PADDING;
+        float y = startY + PADDING;
+        width -= 2 * x;
+        
+        float fieldHeight = cmbDeckTypes.getHeight();
+
+        cmbDeckTypes.setBounds(x, y, width, fieldHeight);
+        y += cmbDeckTypes.getHeight() + PADDING;
+        lstDecks.setBounds(x, y, width, height - y - fieldHeight - 2 * PADDING); //leave room for buttons at bottom
+
+        y = height - fieldHeight - PADDING;
+        float buttonWidth = (width - PADDING) / 2;
+        btnViewDeck.setBounds(x, y, buttonWidth, fieldHeight);
+        x += buttonWidth + PADDING;
+        btnRandom.setBounds(x, y, buttonWidth, fieldHeight);
     }
 
     public DeckType getSelectedDeckType() { return selectedDeckType; }
@@ -262,7 +302,7 @@ public class FDeckChooser extends FScreen {
         selectedDeckType = deckType;
 
         if (e == null) {
-            decksComboBox.setSelectedItem(deckType);
+            cmbDeckTypes.setSelectedItem(deckType);
         }
         if (deckType == null) { return; }
 
@@ -298,7 +338,7 @@ public class FDeckChooser extends FScreen {
     }
 
     private String getState() {
-        String deckType = decksComboBox.getSelectedItem().name();
+        String deckType = cmbDeckTypes.getSelectedItem().name();
         StringBuilder state = new StringBuilder(deckType);
         state.append(";");
         joinSelectedDecks(state, SELECTED_DECK_DELIMITER);
@@ -323,7 +363,7 @@ public class FDeckChooser extends FScreen {
 
     /** Returns a clean name from the state that can be used for labels. */
     public final String getStateForLabel() {
-        String deckType = decksComboBox.getSelectedItem().toString();
+        String deckType = cmbDeckTypes.getSelectedItem().toString();
         StringBuilder state = new StringBuilder(deckType);
         state.append(": ");
         joinSelectedDecks(state, ", ");
@@ -373,12 +413,6 @@ public class FDeckChooser extends FScreen {
     }
 
     public FComboBox<DeckType> getDecksComboBox() {
-        return decksComboBox;
-    }
-
-    @Override
-    protected void doLayout(float startY, float width, float height) {
-        // TODO Auto-generated method stub
-        
+        return cmbDeckTypes;
     }
 }

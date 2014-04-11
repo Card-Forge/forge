@@ -56,6 +56,15 @@ public abstract class FScreen extends FContainer {
         }
     }
 
+    public String getHeaderCaption() {
+        if (lblHeader == null) { return ""; }
+        return lblHeader.getText();
+    }
+    public void setHeaderCaption(String headerCaption) {
+        if (lblHeader == null) { return; }
+        lblHeader.setText(headerCaption);
+    }
+
     public void onActivate() {
     }
 
