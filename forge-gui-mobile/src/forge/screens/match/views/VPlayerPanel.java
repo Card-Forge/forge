@@ -200,6 +200,12 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
+        public boolean tap(float x, float y, int count) {
+            FControl.getInputProxy().selectPlayer(player, null); //treat tapping on life the same as tapping on the avatar
+            return true;
+        }
+
+        @Override
         public void draw(Graphics g) {
             g.drawText(life, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
         }
