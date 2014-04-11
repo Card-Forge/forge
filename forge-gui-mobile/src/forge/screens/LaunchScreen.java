@@ -1,7 +1,9 @@
 package forge.screens;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import forge.screens.FScreen;
 import forge.screens.match.FControl;
@@ -36,7 +38,7 @@ public abstract class LaunchScreen extends FScreen {
     protected class LaunchParams {
         public GameType gameType;
         public final List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-        public final List<GameType> appliedVariants = new ArrayList<GameType>();
+        public final Set<GameType> appliedVariants = new HashSet<GameType>();
     }
 
     private class StartButton extends FDisplayObject {

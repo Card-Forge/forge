@@ -220,11 +220,10 @@ public class ConstructedScreen extends LaunchScreen {
             }
         } // Is it even possible anymore? I think current implementation assigns decks automatically.
 
-        final List<GameType> variantTypes = new ArrayList<GameType>();
-        variantTypes.addAll(appliedVariants);
+        launchParams.appliedVariants.addAll(appliedVariants);
 
         boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-        if (checkLegality && !variantTypes.contains(GameType.Commander)) { //Commander deck replaces regular deck and is checked later
+        if (checkLegality && !appliedVariants.contains(GameType.Commander)) { //Commander deck replaces regular deck and is checked later
             for (int i = 0; i < getNumPlayers(); i++) {
                 String name = getPlayerName(i);
                 String errMsg = GameType.Constructed.getDecksFormat().getDeckConformanceProblem(getDeckChooser(i).getPlayer().getDeck());
@@ -236,7 +235,6 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         Lobby lobby = FServer.getLobby();
-        List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
         for (int i = 0; i < getNumPlayers(); i++) {
             PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
@@ -244,13 +242,13 @@ public class ConstructedScreen extends LaunchScreen {
                     getPlayerAvatar(i)) : lobby.getGuiPlayer();
             RegisteredPlayer rp = playerPanel.deckChooser.getPlayer();
 
-            if (variantTypes.isEmpty()) {
+            if (appliedVariants.isEmpty()) {
                 rp.setTeamNumber(getTeam(i));
-                players.add(rp.setPlayer(lobbyPlayer));
+                launchParams.players.add(rp.setPlayer(lobbyPlayer));
             }
             else {
                 Deck deck = null;
-                boolean isCommanderMatch = variantTypes.contains(GameType.Commander);
+                boolean isCommanderMatch = appliedVariants.contains(GameType.Commander);
                 if (isCommanderMatch) {
                     Object selected = playerPanel.commanderDeckList.getSelectedValue();
                     if (selected instanceof String) {
@@ -283,8 +281,8 @@ public class ConstructedScreen extends LaunchScreen {
                 PaperCard vanguardAvatar = null;
 
                 //Archenemy
-                if (variantTypes.contains(GameType.ArchenemyRumble)
-                        || (variantTypes.contains(GameType.Archenemy) && playerIsArchenemy)) {
+                if (appliedVariants.contains(GameType.ArchenemyRumble)
+                        || (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy)) {
                     Object selected = playerPanel.schemeDeckList.getSelectedValue();
                     CardPool schemePool = null;
                     if (selected instanceof String) {
@@ -319,7 +317,7 @@ public class ConstructedScreen extends LaunchScreen {
                 }
 
                 //Planechase
-                if (variantTypes.contains(GameType.Planechase)) {
+                if (appliedVariants.contains(GameType.Planechase)) {
                     Object selected = playerPanel.planarDeckList.getSelectedValue();
                     CardPool planePool = null;
                     if (selected instanceof String) {
@@ -353,7 +351,7 @@ public class ConstructedScreen extends LaunchScreen {
                 }
 
                 //Vanguard
-                if (variantTypes.contains(GameType.Vanguard)) {
+                if (appliedVariants.contains(GameType.Vanguard)) {
                     Object selected = playerPanel.vgdAvatarList.getSelectedValue();
                     if (selected instanceof String) {
                         String sel = (String) selected;
@@ -379,9 +377,9 @@ public class ConstructedScreen extends LaunchScreen {
                     }
                 }
 
-                rp = RegisteredPlayer.forVariants(variantTypes, deck, schemes, playerIsArchenemy, planes, vanguardAvatar);
+                rp = RegisteredPlayer.forVariants(appliedVariants, deck, schemes, playerIsArchenemy, planes, vanguardAvatar);
                 rp.setTeamNumber(getTeam(i));
-                players.add(rp.setPlayer(lobbyPlayer));
+                launchParams.players.add(rp.setPlayer(lobbyPlayer));
             }
             getDeckChooser(i).saveState();
         }

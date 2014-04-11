@@ -63,7 +63,7 @@ public class FDeckChooser extends FScreen {
         selectedDeckType = defaultDeckType;
 
         if (decksComboBox == null) { //initialize components with delayed initialization the first time this is populated
-            decksComboBox = new FComboBox<DeckType>();
+            decksComboBox = new FComboBox<DeckType>(DeckType.values());
             restoreSavedState();
             decksComboBox.setChangedHandler(new FEventHandler() {
                 @Override

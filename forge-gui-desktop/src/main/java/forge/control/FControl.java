@@ -72,6 +72,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -555,7 +556,7 @@ public enum FControl implements KeyEventDispatcher {
         startMatch(gameType, null, players);
     }
 
-    public void startMatch(GameType gameType, List<GameType> appliedVariants, List<RegisteredPlayer> players) {
+    public void startMatch(GameType gameType, Set<GameType> appliedVariants, List<RegisteredPlayer> players) {
         boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
         for(RegisteredPlayer rp : players) {
             rp.setRandomFoil(useRandomFoil);

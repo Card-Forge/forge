@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 //import forge.gui.home.variant.VSubmenuVanguard;
@@ -154,9 +155,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-            	final List<GameType> variantTypes = new ArrayList<GameType>(4);
-            	variantTypes.addAll(view.getAppliedVariants());
-                startGame(variantTypes);
+                startGame(view.getAppliedVariants());
             }
         });
 
@@ -184,7 +183,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     }
 
     /** Starts a match with the applied variants. */
-    private void startGame(final List<GameType> variantTypes) {
+    private void startGame(final Set<GameType> variantTypes) {
     	if (!view.isEnoughTeams()) {
     	    FOptionPane.showMessageDialog("There are not enough teams! Please adjust team allocations.");
     	    return;

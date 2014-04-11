@@ -1,7 +1,7 @@
 package forge.game;
 
 import java.util.EnumSet;
-import java.util.List;
+import java.util.Set;
 
 public class GameRules {
     private GameType gameType;
@@ -66,7 +66,7 @@ public class GameRules {
         return gamesToWinMatch;
     }
 
-    public void setAppliedVariants(List<GameType> appliedVariants) {
+    public void setAppliedVariants(Set<GameType> appliedVariants) {
         this.appliedVariants.addAll(appliedVariants);
     }
 

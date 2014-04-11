@@ -86,7 +86,7 @@ public class FControl {
     public static void startMatch(GameType gameType, List<RegisteredPlayer> players) {
         startMatch(gameType, null, players);
     }
-    public static void startMatch(GameType gameType, List<GameType> appliedVariants, List<RegisteredPlayer> players) {
+    public static void startMatch(GameType gameType, Set<GameType> appliedVariants, List<RegisteredPlayer> players) {
         boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
         for (RegisteredPlayer rp : players) {
             rp.setRandomFoil(useRandomFoil);

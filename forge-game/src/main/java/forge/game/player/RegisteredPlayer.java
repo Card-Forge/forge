@@ -9,6 +9,7 @@ import forge.item.PaperCard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 
 public class RegisteredPlayer {
@@ -115,7 +116,7 @@ public class RegisteredPlayer {
     }
 
     public static RegisteredPlayer forVariants(
-    		final List<GameType> appliedVariants, final Deck deck,	              //General vars
+    		final Set<GameType> appliedVariants, final Deck deck,	              //General vars
     		final Iterable<PaperCard> schemes, final boolean playerIsArchenemy,   //Archenemy specific vars
     		final Iterable<PaperCard> planes, final PaperCard vanguardAvatar) {   //Planechase and Vanguard
         
