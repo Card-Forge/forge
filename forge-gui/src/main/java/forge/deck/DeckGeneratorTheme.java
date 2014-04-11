@@ -98,7 +98,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
         String s = "";
 
         // read theme file
-        final String tFileName = ForgeConstants.THEMES_DIR + themeName + ".thm";
+        final String tFileName = ForgeConstants.THEMES_DIR + "/" + themeName + ".thm";
         List<String> lines = FileUtil.readFile(tFileName);
 
         final List<Grp> groups = readGroups(lines);
