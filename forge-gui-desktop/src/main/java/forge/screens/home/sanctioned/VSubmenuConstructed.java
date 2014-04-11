@@ -328,7 +328,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
         vgdDeckPanel.add(new FLabel.Builder().text("Select a Vanguard avatar:").build(), labelConstraints);
         vgdDeckPanel.add(scrAvatars, "grow, push");
-        vgdDeckPanel.add(vgdDetail, "growx, pushx, hidemode 3");
+        vgdDeckPanel.add(vgdDetail, "h 200px, pushx, growx, hidemode 3");
         vgdAvatarLists.add(vgdAvatarList);
         vgdPanels.add(vgdDeckPanel);
     }
