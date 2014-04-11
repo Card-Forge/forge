@@ -25,12 +25,35 @@ Quarum Trench Gnomes
 Game of Chaos
 
 
---------------------
-New JOU branch Cards
---------------------
+---------------------------------
+New Journey into Nyx branch Cards
+---------------------------------
 
 Ravenous Leucrocota
 Cyclops of Eternal Fury
+Hall of Triumph
+Iroas, God of Victory
+Sigiled Starfish
+Dawnbringer Charioteers and Scourge of Fleets
+Ajani's Presence
+Gnarled Scarhide
+Dakra Mystic
+Dictate of Kruphix
+Godsend
+Sage of Hours
+Kruphix, God of Horizons
+Temple of Epiphany
+Temple of Malady
+Eidolon of the Great Revel
+Mogis's Warhound
+Dictate of the Twin Gods
+Eidolon of Blossoms
+Satyr Hoplite
+Keranos, God of Storms
+Interpret the Signs
+Extinguish All Hope
+Dictate of Karametra
+Mana Confluence
 
 
 ------------
