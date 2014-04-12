@@ -31,13 +31,11 @@ import forge.itemmanager.views.ItemView;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
-import forge.toolbox.FCheckBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
-import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
@@ -61,10 +59,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private final Class<T> genericType;
     private ItemManagerConfig config;
-
-    private final FCheckBox chkEnableFilters = new FCheckBox();
-
-    private final FTextField txtFilterLogic = new FTextField();
 
     private final ItemFilter<? extends T> mainSearchFilter;
 
@@ -132,28 +126,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             views.get(i).initialize(i);
         }
 
-        //build enable filters checkbox
-        chkEnableFilters.setText("(*)");
-        chkEnableFilters.setSelected(true);
-        chkEnableFilters.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lockFiltering = true;
-                boolean enabled = chkEnableFilters.isSelected();
-                for (ItemFilter<? extends T> filter : orderedFilters) {
-                    filter.setEnabled(enabled);
-                }
-                txtFilterLogic.setEnabled(enabled);
-                mainSearchFilter.setEnabled(enabled);
-                mainSearchFilter.updateEnabled(); //need to call updateEnabled since no listener for filter checkbox
-                lockFiltering = false;
-                applyFilters();
-            }
-        });
-
         //build display
-        add(chkEnableFilters);
-        add(txtFilterLogic);
         add(mainSearchFilter.getWidget());
         add(btnFilters);
         add(lblCaption);
@@ -215,7 +188,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                             addItem(new FMenuItem("Show Filters", cmdHideFilters));
                         }
                         else {
-                            addMenu.setEnabled(mainSearchFilter.isEnabled());
                             addItem(addMenu);
                             addItem(new FMenuItem("Reset Filters", cmdResetFilters));
                             addItem(new FMenuItem("Hide Filters", cmdHideFilters));
@@ -303,26 +275,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     @Override
     public void doLayout(float width, float height) {
-        LayoutHelper helper = new LayoutHelper(this);
-        float fieldHeight = txtFilterLogic.getHeight();
+        LayoutHelper helper = new LayoutHelper(this, 3, 0);
+        float fieldHeight = ItemFilter.PANEL_HEIGHT;
         if (!hideFilters) {
-            int number = 0;
-            StringBuilder logicBuilder = new StringBuilder();
             for (ItemFilter<? extends T> filter : orderedFilters) {
-                filter.setNumber(++number);
-                logicBuilder.append(number + "&");
                 helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
+                helper.newLine();
             }
-            txtFilterLogic.setText(logicBuilder.toString());
-            helper.newLine();
-            helper.include(chkEnableFilters, 41, fieldHeight);
-            helper.offset(-1, 0); //ensure widgets line up
-            helper.include(txtFilterLogic, txtFilterLogic.getAutoSizeWidth(), fieldHeight);
             helper.fillLine(mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
-            helper.newLine(-3);
         }
         helper.newLine();
-        helper.offset(1, 0); //align filters button with expand/collapse all button
         helper.include(btnFilters, 61, fieldHeight);
         float captionWidth = lblCaption.getAutoSizeBounds().width;
         float ratioWidth = lblRatio.getAutoSizeBounds().width;
@@ -811,7 +773,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
         for (ItemFilter<? extends T> filter : orderedFilters) { //TODO: Support custom filter logic
-            if (filter.isEnabled() && !filter.isEmpty()) {
+            if (!filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(genericType));
             }
         }
@@ -862,8 +824,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         for (ItemFilter<? extends T> filter : orderedFilters) {
             filter.getPanel().setVisible(visible);
         }
-        chkEnableFilters.setVisible(visible);
-        txtFilterLogic.setVisible(visible);
         mainSearchFilter.getWidget().setVisible(visible);
 
         if (initialized) {
@@ -890,18 +850,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void resetFilters() {
         lockFiltering = true; //prevent updating filtering from this change until all filters reset
         for (ItemFilter<? extends T> filter : orderedFilters) {
-            filter.setEnabled(true);
             filter.reset();
         }
         mainSearchFilter.reset();
         lockFiltering = false;
-
-        if (mainSearchFilter.isEnabled()) {
-            applyFilters();
-        }
-        else {
-            chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
-        }
+        applyFilters();
     }
 
     /**

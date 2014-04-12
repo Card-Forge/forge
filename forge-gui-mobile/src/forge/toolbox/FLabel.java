@@ -144,6 +144,10 @@ public class FLabel extends FDisplayObject implements IButton {
         command = command0;
     }
 
+    public float getAlphaComposite() {
+        return alphaComposite;
+    }
+
     public boolean isPressed() {
         return pressed;
     }
@@ -205,7 +209,7 @@ public class FLabel extends FDisplayObject implements IButton {
         float h = getHeight();
 
         g.startClip(0, 0, w, h); //start clip to ensure nothing escapes bounds
-        
+
         boolean applyAlphaComposite = (opaque && !pressed);
         if (applyAlphaComposite) {
             g.setAlphaComposite(alphaComposite);

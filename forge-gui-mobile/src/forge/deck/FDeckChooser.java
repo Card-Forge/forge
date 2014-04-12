@@ -112,10 +112,10 @@ public class FDeckChooser extends FScreen {
         float fieldHeight = cmbDeckTypes.getHeight();
 
         cmbDeckTypes.setBounds(x, y, width, fieldHeight);
-        y += cmbDeckTypes.getHeight() + PADDING;
-        lstDecks.setBounds(x, y, width, height - y - fieldHeight - 2 * PADDING); //leave room for buttons at bottom
+        y += cmbDeckTypes.getHeight() + 1;
+        lstDecks.setBounds(x, y, width, height - y - fieldHeight - PADDING); //leave room for buttons at bottom
 
-        y = height - fieldHeight - PADDING;
+        y += lstDecks.getHeight();
         float buttonWidth = (width - PADDING) / 2;
         btnViewDeck.setBounds(x, y, buttonWidth, fieldHeight);
         x += buttonWidth + PADDING;

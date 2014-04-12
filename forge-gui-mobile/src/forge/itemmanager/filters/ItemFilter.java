@@ -3,58 +3,34 @@ package forge.itemmanager.filters;
 import com.google.common.base.Predicate;
 
 import forge.Forge.Graphics;
-import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
-import forge.toolbox.FCheckBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
+import forge.toolbox.FTextField;
 import forge.util.LayoutHelper;
 
 
 public abstract class ItemFilter<T extends InventoryItem> {
-    public final static float PANEL_HEIGHT = 28;
-    private static final float REMOVE_BUTTON_SIZE = 17;
-    private final static float PADDING = 3;
+    private static final float PADDING = 3;
+    public static final int DEFAULT_FONT_SIZE = 11;
+    public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT_SIZE) + 2 * PADDING;
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
     protected final ItemManager<? super T> itemManager;
     private FilterPanel panel;
     private Widget widget;
-    private final FCheckBox chkEnable = new FCheckBox();
-    private RemoveButton btnRemove;
 
     protected ItemFilter(ItemManager<? super T> itemManager0) {
         itemManager = itemManager0;
-        chkEnable.setSelected(true); //enable by default
     }
 
     public FilterPanel getPanel() {
         if (panel == null) {
             panel = new FilterPanel();
-
-            chkEnable.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    updateEnabled();
-                    applyChange();
-                }
-            });
-            panel.add(chkEnable);
-
-            getWidget(); //initialize widget
-            if (!isEnabled()) {
-                updateEnabled();
-            }
-            panel.add(widget);
-
-            btnRemove = new RemoveButton();
-            panel.add(btnRemove);
+            panel.add(getWidget());
         }
         return panel;
     }
@@ -75,25 +51,6 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
     public FDisplayObject getMainComponent() {
         return getWidget();
-    }
-
-    public void setNumber(int number) {
-        chkEnable.setText("(" + number + ")");
-    }
-
-    public boolean isEnabled() {
-        return chkEnable.isSelected();
-    }
-
-    public void setEnabled(boolean enabled0) {
-        chkEnable.setSelected(enabled0);
-    }
-
-    public void updateEnabled() {
-        boolean enabled = isEnabled();
-        for (FDisplayObject child : widget.getChildren()) {
-            child.setEnabled(enabled);
-        }
     }
 
     protected void applyChange() {
@@ -143,15 +100,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
         @Override
         protected void doLayout(float width, float height) {
-            float x = PADDING;
-            float y = PADDING;
-            float w = width - 2 * PADDING;
-            float h = height - 2 * PADDING;
-            chkEnable.setBounds(x, y, 43, h);
-            x += chkEnable.getWidth();
-            widget.setBounds(x, y, w - REMOVE_BUTTON_SIZE - x, h);
-            x += widget.getWidth();
-            btnRemove.setBounds(x, y, REMOVE_BUTTON_SIZE, height);
+            widget.setBounds(0, PADDING, width, height - 2 * PADDING);
         }
 
         public void drawOverlay(Graphics g) {
@@ -168,52 +117,6 @@ public abstract class ItemFilter<T extends InventoryItem> {
         protected void doLayout(float width, float height) {
             LayoutHelper helper = new LayoutHelper(this);
             doWidgetLayout(helper);
-        }
-    }
-
-    private class RemoveButton extends FLabel {
-        private RemoveButton() {
-            super(new FLabel.Builder()
-                .command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        itemManager.removeFilter(ItemFilter.this);
-                    }
-                }));
-            setIcon(new RemoveIcon());
-        }
-
-        private class RemoveIcon implements FImage {
-            @Override
-            public float getWidth() {
-                return REMOVE_BUTTON_SIZE;
-            }
-
-            @Override
-            public float getHeight() {
-                return REMOVE_BUTTON_SIZE;
-            }
-
-            @Override
-            public void draw(forge.Forge.Graphics g, float x, float y, float w, float h) {
-                float thickness = 2;
-                float offset = 4;
-                float x1 = offset;
-                float y1 = offset;
-                float x2 = w - offset - 1;
-                float y2 = h - offset - 1;
-
-                if (!RemoveButton.this.isPressed()) {
-                    g.setAlphaComposite(0.6f);
-                }
-
-                g.drawLine(thickness, FORE_COLOR, x1, y1, x2, y2);
-                g.drawLine(thickness, FORE_COLOR, x2, y1, x1, y2);
-                
-                if (!RemoveButton.this.isPressed()) {
-                    g.resetAlphaComposite();
-                }
-            }
         }
     }
 }

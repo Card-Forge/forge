@@ -91,7 +91,7 @@ public final class LayoutHelper {
     public void include(final FDisplayObject obj, float width, float height) {
         if (width <= 0 || height <= 0) { return; }
 
-        if (x + width > parentWidth) {
+        if (x + width > parentWidth + 1) { //+1 to avoid wrapping from rounding error
             newLine();
             if (width > parentWidth) {
                 width = parentWidth;
