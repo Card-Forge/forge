@@ -985,8 +985,8 @@ public class ConstructedScreen extends LaunchScreen {
                 else if (vntArchenemyRumble.isSelected()) {
                     appliedVariants.add(GameType.ArchenemyRumble);
                 }
+                updateLayoutForVariants();
                 Forge.back();
-                playersScroll.revalidate();
             }
         }));
 
