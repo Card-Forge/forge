@@ -207,6 +207,26 @@ public class AiBlockController {
                     blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
+                    if (attacker.hasKeyword("Trample")) {
+                        boolean doNotBlock = false;
+                        for (Card other : attackersLeft) {
+                            if (other.equals(attacker) || !CombatUtil.canBlock(other, blocker) 
+                                    || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)) {
+                                continue;
+                            }
+                            int damageNext = other.getNetAttack();
+                            if (other.hasKeyword("Trample")) {
+                                damageNext -= blocker.getLethalDamage();
+                            }
+                            if (damageNext > blocker.getLethalDamage()) {
+                                doNotBlock = true;
+                                break;
+                            }
+                        }
+                        if (doNotBlock) {
+                            continue;
+                        }
+                    }
                     blockedButUnkilled.add(attacker);
                 }
             } // no safe blockers
