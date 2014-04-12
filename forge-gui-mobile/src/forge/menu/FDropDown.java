@@ -57,6 +57,7 @@ public abstract class FDropDown extends FScrollPane {
         return true;
     }
 
+    @Override
     public void setVisible(boolean visible0) {
         if (this.isVisible() == visible0) { return; }
 
@@ -144,12 +145,13 @@ public abstract class FDropDown extends FScrollPane {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            FDisplayObject owner = getDropDownOwner();
-            if (owner != null && owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
-                hide(); //auto-hide when owner tapped
-                return true; //prevent owner handling this tap
+            hide(); //always hide if tapped
+
+            //prevent owner handling this tap unless it's a sub menu
+            if (getDropDownOwner() instanceof FSubMenu) {
+                return false;
             }
-            return false;
+            return true; 
         }
 
         @Override
