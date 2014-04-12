@@ -147,9 +147,10 @@ public abstract class FDropDown extends FScrollPane {
         public boolean tap(float x, float y, int count) {
             hide(); //always hide if tapped
 
-            //prevent owner handling this tap unless it's a sub menu
-            if (getDropDownOwner() instanceof FSubMenu) {
-                return false;
+            //prevent owner handling this tap unless it's a sub menu and not over it
+            FDisplayObject owner = getDropDownOwner();
+            if (owner instanceof FSubMenu) {
+                return owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y));
             }
             return true; 
         }
