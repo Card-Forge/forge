@@ -45,7 +45,7 @@ public class FDeckChooser extends FScreen {
     public FDeckChooser(boolean isAi0) {
         super(true, "", false);
         isAi = isAi0;
-        
+
         lstDecks.setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -302,8 +302,6 @@ public class FDeckChooser extends FScreen {
             cmbDeckTypes.setSelectedItem(deckType);
         }
         if (deckType == null) { return; }
-
-        lstDecks.setCaption(deckType.toString());
 
         switch (deckType) {
         case CUSTOM_DECK:

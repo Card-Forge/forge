@@ -283,12 +283,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         float ratioWidth = lblRatio.getAutoSizeBounds().width;
         float viewButtonWidth = fieldHeight;
         float viewButtonCount = views.size() + 1;
-        float availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 2) * helper.getGapX();
+        float availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 1) * helper.getGapX();
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
             captionWidth = availableCaptionWidth;
         }
+        helper.offset(0, 1); //shift caption downward
         helper.include(lblCaption, captionWidth, fieldHeight);
+        helper.offset(-helper.getGapX(), 0);
         helper.fillLine(lblRatio, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
+        helper.offset(0, -1);
         for (ItemView<T> view : views) {
             helper.include(view.getButton(), viewButtonWidth, fieldHeight);
             helper.offset(-1, 0);

@@ -40,35 +40,37 @@ public final class DeckManager extends ItemManager<DeckProxy> {
      */
     public DeckManager(final GameType gt) {
         super(DeckProxy.class, true);
-        this.gametype = gt;
+        gametype = gt;
 
-        this.setItemActivateHandler(new FEventHandler() {
+        setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 editDeck(getSelectedItem());
             }
         });
+
+        setCaption("Decks");
     }
 
     @Override
     public void setup(ItemManagerConfig config0) {
-        boolean wasStringOnly = (this.getConfig() == ItemManagerConfig.STRING_ONLY);
+        boolean wasStringOnly = (getConfig() == ItemManagerConfig.STRING_ONLY);
         boolean isStringOnly = (config0 == ItemManagerConfig.STRING_ONLY);
 
         super.setup(config0, null);
 
         if (isStringOnly != wasStringOnly) {
-            this.restoreDefaultFilters();
+            restoreDefaultFilters();
         }
     }
 
     public void setDeleteCommand(final FEventHandler c0) {
-        this.cmdDelete = c0;
+        cmdDelete = c0;
     }
 
     @Override
     protected void addDefaultFilters() {
-        if (this.getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
+        if (getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
 
         addFilter(new DeckColorFilter(this));
     }
@@ -164,7 +166,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
 
         /*FScreen screen = null;
 
-        switch (this.gametype) {
+        switch (gametype) {
             case Quest:
                 screen = FScreen.DECK_EDITOR_QUEST;
                 editorCtrl = new CEditorQuest(FModel.getQuest());
@@ -208,7 +210,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         }
 
         // consider using deck proxy's method to delete deck
-        switch(this.gametype) {
+        switch(gametype) {
             case Constructed:
             case Draft:
             case Sealed:
@@ -222,10 +224,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
         }
 
-        this.removeItem(deck, 1);
+        removeItem(deck, 1);
 
-        if (this.cmdDelete != null) {
-            this.cmdDelete.handleEvent(new FEvent(this, FEventType.DELETE));
+        if (cmdDelete != null) {
+            cmdDelete.handleEvent(new FEvent(this, FEventType.DELETE));
         }
         return true;
     }
