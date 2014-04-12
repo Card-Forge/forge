@@ -5,8 +5,6 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.google.common.base.Predicate;
-
 import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
@@ -135,7 +133,7 @@ public class ConstructedScreen extends LaunchScreen {
             public void handleEvent(FEvent e) {
                 if (cmbVariants.getSelectedIndex() <= 0) {
                     appliedVariants.clear();
-                    playersScroll.revalidate();
+                    updateLayoutForVariants();
                 }
                 else if (cmbVariants.getSelectedIndex() == cmbVariants.getItemCount() - 1) {
                     Forge.openScreen(new AdvancedVariants());
@@ -143,7 +141,7 @@ public class ConstructedScreen extends LaunchScreen {
                 else {
                     appliedVariants.clear();
                     appliedVariants.add((GameType)cmbVariants.getSelectedItem());
-                    playersScroll.revalidate();
+                    updateLayoutForVariants();
                 }
             }
         });
@@ -174,6 +172,13 @@ public class ConstructedScreen extends LaunchScreen {
         getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
 
         updatePlayersFromPrefs();
+    }
+
+    private void updateLayoutForVariants() {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            playerPanels.get(i).updateVariantControlsVisibility();
+        }
+        playersScroll.revalidate();
     }
 
     @Override
@@ -250,7 +255,7 @@ public class ConstructedScreen extends LaunchScreen {
                 Deck deck = null;
                 boolean isCommanderMatch = appliedVariants.contains(GameType.Commander);
                 if (isCommanderMatch) {
-                    Object selected = playerPanel.commanderDeckList.getSelectedValue();
+                    Object selected = playerPanel.lstCommanderDecks.getSelectedValue();
                     if (selected instanceof String) {
                         String sel = (String) selected;
                         IStorage<Deck> comDecks = FModel.getDecks().getCommander();
@@ -283,7 +288,7 @@ public class ConstructedScreen extends LaunchScreen {
                 //Archenemy
                 if (appliedVariants.contains(GameType.ArchenemyRumble)
                         || (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy)) {
-                    Object selected = playerPanel.schemeDeckList.getSelectedValue();
+                    Object selected = playerPanel.lstSchemeDecks.getSelectedValue();
                     CardPool schemePool = null;
                     if (selected instanceof String) {
                         String sel = (String) selected;
@@ -318,7 +323,7 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Planechase
                 if (appliedVariants.contains(GameType.Planechase)) {
-                    Object selected = playerPanel.planarDeckList.getSelectedValue();
+                    Object selected = playerPanel.lstPlanarDecks.getSelectedValue();
                     CardPool planePool = null;
                     if (selected instanceof String) {
                         String sel = (String) selected;
@@ -352,7 +357,7 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Vanguard
                 if (appliedVariants.contains(GameType.Vanguard)) {
-                    Object selected = playerPanel.vgdAvatarList.getSelectedValue();
+                    Object selected = playerPanel.lstVanguardAvatars.getSelectedValue();
                     if (selected instanceof String) {
                         String sel = (String) selected;
                         if (sel.contains("Use deck's default avatar") && deck.has(DeckSection.Avatar)) {
@@ -397,30 +402,18 @@ public class ConstructedScreen extends LaunchScreen {
         private final FTextField txtPlayerName = new FTextField("Player name");
         private final FToggleSwitch humanAiSwitch = new FToggleSwitch("Human", "AI");
 
+        private boolean playerIsArchenemy = false;
         private FComboBox<Object> teamComboBox = new FComboBox<Object>();
         private FComboBox<Object> aeTeamComboBox = new FComboBox<Object>();
 
-        private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
-        private final FLabel deckLabel = newLabel("Deck:");
-
-        private boolean playerIsArchenemy = false;
-        private final FLabel scmDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a scheme deck").build();
-        private final FLabel scmDeckEditor = new FLabel.ButtonBuilder().text("Scheme Deck Editor").build();
-        private final FLabel scmLabel = newLabel("Scheme deck:");
-
-        private final FLabel cmdDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a Commander deck").build();
-        private final FLabel cmdDeckEditor = new FLabel.ButtonBuilder().text("Commander Deck Editor").build();
-        private final FLabel cmdLabel = newLabel("Commander deck:");
-
-        private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
-        private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
-        private final FLabel pchLabel = newLabel("Planar deck:");
-
-        private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
-        private final FLabel vgdLabel = newLabel("Vanguard:");
+        private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Deck: (None)").build();
+        private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: (None)").build();
+        private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: (None)").build();
+        private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: (None)").build();
+        private final FLabel btnVanguardAvatar = new FLabel.ButtonBuilder().text("Vanguard Avatar: (None)").build();
 
         private final FDeckChooser deckChooser;
-        private final DeckList schemeDeckList, commanderDeckList, planarDeckList, vgdAvatarList;
+        private final DeckList lstSchemeDecks, lstCommanderDecks, lstPlanarDecks, lstVanguardAvatars;
 
         public PlayerPanel(final int index0) {
             super();
@@ -430,15 +423,15 @@ public class ConstructedScreen extends LaunchScreen {
             deckChooser.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    deckBtn.setText(deckChooser.getSelectedDeckType().toString() + ": " +
+                    btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ": " +
                             Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME));
                 }
             });
             deckChooser.initialize();
-            schemeDeckList = new DeckList();
-            commanderDeckList = new DeckList();
-            planarDeckList = new DeckList();
-            vgdAvatarList = new DeckList();
+            lstSchemeDecks = new DeckList();
+            lstCommanderDecks = new DeckList();
+            lstPlanarDecks = new DeckList();
+            lstVanguardAvatars = new DeckList();
 
             createAvatar();
             add(avatarLabel);
@@ -461,64 +454,79 @@ public class ConstructedScreen extends LaunchScreen {
             add(teamComboBox);
             add(aeTeamComboBox);
 
-            add(deckLabel);
-            add(deckBtn);
-            deckBtn.setCommand(new FEventHandler() {
+            add(btnDeck);
+            btnDeck.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     deckChooser.setHeaderCaption("Select Deck for " + txtPlayerName.getText());
                     Forge.openScreen(deckChooser);
                 }
             });
+            add(btnCommanderDeck);
+            btnCommanderDeck.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    deckChooser.setHeaderCaption("Select Commander Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(deckChooser);
+                }
+            });
+            add(btnSchemeDeck);
+            btnSchemeDeck.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    deckChooser.setHeaderCaption("Select Scheme Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(deckChooser);
+                }
+            });
+            add(btnPlanarDeck);
+            btnPlanarDeck.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    deckChooser.setHeaderCaption("Select Planar Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(deckChooser);
+                }
+            });
+            add(btnVanguardAvatar);
+            btnVanguardAvatar.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    deckChooser.setHeaderCaption("Select Vanguard Avatar for " + txtPlayerName.getText());
+                    Forge.openScreen(deckChooser);
+                }
+            });
 
-            add(cmdLabel);
-            add(cmdDeckSelectorBtn);
-            add(cmdDeckEditor);
-
-            add(scmLabel);
-            add(scmDeckSelectorBtn);
-            add(scmDeckEditor);
-
-            add(pchLabel);
-            add(pchDeckSelectorBtn);
-            add(pchDeckEditor);
-
-            add(vgdLabel);
-            add(vgdSelectorBtn);
-
-            addHandlersToVariantsControls();
             updateVariantControlsVisibility();
 
             final CardCollections decks = FModel.getDecks();
             
-            commanderDeckList.list.addItem("Generate");
+            lstCommanderDecks.list.addItem("Generate");
             if (decks.getCommander().size() > 0) {
-                commanderDeckList.list.addItem("Random");
+                lstCommanderDecks.list.addItem("Random");
                 for (Deck comDeck : decks.getCommander()) {
-                    commanderDeckList.list.addItem(comDeck);
+                    lstCommanderDecks.list.addItem(comDeck);
                 }
             }
-            commanderDeckList.setSelectedIndex(0);
+            lstCommanderDecks.setSelectedIndex(0);
 
-            schemeDeckList.list.addItem("Use deck's scheme section (random if unavailable)");
-            schemeDeckList.list.addItem("Generate");
+            lstSchemeDecks.list.addItem("Use deck's scheme section (random if unavailable)");
+            lstSchemeDecks.list.addItem("Generate");
             if (decks.getScheme().size() > 0) {
-                schemeDeckList.list.addItem("Random");
+                lstSchemeDecks.list.addItem("Random");
                 for (Deck schemeDeck : decks.getScheme()) {
-                    schemeDeckList.list.addItem(schemeDeck);
+                    lstSchemeDecks.list.addItem(schemeDeck);
                 }
             }
-            schemeDeckList.setSelectedIndex(0);
+            lstSchemeDecks.setSelectedIndex(0);
 
-            planarDeckList.list.addItem("Use deck's planes section (random if unavailable)");
-            planarDeckList.list.addItem("Generate");
+            lstPlanarDecks.list.addItem("Use deck's planes section (random if unavailable)");
+            lstPlanarDecks.list.addItem("Generate");
             if (decks.getPlane().size() > 0) {
-                planarDeckList.list.addItem("Random");
+                lstPlanarDecks.list.addItem("Random");
                 for (Deck planarDeck : decks.getPlane()) {
-                    planarDeckList.list.addItem(planarDeck);
+                    lstPlanarDecks.list.addItem(planarDeck);
                 }                
             }
-            planarDeckList.setSelectedIndex(0);
+            lstPlanarDecks.setSelectedIndex(0);
 
             updateVanguardList();
         }
@@ -529,6 +537,7 @@ public class ConstructedScreen extends LaunchScreen {
             float y = PADDING;
             float fieldHeight = txtPlayerName.getHeight();
             float avatarSize = 2 * fieldHeight + PADDING;
+            float dy = fieldHeight + PADDING;
 
             avatarLabel.setBounds(x, y, avatarSize, avatarSize);
             x += avatarSize + PADDING;
@@ -537,36 +546,52 @@ public class ConstructedScreen extends LaunchScreen {
             x += w + PADDING;
             nameRandomiser.setBounds(x, y, fieldHeight, fieldHeight);
 
-            y += fieldHeight + PADDING;
+            y += dy;
             humanAiSwitch.setSize(humanAiSwitch.getAutoSizeWidth(fieldHeight), fieldHeight);
             x = width - humanAiSwitch.getWidth() - PADDING;
             humanAiSwitch.setPosition(x, y);
             w = x - avatarSize - 3 * PADDING;
             x = avatarSize + 2 * PADDING;
-            teamComboBox.setBounds(x, y, w, fieldHeight);
-            aeTeamComboBox.setBounds(x, y, width, fieldHeight);
+            if (aeTeamComboBox.isVisible()) {
+                aeTeamComboBox.setBounds(x, y, w, fieldHeight);
+            }
+            else {
+                teamComboBox.setBounds(x, y, w, fieldHeight);
+            }
 
-            y += fieldHeight + PADDING;
+            y += dy;
             x = PADDING;
-            deckLabel.setBounds(x, y, avatarSize, fieldHeight);
-            x += avatarSize + PADDING;
-            w = width - x - PADDING;
-            deckBtn.setBounds(x, y, w, fieldHeight);
+            w = width - 2 * PADDING;
+            if (btnCommanderDeck.isVisible()) {
+                btnCommanderDeck.setBounds(x, y, w, fieldHeight);
+            }
+            else {
+                btnDeck.setBounds(x, y, w, fieldHeight);
+            }
+            y += dy;
+            if (btnSchemeDeck.isVisible()) {
+                btnSchemeDeck.setBounds(x, y, w, fieldHeight);
+                y += dy;
+            }
+            if (btnPlanarDeck.isVisible()) {
+                btnPlanarDeck.setBounds(x, y, w, fieldHeight);
+                y += dy;
+            }
+            if (btnVanguardAvatar.isVisible()) {
+                btnVanguardAvatar.setBounds(x, y, w, fieldHeight);
+            }
         }
 
         private float getPreferredHeight() {
             int rows = 3;
             if (!appliedVariants.isEmpty()) {
-                if (appliedVariants.contains(GameType.Archenemy)) {
+                if (btnSchemeDeck.isVisible()) {
                     rows++;
                 }
-                else if (appliedVariants.contains(GameType.ArchenemyRumble)) {
+                if (btnPlanarDeck.isVisible()) {
                     rows++;
                 }
-                if (appliedVariants.contains(GameType.Planechase)) {
-                    rows++;
-                }
-                if (appliedVariants.contains(GameType.Vanguard)) {
+                if (btnVanguardAvatar.isVisible()) {
                     rows++;
                 }
             }
@@ -634,29 +659,21 @@ public class ConstructedScreen extends LaunchScreen {
         };
 
         public void updateVariantControlsVisibility() {
-            // Commander deck replaces basic deck, so hide that
-            deckLabel.setVisible(!appliedVariants.contains(GameType.Commander));
-            deckBtn.setVisible(!appliedVariants.contains(GameType.Commander));
-            cmdDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Commander));
-            cmdDeckEditor.setVisible(appliedVariants.contains(GameType.Commander));
-            cmdLabel.setVisible(appliedVariants.contains(GameType.Commander));
+            boolean isCommanderApplied = appliedVariants.contains(GameType.Commander);
+            btnDeck.setVisible(!isCommanderApplied); // Commander deck replaces basic deck, so hide that
+            btnCommanderDeck.setVisible(isCommanderApplied);
 
+            boolean isArchenemyApplied = appliedVariants.contains(GameType.Archenemy);
             boolean archenemyVisiblity = appliedVariants.contains(GameType.ArchenemyRumble)
-                    || (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy);
-            scmDeckSelectorBtn.setVisible(archenemyVisiblity);
-            scmDeckEditor.setVisible(archenemyVisiblity);
-            scmLabel.setVisible(archenemyVisiblity);
+                    || (isArchenemyApplied && playerIsArchenemy);
+            btnSchemeDeck.setVisible(archenemyVisiblity);
 
-            teamComboBox.setVisible(!appliedVariants.contains(GameType.Archenemy));
-            aeTeamComboBox.setVisible(appliedVariants.contains(GameType.Archenemy));
-            aeTeamComboBox.setEnabled(!(appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy));
+            teamComboBox.setVisible(!isArchenemyApplied);
+            aeTeamComboBox.setVisible(isArchenemyApplied);
+            aeTeamComboBox.setEnabled(!(isArchenemyApplied && playerIsArchenemy));
 
-            pchDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Planechase));
-            pchDeckEditor.setVisible(appliedVariants.contains(GameType.Planechase));
-            pchLabel.setVisible(appliedVariants.contains(GameType.Planechase));
-
-            vgdSelectorBtn.setVisible(appliedVariants.contains(GameType.Vanguard));
-            vgdLabel.setVisible(appliedVariants.contains(GameType.Vanguard));
+            btnPlanarDeck.setVisible(appliedVariants.contains(GameType.Planechase));
+            btnVanguardAvatar.setVisible(appliedVariants.contains(GameType.Vanguard));
         }
 
         public boolean isPlayerAI() {
@@ -664,7 +681,7 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         public void setVanguardButtonText(String text) {
-            vgdSelectorBtn.setText(text);
+            btnVanguardAvatar.setText(text);
         }
 
         private void populateTeamsComboBoxes() {
@@ -713,76 +730,7 @@ public class ConstructedScreen extends LaunchScreen {
             else {
                 playerIsArchenemy = appliedVariants.contains(GameType.ArchenemyRumble);
             }
-            updateVariantControlsVisibility();
-        }
-
-        private void addHandlersToVariantsControls() {
-            // Archenemy buttons
-            scmDeckSelectorBtn.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            });
-
-            scmDeckEditor.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
-                        @Override
-                        public boolean apply(PaperCard arg0) {
-                            return arg0.getRules().getType().isScheme();
-                        }
-                    };
-
-                    /*Forge.setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                            new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));*/
-                }
-            });
-
-            // Commander buttons
-            cmdDeckSelectorBtn.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            });
-
-            cmdDeckEditor.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    //Forge.setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                }
-            });
-
-            // Planechase buttons
-            pchDeckSelectorBtn.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            });
-
-            pchDeckEditor.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    /*Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
-                        @Override
-                        public boolean apply(PaperCard arg0) {
-                            return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
-                        }
-                    };
-
-                    Forge.setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
-                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                            new CEditorVariant(FModel.getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));*/
-                }
-            });
-
-            // Vanguard buttons
-            vgdSelectorBtn.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            });
+            updateLayoutForVariants();
         }
 
         private FLabel createNameRandomizer() {
@@ -864,45 +812,16 @@ public class ConstructedScreen extends LaunchScreen {
             return txtPlayerName.getText();
         }
 
-        private void changeDeck(final GameType forGameType) {
-            switch (forGameType) {
-            case Constructed:
-                Forge.openScreen(deckChooser);
-                break;
-            case Archenemy:
-            case ArchenemyRumble:
-                if (playerIsArchenemy) {
-                    Forge.openScreen(schemeDeckList);
-                }
-                else {
-                    Forge.openScreen(deckChooser);
-                }
-                break;
-            case Commander:
-                Forge.openScreen(commanderDeckList);
-                break;
-            case Planechase:
-                Forge.openScreen(planarDeckList);
-                break;
-            case Vanguard:
-                updateVanguardList();
-                Forge.openScreen(vgdAvatarList);
-                break;
-            default:
-                break;
-            }
-        }
-
         /** update vanguard list. */
         public void updateVanguardList() {
-            Object lastSelection = vgdAvatarList.getSelectedValue();
-            vgdAvatarList.setSelectedIndex(-1);
-            vgdAvatarList.list.setListData(isPlayerAI() ? aiListData : humanListData);
+            Object lastSelection = lstVanguardAvatars.getSelectedValue();
+            lstVanguardAvatars.setSelectedIndex(-1);
+            lstVanguardAvatars.list.setListData(isPlayerAI() ? aiListData : humanListData);
             if (lastSelection != null) {
-                vgdAvatarList.setSelectedValue(lastSelection);
+                lstVanguardAvatars.setSelectedValue(lastSelection);
             }
-            if (vgdAvatarList.getSelectedIndex() == -1) {
-                vgdAvatarList.setSelectedIndex(0);
+            if (lstVanguardAvatars.getSelectedIndex() == -1) {
+                lstVanguardAvatars.setSelectedIndex(0);
             }
         }
 
