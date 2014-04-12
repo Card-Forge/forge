@@ -20,6 +20,8 @@ package forge.itemmanager;
 import com.google.common.base.Function;
 
 import forge.item.InventoryItem;
+import forge.itemmanager.ItemColumnConfig.SortState;
+
 import java.util.Map.Entry;
 
 
@@ -48,6 +50,50 @@ public class ItemColumn {
 
     public ItemColumnConfig getConfig() {
         return config;
+    }
+
+    public String getShortName() {
+        return config.getShortName();
+    }
+
+    public String getLongName() {
+        return config.getLongName();
+    }
+
+    public int getIndex() {
+        return config.getIndex();
+    }
+
+    public void setIndex(final int index0) {
+        config.setIndex(index0);
+    }
+
+    public int getSortPriority() {
+        return config.getSortPriority();
+    }
+
+    public void setSortPriority(final int sortPriority0) {
+        config.setSortPriority(sortPriority0);
+    }
+
+    public SortState getSortState() {
+        return config.getSortState();
+    }
+
+    public void setSortState(final SortState state0) {
+        config.setSortState(state0);
+    }
+
+    public SortState getDefaultSortState() {
+        return config.getDefaultSortState();
+    }
+
+    public boolean isVisible() {
+        return config.isVisible();
+    }
+
+    public void setVisible(boolean visible0) {
+        config.setVisible(visible0);
     }
 
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnSort() {

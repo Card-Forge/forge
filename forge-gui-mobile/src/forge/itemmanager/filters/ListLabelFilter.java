@@ -6,7 +6,6 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.menu.FTooltip;
 import forge.toolbox.FLabel;
-import forge.toolbox.FTextField;
 import forge.util.LayoutHelper;
 import forge.util.TextUtil;
 
