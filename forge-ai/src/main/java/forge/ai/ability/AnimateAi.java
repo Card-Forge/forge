@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 
 import forge.ai.AiAttackController;
+import forge.ai.AiBlockController;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -123,7 +124,10 @@ public class AnimateAi extends SpellAbilityAi {
                 if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                     Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
                     AnimateAi.becomeAnimated(animatedCopy, sa);
-                    if (!AiAttackController.shouldThisAttack(aiPlayer, animatedCopy)) {
+                    if (ph.isPlayerTurn(aiPlayer) && !AiAttackController.shouldThisAttack(aiPlayer, animatedCopy)) {
+                        return false;
+                    }
+                    if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !AiBlockController.shouldThisBlock(aiPlayer, animatedCopy)) {
                         return false;
                     }
                 }

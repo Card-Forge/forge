@@ -19,6 +19,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -631,8 +632,18 @@ public class AiBlockController {
 
     /** Assigns blockers for the provided combat instance (in favor of player passes to ctor) */
     public void assignBlockers(final Combat combat) {
+        assignBlockers(combat, null);
+    }
+    
+    public void assignBlockers(final Combat combat, Card evalBlocker) {
         
-        final List<Card> possibleBlockers = ai.getCreaturesInPlay();
+        List<Card> possibleBlockers = null;
+        if (evalBlocker == null) {
+            possibleBlockers = ai.getCreaturesInPlay();
+        } else {
+            possibleBlockers = new ArrayList<Card>();
+            possibleBlockers.add(evalBlocker);
+        }
 
         attackers = sortPotentialAttackers(combat);
 
@@ -810,5 +821,17 @@ public class AiBlockController {
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
 
         return first;
+    }
+    
+    public static boolean shouldThisBlock(final Player ai, Card blocker) {
+        AiBlockController aiBlk = new AiBlockController(ai);
+        Combat combat = ai.getGame().getCombat();
+        aiBlk.assignBlockers(combat, blocker);
+        if (combat.getAllBlockers().isEmpty()) {
+            return false;
+        } else {
+            combat.removeFromCombat(blocker);
+            return true;
+        }
     }
 }
