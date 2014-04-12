@@ -14,11 +14,11 @@ public enum GameType {
     Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet"),
     Quest           (DeckFormat.QuestDeck, true, true, false, "Quest"),
     Constructed     (DeckFormat.Constructed, false, true, true, "Constructed"),
-    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy"),
-    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble"),
-    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase"),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard"),
-    Commander       (DeckFormat.Commander, false, false, false, "Commander");
+    Commander       (DeckFormat.Commander, false, false, false, "Commander"),
+    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase"),
+    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy"),
+    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble");
 
     private final DeckFormat decksFormat;
     private final boolean bCardpoolLimited;

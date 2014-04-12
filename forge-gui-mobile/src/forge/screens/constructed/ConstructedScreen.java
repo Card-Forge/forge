@@ -187,7 +187,7 @@ public class ConstructedScreen extends LaunchScreen {
             String text = "";
             for (GameType variantType : appliedVariants) {
                 if (text.length() > 0) {
-                    text += "; ";
+                    text += ", ";
                 }
                 text += variantType.toString();
             }
