@@ -123,7 +123,7 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     protected final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
-        if (triggerEvent.getButton() == 3 && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
+        if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
                 && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
             // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);

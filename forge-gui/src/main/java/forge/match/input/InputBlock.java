@@ -99,7 +99,7 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
-        if (triggerEvent.getButton() == 3 && card.getController() == defender) {
+        if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, (Card)null));
         } else {
