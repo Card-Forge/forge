@@ -272,6 +272,12 @@ public class FLabel extends FDisplayObject implements IButton {
             }
             else {
                 //TODO: Calculate these for center/right alignment
+                if (alignment == HAlignment.CENTER) {
+                    float dx = (w - iconWidth - font.getFont().getMultiLineBounds(text).width - insets.x) / 2;
+                    if (dx > 0) {
+                        x += dx; 
+                    }
+                }
                 y += (h - iconHeight) / 2;
             }
 

@@ -1,7 +1,6 @@
 package forge.deck;
 
 import forge.Forge;
-import forge.Forge.Graphics;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -21,6 +20,8 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,6 +82,7 @@ public class FDeckChooser extends FScreen {
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
             cmbDeckTypes = new FComboBox<DeckType>(DeckType.values());
+            cmbDeckTypes.setAlignment(HAlignment.CENTER);
             restoreSavedState();
             cmbDeckTypes.setChangedHandler(new FEventHandler() {
                 @Override
@@ -96,11 +98,6 @@ public class FDeckChooser extends FScreen {
         else {
             restoreSavedState(); //ensure decks refreshed and state restored in case any deleted or added since last loaded
         }
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        super.draw(g);
     }
 
     @Override

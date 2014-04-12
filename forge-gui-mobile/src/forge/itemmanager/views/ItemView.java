@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 public abstract class ItemView<T extends InventoryItem> {
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
@@ -37,8 +39,8 @@ public abstract class ItemView<T extends InventoryItem> {
     protected ItemView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         itemManager = itemManager0;
         model = model0;
-        button = new FLabel.Builder().selectable(true)
-            .icon(getIcon()).iconScaleAuto(false).build();
+        button = new FLabel.Builder().selectable(true).align(HAlignment.CENTER)
+                .iconScaleFactor(0.9f).icon(getIcon()).build();
     }
 
     private class Scroller extends FScrollPane {

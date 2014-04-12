@@ -78,8 +78,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     private static final FSkinImage VIEW_OPTIONS_ICON = FSkinImage.SETTINGS;
     private final FLabel btnViewOptions = new FLabel.Builder()
-        .selectable(true)
-        .icon(VIEW_OPTIONS_ICON).iconScaleAuto(false)
+        .selectable(true).align(HAlignment.CENTER)
+        .icon(VIEW_OPTIONS_ICON).iconScaleFactor(0.9f)
         .build();
 
     private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
@@ -109,17 +109,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         views.add(listView);
         views.add(imageView);
         currentView = listView;
-    }
-
-    protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
-        return new ImageView<T>(this, model0);
-    }
-
-    /**
-     * Initialize item manager if needed
-     */
-    public void initialize() {
-        if (initialized) { return; } //avoid initializing more than once
 
         //initialize views
         for (int i = 0; i < views.size(); i++) {
@@ -127,7 +116,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
 
         //build display
-        add(mainSearchFilter.getWidget());
+        add(mainSearchFilter.getPanel());
         add(btnFilters);
         add(lblCaption);
         add(lblRatio);
@@ -218,6 +207,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
+    protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
+        return new ImageView<T>(this, model0);
+    }
+
     public ItemManagerConfig getConfig() {
         return config;
     }
@@ -275,16 +268,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     @Override
     public void doLayout(float width, float height) {
-        LayoutHelper helper = new LayoutHelper(this, 3, 0);
-        float fieldHeight = ItemFilter.PANEL_HEIGHT;
+        LayoutHelper helper = new LayoutHelper(this, ItemFilter.PADDING, 1);
         if (!hideFilters) {
             for (ItemFilter<? extends T> filter : orderedFilters) {
                 helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
                 helper.newLine();
             }
-            helper.fillLine(mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
+            helper.fillLine(mainSearchFilter.getPanel(), ItemFilter.PANEL_HEIGHT);
         }
-        helper.newLine();
+        helper.newLine(ItemFilter.PADDING);
+        float fieldHeight = mainSearchFilter.getWidget().getHeight();
         helper.include(btnFilters, 61, fieldHeight);
         float captionWidth = lblCaption.getAutoSizeBounds().width;
         float ratioWidth = lblRatio.getAutoSizeBounds().width;

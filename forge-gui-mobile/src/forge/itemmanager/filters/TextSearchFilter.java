@@ -56,6 +56,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     @Override
     protected void buildWidget(Widget widget) {
         txtSearch = new FTextField();
+        txtSearch.setFontSize(ItemFilter.DEFAULT_FONT_SIZE + 1);
         txtSearch.setGhostText("Search");
         widget.add(txtSearch);
 
@@ -69,7 +70,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
-        helper.fillLine(txtSearch, txtSearch.getHeight());
+        helper.fillLine(txtSearch, helper.getParentHeight());
     }
 
     @Override

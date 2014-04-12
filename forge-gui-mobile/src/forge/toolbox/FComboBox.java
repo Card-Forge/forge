@@ -3,6 +3,8 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge;
 import forge.Forge.Graphics;
 import forge.menu.FDropDownMenu;
@@ -141,6 +143,9 @@ public class FComboBox<E> extends FTextField {
 
     @Override
     protected float getRightPadding() {
+        if (getAlignment() == HAlignment.CENTER) {
+            return super.getRightPadding();
+        }
         return getDivotWidth() + 2 * PADDING;
     }
 
