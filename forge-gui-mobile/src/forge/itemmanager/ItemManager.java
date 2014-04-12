@@ -820,7 +820,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         for (ItemFilter<? extends T> filter : orderedFilters) {
             filter.getPanel().setVisible(visible);
         }
-        mainSearchFilter.getWidget().setVisible(visible);
+        mainSearchFilter.getPanel().setVisible(visible);
 
         if (initialized) {
             revalidate();
