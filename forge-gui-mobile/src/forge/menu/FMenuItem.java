@@ -17,11 +17,11 @@ import forge.util.Utils;
 
 public class FMenuItem extends FDisplayObject {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
-    private static final float GAP_X = HEIGHT * 0.1f;
+    protected static final float GAP_X = HEIGHT * 0.1f;
     private static final float ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20; //round down to nearest multiple of 20
 
     private static final FSkinFont FONT = FSkinFont.get(12);
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     private static final FSkinColor SEPARATOR_COLOR = FORE_COLOR.alphaColor(0.5f);
 
@@ -91,12 +91,16 @@ public class FMenuItem extends FDisplayObject {
         return false; //return false so parent can use event to hide menu
     }
 
+    protected boolean showPressedColor() {
+        return pressed;
+    }
+
     @Override
-    public final void draw(Graphics g) {
+    public void draw(Graphics g) {
         float w = getWidth();
         float h = HEIGHT;
 
-        if (pressed) {
+        if (showPressedColor()) {
             g.fillRect(PRESSED_COLOR, 0, 0, w, h);
         }
 

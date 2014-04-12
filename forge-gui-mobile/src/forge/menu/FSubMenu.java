@@ -1,5 +1,6 @@
 package forge.menu;
 
+import forge.Forge.Graphics;
 import forge.assets.FImage;
 
 public class FSubMenu extends FMenuItem {
@@ -20,6 +21,11 @@ public class FSubMenu extends FMenuItem {
     }
 
     @Override
+    protected boolean showPressedColor() {
+        return super.showPressedColor() || popupMenu.isVisible();
+    }
+
+    @Override
     public boolean tap(float x, float y, int count) {
         if (popupMenu.isVisible()) {
             popupMenu.hide();
@@ -28,5 +34,29 @@ public class FSubMenu extends FMenuItem {
             popupMenu.show(this, getWidth(), 0);
         }
         return true;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+
+        float divotWidth = getDivotWidth();
+        float divotHeight = divotWidth * 2f;
+        float x2 = getWidth() - GAP_X - 1;
+        float x1 = x2 - divotWidth;
+        float x3 = x1;
+        float y2 = getHeight() / 2;
+        float y1 = y2 - divotHeight / 2;
+        float y3 = y2 + divotHeight / 2;
+        g.fillTriangle(FORE_COLOR, x1, y1, x2, y2, x3, y3);
+    }
+
+    private float getDivotWidth() {
+        return getHeight() / 6;
+    }
+
+    @Override
+    public float getMinWidth() {
+        return super.getMinWidth() + getDivotWidth() + 2 * GAP_X;
     }
 }
