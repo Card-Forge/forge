@@ -121,7 +121,7 @@ public class ProtectAi extends SpellAbilityAi {
                     if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(c)) {
                         Card threat = game.getStack().peekAbility().getHostCard();
                         //check to see if threat has already been countered by resolved protect
-                        if (!c.hasProtectionFrom(threat) && (ProtectAi.toProtectFrom(threat, sa) != null)) {
+                        if (threat != null && !c.hasProtectionFrom(threat) && (ProtectAi.toProtectFrom(threat, sa) != null)) {
                             return true;
                         }
                     }
@@ -131,14 +131,16 @@ public class ProtectAi extends SpellAbilityAi {
                     //creature is blocking and would be destroyed itself
                     if (combat.isBlocking(c) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c, combat)) {
                         List<Card> threats = combat.getAttackersBlockedBy(c);
-                        return (true && (ProtectAi.toProtectFrom(threats.get(0), sa) != null));
+                        return threats != null && !threats.isEmpty() && ProtectAi.toProtectFrom(threats.get(0), sa) != null;
                     }
     
                     //creature is attacking and would be destroyed itself
                     if (combat.isAttacking(c) && combat.isBlocked(c) && ComputerUtilCombat.attackerWouldBeDestroyed(ai, c, combat)) {
                         List<Card> threats = combat.getBlockers(c);
-                        ComputerUtilCard.sortByEvaluateCreature(threats);
-                        return (true && (ProtectAi.toProtectFrom(threats.get(0), sa) != null));
+                        if (threats != null && !threats.isEmpty()) {
+                        	ComputerUtilCard.sortByEvaluateCreature(threats);
+                        	return ProtectAi.toProtectFrom(threats.get(0), sa) != null;
+                        }
                     }
                 }
                 
