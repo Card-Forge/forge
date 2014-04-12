@@ -20,14 +20,16 @@ package forge.itemmanager.views;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 
 /**
  * A quick converter to avoid -1 being displayed for unapplicable values.
  */
 public class IntegerRenderer extends ItemCellRenderer {
     @Override
-    public void draw(Graphics g, Object value, Vector2 loc, float itemWidth, float itemHeight) {
+    public void draw(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, Vector2 loc, float itemWidth, float itemHeight) {
         if ((int)value == -1) { value = "-"; }
-        super.draw(g, value, loc, itemWidth, itemHeight);
+        super.draw(g, value, font, foreColor, loc, itemWidth, itemHeight);
     }
 }

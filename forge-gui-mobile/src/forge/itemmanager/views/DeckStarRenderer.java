@@ -21,16 +21,19 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
+import forge.itemmanager.filters.ItemFilter;
 
 /**
  * Displays favorite icons
  */
 public class DeckStarRenderer extends ItemCellRenderer {
     @Override
-    public void draw(Graphics g, Object value, Vector2 loc, float itemWidth, float itemHeight) {
+    public void draw(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, Vector2 loc, float itemWidth, float itemHeight) {
         DeckProxy deck;
         if (value instanceof DeckProxy) {
             deck = (DeckProxy) value;
@@ -49,5 +52,7 @@ public class DeckStarRenderer extends ItemCellRenderer {
 
         float size = 15;
         g.drawImage(image, loc.x, loc.y, size, size);
+
+        loc.x += size + ItemFilter.PADDING;
     }
 }

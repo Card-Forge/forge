@@ -19,9 +19,12 @@ package forge.itemmanager.views;
 
 import forge.Forge.Graphics;
 import forge.assets.FImage;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardPreferences;
 import forge.item.IPaperCard;
+import forge.itemmanager.filters.ItemFilter;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -30,7 +33,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class StarRenderer extends ItemCellRenderer {
     @Override
-    public void draw(Graphics g, Object value, Vector2 loc, float itemWidth, float itemHeight) {
+    public void draw(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, Vector2 loc, float itemWidth, float itemHeight) {
         IPaperCard card;
         if (value instanceof IPaperCard) {
             card = (IPaperCard) value;
@@ -49,5 +52,7 @@ public class StarRenderer extends ItemCellRenderer {
 
         float size = 15;
         g.drawImage(image, loc.x, loc.y, size, size);
+
+        loc.x += size + ItemFilter.PADDING;
     }
 }

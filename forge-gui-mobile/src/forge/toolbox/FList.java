@@ -88,6 +88,7 @@ public class FList<E> extends FScrollPane {
         for (E item : items0) {
             addItem(item);
         }
+        revalidate();
     }
 
     public boolean isEmpty() {
@@ -102,17 +103,23 @@ public class FList<E> extends FScrollPane {
         return count;
     }
 
-    public E getItemAt(int index) {
+    public ListItem getItemAt(int index) {
         int count = 0;
         for (ListGroup group : groups) {
             for (ListItem item : group.items) {
                 if (index == count) {
-                    return item.value;
+                    return item;
                 }
                 count++;
             }
         }
         return null;
+    }
+
+    public E getItemValueAt(int index) {
+        ListItem item = getItemAt(index);
+        if (item == null) { return null; }
+        return item.value;
     }
 
     public int getIndexOf(E value) {
@@ -130,6 +137,13 @@ public class FList<E> extends FScrollPane {
 
     public void setListItemRenderer(ListItemRenderer<E> renderer0) {
         renderer = renderer0;
+    }
+
+    public int getFontSize() {
+        return font.getSize();
+    }
+    public void setFontSize(int fontSize0) {
+        font = FSkinFont.get(fontSize0);
     }
 
     @Override
@@ -215,7 +229,7 @@ public class FList<E> extends FScrollPane {
         }
     }
 
-    private class ListItem extends FDisplayObject {
+    protected class ListItem extends FDisplayObject {
         private final E value;
         private boolean pressed;
 
@@ -242,14 +256,28 @@ public class FList<E> extends FScrollPane {
             float w = getWidth();
             float h = renderer.getItemHeight();
 
-            if (pressed) {
-                g.fillRect(PRESSED_COLOR, 0, 0, w, h);
+            FSkinColor fillColor = getItemFillColor(this);
+            if (fillColor != null) {
+                g.fillRect(fillColor, 0, 0, w, h);
             }
 
-            renderer.drawValue(g, value, font, FORE_COLOR, w, h); //-1 to not account for border
+            renderer.drawValue(g, value, font, FORE_COLOR, w, h);
 
-            g.drawLine(1, LINE_COLOR, 0, h, w, h);
+            if (drawLineSeparators()) {
+                g.drawLine(1, LINE_COLOR, 0, h, w, h);
+            }
         }
+    }
+
+    protected FSkinColor getItemFillColor(ListItem item) {
+        if (item.pressed) {
+            return PRESSED_COLOR;
+        }
+        return null;
+    }
+
+    protected boolean drawLineSeparators() {
+        return true;
     }
 
     public static abstract class ListItemRenderer<V> {

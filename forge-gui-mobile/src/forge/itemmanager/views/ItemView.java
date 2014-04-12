@@ -29,7 +29,7 @@ public abstract class ItemView<T extends InventoryItem> {
 
     protected final ItemManager<T> itemManager;
     protected final ItemManagerModel<T> model;
-    private final FScrollPane scroller = new Scroller();;
+    private final FScrollPane scroller = new Scroller();
     private final FLabel button;
     private final OptionsPanel pnlOptions = new OptionsPanel();
 
@@ -52,12 +52,13 @@ public abstract class ItemView<T extends InventoryItem> {
                 heightBackup = visibleHeight;
                 scrollSelectionIntoView();
             }
+            getComponent().setSize(visibleWidth, visibleHeight);
             return new ScrollBounds(visibleWidth, visibleHeight);
         }
 
         @Override
         public void drawOverlay(Graphics g) {
-            g.drawLine(1, BORDER_COLOR, 0, 0, getWidth(), 0);
+            g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
     }
 
@@ -86,6 +87,7 @@ public abstract class ItemView<T extends InventoryItem> {
                 }
             }
         });
+        scroller.add(getComponent());
     }
 
     public FLabel getButton() {

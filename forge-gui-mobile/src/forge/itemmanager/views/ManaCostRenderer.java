@@ -19,6 +19,8 @@ package forge.itemmanager.views;
 
 import forge.Forge.Graphics;
 import forge.assets.CardFaceSymbols;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
@@ -30,15 +32,14 @@ import com.badlogic.gdx.math.Vector2;
  * Displays mana cost as symbols.
  */
 public class ManaCostRenderer extends ItemCellRenderer {
-    private static final float elemtWidth = 13;
-    private static final float elemtGap = 0;
-    private static final float padding0 = 2;
-    private static final float spaceBetweenSplitCosts = 3;
+    private static final float ICON_SIZE = 13;
+    private static final float PADDING = 2;
+    private static final float SPACE_BETWEEN_SPLIT_COSTS = 3;
     
     private ManaCost v1, v2;
 
     @Override
-    public void draw(Graphics g, Object value, Vector2 loc, float itemWidth, float itemHeight) {
+    public void draw(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, Vector2 loc, float itemWidth, float itemHeight) {
         v2 = null;
         if (value instanceof CardRules) {
             CardRules v = (CardRules) value;
@@ -52,38 +53,40 @@ public class ManaCostRenderer extends ItemCellRenderer {
             v1 = ManaCost.NO_COST;
         }
 
-        final float cellWidth = itemWidth;
+        final float cellWidth = itemWidth - loc.x;
 
         if (v2 == null) {
-            drawCost(g, v1, padding0, cellWidth);
+            drawCost(g, v1, loc.x + PADDING, loc.y, cellWidth);
         }
         else {
             float shards1 = v1.getGlyphCount();
             float shards2 = v2.getGlyphCount();
 
-            float perGlyph = (cellWidth - padding0 - spaceBetweenSplitCosts) / (shards1 + shards2);
-            perGlyph = Math.min(perGlyph, elemtWidth + elemtGap);
-            drawCost(g, v1, padding0, padding0 + perGlyph * shards1);
-            drawCost(g, v2, cellWidth - perGlyph * shards2 - padding0, cellWidth);
+            float perGlyph = (cellWidth - PADDING - SPACE_BETWEEN_SPLIT_COSTS) / (shards1 + shards2);
+            perGlyph = Math.min(perGlyph, ICON_SIZE);
+            drawCost(g, v1, loc.x + PADDING, loc.y, PADDING + perGlyph * shards1);
+            drawCost(g, v2, loc.x + cellWidth - perGlyph * shards2 - PADDING, loc.y, cellWidth);
         }
+        loc.x = 0;
+        loc.y += itemHeight / 2;
     }
 
-    private void drawCost(final Graphics g, ManaCost value, final float padding, final float cellWidth) {
-        float x = padding;
-        float y = padding0 + 1;
+    private void drawCost(final Graphics g, ManaCost value, float x, float y, final float cellWidth) {
+        x += PADDING;
+        y += PADDING + 1;
         final int genericManaCost = value.getGenericCost();
         final float xManaCosts = value.countX();
         final boolean hasGeneric = (genericManaCost > 0) || v1.isPureGeneric();
 
         final int cntGlyphs = value.getGlyphCount();
-        final float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1)
-                : elemtWidth + elemtGap;
-        final float dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
+        final float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - PADDING - ICON_SIZE) / (cntGlyphs - 1)
+                : ICON_SIZE;
+        final float dx = Math.min(ICON_SIZE, offsetIfNoSpace);
 
         // Display X Mana before any other type of mana
         if (xManaCosts > 0) {
             for (int i = 0; i < xManaCosts; i++) {
-                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y, elemtWidth);
+                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y, ICON_SIZE);
                 x += dx;
             }
         }
@@ -91,7 +94,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
         // Display colorless mana before colored mana
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
-            CardFaceSymbols.drawSymbol(sGeneric, g, x, y, elemtWidth);
+            CardFaceSymbols.drawSymbol(sGeneric, g, x, y, ICON_SIZE);
             x += dx;
         }
 
@@ -100,7 +103,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
                 // X costs already drawn up above
                 continue;
             }
-            CardFaceSymbols.drawSymbol(s.getImageKey(), g, x, y, elemtWidth);
+            CardFaceSymbols.drawSymbol(s.getImageKey(), g, x, y, ICON_SIZE);
             x += dx;
         }
     }

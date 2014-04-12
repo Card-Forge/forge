@@ -297,9 +297,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             helper.offset(-1, 0);
         }
         helper.include(btnViewOptions, viewButtonWidth, fieldHeight);
-        helper.newLine(-1);
+        helper.newLine(1);
         if (currentView.getPnlOptions().isVisible()) {
             helper.fillLine(currentView.getPnlOptions(), fieldHeight + 4);
+            helper.newLine(2);
         }
         helper.fill(currentView.getScroller());
     }

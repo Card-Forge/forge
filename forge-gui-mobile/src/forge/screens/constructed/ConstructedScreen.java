@@ -864,7 +864,7 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             public Object getSelectedValue() {
-                return list.getItemAt(selectedIndex);
+                return list.getItemValueAt(selectedIndex);
             }
 
             public void setSelectedValue(Object value) {

@@ -23,16 +23,13 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinColor.Colors;
 import forge.itemmanager.ColumnDef;
+import forge.itemmanager.filters.ItemFilter;
 
 /**
  * Base cell renderer class for item tables
  */
 public class ItemCellRenderer {
-    public static final FSkinFont FONT = FSkinFont.get(14);
-    public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-
     public static ItemCellRenderer getColumnDefRenderer(ColumnDef columnDef) {
         switch (columnDef) {
         case POWER:
@@ -54,8 +51,9 @@ public class ItemCellRenderer {
         }
     }
 
-    public void draw(Graphics g, Object value, Vector2 loc, float itemWidth, float itemHeight) {
+    public void draw(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, Vector2 loc, float itemWidth, float itemHeight) {
         String text = value.toString();
-        g.drawText(text, FONT, FORE_COLOR, loc.x, loc.y, itemWidth, itemHeight, false, HAlignment.LEFT, false);
+        g.drawText(text, font, foreColor, loc.x, loc.y, itemWidth, itemHeight, false, HAlignment.LEFT, false);
+        loc.x += font.getFont().getMultiLineBounds(text).width + ItemFilter.PADDING;
     }
 }

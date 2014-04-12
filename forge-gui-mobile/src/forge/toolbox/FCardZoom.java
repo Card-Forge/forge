@@ -152,7 +152,7 @@ public class FCardZoom extends FOverlay {
     }
 
     private void selectFirstOption() {
-        selectOption(optionList.getItemAt(0));
+        selectOption(optionList.getItemValueAt(0));
     }
 
     @SuppressWarnings("unchecked")

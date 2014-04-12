@@ -777,6 +777,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             selectedIndices.add(i);
         }
         updateSelection();
+        onSelectionChange();
     }
 
     @Override

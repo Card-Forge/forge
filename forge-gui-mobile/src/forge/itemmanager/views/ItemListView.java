@@ -17,6 +17,7 @@
  */
 package forge.itemmanager.views;
 
+import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -38,29 +39,30 @@ import forge.util.Utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.math.Vector2;
+
 import java.util.*;
 import java.util.Map.Entry;
 
 
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
-    static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor SEL_ACTIVE_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    private static final FSkinColor SEL_INACTIVE_COLOR = FSkinColor.get(Colors.CLR_INACTIVE);
-    private static final FSkinFont ROW_FONT = FSkinFont.get(12);
+    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
+    private static final FSkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
+    private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     private static final float ROW_HEIGHT = Utils.AVG_FINGER_HEIGHT + 12;
+    private static final float ROW_PADDING = 5;
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
     private boolean allowMultipleSelections;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
 
-    public ItemListModel getTableModel() {
+    public ItemListModel getListModel() {
         return listModel;
     }
 
     /**
-     * ItemTable Constructor.
+     * ItemListView Constructor.
      * 
      * @param itemManager0
      * @param model0
@@ -97,7 +99,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         if (config.getShowUniqueCardsOption()) {
             final FCheckBox chkBox = new FCheckBox("Unique Cards Only", itemManager.getWantUnique());
-            chkBox.setFontSize(ROW_FONT.getSize());
+            chkBox.setFontSize(list.getFontSize());
             chkBox.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -114,6 +116,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             getPnlOptions().add(chkBox);
         }
 
+        list.cells.clear();
+
         int modelIndex = 0;
         for (final ItemColumn col : cols) {
             final ItemCell cell = new ItemCell(col);
@@ -122,7 +126,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
                     col.getLongName() : col.getShortName(), col.isVisible());
-            chkBox.setFontSize(ROW_FONT.getSize());
+            chkBox.setFontSize(list.getFontSize());
             chkBox.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -208,11 +212,16 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void scrollSelectionIntoView() {
-        //list.scrollIntoView(list.getItemAt(getSelectedIndex()));
+        list.scrollIntoView(list.getItemAt(getSelectedIndex()));
     }
 
     @Override
     public void selectAll() {
+        selectedIndices.clear();
+        for (Integer i = 0; i < getCount(); i++) {
+            selectedIndices.add(i);
+        }
+        onSelectionChange();
     }
 
     @Override
@@ -247,12 +256,49 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onRefresh() {
+        list.setListData(model.getOrderedList());
     }
 
-    public final class ItemList extends FList<T> {
+    public final class ItemList extends FList<Entry<T, Integer>> {
         private List<ItemCell> cells = new ArrayList<ItemCell>();
 
         private ItemList() {
+            setListItemRenderer(new ListItemRenderer<Map.Entry<T,Integer>>() {
+                @Override
+                public float getItemHeight() {
+                    return ROW_HEIGHT;
+                }
+
+                @Override
+                public boolean tap(Entry<T, Integer> value, float x, float y, int count) {
+                    int index = list.getIndexOf(value);
+                    if (allowMultipleSelections) {
+                        if (selectedIndices.contains(index)) {
+                            selectedIndices.remove(index);
+                        }
+                        else {
+                            selectedIndices.add(index);
+                        }
+                        onSelectionChange();
+                    }
+                    else {
+                        setSelectedIndex(index);
+                    }
+                    if (count == 2) {
+                        itemManager.activateSelectedItems();
+                    }
+                    return true;
+                }
+
+                @Override
+                public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                    Vector2 loc = new Vector2(ROW_PADDING, ROW_PADDING);
+                    for (ItemCell cell : cells) {
+                        cell.getCellRenderer().draw(g, cell.getFnDisplay().apply(value), font, foreColor, loc, width, height);
+                    }
+                }
+            });
+            setFontSize(12);
         }
 
         public Iterable<ItemCell> getCells() {
@@ -261,6 +307,28 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         public int getCellCount() {
             return cells.size();
+        }
+
+        @Override
+        protected void drawBackground(Graphics g) {
+            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+        }
+
+        @Override
+        protected FSkinColor getItemFillColor(ListItem item) {
+            int index = Math.round(item.getTop() / ROW_HEIGHT); //more efficient indexing strategy
+            if (selectedIndices.contains(index)) {
+                return SEL_COLOR;
+            }
+            if (index % 2 == 1) {
+                return ALT_ROW_COLOR;
+            }
+            return null;
+        }
+
+        @Override
+        protected boolean drawLineSeparators() {
+            return false;
         }
     }
 
