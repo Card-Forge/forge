@@ -687,33 +687,53 @@ public class Forge implements ApplicationListener {
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
+            TextBounds bounds;
             int fontSize = skinFont.getSize();
             BitmapFont font = skinFont.getFont();
             if (wrap) {
-                TextBounds bounds = font.getWrappedBounds(text, w);
-                while ((bounds.width > w || bounds.height > h) && fontSize > FSkinFont.MIN_FONT_SIZE) {
-                    font = FSkinFont.get(--fontSize).getFont(); //shrink font to fit if possible
-                    bounds = font.getWrappedBounds(text, w);
+                bounds = font.getWrappedBounds(text, w);
+            }
+            else {
+                bounds = font.getMultiLineBounds(text);
+            }
+            
+            boolean needClip = false;
+
+            while (bounds.width > w || bounds.height > h) {
+                if (fontSize > FSkinFont.MIN_FONT_SIZE) { //shrink font to fit if possible
+                    font = FSkinFont.get(--fontSize).getFont();
+                    if (wrap) {
+                        bounds = font.getWrappedBounds(text, w);
+                    }
+                    else {
+                        bounds = font.getMultiLineBounds(text);
+                    }
                 }
-                float textHeight = bounds.height;
-                if (h > textHeight && centerVertically) {
-                    y += (h - textHeight) / 2;
+                else {
+                    needClip = true;
+                    break;
                 }
-                font.setColor(color);
+            }
+
+            if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
+                startClip(x, y, w, h);
+            }
+
+            float textHeight = bounds.height;
+            if (h > textHeight && centerVertically) {
+                y += (h - textHeight) / 2;
+            }
+            font.setColor(color);
+
+            if (wrap) {
                 font.drawWrapped(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
             }
             else {
-                TextBounds bounds = font.getMultiLineBounds(text);
-                while ((bounds.width > w || bounds.height > h) && fontSize > FSkinFont.MIN_FONT_SIZE) {
-                    font = FSkinFont.get(--fontSize).getFont(); //shrink font to fit if possible
-                    bounds = font.getMultiLineBounds(text);
-                }
-                float textHeight = bounds.height;
-                if (h > textHeight && centerVertically) {
-                    y += (h - textHeight) / 2;
-                }
-                font.setColor(color);
                 font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
+            }
+
+            if (needClip) {
+                endClip();
             }
 
             if (color.a < 1) {
