@@ -115,7 +115,7 @@ public class FDeckViewer extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        cardManager.setBounds(0, startY, width, height - BUTTON_HEIGHT - 2 * PADDING - startY);
+        cardManager.setBounds(PADDING, startY, width - 2 * PADDING, height - BUTTON_HEIGHT - 2 * PADDING - startY);
 
         float y = height - BUTTON_HEIGHT - PADDING;
         float buttonWidth = (width - 3 * PADDING) / 2;

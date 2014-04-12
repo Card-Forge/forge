@@ -1,5 +1,6 @@
 package forge.itemmanager.filters;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 
 import forge.item.InventoryItem;
@@ -47,6 +48,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         super.buildWidget(widget);
 
         cbSearchMode = new FComboBox<String>();
+        cbSearchMode.setFontSize(txtSearch.getFontSize());
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         cbSearchMode.setChangedHandler(new FEventHandler() {
@@ -68,7 +70,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     protected void doWidgetLayout(LayoutHelper helper) {
         final float comboBoxWidth = 61;
         final float buttonWidth = 51;
-        final float height = txtSearch.getHeight();
+        final float height = helper.getParentHeight();
 
         helper.fillLine(txtSearch, height, comboBoxWidth + buttonWidth * 3 + helper.getGapX() * 4); //leave space for combo box and buttons
         helper.include(cbSearchMode, comboBoxWidth, height);
@@ -78,7 +80,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     }
 
     private FLabel addButton(Widget widget, String text) {
-        FLabel button = new FLabel.Builder().text(text)
+        FLabel button = new FLabel.Builder().text(text).align(HAlignment.CENTER)
                 .selectable().selected().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {

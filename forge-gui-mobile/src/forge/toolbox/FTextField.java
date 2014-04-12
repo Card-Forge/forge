@@ -66,6 +66,9 @@ public class FTextField extends FDisplayObject {
         alignment = alignment0;
     }
 
+    public int getFontSize() {
+        return font.getSize();
+    }
     public void setFontSize(int fontSize0) {
         font = FSkinFont.get(fontSize0);
         setHeight(getDefaultHeight(font));
