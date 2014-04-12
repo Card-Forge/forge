@@ -16,9 +16,11 @@ public class FTooltip extends FDropDown {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final float PADDING = 5;
 
+    FDisplayObject owner;
     float x, y;
 
-    public void show(FDisplayObject owner, float x0, float y0) {
+    public void show(FDisplayObject owner0, float x0, float y0) {
+        owner = owner0;
         x = owner.localToScreenX(x0);
         y = owner.localToScreenY(y0);
         show();
@@ -50,6 +52,11 @@ public class FTooltip extends FDropDown {
     @Override
     protected boolean autoHide() {
         return true;
+    }
+
+    @Override
+    protected FDisplayObject getDropDownOwner() {
+        return owner;
     }
 
     @Override

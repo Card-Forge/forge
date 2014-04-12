@@ -137,9 +137,19 @@ public abstract class FDropDown extends FScrollPane {
         public boolean press(float x, float y) {
             FDisplayObject owner = getDropDownOwner();
             if (owner == null || !owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
-                hide(); //auto-hide when backdrop pressed unless over menu tab
+                hide(); //auto-hide when backdrop pressed unless over owner
             }
             return false; //allow press to pass through to object behind backdrop
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            FDisplayObject owner = getDropDownOwner();
+            if (owner != null && owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
+                hide(); //auto-hide when owner tapped
+                return true; //prevent owner handling this tap
+            }
+            return false;
         }
 
         @Override

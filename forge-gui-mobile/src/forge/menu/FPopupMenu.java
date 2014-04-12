@@ -5,12 +5,19 @@ import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 
 public abstract class FPopupMenu extends FDropDownMenu {
+    FDisplayObject owner;
     float x, y;
 
-    public void show(FDisplayObject owner, float x0, float y0) {
+    public void show(FDisplayObject owner0, float x0, float y0) {
+        owner = owner0;
         x = owner.localToScreenX(x0);
         y = owner.localToScreenY(y0);
         show();
+    }
+
+    @Override
+    protected FDisplayObject getDropDownOwner() {
+        return owner;
     }
 
     @Override
