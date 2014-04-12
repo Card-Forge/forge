@@ -20,9 +20,9 @@ import forge.toolbox.FList;
 import forge.util.Utils;
 
 public class SettingsScreen extends FScreen {
-    private static final float INSETS_FACTOR = 0.025f;
-    private static final FSkinFont DESC_FONT = FSkinFont.get(11);
-    private static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
+    public static final float INSETS_FACTOR = 0.025f;
+    public static final FSkinFont DESC_FONT = FSkinFont.get(11);
+    public static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
 
     private final FList<Setting> lstSettings = add(new FList<Setting>());
 

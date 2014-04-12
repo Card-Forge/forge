@@ -5,10 +5,12 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
@@ -31,8 +33,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
-import forge.toolbox.FButton;
-import forge.toolbox.FCheckBox;
+import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -127,7 +128,7 @@ public class ConstructedScreen extends LaunchScreen {
         cmbVariants.addItem(GameType.Planechase);
         cmbVariants.addItem(GameType.Archenemy);
         cmbVariants.addItem(GameType.ArchenemyRumble);
-        cmbVariants.addItem("Advanced....");
+        cmbVariants.addItem("More....");
         cmbVariants.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -136,7 +137,8 @@ public class ConstructedScreen extends LaunchScreen {
                     updateLayoutForVariants();
                 }
                 else if (cmbVariants.getSelectedIndex() == cmbVariants.getItemCount() - 1) {
-                    Forge.openScreen(new AdvancedVariants());
+                    Forge.openScreen(new MultiVariantSelect());
+                    updateVariantSelection();
                 }
                 else {
                     appliedVariants.clear();
@@ -172,6 +174,25 @@ public class ConstructedScreen extends LaunchScreen {
         getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
 
         updatePlayersFromPrefs();
+    }
+
+    private void updateVariantSelection() {
+        if (appliedVariants.isEmpty()) {
+            cmbVariants.setSelectedIndex(0);
+        }
+        else if (appliedVariants.size() == 1) {
+            cmbVariants.setSelectedItem(appliedVariants.iterator().next());
+        }
+        else {
+            String text = "";
+            for (GameType variantType : appliedVariants) {
+                if (text.length() > 0) {
+                    text += "; ";
+                }
+                text += variantType.toString();
+            }
+            cmbVariants.setText(text);
+        }
     }
 
     private void updateLayoutForVariants() {
@@ -959,83 +980,94 @@ public class ConstructedScreen extends LaunchScreen {
     /////////////////////////////////////////////
     //========== Various listeners in build order
     
-    private class AdvancedVariants extends FScreen {
-        private final FCheckBox vntVanguard = add(new FCheckBox("Vanguard"));
-        private final FCheckBox vntCommander = add(new FCheckBox("Commander"));
-        private final FCheckBox vntPlanechase = add(new FCheckBox("Planechase"));
-        private final FCheckBox vntArchenemy = add(new FCheckBox("Archenemy"));
-        private final FCheckBox vntArchenemyRumble = add(new FCheckBox("Archenemy Rumble"));
+    private class MultiVariantSelect extends FScreen {
+        private final FList<Variant> lstVariants = add(new FList<Variant>());
 
-        private FButton btnApply = add(new FButton("Apply Variants", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                appliedVariants.clear();
-                if (vntVanguard.isSelected()) {
-                    appliedVariants.add(GameType.Vanguard);
-                }
-                if (vntCommander.isSelected()) {
-                    appliedVariants.add(GameType.Commander);
-                }
-                if (vntPlanechase.isSelected()) {
-                    appliedVariants.add(GameType.Planechase);
-                }
-                if (vntArchenemy.isSelected()) {
-                    appliedVariants.add(GameType.Archenemy);
-                }
-                else if (vntArchenemyRumble.isSelected()) {
-                    appliedVariants.add(GameType.ArchenemyRumble);
-                }
-                updateLayoutForVariants();
-                Forge.back();
-            }
-        }));
+        private MultiVariantSelect() {
+            super(true, "Select Variants", false);
 
-        private AdvancedVariants() {
-            super(true, "Variants - Advanced", false);
-            vntVanguard.setSelected(appliedVariants.contains(GameType.Vanguard));
-            vntCommander.setSelected(appliedVariants.contains(GameType.Vanguard));
-            vntPlanechase.setSelected(appliedVariants.contains(GameType.Vanguard));
-            vntArchenemy.setSelected(appliedVariants.contains(GameType.Archenemy));
-            vntArchenemyRumble.setSelected(appliedVariants.contains(GameType.ArchenemyRumble));
-
-            //prevent selecting both archenemy types
-            vntArchenemy.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (vntArchenemy.isSelected()) {
-                        vntArchenemyRumble.setSelected(false);
-                    }
-                }
-            });
-            vntArchenemyRumble.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (vntArchenemyRumble.isSelected()) {
-                        vntArchenemy.setSelected(false);
-                    }
-                }
-            });
+            lstVariants.setListItemRenderer(new VariantRenderer());
+            lstVariants.addItem(new Variant(GameType.Vanguard, "Each player has a special \"Avatar\" card that affects the game."));
+            lstVariants.addItem(new Variant(GameType.Commander, "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."));
+            lstVariants.addItem(new Variant(GameType.Planechase, "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die."));
+            lstVariants.addItem(new Variant(GameType.Archenemy, "One player is the Archenemy and can play scheme cards."));
+            lstVariants.addItem(new Variant(GameType.ArchenemyRumble, "All players are Archenemies and can play scheme cards."));
         }
 
         @Override
         protected void doLayout(float startY, float width, float height) {
-            float x = PADDING;
-            float y = startY + PADDING;
-            width -= 2 * x;
+            lstVariants.setBounds(0, startY, width, height - startY);
+        }
 
-            float checkBoxHeight = vntVanguard.getAutoSizeBounds().height * 1.5f;
-            vntVanguard.setBounds(x, y, width, checkBoxHeight);
-            y += checkBoxHeight + PADDING;
-            vntCommander.setBounds(x, y, width, checkBoxHeight);
-            y += checkBoxHeight + PADDING;
-            vntPlanechase.setBounds(x, y, width, checkBoxHeight);
-            y += checkBoxHeight + PADDING;
-            vntArchenemy.setBounds(x, y, width, checkBoxHeight);
-            y += checkBoxHeight + PADDING;
-            vntArchenemyRumble.setBounds(x, y, width, checkBoxHeight);
+        private class Variant {
+            private final GameType gameType;
+            private final String description;
+            
+            private Variant(GameType gameType0, String description0) {
+                gameType = gameType0;
+                description = description0;
+            }
 
-            float buttonHeight = Utils.AVG_FINGER_HEIGHT;
-            btnApply.setBounds(x, height - buttonHeight - PADDING, width, buttonHeight);
+            private void draw(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+                x += w - h;
+                w = h;
+                g.drawRect(1, SettingsScreen.DESC_COLOR, x, y, w, h);
+                if (appliedVariants.contains(gameType)) {
+                    //draw check mark
+                    x += 3;
+                    y++;
+                    w -= 6;
+                    h -= 3;
+                    g.drawLine(2, color, x, y + h / 2, x + w / 2, y + h);
+                    g.drawLine(2, color, x + w / 2, y + h, x + w, y);
+                }
+            }
+
+            private void toggle() {
+                if (appliedVariants.contains(gameType)) {
+                    appliedVariants.remove(gameType);
+                }
+                else {
+                    appliedVariants.add(gameType);
+
+                    //only allow setting one of Archenemy or ArchenemyRumble
+                    if (gameType == GameType.Archenemy) {
+                        appliedVariants.remove(GameType.ArchenemyRumble);
+                    }
+                    else if (gameType == GameType.ArchenemyRumble) {
+                        appliedVariants.remove(GameType.Archenemy);
+                    }
+                }
+                updateVariantSelection();
+                updateLayoutForVariants();
+            }
+        }
+
+        private class VariantRenderer extends FList.ListItemRenderer<Variant> {
+            @Override
+            public float getItemHeight() {
+                return Utils.AVG_FINGER_HEIGHT + 12;
+            }
+
+            @Override
+            public boolean tap(Variant value, float x, float y, int count) {
+                value.toggle();
+                return true;
+            }
+
+            @Override
+            public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, float width, float height) {
+                String text = value.gameType.toString();
+                float x = width * SettingsScreen.INSETS_FACTOR;
+                float y = x;
+                float w = width - 2 * x;
+                float h = font.getFont().getMultiLineBounds(text).height + 5;
+
+                g.drawText(text, font, color, x, y, w, h, false, HAlignment.LEFT, false);
+                value.draw(g, font, color, x, y, w, h);
+                h += 5;
+                g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, height - h - y, true, HAlignment.LEFT, false);            
+            }
         }
     }
     

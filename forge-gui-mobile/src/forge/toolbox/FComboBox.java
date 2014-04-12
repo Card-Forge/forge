@@ -111,7 +111,7 @@ public class FComboBox<E> extends FTextField {
             }
         }
         selectedItem = null;
-        setText(text0);
+        super.setText(text0);
     }
 
     @Override
