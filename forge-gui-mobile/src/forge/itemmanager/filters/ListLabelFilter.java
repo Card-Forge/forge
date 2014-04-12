@@ -54,7 +54,7 @@ public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilte
 
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
-        helper.fillLine(label, FTextField.getDefaultHeight());
+        helper.fillLine(label, helper.getParentHeight());
     }
 
     private class ListLabel extends FLabel {
@@ -65,7 +65,7 @@ public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilte
         @Override
         public boolean tap(float x, float y, int count) {
             FTooltip tooltip = new FTooltip(getTooltip());
-            tooltip.show(this, x, y);
+            tooltip.show(this, x, getHeight());
             return true;
         }
     }

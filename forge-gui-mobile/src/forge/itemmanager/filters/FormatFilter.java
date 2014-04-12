@@ -40,9 +40,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
         }
 
         //use HTML tooltips so we can insert line breaks
-        int lastLen = 0;
-        int lineLen = 0;
-        StringBuilder tooltip = new StringBuilder("<html>Sets:");
+        StringBuilder tooltip = new StringBuilder("Sets:");
         if (sets.isEmpty()) {
             tooltip.append(" All");
         }
@@ -50,47 +48,28 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
             CardEdition.Collection editions = FModel.getMagicDb().getEditions();
 
             for (String code : sets) {
-                // don't let a single line get too long
-                if (50 < lineLen) {
-                    tooltip.append("<br>");
-                    lastLen += lineLen;
-                    lineLen = 0;
-                }
-
                 CardEdition edition = editions.get(code);
                 tooltip.append(" ").append(edition.getName()).append(" (").append(code).append("),");
-                lineLen = tooltip.length() - lastLen;
             }
 
             // chop off last comma
             tooltip.delete(tooltip.length() - 1, tooltip.length());
 
             if (this.allowReprints) {
-                tooltip.append("<br><br>Allowing identical cards from other sets");
+                tooltip.append("\n\nAllowing identical cards from other sets.");
             }
         }
 
         if (!bannedCards.isEmpty()) {
-            tooltip.append("<br><br>Banned:");
-            lastLen += lineLen;
-            lineLen = 0;
+            tooltip.append("\n\nBanned:");
 
             for (String cardName : bannedCards) {
-                // don't let a single line get too long
-                if (50 < lineLen) {
-                    tooltip.append("<br>");
-                    lastLen += lineLen;
-                    lineLen = 0;
-                }
-
                 tooltip.append(" ").append(cardName).append(";");
-                lineLen = tooltip.length() - lastLen;
             }
 
             // chop off last semicolon
             tooltip.delete(tooltip.length() - 1, tooltip.length());
         }
-        tooltip.append("</html>");
         return tooltip.toString();
     }
 

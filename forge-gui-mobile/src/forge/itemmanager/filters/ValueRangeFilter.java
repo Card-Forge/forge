@@ -83,7 +83,7 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
 
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
-        float height = lowerBound.getHeight();
+        float height = helper.getParentHeight();
         helper.include(lowerBound, 45, height);
         helper.include(label, 125, height);
         helper.include(upperBound, 45, height);
