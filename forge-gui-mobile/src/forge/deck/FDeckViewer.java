@@ -82,7 +82,7 @@ public class FDeckViewer extends FScreen {
     }
 
     private void updateCaption() {
-        cardManager.setCaption(deck.getName() + " - " + currentSection.name());
+        cardManager.setCaption(currentSection.name());
     }
 
     private void copyToClipboard() {
