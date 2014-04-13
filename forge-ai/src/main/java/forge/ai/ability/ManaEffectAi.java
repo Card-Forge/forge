@@ -14,6 +14,10 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (ai.getGame().getPhaseHandler().is(PhaseType.MAIN2) && ComputerUtil.activateForCost(sa, ai)) {
             return true;
         }
+        if (ComputerUtil.playImmediately(ai, sa) && sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource() 
+        		&& sa.getSubAbility() == null) {
+        	return true;
+        }
         return false;
     }
 
