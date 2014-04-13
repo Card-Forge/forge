@@ -4557,8 +4557,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         while (true) {
             try {
                 final ArrayList<String> keywords = new ArrayList<String>();
-                for (int i = 0; i < this.hiddenExtrinsicKeyword.size(); i++) {
-                    String keyword = this.hiddenExtrinsicKeyword.get(i);
+                for (String keyword : this.hiddenExtrinsicKeyword) {
+                    if (keyword == null) {
+                        continue;
+                    }
                     if (keyword.startsWith("HIDDEN")) {
                         keyword = keyword.substring(7);
                     }
