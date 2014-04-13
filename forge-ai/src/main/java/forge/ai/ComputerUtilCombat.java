@@ -1587,8 +1587,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (defender.hasKeyword("Double Strike")) {
-            if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (defenderDamage >= attackerLife) {
@@ -1601,8 +1600,7 @@ public class ComputerUtilCombat {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                        || defender.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1620,14 +1618,12 @@ public class ComputerUtilCombat {
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
-                if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                        || defender.hasSVar("DestroyWhenDamaged"))) {
+                if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasSVar("DestroyWhenDamaged"))) {
+            if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -1744,8 +1740,7 @@ public class ComputerUtilCombat {
                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (attacker.hasKeyword("Double Strike")) {
-            if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                    || defender.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
             if (attackerDamage >= defenderLife) {
@@ -1758,8 +1753,7 @@ public class ComputerUtilCombat {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
@@ -1771,19 +1765,17 @@ public class ComputerUtilCombat {
         else { // no double strike for attacker
                // Defender may kill the attacker before he can deal any damage
             if (dealsFirstStrikeDamage(defender, withoutAbilities) && !attacker.hasKeyword("Indestructible") 
-                    && !attacker.hasKeyword("First Strike")) {
+                    && !dealsFirstStrikeDamage(attacker, withoutAbilities)) {
 
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
-                        || attacker.hasSVar("DestroyWhenDamaged"))) {
+                if (defenderDamage > 0 && (canGainKeyword(defender, "Deathtouch") || attacker.hasSVar("DestroyWhenDamaged"))) {
                     return false;
                 }
             }
 
-            if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
-                    || defender.hasSVar("DestroyWhenDamaged"))) {
+            if (attackerDamage > 0 && (canGainKeyword(attacker, "Deathtouch") || defender.hasSVar("DestroyWhenDamaged"))) {
                 return true;
             }
 
@@ -2101,6 +2093,16 @@ public class ComputerUtilCombat {
         }
     
         return false;
+    }
+
+    public final static boolean canGainKeyword(final Card combatant, final String keyword) {
+        if (combatant.hasKeyword(keyword)) {
+            return true;
+        }
+
+    	List<String> keywords = new ArrayList<String>();
+    	keywords.add(keyword);
+        return canGainKeyword(combatant, keywords);
     }
 
     public final static boolean canGainKeyword(final Card combatant, final List<String> keywords) {
