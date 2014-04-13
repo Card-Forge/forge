@@ -468,7 +468,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             List<Card> blockedBy = combat.getAttackersBlockedBy(c);
             // For now, Only care the first creature blocked by a card.
             // TODO Add in better BlockAdditional support
-            if (!blockedBy.isEmpty() && attack > 0 && !ComputerUtilCombat.attackerWouldBeDestroyed(ai, blockedBy.get(0), combat)) {
+            if (!blockedBy.isEmpty() && attack > 0 && !ComputerUtilCombat.attackerWouldBeDestroyed(ai, blockedBy.get(0), combat)
+            		&& blockedBy.get(0).staticDamagePrevention(99, c, true, true) > 0) {
                 return true;
             }
         }
@@ -485,7 +486,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 && combat.isBlocked(c)
                 && combat.getBlockers(c) != null
                 && !combat.getBlockers(c).isEmpty()
-                && !ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0), combat)) {
+                && !ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0), combat)
+                && combat.getBlockers(c).get(0).staticDamagePrevention(99, c, true, true) > 0) {
             return true;
         }
 
