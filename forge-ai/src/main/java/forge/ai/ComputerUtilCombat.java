@@ -744,10 +744,10 @@ public class ComputerUtilCombat {
 
         // if the attacker has first strike and wither the blocker will deal
         // less damage than expected
-        if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities)
+        if (dealsFirstStrikeDamage(attacker, withoutAbilities)
                 && (attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))
-                && !(blocker.hasKeyword("First Strike") || blocker.hasKeyword("Double Strike") || blocker
-                        .hasKeyword("CARDNAME can't have counters placed on it."))) {
+                && !dealsFirstStrikeDamage(blocker, withoutAbilities)
+                && !blocker.hasKeyword("CARDNAME can't have counters placed on it.")) {
             power -= attacker.getNetCombatDamage();
         }
 
@@ -1065,8 +1065,8 @@ public class ComputerUtilCombat {
         if (null != blocker) {
             if (ComputerUtilCombat.dealsFirstStrikeDamage(blocker, withoutAbilities)
                     && (blocker.hasKeyword("Wither") || blocker.hasKeyword("Infect"))
-                    && !(attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike") || attacker
-                            .hasKeyword("CARDNAME can't have counters placed on it."))) {
+                    && !ComputerUtilCombat.dealsFirstStrikeDamage(attacker, withoutAbilities) 
+                    && !attacker.hasKeyword("CARDNAME can't have counters placed on it.")) {
                 power -= blocker.getNetCombatDamage();
             }
             theTriggers.addAll(blocker.getTriggers());
@@ -1614,7 +1614,8 @@ public class ComputerUtilCombat {
         else { // no double strike for defender
                // Attacker may kill the blocker before he can deal any damage
             if (dealsFirstStrikeDamage(attacker, withoutAbilities)
-                    && !defender.hasKeyword("Indestructible") && !defender.hasKeyword("First Strike")) {
+                    && !defender.hasKeyword("Indestructible") 
+                    && !dealsFirstStrikeDamage(defender, withoutAbilities)) {
 
                 if (attackerDamage >= defenderLife) {
                     return false;
@@ -2093,25 +2094,35 @@ public class ComputerUtilCombat {
         }
         
         if (!withoutAbilities) {
-            for (SpellAbility ability : combatant.getAllSpellAbilities()) {
-                if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
-                    continue;
-                }
-                if (ability.getApi() != ApiType.Pump) {
-                    continue;
-                }
+        	List<String> keywords = new ArrayList<String>();
+        	keywords.add("Double Strike");
+        	keywords.add("First Strike");
+            return canGainKeyword(combatant, keywords);
+        }
     
-                if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
-                    continue;
-                }
-    
-                if (!ability.hasParam("KW")) {
-                    continue;
-                }
-    
-                if (ability.getParam("KW").contains("First Strike") && ComputerUtilCost.canPayCost(ability, combatant.getController())) {
-                    return true;
-                }
+        return false;
+    }
+
+    public final static boolean canGainKeyword(final Card combatant, final List<String> keywords) {
+    	for (SpellAbility ability : combatant.getAllSpellAbilities()) {
+            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+                continue;
+            }
+            if (ability.getApi() != ApiType.Pump) {
+                continue;
+            }
+
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
+                continue;
+            }
+
+            if (!ability.hasParam("KW") || !ComputerUtilCost.canPayCost(ability, combatant.getController())) {
+                continue;
+            }
+            for (String keyword : keywords) {
+            	if (ability.getParam("KW").contains(keyword)) {
+            		return true;
+            	}
             }
         }
     
