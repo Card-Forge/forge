@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+import java.util.concurrent.CountDownLatch;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Gdx;
@@ -52,11 +52,23 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void invokeInEdtAndWait(final Runnable proc) {
         if (isGuiThread()) {
-            // Just run in the current thread.
             proc.run();
         }
         else {
-            //TODO
+            final CountDownLatch cdl = new CountDownLatch(1);
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    proc.run();
+                    cdl.countDown();
+                }
+            });
+            try {
+                cdl.await();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
