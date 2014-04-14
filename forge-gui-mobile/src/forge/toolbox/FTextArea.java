@@ -1,7 +1,6 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
@@ -47,10 +46,14 @@ public class FTextArea extends FScrollPane {
         revalidate();
     }
 
+    public float getPreferredHeight(float width) {
+        return font.getFont().getWrappedBounds(text, width - 2 * insets.x).height +
+                font.getFont().getLineHeight() - font.getFont().getCapHeight(); //account for height below baseline of final line
+    }
+
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        TextBounds bounds = font.getFont().getWrappedBounds(text, visibleWidth - 2 * insets.x);
-        return new ScrollBounds(visibleWidth, bounds.height + 2 * insets.y);
+        return new ScrollBounds(visibleWidth, getPreferredHeight(visibleWidth) + 2 * insets.y);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.math.Vector2;
+
 import forge.assets.FSkinImage;
-import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.*;
 import forge.util.Callback;
+import forge.util.Utils;
 
 public class FOptionPane extends FDialog {
     public static final FSkinImage QUESTION_ICON = FSkinImage.QUESTION;
@@ -123,7 +125,7 @@ public class FOptionPane extends FDialog {
         super(title);
 
         if (icon != null) {
-            lblIcon = add(new FLabel.Builder().icon(icon).build());
+            lblIcon = add(new FLabel.Builder().icon(icon).iconScaleAuto(false).insets(new Vector2(0, 0)).build());
         }
         else {
             lblIcon = null;
@@ -167,10 +169,10 @@ public class FOptionPane extends FDialog {
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float x = PADDING;
-        float y = 0;
-        float gapAboveButtons = PADDING * 3 / 2;
-        float gapBottom = displayObj == null ? gapAboveButtons: PADDING;
-        float buttonHeight = VPrompt.HEIGHT;
+        float y = PADDING;
+        float gapAboveButtons = PADDING * 1.5f;
+        float gapBottom = PADDING;
+        float buttonHeight = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
         float maxPromptHeight = maxHeight - gapAboveButtons - gapBottom - buttonHeight;
         if (displayObj != null) {
@@ -189,12 +191,12 @@ public class FOptionPane extends FDialog {
         }
         if (prompt != null) {
             float promptWidth = width - x - PADDING;
-            prompt.setBounds(x, y, promptWidth, promptHeight);
-            if (prompt.getScrollHeight() > promptHeight) { //increase prompt size if needed
-                promptHeight = prompt.getScrollHeight();
-                if (promptHeight > maxPromptHeight) {
-                    promptHeight = maxPromptHeight;
-                }
+            prompt.setBounds(x, y, promptWidth, prompt.getPreferredHeight(promptWidth));
+            if (prompt.getHeight() > maxPromptHeight) {
+                prompt.setHeight(maxPromptHeight);
+            }
+            if (prompt.getHeight() > promptHeight) {
+                promptHeight = prompt.getHeight();
             }
         }
         x = PADDING;
@@ -228,6 +230,6 @@ public class FOptionPane extends FDialog {
             x += dx;
         }
 
-        return y;
+        return y + buttonHeight + gapBottom / 2; //leave less gap below buttons
     }
 }
