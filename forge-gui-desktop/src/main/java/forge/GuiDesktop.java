@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JFileChooser;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.MenuElement;
@@ -387,5 +388,15 @@ public class GuiDesktop implements IGuiBase {
             int damageDealt, GameEntity defender, boolean overrideOrder) {
         return CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers,
                 damageDealt, defender, overrideOrder);
+    }
+
+    @Override
+    public String showFileDialog(String title, String defaultDir) {
+        final JFileChooser fc = new JFileChooser(defaultDir);
+        final int rc = fc.showDialog(null, title);
+        if (rc != JFileChooser.APPROVE_OPTION) {
+            return null;
+        }
+        return fc.getSelectedFile().getAbsolutePath();
     }
 }

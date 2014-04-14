@@ -2,10 +2,9 @@ package forge.toolbox;
 
 import forge.FThreads;
 import forge.game.card.Card;
-import org.apache.commons.lang3.StringUtils;
+import forge.util.Callback;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import org.apache.commons.lang3.StringUtils;
 
 /** 
  * Holds player interactions using standard windows 
@@ -14,36 +13,31 @@ import java.util.concurrent.FutureTask;
 public class GuiDialog {
     private static final String[] defaultConfirmOptions = { "Yes", "No" };
 
-    public static boolean confirm(final Card c, final String question) {
-        return GuiDialog.confirm(c, question, true, null);
+    public static void confirm(final Card c, final String question, final Callback<Boolean> callback) {
+        GuiDialog.confirm(c, question, true, null, callback);
     }
-    public static boolean confirm(final Card c, final String question, final boolean defaultChoice) {
-        return GuiDialog.confirm(c, question, defaultChoice, null);
+    public static void confirm(final Card c, final String question, final boolean defaultChoice, final Callback<Boolean> callback) {
+        GuiDialog.confirm(c, question, defaultChoice, null, callback);
     }
-    public static boolean confirm(final Card c, final String question, String[] options) {
-        return GuiDialog.confirm(c, question, true, options);
+    public static void confirm(final Card c, final String question, String[] options, final Callback<Boolean> callback) {
+        GuiDialog.confirm(c, question, true, options, callback);
     }
     
-    public static boolean confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options) {
-        Callable<Boolean> confirmTask = new Callable<Boolean>() {
+    public static void confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options, final Callback<Boolean> callback) {
+        FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
-            public Boolean call() throws Exception {
+            public void run() {
                 final String title = c == null ? "Question" : c.getName() + " - Ability";
                 String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
                 String[] opts = options == null ? defaultConfirmOptions : options;
-                int answer = FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
-                return answer == 0;
-            }};
-
-        FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
-        FThreads.invokeInEdtAndWait(future);
-        try { 
-            return future.get().booleanValue();
-        }
-        catch (Exception e) { // should be no exception here
-            e.printStackTrace();
-        }
-        return false;
+                FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
+                    @Override
+                    public void run(Integer result) {
+                        callback.run(result == 0);
+                    }
+                });
+            }
+        });
     }
 
     /**

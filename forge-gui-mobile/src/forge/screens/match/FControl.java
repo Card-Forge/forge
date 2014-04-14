@@ -61,6 +61,7 @@ import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FCardZoom;
 import forge.toolbox.FOptionPane;
+import forge.util.Callback;
 
 public class FControl {
     private FControl() { } //don't allow creating instance
@@ -447,9 +448,14 @@ public class FControl {
         String userPrompt =
                 "This will end the current game and you will not be able to resume.\n\n" +
                         "Concede anyway?";
-        if (FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel", false)) {
-            stopGame();
-        }
+        FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel", false, new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    stopGame();
+                }
+            }
+        });
     }
 
     public static void stopGame() {

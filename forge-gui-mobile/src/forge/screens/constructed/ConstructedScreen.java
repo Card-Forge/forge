@@ -45,6 +45,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Aggregates;
+import forge.util.Callback;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
@@ -760,16 +761,19 @@ public class ConstructedScreen extends LaunchScreen {
             newNameBtn.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    String newName = getNewName();
-                    if (null == newName) {
-                        return;
-                    }
-                    txtPlayerName.setText(newName);
+                    getNewName(new Callback<String>() {
+                        @Override
+                        public void run(String newName) {
+                            if (newName == null) { return; }
 
-                    if (index == 0) {
-                        prefs.setPref(FPref.PLAYER_NAME, newName);
-                        prefs.save();
-                    }
+                            txtPlayerName.setText(newName);
+
+                            if (index == 0) {
+                                prefs.setPref(FPref.PLAYER_NAME, newName);
+                                prefs.save();
+                            }
+                        }
+                    });
                 }
             });
             return newNameBtn;
@@ -917,33 +921,50 @@ public class ConstructedScreen extends LaunchScreen {
         return usedAvatars;
     }
 
-    private final String getNewName() {
+    private final void getNewName(final Callback<String> callback) {
         final String title = "Get new random name";
         final String message = "What type of name do you want to generate?";
         final FSkinImage icon = FOptionPane.QUESTION_ICON;
         final String[] genderOptions = new String[]{ "Male", "Female", "Any" };
         final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
 
-        final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
-        if (genderIndex < 0) {
-            return null;
-        }
-        final int typeIndex = FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2);
-        if (typeIndex < 0) {
-            return null;
-        }
+        FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, new Callback<Integer>() {
+            @Override
+            public void run(final Integer genderIndex) {
+                if (genderIndex == null || genderIndex < 0) {
+                    callback.run(null);
+                    return;
+                }
+                
+                FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2, new Callback<Integer>() {
+                    @Override
+                    public void run(final Integer typeIndex) {
+                        if (typeIndex == null || typeIndex < 0) {
+                            callback.run(null);
+                            return;
+                        }
 
-        final String gender = genderOptions[genderIndex];
-        final String type = typeOptions[typeIndex];
+                        generateRandomName(genderOptions[genderIndex], typeOptions[typeIndex], getPlayerNames(), title, callback);
+                    }
+                });
+            }
+        });
+    }
 
-        String confirmMsg, newName;
-        List<String> usedNames = getPlayerNames();
-        do {
-            newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
-        } while (!FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true));
-
-        return newName;
+    private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Callback<String> callback) {
+        final String newName = NameGenerator.getRandomName(gender, type, usedNames);
+        String confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
+        FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true, new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    callback.run(newName);
+                }
+                else {
+                    generateRandomName(gender, type, usedNames, title, callback);
+                }
+            }
+        });
     }
 
     private List<String> getPlayerNames() {

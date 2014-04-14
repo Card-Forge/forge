@@ -178,7 +178,7 @@ public class FOptionPane extends FDialog {
         int width = this.getWidth();
         int gapBetween = 3;
         int buttonHeight = 26;
-        int buttonWidth = Math.max(maxTextWidth + btnMeasure.getMargin().left + btnMeasure.getMargin().right, 120); //account for margins and enfore minimum width
+        int buttonWidth = Math.max(maxTextWidth + btnMeasure.getMargin().left + btnMeasure.getMargin().right, 120); //account for margins and enforce minimum width
         int dx = buttonWidth + gapBetween;
         int totalButtonWidth = dx * optionCount - gapBetween;
         final int lastOption = optionCount - 1;

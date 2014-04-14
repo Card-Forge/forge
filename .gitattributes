@@ -1163,6 +1163,7 @@ forge-gui-mobile/src/forge/toolbox/FCardZoom.java -text
 forge-gui-mobile/src/forge/toolbox/FCheckBox.java -text
 forge-gui-mobile/src/forge/toolbox/FComboBox.java -text
 forge-gui-mobile/src/forge/toolbox/FContainer.java -text
+forge-gui-mobile/src/forge/toolbox/FDialog.java -text
 forge-gui-mobile/src/forge/toolbox/FDisplayObject.java -text
 forge-gui-mobile/src/forge/toolbox/FEvent.java -text
 forge-gui-mobile/src/forge/toolbox/FFileChooser.java -text
@@ -16281,6 +16282,7 @@ forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
 forge-gui/src/main/java/forge/util/AwtUtil.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
+forge-gui/src/main/java/forge/util/Callback.java -text
 forge-gui/src/main/java/forge/util/Evaluator.java -text
 forge-gui/src/main/java/forge/util/GuiDisplayUtil.java -text
 forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
@@ -16288,6 +16290,7 @@ forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
+forge-gui/src/main/java/forge/util/WaitCallback.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
 forge-gui/src/main/resources/proxy-template.ftl -text

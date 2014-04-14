@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 import forge.game.card.Card;
+import forge.util.Callback;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,20 +30,30 @@ public class GuiChoose {
      *         getChoices.
      * @see #getChoices(String, int, int, Object...)
      */
-    public static <T> T oneOrNone(final String message, final T[] choices) {
+    public static <T> void oneOrNone(final String message, final T[] choices, final Callback<T> callback) {
         if ((choices == null) || (choices.length == 0)) {
-            return null;
+            callback.run(null);
+            return;
         }
-        final List<T> choice = GuiChoose.getChoices(message, 0, 1, choices);
-        return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
+        getChoices(message, 0, 1, choices, new Callback<List<T>>() {
+            @Override
+            public void run(final List<T> result) {
+                callback.run(result.isEmpty() ? null : result.get(0));
+            }
+        });
+    }
 
-    public static <T> T oneOrNone(final String message, final Collection<T> choices) {
+    public static <T> void oneOrNone(final String message, final Collection<T> choices, final Callback<T> callback) {
         if ((choices == null) || choices.isEmpty()) {
-            return null;
+            callback.run(null);
+            return;
         }
-        final List<T> choice = GuiChoose.getChoices(message, 0, 1, choices);
-        return choice.isEmpty() ? null : choice.get(0);
+        getChoices(message, 0, 1, choices, new Callback<List<T>>() {
+            @Override
+            public void run(final List<T> result) {
+                callback.run(result.isEmpty() ? null : result.get(0));
+            }
+        });
     } // getChoiceOptional(String,T...)
 
     // returned Object will never be null
@@ -59,25 +70,46 @@ public class GuiChoose {
      *            a T object.
      * @return a T object.
      */
-    public static <T> T one(final String message, final T[] choices) {
-        final List<T> choice = GuiChoose.getChoices(message, 1, 1, choices);
-        assert choice.size() == 1;
-        return choice.get(0);
+    public static <T> void one(final String message, final T[] choices, final Callback<T> callback) {
+        if (choices == null || choices.length == 0) {
+            callback.run(null);
+            return;
+        }
+        if (choices.length == 1) {
+            callback.run(choices[0]);
+            return;
+        }
+
+        getChoices(message, 1, 1, choices, new Callback<List<T>>() {
+            @Override
+            public void run(final List<T> result) {
+                assert result.size() == 1;
+                callback.run(result.get(0));
+            }
+        });
     }
 
-    public static <T> T one(final String message, final Collection<T> choices) {
-        if (choices == null || choices.isEmpty())
-            return null;
-        if( choices.size() == 1)
-            return Iterables.getFirst(choices, null);
+    public static <T> void one(final String message, final Collection<T> choices, final Callback<T> callback) {
+        if (choices == null || choices.isEmpty()) {
+            callback.run(null);
+            return;
+        }
+        if (choices.size() == 1) {
+            callback.run(Iterables.getFirst(choices, null));
+            return;
+        }
 
-        final List<T> choice = GuiChoose.getChoices(message, 1, 1, choices);
-        assert choice.size() == 1;
-        return choice.get(0);
+        getChoices(message, 1, 1, choices, new Callback<List<T>>() {
+            @Override
+            public void run(final List<T> result) {
+                assert result.size() == 1;
+                callback.run(result.get(0));
+            }
+        });
     }
 
-    public static <T> List<T> noneOrMany(final String message, final Collection<T> choices) {
-        return GuiChoose.getChoices(message, 0, choices.size(), choices, null, null);
+    public static <T> void noneOrMany(final String message, final Collection<T> choices, final Callback<List<T>> callback) {
+        getChoices(message, 0, choices.size(), choices, null, null, callback);
     }
 
     // Nothing to choose here. Code uses this to just reveal one or more items
@@ -87,42 +119,51 @@ public class GuiChoose {
         reveal(message, items);
     }
     public static <T> void reveal(final String message, final T[] items) {
-        GuiChoose.getChoices(message, -1, -1, items);
+        getChoices(message, -1, -1, items, null);
     }
     public static <T> void reveal(final String message, final Collection<T> items) {
-        GuiChoose.getChoices(message, -1, -1, items);
+        getChoices(message, -1, -1, items, null);
     }
 
     // Get Integer in range
-    public static Integer getInteger(final String message) {
-        return getInteger(message, 0, Integer.MAX_VALUE);
+    public static void getInteger(final String message, final Callback<Integer> callback) {
+        getInteger(message, 0, Integer.MAX_VALUE, callback);
     }
-    public static Integer getInteger(final String message, int min) {
-        return getInteger(message, min, Integer.MAX_VALUE);
+    public static void getInteger(final String message, int min, final Callback<Integer> callback) {
+        getInteger(message, min, Integer.MAX_VALUE, callback);
     }
-    public static Integer getInteger(final String message, int min, int max) {
-        if (max <= min) { return min; } //just return min if max <= min
+    public static void getInteger(final String message, int min, int max, final Callback<Integer> callback) {
+        if (max <= min) { //just return min if max <= min
+            callback.run(min);
+            return;
+        }
 
         //force cutting off after 100 numbers at most
         if (max == Integer.MAX_VALUE) {
-            return getInteger(message, min, max, min + 99);
+            getInteger(message, min, max, min + 99, callback);
+            return;
         }
         int count = max - min + 1;
         if (count > 100) { 
-            return getInteger(message, min, max, min + 99);
+            getInteger(message, min, max, min + 99, callback);
+            return;
         }
 
         final Integer[] choices = new Integer[count];
         for (int i = 0; i < count; i++) {
             choices[i] = Integer.valueOf(i + min);
         }
-        return GuiChoose.oneOrNone(message, choices);
+        oneOrNone(message, choices, callback);
     }
-    public static Integer getInteger(final String message, int min, int max, int cutoff) {
-        if (max <= min || cutoff < min) { return min; } //just return min if max <= min or cutoff < min
+    public static void getInteger(final String message, final int min, final int max, final int cutoff, final Callback<Integer> callback) {
+        if (max <= min || cutoff < min) { //just return min if max <= min or cutoff < min
+            callback.run(min);
+            return;
+        }
 
         if (cutoff >= max) { //fallback to regular integer prompt if cutoff at or after max
-            return getInteger(message, min, max);
+            getInteger(message, min, max, callback);
+            return;
         }
 
         List<Object> choices = new ArrayList<Object>();
@@ -131,52 +172,69 @@ public class GuiChoose {
         }
         choices.add("Other...");
 
-        Object choice = GuiChoose.oneOrNone(message, choices);
-        if (choice instanceof Integer || choice == null) {
-            return (Integer)choice;
-        }
-
-        //if Other option picked, prompt for number input
-        String prompt = "Enter a number";
-        if (min != Integer.MIN_VALUE) {
-            if (max != Integer.MAX_VALUE) {
-                prompt += " between " + min + " and " + max;
-            }
-            else {
-                prompt += " greater than or equal to " + min;
-            }
-        }
-        else if (max != Integer.MAX_VALUE) {
-            prompt += " less than or equal to " + max;
-        }
-        prompt += ":";
-
-        while (true) {
-            String str = FOptionPane.showInputDialog(prompt, message);
-            if (str == null) { return null; } // that is 'cancel'
-
-            if (StringUtils.isNumeric(str)) {
-                Integer val = Integer.valueOf(str);
-                if (val >= min && val <= max) {
-                    return val;
+        oneOrNone(message, choices, new Callback<Object>() {
+            @Override
+            public void run(Object choice) {
+                if (choice instanceof Integer || choice == null) {
+                    callback.run((Integer)choice);
+                    return;
                 }
+
+                //if Other option picked, prompt for number input
+                String prompt = "Enter a number";
+                if (min != Integer.MIN_VALUE) {
+                    if (max != Integer.MAX_VALUE) {
+                        prompt += " between " + min + " and " + max;
+                    }
+                    else {
+                        prompt += " greater than or equal to " + min;
+                    }
+                }
+                else if (max != Integer.MAX_VALUE) {
+                    prompt += " less than or equal to " + max;
+                }
+                prompt += ":";
+                getNumberInput(prompt, message, min, max, callback);
             }
-        }
+        });
+    }
+    
+    private static void getNumberInput(final String prompt, final String message, final int min, final int max, final Callback<Integer> callback) {
+        FOptionPane.showInputDialog(prompt, message, new Callback<String>() {
+            @Override
+            public void run(String result) {
+                if (result == null) { //that is 'cancel'
+                    callback.run(null);
+                    return;
+                }
+                if (StringUtils.isNumeric(result)) {
+                    Integer val = Integer.valueOf(result);
+                    if (val >= min && val <= max) {
+                        callback.run(val);
+                        return;
+                    }
+                }
+
+                //re-prompt if invalid input
+                getNumberInput(prompt, message, min, max, callback);
+            }
+        });
     }
 
     // returned Object will never be null
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        return getChoices(message, min, max, Arrays.asList(choices), null, null);
+    public static <T> void getChoices(final String message, final int min, final int max, final T[] choices, final Callback<List<T>> callback) {
+        getChoices(message, min, max, Arrays.asList(choices), null, null, callback);
     }
 
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        return getChoices(message, min, max, choices, null, null);
+    public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final Callback<List<T>> callback) {
+        getChoices(message, min, max, choices, null, null, callback);
     }
 
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+    public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display, final Callback<List<T>> callback) {
         if (choices == null || choices.isEmpty()) {
             if (min == 0) {
-                return new ArrayList<T>();
+                callback.run(new ArrayList<T>());
+                return;
             }
             throw new RuntimeException("choice required from empty list");
         }
@@ -193,7 +251,7 @@ public class GuiChoose {
                 break;
             }
         }
-        return result;
+        callback.run(result);
 
         /*Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
@@ -242,28 +300,28 @@ public class GuiChoose {
         }*/
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
-        return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
+    public static <T> void many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
+        order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false, callback);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> void many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
-        return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
+        order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false, callback);
     }
 
-    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, Card referenceCard) {
-        return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
+    public static <T> void order(final String title, final String top, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
+        order(title, top, 0, 0, sourceChoices, null, referenceCard, false, callback);
     }
 
-    public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck) {
+    public static <T extends Comparable<? super T>> void sideboard(List<T> sideboard, List<T> deck, final Callback<List<T>> callback) {
         Collections.sort(deck);
         Collections.sort(sideboard);
-        return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
+        order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true, callback);
     }
 
-    public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
+    public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode, final Callback<List<T>> callback) {
         // An input box for handling the order of choices.
 
         /*Callable<List<T>> callable = new Callable<List<T>>() {
@@ -298,61 +356,84 @@ public class GuiChoose {
         } catch (Exception e) { // we have waited enough
             e.printStackTrace();
         }*/
-        return null;
+        callback.run(null);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOneOrNone(final String message, final T[] choices, Comparator<T> comparer) {
+    public static <T> void sortedOneOrNone(final String message, final T[] choices, Comparator<T> comparer, final Callback<T> callback) {
         if ((choices == null) || (choices.length == 0)) {
-            return null;
+            callback.run(null);
+            return;
         }
-        final List<T> choice = GuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
-        return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
+        sortedGetChoices(message, 0, 1, choices, comparer, new Callback<List<T>>() {
+            @Override
+            public void run(List<T> result) {
+                callback.run(result.isEmpty() ? null : result.get(0));
+            }
+        });
+    }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOneOrNone(final String message, final List<T> choices, Comparator<T> comparer) {
+    public static <T> void sortedOneOrNone(final String message, final List<T> choices, Comparator<T> comparer, final Callback<T> callback) {
         if ((choices == null) || choices.isEmpty()) {
-            return null;
+            callback.run(null);
+            return;
         }
-        final List<T> choice = GuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
-        return choice.isEmpty() ? null : choice.get(0);
+        sortedGetChoices(message, 0, 1, choices, comparer, new Callback<List<T>>() {
+            @Override
+            public void run(List<T> result) {
+                callback.run(result.isEmpty() ? null : result.get(0));
+            }
+        });
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOne(final String message, final T[] choices, Comparator<T> comparer) {
-        final List<T> choice = GuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
-        assert choice.size() == 1;
-        return choice.get(0);
+    public static <T> void sortedOne(final String message, final T[] choices, Comparator<T> comparer, final Callback<T> callback) {
+        if ((choices == null) || (choices.length == 0)) {
+            callback.run(null);
+            return;
+        }
+        sortedGetChoices(message, 1, 1, choices, comparer, new Callback<List<T>>() {
+            @Override
+            public void run(List<T> result) {
+                assert result.size() == 1;
+                callback.run(result.get(0));
+            }
+        });
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> T sortedOne(final String message, final List<T> choices, Comparator<T> comparer) {
+    public static <T> void sortedOne(final String message, final List<T> choices, Comparator<T> comparer, final Callback<T> callback) {
         if ((choices == null) || (choices.size() == 0)) {
-            return null;
+            callback.run(null);
+            return;
         }
-        final List<T> choice = GuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
-        assert choice.size() == 1;
-        return choice.get(0);
+        sortedGetChoices(message, 1, 1, choices, comparer, new Callback<List<T>>() {
+            @Override
+            public void run(List<T> result) {
+                assert result.size() == 1;
+                callback.run(result.get(0));
+            }
+        });
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> List<T> sortedNoneOrMany(final String message, final List<T> choices, Comparator<T> comparer) {
-        return GuiChoose.sortedGetChoices(message, 0, choices.size(), choices, comparer);
+    public static <T> void sortedNoneOrMany(final String message, final List<T> choices, Comparator<T> comparer, final Callback<List<T>> callback) {
+        sortedGetChoices(message, 0, choices.size(), choices, comparer, callback);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final T[] choices, Comparator<T> comparer) {
+    public static <T> void sortedGetChoices(final String message, final int min, final int max, final T[] choices, Comparator<T> comparer, final Callback<List<T>> callback) {
         // You may create a copy of source array if callers expect the collection to be unchanged
         Arrays.sort(choices, comparer);
-        return getChoices(message, min, max, choices);
+        getChoices(message, min, max, choices, callback);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
-    public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final List<T> choices, Comparator<T> comparer) {
+    public static <T> void sortedGetChoices(final String message, final int min, final int max, final List<T> choices, Comparator<T> comparer, final Callback<List<T>> callback) {
         // You may create a copy of source list if callers expect the collection to be unchanged
         Collections.sort(choices, comparer);
-        return getChoices(message, min, max, choices);
+        getChoices(message, min, max, choices, callback);
     }
 }
 

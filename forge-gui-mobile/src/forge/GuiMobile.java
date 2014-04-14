@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Gdx;
@@ -36,12 +37,14 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
+import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.ThreadUtil;
+import forge.util.WaitCallback;
 
 public class GuiMobile implements IGuiBase {
     @Override
@@ -121,24 +124,44 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption) {
-        return FOptionPane.showOptionDialog(message, title, icon == null ? null : FSkin.getImages().get(icon), options, defaultOption);
+    public int showOptionDialog(final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+        return new WaitCallback<Integer>() {
+            @Override
+            public void run() {
+                FOptionPane.showOptionDialog(message, title, icon == null ? null : FSkin.getImages().get(icon), options, defaultOption, this);
+            }
+        }.invokeAndWait();
     }
 
     @Override
-    public <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
-        return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImages().get(icon), initialInput, inputOptions);
+    public <T> T showInputDialog(final String message, final String title, final FSkinProp icon, final T initialInput, final T[] inputOptions) {
+        return new WaitCallback<T>() {
+            @Override
+            public void run() {
+                FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImages().get(icon), initialInput, inputOptions, this);
+            }
+        }.invokeAndWait();
     }
 
     @Override
     public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
-        return GuiChoose.getChoices(message, min, max, choices, selected, display);
+        return new WaitCallback<List<T>>() {
+            @Override
+            public void run() {
+                GuiChoose.getChoices(message, min, max, choices, selected, display, this);
+            }
+        }.invokeAndWait();
     }
 
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
-        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
+        return new WaitCallback<List<T>>() {
+            @Override
+            public void run() {
+                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+            }
+        }.invokeAndWait();
     }
 
     @Override
@@ -222,7 +245,7 @@ public class GuiMobile implements IGuiBase {
         if (abilities.size() == 1) {
             return abilities.get(0);
         }
-        return GuiChoose.oneOrNone("Choose ability to play", abilities);
+        return SGuiChoose.oneOrNone("Choose ability to play", abilities);
     }
 
     @Override
@@ -313,5 +336,10 @@ public class GuiMobile implements IGuiBase {
             int damageDealt, GameEntity defender, boolean overrideOrder) {
         return FControl.getDamageToAssign(attacker, blockers,
                 damageDealt, defender, overrideOrder);
+    }
+
+    @Override
+    public String showFileDialog(String title, String defaultDir) {
+        return ForgeConstants.USER_GAMES_DIR + "Test.fgs"; //TODO: Show dialog
     }
 }

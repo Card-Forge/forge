@@ -44,6 +44,7 @@ public interface IGuiBase {
     <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display);
     <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode);
+    String showFileDialog(String title, String defaultDir);
     void showCardList(final String title, final String message, final List<PaperCard> list);
     void fireEvent(UiEvent e);
     void setCard(Card card);

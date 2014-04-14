@@ -54,7 +54,7 @@ public abstract class FOverlay extends FContainer {
     }
 
     @Override
-    public void drawBackground(Graphics g) {
+    protected void drawBackground(Graphics g) {
         g.fillRect(backColor, 0, 0, this.getWidth(), this.getHeight());
     }
 

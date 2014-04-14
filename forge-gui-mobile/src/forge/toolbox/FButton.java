@@ -3,6 +3,7 @@ package forge.toolbox;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
@@ -16,6 +17,7 @@ import forge.toolbox.FEvent.FEventType;
 public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final float DISABLED_COMPOSITE = 0.25f;
+    private static final float PADDING = 3;
 
     private FSkinImage imgL, imgM, imgR;
     private String text;
@@ -118,6 +120,13 @@ public class FButton extends FDisplayObject implements IButton {
         command = command0;
     }
 
+    public TextBounds getAutoSizeBounds() {
+        TextBounds bounds = new TextBounds();
+        bounds.width = font.getFont().getBounds(text).width + 2 * PADDING;
+        bounds.height = font.getFont().getCapHeight();
+        return bounds;
+    }
+
     @Override
     public final boolean press(float x, float y) {
         if (isToggled()) { return true; }
@@ -190,7 +199,7 @@ public class FButton extends FDisplayObject implements IButton {
         }
 
         if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
+            g.drawText(text, font, FORE_COLOR, x + PADDING, y, w - 2 * PADDING, h, false, HAlignment.CENTER, true);
         }
 
         if (disabled) {

@@ -46,8 +46,6 @@ import forge.player.HumanPlay;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 
-import javax.swing.*;
-
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
@@ -88,14 +86,14 @@ public final class GuiDisplayUtil {
         if (!gamesDir.exists()) { // if the directory does not exist, try to create it
             gamesDir.mkdir();
         }
-        final JFileChooser fc = new JFileChooser(ForgeConstants.USER_GAMES_DIR);
-        final int rc = fc.showDialog(null, "Select Game State File");
-        if (rc != JFileChooser.APPROVE_OPTION) {
+        
+        String filename = GuiBase.getInterface().showFileDialog("Select Game State File", ForgeConstants.USER_GAMES_DIR);
+        if (filename == null) {
             return;
         }
 
         try {
-            final FileInputStream fstream = new FileInputStream(fc.getSelectedFile().getAbsolutePath());
+            final FileInputStream fstream = new FileInputStream(filename);
             final DataInputStream in = new DataInputStream(fstream);
             final BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
@@ -133,7 +131,7 @@ public final class GuiDisplayUtil {
             in.close();
         }
         catch (final FileNotFoundException fnfe) {
-            SOptionPane.showErrorDialog("File not found: " + fc.getSelectedFile().getAbsolutePath());
+            SOptionPane.showErrorDialog("File not found: " + filename);
         }
         catch (final Exception e) {
             SOptionPane.showErrorDialog("Error loading battle setup file!");

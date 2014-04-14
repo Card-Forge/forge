@@ -17,6 +17,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FOptionPane;
+import forge.util.Callback;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -200,35 +201,37 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());*/
     }
 
-    public boolean deleteDeck(DeckProxy deck) {
-        if (deck == null) { return false; }
+    public void deleteDeck(final DeckProxy deck) {
+        if (deck == null) { return; }
 
-        if (!FOptionPane.showConfirmDialog(
+        FOptionPane.showConfirmDialog(
                 "Are you sure you want to delete '" + deck.getName() + "'?",
-                "Delete Deck", "Delete", "Cancel", false)) {
-            return false;
-        }
+                "Delete Deck", "Delete", "Cancel", false, new Callback<Boolean>() {
+                    @Override
+                    public void run(Boolean result) {
+                        if (!result) { return; }
 
-        // consider using deck proxy's method to delete deck
-        switch(gametype) {
-            case Constructed:
-            case Draft:
-            case Sealed:
-                deck.deleteFromStorage();
-                break;
-            case Quest:
-                deck.deleteFromStorage();
-                //FModel.getQuest().save();
-                break;
-            default:
-                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
-        }
+                        // consider using deck proxy's method to delete deck
+                        switch(gametype) {
+                            case Constructed:
+                            case Draft:
+                            case Sealed:
+                                deck.deleteFromStorage();
+                                break;
+                            case Quest:
+                                deck.deleteFromStorage();
+                                //FModel.getQuest().save();
+                                break;
+                            default:
+                                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
+                        }
 
-        removeItem(deck, 1);
+                        removeItem(deck, 1);
 
-        if (cmdDelete != null) {
-            cmdDelete.handleEvent(new FEvent(this, FEventType.DELETE));
-        }
-        return true;
+                        if (cmdDelete != null) {
+                            cmdDelete.handleEvent(new FEvent(DeckManager.this, FEventType.DELETE));
+                        }
+                    }
+        });
     }
 }
