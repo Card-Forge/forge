@@ -27,12 +27,10 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 public class ChangeZoneAi extends SpellAbilityAi {
 
@@ -546,8 +544,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 
-        final Random r = MyRandom.getRandom();
-
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
@@ -567,8 +563,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+        	return false;
+        }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -635,6 +632,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+        //don't uearth after attacking is possible
+        if (sa.hasParam("Unearth") && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        	return false;
+        }
 
         if (destination.equals(ZoneType.Library) && origin.equals(ZoneType.Graveyard)) {
             if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
@@ -646,9 +648,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        chance &= subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
+        if (subAb != null && !SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb)) {
+        	return false;
+        }
 
-        return chance;
+        return true;
     }
 
     /**

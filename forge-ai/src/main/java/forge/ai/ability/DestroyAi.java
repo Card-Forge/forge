@@ -18,11 +18,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class DestroyAi extends SpellAbilityAi {
 
@@ -40,7 +38,6 @@ public class DestroyAi extends SpellAbilityAi {
     protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final TargetRestrictions abTgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
@@ -62,8 +59,9 @@ public class DestroyAi extends SpellAbilityAi {
             }
         }
 
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+        	return false;
+        }
 
         // Targeting
         if (abTgt != null) {
@@ -192,7 +190,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
         }
 
-        return chance;
+        return true;
     }
 
     @Override
