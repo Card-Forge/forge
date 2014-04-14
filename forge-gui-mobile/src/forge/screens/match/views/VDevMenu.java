@@ -11,6 +11,7 @@ import forge.screens.match.FControl;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.GuiDisplayUtil;
+import forge.util.ThreadUtil;
 
 public class VDevMenu extends FDropDownMenu {
     @Override
@@ -18,37 +19,67 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Generate Mana", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeGenerateMana();
+                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke all these in game thread since they may require synchronous user input
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeGenerateMana();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Tutor for Card", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeTutor();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeTutor();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Add card to hand", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeCardToHand();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeCardToHand();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Add card to play", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeCardToBattlefield();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeCardToBattlefield();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Set Player Life", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeSetLife();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeSetLife();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Setup Game State", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devSetupGameState();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devSetupGameState();
+                    }
+                });
             }
         }));
 
@@ -72,31 +103,56 @@ public class VDevMenu extends FDropDownMenu {
         addItem(new FMenuItem("Add Counter to Permanent", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeAddCounter();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeAddCounter();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Tap Permanent", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeTapPerm();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeTapPerm();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Untap Permanent", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeUntapPerm();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeUntapPerm();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Rigged planar roll", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModeRiggedPlanarRoll();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeRiggedPlanarRoll();
+                    }
+                });
             }
         }));
         addItem(new FMenuItem("Planeswalk to", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                GuiDisplayUtil.devModePlaneswalkTo();
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModePlaneswalkTo();
+                    }
+                });
             }
         }));
     }
