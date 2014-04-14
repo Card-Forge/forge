@@ -428,6 +428,8 @@ public class CountersPutAi extends SpellAbilityAi {
                     }
                 } else if (logic.equals("DontControlCreatures")) {
                     return !creats.isEmpty();
+                } else if (logic.equals("OppHasCardsInHand")) {
+                    return !player.getOpponent().getCardsIn(ZoneType.Hand).isEmpty();
                 }
             }
         }

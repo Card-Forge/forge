@@ -6,7 +6,6 @@ K:Haste
 K:Tribute 2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost.
 SVar:TrigNotTribute:AB$ Play | Cost$ 0 | ValidZone$ Hand | Valid$ Instant.YouOwn,Sorcery.YouOwn | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1
-SVar:NeedsToPlayVar:CheckHand GE1
-SVar:CheckHand:Count$ValidHand Sorcery.YouCtrl,Instant.YouCtrl
+SVar:TributeAILogic:OppHasCardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_bones.jpg
 Oracle:Haste\nTribute 2 (As this creature enters the battlefield, an opponent of your choice may place two +1/+1 counters on it.)\nWhen Oracle of Bones enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery card from your hand without paying its mana cost.
