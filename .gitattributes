@@ -696,7 +696,7 @@ forge-gui-desktop/src/main/java/forge/download/GuiDownloadQuestImages.java -text
 forge-gui-desktop/src/main/java/forge/download/GuiDownloadSetPicturesLQ.java -text
 forge-gui-desktop/src/main/java/forge/download/GuiDownloader.java -text
 forge-gui-desktop/src/main/java/forge/download/package-info.java -text
-forge-gui-desktop/src/main/java/forge/error/BugReporter.java -text
+forge-gui-desktop/src/main/java/forge/error/BugReportDialog.java -text
 forge-gui-desktop/src/main/java/forge/error/package-info.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardContainer.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardDetailPanel.java -text
@@ -1078,7 +1078,6 @@ forge-gui-mobile/src/forge/assets/ImageCache.java -text
 forge-gui-mobile/src/forge/assets/ImageLoader.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
-forge-gui-mobile/src/forge/error/BugReporter.java -text
 forge-gui-mobile/src/forge/itemmanager/CardManager.java -text
 forge-gui-mobile/src/forge/itemmanager/DeckManager.java -text
 forge-gui-mobile/src/forge/itemmanager/ItemManager.java -text
@@ -16127,6 +16126,7 @@ forge-gui/src/main/java/forge/deck/io/DeckHtmlSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
 forge-gui/src/main/java/forge/deck/io/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/error/BugReporter.java -text
 forge-gui/src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/events/IUiEventVisitor.java -text

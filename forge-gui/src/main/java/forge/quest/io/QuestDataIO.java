@@ -24,11 +24,11 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.error.BugReporter;
 import forge.item.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -120,15 +120,16 @@ public class QuestDataIO {
             if (data.getVersionNumber() != QuestData.CURRENT_VERSION_NUMBER) {
                 try {
                     QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
-                } catch (final Exception e) {
-                    GuiBase.getInterface().reportException(e);
+                }
+                catch (final Exception e) {
+                    BugReporter.reportException(e);
                 }
             }
 
             return data;
         }
         catch (final Exception ex) {
-            GuiBase.getInterface().reportException(ex, "Error loading Quest Data");
+            BugReporter.reportException(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
     }
@@ -358,7 +359,7 @@ public class QuestDataIO {
 
         }
         catch (final Exception ex) {
-            GuiBase.getInterface().reportException(ex, "Error saving Quest Data.");
+            BugReporter.reportException(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }
     }

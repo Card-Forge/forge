@@ -2,6 +2,7 @@ package forge.match.input;
 
 import forge.FThreads;
 import forge.GuiBase;
+import forge.error.BugReporter;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,8 +18,9 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         FThreads.assertExecutedByEdt(false);
         try{
             cdlDone.await();
-        } catch (InterruptedException e) {
-            GuiBase.getInterface().reportException(e);
+        }
+        catch (InterruptedException e) {
+            BugReporter.reportException(e);
         }
     }
 

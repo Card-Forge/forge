@@ -3,7 +3,6 @@ package forge.deck;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
-import forge.GuiBase;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -12,6 +11,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.error.BugReporter;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
@@ -289,7 +289,7 @@ public class DeckProxy implements InventoryItem {
             StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
             if (errorBuilder.length() > 0) {
-                GuiBase.getInterface().reportBug(errorBuilder.toString());
+                BugReporter.reportBug(errorBuilder.toString());
             }
             return deck;
         }

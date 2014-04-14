@@ -16,6 +16,8 @@ import forge.util.ThreadUtil;
 public class VDevMenu extends FDropDownMenu {
     @Override
     protected void buildMenu() {
+        int[] x = null;
+        int y = x[1];
         addItem(new FMenuItem("Generate Mana", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

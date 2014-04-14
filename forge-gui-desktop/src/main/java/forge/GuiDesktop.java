@@ -2,6 +2,7 @@ package forge;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +24,7 @@ import com.google.common.base.Function;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.control.FControl;
-import forge.error.BugReporter;
+import forge.error.BugReportDialog;
 import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -108,21 +109,6 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public boolean mayShowCard(Card card) {
         return Singletons.getControl().mayShowCard(card);
-    }
-
-    @Override
-    public void reportBug(String details) {
-        BugReporter.reportBug(details);
-    }
-
-    @Override
-    public void reportException(Throwable ex) {
-        BugReporter.reportException(ex);
-    }
-
-    @Override
-    public void reportException(Throwable ex, String message) {
-        BugReporter.reportException(ex, message);
     }
 
     @Override
@@ -398,5 +384,18 @@ public class GuiDesktop implements IGuiBase {
             return null;
         }
         return fc.getSelectedFile().getAbsolutePath();
+    }
+
+    @Override
+    public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {
+        BugReportDialog.show(title, text, showExitAppBtn);
+    }
+
+    @Override
+    public File getSaveFile(File defaultFile) {
+        JFileChooser fc = new JFileChooser();
+        fc.setSelectedFile(defaultFile);
+        fc.showSaveDialog(null);
+        return fc.getSelectedFile();
     }
 }

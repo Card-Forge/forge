@@ -1,9 +1,11 @@
 package forge;
 
 import forge.error.BugReporter;
+
 import org.testng.annotations.Test;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 /**
@@ -41,7 +43,8 @@ public class PanelTest extends JFrame {
     public PanelTest() {
         try {
             this.jbInit();
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             BugReporter.reportException(ex);
             ex.printStackTrace();
         }

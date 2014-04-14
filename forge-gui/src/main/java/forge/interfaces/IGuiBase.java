@@ -1,5 +1,6 @@
 package forge.interfaces;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -35,16 +36,15 @@ public interface IGuiBase {
     String getInstallRoot();
     String getAssetsDir();
     boolean mayShowCard(Card card);
-    void reportBug(String details);
-    void reportException(Throwable ex);
-    void reportException(Throwable ex, String message);
     ISkinImage getUnskinnedIcon(String path);
+    void showBugReportDialog(String title, String text, boolean showExitAppBtn);
     int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption);
     <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions);
     <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display);
     <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode);
     String showFileDialog(String title, String defaultDir);
+    File getSaveFile(File defaultFile);
     void showCardList(final String title, final String message, final List<PaperCard> list);
     void fireEvent(UiEvent e);
     void setCard(Card card);

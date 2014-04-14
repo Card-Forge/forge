@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.GuiBase;
+import forge.error.BugReporter;
 import forge.net.client.NetClient;
 
 import org.eclipse.jetty.server.Connector;
@@ -69,8 +69,9 @@ public class NetServer {
         public void send(String data)  {
             try {
                 _connection.sendMessage(data);
-            } catch (IOException e) {
-                GuiBase.getInterface().reportException(e);
+            }
+            catch (IOException e) {
+                BugReporter.reportException(e);
             }
         }
 
@@ -109,7 +110,7 @@ public class NetServer {
                 String host = connector.getHost();
                 serverUri = new URI(String.format("ws://%s:%d/", host == null ? "localhost" : host ,port));
             } catch (Exception e) {
-                GuiBase.getInterface().reportException(e);
+                BugReporter.reportException(e);
             }
             
             System.out.println("Server started @ " + serverUri);
@@ -124,7 +125,7 @@ public class NetServer {
             srv.stop();
             portNumber = -1;
         } catch (Exception e) {
-            GuiBase.getInterface().reportException(e);
+            BugReporter.reportException(e);
         }
     }
     

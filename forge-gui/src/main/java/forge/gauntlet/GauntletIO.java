@@ -7,8 +7,8 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import forge.GuiBase;
 import forge.deck.CardPool;
+import forge.error.BugReporter;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -95,7 +95,7 @@ public class GauntletIO {
             
             return data;
         } catch (final Exception ex) {
-            GuiBase.getInterface().reportException(ex, "Error loading Gauntlet Data");
+            BugReporter.reportException(ex, "Error loading Gauntlet Data");
             throw new RuntimeException(ex);
         } finally {
             if (null != zin) {
@@ -110,7 +110,7 @@ public class GauntletIO {
             final XStream xStream = GauntletIO.getSerializer(false);
             GauntletIO.savePacked(xStream, gd0);
         } catch (final Exception ex) {
-            GuiBase.getInterface().reportException(ex, "Error saving Gauntlet Data.");
+            BugReporter.reportException(ex, "Error saving Gauntlet Data.");
             throw new RuntimeException(ex);
         }
     }

@@ -1,5 +1,6 @@
 package forge;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,6 @@ import forge.assets.FTextureImage;
 import forge.assets.ISkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
-import forge.error.BugReporter;
 import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -104,21 +104,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void reportBug(String details) {
-        BugReporter.reportBug(details);
-    }
-
-    @Override
-    public void reportException(Throwable ex) {
-        BugReporter.reportException(ex);
-    }
-
-    @Override
-    public void reportException(Throwable ex, String message) {
-        BugReporter.reportException(ex, message);
-    }
-
-    @Override
     public ISkinImage getUnskinnedIcon(String path) {
         return new FTextureImage(new Texture(path));
     }
@@ -162,6 +147,11 @@ public class GuiMobile implements IGuiBase {
                 GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
             }
         }.invokeAndWait();
+    }
+
+    @Override
+    public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {
+        FOptionPane.showErrorDialog(text, title); //TODO: Create dialog with bells and whistles of desktop bug report dialog
     }
 
     @Override
@@ -341,5 +331,10 @@ public class GuiMobile implements IGuiBase {
     @Override
     public String showFileDialog(String title, String defaultDir) {
         return ForgeConstants.USER_GAMES_DIR + "Test.fgs"; //TODO: Show dialog
+    }
+
+    @Override
+    public File getSaveFile(File defaultFile) {
+        return defaultFile; //TODO: Show dialog
     }
 }

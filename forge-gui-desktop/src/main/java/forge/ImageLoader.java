@@ -87,7 +87,8 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
                 //System.out.println(String.format("Found %s at: %s", key, file.getAbsolutePath()));
                 try {
                     return ImageIO.read(file);
-                } catch (IOException ex) {
+                }
+                catch (IOException ex) {
                     BugReporter.reportException(ex, "Could not read image file " + file.getAbsolutePath() + " ");
                     break;
                 }
