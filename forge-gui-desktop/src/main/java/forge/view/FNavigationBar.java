@@ -186,8 +186,6 @@ public class FNavigationBar extends FTitleBarBase {
         btnForge.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int[] x = null;
-                int y = x[2];
                 if (btnForge.isEnabled() && System.currentTimeMillis() - timeMenuHidden > 250) { //time comparsion needed clicking button a second time to hide menu
                     showForgeMenu(true);
                 }
