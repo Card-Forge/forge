@@ -180,6 +180,8 @@ public class FButton extends FDisplayObject implements IButton {
                 g.drawImage(imgL, 0, 0, cornerButtonWidth, h);
                 g.drawImage(imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
             }
+            x += PADDING;
+            w -= 2 * PADDING;
             break;
         case BottomLeft:
             g.drawImage(imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
@@ -199,7 +201,7 @@ public class FButton extends FDisplayObject implements IButton {
         }
 
         if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, FORE_COLOR, x + PADDING, y, w - 2 * PADDING, h, false, HAlignment.CENTER, true);
+            g.drawText(text, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
         }
 
         if (disabled) {
