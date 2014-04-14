@@ -26,6 +26,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
+import forge.error.BugReporter;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
@@ -209,92 +210,146 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean press(float x, float y) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.press(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.press(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean release(float x, float y) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.release(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.release(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean longPress(float x, float y) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.longPress(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.longPress(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean tap(float x, float y, int count) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.tap(listener.screenToLocalX(x), listener.screenToLocalY(y), count)) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.tap(listener.screenToLocalX(x), listener.screenToLocalY(y), count)) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean fling(float velocityX, float velocityY) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.fling(velocityX, velocityY)) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.fling(velocityX, velocityY)) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean pan(float x, float y, float deltaX, float deltaY) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.pan(listener.screenToLocalX(x), listener.screenToLocalY(y), deltaX, deltaY)) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.pan(listener.screenToLocalX(x), listener.screenToLocalY(y), deltaX, deltaY)) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean panStop(float x, float y) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.panStop(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.panStop(listener.screenToLocalX(x), listener.screenToLocalY(y))) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean zoom(float initialDistance, float distance) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.zoom(initialDistance, distance)) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.zoom(initialDistance, distance)) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
 
         @Override
         public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-            for (FDisplayObject listener : potentialListeners) {
-                if (listener.pinch(initialPointer1, initialPointer2, pointer1, pointer2)) {
-                    return true;
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    if (listener.pinch(initialPointer1, initialPointer2, pointer1, pointer2)) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+                return true;
+            }
         }
     }
 

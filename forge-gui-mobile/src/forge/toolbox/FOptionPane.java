@@ -152,7 +152,9 @@ public class FOptionPane extends FDialog {
                 @Override
                 public void handleEvent(FEvent e) {
                     hide();
-                    callback.run(option);
+                    if (callback != null) {
+                        callback.run(option);
+                    }
                 }
             }));
         }

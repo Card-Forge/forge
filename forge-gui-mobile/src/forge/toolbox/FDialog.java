@@ -27,7 +27,8 @@ public abstract class FDialog extends FOverlay {
     protected final void doLayout(float width, float height) {
         width -= 2 * INSET_X;
 
-        float contentHeight = layoutAndGetHeight(width, height - TITLE_HEIGHT);
+        //ensure no more than half the screen is covered by dialog so it can be moved to see anything
+        float contentHeight = layoutAndGetHeight(width, height / 2 - TITLE_HEIGHT);
         totalHeight = contentHeight + TITLE_HEIGHT;
         float y = (height - totalHeight) / 2;
 
