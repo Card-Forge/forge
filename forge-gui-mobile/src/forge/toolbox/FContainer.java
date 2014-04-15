@@ -49,11 +49,13 @@ public abstract class FContainer extends FDisplayObject {
     @Override
     public void setBounds(float x, float y, float width, float height) {
         super.setBounds(x, y, width, height);
-        doLayout(width, height);
+        doLayout(width, height); //always re-do layout when setBounds used
     }
 
     @Override
     public void setSize(float width, float height) {
+        if (getWidth() == width && getHeight() == height) { return; }
+
         super.setSize(width, height);
         doLayout(width, height);
     }
