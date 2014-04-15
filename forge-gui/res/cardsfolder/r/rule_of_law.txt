@@ -1,10 +1,7 @@
 Name:Rule of Law
 ManaCost:2 W
 Types:Enchantment
-S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | References$ X | Description$ Each player can't cast more than one spell each turn.
-S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | CheckSVar$ Y | References$ Y
-SVar:X:Count$ThisTurnCast_Card.YouCtrl
-SVar:Y:Count$ThisTurnCast_Card.YouDontCtrl
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one spell each turn.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rule_of_law.jpg
