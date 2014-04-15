@@ -24,18 +24,13 @@ public class GuiDialog {
     }
     
     public static void confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options, final Callback<Boolean> callback) {
-        FThreads.invokeInEdtAndWait(new Runnable() {
+        final String title = c == null ? "Question" : c.getName() + " - Ability";
+        String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
+        String[] opts = options == null ? defaultConfirmOptions : options;
+        FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
             @Override
-            public void run() {
-                final String title = c == null ? "Question" : c.getName() + " - Ability";
-                String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
-                String[] opts = options == null ? defaultConfirmOptions : options;
-                FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        callback.run(result == 0);
-                    }
-                });
+            public void run(Integer result) {
+                callback.run(result == 0);
             }
         });
     }

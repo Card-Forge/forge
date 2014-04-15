@@ -34,7 +34,7 @@ public class SGuiChoose {
         }
         final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
+    }
 
     public static <T> T oneOrNone(final String message, final Collection<T> choices) {
         if ((choices == null) || choices.isEmpty()) {
@@ -42,7 +42,7 @@ public class SGuiChoose {
         }
         final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
+    }
 
     // returned Object will never be null
     /**
@@ -208,7 +208,7 @@ public class SGuiChoose {
         }
         final List<T> choice = SGuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
         return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
+    }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOneOrNone(final String message, final List<T> choices, Comparator<T> comparer) {
@@ -217,15 +217,14 @@ public class SGuiChoose {
         }
         final List<T> choice = SGuiChoose.sortedGetChoices(message, 0, 1, choices, comparer);
         return choice.isEmpty() ? null : choice.get(0);
-    } // getChoiceOptional(String,T...)
-
+    }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOne(final String message, final T[] choices, Comparator<T> comparer) {
         final List<T> choice = SGuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
         assert choice.size() == 1;
         return choice.get(0);
-    } // getChoice()
+    } 
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOne(final String message, final List<T> choices, Comparator<T> comparer) {

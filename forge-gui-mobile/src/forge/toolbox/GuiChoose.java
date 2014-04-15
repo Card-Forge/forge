@@ -10,10 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class GuiChoose {
 
     /**
@@ -239,65 +236,8 @@ public class GuiChoose {
             throw new RuntimeException("choice required from empty list");
         }
 
-        //TODO: Remove this temporary code and uncomment below
-        int resultCount = min;
-        if (resultCount == 0 && max > 0) {
-            resultCount = 1;
-        }
-        List<T> result = new ArrayList<T>();
-        for (T choice : choices) {
-            result.add(choice);
-            if (result.size() == resultCount) {
-                break;
-            }
-        }
-        callback.run(result);
-
-        /*Callable<List<T>> showChoice = new Callable<List<T>>() {
-            @Override
-            public List<T> call() {
-                ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display);
-                final JList<T> list = c.getLstChoices();
-                list.addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(final ListSelectionEvent ev) {
-                        if (list.getSelectedValue() instanceof Card) {
-                            Card card = (Card) list.getSelectedValue();
-                            if (card.isFaceDown() && FControl.mayShowCard(card)) {
-                                CMatchUI.SINGLETON_INSTANCE.setCard(card, true);
-                            }
-                            else {
-                                CMatchUI.SINGLETON_INSTANCE.setCard(card);
-                            }
-
-                            GuiUtils.clearPanelSelections();
-                            GuiUtils.setPanelSelection(card);
-                        }
-                        if (list.getSelectedValue() instanceof InventoryItem) {
-                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
-                        }
-                    }
-                });
-
-                if (selected != null) {
-                    c.show(selected);
-                }
-                else {
-                    c.show();
-                }
-
-                GuiUtils.clearPanelSelections();
-                return c.getSelectedValues();
-            }
-        };
-
-        FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
-        FThreads.invokeInEdtAndWait(future);
-        try {
-            return future.get();
-        } catch (Exception e) { // should be no exception here
-            e.printStackTrace();
-        }*/
+        ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display, callback);
+        c.show(selected);
     }
 
     public static <T> void many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {

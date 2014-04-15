@@ -120,8 +120,9 @@ public class FOptionPane extends FDialog {
     private final FTextArea prompt;
     private final FDisplayObject displayObj;
     private final FButton[] buttons;
+    private final Callback<Integer> callback;
 
-    public FOptionPane(String message, String title, FSkinImage icon, FDisplayObject displayObj0, String[] options, int defaultOption, final Callback<Integer> callback) {
+    public FOptionPane(String message, String title, FSkinImage icon, FDisplayObject displayObj0, String[] options, int defaultOption, final Callback<Integer> callback0) {
         super(title);
 
         if (icon != null) {
@@ -144,6 +145,8 @@ public class FOptionPane extends FDialog {
             add(displayObj);
         }
 
+        callback = callback0;
+
         int optionCount = options.length;
         buttons = new FButton[optionCount];
         for (int i = 0; i < optionCount; i++) {
@@ -151,13 +154,13 @@ public class FOptionPane extends FDialog {
             buttons[i] = add(new FButton(options[i], new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    onButtonClick(option, callback);
+                    setResult(option);
                 }
             }));
         }
     }
 
-    protected void onButtonClick(final int option, final Callback<Integer> callback) {
+    public void setResult(final int option) {
         hide();
         if (callback != null) {
             callback.run(option);
@@ -205,8 +208,12 @@ public class FOptionPane extends FDialog {
                 promptHeight = prompt.getHeight();
             }
         }
+
         x = PADDING;
-        y += promptHeight + gapBottom;
+        if (promptHeight > 0) {
+            y += promptHeight + gapBottom;
+        }
+
         if (displayObj != null) {
             displayObj.setBounds(x, y, width - 2 * x, displayObj.getHeight());
             y += displayObj.getHeight() + gapBottom;

@@ -11,7 +11,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 
 public class BugReportDialog extends FOptionPane {
     private static boolean dialogShown;
@@ -34,7 +33,7 @@ public class BugReportDialog extends FOptionPane {
     }
 
     @Override
-    protected void onButtonClick(final int option, final Callback<Integer> callback) {
+    public void setResult(final int option) {
         switch (option) {
         case 0:
             BugReporter.copyAndGoToForums(text);

@@ -1182,6 +1182,7 @@ forge-gui-mobile/src/forge/toolbox/FTextField.java -text
 forge-gui-mobile/src/forge/toolbox/FToggleSwitch.java -text
 forge-gui-mobile/src/forge/toolbox/GuiChoose.java -text
 forge-gui-mobile/src/forge/toolbox/GuiDialog.java -text
+forge-gui-mobile/src/forge/toolbox/ListChooser.java -text
 forge-gui-mobile/src/forge/util/LayoutHelper.java -text
 forge-gui-mobile/src/forge/util/PhysicsObject.java -text
 forge-gui-mobile/src/forge/util/Utils.java -text
