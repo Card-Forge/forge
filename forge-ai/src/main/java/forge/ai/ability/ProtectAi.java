@@ -121,7 +121,7 @@ public class ProtectAi extends SpellAbilityAi {
                     if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(c)) {
                         Card threat = game.getStack().peekAbility().getHostCard();
                         //check to see if threat has already been countered by resolved protect
-                        if (threat != null && !c.hasProtectionFrom(threat) && (ProtectAi.toProtectFrom(threat, sa) != null)) {
+                        if (threat != null && !c.hasProtectionFrom(threat) && ProtectAi.toProtectFrom(threat, sa) != null) {
                             return true;
                         }
                     }
@@ -240,7 +240,8 @@ public class ProtectAi extends SpellAbilityAi {
 
     private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
-        if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS) 
+        		&& game.getStack().isEmpty()) {
             return false;
         }
 
@@ -251,17 +252,6 @@ public class ProtectAi extends SpellAbilityAi {
         List<Card> list = getProtectCreatures(ai, sa);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard());
-
-        /*
-         * TODO - What this should probably do is if it's time for instants and
-         * abilities after Human declares attackers, determine desired
-         * protection before assigning blockers.
-         * 
-         * The other time we want protection is if I'm targeted by a damage or
-         * destroy spell on the stack
-         * 
-         * Or, add protection (to make it unblockable) when Compy is attacking.
-         */
 
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
@@ -278,19 +268,19 @@ public class ProtectAi extends SpellAbilityAi {
             }
         }
 
+        // Don't target cards that will die.
+        list = ComputerUtil.getSafeTargets(ai, sa, list);
+
         if (list.isEmpty()) {
             return mandatory && protectMandatoryTarget(ai, sa, mandatory);
         }
-
-        // Don't target cards that will die.
-        list = ComputerUtil.getSafeTargets(ai, sa, list);
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || sa.getTargets().getNumTargeted() == 0) {
                     if (mandatory) {
                         return protectMandatoryTarget(ai, sa, mandatory);
                     }
