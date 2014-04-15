@@ -17,7 +17,7 @@ import forge.toolbox.FEvent.FEventType;
 public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final float DISABLED_COMPOSITE = 0.25f;
-    private static final float PADDING = 3;
+    private static final float PADDING = 10;
 
     private FSkinImage imgL, imgM, imgR;
     private String text;
@@ -123,7 +123,7 @@ public class FButton extends FDisplayObject implements IButton {
     public TextBounds getAutoSizeBounds() {
         TextBounds bounds = new TextBounds();
         bounds.width = font.getFont().getBounds(text).width + 2 * PADDING;
-        bounds.height = font.getFont().getCapHeight();
+        bounds.height = 3 * font.getFont().getCapHeight();
         return bounds;
     }
 

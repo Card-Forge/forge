@@ -19,6 +19,7 @@ import forge.assets.FTextureImage;
 import forge.assets.ISkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
+import forge.error.BugReportDialog;
 import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -151,7 +152,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {
-        FOptionPane.showErrorDialog(text, title); //TODO: Create dialog with bells and whistles of desktop bug report dialog
+        BugReportDialog.show(title, text, showExitAppBtn);
     }
 
     @Override

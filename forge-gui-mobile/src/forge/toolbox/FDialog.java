@@ -14,7 +14,7 @@ public abstract class FDialog extends FOverlay {
     private static final FSkinColor TITLE_BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     private static final float TITLE_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
-    private static float INSET_X = 10;
+    private static float INSETS = 10;
 
     private FLabel lblTitlebar;
     private float totalHeight;
@@ -25,20 +25,19 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     protected final void doLayout(float width, float height) {
-        width -= 2 * INSET_X;
+        width -= 2 * INSETS;
 
-        //ensure no more than half the screen is covered by dialog so it can be moved to see anything
-        float contentHeight = layoutAndGetHeight(width, height / 2 - TITLE_HEIGHT);
+        float contentHeight = layoutAndGetHeight(width, height - TITLE_HEIGHT - 2 * INSETS);
         totalHeight = contentHeight + TITLE_HEIGHT;
         float y = (height - totalHeight) / 2;
 
-        lblTitlebar.setBounds(INSET_X, y, width, TITLE_HEIGHT);
+        lblTitlebar.setBounds(INSETS, y, width, TITLE_HEIGHT);
 
         //shift all children into position below titlebar
         float dy = lblTitlebar.getBottom();
         for (FDisplayObject child : getChildren()) {
             if (child != lblTitlebar) {
-                child.setLeft(child.getLeft() + INSET_X);
+                child.setLeft(child.getLeft() + INSETS);
                 child.setTop(child.getTop() + dy);
             }
         }
@@ -50,7 +49,7 @@ public abstract class FDialog extends FOverlay {
     protected void drawBackground(Graphics g) {
         super.drawBackground(g);
 
-        float x = INSET_X;
+        float x = INSETS;
         float y = lblTitlebar.getTop();
         float w = getWidth() - 2 * x;
         float h = totalHeight;
@@ -63,7 +62,7 @@ public abstract class FDialog extends FOverlay {
 
     @Override
     protected void drawOverlay(Graphics g) {
-        float x = INSET_X;
+        float x = INSETS;
         float y = lblTitlebar.getTop();
         float w = getWidth() - 2 * x;
         float h = totalHeight;

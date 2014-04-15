@@ -64,11 +64,11 @@ public class BugReportDialog {
         ArrayList<Object> options = new ArrayList<Object>();
         options.add(new JButton(new _CopyAndGo(area)));
         options.add(new JButton(new _SaveAction(area)));
-        options.add("Close");
+        options.add(BugReporter.CONTINUE);
         if (showExitAppBtn) {
             options.add(new JButton(new _ExitAction()));
         }
-        
+
         JOptionPane pane = new JOptionPane(p, JOptionPane.PLAIN_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options.toArray(), options.get(0));
         JDialog dlg = pane.createDialog(JOptionPane.getRootFrame(), title);
@@ -85,8 +85,8 @@ public class BugReportDialog {
         private final JTextArea text;
         
         public _CopyAndGo(JTextArea text) {
-            super("Copy and go to forum");
-            this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+            super(BugReporter.REPORT);
+            this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             this.text = text;
         }
 
@@ -101,7 +101,7 @@ public class BugReportDialog {
         private final JTextArea area;
 
         public _SaveAction(final JTextArea areaParam) {
-            super("Save to file");
+            super(BugReporter.SAVE);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             this.area = areaParam;
         }
@@ -115,7 +115,7 @@ public class BugReportDialog {
     @SuppressWarnings("serial")
     private static class _ExitAction extends AbstractAction {
         public _ExitAction() {
-            super("Exit application");
+            super(BugReporter.EXIT);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         }
 

@@ -40,11 +40,16 @@ import java.util.Map.Entry;
  */
 public class BugReporter {
     private static final int STACK_OVERFLOW_MAX_MESSAGE_LEN = 16 * 1024;
-    
+
+    public static final String REPORT = "Report";
+    public static final String SAVE = "Save";
+    public static final String CONTINUE = "Continue";
+    public static final String EXIT = "Exit";
+
     public static final String HELP_TEXT =
-            "<html>A template for a post in the bug reports forum topic is shown below.  Just select 'Copy and go to forum' "
+            "A template for a post in the bug reports forum topic is shown below.  Just select '" + REPORT + "' "
             + "and the template will be copied to your system clipboard and the forum page will open in your browser.  "
-            + "Then all you have to do is paste the text into a forum post and edit the description line.</html>";
+            + "Then all you have to do is paste the text into a forum post and edit the description line.";
     public static final String HELP_URL_LABEL =
             "Reporting bugs in Forge is very important. We sincerely thank you for your time."
             + " For help writing a solid bug report, please see:";

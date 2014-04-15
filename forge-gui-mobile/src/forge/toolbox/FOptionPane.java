@@ -133,7 +133,7 @@ public class FOptionPane extends FDialog {
 
         if (message != null) {
             prompt = add(new FTextArea(message));
-            prompt.setFontSize(14);
+            prompt.setFontSize(12);
         }
         else {
             prompt = null;
@@ -151,12 +151,16 @@ public class FOptionPane extends FDialog {
             buttons[i] = add(new FButton(options[i], new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    hide();
-                    if (callback != null) {
-                        callback.run(option);
-                    }
+                    onButtonClick(option, callback);
                 }
             }));
+        }
+    }
+
+    protected void onButtonClick(final int option, final Callback<Integer> callback) {
+        hide();
+        if (callback != null) {
+            callback.run(option);
         }
     }
 
@@ -205,7 +209,7 @@ public class FOptionPane extends FDialog {
         y += promptHeight + gapBottom;
         if (displayObj != null) {
             displayObj.setBounds(x, y, width - 2 * x, displayObj.getHeight());
-            y += gapBottom;
+            y += displayObj.getHeight() + gapBottom;
         }
 
         //determine size for and position buttons
@@ -216,7 +220,7 @@ public class FOptionPane extends FDialog {
                 maxButtonWidth = buttonWidth;
             }
         }
-        float gapBetween = 3;
+        float gapBetween = -2; //use negative so buttons closer together
         float buttonWidth = Math.max(maxButtonWidth, 120); //account for margins and enforce minimum width
         float dx = buttonWidth + gapBetween;
         float totalButtonWidth = dx * buttons.length - gapBetween;
