@@ -1,6 +1,5 @@
 package forge.toolbox;
 
-import forge.FThreads;
 import forge.game.card.Card;
 import forge.util.Callback;
 
@@ -48,11 +47,6 @@ public class GuiDialog {
     }
 
     public static void message(final String message, final String title) {
-        FThreads.invokeInEdtAndWait(new Runnable() {
-            @Override
-            public void run() {
-                FOptionPane.showMessageDialog(message, title, null);
-            }
-        });
+        FOptionPane.showMessageDialog(message, title, null);
     }
 }

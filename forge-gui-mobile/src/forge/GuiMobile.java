@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Gdx;
@@ -46,6 +44,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
+import forge.util.WaitRunnable;
 
 public class GuiMobile implements IGuiBase {
     @Override
@@ -59,20 +58,12 @@ public class GuiMobile implements IGuiBase {
             proc.run();
         }
         else {
-            final CountDownLatch cdl = new CountDownLatch(1);
-            Gdx.app.postRunnable(new Runnable() {
+            new WaitRunnable() {
                 @Override
                 public void run() {
                     proc.run();
-                    cdl.countDown();
                 }
-            });
-            try {
-                cdl.await();
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            }.invokeAndWait();
         }
     }
 

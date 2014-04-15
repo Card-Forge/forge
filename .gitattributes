@@ -1186,6 +1186,7 @@ forge-gui-mobile/src/forge/toolbox/ListChooser.java -text
 forge-gui-mobile/src/forge/util/LayoutHelper.java -text
 forge-gui-mobile/src/forge/util/PhysicsObject.java -text
 forge-gui-mobile/src/forge/util/Utils.java -text
+forge-gui-mobile/src/forge/util/WaitRunnable.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
