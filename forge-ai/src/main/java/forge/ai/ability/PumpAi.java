@@ -242,29 +242,29 @@ public class PumpAi extends PumpAiBase {
                 int buffedAtk = attack, buffedDef = defense;
                 for (Card humanCreature : humCreatures) {
                 	for (Card aiCreature : aiCreatures) {
+                	    if (sa.isSpell()) {   //heroic triggers adding counters
+                            for (Trigger t : aiCreature.getTriggers()) {
+                                if (t.getMode() == TriggerType.SpellCast) {
+                                    final Map<String, String> params = t.getMapParams();
+                                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                                        SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
+                                        if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
+                                            int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+                                            buffedAtk += amount;
+                                            buffedDef += amount;
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                 		if (sa.getParam("AILogic").equals("PowerDmg")) {
-                			if (FightAi.canKill(aiCreature, humanCreature, attack)) {
+                			if (FightAi.canKill(aiCreature, humanCreature, buffedAtk)) {
 	                			sa.getTargets().add(aiCreature);
 	                			tgtFight.getTargets().add(humanCreature);
 	                			return true;
 	                		}
                 		} else {
-                		    if (sa.isSpell()) {   //heroic triggers adding counters
-                                for (Trigger t : aiCreature.getTriggers()) {
-                                    if (t.getMode() == TriggerType.SpellCast) {
-                                        final Map<String, String> params = t.getMapParams();
-                                        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
-                                            SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
-                                            if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
-                                                int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
-                                                buffedAtk += amount;
-                                                buffedDef += amount;
-                                            }
-                                            break;
-                                        }
-                                    }
-                                }
-                		    }
 	                		if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
 	                			sa.getTargets().add(aiCreature);
 	                			tgtFight.getTargets().add(humanCreature);
