@@ -123,46 +123,64 @@ public class Forge implements ApplicationListener {
     }
 
     private static void setCurrentScreen(FScreen screen0) {
-        Animation.endAll(); //end all active animations before switching screens
-
-        currentScreen = screen0;
-        currentScreen.setSize(screenWidth, screenHeight);
-        currentScreen.onActivate();
+        try {
+            Animation.endAll(); //end all active animations before switching screens
+    
+            currentScreen = screen0;
+            currentScreen.setSize(screenWidth, screenHeight);
+            currentScreen.onActivate();
+        }
+        catch (Exception ex) {
+            batch.end();
+            BugReporter.reportException(ex);
+        }
     }
 
     @Override
     public void render() {
-        Animation.advanceAll();
-
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
-
-        FContainer screen = currentScreen;
-        if (screen == null) {
-            screen = splashScreen;
-            if (screen == null) { 
-                return;
+        try {
+            Animation.advanceAll();
+    
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+    
+            FContainer screen = currentScreen;
+            if (screen == null) {
+                screen = splashScreen;
+                if (screen == null) { 
+                    return;
+                }
             }
+    
+            batch.begin();
+            Graphics g = new Graphics();
+            screen.draw(g);
+            for (FOverlay overlay : FOverlay.getOverlays()) {
+                overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
+                overlay.draw(g);
+            }
+            batch.end();
         }
-
-        batch.begin();
-        Graphics g = new Graphics();
-        screen.draw(g);
-        for (FOverlay overlay : FOverlay.getOverlays()) {
-            overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
-            overlay.draw(g);
+        catch (Exception ex) {
+            batch.end();
+            BugReporter.reportException(ex);
         }
-        batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        screenWidth = width;
-        screenHeight = height;
-        if (currentScreen != null) {
-            currentScreen.setSize(width, height);
+        try {
+            screenWidth = width;
+            screenHeight = height;
+            if (currentScreen != null) {
+                currentScreen.setSize(width, height);
+            }
+            else if (splashScreen != null) {
+                splashScreen.setSize(width, height);
+            }
         }
-        else if (splashScreen != null) {
-            splashScreen.setSize(width, height);
+        catch (Exception ex) {
+            batch.end();
+            BugReporter.reportException(ex);
         }
     }
 
