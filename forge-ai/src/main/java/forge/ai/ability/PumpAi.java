@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -17,11 +18,14 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PumpAi extends PumpAiBase {
 
@@ -235,6 +239,7 @@ public class PumpAi extends PumpAiBase {
                 if (humCreatures.isEmpty() || aiCreatures.isEmpty()) {
                 	return false;
                 }
+                int buffedAtk = attack, buffedDef = defense;
                 for (Card humanCreature : humCreatures) {
                 	for (Card aiCreature : aiCreatures) {
                 		if (sa.getParam("AILogic").equals("PowerDmg")) {
@@ -244,7 +249,23 @@ public class PumpAi extends PumpAiBase {
 	                			return true;
 	                		}
                 		} else {
-	                		if (FightAi.shouldFight(aiCreature, humanCreature, attack, defense)) {
+                		    if (sa.isSpell()) {   //heroic triggers adding counters
+                                for (Trigger t : aiCreature.getTriggers()) {
+                                    if (t.getMode() == TriggerType.SpellCast) {
+                                        final Map<String, String> params = t.getMapParams();
+                                        if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                                            SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
+                                            if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
+                                                int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+                                                buffedAtk += amount;
+                                                buffedDef += amount;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                		    }
+	                		if (FightAi.shouldFight(aiCreature, humanCreature, buffedAtk, buffedDef)) {
 	                			sa.getTargets().add(aiCreature);
 	                			tgtFight.getTargets().add(humanCreature);
 	                			return true;

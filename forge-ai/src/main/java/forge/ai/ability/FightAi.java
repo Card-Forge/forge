@@ -152,7 +152,8 @@ public class FightAi extends SpellAbilityAi {
     	if (opponent.getSVar("Targeting").equals("Dies")) {
     		return true;
     	}
-    	if (opponent.hasProtectionFrom(fighter) || !opponent.canBeDestroyed()) {
+    	if (opponent.hasProtectionFrom(fighter) || !opponent.canBeDestroyed() 
+    	        || !opponent.getShield().isEmpty() || ComputerUtil.canRegenerate(opponent.getController(), opponent)) {
     		return false;
     	}
     	if (fighter.hasKeyword("Deathtouch") || ComputerUtilCombat.getDamageToKill(opponent) <= fighter.getNetAttack() + pumpAttack) {

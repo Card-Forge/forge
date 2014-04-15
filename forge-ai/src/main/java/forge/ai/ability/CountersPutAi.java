@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.*;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -16,6 +17,8 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -23,6 +26,7 @@ import forge.util.MyRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class CountersPutAi extends SpellAbilityAi {
@@ -113,6 +117,21 @@ public class CountersPutAi extends SpellAbilityAi {
             }
             for (Card humanCreature : humCreatures) {
             	for (Card aiCreature : aiCreatures) {
+            	    if (sa.isSpell()) {   //heroic triggers adding counters
+                        for (Trigger t : aiCreature.getTriggers()) {
+                            if (t.getMode() == TriggerType.SpellCast) {
+                                final Map<String, String> params = t.getMapParams();
+                                if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                                    SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
+                                    if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
+                                        int n = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
+                                        nPump += n;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
             		if (FightAi.shouldFight(aiCreature, humanCreature, nPump, nPump)) {
             			sa.getTargets().add(aiCreature);
             			tgtFight.getTargets().add(humanCreature);
