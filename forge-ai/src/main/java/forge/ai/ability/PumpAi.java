@@ -246,7 +246,8 @@ public class PumpAi extends PumpAiBase {
                             for (Trigger t : aiCreature.getTriggers()) {
                                 if (t.getMode() == TriggerType.SpellCast) {
                                     final Map<String, String> params = t.getMapParams();
-                                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                                    if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer")) 
+                                    		&& params.containsKey("Execute")) {
                                         SpellAbility heroic = AbilityFactory.getAbility(aiCreature.getSVar(params.get("Execute")),aiCreature);
                                         if ("Self".equals(heroic.getParam("Defined")) && "P1P1".equals(heroic.getParam("CounterType"))) {
                                             int amount = AbilityUtils.calculateAmount(aiCreature, heroic.getParam("CounterNum"), heroic);
