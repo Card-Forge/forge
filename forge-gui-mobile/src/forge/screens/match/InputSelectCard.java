@@ -188,9 +188,9 @@ public class InputSelectCard {
                     float h = owner.getHeight();
                     float w = h / FCardPanel.ASPECT_RATIO;
                     if (owner.isTapped()) {
-                        w = owner.getWidth();
-                        h = w * FCardPanel.ASPECT_RATIO;
-                        y = owner.getHeight() - h;
+                        h = w;
+                        w = owner.getHeight();
+                        y = pos.y + owner.getHeight() - h;
                     }
                     g.drawRect(2, Color.GREEN, x, y, w, h);
                 }
