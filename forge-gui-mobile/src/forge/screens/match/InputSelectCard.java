@@ -16,6 +16,7 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.match.input.Input;
 import forge.match.input.InputPassPriority;
+import forge.match.input.InputPayMana;
 import forge.screens.FScreen;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
@@ -45,6 +46,16 @@ public class InputSelectCard {
         if (currentInput instanceof InputPassPriority) {
             CardOptionsList.show(cardPanel,
                     card.getAllPossibleAbilities(FControl.getCurrentPlayer(), true),
+                    new Callback<SpellAbility>() {
+                @Override
+                public void run(SpellAbility result) {
+                    FControl.getInputProxy().selectAbility(result);
+                }
+            });
+        }
+        else if (currentInput instanceof InputPayMana) {
+            CardOptionsList.show(cardPanel,
+                    ((InputPayMana)currentInput).getUsefulManaAbilities(card),
                     new Callback<SpellAbility>() {
                 @Override
                 public void run(SpellAbility result) {

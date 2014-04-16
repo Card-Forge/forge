@@ -61,6 +61,51 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         activateManaAbility(card, this.manaCost);
     }
 
+    @Override
+    public void selectAbility(final SpellAbility ab) {
+        if (ab != null && ab.isManaAbility()) {
+            activateManaAbility(ab.getHostCard(), this.manaCost, ab);
+        }
+    }
+
+    public List<SpellAbility> getUsefulManaAbilities(Card card) {
+        List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+
+        if (card.getController() != player) {
+            return abilities;
+        }
+
+        byte colorCanUse = 0;
+        for (final byte color : MagicColor.WUBRG) {
+            if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) {
+                colorCanUse |= color;
+            }
+        }
+        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) {
+            colorCanUse |= ManaAtom.COLORLESS;
+        }
+        if (colorCanUse == 0) { // no mana cost or something 
+            return abilities;
+        }
+
+        final String typeRes = manaCost.getSourceRestriction();
+        if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
+            return abilities;
+        }
+
+        for (SpellAbility ma : card.getManaAbility()) {
+            ma.setActivatingPlayer(player);
+            AbilityManaPart m = ma.getManaPartRecursive();
+            if (m == null || !ma.canPlay())                                 { continue; }
+            if (!abilityProducesManaColor(ma, m, colorCanUse))              { continue; }
+            if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())    { continue; }
+            if (!m.meetsManaRestrictions(saPaidFor))                        { continue; }
+
+            abilities.add(ma);
+        }
+        return abilities;
+    }
+
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
         player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost);
@@ -82,6 +127,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
      */
     protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
+        activateManaAbility(card, manaCost, null);
+    }
+    protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost, SpellAbility chosenAbility) {
         if ( locked ) {
             System.err.print("Should wait till previous call to playAbility finishes.");
             return;
@@ -99,11 +147,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             if (manaCost.isAnyPartPayableWith(color, player.getManaPool())) { colorCanUse |= color; }
             if (manaCost.needsColor(color, player.getManaPool()))           { colorNeeded |= color; }
         }
-        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) 
+        if (manaCost.isAnyPartPayableWith((byte) ManaAtom.COLORLESS, player.getManaPool())) {
             colorCanUse |= ManaAtom.COLORLESS;
+        }
 
-        if ( 0 == colorCanUse ) // no mana cost or something 
+        if (colorCanUse == 0) { // no mana cost or something 
             return;
+        }
         
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for (am:abilities) loop :(
@@ -131,7 +181,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
 
-        if (abilities.isEmpty()) {
+        if (abilities.isEmpty() || (chosenAbility != null && !abilities.contains(chosenAbility))) {
             return;
         }
 
@@ -181,7 +231,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
 
-        final SpellAbility chosen = abilities.size() > 1 && choice ? SGuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
+        final SpellAbility chosen;
+        if (chosenAbility == null) {
+            chosen = abilities.size() > 1 && choice ? SGuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
+        }
+        else {
+            chosen = chosenAbility;
+        }
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
         chosen.getManaPartRecursive().setExpressChoice(colors);
 
