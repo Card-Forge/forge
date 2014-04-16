@@ -26,15 +26,18 @@ import forge.util.Callback;
 import forge.util.Utils;
 
 public class InputSelectCard {
+    private static final float LIST_OPTION_HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    private static CardOptionsList<?> visibleList;
+
     private InputSelectCard() {
     }
 
-    public static void selectCard(CardAreaPanel cardPanel, List<Card> orderedCards) {
+    public static void selectCard(CardAreaPanel cardPanel) {
         Input currentInput = FControl.getInputQueue().getInput();
         if (currentInput == null) { return; }
 
-        if (CardOptionsList.visibleList != null) {
-            boolean isCurrentOwner = (CardOptionsList.visibleList.owner == cardPanel);
+        if (visibleList != null) {
+            boolean isCurrentOwner = (visibleList.owner == cardPanel);
             CardOptionsList.hide();
             if (isCurrentOwner) {
                 return;
@@ -75,6 +78,26 @@ public class InputSelectCard {
         }
     }
 
+    public static boolean handlePan(CardAreaPanel cardPanel, float x, float y, boolean isPanStop) {
+        if (visibleList == null || visibleList.owner != cardPanel) {
+            return false;
+        }
+        if (y < 0 && visibleList.getCount() > 0) {
+            int index = Math.round(visibleList.getCount() + y / LIST_OPTION_HEIGHT);
+            if (index < 0) {
+                index = 0;
+            }
+            if (isPanStop) {
+                visibleList.getItemAt(index).tap(0, 0, 1);
+            }
+            else {
+                //visibleList.getItemAt(index).press(0, 0);
+            }
+            return true;
+        }
+        return false;
+    }
+
     public enum AttackOption {
         DECLARE_AS_ATTACKER("Declare as Attacker"),
         REMOVE_FROM_COMBAT("Remove from Combat"),
@@ -95,9 +118,7 @@ public class InputSelectCard {
 
     private static class CardOptionsList<T> extends FList<T> {
         private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
-        private static final float LIST_OPTION_HEIGHT = Utils.AVG_FINGER_HEIGHT;
 
-        private static CardOptionsList<?> visibleList;
         private static final Backdrop backdrop = new Backdrop();
 
         private static <T> void show(CardAreaPanel cardPanel, Collection<T> options, final Callback<T> callback) {
@@ -140,7 +161,7 @@ public class InputSelectCard {
             visibleList = optionsList;
         }
 
-        private CardAreaPanel owner;
+        private final CardAreaPanel owner;
 
         private CardOptionsList(CardAreaPanel owner0, Iterable<T> options) {
             super(options);

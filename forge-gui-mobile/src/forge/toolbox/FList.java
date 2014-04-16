@@ -229,7 +229,7 @@ public class FList<E> extends FScrollPane {
         }
     }
 
-    protected class ListItem extends FDisplayObject {
+    public class ListItem extends FDisplayObject {
         private final E value;
         private boolean pressed;
 

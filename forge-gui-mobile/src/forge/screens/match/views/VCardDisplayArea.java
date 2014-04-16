@@ -168,10 +168,18 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         @Override
         public boolean press(float x, float y) {
-            if (displayArea != null) {
-                InputSelectCard.selectCard(this, displayArea.orderedCards);
-            }
+            InputSelectCard.selectCard(this);
             return true;
+        }
+
+        @Override
+        public boolean pan(float x, float y, float deltaX, float deltaY) {
+            return InputSelectCard.handlePan(this, x, y, false);
+        }
+
+        @Override
+        public boolean panStop(float x, float y) {
+            return InputSelectCard.handlePan(this, x, y, true);
         }
     }
 }
