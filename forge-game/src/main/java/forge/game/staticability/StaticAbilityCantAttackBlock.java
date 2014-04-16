@@ -20,9 +20,15 @@ package forge.game.staticability;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
+import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Iterables;
 
 /**
  * The Class StaticAbility_CantBeCast.
@@ -50,6 +56,15 @@ public class StaticAbilityCantAttackBlock {
         if (params.containsKey("Target")
                 && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard)) {
             return false;
+        }
+
+        if (params.containsKey("UnlessDefenderControls")) {
+            String type = params.get("UnlessDefenderControls");
+            Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
+            List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
+            if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
+                return false;
+            }
         }
 
         return true;

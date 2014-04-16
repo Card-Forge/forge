@@ -2,7 +2,7 @@ Name:Bog Serpent
 ManaCost:5 B
 Types:Creature Serpent
 PT:5/5
-K:CARDNAME can't attack unless defending player controls a Swamp.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Swamp | Description$ CARDNAME can't attack unless defending player controls a Swamp.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Swamp.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Swamps, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Swamp.YouCtrl

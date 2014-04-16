@@ -18,7 +18,6 @@
 package forge.game.combat;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -31,7 +30,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
@@ -899,41 +897,11 @@ public class CombatUtil {
         } // hasKeyword = CARDNAME can't attack if defending player controls an
           // untapped creature with power ...
 
-        final List<Card> list = defendingPlayer.getCardsIn(ZoneType.Battlefield);
-        List<Card> temp;
         for (String keyword : c.getKeyword()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
                 return false;
             } else if (keyword.equals("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
-            } else if (keyword.equals("CARDNAME can't attack unless defending player controls an Island.")) {
-                temp = CardLists.getType(list, "Island");
-                if (temp.isEmpty()) {
-                    return false;
-                }
-            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Forest.")) {
-                temp = CardLists.getType(list, "Forest");
-                if (temp.isEmpty()) {
-                    return false;
-                }
-            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Swamp.")) {
-                temp = CardLists.getType(list, "Swamp");
-                if (temp.isEmpty()) {
-                    return false;
-                }
-            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a Mountain.")) {
-                temp = CardLists.getType(list, "Mountain");
-                if (temp.isEmpty()) {
-                    return false;
-                }
-            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a snow land.")) {
-                temp = CardLists.filter(list, CardPredicates.Presets.SNOW_LANDS);
-                if (temp.isEmpty()) {
-                    return false;
-                }
-            } else if (keyword.equals("CARDNAME can't attack unless defending player controls a blue permanent.")) {
-                if (!Iterables.any(list, CardPredicates.isColor(MagicColor.BLUE)))
-                    return false;
             } else if (keyword.equals("CARDNAME can't attack during extra turns.")) {
                 if (c.getGame().getPhaseHandler().getPlayerTurn().isPlayingExtraTurn())
                     return false;
