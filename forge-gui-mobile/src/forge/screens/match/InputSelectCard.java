@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
@@ -21,14 +22,17 @@ import forge.screens.FScreen;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FList;
 import forge.util.Callback;
 import forge.util.Utils;
 
 public class InputSelectCard {
     private static final float LIST_OPTION_HEIGHT = Utils.AVG_FINGER_HEIGHT;
+    private static final long DOUBLE_TAP_INTERVAL = Utils.secondsToTimeSpan(FGestureAdapter.DOUBLE_TAP_INTERVAL); 
     private static CardOptionsList<?> visibleList;
     private static CardOptionsList<?>.ListItem pressedItem;
+    private static long lastSelectTime;
 
     private InputSelectCard() {
     }
@@ -37,13 +41,25 @@ public class InputSelectCard {
         Input currentInput = FControl.getInputQueue().getInput();
         if (currentInput == null) { return; }
 
+        long now = Gdx.input.getCurrentEventTime();
+
         if (visibleList != null) {
             boolean isCurrentOwner = (visibleList.owner == cardPanel);
-            CardOptionsList.hide();
+            if (isCurrentOwner && visibleList.getCount() > 0 &&
+                    now - lastSelectTime <= DOUBLE_TAP_INTERVAL) {
+                //auto-select first option if double tapped
+                visibleList.getItemAt(0).tap(0, 0, 1);
+            }
+            else {
+                //otherwise hide options when pressed a second time
+                CardOptionsList.hide();
+            }
             if (isCurrentOwner) {
                 return;
             }
         }
+
+        lastSelectTime = now;
 
         final Card card = cardPanel.getCard();
 
@@ -200,11 +216,13 @@ public class InputSelectCard {
 
             @Override
             public boolean press(float x, float y) {
-                if (visibleList == null) { return false; }
-                CardAreaPanel owner = visibleList.owner;
-                boolean onOwner = owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y));
-                hide(); //auto-hide when backdrop pressed
-                return onOwner; //allow press to pass through to object if it's not the owner
+                if (visibleList != null) {
+                    CardAreaPanel owner = visibleList.owner;
+                    if (!owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
+                        hide(); //auto-hide when backdrop pressed unless on owner
+                    }
+                }
+                return false; //allow press to pass through to object
             }
 
             @Override

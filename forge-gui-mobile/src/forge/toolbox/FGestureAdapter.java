@@ -76,11 +76,11 @@ public abstract class FGestureAdapter extends InputAdapter {
      * @param flingDelay0 time in seconds the finger must have been dragged for a fling event to be fired. */
     public FGestureAdapter(float tapSquareSize0, float tapCountInterval0, float pressDelay0, float longPressDelay0, float quickTapDelay0, float flingDelay0) {
         tapSquareSize = tapSquareSize0;
-        tapCountInterval = (long)(tapCountInterval0 * 1000000000l);
+        tapCountInterval = Utils.secondsToTimeSpan(tapCountInterval0);
         pressDelay = pressDelay0;
         longPressDelay = longPressDelay0;
         quickTapDelay = quickTapDelay0;
-        flingDelay = (long)(flingDelay0 * 1000000000l);
+        flingDelay = Utils.secondsToTimeSpan(flingDelay0);
     }
 
     @Override
