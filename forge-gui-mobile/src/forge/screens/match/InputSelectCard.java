@@ -192,6 +192,10 @@ public class InputSelectCard {
                         w = owner.getHeight();
                         y = pos.y + owner.getHeight() - h;
                     }
+                    if (owner.getAttachedToPanel() != null) {
+                        //redraw owner if needed so it appears on top of cards above it in stack
+                        owner.draw(g, pos.x, pos.y);
+                    }
                     g.drawRect(2, Color.GREEN, x, y, w, h);
                 }
             }

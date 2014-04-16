@@ -53,10 +53,13 @@ public class FCardPanel extends FDisplayObject {
 
     @Override
     public void draw(Graphics g) {
+        draw(g, 0, 0);
+    }
+    public void draw(Graphics g, float x, float y) {
         if (card == null) { return; }
 
-        float x = PADDING;
-        float y = PADDING;
+        x += PADDING;
+        y += PADDING;
         float w = getWidth() - 2 * PADDING;
         float h = getHeight() - 2 * PADDING;
         if (w == h) { //adjust width if needed to make room for tapping
