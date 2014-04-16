@@ -166,28 +166,10 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             return attachedPanels;
         }
 
-        public enum AttackOption {
-            DECLARE_AS_ATTACKER("Declare as Attacker"),
-            REMOVE_FROM_COMBAT("Remove from Combat"),
-            ATTACK_THIS_DEFENDER("Attack this Defender"),
-            ACTIVATE_BAND("Activate Band"),
-            JOIN_BAND("Join Band");
-
-            private String text;
-
-            private AttackOption(String text0) {
-                text = text0;
-            }
-
-            public String toString() {
-                return text;
-            }
-        }
-
         @Override
-        public boolean tap(float x, float y, int count) {
+        public boolean press(float x, float y) {
             if (displayArea != null) {
-                InputSelectCard.selectCard(getCard(), displayArea.orderedCards);
+                InputSelectCard.selectCard(this, displayArea.orderedCards);
             }
             return true;
         }

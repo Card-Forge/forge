@@ -20,7 +20,7 @@ public abstract class FDropDown extends FScrollPane {
     protected ScrollBounds paneSize;
 
     public FDropDown() {
-        setVisible(false); //hide by default
+        super.setVisible(false); //hide by default
     }
 
     public FMenuTab getMenuTab() {
@@ -37,11 +37,11 @@ public abstract class FDropDown extends FScrollPane {
     }
 
     public void show() {
-        this.setVisible(true);
+        setVisible(true);
     }
 
     public void hide() {
-        this.setVisible(false);
+        setVisible(false);
     }
 
     @Override
@@ -59,7 +59,7 @@ public abstract class FDropDown extends FScrollPane {
 
     @Override
     public void setVisible(boolean visible0) {
-        if (this.isVisible() == visible0) { return; }
+        if (isVisible() == visible0) { return; }
 
         //add/remove drop down from current screen when its visibility changes
         FScreen screen = Forge.getCurrentScreen();
@@ -76,6 +76,7 @@ public abstract class FDropDown extends FScrollPane {
         else {
             screen.remove(this);
             if (backdrop != null) {
+                backdrop.setVisible(false);
                 screen.remove(backdrop);
                 backdrop = null;
             }
@@ -145,6 +146,7 @@ public abstract class FDropDown extends FScrollPane {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (!isVisible()) { return false; }
             hide(); //always hide if tapped
 
             //prevent owner handling this tap unless it's a sub menu and not over it
