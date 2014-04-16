@@ -28,6 +28,7 @@ import forge.util.Utils;
 public class InputSelectCard {
     private static final float LIST_OPTION_HEIGHT = Utils.AVG_FINGER_HEIGHT;
     private static CardOptionsList<?> visibleList;
+    private static CardOptionsList<?>.ListItem pressedItem;
 
     private InputSelectCard() {
     }
@@ -79,6 +80,10 @@ public class InputSelectCard {
     }
 
     public static boolean handlePan(CardAreaPanel cardPanel, float x, float y, boolean isPanStop) {
+        if (pressedItem != null) {
+            pressedItem.release(x, y); //prevent pressed item getting stuck
+            pressedItem = null;
+        }
         if (visibleList == null || visibleList.owner != cardPanel) {
             return false;
         }
@@ -87,13 +92,17 @@ public class InputSelectCard {
             if (index < 0) {
                 index = 0;
             }
-            if (isPanStop) {
-                visibleList.getItemAt(index).tap(0, 0, 1);
+            CardOptionsList<?>.ListItem item = visibleList.getItemAt(index);
+            if (item != null) {
+                if (isPanStop) {
+                    item.tap(0, 0, 1);
+                }
+                else {
+                    item.press(0, 0);
+                    pressedItem = item;
+                }
+                return true;
             }
-            else {
-                //visibleList.getItemAt(index).press(0, 0);
-            }
-            return true;
         }
         return false;
     }
