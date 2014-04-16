@@ -393,14 +393,8 @@ public class ManaCostAdjustment {
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return;
         }
-        int value = 0;
-        if ("X".equals(amount)) {
-            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-        } else if ("AffectedX".equals(amount)) {
-            value = CardFactoryUtil.xCount(card, hostCard.getSVar("AffectedX"));
-        } else {
-            value = Integer.valueOf(amount);
-        }
+        // CardFactory.xCout() cannot calculate cards like Battlefield Thaumaturge
+        int value = AbilityUtils.calculateAmount(hostCard, amount, sa);
 
         if (!params.containsKey("Color")) {
             manaCost.decreaseColorlessMana(value);
