@@ -2551,13 +2551,15 @@ public class CardFactoryUtil {
 
         if (card.hasStartOfKeyword("Bestow")) {
             final int bestowPos = card.getKeywordPosition("Bestow");
-            final String cost = card.getKeyword().get(bestowPos).split(":")[1];
+            final String[] params = card.getKeyword().get(bestowPos).split(":");
+            final String cost = params[1];
             card.removeIntrinsicKeyword(card.getKeyword().get(bestowPos));       
 
             final StringBuilder sbAttach = new StringBuilder();
             sbAttach.append("SP$ Attach | Cost$ ");
             sbAttach.append(cost);
-            sbAttach.append(" | AILogic$ Pump | Bestow$ True | ValidTgts$ Creature");
+            sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
+            sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
             final SpellAbility bestow = AbilityFactory.getAbility(sbAttach.toString(), card);
 
             bestow.setDescription("Bestow " + ManaCostParser.parse(cost) + " (If you cast this"
