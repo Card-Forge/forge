@@ -1081,7 +1081,14 @@ public class CardFactoryUtil {
         }
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
-            Card ce = sq[0].contains("Equipped") && c.isEquipping() ? c.getEquipping().get(0) : c;
+            Card ce;
+            if (sq[0].contains("Equipped") && c.isEquipping()) {
+                ce = c.getEquipping().get(0);
+            } else if (sq[0].contains("Remembered")) {
+                ce = (Card) c.getRemembered().get(0);
+            } else {
+                ce = c;
+            }
             return doXMath(ce.getCMC(), m, c);
         }
         // Count$SumCMC_valid

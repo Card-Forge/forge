@@ -298,6 +298,8 @@ public class ComputerUtil {
                 final CostPayment pay = new CostPayment(cost, sa);
                 pay.payComputerCosts(new AiCostDecision(ai, sa));
             }
+            // Disciple of Deceit
+            AbilityUtils.handleRemembering(sa);
 
             AbilityUtils.resolve(sa);
 

@@ -1294,7 +1294,7 @@ public class AbilityUtils {
             host.getRemembered().addAll(sa.getPayingMana());
         }
 
-        if (sa.hasParam("RememberCostCards")) {
+        if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
             if (sa.getParam("Cost").contains("Exile")) {
                 final List<Card> paidListExiled = sa.getPaidList("Exiled");
                 for (final Card exiledAsCost : paidListExiled) {
@@ -1317,6 +1317,12 @@ public class AbilityUtils {
                 final List<Card> paidListUnattached = sa.getPaidList("Unattached");
                 for (final Card unattachedAsCost : paidListUnattached) {
                     host.addRemembered(unattachedAsCost);
+                }
+            }
+            else if (sa.getParam("Cost").contains("Discard")) {
+                final List<Card> paidListDiscarded = sa.getPaidList("Discarded");
+                for (final Card discardedAsCost : paidListDiscarded) {
+                    host.addRemembered(discardedAsCost);
                 }
             }
         }
