@@ -18,8 +18,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.Random;
-
 /**
  * <p>
  * AbilityFactory_Token class.
@@ -85,7 +83,7 @@ public class TokenAi extends SpellAbilityAi {
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (ai.getCardsIn(ZoneType.Battlefield, this.tokenName).size() > 0) {
+                if (!ai.getCardsIn(ZoneType.Battlefield, this.tokenName).isEmpty()) {
                     return false;
                 }
             }
@@ -126,8 +124,6 @@ public class TokenAi extends SpellAbilityAi {
             return false;
         }
 
-        // prevent run-away activations - first time will always return true
-        final Random r = MyRandom.getRandom();
         final Card source = sa.getHostCard();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -181,7 +177,6 @@ public class TokenAi extends SpellAbilityAi {
         if (SpellAbilityAi.playReusable(ai, sa)) {
             return true;
         }
-
         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return true;
         }
@@ -189,7 +184,7 @@ public class TokenAi extends SpellAbilityAi {
             return true;
         }
 
-        return (r.nextFloat() < .8);
+        return MyRandom.getRandom().nextFloat() < .8;
     }
 
     @Override

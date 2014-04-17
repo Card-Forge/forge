@@ -340,7 +340,7 @@ public class AiController {
     }
     
     
-    private List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList)
+    private ArrayList<SpellAbility> getOriginalAndAltCostAbilities(final ArrayList<SpellAbility> originList)
     {
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : originList) {
@@ -350,7 +350,7 @@ public class AiController {
             newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
     
-        final List<SpellAbility> result = new ArrayList<SpellAbility>();
+        final ArrayList<SpellAbility> result = new ArrayList<SpellAbility>();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);
             result.addAll(GameActionUtil.getOptionalCosts(sa));
@@ -588,7 +588,7 @@ public class AiController {
      *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    private SpellAbility chooseCounterSpell(final List<SpellAbility> possibleCounters) {
+    private SpellAbility chooseCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
         if ( possibleCounters == null || possibleCounters.isEmpty())
             return null;;
         
@@ -761,9 +761,9 @@ public class AiController {
             }
     
             // cast 0 mana cost spells first (might be a Mox)
-            if (a1 == 0) {
+            if (a1 == 0 && b1 > 0) {
                 return -1;
-            } else if (b1 == 0) {
+            } else if (a1 > 0 && b1 == 0) {
                 return 1;
             }
 
@@ -1132,7 +1132,7 @@ public class AiController {
         return result;
     }
     
-    private SpellAbility chooseSpellAbilyToPlay(final List<SpellAbility> all, boolean skipCounter) {
+    private SpellAbility chooseSpellAbilyToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
         if ( all == null || all.isEmpty() )
             return null;
 
