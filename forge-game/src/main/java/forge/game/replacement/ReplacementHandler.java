@@ -145,7 +145,10 @@ public class ReplacementHandler {
         chosenRE.setHasRun(false);
         String message = chosenRE.toString();
         if ( !StringUtils.isEmpty(message))
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, chosenRE.toString());
+        	if (chosenRE.getHostCard() != null) {
+        		message = message.replaceAll("CARDNAME", chosenRE.getHostCard().getName());
+        	}
+            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
         return res;
     }
 
