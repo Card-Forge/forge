@@ -5566,11 +5566,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                         final List<Card> list = AbilityUtils.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : list) {
-                            if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
-                                return false;
+                            if (this.equipping.contains(c) || c.equals(this.enchanting)) { // handle multiple targets
+                                return true;
                             }
                         }
                     }
+                    return false;
                 }
             } else {
                 if (((this.enchanting == null) || !this.enchanting.isValid(restriction, sourceController, source))
