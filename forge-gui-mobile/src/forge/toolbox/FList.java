@@ -256,6 +256,11 @@ public class FList<E> extends FScrollPane {
             float w = getWidth();
             float h = renderer.getItemHeight();
 
+            float alphaComposite = pressed ? 1 : getUnpressedAlphaComposite();
+            if (alphaComposite < 1) {
+                g.setAlphaComposite(alphaComposite);
+            }
+
             FSkinColor fillColor = getItemFillColor(this);
             if (fillColor != null) {
                 g.fillRect(fillColor, 0, 0, w, h);
@@ -266,7 +271,15 @@ public class FList<E> extends FScrollPane {
             if (drawLineSeparators()) {
                 g.drawLine(1, LINE_COLOR, 0, h, w, h);
             }
+
+            if (alphaComposite < 1) {
+                g.resetAlphaComposite();
+            }
         }
+    }
+
+    protected float getUnpressedAlphaComposite() {
+        return 1;
     }
 
     protected FSkinColor getItemFillColor(ListItem item) {
@@ -300,7 +313,8 @@ public class FList<E> extends FScrollPane {
         @Override
         public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, float width, float height) {
             float x = width * INSETS_FACTOR;
-            g.drawText(value.toString(), font, color, x, 0, width - 2 * x, height, false, HAlignment.LEFT, true);
+            float y = x;
+            g.drawText(value.toString(), font, color, x, y, width - 2 * x, height - 2 * y, false, HAlignment.LEFT, true);
         }
     }
 }

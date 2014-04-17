@@ -142,7 +142,8 @@ public class InputSelectCard {
     }
 
     private static class CardOptionsList<T> extends FList<T> {
-        private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.5f);
+        private static float ALPHA_COMPOSITE = 0.5f;
+        private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE);
 
         private static final Backdrop backdrop = new Backdrop();
 
@@ -164,10 +165,8 @@ public class InputSelectCard {
                 @Override
                 public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, float width, float height) {
                     float x = width * FList.INSETS_FACTOR;
-                    float y = 3;
-                    g.startClip(0, 0, width, height);
+                    float y = x;
                     g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.CENTER, true);
-                    g.endClip();
                 }
             });
 
@@ -198,6 +197,10 @@ public class InputSelectCard {
             FControl.getView().remove(visibleList);
             FControl.getView().remove(backdrop);
             visibleList = null;
+        }
+
+        protected float getUnpressedAlphaComposite() {
+            return ALPHA_COMPOSITE;
         }
 
         @Override
