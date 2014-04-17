@@ -66,7 +66,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     };
 
     public FGestureAdapter() {
-        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.1f, 1.1f, 0.05f, 0.15f);
+        this(Utils.AVG_FINGER_WIDTH / 4f, DOUBLE_TAP_INTERVAL, 0.05f, 1.1f, 0.025f, 0.15f);
     }
 
     /** @param tapSquareSize0 half width in pixels of the square around an initial touch event
