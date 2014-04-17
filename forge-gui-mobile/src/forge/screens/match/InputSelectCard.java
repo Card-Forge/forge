@@ -33,6 +33,7 @@ public class InputSelectCard {
     private static CardOptionsList<?> visibleList;
     private static CardOptionsList<?>.ListItem pressedItem;
     private static long lastSelectTime;
+    private static boolean zoomPressed, detailsPressed;
 
     private InputSelectCard() {
     }
@@ -100,25 +101,35 @@ public class InputSelectCard {
             pressedItem.release(x, y); //prevent pressed item getting stuck
             pressedItem = null;
         }
+        zoomPressed = false;
+        detailsPressed = false;
+
         if (visibleList == null || visibleList.owner != cardPanel) {
             return false;
         }
-        if (y < 0 && visibleList.getCount() > 0) {
-            int index = Math.round(visibleList.getCount() + y / LIST_OPTION_HEIGHT);
-            if (index < 0) {
-                index = 0;
-            }
-            CardOptionsList<?>.ListItem item = visibleList.getItemAt(index);
-            if (item != null) {
-                if (isPanStop) {
-                    item.tap(0, 0, 1);
+        if (y < 0) {
+            if (visibleList.getCount() > 0) {
+                int index = Math.round(visibleList.getCount() + y / LIST_OPTION_HEIGHT);
+                if (index < 0) {
+                    index = 0;
                 }
-                else {
-                    item.press(0, 0);
-                    pressedItem = item;
+                CardOptionsList<?>.ListItem item = visibleList.getItemAt(index);
+                if (item != null) {
+                    if (isPanStop) {
+                        item.tap(0, 0, 1);
+                    }
+                    else {
+                        item.press(0, 0);
+                        pressedItem = item;
+                    }
+                    return true;
                 }
-                return true;
             }
+        }
+        else if (y > cardPanel.getHeight()) {
+            zoomPressed = cardPanel.getScreenPosition().x + x < FControl.getView().getWidth() / 2;
+            detailsPressed = !zoomPressed;
+            return true;
         }
         return false;
     }
@@ -163,9 +174,12 @@ public class InputSelectCard {
                 }
 
                 @Override
-                public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
                     float x = width * FList.INSETS_FACTOR;
                     float y = x;
+                    if (!pressed) {
+                        foreColor = foreColor.alphaColor(ALPHA_COMPOSITE);
+                    }
                     g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.CENTER, true);
                 }
             });
@@ -197,10 +211,8 @@ public class InputSelectCard {
             FControl.getView().remove(visibleList);
             FControl.getView().remove(backdrop);
             visibleList = null;
-        }
-
-        protected float getUnpressedAlphaComposite() {
-            return ALPHA_COMPOSITE;
+            zoomPressed = false;
+            detailsPressed = false;
         }
 
         @Override
@@ -222,10 +234,63 @@ public class InputSelectCard {
                 if (visibleList != null) {
                     CardAreaPanel owner = visibleList.owner;
                     if (!owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
+                        float ownerBottom = owner.getScreenPosition().y + owner.getHeight();
+                        if (ownerBottom < y && y < ownerBottom + LIST_OPTION_HEIGHT) {
+                            //handle pressing zoom and details options
+                            zoomPressed = x < getWidth() / 2;
+                            detailsPressed = !zoomPressed;
+                            return true;
+                        }
                         hide(); //auto-hide when backdrop pressed unless on owner
                     }
                 }
                 return false; //allow press to pass through to object
+            }
+
+            private boolean handleZoomOrDetails() {
+                if (zoomPressed) {
+                    zoomPressed = false;
+                    return true;
+                }
+                if (detailsPressed) {
+                    detailsPressed = false;
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean release(float x, float y) {
+                //prevent objects below handling release if zoom or details pressed
+                return zoomPressed || detailsPressed;
+            }
+
+            @Override
+            public boolean tap(float x, float y, int count) {
+                return handleZoomOrDetails();
+            }
+
+            @Override
+            public boolean pan(float x, float y, float deltaX, float deltaY) {
+                if (visibleList != null) {
+                    CardAreaPanel owner = visibleList.owner;
+                    float ownerBottom = owner.getScreenPosition().y + owner.getHeight();
+                    if (ownerBottom < y) {
+                        zoomPressed = x < getWidth() / 2;
+                        detailsPressed = !zoomPressed;
+                    }
+                    else {
+                        zoomPressed = false;
+                        detailsPressed = false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean panStop(float x, float y) {
+                return handleZoomOrDetails();
             }
 
             @Override
@@ -248,6 +313,37 @@ public class InputSelectCard {
                         owner.draw(g, pos.x, pos.y);
                     }
                     g.drawRect(2, Color.GREEN, x, y, w, h);
+
+                    //draw zoom/details options
+                    w = getWidth();
+                    h = LIST_OPTION_HEIGHT;
+                    x = w / 2;
+                    y = pos.y + owner.getHeight();
+                    g.fillRect(BACK_COLOR, 0, y, w, h);
+
+                    FSkinColor foreColor;
+                    if (zoomPressed) {
+                        g.fillRect(FList.PRESSED_COLOR, 0, y, x, h);
+                        foreColor = FList.FORE_COLOR;
+                    }
+                    else {
+                        foreColor = FList.FORE_COLOR.alphaColor(ALPHA_COMPOSITE);
+                    }
+                    g.drawText("Zoom", visibleList.getFont(), foreColor, 0, y, x, h, false, HAlignment.CENTER, true);
+
+                    if (detailsPressed) {
+                        g.fillRect(FList.PRESSED_COLOR, x, y, w - x, h);
+                        foreColor = FList.FORE_COLOR;
+                    }
+                    else {
+                        foreColor = FList.FORE_COLOR.alphaColor(ALPHA_COMPOSITE);
+                    }
+                    g.drawText("Details", visibleList.getFont(), foreColor, x, y, w - x, h, false, HAlignment.CENTER, true);
+
+                    g.drawLine(1, FList.LINE_COLOR, 0, y, w, y);
+                    g.drawLine(1, FList.LINE_COLOR, x, y, x, y + h);
+                    y += h;
+                    g.drawLine(1, FList.LINE_COLOR, 0, y, w, y);
                 }
             }
         }

@@ -237,7 +237,7 @@ public class SettingsScreen extends FScreen {
                     }
 
                     @Override
-                    public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                    public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
                         float x = width * INSETS_FACTOR;
                         float y = 0;
                         width -= 2 * x;
@@ -280,7 +280,7 @@ public class SettingsScreen extends FScreen {
         }
 
         @Override
-        public void drawValue(Graphics g, Setting value, FSkinFont font, FSkinColor color, float width, float height) {
+        public void drawValue(Graphics g, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float width, float height) {
             float x = width * INSETS_FACTOR;
             float y = x;
             float w = width - 2 * x;

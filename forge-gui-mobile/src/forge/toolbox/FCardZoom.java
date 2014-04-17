@@ -112,7 +112,7 @@ public class FCardZoom extends FOverlay {
             }
 
             @Override
-            public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+            public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
                 float x = width * FList.INSETS_FACTOR;
                 float y = 3;
                 g.startClip(0, 0, width, height);

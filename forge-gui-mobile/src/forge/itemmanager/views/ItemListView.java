@@ -291,7 +291,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 @Override
-                public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
                     Vector2 loc = new Vector2(ROW_PADDING, ROW_PADDING);
                     for (ItemCell cell : cells) {
                         cell.getCellRenderer().draw(g, cell.getFnDisplay().apply(value), font, foreColor, loc, width, height);

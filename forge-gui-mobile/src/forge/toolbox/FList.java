@@ -17,8 +17,8 @@ import forge.util.Utils;
 public class FList<E> extends FScrollPane {
     public static final float INSETS_FACTOR = 0.025f;
     private static final float GROUP_HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
+    public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
 
     private final List<ListGroup> groups = new ArrayList<ListGroup>();
@@ -139,6 +139,9 @@ public class FList<E> extends FScrollPane {
         renderer = renderer0;
     }
 
+    public FSkinFont getFont() {
+        return font;
+    }
     public int getFontSize() {
         return font.getSize();
     }
@@ -256,30 +259,17 @@ public class FList<E> extends FScrollPane {
             float w = getWidth();
             float h = renderer.getItemHeight();
 
-            float alphaComposite = pressed ? 1 : getUnpressedAlphaComposite();
-            if (alphaComposite < 1) {
-                g.setAlphaComposite(alphaComposite);
-            }
-
             FSkinColor fillColor = getItemFillColor(this);
             if (fillColor != null) {
                 g.fillRect(fillColor, 0, 0, w, h);
             }
 
-            renderer.drawValue(g, value, font, FORE_COLOR, w, h);
+            renderer.drawValue(g, value, font, FORE_COLOR, pressed, w, h);
 
             if (drawLineSeparators()) {
                 g.drawLine(1, LINE_COLOR, 0, h, w, h);
             }
-
-            if (alphaComposite < 1) {
-                g.resetAlphaComposite();
-            }
         }
-    }
-
-    protected float getUnpressedAlphaComposite() {
-        return 1;
     }
 
     protected FSkinColor getItemFillColor(ListItem item) {
@@ -296,7 +286,7 @@ public class FList<E> extends FScrollPane {
     public static abstract class ListItemRenderer<V> {
         public abstract float getItemHeight();
         public abstract boolean tap(V value, float x, float y, int count);
-        public abstract void drawValue(Graphics g, V value, FSkinFont font, FSkinColor foreColor, float width, float height);
+        public abstract void drawValue(Graphics g, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height);
     }
 
     public static class DefaultListItemRenderer<V> extends ListItemRenderer<V> {
@@ -311,7 +301,7 @@ public class FList<E> extends FScrollPane {
         }
 
         @Override
-        public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, float width, float height) {
+        public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, boolean pressed, float width, float height) {
             float x = width * INSETS_FACTOR;
             float y = x;
             g.drawText(value.toString(), font, color, x, y, width - 2 * x, height - 2 * y, false, HAlignment.LEFT, true);

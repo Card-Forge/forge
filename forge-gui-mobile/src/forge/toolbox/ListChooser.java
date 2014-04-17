@@ -190,7 +190,7 @@ public class ListChooser<T> {
                 }
 
                 @Override
-                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, float width, float height) {
+                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
                     float x = width * INSETS_FACTOR;
                     g.drawText(value.toString(), font, foreColor, x, 0, width - 2 * x, height, false, HAlignment.LEFT, true);
                 }

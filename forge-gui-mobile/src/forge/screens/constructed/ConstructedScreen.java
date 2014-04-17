@@ -1077,7 +1077,7 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             @Override
-            public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, float width, float height) {
+            public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float width, float height) {
                 String text = value.gameType.toString();
                 float x = width * SettingsScreen.INSETS_FACTOR;
                 float y = x;
