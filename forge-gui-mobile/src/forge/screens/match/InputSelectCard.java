@@ -130,7 +130,7 @@ public class InputSelectCard {
                 }
             }
         }
-        else if (!isPanStop && y > cardPanel.getHeight()) {
+        else if (y > cardPanel.getHeight()) {
             pannedOverOptions = true;
             zoomPressed = cardPanel.getScreenPosition().x + x < FControl.getView().getWidth() / 2;
             detailsPressed = !zoomPressed;
@@ -249,36 +249,41 @@ public class InputSelectCard {
                         ownerPressed = true;
                     }
                     else {
-                        float ownerBottom = owner.getScreenPosition().y + owner.getHeight();
-                        if (ownerBottom < y && y < ownerBottom + LIST_OPTION_HEIGHT) {
-                            //handle pressing zoom and details options
-                            zoomPressed = x < getWidth() / 2;
-                            detailsPressed = !zoomPressed;
-                            activeList.setVisible(false);
+                        if (zoomPressed || detailsPressed) {
+                            if (y > getHeight() - LIST_OPTION_HEIGHT) {
+                                //support pressing to toggle between zoom and details
+                                if (x < getWidth() / 2) {
+                                    if (detailsPressed) {
+                                        zoomPressed = true;
+                                        detailsPressed = false;
+                                        return true;
+                                    }
+                                }
+                                else if (zoomPressed) {
+                                    zoomPressed = false;
+                                    detailsPressed = true;
+                                    return true;
+                                }
+                            }
+                            //if already selected option pressed again or zoom/details itself pressed,
+                            //hide everything on tap as if owner pressed a second time
+                            ownerPressed = true;
                             return true;
+                        }
+                        else {
+                            float ownerBottom = owner.getScreenPosition().y + owner.getHeight();
+                            if (ownerBottom < y && y < ownerBottom + LIST_OPTION_HEIGHT) {
+                                //handle pressing zoom and details options
+                                zoomPressed = x < getWidth() / 2;
+                                detailsPressed = !zoomPressed;
+                                activeList.setVisible(false);
+                                return true;
+                            }
                         }
                         hide(); //auto-hide when backdrop pressed unless on owner
                     }
                 }
                 return false; //allow press to pass through to object
-            }
-
-            private boolean handleZoomOrDetails() {
-                if (zoomPressed) {
-                    zoomPressed = false;
-                    if (activeList != null) {
-                        activeList.setVisible(true);
-                    }
-                    return true;
-                }
-                if (detailsPressed) {
-                    detailsPressed = false;
-                    if (activeList != null) {
-                        activeList.setVisible(true);
-                    }
-                    return true;
-                }
-                return false;
             }
 
             @Override
@@ -293,7 +298,11 @@ public class InputSelectCard {
                     hide(); //hide when backdrop tapped over owner
                     return true;
                 }
-                return handleZoomOrDetails();
+                //prevent objects below handling release if zoom or details pressed
+                if (zoomPressed || detailsPressed) {
+                    return true;
+                }
+                return false;
             }
 
             @Override
