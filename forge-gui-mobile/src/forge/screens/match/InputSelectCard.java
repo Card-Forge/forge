@@ -167,6 +167,10 @@ public class InputSelectCard {
     private static class CardOptionsList<T> extends FList<T> {
         private static float ALPHA_COMPOSITE = 0.5f;
         private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE);
+        private static final FSkinFont NAME_FONT = FSkinFont.get(16);
+        private static final FSkinFont TYPE_FONT = FSkinFont.get(14);
+        private static final FSkinFont TEXT_FONT = FSkinFont.get(12);
+        private static final float PADDING = 3;
 
         private static final Backdrop backdrop = new Backdrop();
 
@@ -472,6 +476,32 @@ public class InputSelectCard {
                 else {
                     g.fillGradientRect(color1, color2, false, x, y, w, h);
                 }
+
+                float colorBorderThickness = 2 * blackBorderThickness;
+                x += colorBorderThickness;
+                y += colorBorderThickness;
+                w -= 2 * colorBorderThickness;
+                h = NAME_FONT.getFont().getLineHeight() + TYPE_FONT.getFont().getLineHeight() + 3 * PADDING;
+
+                //draw background for name and type lines
+                int nameManaCostStep = 100; //TODO: add better background colors to CardBorderColor enum
+                color1 = FSkinColor.stepColor(color1, nameManaCostStep);
+                if (color2 == null) {
+                    g.fillRect(color1, x, y, w, h);
+                }
+                else {
+                    color2 = FSkinColor.stepColor(color2, nameManaCostStep);
+                    g.fillGradientRect(color1, color2, false, x, y, w, h);
+                }
+                g.drawRect(1, Color.BLACK, x, y, w, h);
+
+                x += PADDING;
+                y += 2 * PADDING;
+                h = NAME_FONT.getFont().getLineHeight() + PADDING;
+                g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, false);
+                y += h;
+                h = TYPE_FONT.getFont().getLineHeight() + PADDING;
+                g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, false);
             }
         }
     }
