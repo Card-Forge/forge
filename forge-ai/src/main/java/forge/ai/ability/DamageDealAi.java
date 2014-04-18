@@ -260,7 +260,8 @@ public class DamageDealAi extends DamageAiBase {
                     continue;
                 }
                 final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(humanCreature, dmg, source, false, noPrevention);
-                if (assignedDamage <= dmg) {
+                if (assignedDamage <= dmg 
+                        && humanCreature.getShield().isEmpty() && !ComputerUtil.canRegenerate(humanCreature.getController(), humanCreature)) {
                     tcs.add(humanCreature);
                     tgt.addDividedAllocation(humanCreature, assignedDamage);
                     lastTgt = humanCreature;

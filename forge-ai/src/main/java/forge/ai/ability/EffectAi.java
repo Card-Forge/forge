@@ -166,6 +166,8 @@ public class EffectAi extends SpellAbilityAi {
                 			tgtFight.getTargets().add(aiCreature);
                 			sa.getTargets().add(humanCreature);
                 			return true;
+                		} else {
+                		    return false;
                 		}
                 	}
                 }
