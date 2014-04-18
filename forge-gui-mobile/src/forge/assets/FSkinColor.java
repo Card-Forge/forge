@@ -216,6 +216,10 @@ public class FSkinColor {
         return isColorBright(c) ? Color.BLACK : Color.WHITE;
     }
 
+    public static Color fromRGB(int r, int g, int b) {
+        return new Color((float)r / 255f, (float)g / 255f, (float)b / 255f, 1f);
+    }
+
     public static void updateAll() {
         if (FSkinColor.baseColors.size() == 0) { //initialize base skin colors if needed
             for (final Colors c : Colors.values()) {

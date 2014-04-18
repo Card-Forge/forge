@@ -2,6 +2,7 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import forge.GuiBase;
 import forge.game.GameEntity;
@@ -16,6 +17,119 @@ import forge.util.Lang;
 
 public class CardDetailUtil {
     private CardDetailUtil() {
+    }
+
+    public enum CardBorderColor {
+        WHITE(254, 253, 244),
+        BLUE(90, 146, 202),
+        BLACK(32, 34, 31),
+        RED(253, 66, 40),
+        GREEN(22, 115, 69),
+        MULTICOLOR(248, 219, 85),
+        COLORLESS(160, 166, 164),
+        LAND(190, 153, 112),
+        FACE_DOWN(83, 61, 40),
+        UNKNOWN(200, 0, 230);
+
+        public final int r, g, b;
+
+        private CardBorderColor(int r0, int g0, int b0) {
+            r = r0;
+            g = g0;
+            b = b0;
+        }
+    }
+
+    public static CardBorderColor getBorderColor(final Card card, boolean canShow) {
+        return getBorderColors(card, canShow, false).get(0);
+    }
+
+    public static List<CardBorderColor> getBorderColors(final Card card, boolean canShow, boolean supportMultiple) {
+        List<CardBorderColor> borderColors = new ArrayList<CardBorderColor>();
+        ColorSet cardColors = card.determineColor();
+
+        if (!canShow) {
+            borderColors.add(CardBorderColor.FACE_DOWN);
+        }
+        else if (cardColors.isColorless()) {
+            if (card.isLand()) { //use different color for lands vs. other colorless cards
+                borderColors.add(CardBorderColor.LAND);
+            }
+            else {
+                borderColors.add(CardBorderColor.COLORLESS);
+            }
+        }
+        else {
+            int colorCount = cardColors.countColors();
+            if (colorCount > 2 || (colorCount > 1 && !supportMultiple)) {
+                borderColors.add(CardBorderColor.MULTICOLOR);
+            }
+            else if (cardColors.hasWhite()) {
+                if (colorCount == 1) {
+                    borderColors.add(CardBorderColor.WHITE);
+                }
+                else if (cardColors.hasBlue()) {
+                    borderColors.add(CardBorderColor.WHITE);
+                    borderColors.add(CardBorderColor.BLUE);
+                }
+                else if (cardColors.hasBlack()) {
+                    borderColors.add(CardBorderColor.WHITE);
+                    borderColors.add(CardBorderColor.BLACK);
+                }
+                else if (cardColors.hasRed()) {
+                    borderColors.add(CardBorderColor.RED);
+                    borderColors.add(CardBorderColor.WHITE);
+                }
+                else if (cardColors.hasGreen()) {
+                    borderColors.add(CardBorderColor.GREEN);
+                    borderColors.add(CardBorderColor.WHITE);
+                }
+            }
+            else if (cardColors.hasBlue()) {
+                if (colorCount == 1) {
+                    borderColors.add(CardBorderColor.BLUE);
+                }
+                else if (cardColors.hasBlack()) {
+                    borderColors.add(CardBorderColor.BLUE);
+                    borderColors.add(CardBorderColor.BLACK);
+                }
+                else if (cardColors.hasRed()) {
+                    borderColors.add(CardBorderColor.BLUE);
+                    borderColors.add(CardBorderColor.RED);
+                }
+                else if (cardColors.hasGreen()) {
+                    borderColors.add(CardBorderColor.GREEN);
+                    borderColors.add(CardBorderColor.BLUE);
+                }
+            }
+            else if (cardColors.hasBlack()) {
+                if (colorCount == 1) {
+                    borderColors.add(CardBorderColor.BLACK);
+                }
+                else if (cardColors.hasRed()) {
+                    borderColors.add(CardBorderColor.BLACK);
+                    borderColors.add(CardBorderColor.RED);
+                }
+                else if (cardColors.hasGreen()) {
+                    borderColors.add(CardBorderColor.BLACK);
+                    borderColors.add(CardBorderColor.GREEN);
+                }
+            }
+            else if (cardColors.hasRed()) { //if we got this far, must be mono-red or red-green
+                borderColors.add(CardBorderColor.RED);
+                if (cardColors.hasGreen()) {
+                    borderColors.add(CardBorderColor.GREEN);
+                }
+            }
+            else if (cardColors.hasGreen()) { //if we got this far, must be mono-green
+                borderColors.add(CardBorderColor.GREEN);
+            }
+        }
+
+        if (borderColors.isEmpty()) { // If your card has a violet border, something is wrong
+            borderColors.add(CardBorderColor.UNKNOWN);
+        }
+        return borderColors;
     }
 
     public static String getItemDescription(final InventoryItemFromSet item) {

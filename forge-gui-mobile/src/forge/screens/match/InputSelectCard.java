@@ -15,6 +15,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.assets.FSkinColor.Colors;
+import forge.card.CardDetailUtil;
+import forge.card.CardDetailUtil.CardBorderColor;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.match.input.Input;
@@ -429,7 +431,47 @@ public class InputSelectCard {
             }
 
             private static void drawDetails(Graphics g, Card card, float w, float h) {
-                
+                float x = FDialog.INSETS;
+                float y = x;
+                w -= 2 * x;
+                h -= 2 * y;
+
+                float ratio = h / w;
+                if (ratio > FCardPanel.ASPECT_RATIO) {
+                    float oldHeight = h;
+                    h = w * FCardPanel.ASPECT_RATIO;
+                    y += (oldHeight - h) / 2;
+                }
+                else {
+                    float oldWidth = w;
+                    w = h / FCardPanel.ASPECT_RATIO;
+                    x += (oldWidth - w) / 2;
+                }
+
+                boolean canShow = !card.isFaceDown() && FControl.mayShowCard(card);
+
+                float blackBorderThickness = w * 0.021f;
+                g.fillRect(Color.BLACK, x, y, w, h);
+                x += blackBorderThickness;
+                y += blackBorderThickness;
+                w -= 2 * blackBorderThickness;
+                h -= 2 * blackBorderThickness;
+
+                //determine colors for borders
+                List<CardBorderColor> borderColors = CardDetailUtil.getBorderColors(card, canShow, true);
+                CardBorderColor borderColor = borderColors.get(0);
+                Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
+                Color color2 = null;
+                if (borderColors.size() > 1) {
+                    borderColor = borderColors.get(1);
+                    color2 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
+                }
+                if (color2 == null) {
+                    g.fillRect(color1, x, y, w, h);
+                }
+                else {
+                    g.fillGradientRect(color1, color2, false, x, y, w, h);
+                }
             }
         }
     }
