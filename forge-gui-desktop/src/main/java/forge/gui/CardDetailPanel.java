@@ -21,10 +21,9 @@ package forge.gui;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardDetailUtil;
+import forge.card.CardDetailUtil.CardBorderColor;
 import forge.card.CardEdition;
-import forge.card.ColorSet;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
@@ -125,7 +124,7 @@ public class CardDetailPanel extends SkinnedPanel {
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");
         cdArea.setText(CardDetailUtil.getItemDescription(item));
-        this.updateBorder(item instanceof IPaperCard ? ((IPaperCard)item).getRules().getColor() : null, false);
+        this.updateBorder(item instanceof IPaperCard ? Card.getCardForUi((IPaperCard)item) : null, false);
 
         String set = item.getEdition();
         setInfoLabel.setText(set);
@@ -241,7 +240,7 @@ public class CardDetailPanel extends SkinnedPanel {
             }
         }
 
-        this.updateBorder(CardUtil.getColors(card), canShowThis);
+        this.updateBorder(card, canShowThis);
 
         this.powerToughnessLabel.setText(CardDetailUtil.formatPowerToughness(card));
 
@@ -283,52 +282,16 @@ public class CardDetailPanel extends SkinnedPanel {
         return this.cdArea;
     }
 
-    private void updateBorder(ColorSet list, final boolean canShow) {
+    private void updateBorder(final Card card, final boolean canShow) {
         // color info
-        if (list == null) {
+        if (card == null) {
             this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
             scrArea.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
             return;
         }
 
-        Color color;
-        if (!canShow) {
-            color = Color.gray;
-        } else if (list.isMulticolor()) {
-            color = Color.orange;
-        } else if (list.hasBlack()) {
-            color = Color.black;
-        } else if (list.hasGreen()) {
-            color = new Color(0, 220, 39);
-        } else if (list.hasWhite()) {
-            color = Color.white;
-        } else if (list.hasRed()) {
-            color = Color.red;
-        } else if (list.hasBlue()) {
-            color = Color.blue;
-        } else if (list.isColorless()) {
-            color = Color.gray;
-        } else {
-            color = new Color(200, 0, 230); // If your card has a violet border, something is wrong
-        }
-
-        if (color != Color.gray) {
-            int r = color.getRed();
-            int g = color.getGreen();
-            int b = color.getBlue();
-
-            final int shade = 10;
-
-            r -= shade;
-            g -= shade;
-            b -= shade;
-
-            r = Math.max(0, r);
-            g = Math.max(0, g);
-            b = Math.max(0, b);
-
-            color = new Color(r, g, b);
-        }
+        CardBorderColor borderColor = CardDetailUtil.getBorderColor(card, canShow);
+        Color color = new Color(borderColor.r, borderColor.g, borderColor.b);
         this.setBorder(BorderFactory.createLineBorder(color, 2));
         scrArea.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, color));
     }
