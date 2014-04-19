@@ -173,11 +173,17 @@ public class InputSelectCard {
         private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE);
         private static final FSkinFont NAME_FONT = FSkinFont.get(16);
         private static final FSkinFont TYPE_FONT = FSkinFont.get(14);
+        private static final FSkinFont SET_FONT = TYPE_FONT;
         private static final FSkinFont TEXT_FONT = TYPE_FONT;
         private static final FSkinFont ID_FONT = TEXT_FONT;
         private static final FSkinFont PT_FONT = NAME_FONT;
         private static final float MANA_COST_PADDING = 3;
+        private static final float SET_BOX_MARGIN = 1;
         private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getFont().getCapHeight() - MANA_COST_PADDING));
+
+        private static Color fromDetailColor(DetailColors detailColor) {
+            return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
+        }
 
         private static final Backdrop backdrop = new Backdrop();
 
@@ -533,9 +539,43 @@ public class InputSelectCard {
                 x += padding;
                 w -= 2 * padding;
                 g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+
                 y += h;
                 h = 2 * TYPE_FONT.getFont().getCapHeight();
+
+                String set = card.getCurSetCode();
+                if (!StringUtils.isEmpty(set)) {
+                    float setWidth = SET_FONT.getFont().getBounds(set).width + SET_FONT.getFont().getCapHeight();
+                    drawSetLabel(g, card, set, padding, x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
+                    w -= setWidth; //reduce available width for type
+                }
+
                 g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+            }
+
+            private static void drawSetLabel(Graphics g, Card card, String set, float padding, float x, float y, float w, float h) {
+                Color backColor;
+                switch(card.getRarity()) {
+                case Uncommon:
+                    backColor = fromDetailColor(DetailColors.UNCOMMON);
+                    break;
+                case Rare:
+                    backColor = fromDetailColor(DetailColors.RARE);
+                    break;
+                case MythicRare:
+                    backColor = fromDetailColor(DetailColors.MYTHIC);
+                    break;
+                case Special: //"Timeshifted" or other Special Rarity Cards
+                    backColor = fromDetailColor(DetailColors.SPECIAL);
+                    break;
+                default: //case BasicLand: + case Common:
+                    backColor = fromDetailColor(DetailColors.COMMON);
+                    break;
+                }
+
+                Color foreColor = FSkinColor.getHighContrastColor(backColor);
+                g.fillRect(backColor, x, y, w, h);
+                g.drawText(set, SET_FONT, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
             }
 
             private static void drawCardTextBox(Graphics g, Card card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
