@@ -216,6 +216,13 @@ public class FSkinColor {
         return isColorBright(c) ? Color.BLACK : Color.WHITE;
     }
 
+    public static Color tintColor(Color source, Color tint, float alpha) {
+        float r = (tint.r - source.r) * alpha + source.r;
+        float g = (tint.g - source.g) * alpha + source.g;
+        float b = (tint.b - source.b) * alpha + source.b;
+        return new Color(r, g, b, 1f);
+    }
+
     public static Color fromRGB(int r, int g, int b) {
         return new Color((float)r / 255f, (float)g / 255f, (float)b / 255f, 1f);
     }

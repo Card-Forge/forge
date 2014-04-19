@@ -177,6 +177,9 @@ public class InputSelectCard {
         private static final FSkinFont TEXT_FONT = TYPE_FONT;
         private static final FSkinFont ID_FONT = TEXT_FONT;
         private static final FSkinFont PT_FONT = NAME_FONT;
+        private static final float NAME_BOX_TINT = 0.2f;
+        private static final float TEXT_BOX_TINT = 0.1f;
+        private static final float PT_BOX_TINT = 0.2f;
         private static final float MANA_COST_PADDING = 3;
         private static final float SET_BOX_MARGIN = 1;
         private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getFont().getCapHeight() - MANA_COST_PADDING));
@@ -499,12 +502,9 @@ public class InputSelectCard {
                 h =  Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight()) + 2 * TYPE_FONT.getFont().getCapHeight() + 2;
 
                 //draw name/type box
-                int nameManaCostStep = 100; //TODO: add better background colors to CardBorderColor enum
-                color1 = FSkinColor.stepColor(color1, nameManaCostStep);
-                if (color2 != null) {
-                    color2 = FSkinColor.stepColor(color2, nameManaCostStep);
-                }
-                drawCardNameBox(g, card, color1, color2, x, y, w, h);
+                Color nameBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, NAME_BOX_TINT);
+                Color nameBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, NAME_BOX_TINT);
+                drawCardNameBox(g, card, nameBoxColor1, nameBoxColor2, x, y, w, h);
 
                 float ptBoxHeight = 2 * PT_FONT.getFont().getCapHeight();
 
@@ -512,11 +512,16 @@ public class InputSelectCard {
                 y += h + innerBorderThickness;
                 h = height - FDialog.INSETS - blackBorderThickness - ptBoxHeight - 2 * innerBorderThickness - y; 
 
-                drawCardTextBox(g, card, canShow, color1, color2, x, y, w, h);
+                Color textBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, TEXT_BOX_TINT);
+                Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, TEXT_BOX_TINT);
+                drawCardTextBox(g, card, canShow, textBoxColor1, textBoxColor2, x, y, w, h);
 
                 y += h + innerBorderThickness;
                 h = ptBoxHeight;
-                drawCardIdAndPtBox(g, card, idForeColor, color1, color2, x, y, w, h);
+
+                Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, PT_BOX_TINT);
+                Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, PT_BOX_TINT);
+                drawCardIdAndPtBox(g, card, idForeColor, ptColor1, ptColor2, x, y, w, h);
             }
 
             private static void drawCardNameBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
@@ -579,7 +584,12 @@ public class InputSelectCard {
             }
 
             private static void drawCardTextBox(Graphics g, Card card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
-                g.fillRect(Color.WHITE, x, y, w, h);
+                if (color2 == null) {
+                    g.fillRect(color1, x, y, w, h);
+                }
+                else {
+                    g.fillGradientRect(color1, color2, false, x, y, w, h);
+                }
                 g.drawRect(1, Color.BLACK, x, y, w, h);
 
                 float padX = TEXT_FONT.getFont().getCapHeight() / 2;
