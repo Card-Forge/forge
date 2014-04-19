@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -169,8 +171,9 @@ public class InputSelectCard {
         private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE);
         private static final FSkinFont NAME_FONT = FSkinFont.get(16);
         private static final FSkinFont TYPE_FONT = FSkinFont.get(14);
-        private static final FSkinFont TEXT_FONT = FSkinFont.get(12);
-        private static final float PADDING = 3;
+        private static final FSkinFont TEXT_FONT = TYPE_FONT;
+        private static final FSkinFont ID_FONT = TEXT_FONT;
+        private static final FSkinFont PT_FONT = NAME_FONT;
 
         private static final Backdrop backdrop = new Backdrop();
 
@@ -397,11 +400,11 @@ public class InputSelectCard {
                 }
             }
 
-            private static void drawZoom(Graphics g, Card card, float w, float h) {
+            private static void drawZoom(Graphics g, Card card, float width, float height) {
                 float x = FDialog.INSETS;
                 float y = x;
-                w -= 2 * x;
-                h -= 2 * y;
+                float w = width - 2 * x;
+                float h = height - 2 * y;
 
                 Texture image = ImageCache.getImage(card);
 
@@ -434,11 +437,11 @@ public class InputSelectCard {
                 g.drawImage(image, x, y, w, h);
             }
 
-            private static void drawDetails(Graphics g, Card card, float w, float h) {
+            private static void drawDetails(Graphics g, Card card, float width, float height) {
                 float x = FDialog.INSETS;
                 float y = x;
-                w -= 2 * x;
-                h -= 2 * y;
+                float w = width - 2 * x;
+                float h = height - 2 * y;
 
                 float ratio = h / w;
                 if (ratio > FCardPanel.ASPECT_RATIO) {
@@ -477,31 +480,83 @@ public class InputSelectCard {
                     g.fillGradientRect(color1, color2, false, x, y, w, h);
                 }
 
-                float colorBorderThickness = 2 * blackBorderThickness;
-                x += colorBorderThickness;
-                y += colorBorderThickness;
-                w -= 2 * colorBorderThickness;
-                h = NAME_FONT.getFont().getLineHeight() + TYPE_FONT.getFont().getLineHeight() + 3 * PADDING;
+                Color idForeColor = FSkinColor.getHighContrastColor(color1);
 
-                //draw background for name and type lines
+                float outerBorderThickness = 2 * blackBorderThickness;
+                x += outerBorderThickness;
+                y += outerBorderThickness;
+                w -= 2 * outerBorderThickness;
+                h = 2 * (NAME_FONT.getFont().getCapHeight() + TYPE_FONT.getFont().getCapHeight());
+
+                //draw name/type box
                 int nameManaCostStep = 100; //TODO: add better background colors to CardBorderColor enum
                 color1 = FSkinColor.stepColor(color1, nameManaCostStep);
+                if (color2 != null) {
+                    color2 = FSkinColor.stepColor(color2, nameManaCostStep);
+                }
+                drawCardNameBox(g, card, color1, color2, x, y, w, h);
+
+                float ptBoxHeight = 2 * PT_FONT.getFont().getCapHeight();
+
+                float innerBorderThickness = outerBorderThickness / 2;
+                y += h + innerBorderThickness;
+                h = height - FDialog.INSETS - blackBorderThickness - ptBoxHeight - 2 * innerBorderThickness - y; 
+
+                drawCardTextBox(g, card, canShow, color1, color2, x, y, w, h);
+
+                y += h + innerBorderThickness;
+                h = ptBoxHeight;
+                drawCardIdAndPtBox(g, card, idForeColor, color1, color2, x, y, w, h);
+            }
+
+            private static void drawCardNameBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
                 if (color2 == null) {
                     g.fillRect(color1, x, y, w, h);
                 }
                 else {
-                    color2 = FSkinColor.stepColor(color2, nameManaCostStep);
                     g.fillGradientRect(color1, color2, false, x, y, w, h);
                 }
                 g.drawRect(1, Color.BLACK, x, y, w, h);
 
-                x += PADDING;
-                y += 2 * PADDING;
-                h = NAME_FONT.getFont().getLineHeight() + PADDING;
-                g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, false);
+                x += h / 8;
+                h = 2 * NAME_FONT.getFont().getCapHeight();
+                g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
                 y += h;
-                h = TYPE_FONT.getFont().getLineHeight() + PADDING;
-                g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, false);
+                h = 2 * TYPE_FONT.getFont().getCapHeight();
+                g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+            }
+
+            private static void drawCardTextBox(Graphics g, Card card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
+                g.fillRect(Color.WHITE, x, y, w, h);
+                g.drawRect(1, Color.BLACK, x, y, w, h);
+
+                float padding = TEXT_FONT.getFont().getCapHeight() / 2;
+                x += padding;
+                y += padding;
+                w -= 2 * padding;
+                h -= 2 * padding;
+                g.drawText(CardDetailUtil.composeCardText(card, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, true, HAlignment.LEFT, false);
+            }
+
+            private static void drawCardIdAndPtBox(Graphics g, Card card, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
+                g.drawText(CardDetailUtil.formatCardId(card), ID_FONT, idForeColor, x, y + ID_FONT.getFont().getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
+
+                String text = CardDetailUtil.formatPowerToughness(card);
+                if (StringUtils.isEmpty(text)) { return; }
+
+                float padding = PT_FONT.getFont().getCapHeight() / 2;
+                float boxWidth = PT_FONT.getFont().getBounds(text).width + 2 * padding;
+                x += w - boxWidth;
+                w = boxWidth;
+
+                if (color2 == null) {
+                    g.fillRect(color1, x, y, w, h);
+                }
+                else {
+                    g.fillGradientRect(color1, color2, false, x, y, w, h);
+                }
+                g.drawRect(1, Color.BLACK, x, y, w, h);
+                g.drawText(text, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
             }
         }
     }
