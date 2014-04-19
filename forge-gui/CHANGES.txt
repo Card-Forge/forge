@@ -71,6 +71,46 @@ Eidolon of Rhetoric
 Aegis of the Gods
 Kruphix's Insight
 Pheres-Band Warchief
+Dictate of Heliod
+Heroes' Bane
+Setessan Tactics
+Spirespine
+Godhunter Octopus
+Battlefield Thaumaturge
+Crystalline Nautilus
+Golden Hind
+Bearer of the Heavens
+Harness by Force
+Hypnotic Siren
+Desperate Stand
+Disciple of Deceit
+Font of Fertility
+Font of Fortunes
+Font of Ire
+Font of Return
+Font of Vigor
+Banishing Light
+Dictate of Erebos
+Master of the Feast
+Silence the Believers
+Bassara Tower Archer
+Desecration Plague
+Goldenhide Ox
+Humbler of Mortals
+Reviving Melody
+Satyr Grovedancer
+Aerial Formation
+Cloaked Siren
+Countermand
+Pin to the Earth
+Armory of Iroas
+Chariot of Victory
+Deserter's Quarters
+Gold-Forged Sentinel
+Fleetfeather Cockatrice
+Nyx Weaver
+Revel of the Fallen God
+Stormchaser Chimera
 
 
 ------------
