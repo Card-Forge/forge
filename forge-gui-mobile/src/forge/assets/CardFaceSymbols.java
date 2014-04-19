@@ -100,39 +100,38 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil20", FSkinImage.FOIL_20);
     }
 
-    public static void draw(Graphics g, ManaCost manaCost, float x, float y, final float imageSize) {
+    public static void drawManaCost(Graphics g, ManaCost manaCost, float x, float y, final float imageSize) {
         if (manaCost.isNoCost()) {
             return;
         }
 
-        float xpos = x;
-        final float offset = 14;
         final int genericManaCost = manaCost.getGenericCost();
         final boolean hasGeneric = (genericManaCost > 0) || manaCost.isPureGeneric();
+        final float dx = imageSize;
 
         if (hasGeneric) {
             for (final ManaCostShard s : manaCost) { //render X shards before generic
                 if (s == ManaCostShard.X) {
-                    drawSymbol(s.getImageKey(), g, xpos, y, imageSize);
-                    xpos += offset;
+                    drawSymbol(s.getImageKey(), g, x, y, imageSize);
+                    x += dx;
                 }
             }
 
             final String sGeneric = Integer.toString(genericManaCost);
-            drawSymbol(sGeneric, g, xpos, y, imageSize);
-            xpos += offset;
+            drawSymbol(sGeneric, g, x, y, imageSize);
+            x += dx;
     
             for (final ManaCostShard s : manaCost) { //render non-X shards after generic
                 if (s != ManaCostShard.X) {
-                    drawSymbol(s.getImageKey(), g, xpos, y, imageSize);
-                    xpos += offset;
+                    drawSymbol(s.getImageKey(), g, x, y, imageSize);
+                    x += dx;
                 }
             }
         }
         else { //if no generic, just render shards in order
             for (final ManaCostShard s : manaCost) {
-                drawSymbol(s.getImageKey(), g, xpos, y, imageSize);
-                xpos += offset;
+                drawSymbol(s.getImageKey(), g, x, y, imageSize);
+                x += dx;
             }
         }
     }
@@ -141,6 +140,8 @@ public class CardFaceSymbols {
         if (s.length() == 0) {
             return;
         }
+
+        final float dx = imageSize;
 
         StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
@@ -151,7 +152,7 @@ public class CardFaceSymbols {
                 continue;
             }
             g.drawImage(image, x, y, imageSize, imageSize);
-            x += imageSize;
+            x += dx;
         }
     }
 

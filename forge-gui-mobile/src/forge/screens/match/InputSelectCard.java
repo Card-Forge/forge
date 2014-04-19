@@ -13,8 +13,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
+import forge.assets.CardFaceSymbols;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardDetailUtil;
@@ -174,6 +176,8 @@ public class InputSelectCard {
         private static final FSkinFont TEXT_FONT = TYPE_FONT;
         private static final FSkinFont ID_FONT = TEXT_FONT;
         private static final FSkinFont PT_FONT = NAME_FONT;
+        private static final float MANA_COST_PADDING = 3;
+        private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getFont().getCapHeight() - MANA_COST_PADDING));
 
         private static final Backdrop backdrop = new Backdrop();
 
@@ -486,7 +490,7 @@ public class InputSelectCard {
                 x += outerBorderThickness;
                 y += outerBorderThickness;
                 w -= 2 * outerBorderThickness;
-                h = 2 * (NAME_FONT.getFont().getCapHeight() + TYPE_FONT.getFont().getCapHeight());
+                h =  Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight()) + 2 * TYPE_FONT.getFont().getCapHeight();
 
                 //draw name/type box
                 int nameManaCostStep = 100; //TODO: add better background colors to CardBorderColor enum
@@ -518,9 +522,17 @@ public class InputSelectCard {
                 }
                 g.drawRect(1, Color.BLACK, x, y, w, h);
 
-                x += h / 8;
-                h = 2 * NAME_FONT.getFont().getCapHeight();
-                g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+                float padding = h / 8;
+
+                //make sure name/mana cost row height is tall enough for both
+                h = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight());
+
+                float manaCostWidth = CardFaceSymbols.getWidth(card.getManaCost(), MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+                CardFaceSymbols.drawManaCost(g, card.getManaCost(), x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+
+                x += padding;
+                w -= 2 * padding;
+                g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
                 y += h;
                 h = 2 * TYPE_FONT.getFont().getCapHeight();
                 g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
@@ -530,11 +542,12 @@ public class InputSelectCard {
                 g.fillRect(Color.WHITE, x, y, w, h);
                 g.drawRect(1, Color.BLACK, x, y, w, h);
 
-                float padding = TEXT_FONT.getFont().getCapHeight() / 2;
-                x += padding;
-                y += padding;
-                w -= 2 * padding;
-                h -= 2 * padding;
+                float padX = TEXT_FONT.getFont().getCapHeight() / 2;
+                float padY = padX + 2; //add a little more vertical padding
+                x += padX;
+                y += padY;
+                w -= 2 * padX;
+                h -= 2 * padY;
                 g.drawText(CardDetailUtil.composeCardText(card, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, true, HAlignment.LEFT, false);
             }
 

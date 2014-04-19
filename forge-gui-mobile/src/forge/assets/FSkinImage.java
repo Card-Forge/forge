@@ -354,8 +354,23 @@ public enum FSkinImage implements FImage {
         return h;
     }
 
+    public float getNearestHQWidth(float baseWidth) {
+        return getNearestHQSize(baseWidth, w);
+    }
+
+    public float getNearestHQHeight(float baseHeight) {
+        return getNearestHQSize(baseHeight, h);
+    }
+
+    private float getNearestHQSize(float baseSize, float actualSize) {
+        //get nearest power of actualSize to baseSize so that the image renders good
+        float nearestSize = (float)Math.pow((double)Math.round(actualSize),
+                (double)Math.round(Math.log((double)baseSize) / Math.log((double)actualSize)));
+        return nearestSize;
+    }
+
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
-        g.drawImage(this.textureRegion, x, y, w, h);
+        g.drawImage(textureRegion, x, y, w, h);
     }
 }
