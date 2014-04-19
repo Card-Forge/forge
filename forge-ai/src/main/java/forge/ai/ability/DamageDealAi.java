@@ -302,6 +302,12 @@ public class DamageDealAi extends DamageAiBase {
 
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
+                    //option to hold removal instead only applies for single targeted removal
+                    if (sa.isSpell() && tgt.getMaxTargets(sa.getHostCard(), sa) == 1 && !divided) {
+                        if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
+                            return false;
+                        }
+                    }
                     tcs.add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
@@ -347,6 +353,12 @@ public class DamageDealAi extends DamageAiBase {
             } else if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
+                    //option to hold removal instead only applies for single targeted removal
+                    if (sa.isSpell() && tgt.getMaxTargets(sa.getHostCard(), sa) == 1 && !divided) {
+                        if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
+                            return false;
+                        }
+                    }
                     tcs.add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);

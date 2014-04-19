@@ -16,10 +16,13 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -891,5 +894,95 @@ public class ComputerUtilCard {
         }
         return chosen;
     }
+    
+    public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
+        final Player ai = sa.getActivatingPlayer();
+        final Player opp = ai.getOpponent();
 
+        final int costRemoval = sa.getHostCard().getCMC();
+        final int costTarget = c.getCMC();
+
+        //burn and curse spells
+        float valueBurn = 0;
+        if (dmg > 0) {
+            if (sa.getDescription().contains("would die, exile it instead")) {
+                destination = ZoneType.Exile;
+            }
+            valueBurn = 1.0f * c.getNetDefense() / dmg;
+            if (sa.getTargetRestrictions().canTgtPlayer()) {
+                valueBurn /= 2;     //preserve option to burn to the face
+            }
+        }
+        
+        //evaluate tempo gain
+        float valueTempo = Math.max(0.2f * costTarget / costRemoval, valueBurn);
+        if (c.isEquipped()) {
+            valueTempo *= 2;
+        }
+        if (SpellAbilityAi.isSorcerySpeed(sa)) {
+            valueTempo *= 2;    //sorceries have less usage opportunities
+        }
+        if (!c.canBeDestroyed()) {
+            valueTempo *= 2;    //deal with annoying things
+        }
+        if (!destination.equals(ZoneType.Graveyard) &&  //TODO:boat-load of "when blah dies" triggers
+                c.hasKeyword("Persist") || c.hasKeyword("Undying") || c.hasKeyword("Modular")) {
+            valueTempo *= 2;
+        }
+        if (destination.equals(ZoneType.Hand) && !c.isToken()) {
+            valueTempo /= 2;    //bouncing non-tokens for tempo is less valuable
+        }
+        if (c.isLand()) {
+            valueTempo += 0.5f / opp.getLandsInPlay().size();   //set back opponent's mana
+        }
+        if (c.isEnchanted()) {
+            boolean myEnchants = false;
+            for (Card enc : c.getEnchantedBy()) {
+                if (enc.getOwner().equals(ai)) {
+                    myEnchants = true;
+                    break;
+                }
+            }
+            if (!myEnchants) {
+                valueTempo += 1;    //card advantage > tempo
+            }
+        }
+        
+        //evaluate threat of targeted card
+        float threat = 0;
+        if (c.isCreature()) {
+            Combat combat = ai.getGame().getCombat();
+            threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat) / ai.getLife();
+            //TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
+        } else {
+            for (final StaticAbility stAb : c.getStaticAbilities()) {
+                final Map<String, String> params = stAb.getMapParams();
+                //continuous buffs
+                if (params.get("Mode").equals("Continuous") && "Creature.YouCtrl".equals(params.get("Affected"))) {
+                    int bonusPT = 0;
+                    if (params.containsKey("AddPower")) {
+                        bonusPT += Integer.valueOf(params.get("AddPower"));
+                    }
+                    if (params.containsKey("AddToughness")) {
+                        bonusPT += Integer.valueOf(params.get("AddToughness"));
+                    }
+                    String kws = params.get("AddKeyword");
+                    if (kws != null) {
+                        bonusPT += 4 * (1 + StringUtils.countMatches(kws, "&"));    //treat each added keyword as a +2/+2 for now
+                    }
+                    if (bonusPT > 0) {
+                        threat = bonusPT * (1 + opp.getCreaturesInPlay().size()) / 10.0f;
+                    }
+                }
+            }
+            //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
+        }
+        if (!c.getManaAbility().isEmpty()) {
+            threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
+        }
+        
+        final float chance = MyRandom.getRandom().nextFloat();
+        return chance < Math.max(valueTempo, threat);
+    }
+    
 }

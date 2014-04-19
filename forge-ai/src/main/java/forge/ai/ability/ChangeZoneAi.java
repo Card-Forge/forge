@@ -883,6 +883,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     } else {
                         choice = mostExpensive;
                     }
+                    //option to hold removal instead only applies for single targeted removal
+                    if (sa.isSpell() && tgt.getMaxTargets(source, sa) == 1) {
+                        if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
+                            return false;
+                        }
+                    }
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.

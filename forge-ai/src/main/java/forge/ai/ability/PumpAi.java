@@ -339,6 +339,12 @@ public class PumpAi extends PumpAiBase {
             }
 
             t = ComputerUtilCard.getBestAI(list);
+            //option to hold removal instead only applies for single targeted removal
+            if (sa.isSpell() && tgt.getMaxTargets(source, sa) == 1) {
+                if (!ComputerUtilCard.useRemovalNow(sa, t, -defense, ZoneType.Graveyard)) {
+                    return false;
+                }
+            }
             sa.getTargets().add(t);
             list.remove(t);
         }
