@@ -20,7 +20,7 @@ import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardDetailUtil;
-import forge.card.CardDetailUtil.CardBorderColor;
+import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.match.input.Input;
@@ -469,8 +469,8 @@ public class InputSelectCard {
                 h -= 2 * blackBorderThickness;
 
                 //determine colors for borders
-                List<CardBorderColor> borderColors = CardDetailUtil.getBorderColors(card, canShow, true);
-                CardBorderColor borderColor = borderColors.get(0);
+                List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card, canShow, true);
+                DetailColors borderColor = borderColors.get(0);
                 Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
                 Color color2 = null;
                 if (borderColors.size() > 1) {
@@ -490,7 +490,7 @@ public class InputSelectCard {
                 x += outerBorderThickness;
                 y += outerBorderThickness;
                 w -= 2 * outerBorderThickness;
-                h =  Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight()) + 2 * TYPE_FONT.getFont().getCapHeight();
+                h =  Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight()) + 2 * TYPE_FONT.getFont().getCapHeight() + 2;
 
                 //draw name/type box
                 int nameManaCostStep = 100; //TODO: add better background colors to CardBorderColor enum
@@ -552,13 +552,15 @@ public class InputSelectCard {
             }
 
             private static void drawCardIdAndPtBox(Graphics g, Card card, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
-                g.drawText(CardDetailUtil.formatCardId(card), ID_FONT, idForeColor, x, y + ID_FONT.getFont().getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
+                String idText = CardDetailUtil.formatCardId(card);
+                g.drawText(idText, ID_FONT, idForeColor, x, y + ID_FONT.getFont().getCapHeight() / 2, w, h, false, HAlignment.LEFT, false);
 
-                String text = CardDetailUtil.formatPowerToughness(card);
-                if (StringUtils.isEmpty(text)) { return; }
+                String ptText = CardDetailUtil.formatPowerToughness(card);
+                if (StringUtils.isEmpty(ptText)) { return; }
 
                 float padding = PT_FONT.getFont().getCapHeight() / 2;
-                float boxWidth = PT_FONT.getFont().getBounds(text).width + 2 * padding;
+                float boxWidth = Math.min(PT_FONT.getFont().getBounds(ptText).width + 2 * padding,
+                        w - ID_FONT.getFont().getBounds(idText).width - padding); //prevent box overlapping ID
                 x += w - boxWidth;
                 w = boxWidth;
 
@@ -569,7 +571,7 @@ public class InputSelectCard {
                     g.fillGradientRect(color1, color2, false, x, y, w, h);
                 }
                 g.drawRect(1, Color.BLACK, x, y, w, h);
-                g.drawText(text, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
+                g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
             }
         }
     }

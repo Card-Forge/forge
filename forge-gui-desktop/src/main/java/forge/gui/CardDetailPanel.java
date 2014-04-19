@@ -21,7 +21,7 @@ package forge.gui;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardDetailUtil;
-import forge.card.CardDetailUtil.CardBorderColor;
+import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
@@ -49,7 +49,9 @@ public class CardDetailPanel extends SkinnedPanel {
     /** Constant <code>serialVersionUID=-8461473263764812323L</code>. */
     private static final long serialVersionUID = -8461473263764812323L;
 
-    private static Color purple = new Color(14381203);
+    private static Color fromDetailColor(DetailColors detailColor) {
+        return new Color(detailColor.r, detailColor.g, detailColor.b);
+    }
 
     private final FLabel nameCostLabel;
     private final FLabel typeLabel;
@@ -203,40 +205,36 @@ public class CardDetailPanel extends SkinnedPanel {
                 else {
                     setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), card.getRarity().name()));
                 }
-                
+
                 this.setInfoLabel.setOpaque(true);
+
+                Color backColor;
                 switch(card.getRarity()) {
                 case Uncommon:
-                    this.setInfoLabel.setBackground(Color.LIGHT_GRAY);
-                    this.setInfoLabel.setForeground(Color.BLACK);
-                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    backColor = fromDetailColor(DetailColors.UNCOMMON);
                     break;
 
                 case Rare:
-                    this.setInfoLabel.setBackground(Color.YELLOW);
-                    this.setInfoLabel.setForeground(Color.BLACK);
-                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    backColor = fromDetailColor(DetailColors.RARE);
                     break;
 
                 case MythicRare:
-                    this.setInfoLabel.setBackground(Color.RED);
-                    this.setInfoLabel.setForeground(Color.BLACK);
-                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    backColor = fromDetailColor(DetailColors.MYTHIC);
                     break; 
 
-                case Special:
-                    // "Timeshifted" or other Special Rarity Cards
-                    this.setInfoLabel.setBackground(CardDetailPanel.purple);
-                    this.setInfoLabel.setForeground(Color.BLACK);
-                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                case Special: //"Timeshifted" or other Special Rarity Cards
+                    backColor = fromDetailColor(DetailColors.SPECIAL);
                     break;
 
                 default: //case BasicLand: + case Common:
-                    this.setInfoLabel.setBackground(Color.BLACK);
-                    this.setInfoLabel.setForeground(Color.WHITE);
-                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                    backColor = fromDetailColor(DetailColors.COMMON);
                     break;
                 }
+
+                Color foreColor = FSkin.getHighContrastColor(backColor);
+                this.setInfoLabel.setBackground(backColor);
+                this.setInfoLabel.setForeground(foreColor);
+                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(foreColor));
             }
         }
 
@@ -290,8 +288,7 @@ public class CardDetailPanel extends SkinnedPanel {
             return;
         }
 
-        CardBorderColor borderColor = CardDetailUtil.getBorderColor(card, canShow);
-        Color color = new Color(borderColor.r, borderColor.g, borderColor.b);
+        Color color = fromDetailColor(CardDetailUtil.getBorderColor(card, canShow));
         this.setBorder(BorderFactory.createLineBorder(color, 2));
         scrArea.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, color));
     }
