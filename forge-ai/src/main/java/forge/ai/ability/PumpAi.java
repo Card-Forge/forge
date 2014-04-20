@@ -93,7 +93,7 @@ public class PumpAi extends PumpAiBase {
             if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (!game.getStack().isEmpty()) {
+        } else if (!game.getStack().isEmpty() && !sa.isCurse()) {
             if (!keywords.contains("Shroud") && !keywords.contains("Hexproof")) {
                 return false;
             }

@@ -14,9 +14,12 @@ import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -898,10 +901,11 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final Player opp = ai.getOpponent();
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
 
         final int costRemoval = sa.getHostCard().getCMC();
         final int costTarget = c.getCMC();
-
+        
         //burn and curse spells
         float valueBurn = 0;
         if (dmg > 0) {
@@ -909,13 +913,14 @@ public class ComputerUtilCard {
                 destination = ZoneType.Exile;
             }
             valueBurn = 1.0f * c.getNetDefense() / dmg;
+            valueBurn *= valueBurn;
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 valueBurn /= 2;     //preserve option to burn to the face
             }
         }
         
         //evaluate tempo gain
-        float valueTempo = Math.max(0.2f * costTarget / costRemoval, valueBurn);
+        float valueTempo = Math.max(0.1f * costTarget / costRemoval, valueBurn);
         if (c.isEquipped()) {
             valueTempo *= 2;
         }
@@ -945,6 +950,18 @@ public class ComputerUtilCard {
             }
             if (!myEnchants) {
                 valueTempo += 1;    //card advantage > tempo
+            }
+        }
+        if (!ph.isPlayerTurn(ai) && ph.getPhase().equals(PhaseType.END_OF_TURN)) {
+            valueTempo *= 2;    //prefer to cast at opponent EOT
+        }
+        
+        //interrupt 1:opponent pumping target (only works if the pump target is the chosen best target to begin with)
+        final MagicStack stack = ai.getGame().getStack();
+        if (!stack.isEmpty()) {
+            final SpellAbility topStack = stack.peekAbility();
+            if (topStack.getActivatingPlayer().equals(opp) && c.equals(topStack.getTargetCard()) && topStack.isSpell()) {
+                valueTempo += 1;
             }
         }
         
@@ -981,8 +998,13 @@ public class ComputerUtilCard {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
         
-        final float chance = MyRandom.getRandom().nextFloat();
-        return chance < Math.max(valueTempo, threat);
+        final float valueNow = Math.max(valueTempo, threat);
+        if (valueNow < 0.2) {   //hard floor to reduce ridiculous odds for instants over time
+            return false;
+        } else {
+            final float chance = MyRandom.getRandom().nextFloat();
+            return chance < valueNow;
+        }
     }
     
 }

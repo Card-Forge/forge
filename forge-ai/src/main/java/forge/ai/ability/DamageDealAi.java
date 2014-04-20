@@ -132,7 +132,13 @@ public class DamageDealAi extends DamageAiBase {
 
         // wait until stack is empty (prevents duplicate kills)
         if (!sa.isTrigger() && !ai.getGame().getStack().isEmpty()) {
-            return null;
+            //TODO:all removal APIs require a check to prevent duplicate kill/bounce/exile/etc.
+            //      The original code is a blunt instrument that also blocks all use of removal as interrupts. The issue is
+            //      with the AI not having code to consider what occurred previously in the stack thus it has no memory of
+            //      removing a target already if something else is placed on top of the stack. A better solution is to place
+            //      the checking mechanism after the target is chosen and determine if the topstack invalidates the earlier
+            //      removal (shroud effect, pump against damage) so a new removal can/should be applied if possible.
+            //return null;
         }
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
