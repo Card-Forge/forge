@@ -16,6 +16,7 @@ import forge.game.GameLogEntryType;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
+import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Utils;
 
@@ -24,7 +25,7 @@ public class SettingsScreen extends FScreen {
     public static final FSkinFont DESC_FONT = FSkinFont.get(11);
     public static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
 
-    private final FList<Setting> lstSettings = add(new FList<Setting>());
+    private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
 
     public SettingsScreen() {
         super(true, "Settings", false);
@@ -237,16 +238,12 @@ public class SettingsScreen extends FScreen {
                     }
 
                     @Override
-                    public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
-                        float x = width * INSETS_FACTOR;
-                        float y = 0;
-                        width -= 2 * x;
+                    public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                        g.drawText(value, font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
 
-                        g.drawText(value, font, foreColor, x, y, width, height, false, HAlignment.LEFT, true);
-
-                        float radius = height / 5;
-                        x += width - radius;
-                        y = height / 2;
+                        float radius = h / 5;
+                        x += w - radius;
+                        y = h / 2;
                         g.drawCircle(1, DESC_COLOR, x, y, radius);
                         if (value.equals(currentValue)) {
                             g.fillCircle(foreColor, x, y, radius / 2);
@@ -280,16 +277,14 @@ public class SettingsScreen extends FScreen {
         }
 
         @Override
-        public void drawValue(Graphics g, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float width, float height) {
-            float x = width * INSETS_FACTOR;
-            float y = x;
-            float w = width - 2 * x;
-            float h = font.getFont().getMultiLineBounds(value.label).height + 5;
+        public void drawValue(Graphics g, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+            float totalHeight = h;
+            h = font.getFont().getMultiLineBounds(value.label).height + 5;
 
             g.drawText(value.label, font, color, x, y, w, h, false, HAlignment.LEFT, false);
             value.drawPrefValue(g, font, color, x, y, w, h);
             h += 5;
-            g.drawText(value.description, DESC_FONT, DESC_COLOR, x, y + h, w, height - h - y, true, HAlignment.LEFT, false);            
+            g.drawText(value.description, DESC_FONT, DESC_COLOR, x, y + h, w, totalHeight - h + w * INSETS_FACTOR, true, HAlignment.LEFT, false);            
         }
     }
 }

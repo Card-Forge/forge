@@ -50,7 +50,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     private static final FSkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     private static final float ROW_HEIGHT = Utils.AVG_FINGER_HEIGHT + 12;
-    private static final float ROW_PADDING = 5;
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
@@ -212,7 +211,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void scrollSelectionIntoView() {
-        list.scrollIntoView(list.getItemAt(getSelectedIndex()));
+        list.scrollIntoView(getSelectedIndex());
     }
 
     @Override
@@ -291,10 +290,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 @Override
-                public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
-                    Vector2 loc = new Vector2(ROW_PADDING, ROW_PADDING);
+                public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                    Vector2 loc = new Vector2(x, y);
                     for (ItemCell cell : cells) {
-                        cell.getCellRenderer().draw(g, cell.getFnDisplay().apply(value), font, foreColor, loc, width, height);
+                        cell.getCellRenderer().draw(g, cell.getFnDisplay().apply(value), font, foreColor, loc, w, h);
                     }
                 }
             });
@@ -315,8 +314,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         @Override
-        protected FSkinColor getItemFillColor(ListItem item) {
-            int index = Math.round(item.getTop() / ROW_HEIGHT); //more efficient indexing strategy
+        protected FSkinColor getItemFillColor(int index) {
             if (selectedIndices.contains(index)) {
                 return SEL_COLOR;
             }

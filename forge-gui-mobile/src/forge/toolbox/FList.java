@@ -11,19 +11,18 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
 public class FList<E> extends FScrollPane {
     public static final float INSETS_FACTOR = 0.025f;
-    private static final float GROUP_HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
     public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
 
-    private final List<ListGroup> groups = new ArrayList<ListGroup>();
+    private final List<E> items = new ArrayList<E>();
     private FSkinFont font;
     private ListItemRenderer<E> renderer;
+    private int pressedIndex = -1;
 
     public FList() {
         initialize();
@@ -46,41 +45,18 @@ public class FList<E> extends FScrollPane {
         renderer = new DefaultListItemRenderer<E>();
     }
 
-    public void addGroup(String groupName) {
-        groups.add(add(new ListGroup(groupName)));
-    }
-
     public void addItem(E item) {
-        addItem(item, 0);
-    }
-    public void addItem(E item, int groupIndex) {
-        if (groups.isEmpty()) {
-            addGroup(null);
-        }
-        if (groupIndex > groups.size()) {
-            groupIndex = groups.size() - 1;
-        }
-        groups.get(groupIndex).addItem(new ListItem(item));
+        items.add(item);
     }
 
     public void removeItem(E item) {
-        for (ListGroup group : groups) {
-            for (ListItem groupItem : group.items) {
-                if (groupItem.value == item) {
-                    group.removeItem(groupItem);
-                    if (group.items.isEmpty()) {
-                        groups.remove(group);
-                    }
-                    return;
-                }
-            }
-        }
+        items.remove(item);
     }
 
     @Override
     public void clear() {
         super.clear();
-        groups.clear();
+        items.clear();
     }
 
     public void setListData(Iterable<E> items0) {
@@ -92,49 +68,35 @@ public class FList<E> extends FScrollPane {
     }
 
     public boolean isEmpty() {
-        return groups.isEmpty();
+        return items.isEmpty();
     }
 
     public int getCount() {
-        int count = 0;
-        for (ListGroup group : groups) {
-            count += group.items.size();
+        return items.size();
+    }
+
+    public E getItemAt(int index) {
+        if (index < 0 || index >= items.size()) {
+            return null;
         }
-        return count;
+        return items.get(index);
     }
 
-    public ListItem getItemAt(int index) {
-        int count = 0;
-        for (ListGroup group : groups) {
-            for (ListItem item : group.items) {
-                if (index == count) {
-                    return item;
-                }
-                count++;
-            }
-        }
-        return null;
+    public int getIndexOf(E item) {
+        return items.indexOf(item);
     }
 
-    public E getItemValueAt(int index) {
-        ListItem item = getItemAt(index);
-        if (item == null) { return null; }
-        return item.value;
+    public E getItemAtPoint(float x, float y) {
+        return getItemAt(getIndexAtPoint(x, y));
     }
 
-    public int getIndexOf(E value) {
-        int count = 0;
-        for (ListGroup group : groups) {
-            for (ListItem item : group.items) {
-                if (item.value == value) {
-                    return count;
-                }
-                count++;
-            }
-        }
-        return -1;
+    public int getIndexAtPoint(float x, float y) {
+        return (int)((getScrollTop() + y) / renderer.getItemHeight());
     }
 
+    public ListItemRenderer<E> getListItemRenderer() {
+        return renderer;
+    }
     public void setListItemRenderer(ListItemRenderer<E> renderer0) {
         renderer = renderer0;
     }
@@ -150,6 +112,49 @@ public class FList<E> extends FScrollPane {
     }
 
     @Override
+    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+        return new ScrollBounds(visibleWidth, items.size() * renderer.getItemHeight());
+    }
+
+    @Override
+    public boolean press(float x, float y) {
+        pressedIndex = getIndexAtPoint(x, y);
+        return true;
+    }
+
+    @Override
+    public boolean release(float x, float y) {
+        pressedIndex = -1;
+        return true;
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        int index = getIndexAtPoint(x, y);
+        E item = getItemAt(index);
+        if (item == null) { return false; }
+
+        return renderer.tap(item, x, y - getItemTop(index), count);
+    }
+
+    private float getItemTop(int index) {
+        return index * renderer.getItemHeight() - getScrollTop();
+    }
+
+    public void scrollIntoView(int index) {
+        float itemTop = getItemTop(index);
+        if (itemTop < 0) {
+            setScrollTop(itemTop);
+        }
+        else {
+            float itemBottom = itemTop + renderer.getItemHeight();
+            if (itemBottom > getHeight()) {
+                setScrollTop(itemBottom - getHeight());
+            }
+        }
+    }
+
+    @Override
     protected void drawBackground(Graphics g) {
         //support scrolling texture with list
         g.drawImage(FSkinTexture.BG_TEXTURE, -getScrollLeft(), -getScrollTop(), getScrollWidth(), getScrollHeight());
@@ -157,124 +162,48 @@ public class FList<E> extends FScrollPane {
     }
 
     @Override
-    protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        float y = 0;
-        float groupHeight;
-
-        for (ListGroup group : groups) {
-            groupHeight = group.getPreferredHeight();
-            group.setBounds(0, y, visibleWidth, groupHeight);
-            y += groupHeight;
-        }
-
-        return new ScrollBounds(visibleWidth, y);
-    }
-
-    private class ListGroup extends FContainer {
-        private final FLabel header;
-        private final List<ListItem> items = new ArrayList<ListItem>();
-
-        private boolean isCollapsed;
-
-        private ListGroup(String name0) {
-            if (name0 == null) {
-                header = null;
-            }
-            else {
-                header = add(new FLabel.ButtonBuilder().text(name0).command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        isCollapsed = !isCollapsed;
-                        FList.this.revalidate();
-                    }
-                }).build());
-            }
-        }
-
-        public void addItem(ListItem item) {
-            items.add(item);
-            add(item);
-        }
-
-        public boolean removeItem(ListItem item) {
-            if (items.remove(item)) {
-                remove(item);
-                return true;
-            }
-            return false;
-        }
-
-        public float getPreferredHeight() {
-            float height = 0;
-            if (header != null) {
-                height += GROUP_HEADER_HEIGHT;
-            }
-            if (!isCollapsed) {
-                height += renderer.getItemHeight() * items.size();
-            }
-            return height;
-        }
-
-        @Override
-        protected void doLayout(float width, float height) {
-            float y = 0;
-            if (header != null) {
-                header.setBounds(0, y, width, GROUP_HEADER_HEIGHT);
-                y += GROUP_HEADER_HEIGHT;
-            }
-
+    public void draw(Graphics g) {
+        float w = getWidth();
+        float h = getHeight();
+        g.startClip(0, 0, w, h);
+        drawBackground(g);
+        
+        //draw only items that are visible
+        if (!items.isEmpty()) {
+            int startIndex = getIndexAtPoint(0, 0);
             float itemHeight = renderer.getItemHeight();
+            boolean drawSeparators = drawLineSeparators();
 
-            for (ListItem item : items) {
-                item.setBounds(0, y, width, itemHeight);
+            float padding = w * INSETS_FACTOR;
+            float y = getItemTop(startIndex);
+            float valueWidth = w - 2 * padding;
+            float valueHeight = itemHeight - 2 * padding;
+
+            for (int i = startIndex; i < items.size(); i++) {
+                if (y > h) { break; }
+
+                FSkinColor fillColor = getItemFillColor(i);
+                if (fillColor != null) {
+                    g.fillRect(fillColor, 0, y, w, itemHeight);
+                }
+
+                renderer.drawValue(g, items.get(i), font, FORE_COLOR, pressedIndex == i, padding, y + padding, valueWidth, valueHeight);
+
                 y += itemHeight;
+
+                if (drawSeparators) {
+                    g.drawLine(1, LINE_COLOR, 0, y, w, y);
+                }
             }
         }
+        
+        drawOverlay(g);
+        g.endClip();
     }
 
-    public class ListItem extends FDisplayObject {
-        private final E value;
-        private boolean pressed;
-
-        private ListItem(E value0) {
-            value = value0;
-        }
-
-        public boolean press(float x, float y) {
-            pressed = true;
-            return true;
-        }
-
-        public boolean release(float x, float y) {
-            pressed = false;
-            return true;
-        }
-
-        public boolean tap(float x, float y, int count) {
-            return renderer.tap(value, x, y, count);
-        }
-
-        @Override
-        public final void draw(Graphics g) {
-            float w = getWidth();
-            float h = renderer.getItemHeight();
-
-            FSkinColor fillColor = getItemFillColor(this);
-            if (fillColor != null) {
-                g.fillRect(fillColor, 0, 0, w, h);
-            }
-
-            renderer.drawValue(g, value, font, FORE_COLOR, pressed, w, h);
-
-            if (drawLineSeparators()) {
-                g.drawLine(1, LINE_COLOR, 0, h, w, h);
-            }
-        }
-    }
-
-    protected FSkinColor getItemFillColor(ListItem item) {
-        if (item.pressed) {
-            return PRESSED_COLOR;
+    protected FSkinColor getItemFillColor(int index) {
+        if (index == pressedIndex) {
+            return FList.PRESSED_COLOR;
         }
         return null;
     }
@@ -286,7 +215,7 @@ public class FList<E> extends FScrollPane {
     public static abstract class ListItemRenderer<V> {
         public abstract float getItemHeight();
         public abstract boolean tap(V value, float x, float y, int count);
-        public abstract void drawValue(Graphics g, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height);
+        public abstract void drawValue(Graphics g, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
     }
 
     public static class DefaultListItemRenderer<V> extends ListItemRenderer<V> {
@@ -301,10 +230,8 @@ public class FList<E> extends FScrollPane {
         }
 
         @Override
-        public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, boolean pressed, float width, float height) {
-            float x = width * INSETS_FACTOR;
-            float y = x;
-            g.drawText(value.toString(), font, color, x, y, width - 2 * x, height - 2 * y, false, HAlignment.LEFT, true);
+        public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+            g.drawText(value.toString(), font, color, x, y, w, h, false, HAlignment.LEFT, true);
         }
     }
 }

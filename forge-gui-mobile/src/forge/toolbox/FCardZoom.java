@@ -112,12 +112,8 @@ public class FCardZoom extends FOverlay {
             }
 
             @Override
-            public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
-                float x = width * FList.INSETS_FACTOR;
-                float y = 3;
-                g.startClip(0, 0, width, height);
-                g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.CENTER, true);
-                g.endClip();
+            public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.CENTER, true);
             }
         });
         prompt = add(new VPrompt("Hide", "More",
@@ -152,7 +148,7 @@ public class FCardZoom extends FOverlay {
     }
 
     private void selectFirstOption() {
-        selectOption(optionList.getItemValueAt(0));
+        selectOption(optionList.getItemAt(0));
     }
 
     @SuppressWarnings("unchecked")

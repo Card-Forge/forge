@@ -868,7 +868,7 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             public Object getSelectedValue() {
-                return list.getItemValueAt(selectedIndex);
+                return list.getItemAt(selectedIndex);
             }
 
             public void setSelectedValue(Object value) {
@@ -1077,17 +1077,15 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             @Override
-            public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float width, float height) {
+            public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
                 String text = value.gameType.toString();
-                float x = width * SettingsScreen.INSETS_FACTOR;
-                float y = x;
-                float w = width - 2 * x;
-                float h = font.getFont().getMultiLineBounds(text).height + 5;
+                float totalHeight = h;
+                h = font.getFont().getMultiLineBounds(text).height + 5;
 
                 g.drawText(text, font, color, x, y, w, h, false, HAlignment.LEFT, false);
                 value.draw(g, font, color, x, y, w, h);
                 h += 5;
-                g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, height - h - y, true, HAlignment.LEFT, false);            
+                g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h - y, true, HAlignment.LEFT, false);            
             }
         }
     }

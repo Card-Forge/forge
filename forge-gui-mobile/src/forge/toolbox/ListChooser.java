@@ -107,7 +107,7 @@ public class ListChooser<T> {
                 if (result == 0) {
                     List<T> choices = new ArrayList<T>();
                     for (int i : lstChoices.selectedIndices) {
-                        choices.add(lstChoices.getItemValueAt(i));
+                        choices.add(lstChoices.getItemAt(i));
                     }
                     callback.run(choices);
                 }
@@ -190,9 +190,8 @@ public class ListChooser<T> {
                 }
 
                 @Override
-                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
-                    float x = width * INSETS_FACTOR;
-                    g.drawText(value.toString(), font, foreColor, x, 0, width - 2 * x, height, false, HAlignment.LEFT, true);
+                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                    g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
                 }
             });
             setFontSize(12);
@@ -209,8 +208,7 @@ public class ListChooser<T> {
         }
 
         @Override
-        protected FSkinColor getItemFillColor(ListItem item) {
-            int index = Math.round(item.getTop() / ITEM_HEIGHT); //more efficient indexing strategy
+        protected FSkinColor getItemFillColor(int index) {
             if (selectedIndices.contains(index)) {
                 return SEL_COLOR;
             }

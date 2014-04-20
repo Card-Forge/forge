@@ -42,7 +42,7 @@ public class InputSelectCard {
     private static final float LIST_OPTION_HEIGHT = Utils.AVG_FINGER_HEIGHT;
     private static final long DOUBLE_TAP_INTERVAL = Utils.secondsToTimeSpan(FGestureAdapter.DOUBLE_TAP_INTERVAL); 
     private static CardOptionsList<?> activeList;
-    private static CardOptionsList<?>.ListItem pressedItem;
+    private static boolean simulatedListPress;
     private static long lastSelectTime;
     private static boolean zoomPressed, detailsPressed, ownerPressed, pannedOverOptions;
 
@@ -59,7 +59,7 @@ public class InputSelectCard {
             if (activeList.owner == cardPanel) {
                 if (activeList.getCount() > 0 && now - lastSelectTime <= DOUBLE_TAP_INTERVAL) {
                     //auto-select first option if double tapped
-                    activeList.getItemAt(0).tap(0, 0, 1);
+                    activeList.tap(0, -activeList.getScrollTop(), 1);
                 }
                 return; //don't select already selected card
             }
@@ -103,9 +103,12 @@ public class InputSelectCard {
     }
 
     public static boolean handlePan(CardAreaPanel cardPanel, float x, float y, boolean isPanStop) {
-        if (pressedItem != null) {
-            pressedItem.release(x, y); //prevent pressed item getting stuck
-            pressedItem = null;
+        if (simulatedListPress) {
+            //prevent pressed item getting stuck
+            if (activeList != null) {
+                activeList.release(x, y - activeList.getTop());
+            }
+            simulatedListPress = false;
         }
         zoomPressed = false;
         detailsPressed = false;
@@ -119,21 +122,19 @@ public class InputSelectCard {
 
         if (y < 0) {
             if (activeList.getCount() > 0) {
-                int index = Math.round(activeList.getCount() + y / LIST_OPTION_HEIGHT);
-                if (index < 0) {
-                    index = 0;
+                //simulate tap or press on list
+                float listY = activeList.getHeight() + y;
+                if (listY < 0) {
+                    listY = 0;
                 }
-                CardOptionsList<?>.ListItem item = activeList.getItemAt(index);
-                if (item != null) {
-                    if (isPanStop) {
-                        item.tap(0, 0, 1);
-                    }
-                    else {
-                        item.press(0, 0);
-                        pressedItem = item;
-                    }
-                    pannedOverOptions = true;
+                if (isPanStop) {
+                    activeList.tap(x, listY, 1);
                 }
+                else {
+                    activeList.press(x, listY);
+                    simulatedListPress = true;
+                }
+                pannedOverOptions = true;
             }
         }
         else if (y > cardPanel.getHeight()) {
@@ -206,13 +207,11 @@ public class InputSelectCard {
                 }
 
                 @Override
-                public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float width, float height) {
-                    float x = width * FList.INSETS_FACTOR;
-                    float y = x;
+                public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                     if (!pressed) {
                         foreColor = foreColor.alphaColor(ALPHA_COMPOSITE);
                     }
-                    g.drawText(value.toString(), font, foreColor, x, y, width - 2 * x, height - 2 * y, true, HAlignment.CENTER, true);
+                    g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.CENTER, true);
                 }
             });
 

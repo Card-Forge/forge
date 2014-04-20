@@ -1168,6 +1168,7 @@ forge-gui-mobile/src/forge/toolbox/FDisplayObject.java -text
 forge-gui-mobile/src/forge/toolbox/FEvent.java -text
 forge-gui-mobile/src/forge/toolbox/FFileChooser.java -text
 forge-gui-mobile/src/forge/toolbox/FGestureAdapter.java -text
+forge-gui-mobile/src/forge/toolbox/FGroupList.java -text
 forge-gui-mobile/src/forge/toolbox/FLabel.java -text
 forge-gui-mobile/src/forge/toolbox/FList.java -text
 forge-gui-mobile/src/forge/toolbox/FOptionPane.java -text

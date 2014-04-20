@@ -256,7 +256,8 @@ public abstract class FScrollPane extends FContainer {
         return true;
     }
 
-    public final void draw(Graphics g) {
+    @Override
+    public void draw(Graphics g) {
         g.startClip(0, 0, getWidth(), getHeight());
         super.draw(g);
         g.endClip();
