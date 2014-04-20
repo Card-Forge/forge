@@ -1,17 +1,21 @@
 package forge.item;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import junit.framework.Assert;
+
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import forge.GuiBase;
+import forge.GuiDesktop;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.DeckHints;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
-import junit.framework.Assert;
-
-import org.testng.annotations.Test;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Tests for DeckHints.
@@ -20,6 +24,11 @@ import java.util.List;
 @Test(timeOut = 1000, enabled = true)
 public class DeckHintsTest {
 
+	@BeforeTest
+	void setupTest() {
+		GuiBase.setInterface(new GuiDesktop());
+	}
+	
     /**
      * Card test.
      */
