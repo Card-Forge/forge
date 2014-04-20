@@ -10,6 +10,7 @@ public class GameRules {
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
+    private boolean matchAnteRarity = false;
     private EnumSet<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
     
     public GameRules(GameType type) {
@@ -60,6 +61,14 @@ public class GameRules {
 
     public void setPlayForAnte(boolean useAnte) {
         this.playForAnte = useAnte;
+    }
+
+    public boolean getMatchAnteRarity() {
+        return matchAnteRarity;
+    }
+
+    public void setMatchAnteRarity(boolean matchRarity) {
+        matchAnteRarity = matchRarity;
     }
 
     public int getGamesToWinMatch() {

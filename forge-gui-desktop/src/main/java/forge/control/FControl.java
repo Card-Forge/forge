@@ -566,6 +566,7 @@ public enum FControl implements KeyEventDispatcher {
         if (null != appliedVariants && !appliedVariants.isEmpty())
             rules.setAppliedVariants(appliedVariants);
         rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
+        rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
         

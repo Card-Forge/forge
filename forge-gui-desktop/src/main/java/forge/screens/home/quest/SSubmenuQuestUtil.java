@@ -453,10 +453,12 @@ public class SSubmenuQuestUtil {
             rp.setRandomFoil(useRandomFoil);
         }
         boolean useAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
+        boolean matchAnteRarity = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY);
         if(forceAnte != null)
             useAnte = forceAnte.booleanValue();
         GameRules rules = new GameRules(GameType.Quest);
         rules.setPlayForAnte(useAnte);
+        rules.setMatchAnteRarity(matchAnteRarity);
         rules.setGamesPerMatch(qData.getCharmState() ? 5 : 3);
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);

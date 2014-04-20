@@ -60,6 +60,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
     private final JCheckBox cbAnte = new OptionsCheckBox("Play for Ante");
+    private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox("Match Ante Rarity");
     private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Picks");
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox("Allow AI Cheating");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
@@ -129,6 +130,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAnte, regularConstraints);
         pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), regularConstraints);
+
+        pnlPrefs.add(cbAnteMatchRarity, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Attempts to make antes the same rarity for all players."), regularConstraints);
 
         pnlPrefs.add(cbUploadDraft, regularConstraints);
         pnlPrefs.add(new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI."), regularConstraints);
@@ -430,6 +434,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAnte() {
         return cbAnte;
+    }
+    
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbAnteMatchRarity() {
+        return cbAnteMatchRarity;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -67,7 +67,7 @@ public class Match {
     public void startGame(final Game game) {
         prepareAllZones(game);
         if (rules.useAnte()) {  // Deciding which cards go to ante
-            Multimap<Player, Card> list = game.chooseCardsForAnte();
+            Multimap<Player, Card> list = game.chooseCardsForAnte(rules.getMatchAnteRarity());
             for (Entry<Player, Card> kv : list.entries()) {
                 Player p = kv.getKey();
                 game.getAction().moveTo(ZoneType.Ante, kv.getValue());

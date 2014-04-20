@@ -17,19 +17,36 @@
  */
 package forge.game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
+
+import forge.card.CardRarity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.phase.*;
+import forge.game.phase.EndOfTurn;
+import forge.game.phase.Phase;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
+import forge.game.phase.Untap;
+import forge.game.phase.Upkeep;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
@@ -40,8 +57,6 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-
-import java.util.*;
 
     /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -585,20 +600,110 @@ public class Game {
         return ++cardIdCounter;
     }
 
-
-    public Multimap<Player, Card> chooseCardsForAnte() {
+    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
+        
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
-        for (final Player p : getPlayers()) {
-            final List<Card> lib = p.getCardsIn(ZoneType.Library);
-            Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
-            Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
-            if (ante == null) {
-                getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
-                ante = Aggregates.random(lib);
+        
+        if (matchRarity) {
+        
+            boolean onePlayerHasTimeShifted = false;
+            
+            List<CardRarity> validRarities = new ArrayList<>(Arrays.asList(CardRarity.values()));
+            for (final Player player : getPlayers()) {
+                Set<CardRarity> playerRarity = getValidRarities(player.getCardsIn(ZoneType.Library));
+                if (onePlayerHasTimeShifted == false) {
+                    onePlayerHasTimeShifted = playerRarity.contains(CardRarity.Special);
+                }
+                validRarities.retainAll(playerRarity);
             }
-            anteed.put(p, ante);
+            
+            if (validRarities.size() == 0) { //If no possible rarity matches were found, use the original method to choose antes
+                for (Player player : getPlayers()) {
+                    chooseRandomCardsForAnte(player, anteed);
+                }
+                return anteed;
+            }
+            
+            //If possible, don't ante basic lands
+            if (validRarities.size() > 1) {
+                validRarities.remove(CardRarity.BasicLand);
+            }
+            
+            if (validRarities.contains(CardRarity.Special)) {
+                onePlayerHasTimeShifted = false;
+            }
+
+            CardRarity anteRarity = validRarities.get(new Random().nextInt(validRarities.size()));
+            
+            System.out.println("Rarity chosen for ante: " + anteRarity.name());
+            
+            for (final Player player : getPlayers()) {
+                
+                List<Card> library = new ArrayList<>(player.getCardsIn(ZoneType.Library));
+                List<Card> toRemove = new ArrayList<>();
+                
+                //Remove all cards that aren't of the chosen rarity
+                for (Card card : library) {
+                    if (onePlayerHasTimeShifted && card.getRarity() == CardRarity.Special) {
+                        //Since Time Shifted cards don't have a traditional rarity, they're wildcards
+                        continue;
+                    } else if (anteRarity == CardRarity.MythicRare || anteRarity == CardRarity.Rare) {
+                        //Rare and Mythic Rare cards are considered the same rarity, just as in booster packs
+                        //Otherwise it's possible to never lose Mythic Rare cards if you choose opponents carefully
+                        //It also lets you win Mythic Rare cards when you don't have any to ante
+                        if (card.getRarity() != CardRarity.MythicRare && card.getRarity() != CardRarity.Rare) {
+                            toRemove.add(card);
+                        }
+                    } else {
+                        if (card.getRarity() != anteRarity) {
+                            toRemove.add(card);
+                        }
+                    }
+                }
+                
+                library.removeAll(toRemove);
+                
+                if (library.size() > 0) { //Make sure that matches were found. If not, use the original method to choose antes
+                    Card ante = library.get(new Random().nextInt(library.size()));
+                    anteed.put(player, ante);
+                } else {
+                    chooseRandomCardsForAnte(player, anteed);
+                }
+                
+            }
+        
+        } else {
+            for (Player player : getPlayers()) {
+                chooseRandomCardsForAnte(player, anteed);
+            }
         }
+        
         return anteed;
 
-   }
+    }
+    
+    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
+        final List<Card> lib = player.getCardsIn(ZoneType.Library);
+        Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
+        Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+        if (ante == null) {
+            getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
+            ante = Aggregates.random(lib);
+        }
+        anteed.put(player, ante);
+    }
+    
+    private Set<CardRarity> getValidRarities(final Iterable<Card> cards) {
+        Set<CardRarity> rarities = new HashSet<>();
+        for (Card card : cards) {
+            if (card.getRarity() == CardRarity.Rare || card.getRarity() == CardRarity.MythicRare) {
+                rarities.add(CardRarity.Rare);
+                rarities.add(CardRarity.MythicRare);
+            } else {
+                rarities.add(card.getRarity());
+            }
+        }
+        return rarities;
+    }
+    
 }
