@@ -314,10 +314,10 @@
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
                                             <fileset dir="${project.build.directory}" includes="forge.sh" />
                                             <fileset dir="${project.build.directory}" includes="forge.command" />
-                                            <fileset dir="${basedir}" includes="forge.profile.properties.example" />
-                                            <fileset dir="${basedir}" includes="LICENSE.txt" />
-                                            <fileset dir="${basedir}" includes="README.txt" />
-                                            <fileset dir="${basedir}" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/">
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
