@@ -45,6 +45,7 @@ public class Forge implements ApplicationListener {
     private static ShapeRenderer shapeRenderer;
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
+    private static KeyInputAdapter keyInputAdapter;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public Forge(Clipboard clipboard0) {
@@ -124,6 +125,7 @@ public class Forge implements ApplicationListener {
 
     private static void setCurrentScreen(FScreen screen0) {
         try {
+            endKeyInput(); //end key input before switching screens
             Animation.endAll(); //end all active animations before switching screens
     
             currentScreen = screen0;
@@ -208,13 +210,67 @@ public class Forge implements ApplicationListener {
         shapeRenderer.dispose();
     }
 
+    public static void startKeyInput(KeyInputAdapter adapter) {
+        keyInputAdapter = adapter;
+        Gdx.input.setOnscreenKeyboardVisible(true);
+    }
+
+    public static void endKeyInput() {
+        if (keyInputAdapter == null) { return; }
+        keyInputAdapter.onInputEnd();
+        keyInputAdapter = null;
+        Gdx.input.setOnscreenKeyboardVisible(false);
+    }
+
+    public static abstract class KeyInputAdapter {
+        public abstract FDisplayObject getOwner();
+        public abstract boolean keyTyped(char ch);
+        public abstract void onInputEnd();
+
+        //also allow handling of keyDown and keyUp but don't require it
+        public boolean keyDown(int keyCode) {
+            return false;
+        }
+        public boolean keyUp(int keyCode) {
+            return false;
+        }
+    }
+
     private static class MainInputProcessor extends FGestureAdapter {
         private static final ArrayList<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
 
         @Override
+        public boolean keyDown(int keyCode) {
+            if (keyInputAdapter != null) {
+                return keyInputAdapter.keyDown(keyCode);
+            }
+            return false;
+        }
+
+        @Override
+        public boolean keyUp(int keyCode) {
+            if (keyInputAdapter != null) {
+                return keyInputAdapter.keyUp(keyCode);
+            }
+            return false;
+        }
+
+        @Override
+        public boolean keyTyped(char ch) {
+            if (keyInputAdapter != null) {
+                return keyInputAdapter.keyTyped(ch);
+            }
+            return false;
+        }
+
+        @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
             potentialListeners.clear();
-            if (currentScreen != null) { //base potential listeners on object containing touch down point
+
+            if (keyInputAdapter != null) {
+                endKeyInput(); //end key input and suppress touch event if needed
+            }
+            else if (currentScreen != null) { //base potential listeners on object containing touch down point
                 FOverlay overlay = FOverlay.getTopOverlay();
                 if (overlay != null) { //let top overlay handle gestures if any is open
                     overlay.buildTouchListeners(x, y, potentialListeners);
