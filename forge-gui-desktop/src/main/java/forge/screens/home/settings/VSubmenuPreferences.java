@@ -79,6 +79,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
+    private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -205,6 +206,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbHideReminderText, regularConstraints);
         pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
+
+        pnlPrefs.add(cbOpenPacksIndiv, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When opening Fat Packs and Booster Boxes, booster packs will be opened and displayed one at a time."), regularConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
@@ -508,6 +512,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbHideReminderText() {
         return cbHideReminderText;
+    }
+
+    public final JCheckBox getCbOpenPacksIndiv() {
+        return cbOpenPacksIndiv;
     }
 
     /** @return {@link forge.toolbox.FLabel} */

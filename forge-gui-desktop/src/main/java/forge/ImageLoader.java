@@ -39,6 +39,9 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         } else if (key.startsWith(ImageKeys.FATPACK_PREFIX)) {
             filename = key.substring(ImageKeys.FATPACK_PREFIX.length());
             path = ForgeConstants.CACHE_FATPACK_PICS_DIR;
+        } else if (key.startsWith(ImageKeys.BOOSTERBOX_PREFIX)) {
+            filename = key.substring(ImageKeys.BOOSTERBOX_PREFIX.length());
+            path = ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR;
         } else if (key.startsWith(ImageKeys.PRECON_PREFIX)) {
             filename = key.substring(ImageKeys.PRECON_PREFIX.length());
             path = ForgeConstants.CACHE_PRECON_PICS_DIR;

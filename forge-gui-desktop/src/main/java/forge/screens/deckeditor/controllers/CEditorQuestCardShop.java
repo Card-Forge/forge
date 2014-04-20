@@ -25,6 +25,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
+import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -35,6 +36,7 @@ import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
 import forge.screens.deckeditor.views.*;
@@ -50,6 +52,7 @@ import javax.swing.*;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -213,6 +216,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             value = 995;
         } else if (card instanceof FatPack) {
             value = 2365;
+        } else if (card instanceof BoosterBox) {
+            value = 8750;
         } else if (card instanceof PreconDeck) {
             value = QuestController.getPreconDeals((PreconDeck) card).getCost();
         }
@@ -348,14 +353,47 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     else if (item instanceof FatPack) {
                         booster = (FatPack) ((FatPack) item).clone();
                     }
+                    else if (item instanceof BoosterBox) {
+                        booster = (BoosterBox) ((BoosterBox) item).clone();
+                    }
                     this.questData.getCards().buyPack(booster, value);
                     final List<PaperCard> newCards = booster.getCards();
 
                     itemsToAdd.addAllFlat(newCards);
-
-                    final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
-                    c.setVisible(true);
-                    c.dispose();
+                    
+                    if (booster instanceof BoxedProduct && FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV)) {
+                        
+                        int totalPacks = ((BoxedProduct) booster).boosterPacksRemaining();
+                        boolean skipTheRest = false;
+                        final List<PaperCard> remainingCards = new ArrayList<>();
+                        
+                        while (((BoxedProduct) booster).boosterPacksRemaining() > 0 && !skipTheRest) {
+                            final BoxedProductCardListViewer c = new BoxedProductCardListViewer(booster.getName(), "You have found the following cards inside (Booster Pack " + (totalPacks - ((BoxedProduct) booster).boosterPacksRemaining() + 1) + " of " + totalPacks + "):", ((BoxedProduct) booster).getNextBoosterPack());
+                            c.setVisible(true);
+                            c.dispose();
+                            skipTheRest = c.skipTheRest();
+                        }
+                        
+                        if (skipTheRest) {
+                            while (((BoxedProduct) booster).boosterPacksRemaining() > 0) {
+                                remainingCards.addAll(((BoxedProduct) booster).getNextBoosterPack());
+                            }
+                        }
+                        
+                        remainingCards.addAll(((BoxedProduct) booster).getExtraCards());
+                        
+                        if (remainingCards.size() > 0) {
+                            final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", remainingCards);
+                            c.setVisible(true);
+                            c.dispose();
+                        }
+                        
+                    } else {
+                        final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
+                        c.setVisible(true);
+                        c.dispose();
+                    }
+                    
                 }
             }
             else if (item instanceof PreconDeck) {

@@ -50,6 +50,7 @@ public class GuiDownloadQuestImages extends GuiDownloader {
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE,  ForgeConstants.CACHE_ICON_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE,        ForgeConstants.CACHE_BOOSTER_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_FATPACKS_FILE,        ForgeConstants.CACHE_FATPACK_PICS_DIR);
+        addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERBOXES_FILE,    ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_PRECONS_FILE,         ForgeConstants.CACHE_PRECON_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOKENS_FILE,          ForgeConstants.CACHE_TOKEN_PICS_DIR);

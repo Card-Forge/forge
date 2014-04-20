@@ -494,6 +494,8 @@ public class ImportSourceAnalyzer {
                     _analyzeSimpleListedDir(dir, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE, ForgeConstants.CACHE_BOOSTER_PICS_DIR, OpType.QUEST_PIC);
                 } else if ("fatpacks".equalsIgnoreCase(dirName)) {
                     _analyzeSimpleListedDir(dir, ForgeConstants.IMAGE_LIST_QUEST_FATPACKS_FILE, ForgeConstants.CACHE_FATPACK_PICS_DIR, OpType.QUEST_PIC);
+                } else if ("boosterboxes".equalsIgnoreCase(dirName)) {
+                    _analyzeSimpleListedDir(dir, ForgeConstants.IMAGE_LIST_QUEST_BOOSTERBOXES_FILE, ForgeConstants.CACHE_BOOSTERBOX_PICS_DIR, OpType.QUEST_PIC);
                 } else if ("precons".equalsIgnoreCase(dirName)) {
                     _analyzeSimpleListedDir(dir, ForgeConstants.IMAGE_LIST_QUEST_PRECONS_FILE, ForgeConstants.CACHE_PRECON_PICS_DIR, OpType.QUEST_PIC);
                 } else if ("tournamentpacks".equalsIgnoreCase(dirName)) {
