@@ -111,6 +111,14 @@ Fleetfeather Cockatrice
 Nyx Weaver
 Revel of the Fallen God
 Stormchaser Chimera
+Agent of Erebos
+Aspect of Gorgon
+Cast into Darkness
+Cruel Feeding
+Dreadbringer Lampads
+Feast of Dreams
+Felhide Petrifier
+Grim Guardian
 
 
 ------------
