@@ -119,6 +119,47 @@ Dreadbringer Lampads
 Feast of Dreams
 Felhide Petrifier
 Grim Guardian
+Colossal Heroics
+Consign to Dust
+Nature's Panoply
+Swarmborn Giant
+Market Festival
+Nessian Game Warden
+Oakheart Dryads
+Pheres-Band Thunderhoof
+Renowned Weaver
+Solidarity of Heroes
+Strength from the Fallen
+Gluttonous Cyclops
+Pensive Minotaur
+Rouse the Mob
+Wildfire Cerberus
+Akroan Line Breaker
+Blinding Flare
+Flamespeaker's Will
+Flurry of Horns
+Knowledge and Power
+Lightning Diadem
+Prophetic Flamespeaker
+Rollick of Abandon
+Sigiled Skink
+Starfall
+Twinflame
+Rotted Hulk
+Spiteful Blow
+Thoughtrender Lamia
+Tormented Thoughts
+Akroan Mastiff
+Armament of Nyx
+Deicide
+Eagle of the Watch
+Bloodcrazed Hoplite
+Brain Maggot
+Nightmarish End
+Nyx Infusion
+Pharika's Chosen
+Returned Reveler
+Ritual of the Returned
 
 
 ------------
