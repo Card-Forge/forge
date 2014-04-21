@@ -78,7 +78,7 @@ public class AnimateAi extends SpellAbilityAi {
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
         if (ph.getPlayerTurn().isOpponentOf(aiPlayer) &&
-                (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || game.getCombat().getAttackersOf(aiPlayer).isEmpty())) {
+                (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || (game.getCombat() != null && game.getCombat().getAttackersOf(aiPlayer).isEmpty()))) {
             return false;
         }
 

@@ -1,7 +1,7 @@
 Name:Thunderstaff
 ManaCost:3
 Types:Artifact
-S:Mode$ PreventDamage | Target$ You | Source$ Creature.YouDontCtrl | CombatDamage$ True | Amount$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
+S:Mode$ PreventDamage | Target$ You | Source$ Creature | CombatDamage$ True | Amount$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
 A:AB$ PumpAll | Cost$ 2 T | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
 SVar:X:Count$Valid Card.Self+untapped
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderstaff.jpg
