@@ -10,6 +10,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 
 public class FTextField extends FDisplayObject {
     private static final int DEFAULT_FONT_SIZE = 14;
@@ -30,12 +31,10 @@ public class FTextField extends FDisplayObject {
         return font0.getFont().getCapHeight() * 3;
     }
 
-    private String text;
-    private String ghostText;
+    private String text, ghostText, textBeforeKeyInput;
     private FSkinFont font;
     private HAlignment alignment;
-    private int selStart;
-    private int selLength;
+    private int selStart, selLength;
     private boolean keyInputActive;
 
     public FTextField() {
@@ -150,6 +149,7 @@ public class FTextField extends FDisplayObject {
 
         selStart = 0; //select all before starting input
         selLength = text.length();
+        textBeforeKeyInput = text; //backup text before input to detect changes
 
         Forge.startKeyInput(new KeyInputAdapter() {
             @Override
@@ -213,9 +213,14 @@ public class FTextField extends FDisplayObject {
 
             @Override
             public void onInputEnd() {
+                if (changedHandler != null && !text.equals(textBeforeKeyInput)) {
+                    //handle change event if text changed during input
+                    changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                }
                 keyInputActive = false;
                 selStart = 0;
                 selLength = 0;
+                textBeforeKeyInput = null;
             }
         });
         keyInputActive = true;
