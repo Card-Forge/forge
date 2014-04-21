@@ -16,6 +16,10 @@ The default locations by operating system are:
 - Linux: <your home directory>/.cache/forge/pics/tokens/
 
 
+- New Journey into Nyx cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+
+
 ---------
 New Cards
 ---------
