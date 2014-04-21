@@ -356,7 +356,6 @@ public class QuestPreferencesHandler extends SkinnedPanel {
             case STARTING_CREDITS_HARD: case STARTING_CREDITS_EXPERT:
             case REWARDS_MILLED: case REWARDS_MULLIGAN0:
             case REWARDS_ALTERNATIVE: case REWARDS_TURN5:
-            case WINS_UNLOCK_SET:
                 if (val > 500) {
                     return "Value too large (maximum 500).";
                 }
@@ -403,6 +402,13 @@ public class QuestPreferencesHandler extends SkinnedPanel {
                     return "Value too small (minimum 1).";
                 } else if (val > 25) {
                     return "Value too large (maximum 25).";
+                }
+                break;
+            case WINS_UNLOCK_SET:
+                if (val < 1) {
+                    return "Value too small (minimum 1).";
+                } else if (val > 100) {
+                    return "Value too large (maximum 100).";
                 }
                 break;
             case STARTING_POOL_COLOR_BIAS:
