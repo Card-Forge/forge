@@ -113,7 +113,6 @@ public class HumanPlaySpellAbility {
 
         if (isFree || this.payment.isFullyPaid()) {
             if (skipStack) {
-                AbilityUtils.handleRemembering(ability); // Disciple of Deceit
                 AbilityUtils.resolve(this.ability);
             }
             else {
