@@ -26,6 +26,8 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -59,7 +61,7 @@ import java.util.List;
  * @author Forge
  * @version $Id: ListChooser.java 25183 2014-03-14 23:09:45Z drdev $
  */
-public class ListChooser<T> {
+public class ListChooser<T> extends FContainer {
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
     private static final FSkinColor ALT_ITEM_COLOR = BACK_COLOR.getContrastColor(-20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
@@ -73,15 +75,47 @@ public class ListChooser<T> {
     private boolean called;
 
     // initialized before; listeners may be added to it
+    private FTextField txtSearch;
     private ChoiceList lstChoices;
     private FOptionPane optionPane;
+    private final Function<T, String> display;
     private final Callback<List<T>> callback;
 
-    public ListChooser(final String title, final int minChoices0, final int maxChoices0, final Collection<T> list, final Function<T, String> display, final Callback<List<T>> callback0) {
+    public ListChooser(final String title, final int minChoices0, final int maxChoices0, final Collection<T> list, final Function<T, String> display0, final Callback<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
         minChoices = minChoices0;
         maxChoices = maxChoices0;
-        lstChoices = new ChoiceList(list);
+        if (list.size() > 25) { //only show search field if more than 25 items
+            txtSearch = add(new FTextField());
+            txtSearch.setFontSize(12);
+            txtSearch.setGhostText("Search");
+            txtSearch.setChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    String pattern = txtSearch.getText().toLowerCase();
+                    lstChoices.selectedIndices.clear();
+                    if (pattern.isEmpty()) {
+                        lstChoices.setListData(list);
+                    }
+                    else {
+                        List<T> filteredList = new ArrayList<T>();
+                        for (T option : list) {
+                            if (getChoiceText(option).toLowerCase().contains(pattern)) {
+                                filteredList.add(option);
+                            }
+                        }
+                        lstChoices.setListData(filteredList);
+                    }
+                    if (!lstChoices.isEmpty() && maxChoices > 0) {
+                        lstChoices.selectedIndices.add(0);
+                    }
+                    lstChoices.setScrollTop(0);
+                    onSelectionChange();
+                }
+            });
+        }
+        lstChoices = add(new ChoiceList(list));
+        display = display0;
         callback = callback0;
 
         String[] options;
@@ -98,9 +132,9 @@ public class ListChooser<T> {
         else {
             lstChoices.allowMultipleSelections = true;
         }
-        lstChoices.setHeight(ITEM_HEIGHT * Math.min(list.size(), 8)); //make tall enough to show 8 items without scrolling
+        setHeight(ITEM_HEIGHT * Math.min(list.size(), 8)); //make tall enough to show 8 items without scrolling
 
-        optionPane = new FOptionPane(null, title, null, lstChoices, options, minChoices < 0 ? 0 : -1, new Callback<Integer>() {
+        optionPane = new FOptionPane(null, title, null, this, options, minChoices < 0 ? 0 : -1, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 called = false;
@@ -154,7 +188,24 @@ public class ListChooser<T> {
         optionPane.setButtonEnabled(0, (num >= minChoices) && (num <= maxChoices || maxChoices == -1));
     }
 
-    public final class ChoiceList extends FList<T> {
+    private String getChoiceText(T choice) {
+        if (display == null) {
+            return choice.toString();
+        }
+        return display.apply(choice);
+    }
+
+    @Override
+    protected void doLayout(float width, float height) {
+        float y = 0;
+        if (txtSearch != null) {
+            txtSearch.setBounds(0, 0, width, txtSearch.getHeight());
+            y += txtSearch.getHeight() * 1.25f;
+        }
+        lstChoices.setBounds(0, y, width, height - y);
+    }
+
+    private class ChoiceList extends FList<T> {
         private boolean allowMultipleSelections;
         private List<Integer> selectedIndices = new ArrayList<Integer>();
 
@@ -191,7 +242,7 @@ public class ListChooser<T> {
 
                 @Override
                 public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
                 }
             });
             setFontSize(12);
