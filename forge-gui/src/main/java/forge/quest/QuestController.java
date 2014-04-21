@@ -38,6 +38,7 @@ import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -436,7 +437,7 @@ public class QuestController {
         final int wins = this.model.getAchievements().getWin();
 
         int cntLocked = this.questFormat.getLockedSets().size();
-        int unlocksAvaliable = wins / 20;
+        int unlocksAvaliable = wins / FModel.getQuestPreferences().getPrefInt(QPref.WINS_UNLOCK_SET);
         int unlocksSpent = this.questFormat.getUnlocksUsed();
 
         return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0;

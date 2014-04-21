@@ -219,6 +219,9 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlShop.add(new FLabel.Builder().text("Wins for Pack").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK, ErrType.SHOP), constraints1);
 
+        pnlShop.add(new FLabel.Builder().text("Wins per Set Unlock").build(), constraints2);
+        pnlShop.add(new PrefInput(QPref.WINS_UNLOCK_SET, ErrType.SHOP), constraints1);
+
         pnlShop.add(new FLabel.Builder().text("Common Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_COMMON, ErrType.SHOP), constraints1);
 
@@ -353,6 +356,7 @@ public class QuestPreferencesHandler extends SkinnedPanel {
             case STARTING_CREDITS_HARD: case STARTING_CREDITS_EXPERT:
             case REWARDS_MILLED: case REWARDS_MULLIGAN0:
             case REWARDS_ALTERNATIVE: case REWARDS_TURN5:
+            case WINS_UNLOCK_SET:
                 if (val > 500) {
                     return "Value too large (maximum 500).";
                 }

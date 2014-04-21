@@ -127,6 +127,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_EXPERTAI_MEDIUM("36"),
         WINS_EXPERTAI_HARD("32"),
         WINS_EXPERTAI_EXPERT("28"),
+        
+        WINS_UNLOCK_SET("20"),
 
         // Maximum amount of "Packs" opened by the Shop and available as singles
         SHOP_MAX_PACKS("6"),

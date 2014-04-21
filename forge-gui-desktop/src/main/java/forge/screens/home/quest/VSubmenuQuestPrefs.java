@@ -356,6 +356,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlShop.add(new FLabel.Builder().text("Wins for Pack").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK, QuestPreferencesErrType.SHOP), constraints1);
 
+        pnlShop.add(new FLabel.Builder().text("Wins per Set Unlock").build(), constraints2);
+        pnlShop.add(new PrefInput(QPref.WINS_UNLOCK_SET, QuestPreferencesErrType.SHOP), constraints1);
+
         pnlShop.add(new FLabel.Builder().text("Common Singles").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_COMMON, QuestPreferencesErrType.SHOP), constraints1);
 
