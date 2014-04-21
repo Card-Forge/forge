@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
@@ -59,6 +60,20 @@ public class FTextField extends FDisplayObject {
         selLength = 0;
     }
 
+    private void insertText(String text0) {
+        int insertLength = text0.length();
+        if (selStart > 0) {
+            text0 = text.substring(0, selStart) + text0;
+        }
+        int selEnd = selStart + selLength;
+        if (selEnd < text.length()) {
+            text0 += text.substring(selEnd);
+        }
+        text = text0;
+        selStart += insertLength; //put cursor after inserted text
+        selLength = 0;
+    }
+
     public String getGhostText() {
         return ghostText;
     }
@@ -98,9 +113,41 @@ public class FTextField extends FDisplayObject {
     public float getAutoSizeWidth() {
         return font.getFont().getBounds(text).width + 2 * PADDING;
     }
+    
+    private int getCharIndexAtPoint(float x, float y) {
+        float charLeft = PADDING;
+        if (x < charLeft) {
+            return 0;
+        }
+        if (x >= charLeft + font.getFont().getBounds(text).width) {
+            return text.length();
+        }
+
+        //find closest character of press
+        float charWidth;
+        for (int i = 0; i < text.length(); i++) {
+            charWidth = font.getFont().getBounds(text.substring(i, i + 1)).width;
+            if (x < charLeft + charWidth / 2) {
+                return i;
+            }
+            charLeft += charWidth;
+        }
+        return text.length();
+    }
+
+    @Override
+    public boolean press(float x, float y) {
+        if (keyInputActive) { //support placing text cursor
+            selStart = getCharIndexAtPoint(x, y);
+            selLength = 0;
+        }
+        return false;
+    }
 
     @Override
     public boolean tap(float x, float y, int count) {
+        if (keyInputActive) { return true; } //do nothing if key input already active
+
         selStart = 0; //select all before starting input
         selLength = text.length();
 
@@ -111,19 +158,57 @@ public class FTextField extends FDisplayObject {
             }
 
             @Override
-            public boolean keyTyped(char ch) {
-                String newText = String.valueOf(ch);
-                if (selStart > 0) {
-                    newText = text.substring(0, selStart) + newText;
-                }
-                int selEnd = selStart + selLength;
-                if (selEnd < text.length()) {
-                    newText += text.substring(selEnd);
-                }
-                text = newText;
-                selStart++; //put cursor after inserted character
-                selLength = 0;
+            public boolean allowTouchInput() {
                 return true;
+            }
+
+            @Override
+            public boolean keyTyped(char ch) {
+                insertText(String.valueOf(ch));
+                return true;
+            }
+
+            @Override
+            public boolean keyDown(int keyCode) {
+                switch (keyCode) {
+                case Keys.TAB:
+                case Keys.ENTER: //end key input on Tab or Enter
+                    Forge.endKeyInput();
+                    return true;
+                case Keys.BACKSPACE: //also handles Delete since those are processed the same by libgdx
+                    if (text.length() > 0) {
+                        if (selLength == 0) { //delete previous or next character if selection empty
+                            if (selStart > 0) {
+                                selStart--;
+                            }
+                            selLength = 1;
+                        }
+                        insertText("");
+                    }
+                    return true;
+                case Keys.LEFT:
+                    if (selLength == 0) {
+                        if (selStart > 0) {
+                            selStart--;
+                        }
+                    }
+                    else {
+                        selLength = 0;
+                    }
+                    return true;
+                case Keys.RIGHT:
+                    if (selLength == 0) {
+                        if (selStart < text.length()) {
+                            selStart++;
+                        }
+                    }
+                    else {
+                        selStart += selLength;
+                        selLength = 0;
+                    }
+                    return true;
+                }
+                return false;
             }
 
             @Override
@@ -153,7 +238,7 @@ public class FTextField extends FDisplayObject {
             float selHeight = h - 2 * PADDING;
             if (selLength == 0) {
                 drawText(g, w, h); //draw text behind cursor
-                g.drawLine(1, FORE_COLOR, selLeft, selTop, selLeft, selTop + selLength);
+                g.drawLine(1, FORE_COLOR, selLeft, selTop, selLeft, selTop + selHeight);
             }
             else if (selStart == 0 && selLength == text.length()) {
                 float selWidth = font.getFont().getBounds(text.substring(selStart, selStart + selLength)).width;

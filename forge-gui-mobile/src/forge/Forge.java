@@ -211,6 +211,10 @@ public class Forge implements ApplicationListener {
     }
 
     public static void startKeyInput(KeyInputAdapter adapter) {
+        if (keyInputAdapter == adapter) { return; }
+        if (keyInputAdapter != null) {
+            keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
+        }
         keyInputAdapter = adapter;
         Gdx.input.setOnscreenKeyboardVisible(true);
     }
@@ -219,18 +223,19 @@ public class Forge implements ApplicationListener {
         if (keyInputAdapter == null) { return; }
         keyInputAdapter.onInputEnd();
         keyInputAdapter = null;
+        MainInputProcessor.keyTyped = false;
+        MainInputProcessor.lastKeyTyped = '\0';
         Gdx.input.setOnscreenKeyboardVisible(false);
     }
 
     public static abstract class KeyInputAdapter {
         public abstract FDisplayObject getOwner();
+        public abstract boolean allowTouchInput();
         public abstract boolean keyTyped(char ch);
+        public abstract boolean keyDown(int keyCode);
         public abstract void onInputEnd();
 
-        //also allow handling of keyDown and keyUp but don't require it
-        public boolean keyDown(int keyCode) {
-            return false;
-        }
+        //also allow handling of keyUp but don't require it
         public boolean keyUp(int keyCode) {
             return false;
         }
@@ -238,6 +243,8 @@ public class Forge implements ApplicationListener {
 
     private static class MainInputProcessor extends FGestureAdapter {
         private static final ArrayList<FDisplayObject> potentialListeners = new ArrayList<FDisplayObject>();
+        private static char lastKeyTyped;
+        private static boolean keyTyped;
 
         @Override
         public boolean keyDown(int keyCode) {
@@ -249,6 +256,7 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean keyUp(int keyCode) {
+            keyTyped = false; //reset on keyUp
             if (keyInputAdapter != null) {
                 return keyInputAdapter.keyUp(keyCode);
             }
@@ -258,7 +266,14 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean keyTyped(char ch) {
             if (keyInputAdapter != null) {
-                return keyInputAdapter.keyTyped(ch);
+                if (ch >= ' ' && ch <= '~') { //only process this event if character is printable
+                    //prevent firing this event more than once for the same character on the same key down, otherwise it fires too often
+                    if (lastKeyTyped != ch || !keyTyped) {
+                        keyTyped = true;
+                        lastKeyTyped = ch;
+                        return keyInputAdapter.keyTyped(ch);
+                    }
+                }
             }
             return false;
         }
@@ -266,17 +281,20 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
             potentialListeners.clear();
-
-            if (keyInputAdapter != null) {
-                endKeyInput(); //end key input and suppress touch event if needed
-            }
-            else if (currentScreen != null) { //base potential listeners on object containing touch down point
+            if (currentScreen != null) { //base potential listeners on object containing touch down point
                 FOverlay overlay = FOverlay.getTopOverlay();
                 if (overlay != null) { //let top overlay handle gestures if any is open
                     overlay.buildTouchListeners(x, y, potentialListeners);
                 }
                 else {
                     currentScreen.buildTouchListeners(x, y, potentialListeners);
+                }
+
+                if (keyInputAdapter != null) {
+                    if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
+                        endKeyInput(); //end key input and suppress touch event if needed
+                        potentialListeners.clear();
+                    }
                 }
             }
             return super.touchDown(x, y, pointer, button);
