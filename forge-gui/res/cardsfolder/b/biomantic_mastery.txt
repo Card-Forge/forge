@@ -1,7 +1,8 @@
 Name:Biomantic Mastery
 ManaCost:4 GU GU GU
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 GU GU GU | NumCards$ X | References$ X | SpellDescription$ Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
-SVar:X:Count$TypeOnBattlefield.Creature
+A:SP$ Draw | Cost$ 4 GU GU GU | Defined$ You | ValidTgts$ Player | NumCards$ X | References$ X | SubAbility$ DBDraw | SpellDescription$ Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
+SVar:DBDraw:DB$ Draw | Defined$ You | ValidTgts$ Player | TargetUnique$ True | NumCards$ X | References$ X
+SVar:X:ThisTargetedPlayer$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biomantic_mastery.jpg
 Oracle:({G/U} can be paid with either {G} or {U}.)\nDraw a card for each creature target player controls, then draw a card for each creature another target player controls.
