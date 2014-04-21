@@ -41,7 +41,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
     protected final Template contents;
     protected final String name;
     private final int hash;
-    private List<PaperCard> cards = null;
+    protected List<PaperCard> cards = null;
 
     public SealedProduct(String name0, Template boosterData) {
         if (null == name0)       { throw new IllegalArgumentException("name0 must not be null");       }
@@ -65,7 +65,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
         return contents.getEdition();
     }
     
-    public final List<PaperCard> getCards() {
+    public List<PaperCard> getCards() {
         if (null == cards) {
             cards = generate();
         }

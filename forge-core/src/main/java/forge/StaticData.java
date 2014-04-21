@@ -1,17 +1,18 @@
 package forge;
 
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
+
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
+import forge.item.BoosterBox;
 import forge.item.FatPack;
 import forge.item.SealedProduct;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
 
 
  /**
@@ -27,6 +28,7 @@ public class StaticData {
     private final IStorage<SealedProduct.Template> specialBoosters;
     private final IStorage<SealedProduct.Template> tournaments;
     private final IStorage<FatPack.Template> fatPacks;
+    private final IStorage<BoosterBox.Template> boosterBoxes;
     private final IStorage<PrintSheet> printSheets;
 
     private static StaticData lastInstance = null;
@@ -57,6 +59,7 @@ public class StaticData {
         this.specialBoosters = new StorageBase<SealedProduct.Template>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
         this.tournaments = new StorageBase<SealedProduct.Template>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
         this.fatPacks = new StorageBase<FatPack.Template>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
+        this.boosterBoxes = new StorageBase<BoosterBox.Template>("Booster boxes", new BoosterBox.Template.Reader(blockDataFolder + "boosterboxes.txt"));
         this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
     }
 
@@ -71,6 +74,10 @@ public class StaticData {
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.item.FatPackTemplate}> */
     public IStorage<FatPack.Template> getFatPacks() {
         return fatPacks;
+    }
+    
+    public IStorage<BoosterBox.Template> getBoosterBoxes() {
+        return boosterBoxes;
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */

@@ -9,6 +9,7 @@ public class ImageKeys {
     public static final String ICON_PREFIX           = "i:";
     public static final String BOOSTER_PREFIX        = "b:";
     public static final String FATPACK_PREFIX        = "f:";
+    public static final String BOOSTERBOX_PREFIX     = "x:";
     public static final String PRECON_PREFIX         = "p:";
     public static final String TOURNAMENTPACK_PREFIX = "o:";
     
@@ -33,6 +34,8 @@ public class ImageKeys {
         }
         if ( ii instanceof FatPack )
             return ImageKeys.FATPACK_PREFIX + ((FatPack)ii).getEdition();
+        if ( ii instanceof BoosterBox )
+            return ImageKeys.BOOSTERBOX_PREFIX + ((BoosterBox)ii).getEdition();
         if ( ii instanceof PreconDeck )
             return ImageKeys.PRECON_PREFIX + ((PreconDeck)ii).getImageFilename();
         if ( ii instanceof PaperToken ) 

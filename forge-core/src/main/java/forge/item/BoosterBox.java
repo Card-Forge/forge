@@ -27,24 +27,23 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Function;
 
 import forge.StaticData;
-import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 
-public class FatPack extends BoxedProduct {
-    public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
+public class BoosterBox extends BoxedProduct {
+    public static final Function<CardEdition, BoosterBox> FN_FROM_SET = new Function<CardEdition, BoosterBox>() {
         @Override
-        public FatPack apply(final CardEdition arg1) {
-            FatPack.Template d = StaticData.instance().getFatPacks().get(arg1.getCode());
+        public BoosterBox apply(final CardEdition arg1) {
+            BoosterBox.Template d = StaticData.instance().getBoosterBoxes().get(arg1.getCode());
             if (d == null) { return null; }
-            return new FatPack(arg1.getName(), d, d.cntBoosters);
+            return new BoosterBox(arg1.getName(), d, d.cntBoosters);
         }
     };
 
-    private final FatPack.Template fpData;
+    private final BoosterBox.Template fpData;
 
-    public FatPack(final String name0, final FatPack.Template fpData0, final int boosterCount) {
+    public BoosterBox(final String name0, final BoosterBox.Template fpData0, final int boosterCount) {
         super(name0, StaticData.instance().getBoosters().get(fpData0.getEdition()), boosterCount);
         fpData = fpData0;
     }
@@ -56,28 +55,12 @@ public class FatPack extends BoxedProduct {
 
     @Override
     public final String getItemType() {
-        return "Fat Pack";
+        return "Booster Box";
     }
-    
-    @Override
-    public List<PaperCard> getExtraCards() {
-        return BoosterGenerator.getBoosterPack(fpData);
-    }
-
-    /*@Override
-    protected List<PaperCard> generate() {
-        List<PaperCard> result = new ArrayList<PaperCard>();
-        for (int i = 0; i < fpData.getCntBoosters(); i++) {
-            result.addAll(super.generate());
-        }
-        // Add any extra cards that may come in the fatpack after Boosters
-        result.addAll(BoosterGenerator.getBoosterPack(fpData));
-        return result;
-    }*/
 
     @Override
     public final Object clone() {
-        return new FatPack(name, fpData, fpData.cntBoosters);
+        return new BoosterBox(name, fpData, fpData.cntBoosters);
     }
 
     @Override
@@ -118,7 +101,7 @@ public class FatPack extends BoxedProduct {
                         slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
                 }
 
-                return new FatPack.Template(edition, nBoosters, slots);
+                return new BoosterBox.Template(edition, nBoosters, slots);
             }
         }
         

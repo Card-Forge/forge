@@ -571,6 +571,13 @@ public class QuestDataIO {
             writer.endNode();
         }
 
+        protected void write(final BoosterBox boosterbox, final Integer count, final HierarchicalStreamWriter writer) {
+            writer.startNode("bbox");
+            writer.addAttribute("s", boosterbox.getEdition());
+            writer.addAttribute("n", count.toString());
+            writer.endNode();
+        }
+
         protected void write(final TournamentPack booster, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("tpack");
             writer.addAttribute("s", booster.getEdition());
@@ -600,6 +607,8 @@ public class QuestDataIO {
                     this.write((TournamentPack) item, count, writer);
                 } else if (item instanceof FatPack) {
                     this.write((FatPack) item, count, writer);
+                } else if (item instanceof BoosterBox) {
+                    this.write((BoosterBox) item, count, writer);
                 } else if (item instanceof PreconDeck) {
                     this.write((PreconDeck) item, count, writer);
                 }
@@ -626,6 +635,8 @@ public class QuestDataIO {
                     result.add(this.readTournamentPack(reader), cnt);
                 } else if ("fpack".equals(nodename)) {
                     result.add(this.readFatPack(reader), cnt);
+                } else if ("bbox".equals(nodename)) {
+                    result.add(this.readBoosterBox(reader), cnt);
                 } else if ("precon".equals(nodename)) {
                     final PreconDeck toAdd = this.readPreconDeck(reader);
                     if (null != toAdd) {
@@ -658,6 +669,11 @@ public class QuestDataIO {
         protected FatPack readFatPack(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return FatPack.FN_FROM_SET.apply(ed);
+        }
+
+        protected BoosterBox readBoosterBox(final HierarchicalStreamReader reader) {
+            final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
+            return BoosterBox.FN_FROM_SET.apply(ed);
         }
 
         protected PaperCard readCardPrinted(final HierarchicalStreamReader reader) {

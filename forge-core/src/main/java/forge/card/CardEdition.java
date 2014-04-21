@@ -464,6 +464,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
         }
 
+        public static final Predicate<CardEdition> HAS_BOOSTER_BOX = new CanMakeBoosterBox();
+        private static class CanMakeBoosterBox implements Predicate<CardEdition> {
+            @Override
+            public boolean apply(final CardEdition subject) {
+                return StaticData.instance().getBoosterBoxes().contains(subject.getCode());
+            }
+        }
+
 
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override

@@ -39,6 +39,7 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = _LIST_DIR + "quest-pet-token-images.txt";
     public static final String IMAGE_LIST_QUEST_BOOSTERS_FILE        = _LIST_DIR + "booster-images.txt";
     public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = _LIST_DIR + "fatpack-images.txt";
+    public static final String IMAGE_LIST_QUEST_BOOSTERBOXES_FILE    = _LIST_DIR + "boosterbox-images.txt";
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
 
@@ -130,6 +131,7 @@ public final class ForgeConstants {
     public static final String CACHE_SYMBOLS_DIR             = _PICS_DIR + "symbols/";
     public static final String CACHE_BOOSTER_PICS_DIR        = _PICS_DIR + "boosters/";
     public static final String CACHE_FATPACK_PICS_DIR        = _PICS_DIR + "fatpacks/";
+    public static final String CACHE_BOOSTERBOX_PICS_DIR     = _PICS_DIR + "boosterboxes/";
     public static final String CACHE_PRECON_PICS_DIR         = _PICS_DIR + "precons/";
     public static final String CACHE_TOURNAMENTPACK_PICS_DIR = _PICS_DIR + "tournamentpacks/";
     public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
@@ -151,6 +153,7 @@ public final class ForgeConstants {
             CACHE_ICON_PICS_DIR,
             CACHE_BOOSTER_PICS_DIR,
             CACHE_FATPACK_PICS_DIR,
+            CACHE_BOOSTERBOX_PICS_DIR,
             CACHE_PRECON_PICS_DIR,
             CACHE_TOURNAMENTPACK_PICS_DIR };
 

@@ -504,6 +504,15 @@ public final class QuestUtilCards {
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
+    
+    private void generateBoosterBoxesInShop(final int count) {
+        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_BOOSTER_BOX;
+        if (qc.getFormat() != null) {
+            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
+        }
+        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
+        this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, BoosterBox.FN_FROM_SET), count));
+    }
 
     /**
      * Generate precons in shop.
@@ -566,6 +575,7 @@ public final class QuestUtilCards {
         this.generatePreconsInShop(totalPacks);
         this.generateTournamentsInShop(totalPacks);
         this.generateFatPacksInShop(totalPacks);
+        this.generateBoosterBoxesInShop(totalPacks);
         int numberSnowLands = 5;
         if (qc.getFormat() != null && !qc.getFormat().hasSnowLands()) {
             numberSnowLands = 0;

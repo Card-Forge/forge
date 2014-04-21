@@ -195,7 +195,9 @@ forge-core/src/main/java/forge/deck/io/DeckStorage.java -text
 forge-core/src/main/java/forge/deck/io/OldDeckFileFormatException.java -text
 forge-core/src/main/java/forge/deck/io/package-info.java -text
 forge-core/src/main/java/forge/deck/package-info.java -text
+forge-core/src/main/java/forge/item/BoosterBox.java -text
 forge-core/src/main/java/forge/item/BoosterPack.java -text
+forge-core/src/main/java/forge/item/BoxedProduct.java -text
 forge-core/src/main/java/forge/item/FatPack.java -text
 forge-core/src/main/java/forge/item/IPaperCard.java -text
 forge-core/src/main/java/forge/item/InventoryItem.java -text
@@ -1202,6 +1204,7 @@ forge-gui/pom.xml -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Reckless.ai -text
 forge-gui/res/blockdata/blocks.txt svneol=native#text/plain
+forge-gui/res/blockdata/boosterboxes.txt -text
 forge-gui/res/blockdata/boosters-special.txt -text
 forge-gui/res/blockdata/fantasyblocks.txt -text
 forge-gui/res/blockdata/fatpacks.txt -text
