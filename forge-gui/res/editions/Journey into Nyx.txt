@@ -23,7 +23,7 @@ C Harvestguard Alseids
 C Lagonna-Band Trailblazer
 R Launch the Fleet
 U Leonin Iconoclast
-C Moral Obstinacy
+C Mortal Obstinacy
 U Nyx-Fleece Ram
 C Oppressive Rays
 C Oreskos Swiftclaw
