@@ -76,6 +76,7 @@ public class QuestWinLose extends ControlWinLose {
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
     private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_CARDS_LARGE = "w 95%!, h 600px!, gap 0 0 0 20px";
 
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
@@ -207,12 +208,20 @@ public class QuestWinLose extends ControlWinLose {
         if (cardsWon != null && !cardsWon.isEmpty()) {
             this.getView().getPnlCustom().add(new TitleLabel("Spoils! These cards will be available in your card pool after this ante match:"),
                     QuestWinLose.CONSTRAINTS_TITLE);
-            this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsWon), QuestWinLose.CONSTRAINTS_CARDS);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+                this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsWon), QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+            } else {
+                this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsWon), QuestWinLose.CONSTRAINTS_CARDS);
+            }
         }
         if (cardsLost != null && !cardsLost.isEmpty()) {
             this.getView().getPnlCustom().add(new TitleLabel("Looted! You lost the following cards in an ante match:"),
                     QuestWinLose.CONSTRAINTS_TITLE);
-            this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsLost), QuestWinLose.CONSTRAINTS_CARDS);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+                this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsLost), QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+            } else {
+                this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsLost), QuestWinLose.CONSTRAINTS_CARDS);
+            }
         }
 
     }
@@ -303,7 +312,8 @@ public class QuestWinLose extends ControlWinLose {
                 .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
         credBase += creditsForPreviousWins;
         
-        sb.append("Bonus for previous wins: ").append(creditsForPreviousWins).append(" credits.<br>");
+        sb.append("Bonus for previous wins: ").append(creditsForPreviousWins).append(
+                  creditsForPreviousWins != 1 ? " credits.<br>" : " credit.<br>");
         
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
@@ -470,7 +480,11 @@ public class QuestWinLose extends ControlWinLose {
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
         this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-        this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+        } else {
+            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+        }
     }
 
     /**
@@ -488,7 +502,11 @@ public class QuestWinLose extends ControlWinLose {
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
         this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-        this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+        } else {
+            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+        }
     }
 
     /**
@@ -566,7 +584,11 @@ public class QuestWinLose extends ControlWinLose {
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
             this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+                this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+            } else {
+                this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+            }
         }
 
     }
@@ -638,7 +660,11 @@ public class QuestWinLose extends ControlWinLose {
                     qData.getCards().addAllCards(boosterCards);
                     final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(boosterCards);
                     this.view.getPnlCustom().add(new TitleLabel("Extra " + ii.getName() + "!"), QuestWinLose.CONSTRAINTS_TITLE);
-                    this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+                        this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+                    } else {
+                        this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+                    }
                 }
             }
             else if (ii instanceof IQuestRewardCard) {
@@ -655,7 +681,11 @@ public class QuestWinLose extends ControlWinLose {
                 this.lblTemp1 = new TitleLabel(message);
                 this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
             }
-            this.getView().getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+                this.getView().getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+            } else {
+                this.getView().getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+            }
             qData.getCards().addAllCards(cardsWon);
         }
     }

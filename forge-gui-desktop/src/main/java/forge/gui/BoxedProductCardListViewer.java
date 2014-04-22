@@ -20,6 +20,8 @@ package forge.gui;
 
 import forge.game.card.Card;
 import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -102,7 +104,13 @@ public class BoxedProductCardListViewer extends FDialog {
         this.picture.setOpaque(false);
 
         this.setTitle(title);
-        this.setSize(720, 374);
+        
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+            this.setSize(1200, 825);
+        } else {
+            this.setSize(720, 374);
+        }
+        
         this.addWindowFocusListener(new CardListFocuser());
 
         FButton btnOK = new FButton("Next Pack");
@@ -123,11 +131,20 @@ public class BoxedProductCardListViewer extends FDialog {
         });
         
         this.add(new FLabel.Builder().text(message).build(), "cell 0 0, spanx 3, gapbottom 4");
-        this.add(new FScrollPane(this.jList, true), "cell 0 1, w 225, growy, pushy, ax c");
-        this.add(this.picture, "cell 1 1, w 225, growy, pushy, ax c");
-        this.add(this.detail, "cell 2 1, w 225, growy, pushy, ax c");
-        this.add(btnOK, "cell 1 2, w 150, h 26, ax c, gaptop 6");
-        this.add(btnCancel, "cell 2 2, w 205, h 26, ax c, gaptop 6");
+
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+            this.add(new FScrollPane(this.jList, true), "cell 0 1, w 225, h 450, ax c");
+            this.add(this.picture, "cell 1 1, w 480, growy, pushy, ax c");
+            this.add(this.detail, "cell 2 1, w 320, h 500, ax c");
+            this.add(btnOK, "cell 1 2, w 150, h 40, ax c, gaptop 6");
+            this.add(btnCancel, "cell 2 2, w 205, h 40, ax c, gaptop 6");
+        } else {
+            this.add(new FScrollPane(this.jList, true), "cell 0 1, w 225, growy, pushy, ax c");
+            this.add(this.picture, "cell 1 1, w 225, growy, pushy, ax c");
+            this.add(this.detail, "cell 2 1, w 225, growy, pushy, ax c");
+            this.add(btnOK, "cell 1 2, w 150, h 26, ax c, gaptop 6");
+            this.add(btnCancel, "cell 2 2, w 205, h 26, ax c, gaptop 6");
+        }
 
         // selection is here
         this.jList.getSelectionModel().addListSelectionListener(new SelListener());

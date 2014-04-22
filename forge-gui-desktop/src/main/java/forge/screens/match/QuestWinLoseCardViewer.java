@@ -21,6 +21,8 @@ import forge.game.card.Card;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
@@ -71,9 +73,16 @@ public class QuestWinLoseCardViewer extends FPanel {
         picture.setOpaque(false);
 
         this.setLayout(new MigLayout("insets 0, gap 0"));
-        this.add(scroller, "w 32%!, h 98%!, gap 1% 1% 1% 1%");
-        this.add(this.picture, "w 32%!, h 98%!, gap 0 0 1% 1%");
-        this.add(this.detail, "w 32%!, h 98%!, gap 1% 1% 1% 1%");
+
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+            this.add(scroller, "w 23%!, h 98%!, gap 1% 1% 1% 1%");
+            this.add(this.picture, "w 48%!, h 98%!, gap 0 0 1% 1%");
+            this.add(this.detail, "w 23%!, h 98%!, gap 1% 1% 1% 1%");
+        } else {
+            this.add(scroller, "w 32%!, h 98%!, gap 1% 1% 1% 1%");
+            this.add(this.picture, "w 32%!, h 98%!, gap 0 0 1% 1%");
+            this.add(this.detail, "w 32%!, h 98%!, gap 1% 1% 1% 1%");
+        }
 
         // selection is here
         this.jList.getSelectionModel().addListSelectionListener(new SelListener());

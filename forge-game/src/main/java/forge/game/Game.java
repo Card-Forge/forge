@@ -633,8 +633,6 @@ public class Game {
                 onePlayerHasTimeShifted = false;
             }
             
-            System.out.println(validRarities.size());
-
             CardRarity anteRarity = validRarities.get(new Random().nextInt(validRarities.size()));
             
             System.out.println("Rarity chosen for ante: " + anteRarity.name());
