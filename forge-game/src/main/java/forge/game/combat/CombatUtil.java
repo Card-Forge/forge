@@ -670,7 +670,8 @@ public class CombatUtil {
         // Handles removing cards like Mogg Flunkies from combat if group attack
         // didn't occur
         for (Card c1 : combat.getAttackers()) {
-            if (c1.hasKeyword("CARDNAME can't attack or block alone.")) {
+            if (c1.hasKeyword("CARDNAME can't attack or block alone.")
+                    || c1.hasKeyword("CARDNAME can't attack alone.")) {
                 if (combat.getAttackers().size() < 2) {
                     combat.removeFromCombat(c1);
                 }
@@ -701,7 +702,8 @@ public class CombatUtil {
             if (CombatUtil.canAttack(c)) {
                 for (Player def : defenders) {
                     if (CombatUtil.canAttackNextTurn(c, def)) {
-                        if (c.hasKeyword("CARDNAME can't attack or block alone.")) {
+                        if (c.hasKeyword("CARDNAME can't attack or block alone.")
+                                || c.hasKeyword("CARDNAME can't attack alone.")) {
                             //ensure another possible attacker is found
                             //if the first one found can't attack alone
                             if (!foundCreatureThatCantAttackAlone) {
@@ -760,8 +762,8 @@ public class CombatUtil {
             }
         }
 
-        if (c.hasKeyword("CARDNAME can't attack or block alone.") &&
-                c.getController().getCreaturesInPlay().size() < 2) {
+        if ((c.hasKeyword("CARDNAME can't attack or block alone.") || c.hasKeyword("CARDNAME can't attack alone."))
+                && c.getController().getCreaturesInPlay().size() < 2) {
             return false;
         }
 
