@@ -632,6 +632,8 @@ public class Game {
             if (validRarities.contains(CardRarity.Special)) {
                 onePlayerHasTimeShifted = false;
             }
+            
+            System.out.println(validRarities.size());
 
             CardRarity anteRarity = validRarities.get(new Random().nextInt(validRarities.size()));
             
@@ -697,8 +699,10 @@ public class Game {
         Set<CardRarity> rarities = new HashSet<>();
         for (Card card : cards) {
             if (card.getRarity() == CardRarity.Rare || card.getRarity() == CardRarity.MythicRare) {
+                //Since both rare and mythic rare are considered the same, adding both rarities
+                //massively increases the odds chances of the game picking rare cards to ante.
+                //This is a little unfair, so we add just one of the two.
                 rarities.add(CardRarity.Rare);
-                rarities.add(CardRarity.MythicRare);
             } else {
                 rarities.add(card.getRarity());
             }
