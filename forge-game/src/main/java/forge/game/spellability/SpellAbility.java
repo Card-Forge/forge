@@ -1523,6 +1523,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public SpellAbility getParentTargetingCard() {
         SpellAbility parent = this.getParent();
+        if (parent instanceof WrappedAbility) {
+            parent = ((WrappedAbility) parent).getWrappedAbility();
+        }
         while (parent != null) {
             if (parent.targetChosen.isTargetingAnyCard())
                 return parent;
