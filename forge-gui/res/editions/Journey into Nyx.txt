@@ -1,0 +1,174 @@
+[metadata]
+Code=JOU
+Date=2014-05-02
+Name=Journey into Nyx
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS
+
+[cards]
+R Aegis of the Gods
+C Ajani's Presence
+C Akroan Mastiff
+C Armament of Nyx
+U Banishing Light
+R Dawnbringer Charioteers
+R Deicide
+R Dictate of Heliod
+C Eagle of the Watch
+U Eidolon of Rhetoric
+C Font of Vigor
+M Godsend
+C Harvestguard Alseids
+C Lagonna-Band Trailblazer
+R Launch the Fleet
+U Leonin Iconoclast
+C Moral Obstinacy
+U Nyx-Fleece Ram
+C Oppressive Rays
+C Oreskos Swiftclaw
+U Phalanx Formation
+U Quarry Colossus
+U Reprisal
+U Sightless Brawler
+R Skybind
+U Skyspear Cavalry
+C Stonewise Fortifier
+C Supply-Line Cranes
+U Tethmos High Priest
+C Aerial Formation
+R Battlefield Thaumaturge
+C Cloaked Siren
+C Countermand
+U Crystalline Nautilus
+U Dakra Mystic
+R Daring Thief
+R Dictate of Kruphix
+C Font of Fortunes
+C Godhunter Octopus
+U Hour of Need
+C Hubris
+R Hypnotic Siren
+U Interpret the Signs
+U Kiora's Dismissal
+C Pin to the Earth
+R Polymorphous Rush
+U Pull from the Deep
+U Riptide Chimera
+C Rise of Eagles
+M Sage of Hours
+R Scourge of Fleets
+C Sigiled Starfish
+C Thassa's Devourer
+U Thassa's Ire
+U Triton Cavalry
+C Triton Shorestalker
+C War-Wing Siren
+U Whitewater Naiads
+U Agent of Erebos
+C Aspect of Gorgon
+C Bloodcrazed Hoplite
+U Brain Maggot
+C Cast into Darkness
+C Cruel Feeding
+R Dictate of Erebos
+R Doomwake Giant
+C Dreadbringer Lampads
+R Extinguish All Hope
+C Feast of Dreams
+U Felhide Petrifier
+C Font of Return
+U Gnarled Scarhide
+C Grim Guardian
+R King Macar, the Gold-Cursed
+R Master of the Feast
+U Nightmarish End
+C Nyx Infusion
+C Pharika's Chosen
+C Returned Reveler
+U Ritual of the Returned
+C Rotted Hulk
+R Silence the Believers
+U Spiteful Blow
+U Squelching Leeches
+U Thoughtrender Lamia
+U Tormented Thoughts
+M Worst Fears
+U Akroan Line Breaker
+R Bearer of the Heavens
+C Bladetusk Boar
+U Blinding Flare
+U Cyclops of Eternal Fury
+R Dictate of the Twin Gods
+R Eidolon of the Great Revel
+C Flamespeaker's Will
+C Flurry of Horns
+C Font of Ire
+U Forgeborn Oreads
+C Gluttonous Cyclops
+R Harness by Force
+U Knowledge and Power
+C Lightning Diadem
+C Magma Spray
+U Mogis's Warhound
+C Pensive Minotaur
+M Prophetic Flamespeaker
+U Riddle of Lightning
+U Rollick of Abandon
+C Rouse the Mob
+C Satyr Hoplite
+C Sigiled Skink
+R Spawn of Thraxes
+U Spite of Mogis
+C Starfall
+R Twinflame
+U Wildfire Cerberus
+U Bassara Tower Archer
+U Colossal Heroics
+U Consign to Dust
+C Desecration Plague
+R Dictate of Karametra
+R Eidolon of Blossoms
+C Font of Fertility
+C Golden Hind
+U Goldenhide Ox
+R Heroes' Bane
+C Humbler of Mortals
+R Hydra Broodmaster
+C Kruphix's Insight
+C Market Festival
+C Nature's Panoply
+U Nessian Game Warden
+C Oakheart Dryads
+C Pheres-Band Thunderhoof
+R Pheres-Band Warchief
+C Ravenous Leucrocota
+C Renowned Weaver
+U Reviving Melody
+C Satyr Grovedancer
+R Setessan Tactics
+U Solidarity of Heroes
+U Spirespine
+U Strength from the Fallen
+U Swarmborn Giant
+M Ajani, Mentor of Heroes
+M Athreos, God of Passage
+U Desperate Stand
+U Disciple of Deceit
+U Fleetfeather Cockatrice
+M Iroas, God of Victory
+M Keranos, God of Storms
+M Kruphix, God of Horizons
+U Nyx Weaver
+M Pharika, God of Affliction
+R Revel of the Fallen God
+U Stormchaser Chimera
+U Underworld Coinsmith
+U Armory of Iroas
+U Chariot of Victory
+U Deserter's Quarters
+U Gold-Forged Sentinel
+R Hall of Triumph
+R Mana Confluence
+R Temple of Epiphany
+R Temple of Malady
