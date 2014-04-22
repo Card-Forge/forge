@@ -1,0 +1,8 @@
+Name:Skyspear Cavalry
+ManaCost:3 W W
+Types:Creature Human Soldier
+PT:2/2
+K:Flying
+K:Double Strike
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyspear_cavalry.jpg
+Oracle:Flying\nDouble strike (This creature deals both first-strike and regular combat damage.)

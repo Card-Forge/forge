@@ -1,0 +1,12 @@
+Name:Dictate of the Twin Gods
+ManaCost:3 R R
+Types:Enchantment
+K:Flash
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
+SVar:DmgTwice:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTwiceCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dictate_of_the_twin_gods.jpg

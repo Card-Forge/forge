@@ -1,0 +1,8 @@
+Name:Spirespine
+ManaCost:2 G
+Types:Enchantment Creature Beast
+PT:4/1
+K:Bestow:4 G
+K:CARDNAME blocks each turn if able.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 4 | AddToughness$ 1 | AddHiddenKeyword$ CARDNAME blocks each turn if able. | Description$ Enchanted creature gets +4/+1 and blocks each turn if able.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirespine.jpg

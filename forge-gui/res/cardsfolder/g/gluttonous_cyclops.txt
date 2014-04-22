@@ -1,0 +1,6 @@
+Name:Gluttonous Cyclops
+ManaCost:5 R
+Types:Creature Cyclops
+PT:5/4
+K:Monstrosity 3:5 R R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gluttonous_cyclops.jpg

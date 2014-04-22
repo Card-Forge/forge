@@ -1,0 +1,8 @@
+Name:Tethmos High Priest
+ManaCost:2 W
+Types:Creature Cat Cleric
+PT:2/3
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Heroic - Whenever you cast a spell that targets CARDNAME, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE2 | Cost$ 0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tethmos_high_priest.jpg
+Oracle:Heroic - Whenever you cast a spell that targets Tethmos High Priest, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.

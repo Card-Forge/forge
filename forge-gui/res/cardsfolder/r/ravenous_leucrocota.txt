@@ -1,0 +1,7 @@
+Name:Ravenous Leucrocota
+ManaCost:3 G
+Types:Creature Beast
+PT:2/4
+K:Vigilance
+K:Monstrosity 3:6 G
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_leucrocota.jpg

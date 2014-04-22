@@ -1,0 +1,9 @@
+Name:Fleetfeather Cockatrice
+ManaCost:3 G U
+Types:Creature Cockatrice
+PT:3/3
+K:Flash
+K:Flying
+K:Deathtouch
+K:Monstrosity 3:5 G U
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fleetfeather_cockatrice.jpg

@@ -1,0 +1,5 @@
+Name:Flurry of Horns
+ManaCost:4 R
+Types:Sorcery
+A:SP$ Token | Cost$ 4 R | TokenAmount$ 2 | TokenName$ Minotaur | TokenTypes$ Creature,Minotaur | TokenOwner$ You | TokenColors$ Red | TokenPower$ 2 | TokenToughness$ 3 | TokenKeywords$ Haste | SpellDescription$ Put two 2/3 red Minotaur creature tokens with haste onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flurry_of_horns.jpg

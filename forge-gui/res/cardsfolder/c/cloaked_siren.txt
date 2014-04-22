@@ -1,0 +1,7 @@
+Name:Cloaked Siren
+ManaCost:3 U
+Types:Creature Siren
+PT:3/2
+K:Flash
+K:Flying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloaked_siren.jpg

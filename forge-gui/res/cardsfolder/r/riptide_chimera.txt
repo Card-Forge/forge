@@ -1,0 +1,10 @@
+Name:Riptide Chimera
+ManaCost:2 U
+Types:Enchantment Creature Chimera
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return an enchanment you control to its owner's hand.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Enchantment.YouCtrl
+SVar:RemAIDeck:True
+SVar:NeedsToPlay:Enchantment.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_chimera.jpg

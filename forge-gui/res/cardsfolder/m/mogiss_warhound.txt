@@ -1,0 +1,9 @@
+Name:Mogis's Warhound
+ManaCost:1 R
+Types:Enchantment Creature Hound
+PT:2/2
+K:Bestow:2 R
+K:CARDNAME attacks each turn if able.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Enchanted creature gets +2/+2 and attacks each turn if able.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mogiss_warhound.jpg

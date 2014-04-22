@@ -1,0 +1,9 @@
+Name:Whitewater Naiads
+ManaCost:3 U U
+Types:Enchantment Creature Nymph
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Constellation - Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature can't be blocked this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigPump | TriggerDescription$ Constellation - Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature can't be blocked this turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable
+SVar:BuffedBy:Enchantment
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whitewater_naiads.jpg

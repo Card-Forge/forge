@@ -1,0 +1,6 @@
+Name:Pharika's Chosen
+ManaCost:B
+Types:Creature Snake
+PT:1/1
+K:Deathtouch
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pharikas_chosen.jpg
