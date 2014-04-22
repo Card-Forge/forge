@@ -74,7 +74,7 @@ M13: 36 Boosters
 RTR: 36 Boosters
 GTC: 36 Boosters
 DGM: 36 Boosters
-MMA: 36 Boosters
+MMA: 24 Boosters
 M14: 36 Boosters
 THS: 36 Boosters
 BNG: 36 Boosters
