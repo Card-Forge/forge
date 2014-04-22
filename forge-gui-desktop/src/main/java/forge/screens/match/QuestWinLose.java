@@ -294,11 +294,16 @@ public class QuestWinLose extends ControlWinLose {
             case EXPERT: multiplier = 3; break;
         }
 
-        credBase += (int) ((base * multiplier) + (Double.parseDouble(FModel.getQuestPreferences()
-                .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
-
+        credBase = (int) (base * multiplier);
+        
         sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
         sb.append(" opponent: ").append(credBase).append(" credits.<br>");
+
+        int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
+                .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
+        credBase += creditsForPreviousWins;
+        
+        sb.append("Bonus for previous wins: ").append(creditsForPreviousWins).append(" credits.<br>");
         
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
