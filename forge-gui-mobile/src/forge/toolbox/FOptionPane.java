@@ -16,13 +16,12 @@ public class FOptionPane extends FDialog {
     public static final FSkinImage ERROR_ICON = FSkinImage.ERROR;
 
     private static float PADDING = 10;
-    private static final float GAP_ABOVE_BUTTONS = PADDING * 1.5f;
     private static final float GAP_BELOW_BUTTONS = PADDING * 0.5f;
     private static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
     public static float getMaxDisplayObjHeight() {
         return Forge.getCurrentScreen().getHeight() - 2 * VPrompt.HEIGHT - FDialog.TITLE_HEIGHT - 
-               PADDING - GAP_ABOVE_BUTTONS - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
+               2 * PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS - 2; //-2 for borders
     }
 
     public static void showMessageDialog(String message) {
@@ -190,7 +189,7 @@ public class FOptionPane extends FDialog {
         float x = PADDING;
         float y = PADDING;
 
-        float maxPromptHeight = maxHeight - GAP_ABOVE_BUTTONS - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
+        float maxPromptHeight = maxHeight - PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
         if (displayObj != null) {
             maxPromptHeight -= displayObj.getHeight();
         }
