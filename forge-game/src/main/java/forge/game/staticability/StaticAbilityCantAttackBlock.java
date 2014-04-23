@@ -58,11 +58,19 @@ public class StaticAbilityCantAttackBlock {
             return false;
         }
 
+        final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
+
         if (params.containsKey("UnlessDefenderControls")) {
             String type = params.get("UnlessDefenderControls");
-            Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
             List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
+                return false;
+            }
+        }
+        if (params.containsKey("IfDefenderControls")) {
+            String type = params.get("IfDefenderControls");
+            List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
+            if (!Iterables.any(list, CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard))) {
                 return false;
             }
         }

@@ -17,7 +17,6 @@
  */
 package forge.game.combat;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -853,51 +852,6 @@ public class CombatUtil {
         if (!c.isCreature()) {
             return false;
         }
-
-        Player defendingPlayer = null;
-        if (defender instanceof Card) {
-            defendingPlayer = ((Card) defender).getController();
-        } else {
-            defendingPlayer = (Player) defender;
-        }
-
-        // CARDNAME can't attack if defending player controls an untapped
-        // creature with power ...
-        final int[] powerLimit = { 0 };
-        String cantAttackKw = null;
-
-        for( String kw : c.getKeyword()) {
-            if (kw.startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
-                cantAttackKw = kw;
-            }
-        }
-
-        // The keyword
-        // "CARDNAME can't attack if defending player controls an untapped creature with power"
-        // ... is present
-        if (cantAttackKw != null) {
-            final String[] asSeparateWords = cantAttackKw.trim().split(" ");
-
-            if (asSeparateWords.length >= 15) {
-                if (StringUtils.isNumeric(asSeparateWords[12])) {
-                    powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
-
-                    List<Card> list = defendingPlayer.getCreaturesInPlay();
-                    list = CardLists.filter(list, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card ct) {
-                            return (ct.isUntapped()
-                                    && ((ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14].contains("greater"))
-                                    ||  (ct.getNetAttack() <= powerLimit[0] && asSeparateWords[14].contains("less"))));
-                        }
-                    });
-                    if (!list.isEmpty()) {
-                        return false;
-                    }
-                }
-            }
-        } // hasKeyword = CARDNAME can't attack if defending player controls an
-          // untapped creature with power ...
 
         for (String keyword : c.getKeyword()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
