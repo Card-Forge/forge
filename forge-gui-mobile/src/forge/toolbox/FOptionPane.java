@@ -21,7 +21,7 @@ public class FOptionPane extends FDialog {
 
     public static float getMaxDisplayObjHeight() {
         return Forge.getCurrentScreen().getHeight() - 2 * VPrompt.HEIGHT - FDialog.TITLE_HEIGHT - 
-               2 * PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS - 2; //-2 for borders
+               2 * PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
     }
 
     public static void showMessageDialog(String message) {
