@@ -66,7 +66,7 @@ public class ListChooser<T> extends FContainer {
     private static final FSkinColor ALT_ITEM_COLOR = BACK_COLOR.getContrastColor(-20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-    private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+    private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
     // Data and number of choices for the list
     private int minChoices, maxChoices;
@@ -132,7 +132,7 @@ public class ListChooser<T> extends FContainer {
         else {
             lstChoices.allowMultipleSelections = true;
         }
-        setHeight(ITEM_HEIGHT * Math.min(list.size(), 8)); //make tall enough to show 8 items without scrolling
+        setHeight(Math.min(ITEM_HEIGHT * list.size(), FOptionPane.getMaxDisplayObjHeight()));
 
         optionPane = new FOptionPane(null, title, null, this, options, minChoices < 0 ? 0 : -1, new Callback<Integer>() {
             @Override

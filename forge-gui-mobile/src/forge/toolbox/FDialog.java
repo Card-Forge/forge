@@ -13,7 +13,7 @@ import forge.util.Utils;
 public abstract class FDialog extends FOverlay {
     private static final FSkinColor TITLE_BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-    private static final float TITLE_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
+    public static final float TITLE_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
     public static float INSETS = 10;
 
     private Titlebar lblTitlebar;
