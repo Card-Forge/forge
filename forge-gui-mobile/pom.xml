@@ -3,6 +3,7 @@
   <groupId>forge</groupId>
   <artifactId>forge-gui-mobile</artifactId>
   <version>1.5.16-SNAPSHOT</version>
+  <name>Forge</name>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

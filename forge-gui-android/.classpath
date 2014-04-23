@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="assets"/>
+	<classpathentry kind="src" output="bin/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/forge-gui-mobile"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="libs/gdx-backend-android.jar"/>
-	<classpathentry kind="lib" path="/forge-m-base/libs/gdx.jar" sourcepath="/forge-m-base/libs/gdx-sources.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/forge-m-base"/>
-	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="/forge-m-base/libs/gdx-freetype.jar"/>
+	<classpathentry exported="true" kind="lib" path="/forge-gui-mobile/libs/gdx.jar" sourcepath="/forge-gui-mobile/libs/gdx-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

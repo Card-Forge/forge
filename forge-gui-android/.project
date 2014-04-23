@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>forge-gui-android</name>
+	<name>forge-android</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -30,17 +30,4 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>assets</name>
-			<type>2</type>
-			<locationURI>copy_PARENT/forge-gui/res</locationURI>
-		</link>
-	</linkedResources>
-	<variableList>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>$%7BPARENT-1-PROJECT_LOC%7D/trunk</value>
-		</variable>
-	</variableList>
 </projectDescription>
