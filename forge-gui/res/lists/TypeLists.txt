@@ -273,6 +273,7 @@ Ajani
 Ashiok
 Bolas
 Chandra
+Dack
 Domri
 Elspeth
 Garruk
