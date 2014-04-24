@@ -87,9 +87,15 @@ public class ChooseCardAi extends SpellAbilityAi {
                 }
             } else if (logic.equals("Ashiok")) {
             	final int loyalty = host.getCounters(CounterType.LOYALTY) - 1;
-            	host.setSVar("ChosenX", "Number$" + loyalty);
-            	choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
-            	choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+            	for (int i = loyalty; i >= 0; i--) {
+            		host.setSVar("ChosenX", "Number$" + i);
+            		choices = ai.getGame().getCardsIn(choiceZone);
+            		choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+                	if (!choices.isEmpty()) {
+                		return true;
+                    }
+            	}
+            	
             	if (choices.isEmpty()) {
                     return false;
                 }

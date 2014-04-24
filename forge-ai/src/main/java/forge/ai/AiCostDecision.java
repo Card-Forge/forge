@@ -506,9 +506,8 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                return null;
-            }
-            if (amount.equals("All")) {
+                c = AbilityUtils.calculateAmount(source, "ChosenX", ability);
+            } else if (amount.equals("All")) {
                 c = source.getCounters(cost.counter);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
