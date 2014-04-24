@@ -129,6 +129,7 @@ public enum ApiType {
     UnattachAll (UnattachAllEffect.class),
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
+    Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
 

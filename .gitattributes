@@ -403,6 +403,7 @@ forge-game/src/main/java/forge/game/ability/effects/UnattachAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/UnattachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/UntapAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/UntapEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/VoteEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ZoneExchangeEffect.java -text
 forge-game/src/main/java/forge/game/ability/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/Card.java svneol=native#text/plain
