@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:DelTrigLeaves:Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroyAll | TriggerController$ TriggeredCardController | TriggerDescription$ Destroy all permanents at the beginning of the next end step.
 SVar:TrigDestroyAll:AB$ DestroyAll | Cost$ 0 | ValidCards$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bearer_of_the_heavens.jpg
+Oracle:When Bearer of the Heavens dies, destroy all permanents at the beginning of the next end step.

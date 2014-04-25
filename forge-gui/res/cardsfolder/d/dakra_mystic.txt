@@ -8,3 +8,4 @@ SVar:DBDraw:DB$ Draw | Defined$ Each | NumCards$ 1 | ConditionDefined$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakra_mystic.jpg
+Oracle:{U}, {T}: Each player reveals the top card of his or her library. You may put the revealed cards into their owners' graveyards. If you don't, each player draws a card.

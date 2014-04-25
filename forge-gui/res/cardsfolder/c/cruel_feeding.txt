@@ -6,3 +6,4 @@ A:SP$ Pump | Cost$ B | ValidTgts$ Creature | KW$ Lifelink | NumAtt$ +1 | NumDef$
 SVar:MaxTargets:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_feeding.jpg
+Oracle:Strive - Cruel Feeding costs {2}{B} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+0 and gain lifelink until end of turn. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

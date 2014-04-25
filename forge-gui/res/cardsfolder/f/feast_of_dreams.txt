@@ -3,3 +3,4 @@ ManaCost:1 B
 Types:Instant
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.enchanted,Creature.Enchantment | TgtPrompt$ Select target enchanted creature or enchantment creature | SpellDescription$ Destroy target enchanted creature or enchantment creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_dreams.jpg
+Oracle:Destroy target enchanted creature or enchantment creature.

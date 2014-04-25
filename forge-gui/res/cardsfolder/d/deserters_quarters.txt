@@ -6,3 +6,4 @@ A:AB$ Tap | Cost$ 6 T | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescript
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | UntilUntaps$ True | KW$ HIDDEN CARDNAME doesn't untap during your untap step.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deserters_quarters.jpg
+Oracle:You may choose not to untap Deserter's Quarters during your untap step.\n{6}, {T}: Tap target creature. It doesn't untap during its controller's untap step for as long as Deserter's Quarters remains tapped.

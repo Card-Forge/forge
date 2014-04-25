@@ -4,3 +4,4 @@ Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller puts the top four cards of his or her library into his or her graveyard.
 SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ TargetedController
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countermand.jpg
+Oracle:Counter target spell. Its controller puts the top four cards of his or her library into his or her graveyard.

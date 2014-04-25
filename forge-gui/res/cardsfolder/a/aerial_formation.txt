@@ -6,3 +6,4 @@ A:SP$ Pump | Cost$ U | ValidTgts$ Creature | KW$ Flying | NumAtt$ +1 | NumDef$ +
 SVar:MaxTargets:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_formation.jpg
+Oracle:Strive - Aerial Formation costs {2}{U} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+1 and gain flying until end of turn.

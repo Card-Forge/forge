@@ -7,3 +7,4 @@ SVar:MaxTargets:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_flare.jpg
+Oracle:Strive - Blinding Flare costs {R} more to cast for each target beyond the first.\nAny number of target creatures can't block this turn.

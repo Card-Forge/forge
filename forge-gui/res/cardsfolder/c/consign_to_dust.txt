@@ -6,3 +6,4 @@ A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select 
 SVar:MaxTargets:Count$Valid Artifact,Enchantment
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consign_to_dust.jpg
+Oracle:Strive - Consign to Dust costs {2}{G} more to cast for each target beyond the first.\nDestroy any number of target artifacts and/or enchantments.

@@ -13,3 +13,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:StaticClear:DB$ Cleanup | ClearRemembered$ True
 K:Equip 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godsend.jpg
+Oracle:Equipped creature gets +3/+3.\nWhenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.\nOpponents can't cast cards with the same name as cards exiled with Godsend.\nEquip {3}
