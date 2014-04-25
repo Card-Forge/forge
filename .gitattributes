@@ -7688,8 +7688,8 @@ forge-gui/res/cardsfolder/l/lady_orca.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lady_sun.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/l/lady_zhurong_warrior_queen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lagac_lizard.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/l/lagonna-band_trailblazer.txt -text
 forge-gui/res/cardsfolder/l/lagonna_band_elder.txt -text
+forge-gui/res/cardsfolder/l/lagonna_band_trailblazer.txt -text
 forge-gui/res/cardsfolder/l/lair_delve.txt -text
 forge-gui/res/cardsfolder/l/lair_of_the_ashen_idol.txt -text
 forge-gui/res/cardsfolder/l/lairwatch_giant.txt -text
@@ -12866,8 +12866,8 @@ forge-gui/res/cardsfolder/s/suntail_hawk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/suntouched_myr.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sunweb.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/superior_numbers.txt -text svneol=unset#text/plain
-forge-gui/res/cardsfolder/s/supply-line_cranes.txt -text
 forge-gui/res/cardsfolder/s/supply_demand.txt -text
+forge-gui/res/cardsfolder/s/supply_line_cranes.txt -text
 forge-gui/res/cardsfolder/s/suppress.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/suppression_field.txt -text
 forge-gui/res/cardsfolder/s/supreme_exemplar.txt svneol=native#text/plain
