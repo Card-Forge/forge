@@ -6,3 +6,4 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ Trample | NumAtt$ +2 | TargetMi
 SVar:MaxTargets:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rouse_the_mob.jpg
+Oracle:Strive - Rouse the Mob costs {2}{R} more to cast for each target beyond the first.\nAny number of target creatures each get +2/+0 and gain trample until end of turn.

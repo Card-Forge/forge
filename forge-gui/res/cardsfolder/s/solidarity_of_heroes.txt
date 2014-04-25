@@ -9,3 +9,4 @@ SVar:MaxTargets:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solidarity_of_heroes.jpg
+Oracle:Strive - Solidarity of Heroes costs {1}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Double the number of +1/+1 counters on each of them.

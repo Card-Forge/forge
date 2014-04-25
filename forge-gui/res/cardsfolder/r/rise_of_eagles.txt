@@ -4,3 +4,4 @@ Types:Sorcery
 A:SP$ Token | Cost$ 4 U U | TokenAmount$ 2 | TokenName$ Bird | TokenTypes$ Enchantment,Creature,Bird | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SubAbility$ DBScry | SpellDescription$ Put two 2/2 blue Bird enchantment creature tokens with flying onto the battlefield. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_of_eagles.jpg
+Oracle:Put two 2/2 blue Bird enchantment creature tokens with flying onto the battlefield. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

@@ -7,3 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchan
 SVar:TrigMill:AB$ Mill | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thassas_devourer.jpg
+Oracle:Constellation - Whenever Thassa's Devourer or another enchantment enters the battlefield under your control, target player puts the top two cards of his or her library into his or her graveyard.

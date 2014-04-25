@@ -5,3 +5,4 @@ A:SP$ DealDamage | Cost$ 4 R | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X
 SVar:X:Targeted$Valid Creature.Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starfall.jpg
+Oracle:Starfall deals 3 damage to target creature. If that creature is an enchantment, Starfall deals 3 damage to that creature's controller.

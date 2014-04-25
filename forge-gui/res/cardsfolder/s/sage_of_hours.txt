@@ -8,3 +8,4 @@ A:AB$ AddTurn | Cost$ SubCounter<All/P1P1> | Defined$ You | NumTurns$ X | Refere
 SVar:X:SVar$CostCountersRemoved/DivideEvenlyDown.5
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_hours.jpg
+Oracle:Heroic - Whenever you cast a spell that targets Sage of Hours, put a +1/+1 counter on it.\nRemove all +1/+1 counters from Sage of Hours: For each five counters removed this way, take an extra turn after this one.

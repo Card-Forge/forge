@@ -5,3 +5,4 @@ A:SP$ ControlPlayer | Cost$ 7 B | ValidTgts$ Player | TgtPrompt$ Select target p
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worst_fears.jpg
+Oracle:You control target player during that player's next turn. Exile Worst Fears. (You see all cards that player could see and make all decisions for the player.)

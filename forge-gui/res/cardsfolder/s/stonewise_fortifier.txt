@@ -8,3 +8,4 @@ SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield 
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewise_fortifier.jpg
+Oracle:{4}{W}: Prevent all damage that would be dealt to Stonewise Fortifier by target creature this turn.

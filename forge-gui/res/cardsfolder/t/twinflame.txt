@@ -6,3 +6,4 @@ A:SP$ CopyPermanent | Cost$ 1 R  | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Sele
 SVar:MaxTargets:Count$Valid Creature.YouCtrl
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinflame.jpg
+Oracle:Strive - Twinflame costs {2}{R} more to cast for each target beyond the first.\nChoose any number of target creatures you control. For each of them, put a token that's a copy of that creature onto the battlefield. Those tokens have haste. Exile them at the beginning of the next end step.

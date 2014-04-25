@@ -7,3 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchan
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whitewater_naiads.jpg
+Oracle:Constellation - Whenever Whitewater Naiads or another enchantment enters the battlefield under your control, target creature can't be blocked this turn.
