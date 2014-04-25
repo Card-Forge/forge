@@ -6,3 +6,4 @@ A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ Max
 SVar:MaxTargets:Count$Valid Creature
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_panoply.jpg
+Oracle:Strive - Nature's Panoply costs {2}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Put a +1/+1 counter on each of them.

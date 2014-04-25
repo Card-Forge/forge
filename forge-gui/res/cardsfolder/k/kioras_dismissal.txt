@@ -7,3 +7,4 @@ SVar:X:Count$Valid Enchantment
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kioras_dismissal.jpg
+Oracle:Strive - Kiora's Dismissal costs {U} more to cast for each target beyond the first.\nReturn any number of target enchantments to their owners' hands.

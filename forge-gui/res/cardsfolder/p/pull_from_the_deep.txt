@@ -5,3 +5,4 @@ A:SP$ ChangeZone | Cost$ 2 U U | Origin$ Graveyard | Destination$ Hand | TargetM
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Sorcery.YouOwn | TgtPrompt$ Select target sorcery card in your graveyard | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pull_from_the_deep.jpg
+Oracle:Return up to one target instant card and up to one target sorcery card from your graveyard to your hand. Exile Pull from the Deep.

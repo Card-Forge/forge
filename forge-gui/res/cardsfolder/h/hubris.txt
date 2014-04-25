@@ -5,3 +5,4 @@ A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | IsCurse$ True | RememberTargets$ 
 SVar:DBBounce:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Hand | UseAllOriginZones$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hubris.jpg
+Oracle:Return target creature and all Auras attached to it to their owners' hands.

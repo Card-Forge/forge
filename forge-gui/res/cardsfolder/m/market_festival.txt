@@ -7,3 +7,4 @@ T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ T
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Combo Any | Amount$ 2 | Defined$ TriggeredCardController
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/market_festival.jpg
+Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool (in addition to the mana the land produces).

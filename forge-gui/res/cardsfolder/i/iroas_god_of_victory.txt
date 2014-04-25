@@ -9,3 +9,5 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlocke
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddHiddenKeyword$ Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to attacking creatures you control.
 SVar:BuffedBy:Permanent.White,Permanent.Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iroas_god_of_victory.jpg
+
+Oracle:Indestructible\nAs long as your devotion to red and white is less than seven, Iroas isn't a creature.\nCreatures you control can't be blocked except by two or more creatures.\nPrevent all damage that would be dealt to attacking creatures you control.

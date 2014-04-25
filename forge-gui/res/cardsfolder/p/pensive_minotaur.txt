@@ -3,3 +3,4 @@ ManaCost:2 R
 Types:Creature Minotaur
 PT:2/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pensive_minotaur.jpg
+Oracle:
