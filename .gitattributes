@@ -15685,6 +15685,7 @@ forge-gui/res/quest/precons/Evincar's[!!-~]Tyranny.dck -text
 forge-gui/res/quest/precons/Expulsion.dck -text
 forge-gui/res/quest/precons/Fangs[!!-~]of[!!-~]the[!!-~]Bloodchief.dck -text
 forge-gui/res/quest/precons/Fate[!!-~]Blaster.dck -text
+forge-gui/res/quest/precons/Fates[!!-~]Foreseen.dck -text
 forge-gui/res/quest/precons/Favors[!!-~]From[!!-~]Nyx.dck -text
 forge-gui/res/quest/precons/Feast[!!-~]of[!!-~]Flesh.dck -text
 forge-gui/res/quest/precons/Fiendish[!!-~]Nature.dck -text
@@ -15739,6 +15740,7 @@ forge-gui/res/quest/precons/Mob[!!-~]Rule.dck -text
 forge-gui/res/quest/precons/Molimo's[!!-~]Might.dck -text
 forge-gui/res/quest/precons/Monstrous[!!-~]Surprise.dck -text
 forge-gui/res/quest/precons/Mortal[!!-~]Coil.dck -text
+forge-gui/res/quest/precons/Mortals[!!-~]of[!!-~]Myth.dck -text
 forge-gui/res/quest/precons/Myr[!!-~]of[!!-~]Mirrodin.dck -text
 forge-gui/res/quest/precons/Mysterious[!!-~]Realms.dck -text
 forge-gui/res/quest/precons/Mystical[!!-~]Might.dck -text
@@ -15746,6 +15748,7 @@ forge-gui/res/quest/precons/Naya[!!-~]Behemoths.dck -text
 forge-gui/res/quest/precons/Naya[!!-~]Domain.dck -text
 forge-gui/res/quest/precons/Orzhov[!!-~]Oppression.dck -text
 forge-gui/res/quest/precons/Overkill.dck -text
+forge-gui/res/quest/precons/Pantheon's[!!-~]Power.dck -text
 forge-gui/res/quest/precons/Path[!!-~]of[!!-~]Blight.dck -text
 forge-gui/res/quest/precons/Phyrexian[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Phyrexian[!!-~]Poison.dck -text
@@ -15801,6 +15804,7 @@ forge-gui/res/quest/precons/Swift[!!-~]Justice.dck -text
 forge-gui/res/quest/precons/The[!!-~]Adventurers.dck -text
 forge-gui/res/quest/precons/The[!!-~]Spikes.dck -text
 forge-gui/res/quest/precons/The[!!-~]Swarm.dck -text
+forge-gui/res/quest/precons/The[!!-~]Wilds[!!-~]and[!!-~]the[!!-~]Deep.dck -text
 forge-gui/res/quest/precons/Time[!!-~]Drain.dck -text
 forge-gui/res/quest/precons/Tombstone.dck -text
 forge-gui/res/quest/precons/Totem[!!-~]Power.dck -text
@@ -15810,6 +15814,7 @@ forge-gui/res/quest/precons/Turnabout.dck -text
 forge-gui/res/quest/precons/Unnatural[!!-~]Schemes.dck -text
 forge-gui/res/quest/precons/Unstable[!!-~]Terrain.dck -text
 forge-gui/res/quest/precons/Vampire[!!-~]Onslaught.dck -text
+forge-gui/res/quest/precons/Voracious[!!-~]Rage.dck -text
 forge-gui/res/quest/precons/War[!!-~]of[!!-~]Attrition.dck -text
 forge-gui/res/quest/precons/Warrior's[!!-~]Code.dck -text
 forge-gui/res/quest/precons/Way[!!-~]Wild.dck -text

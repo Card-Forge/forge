@@ -258,7 +258,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int x = 0;
         int y = PlayArea.GUTTER_Y;
 
-        System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning ) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight );
+        //System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning ) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight );
         for (final CardStackRow row : template) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
@@ -303,7 +303,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         
         int afterFirstRow;
 
-        System.out.println( "======== "  + ( mirror ? "^" : "_" ) + " (try arrange) Card width = " + cardWidth + ". PlayArea = " + playAreaWidth + " x " + playAreaHeight + " ========");
+        //System.out.println( "======== "  + ( mirror ? "^" : "_" ) + " (try arrange) Card width = " + cardWidth + ". PlayArea = " + playAreaWidth + " x " + playAreaHeight + " ========");
         boolean landsFit, tokensFit, creaturesFit;
         if (this.mirror) {
             // Wrap all creatures and lands.
@@ -371,7 +371,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         for (final CardStack stack : sourceRow) {
             final int rowWidth = currentRow.getWidth();
             final int stackWidth = stack.getWidth();
-            System.out.printf("Adding %s (+%dpx), current row is %dpx and has %s \n", stack, stackWidth, rowWidth, currentRow ); 
+            //System.out.printf("Adding %s (+%dpx), current row is %dpx and has %s \n", stack, stackWidth, rowWidth, currentRow ); 
             // If the row is not empty and this stack doesn't fit, add the row.
             if (rowWidth + stackWidth > this.playAreaWidth && !currentRow.isEmpty()) {
 
@@ -423,7 +423,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int planOthersRow(final List<CardStack> sourceRow, final int firstPile, final List<CardStackRow> template, final CardStackRow rowToFill) {
         int rowWidth = rowToFill.getWidth();
 
-        System.out.println("This row has:" + rowToFill + "; want to add:" + sourceRow );
+        //System.out.println("This row has:" + rowToFill + "; want to add:" + sourceRow );
         for (int i = firstPile; i < sourceRow.size(); i++ ) {
             CardStack stack = sourceRow.get(i);
 
