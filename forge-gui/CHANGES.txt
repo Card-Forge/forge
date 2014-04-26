@@ -1,7 +1,7 @@
-Forge Beta: 04-25-2014 ver 1.5.17
+Forge Beta: 0#-##-2014 ver 1.5.18
 
 
-13803 cards in total.
+13### cards in total.
 
 
 -------------
@@ -16,7 +16,7 @@ The default locations by operating system are:
 - Linux: <your home directory>/.cache/forge/pics/tokens/
 
 
-- New Journey into Nyx cards -
+- Journey into Nyx cards -
 Forge now includes all of the new Journey into Nyx cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
@@ -24,177 +24,7 @@ Forge now includes all of the new Journey into Nyx cards. It may take a few days
 New Cards
 ---------
 
-Mindstorm Crown
-Harvest Mage
-Quarum Trench Gnomes
-Game of Chaos
 
-
---------------------------
-New Journey into Nyx Cards
---------------------------
-
-Aegis of the Gods
-Aerial Formation
-Agent of Erebos
-Ajani's Presence
-Ajani, Mentor of Heroes
-Akroan Line Breaker
-Akroan Mastiff
-Armament of Nyx
-Armory of Iroas
-Aspect of Gorgon
-Athreos, God of Passage
-Banishing Light
-Bassara Tower Archer
-Battlefield Thaumaturge
-Bearer of the Heavens
-Blinding Flare
-Bloodcrazed Hoplite
-Brain Maggot
-Cast into Darkness
-Chariot of Victory
-Cloaked Siren
-Colossal Heroics
-Consign to Dust
-Countermand
-Cruel Feeding
-Crystalline Nautilus
-Cyclops of Eternal Fury
-Dakra Mystic
-Daring Thief
-Dawnbringer Charioteers
-Deicide
-Desecration Plague
-Deserter's Quarters
-Desperate Stand
-Dictate of Erebos
-Dictate of Heliod
-Dictate of Karametra
-Dictate of Kruphix
-Dictate of the Twin Gods
-Disciple of Deceit
-Doomwake Giant
-Dreadbringer Lampads
-Eagle of the Watch
-Eidolon of Blossoms
-Eidolon of Rhetoric
-Eidolon of the Great Revel
-Extinguish All Hope
-Feast of Dreams
-Felhide Petrifier
-Flamespeaker's Will
-Fleetfeather Cockatrice
-Flurry of Horns
-Font of Fertility
-Font of Fortunes
-Font of Ire
-Font of Return
-Font of Vigor
-Forgeborn Oreads
-Gluttonous Cyclops
-Gnarled Scarhide
-Godhunter Octopus
-Godsend
-Gold-Forged Sentinel
-Golden Hind
-Goldenhide Ox
-Grim Guardian
-Hall of Triumph
-Harness by Force
-Harvestguard Alseids
-Heroes' Bane
-Hour of Need
-Hubris
-Humbler of Mortals
-Hydra Broodmaster
-Hypnotic Siren
-Interpret the Signs
-Iroas, God of Victory
-Keranos, God of Storms
-King Macar, the Gold-Cursed
-Kiora's Dismissal
-Knowledge and Power
-Kruphix's Insight
-Kruphix, God of Horizons
-Lagonna-Band Trailblazer
-Launch the Fleet
-Leonin Iconoclast
-Lightning Diadem
-Mana Confluence
-Market Festival
-Master of the Feast
-Mogis's Warhound
-Mortal Obstinacy
-Nature's Panoply
-Nessian Game Warden
-Nightmarish End
-Nyx Infusion
-Nyx Weaver
-Nyx-Fleece Ram
-Oakheart Dryads
-Oppressive Rays
-Oreskos Swiftclaw
-Pensive Minotaur
-Phalanx Formation
-Pharika's Chosen
-Pharika, God of Affliction
-Pheres-Band Thunderhoof
-Pheres-Band Warchief
-Pin to the Earth
-Polymorphous Rush
-Prophetic Flamespeaker
-Pull from the Deep
-Quarry Colossus
-Ravenous Leucrocota
-Renowned Weaver
-Returned Reveler
-Revel of the Fallen God
-Reviving Melody
-Riptide Chimera
-Rise of Eagles
-Ritual of the Returned
-Rollick of Abandon
-Rotted Hulk
-Rouse the Mob
-Sage of Hours
-Satyr Grovedancer
-Satyr Hoplite
-Scourge of Fleets
-Setessan Tactics
-Sightless Brawler
-Sigiled Skink
-Sigiled Starfish
-Silence the Believers
-Skybind
-Skyspear Cavalry
-Solidarity of Heroes
-Spawn of Thraxes
-Spirespine
-Spite of Mogis
-Spiteful Blow
-Squelching Leeches
-Starfall
-Stonewise Fortifier
-Stormchaser Chimera
-Strength from the Fallen
-Supply-Line Cranes
-Swarmborn Giant
-Temple of Epiphany
-Temple of Malady
-Tethmos High Priest
-Thassa's Devourer
-Thassa's Ire
-Thoughtrender Lamia
-Tormented Thoughts
-Triton Cavalry
-Triton Shorestalker
-Twinflame
-Underworld Coinsmith
-War-Wing Siren
-Whitewater Naiads
-Wildfire Cerberus
-Worst Fears
 
 
 ---------------------------
@@ -240,20 +70,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-1224Deko
-DrDev
-excessum
-Gos
-Hellfish
-KrazyTheFox
-LordHelmchen
-Marc
-serrasmurf
-Sloth
-Sol
-Swordshine
-ZzzzSleep
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
