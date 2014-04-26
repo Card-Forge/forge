@@ -1079,6 +1079,7 @@ forge-gui-mobile/src/forge/assets/FTextureImage.java -text
 forge-gui-mobile/src/forge/assets/FTextureRegionImage.java -text
 forge-gui-mobile/src/forge/assets/ImageCache.java -text
 forge-gui-mobile/src/forge/assets/ImageLoader.java -text
+forge-gui-mobile/src/forge/assets/TextRenderer.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
 forge-gui-mobile/src/forge/error/BugReportDialog.java -text

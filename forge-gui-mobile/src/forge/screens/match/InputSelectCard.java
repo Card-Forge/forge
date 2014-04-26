@@ -19,6 +19,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
@@ -582,6 +583,9 @@ public class InputSelectCard {
                 g.drawText(set, SET_FONT, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
             }
 
+            //use text renderer to handle mana symbols and reminder text
+            private static final TextRenderer cardTextRenderer = new TextRenderer(true);
+
             private static void drawCardTextBox(Graphics g, Card card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
                 if (color2 == null) {
                     g.fillRect(color1, x, y, w, h);
@@ -597,7 +601,7 @@ public class InputSelectCard {
                 y += padY;
                 w -= 2 * padX;
                 h -= 2 * padY;
-                g.drawText(CardDetailUtil.composeCardText(card, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, true, HAlignment.LEFT, false);
+                cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(card, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, true, HAlignment.LEFT, false);
             }
 
             private static void drawCardIdAndPtBox(Graphics g, Card card, Color idForeColor, Color color1, Color color2, float x, float y, float w, float h) {
