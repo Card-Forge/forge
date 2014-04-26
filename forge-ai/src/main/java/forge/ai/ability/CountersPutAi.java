@@ -222,6 +222,9 @@ public class CountersPutAi extends SpellAbilityAi {
                     break;
                 }
             }
+            if (sa.getTargets().isEmpty()) {
+                return false;
+            }
         } else {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
