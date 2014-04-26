@@ -55,11 +55,10 @@ public class TextRenderer {
 
     private final boolean parseReminderText;
     private String fullText = "";
-    private float width, height;
-    private float totalHeight;
+    private float width, height, totalHeight;
     private BitmapFont baseBitmapFont;
     private FSkinFont baseFont, font;
-    private boolean wrap;
+    private boolean wrap, needClip;
     private List<Piece> pieces = new ArrayList<Piece>();
 
     public TextRenderer() {
@@ -73,13 +72,18 @@ public class TextRenderer {
     private void updatePieces(FSkinFont font0) {
         pieces.clear();
         font = font0;
+        needClip = false;
         if (fullText.isEmpty()) { return; }
 
         BitmapFont bitmapFont = font.getFont();
         totalHeight = bitmapFont.getCapHeight();
-        if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) { //immediately try one font size smaller if no room for anything
-            updatePieces(FSkinFont.get(font.getSize() - 1));
-            return;
+        if (totalHeight > height) {
+            //immediately try one font size smaller if no room for anything
+            if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                updatePieces(FSkinFont.get(font.getSize() - 1));
+                return;
+            }
+            needClip = true;
         }
 
         boolean hideReminderText = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT);
@@ -111,10 +115,13 @@ public class TextRenderer {
                 x = 0;
                 y += lineHeight;
                 totalHeight += lineHeight;
-                if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                if (totalHeight > height) {
                     //try next font size down if out of space
-                    updatePieces(FSkinFont.get(font.getSize() - 1));
-                    return;
+                    if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                        updatePieces(FSkinFont.get(font.getSize() - 1));
+                        return;
+                    }
+                    needClip = true;
                 }
                 continue; //skip new line character
             case '{':
@@ -138,10 +145,13 @@ public class TextRenderer {
                                     x = 0;
                                     y += lineHeight;
                                     totalHeight += lineHeight;
-                                    if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                                    if (totalHeight > height) {
                                         //try next font size down if out of space
-                                        updatePieces(FSkinFont.get(font.getSize() - 1));
-                                        return;
+                                        if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                                            updatePieces(FSkinFont.get(font.getSize() - 1));
+                                            return;
+                                        }
+                                        needClip = true;
                                     }
                                     //make previous consecutive symbols wrap too
                                     for (int j = pieces.size(); j >= 0; j--) {
@@ -158,6 +168,9 @@ public class TextRenderer {
                                     //try next font size down if out of space
                                     updatePieces(FSkinFont.get(font.getSize() - 1));
                                     return;
+                                }
+                                else {
+                                    needClip = true;
                                 }
                             }
                             addPiece(new ImagePiece(symbol, inReminderTextCount > 0), x, y - bitmapFont.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
@@ -224,16 +237,22 @@ public class TextRenderer {
                         x = 0;
                         y += lineHeight;
                         totalHeight += lineHeight;
-                        if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                        if (totalHeight > height) {
                             //try next font size down if out of space
-                            updatePieces(FSkinFont.get(font.getSize() - 1));
-                            return;
+                            if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                                updatePieces(FSkinFont.get(font.getSize() - 1));
+                                return;
+                            }
+                            needClip = true;
                         }
                     }
                     else if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
                         //try next font size down if out of space
                         updatePieces(FSkinFont.get(font.getSize() - 1));
                         return;
+                    }
+                    else {
+                        needClip = true;
                     }
                 }
                 if (atReminderTextEnd && !text.isEmpty()) { //ensure final piece of reminder text added right away
@@ -288,11 +307,17 @@ public class TextRenderer {
         if (needUpdate) {
             updatePieces(baseFont);
         }
+        if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
+            g.startClip(x, y, w, h);
+        }
         if (height > totalHeight && centerVertically) {
             y += (height - totalHeight) / 2;
         }
         for (Piece piece : pieces) {
             piece.draw(g, color, x, y);
+        }
+        if (needClip) {
+            g.endClip();
         }
     }
 
