@@ -4,7 +4,6 @@ http://www.cardforge.org/fpics/products/fatpacks/9ED.jpg
 http://www.cardforge.org/fpics/products/fatpacks/ALA.jpg
 http://www.cardforge.org/fpics/products/fatpacks/APC.jpg
 http://www.cardforge.org/fpics/products/fatpacks/ARB.jpg
-http://www.cardforge.org/fpics/products/fatpacks/AVR.png
 http://www.cardforge.org/fpics/products/fatpacks/BOK.jpg
 http://www.cardforge.org/fpics/products/fatpacks/CFX.jpg
 http://www.cardforge.org/fpics/products/fatpacks/CHK.jpg
@@ -22,11 +21,8 @@ http://www.cardforge.org/fpics/products/fatpacks/JUD.jpg
 http://www.cardforge.org/fpics/products/fatpacks/LGN.jpg
 http://www.cardforge.org/fpics/products/fatpacks/LRW.jpg
 http://www.cardforge.org/fpics/products/fatpacks/M10.jpg
-http://www.cardforge.org/fpics/products/fatpacks/M10.png
 http://www.cardforge.org/fpics/products/fatpacks/M11.jpg
-http://www.cardforge.org/fpics/products/fatpacks/M11.png
 http://www.cardforge.org/fpics/products/fatpacks/M12.jpg
-http://www.cardforge.org/fpics/products/fatpacks/M12.png
 http://www.cardforge.org/fpics/products/fatpacks/M13.jpg
 http://www.cardforge.org/fpics/products/fatpacks/MBS.jpg
 http://www.cardforge.org/fpics/products/fatpacks/MMQ.jpg
