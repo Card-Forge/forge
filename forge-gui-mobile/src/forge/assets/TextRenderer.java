@@ -60,6 +60,7 @@ public class TextRenderer {
     private FSkinFont baseFont, font;
     private boolean wrap, needClip;
     private List<Piece> pieces = new ArrayList<Piece>();
+    private List<Float> lineWidths = new ArrayList<Float>();
 
     public TextRenderer() {
         this(false);
@@ -71,6 +72,7 @@ public class TextRenderer {
     //break text in pieces
     private void updatePieces(FSkinFont font0) {
         pieces.clear();
+        lineWidths.clear();
         font = font0;
         needClip = false;
         if (fullText.isEmpty()) { return; }
@@ -92,8 +94,9 @@ public class TextRenderer {
         float x = 0;
         float y = 0;
         float pieceWidth = 0;
-        int lastSpaceIdx = -1;
         float lineHeight = bitmapFont.getLineHeight();
+        int lastSpaceIdx = -1;
+        int lineNum = 0;
         String text = "";
         int inSymbolCount = 0;
         boolean atReminderTextEnd = false;
@@ -107,14 +110,16 @@ public class TextRenderer {
                     inSymbolCount = 0;
                     text = "{" + text; //if not a symbol, render as text
                 }
+                lineWidths.add(x + pieceWidth);
                 if (!text.isEmpty()) {
-                    addPiece(new TextPiece(text, inReminderTextCount > 0), x, y, pieceWidth, lineHeight);
+                    addPiece(new TextPiece(text, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
                     pieceWidth = 0;
                     text = "";
                 }
                 x = 0;
                 y += lineHeight;
                 totalHeight += lineHeight;
+                lineNum++;
                 if (totalHeight > height) {
                     //try next font size down if out of space
                     if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
@@ -126,7 +131,7 @@ public class TextRenderer {
                 continue; //skip new line character
             case '{':
                 if (inSymbolCount == 0 && !text.isEmpty()) { //add current text if just entering symbol
-                    addPiece(new TextPiece(text, inReminderTextCount > 0), x, y, pieceWidth, lineHeight);
+                    addPiece(new TextPiece(text, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
                     text = "";
@@ -145,6 +150,7 @@ public class TextRenderer {
                                     x = 0;
                                     y += lineHeight;
                                     totalHeight += lineHeight;
+                                    lineNum++;
                                     if (totalHeight > height) {
                                         //try next font size down if out of space
                                         if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
@@ -154,14 +160,23 @@ public class TextRenderer {
                                         needClip = true;
                                     }
                                     //make previous consecutive symbols wrap too
-                                    for (int j = pieces.size(); j >= 0; j--) {
+                                    int j;
+                                    for (j = pieces.size(); j >= 0; j--) {
                                         Piece piece = pieces.get(j);
                                         if (piece instanceof ImagePiece) {
                                             piece.x = x;
                                             piece.y += lineHeight;
+                                            piece.lineNum++;
                                             x += piece.w;
                                         }
                                         else { break; }
+                                    }
+                                    if (j >= 0) {
+                                        Piece piece = pieces.get(j);
+                                        lineWidths.add(piece.x + piece.w);
+                                    }
+                                    else {
+                                        lineWidths.add(0f);
                                     }
                                 }
                                 else if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
@@ -173,8 +188,9 @@ public class TextRenderer {
                                     needClip = true;
                                 }
                             }
-                            addPiece(new ImagePiece(symbol, inReminderTextCount > 0), x, y - bitmapFont.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
+                            addPiece(new ImagePiece(symbol, inReminderTextCount > 0), lineNum, x, y - bitmapFont.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
                             x += pieceWidth;
+                            pieceWidth = 0;
                             text = "";
                             continue; //skip '}' character
                         }
@@ -190,7 +206,7 @@ public class TextRenderer {
                 }
                 if (parseReminderText) {
                     if (inReminderTextCount == 0 && !text.isEmpty()) { //add current text if just entering reminder text
-                        addPiece(new TextPiece(text, false), x, y, pieceWidth, lineHeight);
+                        addPiece(new TextPiece(text, false), lineNum, x, y, pieceWidth, lineHeight);
                         x += pieceWidth;
                         pieceWidth = 0;
                         text = "";
@@ -229,14 +245,20 @@ public class TextRenderer {
                     if (wrap && lastSpaceIdx >= 0) {
                         String currentLineText = text.substring(0, lastSpaceIdx);
                         if (!currentLineText.isEmpty()) {
-                            addPiece(new TextPiece(currentLineText, inReminderTextCount > 0 || atReminderTextEnd), x, y, pieceWidth, lineHeight);
+                            pieceWidth = bitmapFont.getBounds(text).width;
+                            addPiece(new TextPiece(currentLineText, inReminderTextCount > 0 || atReminderTextEnd), lineNum, x, y, pieceWidth, lineHeight);
                         }
+                        else {
+                            pieceWidth = 0;
+                        }
+                        lineWidths.add(x + pieceWidth);
                         text = text.substring(lastSpaceIdx + 1);
                         lastSpaceIdx = -1;
                         pieceWidth = text.isEmpty() ? 0 : bitmapFont.getBounds(text).width;
                         x = 0;
                         y += lineHeight;
                         totalHeight += lineHeight;
+                        lineNum++;
                         if (totalHeight > height) {
                             //try next font size down if out of space
                             if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
@@ -256,7 +278,7 @@ public class TextRenderer {
                     }
                 }
                 if (atReminderTextEnd && !text.isEmpty()) { //ensure final piece of reminder text added right away
-                    addPiece(new TextPiece(text, true), x, y, pieceWidth, lineHeight);
+                    addPiece(new TextPiece(text, true), lineNum, x, y, pieceWidth, lineHeight);
                     x += pieceWidth;
                     pieceWidth = 0;
                     text = "";
@@ -265,12 +287,14 @@ public class TextRenderer {
             }
         }
 
+        lineWidths.add(x + pieceWidth);
         if (!text.isEmpty()) {
-            addPiece(new TextPiece(text, inReminderTextCount > 0), x, y, pieceWidth, lineHeight);
+            addPiece(new TextPiece(text, inReminderTextCount > 0), lineNum, x, y, pieceWidth, lineHeight);
         }
     }
 
-    private void addPiece(Piece piece, float x, float y, float w, float h) {
+    private void addPiece(Piece piece, int lineNum, float x, float y, float w, float h) {
+        piece.lineNum = lineNum;
         piece.x = x;
         piece.y = y;
         piece.w = w;
@@ -279,7 +303,7 @@ public class TextRenderer {
     }
 
     public void drawText(Graphics g, String text0, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
-        drawText(g, text0, skinFont, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
+        drawText(g, text0, skinFont, skinColor.getColor(), x, y, w, h, wrap0, horzAlignment, centerVertically);
     }
     public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
         boolean needUpdate = false;
@@ -313,8 +337,22 @@ public class TextRenderer {
         if (height > totalHeight && centerVertically) {
             y += (height - totalHeight) / 2;
         }
+        float[] alignmentOffsets = new float[lineWidths.size()];
+        for (int i = 0; i < lineWidths.size(); i++) {
+            switch (horzAlignment) {
+            case LEFT:
+                alignmentOffsets[i] = 0;
+                break;
+            case CENTER:
+                alignmentOffsets[i] = Math.max((width - lineWidths.get(i)) / 2, 0);
+                break;
+            case RIGHT:
+                alignmentOffsets[i] = Math.max(width - lineWidths.get(i), 0);
+                break;
+            }
+        }
         for (Piece piece : pieces) {
-            piece.draw(g, color, x, y);
+            piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
         }
         if (needClip) {
             g.endClip();
@@ -323,6 +361,7 @@ public class TextRenderer {
 
     private abstract class Piece {
         protected float x, y, w, h;
+        protected int lineNum;
         protected final boolean inReminderText;
         protected final static float ALPHA_COMPOSITE = 0.5f;
 

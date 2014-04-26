@@ -191,7 +191,7 @@ public class InputSelectCard {
         }
 
         private static final Backdrop backdrop = new Backdrop();
-        private static final TextRenderer cardOptionRenderer = new TextRenderer(); //use text renderer to handle mana symbols
+        private static final TextRenderer cardOptionRenderer = new TextRenderer(true); //use text renderer to handle mana symbols
 
         private static <T> void show(CardAreaPanel cardPanel, Collection<T> options, final Callback<T> callback) {
             final CardOptionsList<T> optionsList = new CardOptionsList<T>(cardPanel, options);

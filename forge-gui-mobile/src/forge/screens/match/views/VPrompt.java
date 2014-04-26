@@ -21,9 +21,9 @@ public class VPrompt extends FContainer {
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
     public static final float PADDING = 2;
 
-    private static final FSkinColor backColor = FSkinColor.get(Colors.CLR_THEME2);
-    private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinFont font = FSkinFont.get(11);
+    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
+    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinFont FONT = FSkinFont.get(14);
 
     private final TextRenderer renderer = new TextRenderer();
     private final FButton btnOk, btnCancel;
@@ -77,11 +77,11 @@ public class VPrompt extends FContainer {
         float w = getWidth();
         float h = getHeight();
 
-        g.fillRect(backColor, 0, 0, w, h);
+        g.fillRect(BACK_COLOR, 0, 0, w, h);
         if (!StringUtils.isEmpty(message)) {
             float x = BTN_WIDTH + PADDING;
             float y = PADDING;
-            renderer.drawText(g, message, font, foreColor, x, y, w - 2 * x, h - 2 * y, true, HAlignment.CENTER, true);
+            renderer.drawText(g, message, FONT, FORE_COLOR, x, y, w - 2 * x, h - 2 * y, true, HAlignment.CENTER, true);
         }
     }
 }
