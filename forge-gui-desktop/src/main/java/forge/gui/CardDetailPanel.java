@@ -176,7 +176,7 @@ public class CardDetailPanel extends SkinnedPanel {
 
         if (card.isFaceDown()) {
             if (card.isInZone(ZoneType.Battlefield)) {
-                this.nameCostLabel.setText("Morph");
+                this.nameCostLabel.setText("???");
                 this.typeLabel.setText("Creature");
             }
         }

@@ -544,7 +544,7 @@ public class InputSelectCard {
 
                 x += padding;
                 w -= 2 * padding;
-                g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+                g.drawText(card.isFaceDown() ? "???" : card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
 
                 y += h;
                 h = 2 * TYPE_FONT.getFont().getCapHeight();
