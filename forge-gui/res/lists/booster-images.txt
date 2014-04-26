@@ -112,6 +112,9 @@ http://www.cardforge.org/fpics/products/boosters/ISD_2.jpg
 http://www.cardforge.org/fpics/products/boosters/ISD_3.jpg
 http://www.cardforge.org/fpics/products/boosters/ISD_4.jpg
 http://www.cardforge.org/fpics/products/boosters/ISD_5.jpg
+http://www.cardforge.org/fpics/products/boosters/JOU_1.jpg
+http://www.cardforge.org/fpics/products/boosters/JOU_2.jpg
+http://www.cardforge.org/fpics/products/boosters/JOU_3.jpg
 http://www.cardforge.org/fpics/products/boosters/JUD.jpg
 http://www.cardforge.org/fpics/products/boosters/LEA.jpg
 http://www.cardforge.org/fpics/products/boosters/LEB.jpg

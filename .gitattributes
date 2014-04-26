@@ -15148,6 +15148,7 @@ forge-gui/res/licenses/xstream-license.txt svneol=native#text/plain
 forge-gui/res/lists/NonStackingKWList.txt svneol=native#text/plain
 forge-gui/res/lists/TypeLists.txt svneol=native#text/plain
 forge-gui/res/lists/booster-images.txt svneol=native#text/plain
+forge-gui/res/lists/boosterbox-images.txt -text
 forge-gui/res/lists/fatpack-images.txt svneol=native#text/plain
 forge-gui/res/lists/precon-images.txt svneol=native#text/plain
 forge-gui/res/lists/quest-opponent-icons.txt svneol=native#text/plain
