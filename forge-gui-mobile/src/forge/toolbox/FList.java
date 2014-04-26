@@ -14,7 +14,7 @@ import forge.screens.FScreen;
 import forge.util.Utils;
 
 public class FList<E> extends FScrollPane {
-    public static final float INSETS_FACTOR = 0.025f;
+    public static final float PADDING = 3;
     public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
@@ -174,10 +174,9 @@ public class FList<E> extends FScrollPane {
             float itemHeight = renderer.getItemHeight();
             boolean drawSeparators = drawLineSeparators();
 
-            float padding = w * INSETS_FACTOR;
             float y = getItemTop(startIndex);
-            float valueWidth = w - 2 * padding;
-            float valueHeight = itemHeight - 2 * padding;
+            float valueWidth = w - 2 * PADDING;
+            float valueHeight = itemHeight - 2 * PADDING;
 
             for (int i = startIndex; i < items.size(); i++) {
                 if (y > h) { break; }
@@ -187,7 +186,7 @@ public class FList<E> extends FScrollPane {
                     g.fillRect(fillColor, 0, y, w, itemHeight);
                 }
 
-                renderer.drawValue(g, items.get(i), font, FORE_COLOR, pressedIndex == i, padding, y + padding, valueWidth, valueHeight);
+                renderer.drawValue(g, items.get(i), font, FORE_COLOR, pressedIndex == i, PADDING, y + PADDING, valueWidth, valueHeight);
 
                 y += itemHeight;
 

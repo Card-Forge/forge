@@ -15,9 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.assets;
+package forge.card;
 
 import forge.Forge.Graphics;
+import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.error.BugReporter;
@@ -28,6 +29,7 @@ import java.util.StringTokenizer;
 
 
 public class CardFaceSymbols {
+    public static final float FONT_SIZE_FACTOR = 0.85f;
     private static final Map<String, FSkinImage> MANA_IMAGES = new HashMap<String, FSkinImage>();
 
     public static void loadImages() {
@@ -136,6 +138,34 @@ public class CardFaceSymbols {
         }
     }
 
+    public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
+        if (colorSet.isColorless()) {
+            CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y, imageSize);
+            return;
+        }
+
+        final float dx = imageSize;
+        if (colorSet.hasWhite()) {
+            g.drawImage(FSkinImage.MANA_W, x, y, imageSize, imageSize);
+            x += dx;
+        }
+        if (colorSet.hasBlue()) {
+            g.drawImage(FSkinImage.MANA_U, x, y, imageSize, imageSize);
+            x += dx;
+        }
+        if (colorSet.hasBlack()) {
+            g.drawImage(FSkinImage.MANA_B, x, y, imageSize, imageSize);
+            x += dx;
+        }
+        if (colorSet.hasRed()) {
+            g.drawImage(FSkinImage.MANA_R, x, y, imageSize, imageSize);
+            x += dx;
+        }
+        if (colorSet.hasGreen()) {
+            g.drawImage(FSkinImage.MANA_G, x, y, imageSize, imageSize);
+        }
+    }
+
     public static void drawOther(final Graphics g, String s, float x, final float y, final float imageSize) {
         if (s.length() == 0) {
             return;
@@ -162,5 +192,9 @@ public class CardFaceSymbols {
 
     public static float getWidth(final ManaCost manaCost, float imageSize) {
         return manaCost.getGlyphCount() * imageSize;
+    }
+
+    public static float getWidth(final ColorSet colorSet, float imageSize) {
+        return Math.max(colorSet.countColors(), 1) * imageSize;
     }
 }

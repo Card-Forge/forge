@@ -1,6 +1,13 @@
 package forge.itemmanager;
 
+import forge.Forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.card.CardFaceSymbols;
+import forge.card.ColorSet;
 import forge.deck.DeckProxy;
+import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.itemmanager.filters.DeckColorFilter;
@@ -9,6 +16,7 @@ import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.DeckSetFilter;
 import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
@@ -16,10 +24,14 @@ import forge.model.FModel;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.Utils;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import java.util.HashSet;
 import java.util.Map.Entry;
@@ -233,5 +245,30 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                         }
                     }
         });
+    }
+
+    private static final float IMAGE_SIZE = FSkinImage.MANA_W.getNearestHQHeight(Utils.AVG_FINGER_HEIGHT / 2);
+    private static final float ITEM_HEIGHT = 2 * IMAGE_SIZE + 3 * FList.PADDING;
+
+    @Override
+    public ItemRenderer<DeckProxy> getListItemRenderer() {
+        return new ItemRenderer<DeckProxy>() {
+            @Override
+            public float getItemHeight() {
+                return ITEM_HEIGHT;
+            }
+
+            @Override
+            public void drawValue(Graphics g, Entry<DeckProxy, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                DeckProxy deck = value.getKey();
+                g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
+                x += IMAGE_SIZE + FList.PADDING;
+                ColorSet deckColor = deck.getColor();
+                float availableNameWidth = w - CardFaceSymbols.getWidth(deckColor, IMAGE_SIZE) - IMAGE_SIZE - 2 * FList.PADDING;
+                g.drawText(deck.getName(), font, foreColor, x, y, availableNameWidth, IMAGE_SIZE, false, HAlignment.LEFT, true);
+                x += availableNameWidth + FList.PADDING;
+                CardFaceSymbols.drawColorSet(g, deckColor, x, y, IMAGE_SIZE);
+            }
+        };
     }
 }

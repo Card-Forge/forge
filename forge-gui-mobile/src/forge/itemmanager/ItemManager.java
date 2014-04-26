@@ -27,6 +27,7 @@ import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
+import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -227,6 +228,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setViewIndex(config0.getViewIndex());
         setHideFilters(config0.getHideFilters());
     }
+
+    public abstract ItemRenderer<T> getListItemRenderer();
 
     public void setViewIndex(int viewIndex) {
         if (viewIndex < 0 || viewIndex >= views.size()) { return; }

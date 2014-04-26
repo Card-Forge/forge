@@ -1068,7 +1068,6 @@ forge-gui-mobile/libs/gdx.jar -text
 forge-gui-mobile/pom.xml -text
 forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
-forge-gui-mobile/src/forge/assets/CardFaceSymbols.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
 forge-gui-mobile/src/forge/assets/FSkin.java -text
 forge-gui-mobile/src/forge/assets/FSkinColor.java -text
@@ -1080,6 +1079,8 @@ forge-gui-mobile/src/forge/assets/FTextureRegionImage.java -text
 forge-gui-mobile/src/forge/assets/ImageCache.java -text
 forge-gui-mobile/src/forge/assets/ImageLoader.java -text
 forge-gui-mobile/src/forge/assets/TextRenderer.java -text
+forge-gui-mobile/src/forge/card/CardFaceSymbols.java -text
+forge-gui-mobile/src/forge/card/CardRenderer.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
 forge-gui-mobile/src/forge/error/BugReportDialog.java -text
@@ -1109,16 +1110,9 @@ forge-gui-mobile/src/forge/itemmanager/filters/StatTypeFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/TextSearchFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/ToggleButtonsFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/ValueRangeFilter.java -text
-forge-gui-mobile/src/forge/itemmanager/views/ColorSetRenderer.java -text
-forge-gui-mobile/src/forge/itemmanager/views/DeckStarRenderer.java -text
 forge-gui-mobile/src/forge/itemmanager/views/ImageView.java -text
-forge-gui-mobile/src/forge/itemmanager/views/IntegerRenderer.java -text
-forge-gui-mobile/src/forge/itemmanager/views/ItemCell.java -text
-forge-gui-mobile/src/forge/itemmanager/views/ItemCellRenderer.java -text
 forge-gui-mobile/src/forge/itemmanager/views/ItemListView.java -text
 forge-gui-mobile/src/forge/itemmanager/views/ItemView.java -text
-forge-gui-mobile/src/forge/itemmanager/views/ManaCostRenderer.java -text
-forge-gui-mobile/src/forge/itemmanager/views/StarRenderer.java -text
 forge-gui-mobile/src/forge/menu/FDropDown.java -text
 forge-gui-mobile/src/forge/menu/FDropDownMenu.java -text
 forge-gui-mobile/src/forge/menu/FMenuBar.java -text

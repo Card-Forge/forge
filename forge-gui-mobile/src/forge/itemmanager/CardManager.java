@@ -1,5 +1,10 @@
 package forge.itemmanager;
 
+import java.util.Map.Entry;
+
+import forge.Forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.CardCMCFilter;
@@ -12,6 +17,7 @@ import forge.itemmanager.filters.CardSetFilter;
 import forge.itemmanager.filters.CardToughnessFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
@@ -143,5 +149,22 @@ public class CardManager extends ItemManager<PaperCard> {
                 itemManager.addFilter(new CardToughnessFilter(itemManager));
             }
         }, itemManager.getFilter(CardToughnessFilter.class) == null));
+    }
+
+    @Override
+    public ItemRenderer<PaperCard> getListItemRenderer() {
+        return new ItemRenderer<PaperCard>() {
+            @Override
+            public float getItemHeight() {
+                return 0;
+            }
+
+            @Override
+            public void drawValue(Graphics g, Entry<PaperCard, Integer> value,
+                    FSkinFont font, FSkinColor foreColor, boolean pressed,
+                    float x, float y, float w, float h) {
+                
+            }
+        };
     }
 }

@@ -8,7 +8,9 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge.Graphics;
+import forge.card.CardFaceSymbols;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 
@@ -144,7 +146,7 @@ public class TextRenderer {
                     if (!text.isEmpty()) {
                         FSkinImage symbol = symbolLookup.get(text);
                         if (symbol != null) {
-                            pieceWidth = lineHeight * 0.85f;
+                            pieceWidth = lineHeight * CardFaceSymbols.FONT_SIZE_FACTOR;
                             if (x + pieceWidth > width) {
                                 if (wrap) {
                                     x = 0;

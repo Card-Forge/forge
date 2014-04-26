@@ -259,8 +259,7 @@ public class FGroupList<E> extends FScrollPane {
                 g.fillRect(fillColor, 0, 0, w, h);
             }
 
-            float padding = w * FList.INSETS_FACTOR;
-            renderer.drawValue(g, value, font, FList.FORE_COLOR, pressed, padding, padding, w - 2 * padding, h - 2 * padding);
+            renderer.drawValue(g, value, font, FList.FORE_COLOR, pressed, FList.PADDING, FList.PADDING, w - 2 * FList.PADDING, h - 2 * FList.PADDING);
 
             if (drawLineSeparators()) {
                 g.drawLine(1, FList.LINE_COLOR, 0, h, w, h);

@@ -35,11 +35,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
-import forge.util.Utils;
-
 import org.apache.commons.lang3.StringUtils;
-
-import com.badlogic.gdx.math.Vector2;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -49,7 +45,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
     private static final FSkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    private static final float ROW_HEIGHT = Utils.AVG_FINGER_HEIGHT + 12;
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
@@ -77,7 +72,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
         final Iterable<T> selectedItemsBefore = getSelectedItems();
 
-        //ensure cells ordered properly
+        //ensure cols ordered properly
         final List<ItemColumn> cols = new LinkedList<ItemColumn>();
         for (ItemColumnConfig colConfig : config.getCols().values()) {
             if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
@@ -115,13 +110,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             getPnlOptions().add(chkBox);
         }
 
-        list.cells.clear();
+        list.cols.clear();
 
         int modelIndex = 0;
         for (final ItemColumn col : cols) {
-            final ItemCell cell = new ItemCell(col);
             col.setIndex(modelIndex++);
-            if (col.isVisible()) { list.cells.add(cell); }
+            if (col.isVisible()) { list.cols.add(col); }
 
             final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
                     col.getLongName() : col.getShortName(), col.isVisible());
@@ -134,9 +128,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     col.setVisible(visible);
 
                     if (col.isVisible()) {
-                        list.cells.add(cell);
+                        list.cols.add(col);
 
-                        //move cell into proper position
+                        //move col into proper position
                         int oldIndex = list.getCellCount() - 1;
                         int newIndex = col.getIndex();
                         for (int i = 0; i < col.getIndex(); i++) {
@@ -145,12 +139,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                             }
                         }
                         if (newIndex < oldIndex) {
-                            list.cells.remove(oldIndex);
-                            list.cells.add(newIndex, cell);
+                            list.cols.remove(oldIndex);
+                            list.cols.add(newIndex, col);
                         }
                     }
                     else {
-                        list.cells.remove(cell);
+                        list.cols.remove(col);
                     }
                     ItemManagerConfig.save();
                 }
@@ -258,14 +252,21 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         list.setListData(model.getOrderedList());
     }
 
+    public abstract static class ItemRenderer<T extends InventoryItem> {
+        public abstract float getItemHeight();
+        public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+    }
+
     public final class ItemList extends FList<Entry<T, Integer>> {
-        private List<ItemCell> cells = new ArrayList<ItemCell>();
+        private final ItemRenderer<T> renderer;
+        private List<ItemColumn> cols = new ArrayList<ItemColumn>();
 
         private ItemList() {
+            renderer = itemManager.getListItemRenderer();
             setListItemRenderer(new ListItemRenderer<Map.Entry<T,Integer>>() {
                 @Override
                 public float getItemHeight() {
-                    return ROW_HEIGHT;
+                    return renderer.getItemHeight();
                 }
 
                 @Override
@@ -291,21 +292,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    Vector2 loc = new Vector2(x, y);
-                    for (ItemCell cell : cells) {
-                        cell.getCellRenderer().draw(g, cell.getFnDisplay().apply(value), font, foreColor, loc, w, h);
-                    }
+                    renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
                 }
             });
-            setFontSize(12);
+            setFontSize(14);
         }
 
-        public Iterable<ItemCell> getCells() {
-            return cells;
+        public Iterable<ItemColumn> getCells() {
+            return cols;
         }
 
         public int getCellCount() {
-            return cells.size();
+            return cols.size();
         }
 
         @Override
@@ -343,21 +341,21 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         public void setup() {
-            final ItemCell[] sortcells = new ItemCell[list.getCellCount()];
+            final ItemColumn[] sortcols = new ItemColumn[list.getCellCount()];
 
             // Assemble priority sort.
-            for (ItemCell cell : list.getCells()) {
-                if (cell.getSortPriority() > 0 && cell.getSortPriority() <= sortcells.length) {
-                    sortcells[cell.getSortPriority() - 1] = cell;
+            for (ItemColumn col : list.getCells()) {
+                if (col.getSortPriority() > 0 && col.getSortPriority() <= sortcols.length) {
+                    sortcols[col.getSortPriority() - 1] = col;
                 }
             }
 
             model.getCascadeManager().reset();
 
-            for (int i = sortcells.length - 1; i >= 0; i--) {
-                ItemCell cell = sortcells[i];
-                if (cell != null) {
-                    model.getCascadeManager().add(cell.getItemColumn(), true);
+            for (int i = sortcols.length - 1; i >= 0; i--) {
+                ItemColumn col = sortcols[i];
+                if (col != null) {
+                    model.getCascadeManager().add(col, true);
                 }
             }
         }
