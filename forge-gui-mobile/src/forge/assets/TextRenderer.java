@@ -8,7 +8,6 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Forge.Graphics;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -57,6 +56,7 @@ public class TextRenderer {
     private final boolean parseReminderText;
     private String fullText = "";
     private float width, height;
+    private float totalHeight;
     private BitmapFont baseBitmapFont;
     private FSkinFont baseFont, font;
     private boolean wrap;
@@ -73,7 +73,14 @@ public class TextRenderer {
     private void updatePieces(FSkinFont font0) {
         pieces.clear();
         font = font0;
+        if (fullText.isEmpty()) { return; }
+
         BitmapFont bitmapFont = font.getFont();
+        totalHeight = bitmapFont.getCapHeight();
+        if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) { //immediately try one font size smaller if no room for anything
+            updatePieces(FSkinFont.get(font.getSize() - 1));
+            return;
+        }
 
         boolean hideReminderText = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT);
 
@@ -103,7 +110,8 @@ public class TextRenderer {
                 }
                 x = 0;
                 y += lineHeight;
-                if (y > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                totalHeight += lineHeight;
+                if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
                     //try next font size down if out of space
                     updatePieces(FSkinFont.get(font.getSize() - 1));
                     return;
@@ -129,7 +137,8 @@ public class TextRenderer {
                                 if (wrap) {
                                     x = 0;
                                     y += lineHeight;
-                                    if (y > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                                    totalHeight += lineHeight;
+                                    if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
                                         //try next font size down if out of space
                                         updatePieces(FSkinFont.get(font.getSize() - 1));
                                         return;
@@ -214,7 +223,8 @@ public class TextRenderer {
                         pieceWidth = text.isEmpty() ? 0 : bitmapFont.getBounds(text).width;
                         x = 0;
                         y += lineHeight;
-                        if (y > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                        totalHeight += lineHeight;
+                        if (totalHeight > height && font.getSize() > FSkinFont.MIN_FONT_SIZE) {
                             //try next font size down if out of space
                             updatePieces(FSkinFont.get(font.getSize() - 1));
                             return;
@@ -277,6 +287,9 @@ public class TextRenderer {
         }
         if (needUpdate) {
             updatePieces(baseFont);
+        }
+        if (height > totalHeight && centerVertically) {
+            y += (height - totalHeight) / 2;
         }
         for (Piece piece : pieces) {
             piece.draw(g, color, x, y);

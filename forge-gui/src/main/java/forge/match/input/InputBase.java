@@ -104,7 +104,6 @@ public abstract class InputBase implements java.io.Serializable, Input {
         } else {
             sb.append("Empty");
         }
-        sb.append("\n");
         return sb.toString();
     }
 }

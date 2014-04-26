@@ -8,6 +8,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.TextRenderer;
 import forge.game.Game;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
@@ -24,6 +25,7 @@ public class VPrompt extends FContainer {
     private static final FSkinColor foreColor = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinFont font = FSkinFont.get(11);
 
+    private final TextRenderer renderer = new TextRenderer();
     private final FButton btnOk, btnCancel;
     private String message;
 
@@ -79,7 +81,7 @@ public class VPrompt extends FContainer {
         if (!StringUtils.isEmpty(message)) {
             float x = BTN_WIDTH + PADDING;
             float y = PADDING;
-            g.drawText(message, font, foreColor, x, y, w - 2 * x, h - 2 * y, true, HAlignment.CENTER, true);
+            renderer.drawText(g, message, font, foreColor, x, y, w - 2 * x, h - 2 * y, true, HAlignment.CENTER, true);
         }
     }
 }
