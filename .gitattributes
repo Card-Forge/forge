@@ -16267,7 +16267,6 @@ forge-gui/src/main/config/builder/create-dmg.builder -text
 forge-gui/src/main/config/create-dmg -text
 forge-gui/src/main/config/forge.command svneol=native#text/x-sh
 forge-gui/src/main/config/forge.ico -text svneol=unset#image/ico
-forge-gui/src/main/config/forge.sh svneol=native#text/x-sh
 forge-gui/src/main/config/forge_checks.xml svneol=native#text/xml
 forge-gui/src/main/config/support/dmg-license.py svneol=native#text/x-python
 forge-gui/src/main/config/support/template.applescript -text
