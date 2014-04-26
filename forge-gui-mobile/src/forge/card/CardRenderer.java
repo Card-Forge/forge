@@ -177,17 +177,21 @@ public class CardRenderer {
 
         String set = card.getCurSetCode();
         if (!StringUtils.isEmpty(set)) {
-            float setWidth = SET_FONT.getFont().getBounds(set).width + SET_FONT.getFont().getCapHeight();
-            drawSetLabel(g, card, set, padding, x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
+            float setWidth = getSetWidth(SET_FONT, set);
+            drawSetLabel(g, SET_FONT, set, card.getRarity(), x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
             w -= setWidth; //reduce available width for type
         }
 
         g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
-    private static void drawSetLabel(Graphics g, Card card, String set, float padding, float x, float y, float w, float h) {
+    public static float getSetWidth(FSkinFont font, String set) {
+        return font.getFont().getBounds(set).width + font.getFont().getCapHeight();
+    }
+
+    public static void drawSetLabel(Graphics g, FSkinFont font, String set, CardRarity rarity, float x, float y, float w, float h) {
         Color backColor;
-        switch(card.getRarity()) {
+        switch(rarity) {
         case Uncommon:
             backColor = fromDetailColor(DetailColors.UNCOMMON);
             break;

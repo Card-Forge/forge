@@ -18,8 +18,6 @@
 package forge.itemmanager;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-
 import forge.card.*;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
@@ -32,8 +30,6 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.limited.DraftRankCache;
 import forge.model.FModel;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.Map.Entry;
@@ -341,7 +337,7 @@ public enum ColumnDef {
                     if (deck == null) {
                         return null;
                     }
-                    return StringUtils.join(Iterables.transform(deck.getFormats(), GameFormat.FN_GET_NAME) , ", ");
+                    return deck.getFormatsString();
                 }
             }),
     DECK_EDITION("Set", "Set of oldest card in deck", 38, true, SortState.DESC,

@@ -2,9 +2,11 @@ package forge.deck;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -54,6 +56,7 @@ public class DeckProxy implements InventoryItem {
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
     private CardEdition edition;
+    private CardRarity highestRarity;
 
     protected DeckProxy() {
         this(null, "", null, "", null, null);
@@ -128,6 +131,7 @@ public class DeckProxy implements InventoryItem {
     public void invalidateCache() {
         color = null;
         colorIdentity = null;
+        highestRarity = null;
         formats = null;
         edition = null;
         mainSize = Integer.MIN_VALUE;
@@ -176,11 +180,54 @@ public class DeckProxy implements InventoryItem {
         return colorIdentity;
     }
 
+    public CardRarity getHighestRarity() {
+        if (highestRarity == null) {
+            highestRarity = CardRarity.Common;
+            for (Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+                switch (deckEntry.getKey()) {
+                case Main:
+                case Sideboard:
+                case Commander:
+                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        switch (poolEntry.getKey().getRarity()) {
+                        case MythicRare:
+                            highestRarity = CardRarity.MythicRare;
+                            return highestRarity; //can return right away since nothing is higher
+                        case Special:
+                            highestRarity = CardRarity.Special; //can always set this since only mythic should be treated higher
+                            break;
+                        case Rare:
+                            if (highestRarity != CardRarity.Special) {
+                                highestRarity = CardRarity.Rare; //can set to rare unless deck contains Special rarity
+                            }
+                            break;
+                        case Uncommon:
+                            if (highestRarity != CardRarity.Rare && highestRarity != CardRarity.Special) {
+                                highestRarity = CardRarity.Uncommon; //can set to uncommon unless deck contains rare or uncommon
+                            }
+                            break;
+                        default:
+                            break; //treat other rarities as equivalent to common
+                        }
+                    }
+                    break;
+                default:
+                    break; //ignore other sections
+                }
+            }
+        }
+        return highestRarity;
+    }
+
     public Iterable<GameFormat> getFormats() {
         if (formats == null) {
             formats = FModel.getFormats().getAllFormatsOfDeck(getDeck());
         }
         return formats;
+    }
+
+    public String getFormatsString() {
+        return StringUtils.join(Iterables.transform(getFormats(), GameFormat.FN_GET_NAME), ", ");
     }
 
     public int getMainSize() {

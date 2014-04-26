@@ -42,8 +42,8 @@ import java.util.Map.Entry;
 
 
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
-    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    private static final FSkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
+    private static final FSkinColor ROW_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
+    private static final FSkinColor ALT_ROW_COLOR = ROW_COLOR.getContrastColor(-20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
     private final ItemList list = new ItemList();
@@ -308,7 +308,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         protected void drawBackground(Graphics g) {
-            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+            //draw no background by default
         }
 
         @Override
@@ -319,7 +319,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (index % 2 == 1) {
                 return ALT_ROW_COLOR;
             }
-            return null;
+            return ROW_COLOR;
         }
 
         @Override
