@@ -122,7 +122,7 @@ public class TextRenderer {
                     if (!text.isEmpty()) {
                         FSkinImage symbol = symbolLookup.get(text);
                         if (symbol != null) {
-                            pieceWidth = lineHeight * 0.9f;
+                            pieceWidth = lineHeight * 0.85f;
                             if (x + pieceWidth > width) {
                                 if (wrap) {
                                     x = 0;
