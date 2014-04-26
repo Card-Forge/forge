@@ -106,13 +106,14 @@ public class CField implements ICDoc {
                 // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
                 final SpellAbility ab = player.getController().getAbilityToPlay(c.getAllPossibleAbilities(player, true));
                 if ( null != ab) {
-                    game.getAction().invoke(new Runnable(){ @Override public void run(){
-                        HumanPlay.playSpellAbility(player, ab);
+                    game.getAction().invoke(new Runnable(){ 
+                    	@Override public void run() {
+                    		HumanPlay.playSpellAbility(player, ab);
+                    		game.getStack().addAllTirggeredAbilitiesToStack();
                     }});
                 }
             }
         };
-
 
         Function<Byte, Void> manaAction = new Function<Byte, Void>() {
             public Void apply(Byte colorCode) {
@@ -126,7 +127,6 @@ public class CField implements ICDoc {
                 return null;
             }
         };
-
         
         view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction, manaAction);
         
