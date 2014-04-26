@@ -169,6 +169,7 @@ public class TextRenderer {
                 if (parseReminderText) {
                     if (inReminderTextCount == 0 && !text.isEmpty()) { //add current text if just entering reminder text
                         addPiece(new TextPiece(text, false), x, y, pieceWidth, lineHeight);
+                        x += pieceWidth;
                         pieceWidth = 0;
                         text = "";
                         lastSpaceIdx = -1;
@@ -227,6 +228,7 @@ public class TextRenderer {
                 }
                 if (atReminderTextEnd && !text.isEmpty()) { //ensure final piece of reminder text added right away
                     addPiece(new TextPiece(text, true), x, y, pieceWidth, lineHeight);
+                    x += pieceWidth;
                     pieceWidth = 0;
                     text = "";
                     lastSpaceIdx = -1;
