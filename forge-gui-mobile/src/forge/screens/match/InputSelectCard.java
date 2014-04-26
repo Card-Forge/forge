@@ -191,6 +191,7 @@ public class InputSelectCard {
         }
 
         private static final Backdrop backdrop = new Backdrop();
+        private static final TextRenderer cardOptionRenderer = new TextRenderer(); //use text renderer to handle mana symbols
 
         private static <T> void show(CardAreaPanel cardPanel, Collection<T> options, final Callback<T> callback) {
             final CardOptionsList<T> optionsList = new CardOptionsList<T>(cardPanel, options);
@@ -212,7 +213,7 @@ public class InputSelectCard {
                     if (!pressed) {
                         foreColor = foreColor.alphaColor(ALPHA_COMPOSITE);
                     }
-                    g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.CENTER, true);
+                    cardOptionRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, true, HAlignment.CENTER, true);
                 }
             });
 

@@ -85,8 +85,10 @@ public class TextRenderer {
         float lineHeight = bitmapFont.getLineHeight();
         String text = "";
         int inSymbolCount = 0;
+        boolean atReminderTextEnd = false;
         int inReminderTextCount = 0;
         for (int i = 0; i < fullText.length(); i++) {
+            atReminderTextEnd = false;
             ch = fullText.charAt(i);
             switch (ch) {
             case '\n':
@@ -181,6 +183,9 @@ public class TextRenderer {
                 }
                 if (inReminderTextCount > 0) {
                     inReminderTextCount--;
+                    if (inReminderTextCount == 0) {
+                        atReminderTextEnd = true;
+                    }
                 }
                 break;
             case ' ':
@@ -191,7 +196,7 @@ public class TextRenderer {
                 lastSpaceIdx = text.length();
                 break;
             }
-            if (inReminderTextCount > 0 && hideReminderText) {
+            if (hideReminderText && (inReminderTextCount > 0 || atReminderTextEnd)) {
                 continue;
             }
             text += ch;
@@ -201,7 +206,7 @@ public class TextRenderer {
                     if (wrap && lastSpaceIdx >= 0) {
                         String currentLineText = text.substring(0, lastSpaceIdx);
                         if (!currentLineText.isEmpty()) {
-                            addPiece(new TextPiece(currentLineText, false), x, y, pieceWidth, lineHeight);
+                            addPiece(new TextPiece(currentLineText, inReminderTextCount > 0 || atReminderTextEnd), x, y, pieceWidth, lineHeight);
                         }
                         text = text.substring(lastSpaceIdx + 1);
                         lastSpaceIdx = -1;
@@ -219,6 +224,12 @@ public class TextRenderer {
                         updatePieces(FSkinFont.get(font.getSize() - 1));
                         return;
                     }
+                }
+                if (atReminderTextEnd && !text.isEmpty()) { //ensure final piece of reminder text added right away
+                    addPiece(new TextPiece(text, true), x, y, pieceWidth, lineHeight);
+                    pieceWidth = 0;
+                    text = "";
+                    lastSpaceIdx = -1;
                 }
             }
         }
@@ -273,6 +284,7 @@ public class TextRenderer {
     private abstract class Piece {
         protected float x, y, w, h;
         protected final boolean inReminderText;
+        protected final static float ALPHA_COMPOSITE = 0.5f;
 
         protected Piece(boolean inReminderText0) {
             inReminderText = inReminderText0;
@@ -291,7 +303,7 @@ public class TextRenderer {
 
         @Override
         public void draw(Graphics g, Color color, float offsetX, float offsetY) {
-            g.drawText(text, font, inReminderText ? FSkinColor.alphaColor(color, 0.75f) : color, x + offsetX, y + offsetY, w, h, false, HAlignment.LEFT, false);
+            g.drawText(text, font, inReminderText ? FSkinColor.alphaColor(color, ALPHA_COMPOSITE) : color, x + offsetX, y + offsetY, w, h, false, HAlignment.LEFT, false);
         }
     }
 
@@ -305,7 +317,13 @@ public class TextRenderer {
 
         @Override
         public void draw(Graphics g, Color color, float offsetX, float offsetY) {
+            if (inReminderText) {
+                g.setAlphaComposite(ALPHA_COMPOSITE);
+            }
             g.drawImage(image, x + offsetX, y + offsetY, w, h);
+            if (inReminderText) {
+                g.resetAlphaComposite();
+            }
         }
     }
 }
