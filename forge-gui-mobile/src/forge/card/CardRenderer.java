@@ -211,7 +211,7 @@ public class CardRenderer {
 
         Color foreColor = FSkinColor.getHighContrastColor(backColor);
         g.fillRect(backColor, x, y, w, h);
-        g.drawText(set, SET_FONT, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        g.drawText(set, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
     }
 
     //use text renderer to handle mana symbols and reminder text
