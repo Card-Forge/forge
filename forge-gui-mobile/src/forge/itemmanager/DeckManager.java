@@ -299,7 +299,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 float availableFormatWidth = w - setWidth - FList.PADDING;
                 g.drawText(deck.getFormatsString(), font, foreColor, x, y, availableFormatWidth, lineHeight, false, HAlignment.LEFT, true);
                 x += availableFormatWidth + FList.PADDING;
-                CardRenderer.drawSetLabel(g, font, set, deck.getHighestRarity(), x, y, setWidth, lineHeight);
+                CardRenderer.drawSetLabel(g, font, set, deck.getHighestRarity(), x - 1, y - 1, setWidth + 2, lineHeight + 2); //provide a little more padding for set label
             }
         };
     }
