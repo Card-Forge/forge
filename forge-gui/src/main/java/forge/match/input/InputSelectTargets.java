@@ -9,8 +9,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.interfaces.ITriggerEvent;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +104,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    protected final void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return;
         }
@@ -193,7 +193,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     } // selectCard()
 
     @Override
-    protected final void onPlayerSelected(Player player, final MouseEvent triggerEvent) {
+    protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
             return;
         }

@@ -20,6 +20,7 @@ package forge.view.arcane;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.MouseTriggerEvent;
 
 import java.awt.event.MouseEvent;
 
@@ -61,14 +62,14 @@ public class HandArea extends CardArea {
     /** {@inheritDoc} */
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), new MouseTriggerEvent(evt));
         super.mouseLeftClicked(panel, evt);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), new MouseTriggerEvent(evt));
         super.mouseRightClicked(panel, evt);
     }
 }

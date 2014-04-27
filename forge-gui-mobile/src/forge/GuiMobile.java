@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Gdx;
@@ -328,5 +329,15 @@ public class GuiMobile implements IGuiBase {
     @Override
     public File getSaveFile(File defaultFile) {
         return defaultFile; //TODO: Show dialog
+    }
+
+    @Override
+    public void copyToClipboard(String text) {
+        Forge.getClipboard().setContents(text);
+    }
+
+    @Override
+    public void browseToUrl(String url) throws Exception {
+        Gdx.net.openURI(url);
     }
 }

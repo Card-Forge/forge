@@ -23,12 +23,12 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 
-import java.awt.Point;
 import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = 5;
@@ -54,8 +54,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private GroupDef groupBy = null;
     private boolean lockHoveredItem = false;
     private boolean lockInput = false;
-    private Point hoverPoint;
-    private Point hoverScrollPos;
+    private Vector2 hoverPoint;
+    private Vector2 hoverScrollPos;
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
@@ -667,7 +667,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
 
-    private boolean updateHoveredItem(Point hoverPoint0, Point hoverScrollPos0) {
+    private boolean updateHoveredItem(Vector2 hoverPoint0, Vector2 hoverScrollPos0) {
         hoverPoint = hoverPoint0;
         if (hoverScrollPos != hoverScrollPos0) {
             hoverScrollPos = hoverScrollPos0;
@@ -679,7 +679,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         ItemInfo item = null;
         FScrollPane scroller = getScroller();
         if (hoverPoint0 != null) {
-            Point displayPoint = new Point(hoverPoint0);
+            Vector2 displayPoint = new Vector2(hoverPoint0);
             //account for change in scroll positions since mouse last moved
             displayPoint.x += scroller.getScrollLeft() - hoverScrollPos0.x;
             displayPoint.y += scroller.getScrollTop() - hoverScrollPos0.y;

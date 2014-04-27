@@ -30,8 +30,8 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.interfaces.ITriggerEvent;
 
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
@@ -112,16 +112,18 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onPlayerSelected(Player selected, final MouseEvent triggerEvent) {
-        if(defenders.contains(selected))
+    protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
+        if(defenders.contains(selected)) {
             setCurrentDefender(selected);
-        else
+        }
+        else {
             flashIncorrectAction(); // cannot attack that player
+        }
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    protected final void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
         if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
                 && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {

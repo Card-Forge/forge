@@ -20,7 +20,8 @@ package forge.match.input;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import java.awt.event.MouseEvent;
+import forge.interfaces.ITriggerEvent;
+
 import java.util.List;
 
 /**
@@ -60,7 +61,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
 
     @Override
-    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
     	List<SpellAbility> abilities = card.getAllPossibleAbilities(player, false);
     	if (abilities.isEmpty()) {
             flashIncorrectAction();

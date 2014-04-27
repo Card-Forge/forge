@@ -6,19 +6,17 @@ import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.interfaces.ITriggerEvent;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> {
     private static final long serialVersionUID = -1779224307654698954L;
     private final Map<Card, ImmutablePair<Byte, ManaCostShard>> chosenCards = new HashMap<Card, ImmutablePair<Byte, ManaCostShard>>();
@@ -39,8 +37,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     }
 
     @Override
-    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
-
+    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         boolean entityWasSelected = chosenCards.containsKey(card);
         if (entityWasSelected) {
             ImmutablePair<Byte, ManaCostShard> color = this.chosenCards.remove(card);
@@ -76,7 +73,7 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
 
 
     @Override
-    protected final void onPlayerSelected(Player player, final MouseEvent triggerEvent) {
+    protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
     }
 
     public Map<Card, ManaCostShard> getConvokeMap() {

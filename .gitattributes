@@ -972,6 +972,7 @@ forge-gui-desktop/src/main/java/forge/toolbox/FUndoManager.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/IDisposable.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/JXButtonPanel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/LayoutHelper.java -text
+forge-gui-desktop/src/main/java/forge/toolbox/MouseTriggerEvent.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/SaveOpenDialog.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/SmartScroller.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/ToolTipListener.java -text
@@ -984,6 +985,7 @@ forge-gui-desktop/src/main/java/forge/toolbox/special/PhaseIndicator.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/PhaseLabel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/PlayerDetailsPanel.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/special/package-info.java -text
+forge-gui-desktop/src/main/java/forge/util/AwtUtil.java -text
 forge-gui-desktop/src/main/java/forge/view/ButtonUtil.java -text
 forge-gui-desktop/src/main/java/forge/view/FDialog.java -text
 forge-gui-desktop/src/main/java/forge/view/FFrame.java -text
@@ -16317,6 +16319,7 @@ forge-gui/src/main/java/forge/gauntlet/GauntletIO.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
+forge-gui/src/main/java/forge/interfaces/ITriggerEvent.java -text
 forge-gui/src/main/java/forge/itemmanager/ColumnDef.java -text
 forge-gui/src/main/java/forge/itemmanager/GroupDef.java -text
 forge-gui/src/main/java/forge/itemmanager/IItemManager.java -text
@@ -16459,7 +16462,6 @@ forge-gui/src/main/java/forge/sound/IAudioClip.java -text
 forge-gui/src/main/java/forge/sound/NoSoundClip.java -text
 forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
-forge-gui/src/main/java/forge/util/AwtUtil.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/Callback.java -text
 forge-gui/src/main/java/forge/util/Evaluator.java -text

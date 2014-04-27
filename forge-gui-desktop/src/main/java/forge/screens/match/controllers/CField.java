@@ -35,6 +35,7 @@ import forge.player.HumanPlay;
 import forge.properties.ForgePreferences;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
+import forge.toolbox.MouseTriggerEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -53,9 +54,12 @@ public class CField implements ICDoc {
     private final VField view;
     private boolean initializedAlready = false;
 
-    private final MouseListener madAvatar = new MouseAdapter() { @Override
+    private final MouseListener madAvatar = new MouseAdapter() {
+        @Override
         public void mousePressed(final MouseEvent e) {
-            CPrompt.SINGLETON_INSTANCE.getInputControl().selectPlayer(player, e); } };
+            CPrompt.SINGLETON_INSTANCE.getInputControl().selectPlayer(player, new MouseTriggerEvent(e));
+        }
+    };
 
     /**
      * Controls Swing components of a player's field instance.

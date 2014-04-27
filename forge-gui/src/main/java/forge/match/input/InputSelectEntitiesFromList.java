@@ -3,8 +3,8 @@ package forge.match.input;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.interfaces.ITriggerEvent;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +25,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
  
     @Override
-    protected void onCardSelected(final Card c, final MouseEvent triggerEvent) {
+    protected void onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
             return;
         }
@@ -33,7 +33,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
 
     @Override
-    protected void onPlayerSelected(final Player p, final MouseEvent triggerEvent) {
+    protected void onPlayerSelected(final Player p, final ITriggerEvent triggerEvent) {
         if (!selectEntity(p)) {
             return;
         }

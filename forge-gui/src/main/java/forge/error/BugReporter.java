@@ -24,10 +24,7 @@ import forge.util.BuildInfo;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.io.*;
-import java.net.URI;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -194,11 +191,8 @@ public class BugReporter {
     public static void copyAndGoToForums(String text) {
         try {
             // copy text to clipboard
-            StringSelection ss = new StringSelection(text);
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-            
-            // browse to url
-            Desktop.getDesktop().browse(new URI(FORUM_URL));
+            GuiBase.getInterface().copyToClipboard(text);
+            GuiBase.getInterface().browseToUrl(FORUM_URL);
         }
         catch (Exception ex) {
             SOptionPane.showMessageDialog("Sorry, a problem occurred while opening the forum in your default browser.",

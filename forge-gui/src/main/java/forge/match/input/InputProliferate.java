@@ -5,15 +5,12 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.interfaces.ITriggerEvent;
 
-import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     private static final long serialVersionUID = -1779224307654698954L;
     private Map<GameEntity, CounterType> chosenCounters = new HashMap<GameEntity, CounterType>();
@@ -45,7 +42,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         if (!card.hasCounters()) {
             return;
         }
@@ -70,7 +67,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected final void onPlayerSelected(Player player, final MouseEvent triggerEvent) {
+    protected final void onPlayerSelected(Player player, final ITriggerEvent triggerEvent) {
         if (player.getPoisonCounters() == 0 || player.hasKeyword("You can't get poison counters")) {
             return;
         }

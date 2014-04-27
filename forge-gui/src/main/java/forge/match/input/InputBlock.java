@@ -25,8 +25,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-
-import java.awt.event.MouseEvent;
+import forge.interfaces.ITriggerEvent;
 
 /**
  * <p>
@@ -98,7 +97,7 @@ public class InputBlock extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    public final void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, (Card)null));

@@ -1,20 +1,19 @@
 package forge.match.input;
 
-import java.awt.event.MouseEvent;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.ITriggerEvent;
 
 
 public interface Input {
     void showMessageInitial();
 
-    void selectCard(Card c, MouseEvent triggerEvent);
+    void selectCard(Card c, ITriggerEvent triggerEvent);
     
     void selectAbility(SpellAbility ab);
 
-    void selectPlayer(Player player, MouseEvent triggerEvent);
+    void selectPlayer(Player player, ITriggerEvent triggerEvent);
 
     void selectButtonOK();
 

@@ -1,9 +1,13 @@
 package forge;
 
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -397,5 +401,16 @@ public class GuiDesktop implements IGuiBase {
         fc.setSelectedFile(defaultFile);
         fc.showSaveDialog(null);
         return fc.getSelectedFile();
+    }
+
+    @Override
+    public void copyToClipboard(String text) {
+        StringSelection ss = new StringSelection(text);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+    }
+
+    @Override
+    public void browseToUrl(String url) throws Exception {
+        Desktop.getDesktop().browse(new URI(url));
     }
 }

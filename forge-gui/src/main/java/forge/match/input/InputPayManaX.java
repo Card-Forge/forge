@@ -7,9 +7,10 @@ import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.ITriggerEvent;
+
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +92,7 @@ public class InputPayManaX extends InputPayMana {
     }
 
     @Override
-    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         // don't allow here the cards that produce only wrong colors
         activateManaAbility(card, this.manaCost);
     }

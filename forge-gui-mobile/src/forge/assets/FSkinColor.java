@@ -169,9 +169,9 @@ public class FSkinColor {
      * Returns opaque (non-alpha) stepped color.
      * Plus for lighter, minus for darker.
      *
-     * @param clr0 {@link java.awt.Color}
+     * @param clr0 {Color}
      * @param step int
-     * @return {@link java.awt.Color}
+     * @return {@link Color}
      */
     public static Color stepColor(Color clr0, int step) {
         float r = clr0.r * 255;

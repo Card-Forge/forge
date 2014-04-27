@@ -23,8 +23,7 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.awt.event.MouseEvent;
+import forge.interfaces.ITriggerEvent;
 
 /**
  * <p>
@@ -51,7 +50,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected abstract void showMessage();
 
     @Override
-    public final void selectPlayer(final Player player, final MouseEvent triggerEvent) {
+    public final void selectPlayer(final Player player, final ITriggerEvent triggerEvent) {
         if (isFinished()) { return; }
         onPlayerSelected(player, triggerEvent);
     }
@@ -72,13 +71,13 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public final void selectCard(final Card c, final MouseEvent triggerEvent) {
+    public final void selectCard(final Card c, final ITriggerEvent triggerEvent) {
         if (isFinished()) { return; }
         onCardSelected(c, triggerEvent);
     }
 
-    protected void onCardSelected(final Card c, final MouseEvent triggerEvent) {}
-    protected void onPlayerSelected(final Player p, final MouseEvent triggerEvent) {}
+    protected void onCardSelected(final Card c, final ITriggerEvent triggerEvent) {}
+    protected void onPlayerSelected(final Player p, final ITriggerEvent triggerEvent) {}
     protected void onCancel() {}
     protected void onOk() {}
 

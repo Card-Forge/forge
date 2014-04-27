@@ -24,8 +24,8 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.ITriggerEvent;
 
-import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
@@ -120,7 +120,7 @@ public class InputProxy implements Observer {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public final void selectPlayer(final Player player, final MouseEvent triggerEvent) {
+    public final void selectPlayer(final Player player, final ITriggerEvent triggerEvent) {
         Input inp = getInput();
         if (inp != null) {
             inp.selectPlayer(player, triggerEvent);
@@ -136,7 +136,7 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.card.Card} object.
      * @param triggerEvent
      */
-    public final void selectCard(final Card card, final MouseEvent triggerEvent) {
+    public final void selectCard(final Card card, final ITriggerEvent triggerEvent) {
         Input inp = getInput();
         if (inp != null) {
             inp.selectCard(card, triggerEvent);

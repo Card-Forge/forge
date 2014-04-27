@@ -19,12 +19,12 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.interfaces.ITriggerEvent;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
-import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -715,7 +715,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 private static final long serialVersionUID = 8338626212893374798L;
 
                 @Override
-                protected void onCardSelected(Card c, MouseEvent triggerEvent) {
+                protected void onCardSelected(Card c, ITriggerEvent triggerEvent) {
                     Card firstCard = Iterables.getFirst(this.selected, null);
                     if(firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c))
                         return;
@@ -805,7 +805,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         @Override
-        protected void onCardSelected(Card c, java.awt.event.MouseEvent triggerEvent) {
+        protected void onCardSelected(Card c, ITriggerEvent triggerEvent) {
             if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
                 return;
             }

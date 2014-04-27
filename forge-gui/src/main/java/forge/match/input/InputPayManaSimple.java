@@ -23,8 +23,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.awt.event.MouseEvent;
+import forge.interfaces.ITriggerEvent;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
@@ -59,7 +58,7 @@ public class InputPayManaSimple extends InputPayMana {
 
     /** {@inheritDoc} */
     @Override
-    protected final void onPlayerSelected(Player selected, final MouseEvent triggerEvent) {
+    protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;

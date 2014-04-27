@@ -4,8 +4,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-
-import java.awt.event.MouseEvent;
+import forge.interfaces.ITriggerEvent;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
     public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility, Player payer) {
@@ -17,7 +16,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     private int phyLifeToLose = 0;
 
     @Override
-    protected final void onPlayerSelected(Player selected, final MouseEvent triggerEvent) {
+    protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         if (player == selected) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;

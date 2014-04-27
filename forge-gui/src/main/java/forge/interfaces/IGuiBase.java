@@ -76,4 +76,6 @@ public interface IGuiBase {
     SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent);
     void hear(LobbyPlayer player, String message);
     int getAvatarCount();
+    void copyToClipboard(String text);
+    void browseToUrl(String url) throws Exception;
 }

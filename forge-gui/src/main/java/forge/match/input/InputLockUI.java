@@ -5,15 +5,12 @@ import forge.GuiBase;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.interfaces.ITriggerEvent;
 import forge.util.ThreadUtil;
 
-import java.awt.event.MouseEvent;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+
 public class InputLockUI implements Input  {
     private final AtomicInteger iCall = new AtomicInteger();
 
@@ -62,9 +59,9 @@ public class InputLockUI implements Input  {
         GuiBase.getInterface().showPromptMessage(message);
     }
 
-    @Override public void selectCard(Card c, MouseEvent triggerEvent) {}
+    @Override public void selectCard(Card c, ITriggerEvent triggerEvent) {}
     @Override public void selectAbility(SpellAbility ab) {}
-    @Override public void selectPlayer(Player player, MouseEvent triggerEvent) {}
+    @Override public void selectPlayer(Player player, ITriggerEvent triggerEvent) {}
     @Override public void selectButtonOK() {}
     @Override public void selectButtonCancel() {}
 
