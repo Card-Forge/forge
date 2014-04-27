@@ -254,6 +254,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     public abstract static class ItemRenderer<T extends InventoryItem> {
         public abstract float getItemHeight();
+        public abstract boolean tap(Entry<T, Integer> value, float x, float y, int count);
         public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
     }
 
@@ -283,6 +284,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     }
                     else {
                         setSelectedIndex(index);
+                    }
+                    if (renderer.tap(value, x, y, count)) {
+                        return true; //don't activate if renderer handles tap
                     }
                     if (count == 2) {
                         itemManager.activateSelectedItems();

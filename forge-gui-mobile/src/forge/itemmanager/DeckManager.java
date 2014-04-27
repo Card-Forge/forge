@@ -33,6 +33,7 @@ import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -255,6 +256,17 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             @Override
             public float getItemHeight() {
                 return IMAGE_SIZE + 2 * FSkinFont.get(12).getFont().getLineHeight() + 4 * FList.PADDING;
+            }
+
+            @Override
+            public boolean tap(Entry<DeckProxy, Integer> value, float x, float y, int count) {
+                float bottomRight = IMAGE_SIZE + 2 * FList.PADDING;
+                if (x <= bottomRight && y <= bottomRight) {
+                    DeckPreferences prefs = DeckPreferences.getPrefs(value.getKey());
+                    prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
+                    return true;
+                }
+                return false;
             }
 
             @Override

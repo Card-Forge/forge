@@ -40,10 +40,13 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
             }
 
             @Override
-            public void drawValue(Graphics g, Entry<InventoryItem, Integer> value,
-                    FSkinFont font, FSkinColor foreColor, boolean pressed,
-                    float x, float y, float w, float h) {
+            public void drawValue(Graphics g, Entry<InventoryItem, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                 
+            }
+
+            @Override
+            public boolean tap(Entry<InventoryItem, Integer> value, float x, float y, int count) {
+                return false;
             }
         };
     }
