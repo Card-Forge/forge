@@ -5,7 +5,9 @@ import java.util.Map.Entry;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.card.CardRenderer;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.menu.FPopupMenu;
@@ -36,12 +38,15 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
         return new ItemRenderer<InventoryItem>() {
             @Override
             public float getItemHeight() {
-                return 0;
+                return CardRenderer.getCardListItemHeight();
             }
 
             @Override
             public void drawValue(Graphics g, Entry<InventoryItem, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                
+                if (value.getKey() instanceof PaperCard) {
+                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), x, y, w, h);
+                }
+                //TODO: render list item for non-card item
             }
 
             @Override

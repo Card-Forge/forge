@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.card.CardRenderer;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.CardCMCFilter;
@@ -156,12 +157,12 @@ public class CardManager extends ItemManager<PaperCard> {
         return new ItemRenderer<PaperCard>() {
             @Override
             public float getItemHeight() {
-                return 0;
+                return CardRenderer.getCardListItemHeight();
             }
 
             @Override
             public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                
+                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), value.getValue(), x, y, w, h);
             }
 
             @Override

@@ -272,7 +272,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             @Override
             public void drawValue(Graphics g, Entry<DeckProxy, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                 DeckProxy deck = value.getKey();
-                
+
                 //draw favorite, name, and color on first line
                 g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
                 x += IMAGE_SIZE + FList.PADDING;

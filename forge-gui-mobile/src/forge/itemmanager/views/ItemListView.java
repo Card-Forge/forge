@@ -296,7 +296,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
+                    renderer.drawValue(g, value, font, foreColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
                 }
             });
             setFontSize(14);

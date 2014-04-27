@@ -1,12 +1,15 @@
 package forge.card;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
@@ -15,12 +18,15 @@ import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
+import forge.card.mana.ManaCost;
 import forge.game.card.Card;
+import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
+import forge.toolbox.FList;
 
 public class CardRenderer {
     private static final FSkinFont NAME_FONT = FSkinFont.get(16);
@@ -149,6 +155,43 @@ public class CardRenderer {
         Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, PT_BOX_TINT);
         Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, PT_BOX_TINT);
         drawCardIdAndPtBox(g, card, idForeColor, ptColor1, ptColor2, x, y, w, h);
+    }
+
+    public static float getCardListItemHeight() {
+        return 2 * MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 4 * FList.PADDING;
+    }
+
+    private static Map<PaperCard, TextureRegion> cardArtCache = new HashMap<PaperCard, TextureRegion>();
+
+    //extract card art from the given card
+    public static TextureRegion getCardArt(PaperCard card) {
+        TextureRegion cardArt = cardArtCache.get(card);
+        if (cardArt == null) {
+            Texture image = ImageCache.getImage(card);
+            int w = image.getWidth();
+            int h = image.getHeight();
+            int x = Math.round(w * 0.065f);
+            int y = Math.round(h * 0.105f);
+            w -= 2 * x;
+            h *= 0.45f;
+            cardArt = new TextureRegion(image, x, y, w, h);
+            cardArtCache.put(card, cardArt);
+        }
+        return cardArt;
+    }
+
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard card, int count, float x, float y, float w, float h) {
+        TextureRegion cardArt = getCardArt(card);
+        float cardArtHeight = h - MANA_SYMBOL_SIZE - FList.PADDING;
+        float cardArtWidth = cardArtHeight * (float)cardArt.getRegionWidth() / (float)cardArt.getRegionHeight();
+        g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
+        x += cardArtWidth;
+
+        ManaCost manaCost = card.getRules().getManaCost();
+        float availableNameWidth = w - CardFaceSymbols.getWidth(manaCost, MANA_SYMBOL_SIZE) - cardArtWidth - FList.PADDING;
+        g.drawText(card.getName(), font, foreColor, x, y, availableNameWidth, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
+        x += availableNameWidth + FList.PADDING;
+        CardFaceSymbols.drawManaCost(g, manaCost, x, y, MANA_SYMBOL_SIZE);
     }
 
     private static void drawCardNameBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
