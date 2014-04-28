@@ -653,6 +653,7 @@ forge-gui-android/libs/gdx-sources.jar -text
 forge-gui-android/libs/gdx.jar -text
 forge-gui-android/libs/x86/libgdx.so -text
 forge-gui-android/lint.xml -text
+forge-gui-android/pom.xml -text
 forge-gui-android/proguard.cfg -text
 forge-gui-android/project.properties -text
 forge-gui-android/res/drawable-hdpi/ic_launcher.png -text
@@ -1194,7 +1195,6 @@ forge-gui-mobile/src/forge/util/LayoutHelper.java -text
 forge-gui-mobile/src/forge/util/PhysicsObject.java -text
 forge-gui-mobile/src/forge/util/Utils.java -text
 forge-gui-mobile/src/forge/util/WaitRunnable.java -text
-forge-gui-mobile/src/forge/view/Main.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
