@@ -181,7 +181,11 @@ public final class QuestUtilCards {
         this.qa.getNewCardList().add(card, qty);
     }
 
+    private static final Predicate<PaperCard> COMMON_PREDICATE = IPaperCard.Predicates.Presets.IS_COMMON;
+    private static final Predicate<PaperCard> UNCOMMON_PREDICATE = IPaperCard.Predicates.Presets.IS_UNCOMMON;
     private static final Predicate<PaperCard> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
+    private static final Predicate<PaperCard> ONLY_RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE;
+    private static final Predicate<PaperCard> MYTHIC_PREDICATE = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
 
 
     /**
@@ -209,6 +213,32 @@ public final class QuestUtilCards {
     }
 
     /**
+     * Adds a random common.
+     * 
+     * @param n the number of cards to add
+     * @return the list of cards added
+     */
+    public List<PaperCard> addRandomCommon(final int n) {
+        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.COMMON_PREDICATE);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        this.addAllCards(newCards);
+        return newCards;
+    }
+
+    /**
+     * Adds a random uncommon.
+     * 
+     * @param n the number of cards to add
+     * @return the list of cards added
+     */
+    public List<PaperCard> addRandomUncommon(final int n) {
+        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.UNCOMMON_PREDICATE);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        this.addAllCards(newCards);
+        return newCards;
+    }
+
+    /**
      * Adds the random rare.
      * 
      * @param n
@@ -217,6 +247,36 @@ public final class QuestUtilCards {
      */
     public List<PaperCard> addRandomRare(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
+
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        this.addAllCards(newCards);
+        return newCards;
+    }
+
+    /**
+     * Adds the random rare.
+     * 
+     * @param n
+     *            the n
+     * @return the list
+     */
+    public List<PaperCard> addRandomRareNotMythic(final int n) {
+        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.ONLY_RARE_PREDICATE);
+
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        this.addAllCards(newCards);
+        return newCards;
+    }
+
+    /**
+     * Adds the random rare.
+     * 
+     * @param n
+     *            the n
+     * @return the list
+     */
+    public List<PaperCard> addRandomMythicRare(final int n) {
+        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.MYTHIC_PREDICATE);
 
         final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
