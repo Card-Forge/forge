@@ -18,8 +18,9 @@
 package forge.screens.match.views;
 
 import forge.ImageCache;
+import forge.card.CardDetailUtil;
+import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -203,43 +204,10 @@ public enum VStack implements IVDoc<CStack> {
                     }
                 });
             }
-            
-            if (spell.getStackDescription().startsWith("Morph ")) {
-                setBackground(new Color(0, 0, 0, 0));
-                setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            }
-            else if (CardUtil.getColors(spell.getSourceCard()).isMulticolor()) {
-                setBackground(new Color(253, 175, 63));
-                setForeground(Color.black);
-            }
-            else if (sourceCard.isBlack()) {
-                setBackground(Color.black);
-                setForeground(Color.white);
-            }
-            else if (sourceCard.isBlue()) {
-                setBackground(new Color(71, 108, 191));
-                setForeground(Color.white);
-            }
-            else if (sourceCard.isGreen()) {
-                setBackground(new Color(23, 95, 30));
-                setForeground(Color.white);
-            }
-            else if (sourceCard.isRed()) {
-                setBackground(new Color(214, 8, 8));
-                setForeground(Color.white);
-            }
-            else if (sourceCard.isWhite()) {
-                setBackground(Color.white);
-                setForeground(Color.black);
-            }
-            else if (sourceCard.isArtifact() || sourceCard.isLand()) {
-                setBackground(new Color(111, 75, 43));
-                setForeground(Color.white);
-            }
-            else {
-                setBackground(new Color(0, 0, 0, 0));
-                setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            }
+
+            DetailColors color = CardDetailUtil.getBorderColor(spell.getSourceCard(), !spell.getStackDescription().startsWith("Morph "));
+            setBackground(new Color(color.r, color.g, color.b));
+            setForeground(FSkin.getHighContrastColor(getBackground()));
         }
 
         @Override

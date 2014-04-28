@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinColor.Colors;
 import forge.assets.ImageCache;
+import forge.card.CardDetailUtil;
+import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
@@ -104,7 +104,7 @@ public class VStack extends FDropDown {
     private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private final boolean isTop;
-        private final FSkinColor foreColor, backColor;
+        private final Color foreColor, backColor;
         private String text;
 
         private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0, boolean isTop0) {
@@ -118,42 +118,9 @@ public class VStack extends FDropDown {
                 text = "(OPTIONAL) " + text;
             }
 
-            if (stackInstance.getStackDescription().startsWith("Morph ")) {
-                backColor = FSkinColor.getStandardColor(209, 156, 8);
-                foreColor = FSkinColor.getStandardColor(Color.BLACK);
-            }
-            else if (CardUtil.getColors(card).isMulticolor()) {
-                backColor = FSkinColor.getStandardColor(253, 175, 63);
-                foreColor = FSkinColor.getStandardColor(Color.BLACK);
-            }
-            else if (card.isBlack()) {
-                backColor = FSkinColor.getStandardColor(Color.BLACK);
-                foreColor = FSkinColor.getStandardColor(Color.WHITE);
-            }
-            else if (card.isBlue()) {
-                backColor = FSkinColor.getStandardColor(71, 108, 191);
-                foreColor = FSkinColor.getStandardColor(Color.WHITE);
-            }
-            else if (card.isGreen()) {
-                backColor = FSkinColor.getStandardColor(23, 95, 30);
-                foreColor = FSkinColor.getStandardColor(Color.WHITE);
-            }
-            else if (card.isRed()) {
-                backColor = FSkinColor.getStandardColor(214, 8, 8);
-                foreColor = FSkinColor.getStandardColor(Color.WHITE);
-            }
-            else if (card.isWhite()) {
-                backColor = FSkinColor.getStandardColor(Color.WHITE);
-                foreColor = FSkinColor.getStandardColor(Color.BLACK);
-            }
-            else if (card.isArtifact() || card.isLand()) {
-                backColor = FSkinColor.getStandardColor(111, 75, 43);
-                foreColor = FSkinColor.getStandardColor(Color.WHITE);
-            }
-            else {
-                backColor = FSkinColor.get(Colors.CLR_OVERLAY);
-                foreColor = FSkinColor.get(Colors.CLR_TEXT);
-            }
+            DetailColors color = CardDetailUtil.getBorderColor(card, !stackInstance.getStackDescription().startsWith("Morph "));
+            backColor = FSkinColor.fromRGB(color.r, color.g, color.b);
+            foreColor = FSkinColor.getHighContrastColor(backColor);
         }
 
         private float getMinHeight(float width) {
