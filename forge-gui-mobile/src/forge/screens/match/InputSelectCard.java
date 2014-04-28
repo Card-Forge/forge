@@ -26,6 +26,7 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FList;
+import forge.toolbox.FOverlay;
 import forge.util.Callback;
 import forge.util.Utils;
 
@@ -161,8 +162,7 @@ public class InputSelectCard {
     }
 
     private static class CardOptionsList<T> extends FList<T> {
-        private static final float ALPHA_COMPOSITE = 0.5f;
-        private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE);
+        private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(FOverlay.ALPHA_COMPOSITE);
 
         private static final Backdrop backdrop = new Backdrop();
         private static final TextRenderer cardOptionRenderer = new TextRenderer(true); //use text renderer to handle mana symbols
@@ -185,7 +185,7 @@ public class InputSelectCard {
                 @Override
                 public void drawValue(Graphics g, Object value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                     if (!pressed) {
-                        foreColor = foreColor.alphaColor(ALPHA_COMPOSITE);
+                        foreColor = foreColor.alphaColor(FOverlay.ALPHA_COMPOSITE);
                     }
                     cardOptionRenderer.drawText(g, value.toString(), font, foreColor, x, y, w, h, true, HAlignment.CENTER, true);
                 }
@@ -367,7 +367,7 @@ public class InputSelectCard {
                         foreColor = FList.FORE_COLOR;
                     }
                     else {
-                        foreColor = FList.FORE_COLOR.alphaColor(ALPHA_COMPOSITE);
+                        foreColor = FList.FORE_COLOR.alphaColor(FOverlay.ALPHA_COMPOSITE);
                     }
                     g.drawText("Zoom", activeList.getFont(), foreColor, 0, y, x, h, false, HAlignment.CENTER, true);
 
@@ -377,7 +377,7 @@ public class InputSelectCard {
                         foreColor = FList.FORE_COLOR;
                     }
                     else {
-                        foreColor = FList.FORE_COLOR.alphaColor(ALPHA_COMPOSITE);
+                        foreColor = FList.FORE_COLOR.alphaColor(FOverlay.ALPHA_COMPOSITE);
                     }
                     g.drawText("Details", activeList.getFont(), foreColor, x, y, w - x, h, false, HAlignment.CENTER, true);
 

@@ -167,7 +167,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public boolean tap(Entry<PaperCard, Integer> value, float x, float y, int count) {
-                return false;
+                return CardRenderer.cardListItemTap(value.getKey(), x, y, count);
             }
         };
     }

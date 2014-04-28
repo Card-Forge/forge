@@ -1090,6 +1090,7 @@ forge-gui-mobile/src/forge/assets/ImageLoader.java -text
 forge-gui-mobile/src/forge/assets/TextRenderer.java -text
 forge-gui-mobile/src/forge/card/CardFaceSymbols.java -text
 forge-gui-mobile/src/forge/card/CardRenderer.java -text
+forge-gui-mobile/src/forge/card/CardZoom.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
 forge-gui-mobile/src/forge/error/BugReportDialog.java -text
@@ -1166,7 +1167,6 @@ forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
 forge-gui-mobile/src/forge/toolbox/FButton.java -text
 forge-gui-mobile/src/forge/toolbox/FCardPanel.java -text
-forge-gui-mobile/src/forge/toolbox/FCardZoom.java -text
 forge-gui-mobile/src/forge/toolbox/FCheckBox.java -text
 forge-gui-mobile/src/forge/toolbox/FComboBox.java -text
 forge-gui-mobile/src/forge/toolbox/FContainer.java -text

@@ -59,7 +59,6 @@ import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FCardZoom;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
@@ -249,10 +248,6 @@ public class FControl {
     }
 
     public static void showMessage(final String s0) {
-        if (FCardZoom.isOpen() && FCardZoom.getMessage().equals(view.getPrompt().getMessage())) {
-            //update zoom view's prompt message if it's shared with main view's prompt's message
-            FCardZoom.setMessage(s0);
-        }
         view.getPrompt().setMessage(s0);
     }
 

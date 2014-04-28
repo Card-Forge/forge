@@ -220,6 +220,17 @@ public class CardRenderer {
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
+    public static boolean cardListItemTap(PaperCard paperCard, float x, float y, int count) {
+        TextureRegion cardArt = getCardArt(paperCard);
+        float cardArtHeight = getCardListItemHeight();
+        float cardArtWidth = cardArtHeight * (float)cardArt.getRegionWidth() / (float)cardArt.getRegionHeight();
+        if (x <= cardArtWidth && y <= cardArtHeight) {
+            CardZoom.show(Card.getCardForUi(paperCard));
+            return true;
+        }
+        return false;
+    }
+
     private static void drawCardNameBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);

@@ -51,6 +51,9 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
 
             @Override
             public boolean tap(Entry<InventoryItem, Integer> value, float x, float y, int count) {
+                if (value.getKey() instanceof PaperCard) {
+                    return CardRenderer.cardListItemTap((PaperCard)value.getKey(), x, y, count);
+                }
                 return false;
             }
         };
