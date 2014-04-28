@@ -25,7 +25,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 /**
  * <p>

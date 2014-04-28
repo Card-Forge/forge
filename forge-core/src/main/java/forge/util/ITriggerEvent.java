@@ -1,4 +1,4 @@
-package forge.interfaces;
+package forge.util;
 
 public interface ITriggerEvent {
     int getButton();

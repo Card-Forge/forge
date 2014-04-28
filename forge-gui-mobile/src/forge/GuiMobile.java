@@ -43,6 +43,7 @@ import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
+import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
@@ -221,7 +222,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (abilities.isEmpty()) {
             return null;
         }

@@ -3,7 +3,7 @@ package forge.match.input;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 
 public interface Input {

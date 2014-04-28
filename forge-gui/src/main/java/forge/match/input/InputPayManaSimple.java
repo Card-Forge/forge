@@ -23,7 +23,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid

@@ -222,6 +222,7 @@ forge-core/src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/IHasName.java -text
 forge-core/src/main/java/forge/util/IItemReader.java -text
 forge-core/src/main/java/forge/util/IItemSerializer.java -text
+forge-core/src/main/java/forge/util/ITriggerEvent.java -text
 forge-core/src/main/java/forge/util/ItemPool.java -text
 forge-core/src/main/java/forge/util/ItemPoolSorter.java -text
 forge-core/src/main/java/forge/util/Lang.java -text
@@ -16319,7 +16320,6 @@ forge-gui/src/main/java/forge/gauntlet/GauntletIO.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
-forge-gui/src/main/java/forge/interfaces/ITriggerEvent.java -text
 forge-gui/src/main/java/forge/itemmanager/ColumnDef.java -text
 forge-gui/src/main/java/forge/itemmanager/GroupDef.java -text
 forge-gui/src/main/java/forge/itemmanager/IItemManager.java -text

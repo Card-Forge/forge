@@ -2,7 +2,7 @@ package forge.toolbox;
 
 import java.awt.event.MouseEvent;
 
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 //MouseEvent wrapper used for passing trigger to input classes
 public class MouseTriggerEvent implements ITriggerEvent {
@@ -15,5 +15,9 @@ public class MouseTriggerEvent implements ITriggerEvent {
     @Override
     public int getButton() {
         return event.getButton();
+    }
+
+    public MouseEvent getMouseEvent() {
+        return event;
     }
 }

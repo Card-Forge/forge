@@ -9,7 +9,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

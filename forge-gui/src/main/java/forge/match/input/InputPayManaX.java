@@ -7,7 +7,7 @@ import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 import org.apache.commons.lang3.StringUtils;
 

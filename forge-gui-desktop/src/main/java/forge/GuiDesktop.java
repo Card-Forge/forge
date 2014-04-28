@@ -66,8 +66,10 @@ import forge.screens.match.views.VPrompt;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PhaseLabel;
 import forge.util.BuildInfo;
+import forge.util.ITriggerEvent;
 
 public class GuiDesktop implements IGuiBase {
     @Override
@@ -230,7 +232,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
                 return null;
@@ -283,7 +285,7 @@ public class GuiDesktop implements IGuiBase {
                     MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
                 }
             });
-            MouseEvent mouseEvent = (MouseEvent) triggerEvent;
+            MouseEvent mouseEvent = ((MouseTriggerEvent)triggerEvent).getMouseEvent();
             menu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
         }
 

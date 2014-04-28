@@ -19,10 +19,10 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-import forge.interfaces.ITriggerEvent;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
+import forge.util.ITriggerEvent;
 import forge.util.Lang;
 
 import java.util.*;

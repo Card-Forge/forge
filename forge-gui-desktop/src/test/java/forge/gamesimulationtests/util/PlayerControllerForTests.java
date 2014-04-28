@@ -47,6 +47,7 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.*;
 import forge.player.HumanPlay;
 import forge.item.PaperCard;
+import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -430,7 +431,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
+	public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
 		return getAbilityToPlay(abilities);
 	}
 

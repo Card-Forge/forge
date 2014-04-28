@@ -29,6 +29,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.ITriggerEvent;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -108,7 +109,7 @@ public abstract class PlayerController {
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
     public final SpellAbility getAbilityToPlay(List<SpellAbility> abilities) { return getAbilityToPlay(abilities, null); }
-    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent);
+    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
     //public abstract void playFromSuspend(Card c);
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);

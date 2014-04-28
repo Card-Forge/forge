@@ -23,7 +23,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 

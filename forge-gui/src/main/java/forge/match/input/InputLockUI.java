@@ -5,7 +5,7 @@ import forge.GuiBase;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;

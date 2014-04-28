@@ -1,10 +1,10 @@
 package forge.util;
 
 import forge.item.PaperCard;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -131,10 +131,12 @@ public class TextUtil {
         return sb.toString();
     }
 
+    private static final char CHAR_UNDEFINED = (char)65535; //taken from KeyEvent.CHAR_UNDEFINED which can't live here since awt library can't be referenced
+
     public static boolean isPrintableChar(char c) {
         Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
         return (!Character.isISOControl(c)) &&
-                c != KeyEvent.CHAR_UNDEFINED &&
+                c != CHAR_UNDEFINED &&
                 block != null &&
                 block != Character.UnicodeBlock.SPECIALS;
     }

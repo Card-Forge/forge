@@ -42,6 +42,7 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 
 import org.apache.commons.lang3.StringUtils;
@@ -71,7 +72,7 @@ public class PlayerControllerAi extends PlayerController {
     }
     
 
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         if (abilities.size() == 0) {
             return null;
         }

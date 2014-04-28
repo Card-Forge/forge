@@ -49,6 +49,7 @@ import forge.item.PaperCard;
 import forge.match.input.*;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
@@ -77,7 +78,7 @@ public class PlayerControllerHuman extends PlayerController {
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, Object triggerEvent) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
         return GuiBase.getInterface().getAbilityToPlay(abilities, triggerEvent);
     }
 

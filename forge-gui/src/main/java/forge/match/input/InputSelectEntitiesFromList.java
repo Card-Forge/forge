@@ -3,7 +3,7 @@ package forge.match.input;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;

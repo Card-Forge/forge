@@ -24,7 +24,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 import java.util.Observable;
 import java.util.Observer;

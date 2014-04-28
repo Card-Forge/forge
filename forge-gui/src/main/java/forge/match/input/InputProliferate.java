@@ -5,7 +5,7 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
-import forge.interfaces.ITriggerEvent;
+import forge.util.ITriggerEvent;
 
 import java.util.*;
 import java.util.Map.Entry;

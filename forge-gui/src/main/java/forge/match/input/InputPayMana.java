@@ -16,9 +16,9 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
-import forge.interfaces.ITriggerEvent;
 import forge.player.HumanPlay;
 import forge.util.Evaluator;
+import forge.util.ITriggerEvent;
 
 import org.apache.commons.lang3.StringUtils;
 
