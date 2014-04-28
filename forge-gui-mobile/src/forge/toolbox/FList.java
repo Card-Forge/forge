@@ -144,12 +144,12 @@ public class FList<E> extends FScrollPane {
     public void scrollIntoView(int index) {
         float itemTop = getItemTop(index);
         if (itemTop < 0) {
-            setScrollTop(itemTop);
+            setScrollTop(getScrollTop() + itemTop);
         }
         else {
             float itemBottom = itemTop + renderer.getItemHeight();
             if (itemBottom > getHeight()) {
-                setScrollTop(itemBottom - getHeight());
+                setScrollTop(getScrollTop() + itemBottom - getHeight());
             }
         }
     }
