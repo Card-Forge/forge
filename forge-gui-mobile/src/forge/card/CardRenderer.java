@@ -158,16 +158,16 @@ public class CardRenderer {
     }
 
     public static float getCardListItemHeight() {
-        return 2 * MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 4 * FList.PADDING;
+        return MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 3 * FList.PADDING + 1;
     }
 
     private static Map<PaperCard, TextureRegion> cardArtCache = new HashMap<PaperCard, TextureRegion>();
 
     //extract card art from the given card
-    public static TextureRegion getCardArt(PaperCard card) {
-        TextureRegion cardArt = cardArtCache.get(card);
+    public static TextureRegion getCardArt(PaperCard paperCard) {
+        TextureRegion cardArt = cardArtCache.get(paperCard);
         if (cardArt == null) {
-            Texture image = ImageCache.getImage(card);
+            Texture image = ImageCache.getImage(paperCard);
             int w = image.getWidth();
             int h = image.getHeight();
             int x = Math.round(w * 0.065f);
@@ -175,23 +175,49 @@ public class CardRenderer {
             w -= 2 * x;
             h *= 0.45f;
             cardArt = new TextureRegion(image, x, y, w, h);
-            cardArtCache.put(card, cardArt);
+            cardArtCache.put(paperCard, cardArt);
         }
         return cardArt;
     }
 
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard card, int count, float x, float y, float w, float h) {
-        TextureRegion cardArt = getCardArt(card);
-        float cardArtHeight = h - MANA_SYMBOL_SIZE - FList.PADDING;
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, float x, float y, float w, float h) {
+        TextureRegion cardArt = getCardArt(paperCard);
+        float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * (float)cardArt.getRegionWidth() / (float)cardArt.getRegionHeight();
         g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
         x += cardArtWidth;
 
-        ManaCost manaCost = card.getRules().getManaCost();
+        CardRules cardRules = paperCard.getRules();
+        ManaCost manaCost = cardRules.getManaCost();
         float availableNameWidth = w - CardFaceSymbols.getWidth(manaCost, MANA_SYMBOL_SIZE) - cardArtWidth - FList.PADDING;
-        g.drawText(card.getName(), font, foreColor, x, y, availableNameWidth, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
+        String name = paperCard.getName();
+        if (count > 0) { //preface name with count if applicable
+            name = count + " " + name;
+        }
+        g.drawText(name, font, foreColor, x, y, availableNameWidth, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
         x += availableNameWidth + FList.PADDING;
         CardFaceSymbols.drawManaCost(g, manaCost, x, y, MANA_SYMBOL_SIZE);
+
+        x -= availableNameWidth + FList.PADDING;
+        y += MANA_SYMBOL_SIZE + FList.PADDING + 1;
+
+        FSkinFont typeFont = FSkinFont.get(12);
+        float availableTypeWidth = w - cardArtWidth;
+        float lineHeight = typeFont.getFont().getLineHeight();
+        String set = paperCard.getEdition();
+        if (!StringUtils.isEmpty(set)) {
+            float setWidth = getSetWidth(typeFont, set);
+            availableTypeWidth -= setWidth;
+            drawSetLabel(g, typeFont, set, paperCard.getRarity(), x + availableTypeWidth + SET_BOX_MARGIN, y - SET_BOX_MARGIN, setWidth, lineHeight + 2 * SET_BOX_MARGIN);
+        }
+        String type = cardRules.getType().toString();
+        if (cardRules.getType().isCreature()) { //include P/T or Loyalty at end of type
+            type += " (" + cardRules.getPower() + " / " + cardRules.getToughness() + ")";
+        }
+        else if (cardRules.getType().isPlaneswalker()) {
+            type += " (" + cardRules.getInitialLoyalty() + ")";
+        }
+        g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
     private static void drawCardNameBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
