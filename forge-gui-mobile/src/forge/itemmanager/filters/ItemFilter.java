@@ -2,9 +2,6 @@ package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
 
-import forge.Forge.Graphics;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinColor.Colors;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FContainer;
@@ -16,8 +13,7 @@ import forge.util.LayoutHelper;
 public abstract class ItemFilter<T extends InventoryItem> {
     public static final float PADDING = 3;
     public static final int DEFAULT_FONT_SIZE = 11;
-    public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT_SIZE) + 2 * PADDING;
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT_SIZE) + PADDING;
 
     protected final ItemManager<? super T> itemManager;
     private FilterPanel panel;
@@ -100,12 +96,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
         @Override
         protected void doLayout(float width, float height) {
-            widget.setBounds(0, PADDING, width, height - 2 * PADDING);
-        }
-
-        public void drawOverlay(Graphics g) {
-            float y = getHeight() + 1;
-            g.drawLine(1, FORE_COLOR, 0, y, getWidth(), y);
+            widget.setBounds(0, PADDING, width, height - PADDING);
         }
     }
 
