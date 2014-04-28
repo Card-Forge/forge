@@ -104,6 +104,10 @@ public class CField implements ICDoc {
                 if (player.getLobbyPlayer() != CField.this.viewer) {
                     return;
                 }
+
+                CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(c, null);
+                // Temporarily commenting out the below to route, Flashback cards through the InputProxy
+                /*
                 final Game game = player.getGame();
                 // TODO: "can play" check needed!
 
@@ -116,6 +120,7 @@ public class CField implements ICDoc {
                     		game.getStack().addAllTirggeredAbilitiesToStack();
                     }});
                 }
+                */
             }
         };
 
