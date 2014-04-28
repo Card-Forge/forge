@@ -121,6 +121,10 @@ public class SettingsScreen extends FScreen {
                 "Randomize Card Art",
                 "Generates cards with random art in generated limited mode card pools."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SCALE_LARGER,
+                "Scale Image Larger",
+                "Allows card pictures to be expanded larger than their original size."),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
                 "Hide Reminder Text",
                 "Hide reminder text in Card Detail pane."),
