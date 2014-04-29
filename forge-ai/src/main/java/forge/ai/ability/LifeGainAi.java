@@ -158,4 +158,9 @@ public class LifeGainAi extends SpellAbilityAi {
 
         return true;
     }
+    
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    	return doTriggerAINoCost(ai, sa, true);
+    }
 }
