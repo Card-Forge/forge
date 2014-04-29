@@ -8,6 +8,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         ret.append(numCards);
         ret.append(" cards of ");
         for (final Player p : tgtPlayers) {
-            ret.append(p.getName());
-            ret.append("s");
+            ret.append(Lang.getPossesive(p.getName()));
             ret.append(" & ");
         }
         ret.delete(ret.length() - 3, ret.length());
