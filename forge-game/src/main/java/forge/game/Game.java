@@ -321,7 +321,7 @@ public class Game {
 
         final GameOutcome result = new GameOutcome(reason, getRegisteredPlayers());
         result.setTurnsPlayed(getPhaseHandler().getTurn());
-
+        
         this.outcome = result;
         match.addGamePlayed(this);
 

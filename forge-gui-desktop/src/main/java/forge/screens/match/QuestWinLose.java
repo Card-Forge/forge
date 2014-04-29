@@ -74,7 +74,7 @@ public class QuestWinLose extends ControlWinLose {
 
     /** String constraint parameters for title blocks and cardviewer blocks. */
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
-    private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_TEXT = "w 95%!,, h 220px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS_LARGE = "w 95%!, h 600px!, gap 0 0 0 20px";
 
@@ -137,7 +137,6 @@ public class QuestWinLose extends ControlWinLose {
                     qc.getCards().loseCards(anteResult.lostCards);
                 this.anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
             }
-            System.err.println(outcome.getWinningPlayer() + ", " + outcome.getLastTurnNumber());
         }
 
         if (!lastGame.getMatch().isMatchOver()) {
@@ -320,7 +319,8 @@ public class QuestWinLose extends ControlWinLose {
         
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
-
+        int lifeDifferenceCredits = 0;
+        
         LobbyPlayer localHuman = FServer.getLobby().getQuestPlayer();
         for (final GameOutcome game : lastGame.getMatch().getPlayedGames()) {
             if (!game.isWinner(localHuman)) {
@@ -363,7 +363,7 @@ public class QuestWinLose extends ControlWinLose {
 
                 if (altReward > 0) {
                     credGameplay += altReward;
-                    sb.append(String.format("Alternate win condition: <u>%s</u>! " + "Bonus: %d credits.<br>",
+                    sb.append(String.format("Alternate win condition: <u>%s</u>! Bonus: %d credits.<br>",
                             winConditionName, altReward));
                 }
             }
@@ -373,7 +373,7 @@ public class QuestWinLose extends ControlWinLose {
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
-                sb.append(String.format("Mulliganed to zero and still won! " + "Bonus: %d credits.<br>", mulliganReward));
+                sb.append(String.format("Mulliganed to zero and still won! Bonus: %d credits.<br>", mulliganReward));
             }
 
             // Early turn bonus
@@ -397,13 +397,22 @@ public class QuestWinLose extends ControlWinLose {
                 credGameplay += turnCredits;
                 sb.append(String.format(" Bonus: %d credits.<br>", turnCredits));
             }
+            
+            if (game.getLifeDelta() > 50) {
+                lifeDifferenceCredits = Math.min((game.getLifeDelta() - 40) / 10, 300);
+            }
+            
         } // End for(game)
+        
+        if (lifeDifferenceCredits > 0) {
+            sb.append(String.format("Life total difference: %d credits.<br>", lifeDifferenceCredits));
+        }
 
         // Undefeated bonus
         if (hasNeverLost) {
             credUndefeated += FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_UNDEFEATED);
             final int reward = FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_UNDEFEATED);
-            sb.append(String.format("You have not lost once! " + "Bonus: %d credits.<br>", reward));
+            sb.append(String.format("You have not lost once! Bonus: %d credits.<br>", reward));
         }
 
         // Estates bonus

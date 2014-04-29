@@ -69,6 +69,7 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
     }
 
     private int lastTurnNumber = 0;
+    private int lifeDelta = 0;
     private final List<Pair<LobbyPlayer, PlayerStatistics>> playerRating = new ArrayList<Pair<LobbyPlayer, PlayerStatistics>>(2);
     private final Iterable<Player> players;
     public final Map<Player, AnteResult> anteResult = new TreeMap<>();
@@ -80,6 +81,24 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
         for (final Player n : list) {
             this.playerRating.add(Pair.of(n.getLobbyPlayer(), n.getStats()));
         }
+        calculateLifeDelta();
+    }
+    
+    private void calculateLifeDelta() {
+        
+        int opponentsHealth = 0;
+        int winnersHealth = 0;
+        
+        for (Player p : players) {
+            if (p == this.getWinningPlayer()) {
+                winnersHealth = p.getLife();
+            } else {
+                opponentsHealth += p.getLife();
+            }
+        }
+        
+        lifeDelta = Math.max(0, winnersHealth -= opponentsHealth);
+        
     }
 
     public boolean isDraw() {
@@ -153,6 +172,14 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
      */
     public int getLastTurnNumber() {
         return this.lastTurnNumber;
+    }
+    
+    /**
+     * 
+     * @return The difference in life totals between the winner and losers. 
+     */
+    public int getLifeDelta() {
+        return lifeDelta;
     }
 
     /**

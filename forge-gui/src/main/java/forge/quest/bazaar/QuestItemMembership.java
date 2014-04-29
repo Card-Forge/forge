@@ -47,6 +47,6 @@ public class QuestItemMembership extends QuestItemBasic {
     @Override
     public final int getBuyingPrice(QuestAssets qA) {
         int level = qA.getItemLevel(this.getItemType());
-        return (int) (getBasePrice() * (Math.pow(level + 2, 2)));
+        return (int) (getBasePrice() * (Math.pow(level + 3, 2)));
     }
 }
