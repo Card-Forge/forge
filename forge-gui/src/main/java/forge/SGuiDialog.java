@@ -1,11 +1,7 @@
 package forge;
 
-import forge.FThreads;
 import forge.game.card.Card;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
 
 /** 
  * Holds player interactions using standard windows 
@@ -25,29 +21,20 @@ public class SGuiDialog {
     }
     
     public static boolean confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options) {
-        Callable<Boolean> confirmTask = new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                if (c != null) {
+        if (c != null) {
+            FThreads.invokeInEdtAndWait(new Runnable() {
+                @Override
+                public void run() {
                     GuiBase.getInterface().setCard(c);
                 }
-
-                final String title = c == null ? "Question" : c.getName() + " - Ability";
-                String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
-                String[] opts = options == null ? defaultConfirmOptions : options;
-                int answer = SOptionPane.showOptionDialog(questionToUse, title, SOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
-                return answer == 0;
-            }};
-
-        FutureTask<Boolean> future = new FutureTask<Boolean>(confirmTask);
-        FThreads.invokeInEdtAndWait(future);
-        try { 
-            return future.get().booleanValue();
+            });
         }
-        catch (Exception e) { // should be no exception here
-            e.printStackTrace();
-        }
-        return false;
+
+        final String title = c == null ? "Question" : c.getName() + " - Ability";
+        String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
+        String[] opts = options == null ? defaultConfirmOptions : options;
+        int answer = SOptionPane.showOptionDialog(questionToUse, title, SOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
+        return answer == 0;
     }
 
     /**
@@ -63,11 +50,6 @@ public class SGuiDialog {
     }
 
     public static void message(final String message, final String title) {
-        FThreads.invokeInEdtAndWait(new Runnable() {
-            @Override
-            public void run() {
-                SOptionPane.showMessageDialog(message, title, null);
-            }
-        });
+        SOptionPane.showMessageDialog(message, title, null);
     }
 }
