@@ -617,6 +617,7 @@ public class QuestWinLose extends ControlWinLose {
                 if (wins + 1 % 5 == 0) { maxChoices++; }
                 if (wins + 1 % 20 == 0) { maxChoices++; }
                 if (wins + 1 % 50 == 0) { maxChoices++; }
+                maxChoices += qData.getAssets().getItemLevel(QuestItemType.MEMBERSHIP_TOKEN);
             }
 
             List<CardEdition> options = new ArrayList<CardEdition>();
