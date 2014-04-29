@@ -282,6 +282,12 @@ public class SettingsScreen extends FScreen {
 
         @Override
         public void drawValue(Graphics g, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+            float offset = w * INSETS_FACTOR - FList.PADDING; //increase padding for settings items
+            x += offset;
+            y += offset;
+            w -= 2 * offset;
+            h -= 2 * offset;
+
             float totalHeight = h;
             h = font.getFont().getMultiLineBounds(value.label).height + 5;
 
