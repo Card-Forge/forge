@@ -14,6 +14,7 @@
     <stall name="Banker" displayName="Bank of Sarpadia" icon="ICO_COIN">
       <description>A large book large enough to be seen from the outside rests on the Banker&apos;s desk.</description>
       <items>
+        <string>Bank Membership</string>
         <string>Estates</string>
         <string>Lucky Coin</string>
         <string>Cash Stakes</string>
@@ -104,6 +105,12 @@ Effect: You may have each match be best of 5 instead of 3.</description>
       
 
 Effect: Cards lost in an ante match will be available immediately following the match in the Card Shop.</description>
+    </item>
+    <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_MEMBERSHIP">
+      <description>A token certifying you as a member of the bank, giving you a greater selection of booster packs when you win. 
+      
+
+Effect: Adds one more booster pack to the pack selection after you win.</description>
     </item>
   </questItems>
   <pets>

@@ -16432,6 +16432,7 @@ forge-gui/src/main/java/forge/quest/bazaar/QuestItemBasic.java svneol=native#tex
 forge-gui/src/main/java/forge/quest/bazaar/QuestItemCharmOfVigor.java -text
 forge-gui/src/main/java/forge/quest/bazaar/QuestItemElixir.java -text
 forge-gui/src/main/java/forge/quest/bazaar/QuestItemEstates.java svneol=native#text/plain
+forge-gui/src/main/java/forge/quest/bazaar/QuestItemMembership.java -text
 forge-gui/src/main/java/forge/quest/bazaar/QuestItemPoundFlesh.java -text
 forge-gui/src/main/java/forge/quest/bazaar/QuestItemType.java -text
 forge-gui/src/main/java/forge/quest/bazaar/QuestItemZeppelin.java svneol=native#text/plain

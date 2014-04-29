@@ -44,7 +44,9 @@ public enum QuestItemType {
     /** The AMULET. */
     CHARM("Charm of Vigor", QuestItemCharmOfVigor.class, QuestItemCondition.class),
 
-    CASH_STAKES("Cash Stakes", QuestItemBasic.class, QuestItemCondition.class);
+    CASH_STAKES("Cash Stakes", QuestItemBasic.class, QuestItemCondition.class),
+
+    MEMBERSHIP_TOKEN("Bank Membership", QuestItemMembership.class, QuestItemCondition.class);
 
     private final String saveFileKey;
     private final Class<? extends QuestItemBasic> bazaarControllerClass;
