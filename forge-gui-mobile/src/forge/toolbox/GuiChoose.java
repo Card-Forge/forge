@@ -263,40 +263,10 @@ public class GuiChoose {
     public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode, final Callback<List<T>> callback) {
         // An input box for handling the order of choices.
-
-        /*Callable<List<T>> callable = new Callable<List<T>>() {
-            @Override
-            public List<T> call() throws Exception {
-                DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
-                dual.setSecondColumnLabelText(top);
-
-                dual.setSideboardMode(sideboardingMode);
-
-                dual.setTitle(title);
-                dual.pack();
-                dual.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                if (referenceCard != null) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
-                    // MARKED FOR UPDATE
-                }
-                dual.setVisible(true);
-
-                List<T> objects = dual.getOrderedList();
-
-                dual.dispose();
-                GuiUtils.clearPanelSelections();
-                return objects;
-            }
-        };
-
-        FutureTask<List<T>> ft = new FutureTask<List<T>>(callable);
-        FThreads.invokeInEdtAndWait(ft);
-        try {
-            return ft.get();
-        } catch (Exception e) { // we have waited enough
-            e.printStackTrace();
-        }*/
-        callback.run(null);
+        DualListBox<T> dual = new DualListBox<T>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, callback);
+        dual.setSecondColumnLabelText(top);
+        dual.setSideboardMode(sideboardingMode);
+        dual.show();
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine

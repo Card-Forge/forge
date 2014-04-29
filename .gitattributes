@@ -1166,6 +1166,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestScreen.java -text
 forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
+forge-gui-mobile/src/forge/toolbox/DualListBox.java -text
 forge-gui-mobile/src/forge/toolbox/FButton.java -text
 forge-gui-mobile/src/forge/toolbox/FCardPanel.java -text
 forge-gui-mobile/src/forge/toolbox/FCheckBox.java -text

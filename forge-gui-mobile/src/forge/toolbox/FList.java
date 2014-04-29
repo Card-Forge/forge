@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -13,7 +14,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.util.Utils;
 
-public class FList<E> extends FScrollPane {
+public class FList<E> extends FScrollPane implements Iterable<E> {
     public static final float PADDING = 3;
     public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
@@ -59,6 +60,9 @@ public class FList<E> extends FScrollPane {
         items.clear();
     }
 
+    public List<E> extractListData() {
+        return new ArrayList<E>(items); //create copy to avoid modifying items
+    }
     public void setListData(Iterable<E> items0) {
         clear();
         for (E item : items0) {
@@ -232,5 +236,10 @@ public class FList<E> extends FScrollPane {
         public void drawValue(Graphics g, V value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
             g.drawText(value.toString(), font, color, x, y, w, h, false, HAlignment.LEFT, true);
         }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return items.iterator();
     }
 }
