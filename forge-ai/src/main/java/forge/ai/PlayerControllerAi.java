@@ -100,6 +100,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public boolean isAI() {
+        return true;
+    }
+
+    @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType) {
         // AI does not know how to sideboard
         return null;

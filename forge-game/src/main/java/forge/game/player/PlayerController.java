@@ -94,6 +94,10 @@ public abstract class PlayerController {
         return phase.isBefore(autoPassUntilPhase);
     }
 
+    public boolean isAI() {
+        return false;
+    }
+
     // Triggers preliminary choice: ask, decline or play
     private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();
 

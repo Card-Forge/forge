@@ -955,6 +955,7 @@ public class PhaseHandler implements java.io.Serializable {
                 game.fireEvent(new GameEventPlayerPriority(getPlayerTurn(), getPhase(), getPriorityPlayer()));
                 SpellAbility chosenSa = null;
 
+                int loopCount = 0;
                 do {
                     
                     boolean addedAnythingToStack = false;
@@ -976,7 +977,12 @@ public class PhaseHandler implements java.io.Serializable {
 
                     pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                     pPlayerPriority.getController().playChosenSpellAbility(chosenSa);
-                } while (chosenSa != null);
+                    loopCount++;
+                } while (chosenSa != null && (loopCount < 999 || !pPlayerPriority.getController().isAI()));
+                
+                if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
+                	System.out.print("AI looped too much with: " + chosenSa);
+                }
 
                 if (DEBUG_PHASES) {
                     sw.stop();
