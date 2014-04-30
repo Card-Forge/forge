@@ -3,6 +3,7 @@ package forge.toolbox;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
@@ -59,8 +60,10 @@ public class DualListBox<T> extends FDialog {
                 for (int index : sourceList.selectedIndices) {
                     selected.add(sourceList.getItemAt(index));
                 }
+                sourceList.selectedIndices.clear();
                 for (T item : selected) {
                     sourceList.removeItem(item);
+                    destList.selectedIndices.add(destList.getCount());
                     destList.addItem(item);
                 }
                 setButtonState();
@@ -76,8 +79,10 @@ public class DualListBox<T> extends FDialog {
                 for (int index : destList.selectedIndices) {
                     selected.add(destList.getItemAt(index));
                 }
+                destList.selectedIndices.clear();
                 for (T item : selected) {
                     destList.removeItem(item);
+                    sourceList.selectedIndices.add(sourceList.getCount());
                     sourceList.addItem(item);
                 }
                 setButtonState();
@@ -86,6 +91,12 @@ public class DualListBox<T> extends FDialog {
 
         sourceList = add(new ChoiceList(sourceElements, onAdd));
         destList = add(new ChoiceList(destElements, onRemove));
+        if (sourceList.getCount() > 0) { //select first items by default if possible
+            sourceList.selectedIndices.add(0);
+        }
+        if (destList.getCount() > 0) {
+            destList.selectedIndices.add(0);
+        }
 
         // Dual List control buttons
         addButton = add(new FButton(">", onAdd));
@@ -121,7 +132,7 @@ public class DualListBox<T> extends FDialog {
             }
         }));
 
-        selectOrder = add(new FLabel.Builder().align(HAlignment.CENTER).text("Select Order:").build());
+        selectOrder = add(new FLabel.Builder().align(HAlignment.CENTER).text("Select Order").build());
         orderedLabel = add(new FLabel.Builder().align(HAlignment.CENTER).build());
 
         setButtonState();
@@ -130,30 +141,30 @@ public class DualListBox<T> extends FDialog {
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float x = FOptionPane.PADDING;
-        float y = FOptionPane.PADDING;
+        float y = FOptionPane.PADDING / 2;
         width -= 2 * x;
+        maxHeight -= 2 * (VPrompt.HEIGHT - FDialog.INSETS);
 
         float buttonHeight = FOptionPane.BUTTON_HEIGHT;
         float labelHeight = selectOrder.getAutoSizeBounds().height;
-        float listHeight = (maxHeight - 2 * labelHeight - 2 * buttonHeight - 3 * FOptionPane.PADDING - FOptionPane.GAP_BELOW_BUTTONS) / 2;
+        float listHeight = (maxHeight - 2 * labelHeight - buttonHeight - FOptionPane.PADDING - 2 * FDialog.INSETS) / 2;
         selectOrder.setBounds(x, y, width, labelHeight);
         y += labelHeight;
         sourceList.setBounds(x, y, width, listHeight);
-        y += listHeight + FOptionPane.PADDING;
-        
+        y += listHeight + FOptionPane.PADDING / 2;
+
         float gapBetweenButtons = FOptionPane.PADDING / 2;
         float buttonWidth = (width - 3 * gapBetweenButtons) / 4;
         float dx = buttonWidth + gapBetweenButtons;
-        addButton.setBounds(x, y, buttonWidth, buttonHeight);
+        /*addButton.setBounds(x, y, buttonWidth, buttonHeight);
         x += dx;
         addAllButton.setBounds(x, y, buttonWidth, buttonHeight);
         x += dx;
         removeButton.setBounds(x, y, buttonWidth, buttonHeight);
         x += dx;
-        removeAllButton.setBounds(x, y, buttonWidth, buttonHeight);
+        removeAllButton.setBounds(x, y, buttonWidth, buttonHeight);*/
 
-        x = FList.PADDING;
-        y += buttonHeight + FOptionPane.PADDING;
+        x = FOptionPane.PADDING;
         orderedLabel.setBounds(x, y, width, labelHeight);
         y += labelHeight;
         destList.setBounds(x, y, width, listHeight);
@@ -188,18 +199,24 @@ public class DualListBox<T> extends FDialog {
     }
 
     private void addAll() {
+        destList.selectedIndices.clear();
         for (T item : sourceList) {
+            destList.selectedIndices.add(destList.getCount());
             destList.addItem(item);
         }
         sourceList.clear();
+        sourceList.selectedIndices.clear();
         setButtonState();
     }
 
     private void removeAll() {
+        sourceList.selectedIndices.clear();
         for (T item : destList) {
+            sourceList.selectedIndices.add(sourceList.getCount());
             sourceList.addItem(item);
         }
         destList.clear();
+        destList.selectedIndices.clear();
         setButtonState();
     }
 
@@ -262,7 +279,7 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         protected void drawBackground(Graphics g) {
-            g.fillRect(ListChooser.BACK_COLOR, 0, 0, getWidth(), getHeight());
+            //draw no background
         }
 
         @Override
@@ -278,7 +295,7 @@ public class DualListBox<T> extends FDialog {
             if (index % 2 == 1) {
                 return ListChooser.ALT_ITEM_COLOR;
             }
-            return null;
+            return ListChooser.ITEM_COLOR;
         }
 
         @Override

@@ -62,8 +62,8 @@ import java.util.List;
  * @version $Id: ListChooser.java 25183 2014-03-14 23:09:45Z drdev $
  */
 public class ListChooser<T> extends FContainer {
-    public static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    public static final FSkinColor ALT_ITEM_COLOR = BACK_COLOR.getContrastColor(-20);
+    public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
+    public static final FSkinColor ALT_ITEM_COLOR = ITEM_COLOR.getContrastColor(-20);
     public static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     public static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     public static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
@@ -250,7 +250,7 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         protected void drawBackground(Graphics g) {
-            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+            //draw no background
         }
 
         @Override
@@ -266,7 +266,7 @@ public class ListChooser<T> extends FContainer {
             if (index % 2 == 1) {
                 return ALT_ITEM_COLOR;
             }
-            return null;
+            return ITEM_COLOR;
         }
 
         @Override
