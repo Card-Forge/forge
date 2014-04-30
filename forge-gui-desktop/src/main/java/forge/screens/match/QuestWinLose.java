@@ -375,11 +375,11 @@ public class QuestWinLose extends ControlWinLose {
                 credGameplay += mulliganReward;
                 sb.append(String.format("Mulliganed to zero and still won! Bonus: %d credits.<br>", mulliganReward));
             }
-
+            
             // Early turn bonus
             final int winTurn = game.getLastTurnNumber();
             final int turnCredits = this.getCreditsRewardForWinByTurn(winTurn);
-
+            
             if (winTurn == 0) {
                 throw new UnsupportedOperationException("QuestWinLose > "
                         + "turn calculation error: Zero turn win");
@@ -392,14 +392,14 @@ public class QuestWinLose extends ControlWinLose {
             } else if (winTurn <= 15) {
                 sb.append("Won by turn 15!");
             }
-
+            
             if (turnCredits > 0) {
                 credGameplay += turnCredits;
                 sb.append(String.format(" Bonus: %d credits.<br>", turnCredits));
             }
             
-            if (game.getLifeDelta() > 50) {
-                lifeDifferenceCredits = Math.min((game.getLifeDelta() - 40) / 10, 300);
+            if (game.getLifeDelta() >= 50) {
+                lifeDifferenceCredits += Math.min((game.getLifeDelta() - 45) / 5, 500);
             }
             
         } // End for(game)
