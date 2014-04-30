@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -216,6 +217,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     c.setSVar(s, actualsVar);
                 }
             }
+            game.fireEvent(new GameEventCardStatsChanged(c));
 
             final GameCommand unanimate = new GameCommand() {
                 private static final long serialVersionUID = -5861759814760561373L;
@@ -239,6 +241,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     for (final ReplacementEffect re : removedReplacements) {
                         re.setTemporarilySuppressed(false);
                     }
+                    game.fireEvent(new GameEventCardStatsChanged(c));
                 }
             };
 
