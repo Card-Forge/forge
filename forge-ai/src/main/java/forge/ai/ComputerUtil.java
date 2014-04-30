@@ -550,7 +550,7 @@ public class ComputerUtil {
      */
     public static List<Card> chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
         List<Card> typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
@@ -590,7 +590,7 @@ public class ComputerUtil {
      */
     public static List<Card> chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
         List<Card> typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.TAPPED);
