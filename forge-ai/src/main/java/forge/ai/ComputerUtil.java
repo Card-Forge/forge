@@ -1413,13 +1413,13 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final boolean canRemove = (c.getNetDefense() <= dmg)
-                            || (!c.hasKeyword("Indestructible") && (dmg >= ComputerUtilCombat.getDamageToKill(c)));
+                            || (!c.hasKeyword("Indestructible") && c.getShield().isEmpty() && (dmg >= ComputerUtilCombat.getDamageToKill(c)));
                     if (!canRemove) {
                         continue;
                     }
                     if (saviourApi == ApiType.Pump) {
                         final boolean cantSave = c.getNetDefense() + defense <= dmg
-                                || (!c.hasKeyword("Indestructible") && !grantIndestructible 
+                                || (!c.hasKeyword("Indestructible") && c.getShield().isEmpty() && !grantIndestructible 
                                         && (dmg >= defense + ComputerUtilCombat.getDamageToKill(c)));
                         if (cantSave && (tgt == null || !grantShroud)) {
                             continue;
