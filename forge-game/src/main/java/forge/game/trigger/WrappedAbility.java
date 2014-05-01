@@ -12,6 +12,9 @@ import forge.game.spellability.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import com.google.common.collect.Lists;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.
@@ -373,6 +376,29 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             return;
         }
 
+        // Check timestamps of triggered objects
+        final List<Object> original = Lists.newArrayList(sa.getTriggerRemembered());
+        for (Object o : original) {
+            if (o instanceof Card) {
+                Card card = (Card) o;
+                Card current = game.getCardState(card);
+                if (current.getTimestamp() != card.getTimestamp()) {
+                    sa.getTriggerRemembered().remove(o);
+                }
+            }
+        }
+        final Map<String, Object> triggerMap = new HashMap<String, Object>(sa.getTriggeringObjects());
+        for (Entry<String, Object> ev : triggerMap.entrySet()) {
+            if (ev.getValue() instanceof Card) {
+                Card card = (Card) ev.getValue();
+                Card current = game.getCardState(card);
+                if (current.getTimestamp() != card.getTimestamp()) {
+                    sa.getTriggeringObjects().remove(ev.getKey());
+                }
+            }
+        }
+        // TODO: List<Card>
+        
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
 
         // Add eventual delayed trigger.
