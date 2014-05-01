@@ -529,7 +529,12 @@ public class PumpAi extends PumpAiBase {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
         final List<Card> threatenedTargets = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        
+
+        if (tgt == null) {
+            // For pumps without targeting restrictions, just return immediately until this is fleshed out.
+            return false;
+        }
+
         List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard());
         targetables = CardLists.getTargetableCards(targetables, sa);
         targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
