@@ -1,10 +1,12 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -57,6 +59,9 @@ public class PumpAllAi extends PumpAiBase {
             comp = new ArrayList<Card>();
         }
 
+        if (!game.getStack().isEmpty() && !sa.isCurse()) {
+            return pumpAgainstRemoval(ai, sa, comp);
+        }
         if (sa.hasParam("IsCurse")) {
             if (defense < 0) { // try to destroy creatures
                 comp = CardLists.filter(comp, new Predicate<Card>() {
@@ -163,4 +168,14 @@ public class PumpAllAi extends PumpAiBase {
         return true;
     }
 
+    boolean pumpAgainstRemoval(Player ai, SpellAbility sa, List<Card> comp) {
+        final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+        final List<Card> threatenedTargets = new ArrayList<Card>();
+        for (final Card c : comp) {
+            if (objects.contains(c)) {
+                threatenedTargets.add(c);
+            }
+        }
+        return !threatenedTargets.isEmpty();
+    }
 }

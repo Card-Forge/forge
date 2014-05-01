@@ -534,7 +534,7 @@ public class PumpAi extends PumpAiBase {
         targetables = CardLists.getTargetableCards(targetables, sa);
         targetables = ComputerUtil.getSafeTargets(ai, sa, targetables);
         for (final Card c : targetables) {
-            if (objects.contains(c) && c.getShield().isEmpty()) {
+            if (objects.contains(c)) {
                 threatenedTargets.add(c);
             }
         }
