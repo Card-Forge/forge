@@ -47,46 +47,53 @@
                         <config>${project.basedir}/proguard.cfg</config>
                     </proguard>
                     <release>true</release>
+                    <dex>
+                        <jvmArguments>
+                            <argument>-Xms256m</argument>
+                            <argument>-Xmx512m</argument>
+                        </jvmArguments>
+                    </dex>
                 </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									com.jayway.maven.plugins.android.generation2
-        								</groupId>
-        								<artifactId>
-        									android-maven-plugin
-        								</artifactId>
-        								<versionRange>
-        									[3.9.0-rc.1,)
-        								</versionRange>
-        								<goals>
-        									<goal>proguard</goal>
-        									<goal>
-        										generate-sources
-        									</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
-        	</plugins>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings 
+                    only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            com.jayway.maven.plugins.android.generation2
+                                        </groupId>
+                                        <artifactId>
+                                            android-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [3.9.0-rc.1,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>proguard</goal>
+                                            <goal>
+                                                generate-sources
+                                            </goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
         </pluginManagement>
     </build>
 
@@ -199,6 +206,12 @@
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
                             <release>true</release>
+                            <dex>
+                                <jvmArguments>
+                                    <argument>-Xms256m</argument>
+                                    <argument>-Xmx512m</argument>
+                                </jvmArguments>
+                            </dex>
                         </configuration>
                     </plugin>
 
