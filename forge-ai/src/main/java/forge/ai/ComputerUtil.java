@@ -1339,6 +1339,18 @@ public class ComputerUtil {
             }
         } else {
             objects = topStack.getTargets().getTargets();
+            if (tgt != null) {
+                final ArrayList<GameObject> canBeTargeted = new ArrayList<GameObject>();
+                for (Object o : objects) {
+                    if (o instanceof Card) {
+                        final Card c = (Card) o;
+                        if (c.canBeTargetedBy(topStack)) {
+                            canBeTargeted.add(c);
+                        }
+                    }
+                }
+                objects = canBeTargeted;
+            }
         }
 
         // Determine if Defined Objects are "threatened" will be destroyed
