@@ -119,11 +119,7 @@ public class ProtectAi extends SpellAbilityAi {
                 if (!game.stack.isEmpty()) {
                     //counter bad effect on stack
                     if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(c)) {
-                        Card threat = game.getStack().peekAbility().getHostCard();
-                        //check to see if threat has already been countered by resolved protect
-                        if (threat != null && !c.hasProtectionFrom(threat) && ProtectAi.toProtectFrom(threat, sa) != null) {
-                            return true;
-                        }
+                        return true;
                     }
                 }
                 
