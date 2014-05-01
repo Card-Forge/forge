@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -8,6 +9,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -82,6 +84,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
         final boolean random = sa.hasParam("RandomOrder");
+        final boolean remLKI = sa.hasParam("RememberLKI");
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
@@ -126,6 +129,13 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 game.getCardState(source).addRemembered(movedCard);
                 if (!source.getRemembered().contains(movedCard)) {
                     source.addRemembered(movedCard);
+                }
+            }
+            if (remLKI && movedCard != null) {
+                final Card lki = CardUtil.getLKICopy(c);
+                game.getCardState(source).addRemembered(lki);
+                if (!source.getRemembered().contains(lki)) {
+                    source.addRemembered(lki);
                 }
             }
             if (forget != null) {
