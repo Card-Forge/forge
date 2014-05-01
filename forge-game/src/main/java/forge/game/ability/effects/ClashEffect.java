@@ -80,8 +80,12 @@ public class ClashEffect extends SpellAbilityEffect {
          */
         final Card source = sa.getHostCard();
         final Player player = source.getController();
-        final Player opponent = player.getOpponent();
+        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, "Choose a opponent") ;
         final ZoneType lib = ZoneType.Library;
+
+        if (sa.hasParam("RememberClasher")) {
+            source.addRemembered(opponent);
+        }
     
         final PlayerZone pLib = player.getZone(lib);
         final PlayerZone oLib = opponent.getZone(lib);
