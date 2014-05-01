@@ -546,7 +546,8 @@ public class PumpAi extends PumpAiBase {
                     break;
                 }
             }
-            if (sa.getTargets().getNumTargeted() > tgt.getMaxTargets(sa.getHostCard(), sa)) {
+            if (sa.getTargets().getNumTargeted() > tgt.getMaxTargets(sa.getHostCard(), sa)
+                    || sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getHostCard(), sa)) {
                 sa.resetTargets();
                 return false;
             }
