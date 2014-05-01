@@ -152,7 +152,9 @@ public final class BoosterUtils {
         final ArrayList<PaperCard> result = new ArrayList<PaperCard>();
 
         final int size = allowedColors == null ? 0 : allowedColors.size();
-        Collections.shuffle(allowedColors);
+        if (allowedColors != null) {
+            Collections.shuffle(allowedColors);
+        }
 
         int cntMade = 0, iAttempt = 0;
 

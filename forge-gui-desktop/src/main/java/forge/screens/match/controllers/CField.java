@@ -21,17 +21,14 @@ import com.google.common.base.Function;
 
 import forge.UiCommand;
 import forge.Singletons;
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
 import forge.match.input.Input;
 import forge.match.input.InputPayMana;
-import forge.player.HumanPlay;
 import forge.properties.ForgePreferences;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;

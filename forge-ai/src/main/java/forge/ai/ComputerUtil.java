@@ -803,7 +803,7 @@ public class ComputerUtil {
                     }
 
                 }  catch (final Exception ex) {
-                    throw new RuntimeException(String.format("There is an error in the card code for %s:%n", c.getName(), ex.getMessage()), ex);
+                    throw new RuntimeException(String.format("There is an error in the card code for %s:%s", c.getName(), ex.getMessage()), ex);
                 } 
             }
         }
@@ -850,7 +850,7 @@ public class ComputerUtil {
                         }
                     }
                 } catch (final Exception ex) {
-                    throw new RuntimeException(String.format("There is an error in the card code for %s:%n", c.getName(), ex.getMessage()), ex);
+                    throw new RuntimeException(String.format("There is an error in the card code for %s:%s", c.getName(), ex.getMessage()), ex);
                 }
             }
         }

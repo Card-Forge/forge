@@ -52,7 +52,7 @@ public class GameRules {
 
     public void setGamesPerMatch(int gamesPerMatch) {
         this.gamesPerMatch = gamesPerMatch;
-        this.gamesToWinMatch = (int)Math.ceil((gamesPerMatch+1)/2);
+        this.gamesToWinMatch = gamesPerMatch / 2 + 1;
     }
 
     public boolean useAnte() {
