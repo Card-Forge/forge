@@ -49,10 +49,14 @@
                     <release>true</release>
                     <dex>
                         <jvmArguments>
-                            <argument>-Xms256m</argument>
-                            <argument>-Xmx512m</argument>
+                            <argument>-Xms512m</argument>
+                            <argument>-Xmx2048m</argument>
                         </jvmArguments>
                     </dex>
+                        <jvmArguments>
+                            <argument>-Xms512m</argument>
+                            <argument>-Xmx2048m</argument>
+                        </jvmArguments>
                 </configuration>
             </plugin>
         </plugins>
