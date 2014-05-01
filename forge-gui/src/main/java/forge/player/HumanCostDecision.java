@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.SGuiChoose;
+import forge.SGuiDialog;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -873,8 +874,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             int maxCounters = source.getCounters(cost.counter);
-            if (amount.equals("All"))
+            if (amount.equals("All")) {
+                if (!SGuiDialog.confirm(ability.getHostCard(), "Remove all counters?")) {
+                    return null;
+                }
                 cntRemoved = maxCounters;
+            }
             else if ( c == null && "XChoice".equals(sVarAmount)) { 
                 cntRemoved = chooseXValue(maxCounters);
             }
