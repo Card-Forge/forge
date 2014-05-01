@@ -539,8 +539,17 @@ public class PumpAi extends PumpAiBase {
             }
         }
         if (!threatenedTargets.isEmpty()) {
-            // Choose "best" of the remaining to regenerate
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
+            ComputerUtilCard.sortByEvaluateCreature(threatenedTargets);
+            for (Card c : threatenedTargets) {
+                sa.getTargets().add(c);
+                if (sa.getTargets().getNumTargeted() >= tgt.getMaxTargets(sa.getHostCard(), sa)) {
+                    break;
+                }
+            }
+            if (sa.getTargets().getNumTargeted() > tgt.getMaxTargets(sa.getHostCard(), sa)) {
+                sa.resetTargets();
+                return false;
+            }
             return true;
         }
         return false;
