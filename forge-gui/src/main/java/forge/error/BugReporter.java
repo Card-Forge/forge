@@ -19,8 +19,8 @@ package forge.error;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.SOptionPane;
 import forge.util.BuildInfo;
+import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 

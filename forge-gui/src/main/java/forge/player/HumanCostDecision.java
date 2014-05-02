@@ -4,8 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.SGuiChoose;
-import forge.SGuiDialog;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -25,6 +23,8 @@ import forge.match.input.InputSelectManyBase;
 import forge.util.Aggregates;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
+import forge.util.gui.SGuiChoose;
+import forge.util.gui.SGuiDialog;
 
 import java.util.*;
 import java.util.Map.Entry;

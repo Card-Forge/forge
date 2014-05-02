@@ -17,8 +17,6 @@
  */
 package forge.limited;
 
-import forge.SOptionPane;
-import forge.SGuiChoose;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
@@ -31,6 +29,8 @@ import forge.model.UnOpenedMeta;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
+import forge.util.gui.SGuiChoose;
+import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.ArrayUtils;
 

@@ -18,8 +18,8 @@
 package forge.card;
 
 import forge.CardStorageReader;
-import forge.SOptionPane;
 import forge.card.CardRules;
+import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 

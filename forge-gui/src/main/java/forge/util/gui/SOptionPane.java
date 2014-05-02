@@ -1,5 +1,6 @@
-package forge;
+package forge.util.gui;
 
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 
 

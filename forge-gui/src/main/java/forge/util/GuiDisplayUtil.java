@@ -20,10 +20,7 @@ package forge.util;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
-import forge.SOptionPane;
 import forge.GuiBase;
-import forge.SGuiChoose;
-import forge.SGuiDialog;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.GameType;
@@ -45,6 +42,9 @@ import forge.model.FModel;
 import forge.player.HumanPlay;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.gui.SGuiChoose;
+import forge.util.gui.SGuiDialog;
+import forge.util.gui.SOptionPane;
 
 import java.io.*;
 import java.util.*;

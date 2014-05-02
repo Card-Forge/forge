@@ -1,7 +1,6 @@
 package forge.match.input;
 
 import forge.FThreads;
-import forge.SGuiChoose;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
@@ -19,6 +18,7 @@ import forge.game.spellability.SpellAbility;
 import forge.player.HumanPlay;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
+import forge.util.gui.SGuiChoose;
 
 import org.apache.commons.lang3.StringUtils;
 

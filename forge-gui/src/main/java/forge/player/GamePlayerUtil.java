@@ -1,9 +1,9 @@
 package forge.player;
 
-import forge.SOptionPane;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,6 +1,9 @@
-package forge;
+package forge.util.gui;
 
+import forge.FThreads;
+import forge.GuiBase;
 import forge.game.card.Card;
+
 import org.apache.commons.lang3.StringUtils;
 
 /** 

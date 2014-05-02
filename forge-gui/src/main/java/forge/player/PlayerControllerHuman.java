@@ -7,10 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
-import forge.SOptionPane;
 import forge.GuiBase;
-import forge.SGuiChoose;
-import forge.SGuiDialog;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -52,6 +49,9 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.gui.SGuiChoose;
+import forge.util.gui.SGuiDialog;
+import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;

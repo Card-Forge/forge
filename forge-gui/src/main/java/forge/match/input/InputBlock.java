@@ -18,7 +18,6 @@
 package forge.match.input;
 
 import forge.GuiBase;
-import forge.SGuiDialog;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
@@ -26,6 +25,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.ITriggerEvent;
+import forge.util.gui.SGuiDialog;
 
 /**
  * <p>

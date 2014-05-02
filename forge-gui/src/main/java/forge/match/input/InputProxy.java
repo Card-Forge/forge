@@ -19,12 +19,12 @@ package forge.match.input;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.SOptionPane;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.ITriggerEvent;
+import forge.util.gui.SOptionPane;
 
 import java.util.Observable;
 import java.util.Observer;

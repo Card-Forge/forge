@@ -46,6 +46,7 @@ import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
+import forge.util.gui.SGuiChoose;
 
 public class GuiMobile implements IGuiBase {
     @Override

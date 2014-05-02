@@ -16289,9 +16289,6 @@ forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
 forge-gui/src/main/java/forge/GuiBase.java -text
-forge-gui/src/main/java/forge/SGuiChoose.java -text
-forge-gui/src/main/java/forge/SGuiDialog.java -text
-forge-gui/src/main/java/forge/SOptionPane.java -text
 forge-gui/src/main/java/forge/UiCommand.java svneol=native#text/plain
 forge-gui/src/main/java/forge/assets/FSkinProp.java -text
 forge-gui/src/main/java/forge/assets/ISkinImage.java -text
@@ -16462,6 +16459,9 @@ forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
 forge-gui/src/main/java/forge/util/WaitCallback.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
+forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
+forge-gui/src/main/java/forge/util/gui/SGuiDialog.java -text
+forge-gui/src/main/java/forge/util/gui/SOptionPane.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
 forge-gui/src/main/resources/proxy-template.ftl -text
 forge-gui/src/site/apt/index.apt -text

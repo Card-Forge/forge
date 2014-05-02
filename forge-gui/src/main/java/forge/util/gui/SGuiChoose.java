@@ -1,4 +1,4 @@
-package forge;
+package forge.util.gui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,11 +6,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
+import forge.GuiBase;
 import forge.game.card.Card;
 
 public class SGuiChoose {

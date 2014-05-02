@@ -4,7 +4,6 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.SGuiChoose;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.*;
@@ -13,6 +12,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
 
 import org.apache.commons.lang3.tuple.Pair;

@@ -3,7 +3,6 @@ package forge.player;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.SGuiChoose;
 import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -31,6 +30,7 @@ import forge.match.input.InputPayManaSimple;
 import forge.match.input.InputPayManaX;
 import forge.match.input.InputSelectCardsFromList;
 import forge.util.Lang;
+import forge.util.gui.SGuiChoose;
 
 import org.apache.commons.lang3.StringUtils;
 

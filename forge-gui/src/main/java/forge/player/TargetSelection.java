@@ -20,7 +20,6 @@ package forge.player;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.SGuiChoose;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -32,6 +31,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
+import forge.util.gui.SGuiChoose;
 
 import java.util.ArrayList;
 import java.util.List;

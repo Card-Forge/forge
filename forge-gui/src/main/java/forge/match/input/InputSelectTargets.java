@@ -1,7 +1,6 @@
 package forge.match.input;
 
 import forge.GuiBase;
-import forge.SGuiChoose;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
@@ -10,6 +9,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.ITriggerEvent;
+import forge.util.gui.SGuiChoose;
 
 import java.util.ArrayList;
 import java.util.HashMap;

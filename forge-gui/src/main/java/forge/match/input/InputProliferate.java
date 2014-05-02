@@ -1,11 +1,11 @@
 package forge.match.input;
 
-import forge.SGuiChoose;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.util.ITriggerEvent;
+import forge.util.gui.SGuiChoose;
 
 import java.util.*;
 import java.util.Map.Entry;

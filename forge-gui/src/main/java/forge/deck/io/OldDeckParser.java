@@ -17,12 +17,12 @@
  */
 package forge.deck.io;
 
-import forge.SOptionPane;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.properties.ForgeConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;

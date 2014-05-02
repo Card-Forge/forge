@@ -18,7 +18,6 @@
 package forge.match.input;
 
 import forge.GuiBase;
-import forge.SGuiDialog;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -26,6 +25,7 @@ import forge.game.zone.ZoneType;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
+import forge.util.gui.SGuiDialog;
 
 import java.util.ArrayList;
 import java.util.List;

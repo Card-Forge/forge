@@ -21,15 +21,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.SOptionPane;
 import forge.GuiBase;
-import forge.SGuiChoose;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.quest.io.ReadPriceList;
+import forge.util.gui.SGuiChoose;
+import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;

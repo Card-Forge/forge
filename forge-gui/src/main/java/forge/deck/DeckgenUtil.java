@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.SOptionPane;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -24,6 +23,7 @@ import forge.quest.QuestEventDuel;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
+import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 import java.util.ArrayList;
