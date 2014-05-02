@@ -818,7 +818,8 @@ public class GameAction {
                     }
                 }
             }
-
+            List<Card> noRegCreats = new ArrayList<Card>();
+            List<Card> desCreats = new ArrayList<Card>();
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature() && c.isPaired()) { // Soulbond unpairing (702.93e) - should not be here
                     Card partner = c.getPairedWith();
@@ -831,13 +832,13 @@ public class GameAction {
                 if (c.isCreature()) {
                     // Rule 704.5f - Destroy (no regeneration) for toughness <= 0
                     if (c.getNetDefense() <= 0) {
-                        this.destroyNoRegeneration(c, null);
+                        noRegCreats.add(c);
                         checkAgain = true;
                     } else
 
                     // Rule 704.5g - Destroy due to lethal damage
                     if (c.getNetDefense() <= c.getDamage()) {
-                        this.destroy(c, null);
+                        desCreats.add(c);
                         checkAgain = true;
                     }
                 }
@@ -856,6 +857,13 @@ public class GameAction {
                     c.subtractCounter(CounterType.DREAM,  c.getCounters(CounterType.DREAM) - 7);
                     checkAgain = true;
                 }
+            }
+
+            for (Card c : noRegCreats) {
+                this.destroyNoRegeneration(c, null);
+            }
+            for (Card c : desCreats) {
+                this.destroy(c, null);
             }
 
             if (game.getTriggerHandler().runWaitingTriggers()) {
