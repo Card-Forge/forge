@@ -176,7 +176,6 @@
             <id>android</id>
             <build>
                 <plugins>
-
                     <plugin>
                         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                         <artifactId>android-maven-plugin</artifactId>
@@ -203,12 +202,12 @@
                             <dex>
                                 <jvmArguments>
                                     <argument>-Xms128m</argument>
-                                    <argument>-Xmx1024m</argument>
+                                    <argument>-Xmx2048m</argument>
                                 </jvmArguments>
                             </dex>
                             <jvmArguments>
                                 <argument>-Xms128m</argument>
-                                <argument>-Xmx1024m</argument>
+                                <argument>-Xmx2048m</argument>
                             </jvmArguments>
                         </configuration>
                     </plugin>
@@ -240,10 +239,8 @@
                             </execution>
                         </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
     </profiles>
-
 </project>
