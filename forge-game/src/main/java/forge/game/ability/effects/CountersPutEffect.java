@@ -91,17 +91,17 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(counterType);
                 }
+                if (sa.hasParam("Tribute")) {
+                    String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
+                    Player chooser = activator.getController().chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
+                    if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
+                        tgtCard.setTributed(true);
+                    } else {
+                        continue;
+                    }
+                }
                 final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                 if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                    if (sa.hasParam("Tribute")) {
-                        String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
-                        Player chooser = activator.getController().chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
-                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
-                            tgtCard.setTributed(true);
-                        } else {
-                            continue;
-                        }
-                    }
                     tgtCard.addCounter(counterType, counterAmount, true);
                     if (remember) {
                         final int value = tgtCard.getTotalCountersToAdd();
