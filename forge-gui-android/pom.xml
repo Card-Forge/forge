@@ -47,16 +47,6 @@
                         <config>${project.basedir}/proguard.cfg</config>
                     </proguard>
                     <release>true</release>
-                    <dex>
-                        <jvmArguments>
-                            <argument>-Xms512m</argument>
-                            <argument>-Xmx2048m</argument>
-                        </jvmArguments>
-                    </dex>
-                        <jvmArguments>
-                            <argument>-Xms512m</argument>
-                            <argument>-Xmx2048m</argument>
-                        </jvmArguments>
                 </configuration>
             </plugin>
         </plugins>
@@ -212,10 +202,14 @@
                             <release>true</release>
                             <dex>
                                 <jvmArguments>
-                                    <argument>-Xms256m</argument>
-                                    <argument>-Xmx512m</argument>
+                                    <argument>-Xms128m</argument>
+                                    <argument>-Xmx1024m</argument>
                                 </jvmArguments>
                             </dex>
+                            <jvmArguments>
+                                <argument>-Xms128m</argument>
+                                <argument>-Xmx1024m</argument>
+                            </jvmArguments>
                         </configuration>
                     </plugin>
 
