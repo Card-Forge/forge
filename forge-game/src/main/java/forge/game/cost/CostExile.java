@@ -23,7 +23,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
@@ -156,13 +155,7 @@ public class CostExile extends CostPartWithList {
         }
 
         List<Card> list;
-        if (this.from.equals(ZoneType.Stack)) {
-            list = new ArrayList<Card>();
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                list.add(si.getSourceCard());
-            }
-        }
-        else if (this.sameZone) {
+        if (this.sameZone) {
             list = new ArrayList<Card>(game.getCardsIn(this.from));
         }
         else {
@@ -203,16 +196,6 @@ public class CostExile extends CostPartWithList {
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
         Game game = targetCard.getGame();
-
-        if (this.from.equals(ZoneType.Stack)) {
-            ArrayList<SpellAbility> spells = targetCard.getSpellAbilities();
-            for (SpellAbility spell : spells) {
-            	final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
-            	if (si != null) {
-            		game.getStack().remove(si);
-            	}
-            }
-        }
 
         game.getAction().exile(targetCard);
     }

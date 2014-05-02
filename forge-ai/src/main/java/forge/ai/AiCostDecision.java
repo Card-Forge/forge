@@ -14,6 +14,7 @@ import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
@@ -157,6 +158,27 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
         }
     }
 
+    @Override
+    public PaymentDecision visit(CostExileFromStack cost) {
+
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            final String sVar = ability.getSVar(cost.getAmount());
+            // Generalize cost
+            if (sVar.equals("XChoice")) {
+                return null;
+            }
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        }
+        List<SpellAbility> chosen = new ArrayList<SpellAbility>();
+        for (SpellAbilityStackInstance si :source.getGame().getStack()) {
+            SpellAbility sp = si.getSpellAbility().getRootAbility();
+            if (si.getSourceCard().isValid(cost.getType().split(";"), source.getController(), source)) {
+                chosen.add(sp);
+            }
+        }
+        return chosen.isEmpty() ? null : PaymentDecision.spellabilities(chosen);
+    }
 
     @Override
     public PaymentDecision visit(CostExiledMoveToGrave cost) {

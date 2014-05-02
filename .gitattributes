@@ -435,6 +435,7 @@ forge-game/src/main/java/forge/game/cost/CostDecisionMakerBase.java -text
 forge-game/src/main/java/forge/game/cost/CostDiscard.java -text
 forge-game/src/main/java/forge/game/cost/CostDraw.java -text
 forge-game/src/main/java/forge/game/cost/CostExile.java -text
+forge-game/src/main/java/forge/game/cost/CostExileFromStack.java -text
 forge-game/src/main/java/forge/game/cost/CostExiledMoveToGrave.java -text
 forge-game/src/main/java/forge/game/cost/CostFlipCoin.java -text
 forge-game/src/main/java/forge/game/cost/CostGainControl.java -text

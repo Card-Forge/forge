@@ -308,7 +308,7 @@ public class Cost {
         if (parse.startsWith("ExileFromStack<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Stack);
+            return new CostExileFromStack(splitStr[0], splitStr[1], description);
         }
 
         if (parse.startsWith("ExileFromTop<")) {

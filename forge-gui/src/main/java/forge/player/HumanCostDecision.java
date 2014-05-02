@@ -258,7 +258,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
 
-        if (cost.from == ZoneType.Stack) { return exileFromStack(cost, ability, c); }
         if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, player, c); }
         if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
         if (!cost.sameZone) { return exileFromMiscZone(cost, ability, c, list); }
@@ -305,20 +304,21 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         List<Card> toExile = SGuiChoose.many("Exile from " + cost.getFrom(), "To be exiled", count - nNeeded, typeList, null);
         return PaymentDecision.card(toExile);
     }
+    
+    @Override
+    public PaymentDecision visit(CostExileFromStack cost) {
+        final String amount = cost.getAmount();
+        final Game game = player.getGame(); 
 
-    private PaymentDecision exileFromStack(CostExile cost, SpellAbility sa, int nNeeded) {
-        if (nNeeded == 0) {
-            return PaymentDecision.number(0);
-        }
-
-        final Game game = sa.getActivatingPlayer().getGame();
-        ArrayList<SpellAbility> saList = new ArrayList<SpellAbility>();
+        Integer c = cost.convertAmount();
+        String type = cost.getType();
+        List<SpellAbility> saList = new ArrayList<SpellAbility>();
         ArrayList<String> descList = new ArrayList<String>();
 
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card stC = si.getSourceCard();
             final SpellAbility stSA = si.getSpellAbility().getRootAbility();
-            if (stC.isValid(cost.getType().split(";"), sa.getActivatingPlayer(), sa.getHostCard()) && stSA.isSpell()) {
+            if (stC.isValid(cost.getType().split(";"), ability.getActivatingPlayer(), source) && stSA.isSpell()) {
                 saList.add(stSA);
                 if (stC.isCopiedSpell()) {
                     descList.add(stSA.getStackDescription() + " (Copied Spell)");
@@ -328,29 +328,40 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        if (saList.size() < nNeeded) {
+        if (type.equals("All")) {
+            return PaymentDecision.spellabilities(saList);
+        }
+        if (c == null) {
+            final String sVar = ability.getSVar(amount);
+            // Generalize this
+            if (sVar.equals("XChoice")) {
+                c = chooseXValue(saList.size());
+            } else {
+                c = AbilityUtils.calculateAmount(source, amount, ability);
+            }
+        }
+
+        if (saList.size() < c) {
             return null;
         }
         
-        List<Card> exiled = new ArrayList<Card>();
-        for (int i = 0; i < nNeeded; i++) {
+        List<SpellAbility> exiled = new ArrayList<SpellAbility>();
+        for (int i = 0; i < c; i++) {
             //Have to use the stack descriptions here because some copied spells have no description otherwise
-            final String o = SGuiChoose.oneOrNone("Exile from " + cost.getFrom(), descList);
+            final String o = SGuiChoose.oneOrNone("Exile from Stack", descList);
 
             if (o != null) {
                 final SpellAbility toExile = saList.get(descList.indexOf(o));
-                final Card c = toExile.getHostCard();
 
                 saList.remove(toExile);
                 descList.remove(o);
                 
-                exiled.add(c);
-            }
-            else {
+                exiled.add(toExile);
+            } else {
                 return null;
             }
         }
-        return PaymentDecision.card(exiled);
+        return PaymentDecision.spellabilities(exiled);
     }
 
     private PaymentDecision exileFromTop(final CostExile cost, final SpellAbility sa, final Player player, final int nNeeded) {

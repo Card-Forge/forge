@@ -40,7 +40,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -460,15 +459,8 @@ public class ComputerUtil {
      */
     public static List<Card> chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
-        final Game game = ai.getGame();
-        List<Card> typeList = new ArrayList<Card>();
-        if (zone.equals(ZoneType.Stack)) {
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                typeList.add(si.getSourceCard());
-            }
-        } else {
-            typeList = ai.getCardsIn(zone);
-        }
+        List<Card> typeList = ai.getCardsIn(zone);
+
         typeList = CardLists.getValidCards(typeList, type.split(";"), activate.getController(), activate);
         
         if ((target != null) && target.getController() == ai && typeList.contains(target)) {

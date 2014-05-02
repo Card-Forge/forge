@@ -4,6 +4,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,26 +22,29 @@ public class PaymentDecision {
     public final List<Card> cards = new ArrayList<Card>();
     public final List<Mana> mana;
     public final List<Player> players;
+    public final List<SpellAbility> sp;
     
     public PaymentDecision(int cnt) {
-        this(null, null, null);
+        this(null, null, null, null);
         c = cnt;
     }
 
-    private PaymentDecision(Collection<Card> chosen, List<Mana> manaProduced, List<Player> players) {
+    private PaymentDecision(Collection<Card> chosen, List<Mana> manaProduced, List<Player> players,
+                List<SpellAbility> sp) {
         if(chosen != null)
             cards.addAll(chosen);
         mana = manaProduced;
         this.players = players;
+        this.sp = sp;
     }
     
     private  PaymentDecision(Card chosen) {
-        this(null, null, null);
+        this(null, null, null, null);
         cards.add(chosen);
     }
     
     public PaymentDecision(String choice) {
-        this(null, null, null);
+        this(null, null, null, null);
         type = choice;
     }
 
@@ -60,17 +64,17 @@ public class PaymentDecision {
     }
 
     public static PaymentDecision card(Collection<Card> chosen) {
-        return new PaymentDecision(chosen, null, null);
+        return new PaymentDecision(chosen, null, null, null);
     }
     
     public static PaymentDecision card(Collection<Card> chosen, int n) {
-        PaymentDecision res = new PaymentDecision(chosen, null, null);
+        PaymentDecision res = new PaymentDecision(chosen, null, null, null);
         res.c = n;
         return res;
     }
     
     public static PaymentDecision mana(List<Mana> manas) {
-        return new PaymentDecision(null, manas, null);
+        return new PaymentDecision(null, manas, null, null);
     }
     
     
@@ -88,7 +92,11 @@ public class PaymentDecision {
 
     public static PaymentDecision players(List<Player> players) {
         // TODO Auto-generated method stub
-        return new PaymentDecision(null, null, players);
+        return new PaymentDecision(null, null, players, null);
+    }
+    
+    public static PaymentDecision spellabilities(List<SpellAbility> sp) {
+        return new PaymentDecision(null, null, null, sp);
     }
 
     public static PaymentDecision card(Card selected, CounterType counterType) {
