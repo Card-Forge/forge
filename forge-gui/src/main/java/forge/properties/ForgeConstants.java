@@ -23,52 +23,50 @@ import java.util.Map;
 import forge.GuiBase;
 
 public final class ForgeConstants {
-    private static final String _INSTALL_ROOT        = GuiBase.getInterface().getInstallRoot();
-    public static final String PROFILE_FILE          = _INSTALL_ROOT + "forge.profile.properties";
+    public static final String ASSETS_DIR            = GuiBase.getInterface().getAssetsDir();
+    public static final String PROFILE_FILE          = ASSETS_DIR + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
-    // data that is only in the program dir
-    private static final String _ASSETS_ROOT = _INSTALL_ROOT + GuiBase.getInterface().getAssetsDir();
+    private static final String RES_DIR = ASSETS_DIR + "res/";
+    private static final String LISTS_DIR = RES_DIR + "lists/";
+    public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
+    public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
+    public static final String IMAGE_LIST_TOKENS_FILE                = LISTS_DIR + "token-images.txt";
+    public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = LISTS_DIR + "quest-opponent-icons.txt";
+    public static final String IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE  = LISTS_DIR + "quest-pet-shop-icons.txt";
+    public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = LISTS_DIR + "quest-pet-token-images.txt";
+    public static final String IMAGE_LIST_QUEST_BOOSTERS_FILE        = LISTS_DIR + "booster-images.txt";
+    public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = LISTS_DIR + "fatpack-images.txt";
+    public static final String IMAGE_LIST_QUEST_BOOSTERBOXES_FILE    = LISTS_DIR + "boosterbox-images.txt";
+    public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = LISTS_DIR + "precon-images.txt";
+    public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = LISTS_DIR + "tournamentpack-images.txt";
 
-    private static final String _LIST_DIR = _ASSETS_ROOT + "lists/";
-    public static final String KEYWORD_LIST_FILE                     = _LIST_DIR + "NonStackingKWList.txt";
-    public static final String TYPE_LIST_FILE                        = _LIST_DIR + "TypeLists.txt";
-    public static final String IMAGE_LIST_TOKENS_FILE                = _LIST_DIR + "token-images.txt";
-    public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = _LIST_DIR + "quest-opponent-icons.txt";
-    public static final String IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE  = _LIST_DIR + "quest-pet-shop-icons.txt";
-    public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = _LIST_DIR + "quest-pet-token-images.txt";
-    public static final String IMAGE_LIST_QUEST_BOOSTERS_FILE        = _LIST_DIR + "booster-images.txt";
-    public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = _LIST_DIR + "fatpack-images.txt";
-    public static final String IMAGE_LIST_QUEST_BOOSTERBOXES_FILE    = _LIST_DIR + "boosterbox-images.txt";
-    public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
-    public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
+    public static final String CHANGES_FILE = ASSETS_DIR + "CHANGES.txt";
+    public static final String LICENSE_FILE = ASSETS_DIR + "LICENSE.txt";
+    public static final String README_FILE  = ASSETS_DIR + "README.txt";
+    public static final String HOWTO_FILE   = RES_DIR + "howto.txt";
 
-    public static final String CHANGES_FILE = _INSTALL_ROOT + "CHANGES.txt";
-    public static final String LICENSE_FILE = _INSTALL_ROOT + "LICENSE.txt";
-    public static final String README_FILE  = _INSTALL_ROOT + "README.txt";
-    public static final String HOWTO_FILE   = _ASSETS_ROOT + "howto.txt";
-
-    public static final String DRAFT_DIR           = _ASSETS_ROOT + "draft/";
+    public static final String DRAFT_DIR           = RES_DIR + "draft/";
     public static final String DRAFT_RANKINGS_FILE = DRAFT_DIR + "rankings.txt";
-    public static final String SEALED_DIR          = _ASSETS_ROOT + "sealed/";
-    public static final String CARD_DATA_DIR       = _ASSETS_ROOT + "cardsfolder/";
-    public static final String EDITIONS_DIR        = _ASSETS_ROOT + "editions/";
-    public static final String BLOCK_DATA_DIR      = _ASSETS_ROOT + "blockdata/";
-    public static final String DECK_CUBE_DIR       = _ASSETS_ROOT + "cube/";
-    public static final String AI_PROFILE_DIR      = _ASSETS_ROOT + "ai/";
-    public static final String SOUND_DIR           = _ASSETS_ROOT + "sound/";
+    public static final String SEALED_DIR          = RES_DIR + "sealed/";
+    public static final String CARD_DATA_DIR       = RES_DIR + "cardsfolder/";
+    public static final String EDITIONS_DIR        = RES_DIR + "editions/";
+    public static final String BLOCK_DATA_DIR      = RES_DIR + "blockdata/";
+    public static final String DECK_CUBE_DIR       = RES_DIR + "cube/";
+    public static final String AI_PROFILE_DIR      = RES_DIR + "ai/";
+    public static final String SOUND_DIR           = RES_DIR + "sound/";
 
-    private static final String _QUEST_DIR            = _ASSETS_ROOT + "quest/";
-    public static final String QUEST_WORLD_DIR        = _QUEST_DIR + "world/";
-    public static final String QUEST_PRECON_DIR       = _QUEST_DIR + "precons/";
-    public static final String PRICES_BOOSTER_FILE    = _QUEST_DIR + "booster-prices.txt";
-    public static final String BAZAAR_DIR             = _QUEST_DIR + "bazaar/";
+    private static final String QUEST_DIR             = RES_DIR + "quest/";
+    public static final String QUEST_WORLD_DIR        = QUEST_DIR + "world/";
+    public static final String QUEST_PRECON_DIR       = QUEST_DIR + "precons/";
+    public static final String PRICES_BOOSTER_FILE    = QUEST_DIR + "booster-prices.txt";
+    public static final String BAZAAR_DIR             = QUEST_DIR + "bazaar/";
     public static final String BAZAAR_INDEX_FILE      = BAZAAR_DIR + "index.xml";
-    public static final String DEFAULT_DUELS_DIR      = _QUEST_DIR + "duels";
-    public static final String DEFAULT_CHALLENGES_DIR = _QUEST_DIR + "challenges";
-    public static final String THEMES_DIR             = _QUEST_DIR + "themes";
+    public static final String DEFAULT_DUELS_DIR      = QUEST_DIR + "duels";
+    public static final String DEFAULT_CHALLENGES_DIR = QUEST_DIR + "challenges";
+    public static final String THEMES_DIR             = QUEST_DIR + "themes";
 
-    public static final String SKINS_DIR         = _ASSETS_ROOT + "skins/";
+    public static final String SKINS_DIR         = RES_DIR + "skins/";
     public static final String DEFAULT_SKINS_DIR = SKINS_DIR + "default/";
     //don't associate these skin files with a directory since skin directory will be determined later
     public static final String SPRITE_ICONS_FILE     = "sprite_icons.png"; 
@@ -87,7 +85,7 @@ public final class ForgeConstants {
     public static final Map<String, String> CACHE_CARD_PICS_SUBDIR;
     public static final int SERVER_PORT_NUMBER;
     static {
-        ForgeProfileProperties profileProps = new ForgeProfileProperties(PROFILE_FILE);
+        ForgeProfileProperties profileProps = GuiBase.getInterface().getProfileProps();
         USER_DIR           = profileProps.userDir;
         CACHE_DIR          = profileProps.cacheDir;
         CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;
@@ -115,7 +113,7 @@ public final class ForgeConstants {
     public static final String ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
 
     // data that has defaults in the program dir but overrides/additions in the user dir
-    private static final String _DEFAULTS_DIR = _ASSETS_ROOT + "defaults/";
+    private static final String _DEFAULTS_DIR = RES_DIR + "defaults/";
     public static final String NO_CARD_FILE   = _DEFAULTS_DIR + "no_card.jpg";
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
@@ -124,16 +122,16 @@ public final class ForgeConstants {
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet/");
 
     // data that is only in the cached dir
-    private static final String _PICS_DIR                    = CACHE_DIR + "pics/";
+    private static final String PICS_DIR                     = CACHE_DIR + "pics/";
     public static final String DB_DIR                        = CACHE_DIR + "db/";
-    public static final String CACHE_TOKEN_PICS_DIR          = _PICS_DIR + "tokens/";
-    public static final String CACHE_ICON_PICS_DIR           = _PICS_DIR + "icons/";
-    public static final String CACHE_SYMBOLS_DIR             = _PICS_DIR + "symbols/";
-    public static final String CACHE_BOOSTER_PICS_DIR        = _PICS_DIR + "boosters/";
-    public static final String CACHE_FATPACK_PICS_DIR        = _PICS_DIR + "fatpacks/";
-    public static final String CACHE_BOOSTERBOX_PICS_DIR     = _PICS_DIR + "boosterboxes/";
-    public static final String CACHE_PRECON_PICS_DIR         = _PICS_DIR + "precons/";
-    public static final String CACHE_TOURNAMENTPACK_PICS_DIR = _PICS_DIR + "tournamentpacks/";
+    public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens/";
+    public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons/";
+    public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols/";
+    public static final String CACHE_BOOSTER_PICS_DIR        = PICS_DIR + "boosters/";
+    public static final String CACHE_FATPACK_PICS_DIR        = PICS_DIR + "fatpacks/";
+    public static final String CACHE_BOOSTERBOX_PICS_DIR     = PICS_DIR + "boosterboxes/";
+    public static final String CACHE_PRECON_PICS_DIR         = PICS_DIR + "precons/";
+    public static final String CACHE_TOURNAMENTPACK_PICS_DIR = PICS_DIR + "tournamentpacks/";
     public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
 
     public static final String[] PROFILE_DIRS = {
@@ -158,8 +156,8 @@ public final class ForgeConstants {
             CACHE_TOURNAMENTPACK_PICS_DIR };
 
     // URLs
-    private static final String _URL_CARDFORGE = "http://cardforge.org";
-    public static final String URL_DRAFT_UPLOAD   = _URL_CARDFORGE + "/draftAI/submitDraftData.php";
-    public static final String URL_PIC_DOWNLOAD   = _URL_CARDFORGE + "/fpics/";
-    public static final String URL_PRICE_DOWNLOAD = _URL_CARDFORGE + "/MagicInfo/pricegen.php";
+    private static final String URL_CARDFORGE = "http://cardforge.org";
+    public static final String URL_DRAFT_UPLOAD   = URL_CARDFORGE + "/draftAI/submitDraftData.php";
+    public static final String URL_PIC_DOWNLOAD   = URL_CARDFORGE + "/fpics/";
+    public static final String URL_PRICE_DOWNLOAD = URL_CARDFORGE + "/MagicInfo/pricegen.php";
 }

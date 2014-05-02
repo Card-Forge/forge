@@ -9,6 +9,7 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
 
@@ -37,6 +38,7 @@ import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgeProfileProperties;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.winlose.ViewWinLose;
@@ -75,21 +77,20 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public String getInstallRoot() {
-        switch (Gdx.app.getType()) {
-        case Desktop:
+    public String getAssetsDir() {
+        if (Gdx.app.getType() == ApplicationType.Desktop) {
             return "../forge-gui/";
-        case Android:
-            break; //TODO
-        default:
-            break;
         }
-        return "";
+        return Gdx.files.getLocalStoragePath();
     }
 
     @Override
-    public String getAssetsDir() {
-        return "res/";
+    public ForgeProfileProperties getProfileProps() {
+        if (Gdx.app.getType() == ApplicationType.Desktop) {
+            return new ForgeProfileProperties(ForgeConstants.PROFILE_FILE);
+        }
+        String assetsDir = ForgeConstants.ASSETS_DIR;
+        return new ForgeProfileProperties(assetsDir + "data/", assetsDir + "cache/");
     }
 
     @Override
@@ -345,25 +346,21 @@ public class GuiMobile implements IGuiBase {
     }
 	@Override
 	public LobbyPlayer getGuiPlayer() {
-		// TODO Auto-generated method stub
 		return FControl.getGuiPlayer();
 	}
 
 	@Override
 	public LobbyPlayer createAiPlayer() {
-		// TODO Auto-generated method stub
 		return FControl.getAiPlayer();
 	}
 
 	@Override
 	public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
-		// TODO Auto-generated method stub
 		return FControl.getAiPlayer(name, avatarIndex);
 	}
 
 	@Override
 	public LobbyPlayer getQuestPlayer() {
-		// TODO Auto-generated method stub
 		return getGuiPlayer();
 	}
 }

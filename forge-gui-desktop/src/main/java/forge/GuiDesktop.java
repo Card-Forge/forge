@@ -53,6 +53,8 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
+import forge.properties.ForgeConstants;
+import forge.properties.ForgeProfileProperties;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.ViewWinLose;
@@ -100,14 +102,14 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public String getInstallRoot() {
+    public String getAssetsDir() {
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
                 "../forge-gui/" : "";
     }
 
     @Override
-    public String getAssetsDir() {
-        return "res/";
+    public ForgeProfileProperties getProfileProps() {
+        return new ForgeProfileProperties(ForgeConstants.PROFILE_FILE);
     }
 
     @Override
@@ -416,25 +418,21 @@ public class GuiDesktop implements IGuiBase {
 
 	@Override
 	public LobbyPlayer getGuiPlayer() {
-		// TODO Auto-generated method stub
 		return FControl.instance.getGuiPlayer();
 	}
 
 	@Override
 	public LobbyPlayer createAiPlayer() {
-		// TODO Auto-generated method stub
 		return FControl.instance.getAiPlayer();
 	}
 
 	@Override
 	public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
-		// TODO Auto-generated method stub
 		return FControl.instance.getAiPlayer(name, avatarIndex);
 	}
 
 	@Override
 	public LobbyPlayer getQuestPlayer() {
-		// TODO Auto-generated method stub
 		return getGuiPlayer();
 	}
 }

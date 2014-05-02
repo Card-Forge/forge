@@ -27,6 +27,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
+import forge.properties.ForgeProfileProperties;
 import forge.util.ITriggerEvent;
 
 
@@ -34,7 +35,6 @@ public interface IGuiBase {
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();
-    String getInstallRoot();
     String getAssetsDir();
     boolean mayShowCard(Card card);
     ISkinImage getUnskinnedIcon(String path);
@@ -83,4 +83,5 @@ public interface IGuiBase {
 	LobbyPlayer createAiPlayer();
 	LobbyPlayer createAiPlayer(String name, int avatarIndex);
 	LobbyPlayer getQuestPlayer();
+    ForgeProfileProperties getProfileProps();
 }

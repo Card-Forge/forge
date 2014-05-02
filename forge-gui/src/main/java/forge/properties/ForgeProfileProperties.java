@@ -18,12 +18,14 @@
 package forge.properties;
 
 import forge.util.FileSection;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -46,6 +48,14 @@ public class ForgeProfileProperties {
     
     private static final String _SERVER_PORT = "serverPort";
 
+    public ForgeProfileProperties(String userDir0, String cacheDir0) {
+        userDir     = userDir0;
+        cacheDir    = cacheDir0;
+        cardPicsDir = cacheDir + "pics/cards/";
+        cardPicsSubDir = new HashMap<String, String>();
+        serverPort = 0;
+    }
+
     public ForgeProfileProperties(String filename) {
         Properties props = new Properties();
         File propFile = new File(filename);
@@ -63,9 +73,7 @@ public class ForgeProfileProperties {
         cardPicsDir = _getDir(props, _CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
         cardPicsSubDir = _getMap(props, _CARD_PICS_SUB_DIRS_KEY);
         serverPort = _getInt(props, _SERVER_PORT, 0);
-        
     }
-
 
     private Map<String,String> _getMap(Properties props, String propertyKey) {
         String strMap = props.getProperty(propertyKey, "").trim();
