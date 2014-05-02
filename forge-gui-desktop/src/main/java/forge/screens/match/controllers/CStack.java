@@ -1,7 +1,7 @@
 package forge.screens.match.controllers;
 
+import forge.LobbyPlayer;
 import forge.UiCommand;
-import forge.game.player.LobbyPlayer;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;

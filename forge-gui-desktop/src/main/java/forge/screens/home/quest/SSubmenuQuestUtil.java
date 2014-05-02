@@ -1,20 +1,20 @@
 package forge.screens.home.quest;
 
 import forge.FThreads;
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.*;
 import forge.quest.bazaar.QuestItemType;
@@ -24,6 +24,7 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
+import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -441,11 +442,10 @@ public class SSubmenuQuestUtil {
         }
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = FServer.getLobby();
-        starter.add(humanStart.setPlayer(lobby.getQuestPlayer()));
+        starter.add(humanStart.setPlayer(GuiBase.getInterface().getQuestPlayer()));
 
-        LobbyPlayer aiPlayer = FServer.getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
-        aiPlayer.setIconImageKey(event.getIconImageKey());
+        LobbyPlayer aiPlayer = FControl.instance.getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
+        CMatchUI.SINGLETON_INSTANCE.avatarImages.put(aiPlayer, event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
 
         boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);

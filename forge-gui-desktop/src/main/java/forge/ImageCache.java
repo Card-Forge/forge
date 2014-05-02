@@ -25,7 +25,6 @@ import com.mortennobel.imagescaling.ResampleOp;
 import forge.assets.FSkinProp;
 import forge.assets.ImageUtil;
 import forge.game.card.Card;
-import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FSkin;
@@ -103,11 +102,10 @@ public class ImageCache {
      * retrieve an icon from the cache.  returns the current skin's ICO_UNKNOWN if the icon image is not found
      * in the cache and cannot be loaded from disk.
      */
-    public static SkinIcon getIcon(IHasIcon ihi) {
-        String imageKey = ihi.getIconImageKey();
+    public static SkinIcon getIcon(String imageKey) {
         final BufferedImage i;
         if (_missingIconKeys.contains(imageKey) ||
-                null == (i = scaleImage(ihi.getIconImageKey(), -1, -1, false))) {
+                null == (i = scaleImage(imageKey, -1, -1, false))) {
             _missingIconKeys.add(imageKey);
             return FSkin.getIcon(FSkinProp.ICO_UNKNOWN);
         }

@@ -1,6 +1,6 @@
 package forge.game.event;
 
-import forge.game.player.LobbyPlayer;
+import forge.LobbyPlayer;
 import forge.game.player.Player;
 
 public class GameEventPlayerControl extends GameEvent {

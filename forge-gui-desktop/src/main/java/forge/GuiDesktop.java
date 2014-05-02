@@ -38,7 +38,6 @@ import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -54,7 +53,6 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
-import forge.net.FServer;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.ViewWinLose;
@@ -202,7 +200,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void updatePlayerControl() {
-        CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.getLobby().getGuiPlayer());
+        CMatchUI.SINGLETON_INSTANCE.initHandViews(getGuiPlayer());
         SLayoutIO.loadLayout(null);
         VMatchUI.SINGLETON_INSTANCE.populate();
         for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
@@ -415,4 +413,28 @@ public class GuiDesktop implements IGuiBase {
     public void browseToUrl(String url) throws Exception {
         Desktop.getDesktop().browse(new URI(url));
     }
+
+	@Override
+	public LobbyPlayer getGuiPlayer() {
+		// TODO Auto-generated method stub
+		return FControl.instance.getGuiPlayer();
+	}
+
+	@Override
+	public LobbyPlayer createAiPlayer() {
+		// TODO Auto-generated method stub
+		return FControl.instance.getAiPlayer();
+	}
+
+	@Override
+	public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
+		// TODO Auto-generated method stub
+		return FControl.instance.getAiPlayer(name, avatarIndex);
+	}
+
+	@Override
+	public LobbyPlayer getQuestPlayer() {
+		// TODO Auto-generated method stub
+		return getGuiPlayer();
+	}
 }

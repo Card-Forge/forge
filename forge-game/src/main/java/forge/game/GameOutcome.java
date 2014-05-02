@@ -17,11 +17,12 @@
  */
 package forge.game;
 
-import forge.game.player.LobbyPlayer;
+import forge.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
 import forge.item.PaperCard;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;

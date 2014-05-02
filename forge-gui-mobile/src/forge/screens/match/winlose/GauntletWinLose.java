@@ -21,6 +21,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.Lists;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
@@ -28,13 +30,11 @@ import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
+import forge.interfaces.IGuiBase;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.screens.match.FControl;
 import forge.toolbox.FLabel;
 import forge.toolbox.FPanel;
@@ -87,7 +87,7 @@ public class GauntletWinLose extends ControlWinLose {
         // the player can restart Forge to replay a match.
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
-        LobbyPlayer questPlayer = FServer.getLobby().getQuestPlayer();
+        LobbyPlayer questPlayer = GuiBase.getInterface().getQuestPlayer();
 
         // In all cases, update stats.
         lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
@@ -192,9 +192,9 @@ public class GauntletWinLose extends ControlWinLose {
             GauntletData gd = FModel.getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
-            Lobby lobby = FServer.getLobby();
-            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
-            players.add(new RegisteredPlayer(aiDeck).setPlayer(lobby.getAiPlayer()));
+            IGuiBase fc = GuiBase.getInterface();
+            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(fc.getGuiPlayer()));
+            players.add(new RegisteredPlayer(aiDeck).setPlayer(fc.createAiPlayer()));
             
             saveOptions();
             FControl.endCurrentGame();

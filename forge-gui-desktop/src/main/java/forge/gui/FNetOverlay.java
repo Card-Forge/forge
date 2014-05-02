@@ -1,8 +1,5 @@
 package forge.gui;
 
-import forge.control.ChatArea;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedPanel;
 import net.miginfocom.swing.MigLayout;
@@ -48,8 +45,7 @@ public enum FNetOverlay {
             if ( StringUtils.isBlank(message) )
                 return;
 
-            Lobby lobby = FServer.getLobby(); 
-            lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
+            // lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
         }
     };
     

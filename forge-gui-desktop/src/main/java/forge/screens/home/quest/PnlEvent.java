@@ -45,7 +45,7 @@ class PnlEvent extends JPanel {
     public PnlEvent(final QuestEvent e0) {
         super();
         this.event = e0;
-        img = ImageCache.getIcon(e0);
+        img = ImageCache.getIcon(e0.getIconImageKey());
 
         // Title and description
         this.rad = new FRadioButton(event.getTitle() + " (" + event.getDifficulty().getTitle() + ")");

@@ -19,19 +19,19 @@ package forge.screens.match;
 
 import com.google.common.collect.Lists;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
+import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -88,7 +88,7 @@ public class GauntletWinLose extends ControlWinLose {
         // the player can restart Forge to replay a match.
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
-        LobbyPlayer questPlayer = FServer.getLobby().getQuestPlayer();
+        LobbyPlayer questPlayer = GuiBase.getInterface().getQuestPlayer();
 
         // In all cases, update stats.
         lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
@@ -202,14 +202,14 @@ public class GauntletWinLose extends ControlWinLose {
             GauntletData gd = FModel.getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
-            Lobby lobby = FServer.getLobby();
-            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
-            players.add(new RegisteredPlayer(aiDeck).setPlayer(lobby.getAiPlayer()));
+            FControl fc = Singletons.getControl();
+            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(fc.getGuiPlayer()));
+            players.add(new RegisteredPlayer(aiDeck).setPlayer(fc.getAiPlayer()));
             
             saveOptions();
-            Singletons.getControl().endCurrentGame();
+            fc.endCurrentGame();
             
-            Singletons.getControl().startMatch(GameType.Gauntlet, players);
+            fc.startMatch(GameType.Gauntlet, players);
         } else {
             super.actionOnContinue();
         }

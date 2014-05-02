@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -22,13 +24,10 @@ import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
 import forge.model.CardCollections;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -261,12 +260,11 @@ public class ConstructedScreen extends LaunchScreen {
             }
         }
 
-        Lobby lobby = FServer.getLobby();
         for (int i = 0; i < getNumPlayers(); i++) {
             PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
-            LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? lobby.getAiPlayer(name,
-                    getPlayerAvatar(i)) : lobby.getGuiPlayer();
+            LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? GuiBase.getInterface().createAiPlayer(name,
+                    getPlayerAvatar(i)) : GuiBase.getInterface().getGuiPlayer();
             RegisteredPlayer rp = playerPanel.deckChooser.getPlayer();
 
             if (appliedVariants.isEmpty()) {

@@ -47,6 +47,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
+import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
@@ -110,7 +111,8 @@ public class Game {
         }
 
         for (RegisteredPlayer psc : players0) {
-            Player pl = psc.getPlayer().createIngamePlayer(this);
+        	IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
+            Player pl = factory.createIngamePlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
 

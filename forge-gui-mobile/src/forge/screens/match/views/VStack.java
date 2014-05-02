@@ -3,6 +3,7 @@ package forge.screens.match.views;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.LobbyPlayer;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -10,7 +11,6 @@ import forge.assets.ImageCache;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
-import forge.game.player.LobbyPlayer;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
 import forge.menu.FDropDown;

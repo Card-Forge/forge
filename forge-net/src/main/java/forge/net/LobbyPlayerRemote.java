@@ -1,24 +1,20 @@
 package forge.net;
 
+import forge.LobbyPlayer;
 import forge.game.Game;
-import forge.game.player.LobbyPlayer;
+import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.net.client.INetClient;
 import forge.net.protocol.toclient.ChatPacketClt;
 
-public class LobbyPlayerRemote extends LobbyPlayer {
+public class LobbyPlayerRemote extends LobbyPlayer implements IGameEntitiesFactory {
     
     private final INetClient connection;
     
     public LobbyPlayerRemote(String name, INetClient netClient) { // This is actually a doubtful idea - this means 1 window per player.
         super(name);
         connection = netClient;
-    }
-
-    @Override
-    protected PlayerType getType() {
-        return PlayerType.REMOTE;
     }
 
     /* (non-Javadoc)

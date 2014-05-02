@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
+import forge.LobbyPlayer;
 import forge.SOptionPane;
 import forge.GuiBase;
 import forge.SGuiChoose;
@@ -32,7 +33,6 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;

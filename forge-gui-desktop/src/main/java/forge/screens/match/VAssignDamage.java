@@ -194,7 +194,7 @@ public class VAssignDamage {
                 fakeCard.setName(this.defender.getName());
                 fakeCard.setOwner((Player)defender);
                 Player p = (Player)defender;
-                fakeCard.setImageKey(p.getLobbyPlayer().getIconImageKey());
+                fakeCard.setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getOriginalLobbyPlayer()));
             } else {
                 fakeCard = new Card(-2);
                 fakeCard.setName(this.defender.getName());

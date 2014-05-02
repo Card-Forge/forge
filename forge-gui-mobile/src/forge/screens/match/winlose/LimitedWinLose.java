@@ -19,10 +19,10 @@ package forge.screens.match.winlose;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.GuiBase;
 import forge.game.Game;
 import forge.limited.GauntletMini;
 import forge.model.FModel;
-import forge.net.FServer;
 import forge.toolbox.FLabel;
 
 /**
@@ -46,7 +46,7 @@ public class LimitedWinLose extends ControlWinLose {
         super(view0, lastGame);
         this.view = view0;
         gauntlet = FModel.getGauntletMini();
-        this.wonMatch = lastGame.getMatch().isWonBy(FServer.getLobby().getGuiPlayer());
+        this.wonMatch = lastGame.getMatch().isWonBy(GuiBase.getInterface().getGuiPlayer());
     }
 
     /**
@@ -65,7 +65,7 @@ public class LimitedWinLose extends ControlWinLose {
         resetView();
         nextRound = false;
 
-        if (lastGame.getOutcome().isWinner(FServer.getLobby().getGuiPlayer())) {
+        if (lastGame.getOutcome().isWinner(GuiBase.getInterface().getGuiPlayer())) {
             gauntlet.addWin();
         }
         else {

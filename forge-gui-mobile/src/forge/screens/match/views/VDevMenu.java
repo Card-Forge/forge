@@ -1,10 +1,10 @@
 package forge.screens.match.views;
 
+import forge.GuiBase;
 import forge.game.player.Player;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
-import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
@@ -90,7 +90,7 @@ public class VDevMenu extends FDropDownMenu {
                 boolean unlimitedLands = !prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND);
 
                 for (Player p : FControl.getGame().getPlayers()) {
-                    if (p.getLobbyPlayer() == FServer.getLobby().getGuiPlayer() ) {
+                    if (p.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer() ) {
                         p.canCheatPlayUnlimitedLands = unlimitedLands;
                     }
                 }

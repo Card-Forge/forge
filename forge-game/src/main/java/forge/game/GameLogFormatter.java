@@ -1,10 +1,11 @@
 package forge.game;
 
 import com.google.common.eventbus.Subscribe;
+
+import forge.LobbyPlayer;
 import forge.game.card.Card;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;

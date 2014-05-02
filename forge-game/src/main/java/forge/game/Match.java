@@ -1,13 +1,14 @@
 package forge.game;
 
 import com.google.common.collect.*;
+
+import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.card.Card;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.trigger.Trigger;

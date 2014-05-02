@@ -3,6 +3,7 @@ package forge.game.player;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 
+import forge.LobbyPlayer;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;

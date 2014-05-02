@@ -16,6 +16,8 @@
  */
 package forge.screens.match;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.card.CardEdition;
@@ -31,7 +33,6 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.item.*;
 import forge.model.FModel;
-import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.*;
 import forge.quest.bazaar.QuestItemType;
@@ -92,7 +93,7 @@ public class QuestWinLose extends ControlWinLose {
         this.view = view0;
         qData = FModel.getQuest();
         qEvent = qData.getCurrentEvent();
-        this.wonMatch = lastGame.getMatch().isWonBy(FServer.getLobby().getQuestPlayer());
+        this.wonMatch = lastGame.getMatch().isWonBy(GuiBase.getInterface().getQuestPlayer());
         this.isAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -117,7 +118,7 @@ public class QuestWinLose extends ControlWinLose {
             qc.getCards().getShopList();
         }
 
-        final LobbyPlayer questLobbyPlayer = FServer.getLobby().getQuestPlayer();
+        final LobbyPlayer questLobbyPlayer = GuiBase.getInterface().getQuestPlayer();
         Player questPlayer = null;
         for (Player p : lastGame.getRegisteredPlayers()) {
             if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
@@ -321,7 +322,7 @@ public class QuestWinLose extends ControlWinLose {
         boolean hasNeverLost = true;
         int lifeDifferenceCredits = 0;
         
-        LobbyPlayer localHuman = FServer.getLobby().getQuestPlayer();
+        LobbyPlayer localHuman = GuiBase.getInterface().getQuestPlayer();
         for (final GameOutcome game : lastGame.getMatch().getPlayedGames()) {
             if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;

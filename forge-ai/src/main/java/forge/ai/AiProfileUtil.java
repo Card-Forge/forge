@@ -17,7 +17,7 @@
  */
 package forge.ai;
 
-import forge.game.player.LobbyPlayer;
+import forge.LobbyPlayer;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
 

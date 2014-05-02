@@ -17,11 +17,12 @@ package forge.screens.match;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.game.Game;
 import forge.gui.SOverlayUtils;
 import forge.limited.GauntletMini;
 import forge.model.FModel;
-import forge.net.FServer;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 
@@ -46,6 +47,7 @@ public class LimitedWinLose extends ControlWinLose {
 
     private SkinnedLabel lblTemp1;
     private SkinnedLabel lblTemp2;
+	private LobbyPlayer guiPlayer;
 
     /**
      * Instantiates a new limited mode win/lose handler.
@@ -57,7 +59,8 @@ public class LimitedWinLose extends ControlWinLose {
         super(view0, lastGame);
         this.view = view0;
         gauntlet = FModel.getGauntletMini();
-        this.wonMatch = lastGame.getMatch().isWonBy(FServer.getLobby().getGuiPlayer());
+        guiPlayer = GuiBase.getInterface().getGuiPlayer();
+        this.wonMatch = lastGame.getMatch().isWonBy(guiPlayer);
     }
 
 
@@ -78,7 +81,7 @@ public class LimitedWinLose extends ControlWinLose {
         resetView();
         nextRound = false;
 
-        if (lastGame.getOutcome().isWinner(FServer.getLobby().getGuiPlayer())) {
+        if (lastGame.getOutcome().isWinner(guiPlayer)) {
             gauntlet.addWin();
         } else {
             gauntlet.addLoss();

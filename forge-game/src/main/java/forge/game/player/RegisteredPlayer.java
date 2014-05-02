@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;

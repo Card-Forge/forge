@@ -12,7 +12,6 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.net.FServer;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
 
@@ -254,7 +253,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventAttackersDeclared event) {
         // Skip redraw for GUI player?
-        if (event.player.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+        if (event.player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
             return null;
         }
 

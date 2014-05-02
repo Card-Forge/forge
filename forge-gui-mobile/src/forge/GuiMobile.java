@@ -28,7 +28,6 @@ import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -215,6 +214,8 @@ public class GuiMobile implements IGuiBase {
     public void startMatch(GameType gameType, List<RegisteredPlayer> players) {
         FControl.startMatch(gameType, players);
     }
+    
+    
 
     @Override
     public void setPanelSelection(Card c) {
@@ -341,4 +342,27 @@ public class GuiMobile implements IGuiBase {
     public void browseToUrl(String url) throws Exception {
         Gdx.net.openURI(url);
     }
+	@Override
+	public LobbyPlayer getGuiPlayer() {
+		// TODO Auto-generated method stub
+		return FControl.getGuiPlayer();
+	}
+
+	@Override
+	public LobbyPlayer createAiPlayer() {
+		// TODO Auto-generated method stub
+		return FControl.getAiPlayer();
+	}
+
+	@Override
+	public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
+		// TODO Auto-generated method stub
+		return FControl.getAiPlayer(name, avatarIndex);
+	}
+
+	@Override
+	public LobbyPlayer getQuestPlayer() {
+		// TODO Auto-generated method stub
+		return getGuiPlayer();
+	}
 }

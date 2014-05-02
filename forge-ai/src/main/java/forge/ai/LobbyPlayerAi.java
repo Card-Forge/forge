@@ -1,10 +1,11 @@
 package forge.ai;
 
+import forge.LobbyPlayer;
 import forge.game.Game;
-import forge.game.player.LobbyPlayer;
+import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 
-public class LobbyPlayerAi extends LobbyPlayer {
+public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     public LobbyPlayerAi(String name) {
         super(name);
     }
@@ -32,11 +33,6 @@ public class LobbyPlayerAi extends LobbyPlayer {
 
     public void setRotateProfileEachGame(boolean rotateProfileEachGame) {
         this.rotateProfileEachGame = rotateProfileEachGame;
-    }
-
-    @Override
-    protected PlayerType getType() {
-        return PlayerType.COMPUTER;
     }
 
     @Override

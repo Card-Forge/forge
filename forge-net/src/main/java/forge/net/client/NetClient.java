@@ -1,6 +1,6 @@
 package forge.net.client;
 
-import forge.game.player.LobbyPlayer;
+import forge.LobbyPlayer;
 import forge.net.FServer;
 import forge.net.IClientSocket;
 import forge.net.IConnectionObserver;

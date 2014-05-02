@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 
+import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.events.UiEvent;
@@ -20,7 +21,6 @@ import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -79,4 +79,8 @@ public interface IGuiBase {
     int getAvatarCount();
     void copyToClipboard(String text);
     void browseToUrl(String url) throws Exception;
+	LobbyPlayer getGuiPlayer();
+	LobbyPlayer createAiPlayer();
+	LobbyPlayer createAiPlayer(String name, int avatarIndex);
+	LobbyPlayer getQuestPlayer();
 }

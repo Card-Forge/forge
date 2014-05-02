@@ -9,7 +9,6 @@ import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.game.GameType;
 import forge.game.card.Card;
-import forge.game.player.LobbyPlayer.PlayerType;
 import forge.gui.CardDetailPanel;
 import forge.deck.DeckProxy;
 import forge.deckchooser.DecksComboBoxEvent;
@@ -442,7 +441,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public FCheckBox getCbArtifacts() { return cbArtifacts; }
 
     public boolean isPlayerAI(int playernum) {
-        return playerPanels.get(playernum).getPlayerType() == PlayerType.COMPUTER;
+        return playerPanels.get(playernum).isAi();
     }
 
     public int getNumPlayers() {
@@ -685,8 +684,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
         }
 
-        public PlayerType getPlayerType() {
-            return radioAi.isSelected() ? PlayerType.COMPUTER : PlayerType.HUMAN;
+        public Boolean isAi() {
+            return radioAi.isSelected();
         }
 
         public void setVanguardButtonText(String text) {

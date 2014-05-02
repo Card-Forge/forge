@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.*;
@@ -2724,7 +2725,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (mindSlaveMaster != null) {
             LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-            controller = mindSlaveMaster.getLobbyPlayer().createControllerFor(this);
+            IGameEntitiesFactory master = (IGameEntitiesFactory)mindSlaveMaster.getLobbyPlayer();
+            controller = master.createControllerFor(this);
             game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, getLobbyPlayer()));
         }
         else {

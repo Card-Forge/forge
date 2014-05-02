@@ -21,6 +21,10 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
+import forge.LobbyPlayer;
+import forge.ai.AiProfileUtil;
+import forge.ai.LobbyPlayerAi;
 import forge.card.CardCharacteristicName;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
@@ -41,7 +45,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.trigger.TriggerType;
@@ -50,7 +53,7 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputProxy;
 import forge.match.input.InputQueue;
 import forge.model.FModel;
-import forge.net.FServer;
+import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VAssignDamage;
@@ -61,6 +64,9 @@ import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.GuiDisplayUtil;
+import forge.util.MyRandom;
+import forge.util.NameGenerator;
 
 public class FControl {
     private FControl() { } //don't allow creating instance
@@ -136,7 +142,7 @@ public class FControl {
         // Add playback controls to match if needed
         gameHasHumanPlayer = false;
         for (Player p :  game.getPlayers()) {
-            if (p.getController().getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+            if (p.getController().getLobbyPlayer() == getGuiPlayer()) {
                 gameHasHumanPlayer = true;
             }
         }
@@ -281,13 +287,13 @@ public class FControl {
     public static Player getCurrentPlayer() {
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if (null != currentPriority && currentPriority.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+        if (null != currentPriority && currentPriority.getLobbyPlayer() == getGuiPlayer()) {
             return currentPriority;
         }
 
         // otherwise find just any player, belonging to this lobbyplayer
         for (Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+            if (p.getLobbyPlayer() == getGuiPlayer()) {
                 return p;
             }
         }
@@ -434,7 +440,7 @@ public class FControl {
     public static void undoLastAction() {
         Game game = getGame();
         Player player = game.getPhaseHandler().getPriorityPlayer();
-        if (player != null && player.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+        if (player != null && player.getLobbyPlayer() == getGuiPlayer()) {
             game.stack.undo();
         }
     }
@@ -457,7 +463,7 @@ public class FControl {
     public static void stopGame() {
         List<Player> pp = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if (p.getOriginalLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+            if (p.getOriginalLobbyPlayer() == getGuiPlayer()) {
                 pp.add(p);
             }
         }
@@ -472,7 +478,7 @@ public class FControl {
         }
 
         Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == FServer.getLobby().getGuiPlayer();
+        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == getGuiPlayer();
 
         if (hasHuman && humanHasPriority) {
             game.getAction().checkGameOverCondition();
@@ -760,4 +766,37 @@ public class FControl {
         fvHuman.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
         fvHuman.getLabel(PhaseType.CLEANUP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
     }
+    
+    /** Returns a random name from the supplied list. */
+    public static String getRandomName() {
+        String playerName = GuiDisplayUtil.getPlayerName();
+        String aiName = NameGenerator.getRandomName("Any", "Generic", playerName);
+        return aiName;
+    }
+    
+    public final static LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
+    public final static LobbyPlayer getAiPlayer(String name) {
+        int avatarCount = GuiBase.getInterface().getAvatarCount();
+        return getAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount));
+    }
+    public final static LobbyPlayer getAiPlayer(String name, int avatarIndex) {
+        LobbyPlayerAi player = new LobbyPlayerAi(name);
+
+        // TODO: implement specific AI profiles for quest mode.
+        String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+        player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
+        if(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
+            lastProfileChosen = AiProfileUtil.getRandomProfile();
+            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
+        }
+        player.setAiProfile(lastProfileChosen);
+        player.setAvatarIndex(avatarIndex);
+        return player;
+    }
+
+    private final static LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
+    public final static LobbyPlayer getGuiPlayer() {
+        return guiPlayer;
+    }
+
 }

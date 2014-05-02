@@ -17,7 +17,7 @@
  */
 package forge.screens.match.views;
 
-import forge.game.player.LobbyPlayer;
+import forge.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;

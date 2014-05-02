@@ -21,6 +21,8 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.FThreads;
 import forge.ImageCache;
@@ -34,7 +36,6 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -42,7 +43,6 @@ import forge.gui.framework.*;
 import forge.item.InventoryItem;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
-import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.*;
 import forge.screens.match.menus.CMatchUIMenus;
@@ -78,6 +78,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     private EventBus uiEvents;
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
     private MatchUiEventVisitor visitor = new MatchUiEventVisitor();
+    public final Map<LobbyPlayer, String> avatarImages = new HashMap<LobbyPlayer, String>();
 
     private CMatchUI() {
         uiEvents = new EventBus("ui events");
@@ -87,8 +88,9 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     private SkinImage getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
-        if (lp.getIconImageKey() != null) {
-            return ImageCache.getIcon(lp);
+        
+        if (avatarImages.containsKey(lp)) {
+            return ImageCache.getIcon(avatarImages.get(lp));
         }
 
         int avatarIdx = lp.getAvatarIndex();
@@ -467,7 +469,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     public void undo() {
     	Game game = Singletons.getControl().getObservedGame();
         Player player = game.getPhaseHandler().getPriorityPlayer();
-        if (player != null && player.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+        if (player != null && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
             game.stack.undo();
         }
     }

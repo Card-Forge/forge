@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.LobbyPlayer;
 import forge.menu.FMenuBar;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
@@ -20,7 +21,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;

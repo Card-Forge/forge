@@ -1,7 +1,5 @@
 package forge.net.client.state;
 
-import forge.control.ChatArea;
-import forge.net.FServer;
 import forge.net.client.INetClient;
 import forge.net.protocol.toserver.ChatPacketSrv;
 import forge.net.protocol.toserver.IPacketSrv;
@@ -22,7 +20,7 @@ public class InLobbyClientState implements IClientState {
         if( data instanceof ChatPacketSrv) {
             ChatPacketSrv cp = (ChatPacketSrv) data;
             // if ( not muted ) 
-            FServer.getLobby().speak(ChatArea.Room, client.getPlayer(), cp.getMessage());
+            // FServer.getLobby().speak(ChatArea.Room, client.getPlayer(), cp.getMessage());
             // else 
             //   client.send("You are banned and cannot speak");
             return true;

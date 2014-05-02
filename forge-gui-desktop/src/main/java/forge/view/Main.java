@@ -22,7 +22,6 @@ import forge.GuiDesktop;
 import forge.Singletons;
 import forge.card.CardReaderExperiments;
 import forge.model.FModel;
-import forge.net.FServer;
 
 /**
  * Main class for Forge's swing application view.
@@ -55,7 +54,7 @@ public final class Main {
         
         switch(mode) {
             case "sim":
-                FServer.simulateMatches(args);
+                SimulateMatch.simulate(args);
                 break;
 
             case "parse":

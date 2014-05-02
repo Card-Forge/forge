@@ -1,5 +1,6 @@
 package forge.screens.home.sanctioned;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -15,8 +16,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
@@ -138,11 +137,10 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = FServer.getLobby();
-        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(lobby.getGuiPlayer()));
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(lobby.getAiPlayer()));
+        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GuiBase.getInterface().getGuiPlayer()));
+        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GuiBase.getInterface().createAiPlayer()));
 
-        Singletons.getControl().startMatch(GameType.Draft, starter);
+        GuiBase.getInterface().startMatch(GameType.Draft, starter);
     }
 
     /** */

@@ -21,9 +21,8 @@ import forge.GuiBase;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
+import forge.interfaces.IGuiBase;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,11 +151,11 @@ public class GauntletMini {
      */
     private void startRound() {
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = FServer.getLobby();
-        starter.add(new RegisteredPlayer(humanDeck).setPlayer(lobby.getGuiPlayer()));
-        starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
+        IGuiBase fc = GuiBase.getInterface();
+        starter.add(new RegisteredPlayer(humanDeck).setPlayer(fc.getGuiPlayer()));
+        starter.add(aiOpponents.get(currentRound - 1).setPlayer(fc.createAiPlayer()));
 
-        GuiBase.getInterface().startMatch(gauntletType, starter);
+        fc.startMatch(gauntletType, starter);
     }
 
     /**

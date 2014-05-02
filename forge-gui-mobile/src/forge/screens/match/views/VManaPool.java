@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.GuiBase;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -15,7 +16,6 @@ import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.match.input.Input;
 import forge.match.input.InputPayMana;
-import forge.net.FServer;
 import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
 
@@ -85,7 +85,7 @@ public class VManaPool extends VDisplayArea {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (player.getLobbyPlayer() == FServer.getLobby().getGuiPlayer()) {
+            if (player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
                 final Input input = FControl.getInputQueue().getInput();
                 if (input instanceof InputPayMana) {
                     // Do something

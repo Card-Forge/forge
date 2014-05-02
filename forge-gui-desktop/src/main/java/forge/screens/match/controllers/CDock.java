@@ -17,6 +17,7 @@
  */
 package forge.screens.match.controllers;
 
+import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.FThreads;
 import forge.Singletons;
@@ -30,7 +31,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.SOverlayUtils;

@@ -1,11 +1,11 @@
 package forge.screens.match.controllers;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VDev;
@@ -46,7 +46,7 @@ public enum CDev implements ICDoc {
         FModel.getPreferences().setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(newValue));
         
         for(Player p : Singletons.getControl().getObservedGame().getPlayers()) {
-            if( p.getLobbyPlayer() == FServer.getLobby().getGuiPlayer() )
+            if( p.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer() )
                 p.canCheatPlayUnlimitedLands = newValue;
         }
         // probably will need to call a synchronized method to have the game thread see changed value of the variable 

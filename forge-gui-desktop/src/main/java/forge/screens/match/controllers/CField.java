@@ -19,10 +19,10 @@ package forge.screens.match.controllers;
 
 import com.google.common.base.Function;
 
+import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.game.card.Card;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;

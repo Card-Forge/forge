@@ -1,5 +1,7 @@
 package forge.screens.home.sanctioned;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.CardPool;
@@ -8,17 +10,15 @@ import forge.deck.DeckSection;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.framework.ICDoc;
+import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.CardCollections;
 import forge.model.FModel;
-import forge.net.FServer;
-import forge.net.Lobby;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
@@ -208,12 +208,13 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         	}
         }
 
-        Lobby lobby = FServer.getLobby();
+        IGuiBase fc = GuiBase.getInterface();
         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
         for (final int i : view.getParticipants()) {
         	String name = view.getPlayerName(i);
-            LobbyPlayer lobbyPlayer = view.isPlayerAI(i) ? lobby.getAiPlayer(name,
-                    view.getPlayerAvatar(i)) : lobby.getGuiPlayer();
+            LobbyPlayer lobbyPlayer = view.isPlayerAI(i) 
+            		? fc.createAiPlayer(name, view.getPlayerAvatar(i)) 
+            		: fc.getGuiPlayer();
             RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
 
             if (variantTypes.isEmpty()) {
