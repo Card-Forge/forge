@@ -257,10 +257,7 @@ public class Forge implements ApplicationListener {
                 }
                 return container.keyDown(keyCode);
             }
-            if (keyInputAdapter != null) {
-                return keyInputAdapter.keyDown(keyCode);
-            }
-            return false;
+            return keyInputAdapter.keyDown(keyCode);
         }
 
         @Override
