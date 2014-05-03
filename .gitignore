@@ -8,6 +8,7 @@ forge-core/forge-core.iml
 forge-core/target
 forge-game/target
 forge-gui-android/bin
+forge-gui-android/gen
 forge-gui-android/target
 forge-gui-desktop/target
 forge-gui-mobile-dev/bin
