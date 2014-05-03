@@ -268,7 +268,7 @@ public class DualListBox<T> extends FDialog {
 
                 @Override
                 public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
                 }
             });
             setFontSize(12);
