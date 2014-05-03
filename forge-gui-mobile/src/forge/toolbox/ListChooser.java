@@ -134,7 +134,7 @@ public class ListChooser<T> extends FContainer {
         }
         setHeight(Math.min(ITEM_HEIGHT * list.size(), FOptionPane.getMaxDisplayObjHeight()));
 
-        optionPane = new FOptionPane(null, title, null, this, options, minChoices < 0 ? 0 : -1, new Callback<Integer>() {
+        optionPane = new FOptionPane(null, title, null, this, options, 0, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 called = false;
