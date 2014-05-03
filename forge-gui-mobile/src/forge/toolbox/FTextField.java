@@ -145,12 +145,12 @@ public class FTextField extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        startEdit();
-        return true;
+        return startKeyInput();
     }
 
-    public void startEdit() {
-        if (keyInputActive) { return; } //do nothing if key input already active
+    @Override
+    public boolean startKeyInput() {
+        if (keyInputActive) { return true; } //do nothing if key input already active
 
         selStart = 0; //select all before starting input
         selLength = text.length();
@@ -229,6 +229,7 @@ public class FTextField extends FDisplayObject {
             }
         });
         keyInputActive = true;
+        return true;
     }
 
     @Override

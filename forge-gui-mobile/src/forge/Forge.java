@@ -248,6 +248,19 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean keyDown(int keyCode) {
+            if (keyInputAdapter == null) {
+                //if no active key input adapter, give current screen or overlay a chance to start one
+                FContainer container = FOverlay.getTopOverlay();
+                if (container == null) {
+                    container = currentScreen;
+                    if (container == null) {
+                        return false;
+                    }
+                }
+                if (!container.startKeyInput()) {
+                    return false;
+                }
+            }
             if (keyInputAdapter != null) {
                 return keyInputAdapter.keyDown(keyCode);
             }

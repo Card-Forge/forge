@@ -18,8 +18,6 @@
 
 package forge.toolbox;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Function;
 
@@ -183,9 +181,6 @@ public class ListChooser<T> extends FContainer {
         }
         onSelectionChange();
         optionPane.show();
-        if (txtSearch != null && Gdx.app.getType() == ApplicationType.Desktop) {
-            txtSearch.startEdit(); //automatically focus search textbox for edit if on desktop
-        }
     }
 
     private void onSelectionChange() {

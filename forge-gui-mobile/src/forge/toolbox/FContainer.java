@@ -99,4 +99,15 @@ public abstract class FContainer extends FDisplayObject {
         }
         return null;
     }
+
+    @Override
+    public boolean startKeyInput() {
+        //by default, give all children a chance to start keyboard input
+        for (FDisplayObject c : children) {
+            if (c.startKeyInput()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
