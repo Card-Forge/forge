@@ -24,7 +24,9 @@ Forge now includes all of the new Journey into Nyx cards. It may take a few days
 New Cards
 ---------
 
-
+Illicit Auction
+Mages' Contest
+Pain's Reward
 
 
 ---------------------------
