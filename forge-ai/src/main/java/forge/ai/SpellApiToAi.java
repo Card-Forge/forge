@@ -22,6 +22,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.Attach, AttachAi.class);
         apiToClass.put(ApiType.Balance, BalanceAi.class);
         apiToClass.put(ApiType.BecomesBlocked, BecomesBlockedAi.class);
+        apiToClass.put(ApiType.BidLife, BidLifeAi.class);
         apiToClass.put(ApiType.Bond, BondAi.class);
         apiToClass.put(ApiType.ChangeTargets, ChangeTargetsAi.class);
         apiToClass.put(ApiType.ChangeZone, ChangeZoneAi.class);

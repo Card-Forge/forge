@@ -11,6 +11,7 @@ public enum PlayerActionConfirmMode {
     ChangeZoneToAltDestination,
     ChangeZoneFromAltSource,
     ChangeZoneGeneral,
+    BidLife,
     Tribute;
     // Ripple;
     

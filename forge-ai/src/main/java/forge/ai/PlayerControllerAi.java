@@ -122,6 +122,8 @@ public class PlayerControllerAi extends PlayerController {
             switch (ability.getApi()) {
                 case ChooseNumber:
                     return ability.getActivatingPlayer().isOpponentOf(player) ? 0 : ComputerUtilMana.determineLeftoverMana(ability, player);
+                case BidLife:
+                    return 0;
                 default:
                     return null;   
             }
@@ -165,6 +167,12 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return getAi().confirmAction(sa, mode, message);
+    }
+    
+    @Override
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String string,
+            int bid, Player winner) {
+        return getAi().confirmBidAction(sa, mode, string, bid, winner);
     }
 
     @Override

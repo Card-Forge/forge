@@ -21,6 +21,7 @@ public enum ApiType {
     Attach (AttachEffect.class),
     Balance (BalanceEffect.class),
     BecomesBlocked (BecomesBlockedEffect.class),
+    BidLife (BidLifeEffect.class),
     Bond (BondEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeZone (ChangeZoneEffect.class),

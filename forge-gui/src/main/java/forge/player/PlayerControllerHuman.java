@@ -318,6 +318,12 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife,
+            String string, int bid, Player winner) {
+        return SGuiDialog.confirm(sa.getHostCard(), string + " Highest Bidder " + winner);
+    }
+
+    @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         return SGuiDialog.confirm(hostCard, message);
     }
@@ -1032,4 +1038,5 @@ public class PlayerControllerHuman extends PlayerController {
     public Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean b, Player decider) {
         return chooseSingleEntityForEffect(fetchList, sa, selectPrompt, b, decider);
     }
+
 }

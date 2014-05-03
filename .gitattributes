@@ -37,6 +37,7 @@ forge-ai/src/main/java/forge/ai/ability/AnimateAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/AttachAi.java -text
 forge-ai/src/main/java/forge/ai/ability/BalanceAi.java -text
 forge-ai/src/main/java/forge/ai/ability/BecomesBlockedAi.java -text
+forge-ai/src/main/java/forge/ai/ability/BidLifeAi.java -text
 forge-ai/src/main/java/forge/ai/ability/BondAi.java -text
 forge-ai/src/main/java/forge/ai/ability/CanPlayAsDrawbackAi.java -text
 forge-ai/src/main/java/forge/ai/ability/CannotPlayAi.java -text
@@ -296,6 +297,7 @@ forge-game/src/main/java/forge/game/ability/effects/AnimateEffectBase.java svneo
 forge-game/src/main/java/forge/game/ability/effects/AttachEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BalanceEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BecomesBlockedEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/BidLifeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BondEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeTargetsEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeZoneAllEffect.java -text
@@ -6877,6 +6879,7 @@ forge-gui/res/cardsfolder/i/iizuka_the_ruthless.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ikiral_outrider.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ill_gotten_gains.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ill_tempered_cyclops.txt -text
+forge-gui/res/cardsfolder/i/illicit_auction.txt -text
 forge-gui/res/cardsfolder/i/illness_in_the_ranks.txt -text
 forge-gui/res/cardsfolder/i/illuminate.txt -text
 forge-gui/res/cardsfolder/i/illuminated_folio.txt -text
@@ -8135,6 +8138,7 @@ forge-gui/res/cardsfolder/m/mage_il_vec.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mage_slayer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magebane_armor.txt -text
 forge-gui/res/cardsfolder/m/magefire_wings.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/mages_contest.txt -text
 forge-gui/res/cardsfolder/m/mages_guile.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mageta_the_lion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/magetas_boon.txt svneol=native#text/plain
@@ -9590,6 +9594,7 @@ forge-gui/res/cardsfolder/p/pain_suffering.txt -text
 forge-gui/res/cardsfolder/p/painbringer.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/painful_memories.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/painful_quandary.txt -text
+forge-gui/res/cardsfolder/p/pains_reward.txt -text
 forge-gui/res/cardsfolder/p/painsmith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/painters_servant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/painwracker_oni.txt svneol=native#text/plain

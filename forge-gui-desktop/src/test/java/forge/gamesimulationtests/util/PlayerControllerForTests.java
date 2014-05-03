@@ -173,6 +173,12 @@ public class PlayerControllerForTests extends PlayerController {
 		return true;
 	}
 
+    @Override
+    public boolean confirmBidAction(SpellAbility sa,
+            PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
+        return false;
+    }
+
 	@Override
 	public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
 		return true;
@@ -600,4 +606,5 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO Auto-generated method stub
         return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
+
 }

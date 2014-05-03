@@ -922,6 +922,22 @@ public class AiController {
             return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
     }
 
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message,
+            int bid, Player winner) {
+        if (mode != null) switch (mode) {
+            case BidLife:
+                if (sa.hasParam("AIBidMax")) {
+                    return !player.equals(winner) && bid < Integer.parseInt(sa.getParam("AIBidMax")) && player.getLife() > bid + 5;
+                } else {
+                    return false;
+                }
+            default:
+                return false;
+        } 
+        return false;
+    }
+    
+
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         if (logic.equalsIgnoreCase("ProtectFriendly")) {
             final Player controller = hostCard.getController();
