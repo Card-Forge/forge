@@ -69,14 +69,12 @@ public enum VPlayers implements IVDoc<CPlayers> {
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
-
+        stormLabel = new InfoLabel();
+        pnl.add(stormLabel, constraints);
         for (final Entry<Player, JLabel[]> p : infoLBLs.entrySet()) {
             for(JLabel label : p.getValue() )
                 pnl.add(label, constraints);
         }
-
-        stormLabel = new InfoLabel();
-        pnl.add(stormLabel, constraints);
     }
     
     public void init(final Iterable<Player> players) {
@@ -95,7 +93,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
             this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes, cmd });
 
             // Set border on bottom label, and larger font on player name
-            cmd.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+            name.setBorder(new FSkin.MatteSkinBorder(1, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             name.setText(p.getName());
         }
     }
@@ -143,9 +141,10 @@ public enum VPlayers implements IVDoc<CPlayers> {
     //========== Observer update methods
 
     /** @param p0 {@link forge.game.player.Player} */
-    public void update() {
+    public void update(Game game) {
         // No need to update if this panel isn't showing
         if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
+        boolean isCommander = game.getRules().hasAppliedVariant(GameType.Commander);
 
         for(Entry<Player, JLabel[]> rr : infoLBLs.entrySet()) {
             Player p0 = rr.getKey();
@@ -172,10 +171,11 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 }
                 temp[6].setText(sb.toString());
             }
-            if(p0.getGame().getRules().getGameType() == GameType.Commander) {
+            if (isCommander) {
                 temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }
+        updateStormLabel(game);
     }
 
     /**

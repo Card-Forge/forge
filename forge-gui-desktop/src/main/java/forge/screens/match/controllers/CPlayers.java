@@ -1,6 +1,7 @@
 package forge.screens.match.controllers;
 
 import forge.UiCommand;
+import forge.game.Game;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VPlayers;
 
@@ -13,6 +14,7 @@ import forge.screens.match.views.VPlayers;
 public enum CPlayers implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
+    private Game game;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -34,7 +36,11 @@ public enum CPlayers implements ICDoc {
      */
     @Override
     public void update() {
-        VPlayers.SINGLETON_INSTANCE.update();
+        VPlayers.SINGLETON_INSTANCE.update(game);
+    }
+
+    public void setModel(Game game) {
+        this.game = game;
     }
 
 }
