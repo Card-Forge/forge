@@ -266,9 +266,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (RowType.Other.isGoodFor(stack.get(0).getCard()) || 
-                        (stack.get(0).getCard().isEnchantment() && !stack.get(0).getCard().isCreature() && !stack.get(0).getCard().isEnchanted() && !stack.get(0).getCard().isCloned() &&
-                        (!stack.get(0).getCard().isEnchantingCard() && ((Card) (stack.get(0).getCard().getEnchanting())).getController() == stack.get(0).getCard().getController()))) {
+                if (RowType.Other.isGoodFor(stack.get(0).getCard())) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++) {
                         CardStack r = row.get(i);
