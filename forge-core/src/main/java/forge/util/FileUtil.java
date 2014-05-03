@@ -80,6 +80,16 @@ public final class FileUtil {
         FileUtil.writeFile(new File(filename), data);
     }
 
+    public static void writeFile(File file, String text) {
+        try {
+            PrintWriter p = new PrintWriter(file);
+            p.print(text);
+            p.close();
+        } catch (final Exception ex) {
+            throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
+        }
+    }
+
     // writes each element of ArrayList on a separate line
     // this is used to write a file of Strings
     // this will create a new file if needed
@@ -109,7 +119,7 @@ public final class FileUtil {
     public static String readFileToString(String filename) {
     	return TextUtil.join(readFile(filename), "\n");
     }
-    
+
     public static List<String> readFile(final String filename) {
         return FileUtil.readFile(new File(filename));
     }
