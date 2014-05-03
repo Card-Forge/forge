@@ -73,6 +73,13 @@ public class FTextField extends FDisplayObject {
         selLength = 0;
     }
 
+    public String getSelectedText() {
+        if (selLength > 0) {
+            return text.substring(selStart, selLength);
+        }
+        return "";
+    }
+
     public String getGhostText() {
         return ghostText;
     }
@@ -220,6 +227,43 @@ public class FTextField extends FDisplayObject {
                         selLength = 0;
                     }
                     return true;
+                case Keys.A: //select all on Ctrl+A
+                    if (KeyInputAdapter.isCtrlKeyDown()) {
+                        selStart = 0;
+                        selLength = text.length();
+                        return true;
+                    }
+                    break;
+                case Keys.C: //copy on Ctrl+C
+                    if (KeyInputAdapter.isCtrlKeyDown()) {
+                        if (selLength > 0) {
+                            Forge.getClipboard().setContents(getSelectedText());
+                        }
+                        return true;
+                    }
+                    break;
+                case Keys.V: //paste on Ctrl+V
+                    if (KeyInputAdapter.isCtrlKeyDown()) {
+                        insertText(Forge.getClipboard().getContents());
+                        return true;
+                    }
+                    break;
+                case Keys.X: //cut on Ctrl+X
+                    if (KeyInputAdapter.isCtrlKeyDown()) {
+                        if (selLength > 0) {
+                            Forge.getClipboard().setContents(getSelectedText());
+                            insertText("");
+                        }
+                        return true;
+                    }
+                    break;
+                case Keys.Z: //cancel edit on Ctrl+Z
+                    if (KeyInputAdapter.isCtrlKeyDown()) {
+                        setText(textBeforeKeyInput);
+                        Forge.endKeyInput();
+                        return true;
+                    }
+                    break;
                 }
                 return false;
             }

@@ -6,6 +6,7 @@ import java.util.Stack;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
@@ -237,6 +238,16 @@ public class Forge implements ApplicationListener {
 
         //also allow handling of keyUp but don't require it
         public boolean keyUp(int keyCode) { return false; }
+
+        public static boolean isCtrlKeyDown() {
+            return Gdx.input.isKeyPressed(Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT);
+        }
+        public static boolean isShiftKeyDown() {
+            return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
+        }
+        public static boolean isAltKeyDown() {
+            return Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT);
+        }
     }
 
     private static class MainInputProcessor extends FGestureAdapter {
