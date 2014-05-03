@@ -171,7 +171,10 @@ public class MatchScreen extends FScreen {
         switch (keyCode) {
         case Keys.ENTER:
         case Keys.SPACE:
-            return prompt.getBtnOk().trigger(); //trigger OK on Enter or Space
+            if (prompt.getBtnOk().trigger()) { //trigger OK on Enter or Space
+                return true;
+            }
+            return prompt.getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
             return prompt.getBtnCancel().trigger(); //trigger Cancel on Escape
         }

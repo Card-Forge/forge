@@ -264,10 +264,14 @@ public class FOptionPane extends FDialog {
         switch (keyCode) {
         case Keys.ENTER:
         case Keys.SPACE:
-            setResult(defaultOption); //set result to default option on Enter/Space
+            if (isButtonEnabled(defaultOption)) {
+                setResult(defaultOption); //set result to default option on Enter/Space
+            }
             return true;
         case Keys.ESCAPE:
-            setResult(buttons.length - 1); //set result to final option on Escape
+            if (isButtonEnabled(buttons.length - 1)) {
+                setResult(buttons.length - 1); //set result to final option on Escape
+            }
             return true;
         }
         return super.keyDown(keyCode);
