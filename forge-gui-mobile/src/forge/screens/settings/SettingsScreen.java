@@ -243,11 +243,17 @@ public class SettingsScreen extends FScreen {
 
                     @Override
                     public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                        float offset = w * INSETS_FACTOR - FList.PADDING; //increase padding for settings items
+                        x += offset;
+                        y += offset;
+                        w -= 2 * offset;
+                        h -= 2 * offset;
+
                         g.drawText(value, font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
 
-                        float radius = h / 5;
+                        float radius = h / 3;
                         x += w - radius;
-                        y = h / 2;
+                        y += h / 2;
                         g.drawCircle(1, DESC_COLOR, x, y, radius);
                         if (value.equals(currentValue)) {
                             g.fillCircle(foreColor, x, y, radius / 2);
