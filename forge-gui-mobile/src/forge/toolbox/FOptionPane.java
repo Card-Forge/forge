@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
@@ -130,8 +131,9 @@ public class FOptionPane extends FDialog {
     private final FDisplayObject displayObj;
     private final FButton[] buttons;
     private final Callback<Integer> callback;
+    private final int defaultOption;
 
-    public FOptionPane(String message, String title, FSkinImage icon, FDisplayObject displayObj0, String[] options, int defaultOption, final Callback<Integer> callback0) {
+    public FOptionPane(String message, String title, FSkinImage icon, FDisplayObject displayObj0, String[] options, int defaultOption0, final Callback<Integer> callback0) {
         super(title);
 
         if (icon != null) {
@@ -167,6 +169,7 @@ public class FOptionPane extends FDialog {
                 }
             }));
         }
+        defaultOption = defaultOption0;
     }
 
     public void setResult(final int option) {
@@ -254,5 +257,19 @@ public class FOptionPane extends FDialog {
         }
 
         return y + BUTTON_HEIGHT + GAP_BELOW_BUTTONS;
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.ENTER:
+        case Keys.SPACE:
+            setResult(defaultOption); //set result to default option on Enter/Space
+            return true;
+        case Keys.ESCAPE:
+            setResult(buttons.length - 1); //set result to final option on Escape
+            return true;
+        }
+        return false;
     }
 }

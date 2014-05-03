@@ -137,8 +137,7 @@ public abstract class FDisplayObject {
         return false;
     }
 
-    //start keyboard input if possible for this object
-    public boolean startKeyInput() {
+    public boolean keyDown(int keyCode) {
         return false;
     }
 }

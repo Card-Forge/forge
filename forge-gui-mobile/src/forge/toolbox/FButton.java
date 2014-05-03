@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
@@ -151,6 +152,14 @@ public class FButton extends FDisplayObject implements IButton {
         return true;
     }
 
+    public boolean trigger() {
+        if (isEnabled() && command != null) {
+            command.handleEvent(new FEvent(this, FEventType.TAP));
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void draw(Graphics g) {
         float x = 0;
@@ -217,5 +226,15 @@ public class FButton extends FDisplayObject implements IButton {
     @Override
     public void setSelected(boolean b0) {
         setToggled(b0);
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.ENTER:
+        case Keys.SPACE:
+            return trigger(); //trigger button on Enter or Space
+        }
+        return false;
     }
 }

@@ -236,9 +236,7 @@ public class Forge implements ApplicationListener {
         public abstract void onInputEnd();
 
         //also allow handling of keyUp but don't require it
-        public boolean keyUp(int keyCode) {
-            return false;
-        }
+        public boolean keyUp(int keyCode) { return false; }
     }
 
     private static class MainInputProcessor extends FGestureAdapter {
@@ -249,7 +247,7 @@ public class Forge implements ApplicationListener {
         @Override
         public boolean keyDown(int keyCode) {
             if (keyInputAdapter == null) {
-                //if no active key input adapter, give current screen or overlay a chance to start one
+                //if no active key input adapter, give current screen or overlay a chance to handle key
                 FContainer container = FOverlay.getTopOverlay();
                 if (container == null) {
                     container = currentScreen;
@@ -257,9 +255,7 @@ public class Forge implements ApplicationListener {
                         return false;
                     }
                 }
-                if (!container.startKeyInput()) {
-                    return false;
-                }
+                return container.keyDown(keyCode);
             }
             if (keyInputAdapter != null) {
                 return keyInputAdapter.keyDown(keyCode);

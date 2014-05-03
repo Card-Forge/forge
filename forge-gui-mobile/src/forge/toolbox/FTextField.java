@@ -35,7 +35,7 @@ public class FTextField extends FDisplayObject {
     private FSkinFont font;
     private HAlignment alignment;
     private int selStart, selLength;
-    private boolean keyInputActive;
+    private boolean isEditing;
 
     public FTextField() {
         this("");
@@ -136,7 +136,7 @@ public class FTextField extends FDisplayObject {
 
     @Override
     public boolean press(float x, float y) {
-        if (keyInputActive) { //support placing text cursor
+        if (isEditing) { //support placing text cursor
             selStart = getCharIndexAtPoint(x, y);
             selLength = 0;
         }
@@ -145,12 +145,18 @@ public class FTextField extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        return startKeyInput();
+        startEdit();
+        return true;
     }
 
     @Override
-    public boolean startKeyInput() {
-        if (keyInputActive) { return true; } //do nothing if key input already active
+    public boolean keyDown(int keyCode) {
+        startEdit(); //start edit if keyDown received while key input not active
+        return true;
+    }
+
+    public void startEdit() {
+        if (isEditing) { return; } //do nothing if already editing
 
         selStart = 0; //select all before starting input
         selLength = text.length();
@@ -178,6 +184,10 @@ public class FTextField extends FDisplayObject {
                 switch (keyCode) {
                 case Keys.TAB:
                 case Keys.ENTER: //end key input on Tab or Enter
+                    Forge.endKeyInput();
+                    return true;
+                case Keys.ESCAPE:
+                    setText(textBeforeKeyInput); //cancel edit on Escape
                     Forge.endKeyInput();
                     return true;
                 case Keys.BACKSPACE: //also handles Delete since those are processed the same by libgdx
@@ -222,14 +232,13 @@ public class FTextField extends FDisplayObject {
                     //handle change event if text changed during input
                     changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
                 }
-                keyInputActive = false;
+                isEditing = false;
                 selStart = 0;
                 selLength = 0;
                 textBeforeKeyInput = null;
             }
         });
-        keyInputActive = true;
-        return true;
+        isEditing = true;
     }
 
     @Override
@@ -239,7 +248,7 @@ public class FTextField extends FDisplayObject {
         g.fillRect(BACK_COLOR, 0, 0, w, h);
 
         //draw selection if key input is active
-        if (keyInputActive) {
+        if (isEditing) {
             float selLeft = PADDING;
             if (selStart > 0) {
                 selLeft += font.getFont().getBounds(text.substring(0, selStart)).width;

@@ -101,10 +101,10 @@ public abstract class FContainer extends FDisplayObject {
     }
 
     @Override
-    public boolean startKeyInput() {
-        //by default, give all children a chance to start keyboard input
+    public boolean keyDown(int keyCode) {
+        //by default, give all enabled children a chance handle keyDown
         for (FDisplayObject c : children) {
-            if (c.startKeyInput()) {
+            if (c.isEnabled() && c.keyDown(keyCode)) {
                 return true;
             }
         }

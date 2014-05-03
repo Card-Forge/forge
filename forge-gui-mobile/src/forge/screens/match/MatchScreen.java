@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Input.Keys;
+
 import forge.LobbyPlayer;
 import forge.menu.FMenuBar;
 import forge.screens.FScreen;
@@ -162,5 +164,17 @@ public class MatchScreen extends FScreen {
         topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
         bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.ENTER:
+        case Keys.SPACE:
+            return prompt.getBtnOk().trigger(); //trigger OK on Enter or Space
+        case Keys.ESCAPE:
+            return prompt.getBtnCancel().trigger(); //trigger Cancel on Escape
+        }
+        return false;
     }
 }
