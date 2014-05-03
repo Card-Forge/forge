@@ -122,8 +122,9 @@ public class FComboBox<E> extends FTextField {
         return true;
     }
 
-    public void startEdit() {
-        //don't allow editing text
+    @Override
+    public boolean startEdit() {
+        return false; //don't allow editing text
     }
 
     @Override
