@@ -18,6 +18,8 @@
 
 package forge.toolbox;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Function;
 
@@ -65,7 +67,7 @@ public class ListChooser<T> extends FContainer {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
     public static final FSkinColor ALT_ITEM_COLOR = ITEM_COLOR.getContrastColor(-20);
     public static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    public static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+    public static final FSkinColor BORDER_COLOR = FList.FORE_COLOR;
     public static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
     // Data and number of choices for the list
@@ -181,6 +183,9 @@ public class ListChooser<T> extends FContainer {
         }
         onSelectionChange();
         optionPane.show();
+        if (txtSearch != null && Gdx.app.getType() == ApplicationType.Desktop) {
+            txtSearch.startEdit(); //automatically focus search textbox for edit if on desktop
+        }
     }
 
     private void onSelectionChange() {

@@ -151,7 +151,7 @@ public class DualListBox<T> extends FDialog {
         float buttonHeight = FOptionPane.BUTTON_HEIGHT;
         float labelHeight = selectOrder.getAutoSizeBounds().height;
         float listHeight = (maxHeight - 2 * labelHeight - buttonHeight - FOptionPane.PADDING - 2 * FDialog.INSETS) / 2;
-        float addButtonWidth = addAllButton.getAutoSizeBounds().width;
+        float addButtonWidth = addAllButton.getAutoSizeBounds().width * 1.2f;
         float addButtonHeight = listHeight / 2 - gapBetweenButtons;
         float listWidth = width - addButtonWidth - gapBetweenButtons;
 
