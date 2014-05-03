@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 // An input box for handling the order of choices.
@@ -312,5 +313,24 @@ public class DualListBox<T> extends FDialog {
         protected boolean drawLineSeparators() {
             return false;
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.ENTER:
+        case Keys.SPACE: //Enter and space should trigger OK button if enabled,
+            //otherwise they should trigger first enabled button (default container behavior)
+            if (okButton.trigger()) {
+                return true;
+            }
+            break;
+        case Keys.ESCAPE: //Escape should trigger either OK or Auto based on which is enabled
+            if (okButton.trigger()) {
+                return true;
+            }
+            return autoButton.trigger();
+        }
+        return super.keyDown(keyCode);
     }
 }
