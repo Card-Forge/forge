@@ -319,17 +319,17 @@ public class DualListBox<T> extends FDialog {
     public boolean keyDown(int keyCode) {
         switch (keyCode) {
         case Keys.ENTER:
-        case Keys.SPACE: //Enter and space should trigger OK button if enabled,
-            //otherwise they should trigger first enabled button (default container behavior)
-            if (okButton.trigger()) {
-                return true;
-            }
-            break;
-        case Keys.ESCAPE: //Escape should trigger either OK or Auto based on which is enabled
+        case Keys.ESCAPE: //Enter and Escape should trigger either OK or Auto based on which is enabled
             if (okButton.trigger()) {
                 return true;
             }
             return autoButton.trigger();
+        case Keys.SPACE: //Space should trigger OK button if enabled,
+            //otherwise it should trigger first enabled button (default container behavior)
+            if (okButton.trigger()) {
+                return true;
+            }
+            break;
         }
         return super.keyDown(keyCode);
     }
