@@ -19,6 +19,7 @@ import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
 import forge.Forge.Graphics;
+import forge.Forge.KeyInputAdapter;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
@@ -180,6 +181,30 @@ public class MatchScreen extends FScreen {
                 return true;
             }
             return prompt.getBtnCancel().trigger(); //otherwise trigger Cancel
+        case Keys.A: //alpha strike on Ctrl+A
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                FControl.alphaStrike();
+                return true;
+            }
+            break;
+        case Keys.E: //end turn on Ctrl+E
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                FControl.endCurrentTurn();
+                return true;
+            }
+            break;
+        case Keys.Q: //concede game on Ctrl+Q
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                FControl.concede();
+                return true;
+            }
+            break;
+        case Keys.Z: //undo on Ctrl+Z
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                FControl.undoLastAction();
+                return true;
+            }
+            break;
         }
         return super.keyDown(keyCode);
     }
