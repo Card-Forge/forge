@@ -645,8 +645,6 @@ forge-gui-android/.settings/org.eclipse.core.resources.prefs -text
 forge-gui-android/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-android/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui-android/AndroidManifest.xml -text
-forge-gui-android/gen/forge/view/BuildConfig.java -text
-forge-gui-android/gen/forge/view/R.java -text
 forge-gui-android/ic_launcher-web.png -text
 forge-gui-android/libs/android-support-v4.jar -text
 forge-gui-android/libs/armeabi-v7a/libgdx.so -text
