@@ -128,7 +128,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 
                 for (final Card c : targetables) {
-                    if (objects.contains(c) && c.getShield().isEmpty()) {
+                    if (objects.contains(c) && c.getShield().isEmpty() && !ComputerUtil.canRegenerate(ai, c)) {
                         threatenedTargets.add(c);
                     }
                 }
