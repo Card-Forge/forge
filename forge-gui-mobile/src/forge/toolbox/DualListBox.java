@@ -60,12 +60,13 @@ public class DualListBox<T> extends FDialog {
                 for (int index : sourceList.selectedIndices) {
                     selected.add(sourceList.getItemAt(index));
                 }
-                sourceList.selectedIndices.clear();
+                destList.selectedIndices.clear();
                 for (T item : selected) {
                     sourceList.removeItem(item);
                     destList.selectedIndices.add(destList.getCount());
                     destList.addItem(item);
                 }
+                sourceList.cleanUpSelections();
                 setButtonState();
             }
         };
@@ -79,12 +80,13 @@ public class DualListBox<T> extends FDialog {
                 for (int index : destList.selectedIndices) {
                     selected.add(destList.getItemAt(index));
                 }
-                destList.selectedIndices.clear();
+                sourceList.selectedIndices.clear();
                 for (T item : selected) {
                     destList.removeItem(item);
                     sourceList.selectedIndices.add(sourceList.getCount());
                     sourceList.addItem(item);
                 }
+                destList.cleanUpSelections();
                 setButtonState();
             }
         };
@@ -145,35 +147,33 @@ public class DualListBox<T> extends FDialog {
         width -= 2 * x;
         maxHeight -= 2 * (VPrompt.HEIGHT - FDialog.INSETS);
 
+        float gapBetweenButtons = FOptionPane.PADDING / 2;
         float buttonHeight = FOptionPane.BUTTON_HEIGHT;
         float labelHeight = selectOrder.getAutoSizeBounds().height;
         float listHeight = (maxHeight - 2 * labelHeight - buttonHeight - FOptionPane.PADDING - 2 * FDialog.INSETS) / 2;
+        float addButtonWidth = addAllButton.getAutoSizeBounds().width;
+        float addButtonHeight = listHeight / 2 - gapBetweenButtons;
+        float listWidth = width - addButtonWidth - gapBetweenButtons;
+
         selectOrder.setBounds(x, y, width, labelHeight);
         y += labelHeight;
-        sourceList.setBounds(x, y, width, listHeight);
+        sourceList.setBounds(x, y, listWidth, listHeight);
+        x += width - addButtonWidth;
+        addButton.setBounds(x, y, addButtonWidth, addButtonHeight);
+        addAllButton.setBounds(x, y + addButtonHeight + gapBetweenButtons, addButtonWidth, addButtonHeight);
         y += listHeight + FOptionPane.PADDING / 2;
-
-        float gapBetweenButtons = FOptionPane.PADDING / 2;
-        float buttonWidth = (width - 3 * gapBetweenButtons) / 4;
-        float dx = buttonWidth + gapBetweenButtons;
-        /*addButton.setBounds(x, y, buttonWidth, buttonHeight);
-        x += dx;
-        addAllButton.setBounds(x, y, buttonWidth, buttonHeight);
-        x += dx;
-        removeButton.setBounds(x, y, buttonWidth, buttonHeight);
-        x += dx;
-        removeAllButton.setBounds(x, y, buttonWidth, buttonHeight);*/
 
         x = FOptionPane.PADDING;
         orderedLabel.setBounds(x, y, width, labelHeight);
         y += labelHeight;
-        destList.setBounds(x, y, width, listHeight);
+        removeButton.setBounds(x, y, addButtonWidth, addButtonHeight);
+        removeAllButton.setBounds(x, y + addButtonHeight + gapBetweenButtons, addButtonWidth, addButtonHeight);
+        destList.setBounds(x + width - listWidth, y, listWidth, listHeight);
         y += listHeight + FOptionPane.PADDING;
-        
-        buttonWidth = (width - gapBetweenButtons) / 2;
-        dx = buttonWidth + gapBetweenButtons;
+
+        float buttonWidth = (width - gapBetweenButtons) / 2;
         okButton.setBounds(x, y, buttonWidth, buttonHeight);
-        x += dx;
+        x += buttonWidth + gapBetweenButtons;
         autoButton.setBounds(x, y, buttonWidth, buttonHeight);
 
         return maxHeight;
@@ -257,12 +257,8 @@ public class DualListBox<T> extends FDialog {
                 @Override
                 public boolean tap(T value, float x, float y, int count) {
                     Integer index = ChoiceList.this.getIndexOf(value);
-                    if (selectedIndices.contains(index)) {
-                        selectedIndices.remove(index);
-                    }
-                    else {
-                        selectedIndices.add(index);
-                    }
+                    selectedIndices.clear();
+                    selectedIndices.add(index);
                     if (count == 2) {
                         dblTapCommand.handleEvent(new FEvent(ChoiceList.this, FEventType.ACTIVATE, index));
                     }
@@ -275,6 +271,20 @@ public class DualListBox<T> extends FDialog {
                 }
             });
             setFontSize(12);
+        }
+
+        //remove any selected indices outside item range
+        public void cleanUpSelections() {
+            int count = getCount();
+            for (int i = 0; i < selectedIndices.size(); i++) {
+                if (selectedIndices.get(i) >= count) {
+                    selectedIndices.remove(i);
+                    i--;
+                }
+            }
+            if (selectedIndices.isEmpty() && count > 0) {
+                selectedIndices.add(count - 1); //select last item if nothing remains selected
+            }
         }
 
         @Override

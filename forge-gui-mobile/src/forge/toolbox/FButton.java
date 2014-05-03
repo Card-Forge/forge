@@ -145,7 +145,7 @@ public class FButton extends FDisplayObject implements IButton {
 
     @Override
     public final boolean tap(float x, float y, int count) {
-        if (count == 1 && command != null) {
+        if (command != null) {
             command.handleEvent(new FEvent(this, FEventType.TAP));
         }
         return true;
