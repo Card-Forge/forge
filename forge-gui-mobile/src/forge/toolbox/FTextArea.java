@@ -23,7 +23,7 @@ public class FTextArea extends FScrollPane {
         text = text0;
         font = FSkinFont.get(14);
         alignment = HAlignment.LEFT;
-        insets = new Vector2(0, 0);
+        insets = new Vector2(1, 1); //prevent text getting cut off by clip
     }
 
     public String getText() {

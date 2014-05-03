@@ -207,7 +207,11 @@ public class FOptionPane extends FDialog {
         if (prompt != null) {
             float promptWidth = width - x - PADDING;
             prompt.setBounds(x, y, promptWidth, prompt.getPreferredHeight(promptWidth));
-            if (prompt.getHeight() > maxPromptHeight) {
+            if (prompt.getHeight() < promptHeight) {
+               //ensure prompt centered next to icon if less tall than icon
+                prompt.setTop(y + (promptHeight - prompt.getHeight()) / 2);
+            }
+            else if (prompt.getHeight() > maxPromptHeight) {
                 prompt.setHeight(maxPromptHeight);
             }
             if (prompt.getHeight() > promptHeight) {
