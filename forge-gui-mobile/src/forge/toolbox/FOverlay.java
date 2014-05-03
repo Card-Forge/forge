@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import java.util.Stack;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
@@ -103,5 +104,14 @@ public abstract class FOverlay extends FContainer {
     @Override
     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
         return true;
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Keys.ESCAPE) {
+            hide(); //hide on escape by default
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }

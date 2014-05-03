@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.badlogic.gdx.Input.Keys;
+
 import forge.screens.FScreen;
 import forge.screens.match.FControl;
 import forge.Forge.Graphics;
@@ -15,6 +17,7 @@ import forge.toolbox.FDisplayObject;
 
 public abstract class LaunchScreen extends FScreen {
     private final StartButton btnStart;
+    private boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
         super(true, headerCaption, true);
@@ -41,9 +44,27 @@ public abstract class LaunchScreen extends FScreen {
         public final Set<GameType> appliedVariants = new HashSet<GameType>();
     }
 
+    private void startMatch() {
+        if (creatingMatch) { return; }
+        creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
+
+        LaunchParams launchParams = new LaunchParams();
+        if (buildLaunchParams(launchParams)) {
+            if (launchParams.gameType == null) {
+                throw new RuntimeException("Must set launchParams.gameType");
+            }
+            if (launchParams.players.isEmpty()) {
+                throw new RuntimeException("Must add at least one player to launchParams.players");
+            }
+            
+            FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
+        }
+
+        creatingMatch = false;
+    }
+
     private class StartButton extends FDisplayObject {
         private boolean pressed;
-        private boolean creatingMatch;
 
         /**
          * Instantiates a new FButton.
@@ -65,22 +86,8 @@ public abstract class LaunchScreen extends FScreen {
 
         @Override
         public final boolean tap(float x, float y, int count) {
-            if (count == 1 && !creatingMatch) {
-                creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
-
-                LaunchParams launchParams = new LaunchParams();
-                if (buildLaunchParams(launchParams)) {
-                    if (launchParams.gameType == null) {
-                        throw new RuntimeException("Must set launchParams.gameType");
-                    }
-                    if (launchParams.players.isEmpty()) {
-                        throw new RuntimeException("Must add at least one player to launchParams.players");
-                    }
-                    
-                    FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
-                }
-
-                creatingMatch = false;
+            if (count == 1) {
+                startMatch();
             }
             return true;
         }
@@ -90,5 +97,16 @@ public abstract class LaunchScreen extends FScreen {
             g.drawImage(pressed ? FSkinImage.BTN_START_DOWN : FSkinImage.BTN_START_UP,
                     0, 0, getWidth(), getHeight());
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.ENTER:
+        case Keys.SPACE:
+            startMatch(); //start match on Enter or Space
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }

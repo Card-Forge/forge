@@ -175,6 +175,6 @@ public class MatchScreen extends FScreen {
         case Keys.ESCAPE:
             return prompt.getBtnCancel().trigger(); //trigger Cancel on Escape
         }
-        return false;
+        return super.keyDown(keyCode);
     }
 }

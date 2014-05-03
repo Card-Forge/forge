@@ -270,6 +270,6 @@ public class FOptionPane extends FDialog {
             setResult(buttons.length - 1); //set result to final option on Escape
             return true;
         }
-        return false;
+        return super.keyDown(keyCode);
     }
 }

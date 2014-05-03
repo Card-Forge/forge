@@ -1,5 +1,6 @@
 package forge.screens;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
@@ -145,5 +146,14 @@ public abstract class FScreen extends FContainer {
             g.drawLine(THICKNESS, COLOR, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
             g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid  - 1, xMid + offsetX, yMid + offsetY);
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Keys.ESCAPE) {
+            Forge.back(); //go back on escape by default
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }
