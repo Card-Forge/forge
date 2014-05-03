@@ -55,7 +55,7 @@ public class InputSelectCard {
                 }
                 return; //don't select already selected card
             }
-            CardOptionsList.hide(); //hide previous card options list before showing a new one
+            hide(); //hide previous card options list before showing a new one
         }
 
         lastSelectTime = now;
@@ -92,6 +92,18 @@ public class InputSelectCard {
                 }
             });
         }
+    }
+
+    public static boolean hide() {
+        if (activeList == null) { return false; }
+        FControl.getView().remove(activeList);
+        FControl.getView().remove(CardOptionsList.backdrop);
+        activeList = null;
+        zoomPressed = false;
+        detailsPressed = false;
+        ownerPressed = false;
+        pannedOverOptions = false;
+        return true;
     }
 
     public static boolean handlePan(CardAreaPanel cardPanel, float x, float y, boolean isPanStop) {
@@ -211,17 +223,6 @@ public class InputSelectCard {
         private CardOptionsList(CardAreaPanel owner0, Iterable<T> options) {
             super(options);
             owner = owner0;
-        }
-
-        public static void hide() {
-            if (activeList == null) { return; }
-            FControl.getView().remove(activeList);
-            FControl.getView().remove(backdrop);
-            activeList = null;
-            zoomPressed = false;
-            detailsPressed = false;
-            ownerPressed = false;
-            pannedOverOptions = false;
         }
 
         @Override

@@ -176,7 +176,10 @@ public class MatchScreen extends FScreen {
             }
             return prompt.getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
-            return prompt.getBtnCancel().trigger(); //trigger Cancel on Escape
+            if (InputSelectCard.hide()) { //hide card selection if one active on Escape
+                return true;
+            }
+            return prompt.getBtnCancel().trigger(); //otherwise trigger Cancel
         }
         return super.keyDown(keyCode);
     }
