@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import forge.GuiBase;
 import forge.game.player.Player;
+import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
@@ -84,7 +85,9 @@ public class VDevMenu extends FDropDownMenu {
         }));
 
         final ForgePreferences prefs = FModel.getPreferences();
-        addItem(new FMenuItem("Play Unlimited Lands", new FEventHandler() {
+        addItem(new FCheckBoxMenuItem("Play Unlimited Lands",
+                prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND),
+                new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 boolean unlimitedLands = !prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND);

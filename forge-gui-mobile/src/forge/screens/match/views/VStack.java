@@ -9,13 +9,21 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.card.CardDetailUtil;
+import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
+import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
@@ -110,7 +118,7 @@ public class VStack extends FDropDown {
         private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0, boolean isTop0) {
             stackInstance = stackInstance0;
             isTop = isTop0;
-            Card card = stackInstance0.getSourceCard();
+            Card card = stackInstance.getSourceCard();
 
             text = stackInstance.getStackDescription();
             if (stackInstance.getSpellAbility().isOptionalTrigger() &&
@@ -129,6 +137,56 @@ public class VStack extends FDropDown {
             float height = Math.max(CARD_HEIGHT, FONT.getFont().getWrappedBounds(text, width).height);
             height += 2 * PADDING;
             return Math.round(height);
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            final Player player = stackInstance.getSpellAbility().getActivatingPlayer();
+            final PlayerController controller = player.getController();
+            if (stackInstance.getSpellAbility().isOptionalTrigger() && player.getLobbyPlayer() == localPlayer && controller != null) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        final int triggerID = stackInstance.getSpellAbility().getSourceTrigger();
+                        addItem(new FCheckBoxMenuItem("Always Yes",
+                                controller.shouldAlwaysAcceptTrigger(triggerID),
+                                new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                controller.setShouldAlwaysAcceptTrigger(triggerID);
+                            }
+                        }));
+                        addItem(new FCheckBoxMenuItem("Always No",
+                                controller.shouldAlwaysDeclineTrigger(triggerID),
+                                new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                controller.setShouldAlwaysDeclineTrigger(triggerID);
+                            }
+                        }));
+                        addItem(new FCheckBoxMenuItem("Always Ask",
+                                controller.shouldAlwaysAskTrigger(triggerID),
+                                new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                controller.setShouldAlwaysAskTrigger(triggerID);
+                            }
+                        }));
+                        addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                CardZoom.show(stackInstance.getSourceCard());
+                            }
+                        }));
+                    }
+                };
+
+                menu.show(this, x, y);
+            }
+            else {
+                CardZoom.show(stackInstance.getSourceCard());
+            }
+            return true;
         }
 
         @Override

@@ -236,8 +236,8 @@ public enum VStack implements IVDoc<CStack> {
         private Integer triggerID = 0;
 
         public OptionalTriggerMenu(){
-            jmiAccept = new JCheckBoxMenuItem("Always Accept");
-            jmiDecline = new JCheckBoxMenuItem("Always Decline");
+            jmiAccept = new JCheckBoxMenuItem("Always Yes");
+            jmiDecline = new JCheckBoxMenuItem("Always No");
             jmiAsk = new JCheckBoxMenuItem("Always Ask");
 
             jmiAccept.addActionListener(new ActionListener() {
