@@ -178,7 +178,7 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
             float itemHeight = renderer.getItemHeight();
             boolean drawSeparators = drawLineSeparators();
 
-            float y = getItemTop(startIndex);
+            float y = Math.round(getItemTop(startIndex)); //round y so items don't flicker from rounding error
             float valueWidth = w - 2 * PADDING;
             float valueHeight = itemHeight - 2 * PADDING;
 

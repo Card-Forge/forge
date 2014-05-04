@@ -158,7 +158,7 @@ public class CardRenderer {
     }
 
     public static float getCardListItemHeight() {
-        return MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 3 * FList.PADDING + 1;
+        return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 3 * FList.PADDING + 1);
     }
 
     private static Map<PaperCard, TextureRegion> cardArtCache = new HashMap<PaperCard, TextureRegion>();
