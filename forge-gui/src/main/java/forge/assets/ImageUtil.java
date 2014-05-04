@@ -13,9 +13,15 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.Base64Coder;
 
 public class ImageUtil {
+    public static float getNearestHQSize(float baseSize, float actualSize) {
+        //get nearest power of actualSize to baseSize so that the image renders good
+        return (float)Math.round(actualSize) * (float)Math.pow(2, (double)Math.round(Math.log((double)(baseSize / actualSize)) / Math.log(2)));
+    }
+
     public static PaperCard getPaperCardFromImageKey(String key) {
-        if( key == null )
+        if ( key == null ) {
             return null;
+        }
 
         PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
         if ( cp == null )

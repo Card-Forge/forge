@@ -21,8 +21,6 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
@@ -47,40 +45,38 @@ public class CardRenderer {
     }
 
     public static void drawZoom(Graphics g, Card card, float width, float height) {
-        float x = FDialog.INSETS;
-        float y = x;
-        float w = width - 2 * x;
-        float h = height - 2 * y;
+        float w = width - 2 * FDialog.INSETS;
+        float h = height - 2 * FDialog.INSETS;
 
         Texture image = ImageCache.getImage(card);
+        float imageWidth = image.getWidth();
+        float imageHeight = image.getHeight();
 
-        float ratio = h / w;
-        float imageRatio = (float)image.getHeight() / (float)image.getWidth(); //use image ratio rather than normal aspect ratio so it looks better
+        if (imageWidth > w || imageHeight > h) {
+            //scale down until image fits on screen
+            float widthRatio = w / imageWidth;
+            float heightRatio = h / imageHeight;
 
-        if (ratio > imageRatio) {
-            float oldHeight = h;
-            h = w * imageRatio;
-            y += (oldHeight - h) / 2;
+            if (widthRatio < heightRatio) {
+                imageWidth *= widthRatio;
+                imageHeight *= widthRatio;
+            }
+            else {
+                imageWidth *= heightRatio;
+                imageHeight *= heightRatio;
+            }
         }
         else {
-            float oldWidth = w;
-            w = h / imageRatio;
-            x += (oldWidth - w) / 2;
-        }
-
-        //prevent scaling image larger if preference turned off
-        if (w > image.getWidth() || h > image.getHeight()) {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
-                float oldWidth = w;
-                float oldHeight = h;
-                w = image.getWidth();
-                h = image.getHeight();
-                x += (oldWidth - w) / 2;
-                y += (oldHeight - h) / 2;
+            //scale up as long as image fits on screen
+            float minWidth = w / 2;
+            float minHeight = h / 2;
+            while (imageWidth < minWidth && imageHeight < minHeight) {
+                imageWidth *= 2;
+                imageHeight *= 2;
             }
         }
 
-        g.drawImage(image, x, y, w, h);
+        g.drawImage(image, (width - imageWidth) / 2, (height - imageHeight) / 2, imageWidth, imageHeight);
     }
 
     public static void drawDetails(Graphics g, Card card, float width, float height) {
