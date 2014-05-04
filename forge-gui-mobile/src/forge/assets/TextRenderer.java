@@ -8,6 +8,7 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.Forge.Graphics;
 import forge.card.CardFaceSymbols;
@@ -334,10 +335,7 @@ public class TextRenderer {
         pieces.add(piece);
     }
 
-    public void drawText(Graphics g, String text0, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
-        drawText(g, text0, skinFont, skinColor.getColor(), x, y, w, h, wrap0, horzAlignment, centerVertically);
-    }
-    public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+    private void setProps(String text, FSkinFont skinFont, float w, float h, boolean wrap0) {
         boolean needUpdate = false;
         if (!fullText.equals(text)) {
             fullText = text;
@@ -363,6 +361,35 @@ public class TextRenderer {
         if (needUpdate) {
             updatePieces(baseFont);
         }
+    }
+
+    private TextBounds getCurrentBounds() {
+        float maxWidth = 0;
+        for (Float lineWidth : lineWidths) {
+            if (lineWidth > maxWidth) {
+                maxWidth = lineWidth;
+            }
+        }
+        TextBounds bounds = new TextBounds();
+        bounds.width = maxWidth;
+        bounds.height = totalHeight;
+        return bounds;
+    }
+
+    public TextBounds getBounds(String text, FSkinFont skinFont) {
+        setProps(text, skinFont, Float.MAX_VALUE, Float.MAX_VALUE, false);
+        return getCurrentBounds();
+    }
+    public TextBounds getWrappedBounds(String text, FSkinFont skinFont, float maxWidth) {
+        setProps(text, skinFont, maxWidth, Float.MAX_VALUE, true);
+        return getCurrentBounds();
+    }
+
+    public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+        drawText(g, text, skinFont, skinColor.getColor(), x, y, w, h, wrap0, horzAlignment, centerVertically);
+    }
+    public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+        setProps(text, skinFont, w, h, wrap0);
         if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
             g.startClip(x, y, w, h);
         }

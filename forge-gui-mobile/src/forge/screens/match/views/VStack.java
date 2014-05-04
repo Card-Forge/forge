@@ -136,7 +136,7 @@ public class VStack extends FDropDown {
         private float getMinHeight(float width) {
             width -= CARD_WIDTH; //account for card picture
             width -= 3 * PADDING; //account for left and right insets and gap between picture and text
-            float height = Math.max(CARD_HEIGHT, FONT.getFont().getWrappedBounds(text, width).height);
+            float height = Math.max(CARD_HEIGHT, textRenderer.getWrappedBounds(text, FONT, width).height);
             height += 2 * PADDING;
             return Math.round(height);
         }
