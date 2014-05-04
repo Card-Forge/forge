@@ -1,5 +1,9 @@
 package forge.player;
 
+import forge.GuiBase;
+import forge.LobbyPlayer;
+import forge.game.Game;
+import forge.game.player.RegisteredPlayer;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -63,5 +67,15 @@ public final class GamePlayerUtil {
             newName = newName.trim();
         }
         return newName;
+    }
+
+    public static RegisteredPlayer getGuiRegisteredPlayer(Game game) {
+        LobbyPlayer guiPlayer = GuiBase.getInterface().getGuiPlayer();
+        for (RegisteredPlayer player : game.getMatch().getPlayers()) {
+            if (player.getPlayer() == guiPlayer) {
+                return player;
+            }
+        }
+        return null;
     }
 }

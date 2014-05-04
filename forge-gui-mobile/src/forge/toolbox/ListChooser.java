@@ -23,12 +23,15 @@ import com.google.common.base.Function;
 
 import forge.FThreads;
 import forge.Forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.item.PaperCard;
+import forge.screens.match.views.VAvatar;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
@@ -279,6 +282,31 @@ public class ListChooser<T> extends FContainer {
             CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, x, y, w, h);
         }
     }
+    private class PlayerItemRenderer extends ItemRenderer {
+        @Override
+        public int getDefaultFontSize() {
+            return 18;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return VAvatar.HEIGHT;
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return false;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            Player player = (Player)value;
+            g.drawImage(FSkin.getAvatars().get(player.getLobbyPlayer().getAvatarIndex()), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
+            x += VAvatar.WIDTH;
+            w -= VAvatar.WIDTH;
+            g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+        }
+    }
 
     private class ChoiceList extends FList<T> {
         private boolean allowMultipleSelections;
@@ -295,6 +323,9 @@ public class ListChooser<T> extends FContainer {
             }
             else if (item instanceof Card) {
                 renderer = new CardItemRenderer();
+            }
+            else if (item instanceof Player) {
+                renderer = new PlayerItemRenderer();
             }
             else {
                 renderer = new DefaultItemRenderer();

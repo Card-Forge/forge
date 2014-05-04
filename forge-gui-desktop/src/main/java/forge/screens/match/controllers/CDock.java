@@ -22,7 +22,7 @@ import forge.UiCommand;
 import forge.FThreads;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.deck.Deck;
+import forge.deckchooser.FDeckViewer;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -32,28 +32,24 @@ import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.game.zone.ZoneType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
-import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VDock;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
 import forge.view.FView;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 
 /**
  * Controls the dock panel in the match UI.
@@ -140,7 +136,10 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     public void viewDeckList() {
-        showDeck(game.getMatch().getPlayers().get(0).getDeck());
+        RegisteredPlayer player = GamePlayerUtil.getGuiRegisteredPlayer(game);
+        if (player != null) {
+            FDeckViewer.show(player.getDeck());
+        }
     }
 
     /**
@@ -217,57 +216,6 @@ public enum CDock implements ICDoc {
     public void setArcState(int state) {
         arcState = state;
     }
-
-    /**
-     * Receives click and programmatic requests for viewing a player's library
-     * (typically used in dev mode). Allows copy of the cardlist to clipboard.
-     * 
-     * @param targetDeck {@link forge.deck.Deck}
-     */
-    private void showDeck(Deck targetDeck) {
-        if (null == targetDeck) {
-            return;
-        }
-
-        final TreeMap<String, Integer> deckMap = new TreeMap<String, Integer>();
-
-        for (final Entry<PaperCard, Integer> s : targetDeck.getMain()) {
-            deckMap.put(s.getKey().getName(), s.getValue());
-        }
-
-        final String nl = System.getProperty("line.separator");
-        final StringBuilder deckList = new StringBuilder();
-        String dName = targetDeck.getName();
-
-        if (dName != null) {
-            deckList.append(dName + nl);
-        }
-
-        for (final Entry<String, Integer> s : deckMap.entrySet()) {
-            deckList.append(s.getValue() + " x " + s.getKey() + nl);
-        }
-
-        String ttl = "Decklist";
-        if (dName != null) {
-            ttl += " - " + dName;
-        }
-
-        final StringBuilder msg = new StringBuilder();
-        if (deckMap.keySet().size() <= 32) {
-            msg.append(deckList.toString() + nl);
-        }
-        else {
-            msg.append("Decklist too long for dialog." + nl + nl);
-        }
-
-        msg.append("Copy Decklist to Clipboard?");
-
-        if (FOptionPane.showConfirmDialog(msg.toString(), ttl, "OK", "Cancel")) {
-            final StringSelection ss = new StringSelection(deckList.toString());
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-        }
-    }
-    // End DeckListAction
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()

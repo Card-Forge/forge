@@ -56,6 +56,7 @@ import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.QuestController;
 import forge.screens.match.views.VAssignDamage;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator;
@@ -115,19 +116,19 @@ public class FControl {
 
         game = match.createGame();
 
-        /*if (game.getRules().getGameType() == GameType.Quest) {
-            QuestController qc = Singletons.getModel().getQuest();
+        if (game.getRules().getGameType() == GameType.Quest) {
+            QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
             if (game.getMatch().getPlayedGames().isEmpty()) {
                 qc.getCards().resetNewList();
             }
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
-        }*/
+        }
 
         inputQueue = new InputQueue();
         inputProxy = new InputProxy();
 
-        //game.subscribeToEvents(Singletons.getControl().getSoundSystem());
+        //game.subscribeToEvents(FControl.getSoundSystem());
 
         LobbyPlayer humanLobbyPlayer = game.getRegisteredPlayers().get(0).getLobbyPlayer(); //FServer.instance.getLobby().getGuiPlayer();
         // The UI controls should use these game data as models
@@ -798,5 +799,4 @@ public class FControl {
     public final static LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }
-
 }
