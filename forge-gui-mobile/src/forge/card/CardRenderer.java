@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Forge.Graphics;
+import forge.ImageKeys;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -157,14 +158,20 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static Map<PaperCard, TextureRegion> cardArtCache = new HashMap<PaperCard, TextureRegion>();
+    private static Map<String, TextureRegion> cardArtCache = new HashMap<String, TextureRegion>();
     private static final float CARD_ART_RATIO = 1.302f;
 
     //extract card art from the given card
     public static TextureRegion getCardArt(PaperCard paperCard) {
-        TextureRegion cardArt = cardArtCache.get(paperCard);
+        return getCardArt(ImageKeys.getImageKey(paperCard, false));
+    }
+    public static TextureRegion getCardArt(Card card) {
+        return getCardArt(card.getImageKey());
+    }
+    public static TextureRegion getCardArt(String imageKey) {
+        TextureRegion cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
-            Texture image = ImageCache.getImage(paperCard);
+            Texture image = ImageCache.getImage(imageKey, true);
             float w = image.getWidth();
             float h = image.getHeight();
             float x = w * 0.1f;
@@ -183,22 +190,31 @@ public class CardRenderer {
                 y += dh / 2;
             }
             cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-            cardArtCache.put(paperCard, cardArt);
+            cardArtCache.put(imageKey, cardArt);
         }
         return cardArt;
     }
 
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, float x, float y, float w, float h) {
+        drawCardListItem(g, font, foreColor, getCardArt(card), card.getRules(), card.getCurSetCode(),
+                card.getRarity(), card.getNetAttack(), card.getNetDefense(),
+                card.getCurrentLoyalty(), count, x, y, w, h);
+    }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, float x, float y, float w, float h) {
-        TextureRegion cardArt = getCardArt(paperCard);
+        CardRules cardRules = paperCard.getRules();
+        drawCardListItem(g, font, foreColor, getCardArt(paperCard), cardRules, paperCard.getEdition(),
+                paperCard.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
+                cardRules.getInitialLoyalty(), count, x, y, w, h);
+    }
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, float x, float y, float w, float h) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
         x += cardArtWidth;
 
-        CardRules cardRules = paperCard.getRules();
+        String name = cardRules.getName();
         ManaCost manaCost = cardRules.getManaCost();
         float availableNameWidth = w - CardFaceSymbols.getWidth(manaCost, MANA_SYMBOL_SIZE) - cardArtWidth - FList.PADDING;
-        String name = paperCard.getName();
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
         }
@@ -212,26 +228,33 @@ public class CardRenderer {
         FSkinFont typeFont = FSkinFont.get(12);
         float availableTypeWidth = w - cardArtWidth;
         float lineHeight = typeFont.getFont().getLineHeight();
-        String set = paperCard.getEdition();
         if (!StringUtils.isEmpty(set)) {
             float setWidth = getSetWidth(typeFont, set);
             availableTypeWidth -= setWidth;
-            drawSetLabel(g, typeFont, set, paperCard.getRarity(), x + availableTypeWidth + SET_BOX_MARGIN, y - SET_BOX_MARGIN, setWidth, lineHeight + 2 * SET_BOX_MARGIN);
+            drawSetLabel(g, typeFont, set, rarity, x + availableTypeWidth + SET_BOX_MARGIN, y - SET_BOX_MARGIN, setWidth, lineHeight + 2 * SET_BOX_MARGIN);
         }
         String type = cardRules.getType().toString();
         if (cardRules.getType().isCreature()) { //include P/T or Loyalty at end of type
-            type += " (" + cardRules.getPower() + " / " + cardRules.getToughness() + ")";
+            type += " (" + power + " / " + toughness + ")";
         }
         else if (cardRules.getType().isPlaneswalker()) {
-            type += " (" + cardRules.getInitialLoyalty() + ")";
+            type += " (" + loyalty + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
-    public static boolean cardListItemTap(PaperCard paperCard, float x, float y, int count) {
-        TextureRegion cardArt = getCardArt(paperCard);
+    public static boolean cardListItemTap(Card card, float x, float y, int count) {
         float cardArtHeight = getCardListItemHeight();
-        float cardArtWidth = cardArtHeight * (float)cardArt.getRegionWidth() / (float)cardArt.getRegionHeight();
+        float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
+        if (x <= cardArtWidth && y <= cardArtHeight) {
+            CardZoom.show(card);
+            return true;
+        }
+        return false;
+    }
+    public static boolean cardListItemTap(PaperCard paperCard, float x, float y, int count) {
+        float cardArtHeight = getCardListItemHeight();
+        float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
             CardZoom.show(Card.getCardForUi(paperCard));
             return true;

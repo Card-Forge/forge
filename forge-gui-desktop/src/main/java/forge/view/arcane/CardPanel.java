@@ -23,7 +23,6 @@ import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.gui.CardContainer;
 import forge.model.FModel;
@@ -623,12 +622,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         // P/T overlay
         String sPt = "";
         if (card.isCreature() && card.isPlaneswalker()) {
-            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCounters(CounterType.LOYALTY));
+            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCurrentLoyalty());
         } else if (card.isCreature()) {
             sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
         } else if (card.isPlaneswalker()) {
-            int loyalty = card.getCounters(CounterType.LOYALTY);
-            sPt = String.valueOf(loyalty == 0 ? card.getBaseLoyalty() : loyalty);
+            sPt = String.valueOf(card.getCurrentLoyalty());
         }
         this.ptText.setText(sPt);
 

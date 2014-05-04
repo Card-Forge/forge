@@ -3721,6 +3721,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.baseLoyalty;
     }
 
+    public final int getCurrentLoyalty() {
+        int loyalty = getCounters(CounterType.LOYALTY);
+        if (loyalty == 0) {
+            loyalty = this.baseLoyalty;
+        }
+        return loyalty;
+    }
+
     // values that are printed on card
     /**
      * <p>

@@ -28,6 +28,7 @@ import forge.ImageKeys;
 import forge.game.card.Card;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 
@@ -84,6 +85,9 @@ public class ImageCache {
         return getImage(key, true);
     }
 
+    public static Texture getImage(PaperCard pc) {
+        return getImage(ImageKeys.getImageKey(pc, false), true);
+    }
     public static Texture getImage(InventoryItem ii) {
         return getImage(ImageKeys.getImageKey(ii, false), true);
     }

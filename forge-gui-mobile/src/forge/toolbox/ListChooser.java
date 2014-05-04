@@ -271,12 +271,12 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap(((Card)value).getPaperCard(), x, y, count);
+            return CardRenderer.cardListItemTap((Card)value, x, y, count);
         }
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, ((Card)value).getPaperCard(), 0, x, y, w, h);
+            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, x, y, w, h);
         }
     }
 

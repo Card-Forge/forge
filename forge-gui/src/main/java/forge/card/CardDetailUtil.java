@@ -200,15 +200,12 @@ public class CardDetailUtil {
             if (ptText.length() > 0) {
                 ptText.insert(0, "P/T: ");
                 ptText.append(" - ").append("Loy: ");
-            } else {
+            }
+            else {
                 ptText.append("Loyalty: ");
             }
 
-            int loyalty = card.getCounters(CounterType.LOYALTY);
-            if (loyalty == 0) {
-                loyalty = card.getBaseLoyalty();
-            }
-            ptText.append(loyalty);
+            ptText.append(card.getCurrentLoyalty());
         }
         return ptText.toString();
     }
