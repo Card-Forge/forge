@@ -1,0 +1,7 @@
+Name:Mana Web
+ManaCost:3
+Types:Artifact
+T:Mode$ TapsForMana | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ Whenever a land an opponent controls is tapped for mana, tap all lands that player controls that could produce any type of mana that land could produce.
+SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ TriggeredCard.canProduceSameManaTypeWith+Land | Defined$ TriggeredCardController
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_web.jpg
+Oracle:Whenever a land an opponent controls is tapped for mana, tap all lands that player controls that could produce any type of mana that land could produce.

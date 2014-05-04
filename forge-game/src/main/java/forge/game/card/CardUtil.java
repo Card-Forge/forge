@@ -261,6 +261,9 @@ public final class CardUtil {
         if (validCard.startsWith("Defined.")) {
             cards = AbilityUtils.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
         } else {
+            if (sa.getActivatingPlayer() == null) {
+                sa.setActivatingPlayer(sa.getHostCard().getController());
+            }
             final Game game = sa.getActivatingPlayer().getGame();
             cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
@@ -338,7 +341,7 @@ public final class CardUtil {
         }
         return colors;
     }
-
+    
     public static Set<String> canProduce(final int maxChoices, final AbilityManaPart ab,
             final Set<String> colors) {
         for (final String col : MagicColor.Constant.ONLY_COLORS) {

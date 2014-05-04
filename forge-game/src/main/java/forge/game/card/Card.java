@@ -2524,6 +2524,36 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
 
+    public final boolean canProduceSameManaTypeWith(final Card c) {
+        final List<SpellAbility> manaAb = this.getManaAbility();
+        if (manaAb.isEmpty()) {
+            return false;
+        }
+        Set<String> colors = new HashSet<String>();
+        for (final SpellAbility ab : c.getManaAbility()) {
+            if (ab.getApi() == ApiType.ManaReflected) {
+                colors.addAll(CardUtil.getReflectableManaColors(ab));
+            } else {
+                colors = CardUtil.canProduce(6, ab.getManaPart(), colors);
+            }
+        }
+
+        for (final SpellAbility mana : manaAb) {
+            for (String s : colors) {
+                if (mana.getApi() == ApiType.ManaReflected) {
+                    if (CardUtil.getReflectableManaColors(mana).contains(s)) {
+                        return true;
+                    }
+                } else {
+                    if (mana.getManaPart().canProduce(MagicColor.toShortString(s))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * <p>
      * clearFirstSpellAbility.
@@ -5999,7 +6029,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.sharesPermanentTypeWith(source)) {
                 return false;
             }
-        }else if (property.startsWith("sharesNameWith")) {
+        } else if (property.equals("canProduceSameManaTypeWith")) {
+            if (!this.canProduceSameManaTypeWith(source)) {
+                return false;
+            }
+        } else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
                 if (!this.getName().equals(source.getName())) {
                     return false;
