@@ -162,19 +162,31 @@ public class CardRenderer {
     }
 
     private static Map<PaperCard, TextureRegion> cardArtCache = new HashMap<PaperCard, TextureRegion>();
+    private static final float CARD_ART_RATIO = 1.302f;
 
     //extract card art from the given card
     public static TextureRegion getCardArt(PaperCard paperCard) {
         TextureRegion cardArt = cardArtCache.get(paperCard);
         if (cardArt == null) {
             Texture image = ImageCache.getImage(paperCard);
-            int w = image.getWidth();
-            int h = image.getHeight();
-            int x = Math.round(w * 0.065f);
-            int y = Math.round(h * 0.105f);
+            float w = image.getWidth();
+            float h = image.getHeight();
+            float x = w * 0.1f;
+            float y = h * 0.11f;
             w -= 2 * x;
-            h *= 0.45f;
-            cardArt = new TextureRegion(image, x, y, w, h);
+            h *= 0.43f;
+            float ratioRatio = w / h / CARD_ART_RATIO;
+            if (ratioRatio > 1) { //if too wide, shrink width
+                float dw = w * (ratioRatio - 1);
+                w -= dw;
+                x += dw / 2;
+            }
+            else { //if too tall, shrink height
+                float dh = h * (1 - ratioRatio);
+                h -= dh;
+                y += dh / 2;
+            }
+            cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
             cardArtCache.put(paperCard, cardArt);
         }
         return cardArt;
@@ -183,7 +195,7 @@ public class CardRenderer {
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, float x, float y, float w, float h) {
         TextureRegion cardArt = getCardArt(paperCard);
         float cardArtHeight = h + 2 * FList.PADDING;
-        float cardArtWidth = cardArtHeight * (float)cardArt.getRegionWidth() / (float)cardArt.getRegionHeight();
+        float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
         x += cardArtWidth;
 
