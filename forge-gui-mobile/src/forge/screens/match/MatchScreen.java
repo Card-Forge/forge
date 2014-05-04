@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 
 import forge.LobbyPlayer;
 import forge.menu.FMenuBar;
+import forge.properties.ForgePreferences;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VCombat;
@@ -38,6 +39,7 @@ public class MatchScreen extends FScreen {
     private final VLog log;
     private final VCombat combat;
     private final VStack stack;
+    private final VDevMenu devMenu;
 
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
@@ -69,14 +71,21 @@ public class MatchScreen extends FScreen {
         log = new VLog(game.getGameLog());
         combat = new VCombat();
         stack = new VStack(game.getStack(), localPlayer);
+        devMenu = new VDevMenu();
 
         menuBar = add(new FMenuBar());
         menuBar.addTab("Game", new VGameMenu());
         menuBar.addTab("Players (" + playerPanels.size() + ")", new VPlayers());
         menuBar.addTab("Log", log);
         menuBar.addTab("Combat", combat);
-        menuBar.addTab("Dev", new VDevMenu());
+        menuBar.addTab("Dev", devMenu);
         menuBar.addTab("Stack (0)", stack);
+    }
+
+    @Override
+    public void onActivate() {
+        //update dev menu visibility here so returning from Settings screen allows update
+        devMenu.getMenuTab().setVisible(ForgePreferences.DEV_MODE);
     }
 
     public VLog getLog() {

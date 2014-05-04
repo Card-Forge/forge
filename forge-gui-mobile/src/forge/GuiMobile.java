@@ -216,8 +216,6 @@ public class GuiMobile implements IGuiBase {
     public void startMatch(GameType gameType, List<RegisteredPlayer> players) {
         FControl.startMatch(gameType, players);
     }
-    
-    
 
     @Override
     public void setPanelSelection(Card c) {
