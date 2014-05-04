@@ -6,6 +6,7 @@ import forge.gui.framework.ILocalRepaint;
 import forge.menus.ForgeMenu;
 import forge.menus.LayoutMenu;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FDigitalClock;
@@ -79,7 +80,7 @@ public class FNavigationBar extends FTitleBarBase {
 
         addNavigationTab(FScreen.HOME_SCREEN);
         addNavigationTab(FScreen.DECK_EDITOR_CONSTRUCTED);
-        if (FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
+        if (ForgePreferences.DEV_MODE) {
             //TODO: Make Workshop available outside developer mode when custom cards supported
             addNavigationTab(FScreen.WORKSHOP_SCREEN);
         }

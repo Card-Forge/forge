@@ -14,6 +14,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.game.GameLogEntryType;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.toolbox.FGroupList;
@@ -100,8 +101,14 @@ public class SettingsScreen extends FScreen {
         //Advanced Settings
         lstSettings.addItem(new BooleanSetting(FPref.DEV_MODE_ENABLED,
                 "Developer Mode",
-                "Enables menu with functions for testing during development."),
-                3);
+                "Enables menu with functions for testing during development.") {
+                    @Override
+                    public void select() {
+                        super.select();
+                        //update DEV_MODE flag when preference changes
+                        ForgePreferences.DEV_MODE = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
+                    }
+                }, 3);
         lstSettings.addItem(new CustomSelectSetting(FPref.DEV_LOG_ENTRY_TYPE,
                 "Game Log Verbosity",
                 "Changes how much information is displayed in the game log. Sorted by least to most verbose.",

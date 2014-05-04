@@ -642,9 +642,6 @@ public enum FControl implements KeyEventDispatcher {
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-        ForgePreferences.DEV_MODE = prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN; // && prefs.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
-
         // AI field is at index [0]
         PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
         fvAi.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));

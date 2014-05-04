@@ -5,6 +5,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.SDisplayUtil;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
@@ -85,7 +86,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
-                if (FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
+                if (ForgePreferences.DEV_MODE) {
                     SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
                 }
             }

@@ -16,7 +16,6 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
         super(name);
     }
 
-
     @Override
     public PlayerController createControllerFor(Player human) {
         return new PlayerControllerHuman(human.getGame(), human, this);
@@ -26,10 +25,10 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     public Player createIngamePlayer(Game game) {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
         player.setFirstController(new PlayerControllerHuman(game, player, this));
-        
-        if( ForgePreferences.DEV_MODE && FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND))
-            player.canCheatPlayUnlimitedLands = true;
 
+        if (ForgePreferences.DEV_MODE && FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
+            player.canCheatPlayUnlimitedLands = true;
+        }
         return player;
     }
 

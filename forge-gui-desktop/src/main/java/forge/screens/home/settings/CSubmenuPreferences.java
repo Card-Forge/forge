@@ -161,7 +161,7 @@ public enum CSubmenuPreferences implements ICDoc {
         this.prefs = FModel.getPreferences();
 
         setPlayerNameButtonText();
-        view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
+        view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
 
         for(Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));

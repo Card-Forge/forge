@@ -2,8 +2,7 @@ package forge.screens.match;
 
 import forge.Singletons;
 import forge.gui.framework.*;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
+import forge.properties.ForgePreferences;
 import forge.screens.match.views.*;
 import forge.toolbox.FButton;
 import forge.view.FView;
@@ -52,7 +51,7 @@ public enum VMatchUI implements IVTopLevelUI {
     @Override
     public void populate() {
         // Dev mode disabled? Remove from parent cell if exists.
-        if (!FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
+        if (!ForgePreferences.DEV_MODE) {
             if (VDev.SINGLETON_INSTANCE.getParentCell() != null) {
                 final DragCell parent = VDev.SINGLETON_INSTANCE.getParentCell();
                 parent.removeDoc(VDev.SINGLETON_INSTANCE);

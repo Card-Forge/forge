@@ -34,6 +34,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
@@ -151,6 +152,9 @@ public class FModel {
         catch (final Exception exn) {
             throw new RuntimeException(exn);
         }
+
+        ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
+        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN; // && preferences.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
 
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
         blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
