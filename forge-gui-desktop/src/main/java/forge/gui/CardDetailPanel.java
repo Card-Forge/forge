@@ -38,6 +38,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -291,5 +292,13 @@ public class CardDetailPanel extends SkinnedPanel {
         Color color = fromDetailColor(CardDetailUtil.getBorderColor(card, canShow));
         this.setBorder(BorderFactory.createLineBorder(color, 2));
         scrArea.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, color));
+    }
+
+    //ensure mouse listener hooked up to all certain opaque child components so it can get raised properly
+    @Override
+    public void addMouseListener(MouseListener l) {
+        super.addMouseListener(l);
+        setInfoLabel.addMouseListener(l);
+        cdArea.addMouseListener(l);
     }
 }
