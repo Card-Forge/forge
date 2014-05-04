@@ -158,8 +158,8 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getFont().getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static Map<String, TextureRegion> cardArtCache = new HashMap<String, TextureRegion>();
-    private static final float CARD_ART_RATIO = 1.302f;
+    private static final Map<String, TextureRegion> cardArtCache = new HashMap<String, TextureRegion>();
+    public static final float CARD_ART_RATIO = 1.302f;
 
     //extract card art from the given card
     public static TextureRegion getCardArt(PaperCard paperCard) {
@@ -244,9 +244,7 @@ public class CardRenderer {
     }
 
     public static boolean cardListItemTap(Card card, float x, float y, int count) {
-        float cardArtHeight = getCardListItemHeight();
-        float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
-        if (x <= cardArtWidth && y <= cardArtHeight) {
+        if (x <= getCardListItemHeight() * CARD_ART_RATIO) {
             CardZoom.show(card);
             return true;
         }

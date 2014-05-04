@@ -8,6 +8,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
+import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
@@ -28,11 +29,12 @@ import forge.toolbox.FLabel;
 import forge.util.Utils;
 
 public class VStack extends FDropDown {
+    public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
+    public static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
     private static final float PADDING = 3;
-    private static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
-    private static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final float ALPHA_COMPOSITE = 0.5f;
+    private static final TextRenderer textRenderer = new TextRenderer(true);
 
     private final MagicStack stack;
     private final LobbyPlayer localPlayer;
@@ -209,7 +211,7 @@ public class VStack extends FDropDown {
             g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
 
             x += cardWidth + padding;
-            g.drawText(text, FONT, foreColor, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
+            textRenderer.drawText(g, text, FONT, foreColor, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
 
             if (!isTop) {
                 g.resetAlphaComposite();

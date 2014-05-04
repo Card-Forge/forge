@@ -3,7 +3,14 @@ package forge.toolbox;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
+import forge.assets.TextRenderer;
+import forge.card.CardRenderer;
+import forge.card.CardZoom;
+import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
 import forge.screens.match.views.VPrompt;
+import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
@@ -92,8 +99,27 @@ public class DualListBox<T> extends FDialog {
             }
         };
 
-        sourceList = add(new ChoiceList(sourceElements, onAdd));
-        destList = add(new ChoiceList(destElements, onRemove));
+        //determine renderer from item type
+        final ItemRenderer renderer;
+        T item = null;
+        if (sourceElements != null && sourceElements.size() > 0) {
+            item = sourceElements.get(0);
+        }
+        else if (destElements != null && destElements.size() > 0) {
+            item = destElements.get(0);
+        }
+        if (item instanceof Card) {
+            renderer = new CardItemRenderer();
+        }
+        else if (item instanceof SpellAbility) {
+            renderer = new SpellAbilityItemRenderer();
+        }
+        else {
+            renderer = new DefaultItemRenderer();
+        }
+
+        sourceList = add(new ChoiceList(sourceElements, renderer, onAdd));
+        destList = add(new ChoiceList(destElements, renderer, onRemove));
         if (sourceList.getCount() > 0) { //select first items by default if possible
             sourceList.selectedIndices.add(0);
         }
@@ -243,16 +269,99 @@ public class DualListBox<T> extends FDialog {
         okButton.setEnabled(targetReached);
     }
 
+    private abstract class ItemRenderer {
+        public abstract int getDefaultFontSize();
+        public abstract float getItemHeight();
+        public abstract boolean tap(T value, float x, float y, int count);
+        public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+    }
+    private class DefaultItemRenderer extends ItemRenderer {
+        @Override
+        public int getDefaultFontSize() {
+            return 12;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return ListChooser.DEFAULT_ITEM_HEIGHT;
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return false;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
+        }
+    }
+    //special renderer for SpellAbilities
+    private class SpellAbilityItemRenderer extends ItemRenderer {
+        private final TextRenderer textRenderer = new TextRenderer(true);
+
+        @Override
+        public int getDefaultFontSize() {
+            return 12;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return VStack.CARD_HEIGHT + 2 * FList.PADDING;
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
+                CardZoom.show(((SpellAbility)value).getHostCard());
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            SpellAbility spellAbility = (SpellAbility)value;
+            g.drawImage(ImageCache.getImage(spellAbility.getHostCard()), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
+            float dx = VStack.CARD_WIDTH + FList.PADDING;
+            x += dx;
+            w -= dx;
+            textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
+        }
+    }
+    //special renderer for cards
+    private class CardItemRenderer extends ItemRenderer {
+        @Override
+        public int getDefaultFontSize() {
+            return 14;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return CardRenderer.getCardListItemHeight();
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap((Card)value, x, y, count);
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, x, y, w, h);
+        }
+    }
+
     private class ChoiceList extends FList<T> {
         private List<Integer> selectedIndices = new ArrayList<Integer>();
 
-        private ChoiceList(Collection<T> items, final FEventHandler dblTapCommand) {
+        private ChoiceList(Collection<T> items, final ItemRenderer renderer, final FEventHandler dblTapCommand) {
             super(items != null ? items : new ArrayList<T>()); //handle null without crashing
 
             setListItemRenderer(new ListItemRenderer<T>() {
                 @Override
                 public float getItemHeight() {
-                    return ListChooser.DEFAULT_ITEM_HEIGHT;
+                    return renderer.getItemHeight();
                 }
 
                 @Override
@@ -260,6 +369,9 @@ public class DualListBox<T> extends FDialog {
                     Integer index = ChoiceList.this.getIndexOf(value);
                     selectedIndices.clear();
                     selectedIndices.add(index);
+                    if (renderer.tap(value, x, y, count)) {
+                        return true; //don't activate if renderer handles tap
+                    }
                     if (count == 2) {
                         dblTapCommand.handleEvent(new FEvent(ChoiceList.this, FEventType.ACTIVATE, index));
                     }
@@ -268,10 +380,10 @@ public class DualListBox<T> extends FDialog {
 
                 @Override
                 public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
+                    renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
                 }
             });
-            setFontSize(12);
+            setFontSize(renderer.getDefaultFontSize());
         }
 
         //remove any selected indices outside item range
