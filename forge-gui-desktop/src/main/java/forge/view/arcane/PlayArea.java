@@ -191,7 +191,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
-            if (!panel.getCard().isCreature()) {
+            if (!panel.getCard().isCreature() || panel.getCard().isToken()) {
                 continue;
             }
 
