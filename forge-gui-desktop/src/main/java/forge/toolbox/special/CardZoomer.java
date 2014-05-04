@@ -18,11 +18,12 @@
 
 package forge.toolbox.special;
 
+import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.card.CardCharacteristicName;
+import forge.card.CardDetailUtil;
 import forge.game.card.Card;
 import forge.gui.SOverlayUtils;
-import forge.screens.match.controllers.CPicture;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -217,7 +218,7 @@ public enum CardZoomer {
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        boolean isFaceDownFlippable = (isFaceDownCard && CPicture.isAuthorizedToViewFaceDownCard(thisCard)); 
+        boolean isFaceDownFlippable = (isFaceDownCard && Singletons.getControl().mayShowCard(thisCard)); 
         if (thisCard.isFlipCard() || thisCard.isDoubleFaced() || isFaceDownFlippable ) {
             imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
@@ -320,7 +321,7 @@ public enum CardZoomer {
      * Uses constraint that prevents a player from identifying opponent's face-down cards.
      */
     private void toggleFaceDownCard() {
-        cardState = CPicture.getAlternateState(thisCard, cardState);        
+        cardState = CardDetailUtil.getAlternateState(thisCard, cardState);        
         setImage();
     }
             
@@ -328,8 +329,7 @@ public enum CardZoomer {
      * Toggles between the front and back image of a double-sided card.
      */
     private void toggleDoubleFacedCard() {
-        cardState = CPicture.getAlternateState(thisCard, cardState);
+        cardState = CardDetailUtil.getAlternateState(thisCard, cardState);
         setImage();
     }
-       
 }

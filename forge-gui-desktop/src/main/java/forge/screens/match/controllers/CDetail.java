@@ -19,6 +19,7 @@ package forge.screens.match.controllers;
 
 import forge.UiCommand;
 import forge.Singletons;
+import forge.card.CardDetailUtil;
 import forge.game.card.Card;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
@@ -45,7 +46,7 @@ public enum CDetail implements ICDoc {
      * @param c &emsp; Card object
      */
     public void showCard(final Card c) {
-        view.getLblFlipcard().setVisible(c != null && (c.isDoubleFaced() || c.isFlipCard() || c.isFaceDown() && Singletons.getControl().mayShowCard(c)));
+        view.getLblFlipcard().setVisible(c != null && CardDetailUtil.isCardFlippable(c) && Singletons.getControl().mayShowCard(c));
         view.getPnlDetail().setCard(c);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();
@@ -55,11 +56,13 @@ public enum CDetail implements ICDoc {
     public void showCard(InventoryItem item) {
         if (item instanceof IPaperCard) {
             showCard(Card.getCardForUi((IPaperCard)item));
-        } else if (item instanceof InventoryItemFromSet) {
+        }
+        else if (item instanceof InventoryItemFromSet) {
             view.getLblFlipcard().setVisible(false);
             view.getPnlDetail().setItem((InventoryItemFromSet)item);
             view.getParentCell().repaintSelf();
-        } else {
+        }
+        else {
             showCard((Card)null);
         }
     }
