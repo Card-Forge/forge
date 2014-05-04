@@ -211,6 +211,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     if (!panel.getAttachedPanels().isEmpty()
                             || panel.getCard().isEnchanted()
                             || panel.getCard().isCloned()
+                            || panel.getCard().isCopiedSpell()
                             || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
                             || (panel.getCard().isSick() != firstPanel.getCard().isSick())
                             || (panel.getCard().getNetAttack() != firstPanel.getCard().getNetAttack())
@@ -255,8 +256,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         final CardStackRow lands = collectAllLands();
         final CardStackRow tokens = collectAllTokens();
-        final CardStackRow creatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) ? collectAllCreatures() : new CardStackRow(this.getCardPanels(), RowType.CreatureNonToken);
+        final CardStackRow creatures;
         final CardStackRow others = new CardStackRow(this.getCardPanels(), RowType.Other);
+        
+        final CardStackRow collectedCreatures = collectAllCreatures();
+
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !collectedCreatures.isEmpty()) {
+            creatures = collectedCreatures;
+        } else {
+            creatures = new CardStackRow(this.getCardPanels(), RowType.CreatureNonToken);
+        }
         
         // should find an appropriate width of card
         int maxCardWidth = this.getCardWidthMax();
