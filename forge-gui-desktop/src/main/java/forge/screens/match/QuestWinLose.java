@@ -400,7 +400,7 @@ public class QuestWinLose extends ControlWinLose {
             }
             
             if (game.getLifeDelta() >= 50) {
-                lifeDifferenceCredits += Math.min((game.getLifeDelta() - 45) / 5, 500);
+                lifeDifferenceCredits += Math.max(Math.min((game.getLifeDelta() - 46) / 4, 750), 0);
             }
             
         } // End for(game)
@@ -417,7 +417,7 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         // Estates bonus
-        credTotal = credBase + credGameplay + credUndefeated;
+        credTotal = credBase + credGameplay + credUndefeated + lifeDifferenceCredits;
         double estateValue = 0;
         switch (qData.getAssets().getItemLevel(QuestItemType.ESTATES)) {
         case 1:
