@@ -81,6 +81,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
+    private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -213,6 +214,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbOpenPacksIndiv, regularConstraints);
         pnlPrefs.add(new NoteLabel("When opening Fat Packs and Booster Boxes, booster packs will be opened and displayed one at a time."), regularConstraints);
+
+        pnlPrefs.add(cbStackCreatures, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Stacks identical creatures on the battlefield like lands, artifacts, and enchantments."), regularConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
@@ -525,6 +529,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbOpenPacksIndiv() {
         return cbOpenPacksIndiv;
+    }
+
+    public final JCheckBox getCbStackCreatures() {
+        return cbStackCreatures;
     }
 
     /** @return {@link forge.toolbox.FLabel} */

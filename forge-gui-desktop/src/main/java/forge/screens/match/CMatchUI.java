@@ -337,20 +337,19 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             Player owner = kv.getKey();
             ZoneType zt = kv.getValue();
 
-            if (zt == ZoneType.Command)
+            if (zt == ZoneType.Command) {
                 getCommandFor(owner).getTabletop().setupPlayZone();
-            else if (zt == ZoneType.Hand) {
+            } else if (zt == ZoneType.Hand) {
                 VHand vHand = getHandFor(owner);
-                if (null != vHand)
+                if (null != vHand) {
                     vHand.getLayoutControl().updateHand();
+                }
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
-            }
-            else if (zt == ZoneType.Battlefield) {
+            } else if (zt == ZoneType.Battlefield) {
                 getFieldViewFor(owner).getTabletop().setupPlayZone();
             } else if (zt == ZoneType.Ante) {
                 CAntes.SINGLETON_INSTANCE.update();
-            }
-            else {
+            } else {
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
             }
         }

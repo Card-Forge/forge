@@ -47,6 +47,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
+        UI_STACK_CREATURES ("false"),
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),

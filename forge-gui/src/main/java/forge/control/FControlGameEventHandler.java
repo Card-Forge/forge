@@ -11,6 +11,8 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
@@ -65,6 +67,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(final GameEventTurnBegan event) {
+
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && event.turnOwner != null) {
+            // anything except stack will get here
+            updateZone(Pair.of(event.turnOwner, ZoneType.Battlefield));
+        }
+        
         if (turnUpdPlanned.getAndSet(true)) { return null; }
 
         final Game game = GuiBase.getInterface().getGame(); // to make sure control gets a correct game instance
