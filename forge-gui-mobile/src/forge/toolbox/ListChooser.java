@@ -26,6 +26,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.card.CardRenderer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
@@ -205,6 +206,50 @@ public class ListChooser<T> extends FContainer {
         lstChoices.setBounds(0, y, width, height - y);
     }
 
+    private abstract static class ItemRenderer<T> {
+        public abstract float getItemHeight();
+        public abstract boolean tap(T value, float x, float y, int count);
+        public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+
+        public static <T> ItemRenderer<T> create(final ListChooser<T> listChooser) {
+            return new ItemRenderer<T>() {
+                @Override
+                public float getItemHeight() {
+                    return ITEM_HEIGHT;
+                }
+
+                @Override
+                public boolean tap(T value, float x, float y, int count) {
+                    return false;
+                }
+
+                @Override
+                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                    g.drawText(listChooser.getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                }
+            };
+        }
+        //create special renderer for cards
+        /*public static ItemRenderer<Card> create(final ListChooser<Card> listChooser) {
+            return new ItemRenderer<Card>() {
+                @Override
+                public float getItemHeight() {
+                    return CardRenderer.getCardListItemHeight();
+                }
+
+                @Override
+                public boolean tap(Card value, float x, float y, int count) {
+                    return false;
+                }
+
+                @Override
+                public void drawValue(Graphics g, Card value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                    CardRenderer.drawCardListItem(g, font, foreColor, paperCard, count, x, y, w, h);
+                }
+            };
+        }*/
+    }
+
     private class ChoiceList extends FList<T> {
         private boolean allowMultipleSelections;
         private List<Integer> selectedIndices = new ArrayList<Integer>();
@@ -212,10 +257,11 @@ public class ListChooser<T> extends FContainer {
         private ChoiceList(Collection<T> items) {
             super(items);
 
+            final ItemRenderer<T> renderer = ItemRenderer.create(ListChooser.this);
             setListItemRenderer(new ListItemRenderer<T>() {
                 @Override
                 public float getItemHeight() {
-                    return ITEM_HEIGHT;
+                    return renderer.getItemHeight();
                 }
 
                 @Override
@@ -234,6 +280,9 @@ public class ListChooser<T> extends FContainer {
                         selectedIndices.add(index);
                     }
                     onSelectionChange();
+                    if (renderer.tap(value, x, y, count)) {
+                        return true; //don't activate if renderer handles tap
+                    }
                     if (count == 2 && optionPane.isButtonEnabled(0)) {
                         optionPane.setResult(0);
                     }
@@ -242,7 +291,7 @@ public class ListChooser<T> extends FContainer {
 
                 @Override
                 public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
                 }
             });
             setFontSize(12);
