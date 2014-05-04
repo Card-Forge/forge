@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.GuiBase;
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -496,6 +497,17 @@ public class CardDetailUtil {
             }
             String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
             area.append("Must block " + mustBlockThese);
+        }
+
+        //show current storm count for storm cards
+        if (card.getKeyword().contains("Storm")) {
+            Game game = GuiBase.getInterface().getGame();
+            if (game != null) {
+                if (area.length() != 0) {
+                    area.append("\n\n");
+                }
+                area.append("Current Storm Count: " + game.getStack().getCardsCastThisTurn().size());
+            }
         }
         return area.toString();
     }

@@ -56,7 +56,6 @@ public enum VPlayers implements IVDoc<CPlayers> {
 
     // Other fields
     private Map<Player, JLabel[]> infoLBLs;
-    private JLabel stormLabel;
 
     //========= Overridden methods
 
@@ -69,8 +68,6 @@ public enum VPlayers implements IVDoc<CPlayers> {
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
-        stormLabel = new InfoLabel();
-        pnl.add(stormLabel, constraints);
         for (final Entry<Player, JLabel[]> p : infoLBLs.entrySet()) {
             for(JLabel label : p.getValue() )
                 pnl.add(label, constraints);
@@ -175,16 +172,6 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }
-        updateStormLabel(game);
-    }
-
-    /**
-     * @param game  */
-    public void updateStormLabel(Game game) {
-        // No need to update if this panel isn't showing
-        if (!parentCell.getSelected().equals(this)) { return; }
-
-        stormLabel.setText("Storm count: " + game.getStack().getCardsCastThisTurn().size());
     }
 
     //========= Custom class handling

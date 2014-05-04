@@ -18,7 +18,6 @@ import forge.toolbox.FLabel;
 
 public class VPlayers extends FDropDown {
     private Map<Player, InfoLabel[]> infoLabels;
-    private InfoLabel stormLabel;
 
     public VPlayers() {
         infoLabels = new HashMap<Player, InfoLabel[]>();
@@ -36,8 +35,6 @@ public class VPlayers extends FDropDown {
 
             name.setText(p.getName());
         }
-
-        stormLabel = add(new InfoLabel());
     }
 
     private class InfoLabel extends FLabel {
@@ -83,8 +80,6 @@ public class VPlayers extends FDropDown {
                 temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }
-        stormLabel.setText("Storm count: " + FControl.getGame().getStack().getCardsCastThisTurn().size());
-
         return new ScrollBounds(maxWidth, maxVisibleHeight);
     }
 }
