@@ -252,7 +252,7 @@ public class DualListBox<T> extends FDialog {
             setListItemRenderer(new ListItemRenderer<T>() {
                 @Override
                 public float getItemHeight() {
-                    return ListChooser.ITEM_HEIGHT;
+                    return ListChooser.DEFAULT_ITEM_HEIGHT;
                 }
 
                 @Override

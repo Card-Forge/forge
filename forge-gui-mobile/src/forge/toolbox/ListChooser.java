@@ -27,6 +27,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
+import forge.game.card.Card;
+import forge.item.PaperCard;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
@@ -67,7 +69,7 @@ public class ListChooser<T> extends FContainer {
     public static final FSkinColor ALT_ITEM_COLOR = ITEM_COLOR.getContrastColor(-20);
     public static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     public static final FSkinColor BORDER_COLOR = FList.FORE_COLOR;
-    public static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
+    public static final float DEFAULT_ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
     // Data and number of choices for the list
     private int minChoices, maxChoices;
@@ -133,7 +135,7 @@ public class ListChooser<T> extends FContainer {
         else {
             lstChoices.allowMultipleSelections = true;
         }
-        setHeight(Math.min(ITEM_HEIGHT * list.size(), FOptionPane.getMaxDisplayObjHeight()));
+        setHeight(Math.min(lstChoices.getListItemRenderer().getItemHeight() * list.size(), FOptionPane.getMaxDisplayObjHeight()));
 
         optionPane = new FOptionPane(null, title, null, this, options, 0, new Callback<Integer>() {
             @Override
@@ -206,48 +208,76 @@ public class ListChooser<T> extends FContainer {
         lstChoices.setBounds(0, y, width, height - y);
     }
 
-    private abstract static class ItemRenderer<T> {
+    private abstract class ItemRenderer {
+        public abstract int getDefaultFontSize();
         public abstract float getItemHeight();
         public abstract boolean tap(T value, float x, float y, int count);
         public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
-
-        public static <T> ItemRenderer<T> create(final ListChooser<T> listChooser) {
-            return new ItemRenderer<T>() {
-                @Override
-                public float getItemHeight() {
-                    return ITEM_HEIGHT;
-                }
-
-                @Override
-                public boolean tap(T value, float x, float y, int count) {
-                    return false;
-                }
-
-                @Override
-                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    g.drawText(listChooser.getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
-                }
-            };
+    }
+    private class DefaultItemRenderer extends ItemRenderer {
+        @Override
+        public int getDefaultFontSize() {
+            return 12;
         }
-        //create special renderer for cards
-        /*public static ItemRenderer<Card> create(final ListChooser<Card> listChooser) {
-            return new ItemRenderer<Card>() {
-                @Override
-                public float getItemHeight() {
-                    return CardRenderer.getCardListItemHeight();
-                }
 
-                @Override
-                public boolean tap(Card value, float x, float y, int count) {
-                    return false;
-                }
+        @Override
+        public float getItemHeight() {
+            return DEFAULT_ITEM_HEIGHT;
+        }
 
-                @Override
-                public void drawValue(Graphics g, Card value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    CardRenderer.drawCardListItem(g, font, foreColor, paperCard, count, x, y, w, h);
-                }
-            };
-        }*/
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return false;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+        }
+    }
+    //special renderer for cards
+    private class PaperCardItemRenderer extends ItemRenderer {
+        @Override
+        public int getDefaultFontSize() {
+            return 14;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return CardRenderer.getCardListItemHeight();
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count);
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, x, y, w, h);
+        }
+    }
+    //special renderer for cards
+    private class CardItemRenderer extends ItemRenderer {
+        @Override
+        public int getDefaultFontSize() {
+            return 14;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return CardRenderer.getCardListItemHeight();
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap(((Card)value).getPaperCard(), x, y, count);
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            CardRenderer.drawCardListItem(g, font, foreColor, ((Card)value).getPaperCard(), 0, x, y, w, h);
+        }
     }
 
     private class ChoiceList extends FList<T> {
@@ -257,7 +287,18 @@ public class ListChooser<T> extends FContainer {
         private ChoiceList(Collection<T> items) {
             super(items);
 
-            final ItemRenderer<T> renderer = ItemRenderer.create(ListChooser.this);
+            //determine renderer from item type
+            final ItemRenderer renderer;
+            T item = items.iterator().next();
+            if (item instanceof PaperCard) {
+                renderer = new PaperCardItemRenderer();
+            }
+            else if (item instanceof Card) {
+                renderer = new CardItemRenderer();
+            }
+            else {
+                renderer = new DefaultItemRenderer();
+            }
             setListItemRenderer(new ListItemRenderer<T>() {
                 @Override
                 public float getItemHeight() {
@@ -294,7 +335,7 @@ public class ListChooser<T> extends FContainer {
                     renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
                 }
             });
-            setFontSize(12);
+            setFontSize(renderer.getDefaultFontSize());
         }
 
         @Override
