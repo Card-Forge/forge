@@ -6201,7 +6201,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final String[] res = restrictions.split("_");
             final ZoneType destination = ZoneType.smartValueOf(res[0]);
             ZoneType origin = null;
-            if (res[1].equals("from")) {
+            if (res.length > 1 && res[1].equals("from")) {
                 origin = ZoneType.smartValueOf(res[2]);
             }
             List<Card> list = CardUtil.getThisTurnEntered(destination,
@@ -6725,6 +6725,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("RememberMap")) {
             System.out.println(source.getRememberMap());
             for (SpellAbility sa : source.getSpellAbilities()) {
+                if (sa.getActivatingPlayer() == null) continue;
                 for (Player p : AbilityUtils.getDefinedPlayers(source, property.split("RememberMap_")[1], sa)) {
                     if (source.getRememberMap().get(p).contains(this)) {
                         return true;
