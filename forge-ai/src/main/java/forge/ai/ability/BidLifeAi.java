@@ -30,7 +30,11 @@ public class BidLifeAi extends SpellAbilityAi {
                     return false;
                 }
                 Card c = ComputerUtilCard.getBestCreatureAI(list);
-                sa.getTargets().add(c);
+                if (sa.canTarget(c)) {
+                    sa.getTargets().add(c);
+                } else {
+                    return false;
+                }
             } else if (tgt.getZone().contains(ZoneType.Stack)) {
                 if (game.getStack().isEmpty()) {
                     return false;

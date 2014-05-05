@@ -6502,6 +6502,7 @@ forge-gui/res/cardsfolder/h/heartwood_dryad.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/heartwood_giant.txt -text
 forge-gui/res/cardsfolder/h/heartwood_shard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/heartwood_storyteller.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/heartwood_storyteller_avatar.txt -text
 forge-gui/res/cardsfolder/h/heartwood_treefolk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/heat_of_battle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/heat_ray.txt svneol=native#text/plain

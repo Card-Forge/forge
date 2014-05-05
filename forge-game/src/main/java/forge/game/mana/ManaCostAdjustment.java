@@ -212,6 +212,15 @@ public class ManaCostAdjustment {
                 if (!sa.isSpell()) {
                     return;
                 }
+                if (params.containsKey("OnlyFirstSpell")) {
+                    if (activator == null ) {
+                        return;
+                    }
+                    if (CardLists.filterControlledBy(activator.getGame().getStack().getCardsCastThisTurn(),
+                            activator).size() > 0) {
+                        return;
+                    }
+                }
             } else if (params.get("Type").equals("Ability")) {
                 if (!(sa instanceof AbilityActivated)) {
                     return;
@@ -342,6 +351,15 @@ public class ManaCostAdjustment {
             if (params.get("Type").equals("Spell")) {
                 if (!sa.isSpell()) {
                     return;
+                }
+                if (params.containsKey("OnlyFirstSpell")) {
+                    if (activator == null ) {
+                        return;
+                    }
+                    if (CardLists.filterControlledBy(activator.getGame().getStack().getCardsCastThisTurn(),
+                            activator).size() > 0) {
+                        return;
+                    }
                 }
             } else if (params.get("Type").equals("Ability")) {
                 if (!(sa instanceof AbilityActivated)) {
