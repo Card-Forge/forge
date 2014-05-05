@@ -266,6 +266,7 @@ Aura
 Curse
 Shrine
 [ArtifactTypes]
+Contraption
 Equipment
 Fortification
 [WalkerTypes]

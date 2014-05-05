@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.spellability.SpellAbility;
@@ -55,6 +56,11 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
                 }
                 delTrig.addRemembered(o);
             }
+        }
+
+        if (mapParams.containsKey("Execute")) {
+            SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(mapParams.get("Execute")), sa.getHostCard());
+            delTrig.setOverridingAbility(overridingSA);
         }
 
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(delTrig);
