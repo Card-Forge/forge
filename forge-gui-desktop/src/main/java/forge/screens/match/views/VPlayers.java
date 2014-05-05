@@ -30,6 +30,7 @@ import forge.gui.framework.IVDoc;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.controllers.CPlayers;
+import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import net.miginfocom.swing.MigLayout;
@@ -53,6 +54,9 @@ public enum VPlayers implements IVDoc<CPlayers> {
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Players");
+    private final FScrollPanel scroller = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap"), false,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Other fields
     private Map<Player, JLabel[]> infoLBLs;
@@ -64,18 +68,18 @@ public enum VPlayers implements IVDoc<CPlayers> {
      */
     @Override
     public void populate() {
-        final JPanel pnl = parentCell.getBody();
-        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-
+        scroller.removeAll();
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
         for (final Entry<Player, JLabel[]> p : infoLBLs.entrySet()) {
-            for(JLabel label : p.getValue() )
-                pnl.add(label, constraints);
+            for (JLabel label : p.getValue()) {
+                scroller.add(label, constraints);
+            }
         }
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
+        parentCell.getBody().add(scroller, "w 100%, h 100%!");
     }
-    
-    public void init(final Iterable<Player> players) {
 
+    public void init(final Iterable<Player> players) {
         this.infoLBLs = new HashMap<Player, JLabel[]>();
         for (final Player p : players) {
             // Create and store labels detailing various non-critical player info.
