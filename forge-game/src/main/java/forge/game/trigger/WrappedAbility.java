@@ -392,7 +392,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             if (ev.getValue() instanceof Card) {
                 Card card = (Card) ev.getValue();
                 Card current = game.getCardState(card);
-                if (current.getTimestamp() != card.getTimestamp()) {
+                if (card.isInPlay() && current.isInPlay() && current.getTimestamp() != card.getTimestamp()) {
                     sa.getTriggeringObjects().remove(ev.getKey());
                 }
             }
