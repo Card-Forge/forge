@@ -120,6 +120,7 @@ public enum ApiType {
     Shuffle (ShuffleEffect.class),
     SkipTurn (SkipTurnEffect.class),
     StoreSVar (StoreSVarEffect.class),
+    StoreMap (StoreMapEffect.class),
     Tap (TapEffect.class),
     TapAll (TapAllEffect.class),
     TapOrUntap (TapOrUntapEffect.class),

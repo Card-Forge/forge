@@ -129,6 +129,7 @@ forge-ai/src/main/java/forge/ai/ability/ScryAi.java -text
 forge-ai/src/main/java/forge/ai/ability/SetStateAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ShuffleAi.java -text
 forge-ai/src/main/java/forge/ai/ability/SkipTurnAi.java -text
+forge-ai/src/main/java/forge/ai/ability/StoreMapAi.java -text
 forge-ai/src/main/java/forge/ai/ability/StoreSVarAi.java -text
 forge-ai/src/main/java/forge/ai/ability/TapAi.java -text
 forge-ai/src/main/java/forge/ai/ability/TapAiBase.java -text
@@ -396,6 +397,7 @@ forge-game/src/main/java/forge/game/ability/effects/SetInMotionEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/SetStateEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ShuffleEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/SkipTurnEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/StoreMapEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/StoreSVarEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/TapAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/TapEffect.java -text

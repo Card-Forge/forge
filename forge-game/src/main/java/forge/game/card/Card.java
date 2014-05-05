@@ -53,10 +53,13 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.maps.HashMapOfLists;
+import forge.util.maps.MapOfLists;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -115,6 +118,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Map<Long, CardKeywords> changedCardKeywords = new ConcurrentSkipListMap<Long, CardKeywords>();
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
+    private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<GameEntity, Object>(CollectionSuppliers.<Object>arrayLists());
     private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
     private final ArrayList<Card> encodedCards = new ArrayList<Card>();
     private final List<Card> devouredCards = new ArrayList<Card>();
@@ -510,6 +514,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final List<Card> getDevoured() {
         return this.devouredCards;
+    }
+
+    public final void addRememberMap(final GameEntity e, final List<Object> o) {
+        this.rememberMap.addAll(e, o);
+    }
+    public MapOfLists<GameEntity, Object> getRememberMap() {
+        return rememberMap;
     }
 
     /**
@@ -6711,6 +6722,16 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getCharacteristics().getManaCost().hasPhyrexian()) {
                 return false;
             }
+        } else if (property.startsWith("RememberMap")) {
+            System.out.println(source.getRememberMap());
+            for (SpellAbility sa : source.getSpellAbilities()) {
+                for (Player p : AbilityUtils.getDefinedPlayers(source, property.split("RememberMap_")[1], sa)) {
+                    if (source.getRememberMap().get(p).contains(this)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         } else if (property.equals("IsRemembered")) {
             if (!source.getRemembered().contains(this)) {
                 return false;
