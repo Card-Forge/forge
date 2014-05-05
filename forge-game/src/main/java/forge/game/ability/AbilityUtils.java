@@ -764,7 +764,7 @@ public class AbilityUtils {
         if (eqIndex >= 0) {
             char reference = valid.charAt(eqIndex + 2); // take whatever goes after EQ
             if (Character.isLetter(reference)) {
-                String varName = valid.split("EQ")[1].split("\\+")[0];
+                String varName = valid.split(",")[0].split("EQ")[1].split("\\+")[0];
                 valid = valid.replace("EQ" + varName, "EQ" + Integer.toString(calculateAmount(source, varName, sa)));
             }
         }
