@@ -46,7 +46,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final String svarName = sa.getParam("Execute");
-        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getHostCard().getSVar(svarName), sa.getHostCard());
+        final SpellAbility trigsa = AbilityFactory.getAbility(sa.getSVar(svarName), sa.getHostCard());
         trigsa.setActivatingPlayer(ai);
         return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
     }
