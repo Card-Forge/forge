@@ -506,14 +506,15 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public TargetChoices chooseNewTargetsFor(SpellAbility ability) {
-        if (ability.getTargetRestrictions() == null) {
+        SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
+        if (sa.getTargetRestrictions() == null) {
             return null;
         }
-        TargetChoices oldTarget = ability.getTargets();
-        TargetSelection select = new TargetSelection(ability);
-        ability.resetTargets();
+        TargetChoices oldTarget = sa.getTargets();
+        TargetSelection select = new TargetSelection(sa);
+        sa.resetTargets();
         if (select.chooseTargets(oldTarget.getNumTargeted())) {
-            return ability.getTargets();
+            return sa.getTargets();
         }
         else {
             // Return old target, since we had to reset them above
