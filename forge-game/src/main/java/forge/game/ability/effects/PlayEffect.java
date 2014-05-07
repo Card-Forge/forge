@@ -220,7 +220,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             
             
-            remember = controller.getController().playSaFromPlayEffect(tgtSA);
+            remember &= controller.getController().playSaFromPlayEffect(tgtSA);
             if (remember) {
                 source.addRemembered(tgtSA.getHostCard());
             }
