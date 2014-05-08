@@ -25,7 +25,6 @@ import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
 import forge.deck.io.DeckPreferences;
-import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
 import forge.game.card.CardUtil;
 import forge.gauntlet.GauntletData;
@@ -39,11 +38,10 @@ import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
-import forge.util.MultiplexOutputStream;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
-import java.io.*;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -59,10 +57,6 @@ public class FModel {
     private FModel() { } //don't allow creating instance
 
     private static StaticData magicDb;
-
-    private static PrintStream oldSystemOut;
-    private static PrintStream oldSystemErr;
-    private static OutputStream logFileStream;
 
     private static QuestPreferences questPreferences;
     private static ForgePreferences preferences;
@@ -80,9 +74,6 @@ public class FModel {
     private static GameFormat.Collection formats;
 
     public static void initialize(final IProgressBar progressBar) {
-        // install our error reporter
-        ExceptionHandler.registerErrorHandling();
-
         //load card database
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
@@ -123,27 +114,6 @@ public class FModel {
                 throw new RuntimeException("cannot create profile directory: " + dname);
             }
         }
-        
-        //initialize log file
-        File logFile = new File(ForgeConstants.LOG_FILE);
-
-        int i = 0;
-        while (logFile.exists() && !logFile.delete()) {
-            String pathname = logFile.getPath().replaceAll("[0-9]{0,2}.log$", String.valueOf(i++) + ".log");
-            logFile = new File(pathname);
-        }
-
-        try {
-            logFileStream = new FileOutputStream(logFile);
-        }
-        catch (final FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        oldSystemOut = System.out;
-        System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
-        oldSystemErr = System.err;
-        System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
 
         // Instantiate preferences: quest and regular
         try {
@@ -311,15 +281,5 @@ public class FModel {
 
     public static IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
-    }
-
-    /**
-     * Finalizer, generally should be avoided, but here closes the log file
-     * stream and resets the system output streams.
-     */
-    public static void close() throws IOException {
-        System.setOut(oldSystemOut);
-        System.setErr(oldSystemErr);
-        logFileStream.close();
     }
 }

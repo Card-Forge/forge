@@ -20,6 +20,15 @@ package forge.error;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.properties.ForgeConstants;
+import forge.util.MultiplexOutputStream;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
@@ -37,12 +46,47 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         System.setProperty("sun.awt.exception.handler", ExceptionHandler.class.getName());
     }
 
+    private static PrintStream oldSystemOut;
+    private static PrintStream oldSystemErr;
+    private static OutputStream logFileStream;
+
     /**
      * Call this at the beginning to make sure that the class is loaded and the
      * static initializer has run.
      */
     public static void registerErrorHandling() {
+        //initialize log file
+        File logFile = new File(ForgeConstants.LOG_FILE);
+
+        int i = 0;
+        while (logFile.exists() && !logFile.delete()) {
+            String pathname = logFile.getPath().replaceAll("[0-9]{0,2}.log$", String.valueOf(i++) + ".log");
+            logFile = new File(pathname);
+        }
+
+        try {
+            logFileStream = new FileOutputStream(logFile);
+        }
+        catch (final FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        oldSystemOut = System.out;
+        System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
+        oldSystemErr = System.err;
+        System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
+
         Log.debug("Error handling registered!");
+    }
+
+    /**
+     * Finalizer, generally should be avoided, but here closes the log file
+     * stream and resets the system output streams.
+     */
+    public static void unregisterErrorHandling() throws IOException {
+        System.setOut(oldSystemOut);
+        System.setErr(oldSystemErr);
+        logFileStream.close();
     }
 
     /** {@inheritDoc} */

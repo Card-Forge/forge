@@ -21,7 +21,7 @@ import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.Singletons;
 import forge.card.CardReaderExperiments;
-import forge.model.FModel;
+import forge.error.ExceptionHandler;
 
 /**
  * Main class for Forge's swing application view.
@@ -39,6 +39,9 @@ public final class Main {
 
         //setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
+
+        //install our error handler
+        ExceptionHandler.registerErrorHandling();
 
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {
@@ -76,7 +79,7 @@ public final class Main {
     @Override
     protected void finalize() throws Throwable {
         try {
-            FModel.close();
+            ExceptionHandler.unregisterErrorHandling();
         } finally {
             super.finalize();
         }

@@ -29,6 +29,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
 import forge.error.BugReporter;
+import forge.error.ExceptionHandler;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
@@ -61,6 +62,9 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void create() {
+        //install our error handler
+        ExceptionHandler.registerErrorHandling();
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 

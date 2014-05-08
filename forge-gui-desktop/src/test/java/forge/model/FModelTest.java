@@ -1,7 +1,9 @@
 package forge.model;
 
+import forge.error.ExceptionHandler;
 import forge.properties.ForgePreferences;
 import forge.util.BuildInfo;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -32,7 +34,7 @@ public class FModelTest {
     @AfterTest
     public final void tearDown() {
         try {
-            FModel.close();
+            ExceptionHandler.unregisterErrorHandling();
         } catch (final Throwable ignored) {
             // ignore exceptions during close.
         }
@@ -52,7 +54,7 @@ public class FModelTest {
         // 8/12/11
         // 10:36
         // AM
-        FModel.close();
+        ExceptionHandler.unregisterErrorHandling();
 
         System.err.println("log test");
     }
