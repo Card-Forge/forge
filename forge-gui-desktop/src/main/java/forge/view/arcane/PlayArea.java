@@ -197,13 +197,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
             int insertIndex = -1;
 
-            // Find tokens with the same name.
+            // Find creatures with the same name.
             for (int i = 0, n = allCreatures.size(); i < n; i++) {
                 final CardStack stack = allCreatures.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 if (firstPanel.getCard().getName().equals(panel.getCard().getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
-                        // Put this token to the left of tokens with the same
+                        // Put this creature to the left of creatures with the same
                         // name and attachments.
                         insertIndex = i;
                         break;
@@ -217,7 +217,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                             || (panel.getCard().getNetAttack() != firstPanel.getCard().getNetAttack())
                             || (panel.getCard().getNetDefense() != firstPanel.getCard().getNetDefense())
                             || (stack.size() == creatureStackMax)) {
-                        // If this token has attachments or the stack is full,
+                        // If this creature has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
                         continue;

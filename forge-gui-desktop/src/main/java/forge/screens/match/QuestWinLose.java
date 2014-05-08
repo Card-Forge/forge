@@ -184,7 +184,7 @@ public class QuestWinLose extends ControlWinLose {
 
             // Award jackpot every 80 games won (currently 10 rares)
 
-            if ((wins > 0) && ((wins % 80) == 0)) {
+            if ((wins > 0) && (((wins + 1) % 80) == 0)) {
                 this.awardJackpot();
             }
 
@@ -624,9 +624,9 @@ public class QuestWinLose extends ControlWinLose {
             if (this.wonMatch) {
                 maxChoices++;
                 final int wins = qData.getAchievements().getWin();
-                if (wins + 1 % 5 == 0) { maxChoices++; }
-                if (wins + 1 % 20 == 0) { maxChoices++; }
-                if (wins + 1 % 50 == 0) { maxChoices++; }
+                if ((wins + 1) % 5 == 0) { maxChoices++; }
+                if ((wins + 1) % 20 == 0) { maxChoices++; }
+                if ((wins + 1) % 50 == 0) { maxChoices++; }
                 maxChoices += qData.getAssets().getItemLevel(QuestItemType.MEMBERSHIP_TOKEN);
             }
 
