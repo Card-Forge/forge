@@ -7,6 +7,6 @@ import forge.Forge;
 
 public class Main {
     public static void main(String[] args) {
-        new LwjglApplication(new Forge(new LwjglClipboard()), "Forge", 320, 480, true);
+        new LwjglApplication(new Forge(new LwjglClipboard(), "../forge-gui/"), "Forge", 320, 480, true);
     }
 }

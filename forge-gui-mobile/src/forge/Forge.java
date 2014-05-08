@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -49,13 +50,13 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public Forge(Clipboard clipboard0) {
+    public Forge(Clipboard clipboard0, String assetDir0) {
         if (game != null) {
             throw new RuntimeException("Cannot initialize Forge more than once");
         }
         game = this;
         clipboard = clipboard0;
-        GuiBase.setInterface(new GuiMobile());
+        GuiBase.setInterface(new GuiMobile(assetDir0));
     }
 
     @Override
@@ -209,6 +210,12 @@ public class Forge implements ApplicationListener {
         screens.clear();
         batch.dispose();
         shapeRenderer.dispose();
+    }
+
+    //special utility method to help with debugging
+    public static void debugPrint(String message) {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        Gdx.app.debug("Forge", message);
     }
 
     public static void startKeyInput(KeyInputAdapter adapter) {

@@ -19,6 +19,6 @@ public class Main extends AndroidApplication {
             this.setRequestedOrientation(7);
         }
 
-        initialize(new Forge(getClipboard()), false);
+        initialize(new Forge(getClipboard(), getExternalFilesDir(null).getAbsolutePath()), false);
     }
 }

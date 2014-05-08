@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
@@ -93,6 +94,7 @@ public class SplashScreen extends FContainer {
 
         String versionStr = BuildInfo.getVersionString();
         File versionFile = new File(ForgeConstants.ASSETS_DIR + "version.txt");
+        Forge.debugPrint("Version file: " + versionFile);
         if (!versionFile.exists()) {
             try {
                 versionFile.createNewFile();
