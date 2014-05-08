@@ -532,13 +532,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            if (remember != null) {
+            if (remember != null && !movedCard.getZone().equals(originZone)) {
                 hostCard.addRemembered(movedCard);
             }
-            if (forget != null) {
+            if (forget != null && !movedCard.getZone().equals(originZone)) {
                 hostCard.getRemembered().remove(movedCard);
             }
-            if (imprint != null) {
+            if (imprint != null && !movedCard.getZone().equals(originZone)) {
                 hostCard.addImprinted(movedCard);
             }
         }
