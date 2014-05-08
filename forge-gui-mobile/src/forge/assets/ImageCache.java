@@ -61,7 +61,7 @@ public class ImageCache {
     static {
         Texture defImage = null;
         try {
-            defImage = new Texture(Gdx.files.local(ForgeConstants.NO_CARD_FILE));
+            defImage = new Texture(Gdx.files.absolute(ForgeConstants.NO_CARD_FILE));
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {

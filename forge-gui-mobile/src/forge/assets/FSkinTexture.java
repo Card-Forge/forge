@@ -22,7 +22,7 @@ public enum FSkinTexture implements FImage {
 
     public void load(String preferredDir, String defaultDir) {
         String preferredFile = preferredDir + filename;
-        FileHandle file = Gdx.files.local(preferredFile);
+        FileHandle file = Gdx.files.absolute(preferredFile);
         if (file.exists()) {
             try {
                 texture = new Texture(file);
@@ -35,7 +35,7 @@ public enum FSkinTexture implements FImage {
         if (texture == null) {
             //use default file if can't use preferred file
             String defaultFile = defaultDir + filename;
-            file = Gdx.files.local(defaultFile);
+            file = Gdx.files.absolute(defaultFile);
             if (file.exists()) {
                 try {
                     texture = new Texture(file);
@@ -43,6 +43,7 @@ public enum FSkinTexture implements FImage {
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);
                     e.printStackTrace();
+                    return;
                 }
             }
         }

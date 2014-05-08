@@ -48,7 +48,7 @@ public class FSkinFont {
         String dir = FSkin.getDir();
 
         //generate .fnt and .png files from .ttf if needed
-        FileHandle ttfFile = Gdx.files.local(dir + TTF_FILE);
+        FileHandle ttfFile = Gdx.files.absolute(dir + TTF_FILE);
         if (ttfFile.exists()) {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
             font = generator.generateFont(size);

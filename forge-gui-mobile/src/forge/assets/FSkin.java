@@ -73,7 +73,7 @@ public class FSkin {
         FSkinTexture.BG_TEXTURE.load(preferredDir, ForgeConstants.DEFAULT_SKINS_DIR); //load background texture early for splash screen
 
         if (splashScreen != null) {
-            final FileHandle f = Gdx.files.local(preferredDir + "bg_splash.png");
+            final FileHandle f = Gdx.files.absolute(preferredDir + "bg_splash.png");
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
                     FSkin.loadLight("default", splashScreen);
@@ -135,12 +135,12 @@ public class FSkin {
 
         // Grab and test various sprite files.
         String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
-        final FileHandle f1 = Gdx.files.local(defaultDir + SourceFile.ICONS.getFilename());
-        final FileHandle f2 = Gdx.files.local(preferredDir + SourceFile.ICONS.getFilename());
-        final FileHandle f3 = Gdx.files.local(defaultDir + SourceFile.FOILS.getFilename());
-        final FileHandle f4 = Gdx.files.local(defaultDir + ForgeConstants.SPRITE_AVATARS_FILE);
-        final FileHandle f5 = Gdx.files.local(preferredDir + ForgeConstants.SPRITE_AVATARS_FILE);
-        final FileHandle f6 = Gdx.files.local(defaultDir + SourceFile.OLD_FOILS.getFilename());
+        final FileHandle f1 = Gdx.files.absolute(defaultDir + SourceFile.ICONS.getFilename());
+        final FileHandle f2 = Gdx.files.absolute(preferredDir + SourceFile.ICONS.getFilename());
+        final FileHandle f3 = Gdx.files.absolute(defaultDir + SourceFile.FOILS.getFilename());
+        final FileHandle f4 = Gdx.files.absolute(defaultDir + ForgeConstants.SPRITE_AVATARS_FILE);
+        final FileHandle f5 = Gdx.files.absolute(preferredDir + ForgeConstants.SPRITE_AVATARS_FILE);
+        final FileHandle f6 = Gdx.files.absolute(defaultDir + SourceFile.OLD_FOILS.getFilename());
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -299,7 +299,7 @@ public class FSkin {
     public static ArrayList<String> getSkinDirectoryNames() {
         final ArrayList<String> mySkins = new ArrayList<String>();
 
-        final FileHandle dir = Gdx.files.local(ForgeConstants.SKINS_DIR);
+        final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
             System.err.println("FSkin > can't find skins directory!");
         }

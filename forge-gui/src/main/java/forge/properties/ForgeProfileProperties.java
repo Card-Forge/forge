@@ -54,6 +54,16 @@ public class ForgeProfileProperties {
         cardPicsDir = cacheDir + "pics/cards/";
         cardPicsSubDir = new HashMap<String, String>();
         serverPort = 0;
+
+        //ensure directories exist
+        File dir = new File(userDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        dir = new File(cacheDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
     }
 
     public ForgeProfileProperties(String filename) {
