@@ -1,4 +1,4 @@
-package forge.view;
+package forge.app;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
