@@ -1075,7 +1075,6 @@ forge-gui-mobile-dev/pom.xml -text
 forge-gui-mobile-dev/src/forge/view/Main.java -text
 forge-gui-mobile/.classpath -text
 forge-gui-mobile/.project -text
-forge-gui-mobile/.settings/org.eclipse.core.resources.prefs -text
 forge-gui-mobile/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-mobile/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui-mobile/libs/gdx-freetype.jar -text

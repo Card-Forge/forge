@@ -24,5 +24,10 @@
           <artifactId>forge-gui-mobile</artifactId>
           <version>${project.version}</version>
       </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
+            <version>0.9.9</version>
+        </dependency>
   </dependencies>
 </project>
