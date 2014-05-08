@@ -101,7 +101,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 mayChoseNewTargets = false;
                 for (GameObject o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
-                    copy.resetFirstTarget(o);
+                    copy.resetFirstTarget(o, chosenSA);
                     copies.add(copy);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
@@ -118,7 +118,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 mayChoseNewTargets = false;
                 for (Card c : valid) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
-                    copy.resetFirstTarget(c);
+                    copy.resetFirstTarget(c, chosenSA);
                     copies.add(copy);
                 }
             }

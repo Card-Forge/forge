@@ -1409,12 +1409,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * Reset the first target.
      * 
      */
-    public void resetFirstTarget(GameObject c) {
+    public void resetFirstTarget(GameObject c, SpellAbility originalSA) {
         SpellAbility sa = this;
         while (sa != null) {
             if (sa.targetRestricions != null) {
                 sa.targetChosen = new TargetChoices();
                 sa.targetChosen.add(c);
+                if (!originalSA.targetRestricions.getDividedMap().isEmpty()) {
+                    sa.targetRestricions.addDividedAllocation(c,
+                            Iterables.getFirst(originalSA.targetRestricions.getDividedMap().values(), null));
+                }
                 break;
             }
             sa = sa.subAbility;

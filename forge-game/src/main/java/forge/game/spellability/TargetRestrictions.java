@@ -709,4 +709,9 @@ public class TargetRestrictions {
     public int getDividedValue(Object tgt) {
         return this.dividedMap.get(tgt);
     }
+
+    public HashMap<Object, Integer> getDividedMap() {
+        return this.dividedMap;
+    }
+
 }
