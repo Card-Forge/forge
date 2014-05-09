@@ -4,13 +4,13 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.GameCommand;
+
 import forge.StaticData;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -18,7 +18,6 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
@@ -27,6 +26,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.PredicateString.StringOp;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -158,7 +158,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                 // start copied Kiki code
                 int multiplier = numCopies * hostCard.getController().getTokenDoublersMagnitude();
-                final Card[] crds = new Card[multiplier];
+                final List<Card> crds = new ArrayList<Card>(multiplier);
 
                 for (int i = 0; i < multiplier; i++) {
                     // TODO Use central copy methods
@@ -264,7 +264,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     copy.setCloneOrigin(hostCard);
                     sa.getHostCard().addClone(copy);
-                    crds[i] = copy;
+                    crds.add(copy);
                     if (sa.hasParam("RememberCopied")) {
                         hostCard.addRemembered(copy);
                     }
@@ -275,41 +275,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         final GameEntity defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
                         game.getCombat().addAttacker(copy, defender);
                     }
-                    
-                    if (sa.hasParam("AtEOT")) {
-                        final String location = sa.getParam("AtEOT");
-                        final Card source = copy;
-                    
-                        final SpellAbility sac = new Ability(copy, ManaCost.ZERO) {
-                            @Override
-                            public void resolve() {
-                                // technically your opponent could steal the token
-                                // and the token shouldn't be sacrificed
-                                if (source.isInPlay()) {
-                                    if (location.equals("Sacrifice")) {
-                                        game.getAction().sacrifice(source, sa);
-                                    } else if (location.equals("Exile")) {
-                                        game.getAction().exile(source);
-                                    }
-    
-                                }
-                            }
-                        };
-                        sac.setTrigger(true);
-                        sac.setDescription(location + " - " + source);
 
-                        final GameCommand atEOT = new GameCommand() {
-                            private static final long serialVersionUID = -4184510100801568140L;
-    
-                            @Override
-                            public void run() {
-                                sac.setStackDescription(sa.getParam("AtEOT") + " " + source + ".");
-                                game.getStack().addSimultaneousStackEntry(sac);
-                            }
-                        };
-                    
-                        game.getEndOfTurn().addAt(atEOT);
-                    }
+                }
+                
+                if (sa.hasParam("AtEOT")) {
+                    final String location = sa.getParam("AtEOT");
+                    registerDelayedTrigger(sa, location, crds);
                 }
 
                 if (wasInAlt) {
@@ -318,5 +289,22 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
             } // end canBeTargetedBy
         } // end foreach Card
     } // end resolve
+
+    private void registerDelayedTrigger(final SpellAbility sa, final String location, final List<Card> crds) {
+        String delTrig = "Mode$ Phase | Phase$ End Of Turn | TriggerDescription$ "
+                + location + " " + crds + " at the beginning of the next end step.";
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig, sa.getHostCard(), true);
+        for (final Card c : crds) {
+            trig.addRemembered(c);
+        }
+        String trigSA = "";
+        if (location.equals("Sacrifice")) {
+            trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRemembered | Controller$ You";
+        } else if (location.equals("Exile")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
+        }
+        trig.setOverridingAbility(AbilityFactory.getAbility(trigSA, sa.getHostCard()));
+        sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
+    }
 
 }
