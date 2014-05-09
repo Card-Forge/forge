@@ -2,17 +2,15 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.game.combat.Combat;
 
 import java.util.List;
 
@@ -120,9 +118,26 @@ public class DestroyAllAi extends SpellAbilityAi {
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
         if (CardLists.getNotType(humanlist, "Creature").isEmpty() && CardLists.getNotType(computerlist, "Creature").isEmpty()) {
-            if (ComputerUtilCard.evaluateCreatureList(computerlist) + 200 >= ComputerUtilCard.evaluateCreatureList(humanlist)) {
-                return false;
+            if (ComputerUtilCard.evaluateCreatureList(computerlist) + 200 < ComputerUtilCard.evaluateCreatureList(humanlist)) {
+                return true;
             }
+            
+            if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+            	return false;
+            }
+            
+            // test whether the human can kill the ai next turn
+            Combat combat = new Combat(ai.getOpponent());
+            for (Card att : ai.getOpponent().getCreaturesInPlay()) {
+                combat.addAttacker(att, ai);
+            }
+            AiBlockController block = new AiBlockController(ai);
+            block.assignBlockers(combat);
+
+            if (ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
+            	return true;
+            }
+            return false;
         } // only lands involved
         else if (CardLists.getNotType(humanlist, "Land").isEmpty() && CardLists.getNotType(computerlist, "Land").isEmpty()) {
         	if (ai.isCardInPlay("Crucible of Worlds") && !ai.getOpponent().isCardInPlay("Crucible of Worlds") && !humanlist.isEmpty()) {
