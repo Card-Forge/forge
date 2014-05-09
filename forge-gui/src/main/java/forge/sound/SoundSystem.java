@@ -2,6 +2,7 @@ package forge.sound;
 
 import com.google.common.eventbus.Subscribe;
 
+import forge.GuiBase;
 import forge.events.UiEvent;
 import forge.game.event.GameEvent;
 import forge.model.FModel;
@@ -41,9 +42,12 @@ public class SoundSystem {
         }
 
         IAudioClip clip = loadedClips.get(type);
-        if (null == clip) { // cache miss
+        if (clip == null) { // cache miss
             String resource = type.getResourceFileName();
-            clip = AudioClip.fileExists(resource) ? new AudioClip(resource) : emptySound;
+            clip = GuiBase.getInterface().createAudioClip(resource);
+            if (clip == null) {
+                clip = emptySound;
+            }
             loadedClips.put(type, clip);
         }
         return clip;
@@ -62,7 +66,10 @@ public class SoundSystem {
 
         IAudioClip clip = loadedScriptClips.get(fileName);
         if (null == clip) { // cache miss
-            clip = AudioClip.fileExists(fileName) ? new AudioClip(fileName) : emptySound;
+            clip = GuiBase.getInterface().createAudioClip(fileName);
+            if (clip == null) {
+                clip = emptySound;
+            }
             loadedScriptClips.put(fileName, clip);
         }
         return clip;
@@ -74,8 +81,9 @@ public class SoundSystem {
      */
     public void play(String resourceFileName, boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            new AltSoundSystem(ForgeConstants.SOUND_DIR + resourceFileName, isSynchronized).start();
-        } else {
+            GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + resourceFileName, isSynchronized);
+        }
+        else {
             IAudioClip snd = fetchResource(resourceFileName);
             if (!isSynchronized || snd.isDone()) {
                 snd.play();
@@ -88,8 +96,9 @@ public class SoundSystem {
      */
     public void play(SoundEffectType type, boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            new AltSoundSystem(ForgeConstants.SOUND_DIR + type.getResourceFileName(), isSynchronized).start();
-        } else {
+            GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + type.getResourceFileName(), isSynchronized);
+        }
+        else {
             IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {
                 snd.play();
@@ -148,5 +157,4 @@ public class SoundSystem {
             play(effect, effect.isSynced());
         }
     }
-
 }

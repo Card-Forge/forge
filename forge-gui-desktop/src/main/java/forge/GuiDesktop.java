@@ -63,6 +63,9 @@ import forge.screens.match.controllers.CStack;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.screens.match.views.VPrompt;
+import forge.sound.AltSoundSystem;
+import forge.sound.AudioClip;
+import forge.sound.IAudioClip;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
@@ -435,4 +438,14 @@ public class GuiDesktop implements IGuiBase {
 	public LobbyPlayer getQuestPlayer() {
 		return getGuiPlayer();
 	}
+
+    @Override
+    public IAudioClip createAudioClip(String filename) {
+        return AudioClip.fileExists(filename) ? new AudioClip(filename) : null;
+    }
+
+    @Override
+    public void startAltSoundSystem(String filename, boolean isSynchronized) {
+        new AltSoundSystem(filename, isSynchronized).start();
+    }
 }

@@ -42,6 +42,7 @@ import forge.properties.ForgeProfileProperties;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.winlose.ViewWinLose;
+import forge.sound.IAudioClip;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.ITriggerEvent;
@@ -363,4 +364,14 @@ public class GuiMobile implements IGuiBase {
 	public LobbyPlayer getQuestPlayer() {
 		return getGuiPlayer();
 	}
+
+    @Override
+    public IAudioClip createAudioClip(String filename) {
+        return null; //TODO: Support audio clips
+    }
+
+    @Override
+    public void startAltSoundSystem(String filename, boolean isSynchronized) {
+        //TODO: Support alt sound system
+    }
 }
