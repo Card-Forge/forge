@@ -1,28 +1,25 @@
 package forge.card;
 
-import javax.xml.stream.*;
-import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-
 import forge.item.IPaperCard;
 import forge.properties.ForgeConstants;
+import forge.util.XmlUtil;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /** 
  * Preferences associated with individual cards
  *
  */
 public class CardPreferences {
-    private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();
-    private static final XMLEvent NEWLINE = EVENT_FACTORY.createDTD("\n");
-    private static final XMLEvent TAB = EVENT_FACTORY.createDTD("\t");
     private static Map<String, CardPreferences> allPrefs = new HashMap<String, CardPreferences>();
 
     public static CardPreferences getPrefs(IPaperCard card) {
@@ -39,77 +36,43 @@ public class CardPreferences {
         allPrefs.clear();
 
         try {
-            final XMLInputFactory in = XMLInputFactory.newInstance();
-            final XMLEventReader reader = in.createXMLEventReader(new FileInputStream(ForgeConstants.CARD_PREFS_FILE));
-
-            XMLEvent event;
-            StartElement element;
-            Iterator<?> attributes;
-            Attribute attribute;
-            String tagname;
-            CardPreferences prefs;
-
-            while (reader.hasNext()) {
-                event = reader.nextEvent();
-
-                if (event.isStartElement()) {
-                    element = event.asStartElement();
-                    tagname = element.getName().getLocalPart();
-
-                    if (tagname.equals("card")) {
-                        prefs = new CardPreferences();
-                        attributes = element.getAttributes();
-
-                        while (attributes.hasNext()) {
-                            attribute = (Attribute) attributes.next();
-                            switch (attribute.getName().toString()) {
-                            case "name":
-                                allPrefs.put(attribute.getValue(), prefs);
-                                break;
-                            case "stars":
-                                prefs.starCount = Integer.parseInt(attribute.getValue());
-                                break;
-                            }
-                        }
-                    }
-                }
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            final Document document = builder.parse(ForgeConstants.CARD_PREFS_FILE);
+            final NodeList cards = document.getElementsByTagName("card");
+            for (int i = 0; i < cards.getLength(); i++) {
+                final CardPreferences prefs = new CardPreferences();
+                final Element el = (Element)cards.item(i);
+                allPrefs.put(el.getAttribute("name"), prefs);
+                prefs.starCount = Integer.parseInt(el.getAttribute("stars"));
             }
         }
-        catch (final FileNotFoundException e) {
-            /* ignore; it's ok if this file doesn't exist */
+        catch (FileNotFoundException e) {
+            //ok if file not found
         }
-        catch (final Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void save() {
         try {
-            final XMLOutputFactory out = XMLOutputFactory.newInstance();
-            final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(ForgeConstants.CARD_PREFS_FILE));
-    
-            writer.add(EVENT_FACTORY.createStartDocument());
-            writer.add(NEWLINE);
-            writer.add(EVENT_FACTORY.createStartElement("", "", "preferences"));
-            writer.add(EVENT_FACTORY.createAttribute("type", "cards"));
-            writer.add(NEWLINE);
-    
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.newDocument();
+            Element root = document.createElement("preferences");
+            root.setAttribute("type", "cards");
+            document.appendChild(root);
+
             for (Map.Entry<String, CardPreferences> entry : allPrefs.entrySet()) {
                 if (entry.getValue().starCount > 0) {
-                    writer.add(TAB);
-                    writer.add(EVENT_FACTORY.createStartElement("", "", "card"));
-                    writer.add(EVENT_FACTORY.createAttribute("name", entry.getKey()));
-                    writer.add(EVENT_FACTORY.createAttribute("stars", String.valueOf(entry.getValue().starCount)));
-                    writer.add(EVENT_FACTORY.createEndElement("", "", "card"));
-                    writer.add(NEWLINE);
+                    Element card = document.createElement("card");
+                    card.setAttribute("name", entry.getKey());
+                    card.setAttribute("stars", String.valueOf(entry.getValue().starCount));
+                    root.appendChild(card);
                 }
             }
-    
-            writer.add(EVENT_FACTORY.createEndDocument());
-            writer.flush();
-            writer.close();
+            XmlUtil.saveDocument(document, ForgeConstants.CARD_PREFS_FILE);
         }
-        catch (final Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
