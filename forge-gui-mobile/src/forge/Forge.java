@@ -65,6 +65,8 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
+        Texture.setEnforcePotImages(false); //ensure image dimensions don't have to be powers of 2
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 

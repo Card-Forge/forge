@@ -9,7 +9,6 @@ import android.os.Environment;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
-
 import forge.Forge;
 
 public class Main extends AndroidApplication {
@@ -36,6 +35,6 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(new Forge(getClipboard(), assetsDir.getAbsolutePath() + "/"), false);
+        initialize(new Forge(getClipboard(), assetsDir.getAbsolutePath() + "/"), true);
     }
 }
