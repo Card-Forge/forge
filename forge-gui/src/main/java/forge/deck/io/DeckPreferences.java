@@ -1,19 +1,19 @@
 package forge.deck.io;
 
-import javax.xml.stream.*;
-import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-
 import forge.deck.DeckProxy;
 import forge.properties.ForgeConstants;
+import forge.util.XmlUtil;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /** 
  * Preferences associated with individual decks
@@ -21,9 +21,6 @@ import java.util.Map;
  */
 public class DeckPreferences {
     private static String currentDeck;
-    private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();
-    private static final XMLEvent NEWLINE = EVENT_FACTORY.createDTD("\n");
-    private static final XMLEvent TAB = EVENT_FACTORY.createDTD("\t");
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
 
     public static String getCurrentDeck() {
@@ -50,88 +47,48 @@ public class DeckPreferences {
         allPrefs.clear();
 
         try {
-            final XMLInputFactory in = XMLInputFactory.newInstance();
-            final XMLEventReader reader = in.createXMLEventReader(new FileInputStream(ForgeConstants.DECK_PREFS_FILE));
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            final Document document = builder.parse(ForgeConstants.DECK_PREFS_FILE);
 
-            XMLEvent event;
-            StartElement element;
-            Iterator<?> attributes;
-            Attribute attribute;
-            String tagname;
-            DeckPreferences prefs;
+            final Element root = (Element)document.getElementsByTagName("preferences").item(0);
+            currentDeck = root.getAttribute("currentDeck");
 
-            while (reader.hasNext()) {
-                event = reader.nextEvent();
-
-                if (event.isStartElement()) {
-                    element = event.asStartElement();
-                    tagname = element.getName().getLocalPart();
-
-                    if (tagname.equals("deck")) {
-                        prefs = new DeckPreferences();
-                        attributes = element.getAttributes();
-
-                        while (attributes.hasNext()) {
-                            attribute = (Attribute) attributes.next();
-                            switch (attribute.getName().toString()) {
-                            case "key":
-                                allPrefs.put(attribute.getValue(), prefs);
-                                break;
-                            case "stars":
-                                prefs.starCount = Integer.parseInt(attribute.getValue());
-                                break;
-                            }
-                        }
-                    }
-                    else if (tagname.equals("preferences")) {
-                        attributes = element.getAttributes();
-                        while (attributes.hasNext()) {
-                            attribute = (Attribute) attributes.next();
-                            switch (attribute.getName().toString()) {
-                            case "currentDeck":
-                                currentDeck = attribute.getValue();
-                            }
-                        }
-                    }
-                }
+            final NodeList cards = document.getElementsByTagName("deck");
+            for (int i = 0; i < cards.getLength(); i++) {
+                final DeckPreferences prefs = new DeckPreferences();
+                final Element el = (Element)cards.item(i);
+                allPrefs.put(el.getAttribute("key"), prefs);
+                prefs.starCount = Integer.parseInt(el.getAttribute("stars"));
             }
         }
-        catch (final FileNotFoundException e) {
-            /* ignore; it's ok if this file doesn't exist */
+        catch (FileNotFoundException e) {
+            //ok if file not found
         }
-        catch (final Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private static void save() {
         try {
-            final XMLOutputFactory out = XMLOutputFactory.newInstance();
-            final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(ForgeConstants.DECK_PREFS_FILE));
-
-            writer.add(EVENT_FACTORY.createStartDocument());
-            writer.add(NEWLINE);
-            writer.add(EVENT_FACTORY.createStartElement("", "", "preferences"));
-            writer.add(EVENT_FACTORY.createAttribute("type", "decks"));
-            writer.add(EVENT_FACTORY.createAttribute("currentDeck", currentDeck));
-            writer.add(NEWLINE);
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.newDocument();
+            Element root = document.createElement("preferences");
+            root.setAttribute("type", "decks");
+            root.setAttribute("currentDeck", currentDeck);
+            document.appendChild(root);
 
             for (Map.Entry<String, DeckPreferences> entry : allPrefs.entrySet()) {
                 if (entry.getValue().starCount > 0) {
-                    writer.add(TAB);
-                    writer.add(EVENT_FACTORY.createStartElement("", "", "deck"));
-                    writer.add(EVENT_FACTORY.createAttribute("key", entry.getKey()));
-                    writer.add(EVENT_FACTORY.createAttribute("stars", String.valueOf(entry.getValue().starCount)));
-                    writer.add(EVENT_FACTORY.createEndElement("", "", "deck"));
-                    writer.add(NEWLINE);
+                    Element deck = document.createElement("deck");
+                    deck.setAttribute("key", entry.getKey());
+                    deck.setAttribute("stars", String.valueOf(entry.getValue().starCount));
+                    root.appendChild(deck);
                 }
             }
-
-            writer.add(EVENT_FACTORY.createEndDocument());
-            writer.flush();
-            writer.close();
+            XmlUtil.saveDocument(document, ForgeConstants.DECK_PREFS_FILE);
         }
-        catch (final Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
