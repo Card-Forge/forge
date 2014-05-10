@@ -422,7 +422,7 @@ public class TextRenderer {
         protected float x, y, w, h;
         protected int lineNum;
         protected final boolean inReminderText;
-        protected final static float ALPHA_COMPOSITE = 0.5f;
+        protected static final float ALPHA_COMPOSITE = 0.5f;
 
         protected Piece(boolean inReminderText0) {
             inReminderText = inReminderText0;
