@@ -19,6 +19,7 @@ public class FOptionPane extends FDialog {
     public static final float PADDING = Utils.scaleMin(10);
     public static final float GAP_BELOW_BUTTONS = PADDING * 0.5f;
     public static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
+    public static final float MIN_BUTTON_WIDTH = Utils.scaleX(120);
 
     public static float getMaxDisplayObjHeight() {
         return Forge.getCurrentScreen().getHeight() - 2 * VPrompt.HEIGHT - FDialog.TITLE_HEIGHT - 
@@ -204,7 +205,7 @@ public class FOptionPane extends FDialog {
             if (promptHeight > maxPromptHeight) {
                 promptHeight = maxPromptHeight;
             }
-            lblIcon.setBounds(x - 3, y, labelWidth, promptHeight);
+            lblIcon.setBounds(x - Utils.scaleX(3), y, labelWidth, promptHeight);
             x += labelWidth;
         }
         if (prompt != null) {
@@ -240,8 +241,8 @@ public class FOptionPane extends FDialog {
                 maxButtonWidth = buttonWidth;
             }
         }
-        float gapBetween = -2; //use negative so buttons closer together
-        float buttonWidth = Math.max(maxButtonWidth, 120); //account for margins and enforce minimum width
+        float gapBetween = Utils.scaleX(-2); //use negative so buttons closer together
+        float buttonWidth = Math.max(maxButtonWidth, MIN_BUTTON_WIDTH); //account for margins and enforce minimum width
         float dx = buttonWidth + gapBetween;
         float totalButtonWidth = dx * buttons.length - gapBetween;
 
