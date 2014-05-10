@@ -54,7 +54,7 @@ import forge.util.storage.IStorage;
 public class ConstructedScreen extends LaunchScreen {
     private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
     private static final ForgePreferences prefs = FModel.getPreferences();
-    private static final float PADDING = 5;
+    private static final float PADDING = Utils.scaleMin(5);
     private static final int MAX_PLAYERS = 8;
     private static final int VARIANTS_FONT_SIZE = 12;
 

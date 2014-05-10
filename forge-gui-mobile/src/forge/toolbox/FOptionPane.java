@@ -16,7 +16,7 @@ public class FOptionPane extends FDialog {
     public static final FSkinImage WARNING_ICON = FSkinImage.WARNING;
     public static final FSkinImage ERROR_ICON = FSkinImage.ERROR;
 
-    public static float PADDING = 10;
+    public static final float PADDING = Utils.scaleMin(10);
     public static final float GAP_BELOW_BUTTONS = PADDING * 0.5f;
     public static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 

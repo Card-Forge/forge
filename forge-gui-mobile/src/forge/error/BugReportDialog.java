@@ -11,6 +11,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Utils;
 
 public class BugReportDialog extends FOptionPane {
     private static boolean dialogShown;
@@ -69,7 +70,7 @@ public class BugReportDialog extends FOptionPane {
         private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
         private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-        private static final float PADDING = 3;
+        private static final float PADDING = Utils.scaleMin(3);
 
         private final String text;
 

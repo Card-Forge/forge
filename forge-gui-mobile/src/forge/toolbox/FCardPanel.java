@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import forge.Forge.Graphics;
 import forge.assets.ImageCache;
 import forge.game.card.Card;
+import forge.util.Utils;
 
 public class FCardPanel extends FDisplayObject {
     public static final float TAPPED_ANGLE = -90;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
-    public static final float PADDING = 2; //scale to leave vertical space between
+    public static final float PADDING = Utils.scaleMax(2); //scale to leave vertical space between
 
     private Card card;
     private boolean tapped;

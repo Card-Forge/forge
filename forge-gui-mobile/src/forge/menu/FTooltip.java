@@ -10,11 +10,12 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
+import forge.util.Utils;
 
 public class FTooltip extends FDropDown {
     private static final FSkinFont FONT = FSkinFont.get(12);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final float PADDING = 5;
+    private static final float PADDING = Utils.scaleMin(5);
 
     FDisplayObject owner;
     float x, y;

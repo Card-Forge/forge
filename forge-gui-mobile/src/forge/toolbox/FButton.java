@@ -14,11 +14,12 @@ import forge.assets.FSkinImage;
 import forge.interfaces.IButton;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.util.Utils;
 
 public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final float DISABLED_COMPOSITE = 0.25f;
-    private static final float PADDING = 10;
+    private static final float PADDING = Utils.scaleX(10);
 
     private FSkinImage imgL, imgM, imgR;
     private String text;

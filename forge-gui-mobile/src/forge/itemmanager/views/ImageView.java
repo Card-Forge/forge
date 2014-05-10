@@ -22,6 +22,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.util.Utils;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -31,13 +32,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
-    private static final float PADDING = 5;
+    private static final float PADDING = Utils.scaleMin(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinColor GROUP_HEADER_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(120);
     private static final FSkinFont GROUP_HEADER_FONT = FSkinFont.get(12);
-    private static final float GROUP_HEADER_HEIGHT = 19;
-    private static final float GROUP_HEADER_GLYPH_WIDTH = 6;
+    private static final float GROUP_HEADER_HEIGHT = Utils.scaleY(19);
+    private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scaleX(6);
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 

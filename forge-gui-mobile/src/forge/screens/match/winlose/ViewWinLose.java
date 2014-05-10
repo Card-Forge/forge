@@ -21,6 +21,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
 import forge.toolbox.FTextArea;
+import forge.util.Utils;
 
 public class ViewWinLose extends FOverlay {
     private static final float INSETS_FACTOR = 0.025f;
@@ -184,7 +185,7 @@ public class ViewWinLose extends FOverlay {
     }
 
     private static class OutcomesPanel extends FContainer {
-        private static final float LBL_HEIGHT = 20;
+        private static final float LBL_HEIGHT = Utils.scaleY(20);
  
         @Override
         protected void doLayout(float width, float height) {

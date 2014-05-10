@@ -8,14 +8,15 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.util.Utils;
 
 public class FToggleSwitch extends FDisplayObject {
     private static final FSkinColor ACTIVE_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     private static final FSkinColor PRESSED_COLOR = ACTIVE_COLOR.stepColor(-30);
     private static final FSkinColor INACTIVE_COLOR = FSkinColor.get(Colors.CLR_INACTIVE);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final float INSETS = 2;
-    private static final float PADDING = 3;
+    private static final float INSETS = Utils.scaleMin(2);
+    private static final float PADDING = Utils.scaleMin(3);
 
     private FSkinFont font;
     private final String offText, onText;

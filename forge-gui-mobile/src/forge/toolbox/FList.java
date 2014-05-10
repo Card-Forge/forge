@@ -15,7 +15,7 @@ import forge.screens.FScreen;
 import forge.util.Utils;
 
 public class FList<E> extends FScrollPane implements Iterable<E> {
-    public static final float PADDING = 3;
+    public static final float PADDING = Utils.scaleMin(3);
     public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);

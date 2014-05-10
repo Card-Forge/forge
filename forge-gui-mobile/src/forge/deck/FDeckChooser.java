@@ -18,6 +18,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.Utils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FDeckChooser extends FScreen {
-    private static final float PADDING = 5;
+    private static final float PADDING = Utils.scaleMin(5);
 
     private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;

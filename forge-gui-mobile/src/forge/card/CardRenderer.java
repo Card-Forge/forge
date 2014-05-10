@@ -26,6 +26,7 @@ import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FList;
+import forge.util.Utils;
 
 public class CardRenderer {
     private static final FSkinFont NAME_FONT = FSkinFont.get(16);
@@ -37,8 +38,8 @@ public class CardRenderer {
     private static final float NAME_BOX_TINT = 0.2f;
     private static final float TEXT_BOX_TINT = 0.1f;
     private static final float PT_BOX_TINT = 0.2f;
-    private static final float MANA_COST_PADDING = 3;
-    private static final float SET_BOX_MARGIN = 1;
+    private static final float MANA_COST_PADDING = Utils.scaleMin(3);
+    private static final float SET_BOX_MARGIN = Utils.scaleMin(1);
     private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getFont().getCapHeight() - MANA_COST_PADDING));
 
     private static Color fromDetailColor(DetailColors detailColor) {

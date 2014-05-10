@@ -8,16 +8,13 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
+import forge.util.Utils;
+
 public class FSkinFont {
-    public static final int MIN_FONT_SIZE = 8;
+    public static final int MIN_FONT_SIZE = Math.round(8 / Utils.MAX_RATIO);
 
     private static final String TTF_FILE = "font1.ttf";
-    private static final int defaultFontSize = 12;
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
-
-    public static FSkinFont get() {
-        return get(defaultFontSize);
-    }
 
     public static FSkinFont get(final int size0) {
         FSkinFont skinFont = fonts.get(size0);
@@ -51,7 +48,7 @@ public class FSkinFont {
         FileHandle ttfFile = Gdx.files.absolute(dir + TTF_FILE);
         if (ttfFile.exists()) {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
-            font = generator.generateFont(size);
+            font = generator.generateFont((int)Utils.scaleMax(size)); //scale font based on size
             font.setUseIntegerPositions(true); //prevent parts of text getting cut off at times
             generator.dispose();
         }

@@ -123,7 +123,7 @@ public abstract class FScreen extends FContainer {
     }
 
     private static class BackIcon implements FImage {
-        private static final float THICKNESS = 3;
+        private static final float THICKNESS = Utils.scaleMax(3);
         private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
         @Override

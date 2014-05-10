@@ -31,7 +31,7 @@ import forge.util.Utils;
 public class VStack extends FDropDown {
     public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
-    private static final float PADDING = 3;
+    private static final float PADDING = Utils.scaleMin(3);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final float ALPHA_COMPOSITE = 0.5f;
     private static final TextRenderer textRenderer = new TextRenderer(true);
