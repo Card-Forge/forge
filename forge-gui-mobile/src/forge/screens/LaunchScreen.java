@@ -17,6 +17,10 @@ import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public abstract class LaunchScreen extends FScreen {
+    private static final float IMAGE_HEIGHT = FSkinImage.BTN_START_UP.getNearestHQHeight(Utils.AVG_FINGER_HEIGHT * 2);
+    private static final float IMAGE_WIDTH = FSkinImage.BTN_START_UP.getWidth() * IMAGE_HEIGHT / FSkinImage.BTN_START_UP.getHeight();
+    private static final float PADDING = IMAGE_HEIGHT * 0.025f;
+
     private final StartButton btnStart;
     private boolean creatingMatch;
 
@@ -27,14 +31,8 @@ public abstract class LaunchScreen extends FScreen {
 
     @Override
     protected final void doLayout(float startY, float width, float height) {
-        float baseImageHeight = FSkinImage.BTN_START_UP.getHeight();
-        float imageHeight = FSkinImage.BTN_START_UP.getNearestHQHeight(Utils.AVG_FINGER_HEIGHT);
-        float imageWidth = FSkinImage.BTN_START_UP.getWidth() * imageHeight / baseImageHeight;
-        float padding = imageHeight * 0.025f;
-
-        btnStart.setBounds((width - imageWidth) / 2, height - imageHeight - padding, imageWidth, imageHeight);
-
-        doLayoutAboveBtnStart(startY, width, height - imageHeight - 2 * padding);
+        btnStart.setBounds((width - IMAGE_WIDTH) / 2, height - IMAGE_HEIGHT - PADDING, IMAGE_WIDTH, IMAGE_HEIGHT);
+        doLayoutAboveBtnStart(startY, width, height - IMAGE_HEIGHT - 2 * PADDING);
     }
 
     protected abstract void doLayoutAboveBtnStart(float startY, float width, float height);
