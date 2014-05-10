@@ -168,7 +168,7 @@ public class ReplacementHandler {
         if (mapParams.containsKey("ReplaceWith")) {
             final String effectSVar = mapParams.get("ReplaceWith");
             final String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
-
+            // TODO: the source of replacement effect should be the source of the original effect 
             effectSA = AbilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
             effectSA.setTrigger(true);
 
