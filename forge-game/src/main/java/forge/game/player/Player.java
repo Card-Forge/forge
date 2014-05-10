@@ -2337,6 +2337,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (this.equals(sourceController) || !this.isOpponentOf(sourceController)) {
                 return false;
             }
+        } else if (property.equals("Allies")) {
+            if (this.equals(sourceController) || this.isOpponentOf(sourceController)) {
+                return false;
+            }
         } else if (property.equals("NonActive")) {
             if (this.equals(game.getPhaseHandler().getPlayerTurn())) {
                 return false;
