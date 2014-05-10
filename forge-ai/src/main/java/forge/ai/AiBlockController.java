@@ -652,10 +652,10 @@ public class AiBlockController {
 
     /** Assigns blockers for the provided combat instance (in favor of player passes to ctor) */
     public void assignBlockers(final Combat combat) {
-        assignBlockers(combat, null);
+        assignBlockers(combat, null, null);
     }
     
-    public void assignBlockers(final Combat combat, Card evalBlocker) {
+    public void assignBlockers(final Combat combat, Card evalBlocker, Card evalAttacker) {
         
         List<Card> possibleBlockers = null;
         if (evalBlocker == null) {
@@ -664,8 +664,12 @@ public class AiBlockController {
             possibleBlockers = new ArrayList<Card>();
             possibleBlockers.add(evalBlocker);
         }
-
-        attackers = sortPotentialAttackers(combat);
+        if (evalAttacker == null) {
+            attackers = sortPotentialAttackers(combat);
+        } else {
+            attackers = new ArrayList<Card>();
+            attackers.add(evalAttacker);
+        }
 
         if (attackers.isEmpty()) {
             return;
@@ -843,15 +847,34 @@ public class AiBlockController {
         return first;
     }
     
+    /**
+     * Decide if a creature is going to be used as a blocker (is only used for AnimateAi so far)
+     * @param ai controller of creature 
+     * @param blocker creature to be evaluated (must NOT already be in combat)
+     * @return creature will be a blocker
+     */
     public static boolean shouldThisBlock(final Player ai, Card blocker) {
         AiBlockController aiBlk = new AiBlockController(ai);
         Combat combat = ai.getGame().getCombat();
-        aiBlk.assignBlockers(combat, blocker);
+        aiBlk.assignBlockers(combat, blocker, null);
         if (combat.getAllBlockers().isEmpty()) {
             return false;
         } else {
             combat.removeFromCombat(blocker);
             return true;
         }
+    }
+    /**
+     * Check if an attacker can be blocked profitably (ie. kill attacker)
+     * @param ai controller of attacking creature
+     * @param attacker attacking creature to evaluate
+     * @return attacker will die
+     */
+    public static boolean canBeBlockedProfitably(final Player ai, Card attacker) {
+        AiBlockController aiBlk = new AiBlockController(ai);
+        Combat combat = new Combat(ai);
+        combat.addAttacker(attacker, ai);
+        aiBlk.assignBlockers(combat, null, attacker);
+        return ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat);
     }
 }
