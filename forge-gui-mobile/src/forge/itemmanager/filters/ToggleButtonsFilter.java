@@ -32,13 +32,12 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
 
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
-        float availableWidth = helper.getParentWidth() - (buttons.size() - 1) * (helper.getGapX() - 1); //account for gaps
+        float availableWidth = helper.getParentWidth() - (buttons.size() - 1) * helper.getGapX(); //account for gaps
         float buttonWidth = availableWidth / buttons.size();
         float buttonHeight = helper.getParentHeight();
 
         for (FLabel btn : buttons) {
             helper.include(btn, buttonWidth, buttonHeight);
-            helper.offset(-1, 0); //keep buttons tighter together
         }
     }
 

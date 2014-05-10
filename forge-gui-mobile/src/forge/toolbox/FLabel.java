@@ -12,6 +12,7 @@ import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.util.Utils;
 
 public class FLabel extends FDisplayObject implements IButton {
     public static class Builder {
@@ -20,7 +21,7 @@ public class FLabel extends FDisplayObject implements IButton {
         private int        bldFontSize        = 14;
         private float      bldAlphaComposite  = 0.7f;
         private HAlignment bldAlignment       = HAlignment.LEFT;
-        private Vector2    bldInsets          = new Vector2(3, 3);
+        private Vector2    bldInsets          = new Vector2(Utils.scaleX(3), Utils.scaleY(3));
 
         private boolean bldSelectable       = false;
         private boolean bldSelected         = false;
@@ -75,6 +76,7 @@ public class FLabel extends FDisplayObject implements IButton {
     private static final FSkinColor d10 = clrMain.stepColor(-10);
     private static final FSkinColor l10 = clrMain.stepColor(10);
     private static final FSkinColor l20 = clrMain.stepColor(20);
+    private static final float BORDER_THICKNESS = Utils.scaleMin(1);
 
     private float iconScaleFactor;
     private FSkinFont font;
@@ -221,19 +223,19 @@ public class FLabel extends FDisplayObject implements IButton {
             }
             else {
                 g.fillGradientRect(d50, d10, true, 0, 0, w, h);
-                g.drawRect(1, d50, 0, 0, w, h);
+                g.drawRect(BORDER_THICKNESS, d50, 0, 0, w, h);
             }
         }
         else if (selected && (opaque || selectable)) {
             g.fillGradientRect(d30, l10, true, 0, 0, w, h);
-            g.drawRect(1, d30, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, d30, 0, 0, w, h);
         }
         else if (opaque) {
             g.fillGradientRect(d10, l20, true, 0, 0, w, h);
-            g.drawRect(1, d10, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, d10, 0, 0, w, h);
         }
         else if (selectable) {
-            g.drawRect(1, l10, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, l10, 0, 0, w, h);
         }
 
         drawContent(g, w, h, pressed);

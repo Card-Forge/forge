@@ -2,6 +2,8 @@ package forge.util;
 
 import com.badlogic.gdx.Gdx;
 
+import forge.Forge;
+
 public class Utils {
     private static final float ppcX = Gdx.graphics.getPpcX();
     private static final float ppcY = Gdx.graphics.getPpcY();
@@ -15,6 +17,13 @@ public class Utils {
     public static final float HEIGHT_RATIO = ((float)Gdx.graphics.getHeight() / BASE_HEIGHT);
     public static final float MIN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO);
     public static final float MAX_RATIO = Math.max(WIDTH_RATIO, HEIGHT_RATIO);
+
+    static {
+        Forge.debugPrint("width: " + BASE_WIDTH);
+        Forge.debugPrint("height: " + BASE_HEIGHT);
+        Forge.debugPrint("width-ratio: " + WIDTH_RATIO);
+        Forge.debugPrint("height-ratio: " + HEIGHT_RATIO);
+    }
 
     public static float cmToPixelsX(float cm) {
         return ppcX * cm;

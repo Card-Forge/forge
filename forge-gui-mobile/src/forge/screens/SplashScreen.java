@@ -70,19 +70,20 @@ public class SplashScreen extends FContainer {
             x = (getWidth() - w) / 2;
         }
         g.drawImage(background, x, y, w, h);
-        
-        y += h * 300f / 450f;
+
+        y += h * 295f / 450f;
         if (disclaimerFont == null) {
             disclaimerFont = FSkinFont.get(9);
         }
+        float disclaimerHeight = 30f / 450f * h;
         String disclaimer = "Forge is not affiliated in any way with Wizards of the Coast.\n"
                 + "Forge is open source software, released under the GNU Public License.";
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,
-                x, y, w, 0, true, HAlignment.CENTER, false);
+                x, y, w, disclaimerHeight, true, HAlignment.CENTER, true);
 
         float padding = 20f / 450f * w;
         float pbHeight = 57f / 450f * h;
-        y += 73f / 450f * h;
+        y += 78f / 450f * h;
         progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
         g.draw(progressBar);
     }

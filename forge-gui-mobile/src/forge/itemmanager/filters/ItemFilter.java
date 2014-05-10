@@ -12,7 +12,7 @@ import forge.util.Utils;
 
 
 public abstract class ItemFilter<T extends InventoryItem> {
-    public static final float PADDING = Utils.scaleY(3);
+    public static final float PADDING = Utils.scaleMax(3);
     public static final int DEFAULT_FONT_SIZE = 11;
     public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT_SIZE) + PADDING;
 

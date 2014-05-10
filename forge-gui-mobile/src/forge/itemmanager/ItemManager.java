@@ -41,6 +41,7 @@ import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
 import forge.util.ReflectionUtil;
+import forge.util.Utils;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -281,29 +282,29 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         helper.newLine(ItemFilter.PADDING);
         float fieldHeight = mainSearchFilter.getMainComponent().getHeight();
-        helper.include(btnFilters, 61, fieldHeight);
+        helper.include(btnFilters, btnFilters.getAutoSizeBounds().width * 1.2f, fieldHeight);
         float captionWidth = lblCaption.getAutoSizeBounds().width;
         float ratioWidth = lblRatio.getAutoSizeBounds().width;
         float viewButtonWidth = fieldHeight;
-        float viewButtonCount = views.size() + 1;
+        float viewButtonCount = views.size() + Utils.scaleX(1);
         float availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 1) * helper.getGapX();
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
             captionWidth = availableCaptionWidth;
         }
-        helper.offset(0, 1); //shift caption downward
+        helper.offset(0, Utils.scaleY(1)); //shift caption downward
         helper.include(lblCaption, captionWidth, fieldHeight);
         helper.offset(-helper.getGapX(), 0);
         helper.fillLine(lblRatio, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
-        helper.offset(0, -1); //shift buttons upward
+        helper.offset(0, Utils.scaleY(1)); //shift buttons upward
         for (ItemView<T> view : views) {
             helper.include(view.getButton(), viewButtonWidth, fieldHeight);
-            helper.offset(-1, 0);
+            helper.offset(Utils.scaleX(-1), 0);
         }
         helper.include(btnViewOptions, viewButtonWidth, fieldHeight);
-        helper.newLine(2);
+        helper.newLine(Utils.scaleY(2));
         if (currentView.getPnlOptions().isVisible()) {
-            helper.fillLine(currentView.getPnlOptions(), fieldHeight + 4);
-            helper.newLine(3);
+            helper.fillLine(currentView.getPnlOptions(), fieldHeight + Utils.scaleY(4));
+            helper.newLine(Utils.scaleY(3));
         }
         helper.fill(currentView.getScroller());
     }

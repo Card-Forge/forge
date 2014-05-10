@@ -16,7 +16,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
