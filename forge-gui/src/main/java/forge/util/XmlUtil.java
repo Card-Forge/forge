@@ -45,7 +45,7 @@ public class XmlUtil {
             final Transformer t = TransformerFactory.newInstance().newTransformer();
             t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             t.setOutputProperty(OutputKeys.INDENT, "yes");
-            t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+            t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             t.transform(new DOMSource(node), new StreamResult(sw));
         } catch (final TransformerException te) {
             System.out.println("nodeToString Transformer Exception");
@@ -57,7 +57,7 @@ public class XmlUtil {
         Transformer t = TransformerFactory.newInstance().newTransformer();
         t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         t.setOutputProperty(OutputKeys.INDENT, "yes");
-        t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         DOMSource source = new DOMSource(document);
         StreamResult result = new StreamResult(new File(filename));
         t.transform(source, result);
