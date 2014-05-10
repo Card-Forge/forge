@@ -649,13 +649,16 @@ forge-gui-android/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui-android/AndroidManifest.xml -text
 forge-gui-android/ic_launcher-web.png -text
 forge-gui-android/libs/android-support-v4.jar -text
+forge-gui-android/libs/armeabi-v7a/libgdx-freetype.so -text
 forge-gui-android/libs/armeabi-v7a/libgdx.so -text
+forge-gui-android/libs/armeabi/libgdx-freetype.so -text
 forge-gui-android/libs/armeabi/libgdx.so -text
 forge-gui-android/libs/gdx-backend-android-sources.jar -text
 forge-gui-android/libs/gdx-backend-android.jar -text
 forge-gui-android/libs/gdx-freetype.jar -text
 forge-gui-android/libs/gdx-sources.jar -text
 forge-gui-android/libs/gdx.jar -text
+forge-gui-android/libs/x86/libgdx-freetype.so -text
 forge-gui-android/libs/x86/libgdx.so -text
 forge-gui-android/lint.xml -text
 forge-gui-android/pom.xml -text
