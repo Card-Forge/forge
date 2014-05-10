@@ -1,8 +1,9 @@
 Name:Mystic Genesis
 ManaCost:2 G U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 G U U | TargetType$ Spell | RememberCountered$ True | ForgetOtherTargets$ True | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X
-SVar:X:Remembered$CardManaCost
+A:SP$ Counter | Cost$ 2 G U U | TargetType$ Spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_genesis.jpg
 Oracle:Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.

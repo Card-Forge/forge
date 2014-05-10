@@ -104,6 +104,10 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            if (sa.hasParam("RememberCounteredCMC")) {
+                sa.getHostCard().addRemembered((Integer) tgtSACard.getCMC());
+            }
+
             this.removeFromStack(tgtSA, sa, si);
 
             // Destroy Permanent may be able to be turned into a SubAbility

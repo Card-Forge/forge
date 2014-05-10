@@ -58,6 +58,14 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             }
         }
 
+        if (sa.hasParam("RememberNumber")) {
+            for (final Object o : sa.getHostCard().getRemembered()) {
+                if (o instanceof Integer) {
+                    delTrig.addRemembered((Integer) o);
+                }
+            }
+        }
+
         if (mapParams.containsKey("Execute")) {
             SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(mapParams.get("Execute")), sa.getHostCard());
             delTrig.setOverridingAbility(overridingSA);

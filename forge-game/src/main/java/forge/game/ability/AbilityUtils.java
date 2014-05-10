@@ -1399,7 +1399,16 @@ public class AbilityUtils {
 
                 return sum;
             }
-
+            if (sq[0].startsWith("TriggerRememberAmount")) {
+                final SpellAbility root = sa.getRootAbility();
+                int count = 0;
+                for (final Object o : root.getTriggerRemembered()) {
+                    if (o instanceof Integer) {
+                        count += (Integer) o;
+                    }
+                }
+                return count;
+            }
             // Count$Compare <int comparator value>.<True>.<False>
             if (sq[0].startsWith("Compare")) {
                 final String[] compString = sq[0].split(" ");

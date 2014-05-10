@@ -872,6 +872,16 @@ public class CardFactoryUtil {
             return doXMath(c.getRemembered().size(), m, c);
         }
 
+        if (l[0].startsWith("RememberedNumber")) {
+            int num = 0;
+            for (final Object o : c.getRemembered()) {
+                if (o instanceof Integer) {
+                    num += (Integer) o;
+                }
+            }
+            return doXMath(num, m, c);
+        }
+
         // Count$CountersAdded <CounterType> <ValidSource>
         if (l[0].startsWith("CountersAdded")) {
             final String[] components = l[0].split(" ", 3);
