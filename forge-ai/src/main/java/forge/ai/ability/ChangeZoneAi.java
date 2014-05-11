@@ -726,6 +726,33 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Don't blink cards that will die.
             aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
 
+            // Removal on blocker to save my creature
+            if (tgt.getMinTargets(sa.getHostCard(), sa) <= 1) {
+                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    Combat currCombat = game.getCombat();
+                    for (Card attacker : currCombat.getAttackers()) {
+                        if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) && !currCombat.getBlockers(attacker).isEmpty()) {
+                            List<Card> blockers = currCombat.getBlockers(attacker);
+                            ComputerUtilCard.sortByEvaluateCreature(blockers);
+                            Combat combat = new Combat(ai);
+                            combat.addAttacker(attacker, ai.getOpponent());
+                            for (Card blocker : blockers) {
+                                combat.addBlocker(attacker, blocker);
+                            }
+                            for (Card blocker : blockers) {
+                                combat.removeFromCombat(blocker);
+                                if (!ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat) && sa.canTarget(blocker)) {
+                                    sa.getTargets().add(blocker);
+                                    return true;
+                                } else {
+                                    combat.addBlocker(attacker, blocker);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
             // if it's blink or bounce, try to save my about to die stuff
             if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
                     && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered")))))

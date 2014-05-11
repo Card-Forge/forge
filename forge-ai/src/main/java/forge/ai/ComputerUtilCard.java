@@ -901,10 +901,33 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final Player opp = ai.getOpponent();
-        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final Game game = ai.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
 
         final int costRemoval = sa.getHostCard().getCMC();
         final int costTarget = c.getCMC();
+        
+        //interrupt 1:remove blocker to save my attacker
+        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            Combat currCombat = game.getCombat();
+            if (currCombat != null && currCombat.getAllBlockers().contains(c)) {
+                for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
+                    List<Card> blockers = currCombat.getBlockers(attacker);
+                    ComputerUtilCard.sortByEvaluateCreature(blockers);
+                    Combat combat = new Combat(ai);
+                    combat.addAttacker(attacker, opp);
+                    for (Card blocker : blockers) {
+                        if (blocker == c) {
+                            continue;
+                        }
+                        combat.addBlocker(attacker, blocker);
+                    }
+                    if (!ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat)) {
+                        return true;
+                    }
+                }
+            }
+        }
         
         //burn and curse spells
         float valueBurn = 0;
@@ -956,7 +979,7 @@ public class ComputerUtilCard {
             valueTempo *= 2;    //prefer to cast at opponent EOT
         }
         
-        //interrupt 1:opponent pumping target (only works if the pump target is the chosen best target to begin with)
+        //interrupt 2:opponent pumping target (only works if the pump target is the chosen best target to begin with)
         final MagicStack stack = ai.getGame().getStack();
         if (!stack.isEmpty()) {
             final SpellAbility topStack = stack.peekAbility();
