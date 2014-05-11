@@ -343,7 +343,7 @@ public class InputSelectCard {
                         //redraw owner if needed so it appears on top of cards above it in stack
                         owner.draw(g, pos.x, pos.y);
                     }
-                    g.drawRect(2, Color.GREEN, x, y, w, h);
+                    g.drawRect(FCardPanel.PADDING, Color.GREEN, x, y, w, h);
 
                     w = getWidth();
                     x = w / 2;

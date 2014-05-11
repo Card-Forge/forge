@@ -98,7 +98,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     }
 
     protected float getCardWidth(float cardHeight) {
-        return (cardHeight - 2 * CardAreaPanel.PADDING_Y) / CardAreaPanel.ASPECT_RATIO + 2 * CardAreaPanel.PADDING_X; //ensure aspect ratio maintained after padding applied
+        return (cardHeight - 2 * CardAreaPanel.PADDING) / CardAreaPanel.ASPECT_RATIO + 2 * CardAreaPanel.PADDING; //ensure aspect ratio maintained after padding applied
     }
 
     @Override
