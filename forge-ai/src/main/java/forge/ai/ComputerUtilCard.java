@@ -910,20 +910,22 @@ public class ComputerUtilCard {
         //interrupt 1:remove blocker to save my attacker
         if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             Combat currCombat = game.getCombat();
-            if (currCombat != null && currCombat.getAllBlockers().contains(c)) {
+            if (currCombat != null && !currCombat.getAllBlockers().isEmpty() && currCombat.getAllBlockers().contains(c)) {
                 for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
-                    List<Card> blockers = currCombat.getBlockers(attacker);
-                    ComputerUtilCard.sortByEvaluateCreature(blockers);
-                    Combat combat = new Combat(ai);
-                    combat.addAttacker(attacker, opp);
-                    for (Card blocker : blockers) {
-                        if (blocker == c) {
-                            continue;
+                    if (attacker.getShield().isEmpty() && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat)) {
+                        List<Card> blockers = currCombat.getBlockers(attacker);
+                        ComputerUtilCard.sortByEvaluateCreature(blockers);
+                        Combat combat = new Combat(ai);
+                        combat.addAttacker(attacker, opp);
+                        for (Card blocker : blockers) {
+                            if (blocker == c) {
+                                continue;
+                            }
+                            combat.addBlocker(attacker, blocker);
                         }
-                        combat.addBlocker(attacker, blocker);
-                    }
-                    if (!ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat)) {
-                        return true;
+                        if (!ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, combat)) {
+                            return true;
+                        }
                     }
                 }
             }

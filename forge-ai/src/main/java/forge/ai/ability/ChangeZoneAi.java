@@ -731,7 +731,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     Combat currCombat = game.getCombat();
                     for (Card attacker : currCombat.getAttackers()) {
-                        if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) && !currCombat.getBlockers(attacker).isEmpty()) {
+                        if (attacker.getShield().isEmpty() && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) 
+                                && !currCombat.getBlockers(attacker).isEmpty()) {
                             List<Card> blockers = currCombat.getBlockers(attacker);
                             ComputerUtilCard.sortByEvaluateCreature(blockers);
                             Combat combat = new Combat(ai);
