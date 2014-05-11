@@ -47,7 +47,8 @@ public class CardReaderExperiments {
                         break;
                     }
                 }
-            } catch (FileNotFoundException ex) {
+            }
+            catch (FileNotFoundException ex) {
             }
         }
 

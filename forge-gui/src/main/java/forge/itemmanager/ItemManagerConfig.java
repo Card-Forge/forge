@@ -5,6 +5,7 @@ import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -247,6 +248,9 @@ public enum ItemManagerConfig {
             }
         }
         catch (FileNotFoundException e) {
+            //ok if file not found
+        }
+        catch (MalformedURLException e) {
             //ok if file not found
         }
         catch (Exception e) {

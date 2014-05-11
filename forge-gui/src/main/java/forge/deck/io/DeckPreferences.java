@@ -5,6 +5,7 @@ import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +63,9 @@ public class DeckPreferences {
             }
         }
         catch (FileNotFoundException e) {
+            //ok if file not found
+        }
+        catch (MalformedURLException e) {
             //ok if file not found
         }
         catch (Exception e) {
