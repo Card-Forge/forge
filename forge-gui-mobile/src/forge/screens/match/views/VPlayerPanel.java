@@ -245,13 +245,14 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             float x, y, w, h;
+            boolean flipped = isFlipped();
 
             if (selectedTab == this) {
                 y = 0;
                 w = getWidth();
                 h = getHeight();
                 float yAcross;
-                if (isFlipped()) {
+                if (flipped) {
                     y += INFO_TAB_PADDING_Y;
                     yAcross = y;
                     y--;
@@ -294,11 +295,24 @@ public class VPlayerPanel extends FContainer {
                 }
                 h = icon.getHeight() * w / icon.getWidth();
                 x = (getWidth() - w) / 2;
-                y = INFO_TAB_PADDING_Y;
+                if (flipped) {
+                    y = getHeight() - h - INFO_TAB_PADDING_Y;
+                }
+                else {
+                    y = INFO_TAB_PADDING_Y;
+                }
                 g.drawImage(icon, x, y, w, h);
 
-                y += h + INFO_TAB_PADDING_Y;
-                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, HAlignment.CENTER, false);
+                if (flipped) {
+                    h = INFO_FONT.getFont().getCapHeight();
+                    y -= h + INFO_TAB_PADDING_Y;
+                    h += INFO_TAB_PADDING_Y;
+                }
+                else {
+                    y += h + INFO_TAB_PADDING_Y;
+                    h = getHeight() - y + 1;
+                }
+                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), h, false, HAlignment.CENTER, false);
             }
         }
     }
