@@ -18,12 +18,14 @@ import forge.screens.match.FControl;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.util.Utils;
 
 public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
+    private static final float INFO_TAB_PADDING = Utils.scaleMin(2);
 
     private final Player player;
     private final VPhaseIndicator phaseIndicator;
@@ -240,8 +242,6 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             float x, y, w, h;
-            float paddingX = 2;
-            float paddingY = 2;
 
             if (selectedTab == this) {
                 y = 0;
@@ -249,18 +249,18 @@ public class VPlayerPanel extends FContainer {
                 h = getHeight();
                 float yAcross;
                 if (isFlipped()) {
-                    y += paddingY;
+                    y += INFO_TAB_PADDING;
                     yAcross = y;
                     y--;
                     h++;
                 }
                 else {
-                    h -= paddingY;
+                    h -= INFO_TAB_PADDING;
                     yAcross = h;
                     y--;
                     h += 2;
                 }
-                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? paddingY : 0, w, getHeight() - paddingY);
+                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING : 0, w, getHeight() - INFO_TAB_PADDING);
                 g.startClip(-1, y, w + 2, h); //use clip to ensure all corners connect
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
@@ -268,13 +268,17 @@ public class VPlayerPanel extends FContainer {
                 g.endClip();
             }
 
-            h = Math.round(getHeight() * 0.7f / 20f) * 20f; //round to nearest 20 so images look ok
-            w = h;
-            x = paddingX;
+            float maxImageWidth = getWidth() - INFO_FONT.getFont().getBounds("0").width - 3 * INFO_TAB_PADDING;
+            w = icon.getNearestHQWidth(maxImageWidth);
+            if (w > maxImageWidth) {
+                w /= 2;
+            }
+            h = icon.getHeight() * w / icon.getWidth();
+            x = INFO_TAB_PADDING;
             y = (getHeight() - h) / 2;
             g.drawImage(icon, x, y, w, h);
 
-            x += w * 1.1f;
+            x += w + INFO_TAB_PADDING;
             g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, HAlignment.LEFT, true);
         }
     }

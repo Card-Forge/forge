@@ -99,10 +99,15 @@ public class VManaPool extends VDisplayArea {
         public void draw(Graphics g) {
             float textHeight = FONT.getFont().getCapHeight();
             float gapY = textHeight / 4f;
-            float w = image.getWidth();
-            float h = image.getHeight();
+
+            float maxImageHeight = getHeight() - textHeight - 3 * gapY;
+            float h = image.getNearestHQHeight(maxImageHeight);
+            if (h > maxImageHeight) {
+                h /= 2;
+            }
+            float w = image.getWidth() * h / image.getHeight();
             float x = (getWidth() - w) / 2;
-            float y = (getHeight() - h - textHeight - gapY) / 2;
+            float y = gapY + (maxImageHeight - h) / 2;
 
             g.drawImage(image, x, y, w, h);
 

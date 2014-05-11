@@ -1,11 +1,13 @@
 package forge.menu;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.toolbox.FDisplayObject;
+import forge.util.Utils;
 
 public class FMenuTab extends FDisplayObject {
     private static final FSkinFont FONT = FSkinFont.get(12);
@@ -14,6 +16,9 @@ public class FMenuTab extends FDisplayObject {
     private static final FSkinColor SEL_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor FORE_COLOR = SEL_FORE_COLOR.alphaColor(0.5f);
     private static final FSkinColor SEPARATOR_COLOR = SEL_FORE_COLOR.alphaColor(0.3f);
+    private static final float PADDING = Utils.scaleMin(2);
+    private static final float SEL_BORDER_WIDTH = Utils.scaleMin(2);
+    private static final float SEPARATOR_WIDTH = Utils.scaleX(1);
 
     private final FMenuBar menuBar;
     private final FDropDown dropDown;
@@ -61,19 +66,17 @@ public class FMenuTab extends FDisplayObject {
     @Override
     public void draw(Graphics g) {
         float x, y, w, h;
-        float paddingX = 2;
-        float paddingY = 2;
 
         FSkinColor foreColor;
         if (dropDown.isVisible()) {
-            x = paddingX; //round so lines show up reliably
-            y = paddingY;
+            x = PADDING; //round so lines show up reliably
+            y = PADDING;
             w = getWidth() - 2 * x + 1;
             h = getHeight() - y + 1;
 
             g.startClip(x, y, w, h);
             g.fillRect(SEL_BACK_COLOR, x, y, w, h);
-            g.drawRect(2, SEL_BORDER_COLOR, x, y, w, h);
+            g.drawRect(SEL_BORDER_WIDTH, SEL_BORDER_COLOR, x, y, w, h);
             g.endClip();
 
             foreColor = SEL_FORE_COLOR;
@@ -85,12 +88,12 @@ public class FMenuTab extends FDisplayObject {
         //draw right separator
         x = getWidth();
         y = getHeight() / 4;
-        g.drawLine(1, SEPARATOR_COLOR, x, y, x, getHeight() - y);
+        g.drawLine(SEPARATOR_WIDTH, SEPARATOR_COLOR, x, y, x, getHeight() - y);
 
-        x = paddingX;
-        y = paddingY;
-        w = getWidth() - 2 * paddingX;
-        h = getHeight() - 2 * paddingY;
+        x = PADDING;
+        y = PADDING;
+        w = getWidth() - 2 * PADDING;
+        h = getHeight() - 2 * PADDING;
         g.drawText(text, FONT, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
     }
 }
