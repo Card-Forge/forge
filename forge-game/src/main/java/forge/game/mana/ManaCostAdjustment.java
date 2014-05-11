@@ -13,6 +13,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
@@ -410,8 +411,16 @@ public class ManaCostAdjustment {
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
             return;
         }
-        // CardFactory.xCout() cannot calculate cards like Battlefield Thaumaturge
-        int value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+
+        int value;
+        if ("AffectedX".equals(amount)) {
+            value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
+        } else if ("X".equals(amount)){
+            value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
+        } else {
+            value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+        }
+
 
         if (!params.containsKey("Color")) {
             manaCost.decreaseColorlessMana(value);

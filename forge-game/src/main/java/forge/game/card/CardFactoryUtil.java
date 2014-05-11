@@ -19,6 +19,7 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
 import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
@@ -56,6 +57,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -555,6 +557,16 @@ public class CardFactoryUtil {
     public static int objectXCount(final List<?> objects, final String s, final Card source) {
         if (objects.isEmpty()) {
             return 0;
+        }
+
+        if (s.startsWith("Valid")) {
+            final List<Card> cards = new ArrayList<Card>();
+            for (Object o : objects) {
+                if (o instanceof Card) {
+                    cards.add((Card) o);
+                }
+            }
+            return CardFactoryUtil.handlePaid(cards, s, source);
         }
 
         int n = s.startsWith("Amount") ? objects.size() : 0;
