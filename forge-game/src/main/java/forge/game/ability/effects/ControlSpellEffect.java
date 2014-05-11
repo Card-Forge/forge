@@ -74,6 +74,10 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                         continue;
                     }
 
+                    if (!c.canBeControlledBy(si.getActivator())) {
+                        continue;
+                    }
+
                     if (c.getController().equals(si.getActivator())) {
                         // Controllers are already the same, no exchange needed
                         continue;

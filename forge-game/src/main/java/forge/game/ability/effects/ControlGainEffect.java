@@ -45,7 +45,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
     private void doLoseControl(final Card c, final Card host, final boolean tapOnLose,
             final List<String> addedKeywords, final long tStamp) {
-        if (null == c) {
+        if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
             return;
         }
         if (c.isInPlay()) {
@@ -103,7 +103,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         for (Card tgtC : tgtCards) {
 
-            if (!tgtC.isInPlay()) {
+            if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                 continue;
             }
 

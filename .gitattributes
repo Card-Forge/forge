@@ -6300,6 +6300,7 @@ forge-gui/res/cardsfolder/g/guard_dogs.txt -text
 forge-gui/res/cardsfolder/g/guard_duty.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/guard_gomazoa.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/guardian_angel.txt -text
+forge-gui/res/cardsfolder/g/guardian_beast.txt -text
 forge-gui/res/cardsfolder/g/guardian_idol.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/guardian_lions.txt -text
 forge-gui/res/cardsfolder/g/guardian_of_cloverdell.txt svneol=native#text/plain

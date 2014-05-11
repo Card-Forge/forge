@@ -3571,7 +3571,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.game.GameEntity} object.
      */
     public final void enchantEntity(final GameEntity entity) {
-        if (entity.hasKeyword("CARDNAME can't be enchanted.")) {
+        if (entity.hasKeyword("CARDNAME can't be enchanted.")
+                || entity.hasKeyword("CARDNAME can't be enchanted in the future.")) {
             getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, "Trying to enchant " + entity.getName()
             + " but it can't be enchanted.");
             return;
@@ -8381,6 +8382,22 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * canBeControlledBy.
+     * 
+     * @param newController
+     *            a Player
+     * @return a boolean
+     */
+    public final boolean canBeControlledBy(final Player newController) {
+        if (this.hasKeyword("Other players can't gain control of CARDNAME.")
+                && !this.getController().equals(newController)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    /**
      * canBeEnchantedBy.
      * 
      * @param aura
@@ -8403,6 +8420,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.hasProtectionFrom(aura)
+            || (this.hasKeyword("CARDNAME can't be enchanted in the future.") && !this.getEnchantedBy().contains(aura))
             || (this.hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura")
                     && !(aura.getName().equals("Consecrate Land") && aura.isInZone(ZoneType.Battlefield)))
             || ((tgt != null) && !this.isValid(tgt.getValidTgts(), aura.getController(), aura))) {
