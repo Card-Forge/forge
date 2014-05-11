@@ -10,13 +10,13 @@ import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public class FMenuTab extends FDisplayObject {
-    private static final FSkinFont FONT = FSkinFont.get(12);
+    public static final FSkinFont FONT = FSkinFont.get(12);
     private static final FSkinColor SEL_BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
     private static final FSkinColor SEL_BORDER_COLOR = FDropDown.BORDER_COLOR;
     private static final FSkinColor SEL_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor FORE_COLOR = SEL_FORE_COLOR.alphaColor(0.5f);
     private static final FSkinColor SEPARATOR_COLOR = SEL_FORE_COLOR.alphaColor(0.3f);
-    private static final float PADDING = Utils.scaleMin(2);
+    public static final float PADDING = Utils.scaleMin(2);
     private static final float SEPARATOR_WIDTH = Utils.scaleX(1);
 
     private final FMenuBar menuBar;

@@ -6,17 +6,18 @@ import java.util.List;
 import forge.Forge.Graphics;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
-import forge.util.Utils;
 
 public class FMenuBar extends FContainer {
-    public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
-
     private final List<FMenuTab> tabs = new ArrayList<FMenuTab>();
 
     public void addTab(String text0, FDropDown dropDown0) {
         FMenuTab tab = new FMenuTab(text0, this, dropDown0);
         dropDown0.setMenuTab(tab);
         tabs.add(add(tab));
+    }
+
+    public float getPreferredHeight() {
+        return Math.round(FMenuTab.FONT.getFont().getLineHeight() * 1.5f + 2 * FMenuTab.PADDING);
     }
 
     @Override
