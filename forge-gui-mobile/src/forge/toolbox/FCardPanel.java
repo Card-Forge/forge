@@ -10,7 +10,8 @@ import forge.util.Utils;
 public class FCardPanel extends FDisplayObject {
     public static final float TAPPED_ANGLE = -90;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
-    public static final float PADDING = Utils.scaleMax(2); //scale to leave vertical space between
+    public static final float PADDING_X = Utils.scaleX(2);
+    public static final float PADDING_Y = Utils.scaleY(2);
 
     private Card card;
     private boolean tapped;
@@ -59,10 +60,10 @@ public class FCardPanel extends FDisplayObject {
     public void draw(Graphics g, float x, float y) {
         if (card == null) { return; }
 
-        x += PADDING;
-        y += PADDING;
-        float w = getWidth() - 2 * PADDING;
-        float h = getHeight() - 2 * PADDING;
+        x += PADDING_X;
+        y += PADDING_Y;
+        float w = getWidth() - 2 * PADDING_X;
+        float h = getHeight() - 2 * PADDING_Y;
         if (w == h) { //adjust width if needed to make room for tapping
             w = h / ASPECT_RATIO;
         }

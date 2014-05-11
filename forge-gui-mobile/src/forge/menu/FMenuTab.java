@@ -17,7 +17,6 @@ public class FMenuTab extends FDisplayObject {
     private static final FSkinColor FORE_COLOR = SEL_FORE_COLOR.alphaColor(0.5f);
     private static final FSkinColor SEPARATOR_COLOR = SEL_FORE_COLOR.alphaColor(0.3f);
     private static final float PADDING = Utils.scaleMin(2);
-    private static final float SEL_BORDER_WIDTH = Utils.scaleMin(2);
     private static final float SEPARATOR_WIDTH = Utils.scaleX(1);
 
     private final FMenuBar menuBar;
@@ -76,7 +75,7 @@ public class FMenuTab extends FDisplayObject {
 
             g.startClip(x, y, w, h);
             g.fillRect(SEL_BACK_COLOR, x, y, w, h);
-            g.drawRect(SEL_BORDER_WIDTH, SEL_BORDER_COLOR, x, y, w, h);
+            g.drawRect(2, SEL_BORDER_COLOR, x, y, w, h);
             g.endClip();
 
             foreColor = SEL_FORE_COLOR;

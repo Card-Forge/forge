@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
@@ -16,10 +17,12 @@ import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public class VPhaseIndicator extends FContainer {
-    public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.3f;
-    private static final FSkinFont labelFont = FSkinFont.get(11);
+    private static final FSkinFont BASE_FONT = FSkinFont.get(11);
+    private static final float PADDING_X = Utils.scaleX(1);
+    private static final float PADDING_Y = Utils.scaleY(2);
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<PhaseType, PhaseLabel>();
+    private FSkinFont font;
 
     public VPhaseIndicator() {
         addPhaseLabel("UP", PhaseType.UPKEEP);
@@ -50,17 +53,37 @@ public class VPhaseIndicator extends FContainer {
         }
     }
 
+    public float getPreferredHeight(float width) {
+        //build string to use to determine ideal font
+        float w = width / phaseLabels.size();
+        w -= 2 * PADDING_X;
+        font = BASE_FONT;
+        return _getPreferredHeight(w);
+    }
+    private float _getPreferredHeight(float w) {
+        TextBounds bounds = null;
+        for (PhaseLabel lbl : phaseLabels.values()) {
+            bounds = font.getFont().getBounds(lbl.caption);
+            if (bounds.width > w) {
+                if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                    font = FSkinFont.get(font.getSize() - 1);
+                    return _getPreferredHeight(w);
+                }
+                break;
+            }
+        }
+        return bounds.height + 2 * PADDING_Y;
+    }
+
     @Override
     protected void doLayout(float width, float height) {
         float x = 0;
-        float padding = 1;
-        float dx = width / phaseLabels.size();
-        float w = dx - 2 * padding;
-        float h = height - 2 * padding;
+        float w = width / phaseLabels.size();
+        float h = height;
 
         for (FDisplayObject lbl : getChildren()) {
-            lbl.setBounds(x + padding, padding, w, h);
-            x += dx;
+            lbl.setBounds(x, 0, w, h);
+            x += w;
         }
     }
 
@@ -101,28 +124,26 @@ public class VPhaseIndicator extends FContainer {
 
         @Override
         public void draw(final Graphics g) {
-            float w = getWidth();
+            float x = PADDING_X;
+            float w = getWidth() - 2 * PADDING_X;
             float h = getHeight();
-            FSkinColor c;
 
-            // Set color according to skip or active state of label
+            //determine back color according to skip or active state of label
+            FSkinColor backColor;
             if (active && stopAtPhase) {
-                c = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+                backColor = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
             }
             else if (!active && stopAtPhase) {
-                c = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
+                backColor = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
             }
             else if (active && !stopAtPhase) {
-                c = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
+                backColor = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
             }
             else {
-                c = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
+                backColor = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
             }
-
-            // Center vertically and horizontally. Show border if active.
-            //g.fillRoundRect(0, 0, w, h, 5, 5);
-            g.fillRect(c, 0, 0, w, h);
-            g.drawText(caption, labelFont, Color.BLACK, 0, 0, w, h, false, HAlignment.CENTER, true);
+            g.fillRect(backColor, x, 0, w, h);
+            g.drawText(caption, font, Color.BLACK, x, PADDING_Y, w, h, false, HAlignment.CENTER, false);
         }
     }
 }

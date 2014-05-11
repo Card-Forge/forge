@@ -25,7 +25,8 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
-    private static final float INFO_TAB_PADDING = Utils.scaleMin(2);
+    private static final float INFO_TAB_PADDING_X = Utils.scaleX(2);
+    private static final float INFO_TAB_PADDING_Y = Utils.scaleY(2);
 
     private final Player player;
     private final VPhaseIndicator phaseIndicator;
@@ -142,7 +143,9 @@ public class VPlayerPanel extends FContainer {
     protected void doLayout(float width, float height) {
         //layout for bottom panel by default
         float x = VAvatar.WIDTH;
-        phaseIndicator.setBounds(x, height - VPhaseIndicator.HEIGHT, width - VAvatar.WIDTH, VPhaseIndicator.HEIGHT);
+        float w = width - VAvatar.WIDTH;
+        float h = phaseIndicator.getPreferredHeight(w);
+        phaseIndicator.setBounds(x, height - h, w, h);
 
         float y = height - VAvatar.HEIGHT;
         float displayAreaHeight = y / 3;
@@ -155,7 +158,7 @@ public class VPlayerPanel extends FContainer {
         avatar.setPosition(0, y);
 
         float lifeLabelWidth = LIFE_FONT.getFont().getBounds("99").width * 1.2f; //make just wide enough for 2-digit life totals
-        float infoLabelHeight = VAvatar.HEIGHT - VPhaseIndicator.HEIGHT;
+        float infoLabelHeight = VAvatar.HEIGHT - phaseIndicator.getHeight();
         lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
         x += lifeLabelWidth;
 
@@ -249,37 +252,54 @@ public class VPlayerPanel extends FContainer {
                 h = getHeight();
                 float yAcross;
                 if (isFlipped()) {
-                    y += INFO_TAB_PADDING;
+                    y += INFO_TAB_PADDING_Y;
                     yAcross = y;
                     y--;
                     h++;
                 }
                 else {
-                    h -= INFO_TAB_PADDING;
+                    h -= INFO_TAB_PADDING_Y;
                     yAcross = h;
                     y--;
                     h += 2;
                 }
-                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING : 0, w, getHeight() - INFO_TAB_PADDING);
-                g.startClip(-1, y, w + 2, h); //use clip to ensure all corners connect
+                g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                g.startClip(-1, y, w + 2, yAcross - y); //use clip to ensure all corners connect
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
                 g.endClip();
             }
 
-            float maxImageWidth = getWidth() - INFO_FONT.getFont().getBounds("0").width - 3 * INFO_TAB_PADDING;
-            w = icon.getNearestHQWidth(maxImageWidth);
-            if (w > maxImageWidth) {
-                w /= 2;
-            }
-            h = icon.getHeight() * w / icon.getWidth();
-            x = INFO_TAB_PADDING;
-            y = (getHeight() - h) / 2;
-            g.drawImage(icon, x, y, w, h);
+            //show image left of text if wider than tall
+            if (getWidth() > getHeight()) {
+                float maxImageWidth = getWidth() - INFO_FONT.getFont().getBounds("0").width - 3 * INFO_TAB_PADDING_X;
+                w = icon.getNearestHQWidth(maxImageWidth);
+                if (w > maxImageWidth) {
+                    w /= 2;
+                }
+                h = icon.getHeight() * w / icon.getWidth();
+                x = INFO_TAB_PADDING_X + (maxImageWidth - w) / 2;
+                y = (getHeight() - h) / 2;
+                g.drawImage(icon, x, y, w, h);
 
-            x += w + INFO_TAB_PADDING;
-            g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, HAlignment.LEFT, true);
+                x += w + INFO_TAB_PADDING_X;
+                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, HAlignment.LEFT, true);
+            }
+            else { //show image above text if taller than wide
+                float maxImageWidth = getWidth() - 2 * INFO_TAB_PADDING_X;
+                w = icon.getNearestHQWidth(maxImageWidth);
+                if (w > maxImageWidth) {
+                    w /= 2;
+                }
+                h = icon.getHeight() * w / icon.getWidth();
+                x = (getWidth() - w) / 2;
+                y = INFO_TAB_PADDING_Y;
+                g.drawImage(icon, x, y, w, h);
+
+                y += h + INFO_TAB_PADDING_Y;
+                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, HAlignment.CENTER, false);
+            }
         }
     }
 }
