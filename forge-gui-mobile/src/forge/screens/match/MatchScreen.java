@@ -139,7 +139,7 @@ public class MatchScreen extends FScreen {
         }
         g.drawLine(1, BORDER_COLOR, 0, y, w, y);
 
-        y = (midField - SEPARATOR_THICKNESS) / 2;
+        y = midField - SEPARATOR_THICKNESS / 2;
         g.drawLine(SEPARATOR_THICKNESS, BORDER_COLOR, 0, y, w, y);
 
         y = midField + bottomPlayerPanel.getField().getHeight();
