@@ -29,11 +29,9 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Utils;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
-    private static final float SEPARATOR_THICKNESS = Utils.scaleY(1);
 
     private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
     private final FMenuBar menuBar;
@@ -139,8 +137,8 @@ public class MatchScreen extends FScreen {
         }
         g.drawLine(1, BORDER_COLOR, 0, y, w, y);
 
-        y = midField - SEPARATOR_THICKNESS / 2;
-        g.drawLine(SEPARATOR_THICKNESS, BORDER_COLOR, 0, y, w, y);
+        y = midField;
+        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
 
         y = midField + bottomPlayerPanel.getField().getHeight();
         g.drawLine(1, BORDER_COLOR, 0, y, w, y);
