@@ -96,6 +96,8 @@ public class Forge implements ApplicationListener {
         FSkin.loadFull(splashScreen);
 
         Gdx.input.setInputProcessor(new MainInputProcessor());
+        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchMenuKey(true);
         openScreen(new HomeScreen());
         splashScreen = null;
     }
@@ -106,6 +108,7 @@ public class Forge implements ApplicationListener {
 
     public static void showMenu() {
         if (currentScreen == null) { return; }
+        endKeyInput(); //end key input before menu shown
         currentScreen.showMenu();
     }
 
@@ -233,13 +236,14 @@ public class Forge implements ApplicationListener {
         Gdx.input.setOnscreenKeyboardVisible(true);
     }
 
-    public static void endKeyInput() {
-        if (keyInputAdapter == null) { return; }
+    public static boolean endKeyInput() {
+        if (keyInputAdapter == null) { return false; }
         keyInputAdapter.onInputEnd();
         keyInputAdapter = null;
         MainInputProcessor.keyTyped = false;
         MainInputProcessor.lastKeyTyped = '\0';
         Gdx.input.setOnscreenKeyboardVisible(false);
+        return true;
     }
 
     public static abstract class KeyInputAdapter {
@@ -270,6 +274,10 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean keyDown(int keyCode) {
+            if (keyCode == Keys.MENU) {
+                showMenu();
+                return true;
+            }
             if (keyInputAdapter == null) {
                 //if no active key input adapter, give current screen or overlay a chance to handle key
                 FContainer container = FOverlay.getTopOverlay();

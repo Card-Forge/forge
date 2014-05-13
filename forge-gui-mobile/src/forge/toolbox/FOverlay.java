@@ -5,6 +5,7 @@ import java.util.Stack;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -108,7 +109,9 @@ public abstract class FOverlay extends FContainer {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (keyCode == Keys.ESCAPE) {
+        if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
+            if (Forge.endKeyInput()) { return true; }
+
             hide(); //hide on escape by default
             return true;
         }

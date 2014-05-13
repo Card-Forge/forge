@@ -270,8 +270,11 @@ public class FOptionPane extends FDialog {
             }
             return true;
         case Keys.ESCAPE:
+        case Keys.BACK:
+            if (Forge.endKeyInput()) { return true; }
+
             if (isButtonEnabled(buttons.length - 1)) {
-                setResult(buttons.length - 1); //set result to final option on Escape
+                setResult(buttons.length - 1); //set result to final option on Escape or Back
             }
             return true;
         }

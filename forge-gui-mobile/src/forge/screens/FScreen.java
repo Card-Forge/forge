@@ -150,7 +150,9 @@ public abstract class FScreen extends FContainer {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (keyCode == Keys.ESCAPE) {
+        if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
+            if (Forge.endKeyInput()) { return true; }
+
             Forge.back(); //go back on escape by default
             return true;
         }
