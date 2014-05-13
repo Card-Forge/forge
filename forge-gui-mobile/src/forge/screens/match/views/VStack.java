@@ -82,7 +82,7 @@ public class VStack extends FDropDown {
         float x = PADDING;
         float y = PADDING;
         float dy = PADDING - 1;
-        float totalWidth = Math.round(maxWidth / 2);
+        float totalWidth = Math.min(4 * CARD_WIDTH, maxWidth);
         float width = totalWidth - 2 * PADDING;
 
         if (stack.isEmpty()) { //show label if stack empty
