@@ -4,10 +4,13 @@ import com.google.common.collect.Iterables;
 
 import forge.ai.AiAttackController;
 import forge.ai.AiBlockController;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
@@ -57,6 +60,32 @@ public class AnimateAi extends SpellAbilityAi {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
+        //interrupt sacrifice effect
+        if (!game.getStack().isEmpty()) {
+            SpellAbility topStack = game.getStack().peekAbility();
+            if (topStack.getApi() == ApiType.Sacrifice) {
+                final String valid = topStack.getParam("SacValid");
+                String num = topStack.getParam("Amount");
+                num = (num == null) ? "1" : num;
+                final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
+                List<Card> list =
+                        CardLists.getValidCards(aiPlayer.getCardsIn(ZoneType.Battlefield), valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());
+                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+                ComputerUtilCard.sortByEvaluateCreature(list);
+                if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, aiPlayer)) {
+                    Card animatedCopy = CardFactory.getCard(source.getPaperCard(), aiPlayer);
+                    becomeAnimated(animatedCopy, sa);
+                    list.add(animatedCopy);
+                    list = CardLists.getValidCards(list, valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());
+                    list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+                    if (ComputerUtilCard.evaluateCreature(animatedCopy) < ComputerUtilCard.evaluateCreature(list.get(0))
+                            && list.contains(animatedCopy)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
         if (!ph.is(PhaseType.COMBAT_BEGIN)
