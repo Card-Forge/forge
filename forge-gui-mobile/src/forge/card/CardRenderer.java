@@ -23,7 +23,6 @@ import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.screens.match.FControl;
-import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FList;
 import forge.util.Utils;
@@ -83,21 +82,9 @@ public class CardRenderer {
 
     public static void drawDetails(Graphics g, Card card, float width, float height) {
         float x = FDialog.INSETS;
-        float y = x;
+        float y = FDialog.INSETS;
         float w = width - 2 * x;
         float h = height - 2 * y;
-
-        float ratio = h / w;
-        if (ratio > FCardPanel.ASPECT_RATIO) {
-            float oldHeight = h;
-            h = w * FCardPanel.ASPECT_RATIO;
-            y += (oldHeight - h) / 2;
-        }
-        else {
-            float oldWidth = w;
-            w = h / FCardPanel.ASPECT_RATIO;
-            x += (oldWidth - w) / 2;
-        }
 
         boolean canShow = !card.isFaceDown() && (FControl.mayShowCard(card) || FDialog.isDialogOpen()); //support showing if card revealed in dialog
 
