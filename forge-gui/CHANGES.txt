@@ -11,8 +11,10 @@ Release Notes
 - Storm Count -
 Current Storm Count is now shown in the Card Detail pane for all storm cards
 
+
 - Improved Deck Viewer from Match screen -
 View Deck List from the Match screen now uses the same dialog that the Home screen uses, allowing viewing card images and searching/sorting the deck list
+
 
 - Token Images -
 The token images are now specific to each set (where possible). It is recommended that users delete the contents of their token image folder and download them again using the game's content downloaders.
@@ -33,6 +35,15 @@ New Cards
 Illicit Auction
 Mages' Contest
 Pain's Reward
+Mana Web
+Guardian Beast
+
+
+--------------------
+New Vanguard Avatars
+--------------------
+
+Heartwood Storyteller
 
 
 ---------------------------
