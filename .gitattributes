@@ -1155,7 +1155,6 @@ forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAssignDamage.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAvatar.java -text
 forge-gui-mobile/src/forge/screens/match/views/VCardDisplayArea.java -text
-forge-gui-mobile/src/forge/screens/match/views/VCombat.java -text
 forge-gui-mobile/src/forge/screens/match/views/VDevMenu.java -text
 forge-gui-mobile/src/forge/screens/match/views/VDisplayArea.java -text
 forge-gui-mobile/src/forge/screens/match/views/VField.java -text

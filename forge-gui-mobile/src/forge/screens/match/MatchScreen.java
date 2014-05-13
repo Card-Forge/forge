@@ -11,7 +11,6 @@ import forge.menu.FMenuBar;
 import forge.properties.ForgePreferences;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
-import forge.screens.match.views.VCombat;
 import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
@@ -37,7 +36,6 @@ public class MatchScreen extends FScreen {
     private final FMenuBar menuBar;
     private final VPrompt prompt;
     private final VLog log;
-    private final VCombat combat;
     private final VStack stack;
     private final VDevMenu devMenu;
 
@@ -69,7 +67,6 @@ public class MatchScreen extends FScreen {
                 }));
 
         log = new VLog(game.getGameLog());
-        combat = new VCombat();
         stack = new VStack(game.getStack(), localPlayer);
         devMenu = new VDevMenu();
 
@@ -77,7 +74,6 @@ public class MatchScreen extends FScreen {
         menuBar.addTab("Game", new VGameMenu());
         menuBar.addTab("Players (" + playerPanels.size() + ")", new VPlayers());
         menuBar.addTab("Log", log);
-        menuBar.addTab("Combat", combat);
         menuBar.addTab("Dev", devMenu);
         menuBar.addTab("Stack (0)", stack);
     }
@@ -90,10 +86,6 @@ public class MatchScreen extends FScreen {
 
     public VLog getLog() {
         return log;
-    }
-
-    public VCombat getCombat() {
-        return combat;
     }
 
     public VStack getStack() {

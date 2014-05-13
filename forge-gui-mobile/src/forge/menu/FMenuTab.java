@@ -24,10 +24,12 @@ public class FMenuTab extends FDisplayObject {
 
     private String text;
     private float minWidth;
+    private int index;
 
-    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0) {
+    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0) {
         menuBar = menuBar0;
         dropDown = dropDown0;
+        index = index0;
         setText(text0);
     }
 
@@ -85,9 +87,11 @@ public class FMenuTab extends FDisplayObject {
         }
 
         //draw right separator
-        x = getWidth();
-        y = getHeight() / 4;
-        g.drawLine(SEPARATOR_WIDTH, SEPARATOR_COLOR, x, y, x, getHeight() - y);
+        if (index < menuBar.getTabCount() - 1) {
+            x = getWidth();
+            y = getHeight() / 4;
+            g.drawLine(SEPARATOR_WIDTH, SEPARATOR_COLOR, x, y, x, getHeight() - y);
+        }
 
         x = PADDING;
         y = PADDING;

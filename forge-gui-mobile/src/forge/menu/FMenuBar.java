@@ -11,13 +11,17 @@ public class FMenuBar extends FContainer {
     private final List<FMenuTab> tabs = new ArrayList<FMenuTab>();
 
     public void addTab(String text0, FDropDown dropDown0) {
-        FMenuTab tab = new FMenuTab(text0, this, dropDown0);
+        FMenuTab tab = new FMenuTab(text0, this, dropDown0, tabs.size());
         dropDown0.setMenuTab(tab);
         tabs.add(add(tab));
     }
 
     public float getPreferredHeight() {
         return Math.round(FMenuTab.FONT.getFont().getLineHeight() * 1.5f + 2 * FMenuTab.PADDING);
+    }
+
+    public int getTabCount() {
+        return tabs.size();
     }
 
     @Override
