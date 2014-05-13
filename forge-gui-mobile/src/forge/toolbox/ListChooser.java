@@ -293,7 +293,7 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public int getDefaultFontSize() {
-            return 12;
+            return 14;
         }
 
         @Override
