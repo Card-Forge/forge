@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.FThreads;
+import forge.card.CardZoom;
 import forge.game.card.Card;
 import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
@@ -175,6 +176,12 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                     FControl.getInputProxy().selectCard(getCard(), null);
                 }
             });
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            CardZoom.show(getCard());
             return true;
         }
     }
