@@ -295,8 +295,9 @@ public class ManaCostAdjustment {
                 if (cmc < 3) {
                     value = 3 - cmc;
                 }
-            }
-            else {
+            } else if (params.containsKey("AffectedAmount")) {
+                value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
+            } else {
                 value = AbilityUtils.calculateAmount(hostCard, amount, sa);
             }
         }
