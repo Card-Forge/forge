@@ -99,7 +99,7 @@ public class CardRenderer {
             x += (oldWidth - w) / 2;
         }
 
-        boolean canShow = !card.isFaceDown() && FControl.mayShowCard(card);
+        boolean canShow = !card.isFaceDown() && (FControl.mayShowCard(card) || FDialog.isDialogOpen()); //support showing if card revealed in dialog
 
         float blackBorderThickness = w * 0.021f;
         g.fillRect(Color.BLACK, x, y, w, h);
@@ -130,7 +130,7 @@ public class CardRenderer {
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
-        h =  Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight()) + 2 * TYPE_FONT.getFont().getCapHeight() + 2;
+        h = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getFont().getCapHeight()) + 2 * TYPE_FONT.getFont().getCapHeight() + 2;
 
         //draw name/type box
         Color nameBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, NAME_BOX_TINT);

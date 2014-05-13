@@ -14,7 +14,12 @@ public abstract class FDialog extends FOverlay {
     private static final FSkinColor TITLE_BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     public static final float TITLE_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
-    public static float INSETS = 10;
+    public static final float INSETS = Utils.scaleMin(10);
+    private static int openDialogCount = 0;
+
+    public static boolean isDialogOpen() {
+        return openDialogCount > 0;
+    }
 
     private Titlebar lblTitlebar;
     private float totalHeight;
@@ -41,6 +46,19 @@ public abstract class FDialog extends FOverlay {
                 child.setTop(child.getTop() + dy);
             }
         }
+    }
+
+    @Override
+    public void setVisible(boolean visible0) {
+        if (this.isVisible() == visible0) { return; }
+
+        if (visible0) {
+            openDialogCount++;
+        }
+        else if (openDialogCount > 0) {
+            openDialogCount--;
+        }
+        super.setVisible(visible0);
     }
 
     protected abstract float layoutAndGetHeight(float width, float maxHeight);
