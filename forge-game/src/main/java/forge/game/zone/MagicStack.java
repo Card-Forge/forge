@@ -383,6 +383,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("Player", sp.getHostCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
             runParams.put("CastSA", si.getSpellAbility());
+            runParams.put("CastSACMC", si.getSpellAbility().getHostCard().getCMC());
             runParams.put("CurrentStormCount", game.getStack().getCardsCastThisTurn().size());
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
