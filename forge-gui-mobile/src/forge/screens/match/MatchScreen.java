@@ -188,9 +188,6 @@ public class MatchScreen extends FScreen {
             }
             return prompt.getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
         case Keys.ESCAPE:
-            if (InputSelectCard.hide()) { //hide card selection if one active on Escape
-                return true;
-            }
             return prompt.getBtnCancel().trigger(); //otherwise trigger Cancel
         case Keys.A: //alpha strike on Ctrl+A
             if (KeyInputAdapter.isCtrlKeyDown()) {

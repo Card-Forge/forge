@@ -26,12 +26,17 @@ import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
+import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
 import forge.screens.match.views.VAvatar;
+import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
@@ -282,6 +287,39 @@ public class ListChooser<T> extends FContainer {
             CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, x, y, w, h);
         }
     }
+    //special renderer for SpellAbilities
+    private class SpellAbilityItemRenderer extends ItemRenderer {
+        private final TextRenderer textRenderer = new TextRenderer(true);
+
+        @Override
+        public int getDefaultFontSize() {
+            return 12;
+        }
+
+        @Override
+        public float getItemHeight() {
+            return VStack.CARD_HEIGHT + 2 * FList.PADDING;
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
+                CardZoom.show(((SpellAbility)value).getHostCard());
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            SpellAbility spellAbility = (SpellAbility)value;
+            g.drawImage(ImageCache.getImage(spellAbility.getHostCard()), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
+            float dx = VStack.CARD_WIDTH + FList.PADDING;
+            x += dx;
+            w -= dx;
+            textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
+        }
+    }
     private class PlayerItemRenderer extends ItemRenderer {
         @Override
         public int getDefaultFontSize() {
@@ -323,6 +361,9 @@ public class ListChooser<T> extends FContainer {
             }
             else if (item instanceof Card) {
                 renderer = new CardItemRenderer();
+            }
+            else if (item instanceof SpellAbility) {
+                renderer = new SpellAbilityItemRenderer();
             }
             else if (item instanceof Player) {
                 renderer = new PlayerItemRenderer();
