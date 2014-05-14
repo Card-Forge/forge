@@ -702,7 +702,7 @@ public class PlayerControllerHuman extends PlayerController {
             case UntapOrLeaveTapped:    labels = new String[]{"Untap", "Leave tapped"}; break;
             case UntapTimeVault: labels = new String[]{"Untap (and skip this turn)", "Leave tapped"}; break;
             case PlayOrDraw:    labels = new String[]{"Play", "Draw"}; break;
-            case GraceOrCondemnation: labels = new String[]{"Grace", "Condemnation"}; break;
+            default:            labels = kindOfChoice.toString().split("Or");
 
         }
         return SGuiDialog.confirm(sa.getHostCard(), question, defaultVal == null || defaultVal.booleanValue(), labels);

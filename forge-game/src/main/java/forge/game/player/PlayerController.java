@@ -65,6 +65,7 @@ public abstract class PlayerController {
         UntapOrLeaveTapped,
         UntapTimeVault,
         GraceOrCondemnation,
+        DeathOrTorture,
     }
 
     protected final Game game;
