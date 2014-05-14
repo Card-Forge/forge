@@ -25,6 +25,8 @@ public class SettingsScreen extends FScreen {
     public static final float INSETS_FACTOR = 0.025f;
     public static final FSkinFont DESC_FONT = FSkinFont.get(11);
     public static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
+    private static final float SETTING_HEIGHT = Utils.AVG_FINGER_HEIGHT + Utils.scaleY(12);
+    private static final float SETTING_PADDING = Utils.scaleY(5);
 
     private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
 
@@ -146,7 +148,7 @@ public class SettingsScreen extends FScreen {
 
     @Override
     public void showMenu() {
-        //No menu to show from this screen
+        Forge.back(); //hide settings screen when menu button pressed
     }
 
     @Override
@@ -285,7 +287,7 @@ public class SettingsScreen extends FScreen {
     private class SettingRenderer extends FList.ListItemRenderer<Setting> {
         @Override
         public float getItemHeight() {
-            return Utils.AVG_FINGER_HEIGHT + 12;
+            return SETTING_HEIGHT;
         }
 
         @Override
@@ -303,11 +305,11 @@ public class SettingsScreen extends FScreen {
             h -= 2 * offset;
 
             float totalHeight = h;
-            h = font.getFont().getMultiLineBounds(value.label).height + 5;
+            h = font.getFont().getMultiLineBounds(value.label).height + SETTING_PADDING;
 
             g.drawText(value.label, font, color, x, y, w, h, false, HAlignment.LEFT, false);
             value.drawPrefValue(g, font, color, x, y, w, h);
-            h += 5;
+            h += SETTING_PADDING;
             g.drawText(value.description, DESC_FONT, DESC_COLOR, x, y + h, w, totalHeight - h + w * INSETS_FACTOR, true, HAlignment.LEFT, false);            
         }
     }
