@@ -186,15 +186,17 @@ public class SettingsScreen extends FScreen {
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
             x += w - h;
             w = h;
-            g.drawRect(1, DESC_COLOR, x, y, w, h);
+            g.drawRect(Utils.scaleMin(1), DESC_COLOR, x, y, w, h);
             if (FModel.getPreferences().getPrefBoolean(pref)) {
                 //draw check mark
-                x += 3;
-                y++;
-                w -= 6;
-                h -= 3;
-                g.drawLine(2, color, x, y + h / 2, x + w / 2, y + h);
-                g.drawLine(2, color, x + w / 2, y + h, x + w, y);
+                float padX = Utils.scaleX(3);
+                float thickness = Utils.scaleMin(2);
+                x += padX;
+                y += Utils.scaleY(1);
+                w -= 2 * padX;
+                h -= Utils.scaleY(3);
+                g.drawLine(thickness, color, x, y + h / 2, x + w / 2, y + h);
+                g.drawLine(thickness, color, x + w / 2, y + h, x + w, y);
             }
         }
     }
