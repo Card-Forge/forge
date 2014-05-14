@@ -194,15 +194,6 @@ public class FControl {
         }
     }
 
-    public static void setCard(final Card c) {
-        FThreads.assertExecutedByEdt(true);
-        setCard(c, false);
-    }
-
-    public static void setCard(final Card c, final boolean showFlipped) {
-        //TODO
-    }
-
     public static void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
@@ -385,8 +376,6 @@ public class FControl {
     private static Set<Card> highlightedCards = new HashSet<Card>();
     // used to highlight cards in UI
     public static void setUsedToPay(Card card, boolean value) {
-        FThreads.assertExecutedByEdt(true);
-
         boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
         if (hasChanged) { // since we are in UI thread, may redraw the card right now
             updateSingleCard(card);

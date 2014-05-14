@@ -256,7 +256,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void setCard(Card card) {
-        FControl.setCard(card);
+        //doesn't need to do anything
     }
 
     @Override
