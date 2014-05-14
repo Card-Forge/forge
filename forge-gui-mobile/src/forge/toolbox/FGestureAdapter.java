@@ -27,8 +27,10 @@ public abstract class FGestureAdapter extends InputAdapter {
     private boolean inTapSquare, pressed, longPressed, longPressHandled, quickTapped, pinching, panning;
 
     private final VelocityTracker tracker = new VelocityTracker();
-    Vector2 pointer1 = new Vector2();
+    private final Vector2 pointer1 = new Vector2();
     private final Vector2 pointer2 = new Vector2();
+    private final Vector2 prevPointer1 = new Vector2();
+    private final Vector2 prevPointer2 = new Vector2();
     private final Vector2 initialPointer1 = new Vector2();
     private final Vector2 initialPointer2 = new Vector2();
 
@@ -136,16 +138,18 @@ public abstract class FGestureAdapter extends InputAdapter {
         if (pointer > 1) { return false; }
 
         if (pointer == 0) {
+            prevPointer1.set(pointer1);
             pointer1.set(x, y);
         }
         else {
+            prevPointer2.set(pointer2);
             pointer2.set(x, y);
         }
 
         // handle pinch zoom
         if (pinching) {
             Vector2 focalPoint = Utils.getIntersection(pointer1, pointer2, initialPointer1, initialPointer2);
-            return zoom(focalPoint.x, focalPoint.y, pointer1.dst(pointer2) - initialPointer1.dst(initialPointer2));
+            return zoom(focalPoint.x, focalPoint.y, pointer1.dst(pointer2) - prevPointer1.dst(prevPointer2));
         }
 
         // update tracker
