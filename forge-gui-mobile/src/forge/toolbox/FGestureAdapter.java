@@ -105,6 +105,8 @@ public abstract class FGestureAdapter extends InputAdapter {
                 // Start pinch.
                 inTapSquare = false;
                 pinching = true;
+                prevPointer1.set(pointer1);
+                prevPointer2.set(pointer2);
                 initialPointer1.set(pointer1);
                 initialPointer2.set(pointer2);
                 endPress(x, y);
@@ -123,6 +125,8 @@ public abstract class FGestureAdapter extends InputAdapter {
             pointer2.set(x, y);
             inTapSquare = false;
             pinching = true;
+            prevPointer1.set(pointer1);
+            prevPointer2.set(pointer2);
             initialPointer1.set(pointer1);
             initialPointer2.set(pointer2);
             endPress(pointer1.x, pointer1.y);
