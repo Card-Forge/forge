@@ -38,6 +38,7 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FOverlay;
+import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
     private static Forge game;
@@ -318,8 +319,7 @@ public class Forge implements ApplicationListener {
             return false;
         }
 
-        @Override
-        public boolean touchDown(int x, int y, int pointer, int button) {
+        private void updatePotentialListeners(int x, int y) {
             potentialListeners.clear();
             if (currentScreen != null) { //base potential listeners on object containing touch down point
                 FOverlay overlay = FOverlay.getTopOverlay();
@@ -329,12 +329,16 @@ public class Forge implements ApplicationListener {
                 else {
                     currentScreen.buildTouchListeners(x, y, potentialListeners);
                 }
+            }
+        }
 
-                if (keyInputAdapter != null) {
-                    if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
-                        endKeyInput(); //end key input and suppress touch event if needed
-                        potentialListeners.clear();
-                    }
+        @Override
+        public boolean touchDown(int x, int y, int pointer, int button) {
+            updatePotentialListeners(x, y);
+            if (keyInputAdapter != null) {
+                if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
+                    endKeyInput(); //end key input and suppress touch event if needed
+                    potentialListeners.clear();
                 }
             }
             return super.touchDown(x, y, pointer, button);
@@ -482,6 +486,37 @@ public class Forge implements ApplicationListener {
                 BugReporter.reportException(ex);
                 return true;
             }
+        }
+
+        //mouseMoved and scrolled events for desktop version
+        private int mouseMovedX, mouseMovedY;
+
+        @Override
+        public boolean mouseMoved(int x, int y) {
+            mouseMovedX = x;
+            mouseMovedY = y;
+            return true;
+        }
+
+        @Override
+        public boolean scrolled(int amount) {
+            updatePotentialListeners(mouseMovedX, mouseMovedY);
+
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                return zoom(10, 10);
+            }
+
+            boolean handled;
+            if (KeyInputAdapter.isShiftKeyDown()) {
+                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount, 0);
+            }
+            else {
+                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amount);
+            }
+            if (panStop(mouseMovedX, mouseMovedY)) {
+                handled = true;
+            }
+            return handled;
         }
     }
 
