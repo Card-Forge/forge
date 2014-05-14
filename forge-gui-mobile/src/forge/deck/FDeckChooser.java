@@ -44,7 +44,7 @@ public class FDeckChooser extends FScreen {
     private FPref stateSetting = null;
 
     public FDeckChooser(boolean isAi0) {
-        super(true, "", false);
+        super(true, "");
         isAi = isAi0;
 
         lstDecks.setItemActivateHandler(new FEventHandler() {

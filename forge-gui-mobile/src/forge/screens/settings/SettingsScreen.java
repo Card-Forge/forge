@@ -29,7 +29,7 @@ public class SettingsScreen extends FScreen {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
 
     public SettingsScreen() {
-        super(true, "Settings", false);
+        super(true, "Settings");
         lstSettings.setListItemRenderer(new SettingRenderer());
 
         lstSettings.addGroup("General Settings");
@@ -145,6 +145,11 @@ public class SettingsScreen extends FScreen {
     }
 
     @Override
+    public void showMenu() {
+        //No menu to show from this screen
+    }
+
+    @Override
     protected void doLayout(float startY, float width, float height) {
         lstSettings.setBounds(0, startY, width, height - startY);
     }
@@ -232,7 +237,7 @@ public class SettingsScreen extends FScreen {
             private final String currentValue = FModel.getPreferences().getPref(pref);
 
             private CustomSelectScreen() {
-                super(true, "Select " + label.substring(0, label.length() - 1), false);
+                super(true, "Select " + label.substring(0, label.length() - 1));
                 lstOptions = add(new FList<String>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override

@@ -25,7 +25,7 @@ public abstract class LaunchScreen extends FScreen {
     private boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
-        super(true, headerCaption, true);
+        super(true, headerCaption);
         btnStart = add(new StartButton());
     }
 

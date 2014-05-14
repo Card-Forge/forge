@@ -42,7 +42,7 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
     public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
-        super(false, null, false); //match screen has custom header
+        super(false, null); //match screen has custom header
 
         for (VPlayerPanel playerPanel : playerPanels0) {
             playerPanels.put(playerPanel.getPlayer(), add(playerPanel));

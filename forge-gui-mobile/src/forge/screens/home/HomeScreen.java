@@ -23,7 +23,7 @@ public class HomeScreen extends FScreen {
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
     
     public HomeScreen() {
-        super(false, null, false);
+        super(false, null);
 
         addButton("Constructed", new FEventHandler() {
             @Override

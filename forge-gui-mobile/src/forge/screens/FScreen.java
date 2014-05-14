@@ -7,7 +7,6 @@ import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
-import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
@@ -24,9 +23,9 @@ public abstract class FScreen extends FContainer {
 
     public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
-    private final FLabel btnBack, lblHeader, btnMenu;
+    private final FLabel btnBack, lblHeader;
 
-    protected FScreen(boolean showBackButton, String headerCaption, boolean showMenuButton) {
+    protected FScreen(boolean showBackButton, String headerCaption) {
         if (showBackButton) {
             btnBack = add(new FLabel.Builder().icon(new BackIcon()).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
@@ -43,17 +42,6 @@ public abstract class FScreen extends FContainer {
         }
         else {
             lblHeader = null;
-        }
-        if (showMenuButton) {
-            btnMenu = add(new FLabel.Builder().icon(FSkinImage.FAVICON).pressedColor(HEADER_BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    showMenu();
-                }
-            }).build());
-        }
-        else {
-            btnMenu = null;
         }
     }
 
@@ -93,9 +81,6 @@ public abstract class FScreen extends FContainer {
 
         if (btnBack != null) {
             btnBack.setBounds(0, 0, HEADER_HEIGHT, HEADER_HEIGHT);
-        }
-        if (btnMenu != null) {
-            btnMenu.setBounds(width - HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT);
         }
         if (lblHeader != null) {
             lblHeader.setBounds(headerX, 0, headerWidth, HEADER_HEIGHT);

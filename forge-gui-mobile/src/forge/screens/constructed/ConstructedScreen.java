@@ -853,7 +853,7 @@ public class ConstructedScreen extends LaunchScreen {
             private int selectedIndex;
 
             private DeckList() {
-                super(true, "", false);
+                super(true, "");
                 list = new FList<Object>();
             }
 
@@ -1003,7 +1003,7 @@ public class ConstructedScreen extends LaunchScreen {
         private final FList<Variant> lstVariants = add(new FList<Variant>());
 
         private MultiVariantSelect() {
-            super(true, "Select Variants", false);
+            super(true, "Select Variants");
 
             lstVariants.setListItemRenderer(new VariantRenderer());
             lstVariants.addItem(new Variant(GameType.Vanguard, "Each player has a special \"Avatar\" card that affects the game."));

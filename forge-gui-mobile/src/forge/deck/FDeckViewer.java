@@ -37,7 +37,7 @@ public class FDeckViewer extends FScreen {
     }
 
     private FDeckViewer(Deck deck0) {
-        super(true, deck0.getName(), false);
+        super(true, deck0.getName());
         deck = deck0;
         cardManager = new CardManager(false);
         cardManager.setPool(deck.getMain());
