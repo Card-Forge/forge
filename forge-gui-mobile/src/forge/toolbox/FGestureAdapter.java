@@ -48,7 +48,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             if (!longPressed) {
                 longPressed = true;
                 if (longPress(pointer1.x, pointer1.y)) {
-                    Gdx.input.vibrate(200); //perform a quick vibrate to signify a successful long press
+                    Gdx.input.vibrate(100); //perform a quick vibrate to signify a successful long press
                     endPress(pointer1.x, pointer1.y); //end press immediately if long press handled
                     longPressHandled = true;
                 }
@@ -67,7 +67,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     };
 
     public FGestureAdapter() {
-        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.05f, 0.75f, 0.025f, 0.15f);
+        this(Utils.AVG_FINGER_WIDTH / 2f, DOUBLE_TAP_INTERVAL, 0.05f, 0.5f, 0.025f, 0.15f);
     }
 
     /** @param tapSquareSize0 half width in pixels of the square around an initial touch event
