@@ -109,7 +109,9 @@ public class Forge implements ApplicationListener {
     public static void showMenu() {
         if (currentScreen == null) { return; }
         endKeyInput(); //end key input before menu shown
-        currentScreen.showMenu();
+        if (FOverlay.getTopOverlay() == null) { //don't show menu if overlay open
+            currentScreen.showMenu();
+        }
     }
 
     public static void back() {

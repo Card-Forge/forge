@@ -182,7 +182,7 @@ public class MatchScreen extends FScreen {
         case Keys.ESCAPE:
             return prompt.getBtnCancel().trigger(); //otherwise trigger Cancel
         case Keys.BACK:
-            FControl.undoLastAction(); //let back trigger undo instead of going back a screen
+            FControl.undoLastAction(); //let Back trigger undo instead of going back a screen
             return true;
         case Keys.A: //alpha strike on Ctrl+A
             if (KeyInputAdapter.isCtrlKeyDown()) {
