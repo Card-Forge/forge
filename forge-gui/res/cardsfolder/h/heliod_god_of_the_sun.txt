@@ -6,7 +6,7 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT5 | References$ X | Description$ As long as your devotion to white is less than 5, CARDNAME isn't a creature. (Each {W} in the mana costs of permanents you control counts towards your devotion to white.)
 SVar:X:Count$Devotion.W
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Vigilance | Description$ Other creatures you control have vigilance.
-A:AB$ Token | Cost$ 2 W W | TokenAmount$ 1 | TokenName$ Cleric | TokenTypes$ Enchantment,Creature,Cleric | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 1 | TokenColors$ White | TokenImage$ w_2_1_cleric_ths | SpellDescription$ Put a 2/1 white Cleric enchantment creature token onto the battlefield.
+A:AB$ Token | Cost$ 2 W W | TokenAmount$ 1 | TokenName$ Cleric | TokenTypes$ Enchantment,Creature,Cleric | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 1 | TokenColors$ White | TokenImage$ w_2_1_cleric | SpellDescription$ Put a 2/1 white Cleric enchantment creature token onto the battlefield.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heliod_god_of_the_sun.jpg
