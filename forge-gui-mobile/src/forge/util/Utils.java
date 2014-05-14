@@ -1,6 +1,7 @@
 package forge.util;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
 
@@ -50,5 +51,41 @@ public class Utils {
 
     public static long secondsToTimeSpan(float seconds) {
         return (long)(seconds * 1000000000l);
+    }
+
+    public static Vector2 getIntersection(Vector2 l1p1, Vector2 l1p2, Vector2 l2p1, Vector2 l2p2) {
+        Vector2 result = new Vector2();
+
+        // Denominator for ua and ub are the same, so store this calculation
+        float d = (l2p2.y - l2p1.y) * (l1p2.x - l1p1.x) - (l2p2.x - l2p1.x) * (l1p2.y - l1p1.y);
+
+        //n_a and n_b are calculated as separate values for readability
+        float n_a = (l2p2.x - l2p1.x) * (l1p1.y - l2p1.y) - (l2p2.y - l2p1.y) * (l1p1.x - l2p1.x);
+        float n_b = (l1p2.x - l1p1.x) * (l1p1.y - l2p1.y) - (l1p2.y - l1p1.y) * (l1p1.x - l2p1.x);
+
+        // Make sure there is not a division by zero - this also indicates that
+        // the lines are parallel.  
+        // If n_a and n_b were both equal to zero the lines would be on top of each 
+        // other (coincidental).  This check is not done because it is not 
+        // necessary for this implementation (the parallel check accounts for this).
+        if (d != 0) {
+            // Calculate the intermediate fractional point that the lines potentially intersect.
+            float ua = n_a / d;
+            float ub = n_b / d;
+
+            // The fractional point will be between 0 and 1 inclusive if the lines
+            // intersect.  If the fractional calculation is larger than 1 or smaller
+            // than 0 the lines would need to be longer to intersect.
+            if (ua >= 0d && ua <= 1d && ub >= 0d && ub <= 1d) {
+                result.x = l1p1.x + (ua * (l1p2.x - l1p1.x));
+                result.y = l1p1.y + (ua * (l1p2.y - l1p1.y));
+                return result;
+            }
+        }
+
+        //if lines are parallel or don't intersect, just return the midpoint of first line
+        result.x = (l1p1.x + l1p2.x) / 2;
+        result.y = (l1p1.y + l1p2.y) / 2;
+        return result;
     }
 }

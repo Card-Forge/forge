@@ -129,11 +129,7 @@ public abstract class FDisplayObject {
         return false;
     }
 
-    public boolean zoom(float initialDistance, float distance) {
-        return false;
-    }
-
-    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+    public boolean zoom(float x, float y, float amount) {
         return false;
     }
 

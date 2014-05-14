@@ -20,7 +20,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Clipboard;
 
@@ -457,26 +456,10 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
-        public boolean zoom(float initialDistance, float distance) {
+        public boolean zoom(float x, float y, float amount) {
             try {
                 for (FDisplayObject listener : potentialListeners) {
-                    if (listener.zoom(initialDistance, distance)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            catch (Exception ex) {
-                BugReporter.reportException(ex);
-                return true;
-            }
-        }
-
-        @Override
-        public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-            try {
-                for (FDisplayObject listener : potentialListeners) {
-                    if (listener.pinch(initialPointer1, initialPointer2, pointer1, pointer2)) {
+                    if (listener.zoom(listener.screenToLocalX(x), listener.screenToLocalY(y), amount)) {
                         return true;
                     }
                 }
@@ -502,8 +485,8 @@ public class Forge implements ApplicationListener {
         public boolean scrolled(int amount) {
             updatePotentialListeners(mouseMovedX, mouseMovedY);
 
-            if (KeyInputAdapter.isCtrlKeyDown()) {
-                return zoom(10, 10);
+            if (KeyInputAdapter.isCtrlKeyDown()) { //zoom in or out based on amount
+                return zoom(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount);
             }
 
             boolean handled;

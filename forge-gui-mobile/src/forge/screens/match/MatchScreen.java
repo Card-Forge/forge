@@ -28,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FScrollPane;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
@@ -38,14 +39,15 @@ public class MatchScreen extends FScreen {
     private final VLog log;
     private final VStack stack;
     private final VDevMenu devMenu;
-
+    private final FieldScroller scroller;
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
     public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
         super(false, null); //match screen has custom header
 
+        scroller = add(new FieldScroller());
         for (VPlayerPanel playerPanel : playerPanels0) {
-            playerPanels.put(playerPanel.getPlayer(), add(playerPanel));
+            playerPanels.put(playerPanel.getPlayer(), scroller.add(playerPanel));
         }
         bottomPlayerPanel = playerPanels0.get(0);
         topPlayerPanel = playerPanels0.get(1);
@@ -115,58 +117,10 @@ public class MatchScreen extends FScreen {
     }
 
     @Override
-    public void drawBackground(Graphics g) {
-        super.drawBackground(g);
-        float midField = topPlayerPanel.getBottom();
-        float y = midField - topPlayerPanel.getField().getHeight();
-        float w = getWidth();
-
-        g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
-
-        //field separator lines
-        if (topPlayerPanel.getSelectedTab() == null) {
-            y++; //ensure border goes all the way across under avatar
-        }
-        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
-
-        y = midField;
-        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
-
-        y = midField + bottomPlayerPanel.getField().getHeight();
-        g.drawLine(1, BORDER_COLOR, 0, y, w, y);
-    }
-
-    @Override
     protected void doLayout(float startY, float width, float height) {
         menuBar.setBounds(0, 0, width, menuBar.getPreferredHeight());
         startY = menuBar.getHeight();
-
-        //determine player panel heights based on visibility of zone displays
-        float topPlayerPanelHeight, bottomPlayerPanelHeight;
-        float cardRowsHeight = height - startY - VPrompt.HEIGHT - 2 * VAvatar.HEIGHT;
-        if (topPlayerPanel.getSelectedTab() == null) {
-            if (bottomPlayerPanel.getSelectedTab() != null) {
-                topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
-                bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
-            }
-            else {
-                topPlayerPanelHeight = cardRowsHeight / 2f;
-                bottomPlayerPanelHeight = topPlayerPanelHeight;
-            }
-        }
-        else if (bottomPlayerPanel.getSelectedTab() == null) {
-            topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
-            bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
-        }
-        else {
-            topPlayerPanelHeight = cardRowsHeight / 2f;
-            bottomPlayerPanelHeight = topPlayerPanelHeight;
-        }
-        topPlayerPanelHeight += VAvatar.HEIGHT;
-        bottomPlayerPanelHeight += VAvatar.HEIGHT;
-
-        topPlayerPanel.setBounds(0, startY, width, topPlayerPanelHeight);
-        bottomPlayerPanel.setBounds(0, height - VPrompt.HEIGHT - bottomPlayerPanelHeight, width, bottomPlayerPanelHeight);
+        scroller.setBounds(0, startY, width, height - VPrompt.HEIGHT - startY);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }
 
@@ -210,5 +164,74 @@ public class MatchScreen extends FScreen {
             break;
         }
         return super.keyDown(keyCode);
+    }
+
+    private class FieldScroller extends FScrollPane {
+        private float extraHeight = 0;
+
+        @Override
+        public void drawBackground(Graphics g) {
+            super.drawBackground(g);
+            float midField = topPlayerPanel.getBottom();
+            float y = midField - topPlayerPanel.getField().getHeight();
+            float w = getWidth();
+
+            g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+
+            //field separator lines
+            if (topPlayerPanel.getSelectedTab() == null) {
+                y++; //ensure border goes all the way across under avatar
+            }
+            g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+
+            y = midField;
+            g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+
+            y = midField + bottomPlayerPanel.getField().getHeight();
+            g.drawLine(1, BORDER_COLOR, 0, y, w, y);
+        }
+
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            float totalHeight = visibleHeight + extraHeight;
+
+            //determine player panel heights based on visibility of zone displays
+            float topPlayerPanelHeight, bottomPlayerPanelHeight;
+            float cardRowsHeight = totalHeight - 2 * VAvatar.HEIGHT;
+            if (topPlayerPanel.getSelectedTab() == null) {
+                if (bottomPlayerPanel.getSelectedTab() != null) {
+                    topPlayerPanelHeight = cardRowsHeight * 2f / 5f;
+                    bottomPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+                }
+                else {
+                    topPlayerPanelHeight = cardRowsHeight / 2f;
+                    bottomPlayerPanelHeight = topPlayerPanelHeight;
+                }
+            }
+            else if (bottomPlayerPanel.getSelectedTab() == null) {
+                topPlayerPanelHeight = cardRowsHeight * 3f / 5f;
+                bottomPlayerPanelHeight = cardRowsHeight * 2f / 5f;
+            }
+            else {
+                topPlayerPanelHeight = cardRowsHeight / 2f;
+                bottomPlayerPanelHeight = topPlayerPanelHeight;
+            }
+            topPlayerPanelHeight += VAvatar.HEIGHT;
+            bottomPlayerPanelHeight += VAvatar.HEIGHT;
+
+            topPlayerPanel.setBounds(0, 0, visibleWidth, topPlayerPanelHeight);
+            bottomPlayerPanel.setBounds(0, totalHeight - bottomPlayerPanelHeight, visibleWidth, bottomPlayerPanelHeight);
+            return new ScrollBounds(visibleWidth, totalHeight);
+        }
+
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            extraHeight += amount;
+            if (extraHeight < 0) {
+                extraHeight = 0;
+            }
+            revalidate();
+            return true;
+        }
     }
 }

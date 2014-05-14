@@ -19,8 +19,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean fling(float velocityX, float velocityY);
     public abstract boolean pan(float x, float y, float deltaX, float deltaY);
     public abstract boolean panStop(float x, float y);
-    public abstract boolean zoom(float initialDistance, float distance);
-    public abstract boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2);
+    public abstract boolean zoom(float x, float y, float amount);
 
     private float tapSquareSize, pressDelay, longPressDelay, quickTapDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
     private long tapCountInterval, flingDelay, lastTapTime, gestureStartTime;
@@ -145,8 +144,8 @@ public abstract class FGestureAdapter extends InputAdapter {
 
         // handle pinch zoom
         if (pinching) {
-            boolean result = pinch(initialPointer1, initialPointer2, pointer1, pointer2);
-            return zoom(initialPointer1.dst(initialPointer2), pointer1.dst(pointer2)) || result;
+            Vector2 focalPoint = Utils.getIntersection(pointer1, pointer2, initialPointer1, initialPointer2);
+            return zoom(focalPoint.x, focalPoint.y, pointer1.dst(pointer2) - initialPointer1.dst(initialPointer2));
         }
 
         // update tracker

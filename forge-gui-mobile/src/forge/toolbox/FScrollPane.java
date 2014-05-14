@@ -252,8 +252,7 @@ public abstract class FScrollPane extends FContainer {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        setScrollPositions(scrollLeft - deltaX, scrollTop - deltaY);
-        return true;
+        return setScrollPositions(scrollLeft - deltaX, scrollTop - deltaY);
     }
 
     @Override
