@@ -5,6 +5,7 @@ PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Constellation - When CARDNAME or another enchantment enters the battlefield under your control, creatures you control gain trample until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Constellation - When CARDNAME or another enchantment enters the battlefield under your control, creatures you control gain trample until end of turn.
 SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Trample | SpellDescription$ Creatures you control gain trample until end of turn.
+SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/humbler_of_mortals.jpg
 Oracle:Constellation - Whenever Humbler of Mortals or another enchantment enters the battlefield under your control, creatures you control gain trample until end of turn.
