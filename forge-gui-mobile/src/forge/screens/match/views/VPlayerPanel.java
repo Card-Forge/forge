@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
@@ -195,13 +196,25 @@ public class VPlayerPanel extends FContainer {
     }
 
     private class LifeLabel extends FDisplayObject {
-        private String life = "20";
+        private int life = 20;
+        private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
         }
 
         private void update() {
-            life = String.valueOf(player.getLife());
+            int delta = player.getLife() - life;
+            if (delta == 0) { return; }
+
+            if (delta < 0) {
+                //TODO: Show animation on avatar for life loss
+                if (player.getLobbyPlayer() == FControl.getGuiPlayer()) {
+                    //when gui player loses life, vibrate device for a length of time based on amount of life lost
+                    Gdx.input.vibrate(Math.min(delta * -100, 2000)); //never vibrate more than two seconds regardless of life lost
+                }
+            }
+            life = player.getLife();
+            lifeStr = String.valueOf(life);
         }
 
         @Override
@@ -212,7 +225,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
-            g.drawText(life, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
+            g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
         }
     }
 

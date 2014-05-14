@@ -48,7 +48,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             if (!longPressed) {
                 longPressed = true;
                 if (longPress(pointer1.x, pointer1.y)) {
-                    Gdx.input.vibrate(100); //perform a quick vibrate to signify a successful long press
+                    Gdx.input.vibrate(50); //perform a quick vibrate to signify a successful long press
                     endPress(pointer1.x, pointer1.y); //end press immediately if long press handled
                     longPressHandled = true;
                 }
