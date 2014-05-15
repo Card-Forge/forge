@@ -3260,6 +3260,21 @@ public class CardFactoryUtil {
             
             ripplePos = hasKeyword(card, "Ripple", n + 1);
         } // Ripple
+
+        final int dethrone = card.getKeywordAmount("Dethrone");
+        for (int i = 0; i < dethrone; i++) {
+            final StringBuilder trigScript = new StringBuilder(
+                    "Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | "
+                    + "TriggerZones$ Battlefield | Execute$ DethroneCounters | TriggerDescription$"
+                    + " Dethrone (Whenever this creature attacks the player with the most life or "
+                    + "tied for the most life, put a +1/+1 counter on it.)");
+
+            final String abString = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
+                    + "CounterNum$ 1";
+            card.setSVar("DethroneCounters", abString);
+            final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
+            card.addTrigger(cascadeTrigger);
+        } // Cascade
     }
 
 

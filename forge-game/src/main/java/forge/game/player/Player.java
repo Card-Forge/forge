@@ -2445,14 +2445,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else if (property.startsWith("withMost")) {
             if (property.substring(8).equals("Life")) {
                 int highestLife = this.getLife(); // Negative base just in case a few Lich's are running around
-                Player healthiest = this;
                 for (final Player p : game.getPlayers()) {
                     if (p.getLife() > highestLife) {
                         highestLife = p.getLife();
-                        healthiest = p;
                     }
                 }
-                if (!this.equals(healthiest)) {
+                if (this.getLife() != highestLife) {
                     return false;
                 }
             }
