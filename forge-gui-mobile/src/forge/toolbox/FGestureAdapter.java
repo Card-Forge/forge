@@ -31,8 +31,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     private final Vector2 pointer2 = new Vector2();
     private final Vector2 prevPointer1 = new Vector2();
     private final Vector2 prevPointer2 = new Vector2();
-    private final Vector2 initialPointer1 = new Vector2();
-    private final Vector2 initialPointer2 = new Vector2();
+    private final Vector2 focalPoint = new Vector2();
 
     private final Task pressTask = new Task() {
         @Override
@@ -40,6 +39,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             if (!pressed) {
                 pressed = true;
                 press(pointer1.x, pointer1.y);
+                Gdx.graphics.requestRendering();
             }
         }
     };
@@ -63,6 +63,7 @@ public abstract class FGestureAdapter extends InputAdapter {
                 quickTapped = false;
                 endPress(lastTapX, lastTapY);
                 tap(lastTapX, lastTapY, tapCount);
+                Gdx.graphics.requestRendering();
             }
         }
     };
@@ -107,8 +108,7 @@ public abstract class FGestureAdapter extends InputAdapter {
                 pinching = true;
                 prevPointer1.set(pointer1);
                 prevPointer2.set(pointer2);
-                initialPointer1.set(pointer1);
-                initialPointer2.set(pointer2);
+                focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
                 endPress(x, y);
             }
             else {
@@ -127,8 +127,7 @@ public abstract class FGestureAdapter extends InputAdapter {
             pinching = true;
             prevPointer1.set(pointer1);
             prevPointer2.set(pointer2);
-            initialPointer1.set(pointer1);
-            initialPointer2.set(pointer2);
+            focalPoint.set(Utils.getMidpoint(pointer1, pointer2));
             endPress(pointer1.x, pointer1.y);
         }
         return true;
@@ -152,7 +151,6 @@ public abstract class FGestureAdapter extends InputAdapter {
 
         // handle pinch zoom
         if (pinching) {
-            Vector2 focalPoint = Utils.getIntersection(pointer1, pointer2, initialPointer1, initialPointer2);
             return zoom(focalPoint.x, focalPoint.y, pointer1.dst(pointer2) - prevPointer1.dst(prevPointer2));
         }
 

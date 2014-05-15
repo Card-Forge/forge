@@ -84,8 +84,13 @@ public class Utils {
         }
 
         //if lines are parallel or don't intersect, just return the midpoint of first line
-        result.x = (l1p1.x + l1p2.x) / 2;
-        result.y = (l1p1.y + l1p2.y) / 2;
+        return getMidpoint(l1p1, l1p2);
+    }
+
+    public static Vector2 getMidpoint(Vector2 p1, Vector2 p2) {
+        Vector2 result = new Vector2();
+        result.x = (p1.x + p2.x) / 2;
+        result.y = (p1.y + p2.y) / 2;
         return result;
     }
 }
