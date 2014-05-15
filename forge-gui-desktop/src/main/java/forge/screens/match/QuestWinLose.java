@@ -512,6 +512,7 @@ public class QuestWinLose extends ControlWinLose {
         int currentStreak = (qData.getAchievements().getWinStreakCurrent() + 1) % 50;
 
         final List<PaperCard> cardsWon = new ArrayList<>();
+        List<PaperCard> cardsToAdd;
         String typeWon = "";
         
         switch (currentStreak) {
@@ -528,8 +529,9 @@ public class QuestWinLose extends ControlWinLose {
                 typeWon = "rare";
                 break;
             case 10:
-                cardsWon.addAll(qData.getCards().addRandomMythicRare(1));
-                if (cardsWon.size() > 0) {
+                cardsToAdd = qData.getCards().addRandomMythicRare(1);
+                if (cardsToAdd != null) {
+                    cardsWon.addAll(cardsToAdd);
                     typeWon = "mythic rare";
                 } else {
                     cardsWon.addAll(qData.getCards().addRandomRareNotMythic(5));
@@ -537,8 +539,9 @@ public class QuestWinLose extends ControlWinLose {
                 }
                 break;
             case 25:
-                cardsWon.addAll(qData.getCards().addRandomMythicRare(5));
-                if (cardsWon.size() > 0) {
+                cardsToAdd = qData.getCards().addRandomMythicRare(5);
+                if (cardsToAdd != null) {
+                    cardsWon.addAll(cardsToAdd);
                     typeWon = "mythic rare";
                 } else {
                     cardsWon.addAll(qData.getCards().addRandomRareNotMythic(15));
@@ -546,8 +549,9 @@ public class QuestWinLose extends ControlWinLose {
                 }
                 break;
             case 0: //The 50th win in the streak is 0, since (50 % 50 == 0)
-                cardsWon.addAll(qData.getCards().addRandomMythicRare(10));
-                if (cardsWon.size() > 0) {
+                cardsToAdd = qData.getCards().addRandomMythicRare(10);
+                if (cardsToAdd != null) {
+                    cardsWon.addAll(cardsToAdd);
                     typeWon = "mythic rare";
                 } else {
                     cardsWon.addAll(qData.getCards().addRandomRareNotMythic(25));

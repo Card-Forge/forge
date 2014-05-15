@@ -278,9 +278,16 @@ public final class QuestUtilCards {
     public List<PaperCard> addRandomMythicRare(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.MYTHIC_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
+        final Iterable<PaperCard> cardPool = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), myFilter);
+        
+        if (!cardPool.iterator().hasNext()) {
+            return null;
+        }
+        
+        final List<PaperCard> newCards = Aggregates.random(cardPool, n);
         this.addAllCards(newCards);
         return newCards;
+        
     }
 
     /**
