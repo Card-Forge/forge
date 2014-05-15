@@ -1,7 +1,7 @@
 Name:Soul Nova
 ManaCost:3 W W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Targeted.Equipment+Attached | Origin$ Battlefield | Destination$ Exile
+A:SP$ Pump | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Targeted.Self,Equipment.AttachedTo Targeted | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_nova.jpg
 Oracle:Exile target attacking creature and all Equipment attached to it.
