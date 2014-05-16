@@ -76,6 +76,14 @@ public class StaticAbilityCantTarget {
             return false;
         }
 
+        if (params.containsKey("SourceCanOnlyTarget")
+                && (!spellAbility.getParam("ValidTgts").contains(params.get("SourceCanOnlyTarget"))
+                    || spellAbility.getParam("ValidTgts").contains(","))
+                    || spellAbility.getParam("ValidTgts").contains("non" + params.get("SourceCanOnlyTarget"))) {
+            return false;
+        }
+
+
         return true;
     }
 

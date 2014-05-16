@@ -14433,6 +14433,7 @@ forge-gui/res/cardsfolder/w/wall_of_razors.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wall_of_resistance.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wall_of_reverence.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/wall_of_roots.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/wall_of_shadows.txt -text
 forge-gui/res/cardsfolder/w/wall_of_shards.txt -text
 forge-gui/res/cardsfolder/w/wall_of_shields.txt -text
 forge-gui/res/cardsfolder/w/wall_of_souls.txt svneol=native#text/plain
