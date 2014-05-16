@@ -22,13 +22,14 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
     private final Map<Card, ImmutablePair<Byte, ManaCostShard>> chosenCards = new HashMap<Card, ImmutablePair<Byte, ManaCostShard>>();
     private final ManaCostBeingPaid remainingCost;
     private final Player player;
+    private final List<Card> availableCreatures;
     
     public InputSelectCardsForConvoke(Player p, ManaCost cost, List<Card> untapped) { 
         super(0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
         allowUnselect = true;
-        
+        availableCreatures = untapped;
     }
 
     
@@ -38,6 +39,12 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
 
     @Override
     protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+        if (!availableCreatures.contains(card)) {
+            // Not in untapped creatures list provided. Not a legal Convoke selection.
+            flashIncorrectAction();
+            return;
+        }
+
         boolean entityWasSelected = chosenCards.containsKey(card);
         if (entityWasSelected) {
             ImmutablePair<Byte, ManaCostShard> color = this.chosenCards.remove(card);
