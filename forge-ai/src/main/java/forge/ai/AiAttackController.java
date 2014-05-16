@@ -808,9 +808,9 @@ public class AiAttackController {
         // variable names
         if (ratioDiff > 0 && doAttritionalAttack) {
             this.aiAggression = 5; // attack at all costs
-        } else if (ratioDiff >= 1 && computerForces > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
+        } else if (ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
             this.aiAggression = 4; // attack expecting to trade or damage player.
-        } else if (ratioDiff >= 0 && computerForces > 1) {
+        } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.
         } else if (ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
                 || ratioDiff * -1 < turnsUntilDeathByUnblockable) {
