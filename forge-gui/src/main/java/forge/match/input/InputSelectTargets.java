@@ -104,33 +104,33 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
-            return;
+            return false;
         }
         
         // leave this in temporarily, there some seriously wrong things going on here
         // Can be targeted doesn't check if the target is a valid type, only if a card is generally "targetable"
         if (!card.canBeTargetedBy(sa)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
-            return;
+            return false;
         }
         // If all cards must be from the same zone
         if (tgt.isSingleZone() && lastTarget != null && !card.getController().equals(lastTarget.getController())) {
             showMessage(sa.getHostCard() + " - Cannot target this card (not in the same zone)");
-            return;
+            return false;
         }
 
         // If all cards must be from different zones
         if (tgt.isDifferentZone() && lastTarget != null && !card.getController().equals(lastTarget.getController().getOpponent())) {
             showMessage(sa.getHostCard() + " - Cannot target this card (not in different zones)");
-            return;
+            return false;
         }
 
         // If the cards can't share a creature type
         if (tgt.isWithoutSameCreatureType() && lastTarget != null && card.sharesCreatureTypeWith(lastTarget)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (should not share a creature type)");
-            return;
+            return false;
         }
 
         // If all cards must have different controllers
@@ -144,17 +144,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
             if (targetedControllers.contains(card.getController())) {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have different controllers)");
-                return;
+                return false;
             }
         }
 
         if (!choices.contains(card)) {
             if (card.isPlaneswalker() && sa.getApi() == ApiType.DealDamage) {
                 showMessage(sa.getHostCard() + " - To deal an opposing Planeswalker direct damage, target its controller and then redirect the damage on resolution.");
-            } else {
+            }
+            else {
                 showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
             }
-            return;
+            return false;
         }
         
         if (tgt.isDividedAsYouChoose()) {
@@ -179,8 +180,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 sb.append(apiBasedMessage);
                 sb.append(card.toString());
                 Integer chosen = SGuiChoose.oneOrNone(sb.toString(), choices);
-                if (null == chosen) {
-                    return;
+                if (chosen == null) {
+                    return true; //still return true since there was a valid choice
                 }
                 allocatedPortion = chosen;
             } else { // otherwise assign the rest of the damage/protection
@@ -190,6 +191,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             tgt.addDividedAllocation(card, allocatedPortion);
         }
         addTarget(card);
+        return true;
     } // selectCard()
 
     @Override

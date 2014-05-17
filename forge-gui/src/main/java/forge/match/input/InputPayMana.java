@@ -49,13 +49,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     @Override
-    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         if (card.getManaAbility().isEmpty()) {
             flashIncorrectAction();
-            return;
+            return false;
         }
         // only tap card if the mana is needed
-        activateManaAbility(card, this.manaCost);
+        return activateManaAbility(card, this.manaCost);
     }
 
     @Override
@@ -123,18 +123,18 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      *            a {@link forge.game.mana.ManaCostBeingPaid} object.
      * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
      */
-    protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
-        activateManaAbility(card, manaCost, null);
+    protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
+        return activateManaAbility(card, manaCost, null);
     }
-    protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost, SpellAbility chosenAbility) {
-        if ( locked ) {
+    protected boolean activateManaAbility(final Card card, ManaCostBeingPaid manaCost, SpellAbility chosenAbility) {
+        if (locked) {
             System.err.print("Should wait till previous call to playAbility finishes.");
-            return;
+            return false;
         }
         
         // make sure computer's lands aren't selected
         if (card.getController() != player) {
-            return;
+            return false;
         }
 
         byte colorCanUse = 0;
@@ -149,7 +149,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         if (colorCanUse == 0) { // no mana cost or something 
-            return;
+            return false;
         }
         
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
@@ -157,7 +157,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         final String typeRes = manaCost.getSourceRestriction();
         if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
-            return;
+            return false;
         }
 
         boolean guessAbilityWithRequiredColors = true;
@@ -179,7 +179,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         if (abilities.isEmpty() || (chosenAbility != null && !abilities.contains(chosenAbility))) {
-            return;
+            return false;
         }
 
         // Store some information about color costs to help with any mana choices
@@ -251,6 +251,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         };
         locked = true;
         game.getAction().invoke(proc);
+        return true;
     }
 
     /**

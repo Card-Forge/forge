@@ -60,15 +60,16 @@ public class InputPassPriority extends InputSyncronizedBase {
     public SpellAbility getChosenSa() { return chosenSa; }
 
     @Override
-    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         //remove unplayable unless triggerEvent specified, in which case unplayable may be shown as disabled options
     	List<SpellAbility> abilities = card.getAllPossibleAbilities(player, triggerEvent == null); 
     	if (abilities.isEmpty()) {
             flashIncorrectAction();
-            return;
+            return false;
     	}
 
     	selectAbility(player.getController().getAbilityToPlay(abilities, triggerEvent));
+    	return true;
     }
     
     @Override

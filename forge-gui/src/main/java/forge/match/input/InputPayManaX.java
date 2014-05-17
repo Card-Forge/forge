@@ -92,9 +92,9 @@ public class InputPayManaX extends InputPayMana {
     }
 
     @Override
-    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         // don't allow here the cards that produce only wrong colors
-        activateManaAbility(card, this.manaCost);
+        return activateManaAbility(card, this.manaCost);
     }
 
     @Override

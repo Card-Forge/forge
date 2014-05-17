@@ -9,7 +9,7 @@ import forge.util.ITriggerEvent;
 public interface Input {
     void showMessageInitial();
 
-    void selectCard(Card c, ITriggerEvent triggerEvent);
+    boolean selectCard(Card c, ITriggerEvent triggerEvent);
     
     void selectAbility(SpellAbility ab);
 

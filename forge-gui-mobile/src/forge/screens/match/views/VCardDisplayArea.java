@@ -173,10 +173,26 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                 @Override
                 public void run() {
-                    FControl.getInputProxy().selectCard(getCard(), null);
+                    if (!selectCard()) {
+                        //if no cards in stack can be selected, just show zoom/details for card
+                        CardZoom.show(getCard());
+                    }
                 }
             });
             return true;
+        }
+
+        public boolean selectCard() {
+            if (FControl.getInputProxy().selectCard(getCard(), null)) {
+                return true;
+            }
+            //if panel can't do anything with card selection, try selecting an attached panel
+            for (CardAreaPanel panel : attachedPanels) {
+                if (panel.selectCard()) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override

@@ -25,11 +25,12 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     }
  
     @Override
-    protected void onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
-            return;
+            return false;
         }
         refresh();
+        return true;
     }
 
     @Override

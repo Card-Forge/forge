@@ -59,10 +59,20 @@ public class InputLockUI implements Input  {
         GuiBase.getInterface().showPromptMessage(message);
     }
 
-    @Override public void selectCard(Card c, ITriggerEvent triggerEvent) {}
-    @Override public void selectAbility(SpellAbility ab) {}
-    @Override public void selectPlayer(Player player, ITriggerEvent triggerEvent) {}
-    @Override public void selectButtonOK() {}
-    @Override public void selectButtonCancel() {}
-
+    @Override
+    public boolean selectCard(Card c, ITriggerEvent triggerEvent) {
+        return false;
+    }
+    @Override
+    public void selectAbility(SpellAbility ab) {
+    }
+    @Override
+    public void selectPlayer(Player player, ITriggerEvent triggerEvent) {
+    }
+    @Override
+    public void selectButtonOK() {
+    }
+    @Override
+    public void selectButtonCancel() {
+    }
 }

@@ -69,7 +69,7 @@ public class InputAttack extends InputSyncronizedBase {
 
         setCurrentDefender(defenders.isEmpty() ? null : defenders.get(0));
 
-        if ( null == currentDefender ) {
+        if (null == currentDefender) {
             System.err.println("InputAttack has no potential defenders!");
             return; // should even throw here!
         }
@@ -77,8 +77,8 @@ public class InputAttack extends InputSyncronizedBase {
         List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
             if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
-                for(GameEntity def : defenders ) {
-                    if( CombatUtil.canAttack(c, def, combat) ) {
+                for(GameEntity def : defenders) {
+                    if(CombatUtil.canAttack(c, def, combat)) {
                         combat.addAttacker(c, currentDefender);
                         GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, currentDefender));
                         break;
@@ -123,7 +123,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    protected final void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
         if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
                 && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
@@ -135,32 +135,37 @@ public class InputAttack extends InputSyncronizedBase {
             this.activateBand(null);
 
             GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, null));
-            return;
+            return true;
         }
 
         if (combat.isAttacking(card, currentDefender)) {
             // Activate band by selecting/deselecting a band member
+            boolean validAction = true;
             if (this.activeBand == null) {
                 this.activateBand(combat.getBandOfAttacker(card));
-            } else if (this.activeBand.getAttackers().contains(card)) {
+            }
+            else if (this.activeBand.getAttackers().contains(card)) {
                 this.activateBand(null);
-            } else { // Join a band by selecting a non-active band member after activating a band
+            }
+            else { // Join a band by selecting a non-active band member after activating a band
                 if (this.activeBand.canJoinBand(card)) {
                     combat.removeFromCombat(card);
                     declareAttacker(card);
-                } else {
+                }
+                else {
                     flashIncorrectAction();
+                    validAction = false;
                 }
             }
 
             updateMessage();
-            return;
+            return validAction;
         }
 
-        if ( card.getController().isOpponentOf(playerAttacks) ) {
-            if ( defenders.contains(card) ) { // planeswalker?
+        if (card.getController().isOpponentOf(playerAttacks)) {
+            if (defenders.contains(card)) { // planeswalker?
                 setCurrentDefender(card);
-                return;
+                return true;
             }
         }
 
@@ -169,7 +174,7 @@ public class InputAttack extends InputSyncronizedBase {
                 this.activateBand(null);
                 updateMessage();
                 flashIncorrectAction();
-                return;
+                return false;
             }
 
             if(combat.isAttacking(card)) {
@@ -178,12 +183,12 @@ public class InputAttack extends InputSyncronizedBase {
 
             declareAttacker(card);
             showCombat();
+            return true;
         }
-        else {
-            flashIncorrectAction();
-        }
-    } // selectCard()
 
+        flashIncorrectAction();
+        return false;
+    }
 
     /**
      * TODO: Write javadoc for this method.
@@ -199,8 +204,8 @@ public class InputAttack extends InputSyncronizedBase {
 
     private final void setCurrentDefender(GameEntity def) {
         currentDefender = def;
-        for( GameEntity ge: defenders ) {
-            if ( ge instanceof Card) {
+        for(GameEntity ge: defenders) {
+            if (ge instanceof Card) {
                 GuiBase.getInterface().setUsedToPay((Card)ge, ge == def);
             }
             else if (ge instanceof Player) {

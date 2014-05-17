@@ -727,11 +727,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 private static final long serialVersionUID = 8338626212893374798L;
 
                 @Override
-                protected void onCardSelected(Card c, ITriggerEvent triggerEvent) {
+                protected boolean onCardSelected(Card c, ITriggerEvent triggerEvent) {
                     Card firstCard = Iterables.getFirst(this.selected, null);
-                    if(firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c))
-                        return;
-                    super.onCardSelected(c, triggerEvent);
+                    if (firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c)) {
+                        return false;
+                    }
+                    return super.onCardSelected(c, triggerEvent);
                 }
             };
             inp.setMessage("Select " + Lang.nounWithAmount(num, "card" ) + " of same color to reveal.");
@@ -817,9 +818,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         @Override
-        protected void onCardSelected(Card c, ITriggerEvent triggerEvent) {
+        protected boolean onCardSelected(Card c, ITriggerEvent triggerEvent) {
             if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
-                return;
+                return false;
             }
 
             int tc = getTimesSelected(c);
@@ -827,6 +828,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
             onSelectStateChanged(c, true);
             refresh();
+            return true;
         };
 
         @Override

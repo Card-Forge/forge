@@ -136,11 +136,12 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.card.Card} object.
      * @param triggerEvent
      */
-    public final void selectCard(final Card card, final ITriggerEvent triggerEvent) {
+    public final boolean selectCard(final Card card, final ITriggerEvent triggerEvent) {
         Input inp = getInput();
         if (inp != null) {
-            inp.selectCard(card, triggerEvent);
+            return inp.selectCard(card, triggerEvent);
         }
+        return false;
     }
 
     public final void selectAbility(SpellAbility ab) {

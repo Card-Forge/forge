@@ -42,9 +42,9 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         if (!card.hasCounters()) {
-            return;
+            return false;
         }
         
         boolean entityWasSelected = chosenCounters.containsKey(card);
@@ -64,6 +64,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
         }
 
         refresh();
+        return true;
     }
 
     @Override

@@ -71,12 +71,14 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public final void selectCard(final Card c, final ITriggerEvent triggerEvent) {
-        if (isFinished()) { return; }
-        onCardSelected(c, triggerEvent);
+    public final boolean selectCard(final Card c, final ITriggerEvent triggerEvent) {
+        if (isFinished()) { return false; }
+        return onCardSelected(c, triggerEvent);
     }
 
-    protected void onCardSelected(final Card c, final ITriggerEvent triggerEvent) {}
+    protected boolean onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
+        return false;
+    }
     protected void onPlayerSelected(final Player p, final ITriggerEvent triggerEvent) {}
     protected void onCancel() {}
     protected void onOk() {}

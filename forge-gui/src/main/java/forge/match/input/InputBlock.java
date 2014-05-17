@@ -97,22 +97,24 @@ public class InputBlock extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+    public final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
+        boolean isCorrectAction = false;
         if (triggerEvent != null && triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, (Card)null));
-        } else {
+            isCorrectAction = true;
+        }
+        else {
             // is attacking?
-            boolean isCorrectAction = false;
-
             if (combat.isAttacking(card)) {
                 setCurrentAttacker(card);
                 isCorrectAction = true;
-            } else {
+            }
+            else {
                 // Make sure this card is valid to even be a blocker
                 if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
                     isCorrectAction = CombatUtil.canBlock(this.currentAttacker, card, combat);
-                    if ( isCorrectAction ) {
+                    if (isCorrectAction) {
                         combat.addBlocker(this.currentAttacker, card);
                         GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
                     }
@@ -124,8 +126,8 @@ public class InputBlock extends InputSyncronizedBase {
             }
         }
         this.showMessage();
-    } // selectCard()
-
+        return isCorrectAction;
+    }
 
     private void setCurrentAttacker(Card card) {
         currentAttacker = card;
