@@ -106,6 +106,10 @@ public class VManaPool extends VDisplayArea {
                 h /= 2;
             }
             float w = image.getWidth() * h / image.getHeight();
+            while (w > getWidth()) {
+                h /= 2;
+                w = image.getWidth() * h / image.getHeight();
+            }
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
 

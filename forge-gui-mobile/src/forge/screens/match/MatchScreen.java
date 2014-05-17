@@ -17,6 +17,7 @@ import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
+import forge.screens.match.views.VManaPool;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
@@ -280,6 +281,9 @@ public class MatchScreen extends FScreen {
             backupHorzScrollPane(playerPanel.getField().getRow1(), x, horzScrollPanes);
             backupHorzScrollPane(playerPanel.getField().getRow2(), x, horzScrollPanes);
             for (InfoTab tab : playerPanel.getTabs()) {
+                if (tab.getDisplayArea() instanceof VManaPool) {
+                    continue; //don't include Mana pool in this
+                }
                 backupHorzScrollPane(tab.getDisplayArea(), x, horzScrollPanes);
             }
         }
