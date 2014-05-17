@@ -171,6 +171,14 @@ public class VField extends FContainer {
         toPanel.setCard(toPanel.getCard());
     }
 
+    public FieldRow getRow1() {
+        return row1;
+    }
+
+    public FieldRow getRow2() {
+        return row2;
+    }
+
     @Override
     public void clear() {
         row1.clear(); //clear rows instead of removing the rows
@@ -193,7 +201,7 @@ public class VField extends FContainer {
         row2.setBounds(0, y2, width, cardSize);
     }
 
-    private class FieldRow extends VCardDisplayArea {
+    public class FieldRow extends VCardDisplayArea {
         private FieldRow() {
             setVisible(true); //make visible by default unlike other display areas
         }

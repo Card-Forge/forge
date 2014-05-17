@@ -3,6 +3,9 @@ package forge.screens.match;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
 
@@ -15,6 +18,7 @@ import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
 import forge.screens.match.views.VPlayerPanel;
+import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
@@ -226,18 +230,48 @@ public class MatchScreen extends FScreen {
 
         @Override
         public boolean zoom(float x, float y, float amount) {
+            //adjust position for current scroll positions
+            float oldScrollHeight = getScrollHeight();
             y += getScrollTop();
-            float yRatioBefore = (y + getScrollTop()) / getScrollHeight();
+
+            //build map of all horizontal scroll panes and their current scrollWidths and adjusted X values
+            Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<FScrollPane, Pair<Float, Float>>();
+            backupHorzScrollPanes(topPlayerPanel, x, horzScrollPanes);
+            backupHorzScrollPanes(bottomPlayerPanel, x, horzScrollPanes);
 
             extraHeight += amount;
             if (extraHeight < 0) {
                 extraHeight = 0;
             }
-            revalidate();
+            revalidate(); //apply change in height to all scroll panes
 
-            float yRatioAfter = (y + getScrollTop()) / getScrollHeight();
-            
+            //adjust scroll top to keep y position the same
+            float newScrollHeight = getScrollHeight();
+            float yAfter = y * newScrollHeight / oldScrollHeight;
+            setScrollTop(getScrollTop() + yAfter - y);
+
+            //adjust scroll left of all horizontal scroll panes to keep x position the same
+            for (Entry<FScrollPane, Pair<Float, Float>> entry : horzScrollPanes.entrySet()) {
+                FScrollPane horzScrollPane = entry.getKey();
+                x = entry.getValue().getRight();
+                float oldScrollWidth = entry.getValue().getLeft();
+                float newScrollWidth = horzScrollPane.getScrollWidth();
+                float xAfter = x * newScrollWidth / oldScrollWidth;
+                horzScrollPane.setScrollLeft(horzScrollPane.getScrollLeft() + xAfter - x);
+            }
+
             return true;
+        }
+
+        private void backupHorzScrollPanes(VPlayerPanel playerPanel, float x, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
+            backupHorzScrollPane(playerPanel.getField().getRow1(), x, horzScrollPanes);
+            backupHorzScrollPane(playerPanel.getField().getRow2(), x, horzScrollPanes);
+            for (InfoTab tab : playerPanel.getTabs()) {
+                backupHorzScrollPane(tab.getDisplayArea(), x, horzScrollPanes);
+            }
+        }
+        private void backupHorzScrollPane(FScrollPane scrollPane, float x, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
+            horzScrollPanes.put(scrollPane, Pair.of(scrollPane.getScrollWidth(), x + scrollPane.getScrollLeft()));
         }
     }
 }

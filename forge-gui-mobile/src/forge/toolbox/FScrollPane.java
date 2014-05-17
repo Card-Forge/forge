@@ -261,12 +261,12 @@ public abstract class FScrollPane extends FContainer {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
-        if (getMaxScrollTop() == 0 && (moreVertical || y < 0 || y >= getHeight() || Math.abs(deltaY) > Math.abs(deltaX))) {
+        if (getMaxScrollTop() <= 0 && (moreVertical || y < 0 || y >= getHeight() || Math.abs(deltaY) > Math.abs(deltaX))) {
             //if can't scroll vertically, don't scroll at all if pan is more vertical
             //or current position is above or below this scroll pane
             return false;
         }
-        if (getMaxScrollLeft() == 0 && (!moreVertical || x < 0 || x >= getWidth() || Math.abs(deltaX) > Math.abs(deltaY))) {
+        if (getMaxScrollLeft() <= 0 && (!moreVertical || x < 0 || x >= getWidth() || Math.abs(deltaX) > Math.abs(deltaY))) {
             //if can't scroll horizontally, don't scroll at all if pan is more horizontal
             //or current position is left or right of this scroll pane
             return false;

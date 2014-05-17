@@ -73,6 +73,10 @@ public class VPlayerPanel extends FContainer {
         tabs.add(zoneTab);
     }
 
+    public Iterable<InfoTab> getTabs() {
+        return tabs;
+    }
+
     public InfoTab getSelectedTab() {
         return selectedTab;
     }
@@ -237,6 +241,10 @@ public class VPlayerPanel extends FContainer {
         private InfoTab(FSkinImage icon0, VDisplayArea displayArea0) {
             icon = icon0;
             displayArea = displayArea0;
+        }
+
+        public VDisplayArea getDisplayArea() {
+            return displayArea;
         }
 
         @Override
