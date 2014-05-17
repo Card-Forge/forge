@@ -14,6 +14,7 @@ import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -140,6 +141,13 @@ public class DestroyAi extends SpellAbilityAi {
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
                         if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {
+                            return false;
+                        }
+                    }
+                    if ("Pongify".equals(logic)) {
+                        Card token = TokenAi.spawnToken(ai.getOpponent(), sa.getSubAbility());
+                        if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) ||    //prevent surprise combatant
+                                ComputerUtilCard.evaluateCreature(choice) < 1.5 * ComputerUtilCard.evaluateCreature(token)) {
                             return false;
                         }
                     }
