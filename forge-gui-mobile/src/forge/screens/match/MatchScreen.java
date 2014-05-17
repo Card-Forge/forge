@@ -250,8 +250,18 @@ public class MatchScreen extends FScreen {
 
             //adjust scroll top to keep y position the same
             float newScrollHeight = getScrollHeight() - staticHeight;
-            float yAfter = y * newScrollHeight / oldScrollHeight;
+            float ratio = newScrollHeight / oldScrollHeight;
+            float yAfter = y * ratio;
             setScrollTop(oldScrollTop + yAfter - y);
+
+            //make scroll panes wide enough to support scrolling cards into view
+            zoom = newScrollHeight / (getHeight() - staticHeight);
+            for (FScrollPane scrollPane : horzScrollPanes.keySet()) {
+                float minScrollWidth = scrollPane.getWidth() * zoom;
+                if (scrollPane.getScrollWidth() < minScrollWidth) {
+                    scrollPane.setScrollWidth(minScrollWidth);
+                }
+            }
 
             //adjust scroll left of all horizontal scroll panes to keep x position the same
             float startX = x;
@@ -259,9 +269,7 @@ public class MatchScreen extends FScreen {
                 FScrollPane horzScrollPane = entry.getKey();
                 float oldScrollLeft = entry.getValue().getLeft();
                 x = startX + oldScrollLeft;
-                float oldScrollWidth = entry.getValue().getRight();
-                float newScrollWidth = horzScrollPane.getScrollWidth();
-                float xAfter = x * newScrollWidth / oldScrollWidth;
+                float xAfter = x * ratio;
                 horzScrollPane.setScrollLeft(oldScrollLeft + xAfter - x);
             }
 
