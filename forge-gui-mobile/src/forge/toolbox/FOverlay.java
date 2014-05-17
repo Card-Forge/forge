@@ -86,7 +86,7 @@ public abstract class FOverlay extends FContainer {
     }
 
     @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
         return true;
     }
 

@@ -99,7 +99,7 @@ public abstract class FDialog extends FOverlay {
         }
 
         @Override
-        public boolean pan(float x, float y, float deltaX, float deltaY) {
+        public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
             for (FDisplayObject child : FDialog.this.getChildren()) {
                 child.setLeft(child.getLeft() + deltaX);
                 child.setTop(child.getTop() + deltaY);

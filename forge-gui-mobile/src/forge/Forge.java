@@ -424,10 +424,10 @@ public class Forge implements ApplicationListener {
         }
 
         @Override
-        public boolean pan(float x, float y, float deltaX, float deltaY) {
+        public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
             try {
                 for (FDisplayObject listener : potentialListeners) {
-                    if (listener.pan(listener.screenToLocalX(x), listener.screenToLocalY(y), deltaX, deltaY)) {
+                    if (listener.pan(listener.screenToLocalX(x), listener.screenToLocalY(y), deltaX, deltaY, moreVertical)) {
                         return true;
                     }
                 }
@@ -491,10 +491,10 @@ public class Forge implements ApplicationListener {
 
             boolean handled;
             if (KeyInputAdapter.isShiftKeyDown()) {
-                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount, 0);
+                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amount, 0, false);
             }
             else {
-                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amount);
+                handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amount, true);
             }
             if (panStop(mouseMovedX, mouseMovedY)) {
                 handled = true;

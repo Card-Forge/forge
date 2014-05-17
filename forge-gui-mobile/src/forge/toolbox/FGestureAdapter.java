@@ -17,7 +17,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean release(float x, float y);
     public abstract boolean tap(float x, float y, int count);
     public abstract boolean fling(float velocityX, float velocityY);
-    public abstract boolean pan(float x, float y, float deltaX, float deltaY);
+    public abstract boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical);
     public abstract boolean panStop(float x, float y);
     public abstract boolean zoom(float x, float y, float amount);
 
@@ -166,7 +166,8 @@ public abstract class FGestureAdapter extends InputAdapter {
         // if we have left the tap square, we are panning
         if (!inTapSquare) {
             panning = true;
-            return pan(x, y, tracker.deltaX, tracker.deltaY);
+            boolean moreVertical = Math.abs(tracker.startY - y) > Math.abs(tracker.startX - x);
+            return pan(x, y, tracker.deltaX, tracker.deltaY, moreVertical);
         }
 
         return false;
@@ -279,6 +280,7 @@ public abstract class FGestureAdapter extends InputAdapter {
 
     private static class VelocityTracker {
         int sampleSize = 10;
+        float startX, startY;
         float lastX, lastY;
         float deltaX, deltaY;
         long lastTime;
@@ -288,6 +290,8 @@ public abstract class FGestureAdapter extends InputAdapter {
         long[] meanTime = new long[sampleSize];
 
         public void start(float x, float y, long timeStamp) {
+            startX = x;
+            startY = y;
             lastX = x;
             lastY = y;
             deltaX = 0;

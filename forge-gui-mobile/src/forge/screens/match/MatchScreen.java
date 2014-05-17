@@ -226,11 +226,17 @@ public class MatchScreen extends FScreen {
 
         @Override
         public boolean zoom(float x, float y, float amount) {
+            y += getScrollTop();
+            float yRatioBefore = (y + getScrollTop()) / getScrollHeight();
+
             extraHeight += amount;
             if (extraHeight < 0) {
                 extraHeight = 0;
             }
             revalidate();
+
+            float yRatioAfter = (y + getScrollTop()) / getScrollHeight();
+            
             return true;
         }
     }

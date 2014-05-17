@@ -95,7 +95,7 @@ public class FToggleSwitch extends FDisplayObject {
 
     //support dragging finger left or right to toggle on/off
     @Override
-    public final boolean pan(float x, float y, float deltaX, float deltaY) {
+    public final boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
         if (contains(getLeft() + x, getTop() + y)) {
             if (x < getHeight()) {
                 setToggled(false, true);

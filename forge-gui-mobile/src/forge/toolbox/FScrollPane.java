@@ -215,6 +215,15 @@ public abstract class FScrollPane extends FContainer {
 
     @Override
     public boolean fling(float velocityX, float velocityY) {
+        if (Math.abs(velocityY) > Math.abs(velocityX)) {
+            if (getMaxScrollTop() == 0) {
+                return false; //if fling is more vertical and can't scroll vertically, don't scroll at all
+            }
+        }
+        else if (getMaxScrollLeft() == 0) {
+            return false; //if fling is more horizontal and can't scroll horizontally, don't scroll at all
+        }
+
         velocityX = -velocityX; //reverse velocities to account for scroll moving in opposite direction
         velocityY = -velocityY;
 
@@ -226,7 +235,7 @@ public abstract class FScrollPane extends FContainer {
             activeFlingAnimation.physicsObj.getVelocity().set(velocityX, velocityY);
             activeFlingAnimation.physicsObj.setDecel(FLING_DECEL, FLING_DECEL);
         }
-        return false; //don't prevent outer scroll panes from working
+        return true;
     }
 
     @Override
@@ -251,9 +260,19 @@ public abstract class FScrollPane extends FContainer {
     }
 
     @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
+    public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+        if (getMaxScrollTop() == 0 && (moreVertical || y < 0 || y >= getHeight() || Math.abs(deltaY) > Math.abs(deltaX))) {
+            //if can't scroll vertically, don't scroll at all if pan is more vertical
+            //or current position is above or below this scroll pane
+            return false;
+        }
+        if (getMaxScrollLeft() == 0 && (!moreVertical || x < 0 || x >= getWidth() || Math.abs(deltaX) > Math.abs(deltaY))) {
+            //if can't scroll horizontally, don't scroll at all if pan is more horizontal
+            //or current position is left or right of this scroll pane
+            return false;
+        }
         setScrollPositions(scrollLeft - deltaX, scrollTop - deltaY);
-        return false; //don't prevent outer scroll panes from working
+        return true;
     }
 
     @Override
