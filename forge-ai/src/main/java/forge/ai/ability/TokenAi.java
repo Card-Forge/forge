@@ -269,17 +269,24 @@ public class TokenAi extends SpellAbilityAi {
         return true;
     }
 
-    public Card spawnToken(Player ai, SpellAbility sa) {
+    /**
+     * Create the token as a Card object.
+     * @param ai owner of the new token
+     * @param sa Token SpellAbility
+     * @return token creature
+     */
+    public static Card spawnToken(Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
 
+        String[] tokenKeywords = sa.hasParam("TokenKeywords") ? sa.getParam("TokenKeywords").split("<>") : new String[0];
+        String tokenAmount = sa.getParam("TokenAmount");
+        String tokenPower = sa.getParam("TokenPower");
+        String tokenToughness = sa.getParam("TokenToughness");
+        String tokenName = sa.getParam("TokenName");
+        String[] tokenTypes = sa.getParam("TokenTypes").split(",");
         String cost = "";
-        // Construct colors
         String[] tokenColors = sa.getParam("TokenColors").split(",");
         String tokenImage = sa.hasParam("TokenImage") ? PaperToken.makeTokenFileName(sa.getParam("TokenImage")) : "";
-        String tokenOwner = sa.hasParam("TokenOwner") ? sa.getParam("TokenOwner") : "You";
-        if (!AbilityUtils.getDefinedPlayers(host, tokenOwner, sa).contains(ai)) {
-            return null;
-        }
         String[] tokenAbilities = sa.hasParam("TokenAbilities") ? sa.getParam("TokenAbilities").split(",") : null;
         String[] tokenTriggers = sa.hasParam("TokenTriggers") ? sa.getParam("TokenTriggers").split(",") : null;
         String[] tokenSVars = sa.hasParam("TokenSVars") ? sa.getParam("TokenSVars").split(",") : null;
@@ -322,23 +329,23 @@ public class TokenAi extends SpellAbilityAi {
 
         cost = colorDesc.replace('C', '1').trim();
 
-        final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
-        final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
-        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
+        final int finalPower = AbilityUtils.calculateAmount(host, tokenPower, sa);
+        final int finalToughness = AbilityUtils.calculateAmount(host, tokenToughness, sa);
+        final int finalAmount = AbilityUtils.calculateAmount(host, tokenAmount, sa);
         if (finalAmount < 1) {
             return null;
         }
 
-        final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
+        final String[] substitutedTypes = Arrays.copyOf(tokenTypes, tokenTypes.length);
         for (int i = 0; i < substitutedTypes.length; i++) {
             if (substitutedTypes[i].equals("ChosenType")) {
                 substitutedTypes[i] = host.getChosenType();
             }
         }
-        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
+        final String substitutedName = tokenName.equals("ChosenType") ? host.getChosenType() : tokenName;
         final List<Card> tokens = CardFactory.makeToken(substitutedName,
                 imageNames.get(MyRandom.getRandom().nextInt(imageNames.size())),
-                ai, cost, substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
+                ai, cost, substitutedTypes, finalPower, finalToughness, tokenKeywords);
         
         // Grant rule changes
         if (tokenHiddenKeywords != null) {
