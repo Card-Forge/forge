@@ -1,13 +1,22 @@
 package forge.ai.ability;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -15,7 +24,10 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import forge.item.PaperToken;
 import forge.util.MyRandom;
 
 /**
@@ -78,7 +90,7 @@ public class TokenAi extends SpellAbilityAi {
                 return false;
             }
         }
-
+        
         Player opp = ai.getOpponent();
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
@@ -98,6 +110,14 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        boolean sacOnStack = false; //check if a negative sacrifice effect is on stack
+        if (!game.getStack().isEmpty()) {
+            SpellAbility topStack = game.getStack().peekAbility();
+            if (topStack.getApi() == ApiType.Sacrifice) {
+                sacOnStack = true;
+            }
+        }
+        
         PhaseHandler ph = game.getPhaseHandler();
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2)
@@ -110,17 +130,17 @@ public class TokenAi extends SpellAbilityAi {
                     buff = true;
                 }
             }
-            if (!buff) {
+            if (!buff && !sacOnStack) {
                 return false;
             }
         }
         if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
-                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste) {
+                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste && !sacOnStack) {
             return false;
         }
         if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(opp))
-                && oneShot) {
+                && oneShot && !sacOnStack) {
             return false;
         }
 
@@ -162,6 +182,32 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        //interrupt sacrifice effect
+        if (sacOnStack) {
+            final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
+            SpellAbility topStack = game.getStack().peekAbility();
+            final String valid = topStack.getParam("SacValid");
+            String num = sa.getParam("Amount");
+            num = (num == null) ? "1" : num;
+            final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
+            List<Card> list =
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), opp, topStack.getHostCard());
+            list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+            if (!list.isEmpty() && nTokens > 0 && list.size() == nToSac) { //only care about saving single creature for now
+                ComputerUtilCard.sortByEvaluateCreature(list);
+                Card token = spawnToken(ai, sa);
+                if (token != null) {
+                    list.add(token);
+                    list = CardLists.getValidCards(list, valid.split(","), ai.getOpponent(), topStack.getHostCard());
+                    list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
+                    if (ComputerUtilCard.evaluateCreature(token) < ComputerUtilCard.evaluateCreature(list.get(0))
+                            && list.contains(token)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
         if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
             int x = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
@@ -223,4 +269,141 @@ public class TokenAi extends SpellAbilityAi {
         return true;
     }
 
+    public Card spawnToken(Player ai, SpellAbility sa) {
+        final Card host = sa.getHostCard();
+
+        String cost = "";
+        // Construct colors
+        String[] tokenColors = sa.getParam("TokenColors").split(",");
+        String tokenImage = sa.hasParam("TokenImage") ? PaperToken.makeTokenFileName(sa.getParam("TokenImage")) : "";
+        String tokenOwner = sa.hasParam("TokenOwner") ? sa.getParam("TokenOwner") : "You";
+        if (!AbilityUtils.getDefinedPlayers(host, tokenOwner, sa).contains(ai)) {
+            return null;
+        }
+        String[] tokenAbilities = sa.hasParam("TokenAbilities") ? sa.getParam("TokenAbilities").split(",") : null;
+        String[] tokenTriggers = sa.hasParam("TokenTriggers") ? sa.getParam("TokenTriggers").split(",") : null;
+        String[] tokenSVars = sa.hasParam("TokenSVars") ? sa.getParam("TokenSVars").split(",") : null;
+        String[] tokenStaticAbilities = sa.hasParam("TokenStaticAbilities") ? sa.getParam("TokenStaticAbilities").split(",") : null;
+        String[] tokenHiddenKeywords = sa.hasParam("TokenHiddenKeywords") ? sa.getParam("TokenHiddenKeywords").split("&") : null;
+        final String[] substitutedColors = Arrays.copyOf(tokenColors, tokenColors.length);
+        for (int i = 0; i < substitutedColors.length; i++) {
+            if (substitutedColors[i].equals("ChosenColor")) {
+                // this currently only supports 1 chosen color
+                substitutedColors[i] = host.getChosenColor().get(0);
+            }
+        }
+        String colorDesc = "";
+        for (final String col : substitutedColors) {
+            if (col.equalsIgnoreCase("White")) {
+                colorDesc += "W ";
+            } else if (col.equalsIgnoreCase("Blue")) {
+                colorDesc += "U ";
+            } else if (col.equalsIgnoreCase("Black")) {
+                colorDesc += "B ";
+            } else if (col.equalsIgnoreCase("Red")) {
+                colorDesc += "R ";
+            } else if (col.equalsIgnoreCase("Green")) {
+                colorDesc += "G ";
+            } else if (col.equalsIgnoreCase("Colorless")) {
+                colorDesc = "C";
+            }
+        }
+        
+        final List<String> imageNames = new ArrayList<String>(1);
+        if (tokenImage.equals("")) {
+            imageNames.add(PaperToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName));
+        } else {
+            imageNames.add(0, tokenImage);
+        }
+
+        for (final char c : colorDesc.toCharArray()) {
+            cost += c + ' ';
+        }
+
+        cost = colorDesc.replace('C', '1').trim();
+
+        final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
+        final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
+        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
+        if (finalAmount < 1) {
+            return null;
+        }
+
+        final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
+        for (int i = 0; i < substitutedTypes.length; i++) {
+            if (substitutedTypes[i].equals("ChosenType")) {
+                substitutedTypes[i] = host.getChosenType();
+            }
+        }
+        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
+        final List<Card> tokens = CardFactory.makeToken(substitutedName,
+                imageNames.get(MyRandom.getRandom().nextInt(imageNames.size())),
+                ai, cost, substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
+        
+        // Grant rule changes
+        if (tokenHiddenKeywords != null) {
+            for (final String s : tokenHiddenKeywords) {
+                for (final Card c : tokens) {
+                    c.addHiddenExtrinsicKeyword(s);
+                }
+            }
+        }
+
+        // Grant abilities
+        if (tokenAbilities != null) {
+            for (final String s : tokenAbilities) {
+                final String actualAbility = host.getSVar(s);
+                for (final Card c : tokens) {
+                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
+                    c.addSpellAbility(grantedAbility);
+                    // added ability to intrinsic list so copies and clones work
+                    c.getUnparsedAbilities().add(actualAbility);
+                }
+            }
+        }
+
+        // Grant triggers
+        if (tokenTriggers != null) {
+
+            for (final String s : tokenTriggers) {
+                final String actualTrigger = host.getSVar(s);
+
+                for (final Card c : tokens) {
+
+                    final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
+                    final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
+                    parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
+                    c.addTrigger(parsedTrigger);
+                }
+            }
+        }
+
+        // Grant SVars
+        if (tokenSVars != null) {
+            for (final String s : tokenSVars) {
+                String actualSVar = host.getSVar(s);
+                String name = s;
+                if (actualSVar.startsWith("SVar")) {
+                    actualSVar = actualSVar.split("SVar:")[1];
+                    name = actualSVar.split(":")[0];
+                    actualSVar = actualSVar.split(":")[1];
+                }
+                for (final Card c : tokens) {
+                    c.setSVar(name, actualSVar);
+                }
+            }
+        }
+
+        // Grant static abilities
+        if (tokenStaticAbilities != null) {
+            for (final String s : tokenStaticAbilities) {
+                final String actualAbility = host.getSVar(s);
+                for (final Card c : tokens) {
+                    c.addStaticAbilityString(actualAbility);
+                    c.addStaticAbility(actualAbility);
+                }
+            }
+        }
+        return tokens.get(0);
+    }
 }
