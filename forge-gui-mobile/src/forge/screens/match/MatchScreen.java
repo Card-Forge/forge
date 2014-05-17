@@ -231,33 +231,38 @@ public class MatchScreen extends FScreen {
         @Override
         public boolean zoom(float x, float y, float amount) {
             //adjust position for current scroll positions
-            float oldScrollHeight = getScrollHeight();
-            y += getScrollTop();
+            float staticHeight = 2 * VAvatar.HEIGHT; //take out avatar rows that don't scale
+            float oldScrollHeight = getScrollHeight() - staticHeight;
+            float oldScrollTop = getScrollTop();
+            y += oldScrollTop - VAvatar.HEIGHT;
 
             //build map of all horizontal scroll panes and their current scrollWidths and adjusted X values
             Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<FScrollPane, Pair<Float, Float>>();
             backupHorzScrollPanes(topPlayerPanel, x, horzScrollPanes);
             backupHorzScrollPanes(bottomPlayerPanel, x, horzScrollPanes);
 
-            extraHeight += amount;
+            float zoom = oldScrollHeight / (getHeight() - staticHeight);
+            extraHeight += amount * zoom; //scale amount by current zoom
             if (extraHeight < 0) {
                 extraHeight = 0;
             }
             revalidate(); //apply change in height to all scroll panes
 
             //adjust scroll top to keep y position the same
-            float newScrollHeight = getScrollHeight();
+            float newScrollHeight = getScrollHeight() - staticHeight;
             float yAfter = y * newScrollHeight / oldScrollHeight;
-            setScrollTop(getScrollTop() + yAfter - y);
+            setScrollTop(oldScrollTop + yAfter - y);
 
             //adjust scroll left of all horizontal scroll panes to keep x position the same
+            float startX = x;
             for (Entry<FScrollPane, Pair<Float, Float>> entry : horzScrollPanes.entrySet()) {
                 FScrollPane horzScrollPane = entry.getKey();
-                x = entry.getValue().getRight();
-                float oldScrollWidth = entry.getValue().getLeft();
+                float oldScrollLeft = entry.getValue().getLeft();
+                x = startX + oldScrollLeft;
+                float oldScrollWidth = entry.getValue().getRight();
                 float newScrollWidth = horzScrollPane.getScrollWidth();
                 float xAfter = x * newScrollWidth / oldScrollWidth;
-                horzScrollPane.setScrollLeft(horzScrollPane.getScrollLeft() + xAfter - x);
+                horzScrollPane.setScrollLeft(oldScrollLeft + xAfter - x);
             }
 
             return true;
@@ -271,7 +276,7 @@ public class MatchScreen extends FScreen {
             }
         }
         private void backupHorzScrollPane(FScrollPane scrollPane, float x, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
-            horzScrollPanes.put(scrollPane, Pair.of(scrollPane.getScrollWidth(), x + scrollPane.getScrollLeft()));
+            horzScrollPanes.put(scrollPane, Pair.of(scrollPane.getScrollLeft(), scrollPane.getScrollWidth()));
         }
     }
 }
