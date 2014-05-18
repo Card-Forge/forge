@@ -40,16 +40,8 @@ public abstract class FScrollPane extends FContainer {
         return scrollBounds.width;
     }
 
-    public void setScrollWidth(float scrollWidth0) {
-        scrollBounds.width = scrollWidth0;
-    }
-
     public float getScrollHeight() {
         return scrollBounds.height;
-    }
-
-    public void setScrollHeight(float scrollHeight0) {
-        scrollBounds.height = scrollHeight0;
     }
 
     public float getMaxScrollLeft() {
