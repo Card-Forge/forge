@@ -54,8 +54,13 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                 addCardPanelToDisplayArea(attachedPanels.get(i));
             }
         }
+
         cardPanel.displayArea = this;
         add(cardPanel);
+
+        if (cardPanel.getNextPanelInStack() != null) {
+            addCardPanelToDisplayArea(cardPanel.getNextPanelInStack());
+        }
     }
 
     public final void removeCardPanel(final CardAreaPanel fromPanel) {
@@ -76,9 +81,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         super.clear();
         if (!cardPanels.isEmpty()) {
             for (CardAreaPanel panel : cardPanels) {
-                panel.attachedPanels.clear();
-                panel.attachedToPanel = null;
-                panel.displayArea = null;
+                panel.reset();
             }
             cardPanels.clear();
         }
@@ -94,8 +97,14 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                 totalCount += count;
             }
         }
+
         orderedCards.add(cardPanel.getCard());
         cardPanel.setBounds(x, y, cardWidth, cardHeight);
+
+        if (cardPanel.getNextPanelInStack() != null) { //add next panel in stack if needed
+            x += cardWidth * CARD_STACK_OFFSET;
+            totalCount += addCards(cardPanel.getNextPanelInStack(), x, y, cardWidth, cardHeight);
+        }
         return totalCount + 1;
     }
 
@@ -137,6 +146,8 @@ public abstract class VCardDisplayArea extends VDisplayArea {
                 cardPanel.displayArea = null;
                 cardPanel.attachedToPanel = null;
                 cardPanel.attachedPanels.clear();
+                cardPanel.prevPanelInStack = null;
+                cardPanel.nextPanelInStack = null;
             }
             allCardPanels.clear();
         }
@@ -144,6 +155,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         private VCardDisplayArea displayArea;
         private CardAreaPanel attachedToPanel;
         private final List<CardAreaPanel> attachedPanels = new ArrayList<CardAreaPanel>();
+        private CardAreaPanel nextPanelInStack, prevPanelInStack;
 
         //use static get(card) function instead
         private CardAreaPanel(Card card0) {
@@ -167,6 +179,32 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         public List<CardAreaPanel> getAttachedPanels() {
             return attachedPanels;
         }
+        public CardAreaPanel getNextPanelInStack() {
+            return nextPanelInStack;
+        }
+        public void setNextPanelInStack(CardAreaPanel nextPanelInStack0) {
+            nextPanelInStack = nextPanelInStack0;
+        }
+        public CardAreaPanel getPrevPanelInStack() {
+            return prevPanelInStack;
+        }
+        public void setPrevPanelInStack(CardAreaPanel prevPanelInStack0) {
+            prevPanelInStack = prevPanelInStack0;
+        }
+
+        //clear and reset all pointers from this panel
+        public void reset() {
+            if (!attachedPanels.isEmpty()) {
+                attachedPanels.clear();
+            }
+            if (nextPanelInStack != null) {
+                nextPanelInStack.reset();
+                nextPanelInStack = null;
+            }
+            attachedToPanel = null;
+            prevPanelInStack = null;
+            displayArea = null;
+        }
 
         @Override
         public boolean tap(float x, float y, int count) {
@@ -186,7 +224,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             if (FControl.getInputProxy().selectCard(getCard(), null)) {
                 return true;
             }
-            //if panel can't do anything with card selection, try selecting an attached panel
+            //if panel can't do anything with card selection, try selecting previous panel in stack
+            if (prevPanelInStack != null && prevPanelInStack.selectCard()) {
+                return true;
+            }
+            //as a last resort try to select attached panels
             for (CardAreaPanel panel : attachedPanels) {
                 if (panel.selectCard()) {
                     return true;

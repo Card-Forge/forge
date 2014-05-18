@@ -102,9 +102,12 @@ public class VField extends FContainer {
                     card.getName().equals(c.getName()) &&
                     card.getCounters().equals(card.getCounters())) {
                 CardAreaPanel cPanel = CardAreaPanel.get(c);
+                while (cPanel.getNextPanelInStack() != null) {
+                    cPanel = cPanel.getNextPanelInStack();
+                }
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                cPanel.getAttachedPanels().add(cardPanel);
-                cardPanel.setAttachedToPanel(cPanel);
+                cPanel.setNextPanelInStack(cardPanel);
+                cardPanel.setPrevPanelInStack(cPanel);
                 return true;
             }
         }
