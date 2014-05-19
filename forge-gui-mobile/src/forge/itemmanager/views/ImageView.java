@@ -30,6 +30,7 @@ import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
@@ -41,6 +42,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final FSkinFont GROUP_HEADER_FONT = FSkinFont.get(12);
     private static final float GROUP_HEADER_HEIGHT = Utils.scaleY(19);
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scaleX(6);
+    private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scaleY(1);
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
@@ -928,43 +930,32 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     break;
                 }
                 if (groupBy != null) {
-                    /*Rectangle bounds = group.getBounds();
-
-                    //draw header background and border if hovered
-                    //TODO: Uncomment
-                    //FSkin.setGraphicsColor(g2d, ItemListView.HEADER_BACK_COLOR);
-                    //g2d.fillRect(bounds.x, bounds.y, bounds.width, GROUP_HEADER_HEIGHT - 1);
-                    //FSkin.setGraphicsColor(g2d, ItemListView.GRID_COLOR);
-                    //g2d.drawRect(bounds.x, bounds.y, bounds.width - 1, GROUP_HEADER_HEIGHT - 1);
-
                     //draw group name and horizontal line
-                    float x = bounds.x + GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
-                    float y = bounds.y + fontOffsetY;
-                    FSkin.setGraphicsColor(g2d, GROUP_HEADER_FORE_COLOR);
+                    float x = GROUP_HEADER_GLYPH_WIDTH + 2 * PADDING + 1;
+                    float y = group.getTop();
                     String caption = group.name + " (" + group.items.size() + ")";
-                    g2d.drawString(caption, x, y);
-                    x += fm.stringWidth(caption) + PADDING;
-                    y = bounds.y + GROUP_HEADER_HEIGHT / 2;
-                    FSkin.setGraphicsColor(g2d, GROUP_HEADER_LINE_COLOR);
-                    g2d.drawLine(x, y, bounds.x + bounds.width - 1, y);
+                    g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, visibleWidth, GROUP_HEADER_HEIGHT, false, HAlignment.LEFT, true);
+                    x += GROUP_HEADER_FONT.getFont().getBounds(caption).width + PADDING;
+                    y += GROUP_HEADER_HEIGHT / 2;
+                    g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, visibleWidth - PADDING, y);
 
                     if (!group.items.isEmpty()) { //draw expand/collapse glyph as long as group isn't empty
-                        Polygon glyph = new Polygon();
                         float offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
-                        x = bounds.x + offset;
+                        x = PADDING + offset;
                         if (group.isCollapsed) {
-                            y++;
-                            glyph.addPoint(x, y - offset);
-                            glyph.addPoint(x + offset, y);
-                            glyph.addPoint(x, y + offset);
+                            y += GROUP_HEADER_LINE_THICKNESS;
+                            g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                                    x, y - offset,
+                                    x + offset, y,
+                                    x, y + offset);
                         }
                         else {
-                            glyph.addPoint(x - offset + 2, y + offset - 1);
-                            glyph.addPoint(x + offset, y + offset - 1);
-                            glyph.addPoint(x + offset, y - offset + 1);
+                            g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                                    x - offset + 2, y + offset - 1,
+                                    x + offset, y + offset - 1,
+                                    x + offset, y - offset + 1);
                         }
-                        g2d.fill(glyph);
-                    }*/
+                    }
                     if (group.isCollapsed || group.items.isEmpty()) {
                         continue;
                     }
