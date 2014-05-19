@@ -141,6 +141,7 @@ forge-ai/src/main/java/forge/ai/ability/TwoPilesAi.java -text
 forge-ai/src/main/java/forge/ai/ability/UnattachAllAi.java -text
 forge-ai/src/main/java/forge/ai/ability/UntapAi.java -text
 forge-ai/src/main/java/forge/ai/ability/UntapAllAi.java -text
+forge-ai/src/main/java/forge/ai/ability/VoteAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ZoneExchangeAi.java -text
 forge-core/.classpath -text
 forge-core/.project -text

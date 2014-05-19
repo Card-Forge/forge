@@ -24,7 +24,8 @@ public class VoteEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return StringUtils.join(getTargetPlayers(sa), ", ") + " vote";
+        return StringUtils.join(getDefinedPlayersOrTargeted(sa), ", ") + " vote "
+                + StringUtils.join(sa.getParam("VoteType").split(","), " or ");
     }
 
     /* (non-Javadoc)
@@ -32,7 +33,7 @@ public class VoteEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         final List<String> voteType = Arrays.asList(sa.getParam("VoteType").split(","));
         final Card host = sa.getHostCard();
         // starting with the activator

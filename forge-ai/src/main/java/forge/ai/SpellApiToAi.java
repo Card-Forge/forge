@@ -133,7 +133,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.UnattachAll, UnattachAllAi.class);
         apiToClass.put(ApiType.Untap, UntapAi.class);
         apiToClass.put(ApiType.UntapAll, UntapAllAi.class);
-        apiToClass.put(ApiType.Vote, CannotPlayAi.class);
+        apiToClass.put(ApiType.Vote, VoteAi.class);
         apiToClass.put(ApiType.WinsGame, GameWinAi.class);
 
         apiToClass.put(ApiType.InternalEtbReplacement, CanPlayAsDrawbackAi.class);
