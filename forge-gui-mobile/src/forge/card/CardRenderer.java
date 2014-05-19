@@ -50,7 +50,14 @@ public class CardRenderer {
         float w = width - 2 * FDialog.INSETS;
         float h = height - 2 * FDialog.INSETS;
 
-        Texture image = ImageCache.getImage(card);
+        final String key;
+        if (FControl.mayShowCard(card) || FDialog.isDialogOpen()) { //support showing if card revealed in dialog
+            key = card.getImageKey();
+        }
+        else { //only show card back if can't show card
+            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
+        }
+        Texture image = ImageCache.getImage(key, true);
         float imageWidth = image.getWidth();
         float imageHeight = image.getHeight();
 
@@ -99,7 +106,7 @@ public class CardRenderer {
             x += (oldWidth - w) / 2;
         }
 
-        boolean canShow = !card.isFaceDown() && (FControl.mayShowCard(card) || FDialog.isDialogOpen()); //support showing if card revealed in dialog
+        boolean canShow = FControl.mayShowCard(card) || FDialog.isDialogOpen(); //support showing if card revealed in dialog
 
         float blackBorderThickness = w * 0.021f;
         g.fillRect(Color.BLACK, x, y, w, h);
