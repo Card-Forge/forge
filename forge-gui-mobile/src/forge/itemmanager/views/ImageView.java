@@ -15,6 +15,7 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.filters.ItemFilter;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
@@ -35,7 +36,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scaleMin(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinColor GROUP_HEADER_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(120);
+    private static final FSkinColor OPTION_LABEL_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(0.7f);
+    private static final FSkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(0.5f);
     private static final FSkinFont GROUP_HEADER_FONT = FSkinFont.get(12);
     private static final float GROUP_HEADER_HEIGHT = Utils.scaleY(19);
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scaleX(6);
@@ -122,10 +124,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-
+    private final FLabel lblGroupBy = new FLabel.Builder().text("Group:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
     private final FComboBox<Object> cbGroupByOptions = new FComboBox<Object>();
+    private final FLabel lblPileBy = new FLabel.Builder().text("Pile:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
     private final FComboBox<Object> cbPileByOptions = new FComboBox<Object>();
-    private final FComboBox<Integer> cbColumnCount = new FComboBox<Integer>();
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -141,12 +143,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         for (ColumnDef option : pileByOptions) {
             cbPileByOptions.addItem(option);
         }
-        for (Integer i = MIN_COLUMN_COUNT; i <= MAX_COLUMN_COUNT; i++) {
-            cbColumnCount.addItem(i);
-        }
         cbGroupByOptions.setSelectedIndex(0);
         cbPileByOptions.setSelectedIndex(0);
-        cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
 
         cbGroupByOptions.setChangedHandler(new FEventHandler() {
             @Override
@@ -170,23 +168,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
         });
-        cbColumnCount.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                setColumnCount(cbColumnCount.getSelectedItem());
-            }
-        });
 
+        cbGroupByOptions.setFontSize(12);
+        cbPileByOptions.setFontSize(12);
         getPnlOptions().add(btnExpandCollapseAll);
-        getPnlOptions().add(new FLabel.Builder().text("Group by:").fontSize(12).build());
+        getPnlOptions().add(lblGroupBy);
         getPnlOptions().add(cbGroupByOptions);
-        getPnlOptions().add(new FLabel.Builder().text("Pile by:").fontSize(12).build());
+        getPnlOptions().add(lblPileBy);
         getPnlOptions().add(cbPileByOptions);
-        getPnlOptions().add(new FLabel.Builder().text("Columns:").fontSize(12).build());
-        getPnlOptions().add(cbColumnCount);
 
         //setup display
-        display = new CardViewDisplay();
+        display = getScroller().add(new CardViewDisplay());
         /*display.addMouseListener(new FMouseAdapter() {
             @Override
             public void onLeftMouseDown(MouseEvent e) {
@@ -416,8 +408,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
         if (columnCount == columnCount0) { return; }
         columnCount = columnCount0;
-        cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
-        
+
         if (!forSetup) {
             if (itemManager.getConfig() != null) {
                 itemManager.getConfig().setImageColumnCount(columnCount);
@@ -515,6 +506,33 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         updateLayout(true);
+    }
+
+    @Override
+    protected float layoutOptionsPanel(float visibleWidth, float height) {
+        float padding = ItemFilter.PADDING;
+        float x = 0;
+        float y = padding;
+        float h = height - 2 * y;
+        btnExpandCollapseAll.setBounds(x, y, h, h);
+        x += h + padding;
+        lblGroupBy.setBounds(x, y, lblGroupBy.getAutoSizeBounds().width, h);
+        x += lblGroupBy.getWidth();
+
+        //determine width of combo boxes based on available width versus auto-size widths
+        float lblPileByWidth = lblPileBy.getAutoSizeBounds().width;
+        float availableComboBoxWidth = visibleWidth - x - lblPileByWidth - padding;
+        float groupByWidth = availableComboBoxWidth * 0.66f;
+        float pileByWidth = availableComboBoxWidth - groupByWidth;
+
+        cbGroupByOptions.setBounds(x, y, groupByWidth, h);
+        x += groupByWidth + padding;
+        lblPileBy.setBounds(x, y, lblPileByWidth, h);
+        x += lblPileByWidth;
+        cbPileByOptions.setBounds(x, y, pileByWidth, h);
+        x += pileByWidth + padding;
+
+        return x;
     }
 
     private void updateLayout(boolean forRefresh) {

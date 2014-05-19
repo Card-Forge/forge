@@ -34,7 +34,7 @@ public class FTextField extends FDisplayObject {
     }
 
     private String text, ghostText, textBeforeKeyInput;
-    private FSkinFont font;
+    protected FSkinFont font;
     private HAlignment alignment;
     private int selStart, selLength;
     private boolean isEditing;
@@ -119,7 +119,7 @@ public class FTextField extends FDisplayObject {
     }
 
     public float getAutoSizeWidth() {
-        return font.getFont().getBounds(text).width + 2 * PADDING;
+        return PADDING + font.getFont().getBounds(text).width + getRightPadding();
     }
     
     private int getCharIndexAtPoint(float x, float y) {

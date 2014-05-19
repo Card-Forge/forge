@@ -61,11 +61,12 @@ public abstract class ItemView<T extends InventoryItem> {
         }
     }
 
+    protected abstract float layoutOptionsPanel(float visibleWidth, float height);
+
     private class OptionsPanel extends FScrollPane {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            // TODO Auto-generated method stub
-            return new ScrollBounds(visibleWidth, visibleHeight);
+            return new ScrollBounds(layoutOptionsPanel(visibleWidth, visibleHeight), visibleHeight);
         }
 
         @Override

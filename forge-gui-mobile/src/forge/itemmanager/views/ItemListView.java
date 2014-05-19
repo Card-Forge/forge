@@ -252,6 +252,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         list.setListData(model.getOrderedList());
     }
 
+    @Override
+    protected float layoutOptionsPanel(float visibleWidth, float height) {
+        return visibleWidth;
+    }
+
     public abstract static class ItemRenderer<T extends InventoryItem> {
         public abstract float getItemHeight();
         public abstract boolean tap(Entry<T, Integer> value, float x, float y, int count);

@@ -128,6 +128,19 @@ public class FComboBox<E> extends FTextField {
     }
 
     @Override
+    public float getAutoSizeWidth() {
+        //use widest item width to determine auto-size width
+        float maxTextWidth = 0;
+        for (E item : items) {
+            float width = font.getFont().getBounds(item.toString()).width;
+            if (width > maxTextWidth) {
+                maxTextWidth = width;
+            }
+        }
+        return PADDING + maxTextWidth + getRightPadding();
+    }
+
+    @Override
     public void draw(Graphics g) {
         super.draw(g);
 
