@@ -1810,7 +1810,19 @@ public class ComputerUtil {
 
         return chosen;
     }
-    
+
+    public static String vote(Player ai, List<String> options, String logic) {
+        if (logic == null) {
+            return Aggregates.random(options);
+        } else {
+            switch (logic) {
+                case "GraceOrCondemnation":
+                    return ai.getCreaturesInPlay().size() > ai.getOpponent().getCreaturesInPlay().size() ? "Grace" : "Condemnation";
+                default: return Iterables.getFirst(options, null);
+            }
+        }
+    }
+
     public static List<Card> getSafeTargets(final Player ai, SpellAbility sa, List<Card> validCards) {
         List<Card> safeCards = new ArrayList<Card>(validCards);
         safeCards = CardLists.filter(safeCards, new Predicate<Card>() {
@@ -1935,4 +1947,5 @@ public class ComputerUtil {
 
         return bestBoardPosition;
     }
+
 }

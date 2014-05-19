@@ -367,6 +367,12 @@ public class PlayerControllerAi extends PlayerController {
         return chosen;
     }
 
+    @Override
+    public String vote(SpellAbility sa, String prompt, List<String> options) {
+        String result = ComputerUtil.vote(player, options, sa.getParam("AILogic"));
+        return result;
+    }
+
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#confirmReplacementEffect(forge.card.replacement.ReplacementEffect, forge.card.spellability.SpellAbility, java.lang.String)
      */

@@ -1,16 +1,20 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Arrays;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class VoteEffect extends SpellAbilityEffect {
@@ -29,7 +33,7 @@ public class VoteEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        final String voteType = sa.getParam("VoteType");
+        final List<String> voteType = Arrays.asList(sa.getParam("VoteType").split(","));
         final Card host = sa.getHostCard();
         // starting with the activator
         int pSize = tgtPlayers.size();
@@ -37,29 +41,49 @@ public class VoteEffect extends SpellAbilityEffect {
         while (tgtPlayers.contains(activator) && !activator.equals(Iterables.getFirst(tgtPlayers, null))) {
             tgtPlayers.add(pSize - 1, tgtPlayers.remove(0));
         }
-        int choice1 = 0;
-        int choice2 = 0;
+        ArrayListMultimap<String, Player> votes = ArrayListMultimap.create();
 
         for (final Player p : tgtPlayers) {
-            final boolean result = p.getController().chooseBinary(sa, sa.getHostCard() + "Vote:", PlayerController.BinaryChoiceType.valueOf(voteType));
-            if (result) {
-                choice1++;
-            } else {
-                choice2++;
+            int voteAmount = p.getAmountOfKeyword("You get an additional vote.") + 1;
+            for (int i = 0; i < voteAmount; i++) {
+                final String result = p.getController().vote(sa, sa.getHostCard() + "Vote:", voteType);
+                votes.put(result, p);
+                host.getGame().getAction().nofityOfValue(sa, p, result + "\r\nCurrent Votes:" + votes, p);
             }
-            host.getGame().getAction().nofityOfValue(sa, p, voteType.split("Or")[result ? 0 : 1], null);
         }
-        String subAb;
-        if (choice1 > choice2) {
-            subAb = sa.getParam("FirstChoice");
-        } else if (choice1 < choice2) {
-            subAb = sa.getParam("SecondChoice");
+        
+
+        List<String> subAbs = Lists.newArrayList();
+        final List<String> mostVotes = getMostVotes(votes);
+        if (sa.hasParam("Tied") && mostVotes.size() > 1) {
+            subAbs.add(sa.getParam("Tied"));
         } else {
-            subAb = sa.getParam("Tied");
+            for (String type : mostVotes) {
+                subAbs.add(sa.getParam("Vote" + type));
+            }
         }
-        final SpellAbility action = AbilityFactory.getAbility(host.getSVar(subAb), host);
-        action.setActivatingPlayer(sa.getActivatingPlayer());
-        ((AbilitySub) action).setParent(sa);
-        AbilityUtils.resolve(action);
+        
+        for (final String subAb : subAbs) {
+            final SpellAbility action = AbilityFactory.getAbility(host.getSVar(subAb), host);
+            action.setActivatingPlayer(sa.getActivatingPlayer());
+            ((AbilitySub) action).setParent(sa);
+            AbilityUtils.resolve(action);
+        }
+    }
+
+    private List<String> getMostVotes(ArrayListMultimap<String, Player> votes) {
+        List<String> most = Lists.newArrayList();
+        int amount = 0;
+        for (String voteType : votes.keySet()) {
+            int voteAmount = votes.get(voteType).size();
+            if (voteAmount == amount) {
+                most.add(voteType);
+            } else if (voteAmount > amount) {
+                amount = voteAmount;
+                most.clear();
+                most.add(voteType);
+            }
+        }
+        return most;
     }
 }

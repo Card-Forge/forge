@@ -64,8 +64,6 @@ public abstract class PlayerController {
         OddsOrEvens,
         UntapOrLeaveTapped,
         UntapTimeVault,
-        GraceOrCondemnation,
-        DeathOrTorture,
     }
 
     protected final Game game;
@@ -178,6 +176,7 @@ public abstract class PlayerController {
         return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
     }
     public abstract String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional);
+    public abstract String vote(SpellAbility sa, String prompt, List<String> options);
     public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);

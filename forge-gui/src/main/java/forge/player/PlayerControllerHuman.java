@@ -571,6 +571,11 @@ public class PlayerControllerHuman extends PlayerController {
             return SGuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
     }
 
+    @Override
+    public String vote(SpellAbility sa, String prompt, List<String> options) {
+        return SGuiChoose.one(prompt, options);
+    }
+
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#confirmReplacementEffect(forge.card.replacement.ReplacementEffect, forge.card.spellability.SpellAbility, java.lang.String)
      */
@@ -793,6 +798,9 @@ public class PlayerControllerHuman extends PlayerController {
             case Protection:
                 String choser = StringUtils.capitalize(mayBeYou(target));
                 return String.format("%s %s protection from %s", choser, Lang.joinVerb(choser, "choose"), value);
+            case Vote:
+                String chooser = StringUtils.capitalize(mayBeYou(target));
+                return String.format("%s %s %s", chooser, Lang.joinVerb(chooser, "vote"), value);
             default:
                 return String.format("%s effect's value for %s is %s", sa.getHostCard().getName(), mayBeYou(target), value);
         }

@@ -2790,6 +2790,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
     }
 
+    public final int getAmountOfKeyword(final String k) {
+        int count = 0;
+        for (String kw : this.getKeywords()) {
+            if (kw.equals(k)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void onCleanupPhase() {
         for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);

@@ -446,6 +446,11 @@ public class PlayerControllerForTests extends PlayerController {
 		return chooseItem(validTypes);
 	}
 
+    @Override
+    public String vote(SpellAbility sa, String prompt, List<String> options) {
+        return chooseItem(options);
+    }
+
 	@Override
 	public PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name) {
 		throw new IllegalStateException("Erring on the side of caution here...");
