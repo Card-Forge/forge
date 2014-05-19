@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.assets.ImageUtil;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.*;
 import forge.util.Callback;
@@ -200,8 +201,12 @@ public class FOptionPane extends FDialog {
 
         float promptHeight = 0;
         if (lblIcon != null) {
-            float labelWidth = lblIcon.getIcon().getWidth();
-            promptHeight = lblIcon.getIcon().getHeight();
+            float maxLabelWidth = Utils.AVG_FINGER_WIDTH * 0.8f;
+            float labelWidth = ImageUtil.getNearestHQSize(maxLabelWidth, lblIcon.getIcon().getWidth());
+            if (labelWidth > maxLabelWidth) {
+                labelWidth /= 2;
+            }
+            promptHeight = lblIcon.getIcon().getHeight() * labelWidth / lblIcon.getIcon().getWidth();
             if (promptHeight > maxPromptHeight) {
                 promptHeight = maxPromptHeight;
             }
