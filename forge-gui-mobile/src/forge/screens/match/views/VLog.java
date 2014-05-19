@@ -51,6 +51,10 @@ public class VLog extends FDropDown {
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getMenuTab().getScreenPosition().x; //stretch from tab to edge of screen
+        float minWidth = 4 * Utils.AVG_FINGER_WIDTH;
+        if (width < minWidth) {
+            width = minWidth;
+        }
 
         float y = 1;
         float height;
