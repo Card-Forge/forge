@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.TriggerReplacementBase;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
@@ -281,10 +282,16 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
         
         String condition = this.mapParams.get("Condition");
-        if( "AltCost".equals(condition) ) {
+        if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get("Card");
             if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
+        } else if ("AttackedPlayerWithMostLife".equals(condition)) {
+            GameEntity attacked = (GameEntity) runParams.get("Attacked");
+            if (attacked == null || !attacked.isValid("Player.withMostLife",
+                    this.getHostCard().getController(), this.getHostCard())) {
+                return false;
+            }
         }
 
 

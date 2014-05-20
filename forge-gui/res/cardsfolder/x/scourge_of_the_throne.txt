@@ -1,0 +1,10 @@
+Name:Scourge of the Throne
+ManaCost:4 R R
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:Dethrone
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | FirstAttack$ True | Condition$ AttackedPlayerWithMostLife | TriggerDescription$ Whenever CARDNAME attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase.
+SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_the_throne.jpg
