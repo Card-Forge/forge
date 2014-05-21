@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scaleMin(5);
@@ -51,17 +50,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
     private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
 
-    private final CardViewDisplay display;
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
     private int columnCount = 4;
     private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
-    private boolean lockHoveredItem = false;
-    private boolean lockInput = false;
-    private Vector2 hoverPoint;
-    private Vector2 hoverScrollPos;
-    private ItemInfo hoveredItem;
     private ItemInfo focalItem;
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final ArrayList<Group> groups = new ArrayList<Group>();
@@ -180,7 +173,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getPnlOptions().add(cbPileByOptions);
 
         //setup display
-        display = getScroller().add(new CardViewDisplay());
         /*display.addMouseListener(new FMouseAdapter() {
             @Override
             public void onLeftMouseDown(MouseEvent e) {
@@ -302,7 +294,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
         });*/
-        groups.add(new Group("")); //add default group
+        Group group = new Group(""); //add default group
+        groups.add(group); 
+        getScroller().add(group);
     }
 
     @Override
@@ -346,6 +340,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     group.isCollapsed = true;
                 }
             }
+        }
+
+        getScroller().clear();
+        for (Group group : groups) {
+            getScroller().add(group);
         }
 
         if (!forSetup) {
@@ -435,10 +434,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             return focalItem;
         }
 
-        if (hoveredItem != null) {
-            return hoveredItem;
-        }
-
         //if not item hovered, use first fully visible item as focal point
         final float visibleTop = getScrollValue();
         for (Group group : groups) {
@@ -463,7 +458,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected void onResize() {
+    protected void onResize(float visibleWidth, float visibleHeight) {
         updateLayout(false); //need to update layout to adjust wrapping of items
     }
 
@@ -538,20 +533,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateLayout(boolean forRefresh) {
-        lockInput = true; //lock input until next repaint finishes
         focalItem = null; //clear cached focalItem when layout changes
 
         float x, groupY, pileY, pileHeight, maxPileHeight;
         float y = PADDING;
         float groupX = PADDING;
-        float itemAreaWidth = display.getWidth();
+        float itemAreaWidth = getScroller().getWidth();
         float groupWidth = itemAreaWidth - 2 * groupX;
-        float pileX = PADDING;
-        float pileWidth = itemAreaWidth - 2 * pileX;
 
-        float gap = (MAX_COLUMN_COUNT - columnCount) / 2 + 2; //more items per row == less gap between them
-        float itemWidth = Math.round((pileWidth + gap) / columnCount - gap);
-        float itemHeight = Math.round(itemWidth * FCardPanel.ASPECT_RATIO);
+        float gap = (MAX_COLUMN_COUNT - columnCount) / 2 + Utils.scaleX(2); //more items per row == less gap between them
+        float itemWidth = (groupWidth + gap) / columnCount - gap;
+        float itemHeight = itemWidth * FCardPanel.ASPECT_RATIO;
         float dx = itemWidth + gap;
         float dy = pileBy == null ? itemHeight + gap : Math.round(itemHeight * PILE_SPACING_Y);
 
@@ -580,11 +572,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 y += GROUP_HEADER_HEIGHT + PADDING; //leave room for group header
                 if (group.isCollapsed || group.items.isEmpty()) {
                     group.setBounds(groupX, groupY, groupWidth, GROUP_HEADER_HEIGHT);
+                    group.scrollWidth = groupWidth;
                     continue;
                 }
             }
             else if (group.items.isEmpty()) {
                 group.setBounds(groupX, groupY, groupWidth, 0);
+                group.scrollWidth = groupWidth;
                 continue;
             }
 
@@ -592,38 +586,32 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 //if not piling by anything, wrap items using a pile for each row
                 group.piles.clear();
                 Pile pile = new Pile();
-                x = pileX;
+                x = 0;
 
                 for (ItemInfo itemInfo : group.items) {
                     if (pile.items.size() == columnCount) {
                         pile = new Pile();
-                        x = pileX;
+                        x = 0;
                         y += dy;
                     }
 
                     itemInfo.setBounds(x, y, itemWidth, itemHeight);
 
                     if (pile.items.size() == 0) {
-                        pile.setBounds(pileX, y, pileWidth, itemHeight);
+                        pile.setBounds(0, y, groupWidth, itemHeight);
                         group.piles.add(pile);
                     }
                     pile.items.add(itemInfo);
                     x += dx;
                 }
                 y += itemHeight;
+                group.scrollWidth = groupWidth;
             }
             else {
-                x = pileX;
+                x = 0;
                 pileY = y;
                 maxPileHeight = 0;
                 for (int j = 0; j < group.piles.size(); j++) {
-                    if (j > 0 && j % columnCount == 0) {
-                        //start new row if needed
-                        y = pileY + maxPileHeight + gap;
-                        x = pileX;
-                        pileY = y;
-                        maxPileHeight = 0;
-                    }
                     Pile pile = group.piles.get(j);
                     y = pileY;
                     for (ItemInfo itemInfo : pile.items) {
@@ -638,6 +626,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     x += dx;
                 }
                 y = pileY + maxPileHeight; //update y for setting group height below
+                group.scrollWidth = Math.max(x - gap, groupWidth);
             }
 
             group.setBounds(groupX, groupY, groupWidth, y - groupY);
@@ -653,11 +642,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 for (Pile pile : group.piles) {
                     for (ItemInfo itemInfo : pile.items) {
                         itemInfo.index = index++;
+                        itemInfo.group = group;
                         orderedItems.add(itemInfo);
                     }
                 }
             }
+            getScroller().revalidate();
         }
+    }
+
+    @Override
+    protected float getScrollHeight() {
+        return groups.get(groups.size() - 1).getBottom();
     }
 
     private ItemInfo getItemAtPoint(float x, float y) {
@@ -678,43 +674,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
         return null;
-    }
-
-    private void setLockHoveredItem(boolean lockHoveredItem0) {
-        if (lockHoveredItem == lockHoveredItem0) { return; }
-        lockHoveredItem = lockHoveredItem0;
-        if (!lockHoveredItem) {
-            updateHoveredItem(hoverPoint, hoverScrollPos);
-        }
-    }
-
-    private boolean updateHoveredItem(Vector2 hoverPoint0, Vector2 hoverScrollPos0) {
-        hoverPoint = hoverPoint0;
-        if (hoverScrollPos != hoverScrollPos0) {
-            hoverScrollPos = hoverScrollPos0;
-            focalItem = null; //clear cached focalItem when scroll changes
-        }
-
-        if (lockHoveredItem) { return false; }
-
-        ItemInfo item = null;
-        FScrollPane scroller = getScroller();
-        if (hoverPoint0 != null) {
-            Vector2 displayPoint = new Vector2(hoverPoint0);
-            //account for change in scroll positions since mouse last moved
-            displayPoint.x += scroller.getScrollLeft() - hoverScrollPos0.x;
-            displayPoint.y += scroller.getScrollTop() - hoverScrollPos0.y;
-            item = getItemAtPoint(displayPoint.x, displayPoint.y);
-        }
-
-        if (hoveredItem == item) { return false; }
-        hoveredItem = item;
-        return true;
-    }
-
-    @Override
-    public FDisplayObject getComponent() {
-        return display;
     }
 
     @Override
@@ -841,11 +800,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getScroller().scrollIntoView(itemInfo);
     }
 
-    private class Group extends FDisplayObject {
+    private class Group extends FScrollPane {
         private final List<ItemInfo> items = new ArrayList<ItemInfo>();
         private final List<Pile> piles = new ArrayList<Pile>();
         private final String name;
         private boolean isCollapsed;
+        private float scrollWidth;
 
         public Group(String name0) {
             name = name0;
@@ -862,6 +822,67 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
+            if (groupBy != null) {
+                //draw group name and horizontal line
+                float x = GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
+                float y = 0;
+                String caption = name + " (" + items.size() + ")";
+                g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, getWidth(), GROUP_HEADER_HEIGHT, false, HAlignment.LEFT, true);
+                x += GROUP_HEADER_FONT.getFont().getBounds(caption).width + PADDING;
+                y += GROUP_HEADER_HEIGHT / 2;
+                g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, getWidth(), y);
+
+                if (!items.isEmpty()) { //draw expand/collapse glyph as long as group isn't empty
+                    float offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
+                    x = offset;
+                    if (isCollapsed) {
+                        y += GROUP_HEADER_LINE_THICKNESS;
+                        g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                                x, y - offset,
+                                x + offset, y,
+                                x, y + offset);
+                    }
+                    else {
+                        g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                                x - offset + 2, y + offset - 1,
+                                x + offset, y + offset - 1,
+                                x + offset, y - offset + 1);
+                    }
+                }
+                if (isCollapsed || items.isEmpty()) { return; }
+
+                float visibleLeft = getScrollLeft();
+                float visibleRight = visibleLeft + getWidth();
+                for (Pile pile : piles) {
+                    if (pile.getRight() < visibleLeft) {
+                        continue;
+                    }
+                    if (pile.getLeft() >= visibleRight) {
+                        break;
+                    }
+                    pile.draw(g);
+                }
+                return;
+            }
+
+            if (items.isEmpty()) { return; }
+
+            final float visibleTop = getScrollValue();
+            final float visibleBottom = visibleTop + getHeight();
+            for (ItemInfo itemInfo : items) {
+                if (itemInfo.getBottom() < visibleTop) {
+                    continue;
+                }
+                if (itemInfo.getTop() >= visibleBottom) {
+                    break;
+                }
+                itemInfo.draw(g);
+            }
+        }
+
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            return new ScrollBounds(scrollWidth, visibleHeight);
         }
     }
     private class Pile extends FDisplayObject {
@@ -869,12 +890,25 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
+            final float visibleTop = getScrollValue();
+            final float visibleBottom = visibleTop + getScroller().getHeight();
+
+            for (ItemInfo itemInfo : items) {
+                if (itemInfo.getBottom() < visibleTop) {
+                    continue;
+                }
+                if (itemInfo.getTop() >= visibleBottom) {
+                    break;
+                }
+                itemInfo.draw(g);
+            }
         }
     }
     private class ItemInfo extends FDisplayObject implements Entry<InventoryItem, Integer> {
         private final T item;
         private int index;
         private boolean selected;
+        private Group group;
 
         private ItemInfo(T item0) {
             item = item0;
@@ -902,122 +936,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
-        }
-    }
+            final float x = getLeft() - group.getScrollLeft();
+            final float y = getTop() - group.getTop() - getScrollValue();
+            final float w = getWidth();
+            final float h = getHeight();
+            final float selBorderSize = Utils.scaleMax(1);
 
-    private class CardViewDisplay extends FDisplayObject {
-        private CardViewDisplay() {
-        }
-
-        @Override
-        public final void draw(final Graphics g) {
-            if (groups.isEmpty() || groups.get(0).getWidth() <= 0) {
-                return; //don't render anything until first group has width
+            if (selected) {
+                g.fillRect(Color.GREEN, x - selBorderSize, y - selBorderSize,
+                        w + 2 * selBorderSize, h + 2 * selBorderSize);
             }
 
-            updateHoveredItem(hoverPoint, hoverScrollPos); //ensure hovered item up to date
-
-            final float visibleWidth = getWidth();
-            final float visibleHeight = getHeight();
-            final float visibleTop = getScrollValue();
-            final float visibleBottom = visibleTop + visibleHeight;
-
-            for (Group group : groups) {
-                if (group.getBottom() < visibleTop) {
-                    continue;
-                }
-                if (group.getTop() >= visibleBottom) {
-                    break;
-                }
-                if (groupBy != null) {
-                    //draw group name and horizontal line
-                    float x = GROUP_HEADER_GLYPH_WIDTH + 2 * PADDING + 1;
-                    float y = group.getTop();
-                    String caption = group.name + " (" + group.items.size() + ")";
-                    g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, visibleWidth, GROUP_HEADER_HEIGHT, false, HAlignment.LEFT, true);
-                    x += GROUP_HEADER_FONT.getFont().getBounds(caption).width + PADDING;
-                    y += GROUP_HEADER_HEIGHT / 2;
-                    g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, visibleWidth - PADDING, y);
-
-                    if (!group.items.isEmpty()) { //draw expand/collapse glyph as long as group isn't empty
-                        float offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
-                        x = PADDING + offset;
-                        if (group.isCollapsed) {
-                            y += GROUP_HEADER_LINE_THICKNESS;
-                            g.fillTriangle(GROUP_HEADER_LINE_COLOR,
-                                    x, y - offset,
-                                    x + offset, y,
-                                    x, y + offset);
-                        }
-                        else {
-                            g.fillTriangle(GROUP_HEADER_LINE_COLOR,
-                                    x - offset + 2, y + offset - 1,
-                                    x + offset, y + offset - 1,
-                                    x + offset, y - offset + 1);
-                        }
-                    }
-                    if (group.isCollapsed || group.items.isEmpty()) {
-                        continue;
-                    }
-                }
-                else if (group.items.isEmpty()) {
-                    continue;
-                }
-
-                ItemInfo skippedItem = null;
-                for (Pile pile : group.piles) {
-                    if (pile.getBottom() < visibleTop) {
-                        continue;
-                    }
-                    if (pile.getTop() >= visibleBottom) {
-                        break;
-                    }
-                    for (ItemInfo itemInfo : pile.items) {
-                        if (itemInfo.getBottom() < visibleTop) {
-                            continue;
-                        }
-                        if (itemInfo.getTop() >= visibleBottom) {
-                            break;
-                        }
-                        if (itemInfo != hoveredItem) { //save hovered item for last
-                            drawItemImage(g, itemInfo);
-                        }
-                        else {
-                            skippedItem = itemInfo;
-                        }
-                    }
-                }
-                if (skippedItem != null) { //draw hovered item on top
-                    drawItemImage(g, skippedItem);
-                }
-            }
-
-            if (lockInput) { //unlock input after repaint finishes if needed
-                /*SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        lockInput = false;
-                    }
-                });*/
-                lockInput = false;
-            }
-        }
-
-        private void drawItemImage(Graphics g, ItemInfo itemInfo) {
-            final float selBorderSize = 1;
-
-            if (itemInfo.selected || itemInfo == hoveredItem) {
-                g.fillRect(Color.GREEN, itemInfo.getLeft() - selBorderSize, itemInfo.getTop() - selBorderSize,
-                        itemInfo.getWidth() + 2 * selBorderSize, itemInfo.getHeight() + 2 * selBorderSize);
-            }
-
-            InventoryItem item = itemInfo.item;
-            Texture img = ImageCache.getImage(itemInfo.item);
+            Texture img = ImageCache.getImage(item);
             if (img != null) {
-                g.drawImage(img, itemInfo.getLeft(), itemInfo.getTop(), itemInfo.getWidth(), itemInfo.getHeight());
+                g.drawImage(img, x, y, w, h);
             }
             else {
-                //g.drawString(itemInfo.item.getName(), itemInfo.getLeft() + 10, itemInfo.getTop() + 20);
+                g.fillRect(Color.BLACK, x, y, w, h);
+                g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, HAlignment.CENTER, false);
             }
 
             //draw foil effect if needed
@@ -1028,7 +964,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
                         card.setRandomFoil();
                     }
-                    CardPanel.drawFoilEffect(g, card, itemInfo.getLeft(), itemInfo.getTop(), itemInfo.getWidth(), itemInfo.getHeight(), borderSize);
+                    CardPanel.drawFoilEffect(g, card, getLeft(), getTop(), getWidth(), getHeight(), borderSize);
                 }
             }*/
         }

@@ -31,7 +31,6 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FCheckBox;
-import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
@@ -66,6 +65,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         listModel = new ItemListModel(model0);
         setAllowMultipleSelections(false);
         getPnlOptions().setVisible(false); //hide options panel by default
+        getScroller().add(list);
     }
 
     @Override
@@ -157,11 +157,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public FDisplayObject getComponent() {
-        return list;
-    }
-
-    @Override
     protected FImage getIcon() {
         return FSkinImage.LIST;
     }
@@ -244,12 +239,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected void onResize() {
+    protected void onResize(float visibleWidth, float visibleHeight) {
+        list.setSize(visibleWidth, visibleHeight);
     }
 
     @Override
     protected void onRefresh() {
         list.setListData(model.getOrderedList());
+    }
+
+    @Override
+    protected float getScrollHeight() {
+        return getScroller().getHeight();
     }
 
     @Override

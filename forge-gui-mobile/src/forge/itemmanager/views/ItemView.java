@@ -10,7 +10,6 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
-import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
@@ -28,7 +27,7 @@ public abstract class ItemView<T extends InventoryItem> {
 
     protected final ItemManager<T> itemManager;
     protected final ItemManagerModel<T> model;
-    private final FScrollPane scroller = new Scroller();
+    private final Scroller scroller = new Scroller();
     private final FLabel button;
     private final OptionsPanel pnlOptions = new OptionsPanel();
 
@@ -45,14 +44,13 @@ public abstract class ItemView<T extends InventoryItem> {
     private class Scroller extends FScrollPane {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            onResize();
+            onResize(visibleWidth, visibleHeight);
             //scroll selection into view whenever view height changes
             if (visibleHeight != heightBackup) {
                 heightBackup = visibleHeight;
                 scrollSelectionIntoView();
             }
-            getComponent().setSize(visibleWidth, visibleHeight);
-            return new ScrollBounds(visibleWidth, visibleHeight);
+            return new ScrollBounds(visibleWidth, ItemView.this.getScrollHeight());
         }
 
         @Override
@@ -61,6 +59,7 @@ public abstract class ItemView<T extends InventoryItem> {
         }
     }
 
+    protected abstract float getScrollHeight();
     protected abstract float layoutOptionsPanel(float visibleWidth, float height);
 
     private class OptionsPanel extends FScrollPane {
@@ -87,7 +86,6 @@ public abstract class ItemView<T extends InventoryItem> {
                 }
             }
         });
-        scroller.add(getComponent());
     }
 
     public FLabel getButton() {
@@ -119,7 +117,7 @@ public abstract class ItemView<T extends InventoryItem> {
         onRefresh();
         fixSelection(itemsToSelect, backupIndexToSelect, scrollValueToRestore);
     }
-    protected abstract void onResize();
+    protected abstract void onResize(float visibleWidth, float visibleHeight);
     protected abstract void onRefresh();
     protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final float scrollValueToRestore) {
         if (itemsToSelect == null) {
@@ -248,7 +246,6 @@ public abstract class ItemView<T extends InventoryItem> {
         return getCaption(); //return caption as string for display in combo box
     }
 
-    public abstract FDisplayObject getComponent();
     public abstract void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides);
     public abstract void setAllowMultipleSelections(boolean allowMultipleSelections);
     public abstract T getItemAtIndex(int index);
