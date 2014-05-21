@@ -1,13 +1,17 @@
 package forge.itemmanager.views;
 
 import forge.Forge.Graphics;
+import forge.Forge.KeyInputAdapter;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
+import forge.card.CardZoom;
 import forge.deck.DeckProxy;
+import forge.game.card.Card;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.GroupDef;
@@ -31,6 +35,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scaleMin(5);
@@ -172,128 +177,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getPnlOptions().add(lblPileBy);
         getPnlOptions().add(cbPileByOptions);
 
-        //setup display
-        /*display.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftMouseDown(MouseEvent e) {
-                if (lockInput) { return; }
-
-                if (!selectItem(e)) {
-                    //if didn't click on item, see if clicked on group header
-                    if (groupBy != null) {
-                        Point point = e.getPoint();
-                        for (Group group : groups) {
-                            if (group.getBounds().contains(point)) {
-                                if (!group.items.isEmpty() && point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
-                                    group.isCollapsed = !group.isCollapsed;
-                                    btnExpandCollapseAll.updateIsAllCollapsed();
-                                    clearSelection(); //must clear selection since indices and visible items will be changing
-                                    updateLayout(false);
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onLeftDoubleClick(MouseEvent e) {
-                if (lockInput) { return; }
-
-                ItemInfo item = getItemAtPoint(e.getPoint());
-                if (item != null && item.selected) {
-                    itemManager.activateSelectedItems();
-                }
-            }
-
-            @Override
-            public void onMiddleMouseDown(MouseEvent e) {
-                if (lockInput) { return; }
-
-                ItemInfo item = getItemAtPoint(e.getPoint());
-                if (item != null && item.item instanceof IPaperCard) {
-                    setLockHoveredItem(true); //lock hoveredItem while zoomer open
-                    Card card = Card.getCardForUi((IPaperCard) item.item);
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(card);
-                }
-            }
-
-            @Override
-            public void onMiddleMouseUp(MouseEvent e) {
-                if (lockInput) { return; }
-
-                CardZoomer.SINGLETON_INSTANCE.closeZoomer();
-                setLockHoveredItem(false);
-            }
-
-            @Override
-            public void onRightClick(MouseEvent e) {
-                if (lockInput) { return; }
-
-                if (selectItem(e)) {
-                    setLockHoveredItem(true); //lock hoveredItem while context menu open
-                    itemManager.showContextMenu(e, new Runnable() {
-                        @Override
-                        public void run() {
-                            setLockHoveredItem(false);
-                        }
-                    });
-                }
-            }
-
-            private boolean selectItem(MouseEvent e) {
-                focus();
-
-                ItemInfo item = getItemAtPoint(e.getPoint());
-                if (item == null) {
-                    if (!e.isControlDown() && !e.isShiftDown()) {
-                        clearSelection();
-                        onSelectionChange();
-                    }
-                    return false;
-                }
-
-                if (item.selected) {
-                    //toggle selection off item if Control down and left mouse down, otherwise do nothing
-                    if (e.getButton() != 1) {
-                        return true;
-                    }
-                    if (e.isControlDown()) {
-                        item.selected = false;
-                        selectedIndices.remove((Object)item.index);
-                        onSelectionChange();
-                        item.scrollIntoView();
-                        return true;
-                    }
-                }
-                if (!allowMultipleSelections || (!e.isControlDown() && !e.isShiftDown())) {
-                    clearSelection();
-                }
-                selectedIndices.add(0, item.index);
-                item.selected = true;
-                onSelectionChange();
-                item.scrollIntoView();
-                return true;
-            }
-
-            @Override
-            public void onMouseExit(MouseEvent e) {
-                if (updateHoveredItem(null, null)) {
-                    display.repaintSelf();
-                }
-            }
-        });
-        display.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                FScrollPane scroller = getScroller();
-                Point hoverScrollPos = new Point(scroller.getHorizontalScrollBar().getValue(), scroller.getVerticalScrollBar().getValue());
-                if (updateHoveredItem(e.getPoint(), hoverScrollPos)) {
-                    display.repaintSelf();
-                }
-            }
-        });*/
         Group group = new Group(""); //add default group
         groups.add(group); 
         getScroller().add(group);
@@ -545,7 +428,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         float itemWidth = (groupWidth + gap) / columnCount - gap;
         float itemHeight = itemWidth * FCardPanel.ASPECT_RATIO;
         float dx = itemWidth + gap;
-        float dy = pileBy == null ? itemHeight + gap : Math.round(itemHeight * PILE_SPACING_Y);
+        float dy = pileBy == null ? itemHeight + gap : itemHeight * PILE_SPACING_Y;
 
         for (int i = 0; i < groups.size(); i++) {
             Group group = groups.get(i);
@@ -653,19 +536,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected float getScrollHeight() {
-        return groups.get(groups.size() - 1).getBottom();
+        return groups.get(groups.size() - 1).getBottom() + PADDING;
     }
 
     private ItemInfo getItemAtPoint(float x, float y) {
         for (int i = groups.size() - 1; i >= 0; i--) {
             Group group = groups.get(i);
-            if (!group.isCollapsed && group.contains(x, y)) {
+            if (!group.isCollapsed) {
                 for (int j = group.piles.size() - 1; j >= 0; j--) {
+                    float relX = x + group.getLeft() + group.getScrollLeft();
+                    float relY = y + group.getTop() + getScrollValue();
                     Pile pile = group.piles.get(j);
-                    if (pile.contains(x, y)) {
+                    if (pile.contains(relX, relY)) {
                         for (int k = pile.items.size() - 1; k >= 0; k--) {
                             ItemInfo item = pile.items.get(k);
-                            if (item.contains(x, y)) {
+                            if (item.contains(relX, relY)) {
                                 return item;
                             }
                         }
@@ -883,6 +768,74 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             return new ScrollBounds(scrollWidth, visibleHeight);
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (count == 1) {
+                if (!items.isEmpty() && y < GROUP_HEADER_HEIGHT) {
+                    isCollapsed = !isCollapsed;
+                    btnExpandCollapseAll.updateIsAllCollapsed();
+                    clearSelection(); //must clear selection since indices and visible items will be changing
+                    updateLayout(false);
+                }
+                else {
+                    selectItem(x, y);
+                }
+            }
+            else if (count == 2) {
+                ItemInfo item = getItemAtPoint(x, y);
+                if (item != null && item.selected) {
+                    itemManager.activateSelectedItems();
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            ItemInfo item = getItemAtPoint(x, y);
+            if (item != null && item.item instanceof IPaperCard) {
+                CardZoom.show(Card.getCardForUi((IPaperCard) item.item));
+                return true;
+            }
+            return false;
+        }
+
+        private boolean selectItem(float x, float y) {
+            ItemInfo item = getItemAtPoint(x, y);
+            if (item == null) {
+                if (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown()) {
+                    clearSelection();
+                    onSelectionChange();
+                }
+                return false;
+            }
+
+            if (item.selected) {
+                if (KeyInputAdapter.isCtrlKeyDown()) {
+                    item.selected = false;
+                    selectedIndices.remove((Object)item.index);
+                    onSelectionChange();
+                    item.group.scrollIntoView(item);
+                    return true;
+                }
+            }
+            if (!allowMultipleSelections || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
+                clearSelection();
+            }
+            selectedIndices.add(0, item.index);
+            item.selected = true;
+            onSelectionChange();
+            item.group.scrollIntoView(item);
+            getScroller().scrollIntoView(item);
+            return true;
+        }
+
+        //provide special override for this function to account for special ItemInfo positioning logic
+        @Override
+        public Vector2 getChildRelativePosition(FDisplayObject child) {
+            return new Vector2(child.getLeft() - getScrollLeft(), child.getTop() - getScrollValue());
         }
     }
     private class Pile extends FDisplayObject {
