@@ -1074,11 +1074,6 @@ public class AiAttackController {
         return false; // don't attack
     }
     
-    private final boolean shouldAttack(final Player ai, final Card attacker, final Combat combat) {
-        aiAggression = 2;
-        return shouldAttack(ai, attacker, oppList, combat);
-    }
-    
     public String toProtectAttacker(SpellAbility sa) {
         if (sa.getApi() != ApiType.Protection || oppList.isEmpty() || getPossibleBlockers(oppList, attackers).isEmpty()) {
             return null;
@@ -1133,12 +1128,6 @@ public class AiAttackController {
             return artifact;
         }
         return null;
-    }
-    
-    public static boolean shouldThisAttack(final Player ai, Card attacker) {
-        AiAttackController aiAtk = new AiAttackController(ai, attacker);
-        Combat combat = ai.getGame().getCombat();
-        return aiAtk.shouldAttack(ai, attacker, combat);
     }
 
 } // end class ComputerUtil_Attack2

@@ -625,6 +625,12 @@ public class ComputerUtilCard {
         aiAtk.declareAttackers(combat);
         return combat.isAttacking(card);
     }
+    public static boolean doesSpecifiedCreatureAttackAI(final Player ai, final Card card) {
+        AiAttackController aiAtk = new AiAttackController(ai, card);
+        Combat combat = new Combat(ai);
+        aiAtk.declareAttackers(combat);
+        return combat.isAttacking(card);
+    }
 
     /**
      * getMostExpensivePermanentAI.

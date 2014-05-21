@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 
-import forge.ai.AiAttackController;
 import forge.ai.AiBlockController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -153,7 +152,7 @@ public class AnimateAi extends SpellAbilityAi {
                 if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                     Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
                     AnimateAi.becomeAnimated(animatedCopy, sa);
-                    if (ph.isPlayerTurn(aiPlayer) && !AiAttackController.shouldThisAttack(aiPlayer, animatedCopy)) {
+                    if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
                         return false;
                     }
                     if (ph.getPlayerTurn().isOpponentOf(aiPlayer) && !AiBlockController.shouldThisBlock(aiPlayer, animatedCopy)) {
