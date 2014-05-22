@@ -107,10 +107,10 @@ public class AbilityUtils {
             }
         }
 
-        else if (defined.equals("TopOfLibrary")) {
+        else if (defined.endsWith("OfLibrary")) {
             final List<Card> lib = hostCard.getController().getCardsIn(ZoneType.Library);
-            if (lib.size() > 0) {
-                c = lib.get(0);
+            if (lib.size() > 0) { // TopOfLibrary or BottomOfLibrary
+                c = lib.get(defined.startsWith("Top") ? 0 : lib.size() - 1);
             } else {
                 // we don't want this to fall through and return the "Self"
                 return cards;
