@@ -785,7 +785,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     updateLayout(false);
                 }
                 else {
-                    selectItem(x, y);
+                    selectItem(getItemAtPoint(x, y));
                 }
             }
             else if (count == 2) {
@@ -800,6 +800,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         @Override
         public boolean longPress(float x, float y) {
             ItemInfo item = getItemAtPoint(x, y);
+            selectItem(item);
             if (item != null && item.item instanceof IPaperCard) {
                 CardZoom.show(Card.getCardForUi((IPaperCard) item.item));
                 return true;
@@ -807,8 +808,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             return false;
         }
 
-        private boolean selectItem(float x, float y) {
-            ItemInfo item = getItemAtPoint(x, y);
+        private boolean selectItem(ItemInfo item) {
             if (item == null) {
                 if (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown()) {
                     clearSelection();
@@ -850,7 +850,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         public void draw(Graphics g) {
             final float visibleTop = getScrollValue();
             final float visibleBottom = visibleTop + getScroller().getHeight();
-
+            
+            ItemInfo skippedItem = null;
             for (ItemInfo itemInfo : items) {
                 if (itemInfo.getBottom() < visibleTop) {
                     continue;
@@ -858,7 +859,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (itemInfo.getTop() >= visibleBottom) {
                     break;
                 }
-                itemInfo.draw(g);
+                if (itemInfo.selected) {
+                    skippedItem = itemInfo;
+                }
+                else {
+                    itemInfo.draw(g);
+                }
+            }
+            if (skippedItem != null) {
+                skippedItem.draw(g);
             }
         }
     }
