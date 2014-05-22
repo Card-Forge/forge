@@ -549,8 +549,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             Group group = groups.get(i);
             if (!group.isCollapsed) {
                 for (int j = group.piles.size() - 1; j >= 0; j--) {
-                    float relX = x + group.getLeft() + group.getScrollLeft();
-                    float relY = y + group.getTop() + getScrollValue();
+                    float relX = x + group.getScrollLeft() - group.getLeft();
+                    float relY = y + getScrollValue();
                     Pile pile = group.piles.get(j);
                     if (pile.contains(relX, relY)) {
                         for (int k = pile.items.size() - 1; k >= 0; k--) {
@@ -777,19 +777,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (count == 1) {
-                if (!items.isEmpty() && y < GROUP_HEADER_HEIGHT) {
-                    isCollapsed = !isCollapsed;
-                    btnExpandCollapseAll.updateIsAllCollapsed();
-                    clearSelection(); //must clear selection since indices and visible items will be changing
-                    updateLayout(false);
-                }
-                else {
-                    selectItem(getItemAtPoint(x, y));
-                }
+            if (!items.isEmpty() && y < GROUP_HEADER_HEIGHT) {
+                isCollapsed = !isCollapsed;
+                btnExpandCollapseAll.updateIsAllCollapsed();
+                clearSelection(); //must clear selection since indices and visible items will be changing
+                updateLayout(false);
+            }
+            else if (count == 1) {
+                selectItem(getItemAtPoint(x + getLeft(), y + getTop()));
             }
             else if (count == 2) {
-                ItemInfo item = getItemAtPoint(x, y);
+                ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
                 if (item != null && item.selected) {
                     itemManager.activateSelectedItems();
                 }
@@ -799,7 +797,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public boolean longPress(float x, float y) {
-            ItemInfo item = getItemAtPoint(x, y);
+            ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
             selectItem(item);
             if (item != null && item.item instanceof IPaperCard) {
                 CardZoom.show(Card.getCardForUi((IPaperCard) item.item));
