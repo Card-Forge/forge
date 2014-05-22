@@ -544,6 +544,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         return groups.get(groups.size() - 1).getBottom() + PADDING;
     }
 
+    @Override
+    protected boolean onScrollerTap(float x, float y, int count) {
+        ItemInfo item = getItemAtPoint(x, y);
+        if (count == 1) {
+            selectItem(item);
+        }
+        else if (count == 2) {
+            if (item != null && item.selected) {
+                itemManager.activateSelectedItems();
+            }
+        }
+        return true;
+    }
+
     private ItemInfo getItemAtPoint(float x, float y) {
         for (int i = groups.size() - 1; i >= 0; i--) {
             Group group = groups.get(i);
@@ -682,6 +696,35 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
 
+    private boolean selectItem(ItemInfo item) {
+        if (item == null) {
+            if (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown()) {
+                clearSelection();
+                onSelectionChange();
+            }
+            return false;
+        }
+
+        if (item.selected) {
+            if (KeyInputAdapter.isCtrlKeyDown()) {
+                item.selected = false;
+                selectedIndices.remove((Object)item.index);
+                onSelectionChange();
+                item.group.scrollIntoView(item);
+                return true;
+            }
+        }
+        if (!allowMultipleSelections || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
+            clearSelection();
+        }
+        selectedIndices.add(0, item.index);
+        item.selected = true;
+        onSelectionChange();
+        item.group.scrollIntoView(item);
+        getScroller().scrollIntoView(item);
+        return true;
+    }
+
     @Override
     public void scrollSelectionIntoView() {
         if (selectedIndices.isEmpty()) { return; }
@@ -782,57 +825,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 btnExpandCollapseAll.updateIsAllCollapsed();
                 clearSelection(); //must clear selection since indices and visible items will be changing
                 updateLayout(false);
-            }
-            else if (count == 1) {
-                selectItem(getItemAtPoint(x + getLeft(), y + getTop()));
-            }
-            else if (count == 2) {
-                ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
-                if (item != null && item.selected) {
-                    itemManager.activateSelectedItems();
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public boolean longPress(float x, float y) {
-            ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
-            selectItem(item);
-            if (item != null && item.item instanceof IPaperCard) {
-                CardZoom.show(Card.getCardForUi((IPaperCard) item.item));
                 return true;
             }
             return false;
         }
 
-        private boolean selectItem(ItemInfo item) {
-            if (item == null) {
-                if (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown()) {
-                    clearSelection();
-                    onSelectionChange();
-                }
-                return false;
+        @Override
+        public boolean longPress(float x, float y) {
+            ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
+            if (item != null && item.item instanceof IPaperCard) {
+                CardZoom.show(Card.getCardForUi((IPaperCard) item.item));
+                return true;
             }
-
-            if (item.selected) {
-                if (KeyInputAdapter.isCtrlKeyDown()) {
-                    item.selected = false;
-                    selectedIndices.remove((Object)item.index);
-                    onSelectionChange();
-                    item.group.scrollIntoView(item);
-                    return true;
-                }
-            }
-            if (!allowMultipleSelections || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
-                clearSelection();
-            }
-            selectedIndices.add(0, item.index);
-            item.selected = true;
-            onSelectionChange();
-            item.group.scrollIntoView(item);
-            getScroller().scrollIntoView(item);
-            return true;
+            return false;
         }
 
         //provide special override for this function to account for special ItemInfo positioning logic

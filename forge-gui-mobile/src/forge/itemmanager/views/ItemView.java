@@ -54,11 +54,19 @@ public abstract class ItemView<T extends InventoryItem> {
         }
 
         @Override
+        public boolean tap(float x, float y, int count) {
+            return onScrollerTap(x, y, count);
+        }
+
+        @Override
         public void drawOverlay(Graphics g) {
             g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
     }
 
+    protected boolean onScrollerTap(float x, float y, int count) {
+        return false;
+    }
     protected abstract float getScrollHeight();
     protected abstract float layoutOptionsPanel(float visibleWidth, float height);
 
