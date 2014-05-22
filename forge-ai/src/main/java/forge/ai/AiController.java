@@ -1395,6 +1395,7 @@ public class AiController {
         List<Card> result = new ArrayList<>();
         switch( sa.getApi()) {
             case TwoPiles:
+                // TODO: improve AI
                 Card biggest = null;
                 Card smallest = null;
                 biggest = pool.get(0);
@@ -1409,7 +1410,7 @@ public class AiController {
                 }
                 result.add(biggest);
 
-                if (max >= 3 && !result.contains(smallest)) {
+                if (max > 3 && !result.contains(smallest)) {
                     result.add(smallest);
                 }
                 break;

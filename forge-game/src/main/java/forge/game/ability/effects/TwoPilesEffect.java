@@ -86,9 +86,12 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 }
                 List<Card> pool = CardLists.getValidCards(pool0, valid, card.getController(), card);
                 int size = pool.size();
+                if (size == 0) {
+                    return;
+                }
 
                 // first, separate the cards into piles
-                final List<Card> pile1 = separator.getController().chooseCardsForEffect(pool, sa, "Divide cards into two piles", 1, size - 1, false);
+                final List<Card> pile1 = separator.getController().chooseCardsForEffect(pool, sa, "Divide cards into two piles", 0, size, false);
                 final List<Card> pile2 = Lists.newArrayList(pool);
                 Iterables.removeAll(pile2, pile1);
 
