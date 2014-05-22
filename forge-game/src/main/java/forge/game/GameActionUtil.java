@@ -17,8 +17,10 @@
  */
 package forge.game;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.MagicColor;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
@@ -33,6 +35,7 @@ import forge.game.player.Player;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -480,9 +483,9 @@ public final class GameActionUtil {
      */
     private static boolean hasUrzaLands(final Player p) {
         final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine"))
-                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower"))
-                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
+        return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
+                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
+                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
     }
 
     /**
