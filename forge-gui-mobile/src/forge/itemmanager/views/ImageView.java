@@ -61,6 +61,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
     private ItemInfo focalItem;
+    private boolean updatingLayout;
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final ArrayList<Group> groups = new ArrayList<Group>();
 
@@ -416,6 +417,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateLayout(boolean forRefresh) {
+        if (updatingLayout) { return; } //prevent infinite loop
+        updatingLayout = true;
+
         focalItem = null; //clear cached focalItem when layout changes
 
         float x, groupY, pileY, pileHeight, maxPileHeight;
@@ -530,8 +534,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                 }
             }
-            getScroller().revalidate();
         }
+        getScroller().revalidate();
+        updatingLayout = false;
     }
 
     @Override
