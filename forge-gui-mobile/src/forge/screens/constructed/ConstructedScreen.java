@@ -176,7 +176,9 @@ public class ConstructedScreen extends LaunchScreen {
         updatePlayersFromPrefs();
 
         //disable player count and variants for now until they work properly
+        lblPlayers.setEnabled(false);
         cbPlayerCount.setEnabled(false);
+        lblVariants.setEnabled(false);
         cbVariants.setEnabled(false);
     }
 
@@ -427,8 +429,8 @@ public class ConstructedScreen extends LaunchScreen {
         private final FToggleSwitch humanAiSwitch = new FToggleSwitch("Human", "AI");
 
         private boolean playerIsArchenemy = false;
-        private FComboBox<Object> teamComboBox = new FComboBox<Object>();
-        private FComboBox<Object> aeTeamComboBox = new FComboBox<Object>();
+        private FComboBox<Object> cbTeam = new FComboBox<Object>();
+        private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
 
         private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Deck: (None)").build();
         private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: (None)").build();
@@ -473,10 +475,10 @@ public class ConstructedScreen extends LaunchScreen {
 
             add(newLabel("Team:"));
             populateTeamsComboBoxes();
-            teamComboBox.setChangedHandler(teamChangedHandler);
-            aeTeamComboBox.setChangedHandler(teamChangedHandler);
-            add(teamComboBox);
-            add(aeTeamComboBox);
+            cbTeam.setChangedHandler(teamChangedHandler);
+            cbArchenemyTeam.setChangedHandler(teamChangedHandler);
+            add(cbTeam);
+            add(cbArchenemyTeam);
 
             add(btnDeck);
             btnDeck.setCommand(new FEventHandler() {
@@ -553,6 +555,10 @@ public class ConstructedScreen extends LaunchScreen {
             lstPlanarDecks.setSelectedIndex(0);
 
             updateVanguardList();
+
+            //disable team combo boxes for now
+            cbTeam.setEnabled(false);
+            cbArchenemyTeam.setEnabled(false);
         }
 
         @Override
@@ -576,11 +582,11 @@ public class ConstructedScreen extends LaunchScreen {
             humanAiSwitch.setPosition(x, y);
             w = x - avatarSize - 3 * PADDING;
             x = avatarSize + 2 * PADDING;
-            if (aeTeamComboBox.isVisible()) {
-                aeTeamComboBox.setBounds(x, y, w, fieldHeight);
+            if (cbArchenemyTeam.isVisible()) {
+                cbArchenemyTeam.setBounds(x, y, w, fieldHeight);
             }
             else {
-                teamComboBox.setBounds(x, y, w, fieldHeight);
+                cbTeam.setBounds(x, y, w, fieldHeight);
             }
 
             y += dy;
@@ -692,9 +698,9 @@ public class ConstructedScreen extends LaunchScreen {
                     || (isArchenemyApplied && playerIsArchenemy);
             btnSchemeDeck.setVisible(archenemyVisiblity);
 
-            teamComboBox.setVisible(!isArchenemyApplied);
-            aeTeamComboBox.setVisible(isArchenemyApplied);
-            aeTeamComboBox.setEnabled(!(isArchenemyApplied && playerIsArchenemy));
+            cbTeam.setVisible(!isArchenemyApplied);
+            cbArchenemyTeam.setVisible(isArchenemyApplied);
+            cbArchenemyTeam.setEnabled(!(isArchenemyApplied && playerIsArchenemy));
 
             btnPlanarDeck.setVisible(appliedVariants.contains(GameType.Planechase));
             btnVanguardAvatar.setVisible(appliedVariants.contains(GameType.Vanguard));
@@ -709,16 +715,16 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         private void populateTeamsComboBoxes() {
-            aeTeamComboBox.addItem("Archenemy");
-            aeTeamComboBox.addItem("Heroes");
-            aeTeamComboBox.setSelectedIndex(archenemyTeams.get(index) - 1);
-            aeTeamComboBox.setEnabled(playerIsArchenemy);
+            cbArchenemyTeam.addItem("Archenemy");
+            cbArchenemyTeam.addItem("Heroes");
+            cbArchenemyTeam.setSelectedIndex(archenemyTeams.get(index) - 1);
+            cbArchenemyTeam.setEnabled(playerIsArchenemy);
 
             for (int i = 1; i <= MAX_PLAYERS; i++) {
-                teamComboBox.addItem("Team " + i);
+                cbTeam.addItem("Team " + i);
             }
-            teamComboBox.setSelectedIndex(teams.get(index) - 1);
-            teamComboBox.setEnabled(true);
+            cbTeam.setSelectedIndex(teams.get(index) - 1);
+            cbTeam.setEnabled(true);
         }
 
         private FEventHandler teamChangedHandler = new FEventHandler() {
@@ -736,7 +742,7 @@ public class ConstructedScreen extends LaunchScreen {
                         for (PlayerPanel pp : playerPanels) {
                             int i = pp.index;
                             archenemyTeams.set(i, i == lastArchenemy ? 1 : 2);
-                            pp.aeTeamComboBox.setSelectedIndex(i == lastArchenemy ? 0 : 1);
+                            pp.cbArchenemyTeam.setSelectedIndex(i == lastArchenemy ? 0 : 1);
                             pp.toggleIsPlayerArchenemy();
                         }
                     }
