@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.18
+Forge Beta: 05-23-2014 ver 1.5.18
 
 
-13### cards in total.
+13810 cards in total.
 
 
 -------------
@@ -31,15 +31,16 @@ Forge now includes all of the new Journey into Nyx cards. It may take a few days
 - New Conspiracy cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
+
 ---------
 New Cards
 ---------
 
+Guardian Beast
 Illicit Auction
 Mages' Contest
-Pain's Reward
 Mana Web
-Guardian Beast
+Pain's Reward
 Wall of Shadows
 
 
@@ -54,21 +55,26 @@ Heartwood Storyteller
 New Conspiracy branch Cards
 ---------------------------
 
-Dack Fayden
-Magister of Worth
-Brago, King Eternal
-Tyrant's Choice
-Selvala, Explorer Returned
-Marchesa, the Black Rose
-Extract from Darkness
-Rousing of Souls
-Reign of the Pit
 Brago's Representative
+Brago, King Eternal
 Council Guardian
+Dack Fayden
+Drakestown Forgotten
+Extract from Darkness
+Grenzo, Dungeon Warden
+Magister of Worth
 Marchesa's Infiltrator
+Marchesa, the Black Rose
+Muzzio, Visionary Architect
 Plea for Power
+Reign of the Pit
+Rousing of Souls
+Scourge of the Throne
 Selvala's Charge
+Selvala, Explorer Returned
 Split Decision
+Treasonous Ogre
+Tyrant's Choice
 
 
 ------------
@@ -106,7 +112,22 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Asepetci
+DrDev
+excessum
+Gos
+Hellfish
+KrazyTheFox
+Marc
+Max
+Nordos
+Sloth
+Sol
+Swordshine
+Xitax
+Xyx
+Zirbert
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
