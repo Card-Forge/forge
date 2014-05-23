@@ -4,6 +4,7 @@ import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FEvent.FEventHandler;
 
 public class FCheckBoxMenuItem extends FMenuItem {
@@ -41,15 +42,6 @@ public class FCheckBoxMenuItem extends FMenuItem {
         float h = CHECKBOX_SIZE;
         float x = getWidth() - PADDING - w;
         float y = (getHeight() - h) / 2;
-        g.drawRect(1, CHECKBOX_COLOR, x, y, w, h);
-        if (checked) {
-            //draw check mark
-            x += 3;
-            y++;
-            w -= 6;
-            h -= 3;
-            g.drawLine(2, FORE_COLOR, x, y + h / 2, x + w / 2, y + h);
-            g.drawLine(2, FORE_COLOR, x + w / 2, y + h, x + w, y);
-        }
+        FCheckBox.drawCheckBox(g, CHECKBOX_COLOR, FORE_COLOR, checked, x, y, w, h);
     }
 }

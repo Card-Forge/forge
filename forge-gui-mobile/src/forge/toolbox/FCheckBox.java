@@ -6,6 +6,7 @@ import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.util.Utils;
 
 public class FCheckBox extends FLabel {
     private static final FSkinColor CHECK_COLOR = FSkinColor.get(Colors.CLR_TEXT);
@@ -35,21 +36,27 @@ public class FCheckBox extends FLabel {
 
         @Override
         public void draw(Graphics g, float x, float y, float w, float h) {
-            g.drawRect(1, BOX_COLOR, x, y, w, h);
-            if (isSelected()) {
-                //draw check mark
-                x += 3;
-                y++;
-                w -= 6;
-                h -= 3;
-                g.drawLine(2, CHECK_COLOR, x, y + h / 2, x + w / 2, y + h);
-                g.drawLine(2, CHECK_COLOR, x + w / 2, y + h, x + w, y);
-            }
+            drawCheckBox(g, BOX_COLOR, CHECK_COLOR, isSelected(), x, y, w, h);
         }
     }
 
     @Override
     public void draw(Graphics g) {
         drawContent(g, getWidth(), getHeight(), false);
+    }
+
+    public static void drawCheckBox(Graphics g, FSkinColor boxColor, FSkinColor checkColor, boolean isChecked, float x, float y, float w, float h) {
+        g.drawRect(Utils.scaleMin(1), boxColor, x, y, w, h);
+        if (isChecked) {
+            //draw check mark
+            float padX = Utils.scaleX(3);
+            float thickness = Utils.scaleMin(2);
+            x += padX;
+            y += Utils.scaleY(1);
+            w -= 2 * padX;
+            h -= Utils.scaleY(3);
+            g.drawLine(thickness, checkColor, x, y + h / 2, x + w / 2, y + h);
+            g.drawLine(thickness, checkColor, x + w / 2, y + h, x + w, y);
+        }
     }
 }

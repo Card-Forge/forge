@@ -17,6 +17,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Utils;
@@ -186,18 +187,7 @@ public class SettingsScreen extends FScreen {
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
             x += w - h;
             w = h;
-            g.drawRect(Utils.scaleMin(1), DESC_COLOR, x, y, w, h);
-            if (FModel.getPreferences().getPrefBoolean(pref)) {
-                //draw check mark
-                float padX = Utils.scaleX(3);
-                float thickness = Utils.scaleMin(2);
-                x += padX;
-                y += Utils.scaleY(1);
-                w -= 2 * padX;
-                h -= Utils.scaleY(3);
-                g.drawLine(thickness, color, x, y + h / 2, x + w / 2, y + h);
-                g.drawLine(thickness, color, x + w / 2, y + h, x + w, y);
-            }
+            FCheckBox.drawCheckBox(g, DESC_COLOR, color, FModel.getPreferences().getPrefBoolean(pref), x, y, w, h);
         }
     }
 
