@@ -36,12 +36,14 @@ public class VPlayers extends FDropDown {
 
     @Override
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
-        float y = 0;
+        float totalHeight = getChildCount() * PlayerInfoPanel.HEIGHT;
+        float y = totalHeight - PlayerInfoPanel.HEIGHT;
+        //display in reverse order so gui player on bottom
         for (FDisplayObject panel : getChildren()) {
             panel.setBounds(0, y, maxWidth, PlayerInfoPanel.HEIGHT);
-            y += PlayerInfoPanel.HEIGHT;
+            y -= PlayerInfoPanel.HEIGHT;
         }
-        return new ScrollBounds(maxWidth, y);
+        return new ScrollBounds(maxWidth, totalHeight);
     }
 
     private static class PlayerInfoPanel extends FContainer {
