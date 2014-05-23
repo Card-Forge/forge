@@ -46,7 +46,6 @@ import forge.toolbox.FTextField;
 import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.Lang;
-import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
@@ -662,29 +661,16 @@ public class ConstructedScreen extends LaunchScreen {
         private FEventHandler avatarCommand = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                setRandomAvatar();
+                AvatarSelector.show(getPlayerName(), avatarIndex, getUsedAvatars(), new Callback<Integer>() {
+                    @Override
+                    public void run(Integer result) {
+                        setAvatar(result);
 
-                //TODO: Support selecting avatar with option at top or bottom to select a random avatar
-                
-                /*final FLabel avatar = (FLabel)e.getSource();
-
-                final AvatarSelector aSel = new AvatarSelector(getPlayerName(), avatarIndex, getUsedAvatars());
-                for (final FLabel lbl : aSel.getSelectables()) {
-                    lbl.setCommand(new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            setAvatar(Integer.valueOf(lbl.getName().substring(11)));
-                            aSel.setVisible(false);
+                        if (index < 2) {
+                            updateAvatarPrefs();
                         }
-                    });
-                }
-                
-                aSel.setVisible(true);
-                aSel.dispose();*/
-
-                if (index < 2) {
-                    updateAvatarPrefs();
-                }
+                    }
+                });
             }
         };
 
@@ -807,25 +793,12 @@ public class ConstructedScreen extends LaunchScreen {
         private void createAvatar() {
             String[] currentPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
             if (index < currentPrefs.length) {
-                avatarIndex = Integer.parseInt(currentPrefs[index]);
-                avatarLabel.setIcon(new FTextureRegionImage(FSkin.getAvatars().get(avatarIndex)));
+                setAvatar(Integer.parseInt(currentPrefs[index]));
             }
             else {
-                setRandomAvatar();
+                setAvatar(AvatarSelector.getRandomAvatar(getUsedAvatars()));
             }
-
             avatarLabel.setCommand(avatarCommand);
-        }
-
-        //Applies a random avatar, avoiding avatars already used.
-        public void setRandomAvatar() {
-            int random = 0;
-
-            List<Integer> usedAvatars = getUsedAvatars();
-            do {
-                random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
-            } while (usedAvatars.contains(random));
-            setAvatar(random);
         }
 
         public void setAvatar(int newAvatarIndex) {
