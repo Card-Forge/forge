@@ -79,9 +79,7 @@ public class MatchScreen extends FScreen {
 
         menuBar = add(new FMenuBar());
         menuBar.addTab("Game", new VGameMenu());
-        VPlayers players = new VPlayers();
-        menuBar.addTab("Players (" + playerPanels.size() + ")", players);
-        players.getMenuTab().setEnabled(false); //disable players tab for now
+        menuBar.addTab("Players (" + playerPanels.size() + ")", new VPlayers());
         menuBar.addTab("Log", log);
         menuBar.addTab("Dev", devMenu);
         menuBar.addTab("Stack (0)", stack);
