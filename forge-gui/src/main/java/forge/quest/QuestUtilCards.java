@@ -609,7 +609,6 @@ public final class QuestUtilCards {
         
         List<BoosterBox> output = new ArrayList<>();
         for (CardEdition e : editions) {
-            System.out.println(e);
             output.add(BoosterBox.FN_FROM_SET.apply(e));
         }
         
