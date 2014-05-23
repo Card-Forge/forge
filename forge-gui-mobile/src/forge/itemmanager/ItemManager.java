@@ -243,7 +243,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         final int backupIndexToSelect = currentView.getSelectedIndex();
         final Iterable<T> itemsToSelect; //only retain selected items if not single selection of first item
-        if (backupIndexToSelect > 0 || getSelectionCount() > 1) {
+        if (backupIndexToSelect > 0 || currentView.getSelectionCount() > 1) {
             itemsToSelect = currentView.getSelectedItems();
         }
         else {

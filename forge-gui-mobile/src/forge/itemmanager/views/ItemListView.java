@@ -70,8 +70,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
-        final Iterable<T> selectedItemsBefore = getSelectedItems();
-
         //ensure cols ordered properly
         final List<ItemColumn> cols = new LinkedList<ItemColumn>();
         for (ItemColumnConfig colConfig : config.getCols().values()) {
@@ -153,7 +151,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         listModel.setup();
-        refresh(selectedItemsBefore, 0, 0);
+        refresh(null, 0, 0);
     }
 
     @Override
