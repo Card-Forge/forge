@@ -135,9 +135,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FLabel lblGroupBy = new FLabel.Builder().text("Group:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
+    private final FLabel lblGroupBy = new FLabel.Builder().text("Groups:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
     private final FComboBox<Object> cbGroupByOptions = new FComboBox<Object>();
-    private final FLabel lblPileBy = new FLabel.Builder().text("Pile:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
+    private final FLabel lblPileBy = new FLabel.Builder().text("Piles:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
     private final FComboBox<Object> cbPileByOptions = new FComboBox<Object>();
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {

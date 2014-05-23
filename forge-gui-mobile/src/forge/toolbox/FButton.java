@@ -18,7 +18,6 @@ import forge.util.Utils;
 
 public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final float DISABLED_COMPOSITE = 0.25f;
     private static final float PADDING = Utils.scaleX(10);
 
     private FSkinImage imgL, imgM, imgR;
@@ -173,11 +172,6 @@ public class FButton extends FDisplayObject implements IButton {
         float cornerTextOffsetX = cornerButtonWidth / 2;
         float cornerTextOffsetY = (cornerButtonHeight - h) / 2;
 
-        boolean disabled = !isEnabled();
-        if (disabled) {
-            g.setAlphaComposite(DISABLED_COMPOSITE);
-        }
-
         //determine images to draw and text alignment based on which corner button is in (if any)
         switch (corner) {
         case None:
@@ -212,10 +206,6 @@ public class FButton extends FDisplayObject implements IButton {
 
         if (!StringUtils.isEmpty(text)) {
             g.drawText(text, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
-        }
-
-        if (disabled) {
-            g.resetAlphaComposite();
         }
     }
 

@@ -60,13 +60,13 @@ public class ConstructedScreen extends LaunchScreen {
 
     // General variables
     private final FLabel lblPlayers = new FLabel.Builder().text("Players:").fontSize(VARIANTS_FONT_SIZE).build();
-    private final FComboBox<Integer> cmbPlayerCount;
+    private final FComboBox<Integer> cbPlayerCount;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
     private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
 
     // Variants frame and variables
     private final FLabel lblVariants = new FLabel.Builder().text("Variants:").fontSize(VARIANTS_FONT_SIZE).build();
-    private final FComboBox<Object> cmbVariants;
+    private final FComboBox<Object> cbVariants;
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
 
     private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
@@ -102,13 +102,13 @@ public class ConstructedScreen extends LaunchScreen {
         super("Constructed");
 
         add(lblPlayers);
-        cmbPlayerCount = add(new FComboBox<Integer>());
-        cmbPlayerCount.setFontSize(VARIANTS_FONT_SIZE);
+        cbPlayerCount = add(new FComboBox<Integer>());
+        cbPlayerCount.setFontSize(VARIANTS_FONT_SIZE);
         for (int i = 2; i <= MAX_PLAYERS; i++) {
-            cmbPlayerCount.addItem(i);
+            cbPlayerCount.addItem(i);
         }
-        cmbPlayerCount.setSelectedItem(2);
-        cmbPlayerCount.setChangedHandler(new FEventHandler() {
+        cbPlayerCount.setSelectedItem(2);
+        cbPlayerCount.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 int numPlayers = getNumPlayers();
@@ -120,29 +120,29 @@ public class ConstructedScreen extends LaunchScreen {
         });
 
         add(lblVariants);
-        cmbVariants = add(new FComboBox<Object>());
-        cmbVariants.setFontSize(VARIANTS_FONT_SIZE);
-        cmbVariants.addItem("(None)");
-        cmbVariants.addItem(GameType.Vanguard);
-        cmbVariants.addItem(GameType.Commander);
-        cmbVariants.addItem(GameType.Planechase);
-        cmbVariants.addItem(GameType.Archenemy);
-        cmbVariants.addItem(GameType.ArchenemyRumble);
-        cmbVariants.addItem("More....");
-        cmbVariants.setChangedHandler(new FEventHandler() {
+        cbVariants = add(new FComboBox<Object>());
+        cbVariants.setFontSize(VARIANTS_FONT_SIZE);
+        cbVariants.addItem("(None)");
+        cbVariants.addItem(GameType.Vanguard);
+        cbVariants.addItem(GameType.Commander);
+        cbVariants.addItem(GameType.Planechase);
+        cbVariants.addItem(GameType.Archenemy);
+        cbVariants.addItem(GameType.ArchenemyRumble);
+        cbVariants.addItem("More....");
+        cbVariants.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (cmbVariants.getSelectedIndex() <= 0) {
+                if (cbVariants.getSelectedIndex() <= 0) {
                     appliedVariants.clear();
                     updateLayoutForVariants();
                 }
-                else if (cmbVariants.getSelectedIndex() == cmbVariants.getItemCount() - 1) {
+                else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
                     Forge.openScreen(new MultiVariantSelect());
                     updateVariantSelection();
                 }
                 else {
                     appliedVariants.clear();
-                    appliedVariants.add((GameType)cmbVariants.getSelectedItem());
+                    appliedVariants.add((GameType)cbVariants.getSelectedItem());
                     updateLayoutForVariants();
                 }
             }
@@ -174,14 +174,18 @@ public class ConstructedScreen extends LaunchScreen {
         getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
 
         updatePlayersFromPrefs();
+
+        //disable player count and variants for now until they work properly
+        cbPlayerCount.setEnabled(false);
+        cbVariants.setEnabled(false);
     }
 
     private void updateVariantSelection() {
         if (appliedVariants.isEmpty()) {
-            cmbVariants.setSelectedIndex(0);
+            cbVariants.setSelectedIndex(0);
         }
         else if (appliedVariants.size() == 1) {
-            cmbVariants.setSelectedItem(appliedVariants.iterator().next());
+            cbVariants.setSelectedItem(appliedVariants.iterator().next());
         }
         else {
             String text = "";
@@ -191,7 +195,7 @@ public class ConstructedScreen extends LaunchScreen {
                 }
                 text += variantType.toString();
             }
-            cmbVariants.setText(text);
+            cbVariants.setText(text);
         }
     }
 
@@ -206,16 +210,16 @@ public class ConstructedScreen extends LaunchScreen {
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
         float x = PADDING;
         float y = startY + PADDING;
-        float fieldHeight = cmbPlayerCount.getHeight();
+        float fieldHeight = cbPlayerCount.getHeight();
         lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
         x += lblPlayers.getWidth();
-        cmbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-        x += cmbPlayerCount.getWidth() + PADDING;
+        cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        x += cbPlayerCount.getWidth() + PADDING;
         lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
         x += lblVariants.getWidth();
-        cmbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
+        cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
 
-        y += cmbPlayerCount.getHeight() + PADDING;
+        y += cbPlayerCount.getHeight() + PADDING;
         playersScroll.setBounds(0, y, width, height - y);
     }
 
@@ -224,10 +228,10 @@ public class ConstructedScreen extends LaunchScreen {
     }
 
     public int getNumPlayers() {
-        return cmbPlayerCount.getSelectedItem();
+        return cbPlayerCount.getSelectedItem();
     }
     public void setNumPlayers(int numPlayers) {
-        cmbPlayerCount.setSelectedItem(numPlayers);
+        cbPlayerCount.setSelectedItem(numPlayers);
     }
 
     @Override

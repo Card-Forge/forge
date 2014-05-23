@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Forge.Graphics;
 
 public abstract class FDisplayObject {
+    protected static final float DISABLED_COMPOSITE = 0.25f;
+
     private boolean visible = true;
     private boolean enabled = true;
     private final Rectangle bounds = new Rectangle();

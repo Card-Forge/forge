@@ -37,7 +37,16 @@ public abstract class FContainer extends FDisplayObject {
         drawBackground(g);
         for (FDisplayObject child : children) {
             if (child.isVisible()) {
+                final boolean disabled = !child.isEnabled();
+                if (disabled) {
+                    g.setAlphaComposite(DISABLED_COMPOSITE);
+                }
+
                 g.draw(child);
+
+                if (disabled) {
+                    g.resetAlphaComposite();
+                }
             }
         }
         drawOverlay(g);
