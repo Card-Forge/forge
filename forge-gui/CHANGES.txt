@@ -32,6 +32,14 @@ Forge now includes all of the new Journey into Nyx cards. It may take a few days
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- Creature Stacking -
+You can now optionally have identical creatures stack as everything else does.
+
+
+- Quest Additions -
+Credits are now awarded for life total differences, making more deck archetypes more rewarding. Win streaks now award cards at certain thresholds. New bazaar item allows for a greater bonus booster pack selection... for a high price.
+
+
 ---------
 New Cards
 ---------

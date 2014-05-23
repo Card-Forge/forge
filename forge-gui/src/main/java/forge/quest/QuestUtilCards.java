@@ -17,17 +17,37 @@
  */
 package forge.quest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.card.*;
+import forge.card.BoosterSlots;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.ICardDatabase;
+import forge.card.MagicColor;
+import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
-import forge.item.*;
+import forge.item.BoosterBox;
+import forge.item.BoosterPack;
+import forge.item.FatPack;
+import forge.item.IPaperCard;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.item.PreconDeck;
+import forge.item.SealedProduct;
+import forge.item.TournamentPack;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
@@ -39,12 +59,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -573,12 +587,34 @@ public final class QuestUtilCards {
     }
     
     private void generateBoosterBoxesInShop(final int count) {
+        
+        if (count == 0) {
+            return;
+        }
+        
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_BOOSTER_BOX;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, BoosterBox.FN_FROM_SET), count));
+
+        List<CardEdition> editions = new ArrayList<>();
+        for (CardEdition e : rightEditions) {
+            editions.add(e);
+        }
+        
+        Collections.shuffle(editions);
+        
+        editions = editions.subList(0, Math.max(count / 2, 1));
+        
+        List<BoosterBox> output = new ArrayList<>();
+        for (CardEdition e : editions) {
+            System.out.println(e);
+            output.add(BoosterBox.FN_FROM_SET.apply(e));
+        }
+        
+        this.qa.getShopList().addAllFlat(output);
+        
     }
 
     /**
