@@ -62,6 +62,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private GroupDef groupBy = null;
     private ItemInfo focalItem;
     private boolean updatingLayout;
+    private float totalZoomAmount;
     private final ArrayList<ItemInfo> orderedItems = new ArrayList<ItemInfo>();
     private final ArrayList<Group> groups = new ArrayList<Group>();
 
@@ -545,7 +546,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected boolean onScrollerTap(float x, float y, int count) {
+    protected boolean tap(float x, float y, int count) {
         ItemInfo item = getItemAtPoint(x, y);
         if (count == 1) {
             selectItem(item);
@@ -554,6 +555,22 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (item != null && item.selected) {
                 itemManager.activateSelectedItems();
             }
+        }
+        return true;
+    }
+
+    @Override
+    protected boolean zoom(float x, float y, float amount) {
+        totalZoomAmount += amount;
+        
+        float columnZoomAmount = Utils.AVG_FINGER_WIDTH;
+        while (totalZoomAmount >= columnZoomAmount) {
+            setColumnCount(getColumnCount() - 1);
+            totalZoomAmount -= columnZoomAmount;
+        }
+        while (totalZoomAmount <= -columnZoomAmount) {
+            setColumnCount(getColumnCount() + 1);
+            totalZoomAmount += columnZoomAmount;
         }
         return true;
     }

@@ -55,7 +55,12 @@ public abstract class ItemView<T extends InventoryItem> {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            return onScrollerTap(x, y, count);
+            return ItemView.this.tap(x, y, count);
+        }
+
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            return ItemView.this.zoom(x, y, amount);
         }
 
         @Override
@@ -64,7 +69,10 @@ public abstract class ItemView<T extends InventoryItem> {
         }
     }
 
-    protected boolean onScrollerTap(float x, float y, int count) {
+    protected boolean tap(float x, float y, int count) {
+        return false;
+    }
+    protected boolean zoom(float x, float y, float amount) {
         return false;
     }
     protected abstract float getScrollHeight();
