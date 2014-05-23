@@ -139,7 +139,7 @@ public class FOptionPane extends FDialog {
         super(title);
 
         if (icon != null) {
-            lblIcon = add(new FLabel.Builder().icon(icon).iconScaleAuto(false).insets(new Vector2(0, 0)).build());
+            lblIcon = add(new FLabel.Builder().icon(icon).iconScaleFactor(1).insets(new Vector2(0, 0)).build());
         }
         else {
             lblIcon = null;
