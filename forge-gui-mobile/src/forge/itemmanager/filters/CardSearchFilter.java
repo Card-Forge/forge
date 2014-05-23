@@ -68,19 +68,18 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
 
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
-        final float comboBoxWidth = 61;
-        final float buttonWidth = 51;
+        final float buttonWidth = Math.max(Math.max(btnName.getAutoSizeBounds().width, btnType.getAutoSizeBounds().width), btnText.getAutoSizeBounds().width);
         final float height = helper.getParentHeight();
 
-        helper.fillLine(txtSearch, height, comboBoxWidth + buttonWidth * 3 + helper.getGapX() * 4); //leave space for combo box and buttons
-        helper.include(cbSearchMode, comboBoxWidth, height);
+        helper.fillLine(txtSearch, height, (buttonWidth + helper.getGapX()) * 4); //leave space for combo box and buttons
+        helper.include(cbSearchMode, buttonWidth, height); //use button width for combo box too
         helper.include(btnName, buttonWidth, height);
         helper.include(btnType, buttonWidth, height);
         helper.include(btnText, buttonWidth, height);
     }
 
     private FLabel addButton(Widget widget, String text) {
-        FLabel button = new FLabel.Builder().text(text).align(HAlignment.CENTER)
+        FLabel button = new FLabel.Builder().text(text).fontSize(txtSearch.getFontSize()).align(HAlignment.CENTER)
                 .selectable().selected().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {

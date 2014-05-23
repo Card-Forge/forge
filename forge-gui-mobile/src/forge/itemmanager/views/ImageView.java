@@ -101,27 +101,36 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         protected void drawContent(Graphics g, float w, float h, final boolean pressed) {
-            float squareSize = w / 2 - 2;
-            float offset = 2;
-            float x = (w - squareSize) / 2 - offset;
-            float y = (h - squareSize) / 2 - offset;
-            if (!pressed) {
-                x--;
-                y--;
+            float lineThickness = Utils.scaleMin(1);
+            float offset = 2 * lineThickness;
+            float squareSize = Math.round(w / 2 - offset);
+            if (squareSize % 2 == 1) {
+                squareSize++; //needs to be even number for this to look right
+            }
+            float x = Math.round((w - squareSize) / 2 - offset);
+            float y = Math.round((h - squareSize) / 2 - offset);
+            if (pressed) {
+                y += lineThickness;
+            }
+            else {
+                x -= lineThickness;
             }
 
             for (int i = 0; i < 2; i++) {
-                g.drawLine(1, GROUP_HEADER_FORE_COLOR, x, y, x + squareSize, y);
-                g.drawLine(1, GROUP_HEADER_FORE_COLOR, x + squareSize, y, x + squareSize, y + offset);
-                g.drawLine(1, GROUP_HEADER_FORE_COLOR, x, y, x, y + squareSize);
-                g.drawLine(1, GROUP_HEADER_FORE_COLOR, x, y + squareSize, x + offset, y + squareSize);
+                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x + squareSize, y);
+                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + squareSize, y, x + squareSize, y + offset);
+                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x, y + squareSize);
+                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y + squareSize, x + offset, y + squareSize);
                 x += offset;
                 y += offset;
             }
-            g.drawRect(1, GROUP_HEADER_FORE_COLOR, x, y, squareSize, squareSize);
-            g.drawLine(1, GROUP_HEADER_FORE_COLOR, x + offset + 1, y + squareSize / 2, x + squareSize - 2 * offset + 1, y + squareSize / 2);
+            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x + squareSize, y);
+            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + squareSize, y, x + squareSize, y + squareSize);
+            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x, y + squareSize);
+            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y + squareSize, x + squareSize, y + squareSize);
+            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + offset + 1, y + squareSize / 2, x + squareSize - offset, y + squareSize / 2);
             if (isAllCollapsed) {
-                g.drawLine(1, GROUP_HEADER_FORE_COLOR, x + squareSize / 2, y + offset + 1, x + squareSize / 2, y + squareSize - 2 * offset + 1);
+                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + squareSize / 2, y + offset, x + squareSize / 2, y + squareSize - offset - 1);
             }
         }
     }

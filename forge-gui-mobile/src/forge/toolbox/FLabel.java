@@ -253,8 +253,8 @@ public class FLabel extends FDisplayObject implements IButton {
         w -= 2 * x;
         h -= 2 * x;
         if (pressed) { //while pressed, translate graphics so icon and text appear shifted down and to the right
-            x++;
-            y++;
+            x += Utils.scaleX(1);
+            y += Utils.scaleY(1);
         }
 
         if (icon != null) {

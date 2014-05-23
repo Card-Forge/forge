@@ -61,6 +61,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private final Class<T> genericType;
     private ItemManagerConfig config;
+    private String caption, ratio;
 
     private final ItemFilter<? extends T> mainSearchFilter;
 
@@ -69,11 +70,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         .build();
 
     private final FLabel lblCaption = new FLabel.Builder()
-        .align(HAlignment.LEFT)
-        .fontSize(12)
-        .build();
-
-    private final FLabel lblRatio = new FLabel.Builder()
         .align(HAlignment.LEFT)
         .fontSize(12)
         .build();
@@ -121,7 +117,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(mainSearchFilter.getPanel());
         add(btnFilters);
         add(lblCaption);
-        add(lblRatio);
         for (ItemView<T> view : views) {
             add(view.getButton());
             view.getButton().setSelected(view == currentView);
@@ -283,19 +278,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         helper.newLine(ItemFilter.PADDING);
         float fieldHeight = mainSearchFilter.getMainComponent().getHeight();
         helper.include(btnFilters, btnFilters.getAutoSizeBounds().width * 1.2f, fieldHeight);
-        float captionWidth = lblCaption.getAutoSizeBounds().width;
-        float ratioWidth = lblRatio.getAutoSizeBounds().width;
         float viewButtonWidth = fieldHeight;
         float viewButtonCount = views.size() + Utils.scaleX(1);
-        float availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * viewButtonCount - ratioWidth - helper.getX() - (viewButtonCount + 1) * helper.getGapX();
-        if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
-            captionWidth = availableCaptionWidth;
-        }
-        helper.offset(0, Utils.scaleY(1)); //shift caption downward
-        helper.include(lblCaption, captionWidth, fieldHeight);
-        helper.offset(-helper.getGapX(), 0);
-        helper.fillLine(lblRatio, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
-        helper.offset(0, Utils.scaleY(1)); //shift buttons upward
+        helper.fillLine(lblCaption, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount - viewButtonCount + 1); //leave room for view buttons
         for (ItemView<T> view : views) {
             helper.include(view.getButton(), viewButtonWidth, fieldHeight);
             helper.offset(Utils.scaleX(-1), 0);
@@ -326,7 +311,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @return caption to display before ratio
      */
     public String getCaption() {
-        return lblCaption.getText();
+        return caption;
     }
 
     /**
@@ -335,8 +320,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * 
      * @param caption - caption to display before ratio
      */
-    public void setCaption(String caption) {
-        lblCaption.setText(caption);
+    public void setCaption(String caption0) {
+        caption = caption0;
+        updateCaptionLabel();
+    }
+
+    private void updateCaptionLabel() {
+        lblCaption.setText(caption + " " + ratio);
     }
 
     /**
@@ -916,7 +906,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         else {
             total = pool.countAll();
         }
-        lblRatio.setText("(" + getFilteredItems().countAll() + " / " + total + ")");
+        ratio = "(" + getFilteredItems().countAll() + " / " + total + ")";
+        updateCaptionLabel();
     }
 
     /**
