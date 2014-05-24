@@ -109,6 +109,8 @@ public class TextRenderer {
             atReminderTextEnd = false;
             ch = fullText.charAt(i);
             switch (ch) {
+            case '\r':
+                continue; //skip '\r' character
             case '\n':
                 if (inSymbolCount > 0) {
                     inSymbolCount = 0;
@@ -257,26 +259,18 @@ public class TextRenderer {
             if (inSymbolCount == 0) {
                 pieceWidth = bitmapFont.getBounds(text).width;
                 if (x + pieceWidth > width) { //wrap or shrink if needed
-                    if (wrap && (lastSpaceIdx >= 0 || consecutiveSymbols > 0 || inReminderTextCount > 0)) {
+                    if (wrap && (lastSpaceIdx >= 0 || consecutiveSymbols > 0)) {
                         if (lastSpaceIdx < 0) {
-                            if (consecutiveSymbols > 0) {
-                                //no space between symbols and end of line, wrap those symbols along with text
-                                x = 0;
-                                int startSymbolIdx = pieces.size() - consecutiveSymbols;
-                                lineWidths.add(pieces.get(startSymbolIdx).x);
-                                for (int j = startSymbolIdx; j < pieces.size(); j++) {
-                                    Piece piece = pieces.get(j);
-                                    piece.x = x;
-                                    piece.y += lineHeight;
-                                    piece.lineNum++;
-                                    x += piece.w;
-                                }
-                            }
-                            else {
-                                //no space between start of reminder text and end of line, wrap all reminder text thus far
-                                Piece lastPiece = pieces.get(pieces.size() - 1);
-                                lineWidths.add(lastPiece.x + lastPiece.w);
-                                x = 0;
+                            //no space between symbols and end of line, wrap those symbols along with text
+                            x = 0;
+                            int startSymbolIdx = pieces.size() - consecutiveSymbols;
+                            lineWidths.add(pieces.get(startSymbolIdx).x);
+                            for (int j = startSymbolIdx; j < pieces.size(); j++) {
+                                Piece piece = pieces.get(j);
+                                piece.x = x;
+                                piece.y += lineHeight;
+                                piece.lineNum++;
+                                x += piece.w;
                             }
                         }
                         else {
@@ -307,12 +301,70 @@ public class TextRenderer {
                             needClip = true;
                         }
                     }
-                    else if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                        //try next font size down if out of space
-                        updatePieces(FSkinFont.get(font.getSize() - 1));
-                        return;
+                    else if (x > 0 && pieceWidth <= width) {
+                        //if current piece starting past beginning of line and no spaces found,
+                        //wrap current piece being built up along with part of previous pieces as needed
+                        int lastPieceIdx;
+                        for (lastPieceIdx = pieces.size() - 1; lastPieceIdx >= 0; lastPieceIdx--) {
+                            Piece lastPiece = pieces.get(lastPieceIdx);
+                            if (lastPiece.lineNum < lineNum) {
+                                lastPieceIdx = pieces.size() - 1; //don't re-wrap anything if reached previous line
+                                break;
+                            }
+                            if (lastPiece instanceof TextPiece) {
+                                TextPiece textPiece = (TextPiece)lastPiece;
+                                int index = textPiece.text.lastIndexOf(' ');
+                                if (index != -1) {
+                                    if (index == 0) {
+                                        textPiece.text = textPiece.text.substring(1);
+                                        textPiece.w = bitmapFont.getBounds(textPiece.text).width;
+                                        lastPieceIdx--;
+                                    }
+                                    else if (index == textPiece.text.length() - 1) {
+                                        textPiece.text = textPiece.text.substring(0, textPiece.text.length() - 1);
+                                        textPiece.w = bitmapFont.getBounds(textPiece.text).width;
+                                    }
+                                    else {
+                                        TextPiece splitPiece = new TextPiece(textPiece.text.substring(index + 1), textPiece.inReminderText);
+                                        textPiece.text = textPiece.text.substring(0, index);
+                                        textPiece.w = bitmapFont.getBounds(textPiece.text).width;
+                                        splitPiece.x = textPiece.x + textPiece.w;
+                                        splitPiece.y = textPiece.y;
+                                        splitPiece.w = bitmapFont.getBounds(splitPiece.text).width;
+                                        splitPiece.h = textPiece.h;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        Piece lastPiece = pieces.get(lastPieceIdx);
+                        lineWidths.add(lastPiece.x + lastPiece.w);
+                        x = 0;
+                        for (int j = lastPieceIdx + 1; j < pieces.size(); j++) {
+                            Piece piece = pieces.get(j);
+                            piece.x = x;
+                            piece.y += lineHeight;
+                            piece.lineNum++;
+                            x += piece.w;
+                        }
+                        y += lineHeight;
+                        totalHeight += lineHeight;
+                        lineNum++;
+                        if (totalHeight > height) {
+                            //try next font size down if out of space
+                            if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                                updatePieces(FSkinFont.get(font.getSize() - 1));
+                                return;
+                            }
+                            needClip = true;
+                        }
                     }
                     else {
+                        if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                            //try next font size down if out of space
+                            updatePieces(FSkinFont.get(font.getSize() - 1));
+                            return;
+                        }
                         needClip = true;
                     }
                 }
@@ -440,7 +492,7 @@ public class TextRenderer {
     }
 
     private class TextPiece extends Piece {
-        private final String text;
+        private String text;
 
         private TextPiece(String text0, boolean inReminderText0) {
             super(inReminderText0);

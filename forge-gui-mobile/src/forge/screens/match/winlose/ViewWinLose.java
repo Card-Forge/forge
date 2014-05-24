@@ -39,7 +39,7 @@ public class ViewWinLose extends FOverlay {
         super(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.75f));
 
         game = game0;
-        
+
         lblTitle = add(new FLabel.Builder().fontSize(30).align(HAlignment.CENTER).build());
         lblStats = add(new FLabel.Builder().fontSize(26).align(HAlignment.CENTER).build());
         pnlOutcomes = add(new OutcomesPanel());
