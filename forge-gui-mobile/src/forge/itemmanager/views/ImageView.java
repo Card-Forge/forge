@@ -50,7 +50,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
-    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.CREATURE_SPELL_LAND, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.CARD_RARITY };
+    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.DEFAULT, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.CARD_RARITY };
     private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
     private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
     private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
@@ -413,7 +413,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         //determine width of combo boxes based on available width versus auto-size widths
         float lblPileByWidth = lblPileBy.getAutoSizeBounds().width;
         float availableComboBoxWidth = visibleWidth - x - lblPileByWidth - padding;
-        float groupByWidth = availableComboBoxWidth * 0.5f;
+        float groupByWidth = availableComboBoxWidth * 0.6f;
         float pileByWidth = availableComboBoxWidth - groupByWidth;
 
         cbGroupByOptions.setBounds(x, y, groupByWidth, h);
