@@ -277,15 +277,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final float scrollValueToRestore) {
-        if (itemsToSelect == null) {
-            clearSelection(); //just clear selection if no items to select
-            setScrollValue(scrollValueToRestore); //ensure scroll value restored
-        }
-        else {
-            if (!setSelectedItems(itemsToSelect)) {
-                setSelectedIndex(backupIndexToSelect);
-            }
-        }
+        clearSelection(); //just clear selection instead of fixing selection this way
+        setScrollValue(scrollValueToRestore); //ensure scroll value restored
     }
 
     public int getColumnCount() {
