@@ -267,6 +267,18 @@ public class Forge implements ApplicationListener {
         public static boolean isAltKeyDown() {
             return Gdx.input.isKeyPressed(Keys.ALT_LEFT) || Gdx.input.isKeyPressed(Keys.ALT_RIGHT);
         }
+        public static boolean isModifierKey(int keyCode) {
+            switch (keyCode) {
+            case Keys.CONTROL_LEFT:
+            case Keys.CONTROL_RIGHT:
+            case Keys.SHIFT_LEFT:
+            case Keys.SHIFT_RIGHT:
+            case Keys.ALT_LEFT:
+            case Keys.ALT_RIGHT:
+                return true;
+            }
+            return false;
+        }
     }
 
     private static class MainInputProcessor extends FGestureAdapter {
@@ -281,6 +293,9 @@ public class Forge implements ApplicationListener {
                 return true;
             }
             if (keyInputAdapter == null) {
+                if (KeyInputAdapter.isModifierKey(keyCode)) {
+                    return false; //don't process modifiers keys for unknown adapter
+                }
                 //if no active key input adapter, give current screen or overlay a chance to handle key
                 FContainer container = FOverlay.getTopOverlay();
                 if (container == null) {
