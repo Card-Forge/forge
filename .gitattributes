@@ -5954,6 +5954,7 @@ forge-gui/res/cardsfolder/g/goblin_firestarter.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_flectomancer.txt -text
 forge-gui/res/cardsfolder/g/goblin_flotilla.txt -text
 forge-gui/res/cardsfolder/g/goblin_furrier.txt -text
+forge-gui/res/cardsfolder/g/goblin_game.txt -text
 forge-gui/res/cardsfolder/g/goblin_gardener.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_gaveleer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_general.txt svneol=native#text/plain
@@ -8431,6 +8432,7 @@ forge-gui/res/cardsfolder/m/memory_lapse.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/memory_plunder.txt -text
 forge-gui/res/cardsfolder/m/memory_sluice.txt -text
 forge-gui/res/cardsfolder/m/memorys_journey.txt -text
+forge-gui/res/cardsfolder/m/menacing_ogre.txt -text
 forge-gui/res/cardsfolder/m/mending_hands.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mending_touch.txt -text
 forge-gui/res/cardsfolder/m/meng_huo_barbarian_king.txt svneol=native#text/plain

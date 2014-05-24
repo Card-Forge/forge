@@ -1,0 +1,11 @@
+Name:Goblin Game
+ManaCost:5 R R
+Types:Sorcery
+A:SP$ ChooseNumber | Defined$ Each | Cost$ 5 R R | Min$ 1 | SecretlyChoose$ True | ChooseNumberSubAbility$ DBLoseLife | Lowest$ DBLoseHalfLife | AILogic$ LowestLoseLife | SpellDescription$ Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items he or she revealed. The player who revealed the fewest items then loses half his or her life, rounded up. If two or more players are tied for fewest, each loses half his or her life, rounded up.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | References$ X | LifeAmount$ X
+SVar:X:Count$ChosenNumber
+SVar:DBLoseHalfLife:DB$ LoseLife | Defined$ Remembered | References$ Y | LifeAmount$ Y
+SVar:Y:PlayerCountRemembered$LifeTotal/HalfUp
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_game.jpg
+Oracle:Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items he or she revealed. The player who revealed the fewest items then loses half his or her life, rounded up. If two or more players are tied for fewest, each loses half his or her life, rounded up.

@@ -1312,38 +1312,36 @@ public class AiController {
             if (player.getLife() < 5 || player.getCardsIn(ZoneType.Hand).size() >= player.getMaxHandSize()) {
                 return min;
             }
-        }
-        else if ("LoseLife".equals(logic)) {
+        } else if ("LoseLife".equals(logic)) {
             if (player.getLife() > 5) {
                 return min;
             }
-        }
-        else if ("Min".equals(logic)) {
+        } else if ("Min".equals(logic)) {
             return min;
-        }
-        else if ("DigACard".equals(logic)) {
+        } else if ("DigACard".equals(logic)) {
             int random = MyRandom.getRandom().nextInt(Math.min(4, max)) + 1;
             if (player.getLife() < random + 5) {
                 return min;
             } else {
                 return random;
             }
-        }
-        else if ("Damnation".equals(logic)) {
+        } else if ("Damnation".equals(logic)) {
             int chosenMax = player.getLife() - 1;
             int cardsInPlay = player.getCardsIn(ZoneType.Battlefield).size();
             return Math.min(chosenMax, cardsInPlay);
-        }
-        else if ("OptionalDraw".equals(logic)) {
+        } else if ("OptionalDraw".equals(logic)) {
             int cardsInHand = player.getCardsIn(ZoneType.Hand).size();
             int maxDraw = Math.min(player.getMaxHandSize() + 2 - cardsInHand, max);
             int maxCheckLib = Math.min(maxDraw, player.getCardsIn(ZoneType.Library).size());
             return Math.max(min, maxCheckLib);
-        }
-        else if ("RepeatDraw".equals(logic)) {
+        } else if ("RepeatDraw".equals(logic)) {
             int remaining = player.getMaxHandSize() - player.getCardsIn(ZoneType.Hand).size()
                     + MyRandom.getRandom().nextInt(3);
             return Math.max(remaining, min) / 2;
+        } else if ("LowestLoseLife".equals(logic)) {
+            return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getOpponent().getLife())) + 1;
+        } else if ("HighestGetCounter".equals(logic)) {
+            return MyRandom.getRandom().nextInt(3);
         }
         return max;
     }

@@ -789,6 +789,9 @@ public class PlayerControllerHuman extends PlayerController {
         }
         switch(sa.getApi()) {
             case ChooseNumber:
+                if (sa.hasParam("SecretlyChoose")) {
+                    return value;
+                }
                 final boolean random = sa.hasParam("Random");
                 return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(target), value);
             case FlipACoin:
