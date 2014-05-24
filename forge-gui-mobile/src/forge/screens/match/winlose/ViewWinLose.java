@@ -85,7 +85,9 @@ public class ViewWinLose extends FOverlay {
         txtLog = add(new FTextArea(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")) {
             @Override
             public boolean tap(float x, float y, int count) {
-                FMagnifyView.show(txtLog, txtLog.getText(), FTextArea.FORE_COLOR, ViewWinLose.this.getBackColor(), txtLog.getFont());
+                if (txtLog.getMaxScrollTop() > 0) {
+                    FMagnifyView.show(txtLog, txtLog.getText(), FTextArea.FORE_COLOR, ViewWinLose.this.getBackColor(), txtLog.getFont(), 0, txtLog.getWidth());
+                }
                 return true;
             }
         });

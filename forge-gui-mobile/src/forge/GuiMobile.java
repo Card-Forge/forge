@@ -197,7 +197,6 @@ public class GuiMobile implements IGuiBase {
     public void updateTurn(final GameEventTurnBegan event, final Game game) {
         //VField nextField = FControl.getFieldViewFor(event.turnOwner);
         //SDisplayUtil.showTab(nextField);
-        FControl.getView().getPrompt().updateText(game);
     }
 
     @Override

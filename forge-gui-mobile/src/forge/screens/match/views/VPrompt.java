@@ -3,13 +3,14 @@ package forge.screens.match.views;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.TextRenderer;
-import forge.game.Game;
+import forge.menu.FMagnifyView;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
@@ -58,13 +59,17 @@ public class VPrompt extends FContainer {
         //SDisplayUtil.remind(view);
     }
 
-    public void updateText(Game game) {
-        //FThreads.assertExecutedByEdt(true);
-        //final Match match = game.getMatch();
-        //final GameRules rules = game.getRules();
-        //final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), rules.getGameType());
-        //view.getLblGames().setText(text);
-        //view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", rules.getGameType(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), game.getPhaseHandler().getTurn()));
+    @Override
+    public boolean tap(float x, float y, int count) {
+        //if not enough room for prompt at given size, show magnify view
+        float offsetX = BTN_WIDTH + PADDING;
+        float maxWidth = getWidth() - 2 * offsetX;
+        float maxHeight = getHeight() - 2 * PADDING;
+        TextBounds textBounds = renderer.getWrappedBounds(message, FONT, maxWidth);
+        if (textBounds.height > maxHeight) {
+            FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT, offsetX, maxWidth);
+        }
+        return true;
     }
 
     @Override
