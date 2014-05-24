@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Clipboard;
 
@@ -890,6 +891,23 @@ public class Forge implements ApplicationListener {
                     0, tilesH, tilesW, 0);
 
             endClip();
+        }
+
+        public void setRotateTransform(float originX, float originY, float rotation) {
+            batch.end();
+            float dx = adjustX(originX);
+            float dy = adjustY(originY, 0);
+            batch.getTransformMatrix().translate(dx, dy, 0);
+            batch.getTransformMatrix().rotate(Vector3.Z, rotation);
+            batch.getTransformMatrix().translate(-dx, -dy, 0);
+            batch.begin();
+            //shapeRenderer.setTransformMatrix(matrix);
+        }
+
+        public void clearTransform() {
+            batch.end();
+            batch.getTransformMatrix().idt();
+            batch.begin();
         }
 
         public void drawRotatedImage(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {

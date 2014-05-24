@@ -86,10 +86,13 @@ public class FCardPanel extends FDisplayObject {
         Texture image = ImageCache.getImage(card);
         if (tapped) {
             float edgeOffset = w / 2f;
-            g.drawRotatedImage(image, x, y, w, h, x + edgeOffset, y + h - edgeOffset, tappedAngle);
+            g.setRotateTransform(x + edgeOffset, y + h - edgeOffset, tappedAngle);
         }
-        else {
-            g.drawImage(image, x, y, w, h);
+
+        g.drawImage(image, x, y, w, h);
+
+        if (tapped) {
+            g.clearTransform();
         }
     }
 }
