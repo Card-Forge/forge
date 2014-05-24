@@ -84,7 +84,7 @@ public class VPrompt extends FContainer {
             float maxHeight = getHeight() - 2 * PADDING;
             TextBounds textBounds = renderer.getWrappedBounds(message, FONT, maxWidth);
             if (textBounds.height > maxHeight) {
-                FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT);
+                FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT, false);
             }
             return true;
         }

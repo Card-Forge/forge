@@ -86,7 +86,7 @@ public class ViewWinLose extends FOverlay {
             @Override
             public boolean tap(float x, float y, int count) {
                 if (txtLog.getMaxScrollTop() > 0) {
-                    FMagnifyView.show(txtLog, txtLog.getText(), FTextArea.FORE_COLOR, ViewWinLose.this.getBackColor(), txtLog.getFont());
+                    FMagnifyView.show(txtLog, txtLog.getText(), FTextArea.FORE_COLOR, ViewWinLose.this.getBackColor(), txtLog.getFont(), true);
                 }
                 return true;
             }

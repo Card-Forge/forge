@@ -12,20 +12,21 @@ import forge.util.Utils;
 
 public class FMagnifyView extends FDropDown {
     private static final float PADDING = Utils.scaleMin(5);
-    private static final TextRenderer renderer = new TextRenderer(true);
 
     private FDisplayObject owner;
     private String text;
     private FSkinColor foreColor, backColor;
     private FSkinFont font;
+    private TextRenderer renderer;
 
-    public static void show(FDisplayObject owner0, String text0, FSkinColor foreColor0, FSkinColor backColor0, FSkinFont font0) {
+    public static void show(FDisplayObject owner0, String text0, FSkinColor foreColor0, FSkinColor backColor0, FSkinFont font0, boolean parseReminderText0) {
         FMagnifyView view = new FMagnifyView();
         view.owner = owner0;
         view.text = text0;
         view.foreColor = foreColor0;
         view.backColor = backColor0;
         view.font = font0;
+        view.renderer = new TextRenderer(parseReminderText0);
         view.show();
     }
     private FMagnifyView() {
