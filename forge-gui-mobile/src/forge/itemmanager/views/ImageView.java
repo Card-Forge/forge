@@ -24,6 +24,7 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FTextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -403,8 +404,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     protected float layoutOptionsPanel(float visibleWidth, float height) {
         float padding = ItemFilter.PADDING;
         float x = 0;
-        float y = padding;
-        float h = height - 2 * y;
+        float h = FTextField.getDefaultHeight(ItemFilter.DEFAULT_FONT_SIZE);
+        float y = (height - h) / 2;
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;
         lblGroupBy.setBounds(x, y, lblGroupBy.getAutoSizeBounds().width, h);

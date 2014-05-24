@@ -318,6 +318,10 @@ public class FTextField extends FDisplayObject {
     }
 
     private void drawText(Graphics g, float w, float h) {
+        float diff = h - font.getFont().getCapHeight();
+        if (diff > 0 && Math.round(diff) % 2 == 1) {
+            h++; //if odd difference between height and font height, increment height so text favors displaying closer to bottom
+        }
         if (!text.isEmpty()) {
             g.drawText(text, font, FORE_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
         }
