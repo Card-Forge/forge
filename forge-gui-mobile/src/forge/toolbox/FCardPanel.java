@@ -52,15 +52,31 @@ public class FCardPanel extends FDisplayObject {
         tappedAngle = tappedAngle0;
     }
 
+    protected boolean renderedCardContains(float x, float y) {
+        float left = PADDING;
+        float top = PADDING;
+        float w = getWidth() - 2 * PADDING;
+        float h = getHeight() - 2 * PADDING;
+        if (w == h) { //adjust width if needed to make room for tapping
+            w = h / ASPECT_RATIO;
+        }
+
+        if (tapped) { //rotate box if tapped
+            top += h - w;
+            float temp = w;
+            w = h;
+            h = temp;
+        }
+
+        return x >= left && x <= left + w && y >= top && y <= top + h;
+    }
+
     @Override
     public void draw(Graphics g) {
-        draw(g, 0, 0);
-    }
-    public void draw(Graphics g, float x, float y) {
         if (card == null) { return; }
 
-        x += PADDING;
-        y += PADDING;
+        float x = PADDING;
+        float y = PADDING;
         float w = getWidth() - 2 * PADDING;
         float h = getHeight() - 2 * PADDING;
         if (w == h) { //adjust width if needed to make room for tapping

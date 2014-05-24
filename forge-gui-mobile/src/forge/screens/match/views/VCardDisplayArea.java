@@ -208,16 +208,19 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
-                @Override
-                public void run() {
-                    if (!selectCard()) {
-                        //if no cards in stack can be selected, just show zoom/details for card
-                        CardZoom.show(getCard());
+            if (renderedCardContains(x, y)) {
+                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
+                    @Override
+                    public void run() {
+                        if (!selectCard()) {
+                            //if no cards in stack can be selected, just show zoom/details for card
+                            CardZoom.show(getCard());
+                        }
                     }
-                }
-            });
-            return true;
+                });
+                return true;
+            }
+            return false;
         }
 
         public boolean selectCard() {
@@ -239,8 +242,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         @Override
         public boolean longPress(float x, float y) {
-            CardZoom.show(getCard());
-            return true;
+            if (renderedCardContains(x, y)) {
+                CardZoom.show(getCard());
+                return true;
+            }
+            return false;
         }
     }
 }
