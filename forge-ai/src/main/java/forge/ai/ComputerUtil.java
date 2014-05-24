@@ -18,6 +18,7 @@
 package forge.ai;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ability.ProtectAi;
@@ -1811,13 +1812,45 @@ public class ComputerUtil {
         return chosen;
     }
 
-    public static String vote(Player ai, List<String> options, String logic) {
-        if (logic == null) {
+    public static Object vote(Player ai, List<Object> options, SpellAbility sa, ArrayListMultimap<Object, Player> votes) {
+        if (!sa.hasParam("AILogic")) {
             return Aggregates.random(options);
         } else {
+            String logic = sa.getParam("AILogic");
             switch (logic) {
                 case "GraceOrCondemnation":
                     return ai.getCreaturesInPlay().size() > ai.getOpponent().getCreaturesInPlay().size() ? "Grace" : "Condemnation";
+                case "CarnageOrHomage":
+                    List<Card> cardsInPlay = CardLists.getNotType(sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield), "Land");
+                    List<Card> humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
+                    List<Card> computerlist = CardLists.filterControlledBy(cardsInPlay, ai);
+                    return  (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard
+                            .evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
+                case "Judgment":
+                    if (votes.isEmpty()) {
+                        List<Card> list = new ArrayList<Card>();
+                        for (Object o : options) {
+                            if (o instanceof Card) {
+                                list.add((Card) o);
+                            }
+                        }
+                        return ComputerUtilCard.getBestAI(list);
+                    } else {
+                        return Iterables.getFirst(votes.keySet(), null);
+                    }
+                case "Protection":
+                    if (votes.isEmpty()) {
+                        List<String> restrictedToColors = new ArrayList<String>();
+                        for (Object o : options) {
+                            if (o instanceof String) {
+                                restrictedToColors.add((String) o);
+                            }
+                        }
+                        List<Card> lists = CardLists.filterControlledBy(ai.getGame().getCardsInGame(), ai.getOpponents());
+                        return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
+                    } else {
+                        return Iterables.getFirst(votes.keySet(), null);
+                    }
                 default: return Iterables.getFirst(options, null);
             }
         }

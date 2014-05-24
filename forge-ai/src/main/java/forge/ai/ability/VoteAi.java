@@ -2,8 +2,11 @@ package forge.ai.ability;
 
 
 import forge.ai.SpellAbilityAi;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 public class VoteAi extends SpellAbilityAi {
     /* (non-Javadoc)
@@ -12,6 +15,14 @@ public class VoteAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // TODO: add ailogic
+        String logic = sa.getParam("AILogic");
+        final Card host = sa.getHostCard();
+        if ("Always".equals(logic)) {
+            return true;
+        } else if ("Judgment".equals(logic)) {
+            return !CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
+                    sa.getParam("VoteCard"), host.getController(), host).isEmpty();
+        }
         return false;
     }
 
@@ -21,5 +32,10 @@ public class VoteAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return canPlayAI(aiPlayer, sa);
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return true;
     }
 }

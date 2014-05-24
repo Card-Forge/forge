@@ -2,6 +2,7 @@ package forge.player;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -572,7 +573,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public String vote(SpellAbility sa, String prompt, List<String> options) {
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes) {
         return SGuiChoose.one(prompt, options);
     }
 

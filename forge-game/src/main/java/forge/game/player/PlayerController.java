@@ -1,6 +1,7 @@
 package forge.game.player;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
@@ -176,7 +177,7 @@ public abstract class PlayerController {
         return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
     }
     public abstract String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional);
-    public abstract String vote(SpellAbility sa, String prompt, List<String> options);
+    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes);
     public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);

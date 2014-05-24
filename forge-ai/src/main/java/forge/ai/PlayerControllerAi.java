@@ -3,6 +3,7 @@ package forge.ai;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -368,9 +369,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String vote(SpellAbility sa, String prompt, List<String> options) {
-        String result = ComputerUtil.vote(player, options, sa.getParam("AILogic"));
-        return result;
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes) {
+        return ComputerUtil.vote(player, options, sa, votes);
     }
 
     /* (non-Javadoc)

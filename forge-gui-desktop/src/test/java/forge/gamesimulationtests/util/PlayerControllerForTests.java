@@ -1,6 +1,7 @@
 package forge.gamesimulationtests.util;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
@@ -447,7 +448,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
     @Override
-    public String vote(SpellAbility sa, String prompt, List<String> options) {
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ArrayListMultimap<Object, Player> votes) {
         return chooseItem(options);
     }
 
