@@ -47,7 +47,7 @@ public enum GroupDef {
                     return -1;
                 }
             }),
-    CREATURE_SPELL_LAND("Creatures/Spells/Lands",
+    DEFAULT("Default",
             new String[] { "Creatures", "Spells", "Lands" },
             new Function<Integer, ColumnDef>() {
                 @Override

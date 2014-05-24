@@ -413,7 +413,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         //determine width of combo boxes based on available width versus auto-size widths
         float lblPileByWidth = lblPileBy.getAutoSizeBounds().width;
         float availableComboBoxWidth = visibleWidth - x - lblPileByWidth - padding;
-        float groupByWidth = availableComboBoxWidth * 0.66f;
+        float groupByWidth = availableComboBoxWidth * 0.5f;
         float pileByWidth = availableComboBoxWidth - groupByWidth;
 
         cbGroupByOptions.setBounds(x, y, groupByWidth, h);
@@ -732,14 +732,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             return false;
         }
 
-        if (item.selected) {
-            if (KeyInputAdapter.isCtrlKeyDown()) {
-                item.selected = false;
-                selectedIndices.remove((Object)item.index);
-                onSelectionChange();
-                item.group.scrollIntoView(item);
-                return true;
-            }
+        if (item.selected) { //unselect item if already selected
+            item.selected = false;
+            selectedIndices.remove((Object)item.index);
+            onSelectionChange();
+            item.group.scrollIntoView(item);
+            return true;
         }
         if (!allowMultipleSelections || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
             clearSelection();
