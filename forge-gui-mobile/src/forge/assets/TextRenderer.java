@@ -257,18 +257,26 @@ public class TextRenderer {
             if (inSymbolCount == 0) {
                 pieceWidth = bitmapFont.getBounds(text).width;
                 if (x + pieceWidth > width) { //wrap or shrink if needed
-                    if (wrap && (lastSpaceIdx >= 0 || consecutiveSymbols > 0)) {
+                    if (wrap && (lastSpaceIdx >= 0 || consecutiveSymbols > 0 || inReminderTextCount > 0)) {
                         if (lastSpaceIdx < 0) {
-                            //no space between symbols and end of line, wrap those symbols along with text
-                            x = 0;
-                            int startSymbolIdx = pieces.size() - consecutiveSymbols;
-                            lineWidths.add(pieces.get(startSymbolIdx).x);
-                            for (int j = startSymbolIdx; j < pieces.size(); j++) {
-                                Piece piece = pieces.get(j);
-                                piece.x = x;
-                                piece.y += lineHeight;
-                                piece.lineNum++;
-                                x += piece.w;
+                            if (consecutiveSymbols > 0) {
+                                //no space between symbols and end of line, wrap those symbols along with text
+                                x = 0;
+                                int startSymbolIdx = pieces.size() - consecutiveSymbols;
+                                lineWidths.add(pieces.get(startSymbolIdx).x);
+                                for (int j = startSymbolIdx; j < pieces.size(); j++) {
+                                    Piece piece = pieces.get(j);
+                                    piece.x = x;
+                                    piece.y += lineHeight;
+                                    piece.lineNum++;
+                                    x += piece.w;
+                                }
+                            }
+                            else {
+                                //no space between start of reminder text and end of line, wrap all reminder text thus far
+                                Piece lastPiece = pieces.get(pieces.size() - 1);
+                                lineWidths.add(lastPiece.x + lastPiece.w);
+                                x = 0;
                             }
                         }
                         else {
