@@ -89,7 +89,7 @@ public class ViewWinLose extends FOverlay {
                 return true;
             }
         });
-        txtLog.setFontSize(14);
+        txtLog.setFontSize(12);
 
         btnCopyLog = add(new FLabel.ButtonBuilder().text("Copy to clipboard").command(new FEventHandler() {
             @Override
