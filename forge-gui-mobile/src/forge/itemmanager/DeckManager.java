@@ -255,6 +255,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         return new ItemRenderer<DeckProxy>() {
             @Override
             public float getItemHeight() {
+                if (DeckManager.this.getConfig().getCols().size() == 1) {
+                    //if just string column, use normal list item height
+                    return Utils.AVG_FINGER_HEIGHT;
+                }
                 return IMAGE_SIZE + 2 * FSkinFont.get(12).getFont().getLineHeight() + 4 * FList.PADDING;
             }
 
@@ -272,6 +276,12 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             @Override
             public void drawValue(Graphics g, Entry<DeckProxy, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                 DeckProxy deck = value.getKey();
+
+                if (DeckManager.this.getConfig().getCols().size() == 1) {
+                    //if just string column, just draw deck string value
+                    g.drawText(deck.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    return;
+                }
 
                 //draw favorite, name, and color on first line
                 g.drawImage(DeckPreferences.getPrefs(deck).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTINE, x, y, IMAGE_SIZE, IMAGE_SIZE);
