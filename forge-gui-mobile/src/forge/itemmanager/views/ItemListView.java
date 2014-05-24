@@ -276,7 +276,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public boolean tap(Entry<T, Integer> value, float x, float y, int count) {
-                    int index = list.getIndexOf(value);
+                    Integer index = list.getIndexOf(value);
                     if (allowMultipleSelections) {
                         if (selectedIndices.contains(index)) {
                             selectedIndices.remove(index);
