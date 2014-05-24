@@ -1138,6 +1138,7 @@ forge-gui-mobile/src/forge/itemmanager/views/ItemView.java -text
 forge-gui-mobile/src/forge/menu/FCheckBoxMenuItem.java -text
 forge-gui-mobile/src/forge/menu/FDropDown.java -text
 forge-gui-mobile/src/forge/menu/FDropDownMenu.java -text
+forge-gui-mobile/src/forge/menu/FMagnifyView.java -text
 forge-gui-mobile/src/forge/menu/FMenuBar.java -text
 forge-gui-mobile/src/forge/menu/FMenuItem.java -text
 forge-gui-mobile/src/forge/menu/FMenuTab.java -text

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
@@ -86,6 +87,7 @@ public class VLog extends FDropDown {
     private class LogEntryDisplay extends FDisplayObject {
         private final String text;
         private final boolean isAltRow;
+        private final TextRenderer renderer = new TextRenderer(true);
 
         private LogEntryDisplay(String text0, boolean isAltRow0) {
             text = text0;
@@ -94,7 +96,7 @@ public class VLog extends FDropDown {
 
         private float getMinHeight(float width) {
             width -= 2 * PADDING; //account for left and right insets
-            float height = FONT.getFont().getWrappedBounds(text, width).height;
+            float height = renderer.getWrappedBounds(text, FONT, width).height;
             height += 2 * PADDING;
             return Math.round(height);
         }
@@ -109,7 +111,7 @@ public class VLog extends FDropDown {
             }
 
             //use full height without padding so text not scaled down
-            g.drawText(text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, true, HAlignment.LEFT, false);
+            renderer.drawText(g, text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, true, HAlignment.LEFT, false);
         }
     }
 }
