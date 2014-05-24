@@ -54,6 +54,10 @@ public abstract class FOverlay extends FContainer {
         super.setVisible(visible0);
     }
 
+    public FSkinColor getBackColor() { 
+        return backColor;
+    }
+
     @Override
     protected void drawBackground(Graphics g) {
         g.fillRect(backColor, 0, 0, this.getWidth(), this.getHeight());

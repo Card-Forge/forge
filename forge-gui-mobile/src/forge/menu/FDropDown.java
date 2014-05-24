@@ -9,7 +9,9 @@ import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.screens.FScreen;
 import forge.screens.match.views.VPrompt;
+import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOverlay;
 import forge.toolbox.FScrollPane;
 
 public abstract class FDropDown extends FScrollPane {
@@ -61,23 +63,26 @@ public abstract class FDropDown extends FScrollPane {
     public void setVisible(boolean visible0) {
         if (isVisible() == visible0) { return; }
 
-        //add/remove drop down from current screen when its visibility changes
-        FScreen screen = Forge.getCurrentScreen();
+        //add/remove drop down from current screen or top overlay when its visibility changes
+        FContainer container = FOverlay.getTopOverlay();
+        if (container == null) {
+            container = Forge.getCurrentScreen();
+        }
         if (visible0) {
             updateSizeAndPosition();
 
             if (autoHide()) { //add invisible backdrop if needed to allow auto-hiding when pressing outide drop down
                 backdrop = new Backdrop();
-                backdrop.setSize(screen.getWidth(), screen.getHeight());
-                screen.add(backdrop);
+                backdrop.setSize(container.getWidth(), container.getHeight());
+                container.add(backdrop);
             }
-            screen.add(this);
+            container.add(this);
         }
         else {
-            screen.remove(this);
+            container.remove(this);
             if (backdrop != null) {
                 backdrop.setVisible(false);
-                screen.remove(backdrop);
+                container.remove(backdrop);
                 backdrop = null;
             }
         }

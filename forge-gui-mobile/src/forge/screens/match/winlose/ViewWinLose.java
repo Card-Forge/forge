@@ -11,6 +11,7 @@ import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameOutcome;
 import forge.game.player.Player;
+import forge.menu.FMagnifyView;
 import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -81,7 +82,13 @@ public class ViewWinLose extends FOverlay {
         btnContinue.setEnabled(!game0.getMatch().isMatchOver());
 
         lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).fontSize(18).build());
-        txtLog = add(new FTextArea(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")));
+        txtLog = add(new FTextArea(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")) {
+            @Override
+            public boolean tap(float x, float y, int count) {
+                FMagnifyView.show(txtLog, txtLog.getText(), FTextArea.FORE_COLOR, ViewWinLose.this.getBackColor(), txtLog.getFont());
+                return true;
+            }
+        });
         txtLog.setFontSize(14);
 
         btnCopyLog = add(new FLabel.ButtonBuilder().text("Copy to clipboard").command(new FEventHandler() {

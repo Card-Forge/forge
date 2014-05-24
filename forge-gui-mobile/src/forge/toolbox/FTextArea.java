@@ -7,14 +7,16 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.TextRenderer;
 
 public class FTextArea extends FScrollPane {
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
     private String text;
     private FSkinFont font;
     private HAlignment alignment;
     private Vector2 insets;
+    private final TextRenderer renderer = new TextRenderer(true);
 
     public FTextArea() {
         this("");
@@ -46,18 +48,21 @@ public class FTextArea extends FScrollPane {
         revalidate();
     }
 
+    public FSkinFont getFont() {
+        return font;
+    }
+
     public float getPreferredHeight(float width) {
-        return font.getFont().getWrappedBounds(text, width - 2 * insets.x).height +
-                font.getFont().getLineHeight() - font.getFont().getCapHeight(); //account for height below baseline of final line
+        return renderer.getWrappedBounds(text, font, width - 2 * insets.x).height + 2 * insets.y;
     }
 
     @Override
     protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-        return new ScrollBounds(visibleWidth, getPreferredHeight(visibleWidth) + 2 * insets.y);
+        return new ScrollBounds(visibleWidth, getPreferredHeight(visibleWidth));
     }
 
     @Override
     public void drawBackground(Graphics g) {
-        g.drawText(text, font, FORE_COLOR, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, true, alignment, false);
+        renderer.drawText(g, text, font, FORE_COLOR, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, true, alignment, false);
     }
 }
