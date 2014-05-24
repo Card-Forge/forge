@@ -114,25 +114,25 @@ public class CardFaceSymbols {
         if (hasGeneric) {
             for (final ManaCostShard s : manaCost) { //render X shards before generic
                 if (s == ManaCostShard.X) {
-                    drawSymbol(s.getImageKey(), g, x, y, imageSize);
+                    drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
                     x += dx;
                 }
             }
 
             final String sGeneric = Integer.toString(genericManaCost);
-            drawSymbol(sGeneric, g, x, y, imageSize);
+            drawSymbol(sGeneric, g, x, y, imageSize, imageSize);
             x += dx;
     
             for (final ManaCostShard s : manaCost) { //render non-X shards after generic
                 if (s != ManaCostShard.X) {
-                    drawSymbol(s.getImageKey(), g, x, y, imageSize);
+                    drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
                     x += dx;
                 }
             }
         }
         else { //if no generic, just render shards in order
             for (final ManaCostShard s : manaCost) {
-                drawSymbol(s.getImageKey(), g, x, y, imageSize);
+                drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
                 x += dx;
             }
         }
@@ -140,7 +140,7 @@ public class CardFaceSymbols {
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize) {
         if (colorSet.isColorless()) {
-            CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y, imageSize);
+            CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y, imageSize, imageSize);
             return;
         }
 
@@ -166,12 +166,12 @@ public class CardFaceSymbols {
         }
     }
 
-    public static void drawOther(final Graphics g, String s, float x, final float y, final float imageSize) {
+    public static void drawOther(final Graphics g, String s, float x, final float y, final float w, final float h) {
         if (s.length() == 0) {
             return;
         }
 
-        final float dx = imageSize;
+        final float dx = w;
 
         StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
@@ -181,13 +181,13 @@ public class CardFaceSymbols {
                 BugReporter.reportBug("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
             }
-            g.drawImage(image, x, y, imageSize, imageSize);
+            g.drawImage(image, x, y, w, h);
             x += dx;
         }
     }
 
-    public static void drawSymbol(final String imageName, final Graphics g, final float x, final float y, final float imageSize) {
-        g.drawImage(MANA_IMAGES.get(imageName), x, y, imageSize, imageSize);
+    public static void drawSymbol(final String imageName, final Graphics g, final float x, final float y, final float w, final float h) {
+        g.drawImage(MANA_IMAGES.get(imageName), x, y, w, h);
     }
 
     public static float getWidth(final ManaCost manaCost, float imageSize) {

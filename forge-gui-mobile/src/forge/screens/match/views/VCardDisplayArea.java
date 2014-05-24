@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import forge.FThreads;
+import forge.Forge;
+import forge.Forge.Graphics;
 import forge.card.CardZoom;
 import forge.game.card.Card;
 import forge.screens.match.FControl;
@@ -127,6 +129,13 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         }
 
         return new ScrollBounds(x, visibleHeight);
+    }
+
+    @Override
+    protected void startClip(Graphics g) {
+        //prevent clipping horizontally
+        float dy = Forge.getCurrentScreen().getHeight();
+        g.startClip(0, -dy, getWidth(), 2 * dy);
     }
 
     public static class CardAreaPanel extends FCardPanel {
