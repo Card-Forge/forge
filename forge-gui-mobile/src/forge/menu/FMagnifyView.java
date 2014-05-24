@@ -18,17 +18,14 @@ public class FMagnifyView extends FDropDown {
     private String text;
     private FSkinColor foreColor, backColor;
     private FSkinFont font;
-    private float offsetX, width;
 
-    public static void show(FDisplayObject owner0, String text0, FSkinColor foreColor0, FSkinColor backColor0, FSkinFont font0, float offsetX0, float width0) {
+    public static void show(FDisplayObject owner0, String text0, FSkinColor foreColor0, FSkinColor backColor0, FSkinFont font0) {
         FMagnifyView view = new FMagnifyView();
         view.owner = owner0;
         view.text = text0;
         view.foreColor = foreColor0;
         view.backColor = backColor0;
         view.font = font0;
-        view.offsetX = offsetX0;
-        view.width = width0;
         view.show();
     }
     private FMagnifyView() {
@@ -36,16 +33,16 @@ public class FMagnifyView extends FDropDown {
 
     @Override
     protected void updateSizeAndPosition() {
-        float x = owner.getScreenPosition().x + offsetX;
+        float x = owner.getScreenPosition().x;
         float y = owner.getScreenPosition().y + owner.getHeight();
-        paneSize = updateAndGetPaneSize(width, y);
+        paneSize = updateAndGetPaneSize(owner.getWidth(), y);
         float height = paneSize.getHeight();
         if (height > y) {
             height = y;
         }
         y -= height;
 
-        setBounds(Math.round(x), Math.round(y), Math.round(width), Math.round(height));
+        setBounds(Math.round(x), Math.round(y), Math.round(owner.getWidth()), Math.round(height));
     }
 
     @Override

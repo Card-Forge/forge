@@ -14,6 +14,7 @@ import forge.menu.FMagnifyView;
 import forge.toolbox.FButton;
 import forge.toolbox.FButton.Corner;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
@@ -26,11 +27,14 @@ public class VPrompt extends FContainer {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinFont FONT = FSkinFont.get(14);
 
-    private final TextRenderer renderer = new TextRenderer();
     private final FButton btnOk, btnCancel;
+    private final MessageLabel lblMessage;
     private String message;
 
     public VPrompt(String okText, String cancelText, FEventHandler okCommand, FEventHandler cancelCommand) {
+        lblMessage = add(new MessageLabel());
+        lblMessage.setLeft(BTN_WIDTH);
+        lblMessage.setHeight(HEIGHT);
         btnOk = add(new FButton(okText, okCommand));
         btnCancel = add(new FButton(cancelText, cancelCommand));
         btnOk.setSize(BTN_WIDTH, HEIGHT);
@@ -60,33 +64,38 @@ public class VPrompt extends FContainer {
     }
 
     @Override
-    public boolean tap(float x, float y, int count) {
-        //if not enough room for prompt at given size, show magnify view
-        float offsetX = BTN_WIDTH + PADDING;
-        float maxWidth = getWidth() - 2 * offsetX;
-        float maxHeight = getHeight() - 2 * PADDING;
-        TextBounds textBounds = renderer.getWrappedBounds(message, FONT, maxWidth);
-        if (textBounds.height > maxHeight) {
-            FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT, offsetX, maxWidth);
-        }
-        return true;
-    }
-
-    @Override
     protected void doLayout(float width, float height) {
-        btnCancel.setLeft(width - BTN_WIDTH);
+        lblMessage.setWidth(width - 2 * BTN_WIDTH);
+        btnCancel.setLeft(lblMessage.getRight());
     }
 
     @Override
     protected void drawBackground(Graphics g) {
-        float w = getWidth();
-        float h = getHeight();
+        g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+    }
+    
+    private class MessageLabel extends FDisplayObject {
+        private final TextRenderer renderer = new TextRenderer();
 
-        g.fillRect(BACK_COLOR, 0, 0, w, h);
-        if (!StringUtils.isEmpty(message)) {
-            float x = BTN_WIDTH + PADDING;
-            float y = PADDING;
-            renderer.drawText(g, message, FONT, FORE_COLOR, x, y, w - 2 * x, h - 2 * y, true, HAlignment.CENTER, true);
+        @Override
+        public boolean tap(float x, float y, int count) {
+            //if not enough room for prompt at given size, show magnify view
+            float maxWidth = getWidth() - 2 * PADDING;
+            float maxHeight = getHeight() - 2 * PADDING;
+            TextBounds textBounds = renderer.getWrappedBounds(message, FONT, maxWidth);
+            if (textBounds.height > maxHeight) {
+                FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT);
+            }
+            return true;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            if (!StringUtils.isEmpty(message)) {
+                float x = PADDING;
+                float y = PADDING;
+                renderer.drawText(g, message, FONT, FORE_COLOR, x, y, getWidth() - 2 * x, getHeight() - 2 * y, true, HAlignment.CENTER, true);
+            }
         }
     }
 }
