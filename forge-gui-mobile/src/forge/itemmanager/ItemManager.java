@@ -280,10 +280,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         helper.include(btnFilters, btnFilters.getAutoSizeBounds().width * 1.2f, fieldHeight);
         float viewButtonWidth = fieldHeight;
         float viewButtonCount = views.size() + 1;
-        helper.fillLine(lblCaption, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount - helper.getGapX() + Utils.scaleX(1)); //leave room for view buttons
+        helper.fillLine(lblCaption, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount); //leave room for view buttons
         for (ItemView<T> view : views) {
             helper.include(view.getButton(), viewButtonWidth, fieldHeight);
-            helper.offset(Utils.scaleX(-1), 0);
         }
         helper.include(btnViewOptions, viewButtonWidth, fieldHeight);
         helper.newLine(Utils.scaleY(2));
