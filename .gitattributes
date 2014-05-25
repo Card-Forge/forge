@@ -629,6 +629,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerTurnFaceUp.java svneol=native
 forge-game/src/main/java/forge/game/trigger/TriggerType.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerUnequip.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerUntaps.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerVote.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerWaiting.java -text
 forge-game/src/main/java/forge/game/trigger/WrappedAbility.java -text
 forge-game/src/main/java/forge/game/trigger/ZCTrigger.java svneol=native#text/plain

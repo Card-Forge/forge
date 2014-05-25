@@ -13,12 +13,13 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class VoteEffect extends SpellAbilityEffect {
@@ -76,6 +77,9 @@ public class VoteEffect extends SpellAbilityEffect {
             }
         }
         
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("AllVotes", votes);
+        game.getTriggerHandler().runTrigger(TriggerType.Vote, runParams, false);
 
         List<String> subAbs = Lists.newArrayList();
         final List<Object> mostVotes = getMostVotes(votes);

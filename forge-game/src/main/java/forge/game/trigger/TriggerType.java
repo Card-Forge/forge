@@ -63,7 +63,8 @@ public enum TriggerType {
     Transformed(TriggerTransformed.class),
     TurnFaceUp(TriggerTurnFaceUp.class),
     Unequip(TriggerUnequip.class),
-    Untaps(TriggerUntaps.class);
+    Untaps(TriggerUntaps.class),
+    Vote(TriggerVote.class);
 
     private final Class<? extends Trigger> classTrigger;
     private TriggerType(Class<? extends Trigger> clasz) {
