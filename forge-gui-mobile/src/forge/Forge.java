@@ -622,10 +622,10 @@ public class Forge implements ApplicationListener {
                 Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
             }
 
-            shapeRenderer.begin(ShapeType.Line);
+            startShape(ShapeType.Line);
             shapeRenderer.setColor(color);
             shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
-            shapeRenderer.end();
+            endShape();
 
             if (needSmoothing) {
                 Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
@@ -663,7 +663,7 @@ public class Forge implements ApplicationListener {
             w = Math.round(w - 1);
             h = Math.round(h - 1);
 
-            shapeRenderer.begin(ShapeType.Line);
+            startShape(ShapeType.Line);
             shapeRenderer.setColor(color);
 
             x = adjustX(x);
@@ -676,7 +676,7 @@ public class Forge implements ApplicationListener {
             shapeRenderer.line(x2, y2, x2, y);
             shapeRenderer.line(x2 + 1, y, x, y); //+1 prevents corner not being filled
 
-            shapeRenderer.end();
+            endShape();
 
             if (cornerRadius > 0) {
                 Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
@@ -706,10 +706,10 @@ public class Forge implements ApplicationListener {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
 
-            shapeRenderer.begin(ShapeType.Line);
+            startShape(ShapeType.Line);
             shapeRenderer.setColor(color);
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
-            shapeRenderer.end();
+            endShape();
 
             Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
             Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -733,10 +733,10 @@ public class Forge implements ApplicationListener {
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
-            shapeRenderer.begin(ShapeType.Filled);
+            startShape(ShapeType.Filled);
             shapeRenderer.setColor(color);
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
-            shapeRenderer.end();
+            endShape();
 
             if (color.a < 1) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -760,10 +760,10 @@ public class Forge implements ApplicationListener {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
 
-            shapeRenderer.begin(ShapeType.Line);
+            startShape(ShapeType.Line);
             shapeRenderer.setColor(color);
             shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius);
-            shapeRenderer.end();
+            endShape();
 
             Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
             Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -787,10 +787,10 @@ public class Forge implements ApplicationListener {
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
-            shapeRenderer.begin(ShapeType.Filled);
+            startShape(ShapeType.Filled);
             shapeRenderer.setColor(color);
             shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius); //TODO: Make smoother
-            shapeRenderer.end();
+            endShape();
 
             if (color.a < 1) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -812,10 +812,10 @@ public class Forge implements ApplicationListener {
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
-            shapeRenderer.begin(ShapeType.Filled);
+            startShape(ShapeType.Filled);
             shapeRenderer.setColor(color);
             shapeRenderer.triangle(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), adjustX(x3), adjustY(y3, 0));
-            shapeRenderer.end();
+            endShape();
 
             if (color.a < 1) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -850,15 +850,27 @@ public class Forge implements ApplicationListener {
             Color bottomLeftColor = vertical ? color2 : color1;
             Color bottomRightColor = color2;
 
-            shapeRenderer.begin(ShapeType.Filled);
+            startShape(ShapeType.Filled);
             shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h, bottomLeftColor, bottomRightColor, topRightColor, topLeftColor);
-            shapeRenderer.end();
+            endShape();
 
             if (needBlending) {
                 Gdx.gl.glDisable(GL20.GL_BLEND);
             }
 
             batch.begin();
+        }
+
+        private void startShape(ShapeType shapeType) {
+            if (isTransformed) {
+                //must copy matrix before starting shape if transformed
+                shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
+            }
+            shapeRenderer.begin(shapeType);
+        }
+
+        private void endShape() {
+            shapeRenderer.end();
         }
 
         public void setAlphaComposite(float alphaComposite0) {
@@ -893,6 +905,8 @@ public class Forge implements ApplicationListener {
             endClip();
         }
 
+        private boolean isTransformed;
+
         public void setRotateTransform(float originX, float originY, float rotation) {
             batch.end();
             float dx = adjustX(originX);
@@ -901,13 +915,15 @@ public class Forge implements ApplicationListener {
             batch.getTransformMatrix().rotate(Vector3.Z, rotation);
             batch.getTransformMatrix().translate(-dx, -dy, 0);
             batch.begin();
-            //shapeRenderer.setTransformMatrix(matrix);
+            isTransformed = true;
         }
 
         public void clearTransform() {
             batch.end();
             batch.getTransformMatrix().idt();
+            shapeRenderer.setTransformMatrix(batch.getTransformMatrix());
             batch.begin();
+            isTransformed = false;
         }
 
         public void drawRotatedImage(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {
