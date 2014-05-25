@@ -19,7 +19,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-import forge.FThreads;
 import forge.Forge;
 import forge.GuiBase;
 import forge.LobbyPlayer;
@@ -68,6 +67,7 @@ import forge.util.Callback;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+import forge.util.WaitCallback;
 
 public class FControl {
     private FControl() { } //don't allow creating instance
@@ -339,13 +339,12 @@ public class FControl {
         CCombat.SINGLETON_INSTANCE.update();*/
     }
 
-    @SuppressWarnings("unchecked")
     public static Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender, final boolean overrideOrder) {
         if (damage <= 0) {
             return new HashMap<Card, Integer>();
         }
 
-        // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
+        // If the first blocker can absorb all of the damage, don't show the Assign Damage dialog
         Card firstBlocker = blockers.get(0);
         if (!overrideOrder && !attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
             Map<Card, Integer> res = new HashMap<Card, Integer>();
@@ -353,14 +352,13 @@ public class FControl {
             return res;
         }
 
-        final Object[] result = { null }; // how else can I extract a value from EDT thread?
-        FThreads.invokeInEdtAndWait(new Runnable() {
+        return new WaitCallback<Map<Card, Integer>>() {
             @Override
             public void run() {
-                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
-                result[0] = v.getDamageMap();
-            }});
-        return (Map<Card, Integer>)result[0];
+                VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder, this);
+                v.show();
+            }
+        }.invokeAndWait();
     }
 
     private static Set<Player> highlightedPlayers = new HashSet<Player>();

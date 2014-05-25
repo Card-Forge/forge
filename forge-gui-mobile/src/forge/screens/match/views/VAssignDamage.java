@@ -34,6 +34,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Callback;
 import forge.util.Utils;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 
 public class VAssignDamage extends FDialog {
+    private final Callback<Map<Card, Integer>> callback;
     private final int totalDamageToAssign;
 
     private boolean attackerHasDeathtouch = false;
@@ -97,9 +99,10 @@ public class VAssignDamage extends FDialog {
      * @param defender GameEntity that's bein attacked
      * @param overrideOrder override combatant order
      */
-    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender0, boolean overrideOrder) {
+    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender0, boolean overrideOrder, final Callback<Map<Card, Integer>> callback0) {
         super("Assign Damage");
 
+        callback = callback0;
         totalDamageToAssign = damage0;
         defender = defender0;
         attackerHasDeathtouch = attacker0.hasKeyword("Deathtouch");
@@ -424,6 +427,7 @@ public class VAssignDamage extends FDialog {
             return;
         }
         hide();
+        callback.run(getDamageMap());
     }
 
     private int getDamageToKill(Card source) {
