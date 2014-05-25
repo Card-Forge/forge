@@ -1080,6 +1080,34 @@ Fixed issue where field would disappear on match screen.
 Fixed issue where hand pane for player's you've MindSlaved wouldn't be removed after the effect ended.
 
 
+- Storm Count -
+Current Storm Count is now shown in the Card Detail pane for all storm cards
+
+
+- Improved Deck Viewer from Match screen -
+View Deck List from the Match screen now uses the same dialog that the Home screen uses, allowing viewing card images and searching/sorting the deck list
+
+
+- Token Images -
+The token images are now specific to each set (where possible). It is recommended that users delete the contents of their token image folder and download them again using the game's content downloaders.
+The default locations by operating system are:
+- Windows: <your local application data directory>/Forge/Cache/pics/tokens/ (usually C:/Users/<your username>/Application Data/Local/Forge/Cache/pics/tokens/)
+- OSX: <your home directory>/Library/Caches/Forge/pics/tokens/
+- Linux: <your home directory>/.cache/forge/pics/tokens/
+
+
+- Journey into Nyx cards -
+Forge now includes all of the new Journey into Nyx cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
+
+
+- Creature Stacking -
+You can now optionally have identical creatures stack as everything else does.
+
+
+- Quest Additions -
+Credits are now awarded for life total differences, making more deck archetypes more rewarding. Win streaks now award cards at certain thresholds. New bazaar item allows for a greater bonus booster pack selection... for a high price.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
