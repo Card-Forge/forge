@@ -143,7 +143,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
 
         public static CardAreaPanel get(Card card0) {
             CardAreaPanel cardPanel = allCardPanels.get(card0.getUniqueNumber());
-            if (cardPanel == null) {
+            if (cardPanel == null || cardPanel.getCard() != card0) { //replace card panel if card copied
                 cardPanel = new CardAreaPanel(card0);
                 allCardPanels.put(card0.getUniqueNumber(), cardPanel);
             }
