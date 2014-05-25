@@ -117,17 +117,35 @@ public class FCardPanel extends FDisplayObject {
     private void drawOverlays(Graphics g, float x, float y, float w, float h) {
         drawFoilEffect(g, card, x, y, w, h);
 
-        boolean needNameAndManaCostOverlays = (w < 200);
-        if (showCardManaCostOverlay() && needNameAndManaCostOverlays) {
-            float manaSymbolSize = w / 4;
-            if (card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
-                float dy = manaSymbolSize / 2 + Utils.scaleY(5);
-                drawManaCost(g, card.getRules().getMainPart().getManaCost(), x, y + dy, w, h, manaSymbolSize);
-                drawManaCost(g, card.getRules().getOtherPart().getManaCost(), x, y - dy, w, h, manaSymbolSize);
+        float padding = w * 0.021f; //adjust for card border
+        x += padding;
+        y += padding;
+        w -= 2 * padding;
+        h -= 2 * padding;
+
+        DetailColors borderColor = CardDetailUtil.getBorderColor(card, FControl.mayShowCard(card));
+        Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
+        color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
+
+        if (w < 200) { //only draw name and mana cost overlays if card is small
+            if (showCardNameOverlay()) {
+                g.drawOutlinedText(card.getName(), FSkinFont.get(12), Color.WHITE, Color.BLACK, x, y + padding, w, h * 0.4f, true, HAlignment.LEFT, false);
             }
-            else {
-                drawManaCost(g, card.getManaCost(), x, y, w, h, manaSymbolSize);
+            if (showCardManaCostOverlay()) {
+                float manaSymbolSize = w / 4;
+                if (card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
+                    float dy = manaSymbolSize / 2 + Utils.scaleY(5);
+                    drawManaCost(g, card.getRules().getMainPart().getManaCost(), x, y + dy, w, h, manaSymbolSize);
+                    drawManaCost(g, card.getRules().getOtherPart().getManaCost(), x, y - dy, w, h, manaSymbolSize);
+                }
+                else {
+                    drawManaCost(g, card.getManaCost(), x, y, w, h, manaSymbolSize);
+                }
             }
+        }
+
+        if (showCardIdOverlay()) {
+            drawIdBox(g, color, x, y, w, h);
         }
 
         int number = 0;
@@ -182,23 +200,7 @@ public class FCardPanel extends FDisplayObject {
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }
 
-        float padding = w * 0.021f; //adjust for card border
-        x += padding;
-        y += padding;
-        w -= 2 * padding;
-        h -= 2 * padding;
-
-        DetailColors borderColor = CardDetailUtil.getBorderColor(card, FControl.mayShowCard(card));
-        Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
-        color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
-
-        if (showCardNameOverlay() && needNameAndManaCostOverlays) {
-            g.drawOutlinedText(card.getName(), FSkinFont.get(12), Color.WHITE, Color.BLACK, x, y + padding, w, h * 0.4f, true, HAlignment.LEFT, false);
-        }
-        if (showCardIdOverlay()) {
-            drawIdBox(g, color, x, y, w, h);
-        }
-        if (showCardPowerOverlay()) {
+        if (showCardPowerOverlay()) { //make sure card p/t box appears on top
             drawPtBox(g, color, x, y, w, h);
         }
     }
