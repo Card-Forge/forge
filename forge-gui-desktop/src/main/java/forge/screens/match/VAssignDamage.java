@@ -141,6 +141,8 @@ public class VAssignDamage {
 
      */
     public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender, boolean overrideOrder) {
+        dlg.setTitle("Assign damage dealt by " + attacker0.getName());
+
         // Set damage storage vars
         this.totalDamageToAssign = damage0;
         this.defender = defender;

@@ -161,7 +161,6 @@ public final class GuiDisplayUtil {
 
                 game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
 
-
                 game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
                 devSetupPlayerState(humanLife, humanCardTexts, human);
