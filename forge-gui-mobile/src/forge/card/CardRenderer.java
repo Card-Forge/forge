@@ -37,7 +37,7 @@ public class CardRenderer {
     private static final FSkinFont PT_FONT = NAME_FONT;
     private static final float NAME_BOX_TINT = 0.2f;
     private static final float TEXT_BOX_TINT = 0.1f;
-    private static final float PT_BOX_TINT = 0.2f;
+    public static final float PT_BOX_TINT = 0.2f;
     private static final float MANA_COST_PADDING = Utils.scaleMin(3);
     private static final float SET_BOX_MARGIN = Utils.scaleMin(1);
     private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getFont().getCapHeight() - MANA_COST_PADDING));
@@ -368,7 +368,7 @@ public class CardRenderer {
         else {
             g.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        g.drawRect(1, Color.BLACK, x, y, w, h);
+        g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
         g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
     }
 }

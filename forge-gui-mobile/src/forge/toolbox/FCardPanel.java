@@ -1,11 +1,21 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.card.CardCharacteristicName;
+import forge.card.CardDetailUtil;
+import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardFaceSymbols;
+import forge.card.CardRenderer;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
@@ -170,9 +180,74 @@ public class FCardPanel extends FDisplayObject {
         }
 
         drawFoilEffect(g, card, x, y, w, h);
+
+        float padding = w * 0.021f; //adjust for card border
+        x += padding;
+        y += padding;
+        w -= 2 * padding;
+        h -= 2 * padding;
+
+        if (showCardNameOverlay()) {
+            g.drawText(card.getName(), FSkinFont.forHeight(h * 0.1f), Color.WHITE, x, y, w, h * 0.2f, true, HAlignment.LEFT, false);
+        }
+        if (showCardIdOverlay() && card.getUniqueNumber() > 0) {
+            FSkinFont idFont = FSkinFont.forHeight(h * 0.08f);
+            g.drawText(String.valueOf(card.getUniqueNumber()), idFont, Color.WHITE, x, y + h * 0.9f, w, h, false, HAlignment.LEFT, false);
+        }
+        if (showCardPowerOverlay()) {
+            drawPtBox(g, x, y, w, h);
+        }
     }
 
-    private void drawManaCost(final Graphics g, ManaCost cost, float x, float y, float w, float h, float manaSymbolSize) {
+    private void drawPtBox(Graphics g, float x, float y, float w, float h) {
+        DetailColors borderColor = CardDetailUtil.getBorderColor(card, FControl.mayShowCard(card));
+        Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
+
+        //use array of strings to render separately with a tiny amount of space in between
+        //instead of using actual spaces which are too wide
+        List<String> pieces = new ArrayList<String>();
+        if (card.isCreature()) {
+            pieces.add(String.valueOf(card.getNetAttack()));
+            pieces.add("/");
+            pieces.add(String.valueOf(card.getNetDefense()));
+        }
+        if (card.isPlaneswalker()) {
+            if (pieces.isEmpty()) {
+                pieces.add(String.valueOf(card.getCurrentLoyalty()));
+            }
+            else {
+                pieces.add("(" + card.getCurrentLoyalty() + ")");
+            }
+        }
+        if (pieces.isEmpty()) { return; }
+
+        FSkinFont font = FSkinFont.forHeight(h * 0.15f);
+        float padding = Math.round(font.getFont().getCapHeight() / 4);
+        float boxWidth = padding;
+        List<Float> pieceWidths = new ArrayList<Float>();
+        for (String piece : pieces) {
+            float pieceWidth = font.getFont().getBounds(piece).width + padding;
+            pieceWidths.add(pieceWidth);
+            boxWidth += pieceWidth;
+        }
+        float boxHeight = font.getFont().getCapHeight() + font.getFont().getAscent() + 2 * padding;
+
+        x += w - boxWidth;
+        y += h - boxHeight;
+        w = boxWidth;
+        h = boxHeight;
+
+        g.fillRect(FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT), x, y, w, h);
+        g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
+
+        x += padding;
+        for (int i = 0; i < pieces.size(); i++) {
+            g.drawText(pieces.get(i), font, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+            x += pieceWidths.get(i);
+        }
+    }
+
+    private void drawManaCost(Graphics g, ManaCost cost, float x, float y, float w, float h, float manaSymbolSize) {
         float manaCostWidth = CardFaceSymbols.getWidth(cost, manaSymbolSize);
         CardFaceSymbols.drawManaCost(g, cost, x + (w - manaCostWidth) / 2, y + (h - manaSymbolSize) / 2, manaSymbolSize);
     }

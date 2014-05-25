@@ -25,6 +25,16 @@ public class FSkinFont {
         return skinFont;
     }
 
+    public static FSkinFont forHeight(final float height) {
+        int size = MIN_FONT_SIZE + 1;
+        while (true) {
+            if (get(size).getFont().getLineHeight() > height) {
+                return get(size - 1);
+            }
+            size++;
+        }
+    }
+
     private final int size;
     private BitmapFont font;
 

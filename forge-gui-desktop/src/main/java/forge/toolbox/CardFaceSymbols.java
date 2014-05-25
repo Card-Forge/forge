@@ -230,7 +230,6 @@ public class CardFaceSymbols {
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
-
     
     /**
      * <p>
