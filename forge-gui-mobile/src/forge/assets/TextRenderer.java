@@ -81,7 +81,7 @@ public class TextRenderer {
         if (fullText.isEmpty()) { return; }
 
         BitmapFont bitmapFont = font.getFont();
-        totalHeight = bitmapFont.getLineHeight();
+        totalHeight = bitmapFont.getCapHeight();
         if (totalHeight > height) {
             //immediately try one font size smaller if no room for anything
             if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {

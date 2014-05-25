@@ -145,6 +145,11 @@ public final class GuiDisplayUtil {
             final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
 
         final Game game = getGame();
+        Player pPriority = game.getPhaseHandler().getPriorityPlayer();
+        if (pPriority == null) {
+            SGuiDialog.message("No player has priority at the moment, so game state cannot be setup.");
+            return;
+        }
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
