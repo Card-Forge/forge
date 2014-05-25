@@ -23,21 +23,24 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FDialog;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FScrollPane;
+import forge.util.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
-public class VAssignDamage {
-    // Width and height of blocker dialog
-    private final int wDlg = 700;
-    private final int hDlg = 500;
-    //private final FDialog dlg = new FDialog();
 
-    // Damage storage
+public class VAssignDamage extends FDialog {
     private final int totalDamageToAssign;
 
     private boolean attackerHasDeathtouch = false;
@@ -47,14 +50,16 @@ public class VAssignDamage {
 
     private final GameEntity defender;
 
-    private final FLabel lblTotalDamage = new FLabel.Builder().text("Available damage points: Unknown").build();
-    private final FLabel lblAssignRemaining = new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").build();
-    //  Label Buttons
-    private final FButton btnOK    = new FButton("OK");
-    private final FButton btnReset = new FButton("Reset");
-    private final FButton btnAuto  = new FButton("Auto");
+    private final FLabel lblTotalDamage = add(new FLabel.Builder().text("Available damage points: Unknown").build());
+    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").build());
 
-    
+    private final FButton btnOK    = add(new FButton("OK"));
+    private final FButton btnReset = add(new FButton("Reset"));
+    private final FButton btnAuto  = add(new FButton("Auto"));
+
+    private final AttackersPanel pnlAttackers;
+    private final DefendersPanel pnlDefenders;
+
     private static class DamageTarget {
         public final Card card;
         public final FLabel label;
@@ -71,10 +76,11 @@ public class VAssignDamage {
     private final Map<Card, DamageTarget> damage = new HashMap<Card, DamageTarget>();  // NULL in this map means defender
 
     private boolean canAssignTo(Card card) {
-        for(DamageTarget dt : defenders) {
+        for (DamageTarget dt : defenders) {
             if (dt.card == card) return true;
-            if (getDamageToKill(dt.card) > dt.damage)
+            if (getDamageToKill(dt.card) > dt.damage) {
                 return false;
+            }
         }
         throw new RuntimeException("Asking to assign damage to object which is not present in defenders list");
     }
@@ -86,7 +92,7 @@ public class VAssignDamage {
             Card source = ((FCardPanel) evt.getSource()).getCard();
             if (!damage.containsKey(source)) source = null; // to get player instead of fake card
             
-            FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
+            FSkin.Colors brdrColor = VAssignDamage.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
             ((FCardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
         }
 
@@ -115,143 +121,147 @@ public class VAssignDamage {
      * @param damage0 int
      * @param defender GameEntity that's bein attacked
      * @param overrideOrder override combatant order
-
      */
-    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender, boolean overrideOrder) {
-        // Set damage storage vars
-        this.totalDamageToAssign = damage0;
-        this.defender = defender;
-        this.attackerHasDeathtouch = attacker0.hasKeyword("Deathtouch");
-        this.attackerHasInfect = attacker0.hasKeyword("Infect");
-        this.attackerHasTrample = defender != null && attacker0.hasKeyword("Trample");
-        this.overrideCombatantOrder = overrideOrder;
+    public VAssignDamage(final Card attacker0, final List<Card> defenderCards, final int damage0, final GameEntity defender0, boolean overrideOrder) {
+        super("Assign Damage");
 
-        // Top-level UI stuff
-        /*final SkinnedPanel pnlMain = new SkinnedPanel();
-        pnlMain.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        totalDamageToAssign = damage0;
+        defender = defender0;
+        attackerHasDeathtouch = attacker0.hasKeyword("Deathtouch");
+        attackerHasInfect = attacker0.hasKeyword("Infect");
+        attackerHasTrample = defender != null && attacker0.hasKeyword("Trample");
+        overrideCombatantOrder = overrideOrder;
 
-        // Attacker area
-        final FCardPanel pnlAttacker = new FCardPanel(attacker0);
-        pnlAttacker.setOpaque(false);
-        pnlAttacker.setCardBounds(0, 0, 105, 150);
+        pnlAttackers = add(new AttackersPanel());
+        pnlDefenders = add(new DefendersPanel(defenderCards));
 
-        final JPanel pnlInfo = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-        pnlInfo.setOpaque(false);
-        pnlInfo.add(lblTotalDamage, "gap 0 0 20px 5px");
-        pnlInfo.add(new FLabel.Builder().text("Left click: Assign 1 damage. (Left Click + Control): Assign remaining damage up to lethal").build(), "gap 0 0 0 5px");
-        pnlInfo.add(new FLabel.Builder().text("Right click: Unassign 1 damage. (Right Click + Control): Unassign all damage.").build(), "gap 0 0 0 5px");
-
-        // Defenders area
-        final JPanel pnlDefenders = new JPanel();
-        pnlDefenders.setOpaque(false);
-        int cols = attackerHasTrample ? defenderCards.size() + 1 : defenderCards.size();
-        final String wrap = "wrap " +  Integer.toString(cols);
-        pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
-
-        final FScrollPane scrDefenders = new FScrollPane(pnlDefenders, false);
-
-        // Top row of cards...
-        for (final Card c : defenderCards) {
-            DamageTarget dt = new DamageTarget(c, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
-            this.damage.put(c, dt);
-            this.defenders.add(dt);
-            addPanelForDefender(pnlDefenders, c);
-        }
-
-        if (attackerHasTrample) {
-            DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
-            this.damage.put(null, dt);
-            this.defenders.add(dt);
-            Card fakeCard; 
-            if (defender instanceof Card) 
-                fakeCard = (Card)defender;
-            else if (defender instanceof Player) { 
-                fakeCard = new Card(-1);
-                fakeCard.setName(this.defender.getName());
-                fakeCard.setOwner((Player)defender);
-                Player p = (Player)defender;
-                fakeCard.setImageKey(p.getLobbyPlayer().getIconImageKey());
-            } else {
-                fakeCard = new Card(-2);
-                fakeCard.setName(this.defender.getName());
-            }
-            addPanelForDefender(pnlDefenders, fakeCard);
-        }        
-
-        // Add "opponent placeholder" card if trample allowed
-        // If trample allowed, make card placeholder
-
-        // ... bottom row of labels.
-        for (DamageTarget l : defenders) {
-            pnlDefenders.add(l.label, "w 145px!, h 30px!, gap 5px 5px 0 5px");
-        }
-
-        btnOK.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
-        btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(false); } });
-        btnAuto.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(true); finish(); } });
-
-        // Final UI layout
-        pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
-        pnlMain.add(pnlAttacker, "w 125px!, h 160px!, gap 50px 0 0 15px");
-        pnlMain.add(pnlInfo, "gap 20px 0 0 15px");
-        pnlMain.add(scrDefenders, "w 96%!, gap 2% 0 0 0, pushy, growy, ax center, span 2");
-        pnlMain.add(lblAssignRemaining, "w 96%!, gap 2% 0 0 0, ax center, span 2");
-
-        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
-        pnlButtons.setOpaque(false);
-        pnlButtons.add(btnAuto, "w 110px!, h 30px!, gap 0 10px 0 0");
-        pnlButtons.add(btnOK, "w 110px!, h 30px!, gap 0 10px 0 0");
-        pnlButtons.add(btnReset, "w 110px!, h 30px!");
-
-        pnlMain.add(pnlButtons, "ax center, w 350px!, gap 10px 10px 10px 10px, span 2");
-        overlay.add(pnlMain);
-        
-        pnlMain.getRootPane().setDefaultButton(btnOK);
-        SwingUtilities.invokeLater(new Runnable() {
+        btnAuto.setCommand(new FEventHandler() {
             @Override
-            public void run() {
-                btnAuto.requestFocusInWindow();
+            public void handleEvent(FEvent e) {
+                resetAssignedDamage();
+                initialAssignDamage(true);
+                finish();
+            }
+        });
+        btnOK.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                finish();
+            }
+        });
+        btnReset.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                resetAssignedDamage();
+                initialAssignDamage(false);
             }
         });
 
         initialAssignDamage(false);
-        SOverlayUtils.showOverlay();
-
-        this.dlg.setUndecorated(true);
-        this.dlg.setContentPane(pnlMain);
-        this.dlg.setSize(new Dimension(wDlg, hDlg));
-        this.dlg.setLocation((overlay.getWidth() - wDlg) / 2, (overlay.getHeight() - hDlg) / 2);
-        this.dlg.setModalityType(ModalityType.APPLICATION_MODAL);
-        this.dlg.setVisible(true);*/
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param pnlDefenders
-     * @param defender
-     */
-    private void addPanelForDefender(final Card defender) {
-        final FCardPanel cp = new FCardPanel(defender);
-        cp.setBounds(0, 0, 145, 170);
+    @Override
+    protected float layoutAndGetHeight(float width, float maxHeight) {
+        float padding = FOptionPane.PADDING;
+        float x = padding;
+        float y = padding;
+        float w = width - 2 * padding;
+
+        //layout buttons
+        float buttonGap = Utils.scaleX(10);
+        float buttonWidth = (w - buttonGap * 2) / 3;
+        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
+        x = padding;
+        y = maxHeight - FOptionPane.GAP_BELOW_BUTTONS - buttonHeight;
+        btnAuto.setBounds(x, y, buttonWidth, buttonHeight);
+        x += buttonWidth + buttonGap;
+        btnOK.setBounds(x, y, buttonWidth, buttonHeight);
+        x += buttonWidth + buttonGap;
+        btnReset.setBounds(x, y, buttonWidth, buttonHeight);
+
+        x = padding;
+        float panelDefendersHeight = y - padding;
+        pnlDefenders.setBounds(x, y - panelDefendersHeight - padding, w, panelDefendersHeight);
+
+        return maxHeight;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param source
-     * @param meta
-     * @param isLMB
-     */
+    private class AttackersPanel extends FScrollPane {
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+
+            return new ScrollBounds(visibleWidth, visibleHeight);
+        }
+    }
+
+    private class DefendersPanel extends FScrollPane {
+        private DefendersPanel(final List<Card> defenderCards) {
+            int cols = attackerHasTrample ? defenderCards.size() + 1 : defenderCards.size();
+
+            // Top row of cards...
+            for (final Card c : defenderCards) {
+                DamageTarget dt = new DamageTarget(c, new FLabel.Builder().text("0").fontSize(18).align(HAlignment.CENTER).build());
+                damage.put(c, dt);
+                defenders.add(dt);
+                add(new FCardPanel(c));
+            }
+
+            if (attackerHasTrample) {
+                DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).align(HAlignment.CENTER).build());
+                damage.put(null, dt);
+                defenders.add(dt);
+                Card fakeCard; 
+                if (defender instanceof Card) {
+                    fakeCard = (Card)defender;
+                }
+                else if (defender instanceof Player) { 
+                    fakeCard = new Card(-1);
+                    fakeCard.setName(defender.getName());
+                    fakeCard.setOwner((Player)defender);
+                    Player p = (Player)defender;
+                    //fakeCard.setImageKey(FControl.avatarImages.get(p.getOriginalLobbyPlayer()));
+                }
+                else {
+                    fakeCard = new Card(-2);
+                    fakeCard.setName(defender.getName());
+                }
+                add(new FCardPanel(fakeCard));
+            }        
+
+            // Add "opponent placeholder" card if trample allowed
+            // If trample allowed, make card placeholder
+
+            // ... bottom row of labels.
+            for (DamageTarget dt : defenders) {
+                add(dt.label);
+            }
+        }
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            float x = 0;
+            float y = 0;
+            float labelWidth = Utils.AVG_FINGER_WIDTH;
+            float labelHeight = Utils.scaleY(30);
+            float padding = FList.PADDING;
+            float dx = labelWidth + padding;
+
+            for (DamageTarget dt : defenders) {
+                dt.label.setBounds(x, y, labelWidth, labelHeight);
+                x += dx;
+            }
+            return new ScrollBounds(x, visibleHeight);
+        }
+    }
+
     private void assignDamageTo(Card source, boolean meta, boolean isAdding) {
-        if (!damage.containsKey(source)) 
+        if (!damage.containsKey(source)) {
             source = null;
+        }
 
         // If trying to assign to the defender, follow the normal assignment rules
         // No need to check for "active" creature assignee when overiding combatant order
-        if ((source == null || source == this.defender || !this.overrideCombatantOrder) && isAdding && 
-                !VAssignDamage.this.canAssignTo(source)) {
+        if ((source == null || source == defender || !overrideCombatantOrder) && isAdding && 
+                !canAssignTo(source)) {
             return;
         }
 
@@ -280,7 +290,7 @@ public class VAssignDamage {
 
         // cannot assign first blocker less than lethal damage except when overriding order
         boolean isFirstBlocker = defenders.get(0).card == source;
-        if (!this.overrideCombatantOrder && isFirstBlocker && damageToAdd + damageItHad < lethalDamage) {
+        if (!overrideCombatantOrder && isFirstBlocker && damageToAdd + damageItHad < lethalDamage) {
             return;
         }
 
@@ -301,7 +311,7 @@ public class VAssignDamage {
             int damage = dt.damage;
             // If overriding combatant order, make sure everything has lethal if defender has damage assigned to it
             // Otherwise, follow normal combatant order
-            if (hasAliveEnemy && (!this.overrideCombatantOrder || dt.card == null || dt.card == this.defender)) {
+            if (hasAliveEnemy && (!overrideCombatantOrder || dt.card == null || dt.card == defender)) {
                 dt.damage = 0;
             }
             else {
@@ -312,7 +322,7 @@ public class VAssignDamage {
 
     // will assign all damage to defenders and rest to player, if present
     private void initialAssignDamage(boolean toAllBlockers) {
-        if (!toAllBlockers && this.overrideCombatantOrder) {
+        if (!toAllBlockers && overrideCombatantOrder) {
             // Don't auto assign the first damage when overriding combatant order
             updateLabels();
             return;
@@ -340,8 +350,9 @@ public class VAssignDamage {
 
     /** Reset Assign Damage back to how it was at the beginning. */
     private void resetAssignedDamage() {
-        for(DamageTarget dt : defenders)
+        for (DamageTarget dt : defenders) {
             dt.damage = 0;
+        }
     }
     
     private void addDamage(final Card card, int addedDamage) {
@@ -386,7 +397,7 @@ public class VAssignDamage {
             dt.label.setText(sb.toString());
         }
 
-        this.lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, this.totalDamageToAssign));
+        lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, totalDamageToAssign));
         btnOK.setEnabled(damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }
@@ -398,8 +409,7 @@ public class VAssignDamage {
         if (getRemainingDamage() > 0) {
             return;
         }
-
-        //dlg.dispose();
+        hide();
     }
 
     private int getDamageToKill(Card source) {
@@ -415,7 +425,7 @@ public class VAssignDamage {
             }
         }
         else {
-            lethalDamage = VAssignDamage.this.attackerHasDeathtouch ? 1 : Math.max(0, source.getLethalDamage());
+            lethalDamage = attackerHasDeathtouch ? 1 : Math.max(0, source.getLethalDamage());
         }
         return lethalDamage;
     }
