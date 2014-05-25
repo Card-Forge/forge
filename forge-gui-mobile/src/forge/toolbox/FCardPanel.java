@@ -187,22 +187,40 @@ public class FCardPanel extends FDisplayObject {
         w -= 2 * padding;
         h -= 2 * padding;
 
+        DetailColors borderColor = CardDetailUtil.getBorderColor(card, FControl.mayShowCard(card));
+        Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
+        color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
+
         if (showCardNameOverlay()) {
-            g.drawText(card.getName(), FSkinFont.forHeight(h * 0.1f), Color.WHITE, x, y, w, h * 0.2f, true, HAlignment.LEFT, false);
+            g.drawText(card.getName(), FSkinFont.forHeight(h * 0.2f), Color.WHITE, x, y, w, h * 0.45f, true, HAlignment.LEFT, false);
         }
-        if (showCardIdOverlay() && card.getUniqueNumber() > 0) {
-            FSkinFont idFont = FSkinFont.forHeight(h * 0.08f);
-            g.drawText(String.valueOf(card.getUniqueNumber()), idFont, Color.WHITE, x, y + h * 0.9f, w, h, false, HAlignment.LEFT, false);
+        if (showCardIdOverlay()) {
+            drawIdBox(g, color, x, y, w, h);
         }
         if (showCardPowerOverlay()) {
-            drawPtBox(g, x, y, w, h);
+            drawPtBox(g, color, x, y, w, h);
         }
     }
 
-    private void drawPtBox(Graphics g, float x, float y, float w, float h) {
-        DetailColors borderColor = CardDetailUtil.getBorderColor(card, FControl.mayShowCard(card));
-        Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
+    private void drawIdBox(Graphics g, Color color, float x, float y, float w, float h) {
+        if (card.getUniqueNumber() <= 0) { return; }
 
+        String text = String.valueOf(card.getUniqueNumber());
+        FSkinFont font = FSkinFont.forHeight(h * 0.12f);
+        float padding = Math.round(font.getFont().getCapHeight() / 8);
+        float boxWidth = font.getFont().getBounds(text).width + 2 * padding;
+        float boxHeight = font.getFont().getCapHeight() + font.getFont().getAscent() + 2 * padding;
+
+        y += h - boxHeight;
+        w = boxWidth;
+        h = boxHeight;
+
+        g.fillRect(color, x, y, w, h);
+        g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
+        g.drawText(text, font, Color.BLACK, Math.round(x) + padding, y, w, h, false, HAlignment.LEFT, true);
+    }
+
+    private void drawPtBox(Graphics g, Color color, float x, float y, float w, float h) {
         //use array of strings to render separately with a tiny amount of space in between
         //instead of using actual spaces which are too wide
         List<String> pieces = new ArrayList<String>();
@@ -237,7 +255,7 @@ public class FCardPanel extends FDisplayObject {
         w = boxWidth;
         h = boxHeight;
 
-        g.fillRect(FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT), x, y, w, h);
+        g.fillRect(color, x, y, w, h);
         g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
 
         x += padding;
