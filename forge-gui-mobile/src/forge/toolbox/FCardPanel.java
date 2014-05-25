@@ -115,7 +115,10 @@ public class FCardPanel extends FDisplayObject {
     }
 
     private void drawOverlays(Graphics g, float x, float y, float w, float h) {
-        if (showCardManaCostOverlay() && w < 200) {
+        drawFoilEffect(g, card, x, y, w, h);
+
+        boolean needNameAndManaCostOverlays = (w < 200);
+        if (showCardManaCostOverlay() && needNameAndManaCostOverlays) {
             float manaSymbolSize = w / 4;
             if (card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
                 float dy = manaSymbolSize / 2 + Utils.scaleY(5);
@@ -179,8 +182,6 @@ public class FCardPanel extends FDisplayObject {
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
         }
 
-        drawFoilEffect(g, card, x, y, w, h);
-
         float padding = w * 0.021f; //adjust for card border
         x += padding;
         y += padding;
@@ -191,8 +192,8 @@ public class FCardPanel extends FDisplayObject {
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
-        if (showCardNameOverlay()) {
-            g.drawText(card.getName(), FSkinFont.forHeight(h * 0.2f), Color.WHITE, x, y, w, h * 0.45f, true, HAlignment.LEFT, false);
+        if (showCardNameOverlay() && needNameAndManaCostOverlays) {
+            g.drawOutlinedText(card.getName(), FSkinFont.get(12), Color.WHITE, Color.BLACK, x, y + padding, w, h * 0.4f, true, HAlignment.LEFT, false);
         }
         if (showCardIdOverlay()) {
             drawIdBox(g, color, x, y, w, h);
