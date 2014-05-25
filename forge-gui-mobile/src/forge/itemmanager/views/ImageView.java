@@ -8,6 +8,7 @@ import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
+import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.deck.DeckProxy;
 import forge.game.card.Card;
@@ -580,6 +581,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private ItemInfo getItemAtPoint(float x, float y) {
+        //check selected items first since they appear on top
+        for (int i = selectedIndices.size() - 1; i >= 0; i--) {
+            ItemInfo item = orderedItems.get(selectedIndices.get(i));
+            float relX = x + item.group.getScrollLeft() - item.group.getLeft();
+            float relY = y + getScrollValue();
+            if (item.contains(relX, relY)) {
+                return item;
+            }
+        }
+
         for (int i = groups.size() - 1; i >= 0; i--) {
             Group group = groups.get(i);
             if (!group.isCollapsed) {
@@ -946,16 +957,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
 
             //draw foil effect if needed
-            /*if (item instanceof IPaperCard) {
+            if (item instanceof IPaperCard) {
                 IPaperCard paperCard = (IPaperCard)item;
                 if (paperCard.isFoil()) {
                     Card card = Card.getCardForUi(paperCard);
                     if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
                         card.setRandomFoil();
                     }
-                    CardPanel.drawFoilEffect(g, card, getLeft(), getTop(), getWidth(), getHeight(), borderSize);
+                    CardRenderer.drawFoilEffect(g, card, getLeft(), getTop(), getWidth(), getHeight());
                 }
-            }*/
+            }
         }
     }
 }
