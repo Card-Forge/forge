@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import forge.Forge.Graphics;
+import forge.assets.FSkinBorder;
 import forge.card.CardRenderer;
 import forge.game.card.Card;
 import forge.util.Utils;
@@ -69,6 +70,10 @@ public class FCardPanel extends FDisplayObject {
         return x >= left && x <= left + w && y >= top && y <= top + h;
     }
 
+    protected FSkinBorder getBorder() {
+        return null;
+    }
+
     @Override
     public void draw(Graphics g) {
         if (card == null) { return; }
@@ -84,6 +89,11 @@ public class FCardPanel extends FDisplayObject {
         if (tapped) {
             float edgeOffset = w / 2f;
             g.setRotateTransform(x + edgeOffset, y + h - edgeOffset, tappedAngle);
+        }
+
+        FSkinBorder border = getBorder();
+        if (border != null) {
+            border.draw(g, x, y, w, h);
         }
 
         CardRenderer.drawCardWithOverlays(g, card, x, y, w, h);

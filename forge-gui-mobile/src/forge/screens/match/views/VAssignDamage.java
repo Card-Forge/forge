@@ -17,6 +17,10 @@
  */
 package forge.screens.match.views;
 
+import forge.Forge.KeyInputAdapter;
+import forge.assets.FSkinBorder;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -84,35 +88,6 @@ public class VAssignDamage extends FDialog {
         }
         throw new RuntimeException("Asking to assign damage to object which is not present in defenders list");
     }
-
-    // Mouse actions
-    /*private final MouseAdapter mad = new MouseAdapter() {
-        @Override
-        public void pressed(float x, float y) {
-            Card source = ((FCardPanel) evt.getSource()).getCard();
-            if (!damage.containsKey(source)) source = null; // to get player instead of fake card
-            
-            FSkin.Colors brdrColor = VAssignDamage.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
-            ((FCardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
-        }
-
-        @Override
-        public void released(float x, float y) {
-            //((FCardPanel) evt.getSource()).setBorder((Border)null);
-        }
-
-        @Override
-        public void tap(float x, float y, int count) {
-            Card source = ((FCardPanel) evt.getSource()).getCard(); // will be NULL for player
-
-            boolean meta = evt.isControlDown();
-            boolean isLMB = SwingUtilities.isLeftMouseButton(evt);
-            boolean isRMB = SwingUtilities.isRightMouseButton(evt);
-            
-            if (isLMB || isRMB)
-                assignDamageTo(source, meta, isLMB);
-        }
-    };*/
 
     /** Constructor.
      * 
@@ -203,7 +178,7 @@ public class VAssignDamage extends FDialog {
                 DamageTarget dt = new DamageTarget(c, new FLabel.Builder().text("0").fontSize(18).align(HAlignment.CENTER).build());
                 damage.put(c, dt);
                 defenders.add(dt);
-                add(new FCardPanel(c));
+                add(new AssignDamageCardPanel(c));
             }
 
             if (attackerHasTrample) {
@@ -225,7 +200,7 @@ public class VAssignDamage extends FDialog {
                     fakeCard = new Card(-2);
                     fakeCard.setName(defender.getName());
                 }
-                add(new FCardPanel(fakeCard));
+                add(new AssignDamageCardPanel(fakeCard));
             }        
 
             // Add "opponent placeholder" card if trample allowed
@@ -250,6 +225,45 @@ public class VAssignDamage extends FDialog {
                 x += dx;
             }
             return new ScrollBounds(x, visibleHeight);
+        }
+    }
+
+    private class AssignDamageCardPanel extends FCardPanel {
+        private FSkinColor borderColor;
+
+        private AssignDamageCardPanel(Card card0) {
+            super(card0);
+        }
+
+        @Override
+        public boolean press(float x, float y) {
+            Card source = getCard();
+            if (!damage.containsKey(source)) {
+                source = null; // to get player instead of fake card
+            }
+
+            borderColor = canAssignTo(source) ? FSkinColor.get(Colors.CLR_ACTIVE) : FSkinColor.get(Colors.CLR_INACTIVE);
+            return true;
+        }
+
+        @Override
+        public boolean release(float x, float y) {
+            borderColor = null;
+            return true;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            assignDamageTo(getCard(), KeyInputAdapter.isCtrlKeyDown(), true);
+            return true;
+        }
+
+        @Override
+        protected FSkinBorder getBorder() {
+            if (borderColor == null) {
+                return null;
+            }
+            return new FSkinBorder(borderColor, Utils.scaleMin(2));
         }
     }
 

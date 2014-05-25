@@ -1092,6 +1092,7 @@ forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
 forge-gui-mobile/src/forge/assets/FSkin.java -text
+forge-gui-mobile/src/forge/assets/FSkinBorder.java -text
 forge-gui-mobile/src/forge/assets/FSkinColor.java -text
 forge-gui-mobile/src/forge/assets/FSkinFont.java -text
 forge-gui-mobile/src/forge/assets/FSkinImage.java -text
