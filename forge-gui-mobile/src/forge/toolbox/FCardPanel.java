@@ -127,9 +127,9 @@ public class FCardPanel extends FDisplayObject {
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
-        if (w < 200) { //only draw name and mana cost overlays if card is small
+        if (h < Utils.AVG_FINGER_HEIGHT * 5) { //only draw name and mana cost overlays if card is small
             if (showCardNameOverlay()) {
-                g.drawOutlinedText(card.getName(), FSkinFont.get(12), Color.WHITE, Color.BLACK, x, y + padding, w, h * 0.4f, true, HAlignment.LEFT, false);
+                g.drawOutlinedText(card.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, HAlignment.LEFT, false);
             }
             if (showCardManaCostOverlay()) {
                 float manaSymbolSize = w / 4;
@@ -144,8 +144,10 @@ public class FCardPanel extends FDisplayObject {
             }
         }
 
-        if (showCardIdOverlay()) {
-            drawIdBox(g, color, x, y, w, h);
+        if (showCardIdOverlay() && card.getUniqueNumber() > 0) {
+            FSkinFont idFont = FSkinFont.forHeight(h * 0.12f);
+            float idHeight = idFont.getFont().getCapHeight();
+            g.drawOutlinedText(String.valueOf(card.getUniqueNumber()), idFont, Color.WHITE, Color.BLACK, x + padding, y + h - idHeight - padding, w, h, false, HAlignment.LEFT, false);
         }
 
         int number = 0;
@@ -203,24 +205,6 @@ public class FCardPanel extends FDisplayObject {
         if (showCardPowerOverlay()) { //make sure card p/t box appears on top
             drawPtBox(g, color, x, y, w, h);
         }
-    }
-
-    private void drawIdBox(Graphics g, Color color, float x, float y, float w, float h) {
-        if (card.getUniqueNumber() <= 0) { return; }
-
-        String text = String.valueOf(card.getUniqueNumber());
-        FSkinFont font = FSkinFont.forHeight(h * 0.12f);
-        float padding = Math.round(font.getFont().getCapHeight() / 8);
-        float boxWidth = font.getFont().getBounds(text).width + 2 * padding;
-        float boxHeight = font.getFont().getCapHeight() + font.getFont().getAscent() + 2 * padding;
-
-        y += h - boxHeight;
-        w = boxWidth;
-        h = boxHeight;
-
-        g.fillRect(color, x, y, w, h);
-        g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
-        g.drawText(text, font, Color.BLACK, Math.round(x) + padding, y, w, h, false, HAlignment.LEFT, true);
     }
 
     private void drawPtBox(Graphics g, Color color, float x, float y, float w, float h) {
