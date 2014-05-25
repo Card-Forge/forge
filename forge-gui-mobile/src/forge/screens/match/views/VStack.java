@@ -7,9 +7,9 @@ import forge.LobbyPlayer;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil;
+import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
@@ -208,7 +208,7 @@ public class VStack extends FDropDown {
             float x = padding;
             float y = padding;
 
-            g.drawImage(ImageCache.getImage(stackInstance.getSourceCard()), x, y, cardWidth, cardHeight);
+            CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, cardWidth, cardHeight);
 
             x += cardWidth + padding;
             textRenderer.drawText(g, text, FONT, foreColor, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);

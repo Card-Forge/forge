@@ -26,7 +26,6 @@ import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
@@ -313,7 +312,8 @@ public class ListChooser<T> extends FContainer {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             SpellAbility spellAbility = (SpellAbility)value;
-            g.drawImage(ImageCache.getImage(spellAbility.getHostCard()), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
+            CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
+
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;
             w -= dx;
