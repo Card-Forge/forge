@@ -67,7 +67,7 @@ public abstract class LaunchScreen extends FScreen {
                             if (launchParams.players.isEmpty()) {
                                 throw new RuntimeException("Must add at least one player to launchParams.players");
                             }
-                            
+
                             FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
                         }
                         loader.hide();

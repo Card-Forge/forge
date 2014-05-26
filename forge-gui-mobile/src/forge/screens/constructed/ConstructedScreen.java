@@ -54,7 +54,7 @@ public class ConstructedScreen extends LaunchScreen {
     private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final float PADDING = Utils.scaleMin(5);
-    private static final int MAX_PLAYERS = 8;
+    private static final int MAX_PLAYERS = 2; //8; //TODO: Support multiplayer
     private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
     private static final FSkinFont LABEL_FONT = FSkinFont.get(14);
 
@@ -163,15 +163,15 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         add(playersScroll);
-
+        
         getDeckChooser(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
         getDeckChooser(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
+        /*getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
         getDeckChooser(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
         getDeckChooser(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
         getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
         getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
+        getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
 
         updatePlayersFromPrefs();
 
@@ -874,7 +874,7 @@ public class ConstructedScreen extends LaunchScreen {
     }
 
     /** Updates the avatars from preferences on update. */
-    public void updatePlayersFromPrefs() {
+    private void updatePlayersFromPrefs() {
         ForgePreferences prefs = FModel.getPreferences();
 
         // Avatar
