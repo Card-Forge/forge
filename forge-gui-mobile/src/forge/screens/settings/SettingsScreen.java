@@ -40,7 +40,7 @@ public class SettingsScreen extends FScreen {
         lstSettings.addGroup("Random Deck Generation");
         lstSettings.addGroup("Advanced Settings");
         lstSettings.addGroup("Graphic Options");
-        lstSettings.addGroup("Sound Options");
+        //lstSettings.addGroup("Sound Options"); //TODO: Uncomment when sound supported
 
         //General Settings
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
@@ -137,14 +137,14 @@ public class SettingsScreen extends FScreen {
                 4);
 
         //Sound Options
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
+        /*lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
                 "Enable Sounds",
                 "Enable sound effects during the game."),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
-                5);
+                5);*/ //TODO: Uncomment when sound supported
     }
 
     @Override
