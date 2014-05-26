@@ -74,9 +74,12 @@ public class TriggerVote extends Trigger {
         for (Object voteType : votes.keySet()) {
             List<Player> players = votes.get(voteType);
             if (votedOtherchoice ^ players.contains(player)) {
-                voters.addAll(new HashSet<Player>(players));
+                voters.addAll(players);
             }
         }
+        HashSet<Player> set = new HashSet<Player>(voters);
+        voters.clear();
+        voters.addAll(set); // clear duplicated players, sometime a player votes more than once
         if (isOpponent) {
             voters.retainAll(player.getOpponents());
         }
