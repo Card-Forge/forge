@@ -123,8 +123,8 @@ public class FButton extends FDisplayObject implements IButton {
 
     public TextBounds getAutoSizeBounds() {
         TextBounds bounds = new TextBounds();
-        bounds.width = font.getFont().getBounds(text).width + 2 * PADDING;
-        bounds.height = 3 * font.getFont().getCapHeight();
+        bounds.width = font.getBounds(text).width + 2 * PADDING;
+        bounds.height = 3 * font.getCapHeight();
         return bounds;
     }
 

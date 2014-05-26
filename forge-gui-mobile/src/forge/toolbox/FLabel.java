@@ -192,8 +192,8 @@ public class FLabel extends FDisplayObject implements IButton {
             bounds = new TextBounds();
         }
         else {
-            bounds = font.getFont().getMultiLineBounds(text);
-            bounds.height += font.getFont().getLineHeight() - font.getFont().getCapHeight(); //account for height below baseline of final line
+            bounds = font.getMultiLineBounds(text);
+            bounds.height += font.getLineHeight() - font.getCapHeight(); //account for height below baseline of final line
         }
         bounds.width += 2 * insets.x;
         bounds.height += 2 * insets.y;
@@ -277,7 +277,7 @@ public class FLabel extends FDisplayObject implements IButton {
                 if (alignment == HAlignment.CENTER) {
                     float dx;
                     while (true) {
-                        dx = (w - iconWidth - font.getFont().getMultiLineBounds(text).width - insets.x) / 2;
+                        dx = (w - iconWidth - font.getMultiLineBounds(text).width - insets.x) / 2;
                         if (dx > 0) {
                             x += dx;
                             break;

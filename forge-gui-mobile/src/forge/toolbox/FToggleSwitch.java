@@ -62,8 +62,8 @@ public class FToggleSwitch extends FDisplayObject {
 
     public float getAutoSizeWidth(float height) {
         float width;
-        float onTextWidth = font.getFont().getBounds(onText).width;
-        float offTextWidth = font.getFont().getBounds(offText).width;
+        float onTextWidth = font.getBounds(onText).width;
+        float offTextWidth = font.getBounds(offText).width;
         if (onTextWidth > offTextWidth) {
             width = onTextWidth;
         }

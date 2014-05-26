@@ -29,7 +29,7 @@ public class MatchLoader extends FOverlay {
 
         float padding = w * HomeScreen.INSETS_FACTOR;
         float logoSize = w * HomeScreen.LOGO_SIZE_FACTOR;
-        float fontHeight = FONT.getFont().getLineHeight();
+        float fontHeight = FONT.getLineHeight();
         float panelHeight = logoSize + fontHeight + 2 * insets + 3 * padding;
 
         float y = (getHeight() - panelHeight) / 2;

@@ -30,7 +30,7 @@ public class FTextField extends FDisplayObject {
         return getDefaultHeight(FSkinFont.get(fontSize));
     }
     public static float getDefaultHeight(FSkinFont font0) {
-        return font0.getFont().getCapHeight() * 3;
+        return font0.getCapHeight() * 3;
     }
 
     private String text, ghostText, textBeforeKeyInput;
@@ -119,7 +119,7 @@ public class FTextField extends FDisplayObject {
     }
 
     public float getAutoSizeWidth() {
-        return PADDING + font.getFont().getBounds(text).width + getRightPadding();
+        return PADDING + font.getBounds(text).width + getRightPadding();
     }
     
     private int getCharIndexAtPoint(float x, float y) {
@@ -127,14 +127,14 @@ public class FTextField extends FDisplayObject {
         if (x < charLeft) {
             return 0;
         }
-        if (x >= charLeft + font.getFont().getBounds(text).width) {
+        if (x >= charLeft + font.getBounds(text).width) {
             return text.length();
         }
 
         //find closest character of press
         float charWidth;
         for (int i = 0; i < text.length(); i++) {
-            charWidth = font.getFont().getBounds(text.substring(i, i + 1)).width;
+            charWidth = font.getBounds(text.substring(i, i + 1)).width;
             if (x < charLeft + charWidth / 2) {
                 return i;
             }
@@ -296,7 +296,7 @@ public class FTextField extends FDisplayObject {
         if (isEditing) {
             float selLeft = PADDING;
             if (selStart > 0) {
-                selLeft += font.getFont().getBounds(text.substring(0, selStart)).width;
+                selLeft += font.getBounds(text.substring(0, selStart)).width;
             }
             float selTop = PADDING;
             float selHeight = h - 2 * PADDING;
@@ -305,7 +305,7 @@ public class FTextField extends FDisplayObject {
                 g.drawLine(BORDER_THICKNESS, FORE_COLOR, selLeft, selTop, selLeft, selTop + selHeight);
             }
             else if (selStart == 0 && selLength == text.length()) {
-                float selWidth = font.getFont().getBounds(text.substring(selStart, selStart + selLength)).width;
+                float selWidth = font.getBounds(text.substring(selStart, selStart + selLength)).width;
                 g.fillRect(SEL_COLOR, selLeft, selTop, selWidth, selHeight);
                 drawText(g, w, h); //draw text in front of selection background
             }
@@ -318,7 +318,7 @@ public class FTextField extends FDisplayObject {
     }
 
     private void drawText(Graphics g, float w, float h) {
-        float diff = h - font.getFont().getCapHeight();
+        float diff = h - font.getCapHeight();
         if (diff > 0 && Math.round(diff) % 2 == 1) {
             h++; //if odd difference between height and font height, increment height so text favors displaying closer to bottom
         }

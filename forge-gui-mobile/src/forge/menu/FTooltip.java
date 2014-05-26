@@ -61,7 +61,7 @@ public class FTooltip extends FDropDown {
 
     @Override
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
-        TextBounds bounds = FONT.getFont().getWrappedBounds(text, maxWidth - 2 * PADDING);
+        TextBounds bounds = FONT.getWrappedBounds(text, maxWidth - 2 * PADDING);
         return new ScrollBounds(maxWidth, bounds.height + 2 * PADDING);
     }
 

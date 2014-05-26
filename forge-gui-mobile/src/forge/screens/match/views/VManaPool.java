@@ -97,7 +97,7 @@ public class VManaPool extends VDisplayArea {
 
         @Override
         public void draw(Graphics g) {
-            float textHeight = FONT.getFont().getCapHeight();
+            float textHeight = FONT.getCapHeight();
             float gapY = textHeight / 4f;
 
             float maxImageHeight = getHeight() - textHeight - 3 * gapY;

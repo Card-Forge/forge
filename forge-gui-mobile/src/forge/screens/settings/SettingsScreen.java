@@ -301,7 +301,7 @@ public class SettingsScreen extends FScreen {
             h -= 2 * offset;
 
             float totalHeight = h;
-            h = font.getFont().getMultiLineBounds(value.label).height + SETTING_PADDING;
+            h = font.getMultiLineBounds(value.label).height + SETTING_PADDING;
 
             g.drawText(value.label, font, color, x, y, w, h, false, HAlignment.LEFT, false);
             value.drawPrefValue(g, font, color, x, y, w, h);

@@ -46,7 +46,7 @@ public class FMenuTab extends FDisplayObject {
 
     public void setText(String text0) {
         text = text0;
-        minWidth = FONT.getFont().getBounds(text).width;
+        minWidth = FONT.getBounds(text).width;
         menuBar.revalidate();
     }
 

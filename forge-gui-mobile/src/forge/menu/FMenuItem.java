@@ -47,7 +47,7 @@ public class FMenuItem extends FDisplayObject {
         handler = handler0;
         setEnabled(enabled0);
 
-        textWidth = FONT.getFont().getBounds(text).width;
+        textWidth = FONT.getBounds(text).width;
     }
 
     public boolean hasIcon() {

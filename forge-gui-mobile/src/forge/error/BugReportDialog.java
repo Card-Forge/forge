@@ -81,9 +81,9 @@ public class BugReportDialog extends FOptionPane {
 
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            TextBounds bounds = FONT.getFont().getMultiLineBounds(text);
+            TextBounds bounds = FONT.getMultiLineBounds(text);
             return new ScrollBounds(bounds.width + 2 * PADDING, bounds.height + 2 * PADDING +
-                    FONT.getFont().getLineHeight() - FONT.getFont().getCapHeight()); //account for height below baseline of final line);
+                    FONT.getLineHeight() - FONT.getCapHeight()); //account for height below baseline of final line);
         }
 
         @Override

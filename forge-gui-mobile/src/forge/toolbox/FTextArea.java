@@ -54,7 +54,7 @@ public class FTextArea extends FScrollPane {
 
     public float getPreferredHeight(float width) {
         return renderer.getWrappedBounds(text, font, width - 2 * insets.x).height
-                + font.getFont().getLineHeight() - font.getFont().getCapHeight() //need to account for difference in line and cap height
+                + font.getLineHeight() - font.getCapHeight() //need to account for difference in line and cap height
                 + 2 * insets.y;
     }
 

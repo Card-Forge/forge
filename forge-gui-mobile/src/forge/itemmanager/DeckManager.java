@@ -259,7 +259,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                     //if just string column, use normal list item height
                     return Utils.AVG_FINGER_HEIGHT;
                 }
-                return IMAGE_SIZE + 2 * FSkinFont.get(12).getFont().getLineHeight() + 4 * FList.PADDING;
+                return IMAGE_SIZE + 2 * FSkinFont.get(12).getLineHeight() + 4 * FList.PADDING;
             }
 
             @Override
@@ -296,7 +296,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 x = FList.PADDING;
                 y += IMAGE_SIZE + FList.PADDING;
                 font = FSkinFont.get(font.getSize() - 2);
-                float lineHeight = font.getFont().getLineHeight();
+                float lineHeight = font.getLineHeight();
 
                 int mainSize = deck.getMainSize();
                 if (mainSize < 0) {
@@ -307,7 +307,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                     sideSize = 0; //show sideboard as 0 if empty
                 }
                 String countStr = mainSize + " / " + sideSize;
-                float countWidth = font.getFont().getBounds(countStr).width;
+                float countWidth = font.getBounds(countStr).width;
                 if (!deck.getPath().isEmpty()) {
                     g.drawText(deck.getPath().substring(1) + "/", font, foreColor, x, y, w - countWidth - FList.PADDING, lineHeight, false, HAlignment.LEFT, true);
                 }

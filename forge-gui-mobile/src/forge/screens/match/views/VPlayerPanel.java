@@ -162,7 +162,7 @@ public class VPlayerPanel extends FContainer {
         y = height - VAvatar.HEIGHT;
         avatar.setPosition(0, y);
 
-        float lifeLabelWidth = LIFE_FONT.getFont().getBounds("99").width * 1.2f; //make just wide enough for 2-digit life totals
+        float lifeLabelWidth = LIFE_FONT.getBounds("99").width * 1.2f; //make just wide enough for 2-digit life totals
         float infoLabelHeight = VAvatar.HEIGHT - phaseIndicator.getHeight();
         lblLife.setBounds(x, y, lifeLabelWidth, infoLabelHeight);
         x += lifeLabelWidth;
@@ -294,7 +294,7 @@ public class VPlayerPanel extends FContainer {
 
             //show image left of text if wider than tall
             if (getWidth() > getHeight()) {
-                float maxImageWidth = getWidth() - INFO_FONT.getFont().getBounds("0").width - 3 * INFO_TAB_PADDING_X;
+                float maxImageWidth = getWidth() - INFO_FONT.getBounds("0").width - 3 * INFO_TAB_PADDING_X;
                 w = icon.getNearestHQWidth(maxImageWidth);
                 if (w > maxImageWidth) {
                     w /= 2;

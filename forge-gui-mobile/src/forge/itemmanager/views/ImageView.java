@@ -791,7 +791,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float y = 0;
                 String caption = name + " (" + items.size() + ")";
                 g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, getWidth(), GROUP_HEADER_HEIGHT, false, HAlignment.LEFT, true);
-                x += GROUP_HEADER_FONT.getFont().getBounds(caption).width + PADDING;
+                x += GROUP_HEADER_FONT.getBounds(caption).width + PADDING;
                 y += GROUP_HEADER_HEIGHT / 2;
                 g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, getWidth(), y);
 

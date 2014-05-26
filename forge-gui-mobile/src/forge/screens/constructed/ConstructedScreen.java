@@ -1061,7 +1061,7 @@ public class ConstructedScreen extends LaunchScreen {
             public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
                 String text = value.gameType.toString();
                 float totalHeight = h;
-                h = font.getFont().getMultiLineBounds(text).height + 5;
+                h = font.getMultiLineBounds(text).height + 5;
 
                 g.drawText(text, font, color, x, y, w, h, false, HAlignment.LEFT, false);
                 value.draw(g, font, color, x, y, w, h);

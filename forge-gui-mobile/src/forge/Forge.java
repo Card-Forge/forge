@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -941,10 +940,10 @@ public class Forge implements ApplicationListener {
             batch.draw(image, adjustX(x), adjustY(y, h), originX - x, h - (originY - y), w, h, 1, 1, rotation, 0, 0, image.getWidth(), image.getHeight(), false, false);
         }
 
-        public void drawText(String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
-            drawText(text, skinFont, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
+        public void drawText(String text, FSkinFont font, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
+            drawText(text, font, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
         }
-        public void drawText(String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
+        public void drawText(String text, FSkinFont font, Color color, float x, float y, float w, float h, boolean wrap, HAlignment horzAlignment, boolean centerVertically) {
             if (alphaComposite < 1) {
                 color = FSkinColor.alphaColor(color, color.a * alphaComposite);
             }
@@ -953,8 +952,7 @@ public class Forge implements ApplicationListener {
             }
 
             TextBounds textBounds;
-            int fontSize = skinFont.getSize();
-            BitmapFont font = skinFont.getFont();
+            int fontSize = font.getSize();
             if (wrap) {
                 textBounds = font.getWrappedBounds(text, w);
             }
@@ -966,7 +964,7 @@ public class Forge implements ApplicationListener {
 
             while (textBounds.width > w || textBounds.height > h) {
                 if (fontSize > FSkinFont.MIN_FONT_SIZE) { //shrink font to fit if possible
-                    font = FSkinFont.get(--fontSize).getFont();
+                    font = FSkinFont.get(--fontSize);
                     if (wrap) {
                         textBounds = font.getWrappedBounds(text, w);
                     }
@@ -988,14 +986,8 @@ public class Forge implements ApplicationListener {
             if (h > textHeight && centerVertically) {
                 y += (h - textHeight) / 2;
             }
-            font.setColor(color);
 
-            if (wrap) {
-                font.drawWrapped(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
-            }
-            else {
-                font.drawMultiLine(batch, text, adjustX(x), adjustY(y, 0), w, horzAlignment);
-            }
+            font.draw(batch, text, color, adjustX(x), adjustY(y, 0), w, wrap, horzAlignment);
 
             if (needClip) {
                 endClip();

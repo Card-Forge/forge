@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
@@ -59,7 +58,6 @@ public class TextRenderer {
     private final boolean parseReminderText;
     private String fullText = "";
     private float width, height, totalHeight;
-    private BitmapFont baseBitmapFont;
     private FSkinFont baseFont, font;
     private boolean wrap, needClip;
     private List<Piece> pieces = new ArrayList<Piece>();
@@ -80,8 +78,7 @@ public class TextRenderer {
         needClip = false;
         if (fullText.isEmpty()) { return; }
 
-        BitmapFont bitmapFont = font.getFont();
-        totalHeight = bitmapFont.getCapHeight();
+        totalHeight = font.getCapHeight();
         if (totalHeight > height) {
             //immediately try one font size smaller if no room for anything
             if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
@@ -97,7 +94,7 @@ public class TextRenderer {
         float x = 0;
         float y = 0;
         float pieceWidth = 0;
-        float lineHeight = bitmapFont.getLineHeight();
+        float lineHeight = font.getLineHeight();
         int lastSpaceIdx = -1;
         int lineNum = 0;
         String text = "";
@@ -194,7 +191,7 @@ public class TextRenderer {
                                     needClip = true;
                                 }
                             }
-                            addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - bitmapFont.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
+                            addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - font.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
                             x += pieceWidth;
                             pieceWidth = 0;
                             text = "";
@@ -257,7 +254,7 @@ public class TextRenderer {
             }
             text += ch;
             if (inSymbolCount == 0) {
-                pieceWidth = bitmapFont.getBounds(text).width;
+                pieceWidth = font.getBounds(text).width;
                 if (x + pieceWidth > width) { //wrap or shrink if needed
                     if (wrap && (lastSpaceIdx >= 0 || consecutiveSymbols > 0)) {
                         if (lastSpaceIdx < 0) {
@@ -276,7 +273,7 @@ public class TextRenderer {
                         else {
                             String currentLineText = text.substring(0, lastSpaceIdx);
                             if (!currentLineText.isEmpty()) {
-                                pieceWidth = bitmapFont.getBounds(text).width;
+                                pieceWidth = font.getBounds(text).width;
                                 addPiece(new TextPiece(currentLineText, inReminderTextCount > 0 || atReminderTextEnd), lineNum, x, y, pieceWidth, lineHeight);
                                 consecutiveSymbols = 0;
                             }
@@ -288,7 +285,7 @@ public class TextRenderer {
                             x = 0;
                         }
                         lastSpaceIdx = -1;
-                        pieceWidth = text.isEmpty() ? 0 : bitmapFont.getBounds(text).width;
+                        pieceWidth = text.isEmpty() ? 0 : font.getBounds(text).width;
                         y += lineHeight;
                         totalHeight += lineHeight;
                         lineNum++;
@@ -317,20 +314,20 @@ public class TextRenderer {
                                 if (index != -1) {
                                     if (index == 0) {
                                         textPiece.text = textPiece.text.substring(1);
-                                        textPiece.w = bitmapFont.getBounds(textPiece.text).width;
+                                        textPiece.w = font.getBounds(textPiece.text).width;
                                         lastPieceIdx--;
                                     }
                                     else if (index == textPiece.text.length() - 1) {
                                         textPiece.text = textPiece.text.substring(0, textPiece.text.length() - 1);
-                                        textPiece.w = bitmapFont.getBounds(textPiece.text).width;
+                                        textPiece.w = font.getBounds(textPiece.text).width;
                                     }
                                     else {
                                         TextPiece splitPiece = new TextPiece(textPiece.text.substring(index + 1), textPiece.inReminderText);
                                         textPiece.text = textPiece.text.substring(0, index);
-                                        textPiece.w = bitmapFont.getBounds(textPiece.text).width;
+                                        textPiece.w = font.getBounds(textPiece.text).width;
                                         splitPiece.x = textPiece.x + textPiece.w;
                                         splitPiece.y = textPiece.y;
-                                        splitPiece.w = bitmapFont.getBounds(splitPiece.text).width;
+                                        splitPiece.w = font.getBounds(splitPiece.text).width;
                                         splitPiece.h = textPiece.h;
                                     }
                                     break;
@@ -401,9 +398,8 @@ public class TextRenderer {
             fullText = text;
             needUpdate = true;
         }
-        if (skinFont != baseFont || skinFont.getFont() != baseBitmapFont) {
+        if (skinFont != baseFont) {
             baseFont = skinFont;
-            baseBitmapFont = skinFont.getFont(); //cache baseBitmapFont separate to handle skin changes
             needUpdate = true;
         }
         if (width != w) {

@@ -5,11 +5,15 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.BitmapFontData;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
@@ -37,7 +41,7 @@ public class FSkinFont {
     public static FSkinFont forHeight(final float height) {
         int size = MIN_FONT_SIZE + 1;
         while (true) {
-            if (get(size).getFont().getLineHeight() > height) {
+            if (get(size).getLineHeight() > height) {
                 return get(size - 1);
             }
             size++;
@@ -69,8 +73,34 @@ public class FSkinFont {
         return size;
     }
 
-    public BitmapFont getFont() {
-        return font;
+    // Expose methods from font that updates scale as needed
+    public TextBounds getBounds(CharSequence str) {
+        return font.getBounds(str);
+    }
+    public TextBounds getMultiLineBounds(CharSequence str) {
+        return font.getMultiLineBounds(str);
+    }
+    public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
+        return font.getWrappedBounds(str, wrapWidth);
+    }
+    public float getAscent() {
+        return font.getAscent();
+    }
+    public float getCapHeight() {
+        return font.getCapHeight();
+    }
+    public float getLineHeight() {
+        return font.getLineHeight();
+    }
+
+    public void draw(SpriteBatch batch, String text, Color color, float x, float y, float w, boolean wrap, HAlignment horzAlignment) {
+        font.setColor(color);
+        if (wrap) {
+            font.drawWrapped(batch, text, x, y, w, horzAlignment);
+        }
+        else {
+            font.drawMultiLine(batch, text, x, y, w, horzAlignment);
+        }
     }
 
     private void updateFont() {
