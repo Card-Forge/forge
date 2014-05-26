@@ -816,6 +816,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         @Override
         public boolean add(final CardPanel panel) {
+            if (panel.getCard() == null) {
+                return false;
+            }
             final boolean appended = super.add(panel);
             for (final CardPanel attachedPanel : panel.getAttachedPanels()) {
                 this.add(attachedPanel);
