@@ -79,7 +79,7 @@ public class Forge implements ApplicationListener {
             public void run() {
                 FModel.initialize(splashScreen.getProgressBar());
 
-                splashScreen.getProgressBar().setDescription("Opening main window...");
+                splashScreen.getProgressBar().setDescription("Finishing startup...");
 
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
