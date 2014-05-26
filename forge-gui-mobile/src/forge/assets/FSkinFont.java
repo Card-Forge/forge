@@ -22,6 +22,7 @@ public class FSkinFont {
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
     private static final int FONT_PAGE_SIZE = 256;
+    private static final int MAX_FONT_SIZE = 72; //don't generate fonts larger than this, use scaling instead
 
     public static FSkinFont get(final int size0) {
         FSkinFont skinFont = fonts.get(size0);
@@ -65,8 +66,13 @@ public class FSkinFont {
     }
 
     private void updateFont() {
+        float scale = 1;
+        int fontSize = (int)Utils.scaleMax(size);
         try {
-            int fontSize = (int)Utils.scaleMax(size);
+            if (fontSize > MAX_FONT_SIZE) { //scale if larger than max font size
+                scale = (float)fontSize / (float)MAX_FONT_SIZE;
+                fontSize = MAX_FONT_SIZE;
+            }
             String fontName = "f" + fontSize;
             FileHandle fontFile = Gdx.files.absolute(FSkin.getFontDir() + fontName + ".fnt");
             if (fontFile.exists()) {
@@ -82,9 +88,12 @@ public class FSkinFont {
         }
         if (font == null) {
             font = new BitmapFont(); //use scaled default font as fallback
-            font.setScale(Utils.scaleMax(size) / font.getLineHeight());
+            scale = (float)fontSize / 15; //default font has size 15
         }
         font.setUseIntegerPositions(true); //prevent parts of text getting cut off at times
+        if (scale != 1) {
+            font.setScale(scale);
+        }
     }
 
     private BitmapFont generateFont(FileHandle ttfFile, String fontName, int fontSize) {
