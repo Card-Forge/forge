@@ -46,15 +46,14 @@ import forge.sound.IAudioClip;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.ITriggerEvent;
+import forge.util.ThreadUtil;
 import forge.util.WaitCallback;
 import forge.util.WaitRunnable;
 import forge.util.gui.SGuiChoose;
 
 public class GuiMobile implements IGuiBase {
-    private final Thread guiThread;
     private final String assetsDir;
-    public GuiMobile(Thread guiThread0, String assetsDir0) {
-        guiThread = guiThread0;
+    public GuiMobile(String assetsDir0) {
         assetsDir = assetsDir0;
     }
 
@@ -80,7 +79,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean isGuiThread() {
-        return Thread.currentThread() == guiThread;
+        return !ThreadUtil.isGameThread();
     }
 
     @Override

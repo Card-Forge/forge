@@ -40,7 +40,6 @@ import forge.toolbox.FOverlay;
 import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
-    private static boolean initialized;
     private static Clipboard clipboard;
     private static int screenWidth;
     private static int screenHeight;
@@ -51,16 +50,12 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public Forge() {
-    }
-
-    public void initialize(Thread guiThread, Clipboard clipboard0, String assetDir0) {
-        if (initialized) {
+    public Forge(Clipboard clipboard0, String assetDir0) {
+        if (GuiBase.getInterface() != null) {
             throw new RuntimeException("Cannot initialize Forge more than once");
         }
         clipboard = clipboard0;
-        GuiBase.setInterface(new GuiMobile(guiThread, assetDir0));
-        initialized = true;
+        GuiBase.setInterface(new GuiMobile(assetDir0));
     }
 
     @Override
@@ -93,7 +88,7 @@ public class Forge implements ApplicationListener {
                     }
                 });
             }
-        }).start();
+        }, "Game Startup").start(); //use thread name that starts with "Game" so GuiMobile.isGuiThread() returns false
     }
 
     private void afterDbLoaded() {
