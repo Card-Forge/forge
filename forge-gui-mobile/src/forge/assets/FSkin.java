@@ -137,8 +137,6 @@ public class FSkin {
 
         final Map<String, Texture> textures = new HashMap<String, Texture>();
 
-        //FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 5);
-
         // Grab and test various sprite files.
         String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
         final FileHandle f1 = Gdx.files.absolute(defaultDir + SourceFile.ICONS.getFilename());
@@ -150,19 +148,15 @@ public class FSkin {
 
         try {
             textures.put(f1.path(), new Texture(f1));
-            //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             textures.put(f2.path(), new Texture(f2));
             Pixmap preferredIcons = new Pixmap(f2);
-            //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             textures.put(f3.path(), new Texture(f3));
-            //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             if (f6.exists()) {
                 textures.put(f6.path(), new Texture(f6));
             }
             else {
                 textures.put(f6.path(), textures.get(f3.path()));
             }
-            //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
 
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
@@ -216,8 +210,6 @@ public class FSkin {
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
-
-            //FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
         }
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
@@ -234,45 +226,7 @@ public class FSkin {
         FSkinColor.updateAll();
 
         // Images loaded; can start UI init.
-        //FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
         loaded = true;
-
-        //establish encoding symbols
-        /*addEncodingSymbol("W", ManaImages.IMG_WHITE);
-        addEncodingSymbol("U", ManaImages.IMG_BLUE);
-        addEncodingSymbol("B", ManaImages.IMG_BLACK);
-        addEncodingSymbol("R", ManaImages.IMG_RED);
-        addEncodingSymbol("G", ManaImages.IMG_GREEN);
-        addEncodingSymbol("W/U", ManaImages.IMG_WHITE_BLUE);
-        addEncodingSymbol("U/B", ManaImages.IMG_BLUE_BLACK);
-        addEncodingSymbol("B/R", ManaImages.IMG_BLACK_RED);
-        addEncodingSymbol("R/G", ManaImages.IMG_RED_GREEN);
-        addEncodingSymbol("G/W", ManaImages.IMG_GREEN_WHITE);
-        addEncodingSymbol("W/B", ManaImages.IMG_WHITE_BLACK);
-        addEncodingSymbol("U/R", ManaImages.IMG_BLUE_RED);
-        addEncodingSymbol("B/G", ManaImages.IMG_BLACK_GREEN);
-        addEncodingSymbol("R/W", ManaImages.IMG_RED_WHITE);
-        addEncodingSymbol("G/U", ManaImages.IMG_GREEN_BLUE);
-        addEncodingSymbol("2/W", ManaImages.IMG_2W);
-        addEncodingSymbol("2/U", ManaImages.IMG_2U);
-        addEncodingSymbol("2/B", ManaImages.IMG_2B);
-        addEncodingSymbol("2/R", ManaImages.IMG_2R);
-        addEncodingSymbol("2/G", ManaImages.IMG_2G);
-        addEncodingSymbol("W/P", ManaImages.IMG_PHRYX_WHITE);
-        addEncodingSymbol("U/P", ManaImages.IMG_PHRYX_BLUE);
-        addEncodingSymbol("B/P", ManaImages.IMG_PHRYX_BLACK);
-        addEncodingSymbol("R/P", ManaImages.IMG_PHRYX_RED);
-        addEncodingSymbol("G/P", ManaImages.IMG_PHRYX_GREEN);
-        for (int i = 0; i <= 20; i++) {
-            addEncodingSymbol(String.valueOf(i), ColorlessManaImages.valueOf("IMG_" + i));
-        }
-        addEncodingSymbol("X", ColorlessManaImages.IMG_X);
-        addEncodingSymbol("Y", ColorlessManaImages.IMG_Y);
-        addEncodingSymbol("Z", ColorlessManaImages.IMG_Z);
-        addEncodingSymbol("C", GameplayImages.IMG_CHAOS);
-        addEncodingSymbol("Q", GameplayImages.IMG_UNTAP);
-        addEncodingSymbol("S", GameplayImages.IMG_SNOW);
-        addEncodingSymbol("T", GameplayImages.IMG_TAP);*/
 
         if (splashScreen != null) {
             CardFaceSymbols.loadImages();
