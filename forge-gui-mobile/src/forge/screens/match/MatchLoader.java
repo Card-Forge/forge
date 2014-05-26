@@ -36,7 +36,7 @@ public class MatchLoader extends FOverlay {
         g.fillRect(BACK_COLOR, x, y, w, panelHeight);
         g.drawRect(Utils.scaleMax(2), FORE_COLOR, x, y, w, panelHeight);
         y += padding;
-        g.drawImage(FSkinImage.LOGO, (w - logoSize) / 2f, y, logoSize, logoSize);
+        g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
         y += logoSize + padding;
         g.drawText("Loading new game...", FONT, FORE_COLOR, x, y, w, fontHeight, false, HAlignment.CENTER, true);
     }
