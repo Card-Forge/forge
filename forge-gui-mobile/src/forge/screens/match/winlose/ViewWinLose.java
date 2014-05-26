@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.game.Game;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
@@ -40,8 +41,8 @@ public class ViewWinLose extends FOverlay {
 
         game = game0;
 
-        lblTitle = add(new FLabel.Builder().fontSize(30).align(HAlignment.CENTER).build());
-        lblStats = add(new FLabel.Builder().fontSize(26).align(HAlignment.CENTER).build());
+        lblTitle = add(new FLabel.Builder().font(FSkinFont.get(30)).align(HAlignment.CENTER).build());
+        lblStats = add(new FLabel.Builder().font(FSkinFont.get(26)).align(HAlignment.CENTER).build());
         pnlOutcomes = add(new OutcomesPanel());
         pnlCustom = new FPanel();
 
@@ -81,7 +82,7 @@ public class ViewWinLose extends FOverlay {
         btnQuit.setFontSize(22);
         btnContinue.setEnabled(!game0.getMatch().isMatchOver());
 
-        lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).fontSize(18).build());
+        lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).font(FSkinFont.get(18)).build());
         txtLog = add(new FTextArea(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")) {
             @Override
             public boolean tap(float x, float y, int count) {
@@ -141,7 +142,7 @@ public class ViewWinLose extends FOverlay {
     private void showGameOutcomeSummary() {
         GameLog log = game.getGameLog();
         for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
-            pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build());
+            pnlOutcomes.add(new FLabel.Builder().text(o.message).font(FSkinFont.get(14)).build());
         }
     }
 

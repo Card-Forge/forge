@@ -3,6 +3,7 @@ package forge.itemmanager.filters;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.assets.FSkinFont;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
@@ -14,6 +15,7 @@ import forge.util.LayoutHelper;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
+    private static final FSkinFont FONT = FSkinFont.get(12);
     protected FTextField txtSearch;
 
     public TextSearchFilter(ItemManager<? super T> itemManager0) {
@@ -56,7 +58,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     @Override
     protected void buildWidget(Widget widget) {
         txtSearch = new FTextField();
-        txtSearch.setFontSize(ItemFilter.DEFAULT_FONT_SIZE + 1);
+        txtSearch.setFont(FONT);
         txtSearch.setGhostText("Search");
         widget.add(txtSearch);
 

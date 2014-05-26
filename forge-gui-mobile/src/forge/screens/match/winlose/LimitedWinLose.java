@@ -20,6 +20,7 @@ package forge.screens.match.winlose;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.GuiBase;
+import forge.assets.FSkinFont;
 import forge.game.Game;
 import forge.limited.GauntletMini;
 import forge.model.FModel;
@@ -109,9 +110,9 @@ public class LimitedWinLose extends ControlWinLose {
      * @param String - the title to be displayed
      */
     private void showTournamentInfo(final String newTitle) {
-        final FLabel lblTitle = new FLabel.Builder().text(newTitle).fontSize(18).align(HAlignment.CENTER).build();
+        final FLabel lblTitle = new FLabel.Builder().text(newTitle).font(FSkinFont.get(18)).align(HAlignment.CENTER).build();
         final FLabel lblSubTitle = new FLabel.Builder().text("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds())
-                .align(HAlignment.CENTER).fontSize(17).build();
+                .align(HAlignment.CENTER).font(FSkinFont.get(17)).build();
         this.getView().getPnlCustom().add(lblTitle);
         this.getView().getPnlCustom().add(lblSubTitle);
     }

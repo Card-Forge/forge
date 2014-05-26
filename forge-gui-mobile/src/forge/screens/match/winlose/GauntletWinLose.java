@@ -25,6 +25,7 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -102,9 +103,9 @@ public class GauntletWinLose extends ControlWinLose {
                 if (gd.getCompleted() == lstDecks.size()) {
                     lblGraphic = new FLabel.Builder()
                         .icon(FSkinImage.QUEST_COIN).build();
-                    lblMessage1 = new FLabel.Builder().fontSize(24)
+                    lblMessage1 = new FLabel.Builder().font(FSkinFont.get(24))
                         .text("CONGRATULATIONS!").build();
-                    lblMessage2 = new FLabel.Builder().fontSize(18)
+                    lblMessage2 = new FLabel.Builder().font(FSkinFont.get(18))
                         .text("You made it through the gauntlet!").build();
 
                     this.getView().getBtnContinue().setVisible(false);
@@ -132,9 +133,9 @@ public class GauntletWinLose extends ControlWinLose {
             else {
                 lblGraphic = new FLabel.Builder()
                     .icon(FSkinImage.QUEST_HEART).build();
-                lblMessage1 = new FLabel.Builder().fontSize(24)
+                lblMessage1 = new FLabel.Builder().font(FSkinFont.get(24))
                         .text("DEFEATED!").build();
-                lblMessage2 = new FLabel.Builder().fontSize(18)
+                lblMessage2 = new FLabel.Builder().font(FSkinFont.get(18))
                         .text("You have failed to pass the gauntlet.").build();
 
                 this.getView().getBtnContinue().setVisible(false);
@@ -153,7 +154,7 @@ public class GauntletWinLose extends ControlWinLose {
 
         // Custom panel display
         final FLabel lblTitle = new FLabel.Builder().text("Gauntlet Progress")
-                .align(HAlignment.CENTER).fontSize(18).build();
+                .align(HAlignment.CENTER).font(FSkinFont.get(18)).build();
 
         final FPanel pnl = this.getView().getPnlCustom();
         pnl.setBackColor(FSkinColor.get(Colors.CLR_THEME2));
@@ -161,7 +162,7 @@ public class GauntletWinLose extends ControlWinLose {
 
         FLabel lblTemp;
         for (int i = 0; i < len; i++) {
-            lblTemp = new FLabel.Builder().fontSize(14).build();
+            lblTemp = new FLabel.Builder().font(FSkinFont.get(14)).build();
 
             if (i <= num) {
                 lblTemp.setTextColor(FSkinColor.getStandardColor(Color.GREEN).stepColor(20));

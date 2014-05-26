@@ -137,11 +137,8 @@ public class FGroupList<E> extends FScrollPane {
     public FSkinFont getFont() {
         return font;
     }
-    public int getFontSize() {
-        return font.getSize();
-    }
-    public void setFontSize(int fontSize0) {
-        font = FSkinFont.get(fontSize0);
+    public void setFont(FSkinFont font0) {
+        font = font0;
     }
 
     @Override

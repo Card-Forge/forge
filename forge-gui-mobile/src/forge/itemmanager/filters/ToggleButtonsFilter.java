@@ -73,7 +73,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
 
         private ToggleButton(FImage icon) {
             super(new FLabel.Builder()
-                .icon(icon).fontSize(11).iconScaleFactor(0.9f)
+                .icon(icon).font(ItemFilter.DEFAULT_FONT).iconScaleFactor(0.9f)
                 .align(HAlignment.CENTER)
                 .selectable(true).selected(true)
                 .command(new FEventHandler() {

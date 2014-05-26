@@ -17,6 +17,7 @@
  */
 package forge.screens.match.views;
 
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardZoom;
 import forge.game.GameEntity;
@@ -232,7 +233,7 @@ public class VAssignDamage extends FDialog {
                 }
                 cardPanel = add(new AttDefCardPanel(fakeCard));
             }
-            label = add(new FLabel.Builder().text("0").fontSize(18).align(HAlignment.CENTER).build());
+            label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(HAlignment.CENTER).build());
             btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

@@ -86,7 +86,7 @@ public class VStack extends FDropDown {
         float width = totalWidth - 2 * PADDING;
 
         if (stack.isEmpty()) { //show label if stack empty
-            FLabel label = add(new FLabel.Builder().text("[Empty]").fontSize(FONT.getSize()).align(HAlignment.CENTER).build());
+            FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 
             height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);

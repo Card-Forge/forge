@@ -18,7 +18,7 @@ public class FLabel extends FDisplayObject implements IButton {
     public static class Builder {
         //========== Default values for FLabel are set here.
         private float      bldIconScaleFactor = 0.8f;
-        private int        bldFontSize        = 14;
+        private FSkinFont  bldFont            = FSkinFont.get(14);
         private float      bldAlphaComposite  = 0.7f;
         private HAlignment bldAlignment       = HAlignment.LEFT;
         private Vector2    bldInsets          = new Vector2(Utils.scaleX(3), Utils.scaleY(3));
@@ -50,7 +50,7 @@ public class FLabel extends FDisplayObject implements IButton {
         public Builder selected(final boolean b0) { this.bldSelected = b0; return this; }
         public Builder selected() { selected(true); return this; }
         public Builder command(final FEventHandler c0) { this.bldCommand = c0; return this; }
-        public Builder fontSize(final int i0) { this.bldFontSize = i0; return this; }
+        public Builder font(final FSkinFont f0) { this.bldFont = f0; return this; }
         public Builder alphaComposite(final float a0) { this.bldAlphaComposite = a0; return this; }
         public Builder enabled(final boolean b0) { this.bldEnabled = b0; return this; }
         public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
@@ -93,7 +93,7 @@ public class FLabel extends FDisplayObject implements IButton {
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
         iconScaleFactor = b0.bldIconScaleFactor;
-        font = FSkinFont.get(b0.bldFontSize);
+        font = b0.bldFont;
         alphaComposite = b0.bldAlphaComposite;
         alignment = b0.bldAlignment;
         insets = b0.bldInsets;
@@ -131,8 +131,8 @@ public class FLabel extends FDisplayObject implements IButton {
         textColor = textColor0;
     }
 
-    public void setFontSize(int fontSize0) {
-        font = FSkinFont.get(fontSize0);
+    public void setFont(FSkinFont font0) {
+        font = font0;
     }
 
     public FImage getIcon() {
@@ -282,10 +282,10 @@ public class FLabel extends FDisplayObject implements IButton {
                             x += dx;
                             break;
                         }
-                        if (font.getSize() <= FSkinFont.MIN_FONT_SIZE) {
+                        if (!font.canShrink()) {
                             break;
                         }
-                        font = FSkinFont.get(font.getSize() - 1);
+                        font = font.shrink();
                     }
                 }
                 y += (h - iconHeight) / 2;

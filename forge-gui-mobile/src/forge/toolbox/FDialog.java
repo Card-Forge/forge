@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
@@ -11,6 +12,7 @@ import forge.screens.FScreen;
 import forge.util.Utils;
 
 public abstract class FDialog extends FOverlay {
+    private static final FSkinFont TITLE_FONT = FSkinFont.get(12);
     private static final FSkinColor TITLE_BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
     public static final float TITLE_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);
@@ -95,7 +97,7 @@ public abstract class FDialog extends FOverlay {
 
     private class Titlebar extends FLabel {
         private Titlebar(String title) {
-            super(new FLabel.Builder().text(title).icon(FSkinImage.FAVICON).fontSize(12).align(HAlignment.LEFT));
+            super(new FLabel.Builder().text(title).icon(FSkinImage.FAVICON).font(TITLE_FONT).align(HAlignment.LEFT));
         }
 
         @Override

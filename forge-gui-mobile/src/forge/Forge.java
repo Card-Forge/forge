@@ -952,7 +952,6 @@ public class Forge implements ApplicationListener {
             }
 
             TextBounds textBounds;
-            int fontSize = font.getSize();
             if (wrap) {
                 textBounds = font.getWrappedBounds(text, w);
             }
@@ -963,8 +962,8 @@ public class Forge implements ApplicationListener {
             boolean needClip = false;
 
             while (textBounds.width > w || textBounds.height > h) {
-                if (fontSize > FSkinFont.MIN_FONT_SIZE) { //shrink font to fit if possible
-                    font = FSkinFont.get(--fontSize);
+                if (font.canShrink()) { //shrink font to fit if possible
+                    font = font.shrink();
                     if (wrap) {
                         textBounds = font.getWrappedBounds(text, w);
                     }

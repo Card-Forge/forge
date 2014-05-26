@@ -295,7 +295,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 //draw path and main/side on second line
                 x = FList.PADDING;
                 y += IMAGE_SIZE + FList.PADDING;
-                font = FSkinFont.get(font.getSize() - 2);
+                font = font.shrink().shrink();
                 float lineHeight = font.getLineHeight();
 
                 int mainSize = deck.getMainSize();

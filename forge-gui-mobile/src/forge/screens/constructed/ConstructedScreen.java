@@ -55,16 +55,17 @@ public class ConstructedScreen extends LaunchScreen {
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final float PADDING = Utils.scaleMin(5);
     private static final int MAX_PLAYERS = 8;
-    private static final int VARIANTS_FONT_SIZE = 12;
+    private static final FSkinFont VARIANTS_FONT = FSkinFont.get(12);
+    private static final FSkinFont LABEL_FONT = FSkinFont.get(14);
 
     // General variables
-    private final FLabel lblPlayers = new FLabel.Builder().text("Players:").fontSize(VARIANTS_FONT_SIZE).build();
+    private final FLabel lblPlayers = new FLabel.Builder().text("Players:").font(VARIANTS_FONT).build();
     private final FComboBox<Integer> cbPlayerCount;
     private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
     private List<Integer> archenemyTeams = new ArrayList<Integer>(MAX_PLAYERS);
 
     // Variants frame and variables
-    private final FLabel lblVariants = new FLabel.Builder().text("Variants:").fontSize(VARIANTS_FONT_SIZE).build();
+    private final FLabel lblVariants = new FLabel.Builder().text("Variants:").font(VARIANTS_FONT).build();
     private final FComboBox<Object> cbVariants;
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
 
@@ -102,7 +103,7 @@ public class ConstructedScreen extends LaunchScreen {
 
         add(lblPlayers);
         cbPlayerCount = add(new FComboBox<Integer>());
-        cbPlayerCount.setFontSize(VARIANTS_FONT_SIZE);
+        cbPlayerCount.setFont(VARIANTS_FONT);
         for (int i = 2; i <= MAX_PLAYERS; i++) {
             cbPlayerCount.addItem(i);
         }
@@ -120,7 +121,7 @@ public class ConstructedScreen extends LaunchScreen {
 
         add(lblVariants);
         cbVariants = add(new FComboBox<Object>());
-        cbVariants.setFontSize(VARIANTS_FONT_SIZE);
+        cbVariants.setFont(VARIANTS_FONT);
         cbVariants.addItem("(None)");
         cbVariants.addItem(GameType.Vanguard);
         cbVariants.addItem(GameType.Commander);
@@ -786,7 +787,7 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             txtPlayerName.setText(name);
-            txtPlayerName.setFontSize(14);
+            txtPlayerName.setFont(LABEL_FONT);
             txtPlayerName.setChangedHandler(nameChangedHandler);
         }
 
@@ -890,7 +891,7 @@ public class ConstructedScreen extends LaunchScreen {
 
     /** Adds a pre-styled FLabel component with the specified title. */
     private FLabel newLabel(String title) {
-        return new FLabel.Builder().text(title).fontSize(14).align(HAlignment.RIGHT).build();
+        return new FLabel.Builder().text(title).font(LABEL_FONT).align(HAlignment.RIGHT).build();
     }
 
     private List<Integer> getUsedAvatars() {

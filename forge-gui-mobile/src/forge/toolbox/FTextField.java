@@ -14,7 +14,7 @@ import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
 
 public class FTextField extends FDisplayObject {
-    private static final int DEFAULT_FONT_SIZE = 14;
+    private static final FSkinFont DEFAULT_FONT = FSkinFont.get(14);
     private static final float BORDER_THICKNESS = Utils.scaleX(1);
     protected static final float PADDING = Utils.scaleX(5);
     protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
@@ -24,10 +24,7 @@ public class FTextField extends FDisplayObject {
     private FEventHandler changedHandler;
 
     public static float getDefaultHeight() {
-        return getDefaultHeight(DEFAULT_FONT_SIZE);
-    }
-    public static float getDefaultHeight(int fontSize) {
-        return getDefaultHeight(FSkinFont.get(fontSize));
+        return getDefaultHeight(DEFAULT_FONT);
     }
     public static float getDefaultHeight(FSkinFont font0) {
         return font0.getCapHeight() * 3;
@@ -45,7 +42,7 @@ public class FTextField extends FDisplayObject {
     public FTextField(String text0) {
         text = text0;
         ghostText = "";
-        setFontSize(DEFAULT_FONT_SIZE);
+        setFont(DEFAULT_FONT);
         alignment = HAlignment.LEFT;
     }
 
@@ -103,11 +100,11 @@ public class FTextField extends FDisplayObject {
         alignment = alignment0;
     }
 
-    public int getFontSize() {
-        return font.getSize();
+    public FSkinFont getFont() {
+        return font;
     }
-    public void setFontSize(int fontSize0) {
-        font = FSkinFont.get(fontSize0);
+    public void setFont(FSkinFont font0) {
+        font = font0;
         setHeight(getDefaultHeight(font));
     }
 

@@ -23,17 +23,18 @@ import forge.FThreads;
 import forge.util.Utils;
 
 public class FSkinFont {
-    public static final int MIN_FONT_SIZE = Math.round(8 / Utils.MAX_RATIO);
-    public static final int MAX_FONT_SIZE = Math.round(72 / Utils.MAX_RATIO);
+    private static final int MIN_FONT_SIZE = 8;
+    private static final int MAX_FONT_SIZE = 72;
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
 
-    public static FSkinFont get(final int size0) {
-        FSkinFont skinFont = fonts.get(size0);
+    public static FSkinFont get(final int unscaledSize) {
+        int fontSize0 = (int)Utils.scaleMax(unscaledSize);
+        FSkinFont skinFont = fonts.get(fontSize0);
         if (skinFont == null) {
-            skinFont = new FSkinFont(size0);
-            fonts.put(size0, skinFont);
+            skinFont = new FSkinFont(fontSize0);
+            fonts.put(fontSize0, skinFont);
         }
         return skinFont;
     }
@@ -61,16 +62,24 @@ public class FSkinFont {
         }
     }
 
-    private final int size;
+    private final int fontSize;
+    private final float scale;
     private BitmapFont font;
 
-    private FSkinFont(final int size0) {
-        size = size0;
+    private FSkinFont(int fontSize0) {
+        if (fontSize0 < MIN_FONT_SIZE) {
+            scale = fontSize0 / MIN_FONT_SIZE;
+            fontSize0 = MIN_FONT_SIZE;
+        }
+        else if (fontSize0 > MAX_FONT_SIZE) {
+            scale = fontSize0 / MAX_FONT_SIZE;
+            fontSize0 = MAX_FONT_SIZE;
+        }
+        else {
+            scale = 1;
+        }
+        fontSize = fontSize0;
         updateFont();
-    }
-
-    public int getSize() {
-        return size;
     }
 
     // Expose methods from font that updates scale as needed
@@ -103,8 +112,15 @@ public class FSkinFont {
         }
     }
 
+    public boolean canShrink() {
+        return fontSize > MIN_FONT_SIZE;
+    }
+
+    public FSkinFont shrink() {
+        return get(fontSize - 1);
+    }
+
     private void updateFont() {
-        int fontSize = (int)Utils.scaleMax(size);
         String fontName = "f" + fontSize;
         FileHandle fontFile = Gdx.files.absolute(FSkin.getFontDir() + fontName + ".fnt");
         if (fontFile.exists()) {

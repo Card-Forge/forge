@@ -42,10 +42,11 @@ import com.badlogic.gdx.math.Vector2;
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scaleMin(5);
     private static final float PILE_SPACING_Y = 0.1f;
+    private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
     private static final FSkinColor GROUP_HEADER_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor OPTION_LABEL_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(0.7f);
     private static final FSkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(0.5f);
-    private static final FSkinFont GROUP_HEADER_FONT = FSkinFont.get(12);
+    private static final FSkinFont GROUP_HEADER_FONT = LABEL_FONT;
     private static final float GROUP_HEADER_HEIGHT = Utils.scaleY(19);
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scaleX(6);
     private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scaleY(1);
@@ -137,9 +138,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FLabel lblGroupBy = new FLabel.Builder().text("Groups:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
+    private final FLabel lblGroupBy = new FLabel.Builder().text("Groups:").font(LABEL_FONT).textColor(OPTION_LABEL_COLOR).build();
     private final FComboBox<Object> cbGroupByOptions = new FComboBox<Object>();
-    private final FLabel lblPileBy = new FLabel.Builder().text("Piles:").fontSize(12).textColor(OPTION_LABEL_COLOR).build();
+    private final FLabel lblPileBy = new FLabel.Builder().text("Piles:").font(LABEL_FONT).textColor(OPTION_LABEL_COLOR).build();
     private final FComboBox<Object> cbPileByOptions = new FComboBox<Object>();
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
@@ -182,8 +183,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         });
 
-        cbGroupByOptions.setFontSize(12);
-        cbPileByOptions.setFontSize(12);
+        cbGroupByOptions.setFont(LABEL_FONT);
+        cbPileByOptions.setFont(LABEL_FONT);
         getPnlOptions().add(btnExpandCollapseAll);
         getPnlOptions().add(lblGroupBy);
         getPnlOptions().add(cbGroupByOptions);
@@ -398,7 +399,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     protected float layoutOptionsPanel(float visibleWidth, float height) {
         float padding = ItemFilter.PADDING;
         float x = 0;
-        float h = FTextField.getDefaultHeight(ItemFilter.DEFAULT_FONT_SIZE);
+        float h = FTextField.getDefaultHeight(ItemFilter.DEFAULT_FONT);
         float y = (height - h) / 2;
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;

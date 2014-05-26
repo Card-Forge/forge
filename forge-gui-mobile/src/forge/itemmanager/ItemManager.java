@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
@@ -71,7 +72,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     private final FLabel lblCaption = new FLabel.Builder()
         .align(HAlignment.LEFT)
-        .fontSize(12)
+        .font(FSkinFont.get(12))
         .build();
 
     private static final FSkinImage VIEW_OPTIONS_ICON = FSkinImage.SETTINGS;

@@ -65,8 +65,8 @@ public class VPhaseIndicator extends FContainer {
         for (PhaseLabel lbl : phaseLabels.values()) {
             bounds = font.getBounds(lbl.caption);
             if (bounds.width > w) {
-                if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                    font = FSkinFont.get(font.getSize() - 1);
+                if (font.canShrink()) {
+                    font = font.shrink();
                     return _getPreferredHeight(w);
                 }
                 break;

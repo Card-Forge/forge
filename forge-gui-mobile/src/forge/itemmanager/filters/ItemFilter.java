@@ -2,6 +2,7 @@ package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
 
+import forge.assets.FSkinFont;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FContainer;
@@ -13,8 +14,8 @@ import forge.util.Utils;
 
 public abstract class ItemFilter<T extends InventoryItem> {
     public static final float PADDING = Utils.scaleMax(3);
-    public static final int DEFAULT_FONT_SIZE = 11;
-    public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT_SIZE) + PADDING;
+    public static final FSkinFont DEFAULT_FONT = FSkinFont.get(11);
+    public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT) + PADDING;
 
     protected final ItemManager<? super T> itemManager;
     private FilterPanel panel;

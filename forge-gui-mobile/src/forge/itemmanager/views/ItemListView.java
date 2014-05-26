@@ -91,7 +91,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         if (config.getShowUniqueCardsOption()) {
             final FCheckBox chkBox = new FCheckBox("Unique Cards Only", itemManager.getWantUnique());
-            chkBox.setFontSize(list.getFontSize());
+            chkBox.setFont(list.getFont());
             chkBox.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -117,7 +117,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
                     col.getLongName() : col.getShortName(), col.isVisible());
-            chkBox.setFontSize(list.getFontSize());
+            chkBox.setFont(list.getFont());
             chkBox.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -303,7 +303,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     renderer.drawValue(g, value, font, foreColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
                 }
             });
-            setFontSize(14);
+            setFont(FSkinFont.get(14));
         }
 
         public Iterable<ItemColumn> getCells() {

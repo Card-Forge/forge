@@ -269,15 +269,15 @@ public class DualListBox<T> extends FDialog {
     }
 
     private abstract class ItemRenderer {
-        public abstract int getDefaultFontSize();
+        public abstract FSkinFont getDefaultFont();
         public abstract float getItemHeight();
         public abstract boolean tap(T value, float x, float y, int count);
         public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
     }
     private class DefaultItemRenderer extends ItemRenderer {
         @Override
-        public int getDefaultFontSize() {
-            return 12;
+        public FSkinFont getDefaultFont() {
+            return FSkinFont.get(12);
         }
 
         @Override
@@ -300,8 +300,8 @@ public class DualListBox<T> extends FDialog {
         private final TextRenderer textRenderer = new TextRenderer(true);
 
         @Override
-        public int getDefaultFontSize() {
-            return 12;
+        public FSkinFont getDefaultFont() {
+            return FSkinFont.get(12);
         }
 
         @Override
@@ -332,8 +332,8 @@ public class DualListBox<T> extends FDialog {
     //special renderer for cards
     private class CardItemRenderer extends ItemRenderer {
         @Override
-        public int getDefaultFontSize() {
-            return 14;
+        public FSkinFont getDefaultFont() {
+            return FSkinFont.get(14);
         }
 
         @Override
@@ -383,7 +383,7 @@ public class DualListBox<T> extends FDialog {
                     renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
                 }
             });
-            setFontSize(renderer.getDefaultFontSize());
+            setFont(renderer.getDefaultFont());
         }
 
         //remove any selected indices outside item range

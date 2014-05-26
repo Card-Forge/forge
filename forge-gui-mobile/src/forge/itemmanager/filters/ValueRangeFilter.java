@@ -55,7 +55,7 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
         lowerBound = addSpinner(widget, true);
 
         String text = " <= " + this.getCaption() + " <= ";
-        label = new FLabel.Builder().text(text).fontSize(12).build();
+        label = new FLabel.Builder().text(text).font(ListLabelFilter.LABEL_FONT).build();
         widget.add(label);
 
         upperBound = addSpinner(widget, false);

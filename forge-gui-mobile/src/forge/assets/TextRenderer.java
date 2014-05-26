@@ -81,8 +81,8 @@ public class TextRenderer {
         totalHeight = font.getCapHeight();
         if (totalHeight > height) {
             //immediately try one font size smaller if no room for anything
-            if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                updatePieces(FSkinFont.get(font.getSize() - 1));
+            if (font.canShrink()) {
+                updatePieces(font.shrink());
                 return;
             }
             needClip = true;
@@ -127,8 +127,8 @@ public class TextRenderer {
                 lineNum++;
                 if (totalHeight > height) {
                     //try next font size down if out of space
-                    if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                        updatePieces(FSkinFont.get(font.getSize() - 1));
+                    if (font.canShrink()) {
+                        updatePieces(font.shrink());
                         return;
                     }
                     needClip = true;
@@ -159,8 +159,8 @@ public class TextRenderer {
                                     lineNum++;
                                     if (totalHeight > height) {
                                         //try next font size down if out of space
-                                        if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                                            updatePieces(FSkinFont.get(font.getSize() - 1));
+                                        if (font.canShrink()) {
+                                            updatePieces(font.shrink());
                                             return;
                                         }
                                         needClip = true;
@@ -182,9 +182,9 @@ public class TextRenderer {
                                         }
                                     }
                                 }
-                                else if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                                else if (font.canShrink()) {
                                     //try next font size down if out of space
-                                    updatePieces(FSkinFont.get(font.getSize() - 1));
+                                    updatePieces(font.shrink());
                                     return;
                                 }
                                 else {
@@ -291,8 +291,8 @@ public class TextRenderer {
                         lineNum++;
                         if (totalHeight > height) {
                             //try next font size down if out of space
-                            if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                                updatePieces(FSkinFont.get(font.getSize() - 1));
+                            if (font.canShrink()) {
+                                updatePieces(font.shrink());
                                 return;
                             }
                             needClip = true;
@@ -349,17 +349,17 @@ public class TextRenderer {
                         lineNum++;
                         if (totalHeight > height) {
                             //try next font size down if out of space
-                            if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
-                                updatePieces(FSkinFont.get(font.getSize() - 1));
+                            if (font.canShrink()) {
+                                updatePieces(font.shrink());
                                 return;
                             }
                             needClip = true;
                         }
                     }
                     else {
-                        if (font.getSize() > FSkinFont.MIN_FONT_SIZE) {
+                        if (font.canShrink()) {
                             //try next font size down if out of space
-                            updatePieces(FSkinFont.get(font.getSize() - 1));
+                            updatePieces(font.shrink());
                             return;
                         }
                         needClip = true;

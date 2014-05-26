@@ -7,6 +7,7 @@ import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
@@ -22,6 +23,7 @@ public abstract class FScreen extends FContainer {
     public static final FSkinColor HEADER_BACK_COLOR = HEADER_BTN_PRESSED_COLOR.stepColor(-80);
 
     public static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+    private static final FSkinFont HEADER_FONT = FSkinFont.get(16);
 
     private final FLabel btnBack, lblHeader;
 
@@ -38,7 +40,7 @@ public abstract class FScreen extends FContainer {
             btnBack = null; 
         }
         if (headerCaption != null) {
-            lblHeader = add(new FLabel.Builder().text(headerCaption).fontSize(16).align(HAlignment.CENTER).build());
+            lblHeader = add(new FLabel.Builder().text(headerCaption).font(HEADER_FONT).align(HAlignment.CENTER).build());
         }
         else {
             lblHeader = null;

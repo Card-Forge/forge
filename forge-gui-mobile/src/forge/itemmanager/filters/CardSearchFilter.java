@@ -48,7 +48,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         super.buildWidget(widget);
 
         cbSearchMode = new FComboBox<String>();
-        cbSearchMode.setFontSize(txtSearch.getFontSize());
+        cbSearchMode.setFont(txtSearch.getFont());
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         cbSearchMode.setChangedHandler(new FEventHandler() {
@@ -79,7 +79,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     }
 
     private FLabel addButton(Widget widget, String text) {
-        FLabel button = new FLabel.Builder().text(text).fontSize(txtSearch.getFontSize()).align(HAlignment.CENTER)
+        FLabel button = new FLabel.Builder().text(text).font(txtSearch.getFont()).align(HAlignment.CENTER)
                 .selectable().selected().command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
