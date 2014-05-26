@@ -5,8 +5,14 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.PixmapPacker;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
+import com.badlogic.gdx.utils.Array;
 
 import forge.util.Utils;
 
@@ -15,6 +21,7 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
+    private static final int FONT_PAGE_SIZE = 256;
 
     public static FSkinFont get(final int size0) {
         FSkinFont skinFont = fonts.get(size0);
@@ -35,6 +42,12 @@ public class FSkinFont {
         }
     }
 
+    public static void updateAll() {
+        for (FSkinFont skinFont : fonts.values()) {
+            skinFont.updateFont();
+        }
+    }
+
     private final int size;
     private BitmapFont font;
 
@@ -52,21 +65,62 @@ public class FSkinFont {
     }
 
     private void updateFont() {
-        String dir = FSkin.getDir();
-
-        //generate .fnt and .png files from .ttf if needed
-        FileHandle ttfFile = Gdx.files.absolute(dir + TTF_FILE);
-        if (ttfFile.exists()) {
-            FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
-            font = generator.generateFont((int)Utils.scaleMax(size)); //scale font based on size
-            font.setUseIntegerPositions(true); //prevent parts of text getting cut off at times
-            generator.dispose();
+        try {
+            int fontSize = (int)Utils.scaleMax(size);
+            String fontName = "f" + fontSize;
+            FileHandle fontFile = Gdx.files.absolute(FSkin.getFontDir() + fontName + ".fnt");
+            if (fontFile.exists()) {
+                font = new BitmapFont(fontFile);
+            }
+            else {
+                FileHandle ttfFile = Gdx.files.absolute(FSkin.getDir() + TTF_FILE);
+                font = generateFont(ttfFile, fontName, fontSize);
+            }
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (font == null) {
+            font = new BitmapFont(); //use scaled default font as fallback
+            font.setScale(Utils.scaleMax(size) / font.getLineHeight());
+        }
+        font.setUseIntegerPositions(true); //prevent parts of text getting cut off at times
     }
 
-    public static void updateAll() {
-        for (FSkinFont skinFont : fonts.values()) {
-            skinFont.updateFont();
+    private BitmapFont generateFont(FileHandle ttfFile, String fontName, int fontSize) {
+        if (!ttfFile.exists()) { return null; }
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(ttfFile);
+
+        PixmapPacker packer = new PixmapPacker(FONT_PAGE_SIZE, FONT_PAGE_SIZE, Pixmap.Format.RGBA8888, 2, false);
+        FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(fontSize, FreeTypeFontGenerator.DEFAULT_CHARS, false, packer);
+        Array<PixmapPacker.Page> pages = packer.getPages();
+        TextureRegion[] texRegions = new TextureRegion[pages.size];
+        for (int i=0; i<pages.size; i++) {
+            PixmapPacker.Page p = pages.get(i);
+            Texture texture = new Texture(new PixmapTextureData(p.getPixmap(), p.getPixmap().getFormat(), false, false)) {
+                @Override
+                public void dispose() {
+                    super.dispose();
+                    getTextureData().consumePixmap().dispose();
+                }
+            };
+            texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+            texRegions[i] = new TextureRegion(texture);
         }
+
+        BitmapFont font = new BitmapFont(fontData, texRegions, false);
+
+        //create .fnt and .png files for font
+        FileHandle fontFile = Gdx.files.absolute(FSkin.getFontDir() + fontName + ".fnt");
+        FileHandle pixmapDir = Gdx.files.absolute(FSkin.getFontDir());
+        BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
+
+        String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, fontName);
+        BitmapFontWriter.writeFont(font.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo(fontName, fontSize), 1, 1);
+
+        generator.dispose();
+        packer.dispose();
+        return font;
     }
 }

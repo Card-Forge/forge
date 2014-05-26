@@ -1,7 +1,5 @@
 package forge.app;
 
-import java.io.File;
-
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,7 +7,9 @@ import android.os.Environment;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
+
 import forge.Forge;
+import forge.util.FileUtil;
 
 public class Main extends AndroidApplication {
     @Override
@@ -28,13 +28,13 @@ public class Main extends AndroidApplication {
             Gdx.app.exit();
             return;
         }
-        File assetsDir = new File(Environment.getExternalStorageDirectory() + "/Forge");
-        if (!assetsDir.exists() && !assetsDir.mkdirs()) {
+        String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
+        if (!FileUtil.ensureDirectoryExists(assetsDir)) {
             Gdx.app.error("Forge", "Can't access external storage");
             Gdx.app.exit();
             return;
         }
 
-        initialize(new Forge(getClipboard(), assetsDir.getAbsolutePath() + "/"), true);
+        initialize(new Forge(getClipboard(), assetsDir), true);
     }
 }

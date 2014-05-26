@@ -1090,6 +1090,7 @@ forge-gui-mobile/libs/gdx.jar -text
 forge-gui-mobile/pom.xml -text
 forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
+forge-gui-mobile/src/forge/assets/BitmapFontWriter.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
 forge-gui-mobile/src/forge/assets/FSkin.java -text
 forge-gui-mobile/src/forge/assets/FSkinBorder.java -text

@@ -22,13 +22,16 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
+import forge.util.FileUtil;
 
 public class FSkin {
+    private static final String FONT_CACHE_DIR = ForgeConstants.CACHE_DIR + "fonts/";
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<FSkinProp, FSkinImage>();
     private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
 
     private static ArrayList<String> allSkins;
     private static String preferredDir;
+    private static String preferredFontDir;
     private static String preferredName;
     private static boolean loaded = false;
 
@@ -69,6 +72,9 @@ public class FSkin {
         // Non-default (preferred) skin name and dir.
         preferredName = skinName.toLowerCase().replace(' ', '_');
         preferredDir = ForgeConstants.SKINS_DIR + preferredName + "/";
+        preferredFontDir = FONT_CACHE_DIR + preferredName + "/";
+
+        FileUtil.ensureDirectoryExists(preferredFontDir);
 
         FSkinTexture.BG_TEXTURE.load(preferredDir, ForgeConstants.DEFAULT_SKINS_DIR); //load background texture early for splash screen
 
@@ -289,6 +295,15 @@ public class FSkin {
      */
     public static String getDir() {
         return FSkin.preferredDir;
+    }
+
+    /**
+     * Gets the directory where fonts should be cached
+     * 
+     * @return Path of font cache directory for the current skin.
+     */
+    public static String getFontDir() {
+        return preferredFontDir;
     }
 
     /**
