@@ -1,0 +1,7 @@
+Name:Reversal of Fortune
+ManaCost:4 R R
+Types:Sorcery
+A:SP$ RevealHand | Cost$ 4 R R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPlay | SpellDescription$ Target opponent reveals his or her hand. You may copy an instant or sorcery card in it. If you do, you may cast the copy without paying its mana cost.
+SVar:DBPlay:DB$ Play | CopyCard$ True | Optional$ True | Valid$ Sorcery.TargetedPlayerCtrl,Instant.TargetedPlayerCtrl | WithoutManaCost$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reversal_of_fortune.jpg
+Oracle:Target opponent reveals his or her hand. You may copy an instant or sorcery card in it. If you do, you may cast the copy without paying its mana cost.
