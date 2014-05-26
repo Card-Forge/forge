@@ -307,10 +307,6 @@ public class Forge implements ApplicationListener {
                 }
                 return container.keyDown(keyCode);
             }
-            if (keyCode == Keys.BACK) {
-                endKeyInput(); //end key input if Back button pressed while keyboard open
-                return true;
-            }
             return keyInputAdapter.keyDown(keyCode);
         }
 
