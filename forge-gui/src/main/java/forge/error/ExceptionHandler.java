@@ -18,11 +18,6 @@
 
 package forge.error;
 
-import com.esotericsoftware.minlog.Log;
-
-import forge.properties.ForgeConstants;
-import forge.util.MultiplexOutputStream;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,7 +25,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.nio.file.Files;
+
+import com.esotericsoftware.minlog.Log;
+
+import forge.properties.ForgeConstants;
+import forge.util.MultiplexOutputStream;
 
 /**
  * This class handles all exceptions that weren't caught by showing the error to
@@ -65,7 +64,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
             logFile = new File(pathname);
         }
         
-        if (!Files.exists(logFile.toPath())) {
+        if (!logFile.exists()) {
             try {
                 logFile.getParentFile().mkdirs();
                 logFile.createNewFile();
