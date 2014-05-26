@@ -1156,6 +1156,7 @@ forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
 forge-gui-mobile/src/forge/screens/guantlet/GuantletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
 forge-gui-mobile/src/forge/screens/match/FControl.java -text
+forge-gui-mobile/src/forge/screens/match/MatchLoader.java -text
 forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAssignDamage.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAvatar.java -text

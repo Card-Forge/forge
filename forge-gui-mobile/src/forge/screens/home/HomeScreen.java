@@ -17,8 +17,8 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
 public class HomeScreen extends FScreen {
-    private static final float LOGO_SIZE_FACTOR = 0.7f;
-    private static final float INSETS_FACTOR = 0.025f;
+    public static final float LOGO_SIZE_FACTOR = 0.7f;
+    public static final float INSETS_FACTOR = 0.025f;
     private static final float GAP_Y_FACTOR = 0.01f;
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
     
