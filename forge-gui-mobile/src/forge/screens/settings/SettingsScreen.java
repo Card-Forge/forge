@@ -62,10 +62,14 @@ public class SettingsScreen extends FScreen {
                 "Play for Ante",
                 "Determines whether or not the game is played for ante."),
                 1);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_MATCH_RARITY,
+                "Match Ante Rarity",
+                "Attempts to make antes the same rarity for all players."),
+                1);
+        /*lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
                 "Upload Draft Picks",
                 "Sends draft picks to Forge servers for analysis, to improve draft AI."),
-                1);
+                1);*/
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
                 "Allow AI Cheating",
                 "Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."),
