@@ -157,7 +157,7 @@
 
     <profiles>
         <profile>
-            <id>android</id>
+            <id>android-debug</id>
             <build>
                 <plugins>
                     <plugin>
@@ -195,7 +195,112 @@
                             </jvmArguments>
                         </configuration>
                     </plugin>
-
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+        	<id>android-release-build</id>
+        	<build>
+        		<plugins>
+                    <plugin>
+                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <artifactId>android-maven-plugin</artifactId>
+                        <version>3.9.0-rc.1</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <sign>
+                                <debug>false</debug>
+                            </sign>
+                            <sdk>
+                                <platform>19</platform>
+                            </sdk>
+					        <zipalign>
+					            <verbose>false</verbose>
+					        </zipalign>
+                            <dexForceJumbo>true</dexForceJumbo>
+                            <deleteConflictingFiles>true</deleteConflictingFiles>
+                            <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+                            <assetsDirectory>${project.basedir}/assets</assetsDirectory>
+                            <resourceDirectory>${project.basedir}/res</resourceDirectory>
+                            <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
+                            <extractDuplicates>true</extractDuplicates>
+                            <proguard>
+                                <config>${project.basedir}/proguard.cfg</config>
+                            </proguard>
+                            <release>true</release>
+                            <dex>
+                                <jvmArguments>
+                                    <argument>-Xms128m</argument>
+                                    <argument>-Xmx2048m</argument>
+                                </jvmArguments>
+                            </dex>
+                            <jvmArguments>
+                                <argument>-Xms128m</argument>
+                                <argument>-Xmx2048m</argument>
+                            </jvmArguments>
+                        </configuration>
+                    </plugin>
+        		</plugins>
+        	</build>
+        </profile>
+		<profile>
+        	<id>android-release-sign</id>
+        	<build>
+        		<plugins>
+                    <plugin>
+			            <groupId>org.apache.maven.plugins</groupId>
+			            <artifactId>maven-jarsigner-plugin</artifactId>
+			            <version>1.3.2</version>
+			            <executions>
+			                <execution>
+			                    <id>signing</id>
+			                    <goals>
+			                        <goal>sign</goal>
+			                        <goal>verify</goal>
+			                    </goals>
+			                    <phase>package</phase>
+			                    <inherited>true</inherited>
+			                    <configuration>
+			                        <removeExistingSignatures>true</removeExistingSignatures>
+			                        <archiveDirectory/>
+			                        <includes>
+			                            <include>${project.build.directory}/${project.build.finalName}/${project.build.finalName}.apk</include>
+			                        </includes>
+			                        <keystore>${sign.keystore}</keystore>
+			                        <alias>${sign.alias}</alias>
+			                        <storepass>${sign.storepass}</storepass>
+			                        <keypass>${sign.keypass}</keypass>
+			                        <verbose>true</verbose>
+			                    </configuration>
+			                </execution>
+			            </executions>
+			        </plugin>
+	                <plugin>
+                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <artifactId>android-maven-plugin</artifactId>
+                        <version>3.9.0-rc.1</version>
+					    <inherited>true</inherited>
+					    <configuration>
+					        <sign>
+					            <debug>false</debug>
+					        </sign>
+					        <zipalign>
+					        	<skip>false</skip>
+					            <verbose>true</verbose>
+					            <inputApk>${project.build.directory}/${project.build.finalName}.apk</inputApk>
+					            <outputApk>${project.build.directory}/${project.build.finalName}-signed-aligned.apk</outputApk>
+					        </zipalign>
+					    </configuration>
+					    <executions>
+					        <execution>
+					            <id>alignApk</id>
+					            <phase>package</phase>
+					            <goals>
+					                <goal>zipalign</goal>
+					            </goals>
+					        </execution>
+					    </executions>
+					</plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -209,7 +314,7 @@
                         </dependencies>
                         <executions>
                             <execution>
-                                <id>android-apk</id>
+                                <id>android-clean</id>
                                 <phase>clean</phase>
                                 <configuration>
                                     <target>
@@ -221,10 +326,34 @@
                                     <goal>run</goal>
                                 </goals>
                             </execution>
+                            <execution>
+                                <id>android-apk</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target>
+                                        <copy todir="${project.build.directory}/${project.build.finalName}">
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/">
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                            </fileset>
+                                            <fileset dir="${project.build.directory}" includes="${project.build.finalName}-signed-aligned.apk" />
+                                        </copy>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}.zip" basedir="${project.build.directory}/${project.build.finalName}" level="1" />
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
                         </executions>
                     </plugin>
-                </plugins>
-            </build>
+        		</plugins>
+        	</build>
         </profile>
     </profiles>
 </project>
