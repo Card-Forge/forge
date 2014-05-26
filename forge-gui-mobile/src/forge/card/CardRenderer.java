@@ -45,6 +45,7 @@ public class CardRenderer {
     private static final float MANA_COST_PADDING = Utils.scaleMin(3);
     private static final float SET_BOX_MARGIN = Utils.scaleMin(1);
     private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getFont().getCapHeight() - MANA_COST_PADDING));
+    private static final float NAME_COST_THRESHOLD = Utils.scaleY(200);
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -392,7 +393,8 @@ public class CardRenderer {
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
-        if (h < Utils.AVG_FINGER_HEIGHT * 5) { //only draw name and mana cost overlays if card is small
+        //draw name and mana cost overlays if card is small or default card image being used
+        if (h <= NAME_COST_THRESHOLD || image == ImageCache.defaultImage) {
             if (showCardNameOverlay(card)) {
                 g.drawOutlinedText(card.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, HAlignment.LEFT, false);
             }

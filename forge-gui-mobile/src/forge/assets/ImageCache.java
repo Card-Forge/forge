@@ -55,9 +55,10 @@ import java.util.concurrent.ExecutionException;
 public class ImageCache {
     // short prefixes to save memory
 
-    private static final Set<String> _missingIconKeys = new HashSet<String>();
-    private static final LoadingCache<String, Texture> _CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
-    private static final Texture _defaultImage;
+    private static final Set<String> missingIconKeys = new HashSet<String>();
+    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
+    public static final Texture defaultImage;
+
     static {
         Texture defImage = null;
         try {
@@ -65,13 +66,13 @@ public class ImageCache {
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {
-            _defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA8888) : defImage; 
+            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA8888) : defImage; 
         }
     }
 
     public static void clear() {
-        _CACHE.invalidateAll();
-        _missingIconKeys.clear();
+        cache.invalidateAll();
+        missingIconKeys.clear();
     }
 
     public static Texture getImage(Card card) {
@@ -99,9 +100,9 @@ public class ImageCache {
     public static FImage getIcon(IHasIcon ihi) {
         String imageKey = ihi.getIconImageKey();
         final Texture icon;
-        if (_missingIconKeys.contains(imageKey) ||
+        if (missingIconKeys.contains(imageKey) ||
                 null == (icon = getImage(ihi.getIconImageKey(), false))) {
-            _missingIconKeys.add(imageKey);
+            missingIconKeys.add(imageKey);
             return FSkinImage.UNKNOWN;
         }
         return new FTextureImage(icon);
@@ -127,14 +128,14 @@ public class ImageCache {
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey.substring(2)), altState, true);
             if (StringUtils.isBlank(imageKey)) { 
-                return _defaultImage;
+                return defaultImage;
             }
         }
 
         // Load from file and add to cache if not found in cache initially.
         Texture image;
         try {
-            image = ImageCache._CACHE.get(imageKey);
+            image = ImageCache.cache.get(imageKey);
         }
         catch (final ExecutionException ex) {
             if (!(ex.getCause() instanceof NullPointerException)) {
@@ -150,8 +151,8 @@ public class ImageCache {
         // a default "not available" image and add to cache for given key.
         if (image == null) {
             if (useDefaultIfNotFound) { 
-                image = _defaultImage;
-                _CACHE.put(imageKey, _defaultImage);
+                image = defaultImage;
+                cache.put(imageKey, defaultImage);
             }
             else {
                 image = null;
