@@ -94,7 +94,9 @@ public class VPrompt extends FContainer {
             if (!StringUtils.isEmpty(message)) {
                 float x = PADDING;
                 float y = PADDING;
-                renderer.drawText(g, message, FONT, FORE_COLOR, x, y, getWidth() - 2 * x, getHeight() - 2 * y, true, HAlignment.CENTER, true);
+                float w = getWidth() - 2 * PADDING;
+                float h = getHeight() - 2 * PADDING;
+                renderer.drawText(g, message, FONT, FORE_COLOR, x, y, w, h, y, h, true, HAlignment.CENTER, true);
             }
         }
     }

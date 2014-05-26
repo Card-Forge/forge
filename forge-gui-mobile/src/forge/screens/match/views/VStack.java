@@ -211,7 +211,9 @@ public class VStack extends FDropDown {
             CardRenderer.drawCardWithOverlays(g, stackInstance.getSourceCard(), x, y, cardWidth, cardHeight);
 
             x += cardWidth + padding;
-            textRenderer.drawText(g, text, FONT, foreColor, x, y, w - x - padding, h - y - padding, true, HAlignment.LEFT, true);
+            w -= x + padding;
+            h -= y + padding;
+            textRenderer.drawText(g, text, FONT, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
 
             if (!isTop) {
                 g.resetAlphaComposite();

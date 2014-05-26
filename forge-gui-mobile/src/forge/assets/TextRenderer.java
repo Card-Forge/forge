@@ -445,10 +445,10 @@ public class TextRenderer {
         return getCurrentBounds();
     }
 
-    public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
-        drawText(g, text, skinFont, skinColor.getColor(), x, y, w, h, wrap0, horzAlignment, centerVertically);
+    public void drawText(Graphics g, String text, FSkinFont skinFont, FSkinColor skinColor, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+        drawText(g, text, skinFont, skinColor.getColor(), x, y, w, h, visibleStartY, visibleHeight, wrap0, horzAlignment, centerVertically);
     }
-    public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
+    public void drawText(Graphics g, String text, FSkinFont skinFont, Color color, float x, float y, float w, float h, float visibleStartY, float visibleHeight, boolean wrap0, HAlignment horzAlignment, boolean centerVertically) {
         setProps(text, skinFont, w, h, wrap0);
         if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
             g.startClip(x, y, w, h);
@@ -470,7 +470,17 @@ public class TextRenderer {
                 break;
             }
         }
+
+        visibleStartY -= y; //subtract y to make calculation quicker
+        float visibleEndY = visibleStartY + visibleHeight;
+
         for (Piece piece : pieces) {
+            if (piece.y + piece.h < visibleStartY) {
+                continue;
+            }
+            if (piece.y >= visibleEndY) {
+                break;
+            }
             piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
         }
         if (needClip) {

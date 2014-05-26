@@ -111,7 +111,7 @@ public class VLog extends FDropDown {
             }
 
             //use full height without padding so text not scaled down
-            renderer.drawText(g, text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, true, HAlignment.LEFT, false);
+            renderer.drawText(g, text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, 0, h, true, HAlignment.LEFT, false);
         }
     }
 }

@@ -66,6 +66,6 @@ public class FMagnifyView extends FDropDown {
     public void drawBackground(Graphics g) {
         super.drawBackground(g);
         g.fillRect(backColor, 0, 0, getWidth(), getHeight());
-        renderer.drawText(g, text, font, foreColor, PADDING - getScrollLeft(), PADDING - getScrollTop(), getScrollWidth() - 2 * PADDING, getScrollHeight() - 2 * PADDING, true, HAlignment.LEFT, false);
+        renderer.drawText(g, text, font, foreColor, PADDING - getScrollLeft(), PADDING - getScrollTop(), getScrollWidth() - 2 * PADDING, getScrollHeight() - 2 * PADDING, 0, getHeight(), true, HAlignment.LEFT, false);
     }
 }

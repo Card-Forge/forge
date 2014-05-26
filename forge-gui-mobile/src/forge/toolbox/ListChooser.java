@@ -317,7 +317,7 @@ public class ListChooser<T> extends FContainer {
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;
             w -= dx;
-            textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
+            textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
         }
     }
     private class PlayerItemRenderer extends ItemRenderer {
