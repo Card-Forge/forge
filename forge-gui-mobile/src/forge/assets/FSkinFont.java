@@ -30,11 +30,13 @@ public class FSkinFont {
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
 
     public static FSkinFont get(final int unscaledSize) {
-        int fontSize0 = (int)Utils.scaleMax(unscaledSize);
-        FSkinFont skinFont = fonts.get(fontSize0);
+        return _get((int)Utils.scaleMax(unscaledSize));
+    }
+    public static FSkinFont _get(final int scaledSize) {
+        FSkinFont skinFont = fonts.get(scaledSize);
         if (skinFont == null) {
-            skinFont = new FSkinFont(fontSize0);
-            fonts.put(fontSize0, skinFont);
+            skinFont = new FSkinFont(scaledSize);
+            fonts.put(scaledSize, skinFont);
         }
         return skinFont;
     }
@@ -42,8 +44,8 @@ public class FSkinFont {
     public static FSkinFont forHeight(final float height) {
         int size = MIN_FONT_SIZE + 1;
         while (true) {
-            if (get(size).getLineHeight() > height) {
-                return get(size - 1);
+            if (_get(size).getLineHeight() > height) {
+                return _get(size - 1);
             }
             size++;
         }
@@ -52,7 +54,7 @@ public class FSkinFont {
     //pre-load all supported font sizes
     public static void preloadAll() {
         for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
-            get(size);
+            _get(size);
         }
     }
 
@@ -67,13 +69,11 @@ public class FSkinFont {
     private BitmapFont font;
 
     private FSkinFont(int fontSize0) {
-        if (fontSize0 < MIN_FONT_SIZE) {
-            scale = fontSize0 / MIN_FONT_SIZE;
-            fontSize0 = MIN_FONT_SIZE;
+        if (fontSize0 > MAX_FONT_SIZE) {
+            scale = (float)fontSize0 / MAX_FONT_SIZE;
         }
-        else if (fontSize0 > MAX_FONT_SIZE) {
-            scale = fontSize0 / MAX_FONT_SIZE;
-            fontSize0 = MAX_FONT_SIZE;
+        else if (fontSize0 < MIN_FONT_SIZE) {
+            scale = (float)fontSize0 / MIN_FONT_SIZE;
         }
         else {
             scale = 1;
@@ -84,25 +84,32 @@ public class FSkinFont {
 
     // Expose methods from font that updates scale as needed
     public TextBounds getBounds(CharSequence str) {
+        updateScale(); //must update scale before measuring text
         return font.getBounds(str);
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
+        updateScale();
         return font.getMultiLineBounds(str);
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
+        updateScale();
         return font.getWrappedBounds(str, wrapWidth);
     }
     public float getAscent() {
+        updateScale();
         return font.getAscent();
     }
     public float getCapHeight() {
+        updateScale();
         return font.getCapHeight();
     }
     public float getLineHeight() {
+        updateScale();
         return font.getLineHeight();
     }
 
     public void draw(SpriteBatch batch, String text, Color color, float x, float y, float w, boolean wrap, HAlignment horzAlignment) {
+        updateScale();
         font.setColor(color);
         if (wrap) {
             font.drawWrapped(batch, text, x, y, w, horzAlignment);
@@ -112,15 +119,32 @@ public class FSkinFont {
         }
     }
 
+    //update scale of font if needed
+    private void updateScale() {
+        if (font.getScaleX() != scale) {
+            font.setScale(scale);
+        }
+    }
+
     public boolean canShrink() {
         return fontSize > MIN_FONT_SIZE;
     }
 
     public FSkinFont shrink() {
-        return get(fontSize - 1);
+        return _get(fontSize - 1);
     }
 
     private void updateFont() {
+        if (scale != 1) { //re-use font inside range if possible
+            if (fontSize > MAX_FONT_SIZE) {
+                font = _get(MAX_FONT_SIZE).font;
+            }
+            else {
+                font = _get(MIN_FONT_SIZE).font;
+            }
+            return;
+        }
+
         String fontName = "f" + fontSize;
         FileHandle fontFile = Gdx.files.absolute(FSkin.getFontDir() + fontName + ".fnt");
         if (fontFile.exists()) {
