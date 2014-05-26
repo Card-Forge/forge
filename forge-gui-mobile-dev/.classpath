@@ -12,7 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl-natives.jar"/>
-	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-lwjgl.jar" sourcepath="libs/gdx-backend-lwjgl-sources.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-natives.jar"/>
 	<classpathentry kind="lib" path="libs/gdx-freetype-natives.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">

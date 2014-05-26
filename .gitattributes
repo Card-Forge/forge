@@ -1071,6 +1071,7 @@ forge-gui-mobile-dev/.project -text
 forge-gui-mobile-dev/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-mobile-dev/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui-mobile-dev/libs/gdx-backend-lwjgl-natives.jar -text
+forge-gui-mobile-dev/libs/gdx-backend-lwjgl-sources.jar -text
 forge-gui-mobile-dev/libs/gdx-backend-lwjgl.jar -text
 forge-gui-mobile-dev/libs/gdx-freetype-natives.jar -text
 forge-gui-mobile-dev/libs/gdx-natives.jar -text
