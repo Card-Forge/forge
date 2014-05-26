@@ -51,8 +51,10 @@ import forge.util.WaitRunnable;
 import forge.util.gui.SGuiChoose;
 
 public class GuiMobile implements IGuiBase {
+    private final Thread guiThread;
     private final String assetsDir;
-    public GuiMobile(String assetsDir0) {
+    public GuiMobile(Thread guiThread0, String assetsDir0) {
+        guiThread = guiThread0;
         assetsDir = assetsDir0;
     }
 
@@ -78,7 +80,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean isGuiThread() {
-        return Thread.currentThread().getName().startsWith("LWJGL");
+        return Thread.currentThread() == guiThread;
     }
 
     @Override

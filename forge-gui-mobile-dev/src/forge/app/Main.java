@@ -8,6 +8,13 @@ import forge.util.Utils;
 
 public class Main {
     public static void main(String[] args) {
-        new LwjglApplication(new Forge(new LwjglClipboard(), "../forge-gui/"), "Forge", (int)Utils.BASE_WIDTH, (int)Utils.BASE_HEIGHT, true);
+        new ForgeApplication(new Forge());
+    }
+
+    private static class ForgeApplication extends LwjglApplication {
+        private ForgeApplication(Forge app) {
+            super(app, "Forge", (int)Utils.BASE_WIDTH, (int)Utils.BASE_HEIGHT, true);
+            app.initialize(mainLoopThread, new LwjglClipboard(), "../forge-gui/");
+        }
     }
 }

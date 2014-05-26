@@ -40,7 +40,7 @@ import forge.toolbox.FOverlay;
 import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
-    private static Forge game;
+    private static boolean initialized;
     private static Clipboard clipboard;
     private static int screenWidth;
     private static int screenHeight;
@@ -51,13 +51,16 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public Forge(Clipboard clipboard0, String assetDir0) {
-        if (game != null) {
+    public Forge() {
+    }
+
+    public void initialize(Thread guiThread, Clipboard clipboard0, String assetDir0) {
+        if (initialized) {
             throw new RuntimeException("Cannot initialize Forge more than once");
         }
-        game = this;
         clipboard = clipboard0;
-        GuiBase.setInterface(new GuiMobile(assetDir0));
+        GuiBase.setInterface(new GuiMobile(guiThread, assetDir0));
+        initialized = true;
     }
 
     @Override

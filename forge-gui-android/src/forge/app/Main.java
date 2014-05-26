@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -35,6 +36,8 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(new Forge(getClipboard(), assetsDir), true);
+        Forge app = new Forge();
+        app.initialize(Looper.getMainLooper().getThread(), getClipboard(), assetsDir);
+        initialize(app, true);
     }
 }
