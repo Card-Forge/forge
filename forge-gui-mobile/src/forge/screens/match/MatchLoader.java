@@ -29,8 +29,8 @@ public class MatchLoader extends FOverlay {
 
         float padding = w * HomeScreen.INSETS_FACTOR;
         float logoSize = w * HomeScreen.LOGO_SIZE_FACTOR;
-        float fontHeight = FONT.getLineHeight();
-        float panelHeight = logoSize + fontHeight + 2 * insets + 3 * padding;
+        float fontHeight = FONT.getCapHeight();
+        float panelHeight = logoSize + fontHeight + 4 * padding;
 
         float y = (getHeight() - panelHeight) / 2;
         g.fillRect(BACK_COLOR, x, y, w, panelHeight);
@@ -38,6 +38,6 @@ public class MatchLoader extends FOverlay {
         y += padding;
         g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
         y += logoSize + padding;
-        g.drawText("Loading new game...", FONT, FORE_COLOR, x, y, w, fontHeight, false, HAlignment.CENTER, true);
+        g.drawText("Loading new game...", FONT, FORE_COLOR, x, y, w, getHeight(), false, HAlignment.CENTER, false);
     }
 }
