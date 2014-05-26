@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -10,6 +11,7 @@ import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -21,6 +23,7 @@ import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -433,10 +436,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        if (containsUsefulKeyword(ai, keywords, c, sa, attack)) {
-            return true;
-        }
-
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
@@ -446,6 +445,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return true;
         }
 
+        // buff attacker/blocker using using triggered pump
         if (sa.isTrigger() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             if (phase.isPlayerTurn(ai)) {
                 if (CombatUtil.canAttack(c)) {
@@ -458,51 +458,93 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         }
 
-        // is the creature blocking and unable to destroy the attacker
-        // or would be destroyed itself?
+        final Player opp = ai.getOpponent();
+        Card pumped = pumpedCreature(ai, sa, c, defense, attack, keywords);
+        List<Card> oppCreatures = opp.getCreaturesInPlay();
+        // grant evasive
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) 
+                && !CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
+            if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
+                    && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                final float chance = MyRandom.getRandom().nextFloat();
+                return chance < 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+            }
+        }
         
-        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && combat.isBlocking(c)) {
-            if (defense > 0 && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c, combat)) {
+        // combat trickery
+        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
+            Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : ai.getOpponent());
+            List<Card> opposing = null;
+            boolean pumpedWillDie = false;
+            final boolean isAttacking = combat.isAttacking(c);
+            if (isAttacking) {
+                pumpedCombat.addAttacker(pumped, opp);
+                opposing = combat.getBlockers(c);
+                for (Card b : opposing) {
+                    pumpedCombat.addBlocker(pumped, b);
+                }
+                if (ComputerUtilCombat.attackerWouldBeDestroyed(ai, pumped, pumpedCombat)) {
+                    pumpedWillDie = true;
+                }
+            } else {
+                opposing = combat.getAttackersBlockedBy(c);
+                for (Card a : opposing) {
+                    pumpedCombat.addAttacker(a, ai);
+                    pumpedCombat.addBlocker(a, pumped);
+                }
+                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, pumped, pumpedCombat)) {
+                    pumpedWillDie = true;
+                }
+            }
+            
+            //1. save combatant
+            if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && !pumpedWillDie) {
                 return true;
             }
-            List<Card> blockedBy = combat.getAttackersBlockedBy(c);
-            // For now, Only care the first creature blocked by a card.
-            // TODO Add in better BlockAdditional support
-            if (!blockedBy.isEmpty() && attack > 0 && !ComputerUtilCombat.attackerWouldBeDestroyed(ai, blockedBy.get(0), combat)
-            		&& blockedBy.get(0).staticDamagePrevention(99, c, true, true) > 0) {
-                return true;
+            
+            //2. kill combatant
+            boolean survivor = false;
+            for (Card o : opposing) {
+                if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
+                    survivor = true;
+                    break;
+                }
+            }
+            if (survivor) {
+                for (Card o : opposing) {
+                    if (!ComputerUtilCombat.combatantWouldBeDestroyed(opp, o, combat)) {
+                        if (isAttacking) {
+                            if (ComputerUtilCombat.blockerWouldBeDestroyed(opp, o, pumpedCombat)) {
+                                return true;
+                            }
+                        } else {
+                            if (ComputerUtilCombat.attackerWouldBeDestroyed(opp, o, pumpedCombat)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //3. buff unblocked attacker
+            if (combat.isAttacking(c) && combat.isUnblocked(c) && attack > 0) {
+                final float chance = MyRandom.getRandom().nextFloat();
+                return chance < 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+            }
+            
+            //4. if the life of the computer is in danger, try to pump blockers blocking Tramplers
+            if (combat.isBlocking(c) && defense > 0 ) {
+                List<Card> blockedBy = combat.getAttackersBlockedBy(c);
+                boolean attackerHasTrample = false;
+                for (Card b : blockedBy) {
+                    attackerHasTrample |= b.hasKeyword("Trample");
+                }
+                if (attackerHasTrample && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, combat))) {
+                    return true;
+                }
             }
         }
-
-        // is the creature unblocked and the spell will pump its power?
-        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && combat.isAttacking(c) && combat.isUnblocked(c) && attack > 0) {
-            return true;
-        }
-
-        // is the creature blocked and the blocker would survive
-        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && attack > 0
-                && combat.isAttacking(c)
-                && combat.isBlocked(c)
-                && combat.getBlockers(c) != null
-                && !combat.getBlockers(c).isEmpty()
-                && !ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0), combat)
-                && combat.getBlockers(c).get(0).staticDamagePrevention(99, c, true, true) > 0) {
-            return true;
-        }
-
-        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai.getOpponent()) && combat.isBlocking(c) && defense > 0 ) {
-            // if the life of the computer is in danger, try to pump blockers blocking Tramplers
-            List<Card> blockedBy = combat.getAttackersBlockedBy(c);
-            boolean attackerHasTrample = false;
-            for (Card b : blockedBy) {
-                attackerHasTrample |= b.hasKeyword("Trample");
-            }
-
-            if (attackerHasTrample && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, combat)))
-                return true;
-        }
-
         return false;
     }
 
@@ -623,4 +665,22 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         return false;
     }
 
+    public Card pumpedCreature(final Player ai, final SpellAbility sa, final Card c, final int d, final int a,
+            final List<String> keywords) {
+        Card pumped = c.isToken() ? CardFactory.copyStats(c, ai) : CardFactory.getCard(c.getPaperCard(), ai);
+        final long timestamp = c.getGame().getNextTimestamp();
+        final ArrayList<String> kws = new ArrayList<String>();
+        for (String kw : keywords) {
+            if (kw.startsWith("HIDDEN")) {
+                pumped.addHiddenExtrinsicKeyword(kw);
+            } else {
+                kws.add(kw);
+            }
+        }
+        pumped.addTempAttackBoost(a);
+        pumped.addTempDefenseBoost(d);
+        pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        pumped.setSickness(c.hasSickness());
+        return pumped;
+    }
 }
