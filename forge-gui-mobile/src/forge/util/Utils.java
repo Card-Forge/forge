@@ -1,6 +1,7 @@
 package forge.util;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Utils {
@@ -83,5 +84,19 @@ public class Utils {
         result.x = (p1.x + p2.x) / 2;
         result.y = (p1.y + p2.y) / 2;
         return result;
+    }
+
+    //get rectangle defining the interestion between two other rectangles
+    public static Rectangle getIntersection(Rectangle r1, Rectangle r2) {
+        float left = Math.max(r1.x, r2.x);
+        float right = Math.min(r1.x + r1.width, r2.x + r2.width);
+        if (right > left) {
+            float top = Math.max(r1.y, r2.y);
+            float bottom = Math.min(r1.y + r1.height, r2.y + r2.height);
+            if (bottom > top) {
+                return new Rectangle(left, top, right - left, bottom - top);
+            }
+        }
+        return null;
     }
 }

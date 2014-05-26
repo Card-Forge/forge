@@ -560,11 +560,13 @@ public class Forge implements ApplicationListener {
 
     public static class Graphics {
         private Rectangle bounds;
+        private Rectangle visibleBounds;
         private int failedClipCount;
         private float alphaComposite = 1;
 
         private Graphics() {
             bounds = new Rectangle(0, 0, screenWidth, screenHeight);
+            visibleBounds = new Rectangle(bounds);
         }
 
         public void startClip() {
@@ -595,8 +597,14 @@ public class Forge implements ApplicationListener {
             bounds = new Rectangle(parentBounds.x + displayObj.getLeft(), parentBounds.y + displayObj.getTop(), displayObj.getWidth(), displayObj.getHeight());
             displayObj.setScreenPosition(bounds.x, bounds.y);
 
-            if (bounds.overlaps(parentBounds)) { //avoid drawing object if it's not within visible region
+            Rectangle intersection = Utils.getIntersection(bounds, visibleBounds);
+            if (intersection != null) { //avoid drawing object if it's not within visible region
+                final Rectangle backup = visibleBounds;
+                visibleBounds = intersection;
+
                 displayObj.draw(this);
+
+                visibleBounds = backup;
             }
 
             bounds = parentBounds;
