@@ -214,7 +214,6 @@ forge-core/src/main/java/forge/item/PreconDeck.java -text
 forge-core/src/main/java/forge/item/SealedProduct.java -text
 forge-core/src/main/java/forge/item/TournamentPack.java -text
 forge-core/src/main/java/forge/item/package-info.java -text
-forge-core/src/main/java/forge/package-info.java -text
 forge-core/src/main/java/forge/util/Aggregates.java -text
 forge-core/src/main/java/forge/util/BinaryUtil.java -text
 forge-core/src/main/java/forge/util/BuildInfo.java -text
@@ -242,7 +241,6 @@ forge-core/src/main/java/forge/util/maps/HashMapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/MapOfLists.java -text
 forge-core/src/main/java/forge/util/maps/MapToAmount.java -text
 forge-core/src/main/java/forge/util/maps/package-info.java -text
-forge-core/src/main/java/forge/util/package-info.java -text
 forge-core/src/main/java/forge/util/storage/IStorage.java -text
 forge-core/src/main/java/forge/util/storage/StorageBase.java -text
 forge-core/src/main/java/forge/util/storage/StorageImmediatelySerialized.java -text
@@ -640,9 +638,7 @@ forge-game/src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=nativ
 forge-game/src/main/java/forge/game/zone/Zone.java -text
 forge-game/src/main/java/forge/game/zone/ZoneType.java -text
 forge-game/src/main/java/forge/game/zone/package-info.java svneol=native#text/plain
-forge-game/src/main/java/forge/package-info.java -text
 forge-game/src/main/java/forge/util/Expressions.java -text
-forge-game/src/main/java/forge/util/package-info.java -text
 forge-gui-android/.classpath -text
 forge-gui-android/.project -text
 forge-gui-android/.settings/org.eclipse.core.resources.prefs -text
@@ -16334,7 +16330,6 @@ forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/io/DeckHtmlSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
-forge-gui/src/main/java/forge/deck/io/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/BugReporter.java -text
 forge-gui/src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/package-info.java svneol=native#text/plain
