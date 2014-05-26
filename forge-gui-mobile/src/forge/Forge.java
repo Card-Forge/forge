@@ -941,26 +941,26 @@ public class Forge implements ApplicationListener {
                 Gdx.gl.glEnable(GL20.GL_BLEND);
             }
 
-            TextBounds bounds;
+            TextBounds textBounds;
             int fontSize = skinFont.getSize();
             BitmapFont font = skinFont.getFont();
             if (wrap) {
-                bounds = font.getWrappedBounds(text, w);
+                textBounds = font.getWrappedBounds(text, w);
             }
             else {
-                bounds = font.getMultiLineBounds(text);
+                textBounds = font.getMultiLineBounds(text);
             }
             
             boolean needClip = false;
 
-            while (bounds.width > w || bounds.height > h) {
+            while (textBounds.width > w || textBounds.height > h) {
                 if (fontSize > FSkinFont.MIN_FONT_SIZE) { //shrink font to fit if possible
                     font = FSkinFont.get(--fontSize).getFont();
                     if (wrap) {
-                        bounds = font.getWrappedBounds(text, w);
+                        textBounds = font.getWrappedBounds(text, w);
                     }
                     else {
-                        bounds = font.getMultiLineBounds(text);
+                        textBounds = font.getMultiLineBounds(text);
                     }
                 }
                 else {
@@ -973,7 +973,7 @@ public class Forge implements ApplicationListener {
                 startClip(x, y, w, h);
             }
 
-            float textHeight = bounds.height;
+            float textHeight = textBounds.height;
             if (h > textHeight && centerVertically) {
                 y += (h - textHeight) / 2;
             }
