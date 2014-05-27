@@ -59,6 +59,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final String numericAmount = sa.getParamOrDefault("Amount", "1");
         final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : CardFactoryUtil.xCount(host, host.getSVar(numericAmount));
 
+        if (validAmount <= 0) {
+            return;
+        }
+
         for (final Player p : tgtPlayers) {
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands, 
