@@ -7,6 +7,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
+        <alpha-version>1.5.19.001</alpha-version>
     </properties>
 
     <parent>
@@ -30,6 +31,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>forge-android</finalName>
     </build>
 
     <dependencies>
@@ -215,7 +217,7 @@
                                     <removeExistingSignatures>true</removeExistingSignatures>
                                     <archiveDirectory />
                                     <includes>
-                                        <include>${project.build.directory}/${project.build.finalName}/${project.build.finalName}.apk</include>
+                                        <include>${project.build.directory}/${project.build.finalName}.apk</include>
                                     </includes>
                                     <keystore>${sign.keystore}</keystore>
                                     <alias>${sign.alias}</alias>
@@ -269,29 +271,12 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <copy todir="${project.build.directory}/${project.build.finalName}">
-                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="CHANGES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/">
-                                                <include name="res/**" />
-                                                <exclude name="res/cardsfolder/**" />
-                                            </fileset>
-                                            <fileset dir="${project.build.directory}"
-                                                includes="${project.build.finalName}-signed-aligned.apk" />
-                                        </copy>
-                                        <mkdir
-                                            dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
-                                        <zip
-                                            destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip"
-                                            basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
-                                        <zip
-                                            destfile="${project.build.directory}/${project.build.finalName}/res.zip"
-                                            basedir="${basedir}/../forge-gui/res" level="1" />
-                                        <zip
-                                            destfile="${project.build.directory}/${project.build.finalName}.zip"
-                                            basedir="${project.build.directory}/${project.build.finalName}"
-                                            level="1" />
+                                        <zip destfile="${project.build.directory}/assets.zip" basedir="${basedir}/../forge-gui" level="1">
+                                            <include name="LICENSE.txt" />
+                                            <include name="README.txt" />
+                                            <include name="CHANGES.txt" />
+                                            <include name="res/**" />
+                                        </zip>
                                     </target>
                                 </configuration>
                                 <goals>
@@ -339,14 +324,13 @@
                                     <target>
                                         <ftp action="mkdir" password="${cardforge.pass}" server="ftp.cardforge.org"
                                             userid="${cardforge.user}" passive="true"
-                                            remotedir="releases/forge/forge-gui-android/${maven.build.timestamp}" />
+                                            remotedir="releases/forge/forge-gui-android/${alpha-version}" />
                                         <ftp password="${cardforge.pass}" server="ftp.cardforge.org"
                                             userid="${cardforge.user}" passive="true"
-                                            remotedir="releases/forge/forge-gui-android/${maven.build.timestamp}/">
-                                            <fileset
-                                                dir="${project.build.directory}/${project.build.finalName}">
+                                            remotedir="releases/forge/forge-gui-android/${alpha-version}/">
+                                            <fileset dir="${project.build.directory}">
                                                 <include name="${project.build.finalName}-signed-aligned.apk" />
-                                                <include name="res.zip" />
+                                                <include name="assets.zip" />
                                             </fileset>
                                         </ftp>
                                     </target>
