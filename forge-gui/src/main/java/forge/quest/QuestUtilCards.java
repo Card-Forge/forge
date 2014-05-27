@@ -605,7 +605,13 @@ public final class QuestUtilCards {
         
         Collections.shuffle(editions);
         
-        editions = editions.subList(0, Math.max(count / 2, 1));
+        int numberOfBoxes = Math.min(Math.max(count / 2, 1), editions.size());
+        
+        if (numberOfBoxes == 0) {
+            return;
+        }
+        
+        editions = editions.subList(0, numberOfBoxes);
         
         List<BoosterBox> output = new ArrayList<>();
         for (CardEdition e : editions) {

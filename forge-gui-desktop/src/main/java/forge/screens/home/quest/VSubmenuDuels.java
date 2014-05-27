@@ -73,15 +73,18 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final FLabel btnTravel = new FLabel.ButtonBuilder().text("Travel").fontSize(16).build();
     private final FLabel btnBazaar = new FLabel.ButtonBuilder().text("Bazaar").fontSize(16).build();
     private final FLabel btnSpellShop = new FLabel.ButtonBuilder().text("Spell Shop").fontSize(16).build();
+    private final FLabel btnRandomOpponent = new FLabel.ButtonBuilder().text("Random Duel").fontSize(16).build();
 
     /**
      * Constructor.
      */
     private VSubmenuDuels() {
+        
         final String constraints = "h 30px!, gap 0 0 0 5px";
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
         pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnTravel, "w 150px!, h 30px!, gap 0 0 0 10px");
+        pnlStats.add(btnRandomOpponent, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(lblWins, constraints);
@@ -94,6 +97,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.add(cbCharm, constraints);
         cbxPet.addTo(pnlStats, constraints);
         pnlStats.setOpaque(false);
+        
+        btnRandomOpponent.setToolTipText("Starts a duel against a randomly selected opponent.");
+        
     }
 
     /* (non-Javadoc)
@@ -209,6 +215,11 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     @Override
     public FLabel getBtnSpellShop() {
         return btnSpellShop;
+    }
+
+    @Override
+    public FLabel getBtnRandomOpponent() {
+        return btnRandomOpponent;
     }
 
     @Override

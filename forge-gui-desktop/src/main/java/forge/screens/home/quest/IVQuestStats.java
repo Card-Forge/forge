@@ -7,6 +7,10 @@ import forge.toolbox.FLabel;
 /** Dictates methods required for a panel with stats/pet display. */
 
 public interface IVQuestStats {
+
+    /** @return {@link forge.toolbox.FLabel} */
+    FLabel getBtnRandomOpponent();
+    
     /** @return {@link forge.toolbox.FLabel} */
     FLabel getBtnBazaar();
 

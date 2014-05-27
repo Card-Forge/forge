@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <properties>
         <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
         <packaging.type>jar</packaging.type>
@@ -18,7 +18,7 @@
     <artifactId>forge-gui-android</artifactId>
     <packaging>${packaging.type}</packaging>
     <name>Forge Android</name>
-    
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
@@ -213,7 +213,7 @@
                                 <inherited>true</inherited>
                                 <configuration>
                                     <removeExistingSignatures>true</removeExistingSignatures>
-                                    <archiveDirectory/>
+                                    <archiveDirectory />
                                     <includes>
                                         <include>${project.build.directory}/${project.build.finalName}/${project.build.finalName}.apk</include>
                                     </includes>
@@ -277,12 +277,21 @@
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
                                             </fileset>
-                                            <fileset dir="${project.build.directory}" includes="${project.build.finalName}-signed-aligned.apk" />
+                                            <fileset dir="${project.build.directory}"
+                                                includes="${project.build.finalName}-signed-aligned.apk" />
                                         </copy>
-                                        <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
-                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
-                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res.zip" basedir="${basedir}/../forge-gui/res" level="1" />
-                                        <zip destfile="${project.build.directory}/${project.build.finalName}.zip" basedir="${project.build.directory}/${project.build.finalName}" level="1" />
+                                        <mkdir
+                                            dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
+                                        <zip
+                                            destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip"
+                                            basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+                                        <zip
+                                            destfile="${project.build.directory}/${project.build.finalName}/res.zip"
+                                            basedir="${basedir}/../forge-gui/res" level="1" />
+                                        <zip
+                                            destfile="${project.build.directory}/${project.build.finalName}.zip"
+                                            basedir="${project.build.directory}/${project.build.finalName}"
+                                            level="1" />
                                     </target>
                                 </configuration>
                                 <goals>
@@ -299,52 +308,57 @@
             <properties>
                 <packaging.type>apk</packaging.type>
             </properties>
-			<build>
-			    <plugins>
-			        <plugin>
-			         <groupId>org.apache.maven.plugins</groupId>
-			         <artifactId>maven-antrun-plugin</artifactId>
-			         <version>1.7</version>
-			         <dependencies>
-			             <dependency>
-			                 <groupId>org.apache.ant</groupId>
-			                 <artifactId>ant-nodeps</artifactId>
-			                 <version>1.8.1</version>
-			             </dependency>
-			            <dependency>
-			              <groupId>commons-net</groupId>
-			              <artifactId>commons-net</artifactId>
-			              <version>1.4.1</version>
-			            </dependency>
-			            <dependency>
-			              <groupId>ant</groupId>
-			              <artifactId>ant-commons-net</artifactId>
-			              <version>1.6.5</version>
-			            </dependency>
-			         </dependencies>
-			         <executions>
-			             <execution>
-			                 <id>android-ftp</id>
-			                 <phase>package</phase>
-			                 <configuration>
-			                     <target>
-			                         <ftp action="mkdir" password="${cardforge.pass}" server="ftp.cardforge.org" userid="${cardforge.user}" passive="true" remotedir="releases/forge/forge-gui-android/${maven.build.timestamp}" />
-			                         <ftp password="${cardforge.pass}" server="ftp.cardforge.org" userid="${cardforge.user}" passive="true" remotedir="releases/forge/forge-gui-android/${maven.build.timestamp}/">
-			                             <fileset dir="${project.build.directory}/${project.build.finalName}">
-			                                 <include name="${project.build.finalName}-signed-aligned.apk"/>
-			                                 <include name="res.zip"/>
-			                             </fileset>
-			                         </ftp>
-			                     </target>
-			                 </configuration>
-			                 <goals>
-			                     <goal>run</goal>
-			                 </goals>
-			             </execution>
-			         </executions>
-			     </plugin>
-			    </plugins>
-			</build>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>commons-net</groupId>
+                                <artifactId>commons-net</artifactId>
+                                <version>1.4.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>ant</groupId>
+                                <artifactId>ant-commons-net</artifactId>
+                                <version>1.6.5</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>android-ftp</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target>
+                                        <ftp action="mkdir" password="${cardforge.pass}" server="ftp.cardforge.org"
+                                            userid="${cardforge.user}" passive="true"
+                                            remotedir="releases/forge/forge-gui-android/${maven.build.timestamp}" />
+                                        <ftp password="${cardforge.pass}" server="ftp.cardforge.org"
+                                            userid="${cardforge.user}" passive="true"
+                                            remotedir="releases/forge/forge-gui-android/${maven.build.timestamp}/">
+                                            <fileset
+                                                dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="${project.build.finalName}-signed-aligned.apk" />
+                                                <include name="res.zip" />
+                                            </fileset>
+                                        </ftp>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

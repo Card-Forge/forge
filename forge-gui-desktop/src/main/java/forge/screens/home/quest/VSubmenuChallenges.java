@@ -285,4 +285,10 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
 	public FCheckBox getCbCharm() {
 		return cbCharm;
 	}
+
+    @Override
+    public FLabel getBtnRandomOpponent() {
+        return null;
+    }
+    
 }
