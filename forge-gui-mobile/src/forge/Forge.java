@@ -33,6 +33,7 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
+import forge.screens.match.FControl;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
@@ -202,6 +203,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void pause() {
+        FControl.pause();
     }
 
     @Override

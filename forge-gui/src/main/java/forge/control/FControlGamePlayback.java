@@ -6,7 +6,6 @@ import forge.FThreads;
 import forge.GuiBase;
 import forge.game.event.*;
 import forge.match.input.InputPlaybackControl;
-
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -173,5 +172,4 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     public void setSpeed(boolean isFast) {
         fasterPlayback  = isFast;
     }
-
 }
