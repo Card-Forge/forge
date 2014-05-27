@@ -2,6 +2,8 @@ package forge.match.input;
 
 import forge.GuiBase;
 import forge.control.FControlGamePlayback;
+import forge.game.Game;
+import forge.game.phase.PhaseHandler;
 
 
 public class InputPlaybackControl extends InputSyncronizedBase implements InputSynchronized {
@@ -25,6 +27,23 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         ButtonUtil.enableAllFocusOk();
     }
 
+    //update message based on current turn and paused state
+    private int currentTurn;
+    public void updateTurnMessage() {
+        Game game = GuiBase.getInterface().getGame();
+        if (isPaused) {
+            showMessage(getTurnPhasePriorityMessage(game));
+            currentTurn = 0;
+        }
+        else {
+            final PhaseHandler ph = game.getPhaseHandler();
+            if (currentTurn == ph.getTurn()) { return; }
+
+            currentTurn = ph.getTurn();
+            showMessage("Turn " + currentTurn + " (" + ph.getPlayerTurn() + ")");
+        }
+    }
+
     private void setPause(boolean pause) {
         isPaused = pause; 
         if (isPaused) {
@@ -32,12 +51,7 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         }
         else {
             ButtonUtil.setButtonText("Pause", isFast ? "1x Speed" : "10x Faster");
-            showMessage("Press pause to pause game.");
         }
-    }
-
-    public void onGamePaused() {
-        showMessage(getTurnPhasePriorityMessage(GuiBase.getInterface().getGame()));
     }
 
     public void pause() {

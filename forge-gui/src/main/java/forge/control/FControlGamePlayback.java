@@ -6,6 +6,7 @@ import forge.FThreads;
 import forge.GuiBase;
 import forge.game.event.*;
 import forge.match.input.InputPlaybackControl;
+
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -112,14 +113,16 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventPlayerPriority event) {
+        inputPlayback.updateTurnMessage();
         if (paused.get()) {
             try {
-                inputPlayback.onGamePaused();
                 gameThreadPauser.await();
                 gameThreadPauser.reset();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
-            } catch (BrokenBarrierException e) {
+            }
+            catch (BrokenBarrierException e) {
                 e.printStackTrace();
             }
         }
