@@ -5,6 +5,7 @@ import forge.download.GuiDownloadPicturesLQ;
 import forge.download.GuiDownloadPrices;
 import forge.download.GuiDownloadQuestImages;
 import forge.download.GuiDownloadSetPicturesLQ;
+import forge.download.GuiDownloader;
 import forge.error.BugReporter;
 import forge.gui.ImportDialog;
 import forge.gui.framework.ICDoc;
@@ -24,13 +25,13 @@ public enum CSubmenuDownloaders implements ICDoc {
     private final UiCommand cmdLicensing = new UiCommand() { @Override
         public void run() { VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing(); } };
     private final UiCommand cmdPicDownload  = new UiCommand() { @Override
-        public void run() { new GuiDownloadPicturesLQ(); } };
+        public void run() { new GuiDownloader(new GuiDownloadPicturesLQ()); } };
     private final UiCommand cmdSetDownload = new UiCommand() { @Override
-        public void run() { new GuiDownloadSetPicturesLQ(); } };
+        public void run() { new GuiDownloader(new GuiDownloadSetPicturesLQ()); } };
     private final UiCommand cmdQuestImages = new UiCommand() { @Override
-        public void run() { new GuiDownloadQuestImages(); } };
+        public void run() { new GuiDownloader(new GuiDownloadQuestImages()); } };
     private final UiCommand cmdDownloadPrices = new UiCommand() { @Override
-        public void run() { new GuiDownloadPrices(); } };
+        public void run() { new GuiDownloader(new GuiDownloadPrices()); } };
     private final UiCommand cmdHowToPlay = new UiCommand() { @Override
         public void run() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
     private final UiCommand cmdImportPictures = new UiCommand() { @Override

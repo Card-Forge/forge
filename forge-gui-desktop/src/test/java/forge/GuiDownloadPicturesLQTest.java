@@ -1,6 +1,7 @@
 package forge;
 
 import forge.download.GuiDownloadPicturesLQ;
+import forge.download.GuiDownloader;
 
 import org.testng.annotations.Test;
 
@@ -15,6 +16,6 @@ public class GuiDownloadPicturesLQTest {
      */
     @Test(enabled = false, timeOut = 1000)
     public void guiDownloadPicturesTest1() {
-        new GuiDownloadPicturesLQ();
+        new GuiDownloader(new GuiDownloadPicturesLQ());
     }
 }

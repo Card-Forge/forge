@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Graphics;
+import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -310,5 +311,21 @@ public class FLabel extends FDisplayObject implements IButton {
             g.drawText(text, font, textColor, x, y, w, h, false, alignment, true);
             g.endClip();
         }
+    }
+
+    //use FEventHandler one except when references as IButton
+    @Override
+    public void setCommand(final UiCommand command0) {
+        setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                command0.run();
+            }
+        });
+    }
+
+    @Override
+    public boolean requestFocusInWindow() {
+        return false;
     }
 }

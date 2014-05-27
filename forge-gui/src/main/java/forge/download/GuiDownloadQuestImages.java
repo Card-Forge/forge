@@ -22,27 +22,9 @@ import forge.properties.ForgeConstants;
 import java.util.Map;
 import java.util.TreeMap;
 
-/** */
-@SuppressWarnings("serial")
-public class GuiDownloadQuestImages extends GuiDownloader {
-    /**
-     * <p>
-     * Constructor for GuiDownloadQuestImages.
-     * </p>
-     */
-    public GuiDownloadQuestImages() {
-        super();
-    }
-
-    /**
-     * <p>
-     * getNeededCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.download.GuiDownloadSetPicturesLQ} objects.
-     */
+public class GuiDownloadQuestImages extends GuiDownloadService {
     @Override
-    protected final Map<String, String> getNeededImages() {
+    protected final Map<String, String> getNeededFiles() {
         // read all card names and urls
         final Map<String, String> urls = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 

@@ -17,6 +17,7 @@
  */
 package forge.toolbox;
 
+import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.framework.ILocalRepaint;
 import forge.interfaces.IButton;
@@ -236,5 +237,15 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
         FSkin.drawImage(g2d, imgR, this.w - this.h, 0, this.h, this.h);
 
         super.paintComponent(g);
+    }
+
+    @Override
+    public void setCommand(final UiCommand command) {
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                command.run();
+            }
+        });
     }
 }

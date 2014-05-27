@@ -627,4 +627,9 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
             super.setIcon(new ImageIcon(img.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
         }
     }
+
+    @Override
+    public void setCommand(UiCommand command0) {
+        cmdClick = command0;
+    }
 }

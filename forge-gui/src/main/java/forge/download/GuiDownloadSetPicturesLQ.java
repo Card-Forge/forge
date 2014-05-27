@@ -31,14 +31,9 @@ import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
-@SuppressWarnings("serial")
-public class GuiDownloadSetPicturesLQ extends GuiDownloader {
-    public GuiDownloadSetPicturesLQ() {
-        super();
-    }
-
+public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
     @Override
-    protected final Map<String, String> getNeededImages() {
+    protected final Map<String, String> getNeededFiles() {
         Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (final PaperCard c : Iterables.concat(FModel.getMagicDb().getCommonCards().getAllCards(), FModel.getMagicDb().getVariantCards().getAllCards())) {

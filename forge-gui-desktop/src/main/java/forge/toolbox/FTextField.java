@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import forge.gui.MouseUtil;
+import forge.interfaces.ITextField;
 import forge.toolbox.FSkin.SkinnedTextField;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ import java.awt.event.FocusEvent;
  *
  */
 @SuppressWarnings("serial")
-public class FTextField extends SkinnedTextField {
+public class FTextField extends SkinnedTextField implements ITextField {
     /** 
      * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch).

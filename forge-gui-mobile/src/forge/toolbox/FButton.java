@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
+import forge.UiCommand;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -226,6 +227,22 @@ public class FButton extends FDisplayObject implements IButton {
         case Keys.SPACE:
             return trigger(); //trigger button on Enter or Space
         }
+        return false;
+    }
+
+    //use FEventHandler one except when references as IButton
+    @Override
+    public void setCommand(final UiCommand command0) {
+        setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                command0.run();
+            }
+        });
+    }
+
+    @Override
+    public boolean requestFocusInWindow() {
         return false;
     }
 }

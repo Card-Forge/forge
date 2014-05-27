@@ -87,4 +87,5 @@ public interface IGuiBase {
     ForgeProfileProperties getProfileProps();
     IAudioClip createAudioClip(String filename);
     void startAltSoundSystem(String filename, boolean isSynchronized);
+    void clearImageCache();
 }

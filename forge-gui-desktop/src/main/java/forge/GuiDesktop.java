@@ -448,4 +448,9 @@ public class GuiDesktop implements IGuiBase {
     public void startAltSoundSystem(String filename, boolean isSynchronized) {
         new AltSoundSystem(filename, isSynchronized).start();
     }
+
+    @Override
+    public void clearImageCache() {
+        ImageCache.clear();
+    }
 }

@@ -9,11 +9,12 @@ import forge.Forge.KeyInputAdapter;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.interfaces.ITextField;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
 
-public class FTextField extends FDisplayObject {
+public class FTextField extends FDisplayObject implements ITextField {
     private static final FSkinFont DEFAULT_FONT = FSkinFont.get(14);
     private static final float BORDER_THICKNESS = Utils.scaleX(1);
     protected static final float PADDING = Utils.scaleX(5);
@@ -329,5 +330,10 @@ public class FTextField extends FDisplayObject {
 
     protected float getRightPadding() {
         return PADDING;
+    }
+
+    @Override
+    public boolean requestFocusInWindow() {
+        return false;
     }
 }

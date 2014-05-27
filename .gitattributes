@@ -705,10 +705,6 @@ forge-gui-desktop/src/main/java/forge/deckchooser/DecksComboBoxEvent.java -text
 forge-gui-desktop/src/main/java/forge/deckchooser/FDeckChooser.java -text
 forge-gui-desktop/src/main/java/forge/deckchooser/FDeckViewer.java -text
 forge-gui-desktop/src/main/java/forge/deckchooser/IDecksComboBoxListener.java -text
-forge-gui-desktop/src/main/java/forge/download/GuiDownloadPicturesLQ.java -text
-forge-gui-desktop/src/main/java/forge/download/GuiDownloadPrices.java -text
-forge-gui-desktop/src/main/java/forge/download/GuiDownloadQuestImages.java -text
-forge-gui-desktop/src/main/java/forge/download/GuiDownloadSetPicturesLQ.java -text
 forge-gui-desktop/src/main/java/forge/download/GuiDownloader.java -text
 forge-gui-desktop/src/main/java/forge/download/package-info.java -text
 forge-gui-desktop/src/main/java/forge/error/BugReportDialog.java -text
@@ -16331,6 +16327,11 @@ forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/deck/io/DeckHtmlSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadPicturesLQ.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadPrices.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadQuestImages.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadService.java -text
+forge-gui/src/main/java/forge/download/GuiDownloadSetPicturesLQ.java -text
 forge-gui/src/main/java/forge/error/BugReporter.java -text
 forge-gui/src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/package-info.java svneol=native#text/plain
@@ -16343,6 +16344,7 @@ forge-gui/src/main/java/forge/gauntlet/GauntletIO.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
+forge-gui/src/main/java/forge/interfaces/ITextField.java -text
 forge-gui/src/main/java/forge/itemmanager/ColumnDef.java -text
 forge-gui/src/main/java/forge/itemmanager/GroupDef.java -text
 forge-gui/src/main/java/forge/itemmanager/IItemManager.java -text
