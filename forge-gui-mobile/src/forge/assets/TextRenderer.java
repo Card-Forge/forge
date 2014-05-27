@@ -273,7 +273,7 @@ public class TextRenderer {
                         else {
                             String currentLineText = text.substring(0, lastSpaceIdx);
                             if (!currentLineText.isEmpty()) {
-                                pieceWidth = font.getBounds(text).width;
+                                pieceWidth = font.getBounds(currentLineText).width;
                                 addPiece(new TextPiece(currentLineText, inReminderTextCount > 0 || atReminderTextEnd), lineNum, x, y, pieceWidth, lineHeight);
                                 consecutiveSymbols = 0;
                             }
