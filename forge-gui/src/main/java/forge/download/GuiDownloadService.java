@@ -68,7 +68,7 @@ public abstract class GuiDownloadService implements Runnable {
     private int type;
 
     // Progress variables
-    private Map<String, String> cards; // local path -> url
+    private Map<String, String> files; // local path -> url
     private boolean cancel;
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
@@ -91,7 +91,7 @@ public abstract class GuiDownloadService implements Runnable {
             @Override
             public void run() {
                 try {
-                    cards = getNeededFiles();
+                    files = getNeededFiles();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -107,14 +107,14 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     private void readyToStart() {
-        if (cards.isEmpty()) {
+        if (files.isEmpty()) {
             barProgress.setDescription("All items have been downloaded.");
             btnStart.setText("OK");
             btnStart.setCommand(cmdClose);
         }
         else {
-            barProgress.setMaximum(cards.size());
-            barProgress.setDescription(cards.size() == 1 ? "1 item found." : cards.size() + " items found.");
+            barProgress.setMaximum(files.size());
+            barProgress.setDescription(files.size() == 1 ? "1 item found." : files.size() + " items found.");
             //for(Entry<String, String> kv : cards.entrySet()) System.out.printf("Will get %s from %s%n", kv.getKey(), kv.getValue());
             btnStart.setCommand(cmdStartDownload);
         }
@@ -158,7 +158,7 @@ public abstract class GuiDownloadService implements Runnable {
         return tTime / Math.max(1, numNonzero);
     }
 
-    private void update(final int card, final File dest) {
+    private void update(final int count, final File dest) {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
@@ -168,10 +168,10 @@ public abstract class GuiDownloadService implements Runnable {
 
                 final int a = getAverageTimePerObject();
 
-                if (card != cards.size()) {
-                    sb.append(card + "/" + cards.size() + " - ");
+                if (count != files.size()) {
+                    sb.append(count + "/" + files.size() + " - ");
 
-                    long t2Go = (cards.size() - card) * a;
+                    long t2Go = (files.size() - count) * a;
 
                     if (t2Go > 3600000) {
                         sb.append(String.format("%02d:", t2Go / 3600000));
@@ -188,15 +188,16 @@ public abstract class GuiDownloadService implements Runnable {
                 }
                 else {
                     sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
-                            card, cards.size()));
+                            count, files.size()));
                     btnStart.setText("OK");
                     btnStart.setCommand(cmdClose);
                     btnStart.setEnabled(true);
                     btnStart.requestFocusInWindow();
                 }
 
+                barProgress.setValue(count);
                 barProgress.setDescription(sb.toString());
-                System.out.println(card + "/" + cards.size() + " - " + dest);
+                System.out.println(count + "/" + files.size() + " - " + dest);
             }
         });
     }
@@ -222,7 +223,7 @@ public abstract class GuiDownloadService implements Runnable {
         }
 
         int iCard = 0;
-        for (Entry<String, String> kv : cards.entrySet()) {
+        for (Entry<String, String> kv : files.entrySet()) {
             if (cancel) { break; }
 
             String url = kv.getValue();
