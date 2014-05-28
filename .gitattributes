@@ -1101,7 +1101,6 @@ forge-gui-mobile/src/forge/card/CardRenderer.java -text
 forge-gui-mobile/src/forge/card/CardZoom.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
-forge-gui-mobile/src/forge/download/GuiDownloader.java -text
 forge-gui-mobile/src/forge/error/BugReportDialog.java -text
 forge-gui-mobile/src/forge/itemmanager/CardManager.java -text
 forge-gui-mobile/src/forge/itemmanager/DeckManager.java -text
@@ -1176,6 +1175,9 @@ forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestScreen.java -text
 forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
+forge-gui-mobile/src/forge/screens/settings/FilesPage.java -text
+forge-gui-mobile/src/forge/screens/settings/GuiDownloader.java -text
+forge-gui-mobile/src/forge/screens/settings/HelpPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
 forge-gui-mobile/src/forge/toolbox/DualListBox.java -text

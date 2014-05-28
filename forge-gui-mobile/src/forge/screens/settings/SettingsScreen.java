@@ -16,9 +16,10 @@ public class SettingsScreen extends TabPageScreen {
 
     public SettingsScreen() {
         super(new TabPage[] {
-                new SettingsPage()
+                new SettingsPage(),
+                new FilesPage(),
+                new HelpPage()
         });
-        // TODO Auto-generated constructor stub
     }
 
     @Override

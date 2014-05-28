@@ -15,12 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.download;
+package forge.screens.settings;
 
 import java.net.Proxy;
 
 import forge.UiCommand;
 import forge.assets.FSkinFont;
+import forge.download.GuiDownloadService;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FRadioButton.RadioButtonGroup;

@@ -153,7 +153,7 @@ public class TabPageScreen extends FScreen {
 
                 //draw caption
                 float y = h - TAB_PADDING - TAB_FONT.getCapHeight();
-                g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, 0, y, w, h - y, false, HAlignment.CENTER, false);
+                g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, TAB_PADDING, y - TAB_PADDING, w - 2 * TAB_PADDING, h - y + TAB_PADDING, false, HAlignment.CENTER, true);
 
                 //draw icon if one
                 if (icon != null) {
