@@ -1453,7 +1453,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 cl.addAll(opponent.getZone(ZoneType.Hand).getCardsPlayerCanActivate(this));
             }
         }
-
+        cl.addAll(this.getGame().getCardsPlayerCanActivateInStack());
         return cl;
     }
 

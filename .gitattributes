@@ -7923,6 +7923,7 @@ forge-gui/res/cardsfolder/l/lightning_reaver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lightning_reflexes.txt -text
 forge-gui/res/cardsfolder/l/lightning_rift.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lightning_serpent.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/lightning_storm.txt -text
 forge-gui/res/cardsfolder/l/lightning_strike.txt -text
 forge-gui/res/cardsfolder/l/lightning_surge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/lightning_talons.txt svneol=native#text/plain

@@ -51,6 +51,7 @@ import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementHandler;
+import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -268,6 +269,23 @@ public class Game {
      */
     public final Zone getStackZone() {
         return this.stackZone;
+    }
+
+    public List<Card> getCardsPlayerCanActivateInStack() {
+        List<Card> list = this.stackZone.getCards();
+        list = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                for (final SpellAbility sa : c.getSpellAbilities()) {
+                    final ZoneType restrictZone = sa.getRestrictions().getZone();
+                    if (ZoneType.Stack == restrictZone) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        return list;
     }
 
     /**
@@ -709,5 +727,5 @@ public class Game {
         }
         return rarities;
     }
-    
+
 }

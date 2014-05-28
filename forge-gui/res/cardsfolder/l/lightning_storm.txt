@@ -1,0 +1,10 @@
+Name:Lightning Storm
+ManaCost:1 R R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.
+SVar:X:Count$CardCounters.CHARGE/Plus.3
+A:AB$ PutCounter | Cost$ Discard<1/Land> | CounterType$ CHARGE | CounterNum$ 2 | Defined$ Self | ActivationZone$ Stack | SubAbility$ DBChangeTarget | AnyPlayer$ True | SpellDescription$ Put two charge counters on CARDNAME. You may choose a new target for it. Any player may activate this ability but only if CARDNAME is on the stack.
+SVar:DBChangeTarget:DB$ ChangeTargets | Defined$ SourceFirstSpell | Optional$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_storm.jpg
+Oracle:Lightning Storm deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.\nDiscard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it. Any player may activate this ability but only if Lightning Storm is on the stack.
