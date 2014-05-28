@@ -1145,6 +1145,7 @@ forge-gui-mobile/src/forge/menu/FTooltip.java -text
 forge-gui-mobile/src/forge/screens/FScreen.java -text
 forge-gui-mobile/src/forge/screens/LaunchScreen.java -text
 forge-gui-mobile/src/forge/screens/SplashScreen.java -text
+forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
@@ -1175,6 +1176,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestScreen.java -text
 forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
+forge-gui-mobile/src/forge/screens/settings/SettingsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
 forge-gui-mobile/src/forge/toolbox/DualListBox.java -text
 forge-gui-mobile/src/forge/toolbox/FButton.java -text

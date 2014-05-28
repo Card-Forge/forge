@@ -83,21 +83,20 @@ public abstract class FScreen extends FContainer {
     }
 
     public static abstract class Header extends FContainer {
-        protected static final FSkinColor BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.alphaColor(1f);
-        protected static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
-        protected static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
-        protected static final float LINE_THICKNESS = Utils.scaleY(1);
+        public static final FSkinColor BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.alphaColor(1f);
+        public static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
+        public static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
+        public static final float LINE_THICKNESS = Utils.scaleY(1);
 
         public abstract float getPreferredHeight();
     }
     private static class DefaultHeader extends Header {
-        protected static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+        private static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         private static final FSkinFont FONT = FSkinFont.get(16);
 
-        private final FLabel lblCaption, btnBack;
+        private final FLabel btnBack, lblCaption;
 
         public DefaultHeader(String headerCaption) {
-            lblCaption = add(new FLabel.Builder().text(headerCaption).font(FONT).align(HAlignment.CENTER).build());
             btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -105,6 +104,7 @@ public abstract class FScreen extends FContainer {
                 }
             }).build());
             btnBack.setSize(HEIGHT, HEIGHT);
+            lblCaption = add(new FLabel.Builder().text(headerCaption).font(FONT).align(HAlignment.CENTER).build());
         }
 
         @Override
@@ -125,16 +125,16 @@ public abstract class FScreen extends FContainer {
 
         @Override
         protected void doLayout(float width, float height) {
-            lblCaption.setBounds(0, 0, width, height);
+            lblCaption.setBounds(height, 0, width - 2 * height, height);
         }
     }
 
-    private static class BackIcon implements FImage {
+    protected static class BackIcon implements FImage {
         private static final float THICKNESS = Utils.scaleMax(3);
         private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
         private final float width, height;
-        private BackIcon(float width0, float height0) {
+        public BackIcon(float width0, float height0) {
             width = width0;
             height = height0;
         }
@@ -151,7 +151,7 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public void draw(Graphics g, float x, float y, float w, float h) {
-            float xMid = x + w / 3; 
+            float xMid = x + w * 0.4f; 
             float yMid = y + h / 2;
             float offsetX = h / 8;
             float offsetY = w / 4;
