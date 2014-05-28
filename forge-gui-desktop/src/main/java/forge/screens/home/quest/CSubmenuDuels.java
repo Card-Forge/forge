@@ -85,10 +85,12 @@ public enum CSubmenuDuels implements ICDoc {
         view.getBtnRandomOpponent().setCommand(new UiCommand() {
             @Override
             public void run() { 
-                FModel.getQuest().getDuelsManager().randomizeOpponents();
-                final List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
-                SSubmenuQuestUtil.setEvent(duels.get((int) (Math.random() * duels.size())));
-                SSubmenuQuestUtil.startGame();
+                if (SSubmenuQuestUtil.canStartGame()) {
+                    FModel.getQuest().getDuelsManager().randomizeOpponents();
+                    final List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
+                    SSubmenuQuestUtil.setEvent(duels.get((int) (Math.random() * duels.size())));
+                    SSubmenuQuestUtil.startGame();
+                }
             }
         });
         

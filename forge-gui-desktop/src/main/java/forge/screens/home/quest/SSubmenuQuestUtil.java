@@ -471,6 +471,46 @@ public class SSubmenuQuestUtil {
             }
         });
     }
+    
+    /**
+     * Checks to see if a game can be started and displays relevant dialogues.
+     * @return
+     */
+    public static boolean canStartGame() {
+        
+        if (!checkActiveQuest("Start a duel.") || null == event) {
+            return false;
+        }
+        
+        Deck deck = null;
+        if (event instanceof QuestEventChallenge) {
+            // Predefined HumanDeck
+            deck = ((QuestEventChallenge) event).getHumanDeck();
+        }
+        
+        if (deck == null) {
+            // If no predefined Deck, use the Player's Deck
+            deck = SSubmenuQuestUtil.getCurrentDeck();
+        }
+        
+        if (deck == null) {
+            String msg = "Please select a Quest Deck.";
+            FOptionPane.showErrorDialog(msg, "No Deck");
+            System.out.println(msg);
+            return false;
+        }
+        
+        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
+            if (null != errorMessage) {
+                FOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
+                return false;
+            }
+        }
+        
+        return true;
+        
+    }
 
     /** Duplicate in DeckEditorQuestMenu and
      * probably elsewhere...can streamline at some point
