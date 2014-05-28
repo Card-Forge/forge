@@ -17,6 +17,8 @@
  */
 package forge.download;
 
+import java.net.Proxy;
+
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.SOverlayUtils;
@@ -27,15 +29,13 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.net.*;
-
 @SuppressWarnings("serial")
 public class GuiDownloader extends DefaultBoundedRangeModel {
     public static final Proxy.Type[] TYPES = Proxy.Type.values();
 
     // Swing components
     private final FPanel pnlDialog = new FPanel(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-    private final FProgressBar barProgress = new FProgressBar();
+    private final FProgressBar progressBar = new FProgressBar();
     private final FButton btnStart = new FButton("Start");
     private final FTextField txtAddress = new FTextField.Builder().ghostText("Proxy Address").build();
     private final FTextField txtPort = new FTextField.Builder().ghostText("Proxy Port").build();
@@ -77,15 +77,15 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         btnStart.setFont(FSkin.getFont(18));
         btnStart.setVisible(false);
 
-        barProgress.reset();
-        barProgress.setString("Scanning for existing items...");
+        progressBar.reset();
+        progressBar.setString("Scanning for existing items...");
         pnlDialog.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
         // Layout
         pnlDialog.add(grpPanel, "w 50%!");
         pnlDialog.add(txtAddress, "w 95%!, h 30px!, gap 2% 0 0 10px");
         pnlDialog.add(txtPort, "w 95%!, h 30px!, gap 2% 0 0 10px");
-        pnlDialog.add(barProgress, "w 95%!, h 40px!, gap 2% 0 20px 0");
+        pnlDialog.add(progressBar, "w 95%!, h 40px!, gap 2% 0 20px 0");
         pnlDialog.add(btnStart, "w 200px!, h 40px!, gap 0 0 20px 0, ax center");
         pnlDialog.add(btnClose, "w 20px!, h 20px!, pos 370px 10px");
 
@@ -95,7 +95,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         pnl.add(pnlDialog, "w 400px!, h 350px!, ax center, ay center");
         SOverlayUtils.showOverlay();
 
-        service.initialize(txtAddress, txtPort, barProgress, btnStart, cmdClose, new Runnable() {
+        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
             @Override
             public void run() {
                 fireStateChanged();

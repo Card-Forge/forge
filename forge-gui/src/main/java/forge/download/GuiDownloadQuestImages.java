@@ -24,6 +24,11 @@ import java.util.TreeMap;
 
 public class GuiDownloadQuestImages extends GuiDownloadService {
     @Override
+    public String getTitle() {
+        return "Download Quest Images";
+    }
+
+    @Override
     protected final Map<String, String> getNeededFiles() {
         // read all card names and urls
         final Map<String, String> urls = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);

@@ -49,7 +49,7 @@ public abstract class GuiDownloadService implements Runnable {
     //Components passed from GUI component displaying download
     private ITextField txtAddress;
     private ITextField txtPort;
-    private IProgressBar barProgress;
+    private IProgressBar progressBar;
     private IButton btnStart;
     private UiCommand cmdClose;
     private Runnable onUpdate;
@@ -78,10 +78,10 @@ public abstract class GuiDownloadService implements Runnable {
     protected GuiDownloadService() {
     }
 
-    public void initialize(ITextField txtAddress0, ITextField txtPort0, IProgressBar barProgress0, IButton btnStart0, UiCommand cmdClose0, Runnable onUpdate0) {
+    public void initialize(ITextField txtAddress0, ITextField txtPort0, IProgressBar progressBar0, IButton btnStart0, UiCommand cmdClose0, Runnable onUpdate0) {
         txtAddress = txtAddress0;
         txtPort = txtPort0;
-        barProgress = barProgress0;
+        progressBar = progressBar0;
         btnStart = btnStart0;
         cmdClose = cmdClose0;
         onUpdate = onUpdate0;
@@ -108,13 +108,13 @@ public abstract class GuiDownloadService implements Runnable {
 
     private void readyToStart() {
         if (files.isEmpty()) {
-            barProgress.setDescription("All items have been downloaded.");
+            progressBar.setDescription("All items have been downloaded.");
             btnStart.setText("OK");
             btnStart.setCommand(cmdClose);
         }
         else {
-            barProgress.setMaximum(files.size());
-            barProgress.setDescription(files.size() == 1 ? "1 item found." : files.size() + " items found.");
+            progressBar.setMaximum(files.size());
+            progressBar.setDescription(files.size() == 1 ? "1 item found." : files.size() + " items found.");
             //for(Entry<String, String> kv : cards.entrySet()) System.out.printf("Will get %s from %s%n", kv.getKey(), kv.getValue());
             btnStart.setCommand(cmdStartDownload);
         }
@@ -162,7 +162,9 @@ public abstract class GuiDownloadService implements Runnable {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                onUpdate.run();
+                if (onUpdate != null) {
+                    onUpdate.run();
+                }
 
                 final StringBuilder sb = new StringBuilder();
 
@@ -195,8 +197,8 @@ public abstract class GuiDownloadService implements Runnable {
                     btnStart.requestFocusInWindow();
                 }
 
-                barProgress.setValue(count);
-                barProgress.setDescription(sb.toString());
+                progressBar.setValue(count);
+                progressBar.setDescription(sb.toString());
                 System.out.println(count + "/" + files.size() + " - " + dest);
             }
         });
@@ -289,6 +291,7 @@ public abstract class GuiDownloadService implements Runnable {
         }
     }
 
+    public abstract String getTitle();
     protected abstract Map<String, String> getNeededFiles();
 
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir) {

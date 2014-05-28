@@ -31,6 +31,11 @@ import java.util.TreeMap;
 
 public class GuiDownloadPicturesLQ extends GuiDownloadService {
     @Override
+    public String getTitle() {
+        return "Download LQ Card Pictures";
+    }
+
+    @Override
     protected final Map<String, String> getNeededFiles() {
         Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 

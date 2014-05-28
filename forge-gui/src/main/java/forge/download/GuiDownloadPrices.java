@@ -24,6 +24,11 @@ import java.util.Map;
 
 public class GuiDownloadPrices extends GuiDownloadService {
     @Override
+    public String getTitle() {
+        return "Download Card Prices";
+    }
+
+    @Override
     protected Map<String, String> getNeededFiles() {
         Map<String, String> result = new HashMap<String, String>();
         result.put(ForgeConstants.QUEST_CARD_PRICE_FILE, ForgeConstants.URL_PRICE_DOWNLOAD);
