@@ -89,7 +89,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         pnlStats.add(lblWins, constraints);
         pnlStats.add(lblLosses, constraints);
         pnlStats.add(lblCredits, constraints);
-        pnlStats.add(lblWinStreak, constraints);
+        pnlStats.add(lblWinStreak, "h 40px!, gap 0 0 0 5px");
         pnlStats.add(lblLife, constraints);
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
