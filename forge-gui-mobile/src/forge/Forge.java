@@ -74,7 +74,7 @@ public class Forge implements ApplicationListener {
         splashScreen = new SplashScreen();
 
         //load model on background thread (using progress bar to report progress)
-        new Thread(new Runnable() {
+        FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
                 FModel.initialize(splashScreen.getProgressBar());
@@ -91,7 +91,7 @@ public class Forge implements ApplicationListener {
                     }
                 });
             }
-        }, "Game Startup").start(); //use thread name that starts with "Game" so GuiMobile.isGuiThread() returns false
+        });
     }
 
     private void afterDbLoaded() {

@@ -53,6 +53,13 @@ public class FThreads {
         GuiBase.getInterface().invokeInEdtAndWait(proc);
     }
 
+    private static int backgroundThreadCount;
+    public static void invokeInBackgroundThread(final Runnable proc) {
+        //start thread name with "Game" so isGuiThread() returns false on GuiMobile
+        new Thread(proc, "Game BT" + backgroundThreadCount).start();
+        backgroundThreadCount++;
+    }
+
     public static boolean isGuiThread() {
         return GuiBase.getInterface().isGuiThread();
     }

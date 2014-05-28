@@ -28,7 +28,6 @@ import forge.interfaces.IProgressBar;
 import forge.interfaces.ITextField;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
-import forge.util.ThreadUtil;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -60,7 +59,7 @@ public abstract class GuiDownloadService implements Runnable {
         public void run() {
             //invalidate image cache so newly downloaded images will be loaded
             GuiBase.getInterface().clearImageCache();
-            ThreadUtil.invokeInGameThread(this);
+            FThreads.invokeInBackgroundThread(GuiDownloadService.this);
             btnStart.setEnabled(false);
         }
     };
@@ -87,8 +86,8 @@ public abstract class GuiDownloadService implements Runnable {
         cmdClose = cmdClose0;
         onUpdate = onUpdate0;
 
-        // Free up the EDT by assembling card list on the game thread
-        ThreadUtil.invokeInGameThread(new Runnable() {
+        // Free up the EDT by assembling card list on a background thread
+        FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
                 try {
