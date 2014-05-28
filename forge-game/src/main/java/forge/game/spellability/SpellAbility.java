@@ -90,6 +90,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean delve = false;
     private boolean offering = false;
     private boolean morphup = false;
+    private int totalManaSpent = 0;
 
     /** The pay costs. */
     private Cost payCosts = null;
@@ -1755,6 +1756,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 AbilityUtils.resolve(deltrig);
             }
         }
+    }
+
+    public void setTotalManaSpent(int totManaSpent) {
+        this.totalManaSpent = totManaSpent;
+    }
+    
+    public int getTotalManaSpent() {
+        return this.totalManaSpent;
     }
 
 }

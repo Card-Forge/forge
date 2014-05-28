@@ -288,9 +288,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             this.frozenStack.push(si);
             return;
         }
+        int totManaSpent = sp.getPayingMana().size();
 
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
+            sp.setTotalManaSpent(totManaSpent);
             AbilityUtils.resolve(sp);
         } else {
             for (OptionalCost s : sp.getOptionalCosts()) {
@@ -301,14 +303,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             } else {
                 if (sp.isMultiKicker()) {
                     final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
-                    
                     boolean hasPaid = false;
                     do {
                         int mkMagnitude = source.getKickerMagnitude();
                         String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", source, mkMagnitude );
                         hasPaid = activator.getController().payManaOptional(source, costMultikicker, sp, prompt, ManaPaymentPurpose.Multikicker);
-                        if( hasPaid )
+                        if  (hasPaid) {
                             source.addMultiKickerMagnitude(1);
+                            totManaSpent += sp.getPayingMana().size();
+                            // TODO: paying mana is replaced by multikicker cost, this should be fixed in the future
+                        }
                     } while( hasPaid );
                 }
                 if (sp.isSpell() && source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
@@ -323,6 +327,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         hasPaid = activator.getController().payManaOptional(source, costPseudoKicker, sp, prompt, ManaPaymentPurpose.Multikicker);
                         if (hasPaid) {
                             source.addPseudoMultiKickerMagnitude(1);
+                            totManaSpent += 1;
                         }
                     } while (hasPaid);
                     if (source.getPseudoKickerMagnitude() > 0) {
@@ -357,12 +362,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     
                     final Cost costReplicate = new Cost(source.getManaCost(), false);
                     boolean hasPaid = false;
-                    
+                    int replicateCMC = source.getManaCost().getCMC();
                     do {
                         String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", source, magnitude);
                         hasPaid = activator.getController().payManaOptional(source, costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
-                        if( hasPaid )
+                        if (hasPaid) {
                             magnitude++;
+                            totManaSpent += replicateCMC;
+                        }
                     } while( hasPaid );
                     // Replicate Trigger
                     String effect = String.format("AB$ CopySpellAbility | Cost$ 0 | Defined$ SourceFirstSpell | Amount$ %d", magnitude);
@@ -374,6 +381,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             }
         }
+
+        sp.setTotalManaSpent(totManaSpent);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         HashMap<String, Object> runParams = new HashMap<String, Object>();

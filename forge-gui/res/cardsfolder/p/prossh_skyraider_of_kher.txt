@@ -1,0 +1,11 @@
+Name:Prossh, Skyraider of Kher
+ManaCost:3 B R G
+Types:Legendary Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast CARDNAME, put X 0/1 red Kobold creature tokens named Kobolds of Kher Keep onto the battlefield, where X is the amount of mana spent to cast CARDNAME.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Kobolds of Kher Keep | TokenTypes$ Creature,Kobold | TokenOwner$ You | TokenColors$ Red | TokenPower$ 0 | TokenToughness$ 1 | References$ X
+SVar:X:Count$FirstSpellTotalManaSpent
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prossh_skyraider_of_kher.jpg
+Oracle:Flying\nWhen you cast Prossh, Skyraider of Kher, put X 0/1 red Kobold creature tokens named Kobolds of Kher Keep onto the battlefield, where X is the amount of mana spent to cast Prossh.\nSacrifice another creature: Prossh gets +1/+0 until end of turn.
