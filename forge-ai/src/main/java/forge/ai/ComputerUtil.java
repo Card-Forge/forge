@@ -630,7 +630,7 @@ public class ComputerUtil {
         }
 
         if (typeList.size() < amount) {
-            return null;
+            return new ArrayList<Card>();
         }
 
         CardLists.sortByPowerAsc(typeList);
