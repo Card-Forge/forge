@@ -1101,6 +1101,7 @@ forge-gui-mobile/src/forge/card/CardRenderer.java -text
 forge-gui-mobile/src/forge/card/CardZoom.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
+forge-gui-mobile/src/forge/download/GuiDownloader.java -text
 forge-gui-mobile/src/forge/error/BugReportDialog.java -text
 forge-gui-mobile/src/forge/itemmanager/CardManager.java -text
 forge-gui-mobile/src/forge/itemmanager/DeckManager.java -text

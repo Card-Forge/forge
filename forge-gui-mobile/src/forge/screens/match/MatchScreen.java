@@ -39,7 +39,6 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
-    private final FMenuBar menuBar;
     private final VPrompt prompt;
     private final VLog log;
     private final VStack stack;
@@ -48,7 +47,7 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
 
     public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
-        super(false, null); //match screen has custom header
+        super(new FMenuBar());
 
         scroller = add(new FieldScroller());
         for (VPlayerPanel playerPanel : playerPanels0) {
@@ -77,7 +76,7 @@ public class MatchScreen extends FScreen {
         stack = new VStack(game.getStack(), localPlayer);
         devMenu = new VDevMenu();
 
-        menuBar = add(new FMenuBar());
+        FMenuBar menuBar = (FMenuBar)getHeader();
         menuBar.addTab("Game", new VGameMenu());
         menuBar.addTab("Players (" + playerPanels.size() + ")", new VPlayers());
         menuBar.addTab("Log", log);
@@ -123,8 +122,6 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        menuBar.setBounds(0, 0, width, menuBar.getPreferredHeight());
-        startY = menuBar.getHeight();
         scroller.setBounds(0, startY, width, height - VPrompt.HEIGHT - startY);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
     }

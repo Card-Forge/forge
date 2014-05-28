@@ -75,11 +75,11 @@ public class ViewWinLose extends FOverlay {
         }
 
         btnContinue.setText("Next Game");
-        btnContinue.setFontSize(22);
+        btnContinue.setFont(FSkinFont.get(22));
         btnRestart.setText("Start New Match");
-        btnRestart.setFontSize(22);
+        btnRestart.setFont(btnContinue.getFont());
         btnQuit.setText("Quit Match");
-        btnQuit.setFontSize(22);
+        btnQuit.setFont(btnContinue.getFont());
         btnContinue.setEnabled(!game0.getMatch().isMatchOver());
 
         lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).font(FSkinFont.get(18)).build());

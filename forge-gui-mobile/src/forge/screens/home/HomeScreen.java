@@ -21,9 +21,9 @@ public class HomeScreen extends FScreen {
     public static final float INSETS_FACTOR = 0.025f;
     private static final float GAP_Y_FACTOR = 0.01f;
     private final ArrayList<FButton> buttons = new ArrayList<FButton>();
-    
+
     public HomeScreen() {
-        super(false, null);
+        super((Header)null);
 
         addButton("Constructed", new FEventHandler() {
             @Override

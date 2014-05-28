@@ -63,7 +63,7 @@ public class AvatarSelector extends FScreen {
     };
 
     private AvatarSelector(final String playerName, final int currentIndex0, final List<Integer> usedAvatars0, final Callback<Integer> callback0) {
-        super(true, "Select Avatar for " + playerName);
+        super("Select Avatar for " + playerName);
 
         currentIndex = currentIndex0;
         usedAvatars = usedAvatars0;

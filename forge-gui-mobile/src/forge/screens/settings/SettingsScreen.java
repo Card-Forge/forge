@@ -32,7 +32,7 @@ public class SettingsScreen extends FScreen {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
 
     public SettingsScreen() {
-        super(true, "Settings");
+        super("Settings");
         lstSettings.setListItemRenderer(new SettingRenderer());
 
         lstSettings.addGroup("General Settings");
@@ -235,7 +235,7 @@ public class SettingsScreen extends FScreen {
             private final String currentValue = FModel.getPreferences().getPref(pref);
 
             private CustomSelectScreen() {
-                super(true, "Select " + label.substring(0, label.length() - 1));
+                super("Select " + label.substring(0, label.length() - 1));
                 lstOptions = add(new FList<String>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override

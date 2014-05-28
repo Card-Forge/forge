@@ -65,8 +65,11 @@ public class FButton extends FDisplayObject implements IButton {
         text = text0;
     }
 
-    public void setFontSize(int fontSize0) {
-        font = FSkinFont.get(fontSize0);
+    public FSkinFont getFont() {
+        return font;
+    }
+    public void setFont(FSkinFont font0) {
+        font = font0;
     }
 
     @Override
