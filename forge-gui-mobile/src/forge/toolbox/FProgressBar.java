@@ -96,7 +96,6 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
         progressTrailStart = -1;
     }
 
-    /** */
     private void calculateETA(int v0) {
         float tempMillis = new Date().getTime();
         float timePerUnit = (tempMillis - startMillis) / v0;
