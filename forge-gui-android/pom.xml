@@ -277,12 +277,17 @@
 								<phase>package</phase>
 								<configuration>
 									<target>
+									    <zip
+                                            destfile="${basedir}/../forge-gui/res/cardsfolder/cardsfolder.zip"
+                                            basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
 										<zip destfile="${project.build.directory}/assets.zip"
 											basedir="${basedir}/../forge-gui" level="1">
 											<include name="LICENSE.txt" />
 											<include name="README.txt" />
 											<include name="CHANGES.txt" />
 											<include name="res/**" />
+											<exclude name="res/cardsfolder/**" />
+                                            <include name="res/cardsfolder/cardsfolder.zip" />
 										</zip>
 									</target>
 								</configuration>
