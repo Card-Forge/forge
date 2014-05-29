@@ -139,7 +139,7 @@ public class FModel {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setDescription("Loading decks");
+                    progressBar.setDescription("Loading decks...");
                 }
             });
         }

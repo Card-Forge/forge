@@ -18,6 +18,7 @@ import java.util.zip.ZipFile;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FProgressBar;
@@ -55,7 +56,13 @@ public class AssetsDownloader {
     }
 
     private static void downloadAssets(final FProgressBar progressBar) {
-        progressBar.setDescription("Downloading resource files");
+        FThreads.invokeInEdtLater(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setShowProgressTrail(true);
+                progressBar.setDescription("Downloading resource files...");
+            }
+        });
 
         String url = "http://cardforge.org/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/assets.zip";
         final File destDir = new File(ForgeConstants.ASSETS_DIR);
@@ -116,8 +123,13 @@ public class AssetsDownloader {
             }
         }
 
-        //if assets.zip download successfully, unzip into destination folder
-        progressBar.setDescription("Unzipping resource files");
+        //if assets.zip downloaded successfully, unzip into destination folder
+        FThreads.invokeInEdtLater(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setDescription("Unzipping resource files...");
+            }
+        });
 
         try {
             ZipFile zipFile = new ZipFile(fileDest);
