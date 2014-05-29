@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
@@ -17,7 +18,6 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
-import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 
@@ -92,7 +92,6 @@ public class SplashScreen extends FContainer {
     private void checkForAssets() {
         if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
 
-        String versionStr = BuildInfo.getVersionString();
         File versionFile = new File(ForgeConstants.ASSETS_DIR + "version.txt");
         if (!versionFile.exists()) {
             try {
@@ -103,12 +102,12 @@ public class SplashScreen extends FContainer {
                 Gdx.app.exit(); //can't continue if this fails
             }
         }
-        else if (versionStr.equals(TextUtil.join(FileUtil.readFile(versionFile), "\n"))) {
+        else if (Forge.CURRENT_VERSION.equals(TextUtil.join(FileUtil.readFile(versionFile), "\n"))) {
             return; //if version matches what had been previously saved, no need to download assets
         }
 
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
-        FileUtil.writeFile(versionFile, versionStr);
+        FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
     }
 }
