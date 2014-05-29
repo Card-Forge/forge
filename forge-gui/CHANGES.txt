@@ -16,7 +16,12 @@ We have added a branch to our SVN for the new cards that are currently being scr
 New Cards
 ---------
 
-
+Goblin Game
+Menacing Ogre
+Reversal of Fortune
+Equipoise
+Lightning Storm
+Prossh, Skyraider of Kher
 
 
 ---------------------------
@@ -43,6 +48,14 @@ Selvala, Explorer Returned
 Split Decision
 Treasonous Ogre
 Tyrant's Choice
+
+Coercive Portal
+Council's Judgment
+Academy Elite
+Dack's Duplicate
+Deathreap Ritual
+Realm Seekers
+Grudge Keeper
 
 
 ------------
