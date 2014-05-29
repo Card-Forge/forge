@@ -27,8 +27,8 @@ public final class ForgeConstants {
     public static final String PROFILE_FILE          = ASSETS_DIR + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
-    private static final String RES_DIR = ASSETS_DIR + "res/";
-    private static final String LISTS_DIR = RES_DIR + "lists/";
+    public static final String RES_DIR = ASSETS_DIR + "res/";
+    public static final String LISTS_DIR = RES_DIR + "lists/";
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
     public static final String IMAGE_LIST_TOKENS_FILE                = LISTS_DIR + "token-images.txt";

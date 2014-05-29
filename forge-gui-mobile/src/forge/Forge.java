@@ -23,6 +23,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Clipboard;
 
+import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -30,6 +31,8 @@ import forge.assets.FImage;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
@@ -73,10 +76,16 @@ public class Forge implements ApplicationListener {
 
         splashScreen = new SplashScreen();
 
+        final ForgePreferences prefs = new ForgePreferences();
+        FSkin.loadLight(prefs.getPref(FPref.UI_SKIN), splashScreen);
+
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
+                //see if app or assets need updating
+                AssetsDownloader.checkForUpdates(splashScreen.getProgressBar());
+
                 FModel.initialize(splashScreen.getProgressBar());
 
                 splashScreen.getProgressBar().setDescription("Loading fonts");

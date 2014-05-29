@@ -34,6 +34,7 @@ public class FSkin {
     private static String preferredFontDir;
     private static String preferredName;
     private static boolean loaded = false;
+    private static boolean needReloadAfterAssetsDownloaded = false;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -233,6 +234,10 @@ public class FSkin {
         }
     }
 
+    public static boolean assetsDownloadNeeded() {
+        return needReloadAfterAssetsDownloaded;
+    }
+
     /**
      * Gets the name.
      * 
@@ -270,7 +275,14 @@ public class FSkin {
 
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
-            System.err.println("FSkin > can't find skins directory!");
+            //if skins directory doesn't exists, create a minimum directory containing skin files for the splash screen
+            FileUtil.ensureDirectoryExists(ForgeConstants.DEFAULT_SKINS_DIR);
+            final FileHandle defaultDir = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
+            Gdx.files.internal("bg_splash.png").copyTo(defaultDir.child("bg_splash.png"));
+            Gdx.files.internal("bg_texture.jpg").copyTo(defaultDir.child("bg_texture.jpg"));
+            Gdx.files.internal("font1.ttf").copyTo(defaultDir.child("font1.ttf"));
+            mySkins.add("default");
+            needReloadAfterAssetsDownloaded = true; //flag that skins need to be reloaded after assets downloaded
         }
         else {
             for (FileHandle skinFile : dir.list()) {
