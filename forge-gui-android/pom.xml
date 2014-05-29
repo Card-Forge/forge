@@ -277,18 +277,23 @@
 								<phase>package</phase>
 								<configuration>
 									<target>
-									    <zip
-                                            destfile="${basedir}/../forge-gui/res/cardsfolder/cardsfolder.zip"
-                                            basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+										<copy todir="${project.build.directory}/res">
+											<fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+											<fileset dir="${basedir}/../forge-gui/" includes="README.txt" />
+											<fileset dir="${basedir}/../forge-gui/" includes="CHANGES.txt" />
+											<fileset dir="${basedir}/../forge-gui/">
+												<include name="res/**" />
+												<exclude name="res/cardsfolder/**" />
+											</fileset>
+										</copy>
+										<mkdir
+											dir="${project.build.directory}/res/res/cardsfolder" />
+										<zip
+											destfile="${project.build.directory}/res/res/cardsfolder/cardsfolder.zip"
+											basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
 										<zip destfile="${project.build.directory}/assets.zip"
-											basedir="${basedir}/../forge-gui" level="1">
-											<include name="LICENSE.txt" />
-											<include name="README.txt" />
-											<include name="CHANGES.txt" />
-											<include name="res/**" />
-											<exclude name="res/cardsfolder/**" />
-                                            <include name="res/cardsfolder/cardsfolder.zip" />
-										</zip>
+											basedir="${project.build.directory}/res" level="1" />
+										<delete dir="${project.build.directory}/res"/>
 									</target>
 								</configuration>
 								<goals>
