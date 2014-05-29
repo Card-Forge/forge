@@ -9,6 +9,7 @@ import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.util.Utils;
 
 public class FRadioButton extends FLabel {
     private static final FSkinColor INNER_CIRCLE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
@@ -72,9 +73,9 @@ public class FRadioButton extends FLabel {
         @Override
         public void draw(Graphics g, float x, float y, float w, float h) {
             float radius = h / 3;
-            x += w / 2;
+            x += w - radius;
             y += h / 2;
-            g.drawCircle(1, OUTER_CIRCLE_COLOR, x, y, radius);
+            g.drawCircle(Utils.scaleMin(1), OUTER_CIRCLE_COLOR, x, y, radius);
             if (isSelected()) {
                 g.fillCircle(INNER_CIRCLE_COLOR, x, y, radius / 2);
             }

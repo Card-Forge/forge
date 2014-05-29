@@ -55,6 +55,8 @@ public class GuiDownloader extends FDialog {
 
         txtAddress.setGhostText("Proxy Address");
         txtPort.setGhostText("Proxy Port");
+        txtAddress.setEnabled(false);
+        txtPort.setEnabled(false);
 
         RadioButtonGroup group = new RadioButtonGroup();
         radProxyNone.setGroup(group);
@@ -67,7 +69,7 @@ public class GuiDownloader extends FDialog {
         radProxyNone.setSelected(true);
 
         btnStart.setFont(FSkinFont.get(18));
-        btnStart.setVisible(false);
+        btnStart.setEnabled(false);
         btnCancel.setFont(btnStart.getFont());
         btnCancel.setCommand(cmdClose);
 
@@ -102,13 +104,13 @@ public class GuiDownloader extends FDialog {
         float x = padding;
         float y = padding;
         float w = width - 2 * padding;
-        float radioButtonWidth = (w - 2 * padding) / 3;
-        float radioButtonHeight = radProxyNone.getHeight();
+        float radioButtonWidth = w / 3;
+        float radioButtonHeight = radProxyNone.getAutoSizeBounds().height;
 
         radProxyNone.setBounds(x, y, radioButtonWidth, radioButtonHeight);
-        x += radioButtonWidth + padding;
+        x += radioButtonWidth;
         radProxyHTTP.setBounds(x, y, radioButtonWidth, radioButtonHeight);
-        x += radioButtonWidth + padding;
+        x += radioButtonWidth;
         radProxySocks.setBounds(x, y, radioButtonWidth, radioButtonHeight);
 
         x = padding;
@@ -116,8 +118,8 @@ public class GuiDownloader extends FDialog {
         txtAddress.setBounds(x, y, w, txtAddress.getHeight());
         y += txtAddress.getHeight() + padding;
         txtPort.setBounds(x, y, w, txtPort.getHeight());
-        y += (txtPort.getHeight() + padding) * 2;
-        progressBar.setBounds(x, y, w, txtPort.getHeight() * 2);
+        y += txtPort.getHeight() + padding * 2;
+        progressBar.setBounds(x, y, w, txtPort.getHeight() * 1.5f);
         y += progressBar.getHeight() + padding * 2;
 
         float buttonWidth = (w - padding) / 2;
@@ -125,6 +127,6 @@ public class GuiDownloader extends FDialog {
         btnStart.setBounds(x, y, buttonWidth, buttonHeight);
         x += w - buttonWidth;
         btnCancel.setBounds(x, y, buttonWidth, buttonHeight);
-        return y + buttonWidth + padding;
+        return y + buttonHeight + padding;
     }
 }

@@ -75,7 +75,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
 
         btnClose.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
         btnStart.setFont(FSkin.getFont(18));
-        btnStart.setVisible(false);
+        btnStart.setEnabled(false);
 
         progressBar.reset();
         progressBar.setString("Scanning for existing items...");

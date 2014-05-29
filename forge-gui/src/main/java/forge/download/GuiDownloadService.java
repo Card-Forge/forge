@@ -118,7 +118,7 @@ public abstract class GuiDownloadService implements Runnable {
             //for(Entry<String, String> kv : cards.entrySet()) System.out.printf("Will get %s from %s%n", kv.getKey(), kv.getValue());
             btnStart.setCommand(cmdStartDownload);
         }
-        btnStart.setVisible(true);
+        btnStart.setEnabled(true);
 
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
