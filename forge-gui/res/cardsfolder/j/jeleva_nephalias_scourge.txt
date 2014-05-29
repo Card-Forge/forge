@@ -1,0 +1,16 @@
+Name:Jeleva, Nephalia's Scourge
+ManaCost:1 U B R
+Types:Legendary Creature Vampire Wizard
+PT:1/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player exiles the top X cards of his or her library, where X is the amount of mana spent to cast Jeleva.
+SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ Each | NumCards$ X | References$ X | RememberMilled$ True | Destination$ Exile
+SVar:X:Count$FirstSpellTotalManaSpent
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay | OptionalDecider$ You| TriggerDescription$ Whenever CARDNAME attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.
+SVar:TrigPlay:DB$ Play | ValidZone$ Exile | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | Controller$ You | WithoutManaCost$ True | Amount$ 1
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeleva_nephalias_scourge.jpg
+Oracle:Flying\nWhen Jeleva, Nephalia's Scourge enters the battlefield, each player exiles the top X cards of his or her library, where X is the amount of mana spent to cast Jeleva.\nWhenever Jeleva attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.

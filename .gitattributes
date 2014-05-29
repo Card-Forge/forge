@@ -7219,6 +7219,7 @@ forge-gui/res/cardsfolder/j/jedit_ojanen.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/j/jedit_ojanen_of_efrava.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/j/jedits_dragoons.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/j/jelenn_sphinx.txt -text
+forge-gui/res/cardsfolder/j/jeleva_nephalias_scourge.txt -text
 forge-gui/res/cardsfolder/j/jenara_asura_of_war.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/j/jerrard_of_the_closed_fist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/j/jeska_warrior_adept.txt svneol=native#text/plain
@@ -8280,6 +8281,7 @@ forge-gui/res/cardsfolder/m/mantis_engine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mantle_of_leadership.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/maralen_of_the_mornsong.txt -text
 forge-gui/res/cardsfolder/m/maralen_of_the_mornsong_avatar.txt -text
+forge-gui/res/cardsfolder/m/marath_will_of_the_wild.txt -text
 forge-gui/res/cardsfolder/m/marauding_knight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/marauding_maulhorn.txt -text
 forge-gui/res/cardsfolder/m/maraxus.txt -text
