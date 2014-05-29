@@ -65,25 +65,30 @@ public class TabPageScreen extends FScreen {
         private final FScrollPane scroller;
 
         public TabHeader(TabPage[] tabPages) {
-            btnBack = add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+            scroller = add(new FScrollPane() {
+                @Override
+                protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+                    float x = 0;
+                    for (FDisplayObject child : getChildren()) {
+                        if (x == 0) { //skip back button
+                            x += BACK_BUTTON_WIDTH;
+                        }
+                        else {
+                            child.setBounds(x, 0, TAB_WIDTH, visibleHeight);
+                            x += TAB_WIDTH;
+                        }
+                    }
+                    return new ScrollBounds(x, visibleHeight);
+                }
+            });
+
+            btnBack = scroller.add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back();
                 }
             }).build());
             btnBack.setSize(BACK_BUTTON_WIDTH, HEIGHT);
-
-            scroller = add(new FScrollPane() {
-                @Override
-                protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-                    float x = 0;
-                    for (FDisplayObject tab : getChildren()) {
-                        tab.setBounds(x, 0, TAB_WIDTH, visibleHeight);
-                        x += TAB_WIDTH;
-                    }
-                    return new ScrollBounds(x, visibleHeight);
-                }
-            });
 
             for (TabPage tabPage : tabPages) {
                 scroller.add(tabPage.createTab());
@@ -113,7 +118,7 @@ public class TabPageScreen extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            scroller.setBounds(btnBack.getWidth(), 0, width - btnBack.getWidth(), height);
+            scroller.setBounds(0, 0, width, height);
         }
     }
 
