@@ -44,7 +44,7 @@ public class AssetsDownloader {
                 Gdx.app.exit(); //can't continue if this fails
             }
         }
-        else if (Forge.CURRENT_VERSION.equals(TextUtil.join(FileUtil.readFile(versionFile), "\n")) && !FSkin.assetsDownloadNeeded()) {
+        else if (Forge.CURRENT_VERSION.equals(TextUtil.join(FileUtil.readFile(versionFile), "\n")) && FSkin.getFontDir() != null) {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
@@ -54,7 +54,7 @@ public class AssetsDownloader {
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                FSkin.reloadAfterAssetsDownload(splashScreen);
+                FSkin.loadLight(FSkin.getName(), splashScreen);
             }
         });
 

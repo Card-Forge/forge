@@ -32,7 +32,6 @@ public class FSkin {
     private static FileHandle preferredFontDir;
     private static String preferredName;
     private static boolean loaded = false;
-    private static boolean needReloadAfterAssetsDownloaded = false;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -66,7 +65,6 @@ public class FSkin {
             //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
             preferredDir = Gdx.files.internal("fallback_skin");
             preferredFontDir = null;
-            needReloadAfterAssetsDownloaded = true; //flag that skins need to be reloaded after assets downloaded
         }
         else {
             if (splashScreen != null) {
@@ -242,16 +240,6 @@ public class FSkin {
         if (splashScreen != null) {
             CardFaceSymbols.loadImages();
         }
-    }
-
-    public static boolean assetsDownloadNeeded() {
-        return needReloadAfterAssetsDownloaded;
-    }
-
-    public static void reloadAfterAssetsDownload(SplashScreen splashScreen) {
-        needReloadAfterAssetsDownloaded = false;
-        allSkins = null;
-        loadLight(preferredName, splashScreen);
     }
 
     /**
