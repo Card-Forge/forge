@@ -19,8 +19,8 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
     private static FSkinFont MSG_FONT;
     private static float TRAIL_INTERVAL = 5000; //complete one trail round every 5 seconds
 
-    private long startMillis = 0;
-    private int etaSecs = 0, maximum = 0, value = 0;
+    private long startTime = 0;
+    private int maximum = 0, value = 0;
     private String desc = "";
     private String message;
     private boolean showETA = true;
@@ -63,8 +63,10 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
             }
         }
 
-        if (showETA) {
-            calculateETA(value);
+        if (showETA && value > 0) {
+            long elapsed = new Date().getTime() - startTime;
+            float timePerUnit = elapsed / value;
+            int etaSecs = (int) ((float)(maximum - value) * timePerUnit / 1000f);
             sb.append(", ETA").append(String.format("%02d:%02d:%02d", etaSecs / 3600, (etaSecs % 3600) / 60, etaSecs % 60 + 1));
         }
         message = sb.toString();
@@ -73,7 +75,7 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
     /** Resets the various values required for this class. Must be called from EDT. */
     public void reset() {
         value = 0;
-        startMillis = new Date().getTime();
+        startTime = new Date().getTime();
         setShowETA(true);
         setShowCount(true);
         setShowProgressTrail(false);
@@ -94,12 +96,6 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
         if (showProgressTrail == b0) { return; }
         showProgressTrail = b0;
         progressTrailStart = -1;
-    }
-
-    private void calculateETA(int v0) {
-        float tempMillis = new Date().getTime();
-        float timePerUnit = (tempMillis - startMillis) / v0;
-        etaSecs = (int) ((maximum - v0) * timePerUnit) / 1000;
     }
 
     public boolean isPercentMode() {
