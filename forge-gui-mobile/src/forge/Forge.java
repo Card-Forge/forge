@@ -84,7 +84,7 @@ public class Forge implements ApplicationListener {
             @Override
             public void run() {
                 //see if app or assets need updating
-                AssetsDownloader.checkForUpdates(splashScreen.getProgressBar());
+                AssetsDownloader.checkForUpdates(splashScreen);
 
                 FModel.initialize(splashScreen.getProgressBar());
 

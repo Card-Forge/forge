@@ -238,6 +238,12 @@ public class FSkin {
         return needReloadAfterAssetsDownloaded;
     }
 
+    public static void reloadAfterAssetsDownload(SplashScreen splashScreen) {
+        needReloadAfterAssetsDownloaded = false;
+        allSkins = null;
+        loadLight(preferredName, splashScreen);
+    }
+
     /**
      * Gets the name.
      * 

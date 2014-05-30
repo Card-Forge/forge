@@ -21,13 +21,14 @@ import com.esotericsoftware.minlog.Log;
 import forge.FThreads;
 import forge.Forge;
 import forge.properties.ForgeConstants;
+import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 
 public class AssetsDownloader {
     //if not forge-gui-mobile-dev, check whether assets are up to date
-    public static void checkForUpdates(final FProgressBar progressBar) {
+    public static void checkForUpdates(final SplashScreen splashScreen) {
         //if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
 
         //TODO see if app needs updating
@@ -48,7 +49,15 @@ public class AssetsDownloader {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
-        downloadAssets(progressBar);
+        downloadAssets(splashScreen.getProgressBar());
+
+        //reload light version of skin of assets updated
+        FThreads.invokeInEdtAndWait(new Runnable() {
+            @Override
+            public void run() {
+                FSkin.reloadAfterAssetsDownload(splashScreen);
+            }
+        });
 
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
@@ -137,15 +146,17 @@ public class AssetsDownloader {
 
             while (entries.hasMoreElements()) {
                 ZipEntry entry = (ZipEntry)entries.nextElement();
-                
+
+                String path = ForgeConstants.ASSETS_DIR + entry.getName();
                 if (entry.isDirectory()) {
-                    (new File(entry.getName())).mkdir();
+                    new File(path).mkdir();
                     continue;
                 }
-                copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(entry.getName())));
+                copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(path)));
             }
 
             zipFile.close();
+            fileDest.delete();
         }
         catch (Exception e) {
             // TODO Auto-generated catch block
