@@ -78,7 +78,7 @@ public abstract class GuiDownloadService implements Runnable {
     protected GuiDownloadService() {
     }
 
-    public void initialize(ITextField txtAddress0, ITextField txtPort0, IProgressBar progressBar0, IButton btnStart0, UiCommand cmdClose0, Runnable onUpdate0) {
+    public void initialize(ITextField txtAddress0, ITextField txtPort0, IProgressBar progressBar0, IButton btnStart0, UiCommand cmdClose0, final Runnable onReadyToStart, Runnable onUpdate0) {
         txtAddress = txtAddress0;
         txtPort = txtPort0;
         progressBar = progressBar0;
@@ -99,6 +99,9 @@ public abstract class GuiDownloadService implements Runnable {
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
+                        if (onReadyToStart != null) {
+                            onReadyToStart.run();
+                        }
                         readyToStart();
                     }
                 });

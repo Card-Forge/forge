@@ -19,6 +19,8 @@ package forge.screens.settings;
 
 import java.net.Proxy;
 
+import com.badlogic.gdx.Gdx;
+
 import forge.UiCommand;
 import forge.assets.FSkinFont;
 import forge.download.GuiDownloadService;
@@ -74,11 +76,19 @@ public class GuiDownloader extends FDialog {
         btnCancel.setCommand(cmdClose);
 
         progressBar.reset();
+        progressBar.setShowProgressTrail(true);
         progressBar.setDescription("Scanning for existing items...");
+        Gdx.graphics.setContinuousRendering(true);
 
         show();
 
-        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, null);
+        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
+            @Override
+            public void run() {
+                Gdx.graphics.setContinuousRendering(false);
+                progressBar.setShowProgressTrail(false);
+            }
+        }, null);
     }
 
     private class ProxyHandler implements FEventHandler {

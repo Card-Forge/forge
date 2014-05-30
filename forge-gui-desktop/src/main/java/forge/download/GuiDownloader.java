@@ -95,7 +95,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
         pnl.add(pnlDialog, "w 400px!, h 350px!, ax center, ay center");
         SOverlayUtils.showOverlay();
 
-        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, new Runnable() {
+        service.initialize(txtAddress, txtPort, progressBar, btnStart, cmdClose, null, new Runnable() {
             @Override
             public void run() {
                 fireStateChanged();
