@@ -100,7 +100,7 @@ public class AssetsDownloader {
  
             while ((count = input.read(data)) != -1) {
                 total += count;
-                progressBar.setValue((int)(total / contentLength));
+                progressBar.setValue((int)(100 * total / contentLength));
                 output.write(data, 0, count);
             }
  
