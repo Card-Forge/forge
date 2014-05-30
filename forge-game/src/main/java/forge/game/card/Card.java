@@ -4603,7 +4603,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> getHiddenExtrinsicKeyword() {
+    public final synchronized ArrayList<String> getHiddenExtrinsicKeyword() {
         while (true) {
             try {
                 final ArrayList<String> keywords = new ArrayList<String>();
@@ -4622,7 +4622,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
     }
-
 
     /**
      * <p>
