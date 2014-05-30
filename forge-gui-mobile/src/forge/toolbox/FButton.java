@@ -208,8 +208,12 @@ public class FButton extends FDisplayObject implements IButton {
             break;
         }
 
-        if (!StringUtils.isEmpty(text)) {
-            g.drawText(text, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
+        String displayText = text;
+        if (!StringUtils.isEmpty(displayText)) {
+            if (corner != Corner.None) {
+                displayText = displayText.replaceFirst(" ", "\n"); //allow second word to wrap if corner button
+            }
+            g.drawText(displayText, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
 

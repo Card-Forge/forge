@@ -595,7 +595,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void declareAttackers(Player attacker, Combat combat) {
         // This input should not modify combat object itself, but should return user choice
-        InputAttack inpAttack = new InputAttack(attacker, player, combat);
+        InputAttack inpAttack = new InputAttack(attacker, combat);
         inpAttack.showAndWait();
     }
 

@@ -24,7 +24,9 @@ import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -32,6 +34,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.ITriggerEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,41 +53,38 @@ public class InputAttack extends InputSyncronizedBase {
     private final List<GameEntity> defenders;
     private GameEntity currentDefender;
     private final Player playerAttacks;
-    private final Player playerDeclares;
     private AttackingBand activeBand = null;
 
-    public InputAttack(Player attacks, Player declares, Combat combat) {
-        this.playerAttacks = attacks;
-        this.playerDeclares = declares;
-        this.combat = combat;
-        this.defenders = combat.getDefenders();
+    public InputAttack(Player attacks0, Combat combat0) {
+        playerAttacks = attacks0;
+        combat = combat0;
+        defenders = combat.getDefenders();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         // TODO still seems to have some issues with multiple planeswalkers
-
-        ButtonUtil.enableOnlyOk();
-
         setCurrentDefender(defenders.isEmpty() ? null : defenders.get(0));
 
         if (null == currentDefender) {
             System.err.println("InputAttack has no potential defenders!");
+            updatePrompt();
             return; // should even throw here!
         }
 
         List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
             if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
-                for(GameEntity def : defenders) {
-                    if(CombatUtil.canAttack(c, def, combat)) {
-                        combat.addAttacker(c, currentDefender);
+                for (GameEntity def : defenders) {
+                    if (CombatUtil.canAttack(c, def, combat)) {
+                        combat.addAttacker(c, def);
                         GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, currentDefender));
                         break;
                     }
                 }
-            } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+            }
+            else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
                 final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
                 final String defined = c.getKeyword().get(i).split(":")[1];
                 final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
@@ -94,11 +94,17 @@ public class InputAttack extends InputSyncronizedBase {
                 }
             }
         }
+        updateMessage();
     }
 
-    private void showCombat() {
-        // redraw sword icons
-        GuiBase.getInterface().showCombat(combat);
+    private void updatePrompt() {
+        if (combat.getAttackers().isEmpty()) {
+            ButtonUtil.setButtonText("OK", "Alpha Strike");
+        }
+        else {
+            ButtonUtil.setButtonText("OK", "Cancel");
+        }
+        ButtonUtil.enableAllFocusOk();
     }
 
     /** {@inheritDoc} */
@@ -111,9 +117,40 @@ public class InputAttack extends InputSyncronizedBase {
         stop();
     }
 
+    /** {@inheritDoc} */
+    @Override
+    protected final void onCancel() {
+        //either alpha strike or undeclare all attackers based on whether any attackers have been declared
+        if (combat.getAttackers().isEmpty()) {
+            //alpha strike
+            List<Player> defenders = playerAttacks.getOpponents();
+    
+            for (Card c : CardLists.filter(playerAttacks.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+                if (combat.isAttacking(c)) {
+                    continue;
+                }
+    
+                for (Player defender : defenders) {
+                    if (CombatUtil.canAttack(c, defender, combat)) {
+                        combat.addAttacker(c, defender);
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            //undeclare all attackers
+            List<Card> attackers = new ArrayList<Card>(combat.getAttackers()); //must copy list since it will be modified
+            for (Card c : attackers) {
+                undeclareAttacker(c);
+            }
+        }
+        updateMessage();
+    }
+
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
-        if(defenders.contains(selected)) {
+        if (defenders.contains(selected)) {
             setCurrentDefender(selected);
         }
         else {
@@ -125,37 +162,37 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     protected final boolean onCardSelected(final Card card, final ITriggerEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
-        if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
-                && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-            // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
-            combat.removeFromCombat(card);
-            GuiBase.getInterface().setUsedToPay(card, false);
-            showCombat();
-            // When removing an attacker clear the attacking band
-            this.activateBand(null);
-
-            GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, null));
-            return true;
+        if (triggerEvent != null && triggerEvent.getButton() == 3 && att.contains(card)) {
+            if (undeclareAttacker(card)) {
+                updateMessage();
+                return true;
+            }
         }
 
         if (combat.isAttacking(card, currentDefender)) {
-            // Activate band by selecting/deselecting a band member
             boolean validAction = true;
-            if (this.activeBand == null) {
-                this.activateBand(combat.getBandOfAttacker(card));
-            }
-            else if (this.activeBand.getAttackers().contains(card)) {
-                this.activateBand(null);
-            }
-            else { // Join a band by selecting a non-active band member after activating a band
-                if (this.activeBand.canJoinBand(card)) {
-                    combat.removeFromCombat(card);
-                    declareAttacker(card);
+            if (isBandingPossible()) {
+                // Activate band by selecting/deselecting a band member
+                if (activeBand == null) {
+                    activateBand(combat.getBandOfAttacker(card));
                 }
-                else {
-                    flashIncorrectAction();
-                    validAction = false;
+                else if (activeBand.getAttackers().contains(card)) {
+                    activateBand(null);
                 }
+                else { // Join a band by selecting a non-active band member after activating a band
+                    if (activeBand.canJoinBand(card)) {
+                        combat.removeFromCombat(card);
+                        declareAttacker(card);
+                    }
+                    else {
+                        flashIncorrectAction();
+                        validAction = false;
+                    }
+                }
+            }
+            else {
+                //if banding not possible, just undeclare attacker
+                undeclareAttacker(card);
             }
 
             updateMessage();
@@ -170,19 +207,19 @@ public class InputAttack extends InputSyncronizedBase {
         }
 
         if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender, combat)) {
-            if (this.activeBand != null && !this.activeBand.canJoinBand(card)) {
-                this.activateBand(null);
+            if (activeBand != null && !activeBand.canJoinBand(card)) {
+                activateBand(null);
                 updateMessage();
                 flashIncorrectAction();
                 return false;
             }
 
-            if(combat.isAttacking(card)) {
+            if (combat.isAttacking(card)) {
                 combat.removeFromCombat(card);
             }
 
             declareAttacker(card);
-            showCombat();
+            updateMessage();
             return true;
         }
 
@@ -190,16 +227,27 @@ public class InputAttack extends InputSyncronizedBase {
         return false;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     */
     private void declareAttacker(final Card card) {
-        combat.addAttacker(card, currentDefender, this.activeBand);
-        this.activateBand(this.activeBand);
-        updateMessage();
+        combat.addAttacker(card, currentDefender, activeBand);
+        activateBand(activeBand);
 
         GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, currentDefender));
+    }
+
+    private boolean undeclareAttacker(Card card) {
+        if (card.hasKeyword("CARDNAME attacks each turn if able.") ||
+                card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+            return false;
+        }
+
+        // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
+        combat.removeFromCombat(card);
+        GuiBase.getInterface().setUsedToPay(card, false);
+        // When removing an attacker clear the attacking band
+        activateBand(null);
+
+        GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, null));
+        return true;
     }
 
     private final void setCurrentDefender(GameEntity def) {
@@ -214,35 +262,42 @@ public class InputAttack extends InputSyncronizedBase {
         }
 
         updateMessage();
-
-        // update UI
     }
 
     private final void activateBand(AttackingBand band) {
-        if (this.activeBand != null) {
-            for(Card card : this.activeBand.getAttackers()) {
+        if (activeBand != null) {
+            for(Card card : activeBand.getAttackers()) {
                 GuiBase.getInterface().setUsedToPay(card, false);
             }
         }
-        this.activeBand = band;
+        activeBand = band;
 
-        if (this.activeBand != null) {
-            for(Card card : this.activeBand.getAttackers()) {
+        if (activeBand != null) {
+            for(Card card : activeBand.getAttackers()) {
                 GuiBase.getInterface().setUsedToPay(card, true);
             }
         }
+    }
 
-        // update UI
+    //only enable banding message and actions if a creature that can attack has banding
+    private boolean isBandingPossible() {
+        List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
+        for (Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
+            if (c.isCreature() && CombatUtil.canAttack(c, currentDefender, combat)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void updateMessage() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(playerDeclares.getName()).append(", ");
-        sb.append(playerAttacks == playerDeclares ? "declare attackers." : "declare attackers for " + playerAttacks.getName()).append("\n");
-        sb.append("Selecting Creatures to Attack ").append(currentDefender).append("\n\n");
-        sb.append("To change the current defender, click on the player or planeswalker you wish to attack.\n");
-        sb.append("To attack as a band, click an attacking creature to activate its 'band', select another to join the band.");
+        String message = "Select creatures to attack " + currentDefender + " or select player/planeswalker you wish to attack.";
+        if (isBandingPossible()) {
+            message += " To attack as a band, select an attacking creature to activate its 'band' then select another to join it.";
+        }
+        showMessage(message);
 
-        showMessage(sb.toString());
+        updatePrompt();
+        GuiBase.getInterface().showCombat(combat); // redraw sword icons
     }
 }
