@@ -56,6 +56,7 @@ public class AssetsDownloader {
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
+                splashScreen.getProgressBar().setShowProgressTrail(false);
                 FSkin.reloadAfterAssetsDownload(splashScreen);
             }
         });
@@ -70,7 +71,7 @@ public class AssetsDownloader {
             @Override
             public void run() {
                 progressBar.setShowProgressTrail(true);
-                progressBar.setDescription("Downloading resource files...");
+                progressBar.setDescription("Updating resource files...\n(This may take several minutes)");
             }
         });
 
@@ -134,13 +135,6 @@ public class AssetsDownloader {
         }
 
         //if assets.zip downloaded successfully, unzip into destination folder
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setDescription("Unzipping resource files...");
-            }
-        });
-
         try {
             ZipFile zipFile = new ZipFile(fileDest);
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
