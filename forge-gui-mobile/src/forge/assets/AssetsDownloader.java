@@ -13,8 +13,6 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
@@ -31,7 +29,7 @@ public class AssetsDownloader {
     public static void checkForUpdates(final SplashScreen splashScreen) {
         if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
 
-        //set if app needs updating
+        //TODO: see if app needs updating
         /*splashScreen.getProgressBar().setDescription("Checking for updates...");
         try {
             URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
@@ -44,7 +42,7 @@ public class AssetsDownloader {
             e.printStackTrace();
         }*/
 
-        //set if assets need updating
+        //see if assets need updating
         File versionFile = new File(ForgeConstants.ASSETS_DIR + "version.txt");
         if (!versionFile.exists()) {
             try {
