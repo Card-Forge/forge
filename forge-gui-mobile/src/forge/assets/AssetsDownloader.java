@@ -13,6 +13,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
@@ -23,15 +25,24 @@ import forge.properties.ForgeConstants;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 import forge.util.FileUtil;
-import forge.util.TextUtil;
 
 public class AssetsDownloader {
     //if not forge-gui-mobile-dev, check whether assets are up to date
     public static void checkForUpdates(final SplashScreen splashScreen) {
         if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
 
-        //TODO see if app needs updating
-        //progressBar.setDescription("Checking for updates");
+        //set if app needs updating
+        /*splashScreen.getProgressBar().setDescription("Checking for updates...");
+        try {
+            URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
+            String version = FileUtil.readFileToString(versionUrl);
+            if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
+                
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
         //set if assets need updating
         File versionFile = new File(ForgeConstants.ASSETS_DIR + "version.txt");
@@ -44,7 +55,7 @@ public class AssetsDownloader {
                 Gdx.app.exit(); //can't continue if this fails
             }
         }
-        else if (Forge.CURRENT_VERSION.equals(TextUtil.join(FileUtil.readFile(versionFile), "\n")) && FSkin.getFontDir() != null) {
+        else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getFontDir() != null) {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 

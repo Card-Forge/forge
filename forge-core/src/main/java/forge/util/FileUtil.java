@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -142,7 +143,11 @@ public final class FileUtil {
     } // writeAllDecks()
 
     public static String readFileToString(String filename) {
-    	return TextUtil.join(readFile(filename), "\n");
+    	return readFileToString(new File(filename));
+    }
+
+    public static String readFileToString(File file) {
+        return TextUtil.join(readFile(file), "\n");
     }
 
     public static List<String> readFile(final String filename) {
@@ -232,5 +237,24 @@ public final class FileUtil {
         }
 
         return list;
+    }
+
+    public static String readFileToString(final URL url) {
+        return TextUtil.join(readFile(url), "\n");
+    }
+
+    public static List<String> readFile(final URL url) {
+        List<String> lines = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                lines.add(line);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lines;
     }
 }
