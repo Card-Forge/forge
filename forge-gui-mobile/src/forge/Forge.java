@@ -40,7 +40,9 @@ import forge.screens.match.FControl;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
+import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
 
@@ -137,12 +139,26 @@ public class Forge implements ApplicationListener {
     }
 
     public static void back() {
-        if (screens.size() < 2) { return; } //don't allow going back from initial screen
+        if (screens.size() < 2) {
+            exit(); //prompt to exit if attempting to go back from home screen
+            return;
+        }
         if (!currentScreen.onClose(true)) {
             return;
         }
         screens.pop();
         setCurrentScreen(screens.lastElement());
+    }
+
+    public static void exit() {
+        FOptionPane.showConfirmDialog("Are you sure you wish to exit Forge?", "Exit Forge", "Exit", "Cancel", new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    Gdx.app.exit();
+                }
+            }
+        });
     }
 
     public static void openScreen(FScreen screen0) {
