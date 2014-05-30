@@ -18,6 +18,7 @@
 package forge.match.input;
 
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.ITriggerEvent;
@@ -48,7 +49,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
-        ButtonUtil.enableOnlyOk();
+        ButtonUtil.setButtonText("OK", "End Turn");
+        ButtonUtil.enableAllFocusOk();
     }
 
     /** {@inheritDoc} */
@@ -56,7 +58,15 @@ public class InputPassPriority extends InputSyncronizedBase {
     protected final void onOk() {
         stop();
     }
-    
+
+    /** {@inheritDoc} */
+    @Override
+    protected final void onCancel() {
+        //end turn
+        player.getController().autoPassUntil(PhaseType.CLEANUP);
+        stop();
+    }
+
     public SpellAbility getChosenSa() { return chosenSa; }
 
     @Override
