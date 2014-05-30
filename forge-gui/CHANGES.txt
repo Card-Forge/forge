@@ -22,6 +22,8 @@ Reversal of Fortune
 Equipoise
 Lightning Storm
 Prossh, Skyraider of Kher
+Jeleva, Nephalia's Scourge
+Marath, Will of the Wild
 
 
 ---------------------------
