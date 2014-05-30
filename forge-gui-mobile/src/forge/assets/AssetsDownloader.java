@@ -1,16 +1,14 @@
 package forge.assets;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.Proxy;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
+import java.net.URLConnection;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -56,7 +54,6 @@ public class AssetsDownloader {
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                splashScreen.getProgressBar().setShowProgressTrail(false);
                 FSkin.reloadAfterAssetsDownload(splashScreen);
             }
         });
@@ -67,94 +64,82 @@ public class AssetsDownloader {
     }
 
     private static void downloadAssets(final FProgressBar progressBar) {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setShowProgressTrail(true);
-                progressBar.setDescription("Updating resource files...\n(This may take several minutes)");
-            }
-        });
-
-        String url = "http://cardforge.org/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/assets.zip";
-        final File destDir = new File(ForgeConstants.ASSETS_DIR);
-        final File fileDest = new File(destDir.getAbsolutePath() + "/assets.zip");
-        final File resDir = new File(ForgeConstants.RES_DIR);
+        final String destFile = ForgeConstants.ASSETS_DIR + "assets.zip";
         try {
+            File resDir = new File(ForgeConstants.RES_DIR);
             if (resDir.exists()) {
-                resDir.delete(); //attempt to delete previous res directory if to be rebuilt
+                //attempt to delete previous res directory if to be rebuilt
+                FileUtil.deleteDirectory(resDir);
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        ReadableByteChannel rbc = null;
-        FileOutputStream    fos = null;
-        try {
-            // test for folder existence
-            if (!destDir.exists() && !destDir.mkdir()) { // create folder if not found
-                System.out.println("Can't create folder" + destDir.getAbsolutePath());
-            }
+        progressBar.reset();
+        progressBar.setPercentMode(true);
+        progressBar.setDescription("Downloading resource files");
 
-            URL imageUrl = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection(Proxy.NO_PROXY);
-            // don't allow redirections here -- they indicate 'file not found' on the server
-            conn.setInstanceFollowRedirects(false);
+        try {
+            URL url = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/assets.zip");
+            URLConnection conn = url.openConnection();
             conn.connect();
 
-            if (conn.getResponseCode() != 200) {
-                conn.disconnect();
-                System.out.println("Could not download assets.zip");
-                return;
-            }
+            long contentLength = conn.getContentLength();
+            progressBar.setMaximum(100);
 
-            rbc = Channels.newChannel(conn.getInputStream());
-            fos = new FileOutputStream(fileDest);
-            fos.getChannel().transferFrom(rbc, 0, 1 << 27);
+            // input stream to read file - with 8k buffer
+            InputStream input = new BufferedInputStream(url.openStream(), 8192);
+ 
+            // output stream to write file
+            OutputStream output = new FileOutputStream(destFile);
+ 
+            int count;
+            long total = 0;
+            byte data[] = new byte[1024];
+ 
+            while ((count = input.read(data)) != -1) {
+                total += count;
+                progressBar.setValue((int)(total / contentLength));
+                output.write(data, 0, count);
+            }
+ 
+            output.flush();
+            output.close();
+            input.close();
         }
         catch (final Exception ex) {
             Log.error("Assets", "Error downloading assets", ex);
         }
-        finally {
-            if (rbc != null) {
-                try {
-                    rbc.close();
-                }
-                catch (IOException e) {
-                    System.out.println("error closing input stream");
-                }
-            }
-            if (fos != null) {
-                try {
-                    fos.close();
-                }
-                catch (IOException e) {
-                    System.out.println("error closing output stream");
-                }
-            }
-        }
 
         //if assets.zip downloaded successfully, unzip into destination folder
         try {
-            ZipFile zipFile = new ZipFile(fileDest);
+            ZipFile zipFile = new ZipFile(destFile);
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
+            progressBar.reset();
+            progressBar.setPercentMode(true);
+            progressBar.setDescription("Unzipping resource files");
+            progressBar.setMaximum(zipFile.size());
+
+            int count = 0;
             while (entries.hasMoreElements()) {
                 ZipEntry entry = (ZipEntry)entries.nextElement();
 
                 String path = ForgeConstants.ASSETS_DIR + entry.getName();
                 if (entry.isDirectory()) {
                     new File(path).mkdir();
+                    progressBar.setValue(++count);
                     continue;
                 }
                 copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(path)));
+                progressBar.setValue(++count);
             }
 
             zipFile.close();
-            fileDest.delete();
+            new File(destFile).delete();
         }
         catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

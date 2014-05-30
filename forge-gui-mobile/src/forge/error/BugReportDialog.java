@@ -17,7 +17,7 @@ public class BugReportDialog extends FOptionPane {
     private static boolean dialogShown;
 
     public static void show(String title, String text, boolean showExitAppBtn) {
-        if (dialogShown) { return; }
+        if (dialogShown || Forge.getCurrentScreen() == null) { return; } //don't allow showing if Forge not finished initializing yet
 
         dialogShown = true;
         BugReportDialog dialog = new BugReportDialog(title, text, showExitAppBtn);

@@ -80,6 +80,17 @@ public final class FileUtil {
         return (dir.exists() && dir.isDirectory()) || dir.mkdirs();
     }
 
+    public static boolean deleteDirectory(File dir) {
+        if (dir.isDirectory()) {
+            for (String filename : dir.list()) {
+                if (!deleteDirectory(new File(dir, filename))) {
+                    return false; 
+                } 
+            }
+        }
+        return dir.delete();
+    }
+
     /**
      * <p>
      * writeFile.

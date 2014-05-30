@@ -284,9 +284,9 @@ public class FSkin {
             //if skins directory doesn't exists, create a minimum directory containing skin files for the splash screen
             FileUtil.ensureDirectoryExists(ForgeConstants.DEFAULT_SKINS_DIR);
             final FileHandle defaultDir = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
-            Gdx.files.internal("bg_splash.png").copyTo(defaultDir.child("bg_splash.png"));
-            Gdx.files.internal("bg_texture.jpg").copyTo(defaultDir.child("bg_texture.jpg"));
-            Gdx.files.internal("font1.ttf").copyTo(defaultDir.child("font1.ttf"));
+            Gdx.files.internal(ForgeConstants.SPLASH_BG_FILE).copyTo(defaultDir.child(ForgeConstants.SPLASH_BG_FILE));
+            Gdx.files.internal(ForgeConstants.TEXTURE_BG_FILE).copyTo(defaultDir.child(ForgeConstants.TEXTURE_BG_FILE));
+            Gdx.files.internal(ForgeConstants.FONT_FILE).copyTo(defaultDir.child(ForgeConstants.FONT_FILE));
             mySkins.add("default");
             needReloadAfterAssetsDownloaded = true; //flag that skins need to be reloaded after assets downloaded
         }

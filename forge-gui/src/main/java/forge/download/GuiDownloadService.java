@@ -249,7 +249,7 @@ public abstract class GuiDownloadService implements Runnable {
                 conn.setInstanceFollowRedirects(false);
                 conn.connect();
 
-                if (conn.getResponseCode() != 200) {
+                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     conn.disconnect();
                     System.out.println("Skipped Download for: " + fileDest.getPath());
                     update(++iCard, fileDest);

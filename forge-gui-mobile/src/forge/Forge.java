@@ -31,6 +31,7 @@ import forge.assets.FImage;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -41,6 +42,7 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
 import forge.toolbox.FOverlay;
+import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
@@ -76,8 +78,16 @@ public class Forge implements ApplicationListener {
 
         splashScreen = new SplashScreen();
 
-        final ForgePreferences prefs = new ForgePreferences();
-        FSkin.loadLight(prefs.getPref(FPref.UI_SKIN), splashScreen);
+        System.err.println("testing2323");
+
+        String skinName;
+        if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
+            skinName = new ForgePreferences().getPref(FPref.UI_SKIN);
+        }
+        else {
+            skinName = "default"; //use default skin if preferences file doesn't exist yet
+        }
+        FSkin.loadLight(skinName, splashScreen);
 
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -170,7 +180,7 @@ public class Forge implements ApplicationListener {
             Animation.advanceAll();
     
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
-    
+
             FContainer screen = currentScreen;
             if (screen == null) {
                 screen = splashScreen;
