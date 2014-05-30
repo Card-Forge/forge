@@ -1,6 +1,5 @@
 package forge.assets;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
@@ -20,12 +19,11 @@ public enum FSkinTexture implements FImage {
         repeat = repeat0;
     }
 
-    public void load(String preferredDir, String defaultDir) {
-        String preferredFile = preferredDir + filename;
-        FileHandle file = Gdx.files.absolute(preferredFile);
-        if (file.exists()) {
+    public void load() {
+        FileHandle preferredFile = FSkin.getSkinFile(filename);
+        if (preferredFile.exists()) {
             try {
-                texture = new Texture(file);
+                texture = new Texture(preferredFile);
             }
             catch (final Exception e) {
                 System.err.println("Failed to load skin file: " + preferredFile);
@@ -34,11 +32,10 @@ public enum FSkinTexture implements FImage {
         }
         if (texture == null) {
             //use default file if can't use preferred file
-            String defaultFile = defaultDir + filename;
-            file = Gdx.files.absolute(defaultFile);
-            if (file.exists()) {
+            FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
+            if (defaultFile.exists()) {
                 try {
-                    texture = new Texture(file);
+                    texture = new Texture(defaultFile);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);

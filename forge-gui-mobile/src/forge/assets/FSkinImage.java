@@ -2,7 +2,6 @@ package forge.assets;
 
 import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -251,15 +250,14 @@ public enum FSkinImage implements FImage {
         FSkin.getImages().put(skinProp, this);
     }
 
-    public void load(String preferredDir, String defaultDir, Map<String, Texture> textures, Pixmap preferredIcons) {
+    public void load(Map<String, Texture> textures, Pixmap preferredIcons) {
         String filename = sourceFile.getFilename();
-        String preferredFile = preferredDir + filename;
-        Texture texture = textures.get(preferredFile);
+        FileHandle preferredFile = FSkin.getSkinFile(filename);
+        Texture texture = textures.get(preferredFile.path());
         if (texture == null) {
-            FileHandle file = Gdx.files.absolute(preferredFile);
-            if (file.exists()) {
+            if (preferredFile.exists()) {
                 try {
-                    texture = new Texture(file);
+                    texture = new Texture(preferredFile);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + preferredFile);
@@ -325,13 +323,12 @@ public enum FSkinImage implements FImage {
         }
 
         //use default file if can't use preferred file
-        String defaultFile = defaultDir + filename;
-        texture = textures.get(defaultFile);
+        FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
+        texture = textures.get(defaultFile.path());
         if (texture == null) {
-            FileHandle file = Gdx.files.absolute(defaultFile);
-            if (file.exists()) {
+            if (defaultFile.exists()) {
                 try {
-                    texture = new Texture(file);
+                    texture = new Texture(defaultFile);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);

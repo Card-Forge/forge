@@ -22,16 +22,14 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
-import forge.util.FileUtil;
 
 public class FSkin {
-    private static final String FONT_CACHE_DIR = ForgeConstants.CACHE_DIR + "fonts/";
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<FSkinProp, FSkinImage>();
     private static final Map<Integer, TextureRegion> avatars = new HashMap<Integer, TextureRegion>();
 
     private static ArrayList<String> allSkins;
-    private static String preferredDir;
-    private static String preferredFontDir;
+    private static FileHandle preferredDir;
+    private static FileHandle preferredFontDir;
     private static String preferredName;
     private static boolean loaded = false;
     private static boolean needReloadAfterAssetsDownloaded = false;
@@ -58,29 +56,42 @@ public class FSkin {
      * @param skinName
      *            the skin name
      */
-    public static void loadLight(final String skinName, final SplashScreen splashScreen) {
-        if (splashScreen != null) {
-            if (allSkins == null) { //initialize
-                allSkins = new ArrayList<String>();
-                ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
-                for (int i = 0; i < skinDirectoryNames.size(); i++) {
-                    allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
+    public static void loadLight(String skinName, final SplashScreen splashScreen) {
+        preferredName = skinName.toLowerCase().replace(' ', '_');
+
+        //ensure skins directory exists
+        final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
+        if (!dir.exists() || !dir.isDirectory()) {
+            forge.Forge.log("skins directory doesn't exist");
+            //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
+            preferredDir = Gdx.files.internal("fallback_skin");
+            preferredFontDir = null;
+            needReloadAfterAssetsDownloaded = true; //flag that skins need to be reloaded after assets downloaded
+        }
+        else {
+            if (splashScreen != null) {
+                if (allSkins == null) { //initialize
+                    allSkins = new ArrayList<String>();
+                    ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
+                    for (int i = 0; i < skinDirectoryNames.size(); i++) {
+                        allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
+                    }
+                    Collections.sort(allSkins);
                 }
-                Collections.sort(allSkins);
+            }
+
+            // Non-default (preferred) skin name and dir.
+            preferredDir = Gdx.files.absolute(ForgeConstants.SKINS_DIR + preferredName);
+            preferredFontDir = Gdx.files.absolute(ForgeConstants.CACHE_DIR + "fonts/" + preferredName);
+            if (!preferredFontDir.exists() || !preferredFontDir.isDirectory()) {
+                preferredFontDir.mkdirs();
             }
         }
 
-        // Non-default (preferred) skin name and dir.
-        preferredName = skinName.toLowerCase().replace(' ', '_');
-        preferredDir = ForgeConstants.SKINS_DIR + preferredName + "/";
-        preferredFontDir = FONT_CACHE_DIR + preferredName + "/";
-
-        FileUtil.ensureDirectoryExists(preferredFontDir);
-
-        FSkinTexture.BG_TEXTURE.load(preferredDir, ForgeConstants.DEFAULT_SKINS_DIR); //load background texture early for splash screen
+        FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 
         if (splashScreen != null) {
-            final FileHandle f = Gdx.files.absolute(preferredDir + "bg_splash.png");
+            final FileHandle f = getSkinFile("bg_splash.png");
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
                     FSkin.loadLight("default", splashScreen);
@@ -139,13 +150,12 @@ public class FSkin {
         final Map<String, Texture> textures = new HashMap<String, Texture>();
 
         // Grab and test various sprite files.
-        String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
-        final FileHandle f1 = Gdx.files.absolute(defaultDir + SourceFile.ICONS.getFilename());
-        final FileHandle f2 = Gdx.files.absolute(preferredDir + SourceFile.ICONS.getFilename());
-        final FileHandle f3 = Gdx.files.absolute(defaultDir + SourceFile.FOILS.getFilename());
-        final FileHandle f4 = Gdx.files.absolute(defaultDir + ForgeConstants.SPRITE_AVATARS_FILE);
-        final FileHandle f5 = Gdx.files.absolute(preferredDir + ForgeConstants.SPRITE_AVATARS_FILE);
-        final FileHandle f6 = Gdx.files.absolute(defaultDir + SourceFile.OLD_FOILS.getFilename());
+        final FileHandle f1 = getDefaultSkinFile(SourceFile.ICONS.getFilename());
+        final FileHandle f2 = getSkinFile(SourceFile.ICONS.getFilename());
+        final FileHandle f3 = getDefaultSkinFile(SourceFile.FOILS.getFilename());
+        final FileHandle f4 = getDefaultSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
+        final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
+        final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -166,9 +176,9 @@ public class FSkin {
 
             //load images
             for (FSkinImage image : FSkinImage.values()) {
-                image.load(preferredDir, ForgeConstants.DEFAULT_SKINS_DIR, textures, preferredIcons);
+                image.load(textures, preferredIcons);
             }
-            FSkinTexture.BG_MATCH.load(preferredDir, ForgeConstants.DEFAULT_SKINS_DIR);
+            FSkinTexture.BG_MATCH.load();
 
             //assemble avatar textures
             int counter = 0;
@@ -254,21 +264,31 @@ public class FSkin {
     }
 
     /**
-     * Gets the directory.
-     * 
-     * @return Path of directory for the current skin.
+     * Gets a FileHandle for a file within the directory where skin files should be stored
      */
-    public static String getDir() {
-        return FSkin.preferredDir;
+    public static FileHandle getSkinFile(String filename) {
+        return preferredDir.child(filename);
     }
 
     /**
-     * Gets the directory where fonts should be cached
-     * 
-     * @return Path of font cache directory for the current skin.
+     * Gets a FileHandle for a file within the directory where the default skin files should be stored
      */
-    public static String getFontDir() {
+    public static FileHandle getDefaultSkinFile(String filename) {
+        return Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR + filename);
+    }
+
+    /**
+     * Gets a FileHandle for the directory where fonts should be cached
+     */
+    public static FileHandle getFontDir() {
         return preferredFontDir;
+    }
+
+    /**
+     * Gets a FileHandle for a file within the directory where fonts should be cached
+     */
+    public static FileHandle getFontFile(String filename) {
+        return preferredFontDir != null ? preferredFontDir.child(filename) : null;
     }
 
     /**
@@ -280,23 +300,11 @@ public class FSkin {
         final ArrayList<String> mySkins = new ArrayList<String>();
 
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
-        if (!dir.exists() || !dir.isDirectory()) {
-            //if skins directory doesn't exists, create a minimum directory containing skin files for the splash screen
-            FileUtil.ensureDirectoryExists(ForgeConstants.DEFAULT_SKINS_DIR);
-            final FileHandle defaultDir = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
-            Gdx.files.internal(ForgeConstants.SPLASH_BG_FILE).copyTo(defaultDir.child(ForgeConstants.SPLASH_BG_FILE));
-            Gdx.files.internal(ForgeConstants.TEXTURE_BG_FILE).copyTo(defaultDir.child(ForgeConstants.TEXTURE_BG_FILE));
-            Gdx.files.internal(ForgeConstants.FONT_FILE).copyTo(defaultDir.child(ForgeConstants.FONT_FILE));
-            mySkins.add("default");
-            needReloadAfterAssetsDownloaded = true; //flag that skins need to be reloaded after assets downloaded
-        }
-        else {
-            for (FileHandle skinFile : dir.list()) {
-                String skinName = skinFile.name();
-                if (skinName.equalsIgnoreCase(".svn")) { continue; }
-                if (skinName.equalsIgnoreCase(".DS_Store")) { continue; }
-                mySkins.add(skinName);
-            }
+        for (FileHandle skinFile : dir.list()) {
+            String skinName = skinFile.name();
+            if (skinName.equalsIgnoreCase(".svn")) { continue; }
+            if (skinName.equalsIgnoreCase(".DS_Store")) { continue; }
+            mySkins.add(skinName);
         }
 
         return mySkins;

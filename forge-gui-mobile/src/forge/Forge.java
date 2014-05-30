@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -78,8 +77,6 @@ public class Forge implements ApplicationListener {
 
         splashScreen = new SplashScreen();
 
-        System.err.println("testing2323");
-
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = new ForgePreferences().getPref(FPref.UI_SKIN);
@@ -88,6 +85,8 @@ public class Forge implements ApplicationListener {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
         FSkin.loadLight(skinName, splashScreen);
+
+        log("after load light");
 
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
@@ -247,10 +246,9 @@ public class Forge implements ApplicationListener {
         shapeRenderer.dispose();
     }
 
-    //special utility method to help with debugging
-    public static void debugPrint(String message) {
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        Gdx.app.debug("Forge", message);
+    //log message to Forge.log file
+    public static void log(String message) {
+        System.out.println(message);
     }
 
     public static void startKeyInput(KeyInputAdapter adapter) {

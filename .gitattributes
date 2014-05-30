@@ -645,9 +645,9 @@ forge-gui-android/.settings/org.eclipse.core.resources.prefs -text
 forge-gui-android/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-android/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui-android/AndroidManifest.xml -text
-forge-gui-android/assets/bg_splash.png -text
-forge-gui-android/assets/bg_texture.jpg -text
-forge-gui-android/assets/font1.ttf -text
+forge-gui-android/assets/fallback_skin/bg_splash.png -text
+forge-gui-android/assets/fallback_skin/bg_texture.jpg -text
+forge-gui-android/assets/fallback_skin/font1.ttf -text
 forge-gui-android/ic_launcher-web.png -text
 forge-gui-android/libs/android-support-v4.jar -text
 forge-gui-android/libs/armeabi-v7a/libgdx-freetype.so -text
@@ -1069,9 +1069,6 @@ forge-gui-mobile-dev/.classpath -text
 forge-gui-mobile-dev/.project -text
 forge-gui-mobile-dev/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui-mobile-dev/.settings/org.eclipse.m2e.core.prefs -text
-forge-gui-mobile-dev/bg_splash.png -text
-forge-gui-mobile-dev/bg_texture.jpg -text
-forge-gui-mobile-dev/font1.ttf -text
 forge-gui-mobile-dev/libs/gdx-backend-lwjgl-natives.jar -text
 forge-gui-mobile-dev/libs/gdx-backend-lwjgl-sources.jar -text
 forge-gui-mobile-dev/libs/gdx-backend-lwjgl.jar -text
