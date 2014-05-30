@@ -15,6 +15,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
 
@@ -29,7 +30,7 @@ import forge.util.TextUtil;
 public class AssetsDownloader {
     //if not forge-gui-mobile-dev, check whether assets are up to date
     public static void checkForUpdates(final SplashScreen splashScreen) {
-        //if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
+        if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
 
         //TODO see if app needs updating
         //progressBar.setDescription("Checking for updates");
