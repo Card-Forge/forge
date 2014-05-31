@@ -48,6 +48,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         boolean canCancel = allowCancel;
         boolean canOk = hasEnoughTargets();
 
+        ButtonUtil.reset();
         if (canOk && canCancel) { ButtonUtil.enableAllFocusOk(); }
         if (!canOk && canCancel) { ButtonUtil.enableOnlyCancel(); }
         if (canOk && !canCancel) { ButtonUtil.enableOnlyOk(); }

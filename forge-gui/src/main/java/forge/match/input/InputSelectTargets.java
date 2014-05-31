@@ -74,6 +74,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         showMessage(sb.toString());
 
         // If reached Minimum targets, enable OK button
+        ButtonUtil.reset();
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
