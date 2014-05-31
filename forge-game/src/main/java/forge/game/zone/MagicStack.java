@@ -19,6 +19,9 @@ package forge.game.zone;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
+import forge.GameCommand;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
@@ -46,6 +49,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingDeque;
 
 
@@ -71,6 +75,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final List<Card> thisTurnCast = new ArrayList<Card>();
     private List<Card> lastTurnCast = new ArrayList<Card>();
     private Card curResolvingCard = null;
+    private final HashMap<String, List<GameCommand>> commandList = new HashMap<String, List<GameCommand>>();
 
     private final Game game;
 
@@ -399,6 +404,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Run SpellCast triggers
             if (sp.isSpell()) {
                 game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
+                this.executeCastCommand(si.getSpellAbility().getHostCard());
             }
 
             // Run AbilityCast triggers
@@ -857,6 +863,29 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      */
     public final List<Card> getCardsCastLastTurn() {
         return this.lastTurnCast;
+    }
+
+    public final void addCastCommand(final String valid, final GameCommand c) {
+        if (this.commandList.containsKey(valid)) {
+            this.commandList.get(valid).add(0, c);
+        } else {
+            this.commandList.put(valid, Lists.newArrayList(c));
+        }
+    }
+
+    private void executeCastCommand(final Card cast) {
+        for (Entry<String, List<GameCommand>> ev : this.commandList.entrySet()) {
+            if (cast.isType(ev.getKey())) {
+                this.execute(ev.getValue());
+            }
+        }
+    }
+
+    private void execute(final List<GameCommand> c) {
+        final int length = c.size();
+        for (int i = 0; i < length; i++) {
+            c.remove(0).run();
+        }
     }
 
     /**

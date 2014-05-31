@@ -12267,6 +12267,7 @@ forge-gui/res/cardsfolder/s/soul_ransom.txt -text
 forge-gui/res/cardsfolder/s/soul_reap.txt -text
 forge-gui/res/cardsfolder/s/soul_rend.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_scourge.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/soul_sculptor.txt -text
 forge-gui/res/cardsfolder/s/soul_seizer_ghastly_haunting.txt -text
 forge-gui/res/cardsfolder/s/soul_shepherd.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soul_shred.txt svneol=native#text/plain

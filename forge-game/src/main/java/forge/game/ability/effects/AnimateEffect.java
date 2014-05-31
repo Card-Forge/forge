@@ -299,6 +299,8 @@ public class AnimateEffect extends AnimateEffectBase {
                     }
                 } else if (sa.hasParam("UntilControllerNextUntap")) {
                     game.getUntap().addUntil(c.getController(), unanimate);
+                } else if (sa.hasParam("UntilAPlayerCastSpell")) {
+                    game.getStack().addCastCommand(sa.getParam("UntilAPlayerCastSpell"), unanimate);
                 } else if (sa.hasParam("UntilYourNextTurn")) {
                     game.getCleanup().addUntil(source.getController(), unanimate);
                 } else {
