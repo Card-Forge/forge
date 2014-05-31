@@ -49,6 +49,7 @@ import forge.util.Utils;
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.5.19.005";
 
+    private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
     private static int screenWidth;
     private static int screenHeight;
@@ -59,12 +60,15 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public Forge(Clipboard clipboard0, String assetDir0) {
-        if (GuiBase.getInterface() != null) {
-            throw new RuntimeException("Cannot initialize Forge more than once");
+    public static ApplicationListener getApp(Clipboard clipboard0, String assetDir0) {
+        if (GuiBase.getInterface() == null) {
+            clipboard = clipboard0;
+            GuiBase.setInterface(new GuiMobile(assetDir0));
         }
-        clipboard = clipboard0;
-        GuiBase.setInterface(new GuiMobile(assetDir0));
+        return app;
+    }
+
+    private Forge() {
     }
 
     @Override

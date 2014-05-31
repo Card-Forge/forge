@@ -151,7 +151,7 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
         else {
             g.fillRect(BACK_COLOR, 0, 0, w, h);
 
-            float selWidth = w * (float)value / (float)maximum;
+            float selWidth = Math.round(w * (float)value / (float)maximum);
             if (selWidth > 0) {
                 g.fillRect(SEL_BACK_COLOR, 0, 0, selWidth, h);
                 selTextRegions.add(Pair.of(0f, selWidth));

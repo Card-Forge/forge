@@ -35,6 +35,6 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(new Forge(getClipboard(), assetsDir), true);
+        initialize(Forge.getApp(getClipboard(), assetsDir), true);
     }
 }

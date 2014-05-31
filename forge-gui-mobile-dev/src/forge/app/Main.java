@@ -8,6 +8,6 @@ import forge.util.Utils;
 
 public class Main {
     public static void main(String[] args) {
-        new LwjglApplication(new Forge(new LwjglClipboard(), "../forge-gui/"), "Forge", (int)Utils.BASE_WIDTH, (int)Utils.BASE_HEIGHT, true);
+        new LwjglApplication(Forge.getApp(new LwjglClipboard(), "../forge-gui/"), "Forge", (int)Utils.BASE_WIDTH, (int)Utils.BASE_HEIGHT, true);
     }
 }
