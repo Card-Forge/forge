@@ -463,8 +463,18 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         List<Card> oppCreatures = opp.getCreaturesInPlay();
         float chance = 0;
         
+        //create and buff attackers
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
-            //1. grant haste
+            //1. become attacker for whatever reason
+            if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
+                    threat *= 2;
+                }
+                chance += threat;
+            }
+            
+            //2. grant haste
             if (keywords.contains("Haste") && c.hasSickness()) {
                 chance += 0.5f;
                 if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
@@ -472,7 +482,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
             
-            //2. grant evasive
+            //3. grant evasive
             if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
                         && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
@@ -481,7 +491,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         }
         
-        // combat trickery
+        //combat trickery
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
             Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : ai.getOpponent());
