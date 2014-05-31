@@ -47,7 +47,7 @@ import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.5.19.004";
+    public static final String CURRENT_VERSION = "1.5.19.005";
 
     private static Clipboard clipboard;
     private static int screenWidth;
