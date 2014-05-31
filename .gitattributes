@@ -6379,6 +6379,7 @@ forge-gui/res/cardsfolder/h/hakim_loreweaver.txt -text
 forge-gui/res/cardsfolder/h/halam_djinn.txt -text
 forge-gui/res/cardsfolder/h/halberdier.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/halcyon_glaze.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/halfdane.txt -text
 forge-gui/res/cardsfolder/h/halimar_depths.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/halimar_excavator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/halimar_wavewatch.txt svneol=native#text/plain

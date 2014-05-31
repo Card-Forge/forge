@@ -7,6 +7,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
+import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
@@ -290,6 +291,12 @@ public class AnimateEffect extends AnimateEffectBase {
                     source.addLeavesPlayCommand(unanimate);
                 } else if (sa.hasParam("UntilYourNextUpkeep")) {
                     game.getUpkeep().addUntil(source.getController(), unanimate);
+                } else if (sa.hasParam("UntilTheEndOfYourNextUpkeep")) {
+                    if (game.getPhaseHandler().is(PhaseType.UPKEEP)) {
+                        game.getUpkeep().registerUntilEnd(source.getController(), unanimate);
+                    } else {
+                        game.getUpkeep().addUntilEnd(source.getController(), unanimate);
+                    }
                 } else if (sa.hasParam("UntilControllerNextUntap")) {
                     game.getUntap().addUntil(c.getController(), unanimate);
                 } else if (sa.hasParam("UntilYourNextTurn")) {

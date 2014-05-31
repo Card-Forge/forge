@@ -93,7 +93,8 @@ public class Phase implements java.io.Serializable {
 
     /** The until map. */
     private final HashMap<Player, List<GameCommand>> untilMap = new HashMap<Player, List<GameCommand>>();
-
+    private final HashMap<Player, List<GameCommand>> untilEndMap = new HashMap<Player, List<GameCommand>>();
+    private final HashMap<Player, List<GameCommand>> registerMap = new HashMap<Player, List<GameCommand>>();
     /**
      * <p>
      * Add a Command that will terminate an effect with "until <Player's> next <phase>".
@@ -118,6 +119,35 @@ public class Phase implements java.io.Serializable {
     public final void executeUntil(final Player p) {
         if (this.untilMap.containsKey(p)) {
             this.execute(this.untilMap.get(p));
+        }
+    }
+
+    public final void registerUntilEnd(Player p, final GameCommand c) {
+        if (this.registerMap.containsKey(p)) {
+            this.registerMap.get(p).add(0, c);
+        } else {
+            this.registerMap.put(p, Lists.newArrayList(c));
+        }
+    }
+
+    public final void addUntilEnd(Player p, final GameCommand c) {
+        if (this.untilEndMap.containsKey(p)) {
+            this.untilEndMap.get(p).add(0, c);
+        } else {
+            this.untilEndMap.put(p, Lists.newArrayList(c));
+        }
+    }
+
+    public final void RegisterUntilEndCommand(final Player p) {
+        if (this.registerMap.containsKey(p)) {
+            this.untilEndMap.put(p, registerMap.get(p));
+            registerMap.remove(p);
+        }      
+    }
+
+    public final void executeUntilEndOfPhase(final Player p) {
+        if (this.untilEndMap.containsKey(p)) {
+            this.execute(this.untilEndMap.get(p));
         }
     }
 
