@@ -88,8 +88,6 @@ public class Forge implements ApplicationListener {
         }
         FSkin.loadLight(skinName, splashScreen);
 
-        log("after load light");
-
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override

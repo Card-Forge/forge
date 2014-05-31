@@ -61,7 +61,6 @@ public class FSkin {
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.SKINS_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
-            forge.Forge.log("skins directory doesn't exist");
             //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
             preferredDir = Gdx.files.internal("fallback_skin");
             preferredFontDir = null;
