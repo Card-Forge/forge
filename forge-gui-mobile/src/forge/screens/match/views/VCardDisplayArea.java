@@ -16,8 +16,8 @@ import forge.util.ThreadUtil;
 public abstract class VCardDisplayArea extends VDisplayArea {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
-    private final List<Card> orderedCards = new ArrayList<Card>();
-    private final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
+    protected final List<Card> orderedCards = new ArrayList<Card>();
+    protected final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
 
     public Iterable<CardAreaPanel> getCardPanels() {
         return cardPanels;
