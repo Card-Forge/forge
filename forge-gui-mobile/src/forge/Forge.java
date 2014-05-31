@@ -258,6 +258,7 @@ public class Forge implements ApplicationListener {
         screens.clear();
         batch.dispose();
         shapeRenderer.dispose();
+        System.exit(0);
     }
 
     //log message to Forge.log file
