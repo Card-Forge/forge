@@ -602,7 +602,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void declareBlockers(Player defender, Combat combat) {
         // This input should not modify combat object itself, but should return user choice
-        InputBlock inpBlock = new InputBlock(player, defender, combat);
+        InputBlock inpBlock = new InputBlock(defender, combat);
         inpBlock.showAndWait();
     }
 

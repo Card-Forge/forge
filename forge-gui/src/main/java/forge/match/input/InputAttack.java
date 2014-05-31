@@ -265,7 +265,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private final void setCurrentDefender(GameEntity def) {
         currentDefender = def;
-        for(GameEntity ge: defenders) {
+        for (GameEntity ge : defenders) {
             if (ge instanceof Card) {
                 GuiBase.getInterface().setUsedToPay((Card)ge, ge == def);
             }
@@ -279,7 +279,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private final void activateBand(AttackingBand band) {
         if (activeBand != null) {
-            for(Card card : activeBand.getAttackers()) {
+            for (Card card : activeBand.getAttackers()) {
                 GuiBase.getInterface().setUsedToPay(card, false);
             }
         }

@@ -20,6 +20,8 @@ package forge.match.input;
 import forge.GuiBase;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
@@ -43,41 +45,38 @@ public class InputBlock extends InputSyncronizedBase {
     // some cards may block several creatures at a time. (ex:  Two-Headed Dragon, Vanguard's Shield)
     private final Combat combat;
     private final Player defender;
-    private final Player declarer;
 
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param priority
-     */
-    public InputBlock(Player whoDeclares, Player whoDefends, Combat combat) {
-        defender = whoDefends;
-        declarer = whoDeclares;
-        this.combat = combat;
+    public InputBlock(Player defender0, Combat combat0) {
+        defender = defender0;
+        combat = combat0;
+
+        //auto-select first attacker to declare blockers for
+        for (Card attacker : combat.getAttackers()) {
+            for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+                if (CombatUtil.canBlock(attacker, c, combat)) {
+                    setCurrentAttacker(attacker);
+                    return;
+                }
+            }
+        }
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
         // could add "Reset Blockers" button
+        ButtonUtil.reset();
         ButtonUtil.enableOnlyOk();
 
-        String prompt = declarer == defender ? "declare blockers." : "declare blockers for " + defender.getName();
-
-        final StringBuilder sb = new StringBuilder(declarer.getName());
-        sb.append(", ").append(prompt).append("\n\n");
-
-        if (this.currentAttacker == null) {
-            sb.append("To Block, click on your opponent's attacker first, then your blocker(s).\n");
-            sb.append("To cancel a block right-click on your blocker");
+        if (currentAttacker == null) {
+            showMessage("Select another attacker to declare blockers for.");
         }
         else {
-            final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
-            sb.append("Select a creature to block ").append(attackerName).append(" (");
-            sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
-            sb.append("To cancel a block right-click on your blocker");
+            String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName() + " (" + currentAttacker.getUniqueNumber() + ")";
+            String message = "Select creatures to block " + attackerName + " or select another attacker to declare blockers for.";
+            showMessage(message);
         }
 
-        showMessage(sb.toString());
         GuiBase.getInterface().showCombat(combat);
     }
 
@@ -85,12 +84,12 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     public final void onOk() {
         String blockErrors = CombatUtil.validateBlocks(combat, defender);
-        if( null == blockErrors ) {
+        if (blockErrors == null) {
             // Done blocking
-            ButtonUtil.reset();
             setCurrentAttacker(null);
             stop();
-        } else {
+        }
+        else {
             SGuiDialog.message(blockErrors);
         }
     }
@@ -112,11 +111,19 @@ public class InputBlock extends InputSyncronizedBase {
             }
             else {
                 // Make sure this card is valid to even be a blocker
-                if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
-                    isCorrectAction = CombatUtil.canBlock(this.currentAttacker, card, combat);
-                    if (isCorrectAction) {
-                        combat.addBlocker(this.currentAttacker, card);
-                        GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
+                if (currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
+                    if (combat.isBlocking(card, currentAttacker)) {
+                        //if creature already blocking current attacker, remove blocker from combat
+                        combat.removeBlockAssignment(currentAttacker, card);
+                        GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, (Card)null));
+                        isCorrectAction = true;
+                    }
+                    else {
+                        isCorrectAction = CombatUtil.canBlock(currentAttacker, card, combat);
+                        if (isCorrectAction) {
+                            combat.addBlocker(currentAttacker, card);
+                            GuiBase.getInterface().fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
+                        }
                     }
                 }
             }
@@ -125,13 +132,13 @@ public class InputBlock extends InputSyncronizedBase {
                 flashIncorrectAction();
             }
         }
-        this.showMessage();
+        showMessage();
         return isCorrectAction;
     }
 
     private void setCurrentAttacker(Card card) {
         currentAttacker = card;
-        for(Card c : combat.getAttackers()) {
+        for (Card c : combat.getAttackers()) {
             GuiBase.getInterface().setUsedToPay(c, card == c);
         }
     }
