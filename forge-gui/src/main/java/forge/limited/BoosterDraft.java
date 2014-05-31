@@ -154,6 +154,23 @@ public final class BoosterDraft implements IBoosterDraft {
         draft.pack = draft.get8BoosterPack();
         return draft;
     }
+    
+    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
+        
+        BoosterDraft draft = new BoosterDraft(draftType);
+        
+        final int nPacks = boosters.length;
+
+        for (int i = 0; i < nPacks; i++) {
+            draft.product.add(block.getBooster(boosters[i]));
+        }
+
+        IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
+
+        draft.pack = draft.get8BoosterPack();
+        return draft;
+        
+    }
 
     /**
      * <p>

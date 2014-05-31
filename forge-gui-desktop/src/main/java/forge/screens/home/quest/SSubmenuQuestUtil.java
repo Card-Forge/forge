@@ -45,6 +45,7 @@ import java.util.List;
  */
 public class SSubmenuQuestUtil {
     private static QuestEvent event;
+    private static QuestEventDraft draftEvent; 
 
     /**
      * <p>
@@ -239,6 +240,14 @@ public class SSubmenuQuestUtil {
      */
     public static void setEvent(final QuestEvent event0) {
         SSubmenuQuestUtil.event = event0;
+    }
+    
+    public static void setDraftEvent(final QuestEventDraft event0) {
+        SSubmenuQuestUtil.draftEvent = event0;
+    }
+    
+    public static QuestEventDraft getDraftEvent() {
+        return draftEvent;
     }
 
     public static boolean checkActiveQuest(String location) {

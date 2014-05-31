@@ -53,7 +53,9 @@ import forge.util.WaitRunnable;
 import forge.util.gui.SGuiChoose;
 
 public class GuiMobile implements IGuiBase {
+    
     private final String assetsDir;
+    
     public GuiMobile(String assetsDir0) {
         assetsDir = assetsDir0;
     }
@@ -203,6 +205,14 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void updatePlayerControl() {
         //TODO
+    }
+    
+    @Override
+    public void disableOverlay() {
+    }
+    
+    @Override
+    public void enableOverlay() {
     }
 
     @Override

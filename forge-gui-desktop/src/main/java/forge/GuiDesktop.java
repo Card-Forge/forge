@@ -75,6 +75,9 @@ import forge.util.BuildInfo;
 import forge.util.ITriggerEvent;
 
 public class GuiDesktop implements IGuiBase {
+    
+    private boolean showOverlay = true;
+    
     @Override
     public void invokeInEdtLater(Runnable proc) {
         SwingUtilities.invokeLater(proc);
@@ -212,11 +215,23 @@ public class GuiDesktop implements IGuiBase {
             h.getLayoutControl().updateHand();
         }
     }
+    
+    @Override
+    public void disableOverlay() {
+        showOverlay = false;
+    }
+    
+    @Override
+    public void enableOverlay() {
+        showOverlay = true;
+    }
 
     @Override
     public void finishGame() {
         new ViewWinLose(Singletons.getControl().getObservedGame());
-        SOverlayUtils.showOverlay();
+        if (showOverlay) {
+            SOverlayUtils.showOverlay();
+        }
     }
 
     @Override

@@ -1,18 +1,32 @@
 package forge.screens.match;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+import net.miginfocom.swing.MigLayout;
 import forge.UiCommand;
-import forge.game.*;
+import forge.game.Game;
+import forge.game.GameLog;
+import forge.game.GameLogEntry;
+import forge.game.GameLogEntryType;
+import forge.game.GameOutcome;
 import forge.game.player.Player;
 import forge.model.FModel;
-import forge.toolbox.*;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOverlay;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
+import forge.toolbox.FTextArea;
 
 
 public class ViewWinLose {
@@ -24,7 +38,7 @@ public class ViewWinLose {
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
 
     private final Game game;
-
+    
     @SuppressWarnings("serial")
     public ViewWinLose(final Game game0) {
 
@@ -47,6 +61,9 @@ public class ViewWinLose {
         switch (game0.getRules().getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
+            break;
+        case QuestDraft:
+            control = new QuestDraftWinLose(this, game0);
             break;
         case Draft:
             if (!FModel.getGauntletMini().isGauntletDraft()) {

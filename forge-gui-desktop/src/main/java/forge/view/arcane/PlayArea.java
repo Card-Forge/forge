@@ -19,8 +19,6 @@ package forge.view.arcane;
 
 import forge.FThreads;
 import forge.game.card.Card;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
@@ -58,7 +56,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** Constant <code>STACK_SPACING_Y=0.07f</code>. */
     private static final float STACK_SPACING_Y = 0.07f;
 
-    private final int creatureStackMax = 4;
+    //private final int creatureStackMax = 4;
     private final int landStackMax = 5;
     private final int tokenStackMax = 5;
     private final int othersStackMax = 4;
@@ -186,7 +184,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return allTokens;
     }
 
-    private final CardStackRow collectAllCreatures() {
+    /*private final CardStackRow collectAllCreatures() {
         final CardStackRow allCreatures = new CardStackRow();
         outerLoop:
         //
@@ -236,7 +234,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             allCreatures.add(insertIndex == -1 ? allCreatures.size() : insertIndex, stack);
         }
         return allCreatures;
-    }
+    }*/
 
     @Override
     public final CardPanel addCard(final Card card) {

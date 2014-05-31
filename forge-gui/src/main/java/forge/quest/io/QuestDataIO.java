@@ -27,12 +27,14 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.error.BugReporter;
 import forge.item.*;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
+import forge.quest.QuestEventDraft;
 import forge.quest.QuestMode;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.*;
@@ -79,6 +81,7 @@ public class QuestDataIO {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
         xStream.registerConverter(new ItemPoolToXml());
         xStream.registerConverter(new DeckToXml());
+        xStream.registerConverter(new DraftTournamentToXml());
         xStream.registerConverter(new GameFormatQuestToXml());
         xStream.registerConverter(new QuestModeToXml());
         xStream.autodetectAnnotations(true);
@@ -184,10 +187,10 @@ public class QuestDataIO {
             QuestDataIO.setFinalField(QuestData.class, "petSlots", newData, new HashMap<Integer, String>());
         }
         
-        if(saveVersion < 8) {
+        if (saveVersion < 8) {
         	QuestDataIO.setFinalField(QuestData.class, "isCharmActive", newData, false);
         }
-
+        
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
 
@@ -316,7 +319,10 @@ public class QuestDataIO {
                 if (!(lc instanceof String))
                     qA.getCurrentChallenges().set(i, lc.toString());
             }
-
+            
+        case 8:
+            QuestDataIO.setFinalField(QuestAssets.class, "draftDecks", qS, new HashMap<String, DeckGroup>());
+            
         default:
             break;
         }
@@ -468,6 +474,161 @@ public class QuestDataIO {
             final String value = reader.getValue();
             return QuestMode.smartValueOf(value, QuestMode.Classic);
         }
+    }
+    
+    private static class DraftTournamentToXml implements Converter {
+
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(Class type) {
+            return type.equals(QuestEventDraftContainer.class);
+        }
+
+        @Override
+        public void marshal(Object source, HierarchicalStreamWriter writer,
+                MarshallingContext context) {
+            
+            QuestEventDraftContainer drafts = (QuestEventDraftContainer) source;
+            
+            for (QuestEventDraft draft : drafts) {
+                
+                writer.startNode("draft");
+                
+                writer.startNode("title");
+                writer.setValue(draft.getTitle());
+                writer.endNode();
+                
+                writer.startNode("packs");
+                String output = "";
+                for (int i = 0; i < draft.getBoosterConfiguration().length; i++) {
+                    output += draft.getBoosterConfiguration()[i];
+                    if (i != draft.getBoosterConfiguration().length - 1) {
+                        output += "/";
+                    }
+                }
+                writer.setValue(output);
+                writer.endNode();
+                
+                writer.startNode("entryFee");
+                writer.setValue(String.valueOf(draft.getEntryFee()));
+                writer.endNode();
+                
+                writer.startNode("block");
+                writer.setValue(draft.getBlock());
+                writer.endNode();
+                
+                writer.startNode("standings");
+                int i = 0;
+                for (String standing : draft.getStandings()) {
+                    writer.startNode("s" + i++);
+                    writer.setValue(standing);
+                    writer.endNode();
+                }
+                writer.endNode();
+                
+                writer.startNode("aiNames");
+                i = 0;
+                for (String name : draft.getAINames()) {
+                    writer.startNode("ain" + i++);
+                    writer.setValue(name);
+                    writer.endNode();
+                }
+                writer.endNode();
+                
+                writer.startNode("aiIcons");
+                i = 0;
+                for (int icon : draft.getAIIcons()) {
+                    writer.startNode("aii" + i++);
+                    writer.setValue(icon + "");
+                    writer.endNode();
+                }
+                writer.endNode();
+                
+                writer.endNode();
+                
+            }
+            
+        }
+
+        @Override
+        public Object unmarshal(HierarchicalStreamReader reader,
+                UnmarshallingContext context) {
+            
+            QuestEventDraftContainer output = new QuestEventDraftContainer();
+            
+            while (reader.hasMoreChildren()) {
+                
+                reader.moveDown();
+                
+                //TODO Use switch and hasMoreChildren()
+                
+                reader.moveDown();
+                String draftName = reader.getValue();
+                reader.moveUp();
+                
+                reader.moveDown();
+                String boosterConfiguration = reader.getValue();
+                reader.moveUp();
+                
+                reader.moveDown();
+                int entryFee = Integer.parseInt(reader.getValue());
+                reader.moveUp();
+                
+                reader.moveDown();
+                String block = reader.getValue();
+                reader.moveUp();
+                
+                String[] standings = new String[15];
+                
+                reader.moveDown();
+                int i = 0;
+                while (reader.hasMoreChildren()) {
+                    reader.moveDown();
+                    standings[i++] = reader.getValue();
+                    reader.moveUp();
+                }
+                reader.moveUp();
+
+                String[] aiNames = new String[7];
+                
+                reader.moveDown();
+                i = 0;
+                while (reader.hasMoreChildren()) {
+                    reader.moveDown();
+                    aiNames[i++] = reader.getValue();
+                    reader.moveUp();
+                }
+                reader.moveUp();
+
+                int[] aiIcons = new int[7];
+                
+                reader.moveDown();
+                i = 0;
+                while (reader.hasMoreChildren()) {
+                    reader.moveDown();
+                    aiIcons[i++] = Integer.parseInt(reader.getValue());
+                    reader.moveUp();
+                }
+                reader.moveUp();
+                
+                QuestEventDraft draft = new QuestEventDraft(draftName);
+                draft.setBoosterConfiguration(boosterConfiguration);
+                draft.setEntryFee(entryFee);
+                draft.setBlock(block);
+                draft.setStandings(standings);
+                draft.setAINames(aiNames);
+                draft.setAIIcons(aiIcons);
+                
+                output.add(draft);
+                
+                reader.moveUp();
+                
+            }
+            
+            return output;
+            
+        }
+        
     }
 
     private static class DeckToXml extends ItemPoolToXml {

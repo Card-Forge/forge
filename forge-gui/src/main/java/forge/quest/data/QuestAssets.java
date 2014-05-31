@@ -17,20 +17,22 @@
  */
 package forge.quest.data;
 
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.quest.QuestDeckGroupMap;
 import forge.quest.QuestDeckMap;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtilCards;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.ItemPool;
-
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
 
 /** */
 public class QuestAssets {
@@ -62,6 +64,8 @@ public class QuestAssets {
 
     // Much the same like other map, but keyed by string (to support a lot of custom pets)
     private final Map<String, QuestItemCondition> combatPets = new HashMap<String, QuestItemCondition>();
+    
+    private final HashMap<String, DeckGroup> draftDecks = new HashMap<String, DeckGroup>();
     /**
      * Checks for item.
      *
@@ -261,6 +265,13 @@ public class QuestAssets {
      */
     public QuestDeckMap getDeckStorage() {
         return new QuestDeckMap(this.myDecks);
+    }
+
+    /**
+     * @return the tournament deck storage
+     */
+    public QuestDeckGroupMap getDraftDeckStorage() {
+        return new QuestDeckGroupMap(this.draftDecks);
     }
 
 }

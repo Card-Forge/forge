@@ -17,12 +17,20 @@
  */
 package forge.quest;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.eventbus.Subscribe;
 
 import forge.GuiBase;
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.game.GameFormat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
@@ -42,9 +50,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
-
-import java.io.File;
-import java.util.*;
 
 /**
  * TODO: Write javadoc for this type.
@@ -76,6 +81,9 @@ public class QuestController {
 
     // This is used by shop. Had no idea where else to place this
     private static transient IStorage<PreconDeck> preconManager = null;
+    
+    private transient IStorage<DeckGroup> draftDecks;
+    
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -91,8 +99,7 @@ public class QuestController {
 
     /** */
     public static final int MAX_PET_SLOTS = 2;
-
-
+    
     /**
      * 
      * TODO: Write javadoc for this method.
@@ -141,6 +148,10 @@ public class QuestController {
      */
     public IStorage<Deck> getMyDecks() {
         return this.decks;
+    }
+    
+    public IStorage<DeckGroup> getDraftDecks() {
+        return draftDecks;
     }
 
     /**
@@ -209,6 +220,8 @@ public class QuestController {
         this.myCards = this.model == null ? null : new QuestUtilCards(this);
         this.questFormat = this.model == null ? null : this.model.getFormat();
         this.currentEvent = null;
+        
+        this.draftDecks = this.model == null ? null : this.model.getAssets().getDraftDeckStorage();
 
         this.resetDuelsManager();
         this.resetChallengesManager();

@@ -41,7 +41,7 @@ import java.util.Map;
  */
 public final class QuestData {
     /** Holds the latest version of the Quest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 8;
+    public static final int CURRENT_VERSION_NUMBER = 9;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor

@@ -64,6 +64,8 @@ public interface IGuiBase {
     void updatePhase();
     void updateTurn(GameEventTurnBegan event, Game game);
     void updatePlayerControl();
+    void enableOverlay();
+    void disableOverlay();
     void finishGame();
     void updateStack();
     void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate);

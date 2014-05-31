@@ -113,6 +113,14 @@ public enum FScreen {
             true,
             "Close Editor",
             ForgeConstants.EDITOR_LAYOUT_FILE),
+    DECK_EDITOR_QUEST_TOURNAMENT(
+            VDeckEditorUI.SINGLETON_INSTANCE,
+            CDeckEditorUI.SINGLETON_INSTANCE,
+            "Quest Tournament Deck Editor",
+            FSkin.getImage(FSkinProp.IMG_PACK),
+            true,
+            "Close Editor",
+            ForgeConstants.EDITOR_LAYOUT_FILE),
     QUEST_CARD_SHOP(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,

@@ -118,6 +118,7 @@ public enum VHomeUI implements IVTopLevelUI {
 
         allSubmenus.add(VSubmenuDuels.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuChallenges.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuQuestDraft.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuQuestDecks.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuQuestData.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuQuestPrefs.SINGLETON_INSTANCE);

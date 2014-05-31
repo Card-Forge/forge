@@ -820,6 +820,8 @@ forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorDraf
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorLimited.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQuest.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQuestCardShop.java -text
+forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQuestDraftingProcess.java -text
+forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQuestLimited.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorVariant.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CProbabilities.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CStatistics.java -text
@@ -858,10 +860,13 @@ forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuChallenges.java
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuDuels.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestData.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestDecks.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestDraft.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestPrefs.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/DialogChooseSets.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/IVQuestStats.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlDraftEvent.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlEvent.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestDraftUtils.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestFileLister.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestPreferencesHandler.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/SSubmenuQuestUtil.java -text
@@ -869,6 +874,7 @@ forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuChallenges.java
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuDuels.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuQuestData.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuQuestDecks.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuQuestDraft.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuQuestPrefs.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/ViewItem.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/ViewStall.java -text
@@ -896,6 +902,7 @@ forge-gui-desktop/src/main/java/forge/screens/match/ControlWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/GameLogPanel.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/GauntletWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/LimitedWinLose.java -text
+forge-gui-desktop/src/main/java/forge/screens/match/QuestDraftWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/QuestWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/QuestWinLoseCardViewer.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/TargetingOverlay.java -text
@@ -16437,10 +16444,12 @@ forge-gui/src/main/java/forge/properties/package-info.java svneol=native#text/pl
 forge-gui/src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/IQuestRewardCard.java -text
 forge-gui/src/main/java/forge/quest/QuestController.java -text
+forge-gui/src/main/java/forge/quest/QuestDeckGroupMap.java -text
 forge-gui/src/main/java/forge/quest/QuestDeckMap.java -text
 forge-gui/src/main/java/forge/quest/QuestEvent.java -text
 forge-gui/src/main/java/forge/quest/QuestEventChallenge.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/QuestEventDifficulty.java -text
+forge-gui/src/main/java/forge/quest/QuestEventDraft.java -text
 forge-gui/src/main/java/forge/quest/QuestEventDuel.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/QuestEventDuelManager.java -text
 forge-gui/src/main/java/forge/quest/QuestMode.java -text
@@ -16473,6 +16482,7 @@ forge-gui/src/main/java/forge/quest/data/GameFormatQuest.java -text
 forge-gui/src/main/java/forge/quest/data/QuestAchievements.java -text
 forge-gui/src/main/java/forge/quest/data/QuestAssets.java -text
 forge-gui/src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
+forge-gui/src/main/java/forge/quest/data/QuestEventDraftContainer.java -text
 forge-gui/src/main/java/forge/quest/data/QuestItemCondition.java -text
 forge-gui/src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/data/package-info.java svneol=native#text/plain
