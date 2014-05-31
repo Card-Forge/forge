@@ -97,12 +97,22 @@ public class InputAttack extends InputSyncronizedBase {
         updateMessage();
     }
 
+    //determine whether currently attackers can be called back (undeclared)
+    private boolean canCallBackAttackers() {
+        for (Card c : combat.getAttackers()) {
+            if (canUndeclareAttacker(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void updatePrompt() {
-        if (combat.getAttackers().isEmpty()) {
-            ButtonUtil.setButtonText("OK", "Alpha Strike");
+        if (canCallBackAttackers()) {
+            ButtonUtil.setButtonText("OK", "Call Back");
         }
         else {
-            ButtonUtil.setButtonText("OK", "Cancel");
+            ButtonUtil.setButtonText("OK", "Alpha Strike");
         }
         ButtonUtil.enableAllFocusOk();
     }
@@ -121,7 +131,14 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     protected final void onCancel() {
         //either alpha strike or undeclare all attackers based on whether any attackers have been declared
-        if (combat.getAttackers().isEmpty()) {
+        if (canCallBackAttackers()) {
+            //undeclare all attackers
+            List<Card> attackers = new ArrayList<Card>(combat.getAttackers()); //must copy list since it will be modified
+            for (Card c : attackers) {
+                undeclareAttacker(c);
+            }
+        }
+        else {
             //alpha strike
             List<Player> defenders = playerAttacks.getOpponents();
     
@@ -136,13 +153,6 @@ public class InputAttack extends InputSyncronizedBase {
                         break;
                     }
                 }
-            }
-        }
-        else {
-            //undeclare all attackers
-            List<Card> attackers = new ArrayList<Card>(combat.getAttackers()); //must copy list since it will be modified
-            for (Card c : attackers) {
-                undeclareAttacker(c);
             }
         }
         updateMessage();
@@ -234,20 +244,23 @@ public class InputAttack extends InputSyncronizedBase {
         GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, currentDefender));
     }
 
+    private boolean canUndeclareAttacker(Card card) {
+        return !card.hasKeyword("CARDNAME attacks each turn if able.") &&
+               !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able");
+    }
+
     private boolean undeclareAttacker(Card card) {
-        if (card.hasKeyword("CARDNAME attacks each turn if able.") ||
-                card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-            return false;
+        if (canUndeclareAttacker(card)) {
+            // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
+            combat.removeFromCombat(card);
+            GuiBase.getInterface().setUsedToPay(card, false);
+            // When removing an attacker clear the attacking band
+            activateBand(null);
+
+            GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, null));
+            return true;
         }
-
-        // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
-        combat.removeFromCombat(card);
-        GuiBase.getInterface().setUsedToPay(card, false);
-        // When removing an attacker clear the attacking band
-        activateBand(null);
-
-        GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(card, null));
-        return true;
+        return false;
     }
 
     private final void setCurrentDefender(GameEntity def) {
