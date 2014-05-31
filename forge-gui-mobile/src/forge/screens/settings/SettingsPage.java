@@ -135,6 +135,10 @@ public class SettingsPage extends TabPage {
                 "Hide Reminder Text",
                 "Hide reminder text in Card Detail pane."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_MATCH_IMAGE_VISIBLE,
+                "Show Match Background",
+                "Show match background image on battlefield, otherwise background texture shown instead."),
+                4);
 
         //Sound Options
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,

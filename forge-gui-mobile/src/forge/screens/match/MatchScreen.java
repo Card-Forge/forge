@@ -11,7 +11,9 @@ import com.badlogic.gdx.Input.Keys;
 
 import forge.LobbyPlayer;
 import forge.menu.FMenuBar;
+import forge.model.FModel;
 import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VDevMenu;
@@ -178,7 +180,9 @@ public class MatchScreen extends FScreen {
             float y = midField - topPlayerPanel.getField().getHeight();
             float w = getWidth();
 
-            g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
+                g.drawImage(FSkinTexture.BG_MATCH, 0, y, w, midField + bottomPlayerPanel.getField().getHeight() - y);
+            }
 
             //field separator lines
             if (topPlayerPanel.getSelectedTab() == null) {
