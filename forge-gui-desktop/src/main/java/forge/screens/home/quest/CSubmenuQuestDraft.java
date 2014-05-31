@@ -66,7 +66,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
             view.setMode(Mode.SELECT_TOURNAMENT);
-        } else if (!FModel.getQuest().getAchievements().isTournamentActive()) {
+        } else if (!FModel.getQuest().getAchievements().isTournamentStarted()) {
             view.setMode(Mode.PREPARE_DECK);
         } else {
             view.setMode(Mode.TOURNAMENT_ACTIVE);
@@ -339,10 +339,21 @@ public enum CSubmenuQuestDraft implements ICDoc {
     }
     
     private void startTournament() {
+        
+        boolean okayToStart = FOptionPane.showConfirmDialog("You will not be able to edit your deck once you start the tournament.\nAre you sure you wish to continue?", "Start Tournament?");
+        
+        if (!okayToStart) {
+            return;
+        }
+        
+        FModel.getQuest().getAchievements().setTournamentStarted(true);
+        FModel.getQuest().save();
+        
         VSubmenuQuestDraft.SINGLETON_INSTANCE.setMode(Mode.TOURNAMENT_ACTIVE);
         VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
+        
         update();
-        // TODO All the stuff needed for the tournament itself
+        
     }
     
     private Deck copyDeck(final Deck deck) {
