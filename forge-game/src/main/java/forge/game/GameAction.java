@@ -762,6 +762,14 @@ public class GameAction {
                     controllerChangeZoneCorrection(c);
                     checkAgain = true;
                 }
+                if (c.isCreature() && c.isPaired()) {
+                    Card partner = c.getPairedWith();
+                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
+                        c.setPairedWith(null);
+                        partner.setPairedWith(null);
+                        checkAgain = true;
+                    }
+                }
             }
         }
 
@@ -825,14 +833,6 @@ public class GameAction {
             List<Card> noRegCreats = new ArrayList<Card>();
             List<Card> desCreats = new ArrayList<Card>();
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                if (c.isCreature() && c.isPaired()) { // Soulbond unpairing (702.93e) - should not be here
-                    Card partner = c.getPairedWith();
-                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
-                        c.setPairedWith(null);
-                        partner.setPairedWith(null);
-                    }
-                }
-
                 if (c.isCreature()) {
                     // Rule 704.5f - Destroy (no regeneration) for toughness <= 0
                     if (c.getNetDefense() <= 0) {
