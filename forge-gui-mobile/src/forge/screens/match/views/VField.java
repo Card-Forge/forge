@@ -100,7 +100,8 @@ public class VField extends FContainer {
         for (Card c : cardsOfType) {
             if (!c.isEnchanted() && !c.isEquipped() &&
                     card.getName().equals(c.getName()) &&
-                    card.getCounters().equals(card.getCounters())) {
+                    card.getCounters().equals(card.getCounters()) &&
+                    card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
                 CardAreaPanel cPanel = CardAreaPanel.get(c);
                 while (cPanel.getNextPanelInStack() != null) {
                     cPanel = cPanel.getNextPanelInStack();
