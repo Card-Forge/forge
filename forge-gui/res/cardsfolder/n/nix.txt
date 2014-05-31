@@ -1,0 +1,7 @@
+Name:Nix
+ManaCost:U
+Types:Instant
+A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Card | CounterNoManaSpell$ True | SpellDescription$ Counter target spell if no mana was spent to cast it.
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nix.jpg
+Oracle:Counter target spell if no mana was spent to cast it.

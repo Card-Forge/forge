@@ -39,12 +39,17 @@ public class CounterAi extends SpellAbilityAi {
         if (tgt != null) {
 
             final SpellAbility topSA = game.getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai) {
+            if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
+                    || ai.getAllies().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return false;
             }
             if (sa.hasParam("AITgts") && (topSA.getHostCard() == null
                     || !topSA.getHostCard().isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), source))) {
+                return false;
+            }
+
+            if (sa.hasParam("CounterNoManaSpell") && topSA.getTotalManaSpent() == 0) {
                 return false;
             }
 

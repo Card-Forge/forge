@@ -138,7 +138,7 @@ public class Phase implements java.io.Serializable {
         }
     }
 
-    public final void RegisterUntilEndCommand(final Player p) {
+    public final void registerUntilEndCommand(final Player p) {
         if (this.registerMap.containsKey(p)) {
             this.untilEndMap.put(p, registerMap.get(p));
             registerMap.remove(p);

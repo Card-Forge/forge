@@ -104,6 +104,10 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            if (sa.hasParam("CounterNoManaSpell") && tgtSA.getTotalManaSpent() != 0) {
+                continue;
+            }
+
             if (sa.hasParam("RememberCounteredCMC")) {
                 sa.getHostCard().addRemembered((Integer) tgtSACard.getCMC());
             }
