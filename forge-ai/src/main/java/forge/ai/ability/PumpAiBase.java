@@ -461,13 +461,23 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         final Player opp = ai.getOpponent();
         Card pumped = pumpedCreature(ai, sa, c, defense, attack, keywords);
         List<Card> oppCreatures = opp.getCreaturesInPlay();
-        // grant evasive
-        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) 
-                && !CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
-            if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
-                    && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                final float chance = MyRandom.getRandom().nextFloat();
-                return chance < 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+        float chance = 0;
+        
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
+            //1. grant haste
+            if (keywords.contains("Haste") && c.hasSickness()) {
+                chance += 0.5f;
+                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                }
+            }
+            
+            //2. grant evasive
+            if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
+                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
+                        && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                }
             }
         }
         
@@ -529,8 +539,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             
             //3. buff unblocked attacker
             if (combat.isAttacking(c) && combat.isUnblocked(c) && attack > 0) {
-                final float chance = MyRandom.getRandom().nextFloat();
-                return chance < 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                chance += 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
             }
             
             //4. if the life of the computer is in danger, try to pump blockers blocking Tramplers
@@ -545,7 +554,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
         }
-        return false;
+        return MyRandom.getRandom().nextFloat() < chance;
     }
 
     /**
@@ -668,6 +677,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
     public Card pumpedCreature(final Player ai, final SpellAbility sa, final Card c, final int d, final int a,
             final List<String> keywords) {
         Card pumped = c.isToken() ? CardFactory.copyStats(c, ai) : CardFactory.getCard(c.getPaperCard(), ai);
+        pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
         final ArrayList<String> kws = new ArrayList<String>();
         for (String kw : keywords) {
@@ -680,7 +690,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         pumped.addTempAttackBoost(a);
         pumped.addTempDefenseBoost(d);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
-        pumped.setSickness(c.hasSickness());
         return pumped;
     }
 }
