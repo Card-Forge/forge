@@ -8,7 +8,7 @@ Revised, 3/6/3ED, 3ED
 Legends, 3/6/3ED, LEG  
 The Dark, 5/9/3ED, DRK  
 Fallen Empires, 5/9/3ED, FEM  
-Fourth Edition, 3/6/4ED, 4ED  
+Fourth Edition, 3/6/4ED, 4ED CHR  
 Ice Age, 3/6/ICE, ICE ALL CSP
 Homelands, 5/9/4ED, HML  
 Mirage, 3/6/MIR, MIR VIS WTH
