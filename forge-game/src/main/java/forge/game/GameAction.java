@@ -672,9 +672,9 @@ public class GameAction {
     }
 
     /** */
-    public final void checkStaticAbilities() { // TODO return checkagain in SBA
+    public final boolean checkStaticAbilities() {
         if (game.isGameOver()) {
-            return;
+            return false;
         }
 
         // remove old effects
@@ -755,13 +755,25 @@ public class GameAction {
             }
         }
 
+        boolean checkAgain = false;
+        for (Player p : game.getPlayers()) {
+            for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+                if (!c.getController().equals(p)) {
+                    controllerChangeZoneCorrection(c);
+                    checkAgain = true;
+                }
+            }
+        }
+
         if (!affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
+            checkAgain = true;
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
+        return checkAgain;
     }
 
     /**
@@ -797,17 +809,9 @@ public class GameAction {
         // do this twice, sometimes creatures/permanents will survive when they
         // shouldn't
         for (int q = 0; q < 9; q++) {
-            boolean checkAgain = false;
-
-            this.checkStaticAbilities();
+            boolean checkAgain = this.checkStaticAbilities();
 
             for (Player p : game.getPlayers()) {
-                for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-                    if (!c.getController().equals(p)) { // should not be here
-                        controllerChangeZoneCorrection(c);
-                        checkAgain = true;
-                    }
-                }
                 for (ZoneType zt : ZoneType.values()) {
                     if (zt == ZoneType.Battlefield) {
                         continue;
