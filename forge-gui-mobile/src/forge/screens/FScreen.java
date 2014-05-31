@@ -10,6 +10,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
+import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -53,7 +54,7 @@ public abstract class FScreen extends FContainer {
     }
 
     public void showMenu() {
-        Forge.openScreen(new forge.screens.settings.SettingsScreen()); //TODO: Build menu containing settings item
+        SettingsScreen.show(); //TODO: Build menu containing settings item
         //buildMenu();
     }
 

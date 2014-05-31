@@ -58,7 +58,7 @@ public class HomeScreen extends FScreen {
         addButton("Settings", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new SettingsScreen());
+                SettingsScreen.show();
             }
         }, true);
     }

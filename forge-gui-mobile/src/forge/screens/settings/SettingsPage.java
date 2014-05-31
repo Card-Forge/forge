@@ -36,6 +36,7 @@ public class SettingsPage extends TabPage {
         lstSettings.addGroup("Random Deck Generation");
         lstSettings.addGroup("Advanced Settings");
         lstSettings.addGroup("Graphic Options");
+        lstSettings.addGroup("Card Overlays");
         //lstSettings.addGroup("Sound Options"); //TODO: Uncomment when sound supported
 
         //General Settings
@@ -140,15 +141,37 @@ public class SettingsPage extends TabPage {
                 "Show match background image on battlefield, otherwise background texture shown instead."),
                 4);
 
+        //Card Overlays
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_CARD_OVERLAYS,
+                "Show Card Overlays",
+                "Show name, mana cost, p/t, and id overlays for cards, otherwise they're hidden."),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_NAME,
+                "Show Card Name Overlays",
+                "Show name overlays for cards, otherwise they're hidden."),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_MANA_COST,
+                "Show Card Mana Cost Overlays",
+                "Show mana cost overlays for cards, otherwise they're hidden."),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_POWER,
+                "Show Card P/T Overlays",
+                "Show power/tougness/loyalty overlays for cards, otherwise they're hidden."),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_ID,
+                "Show Card ID Overlays",
+                "Show id overlays for cards, otherwise they're hidden."),
+                5);
+
         //Sound Options
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
                 "Enable Sounds",
                 "Enable sound effects during the game."),
-                5);
+                6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
-                5);*/ //TODO: Uncomment when sound supported
+                6);*/ //TODO: Uncomment when sound supported
     }
 
     @Override
