@@ -23,6 +23,8 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -1406,6 +1408,17 @@ public class AbilityUtils {
                     if (o instanceof Integer) {
                         count += (Integer) o;
                     }
+                }
+                return count;
+            }
+            // Count$TriggeredPayingMana.<Color1>.<Color2>
+            if (sq[0].startsWith("TriggeredPayingMana")) {
+                final SpellAbility root = sa.getRootAbility();
+                String mana = (String) root.getTriggeringObject("PayingMana");
+                int count = 0;
+                Matcher mat = Pattern.compile(StringUtils.join(sq, "|", 1, sq.length)).matcher(mana);
+                while (mat.find()) {
+                    count++;
                 }
                 return count;
             }

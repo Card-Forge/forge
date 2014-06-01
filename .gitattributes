@@ -2014,6 +2014,7 @@ forge-gui/res/cardsfolder/b/balduvian_barbarians.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_bears.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_conjurer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_dead.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/balduvian_fallen.txt -text
 forge-gui/res/cardsfolder/b/balduvian_frostwaker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_horde.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_hydra.txt svneol=native#text/plain

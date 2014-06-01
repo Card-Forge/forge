@@ -18,6 +18,7 @@
 package forge.game.phase;
 
 import com.google.common.base.Predicate;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -35,6 +36,8 @@ import forge.game.zone.ZoneType;
 
 import java.util.HashMap;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
@@ -165,6 +168,7 @@ public class Upkeep extends Phase {
                             final HashMap<String, Object> runParams = new HashMap<String, Object>();
                             runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
                             runParams.put("Card", this.getHostCard());
+                            runParams.put("PayingMana", StringUtils.join(this.getPayingMana(), ""));
                             game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
                             if(!isPaid)
                                 game.getAction().sacrifice(c, null);
