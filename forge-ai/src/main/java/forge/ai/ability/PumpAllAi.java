@@ -11,7 +11,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -121,38 +120,7 @@ public class PumpAllAi extends PumpAiBase {
             return true;
         } // end Curse
 
-        // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (phase.isBefore(PhaseType.MAIN1)) {
-            return false;
-        } else if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-        	return ComputerUtil.activateForCost(sa, ai);
-        }
-
-        // only count creatures that can attack
-        comp = CardLists.filter(comp, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (power <= 0 && !containsUsefulKeyword(ai, keywords, c, sa, power)) {
-                    return false;
-                }
-                if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS && combat.isAttacking(c)) {
-                    return true;
-                }
-                if (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && CombatUtil.canAttack(c, opp)) {
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        if (comp.size() <= human.size()) {
-            return false;
-        }
-        if (comp.size() <= 1 && (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa.isSpell())) {
-            return false;
-        }
-
-        return true;
+        return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords), valid, source.getController(), source).isEmpty();
     } // pumpAllCanPlayAI()
 
     @Override
