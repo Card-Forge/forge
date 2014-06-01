@@ -131,7 +131,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             
             if (prizes[0] != null && (int) prizes[0] > 0) {
                 FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + (int) prizes[0] + " credits!", "Credits Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_COINSTACK));
-                FModel.getQuest().getAssets().addCredits((long) prizes[0]);
+                FModel.getQuest().getAssets().addCredits((int) prizes[0]);
             }
             
             if (prizes[2] != null) {
