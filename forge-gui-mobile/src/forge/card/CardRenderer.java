@@ -396,7 +396,10 @@ public class CardRenderer {
         Texture image = ImageCache.getImage(card);
         g.drawImage(image, x, y, w, h);
 
-        drawFoilEffect(g, card, x, y, w, h);
+        boolean canShow = FControl.mayShowCard(card);
+        if (canShow) {
+            drawFoilEffect(g, card, x, y, w, h);
+        }
 
         float padding = w * 0.021f; //adjust for card border
         x += padding;
@@ -404,7 +407,7 @@ public class CardRenderer {
         w -= 2 * padding;
         h -= 2 * padding;
 
-        DetailColors borderColor = CardDetailUtil.getBorderColor(card, FControl.mayShowCard(card));
+        DetailColors borderColor = CardDetailUtil.getBorderColor(card, canShow);
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
