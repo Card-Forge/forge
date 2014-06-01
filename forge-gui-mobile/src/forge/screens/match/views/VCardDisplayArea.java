@@ -77,6 +77,10 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         remove(fromPanel);
     }
 
+    protected void clearChildren() {
+        super.clear();
+    }
+
     @Override
     public void clear() {
         super.clear();
