@@ -56,7 +56,7 @@ public class QuestDraftUtils {
         }
         
         switch (currentSet) {
-        
+            
             case 7:
                 addMatchup(0, 1, draft);
                 addMatchup(2, 3, draft);
@@ -64,8 +64,27 @@ public class QuestDraftUtils {
                 addMatchup(6, 7, draft);
                 break;
                 
+            case 8:
+                addMatchup(2, 3, draft);
+                addMatchup(4, 5, draft);
+                addMatchup(6, 7, draft);
+                break;
+                
+            case 9:
+                addMatchup(4, 5, draft);
+                addMatchup(6, 7, draft);
+                break;
+                
+            case 10:
+                addMatchup(6, 7, draft);
+                break;
+                
             case 11:
                 addMatchup(8, 9, draft);
+                addMatchup(10, 11, draft);
+                break;
+                
+            case 12:
                 addMatchup(10, 11, draft);
                 break;
                 

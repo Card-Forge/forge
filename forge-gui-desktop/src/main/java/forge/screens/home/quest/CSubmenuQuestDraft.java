@@ -80,8 +80,6 @@ public enum CSubmenuQuestDraft implements ICDoc {
                 new UiCommand() { @Override
                     public void run() { CSubmenuQuestDraft.this.endTournamentAndAwardPrizes(); } });
         
-        System.out.println(FModel.getQuest().getAchievements());
-        
         if (FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
             view.setMode(Mode.EMPTY);
         } else if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
@@ -420,11 +418,11 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         QuestEventDraft draftEvent = SSubmenuQuestUtil.getDraftEvent();
         
-        /*long creditsAvailable = FModel.getQuest().getAssets().getCredits();
+        long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (creditsAvailable < draftEvent.getEntryFee()) {
             FOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits");
             return;
-        }*/
+        }
         
         boolean okayToEnter = FOptionPane.showConfirmDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?");
         
