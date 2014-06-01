@@ -17,8 +17,14 @@
  */
 package forge.screens.match.views;
 
+import forge.Forge.Graphics;
+import forge.assets.FImage;
+import forge.assets.FSkin;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
+import forge.assets.FSkinColor.Colors;
 import forge.card.CardZoom;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -28,6 +34,7 @@ import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDialog;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -162,7 +169,7 @@ public class VAssignDamage extends FDialog {
         lblTotalDamage.setBounds(x, y, w, labelHeight);
 
         y += labelHeight + padding;
-        pnlDefenders.setBounds(x, y, w, cardPanelHeight + dtOffset);
+        pnlDefenders.setBounds(0, y, width, cardPanelHeight + dtOffset);
 
         return maxHeight;
     }
@@ -192,46 +199,38 @@ public class VAssignDamage extends FDialog {
             float dx = width + CARD_GAP_X;
 
             float x = (visibleWidth - defenders.size() * dx + CARD_GAP_X) / 2;
-            if (x < 0) {
-                x = 0;
+            if (x < FOptionPane.PADDING) {
+                x = FOptionPane.PADDING;
             }
 
             for (DamageTarget dt : defenders) {
                 dt.setBounds(x, 0, width, visibleHeight);
                 x += dx;
             }
-            return new ScrollBounds(x - CARD_GAP_X, visibleHeight);
+            return new ScrollBounds(x - CARD_GAP_X + FOptionPane.PADDING, visibleHeight);
         }
     }
 
     private class DamageTarget extends FContainer {
         private final Card card;
-        private final AttDefCardPanel cardPanel;
+        private final FDisplayObject obj;
         private final FLabel label, btnSubtract, btnAdd;
         private int damage;
 
         public DamageTarget(Card card0) {
             card = card0;
             if (card != null) {
-                cardPanel = add(new AttDefCardPanel(card));
+                obj = add(new AttDefCardPanel(card));
+            }
+            else if (defender instanceof Card) {
+                obj = add(new AttDefCardPanel((Card)defender));
+            }
+            else if (defender instanceof Player) {
+                Player player = (Player)defender;
+                obj = add(new MiscAttDefPanel(player.getName(), new FTextureRegionImage(FSkin.getAvatars().get(player.getLobbyPlayer().getAvatarIndex()))));
             }
             else {
-                Card fakeCard; 
-                if (defender instanceof Card) {
-                    fakeCard = (Card)defender;
-                }
-                else if (defender instanceof Player) { 
-                    Player p = (Player)defender;
-                    fakeCard = new Card(-1);
-                    fakeCard.setName(defender.getName());
-                    fakeCard.setOwner(p);
-                    //fakeCard.setImageKey(FControl.avatarImages.get(p.getOriginalLobbyPlayer()));
-                }
-                else {
-                    fakeCard = new Card(-2);
-                    fakeCard.setName(defender.getName());
-                }
-                cardPanel = add(new AttDefCardPanel(fakeCard));
+                obj = add(new MiscAttDefPanel(defender.getName(), FSkinImage.UNKNOWN));
             }
             label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(HAlignment.CENTER).build());
             btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
@@ -251,8 +250,8 @@ public class VAssignDamage extends FDialog {
         @Override
         protected void doLayout(float width, float height) {
             float y = 0;
-            cardPanel.setBounds(0, y, width, FCardPanel.ASPECT_RATIO * width);
-            y += cardPanel.getHeight();
+            obj.setBounds(0, y, width, FCardPanel.ASPECT_RATIO * width);
+            y += obj.getHeight();
 
             label.setBounds(0, y, width, label.getAutoSizeBounds().height);
             y += label.getHeight();
@@ -263,7 +262,7 @@ public class VAssignDamage extends FDialog {
         }
     }
 
-    private class AttDefCardPanel extends FCardPanel {
+    private static class AttDefCardPanel extends FCardPanel {
         private AttDefCardPanel(Card card) {
             super(card);
         }
@@ -283,6 +282,26 @@ public class VAssignDamage extends FDialog {
         @Override
         protected float getPadding() {
             return 0;
+        }
+    }
+
+    private static class MiscAttDefPanel extends FDisplayObject {
+        private static final FSkinFont FONT = FSkinFont.get(18);
+        private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+        private final String name;
+        private final FImage image;
+
+        private MiscAttDefPanel(String name0, FImage image0) {
+            name = name0;
+            image = image0;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            float w = getWidth();
+            float h = getHeight();
+            g.drawImage(image, 0, 0, w, w);
+            g.drawText(name, FONT, FORE_COLOR, 0, w, w, h - w, false, HAlignment.CENTER, true);
         }
     }
 
