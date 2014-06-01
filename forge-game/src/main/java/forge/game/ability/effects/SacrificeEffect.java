@@ -7,7 +7,9 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -23,6 +25,23 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card card = sa.getHostCard();
+        if (sa.hasParam("Echo")) {
+            boolean isPaid;
+            if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
+                    && activator.getController().confirmAction(sa, null, "Do you want to pay Echo {0}?")) {
+                isPaid = true;
+            } else {
+                isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
+                    sa, "Pay Echo", ManaPaymentPurpose.Echo);
+            }
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("EchoPaid", (Boolean) isPaid);
+            runParams.put("Card", card);
+            game.getTriggerHandler().runTrigger(TriggerType.PayEcho, runParams, false);
+            if (isPaid || !card.getController().equals(activator)) {
+                return;
+            }
+        }
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";

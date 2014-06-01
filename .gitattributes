@@ -609,6 +609,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerLifeLost.java svneol=native#t
 forge-game/src/main/java/forge/game/trigger/TriggerLosesGame.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerNewGame.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPayCumulativeUpkeep.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerPayEcho.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPhase.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerPhaseIn.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPhaseOut.java -text
@@ -11643,6 +11644,7 @@ forge-gui/res/cardsfolder/s/shadowborn_demon.txt -text
 forge-gui/res/cardsfolder/s/shadowfeed.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadowmage_infiltrator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shadowstorm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/shah_of_naar_isle.txt -text
 forge-gui/res/cardsfolder/s/shaleskin_bruiser.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shaleskin_plower.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shallow_grave.txt -text
@@ -13333,6 +13335,7 @@ forge-gui/res/cardsfolder/t/thermal_navigator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thermokarst.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thermopod.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thespians_stage.txt -text
+forge-gui/res/cardsfolder/t/thick_skinned_goblin.txt -text
 forge-gui/res/cardsfolder/t/thicket_basilisk.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/thicket_elemental.txt -text
 forge-gui/res/cardsfolder/t/thief_of_hope.txt svneol=native#text/plain

@@ -102,8 +102,7 @@ public class Upkeep extends Phase {
                 sb.append("Echo for ").append(c).append("\n");
                 String ref = "X".equals(c.getEchoCost()) ? " | References$ X" : "";
                 String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self | "
-                        + "UnlessPayer$ You | UnlessCost$ " + c.getEchoCost()
-                        + ref;
+                        + "Echo$ " + c.getEchoCost() + ref;
 
                 SpellAbility sacAbility = AbilityFactory.getAbility(effect, c);
                 sacAbility.setTrigger(true);

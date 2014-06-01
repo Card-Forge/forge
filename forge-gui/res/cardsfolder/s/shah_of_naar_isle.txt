@@ -1,0 +1,9 @@
+Name:Shah of Naar Isle
+ManaCost:3 R
+Types:Creature Efreet
+PT:6/6
+K:Trample
+K:Echo:0
+T:Mode$ PayEcho | ValidCard$ Card.Self | Paid$ True | Execute$ TrigDraw | TriggerDescription$ When CARDNAME's echo cost is paid, each opponent may draw up to three cards.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ Player.Opponent | Upto$ True | NumCards$ 3 | AILogic$ OptionalDraw
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shah_of_naar_isle.jpg
