@@ -65,6 +65,14 @@ public class DebuffEffect extends SpellAbilityEffect {
         for (final Card tgtC : getTargetCards(sa)) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
+                if (sa.hasParam("AllSuffixKeywords")) {
+                    String suffix = sa.getParam("AllSuffixKeywords");
+                    for (final String keyword : tgtC.getKeyword()) {
+                        if (keyword.endsWith(suffix)) {
+                            kws.add(keyword);
+                        }
+                    }
+                }
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);

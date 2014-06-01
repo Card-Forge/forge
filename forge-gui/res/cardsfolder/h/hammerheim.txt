@@ -1,0 +1,8 @@
+Name:Hammerheim
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R} to your mana pool.
+A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | AllSuffixKeywords$ walk | SpellDescription$ Target creature loses all landwalk abilities until end of turn.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerheim.jpg
+Oracle:{T}: Add {R} to your mana pool.\n{T}: Target creature loses all landwalk abilities until end of turn.
