@@ -1311,6 +1311,7 @@ forge-gui/res/cardsfolder/a/adamaro_first_to_desire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/adaptive_automaton.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/adaptive_snapjaw.txt -text
 forge-gui/res/cardsfolder/a/adarkar_sentinel.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/adarkar_unicorn.txt -text
 forge-gui/res/cardsfolder/a/adarkar_valkyrie.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/adarkar_wastes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/adarkar_windform.txt svneol=native#text/plain
