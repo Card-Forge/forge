@@ -208,15 +208,26 @@ public class CardRenderer {
     }
 
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, float x, float y, float w, float h) {
-        drawCardListItem(g, font, foreColor, getCardArt(card), card.getRules(), card.getCurSetCode(),
-                card.getRarity(), card.getNetAttack(), card.getNetDefense(),
-                card.getCurrentLoyalty(), count, x, y, w, h);
+        CardRules cardRules = card.getRules();
+        if (cardRules != null) {
+            drawCardListItem(g, font, foreColor, getCardArt(card), cardRules, card.getCurSetCode(),
+                    card.getRarity(), card.getNetAttack(), card.getNetDefense(),
+                    card.getCurrentLoyalty(), count, x, y, w, h);
+        }
+        else { //if fake card, just draw card name centered
+            g.drawText(card.getName(), font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        }
     }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, float x, float y, float w, float h) {
         CardRules cardRules = paperCard.getRules();
-        drawCardListItem(g, font, foreColor, getCardArt(paperCard), cardRules, paperCard.getEdition(),
-                paperCard.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
-                cardRules.getInitialLoyalty(), count, x, y, w, h);
+        if (cardRules != null) {
+            drawCardListItem(g, font, foreColor, getCardArt(paperCard), cardRules, paperCard.getEdition(),
+                    paperCard.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
+                    cardRules.getInitialLoyalty(), count, x, y, w, h);
+        }
+        else { //if fake card, just draw card name centered
+            g.drawText(paperCard.getName(), font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+        }
     }
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, float x, float y, float w, float h) {
         float cardArtHeight = h + 2 * FList.PADDING;
