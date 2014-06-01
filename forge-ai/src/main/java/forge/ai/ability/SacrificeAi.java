@@ -8,6 +8,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -138,6 +139,11 @@ public class SacrificeAi extends SpellAbilityAi {
             return false;
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
 
