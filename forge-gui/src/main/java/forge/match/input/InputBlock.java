@@ -17,6 +17,7 @@
  */
 package forge.match.input;
 
+import forge.FThreads;
 import forge.GuiBase;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
@@ -51,10 +52,15 @@ public class InputBlock extends InputSyncronizedBase {
         combat = combat0;
 
         //auto-select first attacker to declare blockers for
-        for (Card attacker : combat.getAttackers()) {
-            for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+        for (final Card attacker : combat.getAttackers()) {
+            for (final Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
-                    setCurrentAttacker(attacker);
+                    FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
+                        @Override
+                        public void run() {
+                            setCurrentAttacker(attacker);
+                        }
+                    });
                     return;
                 }
             }
