@@ -147,7 +147,7 @@ public class CardRenderer {
         //draw name/type box
         Color nameBoxColor1 = FSkinColor.tintColor(Color.WHITE, color1, NAME_BOX_TINT);
         Color nameBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, NAME_BOX_TINT);
-        drawCardNameBox(g, card, nameBoxColor1, nameBoxColor2, x, y, w, cardNameBoxHeight);
+        drawCardNameBox(g, card, canShow, nameBoxColor1, nameBoxColor2, x, y, w, cardNameBoxHeight);
 
         float innerBorderThickness = outerBorderThickness / 2;
         float ptBoxHeight = 2 * PT_FONT.getCapHeight();
@@ -158,10 +158,12 @@ public class CardRenderer {
         Color textBoxColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, TEXT_BOX_TINT);
         drawCardTextBox(g, card, canShow, textBoxColor1, textBoxColor2, x, y, w, textBoxHeight);
 
-        y += textBoxHeight + innerBorderThickness;
-        Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, PT_BOX_TINT);
-        Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, PT_BOX_TINT);
-        drawCardIdAndPtBox(g, card, idForeColor, ptColor1, ptColor2, x, y, w, ptBoxHeight);
+        if (canShow) {
+            y += textBoxHeight + innerBorderThickness;
+            Color ptColor1 = FSkinColor.tintColor(Color.WHITE, color1, PT_BOX_TINT);
+            Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, PT_BOX_TINT);
+            drawCardIdAndPtBox(g, card, idForeColor, ptColor1, ptColor2, x, y, w, ptBoxHeight);
+        }
     }
 
     public static float getCardListItemHeight() {
@@ -285,7 +287,7 @@ public class CardRenderer {
         return false;
     }
 
-    private static void drawCardNameBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawCardNameBox(Graphics g, Card card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -299,24 +301,29 @@ public class CardRenderer {
         //make sure name/mana cost row height is tall enough for both
         h = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getCapHeight());
 
-        float manaCostWidth = CardFaceSymbols.getWidth(card.getManaCost(), MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
-        CardFaceSymbols.drawManaCost(g, card.getManaCost(), x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+        float manaCostWidth = 0;
+        if (canShow) {
+            manaCostWidth = CardFaceSymbols.getWidth(card.getManaCost(), MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+            CardFaceSymbols.drawManaCost(g, card.getManaCost(), x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+        }
 
         x += padding;
         w -= 2 * padding;
-        g.drawText(card.isFaceDown() ? "???" : card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+        g.drawText(!canShow || card.isFaceDown() ? "???" : card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
 
-        y += h;
-        h = 2 * TYPE_FONT.getCapHeight();
-
-        String set = card.getCurSetCode();
-        if (!StringUtils.isEmpty(set)) {
-            float setWidth = getSetWidth(SET_FONT, set);
-            drawSetLabel(g, SET_FONT, set, card.getRarity(), x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
-            w -= setWidth; //reduce available width for type
+        if (canShow) {
+            y += h;
+            h = 2 * TYPE_FONT.getCapHeight();
+    
+            String set = card.getCurSetCode();
+            if (!StringUtils.isEmpty(set)) {
+                float setWidth = getSetWidth(SET_FONT, set);
+                drawSetLabel(g, SET_FONT, set, card.getRarity(), x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
+                w -= setWidth; //reduce available width for type
+            }
+    
+            g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
         }
-
-        g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
     public static float getSetWidth(FSkinFont font, String set) {
