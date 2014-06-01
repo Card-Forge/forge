@@ -55,20 +55,21 @@ public class VZoneDisplay extends VCardDisplayArea {
     private void updateRevealedPanel(float x, float y) {
         if (revealedPanel.contains(x, y)) { return; }
 
-        int i;
-        for (i = cardPanels.size() - 1; i >= 0; i--) {
-            final FCardPanel cardPanel = cardPanels.get(i);
+        int idx = -1;
+        for (int i = getChildCount() - 2; i >= 0; i--) {
+            final FDisplayObject cardPanel = getChildAt(i);
             if (cardPanel.contains(x, y)) {
+                idx = cardPanels.indexOf(cardPanel);
                 break;
             }
         }
-        if (i >= 0) { //cascade cards back from revealed panel
+        if (idx >= 0) { //cascade cards back from revealed panel
             clearChildren();
             int maxIdx = cardPanels.size() - 1;
-            int offset = Math.max(i, maxIdx - i);
-            for (int j = offset; j > 0; j--) {
-                int idx1 = i - j;
-                int idx2 = i + j;
+            int offset = Math.max(idx, maxIdx - idx);
+            for (int i = offset; i > 0; i--) {
+                int idx1 = idx - i;
+                int idx2 = idx + i;
                 if (idx1 >= 0) {
                     add(cardPanels.get(idx1));
                 }
@@ -76,7 +77,7 @@ public class VZoneDisplay extends VCardDisplayArea {
                     add(cardPanels.get(idx2));
                 }
             }
-            revealedPanel = cardPanels.get(i);
+            revealedPanel = cardPanels.get(idx);
             add(revealedPanel);
         }
     }

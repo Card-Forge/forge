@@ -22,6 +22,10 @@ public abstract class FContainer extends FDisplayObject {
         children.clear();
     }
 
+    public FDisplayObject getChildAt(int index) {
+        return children.get(index);
+    }
+
     public int getChildCount() {
         return children.size();
     }
