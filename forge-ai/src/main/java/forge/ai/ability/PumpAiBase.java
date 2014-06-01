@@ -467,7 +467,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
             //1. become attacker for whatever reason
             if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat) / opp.getLife();
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
                     threat *= 2;
                 }
@@ -478,7 +478,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (keywords.contains("Haste") && c.hasSickness()) {
                 chance += 0.5f;
                 if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat) / opp.getLife();
                 }
             }
             
@@ -486,7 +486,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
                         && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat) / opp.getLife();
                 }
             }
         }
@@ -494,7 +494,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         //combat trickery
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
-            Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : ai.getOpponent());
+            Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : opp);
             List<Card> opposing = null;
             boolean pumpedWillDie = false;
             final boolean isAttacking = combat.isAttacking(c);
@@ -547,9 +547,23 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
             
-            //3. buff unblocked attacker
-            if (combat.isAttacking(c) && combat.isUnblocked(c) && attack > 0) {
-                chance += 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, ai.getOpponent(), combat) / ai.getOpponent().getLife();
+            //3. buff attacker
+            if (combat.isAttacking(c)) {
+                int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat);
+                int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat);
+                if (combat.isBlocked(c)) {
+                    if (!c.hasKeyword("Trample")) {
+                        dmg = 0;
+                    }
+                    if (c.hasKeyword("Trample") || keywords.contains("Trample")) {
+                       for (Card b : combat.getBlockers(c)) {
+                           pumpedDmg -= ComputerUtilCombat.getDamageToKill(b);
+                       }
+                    } else {
+                        pumpedDmg = 0;
+                    }
+                }
+                chance += 1.0f * (pumpedDmg - dmg) / opp.getLife();
             }
             
             //4. if the life of the computer is in danger, try to pump blockers blocking Tramplers
