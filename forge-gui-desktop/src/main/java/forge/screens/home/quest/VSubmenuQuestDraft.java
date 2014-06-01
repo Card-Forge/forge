@@ -1,8 +1,13 @@
 package forge.screens.home.quest;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
@@ -19,6 +24,7 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinImage;
 
 /**
  * Assembles Swing components of quest draft submenu singleton.
@@ -30,6 +36,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     SINGLETON_INSTANCE;
     
     protected static enum Mode {
+        EMPTY,
         SELECT_TOURNAMENT,
         PREPARE_DECK,
         TOURNAMENT_ACTIVE
@@ -51,6 +58,10 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         .fontStyle(Font.BOLD).fontSize(16)
         .fontAlign(SwingConstants.LEFT).build();
     
+    private final JLabel lblNoDrafts = new FLabel.Builder().text("There are no tournaments available at this time.")
+        .fontStyle(Font.PLAIN).fontSize(16)
+        .fontAlign(SwingConstants.LEFT).build();
+    
     private final StartButton btnStartDraft  = new StartButton();
     private final StartButton btnStartTournament  = new StartButton();
     private final StartButton btnStartMatch  = new StartButton();
@@ -59,6 +70,8 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     private final FLabel btnLeaveTournament = new FLabel.ButtonBuilder().text("Leave Tournament").fontSize(14).build();
     
     private final JLabel lblsStandings[] = new JLabel[15];
+
+    private final JPanel pnlDeckImage;
     
     private Mode mode = Mode.SELECT_TOURNAMENT;
     
@@ -70,6 +83,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
                     .fontStyle(Font.BOLD).fontSize(14)
                     .fontAlign(SwingConstants.LEFT).build();
         }
+        pnlDeckImage = new ProportionalPanel(FSkin.getImage(FSkinProp.IMG_QUEST_DRAFT_DECK), 680, 475);
     }
     
     public LblHeader getLblTitle() {
@@ -172,7 +186,11 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
             case TOURNAMENT_ACTIVE:
                 populateTournamentActive();
                 break;
+            case EMPTY:
             default:
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax right, wrap"));
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 35px, ax right");
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNoDrafts, "h 30px!, gap 0 0 5px");
                 break;
         
         }
@@ -192,11 +210,17 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     }
     
     private void populatePrepareDeck() {
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout(
+                "insets 0, gap 0, ax center, wrap",
+                "",
+                "[][grow, center][][][]"
+                ));
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 20% 0 15px 35px, ax right");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnEditDeck, "w 150px, h 50px, gap 0 0 35% 0, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartTournament, "gap 0 0 30px 0, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 100px, h 35px, gap 0 0 100px 0, ax center");
+        pnlDeckImage.setMaximumSize(new Dimension(680, 475));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDeckImage, "ax center, grow");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnEditDeck, "w 150px, h 50px, gap 0 0 15px 0, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartTournament, "gap 0 0 10px 10px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 150px, h 35px, gap 0 0 25px 10%, ax center");
     }
     
     private void populateTournamentActive() {
@@ -227,12 +251,80 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         panel.add(lblsStandings[7], constraints);
         
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(panel, "gap 0 0 30px 0, ax center");
-        
-        /*for (JLabel label : lblsStandings) {
-            VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(label, "h 30px!, gap 0 0 5px");
-        }*/
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartMatch, "gap 0 0 30px 0, ax center");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 120px, h 35px, gap 0 0 100px 0, ax center");
+        
+    }
+    
+    private class ProportionalPanel extends JPanel {
+        
+        private static final long serialVersionUID = 2098643413467094674L;
+        
+        private final SkinImage image;  
+        
+        int w, h;
+        
+        public ProportionalPanel(SkinImage image, int w, int h) {  
+            this.image = image;
+            this.w = w;
+            this.h = h;
+        }
+        
+        @Override  
+        public Dimension getPreferredSize() {  
+            return new ProportionalDimension(super.getSize(), w, h);  
+        }
+
+        @Override
+        public void paintComponent(final Graphics g) {
+            
+            Graphics2D g2d = (Graphics2D) g.create();
+            
+            Dimension srcSize = image.getSizeForPaint(g2d);
+            int wSrc = srcSize.width;
+            int hSrc = srcSize.height;
+            
+            int wImg = getPreferredSize().width;
+            int hImg = getPreferredSize().height;
+            
+            int xOffset = (getSize().width - wImg) / 2;
+            
+            RenderingHints hints = new RenderingHints(
+                    RenderingHints.KEY_INTERPOLATION,
+                    RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            g2d.setRenderingHints(hints);
+            
+            FSkin.drawImage(g2d, image,
+                    xOffset, 0, wImg + xOffset, hImg, // Destination
+                    0, 0, wSrc, hSrc); // Source
+            
+            g2d.dispose();
+            
+        }
+        
+    }  
+        
+    private class ProportionalDimension extends Dimension {  
+        
+        private static final long serialVersionUID = -428811386088062426L;
+        
+        public ProportionalDimension(Dimension d, int w, int h) {
+            
+            double containerAspect = (double) d.width / d.height;
+            double imageAspect = (double) w / h;
+            double scale = 1.0;
+            
+            if (imageAspect < containerAspect) {
+                scale = (double) d.height / h;
+            } else if (imageAspect > containerAspect) {
+                scale = (double) d.width / w;
+            }
+            
+            height = (int) (((double) h) * scale);
+            width = (int) (((double) w) * scale);
+            
+        }
+        
     }
     
 }

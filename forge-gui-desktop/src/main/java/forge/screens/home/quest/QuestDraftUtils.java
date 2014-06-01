@@ -30,7 +30,6 @@ public class QuestDraftUtils {
         }
         
         if (!matchInProgress) {
-            // Reset other stuff
             Singletons.getControl().endCurrentGame();
             Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         } else {

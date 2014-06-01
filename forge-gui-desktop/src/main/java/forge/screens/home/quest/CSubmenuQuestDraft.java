@@ -23,9 +23,13 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.BoxedProductCardListViewer;
+import forge.gui.CardListViewer;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.item.BoosterPack;
+import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
@@ -64,14 +68,6 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         final VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
         
-        if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
-            view.setMode(Mode.SELECT_TOURNAMENT);
-        } else if (!FModel.getQuest().getAchievements().isTournamentStarted()) {
-            view.setMode(Mode.PREPARE_DECK);
-        } else {
-            view.setMode(Mode.TOURNAMENT_ACTIVE);
-        }
-        
         view.getBtnStartDraft().addActionListener(selectTournamentStart);
         view.getBtnStartTournament().addActionListener(prepareDeckStart);
         view.getBtnStartMatch().addActionListener(nextMatchStart);
@@ -82,19 +78,127 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         view.getBtnLeaveTournament().setCommand(
                 new UiCommand() { @Override
-                    public void run() { CSubmenuQuestDraft.this.TEMP_END_TOURNAMENT(); } });
+                    public void run() { CSubmenuQuestDraft.this.endTournamentAndAwardPrizes(); } });
+        
+        System.out.println(FModel.getQuest().getAchievements());
+        
+        if (FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
+            view.setMode(Mode.EMPTY);
+        } else if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
+            view.setMode(Mode.SELECT_TOURNAMENT);
+        } else if (!FModel.getQuest().getAchievements().getCurrentDraft().isStarted()) {
+            view.setMode(Mode.PREPARE_DECK);
+        } else {
+            view.setMode(Mode.TOURNAMENT_ACTIVE);
+        }
         
     }
     
-    private void TEMP_END_TOURNAMENT() {
+    @SuppressWarnings("unchecked")
+    private void endTournamentAndAwardPrizes() {
         
-        // TODO Integrate better
+        QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
         
-        Deck deck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
+        if (draft.playerHasMatchesLeft()) {
+            boolean shouldQuit = FOptionPane.showConfirmDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
+                    + "\nYou will still receive winnings as if you conceded your next match and you get to keep all your current cards.\n\nWould you still like to quit the tournament?", "Really Quit?", false);
+            if (!shouldQuit) {
+                return;
+            }
+        }
         
-        FModel.getQuest().getCards().addAllCards(deck.getAllCardsInASinglePool().toFlatList());
+        String placement = QuestEventDraft.getPlacementString(draft.getPlayerPlacement());
         
-        if (FOptionPane.showOptionDialog("Add this draft to normal mode?", "Add Draft?", FSkin.getImage(FSkinProp.ICO_QUESTION), new String[] { "Yes", "No" }) == 0) {
+        Object[] prizes = draft.getPrizes();
+        
+        if (prizes[0] != null && (int) prizes[0] > 0) {
+            FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + (int) prizes[0] + " credits!", "Credits Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_COINSTACK));
+            FModel.getQuest().getAssets().addCredits((long) prizes[0]);
+        }
+        
+        if (prizes[2] != null) {
+            
+            List<PaperCard> individualCards = (ArrayList<PaperCard>) prizes[2];
+            
+            if (!individualCards.isEmpty()) {
+                final CardListViewer c = new CardListViewer("Tournament Reward", "For participating in the tournament, you have been awarded the following promotional card:", individualCards);
+                c.setVisible(true);
+                c.dispose();
+                FModel.getQuest().getCards().addAllCards(individualCards);
+            }
+            
+        }
+        
+        if (prizes[1] != null) {
+            
+            List<BoosterPack> boosterPacks = (ArrayList<BoosterPack>) prizes[1];
+
+            if (!boosterPacks.isEmpty()) {
+                
+                String packPlural = (boosterPacks.size() == 1) ? "" : "s";
+                
+                FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + boosterPacks.size() + " booster pack" + packPlural + "!", "Booster Pack" + packPlural + " Awarded", FSkin.getImage(FSkinProp.ICO_CARD_IMAGE));
+                
+                if (FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV) && boosterPacks.size() > 1) {
+
+                    boolean skipTheRest = false;
+                    List<PaperCard> remainingCards = new ArrayList<PaperCard>();
+                    int totalPacks = boosterPacks.size();
+                    int currentPack = 0;
+                    
+                    while (boosterPacks.size() > 0) {
+                        
+                        BoosterPack pack = boosterPacks.remove(0);
+                        currentPack++;
+                        
+                        if (skipTheRest) {
+                            remainingCards.addAll(pack.getCards());
+                            continue;
+                        }
+                        
+                        final BoxedProductCardListViewer c = new BoxedProductCardListViewer(pack.getName(), "You have found the following cards inside (Booster Pack " + currentPack + " of " + totalPacks + "):", pack.getCards());
+                        c.setVisible(true);
+                        c.dispose();
+                        skipTheRest = c.skipTheRest();
+                        FModel.getQuest().getCards().addAllCards(pack.getCards());
+                        
+                    }
+                    
+                    if (skipTheRest && !remainingCards.isEmpty()) {
+                        final CardListViewer c = new CardListViewer("Tournament Reward", "You have found the following cards inside:", remainingCards);
+                        c.setVisible(true);
+                        c.dispose();
+                        FModel.getQuest().getCards().addAllCards(remainingCards);
+                    }
+                    
+                } else {
+                    
+                    List<PaperCard> cards = new ArrayList<PaperCard>();
+                    
+                    while (boosterPacks.size() > 0) {
+                        BoosterPack pack = boosterPacks.remove(0);
+                        cards.addAll(pack.getCards());
+                        continue;
+                    }
+                    
+                    final CardListViewer c = new CardListViewer("Tournament Reward", "You have found the following cards inside:", cards);
+                    c.setVisible(true);
+                    c.dispose();
+                    FModel.getQuest().getCards().addAllCards(cards);
+                    
+                }
+            }
+            
+        }
+        
+        if (draft.getPlayerPlacement() == 1) {
+            FOptionPane.showMessageDialog("For placing " + placement + ", another tournament will be immediately available!");
+            FModel.getQuest().getAchievements().addDraftToken();
+        }
+        
+        boolean saveDraft = FOptionPane.showConfirmDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?");
+        
+        if (saveDraft) {
             
             String tournamentName = FModel.getQuest().getName() + " Tournament Deck " + new SimpleDateFormat("EEE d MMM yyyy HH-mm-ss").format(new Date());
             
@@ -106,7 +210,11 @@ public enum CSubmenuQuestDraft implements ICDoc {
             output.setHumanDeck(copyDeck(original.getHumanDeck(), tournamentName));
             FModel.getDecks().getDraft().add(output);
             CSubmenuDraft.SINGLETON_INSTANCE.update();
+            
         }
+        
+        Deck deck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
+        FModel.getQuest().getCards().addAllCards(deck.getAllCardsInASinglePool().toFlatList());
         
         if (deck.get(DeckSection.Main).countAll() > 0) {
             FModel.getQuest().getMyDecks().add(FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck());
@@ -134,13 +242,6 @@ public enum CSubmenuQuestDraft implements ICDoc {
     private final ActionListener prepareDeckStart = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent event) {
-            //TODO Refactor the deck getting to a single method
-            String message = GameType.QuestDraft.getDecksFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
-            if (message != null) {
-                //TODO Pref for allowing non-conformant decks
-                FOptionPane.showMessageDialog(message, "Deck Invalid");
-                return;
-            }
             CSubmenuQuestDraft.this.startTournament();
         }
     };
@@ -174,9 +275,20 @@ public enum CSubmenuQuestDraft implements ICDoc {
     public void update() {
         
         VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
-
-        if (FModel.getQuest().getAchievements() == null) {
+        
+        if (FModel.getQuest().getAchievements() == null || FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
+            view.setMode(Mode.EMPTY);
             return;
+        }
+        
+        if ((FModel.getQuest().getDraftDecks() == null
+            || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)
+            || FModel.getQuest().getAchievements().getCurrentDraftIndex() == -1)) {
+            view.setMode(Mode.SELECT_TOURNAMENT);
+        } else if (!FModel.getQuest().getAchievements().getCurrentDraft().isStarted()) {
+            view.setMode(Mode.PREPARE_DECK);
+        } else {
+            view.setMode(Mode.TOURNAMENT_ACTIVE);
         }
         
         QuestDraftUtils.update();
@@ -340,14 +452,21 @@ public enum CSubmenuQuestDraft implements ICDoc {
     
     private void startTournament() {
         
+        //TODO Refactor the deck getting to a single method
+        String message = GameType.QuestDraft.getDecksFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
+        if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            //TODO Pref for allowing non-conformant decks
+            FOptionPane.showMessageDialog(message, "Deck Invalid");
+            return;
+        }
+        
         boolean okayToStart = FOptionPane.showConfirmDialog("You will not be able to edit your deck once you start the tournament.\nAre you sure you wish to continue?", "Start Tournament?");
         
         if (!okayToStart) {
             return;
         }
         
-        FModel.getQuest().getAchievements().setTournamentStarted(true);
-        FModel.getQuest().save();
+        FModel.getQuest().getAchievements().getCurrentDraft().start();
         
         VSubmenuQuestDraft.SINGLETON_INSTANCE.setMode(Mode.TOURNAMENT_ACTIVE);
         VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();

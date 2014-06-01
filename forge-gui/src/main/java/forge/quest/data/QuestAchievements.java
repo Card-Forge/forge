@@ -30,8 +30,6 @@ public class QuestAchievements {
     private int winstreakCurrent = 0;
     private int lost;
     
-    private boolean tournamentStarted = false;
-    
     // Difficulty - will store only index from now.
     private int difficulty;
 
@@ -51,7 +49,6 @@ public class QuestAchievements {
         drafts.remove(drafts.get(currentDraft));
         currentDraft = -1;
         winCountAtEndOfDraft = win;
-        tournamentStarted = false;
         FModel.getQuest().save();
     }
 
@@ -206,10 +203,6 @@ public class QuestAchievements {
     public QuestEventDraftContainer getDraftEvents() {
         return drafts;
     }
-
-    public boolean isTournamentStarted() {
-        return currentDraft >= 0 && tournamentStarted;
-    }
     
     public void generateNewTournaments() {
         
@@ -244,11 +237,14 @@ public class QuestAchievements {
     }
     
     public QuestEventDraft getCurrentDraft() {
+        if (drafts.size() == 0) {
+            return null;
+        }
         return drafts.get(currentDraft);
     }
     
-    public void setTournamentStarted(final boolean started) {
-        tournamentStarted = started;
+    public int getCurrentDraftIndex() {
+        return currentDraft;
     }
 
 }

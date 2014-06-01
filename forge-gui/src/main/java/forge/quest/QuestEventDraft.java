@@ -29,6 +29,10 @@ import com.google.common.base.Function;
 
 import forge.GuiBase;
 import forge.card.CardEdition;
+import forge.card.CardEdition.CardInSet;
+import forge.card.CardRarity;
+import forge.item.BoosterPack;
+import forge.item.PaperCard;
 import forge.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
@@ -67,6 +71,8 @@ public class QuestEventDraft {
     private String[] aiNames = new String[7];
     
     private int[] aiIcons = new int[7];
+    
+    private boolean started = false;
     
     public QuestEventDraft(final String title) {
         this.title = title;
@@ -222,10 +228,309 @@ public class QuestEventDraft {
         }
         
     }
+    
+    /**
+     * Generates the prizes for the player in an Object array.
+     * Index 0: int - credits
+     * Index 1: 
+     * Index 2: ArrayList<PaperCard> - single cards
+     */
+    public Object[] getPrizes() {
+        
+        int place = getPlayerPlacement();
+        int prizePool = entryFee * 8;
+        
+        int boosterPrices = 0;
+        
+        for (String boosterSet : boosterConfiguration.split("/")) {
+            
+            int value = 0;
+            String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
+            
+            if (MAP_PRICES.containsKey(boosterName)) {
+                value = MAP_PRICES.get(boosterName);
+            } else {
+                value = 395;
+            }
+            
+            boosterPrices += value;
+        
+        }
+        
+        prizePool -= boosterPrices * 8;
+        
+        switch (place) {
+            case 1:
+                return generateFirstPlacePrizes(prizePool);
+            case 2:
+                return generateSecondPlacePrizes(prizePool);
+            case 3:
+                return generateThirdPlacePrizes(prizePool);
+            case 4:
+                return generateFourthPlacePrizes(prizePool);
+        }
+        
+        return null;
+        
+    }
+    
+    private Object[] generateFirstPlacePrizes(final int prizePool) {
+        
+        int credits = 2 * (prizePool / 3); //First place gets 2/3 the total prize pool
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        List<BoosterPack> boosters = new ArrayList<BoosterPack>();
+        
+        cards.add(getPromoCard());
+
+        int creditsForPacks = (credits / 2); //Spend 50% of the credits on packs
+        
+        while (true) {
+            BoosterPack pack = getBoosterPack();
+            int price = getBoosterPrice(pack);
+            if (price > creditsForPacks + 150) { //Add a little room for near-same price packs.
+                break;
+            }
+            creditsForPacks -= price;
+            boosters.add(pack);
+        }
+        
+        credits = (credits / 2) + creditsForPacks; //Add the leftover credits + 50%
+        
+        return new Object[] { credits, boosters, cards };
+        
+    }
+    
+    private Object[] generateSecondPlacePrizes(final int prizePool) {
+        
+        int credits = prizePool / 3; //Second place gets 1/3 the total prize pool
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        List<BoosterPack> boosters = new ArrayList<BoosterPack>();
+        
+        cards.add(getPromoCard());
+
+        int creditsForPacks = (credits / 4) * 3; //Spend 75% of the credits on packs
+        
+        while (true) {
+            BoosterPack pack = getBoosterPack();
+            int price = getBoosterPrice(pack);
+            if (price > creditsForPacks + 50) { //Add a little room for near-same price packs.
+                break;
+            }
+            creditsForPacks -= price;
+            boosters.add(pack);
+        }
+        
+        credits = (credits / 4) + creditsForPacks; //Add the leftover credits + 25%
+        
+        return new Object[] { credits, boosters, cards };
+        
+    }
+    
+    private Object[] generateThirdPlacePrizes(final int prizePool) {
+        
+        int credits = 0;
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        
+        cards.add(getPromoCard());
+        
+        List<BoosterPack> boosters = new ArrayList<BoosterPack>();
+        boosters.add(getBoosterPack());
+        
+        return new Object[] { credits, boosters, cards };
+        
+    }
+    
+    private Object[] generateFourthPlacePrizes(final int prizePool) {
+        
+        int credits = 0;
+        List<PaperCard> cards = new ArrayList<PaperCard>();
+        
+        cards.add(getPromoCard());
+        
+        return new Object[] { credits, null, cards };
+        
+    }
+    
+    private BoosterPack getBoosterPack() {
+        return BoosterPack.FN_FROM_SET.apply(getRandomEdition());
+    }
+    
+    private PaperCard getPromoCard() {
+        
+        CardEdition randomEdition = getRandomEdition();
+        List<CardInSet> cardsInEdition = new ArrayList<CardInSet>();
+        
+        for (CardInSet card : randomEdition.getCards()) {
+            if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
+                cardsInEdition.add(card);
+            }
+        }
+
+        CardInSet randomCard = cardsInEdition.get((int) (Math.random() * cardsInEdition.size()));
+        return FModel.getMagicDb().getCommonCards().getCard(randomCard.name, randomEdition.getCode());
+        
+    }
+    
+    private CardEdition getRandomEdition() {
+        
+        List<CardEdition> editions = new ArrayList<CardEdition>();
+        for (String booster : boosterConfiguration.split("/")) {
+            editions.add(FModel.getMagicDb().getEditions().get(booster));
+        }
+        
+        return editions.get((int) (Math.random() * editions.size()));
+        
+    }
+    
+    private int getBoosterPrice(BoosterPack booster) {
+        
+        int value = 0;
+        String boosterName = booster.getName() + " Booster Pack";
+        
+        if (MAP_PRICES.containsKey(boosterName)) {
+            value = MAP_PRICES.get(boosterName);
+        } else {
+            value = 395;
+        }
+        
+        return value;
+        
+    }
+    
+    public boolean playerHasMatchesLeft() {
+        
+        int playerIndex = -1;
+        for (int i = standings.length - 1; i >= 0; i--) {
+            if (standings[i].equals(HUMAN)) {
+                playerIndex = i;
+                break;
+            }
+        }
+        
+        int nextMatchIndex = -1;
+        
+        switch (playerIndex) {
+        
+            case 0:
+            case 1:
+                nextMatchIndex = 8;
+                break;
+            case 2:
+            case 3:
+                nextMatchIndex = 9;
+                break;
+            case 4:
+            case 5:
+                nextMatchIndex = 10;
+                break;
+            case 6:
+            case 7:
+                nextMatchIndex = 11;
+                break;
+            case 8:
+            case 9:
+                nextMatchIndex = 12;
+                break;
+            case 10:
+            case 11:
+                nextMatchIndex = 13;
+                break;
+            case 12:
+            case 13:
+                nextMatchIndex = 14;
+                break;
+            case 14:
+            default:
+                nextMatchIndex = -1;
+                break;
+                
+        }
+        
+        if (nextMatchIndex == -1) {
+            //No matches left in tournament
+            return false;
+        }
+        
+        if (!standings[nextMatchIndex].equals(UNDETERMINED)) {
+            return false;
+        }
+        
+        return true;
+        
+    }
+    
+    public int getPlayerPlacement() {
+        
+        int playerIndex = -1;
+        for (int i = standings.length - 1; i >= 0; i--) {
+            if (standings[i].equals(HUMAN)) {
+                playerIndex = i;
+                break;
+            }
+        }
+        
+        if (playerIndex <= 7) {
+            return 4;
+        }
+        
+        if (playerIndex <= 11) {
+            return 3;
+        }
+        
+        if (playerIndex <= 13) {
+            return 2;
+        }
+        
+        if (playerIndex == 14) {
+            return 1;
+        }
+            
+        return -1;
+        
+    }
+    
+    public boolean isStarted() {
+        return started;
+    }
+    
+    public void start() {
+        started = true;
+        FModel.getQuest().save();
+    }
+    
+    public void setStarted(final boolean started) {
+        this.started = started;
+    }
 
     @Override
     public String toString() {
         return title;
+    }
+    
+    public static String getPlacementString(int place) {
+        
+        String output;
+        
+        switch (place) {
+            case 1:
+                output = "first";
+                break;
+            case 2:
+                output = "second";
+                break;
+            case 3:
+                output = "third";
+                break;
+            case 4:
+                output = "fourth";
+                break;
+            default:
+                output = "ERROR";
+                break;
+        }
+        
+        return output;
+        
     }
     
     /**
@@ -389,7 +694,7 @@ public class QuestEventDraft {
         
         }
         
-        return (int) (entryFee * 1.5);
+        return (int) (entryFee * 1.65);
         
     }
     

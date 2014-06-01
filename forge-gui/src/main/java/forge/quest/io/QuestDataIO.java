@@ -544,6 +544,10 @@ public class QuestDataIO {
                 }
                 writer.endNode();
                 
+                writer.startNode("started");
+                writer.setValue("" + draft.isStarted());
+                writer.endNode();
+                
                 writer.endNode();
                 
             }
@@ -560,56 +564,64 @@ public class QuestDataIO {
                 
                 reader.moveDown();
                 
-                //TODO Use switch and hasMoreChildren()
-                
-                reader.moveDown();
-                String draftName = reader.getValue();
-                reader.moveUp();
-                
-                reader.moveDown();
-                String boosterConfiguration = reader.getValue();
-                reader.moveUp();
-                
-                reader.moveDown();
-                int entryFee = Integer.parseInt(reader.getValue());
-                reader.moveUp();
-                
-                reader.moveDown();
-                String block = reader.getValue();
-                reader.moveUp();
-                
+                String draftName = null;
+                String boosterConfiguration = null;
+                int entryFee = 1500;
+                String block = null;
                 String[] standings = new String[15];
-                
-                reader.moveDown();
-                int i = 0;
-                while (reader.hasMoreChildren()) {
-                    reader.moveDown();
-                    standings[i++] = reader.getValue();
-                    reader.moveUp();
-                }
-                reader.moveUp();
-
                 String[] aiNames = new String[7];
-                
-                reader.moveDown();
-                i = 0;
-                while (reader.hasMoreChildren()) {
-                    reader.moveDown();
-                    aiNames[i++] = reader.getValue();
-                    reader.moveUp();
-                }
-                reader.moveUp();
-
                 int[] aiIcons = new int[7];
+                boolean started = false;
                 
-                reader.moveDown();
-                i = 0;
                 while (reader.hasMoreChildren()) {
+                    
                     reader.moveDown();
-                    aiIcons[i++] = Integer.parseInt(reader.getValue());
+                    
+                    switch (reader.getNodeName()) {
+                        case "title":
+                            draftName = reader.getValue();
+                            break;
+                        case "packs":
+                            boosterConfiguration = reader.getValue();
+                            break;
+                        case "entryFee":
+                            entryFee = Integer.parseInt(reader.getValue());
+                            break;
+                        case "block":
+                            block = reader.getValue();
+                            break;
+                        case "standings":
+                            int i = 0;
+                            while (reader.hasMoreChildren()) {
+                                reader.moveDown();
+                                standings[i++] = reader.getValue();
+                                reader.moveUp();
+                            }
+                            break;
+                        case "aiNames":
+                            int ii = 0;
+                            while (reader.hasMoreChildren()) {
+                                reader.moveDown();
+                                aiNames[ii++] = reader.getValue();
+                                reader.moveUp();
+                            }
+                            break;
+                        case "aiIcons":
+                            int iii = 0;
+                            while (reader.hasMoreChildren()) {
+                                reader.moveDown();
+                                aiIcons[iii++] = Integer.parseInt(reader.getValue());
+                                reader.moveUp();
+                            }
+                            break;
+                        case "started":
+                            started = Boolean.parseBoolean(reader.getValue());
+                            break;
+                    }
+                    
                     reader.moveUp();
+                    
                 }
-                reader.moveUp();
                 
                 QuestEventDraft draft = new QuestEventDraft(draftName);
                 draft.setBoosterConfiguration(boosterConfiguration);
@@ -618,6 +630,7 @@ public class QuestDataIO {
                 draft.setStandings(standings);
                 draft.setAINames(aiNames);
                 draft.setAIIcons(aiIcons);
+                draft.setStarted(started);
                 
                 output.add(draft);
                 

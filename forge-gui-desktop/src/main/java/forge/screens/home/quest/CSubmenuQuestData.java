@@ -282,6 +282,7 @@ public enum CSubmenuQuestData implements ICDoc {
         CSubmenuDuels.SINGLETON_INSTANCE.update();
         CSubmenuChallenges.SINGLETON_INSTANCE.update();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
+        CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
     }
 
     /** @return  */

@@ -251,8 +251,10 @@ public enum FSkinProp {
     IMG_BTN_TOGGLE_RIGHT    (new int[] {160, 160, 40, 40}, PropType.ICON),
     IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}, PropType.ICON),
     IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}, PropType.ICON),
-    IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON);
-
+    IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON),
+    
+    IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE);
+    
     private int[] coords;
     private PropType type;
 
