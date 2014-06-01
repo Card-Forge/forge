@@ -19,6 +19,7 @@ package forge.screens.deckeditor.controllers;
 
 import java.util.Map.Entry;
 
+import forge.assets.FSkinProp;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -32,11 +33,13 @@ import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.QuestEventDraft;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.FSkin;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
@@ -282,9 +285,16 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     public boolean canSwitchAway(boolean isClosing) {
         if (isClosing && !saved) {
             String userPrompt =
-                    "This will end the current draft and you will not be able to resume.\n\n" +
+                    "This will end the current draft and you will not be able to join this tournament again.\nYour credits will be refunded and the draft will be removed.\n\n" +
                             "Leave anyway?";
-            return FOptionPane.showConfirmDialog(userPrompt, "Leave Draft?", "Leave", "Cancel", false);
+            boolean leave = FOptionPane.showOptionDialog(userPrompt, "Leave Draft?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] {"Leave", "Cancel"}, 1) == 0;
+            if (leave) {
+                QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
+                FModel.getQuest().getAssets().addCredits(draft.getEntryFee());
+                FModel.getQuest().getAchievements().deleteDraft(draft);
+                FModel.getQuest().save();
+            }
+            return leave;
         }
         return true;
     }
