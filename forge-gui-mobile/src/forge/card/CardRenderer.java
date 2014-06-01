@@ -513,6 +513,11 @@ public class CardRenderer {
         w = boxWidth;
         h = boxHeight;
 
+        //draw card damage about P/T box if needed
+        if (card.getDamage() > 0) {
+            g.drawOutlinedText(">" + card.getDamage() + "<", font, Color.RED, Color.WHITE, x, y - h + padding, w, h, false, HAlignment.CENTER, true);
+        }
+
         g.fillRect(color, x, y, w, h);
         g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
 
