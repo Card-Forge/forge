@@ -183,7 +183,7 @@ public class TokenAi extends SpellAbilityAi {
         }
 
         //interrupt sacrifice effect
-        if (sacOnStack) {
+        if (sacOnStack && game.getStack().peekAbility().hasParam("SacValid")) {
             final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), this.tokenAmount, sa);
             SpellAbility topStack = game.getStack().peekAbility();
             final String valid = topStack.getParam("SacValid");
