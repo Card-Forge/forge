@@ -284,6 +284,14 @@ public class AbilityManaPart implements java.io.Serializable {
             if (restriction.equals("nonSpell")) {
                 return !sa.isSpell();
             }
+            
+            if (restriction.equals("CumulativeUpkeep")) {
+                if (sa.isCumulativeupkeep()) {
+                    return true;
+                } else {
+                    continue;
+                }
+            }
 
             if (restriction.startsWith("CostContainsX")) {
                 if (sa.isXCost()) {

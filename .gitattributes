@@ -12169,6 +12169,7 @@ forge-gui/res/cardsfolder/s/snow_devil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/snow_fortress.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/snow_hound.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/snowblind.txt -text
+forge-gui/res/cardsfolder/s/snowfall.txt -text
 forge-gui/res/cardsfolder/s/snuff_out.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soar.txt -text
 forge-gui/res/cardsfolder/s/soaring_hope.txt svneol=native#text/plain

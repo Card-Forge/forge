@@ -90,6 +90,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean delve = false;
     private boolean offering = false;
     private boolean morphup = false;
+    private boolean cumulativeupkeep = false;
     private int totalManaSpent = 0;
 
     /** The pay costs. */
@@ -1726,6 +1727,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setMadness(boolean madness) {
         this.madness = madness;
+    }
+
+    public boolean isCumulativeupkeep() {
+        return cumulativeupkeep;
+    }
+
+    public void setCumulativeupkeep(boolean cumulativeupkeep) {
+        this.cumulativeupkeep = cumulativeupkeep;
     }
 
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect

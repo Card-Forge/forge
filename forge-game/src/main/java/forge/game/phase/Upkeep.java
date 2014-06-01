@@ -164,6 +164,7 @@ public class Upkeep extends Phase {
                             c.addCounter(CounterType.AGE, 1, true);
                             String cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
                             final Cost upkeepCost = new Cost(cost, true);
+                            this.setCumulativeupkeep(true);
                             boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
                             final HashMap<String, Object> runParams = new HashMap<String, Object>();
                             runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
