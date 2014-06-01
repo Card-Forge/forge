@@ -80,8 +80,12 @@ public enum CSubmenuQuestDraft implements ICDoc {
                 new UiCommand() { @Override
                     public void run() { CSubmenuQuestDraft.this.endTournamentAndAwardPrizes(); } });
         
-        if (FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
+        if (FModel.getQuest().getAchievements() == null) {
             view.setMode(Mode.EMPTY);
+        } else if (FModel.getQuest().getAchievements().getDraftEvents() == null || FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
+            QuestAchievements achievements = FModel.getQuest().getAchievements();
+            achievements.generateNewTournaments();
+            view.setMode(Mode.SELECT_TOURNAMENT);
         } else if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
             view.setMode(Mode.SELECT_TOURNAMENT);
         } else if (!FModel.getQuest().getAchievements().getCurrentDraft().isStarted()) {
@@ -274,7 +278,15 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
         
-        if (FModel.getQuest().getAchievements() == null || FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
+        if (FModel.getQuest().getAchievements() == null) {
+            view.setMode(Mode.EMPTY);
+            return;
+        }
+        
+        QuestAchievements achievements = FModel.getQuest().getAchievements();
+        achievements.generateNewTournaments();
+        
+        if (FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
             view.setMode(Mode.EMPTY);
             return;
         }
@@ -290,9 +302,6 @@ public enum CSubmenuQuestDraft implements ICDoc {
         }
         
         QuestDraftUtils.update();
-        
-        QuestAchievements achievements = FModel.getQuest().getAchievements();
-        achievements.generateNewTournaments();
         
         switch (view.getMode()) {
         
