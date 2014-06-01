@@ -366,8 +366,23 @@ public class QuestEventDraft {
             }
         }
 
+        
         CardInSet randomCard = cardsInEdition.get((int) (Math.random() * cardsInEdition.size()));
-        return FModel.getMagicDb().getCommonCards().getCard(randomCard.name, randomEdition.getCode());
+        PaperCard promo = null;
+        
+        int attempts = 25;
+        
+        while (promo == null && attempts-- > 0) {
+            randomCard = cardsInEdition.get((int) (Math.random() * cardsInEdition.size()));
+            promo = FModel.getMagicDb().getCommonCards().getCard(randomCard.name, randomEdition.getCode());
+        }
+        
+        if (promo == null) {
+            final PaperCard c = FModel.getQuest().getCards().addRandomRare();
+            return c;
+        }
+        
+        return promo;
         
     }
     

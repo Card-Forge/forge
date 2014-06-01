@@ -107,9 +107,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
         
         if (!draft.isStarted()) {
-            boolean shouldQuit = FOptionPane.showConfirmDialog("If you leave now, this tournament will be forever gone."
+            
+            boolean shouldQuit = FOptionPane.showOptionDialog("If you leave now, this tournament will be forever gone."
                     + "\nYou will keep the cards you drafted, but will receive no other prizes."
-                    + "\n\nWould you still like to quit the tournament?", "Really Quit?", false);
+                    + "\n\nWould you still like to quit the tournament?", "Really Quit?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] { "Yes", "No" }, 1) == 0;
             if (!shouldQuit) {
                 return;
             }
@@ -117,9 +118,9 @@ public enum CSubmenuQuestDraft implements ICDoc {
         } else {
             
             if (draft.playerHasMatchesLeft()) {
-                boolean shouldQuit = FOptionPane.showConfirmDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
+                boolean shouldQuit = FOptionPane.showOptionDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
                         + "\nYou will still receive winnings as if you conceded your next match and you will keep the cards you drafted."
-                        + "\n\nWould you still like to quit the tournament?", "Really Quit?", false);
+                        + "\n\nWould you still like to quit the tournament?", "Really Quit?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] { "Yes", "No" }, 1) == 0;
                 if (!shouldQuit) {
                     return;
                 }
@@ -130,7 +131,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             Object[] prizes = draft.getPrizes();
             
             if (prizes[0] != null && (int) prizes[0] > 0) {
-                FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + (int) prizes[0] + " credits!", "Credits Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_COINSTACK));
+                FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + (int) prizes[0] + " credits!", "Credits Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD));
                 FModel.getQuest().getAssets().addCredits((int) prizes[0]);
             }
             
@@ -155,7 +156,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
                     
                     String packPlural = (boosterPacks.size() == 1) ? "" : "s";
                     
-                    FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + boosterPacks.size() + " booster pack" + packPlural + "!", "Booster Pack" + packPlural + " Awarded", FSkin.getImage(FSkinProp.ICO_CARD_IMAGE));
+                    FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + boosterPacks.size() + " booster pack" + packPlural + "!", "Booster Pack" + packPlural + " Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_BOX));
                     
                     if (FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV) && boosterPacks.size() > 1) {
     
@@ -210,13 +211,13 @@ public enum CSubmenuQuestDraft implements ICDoc {
             }
             
             if (draft.getPlayerPlacement() == 1) {
-                FOptionPane.showMessageDialog("For placing " + placement + ", another tournament will be immediately available!");
+                FOptionPane.showMessageDialog("For placing " + placement + ", another tournament will be immediately available!", "Bonus Tournament", FSkin.getImage(FSkinProp.ICO_QUEST_NOTES));
                 FModel.getQuest().getAchievements().addDraftToken();
             }
             
         }
         
-        boolean saveDraft = FOptionPane.showConfirmDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?");
+        boolean saveDraft = FOptionPane.showOptionDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?", FSkin.getImage(FSkinProp.ICO_QUESTION).scale(2.0), new String[] { "Yes", "No" }, 0) == 0;
         
         if (saveDraft) {
             
@@ -238,7 +239,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         Deck tournamentDeck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
         Deck deck = new Deck(deckName);
         
-        FModel.getQuest().getCards().addAllCards(deck.getAllCardsInASinglePool().toFlatList());
+        FModel.getQuest().getCards().addAllCards(tournamentDeck.getAllCardsInASinglePool().toFlatList());
         
         if (tournamentDeck.get(DeckSection.Main).countAll() > 0) {
             deck.getOrCreate(DeckSection.Main).addAll(tournamentDeck.get(DeckSection.Main));
@@ -451,11 +452,11 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (creditsAvailable < draftEvent.getEntryFee()) {
-            FOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits");
+            FOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0));
             return;
         }
         
-        boolean okayToEnter = FOptionPane.showConfirmDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?");
+        boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), new String[] { "Yes", "No" }, 1) == 0;
         
         if (!okayToEnter) {
             return;
@@ -489,7 +490,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             return;
         }
         
-        boolean okayToStart = FOptionPane.showConfirmDialog("You will not be able to edit your deck once you start the tournament.\nAre you sure you wish to continue?", "Start Tournament?");
+        boolean okayToStart = FOptionPane.showOptionDialog("You will not be able to edit your deck once you start the tournament.\nAre you sure you wish to continue?", "Start Tournament?", FSkin.getImage(FSkinProp.ICO_INFORMATION).scale(2.0), new String[] { "Yes", "No" }, 1) == 0;
         
         if (!okayToStart) {
             return;
