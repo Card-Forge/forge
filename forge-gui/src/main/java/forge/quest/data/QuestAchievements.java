@@ -30,6 +30,11 @@ public class QuestAchievements {
     private int winstreakCurrent = 0;
     private int lost;
     
+    private int firstPlaceDraftFinishes = 0;
+    private int secondPlaceDraftFinishes = 0;
+    private int thirdPlaceDraftFinishes = 0;
+    private int fourthPlaceDraftFinishes = 0;
+    
     // Difficulty - will store only index from now.
     private int difficulty;
 
@@ -45,10 +50,11 @@ public class QuestAchievements {
         drafts.remove(draft);
     }
     
-    public void endCurrentTournament() {
+    public void endCurrentTournament(final int place) {
         drafts.remove(drafts.get(currentDraft));
         currentDraft = -1;
         winCountAtEndOfDraft = win;
+        addDraftFinish(place);
         FModel.getQuest().save();
     }
 
@@ -245,6 +251,42 @@ public class QuestAchievements {
     
     public int getCurrentDraftIndex() {
         return currentDraft;
+    }
+    
+    public int getWinsForPlace(final int place) {
+        
+        switch (place) {
+            case 1:
+                return firstPlaceDraftFinishes;
+            case 2:
+                return secondPlaceDraftFinishes;
+            case 3:
+                return thirdPlaceDraftFinishes;
+            case 4:
+                return fourthPlaceDraftFinishes;
+        }
+        
+        return 0;
+        
+    }
+    
+    private void addDraftFinish(final int place) {
+        
+        switch (place) {
+            case 1:
+                firstPlaceDraftFinishes++;
+                break;
+            case 2:
+                secondPlaceDraftFinishes++;
+                break;
+            case 3:
+                thirdPlaceDraftFinishes++;
+                break;
+            case 4:
+                fourthPlaceDraftFinishes++;
+                break;
+        }
+        
     }
 
 }

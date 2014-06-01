@@ -247,7 +247,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         }
         
         FModel.getQuest().getDraftDecks().delete(QuestEventDraft.DECK_NAME);
-        FModel.getQuest().getAchievements().endCurrentTournament();
+        FModel.getQuest().getAchievements().endCurrentTournament(FModel.getQuest().getAchievements().getCurrentDraft().getPlayerPlacement());
         FModel.getQuest().save();
         
         VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
@@ -311,6 +311,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         if (FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
             view.setMode(Mode.EMPTY);
+            updatePlacementLabelsText();
             return;
         }
         
@@ -352,7 +353,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
 
         view.getLblCredits().setText("Available Credits: " + NUMBER_FORMATTER.format(FModel.getQuest().getAssets().getCredits()));
-
+        
         FModel.getQuest().getAchievements().generateNewTournaments();
 
         view.getPnlTournaments().removeAll();
@@ -381,6 +382,20 @@ public enum CSubmenuQuestDraft implements ICDoc {
         }
         
         view.getPnlTournaments().add(grpPanel, "w 100%!");
+        
+        updatePlacementLabelsText();
+        
+    }
+    
+    private void updatePlacementLabelsText() {
+
+        VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
+        QuestAchievements achievements = FModel.getQuest().getAchievements();
+        
+        view.getLblFirst().setText("1st Place: " + achievements.getWinsForPlace(1) + " time" + (achievements.getWinsForPlace(1) == 1 ? "" : "s"));        
+        view.getLblSecond().setText("2nd Place: " + achievements.getWinsForPlace(2) + " time" + (achievements.getWinsForPlace(2) == 1 ? "" : "s"));        
+        view.getLblThird().setText("3rd Place: " + achievements.getWinsForPlace(3) + " time" + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));        
+        view.getLblFourth().setText("4th Place: " + achievements.getWinsForPlace(4) + " time" + (achievements.getWinsForPlace(4) == 1 ? "" : "s"));
         
     }
     

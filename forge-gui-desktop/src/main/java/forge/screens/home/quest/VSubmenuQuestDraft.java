@@ -61,6 +61,19 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     private final JLabel lblNoDrafts = new FLabel.Builder().text("There are no tournaments available at this time.")
         .fontStyle(Font.PLAIN).fontSize(16)
         .fontAlign(SwingConstants.LEFT).build();
+
+    private final JPanel pnlStats = new JPanel();
+    private final FLabel lblPastResults = new FLabel.Builder()
+    .text("Past Results:")
+    .fontSize(19).build();
+    private final FLabel lblFirst = new FLabel.Builder()
+    .fontSize(15).build();
+    private final FLabel lblSecond = new FLabel.Builder()
+    .fontSize(15).build();
+    private final FLabel lblThird = new FLabel.Builder()
+    .fontSize(15).build();
+    private final FLabel lblFourth = new FLabel.Builder()
+    .fontSize(15).build();
     
     private final StartButton btnStartDraft  = new StartButton();
     private final StartButton btnStartTournament  = new StartButton();
@@ -78,12 +91,23 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     private DragCell parentCell;
     
     private VSubmenuQuestDraft() {
+        
         for (int i = 0; i < 15; i++) {
             lblsStandings[i] = new FLabel.Builder().text("Standing Slot: " + i)
                     .fontStyle(Font.BOLD).fontSize(14)
                     .fontAlign(SwingConstants.LEFT).build();
         }
         pnlDeckImage = new ProportionalPanel(FSkin.getImage(FSkinProp.IMG_QUEST_DRAFT_DECK), 680, 475);
+        
+        final String constraints = "h 30px!, gap 0 0 0 10px";
+        pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
+        pnlStats.add(lblPastResults, "h 30px!, gap 0 0 0 25px");
+        pnlStats.add(lblFirst, constraints);
+        pnlStats.add(lblSecond, constraints);
+        pnlStats.add(lblThird, constraints);
+        pnlStats.add(lblFourth, constraints);
+        pnlStats.setOpaque(false);
+        
     }
     
     public LblHeader getLblTitle() {
@@ -120,6 +144,22 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     
     public JLabel[] getLblsStandings() {
         return lblsStandings;
+    }
+    
+    public JLabel getLblFirst() {
+        return lblFirst;
+    }
+    
+    public JLabel getLblSecond() {
+        return lblSecond;
+    }
+    
+    public JLabel getLblThird() {
+        return lblThird;
+    }
+    
+    public JLabel getLblFourth() {
+        return lblFourth;
     }
     
     public void setMode(Mode mode) {
@@ -188,9 +228,11 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
                 break;
             case EMPTY:
             default:
-                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax right, wrap"));
-                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 35px, ax right");
-                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNoDrafts, "h 30px!, gap 0 0 5px");
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax right, wrap 2"));
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 35px, ax right, span 2");
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNoDrafts, "h 30px!, gap 0 0 5px, span 2");
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlTournaments, "w 88% - 200px!, pushy, growy");
+                VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 185px!, pushy, growy, gap 4% 4% 0 0");
                 break;
         
         }
@@ -201,12 +243,13 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     }
     
     private void populateSelectTournament() {
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax right, wrap"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 35px, ax right");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblCredits, "h 25px!, gap 0 0 30px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "h 30px!, gap 0 0 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlTournaments, "w 95%, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartDraft, "gap 0 6% 30px 30px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax right, wrap 2"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 35px, ax right, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblCredits, "h 25px!, gap 0 0 30px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "h 30px!, gap 0 0 5px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlTournaments, "w 88% - 200px!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 185px!, pushy, growy, gap 4% 4% 0 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartDraft, "gap 0 6% 30px 30px, ax center, span 2");
     }
     
     private void populatePrepareDeck() {
