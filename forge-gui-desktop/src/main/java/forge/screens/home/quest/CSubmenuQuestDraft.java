@@ -80,15 +80,20 @@ public enum CSubmenuQuestDraft implements ICDoc {
                 new UiCommand() { @Override
                     public void run() { CSubmenuQuestDraft.this.endTournamentAndAwardPrizes(); } });
         
-        if (FModel.getQuest().getAchievements() == null) {
+        QuestAchievements achievements = FModel.getQuest().getAchievements();
+        
+        if (achievements == null) {
             view.setMode(Mode.EMPTY);
-        } else if (FModel.getQuest().getAchievements().getDraftEvents() == null || FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
-            QuestAchievements achievements = FModel.getQuest().getAchievements();
+        } else if (achievements.getDraftEvents() == null || achievements.getDraftEvents().isEmpty()) {
             achievements.generateNewTournaments();
-            view.setMode(Mode.SELECT_TOURNAMENT);
+            if (achievements.getDraftEvents().isEmpty()) {
+                view.setMode(Mode.EMPTY);
+            } else {
+                view.setMode(Mode.SELECT_TOURNAMENT);
+            }
         } else if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
             view.setMode(Mode.SELECT_TOURNAMENT);
-        } else if (!FModel.getQuest().getAchievements().getCurrentDraft().isStarted()) {
+        } else if (!achievements.getCurrentDraft().isStarted()) {
             view.setMode(Mode.PREPARE_DECK);
         } else {
             view.setMode(Mode.TOURNAMENT_ACTIVE);
