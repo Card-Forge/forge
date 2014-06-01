@@ -201,24 +201,38 @@ public class VPlayerPanel extends FContainer {
 
     private class LifeLabel extends FDisplayObject {
         private int life = 20;
+        private int poisonCounters = 0;
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
         }
 
         private void update() {
+            int vibrateDuration = 0;
             int delta = player.getLife() - life;
-            if (delta == 0) { return; }
-
-            if (delta < 0) {
-                //TODO: Show animation on avatar for life loss
-                if (player.getLobbyPlayer() == FControl.getGuiPlayer()) {
-                    //when gui player loses life, vibrate device for a length of time based on amount of life lost
-                    Gdx.input.vibrate(Math.min(delta * -100, 2000)); //never vibrate more than two seconds regardless of life lost
+            if (delta != 0) {
+                if (delta < 0) {
+                    //TODO: Show animation on avatar for life loss
+                    vibrateDuration += delta * -100;
                 }
+                life = player.getLife();
+                lifeStr = String.valueOf(life);
             }
-            life = player.getLife();
-            lifeStr = String.valueOf(life);
+
+            delta = player.getPoisonCounters() - poisonCounters;
+            if (delta != 0) {
+                if (delta > 0) {
+                    //TODO: Show animation on avatar for gaining poison counters
+                    vibrateDuration += delta * 200;
+                }
+                poisonCounters = player.getPoisonCounters();
+            }
+
+            //when gui player loses life, vibrate device for a length of time based on amount of life lost
+            if (vibrateDuration > 0 && player.getLobbyPlayer() == FControl.getGuiPlayer()) {
+                //never vibrate more than two seconds regardless of life lost or poison counters gained
+                Gdx.input.vibrate(Math.min(vibrateDuration, 2000)); 
+            }
         }
 
         @Override
@@ -229,7 +243,18 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void draw(Graphics g) {
-            g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
+            if (poisonCounters == 0) {
+                g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, HAlignment.CENTER, true);
+            }
+            else {
+                float halfHeight = getHeight() / 2;
+                float textStart = halfHeight + Utils.scaleX(1);
+                float textWidth = getWidth() - textStart;
+                g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
+                g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR, textStart, 0, textWidth, halfHeight, false, HAlignment.CENTER, true);
+                g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
+                g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, HAlignment.CENTER, true);
+            }
         }
     }
 
