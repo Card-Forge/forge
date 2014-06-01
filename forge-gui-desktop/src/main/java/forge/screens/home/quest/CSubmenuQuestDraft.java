@@ -106,101 +106,114 @@ public enum CSubmenuQuestDraft implements ICDoc {
         
         QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
         
-        if (draft.playerHasMatchesLeft()) {
-            boolean shouldQuit = FOptionPane.showConfirmDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
-                    + "\nYou will still receive winnings as if you conceded your next match and you get to keep all your current cards.\n\nWould you still like to quit the tournament?", "Really Quit?", false);
+        if (!draft.isStarted()) {
+            boolean shouldQuit = FOptionPane.showConfirmDialog("If you leave now, this tournament will be forever gone."
+                    + "\nYou will keep the cards you drafted, but will receive no other prizes."
+                    + "\n\nWould you still like to quit the tournament?", "Really Quit?", false);
             if (!shouldQuit) {
                 return;
             }
-        }
-        
-        String placement = QuestEventDraft.getPlacementString(draft.getPlayerPlacement());
-        
-        Object[] prizes = draft.getPrizes();
-        
-        if (prizes[0] != null && (int) prizes[0] > 0) {
-            FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + (int) prizes[0] + " credits!", "Credits Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_COINSTACK));
-            FModel.getQuest().getAssets().addCredits((long) prizes[0]);
-        }
-        
-        if (prizes[2] != null) {
             
-            List<PaperCard> individualCards = (ArrayList<PaperCard>) prizes[2];
+        } else {
             
-            if (!individualCards.isEmpty()) {
-                final CardListViewer c = new CardListViewer("Tournament Reward", "For participating in the tournament, you have been awarded the following promotional card:", individualCards);
-                c.setVisible(true);
-                c.dispose();
-                FModel.getQuest().getCards().addAllCards(individualCards);
-            }
-            
-        }
-        
-        if (prizes[1] != null) {
-            
-            List<BoosterPack> boosterPacks = (ArrayList<BoosterPack>) prizes[1];
-
-            if (!boosterPacks.isEmpty()) {
-                
-                String packPlural = (boosterPacks.size() == 1) ? "" : "s";
-                
-                FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + boosterPacks.size() + " booster pack" + packPlural + "!", "Booster Pack" + packPlural + " Awarded", FSkin.getImage(FSkinProp.ICO_CARD_IMAGE));
-                
-                if (FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV) && boosterPacks.size() > 1) {
-
-                    boolean skipTheRest = false;
-                    List<PaperCard> remainingCards = new ArrayList<PaperCard>();
-                    int totalPacks = boosterPacks.size();
-                    int currentPack = 0;
-                    
-                    while (boosterPacks.size() > 0) {
-                        
-                        BoosterPack pack = boosterPacks.remove(0);
-                        currentPack++;
-                        
-                        if (skipTheRest) {
-                            remainingCards.addAll(pack.getCards());
-                            continue;
-                        }
-                        
-                        final BoxedProductCardListViewer c = new BoxedProductCardListViewer(pack.getName(), "You have found the following cards inside (Booster Pack " + currentPack + " of " + totalPacks + "):", pack.getCards());
-                        c.setVisible(true);
-                        c.dispose();
-                        skipTheRest = c.skipTheRest();
-                        FModel.getQuest().getCards().addAllCards(pack.getCards());
-                        
-                    }
-                    
-                    if (skipTheRest && !remainingCards.isEmpty()) {
-                        final CardListViewer c = new CardListViewer("Tournament Reward", "You have found the following cards inside:", remainingCards);
-                        c.setVisible(true);
-                        c.dispose();
-                        FModel.getQuest().getCards().addAllCards(remainingCards);
-                    }
-                    
-                } else {
-                    
-                    List<PaperCard> cards = new ArrayList<PaperCard>();
-                    
-                    while (boosterPacks.size() > 0) {
-                        BoosterPack pack = boosterPacks.remove(0);
-                        cards.addAll(pack.getCards());
-                        continue;
-                    }
-                    
-                    final CardListViewer c = new CardListViewer("Tournament Reward", "You have found the following cards inside:", cards);
-                    c.setVisible(true);
-                    c.dispose();
-                    FModel.getQuest().getCards().addAllCards(cards);
-                    
+            if (draft.playerHasMatchesLeft()) {
+                boolean shouldQuit = FOptionPane.showConfirmDialog("You have matches left to play!\nLeaving the tournament early will forfeit your potential future winnings."
+                        + "\nYou will still receive winnings as if you conceded your next match and you will keep the cards you drafted."
+                        + "\n\nWould you still like to quit the tournament?", "Really Quit?", false);
+                if (!shouldQuit) {
+                    return;
                 }
             }
             
-        }
-        
-        if (draft.getPlayerPlacement() == 1) {
-            FOptionPane.showMessageDialog("For placing " + placement + ", another tournament will be immediately available!");
-            FModel.getQuest().getAchievements().addDraftToken();
+            String placement = QuestEventDraft.getPlacementString(draft.getPlayerPlacement());
+            
+            Object[] prizes = draft.getPrizes();
+            
+            if (prizes[0] != null && (int) prizes[0] > 0) {
+                FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + (int) prizes[0] + " credits!", "Credits Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_COINSTACK));
+                FModel.getQuest().getAssets().addCredits((long) prizes[0]);
+            }
+            
+            if (prizes[2] != null) {
+                
+                List<PaperCard> individualCards = (ArrayList<PaperCard>) prizes[2];
+                
+                if (!individualCards.isEmpty()) {
+                    final CardListViewer c = new CardListViewer("Tournament Reward", "For participating in the tournament, you have been awarded the following promotional card:", individualCards);
+                    c.setVisible(true);
+                    c.dispose();
+                    FModel.getQuest().getCards().addAllCards(individualCards);
+                }
+                
+            }
+            
+            if (prizes[1] != null) {
+                
+                List<BoosterPack> boosterPacks = (ArrayList<BoosterPack>) prizes[1];
+    
+                if (!boosterPacks.isEmpty()) {
+                    
+                    String packPlural = (boosterPacks.size() == 1) ? "" : "s";
+                    
+                    FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded " + boosterPacks.size() + " booster pack" + packPlural + "!", "Booster Pack" + packPlural + " Awarded", FSkin.getImage(FSkinProp.ICO_CARD_IMAGE));
+                    
+                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV) && boosterPacks.size() > 1) {
+    
+                        boolean skipTheRest = false;
+                        List<PaperCard> remainingCards = new ArrayList<PaperCard>();
+                        int totalPacks = boosterPacks.size();
+                        int currentPack = 0;
+                        
+                        while (boosterPacks.size() > 0) {
+                            
+                            BoosterPack pack = boosterPacks.remove(0);
+                            currentPack++;
+                            
+                            if (skipTheRest) {
+                                remainingCards.addAll(pack.getCards());
+                                continue;
+                            }
+                            
+                            final BoxedProductCardListViewer c = new BoxedProductCardListViewer(pack.getName(), "You have found the following cards inside (Booster Pack " + currentPack + " of " + totalPacks + "):", pack.getCards());
+                            c.setVisible(true);
+                            c.dispose();
+                            skipTheRest = c.skipTheRest();
+                            FModel.getQuest().getCards().addAllCards(pack.getCards());
+                            
+                        }
+                        
+                        if (skipTheRest && !remainingCards.isEmpty()) {
+                            final CardListViewer c = new CardListViewer("Tournament Reward", "You have found the following cards inside:", remainingCards);
+                            c.setVisible(true);
+                            c.dispose();
+                            FModel.getQuest().getCards().addAllCards(remainingCards);
+                        }
+                        
+                    } else {
+                        
+                        List<PaperCard> cards = new ArrayList<PaperCard>();
+                        
+                        while (boosterPacks.size() > 0) {
+                            BoosterPack pack = boosterPacks.remove(0);
+                            cards.addAll(pack.getCards());
+                            continue;
+                        }
+                        
+                        final CardListViewer c = new CardListViewer("Tournament Reward", "You have found the following cards inside:", cards);
+                        c.setVisible(true);
+                        c.dispose();
+                        FModel.getQuest().getCards().addAllCards(cards);
+                        
+                    }
+                }
+                
+            }
+            
+            if (draft.getPlayerPlacement() == 1) {
+                FOptionPane.showMessageDialog("For placing " + placement + ", another tournament will be immediately available!");
+                FModel.getQuest().getAchievements().addDraftToken();
+            }
+            
         }
         
         boolean saveDraft = FOptionPane.showConfirmDialog("Would you like to save this draft to the regular draft mode?", "Save Draft?");
@@ -220,12 +233,16 @@ public enum CSubmenuQuestDraft implements ICDoc {
             
         }
         
-        Deck deck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
+        String deckName = "Tournament Deck " + new SimpleDateFormat("EEE d MMM yyyy HH-mm-ss").format(new Date());
+        
+        Deck tournamentDeck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
+        Deck deck = new Deck(deckName);
+        
         FModel.getQuest().getCards().addAllCards(deck.getAllCardsInASinglePool().toFlatList());
         
-        if (deck.get(DeckSection.Main).countAll() > 0) {
-            FModel.getQuest().getMyDecks().add(FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck());
-            FModel.getQuest().getMyDecks().get(QuestEventDraft.DECK_NAME).get(DeckSection.Sideboard).clear();
+        if (tournamentDeck.get(DeckSection.Main).countAll() > 0) {
+            deck.getOrCreate(DeckSection.Main).addAll(tournamentDeck.get(DeckSection.Main));
+            FModel.getQuest().getMyDecks().add(deck);
         }
         
         FModel.getQuest().getDraftDecks().delete(QuestEventDraft.DECK_NAME);
