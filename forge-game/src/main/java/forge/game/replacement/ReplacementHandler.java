@@ -129,7 +129,7 @@ public class ReplacementHandler {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose which replacement effect to apply.", possibleReplacers, runParams);
+        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose a replacement effect to apply first.", possibleReplacers, runParams);
 
         possibleReplacers.remove(chosenRE);
 
