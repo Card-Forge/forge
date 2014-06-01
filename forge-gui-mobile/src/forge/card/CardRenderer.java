@@ -182,25 +182,27 @@ public class CardRenderer {
         TextureRegion cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
-            float w = image.getWidth();
-            float h = image.getHeight();
-            float x = w * 0.1f;
-            float y = h * 0.11f;
-            w -= 2 * x;
-            h *= 0.43f;
-            float ratioRatio = w / h / CARD_ART_RATIO;
-            if (ratioRatio > 1) { //if too wide, shrink width
-                float dw = w * (ratioRatio - 1);
-                w -= dw;
-                x += dw / 2;
+            if (image != null) {
+                float w = image.getWidth();
+                float h = image.getHeight();
+                float x = w * 0.1f;
+                float y = h * 0.11f;
+                w -= 2 * x;
+                h *= 0.43f;
+                float ratioRatio = w / h / CARD_ART_RATIO;
+                if (ratioRatio > 1) { //if too wide, shrink width
+                    float dw = w * (ratioRatio - 1);
+                    w -= dw;
+                    x += dw / 2;
+                }
+                else { //if too tall, shrink height
+                    float dh = h * (1 - ratioRatio);
+                    h -= dh;
+                    y += dh / 2;
+                }
+                cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+                cardArtCache.put(imageKey, cardArt);
             }
-            else { //if too tall, shrink height
-                float dh = h * (1 - ratioRatio);
-                h -= dh;
-                y += dh / 2;
-            }
-            cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-            cardArtCache.put(imageKey, cardArt);
         }
         return cardArt;
     }
@@ -219,7 +221,9 @@ public class CardRenderer {
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, float x, float y, float w, float h) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
-        g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
+        if (cardArt != null) {
+            g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
+        }
         x += cardArtWidth;
 
         String name = cardRules.getName();
