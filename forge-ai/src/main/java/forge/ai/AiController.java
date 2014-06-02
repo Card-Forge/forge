@@ -71,6 +71,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -673,6 +674,18 @@ public class AiController {
                 }
                 card.setSVar("PayX", Integer.toString(xPay));
             }
+            
+            // Check for valid targets before casting
+            if (card.getSVar("OblivionRing").length() > 0) {
+                SpellAbility effectExile = AbilityFactory.getAbility(card.getSVar("TrigExile"), card);
+                final ZoneType origin = ZoneType.listValueOf(effectExile.getParam("Origin")).get(0);
+                final TargetRestrictions tgt = effectExile.getTargetRestrictions();
+                final List<Card> list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), player, card);
+                if (CardLists.getTargetableCards(list, sa).isEmpty()) {
+                    return AiPlayDecision.AnotherTime;
+                }
+            }
+            
             // Prevent the computer from summoning Ball Lightning type creatures after attacking
             if (card.hasSVar("EndOfTurnLeavePlay")
                     && (game.getPhaseHandler().isPlayerTurn(player.getOpponent())
