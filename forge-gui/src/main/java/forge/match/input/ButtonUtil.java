@@ -24,52 +24,22 @@ import forge.interfaces.IButton;
  * Manages match UI OK/Cancel button enabling and focus
  */
 public class ButtonUtil {
-    public static void setButtonText(String okLabel, String cancelLabel) {
-        getOk().setText(okLabel);
-        getCancel().setText(cancelLabel);
+    public static void update(boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        update("OK", "Cancel", okEnabled, cancelEnabled, focusOk);
     }
-    
-    public static void reset() {
-        disableAll();
-        getOk().setText("OK");
-        getCancel().setText("Cancel");
-    }
+    public static void update(String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        IButton btnOk = GuiBase.getInterface().getBtnOK();
+        IButton btnCancel = GuiBase.getInterface().getBtnCancel();
 
-    public static void enableOnlyOk() {
-        getCancel().setEnabled(false);
-        enableAndFocus(getOk());
-    }
-
-    public static void enableOnlyCancel() {
-        getOk().setEnabled(false);
-        enableAndFocus(getCancel());
-    }
-
-    public static void disableAll() {
-        getOk().setEnabled(false);
-        getCancel().setEnabled(false);
-    }
-    
-    public static void enableAllFocusOk() {
-        enableAndFocus(getOk());
-        getCancel().setEnabled(true);
-    }
-    
-    public static void enableAllFocusCancel() {
-        getOk().setEnabled(true);
-        enableAndFocus(getCancel());
-    }
-
-    private static void enableAndFocus(final IButton button) {
-        button.setEnabled(true);
-        GuiBase.getInterface().focusButton(button);
-    }
-
-    private static IButton getOk() {
-        return GuiBase.getInterface().getBtnOK();
-    }
-
-    private static IButton getCancel() {
-        return GuiBase.getInterface().getBtnCancel();
+        btnOk.setText(okLabel);
+        btnCancel.setText(cancelLabel);
+        btnOk.setEnabled(okEnabled);
+        btnCancel.setEnabled(cancelEnabled);
+        if (okEnabled && focusOk) {
+            GuiBase.getInterface().focusButton(btnOk);
+        }
+        else if (cancelEnabled) {
+            GuiBase.getInterface().focusButton(btnCancel);
+        }
     }
 }

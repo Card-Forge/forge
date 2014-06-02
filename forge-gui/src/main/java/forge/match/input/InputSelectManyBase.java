@@ -44,17 +44,8 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     public final void showMessage() {
         showMessage(getMessage());
-
-        boolean canCancel = allowCancel;
-        boolean canOk = hasEnoughTargets();
-
-        ButtonUtil.reset();
-        if (canOk && canCancel) { ButtonUtil.enableAllFocusOk(); }
-        if (!canOk && canCancel) { ButtonUtil.enableOnlyCancel(); }
-        if (canOk && !canCancel) { ButtonUtil.enableOnlyOk(); }
-        if (!canOk && !canCancel) { ButtonUtil.disableAll(); }
+        ButtonUtil.update(hasEnoughTargets(), allowCancel, true);
     }
-
 
     @Override
     protected final void onCancel() {

@@ -24,7 +24,6 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     @Override
     protected void showMessage() {
         setPause(false);
-        ButtonUtil.enableAllFocusOk();
     }
 
     //update message based on current turn and paused state
@@ -47,10 +46,10 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
     private void setPause(boolean pause) {
         isPaused = pause; 
         if (isPaused) {
-            ButtonUtil.setButtonText("Resume", "Step");
+            ButtonUtil.update("Resume", "Step", true, true, true);
         }
         else {
-            ButtonUtil.setButtonText("Pause", isFast ? "1x Speed" : "10x Faster");
+            ButtonUtil.update("Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
         }
     }
 

@@ -43,10 +43,9 @@ public class InputLockUI implements Input  {
     };
     
     private final Runnable showMessageFromEdt = new Runnable() {
-        
         @Override
         public void run() {
-            ButtonUtil.disableAll();
+            ButtonUtil.update("", "", false, false, false);
             showMessage("Waiting for actions...");
         }
     };

@@ -109,12 +109,11 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void updatePrompt() {
         if (canCallBackAttackers()) {
-            ButtonUtil.setButtonText("OK", "Call Back");
+            ButtonUtil.update("OK", "Call Back", true, true, true);
         }
         else {
-            ButtonUtil.setButtonText("OK", "Alpha Strike");
+            ButtonUtil.update("OK", "Alpha Strike", true, true, true);
         }
-        ButtonUtil.enableAllFocusOk();
     }
 
     /** {@inheritDoc} */

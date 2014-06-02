@@ -70,13 +70,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         if (isCommander) {
-            ButtonUtil.setButtonText("Keep", "Exile");
-            ButtonUtil.enableOnlyOk();
+            ButtonUtil.update("Keep", "Exile", true, false, true);
             sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
         }
         else {
-            ButtonUtil.setButtonText("Keep", "Mulligan");
-            ButtonUtil.enableAllFocusOk();
+            ButtonUtil.update("Keep", "Mulligan", true, true, true);
             sb.append("Do you want to keep your hand?");
         }
 
@@ -98,7 +96,6 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     }
 
     private void done() {
-        ButtonUtil.reset();
         if (isCommander) {
             // Clear the "selected" icon after clicking the done button
             for (Card c : this.selected) {
@@ -144,12 +141,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
                 GuiBase.getInterface().setUsedToPay(c0, true);
                 selected.add(c0);
             }
-            if (selected.isEmpty()) {
-                ButtonUtil.enableOnlyOk();
-            }
-            else {
-                ButtonUtil.enableAllFocusOk();
-            }
+            ButtonUtil.update("Keep", "Exile", true, !selected.isEmpty(), true);
         }
         return true;
     }

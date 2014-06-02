@@ -49,8 +49,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
-        ButtonUtil.setButtonText("OK", "End Turn");
-        ButtonUtil.enableAllFocusOk();
+        ButtonUtil.update("OK", "End Turn", true, true, true);
     }
 
     /** {@inheritDoc} */

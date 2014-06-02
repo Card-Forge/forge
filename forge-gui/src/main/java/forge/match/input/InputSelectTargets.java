@@ -74,20 +74,22 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         showMessage(sb.toString());
 
         // If reached Minimum targets, enable OK button
-        ButtonUtil.reset();
         if (!tgt.isMinTargetsChosen(sa.getHostCard(), sa) || tgt.isDividedAsYouChoose()) {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
-                ButtonUtil.disableAll();
-            } else {
-                ButtonUtil.enableOnlyCancel();
+                ButtonUtil.update(false, false, false);
             }
-        } else {
+            else {
+                ButtonUtil.update(false, true, false);
+            }
+        }
+        else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
-                ButtonUtil.enableOnlyOk();
-            } else {
-                ButtonUtil.enableAllFocusOk();
+                ButtonUtil.update(true, false, true);
+            }
+            else {
+                ButtonUtil.update(true, true, true);
             }
         }
     }

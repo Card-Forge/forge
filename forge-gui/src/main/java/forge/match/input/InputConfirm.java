@@ -43,46 +43,39 @@ public class InputConfirm extends InputSyncronizedBase {
     }
 
     public InputConfirm(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
-        this.message = message0;
-        this.yesButtonText = yesButtonText0;
-        this.noButtonText = noButtonText0;
-        this.defaultYes = defaultYes0;
+        message = message0;
+        yesButtonText = yesButtonText0;
+        noButtonText = noButtonText0;
+        defaultYes = defaultYes0;
         result = defaultYes0;
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
-        ButtonUtil.setButtonText(this.yesButtonText, this.noButtonText);
-        if (this.defaultYes) {
-            ButtonUtil.enableAllFocusOk();
-        }
-        else {
-            ButtonUtil.enableAllFocusCancel();
-        }
-        showMessage(this.message);
+        ButtonUtil.update(yesButtonText, noButtonText, true, true, defaultYes);
+        showMessage(message);
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
-        this.result = true;
+        result = true;
         done();
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        this.result = false;
+        result = false;
         done();
     }
 
     private void done() {
-        ButtonUtil.reset();
         stop();
     }
 
     public final boolean getResult() {
-        return this.result;
+        return result;
     }
 }

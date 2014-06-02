@@ -358,9 +358,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void updateButtons() {
         if (supportAutoPay()) {
-            ButtonUtil.setButtonText("Auto", "Cancel");
+            ButtonUtil.update("Auto", "Cancel", false, true, false);
         }
-        ButtonUtil.enableOnlyCancel();
+        else {
+            ButtonUtil.update("", "Cancel", false, true, false);
+        }
     }
 
     protected final void updateMessage() {
@@ -377,19 +379,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 runAsAi(proc);
                 canPayManaCost = proc.getResult();
             }
-            if (canPayManaCost) {
-                ButtonUtil.enableAllFocusOk(); //enabled Auto button if mana cost can be paid
+            if (canPayManaCost) { //enabled Auto button if mana cost can be paid
+                ButtonUtil.update("Auto", "Cancel", true, true, true);
             }
         }
         showMessage(getMessage());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final void onStop() {
-        if (supportAutoPay()) {
-            ButtonUtil.reset();
-        }
     }
 
     /** {@inheritDoc} */
