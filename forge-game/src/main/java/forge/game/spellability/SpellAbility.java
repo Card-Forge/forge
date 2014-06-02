@@ -110,6 +110,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private HashMap<String, Object> replacingObjects = new HashMap<String, Object>();
 
+    private List<AbilitySub> chosenList = null;
     private List<Card> tappedForConvoke = new ArrayList<Card>();
     private Card sacrificedAsOffering = null;
     private int conspireInstances = 0;
@@ -1774,5 +1775,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getTotalManaSpent() {
         return this.totalManaSpent;
     }
+    
+    public List<AbilitySub> getChosenList() {
+        return chosenList;
+    }
 
+    public void setChosenList(List<AbilitySub> choices) {
+        this.chosenList = choices;
+    }
 }

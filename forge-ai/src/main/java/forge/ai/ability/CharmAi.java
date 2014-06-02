@@ -31,6 +31,8 @@ public class CharmAi extends SpellAbilityAi {
 
         if (chosenList.isEmpty()) {
             return false;
+        } else {
+            sa.setChosenList(chosenList);
         }
 
         // prevent run-away activations - first time will always return true
@@ -38,6 +40,9 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean opponentChoser) {
+        if (sa.getChosenList() != null) {
+            return sa.getChosenList();
+        }
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
