@@ -266,7 +266,7 @@ public class Forge implements ApplicationListener {
     }
 
     //log message to Forge.log file
-    public static void log(String message) {
+    public static void log(Object message) {
         System.out.println(message);
     }
 
