@@ -3262,6 +3262,7 @@ public class CardFactoryUtil {
         } // Ripple
 
         final int dethrone = card.getKeywordAmount("Dethrone");
+        card.removeIntrinsicKeyword("Dethrone");
         for (int i = 0; i < dethrone; i++) {
             final StringBuilder trigScript = new StringBuilder(
                     "Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | "
