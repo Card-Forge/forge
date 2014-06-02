@@ -68,6 +68,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
         if (mapParams.containsKey("Execute")) {
             SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(mapParams.get("Execute")), sa.getHostCard());
+            overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
             delTrig.setOverridingAbility(overridingSA);
         }
 

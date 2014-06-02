@@ -1251,6 +1251,20 @@ public class AbilityUtils {
         if (unlessCost.equals("CardManaCost")) {
             cost = new Cost(source.getManaCost(), true);
         }
+        else if (unlessCost.equals("TriggeredSpellManaCost")) {
+            SpellAbility triggered = (SpellAbility) sa.getRootAbility().getTriggeringObject("SpellAbility");
+            Card triggeredCard = triggered.getHostCard();
+            if (triggeredCard.getManaCost() == null) {
+                cost = new Cost(ManaCost.ZERO, true);
+            } else {
+                int xCount = triggeredCard.getManaCost().countX();
+                int xPaid = triggeredCard.getXManaCostPaid() * xCount;
+                ManaCostBeingPaid toPay = new ManaCostBeingPaid(triggeredCard.getManaCost());
+                toPay.decreaseShard(ManaCostShard.X, xCount);
+                toPay.increaseColorlessMana(xPaid);
+                cost = new Cost(toPay.toManaCost(), true);
+            }
+        }
         else if (unlessCost.equals("ChosenManaCost")) {
         	if (source.getChosenCard().isEmpty()) {
                 cost = new Cost(ManaCost.ZERO, true);

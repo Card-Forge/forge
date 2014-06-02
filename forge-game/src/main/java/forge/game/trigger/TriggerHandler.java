@@ -380,8 +380,9 @@ public class TriggerHandler {
         if (regtrig.getStoredTriggeredObjects() != null) {
             sa.setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
-
-        sa.setActivatingPlayer(host.getController());
+        if (sa.getActivatingPlayer() == null) { // overriding delayed trigger should have set activator
+            sa.setActivatingPlayer(host.getController());
+        }
         if (triggerParams.containsKey("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);

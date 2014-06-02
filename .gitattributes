@@ -6876,6 +6876,7 @@ forge-gui/res/cardsfolder/i/icatian_skirmishers.txt -text
 forge-gui/res/cardsfolder/i/icatian_store.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/icatian_town.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ice_cage.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/ice_cave.txt -text
 forge-gui/res/cardsfolder/i/ice_floe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ice_storm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/iceberg.txt svneol=native#text/plain
