@@ -74,6 +74,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         UI_FOR_TOUCHSCREN("false"),
 
+        UI_VIBRATE_ON_LIFE_LOSS("true"),
+        UI_VIBRATE_ON_LONG_PRESS("true"),
+
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
         SUBMENU_CURRENTMENU ("CONSTRUCTED"),

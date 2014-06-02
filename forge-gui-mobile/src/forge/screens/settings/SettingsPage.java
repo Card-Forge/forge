@@ -37,6 +37,7 @@ public class SettingsPage extends TabPage {
         lstSettings.addGroup("Advanced Settings");
         lstSettings.addGroup("Graphic Options");
         lstSettings.addGroup("Card Overlays");
+        lstSettings.addGroup("Vibration Options");
         //lstSettings.addGroup("Sound Options"); //TODO: Uncomment when sound supported
 
         //General Settings
@@ -163,15 +164,25 @@ public class SettingsPage extends TabPage {
                 "Show id overlays for cards, otherwise they're hidden."),
                 5);
 
+        //Vibration Options
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
+                "Vibrate On Life Lost",
+                "Enable vibration when your player loses life or takes damage during a game."),
+                6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
+                "Vibrate On Long Press",
+                "Enable quick vibration to signify a long press, such as for card zooming."),
+                6);
+
         //Sound Options
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
                 "Enable Sounds",
                 "Enable sound effects during the game."),
-                6);
+                7);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
-                6);*/ //TODO: Uncomment when sound supported
+                7);*/ //TODO: Uncomment when sound supported
     }
 
     @Override

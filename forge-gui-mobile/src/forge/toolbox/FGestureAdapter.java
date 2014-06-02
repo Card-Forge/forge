@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Utils;
 
 public abstract class FGestureAdapter extends InputAdapter {
@@ -49,7 +51,9 @@ public abstract class FGestureAdapter extends InputAdapter {
             if (!longPressed) {
                 longPressed = true;
                 if (longPress(pointer1.x, pointer1.y)) {
-                    Gdx.input.vibrate(25); //perform a quick vibrate to signify a successful long press
+                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LONG_PRESS)) {
+                        Gdx.input.vibrate(25); //perform a quick vibrate to signify a successful long press
+                    }
                     endPress(pointer1.x, pointer1.y); //end press immediately if long press handled
                     longPressHandled = true;
                 }
