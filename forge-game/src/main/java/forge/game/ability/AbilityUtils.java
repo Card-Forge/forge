@@ -1246,7 +1246,7 @@ public class AbilityUtils {
         final boolean isSwitched = sa.hasParam("UnlessSwitched");
 
         // The cost
-        final Cost cost;
+        Cost cost;
         String unlessCost = sa.getParam("UnlessCost").trim();
         if (unlessCost.equals("CardManaCost")) {
             cost = new Cost(source.getManaCost(), true);
@@ -1283,6 +1283,10 @@ public class AbilityUtils {
 
         boolean alreadyPaid = false;
         for (Player payer : allPayers) {
+            if (unlessCost.equals("LifeTotalHalfUp")) {
+                String halfup = Integer.toString((int) Math.ceil(payer.getLife() / 2.0));
+                cost = new Cost("PayLife<" + halfup + ">", true);
+            }
             alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers);
         }
 
