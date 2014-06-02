@@ -166,11 +166,11 @@ public class SettingsPage extends TabPage {
 
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-                "Vibrate On Life Lost",
+                "Vibrate When Losing Life",
                 "Enable vibration when your player loses life or takes damage during a game."),
                 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
-                "Vibrate On Long Press",
+                "Vibrate After Long Press",
                 "Enable quick vibration to signify a long press, such as for card zooming."),
                 6);
 
