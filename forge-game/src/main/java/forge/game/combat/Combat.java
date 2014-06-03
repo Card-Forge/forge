@@ -218,8 +218,12 @@ public class Combat {
     }
 
     public final void addBlocker(final Card attacker, final Card blocker) {
-        AttackingBand band = getBandOfAttacker(attacker);
+        final AttackingBand band = getBandOfAttacker(attacker);
         blockedBands.put(band, blocker);
+        // If damage is already assigned, add this blocker as a "late entry"
+        if (blockersOrderedForDamageAssignment.containsKey(attacker)) {
+        	addBlockerToDamageAssignmentOrder(attacker, blocker);
+        }
     }
 
     // remove blocked from specific attacker
@@ -310,6 +314,25 @@ public class Combat {
             List<Card> orderedBlockers = playerWhoAttacks.getController().orderBlockers(pair.getLeft(), pair.getRight()); // we know there's a list
             blockersOrderedForDamageAssignment.put(pair.getLeft(), orderedBlockers);
         }
+    }
+    
+    /**
+     * Add a blocker to the damage assignment order of an attacker. The
+     * relative order of creatures already blocking the attacker may not be
+     * changed. Performs controller's role.
+     * 
+     * @param attacker the attacking creature.
+     * @param blocker the blocking creature.
+     */
+    public void addBlockerToDamageAssignmentOrder(Card attacker, Card blocker) {
+    	final List<Card> oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
+    	if (oldBlockers == null || oldBlockers.isEmpty()) {
+   			blockersOrderedForDamageAssignment.put(attacker, Lists.newArrayList(blocker));
+    	}
+    	else {
+    		List<Card> orderedBlockers = playerWhoAttacks.getController().orderBlocker(attacker, blocker, oldBlockers);
+            blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
+    	}
     }
     
     public void orderAttackersForDamageAssignment() { // this method performs controller's role

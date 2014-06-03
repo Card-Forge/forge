@@ -3,6 +3,7 @@ package forge.gamesimulationtests.util;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.LobbyPlayer;
@@ -198,6 +199,14 @@ public class PlayerControllerForTests extends PlayerController {
 	@Override
 	public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
 		return blockers;
+	}
+	
+	@Override
+	public List<Card> orderBlocker(final Card attacker, final Card blocker,
+			final List<Card> oldBlockers) {
+		final List<Card> allBlockers = Lists.newArrayList(oldBlockers);
+		allBlockers.add(blocker);
+		return allBlockers;
 	}
 
 	@Override

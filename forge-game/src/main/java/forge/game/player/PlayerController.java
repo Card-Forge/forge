@@ -150,6 +150,14 @@ public abstract class PlayerController {
     public abstract boolean getWillPlayOnFirstTurn(boolean isFirstGame);
 
     public abstract List<Card> orderBlockers(Card attacker, List<Card> blockers);
+    /**
+     * Add a card to a pre-existing blocking order.
+     * @param attacker the attacking creature.
+     * @param blocker the new blocker.
+     * @param oldBlockers the creatures already blocking the attacker (in order).
+     * @return The new order of creatures blocking the attacker.
+     */
+    public abstract List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers);
     public abstract List<Card> orderAttackers(Card blocker, List<Card> attackers);
 
     /** Shows the card to this player*/

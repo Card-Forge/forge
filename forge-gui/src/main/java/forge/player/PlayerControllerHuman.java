@@ -377,6 +377,12 @@ public class PlayerControllerHuman extends PlayerController {
         GuiBase.getInterface().setPanelSelection(attacker);
         return SGuiChoose.order("Choose Damage Order for " + attacker, "Damaged First", blockers, attacker);
     }
+    
+    @Override
+    public List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
+    	GuiBase.getInterface().setPanelSelection(attacker);
+    	return SGuiChoose.insertInList("Choose blocker after which to place " + attacker + " in damage order; cancel to place it first", blocker, oldBlockers);
+    }
 
     @Override
     public List<Card> orderAttackers(Card blocker, List<Card> attackers) {

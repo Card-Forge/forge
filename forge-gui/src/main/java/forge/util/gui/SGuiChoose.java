@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.GuiBase;
 import forge.game.card.Card;
@@ -199,11 +200,31 @@ public class SGuiChoose {
         Collections.sort(sideboard);
         return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
     }
+    
+    /**
+     * Ask the user to insert an object into a list of other objects. The
+     * current implementation requires the user to cancel in order to get the
+     * new item to be the first item in the resulting list.
+     * 
+     * @param title the dialog title.
+     * @param newItem the object to insert.
+     * @param oldItems the list of objects.
+     * @return A shallow copy of the list of objects, with newItem inserted.
+     */
+    public static <T> List<T> insertInList(final String title, final T newItem, final List<T> oldItems) {
+		final T placeAfter = oneOrNone(title, oldItems);
+    	final int indexAfter = (placeAfter == null ? 0 : oldItems.indexOf(placeAfter) + 1);
+    	final List<T> result = Lists.newArrayListWithCapacity(oldItems.size() + 1);
+    	result.addAll(oldItems);
+    	result.add(indexAfter, newItem);
+    	return result;
+    }
 
     private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
         return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
     }
+
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOneOrNone(final String message, final T[] choices, Comparator<T> comparer) {

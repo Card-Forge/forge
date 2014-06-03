@@ -19,6 +19,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
@@ -821,6 +822,48 @@ public class AiBlockController {
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
 
         return first;
+    }
+    
+    /**
+     * Orders a blocker that put onto the battlefield blocking. Depends heavily
+     * on the implementation of orderBlockers().
+     */
+    public static List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
+    	// add blocker to existing ordering
+    	// sort by evaluate, then insert it appropriately
+    	// relies on current implementation of orderBlockers()
+        final List<Card> allBlockers = Lists.newArrayList(oldBlockers);
+        allBlockers.add(blocker);
+        ComputerUtilCard.sortByEvaluateCreature(allBlockers);
+        final int newBlockerIndex = allBlockers.indexOf(blocker);
+
+        int damage = attacker.getNetCombatDamage();
+
+        final List<Card> result = Lists.newArrayListWithExpectedSize(oldBlockers.size());
+        boolean newBlockerIsAdded = false;
+        // The new blocker comes right after this one
+        final Card newBlockerRightAfter = (newBlockerIndex == 0 ? null : allBlockers.get(newBlockerIndex - 1));
+        if (newBlockerRightAfter == null && damage >= ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true)) {
+        	result.add(blocker);
+        	newBlockerIsAdded = true;
+        }
+        // Don't bother to keep damage up-to-date after the new blocker is added, as we can't modify the order of the other cards anyway
+        for (final Card c : oldBlockers) {
+        	final int lethal = ComputerUtilCombat.getEnoughDamageToKill(c, damage, attacker, true);
+        	damage -= lethal;
+        	result.add(c);
+        	if (!newBlockerIsAdded && c == newBlockerRightAfter && damage <= ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true)) {
+        		// If blocker is right after this card in priority and we have sufficient damage to kill it, add it here
+        		result.add(blocker);
+        		newBlockerIsAdded = true;
+        	}
+        }
+        // We don't have sufficient damage, just add it at the end!
+        if (!newBlockerIsAdded) {
+        	result.add(blocker);
+        }
+      
+        return result;
     }
 
     public static List<Card> orderAttackers(Card blocker, List<Card> attackers) {
