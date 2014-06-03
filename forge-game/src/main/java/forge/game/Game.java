@@ -85,6 +85,8 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
+    
+    private Direction turnOrder = Direction.getDefaultDirection();
 
     private long timestamp = 0;
     public final GameAction action;
@@ -286,6 +288,19 @@ public class Game {
             }
         });
         return list;
+    }
+    
+    /**
+     * Get the turn order.
+     * @return the Direction in which the turn order of this Game currently
+     * proceeds.
+     */
+    public final Direction getTurnOrder() {
+    	return this.turnOrder;
+    }
+    
+    public final void reverseTurnOrder() {
+    	this.turnOrder = this.turnOrder.getOtherDirection();
     }
 
     /**
@@ -498,20 +513,25 @@ public class Game {
             return null;
         }
 
+        final int shift = this.getTurnOrder().getShift();
+        final int totalNumPlayers = allPlayers.size();
         if (-1 == iPlayer) { // if playerTurn has just lost
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
             do {
-                iPlayer = (iPlayer + 1) % allPlayers.size();
+                iPlayer = (iPlayer + shift) % totalNumPlayers;
+                if (iPlayer < 0) {
+                	iPlayer += totalNumPlayers;
+                }
                 iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
             } while (iAlive < 0);
             iPlayer = iAlive;
         }
         else { // for the case noone has died
-            if (iPlayer == roIngamePlayers.size() - 1) {
-                iPlayer = -1;
-            }
-            iPlayer++;
+        	iPlayer = (iPlayer + shift) % totalNumPlayers;
+        	if (iPlayer < 0) {
+        		iPlayer += totalNumPlayers;
+        	}
         }
 
         return roIngamePlayers.get(iPlayer);

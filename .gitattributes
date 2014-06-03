@@ -259,6 +259,7 @@ forge-game/pom.xml -text
 forge-game/src/main/java/forge/GameCommand.java svneol=native#text/plain
 forge-game/src/main/java/forge/ImageKeys.java -text
 forge-game/src/main/java/forge/game/CardTraitBase.java -text
+forge-game/src/main/java/forge/game/Direction.java -text
 forge-game/src/main/java/forge/game/Game.java -text
 forge-game/src/main/java/forge/game/GameAction.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
@@ -387,6 +388,7 @@ forge-game/src/main/java/forge/game/ability/effects/RepeatEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RestartGameEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RevealEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RevealHandEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ReverseTurnOrderEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RollPlanarDiceEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/RunSVarAbilityEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/SacrificeAllEffect.java -text

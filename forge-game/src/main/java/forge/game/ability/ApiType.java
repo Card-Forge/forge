@@ -109,6 +109,7 @@ public enum ApiType {
     RestartGame (RestartGameEffect.class),
     Reveal (RevealEffect.class),
     RevealHand (RevealHandEffect.class),
+    ReverseTurnOrder (ReverseTurnOrderEffect.class),
     RollPlanarDice (RollPlanarDiceEffect.class),
     RunSVarAbility (RunSVarAbilityEffect.class),
     Sacrifice (SacrificeEffect.class),
