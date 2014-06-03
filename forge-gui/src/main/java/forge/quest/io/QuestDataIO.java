@@ -571,7 +571,7 @@ public class QuestDataIO {
                 String draftName = null;
                 String boosterConfiguration = null;
                 int entryFee = 1500;
-                int age = 0;
+                int age = 15;
                 String block = null;
                 String[] standings = new String[15];
                 String[] aiNames = new String[7];

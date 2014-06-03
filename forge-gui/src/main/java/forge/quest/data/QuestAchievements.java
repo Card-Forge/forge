@@ -72,7 +72,13 @@ public class QuestAchievements {
         this.winstreakCurrent++;
         
         for (QuestEventDraft draft : drafts) {
-            draft.addWin();
+            if (!(currentDraft != -1 && drafts.get(currentDraft) == draft)) {
+                draft.addWin();
+            }
+        }
+        
+        if (win % 5 == 0) {
+            draftTokensAvailable++;
         }
         
         if (this.winstreakCurrent > this.winstreakBest) {
@@ -209,7 +215,7 @@ public class QuestAchievements {
         return drafts;
     }
     
-    public void generateNewTournaments() {
+    public void generateDrafts() {
         
         if (drafts == null) {
             drafts = new QuestEventDraftContainer();
@@ -217,8 +223,9 @@ public class QuestAchievements {
         }
         
         QuestEventDraft toRemove = null;
-        for (QuestEventDraft draft : drafts) { //Pick the oldest draft first
-            if (draft.getAge() >= 5 && currentDraft == -1 && drafts.size() == 3) {
+        for (QuestEventDraft draft : drafts) {
+            if (draft.getAge() <= 0
+                    && !(currentDraft != -1 && drafts.get(currentDraft) == draft)) {
                 toRemove = draft;
                 break;
             }
@@ -226,38 +233,9 @@ public class QuestAchievements {
         
         if (toRemove != null) {
             drafts.remove(toRemove);
-            draftTokensAvailable++;
-            for (QuestEventDraft draft : drafts) {
-                draft.setAge(draft.getAge() - 5);
-            }
-        } else {
-            
-            if (drafts.size() < 3) {
-            
-                int oldest = -100;
-                for (QuestEventDraft draft : drafts) {
-                    if (draft.getAge() > oldest) {
-                        oldest = draft.getAge();
-                    }
-                }
-                
-                if (oldest >= 5) {
-                    draftTokensAvailable++;
-                    for (QuestEventDraft draft : drafts) {
-                        draft.setAge(draft.getAge() - 5);
-                    }
-                }
-            
-            }
-            
         }
         
-        int draftsToGenerate = 3 - drafts.size();
-        if (draftsToGenerate > draftTokensAvailable) {
-            draftsToGenerate = draftTokensAvailable;
-        }
-
-        for (int i = 0; i < draftsToGenerate; i++) {
+        for (int i = 0; i < draftTokensAvailable; i++) {
             QuestEventDraft draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());
             if (draft != null) {
                 drafts.add(draft);

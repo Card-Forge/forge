@@ -85,7 +85,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         if (achievements == null) {
             view.setMode(Mode.EMPTY);
         } else if (achievements.getDraftEvents() == null || achievements.getDraftEvents().isEmpty()) {
-            achievements.generateNewTournaments();
+            achievements.generateDrafts();
             if (achievements.getDraftEvents().isEmpty()) {
                 view.setMode(Mode.EMPTY);
             } else {
@@ -307,7 +307,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
         }
         
         QuestAchievements achievements = FModel.getQuest().getAchievements();
-        achievements.generateNewTournaments();
+        achievements.generateDrafts();
         
         if (FModel.getQuest().getAchievements().getDraftEvents().isEmpty()) {
             view.setMode(Mode.EMPTY);
@@ -354,7 +354,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         view.getLblCredits().setText("Available Credits: " + NUMBER_FORMATTER.format(FModel.getQuest().getAssets().getCredits()));
         
-        FModel.getQuest().getAchievements().generateNewTournaments();
+        FModel.getQuest().getAchievements().generateDrafts();
 
         view.getPnlTournaments().removeAll();
         JXButtonPanel grpPanel = new JXButtonPanel();

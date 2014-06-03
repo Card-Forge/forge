@@ -198,7 +198,7 @@ public class QuestWinLose extends ControlWinLose {
         if (this.wonMatch || difficulty == 0) {
             final int outcome = this.wonMatch ? wins : qData.getAchievements().getLost();
             int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
-            if (winsPerBooster > 0 && outcome % winsPerBooster == 0) {
+            if (winsPerBooster > 0 && (outcome + 1) % winsPerBooster == 0) {
                 this.awardBooster();
             }
         }
@@ -514,6 +514,7 @@ public class QuestWinLose extends ControlWinLose {
         final List<PaperCard> cardsWon = new ArrayList<>();
         List<PaperCard> cardsToAdd;
         String typeWon = "";
+        boolean addDraftToken = false;
         
         switch (currentStreak) {
             case 3:
@@ -547,6 +548,7 @@ public class QuestWinLose extends ControlWinLose {
                     cardsWon.addAll(qData.getCards().addRandomRareNotMythic(15));
                     typeWon = "rare";
                 }
+                addDraftToken = true;
                 break;
             case 0: //The 50th win in the streak is 0, since (50 % 50 == 0)
                 cardsToAdd = qData.getCards().addRandomMythicRare(10);
@@ -560,6 +562,19 @@ public class QuestWinLose extends ControlWinLose {
                 break;
             default:
                 return;
+        }
+        
+        if (addDraftToken) {
+            TitleLabel title = new TitleLabel("25 Win Streak Bonus Reward");
+            SkinnedLabel contents = new SkinnedLabel("For achieving a 25 win streak, a new tournament has been made available!");
+            contents.setHorizontalAlignment(SwingConstants.CENTER);
+            contents.setFont(FSkin.getFont(14));
+            contents.setForeground(Color.white);
+            contents.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_COIN));
+            contents.setIconTextGap(50);
+            this.getView().getPnlCustom().add(title, QuestWinLose.CONSTRAINTS_TITLE);
+            this.getView().getPnlCustom().add(contents, QuestWinLose.CONSTRAINTS_TEXT);
+            qData.getAchievements().addDraftToken();
         }
         
         this.lblTemp1 = new TitleLabel("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!");

@@ -73,7 +73,7 @@ public class QuestEventDraft {
     private int[] aiIcons = new int[7];
     
     private boolean started = false;
-    private int age = 0;
+    private int age = 15;
     
     public QuestEventDraft(final String title) {
         this.title = title;
@@ -148,7 +148,7 @@ public class QuestEventDraft {
     }
     
     public void addWin() {
-        age++;
+        age--;
     }
     
     public int getHumanLatestStanding() {
