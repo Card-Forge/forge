@@ -48,7 +48,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
-    private boolean allowMultipleSelections;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
 
     public ItemListModel getListModel() {
@@ -64,7 +63,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public ItemListView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
         listModel = new ItemListModel(model0);
-        setAllowMultipleSelections(false);
         getPnlOptions().setVisible(false); //hide options panel by default
         getScroller().add(list);
     }
@@ -163,11 +161,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected String getCaption() {
         return "List View";
-    }
-
-    @Override
-    public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
-        allowMultipleSelections = allowMultipleSelections0;
     }
 
     @Override
@@ -279,15 +272,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public boolean tap(Integer index, Entry<T, Integer> value, float x, float y, int count) {
-                    if (allowMultipleSelections) {
+                    if (maxSelections > 1) {
                         if (selectedIndices.contains(index)) {
-                            selectedIndices.remove(index);
+                            if (selectedIndices.size() > minSelections) {
+                                selectedIndices.remove(index);
+                                onSelectionChange();
+                            }
                         }
-                        else {
+                        else if (selectedIndices.size() < maxSelections) {
                             selectedIndices.add(index);
                             Collections.sort(selectedIndices); //ensure selected indices are sorted
+                            onSelectionChange();
                         }
-                        onSelectionChange();
                     }
                     else {
                         setSelectedIndex(index);
@@ -305,7 +301,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 @Override
                 public void drawValue(Graphics g, Integer index, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    if (allowMultipleSelections) {
+                    if (maxSelections > 1) {
                         if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
                             g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
                         }
@@ -337,7 +333,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
-            if (!allowMultipleSelections && selectedIndices.contains(index)) {
+            if (maxSelections == 1 && selectedIndices.contains(index)) {
                 return SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
             }
             if (index % 2 == 1) {

@@ -57,7 +57,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final List<ItemFilter<? extends T>> orderedFilters = new ArrayList<ItemFilter<? extends T>>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
-    private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private final Class<T> genericType;
@@ -960,28 +959,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         alwaysNonUnique = nonUniqueOnly;
     }
 
-    /**
-     * 
-     * getAllowMultipleSelections.
-     * 
-     * @return if true, multiple items can be selected at once
-     */
-    public boolean getAllowMultipleSelections() {
-    	return allowMultipleSelections;
-    }
-
-    /**
-     * 
-     * setAllowMultipleSelections.
-     * 
-     * @return allowMultipleSelections0 - if true, multiple items can be selected at once
-     */
-    public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
-    	if (allowMultipleSelections == allowMultipleSelections0) { return; }
-    	allowMultipleSelections = allowMultipleSelections0;
-    	for (ItemView<T> view : views) {
-    	    view.setAllowMultipleSelections(allowMultipleSelections0);
-    	}
+    public void setSelectionSupport(int minSelections0, int maxSelections0) {
+        for (ItemView<T> view : views) {
+            view.setSelectionSupport(minSelections0, maxSelections0);
+        }
     }
 
     /**

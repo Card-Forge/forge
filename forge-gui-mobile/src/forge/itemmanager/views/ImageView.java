@@ -60,7 +60,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
     private int columnCount = 4;
-    private boolean allowMultipleSelections;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
     private ItemInfo focalItem;
@@ -614,11 +613,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
-        allowMultipleSelections = allowMultipleSelections0;
-    }
-
-    @Override
     public T getItemAtIndex(int index) {
         if (index >= 0 && index < getCount()) {
             return orderedItems.get(index).item;
@@ -732,27 +726,33 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private boolean selectItem(ItemInfo item) {
         if (item == null) {
             if (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown()) {
-                clearSelection();
-                onSelectionChange();
+                if (minSelections == 0) {
+                    clearSelection();
+                    onSelectionChange();
+                }
             }
             return false;
         }
 
         if (item.selected) { //unselect item if already selected
-            item.selected = false;
-            selectedIndices.remove((Object)item.index);
-            onSelectionChange();
-            item.group.scrollIntoView(item);
+            if (selectedIndices.size() > minSelections) {
+                item.selected = false;
+                selectedIndices.remove((Object)item.index);
+                onSelectionChange();
+                item.group.scrollIntoView(item);
+            }
             return true;
         }
-        if (!allowMultipleSelections || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
+        if (maxSelections <= 1 || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
             clearSelection();
         }
-        selectedIndices.add(0, item.index);
-        item.selected = true;
-        onSelectionChange();
-        item.group.scrollIntoView(item);
-        getScroller().scrollIntoView(item);
+        if (selectedIndices.size() < maxSelections) {
+            selectedIndices.add(0, item.index);
+            item.selected = true;
+            onSelectionChange();
+            item.group.scrollIntoView(item);
+            getScroller().scrollIntoView(item);
+        }
         return true;
     }
 

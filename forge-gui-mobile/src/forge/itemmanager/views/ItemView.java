@@ -15,6 +15,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,6 +28,8 @@ public abstract class ItemView<T extends InventoryItem> {
 
     protected final ItemManager<T> itemManager;
     protected final ItemManagerModel<T> model;
+    protected int minSelections = 0;
+    protected int maxSelections = 1;
     private final Scroller scroller = new Scroller();
     private final FLabel button;
     private final OptionsPanel pnlOptions = new OptionsPanel();
@@ -202,6 +205,7 @@ public abstract class ItemView<T extends InventoryItem> {
     public void setSelectedIndex(int index, boolean scrollIntoView) {
         int count = getCount();
         if (count == 0) { return; }
+        if (maxSelections == 0) { return; }
 
         if (index < 0) {
             index = 0;
@@ -257,13 +261,17 @@ public abstract class ItemView<T extends InventoryItem> {
         }
     }
 
+    public void setSelectionSupport(int minSelections0, int maxSelections0) {
+        minSelections = minSelections0;
+        maxSelections = maxSelections0;
+    }
+
     @Override
     public String toString() {
         return getCaption(); //return caption as string for display in combo box
     }
 
     public abstract void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides);
-    public abstract void setAllowMultipleSelections(boolean allowMultipleSelections);
     public abstract T getItemAtIndex(int index);
     public abstract int getIndexOfItem(T item);
     public abstract int getSelectedIndex();

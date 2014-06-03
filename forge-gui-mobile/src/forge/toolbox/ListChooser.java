@@ -137,11 +137,12 @@ public class ListChooser<T> extends FContainer {
             options = new String[] {"OK"};
         }
 
-        if (maxChoices == 1 || minChoices == -1) {
-            lstChoices.allowMultipleSelections = false;
+        if (minChoices == -1) {
+            lstChoices.maxSelections = 0; //prevent selection if just revealing
         }
         else {
-            lstChoices.allowMultipleSelections = true;
+            lstChoices.minSelections = minChoices;
+            lstChoices.maxSelections = maxChoices;
         }
         setHeight(Math.min(lstChoices.getListItemRenderer().getItemHeight() * list.size(), FOptionPane.getMaxDisplayObjHeight()));
 
@@ -348,7 +349,7 @@ public class ListChooser<T> extends FContainer {
     }
 
     private class ChoiceList extends FList<T> {
-        private boolean allowMultipleSelections;
+        private int minSelections, maxSelections;
         private List<Integer> selectedIndices = new ArrayList<Integer>();
 
         private ChoiceList(Collection<T> items) {
@@ -382,20 +383,24 @@ public class ListChooser<T> extends FContainer {
 
                 @Override
                 public boolean tap(Integer index, T value, float x, float y, int count) {
-                    if (allowMultipleSelections) {
+                    if (maxSelections > 1) {
                         if (selectedIndices.contains(index)) {
-                            selectedIndices.remove(index);
+                            if (selectedIndices.size() > minSelections) {
+                                selectedIndices.remove(index);
+                                onSelectionChange();
+                            }
                         }
-                        else {
+                        else if (selectedIndices.size() < maxSelections) {
                             selectedIndices.add(index);
                             Collections.sort(selectedIndices); //ensure selected indices are sorted
+                            onSelectionChange();
                         }
                     }
-                    else {
+                    else if (maxSelections > 0 && !selectedIndices.contains(index)) {
                         selectedIndices.clear();
                         selectedIndices.add(index);
+                        onSelectionChange();
                     }
-                    onSelectionChange();
                     if (renderer.tap(value, x, y, count)) {
                         prevTapIndex = index;
                         return true; //don't activate if renderer handles tap
@@ -409,7 +414,7 @@ public class ListChooser<T> extends FContainer {
 
                 @Override
                 public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    if (allowMultipleSelections) {
+                    if (maxSelections > 1) {
                         if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
                             g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
                         }
@@ -438,7 +443,7 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
-            if (!allowMultipleSelections && selectedIndices.contains(index)) {
+            if (maxSelections == 1 && selectedIndices.contains(index)) {
                 return SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
             }
             if (index % 2 == 1) {
