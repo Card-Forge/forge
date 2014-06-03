@@ -807,6 +807,12 @@ public class ComputerUtilMana {
                     continue;
                 }
 
+                // don't kill yourself
+                final Cost abCost = m.getPayCosts();
+                if (!ComputerUtilCost.checkLifeCost(ai, abCost, sourceCard, 1, null)) {
+                    continue;
+                }
+
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null) {
