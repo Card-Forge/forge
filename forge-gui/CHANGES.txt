@@ -8,7 +8,7 @@ Forge Beta: 0#-##-2014 ver 1.5.19
 Release Notes
 -------------
 
-- New Conspiracy cards -
+- New Conspiracy and M15 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
@@ -24,6 +24,16 @@ Lightning Storm
 Prossh, Skyraider of Kher
 Jeleva, Nephalia's Scourge
 Marath, Will of the Wild
+Halfdane
+Nix
+Soul Sculptor
+Balduvian Fallen
+Snowfall
+Adarkar Unicorn
+Hammerheim
+Thick-Skinned Goblin
+Shah of Naar Isle
+Ice Cave
 
 
 ---------------------------
@@ -58,6 +68,25 @@ Dack's Duplicate
 Deathreap Ritual
 Realm Seekers
 Grudge Keeper
+Custodi Soulbinders
+Custodi Squire
+Bite of the Black Rose
+Marchesa's Emissary
+Enraged Revolutionary
+Grenzo's Cutthroat
+Ignition Team
+Flamewright
+Marchesa's Smuggler
+Woodvine Elemental
+Predator's Howl
+Selvala's Enforcer
+
+
+--------------------
+New M15 branch Cards
+--------------------
+
+Waste Not
 
 
 ------------
