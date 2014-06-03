@@ -45,6 +45,7 @@ import forge.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -372,6 +373,8 @@ public class ListChooser<T> extends FContainer {
                 renderer = new DefaultItemRenderer();
             }
             setListItemRenderer(new ListItemRenderer<T>() {
+                private Integer prevTapIndex = -1;
+
                 @Override
                 public float getItemHeight() {
                     return renderer.getItemHeight();
@@ -385,6 +388,7 @@ public class ListChooser<T> extends FContainer {
                         }
                         else {
                             selectedIndices.add(index);
+                            Collections.sort(selectedIndices); //ensure selected indices are sorted
                         }
                     }
                     else {
@@ -393,11 +397,13 @@ public class ListChooser<T> extends FContainer {
                     }
                     onSelectionChange();
                     if (renderer.tap(value, x, y, count)) {
+                        prevTapIndex = index;
                         return true; //don't activate if renderer handles tap
                     }
-                    if (count == 2 && optionPane.isButtonEnabled(0)) {
+                    if (count == 2 && index == prevTapIndex && optionPane.isButtonEnabled(0)) {
                         optionPane.setResult(0);
                     }
+                    prevTapIndex = index;
                     return true;
                 }
 

@@ -270,6 +270,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         private ItemList() {
             renderer = itemManager.getListItemRenderer();
             setListItemRenderer(new ListItemRenderer<Map.Entry<T,Integer>>() {
+                private Integer prevTapIndex = -1;
+
                 @Override
                 public float getItemHeight() {
                     return renderer.getItemHeight();
@@ -283,6 +285,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         }
                         else {
                             selectedIndices.add(index);
+                            Collections.sort(selectedIndices); //ensure selected indices are sorted
                         }
                         onSelectionChange();
                     }
@@ -290,11 +293,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         setSelectedIndex(index);
                     }
                     if (renderer.tap(value, x, y, count)) {
+                        prevTapIndex = index;
                         return true; //don't activate if renderer handles tap
                     }
-                    if (count == 2) {
+                    if (count == 2 && index == prevTapIndex) {
                         itemManager.activateSelectedItems();
                     }
+                    prevTapIndex = index;
                     return true;
                 }
 
