@@ -243,7 +243,7 @@ public class FGroupList<E> extends FScrollPane {
         }
 
         public boolean tap(float x, float y, int count) {
-            return renderer.tap(value, x, y, count);
+            return renderer.tap(-1, value, x, y, count);
         }
 
         @Override
@@ -256,7 +256,7 @@ public class FGroupList<E> extends FScrollPane {
                 g.fillRect(fillColor, 0, 0, w, h);
             }
 
-            renderer.drawValue(g, value, font, FList.FORE_COLOR, pressed, FList.PADDING, FList.PADDING, w - 2 * FList.PADDING, h - 2 * FList.PADDING);
+            renderer.drawValue(g, -1, value, font, FList.FORE_COLOR, pressed, FList.PADDING, FList.PADDING, w - 2 * FList.PADDING, h - 2 * FList.PADDING);
 
             if (drawLineSeparators()) {
                 g.drawLine(1, FList.LINE_COLOR, 0, h, w, h);

@@ -268,7 +268,7 @@ public class SettingsPage extends TabPage {
                 lstOptions = add(new FList<String>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
-                    public boolean tap(String value, float x, float y, int count) {
+                    public boolean tap(Integer index, String value, float x, float y, int count) {
                         if (!value.equals(currentValue)) {
                             valueChanged(value);
                         }
@@ -277,7 +277,7 @@ public class SettingsPage extends TabPage {
                     }
 
                     @Override
-                    public void drawValue(Graphics g, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                    public void drawValue(Graphics g, Integer index, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                         float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
                         x += offset;
                         y += offset;
@@ -316,13 +316,13 @@ public class SettingsPage extends TabPage {
         }
 
         @Override
-        public boolean tap(Setting value, float x, float y, int count) {
+        public boolean tap(Integer index, Setting value, float x, float y, int count) {
             value.select();
             return true;
         }
 
         @Override
-        public void drawValue(Graphics g, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+        public void drawValue(Graphics g, Integer index, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
             float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
             x += offset;
             y += offset;

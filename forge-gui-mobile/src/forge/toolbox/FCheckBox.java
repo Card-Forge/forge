@@ -36,7 +36,7 @@ public class FCheckBox extends FLabel {
 
         @Override
         public void draw(Graphics g, float x, float y, float w, float h) {
-            drawCheckBox(g, BOX_COLOR, CHECK_COLOR, isSelected(), x, y, w, h);
+            drawCheckBox(g, isSelected(), x, y, w, h);
         }
     }
 
@@ -45,6 +45,9 @@ public class FCheckBox extends FLabel {
         drawContent(g, getWidth(), getHeight(), false);
     }
 
+    public static void drawCheckBox(Graphics g, boolean isChecked, float x, float y, float w, float h) {
+        drawCheckBox(g, BOX_COLOR, CHECK_COLOR, isChecked, x, y, w, h);
+    }
     public static void drawCheckBox(Graphics g, FSkinColor boxColor, FSkinColor checkColor, boolean isChecked, float x, float y, float w, float h) {
         g.drawRect(Utils.scaleMin(1), boxColor, x, y, w, h);
         if (isChecked) {

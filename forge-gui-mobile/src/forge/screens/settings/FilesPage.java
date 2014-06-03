@@ -81,13 +81,13 @@ public class FilesPage extends TabPage {
         }
 
         @Override
-        public boolean tap(FilesItem value, float x, float y, int count) {
+        public boolean tap(Integer index, FilesItem value, float x, float y, int count) {
             value.select();
             return true;
         }
 
         @Override
-        public void drawValue(Graphics g, FilesItem value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+        public void drawValue(Graphics g, Integer index, FilesItem value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
             float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
             x += offset;
             y += offset;

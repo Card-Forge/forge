@@ -365,8 +365,7 @@ public class DualListBox<T> extends FDialog {
                 }
 
                 @Override
-                public boolean tap(T value, float x, float y, int count) {
-                    Integer index = ChoiceList.this.getIndexOf(value);
+                public boolean tap(Integer index, T value, float x, float y, int count) {
                     selectedIndices.clear();
                     selectedIndices.add(index);
                     if (renderer.tap(value, x, y, count)) {
@@ -379,7 +378,7 @@ public class DualListBox<T> extends FDialog {
                 }
 
                 @Override
-                public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
                     renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
                 }
             });

@@ -1053,13 +1053,13 @@ public class ConstructedScreen extends LaunchScreen {
             }
 
             @Override
-            public boolean tap(Variant value, float x, float y, int count) {
+            public boolean tap(Integer index, Variant value, float x, float y, int count) {
                 value.toggle();
                 return true;
             }
 
             @Override
-            public void drawValue(Graphics g, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+            public void drawValue(Graphics g, Integer index, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
                 String text = value.gameType.toString();
                 float totalHeight = h;
                 h = font.getMultiLineBounds(text).height + 5;
