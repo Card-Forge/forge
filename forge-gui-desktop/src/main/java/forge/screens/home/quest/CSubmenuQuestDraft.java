@@ -392,6 +392,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         VSubmenuQuestDraft view = VSubmenuQuestDraft.SINGLETON_INSTANCE;
         QuestAchievements achievements = FModel.getQuest().getAchievements();
         
+        if (view.getMode().equals(Mode.EMPTY)) {
+            view.getPnlTournaments().removeAll();
+        }
+        
         view.getLblFirst().setText("1st Place: " + achievements.getWinsForPlace(1) + " time" + (achievements.getWinsForPlace(1) == 1 ? "" : "s"));        
         view.getLblSecond().setText("2nd Place: " + achievements.getWinsForPlace(2) + " time" + (achievements.getWinsForPlace(2) == 1 ? "" : "s"));        
         view.getLblThird().setText("3rd Place: " + achievements.getWinsForPlace(3) + " time" + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));        

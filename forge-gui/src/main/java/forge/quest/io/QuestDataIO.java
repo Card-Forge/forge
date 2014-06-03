@@ -548,6 +548,10 @@ public class QuestDataIO {
                 writer.setValue("" + draft.isStarted());
                 writer.endNode();
                 
+                writer.startNode("age");
+                writer.setValue("" + draft.getAge());
+                writer.endNode();
+                
                 writer.endNode();
                 
             }
@@ -567,6 +571,7 @@ public class QuestDataIO {
                 String draftName = null;
                 String boosterConfiguration = null;
                 int entryFee = 1500;
+                int age = 0;
                 String block = null;
                 String[] standings = new String[15];
                 String[] aiNames = new String[7];
@@ -617,6 +622,9 @@ public class QuestDataIO {
                         case "started":
                             started = Boolean.parseBoolean(reader.getValue());
                             break;
+                        case "age":
+                            age = Integer.parseInt(reader.getValue());
+                            break;
                     }
                     
                     reader.moveUp();
@@ -631,6 +639,7 @@ public class QuestDataIO {
                 draft.setAINames(aiNames);
                 draft.setAIIcons(aiIcons);
                 draft.setStarted(started);
+                draft.setAge(age);
                 
                 output.add(draft);
                 

@@ -73,6 +73,7 @@ public class QuestEventDraft {
     private int[] aiIcons = new int[7];
     
     private boolean started = false;
+    private int age = 0;
     
     public QuestEventDraft(final String title) {
         this.title = title;
@@ -136,6 +137,18 @@ public class QuestEventDraft {
     
     public void setAIIcons(final int[] icons) {
         aiIcons = icons;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public void setAge(final int age) {
+        this.age = age;
+    }
+    
+    public void addWin() {
+        age++;
     }
     
     public int getHumanLatestStanding() {

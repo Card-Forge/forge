@@ -38,6 +38,7 @@ import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.home.quest.CSubmenuQuestDraft;
+import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
@@ -293,6 +294,8 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
                 FModel.getQuest().getAssets().addCredits(draft.getEntryFee());
                 FModel.getQuest().getAchievements().deleteDraft(draft);
                 FModel.getQuest().save();
+                CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
+                VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
             }
             return leave;
         }

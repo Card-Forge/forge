@@ -22,8 +22,7 @@ public class QuestAchievements {
     
     private QuestEventDraftContainer drafts = new QuestEventDraftContainer();
     private int currentDraft = -1;
-    private int draftTokensAvailable = 3;
-    private int winCountAtEndOfDraft = 0;
+    private int draftTokensAvailable = 1;
 
     private int win;
     private int winstreakBest = 0;
@@ -47,13 +46,15 @@ public class QuestAchievements {
     }
     
     public void deleteDraft(QuestEventDraft draft) {
+        if (currentDraft == drafts.indexOf(draft)) {
+            currentDraft = -1;
+        }
         drafts.remove(draft);
     }
     
     public void endCurrentTournament(final int place) {
         drafts.remove(drafts.get(currentDraft));
         currentDraft = -1;
-        winCountAtEndOfDraft = win;
         addDraftFinish(place);
         FModel.getQuest().save();
     }
@@ -66,16 +67,14 @@ public class QuestAchievements {
      * Adds the win.
      */
     public void addWin() { // changes getRank()
+        
         this.win++;
         this.winstreakCurrent++;
         
-        //Every 5 wins, allow a tournament to be generated.
-        if ((win - winCountAtEndOfDraft) % 5 == 0) {
-            if (draftTokensAvailable < 3) {
-                draftTokensAvailable++;
-            }
+        for (QuestEventDraft draft : drafts) {
+            draft.addWin();
         }
-
+        
         if (this.winstreakCurrent > this.winstreakBest) {
             this.winstreakBest = this.winstreakCurrent;
         }
@@ -214,7 +213,43 @@ public class QuestAchievements {
         
         if (drafts == null) {
             drafts = new QuestEventDraftContainer();
-            draftTokensAvailable = 3;
+            draftTokensAvailable = 1;
+        }
+        
+        QuestEventDraft toRemove = null;
+        for (QuestEventDraft draft : drafts) { //Pick the oldest draft first
+            if (draft.getAge() >= 5 && currentDraft == -1 && drafts.size() == 3) {
+                toRemove = draft;
+                break;
+            }
+        }
+        
+        if (toRemove != null) {
+            drafts.remove(toRemove);
+            draftTokensAvailable++;
+            for (QuestEventDraft draft : drafts) {
+                draft.setAge(draft.getAge() - 5);
+            }
+        } else {
+            
+            if (drafts.size() < 3) {
+            
+                int oldest = -100;
+                for (QuestEventDraft draft : drafts) {
+                    if (draft.getAge() > oldest) {
+                        oldest = draft.getAge();
+                    }
+                }
+                
+                if (oldest >= 5) {
+                    draftTokensAvailable++;
+                    for (QuestEventDraft draft : drafts) {
+                        draft.setAge(draft.getAge() - 5);
+                    }
+                }
+            
+            }
+            
         }
         
         int draftsToGenerate = 3 - drafts.size();
