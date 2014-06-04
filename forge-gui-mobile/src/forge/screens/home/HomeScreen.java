@@ -8,7 +8,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.screens.constructed.ConstructedScreen;
 import forge.screens.draft.DraftScreen;
-import forge.screens.guantlet.GuantletScreen;
+import forge.screens.gauntlet.GauntletScreen;
 import forge.screens.quest.QuestScreen;
 import forge.screens.sealed.SealedScreen;
 import forge.screens.settings.SettingsScreen;
@@ -49,10 +49,10 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(new QuestScreen());
             }
         }, false);
-        addButton("Guantlet", new FEventHandler() {
+        addButton("Gauntlet", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new GuantletScreen());
+                Forge.openScreen(new GauntletScreen());
             }
         }, false);
         addButton("Settings", new FEventHandler() {

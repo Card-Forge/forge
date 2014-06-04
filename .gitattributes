@@ -1162,7 +1162,7 @@ forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
-forge-gui-mobile/src/forge/screens/guantlet/GuantletScreen.java -text
+forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
 forge-gui-mobile/src/forge/screens/match/FControl.java -text
 forge-gui-mobile/src/forge/screens/match/MatchLoader.java -text

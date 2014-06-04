@@ -1,11 +1,11 @@
-package forge.screens.guantlet;
+package forge.screens.gauntlet;
 
 import forge.game.GameType;
 import forge.screens.LaunchScreen;
 
-public class GuantletScreen extends LaunchScreen {
-    public GuantletScreen() {
-        super("Guantlet");
+public class GauntletScreen extends LaunchScreen {
+    public GauntletScreen() {
+        super("Gauntlet");
     }
 
     @Override
