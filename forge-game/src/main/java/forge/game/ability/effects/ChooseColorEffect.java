@@ -49,15 +49,54 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                 List<String> chosenColors;
                 int cntMin = sa.hasParam("TwoColors") ? 2 : 1;
                 int cntMax = sa.hasParam("TwoColors") ? 2 : sa.hasParam("OrColors") ? colorChoices.size() : 1;
-                String prompt = cntMax == 1 ? "Choose a color" : cntMin == 2 ? "Choose two colors" : "Choose a color or colors";
-                chosenColors = p.getController().chooseColors(prompt, sa, 1, colorChoices.size(), colorChoices);
-                if(chosenColors.isEmpty())
+                String prompt;
+                if (cntMax == 1) {
+                    prompt = "Choose a color";
+                }
+                else {
+                    prompt = "Choose ";
+                    switch (cntMin) {
+                    case 1:
+                        prompt += "one";
+                        break;
+                    case 2:
+                        prompt += "two";
+                        break;
+                    case 3:
+                        prompt += "three";
+                        break;
+                    case 4:
+                        prompt += "four";
+                        break;
+                    case 5:
+                        prompt += "five";
+                        break;
+                    }
+                    if (cntMax > cntMin) {
+                        switch (cntMin) {
+                        case 2:
+                            prompt += " to two";
+                            break;
+                        case 3:
+                            prompt += " to three";
+                            break;
+                        case 4:
+                            prompt += " to four";
+                            break;
+                        case 5:
+                            prompt += " or more";
+                            break;
+                        }
+                    }
+                    prompt += " colors";
+                }
+                chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
+                if (chosenColors.isEmpty()) {
                     return;
+                }
                 card.setChosenColor(chosenColors);
                 p.getGame().getAction().nofityOfValue(sa, card, p.getName() + " picked " + Lang.joinHomogenous(chosenColors), p);
             }
-            
         }
     }
-
 }
