@@ -133,6 +133,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllConstructedDecks(FModel.getDecks().getConstructed()));
         lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
 
+        btnViewDeck.setEnabled(true);
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new FEventHandler() {
             @Override
@@ -201,6 +202,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(decks);
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
+        btnViewDeck.setEnabled(false);
         btnRandom.setText("Random Colors");
         btnRandom.setCommand(new FEventHandler() {
             @Override
@@ -219,6 +221,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllThemeDecks());
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
+        btnViewDeck.setEnabled(false);
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new FEventHandler() {
             @Override
@@ -236,6 +239,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
         lstDecks.setup(ItemManagerConfig.PRECON_DECKS);
 
+        btnViewDeck.setEnabled(true);
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new FEventHandler() {
             @Override
@@ -253,6 +257,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
         lstDecks.setup(ItemManagerConfig.QUEST_EVENT_DECKS);
 
+        btnViewDeck.setEnabled(true);
         btnRandom.setText("Random Deck");
         btnRandom.setCommand(new FEventHandler() {
             @Override
