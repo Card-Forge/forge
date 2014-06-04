@@ -385,7 +385,9 @@ public class ListChooser<T> extends FContainer {
                 public boolean tap(Integer index, T value, float x, float y, int count) {
                     if (maxSelections > 1) {
                         if (selectedIndices.contains(index)) {
-                            if (selectedIndices.size() > minSelections) {
+                            //allow removing selection if it won't fall below min
+                            //or if max selected (since you need to be able to deselect an item before selecting a new item)
+                            if (selectedIndices.size() > minSelections || selectedIndices.size() == maxSelections) {
                                 selectedIndices.remove(index);
                                 onSelectionChange();
                             }
