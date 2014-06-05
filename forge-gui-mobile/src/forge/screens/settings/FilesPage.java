@@ -65,22 +65,19 @@ public class FilesPage extends TabPage {
         }, 0);
 
         //storage options
-        lstItems.addItem(new StorageOption("User Data", ForgeProfileProperties.getUserDir(),
-                "Location where user data files such as preferences, decks, and quest data are stored.") {
+        lstItems.addItem(new StorageOption("Data Location (e.g. Settings, Decks, Quests)", ForgeProfileProperties.getUserDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setUserDir(newDir);
             }
         }, 1);
-        final StorageOption cardPicsOption = new StorageOption("Card Pics", ForgeProfileProperties.getCardPicsDir(),
-                "Location where card pics are stored.") {
+        final StorageOption cardPicsOption = new StorageOption("Card Pics Location", ForgeProfileProperties.getCardPicsDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setCardPicsDir(newDir);
             }
         };
-        lstItems.addItem(new StorageOption("Cache", ForgeProfileProperties.getCacheDir(),
-                "Location where font cache is stored and card pics are generally stored.") {
+        lstItems.addItem(new StorageOption("Image Cache Location", ForgeProfileProperties.getCacheDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
                 ForgeProfileProperties.setUserDir(newDir);
@@ -151,27 +148,22 @@ public class FilesPage extends TabPage {
     }
 
     private abstract class StorageOption extends FilesItem {
-        private String name, dir;
-
-        public StorageOption(String name0, String dir0, String description0) {
-            super(name0 + ":" + dir0, description0);
-            name = name0;
-            dir = dir0;
+        public StorageOption(String name0, String dir0) {
+            super(name0, dir0);
         }
 
         private void updateDir(String dir0) {
-            dir = dir0;
-            label = name + ":" + dir;
+            description = dir0;
         }
 
         @Override
         public void select() {
-            FFileChooser.show("Select " + name, ChoiceType.GetDirectory, dir, new Callback<String>() {
+            FFileChooser.show("Select " + label, ChoiceType.GetDirectory, description, new Callback<String>() {
                 @Override
                 public void run(String result) {
-                    if (StringUtils.isEmpty(result) || dir.equals(result)) { return; }
+                    if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
                     updateDir(result);
-                    onDirectoryChanged(dir);
+                    onDirectoryChanged(result);
                     FOptionPane.showMessageDialog("You'll need to restart Forge for this change to take effect. Be sure to move any necessary files to the new location before you do.", "Restart Required", FOptionPane.INFORMATION_ICON);
                 }
             });
