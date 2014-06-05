@@ -292,6 +292,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         g.fillRect(BACK_COLOR, 0, 0, w, h);
 
         //determine actual rendered font so selection logic is accurate
+        FSkinFont fontBackup = font;
         TextBounds textBounds = font.getMultiLineBounds(text);
         while (textBounds.width > w || textBounds.height > h) {
             if (font.canShrink()) { //shrink font to fit if possible
@@ -326,6 +327,8 @@ public class FTextField extends FDisplayObject implements ITextField {
         }
 
         g.drawRect(BORDER_THICKNESS, FORE_COLOR, BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
+
+        font = fontBackup; //restore font after finishing render
     }
 
     private void drawText(Graphics g, float w, float h) {

@@ -23,20 +23,19 @@ public class FFileChooser extends FDialog {
     }
 
     public static void show(String title0, ChoiceType choiceType0, Callback<String> callback0) {
-        show(title0, choiceType0, null, "", callback0);
+        show(title0, choiceType0, "", "", callback0);
     }
-    public static void show(String title0, ChoiceType choiceType0, String baseDir0, Callback<String> callback0) {
-        show(title0, choiceType0, baseDir0, baseDir0, callback0);
+    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, Callback<String> callback0) {
+        show(title0, choiceType0, defaultFilename0, "", callback0);
     }
-    public static void show(String title0, ChoiceType choiceType0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
-        FFileChooser dialog = new FFileChooser(title0, choiceType0, baseDir0, defaultFilename0, callback0);
+    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
+        FFileChooser dialog = new FFileChooser(title0, choiceType0, defaultFilename0, baseDir0, callback0);
         dialog.show();
     }
 
     private final ChoiceType choiceType;
-    private final File baseDir;
+    private final String baseDir;
     private final Callback<String> callback;
-    private File currentDir;
 
     private final FList<File> lstFiles   = add(new FileList());
     private final FTextField txtFilename = add(new FTextField());
@@ -60,21 +59,48 @@ public class FFileChooser extends FDialog {
         }
     }));
 
-    private FFileChooser(String title0, ChoiceType choiceType0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
+    private FFileChooser(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
         super(title0);
         choiceType = choiceType0;
-        baseDir = new File(baseDir0);
-        currentDir = baseDir;
+        if (choiceType == ChoiceType.GetDirectory) {
+            if (defaultFilename0.endsWith(File.separator)) { //if getting directory, don't end with a slash
+                defaultFilename0 = defaultFilename0.substring(0, defaultFilename0.length() - 1);
+            }
+        }
+        txtFilename.setFont(FSkinFont.get(12));
         txtFilename.setText(defaultFilename0);
+        txtFilename.setChangedHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                refreshFileList();
+            }
+        });
+        baseDir = baseDir0;
         callback = callback0;
         refreshFileList();
     }
 
     private void refreshFileList() {
-        if (currentDir != null) {
+        String filename = txtFilename.getText();
+        File dir = new File(baseDir + filename);
+        if (!dir.exists() || !dir.isDirectory()) {
+            int idx = filename.lastIndexOf(File.separatorChar);
+            if (idx == -1) {
+                dir = new File(baseDir);
+            }
+            else {
+                dir = new File(baseDir + filename.substring(0, idx));
+            }
+        }
+        if (dir.exists() && dir.isDirectory()) {
             FilenameFilter filter = null;
             if (choiceType == ChoiceType.GetDirectory) {
                 //don't list files if getting directory
+                dir = dir.getParentFile(); //show parent folder's files and select folder
+                if (dir == null) {
+                    lstFiles.setListData(File.listRoots());
+                    return;
+                }
                 filter = new FilenameFilter() {
                     @Override
                     public boolean accept(File dir, String name) {
@@ -82,7 +108,7 @@ public class FFileChooser extends FDialog {
                     }
                 };
             }
-            lstFiles.setListData(currentDir.listFiles(filter));
+            lstFiles.setListData(dir.listFiles(filter));
         }
         else {
             lstFiles.setListData(File.listRoots());
@@ -116,14 +142,16 @@ public class FFileChooser extends FDialog {
         return maxHeight;
     }
 
+    private String getSelectedFilename() {
+        return baseDir + txtFilename.getText();
+    }
+
     private void acceptSelectedFile() {
-        //callback.run(result);
+        callback.run(getSelectedFilename());
         hide();
     }
 
     private class FileList extends FList<File> {
-        private int selectedIndex = -1;
-
         private FileList() {
             setListItemRenderer(new ListItemRenderer<File>() {
                 private Integer prevTapIndex = -1;
@@ -135,10 +163,10 @@ public class FFileChooser extends FDialog {
 
                 @Override
                 public boolean tap(Integer index, File value, float x, float y, int count) {
-                    selectedIndex = index;
                     if (count == 2 && index == prevTapIndex) {
                         acceptSelectedFile();
                     }
+                    txtFilename.setText(value.getAbsolutePath());
                     prevTapIndex = index;
                     return true;
                 }
@@ -167,7 +195,7 @@ public class FFileChooser extends FDialog {
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
-            if (selectedIndex == index) {
+            if (getItemAt(index).getAbsolutePath().equals(getSelectedFilename())) {
                 return ListChooser.SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
             }
             if (index % 2 == 1) {
