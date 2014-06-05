@@ -2,8 +2,10 @@ package forge.toolbox;
 
 import java.io.File;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -12,18 +14,24 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 
 public class FFileChooser extends FDialog {
-    public static void getFilename(String title0, boolean forSave0, Callback<String> callback0) {
-        getFilename(title0, forSave0, null, "", callback0);
+    public enum ChoiceType {
+        OpenFile,
+        SaveFile,
+        GetDirectory
     }
-    public static void getFilename(String title0, boolean forSave0, String baseDir0, Callback<String> callback0) {
-        getFilename(title0, forSave0, baseDir0, "", callback0);
+
+    public static void show(String title0, ChoiceType choiceType0, Callback<String> callback0) {
+        show(title0, choiceType0, null, "", callback0);
     }
-    public static void getFilename(String title0, boolean forSave0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
-        FFileChooser dialog = new FFileChooser(title0, forSave0, baseDir0, defaultFilename0, callback0);
+    public static void show(String title0, ChoiceType choiceType0, String baseDir0, Callback<String> callback0) {
+        show(title0, choiceType0, baseDir0, "", callback0);
+    }
+    public static void show(String title0, ChoiceType choiceType0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
+        FFileChooser dialog = new FFileChooser(title0, choiceType0, baseDir0, defaultFilename0, callback0);
         dialog.show();
     }
 
-    private final boolean forSave;
+    private final ChoiceType choiceType;
     private final File baseDir;
     private final Callback<String> callback;
     private File currentDir;
@@ -49,9 +57,9 @@ public class FFileChooser extends FDialog {
         }
     }));
 
-    private FFileChooser(String title0, boolean forSave0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
+    private FFileChooser(String title0, ChoiceType choiceType0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
         super(title0);
-        forSave = forSave0;
+        choiceType = choiceType0;
         baseDir = new File(baseDir0);
         currentDir = baseDir;
         txtFilename.setText(defaultFilename0);
@@ -155,5 +163,22 @@ public class FFileChooser extends FDialog {
         protected boolean drawLineSeparators() {
             return false;
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        switch (keyCode) {
+        case Keys.ENTER:
+            acceptSelectedFile();
+            return true;
+        case Keys.ESCAPE:
+            if (Forge.endKeyInput()) { return true; }
+            break; //let FDialog handle it
+        case Keys.BACK:
+        case Keys.BACKSPACE:
+            //TODO: Navigate back to previous directory if possible
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }

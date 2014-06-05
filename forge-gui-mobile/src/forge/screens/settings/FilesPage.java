@@ -1,5 +1,7 @@
 package forge.screens.settings;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
@@ -11,9 +13,14 @@ import forge.download.GuiDownloadPrices;
 import forge.download.GuiDownloadQuestImages;
 import forge.download.GuiDownloadService;
 import forge.download.GuiDownloadSetPicturesLQ;
+import forge.properties.ForgeProfileProperties;
 import forge.screens.TabPageScreen.TabPage;
+import forge.toolbox.FFileChooser;
+import forge.toolbox.FFileChooser.ChoiceType;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.util.Callback;
 
 public class FilesPage extends TabPage {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<FilesItem>());
@@ -58,6 +65,31 @@ public class FilesPage extends TabPage {
         }, 0);
 
         //storage options
+        lstItems.addItem(new StorageOption("User Data", ForgeProfileProperties.getUserDir(),
+                "Location where user data files such as preferences, decks, and quest data are stored.") {
+            @Override
+            protected void onDirectoryChanged(String newDir) {
+                ForgeProfileProperties.setUserDir(newDir);
+            }
+        }, 1);
+        final StorageOption cardPicsOption = new StorageOption("Card Pics", ForgeProfileProperties.getCardPicsDir(),
+                "Location where card pics are stored.") {
+            @Override
+            protected void onDirectoryChanged(String newDir) {
+                ForgeProfileProperties.setCardPicsDir(newDir);
+            }
+        };
+        lstItems.addItem(new StorageOption("Cache", ForgeProfileProperties.getCacheDir(),
+                "Location where font cache is stored and card pics are generally stored.") {
+            @Override
+            protected void onDirectoryChanged(String newDir) {
+                ForgeProfileProperties.setUserDir(newDir);
+
+                //ensure card pics option is updated if needed
+                cardPicsOption.updateDir(ForgeProfileProperties.getCardPicsDir());
+            }
+        }, 1);
+        lstItems.addItem(cardPicsOption, 1);
     }
 
     @Override
@@ -118,17 +150,32 @@ public class FilesPage extends TabPage {
         protected abstract GuiDownloadService createService();
     }
 
-    private enum StorageOptions {
-        
-    }
+    private abstract class StorageOption extends FilesItem {
+        private String name, dir;
 
-    private class StorageOption extends FilesItem {
-        public StorageOption(String label0, String description0) {
-            super(label0, description0);
+        public StorageOption(String name0, String dir0, String description0) {
+            super(name0 + ":" + dir0, description0);
+            name = name0;
+            dir = dir0;
+        }
+
+        private void updateDir(String dir0) {
+            dir = dir0;
+            label = name + ":" + dir;
         }
 
         @Override
         public void select() {
+            FFileChooser.show("Select " + name, ChoiceType.GetDirectory, dir, new Callback<String>() {
+                @Override
+                public void run(String result) {
+                    if (StringUtils.isEmpty(result) || dir.equals(result)) { return; }
+                    updateDir(result);
+                    onDirectoryChanged(dir);
+                    FOptionPane.showMessageDialog("You'll need to restart Forge for this change to take effect. Be sure to move any necessary files to the new location before you do.", "Restart Required", FOptionPane.INFORMATION_ICON);
+                }
+            });
         }
+        protected abstract void onDirectoryChanged(String newDir);
     }
 }

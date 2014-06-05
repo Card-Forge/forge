@@ -36,19 +36,23 @@ import java.util.Properties;
  * so they can be easily appended with further path elements.
  */
 public class ForgeProfileProperties {
-    public final String userDir;
-    public final String cacheDir;
-    public final String cardPicsDir;
-    public final Map<String, String> cardPicsSubDir;
-    public final int serverPort; 
-    
+    private static String userDir;
+    private static String cacheDir;
+    private static String cardPicsDir;
+    private static Map<String, String> cardPicsSubDirs;
+    private static int serverPort; 
+
     private static final String USER_DIR_KEY      = "userDir";
     private static final String CACHE_DIR_KEY     = "cacheDir";
     private static final String CARD_PICS_DIR_KEY = "cardPicsDir";
     private static final String CARD_PICS_SUB_DIRS_KEY = "cardPicsSubDirs";
     private static final String SERVER_PORT = "serverPort";
 
-    public ForgeProfileProperties() {
+    private ForgeProfileProperties() {
+        //prevent initializing static class
+    }
+
+    public static void load() {
         Properties props = new Properties();
         File propFile = new File(ForgeConstants.PROFILE_FILE);
         try {
@@ -64,7 +68,7 @@ public class ForgeProfileProperties {
         userDir     = getDir(props, USER_DIR_KEY,      defaults.getLeft());
         cacheDir    = getDir(props, CACHE_DIR_KEY,     defaults.getRight());
         cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
-        cardPicsSubDir = getMap(props, CARD_PICS_SUB_DIRS_KEY);
+        cardPicsSubDirs = getMap(props, CARD_PICS_SUB_DIRS_KEY);
         serverPort = getInt(props, SERVER_PORT, 0);
 
         //ensure directories exist
@@ -73,12 +77,45 @@ public class ForgeProfileProperties {
         FileUtil.ensureDirectoryExists(cardPicsDir);
     }
 
-    private Map<String, String> getMap(Properties props, String propertyKey) {
+    public static String getUserDir() {
+        return userDir;
+    }
+    public static void setUserDir(String userDir0) {
+        userDir = userDir0;
+    }
+
+    public static String getCacheDir() {
+        return cacheDir;
+    }
+    public static void setCacheDir(String cacheDir0) {
+        int idx = cardPicsDir.indexOf(cacheDir); //ensure card pics directory is updated too if within cache directory
+        if (idx != -1) {
+            cardPicsDir = cacheDir0 + cardPicsDir.substring(idx + cacheDir.length());
+        }
+        cacheDir = cacheDir0;
+    }
+
+    public static String getCardPicsDir() {
+        return cardPicsDir;
+    }
+    public static void setCardPicsDir(String cardPicsDir0) {
+        cardPicsDir = cardPicsDir0; 
+    }
+
+    public static Map<String, String> getCardPicsSubDirs() {
+        return cardPicsSubDirs;
+    }
+
+    public static int getServerPort() {
+        return serverPort;
+    }
+
+    private static Map<String, String> getMap(Properties props, String propertyKey) {
         String strMap = props.getProperty(propertyKey, "").trim();
         return FileSection.parseToMap(strMap, "->", "|");
     }
 
-    private int getInt(Properties props, String propertyKey, int defaultValue) {
+    private static int getInt(Properties props, String propertyKey, int defaultValue) {
         String strValue = props.getProperty(propertyKey, "").trim();
         if ( StringUtils.isNotBlank(strValue) && StringUtils.isNumeric(strValue) ) 
             return Integer.parseInt(strValue);
