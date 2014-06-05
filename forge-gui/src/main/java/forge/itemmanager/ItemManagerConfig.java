@@ -58,6 +58,8 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     SEALED_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
+    WINSTON_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
+            null, null, 3, 0),
     QUEST_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
     PRECON_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,

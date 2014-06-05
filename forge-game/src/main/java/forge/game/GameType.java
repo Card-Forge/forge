@@ -11,6 +11,7 @@ public enum GameType {
     //            deck composition rules, isPoolRestricted, can sideboard between matches
     Sealed          (DeckFormat.Limited, true, true, true, "Sealed"),
     Draft           (DeckFormat.Limited, true, true, true, "Draft"),
+    Winston         (DeckFormat.Limited, true, true, true, "Winston"),
     Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet"),
     Quest           (DeckFormat.QuestDeck, true, true, false, "Quest"),
     QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft"),

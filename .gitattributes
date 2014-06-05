@@ -826,6 +826,7 @@ forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQues
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQuestDraftingProcess.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorQuestLimited.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorVariant.java -text
+forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CEditorWinstonProcess.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CProbabilities.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/CStatistics.java -text
 forge-gui-desktop/src/main/java/forge/screens/deckeditor/controllers/DeckController.java -text
@@ -886,10 +887,12 @@ forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/AvatarSelector.jav
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/CSubmenuConstructed.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/CSubmenuDraft.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/CSubmenuSealed.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/CSubmenuWinston.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/ConstructedGameMenu.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuConstructed.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuDraft.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuSealed.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuWinston.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/package-info.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuAvatars.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuDownloaders.java -text
@@ -16407,6 +16410,8 @@ forge-gui/src/main/java/forge/limited/LimitedPoolType.java -text
 forge-gui/src/main/java/forge/limited/ReadDraftRankings.java -text
 forge-gui/src/main/java/forge/limited/SealedCardPoolGenerator.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/SealedDeckBuilder.java svneol=native#text/plain
+forge-gui/src/main/java/forge/limited/WinstonDraft.java -text
+forge-gui/src/main/java/forge/limited/WinstonDraftAI.java -text
 forge-gui/src/main/java/forge/limited/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/match/MatchConstants.java -text
 forge-gui/src/main/java/forge/match/input/ButtonUtil.java -text

@@ -76,4 +76,6 @@ public interface IBoosterDraft {
      */
     void finishedDrafting();
 
+    boolean isPileDraft();
+
 }

@@ -10,6 +10,7 @@ public enum EMenuItem { /** */
     CONSTRUCTED, /** */
     LIMITED_DRAFT, /** */
     LIMITED_SEALED, /** */
+    LIMITED_WINSTON,
 
     QUEST_CHALLENGES, /** */
     QUEST_DUELS, /** */

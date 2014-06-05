@@ -105,4 +105,9 @@ public class BoosterDraftTest implements IBoosterDraft {
     public void finishedDrafting() {
 
     }
+
+    @Override
+    public boolean isPileDraft() {
+        return false;
+    }
 }

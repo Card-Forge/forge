@@ -45,11 +45,11 @@ public class BoosterDraftAI {
     /**
      * Constant <code>nDecks=7.</code>
      */
-    private static final int N_DECKS = 7;
+    protected static final int N_DECKS = 7;
 
     // holds all the cards for each of the computer's decks
-    private final List<List<PaperCard>> deck = new ArrayList<List<PaperCard>>();
-    private final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
+    protected final List<List<PaperCard>> deck = new ArrayList<List<PaperCard>>();
+    protected final ArrayList<DeckColors> playerColors = new ArrayList<DeckColors>();
 
     // roughly equivalent to 25 ranks in a core set, or 15 ranks in a small set
     private static final double TAKE_BEST_THRESHOLD = 0.1;
@@ -63,7 +63,7 @@ public class BoosterDraftAI {
      *            List of CardPrinted
      * @param player
      *            a int.
-     * @return a {@link forge.CardList} object.
+     * @return a {@link forge.item.PaperCard} object.
      */
     public PaperCard choose(final List<PaperCard> chooseFrom, final int player) {
         if (ForgePreferences.DEV_MODE) {

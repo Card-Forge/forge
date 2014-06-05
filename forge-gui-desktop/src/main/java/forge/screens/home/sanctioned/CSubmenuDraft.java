@@ -75,7 +75,7 @@ public enum CSubmenuDraft implements ICDoc {
      */
     @Override
     public void update() {
-         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
         final JButton btnStart = view.getBtnStart();
 
         view.getLstDecks().setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));

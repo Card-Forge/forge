@@ -416,6 +416,15 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    @SuppressWarnings("unchecked")
+    public static Iterable<DeckProxy> getWinstonDecks(IStorage<DeckGroup> draft) {
+        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+        for (DeckGroup d : draft) {
+            decks.add(new DeckProxy(d, "Winston", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Winston, draft));
+        }
+        return decks;
+    }
+
     public static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {

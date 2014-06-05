@@ -50,31 +50,35 @@ import java.util.Map.Entry;
  * Booster Draft Format.
  * 
  */
-public final class BoosterDraft implements IBoosterDraft {
+public class BoosterDraft implements IBoosterDraft {
     private final BoosterDraftAI draftAI = new BoosterDraftAI();
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
 
-    private int nextBoosterGroup = 0;
+    protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
     private List<List<PaperCard>> pack; // size 8
 
     /** The draft picks. */
     private final Map<String, Float> draftPicks = new TreeMap<String, Float>();
-    private final LimitedPoolType draftFormat;
+    protected LimitedPoolType draftFormat;
 
-    private final List<Supplier<List<PaperCard>>> product = new ArrayList<Supplier<List<PaperCard>>>();
+    protected final List<Supplier<List<PaperCard>>> product = new ArrayList<Supplier<List<PaperCard>>>();
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType) {
         BoosterDraft draft = new BoosterDraft(draftType);
+        if (!draft.generateProduct()) { return null; }
+        return draft;
+    }
 
-        switch (draftType) {
+    protected boolean generateProduct() {
+        switch (this.draftFormat) {
         case Full: // Draft from all cards in Forge
             Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
             for (int i = 0; i < 3; i++) {
-                draft.product.add(s);
+                this.product.add(s);
             }
             IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
             break;
@@ -82,7 +86,7 @@ public final class BoosterDraft implements IBoosterDraft {
         case Block: // Draft from cards by block or set
         case FantasyBlock:
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            IStorage<CardBlock> storage = draftType == LimitedPoolType.Block
+            IStorage<CardBlock> storage = this.draftFormat == LimitedPoolType.Block
                     ? FModel.getBlocks() : FModel.getFantasyBlocks();
 
             for (CardBlock b : storage) {
@@ -92,12 +96,12 @@ public final class BoosterDraft implements IBoosterDraft {
             }
 
             final CardBlock block = SGuiChoose.oneOrNone("Choose Block", blocks);
-            if (block == null) { return null; }
+            if (block == null) { return false; }
 
             final CardEdition[] cardSets = block.getSets();
             if (cardSets.length == 0) {
                 SOptionPane.showErrorDialog(block.toString() + " does not contain any set combinations.");
-                return null;
+                return false;
             }
 
             final Stack<String> sets = new Stack<String>();
@@ -115,18 +119,18 @@ public final class BoosterDraft implements IBoosterDraft {
 
             if (sets.size() > 1) {
                 final Object p = SGuiChoose.oneOrNone("Choose Set Combination", getSetCombos(sets));
-                if (p == null) { return null; }
+                if (p == null) { return false; }
 
                 final String[] pp = p.toString().split("/");
                 for (int i = 0; i < nPacks; i++) {
-                    draft.product.add(block.getBooster(pp[i]));
+                    this.product.add(block.getBooster(pp[i]));
                 }
             }
             else {
                 IUnOpenedProduct product1 = block.getBooster(sets.get(0));
 
                 for (int i = 0; i < nPacks; i++) {
-                    draft.product.add(product1);
+                    this.product.add(product1);
                 }
             }
 
@@ -134,29 +138,28 @@ public final class BoosterDraft implements IBoosterDraft {
             break;
 
         case Custom:
-            final List<CustomLimited> myDrafts = draft.loadCustomDrafts();
+            final List<CustomLimited> myDrafts = this.loadCustomDrafts();
 
             if (myDrafts.isEmpty()) {
                 SOptionPane.showMessageDialog("No custom draft files found.");
             }
             else {
                 final CustomLimited customDraft = SGuiChoose.oneOrNone("Choose Custom Draft", myDrafts);
-                if (customDraft == null) { return null; }
+                if (customDraft == null) { return false; }
 
-                draft.setupCustomDraft(customDraft);
+                this.setupCustomDraft(customDraft);
             }
             break;
 
         default:
-            throw new NoSuchElementException("Draft for mode " + draftType + " has not been set up!");
+            throw new NoSuchElementException("Draft for mode " + this.draftFormat + " has not been set up!");
         }
 
-        draft.pack = draft.get8BoosterPack();
-        return draft;
+        this.pack = this.get8BoosterPack();
+        return true;
     }
-    
-    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
-        
+
+    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {   
         BoosterDraft draft = new BoosterDraft(draftType);
         
         final int nPacks = boosters.length;
@@ -169,18 +172,20 @@ public final class BoosterDraft implements IBoosterDraft {
 
         draft.pack = draft.get8BoosterPack();
         return draft;
-        
     }
 
+    protected BoosterDraft() {
+        this.draftFormat = LimitedPoolType.Full;
+    }
     /**
      * <p>
      * Constructor for BoosterDraft_1.
      * </p>
-     * 
+     *
      * @param draftType
      *            a {@link java.lang.String} object.
      */
-    private BoosterDraft(final LimitedPoolType draftType) {
+    protected BoosterDraft(final LimitedPoolType draftType) {
         this.draftAI.setBd(this);
         this.draftFormat = draftType;
     }
@@ -233,7 +238,7 @@ public final class BoosterDraft implements IBoosterDraft {
      * nextChoice.
      * </p>
      * 
-     * @return a {@link forge.CardList} object.
+     * @return a {@link forge.deck.CardPool} object.
      */
     @Override
     public CardPool nextChoice() {
@@ -252,7 +257,7 @@ public final class BoosterDraft implements IBoosterDraft {
      * get8BoosterPack.
      * </p>
      * 
-     * @return an array of {@link forge.CardList} objects.
+     * @return an array of {@link forge.deck.CardPool} objects.
      */
     public List<List<PaperCard>> get8BoosterPack() {
         if (this.nextBoosterGroup >= this.product.size()) {
@@ -284,7 +289,7 @@ public final class BoosterDraft implements IBoosterDraft {
         return this.draftAI.getDecks();
     }
 
-    private void computerChoose() {
+    protected void computerChoose() {
         final int iHumansBooster = this.getCurrentBoosterIndex();
         int iPlayer = 0;
         for (int i = 1; i < this.pack.size(); i++) {
@@ -375,6 +380,11 @@ public final class BoosterDraft implements IBoosterDraft {
         }
         Collections.sort(outDraftData);
         HttpUtil.upload(ForgeConstants.URL_DRAFT_UPLOAD + "?fmt=" + draftFormat, outDraftData);
+    }
+
+    @Override
+    public boolean isPileDraft() {
+        return false;
     }
 
     private static List<String> getSetCombos(final List<String> setz) {

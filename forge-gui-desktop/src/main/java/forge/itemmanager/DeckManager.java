@@ -237,6 +237,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 screen = FScreen.DECK_EDITOR_DRAFT;
                 editorCtrl = new CEditorLimited(FModel.getDecks().getDraft(), screen);
                 break;
+            case Winston:
+                screen = FScreen.DECK_EDITOR_DRAFT;
+                editorCtrl = new CEditorLimited(FModel.getDecks().getWinston(), screen);
+                break;
 
             default:
                 return;

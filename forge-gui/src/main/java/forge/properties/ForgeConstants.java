@@ -102,6 +102,7 @@ public final class ForgeConstants {
     public static final String DECK_BASE_DIR        = USER_DIR + "decks/";
     public static final String DECK_CONSTRUCTED_DIR = DECK_BASE_DIR + "constructed/";
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft/";
+    public static final String DECK_WINSTON_DIR     = DECK_BASE_DIR + "winston/";
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed/";
     public static final String DECK_SCHEME_DIR      = DECK_BASE_DIR + "scheme/";
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar/";
