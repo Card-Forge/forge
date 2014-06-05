@@ -22,7 +22,8 @@ public class QuestAchievements {
     
     private QuestEventDraftContainer drafts = new QuestEventDraftContainer();
     private int currentDraft = -1;
-    private int draftTokensAvailable = 1;
+    private int draftsToGenerate = 1;
+    private int draftTokens = 0;
 
     private int win;
     private int winstreakBest = 0;
@@ -78,7 +79,7 @@ public class QuestAchievements {
         }
         
         if (win % 5 == 0) {
-            draftTokensAvailable++;
+            draftsToGenerate++;
         }
         
         if (this.winstreakCurrent > this.winstreakBest) {
@@ -219,7 +220,7 @@ public class QuestAchievements {
         
         if (drafts == null) {
             drafts = new QuestEventDraftContainer();
-            draftTokensAvailable = 1;
+            draftsToGenerate = 1;
         }
         
         QuestEventDraft toRemove = null;
@@ -235,11 +236,11 @@ public class QuestAchievements {
             drafts.remove(toRemove);
         }
         
-        for (int i = 0; i < draftTokensAvailable; i++) {
+        for (int i = 0; i < draftsToGenerate; i++) {
             QuestEventDraft draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());
             if (draft != null) {
                 drafts.add(draft);
-                draftTokensAvailable--;
+                draftsToGenerate--;
             }
         }
         
@@ -248,7 +249,7 @@ public class QuestAchievements {
     }
 
     public void addDraftToken() {
-        draftTokensAvailable++;
+        draftTokens++;
     }
     
     public void setCurrentDraft(final QuestEventDraft draft) {
@@ -300,6 +301,17 @@ public class QuestAchievements {
                 break;
         }
         
+    }
+    
+    public int getDraftTokens() {
+        return draftTokens;
+    }
+    
+    public void spendDraftToken() {
+        if (draftTokens > 0) {
+            draftTokens--;
+            draftsToGenerate++;
+        }
     }
 
 }

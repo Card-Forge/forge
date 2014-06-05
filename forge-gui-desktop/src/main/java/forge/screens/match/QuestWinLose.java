@@ -75,7 +75,7 @@ public class QuestWinLose extends ControlWinLose {
 
     /** String constraint parameters for title blocks and cardviewer blocks. */
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
-    private static final String CONSTRAINTS_TEXT = "w 95%!,, h 220px!, gap 0 0 0 20px";
+    private static final String CONSTRAINTS_TEXT = "w 95%!, h 220px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS_LARGE = "w 95%!, h 600px!, gap 0 0 0 20px";
 
@@ -460,7 +460,7 @@ public class QuestWinLose extends ControlWinLose {
         qData.getAssets().addCredits(credTotal);
 
         // Generate Swing components and attach.
-        this.icoTemp = FSkin.getIcon(FSkinProp.ICO_QUEST_GOLD).scale(0.5);
+        this.icoTemp = FSkin.getIcon(FSkinProp.ICO_QUEST_GOLD);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
@@ -559,32 +559,35 @@ public class QuestWinLose extends ControlWinLose {
                     cardsWon.addAll(qData.getCards().addRandomRareNotMythic(25));
                     typeWon = "rare";
                 }
+                addDraftToken = true;
                 break;
             default:
                 return;
         }
         
         if (addDraftToken) {
-            TitleLabel title = new TitleLabel("25 Win Streak Bonus Reward");
-            SkinnedLabel contents = new SkinnedLabel("For achieving a 25 win streak, a new tournament has been made available!");
+            TitleLabel title = new TitleLabel("Bonus Draft Token Reward");
+            SkinnedLabel contents = new SkinnedLabel("<html><body>For achieving a 25 win streak, you have been awarded a draft token!<br>Use these tokens to generate new tournaments.</body></html>");
             contents.setHorizontalAlignment(SwingConstants.CENTER);
             contents.setFont(FSkin.getFont(14));
             contents.setForeground(Color.white);
             contents.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_COIN));
             contents.setIconTextGap(50);
-            this.getView().getPnlCustom().add(title, QuestWinLose.CONSTRAINTS_TITLE);
-            this.getView().getPnlCustom().add(contents, QuestWinLose.CONSTRAINTS_TEXT);
+            this.view.getPnlCustom().add(title, QuestWinLose.CONSTRAINTS_TITLE);
+            this.view.getPnlCustom().add(contents, "w 95%!, h 100px!, gap 0 0 0 20px");
             qData.getAchievements().addDraftToken();
         }
         
-        this.lblTemp1 = new TitleLabel("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!");
-        final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
-
-        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
-            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
-        } else {
-            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+        if (cardsWon.size() > 0) {
+            this.lblTemp1 = new TitleLabel("You have achieved a " + (currentStreak == 0 ? "50" : currentStreak) + " win streak and won " + cardsWon.size() + " " + typeWon + " card" + ((cardsWon.size() != 1) ? "s" : "") + "!");
+            final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
+    
+            this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_LARGE_CARD_VIEWERS)) {
+                this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS_LARGE);
+            } else {
+                this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+            }
         }
         
     }

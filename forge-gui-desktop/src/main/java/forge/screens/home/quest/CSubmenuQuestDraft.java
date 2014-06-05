@@ -72,6 +72,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         view.getBtnStartTournament().addActionListener(prepareDeckStart);
         view.getBtnStartMatch().addActionListener(nextMatchStart);
         
+        view.getBtnSpendToken().setCommand(
+                new UiCommand() { @Override
+                    public void run() { CSubmenuQuestDraft.this.spendToken(); } });
+        
         view.getBtnEditDeck().setCommand(
                 new UiCommand() { @Override
                     public void run() { CSubmenuQuestDraft.this.editDeck(); } });
@@ -211,7 +215,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             }
             
             if (draft.getPlayerPlacement() == 1) {
-                FOptionPane.showMessageDialog("For placing " + placement + ", another tournament will be immediately available!", "Bonus Tournament", FSkin.getImage(FSkinProp.ICO_QUEST_NOTES));
+                FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded a token!\nUse tokens to create new drafts to play.", "Bonus Token", FSkin.getImage(FSkinProp.ICO_QUEST_NOTES));
                 FModel.getQuest().getAchievements().addDraftToken();
             }
             
@@ -296,6 +300,22 @@ public enum CSubmenuQuestDraft implements ICDoc {
         }
     };
     
+    private void spendToken() {
+        
+        QuestAchievements achievements = FModel.getQuest().getAchievements();
+        
+        if (achievements != null) {
+            
+            achievements.spendDraftToken();
+            FModel.getQuest().save();
+
+            update();
+            VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
+            
+        }
+        
+    }
+    
     @Override
     public void update() {
         
@@ -354,7 +374,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
 
         view.getLblCredits().setText("Available Credits: " + NUMBER_FORMATTER.format(FModel.getQuest().getAssets().getCredits()));
         
-        FModel.getQuest().getAchievements().generateDrafts();
+        QuestAchievements achievements = FModel.getQuest().getAchievements();
+        achievements.generateDrafts();
 
         view.getPnlTournaments().removeAll();
         JXButtonPanel grpPanel = new JXButtonPanel();
@@ -400,6 +421,9 @@ public enum CSubmenuQuestDraft implements ICDoc {
         view.getLblSecond().setText("2nd Place: " + achievements.getWinsForPlace(2) + " time" + (achievements.getWinsForPlace(2) == 1 ? "" : "s"));        
         view.getLblThird().setText("3rd Place: " + achievements.getWinsForPlace(3) + " time" + (achievements.getWinsForPlace(3) == 1 ? "" : "s"));        
         view.getLblFourth().setText("4th Place: " + achievements.getWinsForPlace(4) + " time" + (achievements.getWinsForPlace(4) == 1 ? "" : "s"));
+        
+        view.getLblTokens().setText("Tokens: " + achievements.getDraftTokens());
+        view.getBtnSpendToken().setEnabled(achievements.getDraftTokens() > 0);
         
     }
     

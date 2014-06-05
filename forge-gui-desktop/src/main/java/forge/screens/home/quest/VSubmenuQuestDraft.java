@@ -74,6 +74,8 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     .fontSize(15).build();
     private final FLabel lblFourth = new FLabel.Builder()
     .fontSize(15).build();
+    private final FLabel lblTokens = new FLabel.Builder()
+    .fontSize(15).build();
     
     private final StartButton btnStartDraft  = new StartButton();
     private final StartButton btnStartTournament  = new StartButton();
@@ -81,6 +83,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     
     private final FLabel btnEditDeck = new FLabel.ButtonBuilder().text("Edit Deck").fontSize(24).build();
     private final FLabel btnLeaveTournament = new FLabel.ButtonBuilder().text("Leave Tournament").fontSize(14).build();
+    private final FLabel btnSpendToken = new FLabel.ButtonBuilder().text("Spend Token").fontSize(14).build();
     
     private final JLabel lblsStandings[] = new JLabel[15];
 
@@ -106,7 +109,11 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         pnlStats.add(lblSecond, constraints);
         pnlStats.add(lblThird, constraints);
         pnlStats.add(lblFourth, constraints);
+        pnlStats.add(lblTokens, "h 30px!, gap 0 0 50px 10px, ax center");
+        pnlStats.add(btnSpendToken, "w 150px!, h 40px!, ax center");
         pnlStats.setOpaque(false);
+        
+        btnSpendToken.setToolTipText("Creates a new tournament that can be played immediately.");
         
     }
     
@@ -160,6 +167,14 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     
     public JLabel getLblFourth() {
         return lblFourth;
+    }
+    
+    public JLabel getLblTokens() {
+        return lblTokens;
+    }
+    
+    public FLabel getBtnSpendToken() {
+        return btnSpendToken;
     }
     
     public void setMode(Mode mode) {
