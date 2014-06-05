@@ -1,0 +1,9 @@
+Name:Hollow Warrior
+ManaCost:4
+Types:Artifact Creature Golem Warrior
+PT:4/4
+S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ tapXType<1/Creature.notattacking> | Description$ CARDNAME can't attack or block unless you tap an untapped creature you control not declared as an attacking or blocking creature this combat. (This cost is paid as attackers or blockers are declared.)
+S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ tapXType<1/Creature.notblocking>
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hollow_warrior.jpg
+Oracle:Hollow Warrior can't attack or block unless you tap an untapped creature you control not declared as an attacking or blocking creature this combat. (This cost is paid as attackers or blockers are declared.)

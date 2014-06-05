@@ -6697,6 +6697,7 @@ forge-gui/res/cardsfolder/h/holistic_wisdom.txt -text
 forge-gui/res/cardsfolder/h/hollow_dogs.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hollow_specter.txt -text
 forge-gui/res/cardsfolder/h/hollow_trees.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/h/hollow_warrior.txt -text
 forge-gui/res/cardsfolder/h/hollowborn_barghest.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/h/hollowhenge_beast.txt -text
 forge-gui/res/cardsfolder/h/hollowhenge_scavenger.txt -text
