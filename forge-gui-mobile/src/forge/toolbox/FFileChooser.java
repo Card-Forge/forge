@@ -26,7 +26,7 @@ public class FFileChooser extends FDialog {
         show(title0, choiceType0, null, "", callback0);
     }
     public static void show(String title0, ChoiceType choiceType0, String baseDir0, Callback<String> callback0) {
-        show(title0, choiceType0, baseDir0, "", callback0);
+        show(title0, choiceType0, baseDir0, baseDir0, callback0);
     }
     public static void show(String title0, ChoiceType choiceType0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
         FFileChooser dialog = new FFileChooser(title0, choiceType0, baseDir0, defaultFilename0, callback0);
@@ -38,9 +38,10 @@ public class FFileChooser extends FDialog {
     private final Callback<String> callback;
     private File currentDir;
 
-    private final FList<File> lstFiles = add(new FileList());
+    private final FList<File> lstFiles   = add(new FileList());
     private final FTextField txtFilename = add(new FTextField());
-    private final FButton btnNewFolder    = add(new FButton("New Folder", new FEventHandler() {
+
+    private final FButton btnNewFolder = add(new FButton("New Folder", new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
             //TODO: Add new folder
@@ -106,11 +107,11 @@ public class FFileChooser extends FDialog {
         btnCancel.setBounds(x, y, buttonWidth, buttonHeight);
 
         float fieldHeight = txtFilename.getHeight();
-        float listHeight = y - fieldHeight - 2 * padding;
+        float listHeight = y - fieldHeight - 3 * padding;
         x = padding;
         y = padding;
         txtFilename.setBounds(x, y, w, fieldHeight);
-        y += fieldHeight;
+        y += fieldHeight + padding;
         lstFiles.setBounds(x, y, w, listHeight);
         return maxHeight;
     }
@@ -121,7 +122,7 @@ public class FFileChooser extends FDialog {
     }
 
     private class FileList extends FList<File> {
-        private int selectedIndex;
+        private int selectedIndex = -1;
 
         private FileList() {
             setListItemRenderer(new ListItemRenderer<File>() {
