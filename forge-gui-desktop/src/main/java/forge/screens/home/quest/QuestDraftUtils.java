@@ -21,6 +21,7 @@ public class QuestDraftUtils {
     private static List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
     
     public static boolean matchInProgress = false;
+    public static boolean aiMatchInProgress = false;
     private static boolean waitForUserInput = false;
     
     public static void continueMatch(Game lastGame) {
@@ -148,6 +149,9 @@ public class QuestDraftUtils {
     public static void update() {
         
         if (matchups.isEmpty()) {
+            if (!matchInProgress) {
+                aiMatchInProgress = false;
+            }
             return;
         }
         
@@ -176,8 +180,10 @@ public class QuestDraftUtils {
         if (!nextMatch.hasHumanPlayer) {
             GuiBase.getInterface().disableOverlay();
             waitForUserInput = false;
+            aiMatchInProgress = true;
         } else {
             waitForUserInput = true;
+            aiMatchInProgress = false;
         }
         
         GuiBase.getInterface().startMatch(GameType.QuestDraft, nextMatch.matchStarter);

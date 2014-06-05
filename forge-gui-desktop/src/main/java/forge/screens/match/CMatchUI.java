@@ -44,6 +44,7 @@ import forge.item.InventoryItem;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.home.quest.QuestDraftUtils;
 import forge.screens.match.controllers.*;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.*;
@@ -475,7 +476,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
-        if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
+        if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing() || QuestDraftUtils.aiMatchInProgress) {
             return;
         }
 

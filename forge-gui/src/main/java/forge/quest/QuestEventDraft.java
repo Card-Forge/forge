@@ -18,12 +18,11 @@
 package forge.quest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Function;
 
@@ -251,7 +250,7 @@ public class QuestEventDraft {
     public Object[] getPrizes() {
         
         int place = getPlayerPlacement();
-        int prizePool = entryFee * 8;
+        int prizePool = entryFee * 9;
         
         int boosterPrices = 0;
         
@@ -622,17 +621,6 @@ public class QuestEventDraft {
         
         Collections.shuffle(possibleBlocks);
         CardBlock selectedBlock = possibleBlocks.get(0);
-
-        final Stack<String> sets = new Stack<String>();
-        for (int k = selectedBlock.getSets().length - 1; k >= 0; k--) {
-            sets.add(selectedBlock.getSets()[k].getCode());
-        }
-        
-        for (String setCode : selectedBlock.getMetaSetNames()) {
-            if (selectedBlock.getMetaSet(setCode).isDraftable()) {
-                sets.push(setCode);
-            }
-        }
         
         QuestEventDraft event = new QuestEventDraft(selectedBlock.getName());
         
@@ -646,7 +634,7 @@ public class QuestEventDraft {
                 event.boosterConfiguration = boosterConfiguration;
             }
         } else {
-            List<String> possibleSetCombinations = getSetCombos(sets);
+            List<String> possibleSetCombinations = getSetCombos(selectedBlock);
             Collections.shuffle(possibleSetCombinations);
             event.boosterConfiguration = possibleSetCombinations.get(0);
         }
@@ -722,71 +710,48 @@ public class QuestEventDraft {
         
         }
         
-        return (int) (entryFee * 1.65);
+        return (int) (entryFee * 1.5);
         
     }
     
-    private static List<String> getSetCombos(final List<String> setz) {
-        String[] sets = setz.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    private static List<String> getSetCombos(final CardBlock block) {
+
         List<String> setCombos = new ArrayList<String>();
-        if (sets.length >= 2) {
-            setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[1]));
-            setCombos.add(String.format("%s/%s/%s", sets[0], sets[1], sets[1]));
-            if (sets.length >= 3) {
-                setCombos.add(String.format("%s/%s/%s", sets[0], sets[1], sets[2]));
-                setCombos.add(String.format("%s/%s/%s", sets[0], sets[2], sets[2]));
+        CardEdition[] sets = block.getSets();
+        
+        Arrays.sort(sets, new Comparator<CardEdition>() {
+            @Override
+            public int compare(CardEdition set1, CardEdition set2) {
+                if (set1.getDate().after(set2.getDate())) {
+                    return -1;
+                } else if (set1.getDate().before(set2.getDate())) {
+                    return 1;
+                }
+                return 0;
             }
-            setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
-            if (sets.length >= 3) {
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[2]));
-                setCombos.add(String.format("%s/%s/%s", sets[1], sets[2], sets[2]));
+        });
+        
+        if (sets.length == 2) {
+            
+            if (sets[0].getCards().length < 200) {
+                setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[1].getCode()));
+            } else if (sets[1].getCards().length < 200) {
+                setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[0].getCode(), sets[0].getCode()));
+            } else {
+                setCombos.add(String.format("%s/%s/%s", sets[1].getCode(), sets[1].getCode(), sets[1].getCode()));
+                setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[1].getCode()));
+                setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[1].getCode()));
+                setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[0].getCode(), sets[0].getCode()));
             }
+            
+        } else if (sets.length >= 3) {
+
+            setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[2].getCode()));
+            
         }
-        if (sets.length >= 3) {
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[1]));
-            setCombos.add(String.format("%s/%s/%s", sets[2], sets[2], sets[2]));
-        } // Beyond 3, skimp on the choice configurations, or the list will be enormous!
-        if (sets.length >= 4) {
-            setCombos.add(String.format("%s/%s/%s", sets[3], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[3], sets[2], sets[1]));
-        }
-        if (sets.length >= 5) {
-            setCombos.add(String.format("%s/%s/%s", sets[4], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[4], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[4], sets[2], sets[0]));
-        }
-        if (sets.length >= 6) {
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[4], sets[3]));
-            setCombos.add(String.format("%s/%s/%s", sets[5], sets[2], sets[0]));
-        }
-        if (sets.length >= 7) {
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[5], sets[4]));
-            setCombos.add(String.format("%s/%s/%s", sets[6], sets[3], sets[0]));
-        }
-        if (sets.length >= 8) {
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[5], sets[4]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[6], sets[5]));
-            setCombos.add(String.format("%s/%s/%s", sets[7], sets[3], sets[0]));
-        }
-        if (sets.length >= 9) {
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[1], sets[0]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[3], sets[2]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[5], sets[4]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[7], sets[6]));
-            setCombos.add(String.format("%s/%s/%s", sets[8], sets[4], sets[0]));
-        }
+        
         return setCombos;
+        
     }
     
 }
