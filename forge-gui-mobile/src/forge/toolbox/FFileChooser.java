@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.io.File;
+import java.io.FilenameFilter;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -9,6 +10,7 @@ import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
@@ -69,7 +71,17 @@ public class FFileChooser extends FDialog {
 
     private void refreshFileList() {
         if (currentDir != null) {
-            lstFiles.setListData(currentDir.listFiles());
+            FilenameFilter filter = null;
+            if (choiceType == ChoiceType.GetDirectory) {
+                //don't list files if getting directory
+                filter = new FilenameFilter() {
+                    @Override
+                    public boolean accept(File dir, String name) {
+                        return new File(dir, name).isDirectory();
+                    }
+                };
+            }
+            lstFiles.setListData(currentDir.listFiles(filter));
         }
         else {
             lstFiles.setListData(File.listRoots());
@@ -132,8 +144,12 @@ public class FFileChooser extends FDialog {
 
                 @Override
                 public void drawValue(Graphics g, Integer index, File value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                    //TODO: Draw icon for folder vs. file
-                    g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+                    if (value.isDirectory()) {
+                        float iconSize = h;
+                        g.drawImage(FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);
+                        x += iconSize + FList.PADDING; 
+                    }
+                    g.drawText(value.getName(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
                 }
             });
         }
