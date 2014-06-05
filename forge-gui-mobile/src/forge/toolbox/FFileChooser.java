@@ -147,8 +147,8 @@ public class FFileChooser extends FDialog {
     }
 
     private void acceptSelectedFile() {
-        callback.run(getSelectedFilename());
         hide();
+        callback.run(getSelectedFilename());
     }
 
     private class FileList extends FList<File> {
