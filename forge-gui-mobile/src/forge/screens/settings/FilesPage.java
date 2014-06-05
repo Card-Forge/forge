@@ -56,6 +56,8 @@ public class FilesPage extends TabPage {
                 return new GuiDownloadPrices();
             }
         }, 0);
+
+        //storage options
     }
 
     @Override
