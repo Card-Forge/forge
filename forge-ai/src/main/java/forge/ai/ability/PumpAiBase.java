@@ -15,6 +15,7 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -27,6 +28,7 @@ import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class PumpAiBase extends SpellAbilityAi {
 
@@ -717,6 +719,10 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         pumped.addTempAttackBoost(a);
         pumped.addTempDefenseBoost(d);
         pumped.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+        Set<CounterType> types = c.getCounters().keySet();
+        for(CounterType ct : types) {
+            pumped.addCounter(ct, c.getCounters(ct), true);
+        }
         return pumped;
     }
 }
