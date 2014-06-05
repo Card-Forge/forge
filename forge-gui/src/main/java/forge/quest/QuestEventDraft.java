@@ -747,6 +747,7 @@ public class QuestEventDraft {
         } else if (sets.length >= 3) {
 
             setCombos.add(String.format("%s/%s/%s", sets[0].getCode(), sets[1].getCode(), sets[2].getCode()));
+            setCombos.add(String.format("%s/%s/%s", sets[2].getCode(), sets[2].getCode(), sets[2].getCode()));
             
         }
         
