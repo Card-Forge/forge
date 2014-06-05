@@ -1981,12 +1981,16 @@ public class CardFactoryUtil {
     public static final String getCommanderInfo(final Player originPlayer ) {
         StringBuilder sb = new StringBuilder();
         for(Player p : originPlayer.getGame().getPlayers()) {
-            if(p.equals(originPlayer))
-                continue;
+        	final String text;
+            if(p.equals(originPlayer)) {
+            	text = "Commander Damage from own Commander: ";
+            } else {
+            	text = "Commander Damage to " + p.getName() + ": ";
+            }
             
-            Map<Card,Integer> map = p.getCommanderDamage();
+            final Map<Card,Integer> map = p.getCommanderDamage();
             if(map.containsKey(originPlayer.getCommander())) {
-                sb.append("Commander Damage to " + p.getName() + ": "+ map.get(originPlayer.getCommander()) + "\r\n");
+                sb.append(text + map.get(originPlayer.getCommander()) + "\r\n");
             }
         }
         

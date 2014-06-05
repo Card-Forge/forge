@@ -173,7 +173,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 temp[6].setText(sb.toString());
             }
             if (isCommander) {
-                temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
+                temp[7].setText(CardFactoryUtil.getCommanderInfo(p0).trim().replace("\r\n", "; "));
             }
         }
     }
