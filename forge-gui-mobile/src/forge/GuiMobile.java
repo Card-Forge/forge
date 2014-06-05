@@ -39,7 +39,6 @@ import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
 import forge.properties.ForgeConstants;
-import forge.properties.ForgeProfileProperties;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.winlose.ViewWinLose;
@@ -58,6 +57,11 @@ public class GuiMobile implements IGuiBase {
     
     public GuiMobile(String assetsDir0) {
         assetsDir = assetsDir0;
+    }
+
+    @Override
+    public boolean isRunningOnDesktop() {
+        return Gdx.app.getType() == ApplicationType.Desktop;
     }
 
     @Override
@@ -88,15 +92,6 @@ public class GuiMobile implements IGuiBase {
     @Override
     public String getAssetsDir() {
         return assetsDir;
-    }
-
-    @Override
-    public ForgeProfileProperties getProfileProps() {
-        if (Gdx.app.getType() == ApplicationType.Desktop) {
-            return new ForgeProfileProperties(ForgeConstants.PROFILE_FILE);
-        }
-        String assetsDir = ForgeConstants.ASSETS_DIR;
-        return new ForgeProfileProperties(assetsDir + "data/", assetsDir + "cache/");
     }
 
     @Override

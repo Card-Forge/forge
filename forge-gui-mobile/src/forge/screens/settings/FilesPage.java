@@ -24,8 +24,9 @@ public class FilesPage extends TabPage {
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
         lstItems.addGroup("Content Downloaders");
+        lstItems.addGroup("Storage Options");
         //lstItems.addGroup("Data Import");
-        
+
         //content downloaders
         lstItems.addItem(new ContentDownloader("Download LQ Card Pictures",
                 "Download default card picture for each card.") {
@@ -113,5 +114,19 @@ public class FilesPage extends TabPage {
             new GuiDownloader(createService());
         }
         protected abstract GuiDownloadService createService();
+    }
+
+    private enum StorageOptions {
+        
+    }
+
+    private class StorageOption extends FilesItem {
+        public StorageOption(String label0, String description0) {
+            super(label0, description0);
+        }
+
+        @Override
+        public void select() {
+        }
     }
 }

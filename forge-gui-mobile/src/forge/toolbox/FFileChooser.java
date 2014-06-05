@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.io.File;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge.Graphics;
@@ -11,20 +12,20 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 
 public class FFileChooser extends FDialog {
-    public static void getFilename(String title0, boolean forSave0, Callback<File> callback0) {
+    public static void getFilename(String title0, boolean forSave0, Callback<String> callback0) {
         getFilename(title0, forSave0, null, "", callback0);
     }
-    public static void getFilename(String title0, boolean forSave0, File baseDir0, Callback<File> callback0) {
+    public static void getFilename(String title0, boolean forSave0, String baseDir0, Callback<String> callback0) {
         getFilename(title0, forSave0, baseDir0, "", callback0);
     }
-    public static void getFilename(String title0, boolean forSave0, File baseDir0, String defaultFilename0, Callback<File> callback0) {
+    public static void getFilename(String title0, boolean forSave0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
         FFileChooser dialog = new FFileChooser(title0, forSave0, baseDir0, defaultFilename0, callback0);
         dialog.show();
     }
 
     private final boolean forSave;
     private final File baseDir;
-    private final Callback<File> callback;
+    private final Callback<String> callback;
     private File currentDir;
 
     private final FList<File> lstFiles = add(new FileList());
@@ -48,10 +49,10 @@ public class FFileChooser extends FDialog {
         }
     }));
 
-    private FFileChooser(String title0, boolean forSave0, File baseDir0, String defaultFilename0, Callback<File> callback0) {
+    private FFileChooser(String title0, boolean forSave0, String baseDir0, String defaultFilename0, Callback<String> callback0) {
         super(title0);
         forSave = forSave0;
-        baseDir = baseDir0;
+        baseDir = new File(baseDir0);
         currentDir = baseDir;
         txtFilename.setText(defaultFilename0);
         callback = callback0;
@@ -69,8 +70,29 @@ public class FFileChooser extends FDialog {
 
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
-        // TODO Auto-generated method stub
-        return 0;
+        float padding = FOptionPane.PADDING;
+        float w = width - 2 * padding;
+
+        //layout buttons
+        float gapBetweenButtons = padding / 2;
+        float buttonWidth = (w - gapBetweenButtons * 2) / 3;
+        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
+        float x = padding;
+        float y = maxHeight - FOptionPane.GAP_BELOW_BUTTONS - buttonHeight;
+        btnNewFolder.setBounds(x, y, buttonWidth, buttonHeight);
+        x += buttonWidth + gapBetweenButtons;
+        btnOK.setBounds(x, y, buttonWidth, buttonHeight);
+        x += buttonWidth + gapBetweenButtons;
+        btnCancel.setBounds(x, y, buttonWidth, buttonHeight);
+
+        float fieldHeight = txtFilename.getHeight();
+        float listHeight = y - fieldHeight - 2 * padding;
+        x = padding;
+        y = padding;
+        txtFilename.setBounds(x, y, w, fieldHeight);
+        y += fieldHeight;
+        lstFiles.setBounds(x, y, w, listHeight);
+        return maxHeight;
     }
 
     private void acceptSelectedFile() {

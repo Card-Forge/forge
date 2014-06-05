@@ -17,6 +17,7 @@
  */
 package forge.properties;
 
+import forge.GuiBase;
 import forge.util.FileSection;
 
 import org.apache.commons.lang3.StringUtils;
@@ -54,6 +55,26 @@ public class ForgeProfileProperties {
         cardPicsDir = cacheDir + "pics/cards/";
         cardPicsSubDir = new HashMap<String, String>();
         serverPort = 0;
+    }
+
+    public ForgeProfileProperties() {
+        Properties props = new Properties();
+        File propFile = new File(ForgeConstants.PROFILE_FILE);
+        try {
+            if (propFile.canRead()) {
+                props.load(new FileInputStream(propFile));
+            }
+        }
+        catch (IOException e) {
+            System.err.println("error while reading from profile properties file");
+        }
+
+        Pair<String, String> defaults = _getDefaultDirs();
+        userDir     = _getDir(props, _USER_DIR_KEY,      defaults.getLeft());
+        cacheDir    = _getDir(props, _CACHE_DIR_KEY,     defaults.getRight());
+        cardPicsDir = _getDir(props, _CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
+        cardPicsSubDir = _getMap(props, _CARD_PICS_SUB_DIRS_KEY);
+        serverPort = _getInt(props, _SERVER_PORT, 0);
 
         //ensure directories exist
         File dir = new File(userDir);
@@ -64,25 +85,6 @@ public class ForgeProfileProperties {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-    }
-
-    public ForgeProfileProperties(String filename) {
-        Properties props = new Properties();
-        File propFile = new File(filename);
-        try {
-            if (propFile.canRead()) {
-                props.load(new FileInputStream(propFile));
-            }
-        } catch (IOException e) {
-            System.err.println("error while reading from profile properties file: " + filename);
-        }
-
-        Pair<String, String> defaults = _getDefaultDirs();
-        userDir     = _getDir(props, _USER_DIR_KEY,      defaults.getLeft());
-        cacheDir    = _getDir(props, _CACHE_DIR_KEY,     defaults.getRight());
-        cardPicsDir = _getDir(props, _CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
-        cardPicsSubDir = _getMap(props, _CARD_PICS_SUB_DIRS_KEY);
-        serverPort = _getInt(props, _SERVER_PORT, 0);
     }
 
     private Map<String,String> _getMap(Properties props, String propertyKey) {
@@ -113,9 +115,14 @@ public class ForgeProfileProperties {
         }
         return retDir + File.separatorChar;
     }
-    
+
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> _getDefaultDirs() {
+        if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
+            String assetsDir = ForgeConstants.ASSETS_DIR;
+            return Pair.of(assetsDir + "data/", assetsDir + "cache/");
+        }
+
         String osName = System.getProperty("os.name");
         String homeDir = System.getProperty("user.home");
 

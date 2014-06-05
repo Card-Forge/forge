@@ -86,7 +86,7 @@ public final class ForgeConstants {
     public static final Map<String, String> CACHE_CARD_PICS_SUBDIR;
     public static final int SERVER_PORT_NUMBER;
     static {
-        ForgeProfileProperties profileProps = GuiBase.getInterface().getProfileProps();
+        ForgeProfileProperties profileProps = new ForgeProfileProperties();
         USER_DIR           = profileProps.userDir;
         CACHE_DIR          = profileProps.cacheDir;
         CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;

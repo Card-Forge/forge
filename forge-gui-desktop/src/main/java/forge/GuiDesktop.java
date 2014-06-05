@@ -53,8 +53,6 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
-import forge.properties.ForgeConstants;
-import forge.properties.ForgeProfileProperties;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.ViewWinLose;
@@ -77,7 +75,12 @@ import forge.util.ITriggerEvent;
 public class GuiDesktop implements IGuiBase {
     
     private boolean showOverlay = true;
-    
+
+    @Override
+    public boolean isRunningOnDesktop() {
+        return true;
+    }
+
     @Override
     public void invokeInEdtLater(Runnable proc) {
         SwingUtilities.invokeLater(proc);
@@ -111,11 +114,6 @@ public class GuiDesktop implements IGuiBase {
     public String getAssetsDir() {
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
                 "../forge-gui/" : "";
-    }
-
-    @Override
-    public ForgeProfileProperties getProfileProps() {
-        return new ForgeProfileProperties(ForgeConstants.PROFILE_FILE);
     }
 
     @Override
