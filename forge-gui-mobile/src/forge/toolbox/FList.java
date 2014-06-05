@@ -70,6 +70,13 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         }
         revalidate();
     }
+    public void setListData(E[] items0) {
+        clear();
+        for (E item : items0) {
+            addItem(item);
+        }
+        revalidate();
+    }
 
     public boolean isEmpty() {
         return items.isEmpty();
@@ -230,8 +237,8 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         }
 
         @Override
-        public void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(value.toString(), font, color, x, y, w, h, false, HAlignment.LEFT, true);
+        public void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
         }
     }
 
