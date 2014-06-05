@@ -624,8 +624,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 }
             }
         }
-        
-        sa.getHostCard().setXManaCostPaid(0);
+        // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
+        // sa.getHostCard().setXManaCostPaid(0);
     }
 
     private final void removeCardFromStack(final SpellAbility sa, final boolean fizzle) {
