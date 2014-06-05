@@ -13047,6 +13047,7 @@ forge-gui/res/cardsfolder/t/tablet_of_epityr.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tablet_of_the_guilds.txt -text
 forge-gui/res/cardsfolder/t/tahngarth.txt -text
 forge-gui/res/cardsfolder/t/tahngarth_talruum_hero.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/tahngarths_glare.txt -text
 forge-gui/res/cardsfolder/t/tahngarths_rage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/taiga.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/tainted_aether.txt svneol=native#text/plain

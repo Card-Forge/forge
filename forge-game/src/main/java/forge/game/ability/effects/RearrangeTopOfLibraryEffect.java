@@ -13,6 +13,8 @@ import forge.util.Lang;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
@@ -99,7 +101,11 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
      *            a boolean.
      */
     private void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards, final boolean mayshuffle, final SpellAbility sa) {
-        final Player activator = sa.getActivatingPlayer();
+        final Player activator = sa.hasParam("RearrangePlayer") ? Iterables.getFirst(AbilityUtils.getDefinedPlayers(src, sa.getParam("RearrangePlayer"), sa), null)
+                : sa.getActivatingPlayer();
+        if (activator == null) {
+            return;
+        }
         final PlayerZone lib = player.getZone(ZoneType.Library);
         int maxCards = lib.size();
         // If library is smaller than N, only show that many cards
