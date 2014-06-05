@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
 import forge.Forge;
 import forge.Forge.Graphics;
@@ -289,6 +290,18 @@ public class FTextField extends FDisplayObject implements ITextField {
         float w = getWidth();
         float h = getHeight();
         g.fillRect(BACK_COLOR, 0, 0, w, h);
+
+        //determine actual rendered font so selection logic is accurate
+        TextBounds textBounds = font.getMultiLineBounds(text);
+        while (textBounds.width > w || textBounds.height > h) {
+            if (font.canShrink()) { //shrink font to fit if possible
+                font = font.shrink();
+                textBounds = font.getMultiLineBounds(text);
+            }
+            else {
+                break;
+            }
+        }
 
         //draw selection if key input is active
         if (isEditing) {
