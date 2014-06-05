@@ -205,9 +205,10 @@ public class Match {
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
         boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
 
+        final List<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
         for (int i = 0; i < playersConditions.size(); i++) {
-            Player player = game.getPlayers().get(i);
+            final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
 
             player.initVariantsZones(psc);

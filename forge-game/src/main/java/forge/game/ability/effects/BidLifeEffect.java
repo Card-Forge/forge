@@ -47,13 +47,14 @@ public class BidLifeEffect extends SpellAbilityEffect {
             bidPlayers.add(activator);
             bidPlayers.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("OtherBidder"), sa));
         } else{
-            bidPlayers.addAll(activator.getGame().getPlayers());
+            bidPlayers.addAll(activator.getGame().getPlayersInTurnOrder());
             int pSize = bidPlayers.size();
             // start with the activator
             while (bidPlayers.contains(activator) && !activator.equals(Iterables.getFirst(bidPlayers, null))) {
                 bidPlayers.add(pSize - 1, bidPlayers.remove(0));
             }
         }
+
         boolean willBid = true;
         Player winner = activator;
         int bid = startBidding;
@@ -66,6 +67,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
                 if (result) { // a different choose number
                     bid += p.getController().chooseNumber(sa, "Bid life:", 1, 9);
                     winner = p;
+                    host.getGame().getAction().nofityOfValue(sa, p, "topped bid with " + bid + " life", p);
                 }
             }
         }

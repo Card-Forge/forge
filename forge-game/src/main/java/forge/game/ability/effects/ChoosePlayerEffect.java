@@ -33,7 +33,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final List<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
-                sa.getHostCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayers();
+                sa.getHostCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayersInTurnOrder();
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
         final boolean random = sa.hasParam("Random");

@@ -40,12 +40,17 @@ public enum Direction {
 	/** @return Immutable list of all directions (in order, Left and Right). */
 	public static List<Direction> getListOfDirections() { return listOfDirections; }
 	
+	/** @return True if and only if this is the default direction. */
+	public boolean isDefaultDirection() {
+		return this.equals(getDefaultDirection());
+	}
+	
 	/**
 	 * Get the index by which the turn order is shifted, given this Direction.
 	 * @return 1 or -1.
 	 */
 	public int getShift() {
-		if (this.equals(getDefaultDirection())) {
+		if (this.isDefaultDirection()) {
 			return 1;
 		}
 		return -1;

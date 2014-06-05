@@ -30,7 +30,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         
         int min = Integer.MAX_VALUE;
         
-        final List<Player> players = game.getPlayers();
+        final List<Player> players = game.getPlayersInTurnOrder();
         final List<List<Card>> validCards = new ArrayList<List<Card>>(players.size());
         
         for(int i = 0; i < players.size(); i++) {

@@ -584,7 +584,7 @@ public class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        for (Player p : controller.getGame().getPlayers()) {
+        for (Player p : controller.getGame().getPlayersInTurnOrder()) {
             if (p.isValid(strngs, controller, hostCard)) {
                 players.add(p);
             }

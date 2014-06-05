@@ -422,7 +422,7 @@ public class AbilityUtils {
             }
             else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
-                for (Player p : game.getPlayers()) {
+                for (Player p : game.getPlayersInTurnOrder()) {
                     if (p.hasProperty(defined, ability.getActivatingPlayer(), ability.getHostCard())) {
                         players.add(p);
                     }
@@ -1011,7 +1011,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("Non")) {
-            players.addAll(game.getPlayers());
+            players.addAll(game.getPlayersInTurnOrder());
             players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
         }
         else if (defined.equals("EnchantedController")) {
@@ -1065,7 +1065,7 @@ public class AbilityUtils {
             players.add(card.getOwner());
         }
         else if (defined.startsWith("PlayerNamed_")) {
-            for (Player p : game.getPlayers()) {
+            for (Player p : game.getPlayersInTurnOrder()) {
                 System.out.println("Named player " + defined.substring(12));
                 if (p.getName().equals(defined.substring(12))) {
                     players.add(p);
@@ -1073,7 +1073,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("Flipped")) {
-            for (Player p : game.getPlayers()) {
+            for (Player p : game.getPlayersInTurnOrder()) {
                 if (null != sa.getHostCard().getFlipResult(p)) {
                     if (sa.getHostCard().getFlipResult(p).equals(defined.substring(7))) {
                         players.add(p);
@@ -1088,13 +1088,13 @@ public class AbilityUtils {
             players.add(sa.getActivatingPlayer());
         }
         else if (defined.equals("Each")) {
-            players.addAll(game.getPlayers());
+            players.addAll(game.getPlayersInTurnOrder());
         }
         else if (defined.equals("Opponent")) {
             players.add(sa.getActivatingPlayer().getOpponent());
         }
         else {
-            for (Player p : game.getPlayers()) {
+            for (Player p : game.getPlayersInTurnOrder()) {
                 if (p.isValid(defined, sa.getActivatingPlayer(), sa.getHostCard())) {
                     players.add(p);
                 }
