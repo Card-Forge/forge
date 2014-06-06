@@ -33,7 +33,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     }
 
     private String text, ghostText, textBeforeKeyInput;
-    protected FSkinFont font;
+    protected FSkinFont font, renderedFont;
     private HAlignment alignment;
     private int selStart, selLength;
     private boolean isEditing;
@@ -107,6 +107,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     }
     public void setFont(FSkinFont font0) {
         font = font0;
+        renderedFont = font0;
         setHeight(getDefaultHeight(font));
     }
 
@@ -126,14 +127,14 @@ public class FTextField extends FDisplayObject implements ITextField {
         if (x < charLeft) {
             return 0;
         }
-        if (x >= charLeft + font.getBounds(text).width) {
+        if (x >= charLeft + renderedFont.getBounds(text).width) {
             return text.length();
         }
 
         //find closest character of press
         float charWidth;
         for (int i = 0; i < text.length(); i++) {
-            charWidth = font.getBounds(text.substring(i, i + 1)).width;
+            charWidth = renderedFont.getBounds(text.substring(i, i + 1)).width;
             if (x < charLeft + charWidth / 2) {
                 return i;
             }
@@ -292,12 +293,13 @@ public class FTextField extends FDisplayObject implements ITextField {
         g.fillRect(BACK_COLOR, 0, 0, w, h);
 
         //determine actual rendered font so selection logic is accurate
-        FSkinFont fontBackup = font;
-        TextBounds textBounds = font.getMultiLineBounds(text);
-        while (textBounds.width > w || textBounds.height > h) {
-            if (font.canShrink()) { //shrink font to fit if possible
-                font = font.shrink();
-                textBounds = font.getMultiLineBounds(text);
+        renderedFont = font;
+        float availableTextWidth = w - PADDING - getRightPadding();
+        TextBounds textBounds = renderedFont.getMultiLineBounds(text);
+        while (textBounds.width > availableTextWidth || textBounds.height > h) {
+            if (renderedFont.canShrink()) { //shrink font to fit if possible
+                renderedFont = renderedFont.shrink();
+                textBounds = renderedFont.getMultiLineBounds(text);
             }
             else {
                 break;
@@ -308,7 +310,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         if (isEditing) {
             float selLeft = PADDING;
             if (selStart > 0) {
-                selLeft += font.getBounds(text.substring(0, selStart)).width;
+                selLeft += renderedFont.getBounds(text.substring(0, selStart)).width;
             }
             float selTop = PADDING;
             float selHeight = h - 2 * PADDING;
@@ -317,7 +319,7 @@ public class FTextField extends FDisplayObject implements ITextField {
                 g.drawLine(BORDER_THICKNESS, FORE_COLOR, selLeft, selTop, selLeft, selTop + selHeight);
             }
             else if (selStart == 0 && selLength == text.length()) {
-                float selWidth = font.getBounds(text.substring(selStart, selStart + selLength)).width;
+                float selWidth = renderedFont.getBounds(text.substring(selStart, selStart + selLength)).width;
                 g.fillRect(SEL_COLOR, selLeft, selTop, selWidth, selHeight);
                 drawText(g, w, h); //draw text in front of selection background
             }
@@ -327,20 +329,18 @@ public class FTextField extends FDisplayObject implements ITextField {
         }
 
         g.drawRect(BORDER_THICKNESS, FORE_COLOR, BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
-
-        font = fontBackup; //restore font after finishing render
     }
 
     private void drawText(Graphics g, float w, float h) {
-        float diff = h - font.getCapHeight();
+        float diff = h - renderedFont.getCapHeight();
         if (diff > 0 && Math.round(diff) % 2 == 1) {
             h++; //if odd difference between height and font height, increment height so text favors displaying closer to bottom
         }
         if (!text.isEmpty()) {
-            g.drawText(text, font, FORE_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+            g.drawText(text, renderedFont, FORE_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
         }
         else if (!ghostText.isEmpty()) {
-            g.drawText(ghostText, font, GHOST_TEXT_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+            g.drawText(ghostText, renderedFont, GHOST_TEXT_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
         }
     }
 
