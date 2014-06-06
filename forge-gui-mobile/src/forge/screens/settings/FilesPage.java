@@ -80,7 +80,7 @@ public class FilesPage extends TabPage {
         lstItems.addItem(new StorageOption("Image Cache Location", ForgeProfileProperties.getCacheDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
-                ForgeProfileProperties.setUserDir(newDir);
+                ForgeProfileProperties.setCacheDir(newDir);
 
                 //ensure card pics option is updated if needed
                 cardPicsOption.updateDir(ForgeProfileProperties.getCardPicsDir());
