@@ -23,6 +23,7 @@ import java.util.List;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.Singletons;
+import forge.assets.FSkinProp;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
@@ -34,6 +35,8 @@ import forge.screens.home.quest.CSubmenuDuels;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.QuestDraftUtils;
 import forge.screens.home.quest.VSubmenuQuestDraft;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FSkin;
 
 /**
  * <p>
@@ -109,19 +112,39 @@ public class QuestDraftWinLose extends ControlWinLose {
         }
         
         view.getBtnRestart().setEnabled(false);
+        view.getBtnRestart().setVisible(false);
         
         if (lastGame.getMatch().isMatchOver()) {
+            view.getBtnQuit().setEnabled(true);
             view.getBtnContinue().setEnabled(false);
-            //TODO Add match quit to quit button listeners before match is officially over
+            view.getBtnQuit().setText("Continue Tournament");
+            for (ActionListener listener : view.getBtnQuit().getActionListeners()) {
+                view.getBtnQuit().removeActionListener(listener);
+            }
             view.getBtnQuit().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
+                    GuiBase.getInterface().endCurrentGame();
                     QuestDraftUtils.matchInProgress = false;
                     QuestDraftUtils.continueMatches();
                 }
             });
         } else {
-            view.getBtnQuit().setEnabled(false);
+            view.getBtnQuit().setEnabled(true);
+            for (ActionListener listener : view.getBtnQuit().getActionListeners()) {
+                view.getBtnQuit().removeActionListener(listener);
+            }
+            view.getBtnQuit().setText("Forfeit Tournament");
+            view.getBtnQuit().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    if (FOptionPane.showOptionDialog("Quitting the match now will forfeit the tournament!\n\nReally quit?", "Really Quit Tournament?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
+                        GuiBase.getInterface().endCurrentGame();
+                        QuestDraftUtils.matchInProgress = false;
+                        QuestDraftUtils.continueMatches();
+                    }
+                }
+            });
         }
         
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();

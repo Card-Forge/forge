@@ -12,6 +12,17 @@ Release Notes
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- Random Duel Button -
+If you find yourself challenging only certain opponents in quest mode, try giving this button a click. It pairs you up with a random opponent to keep you on your toes.
+
+
+- Quest Draft Tournaments -
+An entirely new mode has been added to quests... drafting!
+Compete in tournaments to win credits and booster packs, then keep the deck and the cards you drafted to use in your regular quest duels and challenges.
+Tournaments are generated every 5 regular duel wins and disappear every 15 (a tournament rotates every 5 turns).
+If you get a 25 win streak or win first place in a tournament, you're awarded a token to generate a new draft right away.
+
+
 ---------
 New Cards
 ---------

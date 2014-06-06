@@ -535,7 +535,7 @@ public class QuestWinLose extends ControlWinLose {
                     cardsWon.addAll(cardsToAdd);
                     typeWon = "mythic rare";
                 } else {
-                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(5));
+                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(3));
                     typeWon = "rare";
                 }
                 break;
@@ -556,7 +556,7 @@ public class QuestWinLose extends ControlWinLose {
                     cardsWon.addAll(cardsToAdd);
                     typeWon = "mythic rare";
                 } else {
-                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(25));
+                    cardsWon.addAll(qData.getCards().addRandomRareNotMythic(30));
                     typeWon = "rare";
                 }
                 addDraftToken = true;

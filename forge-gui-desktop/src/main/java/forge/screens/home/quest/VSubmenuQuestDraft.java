@@ -1,10 +1,12 @@
 package forge.screens.home.quest;
 
+import java.awt.BasicStroke;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,10 +14,12 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.model.FModel;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.LblHeader;
@@ -24,6 +28,8 @@ import forge.screens.home.VHomeUI;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.Colors;
+import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 
 /**
@@ -82,10 +88,11 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     private final StartButton btnStartMatch  = new StartButton();
     
     private final FLabel btnEditDeck = new FLabel.ButtonBuilder().text("Edit Deck").fontSize(24).build();
-    private final FLabel btnLeaveTournament = new FLabel.ButtonBuilder().text("Leave Tournament").fontSize(14).build();
+    private final FLabel btnLeaveTournament = new FLabel.ButtonBuilder().text("Leave Tournament").fontSize(12).build();
     private final FLabel btnSpendToken = new FLabel.ButtonBuilder().text("Spend Token").fontSize(14).build();
+    private final FLabel btnStartMatchSmall = new FLabel.ButtonBuilder().text("Start Next Match").fontSize(12).build();
     
-    private final JLabel lblsStandings[] = new JLabel[15];
+    private final PnlMatchup[] matchups = new PnlMatchup[8];
 
     private final JPanel pnlDeckImage;
     
@@ -95,11 +102,40 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
     
     private VSubmenuQuestDraft() {
         
-        for (int i = 0; i < 15; i++) {
-            lblsStandings[i] = new FLabel.Builder().text("Standing Slot: " + i)
-                    .fontStyle(Font.BOLD).fontSize(14)
-                    .fontAlign(SwingConstants.LEFT).build();
-        }
+        SkinImage avatar = FSkin.getAvatars().get(GuiBase.getInterface().getAvatarCount() - 1);
+        
+        matchups[0] = new PnlMatchup(PnlMatchup.LineDirection.DOWN, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
+        matchups[0].setPlayerOne("Undetermined", avatar);
+        matchups[0].setPlayerTwo("Undetermined", avatar);
+
+        matchups[1] = new PnlMatchup(PnlMatchup.LineDirection.UP, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
+        matchups[1].setPlayerOne("Undetermined", avatar);
+        matchups[1].setPlayerTwo("Undetermined", avatar);
+
+        matchups[2] = new PnlMatchup(PnlMatchup.LineDirection.DOWN, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
+        matchups[2].setPlayerOne("Undetermined", avatar);
+        matchups[2].setPlayerTwo("Undetermined", avatar);
+
+        matchups[3] = new PnlMatchup(PnlMatchup.LineDirection.UP, PnlMatchup.LineSide.RIGHT, PnlMatchup.BoxSize.SMALL);
+        matchups[3].setPlayerOne("Undetermined", avatar);
+        matchups[3].setPlayerTwo("Undetermined", avatar);
+
+        matchups[4] = new PnlMatchup(PnlMatchup.LineDirection.DOWN, PnlMatchup.LineSide.BOTH, PnlMatchup.BoxSize.MEDIUM);
+        matchups[4].setPlayerOne("Undetermined", avatar);
+        matchups[4].setPlayerTwo("Undetermined", avatar);
+
+        matchups[5] = new PnlMatchup(PnlMatchup.LineDirection.UP, PnlMatchup.LineSide.BOTH, PnlMatchup.BoxSize.MEDIUM);
+        matchups[5].setPlayerOne("Undetermined", avatar);
+        matchups[5].setPlayerTwo("Undetermined", avatar);
+
+        matchups[6] = new PnlMatchup(PnlMatchup.LineDirection.STRAIGHT, PnlMatchup.LineSide.BOTH, PnlMatchup.BoxSize.LARGE);
+        matchups[6].setPlayerOne("Undetermined", avatar);
+        matchups[6].setPlayerTwo("Undetermined", avatar);
+
+        matchups[7] = new PnlMatchup(PnlMatchup.LineDirection.STRAIGHT, PnlMatchup.LineSide.LEFT, PnlMatchup.BoxSize.LARGE_SINGLE, true);
+        matchups[7].setPlayerOne("Undetermined", avatar);
+        matchups[7].setPlayerTwo("Undetermined", avatar);
+        
         pnlDeckImage = new ProportionalPanel(FSkin.getImage(FSkinProp.IMG_QUEST_DRAFT_DECK), 680, 475);
         
         final String constraints = "h 30px!, gap 0 0 0 10px";
@@ -141,6 +177,10 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         return btnStartMatch;
     }
     
+    public FLabel getBtnStartMatchSmall() {
+        return btnStartMatchSmall;
+    }
+    
     public FLabel getBtnEditDeck() {
         return btnEditDeck;
     }
@@ -149,8 +189,8 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         return btnLeaveTournament;
     }
     
-    public JLabel[] getLblsStandings() {
-        return lblsStandings;
+    public PnlMatchup[] getLblsMatchups() {
+        return matchups;
     }
     
     public JLabel getLblFirst() {
@@ -277,40 +317,57 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
         pnlDeckImage.setMaximumSize(new Dimension(680, 475));
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDeckImage, "ax center, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnEditDeck, "w 150px, h 50px, gap 0 0 15px 0, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartTournament, "gap 0 0 10px 10px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartTournament, "gap 0 0 0 15px, ax center");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 150px, h 35px, gap 0 0 25px 10%, ax center");
+        btnEditDeck.setFontSize(24);
+        btnLeaveTournament.setFontSize(12);
     }
     
     private void populateTournamentActive() {
         
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 20% 0 15px 35px, ax right");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 1"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 20% 0 15px 10px, ax right, span 2");
         
         FScrollPanel panel = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap 4, ax center"), true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
-        String constraints = "w 200px!, h 30px!, ay center";
-        String groupingGap = ", gap 0 0 0 50px";
+        String constraintsLeft = "w 350px!, h 196px!, gap 0px 0px 0px 0px, ay center";
+        String constraintsMiddle = "w 350px!, h 392px!, gap 0px 0px 0px 0px, ay center";
+        String constraintsRight = "w 350px!, h 784px!, gap 0px 0px 0px 0px, ay center";
         
-        panel.add(lblsStandings[0], constraints);
-        panel.add(lblsStandings[8], constraints + ", span 1 2");
-        panel.add(lblsStandings[12], constraints + ", span 1 4");
-        panel.add(lblsStandings[14], constraints + ", span 1 8");
-        panel.add(lblsStandings[1], constraints + groupingGap);
-        panel.add(lblsStandings[2], constraints);
-        panel.add(lblsStandings[9], constraints + ", span 1 2");
-        panel.add(lblsStandings[3], constraints + groupingGap);
-        panel.add(lblsStandings[4], constraints);
-        panel.add(lblsStandings[10], constraints + ", span 1 2");
-        panel.add(lblsStandings[13], constraints + ", span 1 4");
-        panel.add(lblsStandings[5], constraints + groupingGap);
-        panel.add(lblsStandings[6], constraints);
-        panel.add(lblsStandings[11], constraints + ", span 1 2");
-        panel.add(lblsStandings[7], constraints);
+        panel.add(matchups[0], constraintsLeft);
+        panel.add(matchups[4], constraintsMiddle + ", span 1 2");
+        panel.add(matchups[6], constraintsRight + ", span 1 4");
+        panel.add(matchups[7], constraintsRight + ", span 1 4");
+        panel.add(matchups[1], constraintsLeft);
+        panel.add(matchups[2], constraintsLeft);
+        panel.add(matchups[5], constraintsMiddle + ", span 1 2");
+        panel.add(matchups[3], constraintsLeft);
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(panel, "gap 0 0 0 0, ax center");
         
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(panel, "gap 0 0 30px 0, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartMatch, "gap 0 0 30px 0, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 120px, h 35px, gap 0 0 100px 0, ax center");
+        btnEditDeck.setFontSize(12);
+        
+        JPanel bottomButtons = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
+        
+        if (FModel.getQuest().getAchievements().getCurrentDraft().playerHasMatchesLeft()) {
+
+            VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStartMatch, "gap 0 0 0 20px, ax center");
+            bottomButtons.add(btnEditDeck, "w 135px!, h 25px!, gap 0 25px 10px 10px, ax right");
+            bottomButtons.add(btnLeaveTournament, "w 135px!, h 25px!, gap 25px 0 10px 10px, ax right");
+            btnLeaveTournament.setFontSize(12);
+            
+        } else {
+
+            VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnLeaveTournament, "w 250px!, h 60px!, gap 0 0 20px 20px, ax center");
+            bottomButtons.add(btnEditDeck, "w 135px!, h 25px!, gap 0 25px 10px 10px, ax right");
+            bottomButtons.add(btnStartMatchSmall, "w 135px!, h 25px!, gap 25px 0 10px 10px, ax right");
+            btnLeaveTournament.setFontSize(24);
+            
+        }
+        
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(bottomButtons, "w 100%!");
+        bottomButtons.setOpaque(false);
         
     }
     
@@ -380,6 +437,161 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft> {
             
             height = (int) (((double) h) * scale);
             width = (int) (((double) w) * scale);
+            
+        }
+        
+    }
+    
+    public static class PnlMatchup extends JPanel {
+
+        private static final long serialVersionUID = 2055607559359905216L;
+        
+        private static enum LineDirection {
+            UP, DOWN, STRAIGHT, NONE
+        }
+        
+        private static enum LineSide {
+            LEFT, RIGHT, BOTH
+        }
+        
+        private static enum BoxSize {
+            SMALL, MEDIUM, LARGE, LARGE_SINGLE
+        }
+
+        private final SkinColor clr1 = FSkin.getColor(FSkin.Colors.CLR_THEME2).alphaColor(255);
+        private final SkinColor clr2 = FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(100);
+        private final SkinColor clr3 = FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(100);
+        
+        private final int wImg = 55;
+        private final int hImg = 55;
+        
+        private SkinImage img1;
+        private SkinImage img2;
+        
+        private FLabel name1 = new FLabel.Builder().fontSize(14).fontAlign(JLabel.LEFT).build();
+        private FLabel name2 = new FLabel.Builder().fontSize(14).fontAlign(JLabel.LEFT).build();
+        
+        private LineDirection lineDir;
+        private LineSide lineSide;
+        private BoxSize size;
+
+        private boolean singleBox;
+        
+        public PnlMatchup(LineDirection dir, LineSide side, BoxSize size, boolean singleBox) {
+            this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+            if (!singleBox) {
+                this.add(name1, "w 100%!, h 50% - 30px!, gap 135px 0 0 30px, ax right");
+                this.add(name2, "w 100%!, h 50% - 30px!, gap 135px 0 31px 0, ax right");
+            } else {
+                this.add(name1, "w 100%!, h 50%!, gap 135px 0 11px 0, ax right");
+            }
+            this.lineDir = dir;
+            this.lineSide = side;
+            this.size = size;
+            this.singleBox = singleBox;
+            name1.setVerticalAlignment(JLabel.BOTTOM);
+            name2.setVerticalAlignment(JLabel.TOP);
+        }
+        
+        public PnlMatchup(LineDirection dir, LineSide side, BoxSize size) {
+            this(dir, side, size, false);
+        }
+        
+        public void setPlayerOne(final String name, final SkinImage image) {
+            name1.setText(name);
+            img1 = image;
+        }
+        
+        public void setPlayerTwo(final String name, final SkinImage image) {
+            name2.setText(name);
+            img2 = image;
+        }
+
+        @Override
+        public void paintComponent(final Graphics g) {
+            
+            Graphics2D g2d = (Graphics2D) g.create();
+            
+            int width = getWidth() - 100;
+            int height = getHeight() - 40;
+            
+            if (size.equals(BoxSize.MEDIUM)) {
+                height -= 196;
+                g2d.translate(0, 98);
+            } else if (size.equals(BoxSize.LARGE)) {
+                height -= 588;
+                g2d.translate(0, 294);
+            } else if (size.equals(BoxSize.LARGE_SINGLE)) {
+                height -= 665;
+                g2d.translate(0, 333);
+            }
+
+            g2d.setColor(clr1.getColor());
+            g2d.setStroke(new BasicStroke(4));
+
+            if (lineSide.equals(LineSide.LEFT) || lineSide.equals(LineSide.BOTH)) {
+                g2d.drawLine(0, height / 2 + 20, 47, height / 2 + 20);
+            }
+            
+            g2d.translate(50, 20);
+            
+            if (lineSide.equals(LineSide.RIGHT) || lineSide.equals(LineSide.BOTH)) {
+                g2d.drawLine(width, height / 2, width + 65, height / 2);
+                if (lineDir.equals(LineDirection.DOWN)) {
+                    g2d.drawLine(width + 48, height / 2, width + 48, height + 400);
+                } else if (lineDir.equals(LineDirection.UP)) {
+                    g2d.drawLine(width + 48, height / 2, width + 48, -400);
+                } else if (lineDir.equals(LineDirection.STRAIGHT)) {
+                    g2d.drawLine(width, height / 2, width + 45, height / 2);
+                }
+            }
+            
+            FSkin.setGraphicsGradientPaint(g2d, 0, 0, clr3, 0, height / 2 + 15 , clr2);
+            g2d.fillRect(0, 0, width, height / 2);
+            
+            FSkin.setGraphicsGradientPaint(g2d, 0, height / 2 - 15, clr2, 0, height, clr3);
+            g2d.fillRect(0, height / 2, width, height / 2);
+
+            g2d.setColor(clr1.getColor());
+            g2d.setStroke(new BasicStroke(4));
+            g2d.drawRect(1, 1, width - 2, height - 2);
+            
+            if (!singleBox) {
+                FSkin.setGraphicsGradientPaint(g2d, 70, height / 2 - 1, clr1.alphaColor(0), width, height / 2 - 1, clr1);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawRect(70, height / 2 - 1, width - 70, 2);
+            }
+
+            g2d.setColor(FSkin.getColor(Colors.CLR_TEXT).getColor());
+            g2d.setStroke(new BasicStroke(1));
+
+            if (!singleBox) {
+                Rectangle2D textSize = g2d.getFontMetrics().getStringBounds("VS", g2d);
+                g2d.drawString("VS", (width + (int) textSize.getWidth()) / 2, (height + (int) textSize.getHeight()) / 2 - 2);
+            }
+
+            // Padding here
+            g2d.translate(12, 12);
+            
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            
+            Dimension srcSize = img1.getSizeForPaint(g2d);
+            int wSrc = srcSize.width;
+            int hSrc = srcSize.height;
+
+            FSkin.drawImage(g2d, img1,
+                    0, 0, wImg, hImg, // Destination
+                    0, 0, wSrc, hSrc); // Source
+            
+            g2d.translate(0, 77);
+
+            if (!singleBox) {
+                FSkin.drawImage(g2d, img2,
+                        0, 0, wImg, hImg, // Destination
+                        0, 0, wSrc, hSrc); // Source
+            }
+
+            g2d.dispose();
             
         }
         

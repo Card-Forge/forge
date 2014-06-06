@@ -33,6 +33,7 @@ import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.QuestController;
 import forge.quest.QuestEventDraft;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -54,10 +55,12 @@ import forge.util.MyRandom;
  */
 public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     
-    private CSubmenuQuestDraft testDraftQuest;
+    private CSubmenuQuestDraft draftQuest;
+    private QuestController quest;
     
     public void setDraftQuest(CSubmenuQuestDraft testDraftQuest) {
-        this.testDraftQuest = testDraftQuest;
+        this.draftQuest = testDraftQuest;
+        this.quest = FModel.getQuest();
     }
     
     private IBoosterDraft boosterDraft;
@@ -212,7 +215,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
         FScreen.DRAFTING_PROCESS.close();
         
-        testDraftQuest.setCompletedDraft(finishedDraft, s);
+        draftQuest.setCompletedDraft(finishedDraft, s);
         
     }
 
@@ -290,10 +293,10 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
                             "Leave anyway?";
             boolean leave = FOptionPane.showOptionDialog(userPrompt, "Leave Draft?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0), new String[] {"Leave", "Cancel"}, 1) == 0;
             if (leave) {
-                QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
-                FModel.getQuest().getAssets().addCredits(draft.getEntryFee());
-                FModel.getQuest().getAchievements().deleteDraft(draft);
-                FModel.getQuest().save();
+                QuestEventDraft draft = quest.getAchievements().getCurrentDraft();
+                quest.getAssets().addCredits(draft.getEntryFee());
+                quest.getAchievements().deleteDraft(draft);
+                quest.save();
                 CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
                 VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
             }
