@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.19
+Forge Beta: 06-06-2014 ver 1.5.19
 
 
-##### cards in total.
+13831 cards in total.
 
 
 -------------
@@ -27,72 +27,72 @@ If you get a 25 win streak or win first place in a tournament, you're awarded a 
 New Cards
 ---------
 
-Goblin Game
-Menacing Ogre
-Reversal of Fortune
-Equipoise
-Lightning Storm
-Prossh, Skyraider of Kher
-Jeleva, Nephalia's Scourge
-Marath, Will of the Wild
-Halfdane
-Nix
-Soul Sculptor
-Balduvian Fallen
-Snowfall
 Adarkar Unicorn
+Balduvian Fallen
+Equipoise
+Goblin Game
+Halfdane
 Hammerheim
-Thick-Skinned Goblin
-Shah of Naar Isle
-Ice Cave
-Tahngarth's Glare
 Hollow Warrior
+Ice Cave
+Jeleva, Nephalia's Scourge
+Lightning Storm
+Marath, Will of the Wild
+Menacing Ogre
+Nix
+Prossh, Skyraider of Kher
+Reversal of Fortune
 Risky Move
+Shah of Naar Isle
+Snowfall
+Soul Sculptor
+Tahngarth's Glare
+Thick-Skinned Goblin
 
 
 ---------------------------
 New Conspiracy branch Cards
 ---------------------------
 
+Academy Elite
+Bite of the Black Rose
 Brago's Representative
 Brago, King Eternal
+Coercive Portal
 Council Guardian
+Council's Judgment
+Custodi Soulbinders
+Custodi Squire
 Dack Fayden
+Dack's Duplicate
+Deathreap Ritual
 Drakestown Forgotten
+Enraged Revolutionary
 Extract from Darkness
+Flamewright
+Grenzo's Cutthroat
 Grenzo, Dungeon Warden
+Grudge Keeper
+Ignition Team
 Magister of Worth
+Marchesa's Emissary
 Marchesa's Infiltrator
+Marchesa's Smuggler
 Marchesa, the Black Rose
 Muzzio, Visionary Architect
 Plea for Power
+Predator's Howl
+Realm Seekers
 Reign of the Pit
 Rousing of Souls
 Scourge of the Throne
 Selvala's Charge
+Selvala's Enforcer
 Selvala, Explorer Returned
 Split Decision
 Treasonous Ogre
 Tyrant's Choice
-Coercive Portal
-Council's Judgment
-Academy Elite
-Dack's Duplicate
-Deathreap Ritual
-Realm Seekers
-Grudge Keeper
-Custodi Soulbinders
-Custodi Squire
-Bite of the Black Rose
-Marchesa's Emissary
-Enraged Revolutionary
-Grenzo's Cutthroat
-Ignition Team
-Flamewright
-Marchesa's Smuggler
 Woodvine Elemental
-Predator's Howl
-Selvala's Enforcer
 
 
 --------------------
@@ -138,7 +138,15 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+elcnesh
+excessum
+Gos
+KrazyTheFox
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
