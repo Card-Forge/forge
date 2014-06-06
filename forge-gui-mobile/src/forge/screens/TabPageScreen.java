@@ -57,8 +57,8 @@ public class TabPageScreen extends FScreen {
 
     private static class TabHeader extends Header {
         public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
-        public static final float TAB_WIDTH = HEIGHT * 1.2f;
-        private static final float BACK_BUTTON_WIDTH = HEIGHT / 2;
+        public static final float TAB_WIDTH = Math.round(HEIGHT * 1.2f);
+        private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
         private static final FSkinColor SEPARATOR_COLOR = BACK_COLOR.stepColor(-40);
 
         private final FLabel btnBack;
