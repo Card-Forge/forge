@@ -14,8 +14,11 @@ import forge.assets.FSkinImage;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.Utils;
 
 public class FFileChooser extends FDialog {
+    private static final float BACK_ICON_THICKNESS = Utils.scaleMax(2);
+
     public enum ChoiceType {
         OpenFile,
         SaveFile,
@@ -38,7 +41,7 @@ public class FFileChooser extends FDialog {
     private final Callback<String> callback;
 
     private final FList<File> lstFiles   = add(new FileList());
-    private final FTextField txtFilename = add(new FTextField());
+    private final FTextField txtFilename = add(new FilenameField());
 
     private final FButton btnNewFolder = add(new FButton("New Folder", new FEventHandler() {
         @Override
@@ -185,6 +188,43 @@ public class FFileChooser extends FDialog {
         if (idx != -1) {
             txtFilename.setText(txtFilename.getText().substring(0, idx));
             refreshFileList();
+        }
+    }
+
+    private class FilenameField extends FTextField {
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (x < getLeftPadding()) { //handle tapping on back icon
+                back();
+                return true;
+            }
+            return super.tap(x, y, count);
+        }
+
+        @Override
+        protected float getLeftPadding() {
+            return getHeight();
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            super.draw(g);
+
+            //draw back icon
+            float w = getHeight();
+            float h = w;
+            float x = w * 0.35f; 
+            float y = h / 2;
+            float offsetX = w / 8;
+            float offsetY = h / 6;
+
+            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x + offsetX, y - offsetY, x - offsetX, y);
+            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x - offsetX, y, x + offsetX, y + offsetY);
+
+            x += w * 0.3f;
+
+            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x + offsetX, y - offsetY, x - offsetX, y);
+            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x - offsetX, y, x + offsetX, y + offsetY);
         }
     }
 

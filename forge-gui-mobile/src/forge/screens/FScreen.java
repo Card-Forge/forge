@@ -158,7 +158,7 @@ public abstract class FScreen extends FContainer {
             float offsetY = w / 4;
 
             g.drawLine(THICKNESS, COLOR, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
-            g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid  - 1, xMid + offsetX, yMid + offsetY);
+            g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid - 1, xMid + offsetX, yMid + offsetY);
         }
     }
 

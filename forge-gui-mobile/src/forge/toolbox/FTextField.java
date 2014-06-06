@@ -121,9 +121,9 @@ public class FTextField extends FDisplayObject implements ITextField {
     public float getAutoSizeWidth() {
         return PADDING + font.getBounds(text).width + getRightPadding();
     }
-    
+
     private int getCharIndexAtPoint(float x, float y) {
-        float charLeft = PADDING;
+        float charLeft = getLeftPadding();
         if (x < charLeft) {
             return 0;
         }
@@ -294,7 +294,7 @@ public class FTextField extends FDisplayObject implements ITextField {
 
         //determine actual rendered font so selection logic is accurate
         renderedFont = font;
-        float availableTextWidth = w - PADDING - getRightPadding();
+        float availableTextWidth = w - getLeftPadding() - getRightPadding();
         TextBounds textBounds = renderedFont.getMultiLineBounds(text);
         while (textBounds.width > availableTextWidth || textBounds.height > h) {
             if (renderedFont.canShrink()) { //shrink font to fit if possible
@@ -308,7 +308,7 @@ public class FTextField extends FDisplayObject implements ITextField {
 
         //draw selection if key input is active
         if (isEditing) {
-            float selLeft = PADDING;
+            float selLeft = getLeftPadding();
             if (selStart > 0) {
                 selLeft += renderedFont.getBounds(text.substring(0, selStart)).width;
             }
@@ -337,11 +337,15 @@ public class FTextField extends FDisplayObject implements ITextField {
             h++; //if odd difference between height and font height, increment height so text favors displaying closer to bottom
         }
         if (!text.isEmpty()) {
-            g.drawText(text, renderedFont, FORE_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+            g.drawText(text, renderedFont, FORE_COLOR, getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
         }
         else if (!ghostText.isEmpty()) {
-            g.drawText(ghostText, renderedFont, GHOST_TEXT_COLOR, PADDING, 0, w - PADDING - getRightPadding(), h, false, alignment, true);
+            g.drawText(ghostText, renderedFont, GHOST_TEXT_COLOR, getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
         }
+    }
+
+    protected float getLeftPadding() {
+        return PADDING;
     }
 
     protected float getRightPadding() {
