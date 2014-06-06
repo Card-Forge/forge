@@ -49,7 +49,7 @@ public class FFileChooser extends FDialog {
     private final FButton btnOK = add(new FButton("OK", new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            acceptSelectedFile();
+            activateSelectedFile(true);
         }
     }));
     private final FButton btnCancel  = add(new FButton("Cancel", new FEventHandler() {
@@ -80,41 +80,6 @@ public class FFileChooser extends FDialog {
         refreshFileList();
     }
 
-    private void refreshFileList() {
-        String filename = txtFilename.getText();
-        File dir = new File(baseDir + filename);
-        if (!dir.exists() || !dir.isDirectory()) {
-            int idx = filename.lastIndexOf(File.separatorChar);
-            if (idx == -1) {
-                dir = new File(baseDir);
-            }
-            else {
-                dir = new File(baseDir + filename.substring(0, idx));
-            }
-        }
-        if (dir.exists() && dir.isDirectory()) {
-            FilenameFilter filter = null;
-            if (choiceType == ChoiceType.GetDirectory) {
-                //don't list files if getting directory
-                dir = dir.getParentFile(); //show parent folder's files and select folder
-                if (dir == null) {
-                    lstFiles.setListData(File.listRoots());
-                    return;
-                }
-                filter = new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return new File(dir, name).isDirectory();
-                    }
-                };
-            }
-            lstFiles.setListData(dir.listFiles(filter));
-        }
-        else {
-            lstFiles.setListData(File.listRoots());
-        }
-    }
-
     @Override
     protected float layoutAndGetHeight(float width, float maxHeight) {
         float padding = FOptionPane.PADDING;
@@ -142,13 +107,85 @@ public class FFileChooser extends FDialog {
         return maxHeight;
     }
 
+    private void refreshFileList() {
+        String filename = txtFilename.getText();
+        File dir = new File(baseDir + filename);
+        if (!dir.exists() || !dir.isDirectory()) {
+            int idx = filename.lastIndexOf(File.separatorChar);
+            if (idx == -1) {
+                dir = new File(baseDir);
+            }
+            else {
+                dir = new File(baseDir + filename.substring(0, idx));
+            }
+        }
+        if (dir.exists() && dir.isDirectory()) {
+            if (choiceType == ChoiceType.GetDirectory) {
+                dir = dir.getParentFile(); //show parent folder's files and select folder
+            }
+            if (dir != null) {
+                setFileListForDir(dir);
+                scrollSelectionIntoView();
+                return;
+            }
+        }
+        lstFiles.setListData(File.listRoots());
+        scrollSelectionIntoView();
+    }
+
+    private void setFileListForDir(File dir) {
+        FilenameFilter filter = null;
+        if (choiceType == ChoiceType.GetDirectory) {
+            //don't list files if getting directory
+            filter = new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return new File(dir, name).isDirectory();
+                }
+            };
+        }
+        lstFiles.setListData(dir.listFiles(filter));
+    }
+
+    private void scrollSelectionIntoView() {
+        String filename = getSelectedFilename();
+        for (int i = 0; i < lstFiles.getCount(); i++) {
+            if (lstFiles.getItemAt(i).getAbsolutePath().equals(filename)) {
+                lstFiles.scrollIntoView(i);
+                return;
+            }
+        }
+    }
+
     private String getSelectedFilename() {
         return baseDir + txtFilename.getText();
     }
 
-    private void acceptSelectedFile() {
+    private void activateSelectedFile(boolean fromOkButton) {
+        String filename = getSelectedFilename();
+        File file = new File(filename);
+        if (file.exists() && file.isDirectory() && !fromOkButton) {
+            //if directory activated not from OK button, open it within dialog
+            setFileListForDir(file);
+            if (lstFiles.getCount() > 0) { //select first item if any
+                txtFilename.setText(lstFiles.getItemAt(0).getAbsolutePath());
+            }
+            else {
+                txtFilename.setText(file.getAbsolutePath() + File.separator); //indicate no selection in directory
+            }
+            scrollSelectionIntoView();
+            return;
+        }
         hide();
-        callback.run(getSelectedFilename());
+        callback.run(filename);
+    }
+
+    private void back() {
+        int idx = txtFilename.getText().lastIndexOf(File.separatorChar);
+        if (idx != -1) {
+            txtFilename.setText(txtFilename.getText().substring(0, idx));
+            refreshFileList();
+        }
     }
 
     private class FileList extends FList<File> {
@@ -164,7 +201,8 @@ public class FFileChooser extends FDialog {
                 @Override
                 public boolean tap(Integer index, File value, float x, float y, int count) {
                     if (count == 2 && index == prevTapIndex) {
-                        acceptSelectedFile();
+                        activateSelectedFile(false);
+                        return true;
                     }
                     txtFilename.setText(value.getAbsolutePath());
                     prevTapIndex = index;
@@ -214,14 +252,14 @@ public class FFileChooser extends FDialog {
     public boolean keyDown(int keyCode) {
         switch (keyCode) {
         case Keys.ENTER:
-            acceptSelectedFile();
+            activateSelectedFile(false);
             return true;
         case Keys.ESCAPE:
             if (Forge.endKeyInput()) { return true; }
             break; //let FDialog handle it
         case Keys.BACK:
         case Keys.BACKSPACE:
-            //TODO: Navigate back to previous directory if possible
+            back();
             return true;
         }
         return super.keyDown(keyCode);
