@@ -63,7 +63,7 @@ public class AnimateAi extends SpellAbilityAi {
         if (!game.getStack().isEmpty()) {
             SpellAbility topStack = game.getStack().peekAbility();
             if (topStack.getApi() == ApiType.Sacrifice) {
-                final String valid = topStack.getParam("SacValid");
+                final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
                 String num = topStack.getParam("Amount");
                 num = (num == null) ? "1" : num;
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
