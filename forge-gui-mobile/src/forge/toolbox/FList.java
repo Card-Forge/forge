@@ -145,6 +145,14 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         return renderer.tap(index, item, x, y - getItemTop(index), count);
     }
 
+    public boolean longPress(float x, float y) {
+        int index = getIndexAtPoint(x, y);
+        E item = getItemAt(index);
+        if (item == null) { return false; }
+
+        return renderer.showMenu(index, item, this, x, y);
+    }
+
     private float getItemTop(int index) {
         return index * renderer.getItemHeight() - getScrollTop();
     }
@@ -223,6 +231,10 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         public abstract float getItemHeight();
         public abstract boolean tap(Integer index, V value, float x, float y, int count);
         public abstract void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+
+        public boolean showMenu(Integer index, V value, FDisplayObject owner, float x, float y) {
+            return false; //showing menu on long press is optional
+        }
     }
 
     public static class DefaultListItemRenderer<V> extends ListItemRenderer<V> {

@@ -246,6 +246,10 @@ public class FGroupList<E> extends FScrollPane {
             return renderer.tap(-1, value, x, y, count);
         }
 
+        public boolean longPress(float x, float y) {
+            return renderer.showMenu(-1, value, this, x, y);
+        }
+
         @Override
         public final void draw(Graphics g) {
             float w = getWidth();

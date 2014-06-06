@@ -13,9 +13,12 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
+import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class FFileChooser extends FDialog {
@@ -239,6 +242,39 @@ public class FFileChooser extends FDialog {
         }
     }
 
+    private void deleteFile(final Integer index, final File file) {
+        FOptionPane.showConfirmDialog("Are you sure you wish to proceed with delete? This action cannot be undone.",
+                "Delete " + (file.isDirectory() ? "Folder" : "File"), "Delete", "Cancel", new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    try {
+                        if (FileUtil.deleteDirectory(file)) { //this will ensure directory or file deleted
+                            lstFiles.removeItem(file);
+                            if (lstFiles.getCount() > index) { //select next item if possible
+                                txtFilename.setText(lstFiles.getItemAt(index).getAbsolutePath());
+                            }
+                            else if (lstFiles.getCount() > 0) { //select new last item otherwise
+                                txtFilename.setText(lstFiles.getItemAt(lstFiles.getCount() - 1).getAbsolutePath());
+                            }
+                            else {
+                                File dir = getCurrentDir();
+                                if (dir != null) {
+                                    txtFilename.setText(dir.getAbsolutePath() + File.separator); //indicate no selection in directory
+                                }
+                            }
+                            return;
+                        }
+                    }
+                    catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    FOptionPane.showErrorDialog("Could not delete file.");
+                }
+            }
+        });
+    }
+
     private class FilenameField extends FTextField {
         @Override
         public boolean tap(float x, float y, int count) {
@@ -294,6 +330,26 @@ public class FFileChooser extends FDialog {
                     }
                     txtFilename.setText(value.getAbsolutePath());
                     prevTapIndex = index;
+                    return true;
+                }
+
+                @Override
+                public boolean showMenu(final Integer index, final File value, FDisplayObject owner, float x, float y) {
+                    txtFilename.setText(value.getAbsolutePath());
+                    FPopupMenu menu = new FPopupMenu() {
+                        @Override
+                        protected void buildMenu() {
+                            addItem(new FMenuItem("Delete " + (value.isDirectory() ? "Folder" : "File"), FSkinImage.DELETE,
+                                    new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    deleteFile(index, value);
+                                }
+                            }));
+                        }
+                    };
+
+                    menu.show(owner, x, y);
                     return true;
                 }
 
