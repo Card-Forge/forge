@@ -1,0 +1,7 @@
+Name:Marchesa's Emissary
+ManaCost:3 U
+Types:Creature Human Rogue
+PT:2/2
+K:Hexproof
+K:Dethrone
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marchesas_emissary.jpg

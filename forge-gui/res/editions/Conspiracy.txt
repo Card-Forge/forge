@@ -1,0 +1,218 @@
+[metadata]
+Code=CNS
+Date=2014-06-06
+Name=Conspiracy
+Code2=CNS
+Type=Other
+
+[cards]
+U Advantageous Proclamation
+R Backup Plan
+C Brago's Favor
+U Double Stroke
+C Immediate Action
+U Iterative Analysis
+C Muzzio's Preparations
+U Power Play
+U Secret Summoning
+C Secrets of Paradise
+C Sentinel Dispatch
+U Unexpected Potential
+R Worldknit
+C Brago's Representative
+U Council Guardian
+R Council's Judgment
+R Custodi Soulbinders
+C Custodi Squire
+C Rousing of Souls
+R Academy Elite
+C Marchesa's Emissary
+U Marchesa's Infiltrator
+M Muzzio, Visionary Architect
+R Plea for Power
+U Split Decision
+U Bite of the Black Rose
+R Drakestown Forgotten
+C Grudge Keeper
+R Reign of the Pit
+C Tyrant's Choice
+C Enraged Revolutionary
+C Grenzo's Cutthroat
+R Grenzo's Rebuttal
+R Ignition Team
+M Scourge of the Throne
+U Treasonous Ogre
+U Predator's Howl
+R Realm Seekers
+U Selvala's Charge
+C Selvala's Enforcer
+R Brago, King Eternal
+M Dack Fayden
+R Dack's Duplicate
+U Deathreap Ritual
+U Extract from Darkness
+U Flamewright
+R Grenzo, Dungeon Warden
+R Magister of Worth
+M Marchesa, the Black Rose
+U Marchesa's Smuggler
+R Selvala, Explorer Returned
+U Woodvine Elemental
+R AEther Searcher
+U Agent of Acquisitions
+R Canal Dredger
+M Coercive Portal
+R Cogwork Grinder
+C Cogwork Librarian
+C Cogwork Spy
+U Cogwork Tracker
+R Deal Broker
+R Lore Seeker
+C Lurking Automaton
+C Whispergear Sneak
+R Paliano, the High City
+C Ajani's Sunstriker
+C Apex Hawks
+C Courier Hawk
+C Doomed Traveler
+U Glimmerpoint Stag
+C Guardian Zendikon
+U Intangible Virtue
+C Kor Chant
+C Moment of Heroism
+C Noble Templar
+C Pillarfield Ox
+C Pride Guardian
+M Pristine Angel
+R Reya Dawnbringer
+R Rout
+C Silverchase Fox
+U Soulcatcher
+C Stave Off
+U Swords to Plowshares
+U Unquestioned Authority
+C Valor Made Real
+U Vow of Duty
+U Wakestone Gargoyle
+C AEther Tradewinds
+U Air Servant
+C Brainstorm
+U Breakthrough
+C Compulsive Research
+C Crookclaw Transmuter
+C Dream Fracture
+C Enclave Elite
+U Fact or Fiction
+U Favorable Winds
+C Grixis Illusionist
+U Jetting Glasskite
+C Minamo Scrollkeeper
+R Misdirection
+C Plated Seastrider
+C Reckless Scholar
+C Screaming Seahawk
+C Shoreline Ranger
+C Stasis Cell
+R Stifle
+C Traveler's Cloak
+C Turn the Tide
+U Wind Dancer
+C Altar's Reap
+C Assassinate
+R Ill-Gotten Gains
+C Infectious Horror
+C Liliana's Specter
+R Magus of the Mirror
+U Morkrut Banshee
+C Necromantic Thirst
+M Phage the Untouchable
+U Plagued Rusalka
+C Quag Vampires
+U Reckless Spite
+U Skeletal Scrying
+U Smallpox
+C Stronghold Discipline
+C Syphon Soul
+C Tragic Slip
+C Twisted Abomination
+C Typhoid Rats
+C Unhallowed Pact
+U Vampire Hexmage
+U Victimize
+C Wakedancer
+C Zombie Goliath
+U Barbed Shocker
+U Boldwyr Intimidator
+C Brimstone Volley
+C Chartooth Cougar
+C Cinder Wall
+U Deathforge Shaman
+U Flaring Flame-Kin
+C Flowstone Blade
+R Heartless Hidetsugu
+U Heckling Fiends
+C Lizard Warrior
+C Mana Geyser
+C Orcish Cannonade
+C Pitchburn Devils
+C Power of Fire
+C Skitter of Lizards
+R Sulfuric Vortex
+C Torch Fiend
+C Trumpet Blast
+U Uncontrollable Anger
+C Vent Sentinel
+U Volcanic Fallout
+C Wrap in Flames
+C Charging Rhino
+C Copperhorn Scout
+C Echoing Courage
+U Elephant Guide
+C Elvish Aberration
+R Exploration
+U Gamekeeper
+C Gnarlid Pack
+C Howling Wolf
+C Hunger of the Howlpack
+M Hydra Omnivore
+U Lead the Stampede
+C Nature's Claim
+U Pelakka Wurm
+C Plummet
+C Provoke
+U Relic Crush
+C Respite
+C Sakura-Tribe Elder
+C Scaled Wurm
+C Sporecap Spider
+U Squirrel Nest
+R Terastodon
+R Wolfbriar Elemental
+C Wrap in Vigor
+R Basandra, Battle Seraph
+R Decimate
+R Dimir Doppelganger
+R Edric, Spymaster of Trest
+U Fires of Yavimaya
+M Mirari's Wake
+U Mortify
+M Pernicious Deed
+U Sky Spirit
+R Spiritmonger
+U Spontaneous Combustion
+U Wood Sage
+R Altar of Dementia
+R Deathrender
+U Explorer's Scope
+U Fireshrieker
+U Galvanic Juggernaut
+U Peace Strider
+U Reito Lantern
+U Runed Servitor
+R Silent Arbiter
+U Spectral Searchlight
+R Vedalken Orrery
+U Warmonger's Chariot
+U Mirrodin's Core
+U Quicksand
+R Reflecting Pool

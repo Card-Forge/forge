@@ -1,0 +1,6 @@
+Name:Enraged Revolutionary
+ManaCost:2 R
+Types:Creature Human Warrior
+PT:2/1
+K:Dethrone
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enraged_revolutionary.jpg

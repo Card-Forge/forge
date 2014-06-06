@@ -1,0 +1,7 @@
+Name:Grenzo's Cutthroat
+ManaCost:1 R
+Types:Creature Goblin Rogue
+PT:1/1
+K:First Strike
+K:Dethrone
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grenzos_cutthroat.jpg
