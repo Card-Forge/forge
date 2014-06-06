@@ -3,6 +3,8 @@ package forge.toolbox;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -46,7 +48,31 @@ public class FFileChooser extends FDialog {
     private final FButton btnNewFolder = add(new FButton("New Folder", new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            //TODO: Add new folder
+            final File dir = getCurrentDir();
+            if (dir == null) {
+                FOptionPane.showErrorDialog("Cannot add new folder to invalid folder.", "Invalid Folder");
+                return;
+            }
+
+            FOptionPane.showInputDialog("Enter name for new folder:", "New Folder", new Callback<String>() {
+                @Override
+                public void run(String result) {
+                    if (StringUtils.isEmpty(result)) { return; }
+
+                    try {
+                        File newDir = new File(dir, result);
+                        if (newDir.mkdirs()) {
+                            txtFilename.setText(newDir.getAbsolutePath());
+                            refreshFileList();
+                            return;
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    FOptionPane.showErrorDialog("\"" + result + "\" is not a valid folder name.", "Invalid Name");
+                }
+            });
         }
     }));
     private final FButton btnOK = add(new FButton("OK", new FEventHandler() {
@@ -110,29 +136,32 @@ public class FFileChooser extends FDialog {
         return maxHeight;
     }
 
-    private void refreshFileList() {
-        String filename = txtFilename.getText();
-        File dir = new File(baseDir + filename);
+    private File getCurrentDir() {
+        String filename = getSelectedFilename();
+        File dir = new File(filename);
         if (!dir.exists() || !dir.isDirectory()) {
             int idx = filename.lastIndexOf(File.separatorChar);
-            if (idx == -1) {
-                dir = new File(baseDir);
-            }
-            else {
-                dir = new File(baseDir + filename.substring(0, idx));
+            if (idx != -1) {
+                dir = new File(filename.substring(0, idx));
             }
         }
         if (dir.exists() && dir.isDirectory()) {
             if (choiceType == ChoiceType.GetDirectory) {
                 dir = dir.getParentFile(); //show parent folder's files and select folder
             }
-            if (dir != null) {
-                setFileListForDir(dir);
-                scrollSelectionIntoView();
-                return;
-            }
+            return dir;
         }
-        lstFiles.setListData(File.listRoots());
+        return null;
+    }
+
+    private void refreshFileList() {
+        File dir = getCurrentDir();
+        if (dir != null) {
+            setFileListForDir(dir);
+        }
+        else {
+            lstFiles.setListData(File.listRoots());
+        }
         scrollSelectionIntoView();
     }
 
@@ -184,7 +213,7 @@ public class FFileChooser extends FDialog {
         //validate return value
         if (returnDirectory) {
             if (!file.exists() || !file.isDirectory()) {
-                FOptionPane.showErrorDialog("No directory exists with the selected path.", "Invalid Directory");
+                FOptionPane.showErrorDialog("No folder exists with the selected path.", "Invalid Folder");
                 return;
             }
         }

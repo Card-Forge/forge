@@ -126,6 +126,9 @@ public class FOptionPane extends FDialog {
             }
         });
         optionPane.show();
+        if (txtInput != null) {
+            txtInput.startEdit();
+        }
     }
 
     private final FLabel lblIcon;
@@ -230,7 +233,10 @@ public class FOptionPane extends FDialog {
 
         x = PADDING;
         if (promptHeight > 0) {
-            y += promptHeight + PADDING;
+            y += promptHeight;
+            if (displayObj == null) { //don't add additional padding between prompt and display object
+                y += PADDING;
+            }
         }
 
         if (displayObj != null) {
