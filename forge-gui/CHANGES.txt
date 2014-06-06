@@ -45,6 +45,9 @@ Hammerheim
 Thick-Skinned Goblin
 Shah of Naar Isle
 Ice Cave
+Tahngarth's Glare
+Hollow Warrior
+Risky Move
 
 
 ---------------------------
@@ -71,7 +74,6 @@ Selvala, Explorer Returned
 Split Decision
 Treasonous Ogre
 Tyrant's Choice
-
 Coercive Portal
 Council's Judgment
 Academy Elite
@@ -97,6 +99,7 @@ Selvala's Enforcer
 New M15 branch Cards
 --------------------
 
+Soul of Zendikar
 Waste Not
 
 
