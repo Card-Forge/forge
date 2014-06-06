@@ -31,7 +31,7 @@ public class FilesPage extends TabPage {
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
         lstItems.addGroup("Content Downloaders");
-        lstItems.addGroup("Storage Options");
+        lstItems.addGroup("Storage Locations");
         //lstItems.addGroup("Data Import");
 
         //content downloaders
@@ -64,7 +64,7 @@ public class FilesPage extends TabPage {
             }
         }, 0);
 
-        //storage options
+        //storage locations
         lstItems.addItem(new StorageOption("Data Location (e.g. Settings, Decks, Quests)", ForgeProfileProperties.getUserDir()) {
             @Override
             protected void onDirectoryChanged(String newDir) {
