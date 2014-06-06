@@ -167,7 +167,8 @@ public class FFileChooser extends FDialog {
     private void activateSelectedFile(boolean fromOkButton) {
         String filename = getSelectedFilename();
         File file = new File(filename);
-        if (file.exists() && file.isDirectory() && !fromOkButton) {
+        boolean returnDirectory = (choiceType == ChoiceType.GetDirectory);
+        if (file.exists() && file.isDirectory() && (!fromOkButton || !returnDirectory)) {
             //if directory activated not from OK button, open it within dialog
             setFileListForDir(file);
             if (lstFiles.getCount() > 0) { //select first item if any
@@ -179,7 +180,25 @@ public class FFileChooser extends FDialog {
             scrollSelectionIntoView();
             return;
         }
+
+        //validate return value
+        if (returnDirectory) {
+            if (!file.exists() || !file.isDirectory()) {
+                FOptionPane.showErrorDialog("No directory exists with the selected path.", "Invalid Directory");
+                return;
+            }
+        }
+        else {
+            if ((!file.exists() && choiceType == ChoiceType.OpenFile) || file.isDirectory()) {
+                FOptionPane.showErrorDialog("No file exists with the selected path.", "Invalid File");
+                return;
+            }
+        }
+
         hide();
+        if (returnDirectory) {
+            filename += File.separator; //re-append separator if returning directory
+        }
         callback.run(filename);
     }
 
