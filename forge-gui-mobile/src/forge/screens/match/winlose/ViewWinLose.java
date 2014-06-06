@@ -1,5 +1,6 @@
 package forge.screens.match.winlose;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
@@ -205,5 +206,14 @@ public class ViewWinLose extends FOverlay {
                 y += LBL_HEIGHT;
             }
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Keys.ESCAPE || keyCode == Keys.BACK) {
+            btnQuit.trigger(); //quit on escape or back
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }
