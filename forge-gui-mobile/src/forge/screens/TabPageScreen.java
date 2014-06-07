@@ -128,9 +128,9 @@ public class TabPageScreen extends FScreen {
         private static final FSkinColor TAB_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinFont TAB_FONT = FSkinFont.get(12);
 
-        private TabPageScreen parentScreen;
-        private final String caption;
-        private final FImage icon;
+        protected TabPageScreen parentScreen;
+        protected String caption;
+        protected FImage icon;
 
         protected TabPage(String caption0, FImage icon0) {
             caption = caption0;
