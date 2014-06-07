@@ -13555,6 +13555,7 @@ forge-gui/res/cardsfolder/t/timberpack_wolf.txt -text
 forge-gui/res/cardsfolder/t/timberwatch_elf.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/time_and_tide.txt -text
 forge-gui/res/cardsfolder/t/time_bomb.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/t/time_distortion.txt -text
 forge-gui/res/cardsfolder/t/time_ebb.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/time_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/t/time_of_heroes.txt svneol=native#text/plain

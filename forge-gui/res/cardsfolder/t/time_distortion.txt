@@ -1,0 +1,8 @@
+Name:Time Distortion
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ TrigReverse | TriggerDescription$ When you encounter CARDNAME, reverse the game's turn order. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise. Then planeswalk away from this phenomenon.)
+SVar:TrigReverse:AB$ ReverseTurnOrder | Cost$ 0 | SubAbility$ PWAway
+SVar:PWAway:DB$ Planeswalk | Cost$ 0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/time_distortion.jpg
+Oracle:When you encounter Time Distortion, reverse the game's turn order. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise. Then planeswalk away from this phenomenon.)

@@ -111,6 +111,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.RestartGame, RestartGameAi.class);
         apiToClass.put(ApiType.Reveal, RevealAi.class);
         apiToClass.put(ApiType.RevealHand, RevealHandAi.class);
+        apiToClass.put(ApiType.ReverseTurnOrder, AlwaysPlayAi.class);
         apiToClass.put(ApiType.RollPlanarDice, RollPlanarDiceAi.class);
         apiToClass.put(ApiType.RunSVarAbility, AlwaysPlayAi.class);
         apiToClass.put(ApiType.Sacrifice, SacrificeAi.class);
