@@ -49,7 +49,7 @@ public abstract class FOverlay extends FContainer {
             overlays.push(this);
         }
         else {
-            overlays.pop();
+            overlays.remove(this);
         }
         super.setVisible(visible0);
     }
