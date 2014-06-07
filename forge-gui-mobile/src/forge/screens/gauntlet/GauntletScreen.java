@@ -5,7 +5,7 @@ import forge.screens.LaunchScreen;
 
 public class GauntletScreen extends LaunchScreen {
     public GauntletScreen() {
-        super("Gauntlet");
+        super("Gauntlets");
     }
 
     @Override

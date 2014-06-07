@@ -24,7 +24,7 @@ public abstract class LaunchScreen extends FScreen {
     private static final float IMAGE_WIDTH = FSkinImage.BTN_START_UP.getWidth() * IMAGE_HEIGHT / FSkinImage.BTN_START_UP.getHeight();
     private static final float PADDING = IMAGE_HEIGHT * 0.025f;
 
-    private final StartButton btnStart;
+    protected final StartButton btnStart;
     private boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
@@ -78,7 +78,7 @@ public abstract class LaunchScreen extends FScreen {
         });
     }
 
-    private class StartButton extends FDisplayObject {
+    protected class StartButton extends FDisplayObject {
         private boolean pressed;
 
         /**

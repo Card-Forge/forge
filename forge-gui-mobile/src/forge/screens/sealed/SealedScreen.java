@@ -5,7 +5,7 @@ import forge.screens.LaunchScreen;
 
 public class SealedScreen extends LaunchScreen {
     public SealedScreen() {
-        super("Sealed");
+        super("Sealed Deck");
     }
 
     @Override

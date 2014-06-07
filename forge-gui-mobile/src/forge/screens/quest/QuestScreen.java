@@ -5,7 +5,7 @@ import forge.screens.LaunchScreen;
 
 public class QuestScreen extends LaunchScreen {
     public QuestScreen() {
-        super("Quest");
+        super("Quest Mode");
     }
 
     @Override

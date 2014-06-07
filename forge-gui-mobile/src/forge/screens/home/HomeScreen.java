@@ -31,25 +31,25 @@ public class HomeScreen extends FScreen {
                 Forge.openScreen(new ConstructedScreen());
             }
         }, true);
-        addButton("Draft", new FEventHandler() {
+        addButton("Booster Draft", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new DraftScreen());
             }
-        }, false);
-        addButton("Sealed", new FEventHandler() {
+        }, true);
+        addButton("Sealed Deck", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new SealedScreen());
             }
         }, false);
-        addButton("Quest", new FEventHandler() {
+        addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new QuestScreen());
             }
         }, false);
-        addButton("Gauntlet", new FEventHandler() {
+        addButton("Gauntlets", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new GauntletScreen());
