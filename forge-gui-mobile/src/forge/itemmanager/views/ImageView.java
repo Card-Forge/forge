@@ -435,7 +435,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         float gap = (MAX_COLUMN_COUNT - columnCount) / 2 + Utils.scaleX(2); //more items per row == less gap between them
         float itemWidth = (groupWidth + gap) / columnCount - gap;
-        itemWidth *= (1 - 0.2f / columnCount); //make smaller so part of the next card is visible so it's obvious if scrolling is needed
+        if (pileBy != null) {
+            //if showing piles, make smaller so part of the next card is visible so it's obvious if scrolling is needed
+            itemWidth *= (1 - 0.2f / columnCount);
+        }
         float itemHeight = itemWidth * FCardPanel.ASPECT_RATIO;
         float dx = itemWidth + gap;
         float dy = pileBy == null ? itemHeight + gap : itemHeight * PILE_SPACING_Y;
