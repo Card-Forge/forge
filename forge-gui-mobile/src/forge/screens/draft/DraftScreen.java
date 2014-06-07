@@ -5,6 +5,7 @@ import forge.Forge;
 import forge.GuiBase;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
+import forge.screens.LoadingOverlay;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -60,7 +61,12 @@ public class DraftScreen extends LaunchScreen {
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
-                                Forge.openScreen(new DraftingProcessScreen(draft));
+                                LoadingOverlay.show("Loading new draft...", new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Forge.openScreen(new DraftingProcessScreen(draft));
+                                    }
+                                });
                             }
                         });
                     }

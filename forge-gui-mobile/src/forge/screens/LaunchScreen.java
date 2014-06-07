@@ -7,7 +7,6 @@ import java.util.Set;
 
 import com.badlogic.gdx.Input.Keys;
 
-import forge.FThreads;
 import forge.screens.FScreen;
 import forge.screens.match.FControl;
 import forge.Forge.Graphics;
@@ -15,7 +14,6 @@ import forge.assets.FSkinImage;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.toolbox.FDisplayObject;
-import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public abstract class LaunchScreen extends FScreen {
@@ -50,29 +48,21 @@ public abstract class LaunchScreen extends FScreen {
         if (creatingMatch) { return; }
         creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
 
-        final LoadingOverlay loader = new LoadingOverlay("Loading new game...");
-        loader.show(); //show loading overlay then delay starting game so UI can respond
-        ThreadUtil.invokeInGameThread(new Runnable() {
+        LoadingOverlay.show("Loading new game...", new Runnable() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        LaunchParams launchParams = new LaunchParams();
-                        if (buildLaunchParams(launchParams)) {
-                            if (launchParams.gameType == null) {
-                                throw new RuntimeException("Must set launchParams.gameType");
-                            }
-                            if (launchParams.players.isEmpty()) {
-                                throw new RuntimeException("Must add at least one player to launchParams.players");
-                            }
-
-                            FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
-                        }
-                        loader.hide();
-                        creatingMatch = false;
+                LaunchParams launchParams = new LaunchParams();
+                if (buildLaunchParams(launchParams)) {
+                    if (launchParams.gameType == null) {
+                        throw new RuntimeException("Must set launchParams.gameType");
                     }
-                });
+                    if (launchParams.players.isEmpty()) {
+                        throw new RuntimeException("Must add at least one player to launchParams.players");
+                    }
+
+                    FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
+                }
+                creatingMatch = false;
             }
         });
     }

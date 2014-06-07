@@ -2,6 +2,7 @@ package forge.screens;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -10,6 +11,7 @@ import forge.assets.FSkinImage;
 import forge.screens.home.HomeScreen;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public class LoadingOverlay extends FOverlay {
@@ -17,9 +19,26 @@ public class LoadingOverlay extends FOverlay {
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.75f);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
 
+    public static void show(String caption0, final Runnable runnable) {
+        final LoadingOverlay loader = new LoadingOverlay(caption0);
+        loader.show(); //show loading overlay then delay running remaining logic so UI can respond
+        ThreadUtil.invokeInGameThread(new Runnable() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        runnable.run();
+                        loader.hide();
+                    }
+                });
+            }
+        });
+    }
+
     private final String caption;
 
-    public LoadingOverlay(String caption0) {
+    private LoadingOverlay(String caption0) {
         caption = caption0;
     }
 
