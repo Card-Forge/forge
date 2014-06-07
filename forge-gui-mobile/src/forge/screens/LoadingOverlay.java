@@ -1,4 +1,4 @@
-package forge.screens.match;
+package forge.screens;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
@@ -12,10 +12,16 @@ import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
 import forge.util.Utils;
 
-public class MatchLoader extends FOverlay {
+public class LoadingOverlay extends FOverlay {
     private static final FSkinFont FONT = FSkinFont.get(22);
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.75f);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+
+    private final String caption;
+
+    public LoadingOverlay(String caption0) {
+        caption = caption0;
+    }
 
     @Override
     protected void doLayout(float width, float height) {
@@ -38,6 +44,6 @@ public class MatchLoader extends FOverlay {
         y += padding;
         g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
         y += logoSize + padding;
-        g.drawText("Loading new game...", FONT, FORE_COLOR, x, y, w, getHeight(), false, HAlignment.CENTER, false);
+        g.drawText(caption, FONT, FORE_COLOR, x, y, w, getHeight(), false, HAlignment.CENTER, false);
     }
 }

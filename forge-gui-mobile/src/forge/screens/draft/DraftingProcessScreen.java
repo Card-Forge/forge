@@ -32,7 +32,7 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
         //create starting point for draft deck with lands in sideboard
         deck = new Deck();
         deck.getOrCreate(DeckSection.Sideboard);
-
+/*
         final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
         final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
         final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
@@ -52,7 +52,7 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
             else {
                 deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
             }
-        }
+        }*/
 
         //show initial cards in card managers
         getPackPage().showChoices();

@@ -1160,6 +1160,7 @@ forge-gui-mobile/src/forge/menu/FSubMenu.java -text
 forge-gui-mobile/src/forge/menu/FTooltip.java -text
 forge-gui-mobile/src/forge/screens/FScreen.java -text
 forge-gui-mobile/src/forge/screens/LaunchScreen.java -text
+forge-gui-mobile/src/forge/screens/LoadingOverlay.java -text
 forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
@@ -1172,7 +1173,6 @@ forge-gui-mobile/src/forge/screens/draft/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
 forge-gui-mobile/src/forge/screens/match/FControl.java -text
-forge-gui-mobile/src/forge/screens/match/MatchLoader.java -text
 forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAssignDamage.java -text
 forge-gui-mobile/src/forge/screens/match/views/VAvatar.java -text

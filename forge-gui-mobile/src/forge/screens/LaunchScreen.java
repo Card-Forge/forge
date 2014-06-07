@@ -10,7 +10,6 @@ import com.badlogic.gdx.Input.Keys;
 import forge.FThreads;
 import forge.screens.FScreen;
 import forge.screens.match.FControl;
-import forge.screens.match.MatchLoader;
 import forge.Forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.game.GameType;
@@ -51,7 +50,7 @@ public abstract class LaunchScreen extends FScreen {
         if (creatingMatch) { return; }
         creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
 
-        final MatchLoader loader = new MatchLoader();
+        final LoadingOverlay loader = new LoadingOverlay("Loading new game...");
         loader.show(); //show loading overlay then delay starting game so UI can respond
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
