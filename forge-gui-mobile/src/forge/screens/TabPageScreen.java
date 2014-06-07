@@ -16,26 +16,27 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
-public class TabPageScreen extends FScreen {
-    private final TabPage[] tabPages;
-    private TabPage selectedPage;
+public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
+    protected final TabPage<T>[] tabPages;
+    private TabPage<T> selectedPage;
 
-    public TabPageScreen(TabPage[] tabPages0) {
-        super(new TabHeader(tabPages0));
+    @SuppressWarnings("unchecked")
+    public TabPageScreen(TabPage<T>[] tabPages0) {
+        super(new TabHeader<T>(tabPages0));
 
         tabPages = tabPages0;
-        for (TabPage tabPage : tabPages) {
-            tabPage.parentScreen = this;
+        for (TabPage<T> tabPage : tabPages) {
+            tabPage.parentScreen = (T)this;
             add(tabPage);
             tabPage.setVisible(false);
         }
         setSelectedPage(tabPages[0]);
     }
 
-    public TabPage getSelectedPage() {
+    public TabPage<T> getSelectedPage() {
         return selectedPage;
     }
-    public void setSelectedPage(TabPage tabPage0) {
+    public void setSelectedPage(TabPage<T> tabPage0) {
         if (selectedPage == tabPage0) { return; }
 
         if (selectedPage != null) {
@@ -50,12 +51,12 @@ public class TabPageScreen extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         height -= startY;
-        for (TabPage tabPage : tabPages) {
+        for (TabPage<T> tabPage : tabPages) {
             tabPage.setBounds(0, startY, width, height);
         }
     }
 
-    private static class TabHeader extends Header {
+    private static class TabHeader<T extends TabPageScreen<T>> extends Header {
         public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
         public static final float TAB_WIDTH = Math.round(HEIGHT * 1.2f);
         private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
@@ -64,7 +65,7 @@ public class TabPageScreen extends FScreen {
         private final FLabel btnBack;
         private final FScrollPane scroller;
 
-        public TabHeader(TabPage[] tabPages) {
+        public TabHeader(TabPage<T>[] tabPages) {
             scroller = add(new FScrollPane() {
                 @Override
                 protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -90,7 +91,7 @@ public class TabPageScreen extends FScreen {
             }).build());
             btnBack.setSize(BACK_BUTTON_WIDTH, HEIGHT);
 
-            for (TabPage tabPage : tabPages) {
+            for (TabPage<T> tabPage : tabPages) {
                 scroller.add(tabPage.createTab());
             }
         }
@@ -122,13 +123,13 @@ public class TabPageScreen extends FScreen {
         }
     }
 
-    public static abstract class TabPage extends FContainer {
+    public static abstract class TabPage<T extends TabPageScreen<T>> extends FContainer {
         private static final float TAB_PADDING = TabHeader.HEIGHT * 0.1f;
         private static final FSkinColor SEL_TAB_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
         private static final FSkinColor TAB_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinFont TAB_FONT = FSkinFont.get(12);
 
-        protected TabPageScreen parentScreen;
+        protected T parentScreen;
         protected String caption;
         protected FImage icon;
 

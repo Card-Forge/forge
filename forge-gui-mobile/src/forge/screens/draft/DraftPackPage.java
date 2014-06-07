@@ -1,23 +1,19 @@
 package forge.screens.draft;
 
 import forge.assets.FSkinImage;
-import forge.item.PaperCard;
+import forge.deck.CardPool;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.screens.TabPageScreen.TabPage;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.ItemPool;
 
-public class CurrentPackPage extends TabPage {
-    private final BoosterDraft draft;
+public class DraftPackPage extends TabPage<DraftingProcessScreen> {
     private final CardManager lstPack = add(new CardManager(false));
 
-    protected CurrentPackPage(BoosterDraft draft0) {
+    protected DraftPackPage() {
         super("Pack 1", FSkinImage.PACK);
-
-        draft = draft0;
 
         //hide filters and options panel so more of pack is visible by default
         lstPack.setHideViewOptions(1, true);
@@ -27,32 +23,31 @@ public class CurrentPackPage extends TabPage {
         lstPack.setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                parentScreen.getMainPage().addCard(lstPack.getSelectedItem());
                 pickSelectedCard();
             }
         });
-        showChoices(draft.nextChoice());
     }
 
-    private void showChoices(final ItemPool<PaperCard> list) {
+    public void showChoices() {
+        BoosterDraft draft = parentScreen.getDraft();
+        CardPool pool = draft.nextChoice();
         int packNumber = draft.getCurrentBoosterIndex() + 1;
         caption = "Pack " + packNumber;
-        lstPack.setPool(list);
+        lstPack.setPool(pool);
     }
 
     private void pickSelectedCard() {
+        BoosterDraft draft = parentScreen.getDraft();
         draft.setChoice(lstPack.getSelectedItem());
 
         if (draft.hasNextChoice()) {
-            showChoices(draft.nextChoice());
+            showChoices();
         }
         else {
             draft.finishedDrafting();
-            saveDraft();
+            parentScreen.saveDraft();
         }
-    }
-
-    private void saveDraft() {
-        //TODO
     }
 
     @Override

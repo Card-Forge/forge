@@ -1164,8 +1164,8 @@ forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
-forge-gui-mobile/src/forge/screens/draft/CurrentPackPage.java -text
-forge-gui-mobile/src/forge/screens/draft/DraftDeckPage.java -text
+forge-gui-mobile/src/forge/screens/draft/DraftMainPage.java -text
+forge-gui-mobile/src/forge/screens/draft/DraftPackPage.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftSideboardPage.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftingProcessScreen.java -text

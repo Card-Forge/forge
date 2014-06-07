@@ -23,7 +23,7 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Utils;
 
-public class SettingsPage extends TabPage {
+public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<Setting>());
 
     public SettingsPage() {

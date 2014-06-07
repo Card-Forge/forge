@@ -7,7 +7,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.screens.TabPageScreen;
 import forge.util.Utils;
 
-public class SettingsScreen extends TabPageScreen {
+public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     public static final float INSETS_FACTOR = 0.025f;
     public static final FSkinFont DESC_FONT = FSkinFont.get(11);
     public static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.5f);
@@ -23,6 +23,7 @@ public class SettingsScreen extends TabPageScreen {
         Forge.openScreen(settingsScreen);
     }
 
+    @SuppressWarnings("unchecked")
     private SettingsScreen() {
         super(new TabPage[] {
                 new SettingsPage(),
