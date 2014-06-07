@@ -365,8 +365,13 @@ public class FFileChooser extends FDialog {
                         activateSelectedFile(false);
                         return true;
                     }
+
                     txtFilename.setText(value.getAbsolutePath());
                     prevTapIndex = index;
+
+                    if (value.isDirectory() && x < getItemHeight() + 2 * FList.PADDING) {
+                        activateSelectedFile(false); //open folders if icon single tapped
+                    }
                     return true;
                 }
 
