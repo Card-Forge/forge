@@ -242,6 +242,43 @@ public class FFileChooser extends FDialog {
         }
     }
 
+    private void renameFile(final File file) {
+        final File dir = file.getParentFile();
+        if (dir == null) {
+            FOptionPane.showErrorDialog("Cannot rename file in invalid folder.", "Invalid Folder");
+            return;
+        }
+
+        String message, title;
+        if (file.isDirectory()) {
+            message = "Enter new name for folder:";
+            title = "Rename Folder";
+        }
+        else {
+            message = "Enter new name for file:";
+            title = "Rename File";
+        }
+        FOptionPane.showInputDialog(message, title, null, file.getName(), new Callback<String>() {
+            @Override
+            public void run(String result) {
+                if (StringUtils.isEmpty(result)) { return; }
+
+                try {
+                    File newFile = new File(dir, result);
+                    if (file.renameTo(newFile)) {
+                        txtFilename.setText(newFile.getAbsolutePath());
+                        refreshFileList();
+                        return;
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                FOptionPane.showErrorDialog("\"" + result + "\" is not a valid name.", "Invalid Name");
+            }
+        });
+    }
+
     private void deleteFile(final Integer index, final File file) {
         FOptionPane.showConfirmDialog("Are you sure you wish to proceed with delete? This action cannot be undone.",
                 "Delete " + (file.isDirectory() ? "Folder" : "File"), "Delete", "Cancel", new Callback<Boolean>() {
@@ -339,7 +376,15 @@ public class FFileChooser extends FDialog {
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            addItem(new FMenuItem("Delete " + (value.isDirectory() ? "Folder" : "File"), FSkinImage.DELETE,
+                            String suffix = value.isDirectory() ? " Folder" : " File";
+                            addItem(new FMenuItem("Rename" + suffix, FSkinImage.EDIT,
+                                    new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    renameFile(value);
+                                }
+                            }));
+                            addItem(new FMenuItem("Delete" + suffix, FSkinImage.DELETE,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
