@@ -45,6 +45,7 @@ public class DraftPackPage extends TabPage<DraftingProcessScreen> {
             showChoices();
         }
         else {
+            tab.setVisible(false); //hide this tab page when finished drafting
             draft.finishedDrafting();
             parentScreen.saveDraft();
         }

@@ -81,6 +81,8 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
     }
 
     public void saveDraft() {
+        if (saved) { return; }
+
         FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON, new Callback<String>() {
             @Override
             public void run(final String name) {
@@ -131,6 +133,7 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
     public void onClose(Callback<Boolean> canCloseCallback) {
         if (saved || canCloseCallback == null) {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
+            return;
         }
         FOptionPane.showConfirmDialog("This will end the current draft and you will not be able to resume.\n\n" +
                 "Leave anyway?", "Leave Draft?", "Leave", "Cancel", false, canCloseCallback);
