@@ -61,7 +61,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private final Class<T> genericType;
     private ItemManagerConfig config;
-    private String caption, ratio;
+    private String caption = "Items";
+    private String ratio = "(0 / 0)";
 
     private final ItemFilter<? extends T> mainSearchFilter;
 
