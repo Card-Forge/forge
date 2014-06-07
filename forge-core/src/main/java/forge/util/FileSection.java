@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * TODO: Write javadoc for this type.
  * 
@@ -69,13 +71,15 @@ public class FileSection {
     }
     
     public static Map<String, String> parseToMap(final String line, final String kvSeparator, final String pairSeparator) {
-        final String[] pairs = line.split(Pattern.quote(pairSeparator));
-        final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
         Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-
-        for (final String dd : pairs) {
-            final String[] v = splitter.split(dd, 2);
-            result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
+        if (!StringUtils.isEmpty(line)) {
+            final String[] pairs = line.split(Pattern.quote(pairSeparator));
+            final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
+    
+            for (final String dd : pairs) {
+                final String[] v = splitter.split(dd, 2);
+                result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
+            }
         }
         return result;
     }

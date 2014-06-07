@@ -92,18 +92,8 @@ public final class FileUtil {
         return dir.delete();
     }
 
-    /**
-     * <p>
-     * writeFile.
-     * </p>
-     * 
-     * @param filename
-     *            a {@link java.lang.String} object.
-     * @param data
-     *            a {@link java.util.List} object.
-     */
-    public static void writeFile(final String filename, final List<String> data) {
-        FileUtil.writeFile(new File(filename), data);
+    public static void writeFile(String filename, String text) {
+        FileUtil.writeFile(new File(filename), text);
     }
 
     public static void writeFile(File file, String text) {
@@ -114,6 +104,20 @@ public final class FileUtil {
         } catch (final Exception ex) {
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
+    }
+
+    /**
+     * <p>
+     * writeFile.
+     * </p>
+     * 
+     * @param filename
+     *            a {@link java.lang.String} object.
+     * @param data
+     *            a {@link java.util.List} object.
+     */
+    public static void writeFile(String filename, List<String> data) {
+        FileUtil.writeFile(new File(filename), data);
     }
 
     // writes each element of ArrayList on a separate line

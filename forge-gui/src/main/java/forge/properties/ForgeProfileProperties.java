@@ -46,7 +46,7 @@ public class ForgeProfileProperties {
     private static final String CACHE_DIR_KEY     = "cacheDir";
     private static final String CARD_PICS_DIR_KEY = "cardPicsDir";
     private static final String CARD_PICS_SUB_DIRS_KEY = "cardPicsSubDirs";
-    private static final String SERVER_PORT = "serverPort";
+    private static final String SERVER_PORT_KEY = "serverPort";
 
     private ForgeProfileProperties() {
         //prevent initializing static class
@@ -64,12 +64,12 @@ public class ForgeProfileProperties {
             System.err.println("error while reading from profile properties file");
         }
 
-        Pair<String, String> defaults = _getDefaultDirs();
+        Pair<String, String> defaults = getDefaultDirs();
         userDir     = getDir(props, USER_DIR_KEY,      defaults.getLeft());
         cacheDir    = getDir(props, CACHE_DIR_KEY,     defaults.getRight());
-        cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
+        cardPicsDir = getDir(props, CARD_PICS_DIR_KEY, cacheDir + "pics" + File.separator + "cards" + File.separator);
         cardPicsSubDirs = getMap(props, CARD_PICS_SUB_DIRS_KEY);
-        serverPort = getInt(props, SERVER_PORT, 0);
+        serverPort = getInt(props, SERVER_PORT_KEY, 0);
 
         //ensure directories exist
         FileUtil.ensureDirectoryExists(userDir);
@@ -82,6 +82,7 @@ public class ForgeProfileProperties {
     }
     public static void setUserDir(String userDir0) {
         userDir = userDir0;
+        save();
     }
 
     public static String getCacheDir() {
@@ -93,6 +94,7 @@ public class ForgeProfileProperties {
             cardPicsDir = cacheDir0 + cardPicsDir.substring(idx + cacheDir.length());
         }
         cacheDir = cacheDir0;
+        save();
     }
 
     public static String getCardPicsDir() {
@@ -100,6 +102,7 @@ public class ForgeProfileProperties {
     }
     public static void setCardPicsDir(String cardPicsDir0) {
         cardPicsDir = cardPicsDir0; 
+        save();
     }
 
     public static Map<String, String> getCardPicsSubDirs() {
@@ -140,10 +143,10 @@ public class ForgeProfileProperties {
     }
 
     // returns a pair <userDir, cacheDir>
-    private static Pair<String, String> _getDefaultDirs() {
+    private static Pair<String, String> getDefaultDirs() {
         if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
             String assetsDir = ForgeConstants.ASSETS_DIR;
-            return Pair.of(assetsDir + "data/", assetsDir + "cache/");
+            return Pair.of(assetsDir + "data" + File.separator, assetsDir + "cache" + File.separator);
         }
 
         String osName = System.getProperty("os.name");
@@ -154,7 +157,7 @@ public class ForgeProfileProperties {
         }
         
         String fallbackDataDir = String.format("%s/.forge", homeDir);
-        
+
         if (StringUtils.containsIgnoreCase(osName, "windows")) {
             // the split between appdata and localappdata on windows is relatively recent.  If
             // localappdata is not defined, use appdata for both.  and if appdata is not defined,
@@ -167,17 +170,63 @@ public class ForgeProfileProperties {
             if (StringUtils.isEmpty(cacheRoot)) {
                 cacheRoot = appRoot;
             }
-            // just use '/' everywhere instead of file.separator.  it always works
             // the cache dir is Forge/Cache instead of just Forge since appRoot and cacheRoot might be the
             // same directory on windows and we need to distinguish them.
-            return Pair.of(String.format("%s/Forge", appRoot),
-                           String.format("%s/Forge/Cache", cacheRoot));
-        } else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
+            return Pair.of(appRoot + File.separator + "Forge", cacheRoot + File.separator + "Forge" + File.separator + "Cache");
+        }
+        else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
             return Pair.of(String.format("%s/Library/Application Support/Forge", homeDir),
                            String.format("%s/Library/Caches/Forge", homeDir));
         }
 
         // Linux and everything else
         return Pair.of(fallbackDataDir, String.format("%s/.cache/forge", homeDir));
+    }
+
+    private static void save() {
+        Pair<String, String> defaults = getDefaultDirs();
+        String defaultUserDir = defaults.getLeft() + File.separator;
+        String defaultCacheDir = defaults.getRight() + File.separator;
+        String defaultCardPicsDir = defaultCacheDir + "pics" + File.separator + "cards" + File.separator;
+
+        //only append values that aren't equal to defaults
+        StringBuilder sb = new StringBuilder();
+        if (!userDir.equals(defaultUserDir)) { //ensure backslashes are escaped
+            sb.append(USER_DIR_KEY + "=" + userDir.replace("\\", "\\\\") + "\n");
+        }
+        if (!cacheDir.equals(defaultCacheDir)) {
+            sb.append(CACHE_DIR_KEY + "=" + cacheDir.replace("\\", "\\\\") + "\n");
+        }
+        if (!cardPicsDir.equals(defaultCardPicsDir)) {
+            sb.append(CARD_PICS_DIR_KEY + "=" + cardPicsDir.replace("\\", "\\\\") + "\n");
+        }
+        if (cardPicsSubDirs.size() > 0) {
+            sb.append(CARD_PICS_SUB_DIRS_KEY + "=");
+            boolean needDelim = false;
+            for (Map.Entry<String, String> entry : cardPicsSubDirs.entrySet()) {
+                if (needDelim) {
+                    sb.append("|");
+                }
+                sb.append(entry.getKey() + "->" + entry.getValue());
+            }
+            sb.append("\n");
+        }
+        if (serverPort != 0) {
+            sb.append(SERVER_PORT_KEY + "=" + serverPort);
+        }
+        if (sb.length() > 0) {
+            FileUtil.writeFile(ForgeConstants.PROFILE_FILE, sb.toString());
+        }
+        else { //delete file if empty
+            try {
+                File file = new File(ForgeConstants.PROFILE_FILE);
+                if (file.exists()) {
+                    file.delete();
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
