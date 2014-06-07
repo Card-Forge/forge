@@ -912,7 +912,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         choice = mostExpensive;
                     }
                     //option to hold removal instead only applies for single targeted removal
-                    if (sa.isSpell() && tgt.getMaxTargets(source, sa) == 1) {
+                    if (!sa.isTrigger() && tgt.getMaxTargets(source, sa) == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
                             return false;
                         }

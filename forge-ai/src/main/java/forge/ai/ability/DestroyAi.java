@@ -157,7 +157,7 @@ public class DestroyAi extends SpellAbilityAi {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
                 //option to hold removal instead only applies for single targeted removal
-                if (sa.isSpell() && abTgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
+                if (!sa.isTrigger() && abTgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
                     if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, ZoneType.Graveyard)) {
                         return false;
                     }
