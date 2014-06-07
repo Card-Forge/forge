@@ -11,11 +11,11 @@ public class DraftDeckPage extends TabPage {
     private final CardManager lstDeck = add(new CardManager(false));
 
     protected DraftDeckPage(BoosterDraft draft0) {
-        super("Deck", FSkinImage.DECKLIST);
+        super("Main (0)", FSkinImage.DECKLIST);
 
         draft = draft0;
 
-        lstDeck.setCaption("Deck");
+        lstDeck.setCaption("Main Deck");
         lstDeck.setAlwaysNonUnique(true);
         lstDeck.setup(ItemManagerConfig.DRAFT_POOL);
     }

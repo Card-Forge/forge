@@ -11,7 +11,7 @@ public class DraftSideboardPage extends TabPage {
     private final CardManager lstSideboard = add(new CardManager(false));
 
     protected DraftSideboardPage(BoosterDraft draft0) {
-        super("Sideboard", FSkinImage.FLASHBACK);
+        super("Side (0)", FSkinImage.FLASHBACK);
 
         draft = draft0;
 
