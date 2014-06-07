@@ -25,7 +25,6 @@ public abstract class LaunchScreen extends FScreen {
     private static final float PADDING = IMAGE_HEIGHT * 0.025f;
 
     protected final StartButton btnStart;
-    private boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
         super(headerCaption);
@@ -48,8 +47,15 @@ public abstract class LaunchScreen extends FScreen {
     }
 
     private void startMatch() {
-        if (creatingMatch) { return; }
-        creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
+        final LaunchParams launchParams = new LaunchParams();
+        if (!buildLaunchParams(launchParams)) { return; }
+
+        if (launchParams.gameType == null) {
+            throw new RuntimeException("Must set launchParams.gameType");
+        }
+        if (launchParams.players.isEmpty()) {
+            throw new RuntimeException("Must add at least one player to launchParams.players");
+        }
 
         final MatchLoader loader = new MatchLoader();
         loader.show(); //show loading overlay then delay starting game so UI can respond
@@ -59,19 +65,8 @@ public abstract class LaunchScreen extends FScreen {
                 FThreads.invokeInEdtLater(new Runnable() {
                     @Override
                     public void run() {
-                        LaunchParams launchParams = new LaunchParams();
-                        if (buildLaunchParams(launchParams)) {
-                            if (launchParams.gameType == null) {
-                                throw new RuntimeException("Must set launchParams.gameType");
-                            }
-                            if (launchParams.players.isEmpty()) {
-                                throw new RuntimeException("Must add at least one player to launchParams.players");
-                            }
-
-                            FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
-                        }
+                        FControl.startMatch(launchParams.gameType, launchParams.appliedVariants, launchParams.players);
                         loader.hide();
-                        creatingMatch = false;
                     }
                 });
             }
