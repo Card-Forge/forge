@@ -3,10 +3,13 @@ package forge.screens.draft;
 import forge.GuiBase;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
@@ -16,7 +19,10 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.limited.BoosterDraft;
+import forge.limited.LimitedPoolType;
 import forge.model.FModel;
+import forge.util.gui.SGuiChoose;
 
 public class DraftScreen extends LaunchScreen {
     private static final float PADDING = Utils.scaleMin(5);
@@ -36,6 +42,22 @@ public class DraftScreen extends LaunchScreen {
         radSingle.setGroup(group);
         radAll.setGroup(group);
         radSingle.setSelected(true);
+
+        btnNewDraft.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
+                    @Override
+                    public void run() {
+                        final LimitedPoolType poolType = SGuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
+                        if (poolType == null) { return; }
+
+                        BoosterDraft draft = BoosterDraft.createDraft(poolType);
+                        if (draft == null) { return; }
+                    }
+                });
+            }
+        });
     }
 
     @Override
