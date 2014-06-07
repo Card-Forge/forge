@@ -145,11 +145,15 @@ public class Forge implements ApplicationListener {
             exit(); //prompt to exit if attempting to go back from home screen
             return;
         }
-        if (!currentScreen.onClose(true)) {
-            return;
-        }
-        screens.pop();
-        setCurrentScreen(screens.lastElement());
+        currentScreen.onClose(new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    screens.pop();
+                    setCurrentScreen(screens.lastElement());
+                }
+            }
+        });
     }
 
     public static void exit() {
@@ -163,13 +167,24 @@ public class Forge implements ApplicationListener {
         });
     }
 
-    public static void openScreen(FScreen screen0) {
+    public static void openScreen(final FScreen screen0) {
         if (currentScreen == screen0) { return; }
-        if (currentScreen != null && !currentScreen.onSwitchAway()) {
+
+        if (currentScreen == null) {
+            screens.push(screen0);
+            setCurrentScreen(screen0);
             return;
         }
-        screens.push(screen0);
-        setCurrentScreen(screen0);
+
+        currentScreen.onSwitchAway(new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    screens.push(screen0);
+                    setCurrentScreen(screen0);
+                }
+            }
+        });
     }
 
     public static FScreen getCurrentScreen() {
@@ -256,7 +271,7 @@ public class Forge implements ApplicationListener {
                 overlay.hide();
                 overlay = FOverlay.getTopOverlay();
             }
-            currentScreen.onClose(false);
+            currentScreen.onClose(null);
             currentScreen = null;
         }
         screens.clear();

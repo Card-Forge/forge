@@ -36,6 +36,7 @@ import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
+import forge.util.Callback;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
@@ -117,9 +118,9 @@ public class MatchScreen extends FScreen {
     }
 
     @Override
-    public boolean onClose(boolean canCancel) {
+    public void onClose(Callback<Boolean> canCloseCallback) {
         FControl.writeMatchPreferences();
-        return true;
+        super.onClose(canCloseCallback);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package forge.screens.draft;
 
+import forge.FThreads;
+import forge.Forge;
 import forge.GuiBase;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
@@ -52,8 +54,15 @@ public class DraftScreen extends LaunchScreen {
                         final LimitedPoolType poolType = SGuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
                         if (poolType == null) { return; }
 
-                        BoosterDraft draft = BoosterDraft.createDraft(poolType);
+                        final BoosterDraft draft = BoosterDraft.createDraft(poolType);
                         if (draft == null) { return; }
+
+                        FThreads.invokeInEdtLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                Forge.openScreen(new DraftingProcessScreen(draft));
+                            }
+                        });
                     }
                 });
             }

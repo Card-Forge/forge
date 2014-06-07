@@ -15,6 +15,7 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.util.Callback;
 import forge.util.Utils;
 
 public abstract class FScreen extends FContainer {
@@ -45,12 +46,14 @@ public abstract class FScreen extends FContainer {
     public void onActivate() {
     }
 
-    public boolean onSwitchAway() {
-        return true;
+    public void onSwitchAway(Callback<Boolean> canSwitchCallback) {
+        canSwitchCallback.run(true);
     }
 
-    public boolean onClose(boolean canCancel) {
-        return true;
+    public void onClose(Callback<Boolean> canCloseCallback) {
+        if (canCloseCallback != null) { //will be null if app exited
+            canCloseCallback.run(true);
+        }
     }
 
     public void showMenu() {
