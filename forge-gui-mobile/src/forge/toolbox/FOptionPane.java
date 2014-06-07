@@ -122,7 +122,9 @@ public class FOptionPane extends FDialog {
                         callback.run((T)cbInput.getSelectedItem());
                     }
                 }
-                callback.run(null);
+                else {
+                    callback.run(null);
+                }
             }
         });
         optionPane.show();
