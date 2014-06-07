@@ -42,9 +42,9 @@ public class CardRenderer {
     private static final float NAME_BOX_TINT = 0.2f;
     private static final float TEXT_BOX_TINT = 0.1f;
     public static final float PT_BOX_TINT = 0.2f;
-    private static final float MANA_COST_PADDING = Utils.scaleMin(3);
-    private static final float SET_BOX_MARGIN = Utils.scaleMin(1);
-    private static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
+    public static final float MANA_COST_PADDING = Utils.scaleMin(3);
+    public static final float SET_BOX_MARGIN = Utils.scaleMin(1);
+    public static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
     private static final float NAME_COST_THRESHOLD = Utils.scaleY(200);
 
     private static Color fromDetailColor(DetailColors detailColor) {
@@ -250,7 +250,7 @@ public class CardRenderer {
         CardFaceSymbols.drawManaCost(g, manaCost, x, y, MANA_SYMBOL_SIZE);
 
         x -= availableNameWidth + FList.PADDING;
-        y += MANA_SYMBOL_SIZE + FList.PADDING + 1;
+        y += MANA_SYMBOL_SIZE + FList.PADDING + SET_BOX_MARGIN;
 
         FSkinFont typeFont = FSkinFont.get(12);
         float availableTypeWidth = w - cardArtWidth;
@@ -314,14 +314,14 @@ public class CardRenderer {
         if (canShow) {
             y += h;
             h = 2 * TYPE_FONT.getCapHeight();
-    
+
             String set = card.getCurSetCode();
             if (!StringUtils.isEmpty(set)) {
                 float setWidth = getSetWidth(SET_FONT, set);
                 drawSetLabel(g, SET_FONT, set, card.getRarity(), x + w + padding - setWidth - SET_BOX_MARGIN, y + SET_BOX_MARGIN, setWidth, h - SET_BOX_MARGIN);
                 w -= setWidth; //reduce available width for type
             }
-    
+
             g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
         }
     }

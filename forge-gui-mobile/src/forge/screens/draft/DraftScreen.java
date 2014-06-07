@@ -10,8 +10,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FRadioButton;
-import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 import forge.assets.FSkinFont;
@@ -32,19 +30,12 @@ public class DraftScreen extends LaunchScreen {
 
     private final FLabel btnNewDraft = add(new FLabel.ButtonBuilder().text("New Booster Draft Game").font(FSkinFont.get(16)).build());
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
-    private final FRadioButton radSingle = add(new FRadioButton("Play one opponent"));
-    private final FRadioButton radAll = add(new FRadioButton("Play all 7 opponents"));
 
     public DraftScreen() {
         super("Booster Draft");
 
         lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
-
-        RadioButtonGroup group = new RadioButtonGroup();
-        radSingle.setGroup(group);
-        radAll.setGroup(group);
-        radSingle.setSelected(true);
 
         btnNewDraft.setCommand(new FEventHandler() {
             @Override
@@ -82,12 +73,7 @@ public class DraftScreen extends LaunchScreen {
         float w = width - 2 * PADDING;
         btnNewDraft.setBounds(x, y, w, btnNewDraft.getAutoSizeBounds().height * 1.2f);
         y += btnNewDraft.getHeight() + PADDING;
-        float radioButtonWidth = (w - PADDING) / 2;
-        float radioButtonHeight = radSingle.getAutoSizeBounds().height;
-        lstDecks.setBounds(x, y, w, height - y - PADDING - radioButtonHeight);
-        y += lstDecks.getHeight() + PADDING;
-        radSingle.setBounds(x, y, radioButtonWidth, radioButtonHeight);
-        radAll.setBounds(x + radioButtonWidth, y, radioButtonWidth, radioButtonHeight);
+        lstDecks.setBounds(x, y, w, height - y - PADDING);
     }
 
     @Override
@@ -108,11 +94,11 @@ public class DraftScreen extends LaunchScreen {
 
         FModel.getGauntletMini().resetGauntletDraft();
 
-        if (radAll.isSelected()) {
+        /*if (radAll.isSelected()) {
             int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
             FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
             return false;
-        }
+        }*/
 
         final int aiIndex = (int) Math.floor(Math.random() * 7);
         DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
