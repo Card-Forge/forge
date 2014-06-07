@@ -44,6 +44,16 @@ public class CardZoom extends FOverlay {
     }
 
     @Override
+    public boolean fling(float velocityX, float velocityY) {
+        //allow changing from Zoom to Details and back with a quick fling action
+        if (Math.abs(velocityX) > Math.abs(velocityY)) {
+            zoomMode = velocityX < 0;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void drawOverlay(Graphics g) {
         float w = getWidth();
         float h = TAB_HEIGHT;
