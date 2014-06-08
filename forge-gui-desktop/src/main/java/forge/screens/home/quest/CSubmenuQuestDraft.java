@@ -93,6 +93,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
                     public void run() { CSubmenuQuestDraft.this.endTournamentAndAwardPrizes(); } });
         
         QuestAchievements achievements = FModel.getQuest().getAchievements();
+        FModel.getQuest().getDraftDecks();
         
         if (achievements == null) {
             view.setMode(Mode.EMPTY);
@@ -533,10 +534,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         QuestEventDraft draftEvent = SSubmenuQuestUtil.getDraftEvent();
         
         long creditsAvailable = FModel.getQuest().getAssets().getCredits();
-        if (creditsAvailable < draftEvent.getEntryFee()) {
+        /*if (creditsAvailable < draftEvent.getEntryFee()) {
             FOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0));
             return;
-        }
+        }*/
         
         boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), new String[] { "Yes", "No" }, 1) == 0;
         
@@ -563,6 +564,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
     }
     
     private void startTournament() {
+        
+        FModel.getQuest().save();
         
         String message = GameType.QuestDraft.getDecksFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
         if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {

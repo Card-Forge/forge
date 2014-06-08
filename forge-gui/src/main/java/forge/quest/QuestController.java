@@ -20,6 +20,7 @@ package forge.quest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -151,6 +152,12 @@ public class QuestController {
     }
     
     public IStorage<DeckGroup> getDraftDecks() {
+        if (draftDecks == null) {
+            draftDecks = new QuestDeckGroupMap(new HashMap<String, DeckGroup>());
+        }
+        if (this.getAchievements().getCurrentDraftIndex() == -1 || this.getAchievements().getCurrentDraft() == null) {
+            draftDecks.delete(QuestEventDraft.DECK_NAME);
+        }
         return draftDecks;
     }
 

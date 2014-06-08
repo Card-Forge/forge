@@ -306,7 +306,7 @@ public class QuestDataIO {
             }
 
             // pet manager will be re-engineered here
-
+        case 5:
         case 6:
             // have to convert completed challenges list members to strings.
             for(int i = qA.getLockedChallenges().size()-1; i >= 0; i-- ) {
@@ -320,8 +320,11 @@ public class QuestDataIO {
                     qA.getCurrentChallenges().set(i, lc.toString());
             }
             
+        case 7:
         case 8:
+            System.out.println("UPDATE");
             QuestDataIO.setFinalField(QuestAssets.class, "draftDecks", qS, new HashMap<String, DeckGroup>());
+            qS.getDraftDeckStorage();
             
         default:
             break;

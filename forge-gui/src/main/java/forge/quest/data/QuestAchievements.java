@@ -257,7 +257,12 @@ public class QuestAchievements {
     }
     
     public QuestEventDraft getCurrentDraft() {
-        if (drafts.size() == 0) {
+        if (drafts == null || drafts.size() == 0) {
+            return null;
+        }
+        if (currentDraft > drafts.size() - 1) {
+            currentDraft = -1;
+            FModel.getQuest().getDraftDecks().delete(QuestEventDraft.DECK_NAME);
             return null;
         }
         return drafts.get(currentDraft);

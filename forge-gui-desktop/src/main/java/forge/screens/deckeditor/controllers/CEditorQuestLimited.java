@@ -117,7 +117,7 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
                 return new DeckGroup("");
             }
         };
-
+        
         this.controller = new DeckController<DeckGroup>(questData0.getDraftDecks(), this, newCreator);
         controller.getView().getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
         controller.setModel(questData0.getDraftDecks().get(QuestEventDraft.DECK_NAME));
@@ -271,6 +271,7 @@ public final class CEditorQuestLimited extends ACEditorBase<PaperCard, DeckGroup
             FModel.getQuest().save();
             return true;
         }
+        FModel.getQuest().save();
         return false;
     }
 
