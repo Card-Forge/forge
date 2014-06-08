@@ -794,6 +794,8 @@ public class PlayerControllerHuman extends PlayerController {
             return ("Result: " + value);
         }
         switch(sa.getApi()) {
+            case ChooseDirection:
+                return value;
             case ChooseNumber:
                 if (sa.hasParam("SecretlyChoose")) {
                     return value;

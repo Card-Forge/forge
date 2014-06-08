@@ -117,8 +117,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
         if (recordChoice) {
             boolean random = sa.hasParam("Random");
+            Map<Player, List<Card>> recordMap = new HashMap<Player, List<Card>>();
             if (sa.hasParam("ChoosePlayer")) {
-                Map<Player, List<Card>> recordMap = new HashMap<Player, List<Card>>();
                 for (Card card : repeatCards) {
                     Player p;
                     if (random) {
@@ -132,14 +132,40 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                         recordMap.put(p, Lists.newArrayList(card));
                     }
                 }
-                for (Entry<Player, List<Card>> entry : recordMap.entrySet()) {
-                    // Remember the player and imprint the cards
-                    source.addRemembered(entry.getKey());
-                    source.getImprinted().addAll(entry.getValue());
-                    AbilityUtils.resolve(repeat);
-                    source.removeRemembered(entry.getKey());
-                    source.getImprinted().removeAll(entry.getValue());
-                }
+            } else if (sa.hasParam("ChooseCard")) {
+                List<Card> list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                        sa.getParam("ChooseCard"), source.getController(), source);
+                String filterController = sa.getParam("FilterControlledBy");
+                // default: Starting with you and proceeding in the chosen direction
+                Player p = sa.getActivatingPlayer();
+                do {
+                    List<Card> valid = new ArrayList<Card>(list);
+                    if ("NextPlayerInChosenDirection".equals(filterController)) {
+                        valid = CardLists.filterControlledBy(valid,
+                                game.getNextPlayerAfter(p, source.getChosenDirection()));
+                    }
+                    Card card = p.getController().chooseSingleEntityForEffect(valid, sa, "Choose a card");
+                    if (recordMap.containsKey(p)) {
+                        recordMap.get(p).add(0, card);
+                    } else {
+                        recordMap.put(p, Lists.newArrayList(card));
+                    }
+                    if (source.getChosenDirection() != null) {
+                        p = game.getNextPlayerAfter(p, source.getChosenDirection());
+                    } else {
+                        p = game.getNextPlayerAfter(p);
+                    }
+                } while (!p.equals(sa.getActivatingPlayer()));
+               
+            }
+
+            for (Entry<Player, List<Card>> entry : recordMap.entrySet()) {
+                // Remember the player and imprint the cards
+                source.addRemembered(entry.getKey());
+                source.getImprinted().addAll(entry.getValue());
+                AbilityUtils.resolve(repeat);
+                source.removeRemembered(entry.getKey());
+                source.getImprinted().removeAll(entry.getValue());
             }
         }
     }

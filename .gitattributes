@@ -48,6 +48,7 @@ forge-ai/src/main/java/forge/ai/ability/CharmAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseCardAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseCardNameAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseColorAi.java -text
+forge-ai/src/main/java/forge/ai/ability/ChooseDirectionAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseGenericEffectAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChooseNumberAi.java -text
 forge-ai/src/main/java/forge/ai/ability/ChoosePlayerAi.java -text
@@ -307,6 +308,7 @@ forge-game/src/main/java/forge/game/ability/effects/CharmEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChooseCardEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChooseCardNameEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChooseColorEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ChooseDirectionEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChooseGenericEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChooseNumberEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChoosePlayerEffect.java -text
@@ -9560,6 +9562,7 @@ forge-gui/res/cardsfolder/o/ordeal_of_purphoros.txt -text
 forge-gui/res/cardsfolder/o/ordeal_of_thassa.txt -text
 forge-gui/res/cardsfolder/o/order_chaos.txt -text
 forge-gui/res/cardsfolder/o/order_of_leitbur.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/o/order_of_succession.txt -text
 forge-gui/res/cardsfolder/o/order_of_the_ebon_hand.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/order_of_the_golden_cricket.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/o/order_of_the_sacred_bell.txt svneol=native#text/plain

@@ -41,6 +41,7 @@ import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.Direction;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
@@ -1534,6 +1535,23 @@ public class AiController {
         }
     }
 
+    public boolean chooseDirection(SpellAbility sa) {
+        if( sa == null || sa.getApi() == null ) {
+            throw new UnsupportedOperationException();
+        }
+        // Left:True; Right:False
+        if ("GainControl".equals(sa.getParam("AILogic")) && game.getPlayers().size() > 2) {
+            List<Card> creats = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Creature");
+            List<Card> left = CardLists.filterControlledBy(creats, game.getNextPlayerAfter(player, Direction.Left));
+            List<Card> right = CardLists.filterControlledBy(creats, game.getNextPlayerAfter(player, Direction.Right));
+            if (!left.isEmpty() || !right.isEmpty()) {
+                List<Card> all = new ArrayList<Card>(left);
+                all.addAll(right);
+                return left.contains(ComputerUtilCard.getBestCreatureAI(all));
+            }
+        }
+        return MyRandom.getRandom().nextBoolean();
+    }
 
 }
 

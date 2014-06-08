@@ -30,6 +30,7 @@ public enum ApiType {
     Charm (CharmEffect.class),
     ChooseCard (ChooseCardEffect.class),
     ChooseColor (ChooseColorEffect.class),
+    ChooseDirection (ChooseDirectionEffect.class),
     ChooseNumber (ChooseNumberEffect.class),
     ChoosePlayer (ChoosePlayerEffect.class),
     ChooseSource (ChooseSourceEffect.class),

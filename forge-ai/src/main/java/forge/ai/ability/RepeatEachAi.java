@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -11,6 +13,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /** 
@@ -113,5 +116,10 @@ public class RepeatEachAi extends SpellAbilityAi {
         // TODO Add some normal AI variability here
 
         return true;
+    }
+
+    @Override
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+        return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

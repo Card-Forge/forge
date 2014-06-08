@@ -207,6 +207,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int chosenNumber;
     private Player chosenPlayer;
     private List<Card> chosenCard = new ArrayList<Card>();
+    private Direction chosenDirection = null;
 
     private Card cloneOrigin = null;
     private final List<Card> clones = new ArrayList<Card>();
@@ -1725,6 +1726,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.chosenCard = c;
     }
 
+    public Direction getChosenDirection() {
+        return chosenDirection;
+    }
+
+    public void setChosenDirection(Direction chosenDirection) {
+        this.chosenDirection = chosenDirection;
+    }
+
     // used for cards like Meddling Mage...
     /**
      * <p>
@@ -1895,6 +1904,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.chosenPlayer != null) {
             sb.append("\r\n[Chosen player: ");
             sb.append(this.getChosenPlayer());
+            sb.append("]\r\n");
+        }
+
+        if (this.chosenDirection != null) {
+            sb.append("\r\n[Chosen direction: ");
+            sb.append(this.getChosenDirection());
             sb.append("]\r\n");
         }
 
@@ -5476,7 +5491,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (o instanceof Player) {
                         if (!p.equals(o)) {
                             return false;
-                          }
+                        }
                     }
                 }
             }
@@ -5485,7 +5500,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (o instanceof Player) {
                     if (!p.equals(o)) {
                         return false;
-                      }
+                    }
                 }
             }
         } else if (property.startsWith("nonRememberedPlayerCtrl")) {

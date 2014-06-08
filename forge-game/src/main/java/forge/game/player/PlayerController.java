@@ -65,6 +65,7 @@ public abstract class PlayerController {
         OddsOrEvens,
         UntapOrLeaveTapped,
         UntapTimeVault,
+        LeftOrRight,
     }
 
     protected final Game game;

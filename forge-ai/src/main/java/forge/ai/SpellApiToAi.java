@@ -31,6 +31,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.Charm, CharmAi.class);
         apiToClass.put(ApiType.ChooseCard, ChooseCardAi.class);
         apiToClass.put(ApiType.ChooseColor, ChooseColorAi.class);
+        apiToClass.put(ApiType.ChooseDirection, ChooseDirectionAi.class);
         apiToClass.put(ApiType.ChooseNumber, ChooseNumberAi.class);
         apiToClass.put(ApiType.ChoosePlayer, ChoosePlayerAi.class);
         apiToClass.put(ApiType.ChooseSource, ChooseSourceAi.class);
