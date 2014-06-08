@@ -103,7 +103,7 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
                                         finishSave(name);
                                     }
                                     else {
-                                        saveDraft(); //If no overwrite, recurse.
+                                        saveDraft(); //If no overwrite, recurse
                                     }
                                 }
                             });

@@ -69,7 +69,8 @@ public class DraftScreen extends LaunchScreen {
         btnEditDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                
+                final DeckProxy deck = lstDecks.getSelectedItem();
+                if (deck == null) { return; }
             }
         });
     }
