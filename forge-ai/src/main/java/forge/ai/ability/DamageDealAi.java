@@ -239,13 +239,6 @@ public class DamageDealAi extends DamageAiBase {
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
-        if ("PowerDmg".equals(sa.getParam("AILogic"))) {
-        	if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){
-        		sa.resetTargets();
-        		sa.getTargets().add(ai.getOpponent());
-        	}
-    		return true;
-    	}
         // target loop
         sa.resetTargets();
         TargetChoices tcs = sa.getTargets();
@@ -255,6 +248,21 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
+        if ("PowerDmg".equals(sa.getParam("AILogic"))) {
+            // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
+            if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){
+                sa.resetTargets();
+                tcs.add(enemy);
+            }
+            return true;
+        }
+        if ("ChoiceBurn".equals(sa.getParam("AILogic"))) {
+            // do not waste burns on player if other choices are present
+            if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+                tcs.add(enemy);
+                return true;
+            }
+        }
         if ("Polukranos".equals(sa.getParam("AILogic"))) {
             int dmgTaken = 0;
             List<Card> humCreatures = ai.getOpponent().getCreaturesInPlay();
