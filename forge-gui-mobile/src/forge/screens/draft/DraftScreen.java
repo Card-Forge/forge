@@ -6,30 +6,30 @@ import forge.GuiBase;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
+import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.ThreadUtil;
-import forge.util.Utils;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
+import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.filters.ItemFilter;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.model.FModel;
 import forge.util.gui.SGuiChoose;
 
 public class DraftScreen extends LaunchScreen {
-    private static final float PADDING = Utils.scaleMin(5);
-
-    private final FLabel btnNewDraft = add(new FLabel.ButtonBuilder().text("New Booster Draft Game").font(FSkinFont.get(16)).build());
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
+    private final FButton btnNewDraft = add(new FButton("New Draft"));
+    private final FButton btnEditDeck = add(new FButton("Edit Deck"));
 
     public DraftScreen() {
         super("Booster Draft");
@@ -37,6 +37,7 @@ public class DraftScreen extends LaunchScreen {
         lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
 
+        btnNewDraft.setFont(FSkinFont.get(16));
         btnNewDraft.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -64,16 +65,28 @@ public class DraftScreen extends LaunchScreen {
                 });
             }
         });
+        btnEditDeck.setFont(btnNewDraft.getFont());
+        btnEditDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                
+            }
+        });
     }
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        float x = PADDING;
-        float y = startY + PADDING;
-        float w = width - 2 * PADDING;
-        btnNewDraft.setBounds(x, y, w, btnNewDraft.getAutoSizeBounds().height * 1.2f);
-        y += btnNewDraft.getHeight() + PADDING;
-        lstDecks.setBounds(x, y, w, height - y - PADDING);
+        float x = ItemFilter.PADDING;
+        float y = startY;
+        float w = width - 2 * x;
+        float buttonWidth = (w - FDeckChooser.PADDING) / 2;
+        float buttonHeight = btnNewDraft.getAutoSizeBounds().height * 1.2f;
+        float listHeight = height - buttonHeight - y - FDeckChooser.PADDING;
+
+        lstDecks.setBounds(x, y, w, listHeight);
+        y += listHeight + FDeckChooser.PADDING;
+        btnNewDraft.setBounds(x, y, buttonWidth, buttonHeight);
+        btnEditDeck.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
     }
 
     @Override
