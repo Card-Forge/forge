@@ -6250,6 +6250,7 @@ forge-gui/res/cardsfolder/g/greenweaver_druid.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gremlin_mine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grenzo_dungeon_warden.txt -text
 forge-gui/res/cardsfolder/g/grenzos_cutthroat.txt -text
+forge-gui/res/cardsfolder/g/grenzos_rebuttal.txt -text
 forge-gui/res/cardsfolder/g/greven_il_vec.txt -text
 forge-gui/res/cardsfolder/g/grid_monitor.txt -text
 forge-gui/res/cardsfolder/g/gridlock.txt -text

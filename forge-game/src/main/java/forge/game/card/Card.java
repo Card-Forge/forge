@@ -6224,6 +6224,24 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!list.contains(this)) {
                 return false;
             }
+        } else if (property.startsWith("ControlledByPlayerInTheDirection")) {
+            final String restrictions = property.split("ControlledByPlayerInTheDirection_")[1];
+            final String[] res = restrictions.split("_");
+            final Direction direction = Direction.valueOf(res[0]);
+            Player p = null;
+            if (res.length > 1) {
+                for (Player pl : game.getPlayers()) {
+                    if (pl.isValid(res[1], sourceController, source)) {
+                        p = pl;
+                        break;
+                    }
+                }
+            } else {
+                p = sourceController;
+            }
+            if (p == null || !this.getController().equals(game.getNextPlayerAfter(p, direction))) {
+                return false;
+            }
         } else if (property.startsWith("sharesTypeWith")) {
             if (property.equals("sharesTypeWith")) {
                 if (!this.sharesTypeWith(source)) {
