@@ -261,6 +261,8 @@ public class DamageDealAi extends DamageAiBase {
             if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
                 tcs.add(enemy);
                 return true;
+            } else {
+                return false;
             }
         }
         if ("Polukranos".equals(sa.getParam("AILogic"))) {
