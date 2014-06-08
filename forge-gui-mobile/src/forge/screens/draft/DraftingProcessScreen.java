@@ -2,92 +2,39 @@ package forge.screens.draft;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.MagicColor;
 import forge.deck.Deck;
+import forge.deck.DeckEditorType;
 import forge.deck.DeckGroup;
-import forge.deck.DeckSection;
+import forge.deck.FDeckEditor;
 import forge.limited.BoosterDraft;
-import forge.limited.IBoosterDraft;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.screens.TabPageScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-import forge.util.MyRandom;
 
-public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> {
+public class DraftingProcessScreen extends FDeckEditor {
     private boolean saved;
     private final BoosterDraft draft;
-    private final Deck deck;
 
-    @SuppressWarnings("unchecked")
     public DraftingProcessScreen(BoosterDraft draft0) {
-        super(new TabPage[] {
-                new DraftPackPage(),
-                new DraftMainPage(),
-                new DraftSideboardPage()
-        });
+        super(DeckEditorType.Draft, new Deck());
         draft = draft0;
-
-        //create starting point for draft deck with lands in sideboard
-        deck = new Deck();
-        deck.getOrCreate(DeckSection.Sideboard);
-/*
-        final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
-        final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
-        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
-
-        final int landsCount = 10;
-
-        for (String landName : MagicColor.Constant.BASIC_LANDS) {
-            int numArt = FModel.getMagicDb().getCommonCards().getArtCount(landName, landSet);
-            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
-            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
-
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = minArtIndex; i <= maxArtIndex; i++) {
-                    deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
-                }
-            }
-            else {
-                deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
-            }
-        }*/
-
-        //show initial cards in card managers
-        getPackPage().showChoices();
-        getMainPage().refresh();
-        getSideboardPage().refresh();
+        getCatalogPage().refresh(); //must refresh after draft set
     }
 
-    public DraftPackPage getPackPage() {
-        return (DraftPackPage)tabPages[0];
-    }
-
-    public DraftMainPage getMainPage() {
-        return (DraftMainPage)tabPages[1];
-    }
-
-    public DraftSideboardPage getSideboardPage() {
-        return (DraftSideboardPage)tabPages[2];
-    }
-
-    public BoosterDraft getDraft() {
+    @Override
+    protected BoosterDraft getDraft() {
         return draft;
     }
 
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void saveDraft() {
+    @Override
+    protected void save() {
         if (saved) { return; }
 
         FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON, new Callback<String>() {
             @Override
             public void run(final String name) {
                 if (StringUtils.isEmpty(name)) {
-                    saveDraft(); //re-prompt if user doesn't pick a name
+                    save(); //re-prompt if user doesn't pick a name
                     return;
                 }
 
@@ -103,7 +50,7 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
                                         finishSave(name);
                                     }
                                     else {
-                                        saveDraft(); //If no overwrite, recurse
+                                        save(); //If no overwrite, recurse
                                     }
                                 }
                             });
@@ -123,7 +70,7 @@ public class DraftingProcessScreen extends TabPageScreen<DraftingProcessScreen> 
         final Deck[] computer = draft.getDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(name);
-        finishedDraft.setHumanDeck((Deck) deck.copyTo(name));
+        finishedDraft.setHumanDeck((Deck) getDeck().copyTo(name));
         finishedDraft.addAiDecks(computer);
 
         FModel.getDecks().getDraft().add(finishedDraft);

@@ -1118,6 +1118,7 @@ forge-gui-mobile/src/forge/assets/TextRenderer.java -text
 forge-gui-mobile/src/forge/card/CardFaceSymbols.java -text
 forge-gui-mobile/src/forge/card/CardRenderer.java -text
 forge-gui-mobile/src/forge/card/CardZoom.java -text
+forge-gui-mobile/src/forge/deck/DeckEditorType.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckEditor.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
@@ -1168,10 +1169,7 @@ forge-gui-mobile/src/forge/screens/SplashScreen.java -text
 forge-gui-mobile/src/forge/screens/TabPageScreen.java -text
 forge-gui-mobile/src/forge/screens/constructed/AvatarSelector.java -text
 forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
-forge-gui-mobile/src/forge/screens/draft/DraftMainPage.java -text
-forge-gui-mobile/src/forge/screens/draft/DraftPackPage.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
-forge-gui-mobile/src/forge/screens/draft/DraftSideboardPage.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
