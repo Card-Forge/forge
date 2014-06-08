@@ -115,7 +115,7 @@ public class DraftScreen extends LaunchScreen {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Draft.getDecksFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (errorMessage != null) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
+                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
                 return false;
             }
         }

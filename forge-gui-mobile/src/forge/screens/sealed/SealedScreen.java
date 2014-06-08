@@ -14,9 +14,11 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
 import forge.limited.SealedCardPoolGenerator;
 import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
 
@@ -90,7 +92,22 @@ public class SealedScreen extends LaunchScreen {
 
     @Override
     protected boolean buildLaunchParams(LaunchParams launchParams) {
-        launchParams.gameType = GameType.Sealed;
-        return false; //TODO: Support launching match
+        final DeckProxy human = lstDecks.getSelectedItem();
+        if (human == null) {
+            FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new sealed pool.", "No Deck");
+            return false;
+        }
+
+        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = GameType.Sealed.getDecksFormat().getDeckConformanceProblem(human.getDeck());
+            if (errorMessage != null) {
+                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
+                return false;
+            }
+        }
+
+        int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
+        FModel.getGauntletMini().launch(matches, human.getDeck(), GameType.Sealed);
+        return false; //prevent launching via launch screen since gauntlet handles it
     }
 }
