@@ -3,7 +3,6 @@ package forge.screens.draft;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
-import forge.deck.DeckEditorType;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
 import forge.limited.BoosterDraft;
@@ -16,7 +15,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     private final BoosterDraft draft;
 
     public DraftingProcessScreen(BoosterDraft draft0) {
-        super(DeckEditorType.Draft, new Deck());
+        super(EditorType.Draft);
         draft = draft0;
         getCatalogPage().refresh(); //must refresh after draft set
     }

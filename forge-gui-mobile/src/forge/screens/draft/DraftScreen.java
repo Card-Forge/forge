@@ -16,6 +16,8 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
+import forge.deck.FDeckEditor;
+import forge.deck.FDeckEditor.EditorType;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
@@ -71,6 +73,8 @@ public class DraftScreen extends LaunchScreen {
             public void handleEvent(FEvent e) {
                 final DeckProxy deck = lstDecks.getSelectedItem();
                 if (deck == null) { return; }
+
+                Forge.openScreen(new FDeckEditor(EditorType.Draft, deck.getDeck()));
             }
         });
     }

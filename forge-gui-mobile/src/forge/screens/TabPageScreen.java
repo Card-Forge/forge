@@ -134,13 +134,17 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         protected T parentScreen;
         protected String caption;
         protected FImage icon;
-        protected int index;
-        protected final Tab tab;
+        private int index;
+        private final Tab tab;
 
         protected TabPage(String caption0, FImage icon0) {
             caption = caption0;
             icon = icon0;
             tab = new Tab();
+        }
+
+        public void hideTab() {
+            tab.setVisible(false);
         }
 
         protected class Tab extends FDisplayObject {

@@ -15,7 +15,17 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ItemPool;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
-    private static DeckEditorPage[] getPages(DeckEditorType editorType) {
+    public enum EditorType {
+        Constructed,
+        Draft,
+        Sealed,
+        Commander,
+        Archenemy,
+        Planechase,
+        Vanguard,
+    }
+
+    private static DeckEditorPage[] getPages(EditorType editorType) {
         switch (editorType) {
         default:
         case Constructed:
@@ -66,15 +76,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    private final DeckEditorType editorType;
+    private final EditorType editorType;
     private final Deck deck;
     private CatalogPage catalogPage;
     private DeckSectionPage mainDeckPage;
     private DeckSectionPage sideboardPage;
 
-    public FDeckEditor(DeckEditorType editorType0, Deck deck0) {
+    public FDeckEditor(EditorType editorType0) {
+        this(editorType0, null);
+    }
+    public FDeckEditor(EditorType editorType0, Deck deck0) {
         super(getPages(editorType0));
         editorType = editorType0;
+        if (deck0 == null) {
+            deck0 = new Deck();
+        }
+        else {
+            if (editorType == EditorType.Draft) {
+                tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
+            }
+        }
         deck = deck0;
 
         //cache specific pages and initialize all pages after fields set
@@ -96,7 +117,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    public DeckEditorType getEditorType() {
+    public EditorType getEditorType() {
         return editorType;
     }
 
@@ -269,7 +290,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 refresh();
             }
             else {
-                tab.setVisible(false); //hide this tab page when finished drafting
+                hideTab(); //hide this tab page when finished drafting
                 draft.finishedDrafting();
                 parentScreen.save();
             }
