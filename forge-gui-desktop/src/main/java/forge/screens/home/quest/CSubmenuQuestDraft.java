@@ -534,10 +534,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         QuestEventDraft draftEvent = SSubmenuQuestUtil.getDraftEvent();
         
         long creditsAvailable = FModel.getQuest().getAssets().getCredits();
-        /*if (creditsAvailable < draftEvent.getEntryFee()) {
+        if (creditsAvailable < draftEvent.getEntryFee()) {
             FOptionPane.showMessageDialog("You need " + NUMBER_FORMATTER.format(draftEvent.getEntryFee() - creditsAvailable) + " more credits to enter this tournament.", "Not Enough Credits", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2.0));
             return;
-        }*/
+        }
         
         boolean okayToEnter = FOptionPane.showOptionDialog("This tournament costs " + draftEvent.getEntryFee() + " credits to enter.\nAre you sure you wish to enter?", "Enter Draft Tournament?", FSkin.getImage(FSkinProp.ICO_QUEST_GOLD), new String[] { "Yes", "No" }, 1) == 0;
         

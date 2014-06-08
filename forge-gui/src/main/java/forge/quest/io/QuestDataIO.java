@@ -322,9 +322,7 @@ public class QuestDataIO {
             
         case 7:
         case 8:
-            System.out.println("UPDATE");
             QuestDataIO.setFinalField(QuestAssets.class, "draftDecks", qS, new HashMap<String, DeckGroup>());
-            qS.getDraftDeckStorage();
             
         default:
             break;
