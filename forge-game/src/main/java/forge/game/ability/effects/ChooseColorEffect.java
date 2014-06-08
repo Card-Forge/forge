@@ -54,39 +54,13 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                     prompt = "Choose a color";
                 }
                 else {
-                    prompt = "Choose ";
-                    switch (cntMin) {
-                    case 1:
-                        prompt += "one";
-                        break;
-                    case 2:
-                        prompt += "two";
-                        break;
-                    case 3:
-                        prompt += "three";
-                        break;
-                    case 4:
-                        prompt += "four";
-                        break;
-                    case 5:
-                        prompt += "five";
-                        break;
-                    }
+                    prompt = "Choose " + Lang.getNumeral(cntMin);
                     if (cntMax > cntMin) {
-                        switch (cntMin) {
-                        case 2:
-                            prompt += " to two";
-                            break;
-                        case 3:
-                            prompt += " to three";
-                            break;
-                        case 4:
-                            prompt += " to four";
-                            break;
-                        case 5:
-                            prompt += " or more";
-                            break;
-                        }
+                    	if (cntMax >= MagicColor.NUMBER_OR_COLORS) {
+                    		prompt += " or more";
+                    	} else {
+                    		prompt += " to " + Lang.getNumeral(cntMax);
+                    	}
                     }
                     prompt += " colors";
                 }

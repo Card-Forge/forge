@@ -13,6 +13,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Lang;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -76,7 +78,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 for (final String type : CardType.getBasicTypes()) {
                     final List<Card> cl = CardLists.getType(land, type);
                     if (!cl.isEmpty()) {
-                        final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
+                        final String prompt = "Choose " + Lang.nounWithAmount(1, type);
                         Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false);
                         
                         if (null != c) {
