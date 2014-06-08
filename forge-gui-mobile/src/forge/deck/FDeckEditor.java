@@ -155,9 +155,29 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected DeckEditorPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(caption0, icon0);
             cardManager.setup(config);
+            cardManager.setItemActivateHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    onCardActivated(cardManager.getSelectedItem());
+                }
+            });
+        }
+
+        public void addCard(PaperCard card) {
+            cardManager.addItem(card, 1);
+            updateCaption();
+        }
+
+        public void removeCard(PaperCard card) {
+            cardManager.removeItem(card, 1);
+            updateCaption();
+        }
+
+        protected void updateCaption() {
         }
 
         protected abstract void initialize();
+        protected abstract void onCardActivated(PaperCard card);
 
         @Override
         protected void doLayout(float width, float height) {
@@ -176,13 +196,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void initialize() {
             cardManager.setCaption(getItemManagerCaption());
-            cardManager.setItemActivateHandler(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    parentScreen.getMainDeckPage().addCard(cardManager.getSelectedItem());
-                    onCardSelected();
-                }
-            });
             refresh();
         }
 
@@ -194,7 +207,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
         }
 
-        protected void onCardSelected() {
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            parentScreen.getMainDeckPage().addCard(card);
         }
     }
 
@@ -210,6 +225,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             deckSection = deckSection0;
             switch (deckSection) {
+            default:
             case Main:
                 captionPrefix = "Main";
                 cardManager.setCaption("Main Deck");
@@ -240,9 +256,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setCaption("Schemes");
                 icon = FSkinImage.POISON;
                 break;
-            default:
-                captionPrefix = "";
-                break;
             }
         }
 
@@ -252,13 +265,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             updateCaption();
         }
 
-        public void addCard(PaperCard card) {
-            cardManager.addItem(card, 1);
-            updateCaption();
+        @Override
+        protected void updateCaption() {
+            caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
         }
 
-        private void updateCaption() {
-            caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            switch (deckSection) {
+            case Main:
+                removeCard(card);
+                switch (parentScreen.getEditorType()) {
+                case Draft:
+                case Sealed:
+                    parentScreen.getSideboardPage().addCard(card);
+                    break;
+                default:
+                    if (parentScreen.getCatalogPage() != null) {
+                        parentScreen.getCatalogPage().addCard(card);
+                    }
+                    break;
+                }
+                break;
+            case Sideboard:
+                removeCard(card);
+                parentScreen.getMainDeckPage().addCard(card);
+                break;
+            default:
+                break;
+            }
         }
     }
 
@@ -287,9 +322,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         @Override
-        protected void onCardSelected() {
+        protected void onCardActivated(PaperCard card) {
+            super.onCardActivated(card);
+
             BoosterDraft draft = parentScreen.getDraft();
-            draft.setChoice(cardManager.getSelectedItem());
+            draft.setChoice(card);
 
             if (draft.hasNextChoice()) {
                 refresh();
