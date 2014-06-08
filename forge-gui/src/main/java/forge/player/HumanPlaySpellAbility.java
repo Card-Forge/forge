@@ -97,10 +97,10 @@ public class HumanPlaySpellAbility {
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
                 rollbackAbility(fromZone, zonePosition);
-                if (ability.isMadness()) {
+                if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     game.getAction().moveToGraveyard(c);
-                    ability.setMadness(false);
+                    ability.getHostCard().setMadness(false);
                 } else if (ability.getHostCard().isBestowed()) {
                     ability.getHostCard().unanimateBestow();
                 }

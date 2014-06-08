@@ -114,7 +114,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<Card> tappedForConvoke = new ArrayList<Card>();
     private Card sacrificedAsOffering = null;
     private int conspireInstances = 0;
-    private boolean madness = false;
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
 
@@ -1720,15 +1719,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getConspireInstances() {
         return this.conspireInstances;
     } // End of Conspire methods
-
-    // Madness
-    public boolean isMadness() {
-        return madness;
-    }
-
-    public void setMadness(boolean madness) {
-        this.madness = madness;
-    }
 
     public boolean isCumulativeupkeep() {
         return cumulativeupkeep;

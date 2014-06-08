@@ -1,0 +1,9 @@
+Name:Grave Scrabbler
+ManaCost:3 B
+Types:Creature Zombie
+PT:2/2
+K:Madness:1 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+madness | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_scrabbler.jpg
+Oracle:Madness {1}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)\nWhen Grave Scrabbler enters the battlefield, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand.

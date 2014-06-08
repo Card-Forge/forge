@@ -212,7 +212,7 @@ public class PlayEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("PlayMadness")) {
                 Cost abCost = new Cost(sa.getParam("PlayMadness"), false);
                 tgtSA = tgtSA.copyWithDefinedCost(abCost);
-                tgtSA.setMadness(true);
+                tgtSA.getHostCard().setMadness(true);
             }
 
             if (tgtSA.usesTargeting() && !optional) {

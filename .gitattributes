@@ -6186,6 +6186,7 @@ forge-gui/res/cardsfolder/g/grave_exchange.txt -text
 forge-gui/res/cardsfolder/g/grave_pact.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grave_peril.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grave_robbers.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/grave_scrabbler.txt -text
 forge-gui/res/cardsfolder/g/grave_servitude.txt -text
 forge-gui/res/cardsfolder/g/grave_shell_scarab.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/grave_titan.txt svneol=native#text/plain

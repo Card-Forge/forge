@@ -156,6 +156,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean suspendCast = false;
     private boolean suspend = false;
     private boolean tributed = false;
+    private boolean madness = false;
 
     private boolean phasedOut = false;
     private boolean directlyPhasedOut = true;
@@ -5796,6 +5797,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.tributed) {
                 return false;
             }
+        } else if (property.startsWith("madness")) {
+            if (!this.madness) {
+                return false;
+            }
         } else if (property.contains("Paired")) {
             if (property.contains("With")) { // PairedWith
                 if (!this.isPaired() || this.pairedWith != source) {
@@ -7901,6 +7906,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setTributed(final boolean b) {
         this.tributed = b;
+    }
+
+    // Madness
+    public boolean isMadness() {
+        return madness;
+    }
+
+    public void setMadness(boolean madness) {
+        this.madness = madness;
     }
 
     /**
