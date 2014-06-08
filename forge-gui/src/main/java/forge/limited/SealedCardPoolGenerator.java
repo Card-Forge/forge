@@ -17,27 +17,37 @@
  */
 package forge.limited;
 
+import forge.assets.FSkinProp;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
+import forge.card.MagicColor;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.model.UnOpenedMeta;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.FileUtil;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -56,6 +66,84 @@ public class SealedCardPoolGenerator {
     /** The Land set code. */
     private String landSetCode = null;
 
+    public static DeckGroup generateSealedDeck() {
+        final String prompt = "Choose Sealed Deck Format";
+        final LimitedPoolType poolType = SGuiChoose.oneOrNone(prompt, LimitedPoolType.values());
+        if (poolType == null) { return null; }
+
+        SealedCardPoolGenerator sd = new SealedCardPoolGenerator(poolType);
+        if (sd.isEmpty()) { return null; }
+
+        final CardPool humanPool = sd.getCardPool(true);
+        if (humanPool == null) { return null; }
+
+        // System.out.println(humanPool);
+
+        // This seems to be limited by the MAX_DRAFT_PLAYERS constant
+        // in DeckGroupSerializer.java. You could create more AI decks
+        // but only the first seven would load. --BBU
+        Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?", 1, 7);
+        if (rounds == null) { return null; }
+
+        final String sDeckName = SOptionPane.showInputDialog(
+                "Save this card pool as:",
+                "Save Card Pool",
+                FSkinProp.ICO_QUESTION);
+
+        if (StringUtils.isBlank(sDeckName)) {
+            return null;
+        }
+
+        final IStorage<DeckGroup> sealedDecks = FModel.getDecks().getSealed();
+        if (sealedDecks.contains(sDeckName)) {
+            if (!SOptionPane.showConfirmDialog(
+                    "'" + sDeckName + "' already exists. Do you want to replace it?",
+                    "Sealed Deck Game Exists")) {
+                return null;
+            }
+            sealedDecks.delete(sDeckName);
+        }
+
+        final Deck deck = new Deck(sDeckName);
+        deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
+
+        final int landsCount = 10;
+
+        final boolean isZendikarSet = sd.getLandSetCode().equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
+        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
+
+        for (final String element : MagicColor.Constant.BASIC_LANDS) {
+            int numArt = FModel.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
+            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
+            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
+
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
+                for (int i = minArtIndex; i <= maxArtIndex; i++) {
+                    deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
+                }
+            }
+            else {
+                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), 30);
+            }
+        }
+
+        final DeckGroup sealed = new DeckGroup(sDeckName);
+        sealed.setHumanDeck(deck);
+        for (int i = 0; i < rounds; i++) {
+            // Generate other decks for next N opponents
+            final CardPool aiPool = sd.getCardPool(false);
+            if (aiPool == null) { return null; }
+
+            sealed.addAiDeck(new SealedDeckBuilder(aiPool.toFlatList()).buildDeck());
+        }
+
+        // Rank the AI decks
+        sealed.rankAiDecks(new SealedDeckComparer());
+
+        FModel.getDecks().getSealed().add(sealed);
+        return sealed;
+    }
+
     /**
      * <p>
      * Constructor for SealedDeck.
@@ -64,7 +152,7 @@ public class SealedCardPoolGenerator {
      * @param poolType
      *            a {@link java.lang.String} object.
      */
-    public SealedCardPoolGenerator(final LimitedPoolType poolType) {
+    private SealedCardPoolGenerator(final LimitedPoolType poolType) {
         switch(poolType) {
             case Full:
                 // Choose number of boosters
@@ -367,5 +455,48 @@ public class SealedCardPoolGenerator {
 
     public boolean isEmpty() {
         return product.isEmpty();
+    }
+
+    private static class SealedDeckComparer implements java.util.Comparator<Deck> {
+        public double getDraftValue(Deck d) {
+            double value = 0;
+            double divider = 0;
+
+            if (d.getMain().isEmpty()) {
+                return 0;
+            }
+
+            double best = 1.0;
+
+            for (Entry<PaperCard, Integer> kv : d.getMain()) {
+                PaperCard evalCard = kv.getKey();
+                int count = kv.getValue();
+                if (DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
+                    double add = DraftRankCache.getRanking(evalCard.getName(), evalCard.getEdition());
+                    // System.out.println(evalCard.getName() + " is worth " + add);
+                    value += add * count;
+                    divider += count;
+                    if (best > add) {
+                        best = add;
+                    }
+                }
+            }
+
+            if (divider == 0 || value == 0) {
+                return 0;
+            }
+
+            value /= divider;
+
+            return (20.0 / (best + (2 * value)));
+        }
+
+        @Override
+        public int compare(Deck o1, Deck o2) {
+            double delta = getDraftValue(o1) - getDraftValue(o2);
+            if ( delta > 0 ) return 1;
+            if ( delta < 0 ) return -1;
+            return 0;
+        }
     }
 }

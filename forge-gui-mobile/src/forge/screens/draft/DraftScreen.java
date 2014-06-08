@@ -38,6 +38,12 @@ public class DraftScreen extends LaunchScreen {
 
         lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
+        lstDecks.setItemActivateHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                editSelectedDeck();
+            }
+        });
 
         btnNewDraft.setFont(FSkinFont.get(16));
         btnNewDraft.setCommand(new FEventHandler() {
@@ -71,12 +77,16 @@ public class DraftScreen extends LaunchScreen {
         btnEditDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final DeckProxy deck = lstDecks.getSelectedItem();
-                if (deck == null) { return; }
-
-                Forge.openScreen(new FDeckEditor(EditorType.Draft, deck.getDeck()));
+                editSelectedDeck();
             }
         });
+    }
+
+    private void editSelectedDeck() {
+        final DeckProxy deck = lstDecks.getSelectedItem();
+        if (deck == null) { return; }
+
+        Forge.openScreen(new FDeckEditor(EditorType.Draft, deck.getDeck()));
     }
 
     @Override

@@ -115,6 +115,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             tabPage.initialize();
         }
+
+        //if opening brand new sealed deck, show sideboard (card pool) by default
+        if (editorType == EditorType.Sealed && deck.getMain().isEmpty()) {
+            setSelectedPage(sideboardPage);
+        }
     }
 
     public EditorType getEditorType() {

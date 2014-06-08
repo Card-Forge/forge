@@ -110,7 +110,7 @@ public class FOptionPane extends FDialog {
             inputField = cbInput;
         }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, new String[] {"OK", "Cancel"}, -1, new Callback<Integer>() {
+        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, new String[] {"OK", "Cancel"}, 0, new Callback<Integer>() {
             @SuppressWarnings("unchecked")
             @Override
             public void run(Integer result) {

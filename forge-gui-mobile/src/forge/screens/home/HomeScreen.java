@@ -42,7 +42,7 @@ public class HomeScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new SealedScreen());
             }
-        }, false);
+        }, true);
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
