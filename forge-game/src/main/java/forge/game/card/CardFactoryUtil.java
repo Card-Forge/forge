@@ -94,14 +94,10 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-                //Lands do not have SpellPermanents.
-                if (sourceCard.isLand()) {
-                    return (sourceCard.getGame().getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
-                            && sourceCard.getController().canCastSorcery();
-                }
-                else {
-                    return sourceCard.getSpellPermanent().canPlay();
-                }
+            	sourceCard.setState(CardCharacteristicName.FaceDown);
+                boolean success = super.canPlay();
+            	sourceCard.setState(CardCharacteristicName.Original);
+            	return success;
             }
         };
 

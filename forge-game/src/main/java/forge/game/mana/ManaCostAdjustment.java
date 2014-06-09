@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
+import forge.card.CardCharacteristicName;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -38,6 +39,7 @@ public class ManaCostAdjustment {
             return;
         }
     
+        boolean isStateChangeToFaceDown = false;
         if (sa.isSpell()) {
             if (sa.isDelve()) {
                 final Player pc = originalCard.getController();
@@ -52,6 +54,10 @@ public class ManaCostAdjustment {
             }
             else if (sa.getHostCard().hasKeyword("Convoke")) {
                 adjustCostByConvoke(cost, sa);
+            } else if (((Spell) sa).isCastFaceDown()) {
+            	// Turn face down to apply cost modifiers correctly
+            	originalCard.setState(CardCharacteristicName.FaceDown);
+            	isStateChangeToFaceDown = true;
             }
         } // isSpell
     
@@ -97,7 +103,13 @@ public class ManaCostAdjustment {
         for (final StaticAbility stAb : setAbilities) {
             applyAbility(stAb, "SetCost", sa, cost);
         }
-    } // GetSpellCostChange
+        
+        // Reset card state (if changed)
+        if (isStateChangeToFaceDown) {
+        	originalCard.setState(CardCharacteristicName.Original);
+        }
+    }
+  // GetSpellCostChange
 
 
     /**

@@ -89,8 +89,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        // for uncastables like lotus bloom, check if manaCost is blank
-        if (isBasicSpell() && card.getManaCost().isNoCost()) {
+        // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
+        if (!isCastFaceDown() && isBasicSpell() && card.getManaCost().isNoCost()) {
             return false;
         }
 
