@@ -12,7 +12,10 @@ import forge.model.FModel;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FTextField;
 import forge.util.ItemPool;
+import forge.util.Utils;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public enum EditorType {
@@ -366,6 +369,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static class OptionsPage extends DeckEditorPage {
+        private static final float PADDING = Utils.scaleMin(5);
+
+        private final FLabel lblName = add(new FLabel.Builder().text("Name:").build());
+        private final FTextField txtName = add(new FTextField());
+        private final FLabel btnSave = add(new FLabel.ButtonBuilder().text("Save Deck").icon(FSkinImage.SAVE).build());
+        private final FLabel btnNew = add(new FLabel.ButtonBuilder().text("New Deck").icon(FSkinImage.NEW).build());
+        private final FLabel btnOpen = add(new FLabel.ButtonBuilder().text("Open Deck").icon(FSkinImage.OPEN).build());
+        private final FLabel btnSaveAs = add(new FLabel.ButtonBuilder().text("Save Deck As").icon(FSkinImage.SAVEAS).build());
 
         protected OptionsPage() {
             super("Options", FSkinImage.SETTINGS);
@@ -373,10 +384,31 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void initialize() {
+            txtName.setGhostText("[New Deck]");
+            txtName.setText(parentScreen.getDeck().getName());
         }
 
         @Override
         protected void doLayout(float width, float height) {
+            float x = PADDING;
+            float y = PADDING;
+            float w = width - 2 * PADDING;
+            float h = height - 2 * PADDING;
+
+            lblName.setBounds(x, y, lblName.getAutoSizeBounds().width, txtName.getHeight());
+            txtName.setBounds(x + lblName.getWidth(), y, w - lblName.getWidth(), txtName.getHeight());
+            y += txtName.getHeight() + PADDING;
+
+            float buttonHeight = Utils.AVG_FINGER_HEIGHT;
+            float dy = buttonHeight + PADDING;
+
+            btnSave.setBounds(x, y, w, buttonHeight);
+            y += dy;
+            btnNew.setBounds(x, y, w, buttonHeight);
+            y += dy;
+            btnOpen.setBounds(x, y, w, buttonHeight);
+            y += dy;
+            btnSaveAs.setBounds(x, y, w, buttonHeight);
         }
     }
 }
