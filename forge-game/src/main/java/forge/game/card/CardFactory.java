@@ -285,6 +285,10 @@ public class CardFactory {
                 c.setState(CardCharacteristicName.RightSplit);
                 c.setImageKey(originalPicture);
             }
+            else if (c.isLicid()) {
+            	c.setState(CardCharacteristicName.Licid);
+            	c.setImageKey(originalPicture);
+            }
 
             c.setCurSetCode(cp.getEdition());
             c.setRarity(cp.getRarity());

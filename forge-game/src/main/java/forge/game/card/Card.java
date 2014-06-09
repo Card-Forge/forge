@@ -469,6 +469,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isSplitCard() {
         return characteristicsMap.containsKey(CardCharacteristicName.LeftSplit);
     }
+    
+    public final boolean isLicid() {
+    	return characteristicsMap.containsKey(CardCharacteristicName.Licid);
+    }
 
     /**
      * Checks if is cloned.
