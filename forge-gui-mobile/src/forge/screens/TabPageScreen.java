@@ -139,6 +139,9 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             tab = new Tab();
         }
 
+        public void showTab() {
+            tab.setVisible(true);
+        }
         public void hideTab() {
             tab.setVisible(false);
         }

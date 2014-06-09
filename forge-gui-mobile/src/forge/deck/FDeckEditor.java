@@ -88,6 +88,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private CatalogPage catalogPage;
     private DeckSectionPage mainDeckPage;
     private DeckSectionPage sideboardPage;
+    private OptionsPage optionsPage;
 
     public FDeckEditor(EditorType editorType0) {
         this(editorType0, null);
@@ -97,6 +98,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         editorType = editorType0;
         if (deck0 == null) {
             deck0 = new Deck();
+            if (editorType == EditorType.Draft) {
+                tabPages[3].hideTab(); //hide Options page while drafting
+            }
         }
         else {
             if (editorType == EditorType.Draft) {
@@ -119,6 +123,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 else if (deckSectionPage.deckSection == DeckSection.Sideboard) {
                     sideboardPage = deckSectionPage;
                 }
+            }
+            else if (tabPage instanceof OptionsPage) {
+                optionsPage = (OptionsPage) tabPage;
             }
             tabPage.initialize();
         }
@@ -147,6 +154,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected DeckSectionPage getSideboardPage() {
         return sideboardPage;
+    }
+
+    protected OptionsPage getOptionsPage() {
+        return optionsPage;
     }
 
     protected BoosterDraft getDraft() {
@@ -347,6 +358,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             else {
                 hideTab(); //hide this tab page when finished drafting
+                parentScreen.getOptionsPage().showTab(); //show options page when finished drafting
                 draft.finishedDrafting();
                 parentScreen.save();
             }
