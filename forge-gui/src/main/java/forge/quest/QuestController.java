@@ -155,7 +155,8 @@ public class QuestController {
         if (draftDecks == null) {
             draftDecks = new QuestDeckGroupMap(new HashMap<String, DeckGroup>());
         }
-        if (this.getAchievements().getCurrentDraftIndex() == -1 || this.getAchievements().getCurrentDraft() == null) {
+        final QuestAchievements achievements = this.getAchievements();
+        if (achievements != null && (achievements.getCurrentDraftIndex() == -1 || achievements.getCurrentDraft() == null)) {
             draftDecks.delete(QuestEventDraft.DECK_NAME);
         }
         return draftDecks;
