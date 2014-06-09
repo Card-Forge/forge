@@ -1083,43 +1083,44 @@ public class AiAttackController {
         if (choices.contains("artifacts")) {
             artifact = "artifacts";
         }
-        if (!choices.contains(color)) {
-            color = null;
-        }
-        for (Card c : oppList) {
-            if (!c.isArtifact()) {
-                artifact = null;
-            }
-            switch (color) {
-            case "black":
-                if (!c.isBlack()) {
-                    color = null;
-                }
-                break;
-            case "blue":
-                if (!c.isBlue()) {
-                    color = null;
-                }
-                break;
-            case "green":
-                if (!c.isGreen()) {
-                    color = null;
-                }
-                break;
-            case "red":
-                if (!c.isRed()) {
-                    color = null;
-                }
-                break;
-            case "white":
-                if (!c.isWhite()) {
-                    color = null;
-                }
-                break;
-            }
-            if (color == null && artifact == null) {
-                return null;
-            }
+        if (choices.contains(color)) {
+        	for (Card c : oppList) {
+        		if (!c.isArtifact()) {
+        			artifact = null;
+        		}
+        		switch (color) {
+        		case "black":
+        			if (!c.isBlack()) {
+        				color = null;
+        			}
+        			break;
+        		case "blue":
+        			if (!c.isBlue()) {
+        				color = null;
+        			}
+        			break;
+        		case "green":
+        			if (!c.isGreen()) {
+        				color = null;
+        			}
+        			break;
+        		case "red":
+        			if (!c.isRed()) {
+        				color = null;
+        			}
+        			break;
+        		case "white":
+        			if (!c.isWhite()) {
+        				color = null;
+        			}
+        			break;
+        		}
+        		if (color == null && artifact == null) {
+        			return null;
+        		}
+        	}
+        } else {
+        	color = null;
         }
         if (color != null) {
             return color;
