@@ -12,7 +12,6 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Utils;
 
@@ -60,32 +59,13 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
     private static class TabHeader<T extends TabPageScreen<T>> extends Header {
         public static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
-        public static final float TAB_WIDTH = Math.round(HEIGHT * 1.2f);
         private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
         private static final FSkinColor SEPARATOR_COLOR = BACK_COLOR.stepColor(-40);
 
         private final FLabel btnBack;
-        private final FScrollPane scroller;
 
         public TabHeader(TabPage<T>[] tabPages) {
-            scroller = add(new FScrollPane() {
-                @Override
-                protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-                    float x = 0;
-                    for (FDisplayObject child : getChildren()) {
-                        if (x == 0) { //skip back button
-                            x += BACK_BUTTON_WIDTH;
-                        }
-                        else if (child.isVisible()) {
-                            child.setBounds(x, 0, TAB_WIDTH, visibleHeight);
-                            x += TAB_WIDTH;
-                        }
-                    }
-                    return new ScrollBounds(x, visibleHeight);
-                }
-            });
-
-            btnBack = scroller.add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+            btnBack = add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back();
@@ -94,7 +74,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             btnBack.setSize(BACK_BUTTON_WIDTH, HEIGHT);
 
             for (TabPage<T> tabPage : tabPages) {
-                scroller.add(tabPage.tab);
+                add(tabPage.tab);
             }
         }
 
@@ -121,7 +101,23 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            scroller.setBounds(0, 0, width, height);
+            int tabCount = -1; //start at -1 so back button not counted
+            for (FDisplayObject child : getChildren()) {
+                if (child.isVisible()) {
+                    tabCount++;
+                }
+            }
+            float x = 0;
+            float tabWidth = (width - BACK_BUTTON_WIDTH) / tabCount;
+            for (FDisplayObject child : getChildren()) {
+                if (x == 0) { //skip back button
+                    x += BACK_BUTTON_WIDTH;
+                }
+                else if (child.isVisible()) {
+                    child.setBounds(x, 0, tabWidth, height);
+                    x += tabWidth;
+                }
+            }
         }
     }
 
@@ -202,9 +198,11 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                     g.drawImage(icon, (w - iconWidth) / 2, (y - iconHeight) / 2, iconWidth, iconHeight);
                 }
 
-                //draw right border
-                float x = getWidth() - Header.LINE_THICKNESS / 2;
-                g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, h);
+                //draw right border if needed
+                if (getLeft() < TabPage.this.getWidth() - getWidth() - 1) {
+                    float x = getWidth() - Header.LINE_THICKNESS / 2;
+                    g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, h);
+                }
             }
         }
     }

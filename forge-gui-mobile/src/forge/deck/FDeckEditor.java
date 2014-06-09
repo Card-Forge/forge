@@ -32,46 +32,53 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard)
+                    new DeckSectionPage(DeckSection.Sideboard),
+                    new OptionsPage()
             };
         case Draft:
             return new DeckEditorPage[] {
                     new DraftPackPage(),
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
+                    new OptionsPage()
             };
         case Sealed:
             return new DeckEditorPage[] {
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SEALED_POOL)
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SEALED_POOL),
+                    new OptionsPage()
             };
         case Commander:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Commander)
+                    new DeckSectionPage(DeckSection.Commander),
+                    new OptionsPage()
             };
         case Archenemy:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Schemes)
+                    new DeckSectionPage(DeckSection.Schemes),
+                    new OptionsPage()
             };
         case Planechase:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Planes)
+                    new DeckSectionPage(DeckSection.Planes),
+                    new OptionsPage()
             };
         case Vanguard:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Avatar)
+                    new DeckSectionPage(DeckSection.Avatar),
+                    new OptionsPage()
             };
         }
     }
@@ -150,9 +157,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static abstract class DeckEditorPage extends TabPage<FDeckEditor> {
+        protected DeckEditorPage(String caption0, FImage icon0) {
+            super(caption0, icon0);
+        }
+
+        protected abstract void initialize();
+    }
+
+    protected static abstract class CardManagerPage extends DeckEditorPage {
         protected final CardManager cardManager = add(new CardManager(false));
 
-        protected DeckEditorPage(ItemManagerConfig config, String caption0, FImage icon0) {
+        protected CardManagerPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(caption0, icon0);
             cardManager.setup(config);
             cardManager.setItemActivateHandler(new FEventHandler() {
@@ -176,7 +191,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void updateCaption() {
         }
 
-        protected abstract void initialize();
         protected abstract void onCardActivated(PaperCard card);
 
         @Override
@@ -185,7 +199,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    protected static class CatalogPage extends DeckEditorPage {
+    protected static class CatalogPage extends CardManagerPage {
         protected CatalogPage() {
             this(ItemManagerConfig.CARD_CATALOG, "Catalog", FSkinImage.FOLDER);
         }
@@ -213,7 +227,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    protected static class DeckSectionPage extends DeckEditorPage {
+    protected static class DeckSectionPage extends CardManagerPage {
         private final String captionPrefix;
         private final DeckSection deckSection;
 
@@ -336,6 +350,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 draft.finishedDrafting();
                 parentScreen.save();
             }
+        }
+    }
+
+    protected static class OptionsPage extends DeckEditorPage {
+
+        protected OptionsPage() {
+            super("Options", FSkinImage.SETTINGS);
+        }
+
+        @Override
+        protected void initialize() {
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
         }
     }
 }
