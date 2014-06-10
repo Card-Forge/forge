@@ -18,6 +18,7 @@ import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
+import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
@@ -84,12 +85,14 @@ public class DraftScreen extends LaunchScreen {
     @Override
     public void onActivate() {
         lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
+        lstDecks.setSelectedString(DeckPreferences.getDraftDeck());
     }
 
     private void editSelectedDeck() {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
 
+        DeckPreferences.setDraftDeck(deck.getName());
         Forge.openScreen(new FDeckEditor(EditorType.Draft, deck.getDeck()));
     }
 

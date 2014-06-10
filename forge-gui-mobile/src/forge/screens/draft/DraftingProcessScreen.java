@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
+import forge.deck.io.DeckPreferences;
 import forge.limited.BoosterDraft;
 import forge.model.FModel;
 import forge.toolbox.FOptionPane;
@@ -83,6 +84,7 @@ public class DraftingProcessScreen extends FDeckEditor {
 
         FModel.getDecks().getDraft().add(finishedDraft);
         this.getEditorType().getController().setDeckBase(finishedDraft);
+        DeckPreferences.setDraftDeck(name);
     }
 
     @Override

@@ -21,16 +21,33 @@ import org.w3c.dom.NodeList;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck;
+    private static String currentDeck, draftDeck, sealedDeck;
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
 
     public static String getCurrentDeck() {
         return currentDeck;
     }
-
     public static void setCurrentDeck(String currentDeck0) {
         if (currentDeck != null && currentDeck.equals(currentDeck0)) { return; }
         currentDeck = currentDeck0;
+        save();
+    }
+
+    public static String getDraftDeck() {
+        return draftDeck;
+    }
+    public static void setDraftDeck(String draftDeck0) {
+        if (draftDeck != null && draftDeck.equals(draftDeck0)) { return; }
+        draftDeck = draftDeck0;
+        save();
+    }
+
+    public static String getSealedDeck() {
+        return sealedDeck;
+    }
+    public static void setSealedDeck(String sealedDeck0) {
+        if (sealedDeck != null && sealedDeck.equals(sealedDeck0)) { return; }
+        sealedDeck = sealedDeck0;
         save();
     }
 
@@ -53,6 +70,8 @@ public class DeckPreferences {
 
             final Element root = (Element)document.getElementsByTagName("preferences").item(0);
             currentDeck = root.getAttribute("currentDeck");
+            draftDeck = root.getAttribute("draftDeck");
+            sealedDeck = root.getAttribute("sealedDeck");
 
             final NodeList cards = document.getElementsByTagName("deck");
             for (int i = 0; i < cards.getLength(); i++) {
@@ -80,6 +99,8 @@ public class DeckPreferences {
             Element root = document.createElement("preferences");
             root.setAttribute("type", "decks");
             root.setAttribute("currentDeck", currentDeck);
+            root.setAttribute("draftDeck", draftDeck);
+            root.setAttribute("sealedDeck", sealedDeck);
             document.appendChild(root);
 
             for (Map.Entry<String, DeckPreferences> entry : allPrefs.entrySet()) {

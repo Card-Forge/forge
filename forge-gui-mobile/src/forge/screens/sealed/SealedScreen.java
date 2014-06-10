@@ -8,6 +8,7 @@ import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
+import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -51,6 +52,7 @@ public class SealedScreen extends LaunchScreen {
                         FThreads.invokeInEdtLater(new Runnable() {
                             @Override
                             public void run() {
+                                DeckPreferences.setSealedDeck(sealed.getName());
                                 Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getHumanDeck()));
                             }
                         });
@@ -70,12 +72,14 @@ public class SealedScreen extends LaunchScreen {
     @Override
     public void onActivate() {
         lstDecks.setPool(DeckProxy.getAllSealedDecks(FModel.getDecks().getSealed()));
+        lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
     }
 
     private void editSelectedDeck() {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
 
+        DeckPreferences.setSealedDeck(deck.getName());
         Forge.openScreen(new FDeckEditor(EditorType.Sealed, deck.getDeck()));
     }
 
