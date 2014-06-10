@@ -36,7 +36,6 @@ public class DraftScreen extends LaunchScreen {
     public DraftScreen() {
         super("Booster Draft");
 
-        lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
             @Override
@@ -80,6 +79,11 @@ public class DraftScreen extends LaunchScreen {
                 editSelectedDeck();
             }
         });
+    }
+
+    @Override
+    public void onActivate() {
+        lstDecks.setPool(DeckProxy.getDraftDecks(FModel.getDecks().getDraft()));
     }
 
     private void editSelectedDeck() {
@@ -129,8 +133,8 @@ public class DraftScreen extends LaunchScreen {
         }*/
 
         final int aiIndex = (int) Math.floor(Math.random() * 7);
-        DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
-        Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
+        DeckGroup deckGroup = FModel.getDecks().getDraft().get(humanDeck.getName());
+        Deck aiDeck = deckGroup.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }

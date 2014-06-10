@@ -11,11 +11,11 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
 public class DraftingProcessScreen extends FDeckEditor {
-    private boolean saved;
+    private boolean isDraftSaved;
     private final BoosterDraft draft;
 
     public DraftingProcessScreen(BoosterDraft draft0) {
-        super(EditorType.Draft);
+        super(EditorType.Draft, null);
         draft = draft0;
         getCatalogPage().refresh(); //must refresh after draft set
     }
@@ -26,14 +26,17 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     @Override
-    protected void save() {
-        if (saved) { return; }
+    protected void save(final Callback<Boolean> callback) {
+        if (isDraftSaved) { //if draft itself is saved, let base class handle saving deck changes
+            super.save(callback);
+            return;
+        }
 
         FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON, new Callback<String>() {
             @Override
             public void run(final String name) {
                 if (StringUtils.isEmpty(name)) {
-                    save(); //re-prompt if user doesn't pick a name
+                    save(callback); //re-prompt if user doesn't pick a name
                     return;
                 }
 
@@ -47,9 +50,12 @@ public class DraftingProcessScreen extends FDeckEditor {
                                 public void run(Boolean result) {
                                     if (result) {
                                         finishSave(name);
+                                        if (callback != null) {
+                                            callback.run(true);
+                                        }
                                     }
                                     else {
-                                        save(); //If no overwrite, recurse
+                                        save(callback); //If no overwrite, recurse
                                     }
                                 }
                             });
@@ -58,12 +64,15 @@ public class DraftingProcessScreen extends FDeckEditor {
                 }
 
                 finishSave(name);
+                if (callback != null) {
+                    callback.run(true);
+                }
             }
         });
     }
 
     private void finishSave(String name) {
-        saved = true;
+        isDraftSaved = true;
 
         // Construct computer's decks and save draft
         final Deck[] computer = draft.getDecks();
@@ -73,11 +82,12 @@ public class DraftingProcessScreen extends FDeckEditor {
         finishedDraft.addAiDecks(computer);
 
         FModel.getDecks().getDraft().add(finishedDraft);
+        this.getEditorType().getController().setDeckBase(finishedDraft);
     }
 
     @Override
     public void onClose(Callback<Boolean> canCloseCallback) {
-        if (saved || canCloseCallback == null) {
+        if (isDraftSaved || canCloseCallback == null) {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
         }

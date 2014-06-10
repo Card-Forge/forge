@@ -30,7 +30,6 @@ public class SealedScreen extends LaunchScreen {
     public SealedScreen() {
         super("Sealed Deck");
 
-        lstDecks.setPool(DeckProxy.getAllSealedDecks(FModel.getDecks().getSealed()));
         lstDecks.setup(ItemManagerConfig.SEALED_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
             @Override
@@ -66,6 +65,11 @@ public class SealedScreen extends LaunchScreen {
                 editSelectedDeck();
             }
         });
+    }
+
+    @Override
+    public void onActivate() {
+        lstDecks.setPool(DeckProxy.getAllSealedDecks(FModel.getDecks().getSealed()));
     }
 
     private void editSelectedDeck() {

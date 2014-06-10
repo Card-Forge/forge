@@ -1,9 +1,14 @@
 package forge.deck;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Supplier;
+
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -13,19 +18,73 @@ import forge.screens.TabPageScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
+import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
+import forge.util.storage.IStorage;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public enum EditorType {
-        Constructed,
-        Draft,
-        Sealed,
-        Commander,
-        Archenemy,
-        Planechase,
-        Vanguard,
+        Constructed(new DeckController<Deck>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        })),
+        Draft(new DeckController<DeckGroup>(FModel.getDecks().getDraft(), new Supplier<DeckGroup>() {
+            @Override
+            public DeckGroup get() {
+                return new DeckGroup("");
+            }
+        })),
+        Sealed(new DeckController<DeckGroup>(FModel.getDecks().getSealed(), new Supplier<DeckGroup>() {
+            @Override
+            public DeckGroup get() {
+                return new DeckGroup("");
+            }
+        })),
+        Winston(new DeckController<DeckGroup>(FModel.getDecks().getWinston(), new Supplier<DeckGroup>() {
+            @Override
+            public DeckGroup get() {
+                return new DeckGroup("");
+            }
+        })),
+        Commander(new DeckController<Deck>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        })),
+        Archenemy(new DeckController<Deck>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        })),
+        Planechase(new DeckController<Deck>(FModel.getDecks().getPlane(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        })),
+        Vanguard(new DeckController<Deck>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
+        }));
+
+        private final DeckController<? extends DeckBase> controller;
+
+        public DeckController<? extends DeckBase> getController() {
+            return controller;
+        }
+
+        private EditorType(DeckController<? extends DeckBase> controller0) {
+            controller = controller0;
+        }
     }
 
     private static DeckEditorPage[] getPages(EditorType editorType) {
@@ -93,9 +152,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private DeckSectionPage sideboardPage;
     private OptionsPage optionsPage;
 
-    public FDeckEditor(EditorType editorType0) {
-        this(editorType0, null);
-    }
     public FDeckEditor(EditorType editorType0, Deck deck0) {
         super(getPages(editorType0));
         editorType = editorType0;
@@ -137,6 +193,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if (editorType == EditorType.Sealed && deck.getMain().isEmpty()) {
             setSelectedPage(sideboardPage);
         }
+
+        //set model for controller based on editor type
+        if (!StringUtils.isEmpty(deck.getName())) {
+            switch (editorType) {
+            case Draft:
+            case Sealed:
+            case Winston:
+                editorType.getController().setDeckBase(editorType.getController().currentFolder.get(deck.getName()));
+                break;
+            default:
+                editorType.getController().setDeckBase(deck);
+                break;
+            }
+        }
     }
 
     public EditorType getEditorType() {
@@ -167,7 +237,91 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return null;
     }
 
-    protected void save() {
+    protected void save(final Callback<Boolean> callback) {
+        final DeckController<?> controller = editorType.getController();
+        final String name = getOptionsPage().txtName.getText();
+        final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
+
+        // Warn if no name
+        if (StringUtils.isEmpty(name)) {
+            FOptionPane.showErrorDialog("Please name your deck using the 'Name' box.", "Save Error!");
+            if (callback != null) {
+                callback.run(false);
+            }
+            return;
+        }
+        
+        // Confirm if overwrite
+        if (controller.fileExists(name)) {
+            //prompt only if name was changed
+            if (!StringUtils.equals(name, controller.getModelName())) {
+                FOptionPane.showConfirmDialog("There is already a deck named '" + name + "'. Overwrite?",
+                    "Overwrite Deck?", new Callback<Boolean>() {
+                        @Override
+                        public void run(Boolean result) {
+                            if (result) {
+                                controller.save();
+                                afterSave(deckStr);
+                            }
+                            if (callback != null) {
+                                callback.run(result);
+                            }
+                        }
+                });
+                return;
+            }
+            controller.save();
+            afterSave(deckStr);
+            if (callback != null) {
+                callback.run(true);
+            }
+            return;
+        }
+
+        // Confirm if a new deck will be created
+        FOptionPane.showConfirmDialog("This will create a new deck named '" +
+                name + "'. Continue?", "Create Deck?", new Callback<Boolean>() {
+                    @Override
+                    public void run(Boolean result) {
+                        if (result) {
+                            controller.saveAs(name);
+                            afterSave(deckStr);
+                        }
+                        if (callback != null) {
+                            callback.run(result);
+                        }
+                    }
+        });
+    }
+
+    private void afterSave(String deckStr) {
+        if (editorType == EditorType.Constructed) {
+            DeckPreferences.setCurrentDeck(deckStr);
+        }
+    }
+
+    @Override
+    public void onClose(final Callback<Boolean> canCloseCallback) {
+        if (editorType.getController().isSaved() || canCloseCallback == null) {
+            super.onClose(canCloseCallback); //can skip prompt if draft saved
+            return;
+        }
+        FOptionPane.showOptionDialog("Save changes to current deck?", "Save Changes?",
+                FOptionPane.QUESTION_ICON, new String[] {"Save", "Don't Save", "Cancel"}, new Callback<Integer>() {
+                    @Override
+                    public void run(Integer result) {
+                        if (result == 0) {
+                            save(canCloseCallback);
+                        }
+                        else if (result == 1) {
+                            editorType.getController().reload(); //reload if not saving changes
+                            canCloseCallback.run(true);
+                        }
+                        else {
+                            canCloseCallback.run(false);
+                        }
+                    }
+        });
     }
 
     protected static abstract class DeckEditorPage extends TabPage<FDeckEditor> {
@@ -194,11 +348,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public void addCard(PaperCard card) {
             cardManager.addItem(card, 1);
+            parentScreen.getEditorType().getController().notifyModelChanged();
             updateCaption();
         }
 
         public void removeCard(PaperCard card) {
             cardManager.removeItem(card, 1);
+            parentScreen.getEditorType().getController().notifyModelChanged();
             updateCaption();
         }
 
@@ -363,7 +519,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 hideTab(); //hide this tab page when finished drafting
                 parentScreen.getOptionsPage().showTab(); //show options page when finished drafting
                 draft.finishedDrafting();
-                parentScreen.save();
+                parentScreen.save(null);
             }
         }
     }
@@ -374,9 +530,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private final FLabel lblName = add(new FLabel.Builder().text("Name:").build());
         private final FTextField txtName = add(new FTextField());
         private final FLabel btnSave = add(new FLabel.ButtonBuilder().text("Save Deck").icon(FSkinImage.SAVE).build());
-        private final FLabel btnNew = add(new FLabel.ButtonBuilder().text("New Deck").icon(FSkinImage.NEW).build());
+        private final FLabel btnAddLands = add(new FLabel.ButtonBuilder().text("Add Lands").icon(FSkinImage.LAND).build());
+        /*private final FLabel btnNew = add(new FLabel.ButtonBuilder().text("New Deck").icon(FSkinImage.NEW).build());
         private final FLabel btnOpen = add(new FLabel.ButtonBuilder().text("Open Deck").icon(FSkinImage.OPEN).build());
-        private final FLabel btnSaveAs = add(new FLabel.ButtonBuilder().text("Save Deck As").icon(FSkinImage.SAVEAS).build());
+        private final FLabel btnSaveAs = add(new FLabel.ButtonBuilder().text("Save Deck As").icon(FSkinImage.SAVEAS).build());*/
 
         protected OptionsPage() {
             super("Options", FSkinImage.SETTINGS);
@@ -386,6 +543,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void initialize() {
             txtName.setGhostText("[New Deck]");
             txtName.setText(parentScreen.getDeck().getName());
+
+            btnSave.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    parentScreen.save(null);
+                }
+            });
+            btnAddLands.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                }
+            });
         }
 
         @Override
@@ -393,7 +562,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             float x = PADDING;
             float y = PADDING;
             float w = width - 2 * PADDING;
-            float h = height - 2 * PADDING;
 
             lblName.setBounds(x, y, lblName.getAutoSizeBounds().width, txtName.getHeight());
             txtName.setBounds(x + lblName.getWidth(), y, w - lblName.getWidth(), txtName.getHeight());
@@ -404,11 +572,176 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             btnSave.setBounds(x, y, w, buttonHeight);
             y += dy;
-            btnNew.setBounds(x, y, w, buttonHeight);
+            btnAddLands.setBounds(x, y, w, buttonHeight);
+            y += dy;
+            /*btnNew.setBounds(x, y, w, buttonHeight);
             y += dy;
             btnOpen.setBounds(x, y, w, buttonHeight);
             y += dy;
-            btnSaveAs.setBounds(x, y, w, buttonHeight);
+            btnSaveAs.setBounds(x, y, w, buttonHeight);*/
+        }
+    }
+
+    public static class DeckController<T extends DeckBase> {
+        private T model;
+        private boolean saved;
+        private boolean modelInStorage;
+        private final IStorage<T> rootFolder;
+        private IStorage<T> currentFolder;
+        private String modelPath;
+        private final Supplier<T> newModelCreator;
+
+        protected DeckController(final IStorage<T> folder0, final Supplier<T> newModelCreator0) {
+            rootFolder = folder0;
+            currentFolder = rootFolder;
+            model = null;
+            saved = true;
+            modelInStorage = false;
+            modelPath = "";
+            newModelCreator = newModelCreator0;
+        }
+
+        public T getModel() {
+            return model;
+        }
+
+        public String getModelPath() {
+            return modelPath;
+        }
+
+        @SuppressWarnings("unchecked")
+        public void setDeckBase(final DeckBase deckBase) {
+            setModel((T)deckBase, true);
+        }
+
+        public void setModel(final T document) {
+            setModel(document, false);
+        }
+        public void setModel(final T document, final boolean isStored) {
+            modelInStorage = isStored;
+            model = document;
+
+            if (isStored) {
+                if (isModelInSyncWithFolder()) {
+                    setSaved(true);
+                }
+                else {
+                    notifyModelChanged();
+                }
+            }
+            else { //TODO: Make this smarter
+                currentFolder = rootFolder;
+                modelPath = "";
+                setSaved(true);
+            }
+        }
+
+        private boolean isModelInSyncWithFolder() {
+            if (model.getName().isEmpty()) {
+                return true;
+            }
+
+            final T modelStored = currentFolder.get(model.getName());
+            // checks presence in dictionary only.
+            if (modelStored == model) {
+                return true;
+            }
+            if (modelStored == null) {
+                return false;
+            }
+
+            return modelStored.equals(model);
+        }
+
+        public void notifyModelChanged() {
+            if (saved) {
+                setSaved(false);
+            }
+        }
+
+        private void setSaved(boolean val) {
+            saved = val;
+        }
+
+        public void reload() {
+            String name = getModelName();
+            if (name.isEmpty()) {
+                newModel();
+            }
+            else {
+                load(name);
+            }
+        }
+
+        public void load(final String path, final String name) {
+            if (StringUtils.isBlank(path)) {
+                currentFolder = rootFolder;
+            }
+            else {
+                currentFolder = rootFolder.tryGetFolder(path);
+            }
+            modelPath = path;
+            load(name);
+        }
+
+        @SuppressWarnings("unchecked")
+        private void load(final String name) {
+            T newModel = currentFolder.get(name);
+            if (newModel != null) {
+                setModel((T) newModel.copyTo(name), true);
+            }
+            else {
+                setSaved(true);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        public void save() {
+            if (model == null) {
+                return;
+            }
+
+            // copy to new instance before adding to current folder so further changes are auto-saved
+            currentFolder.add((T) model.copyTo(model.getName()));
+            modelInStorage = true;
+            setSaved(true);
+        }
+
+        @SuppressWarnings("unchecked")
+        public void saveAs(final String name0) {
+            model = (T)model.copyTo(name0);
+            modelInStorage = false;
+            save();
+        }
+
+        public boolean isSaved() {
+            return saved;
+        }
+
+        public boolean fileExists(final String deckName) {
+            return currentFolder.contains(deckName);
+        }
+
+        public void importDeck(final T newDeck) {
+            setModel(newDeck);
+        }
+
+        public void refreshModel() {
+            if (model == null) {
+                newModel();
+            }
+            else {
+                setModel(model, modelInStorage);
+            }
+        }
+
+        public void newModel() {
+            model = newModelCreator.get();
+            setSaved(true);
+        }
+
+        public String getModelName() {
+            return model != null ? model.getName() : "";
         }
     }
 }

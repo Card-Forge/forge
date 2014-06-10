@@ -273,6 +273,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override
+    @SuppressWarnings("serial")
     public void update() {
         this.getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
         this.getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
