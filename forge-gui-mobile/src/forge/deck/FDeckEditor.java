@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Supplier;
 
+import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
@@ -527,6 +528,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private final FTextField txtName = add(new FTextField());
         private final FLabel btnSave = add(new FLabel.ButtonBuilder().text("Save Deck").icon(FSkinImage.SAVE).build());
         private final FLabel btnAddLands = add(new FLabel.ButtonBuilder().text("Add Lands").icon(FSkinImage.LAND).build());
+        private final FLabel btnDelete = add(new FLabel.ButtonBuilder().text("Delete Deck").icon(FSkinImage.DELETE).build());
         /*private final FLabel btnNew = add(new FLabel.ButtonBuilder().text("New Deck").icon(FSkinImage.NEW).build());
         private final FLabel btnOpen = add(new FLabel.ButtonBuilder().text("Open Deck").icon(FSkinImage.OPEN).build());
         private final FLabel btnSaveAs = add(new FLabel.ButtonBuilder().text("Save Deck As").icon(FSkinImage.SAVEAS).build());*/
@@ -551,6 +553,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 public void handleEvent(FEvent e) {
                 }
             });
+            btnDelete.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    FOptionPane.showConfirmDialog(
+                            "Are you sure you want to delete '" + parentScreen.getDeck().getName() + "'?",
+                            "Delete Deck", "Delete", "Cancel", false, new Callback<Boolean>() {
+                                @Override
+                                public void run(Boolean result) {
+                                    if (result) {
+                                        parentScreen.getEditorType().getController().delete();
+                                        Forge.back();
+                                    }
+                                }
+                            });
+                }
+            });
         }
 
         @Override
@@ -569,6 +587,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             btnSave.setBounds(x, y, w, buttonHeight);
             y += dy;
             btnAddLands.setBounds(x, y, w, buttonHeight);
+            y += dy;
+            btnDelete.setBounds(x, y, w, buttonHeight);
             y += dy;
             /*btnNew.setBounds(x, y, w, buttonHeight);
             y += dy;
@@ -740,6 +760,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public String getModelName() {
             return model != null ? model.getName() : "";
+        }
+
+        public boolean delete() {
+            if (model == null) { return false; }
+            currentFolder.delete(model.getName());
+            setModel(null);
+            return true;
         }
     }
 }
