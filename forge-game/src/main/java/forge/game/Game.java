@@ -548,8 +548,8 @@ public class Game {
         }
 
         final int shift = turnOrder.getShift();
-        final int totalNumPlayers = allPlayers.size();
         if (-1 == iPlayer) { // if playerTurn has just lost
+        	final int totalNumPlayers = allPlayers.size();
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
             do {
@@ -561,10 +561,11 @@ public class Game {
             } while (iAlive < 0);
             iPlayer = iAlive;
         }
-        else { // for the case noone has died
-        	iPlayer = (iPlayer + shift) % totalNumPlayers;
+        else { // for the case playerTurn hasn't died
+        	final int numPlayersInGame = roIngamePlayers.size();
+        	iPlayer = (iPlayer + shift) % numPlayersInGame;
         	if (iPlayer < 0) {
-        		iPlayer += totalNumPlayers;
+        		iPlayer += numPlayersInGame;
         	}
         }
 
