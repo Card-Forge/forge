@@ -705,7 +705,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
     public Card pumpedCreature(final Player ai, final SpellAbility sa, final Card c, final int d, final int a,
             final List<String> keywords) {
-        Card pumped = c.isToken() || c.isFaceDown() ? CardFactory.copyStats(c, ai) : CardFactory.getCard(c.getPaperCard(), ai);
+        Card pumped = CardFactory.copyCard(c, true);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
         final ArrayList<String> kws = new ArrayList<String>();
