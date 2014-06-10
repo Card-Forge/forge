@@ -9029,6 +9029,7 @@ forge-gui/res/cardsfolder/m/myr_turbine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/myr_welder.txt -text
 forge-gui/res/cardsfolder/m/myrsmith.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mysteries_of_the_deep.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/mystic_barrier.txt -text
 forge-gui/res/cardsfolder/m/mystic_compass.txt -text
 forge-gui/res/cardsfolder/m/mystic_crusader.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mystic_decree.txt -text

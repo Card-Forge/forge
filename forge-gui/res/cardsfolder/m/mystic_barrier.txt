@@ -1,0 +1,12 @@
+Name:Mystic Barrier
+ManaCost:4 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseDirection | TriggerDescription$ When CARDNAME enters the battlefield or at the beginning of your upkeep, choose left or right.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseDirection | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or at the beginning of your upkeep, choose left or right.
+SVar:TrigChooseDirection:AB$ ChooseDirection | Cost$ 0
+S:Mode$ CantAttack | DefenderNotNearestToYouInChosenDirection$ True | Description$ Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player.
+SVar:RemRandomDeck:True
+SVar:NonStackingEffect:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_barrier.jpg
+Oracle:When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.\nEach player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player.

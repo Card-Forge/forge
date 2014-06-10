@@ -74,6 +74,11 @@ public class StaticAbilityCantAttackBlock {
                 return false;
             }
         }
+        if (params.containsKey("DefenderNotNearestToYouInChosenDirection")
+                && hostCard.getChosenDirection() != null
+                && defender.equals(hostCard.getGame().getNextPlayerAfter(card.getController(), hostCard.getChosenDirection()))) {
+            return false;
+        }
 
         return true;
     }
