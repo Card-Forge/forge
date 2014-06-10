@@ -70,7 +70,8 @@ public class FLabel extends FDisplayObject implements IButton {
         }
     }
 
-    private static final FSkinColor DEFAULT_TEXT_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    public static final FSkinColor DEFAULT_TEXT_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    public static final FSkinColor INLINE_LABEL_COLOR = DEFAULT_TEXT_COLOR.alphaColor(0.7f);
     private static final FSkinColor clrMain = FSkinColor.get(Colors.CLR_INACTIVE);
     private static final FSkinColor d50 = clrMain.stepColor(-50);
     private static final FSkinColor d30 = clrMain.stepColor(-30);

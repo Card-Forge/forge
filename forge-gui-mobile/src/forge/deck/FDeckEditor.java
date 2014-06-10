@@ -524,7 +524,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected static class OptionsPage extends DeckEditorPage {
         private static final float PADDING = Utils.scaleMin(5);
 
-        private final FLabel lblName = add(new FLabel.Builder().text("Name:").build());
+        private final FLabel lblName = add(new FLabel.Builder().text("Name:").textColor(FLabel.INLINE_LABEL_COLOR).build());
         private final FTextField txtName = add(new FTextField());
         private final FLabel btnSave = add(new FLabel.ButtonBuilder().text("Save Deck").icon(FSkinImage.SAVE).build());
         private final FLabel btnAddLands = add(new FLabel.ButtonBuilder().text("Add Lands").icon(FSkinImage.LAND).build());
@@ -541,7 +541,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void initialize() {
             txtName.setGhostText("[New Deck]");
             txtName.setText(parentScreen.getDeck().getName());
-            txtName.setEnabled(false); //TODO: Allow editing for non-limited decks
+            txtName.setReadOnly(true); //TODO: Allow editing for non-limited decks
 
             btnSave.setCommand(new FEventHandler() {
                 @Override

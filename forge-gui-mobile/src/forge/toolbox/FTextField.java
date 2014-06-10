@@ -36,7 +36,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     protected FSkinFont font, renderedFont;
     private HAlignment alignment;
     private int selStart, selLength;
-    private boolean isEditing;
+    private boolean isEditing, readOnly;
 
     public FTextField() {
         this("");
@@ -111,6 +111,13 @@ public class FTextField extends FDisplayObject implements ITextField {
         setHeight(getDefaultHeight(font));
     }
 
+    public boolean isReadOnly() {
+        return readOnly;
+    }
+    public void setReadOnly(boolean readOnly0) {
+        readOnly = readOnly0;
+    }
+
     public FEventHandler getChangedHandler() {
         return changedHandler;
     }
@@ -163,6 +170,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     }
 
     public boolean startEdit() {
+        if (readOnly) { return false; }
         if (isEditing) { return true; } //do nothing if already editing
 
         selStart = 0; //select all before starting input
@@ -290,7 +298,11 @@ public class FTextField extends FDisplayObject implements ITextField {
     public void draw(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.fillRect(BACK_COLOR, 0, 0, w, h);
+        boolean drawBackground = !readOnly; //don't draw background or border if read-only
+
+        if (drawBackground) {
+            g.fillRect(BACK_COLOR, 0, 0, w, h);
+        }
 
         //determine actual rendered font so selection logic is accurate
         renderedFont = font;
@@ -328,7 +340,9 @@ public class FTextField extends FDisplayObject implements ITextField {
             drawText(g, w, h);
         }
 
-        g.drawRect(BORDER_THICKNESS, FORE_COLOR, BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
+        if (drawBackground) {
+            g.drawRect(BORDER_THICKNESS, FORE_COLOR, BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
+        }
     }
 
     private void drawText(Graphics g, float w, float h) {
