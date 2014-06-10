@@ -541,6 +541,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void initialize() {
             txtName.setGhostText("[New Deck]");
             txtName.setText(parentScreen.getDeck().getName());
+            txtName.setEnabled(false); //TODO: Allow editing for non-limited decks
 
             btnSave.setCommand(new FEventHandler() {
                 @Override
