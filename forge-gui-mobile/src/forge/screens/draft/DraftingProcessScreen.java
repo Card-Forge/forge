@@ -16,7 +16,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     private final BoosterDraft draft;
 
     public DraftingProcessScreen(BoosterDraft draft0) {
-        super(EditorType.Draft, null);
+        super(EditorType.Draft, "");
         draft = draft0;
         getCatalogPage().refresh(); //must refresh after draft set
     }
@@ -83,7 +83,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         finishedDraft.addAiDecks(computer);
 
         FModel.getDecks().getDraft().add(finishedDraft);
-        this.getEditorType().getController().setDeckBase(finishedDraft);
+        this.getEditorType().getController().load("", name);
         DeckPreferences.setDraftDeck(name);
     }
 

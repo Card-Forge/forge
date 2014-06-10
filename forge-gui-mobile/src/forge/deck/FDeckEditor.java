@@ -146,17 +146,25 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     private final EditorType editorType;
-    private final Deck deck;
+    private Deck deck;
     private CatalogPage catalogPage;
     private DeckSectionPage mainDeckPage;
     private DeckSectionPage sideboardPage;
     private OptionsPage optionsPage;
 
-    public FDeckEditor(EditorType editorType0, Deck deck0) {
+    public FDeckEditor(EditorType editorType0, DeckProxy editDeck) {
+        this(editorType0, editDeck.getName(), editDeck.getPath());
+    }
+    public FDeckEditor(EditorType editorType0, String editDeckName) {
+        this(editorType0, editDeckName, "");
+    }
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath) {
         super(getPages(editorType0));
+
         editorType = editorType0;
-        if (deck0 == null) {
-            deck0 = new Deck();
+
+        if (StringUtils.isEmpty(editDeckName)) {
+            deck = new Deck();
             if (editorType == EditorType.Draft) {
                 tabPages[3].hideTab(); //hide Options page while drafting
             }
@@ -165,8 +173,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (editorType == EditorType.Draft) {
                 tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
             }
+            editorType.getController().load(editDeckPath, editDeckName);
+            deck = editorType.getController().getDeck();
         }
-        deck = deck0;
 
         //cache specific pages and initialize all pages after fields set
         for (int i = 0; i < tabPages.length; i++) {
@@ -192,20 +201,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         //if opening brand new sealed deck, show sideboard (card pool) by default
         if (editorType == EditorType.Sealed && deck.getMain().isEmpty()) {
             setSelectedPage(sideboardPage);
-        }
-
-        //set model for controller based on editor type
-        if (!StringUtils.isEmpty(deck.getName())) {
-            switch (editorType) {
-            case Draft:
-            case Sealed:
-            case Winston:
-                editorType.getController().setDeckBase(editorType.getController().currentFolder.get(deck.getName()));
-                break;
-            default:
-                editorType.getController().setDeckBase(deck);
-                break;
-            }
         }
     }
 
@@ -298,6 +293,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if (editorType == EditorType.Constructed) {
             DeckPreferences.setCurrentDeck(deckStr);
         }
+        deck = editorType.getController().getDeck();
     }
 
     @Override
@@ -601,17 +597,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             newModelCreator = newModelCreator0;
         }
 
+        public Deck getDeck() {
+            if (model instanceof Deck) {
+                return (Deck) model;
+            }
+            return ((DeckGroup) model).getHumanDeck();
+        }
+
         public T getModel() {
             return model;
         }
 
         public String getModelPath() {
             return modelPath;
-        }
-
-        @SuppressWarnings("unchecked")
-        public void setDeckBase(final DeckBase deckBase) {
-            setModel((T)deckBase, true);
         }
 
         public void setModel(final T document) {
