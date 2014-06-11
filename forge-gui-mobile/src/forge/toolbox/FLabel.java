@@ -203,7 +203,7 @@ public class FLabel extends FDisplayObject implements IButton {
         if (icon != null) {
             bounds.width += icon.getWidth() + insets.x;
         }
-        
+
         return bounds;
     }
 
@@ -253,7 +253,7 @@ public class FLabel extends FDisplayObject implements IButton {
         float x = insets.x;
         float y = insets.y;
         w -= 2 * x;
-        h -= 2 * x;
+        h -= 2 * y;
         if (pressed) { //while pressed, translate graphics so icon and text appear shifted down and to the right
             x += Utils.scaleX(1);
             y += Utils.scaleY(1);

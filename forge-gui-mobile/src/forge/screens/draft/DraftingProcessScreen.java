@@ -83,8 +83,12 @@ public class DraftingProcessScreen extends FDeckEditor {
         finishedDraft.addAiDecks(computer);
 
         FModel.getDecks().getDraft().add(finishedDraft);
-        this.getEditorType().getController().load("", name);
+        getEditorType().getController().load("", name);
         DeckPreferences.setDraftDeck(name);
+
+        //show header for main deck and sideboard when finished drafting
+        deckHeader.setVisible(true);
+        revalidate();
     }
 
     @Override

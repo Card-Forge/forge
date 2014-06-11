@@ -2,11 +2,14 @@ package forge.deck;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Supplier;
 
-import forge.Forge;
+import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.deck.io.DeckPreferences;
@@ -16,17 +19,19 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
+import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-import forge.toolbox.FTextField;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
+    private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+
     public enum EditorType {
         Constructed(new DeckController<Deck>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
             @Override
@@ -95,53 +100,46 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Sideboard)
             };
         case Draft:
             return new DeckEditorPage[] {
                     new DraftPackPage(),
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
             };
         case Sealed:
             return new DeckEditorPage[] {
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SEALED_POOL),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SEALED_POOL)
             };
         case Commander:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Commander),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Commander)
             };
         case Archenemy:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Schemes),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Schemes)
             };
         case Planechase:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Planes),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Planes)
             };
         case Vanguard:
             return new DeckEditorPage[] {
                     new CatalogPage(),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Avatar),
-                    new OptionsPage()
+                    new DeckSectionPage(DeckSection.Avatar)
             };
         }
     }
@@ -151,7 +149,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private CatalogPage catalogPage;
     private DeckSectionPage mainDeckPage;
     private DeckSectionPage sideboardPage;
-    private OptionsPage optionsPage;
+
+    protected final DeckHeader deckHeader = add(new DeckHeader());
+    private final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scaleX(5), 0)).build());
+    private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(FSkinImage.SAVE).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
+    private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck) {
         this(editorType0, editDeck.getName(), editDeck.getPath());
@@ -167,7 +169,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if (StringUtils.isEmpty(editDeckName)) {
             deck = new Deck();
             if (editorType == EditorType.Draft) {
-                tabPages[3].hideTab(); //hide Options page while drafting
+                //hide deck header on while drafting
+                deckHeader.setVisible(false);
             }
         }
         else {
@@ -177,6 +180,36 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             editorType.getController().load(editDeckPath, editDeckName);
             deck = editorType.getController().getDeck();
         }
+
+        lblName.setText(deck.getName());
+
+        btnSave.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                save(null);
+            }
+        });
+        /*btnAddLands.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+            }
+        });
+        btnDelete.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FOptionPane.showConfirmDialog(
+                        "Are you sure you want to delete '" + parentScreen.getDeck().getName() + "'?",
+                        "Delete Deck", "Delete", "Cancel", false, new Callback<Boolean>() {
+                            @Override
+                            public void run(Boolean result) {
+                                if (result) {
+                                    parentScreen.getEditorType().getController().delete();
+                                    Forge.back();
+                                }
+                            }
+                        });
+            }
+        });*/
 
         //cache specific pages and initialize all pages after fields set
         for (int i = 0; i < tabPages.length; i++) {
@@ -193,9 +226,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     sideboardPage = deckSectionPage;
                 }
             }
-            else if (tabPage instanceof OptionsPage) {
-                optionsPage = (OptionsPage) tabPage;
-            }
             tabPage.initialize();
         }
 
@@ -203,6 +233,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if (editorType == EditorType.Sealed && deck.getMain().isEmpty()) {
             setSelectedPage(sideboardPage);
         }
+    }
+
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        if (deckHeader.isVisible()) {
+            deckHeader.setBounds(0, startY, width, HEADER_HEIGHT);
+            startY += HEADER_HEIGHT;
+        }
+        super.doLayout(startY, width, height);
     }
 
     public EditorType getEditorType() {
@@ -225,17 +264,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return sideboardPage;
     }
 
-    protected OptionsPage getOptionsPage() {
-        return optionsPage;
-    }
-
     protected BoosterDraft getDraft() {
         return null;
     }
 
     protected void save(final Callback<Boolean> callback) {
         final DeckController<?> controller = editorType.getController();
-        final String name = getOptionsPage().txtName.getText();
+        final String name = deck.getName();
         final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
 
         // Warn if no name
@@ -319,6 +354,33 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     }
         });
+    }
+
+    protected class DeckHeader extends FContainer {
+        private DeckHeader() {
+            setHeight(HEADER_HEIGHT);
+        }
+
+        @Override
+        public void drawBackground(Graphics g) {
+            g.fillRect(Header.BACK_COLOR, 0, 0, getWidth(), HEADER_HEIGHT);
+        }
+
+        @Override
+        public void drawOverlay(Graphics g) {
+            float y = HEADER_HEIGHT - Header.LINE_THICKNESS / 2;
+            g.drawLine(Header.LINE_THICKNESS, Header.LINE_COLOR, 0, y, getWidth(), y);
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            float x = 0;
+            lblName.setBounds(0, 0, width - 2 * height, height);
+            x += lblName.getWidth();
+            btnSave.setBounds(x, 0, height, height);
+            x += height;
+            btnMoreOptions.setBounds(x, 0, height, height);
+        }
     }
 
     protected static abstract class DeckEditorPage extends TabPage<FDeckEditor> {
@@ -514,88 +576,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             else {
                 hideTab(); //hide this tab page when finished drafting
-                parentScreen.getOptionsPage().showTab(); //show options page when finished drafting
                 draft.finishedDrafting();
                 parentScreen.save(null);
             }
-        }
-    }
-
-    protected static class OptionsPage extends DeckEditorPage {
-        private static final float PADDING = Utils.scaleMin(5);
-
-        private final FLabel lblName = add(new FLabel.Builder().text("Name:").textColor(FLabel.INLINE_LABEL_COLOR).build());
-        private final FTextField txtName = add(new FTextField());
-        private final FLabel btnSave = add(new FLabel.ButtonBuilder().text("Save Deck").icon(FSkinImage.SAVE).build());
-        private final FLabel btnAddLands = add(new FLabel.ButtonBuilder().text("Add Lands").icon(FSkinImage.LAND).build());
-        private final FLabel btnDelete = add(new FLabel.ButtonBuilder().text("Delete Deck").icon(FSkinImage.DELETE).build());
-        /*private final FLabel btnNew = add(new FLabel.ButtonBuilder().text("New Deck").icon(FSkinImage.NEW).build());
-        private final FLabel btnOpen = add(new FLabel.ButtonBuilder().text("Open Deck").icon(FSkinImage.OPEN).build());
-        private final FLabel btnSaveAs = add(new FLabel.ButtonBuilder().text("Save Deck As").icon(FSkinImage.SAVEAS).build());*/
-
-        protected OptionsPage() {
-            super("Options", FSkinImage.SETTINGS);
-        }
-
-        @Override
-        protected void initialize() {
-            txtName.setGhostText("[New Deck]");
-            txtName.setText(parentScreen.getDeck().getName());
-            txtName.setReadOnly(true); //TODO: Allow editing for non-limited decks
-
-            btnSave.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    parentScreen.save(null);
-                }
-            });
-            btnAddLands.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
-            });
-            btnDelete.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    FOptionPane.showConfirmDialog(
-                            "Are you sure you want to delete '" + parentScreen.getDeck().getName() + "'?",
-                            "Delete Deck", "Delete", "Cancel", false, new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        parentScreen.getEditorType().getController().delete();
-                                        Forge.back();
-                                    }
-                                }
-                            });
-                }
-            });
-        }
-
-        @Override
-        protected void doLayout(float width, float height) {
-            float x = PADDING;
-            float y = PADDING;
-            float w = width - 2 * PADDING;
-
-            lblName.setBounds(x, y, lblName.getAutoSizeBounds().width, txtName.getHeight());
-            txtName.setBounds(x + lblName.getWidth(), y, w - lblName.getWidth(), txtName.getHeight());
-            y += txtName.getHeight() + PADDING;
-
-            float buttonHeight = Utils.AVG_FINGER_HEIGHT;
-            float dy = buttonHeight + PADDING;
-
-            btnSave.setBounds(x, y, w, buttonHeight);
-            y += dy;
-            btnAddLands.setBounds(x, y, w, buttonHeight);
-            y += dy;
-            btnDelete.setBounds(x, y, w, buttonHeight);
-            y += dy;
-            /*btnNew.setBounds(x, y, w, buttonHeight);
-            y += dy;
-            btnOpen.setBounds(x, y, w, buttonHeight);
-            y += dy;
-            btnSaveAs.setBounds(x, y, w, buttonHeight);*/
         }
     }
 
