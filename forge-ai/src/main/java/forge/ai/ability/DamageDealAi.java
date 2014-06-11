@@ -240,14 +240,9 @@ public class DamageDealAi extends DamageAiBase {
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
         // target loop
-        sa.resetTargets();
         TargetChoices tcs = sa.getTargets();
         Player enemy = ai.getOpponent();
         
-        if (tgt.getMaxTargets(source, sa) <= 0) {
-            return false;
-        }
-
         if ("PowerDmg".equals(sa.getParam("AILogic"))) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
             if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){
@@ -256,6 +251,12 @@ public class DamageDealAi extends DamageAiBase {
             }
             return true;
         }
+        
+        sa.resetTargets();
+        if (tgt.getMaxTargets(source, sa) <= 0) {
+            return false;
+        }
+
         if ("ChoiceBurn".equals(sa.getParam("AILogic"))) {
             // do not waste burns on player if other choices are present
             if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
