@@ -3,14 +3,10 @@ package forge.limited;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
-import forge.game.card.CardColor;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class WinstonDraftAI extends BoosterDraftAI{
 

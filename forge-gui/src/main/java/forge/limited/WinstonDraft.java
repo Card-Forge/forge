@@ -5,9 +5,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.quest.data.GameFormatQuest;
 import forge.util.MyRandom;
 
 import java.util.*;
