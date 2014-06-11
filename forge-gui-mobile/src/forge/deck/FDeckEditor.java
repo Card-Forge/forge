@@ -151,7 +151,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private DeckSectionPage sideboardPage;
 
     protected final DeckHeader deckHeader = add(new DeckHeader());
-    private final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scaleX(5), 0)).build());
+    protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scaleX(5), 0)).build());
     private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(FSkinImage.SAVE).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
@@ -165,6 +165,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         super(getPages(editorType0));
 
         editorType = editorType0;
+        editorType.getController().editor = this;
 
         if (StringUtils.isEmpty(editDeckName)) {
             deck = new Deck();
@@ -180,8 +181,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             editorType.getController().load(editDeckPath, editDeckName);
             deck = editorType.getController().getDeck();
         }
-
-        lblName.setText(deck.getName());
 
         btnSave.setCommand(new FEventHandler() {
             @Override
@@ -589,6 +588,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private final IStorage<T> rootFolder;
         private IStorage<T> currentFolder;
         private String modelPath;
+        private FDeckEditor editor;
         private final Supplier<T> newModelCreator;
 
         protected DeckController(final IStorage<T> folder0, final Supplier<T> newModelCreator0) {
@@ -663,6 +663,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         private void setSaved(boolean val) {
             saved = val;
+
+            if (editor != null) {
+                String name = this.getModelName();
+                if (!saved) {
+                    name = "*" + name;
+                }
+                editor.lblName.setText(name);
+                editor.btnSave.setEnabled(!saved);
+            }
         }
 
         public void reload() {
