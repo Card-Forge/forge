@@ -180,19 +180,19 @@ public final class CardDb implements ICardDatabase {
     }
 
     @Override
-    public PaperCard getCard(final String cardName, String setName) {
+    public PaperCard getCard(final String cardName, String setCode) {
         CardRequest request = CardRequest.fromString(cardName);
-        if (setName != null) {
-            request.edition = setName;
+        if (setCode != null) {
+            request.edition = setCode;
         }
         return tryGetCard(request);
     }
 
     @Override
-    public PaperCard getCard(final String cardName, String setName, int artIndex) {
+    public PaperCard getCard(final String cardName, String setCode, int artIndex) {
         CardRequest request = CardRequest.fromString(cardName);
-        if (setName != null) {
-            request.edition = setName;
+        if (setCode != null) {
+            request.edition = setCode;
         }
         if (artIndex > 0) {
             request.artIndex = artIndex;

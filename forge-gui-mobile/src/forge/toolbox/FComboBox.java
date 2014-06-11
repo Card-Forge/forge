@@ -59,6 +59,11 @@ public class FComboBox<E> extends FTextField {
         return false;
     }
 
+    public void clearItems() {
+        items.clear();
+        setSelectedItem(null);
+    }
+
     public int getItemCount() {
         return items.size();
     }

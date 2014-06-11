@@ -1,5 +1,7 @@
 package forge.deck;
 
+import java.util.Map.Entry;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -7,12 +9,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Supplier;
 
 import forge.Forge;
+import forge.StaticData;
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.card.CardEdition;
 import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -200,6 +204,28 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addItem(new FMenuItem("Add Lands", FSkinImage.LAND, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
+                                CardEdition defaultLandSet;
+                                switch (editorType) {
+                                case Draft:
+                                case Sealed:
+                                    //use most recent edition that all cards in limited pool came before or in 
+                                    defaultLandSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(deck.getAllCardsInASinglePool());
+                                    break;
+                                default:
+                                    //TODO: Support loading/saving default land set for non-limited decks
+                                    defaultLandSet = StaticData.instance().getEditions().get("ZEN");
+                                    break;
+                                }
+                                AddLandsDialog dialog = new AddLandsDialog(deck, defaultLandSet, new Callback<Boolean>() {
+                                    @Override
+                                    public void run(Boolean result) {
+                                        if (result) { //account for added lands
+                                            editorType.getController().notifyModelChanged();
+                                            getMainDeckPage().updateCaption();
+                                        }
+                                    }
+                                });
+                                dialog.show();
                             }
                         }));
                         addItem(new FMenuItem("Rename Deck", FSkinImage.EDIT, new FEventHandler() {
@@ -420,6 +446,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public void addCard(PaperCard card) {
             cardManager.addItem(card, 1);
+            parentScreen.getEditorType().getController().notifyModelChanged();
+            updateCaption();
+        }
+
+        public void addCards(Iterable<Entry<PaperCard, Integer>> cards) {
+            cardManager.addItems(cards);
             parentScreen.getEditorType().getController().notifyModelChanged();
             updateCaption();
         }
