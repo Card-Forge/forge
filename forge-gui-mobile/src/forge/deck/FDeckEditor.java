@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Supplier;
 
+import forge.Forge;
 import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -17,6 +18,8 @@ import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
@@ -188,27 +191,38 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 save(null);
             }
         });
-        /*btnAddLands.setCommand(new FEventHandler() {
+        btnMoreOptions.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        addItem(new FMenuItem("Add Lands", FSkinImage.LAND, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                            }
+                        }));
+                        addItem(new FMenuItem("Delete Deck", FSkinImage.DELETE, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                FOptionPane.showConfirmDialog(
+                                        "Are you sure you want to delete '" + deck.getName() + "'?",
+                                        "Delete Deck", "Delete", "Cancel", false, new Callback<Boolean>() {
+                                            @Override
+                                            public void run(Boolean result) {
+                                                if (result) {
+                                                    editorType.getController().delete();
+                                                    Forge.back();
+                                                }
+                                            }
+                                        });
+                            }
+                        }));
+                    }
+                };
+                menu.show(btnMoreOptions, 0, btnMoreOptions.getHeight());
             }
         });
-        btnDelete.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FOptionPane.showConfirmDialog(
-                        "Are you sure you want to delete '" + parentScreen.getDeck().getName() + "'?",
-                        "Delete Deck", "Delete", "Cancel", false, new Callback<Boolean>() {
-                            @Override
-                            public void run(Boolean result) {
-                                if (result) {
-                                    parentScreen.getEditorType().getController().delete();
-                                    Forge.back();
-                                }
-                            }
-                        });
-            }
-        });*/
 
         //cache specific pages and initialize all pages after fields set
         for (int i = 0; i < tabPages.length; i++) {
