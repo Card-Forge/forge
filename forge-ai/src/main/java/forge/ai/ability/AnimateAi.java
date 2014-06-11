@@ -72,7 +72,7 @@ public class AnimateAi extends SpellAbilityAi {
                 list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, aiPlayer)) {
-                    Card animatedCopy = CardFactory.getCard(source.getPaperCard(), aiPlayer);
+                    Card animatedCopy = CardFactory.copyCard(source, true);
                     becomeAnimated(animatedCopy, sa);
                     list.add(animatedCopy);
                     list = CardLists.getValidCards(list, valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());

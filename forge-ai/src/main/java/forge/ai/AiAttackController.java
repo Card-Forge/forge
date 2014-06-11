@@ -123,7 +123,7 @@ public class AiAttackController {
                 if (sa.getApi() == ApiType.Animate) {
                     if (ComputerUtilCost.canPayCost(sa, defender) 
                     		&& sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
-                        Card animatedCopy = CardFactory.getCard(c.getPaperCard(), defender);
+                        Card animatedCopy = CardFactory.copyCard(c, true);
                         AnimateAi.becomeAnimated(animatedCopy, sa);
                         defenders.add(animatedCopy);
                     }
