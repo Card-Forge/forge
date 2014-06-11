@@ -1,58 +1,31 @@
-Forge Beta: 06-06-2014 ver 1.5.19
+Forge Beta: 0#-##-2014 ver 1.5.20
 
 
-13831 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- New Conspiracy and M15 cards -
+- New Magic 2015 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
-- Random Duel Button -
-If you find yourself challenging only certain opponents in quest mode, try giving this button a click. It pairs you up with a random opponent to keep you on your toes.
-
-
-- Quest Draft Tournaments -
-An entirely new mode has been added to quests... drafting!
-Compete in tournaments to win credits and booster packs, then keep the deck and the cards you drafted to use in your regular quest duels and challenges.
-Tournaments are generated every 5 regular duel wins and disappear every 15 (a tournament rotates every 5 turns).
-If you get a 25 win streak or win first place in a tournament, you're awarded a token to generate a new draft right away.
+- Conspiracy cards -
+Forge now includes many of the new Conspiracy cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
 ---------
 New Cards
 ---------
 
-Adarkar Unicorn
-Balduvian Fallen
-Equipoise
-Goblin Game
-Halfdane
-Hammerheim
-Hollow Warrior
-Ice Cave
-Jeleva, Nephalia's Scourge
-Lightning Storm
-Marath, Will of the Wild
-Menacing Ogre
-Nix
-Prossh, Skyraider of Kher
-Reversal of Fortune
-Risky Move
-Shah of Naar Isle
-Snowfall
-Soul Sculptor
-Tahngarth's Glare
-Thick-Skinned Goblin
 
 
----------------------------
-New Conspiracy branch Cards
----------------------------
+
+--------------------
+New Conspiracy Cards
+--------------------
 
 Academy Elite
 Bite of the Black Rose
@@ -138,15 +111,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-elcnesh
-excessum
-Gos
-KrazyTheFox
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
