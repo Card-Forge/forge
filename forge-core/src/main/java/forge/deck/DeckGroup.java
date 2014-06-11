@@ -92,7 +92,7 @@ public class DeckGroup extends DeckBase {
         super.cloneFieldsTo(clone);
 
         DeckGroup myClone = (DeckGroup) clone;
-        myClone.setHumanDeck((Deck) this.getHumanDeck().copyTo(this.getHumanDeck().getName()));
+        myClone.setHumanDeck((Deck) this.getHumanDeck().copyTo(getName())); //human deck name should always match DeckGroup name
 
         for (int i = 0; i < this.getAiDecks().size(); i++) {
             Deck src = this.getAiDecks().get(i);

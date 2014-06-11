@@ -79,7 +79,12 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
      */
     @Override
     public final void delete(final String itemName) {
-        this.serializer.erase(this.map.remove(itemName));
+        try {
+            this.serializer.erase(this.map.remove(itemName));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /* (non-Javadoc)

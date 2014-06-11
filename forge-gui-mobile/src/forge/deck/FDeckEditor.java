@@ -202,6 +202,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             public void handleEvent(FEvent e) {
                             }
                         }));
+                        addItem(new FMenuItem("Rename Deck", FSkinImage.EDIT, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                FOptionPane.showInputDialog("Enter new name for deck:", "Rename Deck", null, deck.getName(), new Callback<String>() {
+                                    @Override
+                                    public void run(String result) {
+                                        editorType.getController().rename(result);
+                                    }
+                                });
+                            }
+                        }));
                         addItem(new FMenuItem("Delete Deck", FSkinImage.DELETE, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
@@ -284,7 +295,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected void save(final Callback<Boolean> callback) {
         final DeckController<?> controller = editorType.getController();
         final String name = deck.getName();
-        final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
 
         // Warn if no name
         if (StringUtils.isEmpty(name)) {
@@ -305,7 +315,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         public void run(Boolean result) {
                             if (result) {
                                 controller.save();
-                                afterSave(deckStr);
                             }
                             if (callback != null) {
                                 callback.run(result);
@@ -315,7 +324,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return;
             }
             controller.save();
-            afterSave(deckStr);
             if (callback != null) {
                 callback.run(true);
             }
@@ -329,20 +337,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     public void run(Boolean result) {
                         if (result) {
                             controller.saveAs(name);
-                            afterSave(deckStr);
                         }
                         if (callback != null) {
                             callback.run(result);
                         }
                     }
         });
-    }
-
-    private void afterSave(String deckStr) {
-        if (editorType == EditorType.Constructed) {
-            DeckPreferences.setCurrentDeck(deckStr);
-        }
-        deck = editorType.getController().getDeck();
     }
 
     @Override
@@ -730,6 +730,23 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             currentFolder.add((T) model.copyTo(model.getName()));
             modelInStorage = true;
             setSaved(true);
+
+            //update saved deck names
+            String deckStr = DeckProxy.getDeckString(getModelPath(), getModelName());
+            switch (editor.getEditorType()) {
+            case Constructed:
+                DeckPreferences.setCurrentDeck(deckStr);
+                break;
+            case Draft:
+                DeckPreferences.setDraftDeck(deckStr);
+                break;
+            case Sealed:
+                DeckPreferences.setSealedDeck(deckStr);
+                break;
+            default:
+                break;
+            }
+            editor.deck = getDeck();
         }
 
         @SuppressWarnings("unchecked")
@@ -737,6 +754,16 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             model = (T)model.copyTo(name0);
             modelInStorage = false;
             save();
+        }
+
+        public void rename(final String name0) {
+            if (StringUtils.isEmpty(name0)) { return; }
+
+            String oldName = model.getName();
+            if (name0.equals(oldName)) { return; }
+
+            saveAs(name0);
+            currentFolder.delete(oldName); //delete deck with old name
         }
 
         public boolean isSaved() {
