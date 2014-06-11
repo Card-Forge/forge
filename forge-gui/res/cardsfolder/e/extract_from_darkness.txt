@@ -6,3 +6,4 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature | ChoiceZone$ Gr
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extract_from_darkness.jpg
+Oracle:Each player puts the top two cards of his or her library into his or her graveyard. Then put a creature card from a graveyard onto the battlefield under your control.

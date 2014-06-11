@@ -6,3 +6,4 @@ A:AB$ Dig | Cost$ 3 U T | DigNum$ X | References$ X | Optional$ True | ChangeVal
 SVar:X:Count$HighestCMC_Artifact.YouCtrl+inZoneBattlefield
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muzzio_visionary_architect.jpg
+Oracle:{3}{U}, {T}: Look at the top X cards of your library, where X is the highest converted mana cost among artifacts you control. You may reveal an artifact card from among them and put it onto the battlefield. Put the rest on the bottom of your library in any order.

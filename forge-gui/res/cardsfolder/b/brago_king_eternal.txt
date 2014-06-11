@@ -9,3 +9,4 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.YouCtrl+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brago_king_eternal.jpg
+Oracle:Flying\nWhen Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.

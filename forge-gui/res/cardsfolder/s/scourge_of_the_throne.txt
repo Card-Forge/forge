@@ -8,3 +8,4 @@ T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute
 SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_the_throne.jpg
+Oracle:Flying\nDethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nWhenever Scourge of the Throne attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase.

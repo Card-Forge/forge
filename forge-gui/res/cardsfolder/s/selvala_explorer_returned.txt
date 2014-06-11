@@ -10,3 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selvala_explorer_returned.jpg
+Oracle:Parley - {T}: Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life. Then each player draws a card.

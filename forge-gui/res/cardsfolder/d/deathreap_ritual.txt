@@ -5,3 +5,4 @@ T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZo
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathreap_ritual.jpg
+Oracle:Morbid - At the beginning of each end step, if a creature died this turn, you may draw a card.

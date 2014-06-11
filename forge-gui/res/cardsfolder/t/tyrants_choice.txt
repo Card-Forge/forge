@@ -6,3 +6,4 @@ SVar:TyrantsChoiceSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creat
 SVar:TyrantsChoiceLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 4
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tyrants_choice.jpg
+Oracle:Will of the council - Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life.

@@ -7,3 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_the_pit.jpg
+Oracle:Each player sacrifices a creature. Put an X/X black Demon creature token with flying onto the battlefield, where X is the total power of the creatures sacrificed this way.

@@ -10,3 +10,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.YouCtrl+counters_GE1_P1P1 | Origin$ Battle
 SVar:DelTrigReturn:Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | TriggerDescription$ Sacrifice the token at the beginning of the next end step.
 SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marchesa_the_black_rose.jpg
+Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)\nOther creatures you control have dethrone.\nWhenever a creature you control with a +1/+1 counter on it dies, return that card to the battlefield under your control at the beginning of the next end step.
