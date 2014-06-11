@@ -216,16 +216,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     defaultLandSet = StaticData.instance().getEditions().get("ZEN");
                                     break;
                                 }
-                                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<Boolean>() {
+                                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<CardPool>() {
                                     @Override
-                                    public void run(Boolean result) {
-                                        if (result) { //account for added lands
-                                            editorType.getController().notifyModelChanged();
-                                            getMainDeckPage().updateCaption();
-                                        }
+                                    public void run(CardPool landsToAdd) {
+                                        getMainDeckPage().addCards(landsToAdd);
                                     }
                                 });
                                 dialog.show();
+                                setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
                             }
                         }));
                         addItem(new FMenuItem("Rename Deck", FSkinImage.EDIT, new FEventHandler() {

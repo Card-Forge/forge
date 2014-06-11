@@ -48,7 +48,7 @@ public class AddBasicLandsDialog extends FDialog {
     private static final float LAND_PANEL_PADDING = Utils.scaleY(3);
 
     private final Deck deck;
-    private final Callback<Boolean> callback;
+    private final Callback<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
     private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<CardEdition>(StaticData.instance().getEditions()));
@@ -63,10 +63,10 @@ public class AddBasicLandsDialog extends FDialog {
 
     private CardEdition landSet;
 
-    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, final Callback<Boolean> callback0) {
+    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
         this(deck0, defaultLandSet, null, callback0);
     }
-    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<Boolean> callback0) {
+    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<CardPool> callback0) {
         super("Add Basic Lands to " + deck0.getName());
 
         deck = deck0;
@@ -95,17 +95,27 @@ public class AddBasicLandsDialog extends FDialog {
         btnOK.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                CardPool landsToAdd = new CardPool();
+                pnlPlains.addToCardPool(landsToAdd);
+                pnlIsland.addToCardPool(landsToAdd);
+                pnlSwamp.addToCardPool(landsToAdd);
+                pnlMountain.addToCardPool(landsToAdd);
+                pnlForest.addToCardPool(landsToAdd);
+
                 hide();
-                callback.run(true);
+
+                if (landsToAdd.countAll() > 0) {
+                    callback.run(landsToAdd);
+                }
             }
         });
         btnCancel.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
-                callback.run(false);
             }
         });
+        btnAuto.setEnabled(false); //TODO: Enable when auto button works
     }
 
     @Override
@@ -173,7 +183,9 @@ public class AddBasicLandsDialog extends FDialog {
             cbLandArt.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    card = generateCard(); //generate card for display
+                    int artIndex = cbLandArt.getSelectedIndex();
+                    if (artIndex < 0) { return; }
+                    card = generateCard(artIndex); //generate card for display
                 }
             });
             lblCount = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(HAlignment.CENTER).build());
@@ -197,13 +209,25 @@ public class AddBasicLandsDialog extends FDialog {
             }).build());
         }
 
-        private PaperCard generateCard() {
+        private void addToCardPool(CardPool pool) {
+            if (count == 0) { return; }
             int artIndex = cbLandArt.getSelectedIndex();
-            if (artIndex < 0) { return card; }
+            if (artIndex < 0) { return; }
 
+            if (artIndex > 0 && card != null) {
+                pool.add(card, count); //simplify things if art index specified
+            }
+            else {
+                for (int i = 0; i < count; i++) {
+                    pool.add(generateCard(artIndex));
+                }
+            }
+        }
+
+        private PaperCard generateCard(int artIndex) {
             PaperCard c = FModel.getMagicDb().getCommonCards().getCard(cardName, landSet.getCode(), artIndex);
-
-            if (c == null) { //if can't find land for this set, fall back to Zendikar lands
+            if (c == null) {
+                //if can't find land for this set, fall back to Zendikar lands
                 c = FModel.getMagicDb().getCommonCards().getCard(cardName, "ZEN");
             }
             return c;
