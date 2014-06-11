@@ -17,12 +17,13 @@
  */
 package forge.deck;
 
+import forge.Forge.Graphics;
 import forge.StaticData;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.card.CardEdition;
 import forge.card.CardZoom;
-import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.toolbox.FButton;
@@ -30,14 +31,15 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDialog;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-import forge.util.MyRandom;
 import forge.util.Utils;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 
@@ -161,21 +163,17 @@ public class AddLandsDialog extends FDialog {
         private final FComboBox<String> cbLandArt;
         private final String cardName;
         private PaperCard card;
-        private int count, maxCount, artChoiceCount;
+        private int count, maxCount;
 
         private LandPanel(String cardName0) {
             cardName = cardName0;
             cardPanel = add(new LandCardPanel());
             cbLandArt = add(new FComboBox<String>());
-            cbLandSet.setChangedHandler(new FEventHandler() {
+            cbLandArt.setFont(cbLandSet.getFont());
+            cbLandArt.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    int artIndex = cbLandArt.getSelectedIndex() - 1;
-                    if (artIndex < -1) { return; }
-                    if (artIndex == -1) { //use a random art index if "Assorted Art" selected
-                        artIndex = MyRandom.getRandom().nextInt(artChoiceCount);
-                    }
-                    setCard(FModel.getMagicDb().getCommonCards().getCard(cardName, landSet.getCode(), artIndex));
+                    card = generateCard(); //generate card for display
                 }
             });
             lblCount = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(HAlignment.CENTER).build());
@@ -199,24 +197,27 @@ public class AddLandsDialog extends FDialog {
             }).build());
         }
 
+        private PaperCard generateCard() {
+            int artIndex = cbLandArt.getSelectedIndex();
+            if (artIndex < 0) { return card; }
+
+            PaperCard c = FModel.getMagicDb().getCommonCards().getCard(cardName, landSet.getCode(), artIndex);
+
+            if (c == null) { //if can't find land for this set, fall back to Zendikar lands
+                c = FModel.getMagicDb().getCommonCards().getCard(cardName, "ZEN");
+            }
+            return c;
+        }
+
         private void refreshArtChoices() {
             cbLandArt.clearItems();
             if (landSet == null) { return; }
 
-            artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
+            int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
             cbLandArt.addItem("Assorted Art");
             for (int i = 1; i <= artChoiceCount; i++) {
                 cbLandArt.addItem("Card Art " + i);
             }
-        }
-
-        private PaperCard getCard() {
-            return card;
-        }
-        private void setCard(PaperCard card0) {
-            if (card == card0) { return; }
-            card = card0;
-            cardPanel.setCard(Card.getCardForUi(card));
         }
 
         @Override
@@ -231,31 +232,32 @@ public class AddLandsDialog extends FDialog {
 
             float cardPanelHeight = y - LAND_PANEL_PADDING;
             float cardPanelWidth = cardPanelHeight / FCardPanel.ASPECT_RATIO;
-            cardPanel.setBounds(0, 0, cardPanelWidth, cardPanelHeight);
+            cardPanel.setBounds((width - cardPanelWidth) / 2, 0, cardPanelWidth, cardPanelHeight);
         }
 
-        private class LandCardPanel extends FCardPanel {
+        private class LandCardPanel extends FDisplayObject {
             private LandCardPanel() {
-                super(null);
             }
 
             @Override
             public boolean tap(float x, float y, int count) {
-                if (getCard() == null) { return false; }
-                CardZoom.show(getCard());
+                if (card == null) { return false; }
+                CardZoom.show(card);
                 return true;
             }
 
             @Override
             public boolean longPress(float x, float y) {
-                if (getCard() == null) { return false; }
-                CardZoom.show(getCard());
+                if (card == null) { return false; }
+                CardZoom.show(card);
                 return true;
             }
 
             @Override
-            protected float getPadding() {
-                return 0;
+            public void draw(Graphics g) {
+                if (card == null) { return; }
+                Texture image = ImageCache.getImage(card);
+                g.drawImage(image, 0, 0, getWidth(), getHeight());
             }
         }
     }

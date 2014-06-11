@@ -89,14 +89,6 @@ public abstract class FDialog extends FOverlay {
 
         //draw custom background behind titlebar
         g.fillRect(TITLE_BACK_COLOR, x, y, w, TITLE_HEIGHT);
-    }
-
-    @Override
-    protected void drawOverlay(Graphics g) {
-        float x = lblTitlebar.getLeft();
-        float y = lblTitlebar.getTop();
-        float w = lblTitlebar.getWidth();
-        float h = totalHeight;
 
         //draw border around dialog
         g.drawRect(1, BORDER_COLOR, x, y, w, h);

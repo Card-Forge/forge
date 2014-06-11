@@ -6,6 +6,7 @@ import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.Card;
+import forge.item.PaperCard;
 import forge.toolbox.FList;
 import forge.toolbox.FOverlay;
 import forge.util.Utils;
@@ -17,6 +18,9 @@ public class CardZoom extends FOverlay {
     private static Card card;
     private static boolean zoomMode = true;
 
+    public static <T> void show(final PaperCard pc0) {
+        show(Card.getCardForUi(pc0));
+    }
     public static <T> void show(final Card card0) {
         card = card0;
         cardZoom.show();
