@@ -43,7 +43,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 
-public class AddLandsDialog extends FDialog {
+public class AddBasicLandsDialog extends FDialog {
     private static final float ADD_BTN_SIZE = Utils.AVG_FINGER_HEIGHT * 0.75f;
     private static final float LAND_PANEL_PADDING = Utils.scaleY(3);
 
@@ -63,11 +63,11 @@ public class AddLandsDialog extends FDialog {
 
     private CardEdition landSet;
 
-    public AddLandsDialog(Deck deck0, CardEdition defaultLandSet, final Callback<Boolean> callback0) {
+    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, final Callback<Boolean> callback0) {
         this(deck0, defaultLandSet, null, callback0);
     }
-    public AddLandsDialog(Deck deck0, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<Boolean> callback0) {
-        super("Add Lands to " + deck0.getName());
+    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<Boolean> callback0) {
+        super("Add Basic Lands to " + deck0.getName());
 
         deck = deck0;
         callback = callback0;

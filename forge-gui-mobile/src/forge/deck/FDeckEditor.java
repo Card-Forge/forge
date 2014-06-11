@@ -201,7 +201,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 FPopupMenu menu = new FPopupMenu() {
                     @Override
                     protected void buildMenu() {
-                        addItem(new FMenuItem("Add Lands", FSkinImage.LAND, new FEventHandler() {
+                        addItem(new FMenuItem("Add Basic Lands", FSkinImage.LAND, new FEventHandler() {
                             @Override
                             public void handleEvent(FEvent e) {
                                 CardEdition defaultLandSet;
@@ -216,7 +216,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     defaultLandSet = StaticData.instance().getEditions().get("ZEN");
                                     break;
                                 }
-                                AddLandsDialog dialog = new AddLandsDialog(deck, defaultLandSet, new Callback<Boolean>() {
+                                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<Boolean>() {
                                     @Override
                                     public void run(Boolean result) {
                                         if (result) { //account for added lands
