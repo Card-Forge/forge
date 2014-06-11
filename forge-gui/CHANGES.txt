@@ -20,7 +20,11 @@ Forge now includes many of the new Conspiracy cards. It may take a few days/week
 New Cards
 ---------
 
-
+Time Distortion
+Order of Succession
+Grenzo's Rebuttal
+Grave Scrabbler
+Mystic Barrier
 
 
 --------------------
@@ -74,6 +78,21 @@ New M15 branch Cards
 
 Soul of Zendikar
 Waste Not
+Chasm Skulker
+Coral Barrier
+Marked for Honor
+Meditation Puzzle
+Military Intelligence
+Paragon of Eternal Wilds
+Paragon of Fierce Defiance
+Paragon of Gathering Mists
+Paragon of New Dawns
+Paragon of Open Graves
+Quickling
+Reclamation Sage
+Seraph of the Masses
+Triplicate Spirits
+Void Snare
 
 
 ------------
