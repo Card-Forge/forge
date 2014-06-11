@@ -42,12 +42,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 
 public class AddLandsDialog extends FDialog {
-    private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
+    private static final float ADD_BTN_SIZE = Utils.AVG_FINGER_HEIGHT * 0.75f;
+    private static final float LAND_PANEL_PADDING = Utils.scaleY(3);
 
     private final Deck deck;
     private final Callback<Boolean> callback;
 
-    private final FLabel lblLandSet = add(new FLabel.Builder().text("Basic Land Set:").textColor(FLabel.INLINE_LABEL_COLOR).build());
+    private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
     private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<CardEdition>(StaticData.instance().getEditions()));
     private final LandPanel pnlPlains = add(new LandPanel("Plains"));
     private final LandPanel pnlIsland = add(new LandPanel("Island"));
@@ -69,6 +70,7 @@ public class AddLandsDialog extends FDialog {
         deck = deck0;
         callback = callback0;
 
+        cbLandSet.setFont(lblLandSet.getFont());
         cbLandSet.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -119,12 +121,14 @@ public class AddLandsDialog extends FDialog {
         //layout card panels
         x = padding;
         y += comboBoxHeight + padding;
+        float maxPanelHeight = (maxHeight - y - FOptionPane.BUTTON_HEIGHT - FOptionPane.GAP_BELOW_BUTTONS - 2 * padding) / 2;
+        float panelExtraHeight = pnlPlains.cbLandArt.getHeight() + ADD_BTN_SIZE + 2 * LAND_PANEL_PADDING;
         float panelWidth = (w - 2 * padding) / 3;
-        float panelHeight = panelWidth * FCardPanel.ASPECT_RATIO + ADD_BTN_HEIGHT +
-                pnlPlains.lblCount.getAutoSizeBounds().height + pnlPlains.cbLandArt.getHeight();
+        float panelHeight = panelWidth * FCardPanel.ASPECT_RATIO + panelExtraHeight;
+        if (panelHeight > maxPanelHeight) { //ensure panels short enough that dialog doesn't exceed max height
+            panelHeight = maxPanelHeight;
+        }
 
-        x = padding;
-        y += panelHeight + padding;
         pnlPlains.setBounds(x, y, panelWidth, panelHeight);
         x += panelWidth + padding;
         pnlIsland.setBounds(x, y, panelWidth, panelHeight);
@@ -138,16 +142,17 @@ public class AddLandsDialog extends FDialog {
         pnlForest.setBounds(x, y, panelWidth, panelHeight);
 
         //layout buttons
+        x = padding;
+        y += panelHeight + padding;
         float gapBetweenButtons = padding / 2;
         float buttonWidth = (w - gapBetweenButtons * 2) / 3;
-        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
-        btnAuto.setBounds(x, y, buttonWidth, buttonHeight);
+        btnAuto.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
         x += buttonWidth + gapBetweenButtons;
-        btnOK.setBounds(x, y, buttonWidth, buttonHeight);
+        btnOK.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
         x += buttonWidth + gapBetweenButtons;
-        btnCancel.setBounds(x, y, buttonWidth, buttonHeight);
+        btnCancel.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
 
-        return y + buttonHeight + FOptionPane.GAP_BELOW_BUTTONS;
+        return y + FOptionPane.BUTTON_HEIGHT + FOptionPane.GAP_BELOW_BUTTONS;
     }
 
     private class LandPanel extends FContainer {
@@ -198,7 +203,7 @@ public class AddLandsDialog extends FDialog {
             cbLandArt.clearItems();
             if (landSet == null) { return; }
 
-            int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
+            artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
             cbLandArt.addItem("Assorted Art");
             for (int i = 1; i <= artChoiceCount; i++) {
                 cbLandArt.addItem("Card Art " + i);
@@ -216,19 +221,17 @@ public class AddLandsDialog extends FDialog {
 
         @Override
         protected void doLayout(float width, float height) {
-            float y = 0;
-            cardPanel.setBounds(0, y, width, FCardPanel.ASPECT_RATIO * width);
-            y += cardPanel.getHeight();
+            float y = height - ADD_BTN_SIZE;
+            btnSubtract.setBounds(0, y, ADD_BTN_SIZE, ADD_BTN_SIZE);
+            lblCount.setBounds(ADD_BTN_SIZE, y, width - 2 * ADD_BTN_SIZE, ADD_BTN_SIZE);
+            btnAdd.setBounds(width - ADD_BTN_SIZE, y, ADD_BTN_SIZE, ADD_BTN_SIZE);
 
+            y -= cbLandArt.getHeight() + LAND_PANEL_PADDING;
             cbLandArt.setBounds(0, y, width, cbLandArt.getHeight());
-            y += cbLandArt.getHeight();
 
-            lblCount.setBounds(0, y, width, lblCount.getAutoSizeBounds().height);
-            y += lblCount.getHeight();
-
-            float buttonSize = (width - FOptionPane.PADDING) / 2;
-            btnSubtract.setBounds(0, y, buttonSize, ADD_BTN_HEIGHT);
-            btnAdd.setBounds(width - buttonSize, y, buttonSize, ADD_BTN_HEIGHT);
+            float cardPanelHeight = y - LAND_PANEL_PADDING;
+            float cardPanelWidth = cardPanelHeight / FCardPanel.ASPECT_RATIO;
+            cardPanel.setBounds(0, 0, cardPanelWidth, cardPanelHeight);
         }
 
         private class LandCardPanel extends FCardPanel {
@@ -238,12 +241,14 @@ public class AddLandsDialog extends FDialog {
 
             @Override
             public boolean tap(float x, float y, int count) {
+                if (getCard() == null) { return false; }
                 CardZoom.show(getCard());
                 return true;
             }
 
             @Override
             public boolean longPress(float x, float y) {
+                if (getCard() == null) { return false; }
                 CardZoom.show(getCard());
                 return true;
             }

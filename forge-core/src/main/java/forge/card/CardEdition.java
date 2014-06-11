@@ -194,7 +194,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     @Override
     public String toString() {
-        return this.name + " (set)";
+        return this.name + " (" + this.code + ")";
     }
 
 

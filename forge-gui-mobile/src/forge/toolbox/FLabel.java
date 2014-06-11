@@ -133,6 +133,9 @@ public class FLabel extends FDisplayObject implements IButton {
         textColor = textColor0;
     }
 
+    public FSkinFont getFont() {
+        return font;
+    }
     public void setFont(FSkinFont font0) {
         font = font0;
     }
