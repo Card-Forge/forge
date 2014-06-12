@@ -175,7 +175,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         editorType.getController().editor = this;
 
         if (StringUtils.isEmpty(editDeckName)) {
-            deck = new Deck();
+            setDeck(new Deck());
             if (editorType == EditorType.Draft) {
                 //hide deck header on while drafting
                 deckHeader.setVisible(false);
@@ -186,7 +186,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
             }
             editorType.getController().load(editDeckPath, editDeckName);
-            deck = editorType.getController().getDeck();
         }
 
         btnSave.setCommand(new FEventHandler() {
@@ -259,9 +258,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         });
 
-        //cache specific pages and initialize all pages after fields set
-        for (int i = 0; i < tabPages.length; i++) {
-            DeckEditorPage tabPage = (DeckEditorPage) tabPages[i];
+        //cache specific pages
+        for (TabPage<FDeckEditor> tabPage : tabPages) {
             if (tabPage instanceof CatalogPage) {
                 catalogPage = (CatalogPage) tabPage;
             }
@@ -274,7 +272,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     sideboardPage = deckSectionPage;
                 }
             }
-            tabPage.initialize();
         }
 
         //if opening brand new sealed deck, show sideboard (card pool) by default
@@ -299,6 +296,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public Deck getDeck() {
         return deck;
     }
+    public void setDeck(Deck deck0) {
+        if (deck == deck0) { return; }
+        deck = deck0;
+
+        //reinitialize tab pages when deck changes
+        for (TabPage<FDeckEditor> tabPage : tabPages) {
+            ((DeckEditorPage)tabPage).initialize();
+        }
+    }
 
     protected CatalogPage getCatalogPage() {
         return catalogPage;
@@ -317,56 +323,23 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected void save(final Callback<Boolean> callback) {
-        final DeckController<?> controller = editorType.getController();
-        final String name = deck.getName();
-
-        // Warn if no name
-        if (StringUtils.isEmpty(name)) {
-            FOptionPane.showErrorDialog("Please name your deck using the 'Name' box.", "Save Error!");
-            if (callback != null) {
-                callback.run(false);
-            }
-            return;
-        }
-        
-        // Confirm if overwrite
-        if (controller.fileExists(name)) {
-            //prompt only if name was changed
-            if (!StringUtils.equals(name, controller.getModelName())) {
-                FOptionPane.showConfirmDialog("There is already a deck named '" + name + "'. Overwrite?",
-                    "Overwrite Deck?", new Callback<Boolean>() {
-                        @Override
-                        public void run(Boolean result) {
-                            if (result) {
-                                controller.save();
-                            }
-                            if (callback != null) {
-                                callback.run(result);
-                            }
-                        }
-                });
-                return;
-            }
-            controller.save();
-            if (callback != null) {
-                callback.run(true);
-            }
-            return;
-        }
-
-        // Confirm if a new deck will be created
-        FOptionPane.showConfirmDialog("This will create a new deck named '" +
-                name + "'. Continue?", "Create Deck?", new Callback<Boolean>() {
-                    @Override
-                    public void run(Boolean result) {
-                        if (result) {
-                            controller.saveAs(name);
-                        }
-                        if (callback != null) {
-                            callback.run(result);
-                        }
+        if (StringUtils.isEmpty(deck.getName())) {
+            FOptionPane.showInputDialog("Enter name for new deck:", "New Deck", new Callback<String>() {
+                @Override
+                public void run(String result) {
+                    editorType.getController().saveAs(result);
+                    if (callback != null) {
+                        callback.run(true);
                     }
-        });
+                }
+            });
+            return;
+        }
+
+        editorType.getController().save();
+        if (callback != null) {
+            callback.run(true);
+        }
     }
 
     @Override
@@ -472,6 +445,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static class CatalogPage extends CardManagerPage {
+        private boolean initialized;
+
         protected CatalogPage() {
             this(ItemManagerConfig.CARD_CATALOG, "Catalog", FSkinImage.FOLDER);
         }
@@ -481,6 +456,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void initialize() {
+            if (initialized) { return; } //prevent initializing more than once if deck changes
+            initialized = true;
+
             cardManager.setCaption(getItemManagerCaption());
             refresh();
         }
@@ -680,6 +658,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 modelPath = "";
                 setSaved(true);
             }
+            editor.setDeck(getDeck());
         }
 
         private boolean isModelInSyncWithFolder() {
@@ -776,7 +755,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             default:
                 break;
             }
-            editor.deck = getDeck();
+            editor.setDeck(getDeck());
         }
 
         @SuppressWarnings("unchecked")
