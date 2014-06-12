@@ -157,7 +157,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_POWER,
                 "Show Card P/T Overlays",
-                "Show power/tougness/loyalty overlays for cards, otherwise they're hidden."),
+                "Show power/toughness/loyalty overlays for cards, otherwise they're hidden."),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_ID,
                 "Show Card ID Overlays",
