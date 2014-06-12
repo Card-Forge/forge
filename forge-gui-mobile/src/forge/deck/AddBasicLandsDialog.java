@@ -244,9 +244,9 @@ public class AddBasicLandsDialog extends FDialog {
                 labelWidth = minLabelWidth;
                 buttonWidth = (width - labelWidth) / 2;
             }
-            btnSubtract.setBounds(0, y, ADD_BTN_SIZE, buttonWidth);
-            lblCount.setBounds(ADD_BTN_SIZE, y, labelWidth, ADD_BTN_SIZE);
-            btnAdd.setBounds(width - ADD_BTN_SIZE, y, buttonWidth, ADD_BTN_SIZE);
+            btnSubtract.setBounds(0, y, buttonWidth, ADD_BTN_SIZE);
+            lblCount.setBounds(buttonWidth, y, labelWidth, ADD_BTN_SIZE);
+            btnAdd.setBounds(width - buttonWidth, y, buttonWidth, ADD_BTN_SIZE);
 
             y -= cbLandArt.getHeight() + LAND_PANEL_PADDING;
             cbLandArt.setBounds(0, y, width, cbLandArt.getHeight());
