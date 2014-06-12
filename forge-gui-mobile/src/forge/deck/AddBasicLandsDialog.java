@@ -57,7 +57,6 @@ public class AddBasicLandsDialog extends FDialog {
     private final LandPanel pnlSwamp = add(new LandPanel("Swamp"));
     private final LandPanel pnlMountain = add(new LandPanel("Mountain"));
     private final LandPanel pnlForest = add(new LandPanel("Forest"));
-    private final FButton btnAuto  = add(new FButton("Auto"));
     private final FButton btnOK    = add(new FButton("OK"));
     private final FButton btnCancel = add(new FButton("Cancel"));
 
@@ -86,12 +85,6 @@ public class AddBasicLandsDialog extends FDialog {
         });
         cbLandSet.setSelectedItem(defaultLandSet);
 
-        btnAuto.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                //TODO: Support automatically determining lands to add
-            }
-        });
         btnOK.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -115,7 +108,6 @@ public class AddBasicLandsDialog extends FDialog {
                 hide();
             }
         });
-        btnAuto.setEnabled(false); //TODO: Enable when auto button works
     }
 
     @Override
@@ -157,9 +149,7 @@ public class AddBasicLandsDialog extends FDialog {
         x = padding;
         y += panelHeight + padding;
         float gapBetweenButtons = padding / 2;
-        float buttonWidth = (w - gapBetweenButtons * 2) / 3;
-        btnAuto.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
-        x += buttonWidth + gapBetweenButtons;
+        float buttonWidth = (w - gapBetweenButtons) / 2;
         btnOK.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
         x += buttonWidth + gapBetweenButtons;
         btnCancel.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
