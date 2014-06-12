@@ -147,6 +147,13 @@ public class FLabel extends FDisplayObject implements IButton {
         icon = icon0;
     }
 
+    public Vector2 getInsets() {
+        return insets;
+    }
+    public void setInsets(Vector2 insets0) {
+        insets = insets0;
+    }
+
     public void setCommand(final FEventHandler command0) {
         command = command0;
     }

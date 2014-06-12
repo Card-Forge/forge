@@ -237,9 +237,16 @@ public class AddBasicLandsDialog extends FDialog {
         @Override
         protected void doLayout(float width, float height) {
             float y = height - ADD_BTN_SIZE;
-            btnSubtract.setBounds(0, y, ADD_BTN_SIZE, ADD_BTN_SIZE);
-            lblCount.setBounds(ADD_BTN_SIZE, y, width - 2 * ADD_BTN_SIZE, ADD_BTN_SIZE);
-            btnAdd.setBounds(width - ADD_BTN_SIZE, y, ADD_BTN_SIZE, ADD_BTN_SIZE);
+            float buttonWidth = ADD_BTN_SIZE;
+            float labelWidth = width - 2 * ADD_BTN_SIZE;
+            float minLabelWidth = lblCount.getFont().getBounds("0").width + 2 * lblCount.getInsets().x;
+            if (labelWidth < minLabelWidth) { //ensure count label has enough room for display a single digit count at normal font size
+                labelWidth = minLabelWidth;
+                buttonWidth = (width - labelWidth) / 2;
+            }
+            btnSubtract.setBounds(0, y, ADD_BTN_SIZE, buttonWidth);
+            lblCount.setBounds(ADD_BTN_SIZE, y, labelWidth, ADD_BTN_SIZE);
+            btnAdd.setBounds(width - ADD_BTN_SIZE, y, buttonWidth, ADD_BTN_SIZE);
 
             y -= cbLandArt.getHeight() + LAND_PANEL_PADDING;
             cbLandArt.setBounds(0, y, width, cbLandArt.getHeight());
