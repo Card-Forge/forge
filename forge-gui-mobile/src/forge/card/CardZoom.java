@@ -49,9 +49,9 @@ public class CardZoom extends FOverlay {
 
     @Override
     public boolean fling(float velocityX, float velocityY) {
-        //allow changing from Zoom to Details and back with a quick fling action
+        //toggle between Zoom and Details with a quick horizontal fling action
         if (Math.abs(velocityX) > Math.abs(velocityY)) {
-            zoomMode = velocityX < 0;
+            zoomMode = !zoomMode;
             return true;
         }
         return false;
