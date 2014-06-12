@@ -46,7 +46,7 @@ public class SealedScreen extends LaunchScreen {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
-                        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck();
+                        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
                         if (sealed == null) { return; }
 
                         FThreads.invokeInEdtLater(new Runnable() {

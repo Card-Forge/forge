@@ -66,7 +66,7 @@ public class SealedCardPoolGenerator {
     /** The Land set code. */
     private String landSetCode = null;
 
-    public static DeckGroup generateSealedDeck() {
+    public static DeckGroup generateSealedDeck(boolean addBasicLands) {
         final String prompt = "Choose Sealed Deck Format";
         final LimitedPoolType poolType = SGuiChoose.oneOrNone(prompt, LimitedPoolType.values());
         if (poolType == null) { return null; }
@@ -107,23 +107,25 @@ public class SealedCardPoolGenerator {
         final Deck deck = new Deck(sDeckName);
         deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
 
-        final int landsCount = 10;
-
-        final boolean isZendikarSet = sd.getLandSetCode().equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
-        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
-
-        for (final String element : MagicColor.Constant.BASIC_LANDS) {
-            int numArt = FModel.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
-            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
-            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
-
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = minArtIndex; i <= maxArtIndex; i++) {
-                    deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
+        if (addBasicLands) {
+            final int landsCount = 10;
+    
+            final boolean isZendikarSet = sd.getLandSetCode().equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
+            final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
+    
+            for (final String element : MagicColor.Constant.BASIC_LANDS) {
+                int numArt = FModel.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
+                int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
+                int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
+    
+                if (FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
+                    for (int i = minArtIndex; i <= maxArtIndex; i++) {
+                        deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
+                    }
                 }
-            }
-            else {
-                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), 30);
+                else {
+                    deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), 30);
+                }
             }
         }
 
