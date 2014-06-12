@@ -342,11 +342,16 @@ public class CountersPutAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("CounterNum");
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
-
+        
         if (abTgt == null) {
             // No target. So must be defined
             list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
-
+            
+            if (amountStr.equals("X") && ((sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) || source.getSVar(amountStr).equals("Count$xPaid") )) {
+                // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
+                source.setSVar("PayX", Integer.toString(ComputerUtilMana.determineLeftoverMana(sa, ai)));
+            }
+            
             if (!mandatory) {
                 // TODO - If Trigger isn't mandatory, when wouldn't we want to
                 // put a counter?
