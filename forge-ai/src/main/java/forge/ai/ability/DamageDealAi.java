@@ -239,20 +239,21 @@ public class DamageDealAi extends DamageAiBase {
         final boolean divided = sa.hasParam("DividedAsYouChoose");
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
-        // target loop
-        TargetChoices tcs = sa.getTargets();
         Player enemy = ai.getOpponent();
         
         if ("PowerDmg".equals(sa.getParam("AILogic"))) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
             if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){
                 sa.resetTargets();
-                tcs.add(enemy);
+                sa.getTargets().add(enemy);
             }
             return true;
         }
         
         sa.resetTargets();
+        // target loop
+        TargetChoices tcs = sa.getTargets();
+
         if (tgt.getMaxTargets(source, sa) <= 0) {
             return false;
         }
