@@ -157,8 +157,8 @@ public class CostPayment {
             this.ability.setActivatingPlayer(decisionMaker.getPlayer());
         }
 
-        Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();
-
+        Map<CostPart, PaymentDecision> decisions = new HashMap<CostPart, PaymentDecision>();
+        
         // Set all of the decisions before attempting to pay anything
         for (final CostPart part : this.cost.getCostParts()) {
             PaymentDecision decision = part.accept(decisionMaker);
@@ -167,11 +167,11 @@ public class CostPayment {
             if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability))
                 return false;
             
-            decisions.put(part.getClass(), decision);
+            decisions.put(part, decision);
         }
 
         for (final CostPart part : this.cost.getCostParts()) {
-            if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part.getClass()), this.ability)) {
+            if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability)) {
                 return false;
             }
             // abilities care what was used to pay for them
