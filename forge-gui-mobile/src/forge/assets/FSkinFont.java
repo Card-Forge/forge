@@ -3,6 +3,7 @@ package forge.assets;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 
 import forge.FThreads;
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class FSkinFont {
@@ -27,6 +30,10 @@ public class FSkinFont {
 
     private static final String TTF_FILE = "font1.ttf";
     private static final Map<Integer, FSkinFont> fonts = new HashMap<Integer, FSkinFont>();
+
+    static {
+        FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
+    }
 
     public static FSkinFont get(final int unscaledSize) {
         return _get((int)Utils.scaleMax(unscaledSize));
@@ -145,7 +152,7 @@ public class FSkinFont {
         }
 
         String fontName = "f" + fontSize;
-        FileHandle fontFile = FSkin.getFontFile(fontName + ".fnt");
+        FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
             FThreads.invokeInEdtNowOrLater(new Runnable() {
@@ -203,9 +210,9 @@ public class FSkinFont {
                 font = new BitmapFont(fontData, textureRegions, true);
 
                 //create .fnt and .png files for font
-                FileHandle pixmapDir = FSkin.getFontDir();
+                FileHandle pixmapDir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
                 if (pixmapDir != null) {
-                    FileHandle fontFile = FSkin.getFontFile(fontName + ".fnt");
+                    FileHandle fontFile = pixmapDir.child(fontName + ".fnt");
                     BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
     
                     String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, fontName);

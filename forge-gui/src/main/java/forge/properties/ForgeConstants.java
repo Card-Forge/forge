@@ -126,6 +126,7 @@ public final class ForgeConstants {
     // data that is only in the cached dir
     private static final String PICS_DIR                     = CACHE_DIR + "pics/";
     public static final String DB_DIR                        = CACHE_DIR + "db/";
+    public static final String FONTS_DIR                     = CACHE_DIR + "fonts/";
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens/";
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons/";
     public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols/";

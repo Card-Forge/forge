@@ -53,7 +53,7 @@ public class AssetsDownloader {
                 Gdx.app.exit(); //can't continue if this fails
             }
         }
-        else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getFontDir() != null) {
+        else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getSkinDir() != null) {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 

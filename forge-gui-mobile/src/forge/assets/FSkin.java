@@ -31,7 +31,6 @@ public class FSkin {
 
     private static ArrayList<String> allSkins;
     private static FileHandle preferredDir;
-    private static FileHandle preferredFontDir;
     private static String preferredName;
     private static boolean loaded = false;
 
@@ -91,7 +90,6 @@ public class FSkin {
         if (!dir.exists() || !dir.isDirectory()) {
             //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
             preferredDir = Gdx.files.internal("fallback_skin");
-            preferredFontDir = null;
         }
         else {
             if (splashScreen != null) {
@@ -107,9 +105,8 @@ public class FSkin {
 
             // Non-default (preferred) skin name and dir.
             preferredDir = Gdx.files.absolute(ForgeConstants.SKINS_DIR + preferredName);
-            preferredFontDir = Gdx.files.absolute(ForgeConstants.CACHE_DIR + "fonts/" + preferredName);
-            if (!preferredFontDir.exists() || !preferredFontDir.isDirectory()) {
-                preferredFontDir.mkdirs();
+            if (!preferredDir.exists() || !preferredDir.isDirectory()) {
+                preferredDir.mkdirs();
             }
         }
 
@@ -287,18 +284,8 @@ public class FSkin {
         return Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR + filename);
     }
 
-    /**
-     * Gets a FileHandle for the directory where fonts should be cached
-     */
-    public static FileHandle getFontDir() {
-        return preferredFontDir;
-    }
-
-    /**
-     * Gets a FileHandle for a file within the directory where fonts should be cached
-     */
-    public static FileHandle getFontFile(String filename) {
-        return preferredFontDir != null ? preferredFontDir.child(filename) : null;
+    public static FileHandle getSkinDir() {
+        return preferredDir;
     }
 
     /**
