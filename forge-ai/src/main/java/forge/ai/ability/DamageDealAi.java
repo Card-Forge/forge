@@ -283,8 +283,8 @@ public class DamageDealAi extends DamageAiBase {
                     tcs.add(humanCreature);
                     tgt.addDividedAllocation(humanCreature, assignedDamage);
                     lastTgt = humanCreature;
+                    dmg -= assignedDamage;
                 }
-                dmg -= assignedDamage;
                 if (!source.hasProtectionFrom(humanCreature)) {
                     dmgTaken += humanCreature.getNetAttack();
                 }
