@@ -272,6 +272,13 @@ public class GameAction {
                     c.setPairedWith(null);
                 }
             }
+            // Reveal if face-down
+            if (c.isFaceDown()) {
+            	c.setState(CardCharacteristicName.Original);
+            	this.reveal(Collections.singleton(c), c.getOwner(), true, "Face-down card leaves the battlefield");
+            	c.setState(CardCharacteristicName.FaceDown);
+            	copied.setState(CardCharacteristicName.Original);
+            }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously 
