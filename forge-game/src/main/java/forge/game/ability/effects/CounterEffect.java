@@ -94,6 +94,10 @@ public class CounterEffect extends SpellAbilityEffect {
 
         for (final SpellAbility tgtSA : sas) {
             final Card tgtSACard = tgtSA.getHostCard();
+            // should remember even that spell cannot be countered, e.g. Dovescape
+            if (sa.hasParam("RememberCounteredCMC")) {
+                sa.getHostCard().addRemembered((Integer) tgtSACard.getCMC());
+            }
 
             if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {
                 continue;
@@ -106,10 +110,6 @@ public class CounterEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("CounterNoManaSpell") && tgtSA.getTotalManaSpent() != 0) {
                 continue;
-            }
-
-            if (sa.hasParam("RememberCounteredCMC")) {
-                sa.getHostCard().addRemembered((Integer) tgtSACard.getCMC());
             }
 
             this.removeFromStack(tgtSA, sa, si);
