@@ -101,6 +101,9 @@ public class ComputerUtilCost {
                 final CostDiscard disc = (CostDiscard) part;
     
                 final String type = disc.getType();
+                if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
+                    continue;
+                }
                 final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Hand), type.split(","), source.getController(), source);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
