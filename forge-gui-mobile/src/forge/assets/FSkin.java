@@ -14,12 +14,14 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import forge.FThreads;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 
@@ -43,8 +45,34 @@ public class FSkin {
 
         //load skin
         loaded = false; //reset this temporarily until end of loadFull()
-        loadLight(skinName, null);
-        loadFull(null);
+
+        final LoadingOverlay loader = new LoadingOverlay("Loading new theme...");
+        loader.show(); //show loading overlay then delay running remaining logic so UI can respond
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadLight(skinName, null);
+                        loadFull(null);
+                        loader.setCaption("Loading fonts...");
+                        FThreads.invokeInBackgroundThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                FSkinFont.updateAll();
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        loader.hide();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     /*
@@ -223,11 +251,6 @@ public class FSkin {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
                     + "preferred icons, or foils.");
             e.printStackTrace();
-        }
-
-        // Update fonts if needed
-        if (splashScreen == null) {
-            FSkinFont.updateAll();
         }
 
         // Run through enums and load their coords.

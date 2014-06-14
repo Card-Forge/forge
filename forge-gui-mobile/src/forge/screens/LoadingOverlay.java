@@ -36,9 +36,13 @@ public class LoadingOverlay extends FOverlay {
         });
     }
 
-    private final String caption;
+    private String caption;
 
-    private LoadingOverlay(String caption0) {
+    public LoadingOverlay(String caption0) {
+        caption = caption0;
+    }
+
+    public void setCaption(String caption0) {
         caption = caption0;
     }
 
