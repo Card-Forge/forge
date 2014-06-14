@@ -6,7 +6,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -15,7 +14,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -148,102 +146,13 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
 
-                boolean wasInAlt = false;
-                CardCharacteristicName stateName = CardCharacteristicName.Original;
-                if (c.isInAlternateState()) {
-                    stateName = c.getCurState();
-                    wasInAlt = true;
-                    c.setState(CardCharacteristicName.Original);
-                }
-
-                // start copied Kiki code
                 int multiplier = numCopies * hostCard.getController().getTokenDoublersMagnitude();
                 final List<Card> crds = new ArrayList<Card>(multiplier);
 
                 for (int i = 0; i < multiplier; i++) {
-                    // TODO Use central copy methods
-                    Card copy;
-                    if (!c.isToken() || c.isCopiedToken()) {
-                        // copy creature and put it onto the battlefield
-
-                        copy = CardFactory.getCard(c.getPaperCard(), sa.getActivatingPlayer());
-
-                        copy.setToken(true);
-                        copy.setCopiedToken(true);
-                    } else { // isToken()
-                        copy = CardFactory.copyStats(c, controller);
-
-                        copy.setName(c.getName());
-                        copy.setImageKey(c.getImageKey());
-
-                        copy.setManaCost(c.getManaCost());
-                        copy.setColor(c.getColor());
-                        copy.setToken(true);
-
-                        copy.setType(c.getType());
-
-                        copy.setBaseAttack(c.getBaseAttack());
-                        copy.setBaseDefense(c.getBaseDefense());
-
-                        CardFactoryUtil.addAbilityFactoryAbilities(copy);
-                        for (String s : copy.getStaticAbilityStrings()) {
-                            copy.addStaticAbility(s);
-                        }
-                    }
-
-                    // when copying something stolen:
-                    copy.setController(controller, 0);
-                    copy.setCurSetCode(c.getCurSetCode());
-
-                    if (c.isDoubleFaced()) { // Cloned DFC's can't transform
-                        if (wasInAlt) {
-                            copy.setState(CardCharacteristicName.Transformed);
-                        }
-                    }
-                    if (c.isFlipCard()) { // Cloned Flips CAN flip.
-                        copy.setState(CardCharacteristicName.Original);
-                        c.setState(CardCharacteristicName.Original);
-                        copy.setImageKey(c.getImageKey());
-                        if (!c.isInAlternateState()) {
-                            copy.setState(CardCharacteristicName.Flipped);
-                        }
-
-                        c.setState(CardCharacteristicName.Flipped);
-                    }
-
-                    if (c.isFaceDown()) {
-                        c.setState(CardCharacteristicName.FaceDown);
-                    }
-
-                    if (sa.hasParam("AttachedTo")) {
-                        List<Card> list = AbilityUtils.getDefinedCards(hostCard,
-                                sa.getParam("AttachedTo"), sa);
-                        if (list.isEmpty()) {
-                            list = copy.getController().getGame().getCardsIn(ZoneType.Battlefield);
-                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copy.getController(), copy);
-                        }
-                        if (!list.isEmpty()) {
-                            Card attachedTo = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(list, sa, copy + " - Select a card to attach to.");
-                            if (copy.isAura()) {
-                                if (attachedTo.canBeEnchantedBy(copy)) {
-                                    copy.enchantEntity(attachedTo);
-                                } else {//can't enchant
-                                    continue;
-                                }
-                            } else if (copy.isEquipment()) { //Equipment
-                                if (attachedTo.canBeEquippedBy(copy)) {
-                                    copy.equipCard(attachedTo);
-                                } else {
-                                    continue;
-                                }
-                            } else { // Fortification
-                                copy.fortifyCard(attachedTo);
-                            }
-                        } else {
-                            continue;
-                        }
-                    }
-
+                    final Card copy = CardFactory.copyCopiableCharacteristics(c, sa.getActivatingPlayer());
+                    copy.setToken(true);
+                    copy.setCopiedToken(true);
                     // add keywords from sa
                     for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
@@ -260,20 +169,55 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, copy, false);
                         copy.addTrigger(parsedTrigger);
                     }
-                    copy = game.getAction().moveToPlay(copy);
+                    CardFactory.copyCopiableAbilities(c, copy);
 
-                    copy.setCloneOrigin(hostCard);
-                    sa.getHostCard().addClone(copy);
-                    crds.add(copy);
+                    final Card copyInPlay = game.getAction().moveToPlay(copy);
+
+                    // when copying something stolen:
+                    copyInPlay.setController(controller, 0);
+                    copyInPlay.setCurSetCode(c.getCurSetCode());
+
+                    copyInPlay.setCloneOrigin(hostCard);
+                    sa.getHostCard().addClone(copyInPlay);
+                    crds.add(copyInPlay);
                     if (sa.hasParam("RememberCopied")) {
-                        hostCard.addRemembered(copy);
+                        hostCard.addRemembered(copyInPlay);
                     }
                     if (sa.hasParam("Tapped")) {
-                        copy.setTapped(true);
+                        copyInPlay.setTapped(true);
                     }
                     if (sa.hasParam("CopyAttacking") && game.getPhaseHandler().inCombat()) {
                         final GameEntity defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
-                        game.getCombat().addAttacker(copy, defender);
+                        game.getCombat().addAttacker(copyInPlay, defender);
+                    }
+
+                    if (sa.hasParam("AttachedTo")) {
+                        List<Card> list = AbilityUtils.getDefinedCards(hostCard,
+                                sa.getParam("AttachedTo"), sa);
+                        if (list.isEmpty()) {
+                            list = copyInPlay.getController().getGame().getCardsIn(ZoneType.Battlefield);
+                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copyInPlay.getController(), copyInPlay);
+                        }
+                        if (!list.isEmpty()) {
+                            Card attachedTo = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(list, sa, copyInPlay + " - Select a card to attach to.");
+                            if (copyInPlay.isAura()) {
+                                if (attachedTo.canBeEnchantedBy(copyInPlay)) {
+                                    copyInPlay.enchantEntity(attachedTo);
+                                } else {//can't enchant
+                                    continue;
+                                }
+                            } else if (copyInPlay.isEquipment()) { //Equipment
+                                if (attachedTo.canBeEquippedBy(copyInPlay)) {
+                                    copyInPlay.equipCard(attachedTo);
+                                } else {
+                                    continue;
+                                }
+                            } else { // Fortification
+                                copyInPlay.fortifyCard(attachedTo);
+                            }
+                        } else {
+                            continue;
+                        }
                     }
 
                 }
@@ -281,10 +225,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 if (sa.hasParam("AtEOT")) {
                     final String location = sa.getParam("AtEOT");
                     registerDelayedTrigger(sa, location, crds);
-                }
-
-                if (wasInAlt) {
-                    c.setState(stateName);
                 }
             } // end canBeTargetedBy
         } // end foreach Card

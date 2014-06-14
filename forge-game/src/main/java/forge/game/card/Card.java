@@ -82,6 +82,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Card extends GameEntity implements Comparable<Card> {
     private final int uniqueNumber;
+    private final IPaperCard paperCard;
 
     private final Map<CardCharacteristicName, CardCharacteristics> characteristicsMap
         = new EnumMap<CardCharacteristicName, CardCharacteristics>(CardCharacteristicName.class);
@@ -242,10 +243,24 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * Instantiates a new card.
+     * Instantiates a new card not associated to any paper card.
+     * @param id the unique id of the new card.
      */
-    public Card(int id) {
+    public Card(final int id) {
+    	this(id, null);
+    }
+
+    /**
+     * Instantiates a new card with a given paper card.
+     * @param id the unique id of the new card.
+     * @param paperCard the {@link IPaperCard} of which the new card is a
+     * representation, or {@code null} if this new {@link Card} doesn't represent any paper
+     * card.
+     * @see IPaperCard
+     */
+    public Card(final int id, final IPaperCard paperCard) {
         this.uniqueNumber = id;
+        this.paperCard = paperCard;
         this.characteristicsMap.put(CardCharacteristicName.Original, new CardCharacteristics());
         this.characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
     }
@@ -8911,15 +8926,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         return fromPaperCard(pc, null);
     }
 
-    public PaperCard getPaperCard() {
+    public IPaperCard getPaperCard() {
+    	IPaperCard cp = this.paperCard;
+    	if (cp != null) {
+    		return cp;
+    	}
+
         final String name = getName();
         final String set = getCurSetCode();
 
         if (StringUtils.isNotBlank(set)) {
-            PaperCard cp = StaticData.instance().getVariantCards().getCard(name, set);
+            cp = StaticData.instance().getVariantCards().getCard(name, set);
             return cp == null ? StaticData.instance().getCommonCards().getCard(name, set) : cp;
         }
-        PaperCard cp = StaticData.instance().getVariantCards().getCard(name);
+        cp = StaticData.instance().getVariantCards().getCard(name);
         return cp == null ? StaticData.instance().getCommonCards().getCardFromEdition(name, SetPreference.Latest) : cp;
     }
 

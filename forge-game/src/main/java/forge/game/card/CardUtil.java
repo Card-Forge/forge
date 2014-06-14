@@ -139,7 +139,7 @@ public final class CardUtil {
      */
     public static Card getLKICopy(final Card in) {
 
-        final Card newCopy = new Card(in.getUniqueNumber());
+        final Card newCopy = new Card(in.getUniqueNumber(), in.getPaperCard());
         newCopy.setCurSetCode(in.getCurSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);

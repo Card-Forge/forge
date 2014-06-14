@@ -6,6 +6,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCharacteristics;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
@@ -105,8 +106,7 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard.addAlternateState(CardCharacteristicName.Cloner);
             tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloner);
             tgtCard.setState(CardCharacteristicName.Original);
-        }
-        else {
+        } else {
             //copy Original state to Cloned
             tgtCard.addAlternateState(CardCharacteristicName.Cloned);
             tgtCard.switchStates(CardCharacteristicName.Original, CardCharacteristicName.Cloned);
@@ -114,51 +114,34 @@ public class CloneEffect extends SpellAbilityEffect {
                 tgtCard.setState(CardCharacteristicName.Original);
             }
         }
-
-        CardCharacteristicName stateToCopy = null;
+        
+        final CardCharacteristicName origState = cardToCopy.getCurState();
         if (copyingSelf) {
-            stateToCopy = CardCharacteristicName.Cloned;
+        	cardToCopy.setState(CardCharacteristicName.Cloned);
         }
-        else if (cardToCopy.isFlipCard()) {
-            stateToCopy = CardCharacteristicName.Original;
-        }
-        else {
-            stateToCopy = cardToCopy.getCurState();
+        CardFactory.copyCopiableCharacteristics(cardToCopy, tgtCard);
+        if (copyingSelf) {
+        	cardToCopy.setState(origState);
         }
 
-        CardFactory.copyState(cardToCopy, stateToCopy, tgtCard);
         // must call this before addAbilityFactoryAbilities so cloned added abilities are handled correctly
         addExtraCharacteristics(tgtCard, sa, origSVars);
-        CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
-        for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
-            tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
-        }
+        CardFactory.copyCopiableAbilities(cardToCopy, tgtCard);
+
+        // restore name if it should be unchanged
         if (keepName) {
-            tgtCard.setName(originalName);
+        	tgtCard.setName(originalName);
         }
 
-        // If target is a flipped card, also copy the flipped
+        // If target is a flip card, also set characteristics of the flipped
         // state.
         if (cardToCopy.isFlipCard()) {
-            if (!copyingSelf) {
-                tgtCard.addAlternateState(CardCharacteristicName.Flipped);
-                tgtCard.setState(CardCharacteristicName.Flipped);
-            }
-            CardFactory.copyState(cardToCopy, CardCharacteristicName.Flipped, tgtCard);
-            addExtraCharacteristics(tgtCard, sa, origSVars);
-            CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
-            for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
-                tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
-            }
+        	final CardCharacteristics flippedState = tgtCard.getState(CardCharacteristicName.Flipped);
             if (keepName) {
-                tgtCard.setName(originalName);
+                flippedState.setName(originalName);
             }
             //keep the Clone card image for the cloned card
-            tgtCard.setImageKey(imageFileName);
-
-            if (tgtCard.getCurState() != CardCharacteristicName.Flipped) {
-              tgtCard.setState(CardCharacteristicName.Original);
-            }
+            flippedState.setImageKey(imageFileName);
         }
 
         //Clean up copy of cloned state
@@ -263,7 +246,7 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         }
 
-        // set power of clone
+        // set ETB tapped of clone
         if (sa.hasParam("IntoPlayTapped")) {
             tgtCard.setTapped(true);
         }

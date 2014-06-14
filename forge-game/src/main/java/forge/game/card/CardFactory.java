@@ -71,27 +71,13 @@ public class CardFactory {
      * @return a {@link forge.game.card.Card} object.
      */
     public final static Card copyCard(final Card in, boolean assignNewId) {
-        final CardCharacteristicName curState = in.getCurState();
-        boolean alternate = false;
-        if (in.isInAlternateState()) {
-            alternate = true;
-            in.setState(CardCharacteristicName.Original);
-        }
-        Card out = null;
+        Card out;
         if (!in.isToken() || in.isCopiedToken()) {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner()) 
                               : getCard(in.getPaperCard(), in.getOwner(), in.getUniqueNumber());
         } else { // token
-            out = assignNewId ? new Card(in.getGame().nextCardId()) : new Card(in.getUniqueNumber());
+            out = assignNewId ? new Card(in.getGame().nextCardId(), in.getPaperCard()) : new Card(in.getUniqueNumber(), in.getPaperCard());
             out = CardFactory.copyStats(in, in.getController());
-
-            out.setName(in.getName());
-            out.setImageKey(in.getImageKey());
-            out.setManaCost(in.getManaCost());
-            out.setColor(in.getColor());
-            out.setType(in.getType());
-            out.setBaseAttack(in.getBaseAttack());
-            out.setBaseDefense(in.getBaseDefense());
             out.setToken(true);
 
             CardFactoryUtil.addAbilityFactoryAbilities(out);
@@ -99,22 +85,11 @@ public class CardFactory {
                 out.addStaticAbility(s);
             }
         }
-                
-        CardFactory.copyCharacteristics(in, out);
-        if (in.hasAlternateState()) {
-            for (final CardCharacteristicName state : in.getStates()) {
-                in.setState(state);
-                if (state == CardCharacteristicName.Cloner) {
-                    out.addAlternateState(state);
-                }
-                out.setState(state);
-                CardFactory.copyCharacteristics(in, out);
-            }
+
+        for (final CardCharacteristicName state : in.getStates()) {
+        	CardFactory.copyState(in, state, out, state);
         }
-        if (alternate) {
-            in.setState(curState);
-        }
-        out.setState(curState);
+        out.setState(in.getCurState());
 
         // I'm not sure if we really should be copying enchant/equip stuff over.
         out.setEquipping(in.getEquipping());
@@ -254,7 +229,7 @@ public class CardFactory {
     public final static Card getCard(final IPaperCard cp, final Player owner, final int cardId) {
         //System.out.println(cardName);
         CardRules cardRules = cp.getRules();
-        final Card c = readCard(cardRules, cardId);
+        final Card c = readCard(cardRules, cp, cardId);
         c.setRules(cardRules);
         c.setOwner(owner);
         buildAbilities(c);
@@ -383,9 +358,9 @@ public class CardFactory {
         card.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
 
-    private static Card readCard(final CardRules rules, int cardId) {
+    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId) {
 
-        final Card card = new Card(cardId);
+        final Card card = new Card(cardId, paperCard);
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
@@ -466,81 +441,128 @@ public class CardFactory {
             c.setBaseDefenseString(face.getToughness());
         }
     }
+    
+    /**
+     * Create a copy of a card, including its copiable characteristics (but not
+     * abilities).
+     * @param from
+     * @param newOwner
+     * @return
+     */
+    public static Card copyCopiableCharacteristics(final Card from, final Player newOwner) {
+        int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
+        final Card c = new Card(id, from.getPaperCard());
+        c.setOwner(newOwner);
+        c.setCurSetCode(from.getCurSetCode());
+        
+        copyCopiableCharacteristics(from, c);
+        return c;
+    }
+
+    /**
+     * Copy the copiable characteristics of one card to another, taking the
+     * states of both cards into account.
+     * 
+     * @param from the {@link Card} to copy from.
+     * @param to the {@link Card} to copy to.
+     */
+    public static void copyCopiableCharacteristics(final Card from, final Card to) {
+    	final boolean toIsFaceDown = to.isFaceDown();
+    	if (toIsFaceDown) {
+    		// If to is face down, copy to its front side
+    		to.setState(CardCharacteristicName.Original);
+    		copyCopiableCharacteristics(from, to);
+    		to.setState(CardCharacteristicName.FaceDown);
+    		return;
+    	}
+
+    	final boolean fromIsFlipCard = from.isFlipCard();
+    	if (fromIsFlipCard) {
+    		if (to.getCurState().equals(CardCharacteristicName.Flipped)) {
+    			copyState(from, CardCharacteristicName.Original, to, CardCharacteristicName.Original);
+    		} else {
+    			copyState(from, CardCharacteristicName.Original, to, to.getCurState());
+    		}
+    		copyState(from, CardCharacteristicName.Flipped, to, CardCharacteristicName.Flipped);
+    	} else {
+    		copyState(from, from.getCurState(), to, to.getCurState());
+    	}
+    }
+    
+    /**
+     * Copy the copiable abilities of one card to another, taking the states of
+     * both cards into account.
+     * 
+     * @param from the {@link Card} to copy from.
+     * @param to the {@link Card} to copy to.
+     */
+    public static void copyCopiableAbilities(final Card from, final Card to) {
+    	final boolean toIsFaceDown = to.isFaceDown();
+    	if (toIsFaceDown) {
+    		// If to is face down, copy to its front side
+    		to.setState(CardCharacteristicName.Original);
+    		copyCopiableAbilities(from, to);
+    		to.setState(CardCharacteristicName.FaceDown);
+    		return;
+    	}
+
+    	final boolean fromIsFlipCard = from.isFlipCard();
+    	if (fromIsFlipCard) {
+    		copyAbilities(from, CardCharacteristicName.Original, to, to.getCurState());
+    		copyAbilities(from, CardCharacteristicName.Flipped, to, CardCharacteristicName.Flipped);
+    	} else {
+    		copyAbilities(from, from.getCurState(), to, to.getCurState());
+    	}
+    }
 
     /**
      * <p>
-     * Copies stats like power, toughness, etc.
+     * Copy stats like power, toughness, etc. from one card to another.
+     * </p>
+     * <p>
+     * The copy is made independently for each state of the input {@link Card}.
+     * This amounts to making a full copy of the card, including the current
+     * state.
      * </p>
      * 
-     * @param sim
-     *            a {@link java.lang.Object} object.
+     * @param in
+     *            the {@link forge.game.card.Card} to be copied.
      * @param newOwner 
-     * @return a {@link forge.game.card.Card} object.
+     * 			  the {@link forge.game.player.Player} to be the owner of the newly
+     * 			  created Card.
+     * @return a new {@link forge.game.card.Card}.
      */
-    public static Card copyStats(final Card sim, Player newOwner) {
+    public static Card copyStats(final Card in, final Player newOwner) {
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
-        final Card c = new Card(id);
+        final Card c = new Card(id, in.getPaperCard());
     
         c.setOwner(newOwner);
-        c.setCurSetCode(sim.getCurSetCode());
+        c.setCurSetCode(in.getCurSetCode());
     
-        final CardCharacteristicName origState = sim.getCurState();
-        for (final CardCharacteristicName state : sim.getStates()) {
-            c.addAlternateState(state);
-            c.setState(state);
-            sim.setState(state);
-            CardFactory.copyCharacteristics(sim, c);
+        for (final CardCharacteristicName state : in.getStates()) {
+            CardFactory.copyState(in, state, c, state);
         }
     
-        sim.setState(origState);
-        c.setState(origState);
-        c.setRules(sim.getRules());
+        c.setState(in.getCurState());
+        c.setRules(in.getRules());
     
         return c;
     } // copyStats()
 
     /**
-     * Copy characteristics.
+     * Copy characteristics of a particular state of one card to those of a
+     * (possibly different) state of another.
      * 
      * @param from
-     *            the from
+     *            the {@link Card} to copy from.
+     * @param fromState
+     *            the {@link CardCharacteristicName} of {@code from} to copy from.
      * @param to
-     *            the to
+     *            the {@link Card} to copy to.
+     * @param toState
+     *            the {@link CardCharacteristicName} of {@code to} to copy to.
      */
-    private static void copyCharacteristics(final Card from, final Card to) {
-        to.setBaseAttack(from.getBaseAttack());
-        to.setBaseDefense(from.getBaseDefense());
-        to.setBaseLoyalty(from.getBaseLoyalty());
-        to.setBaseAttackString(from.getBaseAttackString());
-        to.setBaseDefenseString(from.getBaseDefenseString());
-        to.setIntrinsicKeyword(from.getIntrinsicKeyword());
-        to.setName(from.getName());
-        to.setType(from.getCharacteristics().getType());
-        to.setText(from.getSpellText());
-        to.setManaCost(from.getManaCost());
-        to.setColor(from.getColor());
-        to.setSVars(from.getSVars());
-        to.setIntrinsicAbilities(from.getUnparsedAbilities());
-    
-        to.setImageKey(from.getImageKey());
-        to.setTriggers(from.getTriggers(), true);
-        to.setReplacementEffects(from.getReplacementEffects());
-        to.setStaticAbilityStrings(from.getStaticAbilityStrings());
-    
-    }
-
-    /**
-     * Copy characteristics.
-     * 
-     * @param from
-     *            the from
-     * @param stateToCopy
-     *            the state to copy
-     * @param to
-     *            the to
-     */
-    public static void copyState(final Card from, final CardCharacteristicName stateToCopy, final Card to) {
-    
+    public static void copyState(final Card from, final CardCharacteristicName fromState, final Card to, final CardCharacteristicName toState) {
         // copy characteristics not associated with a state
         to.setBaseLoyalty(from.getBaseLoyalty());
         to.setBaseAttackString(from.getBaseAttackString());
@@ -548,11 +570,41 @@ public class CardFactory {
         to.setText(from.getSpellText());
     
         // get CardCharacteristics for desired state
-        CardCharacteristics characteristics = from.getState(stateToCopy);
-        to.getCharacteristics().copyFrom(characteristics);
+        if (!to.getStates().contains(toState)) {
+        	to.addAlternateState(toState);
+        }
+    	final CardCharacteristics toCharacteristics = to.getState(toState),
+    			fromCharacteristics = from.getState(fromState);
+        toCharacteristics.copyFrom(fromCharacteristics);
+    }
+    
+    /**
+     * Copy the abilities (including static abilities, triggers, and replacement
+     * effects) from one card to another.
+     * 
+     * @param from the {@link Card} to copy from.
+     * @param fromState the {@link CardCharacteristicName} of {@code from} to copy from.
+     * @param to the {@link Card} to copy to.
+     * @param toState the {@link CardCharacteristicName} of {@code to} to copy to.
+     */
+    private static void copyAbilities(final Card from, final CardCharacteristicName fromState, final Card to, final CardCharacteristicName toState) {
+        final CardCharacteristics fromCharacteristics = from.getState(fromState);
+        final CardCharacteristicName oldToState = to.getCurState();
+        if (!to.getStates().contains(toState)) {
+        	to.addAlternateState(toState);
+        }
+
+        to.setState(toState);
         // handle triggers and replacement effect through Card class interface
-        to.setTriggers(characteristics.getTriggers(), true);
-        to.setReplacementEffects(characteristics.getReplacementEffects());
+        to.setTriggers(fromCharacteristics.getTriggers(), true);
+        to.setReplacementEffects(fromCharacteristics.getReplacementEffects());
+        // add abilities
+        CardFactoryUtil.addAbilityFactoryAbilities(to);
+        for (String staticAbility : to.getStaticAbilityStrings()) {
+        	to.addStaticAbility(staticAbility);
+        }
+        // reset state
+        to.setState(oldToState);
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {
