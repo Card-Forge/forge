@@ -237,21 +237,32 @@ public class CardRenderer {
         if (cardArt != null) {
             g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
         }
-        x += cardArtWidth;
 
+        //render card name and mana cost on first line
+        float manaCostWidth = 0;
+        ManaCost mainManaCost = cardRules.getMainPart().getManaCost();
+        if (cardRules.getSplitType() == CardSplitType.Split) {
+            //handle rendering both parts of split card
+            ManaCost otherManaCost = cardRules.getOtherPart().getManaCost();
+            manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+            CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
+            //draw "//" between two parts of mana cost
+            manaCostWidth += font.getBounds("//").width + MANA_COST_PADDING;
+            g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
+        }
+        manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE);
+        CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
+
+        x += cardArtWidth;
         String name = cardRules.getName();
-        ManaCost manaCost = cardRules.getManaCost();
-        float availableNameWidth = w - CardFaceSymbols.getWidth(manaCost, MANA_SYMBOL_SIZE) - cardArtWidth - FList.PADDING;
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
         }
-        g.drawText(name, font, foreColor, x, y, availableNameWidth, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
-        x += availableNameWidth + FList.PADDING;
-        CardFaceSymbols.drawManaCost(g, manaCost, x, y, MANA_SYMBOL_SIZE);
+        g.drawText(name, font, foreColor, x, y, w - manaCostWidth - cardArtWidth - FList.PADDING, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
 
-        x -= availableNameWidth + FList.PADDING;
         y += MANA_SYMBOL_SIZE + FList.PADDING + SET_BOX_MARGIN;
 
+        //render card type, p/t, and set box on second line
         FSkinFont typeFont = FSkinFont.get(12);
         float availableTypeWidth = w - cardArtWidth;
         float lineHeight = typeFont.getLineHeight();
@@ -301,16 +312,30 @@ public class CardRenderer {
         //make sure name/mana cost row height is tall enough for both
         h = Math.max(MANA_SYMBOL_SIZE + 2 * MANA_COST_PADDING, 2 * NAME_FONT.getCapHeight());
 
+        //draw mana cost for card
         float manaCostWidth = 0;
         if (canShow) {
-            manaCostWidth = CardFaceSymbols.getWidth(card.getManaCost(), MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
-            CardFaceSymbols.drawManaCost(g, card.getManaCost(), x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+            ManaCost mainManaCost = card.getManaCost();
+            if (card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
+                //handle rendering both parts of split card
+                mainManaCost = card.getRules().getMainPart().getManaCost();
+                ManaCost otherManaCost = card.getRules().getOtherPart().getManaCost();
+                manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+                CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+                //draw "//" between two parts of mana cost
+                manaCostWidth += NAME_FONT.getBounds("//").width + MANA_COST_PADDING;
+                g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, HAlignment.LEFT, true);
+            }
+            manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+            CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
         }
 
+        //draw name for card
         x += padding;
         w -= 2 * padding;
         g.drawText(!canShow || card.isFaceDown() ? "???" : card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
 
+        //draw type and set label for card
         if (canShow) {
             y += h;
             h = 2 * TYPE_FONT.getCapHeight();
