@@ -53,8 +53,7 @@ public class Forge implements ApplicationListener {
     private static Clipboard clipboard;
     private static int screenWidth;
     private static int screenHeight;
-    private static SpriteBatch batch;
-    private static ShapeRenderer shapeRenderer;
+    private static Graphics graphics;
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
@@ -78,9 +77,7 @@ public class Forge implements ApplicationListener {
 
         Texture.setEnforcePotImages(false); //ensure image dimensions don't have to be powers of 2
 
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-
+        graphics = new Graphics();
         splashScreen = new SplashScreen();
 
         String skinName;
@@ -201,7 +198,7 @@ public class Forge implements ApplicationListener {
             currentScreen.onActivate();
         }
         catch (Exception ex) {
-            batch.end();
+            graphics.end();
             BugReporter.reportException(ex);
         }
     }
@@ -220,18 +217,17 @@ public class Forge implements ApplicationListener {
                     return;
                 }
             }
-    
-            batch.begin();
-            Graphics g = new Graphics();
-            screen.draw(g);
+
+            graphics.begin();
+            screen.draw(graphics);
             for (FOverlay overlay : FOverlay.getOverlays()) {
                 overlay.setSize(screenWidth, screenHeight); //update overlay sizes as they're rendered
-                overlay.draw(g);
+                overlay.draw(graphics);
             }
-            batch.end();
+            graphics.end();
         }
         catch (Exception ex) {
-            batch.end();
+            graphics.end();
             BugReporter.reportException(ex);
         }
     }
@@ -249,7 +245,7 @@ public class Forge implements ApplicationListener {
             }
         }
         catch (Exception ex) {
-            batch.end();
+            graphics.end();
             BugReporter.reportException(ex);
         }
     }
@@ -275,8 +271,7 @@ public class Forge implements ApplicationListener {
             currentScreen = null;
         }
         screens.clear();
-        batch.dispose();
-        shapeRenderer.dispose();
+        graphics.dispose();
         System.exit(0);
     }
 
@@ -614,14 +609,30 @@ public class Forge implements ApplicationListener {
     }
 
     public static class Graphics {
+        private final SpriteBatch batch = new SpriteBatch();
+        private final ShapeRenderer shapeRenderer = new ShapeRenderer();
         private Rectangle bounds;
         private Rectangle visibleBounds;
         private int failedClipCount;
         private float alphaComposite = 1;
 
         private Graphics() {
+        }
+
+        public void begin() {
+            batch.begin();
             bounds = new Rectangle(0, 0, screenWidth, screenHeight);
             visibleBounds = new Rectangle(bounds);
+        }
+
+        public void end() {
+            batch.end();
+            shapeRenderer.end();
+        }
+
+        public void dispose() {
+            batch.dispose();
+            shapeRenderer.dispose();
         }
 
         public void startClip() {
