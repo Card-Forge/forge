@@ -59,6 +59,7 @@ public class FSkin {
                         FThreads.invokeInBackgroundThread(new Runnable() {
                             @Override
                             public void run() {
+                                FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
                                 FSkinFont.updateAll();
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override

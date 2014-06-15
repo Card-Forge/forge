@@ -57,12 +57,15 @@ public class AssetsDownloader {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
+        FSkinFont.deleteCachedFiles(); //delete cached font files in case skin .ttf files change
+
         downloadAssets(splashScreen.getProgressBar());
 
         //reload light version of skin of assets updated
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
+                FSkinFont.updateAll(); //update all fonts used by splash screen
                 FSkin.loadLight(FSkin.getName(), splashScreen);
             }
         });

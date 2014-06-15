@@ -1,5 +1,6 @@
 package forge.assets;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,6 +63,12 @@ public class FSkinFont {
         for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }
+    }
+
+    //delete all cached font files
+    public static void deleteCachedFiles() {
+        FileUtil.deleteDirectory(new File(ForgeConstants.FONTS_DIR));
+        FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
     }
 
     public static void updateAll() {
