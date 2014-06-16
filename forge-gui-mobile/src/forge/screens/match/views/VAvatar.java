@@ -7,6 +7,7 @@ import forge.assets.FSkin;
 import forge.game.player.Player;
 import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
 
 public class VAvatar extends FDisplayObject {
@@ -24,7 +25,12 @@ public class VAvatar extends FDisplayObject {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        FControl.getInputProxy().selectPlayer(player, null);
+        ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
+            @Override
+            public void run() {
+                FControl.getInputProxy().selectPlayer(player, null);
+            }
+        });
         return true;
     }
 
