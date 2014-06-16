@@ -20,9 +20,9 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.Forge.Graphics;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardCharacteristicName;

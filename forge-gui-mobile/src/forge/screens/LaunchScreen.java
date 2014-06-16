@@ -9,7 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 
 import forge.screens.FScreen;
 import forge.screens.match.FControl;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;

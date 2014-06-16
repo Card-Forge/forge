@@ -1,6 +1,6 @@
 package forge.assets;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 
 public class FSkinBorder {
     private final FSkinColor color;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 
 public abstract class FDisplayObject {
     protected static final float DISABLED_COMPOSITE = 0.25f;

@@ -2,7 +2,7 @@ package forge.assets;
 
 import com.badlogic.gdx.graphics.Texture;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 
 public class FTextureImage implements FImage {
     private final Texture texture;

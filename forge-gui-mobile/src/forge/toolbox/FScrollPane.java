@@ -3,8 +3,9 @@ package forge.toolbox;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+
 import forge.Forge.Animation;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
 

@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Supplier;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.StaticData;
-import forge.Forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;

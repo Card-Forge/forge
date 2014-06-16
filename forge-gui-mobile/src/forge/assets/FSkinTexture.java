@@ -4,7 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 
 public enum FSkinTexture implements FImage {
     BG_TEXTURE("bg_texture.jpg", true),

@@ -17,7 +17,7 @@
  */
 package forge.deck;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.StaticData;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;

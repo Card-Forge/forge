@@ -1,6 +1,6 @@
 package forge.itemmanager;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import forge.screens.FScreen;
 import forge.Forge;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.screens.constructed.ConstructedScreen;
 import forge.screens.draft.DraftScreen;

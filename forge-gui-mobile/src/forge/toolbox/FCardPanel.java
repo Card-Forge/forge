@@ -1,6 +1,6 @@
 package forge.toolbox;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.card.CardRenderer;
 import forge.game.card.Card;
 import forge.util.Utils;

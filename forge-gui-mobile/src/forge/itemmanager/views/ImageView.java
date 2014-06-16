@@ -1,7 +1,7 @@
 package forge.itemmanager.views;
 
-import forge.Forge.Graphics;
 import forge.Forge.KeyInputAdapter;
+import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinImage;

@@ -2,7 +2,7 @@ package forge.card;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.Card;

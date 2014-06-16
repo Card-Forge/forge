@@ -2,7 +2,7 @@ package forge.assets;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 
 public class FTextureRegionImage implements FImage {
     private final TextureRegion textureRegion;

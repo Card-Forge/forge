@@ -1,6 +1,6 @@
 package forge.menu;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FImage;
 
 public class FSubMenu extends FMenuItem {

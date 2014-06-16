@@ -17,7 +17,7 @@
  */
 package forge.screens.match.views;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;

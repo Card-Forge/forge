@@ -2,7 +2,8 @@ package forge.screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import forge.Forge.Graphics;
+
+import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;

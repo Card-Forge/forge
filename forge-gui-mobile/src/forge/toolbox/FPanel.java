@@ -1,6 +1,6 @@
 package forge.toolbox;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 
 public class FPanel extends FScrollPane {

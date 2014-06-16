@@ -3,8 +3,9 @@ package forge.toolbox;
 import java.util.Stack;
 
 import com.badlogic.gdx.Input.Keys;
+
 import forge.Forge;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 

@@ -7,12 +7,16 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -175,35 +179,39 @@ public class CardRenderer {
 
     //extract card art from the given card
     public static TextureRegion getCardArt(PaperCard paperCard) {
-        return getCardArt(ImageKeys.getImageKey(paperCard, false));
+        return getCardArt(ImageKeys.getImageKey(paperCard, false), paperCard.getRules().getSplitType() == CardSplitType.Split);
     }
     public static TextureRegion getCardArt(Card card) {
-        return getCardArt(card.getImageKey());
+        return getCardArt(card.getImageKey(), card.isSplitCard());
     }
-    public static TextureRegion getCardArt(String imageKey) {
+    public static TextureRegion getCardArt(String imageKey, boolean isSplitCard) {
         TextureRegion cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
             if (image != null) {
                 float w = image.getWidth();
                 float h = image.getHeight();
-                float x = w * 0.1f;
-                float y = h * 0.11f;
-                w -= 2 * x;
-                h *= 0.43f;
-                float ratioRatio = w / h / CARD_ART_RATIO;
-                if (ratioRatio > 1) { //if too wide, shrink width
-                    float dw = w * (ratioRatio - 1);
-                    w -= dw;
-                    x += dw / 2;
+                if (isSplitCard) {
                 }
-                else { //if too tall, shrink height
-                    float dh = h * (1 - ratioRatio);
-                    h -= dh;
-                    y += dh / 2;
+                else {
+                    float x = w * 0.1f;
+                    float y = h * 0.11f;
+                    w -= 2 * x;
+                    h *= 0.43f;
+                    float ratioRatio = w / h / CARD_ART_RATIO;
+                    if (ratioRatio > 1) { //if too wide, shrink width
+                        float dw = w * (ratioRatio - 1);
+                        w -= dw;
+                        x += dw / 2;
+                    }
+                    else { //if too tall, shrink height
+                        float dh = h * (1 - ratioRatio);
+                        h -= dh;
+                        y += dh / 2;
+                    }
+                    cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+                    cardArtCache.put(imageKey, cardArt);
                 }
-                cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-                cardArtCache.put(imageKey, cardArt);
             }
         }
         return cardArt;

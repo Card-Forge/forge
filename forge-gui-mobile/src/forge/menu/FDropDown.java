@@ -3,7 +3,7 @@ package forge.menu;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;

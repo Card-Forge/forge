@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.FThreads;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.card.CardZoom;
 import forge.game.card.Card;
 import forge.screens.match.FControl;

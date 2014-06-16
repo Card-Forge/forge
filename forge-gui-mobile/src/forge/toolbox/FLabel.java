@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.math.Vector2;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;

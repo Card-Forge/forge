@@ -6,7 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.ai.AiProfileUtil;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;

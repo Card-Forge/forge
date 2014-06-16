@@ -3,7 +3,7 @@ package forge.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.screens.FScreen.Header;
 
 public class FMenuBar extends Header {

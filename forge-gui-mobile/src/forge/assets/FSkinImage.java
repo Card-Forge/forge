@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.properties.ForgeConstants;
 
 /** Properties of various components that make up the skin.

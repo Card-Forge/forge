@@ -3,8 +3,8 @@ package forge.screens.match.views;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Graphics;
 import forge.LobbyPlayer;
-import forge.Forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;

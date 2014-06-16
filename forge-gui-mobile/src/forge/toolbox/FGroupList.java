@@ -3,7 +3,7 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;

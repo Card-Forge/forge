@@ -2,7 +2,7 @@ package forge.screens.match.views;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkin;
 import forge.game.player.Player;
 import forge.screens.match.FControl;

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.card.CardFaceSymbols;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;

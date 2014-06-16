@@ -7,9 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.Forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;

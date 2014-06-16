@@ -17,7 +17,7 @@
  */
 package forge.card;
 
-import forge.Forge.Graphics;
+import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
