@@ -8,6 +8,7 @@ forge-core/forge-core.iml
 forge-core/target
 forge-game/target
 forge-gui-android/*.keystore
+forge-gui-android/assets/fallback_skin/Thumbs.db
 forge-gui-android/bin
 forge-gui-android/gen
 forge-gui-android/res/Thumbs.db

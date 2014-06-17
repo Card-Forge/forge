@@ -77,16 +77,6 @@ public class AssetsDownloader {
 
     private static void downloadAssets(final FProgressBar progressBar) {
         final String destFile = ForgeConstants.ASSETS_DIR + "assets.zip";
-        try {
-            File resDir = new File(ForgeConstants.RES_DIR);
-            if (resDir.exists()) {
-                //attempt to delete previous res directory if to be rebuilt
-                FileUtil.deleteDirectory(resDir);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
 
         progressBar.reset();
         progressBar.setPercentMode(true);
@@ -133,6 +123,12 @@ public class AssetsDownloader {
             progressBar.setPercentMode(true);
             progressBar.setDescription("Unzipping resource files");
             progressBar.setMaximum(zipFile.size());
+
+            File resDir = new File(ForgeConstants.RES_DIR);
+            if (resDir.exists()) {
+                //attempt to delete previous res directory if to be rebuilt
+                FileUtil.deleteDirectory(resDir);
+            }
 
             int count = 0;
             while (entries.hasMoreElements()) {
