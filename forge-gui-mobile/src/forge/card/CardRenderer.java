@@ -7,15 +7,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinColor;
@@ -189,13 +184,17 @@ public class CardRenderer {
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
             if (image != null) {
+                float x, y;
                 float w = image.getWidth();
                 float h = image.getHeight();
-                if (isSplitCard) {
+                if (isSplitCard) { //allow rotated image for split cards
+                    x = w * 33f / 250f;
+                    y = 0; //delay adjusting y and h until drawn
+                    w *= 106f / 250f;
                 }
                 else {
-                    float x = w * 0.1f;
-                    float y = h * 0.11f;
+                    x = w * 0.1f;
+                    y = h * 0.11f;
                     w -= 2 * x;
                     h *= 0.43f;
                     float ratioRatio = w / h / CARD_ART_RATIO;
@@ -209,9 +208,9 @@ public class CardRenderer {
                         h -= dh;
                         y += dh / 2;
                     }
-                    cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-                    cardArtCache.put(imageKey, cardArt);
                 }
+                cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+                cardArtCache.put(imageKey, cardArt);
             }
         }
         return cardArt;
@@ -243,7 +242,21 @@ public class CardRenderer {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (cardArt != null) {
-            g.drawImage(cardArt, x - FList.PADDING, y - FList.PADDING, cardArtWidth, cardArtHeight);
+            float artX = x - FList.PADDING;
+            float artY = y - FList.PADDING;
+            if (cardRules.getSplitType() == CardSplitType.Split) {
+                //draw split art with proper orientation
+                float srcY = (float)cardArt.getRegionHeight() * 13f / 354f;
+                float srcHeight = (float)cardArt.getRegionHeight() * 150f / 354f;
+                float dh = srcHeight * (1 - (float)cardArt.getRegionWidth() / srcHeight / CARD_ART_RATIO);
+                srcHeight -= dh;
+                srcY += dh / 2;
+                g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)srcY, cardArt.getRegionWidth(), (int)srcHeight, -90);
+                g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtWidth / 2, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), cardArt.getRegionHeight() - (int)(srcY + srcHeight), cardArt.getRegionWidth(), (int)srcHeight, -90);
+            }
+            else {
+                g.drawImage(cardArt, artX, artY, cardArtWidth, cardArtHeight);
+            }
         }
 
         //render card name and mana cost on first line
