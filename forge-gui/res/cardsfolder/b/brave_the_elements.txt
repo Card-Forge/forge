@@ -6,4 +6,4 @@ SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.White+YouCtrl | Gains
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brave_the_elements.jpg
-Oracle:Choose a color. White creatures you control gain protection from the chosen color until end of turn.
+Oracle:Choose a color. White creatures you control gain protection from the chosen color until end of turn. (They can't be blocked, targeted, dealt damage, or enchanted by anything of that color.)

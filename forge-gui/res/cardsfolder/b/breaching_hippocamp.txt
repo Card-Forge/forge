@@ -1,4 +1,4 @@
-Name:Breaching Hippocamp 
+Name:Breaching Hippocamp
 ManaCost:3 U
 Types:Creature Horse Fish
 PT:3/2
