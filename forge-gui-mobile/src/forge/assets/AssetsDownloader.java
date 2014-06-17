@@ -116,6 +116,14 @@ public class AssetsDownloader {
 
         //if assets.zip downloaded successfully, unzip into destination folder
         try {
+            File resDir = new File(ForgeConstants.RES_DIR);
+            if (resDir.exists()) {
+                //attempt to delete previous res directory if to be rebuilt
+                progressBar.reset();
+                progressBar.setDescription("Deleting old resource files...");
+                FileUtil.deleteDirectory(resDir);
+            }
+
             ZipFile zipFile = new ZipFile(destFile);
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
@@ -123,12 +131,6 @@ public class AssetsDownloader {
             progressBar.setPercentMode(true);
             progressBar.setDescription("Unzipping resource files");
             progressBar.setMaximum(zipFile.size());
-
-            File resDir = new File(ForgeConstants.RES_DIR);
-            if (resDir.exists()) {
-                //attempt to delete previous res directory if to be rebuilt
-                FileUtil.deleteDirectory(resDir);
-            }
 
             int count = 0;
             while (entries.hasMoreElements()) {
