@@ -38,6 +38,7 @@ public class Forge implements ApplicationListener {
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
+    private static Runnable onExit;
     private static int screenWidth;
     private static int screenHeight;
     private static Graphics graphics;
@@ -46,9 +47,10 @@ public class Forge implements ApplicationListener {
     private static KeyInputAdapter keyInputAdapter;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public static ApplicationListener getApp(Clipboard clipboard0, String assetDir0) {
+    public static ApplicationListener getApp(Clipboard clipboard0, String assetDir0, Runnable onExit0) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
+            onExit = onExit0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
         }
         return app;
@@ -259,7 +261,10 @@ public class Forge implements ApplicationListener {
         }
         screens.clear();
         graphics.dispose();
-        System.exit(0);
+
+        if (onExit != null) {
+            onExit.run();
+        }
     }
 
     //log message to Forge.log file

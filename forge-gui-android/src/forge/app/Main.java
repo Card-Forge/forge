@@ -35,6 +35,12 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(Forge.getApp(getClipboard(), assetsDir), true);
+        initialize(Forge.getApp(getClipboard(), assetsDir, new Runnable() {
+            @Override
+            public void run() {
+                //ensure process doesn't stick around after exiting
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        }), true);
     }
 }
