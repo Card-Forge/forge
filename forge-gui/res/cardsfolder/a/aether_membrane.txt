@@ -9,4 +9,4 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttacker
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_membrane.jpg
-Oracle:Defender; reach (This creature can block creatures with flying.)\nWhenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
+Oracle:Defender, reach (This creature can block creatures with flying.)\nWhenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.

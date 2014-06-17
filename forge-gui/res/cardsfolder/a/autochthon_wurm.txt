@@ -5,4 +5,4 @@ PT:9/14
 K:Trample
 K:Convoke
 SVar:Picture:http://www.wizards.com/global/images/magic/general/autochthon_wurm.jpg
-Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nTrample
+Oracle:Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTrample
