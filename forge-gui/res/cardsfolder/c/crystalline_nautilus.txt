@@ -2,7 +2,7 @@ Name:Crystalline Nautilus
 ManaCost:2 U
 Types:Enchantment Creature Nautilus
 PT:4/4
-K:Bestow:3 U U 
+K:Bestow:3 U U
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ CrystallineNautilusSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:CrystallineNautilusSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Self
 SVar:Targeting:Dies
