@@ -431,6 +431,8 @@ public class ComputerUtilCost {
             if (combat.getAttackers().isEmpty()) {
                 return false;
             }
+        } else if ("nonToken".equals(aiLogic) && AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0).isToken()) {
+            return false;
         }
 
         // AI will only pay when it's not already payed and only opponents abilities
