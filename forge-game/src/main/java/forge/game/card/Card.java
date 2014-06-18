@@ -2111,7 +2111,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
-                sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)");
+                sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)");
             } else if (keyword.endsWith(" offering")) {
                 String offeringType = keyword.split(" ")[0];
                 if (sb.length() != 0) {
@@ -2528,12 +2528,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
-                sb.append("Convoke (Each creature you tap while casting this spell reduces its cost by 1 or by one mana of that creature's color.)\r\n");
+                sb.append("Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\r\n");
             } else if (keyword.equals("Delve")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
-                sb.append("Delve (You may exile any number of cards from your graveyard as you cast this spell. It costs 1 less to cast for each card exiled this way.)\r\n");
+                sb.append("Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\r\n");
             } else if (keyword.endsWith(" offering")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
