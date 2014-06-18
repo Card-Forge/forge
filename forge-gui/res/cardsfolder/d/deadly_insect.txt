@@ -4,4 +4,4 @@ Types:Creature Insect
 PT:6/1
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_insect.jpg
-Oracle:Shroud (This permanent can't be the target of spells or abilities.)
+Oracle:Shroud (This creature can't be the target of spells or abilities.)

@@ -8,7 +8,7 @@ SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
 AlternateMode:Licid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominating_licid.jpg
-Oracle:{1}{U}{U}, {T}: Dominating Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay  to end this effect.\nYou control enchanted creature.
+Oracle:{1}{U}{U}, {T}: Dominating Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {U} to end this effect.\nYou control enchanted creature.
 
 ALTERNATE
 
@@ -22,4 +22,4 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 A:AB$ SetState | Cost$ U | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominating_licid.jpg
-Oracle:{1}{U}{U}, {T}: Dominating Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay  to end this effect.\nYou control enchanted creature.
+Oracle:{1}{U}{U}, {T}: Dominating Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {U} to end this effect.\nYou control enchanted creature.

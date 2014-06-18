@@ -8,5 +8,4 @@ SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permane
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daring_thief.jpg
-
 Oracle:Inspired - Whenever Daring Thief becomes untapped, you may exchange control of target nonland permanent you control and target permanent an opponent controls that shares a card type with it.

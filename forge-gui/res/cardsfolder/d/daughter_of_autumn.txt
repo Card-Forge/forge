@@ -16,4 +16,4 @@ SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daughter_of_autumn.jpg
-Oracle:{W}: The next 1 damage that would be dealt to target white creature this turn is dealt to CARDNAME instead.
+Oracle:{W}: The next 1 damage that would be dealt to target white creature this turn is dealt to Daughter of Autumn instead.
