@@ -2,6 +2,8 @@ package forge.deck;
 
 import forge.Forge;
 import forge.deck.Deck;
+import forge.deck.FDeckEditor.EditorType;
+import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
@@ -35,6 +37,8 @@ public class FDeckChooser extends FScreen {
     private DeckType selectedDeckType;
 
     private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
+    private final FButton btnNewDeck = new FButton("New Deck");
+    private final FButton btnEditDeck = new FButton("Edit Deck");
     private final FButton btnViewDeck = new FButton("View Deck");
     private final FButton btnRandom = new FButton("Random Deck");
 
@@ -51,6 +55,18 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.back();
+            }
+        });
+        btnNewDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                Forge.openScreen(new FDeckEditor(EditorType.Constructed, ""));
+            }
+        });
+        btnEditDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                editSelectedDeck();
             }
         });
         btnViewDeck.setCommand(new FEventHandler() {
@@ -71,6 +87,14 @@ public class FDeckChooser extends FScreen {
         });
     }
 
+    private void editSelectedDeck() {
+        final DeckProxy deck = lstDecks.getSelectedItem();
+        if (deck == null) { return; }
+
+        DeckPreferences.setCurrentDeck(deck.getName());
+        Forge.openScreen(new FDeckEditor(EditorType.Constructed, deck));
+    }
+
     public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
         stateSetting = savedStateSetting;
         selectedDeckType = defaultDeckType;
@@ -87,6 +111,8 @@ public class FDeckChooser extends FScreen {
             });
             add(cmbDeckTypes);
             add(lstDecks);
+            add(btnNewDeck);
+            add(btnEditDeck);
             add(btnViewDeck);
             add(btnRandom);
         }
@@ -100,15 +126,30 @@ public class FDeckChooser extends FScreen {
         float x = PADDING;
         float y = startY + PADDING;
         width -= 2 * x;
-        
+
         float fieldHeight = cmbDeckTypes.getHeight();
+
+        float totalButtonHeight = fieldHeight;
+        if (btnNewDeck.isVisible()) {
+            totalButtonHeight += fieldHeight + PADDING;
+        }
 
         cmbDeckTypes.setBounds(x, y, width, fieldHeight);
         y += cmbDeckTypes.getHeight() + 1;
-        lstDecks.setBounds(x, y, width, height - y - fieldHeight - 2 * PADDING); //leave room for buttons at bottom
+        lstDecks.setBounds(x, y, width, height - y - totalButtonHeight - 2 * PADDING); //leave room for buttons at bottom
 
         y += lstDecks.getHeight() + PADDING;
         float buttonWidth = (width - PADDING) / 2;
+
+        if (btnNewDeck.isVisible()) {
+            btnNewDeck.setBounds(x, y, buttonWidth, fieldHeight);
+            x += buttonWidth + PADDING;
+            btnEditDeck.setBounds(x, y, buttonWidth, fieldHeight);
+
+            x = PADDING;
+            y += fieldHeight + PADDING;
+        }
+
         btnViewDeck.setBounds(x, y, buttonWidth, fieldHeight);
         x += buttonWidth + PADDING;
         btnRandom.setBounds(x, y, buttonWidth, fieldHeight);
@@ -136,7 +177,11 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        lstDecks.setSelectedIndex(0);
+        if (!btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(true);
+            btnEditDeck.setVisible(true);
+            revalidate();
+        }
     }
 
     private class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
@@ -205,8 +250,11 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        // default selection = basic two color deck
-        lstDecks.setSelectedIndices(new Integer[]{0, 1});
+        if (btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(false);
+            btnEditDeck.setVisible(false);
+            revalidate();
+        }
     }
 
     private void updateThemes() {
@@ -224,7 +272,11 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        lstDecks.setSelectedIndex(0);
+        if (btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(false);
+            btnEditDeck.setVisible(false);
+            revalidate();
+        }
     }
 
     private void updatePrecons() {
@@ -242,7 +294,11 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        lstDecks.setSelectedIndex(0);
+        if (btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(false);
+            btnEditDeck.setVisible(false);
+            revalidate();
+        }
     }
 
     private void updateQuestEvents() {
@@ -260,7 +316,11 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        lstDecks.setSelectedIndex(0);
+        if (btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(false);
+            btnEditDeck.setVisible(false);
+            revalidate();
+        }
     }
 
     public Deck getDeck() {
@@ -319,6 +379,16 @@ public class FDeckChooser extends FScreen {
         case PRECONSTRUCTED_DECK:
             updatePrecons();
             break;
+        }
+
+        if (e != null) { //set default list selection if from combo box change event
+            if (deckType == DeckType.COLOR_DECK) {
+                // default selection = basic two color deck
+                lstDecks.setSelectedIndices(new Integer[]{0, 1});
+            }
+            else {
+                lstDecks.setSelectedIndex(0);
+            }
         }
     }
 
