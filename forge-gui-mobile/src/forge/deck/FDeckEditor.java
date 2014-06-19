@@ -175,10 +175,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         editorType.getController().editor = this;
 
         if (StringUtils.isEmpty(editDeckName)) {
-            setDeck(new Deck());
             if (editorType == EditorType.Draft) {
                 //hide deck header on while drafting
+                setDeck(new Deck());
                 deckHeader.setVisible(false);
+            }
+            else {
+                editorType.getController().newModel();
             }
         }
         else {
@@ -274,9 +277,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         }
 
-        //if opening brand new sealed deck, show sideboard (card pool) by default
-        if (editorType == EditorType.Sealed && deck.getMain().isEmpty()) {
-            setSelectedPage(sideboardPage);
+        switch (editorType) {
+        case Sealed:
+            //if opening brand new sealed deck, show sideboard (card pool) by default
+            if (deck.getMain().isEmpty()) {
+                setSelectedPage(sideboardPage);
+            }
+            break;
+        case Draft:
+            break;
+        default:
+            //if editing existing non-limited deck, show main deck by default
+            if (!deck.getMain().isEmpty()) {
+                setSelectedPage(mainDeckPage);
+            }
+            break;
         }
     }
 
@@ -327,6 +342,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             FOptionPane.showInputDialog("Enter name for new deck:", "New Deck", new Callback<String>() {
                 @Override
                 public void run(String result) {
+                    if (StringUtils.isEmpty(result)) { return; }
+
                     editorType.getController().saveAs(result);
                     if (callback != null) {
                         callback.run(true);
@@ -468,7 +485,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void refresh() {
-            ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
+            cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class));
         }
 
         @Override
@@ -689,6 +706,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             if (editor != null) {
                 String name = this.getModelName();
+                if (name.isEmpty()) {
+                    name = "[New Deck]";
+                }
                 if (!saved) {
                     name = "*" + name;
                 }
@@ -797,8 +817,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void newModel() {
-            model = newModelCreator.get();
-            setSaved(true);
+            setModel(newModelCreator.get());
         }
 
         public String getModelName() {

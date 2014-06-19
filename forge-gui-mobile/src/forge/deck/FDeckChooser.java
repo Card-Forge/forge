@@ -35,6 +35,7 @@ public class FDeckChooser extends FScreen {
 
     private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;
+    private boolean needRefreshOnActivate;
 
     private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
     private final FButton btnNewDeck = new FButton("New Deck");
@@ -60,6 +61,7 @@ public class FDeckChooser extends FScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                needRefreshOnActivate = true;
                 Forge.openScreen(new FDeckEditor(EditorType.Constructed, ""));
             }
         });
@@ -87,10 +89,20 @@ public class FDeckChooser extends FScreen {
         });
     }
 
+    @Override
+    public void onActivate() {
+        if (needRefreshOnActivate) {
+            needRefreshOnActivate = false;
+            updateCustom();
+            lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
+        }
+    }
+
     private void editSelectedDeck() {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
 
+        needRefreshOnActivate = true;
         DeckPreferences.setCurrentDeck(deck.getName());
         Forge.openScreen(new FDeckEditor(EditorType.Constructed, deck));
     }
