@@ -72,6 +72,7 @@ public class SpellAbilityVariables {
         this.metalcraft = sav.isThreshold();
         this.hellbent = sav.isHellbent();
         this.allTargetsLegal = sav.isAllTargetsLegal();
+        this.shareAllColors = sav.getShareAllColors();
         this.prowlTypes = new ArrayList<String>(sav.getProwlTypes());
         this.isPresent = sav.getIsPresent();
         this.presentCompare = sav.getPresentCompare();
@@ -186,6 +187,9 @@ public class SpellAbilityVariables {
 
     /** The life amount. */
     private String lifeAmount = "GE1";
+
+    /** The shareAllColors. */
+    private String shareAllColors = null;
 
     /** The mana spent. */
     private String manaSpent = "";
@@ -720,6 +724,14 @@ public class SpellAbilityVariables {
      */
     public final boolean isHellbent() {
         return this.hellbent;
+    }
+
+    public String getShareAllColors() {
+        return shareAllColors;
+    }
+
+    public void setShareAllColors(String shareAllColors) {
+        this.shareAllColors = shareAllColors;
     }
 
     /**

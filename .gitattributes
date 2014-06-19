@@ -3896,6 +3896,7 @@ forge-gui/res/cardsfolder/d/dead_gone.txt -text
 forge-gui/res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/d/dead_reveler.txt -text
+forge-gui/res/cardsfolder/d/dead_ringers.txt -text
 forge-gui/res/cardsfolder/d/dead_weight.txt -text
 forge-gui/res/cardsfolder/d/deadapult.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deadbridge_chant.txt -text

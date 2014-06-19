@@ -24,11 +24,15 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,6 +157,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
+        if (params.containsKey("ConditionShareAllColors")) {
+            this.setShareAllColors(params.get("ConditionShareAllColors"));
+        }
+
         if (params.containsKey("ConditionManaSpent")) {
             this.setManaSpent(params.get("ConditionManaSpent"));
         }
@@ -205,6 +213,21 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             for (Card c : sa.getTargets().getTargetCards()) {
                 if (!CardFactoryUtil.isTargetStillValid(sa, c)) {
                     return false;
+                }
+            }
+        }
+
+        if (this.getShareAllColors() != null) {
+            List<Card> tgts = AbilityUtils.getDefinedCards(sa.getHostCard(), this.getShareAllColors(), sa);
+            Card first = Iterables.getFirst(tgts, null);
+            if (first == null) {
+                return false;
+            } else {
+                byte firstColor = CardUtil.getColors(first).getColor();
+                for (Card c : tgts) {
+                    if (CardUtil.getColors(c).getColor() != firstColor) {
+                        return false;
+                    }
                 }
             }
         }

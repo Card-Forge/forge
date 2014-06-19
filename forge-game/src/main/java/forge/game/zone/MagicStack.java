@@ -684,6 +684,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
         // Can't fizzle unless there are some targets
         boolean fizzle = false;
+        boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
 
         TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -698,6 +699,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 final TargetChoices choices = sa.getTargets();
                 for (final GameObject o : sa.getTargets().getTargets()) {
                     boolean invalidTarget = false;
+                    if (rememberTgt) {
+                        source.addRemembered(o);
+                    }
                     if (o instanceof Card) {
                         final Card card = (Card) o;
                         Card current = game.getCardState(card);
@@ -730,6 +734,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sa.getSubAbility() == null) {
+            if (fizzle && rememberTgt) {
+                source.clearRemembered();
+            }
             return fizzle;
         }
 
