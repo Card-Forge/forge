@@ -6,4 +6,4 @@ K:Islandwalk
 K:Trample
 K:Shroud
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkwell_leviathan.jpg
-Oracle:Islandwalk, trample, shroud
+Oracle:Islandwalk, trample\nShroud (This creature can't be the target of spells or abilities.)
