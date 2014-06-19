@@ -8,4 +8,4 @@ A:AB$ PutCounter | Cost$ X | CounterType$ TOWER | CounterNum$ X | References$ X 
 SVar:X:Count$xPaid
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helix_pinnacle.jpg
-Oracle:Shroud\n{X}: Put X tower counters on Helix Pinnacle.\nAt the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
+Oracle:Shroud (This enchantment can't be the target of spells or abilities.)\n{X}: Put X tower counters on Helix Pinnacle.\nAt the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
