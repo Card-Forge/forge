@@ -314,6 +314,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public void setDeck(Deck deck0) {
         if (deck == deck0) { return; }
         deck = deck0;
+        if (deck == null) { return; }
 
         //reinitialize tab pages when deck changes
         for (TabPage<FDeckEditor> tabPage : tabPages) {
@@ -641,6 +642,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public Deck getDeck() {
+            if (model == null) { return null; }
+
             if (model instanceof Deck) {
                 return (Deck) model;
             }
