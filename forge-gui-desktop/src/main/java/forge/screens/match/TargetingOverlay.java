@@ -25,6 +25,7 @@ import forge.screens.match.controllers.CDock;
 import forge.screens.match.views.VField;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
+import forge.view.FView;
 import forge.view.arcane.CardPanel;
 
 import javax.swing.*;
@@ -370,6 +371,8 @@ public enum TargetingOverlay {
             drawArcs(g2d, colorOther, arcsOther);
             drawArcs(g2d, colorCombat, arcsCombat);
 
+            FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
+            
         }
 
     }
