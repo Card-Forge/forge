@@ -6,4 +6,4 @@ SVar:BuffedBy:Creature
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
-Oracle:Creatures you control have haste.
+Oracle:Creatures you control have haste. (They can attack and {T} as soon as they come under your control.)
