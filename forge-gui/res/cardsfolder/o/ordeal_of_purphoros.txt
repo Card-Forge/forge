@@ -12,4 +12,4 @@ SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | NumDmg$ 3 | ValidTgts$ Creature,Player |
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordeal_of_purphoros.jpg
-Oracle:Enchant creatureWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.
+Oracle:Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.\nWhen you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.
