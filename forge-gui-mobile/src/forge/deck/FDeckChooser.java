@@ -71,12 +71,6 @@ public class FDeckChooser extends FScreen {
         });
     }
 
-    public void initialize() {
-        initialize(DeckType.COLOR_DECK);
-    }
-    public void initialize(DeckType defaultDeckType) {
-        initialize(null, defaultDeckType);
-    }
     public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
         stateSetting = savedStateSetting;
         selectedDeckType = defaultDeckType;
