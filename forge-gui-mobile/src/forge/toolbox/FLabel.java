@@ -224,7 +224,7 @@ public class FLabel extends FDisplayObject implements IButton {
 
         g.startClip(0, 0, w, h); //start clip to ensure nothing escapes bounds
 
-        boolean applyAlphaComposite = (opaque && !pressed);
+        boolean applyAlphaComposite = (opaque && !pressed && isEnabled());
         if (applyAlphaComposite) {
             g.setAlphaComposite(alphaComposite);
         }

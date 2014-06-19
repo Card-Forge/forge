@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.GuiBase;
@@ -26,7 +27,6 @@ import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
-import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -101,6 +101,8 @@ public class ConstructedScreen extends LaunchScreen {
     public ConstructedScreen() {
         super("Constructed");
 
+        btnStart.setEnabled(false); //disable start button until decks loaded
+
         add(lblPlayers);
         cbPlayerCount = add(new FComboBox<Integer>());
         cbPlayerCount.setFont(VARIANTS_FONT);
@@ -163,17 +165,29 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         add(playersScroll);
-        
-        getDeckChooser(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-        getDeckChooser(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
-        /*getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
-        getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
 
         updatePlayersFromPrefs();
+
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                getDeckChooser(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+                getDeckChooser(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
+                /*getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
+                getDeckChooser(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
+                getDeckChooser(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
+                getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
+                getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
+                getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Support multiplayer and improve performance of loading this screen by using background thread
+
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnStart.setEnabled(true);
+                    }
+                });
+            }
+        });
 
         //disable player count and variants for now until they work properly
         lblPlayers.setEnabled(false);
@@ -432,7 +446,7 @@ public class ConstructedScreen extends LaunchScreen {
         private FComboBox<Object> cbTeam = new FComboBox<Object>();
         private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
 
-        private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Deck: (None)").build();
+        private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Loading Deck...").build();
         private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: (None)").build();
         private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: (None)").build();
         private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: (None)").build();
@@ -445,15 +459,16 @@ public class ConstructedScreen extends LaunchScreen {
             super();
             index = index0;
             playerIsArchenemy = index == 0;
+            btnDeck.setEnabled(false); //disable deck button until done loading decks
             deckChooser = new FDeckChooser(isPlayerAI());
             deckChooser.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
+                    btnDeck.setEnabled(true);
                     btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ": " +
                             Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME));
                 }
             });
-            deckChooser.initialize();
             lstSchemeDecks = new DeckList();
             lstCommanderDecks = new DeckList();
             lstPlanarDecks = new DeckList();
@@ -488,7 +503,7 @@ public class ConstructedScreen extends LaunchScreen {
                     Forge.openScreen(deckChooser);
                 }
             });
-            add(btnCommanderDeck);
+            /*add(btnCommanderDeck);
             btnCommanderDeck.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -519,11 +534,11 @@ public class ConstructedScreen extends LaunchScreen {
                     deckChooser.setHeaderCaption("Select Vanguard Avatar for " + txtPlayerName.getText());
                     Forge.openScreen(deckChooser);
                 }
-            });
+            });*/
 
             updateVariantControlsVisibility();
 
-            final CardCollections decks = FModel.getDecks();
+            /*final CardCollections decks = FModel.getDecks();
             
             lstCommanderDecks.list.addItem("Generate");
             if (decks.getCommander().size() > 0) {
@@ -554,7 +569,7 @@ public class ConstructedScreen extends LaunchScreen {
             }
             lstPlanarDecks.setSelectedIndex(0);
 
-            updateVanguardList();
+            updateVanguardList();*/
 
             //disable team combo boxes for now
             cbTeam.setEnabled(false);
