@@ -1,8 +1,8 @@
 Name:Skyshroud Blessing
 ManaCost:1 G
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Land | KW$ Shroud | SubAbility$ DBDraw | SpellDescription$ Lands gain shroud until end of turn. (They can't be the targets of spells or abilities.) Draw a card.
+A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Land | KW$ Shroud | SubAbility$ DBDraw | SpellDescription$ All lands gain shroud until end of turn. (They can't be the targets of spells or abilities.) Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_blessing.jpg
-Oracle:Lands gain shroud until end of turn. (They can't be the targets of spells or abilities.)\nDraw a card.
+Oracle:All lands gain shroud until end of turn. (They can't be the targets of spells or abilities.)\nDraw a card.

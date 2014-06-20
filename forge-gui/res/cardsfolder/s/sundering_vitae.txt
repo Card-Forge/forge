@@ -4,4 +4,4 @@ Types:Instant
 K:Convoke
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_vitae.jpg
-Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nDestroy target artifact or enchantment.
+Oracle:Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target artifact or enchantment.

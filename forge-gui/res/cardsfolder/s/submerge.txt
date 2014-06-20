@@ -6,4 +6,4 @@ SVar:X:Count$Valid Forest.OppCtrl
 SVar:Y:Count$Valid Island.YouCtrl
 A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/submerge.jpg
-Oracle:Put target creature on top of its owner's library.
+Oracle:If an opponent controls a Forest and you control an Island, you may cast Submerge without paying its mana cost.\nPut target creature on top of its owner's library.

@@ -7,4 +7,4 @@ SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Y
 SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | UnlessCost$ 2 G G | UnlessPayer$ You | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoners_pact.jpg
-Oracle:Summoner's Pact is green.\nSearch your library for a green creature card, reveal it, and put it into your hand. Then shuffle your library.\nAt the beginning of your next upkeep, pay {2}{G}{G}. If you don't, you lose the game.
+Oracle:Search your library for a green creature card, reveal it, and put it into your hand. Then shuffle your library.\nAt the beginning of your next upkeep, pay {2}{G}{G}. If you don't, you lose the game.

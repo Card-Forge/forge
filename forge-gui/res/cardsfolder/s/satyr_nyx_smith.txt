@@ -6,4 +6,4 @@ PT:2/1
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired - Whenever CARDNAME becomes untapped, you may pay {2}{R}. If you do, put a 3/1 red Elemental enchantment creature token with haste onto the battlefield.
 SVar:GFGToken:AB$ Token | Cost$ 2 R | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Enchantment,Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenImage$ r 3 1 elemental bng | TokenKeywords$ Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/god-favored_general.txt
-Oracle:Haste\nInspired — Whenever Satyr Nyx-Smith becomes untapped, you may pay {2}{R}. If you do, put a 3/1 red Elemental enchantment creature token with haste onto the battlefield.
+Oracle:Haste\nInspired - Whenever Satyr Nyx-Smith becomes untapped, you may pay {2}{R}. If you do, put a 3/1 red Elemental enchantment creature token with haste onto the battlefield.

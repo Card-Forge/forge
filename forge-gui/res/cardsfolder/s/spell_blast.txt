@@ -5,4 +5,4 @@ A:SP$Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card | SpellDescriptio
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_blast.jpg
-Oracle:Counter target spell with converted mana cost X.
+Oracle:Counter target spell with converted mana cost X. (For example, if that spell's mana cost is {3}{U}{U}, X is 5.)

@@ -6,7 +6,9 @@ A:SP$ ChangeZone | Cost$ G U | Origin$ Sideboard | Destination$ Library | Shuffl
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/researchdevelopment.jpg
 Oracle:Choose up to four cards you own from outside the game and shuffle them into your library.
+
 ALTERNATE
+
 Name:Development
 ManaCost:3 U R
 Types:Instant

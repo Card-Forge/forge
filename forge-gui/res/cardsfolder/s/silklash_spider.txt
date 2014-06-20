@@ -6,4 +6,4 @@ K:Reach
 A:AB$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | References$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silklash_spider.jpg
-Oracle:Reach (This creature can block creatures with flying.)\n{X}{G}{G}: Silklash Spider deals X damage to each creature with flying.
+Oracle:Reach\n{X}{G}{G}: Silklash Spider deals X damage to each creature with flying.
