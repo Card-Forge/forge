@@ -36,6 +36,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.Utils;
 
@@ -52,11 +53,34 @@ public class AddBasicLandsDialog extends FDialog {
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
     private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<CardEdition>(StaticData.instance().getEditions()));
-    private final LandPanel pnlPlains = add(new LandPanel("Plains"));
-    private final LandPanel pnlIsland = add(new LandPanel("Island"));
-    private final LandPanel pnlSwamp = add(new LandPanel("Swamp"));
-    private final LandPanel pnlMountain = add(new LandPanel("Mountain"));
-    private final LandPanel pnlForest = add(new LandPanel("Forest"));
+
+    private final FScrollPane scroller = add(new FScrollPane() {
+        @Override
+        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
+            float padding = FOptionPane.PADDING;
+            float x = padding;
+            float totalWidth = 2 * visibleWidth - ADD_BTN_SIZE;
+            float panelWidth = (totalWidth - 6 * padding) / 5;
+
+            pnlPlains.setBounds(x, 0, panelWidth, visibleHeight);
+            x += panelWidth + padding;
+            pnlIsland.setBounds(x, 0, panelWidth, visibleHeight);
+            x += panelWidth + padding;
+            pnlSwamp.setBounds(x, 0, panelWidth, visibleHeight);
+            x += panelWidth + padding;
+            pnlMountain.setBounds(x, 0, panelWidth, visibleHeight);
+            x += panelWidth + padding;
+            pnlForest.setBounds(x, 0, panelWidth, visibleHeight);
+
+            return new ScrollBounds(totalWidth, visibleHeight);
+        }
+    });
+    private final LandPanel pnlPlains = scroller.add(new LandPanel("Plains"));
+    private final LandPanel pnlIsland = scroller.add(new LandPanel("Island"));
+    private final LandPanel pnlSwamp = scroller.add(new LandPanel("Swamp"));
+    private final LandPanel pnlMountain = scroller.add(new LandPanel("Mountain"));
+    private final LandPanel pnlForest = scroller.add(new LandPanel("Forest"));
+
     private final FButton btnOK    = add(new FButton("OK"));
     private final FButton btnCancel = add(new FButton("Cancel"));
 
@@ -122,31 +146,14 @@ public class AddBasicLandsDialog extends FDialog {
         lblLandSet.setBounds(x, y, lblLandSet.getAutoSizeBounds().width, comboBoxHeight);
         cbLandSet.setBounds(x + lblLandSet.getWidth(), y, w - lblLandSet.getWidth(), comboBoxHeight);
 
-        //layout card panels
-        x = padding;
+        //layout card panel scroller
         y += comboBoxHeight + padding;
-        float maxPanelHeight = (maxHeight - y - FOptionPane.BUTTON_HEIGHT - FOptionPane.GAP_BELOW_BUTTONS - 2 * padding) / 2;
         float panelExtraHeight = pnlPlains.cbLandArt.getHeight() + ADD_BTN_SIZE + 2 * LAND_PANEL_PADDING;
-        float panelWidth = (w - 2 * padding) / 3;
+        float panelWidth = (2 * width - ADD_BTN_SIZE - 6 * padding) / 5;
         float panelHeight = panelWidth * FCardPanel.ASPECT_RATIO + panelExtraHeight;
-        if (panelHeight > maxPanelHeight) { //ensure panels short enough that dialog doesn't exceed max height
-            panelHeight = maxPanelHeight;
-        }
-
-        pnlPlains.setBounds(x, y, panelWidth, panelHeight);
-        x += panelWidth + padding;
-        pnlIsland.setBounds(x, y, panelWidth, panelHeight);
-        x += panelWidth + padding;
-        pnlSwamp.setBounds(x, y, panelWidth, panelHeight);
-
-        x = (width - padding) / 2 - panelWidth;
-        y += panelHeight + padding;
-        pnlMountain.setBounds(x, y, panelWidth, panelHeight);
-        x += panelWidth + padding;
-        pnlForest.setBounds(x, y, panelWidth, panelHeight);
+        scroller.setBounds(0, y, width, panelHeight);
 
         //layout buttons
-        x = padding;
         y += panelHeight + padding;
         float gapBetweenButtons = padding / 2;
         float buttonWidth = (w - gapBetweenButtons) / 2;
