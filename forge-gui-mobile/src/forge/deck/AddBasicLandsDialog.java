@@ -17,13 +17,18 @@
  */
 package forge.deck;
 
+import java.text.NumberFormat;
+import java.util.Map.Entry;
+
 import forge.Graphics;
 import forge.StaticData;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardEdition;
+import forge.card.CardRules;
 import forge.card.CardZoom;
+import forge.card.mana.ManaCostShard;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.toolbox.FButton;
@@ -37,6 +42,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextArea;
 import forge.util.Callback;
 import forge.util.Utils;
 
@@ -48,7 +54,6 @@ public class AddBasicLandsDialog extends FDialog {
     private static final float ADD_BTN_SIZE = Utils.AVG_FINGER_HEIGHT * 0.75f;
     private static final float LAND_PANEL_PADDING = Utils.scaleY(3);
 
-    private final Deck deck;
     private final Callback<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text("Land Set:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
@@ -81,19 +86,24 @@ public class AddBasicLandsDialog extends FDialog {
     private final LandPanel pnlMountain = scroller.add(new LandPanel("Mountain"));
     private final LandPanel pnlForest = scroller.add(new LandPanel("Forest"));
 
-    private final FButton btnOK    = add(new FButton("OK"));
+    private final FTextArea lblDeckInfo = add(new FTextArea());
+
+    private final FButton btnOK     = add(new FButton("OK"));
     private final FButton btnCancel = add(new FButton("Cancel"));
 
+    private int nonLandCount, oldLandCount;
     private CardEdition landSet;
 
-    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
-        this(deck0, defaultLandSet, null, callback0);
+    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
+        this(deck, defaultLandSet, null, callback0);
     }
-    public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<CardPool> callback0) {
-        super("Add Basic Lands to " + deck0.getName());
+    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, CardPool restrictedCatalog0, final Callback<CardPool> callback0) {
+        super("Add Basic Lands to " + deck.getName());
 
-        deck = deck0;
         callback = callback0;
+
+        lblDeckInfo.setAlignment(HAlignment.CENTER);
+        lblDeckInfo.setFont(FSkinFont.get(12));
 
         cbLandSet.setFont(lblLandSet.getFont());
         cbLandSet.setChangedHandler(new FEventHandler() {
@@ -132,6 +142,81 @@ public class AddBasicLandsDialog extends FDialog {
                 hide();
             }
         });
+
+        //initialize land counts based on current deck contents
+        int halfCountW = 0; //track half shard count for each color to add to symbol count only if a full symbol is also found
+        int halfCountU = 0;
+        int halfCountB = 0;
+        int halfCountR = 0;
+        int halfCountG = 0;
+        for (Entry<PaperCard, Integer> entry : deck.getMain()) {
+            CardRules cardRules = entry.getKey().getRules();
+            int count = entry.getValue();
+            if (cardRules.getType().isLand()) {
+                oldLandCount += count;
+            }
+            else {
+                nonLandCount += count;
+
+                for (ManaCostShard shard : cardRules.getManaCost()) {
+                    boolean isMonoColor = shard.isMonoColor();
+                    if (shard.isWhite()) {
+                        if (isMonoColor) {
+                            pnlPlains.symbolCount++;
+                            continue;
+                        }
+                        halfCountW++;
+                    }
+                    if (shard.isBlue()) {
+                        if (isMonoColor) {
+                            pnlIsland.symbolCount++;
+                            continue;
+                        }
+                        halfCountU++;
+                    }
+                    if (shard.isBlack()) {
+                        if (isMonoColor) {
+                            pnlSwamp.symbolCount++;
+                            continue;
+                        }
+                        halfCountB++;
+                    }
+                    if (shard.isRed()) {
+                        if (isMonoColor) {
+                            pnlMountain.symbolCount++;
+                            continue;
+                        }
+                        halfCountR++;
+                    }
+                    if (shard.isGreen()) {
+                        if (isMonoColor) {
+                            pnlForest.symbolCount++;
+                            continue;
+                        }
+                        halfCountG++;
+                    }
+                }
+            }
+
+            //only account for half shards if full shards exist for a given color
+            if (pnlPlains.symbolCount > 0 && halfCountW > 0) {
+                pnlPlains.symbolCount += halfCountW * 0.5;
+            }
+            if (pnlIsland.symbolCount > 0 && halfCountU > 0) {
+                pnlIsland.symbolCount += halfCountU * 0.5;
+            }
+            if (pnlSwamp.symbolCount > 0 && halfCountB > 0) {
+                pnlSwamp.symbolCount += halfCountB * 0.5;
+            }
+            if (pnlMountain.symbolCount > 0 && halfCountR > 0) {
+                pnlMountain.symbolCount += halfCountR * 0.5;
+            }
+            if (pnlForest.symbolCount > 0 && halfCountG > 0) {
+                pnlForest.symbolCount += halfCountG * 0.5;
+            }
+        }
+
+        updateDeckInfoLabel();
     }
 
     @Override
@@ -153,8 +238,12 @@ public class AddBasicLandsDialog extends FDialog {
         float panelHeight = panelWidth * FCardPanel.ASPECT_RATIO + panelExtraHeight;
         scroller.setBounds(0, y, width, panelHeight);
 
-        //layout buttons
+        //layout info label
         y += panelHeight + padding;
+        lblDeckInfo.setBounds(x, y, w, lblDeckInfo.getPreferredHeight(w));
+
+        //layout buttons
+        y += lblDeckInfo.getHeight() + padding;
         float gapBetweenButtons = padding / 2;
         float buttonWidth = (w - gapBetweenButtons) / 2;
         btnOK.setBounds(x, y, buttonWidth, FOptionPane.BUTTON_HEIGHT);
@@ -164,6 +253,24 @@ public class AddBasicLandsDialog extends FDialog {
         return y + FOptionPane.BUTTON_HEIGHT + FOptionPane.GAP_BELOW_BUTTONS;
     }
 
+    private void updateDeckInfoLabel() {
+        NumberFormat integer = NumberFormat.getIntegerInstance();
+        NumberFormat percent = NumberFormat.getPercentInstance();
+        int newLandCount = pnlPlains.count + pnlIsland.count + pnlSwamp.count + pnlMountain.count + pnlForest.count;
+        double totalSymbolCount = pnlPlains.symbolCount + pnlIsland.symbolCount + pnlSwamp.symbolCount + pnlMountain.symbolCount + pnlForest.symbolCount;
+        int newTotalCount = nonLandCount + oldLandCount + newLandCount;
+        lblDeckInfo.setText(
+                nonLandCount + " non-lands + " +
+                oldLandCount + " lands + " +
+                newLandCount + " added lands = " +
+                newTotalCount + " cards\n" +
+                integer.format(pnlPlains.symbolCount)   + " {W} (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
+                integer.format(pnlIsland.symbolCount)   + " {U} (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
+                integer.format(pnlSwamp.symbolCount)    + " {B} (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
+                integer.format(pnlMountain.symbolCount) + " {R} (" + percent.format(pnlMountain.symbolCount / totalSymbolCount) + ") | " +
+                integer.format(pnlForest.symbolCount)   + " {G} (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")");
+    }
+
     private class LandPanel extends FContainer {
         private final LandCardPanel cardPanel;
         private final FLabel lblCount, btnSubtract, btnAdd;
@@ -171,6 +278,7 @@ public class AddBasicLandsDialog extends FDialog {
         private final String cardName;
         private PaperCard card;
         private int count, maxCount;
+        private double symbolCount;
 
         private LandPanel(String cardName0) {
             cardName = cardName0;
@@ -192,6 +300,7 @@ public class AddBasicLandsDialog extends FDialog {
                     if (count > 0) {
                         count--;
                         lblCount.setText(String.valueOf(count));
+                        updateDeckInfoLabel();
                     }
                 }
             }).build());
@@ -201,6 +310,7 @@ public class AddBasicLandsDialog extends FDialog {
                     if (maxCount == 0 || count < maxCount) {
                         count++;
                         lblCount.setText(String.valueOf(count));
+                        updateDeckInfoLabel();
                     }
                 }
             }).build());

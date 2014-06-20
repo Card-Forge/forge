@@ -43,13 +43,12 @@ public class FTextArea extends FScrollPane {
         alignment = alignment0;
     }
 
-    public void setFontSize(int fontSize0) {
-        font = FSkinFont.get(fontSize0);
-        revalidate();
-    }
-
     public FSkinFont getFont() {
         return font;
+    }
+    public void setFont(FSkinFont font0) {
+        font = font0;
+        revalidate();
     }
 
     public float getPreferredHeight(float width) {

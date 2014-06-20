@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageUtil;
 import forge.screens.match.views.VPrompt;
@@ -152,7 +153,7 @@ public class FOptionPane extends FDialog {
 
         if (message != null) {
             prompt = add(new FTextArea(message));
-            prompt.setFontSize(12);
+            prompt.setFont(FSkinFont.get(12));
         }
         else {
             prompt = null;

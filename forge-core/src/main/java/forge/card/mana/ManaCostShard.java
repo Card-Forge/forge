@@ -246,6 +246,22 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
         return this.imageKey;
     }
 
+    public boolean isWhite() {
+        return (this.shard & ManaAtom.WHITE) != 0;
+    }
+    public boolean isBlue() {
+        return (this.shard & ManaAtom.BLUE) != 0;
+    }
+    public boolean isBlack() {
+        return (this.shard & ManaAtom.BLACK) != 0;
+    }
+    public boolean isRed() {
+        return (this.shard & ManaAtom.RED) != 0;
+    }
+    public boolean isGreen() {
+        return (this.shard & ManaAtom.GREEN) != 0;
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * @return
