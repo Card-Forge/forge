@@ -64,9 +64,29 @@ public class FDeckChooser extends FScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                needRefreshOnActivate = true;
-                setSelectedDeckType(DeckType.CUSTOM_DECK); //ensure user returns to custom user deck
-                Forge.openScreen(new FDeckEditor(EditorType.Constructed, ""));
+                switch (selectedDeckType) {
+                case COLOR_DECK:
+                case THEME_DECK:
+                    final DeckProxy deck = lstDecks.getSelectedItem();
+                    if (deck != null) {
+                        Deck generatedDeck = deck.getDeck();
+                        if (generatedDeck != null) {
+                            generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
+                            needRefreshOnActivate = true;
+                            setSelectedDeckType(DeckType.CUSTOM_DECK); //ensure user returns to custom user deck
+                            Forge.openScreen(new FDeckEditor(EditorType.Constructed, generatedDeck));
+                        }
+                    }
+                    else {
+                        FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
+                    }
+                    break;
+                default:
+                    needRefreshOnActivate = true;
+                    setSelectedDeckType(DeckType.CUSTOM_DECK);
+                    Forge.openScreen(new FDeckEditor(EditorType.Constructed, ""));
+                    break;
+                }
             }
         });
         btnEditDeck.setCommand(new FEventHandler() {
@@ -250,7 +270,6 @@ public class FDeckChooser extends FScreen {
             return name;
         }
 
-
         @Override
         public int compareTo(final ColorDeckGenerator d) {
             return d instanceof ColorDeckGenerator ? Integer.compare(this.index, ((ColorDeckGenerator)d).index) : 1;
@@ -267,7 +286,7 @@ public class FDeckChooser extends FScreen {
             }
             return null;
         }
-        
+
         @Override
         public boolean isGeneratedDeck() {
             return true;

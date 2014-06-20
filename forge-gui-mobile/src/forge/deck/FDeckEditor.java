@@ -163,12 +163,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck) {
-        this(editorType0, editDeck.getName(), editDeck.getPath());
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null);
     }
     public FDeckEditor(EditorType editorType0, String editDeckName) {
-        this(editorType0, editDeckName, "");
+        this(editorType0, editDeckName, "", null);
     }
-    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath) {
+    public FDeckEditor(EditorType editorType0, Deck newDeck) {
+        this(editorType0, "", "", newDeck);
+    }
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck) {
         super(getPages(editorType0));
 
         editorType = editorType0;
@@ -181,7 +184,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 deckHeader.setVisible(false);
             }
             else {
-                editorType.getController().newModel();
+                if (newDeck == null) {
+                    editorType.getController().newModel();
+                }
+                else {
+                    editorType.getController().setDeck(newDeck);
+                }
             }
         }
         else {
@@ -656,6 +664,16 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public String getModelPath() {
             return modelPath;
+        }
+
+        @SuppressWarnings("unchecked")
+        public void setDeck(final Deck deck) {
+            modelInStorage = false;
+            model = (T)deck;
+            currentFolder = rootFolder;
+            modelPath = "";
+            setSaved(false);
+            editor.setDeck(deck);
         }
 
         public void setModel(final T document) {
