@@ -6,6 +6,7 @@ public class FEvent {
         LONG_PRESS,
         CHANGE,
         ACTIVATE,
+        SAVE,
         DELETE
     }
 

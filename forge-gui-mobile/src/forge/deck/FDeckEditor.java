@@ -29,6 +29,7 @@ import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -156,6 +157,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private CatalogPage catalogPage;
     private DeckSectionPage mainDeckPage;
     private DeckSectionPage sideboardPage;
+    private FEventHandler saveHandler;
 
     protected final DeckHeader deckHeader = add(new DeckHeader());
     protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scaleX(5), 0)).build());
@@ -344,6 +346,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected BoosterDraft getDraft() {
         return null;
+    }
+
+    public void setSaveHandler(FEventHandler saveHandler0) {
+        saveHandler = saveHandler0;
     }
 
     protected void save(final Callback<Boolean> callback) {
@@ -797,6 +803,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             }
             editor.setDeck(getDeck());
+            if (editor.saveHandler != null) {
+                editor.saveHandler.handleEvent(new FEvent(editor, FEventType.SAVE));
+            }
         }
 
         @SuppressWarnings("unchecked")

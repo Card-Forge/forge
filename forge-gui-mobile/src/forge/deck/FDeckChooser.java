@@ -64,29 +64,38 @@ public class FDeckChooser extends FScreen {
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
+                FDeckEditor editor;
                 switch (selectedDeckType) {
                 case COLOR_DECK:
                 case THEME_DECK:
                     final DeckProxy deck = lstDecks.getSelectedItem();
                     if (deck != null) {
                         Deck generatedDeck = deck.getDeck();
-                        if (generatedDeck != null) {
-                            generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
-                            needRefreshOnActivate = true;
-                            setSelectedDeckType(DeckType.CUSTOM_DECK); //ensure user returns to custom user deck
-                            Forge.openScreen(new FDeckEditor(EditorType.Constructed, generatedDeck));
-                        }
+                        if (generatedDeck == null) { return; }
+
+                        generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
+                        editor = new FDeckEditor(EditorType.Constructed, generatedDeck);
                     }
                     else {
                         FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
+                        return;
                     }
                     break;
                 default:
-                    needRefreshOnActivate = true;
-                    setSelectedDeckType(DeckType.CUSTOM_DECK);
-                    Forge.openScreen(new FDeckEditor(EditorType.Constructed, ""));
+                    editor = new FDeckEditor(EditorType.Constructed, "");
                     break;
                 }
+                editor.setSaveHandler(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        //ensure user returns to custom user deck and that list is refreshed if new deck is saved
+                        if (!needRefreshOnActivate) {
+                            needRefreshOnActivate = true;
+                            setSelectedDeckType(DeckType.CUSTOM_DECK);
+                        }
+                    }
+                });
+                Forge.openScreen(editor);
             }
         });
         btnEditDeck.setCommand(new FEventHandler() {
