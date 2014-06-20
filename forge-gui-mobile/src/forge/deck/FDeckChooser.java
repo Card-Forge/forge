@@ -20,7 +20,10 @@ import forge.toolbox.FButton;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FOptionPane;
+import forge.util.Callback;
 import forge.util.Utils;
+import forge.util.storage.IStorage;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,6 +65,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 needRefreshOnActivate = true;
+                setSelectedDeckType(DeckType.CUSTOM_DECK); //ensure user returns to custom user deck
                 Forge.openScreen(new FDeckEditor(EditorType.Constructed, ""));
             }
         });
@@ -102,6 +106,36 @@ public class FDeckChooser extends FScreen {
         final DeckProxy deck = lstDecks.getSelectedItem();
         if (deck == null) { return; }
 
+        if (selectedDeckType == DeckType.CUSTOM_DECK) {
+            editDeck(deck);
+            return;
+        }
+
+        //set if deck with selected name exists already
+        final IStorage<Deck> decks = FModel.getDecks().getConstructed();
+        Deck existingDeck = decks.get(deck.getName());
+        if (existingDeck != null) {
+            setSelectedDeckType(DeckType.CUSTOM_DECK);
+            editDeck(new DeckProxy(existingDeck, "Constructed", GameType.Constructed, decks));
+            return;
+        }
+
+        //prompt to duplicate deck if deck doesn't exist already
+        FOptionPane.showConfirmDialog(selectedDeckType + " cannot be edited directly. Would you like to duplicate " + deck.getName() + " for editing as a custom user deck?",
+                "Duplicate Deck?", "Duplicate", "Cancel", new Callback<Boolean>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
+                    decks.add(copiedDeck);
+                    setSelectedDeckType(DeckType.CUSTOM_DECK);
+                    editDeck(new DeckProxy(copiedDeck, "Constructed", GameType.Constructed, decks));
+                }
+            }
+        });
+    }
+
+    private void editDeck(DeckProxy deck) {
         needRefreshOnActivate = true;
         DeckPreferences.setCurrentDeck(deck.getName());
         Forge.openScreen(new FDeckEditor(EditorType.Constructed, deck));
@@ -306,9 +340,9 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        if (btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(false);
-            btnEditDeck.setVisible(false);
+        if (!btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(true);
+            btnEditDeck.setVisible(true);
             revalidate();
         }
     }
@@ -328,9 +362,9 @@ public class FDeckChooser extends FScreen {
             }
         });
 
-        if (btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(false);
-            btnEditDeck.setVisible(false);
+        if (!btnNewDeck.isVisible()) {
+            btnNewDeck.setVisible(true);
+            btnEditDeck.setVisible(true);
             revalidate();
         }
     }

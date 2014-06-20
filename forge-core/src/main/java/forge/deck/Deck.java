@@ -131,8 +131,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return new Deck(name0);
     }
 
-
-
     public void convertByXitaxMethod() {
         CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getAllCardsInASinglePool());
 
