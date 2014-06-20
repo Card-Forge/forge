@@ -14,5 +14,4 @@ SVar:TriggerPlayPF:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | TriggerZone
 SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_flamespeaker.jpg
-
 Oracle:Double strike, trample\nWhenever Prophetic Flamespeaker deals combat damage to a player, exile the top card of your library. You may play it this turn.
