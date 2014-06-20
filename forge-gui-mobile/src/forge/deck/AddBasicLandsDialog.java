@@ -264,11 +264,11 @@ public class AddBasicLandsDialog extends FDialog {
                 oldLandCount + " lands + " +
                 newLandCount + " added lands = " +
                 newTotalCount + " cards\n" +
-                integer.format(pnlPlains.symbolCount)   + " {W} (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
-                integer.format(pnlIsland.symbolCount)   + " {U} (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
-                integer.format(pnlSwamp.symbolCount)    + " {B} (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
-                integer.format(pnlMountain.symbolCount) + " {R} (" + percent.format(pnlMountain.symbolCount / totalSymbolCount) + ") | " +
-                integer.format(pnlForest.symbolCount)   + " {G} (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")");
+                "{W} " + integer.format(pnlPlains.symbolCount) + " (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
+                "{U} " + integer.format(pnlIsland.symbolCount) + " (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
+                "{B} " + integer.format(pnlSwamp.symbolCount) + " (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
+                "{R} " + integer.format(pnlMountain.symbolCount) + " (" + percent.format(pnlMountain.symbolCount / totalSymbolCount) + ") | " +
+                "{G} " + integer.format(pnlForest.symbolCount) + " (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")");
     }
 
     private class LandPanel extends FContainer {
