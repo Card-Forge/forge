@@ -174,11 +174,7 @@ public class FDeckChooser extends FScreen {
         width -= 2 * x;
 
         float fieldHeight = cmbDeckTypes.getHeight();
-
-        float totalButtonHeight = fieldHeight;
-        if (btnNewDeck.isVisible()) {
-            totalButtonHeight += fieldHeight + PADDING;
-        }
+        float totalButtonHeight = 2 * fieldHeight + PADDING;
 
         cmbDeckTypes.setBounds(x, y, width, fieldHeight);
         y += cmbDeckTypes.getHeight() + 1;
@@ -187,18 +183,22 @@ public class FDeckChooser extends FScreen {
         y += lstDecks.getHeight() + PADDING;
         float buttonWidth = (width - PADDING) / 2;
 
-        if (btnNewDeck.isVisible()) {
+        if (btnEditDeck.isVisible()) {
             btnNewDeck.setBounds(x, y, buttonWidth, fieldHeight);
-            x += buttonWidth + PADDING;
-            btnEditDeck.setBounds(x, y, buttonWidth, fieldHeight);
-
-            x = PADDING;
-            y += fieldHeight + PADDING;
         }
+        else {
+            btnNewDeck.setBounds(x, y, width, fieldHeight);
+        }
+        btnEditDeck.setBounds(x + buttonWidth + PADDING, y, buttonWidth, fieldHeight);
+        y += fieldHeight + PADDING;
 
         btnViewDeck.setBounds(x, y, buttonWidth, fieldHeight);
-        x += buttonWidth + PADDING;
-        btnRandom.setBounds(x, y, buttonWidth, fieldHeight);
+        if (btnViewDeck.isVisible()) {
+            btnRandom.setBounds(x + buttonWidth + PADDING, y, buttonWidth, fieldHeight);
+        }
+        else {
+            btnRandom.setBounds(x, y, width, fieldHeight);
+        }
     }
 
     public DeckType getSelectedDeckType() { return selectedDeckType; }
@@ -214,20 +214,20 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllConstructedDecks(FModel.getDecks().getConstructed()));
         lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
 
-        btnViewDeck.setEnabled(true);
+        btnNewDeck.setText("New Deck");
+        btnNewDeck.setWidth(btnEditDeck.getWidth());
+        btnEditDeck.setVisible(true);
+
+        btnViewDeck.setVisible(true);
         btnRandom.setText("Random Deck");
+        btnRandom.setWidth(btnNewDeck.getWidth());
+        btnRandom.setLeft(getWidth() - PADDING - btnRandom.getWidth());
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
             }
         });
-
-        if (!btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(true);
-            btnEditDeck.setVisible(true);
-            revalidate();
-        }
     }
 
     private class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
@@ -287,20 +287,20 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(decks);
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
-        btnViewDeck.setEnabled(false);
+        btnNewDeck.setText("Generate New Deck");
+        btnNewDeck.setWidth(getWidth() - 2 * PADDING);
+        btnEditDeck.setVisible(false);
+
+        btnViewDeck.setVisible(false);
         btnRandom.setText("Random Colors");
+        btnRandom.setWidth(btnNewDeck.getWidth());
+        btnRandom.setLeft(getWidth() - PADDING - btnRandom.getWidth());
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelectColors(lstDecks);
             }
         });
-
-        if (btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(false);
-            btnEditDeck.setVisible(false);
-            revalidate();
-        }
     }
 
     private void updateThemes() {
@@ -309,20 +309,20 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllThemeDecks());
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);
 
-        btnViewDeck.setEnabled(false);
-        btnRandom.setText("Random Deck");
+        btnNewDeck.setText("Generate New Deck");
+        btnNewDeck.setWidth(getWidth() - 2 * PADDING);
+        btnEditDeck.setVisible(false);
+
+        btnViewDeck.setVisible(false);
+        btnRandom.setText("Random Theme");
+        btnRandom.setWidth(btnNewDeck.getWidth());
+        btnRandom.setLeft(getWidth() - PADDING - btnRandom.getWidth());
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
             }
         });
-
-        if (btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(false);
-            btnEditDeck.setVisible(false);
-            revalidate();
-        }
     }
 
     private void updatePrecons() {
@@ -331,20 +331,20 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
         lstDecks.setup(ItemManagerConfig.PRECON_DECKS);
 
-        btnViewDeck.setEnabled(true);
+        btnNewDeck.setText("New Deck");
+        btnNewDeck.setWidth(btnEditDeck.getWidth());
+        btnEditDeck.setVisible(true);
+
+        btnViewDeck.setVisible(true);
         btnRandom.setText("Random Deck");
+        btnRandom.setWidth(btnNewDeck.getWidth());
+        btnRandom.setLeft(getWidth() - PADDING - btnRandom.getWidth());
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
             }
         });
-
-        if (!btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(true);
-            btnEditDeck.setVisible(true);
-            revalidate();
-        }
     }
 
     private void updateQuestEvents() {
@@ -353,20 +353,20 @@ public class FDeckChooser extends FScreen {
         lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
         lstDecks.setup(ItemManagerConfig.QUEST_EVENT_DECKS);
 
-        btnViewDeck.setEnabled(true);
+        btnNewDeck.setText("New Deck");
+        btnNewDeck.setWidth(btnEditDeck.getWidth());
+        btnEditDeck.setVisible(true);
+
+        btnViewDeck.setVisible(true);
         btnRandom.setText("Random Deck");
+        btnRandom.setWidth(btnNewDeck.getWidth());
+        btnRandom.setLeft(getWidth() - PADDING - btnRandom.getWidth());
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
             }
         });
-
-        if (!btnNewDeck.isVisible()) {
-            btnNewDeck.setVisible(true);
-            btnEditDeck.setVisible(true);
-            revalidate();
-        }
     }
 
     public Deck getDeck() {
