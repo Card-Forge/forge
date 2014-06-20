@@ -162,38 +162,38 @@ public class AddBasicLandsDialog extends FDialog {
                     boolean isMonoColor = shard.isMonoColor();
                     if (shard.isWhite()) {
                         if (isMonoColor) {
-                            pnlPlains.symbolCount++;
+                            pnlPlains.symbolCount += count;
                             continue;
                         }
-                        halfCountW++;
+                        halfCountW += count;
                     }
                     if (shard.isBlue()) {
                         if (isMonoColor) {
-                            pnlIsland.symbolCount++;
+                            pnlIsland.symbolCount += count;
                             continue;
                         }
-                        halfCountU++;
+                        halfCountU += count;
                     }
                     if (shard.isBlack()) {
                         if (isMonoColor) {
-                            pnlSwamp.symbolCount++;
+                            pnlSwamp.symbolCount += count;
                             continue;
                         }
-                        halfCountB++;
+                        halfCountB += count;
                     }
                     if (shard.isRed()) {
                         if (isMonoColor) {
-                            pnlMountain.symbolCount++;
+                            pnlMountain.symbolCount += count;
                             continue;
                         }
-                        halfCountR++;
+                        halfCountR += count;
                     }
                     if (shard.isGreen()) {
                         if (isMonoColor) {
-                            pnlForest.symbolCount++;
+                            pnlForest.symbolCount += count;
                             continue;
                         }
-                        halfCountG++;
+                        halfCountG += count;
                     }
                 }
             }
