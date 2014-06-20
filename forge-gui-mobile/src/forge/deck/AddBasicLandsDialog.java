@@ -238,6 +238,14 @@ public class AddBasicLandsDialog extends FDialog {
         float panelHeight = panelWidth * FCardPanel.ASPECT_RATIO + panelExtraHeight;
         scroller.setBounds(0, y, width, panelHeight);
 
+        //adjust scroll based on prevalent colors in deck
+        if (pnlMountain.symbolCount + pnlForest.symbolCount > pnlPlains.symbolCount + pnlIsland.symbolCount) {
+            scroller.scrollToRight();
+        }
+        else {
+            scroller.scrollToLeft();
+        }
+
         //layout info label
         y += panelHeight + padding;
         lblDeckInfo.setBounds(x, y, w, lblDeckInfo.getPreferredHeight(w));
