@@ -18,7 +18,6 @@ import forge.itemmanager.filters.CardSetFilter;
 import forge.itemmanager.filters.CardToughnessFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
@@ -153,8 +152,8 @@ public class CardManager extends ItemManager<PaperCard> {
     }
 
     @Override
-    public ItemRenderer<PaperCard> getListItemRenderer() {
-        return new ItemRenderer<PaperCard>() {
+    public ItemRenderer getListItemRenderer() {
+        return new ItemRenderer() {
             @Override
             public float getItemHeight() {
                 return CardRenderer.getCardListItemHeight();
@@ -162,7 +161,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), value.getValue(), x, y, w, h);
+                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), x, y, w, h);
             }
 
             @Override

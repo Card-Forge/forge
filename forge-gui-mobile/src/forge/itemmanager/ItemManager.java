@@ -22,13 +22,14 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.Graphics;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
-import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -226,7 +227,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setHideFilters(config0.getHideFilters());
     }
 
-    public abstract ItemRenderer<T> getListItemRenderer();
+    public abstract class ItemRenderer {
+        public abstract float getItemHeight();
+        public abstract boolean tap(Entry<T, Integer> value, float x, float y, int count);
+        public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+    }
+    public abstract ItemRenderer getListItemRenderer();
 
     public void setViewIndex(int viewIndex) {
         if (viewIndex < 0 || viewIndex >= views.size()) { return; }

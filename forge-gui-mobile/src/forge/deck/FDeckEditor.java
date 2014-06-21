@@ -528,7 +528,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 needRefreshWhenShown = true;
                 return; //delay refreshing while hidden
             }
-            cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class));
+            cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
         }
 
         @Override

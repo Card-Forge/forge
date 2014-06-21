@@ -17,7 +17,6 @@ import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.DeckSetFilter;
 import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
@@ -251,8 +250,8 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     private static final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
 
     @Override
-    public ItemRenderer<DeckProxy> getListItemRenderer() {
-        return new ItemRenderer<DeckProxy>() {
+    public ItemRenderer getListItemRenderer() {
+        return new ItemRenderer() {
             @Override
             public float getItemHeight() {
                 if (DeckManager.this.getConfig().getCols().size() == 1) {

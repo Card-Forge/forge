@@ -9,7 +9,6 @@ import forge.card.CardRenderer;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.views.ItemListView.ItemRenderer;
 import forge.menu.FPopupMenu;
 
 
@@ -34,8 +33,8 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
     }
 
     @Override
-    public ItemRenderer<InventoryItem> getListItemRenderer() {
-        return new ItemRenderer<InventoryItem>() {
+    public ItemRenderer getListItemRenderer() {
+        return new ItemRenderer() {
             @Override
             public float getItemHeight() {
                 return CardRenderer.getCardListItemHeight();

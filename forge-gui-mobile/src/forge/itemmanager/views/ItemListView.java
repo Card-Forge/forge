@@ -250,14 +250,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         return visibleWidth;
     }
 
-    public abstract static class ItemRenderer<T extends InventoryItem> {
-        public abstract float getItemHeight();
-        public abstract boolean tap(Entry<T, Integer> value, float x, float y, int count);
-        public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
-    }
-
     public final class ItemList extends FList<Entry<T, Integer>> {
-        private final ItemRenderer<T> renderer;
+        private final ItemManager<T>.ItemRenderer renderer;
         private List<ItemColumn> cols = new ArrayList<ItemColumn>();
 
         private ItemList() {
