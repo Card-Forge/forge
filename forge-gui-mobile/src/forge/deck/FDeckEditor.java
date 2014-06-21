@@ -164,20 +164,53 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(FSkinImage.SAVE).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(HAlignment.CENTER).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
-    public FDeckEditor(EditorType editorType0, DeckProxy editDeck) {
-        this(editorType0, editDeck.getName(), editDeck.getPath(), null);
+    public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck);
     }
-    public FDeckEditor(EditorType editorType0, String editDeckName) {
-        this(editorType0, editDeckName, "", null);
+    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck) {
+        this(editorType0, editDeckName, "", null, showMainDeck);
     }
-    public FDeckEditor(EditorType editorType0, Deck newDeck) {
-        this(editorType0, "", "", newDeck);
+    public FDeckEditor(EditorType editorType0, Deck newDeck, boolean showMainDeck) {
+        this(editorType0, "", "", newDeck, showMainDeck);
     }
-    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck) {
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck) {
         super(getPages(editorType0));
 
         editorType = editorType0;
         editorType.getController().editor = this;
+
+        //cache specific pages
+        for (TabPage<FDeckEditor> tabPage : tabPages) {
+            if (tabPage instanceof CatalogPage) {
+                catalogPage = (CatalogPage) tabPage;
+            }
+            else if (tabPage instanceof DeckSectionPage) {
+                DeckSectionPage deckSectionPage = (DeckSectionPage) tabPage;
+                if (deckSectionPage.deckSection == DeckSection.Main) {
+                    mainDeckPage = deckSectionPage;
+                }
+                else if (deckSectionPage.deckSection == DeckSection.Sideboard) {
+                    sideboardPage = deckSectionPage;
+                }
+            }
+        }
+
+        switch (editorType) {
+        case Sealed:
+            //if opening brand new sealed deck, show sideboard (card pool) by default
+            if (!showMainDeck) {
+                setSelectedPage(sideboardPage);
+            }
+            break;
+        case Draft:
+            break;
+        default:
+            //if editing existing non-limited deck, show main deck by default
+            if (showMainDeck) {
+                setSelectedPage(mainDeckPage);
+            }
+            break;
+        }
 
         if (StringUtils.isEmpty(editDeckName)) {
             if (editorType == EditorType.Draft) {
@@ -270,39 +303,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 menu.show(btnMoreOptions, 0, btnMoreOptions.getHeight());
             }
         });
-
-        //cache specific pages
-        for (TabPage<FDeckEditor> tabPage : tabPages) {
-            if (tabPage instanceof CatalogPage) {
-                catalogPage = (CatalogPage) tabPage;
-            }
-            else if (tabPage instanceof DeckSectionPage) {
-                DeckSectionPage deckSectionPage = (DeckSectionPage) tabPage;
-                if (deckSectionPage.deckSection == DeckSection.Main) {
-                    mainDeckPage = deckSectionPage;
-                }
-                else if (deckSectionPage.deckSection == DeckSection.Sideboard) {
-                    sideboardPage = deckSectionPage;
-                }
-            }
-        }
-
-        switch (editorType) {
-        case Sealed:
-            //if opening brand new sealed deck, show sideboard (card pool) by default
-            if (deck.getMain().isEmpty()) {
-                setSelectedPage(sideboardPage);
-            }
-            break;
-        case Draft:
-            break;
-        default:
-            //if editing existing non-limited deck, show main deck by default
-            if (!deck.getMain().isEmpty()) {
-                setSelectedPage(mainDeckPage);
-            }
-            break;
-        }
     }
 
     @Override
@@ -477,7 +477,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static class CatalogPage extends CardManagerPage {
-        private boolean initialized;
+        private boolean initialized, needRefreshWhenShown;
 
         protected CatalogPage() {
             this(ItemManagerConfig.CARD_CATALOG, "Catalog", FSkinImage.FOLDER);
@@ -499,7 +499,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return "Catalog";
         }
 
+        @Override
+        public void setVisible(boolean visible0) {
+            if (isVisible() == visible0) { return; }
+
+            super.setVisible(visible0);
+            if (visible0 && needRefreshWhenShown) {
+                needRefreshWhenShown = false;
+                refresh();
+            }
+        }
+
         public void refresh() {
+            if (!isVisible()) {
+                needRefreshWhenShown = true;
+                return; //delay refreshing while hidden
+            }
             cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class));
         }
 

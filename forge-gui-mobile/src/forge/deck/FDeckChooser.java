@@ -74,7 +74,7 @@ public class FDeckChooser extends FScreen {
                         if (generatedDeck == null) { return; }
 
                         generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
-                        editor = new FDeckEditor(EditorType.Constructed, generatedDeck);
+                        editor = new FDeckEditor(EditorType.Constructed, generatedDeck, true);
                     }
                     else {
                         FOptionPane.showErrorDialog("You must select something before you can generate a new deck.");
@@ -82,7 +82,7 @@ public class FDeckChooser extends FScreen {
                     }
                     break;
                 default:
-                    editor = new FDeckEditor(EditorType.Constructed, "");
+                    editor = new FDeckEditor(EditorType.Constructed, "", false);
                     break;
                 }
                 editor.setSaveHandler(new FEventHandler() {
@@ -167,7 +167,7 @@ public class FDeckChooser extends FScreen {
     private void editDeck(DeckProxy deck) {
         needRefreshOnActivate = true;
         DeckPreferences.setCurrentDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(EditorType.Constructed, deck));
+        Forge.openScreen(new FDeckEditor(EditorType.Constructed, deck, true));
     }
 
     public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {

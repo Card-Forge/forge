@@ -93,7 +93,7 @@ public class DraftScreen extends LaunchScreen {
         if (deck == null) { return; }
 
         DeckPreferences.setDraftDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(EditorType.Draft, deck));
+        Forge.openScreen(new FDeckEditor(EditorType.Draft, deck, true));
     }
 
     @Override

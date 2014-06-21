@@ -53,7 +53,7 @@ public class SealedScreen extends LaunchScreen {
                             @Override
                             public void run() {
                                 DeckPreferences.setSealedDeck(sealed.getName());
-                                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName()));
+                                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false));
                             }
                         });
                     }
@@ -80,7 +80,7 @@ public class SealedScreen extends LaunchScreen {
         if (deck == null) { return; }
 
         DeckPreferences.setSealedDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(EditorType.Sealed, deck));
+        Forge.openScreen(new FDeckEditor(EditorType.Sealed, deck, true));
     }
 
     @Override
