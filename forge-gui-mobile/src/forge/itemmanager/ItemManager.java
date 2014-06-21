@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.FThreads;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
@@ -46,6 +47,8 @@ import forge.util.Utils;
 
 import java.util.*;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T> {
@@ -855,6 +858,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(true, getSelectedItems());
     }
 
+    private boolean updateInProgress;
+    private Pair<Boolean, Iterable<T>> delayedUpdateInfo;
+
     /**
      * 
      * updateView.
@@ -864,50 +870,74 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
 
-        if (useFilter || wantUnique || forceFilter) {
-            model.clear();
-        }
-
-        if (useFilter && wantUnique) {
-            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(pool, filterForPool), pool.FN_GET_NAME);
-            model.addItems(items);
-        }
-        else if (useFilter) {
-            Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
-            model.addItems(Iterables.filter(pool, pred));
-        }
-        else if (wantUnique) {
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
-            model.addItems(items);
-        }
-        else if (!useFilter && forceFilter) {
-            model.addItems(pool);
-        }
-
-        currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
-
-        for (ItemFilter<? extends T> filter : orderedFilters) {
-            filter.afterFiltersApplied();
-        }
-
-        //update ratio of # in filtered pool / # in total pool
-        int total;
-        if (!useFilter) {
-            total = getFilteredItems().countAll();
-        }
-        else if (wantUnique) {
-            total = 0;
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
-            for (Entry<T, Integer> entry : items) {
-                total += entry.getValue();
-            }
+        if (updateInProgress) {
+            delayedUpdateInfo = Pair.of(forceFilter, itemsToSelect);
         }
         else {
-            total = pool.countAll();
+            updateInProgress = true;
+            FThreads.invokeInBackgroundThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (useFilter || wantUnique || forceFilter) {
+                        model.clear();
+                    }
+    
+                    if (useFilter && wantUnique) {
+                        Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+                        Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(pool, filterForPool), pool.FN_GET_NAME);
+                        model.addItems(items);
+                    }
+                    else if (useFilter) {
+                        Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+                        model.addItems(Iterables.filter(pool, pred));
+                    }
+                    else if (wantUnique) {
+                        Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
+                        model.addItems(items);
+                    }
+                    else if (!useFilter && forceFilter) {
+                        model.addItems(pool);
+                    }
+    
+                    currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
+    
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (ItemFilter<? extends T> filter : orderedFilters) {
+                                filter.afterFiltersApplied();
+                            }
+    
+                            //update ratio of # in filtered pool / # in total pool
+                            int total;
+                            if (!useFilter) {
+                                total = getFilteredItems().countAll();
+                            }
+                            else if (wantUnique) {
+                                total = 0;
+                                Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
+                                for (Entry<T, Integer> entry : items) {
+                                    total += entry.getValue();
+                                }
+                            }
+                            else {
+                                total = pool.countAll();
+                            }
+                            ratio = "(" + getFilteredItems().countAll() + " / " + total + ")";
+                            updateCaptionLabel();
+
+                            updateInProgress = false;
+                            if (delayedUpdateInfo != null) {
+                                boolean b0 = delayedUpdateInfo.getLeft();
+                                Iterable<T> i0 = delayedUpdateInfo.getRight();
+                                delayedUpdateInfo = null;
+                                updateView(b0, i0);
+                            }
+                        }
+                    });
+                }
+            });
         }
-        ratio = "(" + getFilteredItems().countAll() + " / " + total + ")";
-        updateCaptionLabel();
     }
 
     /**
