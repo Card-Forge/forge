@@ -171,6 +171,11 @@ public class MatchScreen extends FScreen {
         return super.keyDown(keyCode);
     }
 
+    @Override
+    public void showMenu() {
+        //don't show menu from this screen since it's too easy to bump the menu button when trying to press OK or Cancel
+    }
+
     private class FieldScroller extends FScrollPane {
         private float extraHeight = 0;
 
