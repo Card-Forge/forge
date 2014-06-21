@@ -30,13 +30,18 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         final ToggleButton button = addToggleButton(widget, FSkin.getImages().get(st.skinProp));
         buttonMap.put(st, button);
 
-        //hook so long-pressing a button toggles itself on and toggles off all other buttons
-        button.setLongPressHandler(new FEventHandler() {
+        //hook so pressing a selected button toggles off all other buttons while remaining toggled
+        button.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lockFiltering = true;
-                SFilterUtil.showOnlyStat(st, button, buttonMap);
-                lockFiltering = false;
+                if (lockFiltering) { return; }
+
+                if (!button.isSelected()) {
+                    lockFiltering = true;
+                    button.setSelected(true);
+                    SFilterUtil.showOnlyStat(st, button, buttonMap);
+                    lockFiltering = false;
+                }
                 applyChange();
             }
         });
