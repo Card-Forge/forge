@@ -18,10 +18,12 @@
 package forge.itemmanager;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -31,9 +33,11 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
+import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
+import forge.screens.FScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -60,6 +64,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean alwaysNonUnique = false;
     private boolean hideFilters = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
+    private ContextMenuBuilder<T> contextMenuBuilder;
     private final Class<T> genericType;
     private ItemManagerConfig config;
     private String caption = "Items";
@@ -1000,6 +1005,70 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void activateSelectedItems() {
         if (itemActivateHandler != null) {
             itemActivateHandler.handleEvent(new FEvent(this, FEventType.ACTIVATE));
+        }
+    }
+
+    public void setContextMenuBuilder(ContextMenuBuilder<T> contextMenuBuilder0) {
+        contextMenuBuilder = contextMenuBuilder0;
+    }
+
+    public void showMenu() {
+        if (contextMenuBuilder != null && getSelectionCount() > 0) {
+            ContextMenu menu = new ContextMenu();
+            menu.show();
+        }
+    }
+
+    public static abstract class ContextMenuBuilder<T> {
+        public abstract void buildMenu(final FDropDownMenu menu, final T item);
+    }
+
+    private class ContextMenu extends FDropDownMenu {
+        @Override
+        protected void buildMenu() {
+            contextMenuBuilder.buildMenu(this, getSelectedItem());
+        }
+
+        @Override
+        protected void updateSizeAndPosition() {
+            FScreen screen = Forge.getCurrentScreen();
+            float screenWidth = screen.getWidth();
+            float screenHeight = screen.getHeight();
+
+            paneSize = updateAndGetPaneSize(screenWidth, screenHeight);
+
+            Rectangle bounds = currentView.getSelectionBounds();
+
+            //try displaying right of selection if possible
+            float x = bounds.x + bounds.width;
+            float y = bounds.y;
+            if (x + paneSize.getWidth() > screenWidth) {
+                //try displaying left of selection if possible
+                x = bounds.x - paneSize.getWidth();
+                if (x < 0) {
+                    //display below selection if no room left or right of selection
+                    x = bounds.x;
+                    if (x + paneSize.getWidth() > screenWidth) {
+                        x = screenWidth - paneSize.getWidth();
+                    }
+                    y += bounds.height;
+                }
+            }
+            if (y + paneSize.getHeight() > screenHeight) {
+                if (y == bounds.y) {
+                    //if displaying to left or right, move up if not enough room
+                    y = screenHeight - paneSize.getHeight();
+                }
+                else {
+                    //if displaying below selection and not enough room, display above selection
+                    y -= paneSize.getHeight();
+                }
+                if (y < 0) {
+                    y = 0;
+                }
+            }
+
+            setBounds(Math.round(x), Math.round(y), Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
         }
     }
 }

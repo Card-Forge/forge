@@ -153,7 +153,7 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         return renderer.showMenu(index, item, this, x, y);
     }
 
-    private float getItemTop(int index) {
+    public float getItemTop(int index) {
         return index * renderer.getItemHeight() - getScrollTop();
     }
 

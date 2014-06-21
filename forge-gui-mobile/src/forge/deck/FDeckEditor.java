@@ -17,11 +17,14 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardEdition;
+import forge.card.CardZoom;
 import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
+import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
+import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
@@ -445,6 +448,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     onCardActivated(cardManager.getSelectedItem());
                 }
             });
+            cardManager.setContextMenuBuilder(new ContextMenuBuilder<PaperCard>() {
+                @Override
+                public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+                    CardManagerPage.this.buildMenu(menu, card);
+                    menu.addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            CardZoom.show(card);
+                        }
+                    }));
+                }
+            });
         }
 
         protected boolean canAddCards() {
@@ -477,6 +492,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected abstract void onCardActivated(PaperCard card);
+        protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
         @Override
         protected void doLayout(float width, float height) {
@@ -534,6 +550,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void onCardActivated(PaperCard card) {
             parentScreen.getMainDeckPage().addCard(card);
+        }
+
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            
         }
     }
 
@@ -618,6 +639,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             default:
                 break;
             }
+        }
+
+        @Override
+        protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
+            
         }
     }
 

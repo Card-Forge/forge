@@ -37,6 +37,9 @@ import forge.toolbox.FList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -196,6 +199,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    public Rectangle getSelectionBounds() {
+        if (selectedIndices.isEmpty()) { return null; }
+
+        Vector2 screenPos = list.getScreenPosition();
+        return new Rectangle(screenPos.x, screenPos.y + list.getItemTop(getSelectedIndex()), list.getWidth(), list.getListItemRenderer().getItemHeight());
+    }
+
+    @Override
     public void selectAll() {
         selectedIndices.clear();
         for (Integer i = 0; i < getCount(); i++) {
@@ -288,7 +299,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         prevTapIndex = index;
                         return true; //don't activate if renderer handles tap
                     }
-                    if (count == 2 && index == prevTapIndex) {
+                    if (count == 1) {
+                        itemManager.showMenu();
+                    }
+                    else if (count == 2 && index == prevTapIndex) {
                         itemManager.activateSelectedItems();
                     }
                     prevTapIndex = index;

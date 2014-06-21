@@ -37,6 +37,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
@@ -49,6 +50,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float GROUP_HEADER_HEIGHT = Utils.scaleY(19);
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scaleX(6);
     private static final float GROUP_HEADER_LINE_THICKNESS = Utils.scaleY(1);
+    private static final float SEL_BORDER_SIZE = Utils.scaleMax(1);
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
@@ -557,6 +559,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         ItemInfo item = getItemAtPoint(x, y);
         if (count == 1) {
             selectItem(item);
+            itemManager.showMenu();
         }
         else if (count == 2) {
             if (item != null && item.selected) {
@@ -766,6 +769,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getScroller().scrollIntoView(itemInfo);
     }
 
+    @Override
+    public Rectangle getSelectionBounds() {
+        if (selectedIndices.isEmpty()) { return null; }
+
+        ItemInfo itemInfo = orderedItems.get(selectedIndices.get(0));
+        Vector2 screenPos = itemInfo.group.getScreenPosition();
+        Vector2 relPos = itemInfo.group.getChildRelativePosition(itemInfo);
+        return new Rectangle(screenPos.x + relPos.x - SEL_BORDER_SIZE,
+                screenPos.y + relPos.y - itemInfo.group.getTop() - SEL_BORDER_SIZE,
+                itemInfo.getWidth() + 2 * SEL_BORDER_SIZE, itemInfo.getHeight() + 2 * SEL_BORDER_SIZE);
+    }
+
     private class Group extends FScrollPane {
         private final List<ItemInfo> items = new ArrayList<ItemInfo>();
         private final List<Pile> piles = new ArrayList<Pile>();
@@ -943,11 +958,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final float y = getTop() - group.getTop() - getScrollValue();
             final float w = getWidth();
             final float h = getHeight();
-            final float selBorderSize = Utils.scaleMax(1);
 
             if (selected) {
-                g.fillRect(Color.GREEN, x - selBorderSize, y - selBorderSize,
-                        w + 2 * selBorderSize, h + 2 * selBorderSize);
+                g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE,
+                        w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
             }
 
             Texture img = ImageCache.getImage(item);

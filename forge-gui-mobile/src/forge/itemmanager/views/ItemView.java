@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class ItemView<T extends InventoryItem> {
     private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_TEXT);
@@ -281,6 +282,7 @@ public abstract class ItemView<T extends InventoryItem> {
     public abstract int getSelectionCount();
     public abstract int getIndexAtPoint(float x, float y);
     public abstract void scrollSelectionIntoView();
+    public abstract Rectangle getSelectionBounds();
     protected abstract FImage getIcon();
     protected abstract String getCaption();
     protected abstract void onSetSelectedIndex(int index);
