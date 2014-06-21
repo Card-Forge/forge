@@ -447,16 +447,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             });
         }
 
+        protected boolean canAddCards() {
+            return true;
+        }
+
         public void addCard(PaperCard card) {
-            cardManager.addItem(card, 1);
-            parentScreen.getEditorType().getController().notifyModelChanged();
-            updateCaption();
+            if (canAddCards()) {
+                cardManager.addItem(card, 1);
+                parentScreen.getEditorType().getController().notifyModelChanged();
+                updateCaption();
+            }
         }
 
         public void addCards(Iterable<Entry<PaperCard, Integer>> cards) {
-            cardManager.addItems(cards);
-            parentScreen.getEditorType().getController().notifyModelChanged();
-            updateCaption();
+            if (canAddCards()) {
+                cardManager.addItems(cards);
+                parentScreen.getEditorType().getController().notifyModelChanged();
+                updateCaption();
+            }
         }
 
         public void removeCard(PaperCard card) {
@@ -495,8 +503,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             refresh();
         }
 
+        @Override
+        protected boolean canAddCards() {
+            return false;
+        }
+
         protected String getItemManagerCaption() {
-            return "Catalog";
+            return "Cards";
         }
 
         @Override
