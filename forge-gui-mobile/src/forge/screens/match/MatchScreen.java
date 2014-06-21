@@ -141,8 +141,7 @@ public class MatchScreen extends FScreen {
         case Keys.ESCAPE:
             return prompt.getBtnCancel().trigger(); //otherwise trigger Cancel
         case Keys.BACK:
-            FControl.undoLastAction(); //let Back trigger undo instead of going back a screen
-            return true;
+            return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
         case Keys.A: //alpha strike on Ctrl+A
             if (KeyInputAdapter.isCtrlKeyDown()) {
                 FControl.alphaStrike();
