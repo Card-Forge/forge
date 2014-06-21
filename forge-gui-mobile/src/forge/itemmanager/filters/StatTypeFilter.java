@@ -10,6 +10,7 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
+import forge.menu.FTooltip;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -43,6 +44,14 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
                     lockFiltering = false;
                 }
                 applyChange();
+            }
+        });
+        //show tooltip when long pressed
+        button.setLongPressHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                FTooltip tooltip = new FTooltip(st.label);
+                tooltip.show(button, 0, button.getHeight());
             }
         });
     }

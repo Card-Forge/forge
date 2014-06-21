@@ -60,6 +60,11 @@ public abstract class FDropDown extends FScrollPane {
     }
 
     @Override
+    public boolean longPress(float x, float y) {
+        return true; //prevent objects behind drop down handling long press
+    }
+
+    @Override
     public void setVisible(boolean visible0) {
         if (isVisible() == visible0) { return; }
 

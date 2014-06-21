@@ -31,7 +31,7 @@ public final class SItemManagerUtil {
         BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "Black cards"),
         RED        (FSkinProp.IMG_MANA_R,         CardRulesPredicates.Presets.IS_RED, "Red cards"),
         GREEN      (FSkinProp.IMG_MANA_G,         CardRulesPredicates.Presets.IS_GREEN, "Green cards"),
-        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, " cards"),
+        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "Colorless cards"),
         MULTICOLOR (FSkinProp.IMG_MULTI,          CardRulesPredicates.Presets.IS_MULTICOLOR, "Multicolor cards"),
 
         PACK_OR_DECK (FSkinProp.IMG_PACK,         null, "Card packs and prebuilt decks"),
