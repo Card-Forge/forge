@@ -38,6 +38,7 @@ public interface IGuiBase {
     boolean isGuiThread();
     String getAssetsDir();
     boolean mayShowCard(Card card);
+    ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
     int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption);

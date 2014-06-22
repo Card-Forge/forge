@@ -20,6 +20,8 @@ package forge.quest.bazaar;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+import forge.GuiBase;
+import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class QuestStallDefinition {
     private final String displayName;
 
     @XStreamAsAttribute
-    private final ISkinImage icon;
+    private final FSkinProp icon;
 
     private final String description;
 
@@ -88,7 +90,7 @@ public class QuestStallDefinition {
      * @return the icon
      */
     public ISkinImage getIcon() {
-        return icon;
+        return GuiBase.getInterface().getSkinIcon(icon);
     }
 
     /**

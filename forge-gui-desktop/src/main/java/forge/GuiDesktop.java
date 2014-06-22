@@ -122,6 +122,12 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public ISkinImage getSkinIcon(FSkinProp skinProp) {
+        if (skinProp == null) { return null; }
+        return FSkin.getIcon(skinProp);
+    }
+
+    @Override
     public ISkinImage getUnskinnedIcon(String path) {
         return new FSkin.UnskinnedIcon(path);
     }

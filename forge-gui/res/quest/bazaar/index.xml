@@ -4,14 +4,14 @@
    <iconSize>80</iconSize>
   </options>
   <stalls>
-    <stall name="Alchemist" displayName="Orim, Samite Healer" icon="ICO_BOTTLES">
+    <stall name="Alchemist" displayName="Orim, Samite Healer" icon="ICO_QUEST_BOTTLES">
       <description>The walls of this alchemist&apos;s stall are covered with shelves with potions, oils, powders, poultices and elixirs, each meticulously labeled.</description>
       <items>
         <string>Elixir of Life</string>
         <string>Pound of Flesh</string>
       </items> 	
     </stall>
-    <stall name="Banker" displayName="Bank of Sarpadia" icon="ICO_COIN">
+    <stall name="Banker" displayName="Bank of Sarpadia" icon="ICO_QUEST_COIN">
       <description>A large book large enough to be seen from the outside rests on the Banker&apos;s desk.</description>
       <items>
         <string>Bank Membership</string>
@@ -20,13 +20,13 @@
         <string>Cash Stakes</string>
       </items> 	
     </stall>
-    <stall name="Bookstore" displayName="Beleren&apos;s Books" icon="ICO_BOOK">
+    <stall name="Bookstore" displayName="Beleren&apos;s Books" icon="ICO_QUEST_BOOK">
       <description>Tomes of different sizes are stacked in man-high towers.</description>
       <items>
         <string>Sleight</string>
       </items> 	
     </stall>
-    <stall name="Gear" displayName="The Rope and Axe" icon="ICO_GEAR">
+    <stall name="Gear" displayName="The Rope and Axe" icon="ICO_QUEST_GEAR">
       <description>This adventurer&apos;s market has a tool for every need ... or so the plaque on the wall claims.</description>
       <items>
         <string>Map</string>
@@ -34,13 +34,13 @@
         <string>Charm of Vigor</string>
       </items> 	
     </stall>
-    <stall name="Nursery" displayName="Force of Nature Nursery" icon="ICO_LEAF">
+    <stall name="Nursery" displayName="Force of Nature Nursery" icon="ICO_QUEST_LEAF">
       <description>The smells of the one hundred and one different plants forms a unique fragrance.</description>
       <items>
         <string>Plant</string>
       </items> 	
     </stall>
-    <stall name="Pet Shop" displayName="The Hive" icon="ICO_FOX">
+    <stall name="Pet Shop" displayName="The Hive" icon="ICO_QUEST_FOX">
       <description>This large menagerie echoes with a multitude of animal noises.</description>
       <items>
 		<string>Ape</string>
@@ -52,28 +52,28 @@
     </stall>
   </stalls>
   <questItems>
-    <item name="Sleight" purchaseName="Sleight of Hand Vol. I" maxLevel="1" basePrice="2000" itemType="SLEIGHT" icon="ICO_BOOK">
+    <item name="Sleight" purchaseName="Sleight of Hand Vol. I" maxLevel="1" basePrice="2000" itemType="SLEIGHT" icon="ICO_QUEST_BOOK">
       <description>These volumes explain how to perform the most difficult of sleights.
 
 Effect: Your first mulligan is free.</description>
     </item>
-    <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_MAP">
+    <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_QUEST_MAP">
       <description>These ancient charts should facilitate navigation during your travels significantly.
 
 Effect: Quest challenges become available more frequently</description>
     </item>
-    <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_COIN">
+    <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_QUEST_COIN">
       <description>This coin is believed to give good luck to its owner.
 
 Effect: Improves the chance of getting a random rare after each match by 15%.</description>
     </item>
-    <item name="Estates" maxLevel="3" basePrice="250" itemType="ESTATES" icon="ICO_GOLD">
+    <item name="Estates" maxLevel="3" basePrice="250" itemType="ESTATES" icon="ICO_QUEST_GOLD">
       <description>Land owners have a strong voice in community matters.
 
 Effect: Gives a bonus of %d%% to match winnings.
 Effect: Improves sell percentage by %.2f%%.</description>
     </item>
-    <item name="Zeppelin" maxLevel="1" basePrice="5000" itemType="ZEPPELIN" icon="ICO_ZEP">
+    <item name="Zeppelin" maxLevel="1" basePrice="5000" itemType="ZEPPELIN" icon="ICO_QUEST_ZEP">
       <description>This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.
       
 
@@ -81,32 +81,32 @@ Effect: Quest challenges become available more frequently.
 Effect: +3 life
 Effect: Activate once for a new set of challenges (re-fuels after a challenge is attempted).</description>
     </item>
-    <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_BREW">
+    <item name="Pound of Flesh" maxLevel="29" basePrice="250" itemType="POUND_FLESH" icon="ICO_QUEST_BREW">
       <description>The Alchemist welcomes contributions to his famous Elixir.
 But beware, you may build an immunity to its effects...
 
 Effect: Alchemist gives you %d credits.
 Effect: Reduces maximum life by 1."</description>
     </item>
-    <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_ELIXIR">
+    <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_QUEST_ELIXIR">
       <description>A salty sweet smell rises from the vials bubbling behind the counter.
 
 Effect: Gives +1 to maximum life.
 Fine Print: Loses effectiveness after 15 uses.</description>
     </item>
     <item name="Charm of Vigor" maxLevel="1" basePrice="1000"
-    	itemType="CHARM" icon="ICO_CHARM">
+    	itemType="CHARM" icon="ICO_QUEST_CHARM">
     	<description>A charm to ward off the fatigue of battle.
     	
 Effect: You may have each match be best of 5 instead of 3.</description>
     </item>
-    <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_STAKES">
+    <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_QUEST_STAKES">
       <description>A written agreement with the Spell Shop to acquire cards you lose in an ante match from quest opponents.
       
 
 Effect: Cards lost in an ante match will be available immediately following the match in the Card Shop.</description>
     </item>
-    <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_MEMBERSHIP">
+    <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_QUEST_GOLD">
       <description>A token certifying you as a member of the bank, giving you a greater selection of booster packs when you win. 
       
 

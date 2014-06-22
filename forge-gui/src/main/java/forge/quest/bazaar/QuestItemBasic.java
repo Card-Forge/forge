@@ -19,6 +19,8 @@ package forge.quest.bazaar;
 
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+import forge.GuiBase;
+import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.quest.data.QuestAssets;
 
@@ -65,6 +67,9 @@ public class QuestItemBasic implements IQuestBazaarItem {
     protected final int getBasePrice() {
         return this.basePrice;
     }
+
+    @XStreamAsAttribute
+    private final FSkinProp icon = null;
 
     /**
      * <p>
@@ -163,7 +168,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      */
     @Override
     public ISkinImage getIcon(QuestAssets qA) {
-        return null;
+        return GuiBase.getInterface().getSkinIcon(icon);
     }
 
     /**

@@ -52,7 +52,7 @@ import forge.util.WaitRunnable;
 import forge.util.gui.SGuiChoose;
 
 public class GuiMobile implements IGuiBase {
-    
+
     private final String assetsDir;
     
     public GuiMobile(String assetsDir0) {
@@ -97,6 +97,12 @@ public class GuiMobile implements IGuiBase {
     @Override
     public boolean mayShowCard(Card card) {
         return FControl.mayShowCard(card);
+    }
+
+    @Override
+    public ISkinImage getSkinIcon(FSkinProp skinProp) {
+        if (skinProp == null) { return null; }
+        return FSkin.getImages().get(skinProp);
     }
 
     @Override
