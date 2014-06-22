@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 
@@ -193,7 +194,11 @@ public class FSkinFont {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*";
 
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
-        final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(fontSize, chars, false, packer);
+        final FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.characters = chars;
+        parameter.size = fontSize;
+        parameter.packer = packer;
+        final FreeTypeFontGenerator.FreeTypeBitmapFontData fontData = generator.generateData(parameter);
         final Array<PixmapPacker.Page> pages = packer.getPages();
 
         //finish generating font on UI thread

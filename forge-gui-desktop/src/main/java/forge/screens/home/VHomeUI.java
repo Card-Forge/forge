@@ -31,7 +31,6 @@ import forge.screens.home.quest.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
 import forge.screens.home.sanctioned.VSubmenuSealed;
-import forge.screens.home.sanctioned.VSubmenuWinston;
 import forge.screens.home.settings.VSubmenuAvatars;
 import forge.screens.home.settings.VSubmenuDownloaders;
 import forge.screens.home.settings.VSubmenuPreferences;
