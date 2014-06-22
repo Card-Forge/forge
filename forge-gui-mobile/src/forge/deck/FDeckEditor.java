@@ -543,7 +543,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private static final List<String> limitExceptions = Arrays.asList(
                 new String[]{"Relentless Rats", "Shadowborn Apostle"});
 
-        private ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd) {
+        private ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd, boolean isAddSource) {
             ItemPool<PaperCard> additions = new ItemPool<PaperCard>(cardManager.getGenericType());
             CardLimit limit = parentScreen.getCardLimit();
             Deck deck = parentScreen.getDeck();
@@ -568,21 +568,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         max -= deck.get(DeckSection.Commander).count(card);
                     }
                 }
-                if (qty > max) {
-                    qty = max;
+                if (isAddSource) {
+                    if (qty > max) {
+                        qty = max;
+                    }
+                    if (qty > 0) {
+                        additions.add(item, qty);
+                    }
                 }
-                if (qty > 0) {
-                    additions.add(item, qty);
+                else { //if not source of items being added, use max directly
+                    additions.add(item, max);
                 }
             }
 
             return additions;
         }
 
-        private int getMaxMoveQuantity(boolean isAddMenu) {
+        private int getMaxMoveQuantity(boolean isAddMenu, boolean isAddSource) {
             ItemPool<PaperCard> selectedItemPool = cardManager.getSelectedItemPool();
             if (isAddMenu) {
-                selectedItemPool = getAllowedAdditions(selectedItemPool);
+                selectedItemPool = getAllowedAdditions(selectedItemPool, isAddSource);
             }
             if (selectedItemPool.isEmpty()) {
                 return 0;
@@ -596,8 +601,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return max;
         }
 
-        protected void addItem(FDropDownMenu menu, final String verb, String dest, FImage icon, boolean isAddMenu, final Callback<Integer> callback) {
-            final int max = getMaxMoveQuantity(isAddMenu);
+        protected void addItem(FDropDownMenu menu, final String verb, String dest, FImage icon, boolean isAddMenu, boolean isAddSource, final Callback<Integer> callback) {
+            final int max = getMaxMoveQuantity(isAddMenu, isAddSource);
             if (max == 0) { return; }
 
             String label = verb;
@@ -677,7 +682,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Add", "to main deck", parentScreen.getMainDeckPage().getIcon(), true, new Callback<Integer>() {
+            addItem(menu, "Add", "to main deck", parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     if (result == null || result <= 0) { return; }
@@ -685,7 +690,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     parentScreen.getMainDeckPage().addCard(card, result);
                 }
             });
-            addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, new Callback<Integer>() {
+            addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     if (result == null || result <= 0) { return; }
@@ -783,7 +788,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             switch (deckSection) {
             case Main:
-                addItem(menu, "Add", null, FSkinImage.PLUS, true, new Callback<Integer>() {
+                addItem(menu, "Add", null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -792,7 +797,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (!parentScreen.isLimitedEditor()) {
-                    addItem(menu, "Remove", null, FSkinImage.MINUS, false, new Callback<Integer>() {
+                    addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -804,7 +809,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                addItem(menu, "Move", "to sideboard", parentScreen.getSideboardPage().getIcon(), false, new Callback<Integer>() {
+                addItem(menu, "Move", "to sideboard", parentScreen.getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -815,7 +820,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Sideboard:
-                addItem(menu, "Add", null, FSkinImage.PLUS, true, new Callback<Integer>() {
+                addItem(menu, "Add", null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -824,7 +829,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (!parentScreen.isLimitedEditor()) {
-                    addItem(menu, "Remove", null, FSkinImage.MINUS, false, new Callback<Integer>() {
+                    addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -836,7 +841,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                addItem(menu, "Move", "to main deck", parentScreen.getMainDeckPage().getIcon(), false, new Callback<Integer>() {
+                addItem(menu, "Move", "to main deck", parentScreen.getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -847,7 +852,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Commander:
-                addItem(menu, "Remove", null, FSkinImage.MINUS, false, new Callback<Integer>() {
+                addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -857,7 +862,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Avatar:
-                addItem(menu, "Remove", null, FSkinImage.MINUS, false, new Callback<Integer>() {
+                addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -867,7 +872,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Schemes:
-                addItem(menu, "Add", null, FSkinImage.PLUS, true, new Callback<Integer>() {
+                addItem(menu, "Add", null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -875,7 +880,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addCard(card, result);
                     }
                 });
-                addItem(menu, "Remove", null, FSkinImage.MINUS, false, new Callback<Integer>() {
+                addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -885,7 +890,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 });
                 break;
             case Planes:
-                addItem(menu, "Add", null, FSkinImage.PLUS, true, new Callback<Integer>() {
+                addItem(menu, "Add", null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -893,7 +898,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addCard(card, result);
                     }
                 });
-                addItem(menu, "Remove", null, FSkinImage.MINUS, false, new Callback<Integer>() {
+                addItem(menu, "Remove", null, FSkinImage.MINUS, false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -948,14 +953,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Add", "to main deck", parentScreen.getMainDeckPage().getIcon(), true, new Callback<Integer>() {
+            addItem(menu, "Add", "to main deck", parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     parentScreen.getMainDeckPage().addCard(card);
                     afterCardPicked(card);
                 }
             });
-            addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, new Callback<Integer>() {
+            addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     parentScreen.getSideboardPage().addCard(card);
