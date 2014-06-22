@@ -146,6 +146,14 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             tab.setVisible(false);
         }
 
+        public String getCaption() {
+            return caption;
+        }
+
+        public FImage getIcon() {
+            return icon;
+        }
+
         protected class Tab extends FDisplayObject {
             @Override
             public boolean tap(float x, float y, int count) {
