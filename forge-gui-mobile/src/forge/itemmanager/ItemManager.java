@@ -1036,43 +1036,48 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             float screenHeight = screen.getHeight();
 
             paneSize = updateAndGetPaneSize(screenWidth, screenHeight);
+            float w = paneSize.getWidth();
+            float h = paneSize.getHeight();
 
             Rectangle bounds = currentView.getSelectionBounds();
 
             //try displaying right of selection if possible
             float x = bounds.x + bounds.width;
             float y = bounds.y;
-            if (x + paneSize.getWidth() > screenWidth) {
+            if (x + w > screenWidth) {
                 //try displaying left of selection if possible
-                x = bounds.x - paneSize.getWidth();
+                x = bounds.x - w;
                 if (x < 0) {
                     //display below selection if no room left or right of selection
                     x = bounds.x;
-                    if (paneSize.getWidth() < bounds.width) {
+                    if (w < bounds.width) {
                         //center below item if needed
-                        x += (bounds.width - paneSize.getWidth()) / 2;
+                        x += (bounds.width - w) / 2;
                     }
-                    if (x + paneSize.getWidth() > screenWidth) {
-                        x = screenWidth - paneSize.getWidth();
+                    if (x + w > screenWidth) {
+                        x = screenWidth - w;
                     }
                     y += bounds.height;
                 }
             }
-            if (y + paneSize.getHeight() > screenHeight) {
+            if (y + h > screenHeight) {
                 if (y == bounds.y) {
                     //if displaying to left or right, move up if not enough room
-                    y = screenHeight - paneSize.getHeight();
+                    y = screenHeight - h;
                 }
                 else {
                     //if displaying below selection and not enough room, display above selection
-                    y -= bounds.height + paneSize.getHeight();
+                    y -= bounds.height + h;
                 }
                 if (y < 0) {
                     y = 0;
+                    if (h > bounds.y) {
+                        h = bounds.y; //cut off menu if not enough room above or below selection
+                    }
                 }
             }
 
-            setBounds(Math.round(x), Math.round(y), Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
+            setBounds(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
         }
     }
 }

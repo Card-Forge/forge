@@ -23,7 +23,6 @@ import forge.card.CardZoom;
 import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
-import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
@@ -541,16 +540,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void onCardActivated(PaperCard card);
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
-        private void addItem(FDropDownMenu menu, String verb, String dest, final int qty, final Callback<Integer> callback) {
-            String label = verb + " " + SItemManagerUtil.getItemDisplayString(cardManager.getSelectedItems(), qty, false);
-            if (dest != null && !dest.isEmpty()) {
-                label += " " + dest;
-            }
-            menu.addItem(new FMenuItem(label, new FEventHandler() {
+        private void addItem(FDropDownMenu menu, final String verb, String dest, final int qty, final Callback<Integer> callback) {
+            menu.addItem(new FMenuItem(verb + " " + dest, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     if (qty < 0) {
-                        GuiChoose.getInteger("Choose a value for X", 1, -qty, 20, callback);
+                        GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " how many?", 1, -qty, 20, callback);
                     }
                     else {
                         callback.run(qty);
@@ -619,18 +614,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             int max = getMaxMoveQuantity(isAddMenu);
             if (max == 0) { return; }
 
-            addItem(menu, verb, dest, 1, callback);
-            if (max == 1) { return; }
-
-            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-            if (qty > max) {
-                qty = max;
+            if (max == 1) {
+                addItem(menu, verb, dest, 1, callback);
             }
-
-            addItem(menu, verb, dest, qty, callback);
-            if (max == 2) { return; }
-
-            addItem(menu, verb, dest, -max, callback); //pass -max as quantity to indicate to prompt for specific quantity
+            else {
+                addItem(menu, verb, dest, -max, callback); //pass -max as quantity to indicate to prompt for specific quantity
+            }
         }
 
         @Override
