@@ -981,7 +981,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
                         card.setRandomFoil();
                     }
-                    CardRenderer.drawFoilEffect(g, card, getLeft(), getTop(), getWidth(), getHeight());
+                    CardRenderer.drawFoilEffect(g, card, x, y, w, h);
                 }
             }
         }

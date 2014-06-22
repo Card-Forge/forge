@@ -1048,6 +1048,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 if (x < 0) {
                     //display below selection if no room left or right of selection
                     x = bounds.x;
+                    if (paneSize.getWidth() < bounds.width) {
+                        //center below item if needed
+                        x += (bounds.width - paneSize.getWidth()) / 2;
+                    }
                     if (x + paneSize.getWidth() > screenWidth) {
                         x = screenWidth - paneSize.getWidth();
                     }
@@ -1061,7 +1065,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 }
                 else {
                     //if displaying below selection and not enough room, display above selection
-                    y -= paneSize.getHeight();
+                    y -= bounds.height + paneSize.getHeight();
                 }
                 if (y < 0) {
                     y = 0;
