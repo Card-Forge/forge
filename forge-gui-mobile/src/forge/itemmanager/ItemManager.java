@@ -65,6 +65,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean hideFilters = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
+    private ContextMenu contextMenu;
     private final Class<T> genericType;
     private ItemManagerConfig config;
     private String caption = "Items";
@@ -1014,9 +1015,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void showMenu() {
         if (contextMenuBuilder != null && getSelectionCount() > 0) {
-            ContextMenu menu = new ContextMenu();
-            menu.show();
+            if (contextMenu == null) {
+                contextMenu = new ContextMenu();
+            }
+            contextMenu.show();
         }
+    }
+
+    public boolean isContextMenuOpen() {
+        return contextMenu != null && contextMenu.isVisible();
     }
 
     public static abstract class ContextMenuBuilder<T> {
@@ -1027,6 +1034,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         @Override
         protected void buildMenu() {
             contextMenuBuilder.buildMenu(this, getSelectedItem());
+        }
+
+        @Override
+        protected boolean hideBackdropOnPress(float x, float y) {
+            Rectangle bounds = currentView.getSelectionBounds();
+            if (bounds == null || bounds.contains(x, y)) {
+                return false; //don't hide on press if within selection bounds
+            }
+            return true;
+        }
+
+        @Override
+        protected boolean preventOwnerHandlingBackupTap(float x, float y, int count) {
+            //prevent view handling single tap, but allow it to handle double tap
+            return count == 1;
         }
 
         @Override

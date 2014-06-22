@@ -141,15 +141,31 @@ public abstract class FDropDown extends FScrollPane {
         return menuTab;
     }
 
+    protected boolean hideBackdropOnPress(float x, float y) {
+        FDisplayObject owner = getDropDownOwner();
+        if (owner == null || !owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
+            return true; //auto-hide when backdrop pressed unless over owner
+        }
+        return false;
+    }
+
+    protected boolean preventOwnerHandlingBackupTap(float x, float y, int count) {
+        //prevent owner handling this tap unless it's a sub menu and not over it
+        FDisplayObject owner = getDropDownOwner();
+        if (owner instanceof FSubMenu) {
+            return owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y));
+        }
+        return true; 
+    }
+
     private class Backdrop extends FDisplayObject {
         private Backdrop() {
         }
 
         @Override
         public boolean press(float x, float y) {
-            FDisplayObject owner = getDropDownOwner();
-            if (owner == null || !owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y))) {
-                hide(); //auto-hide when backdrop pressed unless over owner
+            if (hideBackdropOnPress(x, y)) {
+                hide();
             }
             return false; //allow press to pass through to object behind backdrop
         }
@@ -159,12 +175,7 @@ public abstract class FDropDown extends FScrollPane {
             if (!isVisible()) { return false; }
             hide(); //always hide if tapped
 
-            //prevent owner handling this tap unless it's a sub menu and not over it
-            FDisplayObject owner = getDropDownOwner();
-            if (owner instanceof FSubMenu) {
-                return owner.contains(owner.getLeft() + owner.screenToLocalX(x), owner.getTop() + owner.screenToLocalY(y));
-            }
-            return true; 
+            return preventOwnerHandlingBackupTap(x, y, count);
         }
 
         @Override

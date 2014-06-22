@@ -264,7 +264,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public final class ItemList extends FList<Entry<T, Integer>> {
         private final ItemManager<T>.ItemRenderer renderer;
         private List<ItemColumn> cols = new ArrayList<ItemColumn>();
-        private int prevShowMenuIndex = -1;
 
         private ItemList() {
             renderer = itemManager.getListItemRenderer();
@@ -301,14 +300,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         return true; //don't activate if renderer handles tap
                     }
                     if (count == 1) {
-                        //prevent re-showing menu if shown for last tap
-                        if (prevShowMenuIndex == index) {
-                            prevShowMenuIndex = -1; //reset so another tap works again
-                        }
-                        else {
-                            itemManager.showMenu();
-                            prevShowMenuIndex = index;
-                        }
+                        itemManager.showMenu();
                     }
                     else if (count == 2 && index == prevTapIndex) {
                         itemManager.activateSelectedItems();
