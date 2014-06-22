@@ -557,6 +557,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (deck == null || card == null || card.getRules().getType().isBasic() ||
                         limit == CardLimit.None || limitExceptions.contains(card.getName())) {
                     max = Integer.MAX_VALUE;
+                    if (parentScreen.isLimitedEditor() && !isAddSource) {
+                        //prevent adding more than is in other pool when editing limited decks
+                        if (parentScreen.getMainDeckPage() == this) {
+                            max = deck.get(DeckSection.Sideboard).count(card);
+                        }
+                        else if (parentScreen.getSideboardPage() == this) {
+                            max = deck.get(DeckSection.Main).count(card);
+                        }
+                    }
                 }
                 else {
                     max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
