@@ -41,6 +41,6 @@ public class Main extends AndroidApplication {
                 //ensure process doesn't stick around after exiting
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
-        }), true);
+        }));
     }
 }

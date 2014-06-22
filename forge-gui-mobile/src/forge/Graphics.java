@@ -2,7 +2,6 @@ package forge;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,6 +21,9 @@ import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public class Graphics {
+    private static final int GL_BLEND = GL20.GL_BLEND;
+    private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
+
     private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private float regionHeight;
@@ -105,10 +107,10 @@ public class Graphics {
         }
         boolean needSmoothing = (x1 != x2 && y1 != y2);
         if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
         if (needSmoothing) {
-            Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
+            Gdx.gl.glEnable(GL_LINE_SMOOTH);
         }
 
         startShape(ShapeType.Line);
@@ -117,10 +119,10 @@ public class Graphics {
         endShape();
 
         if (needSmoothing) {
-            Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
+            Gdx.gl.glDisable(GL_LINE_SMOOTH);
         }
         if (color.a < 1 || needSmoothing) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
         if (thickness > 1) {
             Gdx.gl.glLineWidth(1);
@@ -142,10 +144,10 @@ public class Graphics {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
         if (color.a < 1 || cornerRadius > 0) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
         if (cornerRadius > 0) {
-            Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
+            Gdx.gl.glEnable(GL_LINE_SMOOTH);
         }
 
         //adjust width/height so rectangle covers equivalent filled area
@@ -168,10 +170,10 @@ public class Graphics {
         endShape();
 
         if (cornerRadius > 0) {
-            Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
+            Gdx.gl.glDisable(GL_LINE_SMOOTH);
         }
         if (color.a < 1 || cornerRadius > 0) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
         if (thickness > 1) {
             Gdx.gl.glLineWidth(1);
@@ -192,16 +194,16 @@ public class Graphics {
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
+        Gdx.gl.glEnable(GL_BLEND);
+        Gdx.gl.glEnable(GL_LINE_SMOOTH); //must be smooth to ensure edges aren't missed
 
         startShape(ShapeType.Line);
         shapeRenderer.setColor(color);
         shapeRenderer.rect(adjustX(x), adjustY(y, h), w, h);
         endShape();
 
-        Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
-        Gdx.gl.glDisable(GL20.GL_BLEND);
+        Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        Gdx.gl.glDisable(GL_BLEND);
         if (thickness > 1) {
             Gdx.gl.glLineWidth(1);
         }
@@ -219,7 +221,7 @@ public class Graphics {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
 
         startShape(ShapeType.Filled);
@@ -228,7 +230,7 @@ public class Graphics {
         endShape();
 
         if (color.a < 1) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
 
         batch.begin();
@@ -246,16 +248,16 @@ public class Graphics {
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glEnable(GL10.GL_LINE_SMOOTH);
+        Gdx.gl.glEnable(GL_BLEND);
+        Gdx.gl.glEnable(GL_LINE_SMOOTH);
 
         startShape(ShapeType.Line);
         shapeRenderer.setColor(color);
         shapeRenderer.circle(adjustX(x), adjustY(y, 0), radius);
         endShape();
 
-        Gdx.gl.glDisable(GL10.GL_LINE_SMOOTH);
-        Gdx.gl.glDisable(GL20.GL_BLEND);
+        Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        Gdx.gl.glDisable(GL_BLEND);
         if (thickness > 1) {
             Gdx.gl.glLineWidth(1);
         }
@@ -273,7 +275,7 @@ public class Graphics {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
 
         startShape(ShapeType.Filled);
@@ -282,7 +284,7 @@ public class Graphics {
         endShape();
 
         if (color.a < 1) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
 
         batch.begin();
@@ -298,7 +300,7 @@ public class Graphics {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
 
         startShape(ShapeType.Filled);
@@ -307,7 +309,7 @@ public class Graphics {
         endShape();
 
         if (color.a < 1) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
 
         batch.begin();
@@ -331,7 +333,7 @@ public class Graphics {
         }
         boolean needBlending = (color1.a < 1 || color2.a < 1);
         if (needBlending) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
 
         Color topLeftColor = color1;
@@ -344,7 +346,7 @@ public class Graphics {
         endShape();
 
         if (needBlending) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
 
         batch.begin();
@@ -430,7 +432,7 @@ public class Graphics {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
         if (color.a < 1) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glEnable(GL_BLEND);
         }
 
         TextBounds textBounds;
@@ -475,7 +477,7 @@ public class Graphics {
         }
 
         if (color.a < 1) {
-            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Gdx.gl.glDisable(GL_BLEND);
         }
     }
 

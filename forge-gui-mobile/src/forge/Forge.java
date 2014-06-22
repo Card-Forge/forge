@@ -64,8 +64,6 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
 
-        Texture.setEnforcePotImages(false); //ensure image dimensions don't have to be powers of 2
-
         graphics = new Graphics();
         splashScreen = new SplashScreen();
 
