@@ -94,7 +94,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
                         CounterType chosenType = pc.chooseCounterType(tgtCounters.keySet(), sa, "Select type of counters to remove");
                         String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
-                        int chosenAmount = pc.chooseNumber(sa, prompt, 1, Math.max(cntToRemove, tgtCounters.get(chosenType)));
+                        int chosenAmount = pc.chooseNumber(sa, prompt, 1, Math.min(cntToRemove, tgtCounters.get(chosenType)));
 
                         tgtCard.subtractCounter(chosenType, chosenAmount);
                         if (rememberRemoved) {
