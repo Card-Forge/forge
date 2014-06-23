@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -680,8 +681,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (!defined && changeType != null)
             fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
 
-        if (searchedLibrary && decider.equals(player)) { // should only count the number of searching player's own library
-            decider.incLibrarySearched();
+        if (searchedLibrary) {
+            if (decider.equals(player)) {
+                // should only count the number of searching player's own library
+                decider.incLibrarySearched();
+            }
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Player", decider);
+            runParams.put("Target", Lists.newArrayList(player));
+            decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
 
         if (!defined) {

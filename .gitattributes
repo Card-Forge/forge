@@ -622,6 +622,7 @@ forge-game/src/main/java/forge/game/trigger/TriggerPlaneswalkedFrom.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerPlaneswalkedTo.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerSacrificed.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerScry.java -text
+forge-game/src/main/java/forge/game/trigger/TriggerSearchedLibrary.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerSetInMotion.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerShuffled.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerSpellAbilityCast.java svneol=native#text/plain

@@ -274,6 +274,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 });
             }
+            // TODO: prevent ai seaching its own library when Ob Nixilis, Unshackled is in play
             if (origin != null && origin.isKnown()) {
                 list = CardLists.getValidCards(list, type, source.getController(), source);
             }

@@ -12,9 +12,11 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
@@ -73,6 +75,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 sa.getActivatingPlayer().incLibrarySearched();
             }
             sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, sa.getActivatingPlayer());
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Player", sa.getActivatingPlayer());
+            runParams.put("Target", tgtPlayers);
+            game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
