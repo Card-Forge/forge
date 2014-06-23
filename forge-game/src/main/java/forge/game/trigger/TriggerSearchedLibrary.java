@@ -58,7 +58,7 @@ public class TriggerSearchedLibrary extends Trigger {
                 return false;
             }
         }
-        if (this.mapParams.containsKey("SeachOwnLibrary")) {
+        if (this.mapParams.containsKey("SearchOwnLibrary")) {
             @SuppressWarnings("unchecked")
             List<Player> targets = (List<Player>) runParams2.get("Target");
             if (!targets.contains(runParams2.get("Player"))) {
