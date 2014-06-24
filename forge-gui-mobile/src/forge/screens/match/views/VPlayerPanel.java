@@ -313,7 +313,12 @@ public class VPlayerPanel extends FContainer {
                     h += 2;
                 }
                 g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
-                g.startClip(-1, y, w + 2, yAcross - y); //use clip to ensure all corners connect
+                if (isFlipped()) { //use clip to ensure all corners connect
+                    g.startClip(-1, y, w + 2, h);
+                }
+                else {
+                    g.startClip(-1, y, w + 2, yAcross - y);
+                }
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
                 g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
