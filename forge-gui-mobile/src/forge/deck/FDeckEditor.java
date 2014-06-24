@@ -802,6 +802,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
 
+                        if (parentScreen.isLimitedEditor()) { //ensure card removed from sideboard before adding to main
+                            parentScreen.getSideboardPage().removeCard(card, result);
+                        }
                         addCard(card, result);
                     }
                 });
@@ -834,6 +837,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
 
+                        if (parentScreen.isLimitedEditor()) { //ensure card removed from main deck before adding to sideboard
+                            parentScreen.getMainDeckPage().removeCard(card, result);
+                        }
                         addCard(card, result);
                     }
                 });
