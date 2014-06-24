@@ -530,7 +530,7 @@ public class CardRenderer {
             }
         }
 
-        if (card.isSick() && card.isInPlay()) {
+        if (details.isCreature && card.hasSickness() && card.isInPlay()) {
             CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
 
