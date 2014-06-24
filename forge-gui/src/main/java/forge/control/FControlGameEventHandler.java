@@ -311,7 +311,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventCardStatsChanged event) {
-        // TODO Smart partial updates
+        GuiBase.getInterface().refreshCardDetails(event.cards);
         return updateManyCards(event.cards);
     }
 

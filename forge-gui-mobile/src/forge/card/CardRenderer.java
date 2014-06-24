@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.assets.FSkinColor;
@@ -26,6 +27,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
+import forge.screens.match.FControl.CardDetails;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FList;
@@ -460,7 +462,8 @@ public class CardRenderer {
         w -= 2 * padding;
         h -= 2 * padding;
 
-        DetailColors borderColor = CardDetailUtil.getBorderColor(card, canShow);
+        CardDetails details = FControl.getCardDetails(card);
+        DetailColors borderColor = CardDetailUtil.getBorderColor(details.colors, details.isLand, canShow);
         Color color = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
@@ -541,25 +544,25 @@ public class CardRenderer {
         }
 
         if (showCardPowerOverlay(card)) { //make sure card p/t box appears on top
-            drawPtBox(g, card, color, x, y, w, h);
+            drawPtBox(g, card, details, color, x, y, w, h);
         }
     }
 
-    private static void drawPtBox(Graphics g, Card card, Color color, float x, float y, float w, float h) {
+    private static void drawPtBox(Graphics g, Card card, CardDetails details, Color color, float x, float y, float w, float h) {
         //use array of strings to render separately with a tiny amount of space in between
         //instead of using actual spaces which are too wide
         List<String> pieces = new ArrayList<String>();
-        if (card.isCreature()) {
-            pieces.add(String.valueOf(card.getNetAttack()));
+        if (details.isCreature) {
+            pieces.add(String.valueOf(details.power));
             pieces.add("/");
-            pieces.add(String.valueOf(card.getNetDefense()));
+            pieces.add(String.valueOf(details.toughness));
         }
-        if (card.isPlaneswalker()) {
+        if (details.isPlaneswalker) {
             if (pieces.isEmpty()) {
-                pieces.add(String.valueOf(card.getCurrentLoyalty()));
+                pieces.add(String.valueOf(details.loyalty));
             }
             else {
-                pieces.add("(" + card.getCurrentLoyalty() + ")");
+                pieces.add("(" + details.loyalty + ")");
             }
         }
         if (pieces.isEmpty()) { return; }

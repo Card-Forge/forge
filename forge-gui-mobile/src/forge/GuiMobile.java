@@ -316,6 +316,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public void refreshCardDetails(Collection<Card> cards) {
+        FControl.refreshCardDetails(cards);
+    }
+
+    @Override
     public void updateManaPool(List<Player> manaPoolUpdate) {
         FControl.updateManaPool(manaPoolUpdate);
     }

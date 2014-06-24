@@ -383,6 +383,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public void refreshCardDetails(Collection<Card> cards) {
+        //TODO: Consider caching card details like mobile game
+    }
+
+    @Override
     public void updateManaPool(List<Player> manaPoolUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateManaPool(manaPoolUpdate);
     }

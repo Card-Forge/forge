@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardCharacteristicName;
+import forge.card.ColorSet;
 import forge.control.FControlGameEventHandler;
 import forge.control.FControlGamePlayback;
 import forge.events.IUiEventVisitor;
@@ -431,6 +433,50 @@ public class FControl {
         }
     }
 
+    private static final Map<Integer, CardDetails> cardDetailsCache = new HashMap<Integer, CardDetails>();
+
+    public static CardDetails getCardDetails(Card card) {
+        CardDetails details = cardDetailsCache.get(card.getUniqueNumber());
+        if (details == null) {
+            details = new CardDetails(card);
+            cardDetailsCache.put(card.getUniqueNumber(), details);
+        }
+        return details;
+    }
+
+    public static class CardDetails {
+        public final int power, toughness, loyalty;
+        public final boolean isCreature, isPlaneswalker, isLand;
+        public final ColorSet colors;
+
+        private CardDetails(Card card) {
+            isCreature = card.isCreature();
+            if (isCreature) {
+                power = card.getNetAttack();
+                toughness = card.getNetDefense();
+            }
+            else {
+                power = 0;
+                toughness = 0;
+            }
+            isPlaneswalker = card.isPlaneswalker();
+            if (isPlaneswalker) {
+                loyalty = card.getCurrentLoyalty();
+            }
+            else {
+                loyalty = 0;
+            }
+            colors = card.determineColor();
+            isLand = card.isLand();
+        }
+    }
+
+    public static void refreshCardDetails(Collection<Card> cards) {
+        for (Card c : cards) {
+            cardDetailsCache.put(c.getUniqueNumber(), new CardDetails(c));
+        }
+    }
+
     public static void updateSingleCard(Card c) {
         Zone zone = c.getZone();
         if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
@@ -468,6 +514,8 @@ public class FControl {
             }
         }
         boolean hasHuman = !pp.isEmpty();
+
+        cardDetailsCache.clear(); //clear cache when game ended
 
         if (pp.isEmpty()) {
             pp.addAll(game.getPlayers()); // no human? then all players surrender!

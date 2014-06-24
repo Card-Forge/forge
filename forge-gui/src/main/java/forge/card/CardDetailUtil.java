@@ -47,18 +47,22 @@ public class CardDetailUtil {
     }
 
     public static DetailColors getBorderColor(final Card card, boolean canShow) {
-        return getBorderColors(card, canShow, false).get(0);
+        return getBorderColors(card.determineColor(), card.isLand(), canShow, false).get(0);
     }
-
+    public static DetailColors getBorderColor(final ColorSet cardColors, final boolean isLand, boolean canShow) {
+        return getBorderColors(cardColors, isLand, canShow, false).get(0);
+    }
     public static List<DetailColors> getBorderColors(final Card card, boolean canShow, boolean supportMultiple) {
+        return getBorderColors(card.determineColor(), card.isLand(), canShow, supportMultiple);
+    }
+    public static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
         List<DetailColors> borderColors = new ArrayList<DetailColors>();
-        ColorSet cardColors = card.determineColor();
 
         if (!canShow) {
             borderColors.add(DetailColors.FACE_DOWN);
         }
         else if (cardColors.isColorless()) {
-            if (card.isLand()) { //use different color for lands vs. other colorless cards
+            if (isLand) { //use different color for lands vs. other colorless cards
                 borderColors.add(DetailColors.LAND);
             }
             else {

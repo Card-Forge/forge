@@ -71,6 +71,7 @@ public interface IGuiBase {
     void updateStack();
     void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate);
     void updateCards(Set<Card> cardsToUpdate);
+    void refreshCardDetails(Collection<Card> cards);
     void updateManaPool(List<Player> manaPoolUpdate);
     void updateLives(List<Player> livesUpdate);
     void endCurrentGame();
