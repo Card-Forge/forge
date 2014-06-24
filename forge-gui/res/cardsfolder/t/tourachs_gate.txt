@@ -7,9 +7,8 @@ A:AB$ PutCounter | Cost$ Sac<1/Thrull> | Defined$ Self | CounterType$ TIME | Cou
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a time counter from CARDNAME. If there are no time counters on CARDNAME, sacrifice it.
 SVar:TrigSubCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ Sac
 SVar:Sac:DB$ Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_TIME
-S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "{T}: Attacking creatures you control get +2/-1 until end of turn."
-SVar:Pump:AB$ PumpAll | Cost$ T | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ 2 | NumDef$ -1 | SpellDescription$ Attacking creatures you control get +2/-1 until end of turn.
+A:AB$ PumpAll | Cost$ tapXType<1/Land.EnchantedBy/Enchanted Land> | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ 2 | NumDef$ -1 | SpellDescription$ Attacking creatures you control get +2/-1 until end of turn.
 SVar:RemRandomDeck:True
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tourachs_gate.jpg
-Oracle:Enchant land you control\nSacrifice a Thrull: Put three time counters on Tourach's Gate.\nAt the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.\nEnchanted land has "{T}: Attacking creatures you control get +2/-1 until end of turn."
+Oracle:Enchant land you control\nSacrifice a Thrull: Put three time counters on Tourach's Gate.\nAt the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.\nTap enchanted land: Attacking creatures you control get +2/-1 until end of turn. Activate this ability only if enchanted land is untapped.

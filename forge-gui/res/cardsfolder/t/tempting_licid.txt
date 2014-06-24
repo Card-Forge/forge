@@ -8,7 +8,7 @@ SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 AlternateMode:Licid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_licid.jpg
-Oracle:{G}, {T}: CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.
+Oracle:{G}, {T}: Tempting Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.
 
 ALTERNATE
 
@@ -23,4 +23,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All crea
 A:AB$ SetState | Cost$ G | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_licid.jpg
-Oracle:{G}, {T}: CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.
+Oracle:{G}, {T}: Tempting Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.

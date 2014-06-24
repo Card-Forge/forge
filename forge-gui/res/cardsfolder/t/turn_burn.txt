@@ -6,7 +6,9 @@ K:Fuse
 A:SP$ Animate | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Red | OverwriteColors$ True | Types$ Weird | RemoveCreatureTypes$ True | SpellDescription$ Target creature loses all abilities and becomes a 0/1 red Weird until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_burn.jpg
 Oracle:Target creature loses all abilities and becomes a 0/1 red Weird until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
+
 ALTERNATE
+
 Name:Burn
 ManaCost:1 R
 Types:Instant

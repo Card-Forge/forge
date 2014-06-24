@@ -1,4 +1,4 @@
-Name:Traveling Philosopher 
+Name:Traveling Philosopher
 ManaCost:1 W
 Types:Creature Human Advisor
 PT:2/2
