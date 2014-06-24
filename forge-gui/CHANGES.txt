@@ -1,7 +1,7 @@
-Forge Beta: 06-20-2014 ver 1.5.20
+Forge Beta: 0#-##-2014 ver 1.5.21
 
 
-13876 cards in total.
+13### cards in total.
 
 
 -------------
@@ -20,57 +20,7 @@ Forge now includes many of the new Conspiracy cards. It may take a few days/week
 New Cards
 ---------
 
-Dead Ringers
-Grave Scrabbler
-Grenzo's Rebuttal
-Mystic Barrier
-Order of Succession
-Time Distortion
 
-
---------------------
-New Conspiracy Cards
---------------------
-
-Academy Elite
-Bite of the Black Rose
-Brago's Representative
-Brago, King Eternal
-Coercive Portal
-Council Guardian
-Council's Judgment
-Custodi Soulbinders
-Custodi Squire
-Dack Fayden
-Dack's Duplicate
-Deathreap Ritual
-Drakestown Forgotten
-Enraged Revolutionary
-Extract from Darkness
-Flamewright
-Grenzo's Cutthroat
-Grenzo, Dungeon Warden
-Grudge Keeper
-Ignition Team
-Magister of Worth
-Marchesa's Emissary
-Marchesa's Infiltrator
-Marchesa's Smuggler
-Marchesa, the Black Rose
-Muzzio, Visionary Architect
-Plea for Power
-Predator's Howl
-Realm Seekers
-Reign of the Pit
-Rousing of Souls
-Scourge of the Throne
-Selvala's Charge
-Selvala's Enforcer
-Selvala, Explorer Returned
-Split Decision
-Treasonous Ogre
-Tyrant's Choice
-Woodvine Elemental
 
 
 --------------------
@@ -94,6 +44,14 @@ Soul of Zendikar
 Triplicate Spirits
 Void Snare
 Waste Not
+Avarice Amulet
+In Garruk's Wake
+Xathrid Slyblade
+Cruel Sadist
+Ob Nixilis, Unshackled
+Aggressive Mining
+Master of Predicaments
+Soul of Innistrad
 
 
 ------------
@@ -131,16 +89,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-elcnesh
-excessum
-Gos
-KrazyTheFox
-rikimbo
-Sol
-Swordshine
-torridus
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
