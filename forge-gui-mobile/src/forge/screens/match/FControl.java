@@ -472,8 +472,28 @@ public class FControl {
     }
 
     public static void refreshCardDetails(Collection<Card> cards) {
+        Set<Player> playersNeedingFieldUpdate = null;
+
         for (Card c : cards) {
+            //for each card in play, if it changed from creature to non-creature or vice versa,
+            //or if it changed from land to non-land or vice-versa,
+            //ensure field containing that card is updated to reflect that change
+            if (c.isInPlay()) {
+                CardDetails oldDetails = cardDetailsCache.get(c);
+                if (oldDetails == null || c.isCreature() != oldDetails.isCreature || c.isLand() != oldDetails.isLand) {
+                    if (playersNeedingFieldUpdate == null) {
+                        playersNeedingFieldUpdate = new HashSet<Player>();
+                    }
+                    playersNeedingFieldUpdate.add(c.getController());
+                }
+            }
             cardDetailsCache.put(c.getUniqueNumber(), new CardDetails(c));
+        }
+
+        if (playersNeedingFieldUpdate != null) { //update field for any players necessary
+            for (Player p : playersNeedingFieldUpdate) {
+                getPlayerPanel(p).getField().update();
+            }
         }
     }
 

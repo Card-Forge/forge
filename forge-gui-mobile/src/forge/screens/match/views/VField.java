@@ -7,6 +7,8 @@ import forge.FThreads;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.screens.match.FControl;
+import forge.screens.match.FControl.CardDetails;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FContainer;
 
@@ -59,13 +61,14 @@ public class VField extends FContainer {
 
             for (Card card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
+                CardDetails details = FControl.getCardDetails(card); //use details so creature/land check is accurate
                 if (cardPanel.getAttachedToPanel() == null) { //skip attached panels
-                    if (card.isCreature()) {
+                    if (details.isCreature) {
                         if (!tryStackCard(card, creatures)) {
                             creatures.add(card);
                         }
                     }
-                    else if (card.isLand()) {
+                    else if (details.isLand) {
                         if (!tryStackCard(card, lands)) {
                             lands.add(card);
                         }

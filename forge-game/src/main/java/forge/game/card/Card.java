@@ -8796,8 +8796,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         return requestedCMC;
     }
 
-    public final boolean canBeSacrificedBy(final SpellAbility source)
-    {
+    public final boolean canBeSacrificedBy(final SpellAbility source) {
         if (isImmutable()) {
             System.out.println("Trying to sacrifice immutables: " + this);
             return false;
