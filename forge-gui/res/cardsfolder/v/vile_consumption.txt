@@ -4,4 +4,4 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay PayLife<1> | Description$ All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_consumption.jpg
-Oracle:All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life.
+Oracle:All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."
