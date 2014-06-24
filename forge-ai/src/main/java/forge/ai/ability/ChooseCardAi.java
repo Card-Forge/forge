@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
+
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -15,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -99,6 +101,10 @@ public class ChooseCardAi extends SpellAbilityAi {
             	if (choices.isEmpty()) {
                     return false;
                 }
+            } else if (logic.equals("RandomNonLand")) {
+                if (CardLists.getValidCards(choices, "Card.nonLand", host.getController(), host).isEmpty()) {
+                    return false;
+                }
             }
         }
 
@@ -133,6 +139,9 @@ public class ChooseCardAi extends SpellAbilityAi {
                 options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
             }
             choice = ComputerUtilCard.getBestAI(options);
+        } else if ("RandomNonLand".equals(logic)) {
+            options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host);
+            choice = Aggregates.random(options);
         } else if (logic.equals("Untap")) {
             if (!CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host).isEmpty()) {
                 options = CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
