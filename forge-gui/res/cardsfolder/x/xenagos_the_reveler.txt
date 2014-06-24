@@ -11,4 +11,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$ValidExile Creature.IsRemembered,Land.IsRemembered
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xenagos_the_reveler.jpg
-Oracle:+1: Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.\n0: Put a 2/2 red and green Satyr creature token with haste onto the battlefield.\n-6: Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.
+Oracle:[+1] Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.\n[0] Put a 2/2 red and green Satyr creature token with haste onto the battlefield.\n[-6] Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.

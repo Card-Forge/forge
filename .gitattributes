@@ -14653,7 +14653,7 @@ forge-gui/res/cardsfolder/w/weakness.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/weakstone.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/weapon_surge.txt -text
 forge-gui/res/cardsfolder/w/wear_away.txt -text
-forge-gui/res/cardsfolder/w/wear_tear[!!-~].txt -text
+forge-gui/res/cardsfolder/w/wear_tear.txt -text
 forge-gui/res/cardsfolder/w/weathered_bodyguards.txt -text
 forge-gui/res/cardsfolder/w/weathered_wayfarer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/weatherseed_elf.txt svneol=native#text/plain

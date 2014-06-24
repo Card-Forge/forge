@@ -6,4 +6,4 @@ SVar:ExileAllHand:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | Change
 SVar:ExileAllGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ SetAllLife
 SVar:SetAllLife:DB$ SetLife | Cost$ 0 | Defined$ Each | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldfire.jpg
-Oracle:{6}, {R}, {R}, {R}: Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
+Oracle:Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
