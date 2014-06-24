@@ -48,6 +48,7 @@ public class MatchScreen extends FScreen {
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
+    private final TargetingOverlay targetingOverlay = new TargetingOverlay();
 
     public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -127,6 +128,11 @@ public class MatchScreen extends FScreen {
     protected void doLayout(float startY, float width, float height) {
         scroller.setBounds(0, startY, width, height - VPrompt.HEIGHT - startY);
         prompt.setBounds(0, height - VPrompt.HEIGHT, width, VPrompt.HEIGHT);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        targetingOverlay.draw(g);
     }
 
     @Override

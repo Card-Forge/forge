@@ -238,4 +238,8 @@ public class FSkinColor {
             }
         }
     }
+
+    public float getAlpha() {
+        return color.a;
+    }
 }
