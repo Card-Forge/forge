@@ -143,6 +143,17 @@ public class VPlayerPanel extends FContainer {
             if (zoneTab != null) { //TODO: Support Ante somehow
                 zoneTab.update();
             }
+
+            //update flashback zone when graveyard, library, or exile zones updated
+            switch (zoneType) {
+            case Graveyard:
+            case Library:
+            case Exile:
+                tabFlashbackZone.update();
+                break;
+            default:
+                break;
+            }
         }
     }
 
