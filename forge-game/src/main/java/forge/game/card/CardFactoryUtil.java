@@ -999,7 +999,7 @@ public class CardFactoryUtil {
         if (sq[0].equals("TotalDamageReceivedThisTurn"))    return doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
 
         if (sq[0].contains("YourPoisonCounters"))           return doXMath(cc.getPoisonCounters(), m, c);
-        if (sq[0].contains("OppPoisonCounters"))            return doXMath(ccOpp.getPoisonCounters(), m, c);
+        if (sq[0].contains("TotalOppPoisonCounters"))            return doXMath(cc.getOpponentsTotalPoisonCounters(), m, c);
 
         if (sq[0].contains("OppDamageThisTurn"))            return doXMath(ccOpp.getAssignedDamage(), m, c);
         if (sq[0].contains("YourDamageThisTurn"))           return doXMath(cc.getAssignedDamage(), m, c);

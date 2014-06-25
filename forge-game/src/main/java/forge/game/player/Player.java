@@ -51,6 +51,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
 
@@ -307,14 +308,16 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return the life total of the opponent with the most life.
      */
     public final int getOpponentsGreatestLifeTotal() {
-    	final List<Player> opps = this.getOpponents();
-    	int greatestLifeTotal = Integer.MIN_VALUE;
-    	for (final Player p : opps) {
-    		if (p.getLife() > greatestLifeTotal) {
-    			greatestLifeTotal = p.getLife();
-    		}
-    	}
-    	return greatestLifeTotal;
+    	return Aggregates.max(this.getOpponents(), Accessors.FN_GET_LIFE_TOTAL);
+    }
+    
+    /**
+     * Get the total number of poison counters amongst this player's opponents.
+     * 
+     * @return the total number of poison counters amongst this player's opponents.
+     */
+    public final int getOpponentsTotalPoisonCounters() {
+    	return Aggregates.sum(this.getOpponents(), Accessors.FN_GET_POISON_COUNTERS);
     }
 
     /**
@@ -2080,7 +2083,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        return (this.hasKeyword("You can't lose the game.") || this.getOpponent().hasKeyword("You can't win the game."));
+        return (this.hasKeyword("You can't lose the game.") || Iterables.any(this.getOpponents(), Predicates.CANT_WIN));
     }
 
     /**
@@ -2708,6 +2711,12 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return p.getOutcome() == null || p.getOutcome().hasWon();
             }
         };
+        public static final Predicate<Player> CANT_WIN = new Predicate<Player>() {
+        	@Override
+        	public boolean apply(final Player p) {
+        		return p.hasKeyword("You can't win the game.");
+        	}
+        };
     }
 
     public static class Accessors {
@@ -2716,6 +2725,18 @@ public class Player extends GameEntity implements Comparable<Player> {
             public String apply(Player input) {
                 return input.getName();
             }
+        };
+        public static Function<Player, Integer> FN_GET_LIFE_TOTAL = new Function<Player, Integer>() {
+        	@Override
+        	public Integer apply(Player input) {
+        		return input.getLife();
+        	}
+        };
+        public static Function<Player, Integer> FN_GET_POISON_COUNTERS = new Function<Player, Integer>() {
+        	@Override
+        	public Integer apply(Player input) {
+        		return input.getPoisonCounters();
+        	}
         };
     }
 
