@@ -2,7 +2,7 @@ Name:Falkenrath Torturer
 ManaCost:2 B
 Types:Creature Vampire
 PT:2/1
-A:AB$ Pump | Cost$ Sac<1/Creature> | KW$ Flying | SubAbility$ DBPutCounter | SpellDescription$ CARDNAME gains flying until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
+A:AB$ Pump | Cost$ Sac<1/Creature> | Defined$ Self | KW$ Flying | SubAbility$ DBPutCounter | SpellDescription$ CARDNAME gains flying until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
 SVar:DBPutCounter:DB$PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | CounterNum$ 1 | CounterType$ P1P1 | References$ X
 SVar:X:Sacrificed$Valid Human
 SVar:RemAIDeck:True

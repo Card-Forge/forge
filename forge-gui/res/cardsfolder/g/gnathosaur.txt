@@ -2,7 +2,7 @@ Name:Gnathosaur
 ManaCost:4 R R
 Types:Creature Lizard
 PT:5/4
-A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnathosaur.jpg
 Oracle:Sacrifice an artifact: Gnathosaur gains trample until end of turn.

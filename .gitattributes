@@ -6406,7 +6406,6 @@ forge-gui/res/cardsfolder/g/gwafa_hazid_profiteer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gwendlyn_di_corci.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gwyllion_hedge_mage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/gyre_sage.txt -text
-forge-gui/res/cardsfolder/g/skarrg_goliath.txt -text
 forge-gui/res/cardsfolder/h/haakon_stromgald_scourge.txt -text
 forge-gui/res/cardsfolder/h/haakon_stromgald_scourge_avatar.txt -text
 forge-gui/res/cardsfolder/h/haazda_exonerator.txt svneol=native#text/plain
@@ -11999,6 +11998,7 @@ forge-gui/res/cardsfolder/s/sivvis_ruse.txt -text
 forge-gui/res/cardsfolder/s/sizzle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skaab_goliath.txt -text
 forge-gui/res/cardsfolder/s/skaab_ruinator.txt -text
+forge-gui/res/cardsfolder/s/skarrg_goliath.txt -text
 forge-gui/res/cardsfolder/s/skarrg_guildmage.txt -text
 forge-gui/res/cardsfolder/s/skarrg_the_rage_pits.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skarrgan_firebird.txt -text

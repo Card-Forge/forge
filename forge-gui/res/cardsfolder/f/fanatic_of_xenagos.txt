@@ -5,7 +5,7 @@ PT:3/3
 K:Trample
 K:Tribute 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
-SVar:TrigNotTribute:AB$ Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | KW$ Haste
+SVar:TrigNotTribute:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Haste
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatic_of_xenagos.jpg
 Oracle:Trample\nTribute 1 (As this creature enters the battlefield, an opponent of your choice may place a +1/+1 counter on it.)\nWhen Fanatic of Xenagos enters the battlefield, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
