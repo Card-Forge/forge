@@ -260,5 +260,19 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             }
             return false;
         }
+
+        public void buildCardPanelList(List<? super FCardPanel> list) {
+            if (!attachedPanels.isEmpty()) {
+                for (int i = attachedPanels.size() - 1; i >= 0; i--) {
+                    attachedPanels.get(i).buildCardPanelList(list);
+                }
+            }
+
+            list.add(this);
+
+            if (nextPanelInStack != null) {
+                nextPanelInStack.buildCardPanelList(list);
+            }
+        }
     }
 }

@@ -45,7 +45,7 @@ public class TargetingOverlay {
     // TODO - this is called every repaint, regardless if card
     // positions have changed or not.  Could perform better if
     // it checked for a state change.
-    private void assembleArcs(Combat combat) {
+    private void assembleArcs() {
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
         arcsCombat.clear();
         arcsOther.clear();
@@ -53,7 +53,7 @@ public class TargetingOverlay {
 
         for (VPlayerPanel pnl : FControl.getView().getPlayerPanels().values()) {
             for (CardAreaPanel cardPanel : pnl.getField().getCardPanels()) {
-                cardPanels.add(cardPanel);
+                cardPanel.buildCardPanelList(cardPanels);
             }
         }
 
@@ -66,6 +66,8 @@ public class TargetingOverlay {
                     cardScreenPos.x + c.getWidth() / 4,
                     cardScreenPos.y + c.getHeight() / 2));
         }
+
+        final Combat combat = FControl.getGame().getCombat();
 
         // Work with all card panels currently visible
         List<Card> visualized = new ArrayList<Card>();
@@ -254,10 +256,7 @@ public class TargetingOverlay {
     }
 
     public void draw(final Graphics g) {
-        final Combat combat = FControl.getGame().getCombat();
-
-        // Arc drawing
-        assembleArcs(combat);
+        assembleArcs();
 
         if (arcsCombat.isEmpty() && arcsOther.isEmpty()) { return; }
 
