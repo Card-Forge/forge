@@ -2,7 +2,7 @@ Name:Crazed Armodon
 ManaCost:2 G G
 Types:Creature Elephant
 PT:3/3
-A:AB$ Pump | Cost$ G | NumAtt$ +3 | KW$ Trample | ActivationLimit$ 1 | SubAbility$ DBDelayTrig | SpellDescription$ CARDNAME gets +3/+0 and gains trample until end of turn. Destroy Crazed Armodon at the beginning of the next end step. Activate this ability only once each turn.
+A:AB$ Pump | Cost$ G | Defined$ Self | NumAtt$ +3 | KW$ Trample | ActivationLimit$ 1 | SubAbility$ DBDelayTrig | SpellDescription$ CARDNAME gets +3/+0 and gains trample until end of turn. Destroy Crazed Armodon at the beginning of the next end step. Activate this ability only once each turn.
 SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigDestroy | TriggerDescription$ Destroy that creature at the beginning of the next end step. | AILogic$ Always
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True

@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Snow Creature Griffin
 PT:3/2
 K:Flying
-A:AB$ Pump | Cost$ S | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ S | KW$ First Strike | Defined$ Self | SpellDescription$ CARDNAME gains first strike until end of turn.
 # AI can now use snow mana to pay for activated abilities.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_griffin.jpg
