@@ -43,8 +43,12 @@ public class Graphics {
     }
 
     public void end() {
-        batch.end();
-        shapeRenderer.end();
+        if (batch.isDrawing()) {
+            batch.end();
+        }
+        if (shapeRenderer.getCurrentType() != null) {
+            shapeRenderer.end();
+        }
     }
 
     public void dispose() {
@@ -127,6 +131,50 @@ public class Graphics {
         if (thickness > 1) {
             Gdx.gl.glLineWidth(1);
         }
+
+        batch.begin();
+    }
+
+    public void drawArrow(float thickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        drawArrow(thickness, skinColor.getColor(), x1, y1, x2, y2);
+    }
+    public void drawArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+        float ex = x2 - x1;
+        float ey = y2 - y1;
+        if (ex == 0 && ey == 0) { return; }
+
+        float length = (float) Math.sqrt(ex * ex + ey * ey);
+        float bendPercent = (float) Math.asin(ey / length);
+
+        if (ex > 0) {
+            bendPercent = -bendPercent;
+        }
+
+        batch.end(); //must pause batch while rendering shapes
+
+        if (alphaComposite < 1) {
+            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+        }
+        Gdx.gl.glEnable(GL_BLEND);
+        Gdx.gl.glEnable(GL_LINE_SMOOTH);
+
+        x1 = adjustX(x1);
+        y1 = adjustY(y1, 0);
+        x2 = adjustX(x2);
+        y2 = adjustY(y2, 0);
+
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(color);
+        shapeRenderer.rectLine(x1, y1, x2, y2, thickness);
+        endShape();
+
+        startShape(ShapeType.Line);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rectLine(x1, y1, x2, y2, thickness);
+        endShape();
+
+        Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        Gdx.gl.glDisable(GL_BLEND);
 
         batch.begin();
     }

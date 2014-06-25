@@ -222,21 +222,6 @@ public class TargetingOverlay {
         return area;
     }*/
 
-    private void drawArrow(Graphics g, FSkinColor color, float startX, float startY, float endX, float endY) {
-        float ex = endX - startX;
-        float ey = endY - startY;
-        if (ex == 0 && ey == 0) { return; }
-
-        float length = (float) Math.sqrt(ex * ex + ey * ey);
-        float bendPercent = (float) Math.asin(ey / length);
-
-        if (endX > startX) {
-            bendPercent = -bendPercent;
-        }
-
-        g.drawLine(4, color, startX, startY, endX, endY);
-    }
-
     public void drawArcs(Graphics g, FSkinColor color, List<Vector2[]> arcs) {
         for (Vector2[] p : arcs) {
             if (p[0] == null || p[1] == null) {
@@ -248,7 +233,7 @@ public class TargetingOverlay {
             float startX = p[1].x;
             float startY = p[1].y;
 
-            drawArrow(g, color, startX, startY, endX, endY);
+            g.drawArrow(5, color, startX, startY, endX, endY);
         }
     }
 
