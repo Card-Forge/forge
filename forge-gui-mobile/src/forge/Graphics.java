@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
@@ -139,17 +140,6 @@ public class Graphics {
         drawArrow(thickness, skinColor.getColor(), x1, y1, x2, y2);
     }
     public void drawArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
-        float ex = x2 - x1;
-        float ey = y2 - y1;
-        if (ex == 0 && ey == 0) { return; }
-
-        float length = (float) Math.sqrt(ex * ex + ey * ey);
-        float bendPercent = (float) Math.asin(ey / length);
-
-        if (ex > 0) {
-            bendPercent = -bendPercent;
-        }
-
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -158,20 +148,29 @@ public class Graphics {
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glEnable(GL_LINE_SMOOTH);
 
-        x1 = adjustX(x1);
-        y1 = adjustY(y1, 0);
-        x2 = adjustX(x2);
-        y2 = adjustY(y2, 0);
+        float arrowSize = 3 * thickness;
+        float angle = new Vector2(x2 - x1, y2 - y1).angleRad();
+        float rotation = (float)(Math.PI * 0.8f);
 
+        //draw arrow tail
         startShape(ShapeType.Filled);
         shapeRenderer.setColor(color);
-        shapeRenderer.rectLine(x1, y1, x2, y2, thickness);
+        shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
+                adjustX(x2 - arrowSize * (float)Math.cos(angle) / 2), //shorten tail to make room for arrow head
+                adjustY(y2 - arrowSize * (float)Math.sin(angle) / 2, 0), thickness);
+
+        //draw arrow head
+        shapeRenderer.triangle(adjustX(x2), adjustY(y2, 0),
+                adjustX(x2 + arrowSize * (float)Math.cos(angle + rotation)),
+                adjustY(y2 + arrowSize * (float)Math.sin(angle + rotation), 0),
+                adjustX(x2 + arrowSize * (float)Math.cos(angle - rotation)),
+                adjustY(y2 + arrowSize * (float)Math.sin(angle - rotation), 0));
         endShape();
 
-        startShape(ShapeType.Line);
+        /*startShape(ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rectLine(x1, y1, x2, y2, thickness);
-        endShape();
+        shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
+        endShape();*/
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
         Gdx.gl.glDisable(GL_BLEND);
