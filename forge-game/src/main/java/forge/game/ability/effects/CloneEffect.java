@@ -124,9 +124,11 @@ public class CloneEffect extends SpellAbilityEffect {
         	cardToCopy.setState(origState);
         }
 
-        // must call this before addAbilityFactoryAbilities so cloned added abilities are handled correctly
-        addExtraCharacteristics(tgtCard, sa, origSVars);
+        // must copy abilities before first so cloned added abilities are handled correctly
         CardFactory.copyCopiableAbilities(cardToCopy, tgtCard);
+        
+        // add extra abilities as granted by the copy effect
+        addExtraCharacteristics(tgtCard, sa, origSVars);
 
         // restore name if it should be unchanged
         if (keepName) {
