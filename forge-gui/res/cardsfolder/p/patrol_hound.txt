@@ -2,6 +2,6 @@ Name:Patrol Hound
 ManaCost:1 W
 Types:Creature Hound
 PT:2/2
-A:AB$ Pump | Cost$ Discard<1/Card> | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patrol_hound.jpg
 Oracle:Discard a card: Patrol Hound gains first strike until end of turn.
