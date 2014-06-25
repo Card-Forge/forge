@@ -999,10 +999,11 @@ public class CardFactoryUtil {
         if (sq[0].equals("TotalDamageReceivedThisTurn"))    return doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
 
         if (sq[0].contains("YourPoisonCounters"))           return doXMath(cc.getPoisonCounters(), m, c);
-        if (sq[0].contains("TotalOppPoisonCounters"))            return doXMath(cc.getOpponentsTotalPoisonCounters(), m, c);
+        if (sq[0].contains("TotalOppPoisonCounters"))       return doXMath(cc.getOpponentsTotalPoisonCounters(), m, c);
 
-        if (sq[0].contains("OppDamageThisTurn"))            return doXMath(ccOpp.getAssignedDamage(), m, c);
         if (sq[0].contains("YourDamageThisTurn"))           return doXMath(cc.getAssignedDamage(), m, c);
+        if (sq[0].contains("TotalOppDamageThisTurn"))       return doXMath(cc.getOpponentsAssignedDamage(), m, c);
+        if (sq[0].contains("MaxOppDamageThisTurn"))         return doXMath(cc.getMaxOpponentAssignedDamage(), m, c);
 
         // Count$YourTypeDamageThisTurn Type
         if (sq[0].contains("YourTypeDamageThisTurn"))       return doXMath(cc.getAssignedDamage(sq[0].split(" ")[1]), m, c);
@@ -1014,7 +1015,6 @@ public class CardFactoryUtil {
         }
         
         if (sq[0].contains("YourLandsPlayed"))              return doXMath(cc.getNumLandsPlayed(), m, c);
-        if (sq[0].contains("OppLandsPlayed"))               return doXMath(ccOpp.getNumLandsPlayed(), m, c);
 
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {

@@ -1023,6 +1023,24 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return num;
     }
+    
+    /**
+     * Get the total damage assigned to this player's opponents this turn.
+     * 
+     * @return the total damage assigned to this player's opponents this turn.
+     */
+    public final int getOpponentsAssignedDamage() {
+    	return Aggregates.sum(this.getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+    }
+    
+    /**
+     * Get the greatest amount of damage assigned to a single opponent this turn.
+     * 
+     * @return the greatest amount of damage assigned to a single opponent this turn.
+     */
+    public final int getMaxOpponentAssignedDamage() {
+    	return Aggregates.max(this.getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+    }
 
     /**
      * <p>
@@ -2736,6 +2754,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         	@Override
         	public Integer apply(Player input) {
         		return input.getPoisonCounters();
+        	}
+        };
+        public static final Function<Player, Integer> FN_GET_ASSIGNED_DAMAGE = new Function<Player, Integer>() {
+        	@Override
+        	public Integer apply(Player input) {
+        		return input.getAssignedDamage();
         	}
         };
     }
