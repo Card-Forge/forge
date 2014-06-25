@@ -19,6 +19,7 @@ package forge.game.card;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.card.CardCharacteristicName;
@@ -771,11 +772,9 @@ public class CardFactoryUtil {
         if (StringUtils.isNumeric(expression)) return Integer.parseInt(expression);
 
         final Player cc = c.getController();
-        final Player ccOpp = cc.getOpponent();
         final Game game = c.getGame();
         final Player activePlayer = game.getPhaseHandler().getPlayerTurn();
         
-
         final String[] l = expression.split("/");
         final String m = extractOperators(expression);
 
@@ -1287,10 +1286,9 @@ public class CardFactoryUtil {
             final boolean isMulti = CardUtil.getColors(c).isMulticolor(); 
             return doXMath(Integer.parseInt(sq[isMulti ? 1 : 2]), m, c);
         }
-
         
         // Complex counting methods
-        List<Card> someCards = getCardListForXCount(c, cc, ccOpp, sq);
+        List<Card> someCards = getCardListForXCount(c, cc, sq);
         
         // 1/10 - Count$MaxCMCYouCtrl
         if (sq[0].contains("MaxCMC")) {
@@ -1301,8 +1299,9 @@ public class CardFactoryUtil {
         return doXMath(someCards.size(), m, c);
     }
 
-    private static List<Card> getCardListForXCount(final Card c, final Player cc, final Player ccOpp, final String[] sq) {
-        List<Card> someCards = new ArrayList<Card>();
+    private static List<Card> getCardListForXCount(final Card c, final Player cc, final String[] sq) {
+    	final List<Player> opps = cc.getOpponents();
+        Collection<Card> someCards = Sets.newHashSet(); // a set to prevent double counting
         final Game game = c.getGame();
         
         // Generic Zone-based counting
@@ -1310,91 +1309,62 @@ public class CardFactoryUtil {
 
         // build a list of cards in each possible specified zone
 
-        // if a card was ever written to count two different zones,
-        // make sure they don't get added twice.
-        boolean mf = false, my = false, mh = false;
-        boolean of = false, oy = false, oh = false;
-
-        if (sq[0].contains("YouCtrl") && !mf) {
+        if (sq[0].contains("YouCtrl")) {
             someCards.addAll(cc.getCardsIn(ZoneType.Battlefield));
-            mf = true;
         }
 
-        if (sq[0].contains("InYourYard") && !my) {
+        if (sq[0].contains("InYourYard")) {
             someCards.addAll(cc.getCardsIn(ZoneType.Graveyard));
-            my = true;
         }
 
-        if (sq[0].contains("InYourLibrary") && !my) {
+        if (sq[0].contains("InYourLibrary")) {
             someCards.addAll(cc.getCardsIn(ZoneType.Library));
-            my = true;
         }
 
-        if (sq[0].contains("InYourHand") && !mh) {
+        if (sq[0].contains("InYourHand")) {
             someCards.addAll(cc.getCardsIn(ZoneType.Hand));
-            mh = true;
         }
 
-        if (sq[0].contains("InYourSideboard") && !mh) {
+        if (sq[0].contains("InYourSideboard")) {
             someCards.addAll(cc.getCardsIn(ZoneType.Sideboard));
-            mh = true;
         }
 
         if (sq[0].contains("OppCtrl")) {
-            if (!of) {
-                someCards.addAll(ccOpp.getCardsIn(ZoneType.Battlefield));
-                of = true;
-            }
+        	for (final Player p : opps) {
+        		someCards.addAll(p.getZone(ZoneType.Battlefield).getCards());
+        	}
         }
 
         if (sq[0].contains("InOppYard")) {
-            if (!oy) {
-                someCards.addAll(ccOpp.getCardsIn(ZoneType.Graveyard));
-                oy = true;
-            }
+        	for (final Player p : opps) {
+        		someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
+        	}
         }
 
         if (sq[0].contains("InOppHand")) {
-            if (!oh) {
-                someCards.addAll(ccOpp.getCardsIn(ZoneType.Hand));
-                oh = true;
-            }
+        	for (final Player p : opps) {
+        		someCards.addAll(p.getCardsIn(ZoneType.Hand));
+        	}
         }
 
         if (sq[0].contains("InChosenHand")) {
-            if (!oh) {
-                if (c.getChosenPlayer() != null) {
-                    someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-                }
-                oh = true;
-            }
+        	if (c.getChosenPlayer() != null) {
+        		someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
+        	}
         }
 
         if (sq[0].contains("InChosenYard")) {
-            if (!oh) {
-                if (c.getChosenPlayer() != null) {
-                    someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-                }
-                oh = true;
-            }
+        	if (c.getChosenPlayer() != null) {
+        		someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
+        	}
         }
 
         if (sq[0].contains("OnBattlefield")) {
-            if (!mf) {
-                someCards.addAll(cc.getCardsIn(ZoneType.Battlefield));
-            }
-            if (!of) {
-                someCards.addAll(ccOpp.getCardsIn(ZoneType.Battlefield));
-            }
+        	someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
         }
 
         if (sq[0].contains("InAllYards")) {
-            if (!my) {
-                someCards.addAll(cc.getCardsIn(ZoneType.Graveyard));
-            }
-            if (!oy) {
-                someCards.addAll(ccOpp.getCardsIn(ZoneType.Graveyard));
-            }
+        	someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
         }
 
         if (sq[0].contains("SpellsOnStack")) {
@@ -1402,12 +1372,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("InAllHands")) {
-            if (!mh) {
-                someCards.addAll(cc.getCardsIn(ZoneType.Hand));
-            }
-            if (!oh) {
-                someCards.addAll(ccOpp.getCardsIn(ZoneType.Hand));
-            }
+        	someCards.addAll(game.getCardsIn(ZoneType.Hand));
         }
 
         //  Count$InTargetedHand (targeted player's cards in hand)
@@ -1449,6 +1414,7 @@ public class CardFactoryUtil {
                 someCards.addAll(controller.getCardsIn(ZoneType.Graveyard));
             }
         }
+        
         // filter lists based on the specified quality
 
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
@@ -1501,7 +1467,8 @@ public class CardFactoryUtil {
                 }
             });
         }
-        return someCards;
+
+        return Lists.newArrayList(someCards);
     }
 
     public static int doXMath(final int num, final String operators, final Card c) {
