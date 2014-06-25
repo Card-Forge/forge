@@ -61,10 +61,7 @@ public class TargetingOverlay {
         final Map<Integer, Vector2> endpoints = new HashMap<Integer, Vector2>();
 
         for (FCardPanel c : cardPanels) {
-            Vector2 cardScreenPos = c.getScreenPosition();
-            endpoints.put(c.getCard().getUniqueNumber(), new Vector2(
-                    cardScreenPos.x + c.getWidth() / 4,
-                    cardScreenPos.y + c.getHeight() / 2));
+            endpoints.put(c.getCard().getUniqueNumber(), c.getTargetingArrowOrigin());
         }
 
         final Combat combat = FControl.getGame().getCombat();
