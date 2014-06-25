@@ -79,6 +79,12 @@ public class StaticAbilityCantAttackBlock {
                 && defender.equals(hostCard.getGame().getNextPlayerAfter(card.getController(), hostCard.getChosenDirection()))) {
             return false;
         }
+        if (params.containsKey("UnlessDefender")) {
+        	final String type = params.get("UnlessDefender");
+        	if (defender.hasProperty(type, hostCard.getController(), hostCard)) {
+        		return false;
+        	}
+        }
 
         return true;
     }

@@ -961,7 +961,17 @@ public class CardFactoryUtil {
         
 
         if (sq[0].contains("YourLifeTotal"))        return doXMath(cc.getLife(), m, c);
-        if (sq[0].contains("OppLifeTotal"))         return doXMath(ccOpp.getLife(), m, c);
+        if (sq[0].contains("OppGreatestLifeTotal")) return doXMath(cc.getOpponentsGreatestLifeTotal(), m, c);
+        if (sq[0].contains("OppsAtLifeTotal")) {
+        	final int lifeTotal = xCount(c, sq[1]);
+        	int number = 0;
+        	for (final Player opp : cc.getOpponents()) {
+        		if (opp.getLife() == lifeTotal) {
+        			number++;
+        		}
+        	}
+        	return doXMath(number, m, c);
+        }
 
         //  Count$TargetedLifeTotal (targeted player's life total)
         if (sq[0].contains("TargetedLifeTotal")) {

@@ -302,6 +302,22 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * Find the greatest life total amongst this player's opponents.
+     * 
+     * @return the life total of the opponent with the most life.
+     */
+    public final int getOpponentsGreatestLifeTotal() {
+    	final List<Player> opps = this.getOpponents();
+    	int greatestLifeTotal = Integer.MIN_VALUE;
+    	for (final Player p : opps) {
+    		if (p.getLife() > greatestLifeTotal) {
+    			greatestLifeTotal = p.getLife();
+    		}
+    	}
+    	return greatestLifeTotal;
+    }
+
+    /**
      * returns allied players.
      * Should keep player relations somewhere in the match structure
      * @return
@@ -2407,6 +2423,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (this.getLife() != life) {
                 return false;
             }
+        } else if (property.equals("IsPoisoned")) {
+        	if (this.getPoisonCounters() <= 0) {
+        		return false;
+        	}
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
@@ -2426,7 +2446,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (property.startsWith("hasMore")) {
-            final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            final Player controller = property.contains("Than") && "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             if (property.substring(7).startsWith("Life") && this.getLife() <= controller.getLife()) {
                 return false;
             } else if (property.substring(7).startsWith("CardsInHand")

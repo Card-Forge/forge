@@ -392,8 +392,13 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     continue;
                 }
+            } else if ("OppAtTenLife".equals(sa.getParam("AILogic"))) {
+            	for (final Player p : ai.getOpponents()) {
+            		if (sa.canTarget(p) && p.getLife() == 10 && tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+            			tcs.add(p);
+            		}
+            	}
             }
-
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
             else if (sa.canTarget(enemy)) {
