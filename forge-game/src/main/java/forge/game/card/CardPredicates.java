@@ -50,7 +50,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return pList.contains((Player) c.getController());
+                return pList.contains(c.getController());
             }
         };
     }
