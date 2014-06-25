@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Juggernaut
 PT:1/5
 K:Trample
-A:AB$ Pump | Cost$ 3 | KW$ Banding | SpellDescription$ CARDNAME gains banding until end of turn.
+A:AB$ Pump | Cost$ 3 | Defined$ Self | KW$ Banding | SpellDescription$ CARDNAME gains banding until end of turn.
 A:AB$ PumpAll | Cost$ 3 | ValidCards$ Creature.attackersBandedWith | KW$ Trample | SpellDescription$ Attacking creatures banded with Urza's Engine gain trample until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_engine.jpg
