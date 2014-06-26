@@ -136,10 +136,10 @@ public class Graphics {
         batch.begin();
     }
 
-    public void drawArrow(float thickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-        drawArrow(thickness, arrowSize, skinColor.getColor(), x1, y1, x2, y2);
+    public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        drawArrow(borderThickness, arrowThickness, arrowSize, skinColor.getColor(), x1, y1, x2, y2);
     }
-    public void drawArrow(float thickness, float arrowSize, Color color, float x1, float y1, float x2, float y2) {
+    public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, Color color, float x1, float y1, float x2, float y2) {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -151,13 +151,15 @@ public class Graphics {
         float angle = new Vector2(x2 - x1, y2 - y1).angleRad();
         float perpRotation = (float)(Math.PI * 0.5f);
         float arrowHeadRotation = (float)(Math.PI * 0.8f);
-        float halfThickness = thickness / 2;
+        float arrowTipAngle = (float)(Math.PI - arrowHeadRotation);
+        float halfThickness = arrowThickness / 2;
 
         int index = 0;
         float[] vertices = new float[14];
         Vector2 arrowCorner1 = new Vector2(x2 + arrowSize * (float)Math.cos(angle + arrowHeadRotation), y2 + arrowSize * (float)Math.sin(angle + arrowHeadRotation));
         Vector2 arrowCorner2 = new Vector2(x2 + arrowSize * (float)Math.cos(angle - arrowHeadRotation), y2 + arrowSize * (float)Math.sin(angle - arrowHeadRotation));
-        float arrowCornerLen = (arrowCorner1.dst(arrowCorner2) - thickness) / 2;
+        float arrowCornerLen = (arrowCorner1.dst(arrowCorner2) - arrowThickness) / 2;
+        float arrowHeadLen = arrowSize * (float)Math.cos(arrowTipAngle);
         index = addVertex(arrowCorner1.x, arrowCorner1.y, vertices, index);
         index = addVertex(x2, y2, vertices, index);
         index = addVertex(arrowCorner2.x, arrowCorner2.y, vertices, index);
@@ -170,18 +172,24 @@ public class Graphics {
         startShape(ShapeType.Filled);
         shapeRenderer.setColor(color);
         shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0),
-                adjustX(x2 - arrowSize * (float)Math.cos(angle) / 2), //shorten tail to make room for arrow head
-                adjustY(y2 - arrowSize * (float)Math.sin(angle) / 2, 0), thickness);
+                adjustX(x2 - arrowHeadLen * (float)Math.cos(angle)), //shorten tail to make room for arrow head
+                adjustY(y2 - arrowHeadLen * (float)Math.sin(angle), 0), arrowThickness);
 
         //draw arrow head
         shapeRenderer.triangle(vertices[0], vertices[1], vertices[2], vertices[3], vertices[4], vertices[5]);
         endShape();
 
         //draw border around arrow
+        if (borderThickness > 1) {
+            Gdx.gl.glLineWidth(borderThickness);
+        }
         startShape(ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.polygon(vertices);
         endShape();
+        if (borderThickness > 1) {
+            Gdx.gl.glLineWidth(1);
+        }
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
         Gdx.gl.glDisable(GL_BLEND);

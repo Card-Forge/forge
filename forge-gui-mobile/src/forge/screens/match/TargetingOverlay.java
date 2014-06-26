@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class TargetingOverlay {
+    private static final float BORDER_THICKNESS = Utils.scaleMin(1);
     private static final float ARROW_THICKNESS = Utils.scaleMax(5);
     private static final float ARROW_SIZE = 3 * ARROW_THICKNESS;
     private static FSkinColor friendColor, foeColor;
@@ -67,6 +68,6 @@ public class TargetingOverlay {
         if (start == null || end == null) { return; }
 
         FSkinColor color = connectsFoes ? foeColor : friendColor;
-        g.drawArrow(ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
+        g.drawArrow(BORDER_THICKNESS, ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
     }
 }
