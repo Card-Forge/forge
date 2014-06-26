@@ -4,8 +4,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.cache.CacheLoader;
 
+import forge.Forge;
 import forge.ImageKeys;
-import forge.error.BugReporter;
 import forge.properties.ForgeConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,28 +22,34 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         if (StringUtils.isEmpty(key)) {
             return null;
         }
-        
+
         final String path;
         final String filename;
         if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
             filename = key.substring(ImageKeys.TOKEN_PREFIX.length());
             path = ForgeConstants.CACHE_TOKEN_PICS_DIR;
-        } else if (key.startsWith(ImageKeys.ICON_PREFIX)) {
+        }
+        else if (key.startsWith(ImageKeys.ICON_PREFIX)) {
             filename = key.substring(ImageKeys.ICON_PREFIX.length());
             path = ForgeConstants.CACHE_ICON_PICS_DIR;
-        } else if (key.startsWith(ImageKeys.BOOSTER_PREFIX)) {
+        }
+        else if (key.startsWith(ImageKeys.BOOSTER_PREFIX)) {
             filename = key.substring(ImageKeys.BOOSTER_PREFIX.length());
             path = ForgeConstants.CACHE_BOOSTER_PICS_DIR;
-        } else if (key.startsWith(ImageKeys.FATPACK_PREFIX)) {
+        }
+        else if (key.startsWith(ImageKeys.FATPACK_PREFIX)) {
             filename = key.substring(ImageKeys.FATPACK_PREFIX.length());
             path = ForgeConstants.CACHE_FATPACK_PICS_DIR;
-        } else if (key.startsWith(ImageKeys.PRECON_PREFIX)) {
+        }
+        else if (key.startsWith(ImageKeys.PRECON_PREFIX)) {
             filename = key.substring(ImageKeys.PRECON_PREFIX.length());
             path = ForgeConstants.CACHE_PRECON_PICS_DIR;
-        } else if (key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
+        }
+        else if (key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
             filename = key.substring(ImageKeys.TOURNAMENTPACK_PREFIX.length());
             path = ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR;
-        } else {
+        }
+        else {
             filename = key;
             path = ForgeConstants.CACHE_CARD_PICS_DIR;
         }
@@ -85,13 +91,14 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                 //System.out.println(String.format("Found %s at: %s", key, file.getAbsolutePath()));
                 try {
                     return new Texture(new FileHandle(file));
-                } catch (Exception ex) {
-                    BugReporter.reportException(ex, "Could not read image file " + file.getAbsolutePath() + " ");
+                }
+                catch (Exception ex) {
+                    Forge.log("Could not read image file " + file.getAbsolutePath() + "\n\nException:\n" + ex.toString());
                     break;
                 }
             }
         }
-        
+
         return null;
     }
 }
