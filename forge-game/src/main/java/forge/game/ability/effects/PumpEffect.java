@@ -92,7 +92,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 game.getEndOfTurn().addUntil(untilEOT);
             }
         }
-        sa.getActivatingPlayer().getGame().fireEvent(new GameEventCardStatsChanged(applyTo));
+        game.fireEvent(new GameEventCardStatsChanged(applyTo));
     }
 
     private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords) {

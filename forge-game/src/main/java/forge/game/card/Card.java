@@ -1223,9 +1223,17 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         this.setTotalCountersToAdd(addAmount);
 
+        int powerBonusBefore = this.getPowerBonusFromCounters();
+        int toughnessBonusBefore = this.getToughnessBonusFromCounters();
+
         Integer oldValue = this.counters.get(counterType);
         int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
         this.counters.put(counterType, Integer.valueOf(newValue));
+
+        //fire card stats changed event if p/t bonuses changed from added counters
+        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters()) {
+            getGame().fireEvent(new GameEventCardStatsChanged(this));
+        }
 
         // play the Add Counter sound
         getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue.intValue(), newValue));
@@ -1290,10 +1298,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             return;
         }
 
+        int powerBonusBefore = this.getPowerBonusFromCounters();
+        int toughnessBonusBefore = this.getToughnessBonusFromCounters();
+
         if (newValue > 0) {
             this.counters.put(counterName, Integer.valueOf(newValue));
-        } else {
+        }
+        else {
             this.counters.remove(counterName);
+        }
+
+        //fire card stats changed event if p/t bonuses changed from subtracted counters
+        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters()) {
+            getGame().fireEvent(new GameEventCardStatsChanged(this));
         }
 
         // Play the Subtract Counter sound
@@ -7259,10 +7276,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void setDamage(final int n) {
-        int oldDamae = damage;
+        int oldDamage = damage;
         this.damage = n;
-        if (n != oldDamae)
+        if (n != oldDamage) {
             getGame().fireEvent(new GameEventCardStatsChanged(this));
+        }
     }
 
     /**
