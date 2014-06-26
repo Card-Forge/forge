@@ -130,6 +130,10 @@ public abstract class FDropDown extends FScrollPane {
         g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
     }
 
+    protected boolean drawAboveOverlay() {
+        return true; //draw drop downs above screen overlay by default
+    }
+
     @Override
     protected void drawOverlay(Graphics g) {
         float w = getWidth();

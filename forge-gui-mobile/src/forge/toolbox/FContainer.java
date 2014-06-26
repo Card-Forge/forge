@@ -39,8 +39,15 @@ public abstract class FContainer extends FDisplayObject {
 
     public void draw(Graphics g) {
         drawBackground(g);
+
+        boolean needOverlayDrawn = true;
         for (FDisplayObject child : children) {
             if (child.isVisible()) {
+                if (child.drawAboveOverlay() && needOverlayDrawn) {
+                    drawOverlay(g);
+                    needOverlayDrawn = false;
+                }
+
                 final boolean disabled = !child.isEnabled();
                 if (disabled) {
                     g.setAlphaComposite(DISABLED_COMPOSITE);
@@ -51,9 +58,14 @@ public abstract class FContainer extends FDisplayObject {
                 if (disabled) {
                     g.resetAlphaComposite();
                 }
+
+                child.drawOnContainer(g); //give child an additional chance to draw additional content on container outside its bounds
             }
         }
-        drawOverlay(g);
+
+        if (needOverlayDrawn) {
+            drawOverlay(g);
+        }
     }
 
     protected void drawOverlay(Graphics g) {

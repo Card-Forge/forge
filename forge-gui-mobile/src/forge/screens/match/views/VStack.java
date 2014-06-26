@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -16,11 +17,13 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
+import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
@@ -111,7 +114,36 @@ public class VStack extends FDropDown {
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
     }
 
-    public class StackInstanceDisplay extends FDisplayObject {
+    @Override
+    protected void drawOnContainer(Graphics g) {
+        //draw target arrows immediately above stack
+        for (FDisplayObject child : getChildren()) {
+            Vector2 arrowOrigin = new Vector2(
+                    child.getLeft() + VStack.CARD_WIDTH * FCardPanel.TARGET_ORIGIN_FACTOR_X + VStack.PADDING,
+                    child.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING);
+
+            if (arrowOrigin.y < 0) {
+                continue; //don't draw arrow scrolled off top
+            }
+            if (arrowOrigin.y > getHeight()) {
+                break; //don't draw arrow scrolled off bottom
+            }
+
+            SpellAbilityStackInstance stackInstance = ((StackInstanceDisplay)child).getStackInstance();
+            TargetChoices targets = stackInstance.getSpellAbility().getTargets();
+            Player activator = stackInstance.getActivator();
+            arrowOrigin = arrowOrigin.add(getScreenPosition());
+
+            for (Card c : targets.getTargetCards()) {
+                TargetingOverlay.drawArrow(g, arrowOrigin, c, activator.isOpponentOf(c.getOwner()));
+            }
+            for (Player p : targets.getTargetPlayers()) {
+                TargetingOverlay.drawArrow(g, arrowOrigin, p, activator.isOpponentOf(p));
+            }
+        }
+    }
+
+    private class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private final boolean isTop;
         private final Color foreColor, backColor;

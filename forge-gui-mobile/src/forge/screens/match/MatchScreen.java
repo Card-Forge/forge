@@ -1,6 +1,7 @@
 package forge.screens.match;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -31,6 +32,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;
@@ -48,7 +51,6 @@ public class MatchScreen extends FScreen {
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
-    private final TargetingOverlay targetingOverlay = new TargetingOverlay();
 
     public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -132,7 +134,36 @@ public class MatchScreen extends FScreen {
 
     @Override
     protected void drawOverlay(Graphics g) {
-        targetingOverlay.draw(g);
+        //draw arrows for paired cards
+        HashSet<Card> pairedCards = new HashSet<Card>();
+        for (VPlayerPanel playerPanel : playerPanels.values()) {
+            for (Card card : playerPanel.getField().getRow1().getOrderedCards()) {
+                if (pairedCards.contains(card)) { continue; } //prevent arrows going both ways
+
+                Card paired = card.getPairedWith();
+                if (paired != null) {
+                    TargetingOverlay.drawArrow(g, card, paired);
+                }
+            }
+        }
+
+        //draw arrows for combat
+        final Combat combat = FControl.getGame().getCombat();
+        if (combat != null) {
+            //connect each attacker with planeswalker it's attacking if applicable
+            for (Card planeswalker : combat.getDefendingPlaneswalkers()) {
+                for (Card attacker : combat.getAttackersOf(planeswalker)) {
+                    TargetingOverlay.drawArrow(g, attacker, planeswalker);
+                }
+            }
+
+            //connect each blocker with the attacker it's blocking
+            for (Card blocker : combat.getAllBlockers()) {
+                for (Card attacker : combat.getAttackersBlockedBy(blocker)) {
+                    TargetingOverlay.drawArrow(g, blocker, attacker);
+                }
+            }
+        }
     }
 
     @Override

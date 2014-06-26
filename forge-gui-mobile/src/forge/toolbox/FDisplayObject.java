@@ -92,6 +92,16 @@ public abstract class FDisplayObject {
         visible = b0;
     }
 
+    //override to return true if drawOverlay should be called on container before drawing this object
+    protected boolean drawAboveOverlay() {
+        return false;
+    }
+
+    //override if anything should be drawn at the container level immediately after this object is drawn
+    //this allows drawing outside the bounds of this object
+    protected void drawOnContainer(Graphics g) {
+    }
+
     public abstract void draw(Graphics g);
     public void buildTouchListeners(float screenX, float screenY, ArrayList<FDisplayObject> listeners) {
         if (enabled && contains(getLeft() + screenToLocalX(screenX), getTop() + screenToLocalY(screenY))) {
