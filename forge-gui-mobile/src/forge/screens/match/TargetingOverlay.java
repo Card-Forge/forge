@@ -43,6 +43,19 @@ import java.util.List;
 public class TargetingOverlay {
     private static final float ARROW_THICKNESS = Utils.scaleMax(5);
     private static final float ARROW_SIZE = 3 * ARROW_THICKNESS;
+    private static FSkinColor friendColor, foeColor;
+
+    public static void updateColors() {
+        friendColor = FSkinColor.get(Colors.CLR_NORMAL_TARGETING_ARROW);
+        if (friendColor.getAlpha() == 0) {
+            friendColor = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(153f / 255f);
+        }
+
+        foeColor = FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW);
+        if (foeColor.getAlpha() == 0) {
+            foeColor = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
+        }
+    }
 
     private final List<Arrow> combatArrows = new ArrayList<Arrow>();
     private final List<Arrow> targetArrows = new ArrayList<Arrow>();
@@ -92,13 +105,14 @@ public class TargetingOverlay {
 
                 SpellAbilityStackInstance stackInstance = ((StackInstanceDisplay)child).getStackInstance();
                 TargetChoices targets = stackInstance.getSpellAbility().getTargets();
+                Player activator = stackInstance.getActivator();
                 arrowOrigin = arrowOrigin.add(stack.getScreenPosition());
 
                 for (Card c : targets.getTargetCards()) {
-                    targetArrows.add(new Arrow(arrowOrigin, c));
+                    targetArrows.add(new Arrow(arrowOrigin, c, activator.isOpponentOf(c.getOwner())));
                 }
                 for (Player p : targets.getTargetPlayers()) {
-                    targetArrows.add(new Arrow(arrowOrigin, p));
+                    targetArrows.add(new Arrow(arrowOrigin, p, activator.isOpponentOf(p)));
                 }
             }
         }
@@ -124,61 +138,60 @@ public class TargetingOverlay {
     public void draw(final Graphics g) {
         refreshPairArrows(); //TODO: Optimize so these don't need to be refreshed every render
         if (!pairArrows.isEmpty()) {
-            FSkinColor color = FSkinColor.get(Colors.CLR_NORMAL_TARGETING_ARROW);
-            if (color.getAlpha() == 0) {
-                color = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(153f / 255f);
-            }
             for (Arrow arrow : pairArrows) {
-                arrow.draw(g, color);
+                arrow.draw(g);
             }
         }
 
         refreshCombatArrows();
         if (!combatArrows.isEmpty()) {
-            FSkinColor color = FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW);
-            if (color.getAlpha() == 0) {
-                color = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
-            }
             for (Arrow arrow : combatArrows) {
-                arrow.draw(g, color);
+                arrow.draw(g);
             }
         }
 
         refreshTargetArrows();
         if (!targetArrows.isEmpty()) {
-            FSkinColor color = FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW); //TODO: Consider a different color for targeting
-            if (color.getAlpha() == 0) {
-                color = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
-            }
             for (Arrow arrow : targetArrows) {
-                arrow.draw(g, color);
+                arrow.draw(g);
             }
         }
     }
 
     private static class Arrow {
         private final Vector2 start, end;
+        private final boolean connectsFoes;
 
         private Arrow(Card startCard, Card endCard) {
-            this(CardAreaPanel.get(startCard).getTargetingArrowOrigin(), CardAreaPanel.get(endCard).getTargetingArrowOrigin());
+            this(CardAreaPanel.get(startCard).getTargetingArrowOrigin(),
+                    CardAreaPanel.get(endCard).getTargetingArrowOrigin(),
+                    startCard.getOwner().isOpponentOf(endCard.getOwner()));
         }
         private Arrow(Card card, Player player) {
-            this(CardAreaPanel.get(card).getTargetingArrowOrigin(), FControl.getPlayerPanel(player).getAvatar().getTargetingArrowOrigin());
+            this(CardAreaPanel.get(card).getTargetingArrowOrigin(),
+                    FControl.getPlayerPanel(player).getAvatar().getTargetingArrowOrigin(),
+                    card.getOwner().isOpponentOf(player));
         }
-        private Arrow(Vector2 start0, Card targetCard) {
-            this(start0, CardAreaPanel.get(targetCard).getTargetingArrowOrigin());
+        private Arrow(Vector2 start0, Card targetCard, boolean connectsFoes) {
+            this(start0,
+                    CardAreaPanel.get(targetCard).getTargetingArrowOrigin(),
+                    connectsFoes);
         }
-        private Arrow(Vector2 start0, Player targetPlayer) {
-            this(start0, FControl.getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin());
+        private Arrow(Vector2 start0, Player targetPlayer, boolean connectsFoes) {
+            this(start0,
+                    FControl.getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(),
+                    connectsFoes);
         }
-        private Arrow(Vector2 start0, Vector2 end0) {
+        private Arrow(Vector2 start0, Vector2 end0, boolean connectsFoes0) {
             start = start0;
             end = end0;
+            connectsFoes = connectsFoes0;
         }
-        
-        private void draw(Graphics g, FSkinColor color) {
+
+        private void draw(Graphics g) {
             if (start == null || end == null) { return; }
 
+            FSkinColor color = connectsFoes ? foeColor : friendColor;
             g.drawArrow(ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
         }
     }

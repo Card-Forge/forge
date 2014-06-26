@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.Color;
 
+import forge.screens.match.TargetingOverlay;
+
 public class FSkinColor {
     public enum Colors {
         CLR_THEME                   (FSkinProp.CLR_THEME),
@@ -237,6 +239,7 @@ public class FSkinColor {
                 c.updateColor();
             }
         }
+        TargetingOverlay.updateColors();
     }
 
     public float getAlpha() {
