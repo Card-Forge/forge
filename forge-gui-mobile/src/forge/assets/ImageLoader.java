@@ -54,13 +54,13 @@ final class ImageLoader extends CacheLoader<String, Texture> {
             path = ForgeConstants.CACHE_CARD_PICS_DIR;
         }
 
-        Texture ret = _findFile(key, path, filename);
+        Texture ret = findFile(key, path, filename);
         
         // some S00 cards are really part of 6ED
         if (null == ret ) {
             String s2kAlias = ImageUtil.getSetFolder("S00");
             if ( filename.startsWith(s2kAlias) ) {
-                ret = _findFile(key, path, filename.replace(s2kAlias, ImageUtil.getSetFolder("6ED")));
+                ret = findFile(key, path, filename.replace(s2kAlias, ImageUtil.getSetFolder("6ED")));
             }
         }
 
@@ -68,11 +68,11 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         String setlessFilename = null;
         if (null == ret && filename.contains("/")) {
             setlessFilename = filename.substring(filename.indexOf('/') + 1);
-            ret = _findFile(key, path, setlessFilename);
+            ret = findFile(key, path, setlessFilename);
         
             // try lowering the art index to the minimum for regular cards
             if (null == ret && setlessFilename.contains(".full")) {
-                ret = _findFile(key, path, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
+                ret = findFile(key, path, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
             }
         }
         
@@ -83,7 +83,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
         return ret;
     }
 
-    private static Texture _findFile(String key, String path, String filename) {
+    private static Texture findFile(String key, String path, String filename) {
         for (String ext : _FILE_EXTENSIONS) {
             File file = new File(path, filename + ext);
             //System.out.println(String.format("Searching for %s at: %s", key, file.getAbsolutePath()));
