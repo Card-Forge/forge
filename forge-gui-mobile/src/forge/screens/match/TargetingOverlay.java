@@ -84,82 +84,16 @@ public class TargetingOverlay {
         List<Card> cardsVisualized = new ArrayList<Card>();
         cardsVisualized.add(c);
 
-        Card enchanting = c.getEnchantingCard();
-        Card equipping = c.getEquippingCard();
-        Card fortifying = c.getFortifyingCard();
-        List<Card> enchantedBy = c.getEnchantedBy();
-        List<Card> equippedBy = c.getEquippedBy();
-        List<Card> fortifiedBy = c.getFortifiedBy();
         Card paired = c.getPairedWith();
-
-        if (null != enchanting) {
-            if (!enchanting.getController().equals(c.getController())) {
-                arcsOther.add(new Vector2[] {
-                    endpoints.get(enchanting.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
-                });
-                cardsVisualized.add(enchanting);
-            }
-        }
-        if (null != equipping) {
-            if (!equipping.getController().equals(c.getController())) {
-                arcsOther.add(new Vector2[] {
-                    endpoints.get(equipping.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
-                });
-                cardsVisualized.add(equipping);
-            }
-        }
-        if (null != fortifying) {
-            if (!fortifying.getController().equals(c.getController())) {
-                arcsOther.add(new Vector2[] {
-                    endpoints.get(fortifying.getUniqueNumber()),
-                    endpoints.get(c.getUniqueNumber())
-                });
-                cardsVisualized.add(fortifying);
-            }
-        }
-        if (null != enchantedBy) {
-            for (Card enc : enchantedBy) {
-                if (!enc.getController().equals(c.getController())) {
-                    arcsOther.add(new Vector2[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(enc.getUniqueNumber())
-                    });
-                    cardsVisualized.add(enc);
-                }
-            }
-        }
-        if (null != equippedBy) {
-            for (Card eq : equippedBy) {
-                if (!eq.getController().equals(c.getController())) {
-                    arcsOther.add(new Vector2[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(eq.getUniqueNumber())
-                    });
-                    cardsVisualized.add(eq);
-                }
-            }
-        }
-        if (null != fortifiedBy) {
-            for (Card eq : fortifiedBy) {
-                if (!eq.getController().equals(c.getController())) {
-                    arcsOther.add(new Vector2[] {
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(eq.getUniqueNumber())
-                    });
-                    cardsVisualized.add(eq);
-                }
-            }
-        }
-        if (null != paired) {
+        if (paired != null) {
             arcsOther.add(new Vector2[] {
                 endpoints.get(paired.getUniqueNumber()),
                 endpoints.get(c.getUniqueNumber())
             });
             cardsVisualized.add(paired);
         }
-        if (null != combat) {
+
+        if (combat != null) {
             for (Card planeswalker : combat.getDefendingPlaneswalkers()) {
                 List<Card> cards = combat.getAttackersOf(planeswalker);
                 for (Card pwAttacker : cards) {
