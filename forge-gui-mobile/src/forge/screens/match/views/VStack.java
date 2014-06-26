@@ -31,7 +31,7 @@ import forge.util.Utils;
 public class VStack extends FDropDown {
     public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;
     public static final float CARD_HEIGHT = Math.round(CARD_WIDTH * FCardPanel.ASPECT_RATIO);
-    private static final float PADDING = Utils.scaleMin(3);
+    public static final float PADDING = Utils.scaleMin(3);
     private static final FSkinFont FONT = FSkinFont.get(11);
     private static final float ALPHA_COMPOSITE = 0.5f;
     private static final TextRenderer textRenderer = new TextRenderer(true);
@@ -111,7 +111,7 @@ public class VStack extends FDropDown {
         super.setScrollPositionsAfterLayout(0, 0); //always scroll to top after layout
     }
 
-    private class StackInstanceDisplay extends FDisplayObject {
+    public class StackInstanceDisplay extends FDisplayObject {
         private final SpellAbilityStackInstance stackInstance;
         private final boolean isTop;
         private final Color foreColor, backColor;
@@ -139,6 +139,10 @@ public class VStack extends FDropDown {
             float height = Math.max(CARD_HEIGHT, textRenderer.getWrappedBounds(text, FONT, width).height);
             height += 2 * PADDING;
             return Math.round(height);
+        }
+
+        public SpellAbilityStackInstance getStackInstance() {
+            return stackInstance;
         }
 
         @Override

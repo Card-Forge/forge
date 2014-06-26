@@ -11,6 +11,8 @@ public class FCardPanel extends FDisplayObject {
     public static final float TAPPED_ANGLE = -90;
     public static final float ASPECT_RATIO = 3.5f / 2.5f;
     public static final float PADDING = Utils.scaleMin(2);
+    public static final float TARGET_ORIGIN_FACTOR_X = 0.15f;
+    public static final float TARGET_ORIGIN_FACTOR_Y = 0.5f;
 
     private Card card;
     private boolean tapped;
@@ -93,8 +95,8 @@ public class FCardPanel extends FDisplayObject {
             h = temp;
         }
 
-        origin.x += left + w * 0.15f;
-        origin.y += top + h * 0.5f;
+        origin.x += left + w * TARGET_ORIGIN_FACTOR_X;
+        origin.y += top + h * TARGET_ORIGIN_FACTOR_Y;
 
         return origin;
     }

@@ -19,6 +19,10 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     protected final List<Card> orderedCards = new ArrayList<Card>();
     protected final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
 
+    public Iterable<Card> getOrderedCards() {
+        return orderedCards;
+    }
+
     public Iterable<CardAreaPanel> getCardPanels() {
         return cardPanels;
     }
