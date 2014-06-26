@@ -136,10 +136,10 @@ public class Graphics {
         batch.begin();
     }
 
-    public void drawArrow(float thickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-        drawArrow(thickness, skinColor.getColor(), x1, y1, x2, y2);
+    public void drawArrow(float thickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        drawArrow(thickness, arrowSize, skinColor.getColor(), x1, y1, x2, y2);
     }
-    public void drawArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+    public void drawArrow(float thickness, float arrowSize, Color color, float x1, float y1, float x2, float y2) {
         batch.end(); //must pause batch while rendering shapes
 
         if (alphaComposite < 1) {
@@ -148,9 +148,23 @@ public class Graphics {
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glEnable(GL_LINE_SMOOTH);
 
-        float arrowSize = 3 * thickness;
         float angle = new Vector2(x2 - x1, y2 - y1).angleRad();
-        float rotation = (float)(Math.PI * 0.8f);
+        float perpRotation = (float)(Math.PI * 0.5f);
+        float arrowHeadRotation = (float)(Math.PI * 0.8f);
+        float halfThickness = thickness / 2;
+
+        int index = 0;
+        float[] vertices = new float[14];
+        Vector2 arrowCorner1 = new Vector2(x2 + arrowSize * (float)Math.cos(angle + arrowHeadRotation), y2 + arrowSize * (float)Math.sin(angle + arrowHeadRotation));
+        Vector2 arrowCorner2 = new Vector2(x2 + arrowSize * (float)Math.cos(angle - arrowHeadRotation), y2 + arrowSize * (float)Math.sin(angle - arrowHeadRotation));
+        float arrowCornerLen = (arrowCorner1.dst(arrowCorner2) - thickness) / 2;
+        index = addVertex(arrowCorner1.x, arrowCorner1.y, vertices, index);
+        index = addVertex(x2, y2, vertices, index);
+        index = addVertex(arrowCorner2.x, arrowCorner2.y, vertices, index);
+        index = addVertex(arrowCorner2.x + arrowCornerLen * (float)Math.cos(angle + perpRotation), arrowCorner2.y + arrowCornerLen * (float)Math.sin(angle + perpRotation), vertices, index);
+        index = addVertex(x1 + halfThickness * (float)Math.cos(angle - perpRotation), y1 + halfThickness * (float)Math.sin(angle - perpRotation), vertices, index);
+        index = addVertex(x1 + halfThickness * (float)Math.cos(angle + perpRotation), y1 + halfThickness * (float)Math.sin(angle + perpRotation), vertices, index);
+        index = addVertex(arrowCorner1.x + arrowCornerLen * (float)Math.cos(angle - perpRotation), arrowCorner1.y + arrowCornerLen * (float)Math.sin(angle - perpRotation), vertices, index);
 
         //draw arrow tail
         startShape(ShapeType.Filled);
@@ -160,22 +174,25 @@ public class Graphics {
                 adjustY(y2 - arrowSize * (float)Math.sin(angle) / 2, 0), thickness);
 
         //draw arrow head
-        shapeRenderer.triangle(adjustX(x2), adjustY(y2, 0),
-                adjustX(x2 + arrowSize * (float)Math.cos(angle + rotation)),
-                adjustY(y2 + arrowSize * (float)Math.sin(angle + rotation), 0),
-                adjustX(x2 + arrowSize * (float)Math.cos(angle - rotation)),
-                adjustY(y2 + arrowSize * (float)Math.sin(angle - rotation), 0));
+        shapeRenderer.triangle(vertices[0], vertices[1], vertices[2], vertices[3], vertices[4], vertices[5]);
         endShape();
 
-        /*startShape(ShapeType.Line);
+        //draw border around arrow
+        startShape(ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rectLine(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0), thickness);
-        endShape();*/
+        shapeRenderer.polygon(vertices);
+        endShape();
 
         Gdx.gl.glDisable(GL_LINE_SMOOTH);
         Gdx.gl.glDisable(GL_BLEND);
 
         batch.begin();
+    }
+
+    private int addVertex(float x, float y, float[] vertices, int index) {
+        vertices[index] = adjustX(x);
+        vertices[index + 1] = adjustY(y, 0);
+        return index + 2;
     }
 
     public void drawRoundRect(float thickness, FSkinColor skinColor, float x, float y, float w, float h, float cornerRadius) {

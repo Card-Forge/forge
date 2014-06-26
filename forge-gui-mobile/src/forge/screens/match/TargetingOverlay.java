@@ -25,6 +25,7 @@ import forge.game.combat.Combat;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.toolbox.FCardPanel;
+import forge.util.Utils;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -35,6 +36,9 @@ import java.util.List;
 import java.util.Map;
 
 public class TargetingOverlay {
+    private static final float ARROW_THICKNESS = Utils.scaleMax(5);
+    private static final float ARROW_SIZE = 3 * ARROW_THICKNESS;
+
     private final List<FCardPanel> cardPanels = new ArrayList<FCardPanel>();
     private final List<Vector2[]> arcsCombat = new ArrayList<Vector2[]>();
     private final List<Vector2[]> arcsOther = new ArrayList<Vector2[]>();
@@ -183,57 +187,11 @@ public class TargetingOverlay {
         return cardsVisualized;
     }
 
-    /*private Area getArrow(float length, float bendPercent) {
-        float p1x = 0, p1y = 0;
-        float p2x = length, p2y = 0;
-        float cx = length / 2, cy = length / 8f * bendPercent;
-
-        int bodyWidth = 15;
-        float headSize = 20;
-
-        float adjSize, ex, ey, abs_e;
-        adjSize = (float) (bodyWidth / 2 / Math.sqrt(2));
-        ex = p2x - cx;
-        ey = p2y - cy;
-        abs_e = (float) Math.sqrt(ex * ex + ey * ey);
-        ex /= abs_e;
-        ey /= abs_e;
-        GeneralPath bodyPath = new GeneralPath();
-        bodyPath.moveTo(p2x + (ey - ex) * adjSize, p2y - (ex + ey) * adjSize);
-        bodyPath.quadTo(cx, cy, p1x, p1y - bodyWidth / 2);
-        bodyPath.lineTo(p1x, p1y + bodyWidth / 2);
-        bodyPath.quadTo(cx, cy, p2x - (ey + ex) * adjSize, p2y + (ex - ey) * adjSize);
-        bodyPath.closePath();
-
-        adjSize = (float) (headSize / Math.sqrt(2));
-        ex = p2x - cx;
-        ey = p2y - cy;
-        abs_e = (float) Math.sqrt(ex * ex + ey * ey);
-        ex /= abs_e;
-        ey /= abs_e;
-        GeneralPath headPath = new GeneralPath();
-        headPath.moveTo(p2x - (ey + ex) * adjSize, p2y + (ex - ey) * adjSize);
-        headPath.lineTo(p2x + headSize / 2, p2y);
-        headPath.lineTo(p2x + (ey - ex) * adjSize, p2y - (ex + ey) * adjSize);
-        headPath.closePath();
-
-        Area area = new Area(headPath);
-        area.add(new Area(bodyPath));
-        return area;
-    }*/
-
     public void drawArcs(Graphics g, FSkinColor color, List<Vector2[]> arcs) {
         for (Vector2[] p : arcs) {
-            if (p[0] == null || p[1] == null) {
-                continue;
+            if (p[0] != null && p[1] != null) {
+                g.drawArrow(ARROW_THICKNESS, ARROW_SIZE, color, p[1].x, p[1].y, p[0].x, p[0].y);
             }
-
-            float endX = p[0].x;
-            float endY = p[0].y;
-            float startX = p[1].x;
-            float startY = p[1].y;
-
-            g.drawArrow(5, color, startX, startY, endX, endY);
         }
     }
 
