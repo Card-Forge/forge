@@ -41,7 +41,7 @@ public class FVanguardChooser extends FScreen {
     private final FButton btnRandom = add(new FButton("Random Vanguard"));
     private boolean isAi;
 
-    public FVanguardChooser(boolean isAi0) {
+    public FVanguardChooser(boolean isAi0, FEventHandler selectionChangedHandler) {
         super("");
         isAi = isAi0;
         lstVanguards.setItemActivateHandler(new FEventHandler() {
@@ -53,20 +53,25 @@ public class FVanguardChooser extends FScreen {
         btnRandom.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                if (isAi) {
-                    lstVanguards.setSelectedItem(Aggregates.random(nonRandomAiAvatars).getKey());
-                }
-                else {
-                    lstVanguards.setSelectedItem(Aggregates.random(nonRandomHumanAvatars).getKey());
-                }
+                selectRandom();
                 Forge.back();
             }
         });
         lstVanguards.setup(ItemManagerConfig.VANGUARDS);
         lstVanguards.setHideViewOptions(1, true);
         lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars, true);
-        if (lstVanguards.getItemCount() > 0) {
-            lstVanguards.setSelectedIndex(0);
+        lstVanguards.setSelectionChangedHandler(selectionChangedHandler);
+        selectRandom();
+    }
+
+    private void selectRandom() {
+        if (lstVanguards.getItemCount() == 0) { return; }
+
+        if (isAi) {
+            lstVanguards.setSelectedItem(Aggregates.random(nonRandomAiAvatars).getKey());
+        }
+        else {
+            lstVanguards.setSelectedItem(Aggregates.random(nonRandomHumanAvatars).getKey());
         }
     }
 
@@ -81,8 +86,8 @@ public class FVanguardChooser extends FScreen {
         if (lastSelection != null) {
             lstVanguards.setSelectedItem(lastSelection);
         }
-        if (lstVanguards.getSelectedIndex() == -1 && lstVanguards.getItemCount() > 0) {
-            lstVanguards.setSelectedIndex(0);
+        if (lstVanguards.getSelectedIndex() == -1) {
+            selectRandom();
         }
     }
 

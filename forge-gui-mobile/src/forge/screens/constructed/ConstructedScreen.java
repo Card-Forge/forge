@@ -27,6 +27,8 @@ import forge.deck.FVanguardChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
+import forge.itemmanager.CardManager;
+import forge.itemmanager.DeckManager;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -380,41 +382,36 @@ public class ConstructedScreen extends LaunchScreen {
             playerIsArchenemy = index == 0;
             btnDeck.setEnabled(false); //disable deck button until done loading decks
             boolean isAi = isPlayerAI();
-            deckChooser = new FDeckChooser(GameType.Constructed, isAi);
-            deckChooser.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+            deckChooser = new FDeckChooser(GameType.Constructed, isAi, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     btnDeck.setEnabled(true);
                     btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ": " +
-                            Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME));
+                            Lang.joinHomogenous(((DeckManager)e.getSource()).getSelectedItems(), DeckProxy.FN_GET_NAME));
                 }
             });
-            lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi);
-            lstCommanderDecks.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+            lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    btnCommanderDeck.setText("Commander Deck: " + lstCommanderDecks.getLstDecks().getSelectedItem().getName());
+                    btnCommanderDeck.setText("Commander Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
                 }
             });
-            lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi);
-            lstSchemeDecks.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+            lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    btnSchemeDeck.setText("Scheme Deck: " + lstSchemeDecks.getLstDecks().getSelectedItem().getName());
+                    btnSchemeDeck.setText("Scheme Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
                 }
             });
-            lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi);
-            lstPlanarDecks.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+            lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    btnPlanarDeck.setText("Planar Deck: " + lstPlanarDecks.getLstDecks().getSelectedItem().getName());
+                    btnPlanarDeck.setText("Planar Deck: " + ((DeckManager)e.getSource()).getSelectedItem().getName());
                 }
             });
-            lstVanguardAvatars = new FVanguardChooser(isAi);
-            lstVanguardAvatars.getLstVanguards().setSelectionChangedHandler(new FEventHandler() {
+            lstVanguardAvatars = new FVanguardChooser(isAi, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    btnVanguardAvatar.setText("Vanguard Avatar: " + lstVanguardAvatars.getLstVanguards().getSelectedItem().getName());
+                    btnVanguardAvatar.setText("Vanguard: " + ((CardManager)e.getSource()).getSelectedItem().getName());
                 }
             });
 
@@ -475,7 +472,7 @@ public class ConstructedScreen extends LaunchScreen {
             btnVanguardAvatar.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    lstVanguardAvatars.setHeaderCaption("Select Vanguard Avatar for " + txtPlayerName.getText());
+                    lstVanguardAvatars.setHeaderCaption("Select Vanguard for " + txtPlayerName.getText());
                     Forge.openScreen(lstVanguardAvatars);
                 }
             });

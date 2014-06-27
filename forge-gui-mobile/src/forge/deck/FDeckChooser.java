@@ -52,7 +52,7 @@ public class FDeckChooser extends FScreen {
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
 
-    public FDeckChooser(GameType gameType0, boolean isAi0) {
+    public FDeckChooser(GameType gameType0, boolean isAi0, FEventHandler selectionChangedHandler) {
         super("");
         lstDecks = new DeckManager(gameType0);
         isAi = isAi0;
@@ -135,6 +135,7 @@ public class FDeckChooser extends FScreen {
         if (gameType0 != GameType.Constructed) { //delay initialize for constructed until saved decks can be reloaded
             initialize(null, DeckType.RANDOM_DECK);
         }
+        lstDecks.setSelectionChangedHandler(selectionChangedHandler);
     }
 
     @Override
