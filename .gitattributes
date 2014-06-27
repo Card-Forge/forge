@@ -16594,6 +16594,7 @@ forge-gui/tools/assignSetInfo.py svneol=native#text/x-python
 forge-gui/tools/cardTemplateScript.py svneol=native#text/x-python
 forge-gui/tools/deckAiCompat.py -text
 forge-gui/tools/extractSetInfo.py -text
+forge-gui/tools/formatCards -text
 forge-gui/tools/formats.txt -text
 forge-gui/tools/guilds.xlsx -text
 forge-gui/tools/missingPreconFiles.py -text

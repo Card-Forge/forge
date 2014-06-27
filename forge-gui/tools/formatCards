@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CARDSFOLDER="../res/cardsfolder/"
+
+for d in `ls -1 "$CARDSFOLDER"`; do
+    for f in `ls -1 "$CARDSFOLDER/$d"`; do
+        FILE="$CARDSFOLDER/$d/$f";
+        dos2unix "$FILE";
+        [[ -f "$FILE" && $(tail -c1 "$FILE") ]] && echo '' >> "$FILE" && echo "Appended trailing newline to $FILE";
+    done
+done
