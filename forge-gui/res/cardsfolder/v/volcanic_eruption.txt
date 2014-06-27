@@ -1,11 +1,11 @@
 Name:Volcanic Eruption
 ManaCost:X U U U
 Types:Sorcery
-A:SP$ Destroy | Cost$ X U U U | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain  | SpellDescription$ Destroy X target Mountains. CARDNAME deals damage to each creature and each player equal to the number of Mountains destroyed this way. | SubAbility$ DB
-# It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
-SVar:X:Targeted$Amount
+A:SP$ Destroy | Cost$ X U U U | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | RememberTargets$ True | SpellDescription$ Destroy X target Mountains. CARDNAME deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way. | SubAbility$ DBDamage
 SVar:MaxTgts:Count$Valid Land
-SVar:DB:DB$DamageAll | NumDmg$X | ValidCards$ Creature.withFlying | ValidPlayers$ Each | ValidDescription$ each creature with flying and each player.
+SVar:DBDamage:DB$DamageAll | NumDmg$ Y | References$ Y | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SubAbility$ DBCleanup
+SVar:Y:Count$ValidGraveyard Mountain.IsRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_eruption.jpg
-Oracle:Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains destroyed this way.
+Oracle:Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.
