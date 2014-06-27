@@ -275,7 +275,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void setHideViewOptions(int viewIndex, boolean hideViewOptions) {
         if (viewIndex < 0 || viewIndex >= views.size()) { return; }
-        views.get(viewIndex).getPnlOptions().setVisible(!hideViewOptions);
+        ItemView<T> view = views.get(viewIndex);
+        view.getPnlOptions().setVisible(!hideViewOptions);
+        if (currentView == view) {
+            btnViewOptions.setSelected(!hideViewOptions);
+        }
     }
 
     @Override
