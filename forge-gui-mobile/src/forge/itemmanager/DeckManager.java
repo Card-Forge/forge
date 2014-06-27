@@ -42,7 +42,7 @@ import java.util.Set;
  *
  */
 public final class DeckManager extends ItemManager<DeckProxy> {
-    private final GameType gametype;
+    private final GameType gameType;
     private FEventHandler cmdDelete;
 
     /**
@@ -53,7 +53,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
      */
     public DeckManager(final GameType gt) {
         super(DeckProxy.class, true);
-        gametype = gt;
+        gameType = gt;
 
         setItemActivateHandler(new FEventHandler() {
             @Override
@@ -63,6 +63,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         });
 
         setCaption("Decks");
+    }
+
+    public GameType getGameType() {
+        return gameType;
     }
 
     @Override
@@ -224,7 +228,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                         if (!result) { return; }
 
                         // consider using deck proxy's method to delete deck
-                        switch(gametype) {
+                        switch(gameType) {
                             case Constructed:
                             case Draft:
                             case Sealed:
@@ -235,7 +239,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                                 //FModel.getQuest().save();
                                 break;
                             default:
-                                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
+                                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gameType.toString());
                         }
 
                         removeItem(deck, 1);

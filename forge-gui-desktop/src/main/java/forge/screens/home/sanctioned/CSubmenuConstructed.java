@@ -275,7 +275,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     	schemePool = ((Deck) selected).get(DeckSection.Schemes);
                     }
                     if (schemePool == null) { //Can be null if player deselects the list selection or chose Generate
-                    	schemePool = DeckgenUtil.generateSchemeDeck();
+                    	schemePool = DeckgenUtil.generateSchemePool();
                     }
                     if (checkLegality) {
                     	String errMsg = GameType.Archenemy.getDecksFormat().getSchemeSectionConformanceProblem(schemePool);
@@ -308,7 +308,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     	planePool = ((Deck) selected).get(DeckSection.Planes);
                     }
                     if (planePool == null) { //Can be null if player deselects the list selection or chose Generate
-                    	planePool = DeckgenUtil.generatePlanarDeck();
+                    	planePool = DeckgenUtil.generatePlanarPool();
                     }
                     if (checkLegality) {
                     	String errMsg = GameType.Planechase.getDecksFormat().getPlaneSectionConformanceProblem(planePool);

@@ -195,7 +195,13 @@ public class DeckgenUtil {
         return result;
     }
 
-    public static CardPool generateSchemeDeck() {
+    public static Deck generateSchemeDeck() {
+        Deck deck = new Deck("");
+        deck.putSection(DeckSection.Schemes, generateSchemePool());
+        return deck;
+    }
+
+    public static CardPool generateSchemePool() {
         CardPool schemes = new CardPool();
         List<PaperCard> allSchemes = new ArrayList<PaperCard>();
         for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
@@ -221,7 +227,13 @@ public class DeckgenUtil {
         return schemes;
     }
 
-    public static CardPool generatePlanarDeck() {
+    public static Deck generatePlanarDeck() {
+        Deck deck = new Deck("");
+        deck.putSection(DeckSection.Planes, generatePlanarPool());
+        return deck;
+    }
+
+    public static CardPool generatePlanarPool() {
         CardPool res = new CardPool();
         List<PaperCard> allPlanars = new ArrayList<PaperCard>();
         for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {

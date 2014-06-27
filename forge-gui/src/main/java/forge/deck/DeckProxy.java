@@ -258,9 +258,27 @@ public class DeckProxy implements InventoryItem {
     }
 
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
-    public static Iterable<DeckProxy> getAllConstructedDecks(IStorage<Deck> storageRoot) {
+    public static Iterable<DeckProxy> getAllConstructedDecks() {
         List<DeckProxy> result = new ArrayList<DeckProxy>();
-        addDecksRecursivelly("Constructed", GameType.Constructed, result, "", storageRoot);
+        addDecksRecursivelly("Constructed", GameType.Constructed, result, "", FModel.getDecks().getConstructed());
+        return result;
+    }
+
+    public static Iterable<DeckProxy> getAllCommanderDecks() {
+        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        addDecksRecursivelly("Commander", GameType.Commander, result, "", FModel.getDecks().getCommander());
+        return result;
+    }
+
+    public static Iterable<DeckProxy> getAllSchemeDecks() {
+        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        addDecksRecursivelly("Scheme", GameType.Archenemy, result, "", FModel.getDecks().getScheme());
+        return result;
+    }
+
+    public static Iterable<DeckProxy> getAllPlanarDecks() {
+        List<DeckProxy> result = new ArrayList<DeckProxy>();
+        addDecksRecursivelly("Plane", GameType.Planechase, result, "", FModel.getDecks().getPlane());
         return result;
     }
 

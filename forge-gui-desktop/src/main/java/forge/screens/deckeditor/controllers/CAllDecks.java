@@ -4,7 +4,6 @@ import forge.UiCommand;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
-import forge.model.FModel;
 import forge.screens.deckeditor.views.VAllDecks;
 
 /** 
@@ -36,7 +35,7 @@ public enum CAllDecks implements ICDoc {
     }
 
     public void refresh() {
-        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(DeckProxy.getAllConstructedDecks(FModel.getDecks().getConstructed()));
+        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(DeckProxy.getAllConstructedDecks());
     }
 
     /* (non-Javadoc)

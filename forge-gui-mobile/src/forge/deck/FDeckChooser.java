@@ -21,6 +21,7 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
+import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
@@ -40,7 +41,7 @@ public class FDeckChooser extends FScreen {
     private DeckType selectedDeckType;
     private boolean needRefreshOnActivate;
 
-    private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
+    private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton("New Deck");
     private final FButton btnEditDeck = new FButton("Edit Deck");
     private final FButton btnViewDeck = new FButton("View Deck");
@@ -51,8 +52,9 @@ public class FDeckChooser extends FScreen {
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
 
-    public FDeckChooser(boolean isAi0) {
+    public FDeckChooser(GameType gameType0, boolean isAi0) {
         super("");
+        lstDecks = new DeckManager(gameType0);
         isAi = isAi0;
 
         lstDecks.setItemActivateHandler(new FEventHandler() {
@@ -82,7 +84,22 @@ public class FDeckChooser extends FScreen {
                     }
                     break;
                 default:
-                    editor = new FDeckEditor(EditorType.Constructed, "", false);
+                    switch (lstDecks.getGameType()) {
+                    case Constructed:
+                        editor = new FDeckEditor(EditorType.Constructed, "", false);
+                        break;
+                    case Commander:
+                        editor = new FDeckEditor(EditorType.Commander, "", false);
+                        break;
+                    case Archenemy:
+                        editor = new FDeckEditor(EditorType.Archenemy, "", false);
+                        break;
+                    case Planechase:
+                        editor = new FDeckEditor(EditorType.Planechase, "", false);
+                        break;
+                    default:
+                        return;
+                    }
                     break;
                 }
                 editor.setSaveHandler(new FEventHandler() {
@@ -120,6 +137,9 @@ public class FDeckChooser extends FScreen {
                 }
             }
         });
+        if (gameType0 != GameType.Constructed) { //delay initialize for constructed until saved decks can be reloaded
+            initialize(null, DeckType.RANDOM_DECK);
+        }
     }
 
     @Override
@@ -145,7 +165,7 @@ public class FDeckChooser extends FScreen {
         Deck existingDeck = decks.get(deck.getName());
         if (existingDeck != null) {
             setSelectedDeckType(DeckType.CUSTOM_DECK);
-            editDeck(new DeckProxy(existingDeck, "Constructed", GameType.Constructed, decks));
+            editDeck(new DeckProxy(existingDeck, "Constructed", lstDecks.getGameType(), decks));
             return;
         }
 
@@ -175,7 +195,18 @@ public class FDeckChooser extends FScreen {
         selectedDeckType = defaultDeckType;
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
-            cmbDeckTypes = new FComboBox<DeckType>(DeckType.values());
+            cmbDeckTypes = new FComboBox<DeckType>();
+            if (lstDecks.getGameType() == GameType.Constructed) {
+                cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
+                cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
+                cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
+                cmbDeckTypes.addItem(DeckType.COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.THEME_DECK);
+            }
+            else {
+                cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
+                cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
+            }
             cmbDeckTypes.setAlignment(HAlignment.CENTER);
             restoreSavedState();
             cmbDeckTypes.setChangedHandler(new FEventHandler() {
@@ -240,8 +271,26 @@ public class FDeckChooser extends FScreen {
     private void updateCustom() {
         lstDecks.setSelectionSupport(1, 1);
 
-        lstDecks.setPool(DeckProxy.getAllConstructedDecks(FModel.getDecks().getConstructed()));
-        lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+        switch (lstDecks.getGameType()) {
+        case Constructed:
+            lstDecks.setPool(DeckProxy.getAllConstructedDecks());
+            lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
+            break;
+        case Commander:
+            lstDecks.setPool(DeckProxy.getAllCommanderDecks());
+            lstDecks.setup(ItemManagerConfig.COMMANDER_DECKS);
+            break;
+        case Archenemy:
+            lstDecks.setPool(DeckProxy.getAllSchemeDecks());
+            lstDecks.setup(ItemManagerConfig.SCHEME_DECKS);
+            break;
+        case Planechase:
+            lstDecks.setPool(DeckProxy.getAllPlanarDecks());
+            lstDecks.setup(ItemManagerConfig.PLANAR_DECKS);
+            break;
+        default:
+            break;
+        }
 
         btnNewDeck.setText("New Deck");
         btnNewDeck.setWidth(btnEditDeck.getWidth());
@@ -266,7 +315,7 @@ public class FDeckChooser extends FScreen {
         public ColorDeckGenerator(String name0, int index0) {
             super();
             name = name0;
-            this.index = index0;
+            index = index0;
         }
 
         @Override
@@ -281,7 +330,7 @@ public class FDeckChooser extends FScreen {
 
         @Override
         public int compareTo(final ColorDeckGenerator d) {
-            return d instanceof ColorDeckGenerator ? Integer.compare(this.index, ((ColorDeckGenerator)d).index) : 1;
+            return d instanceof ColorDeckGenerator ? Integer.compare(index, ((ColorDeckGenerator)d).index) : 1;
         }
 
         @Override
@@ -353,6 +402,97 @@ public class FDeckChooser extends FScreen {
         });
     }
 
+    private class RandomDeckGenerator extends DeckProxy implements Comparable<RandomDeckGenerator> {
+        private String name;
+        private int index;
+
+        public RandomDeckGenerator(String name0, int index0) {
+            super();
+            name = name0;
+            index = index0;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        @Override
+        public int compareTo(final RandomDeckGenerator d) {
+            return d instanceof RandomDeckGenerator ? Integer.compare(index, ((RandomDeckGenerator)d).index) : 1;
+        }
+
+        @Override
+        public Deck getDeck() {
+            String sel = lstDecks.getSelectedItem().getName();
+            switch (lstDecks.getGameType()) {
+            case Commander:
+                if (sel.equals("Random")) {
+                    IStorage<Deck> decks = FModel.getDecks().getCommander();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                return DeckgenUtil.generateCommanderDeck(isAi);
+            case Archenemy:
+                if (sel.equals("Random")) {
+                    IStorage<Deck> decks = FModel.getDecks().getScheme();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                return DeckgenUtil.generateSchemeDeck();
+            case Planechase:
+                if (sel.equals("Random")) {
+                    IStorage<Deck> decks = FModel.getDecks().getPlane();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                return DeckgenUtil.generatePlanarDeck();
+            default:
+                break;
+            }
+            return null;
+        }
+
+        @Override
+        public boolean isGeneratedDeck() {
+            return true;
+        }
+    }
+
+    private void updateRandom() {
+        lstDecks.setSelectionSupport(1, 1);
+
+        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+        decks.add(new RandomDeckGenerator("Random Generated Deck", 0));
+        decks.add(new RandomDeckGenerator("Random User Deck", 1));
+
+        lstDecks.setPool(decks);
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+
+        btnNewDeck.setText("Generate New Deck");
+        btnNewDeck.setWidth(getWidth() - 2 * PADDING);
+        btnEditDeck.setVisible(false);
+
+        btnViewDeck.setVisible(false);
+        btnRandom.setText("Random Deck");
+        btnRandom.setWidth(btnNewDeck.getWidth());
+        btnRandom.setLeft(getWidth() - PADDING - btnRandom.getWidth());
+        btnRandom.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                DeckgenUtil.randomSelect(lstDecks);
+            }
+        });
+    }
+
     private void updatePrecons() {
         lstDecks.setSelectionSupport(1, 1);
 
@@ -399,6 +539,7 @@ public class FDeckChooser extends FScreen {
 
     public Deck getDeck() {
         DeckProxy proxy = lstDecks.getSelectedItem();
+        if (proxy == null) { return null; }
         return proxy.getDeck();
     }
 
@@ -425,7 +566,7 @@ public class FDeckChooser extends FScreen {
     }
 
     public void setIsAi(boolean isAiDeck) {
-        this.isAi = isAiDeck;
+        isAi = isAiDeck;
     }
 
     private void refreshDecksList(DeckType deckType, boolean forceRefresh, FEvent e) {
@@ -452,6 +593,9 @@ public class FDeckChooser extends FScreen {
             break;
         case PRECONSTRUCTED_DECK:
             updatePrecons();
+            break;
+        case RANDOM_DECK:
+            updateRandom();
             break;
         }
 

@@ -22,12 +22,11 @@ import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
-import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
+import forge.deck.FVanguardChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
-import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -44,12 +43,10 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.Utils;
-import forge.util.storage.IStorage;
 
 public class ConstructedScreen extends LaunchScreen {
     private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
@@ -91,13 +88,7 @@ public class ConstructedScreen extends LaunchScreen {
     };
 
     // Variants
-    private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
-    private final List<PaperCard> vgdAllAiAvatars = new ArrayList<PaperCard>();
-    private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
-    private final List<PaperCard> nonRandomAiAvatars = new ArrayList<PaperCard>();
     private int lastArchenemy = 0;
-    private Vector<Object> humanListData = new Vector<Object>();
-    private Vector<Object> aiListData = new Vector<Object>();
 
     public ConstructedScreen() {
         super("Constructed");
@@ -294,20 +285,7 @@ public class ConstructedScreen extends LaunchScreen {
                 Deck deck = null;
                 boolean isCommanderMatch = appliedVariants.contains(GameType.Commander);
                 if (isCommanderMatch) {
-                    Object selected = playerPanel.lstCommanderDecks.getSelectedValue();
-                    if (selected instanceof String) {
-                        String sel = (String) selected;
-                        IStorage<Deck> comDecks = FModel.getDecks().getCommander();
-                        if (sel.equals("Random") && comDecks.size() > 0) {
-                            deck = Aggregates.random(comDecks);                            
-                        }
-                    }
-                    else {
-                        deck = (Deck) selected;
-                    }
-                    if (deck == null) { //Can be null if player deselects the list selection or chose Generate
-                        deck = DeckgenUtil.generateCommanderDeck(isPlayerAI(i));
-                    }
+                    deck = playerPanel.lstCommanderDecks.getDeck();
                     if (checkLegality) {
                         String errMsg = GameType.Commander.getDecksFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
@@ -327,29 +305,8 @@ public class ConstructedScreen extends LaunchScreen {
                 //Archenemy
                 if (appliedVariants.contains(GameType.ArchenemyRumble)
                         || (appliedVariants.contains(GameType.Archenemy) && playerIsArchenemy)) {
-                    Object selected = playerPanel.lstSchemeDecks.getSelectedValue();
-                    CardPool schemePool = null;
-                    if (selected instanceof String) {
-                        String sel = (String) selected;
-                        if (sel.contains("Use deck's scheme section")) {
-                            if (deck.has(DeckSection.Schemes)) {
-                                schemePool = deck.get(DeckSection.Schemes);
-                            }
-                            else {
-                                sel = "Random";
-                            }
-                        }
-                        IStorage<Deck> sDecks = FModel.getDecks().getScheme();
-                        if (sel.equals("Random") && sDecks.size() != 0) {
-                            schemePool = Aggregates.random(sDecks).get(DeckSection.Schemes);                            
-                        }
-                    }
-                    else {
-                        schemePool = ((Deck) selected).get(DeckSection.Schemes);
-                    }
-                    if (schemePool == null) { //Can be null if player deselects the list selection or chose Generate
-                        schemePool = DeckgenUtil.generateSchemeDeck();
-                    }
+                    Deck schemeDeck = playerPanel.lstSchemeDecks.getDeck();
+                    CardPool schemePool = schemeDeck.get(DeckSection.Schemes);
                     if (checkLegality) {
                         String errMsg = GameType.Archenemy.getDecksFormat().getSchemeSectionConformanceProblem(schemePool);
                         if (errMsg != null) {
@@ -362,28 +319,8 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Planechase
                 if (appliedVariants.contains(GameType.Planechase)) {
-                    Object selected = playerPanel.lstPlanarDecks.getSelectedValue();
-                    CardPool planePool = null;
-                    if (selected instanceof String) {
-                        String sel = (String) selected;
-                        if (sel.contains("Use deck's planes section")) {
-                            if (deck.has(DeckSection.Planes)) {
-                                planePool = deck.get(DeckSection.Planes);
-                            } else {
-                                sel = "Random";
-                            }
-                        }
-                        IStorage<Deck> pDecks = FModel.getDecks().getPlane();
-                        if (sel.equals("Random") && pDecks.size() != 0) {
-                            planePool = Aggregates.random(pDecks).get(DeckSection.Planes);                            
-                        }
-                    }
-                    else {
-                        planePool = ((Deck) selected).get(DeckSection.Planes);
-                    }
-                    if (planePool == null) { //Can be null if player deselects the list selection or chose Generate
-                        planePool = DeckgenUtil.generatePlanarDeck();
-                    }
+                    Deck planarDeck = playerPanel.lstPlanarDecks.getDeck();
+                    CardPool planePool = planarDeck.get(DeckSection.Planes);
                     if (checkLegality) {
                         String errMsg = GameType.Planechase.getDecksFormat().getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
@@ -396,24 +333,7 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Vanguard
                 if (appliedVariants.contains(GameType.Vanguard)) {
-                    Object selected = playerPanel.lstVanguardAvatars.getSelectedValue();
-                    if (selected instanceof String) {
-                        String sel = (String) selected;
-                        if (sel.contains("Use deck's default avatar") && deck.has(DeckSection.Avatar)) {
-                            vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
-                        }
-                        else { //Only other string is "Random"
-                            if (!isPlayerAI(i)) { //Human
-                                vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
-                            }
-                            else { //AI
-                                vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                            }
-                        }
-                    }
-                    else {
-                        vanguardAvatar = (PaperCard)selected;
-                    }
+                    vanguardAvatar = playerPanel.lstVanguardAvatars.getVanguard();
                     if (vanguardAvatar == null) {
                         FOptionPane.showErrorDialog("No Vanguard avatar selected for " + name
                                 + ". Please choose one or disable the Vanguard variant");
@@ -446,20 +366,21 @@ public class ConstructedScreen extends LaunchScreen {
         private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
 
         private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Loading Deck...").build();
-        private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: (None)").build();
-        private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: (None)").build();
-        private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: (None)").build();
-        private final FLabel btnVanguardAvatar = new FLabel.ButtonBuilder().text("Vanguard Avatar: (None)").build();
+        private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: Random").build();
+        private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: Random").build();
+        private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: Random").build();
+        private final FLabel btnVanguardAvatar = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
 
-        private final FDeckChooser deckChooser;
-        private final DeckList lstSchemeDecks, lstCommanderDecks, lstPlanarDecks, lstVanguardAvatars;
+        private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstPlanarDecks;
+        private final FVanguardChooser lstVanguardAvatars;
 
         public PlayerPanel(final int index0) {
             super();
             index = index0;
             playerIsArchenemy = index == 0;
             btnDeck.setEnabled(false); //disable deck button until done loading decks
-            deckChooser = new FDeckChooser(isPlayerAI());
+            boolean isAi = isPlayerAI();
+            deckChooser = new FDeckChooser(GameType.Constructed, isAi);
             deckChooser.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -468,10 +389,10 @@ public class ConstructedScreen extends LaunchScreen {
                             Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME));
                 }
             });
-            lstSchemeDecks = new DeckList();
-            lstCommanderDecks = new DeckList();
-            lstPlanarDecks = new DeckList();
-            lstVanguardAvatars = new DeckList();
+            lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi);
+            lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi);
+            lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi);
+            lstVanguardAvatars = new FVanguardChooser(isAi);
 
             createAvatar();
             add(avatarLabel);
@@ -506,69 +427,36 @@ public class ConstructedScreen extends LaunchScreen {
             btnCommanderDeck.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    deckChooser.setHeaderCaption("Select Commander Deck for " + txtPlayerName.getText());
-                    Forge.openScreen(deckChooser);
+                    lstCommanderDecks.setHeaderCaption("Select Commander Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(lstCommanderDecks);
                 }
             });
             add(btnSchemeDeck);
             btnSchemeDeck.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    deckChooser.setHeaderCaption("Select Scheme Deck for " + txtPlayerName.getText());
-                    Forge.openScreen(deckChooser);
+                    lstSchemeDecks.setHeaderCaption("Select Scheme Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(lstSchemeDecks);
                 }
             });
             add(btnPlanarDeck);
             btnPlanarDeck.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    deckChooser.setHeaderCaption("Select Planar Deck for " + txtPlayerName.getText());
-                    Forge.openScreen(deckChooser);
+                    lstPlanarDecks.setHeaderCaption("Select Planar Deck for " + txtPlayerName.getText());
+                    Forge.openScreen(lstPlanarDecks);
                 }
             });
             add(btnVanguardAvatar);
             btnVanguardAvatar.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    deckChooser.setHeaderCaption("Select Vanguard Avatar for " + txtPlayerName.getText());
-                    Forge.openScreen(deckChooser);
+                    lstVanguardAvatars.setHeaderCaption("Select Vanguard Avatar for " + txtPlayerName.getText());
+                    Forge.openScreen(lstVanguardAvatars);
                 }
             });
 
             updateVariantControlsVisibility();
-
-            final CardCollections decks = FModel.getDecks();
-            
-            lstCommanderDecks.list.addItem("Generate");
-            if (decks.getCommander().size() > 0) {
-                lstCommanderDecks.list.addItem("Random");
-                for (Deck comDeck : decks.getCommander()) {
-                    lstCommanderDecks.list.addItem(comDeck);
-                }
-            }
-            lstCommanderDecks.setSelectedIndex(0);
-
-            lstSchemeDecks.list.addItem("Use deck's scheme section (random if unavailable)");
-            lstSchemeDecks.list.addItem("Generate");
-            if (decks.getScheme().size() > 0) {
-                lstSchemeDecks.list.addItem("Random");
-                for (Deck schemeDeck : decks.getScheme()) {
-                    lstSchemeDecks.list.addItem(schemeDeck);
-                }
-            }
-            lstSchemeDecks.setSelectedIndex(0);
-
-            lstPlanarDecks.list.addItem("Use deck's planes section (random if unavailable)");
-            lstPlanarDecks.list.addItem("Generate");
-            if (decks.getPlane().size() > 0) {
-                lstPlanarDecks.list.addItem("Random");
-                for (Deck planarDeck : decks.getPlane()) {
-                    lstPlanarDecks.list.addItem(planarDeck);
-                }                
-            }
-            lstPlanarDecks.setSelectedIndex(0);
-
-            updateVanguardList();
 
             //disable team combo boxes for now
             cbTeam.setEnabled(false);
@@ -650,7 +538,7 @@ public class ConstructedScreen extends LaunchScreen {
         private final FEventHandler humanAiSwitched = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                updateVanguardList();
+                lstVanguardAvatars.setIsAi(isPlayerAI());
             }
         };
 
@@ -708,10 +596,6 @@ public class ConstructedScreen extends LaunchScreen {
 
         public boolean isPlayerAI() {
             return humanAiSwitch.isToggled();
-        }
-
-        public void setVanguardButtonText(String text) {
-            btnVanguardAvatar.setText(text);
         }
 
         private void populateTeamsComboBoxes() {
@@ -830,50 +714,6 @@ public class ConstructedScreen extends LaunchScreen {
 
         public String getPlayerName() {
             return txtPlayerName.getText();
-        }
-
-        /** update vanguard list. */
-        public void updateVanguardList() {
-            Object lastSelection = lstVanguardAvatars.getSelectedValue();
-            lstVanguardAvatars.setSelectedIndex(-1);
-            lstVanguardAvatars.list.setListData(isPlayerAI() ? aiListData : humanListData);
-            if (lastSelection != null) {
-                lstVanguardAvatars.setSelectedValue(lastSelection);
-            }
-            if (lstVanguardAvatars.getSelectedIndex() == -1) {
-                lstVanguardAvatars.setSelectedIndex(0);
-            }
-        }
-
-        private class DeckList extends FScreen {
-            private final FList<Object> list;
-            private int selectedIndex;
-
-            private DeckList() {
-                super("");
-                list = new FList<Object>();
-            }
-
-            public int getSelectedIndex() {
-                return selectedIndex;
-            }
-
-            public void setSelectedIndex(int index) {
-                selectedIndex = index;
-            }
-
-            public Object getSelectedValue() {
-                return list.getItemAt(selectedIndex);
-            }
-
-            public void setSelectedValue(Object value) {
-                selectedIndex = list.getIndexOf(value);
-            }
-
-            @Override
-            protected void doLayout(float startY, float width, float height) {
-                list.setBounds(0, startY, width, height - startY);
-            }
         }
     }
 
@@ -1198,53 +1038,5 @@ public class ConstructedScreen extends LaunchScreen {
 
     public boolean isPlayerArchenemy(final int playernum) {
         return playerPanels.get(playernum).playerIsArchenemy;
-    }
-
-    /** Return all the Vanguard avatars. */
-    public Iterable<PaperCard> getAllAvatars() {
-        if (vgdAllAvatars.isEmpty()) {
-            for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-                if (c.getRules().getType().isVanguard()) {
-                    vgdAllAvatars.add(c);
-                }
-            }
-        }
-        return vgdAllAvatars;
-    }
-
-    /** Return the Vanguard avatars not flagged RemAIDeck. */
-    public List<PaperCard> getAllAiAvatars() {
-        return vgdAllAiAvatars;
-    }
-
-    /** Return the Vanguard avatars not flagged RemRandomDeck. */
-    public List<PaperCard> getNonRandomHumanAvatars() {
-        return nonRandomHumanAvatars;
-    }
-
-    /** Return the Vanguard avatars not flagged RemAIDeck or RemRandomDeck. */
-    public List<PaperCard> getNonRandomAiAvatars() {
-        return nonRandomAiAvatars;
-    }
-
-    /** Populate vanguard lists. */
-    private void populateVanguardLists() {
-        humanListData.add("Use deck's default avatar (random if unavailable)");
-        humanListData.add("Random");
-        aiListData.add("Use deck's default avatar (random if unavailable)");
-        aiListData.add("Random");
-        for (PaperCard cp : getAllAvatars()) {
-            humanListData.add(cp);
-            if (!cp.getRules().getAiHints().getRemRandomDecks()) {
-                nonRandomHumanAvatars.add(cp);
-            }
-            if (!cp.getRules().getAiHints().getRemAIDecks()) {
-                aiListData.add(cp);
-                vgdAllAiAvatars.add(cp);
-                if (!cp.getRules().getAiHints().getRemRandomDecks()) {
-                    nonRandomAiAvatars.add(cp);
-                }
-            }
-        }
     }
 }

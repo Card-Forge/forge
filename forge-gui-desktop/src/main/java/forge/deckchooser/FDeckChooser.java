@@ -79,7 +79,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateCustom() {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(DeckProxy.getAllConstructedDecks(FModel.getDecks().getConstructed()));
+        lstDecks.setPool(DeckProxy.getAllConstructedDecks());
         lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
 
         btnRandom.setText("Random Deck");
@@ -299,6 +299,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             break;
         case PRECONSTRUCTED_DECK:
             updatePrecons();
+            break;
+        default:
             break;
         }
     }
