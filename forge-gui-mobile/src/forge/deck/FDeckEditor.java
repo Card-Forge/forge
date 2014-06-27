@@ -149,6 +149,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private CatalogPage catalogPage;
     private DeckSectionPage mainDeckPage;
     private DeckSectionPage sideboardPage;
+    private DeckSectionPage commanderPage;
     private FEventHandler saveHandler;
 
     protected final DeckHeader deckHeader = add(new DeckHeader());
@@ -186,6 +187,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     break;
                 case Sideboard:
                     sideboardPage = deckSectionPage;
+                    break;
+                case Commander:
+                    commanderPage = deckSectionPage;
                     break;
                 default:
                     break;
@@ -340,6 +344,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected DeckSectionPage getSideboardPage() {
         return sideboardPage;
+    }
+
+    protected DeckSectionPage getCommanderPage() {
+        return commanderPage;
     }
 
     protected BoosterDraft getDraft() {
@@ -520,6 +528,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
         public void removeCard(PaperCard card, int qty) {
             cardManager.removeItem(card, qty);
+            parentScreen.getEditorType().getController().notifyModelChanged();
+            updateCaption();
+        }
+
+        public void setCards(CardPool cards) {
+            cardManager.setPool(cards);
             parentScreen.getEditorType().getController().notifyModelChanged();
             updateCaption();
         }
@@ -726,6 +740,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         parentScreen.getSideboardPage().addCard(card, result);
                     }
                 });
+            }
+            if (parentScreen.getCommanderPage() != null) {
+                if (card.getRules().getType().isLegendary() && card.getRules().getType().isCreature() && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
+                    addItem(menu, "Set", "as commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            if (result == null || result <= 0) { return; }
+
+                            CardPool newPool = new CardPool();
+                            newPool.add(card);
+                            parentScreen.getCommanderPage().setCards(newPool);
+                            parentScreen.setSelectedPage(parentScreen.getCommanderPage());
+                        }
+                    });
+                }
             }
         }
     }
@@ -948,6 +977,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 break;
+            }
+
+            if (parentScreen.getCommanderPage() != null && deckSection != DeckSection.Commander) {
+                if (card.getRules().getType().isLegendary() && card.getRules().getType().isCreature() && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
+                    addItem(menu, "Set", "as commander", parentScreen.getCommanderPage().getIcon(), false, false, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            if (result == null || result <= 0) { return; }
+
+                            removeCard(card, result);
+
+                            CardPool newPool = new CardPool();
+                            newPool.add(card, result);
+                            parentScreen.getCommanderPage().setCards(newPool);
+                            parentScreen.setSelectedPage(parentScreen.getCommanderPage());
+                        }
+                    });
+                }
             }
         }
     }
