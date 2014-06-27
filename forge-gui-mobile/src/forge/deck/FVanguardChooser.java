@@ -93,11 +93,11 @@ public class FVanguardChooser extends FScreen {
     @Override
     protected void doLayout(float startY, float width, float height) {
         float x = PADDING;
-        float y = startY + PADDING;
+        float y = startY;
         width -= 2 * x;
 
         float buttonHeight = Utils.AVG_FINGER_HEIGHT;
-        lstVanguards.setBounds(x, y, width, height - y - buttonHeight - PADDING); //leave room for buttons at bottom
+        lstVanguards.setBounds(x, y, width, height - y - buttonHeight - 2 * PADDING); //leave room for buttons at bottom
 
         y += lstVanguards.getHeight() + PADDING;
         btnRandom.setBounds(x, y, width, buttonHeight);
