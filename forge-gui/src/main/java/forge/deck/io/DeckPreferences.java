@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
  *
  */
 public class DeckPreferences {
-    private static String currentDeck, draftDeck, sealedDeck;
+    private static String currentDeck, draftDeck, sealedDeck, commanderDeck, planarDeck, schemeDeck;
     private static Map<String, DeckPreferences> allPrefs = new HashMap<String, DeckPreferences>();
 
     public static String getCurrentDeck() {
@@ -51,6 +51,33 @@ public class DeckPreferences {
         save();
     }
 
+    public static String getCommanderDeck() {
+        return commanderDeck;
+    }
+    public static void setCommanderDeck(String commanderDeck0) {
+        if (commanderDeck != null && commanderDeck.equals(commanderDeck0)) { return; }
+        commanderDeck = commanderDeck0;
+        save();
+    }
+
+    public static String getPlanarDeck() {
+        return planarDeck;
+    }
+    public static void setPlanarDeck(String planarDeck0) {
+        if (planarDeck != null && planarDeck.equals(planarDeck0)) { return; }
+        planarDeck = planarDeck0;
+        save();
+    }
+
+    public static String getSchemeDeck() {
+        return schemeDeck;
+    }
+    public static void setSchemeDeck(String schemeDeck0) {
+        if (schemeDeck != null && schemeDeck.equals(schemeDeck0)) { return; }
+        schemeDeck = schemeDeck0;
+        save();
+    }
+
     public static DeckPreferences getPrefs(DeckProxy deck) {
         String key = deck.getUniqueKey();
         DeckPreferences prefs = allPrefs.get(key);
@@ -72,6 +99,9 @@ public class DeckPreferences {
             currentDeck = root.getAttribute("currentDeck");
             draftDeck = root.getAttribute("draftDeck");
             sealedDeck = root.getAttribute("sealedDeck");
+            commanderDeck = root.getAttribute("commanderDeck");
+            planarDeck = root.getAttribute("planarDeck");
+            schemeDeck = root.getAttribute("schemeDeck");
 
             final NodeList cards = document.getElementsByTagName("deck");
             for (int i = 0; i < cards.getLength(); i++) {
@@ -101,6 +131,9 @@ public class DeckPreferences {
             root.setAttribute("currentDeck", currentDeck);
             root.setAttribute("draftDeck", draftDeck);
             root.setAttribute("sealedDeck", sealedDeck);
+            root.setAttribute("commanderDeck", commanderDeck);
+            root.setAttribute("planarDeck", planarDeck);
+            root.setAttribute("schemeDeck", schemeDeck);
             document.appendChild(root);
 
             for (Map.Entry<String, DeckPreferences> entry : allPrefs.entrySet()) {

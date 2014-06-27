@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 
 import forge.Forge;
@@ -19,6 +20,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardEdition;
+import forge.card.CardRulesPredicates;
 import forge.card.CardZoom;
 import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
@@ -89,12 +91,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             public Deck get() {
                 return new Deck();
             }
-        })),
-        Vanguard(new DeckController<Deck>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
         }));
 
         private final DeckController<? extends DeckBase> controller;
@@ -113,7 +109,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         default:
         case Constructed:
             return new DeckEditorPage[] {
-                    new CatalogPage(),
+                    new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard)
             };
@@ -130,31 +126,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             };
         case Commander:
             return new DeckEditorPage[] {
-                    new CatalogPage(),
+                    new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Commander)
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         case Archenemy:
             return new DeckEditorPage[] {
-                    new CatalogPage(),
-                    new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Schemes)
+                    new CatalogPage(ItemManagerConfig.SCHEME_POOL),
+                    new DeckSectionPage(DeckSection.Schemes, ItemManagerConfig.SCHEME_DECK_EDITOR)
             };
         case Planechase:
             return new DeckEditorPage[] {
-                    new CatalogPage(),
-                    new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Planes)
-            };
-        case Vanguard:
-            return new DeckEditorPage[] {
-                    new CatalogPage(),
-                    new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Avatar)
+                    new CatalogPage(ItemManagerConfig.PLANAR_POOL),
+                    new DeckSectionPage(DeckSection.Planes, ItemManagerConfig.PLANAR_DECK_EDITOR)
             };
         }
     }
@@ -193,11 +178,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             else if (tabPage instanceof DeckSectionPage) {
                 DeckSectionPage deckSectionPage = (DeckSectionPage) tabPage;
-                if (deckSectionPage.deckSection == DeckSection.Main) {
+                switch (deckSectionPage.deckSection) {
+                case Main:
+                case Schemes:
+                case Planes:
                     mainDeckPage = deckSectionPage;
-                }
-                else if (deckSectionPage.deckSection == DeckSection.Sideboard) {
+                    break;
+                case Sideboard:
                     sideboardPage = deckSectionPage;
+                    break;
+                default:
+                    break;
                 }
             }
         }
@@ -364,7 +355,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         switch (editorType) {
         case Constructed:
         case Planechase:
-        case Vanguard:
         case Archenemy:
         default:
             if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
@@ -576,6 +566,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     if (deck.has(DeckSection.Commander)) {
                         max -= deck.get(DeckSection.Commander).count(card);
                     }
+                    if (deck.has(DeckSection.Planes)) {
+                        max -= deck.get(DeckSection.Planes).count(card);
+                    }
+                    if (deck.has(DeckSection.Schemes)) {
+                        max -= deck.get(DeckSection.Schemes).count(card);
+                    }
                 }
                 if (isAddSource) {
                     if (qty > max) {
@@ -640,11 +636,16 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected static class CatalogPage extends CardManagerPage {
         private boolean initialized, needRefreshWhenShown;
 
-        protected CatalogPage() {
-            this(ItemManagerConfig.CARD_CATALOG, "Catalog", FSkinImage.FOLDER);
+        protected CatalogPage(ItemManagerConfig config) {
+            this(config, "Catalog", FSkinImage.FOLDER);
         }
         protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, caption0, icon0);
+            
+            if (config == ItemManagerConfig.PLANAR_POOL || config == ItemManagerConfig.SCHEME_POOL) {
+                //prevent showing image view options for planar and scheme pools by default
+                cardManager.setHideViewOptions(1, true);
+            }
         }
 
         @Override
@@ -662,7 +663,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected String getItemManagerCaption() {
-            return "Cards";
+            switch (parentScreen.getEditorType()) {
+            case Archenemy:
+                return "Schemes";
+            case Planechase:
+                return "Planes";
+            default:
+                return "Cards";
+            }
         }
 
         @Override
@@ -681,7 +689,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 needRefreshWhenShown = true;
                 return; //delay refreshing while hidden
             }
-            cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+            switch (parentScreen.getEditorType()) {
+            case Archenemy:
+                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class), true);
+                break;
+            case Planechase:
+                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
+                break;
+            default:
+                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+                break;
+            }
         }
 
         @Override
@@ -691,7 +709,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Add", "to main deck", parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+            addItem(menu, "Add", "to " + parentScreen.getMainDeckPage().cardManager.getCaption().toLowerCase(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     if (result == null || result <= 0) { return; }
@@ -699,14 +717,16 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     parentScreen.getMainDeckPage().addCard(card, result);
                 }
             });
-            addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    if (result == null || result <= 0) { return; }
-
-                    parentScreen.getSideboardPage().addCard(card, result);
-                }
-            });
+            if (parentScreen.getSideboardPage() != null) {
+                addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                    @Override
+                    public void run(Integer result) {
+                        if (result == null || result <= 0) { return; }
+    
+                        parentScreen.getSideboardPage().addCard(card, result);
+                    }
+                });
+            }
         }
     }
 
@@ -737,21 +757,25 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 captionPrefix = "Commander";
                 cardManager.setCaption("Commander");
                 icon = FSkinImage.PLANESWALKER;
+                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             case Avatar:
                 captionPrefix = "Avatar";
                 cardManager.setCaption("Avatar");
                 icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
+                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             case Planes:
                 captionPrefix = "Planes";
                 cardManager.setCaption("Planes");
                 icon = FSkinImage.CHAOS;
+                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             case Schemes:
                 captionPrefix = "Schemes";
                 cardManager.setCaption("Schemes");
                 icon = FSkinImage.POISON;
+                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             }
         }
@@ -771,6 +795,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected void onCardActivated(PaperCard card) {
             switch (deckSection) {
             case Main:
+            case Planes:
+            case Schemes:
                 removeCard(card);
                 switch (parentScreen.getEditorType()) {
                 case Draft:
