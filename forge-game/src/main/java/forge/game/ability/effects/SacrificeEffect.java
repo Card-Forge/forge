@@ -64,7 +64,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         if (valid.equals("Self")) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
-                if (game.getAction().sacrifice(card, sa) && remSacrificed) {
+                if (game.getAction().sacrifice(card, sa) != null && remSacrificed) {
                     card.addRemembered(card);
                 }
             }
@@ -89,7 +89,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 
                 for(Card sac : choosenToSacrifice) {
                     final Card lKICopy = CardUtil.getLKICopy(sac);
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa);
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa);
                     // Run Devour Trigger
                     if (devour) {

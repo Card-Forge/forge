@@ -84,11 +84,11 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (final Card c : this.getList()) {
+        for (final Card c : this.getCardList()) {
             c.setTapped(true);
         }
 
-        this.getList().clear();
+        this.resetLists();
     }
 
     /*
@@ -123,16 +123,21 @@ public class CostUntapType extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.untap();
+        return targetCard;
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Untapped";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "UntappedCards";
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

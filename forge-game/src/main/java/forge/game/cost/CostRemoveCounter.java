@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import com.google.common.collect.Lists;
+
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -104,8 +105,8 @@ public class CostRemoveCounter extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        int refund = this.getList().size() == 1 ? this.cntRemoved : 1; // is wrong for Ooze Flux and Novijen Sages
-        for (final Card c : this.getList()) {
+        int refund = this.getCardList().size() == 1 ? this.cntRemoved : 1; // is wrong for Ooze Flux and Novijen Sages
+        for (final Card c : this.getCardList()) {
             c.addCounter(this.counter, refund, false);
         }
     }
@@ -162,16 +163,21 @@ public class CostRemoveCounter extends CostPartWithList {
     }
 
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard){
+    protected Card doPayment(SpellAbility ability, Card targetCard){
         targetCard.subtractCounter(this.counter, cntRemoved);
+        return targetCard;
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "CounterRemove";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "CounterRemoveCards";
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

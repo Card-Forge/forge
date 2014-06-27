@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import com.google.common.base.Predicate;
+
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -89,11 +90,11 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (final Card c : this.getList()) {
+        for (final Card c : this.getCardList()) {
             c.setTapped(false);
         }
 
-        this.getList().clear();
+        this.getCardList().clear();
     }
 
     /*
@@ -162,16 +163,21 @@ public class CostTapType extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.tap();
+        return targetCard;
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Tapped";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "TappedCards";
     }
 
     // Inputs

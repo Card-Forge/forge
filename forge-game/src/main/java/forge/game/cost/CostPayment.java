@@ -144,7 +144,7 @@ public class CostPayment {
         // this clears lists used for undo. 
         for (final CostPart part1 : this.paidCostParts) {
             if (part1 instanceof CostPartWithList) {
-                ((CostPartWithList) part1).resetList();
+                ((CostPartWithList) part1).resetLists();
             }
         }
         return true;
@@ -176,7 +176,7 @@ public class CostPayment {
             }
             // abilities care what was used to pay for them
             if( part instanceof CostPartWithList ) {
-                ((CostPartWithList) part).resetList();
+                ((CostPartWithList) part).resetLists();
             }
         }
         return true;

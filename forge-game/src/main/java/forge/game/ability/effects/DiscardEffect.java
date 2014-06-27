@@ -104,7 +104,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (runDiscard) {
                         final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                         for (final Card c : toDiscard) {
-                            boolean hasDiscarded = p.discard(c, sa);
+                            boolean hasDiscarded = p.discard(c, sa) != null;
                             if (hasDiscarded) {
                                 discarded.add(c);
                             }
@@ -122,7 +122,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 if (mode.equals("Hand")) {
                     boolean shouldRemember = sa.hasParam("RememberDiscarded");
                     for(Card c : Lists.newArrayList(p.getCardsIn(ZoneType.Hand))) { // without copying will get concurrent modification exception
-                        boolean hasDiscarded = p.discard(c, sa);
+                        boolean hasDiscarded = p.discard(c, sa) != null;
                         if( hasDiscarded && shouldRemember )
                             source.addRemembered(c);
                     }
@@ -161,7 +161,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                                 break;
                                 
                             final Card disc = Aggregates.random(list);
-                            if ( p.discard(disc, sa) ) 
+                            if (p.discard(disc, sa) != null) 
                                 discarded.add(disc);
                             list.remove(disc);
                         }

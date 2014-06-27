@@ -112,7 +112,7 @@ public class CostPutCounter extends CostPartWithList {
         if(this.payCostFromSource())
             source.subtractCounter(this.counter, this.lastPaidAmount);
         else
-            for (final Card c : this.getList()) {
+            for (final Card c : this.getCardList()) {
                 c.subtractCounter(this.counter, 1);
             }
     }
@@ -177,8 +177,9 @@ public class CostPutCounter extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard){
+    protected Card doPayment(SpellAbility ability, Card targetCard){
         targetCard.addCounter(this.getCounter(), 1, false);
+        return targetCard;
     }
     
     protected void executePayment(SpellAbility ability, Card targetCard, int c) {
@@ -196,8 +197,12 @@ public class CostPutCounter extends CostPartWithList {
 
 
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "CounterPut";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "CounterPutCards";
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

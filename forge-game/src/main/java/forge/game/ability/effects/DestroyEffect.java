@@ -96,7 +96,7 @@ public class DestroyEffect extends SpellAbilityEffect {
                 boolean destroyed = false;
                 final Card lki = CardUtil.getLKICopy(tgtC);
                 if (sac) {
-                    destroyed = game.getAction().sacrifice(tgtC, sa);
+                    destroyed = game.getAction().sacrifice(tgtC, sa) != null;
                 } else if (noRegen) {
                     destroyed = game.getAction().destroyNoRegeneration(tgtC, sa);
                 } else {
@@ -115,7 +115,7 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (unTgtC.isInPlay()) {
                 boolean destroyed = false;
                 if (sac) {
-                    destroyed = game.getAction().sacrifice(unTgtC, sa);
+                    destroyed = game.getAction().sacrifice(unTgtC, sa) != null;
                 } else if (noRegen) {
                     destroyed = game.getAction().destroyNoRegeneration(unTgtC, sa);
                 } else {

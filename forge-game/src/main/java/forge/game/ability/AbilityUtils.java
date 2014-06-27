@@ -241,22 +241,37 @@ public class AbilityUtils {
             }
         } else {
             List<Card> list = null;
-            if (defined.startsWith("Sacrificed")) {
+            if (defined.startsWith("SacrificedCards")) {
+                list = sa.getRootAbility().getPaidList("SacrificedCards");
+            }
+            else if (defined.startsWith("Sacrificed")) {
                 list = sa.getRootAbility().getPaidList("Sacrificed");
             }
 
+            else if (defined.startsWith("DiscardedCards")) {
+                list = sa.getRootAbility().getPaidList("DiscardedCards");
+            }
             else if (defined.startsWith("Discarded")) {
                 list = sa.getRootAbility().getPaidList("Discarded");
             }
 
+            else if (defined.startsWith("ExiledCards")) {
+                list = sa.getRootAbility().getPaidList("ExiledCards");
+            }
             else if (defined.startsWith("Exiled")) {
                 list = sa.getRootAbility().getPaidList("Exiled");
             }
 
+            else if (defined.startsWith("TappedCards")) {
+                list = sa.getRootAbility().getPaidList("TappedCards");
+            }
             else if (defined.startsWith("Tapped")) {
                 list = sa.getRootAbility().getPaidList("Tapped");
             }
 
+            else if (defined.startsWith("UntappedCards")) {
+                list = sa.getRootAbility().getPaidList("UntappedCards");
+            }
             else if (defined.startsWith("Untapped")) {
                 list = sa.getRootAbility().getPaidList("Untapped");
             }

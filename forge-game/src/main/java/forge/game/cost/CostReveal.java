@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -147,23 +148,29 @@ public class CostReveal extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.getGame().getAction().reveal(Lists.newArrayList(targetCard), ability.getActivatingPlayer());
+        return targetCard;
     }
 
     
     @Override protected boolean canPayListAtOnce() { return true; }
     @Override
-    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) {
+    protected Collection<Card> doListPayment(SpellAbility ability, Collection<Card> targetCards) {
         ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
+        return targetCards;
     }    
     
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Revealed";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "RevealedCards";
     }
 
     // Inputs

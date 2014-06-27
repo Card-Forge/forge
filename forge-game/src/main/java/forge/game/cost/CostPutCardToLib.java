@@ -133,8 +133,12 @@ public class CostPutCardToLib extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "CardPutToLib";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "CardPutToLibCards";
     }
 
     /*
@@ -195,8 +199,8 @@ public class CostPutCardToLib extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
+        return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
     }
 
 

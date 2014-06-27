@@ -41,8 +41,12 @@ public class CostFlipCoin extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Flipped";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "FlippedCards";
     }
 
     /*
@@ -66,10 +70,11 @@ public class CostFlipCoin extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         final Player activator = ability.getActivatingPlayer();
         int i = FlipCoinEffect.getFilpMultiplier(activator);
         FlipCoinEffect.flipCoinCall(activator, ability, i);
+        return targetCard;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

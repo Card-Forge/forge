@@ -62,7 +62,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         }
 
         for (int i = 0; i < list.size(); i++) {
-            if (game.getAction().sacrifice(list.get(i), sa) && remSacrificed) {
+            if (game.getAction().sacrifice(list.get(i), sa) != null && remSacrificed) {
                 card.addRemembered(list.get(i));
             }
         }

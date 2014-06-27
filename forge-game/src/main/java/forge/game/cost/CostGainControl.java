@@ -88,16 +88,21 @@ public class CostGainControl extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.setController(ability.getActivatingPlayer(), ability.getActivatingPlayer().getGame().getNextTimestamp());
+        return targetCard;
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "ControllGained"; // why the hell double "L"?
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "ControlGainedCards";
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

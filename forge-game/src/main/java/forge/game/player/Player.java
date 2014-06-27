@@ -1591,9 +1591,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a {@link forge.CardList} object.
+     * @return the discarded {@link Card} in its new location.
      */
-    public final boolean discard(final Card c, final SpellAbility sa) {
+    public final Card discard(final Card c, final SpellAbility sa) {
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
@@ -1608,19 +1608,20 @@ public class Player extends GameEntity implements Comparable<Player> {
         repRunParams.put("Affected", this);
 
         if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
-            return false;
+            return null;
         }
 
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
         boolean discardMadness = sa != null && sa.hasParam("Madness");
 
+        final Card newCard;
         if (discardToTopOfLibrary) {
-            game.getAction().moveToLibrary(c, 0);
+            newCard = game.getAction().moveToLibrary(c, 0);
             // Play the Discard sound
         } else if (discardMadness) {
-            game.getAction().exile(c);
+            newCard = game.getAction().exile(c);
         } else {
-            game.getAction().moveToGraveyard(c);
+            newCard = game.getAction().moveToGraveyard(c);
             // Play the Discard sound
         }
         this.numDiscardedThisTurn++;
@@ -1635,8 +1636,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Cause", cause);
         runParams.put("IsMadness", (Boolean) discardMadness);
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
-        return true;
 
+        return newCard;
     }
 
     /**

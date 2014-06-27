@@ -110,13 +110,18 @@ public class CostUnattach extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.unEquipCard(targetCard.getEquipping().get(0));
+        return targetCard;
     }
 
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Unattached";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "UnattachedCards";
     }
 
    

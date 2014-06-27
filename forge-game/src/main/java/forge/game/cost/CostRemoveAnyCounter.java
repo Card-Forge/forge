@@ -60,8 +60,12 @@ public class CostRemoveAnyCounter extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "CounterRemove";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "CounterRemoveCards";
     }
 
     /**
@@ -146,8 +150,9 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     }
 
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard){
+    protected Card doPayment(SpellAbility ability, Card targetCard){
         targetCard.subtractCounter(this.getCounter(), 1);
+        return targetCard;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

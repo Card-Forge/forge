@@ -116,16 +116,20 @@ public class CostSacrifice extends CostPartWithList {
     }
 
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.getGame().getAction().sacrifice(targetCard, ability);
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
+        return targetCard.getGame().getAction().sacrifice(targetCard, ability);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Sacrificed";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "SacrificedCards";
     }
 
     // Inputs

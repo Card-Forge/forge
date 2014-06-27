@@ -1261,12 +1261,12 @@ public class GameAction {
         return true;
     }
 
-    public final boolean sacrifice(final Card c, final SpellAbility source) {
+    public final Card sacrifice(final Card c, final SpellAbility source) {
         if (!c.canBeSacrificedBy(source)) {
-            return false;
+            return null;
         }
 
-        this.sacrificeDestroy(c);
+        final Card newCard = this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
@@ -1276,7 +1276,7 @@ public class GameAction {
         runParams.put("Card", c);
         runParams.put("Cause", source);
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
-        return true;
+        return newCard;
     }
 
     /**
@@ -1358,7 +1358,8 @@ public class GameAction {
         runParams.put("Causer", activator);
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
 
-        return this.sacrificeDestroy(c);
+        final Card sacrificed = this.sacrificeDestroy(c);
+        return sacrificed != null;
     }
 
     /**
@@ -1413,11 +1414,12 @@ public class GameAction {
      * 
      * @param c
      *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
+     * @return the sacrificed Card in its new location, or {@code null} if the
+     * sacrifice wasn't successful.
      */
-    public final boolean sacrificeDestroy(final Card c) {
+    public final Card sacrificeDestroy(final Card c) {
         if (!c.isInPlay()) {
-            return false;
+            return null;
         }
 
         boolean persist = (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) && !c.isToken();
@@ -1464,7 +1466,7 @@ public class GameAction {
 
             game.getStack().addSimultaneousStackEntry(undyingAb);
         }
-        return true;
+        return newCard;
     } // sacrificeDestroy()
 
     public void reveal(Collection<Card> cards, Player cardOwner) {

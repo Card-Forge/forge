@@ -45,8 +45,12 @@ public class CostMill extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Milled";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "MilledCards";
     }
 
     /*
@@ -106,8 +110,8 @@ public class CostMill extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.getGame().getAction().moveToGraveyard(targetCard);
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
+        return targetCard.getGame().getAction().moveToGraveyard(targetCard);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

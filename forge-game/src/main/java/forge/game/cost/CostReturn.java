@@ -110,16 +110,20 @@ public class CostReturn extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.getGame().getAction().moveToHand(targetCard);
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
+        return targetCard.getGame().getAction().moveToHand(targetCard);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Returned";
+    }
+    @Override
+    public String getHashForCardList() {
+    	return "ReturnedCards";
     }
 
 

@@ -150,16 +150,19 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.getController().discard(targetCard, ability);
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
+        return targetCard.getController().discard(targetCard, ability);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
+    public String getHashForLKIList() {
         return "Discarded";
+    }
+    public String getHashForCardList() {
+    	return "DiscardedCards";
     }
 
     @Override

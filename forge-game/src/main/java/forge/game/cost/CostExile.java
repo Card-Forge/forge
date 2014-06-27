@@ -194,23 +194,24 @@ public class CostExile extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected void doPayment(SpellAbility ability, Card targetCard) {
-        Game game = targetCard.getGame();
-
-        game.getAction().exile(targetCard);
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
+        final Game game = targetCard.getGame();
+        return game.getAction().exile(targetCard);
     }
 
-    public static final String HashListKey = "Exiled";
+    public static final String HashLKIListKey = "Exiled";
+    public static final String HashCardListKey = "ExiledCards";
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#getHashForList()
      */
     @Override
-    public String getHashForList() {
-        // TODO Auto-generated method stub
-        return HashListKey;
+    public String getHashForLKIList() {
+        return HashLKIListKey;
     }
-    
-    
+    @Override
+    public String getHashForCardList() {
+    	return HashCardListKey;
+    }
 
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
