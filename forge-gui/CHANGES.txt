@@ -23,9 +23,9 @@ New Cards
 
 
 
---------------------
-New M15 branch Cards
---------------------
+---------------------------
+New Magic 2015 branch Cards
+---------------------------
 
 Chasm Skulker
 Coral Barrier
@@ -52,6 +52,21 @@ Ob Nixilis, Unshackled
 Aggressive Mining
 Master of Predicaments
 Soul of Innistrad
+Sliver Hive
+Yisan, the Wanderer Bard
+Soul of Theros
+Witch's Familiar
+Endless Obedience
+Ajani Steadfast
+Brawler's Plate
+Hot Soup
+Obelisk of Urd
+Perilous Vault
+Jace, the Living Guildpact
+Soul of Ravnica
+Might Makes Right
+Miner's Bane
+Warden of the Beyond
 
 
 ------------
