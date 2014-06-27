@@ -428,7 +428,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = chooseXValue(cost.getList().size());
+                c = chooseXValue(cost.getLKIList().size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
@@ -503,7 +503,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = chooseXValue(cost.getList().size());
+                c = chooseXValue(cost.getLKIList().size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
@@ -559,7 +559,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = chooseXValue(cost.getList().size());
+                c = chooseXValue(cost.getLKIList().size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
