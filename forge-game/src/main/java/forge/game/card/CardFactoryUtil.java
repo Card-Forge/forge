@@ -302,7 +302,7 @@ public class CardFactoryUtil {
         StringBuilder playTrig = new StringBuilder();
         UUID playSvar = UUID.randomUUID();
 
-        playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | NewCounterAmount$ 0 | Secondary$ True | Execute$ ");
+        playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True | Execute$ ");
         playTrig.append(playSvar.toString());
         playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
         playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
