@@ -817,7 +817,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void updateCaption() {
-            caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
+            if (deckSection == DeckSection.Commander) {
+                caption = captionPrefix; //don't display count for commander section since it won't be more than 1
+            }
+            else {
+                caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
+            }
         }
 
         @Override
