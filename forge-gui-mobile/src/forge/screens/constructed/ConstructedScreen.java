@@ -366,9 +366,9 @@ public class ConstructedScreen extends LaunchScreen {
         private FComboBox<Object> cbArchenemyTeam = new FComboBox<Object>();
 
         private final FLabel btnDeck           = new FLabel.ButtonBuilder().text("Loading Deck...").build();
-        private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: Random").build();
-        private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: Random").build();
-        private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: Random").build();
+        private final FLabel btnSchemeDeck     = new FLabel.ButtonBuilder().text("Scheme Deck: Random Generated Deck").build();
+        private final FLabel btnCommanderDeck  = new FLabel.ButtonBuilder().text("Commander Deck: Random Generated Deck").build();
+        private final FLabel btnPlanarDeck     = new FLabel.ButtonBuilder().text("Planar Deck: Random Generated Deck").build();
         private final FLabel btnVanguardAvatar = new FLabel.ButtonBuilder().text("Vanguard Avatar: Random").build();
 
         private final FDeckChooser deckChooser, lstSchemeDecks, lstCommanderDecks, lstPlanarDecks;
@@ -389,9 +389,27 @@ public class ConstructedScreen extends LaunchScreen {
                             Lang.joinHomogenous(deckChooser.getLstDecks().getSelectedItems(), DeckProxy.FN_GET_NAME));
                 }
             });
-            lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi);
             lstCommanderDecks = new FDeckChooser(GameType.Commander, isAi);
+            lstCommanderDecks.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    btnCommanderDeck.setText("Commander Deck: " + lstCommanderDecks.getLstDecks().getSelectedItem().getName());
+                }
+            });
+            lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi);
+            lstSchemeDecks.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    btnSchemeDeck.setText("Scheme Deck: " + lstSchemeDecks.getLstDecks().getSelectedItem().getName());
+                }
+            });
             lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi);
+            lstPlanarDecks.getLstDecks().setSelectionChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    btnPlanarDeck.setText("Planar Deck: " + lstPlanarDecks.getLstDecks().getSelectedItem().getName());
+                }
+            });
             lstVanguardAvatars = new FVanguardChooser(isAi);
 
             createAvatar();
