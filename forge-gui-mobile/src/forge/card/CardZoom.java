@@ -67,7 +67,9 @@ public class CardZoom extends FOverlay {
         //draw zoom/details options
         FSkinColor foreColor;
         if (zoomMode) {
-            CardRenderer.drawZoom(g, card, w, y);
+            if (!CardRenderer.drawZoom(g, card, w, y)) {
+                CardRenderer.drawDetails(g, card, w, y); //draw details if can't draw zoom
+            }
             g.fillRect(FList.PRESSED_COLOR, 0, y, x, h);
             foreColor = FList.FORE_COLOR;
         }

@@ -52,7 +52,7 @@ public class CardRenderer {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
     }
 
-    public static void drawZoom(Graphics g, Card card, float width, float height) {
+    public static boolean drawZoom(Graphics g, Card card, float width, float height) {
         float w = width - 2 * FDialog.INSETS;
         float h = height - 2 * FDialog.INSETS;
 
@@ -64,6 +64,8 @@ public class CardRenderer {
             key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
         }
         Texture image = ImageCache.getImage(key, true);
+        if (image == null || image == ImageCache.defaultImage) { return false; } //don't support drawing zoom for null or default textures
+
         float imageWidth = image.getWidth();
         float imageHeight = image.getHeight();
 
@@ -92,6 +94,7 @@ public class CardRenderer {
         }
 
         g.drawImage(image, (width - imageWidth) / 2, (height - imageHeight) / 2, imageWidth, imageHeight);
+        return true;
     }
 
     public static void drawDetails(Graphics g, Card card, float width, float height) {
@@ -449,7 +452,12 @@ public class CardRenderer {
 
     public static void drawCardWithOverlays(Graphics g, Card card, float x, float y, float w, float h) {
         Texture image = ImageCache.getImage(card);
-        g.drawImage(image, x, y, w, h);
+        if (image != null) {
+            g.drawImage(image, x, y, w, h);
+        }
+        else { //draw cards without textures as just a black rectangle
+            g.fillRect(Color.BLACK, x, y, w, h);
+        }
 
         boolean canShow = FControl.mayShowCard(card);
         if (canShow) {

@@ -572,7 +572,6 @@ public class ConstructedScreen extends LaunchScreen {
 
             //disable team combo boxes for now
             cbTeam.setEnabled(false);
-            cbArchenemyTeam.setEnabled(false);
         }
 
         @Override
