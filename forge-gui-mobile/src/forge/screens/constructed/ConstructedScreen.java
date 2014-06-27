@@ -27,6 +27,7 @@ import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
+import forge.model.CardCollections;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -192,8 +193,6 @@ public class ConstructedScreen extends LaunchScreen {
         //disable player count and variants for now until they work properly
         lblPlayers.setEnabled(false);
         cbPlayerCount.setEnabled(false);
-        lblVariants.setEnabled(false);
-        cbVariants.setEnabled(false);
     }
 
     private void updateVariantSelection() {
@@ -318,7 +317,7 @@ public class ConstructedScreen extends LaunchScreen {
                     }
                 }
 
-                // Initialise variables for other variants
+                // Initialize variables for other variants
                 deck = deck == null ? rp.getDeck() : deck;
                 Iterable<PaperCard> schemes = null;
                 boolean playerIsArchenemy = isPlayerArchenemy(i);
@@ -503,7 +502,7 @@ public class ConstructedScreen extends LaunchScreen {
                     Forge.openScreen(deckChooser);
                 }
             });
-            /*add(btnCommanderDeck);
+            add(btnCommanderDeck);
             btnCommanderDeck.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -534,11 +533,11 @@ public class ConstructedScreen extends LaunchScreen {
                     deckChooser.setHeaderCaption("Select Vanguard Avatar for " + txtPlayerName.getText());
                     Forge.openScreen(deckChooser);
                 }
-            });*/
+            });
 
             updateVariantControlsVisibility();
 
-            /*final CardCollections decks = FModel.getDecks();
+            final CardCollections decks = FModel.getDecks();
             
             lstCommanderDecks.list.addItem("Generate");
             if (decks.getCommander().size() > 0) {
@@ -569,7 +568,7 @@ public class ConstructedScreen extends LaunchScreen {
             }
             lstPlanarDecks.setSelectedIndex(0);
 
-            updateVanguardList();*/
+            updateVanguardList();
 
             //disable team combo boxes for now
             cbTeam.setEnabled(false);
@@ -1064,7 +1063,7 @@ public class ConstructedScreen extends LaunchScreen {
         private class VariantRenderer extends FList.ListItemRenderer<Variant> {
             @Override
             public float getItemHeight() {
-                return Utils.AVG_FINGER_HEIGHT + 12;
+                return SettingsScreen.SETTING_HEIGHT;
             }
 
             @Override
@@ -1075,14 +1074,20 @@ public class ConstructedScreen extends LaunchScreen {
 
             @Override
             public void drawValue(Graphics g, Integer index, Variant value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+                float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING;
+                x += offset;
+                y += offset;
+                w -= 2 * offset;
+                h -= 2 * offset;
+
                 String text = value.gameType.toString();
                 float totalHeight = h;
-                h = font.getMultiLineBounds(text).height + 5;
+                h = font.getMultiLineBounds(text).height + SettingsScreen.SETTING_PADDING;
 
                 g.drawText(text, font, color, x, y, w, h, false, HAlignment.LEFT, false);
                 value.draw(g, font, color, x, y, w, h);
-                h += 5;
-                g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h - y, true, HAlignment.LEFT, false);            
+                h += SettingsScreen.SETTING_PADDING;
+                g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);            
             }
         }
     }
