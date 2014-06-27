@@ -333,7 +333,7 @@ public class ConstructedScreen extends LaunchScreen {
 
                 //Vanguard
                 if (appliedVariants.contains(GameType.Vanguard)) {
-                    vanguardAvatar = playerPanel.lstVanguardAvatars.getVanguard();
+                    vanguardAvatar = playerPanel.lstVanguardAvatars.getLstVanguards().getSelectedItem();
                     if (vanguardAvatar == null) {
                         FOptionPane.showErrorDialog("No Vanguard avatar selected for " + name
                                 + ". Please choose one or disable the Vanguard variant");
@@ -411,6 +411,12 @@ public class ConstructedScreen extends LaunchScreen {
                 }
             });
             lstVanguardAvatars = new FVanguardChooser(isAi);
+            lstVanguardAvatars.getLstVanguards().setSelectionChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    btnVanguardAvatar.setText("Vanguard Avatar: " + lstVanguardAvatars.getLstVanguards().getSelectedItem().getName());
+                }
+            });
 
             createAvatar();
             add(avatarLabel);

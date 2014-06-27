@@ -1,8 +1,5 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Forge;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -18,10 +15,10 @@ import forge.util.Utils;
 public class FVanguardChooser extends FScreen {
     public static final float PADDING = Utils.scaleMin(5);
 
-    private static final List<PaperCard> allHumanAvatars = new ArrayList<PaperCard>();
-    private static final List<PaperCard> allAiAvatars = new ArrayList<PaperCard>();
-    private static final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
-    private static final List<PaperCard> nonRandomAiAvatars = new ArrayList<PaperCard>();
+    private static final CardPool allHumanAvatars = new CardPool();
+    private static final CardPool allAiAvatars = new CardPool();
+    private static final CardPool nonRandomHumanAvatars = new CardPool();
+    private static final CardPool nonRandomAiAvatars = new CardPool();
     
     static {
         for (PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
@@ -40,8 +37,8 @@ public class FVanguardChooser extends FScreen {
         }
     }
 
-    private final CardManager lstVanguards = new CardManager(true);
-    private final FButton btnRandom = new FButton("Random Avatar");
+    private final CardManager lstVanguards = add(new CardManager(true));
+    private final FButton btnRandom = add(new FButton("Random Vanguard"));
     private boolean isAi;
 
     public FVanguardChooser(boolean isAi0) {
@@ -57,27 +54,29 @@ public class FVanguardChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 if (isAi) {
-                    lstVanguards.setSelectedItem(Aggregates.random(nonRandomAiAvatars));
+                    lstVanguards.setSelectedItem(Aggregates.random(nonRandomAiAvatars).getKey());
                 }
                 else {
-                    lstVanguards.setSelectedItem(Aggregates.random(nonRandomHumanAvatars));
+                    lstVanguards.setSelectedItem(Aggregates.random(nonRandomHumanAvatars).getKey());
                 }
+                Forge.back();
             }
         });
         lstVanguards.setup(ItemManagerConfig.VANGUARDS);
-        lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars);
+        lstVanguards.setHideViewOptions(1, true);
+        lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars, true);
         if (lstVanguards.getItemCount() > 0) {
             lstVanguards.setSelectedIndex(0);
         }
     }
-    
+
     public void setIsAi(boolean isAi0) {
         if (isAi == isAi0) { return; }
         isAi = isAi0;
 
         PaperCard lastSelection = lstVanguards.getSelectedItem();
 
-        lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars);
+        lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars, true);
 
         if (lastSelection != null) {
             lstVanguards.setSelectedItem(lastSelection);
@@ -87,8 +86,8 @@ public class FVanguardChooser extends FScreen {
         }
     }
 
-    public PaperCard getVanguard() {
-        return lstVanguards.getSelectedItem();
+    public CardManager getLstVanguards() {
+        return lstVanguards;
     }
 
     @Override

@@ -132,14 +132,6 @@ public class FDeckChooser extends FScreen {
                 }
             }
         });
-        btnRandom.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
-                    FDeckViewer.show(getDeck());
-                }
-            }
-        });
         if (gameType0 != GameType.Constructed) { //delay initialize for constructed until saved decks can be reloaded
             initialize(null, DeckType.RANDOM_DECK);
         }
@@ -342,6 +334,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
+                Forge.back();
             }
         });
     }
@@ -414,6 +407,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelectColors(lstDecks);
+                Forge.back();
             }
         });
     }
@@ -436,6 +430,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
+                Forge.back();
             }
         });
     }
@@ -527,6 +522,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
+                Forge.back();
             }
         });
     }
@@ -549,6 +545,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
+                Forge.back();
             }
         });
     }
@@ -571,6 +568,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
+                Forge.back();
             }
         });
     }
