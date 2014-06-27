@@ -147,13 +147,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void createPTOverlay() {
-        // Power
+        // Power/Toughness
         this.ptText = new OutlinedLabel();
         this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
         this.ptText.setForeground(Color.white);
         this.ptText.setGlow(Color.black);
         this.add(this.ptText);
-        // Toughness
+        this.updatePTOverlay();
+        // Damage
         this.damageText = new OutlinedLabel();
         this.damageText.setFont(this.getFont().deriveFont(Font.BOLD, 15f));
         this.damageText.setForeground(new Color(160,0,0));
@@ -599,42 +600,39 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         return p;
     }
 
-    /**
-     * <p>
-     * setText.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     */
-    public final void setText(final Card card) {
-        if ((card == null)) {
+    public final void updateText() {
+        if (card == null) {
             return;
         }
 
         // Card name overlay
         if (card.isFaceDown()) {
             this.titleText.setText("");
-        } else {
+        }
+        else {
             this.titleText.setText(card.getName());
         }
-
-        // P/T overlay
-        String sPt = "";
-        if (card.isCreature() && card.isPlaneswalker()) {
-            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCurrentLoyalty());
-        } else if (card.isCreature()) {
-            sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
-        } else if (card.isPlaneswalker()) {
-            sPt = String.valueOf(card.getCurrentLoyalty());
-        }
-        this.ptText.setText(sPt);
 
         int damage = card.getDamage();
         this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
         // Card Id overlay
         this.cardIdText.setText(Integer.toString(card.getUniqueNumber()));
+    }
+
+    public final void updatePTOverlay() {
+        // P/T overlay
+        String sPt = "";
+        if (card.isCreature() && card.isPlaneswalker()) {
+            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCurrentLoyalty());
+        }
+        else if (card.isCreature()) {
+            sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
+        }
+        else if (card.isPlaneswalker()) {
+            sPt = String.valueOf(card.getCurrentLoyalty());
+        }
+        this.ptText.setText(sPt);
     }
 
     /**
@@ -655,13 +653,17 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
+        if (this.card != card) {
+            this.updatePTOverlay(); //update PT Overlay if card changes
+        }
+
         this.card = card;
         if (!this.isShowing()) {
             return;
         }
 
         final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
-        this.setText(this.getCard());
+        this.updateText();
 
         this.setImage(image);
     }

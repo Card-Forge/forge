@@ -380,9 +380,22 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     public void updateSingleCard(Card c) {
         Zone zone = c.getZone();
-        if (null != zone && zone.getZoneType() == ZoneType.Battlefield) {
+        if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
             PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
-            pa.updateSingleCard(c);
+            pa.updateCard(c, false);
+        }
+    }
+
+    public void refreshCardDetails(Collection<Card> cards) {
+        for (Card c : cards) {
+            Zone zone = c.getZone();
+            if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
+                PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
+                CardPanel pnl = pa.getCardPanel(c.getUniqueNumber());
+                if (pnl != null) {
+                    pnl.updatePTOverlay();
+                }
+            }
         }
     }
 

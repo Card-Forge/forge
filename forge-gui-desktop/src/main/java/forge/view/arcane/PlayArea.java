@@ -351,14 +351,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param c
-     */
-    public void updateSingleCard(Card c) {
-        updateCard(c);
-    }
-
     private List<CardStackRow> tryArrangePilesOfWidth(final CardStackRow lands, final CardStackRow tokens, final CardStackRow creatures, CardStackRow others) {
         List<CardStackRow> template = new ArrayList<PlayArea.CardStackRow>();
         
@@ -585,8 +577,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         FThreads.assertExecutedByEdt(true);
         recalculateCardPanels(model);
     }
-    
-    
+
     private void recalculateCardPanels(final List<Card> model) {
         List<Card> oldCards, toDelete;
         oldCards = new ArrayList<Card>();
@@ -634,20 +625,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
     
         for (final Card card : model) {
-            updateCard(card);
+            updateCard(card, true);
         }
         invalidate();
         repaint();
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     */
-    private void updateCard(final Card card) {
+    public void updateCard(final Card card, boolean fromRefresh) {
         final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
-        if (null == toPanel)
-         return;
+        if (null == toPanel) { return; }
+
         if (card.isTapped()) {
             toPanel.setTapped(true);
             toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
@@ -697,6 +684,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
    
         toPanel.setCard(toPanel.getCard());
+        if (fromRefresh) {
+            toPanel.updatePTOverlay(); //ensure PT Overlay updated on refresh
+        }
     }
 
     private static enum RowType {

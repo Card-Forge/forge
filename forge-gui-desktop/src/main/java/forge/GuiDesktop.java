@@ -384,7 +384,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void refreshCardDetails(Collection<Card> cards) {
-        //TODO: Consider caching card details like mobile game
+        CMatchUI.SINGLETON_INSTANCE.refreshCardDetails(cards);
     }
 
     @Override
