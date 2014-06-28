@@ -1214,10 +1214,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (counterType == CounterType.DREAM && this.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
             	addAmount = Math.min(7 - this.getCounters(CounterType.DREAM), addAmount);
             }
-        } else {
+        }
+        else {
         	addAmount = 0;
         }
-        
+
         if (addAmount == 0) {
             return;
         }
@@ -1225,13 +1226,14 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         int powerBonusBefore = this.getPowerBonusFromCounters();
         int toughnessBonusBefore = this.getToughnessBonusFromCounters();
+        int loyaltyBefore = this.getCurrentLoyalty();
 
         Integer oldValue = this.counters.get(counterType);
         int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
         this.counters.put(counterType, Integer.valueOf(newValue));
 
-        //fire card stats changed event if p/t bonuses changed from added counters
-        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters()) {
+        //fire card stats changed event if p/t bonuses or loyalty changed from added counters
+        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
             getGame().fireEvent(new GameEventCardStatsChanged(this));
         }
 
@@ -1300,6 +1302,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         int powerBonusBefore = this.getPowerBonusFromCounters();
         int toughnessBonusBefore = this.getToughnessBonusFromCounters();
+        int loyaltyBefore = this.getCurrentLoyalty();
 
         if (newValue > 0) {
             this.counters.put(counterName, Integer.valueOf(newValue));
@@ -1308,8 +1311,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.counters.remove(counterName);
         }
 
-        //fire card stats changed event if p/t bonuses changed from subtracted counters
-        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters()) {
+        //fire card stats changed event if p/t bonuses or loyalty changed from subtracted counters
+        if (powerBonusBefore != getPowerBonusFromCounters() || toughnessBonusBefore != getToughnessBonusFromCounters() || loyaltyBefore != getCurrentLoyalty()) {
             getGame().fireEvent(new GameEventCardStatsChanged(this));
         }
 
