@@ -49,12 +49,17 @@ public abstract class ItemView<T extends InventoryItem> {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             onResize(visibleWidth, visibleHeight);
-            //scroll selection into view whenever view height changes
-            if (visibleHeight != heightBackup) {
-                heightBackup = visibleHeight;
-                scrollSelectionIntoView();
-            }
             return new ScrollBounds(visibleWidth, ItemView.this.getScrollHeight());
+        }
+
+        protected void setScrollPositionsAfterLayout(float scrollLeft0, float scrollTop0) {
+            if (getHeight() != heightBackup) {
+                heightBackup = getHeight();
+                scrollSelectionIntoView(); //scroll selection into view whenever view height changes
+            }
+            else {
+                super.setScrollPositionsAfterLayout(scrollLeft0, scrollTop0);
+            }
         }
 
         @Override

@@ -61,6 +61,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
     private int columnCount = 4;
+    private float scrollHeight = 0;
     private ColumnDef pileBy = null;
     private GroupDef groupBy = null;
     private ItemInfo focalItem;
@@ -529,6 +530,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             group.setBounds(groupX, groupY, groupWidth, y - groupY);
             y += PADDING;
         }
+        scrollHeight = y;
 
         if (forRefresh) { //refresh ordered items if needed
             int index = 0;
@@ -551,7 +553,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected float getScrollHeight() {
-        return groups.get(groups.size() - 1).getBottom() + PADDING;
+        return scrollHeight;
     }
 
     @Override
@@ -776,8 +778,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         ItemInfo itemInfo = orderedItems.get(selectedIndices.get(0));
         Vector2 screenPos = itemInfo.group.getScreenPosition();
         Vector2 relPos = itemInfo.group.getChildRelativePosition(itemInfo);
-        return new Rectangle(screenPos.x + relPos.x - SEL_BORDER_SIZE,
-                screenPos.y + relPos.y - itemInfo.group.getTop() - SEL_BORDER_SIZE,
+        return new Rectangle(screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
+                screenPos.y + relPos.y - SEL_BORDER_SIZE,
                 itemInfo.getWidth() + 2 * SEL_BORDER_SIZE, itemInfo.getHeight() + 2 * SEL_BORDER_SIZE);
     }
 
@@ -849,7 +851,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (items.isEmpty()) { return; }
 
             final float visibleTop = getScrollValue();
-            final float visibleBottom = visibleTop + getHeight();
+            final float visibleBottom = visibleTop + getScroller().getHeight();
             for (ItemInfo itemInfo : items) {
                 if (itemInfo.getBottom() < visibleTop) {
                     continue;
@@ -890,8 +892,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         //provide special override for this function to account for special ItemInfo positioning logic
         @Override
-        public Vector2 getChildRelativePosition(FDisplayObject child) {
-            return new Vector2(child.getLeft() - getScrollLeft(), child.getTop() - getScrollValue());
+        protected Vector2 getChildRelativePosition(FDisplayObject child, float offsetX, float offsetY) {
+            return new Vector2(child.getLeft() - getScrollLeft() + offsetX - getLeft(), child.getTop() - getScrollValue() + offsetY - getTop());
         }
     }
     private class Pile extends FDisplayObject {

@@ -67,7 +67,7 @@ public enum ItemManagerConfig {
     SCHEME_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
     VANGUARDS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, true,
-            null, null, 3, 1),
+            null, null, 3, 0),
     DRAFT_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
     SEALED_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,

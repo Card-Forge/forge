@@ -104,11 +104,11 @@ public abstract class FContainer extends FDisplayObject {
         }
     }
 
-    public Vector2 getChildRelativePosition(FDisplayObject child) {
+    public final Vector2 getChildRelativePosition(FDisplayObject child) {
         return getChildRelativePosition(child, 0, 0);
     }
 
-    private Vector2 getChildRelativePosition(FDisplayObject child, float offsetX, float offsetY) {
+    protected Vector2 getChildRelativePosition(FDisplayObject child, float offsetX, float offsetY) {
         for (FDisplayObject c : children) { //check direct children first
             if (child == c) {
                 return new Vector2(c.getLeft() + offsetX, c.getTop() + offsetY);

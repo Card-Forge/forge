@@ -130,7 +130,7 @@ public abstract class FScrollPane extends FContainer {
     }
 
     @Override
-    protected final void doLayout(float width, float height) {
+    protected void doLayout(float width, float height) {
         scrollBounds = layoutAndGetScrollBounds(width, height);
         scrollBounds.increaseWidthTo(width); //ensure scroll bounds extends at least to visible bounds
         scrollBounds.increaseHeightTo(height);
