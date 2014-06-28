@@ -23,6 +23,7 @@ import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.FControl;
+import forge.sound.MusicPlayer;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
@@ -45,6 +46,7 @@ public class Forge implements ApplicationListener {
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
+    private static MusicPlayer musicPlayer;
     private static final SoundSystem soundSystem = new SoundSystem();
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
@@ -67,6 +69,7 @@ public class Forge implements ApplicationListener {
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
+        musicPlayer = new MusicPlayer(ForgeConstants.MUSIC_DIR + "menus");
 
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
@@ -105,6 +108,8 @@ public class Forge implements ApplicationListener {
         Gdx.graphics.setContinuousRendering(false); //save power consumption by disabling continuous rendering once assets loaded
 
         FSkin.loadFull(splashScreen);
+
+        musicPlayer.play(); //start background music
 
         Gdx.input.setInputProcessor(new MainInputProcessor());
         Gdx.input.setCatchBackKey(true);
@@ -195,6 +200,10 @@ public class Forge implements ApplicationListener {
         return soundSystem;
     }
 
+    public static MusicPlayer getMusicPlayer() {
+        return musicPlayer;
+    }
+
     @Override
     public void render() {
         try {
@@ -249,10 +258,11 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        FControl.resume();
     }
 
     @Override
-    public void dispose () {
+    public void dispose() {
         if (currentScreen != null) {
             FOverlay overlay = FOverlay.getTopOverlay();
             while (overlay != null) {
@@ -264,6 +274,8 @@ public class Forge implements ApplicationListener {
         }
         screens.clear();
         graphics.dispose();
+        musicPlayer.dispose();
+        FControl.dispose();
 
         if (onExit != null) {
             onExit.run();

@@ -122,7 +122,7 @@ public class MatchScreen extends FScreen {
 
     @Override
     public void onClose(Callback<Boolean> canCloseCallback) {
-        FControl.writeMatchPreferences();
+        FControl.onViewClosed();
         super.onClose(canCloseCallback);
     }
 

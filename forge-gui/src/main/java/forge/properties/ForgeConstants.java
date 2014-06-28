@@ -55,6 +55,7 @@ public final class ForgeConstants {
     public static final String DECK_CUBE_DIR       = RES_DIR + "cube/";
     public static final String AI_PROFILE_DIR      = RES_DIR + "ai/";
     public static final String SOUND_DIR           = RES_DIR + "sound/";
+    public static final String MUSIC_DIR           = RES_DIR + "music/";
 
     private static final String QUEST_DIR             = RES_DIR + "quest/";
     public static final String QUEST_WORLD_DIR        = QUEST_DIR + "world/";
