@@ -53,37 +53,42 @@ public class DeckgenUtil {
      * @return {@link forge.deck.Deck}
      */
     public static Deck buildColorDeck(List<String> selection, boolean forAi) {
-        final Deck deck;
-        String deckName = null;
-
-        DeckGeneratorBase gen = null;
-        CardDb cardDb = FModel.getMagicDb().getCommonCards();
-        if (selection.size() == 1) {
-            gen = new DeckGeneratorMonoColor(cardDb, selection.get(0));
+        try {
+            final Deck deck;
+            String deckName = null;
+    
+            DeckGeneratorBase gen = null;
+            CardDb cardDb = FModel.getMagicDb().getCommonCards();
+            if (selection.size() == 1) {
+                gen = new DeckGeneratorMonoColor(cardDb, selection.get(0));
+            }
+            else if (selection.size() == 2) {
+                gen = new DeckGenerator2Color(cardDb, selection.get(0), selection.get(1));
+            }
+            else if (selection.size() == 3) {
+                gen = new DeckGenerator3Color(cardDb, selection.get(0), selection.get(1), selection.get(2));
+            }
+            else {
+                gen = new DeckGenerator5Color(cardDb);
+                deckName = "5 colors";
+            }
+            gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+            gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
+    
+            if (null == deckName) {
+                deckName = Lang.joinHomogenous(Arrays.asList(selection));
+            }
+    
+            // After generating card lists, build deck.
+            deck = new Deck("Random deck : " + deckName);
+            deck.getMain().addAll(cards);
+            return deck;
         }
-        else if (selection.size() == 2) {
-            gen = new DeckGenerator2Color(cardDb, selection.get(0), selection.get(1));
+        catch (Exception e) {
+            e.printStackTrace();
         }
-        else if (selection.size() == 3) {
-            gen = new DeckGenerator3Color(cardDb, selection.get(0), selection.get(1), selection.get(2));
-        }
-        else {
-            gen = new DeckGenerator5Color(cardDb);
-            deckName = "5 colors";
-        }
-        gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
-
-        if (null == deckName) {
-            deckName = Lang.joinHomogenous(Arrays.asList(selection));
-        }
-
-        // After generating card lists, build deck.
-        deck = new Deck("Random deck : " + deckName);
-        deck.getMain().addAll(cards);
-
-        return deck;
+        return buildColorDeck(selection, forAi); //try again if previous color deck couldn't be generated
     }
 
     public static QuestEvent getQuestEvent(final String name) {
