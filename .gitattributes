@@ -1206,6 +1206,7 @@ forge-gui-mobile/src/forge/screens/settings/GuiDownloader.java -text
 forge-gui-mobile/src/forge/screens/settings/HelpPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
+forge-gui-mobile/src/forge/sound/AudioClip.java -text
 forge-gui-mobile/src/forge/toolbox/DualListBox.java -text
 forge-gui-mobile/src/forge/toolbox/FButton.java -text
 forge-gui-mobile/src/forge/toolbox/FCardPanel.java -text

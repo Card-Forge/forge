@@ -91,7 +91,7 @@ public class FControl {
 
     static {
         uiEvents = new EventBus("ui events");
-        //uiEvents.register(Singletons.getControl().getSoundSystem());
+        uiEvents.register(Forge.getSoundSystem());
         uiEvents.register(visitor);
     }
 
@@ -133,7 +133,7 @@ public class FControl {
         inputQueue = new InputQueue();
         inputProxy = new InputProxy();
 
-        //game.subscribeToEvents(FControl.getSoundSystem());
+        game.subscribeToEvents(Forge.getSoundSystem());
 
         LobbyPlayer humanLobbyPlayer = game.getRegisteredPlayers().get(0).getLobbyPlayer(); //FServer.instance.getLobby().getGuiPlayer();
         // The UI controls should use these game data as models

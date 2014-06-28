@@ -38,7 +38,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addGroup("Graphic Options");
         lstSettings.addGroup("Card Overlays");
         lstSettings.addGroup("Vibration Options");
-        //lstSettings.addGroup("Sound Options"); //TODO: Uncomment when sound supported
+        lstSettings.addGroup("Sound Options");
 
         //General Settings
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_SKIN, "Theme",
@@ -64,10 +64,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Match Ante Rarity",
                 "Attempts to make antes the same rarity for all players."),
                 1);
-        /*lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
+        lstSettings.addItem(new BooleanSetting(FPref.UI_UPLOAD_DRAFT,
                 "Upload Draft Picks",
                 "Sends draft picks to Forge servers for analysis, to improve draft AI."),
-                1);*/
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
                 "Allow AI Cheating",
                 "Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."),
@@ -175,14 +175,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 6);
 
         //Sound Options
-        /*lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_SOUNDS,
                 "Enable Sounds",
                 "Enable sound effects during the game."),
                 7);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
+        /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
-                7);*/ //TODO: Uncomment when sound supported
+                7);*/
     }
 
     @Override

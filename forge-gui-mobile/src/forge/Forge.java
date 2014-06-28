@@ -23,6 +23,7 @@ import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.match.FControl;
+import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGestureAdapter;
@@ -44,6 +45,7 @@ public class Forge implements ApplicationListener {
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
+    private static final SoundSystem soundSystem = new SoundSystem();
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, String assetDir0, Runnable onExit0) {
@@ -187,6 +189,10 @@ public class Forge implements ApplicationListener {
             graphics.end();
             BugReporter.reportException(ex);
         }
+    }
+
+    public static SoundSystem getSoundSystem() {
+        return soundSystem;
     }
 
     @Override
