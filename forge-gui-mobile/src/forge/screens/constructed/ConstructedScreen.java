@@ -35,6 +35,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
 import forge.screens.settings.SettingsScreen;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -888,16 +889,7 @@ public class ConstructedScreen extends LaunchScreen {
             private void draw(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
                 x += w - h;
                 w = h;
-                g.drawRect(1, SettingsScreen.DESC_COLOR, x, y, w, h);
-                if (appliedVariants.contains(gameType)) {
-                    //draw check mark
-                    x += 3;
-                    y++;
-                    w -= 6;
-                    h -= 3;
-                    g.drawLine(2, color, x, y + h / 2, x + w / 2, y + h);
-                    g.drawLine(2, color, x + w / 2, y + h, x + w, y);
-                }
+                FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, appliedVariants.contains(gameType), x, y, w, h);
             }
 
             private void toggle() {
