@@ -42,6 +42,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private VSubmenuPreferences view;
     private ForgePreferences prefs;
+    private boolean updating;
 
     private final List<Pair<JCheckBox, FPref>> lstControls = new ArrayList<Pair<JCheckBox,FPref>>();
 
@@ -59,6 +60,8 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbDevMode().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
+                if (updating) { return; }
+
                 final boolean toggle = view.getCbDevMode().isSelected();
                 prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
                 ForgePreferences.DEV_MODE = toggle;
@@ -70,6 +73,8 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbEnableMusic().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
+                if (updating) { return; }
+
                 final boolean toggle = view.getCbEnableMusic().isSelected();
                 prefs.setPref(FPref.UI_ENABLE_MUSIC, String.valueOf(toggle));
                 prefs.save();
@@ -108,6 +113,8 @@ public enum CSubmenuPreferences implements ICDoc {
             kv.getKey().addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(final ItemEvent arg0) {
+                    if (updating) { return; }
+
                     prefs.setPref(kv.getValue(), String.valueOf(kv.getKey().isSelected()));
                     prefs.save();
                 }
@@ -167,6 +174,7 @@ public enum CSubmenuPreferences implements ICDoc {
      */
     @Override
     public void update() {
+        updating = true; //prevent itemStateChanged causing prefs to be saved or other logic occurring while updating values
 
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = FModel.getPreferences();
@@ -183,6 +191,8 @@ public enum CSubmenuPreferences implements ICDoc {
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() { view.getCbRemoveSmall().requestFocusInWindow(); }
         });
+
+        updating = false;
     }
 
     /* (non-Javadoc)
