@@ -35,7 +35,6 @@ import java.util.MissingResourceException;
  */
 public class AudioClip implements IAudioClip {
     private Clip clip;
-    private final int SOUND_SYSTEM_DELAY = 30;
 
     public static boolean fileExists(String fileName) {
         File fSound = new File(ForgeConstants.SOUND_DIR, fileName);
@@ -74,7 +73,7 @@ public class AudioClip implements IAudioClip {
         }
         clip.setMicrosecondPosition(0);
         try {
-            Thread.sleep(SOUND_SYSTEM_DELAY);
+            Thread.sleep(SoundSystem.DELAY);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -87,7 +86,7 @@ public class AudioClip implements IAudioClip {
         }
         clip.setMicrosecondPosition(0);
         try {
-            Thread.sleep(SOUND_SYSTEM_DELAY);
+            Thread.sleep(SoundSystem.DELAY);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }

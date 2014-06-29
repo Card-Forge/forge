@@ -5,7 +5,7 @@ public class AudioMusic implements IAudioMusic {
     public AudioMusic(String filename) {
     }
 
-    public void play() {
+    public void play(final Runnable onComplete) {
     }
 
     public void pause() {

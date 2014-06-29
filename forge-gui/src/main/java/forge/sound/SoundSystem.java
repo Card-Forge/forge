@@ -18,6 +18,7 @@ import java.util.Map;
  *
  */
 public class SoundSystem {
+    public static final int DELAY = 30;
 
     private static final IAudioClip emptySound = new NoSoundClip();
     private static final Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<SoundEffectType, IAudioClip>(SoundEffectType.class);
@@ -181,7 +182,18 @@ public class SoundSystem {
 
         try {
             currentTrack = GuiBase.getInterface().createAudioMusic(filename);
-            currentTrack.play();
+            currentTrack.play(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(SoundSystem.DELAY);
+                    }
+                    catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    changeBackgroundTrack(); //change track when music completes on its own
+                }
+            });
         }
         catch (Exception ex) {
             System.err.println("Unable to load music file: " + filename);

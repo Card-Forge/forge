@@ -1,7 +1,7 @@
 package forge.sound;
 
 public interface IAudioMusic {
-    void play();
+    void play(final Runnable onComplete);
     void pause();
     void resume();
     void stop();

@@ -26,7 +26,6 @@ import com.badlogic.gdx.files.FileHandle;
 
 public class AudioClip implements IAudioClip {
     private Sound clip;
-    private final int SOUND_SYSTEM_DELAY = 30;
 
     public static AudioClip createClip(String filename) {
         FileHandle fileHandle = Gdx.files.absolute(ForgeConstants.SOUND_DIR + filename);
@@ -48,7 +47,7 @@ public class AudioClip implements IAudioClip {
             return;
         }
         try {
-            Thread.sleep(SOUND_SYSTEM_DELAY);
+            Thread.sleep(SoundSystem.DELAY);
         }
         catch (InterruptedException ex) {
             ex.printStackTrace();
@@ -61,7 +60,7 @@ public class AudioClip implements IAudioClip {
             return;
         }
         try {
-            Thread.sleep(SOUND_SYSTEM_DELAY);
+            Thread.sleep(SoundSystem.DELAY);
         }
         catch (InterruptedException ex) {
             ex.printStackTrace();
