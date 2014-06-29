@@ -5,6 +5,7 @@ PT:3/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:RemRandomDeck:True
+SVar:BuffedBy:Swamp
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_kavu.jpg
 Oracle:Mire Kavu gets +1/+1 as long as you control a Swamp.
