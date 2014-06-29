@@ -179,6 +179,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Enable Sounds",
                 "Enable sound effects during the game."),
                 7);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MUSIC,
+                "Enable Music",
+                "Enable background music during the game.") {
+                    @Override
+                    public void select() {
+                        super.select();
+                        //update background music when this setting changes
+                        Forge.getSoundSystem().changeBackgroundTrack();
+                    }
+                }, 7);
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),

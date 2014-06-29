@@ -168,14 +168,16 @@ public class SoundSystem {
         changeBackgroundTrack();
     }
 
-    private void changeBackgroundTrack() {
+    public void changeBackgroundTrack() {
         //ensure old track stopped and disposed of if needed
         if (currentTrack != null) {
             currentTrack.dispose();
             currentTrack = null;
         }
 
-        if (currentPlaylist == null) { return; }
+        if (currentPlaylist == null || !FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MUSIC)) {
+            return;
+        }
 
         String filename = currentPlaylist.getRandomFilename();
         if (filename == null) { return; }

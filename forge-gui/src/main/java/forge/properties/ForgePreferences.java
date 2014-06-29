@@ -63,6 +63,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_PREFERRED_AVATARS_ONLY ("false"),
         UI_TARGETING_OVERLAY ("false"),
         UI_ENABLE_SOUNDS ("true"),
+        UI_ENABLE_MUSIC ("true"),
         UI_ALT_SOUND_SYSTEM ("false"),
         UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH),
         UI_CLONE_MODE_SOURCE ("false"), /** */
