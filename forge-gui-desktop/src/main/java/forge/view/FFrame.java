@@ -27,7 +27,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private boolean moveInProgress;
     private int resizeCursor;
     private FTitleBarBase titleBar;
-    private boolean minimized, maximized, fullScreen, hideBorder, lockTitleBar, hideTitleBar, isMainFrame;
+    private boolean minimized, maximized, fullScreen, hideBorder, lockTitleBar, hideTitleBar, isMainFrame, paused;
     private Rectangle normalBounds;
 
     public FFrame() {
@@ -49,32 +49,44 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowActivated(WindowEvent e) {
-                if (isMainFrame) { //resume music when main frame regains focus
-                    Singletons.getControl().getSoundSystem().resume();
-                }
+                resume(); //resume music when main frame regains focus
             }
 
             @Override
-            public void windowDeactivated(WindowEvent arg0) {
-                if (isMainFrame) { //pause music when main frame loses focus
-                    Singletons.getControl().getSoundSystem().pause();
-                }
+            public void windowDeactivated(WindowEvent e) {
+                if (e.getOppositeWindow() == null) {
+                    pause(); //pause music when main frame loses focus to outside application
 
-                if (fullScreen && arg0.getOppositeWindow() == null) {
-                    setMinimized(true); //minimize if switching from Full Screen Forge to outside application window
+                    if (fullScreen) {
+                        setMinimized(true); //minimize if switching from Full Screen Forge to outside application window
+                    }
                 }
             }
         });
         this.addWindowStateListener(new WindowStateListener() {
             @Override
-            public void windowStateChanged(WindowEvent arg0) {
-                setState(arg0.getNewState());
+            public void windowStateChanged(WindowEvent e) {
+                setState(e.getNewState());
             }
         });
 
         // Title bar
         this.titleBar = titleBar0;
         addMoveSupport();
+    }
+
+    private void pause() {
+        if (paused || !isMainFrame) { return; }
+
+        Singletons.getControl().getSoundSystem().pause();
+        paused = true;
+    }
+
+    private void resume() {
+        if (!paused || !isMainFrame) { return; }
+
+        Singletons.getControl().getSoundSystem().resume();
+        paused = false;
     }
 
     public FTitleBarBase getTitleBar() {
@@ -188,6 +200,14 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         if (this.minimized == minimized0) { return; }
         this.minimized = minimized0;
         updateState();
+
+        //pause or resume when minimized changes
+        if (minimized0) {
+            pause();
+        }
+        else {
+            resume();
+        }
     }
 
     public boolean isMaximized() {
