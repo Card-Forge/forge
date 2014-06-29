@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
 
+import forge.Forge;
 import forge.LobbyPlayer;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
@@ -26,6 +27,7 @@ import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPlayers;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
+import forge.sound.MusicPlaylist;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -122,7 +124,8 @@ public class MatchScreen extends FScreen {
 
     @Override
     public void onClose(Callback<Boolean> canCloseCallback) {
-        FControl.onViewClosed();
+        Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
+        FControl.writeMatchPreferences();
         super.onClose(canCloseCallback);
     }
 

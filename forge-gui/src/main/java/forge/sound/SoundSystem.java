@@ -157,4 +157,53 @@ public class SoundSystem {
             play(effect, effect.isSynced());
         }
     }
+    
+    //Background Music
+    private IAudioMusic currentTrack;
+    private MusicPlaylist currentPlaylist;
+
+    public void setBackgroundMusic(MusicPlaylist playlist) {
+        currentPlaylist = playlist;
+        changeBackgroundTrack();
+    }
+
+    private void changeBackgroundTrack() {
+        //ensure old track stopped and disposed of if needed
+        if (currentTrack != null) {
+            currentTrack.dispose();
+            currentTrack = null;
+        }
+
+        if (currentPlaylist == null) { return; }
+
+        String filename = currentPlaylist.getRandomFilename();
+        if (filename == null) { return; }
+
+        try {
+            currentTrack = GuiBase.getInterface().createAudioMusic(filename);
+            currentTrack.play();
+        }
+        catch (Exception ex) {
+            System.err.println("Unable to load music file: " + filename);
+        }
+    }
+
+    public void pause() {
+        if (currentTrack != null) {
+            currentTrack.pause();
+        }
+    }
+
+    public void resume() {
+        if (currentTrack != null) {
+            currentTrack.resume();
+        }
+    }
+
+    public void dispose() {
+        if (currentTrack != null) {
+            currentTrack.dispose();
+            currentTrack = null;
+        }
+    }
 }

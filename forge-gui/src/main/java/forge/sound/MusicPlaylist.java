@@ -1,0 +1,48 @@
+package forge.sound;
+
+import java.io.File;
+import java.util.Random;
+
+import forge.properties.ForgeConstants;
+
+public enum MusicPlaylist {
+    MENUS("menus/"),
+    MATCH("match/");
+
+    private final String subDir;
+    private int mostRecentTrackIdx = -1;
+    private String[] filenames;
+    private final Random randomGenerator = new Random();
+
+    private MusicPlaylist(String subDir0) {
+        subDir = subDir0;
+    }
+
+    public String getRandomFilename() {
+        if (filenames == null) {
+            try {
+                filenames = new File(ForgeConstants.MUSIC_DIR + subDir).list();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                filenames = new String[0];
+            }
+        }
+
+        if (filenames.length == 0) { return null; }
+
+        if (filenames.length == 1) {
+            mostRecentTrackIdx = 0;
+        }
+        else { //determine filename randomly from playlist
+            int newIndex;
+            do {
+                newIndex = randomGenerator.nextInt(filenames.length);
+            } while (newIndex == mostRecentTrackIdx); //ensure a different track is chosen than the last one
+
+            mostRecentTrackIdx = newIndex;
+        }
+
+        return ForgeConstants.MUSIC_DIR + subDir + filenames[mostRecentTrackIdx];
+    }
+}

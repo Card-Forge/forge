@@ -28,6 +28,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
 import forge.sound.IAudioClip;
+import forge.sound.IAudioMusic;
 import forge.util.ITriggerEvent;
 
 
@@ -89,6 +90,7 @@ public interface IGuiBase {
 	LobbyPlayer createAiPlayer(String name, int avatarIndex);
 	LobbyPlayer getQuestPlayer();
     IAudioClip createAudioClip(String filename);
+    IAudioMusic createAudioMusic(String filename);
     void startAltSoundSystem(String filename, boolean isSynchronized);
     void clearImageCache();
 }

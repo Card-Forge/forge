@@ -63,7 +63,9 @@ import forge.screens.match.views.VHand;
 import forge.screens.match.views.VPrompt;
 import forge.sound.AltSoundSystem;
 import forge.sound.AudioClip;
+import forge.sound.AudioMusic;
 import forge.sound.IAudioClip;
+import forge.sound.IAudioMusic;
 import forge.toolbox.FButton;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
@@ -466,6 +468,11 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public IAudioClip createAudioClip(String filename) {
         return AudioClip.fileExists(filename) ? new AudioClip(filename) : null;
+    }
+
+    @Override
+    public IAudioMusic createAudioMusic(String filename) {
+        return new AudioMusic(filename);
     }
 
     @Override

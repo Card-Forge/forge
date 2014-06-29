@@ -964,6 +964,7 @@ forge-gui-desktop/src/main/java/forge/screens/workshop/views/VCardScript.java -t
 forge-gui-desktop/src/main/java/forge/screens/workshop/views/VWorkshopCatalog.java -text
 forge-gui-desktop/src/main/java/forge/sound/AltSoundSystem.java -text
 forge-gui-desktop/src/main/java/forge/sound/AudioClip.java -text
+forge-gui-desktop/src/main/java/forge/sound/AudioMusic.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/CardFaceSymbols.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/ContextMenuBuilder.java -text
 forge-gui-desktop/src/main/java/forge/toolbox/FAbsolutePositioner.java -text
@@ -1207,6 +1208,7 @@ forge-gui-mobile/src/forge/screens/settings/HelpPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
 forge-gui-mobile/src/forge/sound/AudioClip.java -text
+forge-gui-mobile/src/forge/sound/AudioMusic.java -text
 forge-gui-mobile/src/forge/toolbox/DualListBox.java -text
 forge-gui-mobile/src/forge/toolbox/FButton.java -text
 forge-gui-mobile/src/forge/toolbox/FCardPanel.java -text
@@ -16579,6 +16581,8 @@ forge-gui/src/main/java/forge/quest/io/package-info.java svneol=native#text/plai
 forge-gui/src/main/java/forge/quest/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/sound/EventVisualizer.java -text
 forge-gui/src/main/java/forge/sound/IAudioClip.java -text
+forge-gui/src/main/java/forge/sound/IAudioMusic.java -text
+forge-gui/src/main/java/forge/sound/MusicPlaylist.java -text
 forge-gui/src/main/java/forge/sound/NoSoundClip.java -text
 forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text

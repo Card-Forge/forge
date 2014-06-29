@@ -18,7 +18,6 @@
 
 package forge.sound;
 
-
 import javax.sound.sampled.*;
 
 import forge.properties.ForgeConstants;
@@ -26,7 +25,6 @@ import forge.properties.ForgeConstants;
 import java.io.File;
 import java.io.IOException;
 import java.util.MissingResourceException;
-
 
 
 /**

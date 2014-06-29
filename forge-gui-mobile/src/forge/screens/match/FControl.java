@@ -57,7 +57,6 @@ import forge.match.input.InputProxy;
 import forge.match.input.InputQueue;
 import forge.model.FModel;
 import forge.player.LobbyPlayerHuman;
-import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -67,7 +66,7 @@ import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
-import forge.sound.MusicPlayer;
+import forge.sound.MusicPlaylist;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
@@ -87,7 +86,6 @@ public class FControl {
     private static List<Player> sortedPlayers;
     private static final EventBus uiEvents;
     private static boolean gameHasHumanPlayer;
-    private static final MusicPlayer matchMusicPlayer = new MusicPlayer(ForgeConstants.MUSIC_DIR + "match");
     private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private static final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
     private static final FControlGamePlayback playbackControl = new FControlGamePlayback();
@@ -122,8 +120,7 @@ public class FControl {
     public static void startGame(final Match match) {
         CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
 
-        Forge.getMusicPlayer().stop(); //switch out menu music for random match screen track
-        matchMusicPlayer.changeTrack();
+        Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
 
         game = match.createGame();
 
@@ -573,8 +570,7 @@ public class FControl {
     }
 
     public static void pause() {
-        Forge.getMusicPlayer().pause();
-        matchMusicPlayer.pause();
+        Forge.getSoundSystem().pause();
         //pause playback if needed
         if (inputQueue != null && inputQueue.getInput() instanceof InputPlaybackControl) {
             ((InputPlaybackControl)inputQueue.getInput()).pause();
@@ -582,12 +578,7 @@ public class FControl {
     }
 
     public static void resume() {
-        Forge.getMusicPlayer().resume();
-        matchMusicPlayer.resume();
-    }
-
-    public static void dispose() {
-        matchMusicPlayer.dispose();
+        Forge.getSoundSystem().resume();
     }
 
     private final static boolean LOG_UIEVENTS = false;
@@ -791,13 +782,6 @@ public class FControl {
             cl.add(c);
         }
         return cl;
-    }
-
-    public static void onViewClosed() {
-        matchMusicPlayer.stop();
-        Forge.getMusicPlayer().changeTrack(); //switch back to random menu screen music
-
-        writeMatchPreferences();
     }
 
     public static void writeMatchPreferences() {
