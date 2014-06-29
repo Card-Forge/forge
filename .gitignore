@@ -57,6 +57,7 @@ forge-gui/res/PerSetTrackingResults
 forge-gui/res/cardsfolder/*.bat
 forge-gui/res/decks
 forge-gui/res/layouts
+forge-gui/res/music/menus/desktop.ini
 forge-gui/res/pics*
 forge-gui/res/pics_product
 forge-gui/res/skins/*.log
