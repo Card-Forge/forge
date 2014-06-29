@@ -23,6 +23,7 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -132,7 +133,8 @@ public class CostPayment {
 
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {
         
-        for (final CostPart part : this.cost.getCostParts()) {
+    	final List<CostPart> costParts = this.getCost().getCostPartsWithZeroMana();
+        for (final CostPart part : costParts) {
             PaymentDecision pd = part.accept(decisionMaker);
             
             if ( null == pd || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability))

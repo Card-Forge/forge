@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Lists;
+
 /**
  * <p>
  * Cost class.
@@ -51,6 +53,10 @@ public class Cost {
         return this.getTotalMana().isZero();
     }
 
+    public final boolean hasManaCost() {
+    	return !this.hasNoManaCost();
+    }
+
     /**
      * Gets the cost parts.
      * 
@@ -58,6 +64,23 @@ public class Cost {
      */
     public final List<CostPart> getCostParts() {
         return this.costParts;
+    }
+    
+    /**
+     * Get the cost parts, always including a mana cost part (which may be
+     * zero).
+     * 
+     * @return the cost parts, possibly with an extra zero mana {@link
+     * CostPartMana}.
+     */
+    public final List<CostPart> getCostPartsWithZeroMana() {
+    	if (this.hasManaCost()) {
+    		return this.costParts;
+    	}
+    	final List<CostPart> newCostParts = Lists.newArrayListWithCapacity(this.costParts.size() + 1);
+    	newCostParts.addAll(this.costParts);
+    	newCostParts.add(new CostPartMana(ManaCost.ZERO, null));
+    	return newCostParts;
     }
 
     /**
