@@ -198,8 +198,6 @@ public enum VMatchUI implements IVTopLevelUI {
      */
     @Override
     public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
-        //switch back to menus music when switching away from screen
-        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
         return true;
     }
 
@@ -212,6 +210,10 @@ public enum VMatchUI implements IVTopLevelUI {
             CMatchUI.SINGLETON_INSTANCE.concede();
             return false; //delay hiding tab even if concede successful
         }
+
+        //switch back to menus music when closing screen
+        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
+
         wasClosed = true;
         return true;
     }
