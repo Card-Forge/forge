@@ -4,6 +4,7 @@ import forge.Singletons;
 import forge.gui.framework.*;
 import forge.properties.ForgePreferences;
 import forge.screens.match.views.*;
+import forge.sound.MusicPlaylist;
 import forge.toolbox.FButton;
 import forge.view.FView;
 
@@ -197,6 +198,8 @@ public enum VMatchUI implements IVTopLevelUI {
      */
     @Override
     public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
+        //switch back to menus music when switching away from screen
+        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
         return true;
     }
 

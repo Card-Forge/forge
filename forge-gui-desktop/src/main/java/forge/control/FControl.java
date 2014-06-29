@@ -58,6 +58,7 @@ import forge.screens.match.controllers.CStack;
 import forge.screens.match.views.VAntes;
 import forge.screens.match.views.VDev;
 import forge.screens.match.views.VField;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
@@ -466,6 +467,9 @@ public enum FControl implements KeyEventDispatcher {
 
         this.game = game0;
         game.subscribeToEvents(Singletons.getControl().getSoundSystem());
+
+        //switch back to match screen music
+        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
 
         LobbyPlayer humanLobbyPlayer = getGuiPlayer();
         // The UI controls should use these game data as models

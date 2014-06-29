@@ -15,6 +15,7 @@ import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.VHomeUI;
 import forge.screens.match.TargetingOverlay;
 import forge.screens.match.VMatchUI;
+import forge.sound.MusicPlaylist;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedLayeredPane;
 import forge.util.BuildInfo;
@@ -220,6 +221,9 @@ public enum FView {
                 });
             }
         }
+
+        //start background music
+        Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
     }
 
     // will populate remainingFiles with remaining files if not null, returns whether any files have

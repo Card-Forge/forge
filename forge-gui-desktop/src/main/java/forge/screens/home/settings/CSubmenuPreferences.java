@@ -66,6 +66,17 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        // This updates background track immediately and is not standard
+        view.getCbEnableMusic().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent arg0) {
+                final boolean toggle = view.getCbEnableMusic().isSelected();
+                prefs.setPref(FPref.UI_ENABLE_MUSIC, String.valueOf(toggle));
+                prefs.save();
+                Singletons.getControl().getSoundSystem().changeBackgroundTrack();
+            }
+        });
+
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
@@ -162,6 +173,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
         setPlayerNameButtonText();
         view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
+        view.getCbEnableMusic().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC));
 
         for(Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));

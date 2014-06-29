@@ -73,6 +73,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbRandomArtInPools = new OptionsCheckBox("Randomize Card Art in Generated Card Pools");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
+    private final JCheckBox cbEnableMusic = new OptionsCheckBox("Enable Music");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for Touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
@@ -223,6 +224,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnableSounds, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
+
+        pnlPrefs.add(cbEnableMusic, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enable background music during the game."), regularConstraints);
 
         pnlPrefs.add(cbAltSoundSystem, regularConstraints);
         pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."), regularConstraints);
@@ -508,6 +512,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableSounds() {
         return cbEnableSounds;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbEnableMusic() {
+        return cbEnableMusic;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
