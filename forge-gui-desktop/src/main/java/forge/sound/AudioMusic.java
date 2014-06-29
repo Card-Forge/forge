@@ -1,67 +1,114 @@
 package forge.sound;
 
-import java.io.File;
-/*import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine.Info;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;*/
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.PlaybackListener;
 
 public class AudioMusic implements IAudioMusic {
-    private final File file;
+    private AdvancedPlayer musicPlayer;
+    private FileInputStream fileStream;
+    private BufferedInputStream bufferedStream;
+    private boolean canResume;
+    private String filename;
+    private int total;
+    private int stopped;
+    private boolean valid;
+    private Runnable onComplete;
 
-    public AudioMusic(String filename) {
-        file = new File(filename);
+    public AudioMusic(String filename0) {
+        filename = filename0;
     }
 
-    public void play(final Runnable onComplete) {
-        /*try (final AudioInputStream in = AudioSystem.getAudioInputStream(file)) {
-            final AudioFormat outFormat = getOutFormat(in.getFormat());
-            final Info info = new Info(SourceDataLine.class, outFormat);
- 
-            try (final SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info)) {
-                if (line != null) {
-                    line.open(outFormat);
-                    line.start();
-                    stream(AudioSystem.getAudioInputStream(outFormat, in), line);
-                    line.drain();
-                    line.stop();
-                }
+    public void play(final Runnable onComplete0) {
+        onComplete = onComplete0;
+        play(-1);
+    }
+
+    private boolean play(int pos) {
+        valid = true;
+        canResume = false;
+        try {
+            fileStream = new FileInputStream(filename);
+            total = fileStream.available();
+            if (pos > -1) {
+                fileStream.skip(pos);
             }
-        } catch (UnsupportedAudioFileException 
-               | LineUnavailableException 
-               | IOException e) {
-            throw new IllegalStateException(e);
-        }*/
+            bufferedStream = new BufferedInputStream(fileStream);
+            musicPlayer = new AdvancedPlayer(bufferedStream);
+            musicPlayer.setPlayBackListener(new PlaybackListener() {
+                @Override
+                public void playbackFinished(PlaybackEvent evt) {
+                    if (onComplete != null) {
+                        onComplete.run();
+                    }
+                }
+            });
+            new Thread(
+                    new Runnable(){
+                        public void run(){
+                            try {
+                                musicPlayer.play();
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                                valid = false;
+                            }
+                        }
+                    }
+            ).start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            valid = false;
+        }
+        return valid;
     }
 
     public void pause() {
+        if (musicPlayer == null) { return; }
+
+        try {
+            stopped = fileStream.available();
+            close();
+            if (valid) {
+                canResume = true;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void close() {
+        musicPlayer.setPlayBackListener(null); //prevent firing if closed
+        musicPlayer.close();
+        fileStream = null;
+        bufferedStream = null;
+        musicPlayer = null;
     }
 
     public void resume() {
+        if (!canResume) { return; }
+
+        if (play(total - stopped)) {
+            canResume = false;
+        }
     }
 
     public void stop() {
+        if (musicPlayer == null) { return; }
+
+        musicPlayer.setPlayBackListener(null); //prevent firing if stopped manually
+        musicPlayer.stop();
     }
 
     public void dispose() {
-    }
+        if (musicPlayer == null) { return; }
 
-    /*private AudioFormat getOutFormat(AudioFormat inFormat) {
-        final int ch = inFormat.getChannels();
-        final float rate = inFormat.getSampleRate();
-        return new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
+        close();
+        canResume = false;
     }
-
-    private void stream(AudioInputStream in, SourceDataLine line) 
-        throws IOException {
-        final byte[] buffer = new byte[4096];
-        for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
-            line.write(buffer, 0, n);
-        }
-    }*/
 }

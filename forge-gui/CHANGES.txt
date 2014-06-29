@@ -8,6 +8,14 @@ Forge Beta: 0#-##-2014 ver 1.5.21
 Release Notes
 -------------
 
+- Introducing Background Music -
+Forge now supports playing background music!!!
+There are 4 tracks for the menu screens and 4 tracks just for the match screen.
+Tracks shuffle randomly as they finish, as well as when starting a new game or leaving the match screen.
+A new "Enable Music" setting allows turning the music off, and toggling this setting can also be used to force a shuffle.
+The music is paused automatically if you minimize or switch away from Forge, and resumed when it's activated again.
+
+
 - New Magic 2015 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 

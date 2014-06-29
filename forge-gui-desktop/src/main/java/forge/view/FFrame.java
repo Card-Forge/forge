@@ -1,5 +1,6 @@
 package forge.view;
 
+import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.model.FModel;
@@ -47,7 +48,18 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
         addResizeSupport();
         this.addWindowListener(new WindowAdapter() {
             @Override
+            public void windowActivated(WindowEvent e) {
+                if (isMainFrame) { //resume music when main frame regains focus
+                    Singletons.getControl().getSoundSystem().resume();
+                }
+            }
+
+            @Override
             public void windowDeactivated(WindowEvent arg0) {
+                if (isMainFrame) { //pause music when main frame loses focus
+                    Singletons.getControl().getSoundSystem().pause();
+                }
+
                 if (fullScreen && arg0.getOppositeWindow() == null) {
                     setMinimized(true); //minimize if switching from Full Screen Forge to outside application window
                 }
