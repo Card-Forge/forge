@@ -4,7 +4,7 @@ Types:Planeswalker Elspeth
 Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | Planeswalker$ True | TokenImage$ w_1_1_soldier_ths | TokenAltImages$ w 1 1 soldier2 THS | SpellDescription$ Put three 1/1 white Soldier creature tokens onto the battlefield.
 A:AB$ DestroyAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.powerGE4 | Planeswalker$ True | SpellDescription$ Destroy all creatures with power 4 or greater.
-A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Elspeth, Sun's Champion emblem | Image$ elspeth_suns_champion_emblem | StaticAbilities$ STFlying | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +2/+2 and have flying."
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Elspeth, Sun's Champion emblem | Image$ elspeth_suns_champion_emblem | StaticAbilities$ STFlying | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +2/+2 and have flying."
 SVar:STFlying:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Flying | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control get +2/+2 and have flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_suns_champion.jpg
 Oracle:[+1] Put three 1/1 white Soldier creature tokens onto the battlefield.\n[-3] Destroy all creatures with power 4 or greater.\n[-7] You get an emblem with "Creatures you control get +2/+2 and have flying."
