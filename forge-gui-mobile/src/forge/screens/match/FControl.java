@@ -118,6 +118,7 @@ public class FControl {
     }
 
     public static void startGame(final Match match) {
+        cardDetailsCache.clear(); //ensure details cache cleared before starting a new game
         CardAreaPanel.resetForNewGame(); //ensure card panels reset between games
 
         Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
@@ -538,8 +539,6 @@ public class FControl {
         }
         boolean hasHuman = !pp.isEmpty();
 
-        cardDetailsCache.clear(); //clear cache when game ended
-
         if (pp.isEmpty()) {
             pp.addAll(game.getPlayers()); // no human? then all players surrender!
         }
@@ -567,6 +566,7 @@ public class FControl {
 
         Forge.back();
         game = null;
+        cardDetailsCache.clear(); //ensure card details cache cleared ending game
     }
 
     public static void pause() {
