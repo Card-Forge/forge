@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.GameCommand;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -224,10 +225,9 @@ public class CloneEffect extends SpellAbilityEffect {
         if (sa.hasParam("AddAbilities")) {
             for (final String s : Arrays.asList(sa.getParam("AddAbilities").split(","))) {
                 if (origSVars.containsKey(s)) {
-                    //final AbilityFactory newAF = new AbilityFactory();
                     final String actualAbility = origSVars.get(s);
-                    // final SpellAbility grantedAbility = newAF.getAbility(actualAbility, tgtCard);
-                    // tgtCard.addSpellAbility(grantedAbility);
+                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, tgtCard);
+                    tgtCard.addSpellAbility(grantedAbility);
                     tgtCard.getUnparsedAbilities().add(actualAbility);
                 }
             }
