@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.match.MatchUtil;
 import forge.util.ITriggerEvent;
 
 import java.util.List;
@@ -49,7 +50,12 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
-        ButtonUtil.update("OK", "End Turn", true, true, true);
+        if (MatchUtil.canUndoLastAction()) { //allow undoing with cancel button if can undo last action
+            ButtonUtil.update("OK", "Undo", true, true, true);
+        }
+        else { //otherwise allow ending turn with cancel button
+            ButtonUtil.update("OK", "End Turn", true, true, true);
+        }
     }
 
     /** {@inheritDoc} */
@@ -61,9 +67,11 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        //end turn
-        player.getController().autoPassUntil(PhaseType.CLEANUP);
-        stop();
+        if (!MatchUtil.undoLastAction()) { //undo if possible
+            //otherwise end turn
+            player.getController().autoPassUntil(PhaseType.CLEANUP);
+            stop();
+        }
     }
 
     public SpellAbility getChosenSa() { return chosenSa; }

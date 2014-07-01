@@ -507,13 +507,6 @@ public class FControl {
             getPlayerPanel(zone.getPlayer()).getField().updateCard(c);
         }
     }
-    public static void undoLastAction() {
-        Game game = getGame();
-        Player player = game.getPhaseHandler().getPriorityPlayer();
-        if (player != null && player.getLobbyPlayer() == getGuiPlayer()) {
-            game.stack.undo();
-        }
-    }
 
     /** Concede game, bring up WinLose UI. */
     public static void concede() {

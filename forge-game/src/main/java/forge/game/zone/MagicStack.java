@@ -236,6 +236,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * 
      * @return a boolean.
      */
+    public final boolean canUndo() {
+        return !undoStack.isEmpty();
+    }
+
+    /**
+     * <p>
+     * undo.
+     * </p>
+     * 
+     * @return a boolean.
+     */
     public final boolean undo() {
         if (undoStack.isEmpty()) { return false; }
 

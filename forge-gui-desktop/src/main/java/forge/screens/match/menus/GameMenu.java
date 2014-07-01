@@ -1,6 +1,7 @@
 package forge.screens.match.menus;
 
 import forge.assets.FSkinProp;
+import forge.match.MatchUtil;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -75,7 +76,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CMatchUI.SINGLETON_INSTANCE.undo();
+                MatchUtil.undoLastAction();
             }
         };
     }

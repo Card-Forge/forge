@@ -16484,6 +16484,7 @@ forge-gui/src/main/java/forge/limited/WinstonDraft.java -text
 forge-gui/src/main/java/forge/limited/WinstonDraftAI.java -text
 forge-gui/src/main/java/forge/limited/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/match/MatchConstants.java -text
+forge-gui/src/main/java/forge/match/MatchUtil.java -text
 forge-gui/src/main/java/forge/match/input/ButtonUtil.java -text
 forge-gui/src/main/java/forge/match/input/Input.java -text
 forge-gui/src/main/java/forge/match/input/InputAttack.java -text

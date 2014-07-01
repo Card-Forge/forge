@@ -21,7 +21,6 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.FThreads;
@@ -31,7 +30,6 @@ import forge.events.IUiEventVisitor;
 import forge.events.UiEvent;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
-import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
@@ -476,15 +474,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             panels.addAll(c.getTabletop().getCardPanels());
         }
         return panels;
-    }
-    
-    /** Undo last game action if possible. */
-    public void undo() {
-    	Game game = Singletons.getControl().getObservedGame();
-        Player player = game.getPhaseHandler().getPriorityPlayer();
-        if (player != null && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
-            game.stack.undo();
-        }
     }
 
     /** Concede game, bring up WinLose UI. */

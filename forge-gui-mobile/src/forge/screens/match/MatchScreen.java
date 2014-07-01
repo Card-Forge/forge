@@ -12,6 +12,7 @@ import com.badlogic.gdx.Input.Keys;
 
 import forge.Forge;
 import forge.LobbyPlayer;
+import forge.match.MatchUtil;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -202,7 +203,7 @@ public class MatchScreen extends FScreen {
             break;
         case Keys.Z: //undo on Ctrl+Z
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                FControl.undoLastAction();
+                MatchUtil.undoLastAction();
                 return true;
             }
             break;
