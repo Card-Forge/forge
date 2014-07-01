@@ -59,11 +59,16 @@ public class FMenuItem extends FDisplayObject {
     }
 
     public float getMinWidth() {
-        float width = textWidth + 2 * GAP_X;
+        //pretend there's a divot even if there isn't to provide extra right padding and allow menu items to line up nicer
+        float width = textWidth + getDivotWidth() + 4 * GAP_X;
         if (allowForIcon) {
             width += ICON_SIZE + GAP_X;
         }
         return width;
+    }
+
+    protected float getDivotWidth() {
+        return getHeight() / 6;
     }
 
     @Override

@@ -50,13 +50,4 @@ public class FSubMenu extends FMenuItem {
         float y3 = y2 + divotHeight / 2;
         g.fillTriangle(FORE_COLOR, x1, y1, x2, y2, x3, y3);
     }
-
-    private float getDivotWidth() {
-        return getHeight() / 6;
-    }
-
-    @Override
-    public float getMinWidth() {
-        return super.getMinWidth() + getDivotWidth() + 2 * GAP_X;
-    }
 }
