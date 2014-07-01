@@ -21,6 +21,11 @@ A new "Enable Music" setting allows turning the music off, and toggling this set
 The music is paused automatically if you minimize or switch away from Forge, and resumed when it's activated again.
 
 
+- Undo button in Prompt and new Floating Mana warning -
+If your last action is undoable, the right button in the Prompt pane will now allow undoing it in addition to Ctrl+Z and Forge > Game > Undo
+In addition, if you attempt to pass priority with mana floating in your pool that could be lost, you'll now receive a warning
+
+
 - Flickering P/T Overlays Fixed -
 Fixed bug that caused P/T overlays to flicker between their base values and their modified values from static effects
 
