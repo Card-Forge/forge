@@ -93,21 +93,23 @@ public class InputPassPriority extends InputSyncronizedBase {
     private void passPriority(final Runnable runnable) {
         //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority
         Game game = GuiBase.getInterface().getGame();
-        Player player = game.getPhaseHandler().getPriorityPlayer();
-        if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
-            ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
-                @Override
-                public void run() {
-                    String message = "You have mana floating in your mana pool that could be lost if you pass priority now.";
-                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
-                        message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
+        if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
+            Player player = game.getPhaseHandler().getPriorityPlayer();
+            if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
+                    @Override
+                    public void run() {
+                        String message = "You have mana floating in your mana pool that could be lost if you pass priority now.";
+                        if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+                            message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
+                        }
+                        if (SOptionPane.showOptionDialog(message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
+                            runnable.run();
+                        }
                     }
-                    if (SOptionPane.showOptionDialog(message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
-                        runnable.run();
-                    }
-                }
-            });
-            return;
+                });
+                return;
+            }
         }
         runnable.run(); //just pass priority immediately if no mana floating that would be lost
     }
