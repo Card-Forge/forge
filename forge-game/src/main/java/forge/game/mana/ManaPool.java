@@ -94,6 +94,28 @@ public class ManaPool implements Iterable<Mana> {
 
     /**
      * <p>
+     * willManaBeLostAtEndOfPhase.
+     * 
+     * @return - whether floating mana will be lost if the current phase ended right now
+     * </p>
+     */
+    public final boolean willManaBeLostAtEndOfPhase() {
+        if (floatingMana.isEmpty() ||
+                owner.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty) ||
+                owner.hasKeyword("Convert unused mana to Colorless")) {
+            return false;
+        }
+
+        if (owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.") &&
+                getAmountOfColor(MagicColor.GREEN) == totalMana()) {
+            return false; //won't lose floating mana if all mana is green and green mana isn't going to be emptied
+        }
+
+        return true;
+    }
+
+    /**
+     * <p>
      * clearPool.
      * 
      * @return - the amount of mana removed this way
@@ -101,14 +123,14 @@ public class ManaPool implements Iterable<Mana> {
      */
     public final int clearPool(boolean isEndOfPhase) {
         // isEndOfPhase parameter: true = end of phase, false = mana drain effect
-        if (this.floatingMana.isEmpty()) { return 0; }
+        if (floatingMana.isEmpty()) { return 0; }
 
         if (isEndOfPhase && owner.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
             return 0;
         }
 
         int numRemoved = 0;
-        boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.");
+        boolean keepGreenMana = isEndOfPhase && owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.");
         boolean convertToColorless = owner.hasKeyword("Convert unused mana to Colorless");
 
         List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
@@ -122,7 +144,7 @@ public class ManaPool implements Iterable<Mana> {
         for (Byte b : keys) {
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
                 final List<Mana> pMana = new ArrayList<Mana>();
-                for (final Mana mana : this.floatingMana.get(b)) {
+                for (final Mana mana : floatingMana.get(b)) {
                     if (mana.getManaAbility()!= null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
                     }
