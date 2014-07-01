@@ -11,7 +11,9 @@ import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -432,6 +434,8 @@ public class ComputerUtilCost {
                 return false;
             }
         } else if ("nonToken".equals(aiLogic) && AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0).isToken()) {
+            return false;
+        } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
         }
 
