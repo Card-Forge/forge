@@ -98,9 +98,9 @@ public class InputPassPriority extends InputSyncronizedBase {
             ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
                 @Override
                 public void run() {
-                    String message = "You have mana floating in your mana pool that will be lost if you pass priority now.";
+                    String message = "You have mana floating in your mana pool that could be lost if you pass priority now.";
                     if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
-                        message += " You will take mana burn damage equal to the amount of floating mana.";
+                        message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
                     }
                     if (SOptionPane.showOptionDialog(message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
                         runnable.run();
