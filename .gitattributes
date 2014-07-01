@@ -583,6 +583,7 @@ forge-game/src/main/java/forge/game/trigger/Trigger.java svneol=native#text/plai
 forge-game/src/main/java/forge/game/trigger/TriggerAlways.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttached.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerAttackerBlocked.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/trigger/TriggerAttackerBlockedByCreature.java -text
 forge-game/src/main/java/forge/game/trigger/TriggerAttackerUnblocked.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/trigger/TriggerAttacks.java svneol=native#text/plain

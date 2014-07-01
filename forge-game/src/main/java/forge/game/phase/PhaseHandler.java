@@ -650,6 +650,14 @@ public class PhaseHandler implements java.io.Serializable {
             runParams.put("Blockers", blockers);
             runParams.put("NumBlockers", blockers.size());
             game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
+            
+            // Run this trigger once for each blocker
+            for (final Card b : blockers) {
+            	final HashMap<String, Object> runParams2 = new HashMap<String, Object>();
+            	runParams2.put("Attacker", a);
+            	runParams2.put("Blocker", b);
+            	game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams2, false);
+            }
 
             if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
                 // Bushido
