@@ -183,6 +183,8 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
 
+        game.getStack().clearUndoStack(); //can't undo action from previous phase
+
         String phaseType = oldPhase == phase ? "Repeat" : phase == PhaseType.getNext(oldPhase) ? "" : "Additional";
 
         if (this.phase == PhaseType.UNTAP) {

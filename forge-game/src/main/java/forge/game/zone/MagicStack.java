@@ -258,6 +258,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     /**
      * <p>
+     * clearUndoStack.
+     * </p>
+     */
+    public final void clearUndoStack() {
+        undoStack.clear();
+    }
+
+    /**
+     * <p>
      * add.
      * </p>
      * 
