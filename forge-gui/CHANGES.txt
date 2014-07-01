@@ -9,8 +9,8 @@ Release Notes
 -------------
 
 - Concurrent Modification Errors Fixed (mostly) -
-The most common cause of concurrent modification error has been fixed, so you should rarely encounter them anymore
-Even if you do, pressing Continue on the bug report dialog should now allow you to continue your game
+The most common cause of concurrent modification error has been fixed, so you should rarely encounter them anymore.
+Even if you do, pressing Continue on the bug report dialog should now allow you to continue your game.
 
 
 - Introducing Background Music -
@@ -22,12 +22,12 @@ The music is paused automatically if you minimize or switch away from Forge, and
 
 
 - Undo button in Prompt and new Floating Mana warning -
-If your last action is undoable, the right button in the Prompt pane will now allow undoing it in addition to Ctrl+Z and Forge > Game > Undo
-In addition, if you attempt to pass priority with mana floating in your pool that could be lost, you'll now receive a warning
+If your last action is undoable, the right button in the Prompt pane will now allow undoing it in addition to Ctrl+Z and Forge > Game > Undo.
+In addition, if you attempt to pass priority with mana floating in your pool that could be lost, you'll now receive a warning.
 
 
 - Flickering P/T Overlays Fixed -
-Fixed bug that caused P/T overlays to flicker between their base values and their modified values from static effects
+Fixed bug that caused P/T overlays to flicker between their base values and their modified values from static effects.
 
 
 - New Magic 2015 cards -
@@ -90,6 +90,28 @@ Might Makes Right
 Miner's Bane
 Warden of the Beyond
 Hushwing Gryff
+Nissa, Worldwaker
+Chronostutter
+Research Assistant
+Genesis Hydra
+Soul of New Phyrexia
+Dauntless River Marshal
+Jorubai Murk Lurker
+Kird Chieftain
+Nightfire Giant
+Sunblade Elf
+Borderland Marauder
+Goblin Kaboomist
+Goblin Rabblemaster
+Soul of Shandalar
+Stoke the Flames
+Chief Engineer
+Garruk, Apex Predator
+Generator Servant
+Sliver Hivelord
+Indulgent Tormentor
+Mercurial Pretender
+Resolute Archangel
 
 
 ------------
