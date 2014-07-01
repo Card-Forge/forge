@@ -40,7 +40,7 @@ public class FSubMenu extends FMenuItem {
     public void draw(Graphics g) {
         super.draw(g);
 
-        float divotWidth = getDivotWidth();
+        float divotWidth = DIVOT_WIDTH;
         float divotHeight = divotWidth * 2f;
         float x2 = getWidth() - GAP_X - 1;
         float x1 = x2 - divotWidth;

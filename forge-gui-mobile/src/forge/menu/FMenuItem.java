@@ -17,6 +17,7 @@ import forge.util.Utils;
 
 public class FMenuItem extends FDisplayObject {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
+    protected static final float DIVOT_WIDTH = HEIGHT / 6;
     protected static final float GAP_X = HEIGHT * 0.1f;
     private static final float ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20; //round down to nearest multiple of 20
 
@@ -60,15 +61,11 @@ public class FMenuItem extends FDisplayObject {
 
     public float getMinWidth() {
         //pretend there's a divot even if there isn't to provide extra right padding and allow menu items to line up nicer
-        float width = textWidth + getDivotWidth() + 4 * GAP_X;
+        float width = textWidth + DIVOT_WIDTH + 4 * GAP_X;
         if (allowForIcon) {
             width += ICON_SIZE + GAP_X;
         }
         return width;
-    }
-
-    protected float getDivotWidth() {
-        return getHeight() / 6;
     }
 
     @Override

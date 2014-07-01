@@ -39,7 +39,7 @@ public abstract class FDropDownMenu extends FDropDown {
         float width = 0;
         for (FMenuItem item : items) {
             float minWidth = item.getMinWidth();
-            if (minWidth > width) {
+            if (width < minWidth) {
                 width = minWidth;
             }
         }
