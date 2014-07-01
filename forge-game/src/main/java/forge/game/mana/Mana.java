@@ -102,6 +102,14 @@ public class Mana {
         return this.manaAbility != null && manaAbility.addKeywords(saBeingPaid);
     }
 
+    public final boolean addsKeywordsType() {
+        return this.manaAbility != null && manaAbility.getAddsKeyowrdsType() != null;
+    }
+    
+    public final boolean addsKeywordsUntil() {
+        return this.manaAbility != null && manaAbility.getAddsKeywordsUntil() != null;
+    }
+
     public final String getAddedKeywords() {
         return this.manaAbility.getKeywords();
     }

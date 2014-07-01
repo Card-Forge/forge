@@ -21,10 +21,13 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
+import forge.GameCommand;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventZone;
 import forge.game.phase.PhaseType;
@@ -34,6 +37,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -256,9 +260,34 @@ public class ManaPool implements Iterable<Mana> {
             sa.getHostCard().setCanCounter(false);
         }
         if (sa.isSpell() && sa.getHostCard() != null) {
-            if (sa.getHostCard().isCreature() && mana.addsKeywords(sa)) {
+            final Card host = sa.getHostCard();
+            if (mana.addsKeywords(sa) && mana.addsKeywordsType()
+                    && host.isType(mana.getManaAbility().getAddsKeyowrdsType())) {
                 final long timestamp = sa.getHostCard().getGame().getNextTimestamp();
-                sa.getHostCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
+                final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
+                host.addChangedCardKeywords(kws, new ArrayList<String>(), false, timestamp);
+                if (mana.addsKeywordsUntil()) {
+                    final GameCommand untilEOT = new GameCommand() {
+                        private static final long serialVersionUID = -8285169579025607693L;
+
+                        @Override
+                        public void run() {
+                            if (!kws.isEmpty()) {
+                                for (String kw : kws) {
+                                    if (kw.startsWith("HIDDEN")) {
+                                        sa.getHostCard().removeHiddenExtrinsicKeyword(kw);
+                                    }
+                                }
+                                host.removeChangedCardKeywords(timestamp);
+                            }
+                            host.getGame().fireEvent(new GameEventCardStatsChanged(host));
+                        }
+                    };
+                    String until = mana.getManaAbility().getAddsKeywordsUntil();
+                    if ("UntilEOT".equals(until)) {
+                        host.getGame().getEndOfTurn().addUntil(untilEOT);
+                    }
+                }
             }
             if (mana.addsCounters(sa)) {
                 mana.getManaAbility().createETBCounters(sa.getHostCard());
