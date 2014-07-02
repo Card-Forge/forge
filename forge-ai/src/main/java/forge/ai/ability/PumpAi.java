@@ -273,9 +273,11 @@ public class PumpAi extends PumpAiBase {
                 		}
                 	}
                 }
+                return false;
             }
-            return false;
-        } else if (sa.isCurse()) {
+        }
+        	
+        if (sa.isCurse()) {
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
                 return true;
