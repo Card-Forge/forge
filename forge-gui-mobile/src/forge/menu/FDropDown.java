@@ -90,8 +90,12 @@ public abstract class FDropDown extends FScrollPane {
                 container.remove(backdrop);
                 backdrop = null;
             }
+            onHidden();
         }
         super.setVisible(visible0);
+    }
+
+    protected void onHidden() {
     }
 
     protected abstract boolean autoHide();
