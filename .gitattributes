@@ -1201,6 +1201,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/ControlWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
+forge-gui-mobile/src/forge/screens/quest/QuestDuelsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestScreen.java -text
 forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
 forge-gui-mobile/src/forge/screens/settings/FilesPage.java -text

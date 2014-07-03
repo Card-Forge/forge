@@ -198,6 +198,14 @@ public class FLabel extends FDisplayObject implements IButton {
         return handled;
     }
 
+    public boolean trigger() {
+        if (isEnabled() && command != null) {
+            command.handleEvent(new FEvent(this, FEventType.TAP));
+            return true;
+        }
+        return false;
+    }
+
     public TextBounds getAutoSizeBounds() {
         TextBounds bounds;
         if (text.isEmpty()) {

@@ -10,6 +10,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
+import forge.menu.FPopupMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -25,6 +26,9 @@ public abstract class FScreen extends FContainer {
 
     protected FScreen(String headerCaption) {
         this(headerCaption == null ? null : new DefaultHeader(headerCaption));
+    }
+    protected FScreen(String headerCaption, FPopupMenu menu) {
+        this(new MenuHeader(headerCaption, menu));
     }
     protected FScreen(Header header0) {
         header = header0;
@@ -57,12 +61,12 @@ public abstract class FScreen extends FContainer {
     }
 
     public void showMenu() {
-        SettingsScreen.show(); //TODO: Build menu containing settings item
-        //buildMenu();
-    }
-
-    protected void buildMenu() {
-        
+        if (header instanceof MenuHeader) {
+            ((MenuHeader)header).btnMenu.trigger();
+        }
+        else { //just so settings screen if no menu header
+            SettingsScreen.show();
+        }
     }
 
     @Override
@@ -95,8 +99,8 @@ public abstract class FScreen extends FContainer {
         public abstract float getPreferredHeight();
     }
     private static class DefaultHeader extends Header {
-        private static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
-        private static final FSkinFont FONT = FSkinFont.get(16);
+        protected static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
+        protected static final FSkinFont FONT = FSkinFont.get(16);
 
         private final FLabel btnBack, lblCaption;
 
@@ -132,6 +136,26 @@ public abstract class FScreen extends FContainer {
             lblCaption.setBounds(height, 0, width - 2 * height, height);
         }
     }
+    private static class MenuHeader extends DefaultHeader {
+        private final FLabel btnMenu;
+
+        public MenuHeader(String headerCaption, final FPopupMenu menu) {
+            super(headerCaption);
+            btnMenu = add(new FLabel.Builder().icon(new MenuIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    menu.show(btnMenu, 0, HEIGHT);
+                }
+            }).build());
+            btnMenu.setSize(HEIGHT, HEIGHT);
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            super.doLayout(width, height);
+            btnMenu.setLeft(width - height);
+        }
+    }
 
     protected static class BackIcon implements FImage {
         private static final float THICKNESS = Utils.scaleMax(3);
@@ -162,6 +186,47 @@ public abstract class FScreen extends FContainer {
 
             g.drawLine(THICKNESS, COLOR, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
             g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid - 1, xMid + offsetX, yMid + offsetY);
+        }
+    }
+
+    protected static class MenuIcon implements FImage {
+        private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
+
+        private final float width, height;
+        public MenuIcon(float width0, float height0) {
+            width = width0;
+            height = height0;
+        }
+
+        @Override
+        public float getWidth() {
+            return width;
+        }
+
+        @Override
+        public float getHeight() {
+            return height;
+        }
+
+        @Override
+        public void draw(Graphics g, float x, float y, float w, float h) {
+            float thickness = Math.round(h / 5);
+            float delta = Math.round(thickness * 1.75f);
+            y += (h - 2 * delta - thickness) / 2;
+
+            g.fillRect(COLOR, x, y, thickness, thickness);
+            y += delta;
+            g.fillRect(COLOR, x, y, thickness, thickness);
+            y += delta;
+            g.fillRect(COLOR, x, y, thickness, thickness);
+            x += delta;
+            y -= 2 * delta;
+            w -= delta;
+            g.fillRect(COLOR, x, y, w, thickness);
+            y += delta;
+            g.fillRect(COLOR, x, y, w, thickness);
+            y += delta;
+            g.fillRect(COLOR, x, y, w, thickness);
         }
     }
 
