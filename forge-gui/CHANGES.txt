@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.21
+Forge Beta: 07-04-2014 ver 1.5.21
 
 
-13### cards in total.
+13876 cards in total.
 
 
 -------------
@@ -34,110 +34,99 @@ Fixed bug that caused P/T overlays to flicker between their base values and thei
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
-- Conspiracy cards -
-Forge now includes many of the new Conspiracy cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-
----------
-New Cards
----------
-
-
-
-
 ---------------------------
 New Magic 2015 branch Cards
 ---------------------------
 
+Aeronaut Tinkerer
+Aggressive Mining
+Ajani Steadfast
+Altac Bloodseeker
+Amphin Pathmage
+Avarice Amulet
+Belligerent Sliver
+Boonweaver Giant
+Borderland Marauder
+Brawler's Plate
+Carrion Crow
 Chasm Skulker
+Chief Engineer
+Chronostutter
 Coral Barrier
+Covenant of Blood
+Cruel Sadist
+Dauntless River Marshal
+Endless Obedience
+Ephemeral Shields
+Feast on the Fallen
+Festergloom
+First Response
+Flesh to Dust
+Garruk, Apex Predator
+Generator Servant
+Genesis Hydra
+Glacial Crasher
+Goblin Kaboomist
+Goblin Rabblemaster
+Hot Soup
+Hushwing Gryff
+In Garruk's Wake
+Indulgent Tormentor
+Invasive Species
+Jace, the Living Guildpact
+Jorubai Murk Lurker
+Kapsho Kitefins
+Kird Chieftain
 Marked for Honor
+Master of Predicaments
 Meditation Puzzle
+Mercurial Pretender
+Meteorite
+Might Makes Right
 Military Intelligence
+Miner's Bane
+Nightfire Giant
+Nissa, Worldwaker
+Ob Nixilis, Unshackled
+Obelisk of Urd
 Paragon of Eternal Wilds
 Paragon of Fierce Defiance
 Paragon of Gathering Mists
 Paragon of New Dawns
 Paragon of Open Graves
-Quickling
-Reclamation Sage
-Seraph of the Masses
-Soul of Zendikar
-Triplicate Spirits
-Void Snare
-Waste Not
-Avarice Amulet
-In Garruk's Wake
-Xathrid Slyblade
-Cruel Sadist
-Ob Nixilis, Unshackled
-Aggressive Mining
-Master of Predicaments
-Soul of Innistrad
-Sliver Hive
-Yisan, the Wanderer Bard
-Soul of Theros
-Witch's Familiar
-Endless Obedience
-Ajani Steadfast
-Brawler's Plate
-Hot Soup
-Obelisk of Urd
 Perilous Vault
-Jace, the Living Guildpact
-Soul of Ravnica
-Might Makes Right
-Miner's Bane
-Warden of the Beyond
-Hushwing Gryff
-Nissa, Worldwaker
-Chronostutter
-Research Assistant
-Genesis Hydra
-Soul of New Phyrexia
-Dauntless River Marshal
-Jorubai Murk Lurker
-Kird Chieftain
-Nightfire Giant
-Sunblade Elf
-Borderland Marauder
-Goblin Kaboomist
-Goblin Rabblemaster
-Soul of Shandalar
-Stoke the Flames
-Chief Engineer
-Garruk, Apex Predator
-Generator Servant
-Sliver Hivelord
-Indulgent Tormentor
-Mercurial Pretender
-Resolute Archangel
 Phytotitan
-Siege Dragon
-Kapsho Kitefins
-Invasive Species
-Shaman of Spring
-Radiant Fountain
-Altac Bloodseeker
-Belligerent Sliver
-Venom Sliver
-Boonweaver Giant
-Ephemeral Shields
-Sanctified Charge
-Sungrace Pegasus
-Aeronaut Tinkerer
-Amphin Pathmage
-Glacial Crasher
-Carrion Crow
-Covenant of Blood
-Festergloom
-Flesh to Dust
-Meteorite
 Profane Memento
+Quickling
+Radiant Fountain
+Reclamation Sage
+Research Assistant
+Resolute Archangel
 Rogue's Gloves
 Sacred Armory
-First Response
-Feast on the Fallen
+Sanctified Charge
+Seraph of the Masses
+Shaman of Spring
+Siege Dragon
+Sliver Hive
+Sliver Hivelord
+Soul of Innistrad
+Soul of New Phyrexia
+Soul of Ravnica
+Soul of Shandalar
+Soul of Theros
+Soul of Zendikar
+Stoke the Flames
+Sunblade Elf
+Sungrace Pegasus
+Triplicate Spirits
+Venom Sliver
+Void Snare
+Warden of the Beyond
+Waste Not
+Witch's Familiar
+Xathrid Slyblade
+Yisan, the Wanderer Bard
 
 
 ------------
@@ -148,6 +137,9 @@ Known Issues
 We can now package Forge as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
 The Mac OS X app version apparently requires the Mavericks OS and is not compatible with earlier OS X versions. People with earlier OS X versions should use the Windows and Linux version and launch forge on their Mac by double clicking on the included "forge.command" file.
+
+- Conspiracy cards -
+Forge now includes many of the new Conspiracy cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 - Commander 2013 cards -
 It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
@@ -175,7 +167,14 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+elcnesh
+Gos
+rikimbo
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
