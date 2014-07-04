@@ -83,6 +83,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
 
+    /** The life lost last turn. */
+    private int lifeLostLastTurn = 0;
+
     /** The life Gained this turn. */
     private int lifeGainedThisTurn = 0;
 
@@ -2664,6 +2667,29 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * <p>
+     * Getter for the field <code>lifeLostLastTurn</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getLifeLostLastTurn() {
+        return this.lifeLostLastTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>lifeLostLastTurn</code>.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     */
+    public final void setLifeLostLastTurn(final int n) {
+        this.lifeLostLastTurn = n;
+    }
+
+    /**
      * a Player or Planeswalker that this Player must attack if able in an
      * upcoming combat. This is cleared at the end of each combat.
      * 
@@ -3301,4 +3327,5 @@ public class Player extends GameEntity implements Comparable<Player> {
     public List<Card> getGainedOwnership() {
         return gainedOwnership;
     }
+
 }

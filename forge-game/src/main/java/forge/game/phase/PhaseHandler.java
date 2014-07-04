@@ -723,6 +723,7 @@ public class PhaseHandler implements java.io.Serializable {
         for (Player p : game.getPlayers()) {
 
             p.resetProwl();
+            p.setLifeLostLastTurn(p.getLifeLostThisTurn());
             p.setLifeLostThisTurn(0);
             p.setLifeGainedThisTurn(0);
             p.setLibrarySearched(0);

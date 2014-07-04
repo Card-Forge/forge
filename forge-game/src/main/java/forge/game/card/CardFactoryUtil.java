@@ -713,6 +713,10 @@ public class CardFactoryUtil {
             return doXMath(player.getLifeLostThisTurn(), m, source);
         }
 
+        if (value.contains("LifeLostLastTurn")) {
+            return doXMath(player.getLifeLostLastTurn(), m, source);
+        }
+
         if (value.contains("LifeGainedThisTurn")) {
             return doXMath(player.getLifeGainedThisTurn(), m, source);
         }
