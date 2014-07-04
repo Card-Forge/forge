@@ -47,6 +47,10 @@ public abstract class FPopupMenu extends FDropDownMenu {
         float screenHeight = screen.getHeight();
 
         paneSize = updateAndGetPaneSize(screenWidth, screenHeight);
+
+        //round width and height so borders appear properly
+        paneSize = new ScrollBounds(Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
+
         if (x + paneSize.getWidth() > screenWidth) {
             x = screenWidth - paneSize.getWidth();
         }
@@ -54,6 +58,6 @@ public abstract class FPopupMenu extends FDropDownMenu {
             y = screenHeight - paneSize.getHeight();
         }
 
-        setBounds(Math.round(x), Math.round(y), Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
+        setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), paneSize.getHeight());
     }
 }

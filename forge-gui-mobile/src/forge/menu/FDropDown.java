@@ -114,11 +114,14 @@ public abstract class FDropDown extends FScrollPane {
 
         float maxVisibleHeight = screenHeight - VPrompt.HEIGHT - y; //prevent covering prompt
         paneSize = updateAndGetPaneSize(screenWidth, maxVisibleHeight);
+
+        //round width and height so borders appear properly
+        paneSize = new ScrollBounds(Math.round(paneSize.getWidth()), Math.round(paneSize.getHeight()));
         if (x + paneSize.getWidth() > screenWidth) {
             x = screenWidth - paneSize.getWidth();
         }
 
-        setBounds(Math.round(x), Math.round(y), Math.round(paneSize.getWidth()), Math.round(Math.min(paneSize.getHeight(), maxVisibleHeight)));
+        setBounds(Math.round(x), Math.round(y), paneSize.getWidth(), Math.min(paneSize.getHeight(), maxVisibleHeight));
     }
 
     @Override
