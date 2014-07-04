@@ -114,6 +114,30 @@ Mercurial Pretender
 Resolute Archangel
 Phytotitan
 Siege Dragon
+Kapsho Kitefins
+Invasive Species
+Shaman of Spring
+Radiant Fountain
+Altac Bloodseeker
+Belligerent Sliver
+Venom Sliver
+Boonweaver Giant
+Ephemeral Shields
+Sanctified Charge
+Sungrace Pegasus
+Aeronaut Tinkerer
+Amphin Pathmage
+Glacial Crasher
+Carrion Crow
+Covenant of Blood
+Festergloom
+Flesh to Dust
+Meteorite
+Profane Memento
+Rogue's Gloves
+Sacred Armory
+First Response
+Feast on the Fallen
 
 
 ------------
