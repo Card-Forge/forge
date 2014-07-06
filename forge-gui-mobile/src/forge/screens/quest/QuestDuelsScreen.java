@@ -1,13 +1,21 @@
 package forge.screens.quest;
 
-public class QuestDuelsScreen extends QuestScreen {
+import forge.screens.LaunchScreen;
 
+public class QuestDuelsScreen extends LaunchScreen {
     public QuestDuelsScreen() {
-        super("Quest Duels");
+        super("Quest Duels", new QuestMenu());
     }
 
     @Override
-    protected void doLayout(float startY, float width, float height) {
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
+        // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    protected boolean buildLaunchParams(LaunchParams launchParams) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

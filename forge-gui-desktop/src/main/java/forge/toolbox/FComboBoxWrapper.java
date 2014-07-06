@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import forge.interfaces.IComboBox;
 import forge.toolbox.FComboBox.TextAlignment;
 import forge.toolbox.FSkin.SkinFont;
 
@@ -16,7 +17,7 @@ import java.util.Vector;
  * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)
  *
  */
-public class FComboBoxWrapper<E> {
+public class FComboBoxWrapper<E> implements IComboBox<E> {
 
     private static final ArrayList<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
 
@@ -123,10 +124,22 @@ public class FComboBoxWrapper<E> {
         this.comboBox.setSkinFont(skinFont);
     }
 
+    @Override
+    public boolean isVisible() {
+        return this.comboBox.isVisible();
+    }
+
+    @Override
     public void setVisible(boolean aFlag) {
         this.comboBox.setVisible(aFlag);
     }
 
+    @Override
+    public boolean isEnabled() {
+        return this.comboBox.isEnabled();
+    }
+
+    @Override
     public void setEnabled(boolean aFlag) {
         this.comboBox.setEnabled(aFlag);
     }

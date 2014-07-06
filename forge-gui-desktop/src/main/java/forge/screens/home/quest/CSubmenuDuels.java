@@ -6,6 +6,7 @@ import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
+import forge.quest.QuestUtil;
 import forge.quest.bazaar.QuestPetController;
 import forge.screens.home.CHomeUI;
 import forge.toolbox.JXButtonPanel;
@@ -35,23 +36,23 @@ public enum CSubmenuDuels implements ICDoc {
 
         view.getBtnSpellShop().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.showSpellShop(); } });
+                    public void run() { QuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.showBazaar(); } });
+                    public void run() { QuestUtil.showBazaar(); } });
 
         view.getBtnTravel().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.travelWorld(); CSubmenuDuels.this.update(); } });
+                    public void run() { QuestUtil.travelWorld(); CSubmenuDuels.this.update(); } });
 
         view.getBtnUnlock().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuDuels.this.update(); } });
+                    public void run() { QuestUtil.chooseAndUnlockEdition(); CSubmenuDuels.this.update(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
+            public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(); } });
 
         final QuestController quest = FModel.getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
@@ -85,11 +86,11 @@ public enum CSubmenuDuels implements ICDoc {
         view.getBtnRandomOpponent().setCommand(new UiCommand() {
             @Override
             public void run() { 
-                if (SSubmenuQuestUtil.canStartGame()) {
+                if (QuestUtil.canStartGame()) {
                     FModel.getQuest().getDuelsManager().randomizeOpponents();
                     final List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
-                    SSubmenuQuestUtil.setEvent(duels.get((int) (Math.random() * duels.size())));
-                    SSubmenuQuestUtil.startGame();
+                    QuestUtil.setEvent(duels.get((int) (Math.random() * duels.size())));
+                    QuestUtil.startGame();
                 }
             }
         });
@@ -118,7 +119,7 @@ public enum CSubmenuDuels implements ICDoc {
      */
     @Override
     public void update() {
-        SSubmenuQuestUtil.updateQuestView(VSubmenuDuels.SINGLETON_INSTANCE);
+        QuestUtil.updateQuestView(VSubmenuDuels.SINGLETON_INSTANCE);
 
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 

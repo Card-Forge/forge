@@ -1,12 +1,13 @@
 package forge.toolbox;
 
+import forge.interfaces.ICheckBox;
 import forge.toolbox.FSkin.SkinnedCheckBox;
 
 /** 
  * A custom instance of JCheckBox using Forge skin properties.
  */
 @SuppressWarnings("serial")
-public class FCheckBox extends SkinnedCheckBox {
+public class FCheckBox extends SkinnedCheckBox implements ICheckBox {
     public FCheckBox() {
         this("");
     }

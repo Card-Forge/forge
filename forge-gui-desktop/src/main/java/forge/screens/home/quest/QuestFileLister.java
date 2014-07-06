@@ -3,6 +3,7 @@ package forge.screens.home.quest;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.properties.ForgeConstants;
+import forge.quest.QuestUtil;
 import forge.quest.data.QuestData;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
@@ -307,7 +308,7 @@ public class QuestFileLister extends JPanel {
             questName = FOptionPane.showInputDialog("Rename quest to:", "Quest Rename", null, oldQuestName);
             if (questName == null) { return; }
 
-            questName = SSubmenuQuestUtil.cleanString(questName);
+            questName = QuestUtil.cleanString(questName);
             if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
             if (questName.isEmpty()) {

@@ -2,6 +2,7 @@ package forge.screens.home.quest;
 
 import forge.ImageCache;
 import forge.quest.QuestEvent;
+import forge.quest.QuestUtil;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
@@ -60,7 +61,7 @@ class PnlEvent extends JPanel {
             @Override
             public void stateChanged(ChangeEvent arg0) {
                 if (rad.isSelected()) {
-                    SSubmenuQuestUtil.setEvent(event);
+                    QuestUtil.setEvent(event);
                 }
             }
         });

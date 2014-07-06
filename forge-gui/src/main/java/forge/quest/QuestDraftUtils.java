@@ -1,47 +1,32 @@
-package forge.screens.home.quest;
+package forge.quest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
-
 import forge.FThreads;
 import forge.GuiBase;
-import forge.Singletons;
 import forge.deck.DeckGroup;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
-import forge.gui.SOverlayUtils;
-import forge.gui.framework.FScreen;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestEventDraft;
 
 public class QuestDraftUtils {
-    
     private static List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
     
     public static boolean matchInProgress = false;
     public static boolean aiMatchInProgress = false;
     private static boolean waitForUserInput = false;
-    
+
     public static void continueMatch(Game lastGame) {
-        
         if (lastGame.getMatch().isMatchOver()) {
             matchInProgress = false;
         }
-        
-        if (!matchInProgress) {
-            Singletons.getControl().endCurrentGame();
-            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
-        } else {
-            Singletons.getControl().endCurrentGame();
-            Singletons.getControl().startGameWithUi(lastGame.getMatch());
-        }
-        
+        GuiBase.getInterface().continueMatch(matchInProgress ? lastGame.getMatch() : null);
     }
 
     public static void startNextMatch() {
@@ -151,11 +136,9 @@ public class QuestDraftUtils {
         }
         
         matchups.add(matchup);
-        
     }
-    
+
     public static void update() {
-        
         if (matchups.isEmpty()) {
             if (!matchInProgress) {
                 aiMatchInProgress = false;
@@ -177,19 +160,12 @@ public class QuestDraftUtils {
         
         matchInProgress = true;
         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
-        });
-        
         if (!nextMatch.hasHumanPlayer) {
             GuiBase.getInterface().disableOverlay();
             waitForUserInput = false;
             aiMatchInProgress = true;
-        } else {
+        }
+        else {
             waitForUserInput = true;
             aiMatchInProgress = false;
         }
@@ -205,10 +181,9 @@ public class QuestDraftUtils {
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
-                Singletons.getControl().startGameWithUi(match);
+                GuiBase.getInterface().startGame(match);
             }
         });
-        
     }
     
     public static void continueMatches() {
@@ -222,5 +197,4 @@ public class QuestDraftUtils {
         private boolean hasHumanPlayer = false;
         
     }
-    
 }

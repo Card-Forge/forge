@@ -25,6 +25,7 @@ import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
@@ -369,6 +370,11 @@ public class GuiMobile implements IGuiBase {
 		return FControl.getGuiPlayer();
 	}
 
+    @Override
+    public LobbyPlayer getAiPlayer(String name) {
+        return FControl.getAiPlayer(name);
+    }
+
 	@Override
 	public LobbyPlayer createAiPlayer() {
 		return FControl.getAiPlayer();
@@ -402,5 +408,36 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void clearImageCache() {
         ImageCache.clear();
+    }
+
+    @Override
+    public void startGame(Match match) {
+        FControl.startGame(match);
+    }
+
+    @Override
+    public void continueMatch(Match match) {
+        FControl.endCurrentGame();
+        if (match == null) {
+            Forge.back();
+        }
+        else {
+            FControl.startGame(match);
+        }
+    }
+
+    @Override
+    public void showSpellShop() {
+        
+    }
+
+    @Override
+    public void showBazaar() {
+        
+    }
+
+    @Override
+    public void setPlayerAvatar(LobbyPlayer player, String iconImageKey) {
+        //Not needed for mobile game
     }
 }

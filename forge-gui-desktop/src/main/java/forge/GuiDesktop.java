@@ -33,6 +33,7 @@ import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
@@ -47,12 +48,16 @@ import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutIO;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
+import forge.model.FModel;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.ViewWinLose;
@@ -450,6 +455,11 @@ public class GuiDesktop implements IGuiBase {
 		return FControl.instance.getGuiPlayer();
 	}
 
+    @Override
+    public LobbyPlayer getAiPlayer(String name) {
+        return FControl.instance.getAiPlayer(name);
+    }
+
 	@Override
 	public LobbyPlayer createAiPlayer() {
 		return FControl.instance.getAiPlayer();
@@ -483,5 +493,41 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public void clearImageCache() {
         ImageCache.clear();
+    }
+
+    @Override
+    public void startGame(Match match) {
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+        Singletons.getControl().startGameWithUi(match);
+    }
+
+    @Override
+    public void continueMatch(Match match) {
+        Singletons.getControl().endCurrentGame();
+        if (match == null) {
+            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+        }
+        else {
+            Singletons.getControl().startGameWithUi(match);
+        }
+    }
+
+    @Override
+    public void showSpellShop() {
+        Singletons.getControl().setCurrentScreen(FScreen.QUEST_CARD_SHOP);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                new CEditorQuestCardShop(FModel.getQuest()));
+    }
+
+    @Override
+    public void showBazaar() {
+        Singletons.getControl().setCurrentScreen(FScreen.QUEST_BAZAAR);
+        Singletons.getView().getFrame().validate();
+    }
+
+    @Override
+    public void setPlayerAvatar(LobbyPlayer player, String iconImageKey) {
+        CMatchUI.SINGLETON_INSTANCE.avatarImages.put(player, iconImageKey);
     }
 }

@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import forge.interfaces.IComboBox;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedComboBox;
 
@@ -13,7 +14,7 @@ import java.awt.*;
 import java.util.Vector;
 
 @SuppressWarnings("serial")
-public class FComboBox<E> extends SkinnedComboBox<E> {
+public class FComboBox<E> extends SkinnedComboBox<E> implements IComboBox<E> {
     public enum TextAlignment {
         LEFT (SwingConstants.LEFT),
         RIGHT (SwingConstants.RIGHT),

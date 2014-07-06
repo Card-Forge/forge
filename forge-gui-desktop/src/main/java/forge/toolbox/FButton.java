@@ -21,6 +21,7 @@ import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gui.framework.ILocalRepaint;
 import forge.interfaces.IButton;
+import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedButton;
 
@@ -247,5 +248,15 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
                 command.run();
             }
         });
+    }
+
+    @Override
+    public void setTextColor(FSkinProp color) {
+        setForeground(FSkin.getColor(Colors.fromSkinProp(color)));
+    }
+
+    @Override
+    public void setTextColor(int r, int g, int b) {
+        setForeground(new Color(r, g, b));
     }
 }

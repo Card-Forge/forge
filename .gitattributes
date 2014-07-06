@@ -871,13 +871,10 @@ forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestDecks.java
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestDraft.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/CSubmenuQuestPrefs.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/DialogChooseSets.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/quest/IVQuestStats.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlDraftEvent.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/PnlEvent.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestDraftUtils.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestFileLister.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/QuestPreferencesHandler.java -text
-forge-gui-desktop/src/main/java/forge/screens/home/quest/SSubmenuQuestUtil.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuChallenges.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuDuels.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/quest/VSubmenuQuestData.java -text
@@ -1202,7 +1199,7 @@ forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestDuelsScreen.java -text
-forge-gui-mobile/src/forge/screens/quest/QuestScreen.java -text
+forge-gui-mobile/src/forge/screens/quest/QuestMenu.java -text
 forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
 forge-gui-mobile/src/forge/screens/settings/FilesPage.java -text
 forge-gui-mobile/src/forge/screens/settings/GuiDownloader.java -text
@@ -16454,6 +16451,8 @@ forge-gui/src/main/java/forge/events/UiEventBlockerAssigned.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletData.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletIO.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
+forge-gui/src/main/java/forge/interfaces/ICheckBox.java -text
+forge-gui/src/main/java/forge/interfaces/IComboBox.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
@@ -16534,9 +16533,11 @@ forge-gui/src/main/java/forge/properties/SavePreferencesListener.java svneol=nat
 forge-gui/src/main/java/forge/properties/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/IQuestRewardCard.java -text
+forge-gui/src/main/java/forge/quest/IVQuestStats.java -text
 forge-gui/src/main/java/forge/quest/QuestController.java -text
 forge-gui/src/main/java/forge/quest/QuestDeckGroupMap.java -text
 forge-gui/src/main/java/forge/quest/QuestDeckMap.java -text
+forge-gui/src/main/java/forge/quest/QuestDraftUtils.java -text
 forge-gui/src/main/java/forge/quest/QuestEvent.java -text
 forge-gui/src/main/java/forge/quest/QuestEventChallenge.java svneol=native#text/plain
 forge-gui/src/main/java/forge/quest/QuestEventDifficulty.java -text

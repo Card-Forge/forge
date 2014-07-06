@@ -7,6 +7,7 @@ import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
+import forge.quest.QuestUtil;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 import forge.screens.home.CHomeUI;
@@ -41,29 +42,29 @@ public enum CSubmenuChallenges implements ICDoc {
 
         view.getBtnSpellShop().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.showSpellShop(); } });
+                    public void run() { QuestUtil.showSpellShop(); } });
 
         view.getBtnBazaar().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.showBazaar(); } });
+                    public void run() { QuestUtil.showBazaar(); } });
 
         view.getBtnUnlock().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
+                    public void run() { QuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
 
         view.getBtnTravel().setCommand(
                 new UiCommand() { @Override
-                    public void run() { SSubmenuQuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
+                    public void run() { QuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
+            public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(); } });
 
         ((FLabel) view.getLblZep()).setCommand(
                 new UiCommand() {
                     @Override
                     public void run() {
-                        if (!SSubmenuQuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
+                        if (!QuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
                             return;
                         }
                         FModel.getQuest().getAchievements().setCurrentChallenges(null);
@@ -124,7 +125,7 @@ public enum CSubmenuChallenges implements ICDoc {
      */
     @Override
     public void update() {
-        SSubmenuQuestUtil.updateQuestView(VSubmenuChallenges.SINGLETON_INSTANCE);
+        QuestUtil.updateQuestView(VSubmenuChallenges.SINGLETON_INSTANCE);
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
         final QuestController qCtrl = FModel.getQuest();

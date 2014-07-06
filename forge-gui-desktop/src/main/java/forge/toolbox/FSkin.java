@@ -363,6 +363,15 @@ public class FSkin {
             skinProp = skinProp0;
         }
 
+        public static Colors fromSkinProp(FSkinProp skinProp) {
+            for (final Colors c : Colors.values()) {
+                if (c.skinProp == skinProp) {
+                    return c;
+                }
+            }
+            return null;
+        }
+
         public static void updateAll() {
             for (final Colors c : Colors.values()) {
                 c.updateColor();

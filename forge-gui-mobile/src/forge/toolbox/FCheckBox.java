@@ -6,9 +6,10 @@ import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.interfaces.ICheckBox;
 import forge.util.Utils;
 
-public class FCheckBox extends FLabel {
+public class FCheckBox extends FLabel implements ICheckBox {
     private static final FSkinColor CHECK_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor BOX_COLOR = CHECK_COLOR.alphaColor(0.5f);
 

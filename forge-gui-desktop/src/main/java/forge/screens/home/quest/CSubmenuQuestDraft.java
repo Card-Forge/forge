@@ -37,7 +37,9 @@ import forge.limited.LimitedPoolType;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
+import forge.quest.QuestDraftUtils;
 import forge.quest.QuestEventDraft;
+import forge.quest.QuestUtil;
 import forge.quest.data.QuestAchievements;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestDraftingProcess;
@@ -531,7 +533,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
             return;
         }
         
-        QuestEventDraft draftEvent = SSubmenuQuestUtil.getDraftEvent();
+        QuestEventDraft draftEvent = QuestUtil.getDraftEvent();
         
         long creditsAvailable = FModel.getQuest().getAssets().getCredits();
         if (creditsAvailable < draftEvent.getEntryFee()) {

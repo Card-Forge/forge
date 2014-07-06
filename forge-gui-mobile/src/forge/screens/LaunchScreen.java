@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.Input.Keys;
 
+import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.FControl;
 import forge.Graphics;
@@ -21,12 +22,14 @@ public abstract class LaunchScreen extends FScreen {
     private static final float IMAGE_WIDTH = FSkinImage.BTN_START_UP.getWidth() * IMAGE_HEIGHT / FSkinImage.BTN_START_UP.getHeight();
     private static final float PADDING = IMAGE_HEIGHT * 0.025f;
 
-    protected final StartButton btnStart;
+    protected final StartButton btnStart = add(new StartButton());
     private boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
         super(headerCaption);
-        btnStart = add(new StartButton());
+    }
+    public LaunchScreen(String headerCaption, FPopupMenu menu) {
+        super(headerCaption, menu);
     }
 
     @Override

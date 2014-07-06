@@ -9,6 +9,7 @@ import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.quest.QuestController;
+import forge.quest.QuestUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuest;
@@ -55,7 +56,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new UiCommand() {
             @Override
             public void run() {
-                if (!SSubmenuQuestUtil.checkActiveQuest("Create a Deck.")) {
+                if (!QuestUtil.checkActiveQuest("Create a Deck.")) {
                     return;
                 }
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);

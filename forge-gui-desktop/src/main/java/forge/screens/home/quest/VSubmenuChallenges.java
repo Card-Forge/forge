@@ -4,6 +4,7 @@ import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.quest.IVQuestStats;
 import forge.screens.home.*;
 import forge.toolbox.*;
 import net.miginfocom.swing.MigLayout;
@@ -290,5 +291,9 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     public FLabel getBtnRandomOpponent() {
         return null;
     }
-    
+
+    @Override
+    public boolean isChallengesView() {
+        return true;
+    }
 }

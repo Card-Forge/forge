@@ -17,6 +17,7 @@ import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
@@ -86,6 +87,7 @@ public interface IGuiBase {
     void copyToClipboard(String text);
     void browseToUrl(String url) throws Exception;
 	LobbyPlayer getGuiPlayer();
+    LobbyPlayer getAiPlayer(String name);
 	LobbyPlayer createAiPlayer();
 	LobbyPlayer createAiPlayer(String name, int avatarIndex);
 	LobbyPlayer getQuestPlayer();
@@ -93,4 +95,9 @@ public interface IGuiBase {
     IAudioMusic createAudioMusic(String filename);
     void startAltSoundSystem(String filename, boolean isSynchronized);
     void clearImageCache();
+    void startGame(Match match);
+    void continueMatch(Match match);
+    void showSpellShop();
+    void showBazaar();
+    void setPlayerAvatar(LobbyPlayer player, String iconImageKey);
 }

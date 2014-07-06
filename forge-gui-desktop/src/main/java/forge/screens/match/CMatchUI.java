@@ -42,7 +42,7 @@ import forge.item.InventoryItem;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.screens.home.quest.QuestDraftUtils;
+import forge.quest.QuestDraftUtils;
 import forge.screens.match.controllers.*;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.*;

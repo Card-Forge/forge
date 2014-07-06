@@ -12,6 +12,7 @@ import javax.swing.event.ChangeListener;
 import net.miginfocom.swing.MigLayout;
 import forge.model.FModel;
 import forge.quest.QuestEventDraft;
+import forge.quest.QuestUtil;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
@@ -56,7 +57,7 @@ public class PnlDraftEvent extends JPanel {
             @Override
             public void stateChanged(ChangeEvent arg0) {
                 if (radButton.isSelected()) {
-                    SSubmenuQuestUtil.setDraftEvent(event);
+                    QuestUtil.setDraftEvent(event);
                 }
             }
         });

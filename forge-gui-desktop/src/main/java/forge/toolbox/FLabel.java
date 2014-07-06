@@ -1,8 +1,10 @@
 package forge.toolbox;
 
 import forge.UiCommand;
+import forge.assets.FSkinProp;
 import forge.gui.framework.ILocalRepaint;
 import forge.interfaces.IButton;
+import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -631,5 +633,15 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     @Override
     public void setCommand(UiCommand command0) {
         cmdClick = command0;
+    }
+
+    @Override
+    public void setTextColor(FSkinProp color) {
+        setForeground(FSkin.getColor(Colors.fromSkinProp(color)));
+    }
+
+    @Override
+    public void setTextColor(int r, int g, int b) {
+        setForeground(new Color(r, g, b));
     }
 }

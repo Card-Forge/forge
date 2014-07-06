@@ -4,6 +4,8 @@ import forge.assets.FSkinProp;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.interfaces.IButton;
+import forge.quest.IVQuestStats;
 import forge.screens.home.*;
 import forge.toolbox.*;
 import net.miginfocom.swing.MigLayout;
@@ -178,7 +180,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public FLabel getLblLosses() {
+    public IButton getLblLosses() {
         return lblLosses;
     }
 
@@ -290,4 +292,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
 	public FCheckBox getCbCharm() {
 		return cbCharm;
 	}
+
+    @Override
+    public boolean isChallengesView() {
+        return false;
+    }
 }

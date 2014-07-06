@@ -242,7 +242,7 @@ public enum CSubmenuQuestData implements ICDoc {
             questName = FOptionPane.showInputDialog("Poets will remember your quest as:", "Quest Name");
             if (questName == null) { return; }
 
-            questName = SSubmenuQuestUtil.cleanString(questName);
+            questName = QuestUtil.cleanString(questName);
 
             if (questName.isEmpty()) {
                 FOptionPane.showMessageDialog("Please specify a quest name.");
