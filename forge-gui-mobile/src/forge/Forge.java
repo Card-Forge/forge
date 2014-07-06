@@ -258,11 +258,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void dispose() {
         if (currentScreen != null) {
-            FOverlay overlay = FOverlay.getTopOverlay();
-            while (overlay != null) {
-                overlay.hide();
-                overlay = FOverlay.getTopOverlay();
-            }
+            FOverlay.hideAll();
             currentScreen.onClose(null);
             currentScreen = null;
         }

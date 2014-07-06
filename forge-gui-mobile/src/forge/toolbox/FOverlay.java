@@ -3,6 +3,8 @@ package forge.toolbox;
 import java.util.Stack;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Forge;
 import forge.Graphics;
@@ -12,6 +14,8 @@ import forge.assets.FSkinColor.Colors;
 public abstract class FOverlay extends FContainer {
     public static final float ALPHA_COMPOSITE = 0.5f;
     private static final Stack<FOverlay> overlays = new Stack<FOverlay>();
+    private static boolean hidingAll = false;
+    private static FOverlay tempOverlay;
 
     private FSkinColor backColor;
 
@@ -34,6 +38,22 @@ public abstract class FOverlay extends FContainer {
         return overlays;
     }
 
+    public static void hideAll() {
+        hidingAll = true;
+        for (int i = overlays.size() - 1; i >= 0; i--) {
+            overlays.get(i).hide();
+        }
+        overlays.clear();
+        hidingAll = false;
+    }
+
+    private static final Task hideTempOverlayTask = new Task() {
+        @Override
+        public void run () {
+            tempOverlay.hide();
+        }
+    };
+
     public void show() {
         setVisible(true);
     }
@@ -46,11 +66,37 @@ public abstract class FOverlay extends FContainer {
     public void setVisible(boolean visible0) {
         if (this.isVisible() == visible0) { return; }
 
+        //ensure task to hide temporary overlay cancelled and run if another overlay becomes shown or hidden
+        if (tempOverlay != this && hideTempOverlayTask.isScheduled()) {
+            hideTempOverlayTask.cancel();
+            hideTempOverlayTask.run();
+        }
+
         if (visible0) {
             overlays.push(this);
         }
-        else {
-            overlays.remove(this);
+        else if (!hidingAll) { //hiding all handles cleaning up overlay collection
+            if (overlays.get(overlays.size() - 1) == this) {
+                overlays.pop();
+
+                //after removing the top overlay, put up an empty overlay for a brief period
+                //to prevent back color flickering if another popup immediately follows
+                if (tempOverlay != this) {
+                    if (tempOverlay == null) {
+                        tempOverlay = new FOverlay() {
+                            @Override
+                            protected void doLayout(float width, float height) {
+                            }
+                        };
+                    }
+                    tempOverlay.backColor = backColor;
+                    tempOverlay.show();
+                    Timer.schedule(hideTempOverlayTask, 0.025f);
+                }
+            }
+            else {
+                overlays.remove(this);
+            }
         }
         super.setVisible(visible0);
     }
