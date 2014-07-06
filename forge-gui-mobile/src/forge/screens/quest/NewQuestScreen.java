@@ -39,7 +39,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
@@ -430,8 +429,8 @@ public class NewQuestScreen extends FScreen {
             case SealedDeck:
             case Cube:
                 dckStartPool = getSelectedDeck();
-                if (null == dckStartPool) {
-                    FOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", FOptionPane.ERROR_ICON);
+                if (dckStartPool == null) {
+                    SOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", FOptionPane.ERROR_ICON);
                     return;
                 }
                 break;
@@ -501,11 +500,11 @@ public class NewQuestScreen extends FScreen {
             questName = QuestUtil.cleanString(questName);
 
             if (questName.isEmpty()) {
-                FOptionPane.showMessageDialog("Please specify a quest name.");
+                SOptionPane.showMessageDialog("Please specify a quest name.");
                 continue;
             }
             if (FileUtil.doesFileExist(ForgeConstants.QUEST_SAVE_DIR + questName + ".dat")) {
-                FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
                 continue;
             }
             break;
