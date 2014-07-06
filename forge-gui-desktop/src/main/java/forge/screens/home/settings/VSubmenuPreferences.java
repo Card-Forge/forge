@@ -64,6 +64,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Picks");
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox("Allow AI Cheating");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
+    private final JCheckBox cbManaLostPrompt = new OptionsCheckBox("Prompt Mana Pool Emptying");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
@@ -83,7 +84,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox("Open Packs Individually");
     private final JCheckBox cbStackCreatures = new OptionsCheckBox("Stack Creatures");
-    private final JCheckBox cbManaLostPrompt = new OptionsCheckBox("Prompt Mana Pool Emptying");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -148,6 +148,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbManaBurn, regularConstraints);
         pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
 
+        pnlPrefs.add(cbManaLostPrompt, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."), regularConstraints);
+
         pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."), regularConstraints);
 
@@ -156,9 +159,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbPromptFreeBlocks, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt."), regularConstraints);
-        
-        pnlPrefs.add(cbManaLostPrompt, regularConstraints);
-        pnlPrefs.add(new NoteLabel("When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."), regularConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);

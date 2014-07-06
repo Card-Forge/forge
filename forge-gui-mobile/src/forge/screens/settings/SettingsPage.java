@@ -76,6 +76,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Mana Burn",
                 "Play with mana burn (from pre-Magic 2010 rules)."),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_MANA_LOST_PROMPT,
+                "Prompt Mana Pool Emptying",
+                "When enabled, you get a warning if passing priority would cause you to lose mana in your mana pool."),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.ENFORCE_DECK_LEGALITY,
                 "Deck Conformance",
                 "Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)."),
