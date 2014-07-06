@@ -39,6 +39,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
