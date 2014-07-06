@@ -63,7 +63,7 @@ public class FTextArea extends FScrollPane {
     }
 
     @Override
-    public void drawBackground(Graphics g) {
+    protected void drawBackground(Graphics g) {
         renderer.drawText(g, text, font, FORE_COLOR, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, 0, getHeight(), true, alignment, false);
     }
 }

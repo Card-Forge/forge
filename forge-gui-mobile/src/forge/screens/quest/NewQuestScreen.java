@@ -227,6 +227,10 @@ public class NewQuestScreen extends FScreen {
             preconDescriptions.put(name, description);
         }
 
+        //TODO: Support defining custom format
+        btnDefineCustomFormat.setEnabled(false);
+        btnPrizeDefineCustomFormat.setEnabled(false);
+
         // disable the very powerful sets -- they can be unlocked later for a high price
         final List<String> unselectableSets = new ArrayList<String>();
         unselectableSets.add("LEA");

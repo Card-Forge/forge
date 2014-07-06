@@ -10,6 +10,7 @@ import forge.gui.framework.EDocID;
 import forge.item.PreconDeck;
 import forge.model.CardCollections;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
@@ -52,8 +53,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FLabel lblTitleNew = new FLabel.Builder().text("Start a new Quest")
             .opaque(true).fontSize(16).build();
 
-    private final FLabel lblOldQuests = new FLabel.Builder().text("Old quest data? Put into "
-            + "res/quest/data, and restart Forge.")
+    private final FLabel lblOldQuests = new FLabel.Builder().text("Old quest data? Put into \""
+            + ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/') + "\" and restart Forge.")
             .fontAlign(SwingConstants.CENTER).fontSize(12).build();
 
     private final QuestFileLister lstQuests = new QuestFileLister();

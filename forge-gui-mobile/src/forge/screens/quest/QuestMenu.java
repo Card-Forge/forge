@@ -1,5 +1,7 @@
 package forge.screens.quest;
 
+import java.io.File;
+
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.interfaces.IButton;
@@ -8,8 +10,11 @@ import forge.interfaces.IComboBox;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.quest.IVQuestStats;
-import forge.quest.QuestController;
+import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.io.QuestDataIO;
+import forge.screens.LoadingOverlay;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
@@ -32,14 +37,23 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     }
 
     public static void launchQuestMode() {
-        QuestController qc = FModel.getQuest();
-        if (qc == null || qc.getAssets() == null) {
-            //if no quest has been created yet, go to new quest screen
-            Forge.openScreen(new NewQuestScreen());
+        //attempt to load current quest
+        final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
+        final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
+        final File data = new File(dirQuests.getPath(), questname);
+        if (data.exists()) {
+            LoadingOverlay.show("Loading current quest...", new Runnable() {
+                @Override
+                public void run() {
+                    FModel.getQuest().load(QuestDataIO.loadData(data));
+                    Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
+                }
+            });
+            return;
         }
-        else { //TODO: Consider opening most recent quest view
-            Forge.openScreen(duelsScreen);
-        }
+
+        //if current quest can't be loaded, open Load Quest screen
+        Forge.openScreen(new LoadQuestScreen());
     }
 
     @Override
