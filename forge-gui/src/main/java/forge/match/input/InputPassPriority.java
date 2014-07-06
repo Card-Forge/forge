@@ -95,7 +95,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         Game game = GuiBase.getInterface().getGame();
         if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
             Player player = game.getPhaseHandler().getPriorityPlayer();
-            if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+            if (player != null && FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT) && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
                     @Override
                     public void run() {

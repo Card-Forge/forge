@@ -72,6 +72,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"),                // Visibility of tabs in match screen.
         UI_CLOSE_ACTION ("NONE"),
+        UI_MANA_LOST_PROMPT ("false"),				// Prompt on losing mana when passing priority
 
         UI_FOR_TOUCHSCREN("false"),
 
