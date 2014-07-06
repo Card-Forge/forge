@@ -1,5 +1,8 @@
 package forge.game.ability.effects;
 
+import java.util.Arrays;
+import java.util.List;
+
 import forge.GameCommand;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -12,9 +15,6 @@ import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ControlGainEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
@@ -23,20 +23,25 @@ public class ControlGainEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        List<Player> newController = getTargetPlayers(sa, "NewController");
+        final List<Player> newController = getTargetPlayers(sa, "NewController");
         if (newController.isEmpty()) {
             newController.add(sa.getActivatingPlayer());
         }
 
-        sb.append(newController).append(" gains control of ");
+        sb.append(newController).append(" gains control of");
 
-        for (final Card c : getTargetCards(sa)) {
-            sb.append(" ");
-            if (c.isFaceDown()) {
-                sb.append("Morph");
-            } else {
-                sb.append(c);
-            }
+        final List<Card> tgts = getDefinedCards(sa);
+        if (tgts.isEmpty()) {
+        	sb.append(" (nothing)");
+        } else {
+        	for (final Card c : getDefinedCards(sa)) {
+        	    sb.append(" ");
+        	    if (c.isFaceDown()) {
+        	        sb.append("Face-down creature (").append(c.getUniqueNumber()).append(')');
+        	    } else {
+        	        sb.append(c);
+        	    }
+        	}
         }
         sb.append(".");
 
@@ -83,11 +88,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
         final Game game = newController.getGame();
 
-        List<Card> tgtCards;
-        if (sa.hasParam("AllValid")) {
-            tgtCards = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
-        } else
-            tgtCards = getTargetCards(sa);
+        List<Card> tgtCards = this.getDefinedCards(sa);
 
         if (sa.hasParam("ControlledByTarget")) {
         	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
@@ -240,6 +241,14 @@ public class ControlGainEffect extends SpellAbilityEffect {
         };
 
         return loseControl;
+    }
+    
+    private List<Card> getDefinedCards(final SpellAbility sa) {
+        final Game game = sa.getHostCard().getGame();
+        if (sa.hasParam("AllValid")) {
+            return AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
+        }
+        return getTargetCards(sa);
     }
 
 }
