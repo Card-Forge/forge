@@ -523,7 +523,7 @@ public class NewQuestScreen extends FScreen {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                LoadingOverlay.show("Starting new quest...", new Runnable() {
+                LoadingOverlay.show("Creating new quest...", new Runnable() {
                     @Override
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
