@@ -430,7 +430,7 @@ public class NewQuestScreen extends FScreen {
             case Cube:
                 dckStartPool = getSelectedDeck();
                 if (dckStartPool == null) {
-                    SOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", FOptionPane.ERROR_ICON);
+                    SOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", SOptionPane.ERROR_ICON);
                     return;
                 }
                 break;
