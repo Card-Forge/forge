@@ -8,6 +8,7 @@ import forge.Graphics;
 import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
+import forge.assets.FSkinProp;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
@@ -346,5 +347,15 @@ public class FLabel extends FDisplayObject implements IButton {
     @Override
     public boolean requestFocusInWindow() {
         return false;
+    }
+
+    @Override
+    public void setTextColor(FSkinProp color) {
+        setTextColor(FSkinColor.get(Colors.fromSkinProp(color)));
+    }
+
+    @Override
+    public void setTextColor(int r, int g, int b) {
+        setTextColor(FSkinColor.getStandardColor(r, g, b));
     }
 }

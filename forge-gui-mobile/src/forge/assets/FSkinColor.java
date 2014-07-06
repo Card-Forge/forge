@@ -26,8 +26,10 @@ public class FSkinColor {
 
         private Color color;
         private final int x, y;
+        private final FSkinProp skinProp;
 
-        Colors(final FSkinProp skinProp) {
+        Colors(final FSkinProp skinProp0) {
+            skinProp = skinProp0;
             int[] coords = skinProp.getCoords();
             x = coords[0];
             y = coords[1];
@@ -43,6 +45,15 @@ public class FSkinColor {
 
         public void setColor(Color color0) {
             color = color0;
+        }
+
+        public static Colors fromSkinProp(FSkinProp skinProp) {
+            for (final Colors c : Colors.values()) {
+                if (c.skinProp == skinProp) {
+                    return c;
+                }
+            }
+            return null;
         }
     }
 

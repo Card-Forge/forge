@@ -12,18 +12,20 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinProp;
 import forge.interfaces.IButton;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
 
 public class FButton extends FDisplayObject implements IButton {
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static final FSkinColor DEFAULT_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final float PADDING = Utils.scaleX(10);
 
     private FSkinImage imgL, imgM, imgR;
     private String text;
     private FSkinFont font;
+    private FSkinColor foreColor = DEFAULT_FORE_COLOR;
     private boolean toggled = false;
     private FEventHandler command;
 
@@ -213,7 +215,7 @@ public class FButton extends FDisplayObject implements IButton {
             if (corner != Corner.None) {
                 displayText = displayText.replaceFirst(" ", "\n"); //allow second word to wrap if corner button
             }
-            g.drawText(displayText, font, FORE_COLOR, x, y, w, h, false, HAlignment.CENTER, true);
+            g.drawText(displayText, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
 
@@ -251,5 +253,15 @@ public class FButton extends FDisplayObject implements IButton {
     @Override
     public boolean requestFocusInWindow() {
         return false;
+    }
+
+    @Override
+    public void setTextColor(FSkinProp color) {
+        foreColor = FSkinColor.get(Colors.fromSkinProp(color));
+    }
+
+    @Override
+    public void setTextColor(int r, int g, int b) {
+        foreColor = FSkinColor.getStandardColor(r, g, b);
     }
 }
