@@ -1,0 +1,279 @@
+[metadata]
+Code=M15
+Date=2014-07-18
+Name=Magic 2015
+Code2=M15
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+
+[cards]
+M Ajani Steadfast
+U Ajani's Pridemate
+R Avacyn, Guardian Angel
+U Battle Mastery
+U Boonweaver Giant
+U Congregate
+U Constricting Sliver
+U Dauntless River Marshal
+U Devouring Light
+C Divine Favor
+C Ephemeral Shields
+U First Response
+U Geist of the Moors
+C Heliod's Pilgrim
+R Hushwing Gryff
+C Kinsbaile Skirmisher
+C Marked by Honor
+R Mass Calcify
+C Meditation Puzzle
+C Midnight Guard
+C Oppressive Rays
+C Oreskos Swiftclaw
+U Paragon of New Dawns
+C Pillar of Light
+R Preeminent Captain
+C Raise the Alarm
+C Razorfoot Griffin
+R Resolute Archangel
+R Return to the Ranks
+C Sanctified Charge
+C Selfless Cathar
+U Seraph of the Masses
+C Solemn Offering
+M Soul of Theros
+C Soulmender
+R Spectra Ward
+R Spirit Bonds
+C Sungrace Pegasus
+C Tireless Missionaries
+C Triplicate Spirits
+U Wall of Essence
+U Warden of the Beyond
+C Aeronaut Tinkerer
+R AEtherspouts
+C Amphin Pathmage
+R Chasm Skulker
+R Chief Engineer
+C Chronostutter
+C Coral Barrier
+U Diffusion Sliver
+U Dissipate
+C Divination
+C Encrust
+U Ensoul Artifact
+C Frost Lynx
+C Fugitive Wizard
+C Glacial Crasher
+C Hydrosurge
+U Illusory Angel
+U Into the Void
+C Invisibility
+M Jace, the Living Guildpact
+U Jace's Ingenuity
+R Jalira, Master Polymorphist
+U Jorubai Murk Lurker
+U Kapsho Kitefins
+R Master of Predicaments
+R Mercurial Pretender
+U Military Intelligence
+C Mind Sculpt
+C Negate
+C Nimbus of the Isles
+U Paragon of Gathering Mists
+C Peel from Reality
+R Polymorphist's Jest
+U Quickling
+C Research Assistant
+M Soul of Ravnica
+C Statue of Denial
+R Stormtide Leviathan
+U Turn to Frog
+C Void Snare
+U Wall of Frost
+C Welkin Tern
+C Accursed Spirit
+C Black Cat
+U Blood Host
+C Carrion Crow
+U Caustic Tar
+C Child of Night
+C Covenant of Blood
+C Crippling Blight
+R Cruel Sadist
+U Endless Obedience
+C Eternal Thirst
+U Feast on the Fallen
+C Festergloom
+C Flesh to Dust
+U Gravedigger
+R In Garruk's Wake
+R Indulgent Tormentor
+U Leeching Sliver
+M Liliana Vess
+C Mind Rot
+C Necrobite
+U Necrogen Scudder
+C Necromancer's Assistant
+R Necromancer's Stockpile
+U Nightfire Giant
+R Ob Nixilis, Unshackled
+U Paragon of Open Graves
+C Rotfeaster Maggot
+C Shadowcloak Vampire
+C Sign in Blood
+M Soul of Innistrad
+U Stab Wound
+R Stain the Mind
+C Typhoid Rats
+U Ulcerate
+C Unmake the Graves
+U Wall of Limbs
+R Waste Not
+C Witch's Familiar
+U Xathrid Slyblade
+C Zof Shade
+U Act on Impulse
+R Aggressive Mining
+U Altac Bloodseeker
+U Belligerent Sliver
+C Blastfire Bolt
+C Borderland Marauder
+U Brood Keeper
+R Burning Anger
+M Chandra, Pyromaster
+U Circle of Flame
+C Clear a Path
+U Cone of Flame
+C Crowd's Favor
+R Crucible of Fire
+C Forge Devil
+C Foundry Street Denizen
+U Frenzied Goblin
+C Generator Servant
+R Goblin Kaboomist
+R Goblin Rabblemaster
+C Goblin Roughrider
+C Hammerhand
+C Heat Ray
+R Hoarding Dragon
+C Inferno Fist
+U Kird Chieftain
+C Krenko's Enforcer
+R Kurkesh, Onakke Ancient
+C Lava Axe
+C Lightning Strike
+U Might Makes Right
+C Miner's Bane
+U Paragon of Fierce Defiance
+C Rummaging Goblin
+C Scrapyard Mongrel
+U Shrapnel Blast
+R Siege Dragon
+M Soul of Shandalar
+U Stoke the Flames
+C Thundering Giant
+C Torch Fiend
+C Wall of Fire
+U Ancient Silverback
+U Back to Nature
+C Carnivorous Moss-Beast
+C Charging Rhino
+R Chord of Calling
+C Elvish Mystic
+U Feral Incarnation
+U Gather Courage
+R Genesis Hydra
+R Hornet Nest
+R Hornet Queen
+C Hunt the Weak
+C Hunter's Ambush
+C Invasive Species
+R Kalonian Twingrove
+R Life's Legacy
+C Living Totem
+C Naturalize
+C Netcaster Spider
+M Nissa, Worldwaker
+U Nissa's Expedition
+U Overwhelm
+U Paragon of Eternal Wilds
+R Phytotitan
+C Plummet
+C Ranger's Guile
+U Reclamation Sage
+U Restock
+U Roaring Primadox
+C Runeclaw Bear
+C Satyr Wayfinder
+C Shaman of Spring
+C Siege Wurm
+M Soul of Zendikar
+U Sunblade Elf
+C Titanic Growth
+C Undergrowth Scavenger
+U Venom Sliver
+C Verdant Haven
+C Vineweft
+U Wall of Mulch
+R Yisan, the Wanderer Bard
+M Garruk, Apex Predator
+M Sliver Hivelord
+R Avarice Amulet
+U Brawler's Plate
+C Bronze Sable
+M The Chain Veil
+U Gargoyle Sentinel
+R Grindclock
+R Haunted Plate Mail
+U Hot Soup
+U Juggernaut
+U Meteorite
+R Obelisk of Urd
+C Ornithopter
+M Perilous Vault
+R Phyrexian Revoker
+U Profane Memento
+U Rogue's Gloves
+U Sacred Armory
+R Scuttling Doom Engine
+R Shield of the Avatar
+M Soul of New Phyrexia
+U Staff of the Death Magus
+U Staff of the Flame Magus
+U Staff of the Mind Magus
+U Staff of the Sun Magus
+U Staff of the Wild Magus
+U Tormod's Crypt
+C Tyrant's Machine
+C Will-Forged Golem
+R Battlefield Forge
+R Caves of Koilos
+U Darksteel Citadel
+C Evolving Wilds
+R Llanowar Wastes
+C Radiant Fountain
+R Shivan Reef
+R Sliver Hive
+R Urborg, Tomb of Yawgmoth
+R Yavimaya Coast
+L Plains
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
+L Forest
