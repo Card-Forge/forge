@@ -349,7 +349,7 @@ public class AddBasicLandsDialog extends FDialog {
         }
 
         private void refreshArtChoices() {
-            cbLandArt.clearItems();
+            cbLandArt.removeAllItems();
             if (landSet == null) { return; }
 
             int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());

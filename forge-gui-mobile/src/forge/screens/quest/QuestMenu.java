@@ -135,32 +135,27 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IButton getLblCredits() {
-        // TODO Auto-generated method stub
-        return null;
+        return statsScreen.getLblCredits();
     }
 
     @Override
     public IButton getLblLife() {
-        // TODO Auto-generated method stub
-        return null;
+        return statsScreen.getLblLife();
     }
 
     @Override
     public IButton getLblWorld() {
-        // TODO Auto-generated method stub
-        return null;
+        return statsScreen.getLblWorld();
     }
 
     @Override
     public IButton getLblWins() {
-        // TODO Auto-generated method stub
-        return null;
+        return statsScreen.getLblWins();
     }
 
     @Override
     public IButton getLblLosses() {
-        // TODO Auto-generated method stub
-        return null;
+        return statsScreen.getLblLosses();
     }
 
     @Override
@@ -177,8 +172,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IButton getLblWinStreak() {
-        // TODO Auto-generated method stub
-        return null;
+        return statsScreen.getLblWinStreak();
     }
 
     @Override
@@ -207,7 +201,6 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public boolean isChallengesView() {
-        // TODO Auto-generated method stub
-        return false;
+        return Forge.getCurrentScreen() == challengesScreen;
     }
 }

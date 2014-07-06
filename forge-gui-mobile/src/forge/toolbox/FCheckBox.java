@@ -12,6 +12,7 @@ import forge.util.Utils;
 public class FCheckBox extends FLabel implements ICheckBox {
     private static final FSkinColor CHECK_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor BOX_COLOR = CHECK_COLOR.alphaColor(0.5f);
+    private static final float EXTRA_GAP = Utils.scaleX(3);
 
     public FCheckBox() {
         this("", false);
@@ -22,6 +23,11 @@ public class FCheckBox extends FLabel implements ICheckBox {
     public FCheckBox(String text0, boolean selected0) {
         super(new Builder().text(text0).align(HAlignment.LEFT).selectable().selected(selected0));
         setIcon(new CheckBoxIcon());
+    }
+
+    @Override
+    protected float getExtraGapBetweenIconAndText() {
+        return EXTRA_GAP;
     }
 
     private class CheckBoxIcon implements FImage {

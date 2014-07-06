@@ -167,14 +167,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final ActionListener alStartingWorld = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            updateEnableFormats();
+            updateEnabledFormats();
         }
     };
 
     /**
      * Aux function for enabling or disabling the format selection according to world selection.
      */
-    private void updateEnableFormats() {
+    private void updateEnabledFormats() {
         final QuestWorld qw = FModel.getWorlds().get(getStartingWorldName());
         if (qw != null) {
             cbxStartingPool.setEnabled(qw.getFormat() == null);
@@ -244,7 +244,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Main world"));
 
         cbxStartingWorld.addActionListener(alStartingWorld);
-        updateEnableFormats();
+        updateEnabledFormats();
 
         cboAllowUnlocks.setSelected(true);
 

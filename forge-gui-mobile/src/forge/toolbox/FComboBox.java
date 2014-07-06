@@ -7,12 +7,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.interfaces.IComboBox;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent.*;
 
-public class FComboBox<E> extends FTextField {
+public class FComboBox<E> extends FTextField implements IComboBox<E> {
     private final List<E> items = new ArrayList<E>();
     private E selectedItem;
     private final DropDown dropDown = new DropDown();
@@ -59,7 +60,7 @@ public class FComboBox<E> extends FTextField {
         return false;
     }
 
-    public void clearItems() {
+    public void removeAllItems() {
         items.clear();
         setSelectedItem(null);
     }

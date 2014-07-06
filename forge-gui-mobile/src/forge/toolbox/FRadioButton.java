@@ -14,6 +14,7 @@ import forge.util.Utils;
 public class FRadioButton extends FLabel {
     private static final FSkinColor INNER_CIRCLE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinColor OUTER_CIRCLE_COLOR = INNER_CIRCLE_COLOR.alphaColor(0.5f);
+    private static final float EXTRA_GAP = Utils.scaleX(3);
     
     private RadioButtonGroup group;
 
@@ -39,6 +40,11 @@ public class FRadioButton extends FLabel {
         if (group != null) {
             group.buttons.add(this);
         }
+    }
+
+    @Override
+    protected float getExtraGapBetweenIconAndText() {
+        return EXTRA_GAP;
     }
 
     @Override

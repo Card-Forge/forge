@@ -155,6 +155,13 @@ public class FLabel extends FDisplayObject implements IButton {
         insets = insets0;
     }
 
+    public HAlignment getAlignment() {
+        return alignment;
+    }
+    public void setAlignment(final HAlignment alignment0) {
+        alignment = alignment0;
+    }
+
     public void setCommand(final FEventHandler command0) {
         command = command0;
     }
@@ -220,7 +227,7 @@ public class FLabel extends FDisplayObject implements IButton {
         bounds.height += 2 * insets.y;
 
         if (icon != null) {
-            bounds.width += icon.getWidth() + insets.x;
+            bounds.width += icon.getWidth() + insets.x + getExtraGapBetweenIconAndText();
         }
 
         return bounds;
@@ -319,8 +326,9 @@ public class FLabel extends FDisplayObject implements IButton {
                 if (pressed) {
                     y++;
                 }
-                x += iconWidth + insets.x;
-                w -= iconWidth + insets.x;
+                float dx = iconWidth + insets.x + getExtraGapBetweenIconAndText();
+                x += dx;
+                w -= dx;
                 g.startClip(x, y, w, h);
                 g.drawText(text, font, textColor, x, y, w, h, false, HAlignment.LEFT, true);
                 g.endClip();
@@ -347,6 +355,10 @@ public class FLabel extends FDisplayObject implements IButton {
     @Override
     public boolean requestFocusInWindow() {
         return false;
+    }
+
+    protected float getExtraGapBetweenIconAndText() {
+        return 0;
     }
 
     @Override
