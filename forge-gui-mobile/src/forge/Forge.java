@@ -402,8 +402,7 @@ public class Forge implements ApplicationListener {
             updatePotentialListeners(x, y);
             if (keyInputAdapter != null) {
                 if (!keyInputAdapter.allowTouchInput() || !potentialListeners.contains(keyInputAdapter.getOwner())) {
-                    endKeyInput(); //end key input and suppress touch event if needed
-                    potentialListeners.clear();
+                    endKeyInput(); //end key input if needed
                 }
             }
             return super.touchDown(x, y, pointer, button);
