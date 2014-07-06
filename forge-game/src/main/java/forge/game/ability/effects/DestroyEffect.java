@@ -72,7 +72,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Game game = card.getGame();
 
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
-        if (remDestroyed) {
+        final boolean remAttached = sa.hasParam("RememberAttached");
+        if (remDestroyed || remAttached) {
             card.clearRemembered();
         }
 
@@ -95,6 +96,11 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 boolean destroyed = false;
                 final Card lki = CardUtil.getLKICopy(tgtC);
+                if (remAttached) {
+                	card.getRemembered().addAll(tgtC.getEnchantedBy());
+                	card.getRemembered().addAll(tgtC.getEquippedBy());
+                	card.getRemembered().addAll(tgtC.getFortifiedBy());
+                }
                 if (sac) {
                     destroyed = game.getAction().sacrifice(tgtC, sa) != null;
                 } else if (noRegen) {
