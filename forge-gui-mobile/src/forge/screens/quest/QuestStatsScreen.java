@@ -64,7 +64,7 @@ public class QuestStatsScreen extends FScreen {
     }
 
     public QuestStatsScreen() {
-        super("Quest Statistics", new QuestMenu());
+        super("Quest Statistics", QuestMenu.getMenu());
     }
 
     @Override

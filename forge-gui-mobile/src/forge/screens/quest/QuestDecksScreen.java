@@ -4,7 +4,7 @@ import forge.screens.FScreen;
 
 public class QuestDecksScreen extends FScreen {
     public QuestDecksScreen() {
-        super("Select Quest Deck", new QuestMenu());
+        super("Select Quest Deck", QuestMenu.getMenu());
     }
 
     @Override

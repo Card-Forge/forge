@@ -4,7 +4,7 @@ import forge.screens.LaunchScreen;
 
 public class QuestChallengesScreen extends LaunchScreen {
     public QuestChallengesScreen() {
-        super("Quest Duels", new QuestMenu());
+        super("Quest Duels", QuestMenu.getMenu());
     }
 
     @Override

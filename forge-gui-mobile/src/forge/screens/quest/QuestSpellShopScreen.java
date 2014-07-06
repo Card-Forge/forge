@@ -4,7 +4,7 @@ import forge.screens.FScreen;
 
 public class QuestSpellShopScreen extends FScreen {
     public QuestSpellShopScreen() {
-        super("Spell Shop", new QuestMenu());
+        super("Spell Shop", QuestMenu.getMenu());
     }
 
     @Override

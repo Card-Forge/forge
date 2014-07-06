@@ -14,6 +14,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
+    private static final QuestMenu questMenu = new QuestMenu();
     private static final QuestBazaarScreen bazaarScreen = new QuestBazaarScreen();
     private static QuestChallengesScreen challengesScreen = new QuestChallengesScreen();
     private static QuestDecksScreen decksScreen = new QuestDecksScreen();
@@ -22,6 +23,13 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static QuestSpellShopScreen spellShopScreen = new QuestSpellShopScreen();
     private static QuestStatsScreen statsScreen = new QuestStatsScreen();
     private static QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
+
+    public static QuestMenu getMenu() {
+        return questMenu;
+    }
+
+    private QuestMenu() {
+    }
 
     public static void launchQuestMode() {
         QuestController qc = FModel.getQuest();

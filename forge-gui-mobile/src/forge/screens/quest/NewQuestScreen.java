@@ -1,7 +1,12 @@
 package forge.screens.quest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -12,13 +17,21 @@ import forge.assets.FSkinImage;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.game.GameFormat;
+import forge.item.PaperCard;
 import forge.item.PreconDeck;
 import forge.model.CardCollections;
 import forge.model.FModel;
+import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
+import forge.quest.QuestMode;
+import forge.quest.QuestUtil;
 import forge.quest.QuestWorld;
+import forge.quest.StartingPoolPreferences;
 import forge.quest.StartingPoolType;
+import forge.quest.data.GameFormatQuest;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
@@ -28,12 +41,18 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.FileUtil;
+import forge.util.ThreadUtil;
 import forge.util.Utils;
+import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
 
 public class NewQuestScreen extends FScreen {
     private static final float EMBARK_BTN_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
     private static final float PADDING = FOptionPane.PADDING;
+
+    private final List<String> customFormatCodes = new ArrayList<String>();
+    private final List<String> customPrizeFormatCodes = new ArrayList<String>();
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -110,7 +129,18 @@ public class NewQuestScreen extends FScreen {
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox("Fantasy Mode"));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
-            .font(FSkinFont.get(22)).text("Embark!").icon(FSkinImage.QUEST_ZEP).build());
+            .font(FSkinFont.get(22)).text("Embark!").icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    //create new quest in game thread so option panes can wait for input
+                    ThreadUtil.invokeInGameThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            newQuest();
+                        }
+                    });
+                }
+            }).build());
 
     public NewQuestScreen() {
         super("Start a New Quest");
@@ -189,6 +219,43 @@ public class NewQuestScreen extends FScreen {
             description = "<html>" + WordUtils.wrap(description, 40, "<br>", false) + "</html>";
             preconDescriptions.put(name, description);
         }
+
+        // disable the very powerful sets -- they can be unlocked later for a high price
+        final List<String> unselectableSets = new ArrayList<String>();
+        unselectableSets.add("LEA");
+        unselectableSets.add("LEB");
+        unselectableSets.add("MBP");
+        unselectableSets.add("VAN");
+        unselectableSets.add("ARC");
+        unselectableSets.add("PC2");
+
+        btnDefineCustomFormat.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                /*final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customFormatCodes.clear();
+                        customFormatCodes.addAll(dialog.getSelectedSets());
+                    }
+                });*/
+            }
+        });
+
+        btnPrizeDefineCustomFormat.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                /*final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
+                dialog.setOkCallback(new Runnable() {
+                    @Override
+                    public void run() {
+                        customPrizeFormatCodes.clear();
+                        customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+                    }
+                });*/
+            }
+        });
 
         // Fantasy box enabled by Default
         cbFantasy.setSelected(true);
@@ -329,5 +396,126 @@ public class NewQuestScreen extends FScreen {
     protected void doLayout(float startY, float width, float height) {
         btnEmbark.setBounds(PADDING, height - EMBARK_BTN_HEIGHT - PADDING, width - 2 * PADDING, EMBARK_BTN_HEIGHT);
         scroller.setBounds(0, startY, width, btnEmbark.getTop() - startY);
+    }
+
+    /**
+     * The actuator for new quests.
+     */
+    private void newQuest() {
+        final QuestController qc = FModel.getQuest();
+        final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
+
+        Deck dckStartPool = null;
+        GameFormat fmtStartPool = null;
+        int difficulty = getSelectedDifficulty();
+        QuestWorld startWorld = FModel.getWorlds().get(getStartingWorldName());
+        GameFormat worldFormat = (startWorld == null ? null : startWorld.getFormat());
+
+        if (worldFormat == null) {
+            switch(getStartingPoolType()) {
+            case Rotating:
+                fmtStartPool = getRotatingFormat();
+                break;
+
+            case CustomFormat:
+                if (customFormatCodes.isEmpty()) {
+                    if (!SOptionPane.showConfirmDialog("You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
+                        return;
+                    }
+                }
+                fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null); // chosen sets and no banend cards
+                break;
+
+            case DraftDeck:
+            case SealedDeck:
+            case Cube:
+                dckStartPool = getSelectedDeck();
+                if (null == dckStartPool) {
+                    FOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", FOptionPane.ERROR_ICON);
+                    return;
+                }
+                break;
+
+            case Precon:
+                dckStartPool = QuestController.getPrecons().get(getSelectedPrecon()).getDeck();
+                break;
+
+            case Complete:
+            default:
+                // leave everything as nulls
+                break;
+            }
+        }
+        else {
+            fmtStartPool = worldFormat;
+        }
+
+        GameFormat fmtPrizes = null;
+
+        // The starting QuestWorld format should NOT affect what you get if you travel to a world that doesn't have one...
+        // if (worldFormat == null) {
+        StartingPoolType prizedPoolType = getPrizedPoolType();
+        if (null == prizedPoolType) {
+            fmtPrizes = fmtStartPool;
+            if (null == fmtPrizes && dckStartPool != null) { // build it form deck
+                Set<String> sets = new HashSet<String>();
+                for (Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
+                    sets.add(c.getKey().getEdition());
+                }
+                if (dckStartPool.has(DeckSection.Sideboard)) {
+                    for (Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
+                        sets.add(c.getKey().getEdition());
+                    }
+                }
+                fmtPrizes = new GameFormat("From deck", sets, null);
+            }
+        }
+        else {
+            switch(prizedPoolType) {
+            case Complete:
+                fmtPrizes = null;
+                break;
+            case CustomFormat:
+                if (customPrizeFormatCodes.isEmpty()) {
+                    if (!SOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?")) {
+                        return;
+                    }
+                }
+                fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
+                break;
+            case Rotating:
+                fmtPrizes = getPrizedRotatingFormat();
+                break;
+            default:
+                throw new RuntimeException("Should not get this result");
+            }
+        }
+
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor());
+
+        String questName;
+        while (true) {
+            questName = SOptionPane.showInputDialog("Poets will remember your quest as:", "Quest Name");
+            if (questName == null) { return; }
+
+            questName = QuestUtil.cleanString(questName);
+
+            if (questName.isEmpty()) {
+                FOptionPane.showMessageDialog("Please specify a quest name.");
+                continue;
+            }
+            if (FileUtil.doesFileExist(ForgeConstants.QUEST_SAVE_DIR + questName + ".dat")) {
+                FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                continue;
+            }
+            break;
+        }
+
+        qc.newGame(questName, difficulty, mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
+        qc.save();
+
+        // Save in preferences.
+        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
+        FModel.getQuestPreferences().save();
     }
 }

@@ -4,7 +4,7 @@ import forge.screens.FScreen;
 
 public class QuestPrefsScreen extends FScreen {
     public QuestPrefsScreen() {
-        super("Quest Preferences", new QuestMenu());
+        super("Quest Preferences", QuestMenu.getMenu());
     }
 
     @Override
