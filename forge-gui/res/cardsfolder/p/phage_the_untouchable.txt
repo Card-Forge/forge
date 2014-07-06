@@ -1,6 +1,6 @@
 Name:Phage the Untouchable
 ManaCost:3 B B B B
-Types:Legendary Creature Zombie Minion
+Types:Legendary Creature Avatar Minion
 PT:4/4
 T:Mode$ ChangesZone | ValidCard$ Card.wasNotCastFromHand+Self | Destination$ Battlefield | Execute$ TrigYouLose | TriggerDescription$ When CARDNAME enters the battlefield, if you didn't cast it from your hand, you lose the game.
 SVar:TrigYouLose:AB$ LosesGame | Cost$ 0 | Defined$ You
