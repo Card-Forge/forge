@@ -292,7 +292,10 @@ public class QuestController {
      * @return the rank
      */
     public String getRank() {
-        int level = this.model.getAchievements().getLevel();
+        return getRank(this.model.getAchievements().getLevel());
+    }
+
+    public String getRank(int level) {
         if (level >= QuestController.RANK_TITLES.length) {
             level = QuestController.RANK_TITLES.length - 1;
         }

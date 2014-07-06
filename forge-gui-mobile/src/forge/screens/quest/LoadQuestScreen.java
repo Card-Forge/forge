@@ -259,11 +259,17 @@ public class LoadQuestScreen extends FScreen {
                     h -= 2 * offset;
 
                     float totalHeight = h;
-                    h = font.getMultiLineBounds(value.getName()).height + SettingsScreen.SETTING_PADDING;
+                    String name = value.getName() + " (" + value.getMode().toString() + ")";
+                    h = font.getMultiLineBounds(name).height + SettingsScreen.SETTING_PADDING;
 
-                    g.drawText(value.getName(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
+                    String winRatio = value.getAchievements().getWin() + "/" + value.getAchievements().getLost();
+                    float winRatioWidth = font.getBounds(winRatio).width + SettingsScreen.SETTING_PADDING;
+
+                    g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, HAlignment.LEFT, false);
+                    g.drawText(winRatio, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
+
                     h += SettingsScreen.SETTING_PADDING;
-                    g.drawText(value.getMode().toString(), FSkinFont.get(12), SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);  
+                    g.drawText(FModel.getQuest().getRank(value.getAchievements().getLevel()), FSkinFont.get(12), SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);
                 }
             });
         }
