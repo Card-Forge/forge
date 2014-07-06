@@ -1,7 +1,7 @@
 Name:Eaten by Spiders
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ ChompEquip | SpellDescription$ Destroy target creature with flying and all Equipment attached to that creature.
-SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Equipment+Attached
+A:SP$ DestroyAll | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | ValidCards$ Targeted.Equipment+Attached | SubAbility$ Destroy | SpellDescription$ Destroy target creature with flying and all Equipment attached to that creature.
+SVar:Destroy:DB$ Destroy | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eaten_by_spiders.jpg
 Oracle:Destroy target creature with flying and all Equipment attached to that creature.
