@@ -8,6 +8,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -27,9 +28,11 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Utils;
 import forge.util.storage.IStorage;
 
 public class NewQuestScreen extends FScreen {
+    private static final float EMBARK_BTN_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
     private static final float PADDING = FOptionPane.PADDING;
 
     private final FScrollPane scroller = add(new FScrollPane() {
@@ -107,7 +110,7 @@ public class NewQuestScreen extends FScreen {
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox("Fantasy Mode"));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
-            .font(FSkinFont.get(16)).text("Embark!").build());
+            .font(FSkinFont.get(22)).text("Embark!").icon(FSkinImage.QUEST_ZEP).build());
 
     public NewQuestScreen() {
         super("Start a New Quest");
@@ -324,8 +327,7 @@ public class NewQuestScreen extends FScreen {
 
     @Override
     protected void doLayout(float startY, float width, float height) {
-        float buttonHeight = btnEmbark.getAutoSizeBounds().height * 1.2f;
-        btnEmbark.setBounds(PADDING, height - buttonHeight - PADDING, width - 2 * PADDING, buttonHeight);
+        btnEmbark.setBounds(PADDING, height - EMBARK_BTN_HEIGHT - PADDING, width - 2 * PADDING, EMBARK_BTN_HEIGHT);
         scroller.setBounds(0, startY, width, btnEmbark.getTop() - startY);
     }
 }
