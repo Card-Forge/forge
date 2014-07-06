@@ -12,6 +12,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.MagicColor;
@@ -33,6 +34,7 @@ import forge.quest.StartingPoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
@@ -87,18 +89,22 @@ public class NewQuestScreen extends FScreen {
         }
     });
 
+    @SuppressWarnings("unused")
     private final FLabel lblStartingWorld = scroller.add(new FLabel.Builder().text("Starting world:").build());
     private final FComboBox<QuestWorld> cbxStartingWorld = scroller.add(new FComboBox<QuestWorld>());
 
+    @SuppressWarnings("unused")
     private final FLabel lblDifficulty = scroller.add(new FLabel.Builder().text("Difficulty:").build());
     private final FComboBox<String> cbxDifficulty = scroller.add(new FComboBox<String>(new String[]{ "Easy", "Medium", "Hard", "Expert" }));
 
+    @SuppressWarnings("unused")
     private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text("Starting pool colors:").build());
     private final FComboBox<String> cbxPreferredColor = scroller.add(new FComboBox<String>());
     private final String stringBalancedDistribution = new String("balanced distribution");
     private final String stringRandomizedDistribution = new String("randomized distribution");
     private final String stringBias = new String(" bias");
     
+    @SuppressWarnings("unused")
     private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text("Starting pool:").build());
     private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<StartingPoolType>());
 
@@ -115,6 +121,7 @@ public class NewQuestScreen extends FScreen {
 
     private final FLabel btnDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
 
+    @SuppressWarnings("unused")
     private final FLabel lblPrizedCards = scroller.add(new FLabel.Builder().text("Prized cards:").build());
     private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<Object>());
 
@@ -402,12 +409,8 @@ public class NewQuestScreen extends FScreen {
      * The actuator for new quests.
      */
     private void newQuest() {
-        final QuestController qc = FModel.getQuest();
-        final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
-
         Deck dckStartPool = null;
         GameFormat fmtStartPool = null;
-        int difficulty = getSelectedDifficulty();
         QuestWorld startWorld = FModel.getWorlds().get(getStartingWorldName());
         GameFormat worldFormat = (startWorld == null ? null : startWorld.getFormat());
 
@@ -491,8 +494,6 @@ public class NewQuestScreen extends FScreen {
             }
         }
 
-        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor());
-
         String questName;
         while (true) {
             questName = SOptionPane.showInputDialog("Poets will remember your quest as:", "Quest Name");
@@ -511,11 +512,30 @@ public class NewQuestScreen extends FScreen {
             break;
         }
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
-        qc.save();
+        startNewQuest(questName, fmtPrizes, dckStartPool, fmtStartPool);
+    }
 
-        // Save in preferences.
-        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
-        FModel.getQuestPreferences().save();
+    private void startNewQuest(final String questName, final GameFormat fmtPrizes, final Deck dckStartPool, final GameFormat fmtStartPool) {
+        FThreads.invokeInEdtLater(new Runnable() {
+            @Override
+            public void run() {
+                LoadingOverlay.show("Starting new quest...", new Runnable() {
+                    @Override
+                    public void run() {
+                        final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
+                        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor());
+                        QuestController qc = FModel.getQuest();
+                        qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
+                        qc.save();
+
+                        // Save in preferences.
+                        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
+                        FModel.getQuestPreferences().save();
+
+                        QuestMenu.launchQuestMode(); //launch quest mode for new quest
+                    }
+                });
+            }
+        });
     }
 }
