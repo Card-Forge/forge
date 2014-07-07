@@ -18,6 +18,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.card.CardRenderer;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
@@ -262,14 +263,28 @@ public class LoadQuestScreen extends FScreen {
                     String name = value.getName() + " (" + value.getMode().toString() + ")";
                     h = font.getMultiLineBounds(name).height + SettingsScreen.SETTING_PADDING;
 
-                    String winRatio = value.getAchievements().getWin() + "/" + value.getAchievements().getLost();
+                    String winRatio = value.getAchievements().getWin() + "W / " + value.getAchievements().getLost() + "L";
                     float winRatioWidth = font.getBounds(winRatio).width + SettingsScreen.SETTING_PADDING;
 
                     g.drawText(name, font, foreColor, x, y, w - winRatioWidth, h, false, HAlignment.LEFT, false);
                     g.drawText(winRatio, font, foreColor, x, y, w, h, false, HAlignment.RIGHT, false);
 
                     h += SettingsScreen.SETTING_PADDING;
-                    g.drawText(FModel.getQuest().getRank(value.getAchievements().getLevel()), FSkinFont.get(12), SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);
+                    y += h;
+                    h = totalHeight - h + w * SettingsScreen.INSETS_FACTOR;
+                    float iconSize = h + Utils.scaleMin(1);
+                    float iconOffset = SettingsScreen.SETTING_PADDING - Utils.scaleX(2);
+
+                    String cards = String.valueOf(value.getAssets().getCardPool().countAll());
+                    String credits = String.valueOf(value.getAssets().getCredits());
+                    font = FSkinFont.get(12);
+                    float cardsWidth = font.getBounds(cards).width + iconSize + SettingsScreen.SETTING_PADDING;
+                    float creditsWidth = font.getBounds(credits).width + iconSize + SettingsScreen.SETTING_PADDING;
+                    g.drawText(FModel.getQuest().getRank(value.getAchievements().getLevel()), font, SettingsScreen.DESC_COLOR, x, y, w - creditsWidth - cardsWidth, h, false, HAlignment.LEFT, false);
+                    g.drawImage(FSkinImage.HAND, x + w - creditsWidth - cardsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                    g.drawText(cards, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth - cardsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
+                    g.drawImage(FSkinImage.QUEST_COINSTACK, x + w - creditsWidth + iconOffset, y - SettingsScreen.SETTING_PADDING, iconSize, iconSize);
+                    g.drawText(credits, font, SettingsScreen.DESC_COLOR, x + w - creditsWidth + iconSize + SettingsScreen.SETTING_PADDING, y, w, h, false, HAlignment.LEFT, false);
                 }
             });
         }
