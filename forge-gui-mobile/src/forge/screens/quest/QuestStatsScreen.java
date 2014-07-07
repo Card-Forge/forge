@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
@@ -71,6 +72,7 @@ public class QuestStatsScreen extends FScreen {
     @Override
     public void onActivate() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Statistics\n(" + FModel.getQuest().getRank() + ")");
     }
 
     @Override

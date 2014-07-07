@@ -1,5 +1,6 @@
 package forge.screens.quest;
 
+import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 
@@ -11,6 +12,7 @@ public class QuestTournamentsScreen extends LaunchScreen {
     @Override
     public void onActivate() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Tournaments\n(" + FModel.getQuest().getRank() + ")");
     }
 
     @Override

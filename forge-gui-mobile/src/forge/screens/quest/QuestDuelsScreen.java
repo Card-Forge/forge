@@ -1,9 +1,11 @@
 package forge.screens.quest;
 
+import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
 import forge.interfaces.ICheckBox;
 import forge.interfaces.IComboBox;
+import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
@@ -36,6 +38,7 @@ public class QuestDuelsScreen extends LaunchScreen {
     @Override
     public void onActivate() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Duels\n(" + FModel.getQuest().getRank() + ")");
     }
 
     @Override
