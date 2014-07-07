@@ -51,7 +51,7 @@ public class LoadQuestScreen extends FScreen {
     private final FButton btnDeleteQuest = add(new FButton("Delete"));
 
     public LoadQuestScreen() {
-        super("Load Quest", QuestMenu.getMenu());
+        super("Load Quest");
 
         lblOldQuests.setFont(FSkinFont.get(12));
         lblOldQuests.setAlignment(HAlignment.CENTER);
