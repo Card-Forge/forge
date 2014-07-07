@@ -1119,6 +1119,28 @@ Tournaments are generated every 5 regular duel wins and disappear every 15 (a to
 If you get a 25 win streak or win first place in a tournament, you're awarded a token to generate a new draft right away.
 
 
+- Concurrent Modification Errors Fixed (mostly) -
+The most common cause of concurrent modification error has been fixed, so you should rarely encounter them anymore.
+Even if you do, pressing Continue on the bug report dialog should now allow you to continue your game.
+
+
+- Introducing Background Music -
+Forge now supports playing background music!!!
+There are 4 tracks for the menu screens and 4 tracks just for the match screen.
+Tracks shuffle randomly as they finish, as well as when starting a new game or leaving the match screen.
+A new "Enable Music" setting allows turning the music off, and toggling this setting can also be used to force a shuffle.
+The music is paused automatically if you minimize or switch away from Forge, and resumed when it's activated again.
+
+
+- Undo button in Prompt and new Floating Mana warning -
+If your last action is undoable, the right button in the Prompt pane will now allow undoing it in addition to Ctrl+Z and Forge > Game > Undo.
+In addition, if you attempt to pass priority with mana floating in your pool that could be lost, you'll now receive a warning.
+
+
+- Flickering P/T Overlays Fixed -
+Fixed bug that caused P/T overlays to flicker between their base values and their modified values from static effects.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
