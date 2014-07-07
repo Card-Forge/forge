@@ -5,17 +5,20 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 import forge.Graphics;
+import forge.UiCommand;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.assets.FSkinProp;
+import forge.interfaces.IButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
 
-public class FMenuItem extends FDisplayObject {
+public class FMenuItem extends FDisplayObject implements IButton {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.8f;
     protected static final float DIVOT_WIDTH = HEIGHT / 6;
     protected static final float GAP_X = HEIGHT * 0.1f;
@@ -120,5 +123,33 @@ public class FMenuItem extends FDisplayObject {
 
         //draw separator line
         g.drawLine(1, SEPARATOR_COLOR, 0, h, w, h);
+    }
+
+    @Override
+    public String getText() {
+        return text;
+    }
+    @Override
+    public void setText(String text0) {
+    }
+    @Override
+    public boolean isSelected() {
+        return false;
+    }
+    @Override
+    public void setSelected(boolean b0) {
+    }
+    @Override
+    public boolean requestFocusInWindow() {
+        return false;
+    }
+    @Override
+    public void setCommand(UiCommand command0) {
+    }
+    @Override
+    public void setTextColor(FSkinProp color) {
+    }
+    @Override
+    public void setTextColor(int r, int g, int b) {
     }
 }

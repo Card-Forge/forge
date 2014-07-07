@@ -59,7 +59,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         .fontSize(15).build();
     private final LblHeader lblTitle = new LblHeader("Quest Mode: Duels");
 
-    private final JLabel lblInfo = new FLabel.Builder().text("Select your next duel.")
+    private final FLabel lblInfo = new FLabel.Builder().text("Select your next duel.")
             .fontStyle(Font.BOLD).fontSize(16)
             .fontAlign(SwingConstants.LEFT).build();
 

@@ -21,13 +21,36 @@ import forge.toolbox.FEvent.FEventHandler;
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestMenu questMenu = new QuestMenu();
     private static final QuestBazaarScreen bazaarScreen = new QuestBazaarScreen();
-    private static QuestChallengesScreen challengesScreen = new QuestChallengesScreen();
-    private static QuestDecksScreen decksScreen = new QuestDecksScreen();
-    private static QuestDuelsScreen duelsScreen = new QuestDuelsScreen();
-    private static QuestPrefsScreen prefsScreen = new QuestPrefsScreen();
-    private static QuestSpellShopScreen spellShopScreen = new QuestSpellShopScreen();
-    private static QuestStatsScreen statsScreen = new QuestStatsScreen();
-    private static QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
+    private static final QuestChallengesScreen challengesScreen = new QuestChallengesScreen();
+    private static final QuestDecksScreen decksScreen = new QuestDecksScreen();
+    private static final QuestDuelsScreen duelsScreen = new QuestDuelsScreen();
+    private static final QuestPrefsScreen prefsScreen = new QuestPrefsScreen();
+    private static final QuestSpellShopScreen spellShopScreen = new QuestSpellShopScreen();
+    private static final QuestStatsScreen statsScreen = new QuestStatsScreen();
+    private static final QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
+
+    private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+        }
+    });
+    private static final FMenuItem travelItem = new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+        }
+    });
+    private static final FMenuItem spellShopItem = new FMenuItem("Spell Shop", FSkinImage.QUEST_BOOK, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(spellShopScreen);
+        }
+    });
+    private static final FMenuItem bazaarItem = new FMenuItem("Bazaar", FSkinImage.QUEST_BOTTLES, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(bazaarScreen);
+        }
+    });
 
     public static QuestMenu getMenu() {
         return questMenu;
@@ -76,23 +99,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 Forge.openScreen(tournamentsScreen);
             }
         }));
-        addItem(new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-            }
-        }));
-        addItem(new FMenuItem("Spell Shop", FSkinImage.QUEST_BOOK, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(spellShopScreen);
-            }
-        }));
-        addItem(new FMenuItem("Bazaar", FSkinImage.QUEST_BOTTLES, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(bazaarScreen);
-            }
-        }));
+        addItem(unlockSetsItem);
+        addItem(travelItem);
+        addItem(spellShopItem);
+        addItem(bazaarItem);
         addItem(new FMenuItem("Statistics", FSkinImage.MULTI, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -127,32 +137,27 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IButton getBtnRandomOpponent() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getBtnRandomOpponent();
     }
 
     @Override
     public IButton getBtnBazaar() {
-        // TODO Auto-generated method stub
-        return null;
+        return bazaarItem;
     }
 
     @Override
     public IButton getBtnSpellShop() {
-        // TODO Auto-generated method stub
-        return null;
+        return spellShopItem;
     }
 
     @Override
     public IButton getBtnUnlock() {
-        // TODO Auto-generated method stub
-        return null;
+        return unlockSetsItem;
     }
 
     @Override
     public IButton getBtnTravel() {
-        // TODO Auto-generated method stub
-        return null;
+        return travelItem;
     }
 
     @Override
@@ -182,14 +187,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IButton getLblNextChallengeInWins() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getLblNextChallengeInWins();
     }
 
     @Override
     public IButton getLblCurrentDeck() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getLblCurrentDeck();
     }
 
     @Override
@@ -199,26 +202,22 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IComboBox<String> getCbxPet() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getCbxPet();
     }
 
     @Override
     public ICheckBox getCbPlant() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getCbPlant();
     }
 
     @Override
     public ICheckBox getCbCharm() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getCbCharm();
     }
 
     @Override
     public IButton getLblZep() {
-        // TODO Auto-generated method stub
-        return null;
+        return duelsScreen.getLblZep();
     }
 
     @Override

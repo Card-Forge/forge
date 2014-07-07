@@ -58,7 +58,9 @@ public abstract class FDropDownMenu extends FDropDown {
     }
     
     public void addItem(FMenuItem item) {
-        items.add(add(item));
+        if (item.isVisible()) {
+            items.add(add(item));
+        }
     }
 
     @Override

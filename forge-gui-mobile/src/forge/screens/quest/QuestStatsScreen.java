@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.quest.QuestUtil;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
@@ -27,22 +28,22 @@ public class QuestStatsScreen extends FScreen {
     });
     private final FLabel lblWins = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_PLUS)
-        .font(FSkinFont.get(15)).build());
+        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
     private final FLabel lblLosses = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_MINUS)
-        .font(FSkinFont.get(15)).build());
+        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
     private final FLabel lblCredits = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_COINSTACK)
-        .font(FSkinFont.get(15)).build());
+        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
     private final FLabel lblWinStreak = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_PLUSPLUS)
-        .font(FSkinFont.get(15)).build());
+        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
     private final FLabel lblLife = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_LIFE)
-        .font(FSkinFont.get(15)).build());
+        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
     private final FLabel lblWorld = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_MAP)
-        .font(FSkinFont.get(15)).build());
+        .font(FSkinFont.get(16)).iconScaleFactor(1).build());
 
     public FLabel getLblWins() {
         return lblWins;
@@ -65,6 +66,11 @@ public class QuestStatsScreen extends FScreen {
 
     public QuestStatsScreen() {
         super("Quest Statistics", QuestMenu.getMenu());
+    }
+
+    @Override
+    public void onActivate() {
+        QuestUtil.updateQuestView(QuestMenu.getMenu());
     }
 
     @Override
