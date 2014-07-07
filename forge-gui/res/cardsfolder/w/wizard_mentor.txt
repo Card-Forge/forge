@@ -1,6 +1,6 @@
 Name:Wizard Mentor
 ManaCost:2 U
-Types:Creature Wizard
+Types:Creature Human Wizard
 PT:2/2
 A:AB$ ChangeZone | Cost$ T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature. | SubAbility$ DBChangeZone | SpellDescription$ Return CARDNAME and target creature you control to owner's hand.
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand

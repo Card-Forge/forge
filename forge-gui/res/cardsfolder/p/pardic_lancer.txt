@@ -1,6 +1,6 @@
 Name:Pardic Lancer
 ManaCost:4 R
-Types:Creature Barbarian
+Types:Creature Human Barbarian
 PT:3/2
 A:AB$ Pump | Cost$ Discard<1/Random> | Defined$ Self | NumAtt$ +1 | KW$ First Strike | SpellDescription$ CARDNAME gets +1/+0 and gains first strike until end of turn.
 SVar:RemAIDeck:True

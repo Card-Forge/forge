@@ -1,6 +1,6 @@
 Name:Subterranean Spirit
 ManaCost:3 R R
-Types:Creature Elemental
+Types:Creature Elemental Spirit
 PT:3/3
 K:Protection from red
 A:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature and without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.

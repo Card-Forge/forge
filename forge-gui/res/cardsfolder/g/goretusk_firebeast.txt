@@ -1,6 +1,6 @@
 Name:Goretusk Firebeast
 ManaCost:5 R
-Types:Creature Beast
+Types:Creature Elemental Boar Beast
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target player.
 SVar:TrigDealDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4

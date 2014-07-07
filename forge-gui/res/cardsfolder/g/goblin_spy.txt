@@ -1,6 +1,6 @@
 Name:Goblin Spy
 ManaCost:R
-Types:Creature Goblin
+Types:Creature Goblin Rogue
 PT:1/1
 K:Play with the top card of your library revealed.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_spy.jpg

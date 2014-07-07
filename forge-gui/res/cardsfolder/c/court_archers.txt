@@ -1,6 +1,6 @@
 Name:Court Archers
 ManaCost:2 G
-Types:Creature Human Archers
+Types:Creature Human Archer
 PT:1/3
 K:Reach
 K:Exalted

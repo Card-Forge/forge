@@ -1,6 +1,6 @@
 Name:One with Nothing
 ManaCost:B
-Types:Sorcery
+Types:Instant
 A:SP$ Discard | Cost$ B | Mode$ Hand | SpellDescription$ Discard your hand.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_with_nothing.jpg

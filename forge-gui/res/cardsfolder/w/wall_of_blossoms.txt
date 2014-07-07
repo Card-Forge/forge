@@ -1,6 +1,6 @@
 Name:Wall of Blossoms
 ManaCost:1 G
-Types:Creature Wall
+Types:Creature Plant Wall
 PT:0/4
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.

@@ -1,7 +1,7 @@
 Name:Darksteel Juggernaut
 ManaCost:5
 Types:Artifact Creature Juggernaut
-PT:0/1
+PT:*/*
 K:Indestructible
 K:CARDNAME attacks each turn if able.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.

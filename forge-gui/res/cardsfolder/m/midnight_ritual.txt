@@ -1,6 +1,6 @@
 Name:Midnight Ritual
 ManaCost:X 2 B
-Types:Instant
+Types:Sorcery
 A:SP$ ChangeZone | Cost$ X 2 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | SubAbility$ DBToken | SpellDescription$ Exile X target creature cards from your graveyard. For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield.
 SVar:DBToken:DB$ Token | TokenImage$ b 2 2 zombie 10E | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ X | References$ X
 SVar:X:Targeted$Amount

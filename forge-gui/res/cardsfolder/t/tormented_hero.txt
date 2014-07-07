@@ -1,6 +1,6 @@
 Name:Tormented Hero
 ManaCost:B
-Types:Creature Human Warior
+Types:Creature Human Warrior
 PT:2/1
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Heroic - Whenever you cast a spell that targets CARDNAME, each opponent loses 1 life. You gain life equal to the life lost this way.

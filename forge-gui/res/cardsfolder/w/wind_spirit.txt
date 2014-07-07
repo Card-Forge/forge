@@ -1,6 +1,6 @@
 Name:Wind Spirit
 ManaCost:4 U
-Types:Creature Spirit
+Types:Creature Elemental Spirit
 PT:3/2
 K:Flying
 K:CantBeBlockedByAmount LT2
