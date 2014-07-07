@@ -224,4 +224,9 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     public boolean isChallengesView() {
         return Forge.getCurrentScreen() == challengesScreen;
     }
+
+    @Override
+    public boolean allowHtml() {
+        return false;
+    }
 }

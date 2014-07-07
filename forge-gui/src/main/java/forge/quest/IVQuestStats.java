@@ -29,4 +29,5 @@ public interface IVQuestStats {
     IButton getLblZep();
 
     boolean isChallengesView();
+    boolean allowHtml();
 }

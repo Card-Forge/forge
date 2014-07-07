@@ -296,4 +296,9 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     public boolean isChallengesView() {
         return true;
     }
+
+    @Override
+    public boolean allowHtml() {
+        return true;
+    }
 }

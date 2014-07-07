@@ -297,4 +297,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     public boolean isChallengesView() {
         return false;
     }
+
+    @Override
+    public boolean allowHtml() {
+        return true;
+    }
 }
