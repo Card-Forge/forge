@@ -1,5 +1,5 @@
 Name:Kruphix, God of Horizons
-ManaCost:3 U G
+ManaCost:3 G U
 Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible

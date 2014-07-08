@@ -1,5 +1,5 @@
 Name:Pus Kami
-ManaCost:6 B
+ManaCost:5 B B
 Types:Creature Spirit
 PT:3/3
 A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.

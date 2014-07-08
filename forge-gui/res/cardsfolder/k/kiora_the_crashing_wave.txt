@@ -1,5 +1,5 @@
 Name:Kiora, the Crashing Wave
-ManaCost:2 U G
+ManaCost:2 G U
 Types:Planeswalker Kiora
 Loyalty:2
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls | Planeswalker$ True | KW$ HIDDEN Prevent all damage that would be dealt to and dealt by CARDNAME. | IsCurse$ True | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.

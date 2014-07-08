@@ -1,5 +1,5 @@
 Name:Fungal Shambler
-ManaCost:4 U B G
+ManaCost:4 G U B
 Types:Creature Fungus Beast
 PT:6/4
 K:Trample
