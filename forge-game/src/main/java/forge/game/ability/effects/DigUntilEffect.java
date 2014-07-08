@@ -139,7 +139,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
                 final Game game = p.getGame();
                 if (revealed.size() > 0) {
-                    game.getAction().reveal(revealed, p, true);
+                    game.getAction().reveal(revealed, p, false);
                 }
                 
 
