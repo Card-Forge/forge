@@ -343,6 +343,13 @@ public abstract class CardTraitBase extends GameObject {
                 return false;
             }
         }
+
+        if (params.containsKey("ActivateNoLoyaltyAbilitiesCondition")) {
+            final Player active = game.getPhaseHandler().getPlayerTurn();
+            if (active.getActivateLoyaltyAbilityThisTurn()) {
+                return false;
+            }
+        }
         return true;
     }
 }

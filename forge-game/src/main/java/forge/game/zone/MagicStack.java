@@ -523,9 +523,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isSpell() && !sp.isCopied()) {
             this.thisTurnCast.add(sp.getHostCard());
-
-            /*final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getHostCard());
-            ripple.run();*/
+        }
+        if (sp.isAbility() && sp.getRestrictions().isPwAbility()) {
+            sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         return si;
     }

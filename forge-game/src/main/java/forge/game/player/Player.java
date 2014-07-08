@@ -142,6 +142,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The attackedWithCreatureThisTurn. */
     private boolean attackedWithCreatureThisTurn = false;
 
+    private boolean activateLoyaltyAbilityThisTurn = false;
+
     /** The playerAttackCountThisTurn. */
     private int attackersDeclaredThisTurn = 0;
 
@@ -1983,6 +1985,29 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
+     * getActivateLoyaltyAbilityThisTurn.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean getActivateLoyaltyAbilityThisTurn() {
+        return this.activateLoyaltyAbilityThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>activateLoyaltyAbilityThisTurn</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setActivateLoyaltyAbilityThisTurn(final boolean b) {
+        this.activateLoyaltyAbilityThisTurn = b;
+    }
+ 
+    /**
+     * <p>
      * getAttackedWithCreatureThisTurn.
      * </p>
      * 
@@ -2902,6 +2927,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDiscardedThisTurn();
         setNumCardsInHandStartedThisTurnWith(this.getCardsIn(ZoneType.Hand).size());
         setAttackedWithCreatureThisTurn(false);
+        setActivateLoyaltyAbilityThisTurn(false);
         setNumLandsPlayed(0);
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();

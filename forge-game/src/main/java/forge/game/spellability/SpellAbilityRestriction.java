@@ -373,13 +373,18 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.isPwAbility()) {
+            final int limits = c.getKeywordAmount("May activate CARDNAME's loyalty abilities once");
+            int numActivates = 0;
             for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {
                 // check all abilities on card that have their planeswalker
                 // restriction set to confirm they haven't been activated
                 final SpellAbilityRestriction restrict = pwAbs.getRestrictions();
-                if (restrict.getPlaneswalker() && (restrict.getNumberTurnActivations() > 0)) {
-                    return false;
+                if (restrict.getPlaneswalker()) {
+                    numActivates += restrict.getNumberTurnActivations();
                 }
+            }
+            if (numActivates > limits) {
+                return false;
             }
         }
 
