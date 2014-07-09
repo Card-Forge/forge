@@ -317,6 +317,10 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAIAnimatePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
+    	if (list.isEmpty()) {
+    		return null;
+    	}
+    	Card c = null;
         // AI For choosing a Card to Animate.
         List<Card> betterList = CardLists.getNotType(list, "Creature");
         if (sa.getHostCard().getName().equals("Animate Artifact")) {
@@ -326,9 +330,52 @@ public class AttachAi extends SpellAbilityAi {
                     return c.getCMC() > 0;
                 }
             });
+            c = ComputerUtilCard.getMostExpensivePermanentAI(betterList);
+        } else {
+        	List<Card> evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.hasKeyword("Indestructible") || c.hasKeyword("Hexproof");
+                }
+            });
+        	if (!evenBetterList.isEmpty()) {
+        		betterList = evenBetterList;
+        	}
+        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.isUntapped();
+                }
+            });
+        	if (!evenBetterList.isEmpty()) {
+        		betterList = evenBetterList;
+        	}
+        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.getTurnInZone() != c.getGame().getPhaseHandler().getTurn();
+                }
+            });
+        	if (!evenBetterList.isEmpty()) {
+        		betterList = evenBetterList;
+        	}
+        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (final SpellAbility sa : c.getSpellAbilities()) {
+                        if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
+        	if (!evenBetterList.isEmpty()) {
+        		betterList = evenBetterList;
+        	}
+        	c = ComputerUtilCard.getWorstAI(betterList);
         }
-
-        final Card c = ComputerUtilCard.getMostExpensivePermanentAI(betterList);
+        
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
