@@ -86,7 +86,7 @@ R Polymorphist's Jest
 U Quickling
 C Research Assistant
 M Soul of Ravnica
-C Statue of Denial
+C Statute of Denial
 R Stormtide Leviathan
 U Turn to Frog
 C Void Snare
@@ -155,7 +155,7 @@ R Goblin Kaboomist
 R Goblin Rabblemaster
 C Goblin Roughrider
 C Hammerhand
-C Heat Ray
+U Heat Ray
 R Hoarding Dragon
 C Inferno Fist
 U Kird Chieftain
@@ -277,3 +277,18 @@ L Forest
 L Forest
 L Forest
 L Forest
+R Aegis Angel
+C Divine Verdict
+C Inspired Charge
+U Serra Angel
+C Cancel
+R Mahamoti Djinn
+R Nightmare
+U Sengir Vampire
+C Walking Corpse
+U Furnace Whelp
+C Seismic Strike
+R Shivan Dragon
+C Centaur Courser
+U Garruk's Packleader
+R Terra Stomper
