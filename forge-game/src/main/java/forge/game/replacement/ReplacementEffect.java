@@ -19,8 +19,10 @@ package forge.game.replacement;
 
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
+import forge.game.ability.AbilityApiBased;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 
 import java.util.List;
@@ -135,14 +137,29 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return the copy
      */
     public final ReplacementEffect getCopy() {
-        ReplacementType rt = ReplacementType.getTypeFor(this);
-        ReplacementEffect res = rt.createReplacement(mapParams, hostCard, intrinsic); 
-        res.setOverridingAbility(this.getOverridingAbility());
+        final ReplacementType rt = ReplacementType.getTypeFor(this);
+        final ReplacementEffect res = rt.createReplacement(mapParams, hostCard, intrinsic); 
+        final SpellAbility overridingAbility = this.getOverridingAbility();
+        if (overridingAbility != null) {
+        	final SpellAbility overridingAbilityCopy;
+        	if (overridingAbility instanceof AbilityApiBased) {
+        		overridingAbilityCopy = ((AbilityApiBased) overridingAbility).getCopy();
+        	} else if (overridingAbility instanceof AbilitySub) {
+        		overridingAbilityCopy = ((AbilitySub) overridingAbility).getCopy();
+        	} else {
+        		System.err.println("Overriding ability of " + hostCard + " of unexpected type " + overridingAbility.getClass());
+        		overridingAbilityCopy = null;
+        	}
+
+        	if (overridingAbilityCopy != null) {
+        		overridingAbilityCopy.setHostCard(hostCard);
+        		res.setOverridingAbility(overridingAbilityCopy);
+        	}
+        }
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());
         res.setTemporary(isTemporary());
         return res;
-
     }
 
     /**
