@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigEvoke | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
 SVar:TrigEvoke:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ TriggeredPlayer | SubAbility$ DBEvokeLand
-SVar:DBEvokeLand:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.IsRemembered | SubAbility$ DBEvokePlay
+SVar:DBEvokeLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ValidHand Land.IsRemembered | ForgetChanged$ True | SubAbility$ DBEvokePlay
 SVar:DBEvokePlay:DB$ Play | ValidZone$ Hand | Controller$ TriggeredPlayer | Defined$ Remembered | WithoutManaCost$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
