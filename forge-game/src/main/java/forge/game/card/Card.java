@@ -6293,11 +6293,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else {
                 final String restriction = property.split("sharesTypeWith ")[1];
-                if (restriction.equals("FirstImprinted")) {
-                    if (source.getImprinted().isEmpty() ||
-                            !this.sharesTypeWith(source.getImprinted().get(0))) {
-                        return false;
-                    }
+                final Card checkCard;
+                if (restriction.startsWith("Triggered")) {
+                	final Object triggeringObject = source.getTriggeringObject(restriction.substring("Triggered".length()));
+                	if (!(triggeringObject instanceof Card)) {
+                		return false;
+                	}
+                	checkCard = (Card) triggeringObject;
+                } else {
+                	return false;
+                }
+
+                if (!this.sharesTypeWith(checkCard)) {
+                	return false;
                 }
             }
         } else if (property.startsWith("withFlashback")) {
