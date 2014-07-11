@@ -51,34 +51,34 @@ public class TriggerBlocks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
-        Card blocker = (Card) runParams2.get("Blocker");
-        Card attacker = (Card) runParams2.get("Attacker");
         if (this.mapParams.containsKey("ValidCard")) {
             String validBlocker = this.mapParams.get("ValidCard");
-            if (validBlocker.contains(".withLesserPower")) {
-                // Have to check this here as triggering objects aren't set yet for AI combat trigger checks
-                // so ValidCard$Creature.powerLTX where X:TriggeredAttacker$CardPower crashes with NPE
-                validBlocker = validBlocker.replace(".withLesserPower", "");
-                if (blocker.getCurrentPower() >= attacker.getCurrentPower()) {
-                    return false;
-                }
-            }
             if (!matchesValid(runParams2.get("Blocker"), validBlocker.split(","), this.getHostCard())) {
                 return false;
             }
         }
+
         if (this.mapParams.containsKey("ValidBlocked")) {
-            String validBlocked = this.mapParams.get("ValidBlocked");
-            if (validBlocked.contains(".withLesserPower")) {
-                // Have to check this here as triggering objects aren't set yet for AI combat trigger checks
-                // so ValidBlocked$Creature.powerLTX where X:TriggeredBlocker$CardPower crashes with NPE
-                validBlocked = validBlocked.replace(".withLesserPower", "");
-                if (blocker.getCurrentPower() <= attacker.getCurrentPower()) {
-                    return false;
-                }
+            final String[] validBlockedSplit = this.mapParams.get("ValidBlocked").split(",");
+            final Object a = runParams2.get("Attackers");
+            if (!(a instanceof Iterable<?>)) {
+            	return false;
             }
-            if (!matchesValid(runParams2.get("Attacker"), validBlocked.split(","), this.getHostCard())) {
-                return false;
+
+            final Iterable<?> attackers = (Iterable<?>) a;
+            boolean foundMatch = false;
+            for (final Object o : attackers) {
+            	if (!(o instanceof Card)) {
+            		continue;
+            	}
+            	if (matchesValid(o, validBlockedSplit, this.getHostCard())) {
+            		foundMatch = true;
+            		break;
+            	}
+            }
+            
+            if (!foundMatch) {
+            	return false;
             }
         }
 
@@ -89,7 +89,6 @@ public class TriggerBlocks extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
-        sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
         sa.setTriggeringObject("Attackers", this.getRunParams().get("Attackers"));
     }
 }

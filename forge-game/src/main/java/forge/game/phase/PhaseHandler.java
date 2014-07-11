@@ -624,8 +624,6 @@ public class PhaseHandler implements java.io.Serializable {
                 // Run triggers
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Blocker", c1);
-                // TODO : Fix No Quarter and convert scripts
-                runParams.put("Attacker", combat.getAttackersBlockedBy(c1).get(0));
                 runParams.put("Attackers", combat.getAttackersBlockedBy(c1));
                 game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
             }
@@ -639,7 +637,7 @@ public class PhaseHandler implements java.io.Serializable {
                 a.getDamageHistory().clearNotBeenBlockedSinceLastUpkeepOf();
             }
 
-            List<Card> blockers = combat.getBlockers(a);
+            final List<Card> blockers = combat.getBlockers(a);
             if (blockers.isEmpty()) {
                 continue;
             }

@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ Blocks | ValidCard$ Creature.nonArtifact+nonDragon | ValidBlocked$ Card.Self | Execute$ TrigPumpBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a nonartifact, non-Dragon creature, that creature gets -X/-0 until end of turn, where X is half the creature's power, rounded down.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.nonArtifact+nonDragon | Execute$ TrigPumpBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a nonartifact, non-Dragon creature, that creature gets -X/-0 until end of turn, where X is half the creature's power, rounded down.
 SVar:TrigPumpBlocker:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | NumAtt$ -X | References$ X
 SVar:X:TriggeredBlocker$CardPower/HalfDown
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catacomb_dragon.jpg

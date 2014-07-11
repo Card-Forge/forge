@@ -2,8 +2,8 @@ Name:Deathgazer
 ManaCost:3 B
 Types:Creature Lizard
 PT:2/2
-T:Mode$ AttackerBlocked | ValidCard$ Creature.nonBlack | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
-T:Mode$ Blocks | ValidCard$ Creature.nonBlack | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.nonBlack | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.nonBlack | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
 SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocked | TriggerDescription$ Destroy blocked creature at end of combat.
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
 SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
