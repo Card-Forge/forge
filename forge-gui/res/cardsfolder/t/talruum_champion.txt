@@ -3,8 +3,8 @@ ManaCost:4 R
 Types:Creature Minotaur
 PT:3/3
 K:First Strike
-T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
-T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
 SVar:TrigBlocks:AB$ Debuff | Cost$ 0 | Defined$ TriggeredAttacker | Keywords$ First Strike
 SVar:TrigBlocked:AB$ Debuff | Cost$ 0 | Defined$ TriggeredBlocker | Keywords$ First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talruum_champion.jpg
