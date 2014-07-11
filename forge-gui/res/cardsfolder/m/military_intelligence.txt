@@ -1,0 +1,7 @@
+Name:Military Intelligence
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | CheckSVar$ OverwhelmInstinct | SVarCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:OverwhelmInstinct:Count$Valid Creature.attacking
+SVar:Picture:http://www.wizards.com/global/images/magic/general/military_intelligence.jpg

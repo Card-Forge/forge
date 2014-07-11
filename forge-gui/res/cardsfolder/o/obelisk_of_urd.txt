@@ -1,0 +1,10 @@
+Name:Obelisk of Urd
+ManaCost:6
+Types:Artifact
+K:Convoke
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
+S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control of the chosen type get +2/+2.
+SVar:RemRandomDeck:True
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_urd.jpg

@@ -1,0 +1,6 @@
+Name:Will-Forged Golem
+ManaCost:6
+Types:Artifact Creature Golem
+PT:4/4
+K:Convoke
+SVar:Picture:http://www.wizards.com/global/images/magic/general/will_forged_golem.jpg

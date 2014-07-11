@@ -1,0 +1,12 @@
+Name:Soul of Ravnica
+ManaCost:4 U U
+Types:Creature Avatar
+PT:6/6
+K:Flying
+A:AB$ Draw | Cost$ 5 U U | NumCards$ 1 | ConditionPresent$ Permanent.Blue+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DrawB | SpellDescription$ Draw a card for each color among permanents you control.
+SVar:DrawB:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.Black+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DrawR
+SVar:DrawR:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.Red+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DrawG
+SVar:DrawG:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.Green+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DrawW
+SVar:DrawW:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.White+YouCtrl | ConditionCompare$ GE1
+A:AB$ Draw | Cost$ 5 U U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | NumCards$ 1 | ConditionPresent$ Permanent.Blue+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DrawB | SpellDescription$ Draw a card for each color among permanents you control.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_ravnica.jpg

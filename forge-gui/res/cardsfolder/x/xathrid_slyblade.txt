@@ -1,0 +1,9 @@
+Name:Xathrid Slyblade
+ManaCost:2 B
+Types:Creature Human Assassin
+PT:2/1
+K:Hexproof
+A:AB$ Debuff | Cost$ 3 B | Defined$ Self | Keywords$ Hexproof | SubAbility$ DBPump | SpellDescription$ Until end of turn, CARDNAME loses hexproof and gains first strike and deathtouch.
+SVar:DBPump:DB$ Pump | KW$ First Strike & Deathtouch | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/xathrid_slyblade.jpg

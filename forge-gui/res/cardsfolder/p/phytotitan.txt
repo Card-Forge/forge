@@ -1,0 +1,8 @@
+Name:Phytotitan
+ManaCost:4 G G
+Types:Creature Plant Elemental
+PT:7/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | DelayedTrigger$ DelTrig | TriggerDescription$ When CARDNAME dies, return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.
+SVar:DelTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChange | TriggerDescription$ Return CARDNAME to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | Tapped$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phytotitan.jpg

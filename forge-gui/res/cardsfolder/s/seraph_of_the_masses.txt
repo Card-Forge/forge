@@ -1,0 +1,10 @@
+Name:Seraph of the Masses
+ManaCost:5 W W
+Types:Creature Angel
+PT:*/*
+K:Convoke
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_of_the_masses.jpg

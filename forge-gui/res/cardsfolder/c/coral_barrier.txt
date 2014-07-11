@@ -1,0 +1,8 @@
+Name:Coral Barrier
+ManaCost:2 U
+Types:Creature Wall
+PT:1/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 blue Squid creature token with Islandwalk onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Squid | TokenTypes$ Creature,Squid | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Islandwalk 
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_barrier.jpg

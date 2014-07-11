@@ -1,0 +1,10 @@
+Name:Dauntless River Marshal
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control an Island.
+SVar:X:Count$Valid Island.YouCtrl
+SVar:BuffedBy:Island
+A:AB$ Tap | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+DeckNeeds:Color$Blue
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_river_marshal.jpg

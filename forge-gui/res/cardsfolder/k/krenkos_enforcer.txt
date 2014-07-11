@@ -1,0 +1,6 @@
+Name:Krenko's Enforcer
+ManaCost:1 R R
+Types:Creature Goblin Warrior
+PT:2/2
+K:Intimidate
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krenkos_enforcer.jpg

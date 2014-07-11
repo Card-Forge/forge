@@ -1,0 +1,7 @@
+Name:Chief Engineer
+ManaCost:1 U
+Types:Creature Vedalken Artificer
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Artifact+YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Artifact spells you cast have convoke.
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chief_engineer.jpg

@@ -1,0 +1,6 @@
+Name:Miner's Bane
+ManaCost:4 R R
+Types:Creature Elemental
+PT:6/3
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ 1 | KW$ Trample | SpellDescription$ CARDNAME gets +1/+0 and gains trample until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/miners_bane.jpg

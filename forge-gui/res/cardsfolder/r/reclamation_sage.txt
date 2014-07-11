@@ -1,0 +1,7 @@
+Name:Reclamation Sage
+ManaCost:2 G
+Types:Creature Elf Shaman
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact or enchantment.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reclamation_sage.jpg

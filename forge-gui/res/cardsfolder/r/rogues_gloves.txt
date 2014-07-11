@@ -1,0 +1,7 @@
+Name:Rogue's Gloves
+ManaCost:2
+Types:Artifact Equipment
+K:Equip 2
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rogues_gloves.jpg

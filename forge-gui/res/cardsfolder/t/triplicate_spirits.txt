@@ -1,0 +1,6 @@
+Name:Triplicate Spirits
+ManaCost:4 W W
+Types:Sorcery
+K:Convoke
+A:SP$ Token | Cost$ 4 W W | TokenAmount$ 3 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/triplicate_spirits.jpg

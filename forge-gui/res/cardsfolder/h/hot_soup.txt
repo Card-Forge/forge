@@ -1,0 +1,10 @@
+Name:Hot Soup
+ManaCost:1
+Types:Artifact Equipment
+K:Equip 3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ HotSoupDestroy | AddHiddenKeyword$ Unblockable | Description$ Equipped creature can't be blocked.
+SVar:HotSoupDestroy:SVar:DestroyWhenDamaged:True
+T:Mode$ DamageDone | ValidTarget$ Creature.EquippedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When equippeded creature is dealt damage, destroy it.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredTarget
+SVar:NonStackingAttachEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hot_soup.jpg

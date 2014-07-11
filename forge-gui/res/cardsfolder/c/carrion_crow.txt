@@ -1,0 +1,7 @@
+Name:Carrion Crow
+ManaCost:2 B
+Types:Creature Zombie Bird
+PT:2/2
+K:Flying
+K:CARDNAME enters the battlefield tapped.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_crow.jpg
