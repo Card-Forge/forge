@@ -2,8 +2,8 @@ Name:Ashmouth Hound
 ManaCost:1 R
 Types:Creature Elemental Hound
 PT:2/1
-T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self  | Execute$ TrigDamageAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
-T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self  | Execute$ TrigDamageBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDamageAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDamageBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
 SVar:TrigDamageAttacker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
 SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashmouth_hound.jpg
