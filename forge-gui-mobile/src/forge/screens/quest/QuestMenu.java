@@ -14,6 +14,7 @@ import forge.properties.ForgeConstants;
 import forge.quest.IVQuestStats;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
+import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -29,14 +30,22 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestStatsScreen statsScreen = new QuestStatsScreen();
     private static final QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
 
-    private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem duelsItem = new FMenuItem("Duels", FSkinImage.QUEST_GEAR, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
+            Forge.openScreen(duelsScreen);
         }
     });
-    private static final FMenuItem travelItem = new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
+    private static final FMenuItem challengesItem = new FMenuItem("Challenges", FSkinImage.QUEST_HEART, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
+            Forge.openScreen(challengesScreen);
+        }
+    });
+    private static final FMenuItem tournamentsItem = new FMenuItem("Tournaments", FSkinImage.PACK, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(tournamentsScreen);
         }
     });
     private static final FMenuItem spellShopItem = new FMenuItem("Spell Shop", FSkinImage.QUEST_BOOK, new FEventHandler() {
@@ -49,6 +58,22 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         @Override
         public void handleEvent(FEvent e) {
             Forge.openScreen(bazaarScreen);
+        }
+    });
+    private static final FMenuItem statsItem = new FMenuItem("Statistics", FSkinImage.MULTI, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(statsScreen);
+        }
+    });
+    private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+        }
+    });
+    private static final FMenuItem travelItem = new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
         }
     });
 
@@ -81,34 +106,15 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     protected void buildMenu() {
-        addItem(new FMenuItem("Duels", FSkinImage.QUEST_GEAR, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(duelsScreen);
-            }
-        }));
-        addItem(new FMenuItem("Challenges", FSkinImage.QUEST_HEART, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(challengesScreen);
-            }
-        }));
-        addItem(new FMenuItem("Tournaments", FSkinImage.PACK, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(tournamentsScreen);
-            }
-        }));
+        FScreen currentScreen = Forge.getCurrentScreen();
+        addItem(duelsItem); duelsItem.setSelected(currentScreen == duelsScreen);
+        addItem(challengesItem); challengesItem.setSelected(currentScreen == challengesScreen);
+        addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
+        addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
+        addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
+        addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(unlockSetsItem);
         addItem(travelItem);
-        addItem(spellShopItem);
-        addItem(bazaarItem);
-        addItem(new FMenuItem("Statistics", FSkinImage.MULTI, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(statsScreen);
-            }
-        }));
         addItem(new FMenuItem("Change Deck", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

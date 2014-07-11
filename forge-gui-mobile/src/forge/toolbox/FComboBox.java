@@ -177,12 +177,16 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
         @Override
         protected void buildMenu() {
             for (final E item : FComboBox.this.items) {
-                addItem(new FMenuItem(item.toString(), new FEventHandler() {
+                FMenuItem menuItem = new FMenuItem(item.toString(), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
                         setSelectedItem(item);
                     }
-                }));
+                });
+                if (selectedItem == item) {
+                    menuItem.setSelected(true);
+                }
+                addItem(menuItem);
             }
         }
 

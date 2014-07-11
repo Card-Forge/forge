@@ -56,7 +56,7 @@ public abstract class FDropDownMenu extends FDropDown {
 
         return new ScrollBounds(width, y);
     }
-    
+
     public void addItem(FMenuItem item) {
         if (item.isVisible()) {
             items.add(add(item));

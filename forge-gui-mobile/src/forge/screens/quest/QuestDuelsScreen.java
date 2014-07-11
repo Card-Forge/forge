@@ -1,6 +1,5 @@
 package forge.screens.quest;
 
-import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
 import forge.interfaces.ICheckBox;
@@ -49,7 +48,6 @@ public class QuestDuelsScreen extends LaunchScreen {
 
     @Override
     protected boolean buildLaunchParams(LaunchParams launchParams) {
-        // TODO Auto-generated method stub
         return false;
     }
 

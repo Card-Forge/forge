@@ -32,8 +32,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
     private final String text;
     private final FImage icon;
     private final FEventHandler handler;
-    private boolean pressed;
-    private boolean allowForIcon;
+    private boolean pressed, allowForIcon, selected;
     private float textWidth;
 
     public FMenuItem(String text0, FEventHandler handler0) {
@@ -97,7 +96,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
     }
 
     protected boolean showPressedColor() {
-        return pressed;
+        return pressed || selected;
     }
 
     @Override
@@ -134,10 +133,11 @@ public class FMenuItem extends FDisplayObject implements IButton {
     }
     @Override
     public boolean isSelected() {
-        return false;
+        return selected;
     }
     @Override
     public void setSelected(boolean b0) {
+        selected = b0;
     }
     @Override
     public boolean requestFocusInWindow() {
