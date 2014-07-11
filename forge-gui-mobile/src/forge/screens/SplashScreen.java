@@ -3,6 +3,7 @@ package forge.screens;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
@@ -69,5 +70,8 @@ public class SplashScreen extends FContainer {
         y += 78f / 450f * h;
         progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
         g.draw(progressBar);
+
+        String version = "v. " + Forge.CURRENT_VERSION + " (Alpha)";
+        g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, HAlignment.CENTER, true);
     }
 }
