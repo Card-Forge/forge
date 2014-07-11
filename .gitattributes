@@ -3440,6 +3440,7 @@ forge-gui/res/cardsfolder/c/consign_to_dream.txt -text
 forge-gui/res/cardsfolder/c/consign_to_dust.txt -text
 forge-gui/res/cardsfolder/c/conspiracy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/constant_mists.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/constricting_sliver.txt -text
 forge-gui/res/cardsfolder/c/constricting_tendrils.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/consult_the_necrosages.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/consume_spirit.txt -text
