@@ -900,7 +900,7 @@ public class PhaseHandler implements java.io.Serializable {
      * 
      */
     public final void addExtraPhase(final PhaseType afterPhase, final PhaseType extraPhase) {
-        // 300.7. Some effects can add phases to a turn. They do this by adding the phases directly after the specified phase.
+        // 500.8. Some effects can add phases to a turn. They do this by adding the phases directly after the specified phase.
         // If multiple extra phases are created after the same phase, the most recently created phase will occur first.
         if (!this.extraPhases.containsKey(afterPhase)) {
             this.extraPhases.put(afterPhase, new Stack<PhaseType>());
@@ -1062,6 +1062,7 @@ public class PhaseHandler implements java.io.Serializable {
      */
     public final void endTurnByEffect() {
         this.combat = null;
+        this.extraPhases.clear();
         this.phase = PhaseType.CLEANUP;
         this.onPhaseBegin();
     }
