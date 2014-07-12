@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.DeckProxy;
+import forge.deck.DeckgenUtil;
 import forge.deck.FDeckChooser;
+import forge.deck.FDeckViewer;
 import forge.game.GameType;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -17,16 +19,18 @@ import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FTextField;
 import forge.util.ThreadUtil;
 
 public class QuestDecksScreen extends FScreen {
-    private static final float PADDING = FOptionPane.PADDING;
+    private static final float PADDING = FDeckChooser.PADDING;
 
     private final DeckManager lstDecks = add(new DeckManager(GameType.Quest));
     private final FButton btnNewDeck = add(new FButton("New Deck"));
     private final FButton btnEditDeck = add(new FButton("Edit Deck"));
+    private final FButton btnViewDeck = add(new FButton("View Deck"));
+    private final FButton btnRandom = add(new FButton("Random Deck"));
 
     private final FLabel lblInfo = add(new FLabel.Builder()
         .align(HAlignment.CENTER).font(FSkinFont.get(16))
@@ -59,7 +63,6 @@ public class QuestDecksScreen extends FScreen {
             }
         });
 
-        btnNewDeck.setFont(FSkinFont.get(16));
         btnNewDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -82,11 +85,26 @@ public class QuestDecksScreen extends FScreen {
                 });
             }
         });
-        btnEditDeck.setFont(btnNewDeck.getFont());
         btnEditDeck.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 editSelectedDeck();
+            }
+        });
+        btnViewDeck.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                final DeckProxy deck = lstDecks.getSelectedItem();
+                if (deck != null) {
+                    FDeckViewer.show(deck.getDeck());
+                }
+            }
+        });
+        btnRandom.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                DeckgenUtil.randomSelect(lstDecks);
+                Forge.back();
             }
         });
     }
@@ -139,12 +157,15 @@ public class QuestDecksScreen extends FScreen {
         y += lblInfo.getHeight();
 
         float buttonWidth = (w - FDeckChooser.PADDING) / 2;
-        float buttonHeight = btnNewDeck.getAutoSizeBounds().height * 1.2f;
-        float listHeight = height - buttonHeight - y - FDeckChooser.PADDING;
+        float buttonHeight = FTextField.getDefaultHeight();
+        float listHeight = height - 2 * buttonHeight - y - 3 * PADDING;
 
         lstDecks.setBounds(x, y, w, listHeight);
-        y += listHeight + FDeckChooser.PADDING;
+        y += listHeight + PADDING;
         btnNewDeck.setBounds(x, y, buttonWidth, buttonHeight);
         btnEditDeck.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
+        y += buttonHeight + PADDING;
+        btnViewDeck.setBounds(x, y, buttonWidth, buttonHeight);
+        btnRandom.setBounds(x + buttonWidth + FDeckChooser.PADDING, y, buttonWidth, buttonHeight);
     }
 }
