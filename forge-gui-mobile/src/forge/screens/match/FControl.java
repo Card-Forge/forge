@@ -26,6 +26,9 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
+import forge.assets.FImage;
+import forge.assets.FSkin;
+import forge.assets.FTextureRegionImage;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.control.FControlGameEventHandler;
@@ -89,6 +92,7 @@ public class FControl {
     private static final MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     private static final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
     private static final FControlGamePlayback playbackControl = new FControlGamePlayback();
+    private static final Map<LobbyPlayer, FImage> avatarImages = new HashMap<LobbyPlayer, FImage>();
 
     static {
         uiEvents = new EventBus("ui events");
@@ -873,5 +877,18 @@ public class FControl {
     private final static LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
     public final static LobbyPlayer getGuiPlayer() {
         return guiPlayer;
+    }
+
+    public static FImage getPlayerAvatar(final Player p) {
+        LobbyPlayer lp = p.getLobbyPlayer();
+        FImage avatar = avatarImages.get(lp);
+        if (avatar == null) {
+            avatar = new FTextureRegionImage(FSkin.getAvatars().get(lp.getAvatarIndex()));
+        }
+        return avatar;
+    }
+
+    public static void setPlayerAvatar(final LobbyPlayer lp, final FImage avatarImage) {
+        avatarImages.put(lp, avatarImage);
     }
 }

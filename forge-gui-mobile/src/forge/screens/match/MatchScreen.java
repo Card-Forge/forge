@@ -125,8 +125,8 @@ public class MatchScreen extends FScreen {
 
     @Override
     public void onClose(Callback<Boolean> canCloseCallback) {
-        Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
         FControl.writeMatchPreferences();
+        Forge.getSoundSystem().setBackgroundMusic(MusicPlaylist.MENUS);
         super.onClose(canCloseCallback);
     }
 

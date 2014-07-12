@@ -39,6 +39,7 @@ import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.IHasIcon;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -527,7 +528,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void setPlayerAvatar(LobbyPlayer player, String iconImageKey) {
-        CMatchUI.SINGLETON_INSTANCE.avatarImages.put(player, iconImageKey);
+    public void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi) {
+        CMatchUI.SINGLETON_INSTANCE.avatarImages.put(player, ihi.getIconImageKey());
     }
 }

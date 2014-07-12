@@ -31,6 +31,7 @@ import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.IHasIcon;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -43,6 +44,7 @@ import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.winlose.ViewWinLose;
+import forge.screens.quest.QuestMenu;
 import forge.sound.AudioClip;
 import forge.sound.AudioMusic;
 import forge.sound.IAudioClip;
@@ -428,16 +430,16 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void showSpellShop() {
-        
+        QuestMenu.showSpellShop();
     }
 
     @Override
     public void showBazaar() {
-        
+        QuestMenu.showBazaar();
     }
 
     @Override
-    public void setPlayerAvatar(LobbyPlayer player, String iconImageKey) {
-        //Not needed for mobile game
+    public void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi) {
+        FControl.setPlayerAvatar(player, ImageCache.getIcon(ihi));
     }
 }

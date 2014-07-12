@@ -22,6 +22,7 @@ import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.phase.PhaseType;
+import forge.game.player.IHasIcon;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
@@ -99,5 +100,5 @@ public interface IGuiBase {
     void continueMatch(Match match);
     void showSpellShop();
     void showBazaar();
-    void setPlayerAvatar(LobbyPlayer player, String iconImageKey);
+    void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
 }

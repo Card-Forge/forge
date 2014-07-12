@@ -566,7 +566,7 @@ public class QuestUtil {
         starter.add(humanStart.setPlayer(GuiBase.getInterface().getQuestPlayer()));
 
         LobbyPlayer aiPlayer = GuiBase.getInterface().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
-        GuiBase.getInterface().setPlayerAvatar(aiPlayer, event.getIconImageKey());
+        GuiBase.getInterface().setPlayerAvatar(aiPlayer, event);
         starter.add(aiStart.setPlayer(aiPlayer));
 
         boolean useRandomFoil = FModel.getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);

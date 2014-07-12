@@ -1,10 +1,9 @@
 package forge.screens.match.views;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
-import forge.assets.FSkin;
+import forge.assets.FImage;
 import forge.game.player.Player;
 import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
@@ -16,11 +15,11 @@ public class VAvatar extends FDisplayObject {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;
 
     private final Player player;
-    private final TextureRegion image;
+    private final FImage image;
 
     public VAvatar(Player player0) {
         player = player0;
-        image = FSkin.getAvatars().get(player.getLobbyPlayer().getAvatarIndex());
+        image = FControl.getPlayerAvatar(player);
         setSize(WIDTH, HEIGHT);
     }
 

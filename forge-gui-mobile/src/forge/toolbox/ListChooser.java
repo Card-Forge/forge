@@ -23,7 +23,6 @@ import com.google.common.base.Function;
 
 import forge.FThreads;
 import forge.Graphics;
-import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
@@ -34,6 +33,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
+import forge.screens.match.FControl;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent;
@@ -334,7 +334,7 @@ public class ListChooser<T> extends FContainer {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             Player player = (Player)value;
-            g.drawImage(FSkin.getAvatars().get(player.getLobbyPlayer().getAvatarIndex()), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
+            g.drawImage(FControl.getPlayerAvatar(player), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
             x += VAvatar.WIDTH;
             w -= VAvatar.WIDTH;
             g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);

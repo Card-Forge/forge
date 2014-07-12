@@ -263,4 +263,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     public boolean allowHtml() {
         return false;
     }
+
+    public static void showSpellShop() {
+        Forge.openScreen(spellShopScreen);
+    }
+
+    public static void showBazaar() {
+        Forge.openScreen(bazaarScreen);
+    }
 }

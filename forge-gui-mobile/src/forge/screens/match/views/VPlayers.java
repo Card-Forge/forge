@@ -2,11 +2,10 @@ package forge.screens.match.views;
 
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Graphics;
-import forge.assets.FSkin;
+import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.game.GameType;
 import forge.game.card.Card;
@@ -67,7 +66,7 @@ public class VPlayers extends FDropDown {
             float y = PADDING;
             float h = getHeight() - 2 * y;
 
-            TextureRegion avatarImage = FSkin.getAvatars().get(player.getLobbyPlayer().getAvatarIndex());
+            FImage avatarImage = FControl.getPlayerAvatar(player);
             g.drawImage(avatarImage, x, y, h, h);
             x += h + PADDING;
 

@@ -19,17 +19,16 @@ package forge.screens.match.views;
 
 import forge.Graphics;
 import forge.assets.FImage;
-import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardZoom;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.screens.match.FControl;
 import forge.toolbox.FButton;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -227,7 +226,7 @@ public class VAssignDamage extends FDialog {
             }
             else if (defender instanceof Player) {
                 Player player = (Player)defender;
-                obj = add(new MiscAttDefPanel(player.getName(), new FTextureRegionImage(FSkin.getAvatars().get(player.getLobbyPlayer().getAvatarIndex()))));
+                obj = add(new MiscAttDefPanel(player.getName(), FControl.getPlayerAvatar(player)));
             }
             else {
                 obj = add(new MiscAttDefPanel(defender.getName(), FSkinImage.UNKNOWN));
