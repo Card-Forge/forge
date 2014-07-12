@@ -1,5 +1,8 @@
 package forge.screens.quest;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
+
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
 import forge.interfaces.ICheckBox;
@@ -10,22 +13,25 @@ import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 
 public class QuestDuelsScreen extends LaunchScreen {
+    private static final float PADDING = FOptionPane.PADDING;
+
     private final FComboBox<String> cbxPet = add(new FComboBox<String>());
     private final FCheckBox cbCharm = add(new FCheckBox("Use Charm of Vigor"));
     private final FCheckBox cbPlant = add(new FCheckBox("Summon Plant"));
     private final FLabel lblZep = add(new FLabel.Builder().text("Launch Zeppelin").font(FSkinFont.get(14)).build());
 
     private final FLabel lblInfo = add(new FLabel.Builder().text("Select your next duel.")
-            .font(FSkinFont.get(16)).build());
+            .align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
 
     private final FLabel lblCurrentDeck = add(new FLabel.Builder()
-        .text("Current deck hasn't been set yet.")
+        .text("Current deck hasn't been set yet.").align(HAlignment.CENTER).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final FLabel lblNextChallengeInWins = add(new FLabel.Builder()
-        .text("Next challenge in wins hasn't been set yet.")
+        .text("Next challenge in wins hasn't been set yet.").align(HAlignment.CENTER).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final FLabel btnRandomOpponent = add(new FLabel.ButtonBuilder().text("Random Duel").font(FSkinFont.get(16)).build());
@@ -42,8 +48,15 @@ public class QuestDuelsScreen extends LaunchScreen {
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        // TODO Auto-generated method stub
-        
+        float x = PADDING;
+        float y = startY + PADDING / 2;
+        float w = width - 2 * PADDING;
+        lblInfo.setBounds(x, y, w, lblInfo.getAutoSizeBounds().height);
+        y += lblInfo.getHeight();
+        lblCurrentDeck.setBounds(x, y, w, lblCurrentDeck.getAutoSizeBounds().height);
+        y += lblCurrentDeck.getHeight();
+        lblNextChallengeInWins.setBounds(x, y, w, lblCurrentDeck.getHeight());
+        y += lblCurrentDeck.getHeight() + PADDING / 2;
     }
 
     @Override
