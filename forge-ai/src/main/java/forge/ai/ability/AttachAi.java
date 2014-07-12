@@ -938,10 +938,14 @@ public class AttachAi extends SpellAbilityAi {
             // Probably prefer to Enchant Creatures that Can Attack
             // Filter out creatures that can't Attack or have Defender
             if (keywords.isEmpty()) {
+            	final int powerBonus = totPower;
                 prefList = CardLists.filter(prefList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
+                    	if (!c.isCreature()) {
+                    		return true;
+                    	}
+                        return CombatUtil.canAttackNextTurn(c) && powerBonus + c.getNetAttack() > 0;
                     }
                 });
             }
