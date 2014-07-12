@@ -71,6 +71,11 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public String getCurrentVersion() {
+        return Forge.CURRENT_VERSION;
+    }
+
+    @Override
     public void invokeInEdtLater(Runnable proc) {
         Gdx.app.postRunnable(proc);
     }

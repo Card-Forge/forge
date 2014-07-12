@@ -90,6 +90,11 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public String getCurrentVersion() {
+        return BuildInfo.getVersionString();
+    }
+
+    @Override
     public void invokeInEdtLater(Runnable proc) {
         SwingUtilities.invokeLater(proc);
     }

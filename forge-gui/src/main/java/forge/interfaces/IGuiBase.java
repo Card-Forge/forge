@@ -36,6 +36,7 @@ import forge.util.ITriggerEvent;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();
+    String getCurrentVersion();
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();

@@ -75,7 +75,7 @@ public class BugReporter {
         if (message != null) {
             System.err.printf("%s > %s%n", FThreads.debugGetCurrThreadId(), message);
         }
-        System.err.print( FThreads.debugGetCurrThreadId() + " > " );
+        System.err.print(FThreads.debugGetCurrThreadId() + " > ");
         ex.printStackTrace();
         
         StringBuilder sb = new StringBuilder();
@@ -174,7 +174,7 @@ public class BugReporter {
 
     private static StringBuilder buildSpoilerHeader(StringBuilder sb, String reportTitle) {
         sb.append("[spoiler=").append(reportTitle).append("][code]");
-        sb.append("\nForge Version:    ").append(BuildInfo.getVersionString());
+        sb.append("\nForge Version:    ").append(GuiBase.getInterface().getCurrentVersion());
         sb.append("\nOperating System: ").append(System.getProperty("os.name"))
                                          .append(" ").append(System.getProperty("os.version"))
                                          .append(" ").append(System.getProperty("os.arch"));
