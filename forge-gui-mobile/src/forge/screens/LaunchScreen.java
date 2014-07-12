@@ -23,7 +23,7 @@ public abstract class LaunchScreen extends FScreen {
     private static final float PADDING = IMAGE_HEIGHT * 0.025f;
 
     protected final StartButton btnStart = add(new StartButton());
-    private boolean creatingMatch;
+    protected boolean creatingMatch;
 
     public LaunchScreen(String headerCaption) {
         super(headerCaption);
@@ -47,7 +47,7 @@ public abstract class LaunchScreen extends FScreen {
         public final Set<GameType> appliedVariants = new HashSet<GameType>();
     }
 
-    private void startMatch() {
+    protected void startMatch() {
         if (creatingMatch) { return; }
         creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
 

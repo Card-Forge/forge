@@ -42,7 +42,7 @@ class QuestEventPanel extends FDisplayObject {
         img = ImageCache.getIcon(e0);
         container = container0;
         if (container.selectedPanel == null) {
-            container.selectedPanel = this; //select first panel in container by default
+            setSelected(true); //select first panel in container by default
         }
     }
 

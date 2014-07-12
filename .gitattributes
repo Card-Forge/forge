@@ -1205,6 +1205,7 @@ forge-gui-mobile/src/forge/screens/quest/QuestChallengesScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestDecksScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestDuelsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestEventPanel.java -text
+forge-gui-mobile/src/forge/screens/quest/QuestLaunchScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestMenu.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestPrefsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestSpellShopScreen.java -text

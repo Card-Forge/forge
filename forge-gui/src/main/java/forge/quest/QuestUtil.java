@@ -511,36 +511,14 @@ public class QuestUtil {
         QuestUtilUnlockSets.doUnlock(qData, unlocked);
     }
 
-    /** */
     public static void startGame() {
-        if (!checkActiveQuest("Start a duel.") || null == event) {
-            return;
+        if (canStartGame()) {
+            finishStartingGame();
         }
-        final QuestController qData = FModel.getQuest();
+    }
 
-        Deck deck = null;
-        if (event instanceof QuestEventChallenge) {
-            // Predefined HumanDeck
-            deck = ((QuestEventChallenge) event).getHumanDeck();
-        }
-        if (deck == null) {
-            // If no predefined Deck, use the Player's Deck
-            deck = getCurrentDeck();
-        }
-        if (deck == null) {
-            String msg = "Please select a Quest Deck.";
-            SOptionPane.showErrorDialog(msg, "No Deck");
-            System.out.println(msg);
-            return;
-        }
-        
-        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
-            if (null != errorMessage) {
-                SOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
-                return;
-            }
-        }
+    public static void finishStartingGame() {
+        final QuestController qData = FModel.getQuest();
 
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
@@ -569,7 +547,7 @@ public class QuestUtil {
             forceAnte = qc.isForceAnte();
         }
 
-        RegisteredPlayer humanStart = new RegisteredPlayer(deck);
+        RegisteredPlayer humanStart = new RegisteredPlayer(getDeckForNewGame());
         RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
         
         if (lifeHuman != null) {
@@ -606,14 +584,27 @@ public class QuestUtil {
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
         final Match mc = new Match(rules, starter);
-        FThreads.invokeInEdtLater(new Runnable(){
+        FThreads.invokeInEdtNowOrLater(new Runnable(){
             @Override
             public void run() {
                 GuiBase.getInterface().startGame(mc);
             }
         });
     }
-    
+
+    private static Deck getDeckForNewGame() {
+        Deck deck = null;
+        if (event instanceof QuestEventChallenge) {
+            // Predefined HumanDeck
+            deck = ((QuestEventChallenge) event).getHumanDeck();
+        }
+        if (deck == null) {
+            // If no predefined Deck, use the Player's Deck
+            deck = getCurrentDeck();
+        }
+        return deck;
+    }
+
     /**
      * Checks to see if a game can be started and displays relevant dialogues.
      * @return
@@ -622,25 +613,15 @@ public class QuestUtil {
         if (!checkActiveQuest("Start a duel.") || null == event) {
             return false;
         }
-        
-        Deck deck = null;
-        if (event instanceof QuestEventChallenge) {
-            // Predefined HumanDeck
-            deck = ((QuestEventChallenge) event).getHumanDeck();
-        }
-        
-        if (deck == null) {
-            // If no predefined Deck, use the Player's Deck
-            deck = getCurrentDeck();
-        }
-        
+
+        Deck deck = getDeckForNewGame();
         if (deck == null) {
             String msg = "Please select a Quest Deck.";
             SOptionPane.showErrorDialog(msg, "No Deck");
             System.out.println(msg);
             return false;
         }
-        
+
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
             if (null != errorMessage) {

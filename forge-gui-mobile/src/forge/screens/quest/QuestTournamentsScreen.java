@@ -1,17 +1,8 @@
 package forge.screens.quest;
 
-import forge.model.FModel;
-import forge.quest.QuestUtil;
-import forge.screens.LaunchScreen;
-
-public class QuestTournamentsScreen extends LaunchScreen {
+public class QuestTournamentsScreen extends QuestLaunchScreen {
     public QuestTournamentsScreen() {
-        super("Quest Duels", QuestMenu.getMenu());
-    }
-
-    @Override
-    public void onActivate() {
-        update();
+        super();
     }
 
     @Override
@@ -20,14 +11,12 @@ public class QuestTournamentsScreen extends LaunchScreen {
         
     }
 
-    public void update() {
-        QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - Tournaments\n(" + FModel.getQuest().getRank() + ")");
+    @Override
+    protected String getGameType() {
+        return "Tournaments";
     }
 
     @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        // TODO Auto-generated method stub
-        return false;
+    public void onUpdate() {
     }
 }

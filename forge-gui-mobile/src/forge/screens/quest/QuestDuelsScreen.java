@@ -11,16 +11,11 @@ import forge.interfaces.ICheckBox;
 import forge.interfaces.IComboBox;
 import forge.model.FModel;
 import forge.quest.QuestEventDuel;
-import forge.quest.QuestUtil;
-import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 
-public class QuestDuelsScreen extends LaunchScreen {
-    private static final float PADDING = FOptionPane.PADDING;
-
+public class QuestDuelsScreen extends QuestLaunchScreen {
     private final FComboBox<String> cbxPet = add(new FComboBox<String>());
     private final FCheckBox cbCharm = add(new FCheckBox("Use Charm of Vigor"));
     private final FCheckBox cbPlant = add(new FCheckBox("Summon Plant"));
@@ -42,12 +37,7 @@ public class QuestDuelsScreen extends LaunchScreen {
     private final FLabel btnRandomOpponent = add(new FLabel.ButtonBuilder().text("Random Duel").font(FSkinFont.get(16)).build());
 
     public QuestDuelsScreen() {
-        super("Quest Duels", QuestMenu.getMenu());
-    }
-
-    @Override
-    public void onActivate() {
-        update();
+        super();
     }
 
     @Override
@@ -62,11 +52,6 @@ public class QuestDuelsScreen extends LaunchScreen {
         lblNextChallengeInWins.setBounds(x, y, w, lblCurrentDeck.getHeight());
         y += lblCurrentDeck.getHeight() + PADDING / 2;
         pnlDuels.setBounds(x, y, w, height - y);
-    }
-
-    @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        return false;
     }
 
     public IButton getBtnRandomOpponent() {
@@ -97,10 +82,13 @@ public class QuestDuelsScreen extends LaunchScreen {
         return lblZep;
     }
 
-    public void update() {
-        QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - Duels\n(" + FModel.getQuest().getRank() + ")");
+    @Override
+    protected String getGameType() {
+        return "Duels";
+    }
 
+    @Override
+    public void onUpdate() {
         pnlDuels.clear();
 
         List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
