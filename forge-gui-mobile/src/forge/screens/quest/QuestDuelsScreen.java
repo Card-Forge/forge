@@ -13,6 +13,8 @@ import forge.model.FModel;
 import forge.quest.QuestEventDuel;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {
@@ -38,6 +40,12 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
 
     public QuestDuelsScreen() {
         super();
+        pnlDuels.setActivateHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                startMatch();
+            }
+        });
     }
 
     @Override

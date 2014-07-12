@@ -13,6 +13,9 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestUtil;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;
@@ -68,6 +71,9 @@ class QuestEventPanel extends FDisplayObject {
     @Override
     public boolean tap(float x, float y, int count) {
         setSelected(true);
+        if (count == 2 && container.activateHandler != null) {
+            container.activateHandler.handleEvent(new FEvent(this, FEventType.ACTIVATE));
+        }
         return true;
     }
 
@@ -110,9 +116,14 @@ class QuestEventPanel extends FDisplayObject {
 
     static class Container extends FScrollPane {
         private QuestEventPanel selectedPanel;
+        private FEventHandler activateHandler;
 
         public QuestEventPanel getSelectedPanel() {
             return selectedPanel;
+        }
+
+        public void setActivateHandler(FEventHandler activateHandler0) {
+            activateHandler = activateHandler0;
         }
 
         @Override
