@@ -1,5 +1,7 @@
 package forge.screens.quest;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
@@ -8,6 +10,7 @@ import forge.interfaces.IButton;
 import forge.interfaces.ICheckBox;
 import forge.interfaces.IComboBox;
 import forge.model.FModel;
+import forge.quest.QuestEventDuel;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FCheckBox;
@@ -34,6 +37,8 @@ public class QuestDuelsScreen extends LaunchScreen {
         .text("Next challenge in wins hasn't been set yet.").align(HAlignment.CENTER).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
+    private final QuestEventPanel.Container pnlDuels = add(new QuestEventPanel.Container());
+
     private final FLabel btnRandomOpponent = add(new FLabel.ButtonBuilder().text("Random Duel").font(FSkinFont.get(16)).build());
 
     public QuestDuelsScreen() {
@@ -44,6 +49,9 @@ public class QuestDuelsScreen extends LaunchScreen {
     public void onActivate() {
         QuestUtil.updateQuestView(QuestMenu.getMenu());
         setHeaderCaption(FModel.getQuest().getName() + " - Duels\n(" + FModel.getQuest().getRank() + ")");
+        if (pnlDuels.getChildCount() == 0) {
+            update(); //update if duels list hasn't been populated yet
+        }
     }
 
     @Override
@@ -57,6 +65,7 @@ public class QuestDuelsScreen extends LaunchScreen {
         y += lblCurrentDeck.getHeight();
         lblNextChallengeInWins.setBounds(x, y, w, lblCurrentDeck.getHeight());
         y += lblCurrentDeck.getHeight() + PADDING / 2;
+        pnlDuels.setBounds(x, y, w, height - y);
     }
 
     @Override
@@ -90,5 +99,18 @@ public class QuestDuelsScreen extends LaunchScreen {
 
     public IButton getLblZep() {
         return lblZep;
+    }
+
+    public void update() {
+        pnlDuels.clear();
+
+        List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
+        if (duels != null) {
+            for (QuestEventDuel duel : duels) {
+                pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
+            }
+        }
+
+        pnlDuels.revalidate();
     }
 }
