@@ -111,6 +111,16 @@ class QuestEventPanel extends FDisplayObject {
     static class Container extends FScrollPane {
         private QuestEventPanel selectedPanel;
 
+        public QuestEventPanel getSelectedPanel() {
+            return selectedPanel;
+        }
+
+        @Override
+        public void clear() {
+            super.clear();
+            selectedPanel = null;
+        }
+
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             int panelCount = getChildCount();

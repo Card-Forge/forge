@@ -47,11 +47,7 @@ public class QuestDuelsScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - Duels\n(" + FModel.getQuest().getRank() + ")");
-        if (pnlDuels.getChildCount() == 0) {
-            update(); //update if duels list hasn't been populated yet
-        }
+        update();
     }
 
     @Override
@@ -102,6 +98,9 @@ public class QuestDuelsScreen extends LaunchScreen {
     }
 
     public void update() {
+        QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Duels\n(" + FModel.getQuest().getRank() + ")");
+
         pnlDuels.clear();
 
         List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();

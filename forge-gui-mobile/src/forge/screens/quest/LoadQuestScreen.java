@@ -167,8 +167,6 @@ public class LoadQuestScreen extends FScreen {
         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST,
                 lstQuests.getSelectedQuest().getName() + ".dat");
         FModel.getQuestPreferences().save();
-
-        Forge.back();
         QuestMenu.launchQuestMode();
     }
 
