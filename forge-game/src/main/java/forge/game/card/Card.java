@@ -8312,10 +8312,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (source.isSpell() && !source.isColorless()) {
                         return true;
                     }
-                } else if (kw.equals("Protection from all colors")) { // Spectra Ward
-                    if (!source.isColorless() && !source.isAura()) {
-                        return true;
-                    }
                 } else if (kw.equals("Protection from Dragons")) {
                     if (source.isType("Dragon")) {
                         return true;

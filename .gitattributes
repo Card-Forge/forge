@@ -12537,7 +12537,6 @@ forge-gui/res/cardsfolder/s/spearpoint_oread.txt -text
 forge-gui/res/cardsfolder/s/species_gorger.txt -text
 forge-gui/res/cardsfolder/s/specters_shroud.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/specters_wail.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/s/spectra_ward.txt -text
 forge-gui/res/cardsfolder/s/spectral_bears.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spectral_cloak.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/spectral_flight.txt -text
