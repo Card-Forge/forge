@@ -24,7 +24,7 @@ public class Utils {
 
     //round to nearest int to reduce floating point display issues
     //reduce if either would take up too large a percentage of the screen to prevent layouts not working
-    private static final float MIN_FINGERS_WIDE = 5;//ensure screen considered to be at least 5 "fingers" wide
+    private static final float MIN_FINGERS_WIDE = 5; //ensure screen considered to be at least 5 "fingers" wide
     private static final float MIN_FINGERS_TALL = MIN_FINGERS_WIDE * BASE_HEIGHT / BASE_WIDTH; //ensure screen tall enough based on fingers wide and base ratio
 
     public static final float AVG_FINGER_WIDTH = Math.round(Math.min(cmToPixelsX(AVG_FINGER_SIZE_CM), SCREEN_WIDTH / MIN_FINGERS_WIDE));
