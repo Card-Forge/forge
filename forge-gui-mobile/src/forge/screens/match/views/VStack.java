@@ -228,6 +228,12 @@ public class VStack extends FDropDown {
         }
 
         @Override
+        public boolean longPress(float x, float y) {
+            CardZoom.show(stackInstance.getSourceCard());
+            return true;
+        }
+
+        @Override
         public void draw(Graphics g) {
             float w = getWidth();
             float h = getHeight();
