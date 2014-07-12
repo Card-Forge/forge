@@ -15,12 +15,13 @@ import forge.assets.FSkinImage;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOptionPane;
 import forge.util.Utils;
 
 public abstract class LaunchScreen extends FScreen {
-    private static final float IMAGE_HEIGHT = FSkinImage.BTN_START_UP.getNearestHQHeight(Utils.AVG_FINGER_HEIGHT * 2);
-    private static final float IMAGE_WIDTH = FSkinImage.BTN_START_UP.getWidth() * IMAGE_HEIGHT / FSkinImage.BTN_START_UP.getHeight();
-    private static final float PADDING = IMAGE_HEIGHT * 0.025f;
+    private static final float MAX_START_BUTTON_HEIGHT = 2 * Utils.AVG_FINGER_HEIGHT;
+    private static final float START_BUTTON_RATIO = FSkinImage.BTN_START_UP.getWidth() / FSkinImage.BTN_START_UP.getHeight();
+    private static final float PADDING = FOptionPane.PADDING;
 
     protected final StartButton btnStart = add(new StartButton());
     protected boolean creatingMatch;
@@ -34,8 +35,15 @@ public abstract class LaunchScreen extends FScreen {
 
     @Override
     protected final void doLayout(float startY, float width, float height) {
-        btnStart.setBounds((width - IMAGE_WIDTH) / 2, height - IMAGE_HEIGHT - PADDING, IMAGE_WIDTH, IMAGE_HEIGHT);
-        doLayoutAboveBtnStart(startY, width, height - IMAGE_HEIGHT - 2 * PADDING);
+        float buttonWidth = width - 2 * PADDING;
+        float buttonHeight = buttonWidth / START_BUTTON_RATIO;
+        if (buttonHeight > MAX_START_BUTTON_HEIGHT) {
+            buttonHeight = MAX_START_BUTTON_HEIGHT;
+            buttonWidth = buttonHeight * START_BUTTON_RATIO;
+        }
+        btnStart.setBounds((width - buttonWidth) / 2, height - buttonHeight - PADDING, buttonWidth, buttonHeight);
+
+        doLayoutAboveBtnStart(startY, width, height - buttonHeight - 2 * PADDING);
     }
 
     protected abstract void doLayoutAboveBtnStart(float startY, float width, float height);
