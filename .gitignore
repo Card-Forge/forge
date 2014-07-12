@@ -44,6 +44,7 @@ forge-gui-android/res/values/bin
 forge-gui-android/res/values/gen
 forge-gui-android/res/values/target
 forge-gui-android/target
+forge-gui-desktop/*.iml
 forge-gui-desktop/target
 forge-gui-mobile-dev/bin
 forge-gui-mobile-dev/res

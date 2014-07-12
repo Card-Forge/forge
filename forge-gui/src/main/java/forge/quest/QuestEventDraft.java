@@ -17,27 +17,27 @@
  */
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Function;
-
 import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
+import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -48,7 +48,27 @@ import forge.util.storage.IStorage;
  * unique event types: battles, quests, and others.
  */
 public class QuestEventDraft {
-
+	
+	public static class QuestDraftPrizes {
+		
+		public int credits;
+		public List<BoosterPack> boosterPacks;
+		public List<PaperCard> individualCards;
+		
+		public boolean hasCredits() {
+			return credits > 0;
+		}
+		
+		public boolean hasBoosterPacks() {
+			return boosterPacks != null && boosterPacks.size() > 0;
+		}
+		
+		public boolean hasIndividualCards() {
+			return individualCards != null && individualCards.size() > 0;
+		}
+		
+	}
+	
     public static final String UNDETERMINED = "quest_draft_undetermined_place";
     public static final String HUMAN = "quest_draft_human_place";
     public static final String DECK_NAME = "Tournament Deck";
@@ -149,7 +169,58 @@ public class QuestEventDraft {
     public void addWin() {
         age--;
     }
-    
+	
+	public void saveToRegularDraft() {
+		String tournamentName = FModel.getQuest().getName() + " Tournament Deck " + new SimpleDateFormat("EEE d MMM yyyy HH-mm-ss").format(new Date());
+		DeckGroup original = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
+		DeckGroup output = new DeckGroup(tournamentName);
+		for (Deck aiDeck : original.getAiDecks()) {
+			output.addAiDeck(copyDeck(aiDeck));
+		}
+		output.setHumanDeck(copyDeck(original.getHumanDeck(), tournamentName));
+		FModel.getDecks().getDraft().add(output);
+	}
+	
+	public void addToQuestDecks() {
+		String deckName = "Tournament Deck " + new SimpleDateFormat("EEE d MMM yyyy HH-mm-ss").format(new Date());
+
+		Deck tournamentDeck = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME).getHumanDeck();
+		Deck deck = new Deck(deckName);
+
+		FModel.getQuest().getCards().addAllCards(tournamentDeck.getAllCardsInASinglePool().toFlatList());
+
+		if (tournamentDeck.get(DeckSection.Main).countAll() > 0) {
+			deck.getOrCreate(DeckSection.Main).addAll(tournamentDeck.get(DeckSection.Main));
+			FModel.getQuest().getMyDecks().add(deck);
+		}
+
+		FModel.getQuest().getDraftDecks().delete(QuestEventDraft.DECK_NAME);
+		FModel.getQuest().getAchievements().endCurrentTournament(FModel.getQuest().getAchievements().getCurrentDraft().getPlayerPlacement());
+		FModel.getQuest().save();
+	}
+
+	private Deck copyDeck(final Deck deck) {
+
+		Deck outputDeck = new Deck(deck.getName());
+
+		outputDeck.putSection(DeckSection.Main, new CardPool(deck.get(DeckSection.Main)));
+		outputDeck.putSection(DeckSection.Sideboard, new CardPool(deck.get(DeckSection.Sideboard)));
+
+		return outputDeck;
+
+	}
+
+	private Deck copyDeck(final Deck deck, final String deckName) {
+
+		Deck outputDeck = new Deck(deckName);
+
+		outputDeck.putSection(DeckSection.Main, new CardPool(deck.get(DeckSection.Main)));
+		outputDeck.putSection(DeckSection.Sideboard, new CardPool(deck.get(DeckSection.Sideboard)));
+
+		return outputDeck;
+
+	}
+	
     public int getHumanLatestStanding() {
         int humanIndex = 0;
         for (int i = getStandings().length - 1; i >= 0; i--) {
@@ -242,12 +313,9 @@ public class QuestEventDraft {
     }
     
     /**
-     * Generates the prizes for the player in an Object array.
-     * Index 0: int - credits
-     * Index 1: 
-     * Index 2: ArrayList<PaperCard> - single cards
+     * Generates the prizes for the player and saves them to the current quest.
      */
-    public Object[] getPrizes() {
+    public QuestDraftPrizes collectPrizes() {
         
         int place = getPlayerPlacement();
         int prizePool = entryFee * 9;
@@ -270,23 +338,49 @@ public class QuestEventDraft {
         }
         
         prizePool -= boosterPrices * 8;
+
+		QuestDraftPrizes prizes = null;
         
         switch (place) {
             case 1:
-                return generateFirstPlacePrizes(prizePool);
+				prizes = generateFirstPlacePrizes(prizePool);
+				break;
             case 2:
-                return generateSecondPlacePrizes(prizePool);
+				prizes = generateSecondPlacePrizes(prizePool);
+				break;
             case 3:
-                return generateThirdPlacePrizes(prizePool);
+				prizes = generateThirdPlacePrizes(prizePool);
+				break;
             case 4:
-                return generateFourthPlacePrizes(prizePool);
+				prizes = generateFourthPlacePrizes(prizePool);
+				break;
         }
+		
+		if (prizes != null) {
+
+			if (prizes.hasCredits()) {
+				FModel.getQuest().getAssets().addCredits(prizes.credits);
+			}
+			
+			if (prizes.hasBoosterPacks()) {
+				for (BoosterPack boosterPack : prizes.boosterPacks) {
+					FModel.getQuest().getCards().addAllCards(boosterPack.getCards());
+				}
+			}
+			
+			if (prizes.hasIndividualCards()) {
+				FModel.getQuest().getCards().addAllCards(prizes.individualCards);
+			}
+			
+			return prizes;
+			
+		}
         
         return null;
         
     }
     
-    private Object[] generateFirstPlacePrizes(final int prizePool) {
+    private QuestDraftPrizes generateFirstPlacePrizes(final int prizePool) {
         
         int credits = 2 * (prizePool / 3); //First place gets 2/3 the total prize pool
         List<PaperCard> cards = new ArrayList<PaperCard>();
@@ -307,12 +401,17 @@ public class QuestEventDraft {
         }
         
         credits = (credits / 2) + creditsForPacks; //Add the leftover credits + 50%
-        
-        return new Object[] { credits, boosters, cards };
+
+		QuestDraftPrizes prizes = new QuestDraftPrizes();
+		prizes.credits = credits;
+		prizes.boosterPacks = boosters;
+		prizes.individualCards = cards;
+		
+        return prizes;
         
     }
     
-    private Object[] generateSecondPlacePrizes(final int prizePool) {
+    private QuestDraftPrizes generateSecondPlacePrizes(final int prizePool) {
         
         int credits = prizePool / 3; //Second place gets 1/3 the total prize pool
         List<PaperCard> cards = new ArrayList<PaperCard>();
@@ -333,12 +432,17 @@ public class QuestEventDraft {
         }
         
         credits = (credits / 4) + creditsForPacks; //Add the leftover credits + 25%
-        
-        return new Object[] { credits, boosters, cards };
+
+		QuestDraftPrizes prizes = new QuestDraftPrizes();
+		prizes.credits = credits;
+		prizes.boosterPacks = boosters;
+		prizes.individualCards = cards;
+
+		return prizes;
         
     }
     
-    private Object[] generateThirdPlacePrizes(final int prizePool) {
+    private QuestDraftPrizes generateThirdPlacePrizes(final int prizePool) {
         
         int credits = 0;
         List<PaperCard> cards = new ArrayList<PaperCard>();
@@ -347,19 +451,28 @@ public class QuestEventDraft {
         
         List<BoosterPack> boosters = new ArrayList<BoosterPack>();
         boosters.add(getBoosterPack());
-        
-        return new Object[] { credits, boosters, cards };
+
+		QuestDraftPrizes prizes = new QuestDraftPrizes();
+		prizes.credits = credits;
+		prizes.boosterPacks = boosters;
+		prizes.individualCards = cards;
+
+		return prizes;
         
     }
     
-    private Object[] generateFourthPlacePrizes(final int prizePool) {
+    private QuestDraftPrizes generateFourthPlacePrizes(final int prizePool) {
         
         int credits = 0;
         List<PaperCard> cards = new ArrayList<PaperCard>();
         
         cards.add(getPromoCard());
-        
-        return new Object[] { credits, null, cards };
+
+		QuestDraftPrizes prizes = new QuestDraftPrizes();
+		prizes.credits = credits;
+		prizes.individualCards = cards;
+
+		return prizes;
         
     }
     
@@ -379,7 +492,7 @@ public class QuestEventDraft {
         }
 
         
-        CardInSet randomCard = cardsInEdition.get((int) (Math.random() * cardsInEdition.size()));
+        CardInSet randomCard;
         PaperCard promo = null;
         
         int attempts = 25;
@@ -411,7 +524,7 @@ public class QuestEventDraft {
     
     private int getBoosterPrice(BoosterPack booster) {
         
-        int value = 0;
+        int value;
         String boosterName = booster.getName() + " Booster Pack";
         
         if (MAP_PRICES.containsKey(boosterName)) {
@@ -516,6 +629,17 @@ public class QuestEventDraft {
         
     }
     
+	public boolean canEnter() {
+		long creditsAvailable = FModel.getQuest().getAssets().getCredits();
+		return creditsAvailable < getEntryFee();
+	}
+	
+	public BoosterDraft enter() {
+		FModel.getQuest().getAchievements().setCurrentDraft(this);
+		FModel.getQuest().getAssets().subtractCredits(getEntryFee());
+		return BoosterDraft.createDraft(LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration());
+	}
+	
     public boolean isStarted() {
         return started;
     }

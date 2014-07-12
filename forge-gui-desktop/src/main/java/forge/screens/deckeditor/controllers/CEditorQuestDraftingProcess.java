@@ -200,22 +200,20 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      * </p>
      */
     private void saveDraft() {
-        
-        String s = "Tournament Deck";
 
         saved = true;
 
         // Construct computer's decks and save draft
         final Deck[] computer = this.boosterDraft.getDecks();
 
-        final DeckGroup finishedDraft = new DeckGroup(s);
-        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
+        final DeckGroup finishedDraft = new DeckGroup(QuestEventDraft.DECK_NAME);
+        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(QuestEventDraft.DECK_NAME));
         finishedDraft.addAiDecks(computer);
 
         CSubmenuQuestDraft.SINGLETON_INSTANCE.update();
         FScreen.DRAFTING_PROCESS.close();
         
-        draftQuest.setCompletedDraft(finishedDraft, s);
+        draftQuest.setCompletedDraft(finishedDraft);
         
     }
 

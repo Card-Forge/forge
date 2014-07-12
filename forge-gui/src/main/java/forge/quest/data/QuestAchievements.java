@@ -1,11 +1,11 @@
 package forge.quest.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.model.FModel;
 import forge.quest.QuestEventDraft;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -316,6 +316,7 @@ public class QuestAchievements {
         if (draftTokens > 0) {
             draftTokens--;
             draftsToGenerate++;
+			FModel.getQuest().save();
         }
     }
 

@@ -1,11 +1,10 @@
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.FThreads;
 import forge.GuiBase;
+import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -13,7 +12,10 @@ import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestEventDraft;
+import forge.util.storage.IStorage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestDraftUtils {
     private static List<DraftMatchup> matchups = new ArrayList<DraftMatchup>();
@@ -28,6 +30,34 @@ public class QuestDraftUtils {
         }
         GuiBase.getInterface().continueMatch(matchInProgress ? lastGame.getMatch() : null);
     }
+	
+	public static void completeDraft(DeckGroup finishedDraft) {
+
+		List<Deck> aiDecks = new ArrayList<Deck>(finishedDraft.getAiDecks());
+		finishedDraft.getAiDecks().clear();
+
+		for (int i = 0; i < aiDecks.size(); i++) {
+			Deck oldDeck = aiDecks.get(i);
+			Deck namedDeck = new Deck("AI Deck " + i);
+			namedDeck.putSection(DeckSection.Main, oldDeck.get(DeckSection.Main));
+			namedDeck.putSection(DeckSection.Sideboard, oldDeck.get(DeckSection.Sideboard));
+			finishedDraft.getAiDecks().add(namedDeck);
+		}
+
+		IStorage<DeckGroup> draft = FModel.getQuest().getDraftDecks();
+		draft.add(finishedDraft);
+
+		FModel.getQuest().save();
+		
+	}
+	
+	public static String getDeckLegality() {
+		String message = GameType.QuestDraft.getDecksFormat().getDeckConformanceProblem(FModel.getQuest().getAssets().getDraftDeckStorage().get(QuestEventDraft.DECK_NAME).getHumanDeck());
+		if (message != null && FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+			return message;
+		}
+		return null;
+	}
 
     public static void startNextMatch() {
         
