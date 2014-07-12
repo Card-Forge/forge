@@ -700,7 +700,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected boolean canAddCards() {
-            return false;
+            return !cardManager.isInfinite();
         }
 
         protected String getItemManagerCaption() {
@@ -726,9 +726,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void refresh() {
-            if (!isVisible()) {
+            if (!isVisible() && cardManager.isInfinite()) {
                 needRefreshWhenShown = true;
-                return; //delay refreshing while hidden
+                return; //delay refreshing while hidden for infinite card managers
             }
             switch (parentScreen.getEditorType()) {
             case Archenemy:
@@ -754,6 +754,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void onCardActivated(PaperCard card) {
+            if (!cardManager.isInfinite()) {
+                removeCard(card);
+            }
             parentScreen.getMainDeckPage().addCard(card);
         }
 
@@ -764,6 +767,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 public void run(Integer result) {
                     if (result == null || result <= 0) { return; }
 
+                    if (!cardManager.isInfinite()) {
+                        removeCard(card, result);
+                    }
                     parentScreen.getMainDeckPage().addCard(card, result);
                 }
             });
@@ -772,7 +778,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
-    
+
+                        if (!cardManager.isInfinite()) {
+                            removeCard(card, result);
+                        }
                         parentScreen.getSideboardPage().addCard(card, result);
                     }
                 });
@@ -784,6 +793,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
 
+                            if (!cardManager.isInfinite()) {
+                                removeCard(card);
+                            }
                             CardPool newPool = new CardPool();
                             newPool.add(card);
                             parentScreen.getCommanderPage().setCards(newPool);
