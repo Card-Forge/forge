@@ -127,7 +127,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
                 }
             }
             
-            String placement = QuestEventDraft.getPlacementString(draft.getPlayerPlacement());
+            String placement = draft.getPlacementString();
             
             QuestEventDraft.QuestDraftPrizes prizes = draft.collectPrizes();
             

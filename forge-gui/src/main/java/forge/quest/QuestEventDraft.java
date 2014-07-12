@@ -628,6 +628,34 @@ public class QuestEventDraft {
         return -1;
         
     }
+
+    public String getPlacementString() {
+        
+        int place = getPlayerPlacement();
+
+        String output;
+
+        switch (place) {
+            case 1:
+                output = "first";
+                break;
+            case 2:
+                output = "second";
+                break;
+            case 3:
+                output = "third";
+                break;
+            case 4:
+                output = "fourth";
+                break;
+            default:
+                output = "ERROR";
+                break;
+        }
+
+        return output;
+
+    }
     
 	public boolean canEnter() {
 		long creditsAvailable = FModel.getQuest().getAssets().getCredits();
@@ -656,32 +684,6 @@ public class QuestEventDraft {
     @Override
     public String toString() {
         return title;
-    }
-    
-    public static String getPlacementString(int place) {
-        
-        String output;
-        
-        switch (place) {
-            case 1:
-                output = "first";
-                break;
-            case 2:
-                output = "second";
-                break;
-            case 3:
-                output = "third";
-                break;
-            case 4:
-                output = "fourth";
-                break;
-            default:
-                output = "ERROR";
-                break;
-        }
-        
-        return output;
-        
     }
     
     /**
