@@ -11,14 +11,18 @@ public class QuestChallengesScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        QuestUtil.updateQuestView(QuestMenu.getMenu());
-        setHeaderCaption(FModel.getQuest().getName() + " - Challenges\n(" + FModel.getQuest().getRank() + ")");
+        update();
     }
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
         // TODO Auto-generated method stub
         
+    }
+
+    public void update() {
+        QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Challenges\n(" + FModel.getQuest().getRank() + ")");
     }
 
     @Override

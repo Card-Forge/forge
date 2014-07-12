@@ -12,12 +12,14 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.IVQuestStats;
+import forge.quest.QuestUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.util.ThreadUtil;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestMenu questMenu = new QuestMenu();
@@ -69,13 +71,39 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
+            ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
+                @Override
+                public void run() {
+                    QuestUtil.chooseAndUnlockEdition();
+                    updateCurrentQuestScreen();
+                }
+            });
         }
     });
     private static final FMenuItem travelItem = new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
+            ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
+                @Override
+                public void run() {
+                    QuestUtil.travelWorld();
+                    updateCurrentQuestScreen();
+                }
+            });
         }
     });
+
+    private static void updateCurrentQuestScreen() {
+        if (duelsItem.isSelected()) {
+            duelsScreen.update();
+        }
+        else if (challengesItem.isSelected()) {
+            challengesScreen.update();
+        }
+        else if (tournamentsItem.isSelected()) {
+            tournamentsScreen.update();
+        }
+    }
 
     public static QuestMenu getMenu() {
         return questMenu;
