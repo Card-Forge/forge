@@ -5,14 +5,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Utils {
-    private static final float ppcX = Gdx.graphics.getPpcX();
-    private static final float ppcY = Gdx.graphics.getPpcY();
+    private static final float ppcX = Gdx.graphics.getPpcX(), ppcY = Gdx.graphics.getPpcY();
+    public static final float BASE_WIDTH = 320f, BASE_HEIGHT = 480f;
+
     private static final float AVG_FINGER_SIZE_CM = 1.1f;
+
+    //Uncomment below and comment out above to specify AVG_FINGER_WIDTH and AVG_FINGER_HEIGHT
+    //private static final float ppcX = 169f / AVG_FINGER_SIZE_CM, ppcY = 237f / AVG_FINGER_SIZE_CM;
+    //public static final float BASE_WIDTH = 540f, BASE_HEIGHT = 960f;
+
     public static final float AVG_FINGER_WIDTH = Math.round(cmToPixelsX(AVG_FINGER_SIZE_CM)); //round to nearest int to reduce floating point display issues
     public static final float AVG_FINGER_HEIGHT = Math.round(cmToPixelsY(AVG_FINGER_SIZE_CM));
 
-    public static final float BASE_WIDTH = 320f;
-    public static final float BASE_HEIGHT = 480f;
     public static final float WIDTH_RATIO = ((float)Gdx.graphics.getWidth() / BASE_WIDTH);
     public static final float HEIGHT_RATIO = ((float)Gdx.graphics.getHeight() / BASE_HEIGHT);
     public static final float MIN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO);
