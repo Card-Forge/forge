@@ -272,6 +272,7 @@ public class DualListBox<T> extends FDialog {
         public abstract FSkinFont getDefaultFont();
         public abstract float getItemHeight();
         public abstract boolean tap(T value, float x, float y, int count);
+        public abstract boolean longPress(T value, float x, float y);
         public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
     }
     private class DefaultItemRenderer extends ItemRenderer {
@@ -287,6 +288,11 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
+            return false;
+        }
+
+        @Override
+        public boolean longPress(T value, float x, float y) {
             return false;
         }
 
@@ -319,6 +325,12 @@ public class DualListBox<T> extends FDialog {
         }
 
         @Override
+        public boolean longPress(T value, float x, float y) {
+            CardZoom.show(((SpellAbility)value).getHostCard());
+            return true;
+        }
+
+        @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             SpellAbility spellAbility = (SpellAbility)value;
             CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
@@ -344,6 +356,12 @@ public class DualListBox<T> extends FDialog {
         @Override
         public boolean tap(T value, float x, float y, int count) {
             return CardRenderer.cardListItemTap((Card)value, x, y, count);
+        }
+
+        @Override
+        public boolean longPress(T value, float x, float y) {
+            CardZoom.show((Card)value);
+            return true;
         }
 
         @Override
@@ -375,6 +393,11 @@ public class DualListBox<T> extends FDialog {
                         dblTapCommand.handleEvent(new FEvent(ChoiceList.this, FEventType.ACTIVATE, index));
                     }
                     return true;
+                }
+
+                @Override
+                public boolean showMenu(Integer index, T value, FDisplayObject owner, float x, float y) {
+                    return renderer.longPress(value, x, y);
                 }
 
                 @Override
