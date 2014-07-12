@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 
+import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -107,5 +108,15 @@ public class ItemColumn {
     @Override
     public String toString() {
         return config.getLongName();
+    }
+
+    public static void addColOverride(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides, ColumnDef colDef) {
+        ItemColumnConfig colConfig = config.getCols().get(colDef);
+        addColOverride(config, colOverrides, colDef, colConfig.getFnSort(), colConfig.getFnDisplay());
+    }
+    public static void addColOverride(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides, ColumnDef colDef,
+            Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
+            Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay0) {
+        colOverrides.put(colDef, new ItemColumn(config.getCols().get(colDef), fnSort0, fnDisplay0));
     }
 }

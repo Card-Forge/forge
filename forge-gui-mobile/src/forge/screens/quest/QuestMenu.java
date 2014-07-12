@@ -50,6 +50,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             Forge.openScreen(tournamentsScreen);
         }
     });
+    private static final FMenuItem decksItem = new FMenuItem("Quest Decks", FSkinImage.DECKLIST, new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            Forge.openScreen(decksScreen);
+        }
+    });
     private static final FMenuItem spellShopItem = new FMenuItem("Spell Shop", FSkinImage.QUEST_BOOK, new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
@@ -138,17 +144,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         addItem(duelsItem); duelsItem.setSelected(currentScreen == duelsScreen);
         addItem(challengesItem); challengesItem.setSelected(currentScreen == challengesScreen);
         addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
+        addItem(decksItem); decksItem.setSelected(currentScreen == decksScreen);
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
         addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
         addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(unlockSetsItem);
         addItem(travelItem);
-        addItem(new FMenuItem("Change Deck", FSkinImage.DECKLIST, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.openScreen(decksScreen);
-            }
-        }));
         addItem(new FMenuItem("New Quest", FSkinImage.NEW, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

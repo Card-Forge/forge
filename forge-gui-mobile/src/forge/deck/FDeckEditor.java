@@ -2,6 +2,7 @@ package forge.deck;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,8 @@ import forge.card.CardZoom;
 import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
+import forge.itemmanager.ColumnDef;
+import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
@@ -33,6 +36,7 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -91,6 +95,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             public Deck get() {
                 return new Deck();
             }
+        })),
+        Quest(new DeckController<Deck>(FModel.getQuest().getMyDecks(), new Supplier<Deck>() {
+            @Override
+            public Deck get() {
+                return new Deck();
+            }
         }));
 
         private final DeckController<? extends DeckBase> controller;
@@ -140,6 +150,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.PLANAR_POOL),
                     new DeckSectionPage(DeckSection.Planes, ItemManagerConfig.PLANAR_DECK_EDITOR)
+            };
+        case Quest:
+            return new DeckEditorPage[] {
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, "Inventory", FSkinImage.QUEST_BOX),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
         }
     }
@@ -364,6 +380,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Constructed:
         case Planechase:
         case Archenemy:
+        case Quest:
         default:
             if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
                 return CardLimit.Default;
@@ -439,6 +456,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
+    protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
+        return null;
+    }
+
     protected class DeckHeader extends FContainer {
         private DeckHeader() {
             setHeight(HEADER_HEIGHT);
@@ -475,11 +496,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static abstract class CardManagerPage extends DeckEditorPage {
+        private final ItemManagerConfig config;
         protected final CardManager cardManager = add(new CardManager(false));
 
-        protected CardManagerPage(ItemManagerConfig config, String caption0, FImage icon0) {
+        protected CardManagerPage(ItemManagerConfig config0, String caption0, FImage icon0) {
             super(caption0, icon0);
-            cardManager.setup(config);
+            config = config0;
             cardManager.setItemActivateHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -498,6 +520,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }));
                 }
             });
+        }
+
+        protected void initialize() {
+            cardManager.setup(config, parentScreen.getColOverrides(config));
         }
 
         protected boolean canAddCards() {
@@ -667,6 +693,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (initialized) { return; } //prevent initializing more than once if deck changes
             initialized = true;
 
+            super.initialize();
             cardManager.setCaption(getItemManagerCaption());
             refresh();
         }
@@ -709,6 +736,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Planechase:
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class), true);
+                break;
+            case Quest:
+                final ItemPool<PaperCard> cardpool = new ItemPool<PaperCard>(PaperCard.class);
+                cardpool.addAll(FModel.getQuest().getCards().getCardpool());
+                // remove bottom cards that are in the deck from the card pool
+                cardpool.removeAll(parentScreen.getDeck().getMain());
+                // remove sideboard cards from the catalog
+                cardpool.removeAll(parentScreen.getDeck().getOrCreate(DeckSection.Sideboard));
+                cardManager.setPool(cardpool);
                 break;
             default:
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
@@ -811,6 +847,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void initialize() {
+            super.initialize();
             cardManager.setPool(parentScreen.getDeck().getOrCreate(deckSection));
             updateCaption();
         }
@@ -1226,6 +1263,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Sealed:
                 DeckPreferences.setSealedDeck(deckStr);
+                break;
+            case Quest:
+                FModel.getQuestPreferences().setPref(QPref.CURRENT_DECK, model.toString());
+                FModel.getQuest().save();
                 break;
             default:
                 break;

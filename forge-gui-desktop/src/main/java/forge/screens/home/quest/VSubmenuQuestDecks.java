@@ -38,7 +38,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
 
     private final DeckManager lstDecks = new DeckManager(GameType.Quest);
 
-    private final JLabel lblInfo = new FLabel.Builder()
+    private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
         .text("Build or select a deck").build();
 
