@@ -53,7 +53,7 @@ public class QuestDecksScreen extends FScreen {
     private boolean needRefreshOnActivate = true;
 
     public QuestDecksScreen() {
-        super("Quest Decks", QuestMenu.getMenu());
+        super("", QuestMenu.getMenu());
 
         lstDecks.setup(ItemManagerConfig.QUEST_DECKS);
         lstDecks.setItemActivateHandler(new FEventHandler() {
@@ -111,6 +111,9 @@ public class QuestDecksScreen extends FScreen {
 
     @Override
     public void onActivate() {
+        QuestUtil.updateQuestView(QuestMenu.getMenu());
+        setHeaderCaption(FModel.getQuest().getName() + " - Decks\n(" + FModel.getQuest().getRank() + ")");
+
         if (needRefreshOnActivate) {
             needRefreshOnActivate = false;
             refreshDecks();
