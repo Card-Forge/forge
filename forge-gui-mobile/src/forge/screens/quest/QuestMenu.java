@@ -128,6 +128,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 @Override
                 public void run() {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
+                    duelsScreen.update();
+                    challengesScreen.update();
+                    tournamentsScreen.update();
+                    decksScreen.refreshDecks();
                     Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
                 }
             });
