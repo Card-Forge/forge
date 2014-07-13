@@ -40,7 +40,9 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
                             });
                         }
                     });
+                    return;
                 }
+                creatingMatch = false;
             }
         });
     }
