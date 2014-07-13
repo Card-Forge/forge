@@ -1,0 +1,16 @@
+Name:Avacyn, Guardian Angel
+ManaCost:2 W W W
+Types:Legendary Creature Angel
+PT:5/4
+K:Flying
+K:Vigilance
+A:AB$ ChooseColor | Cost$ 1 W | Defined$ You | SubAbility$ DBEffect | SpellDescription$ Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Name$ Avacyn, Guardian Angel Effect 1 | StaticAbilities$ STPrevent | RememberObjects$ Targeted | Triggers$ OutOfSight | SVars$ ExileSelf
+SVar:OutOfSight:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.ChosenColor | Target$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.
+A:AB$ ChooseColor | Cost$ 5 W W | Defined$ You | SubAbility$ DBEffect2 | SpellDescription$ Prevent all damage that would be dealt to target player this turn by sources of the color of your choice.
+SVar:DBEffect2:DB$ Effect | ValidTgts$ Player | Name$ Avacyn, Guardian Angel Effect 2 | StaticAbilities$ STPrevent2 | AILogic$ Fog | RememberObjects$ Targeted
+SVar:STPrevent2:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.ChosenColor | Target$ Player.IsRemembered | Description$ Prevent all damage that would be dealt to target player this turn by sources of the color of your choice.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_guardian_angel.jpg
