@@ -46,7 +46,7 @@ public class HomeScreen extends FScreen {
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                QuestMenu.launchQuestMode();
+                QuestMenu.launchQuestMode(false);
             }
         }, true);
         addButton("Gauntlets", new FEventHandler() {

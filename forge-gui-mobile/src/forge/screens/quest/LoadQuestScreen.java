@@ -167,7 +167,7 @@ public class LoadQuestScreen extends FScreen {
         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST,
                 lstQuests.getSelectedQuest().getName() + ".dat");
         FModel.getQuestPreferences().save();
-        QuestMenu.launchQuestMode();
+        QuestMenu.launchQuestMode(true);
     }
 
     private void renameQuest(final QuestData quest) {

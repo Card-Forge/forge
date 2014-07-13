@@ -118,7 +118,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private QuestMenu() {
     }
 
-    public static void launchQuestMode() {
+    public static void launchQuestMode(final boolean fromQuestChange) {
         //attempt to load current quest
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -128,11 +128,16 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 @Override
                 public void run() {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
-                    duelsScreen.update();
-                    challengesScreen.update();
-                    tournamentsScreen.update();
-                    decksScreen.refreshDecks();
-                    Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
+                    if (fromQuestChange) {
+                        duelsScreen.update();
+                        challengesScreen.update();
+                        tournamentsScreen.update();
+                        decksScreen.refreshDecks();
+                        Forge.back();
+                    }
+                    else {
+                        Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
+                    }
                 }
             });
             return;

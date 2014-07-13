@@ -536,7 +536,7 @@ public class NewQuestScreen extends FScreen {
                         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
                         FModel.getQuestPreferences().save();
 
-                        QuestMenu.launchQuestMode(); //launch quest mode for new quest
+                        QuestMenu.launchQuestMode(true); //launch quest mode for new quest
                     }
                 });
             }
