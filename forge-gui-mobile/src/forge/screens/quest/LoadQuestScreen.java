@@ -28,6 +28,7 @@ import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.screens.FScreen;
+import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
@@ -167,7 +168,7 @@ public class LoadQuestScreen extends FScreen {
         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST,
                 lstQuests.getSelectedQuest().getName() + ".dat");
         FModel.getQuestPreferences().save();
-        QuestMenu.launchQuestMode(true);
+        QuestMenu.launchQuestMode(LaunchReason.LoadQuest);
     }
 
     private void renameQuest(final QuestData quest) {

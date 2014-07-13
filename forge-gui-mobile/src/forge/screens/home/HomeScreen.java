@@ -10,6 +10,7 @@ import forge.screens.constructed.ConstructedScreen;
 import forge.screens.draft.DraftScreen;
 import forge.screens.gauntlet.GauntletScreen;
 import forge.screens.quest.QuestMenu;
+import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.sealed.SealedScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
@@ -46,7 +47,7 @@ public class HomeScreen extends FScreen {
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                QuestMenu.launchQuestMode(false);
+                QuestMenu.launchQuestMode(LaunchReason.StartQuestMode);
             }
         }, true);
         addButton("Gauntlets", new FEventHandler() {

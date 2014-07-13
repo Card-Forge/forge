@@ -118,7 +118,13 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private QuestMenu() {
     }
 
-    public static void launchQuestMode(final boolean fromQuestChange) {
+    public enum LaunchReason {
+        StartQuestMode,
+        LoadQuest,
+        NewQuest
+    }
+
+    public static void launchQuestMode(final LaunchReason reason) {
         //attempt to load current quest
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -128,15 +134,31 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 @Override
                 public void run() {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
-                    if (fromQuestChange) {
+                    if (reason == LaunchReason.StartQuestMode) {
+                        if (QuestUtil.getCurrentDeck() == null) {
+                            Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default
+                        }
+                        else {
+                            Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
+                        }
+                    }
+                    else {
                         duelsScreen.update();
                         challengesScreen.update();
                         tournamentsScreen.update();
                         decksScreen.refreshDecks();
-                        Forge.back();
-                    }
-                    else {
-                        Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
+                        if (reason == LaunchReason.LoadQuest) {
+                            Forge.back();
+                        }
+                        else {
+                            Forge.back();
+                            if (Forge.getCurrentScreen() instanceof LoadQuestScreen) {
+                                Forge.back(); //remove LoadQuestScreen from screen stack
+                            }
+                            if (Forge.getCurrentScreen() != decksScreen) {
+                                Forge.openScreen(decksScreen); //open deck screen for new quest
+                            }
+                        }
                     }
                 }
             });

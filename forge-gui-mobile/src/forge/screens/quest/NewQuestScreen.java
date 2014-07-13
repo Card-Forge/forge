@@ -35,6 +35,7 @@ import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
+import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
@@ -536,7 +537,7 @@ public class NewQuestScreen extends FScreen {
                         FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
                         FModel.getQuestPreferences().save();
 
-                        QuestMenu.launchQuestMode(true); //launch quest mode for new quest
+                        QuestMenu.launchQuestMode(LaunchReason.NewQuest); //launch quest mode for new quest
                     }
                 });
             }
