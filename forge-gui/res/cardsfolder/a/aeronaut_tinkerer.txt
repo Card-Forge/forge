@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | S
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aeronaut_tinkerer.jpg
+Oracle:Aeronaut Tinkerer has flying as long as you control an artifact. (It can't be blocked except by creatures with flying or reach.)

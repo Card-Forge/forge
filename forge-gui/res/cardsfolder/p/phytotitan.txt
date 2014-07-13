@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:DelTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChange | TriggerDescription$ Return CARDNAME to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | Tapped$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phytotitan.jpg
+Oracle:When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.

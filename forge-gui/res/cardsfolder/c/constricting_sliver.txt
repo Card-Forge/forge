@@ -11,3 +11,4 @@ SVar:ConstrictingTrigReturn:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destin
 SVar:ConstrictingExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constricting_sliver.jpg
+Oracle:Sliver creatures you control have "When this creature enters the battlefield, you may exile target creature an opponent controls until this creature leaves the battlefield."

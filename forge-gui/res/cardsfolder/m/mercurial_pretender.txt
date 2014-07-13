@@ -7,3 +7,4 @@ SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choice
 SVar:DBCopy:DB$ Clone | Defined$ ChosenCard | AddAbilities$ MercurialBounce
 SVar:MercurialBounce:AB$ ChangeZone | Cost$ 2 U U | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercurial_pretender.jpg
+Oracle:You may have Mercurial Pretender enter the battlefield as a copy of any creature you control except it gains "{2}{U}{U}: Return this creature to its owner's hand."

@@ -5,3 +5,4 @@ PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top three cards of your library into your graveyard.
 SVar:TrigMill:DB$ Mill | Cost$ 0 | NumCards$ 3 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_assistant.jpg
+Oracle:When Necromancer's Assistant enters the battlefield, put the top three cards of your library into your graveyard.

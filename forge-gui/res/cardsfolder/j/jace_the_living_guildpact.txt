@@ -8,3 +8,4 @@ A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | ChangeType$ Card | Origin$ H
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_the_living_guildpact.jpg
+Oracle:[+1] Look at the top two cards of your library. Put one of them into your graveyard.\n[-3] Return another target nonland permanent to its owner's hand.\n[-8] Each player shuffles his or her hand and graveyard into his or her library. You draw seven cards.

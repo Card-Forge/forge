@@ -10,3 +10,4 @@ SVar:DrawG:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.Green+YouCtrl | 
 SVar:DrawW:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.White+YouCtrl | ConditionCompare$ GE1
 A:AB$ Draw | Cost$ 5 U U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | NumCards$ 1 | ConditionPresent$ Permanent.Blue+YouCtrl | ConditionCompare$ GE1 | SubAbility$ DrawB | SpellDescription$ Draw a card for each color among permanents you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_ravnica.jpg
+Oracle:Flying\n{5}{U}{U}: Draw a card for each color among permanents you control.\n{5}{U}{U}, Exile Soul of Ravnica from your graveyard: Draw a card for each color among permanents you control.

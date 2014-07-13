@@ -6,3 +6,4 @@ A:SP$ ChangeZone | Cost$ X W W | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$ValidGraveyard Creature.YouOwn+cmcLE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/return_to_the_ranks.jpg
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nReturn X target creature cards with converted mana cost 2 or less from your graveyard to the battlefield.

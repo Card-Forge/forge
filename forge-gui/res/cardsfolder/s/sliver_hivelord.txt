@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Indestructi
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_hivelord.jpg
+Oracle:Sliver creatures you control have indestructible. (Damage and effects that say "destroy" don't destroy them.)

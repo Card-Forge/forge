@@ -8,3 +8,4 @@ T:Mode$ DamageDone | ValidTarget$ Creature.EquippedBy | Execute$ TrigDestroy | T
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hot_soup.jpg
+Oracle:Equipped creature can't be blocked.\nWhenever equipped creature is dealt damage, destroy it.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

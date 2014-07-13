@@ -5,3 +5,4 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ CantBeBlockedByAmount LT2 | Description$ Sliver creatures you control have "This creature can't be blocked except by two or more creatures."
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belligerent_sliver.jpg
+Oracle:Sliver creatures you control have "This creature can't be blocked except by two or more creatures."

@@ -8,3 +8,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | Su
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotfeaster_maggot.jpg
+Oracle:When Rotfeaster Maggot enters the battlefield, exile target creature card from a graveyard. You gain life equal to that card's toughness.

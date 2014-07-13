@@ -11,3 +11,4 @@ SVar:X:Count$Valid Goblin.attacking+Other
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rabblemaster.jpg
+Oracle:Other Goblin creatures you control attack each turn if able.\nAt the beginning of combat on your turn, put a 1/1 red Goblin creature token with haste onto the battlefield.\nWhenever Goblin Rabblemaster attacks, it gets +1/+0 until end of turn for each other attacking Goblin.

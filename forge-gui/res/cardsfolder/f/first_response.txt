@@ -5,3 +5,4 @@ T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | References$ X | SVarCompare$ GE1 
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$Controller$LifeLostLastTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/first_response.jpg
+Oracle:At the beginning of each upkeep, if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield.

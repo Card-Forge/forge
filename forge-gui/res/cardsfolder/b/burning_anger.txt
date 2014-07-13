@@ -8,3 +8,4 @@ SVar:TapDmg:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ S
 SVar:BurningAngerDmg:Count$CardPower
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_anger.jpg
+Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals damage equal to its power to target creature or player."
