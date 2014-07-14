@@ -11183,6 +11183,7 @@ forge-gui/res/cardsfolder/r/rot_farm_skeleton.txt -text
 forge-gui/res/cardsfolder/r/rot_wolf.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rotcrown_ghoul.txt -text
 forge-gui/res/cardsfolder/r/roterothopter.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/rotfeaster_maggot.txt -text
 forge-gui/res/cardsfolder/r/rotlung_reanimator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rotted_hulk.txt -text
 forge-gui/res/cardsfolder/r/rotted_hystrix.txt svneol=native#text/plain
@@ -11283,7 +11284,6 @@ forge-gui/res/cardsfolder/r/ruthless_cullblade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/ruthless_invasion.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rysorian_badger.txt -text
 forge-gui/res/cardsfolder/r/ryusei_the_falling_star.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/s/rotfeaster_maggot.txt -text
 forge-gui/res/cardsfolder/s/saber_ants.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/saberclaw_golem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sabertooth_alley_cat.txt svneol=native#text/plain
