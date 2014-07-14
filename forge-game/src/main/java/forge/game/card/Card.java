@@ -3946,9 +3946,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return -1;
         }
 
-        final CardPowerToughness latestPT = this.getLatestPT();
-
-        return latestPT.getPower();
+        return this.getLatestPT().getLeft();
     }
 
     /**
@@ -3962,29 +3960,39 @@ public class Card extends GameEntity implements Comparable<Card> {
             return -1;
         }
 
-        final CardPowerToughness latestPT = this.getLatestPT();
-
-        return latestPT.getToughness();
+        return this.getLatestPT().getRight();
     }
 
     /**
      * 
-     * TODO Write javadoc for this method.
+     * Get the latest set Power and Toughness of this Card.
      * 
-     * @return CardPowerToughness
+     * @return the latest set Power and Toughness of this {@link Card} as the
+     * left and right values of a {@link Pair}, respectively. A value of -1
+     * means that particular property has not been set.
      */
-    public final CardPowerToughness getLatestPT() {
-        CardPowerToughness latestPT = new CardPowerToughness(-1, -1, -2);
-        long max = -2;
-
+    private final Pair<Integer, Integer> getLatestPT() {
+        // Find latest set power
+        long maxPowerTimestamp = -2;
+        int latestPower = -1;
         for (final CardPowerToughness pt : this.newPT) {
-            if (pt.getTimestamp() >= max) {
-                max = pt.getTimestamp();
-                latestPT = pt;
+            if (pt.getTimestamp() >= maxPowerTimestamp && pt.getPower() != -1) {
+                maxPowerTimestamp = pt.getTimestamp();
+                latestPower = pt.getPower();
             }
         }
 
-        return latestPT;
+        // Find latest set toughness
+        long maxToughnessTimestamp = -2;
+        int latestToughness = -1;
+        for (final CardPowerToughness pt : this.newPT) {
+            if (pt.getTimestamp() >= maxToughnessTimestamp && pt.getToughness() != -1) {
+                maxToughnessTimestamp = pt.getTimestamp();
+                latestToughness = pt.getToughness();
+            }
+        }
+
+        return Pair.of(latestPower, latestToughness);
     }
 
     /**
