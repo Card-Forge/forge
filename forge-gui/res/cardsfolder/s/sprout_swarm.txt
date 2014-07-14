@@ -5,4 +5,4 @@ K:Convoke
 A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling TSP | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 K:Buyback 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout_swarm.jpg
-Oracle:Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nBuyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPut a 1/1 green Saproling creature token onto the battlefield.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nBuyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPut a 1/1 green Saproling creature token onto the battlefield.

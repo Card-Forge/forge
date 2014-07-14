@@ -2,7 +2,7 @@ Name:Sorceress Queen
 ManaCost:1 B B
 Types:Creature Human Wizard
 PT:1/1
-A:AB$ Animate | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | Power$ 0 | Toughness$ 2 | SpellDescription$ Target creature other than CARDNAME becomes 0/2 until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than CARDNAME | Power$ 0 | Toughness$ 2 | SpellDescription$ Target creature other than CARDNAME has base power and toughness 0/2 until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2129.jpg
-Oracle:{T}: Target creature other than Sorceress Queen becomes 0/2 until end of turn.
+Oracle:{T}: Target creature other than Sorceress Queen has base power and toughness 0/2 until end of turn.

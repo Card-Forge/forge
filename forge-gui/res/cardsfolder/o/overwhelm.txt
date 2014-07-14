@@ -5,4 +5,4 @@ K:Convoke
 A:SP$PumpAll | Cost$ 5 G G | ValidCards$ Creature.YouCtrl | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Creatures you control get +3/+3 until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelm.jpg
-Oracle:Convoke (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreatures you control get +3/+3 until end of turn.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreatures you control get +3/+3 until end of turn.

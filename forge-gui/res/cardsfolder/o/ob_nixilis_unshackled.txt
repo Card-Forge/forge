@@ -1,7 +1,7 @@
 Name:Ob Nixilis, Unshackled
 ManaCost:4 B B
 Types:Legendary Creature Demon
-PT:6/6
+PT:4/4
 K:Flying
 K:Trample
 T:Mode$ SearchedLibrary | ValidPlayer$ Player.Opponent | SearchOwnLibrary$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent searches his or her library, that player sacrifices a creature and loses 10 life.

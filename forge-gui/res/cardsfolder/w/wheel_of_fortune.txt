@@ -1,8 +1,8 @@
 Name:Wheel of Fortune
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 R | Mode$ Hand | Defined$ Each | SubAbility$ DBEachDraw | SpellDescription$ Each player discards his or her hand and draws seven cards.
+A:SP$ Discard | Cost$ 2 R | Mode$ Hand | Defined$ Each | SubAbility$ DBEachDraw | SpellDescription$ Each player discards his or her hand, then draws seven cards.
 SVar:DBEachDraw:DB$Draw | Defined$ Each | NumCards$ 7
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_fortune.jpg
-Oracle:Each player discards his or her hand and draws seven cards.
+Oracle:Each player discards his or her hand, then draws seven cards.
