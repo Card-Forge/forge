@@ -109,6 +109,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         else if (tournamentsItem.isSelected()) {
             tournamentsScreen.update();
         }
+        else if (decksItem.isSelected()) {
+            decksScreen.refreshDecks();
+        }
+        else if (statsItem.isSelected()) {
+            statsScreen.update();
+        }
     }
 
     public static QuestMenu getMenu() {
@@ -253,12 +259,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IButton getLblNextChallengeInWins() {
-        return isChallengesView() ? challengesScreen.getLblNextChallengeInWins() : duelsScreen.getLblNextChallengeInWins();
+        return Forge.getCurrentScreen() == challengesScreen ? challengesScreen.getLblNextChallengeInWins() : duelsScreen.getLblNextChallengeInWins();
     }
 
     @Override
     public IButton getLblCurrentDeck() {
-        return isChallengesView() ? challengesScreen.getLblCurrentDeck() : duelsScreen.getLblCurrentDeck();
+        return Forge.getCurrentScreen() == challengesScreen ? challengesScreen.getLblCurrentDeck() : duelsScreen.getLblCurrentDeck();
     }
 
     @Override
@@ -288,7 +294,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public boolean isChallengesView() {
-        return Forge.getCurrentScreen() == challengesScreen;
+        return Forge.getCurrentScreen() == challengesScreen || Forge.getCurrentScreen() == statsScreen; //treat stats screen as challenges view so Zeppelin shows up 
     }
 
     @Override

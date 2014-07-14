@@ -17,6 +17,7 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
     private final List<E> items = new ArrayList<E>();
     private E selectedItem;
     private final DropDown dropDown = new DropDown();
+    private FEventHandler dropDownChangeHandler;
 
     public FComboBox() {
         initialize();
@@ -133,6 +134,13 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
         return false; //don't allow editing text
     }
 
+    public FEventHandler getDropDownChangeHandler() {
+        return dropDownChangeHandler;
+    }
+    public void setDropDownChangeHandler(FEventHandler changedHandler0) {
+        dropDownChangeHandler = changedHandler0;
+    }
+
     @Override
     public float getAutoSizeWidth() {
         //use widest item width to determine auto-size width
@@ -180,7 +188,12 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
                 FMenuItem menuItem = new FMenuItem(item.toString(), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        setSelectedItem(item);
+                        if (item != selectedItem) {
+                            setSelectedItem(item);
+                            if (dropDownChangeHandler != null) {
+                                dropDownChangeHandler.handleEvent(new FEvent(FComboBox.this, FEventType.CHANGE, item));
+                            }
+                        }
                     }
                 });
                 if (selectedItem == item) {
