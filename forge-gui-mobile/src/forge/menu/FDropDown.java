@@ -19,6 +19,7 @@ public abstract class FDropDown extends FScrollPane {
 
     private Backdrop backdrop;
     private FMenuTab menuTab;
+    private FContainer dropDownContainer;
     protected ScrollBounds paneSize;
 
     public FDropDown() {
@@ -30,6 +31,13 @@ public abstract class FDropDown extends FScrollPane {
     }
     public void setMenuTab(FMenuTab menuTab0) {
         menuTab = menuTab0;
+    }
+
+    public FContainer getDropDownContainer() {
+        return dropDownContainer;
+    }
+    public void setDropDownContainer(FContainer dropDownContainer0) {
+        dropDownContainer = dropDownContainer0;
     }
 
     public void update() {
@@ -68,10 +76,13 @@ public abstract class FDropDown extends FScrollPane {
     public void setVisible(boolean visible0) {
         if (isVisible() == visible0) { return; }
 
-        //add/remove drop down from current screen or top overlay when its visibility changes
-        FContainer container = FOverlay.getTopOverlay();
+        //add/remove drop down from its container, current screen, or top overlay when its visibility changes
+        FContainer container = dropDownContainer;
         if (container == null) {
-            container = Forge.getCurrentScreen();
+            container = FOverlay.getTopOverlay();
+            if (container == null) {
+                container = Forge.getCurrentScreen();
+            }
         }
         if (visible0) {
             updateSizeAndPosition();

@@ -82,12 +82,18 @@ public class MatchScreen extends FScreen {
                 }));
 
         log = new VLog(game.getGameLog());
+        log.setDropDownContainer(this);
         stack = new VStack(game.getStack(), localPlayer);
+        stack.setDropDownContainer(this);
         devMenu = new VDevMenu();
+        devMenu.setDropDownContainer(this);
+
+        VPlayers players = new VPlayers();
+        players.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
         menuBar.addTab("Game", new VGameMenu());
-        menuBar.addTab("Players (" + playerPanels.size() + ")", new VPlayers());
+        menuBar.addTab("Players (" + playerPanels.size() + ")", players);
         menuBar.addTab("Log", log);
         menuBar.addTab("Dev", devMenu);
         menuBar.addTab("Stack (0)", stack);
