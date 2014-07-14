@@ -253,12 +253,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IButton getLblNextChallengeInWins() {
-        return duelsScreen.getLblNextChallengeInWins();
+        return isChallengesView() ? challengesScreen.getLblNextChallengeInWins() : duelsScreen.getLblNextChallengeInWins();
     }
 
     @Override
     public IButton getLblCurrentDeck() {
-        return duelsScreen.getLblCurrentDeck();
+        return isChallengesView() ? challengesScreen.getLblCurrentDeck() : duelsScreen.getLblCurrentDeck();
     }
 
     @Override
@@ -268,22 +268,22 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
 
     @Override
     public IComboBox<String> getCbxPet() {
-        return duelsScreen.getCbxPet();
+        return statsScreen.getCbxPet();
     }
 
     @Override
     public ICheckBox getCbPlant() {
-        return duelsScreen.getCbPlant();
+        return statsScreen.getCbPlant();
     }
 
     @Override
     public ICheckBox getCbCharm() {
-        return duelsScreen.getCbCharm();
+        return statsScreen.getCbCharm();
     }
 
     @Override
     public IButton getLblZep() {
-        return duelsScreen.getLblZep();
+        return statsScreen.getLblZep();
     }
 
     @Override

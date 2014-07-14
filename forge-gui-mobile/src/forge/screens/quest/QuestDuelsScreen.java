@@ -7,22 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.assets.FSkinFont;
 import forge.interfaces.IButton;
-import forge.interfaces.ICheckBox;
-import forge.interfaces.IComboBox;
 import forge.model.FModel;
 import forge.quest.QuestEventDuel;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {
-    private final FComboBox<String> cbxPet = add(new FComboBox<String>());
-    private final FCheckBox cbCharm = add(new FCheckBox("Use Charm of Vigor"));
-    private final FCheckBox cbPlant = add(new FCheckBox("Summon Plant"));
-    private final FLabel lblZep = add(new FLabel.Builder().text("Launch Zeppelin").font(FSkinFont.get(14)).build());
-
     private final FLabel lblInfo = add(new FLabel.Builder().text("Select your next duel.")
             .align(HAlignment.CENTER).font(FSkinFont.get(16)).build());
 
@@ -72,22 +63,6 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
 
     public IButton getLblCurrentDeck() {
         return lblCurrentDeck;
-    }
-
-    public IComboBox<String> getCbxPet() {
-        return cbxPet;
-    }
-
-    public ICheckBox getCbPlant() {
-        return cbPlant;
-    }
-
-    public ICheckBox getCbCharm() {
-        return cbCharm;
-    }
-
-    public IButton getLblZep() {
-        return lblZep;
     }
 
     @Override

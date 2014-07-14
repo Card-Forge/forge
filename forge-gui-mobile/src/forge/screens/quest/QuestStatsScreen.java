@@ -2,9 +2,14 @@ package forge.screens.quest;
 
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.interfaces.IButton;
+import forge.interfaces.ICheckBox;
+import forge.interfaces.IComboBox;
 import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.FScreen;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -21,8 +26,10 @@ public class QuestStatsScreen extends FScreen {
             float w = visibleWidth - 2 * PADDING;
             float h = lblWins.getAutoSizeBounds().height;
             for (FDisplayObject lbl : getChildren()) {
-                lbl.setBounds(x, y, w, h);
-                y += h + PADDING;
+                if (lbl.isVisible()) {
+                    lbl.setBounds(x, y, w, h);
+                    y += h + PADDING;
+                }
             }
             return new ScrollBounds(visibleWidth, y);
         }
@@ -45,6 +52,10 @@ public class QuestStatsScreen extends FScreen {
     private final FLabel lblWorld = scroller.add(new FLabel.Builder()
         .icon(FSkinImage.QUEST_MAP)
         .font(FSkinFont.get(16)).iconScaleFactor(1).build());
+    private final FComboBox<String> cbxPet = add(new FComboBox<String>());
+    private final FCheckBox cbCharm = add(new FCheckBox("Use Charm of Vigor"));
+    private final FCheckBox cbPlant = add(new FCheckBox("Summon Plant"));
+    private final FLabel lblZep = add(new FLabel.Builder().text("Launch Zeppelin").font(FSkinFont.get(14)).build());
 
     public FLabel getLblWins() {
         return lblWins;
@@ -63,6 +74,18 @@ public class QuestStatsScreen extends FScreen {
     }
     public FLabel getLblWorld() {
         return lblWorld;
+    }
+    public IComboBox<String> getCbxPet() {
+        return cbxPet;
+    }
+    public ICheckBox getCbPlant() {
+        return cbPlant;
+    }
+    public ICheckBox getCbCharm() {
+        return cbCharm;
+    }
+    public IButton getLblZep() {
+        return lblZep;
     }
 
     public QuestStatsScreen() {
