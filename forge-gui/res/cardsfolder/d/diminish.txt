@@ -1,7 +1,7 @@
 Name:Diminish
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | SpellDescription$ Target creature becomes 1/1 until end of turn.
+A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | SpellDescription$ Target creature has base power and toughness 1/1 until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diminish.jpg
-Oracle:Target creature becomes 1/1 until end of turn.
+Oracle:Target creature has base power and toughness 1/1 until end of turn.

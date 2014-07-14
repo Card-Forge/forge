@@ -1,6 +1,6 @@
 Name:Meditation Puzzle
 ManaCost:3 W W
-Types:Sorcery
+Types:Instant
 K:Convoke
 A:SP$ GainLife | Cost$ 3 W W | LifeAmount$ 8 | SpellDescription$ You gain 8 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meditation_puzzle.jpg
