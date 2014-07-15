@@ -80,8 +80,8 @@ public class QuestFileLister extends JPanel {
         final SkinnedPanel rowTitle = new SkinnedPanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().text("Name | Rank").fontAlign(SwingConstants.LEFT).build(), "w 65%!, h 20px!, gaptop 5px, gapleft 48px");
-        rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 35% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text("Name | Rank").fontAlign(SwingConstants.LEFT).build(), "w 60%!, h 20px!, gaptop 5px, gapleft 48px");
+        rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 40% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
         rowTitle.add(new FLabel.Builder().text("Record | Assets").fontAlign(SwingConstants.LEFT).build(), "w 120px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 		
@@ -104,11 +104,11 @@ public class QuestFileLister extends JPanel {
 			
             row.add(new FLabel.Builder().text(qd.getName()).fontAlign(SwingConstants.LEFT)
 					.fontStyle(Font.BOLD)
-					.build(), "w 65%, h 20px!, shrinkx, gaptop 5px, gapleft 4px, cell 2 0 1 1");
+					.build(), "w 60%, h 20px!, shrinkx, gaptop 5px, gapleft 4px, cell 2 0 1 1");
 			row.add(new FLabel.Builder().text(FModel.getQuest().getRank(qd.getAchievements().getLevel()))
 					.fontAlign(SwingConstants.LEFT)
 					.fontSize(12)
-					.build(), "w 65%, h 20px!, shrinkx, gapbottom 5px, gapleft 4px, cell 2 1 1 1");
+					.build(), "w 60%, h 20px!, shrinkx, gapbottom 5px, gapleft 4px, cell 2 1 1 1");
 
 			
             row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "h 20px!, gaptop 5px, gapleft 4px, cell 3 0 1 1");
@@ -230,9 +230,7 @@ public class QuestFileLister extends JPanel {
             super();
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
-            setLayout(new MigLayout("insets 0, gap 0",
-					"[][][sg one, shrink 100][][sg two, shrink 1]"
-			));
+            setLayout(new MigLayout("insets 0, gap 0"));
             this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, clrBorders));
             questData = qd0;
 
