@@ -31,6 +31,7 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FCheckBox;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
@@ -307,6 +308,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     }
                     prevTapIndex = index;
                     return true;
+                }
+
+                @Override
+                public boolean showMenu(Integer index, Entry<T, Integer> value, FDisplayObject owner, float x, float y) {
+                    return renderer.longPress(value, x, y);
                 }
 
                 @Override
