@@ -80,8 +80,8 @@ public class QuestFileLister extends JPanel {
         final SkinnedPanel rowTitle = new SkinnedPanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().text("Name | Rank").fontAlign(SwingConstants.LEFT).build(), "w 50%!, h 20px!, gaptop 5px, gapleft 48px");
-        rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 50% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text("Name | Rank").fontAlign(SwingConstants.LEFT).build(), "w 65%!, h 20px!, gaptop 5px, gapleft 48px");
+        rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 35% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
         rowTitle.add(new FLabel.Builder().text("Record | Assets").fontAlign(SwingConstants.LEFT).build(), "w 120px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 		
@@ -104,21 +104,21 @@ public class QuestFileLister extends JPanel {
 			
             row.add(new FLabel.Builder().text(qd.getName()).fontAlign(SwingConstants.LEFT)
 					.fontStyle(Font.BOLD)
-					.build(), "w 50%!, h 20px!, growx, gaptop 5px, gapleft 4px, cell 2 0 1 1");
+					.build(), "w 65%, h 20px!, shrinkx, gaptop 5px, gapleft 4px, cell 2 0 1 1");
 			row.add(new FLabel.Builder().text(FModel.getQuest().getRank(qd.getAchievements().getLevel()))
 					.fontAlign(SwingConstants.LEFT)
 					.fontSize(12)
-					.build(), "w 50%!, h 20px!, growx, gapbottom 5px, gapleft 4px, cell 2 1 1 1");
+					.build(), "w 65%, h 20px!, shrinkx, gapbottom 5px, gapleft 4px, cell 2 1 1 1");
 
 			
-            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px, cell 3 0 1 1");
+            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "h 20px!, gaptop 5px, gapleft 4px, cell 3 0 1 1");
 			row.add(new FLabel.Builder().text(difficultyNameMap.get(qd.getAchievements().getDifficulty()))
 					.fontAlign(SwingConstants.LEFT)
 					.fontSize(12)
-					.build(), "w 15%!, h 20px!, shrinkpriox 100, pushx, gapbottom 5px, gapleft 4px, cell 3 1 1 1");
+					.build(), "h 20px!, pushx, gapbottom 5px, gapleft 4px, cell 3 1 1 1");
 			
             row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + " W / " + qd.getAchievements().getLost() + " L")
-                    .fontAlign(SwingConstants.RIGHT).build(), "h 20px!, gaptop 5px, gapleft 4px, gapright 5px, cell 4 0 2 1, align right");
+                    .fontAlign(SwingConstants.RIGHT).build(), "h 20px!, gaptop 5px, gapleft 4px, gapright 5px, cell 4 0 1 1, align right");
 			
 			FLabel cardsLabel = new FLabel.Builder().text(String.valueOf(qd.getAssets().getCardPool().countAll()))
 					.fontAlign(SwingConstants.LEFT)
@@ -133,7 +133,7 @@ public class QuestFileLister extends JPanel {
 					.build();
 			
 			row.add(cardsLabel, "h 20px!, gapbottom 5px, cell 4 1 1 1");
-			row.add(goldLabel, "h 20px!, gapleft 10px, gapright 5px, gapbottom 5px, cell 5 1 1 1");
+			row.add(goldLabel, "h 20px!, gapleft 10px, gapright 5px, gapbottom 5px, cell 4 1 1 1");
 			
             this.add(row, "w 98%!, h 50px!, gap 1% 0 0 0");
             tempRows.add(row);
@@ -231,7 +231,7 @@ public class QuestFileLister extends JPanel {
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
             setLayout(new MigLayout("insets 0, gap 0",
-					"[][][sg][][]"
+					"[][][sg one, shrink 100][][sg two, shrink 1]"
 			));
             this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, clrBorders));
             questData = qd0;
