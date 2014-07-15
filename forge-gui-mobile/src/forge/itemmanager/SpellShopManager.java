@@ -26,6 +26,9 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
         super(InventoryItem.class, false);
 
         fnGetPrice = isShop0 ? QuestSpellShop.fnPriceGet : QuestSpellShop.fnPriceSellGet;
+        if (!isShop0) {
+            setCaption("Cards");
+        }
     }
 
     @Override
