@@ -125,7 +125,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static class SpellShopPage extends SpellShopBasePage {
         private SpellShopPage() {
-            super("Spell Shop", FSkinImage.QUEST_BOOK, true);
+            super("Cards for Sale", FSkinImage.QUEST_BOOK, true);
         }
 
         @Override
@@ -156,7 +156,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     private static class InventoryPage extends SpellShopBasePage {
         private InventoryPage() {
-            super("Inventory", FSkinImage.QUEST_BOX, false);
+            super("Your Cards", FSkinImage.QUEST_BOX, false);
         }
 
         @Override
