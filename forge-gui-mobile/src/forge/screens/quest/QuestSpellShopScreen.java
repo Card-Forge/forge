@@ -63,13 +63,14 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     }
                 }
             });
+        }
+
+        public void refresh() {
             Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
             ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
             ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
             shopManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
-        }
 
-        public void refresh() {
             shopManager.setPool(FModel.getQuest().getCards().getShopList());
         }
 
@@ -102,14 +103,15 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     }
                 }
             });
+        }
+
+        public void refresh() {
             Map<ColumnDef, ItemColumn> colOverrides = new HashMap<ColumnDef, ItemColumn>();
             ItemColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceSellGet);
             ItemColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverrides, ColumnDef.NEW, FModel.getQuest().getCards().getFnNewCompare(), FModel.getQuest().getCards().getFnNewGet());
             ItemColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverrides, ColumnDef.DECKS, QuestSpellShop.fnDeckCompare, QuestSpellShop.fnDeckGet);
             inventoryManager.setup(ItemManagerConfig.QUEST_INVENTORY, colOverrides);
-        }
 
-        public void refresh() {
             final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
             ownedItems.addAll(FModel.getQuest().getCards().getCardpool().getView());
             inventoryManager.setPool(ownedItems);
