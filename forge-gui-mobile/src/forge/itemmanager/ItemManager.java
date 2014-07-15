@@ -236,7 +236,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public abstract class ItemRenderer {
         public abstract float getItemHeight();
         public abstract boolean tap(Entry<T, Integer> value, float x, float y, int count);
-        public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+        public abstract boolean longPress(Entry<T, Integer> value, float x, float y);
+        public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h);
     }
     public abstract ItemRenderer getListItemRenderer();
 

@@ -404,7 +404,7 @@ public class FFileChooser extends FDialog {
                 }
 
                 @Override
-                public void drawValue(Graphics g, Integer index, File value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                public void drawValue(Graphics g, Integer index, File value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                     if (value.isDirectory()) {
                         float iconSize = h;
                         g.drawImage(FSkinImage.FOLDER, x, y + (h - iconSize) / 2, iconSize, iconSize);

@@ -202,7 +202,7 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
                     g.fillRect(fillColor, 0, y, w, itemHeight);
                 }
 
-                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, pressedIndex == i, PADDING, y + PADDING, valueWidth, valueHeight);
+                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, fillColor, pressedIndex == i, PADDING, y + PADDING, valueWidth, valueHeight);
 
                 y += itemHeight;
 
@@ -230,7 +230,7 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
     public static abstract class ListItemRenderer<V> {
         public abstract float getItemHeight();
         public abstract boolean tap(Integer index, V value, float x, float y, int count);
-        public abstract void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
+        public abstract void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h);
 
         public boolean showMenu(Integer index, V value, FDisplayObject owner, float x, float y) {
             return false; //showing menu on long press is optional
@@ -249,7 +249,7 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         }
 
         @Override
-        public void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+        public void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
             g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
         }
     }

@@ -41,7 +41,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     }
 
     private static class SpellShopPage extends TabPage<QuestSpellShopScreen> {
-        private final SpellShopManager shopManager = add(new SpellShopManager(false));
+        private final SpellShopManager shopManager = add(new SpellShopManager(true));
 
         private SpellShopPage() {
             super("Spell Shop", FSkinImage.QUEST_BOOK);

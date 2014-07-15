@@ -8,6 +8,7 @@ import forge.card.CardFaceSymbols;
 import forge.card.CardRenderer;
 import forge.card.ColorSet;
 import forge.deck.DeckProxy;
+import forge.deck.FDeckViewer;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
@@ -277,7 +278,13 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             }
 
             @Override
-            public void drawValue(Graphics g, Entry<DeckProxy, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            public boolean longPress(Entry<DeckProxy, Integer> value, float x, float y) {
+                FDeckViewer.show(value.getKey().getDeck());
+                return true;
+            }
+
+            @Override
+            public void drawValue(Graphics g, Entry<DeckProxy, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                 DeckProxy deck = value.getKey();
 
                 if (DeckManager.this.getConfig().getCols().size() == 1) {

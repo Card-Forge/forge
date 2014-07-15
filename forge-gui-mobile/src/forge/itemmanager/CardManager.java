@@ -6,6 +6,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.CardCMCFilter;
@@ -160,13 +161,19 @@ public class CardManager extends ItemManager<PaperCard> {
             }
 
             @Override
-            public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                 CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), x, y, w, h);
             }
 
             @Override
             public boolean tap(Entry<PaperCard, Integer> value, float x, float y, int count) {
                 return CardRenderer.cardListItemTap(value.getKey(), x, y, count);
+            }
+
+            @Override
+            public boolean longPress(Entry<PaperCard, Integer> value, float x, float y) {
+                CardZoom.show(value.getKey());
+                return true;
             }
         };
     }

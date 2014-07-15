@@ -291,7 +291,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
 
                     @Override
-                    public void drawValue(Graphics g, Integer index, String value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                    public void drawValue(Graphics g, Integer index, String value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                         float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
                         x += offset;
                         y += offset;
@@ -336,7 +336,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }
 
         @Override
-        public void drawValue(Graphics g, Integer index, Setting value, FSkinFont font, FSkinColor color, boolean pressed, float x, float y, float w, float h) {
+        public void drawValue(Graphics g, Integer index, Setting value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
             float offset = w * SettingsScreen.INSETS_FACTOR - FList.PADDING; //increase padding for settings items
             x += offset;
             y += offset;
@@ -346,8 +346,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             float totalHeight = h;
             h = font.getMultiLineBounds(value.label).height + SettingsScreen.SETTING_PADDING;
 
-            g.drawText(value.label, font, color, x, y, w, h, false, HAlignment.LEFT, false);
-            value.drawPrefValue(g, font, color, x, y, w, h);
+            g.drawText(value.label, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
+            value.drawPrefValue(g, font, foreColor, x, y, w, h);
             h += SettingsScreen.SETTING_PADDING;
             g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);            
         }

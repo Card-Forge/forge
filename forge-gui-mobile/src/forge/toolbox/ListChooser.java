@@ -437,7 +437,7 @@ public class ListChooser<T> extends FContainer {
                 }
 
                 @Override
-                public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+                public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                     if (maxChoices > 1) {
                         if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
                             g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
