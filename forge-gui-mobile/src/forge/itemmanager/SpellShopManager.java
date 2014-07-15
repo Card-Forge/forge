@@ -2,6 +2,7 @@ package forge.itemmanager;
 
 import java.util.Map.Entry;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Function;
 
@@ -9,6 +10,7 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.ImageCache;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.item.InventoryItem;
@@ -56,16 +58,30 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
 
             @Override
             public void drawValue(Graphics g, Entry<InventoryItem, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
+                float totalHeight = h + 2 * FList.PADDING;
+                float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
+
                 if (value.getKey() instanceof PaperCard) {
                     CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), x, y, w, h);
                 }
-                //TODO: render list item for non-card item
+                else {
+                    g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
+                    Texture image = ImageCache.getImage(value.getKey());
+                    if (image != null) {
+                        float imageRatio = (float)image.getWidth() / (float)image.getHeight();
+                        float imageHeight = totalHeight;
+                        float imageWidth = imageHeight * imageRatio;
+                        if (imageWidth > cardArtWidth) {
+                            imageWidth = cardArtWidth;
+                            imageHeight = imageWidth / imageRatio;
+                        }
+                        g.drawImage(image, x - FList.PADDING + (cardArtWidth - imageWidth) / 2, y - FList.PADDING + (totalHeight - imageHeight) / 2, imageWidth, imageHeight);
+                    }
+                }
 
                 //render price on top of card art
-                h += 2 * FList.PADDING;
-                float cardArtWidth = h * CardRenderer.CARD_ART_RATIO;
                 float priceHeight = font.getLineHeight();
-                y += h - priceHeight - FList.PADDING;
+                y += totalHeight - priceHeight - FList.PADDING;
                 g.fillRect(backColor, x - FList.PADDING, y, cardArtWidth, priceHeight);
                 g.drawImage(FSkinImage.QUEST_COINSTACK, x, y, priceHeight, priceHeight);
                 float offset = priceHeight * 1.1f;
