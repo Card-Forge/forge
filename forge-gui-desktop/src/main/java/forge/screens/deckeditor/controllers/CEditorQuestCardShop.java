@@ -17,45 +17,28 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Function;
-
 import forge.UiCommand;
 import forge.assets.FSkinProp;
-import forge.deck.CardPool;
-import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.deck.DeckSection;
-import forge.gui.BoxedProductCardListViewer;
-import forge.gui.CardListViewer;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.*;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.SpellShopManager;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
-import forge.quest.io.ReadPriceList;
+import forge.quest.QuestSpellShop;
 import forge.screens.deckeditor.views.*;
 import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.ItemPool;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -68,16 +51,16 @@ import java.util.Map.Entry;
  * @version $Id: CEditorQuestCardShop.java 15088 2012-04-07 11:34:05Z Max mtg $
  */
 public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, DeckBase> {
-    private final JLabel creditsLabel = new FLabel.Builder()
+    private final FLabel creditsLabel = new FLabel.Builder()
             .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_COINSTACK))
             .fontSize(15).build();
 
     // TODO: move these to the view where they belong
-    private final JLabel sellPercentageLabel = new FLabel.Builder().text("0")
+    private final FLabel sellPercentageLabel = new FLabel.Builder().text("0")
             .fontSize(11)
             .build();
     @SuppressWarnings("serial")
-    private final JLabel fullCatalogToggle = new FLabel.Builder().text("See full catalog")
+    private final FLabel fullCatalogToggle = new FLabel.Builder().text("See full catalog")
             .fontSize(14).hoverable(true).cmdClick(new UiCommand() {
                 @Override
                 public void run() {
@@ -86,7 +69,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             })
             .build();
 
-    private double multiplier;
     private final QuestController questData;
 
     private ItemPool<InventoryItem> cardsForSale;
@@ -96,11 +78,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private DragCell probsParent = null;
-
-    // get pricelist:
-    private final ReadPriceList r = new ReadPriceList();
-    private final Map<String, Integer> mapPrices = this.r.getPriceList();
-    private ItemPool<InventoryItem> decksUsingMyCards;
 
     // remember changed gui elements
     private String CCTabLabel = new String();
@@ -154,136 +131,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
     }
 
-    // fills number of decks using each card
-    private ItemPool<InventoryItem> countDecksForEachCard() {
-        final ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
-        for (final Deck deck : this.questData.getMyDecks()) {
-            CardPool main = deck.getMain();
-            for (final Entry<PaperCard, Integer> e : main) {
-                result.add(e.getKey());
-            }
-            if (deck.has(DeckSection.Sideboard)) {
-                for (final Entry<PaperCard, Integer> e : deck.get(DeckSection.Sideboard)) {
-                    // only add card if we haven't already encountered it in main
-                    if (!main.contains(e.getKey())) {
-                        result.add(e.getKey());
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    private Integer getCardValue(final InventoryItem card) {
-        String ns = null;
-        int value = 1337; // previously this was the returned default
-        boolean foil = false;
-        int foilMultiplier = 1;
-
-        if (card instanceof PaperCard) {
-            ns = card.getName() + "|" + ((PaperCard) card).getEdition();
-            foil = ((PaperCard) card).isFoil();
-        } else {
-            ns = card.getName();
-        }
-
-        if (this.mapPrices.containsKey(ns)) {
-            value = this.mapPrices.get(ns);
-        } else if (card instanceof PaperCard) {
-            switch (((IPaperCard) card).getRarity()) {
-                case BasicLand:
-                    value = 4;
-                    break;
-                case Common:
-                    value = 6;
-                    break;
-                case Uncommon:
-                    value = 40;
-                    break;
-                case Rare:
-                    value = 120;
-                    break;
-                case MythicRare:
-                    value = 600;
-                    break;
-                default:
-                    value = 15;
-                    break;
-            }
-        } else if (card instanceof BoosterPack) {
-            value = 395;
-        } else if (card instanceof TournamentPack) {
-            value = 995;
-        } else if (card instanceof FatPack) {
-            value = 2365;
-        } else if (card instanceof BoosterBox) {
-            value = 8750;
-        } else if (card instanceof PreconDeck) {
-            value = QuestController.getPreconDeals((PreconDeck) card).getCost();
-        }
-
-        // TODO: make this changeable via a user-definable property?
-        if (foil) {
-            switch (((IPaperCard) card).getRarity()) {
-                case BasicLand:
-                    foilMultiplier = 2;
-                    break;
-                case Common:
-                    foilMultiplier = 2;
-                    break;
-                case Uncommon:
-                    foilMultiplier = 2;
-                    break;
-                case Rare:
-                    foilMultiplier = 3;
-                    break;
-                case MythicRare:
-                    foilMultiplier = 3;
-                    break;
-                default:
-                    foilMultiplier = 2;
-                    break;
-            }
-            value *= foilMultiplier;
-        }
-
-        return Integer.valueOf(value);
-    }
-
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-        @Override
-        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return CEditorQuestCardShop.this.getCardValue(from.getKey());
-        }
-    };
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnPriceGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return CEditorQuestCardShop.this.getCardValue(from.getKey());
-        }
-    };
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnPriceSellGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return (int) (CEditorQuestCardShop.this.multiplier * CEditorQuestCardShop.this.getCardValue(from.getKey()));
-        }
-    };
-
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-        @Override
-        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.count(from.getKey());
-            return iValue == null ? Integer.valueOf(0) : iValue;
-        }
-    };
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.count(from.getKey());
-            return iValue == null ? "" : iValue.toString();
-        }
-    };
-
     //=========== Overridden from ACEditorBase
 
     @Override
@@ -301,122 +148,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
 
-        long totalCost = 0;
-        ItemPool<InventoryItem> itemsToBuy = new ItemPool<InventoryItem>(InventoryItem.class);
-        for (Entry<InventoryItem, Integer> itemEntry : items) {
-            final InventoryItem item = itemEntry.getKey();
-            if (item instanceof PaperCard || item instanceof SealedProduct || item instanceof PreconDeck) {
-                final int qty = itemEntry.getValue();
-                itemsToBuy.add(item, qty);
-                totalCost += qty * this.getCardValue(item);
-            }
-        }
-        if (itemsToBuy.isEmpty()) { return; }
-
-        List<InventoryItem> itemFlatList = itemsToBuy.toFlatList();
-        String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
-        String displayList = SItemManagerUtil.buildDisplayList(itemsToBuy);
-        String title = "Buy " + suffix;
-
-        long creditsShort = totalCost - this.questData.getAssets().getCredits();
-        if (creditsShort > 0) {
-            FOptionPane.showMessageDialog("You need " + creditsShort + " more credits to purchase the following " + suffix.toLowerCase() + ".\n" + displayList, title);
-            return;
-        }
-
-        if (!FOptionPane.showConfirmDialog("Pay " + totalCost + " credits to purchase the following " +
-                suffix.toLowerCase() + "?\n" + displayList, title, "Buy", "Cancel")) {
-            return;
-        }
-
-        ItemPool<InventoryItem> itemsToAdd = new ItemPool<InventoryItem>(InventoryItem.class);
-
-        for (Entry<InventoryItem, Integer> itemEntry : itemsToBuy) {
-            final InventoryItem item = itemEntry.getKey();
-
-            final int qty = itemEntry.getValue();
-            final int value = this.getCardValue(item);
-
-            if (item instanceof PaperCard) {
-                this.questData.getCards().buyCard((PaperCard) item, qty, value);
-                itemsToAdd.add(item, qty);
-            }
-            else if (item instanceof SealedProduct) {
-                for (int i = 0; i < qty; i++) {
-                    SealedProduct booster = null;
-                    if (item instanceof BoosterPack) {
-                        booster = (BoosterPack) ((BoosterPack) item).clone();
-                    }
-                    else if (item instanceof TournamentPack) {
-                        booster = (TournamentPack) ((TournamentPack) item).clone();
-                    }
-                    else if (item instanceof FatPack) {
-                        booster = (FatPack) ((FatPack) item).clone();
-                    }
-                    else if (item instanceof BoosterBox) {
-                        booster = (BoosterBox) ((BoosterBox) item).clone();
-                    }
-                    this.questData.getCards().buyPack(booster, value);
-                    final List<PaperCard> newCards = booster.getCards();
-
-                    itemsToAdd.addAllFlat(newCards);
-                    
-                    if (booster instanceof BoxedProduct && FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV)) {
-                        
-                        int totalPacks = ((BoxedProduct) booster).boosterPacksRemaining();
-                        boolean skipTheRest = false;
-                        final List<PaperCard> remainingCards = new ArrayList<>();
-                        
-                        while (((BoxedProduct) booster).boosterPacksRemaining() > 0 && !skipTheRest) {
-                            final BoxedProductCardListViewer c = new BoxedProductCardListViewer(booster.getName(), "You have found the following cards inside (Booster Pack " + (totalPacks - ((BoxedProduct) booster).boosterPacksRemaining() + 1) + " of " + totalPacks + "):", ((BoxedProduct) booster).getNextBoosterPack());
-                            c.setVisible(true);
-                            c.dispose();
-                            skipTheRest = c.skipTheRest();
-                        }
-                        
-                        if (skipTheRest) {
-                            while (((BoxedProduct) booster).boosterPacksRemaining() > 0) {
-                                remainingCards.addAll(((BoxedProduct) booster).getNextBoosterPack());
-                            }
-                        }
-                        
-                        remainingCards.addAll(((BoxedProduct) booster).getExtraCards());
-                        
-                        if (remainingCards.size() > 0) {
-                            final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", remainingCards);
-                            c.setVisible(true);
-                            c.dispose();
-                        }
-                        
-                    } else {
-                        final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
-                        c.setVisible(true);
-                        c.dispose();
-                    }
-                    
-                }
-            }
-            else if (item instanceof PreconDeck) {
-                final PreconDeck deck = (PreconDeck) item;
-                for (int i = 0; i < qty; i++) {
-                    this.questData.getCards().buyPreconDeck(deck, value);
-
-                    itemsToAdd.addAll(deck.getDeck().getMain());
-                }
-
-                boolean one = (qty == 1);
-                FOptionPane.showMessageDialog(String.format(
-                        "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
-                        one ? "Deck" : String.format("%d copies of deck", qty),
-                        deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
-                        "Thanks for purchasing!", FOptionPane.INFORMATION_ICON);
-            }
-        }
-
-        this.getDeckManager().addItems(itemsToAdd);
-        this.getCatalogManager().removeItems(itemsToBuy);
-
-        this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
+        QuestSpellShop.buy(items, this.getCatalogManager(), this.getDeckManager(), true);
+        updateCreditsLabel();
     }
 
     /* (non-Javadoc)
@@ -426,40 +159,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     protected void onRemoveItems(Iterable<Entry<InventoryItem, Integer>> items, boolean toAlternate) {
         if (showingFullCatalog || toAlternate) { return; }
 
-        long totalReceived = 0;
-        ItemPool<InventoryItem> itemsToSell = new ItemPool<InventoryItem>(InventoryItem.class);
-        for (Entry<InventoryItem, Integer> itemEntry : items) {
-            final InventoryItem item = itemEntry.getKey();
-            if (item instanceof PaperCard) {
-                final int qty = itemEntry.getValue();
-                itemsToSell.add(item, qty);
-                totalReceived += qty * Math.min((int) (this.multiplier * this.getCardValue(item)), this.questData.getCards().getSellPriceLimit());
-            }
-        }
-        if (itemsToSell.isEmpty()) { return; }
-
-        List<InventoryItem> itemFlatList = itemsToSell.toFlatList();
-        String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
-        String displayList = SItemManagerUtil.buildDisplayList(itemsToSell);
-        String title = "Sell " + suffix;
-
-        if (!FOptionPane.showConfirmDialog("Sell the following " + suffix.toLowerCase() + " for " + totalReceived +
-                " credit" + (totalReceived != 1 ? "s" : "") + "?\n" + displayList, title, "Sell", "Cancel")) {
-            return;
-        }
-
-        for (Entry<InventoryItem, Integer> itemEntry : itemsToSell) {
-            final PaperCard card = (PaperCard) itemEntry.getKey();
-            final int qty = itemEntry.getValue();
-            final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards().getSellPriceLimit());
-
-            this.questData.getCards().sellCard(card, qty, price);
-        }
-
-        this.getCatalogManager().addItems(itemsToSell);
-        this.getDeckManager().removeItems(itemsToSell);
-
-        this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
+        QuestSpellShop.sell(items, this.getCatalogManager(), this.getDeckManager(), true);
+        updateCreditsLabel();
     }
 
     @Override
@@ -476,24 +177,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
     }
 
-    public void removeCards(List<Entry<InventoryItem, Integer>> cardsToRemove) {
-        if (showingFullCatalog) {
-            return;
-        }
-
-        this.getCatalogManager().addItems(cardsToRemove);
-        this.getDeckManager().removeItems(cardsToRemove);
-
-        for (Entry<InventoryItem, Integer> item : cardsToRemove) {
-            if (!(item.getKey() instanceof PaperCard)) {
-                continue;
-            }
-            PaperCard card = (PaperCard)item.getKey();
-            final int price = Math.min((int) (this.multiplier * this.getCardValue(card)),
-                    this.questData.getCards().getSellPriceLimit());
-            this.questData.getCards().sellCard(card, item.getValue(), price);
-        }
-
+    private void updateCreditsLabel() {
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
 
@@ -526,11 +210,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final Map<ColumnDef, ItemTableColumn> colOverridesDeck = new HashMap<ColumnDef, ItemTableColumn>();
 
         // Add spell shop-specific columns
-        ItemTableColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverridesCatalog, ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceGet);
+        ItemTableColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverridesCatalog, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
         ItemTableColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverridesCatalog, ColumnDef.OWNED, questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet());
-        ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverridesDeck, ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceSellGet);
+        ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverridesDeck, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceSellGet);
         ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverridesDeck, ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
-        ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverridesDeck, ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet);
+        ItemTableColumn.addColOverride(ItemManagerConfig.QUEST_INVENTORY, colOverridesDeck, ColumnDef.DECKS, QuestSpellShop.fnDeckCompare, QuestSpellShop.fnDeckGet);
 
         // Setup with current column set
         this.getCatalogManager().setup(ItemManagerConfig.SPELL_SHOP, colOverridesCatalog);
@@ -558,8 +242,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
-        this.decksUsingMyCards = this.countDecksForEachCard();
-        this.multiplier = this.questData.getCards().getSellMultiplier();
+        QuestSpellShop.updateDecksForEachCard();
+        double multiplier = QuestSpellShop.updateMultiplier();
         this.cardsForSale = this.questData.getCards().getShopList();
 
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
@@ -573,25 +257,15 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getBtnRemove4().setCommand(new UiCommand() {
             @Override
             public void run() {
-                List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
-                for (Entry<InventoryItem, Integer> item : getDeckManager().getPool()) {
-                    PaperCard card = (PaperCard)item.getKey();
-                    int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
-                    if ("Relentless Rats".equals(card.getName())) {
-                        numToKeep = Integer.MAX_VALUE;
-                    }
-                    if (numToKeep < item.getValue()) {
-                        cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - numToKeep));
-                    }
-                }
-                removeCards(cardsToRemove);
+                QuestSpellShop.sellExtras(getCatalogManager(), getDeckManager());
+                updateCreditsLabel();
             }
         });
 
         this.getDeckManager().getPnlButtons().add(creditsLabel, "gap 5px");
-        this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
+        updateCreditsLabel();
 
-        final double multiPercent = this.multiplier * 100;
+        final double multiPercent = multiplier * 100;
         final NumberFormat formatter = new DecimalFormat("#0.00");
         String maxSellingPrice = "";
         final int maxSellPrice = this.questData.getCards().getSellPriceLimit();

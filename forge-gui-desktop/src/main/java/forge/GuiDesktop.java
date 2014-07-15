@@ -44,6 +44,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
 import forge.gui.FNetOverlay;
 import forge.gui.GuiChoose;
@@ -171,6 +172,14 @@ public class GuiDesktop implements IGuiBase {
         final CardListViewer cardView = new CardListViewer(title, message, list);
         cardView.setVisible(true);
         cardView.dispose();
+    }
+
+    @Override
+    public boolean showBoxedProduct(final String title, final String message, final List<PaperCard> list) {
+        final BoxedProductCardListViewer viewer = new BoxedProductCardListViewer(title, message, list);
+        viewer.setVisible(true);
+        viewer.dispose();
+        return viewer.skipTheRest();
     }
 
     @Override

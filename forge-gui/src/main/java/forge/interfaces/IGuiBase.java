@@ -53,6 +53,7 @@ public interface IGuiBase {
     String showFileDialog(String title, String defaultDir);
     File getSaveFile(File defaultFile);
     void showCardList(final String title, final String message, final List<PaperCard> list);
+    boolean showBoxedProduct(final String title, final String message, final List<PaperCard> list);
     void fireEvent(UiEvent e);
     void setCard(Card card);
     void showCombat(Combat combat);

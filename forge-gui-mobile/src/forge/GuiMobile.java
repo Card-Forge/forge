@@ -175,6 +175,14 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public boolean showBoxedProduct(final String title, final String message, final List<PaperCard> list) {
+        Deck deck = new Deck(title + " - " + message); //TODO: Make this nicer
+        deck.getMain().addAllFlat(list);
+        FDeckViewer.show(deck);
+        return false;
+    }
+
+    @Override
     public IButton getBtnOK() {
         return FControl.getView().getPrompt().getBtnOk();
     }

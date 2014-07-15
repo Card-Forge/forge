@@ -20,7 +20,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     private TabPage<T> selectedPage;
 
     @SuppressWarnings("unchecked")
-    public TabPageScreen(TabPage<T>[] tabPages0) {
+    public TabPageScreen(TabPage<T>... tabPages0) {
         super(new TabHeader<T>(tabPages0));
 
         int index = 0;
