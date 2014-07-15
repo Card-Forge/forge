@@ -2,26 +2,21 @@ package forge.screens.home.quest;
 
 import forge.UiCommand;
 import forge.assets.FSkinProp;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestUtil;
 import forge.quest.data.QuestData;
-import forge.toolbox.FLabel;
-import forge.toolbox.FMouseAdapter;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinnedButton;
 import forge.toolbox.FSkin.SkinnedPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
 
 /** 
@@ -85,24 +80,64 @@ public class QuestFileLister extends JPanel {
         final SkinnedPanel rowTitle = new SkinnedPanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(), "w 85%-112px!, h 20px!, gaptop 5px, gapleft 48px");
-        rowTitle.add(new FLabel.Builder().text("Mode").fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px");
-        rowTitle.add(new FLabel.Builder().text("Record").fontAlign(SwingConstants.LEFT).build(), "w 60px!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text("Name | Rank").fontAlign(SwingConstants.LEFT).build(), "w 50%!, h 20px!, gaptop 5px, gapleft 48px");
+        rowTitle.add(new FLabel.Builder().text("Mode | Difficulty").fontAlign(SwingConstants.LEFT).build(), "w 50% - 112px!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text("Record | Assets").fontAlign(SwingConstants.LEFT).build(), "w 120px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
+		
+		Map<Integer, String> difficultyNameMap = new HashMap<>();
+		difficultyNameMap.put(0, "Easy");
+		difficultyNameMap.put(1, "Medium");
+		difficultyNameMap.put(2, "Hard");
+		difficultyNameMap.put(3, "Expert");
 
         RowPanel row;
         String mode;
+		
         for (QuestData qd : sorted) {
+			
             mode = qd.getMode().toString();
             row = new RowPanel(qd);
-            row.add(new DeleteButton(row), "w 22px!, h 20px!, gaptop 5px");
-            row.add(new EditButton(row), "w 22px!, h 20px!, gaptop 5px");
-            row.add(new FLabel.Builder().text(qd.getName()).fontAlign(SwingConstants.LEFT).build(), "w 85%-112px!, h 20px!, gaptop 5px, gapleft 4px");
-            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px");
-            row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + "/" + qd.getAchievements().getLost())
-                    .fontAlign(SwingConstants.LEFT).build(), "w 60px!, h 20px!, gaptop 5px, gapleft 4px");
-            this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");
+			
+            row.add(new DeleteButton(row), "w 22px!, h 20px!, cell 0 0 1 2");
+            row.add(new EditButton(row), "w 22px!, h 20px!, cell 1 0 1 2");
+			
+            row.add(new FLabel.Builder().text(qd.getName()).fontAlign(SwingConstants.LEFT)
+					.fontStyle(Font.BOLD)
+					.build(), "w 50%!, h 20px!, growx, gaptop 5px, gapleft 4px, cell 2 0 1 1");
+			row.add(new FLabel.Builder().text(FModel.getQuest().getRank(qd.getAchievements().getLevel()))
+					.fontAlign(SwingConstants.LEFT)
+					.fontSize(12)
+					.build(), "w 50%!, h 20px!, growx, gapbottom 5px, gapleft 4px, cell 2 1 1 1");
+
+			
+            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px, cell 3 0 1 1");
+			row.add(new FLabel.Builder().text(difficultyNameMap.get(qd.getAchievements().getDifficulty()))
+					.fontAlign(SwingConstants.LEFT)
+					.fontSize(12)
+					.build(), "w 15%!, h 20px!, shrinkpriox 100, pushx, gapbottom 5px, gapleft 4px, cell 3 1 1 1");
+			
+            row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + " W / " + qd.getAchievements().getLost() + " L")
+                    .fontAlign(SwingConstants.RIGHT).build(), "h 20px!, gaptop 5px, gapleft 4px, gapright 5px, cell 4 0 2 1, align right");
+			
+			FLabel cardsLabel = new FLabel.Builder().text(String.valueOf(qd.getAssets().getCardPool().countAll()))
+					.fontAlign(SwingConstants.LEFT)
+					.fontSize(12)
+					.icon(FSkin.getImage(FSkinProp.IMG_ZONE_HAND))
+					.build();
+
+			FLabel goldLabel = new FLabel.Builder().text(String.valueOf(qd.getAssets().getCredits()))
+					.fontAlign(SwingConstants.LEFT)
+					.fontSize(12)
+					.icon(FSkin.getImage(FSkinProp.ICO_QUEST_GOLD))
+					.build();
+			
+			row.add(cardsLabel, "h 20px!, gapbottom 5px, cell 4 1 1 1");
+			row.add(goldLabel, "h 20px!, gapleft 10px, gapright 5px, gapbottom 5px, cell 5 1 1 1");
+			
+            this.add(row, "w 98%!, h 50px!, gap 1% 0 0 0");
             tempRows.add(row);
+			
         }
 
         rows = tempRows.toArray(new RowPanel[0]);
@@ -195,7 +230,9 @@ public class QuestFileLister extends JPanel {
             super();
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
-            setLayout(new MigLayout("insets 0, gap 0"));
+            setLayout(new MigLayout("insets 0, gap 0",
+					"[][][sg][][]"
+			));
             this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, clrBorders));
             questData = qd0;
 
