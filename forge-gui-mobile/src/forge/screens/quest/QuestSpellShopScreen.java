@@ -1,8 +1,15 @@
 package forge.screens.quest;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
+import forge.FThreads;
 import forge.assets.FImage;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardZoom;
 import forge.item.InventoryItem;
@@ -17,19 +24,28 @@ import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.quest.QuestSpellShop;
 import forge.screens.TabPageScreen;
+import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
+import forge.toolbox.FLabel;
+import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.ThreadUtil;
+import forge.util.Utils;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
+    private final SpellShopPage spellShopPage;
+    private final InventoryPage inventoryPage;
+
     @SuppressWarnings("unchecked")
     public QuestSpellShopScreen() {
         super(new SpellShopPage(), new InventoryPage());
-        ((SpellShopPage)tabPages[0]).parentScreen = this;
-        ((InventoryPage)tabPages[1]).parentScreen = this;
+        spellShopPage = ((SpellShopPage)tabPages[0]);
+        inventoryPage = ((InventoryPage)tabPages[1]);
+        spellShopPage.parentScreen = this;
+        inventoryPage.parentScreen = this;
     }
 
     @Override
@@ -45,14 +61,33 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     public void update() {
         QuestSpellShop.updateDecksForEachCard();
-        QuestSpellShop.updateMultiplier();
-        ((SpellShopPage)tabPages[0]).refresh();
-        ((InventoryPage)tabPages[1]).refresh();
+        double multiplier = QuestSpellShop.updateMultiplier();
+        spellShopPage.refresh();
+        inventoryPage.refresh();
+        updateCreditsLabel();
+
+        final double multiPercent = multiplier * 100;
+        final NumberFormat formatter = new DecimalFormat("#0.00");
+        String maxSellingPrice = "";
+        final int maxSellPrice = FModel.getQuest().getCards().getSellPriceLimit();
+
+        if (maxSellPrice < Integer.MAX_VALUE) {
+            maxSellingPrice = String.format("Maximum selling price is %d credits.", maxSellPrice);
+        }
+        spellShopPage.lblSellPercentage.setText("Selling cards at " + formatter.format(multiPercent)
+                + "% of their value.\n" + maxSellingPrice);
     }
-    
+
+    public void updateCreditsLabel() {
+        String credits = "Credits: " + FModel.getQuest().getAssets().getCredits();
+        spellShopPage.lblCredits.setText(credits);
+        inventoryPage.lblCredits.setText(credits);
+    }
+
     private static abstract class SpellShopBasePage extends TabPage<QuestSpellShopScreen> {
         protected final SpellShopManager itemManager;
         protected QuestSpellShopScreen parentScreen;
+        protected FLabel lblCredits = new FLabel.Builder().icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).font(FSkinFont.get(16)).build();
 
         protected SpellShopBasePage(String caption0, FImage icon0, boolean isShop0) {
             super(caption0, icon0);
@@ -81,12 +116,14 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     }
                 }
             });
+            add(lblCredits);
         }
 
         protected abstract void activateItems(ItemPool<InventoryItem> items);
         protected abstract void refresh();
         protected abstract String getVerb();
         protected abstract FSkinImage getVerbIcon();
+        protected abstract FDisplayObject getSecondLabel();
 
         private void activateSelectedItem() {
             final InventoryItem item = itemManager.getSelectedItem();
@@ -105,6 +142,12 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                             ItemPool<InventoryItem> items = new ItemPool<InventoryItem>(InventoryItem.class);
                             items.add(item, result);
                             activateItems(items);
+                            FThreads.invokeInEdtLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    parentScreen.updateCreditsLabel();
+                                }
+                            });
                         }
                     });
                 }
@@ -119,13 +162,20 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void doLayout(float width, float height) {
-            itemManager.setBounds(0, 0, width, height);
+            float y = Utils.scaleY(2); //move credits label down a couple pixels so it looks better
+            float halfWidth = width / 2;
+            lblCredits.setBounds(0, y, halfWidth, lblCredits.getAutoSizeBounds().height);
+            getSecondLabel().setBounds(halfWidth, y, halfWidth, lblCredits.getHeight());
+            itemManager.setBounds(0, lblCredits.getHeight(), width, height - lblCredits.getHeight());
         }
     }
 
     private static class SpellShopPage extends SpellShopBasePage {
+        private FTextArea lblSellPercentage = add(new FTextArea());
+
         private SpellShopPage() {
             super("Cards for Sale", FSkinImage.QUEST_BOOK, true);
+            lblSellPercentage.setFont(FSkinFont.get(11));
         }
 
         @Override
@@ -152,9 +202,35 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         protected FSkinImage getVerbIcon() {
             return FSkinImage.PLUS;
         }
+
+        @Override
+        protected FDisplayObject getSecondLabel() {
+            return lblSellPercentage;
+        }
     }
 
     private static class InventoryPage extends SpellShopBasePage {
+        protected FLabel lblSellExtras = add(new FLabel.Builder().text("Sell all extras")
+                .icon(FSkinImage.MINUS).iconScaleFactor(1f).align(HAlignment.RIGHT).font(FSkinFont.get(16))
+                .command(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                //invoke in game thread so other dialogs can be shown properly
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        QuestSpellShop.sellExtras(((SpellShopPage)parentScreen.tabPages[0]).itemManager, itemManager);
+                        FThreads.invokeInEdtLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                parentScreen.updateCreditsLabel();
+                            }
+                        });
+                    }
+                });
+            }
+        }).build());
+
         private InventoryPage() {
             super("Your Cards", FSkinImage.QUEST_BOX, false);
         }
@@ -185,6 +261,11 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         @Override
         protected FSkinImage getVerbIcon() {
             return FSkinImage.MINUS;
+        }
+
+        @Override
+        protected FDisplayObject getSecondLabel() {
+            return lblSellExtras;
         }
     }
 }

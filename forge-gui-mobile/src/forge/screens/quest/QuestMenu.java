@@ -112,6 +112,9 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         else if (decksItem.isSelected()) {
             decksScreen.refreshDecks();
         }
+        else if (spellShopItem.isSelected()) {
+            spellShopScreen.update();
+        }
         else if (statsItem.isSelected()) {
             statsScreen.update();
         }

@@ -218,6 +218,7 @@ public class FLabel extends FDisplayObject implements IButton {
         TextBounds bounds;
         if (text.isEmpty()) {
             bounds = new TextBounds();
+            bounds.height += font.getLineHeight();
         }
         else {
             bounds = font.getMultiLineBounds(text);
@@ -301,11 +302,24 @@ public class FLabel extends FDisplayObject implements IButton {
                 y += (h - iconHeight) / 2;
             }
             else {
-                //TODO: Calculate these for center/right alignment
                 if (alignment == HAlignment.CENTER) {
                     float dx;
                     while (true) {
                         dx = (w - iconWidth - font.getMultiLineBounds(text).width - insets.x) / 2;
+                        if (dx > 0) {
+                            x += dx;
+                            break;
+                        }
+                        if (!font.canShrink()) {
+                            break;
+                        }
+                        font = font.shrink();
+                    }
+                }
+                else if (alignment == HAlignment.RIGHT) {
+                    float dx;
+                    while (true) {
+                        dx = (w - iconWidth - font.getMultiLineBounds(text).width - insets.x);
                         if (dx > 0) {
                             x += dx;
                             break;
