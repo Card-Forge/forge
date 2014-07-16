@@ -158,11 +158,17 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                         decksScreen.refreshDecks();
                         if (reason == LaunchReason.LoadQuest) {
                             Forge.back();
+                            if (Forge.onHomeScreen()) { //open duels screen if Load Quest screen was opening direct from home screen
+                                Forge.openScreen(duelsScreen);
+                            }
                         }
                         else {
                             Forge.back();
                             if (Forge.getCurrentScreen() instanceof LoadQuestScreen) {
                                 Forge.back(); //remove LoadQuestScreen from screen stack
+                            }
+                            if (Forge.onHomeScreen()) { //open duels screen if New Quest screen was opening direct from home screen
+                                Forge.openScreen(duelsScreen);
                             }
                             if (Forge.getCurrentScreen() != decksScreen) {
                                 Forge.openScreen(decksScreen); //open deck screen for new quest

@@ -128,6 +128,10 @@ public class Forge implements ApplicationListener {
         }
     }
 
+    public static boolean onHomeScreen() {
+        return screens.size() == 1;
+    }
+
     public static void back() {
         if (screens.size() < 2) {
             exit(); //prompt to exit if attempting to go back from home screen
