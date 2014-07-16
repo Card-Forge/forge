@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.DeckProxy;
@@ -72,15 +73,20 @@ public class QuestDecksScreen extends FScreen {
                         if (!QuestUtil.checkActiveQuest("Create a Deck.")) {
                             return;
                         }
-                        QuestDeckEditor editor = new QuestDeckEditor();
-                        editor.setSaveHandler(new FEventHandler() {
+                        FThreads.invokeInEdtLater(new Runnable() {
                             @Override
-                            public void handleEvent(FEvent e) {
-                                //ensure list is refreshed if new deck is saved
-                                needRefreshOnActivate = true;
+                            public void run() {
+                                QuestDeckEditor editor = new QuestDeckEditor();
+                                editor.setSaveHandler(new FEventHandler() {
+                                    @Override
+                                    public void handleEvent(FEvent e) {
+                                        //ensure list is refreshed if new deck is saved
+                                        needRefreshOnActivate = true;
+                                    }
+                                });
+                                Forge.openScreen(editor);
                             }
                         });
-                        Forge.openScreen(editor);
                     }
                 });
             }
