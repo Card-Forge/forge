@@ -56,7 +56,10 @@ public class ViewWinLose extends FOverlay {
         ControlWinLose control = null;
         switch (game0.getRules().getGameType()) {
         case Quest:
-            //control = new QuestWinLose(this, game0);
+            control = new QuestWinLose(this, game0);
+            break;
+        case QuestDraft:
+            //control = new QuestDraftWinLose(this, game0);
             break;
         case Draft:
             if (!FModel.getGauntletMini().isGauntletDraft()) {

@@ -1197,6 +1197,8 @@ forge-gui-mobile/src/forge/screens/match/views/VZoneDisplay.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ControlWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/GauntletWinLose.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/LimitedWinLose.java -text
+forge-gui-mobile/src/forge/screens/match/winlose/QuestWinLose.java -text
+forge-gui-mobile/src/forge/screens/match/winlose/QuestWinLoseCardViewer.java -text
 forge-gui-mobile/src/forge/screens/match/winlose/ViewWinLose.java -text
 forge-gui-mobile/src/forge/screens/quest/LoadQuestScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/NewQuestScreen.java -text
