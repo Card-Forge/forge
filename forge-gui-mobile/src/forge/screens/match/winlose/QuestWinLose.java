@@ -16,6 +16,7 @@
  */
 package forge.screens.match.winlose;
 
+import forge.FThreads;
 import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
@@ -133,66 +134,72 @@ public class QuestWinLose extends ControlWinLose {
         if (!lastGame.getMatch().isMatchOver()) {
             getView().getBtnQuit().setText("Quit (-15 Credits)");
             return isAnte;
-        } else {
+        }
+        else {
             getView().getBtnContinue().setVisible(false);
             if (wonMatch) {
                 getView().getBtnQuit().setText("Great!");
-            } else {
+            }
+            else {
                 getView().getBtnQuit().setText("OK");
             }
         }
 
-        // TODO: We don't have a enum for difficulty?
-        int difficulty = qData.getAchievements().getDifficulty();
+        //invoke remaining logic in background thread so dialogs can be shown
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO: We don't have a enum for difficulty?
+                int difficulty = qData.getAchievements().getDifficulty();
 
+                final int wins = qData.getAchievements().getWin();
+                // Win case
+                if (wonMatch) {
+                    // Standard event reward credits
+                    awardEventCredits();
 
-        final int wins = qData.getAchievements().getWin();
-        // Win case
-        if (wonMatch) {
-            // Standard event reward credits
-            awardEventCredits();
+                    // Challenge reward credits
+                    if (qEvent instanceof QuestEventChallenge) {
+                        awardChallengeWin();
+                    }
 
-            // Challenge reward credits
-            if (qEvent instanceof QuestEventChallenge) {
-                awardChallengeWin();
-            }
+                    else {
+                        awardSpecialReward("Special bonus reward:"); // If any
+                        // Random rare for winning against a very hard deck
+                        if (qEvent.getDifficulty() == QuestEventDifficulty.EXPERT) {
+                            awardRandomRare("You've won a random rare for winning against a very hard deck.");
+                        }
+                    }
+                    
+                    awardWinStreakBonus();
 
-            else {
-                awardSpecialReward("Special bonus reward:"); // If any
-                // Random rare for winning against a very hard deck
-                if (qEvent.getDifficulty() == QuestEventDifficulty.EXPERT) {
-                    awardRandomRare("You've won a random rare for winning against a very hard deck.");
+                    // Random rare given at 50% chance (65% with luck upgrade)
+                    if (getLuckyCoinResult()) {
+                        awardRandomRare("You've won a random rare.");
+                    }
+
+                    // Award jackpot every 80 games won (currently 10 rares)
+
+                    if ((wins > 0) && (((wins + 1) % 80) == 0)) {
+                        awardJackpot();
+                    }
+
+                }
+                // Lose case
+                else {
+                    penalizeLoss();
+                }
+
+                // Grant booster on a win, or on a loss in easy mode
+                if (wonMatch || difficulty == 0) {
+                    final int outcome = wonMatch ? wins : qData.getAchievements().getLost();
+                    int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
+                    if (winsPerBooster > 0 && (outcome + 1) % winsPerBooster == 0) {
+                        awardBooster();
+                    }
                 }
             }
-            
-            awardWinStreakBonus();
-
-            // Random rare given at 50% chance (65% with luck upgrade)
-            if (getLuckyCoinResult()) {
-                awardRandomRare("You've won a random rare.");
-            }
-
-            // Award jackpot every 80 games won (currently 10 rares)
-
-            if ((wins > 0) && (((wins + 1) % 80) == 0)) {
-                awardJackpot();
-            }
-
-        }
-        // Lose case
-        else {
-            penalizeLoss();
-        }
-
-        // Grant booster on a win, or on a loss in easy mode
-        if (wonMatch || difficulty == 0) {
-            final int outcome = wonMatch ? wins : qData.getAchievements().getLost();
-            int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
-            if (winsPerBooster > 0 && (outcome + 1) % winsPerBooster == 0) {
-                awardBooster();
-            }
-        }
-
+        });
         return true;
     }
 
@@ -607,7 +614,6 @@ public class QuestWinLose extends ControlWinLose {
      * 
      */
     private void awardBooster() {
-
         List<PaperCard> cardsWon = null;
 
         if (qData.getFormat() == null) {
