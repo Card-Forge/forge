@@ -38,6 +38,7 @@ import forge.quest.QuestEventDraft;
 import forge.quest.QuestMode;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.*;
+import forge.util.FileUtil;
 import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 import forge.util.XmlUtil;
@@ -70,6 +71,10 @@ import java.util.zip.GZIPOutputStream;
  * @version $Id$
  */
 public class QuestDataIO {
+    static {
+        //ensure save directory exists if this class is used
+        FileUtil.ensureDirectoryExists(ForgeConstants.QUEST_SAVE_DIR);
+    }
 
     /**
      * Gets the serializer.
