@@ -17,14 +17,11 @@ package forge.screens.match.winlose;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.GuiBase;
-import forge.assets.FSkinFont;
 import forge.game.Game;
 import forge.limited.GauntletMini;
 import forge.model.FModel;
-import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -50,14 +47,8 @@ public class LimitedWinLose extends ControlWinLose {
         this.wonMatch = lastGame.getMatch().isWonBy(GuiBase.getInterface().getGuiPlayer());
     }
 
-    /**
-     * <p>
-     * populateCustomPanel.
-     * </p>
-     * @return true
-     */
     @Override
-    public final boolean populateCustomPanel() {
+    public final void showRewards() {
         // view.getBtnRestart().setVisible(false);
         // Deliberate; allow replaying bad tournaments
 
@@ -77,10 +68,10 @@ public class LimitedWinLose extends ControlWinLose {
 
         if (!lastGame.getMatch().isMatchOver()) {
             showTournamentInfo("Tournament Info");
-            return true;
+            return;
         }
         else {
-            if (this.wonMatch) {
+            if (wonMatch) {
                 if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
                     view.getBtnContinue().setText("Next Round (" + (gauntlet.getCurrentRound() + 1)
                             + "/" + gauntlet.getRounds() + ")");
@@ -99,8 +90,6 @@ public class LimitedWinLose extends ControlWinLose {
                 view.getBtnContinue().setVisible(false);
             }
         }
-
-        return true;
     }
 
     /**
@@ -110,11 +99,7 @@ public class LimitedWinLose extends ControlWinLose {
      * @param String - the title to be displayed
      */
     private void showTournamentInfo(final String newTitle) {
-        final FLabel lblTitle = new FLabel.Builder().text(newTitle).font(FSkinFont.get(18)).align(HAlignment.CENTER).build();
-        final FLabel lblSubTitle = new FLabel.Builder().text("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds())
-                .align(HAlignment.CENTER).font(FSkinFont.get(17)).build();
-        this.getView().getPnlCustom().add(lblTitle);
-        this.getView().getPnlCustom().add(lblSubTitle);
+        FOptionPane.showMessageDialog("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds(), newTitle);
     }
 
     /**

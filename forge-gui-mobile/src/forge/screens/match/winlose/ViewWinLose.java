@@ -22,7 +22,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
-import forge.toolbox.FPanel;
 import forge.toolbox.FTextArea;
 import forge.util.Utils;
 
@@ -33,7 +32,6 @@ public class ViewWinLose extends FOverlay {
     private final FButton btnContinue, btnRestart, btnQuit;
     private final FLabel lblTitle, lblLog, lblStats, btnCopyLog;
     private final FTextArea txtLog;
-    private final FPanel pnlCustom;
     private final OutcomesPanel pnlOutcomes;
     private final Game game;
 
@@ -45,7 +43,6 @@ public class ViewWinLose extends FOverlay {
         lblTitle = add(new FLabel.Builder().font(FSkinFont.get(30)).align(HAlignment.CENTER).build());
         lblStats = add(new FLabel.Builder().font(FSkinFont.get(26)).align(HAlignment.CENTER).build());
         pnlOutcomes = add(new OutcomesPanel());
-        pnlCustom = new FPanel();
 
         btnContinue = add(new FButton());
         btnRestart = add(new FButton());
@@ -105,14 +102,11 @@ public class ViewWinLose extends FOverlay {
             }
         }).build());
 
-        if (control.populateCustomPanel()) {
-            add(pnlCustom);
-        }
-
         lblTitle.setText(composeTitle(game0.getOutcome()));
 
         showGameOutcomeSummary();
         showPlayerScores();
+        control.showRewards();
     }
 
     private String composeTitle(GameOutcome outcome) {
@@ -137,10 +131,6 @@ public class ViewWinLose extends FOverlay {
 
     public FButton getBtnQuit() {
         return this.btnQuit;
-    }
-
-    public FPanel getPnlCustom() {
-        return this.pnlCustom;
     }
 
     private void showGameOutcomeSummary() {

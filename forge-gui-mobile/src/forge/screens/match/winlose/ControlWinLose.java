@@ -19,8 +19,8 @@ public class ControlWinLose {
     /** @param v &emsp; ViewWinLose
      * @param match */
     public ControlWinLose(final ViewWinLose v, Game game) {
-        this.view = v;
-        this.lastGame = game;
+        view = v;
+        lastGame = game;
         addListeners();
     }
 
@@ -93,12 +93,11 @@ public class ControlWinLose {
      * 
      * @return boolean, panel has contents or not.
      */
-    public boolean populateCustomPanel() {
-        return false;
+    public void showRewards() {
     }
 
     /** @return ViewWinLose object this controller is in charge of */
     public ViewWinLose getView() {
-        return this.view;
+        return view;
     }
 }

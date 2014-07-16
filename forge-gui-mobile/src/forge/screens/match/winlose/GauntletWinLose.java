@@ -17,15 +17,10 @@ package forge.screens.match.winlose;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
 import forge.LobbyPlayer;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinColor.Colors;
-import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -37,9 +32,7 @@ import forge.gauntlet.GauntletIO;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.screens.match.FControl;
-import forge.toolbox.FLabel;
-import forge.toolbox.FPanel;
-
+import forge.toolbox.FOptionPane;
 import java.util.List;
 
 /**
@@ -57,26 +50,20 @@ public class GauntletWinLose extends ControlWinLose {
         super(view0, lastGame);
     }
 
-    /**
-     * <p>
-     * populateCustomPanel.
-     * </p>
-     * @return true
-     */
     @Override
-    public final boolean populateCustomPanel() {
+    public final void showRewards() {
         final GauntletData gd = FModel.getGauntletData();
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
         final int len = lstDecks.size();
         final int num = gd.getCompleted();
-        FLabel lblGraphic = null;
-        FLabel lblMessage1 = null;
-        FLabel lblMessage2 = null;
+        FSkinImage icon = null;
+        String message1 = "";
+        String message2 = "";
 
         // No restarts.
-        this.getView().getBtnRestart().setVisible(false);
+        getView().getBtnRestart().setVisible(false);
 
         // Generic event record.
         lstEventRecords.set(gd.getCompleted(), "Ongoing");
@@ -101,15 +88,12 @@ public class GauntletWinLose extends ControlWinLose {
             if (match.isWonBy(questPlayer)) {
                 // Gauntlet complete: Remove save file
                 if (gd.getCompleted() == lstDecks.size()) {
-                    lblGraphic = new FLabel.Builder()
-                        .icon(FSkinImage.QUEST_COIN).build();
-                    lblMessage1 = new FLabel.Builder().font(FSkinFont.get(24))
-                        .text("CONGRATULATIONS!").build();
-                    lblMessage2 = new FLabel.Builder().font(FSkinFont.get(18))
-                        .text("You made it through the gauntlet!").build();
+                    icon = FSkinImage.QUEST_COIN;
+                    message1 = "CONGRATULATIONS!";
+                    message2 = "You made it through the gauntlet!";
 
-                    this.getView().getBtnContinue().setVisible(false);
-                    this.getView().getBtnQuit().setText("OK");
+                    getView().getBtnContinue().setVisible(false);
+                    getView().getBtnQuit().setText("OK");
 
                     // Remove save file if it's a quickie, or just reset it.
                     if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {
@@ -124,21 +108,18 @@ public class GauntletWinLose extends ControlWinLose {
                     gd.stamp();
                     GauntletIO.saveGauntlet(gd);
 
-                    this.getView().getBtnContinue().setVisible(true);
-                    this.getView().getBtnContinue().setEnabled(true);
-                    this.getView().getBtnQuit().setText("Save and Quit");
+                    getView().getBtnContinue().setVisible(true);
+                    getView().getBtnContinue().setEnabled(true);
+                    getView().getBtnQuit().setText("Save and Quit");
                 }
             }
             // Lose match case; stop gauntlet.
             else {
-                lblGraphic = new FLabel.Builder()
-                    .icon(FSkinImage.QUEST_HEART).build();
-                lblMessage1 = new FLabel.Builder().font(FSkinFont.get(24))
-                        .text("DEFEATED!").build();
-                lblMessage2 = new FLabel.Builder().font(FSkinFont.get(18))
-                        .text("You have failed to pass the gauntlet.").build();
+                icon = FSkinImage.QUEST_HEART;
+                message1 = "DEFEATED!";
+                message2 = "You have failed to pass the gauntlet.";
 
-                this.getView().getBtnContinue().setVisible(false);
+                getView().getBtnContinue().setVisible(false);
 
                 // Remove save file if it's a quickie, or just reset it.
                 if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {
@@ -152,38 +133,22 @@ public class GauntletWinLose extends ControlWinLose {
 
         gd.setEventRecords(lstEventRecords);
 
-        // Custom panel display
-        final FLabel lblTitle = new FLabel.Builder().text("Gauntlet Progress")
-                .align(HAlignment.CENTER).font(FSkinFont.get(18)).build();
-
-        final FPanel pnl = this.getView().getPnlCustom();
-        pnl.setBackColor(FSkinColor.get(Colors.CLR_THEME2));
-        pnl.add(lblTitle);
-
-        FLabel lblTemp;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < len; i++) {
-            lblTemp = new FLabel.Builder().font(FSkinFont.get(14)).build();
-
             if (i <= num) {
-                lblTemp.setTextColor(FSkinColor.getStandardColor(Color.GREEN).stepColor(20));
-                lblTemp.setText((i + 1) + ". " + lstEventNames.get(i)
-                        + " (" + lstEventRecords.get(i) + ")");
+                sb.append((i + 1) + ". " + lstEventNames.get(i)
+                        + " (" + lstEventRecords.get(i) + ")\n");
             }
             else {
-                lblTemp.setTextColor(FSkinColor.getStandardColor(Color.RED));
-                lblTemp.setText((i + 1) + ". ??????");
+                sb.append((i + 1) + ". ??????\n");
             }
-
-            pnl.add(lblTemp);
         }
 
-        if (lblGraphic != null) {
-            pnl.add(lblGraphic);
-            pnl.add(lblMessage1);
-            pnl.add(lblMessage2);
-        }
+        sb.append("\n");
+        sb.append(message1 + "\n\n");
+        sb.append(message2);
 
-        return true;
+        FOptionPane.showMessageDialog(sb.toString(), "Gauntlet Progress", icon);
     }
 
     @Override
