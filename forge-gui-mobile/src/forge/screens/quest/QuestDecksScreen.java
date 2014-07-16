@@ -110,7 +110,6 @@ public class QuestDecksScreen extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
-                Forge.back();
             }
         });
     }
