@@ -60,10 +60,13 @@ public final class QuestData {
     private String worldId;
     // gadgets
 
-    private final QuestAssets assets;
-    private final QuestAchievements achievements;
+    private QuestAssets assets;
+    private QuestAchievements achievements;
     private final Map<Integer, String> petSlots = new HashMap<Integer, String>();
     private boolean isCharmActive = false;
+
+    public QuestData() { //needed for XML serialization
+    }
 
     /**
      * Instantiates a new quest data.
