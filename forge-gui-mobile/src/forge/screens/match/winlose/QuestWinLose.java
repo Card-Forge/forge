@@ -142,7 +142,7 @@ public class QuestWinLose extends ControlWinLose {
                     }
 
                     else {
-                        awardSpecialReward("Special bonus reward:"); // If any
+                        awardSpecialReward("Special bonus reward"); // If any
                         // Random rare for winning against a very hard deck
                         if (qEvent.getDifficulty() == QuestEventDifficulty.EXPERT) {
                             awardRandomRare("You've won a random rare for winning against a very hard deck.");
@@ -183,10 +183,10 @@ public class QuestWinLose extends ControlWinLose {
     private void anteReport(final List<PaperCard> cardsWon, List<PaperCard> cardsLost, boolean hasWon) {
         // Generate Swing components and attach.
         if (cardsWon != null && !cardsWon.isEmpty()) {
-            SGuiChoose.reveal("Spoils! These cards will be available in your card pool after this ante match:", cardsWon);
+            SGuiChoose.reveal("Spoils! Cards won from ante.", cardsWon);
         }
         if (cardsLost != null && !cardsLost.isEmpty()) {
-            SGuiChoose.reveal("Looted! You lost the following cards in an ante match:", cardsLost);
+            SGuiChoose.reveal("Looted! Cards lost to ante.", cardsLost);
         }
     }
 
@@ -582,7 +582,7 @@ public class QuestWinLose extends ControlWinLose {
                 maxChoices--;
             }
 
-            final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set:", options);
+            final CardEdition chooseEd = SGuiChoose.one("Choose bonus booster set", options);
 
             IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
             cardsWon = product.get();
@@ -654,7 +654,7 @@ public class QuestWinLose extends ControlWinLose {
             }
             else if (ii instanceof IQuestRewardCard) {
                 final List<PaperCard> cardChoices = ((IQuestRewardCard) ii).getChoices();
-                final PaperCard chosenCard = (null == cardChoices ? null : SGuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
+                final PaperCard chosenCard = (null == cardChoices ? null : SGuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName(), cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }
