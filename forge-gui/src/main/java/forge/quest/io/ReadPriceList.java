@@ -60,7 +60,6 @@ public class ReadPriceList {
     private void setup() {
         this.priceMap = this.readFile(ForgeConstants.QUEST_CARD_PRICE_FILE);
         this.priceMap.putAll(this.readFile(ForgeConstants.PRICES_BOOSTER_FILE));
-
     } // setup()
 
     /**
@@ -87,6 +86,8 @@ public class ReadPriceList {
             }
 
             final String[] s = line.split("=");
+            if (s.length < 2) { continue; } //skip line if not in correct format
+
             final String name = s[0].trim();
             final String price = s[1].trim();
 
@@ -97,7 +98,8 @@ public class ReadPriceList {
                     float ff = 0;
                     if (r.nextInt(100) < 90) {
                         ff = r.nextInt(10) * (float) .01;
-                    } else {
+                    }
+                    else {
                         // +/- 50%
                         ff = r.nextInt(50) * (float) .01;
                     }

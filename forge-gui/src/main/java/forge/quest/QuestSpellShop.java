@@ -33,8 +33,7 @@ import forge.util.ItemPool;
 import forge.util.gui.SOptionPane;
 
 public class QuestSpellShop {
-    private static final ReadPriceList r = new ReadPriceList();
-    private static final Map<String, Integer> mapPrices = r.getPriceList();
+    private static Map<String, Integer> mapPrices;
     private static double multiplier;
     private static ItemPool<InventoryItem> decksUsingMyCards;
 
@@ -47,13 +46,18 @@ public class QuestSpellShop {
         if (card instanceof PaperCard) {
             ns = card.getName() + "|" + ((PaperCard) card).getEdition();
             foil = ((PaperCard) card).isFoil();
-        } else {
+        }
+        else {
             ns = card.getName();
         }
 
+        if (mapPrices == null) { //initialize price map if not already done
+            mapPrices = new ReadPriceList().getPriceList();
+        }
         if (mapPrices.containsKey(ns)) {
             value = mapPrices.get(ns);
-        } else if (card instanceof PaperCard) {
+        }
+        else if (card instanceof PaperCard) {
             switch (((IPaperCard) card).getRarity()) {
                 case BasicLand:
                     value = 4;
