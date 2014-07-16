@@ -88,7 +88,6 @@ public class QuestWinLose extends ControlWinLose {
         isAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
-
     /**
      * <p>
      * populateCustomPanel.

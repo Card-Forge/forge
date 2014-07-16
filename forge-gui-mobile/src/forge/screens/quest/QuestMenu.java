@@ -174,8 +174,13 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
             return;
         }
 
-        //if current quest can't be loaded, open Load Quest screen
-        Forge.openScreen(new LoadQuestScreen());
+        //if current quest can't be loaded, open New Quest or Load Quest screen based on whether a quest exists
+        if (dirQuests.exists() && dirQuests.isDirectory() && dirQuests.list().length > 0) {
+            Forge.openScreen(new LoadQuestScreen());
+        }
+        else {
+            Forge.openScreen(new NewQuestScreen());
+        }
     }
 
     @Override
