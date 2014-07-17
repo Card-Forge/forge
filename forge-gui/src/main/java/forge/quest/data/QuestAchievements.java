@@ -71,24 +71,20 @@ public class QuestAchievements {
      * Adds the win.
      */
     public void addWin() { // changes getRank()
-        
-        this.win++;
-        this.winstreakCurrent++;
-        
-        for (QuestEventDraft draft : drafts) {
-            if (!(currentDraft != -1 && drafts.get(currentDraft) == draft)) {
-                draft.addWin();
-            }
+        win++;
+        winstreakCurrent++;
+
+        if (drafts != null && currentDraft != -1) {
+            drafts.get(currentDraft).addWin();
         }
-        
+
         if (win % 5 == 0) {
             draftsToGenerate++;
         }
         
-        if (this.winstreakCurrent > this.winstreakBest) {
-            this.winstreakBest = this.winstreakCurrent;
+        if (winstreakCurrent > winstreakBest) {
+            winstreakBest = winstreakCurrent;
         }
-
     }
 
     // Challenge performance
@@ -98,14 +94,14 @@ public class QuestAchievements {
      * @return the challenges played
      */
     public int getChallengesPlayed() {
-        return this.challengesPlayed;
+        return challengesPlayed;
     }
 
     /**
      * Adds the challenges played.
      */
     public void addChallengesPlayed() {
-        this.challengesPlayed++;
+        challengesPlayed++;
     }
 
     /**
@@ -114,7 +110,7 @@ public class QuestAchievements {
      * @return List<Integer>
      */
     public List<String> getLockedChallenges() {
-        return this.completedChallenges;
+        return completedChallenges;
     }
 
     /**
@@ -127,7 +123,7 @@ public class QuestAchievements {
      *            the i
      */
     public void addLockedChallenge(final String i) {
-        this.completedChallenges.add(i);
+        completedChallenges.add(i);
     }
 
     /**
@@ -136,11 +132,11 @@ public class QuestAchievements {
      * @return List<Integer>
      */
     public List<String> getCurrentChallenges() {
-        if (this.currentChallenges == null) {
-            this.currentChallenges = new ArrayList<String>();
+        if (currentChallenges == null) {
+            currentChallenges = new ArrayList<String>();
         }
 
-        return this.currentChallenges;
+        return currentChallenges;
     }
 
     /**
@@ -149,16 +145,17 @@ public class QuestAchievements {
      * @param lst0 List<Integer>
      */
     public void setCurrentChallenges(final List<String> lst0) {
-        this.currentChallenges = lst0;
+        currentChallenges = lst0;
     }
 
     /**
      * Adds the lost.
      */
     public void addLost() {
-        this.lost++;
-        this.winstreakCurrent = 0;
+        lost++;
+        winstreakCurrent = 0;
     }
+
     // Level, read-only ( note: it increments in addWin() )
     /**
      * Gets the level.
@@ -167,8 +164,9 @@ public class QuestAchievements {
      */
     public int getLevel() {
         final int winsToLvlUp = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_RANKUP, difficulty);
-        return this.win / winsToLvlUp;
+        return win / winsToLvlUp;
     }
+
     // Wins & Losses
     /**
      * Gets the lost.
@@ -176,7 +174,7 @@ public class QuestAchievements {
      * @return the lost
      */
     public int getLost() {
-        return this.lost;
+        return lost;
     }
 
     /**
@@ -212,20 +210,19 @@ public class QuestAchievements {
      * @return the difficulty index
      */
     public int getDifficulty() {
-        return this.difficulty;
+        return difficulty;
     }
 
     public QuestEventDraftContainer getDraftEvents() {
         return drafts;
     }
-    
+
     public void generateDrafts() {
-        
         if (drafts == null) {
             drafts = new QuestEventDraftContainer();
             draftsToGenerate = 1;
         }
-        
+
         QuestEventDraft toRemove = null;
         for (QuestEventDraft draft : drafts) {
             if (draft.getAge() <= 0
@@ -234,11 +231,11 @@ public class QuestAchievements {
                 break;
             }
         }
-        
+
         if (toRemove != null) {
             drafts.remove(toRemove);
         }
-        
+
         for (int i = 0; i < draftsToGenerate; i++) {
             QuestEventDraft draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());
             if (draft != null) {
@@ -246,19 +243,18 @@ public class QuestAchievements {
                 draftsToGenerate--;
             }
         }
-        
+
         FModel.getQuest().save();
-        
     }
 
     public void addDraftToken() {
         draftTokens++;
     }
-    
+
     public void setCurrentDraft(final QuestEventDraft draft) {
         currentDraft = drafts.indexOf(draft);
     }
-    
+
     public QuestEventDraft getCurrentDraft() {
         if (drafts == null || drafts.size() == 0) {
             return null;
@@ -276,7 +272,6 @@ public class QuestAchievements {
     }
     
     public int getWinsForPlace(final int place) {
-        
         switch (place) {
             case 1:
                 return firstPlaceDraftFinishes;
@@ -289,11 +284,9 @@ public class QuestAchievements {
         }
         
         return 0;
-        
     }
-    
+
     private void addDraftFinish(final int place) {
-        
         switch (place) {
             case 1:
                 firstPlaceDraftFinishes++;
@@ -308,13 +301,12 @@ public class QuestAchievements {
                 fourthPlaceDraftFinishes++;
                 break;
         }
-        
     }
-    
+
     public int getDraftTokens() {
         return draftTokens;
     }
-    
+
     public void spendDraftToken() {
         if (draftTokens > 0) {
             draftTokens--;
@@ -322,5 +314,4 @@ public class QuestAchievements {
 			FModel.getQuest().save();
         }
     }
-
 }
