@@ -19,7 +19,7 @@ import forge.util.Utils;
 public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     protected final TabPage<T>[] tabPages;
     private TabPage<T> selectedPage;
-    private final TabHeader<T> tabHeader;
+    protected final TabHeader<T> tabHeader;
 
     @SuppressWarnings("unchecked")
     public TabPageScreen(TabPage<T>... tabPages0) {
@@ -70,6 +70,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         private final FLabel btnBack;
         private boolean isScrollable;
+        private FDisplayObject finalVisibleTab;
 
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
@@ -78,6 +79,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 for (FDisplayObject child : getChildren()) {
                     if (child.isVisible()) {
                         tabCount++;
+                        finalVisibleTab = child;
                     }
                 }
                 float x = 0;
@@ -230,7 +232,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 }
 
                 //draw right border if needed
-                if (getLeft() < TabPage.this.getWidth() - getWidth() - 1) {
+                if (parentScreen.tabHeader.finalVisibleTab != this) {
                     float x = getWidth() - Header.LINE_THICKNESS / 2;
                     g.drawLine(Header.LINE_THICKNESS, TabHeader.SEPARATOR_COLOR, x, 0, x, h);
                 }
