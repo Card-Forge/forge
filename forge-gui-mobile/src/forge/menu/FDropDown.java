@@ -154,6 +154,7 @@ public abstract class FDropDown extends FScrollPane {
 
     @Override
     protected void drawOverlay(Graphics g) {
+        super.drawOverlay(g);
         float w = getWidth();
         float h = getHeight();
         g.drawRect(2, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides

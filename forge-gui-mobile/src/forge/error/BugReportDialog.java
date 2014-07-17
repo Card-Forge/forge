@@ -94,6 +94,7 @@ public class BugReportDialog extends FOptionPane {
 
         @Override
         public void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
             g.drawRect(1, BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
     }

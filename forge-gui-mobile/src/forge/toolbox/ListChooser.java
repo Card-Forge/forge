@@ -462,6 +462,7 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
             g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
 

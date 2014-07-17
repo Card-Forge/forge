@@ -74,6 +74,7 @@ public abstract class ItemView<T extends InventoryItem> {
 
         @Override
         public void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
             g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
     }
@@ -95,6 +96,7 @@ public abstract class ItemView<T extends InventoryItem> {
 
         @Override
         public void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
             g.drawLine(1, BORDER_COLOR, 0, 0, getWidth(), 0);
         }
     }

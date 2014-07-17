@@ -6,11 +6,16 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge.Animation;
 import forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinColor.Colors;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
 
 public abstract class FScrollPane extends FContainer {
-    private static float FLING_DECEL = 750f;
+    private static final float FLING_DECEL = 750f;
+    private static final FSkinColor INDICATOR_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.7f);
+    private static final float INDICATOR_SIZE = Utils.scaleMax(5);
+    private static final float INDICATOR_MARGIN = Utils.scaleMax(3);
 
     private float scrollLeft, scrollTop;
     private ScrollBounds scrollBounds;
@@ -145,6 +150,31 @@ public abstract class FScrollPane extends FContainer {
         scrollLeft = 0;
         scrollTop = 0;
         setScrollPositionsAfterLayout(oldScrollLeft, oldScrollTop);
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        //draw triangles indicating scroll potential
+        if (scrollLeft > 0) {
+            float x = INDICATOR_MARGIN;
+            float y = getHeight() / 2;
+            g.fillTriangle(INDICATOR_COLOR, x, y, x + INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
+        }
+        if (scrollLeft < getMaxScrollLeft()) {
+            float x = getWidth() - INDICATOR_MARGIN;
+            float y = getHeight() / 2;
+            g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x - INDICATOR_SIZE, y + INDICATOR_SIZE);
+        }
+        if (scrollTop > 0) {
+            float x = getWidth() / 2;
+            float y = INDICATOR_MARGIN;
+            g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y + INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
+        }
+        if (scrollTop < getMaxScrollTop()) {
+            float x = getWidth() / 2;
+            float y = getHeight() - INDICATOR_MARGIN;
+            g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y - INDICATOR_SIZE);
+        }
     }
 
     //allow overriding to adjust what scroll positions are restored after layout

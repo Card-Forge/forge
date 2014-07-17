@@ -429,6 +429,7 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
             g.drawRect(1.5f, ListChooser.BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
 

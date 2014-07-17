@@ -86,6 +86,7 @@ public class ConstructedScreen extends LaunchScreen {
 
         @Override
         protected void drawOverlay(Graphics g) {
+            super.drawOverlay(g);
             g.drawLine(1.5f, PLAYER_BORDER_COLOR, 0, 0, getWidth(), 0);
         }
     };
