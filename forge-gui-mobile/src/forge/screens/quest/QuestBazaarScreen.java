@@ -5,6 +5,7 @@ import java.util.Set;
 import forge.assets.FImage;
 import forge.model.FModel;
 import forge.quest.bazaar.QuestBazaarManager;
+import forge.quest.bazaar.QuestStallDefinition;
 import forge.screens.TabPageScreen;
 
 public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
@@ -19,14 +20,17 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         BazaarPage[] pages = new BazaarPage[stallNames.size()];
 
         for (final String s : stallNames) {
-            pages[pageNum++] = new BazaarPage(s, (FImage)bazaar.getStall(s).getIcon());
+            pages[pageNum++] = new BazaarPage(bazaar.getStall(s));
         }
         return pages;
     }
 
     private static class BazaarPage extends TabPage<QuestBazaarScreen> {
-        private BazaarPage(String caption0, FImage icon0) {
-            super(caption0, icon0);
+        private final QuestStallDefinition stallDef;
+
+        private BazaarPage(QuestStallDefinition stallDef0) {
+            super(stallDef0.getName(), (FImage)stallDef0.getIcon());
+            stallDef = stallDef0;
         }
 
         @Override
