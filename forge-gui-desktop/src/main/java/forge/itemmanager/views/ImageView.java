@@ -977,6 +977,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             int fontOffsetY = (GROUP_HEADER_HEIGHT - fm.getHeight()) / 2 + fm.getAscent();
 
             for (Group group : groups) {
+                if (group.items.isEmpty()) {
+                    continue;
+                }
                 if (group.getBottom() < visibleTop) {
                     continue;
                 }
@@ -1004,29 +1007,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     FSkin.setGraphicsColor(g2d, GROUP_HEADER_LINE_COLOR);
                     g2d.drawLine(x, y, bounds.x + bounds.width - 1, y);
 
-                    if (!group.items.isEmpty()) { //draw expand/collapse glyph as long as group isn't empty
-                        Polygon glyph = new Polygon();
-                        int offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
-                        x = bounds.x + offset;
-                        if (group.isCollapsed) {
-                            y++;
-                            glyph.addPoint(x, y - offset);
-                            glyph.addPoint(x + offset, y);
-                            glyph.addPoint(x, y + offset);
-                        }
-                        else {
-                            glyph.addPoint(x - offset + 2, y + offset - 1);
-                            glyph.addPoint(x + offset, y + offset - 1);
-                            glyph.addPoint(x + offset, y - offset + 1);
-                        }
-                        g2d.fill(glyph);
+                    //draw expand/collapse glyph
+                    Polygon glyph = new Polygon();
+                    int offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
+                    x = bounds.x + offset;
+                    if (group.isCollapsed) {
+                        y++;
+                        glyph.addPoint(x, y - offset);
+                        glyph.addPoint(x + offset, y);
+                        glyph.addPoint(x, y + offset);
                     }
-                    if (group.isCollapsed || group.items.isEmpty()) {
-                        continue;
+                    else {
+                        glyph.addPoint(x - offset + 2, y + offset - 1);
+                        glyph.addPoint(x + offset, y + offset - 1);
+                        glyph.addPoint(x + offset, y - offset + 1);
                     }
-                }
-                else if (group.items.isEmpty()) {
-                    continue;
+                    g2d.fill(glyph);
+
+                    if (group.isCollapsed) { continue; }
                 }
 
                 ItemInfo skippedItem = null;

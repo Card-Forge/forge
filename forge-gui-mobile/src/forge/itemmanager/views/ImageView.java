@@ -791,6 +791,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
+            if (items.isEmpty()) { return; }
+
             if (groupBy != null) {
                 //draw group name and horizontal line
                 float x = GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
@@ -801,24 +803,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 y += GROUP_HEADER_HEIGHT / 2;
                 g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, getWidth(), y);
 
-                if (!items.isEmpty()) { //draw expand/collapse glyph as long as group isn't empty
-                    float offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
-                    x = offset;
-                    if (isCollapsed) {
-                        y += GROUP_HEADER_LINE_THICKNESS;
-                        g.fillTriangle(GROUP_HEADER_LINE_COLOR,
-                                x, y - offset,
-                                x + offset, y,
-                                x, y + offset);
-                    }
-                    else {
-                        g.fillTriangle(GROUP_HEADER_LINE_COLOR,
-                                x - offset + 2, y + offset - 1,
-                                x + offset, y + offset - 1,
-                                x + offset, y - offset + 1);
-                    }
+                //draw expand/collapse glyph
+                float offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
+                x = offset;
+                if (isCollapsed) {
+                    y += GROUP_HEADER_LINE_THICKNESS;
+                    g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                            x, y - offset,
+                            x + offset, y,
+                            x, y + offset);
                 }
-                if (isCollapsed || items.isEmpty()) { return; }
+                else {
+                    g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                            x - offset + 2, y + offset - 1,
+                            x + offset, y + offset - 1,
+                            x + offset, y - offset + 1);
+                }
+
+                if (isCollapsed) { return; }
 
                 float visibleLeft = getScrollLeft();
                 float visibleRight = visibleLeft + getWidth();
@@ -833,8 +835,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 return;
             }
-
-            if (items.isEmpty()) { return; }
 
             final float visibleTop = getScrollValue();
             final float visibleBottom = visibleTop + getScroller().getHeight();
