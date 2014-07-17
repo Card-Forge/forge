@@ -49,8 +49,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         selectedPage = tabPage0;
         if (selectedPage != null) {
             selectedPage.setVisible(true);
-            if (tabHeader.isScrollable) { //scroll tab into view if needed
-                tabHeader.scroller.scrollIntoView(selectedPage.tab, TabHeader.BACK_BUTTON_WIDTH);
+            if (tabHeader.isScrollable) { //scroll tab into view if needed, leaving half of the previous/next tab visible if possible
+                tabHeader.scroller.scrollIntoView(selectedPage.tab, selectedPage.tab.getWidth() / 2);
             }
         }
     }
@@ -74,7 +74,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-                int tabCount = -1; //start at -1 so back button not counted
+                int tabCount = 0;
                 for (FDisplayObject child : getChildren()) {
                     if (child.isVisible()) {
                         tabCount++;
@@ -84,16 +84,13 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 float tabWidth;
                 isScrollable = (tabCount > 3); //support up to 3 tabs without scrolling
                 if (isScrollable) {
-                    tabWidth = visibleWidth / 2 - BACK_BUTTON_WIDTH; //support showing an amount of the third tab equal to the width of the back button
+                    tabWidth = visibleWidth / 2.5f; //support half of the third tab to make scrolling more obvious
                 }
                 else {
-                    tabWidth = (visibleWidth - BACK_BUTTON_WIDTH) / tabCount;
+                    tabWidth = visibleWidth / tabCount;
                 }
                 for (FDisplayObject child : getChildren()) {
-                    if (x == 0) { //skip back button
-                        x += BACK_BUTTON_WIDTH;
-                    }
-                    else if (child.isVisible()) {
+                    if (child.isVisible()) {
                         child.setBounds(x, 0, tabWidth, visibleHeight);
                         x += tabWidth;
                     }
@@ -103,7 +100,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         });
 
         public TabHeader(TabPage<T>[] tabPages) {
-            btnBack = scroller.add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+            btnBack = add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back();
@@ -129,10 +126,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         @Override
         public void drawOverlay(Graphics g) {
             //draw right border for back button
-            float x = btnBack.getWidth() - LINE_THICKNESS / 2 - scroller.getScrollLeft();
-            if (x >= 0) {
-                g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, x, 0, x, getHeight());
-            }
+            float x = btnBack.getWidth() - LINE_THICKNESS / 2;
+            g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, x, 0, x, getHeight());
 
             //draw bottom border for header
             float y = HEIGHT - LINE_THICKNESS / 2;
@@ -141,7 +136,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            scroller.setBounds(0, 0, width, height);
+            float x = btnBack.getWidth();
+            scroller.setBounds(x, 0, width - x, height);
         }
     }
 
