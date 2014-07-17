@@ -20,6 +20,7 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.filters.ItemFilter;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FComboBox;
@@ -53,11 +54,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float SEL_BORDER_SIZE = Utils.scaleMax(1);
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
-
-    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.DEFAULT, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.CARD_RARITY };
-    private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
-    private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
-    private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
 
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
     private int columnCount = 4;
@@ -146,20 +142,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
-        //setup options
-        boolean isDeckManager = itemManager0.getGenericType().equals(DeckProxy.class);
-        GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
-        ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
-        cbGroupByOptions.addItem("(none)");
-        cbPileByOptions.addItem("(none)");
-        for (GroupDef option : groupByOptions) {
-            cbGroupByOptions.addItem(option);
-        }
-        for (ColumnDef option : pileByOptions) {
-            cbPileByOptions.addItem(option);
-        }
-        cbGroupByOptions.setSelectedIndex(0);
-        cbPileByOptions.setSelectedIndex(0);
+
+        SItemManagerUtil.populateImageViewOptions(itemManager0, cbGroupByOptions, cbPileByOptions);
 
         cbGroupByOptions.setChangedHandler(new FEventHandler() {
             @Override

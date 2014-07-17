@@ -1,12 +1,17 @@
 package forge.itemmanager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.common.base.Function;
 
+import forge.card.CardEdition;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.deck.DeckProxy;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.model.FModel;
 
 public enum GroupDef {
     COLOR("Color", getColorGroups(),
@@ -43,6 +48,25 @@ public enum GroupDef {
                     }
                     else if (item instanceof DeckProxy) {
                         return getColorGroup(((DeckProxy) item).getColorIdentity());
+                    }
+                    return -1;
+                }
+            }),
+    SET("Set", getSetGroups(),
+            new Function<Integer, ColumnDef>() {
+                @Override
+                public ColumnDef apply(final Integer groupIndex) {
+                    return null;
+                }
+            },
+            new Function<InventoryItem, Integer>() {
+                @Override
+                public Integer apply(final InventoryItem item) {
+                    if (item instanceof PaperCard) {
+                        return getSetGroup(((PaperCard) item).getEdition());
+                    }
+                    else if (item instanceof DeckProxy) {
+                        return getSetGroup(((DeckProxy) item).getEdition().getCode());
                     }
                     return -1;
                 }
@@ -213,5 +237,28 @@ public enum GroupDef {
             return 4;
         }
         return -1; //shouldn't happen
+    }
+
+    private static Map<String, Integer> setGroupMap;
+
+    private static String[] getSetGroups() {
+        setGroupMap = new HashMap<String, Integer>(); //cache mappings to make lookup quicker later
+
+        int groupNum = 0;
+        String[] setGroups = new String[FModel.getMagicDb().getEditions().size()];
+        for (CardEdition edition : FModel.getMagicDb().getEditions()) {
+            setGroups[groupNum] = edition.getName();
+            setGroupMap.put(edition.getCode(), groupNum);
+            groupNum++;
+        }
+        return setGroups;
+    }
+
+    private static Integer getSetGroup(String set) {
+        Integer groupNum = setGroupMap.get(set);
+        if (groupNum == null) {
+            groupNum = -1;
+        }
+        return groupNum;
     }
 }

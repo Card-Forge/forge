@@ -3,6 +3,8 @@ package forge.itemmanager;
 import forge.assets.FSkinProp;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.deck.DeckProxy;
+import forge.interfaces.IComboBox;
 import forge.item.InventoryItem;
 import forge.util.ComparableOp;
 
@@ -136,5 +138,26 @@ public final class SItemManagerUtil {
             builder.append("\n" + itemEntry.getValue() + " * " + itemEntry.getKey().toString());
         }
         return builder.toString();
+    }
+
+    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.DEFAULT, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.SET, GroupDef.CARD_RARITY };
+    private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.SET };
+    private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
+    private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
+
+    public static void populateImageViewOptions(IItemManager<?> itemManager, IComboBox<Object> cbGroupByOptions, IComboBox<Object> cbPileByOptions) {
+        boolean isDeckManager = itemManager.getGenericType().equals(DeckProxy.class);
+        GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
+        ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
+        cbGroupByOptions.addItem("(none)");
+        cbPileByOptions.addItem("(none)");
+        for (GroupDef option : groupByOptions) {
+            cbGroupByOptions.addItem(option);
+        }
+        for (ColumnDef option : pileByOptions) {
+            cbPileByOptions.addItem(option);
+        }
+        cbGroupByOptions.setSelectedIndex(0);
+        cbPileByOptions.setSelectedIndex(0);
     }
 }

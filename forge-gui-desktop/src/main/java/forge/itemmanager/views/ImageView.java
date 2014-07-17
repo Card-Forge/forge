@@ -12,6 +12,7 @@ import forge.itemmanager.GroupDef;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.SItemManagerUtil;
 import forge.screens.match.controllers.CDetail;
 import forge.screens.match.controllers.CPicture;
 import forge.toolbox.*;
@@ -42,11 +43,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int GROUP_HEADER_GLYPH_WIDTH = 6;
     private static final int MIN_COLUMN_COUNT = 1;
     private static final int MAX_COLUMN_COUNT = 10;
-
-    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.DEFAULT, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.CARD_RARITY };
-    private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY };
-    private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
-    private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
 
     private final CardViewDisplay display;
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
@@ -142,26 +138,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
-        //setup options
-        boolean isDeckManager = itemManager0.getGenericType().equals(DeckProxy.class);
-        GroupDef[] groupByOptions = isDeckManager ? DECK_GROUPBY_OPTIONS : CARD_GROUPBY_OPTIONS;
-        ColumnDef[] pileByOptions = isDeckManager ? DECK_PILEBY_OPTIONS : CARD_PILEBY_OPTIONS;
-        cbGroupByOptions.addItem("(none)");
-        cbPileByOptions.addItem("(none)");
-        for (GroupDef option : groupByOptions) {
-            cbGroupByOptions.addItem(option);
-        }
-        for (ColumnDef option : pileByOptions) {
-            cbPileByOptions.addItem(option);
-        }
+
+        SItemManagerUtil.populateImageViewOptions(itemManager0, cbGroupByOptions, cbPileByOptions);
+
         for (Integer i = MIN_COLUMN_COUNT; i <= MAX_COLUMN_COUNT; i++) {
             cbColumnCount.addItem(i);
         }
         cbGroupByOptions.setMaximumRowCount(cbGroupByOptions.getItemCount());
         cbPileByOptions.setMaximumRowCount(cbPileByOptions.getItemCount());
         cbColumnCount.setMaximumRowCount(cbColumnCount.getItemCount());
-        cbGroupByOptions.setSelectedIndex(0);
-        cbPileByOptions.setSelectedIndex(0);
         cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
 
         cbGroupByOptions.addActionListener(new ActionListener() {
