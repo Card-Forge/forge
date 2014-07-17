@@ -1,9 +1,12 @@
 package forge.itemmanager;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 import forge.card.CardEdition;
 import forge.card.CardType;
@@ -244,11 +247,16 @@ public enum GroupDef {
     private static String[] getSetGroups() {
         setGroupMap = new HashMap<String, Integer>(); //cache mappings to make lookup quicker later
 
+        //build sorted list of sets
+        List<CardEdition> sortedSets = Lists.newArrayList(FModel.getMagicDb().getEditions());
+        Collections.sort(sortedSets);
+        Collections.reverse(sortedSets);
+
         int groupNum = 0;
-        String[] setGroups = new String[FModel.getMagicDb().getEditions().size()];
-        for (CardEdition edition : FModel.getMagicDb().getEditions()) {
-            setGroups[groupNum] = edition.getName();
-            setGroupMap.put(edition.getCode(), groupNum);
+        String[] setGroups = new String[sortedSets.size()];
+        for (CardEdition set : sortedSets) {
+            setGroups[groupNum] = set.getName();
+            setGroupMap.put(set.getCode(), groupNum);
             groupNum++;
         }
         return setGroups;
