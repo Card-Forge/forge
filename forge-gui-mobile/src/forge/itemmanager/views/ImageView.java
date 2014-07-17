@@ -450,18 +450,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
 
             groupY = y;
+
+            if (group.items.isEmpty()) {
+                group.setBounds(groupX, groupY, groupWidth, 0);
+                group.scrollWidth = groupWidth;
+                continue;
+            }
+
             if (groupBy != null) {
                 y += GROUP_HEADER_HEIGHT + PADDING; //leave room for group header
-                if (group.isCollapsed || group.items.isEmpty()) {
+                if (group.isCollapsed) {
                     group.setBounds(groupX, groupY, groupWidth, GROUP_HEADER_HEIGHT);
                     group.scrollWidth = groupWidth;
                     continue;
                 }
-            }
-            else if (group.items.isEmpty()) {
-                group.setBounds(groupX, groupY, groupWidth, 0);
-                group.scrollWidth = groupWidth;
-                continue;
             }
 
             if (pileBy == null) {
