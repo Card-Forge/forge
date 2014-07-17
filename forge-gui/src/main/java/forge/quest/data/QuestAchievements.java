@@ -38,6 +38,9 @@ public class QuestAchievements {
     // Difficulty - will store only index from now.
     private int difficulty;
 
+    public QuestAchievements() { //needed for XML serialization
+    }
+
     /**
      * TODO: Write javadoc for Constructor.
      * @param diff &emsp; int

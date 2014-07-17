@@ -165,6 +165,9 @@ public class QuestAssets {
         cond.setLevel(level);
     }
 
+    public QuestAssets() { //needed for XML serialization
+    }
+
     /**
      * Instantiates a new quest assets.
      */
