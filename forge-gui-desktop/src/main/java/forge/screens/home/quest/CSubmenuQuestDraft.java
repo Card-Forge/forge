@@ -101,10 +101,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
         }
         
     }
-    
-    @SuppressWarnings("unchecked")
+
     private void endTournamentAndAwardPrizes() {
-        
         QuestEventDraft draft = FModel.getQuest().getAchievements().getCurrentDraft();
         
         if (!draft.isStarted()) {
