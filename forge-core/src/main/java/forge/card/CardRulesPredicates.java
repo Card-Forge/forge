@@ -42,9 +42,13 @@ public final class CardRulesPredicates {
      *            the what
      * @return the predicate
      */
-    public static Predicate<CardRules> cmc(final ComparableOp op, final int what) {
-        return new LeafNumber(LeafNumber.CardField.CMC, op, what);
-    }
+	public static Predicate<CardRules> cmc(final ComparableOp op, final int what) {
+		return new LeafNumber(LeafNumber.CardField.CMC, op, what);
+	}
+	
+	public static Predicate<CardRules> cost(final PredicateString.StringOp op, final String what) {
+		return new LeafString(LeafString.CardField.COST, op, what);
+	}
 
     /**
      * 
@@ -288,7 +292,7 @@ public final class CardRulesPredicates {
 
     private static class LeafString extends PredicateString<CardRules> {
         public enum CardField {
-            ORACLE_TEXT, NAME, SUBTYPE, JOINED_TYPE
+            ORACLE_TEXT, NAME, SUBTYPE, JOINED_TYPE, COST
         }
 
         private final String operand;
@@ -307,6 +311,9 @@ public final class CardRulesPredicates {
                 return op(card.getOracleText(), operand);
             case JOINED_TYPE:
                 return op(card.getType().toString(), operand);
+			case COST:
+				String cost = card.getManaCost().toString();
+				return op(cost, operand);
             default:
                 return false;
             }
@@ -358,7 +365,7 @@ public final class CardRulesPredicates {
 
     public static class LeafNumber implements Predicate<CardRules> {
         public enum CardField {
-            CMC, POWER, TOUGHNESS,
+            CMC, POWER, TOUGHNESS
         }
 
         private final LeafNumber.CardField field;

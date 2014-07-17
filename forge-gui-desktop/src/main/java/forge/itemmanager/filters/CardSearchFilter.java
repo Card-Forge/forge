@@ -20,7 +20,7 @@ import java.awt.event.ItemListener;
 
 public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     private FComboBoxWrapper<String> cbSearchMode;
-    private FLabel btnName, btnType, btnText;
+    private FLabel btnName, btnType, btnText, btnCost;
 
     public CardSearchFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
@@ -35,6 +35,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         copy.btnName.setSelected(this.btnName.isSelected());
         copy.btnType.setSelected(this.btnType.isSelected());
         copy.btnText.setSelected(this.btnText.isSelected());
+		copy.btnCost.setSelected(this.btnCost.isSelected());
         return copy;
     }
 
@@ -44,7 +45,8 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         this.cbSearchMode.setSelectedIndex(0);
         this.btnName.setSelected(true);
         this.btnType.setSelected(true);
-        this.btnText.setSelected(true);
+		this.btnText.setSelected(true);
+		this.btnCost.setSelected(false);
     }
 
     @Override
@@ -67,6 +69,10 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         btnName = addButton(widget, "Name");
         btnType = addButton(widget, "Type");
         btnText = addButton(widget, "Text");
+		btnCost = addButton(widget, "Cost");
+		
+		btnCost.setSelected(false);
+		
     }
 
     @Override
@@ -74,11 +80,12 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         final int comboBoxWidth = 61;
         final int buttonWidth = 51;
 
-        helper.fillLine(txtSearch, FTextField.HEIGHT, comboBoxWidth + buttonWidth * 3 + 12); //leave space for combo box and buttons
+        helper.fillLine(txtSearch, FTextField.HEIGHT, comboBoxWidth + buttonWidth * 4 + 16); //leave space for combo box and buttons
         helper.include(cbSearchMode.getComponent(), comboBoxWidth, FTextField.HEIGHT);
         helper.include(btnName, buttonWidth, FTextField.HEIGHT);
         helper.include(btnType, buttonWidth, FTextField.HEIGHT);
-        helper.include(btnText, buttonWidth, FTextField.HEIGHT);
+		helper.include(btnText, buttonWidth, FTextField.HEIGHT);
+		helper.include(btnCost, buttonWidth, FTextField.HEIGHT);
     }
 
     @SuppressWarnings("serial")
@@ -103,7 +110,8 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
                 cbSearchMode.getSelectedIndex() != 0,
                 btnName.isSelected(),
                 btnType.isSelected(),
-                btnText.isSelected());
+                btnText.isSelected(),
+				btnCost.isSelected());
     }
 
     @Override
