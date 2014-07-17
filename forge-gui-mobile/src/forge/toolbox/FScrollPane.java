@@ -68,6 +68,10 @@ public abstract class FScrollPane extends FContainer {
     }
 
     public void scrollIntoView(FDisplayObject child) {
+        scrollIntoView(child, 0);
+    }
+
+    public void scrollIntoView(FDisplayObject child, float margin) {
         Vector2 childPos = getChildRelativePosition(child);
         if (childPos == null) { return; } //do nothing if not a valid child
 
@@ -77,18 +81,18 @@ public abstract class FScrollPane extends FContainer {
         float childBottom = childTop + child.getHeight();
 
         float dx = 0;
-        if (childLeft < 0) {
-            dx = childLeft;
+        if (childLeft < margin) {
+            dx = childLeft - margin;
         }
-        else if (childRight > getWidth()) {
-            dx = childRight - getWidth();
+        else if (childRight > getWidth() - margin) {
+            dx = childRight - getWidth() + margin;
         }
         float dy = 0;
-        if (childTop < 0) {
-            dy = childTop;
+        if (childTop < margin) {
+            dy = childTop - margin;
         }
-        else if (childBottom > getHeight()) {
-            dy = childBottom - getHeight();
+        else if (childBottom > getHeight() - margin) {
+            dy = childBottom - getHeight() + margin;
         }
 
         if (dx == 0 && dy == 0) { return; }

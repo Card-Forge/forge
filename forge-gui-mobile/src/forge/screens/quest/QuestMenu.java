@@ -197,7 +197,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         //addItem(tournamentsItem); tournamentsItem.setSelected(currentScreen == tournamentsScreen);
         addItem(decksItem); decksItem.setSelected(currentScreen == decksScreen);
         addItem(spellShopItem); spellShopItem.setSelected(currentScreen == spellShopScreen);
-        //addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
+        addItem(bazaarItem); bazaarItem.setSelected(currentScreen == bazaarScreen);
         addItem(statsItem); statsItem.setSelected(currentScreen == statsScreen);
         addItem(unlockSetsItem);
         addItem(travelItem);
