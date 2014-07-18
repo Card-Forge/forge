@@ -4,6 +4,12 @@ Forge Beta: 0#-##-2014 ver 1.5.22
 ##### cards in total.
 
 
+- CardManagers now support grouping by Set -
+You can now group cards by set, with the sets being sorted in reverse chronological order.
+As part of this, I've also fixed it so the headers for groups with no cards in them will now be hidden instead of appearing with a "(0)" after them.
+Since the groups are collapsible, this can allow CardManagers to work somewhat similar to the old "Binder View" in MTGO (may it rest in peace).
+
+
 -------------
 Release Notes
 -------------
