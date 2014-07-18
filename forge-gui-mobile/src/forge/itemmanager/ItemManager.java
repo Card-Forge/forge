@@ -37,6 +37,7 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
+import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
@@ -70,6 +71,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemManagerConfig config;
     private String caption = "Items";
     private String ratio = "(0 / 0)";
+    private boolean hasNewColumn;
 
     private final ItemFilter<? extends T> mainSearchFilter;
 
@@ -231,6 +233,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         setViewIndex(config0.getViewIndex());
         setHideFilters(config0.getHideFilters());
+        hasNewColumn = config.getCols().containsKey(ColumnDef.NEW);
+    }
+
+    protected String getItemSuffix(Entry<T, Integer> item) {
+        return hasNewColumn && FModel.getQuest().getCards().isNew(item.getKey()) ? " *NEW*" : null;
     }
 
     public abstract class ItemRenderer {

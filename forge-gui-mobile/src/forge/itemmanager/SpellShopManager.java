@@ -17,7 +17,6 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FPopupMenu;
-import forge.model.FModel;
 import forge.quest.QuestSpellShop;
 import forge.toolbox.FList;
 
@@ -63,8 +62,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
                 float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
                 if (value.getKey() instanceof PaperCard) {
-                    String suffix = getConfig().getCols().containsKey(ColumnDef.NEW) && FModel.getQuest().getCards().isNew(value.getKey()) ? " *NEW*" : null;
-                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), suffix, x, y, w, h);
+                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), getItemSuffix(value), x, y, w, h);
                 }
                 else {
                     g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
