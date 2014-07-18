@@ -98,7 +98,8 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
                 cbSearchMode.getSelectedIndex() != 0,
                 btnName.isSelected(),
                 btnType.isSelected(),
-                btnText.isSelected());
+                btnText.isSelected(),
+                btnText.isSelected()); //TODO: Support disabling searching in cost separate from searching in text
     }
 
     @Override
