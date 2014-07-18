@@ -75,7 +75,6 @@ Effect: Improves sell percentage by %.2f%%.</description>
     </item>
     <item name="Zeppelin" maxLevel="1" basePrice="5000" itemType="ZEPPELIN" icon="ICO_QUEST_ZEP">
       <description>This extremely comfortable airship allows for more efficient and safe travel to faraway destinations.
-      
 
 Effect: Quest challenges become available more frequently.
 Effect: +3 life
@@ -102,13 +101,11 @@ Effect: You may have each match be best of 5 instead of 3.</description>
     </item>
     <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_QUEST_STAKES">
       <description>A written agreement with the Spell Shop to acquire cards you lose in an ante match from quest opponents.
-      
 
 Effect: Cards lost in an ante match will be available immediately following the match in the Card Shop.</description>
     </item>
     <item name="Bank Membership" maxLevel="3" basePrice="2500" itemType="MEMBERSHIP_TOKEN" icon="ICO_QUEST_GOLD">
       <description>A token certifying you as a member of the bank, giving you a greater selection of booster packs when you win. 
-      
 
 Effect: Adds one more booster pack to the pack selection after you win.</description>
     </item>
