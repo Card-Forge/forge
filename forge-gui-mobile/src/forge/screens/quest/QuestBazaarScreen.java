@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.assets.FImage;
@@ -57,7 +58,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
                 float y = 0;
                 for (FDisplayObject child : getChildren()) {
-                    child.setBounds(0, y, visibleWidth, BazaarItemDisplay.HEIGHT);
+                    child.setBounds(0, y, visibleWidth, ((BazaarItemDisplay)child).getPreferredHeight(visibleWidth));
                     y += child.getHeight();
                 }
                 return new ScrollBounds(visibleWidth, y);
@@ -136,28 +137,73 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     }
 
     private static class BazaarItemDisplay extends FContainer {
-        private static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
+        private static final float MIN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2.5f;
 
         private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text("Buy").font(FSkinFont.get(20)).build());
+        private final FLabel lblName = add(new FLabel.Builder().font(FSkinFont.get(15)).insets(Vector2.Zero).build());
+        private final FTextArea lblDesc = add(new FTextArea());
+        private final FLabel lblCost = add(new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
+
         private final IQuestBazaarItem item;
+        private final FImage icon;
 
         private BazaarItemDisplay(IQuestBazaarItem item0) {
             item = item0;
+
+            QuestAssets assets = FModel.getQuest().getAssets();
+            icon = (FImage)item.getIcon(assets);
+
+            lblName.setText(item.getPurchaseName());
+            lblDesc.setText(item.getPurchaseDescription(assets));
+            lblCost.setText(String.valueOf(item.getBuyingPrice(assets)));
+
+            lblDesc.setFont(FSkinFont.get(12));
+            lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
+            lblCost.setHeight(lblCost.getAutoSizeBounds().height);
+
+            float buttonSize = MIN_HEIGHT - lblCost.getHeight() - 3 * BazaarPage.PADDING;
+            btnBuy.setSize(buttonSize, buttonSize);
         }
 
         @Override
         public void drawBackground(Graphics g) {
-            float y;
-            
-            y = getHeight() - FList.LINE_THICKNESS / 2;
+            if (icon != null) {
+                float iconSize = btnBuy.getHeight();
+                g.drawImage(icon, 0, BazaarPage.PADDING, iconSize, iconSize);
+            }
+
+            //draw bottom border
+            float y = getHeight() - FList.LINE_THICKNESS / 2;
             g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
+        }
+
+        public float getPreferredHeight(float width) {
+            float padding = BazaarPage.PADDING;
+            width -= 2 * (btnBuy.getHeight() + padding);
+            float height = lblName.getAutoSizeBounds().height + lblDesc.getPreferredHeight(width) + 3 * padding;
+            if (height < MIN_HEIGHT) {
+                height = MIN_HEIGHT;
+            }
+            return height;
         }
 
         @Override
         protected void doLayout(float width, float height) {
             float padding = BazaarPage.PADDING;
-            float buttonSize = height - 2 * padding;
-            btnBuy.setBounds(width - padding - buttonSize, padding, buttonSize, buttonSize);
+            float buttonSize = btnBuy.getHeight();
+
+            float x = width - padding - buttonSize;
+            float y = padding;
+            btnBuy.setPosition(x, y);
+            y += buttonSize + padding;
+            lblCost.setBounds(x, y, buttonSize, lblCost.getHeight());
+
+            float w = x - buttonSize - padding;
+            x = buttonSize;
+            y = padding;
+            lblName.setBounds(x, y, w, lblName.getAutoSizeBounds().height);
+            y += lblName.getHeight() + padding;
+            lblDesc.setBounds(x, y, w, height - padding - y);
         }
     }
 }
