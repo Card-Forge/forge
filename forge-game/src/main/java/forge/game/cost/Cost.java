@@ -23,11 +23,11 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
 
@@ -643,8 +643,6 @@ public class Cost {
      * <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code>
      */
     private static final String[] NUM_NAMES = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
-    /** Constant <code>vowelPattern</code>. */
-    private static final Pattern VOWEL_PATTERN = Pattern.compile("^[aeiou]", Pattern.CASE_INSENSITIVE);
 
     /**
      * Convert amount type to words.
@@ -686,7 +684,7 @@ public class Cost {
         if (i >= Cost.NUM_NAMES.length) {
             sb.append(i);
         }
-        else if ((1 == i) && Cost.VOWEL_PATTERN.matcher(type).find()) {
+        else if (i == 1 && Lang.startsWithVowel(type)) {
             sb.append("an");
         }
         else {

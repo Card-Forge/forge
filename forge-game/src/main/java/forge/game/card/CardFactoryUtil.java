@@ -2161,6 +2161,10 @@ public class CardFactoryUtil {
             final String[] k = parse.split(":");
             final String[] valid = k[1].split(",");
             String desc = k.length > 2 ? k[2] : k[1];
+            String article = Lang.startsWithVowel(desc) ? "an" : "a";
+            if (desc.equals("Creature")) {
+                desc = "creature"; //use lowercase for "Champion a creature"
+            }
 
             StringBuilder changeType = new StringBuilder();
             for (String v : valid) {
@@ -2172,7 +2176,7 @@ public class CardFactoryUtil {
 
             StringBuilder trig = new StringBuilder();
             trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
-            trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion a(n) ");
+            trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion ").append(article + " ");
             trig.append(desc).append(" (When this enters the battlefield, sacrifice it unless you exile another ");
             trig.append(desc).append(" you control. When this leaves the battlefield, that card returns to the battlefield.)");
 

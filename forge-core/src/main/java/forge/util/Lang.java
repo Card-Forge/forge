@@ -3,10 +3,12 @@ package forge.util;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -115,13 +117,9 @@ public class Lang {
         return isVowel(word.trim().charAt(0));
     }
 
-    private static final char[] vowels = { 'a', 'i', 'e', 'o', 'u' };
+    private static final Pattern VOWEL_PATTERN = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
     public static boolean isVowel(char letter) {
-        char l = Character.toLowerCase(letter);
-        for (char c : vowels) {
-            if (c == l) return true;
-        }
-        return false;
+        return VOWEL_PATTERN.matcher(String.valueOf(letter)).find();
     }
 
     public final static String[] numbers0 = new String[] {
