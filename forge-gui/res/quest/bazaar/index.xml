@@ -60,7 +60,7 @@ Effect: Your first mulligan is free.</description>
     <item name="Map" purchaseName="Adventurer&apos;s Map" maxLevel="1" basePrice="2000" itemType="MAP" icon="ICO_QUEST_MAP">
       <description>These ancient charts should facilitate navigation during your travels significantly.
 
-Effect: Quest challenges become available more frequently</description>
+Effect: Quest challenges become available more frequently.</description>
     </item>
     <item name="Lucky Coin" maxLevel="1" basePrice="2000" itemType="LUCKY_COIN" icon="ICO_QUEST_COIN">
       <description>This coin is believed to give good luck to its owner.
@@ -85,7 +85,7 @@ Effect: Activate once for a new set of challenges (re-fuels after a challenge is
 But beware, you may build an immunity to its effects...
 
 Effect: Alchemist gives you %d credits.
-Effect: Reduces maximum life by 1."</description>
+Effect: Reduces maximum life by 1.</description>
     </item>
     <item name="Elixir of Life" maxLevel="15" basePrice="250" itemType="ELIXIR_OF_LIFE" icon="ICO_QUEST_ELIXIR">
       <description>A salty sweet smell rises from the vials bubbling behind the counter.
