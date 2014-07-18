@@ -4,12 +4,6 @@ Forge Beta: 0#-##-2014 ver 1.5.22
 ##### cards in total.
 
 
-- CardManagers now support grouping by Set -
-You can now group cards by set, with the sets being sorted in reverse chronological order.
-As part of this, I've also fixed it so the headers for groups with no cards in them will now be hidden instead of appearing with a "(0)" after them.
-Since the groups are collapsible, this can allow CardManagers to work somewhat similar to the old "Binder View" in MTGO (may it rest in peace).
-
-
 -------------
 Release Notes
 -------------
@@ -18,13 +12,19 @@ Release Notes
 Forge now includes many of the new Magic 2015 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
 
+- CardManagers now support grouping by Set -
+You can now group cards by set, with the sets being sorted in reverse chronological order.
+As part of this, I've also fixed it so the headers for groups with no cards in them will now be hidden instead of appearing with a "(0)" after them.
+Since the groups are collapsible, this can allow CardManagers to work somewhat similar to the old "Binder View" in MTGO (may it rest in peace).
+
+
 - Mana Cost Searching -
 There's now a button (disabled by default) that allows you to search for cards by their mana costs. It's a little finicky right now, but improvements will happen for the next version of Forge.
 
 
 - Boolean Expressions -
-
 You can now filter cards with simple boolean expressions. Forge automatically detects when you want to use one, so just start typing away in the search box.
+This is a completely optional feature and will not change the way you use the search function in Forge, unless you specifically intend to use it.
 
 As an example,
     "warrior" || "cleric"
