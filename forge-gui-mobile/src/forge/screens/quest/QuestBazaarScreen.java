@@ -168,8 +168,8 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         @Override
         public void drawBackground(Graphics g) {
             if (icon != null) {
-                float iconSize = btnBuy.getHeight();
-                g.drawImage(icon, 0, BazaarPage.PADDING, iconSize, iconSize);
+                float iconWidth = btnBuy.getWidth();
+                g.drawImage(icon, BazaarPage.PADDING / 2, BazaarPage.PADDING, iconWidth, iconWidth * icon.getHeight() / icon.getWidth());
             }
 
             //draw bottom border
@@ -199,7 +199,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             lblCost.setBounds(x, y, buttonSize, lblCost.getHeight());
 
             float w = x - buttonSize - padding;
-            x = buttonSize;
+            x = buttonSize + padding;
             y = padding;
             lblName.setBounds(x, y, w, lblName.getAutoSizeBounds().height);
             y += lblName.getHeight() + padding;
