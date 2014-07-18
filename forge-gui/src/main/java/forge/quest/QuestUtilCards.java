@@ -736,6 +736,10 @@ public final class QuestUtilCards {
         return this.fnNewGet;
     }
 
+    public boolean isNew(InventoryItem item) {
+        return qa.getNewCardList().contains(item);
+    }
+
     // These functions provide a way to sort and compare cards in a table
     // according to their new-ness
     // It might be a good idea to store them in a base class for both quest-mode
@@ -746,8 +750,7 @@ public final class QuestUtilCards {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
-                    .valueOf(0);
+            return isNew(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
         }
     };
 
@@ -756,7 +759,7 @@ public final class QuestUtilCards {
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? "NEW" : "";
+            return isNew(from.getKey()) ? "NEW" : "";
         }
     };
 

@@ -366,7 +366,7 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, x, y, w, h);
+            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h);
         }
     }
 

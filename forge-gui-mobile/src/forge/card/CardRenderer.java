@@ -221,29 +221,43 @@ public class CardRenderer {
         return cardArt;
     }
 
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, float x, float y, float w, float h) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, String suffix, float x, float y, float w, float h) {
         CardRules cardRules = card.getRules();
         if (cardRules != null) {
             drawCardListItem(g, font, foreColor, getCardArt(card), cardRules, card.getCurSetCode(),
                     card.getRarity(), card.getNetAttack(), card.getNetDefense(),
-                    card.getCurrentLoyalty(), count, x, y, w, h);
+                    card.getCurrentLoyalty(), count, suffix, x, y, w, h);
         }
         else { //if fake card, just draw card name centered
-            g.drawText(card.getName(), font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+            String name = card.getName();
+            if (count > 0) { //preface name with count if applicable
+                name = count + " " + name;
+            }
+            if (suffix != null) {
+                name += suffix;
+            }
+            g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, float x, float y, float w, float h) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, String suffix, float x, float y, float w, float h) {
         CardRules cardRules = paperCard.getRules();
         if (cardRules != null) {
             drawCardListItem(g, font, foreColor, getCardArt(paperCard), cardRules, paperCard.getEdition(),
                     paperCard.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
-                    cardRules.getInitialLoyalty(), count, x, y, w, h);
+                    cardRules.getInitialLoyalty(), count, suffix, x, y, w, h);
         }
         else { //if fake card, just draw card name centered
-            g.drawText(paperCard.getName(), font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
+            String name = paperCard.getName();
+            if (count > 0) { //preface name with count if applicable
+                name = count + " " + name;
+            }
+            if (suffix != null) {
+                name += suffix;
+            }
+            g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, float x, float y, float w, float h) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (cardArt != null) {
@@ -283,6 +297,9 @@ public class CardRenderer {
         String name = cardRules.getName();
         if (count > 0) { //preface name with count if applicable
             name = count + " " + name;
+        }
+        if (suffix != null) {
+            name += suffix;
         }
         g.drawText(name, font, foreColor, x, y, w - manaCostWidth - cardArtWidth - FList.PADDING, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
 

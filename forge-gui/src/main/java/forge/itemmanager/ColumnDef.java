@@ -231,7 +231,7 @@ public enum ColumnDef {
                     return from.getValue();
                 }
             }),
-    NEW("New", "New", 30, true, SortState.ASC,
+    NEW("New", "New", 30, true, SortState.DESC,
             null, null), //functions will be set later
     PRICE("Price", "Price", 35, true, SortState.DESC,
             null, null),

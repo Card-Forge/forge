@@ -17,6 +17,7 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FPopupMenu;
+import forge.model.FModel;
 import forge.quest.QuestSpellShop;
 import forge.toolbox.FList;
 
@@ -61,11 +62,12 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
                 float totalHeight = h + 2 * FList.PADDING;
                 float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
+                String suffix = FModel.getQuest().getCards().isNew(value.getKey()) ? " *NEW*" : null;
                 if (value.getKey() instanceof PaperCard) {
-                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), x, y, w, h);
+                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), suffix, x, y, w, h);
                 }
                 else {
-                    g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
+                    g.drawText(value.getValue().toString() + " " + value.getKey().toString() + (suffix == null ? "" : suffix), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
                     Texture image = ImageCache.getImage(value.getKey());
                     if (image != null) {
                         float imageRatio = (float)image.getWidth() / (float)image.getHeight();

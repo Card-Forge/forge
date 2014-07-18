@@ -162,7 +162,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
             @Override
             public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), x, y, w, h);
+                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), null, x, y, w, h);
             }
 
             @Override
