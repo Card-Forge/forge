@@ -45,7 +45,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * @return the item type
      */
     public final QuestItemType getItemType() {
-        return this.itemType;
+        return itemType;
     }
 
     @XStreamAsAttribute
@@ -65,11 +65,14 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * @return the base price
      */
     protected final int getBasePrice() {
-        return this.basePrice;
+        return basePrice;
     }
 
     @XStreamAsAttribute
     private final FSkinProp icon = null;
+
+    protected QuestItemBasic() { //needed for XML serialization
+    }
 
     /**
      * <p>
@@ -79,7 +82,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * @param type0 the type0
      */
     protected QuestItemBasic(final QuestItemType type0) {
-        this.itemType = type0;
+        itemType = type0;
     }
 
     /**
@@ -88,7 +91,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * @return a {@link java.lang.String} object.
      */
     public final String getName() {
-        return this.itemType.getKey();
+        return itemType.getKey();
     }
 
     /**
@@ -98,7 +101,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      */
     @Override
     public String getPurchaseName() {
-        return StringUtils.isBlank(this.purchaseName) ? this.getName() : this.purchaseName;
+        return StringUtils.isBlank(purchaseName) ? getName() : purchaseName;
     }
 
     /**
@@ -108,8 +111,8 @@ public class QuestItemBasic implements IQuestBazaarItem {
      */
     @Override
     public void onPurchase(final QuestAssets qA) {
-        final int currentLevel = qA.getItemLevel(this.itemType);
-        qA.setItemLevel(this.itemType, currentLevel + 1);
+        final int currentLevel = qA.getItemLevel(itemType);
+        qA.setItemLevel(itemType, currentLevel + 1);
     }
 
     /**
@@ -122,7 +125,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      */
     @Override
     public boolean isAvailableForPurchase(final QuestAssets qA) {
-        return qA.getItemLevel(this.itemType) < this.maxLevel;
+        return qA.getItemLevel(itemType) < maxLevel;
     }
 
     /**
@@ -133,7 +136,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * @return a int.
      */
     public final int getMaxLevel() {
-        return this.maxLevel;
+        return maxLevel;
     }
 
     /**
@@ -144,7 +147,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * @return a boolean.
      */
     public final boolean isLeveledItem() {
-        return this.maxLevel == 1;
+        return maxLevel == 1;
     }
 
     /**
@@ -157,7 +160,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      */
     @Override
     public String getPurchaseDescription(final QuestAssets qA) {
-        return this.description;
+        return description;
     }
 
     /**
@@ -179,7 +182,7 @@ public class QuestItemBasic implements IQuestBazaarItem {
      */
     @Override
     public int getBuyingPrice(final QuestAssets qA) {
-        return this.basePrice;
+        return basePrice;
     }
 
     /**
@@ -197,6 +200,6 @@ public class QuestItemBasic implements IQuestBazaarItem {
     @Override
     public final int compareTo(final Object o) {
         final IQuestBazaarItem q = (IQuestBazaarItem) o;
-        return this.getPurchaseName().compareTo(q.getPurchaseName());
+        return getPurchaseName().compareTo(q.getPurchaseName());
     }
 }
