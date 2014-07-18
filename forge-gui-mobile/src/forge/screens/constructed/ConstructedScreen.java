@@ -14,7 +14,6 @@ import forge.LobbyPlayer;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.deck.CardPool;
@@ -52,7 +51,6 @@ import forge.util.NameGenerator;
 import forge.util.Utils;
 
 public class ConstructedScreen extends LaunchScreen {
-    private static final FSkinColor PLAYER_BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
     private static final ForgePreferences prefs = FModel.getPreferences();
     private static final float PADDING = Utils.scaleMin(5);
     private static final int MAX_PLAYERS = 2; //8; //TODO: Support multiplayer
@@ -85,9 +83,10 @@ public class ConstructedScreen extends LaunchScreen {
         }
 
         @Override
-        protected void drawOverlay(Graphics g) {
-            super.drawOverlay(g);
-            g.drawLine(1.5f, PLAYER_BORDER_COLOR, 0, 0, getWidth(), 0);
+        public void drawOnContainer(Graphics g) {
+            //draw top border above items
+            float y = playersScroll.getTop() - FList.LINE_THICKNESS / 2;
+            g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
         }
     };
 
@@ -554,8 +553,8 @@ public class ConstructedScreen extends LaunchScreen {
 
         @Override
         protected void drawOverlay(Graphics g) {
-            float y = getHeight();
-            g.drawLine(1, PLAYER_BORDER_COLOR, 0, y, getWidth(), y);
+            float y = getHeight() - FList.LINE_THICKNESS / 2;
+            g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
         }
 
         private final FEventHandler humanAiSwitched = new FEventHandler() {

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
+import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -18,6 +19,7 @@ import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Utils;
@@ -48,17 +50,24 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
                 .text("The merchant does not have anything useful for sale.")
                 .align(HAlignment.CENTER).build());
         private final FLabel lblCredits = add(new FLabel.Builder().font(FSkinFont.get(15)).icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
-        private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_HEART).iconScaleFactor(1f).align(HAlignment.RIGHT).build());
+        private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_LIFE).iconScaleFactor(1f).align(HAlignment.RIGHT).build());
         private final FTextArea lblFluff = add(new FTextArea());
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
                 float y = 0;
                 for (FDisplayObject child : getChildren()) {
-                    child.setBounds(0, y, visibleWidth, child.getHeight());
+                    child.setBounds(0, y, visibleWidth, BazaarItemDisplay.HEIGHT);
                     y += child.getHeight();
                 }
                 return new ScrollBounds(visibleWidth, y);
+            }
+
+            @Override
+            public void drawOnContainer(Graphics g) {
+                //draw top border above items
+                float y = scroller.getTop() - FList.LINE_THICKNESS / 2;
+                g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
             }
         });
 
@@ -119,16 +128,17 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             lblCredits.setBounds(x, y, w / 2, lblCredits.getAutoSizeBounds().height);
             lblLife.setBounds(x + w / 2, y, w / 2, lblCredits.getHeight());
             y += lblCredits.getHeight() + PADDING;
+            scroller.setBounds(0, y, width, height - y);
             if (lblEmpty.isVisible()) {
                 lblEmpty.setBounds(x, y, w, lblEmpty.getAutoSizeBounds().height);
-            }
-            else {
-                scroller.setBounds(x, y, w, height - PADDING - y);
             }
         }
     }
 
     private static class BazaarItemDisplay extends FContainer {
+        private static final float HEIGHT = Utils.AVG_FINGER_HEIGHT * 2;
+
+        private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text("Buy").font(FSkinFont.get(20)).build());
         private final IQuestBazaarItem item;
 
         private BazaarItemDisplay(IQuestBazaarItem item0) {
@@ -136,9 +146,18 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         }
 
         @Override
-        protected void doLayout(float width, float height) {
-            // TODO Auto-generated method stub
+        public void drawBackground(Graphics g) {
+            float y;
             
+            y = getHeight() - FList.LINE_THICKNESS / 2;
+            g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
+        }
+
+        @Override
+        protected void doLayout(float width, float height) {
+            float padding = BazaarPage.PADDING;
+            float buttonSize = height - 2 * padding;
+            btnBuy.setBounds(width - padding - buttonSize, padding, buttonSize, buttonSize);
         }
     }
 }

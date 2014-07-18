@@ -19,6 +19,7 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
     public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
     public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
+    public static final float LINE_THICKNESS = Utils.scaleY(1);
 
     private final List<E> items = new ArrayList<E>();
     private FSkinFont font;
@@ -207,7 +208,8 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
                 y += itemHeight;
 
                 if (drawSeparators) {
-                    g.drawLine(1, LINE_COLOR, 0, y, w, y);
+                    y -= LINE_THICKNESS / 2;
+                    g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, w, y);
                 }
             }
         }
