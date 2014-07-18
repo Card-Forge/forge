@@ -677,6 +677,10 @@ public class Cost {
      * @return a {@link java.lang.String} object.
      */
     public static String convertIntAndTypeToWords(final int i, final String type) {
+        if (i == 1 && type.startsWith("another")) {
+            return type; //prevent returning "an another"
+        }
+
         final StringBuilder sb = new StringBuilder();
 
         if (i >= Cost.NUM_NAMES.length) {
