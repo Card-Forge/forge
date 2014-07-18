@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.model.FModel;
 import forge.quest.QuestController;
 import forge.quest.bazaar.IQuestBazaarItem;
@@ -19,6 +20,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
+import forge.util.Utils;
 
 public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     public QuestBazaarScreen() {
@@ -38,11 +40,15 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     }
 
     private static class BazaarPage extends TabPage<QuestBazaarScreen> {
+        private static final float PADDING = Utils.scaleMax(5);
+
         private final QuestStallDefinition stallDef;
         private final FLabel lblStallName = add(new FLabel.Builder().text("").align(HAlignment.CENTER).build());
-        private final FLabel lblEmpty = add(new FLabel.Builder().text("The merchant does not have anything useful for sale.")
+        private final FLabel lblEmpty = add(new FLabel.Builder().font(FSkinFont.get(12))
+                .text("The merchant does not have anything useful for sale.")
                 .align(HAlignment.CENTER).build());
-        private final FLabel lblStats = add(new FLabel.Builder().align(HAlignment.CENTER).font(FSkinFont.get(12)).build());
+        private final FLabel lblCredits = add(new FLabel.Builder().font(FSkinFont.get(15)).icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
+        private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_HEART).iconScaleFactor(1f).align(HAlignment.RIGHT).build());
         private final FTextArea lblFluff = add(new FTextArea());
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
@@ -60,8 +66,14 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             super(stallDef0.getName(), (FImage)stallDef0.getIcon());
             stallDef = stallDef0;
 
-            lblFluff.setFont(FSkinFont.get(15));
+            lblFluff.setFont(FSkinFont.get(12));
             lblFluff.setAlignment(HAlignment.CENTER);
+            lblFluff.setTextColor(FLabel.INLINE_LABEL_COLOR); //make fluff text a little lighter
+        }
+
+        @Override
+        protected void onActivate() {
+            update();
         }
 
         public void update() {
@@ -73,7 +85,8 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             }
 
             final QuestAssets qS = qData.getAssets();
-            lblStats.setText("Credits: " + qS.getCredits() + "         Life: " + qS.getLife(qData.getMode()));
+            lblCredits.setText("Credits: " + qS.getCredits());
+            lblLife.setText("Life: " + qS.getLife(qData.getMode()));
 
             final List<IQuestBazaarItem> items = qData.getBazaar().getItems(qData, stallDef.getName());
 
@@ -85,6 +98,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
                 lblEmpty.setVisible(true);
             }
             else {
+                lblEmpty.setVisible(false);
                 for (IQuestBazaarItem item : items) {
                     scroller.add(new BazaarItemDisplay(item));
                 }
@@ -94,6 +108,23 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
 
         @Override
         protected void doLayout(float width, float height) {
+            float x = PADDING;
+            float y = PADDING;
+            float w = width - 2 * PADDING;
+
+            lblStallName.setBounds(x, y, w, lblStallName.getAutoSizeBounds().height);
+            y += lblStallName.getHeight() + PADDING;
+            lblFluff.setBounds(x, y, w, lblFluff.getPreferredHeight(w));
+            y += lblFluff.getHeight() + PADDING;
+            lblCredits.setBounds(x, y, w / 2, lblCredits.getAutoSizeBounds().height);
+            lblLife.setBounds(x + w / 2, y, w / 2, lblCredits.getHeight());
+            y += lblCredits.getHeight() + PADDING;
+            if (lblEmpty.isVisible()) {
+                lblEmpty.setBounds(x, y, w, lblEmpty.getAutoSizeBounds().height);
+            }
+            else {
+                scroller.setBounds(x, y, w, height - PADDING - y);
+            }
         }
     }
 

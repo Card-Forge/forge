@@ -49,9 +49,24 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         selectedPage = tabPage0;
         if (selectedPage != null) {
             selectedPage.setVisible(true);
-            if (tabHeader.isScrollable) { //scroll tab into view if needed, leaving half of the previous/next tab visible if possible
-                tabHeader.scroller.scrollIntoView(selectedPage.tab, selectedPage.tab.getWidth() / 2);
+            if (Forge.getCurrentScreen() == this) {
+                scrollSelectedTabIntoView();
+                selectedPage.onActivate();
             }
+        }
+    }
+
+    @Override
+    public void onActivate() {
+        if (selectedPage != null) {
+            scrollSelectedTabIntoView(); //ensure selected tab in view when screen activated
+            selectedPage.onActivate();
+        }
+    }
+
+    private void scrollSelectedTabIntoView() {
+        if (tabHeader.isScrollable) { //scroll tab into view if needed, leaving half of the previous/next tab visible if possible
+            tabHeader.scroller.scrollIntoView(selectedPage.tab, selectedPage.tab.getWidth() / 2);
         }
     }
 
@@ -174,6 +189,9 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         public FImage getIcon() {
             return icon;
+        }
+
+        protected void onActivate() {
         }
 
         protected class Tab extends FDisplayObject {

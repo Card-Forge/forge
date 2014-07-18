@@ -6,16 +6,14 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinColor.Colors;
 import forge.assets.TextRenderer;
 
 public class FTextArea extends FScrollPane {
-    public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-
     private String text;
     private FSkinFont font;
     private HAlignment alignment;
     private Vector2 insets;
+    private FSkinColor textColor;
     private final TextRenderer renderer = new TextRenderer(true);
 
     public FTextArea() {
@@ -26,6 +24,7 @@ public class FTextArea extends FScrollPane {
         font = FSkinFont.get(14);
         alignment = HAlignment.LEFT;
         insets = new Vector2(1, 1); //prevent text getting cut off by clip
+        textColor = FLabel.DEFAULT_TEXT_COLOR;
     }
 
     public String getText() {
@@ -51,6 +50,13 @@ public class FTextArea extends FScrollPane {
         revalidate();
     }
 
+    public FSkinColor getTextColor() {
+        return textColor;
+    }
+    public void setTextColor(FSkinColor textColor0) {
+        textColor = textColor0;
+    }
+
     public float getPreferredHeight(float width) {
         return renderer.getWrappedBounds(text, font, width - 2 * insets.x).height
                 + font.getLineHeight() - font.getCapHeight() //need to account for difference in line and cap height
@@ -64,6 +70,6 @@ public class FTextArea extends FScrollPane {
 
     @Override
     protected void drawBackground(Graphics g) {
-        renderer.drawText(g, text, font, FORE_COLOR, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, 0, getHeight(), true, alignment, false);
+        renderer.drawText(g, text, font, textColor, insets.x - getScrollLeft(), insets.y - getScrollTop(), getScrollWidth() - 2 * insets.x, getScrollHeight() - 2 * insets.y, 0, getHeight(), true, alignment, false);
     }
 }
