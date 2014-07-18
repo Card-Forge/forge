@@ -676,7 +676,7 @@ public class Cost {
      *            a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String convertIntAndTypeToWords(final int i, final String type) {
+    public static String convertIntAndTypeToWords(final int i, String type) {
         if (i == 1 && type.startsWith("another")) {
             return type; //prevent returning "an another"
         }
@@ -685,13 +685,19 @@ public class Cost {
 
         if (i >= Cost.NUM_NAMES.length) {
             sb.append(i);
-        } else if ((1 == i) && Cost.VOWEL_PATTERN.matcher(type).find()) {
+        }
+        else if ((1 == i) && Cost.VOWEL_PATTERN.matcher(type).find()) {
             sb.append("an");
-        } else {
+        }
+        else {
             sb.append(Cost.NUM_NAMES[i]);
         }
 
         sb.append(" ");
+        char firstChar = type.charAt(0);
+        if (Character.isUpperCase(firstChar)) { //fix case of type before appending
+            type = Character.toLowerCase(firstChar) + type.substring(1);
+        }
         sb.append(type);
         if (1 != i) {
             sb.append("s");
