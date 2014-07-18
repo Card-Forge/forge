@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.22
+Forge Beta: 07-18-2014 ver 1.5.22
 
 
-##### cards in total.
+14017 cards in total.
 
 
 -------------
@@ -52,45 +52,73 @@ Spectra Ward
 New Magic 2015 Cards
 --------------------
 
+Act on Impulse
 Aeronaut Tinkerer
+AEtherspouts
 Aggressive Mining
 Ajani Steadfast
 Altac Bloodseeker
 Amphin Pathmage
+Avacyn, Guardian Angel
 Avarice Amulet
 Belligerent Sliver
+Blastfire Bolt
+Blood Host
 Boonweaver Giant
 Borderland Marauder
 Brawler's Plate
+Brood Keeper
+Burning Anger
+Carnivorous Moss-Beast
 Carrion Crow
 Chasm Skulker
 Chief Engineer
 Chronostutter
+Constricting Sliver
 Coral Barrier
 Covenant of Blood
+Crowd's Favor
 Cruel Sadist
 Dauntless River Marshal
+Diffusion Sliver
 Endless Obedience
+Ensoul Artifact
 Ephemeral Shields
+Eternal Thirst
 Feast on the Fallen
+Feral Incarnation
 Festergloom
 First Response
 Flesh to Dust
+Frost Lynx
 Garruk, Apex Predator
+Geist of the Moors
 Generator Servant
 Genesis Hydra
 Glacial Crasher
 Goblin Kaboomist
 Goblin Rabblemaster
+Hammerhand
+Heliod's Pilgrim
+Hornet Nest
 Hot Soup
+Hunter's Ambush
 Hushwing Gryff
 In Garruk's Wake
 Indulgent Tormentor
+Inferno Fist
 Invasive Species
 Jace, the Living Guildpact
+Jalira, Master Polymorphist
 Jorubai Murk Lurker
+Kalonian Twingrove
 Kapsho Kitefins
 Kird Chieftain
+Krenko's Enforcer
+Kurkesh, Onakke Ancient
+Leeching Sliver
+Life's Legacy
+Living Totem
 Marked for Honor
 Master of Predicaments
 Meditation Puzzle
@@ -99,7 +127,12 @@ Meteorite
 Might Makes Right
 Military Intelligence
 Miner's Bane
+Necromancer's Assistant
+Necromancer's Stockpile
+Netcaster Spider
 Nightfire Giant
+Nimbus of the Isles
+Nissa's Expedition
 Nissa, Worldwaker
 Ob Nixilis, Unshackled
 Obelisk of Urd
@@ -110,17 +143,25 @@ Paragon of New Dawns
 Paragon of Open Graves
 Perilous Vault
 Phytotitan
+Pillar of Light
+Polymorphist's Jest
 Profane Memento
 Quickling
 Radiant Fountain
 Reclamation Sage
 Research Assistant
 Resolute Archangel
+Return to the Ranks
 Rogue's Gloves
+Rotfeaster Maggot
 Sacred Armory
 Sanctified Charge
+Scrapyard Mongrel
+Scuttling Doom Engine
 Seraph of the Masses
+Shadowcloak Vampire
 Shaman of Spring
+Shield of the Avatar
 Siege Dragon
 Sliver Hive
 Sliver Hivelord
@@ -130,69 +171,28 @@ Soul of Ravnica
 Soul of Shandalar
 Soul of Theros
 Soul of Zendikar
+Spirit Bonds
+Stain the Mind
+Statute of Denial
 Stoke the Flames
 Sunblade Elf
 Sungrace Pegasus
+The Chain Veil
 Triplicate Spirits
+Tyrant's Machine
+Ulcerate
+Undergrowth Scavenger
+Unmake the Graves
 Venom Sliver
+Vineweft
 Void Snare
+Wall of Limbs
 Warden of the Beyond
 Waste Not
+Will-Forged Golem
 Witch's Familiar
 Xathrid Slyblade
 Yisan, the Wanderer Bard
-Tyrant's Machine
-Will-Forged Golem
-Hornet Nest
-Hunter's Ambush
-Carnivorous Moss-Beast
-Feral Incarnation
-Geist of the Moors
-Heliod's Pilgrim
-Pillar of Light
-Life's Legacy
-Living Totem
-Netcaster Spider
-Nissa's Expedition
-Undergrowth Scavenger
-Vineweft
-Blood Host
-Necromancer's Assistant
-Ulcerate
-Inferno Fist
-Krenko's Enforcer
-Scrapyard Mongrel
-Blastfire Bolt
-Brood Keeper
-Burning Anger
-Crowd's Favor
-Hammerhand
-Frost Lynx
-Nimbus of the Isles
-Statute of Denial
-Unmake the Graves
-Wall of Limbs
-The Chain Veil
- Jalira, Master Polymorphist
-Necromancer's Stockpile
-Scuttling Doom Engine
-Shield of the Avatar
-Kalonian Twingrove
-Act on Impulse
-Kurkesh, Onakke Ancient
-Eternal Thirst
-Leeching Sliver
-Rotfeaster Maggot
-Shadowcloak Vampire
-Stain the Mind
-Ensoul Artifact
-Return to the Ranks
-Spirit Bonds
-Polymorphist's Jest
-AEtherspouts
-Constricting Sliver
-Avacyn, Guardian Angel
-Diffusion Sliver
 
 
 ------------
@@ -233,7 +233,16 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+elcnesh
+excessum
+Gos
+Hellfish
+KrazyTheFox
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
