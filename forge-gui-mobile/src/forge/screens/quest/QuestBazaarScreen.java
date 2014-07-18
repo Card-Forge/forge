@@ -194,7 +194,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             float labelWidth = width * 0.7f;
             float iconWidth = width - labelWidth - padding;
             float iconHeight = iconWidth * lblIcon.getIcon().getHeight() / lblIcon.getIcon().getWidth();
-            float height1 = lblName.getHeight() + lblDesc.getPreferredHeight(width) + 3 * padding;
+            float height1 = lblName.getHeight() + lblDesc.getPreferredHeight(labelWidth) + 3 * padding;
             float height2 = iconHeight + btnBuy.getHeight() + lblCost.getHeight() + 4 * padding;
             return Math.max(height1, height2);
         }
