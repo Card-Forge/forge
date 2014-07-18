@@ -2,6 +2,7 @@ package forge.screens.home.quest;
 
 import forge.UiCommand;
 import forge.model.FModel;
+import forge.quest.QuestUtil;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.data.QuestAssets;
 import forge.screens.bazaar.VBazaarUI;
@@ -47,14 +48,7 @@ public class ViewItem extends FPanel {
         this.btnPurchase.setCommand(new UiCommand() {
             @Override
             public void run() {
-                final QuestAssets qA = FModel.getQuest().getAssets();
-                final int cost = ViewItem.this.getItem().getBuyingPrice(qA);
-                if (cost >= 0 && (qA.getCredits() - cost) >= 0) {
-                    qA.subtractCredits(cost);
-                    qA.addCredits(ViewItem.this.getItem().getSellingPrice(qA));
-                    ViewItem.this.getItem().onPurchase(qA);
-                    FModel.getQuest().save();
-                }
+                QuestUtil.buyQuestItem(getItem());
                 VBazaarUI.SINGLETON_INSTANCE.refreshLastInstance();
             }
         });

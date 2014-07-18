@@ -35,6 +35,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 import forge.quest.data.QuestAchievements;
@@ -651,6 +652,17 @@ public class QuestUtil {
         }
 
         return out.toString();
+    }
+
+    public static void buyQuestItem(IQuestBazaarItem item) {
+        final QuestAssets qA = FModel.getQuest().getAssets();
+        final int cost = item.getBuyingPrice(qA);
+        if (cost >= 0 && (qA.getCredits() - cost) >= 0) {
+            qA.subtractCredits(cost);
+            qA.addCredits(item.getSellingPrice(qA));
+            item.onPurchase(qA);
+            FModel.getQuest().save();
+        }
     }
 
 } // QuestUtil

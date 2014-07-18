@@ -6,12 +6,14 @@ import java.util.Set;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.model.FModel;
 import forge.quest.QuestController;
+import forge.quest.QuestUtil;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.bazaar.QuestStallDefinition;
@@ -19,6 +21,8 @@ import forge.quest.data.QuestAssets;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
@@ -153,9 +157,10 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             QuestAssets assets = FModel.getQuest().getAssets();
             icon = (FImage)item.getIcon(assets);
 
+            int buyingPrice = item.getBuyingPrice(assets);
             lblName.setText(item.getPurchaseName());
             lblDesc.setText(item.getPurchaseDescription(assets));
-            lblCost.setText(String.valueOf(item.getBuyingPrice(assets)));
+            lblCost.setText(String.valueOf(buyingPrice));
 
             lblDesc.setFont(FSkinFont.get(12));
             lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
@@ -163,6 +168,19 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
 
             float buttonSize = MIN_HEIGHT - lblCost.getHeight() - 3 * BazaarPage.PADDING;
             btnBuy.setSize(buttonSize, buttonSize);
+
+            if (assets.getCredits() < buyingPrice) {
+                btnBuy.setEnabled(false);
+            }
+            else {
+                btnBuy.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        QuestUtil.buyQuestItem(item);
+                        ((BazaarPage)((QuestBazaarScreen)Forge.getCurrentScreen()).getSelectedPage()).update();
+                    }
+                });
+            }
         }
 
         @Override
