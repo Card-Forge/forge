@@ -77,7 +77,7 @@ public final class CardScriptInfo {
     public static CardScriptInfo getScriptFor(String name) {
         CardScriptInfo script = allScripts.get(name);
         if (script == null) { //attempt to load script if not previously loaded
-            String filename = name.toLowerCase().replace(' ', '_').replace('-', '_').replace("'", "") + ".txt";
+            String filename = name.toLowerCase().replace(' ', '_').replace('-', '_').replace("'", "").replace(",", "") + ".txt";
             File file = new File(ForgeConstants.CARD_DATA_DIR + filename.charAt(0) + File.separator + filename);
             if (file.exists()) {
                 script = new CardScriptInfo(FileUtil.readFileToString(file), file);
