@@ -19,6 +19,8 @@ package forge.card;
 
 import forge.CardStorageReader;
 import forge.card.CardRules;
+import forge.properties.ForgeConstants;
+import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,35 +36,35 @@ public final class CardScriptInfo {
     private File file;
 
     public CardScriptInfo(String text0, File file0) {
-        this.text = text0;
-        this.file = file0;
+        text = text0;
+        file = file0;
     }
 
     public String getText() {
-        return this.text;
+        return text;
     }
 
     public File getFile() {
-    	return this.file;
+    	return file;
     }
 
     public boolean canEdit() {
-    	return this.file != null;
+    	return file != null;
     }
 
     public boolean trySetText(String text0) {
-    	if (this.file == null) { return false; }
+    	if (file == null) { return false; }
 
     	try {
-    	    PrintWriter p = new PrintWriter(this.file);
+    	    PrintWriter p = new PrintWriter(file);
     	    p.print(text0);
     	    p.close();
 
-    	    this.text = text0;
+    	    text = text0;
     	    return true;
     	}
     	catch (final Exception ex) {
-    		SOptionPane.showErrorDialog("Problem writing file - " + this.file + " : " + ex);
+    		SOptionPane.showErrorDialog("Problem writing file - " + file + " : " + ex);
     		return false;
     	}
     }
@@ -73,7 +75,16 @@ public final class CardScriptInfo {
     }
 
     public static CardScriptInfo getScriptFor(String name) {
-        return allScripts.get(name);
+        CardScriptInfo script = allScripts.get(name);
+        if (script == null) { //attempt to load script if not previously loaded
+            String filename = name.toLowerCase().replace(' ', '_').replace('-', '_').replace("'", "") + ".txt";
+            File file = new File(ForgeConstants.CARD_DATA_DIR + filename.charAt(0) + File.separator + filename);
+            if (file.exists()) {
+                script = new CardScriptInfo(FileUtil.readFileToString(file), file);
+                allScripts.put(name, script);
+            }
+        }
+        return script;
     }
 
     public static CardStorageReader.Observer readerObserver = new CardStorageReader.Observer() {
