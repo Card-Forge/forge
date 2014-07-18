@@ -141,33 +141,31 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
     }
 
     private static class BazaarItemDisplay extends FContainer {
-        private static final float MIN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 2.5f;
-
-        private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text("Buy").font(FSkinFont.get(20)).build());
         private final FLabel lblName = add(new FLabel.Builder().font(FSkinFont.get(15)).insets(Vector2.Zero).build());
         private final FTextArea lblDesc = add(new FTextArea());
+        private final FLabel lblIcon = add(new FLabel.Builder().iconInBackground().iconScaleFactor(1f).insets(Vector2.Zero).build());
         private final FLabel lblCost = add(new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
+        private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text("Buy").font(FSkinFont.get(20)).build());
 
         private final IQuestBazaarItem item;
-        private final FImage icon;
 
         private BazaarItemDisplay(IQuestBazaarItem item0) {
             item = item0;
 
             QuestAssets assets = FModel.getQuest().getAssets();
-            icon = (FImage)item.getIcon(assets);
-
             int buyingPrice = item.getBuyingPrice(assets);
+
             lblName.setText(item.getPurchaseName());
             lblDesc.setText(item.getPurchaseDescription(assets));
+            lblIcon.setIcon((FImage)item.getIcon(assets));
             lblCost.setText(String.valueOf(buyingPrice));
 
             lblDesc.setFont(FSkinFont.get(12));
             lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
-            lblCost.setHeight(lblCost.getAutoSizeBounds().height);
 
-            float buttonSize = MIN_HEIGHT - lblCost.getHeight() - 3 * BazaarPage.PADDING;
-            btnBuy.setSize(buttonSize, buttonSize);
+            lblName.setHeight(lblName.getAutoSizeBounds().height);
+            btnBuy.setHeight(btnBuy.getAutoSizeBounds().height * 1.2f);
+            lblCost.setHeight(lblCost.getAutoSizeBounds().height);
 
             if (assets.getCredits() < buyingPrice) {
                 btnBuy.setEnabled(false);
@@ -184,12 +182,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         }
 
         @Override
-        public void drawBackground(Graphics g) {
-            if (icon != null) {
-                float iconWidth = btnBuy.getWidth();
-                g.drawImage(icon, BazaarPage.PADDING / 2, BazaarPage.PADDING, iconWidth, iconWidth * icon.getHeight() / icon.getWidth());
-            }
-
+        public void drawOverlay(Graphics g) {
             //draw bottom border
             float y = getHeight() - FList.LINE_THICKNESS / 2;
             g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
@@ -197,31 +190,35 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
 
         public float getPreferredHeight(float width) {
             float padding = BazaarPage.PADDING;
-            width -= 2 * (btnBuy.getHeight() + padding);
-            float height = lblName.getAutoSizeBounds().height + lblDesc.getPreferredHeight(width) + 3 * padding;
-            if (height < MIN_HEIGHT) {
-                height = MIN_HEIGHT;
-            }
-            return height;
+            width -= 2 * padding;
+            float labelWidth = width * 0.7f;
+            float iconWidth = width - labelWidth - padding;
+            float iconHeight = iconWidth * lblIcon.getIcon().getHeight() / lblIcon.getIcon().getWidth();
+            float height1 = lblName.getHeight() + lblDesc.getPreferredHeight(width) + 3 * padding;
+            float height2 = iconHeight + btnBuy.getHeight() + lblCost.getHeight() + 4 * padding;
+            return Math.max(height1, height2);
         }
 
         @Override
         protected void doLayout(float width, float height) {
             float padding = BazaarPage.PADDING;
-            float buttonSize = btnBuy.getHeight();
+            width -= 2 * padding;
+            float labelWidth = width * 0.7f;
+            float iconWidth = width - labelWidth - padding;
+            float iconHeight = iconWidth * lblIcon.getIcon().getHeight() / lblIcon.getIcon().getWidth();
 
-            float x = width - padding - buttonSize;
+            float x = padding;
             float y = padding;
-            btnBuy.setPosition(x, y);
-            y += buttonSize + padding;
-            lblCost.setBounds(x, y, buttonSize, lblCost.getHeight());
-
-            float w = x - buttonSize - padding;
-            x = buttonSize + padding;
-            y = padding;
-            lblName.setBounds(x, y, w, lblName.getAutoSizeBounds().height);
+            lblName.setBounds(x, y, labelWidth, lblName.getHeight());
             y += lblName.getHeight() + padding;
-            lblDesc.setBounds(x, y, w, height - padding - y);
+            lblDesc.setBounds(x, y, labelWidth, height - y - padding);
+            x += labelWidth + padding;
+            y = padding;
+            lblIcon.setBounds(x, y, iconWidth, iconHeight);
+            y += iconHeight + padding;
+            lblCost.setBounds(x, y, iconWidth, lblCost.getHeight());
+            y += lblCost.getHeight() + padding;
+            btnBuy.setBounds(x, y, iconWidth, btnBuy.getHeight());
         }
     }
 }
