@@ -10,7 +10,6 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
-import forge.menu.FTooltip;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
@@ -31,27 +30,14 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         final ToggleButton button = addToggleButton(widget, FSkin.getImages().get(st.skinProp));
         buttonMap.put(st, button);
 
-        //hook so pressing a selected button toggles off all other buttons while remaining toggled
-        button.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (lockFiltering) { return; }
-
-                if (!button.isSelected()) {
-                    lockFiltering = true;
-                    button.setSelected(true);
-                    SFilterUtil.showOnlyStat(st, button, buttonMap);
-                    lockFiltering = false;
-                }
-                applyChange();
-            }
-        });
-        //show tooltip when long pressed
+        //hook so long-pressing a button toggles itself on and toggles off all other buttons
         button.setLongPressHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                FTooltip tooltip = new FTooltip(st.label);
-                tooltip.show(button, 0, button.getHeight());
+                lockFiltering = true;
+                SFilterUtil.showOnlyStat(st, button, buttonMap);
+                lockFiltering = false;
+                applyChange();
             }
         });
     }
