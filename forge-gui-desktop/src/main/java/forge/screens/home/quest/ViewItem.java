@@ -6,10 +6,10 @@ import forge.quest.QuestUtil;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.data.QuestAssets;
 import forge.screens.bazaar.VBazaarUI;
+import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
-import forge.toolbox.FTextArea;
 import forge.toolbox.FSkin.SkinImage;
 import net.miginfocom.swing.MigLayout;
 
@@ -21,7 +21,7 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class ViewItem extends FPanel {
     private final FLabel lblIcon, lblName, lblPrice, btnPurchase;
-    private final FTextArea tarDesc;
+    private final FHtmlViewer tarDesc;
     private IQuestBazaarItem item;
 
     /** An update-able panel instance representing a single item. */
@@ -30,7 +30,7 @@ public class ViewItem extends FPanel {
         this.lblIcon = new FLabel.Builder().iconScaleFactor(1).iconInBackground(true).build();
         this.lblName = new FLabel.Builder().fontStyle(Font.BOLD).build();
         this.lblPrice = new FLabel.Builder().fontStyle(Font.BOLD).fontSize(12).build();
-        this.tarDesc = new FTextArea();
+        this.tarDesc = new FHtmlViewer();
         this.btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontSize(20).hoverable(true).build();
 
         this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
@@ -79,7 +79,7 @@ public class ViewItem extends FPanel {
                 ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
                 ViewItem.this.lblPrice.setText("Cost: " + String.valueOf(bazaarItem.getBuyingPrice(qA)) + " credits");
                 String desc = bazaarItem.getPurchaseDescription(qA);
-                ViewItem.this.tarDesc.setText(desc);
+                ViewItem.this.tarDesc.setText(FSkin.encodeSymbols(desc, false)); //encode in case there are mana symbols in description
 
                 ViewItem.this.btnPurchase.setEnabled(!(qA.getCredits() < bazaarItem.getBuyingPrice(qA)));
 
