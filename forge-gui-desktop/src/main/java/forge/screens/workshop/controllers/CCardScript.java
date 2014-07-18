@@ -60,54 +60,54 @@ public enum CCardScript implements ICDoc {
     }
 
     private void updateDirtyFlag() {
-        boolean isTextNowDirty = !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(this.currentScriptInfo.getText());
-        if (this.isTextDirty == isTextNowDirty) { return; }
-        this.isTextDirty = isTextNowDirty;
+        boolean isTextNowDirty = currentScriptInfo != null && !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(currentScriptInfo.getText());
+        if (isTextDirty == isTextNowDirty) { return; }
+        isTextDirty = isTextNowDirty;
         VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextNowDirty);
         VCardScript.SINGLETON_INSTANCE.getTabLabel().setText((isTextNowDirty ? "*" : "") + "Card Script");
         WorkshopFileMenu.updateSaveEnabled();
     }
 
     public PaperCard getCurrentCard() {
-        return this.currentCard;
+        return currentCard;
     }
 
     public void showCard(PaperCard card) {
-        if (this.currentCard == card || this.switchInProgress) { return; }
+        if (currentCard == card || switchInProgress) { return; }
 
         if (!canSwitchAway(true)) { //ensure current card saved before changing to a different card
-            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setSelectedItem(this.currentCard); //return selection to current card //TODO: fix so clicking away again doesn't cause weird selection problems
+            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setSelectedItem(currentCard); //return selection to current card //TODO: fix so clicking away again doesn't cause weird selection problems
             return;
         }
 
-        this.currentCard = card;
-        this.currentScriptInfo = card != null ? CardScriptInfo.getScriptFor(this.currentCard.getRules().getName()) : null;
+        currentCard = card;
+        currentScriptInfo = card != null ? CardScriptInfo.getScriptFor(currentCard.getRules().getName()) : null;
         refresh();
     }
 
     public void refresh() {
         FTextEditor txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
-        txtScript.setText(this.currentScriptInfo != null ? this.currentScriptInfo.getText() : "");
-        txtScript.setEditable(this.currentScriptInfo != null ? this.currentScriptInfo.canEdit() : false);
+        txtScript.setText(currentScriptInfo != null ? currentScriptInfo.getText() : "");
+        txtScript.setEditable(currentScriptInfo != null ? currentScriptInfo.canEdit() : false);
         txtScript.setCaretPosition(0); //keep scrolled to top
     }
 
     public boolean hasChanges() {
-        return (this.currentScriptInfo != null && this.isTextDirty);
+        return (currentScriptInfo != null && isTextDirty);
     }
 
     public boolean canSwitchAway(boolean isCardChanging) {
-        if (this.switchInProgress) { return false; }
+        if (switchInProgress) { return false; }
         if (!hasChanges()) { return true; }
 
-        this.switchInProgress = true;
+        switchInProgress = true;
         Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
         final int choice = FOptionPane.showOptionDialog(
-                "Save changes to " + this.currentCard + "?",
+                "Save changes to " + currentCard + "?",
                 "Save Changes?",
                 FOptionPane.QUESTION_ICON,
                 new String[] {"Save", "Don't Save", "Cancel"});
-        this.switchInProgress = false;
+        switchInProgress = false;
 
         if (choice == -1 || choice == 2) { return false; }
 
@@ -123,13 +123,13 @@ public enum CCardScript implements ICDoc {
         if (!hasChanges()) { return true; } //not need if text hasn't been changed
 
         String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
-        if (!this.currentScriptInfo.trySetText(text)) {
+        if (!currentScriptInfo.trySetText(text)) {
             return false;
         }
 
         updateDirtyFlag();
 
-        String oldName = this.currentCard.getName();
+        String oldName = currentCard.getName();
 
         CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
         CardDb cardDb = newRules.isVariant() ? FModel.getMagicDb().getVariantCards() :
@@ -137,15 +137,15 @@ public enum CCardScript implements ICDoc {
 
         cardDb.getEditor().putCard(newRules);
         if (newRules.getName().equals(oldName)) {
-            Card.updateCard(this.currentCard);
+            Card.updateCard(currentCard);
         }
         else {
-            this.currentCard = cardDb.getCard(newRules.getName());
+            currentCard = cardDb.getCard(newRules.getName());
         }
 
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
-        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
-        CPicture.SINGLETON_INSTANCE.showImage(this.currentCard);
+        CDetail.SINGLETON_INSTANCE.showCard(currentCard);
+        CPicture.SINGLETON_INSTANCE.showImage(currentCard);
         return true;
     }
 
