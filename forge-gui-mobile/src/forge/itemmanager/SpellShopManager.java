@@ -62,12 +62,12 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
                 float totalHeight = h + 2 * FList.PADDING;
                 float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
-                String suffix = FModel.getQuest().getCards().isNew(value.getKey()) ? " *NEW*" : null;
                 if (value.getKey() instanceof PaperCard) {
+                    String suffix = getConfig().getCols().containsKey(ColumnDef.NEW) && FModel.getQuest().getCards().isNew(value.getKey()) ? " *NEW*" : null;
                     CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), suffix, x, y, w, h);
                 }
                 else {
-                    g.drawText(value.getValue().toString() + " " + value.getKey().toString() + (suffix == null ? "" : suffix), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
+                    g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
                     Texture image = ImageCache.getImage(value.getKey());
                     if (image != null) {
                         float imageRatio = (float)image.getWidth() / (float)image.getHeight();
