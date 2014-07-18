@@ -99,7 +99,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
                 btnName.isSelected(),
                 btnType.isSelected(),
                 btnText.isSelected(),
-                btnText.isSelected()); //TODO: Support disabling searching in cost separate from searching in text
+                false); //TODO: Support enabling searching in cost
     }
 
     @Override
