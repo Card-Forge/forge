@@ -15984,6 +15984,7 @@ forge-gui/res/quest/precons/Fiendish[!!-~]Nature.dck -text
 forge-gui/res/quest/precons/Fiery[!!-~]Dawn.dck -text
 forge-gui/res/quest/precons/Fire[!!-~]Surge.dck -text
 forge-gui/res/quest/precons/Firebomber.dck -text
+forge-gui/res/quest/precons/Flames[!!-~]Of[!!-~]The[!!-~]Dragon.dck -text
 forge-gui/res/quest/precons/Flyover.dck -text
 forge-gui/res/quest/precons/Forged[!!-~]in[!!-~]Battle.dck -text
 forge-gui/res/quest/precons/Gifts[!!-~]of[!!-~]the[!!-~]Gods.dck -text
@@ -16000,8 +16001,10 @@ forge-gui/res/quest/precons/Groundbreaker.dck -text
 forge-gui/res/quest/precons/Gruul[!!-~]Goliaths.dck -text
 forge-gui/res/quest/precons/Gruul[!!-~]Wilding.dck -text
 forge-gui/res/quest/precons/Heavy[!!-~]Hitters.dck -text
+forge-gui/res/quest/precons/Hit[!!-~]The[!!-~]Ground[!!-~]Running.dck -text
 forge-gui/res/quest/precons/Hold[!!-~]the[!!-~]Line.dck -text
 forge-gui/res/quest/precons/Infect[!!-~]and[!!-~]Defile.dck -text
+forge-gui/res/quest/precons/Infernal[!!-~]Intervention.dck -text
 forge-gui/res/quest/precons/Infestation.dck -text
 forge-gui/res/quest/precons/Inspiration-Struck.dck -text
 forge-gui/res/quest/precons/Into[!!-~]the[!!-~]Breach.dck -text
@@ -16046,6 +16049,7 @@ forge-gui/res/quest/precons/Phyrexian[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Phyrexian[!!-~]Poison.dck -text
 forge-gui/res/quest/precons/Power[!!-~]of[!!-~]Prophecy.dck -text
 forge-gui/res/quest/precons/Presence[!!-~]of[!!-~]Mind.dck -text
+forge-gui/res/quest/precons/Price[!!-~]Of[!!-~]Glory.dck -text
 forge-gui/res/quest/precons/Primordial[!!-~]Jund.dck -text
 forge-gui/res/quest/precons/Psychic[!!-~]Labyrinth.dck -text
 forge-gui/res/quest/precons/Pummel.dck -text
@@ -16112,6 +16116,7 @@ forge-gui/res/quest/precons/Warrior's[!!-~]Code.dck -text
 forge-gui/res/quest/precons/Way[!!-~]Wild.dck -text
 forge-gui/res/quest/precons/Wicked[!!-~]Big.dck -text
 forge-gui/res/quest/precons/Wild[!!-~]Rush.dck -text
+forge-gui/res/quest/precons/Will[!!-~]Of[!!-~]The[!!-~]Masses.dck -text
 forge-gui/res/quest/precons/World[!!-~]Aflame.dck -text
 forge-gui/res/quest/precons/Zombies[!!-~]Unleashed.dck -text
 forge-gui/res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
