@@ -1,7 +1,5 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.math.Vector2;
-
 import forge.Graphics;
 import forge.card.CardRenderer;
 import forge.game.card.Card;
@@ -75,30 +73,6 @@ public class FCardPanel extends FDisplayObject {
 
     protected float getPadding() {
         return PADDING;
-    }
-
-    public Vector2 getTargetingArrowOrigin() {
-        Vector2 origin = new Vector2(getScreenPosition());
-
-        float left = PADDING;
-        float top = PADDING;
-        float w = getWidth() - 2 * PADDING;
-        float h = getHeight() - 2 * PADDING;
-        if (w == h) { //adjust width if needed to make room for tapping
-            w = h / ASPECT_RATIO;
-        }
-
-        if (tapped) { //rotate box if tapped
-            top += h - w;
-            float temp = w;
-            w = h;
-            h = temp;
-        }
-
-        origin.x += left + w * TARGET_ORIGIN_FACTOR_X;
-        origin.y += top + h * TARGET_ORIGIN_FACTOR_Y;
-
-        return origin;
     }
 
     @Override

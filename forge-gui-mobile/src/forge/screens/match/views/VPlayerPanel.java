@@ -83,6 +83,10 @@ public class VPlayerPanel extends FContainer {
         return selectedTab;
     }
 
+    public InfoTab getZoneTab(ZoneType zoneType) {
+        return zoneTabs.get(zoneType);
+    }
+
     public void setSelectedZone(ZoneType zoneType) {
         setSelectedTab(zoneTabs.get(zoneType));
     }

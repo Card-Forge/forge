@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.math.Vector2;
+
 import forge.FThreads;
 import forge.Graphics;
 import forge.card.CardZoom;
@@ -277,6 +279,33 @@ public abstract class VCardDisplayArea extends VDisplayArea {
             if (nextPanelInStack != null) {
                 nextPanelInStack.buildCardPanelList(list);
             }
+        }
+
+        public Vector2 getTargetingArrowOrigin() {
+            //don't show targeting arrow unless in display area that's visible
+            if (displayArea == null || !displayArea.isVisible()) { return null; }
+
+            Vector2 origin = new Vector2(getScreenPosition());
+
+            float left = PADDING;
+            float top = PADDING;
+            float w = getWidth() - 2 * PADDING;
+            float h = getHeight() - 2 * PADDING;
+            if (w == h) { //adjust width if needed to make room for tapping
+                w = h / ASPECT_RATIO;
+            }
+
+            if (isTapped()) { //rotate box if tapped
+                top += h - w;
+                float temp = w;
+                w = h;
+                h = temp;
+            }
+
+            origin.x += left + w * TARGET_ORIGIN_FACTOR_X;
+            origin.y += top + h * TARGET_ORIGIN_FACTOR_Y;
+
+            return origin;
         }
     }
 }
