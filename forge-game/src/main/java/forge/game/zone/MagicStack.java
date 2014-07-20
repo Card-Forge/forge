@@ -934,8 +934,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      */
     @Override
     public Iterator<SpellAbilityStackInstance> iterator() {
-        // TODO Auto-generated method stub
         return stack.iterator();
+    }
+
+    public Iterator<SpellAbilityStackInstance> reverseIterator() {
+        return stack.descendingIterator();
     }
 
     /**
