@@ -1,10 +1,9 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
@@ -68,19 +67,11 @@ public class VStack extends FDropDown {
 
     //temporarily reveal zones targeted by active stack instance
     private void revealTargetZones() {
-        if (activeStackInstance == null || activeStackInstance.getTargetChoices() == null) { return; }
+        if (activeStackInstance == null) { return; }
 
-        final List<ZoneType> zones = new ArrayList<ZoneType>();
-        playersWithValidTargets = new HashMap<Player, Object>();
-        for (Card card : activeStackInstance.getTargetChoices().getTargetCards()) {
-            ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;
-            if (zoneType != null && !zones.contains(zoneType)) {
-                zones.add(zoneType);
-            }
-            playersWithValidTargets.put(card.getController(), null);
-        }
-
-        if (zones.size() > 0 && playersWithValidTargets.size() > 0) {
+        final List<ZoneType> zones = activeStackInstance.getZonesToOpen();
+        playersWithValidTargets = activeStackInstance.getPlayersWithValidTargets();
+        if (zones != null && zones.size() > 0 && playersWithValidTargets != null && playersWithValidTargets.size() > 0) {
             GuiBase.getInterface().openZones(zones, playersWithValidTargets);
         }
     }

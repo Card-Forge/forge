@@ -20,11 +20,13 @@ package forge.game.spellability;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -76,6 +78,9 @@ public class SpellAbilityStackInstance {
 
     private final HashMap<String, String> storedSVars = new HashMap<String, String>();
 
+    private final List<ZoneType> zonesToOpen;
+    private final Map<Player, Object> playersWithValidTargets;
+
     /**
      * <p>
      * Constructor for SpellAbility_StackInstance.
@@ -123,6 +128,25 @@ public class SpellAbilityStackInstance {
             if (value.length() > 0) {
                 this.storedSVars.put(store, value);
                 source.setSVar(store, "");
+            }
+        }
+
+        //store zones to open and players to open them for at the time the SpellAbility first goes on the stack based on the selected targets
+        if (tc == null) {
+            zonesToOpen = null;
+            playersWithValidTargets = null;
+        }
+        else {
+            zonesToOpen = new ArrayList<ZoneType>();
+            playersWithValidTargets = new HashMap<Player, Object>();
+            for (Card card : tc.getTargetCards()) {
+                ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;
+                if (zoneType != ZoneType.Battlefield) { //don't need to worry about targets on battlefield
+                    if (zoneType != null && !zonesToOpen.contains(zoneType)) {
+                        zonesToOpen.add(zoneType);
+                    }
+                    playersWithValidTargets.put(card.getController(), null);
+                }
             }
         }
     }
@@ -250,6 +274,14 @@ public class SpellAbilityStackInstance {
 
     public final TargetChoices getTargetChoices() {
         return this.tc;
+    }
+
+    public final List<ZoneType> getZonesToOpen() {
+        return this.zonesToOpen;
+    }
+
+    public final Map<Player, Object> getPlayersWithValidTargets() {
+        return this.playersWithValidTargets;
     }
 
     public void updateTarget(TargetChoices target) {
