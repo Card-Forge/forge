@@ -1,12 +1,16 @@
 package forge.screens.match.views;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-
+import java.util.List;
+import java.util.Map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
+import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -21,6 +25,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
+import forge.game.zone.ZoneType;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
@@ -47,6 +52,7 @@ public class VStack extends FDropDown {
     private final LobbyPlayer localPlayer;
     private StackInstanceDisplay activeItem;
     private SpellAbilityStackInstance activeStackInstance;
+    private Map<Player, Object> playersWithValidTargets;
 
     private int stackSize;
 
@@ -62,12 +68,35 @@ public class VStack extends FDropDown {
 
     //temporarily reveal zones targeted by active stack instance
     private void revealTargetZones() {
+        if (activeStackInstance == null || activeStackInstance.getTargetChoices() == null) { return; }
+
+        final List<ZoneType> zones = new ArrayList<ZoneType>();
+        playersWithValidTargets = new HashMap<Player, Object>();
+        for (Card card : activeStackInstance.getTargetChoices().getTargetCards()) {
+            ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;
+            if (zoneType != null && !zones.contains(zoneType)) {
+                zones.add(zoneType);
+            }
+            playersWithValidTargets.put(card.getController(), null);
+        }
+
+        if (zones.size() > 0 && playersWithValidTargets.size() > 0) {
+            GuiBase.getInterface().openZones(zones, playersWithValidTargets);
+        }
+    }
+
+    //restore old zones when active stack instance changes
+    private void restoreOldZones() {
+        if (playersWithValidTargets == null) { return; }
+        GuiBase.getInterface().restoreOldZones(playersWithValidTargets);
+        playersWithValidTargets = null;
     }
 
     @Override
     public void update() {
         activeItem = null;
         activeStackInstance = null; //reset before updating stack
+        restoreOldZones();
 
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
@@ -77,7 +106,6 @@ public class VStack extends FDropDown {
             if (stackSize > 0) {
                 if (!isVisible()) {
                     if (stackSize > oldStackSize) { //don't re-show stack if user hid it and then resolved an item on the stack
-                        revealTargetZones();
                         show();
                     }
                     return; //don't call super.update() either way since show handles this
@@ -138,6 +166,7 @@ public class VStack extends FDropDown {
                 add(activeItem);
             }
             scrollIntoView(activeItem); //scroll active display into view
+            revealTargetZones();
         }
         return new ScrollBounds(totalWidth, y + MARGINS);
     }
@@ -199,6 +228,7 @@ public class VStack extends FDropDown {
         public boolean tap(float x, float y, int count) {
             if (activeStackInstance != stackInstance) { //set as active stack instance if not already such
                 activeStackInstance = stackInstance;
+                restoreOldZones(); //restore old zones before changing active stack instance
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
