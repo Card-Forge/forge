@@ -211,8 +211,6 @@ public class Match {
             final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
 
-            player.initVariantsZones(psc);
-
             if (canSideBoard) {
                 Deck toChange = psc.getDeck();
                 List<PaperCard> newMain = player.getController().sideboard(toChange, rules.getGameType());
@@ -229,6 +227,8 @@ public class Match {
                     toChange.get(DeckSection.Sideboard).addAll(allCards);
                 }
             }
+
+            player.initVariantsZones(psc);
 
             Deck myDeck = psc.getDeck();
 

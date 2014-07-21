@@ -6,7 +6,8 @@ public enum DeckSection {
     Main(60),
     Sideboard(15),
     Planes(10),
-    Schemes(20);
+    Schemes(20),
+    Conspiracy(0);
 
     private final int typicalSize; // Rules enforcement is done in DeckFormat class, this is for reference only
     private DeckSection(int commonSize) {

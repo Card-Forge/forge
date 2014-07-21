@@ -51,4 +51,5 @@ Dragon's Maze Race, -/5/RTR, DGM DGM DGM Meta-Choose(All(S(RTR Azorius Guild);Ra
 Modern Masters, 3/6/M13, MMA
 Magic 2014, 3/6/M14, M14
 Theros, 3/6/THS, THS BNG JOU
+#Conspiracy, 3/6/M14, CNS
 Magic 2015, 3/6/M15, M15

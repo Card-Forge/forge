@@ -657,3 +657,47 @@
 1 Vitu-Ghazi Guildmage|RTR
 1 Wayfaring Temple|RTR
 1 Wild Beastmaster|RTR
+
+[CNS Draft Matters]
+#1 Advantageous Proclamation|CNS
+#1 AEther Searcher|CNS
+#1 Agent of Acquisitions|CNS
+#1 Backup Plan|CNS
+1 Brago's Favor|CNS
+#1 Canal Dredger|CNS
+#1 Cogwork Grinder|CNS
+#1 Cogwork Librarian|CNS
+#1 Cogwork Spy|CNS
+#1 Cogwork Tracker|CNS
+#1 Deal Broker|CNS
+#1 Double Stroke|CNS
+1 Immediate Action|CNS
+#1 Iterative Analysis|CNS
+#1 Lore Seeker|CNS
+#1 Lurking Automaton|CNS
+1 Muzzio's Preparations|CNS
+#1 Paliano, the High City|CNS
+#1 Power Play|CNS
+1 Secret Summoning|CNS
+1 Secrets of Paradise|CNS
+#1 Sentinel Dispatch|CNS
+#1 Unexpected Potential|CNS
+#1 Whispergear Sneak|CNS
+#1 Worldknit|CNS
+
+[M15 Sample Cards]
+1 Aegis Angel|M15
+1 Cancel|M15
+1 Centaur Courser|M15
+1 Divine Verdict|M15
+1 Furnace Whelp|M15
+1 Garruk's Packleader|M15
+1 Inspired Charge|M15
+1 Mahamoti Djinn|M15
+1 Nightmare|M15
+1 Seismic Strike|M15
+1 Sengir Vampire|M15
+1 Serra Angel|M15
+1 Shivan Dragon|M15
+1 Terra Stomper|M15
+1 Walking Corpse|M15

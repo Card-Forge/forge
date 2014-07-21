@@ -38,6 +38,7 @@ public final class CardType implements Comparable<CardType> {
     public enum CoreType {
 
         Artifact(true),
+        Conspiracy(false),
         Creature(true),
         Enchantment(true),
         Instant(false),
@@ -216,6 +217,10 @@ public final class CardType implements Comparable<CardType> {
         return this.coreType.contains(CardType.CoreType.Sorcery);
     }
 
+    public boolean isConspiracy() {
+        return this.coreType.contains(CoreType.Conspiracy);
+    }
+
     public boolean isVanguard() {
         return this.coreType.contains(CardType.CoreType.Vanguard);
     }
@@ -346,10 +351,11 @@ public final class CardType implements Comparable<CardType> {
         // types.addAll(getCardTypes());
         types.addAll(Constant.CARD_TYPES);
     
-        // not currently used by Forge
+        // Variant card types (I don't understand these lines, shouldn't core types be enough?)
         types.add("Plane");
         types.add("Scheme");
         types.add("Vanguard");
+        types.add("Conspiracy");
     
         return types;
     }

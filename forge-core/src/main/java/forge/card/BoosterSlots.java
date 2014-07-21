@@ -11,4 +11,5 @@ public class BoosterSlots {
     public static final String MYTHIC = "Mythic";
     public static final String BASIC_LAND = "BasicLand";
     public static final String TIME_SHIFTED = "TimeShifted";
+    public static final String DUAL_FACED_CARD = "dfc";
 }

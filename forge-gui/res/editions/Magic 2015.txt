@@ -5,7 +5,7 @@ Name=Magic 2015
 Code2=M15
 Type=Core
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sample Cards"), 1 RareMythic:!fromSheet("M15 Sample Cards"), 1 BasicLand
 
 [cards]
 M Ajani Steadfast

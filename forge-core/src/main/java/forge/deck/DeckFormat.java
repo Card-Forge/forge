@@ -114,6 +114,9 @@ public enum DeckFormat {
         int min = getMainRange().getMinimum();
         int max = getMainRange().getMaximum();
 
+        // TODO "Your minimum deck size is reduced by five."
+        // Adjust minimum base on number of Advantageous Proclamation or similar cards
+
         if (deckSize < min) {
             return String.format("should have a minimum of %d cards", min);
         }

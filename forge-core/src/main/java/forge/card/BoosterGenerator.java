@@ -176,8 +176,8 @@ public class BoosterGenerator {
             if( invert ) operator = operator.substring(1);
             
             Predicate<PaperCard> toAdd = null;
-            if( operator.equalsIgnoreCase("dfc") ) {                toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), PaperCard.FN_GET_RULES);
-            } else if ( operator.equalsIgnoreCase(BoosterSlots.LAND) ) {         toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
+            if( operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD) ) {                toAdd = Predicates.compose(CardRulesPredicates.splitType(CardSplitType.Transform), PaperCard.FN_GET_RULES);
+             } else if ( operator.equalsIgnoreCase(BoosterSlots.LAND) ) {         toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard.FN_GET_RULES);
             } else if ( operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;
             } else if ( operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = IPaperCard.Predicates.Presets.IS_SPECIAL;
             } else if ( operator.equalsIgnoreCase(BoosterSlots.MYTHIC)) {        toAdd = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
@@ -187,6 +187,14 @@ public class BoosterGenerator {
             } else if ( operator.startsWith("name(") ) {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
+                toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
+            } else if (operator.startsWith("fromSheet(")) {
+                String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
+                Iterable<PaperCard> src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
+                ArrayList<String> cardNames = Lists.newArrayList();
+                for (PaperCard card : src) {
+                    cardNames.add(card.getName());
+                }
                 toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
             }
 

@@ -2635,6 +2635,7 @@ forge-gui/res/cardsfolder/b/bower_passage.txt -text
 forge-gui/res/cardsfolder/b/brace_for_impact.txt -text
 forge-gui/res/cardsfolder/b/brackwater_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/brago_king_eternal.txt -text
+forge-gui/res/cardsfolder/b/bragos_favor.txt -text
 forge-gui/res/cardsfolder/b/bragos_representative.txt -text
 forge-gui/res/cardsfolder/b/braid_of_fire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/braids_cabal_minion.txt svneol=native#text/plain
@@ -7033,6 +7034,7 @@ forge-gui/res/cardsfolder/i/imagecrafter.txt -text
 forge-gui/res/cardsfolder/i/imaginary_pet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/imi_statue.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/immaculate_magistrate.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/immediate_action.txt -text
 forge-gui/res/cardsfolder/i/immersturm.txt -text
 forge-gui/res/cardsfolder/i/immerwolf.txt -text
 forge-gui/res/cardsfolder/i/immobilizing_ink.txt svneol=native#text/plain
@@ -9084,6 +9086,7 @@ forge-gui/res/cardsfolder/m/mutavault.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mutilate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mutual_epiphany.txt -text
 forge-gui/res/cardsfolder/m/muzzio_visionary_architect.txt -text
+forge-gui/res/cardsfolder/m/muzzios_preparations.txt -text
 forge-gui/res/cardsfolder/m/muzzle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mwonvuli_acid_moss.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/mwonvuli_beast_tracker.txt -text
@@ -11646,7 +11649,9 @@ forge-gui/res/cardsfolder/s/second_sight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/second_sunrise.txt -text
 forge-gui/res/cardsfolder/s/second_thoughts.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/second_wind.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/secret_summoning.txt -text
 forge-gui/res/cardsfolder/s/secretkeeper.txt -text
+forge-gui/res/cardsfolder/s/secrets_of_paradise.txt -text
 forge-gui/res/cardsfolder/s/secrets_of_the_dead.txt -text
 forge-gui/res/cardsfolder/s/security_blockade.txt -text
 forge-gui/res/cardsfolder/s/security_detail.txt svneol=native#text/plain

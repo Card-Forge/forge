@@ -30,6 +30,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -3320,6 +3321,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Command,Stack");
             
             getZone(ZoneType.Command).add(eff);
+        }
+
+        for (IPaperCard cp : registeredPlayer.getConspiracies()) {
+            Card conspire = Card.fromPaperCard(cp, this);
+            if (conspire.hasKeyword("Hidden agenda")) {
+                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire)) {
+                    continue;
+                }
+            }
+            com.add(conspire);
         }
     }
 

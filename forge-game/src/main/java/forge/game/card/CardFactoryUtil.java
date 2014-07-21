@@ -18,6 +18,7 @@
 package forge.game.card;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -56,6 +57,8 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
@@ -157,6 +160,50 @@ public class CardFactoryUtil {
         morphUp.setIsMorphUp(true);
 
         return morphUp;
+    }
+
+    public static boolean handleHiddenAgenda(Player player, Card card) {
+        SpellAbility sa = new SpellAbility.EmptySa(card);
+        sa.getMapParams().put("AILogic", card.getSVar("AgendaLogic"));
+        Predicate<PaperCard> cpp = Predicates.alwaysTrue();
+        //Predicate<Card> pc = Predicates.in(player.getAllCards());
+        // TODO This would be better to send in the player's deck, not all cards
+        String name = player.getController().chooseCardName(sa, cpp, "Card", "Name a card for " + card.getName());
+        if (name == null || name.isEmpty()) {
+            return false;
+        }
+
+        card.setNamedCard(name);
+        card.turnFaceDown();
+        // Hopefully face down also hides the named card?
+        card.addSpellAbility(abilityRevealHiddenAgenda(card));
+        return true;
+    }
+
+    public static AbilityStatic abilityRevealHiddenAgenda(final Card sourceCard) {
+        final AbilityStatic revealAgenda = new AbilityStatic(sourceCard, Cost.Zero, null) {
+
+            @Override
+            public void resolve() {
+                if (sourceCard.turnFaceUp()) {
+                    String sb = this.getActivatingPlayer() + " has revealed " + sourceCard.getName() + " with the chosen name " + sourceCard.getNamedCard();
+                    sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
+                }
+            }
+
+            @Override
+            public boolean canPlay() {
+                return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
+                        && sourceCard.isInZone(ZoneType.Command);
+            }
+
+            // TODO When should the AI activate this?
+
+        }; // reveal hidden agenda
+
+        revealAgenda.setDescription("Reveal this Hidden Agenda at any time. ");
+        return revealAgenda;
     }
 
     /**

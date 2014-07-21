@@ -27,6 +27,7 @@ public class RegisteredPlayer {
     private final List<IPaperCard> cardsInCommand = new ArrayList<IPaperCard>();
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
+    private Iterable<PaperCard> conspiracies = null;
     private PaperCard commander = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     
@@ -99,6 +100,15 @@ public class RegisteredPlayer {
      */
     public Iterable<PaperCard> getPlanes() {
         return planes == null ? EmptyList : planes;
+    }
+
+    public Iterable<PaperCard> getConspiracies() {
+        return conspiracies == null ? EmptyList : conspiracies;
+    }
+
+    public void assignConspiracies() {
+        if (currentDeck.has(DeckSection.Conspiracy))
+            conspiracies = currentDeck.get(DeckSection.Conspiracy).toFlatList();
     }
 
     public int getTeamNumber() {
