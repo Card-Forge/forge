@@ -8277,23 +8277,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                     continue;
                 }
                 if (kw.equals("Protection from white")) {
-                    if (source.isWhite() && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isWhite()) {
                         return true;
                     }
                 } else if (kw.equals("Protection from blue")) {
-                    if (source.isBlue() && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isBlue()) {
                         return true;
                     }
                 } else if (kw.equals("Protection from black")) {
-                    if (source.isBlack() && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isBlack()) {
                         return true;
                     }
                 } else if (kw.equals("Protection from red")) {
-                    if (source.isRed() && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isRed()) {
                         return true;
                     }
                 } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen() && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isGreen()) {
                         return true;
                     }
                 } else if (kw.equals("Protection from creatures")) {
