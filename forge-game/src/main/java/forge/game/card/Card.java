@@ -5426,6 +5426,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.isInstant() || this.isSorcery()) {
                 return false;
             }
+        } else if (property.startsWith("CardUID_")) {// Protection with "doesn't remove effect"
+            if (this.getUniqueNumber() != Integer.parseInt(property.split("CardUID_")[1])) {
+                return false;
+            }
         } else if (property.equals("ChosenCard")) {
             if (!source.getChosenCard().contains(this)) {
                 return false;
@@ -8273,8 +8277,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     continue;
                 }
                 if (kw.equals("Protection from white")) {
-                    if (source.isWhite() && !source.getName().equals("White Ward")
-                            && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isWhite() && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from blue")) {

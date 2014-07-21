@@ -162,9 +162,10 @@ public class StaticAbilityContinuous {
                 addKeywords[w] = addKeywords[w].replaceAll("ChosenType", chosenType);
             }
             final String chosenName = hostCard.getNamedCard();
+            final String hostCardUID = Integer.toString(hostCard.getUniqueNumber()); // Protection with "doesn't remove" effect
             for (int w = 0; w < addKeywords.length; w++) {
                 if (addKeywords[w].startsWith("Protection:")) {
-                    addKeywords[w] = addKeywords[w].replaceAll("ChosenName", "Card.named" + chosenName);
+                    addKeywords[w] = addKeywords[w].replaceAll("ChosenName", "Card.named" + chosenName).replace("HostCardUID", hostCardUID);
                 }
             }
             if (params.containsKey("SharedKeywordsZone")) {
