@@ -45,6 +45,7 @@ public class VStack extends FDropDown {
 
     private final MagicStack stack;
     private final LobbyPlayer localPlayer;
+    private StackInstanceDisplay activeItem;
     private SpellAbilityStackInstance activeStackInstance;
 
     private int stackSize;
@@ -65,6 +66,7 @@ public class VStack extends FDropDown {
 
     @Override
     public void update() {
+        activeItem = null;
         activeStackInstance = null; //reset before updating stack
 
         if (stackSize != stack.size()) {
@@ -109,14 +111,13 @@ public class VStack extends FDropDown {
             //iterate stack in reverse so most recent items appear on bottom
             SpellAbilityStackInstance stackInstance = null;
             StackInstanceDisplay display = null;
-            StackInstanceDisplay activeDisplay = null;
             float overlap = Math.round(CARD_HEIGHT / 2 + PADDING + BORDER_THICKNESS);
             Iterator<SpellAbilityStackInstance> iterator = stack.reverseIterator();
             while (iterator.hasNext()) {
                 stackInstance = iterator.next();
                 display = new StackInstanceDisplay(stackInstance, width);
                 if (activeStackInstance == stackInstance) {
-                    activeDisplay = display;
+                    activeItem = display;
                 }
                 else { //only add non-active items here
                     add(display);
@@ -127,13 +128,13 @@ public class VStack extends FDropDown {
             }
             if (activeStackInstance == null) {
                 activeStackInstance = stackInstance; //use topmost item on stack as default active item
-                activeDisplay = display;
+                activeItem = display;
             }
             else {
-                activeDisplay.setHeight(display.preferredHeight); //increase active item height to preferred height if needed
-                add(activeDisplay);
+                activeItem.setHeight(display.preferredHeight); //increase active item height to preferred height if needed
+                add(activeItem);
             }
-            scrollIntoView(activeDisplay); //scroll active display into view
+            scrollIntoView(activeItem); //scroll active display into view
         }
         return new ScrollBounds(totalWidth, y + MARGINS);
     }
@@ -145,22 +146,14 @@ public class VStack extends FDropDown {
 
     @Override
     protected void drawOnContainer(Graphics g) {
-        //draw target arrows immediately above stack
-        for (FDisplayObject child : getChildren()) {
+        //draw target arrows immediately above stack for active item only
+        if (activeItem != null) {
             Vector2 arrowOrigin = new Vector2(
-                    child.getLeft() + VStack.CARD_WIDTH * FCardPanel.TARGET_ORIGIN_FACTOR_X + VStack.PADDING + VStack.BORDER_THICKNESS,
-                    child.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING + VStack.BORDER_THICKNESS);
+                    activeItem.getLeft() + VStack.CARD_WIDTH * FCardPanel.TARGET_ORIGIN_FACTOR_X + VStack.PADDING + VStack.BORDER_THICKNESS,
+                    activeItem.getTop() + VStack.CARD_HEIGHT * FCardPanel.TARGET_ORIGIN_FACTOR_Y + VStack.PADDING + VStack.BORDER_THICKNESS);
 
-            if (arrowOrigin.y < 0) {
-                continue; //don't draw arrow scrolled off top
-            }
-            if (arrowOrigin.y > getHeight()) {
-                break; //don't draw arrow scrolled off bottom
-            }
-
-            SpellAbilityStackInstance stackInstance = ((StackInstanceDisplay)child).getStackInstance();
-            TargetChoices targets = stackInstance.getSpellAbility().getTargets();
-            Player activator = stackInstance.getActivator();
+            TargetChoices targets = activeStackInstance.getSpellAbility().getTargets();
+            Player activator = activeStackInstance.getActivator();
             arrowOrigin = arrowOrigin.add(getScreenPosition());
 
             for (Card c : targets.getTargetCards()) {
@@ -197,10 +190,6 @@ public class VStack extends FDropDown {
             float height = Math.max(CARD_HEIGHT, textRenderer.getWrappedBounds(text, FONT, width).height);
             height += 2 * (PADDING + BORDER_THICKNESS);
             preferredHeight = Math.round(height);
-        }
-
-        public SpellAbilityStackInstance getStackInstance() {
-            return stackInstance;
         }
 
         @Override
