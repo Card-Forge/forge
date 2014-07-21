@@ -36,9 +36,9 @@ import forge.util.Aggregates;
 import forge.util.gui.SGuiChoose;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * <p>
@@ -113,12 +113,17 @@ public class TargetSelection {
             return this.chooseCardFromStack(mandatory);
         }
         else {
-            List<Card> validTargets = this.getValidCardsToTarget();
-            if (zone.size() == 1 && GuiBase.getInterface().openZone(zone.get(0), getPlayersWithValidTargets(validTargets))) {
+            final List<Card> validTargets = this.getValidCardsToTarget();
+            final Map<Player, Object> playersWithValidTargets = new HashMap<Player, Object>();
+            for (Card card : validTargets) {
+                playersWithValidTargets.put(card.getController(), null);
+            }
+            if (GuiBase.getInterface().openZones(zone, playersWithValidTargets)) {
                 InputSelectTargets inp = new InputSelectTargets(validTargets, ability, mandatory);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
+                GuiBase.getInterface().restoreOldZones(playersWithValidTargets);
             }
             else {
                 // for every other case an all-purpose GuiChoose
@@ -127,14 +132,6 @@ public class TargetSelection {
         }
         // some inputs choose cards one-by-one and need to be called again 
         return choiceResult && chooseTargets(numTargets);
-    }
-
-    private Set<Player> getPlayersWithValidTargets(List<Card> validTargets) {
-        Set<Player> players = new HashSet<Player>();
-        for (Card card : validTargets) {
-            players.add(card.getController());
-        }
-        return players;
     }
 
     // these have been copied over from CardFactoryUtil as they need two extra

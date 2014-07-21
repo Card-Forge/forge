@@ -395,14 +395,21 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public boolean openZone(ZoneType zoneType, Set<Player> players) {
-        switch (zoneType) {
-        case Battlefield:
-        case Hand:
-            return true; //don't actually need to open anything, but indicate that zone can be opened
-        default:
-            return false;
+    public boolean openZones(List<ZoneType> zones, Map<Player, Object> players) {
+        if (zones.size() == 1) {
+            switch (zones.get(0)) {
+            case Battlefield:
+            case Hand:
+                return true; //don't actually need to open anything, but indicate that zone can be opened
+            default:
+                return false;
+            }
         }
+        return false;
+    }
+
+    @Override
+    public void restoreOldZones(Map<Player, Object> playersToRestoreZonesFor) {
     }
 
     @Override

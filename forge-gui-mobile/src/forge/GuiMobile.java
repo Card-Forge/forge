@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -327,24 +328,37 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public boolean openZone(ZoneType zoneType, Set<Player> players) {
-        switch (zoneType) {
-        case Battlefield:
-            return true; //Battlefield is always open
-        default:
-            //open zone tab for given zone if needed
-            boolean result = true;
-            for (Player player : players) {
-                VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
-                InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                if (zoneTab == null) {
-                    result = false;
+    public boolean openZones(List<ZoneType> zones, Map<Player, Object> players) {
+        if (zones.size() == 1) {
+            ZoneType zoneType = zones.get(0);
+            switch (zoneType) {
+            case Battlefield:
+                return true; //Battlefield is always open
+            default:
+                //open zone tab for given zone if needed
+                boolean result = true;
+                for (Player player : players.keySet()) {
+                    VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
+                    players.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
+                    InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
+                    if (zoneTab == null) {
+                        result = false;
+                    }
+                    else {
+                        playerPanel.setSelectedTab(zoneTab);
+                    }
                 }
-                else {
-                    playerPanel.setSelectedTab(zoneTab);
-                }
+                return result;
             }
-            return result;
+        }
+        return false;
+    }
+
+    @Override
+    public void restoreOldZones(Map<Player, Object> playersToRestoreZonesFor) {
+        for (Entry<Player, Object> player : playersToRestoreZonesFor.entrySet()) {
+            VPlayerPanel playerPanel = FControl.getPlayerPanel(player.getKey());
+            playerPanel.setSelectedTab((InfoTab)player.getValue());
         }
     }
 
