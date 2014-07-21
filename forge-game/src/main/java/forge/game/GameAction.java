@@ -941,7 +941,7 @@ public class GameAction {
             final Card perm = (Card) entity;
             ZoneType tgtZone = tgt.getZone().get(0);
 
-            if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c) || (perm.isPhasedOut() && !c.isPhasedOut())) {
+            if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
                 this.moveToGraveyard(c);
                 checkAgain = true;

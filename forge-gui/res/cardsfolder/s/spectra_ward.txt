@@ -1,0 +1,8 @@
+Name:Spectra Ward
+ManaCost:3 W W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 W W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection:Card.nonColorless:Protection from all colors:Aura | Description$ Enchanted creature gets +2/+2 and has protection from all colors. This effect doesn't remove auras.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectra_ward.jpg
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has protection from all colors. This effect doesn't remove Auras. (It can't be blocked, targeted, or dealt damage by anything that's white, blue, black, red, or green.)

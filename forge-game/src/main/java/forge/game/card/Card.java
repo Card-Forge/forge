@@ -8251,6 +8251,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     @Override
     public boolean hasProtectionFrom(final Card source) {
+        return hasProtectionFrom(source, false);
+    }
+
+    public boolean hasProtectionFrom(final Card source, final boolean checkSBA) {
         if (source == null) {
             return false;
         }
@@ -8307,13 +8311,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else if (kw.equals("Protection from everything")) {
                     return true;
-                } else if (kw.startsWith("Protection:")) { // uses isValid
-                    final String characteristic = kw.split(":")[1];
+                } else if (kw.startsWith("Protection:")) { // uses isValid; Protection:characteristic:desc:exception
+                    final String[] kws = kw.split(":");
+                    final String characteristic = kws[1];
                     final String[] characteristics = characteristic.split(",");
+                    final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
                     if (source.isValid(characteristics, this.getController(), this)
                       && !source.getName().contains("Flickering Ward") && !source.getName().contains("Pentarch Ward")
                       && !source.getName().contains("Cho-Manno's Blessing") && !source.getName().contains("Floating Shield")
-                      && !source.getName().contains("Ward of Lights")) {
+                      && !source.getName().contains("Ward of Lights")
+                      && (!checkSBA || (exception != null && !source.isValid(exception, this.getController(), this)))) {
                         return true;
                     }
                 } else if (kw.equals("Protection from colored spells")) {
@@ -8498,7 +8505,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
-    
     /**
      * canBeEnchantedBy.
      * 
@@ -8507,6 +8513,18 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean
      */
     public final boolean canBeEnchantedBy(final Card aura) {
+        return canBeEnchantedBy(aura, false);
+    }
+
+    /**
+     * canBeEnchantedBy.
+     * 
+     * @param aura
+     *            a Card
+     * @param checkSBA
+     * @return a boolean
+     */
+    public final boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
         SpellAbility sa = aura.getFirstSpellAbility();
         if (aura.isBestowed()) {
             for (SpellAbility s : aura.getSpellAbilities()) {
@@ -8521,7 +8539,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             tgt = sa.getTargetRestrictions();
         }
 
-        if (this.hasProtectionFrom(aura)
+        if (this.hasProtectionFrom(aura, checkSBA)
             || (this.hasKeyword("CARDNAME can't be enchanted in the future.") && !this.getEnchantedBy().contains(aura))
             || (this.hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura")
                     && !(aura.getName().equals("Consecrate Land") && aura.isInZone(ZoneType.Battlefield)))
