@@ -132,6 +132,9 @@ public class VStack extends FDropDown {
             }
             else {
                 activeItem.setHeight(display.preferredHeight); //increase active item height to preferred height if needed
+                if (activeItem.getBottom() > y) {
+                    y = activeItem.getBottom(); //ensure stack height increases if needed
+                }
                 add(activeItem);
             }
             scrollIntoView(activeItem); //scroll active display into view
