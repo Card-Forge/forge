@@ -8293,8 +8293,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return true;
                     }
                 } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen() && !source.getName().equals("Green Ward")
-                            && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isGreen() && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from creatures")) {
@@ -8306,7 +8305,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return true;
                     }
                 } else if (kw.equals("Protection from enchantments")) {
-                    if (source.isEnchantment() && !source.getName().contains("Tattoo Ward")) {
+                    if (source.isEnchantment()) {
                         return true;
                     }
                 } else if (kw.equals("Protection from everything")) {
