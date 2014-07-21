@@ -8281,18 +8281,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return true;
                     }
                 } else if (kw.equals("Protection from blue")) {
-                    if (source.isBlue() && !source.getName().equals("Blue Ward")
-                            && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isBlue() && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from black")) {
-                    if (source.isBlack() && !source.getName().equals("Black Ward")
-                            && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isBlack() && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from red")) {
-                    if (source.isRed() && !source.getName().equals("Red Ward")
-                            && !source.getName().contains("Pledge of Loyalty")) {
+                    if (source.isRed() && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from green")) {
@@ -8323,7 +8320,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                       && !source.getName().contains("Flickering Ward") && !source.getName().contains("Pentarch Ward")
                       && !source.getName().contains("Cho-Manno's Blessing") && !source.getName().contains("Floating Shield")
                       && !source.getName().contains("Ward of Lights")
-                      && (!checkSBA || (exception != null && !source.isValid(exception, this.getController(), this)))) {
+                      && (!checkSBA || exception == null || !source.isValid(exception, this.getController(), this))) {
                         return true;
                     }
                 } else if (kw.equals("Protection from colored spells")) {
