@@ -8316,9 +8316,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     final String[] characteristics = characteristic.split(",");
                     final String exception = kws.length > 3 ? kws[3] : null; // check "This effect cannot remove sth"
                     if (source.isValid(characteristics, this.getController(), this)
-                      && !source.getName().contains("Flickering Ward") && !source.getName().contains("Pentarch Ward")
-                      && !source.getName().contains("Cho-Manno's Blessing") && !source.getName().contains("Floating Shield")
-                      && !source.getName().contains("Ward of Lights")
                       && (!checkSBA || exception == null || !source.isValid(exception, this.getController(), this))) {
                         return true;
                     }
