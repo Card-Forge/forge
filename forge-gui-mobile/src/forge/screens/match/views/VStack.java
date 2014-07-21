@@ -45,6 +45,7 @@ public class VStack extends FDropDown {
 
     private final MagicStack stack;
     private final LobbyPlayer localPlayer;
+    private SpellAbilityStackInstance activeStackInstance;
 
     private int stackSize;
 
@@ -58,8 +59,14 @@ public class VStack extends FDropDown {
         return false;
     }
 
+    //temporarily reveal zones targeted by active stack instance
+    private void revealTargetZones() {
+    }
+
     @Override
     public void update() {
+        activeStackInstance = null; //reset before updating stack
+
         if (stackSize != stack.size()) {
             int oldStackSize = stackSize;
             stackSize = stack.size();
@@ -68,6 +75,7 @@ public class VStack extends FDropDown {
             if (stackSize > 0) {
                 if (!isVisible()) {
                     if (stackSize > oldStackSize) { //don't re-show stack if user hid it and then resolved an item on the stack
+                        revealTargetZones();
                         show();
                     }
                     return; //don't call super.update() either way since show handles this
@@ -85,7 +93,6 @@ public class VStack extends FDropDown {
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
 
-        float height;
         float x = MARGINS;
         float y = MARGINS;
         float totalWidth = Math.min(4 * CARD_WIDTH, maxWidth);
@@ -94,27 +101,39 @@ public class VStack extends FDropDown {
         if (stack.isEmpty()) { //show label if stack empty
             FLabel label = add(new FLabel.Builder().text("[Empty]").font(FONT).align(HAlignment.CENTER).build());
 
-            height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
+            float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
             label.setBounds(x, y, width, height);
             return new ScrollBounds(totalWidth, y + height + MARGINS);
         }
         else {
             //iterate stack in reverse so most recent items appear on bottom
-            height = 0;
+            SpellAbilityStackInstance stackInstance = null;
+            StackInstanceDisplay display = null;
+            StackInstanceDisplay activeDisplay = null;
             float overlap = Math.round(CARD_HEIGHT / 2 + PADDING + BORDER_THICKNESS);
             Iterator<SpellAbilityStackInstance> iterator = stack.reverseIterator();
-            while (true) {
-                StackInstanceDisplay display = add(new StackInstanceDisplay(iterator.next(), width));
-                if (iterator.hasNext()) { //make items have top half of card be overlapped
-                    display.setBounds(x, y, width, overlap);
-                    y += overlap;
+            while (iterator.hasNext()) {
+                stackInstance = iterator.next();
+                display = new StackInstanceDisplay(stackInstance, width);
+                if (activeStackInstance == stackInstance) {
+                    activeDisplay = display;
                 }
-                else { //use full preferred height of display for bottom item on stack
-                    display.setBounds(x, y, width, display.preferredHeight);
-                    y += display.preferredHeight;
-                    break;
+                else { //only add non-active items here
+                    add(display);
                 }
+                //use full preferred height of display for topmost item on stack, overlap amount for other items
+                display.setBounds(x, y, width, iterator.hasNext() ? overlap : display.preferredHeight);
+                y += display.getHeight();
             }
+            if (activeStackInstance == null) {
+                activeStackInstance = stackInstance; //use topmost item on stack as default active item
+                activeDisplay = display;
+            }
+            else {
+                activeDisplay.setHeight(display.preferredHeight); //increase active item height to preferred height if needed
+                add(activeDisplay);
+            }
+            scrollIntoView(activeDisplay); //scroll active display into view
         }
         return new ScrollBounds(totalWidth, y + MARGINS);
     }
@@ -186,6 +205,11 @@ public class VStack extends FDropDown {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (activeStackInstance != stackInstance) { //set as active stack instance if not already such
+                activeStackInstance = stackInstance;
+                VStack.this.updateSizeAndPosition();
+                return true;
+            }
             final Player player = stackInstance.getSpellAbility().getActivatingPlayer();
             final PlayerController controller = player.getController();
             if (stackInstance.getSpellAbility().isOptionalTrigger() && player.getLobbyPlayer() == localPlayer && controller != null) {
@@ -247,8 +271,8 @@ public class VStack extends FDropDown {
             float w = getWidth();
             float h = preferredHeight;
 
-            boolean needAlpha = h > getHeight();
-            if (needAlpha) { //use alpha for cards below top of stack
+            boolean needAlpha = (activeStackInstance != stackInstance);
+            if (needAlpha) { //use alpha for non-active items on stack
                 g.setAlphaComposite(ALPHA_COMPOSITE);
             }
 

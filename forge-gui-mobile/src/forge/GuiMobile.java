@@ -333,6 +333,7 @@ public class GuiMobile implements IGuiBase {
             ZoneType zoneType = zones.get(0);
             switch (zoneType) {
             case Battlefield:
+                players.clear(); //clear since no zones need to be restored
                 return true; //Battlefield is always open
             default:
                 //open zone tab for given zone if needed
