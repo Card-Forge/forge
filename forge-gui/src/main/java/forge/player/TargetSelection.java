@@ -20,10 +20,12 @@ package forge.player;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import forge.GuiBase;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
@@ -34,7 +36,9 @@ import forge.util.Aggregates;
 import forge.util.gui.SGuiChoose;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -68,8 +72,9 @@ public class TargetSelection {
     public final boolean chooseTargets(Integer numTargets) {
         TargetRestrictions tgt = getTgt();
         final boolean canTarget = tgt != null && tgt.doesTarget();
-        if( !canTarget )
+        if (!canTarget) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
+        }
         
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect) 
         final int minTargets = numTargets != null ? numTargets.intValue() : tgt.getMinTargets(ability.getHostCard(), ability);
@@ -101,18 +106,21 @@ public class TargetSelection {
             List<GameObject> candidates = tgt.getAllCandidates(this.ability, true);
             GameObject choice = Aggregates.random(candidates);
             return ability.getTargets().add(choice);
-        } else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
+        }
+        else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
             return this.chooseCardFromStack(mandatory);
-        } else {
+        }
+        else {
             List<Card> validTargets = this.getValidCardsToTarget();
-            if (zone.size() == 1 && (zone.get(0) == ZoneType.Battlefield || zone.get(0) == ZoneType.Hand)) {
+            if (zone.size() == 1 && GuiBase.getInterface().openZone(zone.get(0), getPlayersWithValidTargets(validTargets))) {
                 InputSelectTargets inp = new InputSelectTargets(validTargets, ability, mandatory);
                 inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
-            } else {
+            }
+            else {
                 // for every other case an all-purpose GuiChoose
                 choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
             }
@@ -121,7 +129,13 @@ public class TargetSelection {
         return choiceResult && chooseTargets(numTargets);
     }
 
-    
+    private Set<Player> getPlayersWithValidTargets(List<Card> validTargets) {
+        Set<Player> players = new HashSet<Player>();
+        for (Card card : validTargets) {
+            players.add(card.getController());
+        }
+        return players;
+    }
 
     // these have been copied over from CardFactoryUtil as they need two extra
     // parameters for target selection.

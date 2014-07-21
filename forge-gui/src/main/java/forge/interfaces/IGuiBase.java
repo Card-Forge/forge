@@ -73,6 +73,7 @@ public interface IGuiBase {
     void enableOverlay();
     void disableOverlay();
     void finishGame();
+    boolean openZone(ZoneType zoneType, Set<Player> players);
     void updateStack();
     void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate);
     void updateCards(Set<Card> cardsToUpdate);

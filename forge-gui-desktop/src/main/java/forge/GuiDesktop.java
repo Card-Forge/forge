@@ -395,6 +395,17 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public boolean openZone(ZoneType zoneType, Set<Player> players) {
+        switch (zoneType) {
+        case Battlefield:
+        case Hand:
+            return true; //don't actually need to open anything, but indicate that zone can be opened
+        default:
+            return false;
+        }
+    }
+
+    @Override
     public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
         CMatchUI.SINGLETON_INSTANCE.updateZones(zonesToUpdate);
     }

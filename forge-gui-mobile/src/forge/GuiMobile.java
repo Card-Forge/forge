@@ -42,7 +42,9 @@ import forge.item.PaperCard;
 import forge.match.input.InputQueue;
 import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
+import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
+import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.screens.quest.QuestMenu;
 import forge.sound.AudioClip;
@@ -322,6 +324,28 @@ public class GuiMobile implements IGuiBase {
     @Override
     public Game getGame() {
         return FControl.getGame();
+    }
+
+    @Override
+    public boolean openZone(ZoneType zoneType, Set<Player> players) {
+        switch (zoneType) {
+        case Battlefield:
+            return true; //Battlefield is always open
+        default:
+            //open zone tab for given zone if needed
+            boolean result = true;
+            for (Player player : players) {
+                VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
+                InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
+                if (zoneTab == null) {
+                    result = false;
+                }
+                else {
+                    playerPanel.setSelectedTab(zoneTab);
+                }
+            }
+            return result;
+        }
     }
 
     @Override

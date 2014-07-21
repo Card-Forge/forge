@@ -91,7 +91,7 @@ public class VPlayerPanel extends FContainer {
         setSelectedTab(zoneTabs.get(zoneType));
     }
 
-    private void setSelectedTab(InfoTab selectedTab0) {
+    public void setSelectedTab(InfoTab selectedTab0) {
         if (selectedTab == selectedTab0) {
             return;
         }
