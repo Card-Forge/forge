@@ -47,7 +47,6 @@ import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
 import forge.util.ReflectionUtil;
-import forge.util.Utils;
 
 import java.util.*;
 import java.util.Map.Entry;

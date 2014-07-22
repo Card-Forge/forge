@@ -33,8 +33,8 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
         float availableWidth = helper.getParentWidth() - (buttons.size() - 1) * helper.getGapX(); //account for gaps
-        float buttonWidth = availableWidth / buttons.size();
         float buttonHeight = helper.getParentHeight();
+        float buttonWidth = Math.min(buttonHeight, availableWidth / buttons.size());
 
         for (FLabel btn : buttons) {
             helper.include(btn, buttonWidth, buttonHeight);
@@ -73,7 +73,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
 
         private ToggleButton(FImage icon) {
             super(new FLabel.Builder()
-                .icon(icon).font(ItemFilter.DEFAULT_FONT).iconScaleFactor(0.9f)
+                .icon(icon).iconScaleFactor(1f)
                 .align(HAlignment.CENTER)
                 .selectable(true).selected(true)
                 .command(new FEventHandler() {
