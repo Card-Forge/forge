@@ -35,7 +35,11 @@ More improvements are on their way in the next version of Forge, including remov
 New Cards
 ---------
 
-
+Brago's Favor
+Immediate Action
+Muzzio's Preparations
+Secret Summoning
+Secrets of Paradise
 
 
 ------------
