@@ -17,7 +17,7 @@ import forge.itemmanager.filters.DeckFolderFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.DeckSetFilter;
-import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.TextSearchFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
@@ -94,7 +94,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     }
 
     @Override
-    protected ItemFilter<DeckProxy> createSearchFilter() {
+    protected TextSearchFilter<DeckProxy> createSearchFilter() {
         return new DeckSearchFilter(this);
     }
 

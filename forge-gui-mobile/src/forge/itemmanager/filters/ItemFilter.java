@@ -78,8 +78,6 @@ public abstract class ItemFilter<T extends InventoryItem> {
     public abstract ItemFilter<T> createCopy();
     public abstract boolean isEmpty();
     public abstract void reset();
-    public void afterFiltersApplied() {
-    }
 
     /**
      * Merge the given filter with this filter if possible

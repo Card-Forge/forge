@@ -15,7 +15,7 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.TextSearchFilter;
 import forge.menu.FPopupMenu;
 import forge.quest.QuestSpellShop;
 import forge.toolbox.FList;
@@ -39,7 +39,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
     }
 
     @Override
-    protected ItemFilter<? extends InventoryItem> createSearchFilter() {
+    protected TextSearchFilter<? extends InventoryItem> createSearchFilter() {
         return CardManager.createSearchFilter(this);
     }
 

@@ -681,11 +681,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
         protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, caption0, icon0);
-            
-            if (config == ItemManagerConfig.PLANAR_POOL || config == ItemManagerConfig.SCHEME_POOL) {
-                //prevent showing image view options for planar and scheme pools by default
-                cardManager.setHideViewOptions(1, true);
-            }
         }
 
         @Override
@@ -834,25 +829,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 captionPrefix = "Commander";
                 cardManager.setCaption("Commander");
                 icon = FSkinImage.PLANESWALKER;
-                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             case Avatar:
                 captionPrefix = "Avatar";
                 cardManager.setCaption("Avatar");
                 icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
-                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             case Planes:
                 captionPrefix = "Planes";
                 cardManager.setCaption("Planes");
                 icon = FSkinImage.CHAOS;
-                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             case Schemes:
                 captionPrefix = "Schemes";
                 cardManager.setCaption("Schemes");
                 icon = FSkinImage.POISON;
-                cardManager.setHideViewOptions(1, true); //image view options not needed
                 break;
             }
         }
@@ -905,6 +896,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             switch (deckSection) {
+            default:
             case Main:
                 addItem(menu, "Add", null, FSkinImage.PLUS, true, false, new Callback<Integer>() {
                     @Override
@@ -1057,8 +1049,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected DraftPackPage() {
             super(ItemManagerConfig.DRAFT_PACK, "Pack 1", FSkinImage.PACK);
 
-            //hide filters and options panel so more of pack is visible by default
-            cardManager.setHideViewOptions(1, true);
             cardManager.setAlwaysNonUnique(true);
         }
 

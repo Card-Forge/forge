@@ -32,11 +32,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -90,67 +86,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
         });
 
-        getPnlOptions().clear();
-
-        if (config.getShowUniqueCardsOption()) {
-            final FCheckBox chkBox = new FCheckBox("Unique Cards Only", itemManager.getWantUnique());
-            chkBox.setFont(list.getFont());
-            chkBox.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    boolean wantUnique = chkBox.isSelected();
-                    if (itemManager.getWantUnique() == wantUnique) { return; }
-                    itemManager.setWantUnique(wantUnique);
-                    itemManager.refresh();
-
-                    if (itemManager.getConfig() != null) {
-                        itemManager.setWantUnique(wantUnique);
-                    }
-                }
-            });
-            getPnlOptions().add(chkBox);
-        }
-
         list.cols.clear();
 
         int modelIndex = 0;
         for (final ItemColumn col : cols) {
             col.setIndex(modelIndex++);
             if (col.isVisible()) { list.cols.add(col); }
-
-            final FCheckBox chkBox = new FCheckBox(StringUtils.isEmpty(col.getShortName()) ?
-                    col.getLongName() : col.getShortName(), col.isVisible());
-            chkBox.setFont(list.getFont());
-            chkBox.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    boolean visible = chkBox.isSelected();
-                    if (col.isVisible() == visible) { return; }
-                    col.setVisible(visible);
-
-                    if (col.isVisible()) {
-                        list.cols.add(col);
-
-                        //move col into proper position
-                        int oldIndex = list.getCellCount() - 1;
-                        int newIndex = col.getIndex();
-                        for (int i = 0; i < col.getIndex(); i++) {
-                            if (!cols.get(i).isVisible()) {
-                                newIndex--;
-                            }
-                        }
-                        if (newIndex < oldIndex) {
-                            list.cols.remove(oldIndex);
-                            list.cols.add(newIndex, col);
-                        }
-                    }
-                    else {
-                        list.cols.remove(col);
-                    }
-                    ItemManagerConfig.save();
-                }
-            });
-            getPnlOptions().add(chkBox);
         }
 
         listModel.setup();

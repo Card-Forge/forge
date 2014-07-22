@@ -1,8 +1,10 @@
 package forge.itemmanager.filters;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
@@ -16,7 +18,7 @@ import forge.util.LayoutHelper;
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     private static final FSkinFont FONT = FSkinFont.get(12);
-    protected FTextField txtSearch;
+    protected SearchField txtSearch;
 
     public TextSearchFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
@@ -57,9 +59,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     @Override
     protected void buildWidget(Widget widget) {
-        txtSearch = new FTextField();
-        txtSearch.setFont(FONT);
-        txtSearch.setGhostText("Search");
+        txtSearch = new SearchField();
         widget.add(txtSearch);
 
         txtSearch.setChangedHandler(new FEventHandler() {
@@ -82,5 +82,39 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
             return Predicates.alwaysTrue();
         }
         return SFilterUtil.buildItemTextFilter(text);
+    }
+
+    public void setRatio(String ratio0) {
+        txtSearch.ratio = ratio0;
+        txtSearch.ratioWidth = txtSearch.getFont().getBounds(ratio0).width;
+    }
+
+    public String getCaption() {
+        return txtSearch.getGhostText().substring("Search ".length());
+    }
+    public void setCaption(String caption0) {
+        txtSearch.setGhostText("Search " + caption0);
+    }
+
+    protected class SearchField extends FTextField {
+        private String ratio = "(0 / 0)";
+        private float ratioWidth;
+
+        private SearchField() {
+            setFont(FONT);
+            setGhostText("Search");
+            setHeight(getDefaultHeight(DEFAULT_FONT)); //set height based on default filter font
+        }
+
+        @Override
+        protected float getRightPadding() {
+            return ratioWidth + 2 * PADDING;
+        }
+
+        @Override
+        public void draw(Graphics g) {
+            super.draw(g);
+            g.drawText(ratio, renderedFont, GHOST_TEXT_COLOR, 0, 0, getWidth() - PADDING, getHeight(), false, HAlignment.RIGHT, true);
+        }
     }
 }

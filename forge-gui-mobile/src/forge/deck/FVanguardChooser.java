@@ -58,7 +58,6 @@ public class FVanguardChooser extends FScreen {
             }
         });
         lstVanguards.setup(ItemManagerConfig.VANGUARDS);
-        lstVanguards.setHideViewOptions(1, true);
         lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars, true);
         lstVanguards.setSelectionChangedHandler(selectionChangedHandler);
         selectRandom();

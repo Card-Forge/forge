@@ -18,7 +18,7 @@ import forge.itemmanager.filters.CardSearchFilter;
 import forge.itemmanager.filters.CardSetFilter;
 import forge.itemmanager.filters.CardToughnessFilter;
 import forge.itemmanager.filters.CardTypeFilter;
-import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.TextSearchFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.menu.FSubMenu;
@@ -41,7 +41,7 @@ public class CardManager extends ItemManager<PaperCard> {
     }
 
     @Override
-    protected ItemFilter<PaperCard> createSearchFilter() {
+    protected TextSearchFilter<PaperCard> createSearchFilter() {
         return createSearchFilter(this);
     }
 
@@ -55,10 +55,9 @@ public class CardManager extends ItemManager<PaperCard> {
     public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
         itemManager.addFilter(new CardColorFilter(itemManager));
         itemManager.addFilter(new CardTypeFilter(itemManager));
-        itemManager.addFilter(new CardCMCFilter(itemManager));
     }
 
-    public static ItemFilter<PaperCard> createSearchFilter(final ItemManager<? super PaperCard> itemManager) {
+    public static TextSearchFilter<PaperCard> createSearchFilter(final ItemManager<? super PaperCard> itemManager) {
         return new CardSearchFilter(itemManager);
     }
 

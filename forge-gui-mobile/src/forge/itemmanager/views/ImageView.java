@@ -385,7 +385,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         float padding = ItemFilter.PADDING;
         float x = 0;
         float h = FTextField.getDefaultHeight(ItemFilter.DEFAULT_FONT);
-        float y = (height - h) / 2;
+        float y = padding;
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;
         lblGroupBy.setBounds(x, y, lblGroupBy.getAutoSizeBounds().width, h);

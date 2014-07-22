@@ -30,13 +30,12 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.TextSearchFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FDropDownMenu;
-import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.menu.FSubMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
@@ -69,23 +68,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ContextMenu contextMenu;
     private final Class<T> genericType;
     private ItemManagerConfig config;
-    private String caption = "Items";
-    private String ratio = "(0 / 0)";
     private boolean hasNewColumn;
 
-    private final ItemFilter<? extends T> mainSearchFilter;
-
-    private final FLabel btnFilters = new FLabel.ButtonBuilder()
-        .text("Filters")
-        .build();
-
-    private final FLabel lblCaption = new FLabel.Builder()
-        .align(HAlignment.LEFT)
-        .font(FSkinFont.get(12))
-        .build();
+    private final TextSearchFilter<? extends T> mainSearchFilter;
 
     private static final FSkinImage VIEW_OPTIONS_ICON = FSkinImage.SETTINGS;
-    private final FLabel btnViewOptions = new FLabel.Builder()
+    private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
         .selectable(true).align(HAlignment.CENTER)
         .icon(VIEW_OPTIONS_ICON).iconScaleFactor(0.9f)
         .build();
@@ -125,81 +113,19 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         //build display
         add(mainSearchFilter.getPanel());
-        add(btnFilters);
-        add(lblCaption);
         for (ItemView<T> view : views) {
             add(view.getButton());
             view.getButton().setSelected(view == currentView);
         }
-        add(btnViewOptions);
-        btnViewOptions.setSelected(currentView.getPnlOptions().isVisible());
+        add(btnAdvancedSearchOptions);
+        btnAdvancedSearchOptions.setSelected(!hideFilters);
         add(currentView.getPnlOptions());
         add(currentView.getScroller());
 
-        final FEventHandler cmdAddCurrentSearch = new FEventHandler() {
+        btnAdvancedSearchOptions.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
-                if (searchFilter != null) {
-                    lockFiltering = true; //prevent updating filtering from this change
-                    addFilter(searchFilter);
-                    mainSearchFilter.reset();
-                    lockFiltering = false;
-                }
-            }
-        };
-        final FEventHandler cmdResetFilters = new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                resetFilters();
-            }
-        };
-        final FEventHandler cmdHideFilters = new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                setHideFilters(!getHideFilters());
-            }
-        };
-        final FSubMenu addMenu = new FSubMenu("Add", new FPopupMenu() {
-            @Override
-            protected void buildMenu() {
-                FMenuItem currentTextSearch = new FMenuItem("Current text search", cmdAddCurrentSearch);
-                currentTextSearch.setEnabled(!mainSearchFilter.isEmpty());
-                addItem(currentTextSearch);
-
-                if (config != ItemManagerConfig.STRING_ONLY) {
-                    buildAddFilterMenu(this);
-                }
-            }
-        });
-
-        //setup command for btnFilters
-        btnFilters.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FPopupMenu menu = new FPopupMenu() {
-                    @Override
-                    protected void buildMenu() {
-                        if (hideFilters) {
-                            addItem(new FMenuItem("Show Filters", cmdHideFilters));
-                        }
-                        else {
-                            addItem(addMenu);
-                            addItem(new FMenuItem("Reset Filters", cmdResetFilters));
-                            addItem(new FMenuItem("Hide Filters", cmdHideFilters));
-                        }
-                    }
-                };
-                
-                menu.show(btnFilters, 0, btnFilters.getHeight());
-            }
-        });
-
-        btnViewOptions.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
-                revalidate();
+                setHideFilters(!hideFilters);
             }
         });
 
@@ -272,7 +198,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         currentView = view;
 
-        btnViewOptions.setSelected(view.getPnlOptions().isVisible());
         view.getButton().setSelected(true);
         view.refresh(itemsToSelect, backupIndexToSelect, 0);
 
@@ -281,40 +206,31 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         revalidate();
     }
 
-    public void setHideViewOptions(int viewIndex, boolean hideViewOptions) {
-        if (viewIndex < 0 || viewIndex >= views.size()) { return; }
-        ItemView<T> view = views.get(viewIndex);
-        view.getPnlOptions().setVisible(!hideViewOptions);
-        if (currentView == view) {
-            btnViewOptions.setSelected(!hideViewOptions);
-        }
-    }
-
     @Override
     public void doLayout(float width, float height) {
         LayoutHelper helper = new LayoutHelper(this, ItemFilter.PADDING, 0);
+        float fieldHeight = mainSearchFilter.getMainComponent().getHeight();
+        float viewButtonWidth = fieldHeight;
+        float viewButtonCount = views.size() + 1;
+        helper.fillLine(mainSearchFilter.getPanel(), ItemFilter.PANEL_HEIGHT, (viewButtonWidth + helper.getGapX()) * viewButtonCount); //leave room for view buttons
+        helper.offset(0, ItemFilter.PANEL_HEIGHT - fieldHeight);
+        for (ItemView<T> view : views) {
+            helper.include(view.getButton(), viewButtonWidth, fieldHeight);
+        }
+        helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
         if (!hideFilters) {
             for (ItemFilter<? extends T> filter : orderedFilters) {
                 helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
                 helper.newLine();
             }
-            helper.fillLine(mainSearchFilter.getPanel(), ItemFilter.PANEL_HEIGHT);
+            if (currentView.getPnlOptions().getChildCount() > 0) {
+                helper.fillLine(currentView.getPnlOptions(), ItemFilter.PANEL_HEIGHT);
+            }
+            else {
+                helper.offset(0, -ItemFilter.PANEL_HEIGHT); //prevent showing whitespace for empty view options panel
+            }
         }
         helper.newLine(ItemFilter.PADDING);
-        float fieldHeight = mainSearchFilter.getMainComponent().getHeight();
-        helper.include(btnFilters, btnFilters.getAutoSizeBounds().width * 1.2f, fieldHeight);
-        float viewButtonWidth = fieldHeight;
-        float viewButtonCount = views.size() + 1;
-        helper.fillLine(lblCaption, fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount); //leave room for view buttons
-        for (ItemView<T> view : views) {
-            helper.include(view.getButton(), viewButtonWidth, fieldHeight);
-        }
-        helper.include(btnViewOptions, viewButtonWidth, fieldHeight);
-        helper.newLine(Utils.scaleY(2));
-        if (currentView.getPnlOptions().isVisible()) {
-            helper.fillLine(currentView.getPnlOptions(), fieldHeight + Utils.scaleY(4));
-            helper.newLine(Utils.scaleY(3));
-        }
         helper.fill(currentView.getScroller());
     }
 
@@ -335,7 +251,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @return caption to display before ratio
      */
     public String getCaption() {
-        return caption;
+        return mainSearchFilter.getCaption();
     }
 
     /**
@@ -345,12 +261,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @param caption - caption to display before ratio
      */
     public void setCaption(String caption0) {
-        caption = caption0;
-        updateCaptionLabel();
-    }
-
-    private void updateCaptionLabel() {
-        lblCaption.setText(caption + " " + ratio);
+        mainSearchFilter.setCaption(caption0);
     }
 
     /**
@@ -704,7 +615,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     protected abstract void addDefaultFilters();
-    protected abstract ItemFilter<? extends T> createSearchFilter();
+    protected abstract TextSearchFilter<? extends T> createSearchFilter();
     protected abstract void buildAddFilterMenu(FPopupMenu menu);
 
     protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
@@ -745,14 +656,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     //apply filters and focus existing filter's main component if filtering not locked
     private void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
-        if (lockFiltering) {
-            filter.afterFiltersApplied(); //ensure this called even if filters currently locked
-            return;
-        }
-
-        if (!applyFilters()) {
-            filter.afterFiltersApplied(); //ensure this called even if filters didn't need to be updated
-        }
+        if (lockFiltering) { return; }
+        applyFilters();
     }
 
     public void restoreDefaultFilters() {
@@ -839,37 +744,19 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         for (ItemFilter<? extends T> filter : orderedFilters) {
             filter.getPanel().setVisible(visible);
         }
-        mainSearchFilter.getPanel().setVisible(visible);
+        for (ItemView<T> view : views) {
+            view.getPnlOptions().setVisible(visible);
+        }
 
         if (initialized) {
+            btnAdvancedSearchOptions.setSelected(visible);
+
             revalidate();
-    
-            if (hideFilters0) {
-                resetFilters(); //reset filters when they're hidden
-            }
-            else {
-                applyFilters();
-            }
 
             if (config != null) {
                 config.setHideFilters(hideFilters0);
             }
         }
-    }
-
-    /**
-     * 
-     * resetFilters.
-     * 
-     */
-    public void resetFilters() {
-        lockFiltering = true; //prevent updating filtering from this change until all filters reset
-        for (ItemFilter<? extends T> filter : orderedFilters) {
-            filter.reset();
-        }
-        mainSearchFilter.reset();
-        lockFiltering = false;
-        applyFilters();
     }
 
     /**
@@ -911,10 +798,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
 
-        for (ItemFilter<? extends T> filter : orderedFilters) {
-            filter.afterFiltersApplied();
-        }
-
         //update ratio of # in filtered pool / # in total pool
         int total;
         if (!useFilter) {
@@ -930,8 +813,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         else {
             total = pool.countAll();
         }
-        ratio = "(" + getFilteredItems().countAll() + " / " + total + ")";
-        updateCaptionLabel();
+        mainSearchFilter.setRatio("(" + getFilteredItems().countAll() + " / " + total + ")");
     }
 
     /**
