@@ -79,7 +79,7 @@ public class QuestWinLose extends ControlWinLose {
     @Override
     public final void showRewards() {
         getView().getBtnRestart().setVisible(false);
-        QuestController qc = FModel.getQuest();
+        final QuestController qc = FModel.getQuest();
 
         // After the first game, reset the card shop pool to be able to buy back anted cards
         if (lastGame.getMatch().getPlayedGames().size() == 1) {
@@ -88,30 +88,17 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         final LobbyPlayer questLobbyPlayer = GuiBase.getInterface().getQuestPlayer();
-        Player questPlayer = null;
+        Player player = null;
         for (Player p : lastGame.getRegisteredPlayers()) {
             if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
-                questPlayer = p;
+                player = p;
             }
         }
-        if (isAnte) {
-            //do per-game actions
-            GameOutcome outcome = lastGame.getOutcome();
+        final Player questPlayer = player;
 
-            // Won/lost cards should already be calculated (even in a draw)
-            GameOutcome.AnteResult anteResult = outcome.anteResult.get(questPlayer);
-            if (anteResult != null) {
-                if (anteResult.wonCards != null)
-                    qc.getCards().addAllCards(anteResult.wonCards);
-                if (anteResult.lostCards != null)
-                    qc.getCards().loseCards(anteResult.lostCards);
-                anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
-            }
-        }
-
-        if (!lastGame.getMatch().isMatchOver()) {
+        final boolean matchIsNotOver = !lastGame.getMatch().isMatchOver();
+        if (matchIsNotOver) {
             getView().getBtnQuit().setText("Quit (-15 Credits)");
-            return;
         }
         else {
             getView().getBtnContinue().setVisible(false);
@@ -127,6 +114,25 @@ public class QuestWinLose extends ControlWinLose {
         FThreads.invokeInBackgroundThread(new Runnable() {
             @Override
             public void run() {
+                if (isAnte) {
+                    //do per-game actions
+                    GameOutcome outcome = lastGame.getOutcome();
+
+                    // Won/lost cards should already be calculated (even in a draw)
+                    GameOutcome.AnteResult anteResult = outcome.anteResult.get(questPlayer);
+                    if (anteResult != null) {
+                        if (anteResult.wonCards != null) {
+                            qc.getCards().addAllCards(anteResult.wonCards);
+                        }
+                        if (anteResult.lostCards != null) {
+                            qc.getCards().loseCards(anteResult.lostCards);
+                        }
+                        anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
+                    }
+                }
+
+                if (matchIsNotOver) { return; } //skip remaining logic if match isn't over yet
+
                 // TODO: We don't have a enum for difficulty?
                 int difficulty = qData.getAchievements().getDifficulty();
 
