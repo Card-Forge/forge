@@ -1141,6 +1141,16 @@ In addition, if you attempt to pass priority with mana floating in your pool tha
 Fixed bug that caused P/T overlays to flicker between their base values and their modified values from static effects.
 
 
+- CardManagers now support grouping by Set -
+You can now group cards by set, with the sets being sorted in reverse chronological order.
+As part of this, I've also fixed it so the headers for groups with no cards in them will now be hidden instead of appearing with a "(0)" after them.
+Since the groups are collapsible, this can allow CardManagers to work somewhat similar to the old "Binder View" in MTGO (may it rest in peace).
+
+
+- Mana Cost Searching -
+There's now a button (disabled by default) that allows you to search for cards by their mana costs. It's a little finicky right now, but improvements will happen for the next version of Forge.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

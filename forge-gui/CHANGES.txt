@@ -1,7 +1,7 @@
-Forge Beta: 07-18-2014 ver 1.5.22
+Forge Beta: 0#-##-2014 ver 1.5.23
 
 
-14017 cards in total.
+##### cards in total.
 
 
 -------------
@@ -10,16 +10,6 @@ Release Notes
 
 - Magic 2015 cards -
 Forge now includes many of the new Magic 2015 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
-
-
-- CardManagers now support grouping by Set -
-You can now group cards by set, with the sets being sorted in reverse chronological order.
-As part of this, I've also fixed it so the headers for groups with no cards in them will now be hidden instead of appearing with a "(0)" after them.
-Since the groups are collapsible, this can allow CardManagers to work somewhat similar to the old "Binder View" in MTGO (may it rest in peace).
-
-
-- Mana Cost Searching -
-There's now a button (disabled by default) that allows you to search for cards by their mana costs. It's a little finicky right now, but improvements will happen for the next version of Forge.
 
 
 - Boolean Expressions -
@@ -45,154 +35,7 @@ More improvements are on their way in the next version of Forge, including remov
 New Cards
 ---------
 
-Spectra Ward
 
-
---------------------
-New Magic 2015 Cards
---------------------
-
-Act on Impulse
-Aeronaut Tinkerer
-AEtherspouts
-Aggressive Mining
-Ajani Steadfast
-Altac Bloodseeker
-Amphin Pathmage
-Avacyn, Guardian Angel
-Avarice Amulet
-Belligerent Sliver
-Blastfire Bolt
-Blood Host
-Boonweaver Giant
-Borderland Marauder
-Brawler's Plate
-Brood Keeper
-Burning Anger
-Carnivorous Moss-Beast
-Carrion Crow
-Chasm Skulker
-Chief Engineer
-Chronostutter
-Constricting Sliver
-Coral Barrier
-Covenant of Blood
-Crowd's Favor
-Cruel Sadist
-Dauntless River Marshal
-Diffusion Sliver
-Endless Obedience
-Ensoul Artifact
-Ephemeral Shields
-Eternal Thirst
-Feast on the Fallen
-Feral Incarnation
-Festergloom
-First Response
-Flesh to Dust
-Frost Lynx
-Garruk, Apex Predator
-Geist of the Moors
-Generator Servant
-Genesis Hydra
-Glacial Crasher
-Goblin Kaboomist
-Goblin Rabblemaster
-Hammerhand
-Heliod's Pilgrim
-Hornet Nest
-Hot Soup
-Hunter's Ambush
-Hushwing Gryff
-In Garruk's Wake
-Indulgent Tormentor
-Inferno Fist
-Invasive Species
-Jace, the Living Guildpact
-Jalira, Master Polymorphist
-Jorubai Murk Lurker
-Kalonian Twingrove
-Kapsho Kitefins
-Kird Chieftain
-Krenko's Enforcer
-Kurkesh, Onakke Ancient
-Leeching Sliver
-Life's Legacy
-Living Totem
-Marked for Honor
-Master of Predicaments
-Meditation Puzzle
-Mercurial Pretender
-Meteorite
-Might Makes Right
-Military Intelligence
-Miner's Bane
-Necromancer's Assistant
-Necromancer's Stockpile
-Netcaster Spider
-Nightfire Giant
-Nimbus of the Isles
-Nissa's Expedition
-Nissa, Worldwaker
-Ob Nixilis, Unshackled
-Obelisk of Urd
-Paragon of Eternal Wilds
-Paragon of Fierce Defiance
-Paragon of Gathering Mists
-Paragon of New Dawns
-Paragon of Open Graves
-Perilous Vault
-Phytotitan
-Pillar of Light
-Polymorphist's Jest
-Profane Memento
-Quickling
-Radiant Fountain
-Reclamation Sage
-Research Assistant
-Resolute Archangel
-Return to the Ranks
-Rogue's Gloves
-Rotfeaster Maggot
-Sacred Armory
-Sanctified Charge
-Scrapyard Mongrel
-Scuttling Doom Engine
-Seraph of the Masses
-Shadowcloak Vampire
-Shaman of Spring
-Shield of the Avatar
-Siege Dragon
-Sliver Hive
-Sliver Hivelord
-Soul of Innistrad
-Soul of New Phyrexia
-Soul of Ravnica
-Soul of Shandalar
-Soul of Theros
-Soul of Zendikar
-Spirit Bonds
-Stain the Mind
-Statute of Denial
-Stoke the Flames
-Sunblade Elf
-Sungrace Pegasus
-The Chain Veil
-Triplicate Spirits
-Tyrant's Machine
-Ulcerate
-Undergrowth Scavenger
-Unmake the Graves
-Venom Sliver
-Vineweft
-Void Snare
-Wall of Limbs
-Warden of the Beyond
-Waste Not
-Will-Forged Golem
-Witch's Familiar
-Xathrid Slyblade
-Yisan, the Wanderer Bard
 
 
 ------------
@@ -233,16 +76,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-elcnesh
-excessum
-Gos
-Hellfish
-KrazyTheFox
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
