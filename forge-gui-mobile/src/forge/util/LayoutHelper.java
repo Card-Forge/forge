@@ -138,6 +138,13 @@ public final class LayoutHelper {
     }
 
     /**
+     * @return remaining width on current line
+     */
+    public float getRemainingLineWidth() {
+        return parentWidth - x;
+    }
+
+    /**
      * @return width of parent
      */
     public float getParentWidth() {

@@ -13,7 +13,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSpinner;
 import forge.util.ComparableOp;
-import forge.util.LayoutHelper;
 
 
 public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -82,11 +81,13 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
     }
 
     @Override
-    protected void doWidgetLayout(LayoutHelper helper) {
-        float height = helper.getParentHeight();
-        helper.include(lowerBound, 45, height);
-        helper.include(label, 125, height);
-        helper.include(upperBound, 45, height);
+    protected void doWidgetLayout(float width, float height) {
+        float x = 0;
+        lowerBound.setBounds(x, 0, 45, height);
+        x += lowerBound.getWidth();
+        label.setBounds(x, 0, 125, height);
+        x += label.getWidth();
+        upperBound.setBounds(x, 0, 45, height);
     }
 
     private FSpinner addSpinner(Widget widget, boolean lowerBound) {

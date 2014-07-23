@@ -7,30 +7,18 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FTextField;
-import forge.util.LayoutHelper;
 import forge.util.Utils;
 
 
 public abstract class ItemFilter<T extends InventoryItem> {
     public static final float PADDING = Utils.scaleMax(3);
     public static final FSkinFont DEFAULT_FONT = FSkinFont.get(11);
-    public static final float PANEL_HEIGHT = FTextField.getDefaultHeight(DEFAULT_FONT) + PADDING;
 
     protected final ItemManager<? super T> itemManager;
-    private FilterPanel panel;
     private Widget widget;
 
     protected ItemFilter(ItemManager<? super T> itemManager0) {
         itemManager = itemManager0;
-    }
-
-    public FilterPanel getPanel() {
-        if (panel == null) {
-            panel = new FilterPanel();
-            panel.add(getWidget());
-        }
-        return panel;
     }
 
     public Widget getWidget() {
@@ -86,19 +74,13 @@ public abstract class ItemFilter<T extends InventoryItem> {
      */
     public abstract boolean merge(ItemFilter<?> filter);
 
-    protected abstract void buildWidget(Widget widget);
-    protected abstract void doWidgetLayout(LayoutHelper helper);
-    protected abstract Predicate<T> buildPredicate();
-
-    public class FilterPanel extends FContainer {
-        private FilterPanel() {
-        }
-
-        @Override
-        protected void doLayout(float width, float height) {
-            widget.setBounds(0, PADDING, width, height - PADDING);
-        }
+    public float getPreferredWidth(float maxWidth, float height) {
+        return maxWidth; //use maximum width by default
     }
+
+    protected abstract void buildWidget(Widget widget);
+    protected abstract void doWidgetLayout(float width, float height);
+    protected abstract Predicate<T> buildPredicate();
 
     public class Widget extends FContainer {
         private Widget() {
@@ -106,8 +88,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
         @Override
         protected void doLayout(float width, float height) {
-            LayoutHelper helper = new LayoutHelper(this);
-            doWidgetLayout(helper);
+            doWidgetLayout(width, height);
         }
     }
 }

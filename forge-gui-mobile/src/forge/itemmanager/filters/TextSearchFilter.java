@@ -13,7 +13,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
-import forge.util.LayoutHelper;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -71,8 +70,8 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     }
 
     @Override
-    protected void doWidgetLayout(LayoutHelper helper) {
-        helper.fillLine(txtSearch, helper.getParentHeight());
+    protected void doWidgetLayout(float width, float height) {
+        txtSearch.setSize(width, height);
     }
 
     @Override

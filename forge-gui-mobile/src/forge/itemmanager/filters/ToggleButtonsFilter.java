@@ -7,8 +7,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
-import forge.util.LayoutHelper;
-
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -31,13 +29,19 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
     }
 
     @Override
-    protected void doWidgetLayout(LayoutHelper helper) {
-        float availableWidth = helper.getParentWidth() - (buttons.size() - 1) * helper.getGapX(); //account for gaps
-        float buttonHeight = helper.getParentHeight();
-        float buttonWidth = Math.min(buttonHeight, availableWidth / buttons.size());
+    public float getPreferredWidth(float maxWidth, float height) {
+        return Math.min(height * buttons.size(), maxWidth);
+    }
 
+    @Override
+    protected void doWidgetLayout(float width, float height) {
+        float buttonHeight = height;
+        float buttonWidth = Math.min(buttonHeight, width / buttons.size());
+
+        float x = 0;
         for (FLabel btn : buttons) {
-            helper.include(btn, buttonWidth, buttonHeight);
+            btn.setBounds(x, 0, buttonWidth, buttonHeight);
+            x += buttonWidth - FLabel.BORDER_THICKNESS;
         }
     }
 

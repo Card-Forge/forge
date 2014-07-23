@@ -7,7 +7,6 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.menu.FTooltip;
 import forge.toolbox.FLabel;
-import forge.util.LayoutHelper;
 import forge.util.TextUtil;
 
 
@@ -55,8 +54,8 @@ public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilte
     }
 
     @Override
-    protected void doWidgetLayout(LayoutHelper helper) {
-        helper.fillLine(label, helper.getParentHeight());
+    protected void doWidgetLayout(float width, float height) {
+        label.setSize(width, height);
     }
 
     private class ListLabel extends FLabel {

@@ -35,7 +35,6 @@ import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
 import forge.menu.FDropDownMenu;
-import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
@@ -69,7 +68,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemManagerConfig config;
     private boolean hasNewColumn;
 
-    private final TextSearchFilter<? extends T> mainSearchFilter;
+    private final TextSearchFilter<? extends T> searchFilter;
 
     private static final FSkinImage VIEW_OPTIONS_ICON = FSkinImage.SETTINGS;
     private final FLabel btnAdvancedSearchOptions = new FLabel.Builder()
@@ -96,7 +95,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         wantUnique = wantUnique0;
         model = new ItemManagerModel<T>(genericType0);
 
-        mainSearchFilter = createSearchFilter();
+        searchFilter = createSearchFilter();
 
         listView = new ItemListView<T>(this, model);
         imageView = createImageView(model);
@@ -111,7 +110,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
 
         //build display
-        add(mainSearchFilter.getPanel());
+        add(searchFilter.getWidget());
         for (ItemView<T> view : views) {
             add(view.getButton());
             view.getButton().setSelected(view == currentView);
@@ -207,29 +206,29 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     @Override
     public void doLayout(float width, float height) {
-        LayoutHelper helper = new LayoutHelper(this, ItemFilter.PADDING, 0);
-        float fieldHeight = mainSearchFilter.getMainComponent().getHeight();
+        LayoutHelper helper = new LayoutHelper(this, ItemFilter.PADDING, ItemFilter.PADDING);
+        float fieldHeight = searchFilter.getMainComponent().getHeight();
         float viewButtonWidth = fieldHeight;
         float viewButtonCount = views.size() + 1;
-        helper.fillLine(mainSearchFilter.getPanel(), ItemFilter.PANEL_HEIGHT, (viewButtonWidth + helper.getGapX()) * viewButtonCount); //leave room for view buttons
-        helper.offset(0, ItemFilter.PANEL_HEIGHT - fieldHeight);
+        helper.offset(0, ItemFilter.PADDING);
+        helper.fillLine(searchFilter.getWidget(), fieldHeight, (viewButtonWidth + helper.getGapX()) * viewButtonCount); //leave room for view buttons
         for (ItemView<T> view : views) {
             helper.include(view.getButton(), viewButtonWidth, fieldHeight);
         }
         helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
+        helper.newLine();
         if (!hideFilters) {
             for (ItemFilter<? extends T> filter : orderedFilters) {
-                helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
-                helper.newLine();
+                helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
             }
+            helper.newLine(-ItemFilter.PADDING);
             if (currentView.getPnlOptions().getChildCount() > 0) {
-                helper.fillLine(currentView.getPnlOptions(), ItemFilter.PANEL_HEIGHT);
+                helper.fillLine(currentView.getPnlOptions(), fieldHeight + ItemFilter.PADDING);
             }
             else {
-                helper.offset(0, -ItemFilter.PANEL_HEIGHT); //prevent showing whitespace for empty view options panel
+                helper.offset(0, -fieldHeight); //prevent showing whitespace for empty view options panel
             }
         }
-        helper.newLine(ItemFilter.PADDING);
         helper.fill(currentView.getScroller());
     }
 
@@ -250,7 +249,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @return caption to display before ratio
      */
     public String getCaption() {
-        return mainSearchFilter.getCaption();
+        return searchFilter.getCaption();
     }
 
     /**
@@ -260,7 +259,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @param caption - caption to display before ratio
      */
     public void setCaption(String caption0) {
-        mainSearchFilter.setCaption(caption0);
+        searchFilter.setCaption(caption0);
     }
 
     /**
@@ -615,7 +614,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     protected abstract void addDefaultFilters();
     protected abstract TextSearchFilter<? extends T> createSearchFilter();
-    protected abstract void buildAddFilterMenu(FPopupMenu menu);
 
     protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
         return ReflectionUtil.safeCast(filters.get(filterClass), filterClass);
@@ -643,10 +641,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         classFilters.add(filter);
         orderedFilters.add(filter);
-        add(filter.getPanel());
+        add(filter.getWidget());
 
         boolean visible = !hideFilters;
-        filter.getPanel().setVisible(visible);
+        filter.getWidget().setVisible(visible);
         if (visible && initialized) {
             revalidate();
             applyNewOrModifiedFilter(filter);
@@ -662,7 +660,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void restoreDefaultFilters() {
         lockFiltering = true;
         for (ItemFilter<? extends T> filter : orderedFilters) {
-            remove(filter.getPanel());
+            remove(filter.getWidget());
         }
         filters.clear();
         orderedFilters.clear();
@@ -681,7 +679,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 filters.remove(filterClass);
             }
             orderedFilters.remove(filter);
-            remove(filter.getPanel());
+            remove(filter.getWidget());
             revalidate();
             applyFilters();
         }
@@ -696,8 +694,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 predicates.add(filter.buildPredicate(genericType));
             }
         }
-        if (!mainSearchFilter.isEmpty()) {
-            predicates.add(mainSearchFilter.buildPredicate(genericType));
+        if (!searchFilter.isEmpty()) {
+            predicates.add(searchFilter.buildPredicate(genericType));
         }
 
         Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
@@ -741,7 +739,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         boolean visible = !hideFilters0;
         for (ItemFilter<? extends T> filter : orderedFilters) {
-            filter.getPanel().setVisible(visible);
+            filter.getWidget().setVisible(visible);
         }
         for (ItemView<T> view : views) {
             view.getPnlOptions().setVisible(visible);
@@ -812,7 +810,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         else {
             total = pool.countAll();
         }
-        mainSearchFilter.setRatio("(" + getFilteredItems().countAll() + " / " + total + ")");
+        searchFilter.setRatio("(" + getFilteredItems().countAll() + " / " + total + ")");
     }
 
     /**

@@ -79,7 +79,7 @@ public class FLabel extends FDisplayObject implements IButton {
     private static final FSkinColor d10 = clrMain.stepColor(-10);
     private static final FSkinColor l10 = clrMain.stepColor(10);
     private static final FSkinColor l20 = clrMain.stepColor(20);
-    private static final float BORDER_THICKNESS = Utils.scaleMin(1);
+    public static final float BORDER_THICKNESS = Utils.scaleMin(1);
 
     private float iconScaleFactor;
     private FSkinFont font;
