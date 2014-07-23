@@ -28,8 +28,7 @@ import forge.view.arcane.util.CardPanelMouseListener;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -157,11 +156,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
+
+					Set<String> keywords = new HashSet<>(panel.getCard().getIntrinsicKeyword());
+					Set<String> firstKeywords = new HashSet<>(firstPanel.getCard().getIntrinsicKeyword());
+					
                     if (!panel.getAttachedPanels().isEmpty()
                             || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
                             || (panel.getCard().isSick() != firstPanel.getCard().isSick())
                             || (panel.getCard().getNetAttack() != firstPanel.getCard().getNetAttack())
                             || (panel.getCard().getNetDefense() != firstPanel.getCard().getNetDefense())
+							|| !(keywords.equals(firstKeywords))
                             || (stack.size() == tokenStackMax)) {
                         // If this token has attachments or the stack is full,
                         // put it to the right.
@@ -569,9 +573,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * <p>
      * setupPlayZone.
      * </p>
-     * 
-     * @param newList
-     *            an array of {@link forge.game.card.Card} objects.
      */
     public void setupPlayZone() {
         FThreads.assertExecutedByEdt(true);
