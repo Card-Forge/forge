@@ -141,6 +141,9 @@ public final class LayoutHelper {
      * @return remaining width on current line
      */
     public float getRemainingLineWidth() {
+        if (x >= parentWidth) {
+            newLine();
+        }
         return parentWidth - x;
     }
 
