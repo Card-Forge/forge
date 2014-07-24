@@ -1,82 +1,50 @@
 package forge.itemmanager.filters;
 
-import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.model.FModel;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
-public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFilter<T> {
-    protected boolean allowReprints = true;
+public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected final Set<GameFormat> formats = new HashSet<GameFormat>();
+    private FComboBox<Object> cbxFormats = new FComboBox<Object>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
-    }
-    public FormatFilter(ItemManager<? super T> itemManager0, GameFormat format0) {
-        super(itemManager0);
-        this.formats.add(format0);
-    }
 
-    @Override
-    protected String getTooltip() {
-        Set<String> sets = new HashSet<String>();
-        Set<String> bannedCards = new HashSet<String>();
-
-        for (GameFormat format : this.formats) {
-            List<String> formatSets = format.getAllowedSetCodes();
-            if (formatSets != null) {
-                sets.addAll(formatSets);
-            }
-            List<String> formatBannedCards = format.getBannedCardNames();
-            if (formatBannedCards != null) {
-                bannedCards.addAll(formatBannedCards);
-            }
+        cbxFormats.addItem("All Formats");
+        for (GameFormat format : FModel.getFormats()) {
+            cbxFormats.addItem(format);
         }
-
-        //use HTML tooltips so we can insert line breaks
-        StringBuilder tooltip = new StringBuilder("Sets:");
-        if (sets.isEmpty()) {
-            tooltip.append(" All");
-        }
-        else {
-            CardEdition.Collection editions = FModel.getMagicDb().getEditions();
-
-            for (String code : sets) {
-                CardEdition edition = editions.get(code);
-                tooltip.append(" ").append(edition.getName()).append(" (").append(code).append("),");
+        cbxFormats.addItem("More...");
+        cbxFormats.setChangedHandler(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                if (cbxFormats.getSelectedIndex() == 0) {
+                    formats.clear();
+                }
+                else if (cbxFormats.getSelectedIndex() < cbxFormats.getItemCount() - 1) {
+                    formats.clear();
+                    formats.add((GameFormat)cbxFormats.getSelectedItem());
+                }
+                else {
+                    //TODO: Open screen to select one or more sets and/or formats
+                }
             }
-
-            // chop off last comma
-            tooltip.delete(tooltip.length() - 1, tooltip.length());
-
-            if (this.allowReprints) {
-                tooltip.append("\n\nAllowing identical cards from other sets.");
-            }
-        }
-
-        if (!bannedCards.isEmpty()) {
-            tooltip.append("\n\nBanned:");
-
-            for (String cardName : bannedCards) {
-                tooltip.append(" ").append(cardName).append(";");
-            }
-
-            // chop off last semicolon
-            tooltip.delete(tooltip.length() - 1, tooltip.length());
-        }
-        return tooltip.toString();
+        });
+        cbxFormats.setSelectedIndex(0);
     }
 
     @Override
     public void reset() {
         this.formats.clear();
-        this.updateLabel();
     }
 
     public static <T extends InventoryItem> boolean canAddFormat(GameFormat format, FormatFilter<T> existingFilter) {
@@ -93,26 +61,21 @@ public abstract class FormatFilter<T extends InventoryItem> extends ListLabelFil
     public boolean merge(ItemFilter<?> filter) {
         FormatFilter<T> formatFilter = (FormatFilter<T>)filter;
         this.formats.addAll(formatFilter.formats);
-        this.allowReprints = formatFilter.allowReprints;
         return true;
     }
 
     @Override
-    protected String getCaption() {
-        return "Format";
+    public boolean isEmpty() {
+        return formats.isEmpty();
     }
 
     @Override
-    protected int getCount() {
-        return this.formats.size();
+    protected void buildWidget(Widget widget) {
+        widget.add(cbxFormats);
     }
 
     @Override
-    protected Iterable<String> getList() {
-        Set<String> strings = new HashSet<String>();
-        for (GameFormat f : this.formats) {
-            strings.add(f.getName());
-        }
-        return strings;
+    protected void doWidgetLayout(float width, float height) {
+        cbxFormats.setSize(width, height);
     }
 }

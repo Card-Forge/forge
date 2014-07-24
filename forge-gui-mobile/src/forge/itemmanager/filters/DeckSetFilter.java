@@ -12,16 +12,15 @@ import java.util.Set;
 public class DeckSetFilter extends DeckFormatFilter {
     private final Set<String> sets = new HashSet<String>();
 
-    public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0, boolean allowReprints0) {
+    public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0) {
         super(itemManager0);
         this.sets.addAll(sets0);
         this.formats.add(new GameFormat(null, this.sets, null));
-        this.allowReprints = allowReprints0;
     }
 
     @Override
     public ItemFilter<DeckProxy> createCopy() {
-        return new DeckSetFilter(itemManager, this.sets, this.allowReprints);
+        return new DeckSetFilter(itemManager, this.sets);
     }
 
     @Override
@@ -39,7 +38,6 @@ public class DeckSetFilter extends DeckFormatFilter {
     public boolean merge(ItemFilter<?> filter) {
         DeckSetFilter cardSetFilter = (DeckSetFilter)filter;
         this.sets.addAll(cardSetFilter.sets);
-        this.allowReprints = cardSetFilter.allowReprints;
         this.formats.clear();
         this.formats.add(new GameFormat(null, this.sets, null));
         return true;
@@ -57,20 +55,5 @@ public class DeckSetFilter extends DeckFormatFilter {
                 formats.add(new GameFormat(null, sets, null));
             }
         });*/
-    }
-
-    @Override
-    protected String getCaption() {
-        return "Set";
-    }
-
-    @Override
-    protected int getCount() {
-        return this.sets.size();
-    }
-
-    @Override
-    protected Iterable<String> getList() {
-        return this.sets;
     }
 }

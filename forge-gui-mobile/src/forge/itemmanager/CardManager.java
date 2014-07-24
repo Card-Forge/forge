@@ -9,6 +9,7 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.CardColorFilter;
+import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.CardSearchFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.TextSearchFilter;
@@ -36,6 +37,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
     public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
         itemManager.addFilter(new CardColorFilter(itemManager));
+        itemManager.addFilter(new CardFormatFilter(itemManager));
         itemManager.addFilter(new CardTypeFilter(itemManager));
     }
 

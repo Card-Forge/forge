@@ -2,7 +2,6 @@ package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
 
-import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
@@ -11,9 +10,6 @@ import forge.itemmanager.SFilterUtil;
 public class CardFormatFilter extends FormatFilter<PaperCard> {
     public CardFormatFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
-    }
-    public CardFormatFilter(ItemManager<? super PaperCard> itemManager0, GameFormat format0) {
-        super(itemManager0, format0);
     }
 
     @Override
@@ -25,6 +21,6 @@ public class CardFormatFilter extends FormatFilter<PaperCard> {
 
     @Override
     protected final Predicate<PaperCard> buildPredicate() {
-        return SFilterUtil.buildFormatFilter(this.formats, this.allowReprints);
+        return SFilterUtil.buildFormatFilter(this.formats, true);
     }
 }

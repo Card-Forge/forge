@@ -12,6 +12,7 @@ import forge.deck.FDeckViewer;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.itemmanager.filters.DeckColorFilter;
+import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
@@ -61,6 +62,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         if (getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
 
         addFilter(new DeckColorFilter(this));
+        addFilter(new DeckFormatFilter(this));
     }
 
     @Override

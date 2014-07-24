@@ -3,7 +3,6 @@ package forge.itemmanager.filters;
 import com.google.common.base.Predicate;
 
 import forge.deck.DeckProxy;
-import forge.game.GameFormat;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 
@@ -11,9 +10,6 @@ import forge.itemmanager.SFilterUtil;
 public class DeckFormatFilter extends FormatFilter<DeckProxy> {
     public DeckFormatFilter(ItemManager<? super DeckProxy> itemManager0) {
         super(itemManager0);
-    }
-    public DeckFormatFilter(ItemManager<? super DeckProxy> itemManager0, GameFormat format0) {
-        super(itemManager0, format0);
     }
 
     @Override
@@ -25,6 +21,6 @@ public class DeckFormatFilter extends FormatFilter<DeckProxy> {
 
     @Override
     protected final Predicate<DeckProxy> buildPredicate() {
-        return DeckProxy.createPredicate(SFilterUtil.buildFormatFilter(this.formats, this.allowReprints));
+        return DeckProxy.createPredicate(SFilterUtil.buildFormatFilter(this.formats, true));
     }
 }
