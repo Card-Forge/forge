@@ -1,21 +1,20 @@
 package forge.itemmanager;
 
-import forge.UiCommand;
 import forge.Singletons;
+import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.deck.DeckBase;
+import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
-import forge.deck.DeckProxy;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.ItemColumn;
-import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.*;
-import forge.itemmanager.views.*;
+import forge.itemmanager.views.ItemCellRenderer;
+import forge.itemmanager.views.ItemListView;
+import forge.itemmanager.views.ItemTableColumn;
 import forge.model.FModel;
 import forge.quest.QuestWorld;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -26,21 +25,16 @@ import forge.screens.deckeditor.controllers.CEditorQuest;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
-
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /** 
  * ItemManager for decks
@@ -282,7 +276,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 FModel.getQuest().save();
                 break;
             default:
-                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gameType.toString());
+                throw new UnsupportedOperationException("Delete not implemented for game type = " + gameType.toString());
         }
 
         this.removeItem(deck, 1);
