@@ -30,13 +30,13 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
 
     @Override
     public float getPreferredWidth(float maxWidth, float height) {
-        return Math.min(height * buttons.size(), maxWidth);
+        return Math.min((height - FLabel.BORDER_THICKNESS) * buttons.size() + FLabel.BORDER_THICKNESS, maxWidth);
     }
 
     @Override
     protected void doWidgetLayout(float width, float height) {
+        float buttonWidth = (width + FLabel.BORDER_THICKNESS * (buttons.size() - 1)) / buttons.size();
         float buttonHeight = height;
-        float buttonWidth = Math.min(buttonHeight, width / buttons.size());
 
         float x = 0;
         for (FLabel btn : buttons) {
