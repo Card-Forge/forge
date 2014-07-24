@@ -45,7 +45,6 @@ import forge.toolbox.FLabel;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
-import forge.util.ReflectionUtil;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -55,9 +54,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
-    private final Map<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>> filters =
-            new HashMap<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>>();
-    private final List<ItemFilter<? extends T>> orderedFilters = new ArrayList<ItemFilter<? extends T>>();
+    private final List<ItemFilter<? extends T>> filters = new ArrayList<ItemFilter<? extends T>>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private boolean hideFilters = false;
@@ -218,7 +215,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
         helper.newLine();
         if (!hideFilters) {
-            for (ItemFilter<? extends T> filter : orderedFilters) {
+            for (ItemFilter<? extends T> filter : filters) {
                 helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
             }
             helper.newLine(-ItemFilter.PADDING);
@@ -615,32 +612,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected abstract void addDefaultFilters();
     protected abstract TextSearchFilter<? extends T> createSearchFilter();
 
-    protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
-        return ReflectionUtil.safeCast(filters.get(filterClass), filterClass);
-    }
-
-    @SuppressWarnings("unchecked")
     public void addFilter(final ItemFilter<? extends T> filter) {
-        final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
-        List<ItemFilter<? extends T>> classFilters = filters.get(filterClass);
-        if (classFilters == null) {
-            classFilters = new ArrayList<ItemFilter<? extends T>>();
-            filters.put(filterClass, classFilters);
-        }
-        if (classFilters.size() > 0) {
-            //if filter with the same class already exists, try to merge if allowed
-            //NOTE: can always use first filter for these checks since if
-            //merge is supported, only one will ever exist
-            final ItemFilter<? extends T> existingFilter = classFilters.get(0);
-            if (existingFilter.merge(filter)) {
-                //if new filter merged with existing filter, just refresh the widget
-                existingFilter.refreshWidget();
-                applyNewOrModifiedFilter(existingFilter);
-                return;
-            }
-        }
-        classFilters.add(filter);
-        orderedFilters.add(filter);
+        filters.add(filter);
         add(filter.getWidget());
 
         boolean visible = !hideFilters;
@@ -659,37 +632,28 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void restoreDefaultFilters() {
         lockFiltering = true;
-        for (ItemFilter<? extends T> filter : orderedFilters) {
+        for (ItemFilter<? extends T> filter : filters) {
             remove(filter.getWidget());
         }
         filters.clear();
-        orderedFilters.clear();
         addDefaultFilters();
         lockFiltering = false;
         revalidate();
         applyFilters();
     }
 
-    @SuppressWarnings("unchecked")
     public void removeFilter(ItemFilter<? extends T> filter) {
-        final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
-        final List<ItemFilter<? extends T>> classFilters = filters.get(filterClass);
-        if (classFilters != null && classFilters.remove(filter)) {
-            if (classFilters.size() == 0) {
-                filters.remove(filterClass);
-            }
-            orderedFilters.remove(filter);
-            remove(filter.getWidget());
-            revalidate();
-            applyFilters();
-        }
+        filters.remove(filter);
+        remove(filter.getWidget());
+        revalidate();
+        applyFilters();
     }
 
     public boolean applyFilters() {
         if (lockFiltering || !initialized) { return false; }
 
         List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
-        for (ItemFilter<? extends T> filter : orderedFilters) { //TODO: Support custom filter logic
+        for (ItemFilter<? extends T> filter : filters) { //TODO: Support custom filter logic
             if (!filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(genericType));
             }
@@ -738,7 +702,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         hideFilters = hideFilters0;
 
         boolean visible = !hideFilters0;
-        for (ItemFilter<? extends T> filter : orderedFilters) {
+        for (ItemFilter<? extends T> filter : filters) {
             filter.getWidget().setVisible(visible);
         }
         for (ItemView<T> view : views) {

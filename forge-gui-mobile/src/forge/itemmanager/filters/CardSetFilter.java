@@ -28,18 +28,4 @@ public class CardSetFilter extends CardFormatFilter {
         this.sets.clear();
         super.reset();
     }
-
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    @Override
-    public boolean merge(ItemFilter<?> filter) {
-        CardSetFilter cardSetFilter = (CardSetFilter)filter;
-        this.sets.addAll(cardSetFilter.sets);
-        this.formats.clear();
-        this.formats.add(new GameFormat(null, this.sets, null));
-        return true;
-    }
 }

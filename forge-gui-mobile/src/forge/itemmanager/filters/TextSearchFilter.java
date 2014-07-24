@@ -46,16 +46,6 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         return txtSearch;
     }
 
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    @Override
-    public boolean merge(ItemFilter<?> filter) {
-        return false;
-    }
-
     @Override
     protected void buildWidget(Widget widget) {
         txtSearch = new SearchField();

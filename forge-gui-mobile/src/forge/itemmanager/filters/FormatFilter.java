@@ -56,19 +56,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         return existingFilter == null || !existingFilter.formats.contains(format);
     }
 
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public boolean merge(ItemFilter<?> filter) {
-        FormatFilter<T> formatFilter = (FormatFilter<T>)filter;
-        this.formats.addAll(formatFilter.formats);
-        return true;
-    }
-
     @Override
     public boolean isEmpty() {
         return formats.isEmpty();

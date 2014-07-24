@@ -67,13 +67,6 @@ public abstract class ItemFilter<T extends InventoryItem> {
     public abstract boolean isEmpty();
     public abstract void reset();
 
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    public abstract boolean merge(ItemFilter<?> filter);
-
     public float getPreferredWidth(float maxWidth, float height) {
         return maxWidth; //use maximum width by default
     }

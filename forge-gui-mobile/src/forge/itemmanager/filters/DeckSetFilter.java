@@ -29,20 +29,6 @@ public class DeckSetFilter extends DeckFormatFilter {
         super.reset();
     }
 
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    @Override
-    public boolean merge(ItemFilter<?> filter) {
-        DeckSetFilter cardSetFilter = (DeckSetFilter)filter;
-        this.sets.addAll(cardSetFilter.sets);
-        this.formats.clear();
-        this.formats.add(new GameFormat(null, this.sets, null));
-        return true;
-    }
-
     public void edit() {
         /*final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
         dialog.setOkCallback(new Runnable() {

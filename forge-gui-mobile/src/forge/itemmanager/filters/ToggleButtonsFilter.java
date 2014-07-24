@@ -61,16 +61,6 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
             button.setSelected(true);
         }
     }
-    
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    @Override
-    public boolean merge(ItemFilter<?> filter) {
-        return true;
-    }
 
     public class ToggleButton extends FLabel {
         private FEventHandler longPressHandler;

@@ -69,11 +69,4 @@ public class DeckFolderFilter extends ListLabelFilter<DeckProxy> {
         this.folders.clear();
         this.updateLabel();
     }
-
-    @Override
-    public boolean merge(ItemFilter<?> filter) {
-        DeckFolderFilter formatFilter = (DeckFolderFilter)filter;
-        this.folders.addAll(formatFilter.folders);
-        return true;
-    }
 }
