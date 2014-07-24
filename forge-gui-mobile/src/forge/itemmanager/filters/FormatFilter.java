@@ -1,5 +1,6 @@
 package forge.itemmanager.filters;
 
+import forge.assets.FSkinFont;
 import forge.game.GameFormat;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
@@ -19,27 +20,31 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
 
-        cbxFormats.addItem("All Formats");
+        cbxFormats.setFont(FSkinFont.get(12));
+        cbxFormats.addItem("All Sets/Formats");
         for (GameFormat format : FModel.getFormats().getOrderedList()) {
             cbxFormats.addItem(format);
         }
-        cbxFormats.addItem("More...");
+        cbxFormats.addItem("Choose Sets...");
+        cbxFormats.setSelectedIndex(0);
+
         cbxFormats.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 if (cbxFormats.getSelectedIndex() == 0) {
                     formats.clear();
+                    applyChange();
                 }
                 else if (cbxFormats.getSelectedIndex() < cbxFormats.getItemCount() - 1) {
                     formats.clear();
                     formats.add((GameFormat)cbxFormats.getSelectedItem());
+                    applyChange();
                 }
                 else {
                     //TODO: Open screen to select one or more sets and/or formats
                 }
             }
         });
-        cbxFormats.setSelectedIndex(0);
     }
 
     @Override

@@ -703,7 +703,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         filterPredicate = newFilterPredicate;
         if (pool != null) {
-            updateView(true, getSelectedItems());
+            updateView(true, null);
         }
         return true;
     }
