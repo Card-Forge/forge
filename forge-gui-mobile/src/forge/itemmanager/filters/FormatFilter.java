@@ -20,7 +20,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         super(itemManager0);
 
         cbxFormats.addItem("All Formats");
-        for (GameFormat format : FModel.getFormats()) {
+        for (GameFormat format : FModel.getFormats().getOrderedList()) {
             cbxFormats.addItem(format);
         }
         cbxFormats.addItem("More...");

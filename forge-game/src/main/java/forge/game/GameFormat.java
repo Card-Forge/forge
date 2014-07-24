@@ -195,7 +195,7 @@ public class GameFormat implements Comparable<GameFormat> {
      */
     @Override
     public String toString() {
-        return this.name + " (format)";
+        return this.name;
     }
 
     public static final Function<GameFormat, String> FN_GET_NAME = new Function<GameFormat, String>() {
@@ -264,6 +264,10 @@ public class GameFormat implements Comparable<GameFormat> {
         public Collection(GameFormat.Reader reader) {
             super("Format collections", reader);
             naturallyOrdered = reader.naturallyOrdered;
+        }
+
+        public Iterable<GameFormat> getOrderedList() {
+            return naturallyOrdered;
         }
 
         public GameFormat getStandard() {

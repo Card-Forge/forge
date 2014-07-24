@@ -542,7 +542,7 @@ public class QuestWinLose extends ControlWinLose {
             String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
-            for (GameFormat f : FModel.getFormats()) {
+            for (GameFormat f : FModel.getFormats().getOrderedList()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;

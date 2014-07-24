@@ -160,7 +160,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         menu.add(folder);
 
         JMenu fmt = GuiUtils.createMenu("Format");
-        for (final GameFormat f : FModel.getFormats()) {
+        for (final GameFormat f : FModel.getFormats().getOrderedList()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {
