@@ -588,6 +588,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * @param str - String to get item corresponding to
      */
     public T stringToItem(String str) {
+        if (this.pool == null) { return null; }
+
         for (Entry<T, Integer> itemEntry : this.pool) {
             if (itemEntry.getKey().toString().equals(str)) {
                 return itemEntry.getKey();

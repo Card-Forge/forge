@@ -18,6 +18,8 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.toolbox.FLabel;
+import forge.util.Aggregates;
+import forge.util.storage.IStorage;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -135,7 +137,71 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         public boolean isGeneratedDeck() {
             return true;
         }
-        
+    }
+
+    private class RandomDeckGenerator extends DeckProxy implements Comparable<RandomDeckGenerator> {
+        private String name;
+        private int index;
+
+        public RandomDeckGenerator(String name0, int index0) {
+            super();
+            name = name0;
+            index = index0;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        @Override
+        public int compareTo(final RandomDeckGenerator d) {
+            return d instanceof RandomDeckGenerator ? Integer.compare(index, ((RandomDeckGenerator)d).index) : 1;
+        }
+
+        @Override
+        public Deck getDeck() {
+            String sel = lstDecks.getSelectedItem().getName();
+            switch (lstDecks.getGameType()) {
+            case Commander:
+                if (sel.equals("Random")) {
+                    IStorage<Deck> decks = FModel.getDecks().getCommander();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                return DeckgenUtil.generateCommanderDeck(isAi);
+            case Archenemy:
+                if (sel.equals("Random")) {
+                    IStorage<Deck> decks = FModel.getDecks().getScheme();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                return DeckgenUtil.generateSchemeDeck();
+            case Planechase:
+                if (sel.equals("Random")) {
+                    IStorage<Deck> decks = FModel.getDecks().getPlane();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                return DeckgenUtil.generatePlanarDeck();
+            default:
+                break;
+            }
+            return null;
+        }
+
+        @Override
+        public boolean isGeneratedDeck() {
+            return true;
+        }
     }
 
     private void updateColors() {
@@ -212,6 +278,26 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         });
 
         lstDecks.setSelectedIndex(0);
+    }
+
+    private void updateRandom() {
+        lstDecks.setAllowMultipleSelections(false);
+
+        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
+        decks.add(new RandomDeckGenerator("Random Generated Deck", 0));
+        decks.add(new RandomDeckGenerator("Random User Deck", 1));
+
+        lstDecks.setPool(decks);
+        lstDecks.setup(ItemManagerConfig.STRING_ONLY);
+
+        btnViewDeck.setVisible(false);
+        btnRandom.setText("Random Deck");
+        btnRandom.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                DeckgenUtil.randomSelect(lstDecks);
+            }
+        });
     }
 
     public Deck getDeck() {
@@ -300,7 +386,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         case PRECONSTRUCTED_DECK:
             updatePrecons();
             break;
-        default:
+        case RANDOM_DECK:
+            updateRandom();
             break;
         }
     }

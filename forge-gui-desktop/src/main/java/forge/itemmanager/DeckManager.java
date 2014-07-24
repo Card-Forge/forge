@@ -53,7 +53,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     private static final FSkin.SkinIcon icoEdit = FSkin.getIcon(FSkinProp.ICO_EDIT);
     private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
 
-    private final GameType gametype;
+    private final GameType gameType;
     private UiCommand cmdDelete, cmdSelect;
 
     /**
@@ -64,7 +64,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
      */
     public DeckManager(final GameType gt) {
         super(DeckProxy.class, true);
-        this.gametype = gt;
+        this.gameType = gt;
 
         this.addSelectionListener(new ListSelectionListener() {
             @Override
@@ -81,6 +81,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 editDeck(getSelectedItem());
             }
         });
+    }
+
+    public GameType getGameType() {
+        return gameType;
     }
 
     @Override
@@ -219,7 +223,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 
-        switch (this.gametype) {
+        switch (this.gameType) {
             case Quest:
                 screen = FScreen.DECK_EDITOR_QUEST;
                 editorCtrl = new CEditorQuest(FModel.getQuest());
@@ -267,7 +271,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         }
 
         // consider using deck proxy's method to delete deck
-        switch(this.gametype) {
+        switch(this.gameType) {
             case Constructed:
             case Draft:
             case Sealed:
@@ -278,7 +282,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 FModel.getQuest().save();
                 break;
             default:
-                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
+                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gameType.toString());
         }
 
         this.removeItem(deck, 1);
