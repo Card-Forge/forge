@@ -10,6 +10,7 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
+import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
@@ -86,18 +87,12 @@ public abstract class ItemView<T extends InventoryItem> {
         return false;
     }
     protected abstract float getScrollHeight();
-    protected abstract float layoutOptionsPanel(float visibleWidth, float height);
+    protected abstract void layoutOptionsPanel(float visibleWidth, float height);
 
-    private class OptionsPanel extends FScrollPane {
+    private class OptionsPanel extends FContainer {
         @Override
-        protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            return new ScrollBounds(layoutOptionsPanel(visibleWidth, visibleHeight), visibleHeight);
-        }
-
-        @Override
-        public void drawOverlay(Graphics g) {
-            super.drawOverlay(g);
-            g.drawLine(1, BORDER_COLOR, 0, 0, getWidth(), 0);
+        protected void doLayout(float width, float height) {
+            layoutOptionsPanel(width, height);
         }
     }
 
@@ -123,7 +118,7 @@ public abstract class ItemView<T extends InventoryItem> {
         return scroller;
     }
 
-    public FScrollPane getPnlOptions() {
+    public FContainer getPnlOptions() {
         return pnlOptions;
     }
 

@@ -381,7 +381,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected float layoutOptionsPanel(float visibleWidth, float height) {
+    protected void layoutOptionsPanel(float width, float height) {
         float padding = ItemFilter.PADDING;
         float x = 0;
         float h = FTextField.getDefaultHeight(ItemFilter.DEFAULT_FONT);
@@ -393,7 +393,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         //determine width of combo boxes based on available width versus auto-size widths
         float lblPileByWidth = lblPileBy.getAutoSizeBounds().width;
-        float availableComboBoxWidth = visibleWidth - x - lblPileByWidth - padding;
+        float availableComboBoxWidth = width - x - lblPileByWidth - padding;
         float groupByWidth = availableComboBoxWidth * 0.6f;
         float pileByWidth = availableComboBoxWidth - groupByWidth;
 
@@ -402,9 +402,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         lblPileBy.setBounds(x, y, lblPileByWidth, h);
         x += lblPileByWidth;
         cbPileByOptions.setBounds(x, y, pileByWidth, h);
-        x += pileByWidth + padding;
-
-        return x;
     }
 
     private void updateLayout(boolean forRefresh) {

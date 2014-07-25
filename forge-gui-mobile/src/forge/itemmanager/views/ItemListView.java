@@ -209,8 +209,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    protected float layoutOptionsPanel(float visibleWidth, float height) {
-        return visibleWidth;
+    protected void layoutOptionsPanel(float width, float height) {
     }
 
     public final class ItemList extends FList<Entry<T, Integer>> {
