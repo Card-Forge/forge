@@ -1135,14 +1135,12 @@ forge-gui-mobile/src/forge/itemmanager/filters/CardColorFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardFormatFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardPowerFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardSearchFilter.java -text
-forge-gui-mobile/src/forge/itemmanager/filters/CardSetFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardToughnessFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/CardTypeFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckColorFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckFolderFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckFormatFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckSearchFilter.java -text
-forge-gui-mobile/src/forge/itemmanager/filters/DeckSetFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/DeckStatTypeFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/FormatFilter.java -text
 forge-gui-mobile/src/forge/itemmanager/filters/ItemFilter.java -text

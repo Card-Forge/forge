@@ -154,9 +154,11 @@ public class FGroupList<E> extends FScrollPane {
         float groupHeight;
 
         for (ListGroup group : groups) {
-            groupHeight = group.getPreferredHeight();
-            group.setBounds(0, y, visibleWidth, groupHeight);
-            y += groupHeight;
+            if (group.isVisible()) {
+                groupHeight = group.getPreferredHeight();
+                group.setBounds(0, y, visibleWidth, groupHeight);
+                y += groupHeight;
+            }
         }
 
         return new ScrollBounds(visibleWidth, y);
@@ -181,16 +183,19 @@ public class FGroupList<E> extends FScrollPane {
                     }
                 }).build());
             }
+            setVisible(false); //hide by default unless it has items
         }
 
         public void addItem(ListItem item) {
             items.add(item);
             add(item);
+            setVisible(true);
         }
 
         public boolean removeItem(ListItem item) {
             if (items.remove(item)) {
                 remove(item);
+                setVisible(items.size() > 0);
                 return true;
             }
             return false;
