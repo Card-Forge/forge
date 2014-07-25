@@ -1,5 +1,7 @@
 package forge.toolbox;
 
+import forge.util.Callback;
+
 
 public class FSpinner extends FTextField {
     private int value, minValue, maxValue;
@@ -28,5 +30,23 @@ public class FSpinner extends FTextField {
         if (value == value0) { return; }
         value = value0;
         setText(String.valueOf(value));
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count) {
+        GuiChoose.getInteger("Select a number", minValue, maxValue, new Callback<Integer>() {
+            @Override
+            public void run(Integer result) {
+                if (result != null) {
+                    setValue(result);
+                }
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean startEdit() {
+        return false; //don't allow editing text
     }
 }
