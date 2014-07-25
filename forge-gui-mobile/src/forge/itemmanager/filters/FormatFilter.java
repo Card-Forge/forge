@@ -196,10 +196,18 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
             @Override
             public boolean tap(Integer index, CardEdition value, float x, float y, int count) {
                 if (selectedSets.contains(value)) {
-                    selectedSets.remove(value);
+                    if (count == 2) {
+                        Forge.back(); //support double tap to confirm selection without unselecting double tapped item
+                    }
+                    else {
+                        selectedSets.remove(value);
+                    }
                 }
                 else {
                     selectedSets.add(value);
+                    if (count == 2) {
+                        Forge.back(); //support double tap to confirm selection after selecting double tapped item
+                    }
                 }
                 return true;
             }
