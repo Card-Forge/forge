@@ -237,7 +237,7 @@ public enum ColumnDef {
             null, null),
     OWNED("Owned", "Owned", 20, true, SortState.ASC,
             null, null),
-    DECKS("Decks", "Decks Containing Card", 20, true, SortState.ASC,
+    DECKS("Decks", "Decks", 20, true, SortState.ASC,
             null, null),
     FAVORITE("", "Favorite", 18, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
