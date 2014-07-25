@@ -141,7 +141,7 @@ public enum ColumnDef {
                     return toCMC(from.getKey());
                 }
             }),
-    RARITY("Rarity", "Rarity", 20, true, SortState.ASC,
+    RARITY("Rarity", "Rarity", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
