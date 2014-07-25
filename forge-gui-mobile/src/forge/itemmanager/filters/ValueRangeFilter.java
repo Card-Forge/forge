@@ -1,5 +1,6 @@
 package forge.itemmanager.filters;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
@@ -53,8 +54,8 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
     protected final void buildWidget(Widget widget) {
         lowerBound = addSpinner(widget, true);
 
-        String text = " <= " + this.getCaption() + " <= ";
-        label = new FLabel.Builder().text(text).font(ListLabelFilter.LABEL_FONT).build();
+        String text = "<= " + this.getCaption() + " <=";
+        label = new FLabel.Builder().text(text).align(HAlignment.CENTER).font(ListLabelFilter.LABEL_FONT).build();
         widget.add(label);
 
         upperBound = addSpinner(widget, false);
@@ -83,11 +84,12 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
     @Override
     protected void doWidgetLayout(float width, float height) {
         float x = 0;
-        lowerBound.setBounds(x, 0, 45, height);
+        float spinnerWidth = height * 1.5f;
+        lowerBound.setBounds(x, 0, spinnerWidth, height);
         x += lowerBound.getWidth();
-        label.setBounds(x, 0, 125, height);
+        label.setBounds(x, 0, width - 2 * spinnerWidth, height);
         x += label.getWidth();
-        upperBound.setBounds(x, 0, 45, height);
+        upperBound.setBounds(x, 0, spinnerWidth, height);
     }
 
     private FSpinner addSpinner(Widget widget, boolean lowerBound) {

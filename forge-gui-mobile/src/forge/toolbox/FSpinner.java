@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
 
 
@@ -37,8 +38,13 @@ public class FSpinner extends FTextField {
         GuiChoose.getInteger("Select a number", minValue, maxValue, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
-                if (result != null) {
+                if (result != null && result != value) {
+                    int oldValue = value;
                     setValue(result);
+                    if (getChangedHandler() != null) {
+                        //handle change event if value changed from input
+                        getChangedHandler().handleEvent(new FEvent(FSpinner.this, FEventType.CHANGE, oldValue));
+                    }
                 }
             }
         });
