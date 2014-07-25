@@ -136,6 +136,16 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    public float getScrollValue() {
+        return list.getScrollTop();
+    }
+
+    @Override
+    public void setScrollValue(float value) {
+        list.setScrollTop(value);
+    }
+
+    @Override
     public void scrollSelectionIntoView() {
         list.scrollIntoView(getSelectedIndex());
     }
