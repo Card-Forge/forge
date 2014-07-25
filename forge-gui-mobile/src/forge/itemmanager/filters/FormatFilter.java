@@ -33,6 +33,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected GameFormat format;
+    private String selectedFormat;
     private FComboBox<Object> cbxFormats = new FComboBox<Object>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
@@ -45,10 +46,15 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         }
         cbxFormats.addItem("Choose Sets...");
         cbxFormats.setSelectedIndex(0);
+        selectedFormat = cbxFormats.getText();
 
         cbxFormats.setChangedHandler(new FEventHandler() {
+            private boolean preventHandling = false;
+
             @Override
             public void handleEvent(FEvent e) {
+                if (preventHandling) { return; }
+
                 int index = cbxFormats.getSelectedIndex();
                 if (index == -1) {
                     //Do nothing when index set to -1
@@ -58,7 +64,9 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     applyChange();
                 }
                 else if (index == cbxFormats.getItemCount() - 1) {
-                    cbxFormats.setSelectedIndex(-1);
+                    preventHandling = true;
+                    cbxFormats.setText(selectedFormat); //restore previous selection by default
+                    preventHandling = false;
                     Forge.openScreen(new MultiSetSelect());
                 }
                 else {
@@ -67,6 +75,12 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 }
             }
         });
+    }
+
+    @Override
+    protected void applyChange() {
+        selectedFormat = cbxFormats.getText(); //backup current text
+        super.applyChange();
     }
 
     @Override
@@ -166,9 +180,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 format = new GameFormat(null, setCodes, null);
                 cbxFormats.setText(TextUtil.join(setCodes, ", "));
                 applyChange();
-            }
-            else { //if nothing selected, switch to All Sets item
-                cbxFormats.setSelectedIndex(0);
             }
             super.onClose(canCloseCallback);
         }
