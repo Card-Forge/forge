@@ -37,6 +37,7 @@ import forge.itemmanager.views.ItemView;
 import forge.menu.FDropDownMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
@@ -64,6 +65,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final Class<T> genericType;
     private ItemManagerConfig config;
     private boolean hasNewColumn;
+    private List<ItemColumn> sortCols = new ArrayList<ItemColumn>();
 
     private final TextSearchFilter<? extends T> searchFilter;
 
@@ -72,6 +74,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         .selectable(true).align(HAlignment.CENTER)
         .icon(VIEW_OPTIONS_ICON).iconScaleFactor(0.9f)
         .build();
+
+    private final FLabel lblSort;
+    private final FComboBox<ItemColumn> cbxSortOptions;
 
     private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
     private final ItemListView<T> listView;
@@ -114,6 +119,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         add(btnAdvancedSearchOptions);
         btnAdvancedSearchOptions.setSelected(!hideFilters);
+        if (allowSortChange()) {
+            lblSort = add(new FLabel.Builder().text("Sort:").font(FSkinFont.get(12)).textColor(FLabel.INLINE_LABEL_COLOR).build());
+            lblSort.setWidth(lblSort.getAutoSizeBounds().width);
+            cbxSortOptions = add(new FComboBox<ItemColumn>());
+            cbxSortOptions.setFont(lblSort.getFont());
+        }
+        else {
+            lblSort = null;
+            cbxSortOptions = null;
+        }
         add(currentView.getPnlOptions());
         add(currentView.getScroller());
 
@@ -149,12 +164,82 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemColumn> colOverrides) {
         config = config0;
         setWantUnique(config0.getUniqueCardsOnly());
+
+        //ensure sort cols ordered properly
+        final List<ItemColumn> cols = new LinkedList<ItemColumn>();
+        for (ItemColumnConfig colConfig : config.getCols().values()) {
+            if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
+                cols.add(new ItemColumn(colConfig));
+            }
+            else {
+                cols.add(colOverrides.get(colConfig.getDef()));
+            }
+        }
+        Collections.sort(cols, new Comparator<ItemColumn>() {
+            @Override
+            public int compare(ItemColumn arg0, ItemColumn arg1) {
+                return Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex());
+            }
+        });
+
+        sortCols.clear();
+
+        int modelIndex = 0;
+        for (final ItemColumn col : cols) {
+            col.setIndex(modelIndex++);
+            if (col.isVisible()) { sortCols.add(col); }
+        }
+
+        final ItemColumn[] sortcols = new ItemColumn[sortCols.size()];
+
+        // Assemble priority sort.
+        for (ItemColumn col : sortCols) {
+            if (cbxSortOptions != null) {
+                cbxSortOptions.addItem(col);
+            }
+            if (col.getSortPriority() > 0 && col.getSortPriority() <= sortcols.length) {
+                sortcols[col.getSortPriority() - 1] = col;
+            }
+        }
+
+        if (cbxSortOptions != null) {
+            cbxSortOptions.setText("(none)");
+        }
+
+        model.getCascadeManager().reset();
+
+        for (int i = sortcols.length - 1; i >= 0; i--) {
+            ItemColumn col = sortcols[i];
+            if (col != null) {
+                model.getCascadeManager().add(col, true);
+                if (cbxSortOptions != null) {
+                    cbxSortOptions.setSelectedItem(col);
+                }
+            }
+        }
+
+        if (cbxSortOptions != null) {
+            cbxSortOptions.setChangedHandler(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    model.getCascadeManager().add(cbxSortOptions.getSelectedItem(), false);
+                    model.refreshSort();
+                    ItemManagerConfig.save();
+                    updateView(true, null);
+                }
+            });
+        }
+
         for (ItemView<T> view : views) {
             view.setup(config0, colOverrides);
         }
         setViewIndex(config0.getViewIndex());
         setHideFilters(config0.getHideFilters());
         hasNewColumn = config.getCols().containsKey(ColumnDef.NEW);
+    }
+
+    protected boolean allowSortChange() {
+        return true;
     }
 
     protected String getItemSuffix(Entry<T, Integer> item) {
@@ -217,6 +302,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (!hideFilters) {
             for (ItemFilter<? extends T> filter : filters) {
                 helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
+            }
+            if (allowSortChange()) {
+                helper.include(lblSort, lblSort.getWidth(), fieldHeight);
+                helper.fillLine(cbxSortOptions, fieldHeight);
             }
             helper.newLine(-ItemFilter.PADDING);
             if (currentView.getPnlOptions().getChildCount() > 0) {

@@ -70,6 +70,11 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         return new DeckSearchFilter(this);
     }
 
+    @Override
+    protected boolean allowSortChange() {
+        return false;
+    }
+
     private static final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
 
     @Override

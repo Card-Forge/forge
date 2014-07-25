@@ -45,7 +45,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
             cbxFormats.addItem(format);
         }
         cbxFormats.addItem("Choose Sets...");
-        cbxFormats.setSelectedIndex(0);
         selectedFormat = cbxFormats.getText();
 
         cbxFormats.setChangedHandler(new FEventHandler() {

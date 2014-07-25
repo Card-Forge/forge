@@ -26,7 +26,6 @@ import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
-import forge.itemmanager.ItemColumnConfig;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
@@ -69,32 +68,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
-        //ensure cols ordered properly
-        final List<ItemColumn> cols = new LinkedList<ItemColumn>();
-        for (ItemColumnConfig colConfig : config.getCols().values()) {
-            if (colOverrides == null || !colOverrides.containsKey(colConfig.getDef())) {
-                cols.add(new ItemColumn(colConfig));
-            }
-            else {
-                cols.add(colOverrides.get(colConfig.getDef()));
-            }
-        }
-        Collections.sort(cols, new Comparator<ItemColumn>() {
-            @Override
-            public int compare(ItemColumn arg0, ItemColumn arg1) {
-                return Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex());
-            }
-        });
-
-        list.cols.clear();
-
-        int modelIndex = 0;
-        for (final ItemColumn col : cols) {
-            col.setIndex(modelIndex++);
-            if (col.isVisible()) { list.cols.add(col); }
-        }
-
-        listModel.setup();
         refresh(null, 0, 0);
     }
 
@@ -214,7 +187,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     public final class ItemList extends FList<Entry<T, Integer>> {
         private final ItemManager<T>.ItemRenderer renderer;
-        private List<ItemColumn> cols = new ArrayList<ItemColumn>();
 
         private ItemList() {
             renderer = itemManager.getListItemRenderer();
@@ -284,14 +256,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             setFont(FSkinFont.get(14));
         }
 
-        public Iterable<ItemColumn> getCells() {
-            return cols;
-        }
-
-        public int getCellCount() {
-            return cols.size();
-        }
-
         @Override
         protected void drawBackground(Graphics g) {
             //draw no background by default
@@ -324,26 +288,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
          */
         public ItemListModel(final ItemManagerModel<T> model0) {
             model = model0;
-        }
-
-        public void setup() {
-            final ItemColumn[] sortcols = new ItemColumn[list.getCellCount()];
-
-            // Assemble priority sort.
-            for (ItemColumn col : list.getCells()) {
-                if (col.getSortPriority() > 0 && col.getSortPriority() <= sortcols.length) {
-                    sortcols[col.getSortPriority() - 1] = col;
-                }
-            }
-
-            model.getCascadeManager().reset();
-
-            for (int i = sortcols.length - 1; i >= 0; i--) {
-                ItemColumn col = sortcols[i];
-                if (col != null) {
-                    model.getCascadeManager().add(col, true);
-                }
-            }
         }
 
         public Entry<T, Integer> rowToItem(final int row) {
