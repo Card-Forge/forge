@@ -173,12 +173,11 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 List<String> setCodes = new ArrayList<String>();
                 List<CardEdition> sortedSets = new ArrayList<CardEdition>(selectedSets);
                 Collections.sort(sortedSets);
-                Collections.reverse(sortedSets);
                 for (CardEdition set : sortedSets) {
                     setCodes.add(set.getCode());
                 }
                 format = new GameFormat(null, setCodes, null);
-                cbxFormats.setText(TextUtil.join(setCodes, ", "));
+                cbxFormats.setText(sortedSets.size() > 1 ? TextUtil.join(setCodes, ", ") : sortedSets.get(0).toString());
                 applyChange();
             }
             super.onClose(canCloseCallback);
