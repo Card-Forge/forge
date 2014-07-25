@@ -313,6 +313,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         this.curCharacteristics = state;
 
+        getGame().fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
+
         return true;
     }
 
