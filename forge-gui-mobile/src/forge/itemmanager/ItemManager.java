@@ -798,6 +798,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         for (ItemFilter<? extends T> filter : filters) {
             filter.getWidget().setVisible(visible);
         }
+        if (allowSortChange()) {
+            lblSort.setVisible(visible);
+            cbxSortOptions.setVisible(visible);
+        }
         for (ItemView<T> view : views) {
             view.getPnlOptions().setVisible(visible);
         }
