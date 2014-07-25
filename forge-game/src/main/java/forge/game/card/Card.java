@@ -8758,6 +8758,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             return true;
         case Hand:
+            if (getController().hasKeyword("Play with your hand revealed.")) {
+                return true;
+            }
+            //fall through
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
             if (getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
