@@ -183,6 +183,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         });
 
         sortCols.clear();
+        if (cbxSortOptions != null) {
+            cbxSortOptions.setChangedHandler(null);
+            cbxSortOptions.removeAllItems();
+        }
 
         int modelIndex = 0;
         for (final ItemColumn col : cols) {
