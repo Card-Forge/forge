@@ -102,7 +102,7 @@ public enum ColumnDef {
                     return toColor(from.getKey());
                 }
             }),
-    POWER("Power", "Power", 20, true, SortState.ASC,
+    POWER("Power", "Power", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -115,7 +115,7 @@ public enum ColumnDef {
                     return toPower(from.getKey());
                 }
             }),
-    TOUGHNESS("Toughness", "Toughness", 20, true, SortState.ASC,
+    TOUGHNESS("Toughness", "Toughness", 20, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
