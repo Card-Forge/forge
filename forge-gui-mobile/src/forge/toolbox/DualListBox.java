@@ -8,6 +8,7 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
+import forge.item.PaperCard;
 import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent.FEventHandler;
@@ -109,6 +110,9 @@ public class DualListBox<T> extends FDialog {
         }
         if (item instanceof Card) {
             renderer = new CardItemRenderer();
+        }
+        else if (item instanceof PaperCard) {
+            renderer = new PaperCardItemRenderer();
         }
         else if (item instanceof SpellAbility) {
             renderer = new SpellAbilityItemRenderer();
@@ -367,6 +371,34 @@ public class DualListBox<T> extends FDialog {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h);
+        }
+    }
+    //special renderer for paper cards
+    private class PaperCardItemRenderer extends ItemRenderer {
+        @Override
+        public FSkinFont getDefaultFont() {
+            return FSkinFont.get(14);
+        }
+
+        @Override
+        public float getItemHeight() {
+            return CardRenderer.getCardListItemHeight();
+        }
+
+        @Override
+        public boolean tap(T value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count);
+        }
+
+        @Override
+        public boolean longPress(T value, float x, float y) {
+            CardZoom.show((PaperCard)value);
+            return true;
+        }
+
+        @Override
+        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h);
         }
     }
 
