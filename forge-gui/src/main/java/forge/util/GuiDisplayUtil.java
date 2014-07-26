@@ -21,6 +21,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.GameType;
@@ -37,6 +38,8 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.match.input.Input;
+import forge.match.input.InputPassPriority;
 import forge.match.input.InputSelectCardsFromList;
 import forge.model.FModel;
 import forge.player.HumanPlay;
@@ -351,6 +354,33 @@ public final class GuiDisplayUtil {
         if (life == null) { return; }
 
         player.setLife(life, null);
+    }
+
+    /**
+     * <p>
+     * devModeWinGame.
+     * </p>
+     * 
+     * @since 1.5.23
+     */
+    public static void devModeWinGame() {
+        Input input = GuiBase.getInterface().getInputQueue().getInput();
+        if (!(input instanceof InputPassPriority)) {
+            SOptionPane.showMessageDialog("You must have priority to use this feature.", "Win Game", SOptionPane.INFORMATION_ICON);
+            return;
+        }
+
+        //set life of all other players to 0
+        LobbyPlayer guiPlayer = GuiBase.getInterface().getGuiPlayer();
+        final List<Player> players = getGame().getPlayers();
+        for (Player player : players) {
+            if (player.getLobbyPlayer() != guiPlayer) {
+                player.setLife(0, null);
+            }
+        }
+
+        //pass priority so that causes gui player to win
+        input.selectButtonOK();
     }
 
     /**

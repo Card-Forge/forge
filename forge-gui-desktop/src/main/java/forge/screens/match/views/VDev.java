@@ -70,6 +70,7 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblTapPermanent = new DevLabel("Tap Permanent");
     private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanent");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
+    private final DevLabel lblWinGame = new DevLabel("Win Game");
     private final DevLabel lblCardToBattlefield = new DevLabel("Add card to play");
     private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged planar roll");
@@ -86,10 +87,11 @@ public enum VDev implements IVDoc<CDev> {
         devLBLs.add(lblTutor);
         devLBLs.add(lblCardToHand);
         devLBLs.add(lblCardToBattlefield);
+        devLBLs.add(lblSetLife);
+        devLBLs.add(lblWinGame);
         devLBLs.add(lblCounterPermanent);
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
-        devLBLs.add(lblSetLife);
         devLBLs.add(lblWalkTo);
 
         final String constraints = "w 95%!, gap 0 0 4px 0";
@@ -99,6 +101,8 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblTutor, constraints);
         viewport.add(this.lblCardToHand, halfConstraints + ", split 2");
         viewport.add(this.lblCardToBattlefield, halfConstraints);
+        viewport.add(this.lblSetLife, halfConstraints + ", split 2");
+        viewport.add(this.lblWinGame, halfConstraints);
         viewport.add(this.lblRiggedRoll, halfConstraints + ", split 2");
         viewport.add(this.lblWalkTo, halfConstraints);
         // viewport.add(this.lblMilling, constraints);
@@ -107,7 +111,6 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, halfConstraints + ", split 2");
         viewport.add(this.lblUntapPermanent, halfConstraints);
-        viewport.add(this.lblSetLife, constraints);
     }
 
     //========= Overridden methods
@@ -216,6 +219,11 @@ public enum VDev implements IVDoc<CDev> {
     /** @return {@link forge.screens.match.views.VDev.DevLabel} */
     public DevLabel getLblSetLife() {
         return this.lblSetLife;
+    }
+
+    /** @return {@link forge.screens.match.views.VDev.DevLabel} */
+    public DevLabel getLblWinGame() {
+        return this.lblWinGame;
     }
 
     public DevLabel getLblRiggedRoll() {

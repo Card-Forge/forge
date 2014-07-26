@@ -72,6 +72,17 @@ public class VDevMenu extends FDropDownMenu {
                 });
             }
         }));
+        addItem(new FMenuItem("Win Game", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GuiDisplayUtil.devModeWinGame();
+                    }
+                });
+            }
+        }));
         addItem(new FMenuItem("Setup Game State", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
