@@ -167,7 +167,7 @@ public class FSideboardDialog extends FDialog {
                         if (result == null || result <= 0) { return; }
 
                         removeCard(card, result);
-                        parent.getSideboardPage().addCard(card, result);
+                        parent.getMainDeckPage().addCard(card, result);
                     }
                 });
             }
