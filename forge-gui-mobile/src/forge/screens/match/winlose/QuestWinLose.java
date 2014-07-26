@@ -341,8 +341,7 @@ public class QuestWinLose extends ControlWinLose {
             final int turnCredits = getCreditsRewardForWinByTurn(winTurn);
             
             if (winTurn == 0) {
-                throw new UnsupportedOperationException("QuestWinLose > "
-                        + "turn calculation error: Zero turn win");
+                sb.append("Won on turn zero!");
             } else if (winTurn == 1) {
                 sb.append("Won in one turn!");
             } else if (winTurn <= 5) {
@@ -736,7 +735,7 @@ public class QuestWinLose extends ControlWinLose {
     private int getCreditsRewardForWinByTurn(final int iTurn) {
         int credits;
 
-        if (iTurn == 1) {
+        if (iTurn <= 1) {
             credits = FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_TURN1);
         } else if (iTurn <= 5) {
             credits = FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_TURN5);
