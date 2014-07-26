@@ -2,6 +2,7 @@ package forge.util.gui;
 
 import forge.GuiBase;
 import forge.assets.FSkinProp;
+import forge.game.card.Card;
 
 
 public class SOptionPane {
@@ -58,6 +59,10 @@ public class SOptionPane {
 
     public static int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption) {
         return GuiBase.getInterface().showOptionDialog(message, title, icon, options, defaultOption);
+    }
+
+    public static int showCardOptionDialog(Card card, String message, String title, FSkinProp icon, String[] options, int defaultOption) {
+        return GuiBase.getInterface().showCardOptionDialog(card, message, title, icon, options, defaultOption);
     }
 
     public static String showInputDialog(String message, String title) {

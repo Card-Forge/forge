@@ -1,7 +1,5 @@
 package forge.util.gui;
 
-import forge.FThreads;
-import forge.GuiBase;
 import forge.game.card.Card;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,21 +20,12 @@ public class SGuiDialog {
     public static boolean confirm(final Card c, final String question, String[] options) {
         return SGuiDialog.confirm(c, question, true, options);
     }
-    
-    public static boolean confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options) {
-        if (c != null) {
-            FThreads.invokeInEdtAndWait(new Runnable() {
-                @Override
-                public void run() {
-                    GuiBase.getInterface().setCard(c);
-                }
-            });
-        }
 
+    public static boolean confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options) {
         final String title = c == null ? "Question" : c.getName() + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         String[] opts = options == null ? defaultConfirmOptions : options;
-        int answer = SOptionPane.showOptionDialog(questionToUse, title, SOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
+        int answer = SOptionPane.showCardOptionDialog(c, questionToUse, title, SOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
         return answer == 0;
     }
 

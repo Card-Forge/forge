@@ -21,6 +21,7 @@ import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
+import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.item.PaperCard;
@@ -545,13 +546,19 @@ public class CardRenderer {
         final float stateXSymbols = (x + (w / 2)) - otherSymbolsSize / 2;
         final float ySymbols = (y + h) - (h / 8) - otherSymbolsSize / 2;
 
-        Combat combat = card.getGame().getCombat();
-        if (combat != null) {
-            if (combat.isAttacking(card)) {
-                CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
-            }
-            if (combat.isBlocking(card)) {
-                CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
+        Game game = card.getGame();
+        if (game == null) {
+            game = FControl.getGame();
+        }
+        if (game != null) {
+            Combat combat = game.getCombat();
+            if (combat != null) {
+                if (combat.isAttacking(card)) {
+                    CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
+                }
+                if (combat.isBlocking(card)) {
+                    CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
+                }
             }
         }
 

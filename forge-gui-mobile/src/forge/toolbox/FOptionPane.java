@@ -4,9 +4,14 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
+import forge.Graphics;
 import forge.assets.FSkinFont;
+import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.assets.ImageUtil;
+import forge.card.CardRenderer;
+import forge.card.CardZoom;
+import forge.game.card.Card;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FEvent.*;
 import forge.util.Callback;
@@ -44,7 +49,7 @@ public class FOptionPane extends FDialog {
         showMessageDialog(message, title, ERROR_ICON);
     }
 
-    public static void showMessageDialog(String message, String title, FSkinImage icon) {
+    public static void showMessageDialog(String message, String title, FImage icon) {
         showOptionDialog(message, title, icon, new String[] {"OK"}, 0, null);
     }
 
@@ -74,12 +79,41 @@ public class FOptionPane extends FDialog {
         });
     }
 
-    public static void showOptionDialog(String message, String title, FSkinImage icon, String[] options, final Callback<Integer> callback) {
+    public static void showOptionDialog(String message, String title, FImage icon, String[] options, final Callback<Integer> callback) {
         showOptionDialog(message, title, icon, options, 0, callback);
     }
 
-    public static void showOptionDialog(String message, String title, FSkinImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {
+    public static void showOptionDialog(String message, String title, FImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption, callback);
+        optionPane.show();
+    }
+
+    public static void showCardOptionDialog(final Card card, String message, String title, FImage icon, String[] options, int defaultOption, final Callback<Integer> callback) {
+        final FDisplayObject cardDisplay;
+        if (card != null) {
+            cardDisplay = new FDisplayObject() {
+                @Override
+                public boolean tap(float x, float y, int count) {
+                    CardZoom.show(card);
+                    return true;
+                }
+                @Override
+                public boolean longPress(float x, float y) {
+                    CardZoom.show(card);
+                    return true;
+                }
+                @Override
+                public void draw(Graphics g) {
+                    float cardWidth = getHeight() / FCardPanel.ASPECT_RATIO;
+                    CardRenderer.drawCardWithOverlays(g, card, (getWidth() - cardWidth) / 2, 0, cardWidth, getHeight());
+                }
+            };
+            cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);
+        }
+        else {
+            cardDisplay = null;
+        }
+        final FOptionPane optionPane = new FOptionPane(message, title, icon, cardDisplay, options, defaultOption, callback);
         optionPane.show();
     }
 
@@ -87,15 +121,15 @@ public class FOptionPane extends FDialog {
         showInputDialog(message, title, null, "", null, callback);
     }
 
-    public static void showInputDialog(String message, String title, FSkinImage icon, final Callback<String> callback) {
+    public static void showInputDialog(String message, String title, FImage icon, final Callback<String> callback) {
         showInputDialog(message, title, icon, "", null, callback);
     }
 
-    public static void showInputDialog(String message, String title, FSkinImage icon, String initialInput, final Callback<String> callback) {
+    public static void showInputDialog(String message, String title, FImage icon, String initialInput, final Callback<String> callback) {
         showInputDialog(message, title, icon, initialInput, null, callback);
     }
 
-    public static <T> void showInputDialog(String message, String title, FSkinImage icon, T initialInput, T[] inputOptions, final Callback<T> callback) {
+    public static <T> void showInputDialog(String message, String title, FImage icon, T initialInput, T[] inputOptions, final Callback<T> callback) {
         final FDisplayObject inputField;
         final FTextField txtInput;
         final FComboBox<T> cbInput;
@@ -141,7 +175,7 @@ public class FOptionPane extends FDialog {
     private final Callback<Integer> callback;
     private final int defaultOption;
 
-    public FOptionPane(String message, String title, FSkinImage icon, FDisplayObject displayObj0, String[] options, int defaultOption0, final Callback<Integer> callback0) {
+    public FOptionPane(String message, String title, FImage icon, FDisplayObject displayObj0, String[] options, int defaultOption0, final Callback<Integer> callback0) {
         super(title);
 
         if (icon != null) {

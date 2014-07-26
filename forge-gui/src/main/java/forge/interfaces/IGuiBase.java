@@ -46,6 +46,7 @@ public interface IGuiBase {
     ISkinImage getUnskinnedIcon(String path);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
     int showOptionDialog(String message, String title, FSkinProp icon, String[] options, int defaultOption);
+    int showCardOptionDialog(Card card, String message, String title, FSkinProp icon, String[] options, int defaultOption);
     <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions);
     <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display);
     <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,

@@ -128,18 +128,16 @@ public class ClashEffect extends SpellAbilityEffect {
             return pCMC > oCMC;
         }
     }
-    
+
     public final void clashMoveToTopOrBottom(final Player p, final Card c) {
         GameAction action = p.getGame().getAction();
         boolean putOnTop = p.getController().willPutCardOnTop(c);
-        if ( putOnTop )
+        if (putOnTop) {
             action.moveToLibrary(c);
-        else
+        }
+        else {
             action.moveToBottomOfLibrary(c);
-        
+        }
         // computer just puts the card back until such time it can make a smarter decision
-
     }
-
-
 }

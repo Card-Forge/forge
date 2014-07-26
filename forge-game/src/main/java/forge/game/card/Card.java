@@ -313,8 +313,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         this.curCharacteristics = state;
 
-        if (owner != null) {
-            getGame().fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
+        Game game = getGame();
+        if (game != null) {
+            game.fireEvent(new GameEventCardStatsChanged(this)); //ensure stats updated for new characteristics
         }
 
         return true;
@@ -8921,14 +8922,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public Game getGame() {
         Player controller = getController();
-        if (null != controller)
+        if (controller != null) {
             return controller.getGame();
-
+        }
         Player owner = getOwner();
-        if (null != owner)
+        if (owner != null) {
             return owner.getGame();
-
-        throw new IllegalStateException("Card " + toString() + " has no means to determine the game it belongs to!");
+        }
+        return null;
     }
 
     /**

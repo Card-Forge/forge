@@ -152,6 +152,19 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public int showCardOptionDialog(final Card card, String message, String title, FSkinProp skinIcon, String[] options, int defaultOption) {
+        if (card != null) {
+            FThreads.invokeInEdtAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    GuiBase.getInterface().setCard(card);
+                }
+            });
+        }
+        return showOptionDialog(message, title, skinIcon, options, defaultOption);
+    }
+
+    @Override
     public <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
     }

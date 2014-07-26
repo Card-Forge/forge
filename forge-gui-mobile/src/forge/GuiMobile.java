@@ -135,6 +135,16 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public int showCardOptionDialog(final Card card, final String message, final String title, final FSkinProp icon, final String[] options, final int defaultOption) {
+        return new WaitCallback<Integer>() {
+            @Override
+            public void run() {
+                FOptionPane.showCardOptionDialog(card, message, title, icon == null ? null : FSkin.getImages().get(icon), options, defaultOption, this);
+            }
+        }.invokeAndWait();
+    }
+
+    @Override
     public <T> T showInputDialog(final String message, final String title, final FSkinProp icon, final T initialInput, final T[] inputOptions) {
         return new WaitCallback<T>() {
             @Override

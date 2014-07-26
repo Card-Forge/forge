@@ -26,7 +26,7 @@ public class GuiDialog {
         final String title = c == null ? "Question" : c.getName() + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         String[] opts = options == null ? defaultConfirmOptions : options;
-        FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
+        FOptionPane.showCardOptionDialog(c, questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
             @Override
             public void run(Integer result) {
                 callback.run(result == 0);
