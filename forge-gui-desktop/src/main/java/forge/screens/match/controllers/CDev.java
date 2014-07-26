@@ -120,7 +120,7 @@ public enum CDev implements ICDoc {
 
     private final MouseListener madWinGame = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-        setPlayerLife(); }
+        winGame(); }
     };
     public void winGame() {
         GuiDisplayUtil.devModeWinGame();
