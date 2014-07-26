@@ -23,7 +23,12 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
     @SuppressWarnings("unchecked")
     public TabPageScreen(TabPage<T>... tabPages0) {
-        super(new TabHeader<T>(tabPages0));
+        this(tabPages0, true);
+    }
+
+    @SuppressWarnings("unchecked")
+    public TabPageScreen(TabPage<T>[] tabPages0, boolean showBackButton) {
+        super(new TabHeader<T>(tabPages0, showBackButton));
         tabHeader = (TabHeader<T>)getHeader(); //cache reference to tab header with proper type
 
         int index = 0;
@@ -116,14 +121,19 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             }
         });
 
-        public TabHeader(TabPage<T>[] tabPages) {
-            btnBack = add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    Forge.back();
-                }
-            }).build());
-            btnBack.setSize(BACK_BUTTON_WIDTH, HEIGHT);
+        public TabHeader(TabPage<T>[] tabPages, boolean showBackButton) {
+            if (showBackButton) {
+                btnBack = add(new FLabel.Builder().iconScaleAuto(false).icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(HAlignment.CENTER).command(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        Forge.back();
+                    }
+                }).build());
+                btnBack.setSize(BACK_BUTTON_WIDTH, HEIGHT);
+            }
+            else {
+                btnBack = null;
+            }
 
             for (TabPage<T> tabPage : tabPages) {
                 scroller.add(tabPage.tab);
@@ -143,8 +153,10 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         @Override
         public void drawOverlay(Graphics g) {
             //draw right border for back button
-            float x = btnBack.getWidth() - LINE_THICKNESS / 2;
-            g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, x, 0, x, getHeight());
+            if (btnBack != null) {
+                float x = btnBack.getWidth() - LINE_THICKNESS / 2;
+                g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, x, 0, x, getHeight());
+            }
 
             //draw bottom border for header
             float y = HEIGHT - LINE_THICKNESS / 2;
@@ -153,7 +165,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         protected void doLayout(float width, float height) {
-            float x = btnBack.getWidth();
+            float x = btnBack != null ? btnBack.getWidth() : 0;
             scroller.setBounds(x, 0, width - x, height);
         }
     }

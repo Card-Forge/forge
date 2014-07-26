@@ -51,6 +51,8 @@ import forge.util.Utils;
 import forge.util.storage.IStorage;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
+    public static FSkinImage MAIN_DECK_ICON = FSkinImage.DECKLIST;
+    public static FSkinImage SIDEBOARD_ICON = FSkinImage.FLASHBACK;
     private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     public enum EditorType {
@@ -818,12 +820,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Main:
                 captionPrefix = "Main";
                 cardManager.setCaption("Main Deck");
-                icon = FSkinImage.DECKLIST;
+                icon = MAIN_DECK_ICON;
                 break;
             case Sideboard:
                 captionPrefix = "Side";
                 cardManager.setCaption("Sideboard");
-                icon = FSkinImage.FLASHBACK;
+                icon = SIDEBOARD_ICON;
                 break;
             case Commander:
                 captionPrefix = "Commander";

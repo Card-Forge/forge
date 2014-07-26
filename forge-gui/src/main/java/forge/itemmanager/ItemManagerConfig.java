@@ -79,7 +79,9 @@ public enum ItemManagerConfig {
     PRECON_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
     QUEST_EVENT_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
-            null, null, 3, 0);
+            null, null, 3, 0),
+    SIDEBOARD(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
+            GroupDef.DEFAULT, ColumnDef.CMC, 3, 0);
 
     private Map<ColumnDef, ItemColumnConfig> cols;
     private boolean showUniqueCardsOption;

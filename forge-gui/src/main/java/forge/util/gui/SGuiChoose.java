@@ -195,12 +195,6 @@ public class SGuiChoose {
         return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck) {
-        Collections.sort(deck);
-        Collections.sort(sideboard);
-        return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
-    }
-    
     /**
      * Ask the user to insert an object into a list of other objects. The
      * current implementation requires the user to cancel in order to get the

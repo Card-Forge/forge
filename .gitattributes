@@ -1123,6 +1123,7 @@ forge-gui-mobile/src/forge/deck/AddBasicLandsDialog.java -text
 forge-gui-mobile/src/forge/deck/FDeckChooser.java -text
 forge-gui-mobile/src/forge/deck/FDeckEditor.java -text
 forge-gui-mobile/src/forge/deck/FDeckViewer.java -text
+forge-gui-mobile/src/forge/deck/FSideboardDialog.java -text
 forge-gui-mobile/src/forge/deck/FVanguardChooser.java -text
 forge-gui-mobile/src/forge/error/BugReportDialog.java -text
 forge-gui-mobile/src/forge/itemmanager/CardManager.java -text

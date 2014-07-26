@@ -19,8 +19,10 @@ import forge.assets.FSkinProp;
 import forge.assets.FTextureImage;
 import forge.assets.ISkinImage;
 import forge.assets.ImageCache;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
+import forge.deck.FSideboardDialog;
 import forge.error.BugReportDialog;
 import forge.events.UiEvent;
 import forge.game.Game;
@@ -171,6 +173,17 @@ public class GuiMobile implements IGuiBase {
             @Override
             public void run() {
                 GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+            }
+        }.invokeAndWait();
+    }
+
+    @Override
+    public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main) {
+        return new WaitCallback<List<PaperCard>>() {
+            @Override
+            public void run() {
+                FSideboardDialog sideboardDialog = new FSideboardDialog(sideboard, main, this);
+                sideboardDialog.show();
             }
         }.invokeAndWait();
     }

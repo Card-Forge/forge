@@ -28,6 +28,7 @@ import com.google.common.base.Function;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
 import forge.control.FControl;
+import forge.deck.CardPool;
 import forge.error.BugReportDialog;
 import forge.events.UiEvent;
 import forge.game.Game;
@@ -178,6 +179,11 @@ public class GuiDesktop implements IGuiBase {
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
         return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
+    }
+
+    @Override
+    public List<PaperCard> sideboard(CardPool sideboard, CardPool main) {
+        return GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
     }
 
     @Override

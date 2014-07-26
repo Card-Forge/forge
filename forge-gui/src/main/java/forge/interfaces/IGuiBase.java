@@ -13,6 +13,7 @@ import com.google.common.base.Function;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.assets.ISkinImage;
+import forge.deck.CardPool;
 import forge.events.UiEvent;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -51,6 +52,7 @@ public interface IGuiBase {
     <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display);
     <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode);
+    List<PaperCard> sideboard(CardPool sideboard, CardPool main);
     String showFileDialog(String title, String defaultDir);
     File getSaveFile(File defaultFile);
     void showCardList(final String title, final String message, final List<PaperCard> list);

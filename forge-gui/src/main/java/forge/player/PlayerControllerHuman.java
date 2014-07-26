@@ -150,7 +150,7 @@ public class PlayerControllerHuman extends PlayerController {
                 }
                 // Sideboard rules have changed for M14, just need to consider min maindeck and max sideboard sizes
                 // No longer need 1:1 sideboarding in non-limited formats
-                newMain = SGuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
+                newMain = GuiBase.getInterface().sideboard(sideboard, main);
             } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
         }
         return newMain;
