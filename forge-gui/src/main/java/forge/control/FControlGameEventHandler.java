@@ -88,13 +88,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
-        // Require EDT here?
-        List<Object> options = new ArrayList<Object>();
+        List<Card> options = new ArrayList<Card>();
         for (final Entry<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards.entries()) {
-            options.add("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            Card fakeCard = new Card(-1); //use fake card so real cards appear with proper formatting
+            fakeCard.setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            options.add(fakeCard);
             options.add(kv.getValue());
         }
-        SGuiChoose.one("These cards were chosen to ante", options);
+        SGuiChoose.reveal("These cards were chosen to ante", options);
         return null;
     }
 
@@ -113,9 +114,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    private final Runnable unlockGameThreadOnGameOver = new Runnable() { @Override public void run() {
-        GuiBase.getInterface().getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
-    } };
+    private final Runnable unlockGameThreadOnGameOver = new Runnable() {
+        @Override
+        public void run() {
+            GuiBase.getInterface().getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+        }
+    };
 
     @Override
     public Void visit(GameEventGameOutcome ev) {
