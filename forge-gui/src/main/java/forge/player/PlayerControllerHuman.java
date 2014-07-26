@@ -438,7 +438,7 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean willPutCardOnTop(Card c) {
         PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(c.getName());
         Card c1 = (pc != null ? Card.fromPaperCard(pc, null) : c);
-        return SGuiDialog.confirm(c1, "Where will you put " + c1.getName() + " in your library", new String[]{"Top", "Bottom"});
+        return SGuiDialog.confirm(c1, "Put " + c1.getName() + " on the top or bottom of your library?", new String[]{"Top", "Bottom"});
     }
 
     @Override
