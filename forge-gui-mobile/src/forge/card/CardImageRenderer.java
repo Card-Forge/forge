@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-import com.google.common.cache.LoadingCache;
 
 import forge.TextureRenderer;
 import forge.assets.FSkinColor;
@@ -16,7 +15,6 @@ import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
-import forge.item.IPaperCard;
 
 public class CardImageRenderer {
     private static final float IMAGE_WIDTH = 360;
@@ -28,10 +26,7 @@ public class CardImageRenderer {
     private static final FSkinFont TEXT_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.95f);
     private static final FSkinFont PT_FONT = NAME_FONT;
 
-    public static Texture createCardImage(IPaperCard pc, LoadingCache<String, Texture> cache, String imageKey) {
-        return createCardImage(Card.getCardForUi(pc), cache, imageKey);
-    }
-    public static Texture createCardImage(Card card, LoadingCache<String, Texture> cache, String imageKey) {
+    public static Texture createCardImage(Card card) {
         float w = IMAGE_WIDTH;
         float h = IMAGE_HEIGHT;
 
@@ -90,9 +85,7 @@ public class CardImageRenderer {
         Color ptColor2 = color2 == null ? null : FSkinColor.tintColor(Color.WHITE, color2, CardRenderer.PT_BOX_TINT);
         drawPtBox(renderer, card, idForeColor, ptColor1, ptColor2, x, y, w, ptBoxHeight);
 
-        Texture image = renderer.finish();
-        cache.put(imageKey, image);
-        return image;
+        return renderer.finish();
     }
 
     private static void drawHeader(TextureRenderer renderer, Card card, boolean canShow, Color color1, Color color2, float x, float y, float w, float h) {

@@ -57,13 +57,14 @@ public class CardRenderer {
         float w = width - 2 * FDialog.INSETS;
         float h = height - 2 * FDialog.INSETS;
 
-        final Texture image;
+        final String key;
         if (FControl.mayShowCard(card) || FDialog.isDialogOpen()) { //support showing if card revealed in dialog
-            image = ImageCache.getOrCreateImage(card);
+            key = card.getImageKey();
         }
         else { //only show card back if can't show card
-            image = ImageCache.getImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
+            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
         }
+        Texture image = ImageCache.getImage(key, true);
         if (image == null || image == ImageCache.defaultImage) { return false; } //don't support drawing zoom for null or default textures
 
         float imageWidth = image.getWidth();
