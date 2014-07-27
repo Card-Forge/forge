@@ -922,7 +922,7 @@ public class GameAction {
 
         // Check if Card Aura is attached to is a legal target
         final GameEntity entity = c.getEnchanting();
-        SpellAbility sa = c.getSpells().get(0);
+        SpellAbility sa = c.getFirstAttachSpell();
         if (c.isBestowed()) {
             for (SpellAbility s : c.getSpellAbilities()) {
                 if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
@@ -939,7 +939,7 @@ public class GameAction {
 
         if (entity instanceof Card) {
             final Card perm = (Card) entity;
-            ZoneType tgtZone = tgt.getZone().get(0);
+            final ZoneType tgtZone = tgt.getZone().get(0);
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c, true) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);

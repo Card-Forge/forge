@@ -2651,6 +2651,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         return sas.isEmpty() ? null : sas.get(0);
     }
 
+    /**
+     * @return the first {@link SpellAbility} marked as a Spell with API type
+     * {@link ApiType#Attach} in this {@link Card}, or {@code null} if no such
+     * object exists.
+     * @see SpellAbility#isSpell()
+     */
+    public final SpellAbility getFirstAttachSpell() {
+    	for (final SpellAbility sa : this.getSpells()) {
+    		if (sa.isSpell() && sa.getApi() == ApiType.Attach) {
+    			return sa;
+    		}
+    	}
+    	return null;
+    }
 
     /**
      * <p>
@@ -8526,7 +8540,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean
      */
     public final boolean canBeEnchantedBy(final Card aura, final boolean checkSBA) {
-        SpellAbility sa = aura.getFirstSpellAbility();
+        SpellAbility sa = aura.getFirstAttachSpell();
         if (aura.isBestowed()) {
             for (SpellAbility s : aura.getSpellAbilities()) {
                 if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {

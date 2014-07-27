@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -10,6 +12,7 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -166,6 +169,11 @@ public class AnimateEffect extends AnimateEffectBase {
                 }
             }
 
+            if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
+                c.removeSpellAbility(sa);
+                removedAbilities.add(sa);
+            }
+
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
@@ -307,7 +315,24 @@ public class AnimateEffect extends AnimateEffectBase {
                     game.getEndOfTurn().addUntil(unanimate);
                 }
             }
-            
+
+            if (sa.hasParam("RevertCost")) {
+            	final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
+            	final String desc = this.getStackDescription(sa);
+                final SpellAbility revertSA = new AbilityStatic(c, cost) {
+                    @Override
+                    public void resolve() {
+                        unanimate.run();
+                        c.removeSpellAbility(this);
+                    }
+                    @Override
+                    public String getDescription() {
+                        return cost + ": End Effect: " + desc;
+                    }
+                };
+                c.addSpellAbility(revertSA);
+            }
+
             game.fireEvent(new GameEventCardStatsChanged(c));
         }
     } // animateResolve extends SpellEffect {
