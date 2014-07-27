@@ -10,7 +10,6 @@ public enum CardCharacteristicName {
     Flipped,
     Cloner,
     Transformed,
-    Licid,
     Cloned, 
     LeftSplit,
     RightSplit;

@@ -7,9 +7,7 @@ public enum CardSplitType
     None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
     Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardCharacteristicName.Transformed),
     Split(FaceSelectionMethod.COMBINE, CardCharacteristicName.RightSplit),
-    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardCharacteristicName.Flipped),
-    // used by 12 licid creatures to switch type into enchantment aura
-    Licid(FaceSelectionMethod.USE_PRIMARY_FACE, CardCharacteristicName.Licid); 
+    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardCharacteristicName.Flipped);
 
     private CardSplitType(FaceSelectionMethod calcMode, CardCharacteristicName stateName) {
         method = calcMode;
