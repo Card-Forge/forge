@@ -147,7 +147,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (params.containsKey("Planeswalker")) {
             this.setPlaneswalker(true);
-            this.setSorcerySpeed(true);
         }
 
         if (params.containsKey("IsPresent")) {
@@ -373,6 +372,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.isPwAbility()) {
+            if (!c.hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed.")
+                    && !activator.canCastSorcery()) {
+                return false;
+            }
             final int limits = c.getKeywordAmount("May activate CARDNAME's loyalty abilities once");
             int numActivates = 0;
             for (final SpellAbility pwAbs : c.getAllSpellAbilities()) {

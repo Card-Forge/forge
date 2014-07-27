@@ -71,6 +71,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Commander);
 
         commanderPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
+        commanderPool.add(FModel.getMagicDb().getCommonCards().getCard("Teferi, Temporal Archmage"));
         normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
 
         CardManager catalogManager = new CardManager(true);

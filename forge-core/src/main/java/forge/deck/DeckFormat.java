@@ -131,9 +131,8 @@ public enum DeckFormat {
         	if (null == cmd || cmd.isEmpty()) {
         		return "is missing a commander";
         	}
-        	if (!cmd.get(0).getRules().getType().isLegendary()
-        			|| !cmd.get(0).getRules().getType().isCreature()) {
-        	    // TODO: Teferi, Temporal Archmage
+        	if (!cmd.get(0).getRules().getOracleText().contains("can be your commander")
+        	        && (!cmd.get(0).getRules().getType().isLegendary() || !cmd.get(0).getRules().getType().isCreature())) {
         		return "has a commander that is not a legendary creature";
         	}
 
