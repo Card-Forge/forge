@@ -46,9 +46,8 @@ public enum CSubmenuQuestPrefs implements ICDoc {
         int val = Integer.parseInt(i0.getText());
         resetErrors();
 
-        String validationError = QuestPreferencesHandler.validatePreference(i0.getQPref(), val, prefs);
-        if( null != validationError)
-        {
+        String validationError = prefs.validatePreference(i0.getQPref(), val);
+        if (validationError != null) {
             showError(i0, validationError);
             return;
         }

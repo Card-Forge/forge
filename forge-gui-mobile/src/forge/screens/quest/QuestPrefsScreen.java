@@ -4,6 +4,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.model.FModel;
+import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.screens.FScreen;
 import forge.toolbox.FContainer;
@@ -12,6 +13,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FNumericTextField;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
@@ -167,7 +169,7 @@ public class QuestPrefsScreen extends FScreen {
         private static final float FIELD_WIDTH = new FTextField("99999").getAutoSizeWidth(); //base width on 5 digit number
 
         private final FLabel label = add(new FLabel.Builder().build());
-        private final FNumericTextField field = add(new FNumericTextField());
+        private final OptionField field = add(new OptionField());
         private final QPref pref;
         private final PrefsGroup group;
 
@@ -182,6 +184,46 @@ public class QuestPrefsScreen extends FScreen {
         protected void doLayout(float width, float height) {
             label.setBounds(0, 0, width - FIELD_WIDTH - PADDING, height);
             field.setBounds(width - FIELD_WIDTH, 0, FIELD_WIDTH, height);
+        }
+
+        private class OptionField extends FNumericTextField {
+            private OptionField() {
+            }
+
+            @Override
+            protected boolean validate() {
+                if (super.validate()) {
+                    final QuestPreferences prefs = FModel.getQuestPreferences();
+
+                    int val = Integer.parseInt(getText());
+
+                    String validationError = prefs.validatePreference(pref, val);
+                    if (validationError != null) {
+                        String prefType;
+                        switch (group) {
+                        case REWARDS:
+                            prefType = "Rewards";
+                            break;
+                        case BOOSTER:
+                            prefType = "Booster Pack Ratios";
+                            break;
+                        case SHOP:
+                            prefType = "Shop Preferences";
+                            break;
+                        default:
+                            prefType = "Difficulty Adjustments";
+                            break;
+                        }
+                        FOptionPane.showErrorDialog(validationError, "Save Failed - " + prefType);
+                        return false;
+                    }
+
+                    prefs.setPref(pref, getText());
+                    prefs.save();
+                    return true;
+                }
+                return false;
+            }
         }
     }
 }

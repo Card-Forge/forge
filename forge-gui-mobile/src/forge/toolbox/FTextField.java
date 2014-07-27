@@ -60,7 +60,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         selLength = 0;
     }
 
-    private void insertText(String text0) {
+    protected void insertText(String text0) {
         int insertLength = text0.length();
         if (selStart > 0) {
             text0 = text.substring(0, selStart) + text0;
@@ -280,18 +280,33 @@ public class FTextField extends FDisplayObject implements ITextField {
 
             @Override
             public void onInputEnd() {
-                if (changedHandler != null && !text.equals(textBeforeKeyInput)) {
-                    //handle change event if text changed during input
-                    changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
-                }
-                isEditing = false;
-                selStart = 0;
-                selLength = 0;
-                textBeforeKeyInput = null;
+                endEdit();
             }
         });
         isEditing = true;
         return true;
+    }
+
+    protected boolean validate() {
+        return true;
+    }
+
+    protected void endEdit() {
+        if (!text.equals(textBeforeKeyInput)) {
+            if (validate()) {
+                if (changedHandler != null) {
+                    //handle change event if text changed during input
+                    changedHandler.handleEvent(new FEvent(FTextField.this, FEventType.CHANGE, textBeforeKeyInput));
+                }
+            }
+            else { //restore previous text if new text isn't valid
+                setText(textBeforeKeyInput);
+            }
+        }
+        isEditing = false;
+        selStart = 0;
+        selLength = 0;
+        textBeforeKeyInput = null;
     }
 
     @Override

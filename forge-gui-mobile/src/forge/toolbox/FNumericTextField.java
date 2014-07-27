@@ -18,6 +18,37 @@ public class FNumericTextField extends FTextField {
         }
         if (value == value0) { return; }
         value = value0;
-        setText(String.valueOf(value));
+        super.setText(String.valueOf(value));
+    }
+
+    @Override
+    protected boolean validate() {
+        return getText().matches("\\d*");
+    }
+
+    @Override
+    public void setText(String text0) {
+        if (text0.length() > 0) {
+            //prevent inserting non-numbers
+            text0 = text0.replaceAll("\\D", "");
+            if (text0.length() == 0) {
+                return;
+            }
+        }
+        super.setText(text0);
+        value = Integer.parseInt(getText());
+    }
+
+    @Override
+    protected void insertText(String text0) {
+        if (text0.length() > 0) {
+            //prevent inserting non-numbers
+            text0 = text0.replaceAll("\\D", "");
+            if (text0.length() == 0) {
+                return;
+            }
+        }
+        super.insertText(text0);
+        value = Integer.parseInt(getText());
     }
 }

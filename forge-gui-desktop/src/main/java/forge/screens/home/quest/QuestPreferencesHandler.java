@@ -337,9 +337,8 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         int val = Integer.parseInt(i0.getText());
         resetErrors();
 
-        String validationError = validatePreference(i0.getQPref(), val, prefs);
-        if( null != validationError)
-        {
+        String validationError = prefs.validatePreference(i0.getQPref(), val);
+        if (validationError != null) {
             showError(i0, validationError);
             return;
         }
@@ -347,84 +346,6 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         prefs.setPref(i0.getQPref(), i0.getText());
         prefs.save();
         i0.setPreviousText(i0.getText());
-    }
-
-    public static String validatePreference(QPref qpref, int val, QuestPreferences current) {
-        int temp1, temp2;
-        switch (qpref) {
-            case STARTING_CREDITS_EASY: case STARTING_CREDITS_MEDIUM:
-            case STARTING_CREDITS_HARD: case STARTING_CREDITS_EXPERT:
-            case REWARDS_MILLED: case REWARDS_MULLIGAN0:
-            case REWARDS_ALTERNATIVE: case REWARDS_TURN5:
-                if (val > 500) {
-                    return "Value too large (maximum 500).";
-                }
-                break;
-            case BOOSTER_COMMONS:
-                temp1 = current.getPrefInt(QPref.BOOSTER_UNCOMMONS);
-                temp2 = current.getPrefInt(QPref.BOOSTER_RARES);
-
-                if (temp1 + temp2 + val > 15) {
-                    return "Booster packs must have maximum 15 cards.";
-                }
-                break;
-            case BOOSTER_UNCOMMONS:
-                temp1 = current.getPrefInt(QPref.BOOSTER_COMMONS);
-                temp2 = current.getPrefInt(QPref.BOOSTER_RARES);
-
-                if (temp1 + temp2 + val > 15) {
-                    return "Booster packs must have maximum 15 cards.";
-                }
-                break;
-            case BOOSTER_RARES:
-                temp1 = current.getPrefInt(QPref.BOOSTER_COMMONS);
-                temp2 = current.getPrefInt(QPref.BOOSTER_UNCOMMONS);
-
-                if (temp1 + temp2 + val > 15) {
-                    return "Booster packs must have maximum 15 cards.";
-                }
-                break;
-            case REWARDS_TURN1:
-                if (val > 2000) {
-                    return "Value too large (maximum 2000).";
-                }
-                break;
-            case SHOP_STARTING_PACKS:
-            case SHOP_SINGLES_COMMON: case SHOP_SINGLES_UNCOMMON: case SHOP_SINGLES_RARE:
-                if (val < 0) {
-                    return "Value too small (minimum 0).";
-                } else if (val > 15) {
-                    return "Value too large (maximum 15).";
-                }
-                break;
-            case SHOP_WINS_FOR_ADDITIONAL_PACK: case SHOP_MAX_PACKS:
-                if (val < 1) {
-                    return "Value too small (minimum 1).";
-                } else if (val > 25) {
-                    return "Value too large (maximum 25).";
-                }
-                break;
-            case WINS_UNLOCK_SET:
-                if (val < 1) {
-                    return "Value too small (minimum 1).";
-                } else if (val > 100) {
-                    return "Value too large (maximum 100).";
-                }
-                break;
-            case STARTING_POOL_COLOR_BIAS:
-                if (val < 1) {
-                    return "Bias value too small (minimum 1).";
-                } else if (val > 10) {
-                    return "Bias value too large (maximum 10).";
-                }
-                break;
-            default:
-                if (val > 100) {
-                    return "Value too large (maximum 100).";
-                }
-                break;
-        }
-        return null;
     }
 
     private void showError(PrefInput i0, String s0) {
