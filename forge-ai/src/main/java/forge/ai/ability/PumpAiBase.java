@@ -131,7 +131,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (ph.isPlayerTurn(human) && (combat == null || !combat.isAttacking(card) || card.getNetCombatDamage() <= 0)) {
                 return false;
             }
-        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
+        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")
+                || keyword.endsWith("CARDNAME attacks each combat if able.")) {
             if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card, human) || !CombatUtil.canBeBlocked(card, ai.getOpponent())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;

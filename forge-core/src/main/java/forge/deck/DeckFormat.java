@@ -133,6 +133,7 @@ public enum DeckFormat {
         	}
         	if (!cmd.get(0).getRules().getType().isLegendary()
         			|| !cmd.get(0).getRules().getType().isCreature()) {
+        	    // TODO: Teferi, Temporal Archmage
         		return "has a commander that is not a legendary creature";
         	}
 

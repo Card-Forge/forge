@@ -506,7 +506,8 @@ public class ComputerUtilCard {
         }
         if (c.hasKeyword("CARDNAME can't block.")) {
             value -= 10;
-        } else if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
+        } else if (c.hasKeyword("CARDNAME attacks each turn if able.")
+                || c.hasKeyword("CARDNAME attacks each combat if able.")) {
             value -= 10;
         } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
             value -= 10;

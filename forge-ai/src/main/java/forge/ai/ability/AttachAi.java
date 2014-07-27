@@ -1234,7 +1234,7 @@ public class AttachAi extends SpellAbilityAi {
             if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
                 return false;
             }
-        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
+        } else if (keyword.endsWith("CARDNAME attacks each turn if able.") || keyword.endsWith("CARDNAME attacks each combat if able.")) {
             if (!CombatUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true) || ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }

@@ -75,22 +75,24 @@ public class InputAttack extends InputSyncronizedBase {
 
         List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-            if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
-                for (GameEntity def : defenders) {
-                    if (CombatUtil.canAttack(c, def, combat)) {
-                        combat.addAttacker(c, def);
-                        GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, currentDefender));
-                        break;
-                    }
-                }
-            }
-            else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+            if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
                 final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
                 final String defined = c.getKeyword().get(i).split(":")[1];
                 final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
                 if (player != null && CombatUtil.canAttack(c, player, combat)) {
                     combat.addAttacker(c, player);
                     GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, player));
+                    continue;
+                }
+            }
+            if (c.hasKeyword("CARDNAME attacks each combat if able.") || 
+                    (c.hasKeyword("CARDNAME attacks each turn if able.") && !c.getDamageHistory().getCreatureAttackedThisTurn())) {
+                for (GameEntity def : defenders) {
+                    if (CombatUtil.canAttack(c, def, combat)) {
+                        combat.addAttacker(c, def);
+                        GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, currentDefender));
+                        break;
+                    }
                 }
             }
         }
