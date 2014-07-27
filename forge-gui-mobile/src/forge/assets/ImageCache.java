@@ -25,6 +25,7 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 
 import forge.ImageKeys;
+import forge.card.CardImageRenderer;
 import forge.game.card.Card;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
@@ -63,9 +64,11 @@ public class ImageCache {
         Texture defImage = null;
         try {
             defImage = new Texture(Gdx.files.absolute(ForgeConstants.NO_CARD_FILE));
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             System.err.println("could not load default card image");
-        } finally {
+        }
+        finally {
             defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA8888) : defImage; 
         }
     }
@@ -76,20 +79,34 @@ public class ImageCache {
     }
 
     public static Texture getImage(Card card) {
-        final String key;
         if (!FControl.mayShowCard(card) || card.isFaceDown()) {
-            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
+            return getImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
         }
-        else {
-            key = card.getImageKey();
+        return getOrCreateImage(card);
+    }
+
+    public static Texture getOrCreateImage(Card card) {
+        String imageKey = card.getImageKey();
+        Texture image = getImage(imageKey, false);
+        if (image == null) {
+            image = CardImageRenderer.createCardImage(card, cache, imageKey);
         }
-        return getImage(key, true);
+        return image;
     }
 
     public static Texture getImage(PaperCard pc) {
-        return getImage(ImageKeys.getImageKey(pc, false), true);
+        String imageKey = ImageKeys.getImageKey(pc, false);
+        Texture image = getImage(imageKey, false);
+        if (image == null) {
+            image = CardImageRenderer.createCardImage(pc, cache, imageKey);
+        }
+        return image;
     }
+
     public static Texture getImage(InventoryItem ii) {
+        if (ii instanceof PaperCard) {
+            return getImage((PaperCard)ii);
+        }
         return getImage(ImageKeys.getImageKey(ii, false), true);
     }
 
@@ -135,7 +152,7 @@ public class ImageCache {
         // Load from file and add to cache if not found in cache initially.
         Texture image;
         try {
-            image = ImageCache.cache.get(imageKey);
+            image = cache.get(imageKey);
         }
         catch (final ExecutionException ex) {
             if (!(ex.getCause() instanceof NullPointerException)) {
@@ -150,7 +167,7 @@ public class ImageCache {
         // No image file exists for the given key so optionally associate with
         // a default "not available" image and add to cache for given key.
         if (image == null) {
-            if (useDefaultIfNotFound) { 
+            if (useDefaultIfNotFound) {
                 image = defaultImage;
                 cache.put(imageKey, defaultImage);
             }

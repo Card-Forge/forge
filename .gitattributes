@@ -1102,6 +1102,7 @@ forge-gui-mobile/pom.xml -text
 forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/Graphics.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
+forge-gui-mobile/src/forge/TextureRenderer.java -text
 forge-gui-mobile/src/forge/assets/AssetsDownloader.java -text
 forge-gui-mobile/src/forge/assets/BitmapFontWriter.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
@@ -1117,6 +1118,7 @@ forge-gui-mobile/src/forge/assets/ImageCache.java -text
 forge-gui-mobile/src/forge/assets/ImageLoader.java -text
 forge-gui-mobile/src/forge/assets/TextRenderer.java -text
 forge-gui-mobile/src/forge/card/CardFaceSymbols.java -text
+forge-gui-mobile/src/forge/card/CardImageRenderer.java -text
 forge-gui-mobile/src/forge/card/CardRenderer.java -text
 forge-gui-mobile/src/forge/card/CardZoom.java -text
 forge-gui-mobile/src/forge/deck/AddBasicLandsDialog.java -text

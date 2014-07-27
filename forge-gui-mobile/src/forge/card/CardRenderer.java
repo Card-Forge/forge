@@ -41,8 +41,8 @@ public class CardRenderer {
     private static final FSkinFont TEXT_FONT = TYPE_FONT;
     private static final FSkinFont ID_FONT = TEXT_FONT;
     private static final FSkinFont PT_FONT = NAME_FONT;
-    private static final float NAME_BOX_TINT = 0.2f;
-    private static final float TEXT_BOX_TINT = 0.1f;
+    public static final float NAME_BOX_TINT = 0.2f;
+    public static final float TEXT_BOX_TINT = 0.1f;
     public static final float PT_BOX_TINT = 0.2f;
     public static final float MANA_COST_PADDING = Utils.scaleMin(3);
     public static final float SET_BOX_MARGIN = Utils.scaleMin(1);
@@ -57,14 +57,13 @@ public class CardRenderer {
         float w = width - 2 * FDialog.INSETS;
         float h = height - 2 * FDialog.INSETS;
 
-        final String key;
+        final Texture image;
         if (FControl.mayShowCard(card) || FDialog.isDialogOpen()) { //support showing if card revealed in dialog
-            key = card.getImageKey();
+            image = ImageCache.getOrCreateImage(card);
         }
         else { //only show card back if can't show card
-            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
+            image = ImageCache.getImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
         }
-        Texture image = ImageCache.getImage(key, true);
         if (image == null || image == ImageCache.defaultImage) { return false; } //don't support drawing zoom for null or default textures
 
         float imageWidth = image.getWidth();
