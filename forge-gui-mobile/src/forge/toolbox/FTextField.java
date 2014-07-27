@@ -18,7 +18,7 @@ import forge.util.Utils;
 public class FTextField extends FDisplayObject implements ITextField {
     private static final FSkinFont DEFAULT_FONT = FSkinFont.get(14);
     private static final float BORDER_THICKNESS = Utils.scaleX(1);
-    protected static final float PADDING = Utils.scaleX(5);
+    public static final float PADDING = Utils.scaleX(5);
     protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     protected static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
     protected static final FSkinColor GHOST_TEXT_COLOR = FORE_COLOR.alphaColor(0.7f);
@@ -126,11 +126,11 @@ public class FTextField extends FDisplayObject implements ITextField {
     }
 
     public float getAutoSizeWidth() {
-        return PADDING + font.getBounds(text).width + getRightPadding();
+        return getLeftPadding() + font.getBounds(text).width + getRightPadding();
     }
 
     private int getCharIndexAtPoint(float x, float y) {
-        float charLeft = getLeftPadding();
+        float charLeft = getTextLeft();
         if (x < charLeft) {
             return 0;
         }
@@ -320,7 +320,13 @@ public class FTextField extends FDisplayObject implements ITextField {
 
         //draw selection if key input is active
         if (isEditing) {
-            float selLeft = getLeftPadding();
+            float selLeft = getTextLeft();
+            if (alignment == HAlignment.CENTER) {
+                
+            }
+            else if (alignment == HAlignment.RIGHT) {
+                
+            }
             if (selStart > 0) {
                 selLeft += renderedFont.getBounds(text.substring(0, selStart)).width;
             }
@@ -355,6 +361,18 @@ public class FTextField extends FDisplayObject implements ITextField {
         }
         else if (!ghostText.isEmpty()) {
             g.drawText(ghostText, renderedFont, GHOST_TEXT_COLOR, getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
+        }
+    }
+
+    protected float getTextLeft() {
+        switch (alignment) {
+        case LEFT:
+        default:
+            return getLeftPadding();
+        case CENTER:
+            return getLeftPadding() + (getWidth() - getRightPadding() - getLeftPadding() - renderedFont.getBounds(text).width) / 2;
+        case RIGHT:
+            return getWidth() - getRightPadding() - renderedFont.getBounds(text).width;
         }
     }
 

@@ -213,12 +213,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 Forge.openScreen(new LoadQuestScreen());
             }
         }));
-        /*addItem(new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
+        addItem(new FMenuItem("Preferences", FSkinImage.SETTINGS, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(prefsScreen);
             }
-        }));*/
+        }));
     }
 
     @Override
