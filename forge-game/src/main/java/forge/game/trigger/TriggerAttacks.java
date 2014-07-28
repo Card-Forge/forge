@@ -93,6 +93,12 @@ public class TriggerAttacks extends Trigger {
             }
         }
 
+        if (this.mapParams.containsKey("DefendingPlayerPoisoned")) {
+        	if (((Player) runParams2.get("Attacked")).getPoisonCounters() == 0) {
+        		return false;
+        	}
+        }
+
         return true;
     }
 

@@ -309,6 +309,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * Find the smallest life total amongst this player's opponents.
+     * 
+     * @return the life total of the opponent with the least life.
+     */
+    public final int getOpponentsSmallestLifeTotal() {
+    	return Aggregates.min(this.getOpponents(), Accessors.FN_GET_LIFE_TOTAL);
+    }
+
+    /**
      * Find the greatest life total amongst this player's opponents.
      * 
      * @return the life total of the opponent with the most life.

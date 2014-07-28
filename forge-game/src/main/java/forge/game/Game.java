@@ -461,44 +461,6 @@ public class Game {
         return card;
     }
 
-    /**
-     * <p>
-     * compareTypeAmountInPlay.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int compareTypeAmountInPlay(final Player player, final String type) {
-        // returns the difference between player's
-        final Player opponent = player.getOpponent();
-        final List<Card> playerList = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), type);
-        final List<Card> opponentList = CardLists.getType(opponent.getCardsIn(ZoneType.Battlefield), type);
-        return (playerList.size() - opponentList.size());
-    }
-
-    /**
-     * <p>
-     * compareTypeAmountInGraveyard.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int compareTypeAmountInGraveyard(final Player player, final String type) {
-        // returns the difference between player's
-        final Player opponent = player.getOpponent();
-        final List<Card> playerList = CardLists.getType(player.getCardsIn(ZoneType.Graveyard), type);
-        final List<Card> opponentList = CardLists.getType(opponent.getCardsIn(ZoneType.Graveyard), type);
-        return (playerList.size() - opponentList.size());
-    }
-
     public List<Card> getCardsInGame() {
         final List<Card> all = new ArrayList<Card>();
         for (final Player player : getPlayers()) {

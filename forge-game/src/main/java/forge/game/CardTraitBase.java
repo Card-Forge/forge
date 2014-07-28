@@ -168,14 +168,6 @@ public abstract class CardTraitBase extends GameObject {
         if ("True".equalsIgnoreCase(params.get("Bloodthirst")) && !hostController.hasBloodthirst()) return false;
         if ("True".equalsIgnoreCase(params.get("FatefulHour")) && hostController.getLife() > 5) return false;
 
-        if ("You".equalsIgnoreCase(params.get("PlayersPoisoned")) && hostController.getPoisonCounters() == 0) return false;
-        if ("Opponent".equalsIgnoreCase(params.get("PlayersPoisoned")) && hostController.getOpponent().getPoisonCounters() == 0) return false;
-        if ("Each".equalsIgnoreCase(params.get("PlayersPoisoned"))) {
-            for( Player p : game.getPlayers())
-                if( p.getPoisonCounters() == 0 ) 
-                    return false;
-        }
-
         if (params.containsKey("LifeTotal")) {
             final String player = params.get("LifeTotal");
             String lifeCompare = "GE1";
@@ -184,8 +176,11 @@ public abstract class CardTraitBase extends GameObject {
             if (player.equals("You")) {
                 life = hostController.getLife();
             }
-            if (player.equals("Opponent")) {
-                life = hostController.getOpponent().getLife();
+            if (player.equals("OpponentSmallest")) {
+            	life = hostController.getOpponentsSmallestLifeTotal();
+            }
+            if (player.equals("OpponentGreatest")) {
+                life = hostController.getOpponentsGreatestLifeTotal();
             }
             if (player.equals("ActivePlayer")) {
                 life = game.getPhaseHandler().getPlayerTurn().getLife();
