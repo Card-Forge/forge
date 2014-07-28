@@ -6,10 +6,6 @@ import com.google.common.cache.CacheLoader;
 
 import forge.Forge;
 import forge.ImageKeys;
-import forge.card.CardImageRenderer;
-import forge.game.card.Card;
-import forge.item.PaperCard;
-import forge.model.FModel;
 import forge.properties.ForgeConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -92,8 +88,10 @@ final class ImageLoader extends CacheLoader<String, Texture> {
             setlessFilename = filename;
         }
 
+        //TODO: Consider uncommenting this block
         if (isCard) { //if image is for card, attempt to create image for it
-            int artIndex = 0;
+            if (setCode == null) {} //avoid warning, remove if below uncommented
+            /*int artIndex = 0;
             String cardName = setlessFilename;
             idx = cardName.indexOf('.');
             if (idx != -1) {
@@ -114,10 +112,8 @@ final class ImageLoader extends CacheLoader<String, Texture> {
             if (pc != null) {
                 ret = CardImageRenderer.createCardImage(Card.getCardForUi(pc));
                 if (ret != null) { return ret; }
-            }
+            }*/
         }
-
-        System.out.println("File not found, no image created: " + key);
         return null;
     }
 

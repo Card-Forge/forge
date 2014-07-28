@@ -26,6 +26,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardEdition;
+import forge.card.CardRenderer;
 import forge.card.CardRules;
 import forge.card.CardZoom;
 import forge.card.mana.ManaCostShard;
@@ -402,8 +403,7 @@ public class AddBasicLandsDialog extends FDialog {
             @Override
             public void draw(Graphics g) {
                 if (card == null) { return; }
-                Texture image = ImageCache.getImage(card);
-                g.drawImage(image, 0, 0, getWidth(), getHeight());
+                CardRenderer.drawCard(g, card, 0, 0, getWidth(), getHeight());
             }
         }
     }

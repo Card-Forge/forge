@@ -24,7 +24,7 @@ import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
-import forge.item.PaperCard;
+import forge.item.IPaperCard;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.FControl;
@@ -74,14 +74,17 @@ public class CardRenderer {
         float w = width - 2 * FDialog.INSETS;
         float h = height - 2 * FDialog.INSETS;
 
-        final String key;
+        final Texture image;
         if (FControl.mayShowCard(card) || FDialog.isDialogOpen()) { //support showing if card revealed in dialog
-            key = card.getImageKey();
+            image = ImageCache.getImage(card.getImageKey(), true);
+            if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
+                CardImageRenderer.drawCardImage(g, card, FDialog.INSETS, FDialog.INSETS, w, h);
+                return true;
+            }
         }
         else { //only show card back if can't show card
-            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
+            image = ImageCache.getImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
         }
-        Texture image = ImageCache.getImage(key, true);
         if (image == null || image == ImageCache.defaultImage) { return false; } //don't support drawing zoom for null or default textures
 
         float imageWidth = image.getWidth();
@@ -196,8 +199,8 @@ public class CardRenderer {
     public static final float CARD_ART_RATIO = 1.302f;
 
     //extract card art from the given card
-    public static TextureRegion getCardArt(PaperCard paperCard) {
-        return getCardArt(ImageKeys.getImageKey(paperCard, false), paperCard.getRules().getSplitType() == CardSplitType.Split);
+    public static TextureRegion getCardArt(IPaperCard pc) {
+        return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
     }
     public static TextureRegion getCardArt(Card card) {
         return getCardArt(card.getImageKey(), card.isSplitCard());
@@ -207,32 +210,37 @@ public class CardRenderer {
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
             if (image != null) {
-                float x, y;
-                float w = image.getWidth();
-                float h = image.getHeight();
-                if (isSplitCard) { //allow rotated image for split cards
-                    x = w * 33f / 250f;
-                    y = 0; //delay adjusting y and h until drawn
-                    w *= 106f / 250f;
+                if (image == ImageCache.defaultImage) {
+                    cardArt = FSkinImage.LOGO.getTextureRegion(); //use logo instead of cropping default image
                 }
                 else {
-                    x = w * 0.1f;
-                    y = h * 0.11f;
-                    w -= 2 * x;
-                    h *= 0.43f;
-                    float ratioRatio = w / h / CARD_ART_RATIO;
-                    if (ratioRatio > 1) { //if too wide, shrink width
-                        float dw = w * (ratioRatio - 1);
-                        w -= dw;
-                        x += dw / 2;
+                    float x, y;
+                    float w = image.getWidth();
+                    float h = image.getHeight();
+                    if (isSplitCard) { //allow rotated image for split cards
+                        x = w * 33f / 250f;
+                        y = 0; //delay adjusting y and h until drawn
+                        w *= 106f / 250f;
                     }
-                    else { //if too tall, shrink height
-                        float dh = h * (1 - ratioRatio);
-                        h -= dh;
-                        y += dh / 2;
+                    else {
+                        x = w * 0.1f;
+                        y = h * 0.11f;
+                        w -= 2 * x;
+                        h *= 0.43f;
+                        float ratioRatio = w / h / CARD_ART_RATIO;
+                        if (ratioRatio > 1) { //if too wide, shrink width
+                            float dw = w * (ratioRatio - 1);
+                            w -= dw;
+                            x += dw / 2;
+                        }
+                        else { //if too tall, shrink height
+                            float dh = h * (1 - ratioRatio);
+                            h -= dh;
+                            y += dh / 2;
+                        }
                     }
+                    cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
                 }
-                cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
                 cardArtCache.put(imageKey, cardArt);
             }
         }
@@ -257,15 +265,15 @@ public class CardRenderer {
             g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, PaperCard paperCard, int count, String suffix, float x, float y, float w, float h) {
-        CardRules cardRules = paperCard.getRules();
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h) {
+        CardRules cardRules = pc.getRules();
         if (cardRules != null) {
-            drawCardListItem(g, font, foreColor, getCardArt(paperCard), cardRules, paperCard.getEdition(),
-                    paperCard.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
+            drawCardListItem(g, font, foreColor, getCardArt(pc), cardRules, pc.getEdition(),
+                    pc.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
                     cardRules.getInitialLoyalty(), count, suffix, x, y, w, h);
         }
         else { //if fake card, just draw card name centered
-            String name = paperCard.getName();
+            String name = pc.getName();
             if (count > 0) { //preface name with count if applicable
                 name = count + " " + name;
             }
@@ -349,11 +357,11 @@ public class CardRenderer {
         }
         return false;
     }
-    public static boolean cardListItemTap(PaperCard paperCard, float x, float y, int count) {
+    public static boolean cardListItemTap(IPaperCard pc, float x, float y, int count) {
         float cardArtHeight = getCardListItemHeight();
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
-            CardZoom.show(Card.getCardForUi(paperCard));
+            CardZoom.show(Card.getCardForUi(pc));
             return true;
         }
         return false;
@@ -467,19 +475,48 @@ public class CardRenderer {
         g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
     }
 
-    public static void drawCardWithOverlays(Graphics g, Card card, float x, float y, float w, float h) {
-        Texture image = ImageCache.getImage(card);
+    public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h) {
+        Texture image = ImageCache.getImage(pc);
         if (image != null) {
-            g.drawImage(image, x, y, w, h);
+            if (image == ImageCache.defaultImage) {
+                CardImageRenderer.drawCardImage(g, Card.getCardForUi(pc), x, y, w, h);
+            }
+            else {
+                g.drawImage(image, x, y, w, h);
+            }
+            if (pc.isFoil()) { //draw foil effect if needed
+                Card card = Card.getCardForUi(pc);
+                if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
+                    card.setRandomFoil();
+                }
+                drawFoilEffect(g, card, x, y, w, h);
+            }
         }
         else { //draw cards without textures as just a black rectangle
             g.fillRect(Color.BLACK, x, y, w, h);
         }
-
-        boolean canShow = FControl.mayShowCard(card);
-        if (canShow) {
-            drawFoilEffect(g, card, x, y, w, h);
+    }
+    public static void drawCard(Graphics g, Card card, boolean canShow, float x, float y, float w, float h) {
+        Texture image = ImageCache.getImage(card);
+        if (image != null) {
+            if (image == ImageCache.defaultImage && canShow) {
+                CardImageRenderer.drawCardImage(g, card, x, y, w, h);
+            }
+            else {
+                g.drawImage(image, x, y, w, h);
+            }
+            if (canShow) {
+                drawFoilEffect(g, card, x, y, w, h);
+            }
         }
+        else { //draw cards without textures as just a black rectangle
+            g.fillRect(Color.BLACK, x, y, w, h);
+        }
+    }
+
+    public static void drawCardWithOverlays(Graphics g, Card card, float x, float y, float w, float h) {
+        boolean canShow = FControl.mayShowCard(card);
+        drawCard(g, card, canShow, x, y, w, h);
 
         float padding = w * 0.021f; //adjust for card border
         x += padding;
@@ -493,7 +530,7 @@ public class CardRenderer {
         color = FSkinColor.tintColor(Color.WHITE, color, CardRenderer.PT_BOX_TINT);
 
         //draw name and mana cost overlays if card is small or default card image being used
-        if (h <= NAME_COST_THRESHOLD || image == ImageCache.defaultImage) {
+        if (h <= NAME_COST_THRESHOLD) {
             if (showCardNameOverlay(card)) {
                 g.drawOutlinedText(card.getName(), FSkinFont.forHeight(h * 0.18f), Color.WHITE, Color.BLACK, x + padding, y + padding, w - 2 * padding, h * 0.4f, true, HAlignment.LEFT, false);
             }

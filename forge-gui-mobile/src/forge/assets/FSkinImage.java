@@ -352,6 +352,10 @@ public enum FSkinImage implements FImage {
         return h;
     }
 
+    public TextureRegion getTextureRegion() {
+        return textureRegion;
+    }
+
     public float getNearestHQWidth(float baseWidth) {
         return ImageUtil.getNearestHQSize(baseWidth, w);
     }

@@ -57,14 +57,16 @@ public class Graphics {
         shapeRenderer.dispose();
     }
 
-    public void startClip() {
-        startClip(0, 0, bounds.width, bounds.height);
+    public boolean startClip() {
+        return startClip(0, 0, bounds.width, bounds.height);
     }
-    public void startClip(float x, float y, float w, float h) {
+    public boolean startClip(float x, float y, float w, float h) {
         batch.flush(); //must flush batch to prevent other things not rendering
         if (!ScissorStack.pushScissors(new Rectangle(adjustX(x), adjustY(y, h), w, h))) {
             failedClipCount++; //tracked failed clips to prevent calling popScissors on endClip
+            return false;
         }
+        return true;
     }
     public void endClip() {
         if (failedClipCount == 0) {
@@ -456,15 +458,14 @@ public class Graphics {
     }
 
     public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {
-        startClip(x, y, w, h);
-
-        int tilesW = (int)(w / image.getWidth()) + 1;
-        int tilesH = (int)(h / image.getHeight()) + 1;  
-        batch.draw(image, adjustX(x), adjustY(y, h),
-                image.getWidth() * tilesW, 
-                image.getHeight() * tilesH, 
-                0, tilesH, tilesW, 0);
-
+        if (startClip(x, y, w, h)) { //only render if clip successful, otherwise it will escape bounds
+            int tilesW = (int)(w / image.getWidth()) + 1;
+            int tilesH = (int)(h / image.getHeight()) + 1;  
+            batch.draw(image, adjustX(x), adjustY(y, h),
+                    image.getWidth() * tilesW, 
+                    image.getHeight() * tilesH, 
+                    0, tilesH, tilesW, 0);
+        }
         endClip();
     }
 

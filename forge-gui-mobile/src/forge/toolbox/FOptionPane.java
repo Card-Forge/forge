@@ -1,7 +1,6 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Forge;
@@ -9,8 +8,8 @@ import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
-import forge.assets.ImageCache;
 import forge.assets.ImageUtil;
+import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.card.Card;
 import forge.screens.match.views.VPrompt;
@@ -110,10 +109,7 @@ public class FOptionPane extends FDialog {
                     float x = (getWidth() - w) / 2;
                     float y = 0;
 
-                    Texture image = ImageCache.getImage(card);
-                    if (image != null) {
-                        g.drawImage(image, x, y, w, h);
-                    }
+                    CardRenderer.drawCard(g, card, true, x, y, w, h);
                 }
             };
             cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);

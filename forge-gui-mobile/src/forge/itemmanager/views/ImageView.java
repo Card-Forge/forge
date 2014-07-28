@@ -14,6 +14,7 @@ import forge.deck.DeckProxy;
 import forge.game.card.Card;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.GroupDef;
 import forge.itemmanager.ItemColumn;
@@ -949,24 +950,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
             }
 
-            Texture img = ImageCache.getImage(item);
-            if (img != null) {
-                g.drawImage(img, x, y, w, h);
+            if (item instanceof PaperCard) {
+                CardRenderer.drawCard(g, (PaperCard)item, x, y, w, h);
             }
             else {
-                g.fillRect(Color.BLACK, x, y, w, h);
-                g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, HAlignment.CENTER, false);
-            }
-
-            //draw foil effect if needed
-            if (item instanceof IPaperCard) {
-                IPaperCard paperCard = (IPaperCard)item;
-                if (paperCard.isFoil()) {
-                    Card card = Card.getCardForUi(paperCard);
-                    if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
-                        card.setRandomFoil();
-                    }
-                    CardRenderer.drawFoilEffect(g, card, x, y, w, h);
+                Texture img = ImageCache.getImage(item);
+                if (img != null) {
+                    g.drawImage(img, x, y, w, h);
+                }
+                else {
+                    g.fillRect(Color.BLACK, x, y, w, h);
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, HAlignment.CENTER, false);
                 }
             }
         }

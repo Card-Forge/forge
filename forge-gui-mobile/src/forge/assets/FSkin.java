@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.FThreads;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
+import forge.card.CardImageRenderer;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -61,6 +62,7 @@ public class FSkin {
                             public void run() {
                                 FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
                                 FSkinFont.updateAll();
+                                CardImageRenderer.forceStaticFieldUpdate();
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
