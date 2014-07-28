@@ -116,8 +116,7 @@ public class FOptionPane extends FDialog {
                     }
                 }
             };
-            //cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);
-            cardDisplay.setHeight(504);
+            cardDisplay.setHeight(Utils.SCREEN_HEIGHT / 2);
         }
         else {
             cardDisplay = null;
