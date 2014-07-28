@@ -71,14 +71,27 @@ public class CardRenderer {
     }
 
     public static boolean drawZoom(Graphics g, Card card, float width, float height) {
-        float w = width - 2 * FDialog.INSETS;
-        float h = height - 2 * FDialog.INSETS;
+        float x = FDialog.INSETS;
+        float y = FDialog.INSETS;
+        float w = width - 2 * x;
+        float h = height - 2 * y;
 
         final Texture image;
         if (FControl.mayShowCard(card) || FDialog.isDialogOpen()) { //support showing if card revealed in dialog
             image = ImageCache.getImage(card.getImageKey(), true);
             if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
-                CardImageRenderer.drawCardImage(g, card, FDialog.INSETS, FDialog.INSETS, w, h);
+                float ratio = h / w;
+                if (ratio > FCardPanel.ASPECT_RATIO) {
+                    float oldHeight = h;
+                    h = w * FCardPanel.ASPECT_RATIO;
+                    y += (oldHeight - h) / 2;
+                }
+                else {
+                    float oldWidth = w;
+                    w = h / FCardPanel.ASPECT_RATIO;
+                    x += (oldWidth - w) / 2;
+                }
+                CardImageRenderer.drawCardImage(g, card, x, y, w, h);
                 return true;
             }
         }
