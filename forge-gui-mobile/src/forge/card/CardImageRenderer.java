@@ -23,11 +23,12 @@ public class CardImageRenderer {
     private static final float IMAGE_HEIGHT = 504;
     private static final float MANA_SYMBOL_SIZE = 20;
     private static final float PT_BOX_WIDTH = 56;
-    private static final float HEADER_PADDING = 4;
+    private static final float HEADER_PADDING = 5;
     private static final FSkinFont NAME_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE);
     private static final FSkinFont TYPE_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.9f);
     private static final FSkinFont TEXT_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.95f);
     private static final FSkinFont PT_FONT = NAME_FONT;
+    private static final float BORDER_THICKNESS = 1.5f;
 
     public static Texture createCardImage(Card card) {
         float w = IMAGE_WIDTH;
@@ -105,7 +106,7 @@ public class CardImageRenderer {
         else {
             renderer.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        renderer.drawRect(1, Color.BLACK, x, y, w, h);
+        renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
 
@@ -137,7 +138,7 @@ public class CardImageRenderer {
         renderer.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
         renderer.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, x, y, w, h);
         renderer.drawImage(FSkinImage.LOGO, x + (w - imageWidth) / 2, y + (h - imageHeight) / 2, imageWidth, imageHeight);
-        renderer.drawRect(1, Color.BLACK, x, y, w, h);
+        renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 
     private static void drawTypeLine(TextureRenderer renderer, Card card, Color color1, Color color2, float x, float y, float w, float h) {
@@ -147,7 +148,7 @@ public class CardImageRenderer {
         else {
             renderer.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        renderer.drawRect(1, Color.BLACK, x, y, w, h);
+        renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
 
@@ -172,7 +173,7 @@ public class CardImageRenderer {
         else {
             renderer.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        renderer.drawRect(1, Color.BLACK, x, y, w, h);
+        renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padX = TEXT_FONT.getCapHeight() * 0.75f;
         float padY = padX + 2; //add a little more vertical padding
@@ -218,7 +219,7 @@ public class CardImageRenderer {
         else {
             renderer.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        renderer.drawRect(1, Color.BLACK, x, y, w, h);
+        renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         x += (PT_BOX_WIDTH - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {

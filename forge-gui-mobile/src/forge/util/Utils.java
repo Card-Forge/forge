@@ -18,9 +18,9 @@ public class Utils {
 
     //Swap commented out line below to specify average finger size and dev screen size
     private static final float ppcX = Gdx.graphics.getPpcX(), ppcY = Gdx.graphics.getPpcY();
-    //public static final int DEV_SCREEN_WIDTH = (int)BASE_WIDTH, DEV_SCREEN_HEIGHT = (int)BASE_HEIGHT;
+    public static final int DEV_SCREEN_WIDTH = (int)BASE_WIDTH, DEV_SCREEN_HEIGHT = (int)BASE_HEIGHT;
     //private static final float ppcX = 169f / AVG_FINGER_SIZE_CM, ppcY = 237f / AVG_FINGER_SIZE_CM;
-    public static final int DEV_SCREEN_WIDTH = 400, DEV_SCREEN_HEIGHT = 600;
+    //public static final int DEV_SCREEN_WIDTH = 400, DEV_SCREEN_HEIGHT = 600;
 
     //round to nearest int to reduce floating point display issues
     //reduce if either would take up too large a percentage of the screen to prevent layouts not working
