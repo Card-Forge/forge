@@ -22,7 +22,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
-import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 
 import forge.ImageKeys;
 import forge.game.card.Card;

@@ -175,14 +175,39 @@ public class CardImageRenderer {
         }
         renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
-        float padding = TEXT_FONT.getCapHeight() * 0.75f;
-        x += padding;
-        y += padding;
-        w -= 2 * padding;
-        h -= 2 * padding;
-        String text = card.getRules().getOracleText();
-        text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
-        cardTextRenderer.drawText(renderer, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+        if (card.isBasicLand()) {
+            //draw icons for basic lands
+            FSkinImage image;
+            switch (card.getName()) {
+            case "Plains":
+                image = FSkinImage.MANA_W;
+                break;
+            case "Island":
+                image = FSkinImage.MANA_U;
+                break;
+            case "Swamp":
+                image = FSkinImage.MANA_B;
+                break;
+            case "Mountain":
+                image = FSkinImage.MANA_R;
+                break;
+            default:
+                image = FSkinImage.MANA_G;
+                break;
+            }
+            float iconSize = h * 0.75f;
+            renderer.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
+        }
+        else {
+            float padding = TEXT_FONT.getCapHeight() * 0.75f;
+            x += padding;
+            y += padding;
+            w -= 2 * padding;
+            h -= 2 * padding;
+            String text = card.getRules().getOracleText();
+            text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
+            cardTextRenderer.drawText(renderer, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+        }
     }
 
     private static void drawPtBox(TextureRenderer renderer, Card card, Color color1, Color color2, float x, float y, float w, float h) {

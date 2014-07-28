@@ -103,7 +103,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                     idx--;
                 }
                 if (dotIdx > idx) {
-                    artIndex = Integer.parseInt(cardName.substring(dotIdx, idx));
+                    artIndex = Integer.parseInt(cardName.substring(idx, dotIdx));
                 }
                 cardName = cardName.substring(0, idx);
             }
