@@ -3,8 +3,10 @@ package forge.card;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
+import forge.util.PredicateString.StringOp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -511,6 +513,8 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
         public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(Presets.IS_CREATURE, Presets.IS_LAND));
+        public static final Predicate<CardRules> CAN_BE_COMMANDER = Predicates.or(CardRulesPredicates.rules(StringOp.CONTAINS_IC, "can be your commander"),
+                Predicates.and(Presets.IS_CREATURE, Presets.IS_LEGENDARY));
 
         /** The Constant IS_NONCREATURE_SPELL_FOR_GENERATOR. **/
         @SuppressWarnings("unchecked")

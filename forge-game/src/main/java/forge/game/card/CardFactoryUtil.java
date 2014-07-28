@@ -57,7 +57,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.Lang;
