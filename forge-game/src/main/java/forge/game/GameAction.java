@@ -845,10 +845,17 @@ public class GameAction {
                     if (c.getNetDefense() <= 0) {
                         noRegCreats.add(c);
                         checkAgain = true;
-                    } else
-
+                    } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
+                        for (final Integer dmg : c.getReceivedDamageFromThisTurn().values()) {
+                            if (c.getNetDefense() <= dmg.intValue()) {
+                                desCreats.add(c);
+                                checkAgain = true;
+                                break;
+                            }
+                        }
+                    }
                     // Rule 704.5g - Destroy due to lethal damage
-                    if (c.getNetDefense() <= c.getDamage()) {
+                    else if (c.getNetDefense() <= c.getDamage()) {
                         desCreats.add(c);
                         checkAgain = true;
                     }

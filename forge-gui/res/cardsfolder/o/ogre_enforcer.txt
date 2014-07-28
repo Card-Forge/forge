@@ -1,0 +1,7 @@
+Name:Ogre Enforcer
+ManaCost:3 R R
+Types:Creature Ogre
+PT:4/4
+K:CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_enforcer.jpg
+Oracle:Ogre Enforcer can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.
