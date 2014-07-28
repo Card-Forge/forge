@@ -886,10 +886,10 @@ public class AbilityUtils {
                 }
             }
         }
-        else if (defined.equals("RememberedOpponent")) {
+        else if (defined.equals("RememberedOpponents")) {
             for (final Object rem : card.getRemembered()) {
                 if (rem instanceof Player) {
-                    players.add(((Player) rem).getOpponent());
+                    players.addAll(((Player) rem).getOpponents());
                 }
             }
         }

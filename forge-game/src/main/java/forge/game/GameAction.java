@@ -963,7 +963,7 @@ public class GameAction {
             final Player pl = (Player) entity;
             boolean invalid = false;
 
-            if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().equals(pl)) {
+            if (tgt.canOnlyTgtOpponent() && !c.getController().isOpponentOf(pl)) {
                 invalid = true;
             }
             else if (pl.hasProtectionFrom(c)) {

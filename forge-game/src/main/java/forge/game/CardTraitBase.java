@@ -222,8 +222,9 @@ public abstract class CardTraitBase extends GameObject {
                 list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                for (Player p : this.getHostCard().getController().getOpponents())
+                for (final Player p : this.getHostCard().getController().getOpponents()) {
                     list.addAll(p.getCardsIn(presentZone));
+                }
             }
     
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
@@ -262,7 +263,9 @@ public abstract class CardTraitBase extends GameObject {
                 list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
+                for (final Player p : this.getHostCard().getController().getOpponents()) {
+                    list.addAll(p.getCardsIn(presentZone));
+                }
             }
     
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
