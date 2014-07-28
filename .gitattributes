@@ -2791,6 +2791,7 @@ forge-gui/res/cardsfolder/b/burning-tree_emissary.txt -text
 forge-gui/res/cardsfolder/b/burning_anger.txt -text
 forge-gui/res/cardsfolder/b/burning_cloak.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/burning_earth.txt -text
+forge-gui/res/cardsfolder/b/burning_eye_zubera.txt -text
 forge-gui/res/cardsfolder/b/burning_fields.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/burning_inquiry.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/burning_of_xinye.txt -text
@@ -11267,6 +11268,7 @@ forge-gui/res/cardsfolder/r/ruric_thar_the_unbowed.txt -text
 forge-gui/res/cardsfolder/r/rush_of_blood.txt -text
 forge-gui/res/cardsfolder/r/rush_of_knowledge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rushing_river.txt -text
+forge-gui/res/cardsfolder/r/rushing_tide_zubera.txt -text
 forge-gui/res/cardsfolder/r/rushwood_dryad.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rushwood_elemental.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rushwood_grove.txt -text

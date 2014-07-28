@@ -101,8 +101,33 @@ public class TriggerChangesZone extends Trigger {
             if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {
                 return false;
             }
-        }        
-        
+        }
+
+        // Check amount of damage dealt to the triggered card
+        if (this.mapParams.containsKey("DamageReceivedCondition")) {
+            final String cond = this.mapParams.get("DamageReceivedCondition");
+            if (cond.length() < 3) {
+                return false;
+            }
+
+            final Card card;
+            final int rightSide;
+            try {
+                card = (Card) runParams2.get("Card");
+                rightSide = Integer.parseInt(cond.substring(2));
+            } catch (NumberFormatException | ClassCastException e) {
+                return false;
+            }
+            if (card == null) {
+                return false;
+            }
+
+            final boolean expr = Expressions.compare(card.getTotalDamageRecievedThisTurn(), cond, rightSide);
+            if (!expr) {
+                return false;
+            }
+        }
+
         return true;
     }
 
