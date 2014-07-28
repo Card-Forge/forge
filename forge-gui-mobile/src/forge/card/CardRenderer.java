@@ -77,7 +77,8 @@ public class CardRenderer {
         float h = height - 2 * y;
 
         final Texture image;
-        if (FControl.mayShowCard(card) || FDialog.isDialogOpen()) { //support showing if card revealed in dialog
+        boolean canShow = FControl.mayShowCard(card) || FDialog.isDialogOpen(); //support showing if card revealed in dialog
+        if (canShow) {
             image = ImageCache.getImage(card.getImageKey(), true);
             if (image == ImageCache.defaultImage) { //support drawing card image manually if card image not found
                 float ratio = h / w;
@@ -92,6 +93,7 @@ public class CardRenderer {
                     x += (oldWidth - w) / 2;
                 }
                 CardImageRenderer.drawCardImage(g, card, x, y, w, h);
+                drawFoilEffect(g, card, x, y, w, h);
                 return true;
             }
         }
@@ -127,7 +129,12 @@ public class CardRenderer {
             }
         }
 
-        g.drawImage(image, (width - imageWidth) / 2, (height - imageHeight) / 2, imageWidth, imageHeight);
+        x = (width - imageWidth) / 2;
+        y = (height - imageHeight) / 2;
+        g.drawImage(image, x, y, imageWidth, imageHeight);
+        if (canShow) {
+            drawFoilEffect(g, card, x, y, w, h);
+        }
         return true;
     }
 
