@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -13,6 +15,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -92,9 +95,24 @@ public class DiscardEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final List<Card> discarded = new ArrayList<Card>();
+        final List<Player> targets = getTargetPlayers(sa),
+                discarders;
+        Player firstTarget = null;
+        if (mode.equals("RevealTgtChoose")) {
+            // In this case the target need not be the discarding player
+            discarders = getDefinedPlayersOrTargeted(sa);
+            firstTarget = Iterables.getFirst(targets, null);
+            if (tgt != null && !firstTarget.canBeTargetedBy(sa)) {
+            	firstTarget = null;
+            }
+        } else {
+            discarders = targets;
+        }
 
-        for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+
+        for (final Player p : discarders) {
+            if ((mode.equals("RevealTgtChoose") && firstTarget != null)
+            		|| tgt == null || p.canBeTargetedBy(sa)) {
             	if (sa.hasParam("RememberDiscarder")) {
             		source.addRemembered(p);
             	}
@@ -178,7 +196,9 @@ public class DiscardEffect extends SpellAbilityEffect {
                     // Reveal
                     final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
 
-                    p.getOpponent().getController().reveal(dPHand, ZoneType.Hand, p, "Reveal ");
+                    for (final Player opp : p.getOpponents()) {
+                    	opp.getController().reveal(dPHand, ZoneType.Hand, p, "Reveal ");
+                    }
 
                     String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
 
@@ -193,7 +213,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         p.discard(c, sa);
                         discarded.add(c);
                     }
-                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") || mode.equals("TgtChoose")) {
+                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealTgtChoose") || mode.equals("TgtChoose")) {
                     List<Card> dPHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
                     dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
                     if (dPHand.isEmpty())
@@ -211,8 +231,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     Player chooser = p;
                     if (mode.equals("RevealYouChoose")) {
                         chooser = source.getController();
-                    } else if (mode.equals("RevealOppChoose")) {
-                        chooser = source.getController().getOpponent();
+                    } else if (mode.equals("RevealTgtChoose")) {
+                        chooser = firstTarget;
                     }
 
                     if (mode.startsWith("Reveal") && p != chooser)

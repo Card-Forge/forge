@@ -993,17 +993,6 @@ public class AbilityUtils {
                     o = ((SpellAbility) c).getHostCard().getController();
                 }
             }
-            else if (defined.endsWith("Opponent")) {
-                String replacingType = defined.substring(8);
-                replacingType = replacingType.substring(0, replacingType.length() - 8);
-                final Object c = root.getReplacingObject(replacingType);
-                if (c instanceof Card) {
-                    o = ((Card) c).getController().getOpponent();
-                }
-                if (c instanceof SpellAbility) {
-                    o = ((SpellAbility) c).getHostCard().getController().getOpponent();
-                }
-            }
             else if (defined.endsWith("Owner")) {
                 String replacingType = defined.substring(8);
                 replacingType = replacingType.substring(0, replacingType.length() - 5);
