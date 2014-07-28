@@ -2,6 +2,8 @@ package forge.screens.home;
 
 import java.util.ArrayList;
 
+import forge.game.card.Card;
+import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.Forge;
 import forge.Graphics;
@@ -15,6 +17,7 @@ import forge.screens.sealed.SealedScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FEvent.FEventHandler;
 
 public class HomeScreen extends FScreen {
@@ -29,7 +32,9 @@ public class HomeScreen extends FScreen {
         addButton("Constructed", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new ConstructedScreen());
+                forge.item.PaperCard pc = FModel.getMagicDb().getCommonCards().getCard("Llanowar Elves");
+                FOptionPane.showCardOptionDialog(Card.getCardForUi(pc), "Image for " + pc.getName() + ":", "Card Image Test", null, new String[] {"OK"}, 0, null);
+                //Forge.openScreen(new ConstructedScreen());
             }
         }, true);
         addButton("Booster Draft", new FEventHandler() {

@@ -1,8 +1,6 @@
 package forge.assets;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.cache.CacheLoader;
 
@@ -115,10 +113,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
             }
             if (pc != null) {
                 ret = CardImageRenderer.createCardImage(Card.getCardForUi(pc));
-                if (ret != null) {
-                    //PixmapIO.writePNG(Gdx.files.absolute(path + filename + ".png"), ret.);
-                    return ret;
-                }
+                if (ret != null) { return ret; }
             }
         }
 

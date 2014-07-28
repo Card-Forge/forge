@@ -25,8 +25,8 @@ public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
-    private final SpriteBatch batch = new SpriteBatch();
-    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
+    protected final SpriteBatch batch = new SpriteBatch();
+    protected final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private float regionHeight;
     private Rectangle bounds;
     private Rectangle visibleBounds;

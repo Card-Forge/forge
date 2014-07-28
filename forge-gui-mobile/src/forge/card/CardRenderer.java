@@ -48,9 +48,26 @@ public class CardRenderer {
     public static final float SET_BOX_MARGIN = Utils.scaleMin(1);
     public static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
     private static final float NAME_COST_THRESHOLD = Utils.scaleY(200);
+    public static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
+    private static final float BORDER_THICKNESS = Utils.scaleMin(1);
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
+    }
+
+    public static Color getRarityColor(CardRarity rarity) {
+        switch(rarity) {
+        case Uncommon:
+            return fromDetailColor(DetailColors.UNCOMMON);
+        case Rare:
+            return fromDetailColor(DetailColors.RARE);
+        case MythicRare:
+            return fromDetailColor(DetailColors.MYTHIC);
+        case Special: //"Timeshifted" or other Special Rarity Cards
+            return fromDetailColor(DetailColors.SPECIAL);
+        default: //case BasicLand: + case Common:
+            return fromDetailColor(DetailColors.COMMON);
+        }
     }
 
     public static boolean drawZoom(Graphics g, Card card, float width, float height) {
@@ -118,7 +135,7 @@ public class CardRenderer {
 
         boolean canShow = FControl.mayShowCard(card) || FDialog.isDialogOpen(); //support showing if card revealed in dialog
 
-        float blackBorderThickness = w * 0.021f;
+        float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
         g.fillRect(Color.BLACK, x, y, w, h);
         x += blackBorderThickness;
         y += blackBorderThickness;
@@ -349,7 +366,7 @@ public class CardRenderer {
         else {
             g.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        g.drawRect(1, Color.BLACK, x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padding = h / 8;
 
@@ -400,25 +417,7 @@ public class CardRenderer {
     }
 
     public static void drawSetLabel(Graphics g, FSkinFont font, String set, CardRarity rarity, float x, float y, float w, float h) {
-        Color backColor;
-        switch(rarity) {
-        case Uncommon:
-            backColor = fromDetailColor(DetailColors.UNCOMMON);
-            break;
-        case Rare:
-            backColor = fromDetailColor(DetailColors.RARE);
-            break;
-        case MythicRare:
-            backColor = fromDetailColor(DetailColors.MYTHIC);
-            break;
-        case Special: //"Timeshifted" or other Special Rarity Cards
-            backColor = fromDetailColor(DetailColors.SPECIAL);
-            break;
-        default: //case BasicLand: + case Common:
-            backColor = fromDetailColor(DetailColors.COMMON);
-            break;
-        }
-
+        Color backColor = getRarityColor(rarity);
         Color foreColor = FSkinColor.getHighContrastColor(backColor);
         g.fillRect(backColor, x, y, w, h);
         g.drawText(set, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
@@ -434,10 +433,10 @@ public class CardRenderer {
         else {
             g.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        g.drawRect(1, Color.BLACK, x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         float padX = TEXT_FONT.getCapHeight() / 2;
-        float padY = padX + 2; //add a little more vertical padding
+        float padY = padX + Utils.scaleY(2); //add a little more vertical padding
         x += padX;
         y += padY;
         w -= 2 * padX;
@@ -464,7 +463,7 @@ public class CardRenderer {
         else {
             g.fillGradientRect(color1, color2, false, x, y, w, h);
         }
-        g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
         g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.CENTER, true);
     }
 
@@ -621,7 +620,7 @@ public class CardRenderer {
         }
 
         g.fillRect(color, x, y, w, h);
-        g.drawRect(Utils.scaleMin(1), Color.BLACK, x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         x += padding;
         for (int i = 0; i < pieces.size(); i++) {

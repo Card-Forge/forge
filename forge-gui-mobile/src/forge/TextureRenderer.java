@@ -3,6 +3,7 @@ package forge;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Matrix4;
 
 //Special graphics object for rendering to a texture
 public class TextureRenderer extends Graphics {
@@ -14,6 +15,14 @@ public class TextureRenderer extends Graphics {
         height = height0;
         frameBuffer = new FrameBuffer(Format.RGB565, (int)width, (int)height, false);
         frameBuffer.begin();
+
+        //batch and shapeRenderer must be given a projection matrix
+        //so they're rendered properly to custom sized frame buffer
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, 0, width, height);
+        batch.setProjectionMatrix(matrix);
+        shapeRenderer.setProjectionMatrix(matrix);
+
         begin(width, height);
     }
 
@@ -26,7 +35,6 @@ public class TextureRenderer extends Graphics {
         fb.begin();
         begin(width, height);
         drawImage(frameBuffer.getColorBufferTexture(), 0, 0, width, height);
-        //frameBuffer.dispose(); //avoid holding on to the first frame buffer
         end();
         fb.end();
 
