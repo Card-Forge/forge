@@ -32,7 +32,9 @@ public class HomeScreen extends FScreen {
         addButton("Constructed", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                forge.item.PaperCard pc = FModel.getMagicDb().getCommonCards().getCard("Llanowar Elves");
+                //String cardName = "LLanowar Elves";
+                String cardName = "Jace, the Mind Sculptor";
+                forge.item.PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(cardName);
                 FOptionPane.showCardOptionDialog(Card.getCardForUi(pc), "Image for " + pc.getName() + ":", "Card Image Test", null, new String[] {"OK"}, 0, null);
                 //Forge.openScreen(new ConstructedScreen());
             }

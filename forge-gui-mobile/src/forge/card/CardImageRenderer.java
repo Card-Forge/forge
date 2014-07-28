@@ -22,6 +22,7 @@ public class CardImageRenderer {
     private static final float IMAGE_WIDTH = 360;
     private static final float IMAGE_HEIGHT = 504;
     private static final float MANA_SYMBOL_SIZE = 20;
+    private static final float PT_BOX_WIDTH = 56;
     private static final float HEADER_PADDING = 4;
     private static final FSkinFont NAME_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE);
     private static final FSkinFont TYPE_FONT = FSkinFont.forHeight(MANA_SYMBOL_SIZE * 0.9f);
@@ -179,7 +180,9 @@ public class CardImageRenderer {
         y += padY;
         w -= 2 * padX;
         h -= 2 * padY;
-        cardTextRenderer.drawText(renderer, card.getRules().getOracleText(), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);
+        String text = card.getRules().getOracleText();
+        text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
+        cardTextRenderer.drawText(renderer, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);
     }
 
     private static void drawPtBox(TextureRenderer renderer, Card card, Color color1, Color color2, float x, float y, float w, float h) {
@@ -195,18 +198,18 @@ public class CardImageRenderer {
         else { return; }
 
         float padding = Math.round(PT_FONT.getCapHeight() / 4);
-        float boxWidth = 3 * padding;
+        float totalPieceWidth = -padding;
         List<Float> pieceWidths = new ArrayList<Float>();
         for (String piece : pieces) {
             float pieceWidth = PT_FONT.getBounds(piece).width + padding;
             pieceWidths.add(pieceWidth);
-            boxWidth += pieceWidth;
+            totalPieceWidth += pieceWidth;
         }
         float boxHeight = PT_FONT.getCapHeight() + PT_FONT.getAscent() + 3 * padding;
 
-        x += w - boxWidth;
+        x += w - PT_BOX_WIDTH;
         y += h - boxHeight;
-        w = boxWidth;
+        w = PT_BOX_WIDTH;
         h = boxHeight;
 
         if (color2 == null) {
@@ -217,7 +220,7 @@ public class CardImageRenderer {
         }
         renderer.drawRect(1, Color.BLACK, x, y, w, h);
 
-        x += 2 * padding;
+        x += (PT_BOX_WIDTH - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {
             renderer.drawText(pieces.get(i), PT_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
             x += pieceWidths.get(i);
