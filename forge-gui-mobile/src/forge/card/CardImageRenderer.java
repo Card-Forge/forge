@@ -175,12 +175,11 @@ public class CardImageRenderer {
         }
         renderer.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
-        float padX = TEXT_FONT.getCapHeight() * 0.75f;
-        float padY = padX + 2; //add a little more vertical padding
-        x += padX;
-        y += padY;
-        w -= 2 * padX;
-        h -= 2 * padY;
+        float padding = TEXT_FONT.getCapHeight() * 0.75f;
+        x += padding;
+        y += padding;
+        w -= 2 * padding;
+        h -= 2 * padding;
         String text = card.getRules().getOracleText();
         text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
         cardTextRenderer.drawText(renderer, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);

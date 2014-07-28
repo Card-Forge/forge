@@ -143,7 +143,7 @@ public class ImageCache {
             }
             image = null;
         }
-        catch (final InvalidCacheLoadException ex) {
+        catch (final Exception ex) {
             image = null;
         }
 
