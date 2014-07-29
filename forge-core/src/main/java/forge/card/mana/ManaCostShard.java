@@ -56,11 +56,11 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
     COLORLESS(ManaAtom.COLORLESS, "1"),
 
     /* Phyrexian */
-    PW(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P", "PW"),
-    PU(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P", "PU"),
-    PB(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "B/P", "PB"),
-    PR(ManaAtom.RED | ManaAtom.OR_2_LIFE, "R/P", "PR"),
-    PG(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "G/P", "PG"),
+    PW(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "P/W", "PW"),
+    PU(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "P/U", "PU"),
+    PB(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "P/B", "PB"),
+    PR(ManaAtom.RED | ManaAtom.OR_2_LIFE, "P/R", "PR"),
+    PG(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "P/G", "PG"),
 
     X(ManaAtom.IS_X, "X");
 

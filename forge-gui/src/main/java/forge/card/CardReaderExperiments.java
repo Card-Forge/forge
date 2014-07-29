@@ -91,11 +91,11 @@ public class CardReaderExperiments {
             }
         }
         
-        //convert {2W} and {WP} to {2/W} and {W/P}, and ensure not {W/2} or {P/W}
+        //convert {2W} and {PW} to {2/W} and {P/W}, and ensure not {W/2} or {W/P}
         for (int i = 0; i < lines.size(); i++) {
-            String newLine = lines.get(i).replaceAll("\\{([WUBRG2])([WUBRGP])\\}", "\\{$1/$2\\}")
+            String newLine = lines.get(i).replaceAll("\\{([WUBRG2P])([WUBRG])\\}", "\\{$1/$2\\}")
                     .replaceAll("\\{([WUBRG])/2\\}", "\\{2/$1\\}")
-                    .replaceAll("\\{P/([WUBRG])\\}", "\\{$1/P\\}");
+                    .replaceAll("\\{([WUBRG])/P\\}", "\\{P/$1\\}");
             if (!newLine.equals(lines.get(i))) {
                 updated = true;
                 lines.set(i, newLine);
@@ -116,7 +116,7 @@ public class CardReaderExperiments {
             if (s.isEmpty()) { continue; }
             try {
                 String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?")
-                        .replaceAll("\\{([WUBRG2])/([WUBRGP])\\}", "$1$2[ ]\\?")
+                        .replaceAll("\\{([WUBRG2P])/([WUBRG])\\}", "$1$2[ ]\\?")
                         .replaceAll("\\{C\\}", "Chaos");
                 if (pattern.length() != s.length()) {
                     pattern = "Description\\$(.*)" + pattern;

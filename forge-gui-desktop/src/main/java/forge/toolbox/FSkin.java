@@ -1187,11 +1187,11 @@ public class FSkin {
         addEncodingSymbol("2/B", FSkinProp.IMG_MANA_2B);
         addEncodingSymbol("2/R", FSkinProp.IMG_MANA_2R);
         addEncodingSymbol("2/G", FSkinProp.IMG_MANA_2G);
-        addEncodingSymbol("W/P", FSkinProp.IMG_MANA_PHRYX_W);
-        addEncodingSymbol("U/P", FSkinProp.IMG_MANA_PHRYX_U);
-        addEncodingSymbol("B/P", FSkinProp.IMG_MANA_PHRYX_B);
-        addEncodingSymbol("R/P", FSkinProp.IMG_MANA_PHRYX_R);
-        addEncodingSymbol("G/P", FSkinProp.IMG_MANA_PHRYX_G);
+        addEncodingSymbol("P/W", FSkinProp.IMG_MANA_PHRYX_W);
+        addEncodingSymbol("P/U", FSkinProp.IMG_MANA_PHRYX_U);
+        addEncodingSymbol("P/B", FSkinProp.IMG_MANA_PHRYX_B);
+        addEncodingSymbol("P/R", FSkinProp.IMG_MANA_PHRYX_R);
+        addEncodingSymbol("P/G", FSkinProp.IMG_MANA_PHRYX_G);
         for (int i = 0; i <= 20; i++) {
             addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
         }
