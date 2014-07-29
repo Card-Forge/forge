@@ -616,7 +616,7 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CombatUtil.canAttackNextTurn(c) && c.getNetAttack() > 0;
+                    return ComputerUtil.canAttackNextTurn(c) && c.getNetAttack() > 0;
                 }
             });
         }
@@ -945,7 +945,7 @@ public class AttachAi extends SpellAbilityAi {
                     	if (!c.isCreature()) {
                     		return true;
                     	}
-                        return CombatUtil.canAttackNextTurn(c) && powerBonus + c.getNetAttack() > 0;
+                        return ComputerUtil.canAttackNextTurn(c) && powerBonus + c.getNetAttack() > 0;
                     }
                 });
             }
@@ -1133,7 +1133,7 @@ public class AttachAi extends SpellAbilityAi {
         // give evasive keywords to creatures that can attack and deal damage
         if (evasive) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !CombatUtil.canAttackNextTurn(card)
+                    || !ComputerUtil.canAttackNextTurn(card)
                     || !CombatUtil.canBeBlocked(card, opponent)) {
                 return false;
             }
@@ -1142,20 +1142,20 @@ public class AttachAi extends SpellAbilityAi {
                     || card.getNetCombatDamage() + powerBonus <= 0
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || !CombatUtil.canAttackNextTurn(card)) {
+                    || !ComputerUtil.canAttackNextTurn(card)) {
                 return false;
             }
         } else if (keyword.endsWith("Indestructible")) {
             return true;
         } else if (keyword.endsWith("Deathtouch") || keyword.endsWith("Wither")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || ((!CombatUtil.canBeBlocked(card, opponent) || !CombatUtil.canAttackNextTurn(card))
+                    || ((!CombatUtil.canBeBlocked(card, opponent) || !ComputerUtil.canAttackNextTurn(card))
                             && !CombatUtil.canBlock(card, true))) {
                 return false;
             }
         } else if (keyword.equals("Double Strike") || keyword.equals("Lifelink")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || (!CombatUtil.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
+                    || (!ComputerUtil.canAttackNextTurn(card) && !CombatUtil.canBlock(card, true))) {
                 return false;
             }
         } else if (keyword.equals("First Strike")) {
@@ -1164,29 +1164,29 @@ public class AttachAi extends SpellAbilityAi {
             }
         } else if (keyword.startsWith("Flanking")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !CombatUtil.canAttackNextTurn(card)
+                    || !ComputerUtil.canAttackNextTurn(card)
                     || !CombatUtil.canBeBlocked(card, opponent)) {
                 return false;
             }
         } else if (keyword.startsWith("Bushido")) {
-            if ((!CombatUtil.canBeBlocked(card, opponent) || !CombatUtil.canAttackNextTurn(card))
+            if ((!CombatUtil.canBeBlocked(card, opponent) || !ComputerUtil.canAttackNextTurn(card))
                     && !CombatUtil.canBlock(card, true)) {
                 return false;
             }
         } else if (keyword.equals("Trample")) {
             if (card.getNetCombatDamage() + powerBonus <= 1
                     || !CombatUtil.canBeBlocked(card, opponent)
-                    || !CombatUtil.canAttackNextTurn(card)) {
+                    || !ComputerUtil.canAttackNextTurn(card)) {
                 return false;
             }
         } else if (keyword.equals("Infect")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !CombatUtil.canAttackNextTurn(card)) {
+                    || !ComputerUtil.canAttackNextTurn(card)) {
                 return false;
             }
         } else if (keyword.equals("Vigilance")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || !CombatUtil.canAttackNextTurn(card)
+                    || !ComputerUtil.canAttackNextTurn(card)
                     || !CombatUtil.canBlock(card, true)) {
                 return false;
             }
@@ -1231,11 +1231,11 @@ public class AttachAi extends SpellAbilityAi {
 
         if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")
                 || keyword.endsWith("CARDNAME can't attack or block.")) {
-            if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
+            if (!ComputerUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.") || keyword.endsWith("CARDNAME attacks each combat if able.")) {
-            if (!CombatUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true) || ai.getCreaturesInPlay().isEmpty()) {
+            if (!ComputerUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true) || ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't block.") || keyword.contains("CantBlock")) {
@@ -1250,12 +1250,12 @@ public class AttachAi extends SpellAbilityAi {
             }
             return false;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
-            if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
+            if (!ComputerUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
                 return false;
             }
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-            if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 2) {
+            if (!ComputerUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 2) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME doesn't untap during your untap step.")) {

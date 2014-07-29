@@ -731,7 +731,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(final Card c, final GameEntity def, final Combat combat) {
-        int cntAttackers = combat.getAttackers().size();
+        final int cntAttackers = combat.getAttackers().size();
         final Game game = c.getGame();
 
         if (cntAttackers > 0) {
@@ -739,10 +739,6 @@ public class CombatUtil {
                 for (final String keyword : card.getKeyword()) {
                     if (cntAttackers > 1) {
                         if (keyword.equals("No more than two creatures can attack each combat.")) {
-                            return false;
-                        }
-                        if (keyword.equals("No more than two creatures can attack you each combat.") &&
-                                card.getController().getOpponent().equals(c.getController())) {
                             return false;
                         }
                     }
@@ -758,6 +754,18 @@ public class CombatUtil {
 
             if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
                 return false;
+            }
+        }
+
+        final int cntAttackersToDef = combat.getAttackersOf(def).size();
+        if (cntAttackersToDef > 1) {
+            for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                for (final String keyword : card.getKeyword()) {
+                	 if (keyword.equals("No more than two creatures can attack you each combat.") &&
+                             card.getController().equals(def)) {
+                         return false;
+                     }
+                }
             }
         }
 
@@ -832,20 +840,8 @@ public class CombatUtil {
      * 
      * @param c
      *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean canAttackNextTurn(final Card c) {
-        return canAttackNextTurn(c, c.getController().getOpponent());
-    }
-
-    // can a creature attack if untapped and without summoning sickness?
-    /**
-     * <p>
-     * canAttackNextTurn.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.game.card.Card} object.
+     * @param def
+     *            the defending {@link GameEntity}.
      * @return a boolean.
      */
     public static boolean canAttackNextTurn(final Card c, final GameEntity defender) {

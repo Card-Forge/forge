@@ -394,7 +394,7 @@ public class AiAttackController {
         }
 
         for (Card attacker : oppList) {
-            if (!CombatUtil.canAttackNextTurn(attacker)) {
+            if (!ComputerUtil.canAttackNextTurn(attacker)) {
                 continue;
             }
             if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker, ai)) {
@@ -657,7 +657,7 @@ public class AiAttackController {
         for (final Card pCard : this.oppList) {
             // if the creature can attack next turn add it to counter attackers
             // list
-            if (CombatUtil.canAttackNextTurn(pCard)) {
+            if (ComputerUtil.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateCounterAttackDamage += pCard.getNetCombatDamage();
@@ -684,7 +684,7 @@ public class AiAttackController {
         for (final Card pCard : this.myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
-            if (CombatUtil.canAttackNextTurn(pCard)) {
+            if (ComputerUtil.canAttackNextTurn(pCard)) {
                 candidateAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null);

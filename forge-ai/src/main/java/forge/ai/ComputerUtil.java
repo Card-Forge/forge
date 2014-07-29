@@ -879,7 +879,7 @@ public class ComputerUtil {
                     playNow = false;
                     break;
                 }
-                if (!playNow && c.isCreature() && CombatUtil.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
+                if (!playNow && c.isCreature() && ComputerUtil.canAttackNextTurn(c) && c.canBeEquippedBy(card)) {
                     playNow = true;
                 }
             }
@@ -1979,6 +1979,19 @@ public class ComputerUtil {
         }
 
         return bestBoardPosition;
+    }
+    
+    /**
+     * <p>
+     * canAttackNextTurn.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.game.card.Card} object.
+     * @return a boolean.
+     */
+    public static boolean canAttackNextTurn(final Card c) {
+        return CombatUtil.canAttackNextTurn(c, c.getController().getOpponent());
     }
 
 }

@@ -235,7 +235,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     || newPower <= 0
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || !CombatUtil.canAttackNextTurn(card)) {
+                    || !ComputerUtil.canAttackNextTurn(card)) {
                 return false;
             }
         } else if (keyword.endsWith("Indestructible")) {
