@@ -3,4 +3,4 @@ ManaCost:no cost
 Colors:red
 Types:Creature Hound Pet
 PT:1/1
-End
+Oracle:

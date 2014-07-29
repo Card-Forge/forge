@@ -3,4 +3,4 @@ ManaCost:no cost
 Colors:green
 Types:Creature Ape Pet
 PT:2/1
-End
+Oracle:

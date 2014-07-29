@@ -4,4 +4,4 @@ Colors:white
 Types:Creature Wolf Pet
 PT:2/1
 K:Lifelink
-End
+Oracle:Lifelink

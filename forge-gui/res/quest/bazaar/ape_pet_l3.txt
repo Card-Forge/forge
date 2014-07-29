@@ -4,4 +4,4 @@ Colors:green
 Types:Creature Ape Pet
 PT:2/1
 K:Trample
-End
+Oracle:Trample

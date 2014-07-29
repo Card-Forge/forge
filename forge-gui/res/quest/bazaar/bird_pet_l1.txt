@@ -3,4 +3,4 @@ ManaCost:no cost
 Colors:blue
 Types:Creature Bird Pet
 PT:1/1
-End
+Oracle:

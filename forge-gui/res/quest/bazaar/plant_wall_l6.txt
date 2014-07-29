@@ -7,4 +7,4 @@ PT:1/4
 K:Defender
 K:Wither
 A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-End
+Oracle: Defender, Wither\n{T}: You gain 1 life.

@@ -5,4 +5,4 @@ Types:Creature Plant Wall
 Text:Level 2 Plant Wall
 PT:0/2
 K:Defender
-End
+Oracle:Defender
