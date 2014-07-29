@@ -3,6 +3,8 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -247,13 +249,17 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
+            if (card.getRules() == null) { return; } //this can happen with certain tokens
+            String text = card.getRules().getOracleText();
+            if (StringUtils.isEmpty(text)) { return; }
+
+            text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
+
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
             x += padding;
             y += padding;
             w -= 2 * padding;
             h -= 2 * padding;
-            String text = card.getRules().getOracleText();
-            text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
             cardTextRenderer.drawText(g, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, HAlignment.LEFT, true);
         }
     }
