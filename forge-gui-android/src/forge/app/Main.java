@@ -1,5 +1,7 @@
 package forge.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,12 +37,35 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(Forge.getApp(getClipboard(), assetsDir, new Runnable() {
+        initialize(Forge.getApp(new AndroidClipboard(), assetsDir, new Runnable() {
             @Override
             public void run() {
                 //ensure process doesn't stick around after exiting
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
         }));
+    }
+
+    //special clipboard that words on Android
+    private class AndroidClipboard implements com.badlogic.gdx.utils.Clipboard {
+        private final ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        @Override
+        public String getContents() {
+            if (cm.getPrimaryClip().getItemCount() > 0) {
+                try {
+                    return cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).toString();
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            return "";
+        }
+
+        @Override
+        public void setContents(String contents0) {
+            cm.setPrimaryClip(ClipData.newPlainText("Forge", contents0));
+        }
     }
 }
