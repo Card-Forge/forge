@@ -734,7 +734,7 @@ public class CombatUtil {
         final int cntAttackers = combat.getAttackers().size();
         final Game game = c.getGame();
 
-        if (c.getController().getMustAttackEntity() != def) {
+        if (c.getController().getMustAttackEntity() != null && c.getController().getMustAttackEntity() != def) {
             return false;
         }
 
