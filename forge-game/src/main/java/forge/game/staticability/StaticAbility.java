@@ -271,7 +271,7 @@ public class StaticAbility extends CardTraitBase {
             return false;
         }
 
-        if (this.isSuppressed() || !this.checkConditions()) {
+        if (this.isSuppressed() || !this.checkPlayerSpecificConditions(player)) {
             return false;
         }
 
@@ -399,9 +399,30 @@ public class StaticAbility extends CardTraitBase {
     }
 
     /**
+     * Check conditions for static abilities acting on a specific player. Also
+     * automatically check the general conditions.
+     * 
+     * @param player a {@link Player}.
+     * @return true, if the static ability is applicable.
+     * @see {@link StaticAbility#checkConditions()}
+     */
+    public final boolean checkPlayerSpecificConditions(final Player player) {
+        if (!checkConditions()) {
+            return false;
+        }
+
+        if (this.mapParams.containsKey("PlayerAttackedWithCreatureThisTurn")
+                && !player.getAttackedWithCreatureThisTurn()) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
      * Check conditions.
      * 
-     * @return true, if successful
+     * @return true, if the static ability is applicable.
      */
     public final boolean checkConditions() {
         final Player controller = this.hostCard.getController();
@@ -449,11 +470,6 @@ public class StaticAbility extends CardTraitBase {
                     return false;
                 }
             }
-        }
-
-        if (this.mapParams.containsKey("OpponentAttackedWithCreatureThisTurn")
-                && !controller.getOpponent().getAttackedWithCreatureThisTurn()) {
-            return false;
         }
 
         if (this.mapParams.containsKey("Phases")) {

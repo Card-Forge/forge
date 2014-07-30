@@ -856,6 +856,8 @@ public class CombatUtil {
         for (String keyword : c.getKeyword()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
                 return false;
+            } else if (keyword.equals("CARDNAME can't attack if you cast a spell this turn.") && c.getController().getSpellsCastThisTurn() > 0) {
+                return false;
             } else if (keyword.equals("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
             } else if (keyword.equals("CARDNAME can't attack during extra turns.")) {

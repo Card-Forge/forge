@@ -81,6 +81,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The assigned damage. */
     private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
 
+    /** Number of spells cast this turn. */
+    private int spellsCastThisTurn = 0;
+
     /** The life lost this turn. */
     private int lifeLostThisTurn = 0;
 
@@ -1237,28 +1240,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         return false;
-    }
-
-    /**
-     * <p>
-     * canPlaySpells.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean canCastSpells() {
-        return !this.keywords.contains("Can't cast spells");
-    }
-
-    /**
-     * <p>
-     * canPlayAbilities.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean canActivateAbilities() {
-        return !this.keywords.contains("Can't activate abilities");
     }
 
     // //////////////////////////////
@@ -2653,6 +2634,27 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final void setNumLandsPlayed(final int n) {
         this.numLandsPlayed = n;
+    }
+
+    /**
+     * @return the number of spells cast by this player this turn.
+     */
+    public final int getSpellsCastThisTurn() {
+        return this.spellsCastThisTurn;
+    }
+
+    /**
+     * Adds 1 to the number of spells cast by this player this turn.
+     */
+    public final void addSpellCastThisTurn() {
+        this.spellsCastThisTurn++;
+    }
+
+    /**
+     * Resets the number of spells cast by this player this turn to 0.
+     */
+    public final void resetSpellsCastThisTurn() {
+        this.spellsCastThisTurn = 0;
     }
 
     /**
