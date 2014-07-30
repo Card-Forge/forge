@@ -6418,7 +6418,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToOppThisTurn")) {
-            if (!this.getDamageHistory().getThisTurnDamaged().contains(sourceController.getOpponent())) {
+            if (!this.hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
@@ -7289,6 +7289,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void resetDealtDamageToPlayerThisTurn() {
         this.dealtDamageToPlayerThisTurn.clear();
+    }
+
+    /**
+     * @return {@code true} if and only if this dealt damage to an opponent this
+     * turn.
+     */
+    public final boolean hasDealtDamageToOpponentThisTurn() {
+    	for (final Player p : this.getDamageHistory().getThisTurnDamaged()) {
+    		if (this.getController().isOpponentOf(p)) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 
     // this is the minimal damage a trampling creature has to assign to a blocker

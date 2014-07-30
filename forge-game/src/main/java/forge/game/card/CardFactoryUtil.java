@@ -994,8 +994,7 @@ public class CardFactoryUtil {
 
 
         if (sq[0].equals("YouDrewThisTurn"))    return doXMath(c.getController().getNumDrawnThisTurn(), m, c);
-        if (sq[0].equals("OppDrewThisTurn"))    return doXMath(c.getController().getOpponent().getNumDrawnThisTurn(), m, c);
-        
+
         if (sq[0].equals("FirstSpellTotalManaSpent"))     return doXMath(c.getFirstSpellAbility().getTotalManaSpent(), m, c);
         if (sq[0].equals("StormCount"))         return doXMath(game.getStack().getCardsCastThisTurn().size() - 1, m, c);
         if (sq[0].equals("DamageDoneThisTurn")) return doXMath(c.getDamageDoneThisTurn(), m, c);
@@ -1006,8 +1005,6 @@ public class CardFactoryUtil {
         if (sq[0].startsWith("Triggered"))      return doXMath(xCount((Card) c.getTriggeringObject("Card"), sq[0].substring(9)), m, c);
 
         if (sq[0].contains("YourStartingLife"))     return doXMath(cc.getStartingLife(), m, c);
-        //if (sq[0].contains("OppStartingLife"))    return doXMath(oppController.getStartingLife(), m, c); // found no cards using it
-        
 
         if (sq[0].contains("YourLifeTotal"))        return doXMath(cc.getLife(), m, c);
         if (sq[0].contains("OppGreatestLifeTotal")) return doXMath(cc.getOpponentsGreatestLifeTotal(), m, c);
