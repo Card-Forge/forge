@@ -244,9 +244,6 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsFromSingleZone")) {
             abTgt.setSingleZone(true);
         }
-        if (mapParams.containsKey("TargetsFromDifferentZone")) {
-            abTgt.setDifferentZone(true);
-        }
         if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
             abTgt.setWithoutSameCreatureType(true);
         }

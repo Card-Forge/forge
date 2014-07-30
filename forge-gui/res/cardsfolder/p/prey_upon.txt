@@ -1,6 +1,7 @@
 Name:Prey Upon
 ManaCost:G
 Types:Sorcery
-A:SP$ Fight | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetsFromDifferentZone$ True | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
+A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prey_upon.jpg
 Oracle:Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)

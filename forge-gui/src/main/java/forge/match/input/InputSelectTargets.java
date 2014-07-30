@@ -124,12 +124,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
-        // If all cards must be from different zones
-        if (tgt.isDifferentZone() && lastTarget != null && !card.getController().equals(lastTarget.getController().getOpponent())) {
-            showMessage(sa.getHostCard() + " - Cannot target this card (not in different zones)");
-            return false;
-        }
-
         // If the cards can't share a creature type
         if (tgt.isWithoutSameCreatureType() && lastTarget != null && card.sharesCreatureTypeWith(lastTarget)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (should not share a creature type)");

@@ -57,7 +57,6 @@ public class TargetRestrictions {
     // Additional restrictions that may not fit into Valid
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
-    private boolean differentZone = false;
     private boolean differentControllers = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
@@ -96,7 +95,6 @@ public class TargetRestrictions {
         this.uniqueTargets = target.isUniqueTargets();
         this.singleZone = target.isSingleZone();
         this.differentControllers = target.isDifferentControllers();
-        this.differentZone = target.isDifferentZone();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.singleTarget = target.isSingleTarget();
@@ -567,20 +565,6 @@ public class TargetRestrictions {
             System.err.println(e);
         }
         return clone;
-    }
-
-    /**
-     * @return the differentZone
-     */
-    public boolean isDifferentZone() {
-        return differentZone;
-    }
-
-    /**
-     * @param different the differentZone to set
-     */
-    public void setDifferentZone(boolean different) {
-        this.differentZone = different;
     }
 
     /**

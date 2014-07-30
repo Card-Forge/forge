@@ -323,8 +323,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (this.getLifeTotal().equals("You")) {
                 life = activator.getLife();
             }
-            if (this.getLifeTotal().equals("Opponent")) {
-                life = activator.getOpponent().getLife();
+            if (this.getLifeTotal().equals("OpponentSmallest")) {
+                life = activator.getOpponentsSmallestLifeTotal();
             }
 
             int right = 1;
