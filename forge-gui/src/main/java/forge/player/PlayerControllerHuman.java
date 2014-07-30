@@ -364,12 +364,21 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
-        String prompt = String.format("%s, you %s\n\nWould you like to play or draw?", 
-                player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game."); 
-        InputConfirm inp = new InputConfirm(prompt, "Play", "Draw");
-        inp.showAndWait();
-        return inp.getResult();
+    public Player chooseStartingPlayer(boolean isFirstGame) {
+        if (game.getPlayers().size() == 2) {
+            final String prompt = String.format("%s, you %s\n\nWould you like to play or draw?", 
+                    player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
+            final InputConfirm inp = new InputConfirm(prompt, "Play", "Draw");
+            inp.showAndWait();
+            return inp.getResult() ? this.player : this.player.getOpponents().get(0);
+        } else {
+            final String prompt = String.format("%s, you %s\n\nWho would you like to start this game?", 
+                    player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
+            final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(1, 1, game.getPlayersInTurnOrder());
+            input.setMessage(prompt);
+            input.showAndWait();
+            return input.getFirstSelected();
+        }
     }
 
     @Override

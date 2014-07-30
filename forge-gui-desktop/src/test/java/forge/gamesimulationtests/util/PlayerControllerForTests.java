@@ -192,8 +192,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
-        return true;
+    public Player chooseStartingPlayer(boolean isFirstGame) {
+        return this.player;
     }
 
 	@Override

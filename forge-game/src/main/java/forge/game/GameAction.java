@@ -1593,8 +1593,7 @@ public class GameAction {
             goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
         }
 
-        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
-        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
+        goesFirst = goesFirst.getController().chooseStartingPlayer(isFirstGame);
         return goesFirst;
     }
 

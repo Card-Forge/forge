@@ -148,7 +148,7 @@ public abstract class PlayerController {
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
     public abstract boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory);
-    public abstract boolean getWillPlayOnFirstTurn(boolean isFirstGame);
+    public abstract Player chooseStartingPlayer(boolean isFirstGame);
 
     public abstract List<Card> orderBlockers(Card attacker, List<Card> blockers);
     /**

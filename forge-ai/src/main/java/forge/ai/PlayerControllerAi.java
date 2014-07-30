@@ -222,8 +222,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
-        return true; // AI is brave :)
+    public Player chooseStartingPlayer(boolean isFirstGame) {
+        return this.player; // AI is brave :)
     }
 
     @Override
