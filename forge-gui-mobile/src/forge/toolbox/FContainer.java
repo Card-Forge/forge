@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
+import forge.error.BugReporter;
 
 public abstract class FContainer extends FDisplayObject {
     private final ArrayList<FDisplayObject> children = new ArrayList<FDisplayObject>();
@@ -38,33 +39,38 @@ public abstract class FContainer extends FDisplayObject {
     }
 
     public void draw(Graphics g) {
-        drawBackground(g);
-
-        boolean needOverlayDrawn = true;
-        for (FDisplayObject child : children) {
-            if (child.isVisible()) {
-                if (child.drawAboveOverlay() && needOverlayDrawn) {
-                    drawOverlay(g);
-                    needOverlayDrawn = false;
+        try {
+            drawBackground(g);
+    
+            boolean needOverlayDrawn = true;
+            for (FDisplayObject child : children) {
+                if (child.isVisible()) {
+                    if (child.drawAboveOverlay() && needOverlayDrawn) {
+                        drawOverlay(g);
+                        needOverlayDrawn = false;
+                    }
+    
+                    final boolean disabled = !child.isEnabled();
+                    if (disabled) {
+                        g.setAlphaComposite(DISABLED_COMPOSITE);
+                    }
+    
+                    g.draw(child);
+    
+                    if (disabled) {
+                        g.resetAlphaComposite();
+                    }
+    
+                    child.drawOnContainer(g); //give child an additional chance to draw additional content on container outside its bounds
                 }
-
-                final boolean disabled = !child.isEnabled();
-                if (disabled) {
-                    g.setAlphaComposite(DISABLED_COMPOSITE);
-                }
-
-                g.draw(child);
-
-                if (disabled) {
-                    g.resetAlphaComposite();
-                }
-
-                child.drawOnContainer(g); //give child an additional chance to draw additional content on container outside its bounds
+            }
+    
+            if (needOverlayDrawn) {
+                drawOverlay(g);
             }
         }
-
-        if (needOverlayDrawn) {
-            drawOverlay(g);
+        catch (Exception ex) {
+            BugReporter.reportException(ex);
         }
     }
 
