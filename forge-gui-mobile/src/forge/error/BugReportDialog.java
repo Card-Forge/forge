@@ -9,60 +9,100 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinColor.Colors;
+import forge.screens.FScreen;
+import forge.toolbox.FButton;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextArea;
+import forge.util.Callback;
 import forge.util.Utils;
 
-public class BugReportDialog extends FOptionPane {
-    private static boolean dialogShown;
+public class BugReportDialog extends FScreen { //use screen rather than dialog so screen with bug isn't rendered
+    private static final float PADDING = Utils.scaleMin(5);
+    private static boolean isOpen;
 
     public static void show(String title, String text, boolean showExitAppBtn) {
-        if (dialogShown || Forge.getCurrentScreen() == null) { return; } //don't allow showing if Forge not finished initializing yet
+        if (isOpen || Forge.getCurrentScreen() == null) { return; } //don't allow showing if Forge not finished initializing yet
 
-        dialogShown = true;
-        BugReportDialog dialog = new BugReportDialog(title, text, showExitAppBtn);
-        dialog.show();
+        isOpen = true;
+        Forge.openScreen(new BugReportDialog(title, text, showExitAppBtn));
     }
-    
-    private String text;
+
+    private final FTextArea lblHeader = add(new FTextArea(BugReporter.HELP_TEXT));
+    private final TemplateView tvDetails;
+    private final FButton btnReport = add(new FButton(BugReporter.REPORT));
+    private final FButton btnSave = add(new FButton(BugReporter.SAVE));
+    private final FButton btnContinue = add(new FButton(BugReporter.CONTINUE));
+    private final FButton btnExit = add(new FButton(BugReporter.EXIT));
 
     private BugReportDialog(String title, String text0, boolean showExitAppBtn) {
-        super(BugReporter.HELP_TEXT + "\n\n" + BugReporter.HELP_URL_LABEL + " " + BugReporter.HELP_URL + ".",
-                title, null, new TemplateView(text0),
-                getOptions(showExitAppBtn), 0, null);
-        text = text0;
+        super(title);
+        lblHeader.setFont(FSkinFont.get(12));
+        tvDetails = add(new TemplateView(text0));
+        btnReport.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                BugReporter.copyAndGoToForums(tvDetails.text);
+            }
+        });
+        btnSave.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                BugReporter.saveToFile(tvDetails.text);
+            }
+        });
+        btnContinue.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                Forge.back();
+            }
+        });
+        if (showExitAppBtn) {
+            btnExit.setCommand(new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    Gdx.app.exit();
+                }
+            });
+        }
+        else {
+            btnExit.setVisible(false);
+        }
     }
 
     @Override
-    public void setResult(final int option) {
-        switch (option) {
-        case 0:
-            BugReporter.copyAndGoToForums(text);
-            break;
-        case 1:
-            BugReporter.saveToFile(text);
-            break;
-        case 2:
-            hide();
-            dialogShown = false;
-            break;
-        case 3:
-            hide();
-            Gdx.app.exit();
-            dialogShown = false;
-            break;
-        }
+    public void onClose(Callback<Boolean> canCloseCallback) {
+        super.onClose(canCloseCallback);
+        isOpen = false;
     }
 
-    private static String[] getOptions(boolean showExitAppBtn) {
-        String[] options = new String[showExitAppBtn ? 4 : 3];
-        options[0] = BugReporter.REPORT;
-        options[1] = BugReporter.SAVE;
-        options[2] = BugReporter.CONTINUE;
-        if (showExitAppBtn) {
-            options[3] = BugReporter.EXIT;
+    @Override
+    protected void doLayout(float startY, float width, float height) {
+        float x = PADDING;
+        float y = startY + PADDING;
+        float w = width - 2 * PADDING;
+
+        lblHeader.setBounds(x, y, w, lblHeader.getPreferredHeight(w));
+        y += lblHeader.getHeight() + PADDING;
+
+        float buttonWidth = (w - PADDING) / 2;
+        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
+
+        tvDetails.setBounds(x, y, w, height - 2 * buttonHeight - 3 * PADDING - y);
+        y += tvDetails.getHeight() + PADDING;
+
+        btnReport.setBounds(x, y, buttonWidth, buttonHeight);
+        btnSave.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
+        y += buttonHeight + PADDING;
+        if (btnExit.isVisible()) {
+            btnContinue.setBounds(x, y, buttonWidth, buttonHeight);
+            btnExit.setBounds(x + buttonWidth + PADDING, y, buttonWidth, buttonHeight);
         }
-        return options;
+        else {
+            btnContinue.setBounds(x, y, w, buttonHeight);
+        }
     }
 
     private static class TemplateView extends FScrollPane {
