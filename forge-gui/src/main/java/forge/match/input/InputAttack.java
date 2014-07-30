@@ -75,15 +75,16 @@ public class InputAttack extends InputSyncronizedBase {
 
         List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
+            GameEntity mustAttack = c.getController().getMustAttackEntity() ;
             if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
                 final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
                 final String defined = c.getKeyword().get(i).split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
-                if (player != null && CombatUtil.canAttack(c, player, combat)) {
-                    combat.addAttacker(c, player);
-                    GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, player));
-                    continue;
-                }
+                mustAttack = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
+            }
+            if (mustAttack != null && CombatUtil.canAttack(c, mustAttack, combat)) {
+                combat.addAttacker(c, mustAttack);
+                GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, mustAttack));
+                continue;
             }
             if (c.hasKeyword("CARDNAME attacks each combat if able.") || 
                     (c.hasKeyword("CARDNAME attacks each turn if able.") && !c.getDamageHistory().getCreatureAttackedThisTurn())) {
@@ -247,7 +248,8 @@ public class InputAttack extends InputSyncronizedBase {
 
     private boolean canUndeclareAttacker(Card card) {
         return !card.hasKeyword("CARDNAME attacks each turn if able.") &&
-               !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able");
+               !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able") &&
+               card.getController().getMustAttackEntity() == null;
     }
 
     private boolean undeclareAttacker(Card card) {

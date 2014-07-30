@@ -734,6 +734,10 @@ public class CombatUtil {
         final int cntAttackers = combat.getAttackers().size();
         final Game game = c.getGame();
 
+        if (c.getController().getMustAttackEntity() != def) {
+            return false;
+        }
+
         if (cntAttackers > 0) {
             for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
                 for (final String keyword : card.getKeyword()) {
