@@ -436,9 +436,14 @@ public class ManaCostAdjustment {
 
 
         if (!params.containsKey("Color")) {
-            manaCost.decreaseColorlessMana(value);
-            if (manaCost.toString().equals("0") && params.containsKey("MinMana")) {
-                manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
+            int minMana = 0;
+            if (params.containsKey("MinMana")) {
+                minMana = Integer.valueOf(params.get("MinMana"));
+            }
+
+            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana);
+            if (maxReduction > 0) {
+                manaCost.decreaseColorlessMana(Math.min(value, maxReduction));
             }
         } else {
             final String color = params.get("Color");
