@@ -805,55 +805,57 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
 
-            //add option to add or remove card from favorites
-            final CardPreferences prefs = CardPreferences.getPrefs(card);
-            if (prefs.getStarCount() == 0) {
-                menu.addItem(new FMenuItem("Add to Favorites", FSkinImage.STAR_FILLED, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        prefs.setStarCount(1);
-                        CardPreferences.save();
-                    }
-                }));
-            }
-            else {
-                menu.addItem(new FMenuItem("Remove from Favorites", FSkinImage.STAR_OUTINE, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        prefs.setStarCount(0);
-                        CardPreferences.save();
-                    }
-                }));
-            }
-
-            //if card has more than one art option, add item to change user's preferred art
-            final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCards(card.getName());
-            if (artOptions != null && artOptions.size() > 1) {
-                menu.addItem(new FMenuItem("Change Preferred Art", FSkinImage.SETTINGS, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        //sort options so current option is on top and selected by default
-                        List<PaperCard> sortedOptions = new ArrayList<PaperCard>();
-                        sortedOptions.add(card);
-                        for (PaperCard option : artOptions) {
-                            if (option != card) {
-                                sortedOptions.add(option);
-                            }
+            if (parentScreen.getEditorType() == EditorType.Constructed) {
+                //add option to add or remove card from favorites
+                final CardPreferences prefs = CardPreferences.getPrefs(card);
+                if (prefs.getStarCount() == 0) {
+                    menu.addItem(new FMenuItem("Add to Favorites", FSkinImage.STAR_FILLED, new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            prefs.setStarCount(1);
+                            CardPreferences.save();
                         }
-                        GuiChoose.oneOrNone("Select preferred art for " + card.getName(), sortedOptions, new Callback<PaperCard>() {
-                            @Override
-                            public void run(PaperCard result) {
-                                if (result != null) {
-                                    if (result != card) {
-                                        cardManager.replaceAll(card, result);
-                                    }
-                                    prefs.setPreferredArt(result.getEdition() + CardDb.NameSetSeparator + result.getArtIndex());
-                                    CardPreferences.save();
+                    }));
+                }
+                else {
+                    menu.addItem(new FMenuItem("Remove from Favorites", FSkinImage.STAR_OUTINE, new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            prefs.setStarCount(0);
+                            CardPreferences.save();
+                        }
+                    }));
+                }
+
+                //if card has more than one art option, add item to change user's preferred art
+                final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCards(card.getName());
+                if (artOptions != null && artOptions.size() > 1) {
+                    menu.addItem(new FMenuItem("Change Preferred Art", FSkinImage.SETTINGS, new FEventHandler() {
+                        @Override
+                        public void handleEvent(FEvent e) {
+                            //sort options so current option is on top and selected by default
+                            List<PaperCard> sortedOptions = new ArrayList<PaperCard>();
+                            sortedOptions.add(card);
+                            for (PaperCard option : artOptions) {
+                                if (option != card) {
+                                    sortedOptions.add(option);
                                 }
                             }
-                        });
-                    }
-                }));
+                            GuiChoose.oneOrNone("Select preferred art for " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                @Override
+                                public void run(PaperCard result) {
+                                    if (result != null) {
+                                        if (result != card) {
+                                            cardManager.replaceAll(card, result);
+                                        }
+                                        prefs.setPreferredArt(result.getEdition() + CardDb.NameSetSeparator + result.getArtIndex());
+                                        CardPreferences.save();
+                                    }
+                                }
+                            });
+                        }
+                    }));
+                }
             }
         }
     }
