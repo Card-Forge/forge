@@ -25,6 +25,7 @@ public interface ICardDatabase extends Iterable<PaperCard> {
 
     Collection<PaperCard> getUniqueCards();
     List<PaperCard> getAllCards();
+    List<PaperCard> getAllCards(String cardName);
     List<PaperCard> getAllCards(Predicate<PaperCard> predicate);
 
     Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);

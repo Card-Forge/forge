@@ -163,7 +163,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
     public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemColumn> colOverrides) {
         config = config0;
-        setWantUnique(true); //set want unique for mobile game by default regardless of config setting
+        setWantUnique(config0.getUniqueCardsOnly());
 
         //ensure sort cols ordered properly
         final List<ItemColumn> cols = new LinkedList<ItemColumn>();
@@ -672,6 +672,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         pool.clear();
         model.clear();
         updateView(false, null);
+    }
+
+    public void replaceAll(final T item, final T replacement) {
+        int count = pool.count(item);
+        if (count == 0) { return; }
+
+        final Iterable<T> itemsToSelect = currentView == listView ? getSelectedItems() : null;
+
+        pool.removeAll(item);
+        pool.add(replacement, count);
+        if (isUnfiltered()) {
+            model.replaceAll(item, replacement);
+        }
+        updateView(false, itemsToSelect);
     }
 
     /**

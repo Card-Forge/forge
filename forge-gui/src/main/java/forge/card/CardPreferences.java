@@ -45,6 +45,10 @@ public class CardPreferences {
                 final Element el = (Element)cards.item(i);
                 allPrefs.put(el.getAttribute("name"), prefs);
                 prefs.starCount = Integer.parseInt(el.getAttribute("stars"));
+                prefs.preferredArt = el.getAttribute("art");
+                if (prefs.preferredArt.length() == 0) {
+                    prefs.preferredArt = null; //don't store empty string
+                }
             }
         }
         catch (FileNotFoundException e) {
@@ -67,10 +71,16 @@ public class CardPreferences {
             document.appendChild(root);
 
             for (Map.Entry<String, CardPreferences> entry : allPrefs.entrySet()) {
-                if (entry.getValue().starCount > 0) {
+                CardPreferences prefs = entry.getValue();
+                if (prefs.starCount > 0 || prefs.preferredArt != null) {
                     Element card = document.createElement("card");
                     card.setAttribute("name", entry.getKey());
-                    card.setAttribute("stars", String.valueOf(entry.getValue().starCount));
+                    if (prefs.starCount > 0) {
+                        card.setAttribute("stars", String.valueOf(prefs.starCount));
+                    }
+                    if (prefs.preferredArt != null) {
+                        card.setAttribute("art", prefs.preferredArt);
+                    }
                     root.appendChild(card);
                 }
             }
@@ -82,15 +92,24 @@ public class CardPreferences {
     }
 
     private int starCount;
+    private String preferredArt;
 
     private CardPreferences() {
     }
 
     public int getStarCount() {
-        return this.starCount;
+        return starCount;
     }
 
     public void setStarCount(int starCount0) {
-        this.starCount = starCount0;
+        starCount = starCount0;
+    }
+
+    public String getPreferredArt() {
+        return preferredArt;
+    }
+
+    public void setPreferredArt(String preferredArt0) {
+        preferredArt = preferredArt0;
     }
 }

@@ -1,5 +1,6 @@
 package forge.deck;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.card.CardEdition;
+import forge.card.CardPreferences;
 import forge.card.CardRulesPredicates;
 import forge.card.CardZoom;
 import forge.deck.io.DeckPreferences;
@@ -759,7 +761,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Add", "to " + parentScreen.getMainDeckPage().cardManager.getCaption().toLowerCase(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+            addItem(menu, "Add", "to " + parentScreen.getMainDeckPage().cardManager.getCaption(), parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     if (result == null || result <= 0) { return; }
@@ -771,7 +773,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             });
             if (parentScreen.getSideboardPage() != null) {
-                addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                addItem(menu, "Add", "to Sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -785,7 +787,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             if (parentScreen.getCommanderPage() != null) {
                 if (card.getRules().getType().isLegendary() && card.getRules().getType().isCreature() && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
-                    addItem(menu, "Set", "as commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
+                    addItem(menu, "Set", "as Commander", parentScreen.getCommanderPage().getIcon(), true, true, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }
@@ -800,6 +802,56 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
+            }
+
+            //add option to add or remove card from favorites
+            final CardPreferences prefs = CardPreferences.getPrefs(card);
+            if (prefs.getStarCount() == 0) {
+                menu.addItem(new FMenuItem("Add to Favorites", FSkinImage.STAR_FILLED, new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        prefs.setStarCount(1);
+                        CardPreferences.save();
+                    }
+                }));
+            }
+            else {
+                menu.addItem(new FMenuItem("Remove from Favorites", FSkinImage.STAR_OUTINE, new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        prefs.setStarCount(0);
+                        CardPreferences.save();
+                    }
+                }));
+            }
+
+            //if card has more than one art option, add item to change user's preferred art
+            final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCards(card.getName());
+            if (artOptions != null && artOptions.size() > 1) {
+                menu.addItem(new FMenuItem("Change Preferred Art", FSkinImage.SETTINGS, new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        //sort options so current option is on top and selected by default
+                        List<PaperCard> sortedOptions = new ArrayList<PaperCard>();
+                        sortedOptions.add(card);
+                        for (PaperCard option : artOptions) {
+                            if (option != card) {
+                                sortedOptions.add(option);
+                            }
+                        }
+                        GuiChoose.oneOrNone("Select preferred art for " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                            @Override
+                            public void run(PaperCard result) {
+                                if (result != null) {
+                                    if (result != card) {
+                                        cardManager.replaceAll(card, result);
+                                    }
+                                    prefs.setPreferredArt(result.getEdition() + "|" + result.getArtIndex());
+                                }
+                            }
+                        });
+                    }
+                }));
             }
         }
     }
@@ -924,7 +976,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                addItem(menu, "Move", "to sideboard", parentScreen.getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
+                addItem(menu, "Move", "to Sideboard", parentScreen.getSideboardPage().getIcon(), false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -959,7 +1011,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                addItem(menu, "Move", "to main deck", parentScreen.getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
+                addItem(menu, "Move", "to Main Deck", parentScreen.getMainDeckPage().getIcon(), false, false, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) { return; }
@@ -1029,7 +1081,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             if (parentScreen.getCommanderPage() != null && deckSection != DeckSection.Commander) {
                 if (card.getRules().getType().isLegendary() && card.getRules().getType().isCreature() && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
-                    addItem(menu, "Set", "as commander", parentScreen.getCommanderPage().getIcon(), false, false, new Callback<Integer>() {
+                    addItem(menu, "Set", "as Commander", parentScreen.getCommanderPage().getIcon(), false, false, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             if (result == null || result <= 0) { return; }

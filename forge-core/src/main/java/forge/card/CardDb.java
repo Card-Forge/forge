@@ -347,6 +347,11 @@ public final class CardDb implements ICardDatabase {
         return roAllCards;
     }
 
+    @Override
+    public List<PaperCard> getAllCards(String cardName) {
+        return allCardsByName.get(cardName);
+    }
+
     /**  Returns a modifiable list of cards matching the given predicate */
     @Override
     public List<PaperCard> getAllCards(Predicate<PaperCard> predicate) {

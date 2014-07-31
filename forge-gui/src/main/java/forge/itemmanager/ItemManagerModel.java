@@ -124,6 +124,15 @@ public final class ItemManagerModel<T extends InventoryItem> {
         }
     }
 
+    public void replaceAll(final T item0, final T replacement0) {
+        int count = this.data.count(item0);
+        if (count > 0) {
+            this.data.removeAll(item0);
+            this.data.add(replacement0, count);
+            isListInSync = false;
+        }
+    }
+
     /**
      * Adds a item to the model.
      * 
