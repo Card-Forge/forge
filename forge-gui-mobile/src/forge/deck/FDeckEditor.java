@@ -726,9 +726,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void refresh() {
-            if (!isVisible() && cardManager.isInfinite()) {
+            if (!isVisible() && parentScreen.getEditorType() != EditorType.Quest) {
                 needRefreshWhenShown = true;
-                return; //delay refreshing while hidden for infinite card managers
+                return; //delay refreshing while hidden unless for quest inventory
             }
             switch (parentScreen.getEditorType()) {
             case Archenemy:
