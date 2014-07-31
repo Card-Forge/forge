@@ -747,13 +747,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(cardpool);
                 break;
             default:
-                if (cardManager.getConfig().getUniqueCardsOnly()) {
-                    cardManager.setWantUnique(false); //prevent needing to perform logic to calculate uniqueness since we're passing a unique collection
-                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), true);
-                }
-                else {
-                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
-                }
+                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), true);
                 break;
             }
         }
