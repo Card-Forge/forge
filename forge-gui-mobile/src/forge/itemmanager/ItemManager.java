@@ -163,7 +163,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
     public void setup(ItemManagerConfig config0, Map<ColumnDef, ItemColumn> colOverrides) {
         config = config0;
-        setWantUnique(config0.getUniqueCardsOnly());
+        setWantUnique(true); //set want unique for mobile game by default regardless of config setting
 
         //ensure sort cols ordered properly
         final List<ItemColumn> cols = new LinkedList<ItemColumn>();
