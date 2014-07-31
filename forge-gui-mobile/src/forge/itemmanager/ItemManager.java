@@ -17,12 +17,14 @@
  */
 package forge.itemmanager;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.math.Rectangle;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -774,7 +776,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         filterPredicate = newFilterPredicate;
         if (pool != null) {
-            updateView(true, null);
+            FThreads.invokeInBackgroundThread(new Runnable() {
+                @Override
+                public void run() {
+                    updateView(true, null);
+                    Gdx.graphics.requestRendering();
+                }
+            });
         }
         return true;
     }
