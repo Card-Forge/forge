@@ -847,6 +847,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         cardManager.replaceAll(card, result);
                                     }
                                     prefs.setPreferredArt(result.getEdition() + "|" + result.getArtIndex());
+                                    CardPreferences.save();
                                 }
                             }
                         });
@@ -1139,14 +1140,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Add", "to main deck", parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
+            addItem(menu, "Add", "to Main Deck", parentScreen.getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     parentScreen.getMainDeckPage().addCard(card);
                     afterCardPicked(card);
                 }
             });
-            addItem(menu, "Add", "to sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+            addItem(menu, "Add", "to Sideboard", parentScreen.getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     parentScreen.getSideboardPage().addCard(card);

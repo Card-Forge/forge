@@ -117,8 +117,9 @@ public final class CardDb implements ICardDatabase {
             String lastCardName = null;
             int artIdx = 1;
             for (CardEdition.CardInSet cis : e.getCards()) {
-                if (cis.name.equals(lastCardName))
+                if (cis.name.equals(lastCardName)) {
                     artIdx++;
+                }
                 else {
                     artIdx = 1;
                     lastCardName = cis.name;
@@ -209,22 +210,25 @@ public final class CardDb implements ICardDatabase {
         String reqEdition = request.edition;
         if (reqEdition != null && !editions.contains(reqEdition)) {
             CardEdition edition = editions.get(reqEdition);
-            if (edition != null)
+            if (edition != null) {
                 reqEdition =  edition.getCode();
+            }
         }
         
         if (request.artIndex <= 0) { // this stands for 'random art'
             List<PaperCard> candidates = new ArrayList<PaperCard>(9); // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             for (PaperCard pc : cards) {
-                if (pc.getEdition().equalsIgnoreCase(reqEdition) || reqEdition == null)
+                if (pc.getEdition().equalsIgnoreCase(reqEdition) || reqEdition == null) {
                     candidates.add(pc);
+                }
             }
 
             if (candidates.isEmpty()) {
                 return null;
             }
             result = Aggregates.random(candidates);
-        } else {
+        }
+        else {
             for (PaperCard pc : cards) {
                 if (pc.getEdition().equalsIgnoreCase(reqEdition) && request.artIndex == pc.getArtIndex()) {
                     result = pc;
@@ -266,14 +270,17 @@ public final class CardDb implements ICardDatabase {
             for (int i = sz - 1 ; i >= 0 ; i--) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
-                if (!fromSet.accept(ed))
+                if (!fromSet.accept(ed)) {
                     continue;
+                }
 
-                if ((artIndex <= 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore)))
+                if ((artIndex <= 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
                     return pc;
+                }
             }
             return null;
-        } else if (fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random) {
+        }
+        else if (fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random) {
             for (int i = 0 ; i < sz ; i++) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
@@ -302,8 +309,9 @@ public final class CardDb implements ICardDatabase {
     public int getPrintCount(String cardName, String edition) {
         int cnt = 0;
         for (PaperCard pc : allCardsByName.get(cardName)) {
-            if (pc.getEdition().equals(edition))
+            if (pc.getEdition().equals(edition)) {
                 cnt++;
+            }
         }
         return cnt;
     }
@@ -312,8 +320,9 @@ public final class CardDb implements ICardDatabase {
     public int getMaxPrintCount(String cardName) {
         int max = -1;
         for (PaperCard pc : allCardsByName.get(cardName)) {
-            if (max < pc.getArtIndex())
+            if (max < pc.getArtIndex()) {
                 max = pc.getArtIndex();
+            }
         }
         return max;
     }
@@ -423,18 +432,21 @@ public final class CardDb implements ICardDatabase {
                         break;
                     }
                 }
-                if (cE != CardEdition.UNKNOWN)
+                if (cE != CardEdition.UNKNOWN) {
                     break;
+                }
             }
-        } else {
+        }
+        else {
             cE = editions.get(request.edition);
-            if (cE != null)
+            if (cE != null) {
                 for (CardInSet cs : cE.getCards()) {
                     if (cs.name.equals(request.cardName)) {
                         cR = cs.rarity;
                         break;
                     }
                 }
+            }
             else {
                 cE = CardEdition.UNKNOWN;
             }
@@ -450,7 +462,6 @@ public final class CardDb implements ICardDatabase {
         }
         
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cE.getCode(), cR, 1);
-
     }
 
     private final Editor editor = new Editor();
@@ -481,7 +492,8 @@ public final class CardDb implements ICardDatabase {
                         paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++));
                     }
                 }
-            } else {
+            }
+            else {
                 String lastEdition = null;
                 int artIdx = 0;
                 for (Pair<String, CardRarity> tuple : whenItWasPrinted){
