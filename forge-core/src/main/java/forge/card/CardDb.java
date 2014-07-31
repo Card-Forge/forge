@@ -22,10 +22,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
+
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
 import forge.item.PaperCard;
 import forge.util.*;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -40,10 +42,10 @@ public final class CardDb implements ICardDatabase {
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
+    private static Map<String, String> artPrefs = new HashMap<String, String>();
 
     private final List<PaperCard> allCards = new ArrayList<PaperCard>();
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards);
-    private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
     private final CardEdition.Collection editions;
 
     public enum SetPreference {
@@ -174,8 +176,23 @@ public final class CardDb implements ICardDatabase {
         }
     }
 
+    public boolean setPreferredArt(String cardName, String preferredArt) {
+        CardRequest request = CardRequest.fromString(cardName + NameSetSeparator + preferredArt);
+        PaperCard pc = tryGetCard(request);
+        if (pc != null) {
+            artPrefs.put(cardName, preferredArt);
+            uniqueCardsByName.put(cardName, pc);
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    public PaperCard getCard(final String cardName) {
+    public PaperCard getCard(String cardName) {
+        String preferredArt = artPrefs.get(cardName);
+        if (preferredArt != null) { //account for preferred art if needed
+            cardName += NameSetSeparator + preferredArt;
+        }
         CardRequest request = CardRequest.fromString(cardName);
         return tryGetCard(request);
     }
@@ -206,7 +223,7 @@ public final class CardDb implements ICardDatabase {
         if (null == cards) { return null; }
 
         PaperCard result = null;
-        
+
         String reqEdition = request.edition;
         if (reqEdition != null && !editions.contains(reqEdition)) {
             CardEdition edition = editions.get(reqEdition);
@@ -214,7 +231,7 @@ public final class CardDb implements ICardDatabase {
                 reqEdition =  edition.getCode();
             }
         }
-        
+
         if (request.artIndex <= 0) { // this stands for 'random art'
             List<PaperCard> candidates = new ArrayList<PaperCard>(9); // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             for (PaperCard pc : cards) {
@@ -237,20 +254,20 @@ public final class CardDb implements ICardDatabase {
             }
         }
         if (result == null) { return null; }
-        
+
         return request.isFoil ? getFoiled(result) : result;
     }
-    
+
     @Override
     public PaperCard getCardFromEdition(final String cardName, SetPreference fromSet) {
         return getCardFromEdition(cardName, null, fromSet);
     }
-    
+
     @Override
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet) {
         return getCardFromEdition(cardName, printedBefore, fromSet, -1);
     }
-    
+
     @Override
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
         final CardRequest cr = CardRequest.fromString(cardName);
@@ -345,10 +362,10 @@ public final class CardDb implements ICardDatabase {
         return cnt;
     }
 
-    // returns a list of all cards from their respective latest editions
+    // returns a list of all cards from their respective latest (or preferred) editions
     @Override
     public Collection<PaperCard> getUniqueCards() {
-        return roUniqueCards;
+        return uniqueCardsByName.values();
     }
 
     @Override

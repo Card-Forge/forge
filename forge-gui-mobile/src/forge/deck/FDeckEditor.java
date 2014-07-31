@@ -21,6 +21,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardPreferences;
 import forge.card.CardRulesPredicates;
@@ -746,7 +747,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(cardpool);
                 break;
             default:
-                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+                if (cardManager.getConfig().getUniqueCardsOnly()) {
+                    cardManager.setWantUnique(false); //prevent needing to perform logic to calculate uniqueness since we're passing a unique collection
+                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), true);
+                }
+                else {
+                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+                }
                 break;
             }
         }
@@ -846,7 +853,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     if (result != card) {
                                         cardManager.replaceAll(card, result);
                                     }
-                                    prefs.setPreferredArt(result.getEdition() + "|" + result.getArtIndex());
+                                    prefs.setPreferredArt(result.getEdition() + CardDb.NameSetSeparator + result.getArtIndex());
                                     CardPreferences.save();
                                 }
                             }

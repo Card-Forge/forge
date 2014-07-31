@@ -1,6 +1,7 @@
 package forge.card;
 
 import forge.item.IPaperCard;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.XmlUtil;
 
@@ -24,11 +25,11 @@ public class CardPreferences {
     private static Map<String, CardPreferences> allPrefs = new HashMap<String, CardPreferences>();
 
     public static CardPreferences getPrefs(IPaperCard card) {
-        String key = card.getName(); //TODO: Consider include art/set in key
-        CardPreferences prefs = allPrefs.get(key);
+        String cardName = card.getName();
+        CardPreferences prefs = allPrefs.get(cardName);
         if (prefs == null) {
-            prefs = new CardPreferences();
-            allPrefs.put(key, prefs);
+            prefs = new CardPreferences(cardName);
+            allPrefs.put(cardName, prefs);
         }
         return prefs;
     }
@@ -41,14 +42,11 @@ public class CardPreferences {
             final Document document = builder.parse(ForgeConstants.CARD_PREFS_FILE);
             final NodeList cards = document.getElementsByTagName("card");
             for (int i = 0; i < cards.getLength(); i++) {
-                final CardPreferences prefs = new CardPreferences();
                 final Element el = (Element)cards.item(i);
-                allPrefs.put(el.getAttribute("name"), prefs);
-                prefs.starCount = Integer.parseInt(el.getAttribute("stars"));
-                prefs.preferredArt = el.getAttribute("art");
-                if (prefs.preferredArt.length() == 0) {
-                    prefs.preferredArt = null; //don't store empty string
-                }
+                final CardPreferences prefs = new CardPreferences(el.getAttribute("name"));
+                allPrefs.put(prefs.cardName, prefs);
+                prefs.setStarCount(getIntAttribute(el, "stars"));
+                prefs.setPreferredArt(getStringAttribute(el, "art"));
             }
         }
         catch (FileNotFoundException e) {
@@ -60,6 +58,25 @@ public class CardPreferences {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static int getIntAttribute(Element el, String name) {
+        String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            try {
+                return Integer.parseInt(value);
+            }
+            catch (Exception ex) {}
+        }
+        return 0;
+    }
+
+    private static String getStringAttribute(Element el, String name) {
+        String value = el.getAttribute(name);
+        if (value.length() > 0) {
+            return value;
+        }
+        return null;
     }
 
     public static void save() {
@@ -91,10 +108,12 @@ public class CardPreferences {
         }
     }
 
+    private final String cardName;
     private int starCount;
     private String preferredArt;
 
-    private CardPreferences() {
+    private CardPreferences(String cardName0) {
+        cardName = cardName0;
     }
 
     public int getStarCount() {
@@ -110,6 +129,14 @@ public class CardPreferences {
     }
 
     public void setPreferredArt(String preferredArt0) {
-        preferredArt = preferredArt0;
+        if (preferredArt0 == null) {
+            preferredArt = null;
+            return;
+        }
+        if (preferredArt0.equals(preferredArt)) { return; }
+
+        if (FModel.getMagicDb().getCommonCards().setPreferredArt(cardName, preferredArt0)) {
+            preferredArt = preferredArt0;
+        }
     }
 }
