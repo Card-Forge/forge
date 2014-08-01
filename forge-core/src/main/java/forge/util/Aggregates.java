@@ -118,7 +118,6 @@ public class Aggregates {
         return result;
     }
 
-
     public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic
         final Map<K, U> uniques = new Hashtable<K, U>();
         for (final U c : source) {

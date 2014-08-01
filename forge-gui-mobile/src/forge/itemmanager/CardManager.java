@@ -1,5 +1,6 @@
 package forge.itemmanager;
 
+import java.util.HashSet;
 import java.util.Map.Entry;
 
 import forge.Graphics;
@@ -7,6 +8,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
+import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardFormatFilter;
@@ -32,6 +34,22 @@ public class CardManager extends ItemManager<PaperCard> {
     @Override
     protected TextSearchFilter<PaperCard> createSearchFilter() {
         return createSearchFilter(this);
+    }
+
+    @Override
+    protected Iterable<Entry<PaperCard, Integer>> createUniqueList(final Iterable<Entry<PaperCard, Integer>> source) {
+        boolean isInfinite = isInfinite();
+        HashSet<String> usedCardNames = isInfinite ? new HashSet<String>() : null;
+        String cardName;
+        final CardPool uniques = new CardPool();
+        for (Entry<PaperCard, Integer> item : source) {
+            cardName = item.getKey().getName();
+            if (isInfinite && !usedCardNames.add(cardName)) {
+                continue; //don't add card more than once if infinite
+            }
+            uniques.add(cardName, item.getValue());
+        }
+        return uniques;
     }
 
     /* Static overrides shared with SpellShopManager*/

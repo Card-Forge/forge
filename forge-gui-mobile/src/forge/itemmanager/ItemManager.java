@@ -847,6 +847,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(true, getSelectedItems());
     }
 
+    protected Iterable<Entry<T, Integer>> createUniqueList(final Iterable<Entry<T, Integer>> source) {
+        return Aggregates.uniqueByLast(source, pool.FN_GET_NAME);
+    }
+
     /**
      * 
      * updateView.
@@ -858,43 +862,37 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         if (useFilter || wantUnique || forceFilter) {
             model.clear();
-        }
 
-        if (useFilter && wantUnique) {
-            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(pool, filterForPool), pool.FN_GET_NAME);
+            Iterable<Entry<T, Integer>> items = pool;
+            if (useFilter) {
+                Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+                items = Iterables.filter(pool, pred);
+            }
+            if (wantUnique) {
+                items = createUniqueList(items);
+            }
             model.addItems(items);
-        }
-        else if (useFilter) {
-            Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
-            model.addItems(Iterables.filter(pool, pred));
-        }
-        else if (wantUnique) {
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
-            model.addItems(items);
-        }
-        else if (!useFilter && forceFilter) {
-            model.addItems(pool);
         }
 
         currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
 
         //update ratio of # in filtered pool / # in total pool
-        int total;
+        int totalCount;
+        int filteredCount = getFilteredItems().countAll();
         if (!useFilter) {
-            total = getFilteredItems().countAll();
+            totalCount = filteredCount;
         }
         else if (wantUnique) {
-            total = 0;
-            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(pool, pool.FN_GET_NAME);
+            totalCount = 0;
+            Iterable<Entry<T, Integer>> items = createUniqueList(pool);
             for (Entry<T, Integer> entry : items) {
-                total += entry.getValue();
+                totalCount += entry.getValue();
             }
         }
         else {
-            total = pool.countAll();
+            totalCount = pool.countAll();
         }
-        searchFilter.setRatio("(" + getFilteredItems().countAll() + " / " + total + ")");
+        searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
     }
 
     /**

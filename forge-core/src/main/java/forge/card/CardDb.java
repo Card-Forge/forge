@@ -79,10 +79,15 @@ public final class CardDb implements ICardDatabase {
             this.isFoil = isFoil;
         }
         
-        public static CardRequest fromString(String name) { 
+        public static CardRequest fromString(String name) {
             boolean isFoil = name.endsWith(foilSuffix);
             if (isFoil) {
                 name = name.substring(0, name.length() - foilSuffix.length());
+            }
+
+            String preferredArt = artPrefs.get(name);
+            if (preferredArt != null) { //account for preferred art if needed
+                name += NameSetSeparator + preferredArt;
             }
 
             String[] nameParts = TextUtil.split(name, NameSetSeparator);
@@ -189,10 +194,6 @@ public final class CardDb implements ICardDatabase {
 
     @Override
     public PaperCard getCard(String cardName) {
-        String preferredArt = artPrefs.get(cardName);
-        if (preferredArt != null) { //account for preferred art if needed
-            cardName += NameSetSeparator + preferredArt;
-        }
         CardRequest request = CardRequest.fromString(cardName);
         return tryGetCard(request);
     }
@@ -217,10 +218,10 @@ public final class CardDb implements ICardDatabase {
         }
         return tryGetCard(request);
     }
-    
+
     private PaperCard tryGetCard(CardRequest request) {
         Collection<PaperCard> cards = allCardsByName.get(request.cardName);
-        if (null == cards) { return null; }
+        if (cards == null) { return null; }
 
         PaperCard result = null;
 
@@ -228,18 +229,23 @@ public final class CardDb implements ICardDatabase {
         if (reqEdition != null && !editions.contains(reqEdition)) {
             CardEdition edition = editions.get(reqEdition);
             if (edition != null) {
-                reqEdition =  edition.getCode();
+                reqEdition = edition.getCode();
             }
         }
 
         if (request.artIndex <= 0) { // this stands for 'random art'
-            List<PaperCard> candidates = new ArrayList<PaperCard>(9); // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
-            for (PaperCard pc : cards) {
-                if (pc.getEdition().equalsIgnoreCase(reqEdition) || reqEdition == null) {
-                    candidates.add(pc);
+            Collection<PaperCard> candidates;
+            if (reqEdition == null) {
+                candidates = cards;
+            }
+            else {
+                candidates = new ArrayList<PaperCard>();
+                for (PaperCard pc : cards) {
+                    if (pc.getEdition().equalsIgnoreCase(reqEdition)) {
+                        candidates.add(pc);
+                    }
                 }
             }
-
             if (candidates.isEmpty()) {
                 return null;
             }
