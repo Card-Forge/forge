@@ -25,7 +25,6 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardPreferences;
 import forge.card.CardRulesPredicates;
-import forge.card.CardZoom;
 import forge.deck.io.DeckPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -517,12 +516,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 @Override
                 public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
                     CardManagerPage.this.buildMenu(menu, card);
-                    menu.addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            CardZoom.show(card);
-                        }
-                    }));
                 }
             });
         }

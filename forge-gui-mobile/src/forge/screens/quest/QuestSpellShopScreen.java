@@ -11,9 +11,7 @@ import forge.FThreads;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.card.CardZoom;
 import forge.item.InventoryItem;
-import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
@@ -106,14 +104,6 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                             activateSelectedItem();
                         }
                     }));
-                    if (item instanceof PaperCard) {
-                        menu.addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                CardZoom.show((PaperCard)item);
-                            }
-                        }));
-                    }
                 }
             });
             add(lblCredits);

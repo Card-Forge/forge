@@ -88,12 +88,6 @@ public class FSideboardDialog extends FDialog {
                     @Override
                     public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
                         TabPageBase.this.buildMenu(menu, card);
-                        menu.addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                CardZoom.show(card);
-                            }
-                        }));
                     }
                 });
                 cardManager.setup(ItemManagerConfig.SIDEBOARD);
