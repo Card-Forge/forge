@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.23
+Forge Beta: 08-01-2014 ver 1.5.23
 
 
-##### cards in total.
+14027 cards in total.
 
 
 -------------
@@ -30,16 +30,22 @@ will find all humans or cats that are also warriors, clerics, or soldiers.
 
 More improvements are on their way in the next version of Forge, including removing the need for quotation marks and adding NOT operators. 
 
+
 - Continued Work on Conspiracy -
 Conspiracy is one of the strangest sets that have been released in some time. Currently, we have a few of the "Draft matters" cards scripted, although you'll find that they won't quite be available to you (unless you add them manually into a draft deck). Hopefully we'll get the appropriate functionality in so we can start including them in boosters and allowing you to add Conspiracy type cards straight to your deck the way you do every other variant card. We'll make sure to point out when all of these kinks have worked themselves out.
+
 
 ---------
 New Cards
 ---------
 
 Brago's Favor
+Burning-Eye Zubera
+Giant Albatross
 Immediate Action
 Muzzio's Preparations
+Ogre Enforcer
+Rushing-Tide Zubera
 Secret Summoning
 Secrets of Paradise
 Spectra Ward
@@ -97,7 +103,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+elcnesh
+Fizanko
+Gos
+KrazyTheFox
+Marek14
+Sloth
+Sol
+Swordshine
+Zirbert
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
