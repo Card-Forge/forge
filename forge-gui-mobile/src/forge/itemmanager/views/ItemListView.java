@@ -68,6 +68,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void setup(ItemManagerConfig config, Map<ColumnDef, ItemColumn> colOverrides) {
+        list.compactModeHandler.setCompactMode(config.getCompactListView());
         refresh(null, 0, 0);
     }
 
@@ -284,6 +285,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (compactModeHandler.update(amount)) {
                 revalidate(); //update scroll bounds
                 scrollSelectionIntoView(); //ensure selection remains in view
+
+                //update compact mode configuration
+                itemManager.getConfig().setCompactListView(compactModeHandler.isCompactMode());
             }
             return true;
         }

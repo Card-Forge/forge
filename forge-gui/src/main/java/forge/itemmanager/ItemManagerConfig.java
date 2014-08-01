@@ -1,7 +1,9 @@
 package forge.itemmanager;
 
 import forge.itemmanager.ItemColumnConfig.SortState;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.XmlUtil;
 
 import java.io.FileNotFoundException;
@@ -88,6 +90,7 @@ public enum ItemManagerConfig {
 
     private Prop<Boolean> uniqueCardsOnly;
     private Prop<Boolean> hideFilters;
+    private Prop<Boolean> compactListView;
     private Prop<GroupDef> groupBy;
     private Prop<ColumnDef> pileBy;
     private Prop<Integer> imageColumnCount;
@@ -102,6 +105,7 @@ public enum ItemManagerConfig {
 
         uniqueCardsOnly = new Prop<Boolean>(uniqueCardsOnly0);
         hideFilters = new Prop<Boolean>(hideFilters0);
+        compactListView = new Prop<Boolean>(FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)); //use main setting to determine default
         groupBy = new Prop<GroupDef>(groupBy0);
         pileBy = new Prop<ColumnDef>(pileBy0);
         imageColumnCount = new Prop<Integer>(imageColumnCount0);
@@ -167,6 +171,13 @@ public enum ItemManagerConfig {
         hideFilters.setValue(value0);
     }
 
+    public boolean getCompactListView() {
+        return compactListView.getValue();
+    }
+    public void setCompactListView(boolean value0) {
+        compactListView.setValue(value0);
+    }
+
     public GroupDef getGroupBy() {
         return groupBy.getValue();
     }
@@ -209,6 +220,9 @@ public enum ItemManagerConfig {
                     }
                     if (el.hasAttribute("hideFilters")) {
                         config.hideFilters.value = Boolean.parseBoolean(el.getAttribute("hideFilters"));
+                    }
+                    if (el.hasAttribute("compactListView")) {
+                        config.compactListView.value = Boolean.parseBoolean(el.getAttribute("compactListView"));
                     }
                     if (el.hasAttribute("groupBy")) {
                         String value = el.getAttribute("groupBy");
@@ -289,6 +303,7 @@ public enum ItemManagerConfig {
                 el.setAttribute("name", config.name());
                 config.uniqueCardsOnly.writeValue(el, "uniqueCardsOnly");
                 config.hideFilters.writeValue(el, "hideFilters");
+                config.compactListView.writeValue(el, "compactListView");
                 config.groupBy.writeValue(el, "groupBy");
                 config.pileBy.writeValue(el, "pileBy");
                 config.imageColumnCount.writeValue(el, "imageColumnCount");

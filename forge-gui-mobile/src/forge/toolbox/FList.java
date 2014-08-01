@@ -267,6 +267,9 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         public boolean isCompactMode() {
             return compactMode;
         }
+        public void setCompactMode(boolean compactMode0) {
+            compactMode = compactMode0;
+        }
 
         public boolean update(float amount) {
             totalZoomAmount += amount;

@@ -139,7 +139,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
                 "Compact List Items",
-                "Show only a single line of text for cards and decks on list views by default."),
+                "Show only a single line of text for cards and decks on all list views by default."),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
                 "Hide Reminder Text",
