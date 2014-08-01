@@ -24,7 +24,7 @@ import org.w3c.dom.NodeList;
 public enum ItemManagerConfig {
     STRING_ONLY(SColumnUtil.getStringColumn(), false, false, true,
             null, null, 1, 0),
-    CARD_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, false, false,
+    CARD_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, true, false,
             null, null, 4, 0),
     DECK_EDITOR(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
             GroupDef.DEFAULT, ColumnDef.CMC, 4, 1),

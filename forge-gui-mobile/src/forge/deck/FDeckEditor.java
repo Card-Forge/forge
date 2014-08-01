@@ -33,6 +33,7 @@ import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
+import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -320,6 +321,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         });
                             }
                         }));
+                        ((DeckEditorPage)getSelectedPage()).buildDeckMenu(this);
                     }
                 };
                 menu.show(btnMoreOptions, 0, btnMoreOptions.getHeight());
@@ -494,6 +496,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected static abstract class DeckEditorPage extends TabPage<FDeckEditor> {
         protected DeckEditorPage(String caption0, FImage icon0) {
             super(caption0, icon0);
+        }
+
+        protected void buildDeckMenu(FPopupMenu menu) {
         }
 
         protected abstract void initialize();
@@ -740,7 +745,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(cardpool);
                 break;
             default:
-                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), true);
+                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
                 break;
             }
         }
@@ -849,6 +854,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     }));
                 }
+            }
+        }
+
+        @Override
+        protected void buildDeckMenu(FPopupMenu menu) {
+            if (cardManager.getConfig().getShowUniqueCardsOption()) {
+                menu.addItem(new FCheckBoxMenuItem("Unique Cards Only", cardManager.getWantUnique(), new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        boolean wantUnique = !cardManager.getWantUnique();
+                        cardManager.setWantUnique(wantUnique);
+                        cardManager.refresh();
+                        cardManager.getConfig().setUniqueCardsOnly(wantUnique);
+                    }
+                }));
             }
         }
     }
