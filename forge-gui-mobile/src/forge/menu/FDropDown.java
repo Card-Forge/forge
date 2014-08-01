@@ -202,6 +202,22 @@ public abstract class FDropDown extends FScrollPane {
         }
 
         @Override
+        public boolean pan(float x, float y, float deltaX, float deltaY, boolean moreVertical) {
+            if (!isVisible()) { return false; }
+            hide(); //always hide if backdrop panned
+
+            return false; //allow pan to pass through to object behind backdrop
+        }
+
+        @Override
+        public boolean fling(float velocityX, float velocityY) {
+            if (!isVisible()) { return false; }
+            hide(); //always hide if backdrop flung
+
+            return false; //allow fling to pass through to object behind backdrop
+        }
+
+        @Override
         public void draw(Graphics g) {
             //draw nothing for backdrop
         }
