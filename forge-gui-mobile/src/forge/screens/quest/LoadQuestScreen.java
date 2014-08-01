@@ -247,7 +247,7 @@ public class LoadQuestScreen extends FScreen {
 
                 @Override
                 public float getItemHeight() {
-                    return CardRenderer.getCardListItemHeight();
+                    return CardRenderer.getCardListItemHeight(false);
                 }
 
                 @Override

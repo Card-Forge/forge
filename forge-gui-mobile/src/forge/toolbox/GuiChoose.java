@@ -241,31 +241,24 @@ public class GuiChoose {
     }
 
     public static <T> void many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
-        order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false, callback);
+        order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, callback);
     }
 
     public static <T> void many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
-        order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false, callback);
+        order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, callback);
     }
 
     public static <T> void order(final String title, final String top, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {
-        order(title, top, 0, 0, sourceChoices, null, referenceCard, false, callback);
-    }
-
-    public static <T extends Comparable<? super T>> void sideboard(List<T> sideboard, List<T> deck, final Callback<List<T>> callback) {
-        Collections.sort(deck);
-        Collections.sort(sideboard);
-        order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true, callback);
+        order(title, top, 0, 0, sourceChoices, null, referenceCard, callback);
     }
 
     public static <T> void order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode, final Callback<List<T>> callback) {
+            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final Callback<List<T>> callback) {
         // An input box for handling the order of choices.
         DualListBox<T> dual = new DualListBox<T>(title, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, callback);
         dual.setSecondColumnLabelText(top);
-        dual.setSideboardMode(sideboardingMode);
         dual.show();
     }
 

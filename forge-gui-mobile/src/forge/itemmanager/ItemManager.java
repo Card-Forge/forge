@@ -45,6 +45,7 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
+import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
@@ -258,7 +259,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         public abstract boolean longPress(Entry<T, Integer> value, float x, float y);
         public abstract void drawValue(Graphics g, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h);
     }
-    public abstract ItemRenderer getListItemRenderer();
+    public abstract ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler);
 
     public void setViewIndex(int viewIndex) {
         if (viewIndex < 0 || viewIndex >= views.size()) { return; }

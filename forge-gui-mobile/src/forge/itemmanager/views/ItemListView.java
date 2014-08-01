@@ -187,9 +187,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     public final class ItemList extends FList<Entry<T, Integer>> {
         private final ItemManager<T>.ItemRenderer renderer;
+        private final CompactModeHandler compactModeHandler;
 
         private ItemList() {
-            renderer = itemManager.getListItemRenderer();
+            compactModeHandler = new CompactModeHandler();
+            renderer = itemManager.getListItemRenderer(compactModeHandler);
             setListItemRenderer(new ListItemRenderer<Map.Entry<T,Integer>>() {
                 private Integer prevTapIndex = -1;
 
@@ -275,6 +277,15 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         @Override
         protected boolean drawLineSeparators() {
             return false;
+        }
+
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            if (compactModeHandler.update(amount)) {
+                revalidate(); //update scroll bounds
+                scrollSelectionIntoView(); //ensure selection remains in view
+            }
+            return true;
         }
     }
 

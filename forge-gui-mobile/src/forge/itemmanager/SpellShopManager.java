@@ -18,6 +18,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.quest.QuestSpellShop;
 import forge.toolbox.FList;
+import forge.toolbox.FList.CompactModeHandler;
 
 
 public final class SpellShopManager extends ItemManager<InventoryItem> {
@@ -43,11 +44,11 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
     }
 
     @Override
-    public ItemRenderer getListItemRenderer() {
+    public ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler) {
         return new ItemRenderer() {
             @Override
             public float getItemHeight() {
-                return CardRenderer.getCardListItemHeight();
+                return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
             }
 
             @Override
@@ -56,7 +57,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
                 float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
                 if (value.getKey() instanceof PaperCard) {
-                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), getItemSuffix(value), x, y, w, h);
+                    CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
                 }
                 else {
                     g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, HAlignment.LEFT, true);
@@ -85,7 +86,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
             @Override
             public boolean tap(Entry<InventoryItem, Integer> value, float x, float y, int count) {
                 if (value.getKey() instanceof PaperCard) {
-                    return CardRenderer.cardListItemTap((PaperCard)value.getKey(), x, y, count);
+                    return CardRenderer.cardListItemTap((PaperCard)value.getKey(), x, y, count, compactModeHandler.isCompactMode());
                 }
                 return false;
             }

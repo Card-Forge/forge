@@ -13,6 +13,7 @@ import forge.screens.match.views.VPrompt;
 import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
+import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Callback;
 
 import java.util.ArrayList;
@@ -47,8 +48,7 @@ public class DualListBox<T> extends FDialog {
 
     private final int targetRemainingSourcesMin;
     private final int targetRemainingSourcesMax;
-
-    private boolean sideboardingMode = false;
+    private final CompactModeHandler compactModeHandler = new CompactModeHandler();
 
     public DualListBox(String title, int remainingSources, List<T> sourceElements, List<T> destElements, final Callback<List<T>> callback) {
         this(title, remainingSources, remainingSources, sourceElements, destElements, callback);
@@ -213,17 +213,6 @@ public class DualListBox<T> extends FDialog {
         orderedLabel.setText(label);
     }
 
-    public void setSideboardMode(boolean isSideboardMode) {
-        sideboardingMode = isSideboardMode;
-        if (sideboardingMode) {
-            addAllButton.setVisible(false);
-            removeAllButton.setVisible(false);
-            autoButton.setEnabled(false);
-            selectOrder.setText(String.format("Sideboard (%d):", sourceList.getCount()));
-            orderedLabel.setText(String.format("Main Deck (%d):", destList.getCount()));
-        }
-    }
-
     public List<T> getRemainingSourceList() {
         return sourceList.extractListData();
     }
@@ -251,19 +240,12 @@ public class DualListBox<T> extends FDialog {
     }
 
     private void setButtonState() {
-        if (sideboardingMode) {
-            removeAllButton.setVisible(false);
-            addAllButton.setVisible(false);
-            selectOrder.setText(String.format("Sideboard (%d):", sourceList.getCount()));
-            orderedLabel.setText(String.format("Main Deck (%d):", destList.getCount()));
-        }
-
         boolean anySize = targetRemainingSourcesMax < 0;
         boolean canAdd = sourceList.getCount() != 0 && (anySize || targetRemainingSourcesMin <= sourceList.getCount());
         boolean canRemove = destList.getCount() != 0;
         boolean targetReached = anySize || targetRemainingSourcesMin <= sourceList.getCount() && targetRemainingSourcesMax >= sourceList.getCount();
 
-        autoButton.setEnabled(targetRemainingSourcesMax == 0 && !targetReached && !sideboardingMode);
+        autoButton.setEnabled(targetRemainingSourcesMax == 0 && !targetReached);
 
         addButton.setEnabled(canAdd);
         addAllButton.setEnabled(canAdd);
@@ -354,12 +336,12 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight();
+            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((Card)value, x, y, count);
+            return CardRenderer.cardListItemTap((Card)value, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
@@ -370,7 +352,7 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h);
+            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
         }
     }
     //special renderer for paper cards
@@ -382,12 +364,12 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight();
+            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count);
+            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
@@ -398,7 +380,7 @@ public class DualListBox<T> extends FDialog {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h);
+            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
         }
     }
 
@@ -452,6 +434,17 @@ public class DualListBox<T> extends FDialog {
             if (selectedIndices.isEmpty() && count > 0) {
                 selectedIndices.add(count - 1); //select last item if nothing remains selected
             }
+        }
+
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            if (compactModeHandler.update(amount)) {
+                revalidate();
+                if (selectedIndices.size() > 0) {
+                    scrollIntoView(selectedIndices.get(0)); //ensure selection remains in view
+                }
+            }
+            return true;
         }
 
         @Override

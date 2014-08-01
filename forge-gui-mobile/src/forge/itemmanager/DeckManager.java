@@ -15,9 +15,8 @@ import forge.itemmanager.filters.DeckColorFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.TextSearchFilter;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
+import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Utils;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -80,7 +79,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     private static final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
 
     @Override
-    public ItemRenderer getListItemRenderer() {
+    public ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler) {
         return new ItemRenderer() {
             @Override
             public float getItemHeight() {
@@ -88,7 +87,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                     //if just string column, use normal list item height
                     return Utils.AVG_FINGER_HEIGHT;
                 }
-                return CardRenderer.getCardListItemHeight(); //use same height for decks as for cards
+                return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode()); //use same height for decks as for cards
             }
 
             @Override
@@ -131,8 +130,8 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 x += availableNameWidth + FList.PADDING;
                 CardFaceSymbols.drawColorSet(g, deckColor, x, y, IMAGE_SIZE);
 
-                if (FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)) {
-                    return; //skip second line if compact list items setting on
+                if (compactModeHandler.isCompactMode()) {
+                    return; //skip second line if compact mode
                 }
 
                 //draw formats, main/side, and set/highest rarity on second line

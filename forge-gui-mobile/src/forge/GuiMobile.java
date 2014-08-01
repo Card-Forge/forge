@@ -172,7 +172,7 @@ public class GuiMobile implements IGuiBase {
         return new WaitCallback<List<T>>() {
             @Override
             public void run() {
-                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+                GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, this);
             }
         }.invokeAndWait();
     }

@@ -13,6 +13,7 @@ import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.CardSearchFilter;
 import forge.itemmanager.filters.CardTypeFilter;
 import forge.itemmanager.filters.TextSearchFilter;
+import forge.toolbox.FList.CompactModeHandler;
 
 /** 
  * ItemManager for cards
@@ -46,21 +47,21 @@ public class CardManager extends ItemManager<PaperCard> {
     }
 
     @Override
-    public ItemRenderer getListItemRenderer() {
+    public ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler) {
         return new ItemRenderer() {
             @Override
             public float getItemHeight() {
-                return CardRenderer.getCardListItemHeight();
+                return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
             }
 
             @Override
             public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), getItemSuffix(value), x, y, w, h);
+                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
             }
 
             @Override
             public boolean tap(Entry<PaperCard, Integer> value, float x, float y, int count) {
-                return CardRenderer.cardListItemTap(value.getKey(), x, y, count);
+                return CardRenderer.cardListItemTap(value.getKey(), x, y, count, compactModeHandler.isCompactMode());
             }
 
             @Override

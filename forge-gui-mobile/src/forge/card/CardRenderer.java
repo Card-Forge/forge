@@ -211,8 +211,8 @@ public class CardRenderer {
         }
     }
 
-    public static float getCardListItemHeight() {
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)) {
+    public static float getCardListItemHeight(boolean compactMode) {
+        if (compactMode) {
             return MANA_SYMBOL_SIZE + 2 * FList.PADDING;
         }
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
@@ -270,12 +270,12 @@ public class CardRenderer {
         return cardArt;
     }
 
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, String suffix, float x, float y, float w, float h) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         CardRules cardRules = card.getRules();
         if (cardRules != null) {
             drawCardListItem(g, font, foreColor, getCardArt(card), cardRules, card.getCurSetCode(),
                     card.getRarity(), card.getNetAttack(), card.getNetDefense(),
-                    card.getCurrentLoyalty(), count, suffix, x, y, w, h);
+                    card.getCurrentLoyalty(), count, suffix, x, y, w, h, compactMode);
         }
         else { //if fake card, just draw card name centered
             String name = card.getName();
@@ -288,12 +288,12 @@ public class CardRenderer {
             g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, IPaperCard pc, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         CardRules cardRules = pc.getRules();
         if (cardRules != null) {
             drawCardListItem(g, font, foreColor, getCardArt(pc), cardRules, pc.getEdition(),
                     pc.getRarity(), cardRules.getIntPower(), cardRules.getIntToughness(),
-                    cardRules.getInitialLoyalty(), count, suffix, x, y, w, h);
+                    cardRules.getInitialLoyalty(), count, suffix, x, y, w, h, compactMode);
         }
         else { //if fake card, just draw card name centered
             String name = pc.getName();
@@ -306,7 +306,7 @@ public class CardRenderer {
             g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (cardArt != null) {
@@ -352,8 +352,8 @@ public class CardRenderer {
         }
         g.drawText(name, font, foreColor, x, y, w - manaCostWidth - cardArtWidth - FList.PADDING, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)) {
-            return; //skip second line if compact list items setting on
+        if (compactMode) {
+            return; //skip second line if rendering in compact mode
         }
 
         y += MANA_SYMBOL_SIZE + FList.PADDING + SET_BOX_MARGIN;
@@ -377,15 +377,15 @@ public class CardRenderer {
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, HAlignment.LEFT, true);
     }
 
-    public static boolean cardListItemTap(Card card, float x, float y, int count) {
-        if (x <= getCardListItemHeight() * CARD_ART_RATIO) {
+    public static boolean cardListItemTap(Card card, float x, float y, int count, boolean compactMode) {
+        if (x <= getCardListItemHeight(compactMode) * CARD_ART_RATIO) {
             CardZoom.show(card);
             return true;
         }
         return false;
     }
-    public static boolean cardListItemTap(IPaperCard pc, float x, float y, int count) {
-        float cardArtHeight = getCardListItemHeight();
+    public static boolean cardListItemTap(IPaperCard pc, float x, float y, int count, boolean compactMode) {
+        float cardArtHeight = getCardListItemHeight(compactMode);
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (x <= cardArtWidth && y <= cardArtHeight) {
             CardZoom.show(Card.getCardForUi(pc));

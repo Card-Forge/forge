@@ -11,6 +11,8 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
 import forge.util.Utils;
 
@@ -253,6 +255,33 @@ public class FList<E> extends FScrollPane implements Iterable<E> {
         @Override
         public void drawValue(Graphics g, Integer index, V value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
             g.drawText(value.toString(), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+        }
+    }
+
+    public static class CompactModeHandler {
+        private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;
+
+        private float totalZoomAmount;
+        private boolean compactMode = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS);
+
+        public boolean isCompactMode() {
+            return compactMode;
+        }
+
+        public boolean update(float amount) {
+            totalZoomAmount += amount;
+
+            if (totalZoomAmount >= REQ_AMOUNT) {
+                compactMode = false;
+                totalZoomAmount = 0;
+                return true;
+            }
+            if (totalZoomAmount <= REQ_AMOUNT) {
+                compactMode = true;
+                totalZoomAmount = 0;
+                return true;
+            }
+            return false;
         }
     }
 

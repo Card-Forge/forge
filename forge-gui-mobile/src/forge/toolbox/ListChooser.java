@@ -38,6 +38,7 @@ import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FList.CompactModeHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -89,13 +90,16 @@ public class ListChooser<T> extends FContainer {
     private FTextField txtSearch;
     private ChoiceList lstChoices;
     private FOptionPane optionPane;
+    private final Collection<T> list;
     private final Function<T, String> display;
     private final Callback<List<T>> callback;
+    private final CompactModeHandler compactModeHandler = new CompactModeHandler();
 
-    public ListChooser(final String title, final int minChoices0, final int maxChoices0, final Collection<T> list, final Function<T, String> display0, final Callback<List<T>> callback0) {
+    public ListChooser(final String title, final int minChoices0, final int maxChoices0, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
         minChoices = minChoices0;
         maxChoices = maxChoices0;
+        list = list0;
         if (list.size() > 25) { //only show search field if more than 25 items
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
@@ -137,7 +141,7 @@ public class ListChooser<T> extends FContainer {
             options = new String[] {"OK"};
         }
 
-        setHeight(Math.min(lstChoices.getListItemRenderer().getItemHeight() * list.size(), FOptionPane.getMaxDisplayObjHeight()));
+        updateHeight();
 
         optionPane = new FOptionPane(null, title, null, this, options, 0, new Callback<Integer>() {
             @Override
@@ -158,6 +162,14 @@ public class ListChooser<T> extends FContainer {
                 }
             }
         });
+    }
+
+    private void updateHeight() {
+        boolean needRevalidate = getHeight() > 0; //needs to revalidate if already has height
+        setHeight(Math.min(lstChoices.getListItemRenderer().getItemHeight() * list.size(), FOptionPane.getMaxDisplayObjHeight()));
+        if (needRevalidate) {
+            optionPane.revalidate();
+        }
     }
 
     public void show() {
@@ -252,12 +264,12 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight();
+            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count);
+            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
@@ -268,7 +280,7 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h);
+            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
         }
     }
     //special renderer for cards
@@ -280,12 +292,12 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight();
+            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
         }
 
         @Override
         public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((Card)value, x, y, count);
+            return CardRenderer.cardListItemTap((Card)value, x, y, count, compactModeHandler.isCompactMode());
         }
 
         @Override
@@ -296,7 +308,7 @@ public class ListChooser<T> extends FContainer {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h);
+            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
         }
     }
     //special renderer for SpellAbilities
@@ -453,6 +465,17 @@ public class ListChooser<T> extends FContainer {
                 }
             });
             setFont(renderer.getDefaultFont());
+        }
+
+        @Override
+        public boolean zoom(float x, float y, float amount) {
+            if (compactModeHandler.update(amount)) {
+                updateHeight(); //update height and scroll bounds based on compact mode change
+                if (selectedIndices.size() > 0) {
+                    scrollIntoView(selectedIndices.get(0)); //ensure selection remains in view
+                }
+            }
+            return true;
         }
 
         @Override
