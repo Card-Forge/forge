@@ -137,6 +137,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 "Randomize Card Art",
                 "Generates cards with random art in generated limited mode card pools."),
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
+                "Compact List Items",
+                "Show only a single line of text for cards and decks on list views."),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
                 "Hide Reminder Text",
                 "Hide reminder text in Card Detail pane."),

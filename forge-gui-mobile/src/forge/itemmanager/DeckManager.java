@@ -15,6 +15,8 @@ import forge.itemmanager.filters.DeckColorFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
 import forge.itemmanager.filters.TextSearchFilter;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
 import forge.util.Utils;
 
@@ -128,6 +130,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
                 g.drawText(name, font, foreColor, x, y, availableNameWidth, IMAGE_SIZE, false, HAlignment.LEFT, true);
                 x += availableNameWidth + FList.PADDING;
                 CardFaceSymbols.drawColorSet(g, deckColor, x, y, IMAGE_SIZE);
+
+                if (FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)) {
+                    return; //skip second line if compact list items setting on
+                }
 
                 //draw formats, main/side, and set/highest rarity on second line
                 font = FSkinFont.get(12);

@@ -212,6 +212,9 @@ public class CardRenderer {
     }
 
     public static float getCardListItemHeight() {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)) {
+            return MANA_SYMBOL_SIZE + 2 * FList.PADDING + 1;
+        }
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
     }
 
@@ -348,6 +351,10 @@ public class CardRenderer {
             name += suffix;
         }
         g.drawText(name, font, foreColor, x, y, w - manaCostWidth - cardArtWidth - FList.PADDING, MANA_SYMBOL_SIZE, false, HAlignment.LEFT, true);
+
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_LIST_ITEMS)) {
+            return; //skip second line if compact list items setting on
+        }
 
         y += MANA_SYMBOL_SIZE + FList.PADDING + SET_BOX_MARGIN;
 
