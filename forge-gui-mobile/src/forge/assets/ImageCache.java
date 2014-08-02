@@ -58,6 +58,12 @@ public class ImageCache {
     private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
     public static final Texture defaultImage;
 
+    private static boolean imageLoaded, delayLoadRequested;
+    public static void allowSingleLoad() {
+        imageLoaded = false; //reset at the beginning of each render
+        delayLoadRequested = false;
+    }
+
     static {
         Texture defImage = null;
         try {
@@ -132,9 +138,21 @@ public class ImageCache {
         }
 
         // Load from file and add to cache if not found in cache initially.
-        Texture image;
+        Texture image = cache.getIfPresent(imageKey);
+        if (image != null) { return image; }
+
+        if (imageLoaded) { //prevent loading more than one image each render for performance
+            if (!delayLoadRequested) {
+                //ensure images continue to load even if no input is being received
+                delayLoadRequested = true;
+                Gdx.graphics.requestRendering();
+            }
+            return null;
+        }
+        imageLoaded = true;
+
         try {
-            image = ImageCache.cache.get(imageKey);
+            image = cache.get(imageKey);
         }
         catch (final ExecutionException ex) {
             if (!(ex.getCause() instanceof NullPointerException)) {

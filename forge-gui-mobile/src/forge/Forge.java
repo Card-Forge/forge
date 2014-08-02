@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Clipboard;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.model.FModel;
@@ -205,6 +206,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         try {
+            ImageCache.allowSingleLoad();
             Animation.advanceAll();
     
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
