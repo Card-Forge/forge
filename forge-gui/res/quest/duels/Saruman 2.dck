@@ -3,7 +3,7 @@
 Name=Saruman 2
 Title=Saruman
 Difficulty=medium
-Description=UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry 
+Description=UBR discard deck with Waste Not, Megrim, Liliana's Caress and Burning Inquiry 
 Icon=Saruman.jpg
 Deck Type=constructed
 [main]
@@ -12,7 +12,8 @@ Deck Type=constructed
 4 Volcanic Island
 4 Crumbling Necropolis
 5 Swamp|M12
-4 Megrim
+2 Megrim
+2 Waste Not
 4 Liliana's Caress
 1 Geth's Grimoire
 1 Abyssal Nocturnus
