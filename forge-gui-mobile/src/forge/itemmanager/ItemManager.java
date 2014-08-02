@@ -66,6 +66,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final Class<T> genericType;
     private ItemManagerConfig config;
     private boolean hasNewColumn;
+    private boolean viewUpdating, needSecondUpdate;
     private List<ItemColumn> sortCols = new ArrayList<ItemColumn>();
 
     private final TextSearchFilter<? extends T> searchFilter;
@@ -775,13 +776,23 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         filterPredicate = newFilterPredicate;
         if (pool != null) {
-            FThreads.invokeInBackgroundThread(new Runnable() {
-                @Override
-                public void run() {
-                    updateView(true, null);
-                    Gdx.graphics.requestRendering();
-                }
-            });
+            if (viewUpdating) {
+                needSecondUpdate = true;
+            }
+            else {
+                viewUpdating = true;
+                FThreads.invokeInBackgroundThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        do {
+                            needSecondUpdate = false;
+                            updateView(true, null);
+                            Gdx.graphics.requestRendering();
+                        } while (needSecondUpdate);
+                        viewUpdating = false;
+                    }
+                });
+            }
         }
         return true;
     }
