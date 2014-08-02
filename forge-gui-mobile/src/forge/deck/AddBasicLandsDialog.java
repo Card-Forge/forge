@@ -24,7 +24,6 @@ import forge.Graphics;
 import forge.StaticData;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.assets.ImageCache;
 import forge.card.CardEdition;
 import forge.card.CardRenderer;
 import forge.card.CardRules;
@@ -47,7 +46,6 @@ import forge.toolbox.FTextArea;
 import forge.util.Callback;
 import forge.util.Utils;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 

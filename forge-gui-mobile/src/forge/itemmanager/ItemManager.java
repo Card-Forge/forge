@@ -46,7 +46,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
 
@@ -59,9 +58,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
     private final List<ItemFilter<? extends T>> filters = new ArrayList<ItemFilter<? extends T>>();
-    private boolean wantUnique = false;
-    private boolean alwaysNonUnique = false;
     private boolean hideFilters = false;
+    private boolean wantUnique = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
@@ -847,10 +845,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         updateView(true, getSelectedItems());
     }
 
-    protected Iterable<Entry<T, Integer>> createUniqueList(final Iterable<Entry<T, Integer>> source) {
-        return Aggregates.uniqueByLast(source, pool.FN_GET_NAME);
-    }
-
     /**
      * 
      * updateView.
@@ -860,16 +854,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
 
-        if (useFilter || wantUnique || forceFilter) {
+        if (useFilter || forceFilter) {
             model.clear();
 
             Iterable<Entry<T, Integer>> items = pool;
             if (useFilter) {
                 Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
                 items = Iterables.filter(pool, pred);
-            }
-            if (wantUnique) {
-                items = createUniqueList(items);
             }
             model.addItems(items);
         }
@@ -879,18 +870,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         //update ratio of # in filtered pool / # in total pool
         int totalCount;
         int filteredCount = getFilteredItems().countAll();
-        if (!useFilter) {
-            totalCount = filteredCount;
-        }
-        else if (wantUnique) {
-            totalCount = 0;
-            Iterable<Entry<T, Integer>> items = createUniqueList(pool);
-            for (Entry<T, Integer> entry : items) {
-                totalCount += entry.getValue();
-            }
+        if (useFilter) {
+            totalCount = pool.countAll();
         }
         else {
-            totalCount = pool.countAll();
+            totalCount = filteredCount;
         }
         searchFilter.setRatio("(" + filteredCount + " / " + totalCount + ")");
     }
@@ -922,27 +906,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @param unique - if true, the editor will be set to the "unique item names only" mode.
      */
     public void setWantUnique(boolean unique) {
-        wantUnique = alwaysNonUnique ? false : unique;
-    }
-
-    /**
-     * 
-     * getAlwaysNonUnique.
-     * 
-     * @return if true, this editor must always show non-unique items (e.g. quest editor).
-     */
-    public boolean getAlwaysNonUnique() {
-        return alwaysNonUnique;
-    }
-
-    /**
-     * 
-     * setAlwaysNonUnique.
-     * 
-     * @param nonUniqueOnly - if true, this editor must always show non-unique items (e.g. quest editor).
-     */
-    public void setAlwaysNonUnique(boolean nonUniqueOnly) {
-        alwaysNonUnique = nonUniqueOnly;
+        wantUnique = unique;
     }
 
     public void setSelectionSupport(int minSelections0, int maxSelections0) {

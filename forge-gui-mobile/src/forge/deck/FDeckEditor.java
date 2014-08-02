@@ -745,7 +745,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setPool(cardpool);
                 break;
             default:
-                cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+                if (cardManager.getWantUnique()) {
+                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class), true);
+                }
+                else {
+                    cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+                }
                 break;
             }
         }
@@ -865,7 +870,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     public void handleEvent(FEvent e) {
                         boolean wantUnique = !cardManager.getWantUnique();
                         cardManager.setWantUnique(wantUnique);
-                        cardManager.refresh();
+                        refresh();
                         cardManager.getConfig().setUniqueCardsOnly(wantUnique);
                     }
                 }));
@@ -1119,8 +1124,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private static class DraftPackPage extends CatalogPage {
         protected DraftPackPage() {
             super(ItemManagerConfig.DRAFT_PACK, "Pack 1", FSkinImage.PACK);
-
-            cardManager.setAlwaysNonUnique(true);
         }
 
         @Override
