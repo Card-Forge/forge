@@ -188,6 +188,12 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
+        if (this.mapParams.containsKey("FirstUpkeepThisGame")) {
+            if (!phaseHandler.isFirstUpkeepThisGame()) {
+                return false;
+            }
+        }
+
         if (this.mapParams.containsKey("FirstCombat")) {
             if (!phaseHandler.isFirstCombat()) {
                 return false;

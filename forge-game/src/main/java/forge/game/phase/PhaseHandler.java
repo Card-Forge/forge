@@ -67,6 +67,7 @@ public class PhaseHandler implements java.io.Serializable {
     private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = new HashMap<PhaseType, Stack<PhaseType>>();
 
     private int nUpkeepsThisTurn = 0;
+    private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
@@ -259,6 +260,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case UPKEEP:
                     this.nUpkeepsThisTurn++;
+                    this.nUpkeepsThisGame++;
                     game.getUpkeep().executeUntil(this.getPlayerTurn());
                     game.getUpkeep().executeAt();
                     break;
@@ -928,6 +930,17 @@ public class PhaseHandler implements java.io.Serializable {
      */
     public final boolean isFirstUpkeep() {
         return (this.nUpkeepsThisTurn == 1);
+    }
+
+    /**
+     * <p>
+     * isFirstUpkeepThisGame.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isFirstUpkeepThisGame() {
+        return (this.nUpkeepsThisGame == 1);
     }
 
     /**
