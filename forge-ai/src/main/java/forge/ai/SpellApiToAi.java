@@ -64,6 +64,7 @@ public enum SpellApiToAi {
         apiToClass.put(ApiType.EndTurn, EndTurnAi.class);
         apiToClass.put(ApiType.ExchangeLife, LifeExchangeAi.class);
         apiToClass.put(ApiType.ExchangeControl, ControlExchangeAi.class);
+        apiToClass.put(ApiType.ExchangeControlVariant, CannotPlayAi.class);
         apiToClass.put(ApiType.ExchangePower, PowerExchangeAi.class);
         apiToClass.put(ApiType.ExchangeZone, ZoneExchangeAi.class);
         apiToClass.put(ApiType.Fight, FightAi.class);

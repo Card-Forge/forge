@@ -318,6 +318,7 @@ forge-game/src/main/java/forge/game/ability/effects/ClashEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CleanUpEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CloneEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ControlExchangeEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ControlExchangeVariantEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ControlGainEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ControlPlayerEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ControlSpellEffect.java -text
@@ -3729,6 +3730,7 @@ forge-gui/res/cardsfolder/c/culling_sun.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/culling_the_weak.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cultbrand_cinder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cultivate.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/cultural_exchange.txt -text
 forge-gui/res/cardsfolder/c/cumber_stone.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cunning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/cunning_advisor.txt svneol=native#text/plain

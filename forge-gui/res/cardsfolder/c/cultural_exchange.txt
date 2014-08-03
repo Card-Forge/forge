@@ -1,0 +1,7 @@
+Name:Cultural Exchange
+ManaCost:4 U U
+Types:Sorcery
+A:SP$ ExchangeControlVariant | Cost$ 4 U U | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | Zone$ Battlefield | Type$ Creature | SpellDescription$ Choose any number of creatures target player controls. Choose the same number of creatures another target player controls. Those players exchange control of those creatures. (This effect lasts indefinitely.)
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cultural_exchange.jpg
+Oracle:Choose any number of creatures target player controls. Choose the same number of creatures another target player controls. Those players exchange control of those creatures. (This effect lasts indefinitely.)

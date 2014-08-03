@@ -62,6 +62,7 @@ public enum ApiType {
     EndTurn (EndTurnEffect.class),
     ExchangeLife (LifeExchangeEffect.class),
     ExchangeControl (ControlExchangeEffect.class),
+    ExchangeControlVariant (ControlExchangeVariantEffect.class),
     ExchangePower (PowerExchangeEffect.class),
     ExchangeZone (ZoneExchangeEffect.class),
     Fight (FightEffect.class),

@@ -155,7 +155,7 @@ public class ManaPool implements Iterable<Mana> {
                 }
                 if (convertToColorless) {
                     floatingMana.get(b).removeAll(pMana);
-                    ConvertManaColor(b, MagicColor.COLORLESS);
+                    convertManaColor(b, MagicColor.COLORLESS);
                 } else {
                     numRemoved += floatingMana.get(b).size() - pMana.size();
                     floatingMana.get(b).clear();
@@ -164,7 +164,7 @@ public class ManaPool implements Iterable<Mana> {
             }
             else {
                 if (convertToColorless) {
-                    ConvertManaColor(b, MagicColor.COLORLESS);
+                    convertManaColor(b, MagicColor.COLORLESS);
                 } else {
                     numRemoved += floatingMana.get(b).size();
                     floatingMana.get(b).clear();
@@ -176,7 +176,7 @@ public class ManaPool implements Iterable<Mana> {
         return numRemoved;
     }
 
-    private void ConvertManaColor(final byte originalColor, final byte toColor) {
+    private void convertManaColor(final byte originalColor, final byte toColor) {
         List<Mana> convert = new ArrayList<Mana>();
         for (Mana m : floatingMana.get(originalColor)) {
             convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility()));
