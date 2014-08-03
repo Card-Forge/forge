@@ -149,7 +149,6 @@ public class Game {
         subscribeToEvents(gameLog.getEventVisitor());
     }
 
-
     /**
      * Gets the players who are still fighting to win, in turn order.
      * 
@@ -550,7 +549,6 @@ public class Game {
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Player", p);
         this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
-
     }
 
     /**
@@ -600,17 +598,14 @@ public class Game {
         for (int i = 0; i < getCardsIn(ZoneType.Command).size(); i++) {
             Card c = getCardsIn(ZoneType.Command).get(i);
             if (c.isScheme() && !c.isType("Ongoing")) {
-
                 boolean foundonstack = false;
                 for (SpellAbilityStackInstance si : getStack()) {
                     if (si.getSourceCard().equals(c)) {
-
                         foundonstack = true;
                         break;
                     }
                 }
                 if (!foundonstack) {
-
                     getTriggerHandler().suppressMode(TriggerType.ChangesZone);
                     c.getController().getZone(ZoneType.Command).remove(c);
                     i--;
@@ -619,7 +614,6 @@ public class Game {
                     c.getController().getZone(ZoneType.SchemeDeck).add(c);
                 }
             }
-
         }
     }
 
@@ -638,7 +632,6 @@ public class Game {
     }
 
     public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
-        
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
         
         if (matchRarity) {
@@ -708,17 +701,16 @@ public class Game {
                 }
                 
             }
-        
-        } else {
+        }
+        else {
             for (Player player : getPlayers()) {
                 chooseRandomCardsForAnte(player, anteed);
             }
         }
         
         return anteed;
-
     }
-    
+
     private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
         final List<Card> lib = player.getCardsIn(ZoneType.Library);
         Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
@@ -729,7 +721,7 @@ public class Game {
         }
         anteed.put(player, ante);
     }
-    
+
     private Set<CardRarity> getValidRarities(final Iterable<Card> cards) {
         Set<CardRarity> rarities = new HashSet<>();
         for (Card card : cards) {
