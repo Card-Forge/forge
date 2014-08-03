@@ -61,6 +61,15 @@ public class Aggregates {
         return result;
     }
 
+    public static final <T> T random(final T[] source) {
+        if (source == null) { return null; }
+
+        switch (source.length) {
+            case 0: return null;
+            case 1: return source[0];
+            default: return source[MyRandom.getRandom().nextInt(source.length)];
+        }
+    }
 
     // Random - algorithm adapted from Braid's GeneratorFunctions
     /**
@@ -71,10 +80,10 @@ public class Aggregates {
      * @return the t
      */
     public static final <T> T random(final Iterable<T> source) {
-        if( null == source ) 
-            return null;
+        if (source == null) { return null; }
+
         Random rnd = MyRandom.getRandom(); 
-        if ( source instanceof List<?> ) {
+        if (source instanceof List<?>) {
             List<T> src = (List<T>)source;
             int len = src.size();
             switch(len) {
@@ -99,16 +108,16 @@ public class Aggregates {
     public static final <T> List<T> random(final Iterable<T> source, final int count) {
         final List<T> result = new ArrayList<T>();
         final int[] randoms = new int[count];
-        for(int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             randoms[i] = Integer.MAX_VALUE;
             result.add(null);
         }
-        
-        Random rnd = MyRandom.getRandom(); 
-        for(T item : source) {
+
+        Random rnd = MyRandom.getRandom();
+        for (T item : source) {
             int next = rnd.nextInt();
-            for(int i = 0; i < count; i++) {
-                if(next < randoms[i]) {
+            for (int i = 0; i < count; i++) {
+                if (next < randoms[i]) {
                     randoms[i] = next;
                     result.set(i, item);
                     break;
@@ -116,6 +125,11 @@ public class Aggregates {
             }
         }
         return result;
+    }
+
+    public static int randomInt(int min, int max) {
+        Random rnd = MyRandom.getRandom();
+        return rnd.nextInt(max - min + 1) + min;
     }
 
     public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic
@@ -143,13 +157,15 @@ public class Aggregates {
 
     public static <TItem, TField> TItem firstFieldEquals(List<TItem> source, Function<TItem, TField> valueAccessor, TField valueEquals) {
         if (source == null) { return null; }
+
         if (valueEquals == null) {
             for (final TItem c : source) {
                 if (null == valueAccessor.apply(c)) {
                     return c;
                 }
             }
-        } else {
+        }
+        else {
             for (final TItem c : source) {
                 if (valueEquals.equals(valueAccessor.apply(c))) {
                     return c;
@@ -159,10 +175,9 @@ public class Aggregates {
         return null;
     }
 
-
     public static <T, U> Iterable<Entry<U, Integer>> groupSumBy(Iterable<Entry<T, Integer>> source, Function<T, U> fnGetField) {
         Map<U, Integer> result = new HashMap<U, Integer>();
-        for(Entry<T, Integer> kv : source) {
+        for (Entry<T, Integer> kv : source) {
             U k = fnGetField.apply(kv.getKey());
             Integer v = kv.getValue();
             Integer sum = result.get(k);
@@ -172,5 +187,4 @@ public class Aggregates {
         }
         return result.entrySet();
     }
-
 }

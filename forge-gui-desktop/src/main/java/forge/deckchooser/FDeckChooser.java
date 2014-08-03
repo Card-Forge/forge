@@ -169,7 +169,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             String sel = lstDecks.getSelectedItem().getName();
             switch (lstDecks.getGameType()) {
             case Commander:
-                if (sel.equals("Random")) {
+                if (sel.equals("Random User Deck")) {
                     IStorage<Deck> decks = FModel.getDecks().getCommander();
                     if (decks.size() > 0) {
                         return Aggregates.random(decks);
@@ -177,7 +177,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
                 return DeckgenUtil.generateCommanderDeck(isAi);
             case Archenemy:
-                if (sel.equals("Random")) {
+                if (sel.equals("Random User Deck")) {
                     IStorage<Deck> decks = FModel.getDecks().getScheme();
                     if (decks.size() > 0) {
                         return Aggregates.random(decks);
@@ -185,7 +185,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
                 return DeckgenUtil.generateSchemeDeck();
             case Planechase:
-                if (sel.equals("Random")) {
+                if (sel.equals("Random User Deck")) {
                     IStorage<Deck> decks = FModel.getDecks().getPlane();
                     if (decks.size() > 0) {
                         return Aggregates.random(decks);
@@ -193,9 +193,32 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
                 return DeckgenUtil.generatePlanarDeck();
             default:
-                break;
+                if (sel.equals("Random User Deck")) {
+                    IStorage<Deck> decks = FModel.getDecks().getConstructed();
+                    if (decks.size() > 0) {
+                        return Aggregates.random(decks);
+                    }
+                }
+                while (true) {
+                    switch (Aggregates.random(DeckType.values())) {
+                    case PRECONSTRUCTED_DECK:
+                        return Aggregates.random(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons())).getDeck();
+                    case QUEST_OPPONENT_DECK:
+                        return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
+                    case COLOR_DECK:
+                        List<String> colors = new ArrayList<String>();
+                        int count = Aggregates.randomInt(1, 3);
+                        for (int i = 1; i <= count; i++) {
+                            colors.add("Random " + i);
+                        }
+                        return DeckgenUtil.buildColorDeck(colors, isAi);
+                    case THEME_DECK:
+                        return Aggregates.random(DeckProxy.getAllThemeDecks()).getDeck();
+                    default:
+                        continue;
+                    }
+                }
             }
-            return null;
         }
 
         @Override
