@@ -42,6 +42,9 @@ import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
+import forge.game.io.GameStateDeserializer;
+import forge.game.io.GameStateSerializer;
+import forge.game.io.IGameStateObject;
 import forge.game.phase.EndOfTurn;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -64,7 +67,7 @@ import forge.util.Aggregates;
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
-public class Game {
+public class Game implements IGameStateObject {
     private final GameRules rules;
     private final List<Player> roIngamePlayers;
     private final List<Player> roIngamePlayersReversed;
@@ -96,12 +99,39 @@ public class Game {
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
 
+    @Override
+    public void loadState(GameStateDeserializer gsd) {
+    }
+
+    @Override
+    public void saveState(GameStateSerializer gss) {
+        gss.write(rules);
+        gss.write(cleanup);
+        gss.write(endOfTurn);
+        gss.write(endOfCombat);
+        gss.write(untap);
+        gss.write(upkeep);
+        gss.write(stack);
+        gss.write(phaseHandler);
+        gss.write(staticEffects);
+        gss.write(triggerHandler);
+        gss.write(replacementHandler);
+        gss.write(gameLog);
+        gss.write(stackZone);
+        gss.write(turnOrder.name());
+        gss.write(timestamp);
+        gss.write(age.name());
+        gss.write(outcome);
+        gss.writePlayerList(allPlayers);
+        gss.writePlayerList(ingamePlayers);
+    }
+
     /**
      * Constructor.
      * @param match0
      */
-    public Game(List<RegisteredPlayer> players0, GameRules rules, Match match0) { /* no more zones to map here */
-        this.rules = rules;
+    public Game(List<RegisteredPlayer> players0, GameRules rules0, Match match0) { /* no more zones to map here */
+        rules = rules0;
         match = match0;
         List<Player> players = new ArrayList<Player>();
         allPlayers = Collections.unmodifiableList(players);
@@ -156,10 +186,10 @@ public class Game {
      * @return the players
      */
     public final List<Player> getPlayersInTurnOrder() {
-    	if (this.turnOrder.isDefaultDirection()) {
-    		return this.roIngamePlayers;
+    	if (turnOrder.isDefaultDirection()) {
+    		return roIngamePlayers;
     	}
-    	return this.roIngamePlayersReversed;
+    	return roIngamePlayersReversed;
     }
     
     /**
@@ -187,7 +217,7 @@ public class Game {
      * @return the cleanup step
      */
     public final Phase getCleanup() {
-        return this.cleanup;
+        return cleanup;
     }
 
     /**
@@ -196,7 +226,7 @@ public class Game {
      * @return the endOfTurn
      */
     public final EndOfTurn getEndOfTurn() {
-        return this.endOfTurn;
+        return endOfTurn;
     }
 
     /**
@@ -205,7 +235,7 @@ public class Game {
      * @return the endOfCombat
      */
     public final Phase getEndOfCombat() {
-        return this.endOfCombat;
+        return endOfCombat;
     }
 
     /**
@@ -214,7 +244,7 @@ public class Game {
      * @return the upkeep
      */
     public final Upkeep getUpkeep() {
-        return this.upkeep;
+        return upkeep;
     }
 
     /**
@@ -223,7 +253,7 @@ public class Game {
      * @return the upkeep
      */
     public final Untap getUntap() {
-        return this.untap;
+        return untap;
     }
 
     /**
@@ -232,7 +262,7 @@ public class Game {
      * @return the phaseHandler
      */
     public final PhaseHandler getPhaseHandler() {
-        return this.phaseHandler;
+        return phaseHandler;
     }
 
     /**
@@ -241,7 +271,7 @@ public class Game {
      * @return the stack
      */
     public final MagicStack getStack() {
-        return this.stack;
+        return stack;
     }
 
     /**
@@ -250,7 +280,7 @@ public class Game {
      * @return the staticEffects
      */
     public final StaticEffects getStaticEffects() {
-        return this.staticEffects;
+        return staticEffects;
     }
 
     /**
@@ -259,7 +289,7 @@ public class Game {
      * @return the triggerHandler
      */
     public final TriggerHandler getTriggerHandler() {
-        return this.triggerHandler;
+        return triggerHandler;
     }
 
     /**
@@ -268,7 +298,7 @@ public class Game {
      * @return the combat
      */
     public final Combat getCombat() {
-        return this.getPhaseHandler().getCombat();
+        return getPhaseHandler().getCombat();
     }
 
     /**
@@ -277,7 +307,7 @@ public class Game {
      * @return the game log
      */
     public final GameLog getGameLog() {
-        return this.gameLog;
+        return gameLog;
     }
 
     /**
@@ -286,11 +316,11 @@ public class Game {
      * @return the stackZone
      */
     public final Zone getStackZone() {
-        return this.stackZone;
+        return stackZone;
     }
 
     public List<Card> getCardsPlayerCanActivateInStack() {
-        List<Card> list = this.stackZone.getCards();
+        List<Card> list = stackZone.getCards();
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -312,15 +342,15 @@ public class Game {
      * proceeds.
      */
     public final Direction getTurnOrder() {
-    	return this.turnOrder;
+    	return turnOrder;
     }
     
     public final void reverseTurnOrder() {
-    	this.turnOrder = this.turnOrder.getOtherDirection();
+    	turnOrder = turnOrder.getOtherDirection();
     }
 
     public final void resetTurnOrder() {
-    	this.turnOrder = Direction.getDefaultDirection();
+    	turnOrder = Direction.getDefaultDirection();
     }
 
     /**
@@ -329,8 +359,8 @@ public class Game {
      * @return the next timestamp
      */
     public final long getNextTimestamp() {
-        this.timestamp = this.getTimestamp() + 1;
-        return this.getTimestamp();
+        timestamp = getTimestamp() + 1;
+        return getTimestamp();
     }
 
     /**
@@ -339,11 +369,11 @@ public class Game {
      * @return the timestamp
      */
     public final long getTimestamp() {
-        return this.timestamp;
+        return timestamp;
     }
 
     public final GameOutcome getOutcome() {
-        return this.outcome;
+        return outcome;
     }
 
     /**
@@ -365,7 +395,7 @@ public class Game {
      * @param go the gameOver to set
      */
     public synchronized void setGameOver(GameEndReason reason) {
-        this.age = GameStage.GameOver;
+        age = GameStage.GameOver;
         for (Player p : allPlayers) {
             p.setMindSlaveMaster(null); // for correct totals
         }
@@ -377,7 +407,7 @@ public class Game {
         final GameOutcome result = new GameOutcome(reason, getRegisteredPlayers());
         result.setTurnsPlayed(getPhaseHandler().getTurn());
         
-        this.outcome = result;
+        outcome = result;
         match.addGamePlayed(this);
 
         // The log shall listen to events and generate text internally
@@ -491,7 +521,7 @@ public class Game {
      * {@code null} if there are no players in the game.
      */
     public Player getNextPlayerAfter(final Player playerTurn) {
-        return getNextPlayerAfter(playerTurn, this.turnOrder);
+        return getNextPlayerAfter(playerTurn, turnOrder);
     }
 
     /**
@@ -549,7 +579,7 @@ public class Game {
 
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Player", p);
-        this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
+        getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
     }
 
     /**
@@ -585,7 +615,7 @@ public class Game {
      * @param activePlane0 the activePlane to set
      */
     public void setActivePlanes(List<Card> activePlane0) {
-        this.activePlanes = activePlane0;
+        activePlanes = activePlane0;
     }
 
     public void archenemy904_10() {
@@ -737,5 +767,4 @@ public class Game {
         }
         return rarities;
     }
-
 }

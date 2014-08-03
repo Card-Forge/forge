@@ -39,6 +39,9 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
+import forge.game.io.GameStateDeserializer;
+import forge.game.io.GameStateSerializer;
+import forge.game.io.IGameStateObject;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
@@ -61,7 +64,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * @author Forge
  * @version $Id$
  */
-public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
+public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance>, IGameStateObject {
     private final List<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
 
     // They don't provide a LIFO queue, so had to use a deque
@@ -953,6 +956,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     @Override 
     public String toString() {
         return String.format("%s==%s==%s", simultaneousStackEntryList, frozenStack.toString(), stack.toString()); 
+    }
+
+    @Override
+    public void loadState(GameStateDeserializer gsd) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void saveState(GameStateSerializer gss) {
+        // TODO Auto-generated method stub
+        
     }
     
 }

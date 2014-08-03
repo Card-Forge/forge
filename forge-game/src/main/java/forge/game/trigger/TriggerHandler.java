@@ -25,6 +25,9 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.io.GameStateDeserializer;
+import forge.game.io.GameStateSerializer;
+import forge.game.io.IGameStateObject;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -34,7 +37,7 @@ import forge.game.zone.ZoneType;
 
 import java.util.*;
 
-public class TriggerHandler {
+public class TriggerHandler implements IGameStateObject {
     private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
@@ -439,5 +442,17 @@ public class TriggerHandler {
             }
         }
 
+    }
+
+    @Override
+    public void loadState(GameStateDeserializer gsd) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void saveState(GameStateSerializer gss) {
+        // TODO Auto-generated method stub
+        
     }
 }

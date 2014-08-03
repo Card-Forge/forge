@@ -511,6 +511,9 @@ forge-game/src/main/java/forge/game/event/GameEventTurnPhase.java -text
 forge-game/src/main/java/forge/game/event/GameEventZone.java -text
 forge-game/src/main/java/forge/game/event/IGameEventVisitor.java -text
 forge-game/src/main/java/forge/game/event/package-info.java -text
+forge-game/src/main/java/forge/game/io/GameStateDeserializer.java -text
+forge-game/src/main/java/forge/game/io/GameStateSerializer.java -text
+forge-game/src/main/java/forge/game/io/IGameStateObject.java -text
 forge-game/src/main/java/forge/game/mana/Mana.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/mana/ManaCostAdjustment.java -text
 forge-game/src/main/java/forge/game/mana/ManaCostBeingPaid.java svneol=native#text/plain
@@ -527,7 +530,6 @@ forge-game/src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/player/GameLossReason.java -text
 forge-game/src/main/java/forge/game/player/IGameEntitiesFactory.java -text
-forge-game/src/main/java/forge/game/player/LobbyPlayer.java -text
 forge-game/src/main/java/forge/game/player/Player.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/player/PlayerActionConfirmMode.java -text
 forge-game/src/main/java/forge/game/player/PlayerController.java -text

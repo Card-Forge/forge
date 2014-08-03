@@ -3,7 +3,11 @@ package forge.game;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class GameRules {
+import forge.game.io.GameStateDeserializer;
+import forge.game.io.GameStateSerializer;
+import forge.game.io.IGameStateObject;
+
+public class GameRules implements IGameStateObject {
     private GameType gameType;
     private boolean manaBurn;
     private int poisonCountersToLose = 10; // is commonly 10, but turns into 15 for 2HG
@@ -85,4 +89,12 @@ public class GameRules {
 
     // it's a preference, not rule... but I could hardly find a better place for it
     public boolean canCloneUseTargetsImage;
+
+    @Override
+    public void loadState(GameStateDeserializer gsd) {
+    }
+
+    @Override
+    public void saveState(GameStateSerializer gss) {
+    }
 }

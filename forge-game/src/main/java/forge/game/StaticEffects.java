@@ -19,6 +19,9 @@ package forge.game;
 
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.io.GameStateDeserializer;
+import forge.game.io.GameStateSerializer;
+import forge.game.io.IGameStateObject;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityStatic;
@@ -35,7 +38,7 @@ import java.util.*;
  * @author Forge
  * @version $Id$
  */
-public class StaticEffects {
+public class StaticEffects implements IGameStateObject {
 
     // **************** StaticAbility system **************************
     private final ArrayList<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
@@ -251,6 +254,18 @@ public class StaticEffects {
         }
         se.clearTimestamps();
         return affectedCards;
+    }
+
+    @Override
+    public void loadState(GameStateDeserializer gsd) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void saveState(GameStateSerializer gss) {
+        // TODO Auto-generated method stub
+        
     }
 
     // **************** End StaticAbility system **************************

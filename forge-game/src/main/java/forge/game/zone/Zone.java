@@ -20,10 +20,14 @@ package forge.game.zone;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
+import forge.game.io.GameStateDeserializer;
+import forge.game.io.GameStateSerializer;
+import forge.game.io.IGameStateObject;
 import forge.game.player.Player;
 import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
@@ -41,7 +45,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Forge
  * @version $Id: PlayerZone.java 17582 2012-10-19 22:39:09Z Max mtg $
  */
-public class Zone implements java.io.Serializable, Iterable<Card> {
+public class Zone implements java.io.Serializable, Iterable<Card>, IGameStateObject {
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
@@ -266,5 +270,17 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     @Override
     public String toString() {
         return this.zoneType.toString();
+    }
+
+    @Override
+    public void loadState(GameStateDeserializer gsd) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void saveState(GameStateSerializer gss) {
+        // TODO Auto-generated method stub
+        
     }
 }
