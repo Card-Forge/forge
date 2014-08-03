@@ -13,9 +13,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
-import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -179,22 +177,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             // get basic spells (no flashback, etc.)
-            ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-            for (SpellAbility s : tgtCard.getBasicSpells()) {
-                final Spell newSA = (Spell) s.copy();
-                newSA.setActivatingPlayer(controller);
-                SpellAbilityRestriction res = new SpellAbilityRestriction();
-                // timing restrictions still apply
-                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
-                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
-                res.setPhases(s.getRestrictions().getPhases());
-                res.setZone(null);
-                newSA.setRestrictions(res);
-                // timing restrictions still apply
-                if (res.checkTimingRestrictions(tgtCard, newSA) && newSA.checkOtherRestrictions()) {
-                    sas.add(newSA);
-                }
-            }
+            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
             if (sas.isEmpty()) {
                 return;
             }

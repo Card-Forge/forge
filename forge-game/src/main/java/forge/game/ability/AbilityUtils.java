@@ -12,7 +12,9 @@ import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -1483,5 +1485,25 @@ public class AbilityUtils {
                 p.getManaPool().adjustColorReplacement(MagicColor.fromName(c), convertByte, additive);
             }
         }
+    }
+
+    public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
+        List<SpellAbility> sas = new ArrayList<SpellAbility>();
+        for (SpellAbility s : tgtCard.getBasicSpells()) {
+            final Spell newSA = (Spell) s.copy();
+            newSA.setActivatingPlayer(controller);
+            SpellAbilityRestriction res = new SpellAbilityRestriction();
+            // timing restrictions still apply
+            res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
+            res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
+            res.setPhases(s.getRestrictions().getPhases());
+            res.setZone(null);
+            newSA.setRestrictions(res);
+            // timing restrictions still apply
+            if (res.checkTimingRestrictions(tgtCard, newSA) && newSA.checkOtherRestrictions()) {
+                sas.add(newSA);
+            }
+        }
+        return sas;
     }
 }

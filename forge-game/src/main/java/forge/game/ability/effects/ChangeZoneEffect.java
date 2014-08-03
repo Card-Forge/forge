@@ -677,23 +677,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
         }
-        
-        if (!defined && changeType != null)
-            fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
-
-        if (searchedLibrary) {
-            if (decider.equals(player)) {
-                // should only count the number of searching player's own library
-                decider.incLibrarySearched();
-            }
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            runParams.put("Player", decider);
-            runParams.put("Target", Lists.newArrayList(player));
-            decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
-        }
 
         if (!defined) {
-            if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking") && !decider.hasKeyword("CantSearchLibrary")) {
+            if (origin.contains(ZoneType.Library) && searchedLibrary) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 List<Card> shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
@@ -706,6 +692,37 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             
         }
+
+        if (searchedLibrary) {
+            if (decider.equals(player)) {
+                // should only count the number of searching player's own library
+                decider.incLibrarySearched();
+                // Panglacial Wurm
+                List<Card> canCastWhileSearching = CardLists.getKeyword(fetchList,
+                        "While you're searching your library, you may cast CARDNAME from your library.");
+                for (final Card tgtCard : canCastWhileSearching) {
+                    List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
+                    if (sas.isEmpty()) {
+                        continue;
+                    }
+                    SpellAbility tgtSA = decider.getController().getAbilityToPlay(sas);
+                    if (!decider.getController().confirmAction(tgtSA, null, "Do you want to play " + tgtCard + "?")) {
+                        continue;
+                    }
+                    // if played, that card cannot be found
+                    if (decider.getController().playSaFromPlayEffect(tgtSA)) {
+                        fetchList.remove(tgtCard);
+                    }
+                }
+            }
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Player", decider);
+            runParams.put("Target", Lists.newArrayList(player));
+            decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
+        }
+        
+        if (!defined && changeType != null)
+            fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("NoShuffle")) {
             shuffleMandatory = false;
