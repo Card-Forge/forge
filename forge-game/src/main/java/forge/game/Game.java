@@ -61,7 +61,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
-    /**
+/**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
@@ -87,7 +87,7 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
-    
+
     private Direction turnOrder = Direction.getDefaultDirection();
 
     private long timestamp = 0;
@@ -112,8 +112,9 @@ public class Game {
         for (RegisteredPlayer psc : players0) {
             // Track highest team number for auto assigning unassigned teams
             int teamNum = psc.getTeamNumber();
-            if (teamNum > highestTeam)
+            if (teamNum > highestTeam) {
                 highestTeam = teamNum;
+            }
         }
 
         for (RegisteredPlayer psc : players0) {
