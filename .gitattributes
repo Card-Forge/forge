@@ -277,6 +277,7 @@ forge-game/src/main/java/forge/game/GameRules.java -text
 forge-game/src/main/java/forge/game/GameStage.java -text
 forge-game/src/main/java/forge/game/GameType.java -text
 forge-game/src/main/java/forge/game/GlobalRuleChange.java -text
+forge-game/src/main/java/forge/game/IHasGameType.java -text
 forge-game/src/main/java/forge/game/Match.java -text
 forge-game/src/main/java/forge/game/PlanarDice.java -text
 forge-game/src/main/java/forge/game/StaticEffect.java svneol=native#text/plain
@@ -16604,10 +16605,12 @@ forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControlGameEventHandler.java -text
 forge-gui/src/main/java/forge/control/FControlGamePlayback.java -text
 forge-gui/src/main/java/forge/control/package-info.java -text
+forge-gui/src/main/java/forge/deck/ColorDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/DeckGeneratorTheme.java -text
 forge-gui/src/main/java/forge/deck/DeckProxy.java -text
 forge-gui/src/main/java/forge/deck/DeckType.java -text
 forge-gui/src/main/java/forge/deck/DeckgenUtil.java -text
+forge-gui/src/main/java/forge/deck/RandomDeckGenerator.java -text
 forge-gui/src/main/java/forge/deck/io/DeckHtmlSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/DeckPreferences.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text

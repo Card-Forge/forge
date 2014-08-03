@@ -8,6 +8,7 @@ import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.game.IHasGameType;
 import forge.gui.GuiUtils;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
@@ -25,11 +26,13 @@ import forge.screens.deckeditor.controllers.CEditorQuest;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -41,7 +44,7 @@ import java.util.Map.Entry;
  *
  */
 @SuppressWarnings("serial")
-public final class DeckManager extends ItemManager<DeckProxy> {
+public final class DeckManager extends ItemManager<DeckProxy> implements IHasGameType {
     private static final FSkin.SkinIcon icoDelete = FSkin.getIcon(FSkinProp.ICO_DELETE);
     private static final FSkin.SkinIcon icoDeleteOver = FSkin.getIcon(FSkinProp.ICO_DELETE_OVER);
     private static final FSkin.SkinIcon icoEdit = FSkin.getIcon(FSkinProp.ICO_EDIT);

@@ -21,7 +21,6 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
-import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
@@ -233,6 +232,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
+                cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
             }
             else {
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
@@ -340,49 +340,6 @@ public class FDeckChooser extends FScreen {
         });
     }
 
-    private class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
-        private String name;
-        private int index;
-
-        public ColorDeckGenerator(String name0, int index0) {
-            super();
-            name = name0;
-            index = index0;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-
-        @Override
-        public int compareTo(final ColorDeckGenerator d) {
-            return d instanceof ColorDeckGenerator ? Integer.compare(index, ((ColorDeckGenerator)d).index) : 1;
-        }
-
-        @Override
-        public Deck getDeck() {
-            List<String> selection = new ArrayList<String>();
-            for (DeckProxy deck : lstDecks.getSelectedItems()) {
-                selection.add(deck.getName());
-            }
-            if (DeckgenUtil.colorCheck(selection)) {
-                return DeckgenUtil.buildColorDeck(selection, isAi);
-            }
-            return null;
-        }
-
-        @Override
-        public boolean isGeneratedDeck() {
-            return true;
-        }
-    }
-
     private void updateColors() {
         lstDecks.setSelectionSupport(1, 3); //TODO: Consider supporting more than 3 color random decks
 
@@ -390,7 +347,7 @@ public class FDeckChooser extends FScreen {
                 "White", "Blue", "Black", "Red", "Green" };
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (int i = 0; i < colors.length; i++) {
-            decks.add(new ColorDeckGenerator(colors[i], i));
+            decks.add(new ColorDeckGenerator(colors[i], i, lstDecks, isAi));
         }
 
         lstDecks.setPool(decks);
@@ -436,77 +393,12 @@ public class FDeckChooser extends FScreen {
         });
     }
 
-    private class RandomDeckGenerator extends DeckProxy implements Comparable<RandomDeckGenerator> {
-        private String name;
-        private int index;
-
-        public RandomDeckGenerator(String name0, int index0) {
-            super();
-            name = name0;
-            index = index0;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-
-        @Override
-        public int compareTo(final RandomDeckGenerator d) {
-            return d instanceof RandomDeckGenerator ? Integer.compare(index, ((RandomDeckGenerator)d).index) : 1;
-        }
-
-        @Override
-        public Deck getDeck() {
-            String sel = lstDecks.getSelectedItem().getName();
-            switch (lstDecks.getGameType()) {
-            case Commander:
-                if (sel.equals("Random")) {
-                    IStorage<Deck> decks = FModel.getDecks().getCommander();
-                    if (decks.size() > 0) {
-                        return Aggregates.random(decks);
-                    }
-                }
-                return DeckgenUtil.generateCommanderDeck(isAi);
-            case Archenemy:
-                if (sel.equals("Random")) {
-                    IStorage<Deck> decks = FModel.getDecks().getScheme();
-                    if (decks.size() > 0) {
-                        return Aggregates.random(decks);
-                    }
-                }
-                return DeckgenUtil.generateSchemeDeck();
-            case Planechase:
-                if (sel.equals("Random")) {
-                    IStorage<Deck> decks = FModel.getDecks().getPlane();
-                    if (decks.size() > 0) {
-                        return Aggregates.random(decks);
-                    }
-                }
-                return DeckgenUtil.generatePlanarDeck();
-            default:
-                break;
-            }
-            return null;
-        }
-
-        @Override
-        public boolean isGeneratedDeck() {
-            return true;
-        }
-    }
-
     private void updateRandom() {
         lstDecks.setSelectionSupport(1, 1);
 
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        decks.add(new RandomDeckGenerator("Random Generated Deck", 0));
-        decks.add(new RandomDeckGenerator("Random User Deck", 1));
+        decks.add(new RandomDeckGenerator("Random Generated Deck", 0, lstDecks, isAi));
+        decks.add(new RandomDeckGenerator("Random User Deck", 1, lstDecks, isAi));
 
         lstDecks.setPool(decks);
         lstDecks.setup(ItemManagerConfig.STRING_ONLY);

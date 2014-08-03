@@ -11,6 +11,7 @@ import forge.deck.DeckProxy;
 import forge.deck.FDeckViewer;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
+import forge.game.IHasGameType;
 import forge.itemmanager.filters.DeckColorFilter;
 import forge.itemmanager.filters.DeckFormatFilter;
 import forge.itemmanager.filters.DeckSearchFilter;
@@ -27,7 +28,7 @@ import java.util.Map.Entry;
  * ItemManager for decks
  *
  */
-public final class DeckManager extends ItemManager<DeckProxy> {
+public final class DeckManager extends ItemManager<DeckProxy> implements IHasGameType {
     private final GameType gameType;
 
     /**
