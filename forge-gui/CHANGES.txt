@@ -16,7 +16,9 @@ We have added a branch to our SVN for the new cards that are currently being scr
 New Cards
 ---------
 
-
+Sentinel Dispatch
+Panglacial Wurm
+Cultural Exchange
 
 
 New Commander 2014 branch Cards
