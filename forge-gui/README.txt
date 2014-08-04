@@ -1151,6 +1151,25 @@ Since the groups are collapsible, this can allow CardManagers to work somewhat s
 There's now a button (disabled by default) that allows you to search for cards by their mana costs. It's a little finicky right now, but improvements will happen for the next version of Forge.
 
 
+- Boolean Expressions -
+You can now filter cards with simple boolean expressions. Forge automatically detects when you want to use one, so just start typing away in the search box.
+This is a completely optional feature and will not change the way you use the search function in Forge, unless you specifically intend to use it.
+
+As an example,
+    "warrior" || "cleric"
+will find all cards with the type of either "warrior" or "cleric" (when just the type search is enabled).
+
+You can also use an AND operator to find cards with specific mana costs:
+    "g" && "w"
+will find all cards with both green and white mana symbols.
+
+You can then construct large and very specific expressions to find exactly what you need:
+    ("human" || "cat") && ("warrior" || "cleric" || "soldier")
+will find all humans or cats that are also warriors, clerics, or soldiers.
+
+More improvements are on their way in the next version of Forge, including removing the need for quotation marks and adding NOT operators. 
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
