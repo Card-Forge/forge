@@ -17,7 +17,6 @@ import forge.game.zone.ZoneType;
 import java.util.*;
 
 public class RestartGameEffect extends SpellAbilityEffect {
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */

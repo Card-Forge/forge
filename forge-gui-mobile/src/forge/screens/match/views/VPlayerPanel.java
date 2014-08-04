@@ -217,8 +217,8 @@ public class VPlayerPanel extends FContainer {
     }
 
     private class LifeLabel extends FDisplayObject {
-        private int life = 20;
-        private int poisonCounters = 0;
+        private int life = player.getLife();
+        private int poisonCounters = player.getPoisonCounters();
         private String lifeStr = String.valueOf(life);
 
         private LifeLabel() {
