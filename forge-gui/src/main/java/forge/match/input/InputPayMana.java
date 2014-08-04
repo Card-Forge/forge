@@ -266,7 +266,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * @return a boolean.
      */
     private static boolean abilityProducesManaColor(final SpellAbility am, AbilityManaPart m, final byte neededColor) {
-        if (0 != (neededColor & MagicColor.COLORLESS)) {
+        if (0 != (neededColor & ManaAtom.COLORLESS)) {
             return true;
         }
 
@@ -312,8 +312,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 if (0 != (neededColor & MagicColor.fromName(color))) {
                     return true;
                 }
-                if( (neededColor & ManaAtom.COLORLESS) != 0)
-                    return true;
             }
         }
         return false;
