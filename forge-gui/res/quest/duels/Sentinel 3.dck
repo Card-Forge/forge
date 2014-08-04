@@ -8,7 +8,7 @@ Icon=Sentinel.jpg
 Deck Type=constructed
 [main]
 4 Mishra's Workshop
-2 Mishra's Factory
+1 Mishra's Factory
 2 Wasteland
 1 Ancient Tomb
 1 Darksteel Citadel
@@ -19,6 +19,7 @@ Deck Type=constructed
 1 Gods' Eye, Gate to the Reikai
 1 Mystifying Maze
 1 Sheltered Valley
+1 Radiant Fountain
 1 Mox Emerald
 1 Mox Pearl
 1 Mox Jet
@@ -34,7 +35,7 @@ Deck Type=constructed
 3 Cathodion
 2 Chrome Steed
 1 Darksteel Juggernaut
-2 Duplicant
+1 Duplicant
 1 Etched Champion
 2 Juggernaut
 1 Myr Battlesphere
@@ -43,4 +44,5 @@ Deck Type=constructed
 2 Slash Panther
 2 Su-Chi
 1 Wurmcoil Engine
+1 Scuttling Doom Engine
 [sideboard]
