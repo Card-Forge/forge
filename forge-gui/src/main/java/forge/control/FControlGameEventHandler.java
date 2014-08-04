@@ -67,7 +67,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(final GameEventTurnBegan event) {
-
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && event.turnOwner != null) {
             // anything except stack will get here
             updateZone(Pair.of(event.turnOwner, ZoneType.Battlefield));
@@ -339,8 +338,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 manaPoolUpdate.add(event.player);
             }
         }
-        if (invokeUpdate)
+        if (invokeUpdate) {
             FThreads.invokeInEdtNowOrLater(updManaPool);
+        }
         return null;
     }
 
@@ -363,8 +363,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 livesUpdate.add(event.player);
             }
         }
-        if (invokeUpdate)
+        if (invokeUpdate) {
             FThreads.invokeInEdtNowOrLater(updLives);
+        }
         return null;
     }
 
@@ -377,8 +378,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 livesUpdate.add(event.receiver);
             }
         }
-        if (invokeUpdate)
+        if (invokeUpdate) {
             FThreads.invokeInEdtNowOrLater(updLives);
+        }
         return null;
     }
 }

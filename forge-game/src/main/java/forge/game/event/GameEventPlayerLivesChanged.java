@@ -4,7 +4,6 @@ import forge.game.player.Player;
 import forge.util.Lang;
 
 public class GameEventPlayerLivesChanged extends GameEvent {
-    
     public final Player player;
     public final int oldLives;
     public final int newLives;

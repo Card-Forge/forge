@@ -59,8 +59,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         GameAction action = game.getAction();
     
         List<Player> gamePlayers = game.getRegisteredPlayers();
-        for( int i = 0; i < gamePlayers.size(); i++ ) {
-
+        for (int i = 0; i < gamePlayers.size(); i++) {
             final Player player = gamePlayers.get(i);
             if( player.hasLost()) continue;
             
