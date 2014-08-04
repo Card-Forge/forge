@@ -854,7 +854,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public boolean tap(float x, float y, int count) {
-            if (!items.isEmpty() && y < GROUP_HEADER_HEIGHT) {
+            if (groupBy != null && !items.isEmpty() && y < GROUP_HEADER_HEIGHT) {
                 isCollapsed = !isCollapsed;
                 btnExpandCollapseAll.updateIsAllCollapsed();
                 clearSelection(); //must clear selection since indices and visible items will be changing
