@@ -69,8 +69,8 @@ import forge.util.Aggregates;
  */
 public class Game implements IGameStateObject {
     private final GameRules rules;
-    private final List<Player> roIngamePlayers;
-    private final List<Player> roIngamePlayersReversed;
+    private List<Player> roIngamePlayers;
+    private List<Player> roIngamePlayersReversed;
     private final List<Player> allPlayers;
     private final List<Player> ingamePlayers = new ArrayList<Player>();
 
@@ -101,6 +101,24 @@ public class Game implements IGameStateObject {
 
     @Override
     public void loadState(GameStateDeserializer gsd) {
+        gsd.readObject(rules);
+        gsd.readObject(cleanup);
+        gsd.readObject(endOfTurn);
+        gsd.readObject(endOfCombat);
+        gsd.readObject(untap);
+        gsd.readObject(upkeep);
+        gsd.readObject(stack);
+        gsd.readObject(phaseHandler);
+        gsd.readObject(staticEffects);
+        gsd.readObject(triggerHandler);
+        gsd.readObject(gameLog);
+        gsd.readObject(stackZone);
+        turnOrder = Direction.valueOf(gsd.readString());
+        timestamp = gsd.readLong();
+        age = GameStage.valueOf(gsd.readString());
+        outcome = (GameOutcome)gsd.readObject();
+        gsd.readPlayerList(allPlayers);
+        gsd.readPlayerList(ingamePlayers);
     }
 
     @Override
@@ -124,6 +142,8 @@ public class Game implements IGameStateObject {
         gss.write(outcome);
         gss.writePlayerList(allPlayers);
         gss.writePlayerList(ingamePlayers);
+        roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
+        roIngamePlayersReversed = Lists.reverse(roIngamePlayers); // reverse of unmodifiable list is also unmodifiable
     }
 
     /**
