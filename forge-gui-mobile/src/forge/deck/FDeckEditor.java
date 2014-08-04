@@ -693,11 +693,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             super.initialize();
             cardManager.setCaption(getItemManagerCaption());
+
+            if (!isVisible() && parentScreen.getEditorType() != EditorType.Quest) {
+                needRefreshWhenShown = true;
+                return; //delay refreshing while hidden unless for quest inventory
+            }
             refresh();
         }
 
         @Override
         protected boolean canAddCards() {
+            if (needRefreshWhenShown) { //ensure refreshed before cards added if hasn't been refreshed yet
+                needRefreshWhenShown = false;
+                refresh();
+            }
             return !cardManager.isInfinite();
         }
 
@@ -724,10 +733,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void refresh() {
-            if (!isVisible() && parentScreen.getEditorType() != EditorType.Quest) {
-                needRefreshWhenShown = true;
-                return; //delay refreshing while hidden unless for quest inventory
-            }
             switch (parentScreen.getEditorType()) {
             case Archenemy:
                 cardManager.setPool(ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class), true);
