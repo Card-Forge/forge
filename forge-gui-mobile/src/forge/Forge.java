@@ -36,7 +36,7 @@ import forge.util.FileUtil;
 import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.5.24.004";
+    public static final String CURRENT_VERSION = "1.5.24.005";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
