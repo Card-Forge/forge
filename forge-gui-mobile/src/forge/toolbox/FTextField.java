@@ -292,6 +292,7 @@ public class FTextField extends FDisplayObject implements ITextField {
     }
 
     protected void endEdit() {
+        text = text.trim(); //trim text after editing
         if (!text.equals(textBeforeKeyInput)) {
             if (validate()) {
                 if (changedHandler != null) {
