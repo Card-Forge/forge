@@ -37,6 +37,9 @@ public class FSideboardDialog extends FDialog {
                 callback.run(tabs.getMainDeckPage().cardManager.getPool().toFlatList());
             }
         });
+        if (sideboard.isEmpty()) { //show main deck by default if sideboard is empty
+            tabs.setSelectedPage(tabs.getMainDeckPage());
+        }
     }
 
     @Override
