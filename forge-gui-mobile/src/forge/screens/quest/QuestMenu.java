@@ -5,6 +5,9 @@ import java.io.File;
 import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.deck.Deck;
+import forge.deck.FDeckEditor.DeckController;
+import forge.deck.FDeckEditor.EditorType;
 import forge.interfaces.IButton;
 import forge.interfaces.ICheckBox;
 import forge.interfaces.IComboBox;
@@ -152,8 +155,10 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         if (data.exists()) {
             LoadingOverlay.show("Loading current quest...", new Runnable() {
                 @Override
+                @SuppressWarnings("unchecked")
                 public void run() {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
+                    ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
                     if (reason == LaunchReason.StartQuestMode) {
                         if (QuestUtil.getCurrentDeck() == null) {
                             Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default

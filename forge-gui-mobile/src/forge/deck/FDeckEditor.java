@@ -101,7 +101,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return new Deck();
             }
         })),
-        Quest(new DeckController<Deck>(FModel.getQuest().getMyDecks(), new Supplier<Deck>() {
+        Quest(new DeckController<Deck>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
             @Override
             public Deck get() {
                 return new Deck();
@@ -1199,20 +1199,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         private T model;
         private boolean saved;
         private boolean modelInStorage;
-        private final IStorage<T> rootFolder;
+        private IStorage<T> rootFolder;
         private IStorage<T> currentFolder;
         private String modelPath;
         private FDeckEditor editor;
         private final Supplier<T> newModelCreator;
 
         protected DeckController(final IStorage<T> folder0, final Supplier<T> newModelCreator0) {
+            setRootFolder(folder0);
+            newModelCreator = newModelCreator0;
+        }
+
+        public void setRootFolder(IStorage<T> folder0) {
             rootFolder = folder0;
-            currentFolder = rootFolder;
+            currentFolder = folder0;
             model = null;
             saved = true;
             modelInStorage = false;
             modelPath = "";
-            newModelCreator = newModelCreator0;
         }
 
         public Deck getDeck() {
