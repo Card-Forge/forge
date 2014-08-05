@@ -123,7 +123,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public ISkinImage getUnskinnedIcon(String path) {
-        return new FTextureImage(new Texture(path));
+        return new FTextureImage(new Texture(Gdx.files.absolute(path)));
     }
 
     @Override
