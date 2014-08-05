@@ -418,6 +418,12 @@ public class ComputerUtilCombat {
      */
     public static int totalDamageOfBlockers(final Card attacker, final List<Card> defenders) {
         int damage = 0;
+        
+        for (Card equipment : attacker.getEquippedBy()) {
+        	if (equipment.getName().equals("Godsend") && !defenders.isEmpty()) {
+        		defenders.remove(0);
+        	}
+        }
 
         for (final Card defender : defenders) {
             damage += ComputerUtilCombat.dealsDamageAsBlocker(attacker, defender);
@@ -1530,6 +1536,12 @@ public class ComputerUtilCombat {
             return false;
         }
 
+        for (Card equipment : defender.getEquippedBy()) {
+        	if (equipment.getName().equals("Godsend")) {
+        		return true;
+        	}
+        }
+
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
 
@@ -1555,6 +1567,13 @@ public class ComputerUtilCombat {
         if (checkDestroyAttackerTrigger(attacker, defender) && !attacker.hasKeyword("Indestructible")) {
             return true;
         }
+
+        for (Card equipment : attacker.getEquippedBy()) {
+        	if (equipment.getName().equals("Godsend")) {
+        		return false;
+        	}
+        }
+
         if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
             return false;
         }
@@ -1678,6 +1697,13 @@ public class ComputerUtilCombat {
     public static boolean canDestroyBlocker(Player ai, final Card defender, final Card attacker, final Combat combat,
             final boolean withoutAbilities) {
         final Game game = ai.getGame();
+
+        for (Card equipment : attacker.getEquippedBy()) {
+        	if (equipment.getName().equals("Godsend")) {
+        		return true;
+        	}
+        }
+
         int flankingMagnitude = 0;
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
 
@@ -1702,6 +1728,12 @@ public class ComputerUtilCombat {
 
         if (checkDestroyBlockerTrigger(attacker, defender) && !defender.hasKeyword("Indestructible")) {
             return true;
+        }
+
+        for (Card equipment : defender.getEquippedBy()) {
+        	if (equipment.getName().equals("Godsend")) {
+        		return false;
+        	}
         }
 
         int defenderDamage = defender.getNetAttack()
