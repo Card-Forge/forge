@@ -2,7 +2,6 @@ package forge.screens.draft;
 
 import forge.FThreads;
 import forge.Forge;
-import forge.GuiBase;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
@@ -12,15 +11,12 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.ThreadUtil;
 import forge.assets.FSkinFont;
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
-import forge.game.player.RegisteredPlayer;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -112,40 +108,55 @@ public class DraftScreen extends LaunchScreen {
     }
 
     @Override
-    protected boolean buildLaunchParams(LaunchParams launchParams) {
-        final DeckProxy humanDeck = lstDecks.getSelectedItem();
-        if (humanDeck == null) {
-            FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new booster draft game.", "No Deck");
-            return false;
-        }
+    protected void startMatch() {
+        if (creatingMatch) { return; }
+        creatingMatch = true; //ensure user doesn't create multiple matches by tapping multiple times
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Draft.getDecksFormat().getDeckConformanceProblem(humanDeck.getDeck());
-            if (errorMessage != null) {
-                FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
-                return false;
+        FThreads.invokeInBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                final DeckProxy humanDeck = lstDecks.getSelectedItem();
+                if (humanDeck == null) {
+                    FOptionPane.showErrorDialog("You must select an existing deck or build a deck from a new booster draft game.", "No Deck");
+                    creatingMatch = false;
+                    return;
+                }
+
+                if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+                    String errorMessage = GameType.Draft.getDecksFormat().getDeckConformanceProblem(humanDeck.getDeck());
+                    if (errorMessage != null) {
+                        FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
+                        creatingMatch = false;
+                        return;
+                    }
+                }
+
+                final Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?",
+                        1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
+                if (rounds == null) {
+                    creatingMatch = false;
+                    return;
+                }
+
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingOverlay.show("Loading new game...", new Runnable() {
+                            @Override
+                            public void run() {
+                                FModel.getGauntletMini().resetGauntletDraft();
+                                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
+                                creatingMatch = false;
+                            }
+                        });
+                    }
+                });
             }
-        }
+        });
+    }
 
-        FModel.getGauntletMini().resetGauntletDraft();
-
-        /*if (radAll.isSelected()) {
-            int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
-            return false;
-        }*/
-
-        final int aiIndex = (int) Math.floor(Math.random() * 7);
-        DeckGroup deckGroup = FModel.getDecks().getDraft().get(humanDeck.getName());
-        Deck aiDeck = deckGroup.getAiDecks().get(aiIndex);
-        if (aiDeck == null) {
-            throw new IllegalStateException("Draft: Computer deck is null!");
-        }
-
-        launchParams.gameType = GameType.Draft;
-        launchParams.players.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GuiBase.getInterface().getGuiPlayer()));
-        launchParams.players.add(new RegisteredPlayer(aiDeck).setPlayer(GuiBase.getInterface().createAiPlayer()));
-
-        return true;
+    @Override
+    protected boolean buildLaunchParams(LaunchParams launchParams) {
+        return false; //this override isn't needed
     }
 }
