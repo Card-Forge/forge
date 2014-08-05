@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.ai.AiBlockController;
 import forge.ai.ComputerUtilCard;
@@ -73,7 +74,7 @@ public class AnimateAi extends SpellAbilityAi {
                 ComputerUtilCard.sortByEvaluateCreature(list);
                 if (!list.isEmpty() && list.size() == nToSac && ComputerUtilCost.canPayCost(sa, aiPlayer)) {
                     Card animatedCopy = CardFactory.copyCard(source, true);
-                    becomeAnimated(animatedCopy, sa);
+                    becomeAnimated(animatedCopy, source.hasSickness(), sa);
                     list.add(animatedCopy);
                     list = CardLists.getValidCards(list, valid.split(","), aiPlayer.getOpponent(), topStack.getHostCard());
                     list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(topStack));
@@ -151,7 +152,7 @@ public class AnimateAi extends SpellAbilityAi {
 
                 if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                     Card animatedCopy = CardFactory.getCard(c.getPaperCard(), aiPlayer);
-                    AnimateAi.becomeAnimated(animatedCopy, sa);
+                    AnimateAi.becomeAnimated(animatedCopy, c.hasSickness(), sa);
                     if (ph.isPlayerTurn(aiPlayer) && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
                         return false;
                     }
@@ -248,14 +249,15 @@ public class AnimateAi extends SpellAbilityAi {
         return false;
     }
 
-    public static void becomeAnimated(Card source, SpellAbility sa) {
+    public static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
         //duplicating AnimateEffect.resolve
+        final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
         final Map<String, String> svars = source.getSVars();
         final long timestamp = game.getNextTimestamp();
-        source.setSickness(sa.getHostCard().hasSickness());
+        card.setSickness(hasOriginalCardSickness);
 
-     // AF specific sa
+        // AF specific sa
         int power = -1;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
@@ -385,21 +387,21 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         if ((power != -1) || (toughness != -1)) {
-            source.addNewPT(power, toughness, timestamp);
+            card.addNewPT(power, toughness, timestamp);
         }
 
         if (!types.isEmpty() || !removeTypes.isEmpty() || removeCreatureTypes) {
-            source.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
+            card.addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
                     removeCreatureTypes, timestamp);
         }
 
-        source.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
+        card.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
 
         for (final String k : hiddenKeywords) {
-            source.addHiddenExtrinsicKeyword(k);
+            card.addHiddenExtrinsicKeyword(k);
         }
 
-        source.addColor(finalDesc, !sa.hasParam("OverwriteColors"), true);
+        card.addColor(finalDesc, !sa.hasParam("OverwriteColors"), true);
         
         //back to duplicating AnimateEffect.resolve
         //TODO will all these abilities/triggers/replacements/etc. lead to memory leaks or unintended effects?
@@ -410,10 +412,10 @@ public class AnimateAi extends SpellAbilityAi {
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
         if (clearAbilities || clearSpells || removeAll) {
-            for (final SpellAbility ab : source.getSpellAbilities()) {
+            for (final SpellAbility ab : card.getSpellAbilities()) {
                 if (removeAll || (ab.isAbility() && clearAbilities)
                         || (ab.isSpell() && clearSpells)) {
-                    source.removeSpellAbility(ab);
+                    card.removeSpellAbility(ab);
                     removedAbilities.add(ab);
                 }
             }
@@ -426,7 +428,7 @@ public class AnimateAi extends SpellAbilityAi {
                 final String actualAbility = source.getSVar(s);
                 final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, source);
                 addedAbilities.add(grantedAbility);
-                source.addSpellAbility(grantedAbility);
+                card.addSpellAbility(grantedAbility);
             }
         }
 
@@ -436,7 +438,7 @@ public class AnimateAi extends SpellAbilityAi {
             for (final String s : triggers) {
                 final String actualTrigger = source.getSVar(s);
                 final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, source, false);
-                addedTriggers.add(source.addTrigger(parsedTrigger));
+                addedTriggers.add(card.addTrigger(parsedTrigger));
             }
         }
 
@@ -446,14 +448,14 @@ public class AnimateAi extends SpellAbilityAi {
             for (final String s : replacements) {
                 final String actualReplacement = source.getSVar(s);
                 final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, source, false);
-                addedReplacements.add(source.addReplacementEffect(parsedReplacement));
+                addedReplacements.add(card.addReplacementEffect(parsedReplacement));
             }
         }
 
         // suppress triggers from the animated card
         final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
         if (sa.hasParam("OverwriteTriggers") || removeAll) {
-            final List<Trigger> triggersToRemove = source.getTriggers();
+            final List<Trigger> triggersToRemove = card.getTriggers();
             for (final Trigger trigger : triggersToRemove) {
                 trigger.setSuppressed(true);
                 removedTriggers.add(trigger);
@@ -465,11 +467,9 @@ public class AnimateAi extends SpellAbilityAi {
         if (stAbs.size() > 0) {
             for (final String s : stAbs) {
                 final String actualAbility = source.getSVar(s);
-                StaticAbility stAb = source.addStaticAbility(actualAbility);
+                StaticAbility stAb = card.addStaticAbility(actualAbility);
                 if ("Continuous".equals(stAb.getMapParams().get("Mode"))) {
-                	List<Card> list = new ArrayList<Card>();
-                	list.add(source);
-                	list = StaticAbilityContinuous.applyContinuousAbility(stAb, list);
+                    StaticAbilityContinuous.applyContinuousAbility(stAb, Lists.newArrayList(card));
                 } 
             }
         }
@@ -484,14 +484,14 @@ public class AnimateAi extends SpellAbilityAi {
                     name = actualsVar.split(":")[0];
                     actualsVar = actualsVar.split(":")[1];
                 }
-                source.setSVar(name, actualsVar);
+                card.setSVar(name, actualsVar);
             }
         }
 
         // suppress static abilities from the animated card
         final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
         if (sa.hasParam("OverwriteStatics") || removeAll) {
-            final ArrayList<StaticAbility> staticsToRemove = source.getStaticAbilities();
+            final ArrayList<StaticAbility> staticsToRemove = card.getStaticAbilities();
             for (final StaticAbility stAb : staticsToRemove) {
                 stAb.setTemporarilySuppressed(true);
                 removedStatics.add(stAb);
@@ -501,7 +501,7 @@ public class AnimateAi extends SpellAbilityAi {
         // suppress static abilities from the animated card
         final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
         if (sa.hasParam("OverwriteReplacements") || removeAll) {
-            for (final ReplacementEffect re : source.getReplacementEffects()) {
+            for (final ReplacementEffect re : card.getReplacementEffects()) {
                 re.setTemporarilySuppressed(true);
                 removedReplacements.add(re);
             }
