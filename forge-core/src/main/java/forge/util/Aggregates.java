@@ -106,21 +106,21 @@ public class Aggregates {
     }
 
     public static final <T> List<T> random(final Iterable<T> source, final int count) {
+        // Using Reservoir Sampling to grab X random values from source
         final List<T> result = new ArrayList<T>();
-        final int[] randoms = new int[count];
-        for (int i = 0; i < count; i++) {
-            randoms[i] = Integer.MAX_VALUE;
-            result.add(null);
-        }
 
         Random rnd = MyRandom.getRandom();
+        int i = 0;
         for (T item : source) {
-            int next = rnd.nextInt();
-            for (int i = 0; i < count; i++) {
-                if (next < randoms[i]) {
-                    randoms[i] = next;
-                    result.set(i, item);
-                    break;
+            i++;
+            if (i <= count) {
+                // Add the first count items into the result list
+                result.add(item);
+            } else {
+                // Progressively reduce odds of item > count to get added into the reservoir
+                int j = rnd.nextInt(i);
+                if (j < count) {
+                    result.set(j, item);
                 }
             }
         }
