@@ -200,6 +200,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         case Planes:
             cmb.addMoveItems("Add", "to planar deck");
             break;
+        case Conspiracy:
+            cmb.addMoveItems("Add", "to conspiracy deck");
+            break;
         }
     }
 
@@ -224,6 +227,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             break;
         case Planes:
             cmb.addMoveItems("Remove", "from planar deck");
+            break;
+        case Conspiracy:
+            cmb.addMoveItems("Remove", "from conspiracy deck");
             break;
         }
     }
@@ -303,6 +309,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             break;
         case Commander:
             break; //do nothing for Commander here
+        case Conspiracy:
+            break; //do nothing for conspiracy here
         }
 
         this.controller.updateCaptions();
