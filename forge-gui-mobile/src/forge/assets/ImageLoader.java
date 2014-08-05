@@ -1,5 +1,6 @@
 package forge.assets;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.cache.CacheLoader;
@@ -9,8 +10,6 @@ import forge.ImageKeys;
 import forge.properties.ForgeConstants;
 
 import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
 
 final class ImageLoader extends CacheLoader<String, Texture> {
     // image file extensions for various formats in order of likelihood
@@ -118,21 +117,19 @@ final class ImageLoader extends CacheLoader<String, Texture> {
     }
 
     private static Texture findFile(String key, String path, String filename) {
+        path += filename;
         for (String ext : _FILE_EXTENSIONS) {
-            File file = new File(path, filename + ext);
-            //System.out.println(String.format("Searching for %s at: %s", key, file.getAbsolutePath()));
-            if (file.exists()) {
-                //System.out.println(String.format("Found %s at: %s", key, file.getAbsolutePath()));
+            FileHandle fh = Gdx.files.absolute(path + ext);
+            if (fh.exists()) {
                 try {
-                    return new Texture(new FileHandle(file));
+                    return new Texture(fh);
                 }
                 catch (Exception ex) {
-                    Forge.log("Could not read image file " + file.getAbsolutePath() + "\n\nException:\n" + ex.toString());
+                    Forge.log("Could not read image file " + fh.path() + "\n\nException:\n" + ex.toString());
                     break;
                 }
             }
         }
-
         return null;
     }
 }
