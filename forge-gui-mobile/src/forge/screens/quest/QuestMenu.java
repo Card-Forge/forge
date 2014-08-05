@@ -2,6 +2,7 @@ package forge.screens.quest;
 
 import java.io.File;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.interfaces.IButton;
@@ -81,7 +82,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 @Override
                 public void run() {
                     QuestUtil.chooseAndUnlockEdition();
-                    updateCurrentQuestScreen();
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateCurrentQuestScreen();
+                        }
+                    });
                 }
             });
         }
@@ -93,7 +99,12 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 @Override
                 public void run() {
                     QuestUtil.travelWorld();
-                    updateCurrentQuestScreen();
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateCurrentQuestScreen();
+                        }
+                    });
                 }
             });
         }
