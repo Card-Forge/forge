@@ -582,13 +582,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             Deck deck = parentScreen.getDeck();
 
             for (Entry<PaperCard, Integer> itemEntry : itemsToAdd) {
-                PaperCard item = itemEntry.getKey();
-                PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
-                int qty = itemEntry.getValue();
+                PaperCard card = itemEntry.getKey();
 
                 int max;
-                if (deck == null || card == null || card.getRules().getType().isBasic() ||
-                        limit == CardLimit.None || limitExceptions.contains(card.getName())) {
+                if (deck == null || card == null) {
+                    max = Integer.MAX_VALUE;
+                }
+                else if (limit == CardLimit.None || card.getRules().getType().isBasic() || limitExceptions.contains(card.getName())) {
                     max = Integer.MAX_VALUE;
                     if (parentScreen.isLimitedEditor() && !isAddSource) {
                         //prevent adding more than is in other pool when editing limited decks
@@ -616,16 +616,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         max -= deck.get(DeckSection.Schemes).count(card);
                     }
                 }
+
+                int qty;
                 if (isAddSource) {
-                    if (qty > max) {
-                        qty = max;
-                    }
-                    if (qty > 0) {
-                        additions.add(item, qty);
-                    }
+                    qty = itemEntry.getValue();
                 }
-                else { //if not source of items being added, use max directly
-                    additions.add(item, max);
+                else if (parentScreen.getEditorType() == EditorType.Quest) {
+                    //prevent adding more than is in quest inventory
+                    qty = parentScreen.getCatalogPage().cardManager.getItemCount(card);
+                }
+                else {
+                    //if not source of items being added, use max directly if unlimited pool
+                    qty = max;
+                }
+                if (qty > max) {
+                    qty = max;
+                }
+                if (qty > 0) {
+                    additions.add(card, qty);
                 }
             }
 
@@ -987,6 +995,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         if (parentScreen.isLimitedEditor()) { //ensure card removed from sideboard before adding to main
                             parentScreen.getSideboardPage().removeCard(card, result);
                         }
+                        else if (parentScreen.getEditorType() == EditorType.Quest) {
+                            parentScreen.getCatalogPage().removeCard(card, result);
+                        }
                         addCard(card, result);
                     }
                 });
@@ -1021,6 +1032,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
                         if (parentScreen.isLimitedEditor()) { //ensure card removed from main deck before adding to sideboard
                             parentScreen.getMainDeckPage().removeCard(card, result);
+                        }
+                        else if (parentScreen.getEditorType() == EditorType.Quest) {
+                            parentScreen.getCatalogPage().removeCard(card, result);
                         }
                         addCard(card, result);
                     }
