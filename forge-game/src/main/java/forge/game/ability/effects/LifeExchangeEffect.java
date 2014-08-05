@@ -62,11 +62,11 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
         final int life1 = p1.getLife();
         final int life2 = p2.getLife();
 
-        if ((life1 > life2) && p1.canLoseLife()) {
+        if ((life1 > life2) && p1.canLoseLife() && p2.canGainLife()) {
             final int diff = life1 - life2;
             p1.loseLife(diff);
             p2.gainLife(diff, source);
-        } else if ((life2 > life1) && p2.canLoseLife()) {
+        } else if ((life2 > life1) && p2.canLoseLife() && p1.canGainLife()) {
             final int diff = life2 - life1;
             p2.loseLife(diff);
             p1.gainLife(diff, source);
