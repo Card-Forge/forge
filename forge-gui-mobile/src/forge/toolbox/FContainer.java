@@ -1,6 +1,7 @@
 package forge.toolbox;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -68,6 +69,9 @@ public abstract class FContainer extends FDisplayObject {
             if (needOverlayDrawn) {
                 drawOverlay(g);
             }
+        }
+        catch (ConcurrentModificationException ex) {
+            //ignore concurrent modification exceptions during render
         }
         catch (Exception ex) {
             BugReporter.reportException(ex);
