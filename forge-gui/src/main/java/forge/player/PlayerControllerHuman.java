@@ -130,29 +130,27 @@ public class PlayerControllerHuman extends PlayerController {
 
         List<PaperCard> newMain = null;
 
-        if (sbSize == 0 && mainSize == deckMinSize) {
-            // Skip sideboard loop if there are no sideboarding opportunities
-            return null;
-        }
-        else {
-            // conformance should not be checked here
-            boolean conform = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
-            do {
-                if (newMain != null) {
-                    String errMsg;
-                    if (newMain.size() < deckMinSize) {
-                        errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
-                    }
-                    else {
-                        errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
-                    }
-                    SOptionPane.showErrorDialog(errMsg, "Invalid Deck");
+        //Skip sideboard loop if there are no sideboarding opportunities
+        if (sbSize == 0 && mainSize == deckMinSize) { return null; }
+
+        // conformance should not be checked here
+        boolean conform = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
+        do {
+            if (newMain != null) {
+                String errMsg;
+                if (newMain.size() < deckMinSize) {
+                    errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
                 }
-                // Sideboard rules have changed for M14, just need to consider min maindeck and max sideboard sizes
-                // No longer need 1:1 sideboarding in non-limited formats
-                newMain = GuiBase.getInterface().sideboard(sideboard, main);
-            } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
-        }
+                else {
+                    errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
+                }
+                SOptionPane.showErrorDialog(errMsg, "Invalid Deck");
+            }
+            // Sideboard rules have changed for M14, just need to consider min maindeck and max sideboard sizes
+            // No longer need 1:1 sideboarding in non-limited formats
+            newMain = GuiBase.getInterface().sideboard(sideboard, main);
+        } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
+
         return newMain;
     }
 
