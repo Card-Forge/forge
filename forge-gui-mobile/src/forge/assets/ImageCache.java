@@ -137,19 +137,22 @@ public class ImageCache {
             }
         }
 
-        // Load from file and add to cache if not found in cache initially.
-        Texture image = cache.getIfPresent(imageKey);
-        if (image != null) { return image; }
-
-        if (imageLoaded) { //prevent loading more than one image each render for performance
-            if (!delayLoadRequested) {
-                //ensure images continue to load even if no input is being received
-                delayLoadRequested = true;
-                Gdx.graphics.requestRendering();
+        Texture image;
+        if (useDefaultIfNotFound) {
+            // Load from file and add to cache if not found in cache initially.
+            image = cache.getIfPresent(imageKey);
+            if (image != null) { return image; }
+    
+            if (imageLoaded) { //prevent loading more than one image each render for performance
+                if (!delayLoadRequested) {
+                    //ensure images continue to load even if no input is being received
+                    delayLoadRequested = true;
+                    Gdx.graphics.requestRendering();
+                }
+                return null;
             }
-            return null;
+            imageLoaded = true;
         }
-        imageLoaded = true;
 
         try {
             image = cache.get(imageKey);
