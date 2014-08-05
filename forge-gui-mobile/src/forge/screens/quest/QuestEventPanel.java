@@ -134,15 +134,14 @@ class QuestEventPanel extends FDisplayObject {
 
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
-            int panelCount = getChildCount();
-            if (panelCount == 0) {
+            if (getChildCount() == 0) {
                 return new ScrollBounds(visibleWidth, visibleHeight);
             }
 
             float y = 0;
             float panelWidth = visibleWidth;
             float padding = 2 * PADDING; //use twice as much padding between panels
-            float panelHeight = (visibleHeight + padding) / panelCount - padding;
+            float panelHeight = (visibleHeight + padding) / 3 - padding;
             if (panelHeight < MIN_HEIGHT) {
                 panelHeight = MIN_HEIGHT;
             }
