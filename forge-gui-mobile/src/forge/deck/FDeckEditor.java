@@ -143,8 +143,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Main),
-                    new DeckSectionPage(DeckSection.Sideboard),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
+                    new DeckSectionPage(DeckSection.Sideboard)
             };
         case Archenemy:
             return new DeckEditorPage[] {
