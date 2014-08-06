@@ -442,30 +442,31 @@ public class GuiMobile implements IGuiBase {
     public void browseToUrl(String url) throws Exception {
         Gdx.net.openURI(url);
     }
-	@Override
-	public LobbyPlayer getGuiPlayer() {
-		return FControl.getGuiPlayer();
-	}
+
+    @Override
+    public LobbyPlayer getGuiPlayer() {
+        return FControl.getGuiPlayer();
+    }
 
     @Override
     public LobbyPlayer getAiPlayer(String name) {
         return FControl.getAiPlayer(name);
     }
 
-	@Override
-	public LobbyPlayer createAiPlayer() {
-		return FControl.getAiPlayer();
-	}
+    @Override
+    public LobbyPlayer createAiPlayer() {
+        return FControl.getAiPlayer();
+    }
 
-	@Override
-	public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
-		return FControl.getAiPlayer(name, avatarIndex);
-	}
+    @Override
+    public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
+        return FControl.getAiPlayer(name, avatarIndex);
+    }
 
-	@Override
-	public LobbyPlayer getQuestPlayer() {
-		return getGuiPlayer();
-	}
+    @Override
+    public LobbyPlayer getQuestPlayer() {
+        return getGuiPlayer();
+    }
 
     @Override
     public IAudioClip createAudioClip(String filename) {
