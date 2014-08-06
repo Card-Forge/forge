@@ -51,8 +51,8 @@ public class DeckProxy implements InventoryItem {
     protected ColorSet color;
     protected ColorSet colorIdentity;
     protected Iterable<GameFormat> formats;
-    private int mainSize = Integer.MIN_VALUE;
-    private int sbSize = Integer.MIN_VALUE;
+    private Integer mainSize = null;
+    private Integer sbSize = null;
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
     private CardEdition edition;
@@ -134,8 +134,8 @@ public class DeckProxy implements InventoryItem {
         highestRarity = null;
         formats = null;
         edition = null;
-        mainSize = Integer.MIN_VALUE;
-        sbSize = Integer.MIN_VALUE;
+        mainSize = null;
+        sbSize = null;
     }
 
     public ColorSet getColor() {
@@ -231,19 +231,26 @@ public class DeckProxy implements InventoryItem {
     }
 
     public int getMainSize() {
-        if (mainSize == Integer.MIN_VALUE) {
+        if (mainSize == null) {
             if (deck == null) {
                 mainSize = -1;
             }
             else {
-                mainSize = getDeck().getMain().countAll();
+                Deck d = getDeck();
+                mainSize = d.getMain().countAll();
+
+                //account for commander as part of main deck size
+                CardPool commander = d.get(DeckSection.Commander);
+                if (commander != null) {
+                    mainSize += commander.countAll();
+                }
             }
         }
         return mainSize;
     }
 
     public int getSideSize() {
-        if (sbSize == Integer.MIN_VALUE) {
+        if (sbSize == null) {
             CardPool sb = getDeck().get(DeckSection.Sideboard);
             sbSize = sb == null ? -1 : sb.countAll();
             if (sbSize == 0) {
