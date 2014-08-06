@@ -17,22 +17,17 @@ package forge.screens.match.winlose;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import forge.GuiBase;
+import forge.FThreads;
 import forge.game.Game;
-import forge.limited.GauntletMini;
-import forge.model.FModel;
-import forge.toolbox.FOptionPane;
+import forge.limited.LimitedWinLoseController;
+import forge.util.gui.SOptionPane;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
  * games.
  */
 public class LimitedWinLose extends ControlWinLose {
-
-    private final boolean wonMatch;
-    private ViewWinLose view;
-    private GauntletMini gauntlet;
-    private boolean nextRound = false;
+    private final LimitedWinLoseController controller;
 
     /**
      * Instantiates a new limited mode win/lose handler.
@@ -42,126 +37,46 @@ public class LimitedWinLose extends ControlWinLose {
      */
     public LimitedWinLose(final ViewWinLose view0, Game lastGame) {
         super(view0, lastGame);
-        this.view = view0;
-        gauntlet = FModel.getGauntletMini();
-        this.wonMatch = lastGame.getMatch().isWonBy(GuiBase.getInterface().getGuiPlayer());
+        controller = new LimitedWinLoseController(view0, lastGame) {
+            @Override
+            protected void showOutcome(Runnable runnable) {
+                //invoke reward logic in background thread so dialogs can be shown
+                FThreads.invokeInBackgroundThread(runnable);
+            }
+
+            @Override
+            protected void showMessage(String message, String title) {
+                SOptionPane.showMessageDialog(message, title);
+            }
+
+            @Override
+            protected void saveOptions() {
+                LimitedWinLose.this.saveOptions();
+            }
+        };
     }
 
     @Override
     public final void showRewards() {
-        // view.getBtnRestart().setVisible(false);
-        // Deliberate; allow replaying bad tournaments
-
-        //TODO: do per-game actions like ante here...
-
-        resetView();
-        nextRound = false;
-
-        if (lastGame.getOutcome().isWinner(GuiBase.getInterface().getGuiPlayer())) {
-            gauntlet.addWin();
-        }
-        else {
-            gauntlet.addLoss();
-        }
-
-        view.getBtnRestart().setText("Restart Round");
-
-        if (!lastGame.getMatch().isMatchOver()) {
-            showTournamentInfo("Tournament Info");
-            return;
-        }
-        else {
-            if (wonMatch) {
-                if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
-                    view.getBtnContinue().setText("Next Round (" + (gauntlet.getCurrentRound() + 1)
-                            + "/" + gauntlet.getRounds() + ")");
-                    nextRound = true;
-                    view.getBtnContinue().setEnabled(true);
-                    showTournamentInfo("YOU HAVE WON ROUND " + gauntlet.getCurrentRound() + "/"
-                            + gauntlet.getRounds());
-                }
-                else {
-                    showTournamentInfo("***CONGRATULATIONS! YOU HAVE WON THE TOURNAMENT!***");
-                }
-            }
-            else {
-                showTournamentInfo("YOU HAVE LOST ON ROUND " + gauntlet.getCurrentRound() + "/"
-                        + gauntlet.getRounds());
-                view.getBtnContinue().setVisible(false);
-            }
-        }
+        controller.showOutcome();
     }
 
-    /**
-     * <p>
-     * Shows some tournament info in the custom panel.
-     * </p>
-     * @param String - the title to be displayed
-     */
-    private void showTournamentInfo(final String newTitle) {
-        FOptionPane.showMessageDialog("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds(), newTitle);
-    }
-
-    /**
-     * <p>
-     * actionOnRestart.
-     * </p>
-     * When "restart" button is pressed, this method restarts the current round.
-     * 
-     */
     @Override
     public final void actionOnRestart() {
-        resetView();
-        // gauntlet.resetCurrentRound();
+        controller.actionOnRestart();
         super.actionOnRestart();
     }
 
-    /**
-     * <p>
-     * actionOnQuit.
-     * </p>
-     * When "quit" button is pressed, we exit the tournament.
-     * 
-     */
     @Override
     public final void actionOnQuit() {
-        resetView();
-        gauntlet.resetCurrentRound();
+        controller.actionOnQuit();
         super.actionOnQuit();
     }
 
-    /**
-     * <p>
-     * actionOnContinue.
-     * </p>
-     * When "continue / next round" button is pressed, we either continue
-     * to the next game in the current match or (next round) proceed to
-     * the next round in the mini tournament.
-     * 
-     */
     @Override
     public final void actionOnContinue() {
-        resetView();
-        if (nextRound) {
-            view.hide();
-            saveOptions();
-            gauntlet.nextRound();
-        }
-        else { // noone will get here - if round is lost, the button is inivisible anyway
+        if (!controller.actionOnContinue()) {
             super.actionOnContinue();
         }
-    }
-
-    /**
-     * <p>
-     * ResetView
-     * </p>
-     * Restore the default texts to the win/lose panel buttons.
-     * 
-     */
-    private void resetView() {
-        view.getBtnQuit().setText("Quit");
-        view.getBtnContinue().setText("Continue");
-        view.getBtnRestart().setText("Restart");
     }
 }

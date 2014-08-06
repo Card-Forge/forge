@@ -18,6 +18,8 @@ import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameOutcome;
 import forge.game.player.Player;
+import forge.gui.SOverlayUtils;
+import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
@@ -29,7 +31,7 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
 
 
-public class ViewWinLose {
+public class ViewWinLose implements IWinLoseView<FButton> {
     private final FButton btnContinue, btnRestart, btnQuit;
     private final SkinnedPanel pnlCustom;
 
@@ -232,5 +234,10 @@ public class ViewWinLose {
 
     private String removePlayerTypeFromLogMessage(String message) {
         return message.replaceAll("\\[[^\\]]*\\]", "");
+    }
+
+    @Override
+    public void hide() {
+        SOverlayUtils.hideOverlay();
     }
 }

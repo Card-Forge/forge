@@ -114,7 +114,7 @@ public class QuestWinLose extends ControlWinLose {
      */
     @Override
     public final boolean populateCustomPanel() {
-        controller.showRewards(view.getBtnContinue(), view.getBtnRestart(), view.getBtnQuit());
+        controller.showRewards(view);
         return true;
     }
 

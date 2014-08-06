@@ -23,6 +23,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
 import forge.interfaces.IButton;
+import forge.interfaces.IWinLoseView;
 import forge.item.BoosterPack;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -52,8 +53,8 @@ public abstract class QuestWinLoseController {
         isAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
-    public void showRewards(final IButton btnContinue, final IButton btnRestart, final IButton btnQuit) {
-        btnRestart.setVisible(false);
+    public void showRewards(final IWinLoseView<? extends IButton> view) {
+        view.getBtnRestart().setVisible(false);
         final QuestController qc = FModel.getQuest();
 
         // After the first game, reset the card shop pool to be able to buy back anted cards
@@ -73,15 +74,15 @@ public abstract class QuestWinLoseController {
 
         final boolean matchIsNotOver = !lastGame.getMatch().isMatchOver();
         if (matchIsNotOver) {
-            btnQuit.setText("Quit (-15 Credits)");
+            view.getBtnQuit().setText("Quit (-15 Credits)");
         }
         else {
-            btnContinue.setVisible(false);
+            view.getBtnContinue().setVisible(false);
             if (wonMatch) {
-                btnQuit.setText("Great!");
+                view.getBtnQuit().setText("Great!");
             }
             else {
-                btnQuit.setText("OK");
+                view.getBtnQuit().setText("OK");
             }
         }
 

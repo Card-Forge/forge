@@ -16636,6 +16636,7 @@ forge-gui/src/main/java/forge/interfaces/IComboBox.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
+forge-gui/src/main/java/forge/interfaces/IWinLoseView.java -text
 forge-gui/src/main/java/forge/itemmanager/ColumnDef.java -text
 forge-gui/src/main/java/forge/itemmanager/GroupDef.java -text
 forge-gui/src/main/java/forge/itemmanager/IItemManager.java -text
@@ -16658,6 +16659,7 @@ forge-gui/src/main/java/forge/limited/GauntletMini.java -text
 forge-gui/src/main/java/forge/limited/IBoosterDraft.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/LimitedDeckBuilder.java -text
 forge-gui/src/main/java/forge/limited/LimitedPoolType.java -text
+forge-gui/src/main/java/forge/limited/LimitedWinLoseController.java -text
 forge-gui/src/main/java/forge/limited/ReadDraftRankings.java -text
 forge-gui/src/main/java/forge/limited/SealedCardPoolGenerator.java svneol=native#text/plain
 forge-gui/src/main/java/forge/limited/SealedDeckBuilder.java svneol=native#text/plain

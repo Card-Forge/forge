@@ -67,7 +67,7 @@ public class QuestWinLose extends ControlWinLose {
 
     @Override
     public final void showRewards() {
-        controller.showRewards(getView().getBtnContinue(), getView().getBtnRestart(), getView().getBtnQuit());
+        controller.showRewards(getView());
     }
 
     /**

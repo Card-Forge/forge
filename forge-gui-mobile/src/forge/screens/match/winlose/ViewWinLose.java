@@ -13,6 +13,7 @@ import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameOutcome;
 import forge.game.player.Player;
+import forge.interfaces.IWinLoseView;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
 import forge.toolbox.FButton;
@@ -25,7 +26,7 @@ import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
 import forge.util.Utils;
 
-public class ViewWinLose extends FOverlay {
+public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float INSETS_FACTOR = 0.025f;
     private static final float GAP_Y_FACTOR = 0.02f;
 

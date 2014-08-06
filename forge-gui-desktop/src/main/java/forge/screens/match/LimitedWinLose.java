@@ -17,37 +17,28 @@ package forge.screens.match;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import forge.GuiBase;
-import forge.LobbyPlayer;
+import java.awt.Dimension;
+
+import javax.swing.SwingConstants;
+
 import forge.game.Game;
-import forge.gui.SOverlayUtils;
-import forge.limited.GauntletMini;
-import forge.model.FModel;
+import forge.limited.LimitedWinLoseController;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.Colors;
+import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
-
-import javax.swing.*;
-
-import java.awt.*;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
  * games.
  */
 public class LimitedWinLose extends ControlWinLose {
-
-    private final boolean wonMatch;
-    private ViewWinLose view;
-    private GauntletMini gauntlet;
-    private boolean nextRound = false;
+    private final LimitedWinLoseController controller;
 
     /** String constraint parameters. */
+    private static final SkinColor FORE_COLOR = FSkin.getColor(Colors.CLR_TEXT);
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
     private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
-
-    private SkinnedLabel lblTemp1;
-    private SkinnedLabel lblTemp2;
-	private LobbyPlayer guiPlayer;
 
     /**
      * Instantiates a new limited mode win/lose handler.
@@ -57,10 +48,29 @@ public class LimitedWinLose extends ControlWinLose {
      */
     public LimitedWinLose(final ViewWinLose view0, Game lastGame) {
         super(view0, lastGame);
-        this.view = view0;
-        gauntlet = FModel.getGauntletMini();
-        guiPlayer = GuiBase.getInterface().getGuiPlayer();
-        this.wonMatch = lastGame.getMatch().isWonBy(guiPlayer);
+        controller = new LimitedWinLoseController(view0, lastGame) {
+            @Override
+            protected void showOutcome(Runnable runnable) {
+                runnable.run(); //just run on GUI thread
+            }
+
+            @Override
+            protected void showMessage(String message, String title) {
+                TitleLabel lblTemp1 = new TitleLabel(title);
+                SkinnedLabel lblTemp2 = new SkinnedLabel(message);
+                lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
+                lblTemp2.setFont(FSkin.getFont(17));
+                lblTemp2.setForeground(FORE_COLOR);
+                lblTemp2.setIconTextGap(50);
+                getView().getPnlCustom().add(lblTemp1, LimitedWinLose.CONSTRAINTS_TITLE);
+                getView().getPnlCustom().add(lblTemp2, LimitedWinLose.CONSTRAINTS_TEXT);
+            }
+
+            @Override
+            protected void saveOptions() {
+                LimitedWinLose.this.saveOptions();
+            }
+        };
     }
 
 
@@ -72,69 +82,8 @@ public class LimitedWinLose extends ControlWinLose {
      */
     @Override
     public final boolean populateCustomPanel() {
-
-        // view.getBtnRestart().setVisible(false);
-        // Deliberate; allow replaying bad tournaments
-
-        //TODO: do per-game actions like ante here...
-
-        resetView();
-        nextRound = false;
-
-        if (lastGame.getOutcome().isWinner(guiPlayer)) {
-            gauntlet.addWin();
-        } else {
-            gauntlet.addLoss();
-        }
-
-        view.getBtnRestart().setText("Restart Round");
-
-        if (!lastGame.getMatch().isMatchOver()) {
-            showTournamentInfo("Tournament Info");
-            return true;
-        } else {
-            if (this.wonMatch) {
-                if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
-                    view.getBtnContinue().setText("Next Round (" + (gauntlet.getCurrentRound() + 1)
-                            + "/" + gauntlet.getRounds() + ")");
-                    nextRound = true;
-                    view.getBtnContinue().setEnabled(true);
-                    showTournamentInfo("YOU HAVE WON ROUND " + gauntlet.getCurrentRound() + "/"
-                            + gauntlet.getRounds());
-                }
-                else {
-                    showTournamentInfo("***CONGRATULATIONS! YOU HAVE WON THE TOURNAMENT!***");
-                }
-            } else {
-                showTournamentInfo("YOU HAVE LOST ON ROUND " + gauntlet.getCurrentRound() + "/"
-                        + gauntlet.getRounds());
-                view.getBtnContinue().setVisible(false);
-            }
-        }
-
-
-
+        controller.showOutcome();
         return true;
-    }
-
-    /**
-     * <p>
-     * Shows some tournament info in the custom panel.
-     * </p>
-     * @param String - the title to be displayed
-     */
-    private void showTournamentInfo(final String newTitle) {
-
-        this.lblTemp1 = new TitleLabel(newTitle);
-        this.lblTemp2 = new SkinnedLabel("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds());
-                // + "      Total Wins: " + gauntlet.getWins()
-                // + "      Total Losses: " + gauntlet.getLosses());
-        this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(FSkin.getFont(17));
-        this.lblTemp2.setForeground(Color.white);
-        this.lblTemp2.setIconTextGap(50);
-        this.getView().getPnlCustom().add(this.lblTemp1, LimitedWinLose.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(this.lblTemp2, LimitedWinLose.CONSTRAINTS_TEXT);
     }
 
     /**
@@ -146,8 +95,7 @@ public class LimitedWinLose extends ControlWinLose {
      */
     @Override
     public final void actionOnRestart() {
-        resetView();
-        // gauntlet.resetCurrentRound();
+        controller.actionOnRestart();
         super.actionOnRestart();
     }
 
@@ -160,8 +108,7 @@ public class LimitedWinLose extends ControlWinLose {
      */
     @Override
     public final void actionOnQuit() {
-        resetView();
-        gauntlet.resetCurrentRound();
+        controller.actionOnQuit();
         super.actionOnQuit();
     }
 
@@ -176,28 +123,9 @@ public class LimitedWinLose extends ControlWinLose {
      */
     @Override
     public final void actionOnContinue() {
-        resetView();
-        if (nextRound) {
-            SOverlayUtils.hideOverlay();
-            saveOptions();
-            gauntlet.nextRound();
-        }
-        else { // noone will get here - if round is lost, the button is inivisible anyway
+        if (!controller.actionOnContinue()) {
             super.actionOnContinue();
         }
-    }
-
-    /**
-     * <p>
-     * ResetView
-     * </p>
-     * Restore the default texts to the win/lose panel buttons.
-     * 
-     */
-    private void resetView() {
-        view.getBtnQuit().setText("Quit");
-        view.getBtnContinue().setText("Continue");
-        view.getBtnRestart().setText("Restart");
     }
 
     /**
@@ -208,11 +136,11 @@ public class LimitedWinLose extends ControlWinLose {
     private class TitleLabel extends SkinnedLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(FSkin.getFont(18));
-            this.setPreferredSize(new Dimension(200, 40));
-            this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setForeground(Color.white);
-            this.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.white));
+            setFont(FSkin.getFont(18));
+            setPreferredSize(new Dimension(200, 40));
+            setHorizontalAlignment(SwingConstants.CENTER);
+            setForeground(FORE_COLOR);
+            setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FORE_COLOR));
         }
     }
 
