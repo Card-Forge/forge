@@ -184,6 +184,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private List<Card> lostOwnership = new ArrayList<Card>();
     private List<Card> gainedOwnership = new ArrayList<Card>();
 
+    private int numManaConversion = 0;
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -2330,6 +2332,23 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void incLibrarySearched() {
         this.numLibrarySearchedOwn++;
+    }
+
+    public final void setNumManaConversion(final int l) {
+        this.numManaConversion = l;
+    }
+
+    public final boolean hasManaConversion() {
+        return this.numManaConversion < this.getAmountOfKeyword("You may spend mana as though"
+                + " it were mana of any color to cast a spell this turn.");
+    }
+
+    public final void incNumManaConversion() {
+        this.numManaConversion++;
+    }
+
+    public final void decNumManaConversion() {
+        this.numManaConversion--;
     }
 
     /*

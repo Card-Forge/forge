@@ -20,9 +20,9 @@ package forge.player;
 import com.google.common.collect.Iterables;
 
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.CostPartMana;
@@ -40,7 +40,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -70,9 +69,8 @@ public class HumanPlaySpellAbility {
 
         final Card c = this.ability.getHostCard();
         boolean manaConversion = (ability.isSpell() && c.hasKeyword("May spend mana as though it were mana of any color to cast CARDNAME"));
-
-        Map<String, String> params = AbilityFactory.getMapParams(c.getSVar("ManaConversionMatrix"));
-
+        boolean playerManaConversion = human.hasManaConversion()
+                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
         if (this.ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             if (fromZone != null) {
@@ -85,7 +83,11 @@ public class HumanPlaySpellAbility {
         game.getStack().freezeStack();
 
         if (manaConversion) {
-            AbilityUtils.applyManaColorConversion(human, params);
+            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_MANA_CONVERSION);
+        }
+        if (playerManaConversion) {
+            AbilityUtils.applyManaColorConversion(human, MagicColor.Constant.ANY_MANA_CONVERSION);
+            human.incNumManaConversion();
         }
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
@@ -107,6 +109,10 @@ public class HumanPlaySpellAbility {
             }
             if (manaConversion) {
                 manapool.restoreColorReplacements();
+            }
+            if (playerManaConversion) {
+                manapool.restoreColorReplacements();
+                human.decNumManaConversion();
             }
             return;
         }

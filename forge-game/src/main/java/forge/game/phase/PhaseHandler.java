@@ -733,6 +733,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
             p.setLifeLostThisTurn(0);
             p.setLifeGainedThisTurn(0);
             p.setLibrarySearched(0);
+            p.setNumManaConversion(0);
 
             p.removeKeyword("At the beginning of this turn's end step, you lose the game.");
             p.removeKeyword("Skip the untap step of this turn.");

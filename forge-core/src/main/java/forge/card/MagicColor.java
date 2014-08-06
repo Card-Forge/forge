@@ -1,6 +1,7 @@
 package forge.card;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import java.util.List;
 
@@ -127,5 +128,14 @@ public class MagicColor {
         /** The Basic lands. */
         public static final List<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
         public static final List<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
+        public static final ImmutableMap<String, String> ANY_MANA_CONVERSION = new ImmutableMap.Builder<String, String>()
+            .put("ManaColorConversion", "Additive")
+            .put("WhiteConversion", "All")
+            .put("BlueConversion", "All")
+            .put("BlackConversion", "All")
+            .put("RedConversion", "All")
+            .put("GreenConversion", "All")
+            .put("ColorlessConversion", "All")
+            .build();
     }    
 }
