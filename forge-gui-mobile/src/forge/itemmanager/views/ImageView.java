@@ -343,6 +343,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         Group otherItems = groupBy == null ? groups.get(0) : null;
 
         for (Group group : groups) {
+            for (ItemInfo itemInfo : group.items) {
+                itemInfo.group = null; //unlink old items from group
+            }
             group.items.clear();
         }
         clearSelection();
@@ -525,7 +528,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 for (Pile pile : group.piles) {
                     for (ItemInfo itemInfo : pile.items) {
                         itemInfo.index = index++;
-                        itemInfo.group = group;
                         orderedItems.add(itemInfo);
                     }
                 }
@@ -779,6 +781,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         public void add(ItemInfo item) {
+            item.group = this;
             items.add(item);
         }
 
