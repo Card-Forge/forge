@@ -562,7 +562,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public void setCards(CardPool cards) {
-            cardManager.setPool(cards);
+            cardManager.setItems(cards);
             parentScreen.getEditorType().getController().notifyModelChanged();
             updateCaption();
         }

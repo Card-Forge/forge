@@ -632,6 +632,18 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     /**
      * 
+     * setItems.
+     * 
+     * @param items
+     */
+    public void setItems(Iterable<Entry<T, Integer>> items) {
+        pool.clear();
+        model.clear();
+        addItems(items);
+    }
+
+    /**
+     * 
      * removeItem.
      * 
      * @param item

@@ -343,9 +343,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         Group otherItems = groupBy == null ? groups.get(0) : null;
 
         for (Group group : groups) {
-            for (ItemInfo itemInfo : group.items) {
-                itemInfo.group = null; //unlink old items from group
-            }
             group.items.clear();
         }
         clearSelection();
@@ -355,24 +352,27 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             int qty = itemEntry.getValue();
             int groupIndex = groupBy == null ? -1 : groupBy.getItemGroupIndex(item);
 
-            for (int i = 0; i < qty; i++) {
-                if (groupIndex >= 0) {
-                    groups.get(groupIndex).add(new ItemInfo(item));
-                }
-                else {
-                    if (otherItems == null) {
-                        //reuse existing Other group if possible
-                        if (groups.size() > groupBy.getGroups().length) {
-                            otherItems = groups.get(groups.size() - 1);
-                        }
-                        else {
-                            otherItems = new Group("Other");
-                            otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
-                            groups.add(otherItems);
-                        }
+            Group group;
+            if (groupIndex >= 0) {
+                group = groups.get(groupIndex);
+            }
+            else {
+                if (otherItems == null) {
+                    //reuse existing Other group if possible
+                    if (groups.size() > groupBy.getGroups().length) {
+                        otherItems = groups.get(groups.size() - 1);
                     }
-                    otherItems.add(new ItemInfo(item));
+                    else {
+                        otherItems = new Group("Other");
+                        otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
+                        groups.add(otherItems);
+                    }
                 }
+                group = otherItems;
+            }
+
+            for (int i = 0; i < qty; i++) {
+                group.add(new ItemInfo(item, group));
             }
         }
 
@@ -781,7 +781,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         public void add(ItemInfo item) {
-            item.group = this;
             items.add(item);
         }
 
@@ -913,12 +912,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
     private class ItemInfo extends FDisplayObject implements Entry<InventoryItem, Integer> {
         private final T item;
+        private final Group group;
         private int index;
         private boolean selected;
-        private Group group;
 
-        private ItemInfo(T item0) {
+        private ItemInfo(T item0, Group group0) {
             item = item0;
+            group = group0;
         }
 
         @Override
