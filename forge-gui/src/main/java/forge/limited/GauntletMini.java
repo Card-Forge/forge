@@ -23,6 +23,7 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
+import forge.util.Aggregates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,30 +61,6 @@ public class GauntletMini {
     }
 
     /**
-     * 
-     * Set the number of rounds in the tournament.
-     * 
-     * @param gameRounds
-     *          the number of rounds in the mini tournament
-     */
-
-    private void setRounds(int gameRounds) {
-        rounds = gameRounds;
-    }
-
-    /**
-     * 
-     * Chooses the human deck for the tournament.
-     * Note: The AI decks are connected to the human deck.
-     * 
-     * @param hDeck
-     *          the human deck for this tournament
-     */
-    private void setHumanDeck(Deck hDeck) {
-        humanDeck = hDeck;
-    }
-
-    /**
      * Resets the tournament.
      */
     public void resetCurrentRound() {
@@ -97,7 +74,6 @@ public class GauntletMini {
      * Advances the tournament to the next round.
      */
     public void nextRound() {
-
         // System.out.println("Moving from round " + currentRound + " to round " +  currentRound + 1 + " of " + rounds);
         if (currentRound >= rounds) {
             currentRound = rounds - 1;
@@ -114,17 +90,17 @@ public class GauntletMini {
      * Setup and launch the gauntlet.
      * Note: The AI decks are connected to the human deck.
      * 
-     * @param gameRounds
+     * @param rounds0
      *          the number of rounds (opponent decks) in this tournament
-     * @param hDeck
+     * @param humanDeck0
      *          the human deck for this tournament
-     * @param gType
+     * @param gauntletType0
      *          game type (Sealed, Draft, Constructed...)
      */
-    public void launch(int gameRounds, Deck hDeck, final GameType gType) {
-        setHumanDeck(hDeck);
-        setRounds(gameRounds);
-        gauntletType = gType;
+    public void launch(int rounds0, Deck humanDeck0, final GameType gauntletType0) {
+        rounds = rounds0;
+        humanDeck = humanDeck0;
+        gauntletType = gauntletType0;
         List<Deck> aiDecks;
         if (gauntletType == GameType.Sealed) {
             aiDecks = FModel.getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
@@ -137,9 +113,17 @@ public class GauntletMini {
             throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
         }
         aiOpponents.clear();
-        for (int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++) {
 
-            aiOpponents.add(new RegisteredPlayer(aiDecks.get(i)));
+        if (rounds == 1) { //play random opponent if only playing one round
+            aiOpponents.add(new RegisteredPlayer(aiDecks.get(Aggregates.randomInt(0, aiDecks.size() - 1))));
+        }
+        else { //otherwise play opponents in order
+            if (rounds > aiDecks.size()) {
+                rounds = aiDecks.size(); //don't allow playing same opponent twice
+            }
+            for (int i = 0; i < rounds; i++) {
+                aiOpponents.add(new RegisteredPlayer(aiDecks.get(i)));
+            }
         }
 
         resetCurrentRound();

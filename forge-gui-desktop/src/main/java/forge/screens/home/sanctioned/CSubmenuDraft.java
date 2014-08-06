@@ -139,7 +139,7 @@ public enum CSubmenuDraft implements ICDoc {
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GuiBase.getInterface().getGuiPlayer()));
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(GuiBase.getInterface().createAiPlayer()));
-        for(RegisteredPlayer pl : starter) {
+        for (RegisteredPlayer pl : starter) {
             pl.assignConspiracies();
         }
 
