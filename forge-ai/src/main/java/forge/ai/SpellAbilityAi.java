@@ -87,8 +87,9 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
      * @return a boolean.
      */
     protected static boolean isSorcerySpeed(final SpellAbility sa) {
-        return ( sa.isSpell() &&  sa.getHostCard().isSorcery() )
-            || ( sa.isAbility() && sa.getRestrictions().isSorcerySpeed() );
+        return (sa.isSpell() && sa.getHostCard().isSorcery())
+            || (sa.isAbility() && sa.getRestrictions().isSorcerySpeed())
+            || (sa.getRestrictions().isPwAbility() && !sa.getHostCard().hasKeyword("CARDNAME's loyalty abilities can be activated at instant speed."));
     }
 
     /**

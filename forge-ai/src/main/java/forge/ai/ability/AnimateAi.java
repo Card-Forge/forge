@@ -85,7 +85,7 @@ public class AnimateAi extends SpellAbilityAi {
                 }
             }
         }
-        
+
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
         if (!ph.is(PhaseType.COMBAT_BEGIN)
@@ -100,7 +100,8 @@ public class AnimateAi extends SpellAbilityAi {
         if (ph.isPlayerTurn(aiPlayer)
                 && aiPlayer.getLife() < 6
                 && opponent.getLife() > 6
-                && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+                && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
+                && !sa.hasParam("AILogic")) {
             return false;
         }
 
