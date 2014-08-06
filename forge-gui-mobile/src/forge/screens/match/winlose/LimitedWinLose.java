@@ -17,10 +17,8 @@ package forge.screens.match.winlose;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import forge.FThreads;
 import forge.game.Game;
 import forge.limited.LimitedWinLoseController;
-import forge.util.gui.SOptionPane;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -41,12 +39,15 @@ public class LimitedWinLose extends ControlWinLose {
             @Override
             protected void showOutcome(Runnable runnable) {
                 //invoke reward logic in background thread so dialogs can be shown
-                FThreads.invokeInBackgroundThread(runnable);
+                //FThreads.invokeInBackgroundThread(runnable);
+                runnable.run(); //background thread only needed if message shown
             }
 
             @Override
             protected void showMessage(String message, String title) {
-                SOptionPane.showMessageDialog(message, title);
+                //avoid showing unnecessary message for mobile game
+                //TODO: Consider a better way to do this
+                //SOptionPane.showMessageDialog(message, title);
             }
 
             @Override
