@@ -59,7 +59,7 @@ public final class GauntletData {
     }
 
     public void stamp() {
-        final DateFormat dateFormat = new SimpleDateFormat("dd-mm-yy, H:m");
+        final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yy, H:m");
         this.timestamp = dateFormat.format(new Date()).toString();
     }
 
