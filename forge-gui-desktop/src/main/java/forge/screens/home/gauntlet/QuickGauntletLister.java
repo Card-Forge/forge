@@ -75,7 +75,9 @@ public class QuickGauntletLister extends JPanel {
         rowTitle.add(new FLabel.Builder().build(),
                 "w 30px!, h 20px!, gap 1% 0 5px 0");
         rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(),
-                "w 98% - 350px!, h 20px!, gap 20px 0 5px 0");
+                "w 49% - 175px!, h 20px!, gap 20px 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Your Deck").fontAlign(SwingConstants.LEFT).build(),
+                "w 49% - 175px!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel.Builder().text("Last Activity").fontAlign(SwingConstants.CENTER).build(),
                 "w 100px!, h 20px!, gap 0 0 5px 0");
         rowTitle.add(new FLabel.Builder().text("Opponents").fontAlign(SwingConstants.CENTER).build(),
@@ -95,7 +97,9 @@ public class QuickGauntletLister extends JPanel {
             row.add(new DeleteButton(row),
                     "w 30px!, h 20px!, gap 1% 0 5px 0");
             row.add(new FLabel.Builder().fontAlign(SwingConstants.LEFT).text(name).build(),
-                    "w 98% - 350px!, h 20px!, gap 20px 0 5px 0");
+                    "w 49% - 175px!, h 20px!, gap 20px 0 5px 0");
+            row.add(new FLabel.Builder().text(gd.getUserDeck() == null ? "(none)" : gd.getUserDeck().getName()).fontAlign(SwingConstants.LEFT).build(),
+                    "w 49% - 175px!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel.Builder().text(gd.getTimestamp()).fontAlign(SwingConstants.CENTER).build(),
                     "w 100px!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel.Builder().text(String.valueOf(gd.getDecks().size()))
