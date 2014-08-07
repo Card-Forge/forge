@@ -1,5 +1,6 @@
 package forge.deckchooser;
 
+import forge.FThreads;
 import forge.UiCommand;
 import forge.deck.ColorDeckGenerator;
 import forge.deck.Deck;
@@ -20,12 +21,14 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +47,31 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
+
+    //Show dialog to select a deck
+    public static Deck promptForDeck(String title, DeckType defaultDeckType, boolean forAi) {
+        FThreads.assertExecutedByEdt(true);
+        final FDeckChooser chooser = new FDeckChooser(forAi);
+        chooser.initialize(defaultDeckType);
+        chooser.populate();
+        Dimension parentSize = JOptionPane.getRootFrame().getSize();
+        chooser.setMinimumSize(new Dimension((int)(parentSize.getWidth() / 2), (int)parentSize.getHeight() - 200));
+        final FOptionPane optionPane = new FOptionPane(null, title, null, chooser, new String[] { "OK", "Cancel" }, 0);
+        optionPane.setDefaultFocus(chooser);
+        chooser.lstDecks.setItemActivateCommand(new UiCommand() {
+            @Override
+            public void run() {
+                optionPane.setResult(0); //accept selected deck on double click or Enter
+            }
+        });
+        optionPane.setVisible(true);
+        int dialogResult = optionPane.getResult();
+        optionPane.dispose();
+        if (dialogResult == 0) {
+            return chooser.getDeck();
+        }
+        return null;
+    }
 
     public FDeckChooser(boolean forAi) {
         setOpaque(false);

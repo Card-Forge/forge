@@ -3,6 +3,8 @@ package forge.screens.home.gauntlet;
 import forge.GuiBase;
 import forge.UiCommand;
 import forge.deck.Deck;
+import forge.deck.DeckType;
+import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
@@ -11,6 +13,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
+
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
@@ -91,6 +94,18 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         FModel.setGauntletData(
                 GauntletIO.loadGauntlet(view.getGauntletLister().getSelectedGauntletFile()));
 
+        final GauntletData gd = FModel.getGauntletData();
+        final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
+        Deck userDeck = gd.getUserDeck();
+        if (userDeck == null) {
+            //give user a chance to select a deck if none saved with gauntlet
+            userDeck = FDeckChooser.promptForDeck("Select a deck to play for this gauntlet", DeckType.CUSTOM_DECK, false);
+            if (userDeck == null) { return; } //prevent crash if user doesn't select a deck
+            gd.setUserDeck(userDeck);
+            GauntletIO.saveGauntlet(gd);
+            updateData(); //show deck in row
+        }
+
         // Start game
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -100,14 +115,11 @@ public enum CSubmenuGauntletLoad implements ICDoc {
             }
         });
 
-        final GauntletData gd = FModel.getGauntletData();
-        final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
-
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         IGuiBase fc = GuiBase.getInterface(); 
-        starter.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(fc.getGuiPlayer()));
+        starter.add(new RegisteredPlayer(userDeck).setPlayer(fc.getGuiPlayer()));
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(fc.createAiPlayer()));
-        
+
         fc.startMatch(GameType.Gauntlet, starter);
     }
 

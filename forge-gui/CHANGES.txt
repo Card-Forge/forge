@@ -11,6 +11,10 @@ Release Notes
 - New Commander 2014 and KTK cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
+- Improved Gauntlet Support - 
+Add column to Load Gauntlet screen to display your deck for the gauntlet
+Fix so your deck is saved with a gauntlet when starting a quick gauntlet
+Instead of crashing, prompt user to select a deck if attempting to load a gauntlet that doesn't have one saved
 
 ---------
 New Cards
