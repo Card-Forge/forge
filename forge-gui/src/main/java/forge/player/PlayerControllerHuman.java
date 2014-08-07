@@ -581,10 +581,12 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+        final List<String> types = Lists.newArrayList(validTypes);
+        Iterables.removeAll(types, invalidTypes);
         if(isOptional)
-            return SGuiChoose.oneOrNone("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
+            return SGuiChoose.oneOrNone("Choose a " + kindOfType.toLowerCase() + " type", types);
         else
-            return SGuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
+            return SGuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", types);
     }
 
     @Override
