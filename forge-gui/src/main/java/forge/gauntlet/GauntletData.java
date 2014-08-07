@@ -51,7 +51,6 @@ public final class GauntletData {
         this.completed = 0;
         this.stamp();
         this.eventRecords.clear();
-        this.userDeck = null;
 
         for (int i = 0; i < decks.size(); i++) {
             this.eventRecords.add("");

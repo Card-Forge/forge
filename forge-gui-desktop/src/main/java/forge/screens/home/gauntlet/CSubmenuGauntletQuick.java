@@ -130,10 +130,10 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         final GauntletData gd = FModel.getGauntletData();
         gd.setDecks(lstGauntletDecks);
         gd.setEventNames(lstEventNames);
+        gd.setUserDeck(userDeck);
 
         // Reset all variable fields to 0, stamps and saves automatically.
         gd.reset();
-        gd.setUserDeck(userDeck);
 
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
