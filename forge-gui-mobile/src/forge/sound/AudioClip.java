@@ -18,8 +18,6 @@
 
 package forge.sound;
 
-import forge.properties.ForgeConstants;
-
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -28,7 +26,7 @@ public class AudioClip implements IAudioClip {
     private Sound clip;
 
     public static AudioClip createClip(String filename) {
-        FileHandle fileHandle = Gdx.files.absolute(ForgeConstants.SOUND_DIR + filename);
+        FileHandle fileHandle = Gdx.files.absolute(filename);
         if (!fileHandle.exists()) { return null; }
         return new AudioClip(fileHandle);
     }

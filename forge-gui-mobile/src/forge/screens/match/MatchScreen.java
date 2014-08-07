@@ -31,6 +31,7 @@ import forge.screens.match.views.VStack;
 import forge.sound.MusicPlaylist;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
@@ -54,6 +55,7 @@ public class MatchScreen extends FScreen {
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
+    private AbilityEffect activeEffect;
 
     public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -173,6 +175,10 @@ public class MatchScreen extends FScreen {
                     TargetingOverlay.drawArrow(g, blocker, attacker);
                 }
             }
+        }
+
+        if (activeEffect != null) {
+            activeEffect.draw(g, 10, 10, 100, 100);
         }
     }
 

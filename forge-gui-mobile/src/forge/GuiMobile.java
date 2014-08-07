@@ -470,7 +470,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public IAudioClip createAudioClip(String filename) {
-        return AudioClip.createClip(filename);
+        return AudioClip.createClip(ForgeConstants.SOUND_DIR + filename);
     }
 
     @Override

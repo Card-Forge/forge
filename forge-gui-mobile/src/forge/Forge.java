@@ -1,7 +1,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
 
+import forge.animation.ForgeAnimation;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
@@ -187,7 +187,7 @@ public class Forge implements ApplicationListener {
     private static void setCurrentScreen(FScreen screen0) {
         try {
             endKeyInput(); //end key input before switching screens
-            Animation.endAll(); //end all active animations before switching screens
+            ForgeAnimation.endAll(); //end all active animations before switching screens
     
             currentScreen = screen0;
             currentScreen.setSize(screenWidth, screenHeight);
@@ -207,8 +207,8 @@ public class Forge implements ApplicationListener {
     public void render() {
         try {
             ImageCache.allowSingleLoad();
-            Animation.advanceAll();
-    
+            ForgeAnimation.advanceAll();
+
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
             FContainer screen = currentScreen;
@@ -568,44 +568,5 @@ public class Forge implements ApplicationListener {
             }
             return handled;
         }
-    }
-
-    public static abstract class Animation {
-        private static final List<Animation> activeAnimations = new ArrayList<Animation>();
-
-        public void start() {
-            if (activeAnimations.contains(this)) { return; } //prevent starting the same animation multiple times
-
-            activeAnimations.add(this);
-            if (activeAnimations.size() == 1) { //if first animation being started, ensure continuous rendering turned on
-                Gdx.graphics.setContinuousRendering(true);
-            }
-        }
-
-        private static void advanceAll() {
-            if (activeAnimations.isEmpty()) { return; }
-
-            float dt = Gdx.graphics.getDeltaTime();
-            for (int i = 0; i < activeAnimations.size(); i++) {
-                if (!activeAnimations.get(i).advance(dt)) {
-                    activeAnimations.remove(i);
-                    i--;
-                }
-            }
-
-            if (activeAnimations.isEmpty()) { //when all animations have ended, turn continuous rendering back off
-                Gdx.graphics.setContinuousRendering(false);
-            }
-        }
-
-        private static void endAll() {
-            if (activeAnimations.isEmpty()) { return; }
-
-            activeAnimations.clear();
-            Gdx.graphics.setContinuousRendering(false);
-        }
-
-        //return true if animation should continue, false to stop the animation
-        protected abstract boolean advance(float dt);
     }
 }

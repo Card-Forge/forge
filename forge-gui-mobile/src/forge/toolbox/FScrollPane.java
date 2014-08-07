@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
 
-import forge.Forge.Animation;
+import forge.animation.ForgeAnimation;
 import forge.Graphics;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
@@ -219,7 +219,7 @@ public abstract class FScrollPane extends FContainer {
 
     private FlingAnimation activeFlingAnimation;
 
-    private class FlingAnimation extends Animation {
+    private class FlingAnimation extends ForgeAnimation {
         private final PhysicsObject physicsObj;
 
         private FlingAnimation(float velocityX, float velocityY) {
