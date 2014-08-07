@@ -161,7 +161,7 @@ public final class QuestData {
     }
 
     /**
-     * Rename this quest the name.
+     * Rename this quest.
      *
      * @param newName
      *            the new name to set

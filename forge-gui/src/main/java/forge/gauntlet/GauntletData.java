@@ -1,8 +1,10 @@
 package forge.gauntlet;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import forge.deck.Deck;
 
+import forge.deck.Deck;
+import forge.properties.ForgeConstants;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +37,21 @@ public final class GauntletData {
 
     public void setName(String name0) {
         name = name0;
+    }
+
+    /**
+     * Rename this gauntlet.
+     *
+     * @param newName
+     *            the new name to set
+     */
+    public void rename(final String newName) {
+        File newpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, newName + ".dat");
+        File oldpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, this.name + ".dat");
+        oldpath.renameTo(newpath);
+
+        this.name = newName;
+        GauntletIO.saveGauntlet(this);
     }
 
     public String getName() {

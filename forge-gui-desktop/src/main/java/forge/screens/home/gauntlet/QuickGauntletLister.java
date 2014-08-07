@@ -4,7 +4,9 @@ import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
+import forge.quest.QuestUtil;
 import forge.toolbox.FLabel;
+import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
@@ -16,7 +18,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -30,12 +31,13 @@ import java.util.List;
  */
 @SuppressWarnings("serial")
 public class QuickGauntletLister extends JPanel {
-    private SkinIcon icoDelete, icoDeleteOver;
+    private SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
-    private UiCommand cmdRowSelect, cmdRowDelete;
+    private UiCommand cmdRowSelect, cmdRowDelete, cmdRowActivate;
     private final Color clrDefault;
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
+    private List<GauntletData> gauntlets;
 
     /** */
     public QuickGauntletLister() {
@@ -51,18 +53,26 @@ public class QuickGauntletLister extends JPanel {
 
         icoDelete = FSkin.getIcon(FSkinProp.ICO_DELETE);
         icoDeleteOver = FSkin.getIcon(FSkinProp.ICO_DELETE_OVER);
+        icoEdit = FSkin.getIcon(FSkinProp.ICO_EDIT);
+        icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
     }
+    
 
     /** @param gd0 &emsp; {@link forge.gauntlet.GauntletData}[] */
     public void setGauntlets(List<GauntletData> gd0) {
+        gauntlets = gd0;
+        refresh();
+    }
+
+    public void refresh() {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<RowPanel>();
         List<GauntletData> sorted = new ArrayList<GauntletData>();
-        for (GauntletData gd : gd0) { sorted.add(gd); }
+        for (GauntletData gd : gauntlets) { sorted.add(gd); }
         Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
-                return x.getName().compareTo(y.getName());
+                return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
             }
         });
 
@@ -72,18 +82,16 @@ public class QuickGauntletLister extends JPanel {
         final SkinnedPanel rowTitle = new SkinnedPanel();
         rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().build(),
-                "w 30px!, h 20px!, gap 1% 0 5px 0");
         rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(),
-                "w 49% - 175px!, h 20px!, gap 20px 0 5px 0");
+                "w 49% - 185px!, h 20px!, gap 64px 0 5px 0");
         rowTitle.add(new FLabel.Builder().text("Your Deck").fontAlign(SwingConstants.LEFT).build(),
-                "w 49% - 175px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Last Activity").fontAlign(SwingConstants.CENTER).build(),
-                "w 100px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Opponents").fontAlign(SwingConstants.CENTER).build(),
-                "w 100px!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Progress").fontAlign(SwingConstants.CENTER).build(),
-                "w 100px!, h 20px!, gap 0 0 5px 0");
+                "w 49% - 185px!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Last Activity").fontAlign(SwingConstants.LEFT).build(),
+                "w 140px!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Opponents").fontAlign(SwingConstants.RIGHT).build(),
+                "w 90px!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Progress").fontAlign(SwingConstants.RIGHT).build(),
+                "w 90px!, h 20px!, gap 0 0 5px 0");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
@@ -94,21 +102,21 @@ public class QuickGauntletLister extends JPanel {
             row = new RowPanel(gd);
             row.setToolTipText(name);
 
-            row.add(new DeleteButton(row),
-                    "w 30px!, h 20px!, gap 1% 0 5px 0");
+            row.add(new DeleteButton(row), "w 22px!, h 20px!, gap 5px 0 5px 0");
+            row.add(new EditButton(row), "w 22px!, h 20px!, gap 5px 0 5px 0");
             row.add(new FLabel.Builder().fontAlign(SwingConstants.LEFT).text(name).build(),
-                    "w 49% - 175px!, h 20px!, gap 20px 0 5px 0");
+                    "w 49% - 185px!, h 20px!, gap 10px 0 5px 0");
             row.add(new FLabel.Builder().text(gd.getUserDeck() == null ? "(none)" : gd.getUserDeck().getName()).fontAlign(SwingConstants.LEFT).build(),
-                    "w 49% - 175px!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel.Builder().text(gd.getTimestamp()).fontAlign(SwingConstants.CENTER).build(),
-                    "w 100px!, h 20px!, gap 0 0 5px 0");
+                    "w 49% - 185px!, h 20px!, gap 0 0 5px 0");
+            row.add(new FLabel.Builder().text(gd.getTimestamp()).fontAlign(SwingConstants.LEFT).build(),
+                    "w 140px!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel.Builder().text(String.valueOf(gd.getDecks().size()))
-                    .fontAlign(SwingConstants.CENTER).build(),
-                    "w 100px!, h 20px!, gap 0 0 5px 0");
+                    .fontAlign(SwingConstants.RIGHT).build(),
+                    "w 90px!, h 20px!, gap 0 0 5px 0");
             row.add(new FLabel.Builder().text(String.valueOf(Math.round(
-                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + " %")
-                    .fontAlign(SwingConstants.CENTER).build(),
-                    "w 100px!, h 20px!, gap 0 0 5px 0");
+                    ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + "%")
+                    .fontAlign(SwingConstants.RIGHT).build(),
+                    "w 90px!, h 20px!, gap 0 0 5px 0");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");
             tempRows.add(row);
         }
@@ -138,26 +146,62 @@ public class QuickGauntletLister extends JPanel {
             setContentAreaFilled(false);
             setBorder((Border)null);
             setBorderPainted(false);
-            setToolTipText("Delete this deck");
+            setToolTipText("Delete this gauntlet");
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void onMouseEnter(MouseEvent e) {
                     if (!r0.selected) {
                         r0.setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void onMouseExit(MouseEvent e) {
                     if (!r0.selected) {
                         r0.setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void onLeftClick(MouseEvent e) {
                     deleteFile(r0);
+                }
+            });
+        }
+    }
+
+    private class EditButton extends SkinnedButton {
+        public EditButton(final RowPanel r0) {
+            super();
+            setRolloverEnabled(true);
+            setPressedIcon(icoEditOver);
+            setRolloverIcon(icoEditOver);
+            setIcon(icoEdit);
+            setOpaque(false);
+            setContentAreaFilled(false);
+            setBorder((Border)null);
+            setBorderPainted(false);
+            setToolTipText("Rename this gauntlet");
+
+            this.addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onMouseEnter(MouseEvent e) {
+                    if (!r0.selected) {
+                        r0.setBackground(clrHover);
+                        r0.setOpaque(true);
+                    }
+                }
+                @Override
+                public void onMouseExit(MouseEvent e) {
+                    if (!r0.selected) {
+                        r0.setBackground(clrDefault);
+                        r0.setOpaque(false);
+                    }
+                }
+                @Override
+                public void onLeftClick(MouseEvent e) {
+                    renameGauntlet(r0.getGauntletData());
                 }
             });
         }
@@ -165,6 +209,7 @@ public class QuickGauntletLister extends JPanel {
 
     private class RowPanel extends SkinnedPanel {
         private boolean selected = false;
+        private boolean hovered = false;
         private GauntletData gauntletData;
 
         public RowPanel(GauntletData gd0) {
@@ -175,32 +220,43 @@ public class QuickGauntletLister extends JPanel {
             this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, clrBorders));
             gauntletData = gd0;
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (!selected) {
+                public void onMouseEnter(final MouseEvent e) {
+                    RowPanel.this.hovered = true;
+                    if (!RowPanel.this.selected) {
                         RowPanel.this.setBackground(clrHover);
                         RowPanel.this.setOpaque(true);
                     }
                 }
+
                 @Override
-                public void mouseExited(MouseEvent e) {
-                    if (!selected) {
+                public void onMouseExit(final MouseEvent e) {
+                    RowPanel.this.hovered = false;
+                    if (!RowPanel.this.selected) {
                         RowPanel.this.setBackground(clrDefault);
                         RowPanel.this.setOpaque(false);
                     }
                 }
+
                 @Override
-                public void mousePressed(MouseEvent e) {
-                    selectHandler(RowPanel.this);
+                public void onLeftMouseDown(final MouseEvent e) {
+                    if (e.getClickCount() == 1) {
+                        selectHandler(RowPanel.this);
+                    }
+                    else if (cmdRowActivate != null) {
+                        cmdRowActivate.run();
+                    }
                 }
             });
         }
 
-        public void setSelected(boolean b0) {
-            selected = b0;
-            setOpaque(b0);
-            this.setBackground(b0 ? clrActive : clrHover);
+        public void setSelected(final boolean b0) {
+            this.selected = b0;
+            this.setOpaque(b0);
+            if (b0) { this.setBackground(clrActive); }
+            else if (this.hovered) { this.setBackground(clrHover); }
+            else { this.setBackground(clrDefault); }
         }
 
         public boolean isSelected() {
@@ -254,6 +310,11 @@ public class QuickGauntletLister extends JPanel {
         this.cmdRowDelete = c0;
     }
 
+    /** @param c0 &emsp; {@link forge.UiCommand} command executed on row activate. */
+    public void setCmdActivate(UiCommand c0) {
+        this.cmdRowActivate = c0;
+    }
+
     private void selectHandler(RowPanel r0) {
         if (previousSelect != null) {
             previousSelect.setSelected(false);
@@ -262,6 +323,39 @@ public class QuickGauntletLister extends JPanel {
         previousSelect = r0;
 
         if (cmdRowSelect != null) { cmdRowSelect.run(); }
+    }
+
+    private void renameGauntlet(GauntletData gauntlet) {
+        String gauntletName;
+        String oldGauntletName = gauntlet.getName();
+        while (true) {
+            gauntletName = FOptionPane.showInputDialog("Rename gauntlet to:", "Gauntlet Rename", null, oldGauntletName);
+            if (gauntletName == null) { return; }
+
+            gauntletName = QuestUtil.cleanString(gauntletName);
+            if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
+
+            if (gauntletName.isEmpty()) {
+                FOptionPane.showMessageDialog("Please specify a gauntlet name.");
+                continue;
+            }
+
+            boolean exists = false;
+            for (RowPanel r : rows) {
+                if (r.getGauntletData().getName().equalsIgnoreCase(gauntletName)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (exists) {
+                FOptionPane.showMessageDialog("A gauntlet already exists with that name. Please pick another gauntlet name.");
+                continue;
+            }
+            break;
+        }
+
+        gauntlet.rename(gauntletName);
+        refresh();
     }
 
     private void deleteFile(RowPanel r0) {

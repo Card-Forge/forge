@@ -45,7 +45,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         enableStartButton();
 
         view.getGauntletLister().setSelectedIndex(0);
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
                 JButton btnStart = view.getBtnStart();
@@ -64,10 +64,24 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     public void initialize() {
         view.getBtnStart().addActionListener(actStartGame);
 
-        view.getGauntletLister().setCmdDelete(new UiCommand() { @Override
-            public void run() { enableStartButton(); } });
-        view.getGauntletLister().setCmdSelect(new UiCommand() { @Override
-            public void run() { enableStartButton(); } });
+        view.getGauntletLister().setCmdDelete(new UiCommand() {
+            @Override
+            public void run() {
+                enableStartButton();
+            }
+        });
+        view.getGauntletLister().setCmdSelect(new UiCommand() {
+            @Override
+            public void run() {
+                enableStartButton();
+            }
+        });
+        view.getGauntletLister().setCmdActivate(new UiCommand() {
+            @Override
+            public void run() {
+                startGame();
+            }
+        });
     }
 
     private void updateData() {
@@ -103,7 +117,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
             if (userDeck == null) { return; } //prevent crash if user doesn't select a deck
             gd.setUserDeck(userDeck);
             GauntletIO.saveGauntlet(gd);
-            updateData(); //show deck in row
+            view.getGauntletLister().refresh();
         }
 
         // Start game
@@ -126,8 +140,8 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
-    @SuppressWarnings("serial")
     @Override
+    @SuppressWarnings("serial")
     public UiCommand getCommandOnSelect() {
         return new UiCommand() {
             @Override
