@@ -363,7 +363,7 @@ public class QuickGauntletLister extends JPanel {
 
         if (!FOptionPane.showConfirmDialog(
                 "Are you sure you want to delete \"" + gd.getName()
-                + "\" ?", "Delete Gauntlet")) { return; }
+                + "\"?", "Delete Gauntlet")) { return; }
 
         GauntletIO.getGauntletFile(gd).delete();
         if (cmdRowDelete != null) { cmdRowDelete.run(); }
