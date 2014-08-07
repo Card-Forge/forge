@@ -50,7 +50,7 @@ import java.util.Map.Entry;
 public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
-    private final ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool;
+    private final ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool;
 
     //=========== Constructor
     /**
@@ -66,11 +66,13 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Avatar);
         allSections.add(DeckSection.Schemes);
         allSections.add(DeckSection.Planes);
+        allSections.add(DeckSection.Conspiracy);
 
         normalPool = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
         avatarPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
         planePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
         schemePool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
+        conspiracyPool = ItemPool.createFrom(FModel.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
 
         CardManager catalogManager = new CardManager(false); // TODO: restore the functionality of the "want uniques only" toggle
         CardManager deckManager = new CardManager(false); // IMPORTANT: must *always* show all cards in the deck, otherwise cards with different art get ignored!
@@ -310,7 +312,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         case Commander:
             break; //do nothing for Commander here
         case Conspiracy:
-            break; //do nothing for conspiracy here
+            this.getCatalogManager().setup(ItemManagerConfig.CONSPIRACY_DECKS);
+            this.getCatalogManager().setPool(conspiracyPool,true);
+            this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Conspiracy));
         }
 
         this.controller.updateCaptions();

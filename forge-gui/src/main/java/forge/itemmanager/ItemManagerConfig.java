@@ -46,6 +46,8 @@ public enum ItemManagerConfig {
             null, null, 4, 0),
     SCHEME_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false, true,
             null, null, 4, 0),
+    CONSPIRACY_DECKS(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false, true,
+            null, null, 4, 0),
     SCHEME_DECK_EDITOR(SColumnUtil.getCatalogDefaultColumns(true), true, false, true,
             null, null, 4, 0),
     PLANAR_POOL(SColumnUtil.getSpecialCardPoolDefaultColumns(), true, false, true,
