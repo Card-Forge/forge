@@ -18,6 +18,7 @@ Instead of crashing, prompt user to select a deck if attempting to load a gauntl
 Make it so Last Activity column isn't cut off
 Make it so double-clicking a gauntlet on the Load Gauntlet screen will launch it
 Support renaming gauntlets
+Support sorting gauntlets (and quests) case insensitive
 
 ---------
 New Cards
