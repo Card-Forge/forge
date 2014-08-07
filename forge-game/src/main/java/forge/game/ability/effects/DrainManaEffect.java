@@ -8,6 +8,7 @@ import forge.game.spellability.TargetRestrictions;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DrainManaEffect extends SpellAbilityEffect {
@@ -26,16 +27,21 @@ public class DrainManaEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        List<Mana> drained = new ArrayList<Mana>();
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                List<Mana> drained = p.getManaPool().clearPool(false);
-                if (sa.hasParam("DrainMana")) {
-                    for (Mana mana : drained) {
-                        sa.getActivatingPlayer().getManaPool().addMana(mana);
-                    }
-                }
+                drained.addAll(p.getManaPool().clearPool(false));
             }
+        }
+
+        if (sa.hasParam("DrainMana")) {
+            for (Mana mana : drained) {
+                sa.getActivatingPlayer().getManaPool().addMana(mana);
+            }
+        }
+        if (sa.hasParam("RememberDrainedMana")) {
+            sa.getHostCard().addRemembered((Integer) drained.size());
         }
     }
 

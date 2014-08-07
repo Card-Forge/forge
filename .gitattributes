@@ -10463,6 +10463,7 @@ forge-gui/res/cardsfolder/p/putrid_leech.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/putrid_raptor.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/putrid_warrior.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/pygmy_allosaurus.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pygmy_hippo.txt -text
 forge-gui/res/cardsfolder/p/pygmy_kavu.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pygmy_pyrosaur.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pygmy_razorback.txt svneol=native#text/plain
