@@ -410,7 +410,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         }
 
         for (Player p : game.getPlayers()) {
-            int burn = p.getManaPool().clearPool(true);
+            int burn = p.getManaPool().clearPool(true).size();
             
             boolean manaBurns = game.getRules().hasManaBurn();
             if (manaBurns) {

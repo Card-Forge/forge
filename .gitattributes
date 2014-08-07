@@ -29,6 +29,7 @@ forge-ai/src/main/java/forge/ai/LobbyPlayerAi.java -text
 forge-ai/src/main/java/forge/ai/PlayerControllerAi.java -text
 forge-ai/src/main/java/forge/ai/SpellAbilityAi.java -text
 forge-ai/src/main/java/forge/ai/SpellApiToAi.java -text
+forge-ai/src/main/java/forge/ai/ability/ActivateAbilityAi.java -text
 forge-ai/src/main/java/forge/ai/ability/AddPhaseAi.java -text
 forge-ai/src/main/java/forge/ai/ability/AddTurnAi.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/ability/AlwaysPlayAi.java -text
@@ -292,6 +293,7 @@ forge-game/src/main/java/forge/game/ability/SpellAbilityEffect.java -text
 forge-game/src/main/java/forge/game/ability/SpellApiBased.java -text
 forge-game/src/main/java/forge/game/ability/StaticAbilityApiBased.java -text
 forge-game/src/main/java/forge/game/ability/effects/AbandonEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ActivateAbilityEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/AddPhaseEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/AddTurnEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/AnimateAllEffect.java -text
@@ -4424,6 +4426,7 @@ forge-gui/res/cardsfolder/d/dragonspeaker_shaman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dragonstalker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/dragonstorm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/drain_life.txt -text
+forge-gui/res/cardsfolder/d/drain_power.txt -text
 forge-gui/res/cardsfolder/d/drain_the_well.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/draining_whelk.txt -text
 forge-gui/res/cardsfolder/d/drainpipe_vermin.txt -text

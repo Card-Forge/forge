@@ -14,6 +14,7 @@ public enum SpellApiToAi {
     
     static {
         apiToClass.put(ApiType.Abandon, AlwaysPlayAi.class);
+        apiToClass.put(ApiType.ActivateAbility, ActivateAbilityAi.class);
         apiToClass.put(ApiType.AddOrRemoveCounter, CountersPutOrRemoveAi.class);
         apiToClass.put(ApiType.AddPhase, AddPhaseAi.class);
         apiToClass.put(ApiType.AddTurn, AddTurnAi.class);

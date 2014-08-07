@@ -60,5 +60,34 @@ public class LifeExchangeAi extends SpellAbilityAi {
         return ((r.nextFloat() < .6667) && chance);
     }
 
+    /**
+     * <p>
+     * exchangeLifeDoTriggerAINoCost.
+     * </p>
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @param af
+     *            a {@link forge.game.ability.AbilityFactory} object.
+     *
+     * @return a boolean.
+     */
+    @Override
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
+    final boolean mandatory) {
+
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        Player opp = ai.getOpponent();
+        if (tgt != null) {
+            sa.resetTargets();
+            if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {
+                sa.getTargets().add(opp);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

@@ -30,8 +30,9 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return canPlayAI(aiPlayer, sa);
-    }    
-    
+    }
+
+    @Override
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
         final String logic = sa.getParam("AILogic");
         if ("Random".equals(logic)) {

@@ -13,6 +13,7 @@ import java.util.TreeMap;
  */
 public enum ApiType {
     Abandon (AbandonEffect.class),
+    ActivateAbility (ActivateAbilityEffect.class),
     AddOrRemoveCounter (CountersPutOrRemoveEffect.class),
     AddPhase (AddPhaseEffect.class),
     AddTurn (AddTurnEffect.class),

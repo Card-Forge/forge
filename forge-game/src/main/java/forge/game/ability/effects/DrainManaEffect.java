@@ -1,9 +1,11 @@
 package forge.game.ability.effects;
 
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -27,7 +29,12 @@ public class DrainManaEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.getManaPool().clearPool(false);
+                List<Mana> drained = p.getManaPool().clearPool(false);
+                if (sa.hasParam("DrainMana")) {
+                    for (Mana mana : drained) {
+                        sa.getActivatingPlayer().getManaPool().addMana(mana);
+                    }
+                }
             }
         }
     }

@@ -125,15 +125,15 @@ public class ManaPool implements Iterable<Mana> {
      * @return - the amount of mana removed this way
      * </p>
      */
-    public final int clearPool(boolean isEndOfPhase) {
+    public final List<Mana> clearPool(boolean isEndOfPhase) {
         // isEndOfPhase parameter: true = end of phase, false = mana drain effect
-        if (floatingMana.isEmpty()) { return 0; }
+        List<Mana> cleared = new ArrayList<Mana>();
+        if (floatingMana.isEmpty()) { return cleared; }
 
         if (isEndOfPhase && owner.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
-            return 0;
+            return cleared;
         }
 
-        int numRemoved = 0;
         boolean keepGreenMana = isEndOfPhase && owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.");
         boolean convertToColorless = owner.hasKeyword("Convert unused mana to Colorless");
 
@@ -153,11 +153,12 @@ public class ManaPool implements Iterable<Mana> {
                         pMana.add(mana);
                     }
                 }
+                floatingMana.get(b).removeAll(pMana);
                 if (convertToColorless) {
-                    floatingMana.get(b).removeAll(pMana);
                     convertManaColor(b, MagicColor.COLORLESS);
+                    floatingMana.get(b).addAll(pMana);
                 } else {
-                    numRemoved += floatingMana.get(b).size() - pMana.size();
+                    cleared.addAll(floatingMana.get(b));
                     floatingMana.get(b).clear();
                     floatingMana.putAll(b, pMana);
                 }
@@ -166,14 +167,14 @@ public class ManaPool implements Iterable<Mana> {
                 if (convertToColorless) {
                     convertManaColor(b, MagicColor.COLORLESS);
                 } else {
-                    numRemoved += floatingMana.get(b).size();
+                    cleared.addAll(floatingMana.get(b));
                     floatingMana.get(b).clear();
                 }
             }
         }
 
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Cleared, null));
-        return numRemoved;
+        return cleared;
     }
 
     private void convertManaColor(final byte originalColor, final byte toColor) {
