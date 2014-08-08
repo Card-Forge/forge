@@ -188,8 +188,7 @@ public class AiBlockController {
         for (final Card attacker : attackersLeft) {
 
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless " +
-                            "all creatures defending player controls block it.")) {
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
 
@@ -432,8 +431,7 @@ public class AiBlockController {
         for (final Card attacker : attackersLeft) {
 
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless " +
-                            "all creatures defending player controls block it.")) {
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
 
@@ -796,6 +794,15 @@ public class AiBlockController {
                             blockersLeft.remove(blocker);
                         }
                     }
+                }
+            }
+        }
+        //Check for validity of blocks in case something slipped through
+        for (Card attacker : attackers) {
+            if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, combat.getBlockers(attacker).size(), combat)) {
+                for (final Card blocker : combat.getBlockers(attacker)) {
+                    if ( blocker.getController() == ai ) // don't touch other player's blockers
+                        combat.removeFromCombat(blocker);
                 }
             }
         }
