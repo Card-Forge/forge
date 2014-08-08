@@ -303,7 +303,7 @@ public class QuestSpellShop {
         for (Entry<InventoryItem, Integer> item : inventoryManager.getPool()) {
             PaperCard card = (PaperCard)item.getKey();
             int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
-            if ("Relentless Rats".equals(card.getName())) {
+            if ("Relentless Rats".equals(card.getName()) || "Shadowborn Apostle".equals(card.getName())) {
                 numToKeep = Integer.MAX_VALUE;
             }
             if (numToKeep < item.getValue()) {
