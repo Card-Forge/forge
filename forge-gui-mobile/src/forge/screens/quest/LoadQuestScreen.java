@@ -33,7 +33,6 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FList;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
@@ -187,7 +186,7 @@ public class LoadQuestScreen extends FScreen {
                     if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
                     if (questName.isEmpty()) {
-                        FOptionPane.showMessageDialog("Please specify a quest name.");
+                        SOptionPane.showMessageDialog("Please specify a quest name.");
                         continue;
                     }
 
@@ -199,7 +198,7 @@ public class LoadQuestScreen extends FScreen {
                         }
                     }
                     if (exists) {
-                        FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                        SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
                         continue;
                     }
                     break;
@@ -304,10 +303,10 @@ public class LoadQuestScreen extends FScreen {
             Collections.sort(sorted, new Comparator<QuestData>() {
                 @Override
                 public int compare(final QuestData x, final QuestData y) {
-                    return x.getName().compareTo(y.getName());
+                    return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
                 }
             });
-            lstQuests.setListData(sorted);
+            setListData(sorted);
         }
 
         public boolean setSelectedIndex(int i0) {
@@ -318,7 +317,7 @@ public class LoadQuestScreen extends FScreen {
 
         public QuestData getSelectedQuest() {
             if (selectedIndex == -1) { return null; }
-            return lstQuests.getItemAt(selectedIndex);
+            return getItemAt(selectedIndex);
         }
 
         public boolean setSelectedQuest(QuestData qd0) {

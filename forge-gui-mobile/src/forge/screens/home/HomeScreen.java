@@ -3,6 +3,7 @@ package forge.screens.home;
 import java.util.ArrayList;
 
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
@@ -31,43 +32,46 @@ public class HomeScreen extends FScreen {
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new ConstructedScreen());
             }
-        }, true);
+        });
         addButton("Booster Draft", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new DraftScreen());
             }
-        }, true);
+        });
         addButton("Sealed Deck", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.openScreen(new SealedScreen());
             }
-        }, true);
+        });
         addButton("Quest Mode", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 QuestMenu.launchQuestMode(LaunchReason.StartQuestMode);
             }
-        }, true);
+        });
         addButton("Gauntlets", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new GauntletScreen());
+                LoadingOverlay.show("Loading gauntlets...", new Runnable() {
+                    @Override
+                    public void run() {
+                        Forge.openScreen(new GauntletScreen());
+                    }
+                });
             }
-        }, false);
+        });
         addButton("Settings", new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 SettingsScreen.show();
             }
-        }, true);
+        });
     }
 
-    private void addButton(String caption, FEventHandler command, boolean enabled) {
-        FButton button = add(new FButton(caption, command));
-        button.setEnabled(enabled);
-        buttons.add(button);
+    private void addButton(String caption, FEventHandler command) {
+        buttons.add(add(new FButton(caption, command)));
     }
 
     @Override

@@ -1186,6 +1186,7 @@ forge-gui-mobile/src/forge/screens/constructed/ConstructedScreen.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftScreen.java -text
 forge-gui-mobile/src/forge/screens/draft/DraftingProcessScreen.java -text
 forge-gui-mobile/src/forge/screens/gauntlet/GauntletScreen.java -text
+forge-gui-mobile/src/forge/screens/gauntlet/NewGauntletScreen.java -text
 forge-gui-mobile/src/forge/screens/home/HomeScreen.java -text
 forge-gui-mobile/src/forge/screens/match/FControl.java -text
 forge-gui-mobile/src/forge/screens/match/MatchScreen.java -text

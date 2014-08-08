@@ -1,5 +1,6 @@
 package forge.deck;
 
+import forge.FThreads;
 import forge.Forge;
 import forge.deck.Deck;
 import forge.deck.FDeckEditor.EditorType;
@@ -51,6 +52,20 @@ public class FDeckChooser extends FScreen {
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
 
+    //Show dialog to select a deck
+    public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
+        FThreads.assertExecutedByEdt(true);
+        final FDeckChooser chooser = new FDeckChooser(gameType, forAi, null) {
+            @Override
+            public void onClose(Callback<Boolean> canCloseCallback) {
+                super.onClose(canCloseCallback);
+                callback.run(getDeck());
+            }
+        };
+        chooser.setHeaderCaption(title);
+        Forge.openScreen(chooser);
+    }
+
     public FDeckChooser(GameType gameType0, boolean isAi0, FEventHandler selectionChangedHandler) {
         super("");
         lstDecks = new DeckManager(gameType0);
@@ -67,9 +82,6 @@ public class FDeckChooser extends FScreen {
             public void handleEvent(FEvent e) {
                 EditorType editorType;
                 switch (lstDecks.getGameType()) {
-                case Constructed:
-                    editorType = EditorType.Constructed;
-                    break;
                 case Commander:
                     editorType = EditorType.Commander;
                     break;
@@ -80,7 +92,8 @@ public class FDeckChooser extends FScreen {
                     editorType = EditorType.Planechase;
                     break;
                 default:
-                    return;
+                    editorType = EditorType.Constructed;
+                    break;
                 }
                 FDeckEditor editor;
                 switch (selectedDeckType) {
@@ -131,8 +144,16 @@ public class FDeckChooser extends FScreen {
                 }
             }
         });
-        if (gameType0 != GameType.Constructed) { //delay initialize for constructed until saved decks can be reloaded
+        switch (lstDecks.getGameType()) {
+        case Constructed:
+            break; //delay initialize for constructed until saved decks can be reloaded
+        case Commander:
+        case Gauntlet:
+            initialize(null, DeckType.CUSTOM_DECK);
+            break;
+        default:
             initialize(null, DeckType.RANDOM_DECK);
+            break;
         }
         lstDecks.setSelectionChangedHandler(selectionChangedHandler);
     }
@@ -143,9 +164,6 @@ public class FDeckChooser extends FScreen {
             needRefreshOnActivate = false;
             updateCustom();
             switch (lstDecks.getGameType()) {
-            case Constructed:
-                lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
-                break;
             case Commander:
                 lstDecks.setSelectedString(DeckPreferences.getCommanderDeck());
                 break;
@@ -156,7 +174,8 @@ public class FDeckChooser extends FScreen {
                 lstDecks.setSelectedString(DeckPreferences.getPlanarDeck());
                 break;
             default:
-                return;
+                lstDecks.setSelectedString(DeckPreferences.getCurrentDeck());
+                break;
             }
         }
     }
@@ -197,10 +216,6 @@ public class FDeckChooser extends FScreen {
     private void editDeck(DeckProxy deck) {
         EditorType editorType;
         switch (lstDecks.getGameType()) {
-        case Constructed:
-            editorType = EditorType.Constructed;
-            DeckPreferences.setCurrentDeck(deck.getName());
-            break;
         case Commander:
             editorType = EditorType.Commander;
             DeckPreferences.setCommanderDeck(deck.getName());
@@ -214,7 +229,9 @@ public class FDeckChooser extends FScreen {
             DeckPreferences.setPlanarDeck(deck.getName());
             break;
         default:
-            return;
+            editorType = EditorType.Constructed;
+            DeckPreferences.setCurrentDeck(deck.getName());
+            break;
         }
         needRefreshOnActivate = true;
         Forge.openScreen(new FDeckEditor(editorType, deck, true));
@@ -226,17 +243,20 @@ public class FDeckChooser extends FScreen {
 
         if (cmbDeckTypes == null) { //initialize components with delayed initialization the first time this is populated
             cmbDeckTypes = new FComboBox<DeckType>();
-            if (lstDecks.getGameType() == GameType.Constructed) {
+            switch (lstDecks.getGameType()) {
+            case Constructed:
+            case Gauntlet:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
                 cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
                 cmbDeckTypes.addItem(DeckType.COLOR_DECK);
                 cmbDeckTypes.addItem(DeckType.THEME_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
-            }
-            else {
+                break;
+            default:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
+                break;
             }
             cmbDeckTypes.setAlignment(HAlignment.CENTER);
             restoreSavedState();
@@ -303,10 +323,6 @@ public class FDeckChooser extends FScreen {
         lstDecks.setSelectionSupport(1, 1);
 
         switch (lstDecks.getGameType()) {
-        case Constructed:
-            lstDecks.setPool(DeckProxy.getAllConstructedDecks());
-            lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
-            break;
         case Commander:
             lstDecks.setPool(DeckProxy.getAllCommanderDecks());
             lstDecks.setup(ItemManagerConfig.COMMANDER_DECKS);
@@ -320,6 +336,8 @@ public class FDeckChooser extends FScreen {
             lstDecks.setup(ItemManagerConfig.PLANAR_DECKS);
             break;
         default:
+            lstDecks.setPool(DeckProxy.getAllConstructedDecks());
+            lstDecks.setup(ItemManagerConfig.CONSTRUCTED_DECKS);
             break;
         }
 

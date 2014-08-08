@@ -56,7 +56,6 @@ public class QuickGauntletLister extends JPanel {
         icoEdit = FSkin.getIcon(FSkinProp.ICO_EDIT);
         icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
     }
-    
 
     /** @param gd0 &emsp; {@link forge.gauntlet.GauntletData}[] */
     public void setGauntlets(List<GauntletData> gd0) {

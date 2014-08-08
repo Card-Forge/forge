@@ -92,7 +92,7 @@ public class Localizer {
 				e.printStackTrace();
 			}
 
-			System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
+			System.out.println("Language '" + resourceBundle.toString() + "' loaded successfully.");
 			
 			notifyObservers();
 			
