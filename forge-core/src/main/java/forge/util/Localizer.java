@@ -45,7 +45,8 @@ public class Localizer {
 		}
 		
 		if (formatter == null) {
-			return "INVALID PROPERTY: " + key;
+			System.err.println("INVALID PROPERTY: '" + key + "' -- Translation Needed?");
+			return "INVALID PROPERTY: '" + key + "' -- Translation Needed?";
 		}
 		
 		formatter.setLocale(locale);
