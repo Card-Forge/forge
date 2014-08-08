@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Iron Man 3
+Title=Iron Man
+Difficulty=hard
+Description=Mono R Artifact deck with Whipflare
+Icon=Iron Man.jpg
+Deck Type=constructed
+[main]
+1 Mountain
+4 Great Furnace
+2 Ancient Den
+2 Seat of the Synod
+1 Tree of Tales
+1 Vault of Whispers
+4 Darksteel Citadel
+1 Mox Pearl
+1 Mox Jet
+1 Mox Sapphire
+1 Mox Ruby
+1 Mox Emerald
+1 Mox Opal
+1 Sol Ring
+4 Memnite
+1 Arcbound Worker
+4 Frogmite
+4 Myr Enforcer
+2 Signal Pest
+1 Arcbound Stinger
+1 Hovermyr
+1 Jhoira's Toolbox
+1 Myr Retriever
+1 Myr Sire
+1 Steel Overseer
+1 Etched Champion
+1 Chrome Steed
+1 Rusted Relic
+1 Hammer of Purphoros
+1 Moltensteel Dragon
+1 Slash Panther
+4 Whipflare
+4 Galvanic Blast
+2 Feedback Bolt
+1 Blood Moon
+[sideboard]
