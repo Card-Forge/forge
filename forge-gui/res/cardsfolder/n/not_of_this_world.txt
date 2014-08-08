@@ -1,7 +1,7 @@
 Name:Not of This World
 ManaCost:7
 Types:Tribal Instant Eldrazi
-A:SP$ Counter | Cost$ X | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability to counter | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl | SpellDescription$ Counter target spell or ability that targets a permanent you control. CARDNAME costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
+A:SP$ Counter | Cost$ X | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability to counter | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inZoneBattlefield | SpellDescription$ Counter target spell or ability that targets a permanent you control. CARDNAME costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
 SVar:X:Count$Compare CheckTgt GE1.0.7
 SVar:CheckTgt:TargetedByTarget$Valid Card.powerGE7+YouCtrl
 SVar:RemAIDeck:True
