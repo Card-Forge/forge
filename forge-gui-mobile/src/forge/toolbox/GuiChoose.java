@@ -237,7 +237,7 @@ public class GuiChoose {
         }
 
         ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display, callback);
-        c.show(selected);
+        c.show(selected, false);
     }
 
     public static <T> void many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard, final Callback<List<T>> callback) {

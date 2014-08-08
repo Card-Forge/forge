@@ -16645,6 +16645,7 @@ forge-gui/src/main/java/forge/events/UiEventAttackerDeclared.java -text
 forge-gui/src/main/java/forge/events/UiEventBlockerAssigned.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletData.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletIO.java -text
+forge-gui/src/main/java/forge/gauntlet/GauntletUtil.java -text
 forge-gui/src/main/java/forge/gauntlet/GauntletWinLoseController.java -text
 forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/ICheckBox.java -text

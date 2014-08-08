@@ -173,7 +173,7 @@ public class ListChooser<T> extends FContainer {
     }
 
     public void show() {
-        show(null);
+        show(null, false);
     }
 
     /**
@@ -182,14 +182,20 @@ public class ListChooser<T> extends FContainer {
      * @param index0 index to select when shown
      * @return a boolean.
      */
-    public void show(final T item) {
+    public void show(final T item, final boolean selectMax) {
         if (called) {
             throw new IllegalStateException("Already shown");
         }
         called = true;
         lstChoices.selectedIndices.clear();
         if (item == null) {
-            if (maxChoices == 1) { //select first item only if single-select
+            if (selectMax) {
+                int max = Math.min(maxChoices, list.size());
+                for (int i = 0; i < max; i++) {
+                    lstChoices.selectedIndices.add(i);
+                }
+            }
+            else if (maxChoices == 1) { //select first item only if single-select
                 lstChoices.selectedIndices.add(0);
             }
         }

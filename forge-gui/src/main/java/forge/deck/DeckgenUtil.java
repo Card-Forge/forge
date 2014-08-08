@@ -39,15 +39,6 @@ import java.util.List;
  */
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
-    /** */
-    public enum DeckTypes {
-        COLORS,
-        THEMES,
-        CUSTOM,
-        QUESTEVENTS,
-        PRECON
-    }
-
     /**
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}
@@ -123,6 +114,20 @@ public class DeckgenUtil {
         final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomPreconDeck() {
+        final List<DeckProxy> allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
+        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        return allDecks.get(rand).getDeck();
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomThemeDeck() {
+        final List<DeckProxy> allDecks = DeckProxy.getAllThemeDecks();
+        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
+        return allDecks.get(rand).getDeck();
     }
 
     public static Deck getRandomQuestDeck() {

@@ -3,6 +3,7 @@ package forge.screens.gauntlet;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.FThreads;
-import forge.Forge;
 import forge.Graphics;
 import forge.GuiBase;
 import forge.assets.FSkinColor;
@@ -18,11 +18,13 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.card.CardRenderer;
 import forge.deck.Deck;
+import forge.deck.DeckType;
 import forge.deck.FDeckChooser;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
+import forge.gauntlet.GauntletUtil;
 import forge.model.FModel;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
@@ -31,6 +33,8 @@ import forge.toolbox.FButton;
 import forge.toolbox.FEvent;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
+import forge.toolbox.ListChooser;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.ThreadUtil;
@@ -53,7 +57,28 @@ public class GauntletScreen extends LaunchScreen {
         btnNewGauntlet.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.openScreen(new NewGauntletScreen());
+                GuiChoose.oneOrNone("Select a Gauntlet Type", new String[] {
+                        "Quick Gauntlet",
+                        "Custom Gauntlet",
+                        "Gauntlet Contest",
+                }, new Callback<String>() {
+                    @Override
+                    public void run(String result) {
+                        if (result == null) { return; }
+
+                        switch (result) {
+                        case "Quick Gauntlet":
+                            createQuickGauntlet();
+                            break;
+                        case "Custom Gauntlet":
+                            createCustomGauntlet();
+                            break;
+                        default:
+                            createGauntletContest();
+                            break;
+                        }
+                    }
+                });
             }
         });
         btnRenameGauntlet.setFont(btnNewGauntlet.getFont());
@@ -107,6 +132,48 @@ public class GauntletScreen extends LaunchScreen {
         btnDeleteGauntlet.setBounds(x, y, buttonWidth, buttonHeight);
     }
 
+    private void createQuickGauntlet() {
+        GuiChoose.getInteger("How many opponents are you willing to face?", 5, 50, new Callback<Integer>() {
+            @Override
+            public void run(final Integer numOpponents) {
+                if (numOpponents == null) { return; }
+
+                ListChooser<DeckType> chooser = new ListChooser<DeckType>(
+                        "Choose allowed deck types", 0, 5, Arrays.asList(new DeckType[] {
+                        DeckType.CUSTOM_DECK,
+                        DeckType.PRECONSTRUCTED_DECK,
+                        DeckType.QUEST_OPPONENT_DECK,
+                        DeckType.COLOR_DECK,
+                        DeckType.THEME_DECK
+                }), null, new Callback<List<DeckType>>() {
+                    @Override
+                    public void run(final List<DeckType> allowedDeckTypes) {
+                        if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
+
+                        FDeckChooser.promptForDeck("Select Deck for Gauntlet", GameType.Gauntlet, false, new Callback<Deck>() {
+                            @Override
+                            public void run(Deck userDeck) {
+                                if (userDeck == null) { return; }
+
+                                lstGauntlets.addGauntlet(GauntletUtil.createQuickGauntlet(
+                                        userDeck, numOpponents, allowedDeckTypes));
+                            }
+                        });
+                    }
+                });
+                chooser.show(null, true);
+            }
+        });
+    }
+
+    private void createCustomGauntlet() {
+        
+    }
+
+    private void createGauntletContest() {
+        
+    }
+
     @Override
     protected void startMatch() {
         final GauntletData gauntlet = lstGauntlets.getSelectedGauntlet();
@@ -124,7 +191,6 @@ public class GauntletScreen extends LaunchScreen {
                     if (result != null) {
                         gauntlet.setUserDeck(result);
                         GauntletIO.saveGauntlet(gauntlet);
-                        startMatch();
                     }
                 }
             });
@@ -276,6 +342,13 @@ public class GauntletScreen extends LaunchScreen {
             refresh();
         }
 
+        public void addGauntlet(GauntletData gauntlet) {
+            if (gauntlets == null) { return; }
+            gauntlets.add(gauntlet);
+            refresh();
+            setSelectedGauntlet(gauntlet);
+        }
+
         public void refresh() {
             List<GauntletData> sorted = new ArrayList<GauntletData>();
             for (GauntletData gauntlet : gauntlets) {
@@ -293,6 +366,7 @@ public class GauntletScreen extends LaunchScreen {
         public boolean setSelectedIndex(int i0) {
             if (i0 >= getCount()) { return false; }
             selectedIndex = i0;
+            scrollIntoView(i0);
             return true;
         }
 
@@ -305,6 +379,7 @@ public class GauntletScreen extends LaunchScreen {
             for (int i = 0; i < getCount(); i++) {
                 if (getItemAt(i) == gauntlet) {
                     selectedIndex = i;
+                    scrollIntoView(i);
                     return true;
                 }
             }

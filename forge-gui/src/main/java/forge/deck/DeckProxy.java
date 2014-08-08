@@ -381,7 +381,7 @@ public class DeckProxy implements InventoryItem {
         }
     }
 
-    public static Iterable<DeckProxy> getAllThemeDecks() {
+    public static List<DeckProxy> getAllThemeDecks() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final String s : DeckGeneratorTheme.getThemeNames()) {
             decks.add(new ThemeDeckGenerator(s));
@@ -390,7 +390,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static Iterable<DeckProxy> getAllPreconstructedDecks(IStorage<PreconDeck> iStorage) {
+    public static List<DeckProxy> getAllPreconstructedDecks(IStorage<PreconDeck> iStorage) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final PreconDeck preconDeck : iStorage) {
             decks.add(new DeckProxy(preconDeck, "Precon", (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
@@ -398,7 +398,7 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static Iterable<DeckProxy> getAllQuestEventAndChallenges() {
+    public static List<DeckProxy> getAllQuestEventAndChallenges() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         QuestController quest = FModel.getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
@@ -411,7 +411,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static Iterable<DeckProxy> getAllSealedDecks(IStorage<DeckGroup> sealed) {
+    public static List<DeckProxy> getAllSealedDecks(IStorage<DeckGroup> sealed) {
         final List<DeckProxy> humanDecks = new ArrayList<DeckProxy>();
 
         // Since AI decks are tied directly to the human choice,
@@ -422,7 +422,7 @@ public class DeckProxy implements InventoryItem {
         return humanDecks;
     }
 
-    public static Iterable<DeckProxy> getAllQuestDecks(IStorage<Deck> storage) {
+    public static List<DeckProxy> getAllQuestDecks(IStorage<Deck> storage) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         if (storage != null) {
             for (final Deck deck : storage) {
@@ -433,7 +433,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static Iterable<DeckProxy> getDraftDecks(IStorage<DeckGroup> draft) {
+    public static List<DeckProxy> getDraftDecks(IStorage<DeckGroup> draft) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
@@ -442,7 +442,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     @SuppressWarnings("unchecked")
-    public static Iterable<DeckProxy> getWinstonDecks(IStorage<DeckGroup> draft) {
+    public static List<DeckProxy> getWinstonDecks(IStorage<DeckGroup> draft) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (DeckGroup d : draft) {
             decks.add(new DeckProxy(d, "Winston", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Winston, draft));

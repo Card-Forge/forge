@@ -1,5 +1,6 @@
 package forge.screens.home.gauntlet;
 
+import forge.deck.DeckType;
 import forge.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -46,13 +47,13 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final SkinnedSlider sliOpponents = new SkinnedSlider(SwingConstants.HORIZONTAL, 5, 50, 20);
     //private SkinnedSlider sliGamesPerMatch = new SkinnedSlider(JSlider.HORIZONTAL, 1, 7, 3);
 
-    private final JCheckBox boxUserDecks = new FCheckBox("Custom User Decks");
-    private final JCheckBox boxQuestDecks = new FCheckBox("Quest Decks");
-    private final JCheckBox boxColorDecks = new FCheckBox("Fully random color Decks");
-    private final JCheckBox boxThemeDecks = new FCheckBox("Semi-random theme Decks");
+    private final JCheckBox boxUserDecks = new FCheckBox(DeckType.CUSTOM_DECK.toString());
+    private final JCheckBox boxPreconDecks = new FCheckBox(DeckType.PRECONSTRUCTED_DECK.toString());
+    private final JCheckBox boxQuestDecks = new FCheckBox(DeckType.QUEST_OPPONENT_DECK.toString());
+    private final JCheckBox boxColorDecks = new FCheckBox(DeckType.COLOR_DECK.toString());
+    private final JCheckBox boxThemeDecks = new FCheckBox(DeckType.THEME_DECK.toString());
 
     private final FDeckChooser lstDecks = new FDeckChooser(false);
-    private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
     private final FLabel lblOptions = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();
@@ -73,6 +74,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         boxUserDecks.setSelected(true);
+        boxPreconDecks.setSelected(true);
         boxQuestDecks.setSelected(true);
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
@@ -93,6 +95,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         pnlOptions.add(lblDesc3, "w 96%!, gap 2% 0 0 0");
         pnlOptions.setCornerDiameter(0);
         pnlOptions.add(boxUserDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
+        pnlOptions.add(boxPreconDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlOptions.add(boxColorDecks, "w 96%!, h 30px!, gap 2% 0 0 0");
@@ -148,14 +151,14 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         return this.lstDecks;
     }
 
-    /** @return {@link forge.screens.home.gauntlet.QuickGauntletLister} */
-    public QuickGauntletLister getGauntletLister() {
-        return this.gauntletList;
-    }
-
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getBoxUserDecks() {
         return boxUserDecks;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getBoxPreconDecks() {
+        return boxPreconDecks;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
