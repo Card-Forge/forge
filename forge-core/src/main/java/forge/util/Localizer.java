@@ -100,7 +100,7 @@ public class Localizer {
 		
 	}
 	
-	public List<Langauge> getLanguages() {
+	public List<Language> getLanguages() {
 		//TODO List all languages by getting their files
 		return null;
 	}
@@ -115,7 +115,7 @@ public class Localizer {
 		}
 	}
 	
-	public static class Langauge {
+	public static class Language {
 		public String languageName;
 		public String langaugeID; 
 	} 
