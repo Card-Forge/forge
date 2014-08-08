@@ -38,6 +38,7 @@ import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
@@ -74,6 +75,18 @@ public class FModel {
     private static GameFormat.Collection formats;
 
     public static void initialize(final IProgressBar progressBar) {
+
+		// Instantiate preferences: quest and regular
+		//Preferences are initialized first so that the splash screen can be translated.
+		try {
+			preferences = new ForgePreferences();
+		}
+		catch (final Exception exn) {
+			throw new RuntimeException(exn);
+		}
+
+		Localizer.getInstance().initialize(FModel.getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
+		
         //load card database
         final ProgressObserver progressBarBridge = (progressBar == null) ?
                 ProgressObserver.emptyObserver : new ProgressObserver() {
@@ -115,14 +128,6 @@ public class FModel {
             }
         }
 
-        // Instantiate preferences: quest and regular
-        try {
-            preferences = new ForgePreferences();
-        }
-        catch (final Exception exn) {
-            throw new RuntimeException(exn);
-        }
-
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN; // && preferences.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
 
@@ -139,7 +144,7 @@ public class FModel {
             FThreads.invokeInEdtLater(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setDescription("Loading decks...");
+                    progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks"));
                 }
             });
         }

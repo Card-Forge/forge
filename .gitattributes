@@ -231,6 +231,8 @@ forge-core/src/main/java/forge/util/ITriggerEvent.java -text
 forge-core/src/main/java/forge/util/ItemPool.java -text
 forge-core/src/main/java/forge/util/ItemPoolSorter.java -text
 forge-core/src/main/java/forge/util/Lang.java -text
+forge-core/src/main/java/forge/util/LocalizationChangeObserver.java -text
+forge-core/src/main/java/forge/util/Localizer.java -text
 forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/NameGenerator.java -text
 forge-core/src/main/java/forge/util/PredicateString.java -text
@@ -15450,6 +15452,7 @@ forge-gui/res/editions/Worldwake.txt -text
 forge-gui/res/editions/Zendikar.txt -text
 forge-gui/res/effects/lightning.gif -text
 forge-gui/res/howto.txt svneol=native#text/plain
+forge-gui/res/languages/en-US.properties -text
 forge-gui/res/licenses/java-yield-license.txt svneol=native#text/plain
 forge-gui/res/licenses/log4j-license.txt svneol=native#text/plain
 forge-gui/res/licenses/multiline-label-license.txt svneol=native#text/plain

@@ -17,10 +17,10 @@
  */
 package forge.properties;
 
+import forge.GuiBase;
+
 import java.util.Collections;
 import java.util.Map;
-
-import forge.GuiBase;
 
 public final class ForgeConstants {
     public static final String ASSETS_DIR            = GuiBase.getInterface().getAssetsDir();
@@ -56,6 +56,7 @@ public final class ForgeConstants {
     public static final String AI_PROFILE_DIR      = RES_DIR + "ai/";
     public static final String SOUND_DIR           = RES_DIR + "sound/";
     public static final String MUSIC_DIR           = RES_DIR + "music/";
+	public static final String LANG_DIR            = RES_DIR + "languages/";
     public static final String EFFECTS_DIR         = RES_DIR + "effects/";
 
     private static final String QUEST_DIR             = RES_DIR + "quest/";

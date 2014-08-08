@@ -79,6 +79,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
+		
+		UI_LANGUAGE("en-US"),
 
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
