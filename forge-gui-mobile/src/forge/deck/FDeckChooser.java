@@ -52,7 +52,7 @@ public class FDeckChooser extends FScreen {
     private final ForgePreferences prefs = FModel.getPreferences();
     private FPref stateSetting = null;
 
-    //Show dialog to select a deck
+    //Show screen to select a deck
     public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
         FThreads.assertExecutedByEdt(true);
         final FDeckChooser chooser = new FDeckChooser(gameType, forAi, null) {
