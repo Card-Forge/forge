@@ -79,7 +79,15 @@ public class GauntletScreen extends LaunchScreen {
         }
 
         lstGauntlets.setGauntlets(data);
-        lstGauntlets.setSelectedIndex(0);
+
+        if (lstGauntlets.isEmpty()) {
+            btnRenameGauntlet.setEnabled(false);
+            btnDeleteGauntlet.setEnabled(false);
+            btnStart.setEnabled(false);
+        }
+        else {
+            lstGauntlets.setSelectedIndex(0);
+        }
     }
 
     @Override
