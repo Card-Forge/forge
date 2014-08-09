@@ -194,7 +194,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             compactModeHandler = new CompactModeHandler();
             renderer = itemManager.getListItemRenderer(compactModeHandler);
             setListItemRenderer(new ListItemRenderer<Map.Entry<T,Integer>>() {
-                private Integer prevTapIndex = -1;
+                private int prevTapIndex = -1;
 
                 @Override
                 public float getItemHeight() {

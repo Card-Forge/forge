@@ -40,6 +40,7 @@ public class FDeckChooser extends FScreen {
     private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;
     private boolean needRefreshOnActivate;
+    private Callback<Deck> callback;
 
     private final DeckManager lstDecks;
     private final FButton btnNewDeck = new FButton("New Deck");
@@ -53,17 +54,18 @@ public class FDeckChooser extends FScreen {
     private FPref stateSetting = null;
 
     //Show screen to select a deck
+    private static FDeckChooser deckChooserForPrompt;
     public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
         FThreads.assertExecutedByEdt(true);
-        final FDeckChooser chooser = new FDeckChooser(gameType, forAi, null) {
-            @Override
-            public void onClose(Callback<Boolean> canCloseCallback) {
-                super.onClose(canCloseCallback);
-                callback.run(getDeck());
-            }
-        };
-        chooser.setHeaderCaption(title);
-        Forge.openScreen(chooser);
+        if (deckChooserForPrompt == null) {
+            deckChooserForPrompt = new FDeckChooser(gameType, forAi, null);
+        }
+        else { //reuse same deck chooser
+            deckChooserForPrompt.setIsAi(forAi);
+        }
+        deckChooserForPrompt.setHeaderCaption(title);
+        deckChooserForPrompt.callback = callback;
+        Forge.openScreen(deckChooserForPrompt);
     }
 
     public FDeckChooser(GameType gameType0, boolean isAi0, FEventHandler selectionChangedHandler) {
@@ -74,7 +76,7 @@ public class FDeckChooser extends FScreen {
         lstDecks.setItemActivateHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                Forge.back();
+                accept();
             }
         });
         btnNewDeck.setCommand(new FEventHandler() {
@@ -156,6 +158,13 @@ public class FDeckChooser extends FScreen {
             break;
         }
         lstDecks.setSelectionChangedHandler(selectionChangedHandler);
+    }
+
+    private void accept() {
+        Forge.back();
+        if (callback != null) {
+            callback.run(getDeck());
+        }
     }
 
     @Override
@@ -353,7 +362,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
-                Forge.back();
+                accept();
             }
         });
     }
@@ -383,7 +392,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelectColors(lstDecks);
-                Forge.back();
+                accept();
             }
         });
     }
@@ -406,7 +415,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
-                Forge.back();
+                accept();
             }
         });
     }
@@ -433,7 +442,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
-                Forge.back();
+                accept();
             }
         });
     }
@@ -456,7 +465,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
-                Forge.back();
+                accept();
             }
         });
     }
@@ -479,7 +488,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void handleEvent(FEvent e) {
                 DeckgenUtil.randomSelect(lstDecks);
-                Forge.back();
+                accept();
             }
         });
     }
