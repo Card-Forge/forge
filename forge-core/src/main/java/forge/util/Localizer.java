@@ -1,12 +1,11 @@
 package forge.util;
 
-import com.ibm.icu.text.MessageFormat;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.text.MessageFormat;
 import java.util.*;
 
 public class Localizer {
@@ -35,7 +34,6 @@ public class Localizer {
 	}
 
 	public String getMessage(final String key, final Object... messageArguments) {
-		
 		MessageFormat formatter = null;
 		
 		try {

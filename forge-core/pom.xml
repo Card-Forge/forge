@@ -23,10 +23,5 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.3</version>
         </dependency>
-        <dependency>
-            <groupId>com.ibm.icu</groupId>
-            <artifactId>icu4j</artifactId>
-            <version>53.1</version>
-        </dependency>
     </dependencies>
 </project>
