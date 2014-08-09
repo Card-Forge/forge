@@ -134,7 +134,6 @@ public class FModel {
         formats = new GameFormat.Collection(new GameFormat.Reader(new File(ForgeConstants.BLOCK_DATA_DIR + "formats.txt")));
         blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
         questPreferences = new QuestPreferences();
-        gauntletData = new GauntletData();
         fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
         worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt"));
 

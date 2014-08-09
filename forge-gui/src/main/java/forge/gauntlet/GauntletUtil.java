@@ -15,11 +15,15 @@ public class GauntletUtil {
     public static GauntletData createQuickGauntlet(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes) {
         final File[] arrFiles = GauntletIO.getGauntletFilesQuick();
         final Set<String> setNames = new HashSet<String>();
-        for (File f : arrFiles) { setNames.add(f.getName()); }
+        for (File f : arrFiles) {
+            setNames.add(f.getName());
+        }
 
         int num = 1;
         while (setNames.contains(GauntletIO.PREFIX_QUICK + num + GauntletIO.SUFFIX_DATA)) { num++; }
-        FModel.getGauntletData().setName(GauntletIO.PREFIX_QUICK + num);
+        GauntletData gauntlet = new GauntletData();
+        gauntlet.setName(GauntletIO.PREFIX_QUICK + num);
+        FModel.setGauntletData(gauntlet);
 
         // Generate gauntlet decks
         final List<String> lstEventNames = new ArrayList<String>();
@@ -55,13 +59,12 @@ public class GauntletUtil {
             lstGauntletDecks.add(tempDeck);
         }
 
-        final GauntletData gd = FModel.getGauntletData();
-        gd.setDecks(lstGauntletDecks);
-        gd.setEventNames(lstEventNames);
-        gd.setUserDeck(userDeck);
+        gauntlet.setDecks(lstGauntletDecks);
+        gauntlet.setEventNames(lstEventNames);
+        gauntlet.setUserDeck(userDeck);
 
         // Reset all variable fields to 0, stamps and saves automatically.
-        gd.reset();
-        return gd;
+        gauntlet.reset();
+        return gauntlet;
     }
 }

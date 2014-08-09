@@ -104,15 +104,13 @@ public class GauntletScreen extends LaunchScreen {
         }
 
         lstGauntlets.setGauntlets(data);
+    }
 
-        if (lstGauntlets.isEmpty()) {
-            btnRenameGauntlet.setEnabled(false);
-            btnDeleteGauntlet.setEnabled(false);
-            btnStart.setEnabled(false);
-        }
-        else {
-            lstGauntlets.setSelectedIndex(0);
-        }
+    private void updateButtons() {
+        boolean enabled = !lstGauntlets.isEmpty();
+        btnRenameGauntlet.setEnabled(enabled);
+        btnDeleteGauntlet.setEnabled(enabled);
+        btnStart.setEnabled(enabled);
     }
 
     @Override
@@ -268,7 +266,7 @@ public class GauntletScreen extends LaunchScreen {
 
                 GauntletIO.getGauntletFile(gauntlet).delete();
 
-                lstGauntlets.removeItem(gauntlet);
+                lstGauntlets.removeGauntlet(gauntlet);
             }
         });
     }
@@ -340,6 +338,8 @@ public class GauntletScreen extends LaunchScreen {
         public void setGauntlets(List<GauntletData> gauntlets0) {
             gauntlets = gauntlets0;
             refresh();
+            setSelectedIndex(0);
+            updateButtons();
         }
 
         public void addGauntlet(GauntletData gauntlet) {
@@ -347,6 +347,17 @@ public class GauntletScreen extends LaunchScreen {
             gauntlets.add(gauntlet);
             refresh();
             setSelectedGauntlet(gauntlet);
+            updateButtons();
+        }
+
+        public void removeGauntlet(GauntletData gauntlet) {
+            if (gauntlets == null) { return; }
+            removeItem(gauntlet);
+            gauntlets.remove(gauntlet);
+            if (selectedIndex == gauntlets.size()) {
+                selectedIndex--;
+            }
+            updateButtons();
         }
 
         public void refresh() {
