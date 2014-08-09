@@ -648,12 +648,11 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardToMaximumHandSize(int nDiscard) {
-        final int n = player.getZone(ZoneType.Hand).size();
         final int max = player.getMaxHandSize();
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(nDiscard, nDiscard, player.getZone(ZoneType.Hand).getCards());
-        String msgFmt = "Cleanup Phase: You can only have a maximum of %d cards, you currently have %d  cards in your hand - select %d card(s) to discard";
-        String message = String.format(msgFmt, max, n, nDiscard);
+        String message = "Cleanup Phase\nSelect " + nDiscard + " card" + (nDiscard > 1 ? "s" : "") + 
+                " to discard to bring your hand down to the maximum of " + max + " cards.";
         inp.setMessage(message);
         inp.setCancelAllowed(false);
         inp.showAndWait();
