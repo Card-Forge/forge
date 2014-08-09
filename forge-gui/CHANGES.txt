@@ -22,6 +22,9 @@ Support renaming gauntlets.
 Support sorting gauntlets (and quests) case insensitive.
 
 
+- Fixed loading overlay to show logo properly and have some transparency -
+
+
 ---------
 New Cards
 ---------

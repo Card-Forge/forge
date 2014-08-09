@@ -442,6 +442,7 @@ public enum FControl implements KeyEventDispatcher {
                 match.startGame(newGame);
             }
         });
+        SOverlayUtils.hideOverlay();
     }
 
     public final void endCurrentGame() {
@@ -587,7 +588,6 @@ public enum FControl implements KeyEventDispatcher {
             @Override
             public void run() {
                 startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
             }
         });
     }

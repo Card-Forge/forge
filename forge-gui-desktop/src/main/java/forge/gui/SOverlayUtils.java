@@ -35,18 +35,21 @@ public final class SOverlayUtils {
         final int h = overlay.getHeight();
         final int pnlW = 400;
         final int pnlH = 300;
+        final int labelHeight = 50;
+        final int logoSize = pnlH - labelHeight;
 
         // Adds the "loading" panel to generic overlay container
         // (which is preset with null layout and close button)
         final FPanel pnl = new FPanel();
         pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE).alphaColor(191));
         pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
 
-        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_LOGO)).build(),
-                "h 200px!, align center");
+        pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_LOGO))
+                .iconScaleFactor(1d).iconInBackground().build(),
+                "w " + logoSize + "px!, h " + logoSize + "px!, align center");
         pnl.add(new FLabel.Builder().text("Loading new game...")
-                .fontSize(22).build(), "h 40px!, align center");
+                .fontSize(22).build(), "h " + labelHeight + "px!, align center");
 
         overlay.add(pnl);
     }
