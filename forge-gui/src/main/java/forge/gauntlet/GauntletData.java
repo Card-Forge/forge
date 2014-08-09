@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import forge.deck.Deck;
 import forge.properties.ForgeConstants;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,10 +48,10 @@ public final class GauntletData {
      */
     public void rename(final String newName) {
         File newpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, newName + ".dat");
-        File oldpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, this.name + ".dat");
+        File oldpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, name + ".dat");
         oldpath.renameTo(newpath);
 
-        this.name = newName;
+        name = newName;
         GauntletIO.saveGauntlet(this);
     }
 
@@ -58,42 +59,49 @@ public final class GauntletData {
         return name;
     }
 
+    public String getDisplayName() {
+        if (name.startsWith(GauntletIO.PREFIX_LOCKED)) { //trim locked prefix if needed
+            return name.substring(GauntletIO.PREFIX_LOCKED.length());
+        }
+        return name;
+    }
+
     public void stamp() {
         final DateFormat dateFormat = new SimpleDateFormat("MM-dd-yy, H:m");
-        this.timestamp = dateFormat.format(new Date()).toString();
+        timestamp = dateFormat.format(new Date()).toString();
     }
 
     /** Resets a gauntlet data to an unplayed state, then stamps and saves. */
     public void reset() {
-        this.completed = 0;
-        this.stamp();
-        this.eventRecords.clear();
+        completed = 0;
+        stamp();
+        eventRecords.clear();
 
         for (int i = 0; i < decks.size(); i++) {
-            this.eventRecords.add("");
+            eventRecords.add("");
         }
 
         GauntletIO.saveGauntlet(this);
     }
 
     public String getTimestamp() {
-        return this.timestamp;
+        return timestamp;
     }
 
     public void setCompleted(final int i0) {
-        this.completed = i0;
+        completed = i0;
     }
 
     public int getCompleted() {
-        return this.completed;
+        return completed;
     }
 
     public void setUserDeck(final Deck d0) {
-        this.userDeck = d0;
+        userDeck = d0;
     }
 
     public Deck getUserDeck() {
-        return this.userDeck;
+        return userDeck;
     }
 
     public List<String> getDeckNames() {
@@ -103,26 +111,35 @@ public final class GauntletData {
     }
 
     public void setEventRecords(final List<String> records0) {
-        this.eventRecords = records0;
+        eventRecords = records0;
     }
 
     public List<String> getEventRecords() {
-        return this.eventRecords;
+        return eventRecords;
     }
 
     public void setEventNames(final List<String> names0) {
-        this.eventNames = names0;
+        eventNames = names0;
     }
 
     public List<String> getEventNames() {
-        return this.eventNames;
+        return eventNames;
     }
 
     public void setDecks(final List<Deck> decks0) {
-        this.decks = decks0;
+        decks = decks0;
     }
 
     public List<Deck> getDecks() {
-        return this.decks;
+        return decks;
+    }
+
+    @Override
+    public String toString() {
+        String str = getDisplayName();
+        if (decks != null) {
+            str += " (" + decks.size() + " opponents)";
+        }
+        return str;
     }
 }

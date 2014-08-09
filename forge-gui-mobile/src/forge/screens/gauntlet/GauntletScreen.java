@@ -210,7 +210,35 @@ public class GauntletScreen extends LaunchScreen {
     }
 
     private void createGauntletContest() {
-        
+        final File[] files = GauntletIO.getGauntletFilesLocked();
+        final List<GauntletData> contests = new ArrayList<GauntletData>();
+        for (final File f : files) {
+            contests.add(GauntletIO.loadGauntlet(f));
+        }
+
+        GuiChoose.oneOrNone("Select Gauntlet Contest", contests, new Callback<GauntletData>() {
+            @Override
+            public void run(final GauntletData contest) {
+                if (contest == null) { return; }
+
+                FDeckChooser.promptForDeck("Select Your Deck", GameType.Gauntlet, false, new Callback<Deck>() {
+                    @Override
+                    public void run(final Deck userDeck) {
+                        if (userDeck == null) { return; }
+
+                        //create copy of contest to use as gauntlet
+                        GauntletData gauntlet = new GauntletData();
+                        gauntlet.setDecks(new ArrayList<Deck>(contest.getDecks()));
+                        gauntlet.setEventNames(new ArrayList<String>(contest.getEventNames()));
+                        gauntlet.setUserDeck(userDeck);
+                        GauntletUtil.setDefaultGauntletName(gauntlet, contest.getDisplayName() + "_");
+                        FModel.setGauntletData(gauntlet);
+                        gauntlet.reset();
+                        lstGauntlets.addGauntlet(gauntlet);
+                    }
+                });
+            }
+        });
     }
 
     @Override

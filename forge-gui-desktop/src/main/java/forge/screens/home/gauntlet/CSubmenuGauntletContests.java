@@ -63,7 +63,6 @@ public enum CSubmenuGauntletContests implements ICDoc {
         view.getGauntletLister().setSelectedIndex(0);
     }
 
-
     private void updateData() {
         final File[] files = GauntletIO.getGauntletFilesLocked();
         final List<GauntletData> data = new ArrayList<GauntletData>();
@@ -108,7 +107,6 @@ public enum CSubmenuGauntletContests implements ICDoc {
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(fc.createAiPlayer()));
 
         fc.startMatch(GameType.Gauntlet, starter);
-
     }
 
     /* (non-Javadoc)
