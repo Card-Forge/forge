@@ -352,7 +352,7 @@ public class FFileChooser extends FDialog {
     private class FileList extends FList<File> {
         private FileList() {
             setListItemRenderer(new ListItemRenderer<File>() {
-                private Integer prevTapIndex = -1;
+                private int prevTapIndex = -1;
 
                 @Override
                 public float getItemHeight() {

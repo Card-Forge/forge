@@ -413,7 +413,7 @@ public class ListChooser<T> extends FContainer {
                 renderer = new DefaultItemRenderer();
             }
             setListItemRenderer(new ListItemRenderer<T>() {
-                private Integer prevTapIndex = -1;
+                private int prevTapIndex = -1;
 
                 @Override
                 public float getItemHeight() {
