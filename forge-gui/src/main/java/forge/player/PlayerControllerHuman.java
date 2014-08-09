@@ -626,7 +626,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public SpellAbility chooseSpellAbilityToPlay() {
         PhaseType phase = game.getPhaseHandler().getPhase();
-        
+
         boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
         if (game.getStack().isEmpty() && maySkipPriority) {
             return null;
@@ -634,15 +634,14 @@ public class PlayerControllerHuman extends PlayerController {
         else {
             autoPassCancel(); // probably cancel, since something has happened
         }
-        
+
         InputPassPriority defaultInput = new InputPassPriority(player);
         defaultInput.showAndWait();
         return defaultInput.getChosenSa();
     }
-    
+
     @Override
-    public void playChosenSpellAbility(SpellAbility chosenSa)
-    {
+    public void playChosenSpellAbility(SpellAbility chosenSa) {
         HumanPlay.playSpellAbility(player, chosenSa);
     }
 
