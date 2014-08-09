@@ -25,9 +25,11 @@ public class GauntletIO {
     /** Prompt in text field for new (unsaved) built gauntlets. */
     public static final String TXF_PROMPT = "[New Gauntlet]";
     /** suffix for all gauntlet data files */
-    public static final String SUFFIX_DATA = ".dat"; 
+    public static final String SUFFIX_DATA = ".dat";
     /** Prefix for quick gauntlet save files. */
     public static final String PREFIX_QUICK = "Quick_";
+    /** Prefix for custom gauntlet save files. */
+    public static final String PREFIX_CUSTOM = "Custom_";
     /** Regex for locked gauntlet save files. */
     public static final String PREFIX_LOCKED = "LOCKED_";
 
@@ -45,24 +47,12 @@ public class GauntletIO {
     public static File getGauntletFile(GauntletData gd) {
         return getGauntletFile(gd.getName());
     }
-    
-    public static File[] getGauntletFilesUnlocked() {
+
+    public static File[] getGauntletFilesUnlocked(final String prefix) {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return (name.endsWith(SUFFIX_DATA));
-            }
-        };
-
-        File folder = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc);
-        return folder.listFiles(filter);
-    }
-
-    public static File[] getGauntletFilesQuick() {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return (name.startsWith(PREFIX_QUICK) && name.endsWith(SUFFIX_DATA));
+                return ((prefix == null || name.startsWith(prefix)) && name.endsWith(SUFFIX_DATA));
             }
         };
 

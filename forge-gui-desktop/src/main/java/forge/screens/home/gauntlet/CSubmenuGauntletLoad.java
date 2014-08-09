@@ -85,7 +85,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     }
 
     private void updateData() {
-        final File[] files = GauntletIO.getGauntletFilesUnlocked();
+        final File[] files = GauntletIO.getGauntletFilesUnlocked(null);
         final List<GauntletData> data = new ArrayList<GauntletData>();
 
         for (final File f : files) {

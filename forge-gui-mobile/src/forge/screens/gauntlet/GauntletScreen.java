@@ -96,7 +96,7 @@ public class GauntletScreen extends LaunchScreen {
             }
         });
 
-        final File[] files = GauntletIO.getGauntletFilesUnlocked();
+        final File[] files = GauntletIO.getGauntletFilesUnlocked(null);
         final List<GauntletData> data = new ArrayList<GauntletData>();
 
         for (final File f : files) {
@@ -131,7 +131,7 @@ public class GauntletScreen extends LaunchScreen {
     }
 
     private void createQuickGauntlet() {
-        GuiChoose.getInteger("How many opponents are you willing to face?", 5, 50, new Callback<Integer>() {
+        GuiChoose.getInteger("How many opponents are you willing to face?", 3, 50, new Callback<Integer>() {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
@@ -148,7 +148,7 @@ public class GauntletScreen extends LaunchScreen {
                     public void run(final List<DeckType> allowedDeckTypes) {
                         if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) { return; }
 
-                        FDeckChooser.promptForDeck("Select Deck for Gauntlet", GameType.Gauntlet, false, new Callback<Deck>() {
+                        FDeckChooser.promptForDeck("Select Your Deck", GameType.Gauntlet, false, new Callback<Deck>() {
                             @Override
                             public void run(Deck userDeck) {
                                 if (userDeck == null) { return; }
@@ -165,7 +165,48 @@ public class GauntletScreen extends LaunchScreen {
     }
 
     private void createCustomGauntlet() {
-        
+        GuiChoose.getInteger("How many opponents are you willing to face?", 3, 50, new Callback<Integer>() {
+            @Override
+            public void run(final Integer numOpponents) {
+                if (numOpponents == null) { return; }
+
+                GauntletData gauntlet = new GauntletData();
+                gauntlet.setDecks(new ArrayList<Deck>());
+                promptForAiDeck(gauntlet, numOpponents);
+            }
+        });
+    }
+
+    private void promptForAiDeck(final GauntletData gauntlet, final int numOpponents) {
+        final int opponentNum = gauntlet.getDecks().size() + 1;
+        FDeckChooser.promptForDeck("Select Deck for Opponent " + opponentNum + " / " + numOpponents, GameType.Gauntlet, true, new Callback<Deck>() {
+            @Override
+            public void run(Deck aiDeck) {
+                if (aiDeck == null) { return; }
+
+                gauntlet.getDecks().add(aiDeck);
+                gauntlet.getEventNames().add(aiDeck.getName());
+
+                if (opponentNum < numOpponents) {
+                    promptForAiDeck(gauntlet, numOpponents);
+                }
+                else {
+                    //once all ai decks have been selected, prompt for user deck
+                    FDeckChooser.promptForDeck("Select Your Deck", GameType.Gauntlet, false, new Callback<Deck>() {
+                        @Override
+                        public void run(Deck userDeck) {
+                            if (userDeck == null) { return; }
+
+                            gauntlet.setUserDeck(userDeck);
+                            GauntletUtil.setDefaultGauntletName(gauntlet, GauntletIO.PREFIX_CUSTOM);
+                            FModel.setGauntletData(gauntlet);
+                            gauntlet.reset();
+                            lstGauntlets.addGauntlet(gauntlet);
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void createGauntletContest() {

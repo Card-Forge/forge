@@ -13,58 +13,64 @@ import forge.model.FModel;
 
 public class GauntletUtil {
     public static GauntletData createQuickGauntlet(final Deck userDeck, final int numOpponents, final List<DeckType> allowedDeckTypes) {
-        final File[] arrFiles = GauntletIO.getGauntletFilesQuick();
+        GauntletData gauntlet = new GauntletData();
+        setDefaultGauntletName(gauntlet, GauntletIO.PREFIX_QUICK);
+        FModel.setGauntletData(gauntlet);
+
+        // Generate gauntlet decks
+        Deck deck;
+        final List<String> eventNames = new ArrayList<String>();
+        final List<Deck> decks = new ArrayList<Deck>();
+
+        for (int i = 0; i < numOpponents; i++) {
+            int randType = (int)Math.floor(Math.random() * allowedDeckTypes.size());
+            switch (allowedDeckTypes.get(randType)) {
+            case COLOR_DECK:
+                deck = DeckgenUtil.getRandomColorDeck(true);
+                eventNames.add("Random colors deck");
+                break;
+            case CUSTOM_DECK:
+                deck = DeckgenUtil.getRandomCustomDeck();
+                eventNames.add(deck.getName());
+                break;
+            case PRECONSTRUCTED_DECK:
+                deck = DeckgenUtil.getRandomPreconDeck();
+                eventNames.add(deck.getName());
+                break;
+            case QUEST_OPPONENT_DECK:
+                deck = DeckgenUtil.getRandomQuestDeck();
+                eventNames.add(deck.getName());
+                break;
+            case THEME_DECK:
+                deck = DeckgenUtil.getRandomThemeDeck();
+                eventNames.add(deck.getName());
+                break;
+            default:
+                continue;
+            }
+            decks.add(deck);
+        }
+
+        gauntlet.setDecks(decks);
+        gauntlet.setEventNames(eventNames);
+        gauntlet.setUserDeck(userDeck);
+
+        // Reset all variable fields to 0, stamps and saves automatically.
+        gauntlet.reset();
+        return gauntlet;
+    }
+
+    public static void setDefaultGauntletName(GauntletData gauntlet, String prefix) {
+        final File[] arrFiles = GauntletIO.getGauntletFilesUnlocked(prefix);
         final Set<String> setNames = new HashSet<String>();
         for (File f : arrFiles) {
             setNames.add(f.getName());
         }
 
         int num = 1;
-        while (setNames.contains(GauntletIO.PREFIX_QUICK + num + GauntletIO.SUFFIX_DATA)) { num++; }
-        GauntletData gauntlet = new GauntletData();
-        gauntlet.setName(GauntletIO.PREFIX_QUICK + num);
-        FModel.setGauntletData(gauntlet);
-
-        // Generate gauntlet decks
-        final List<String> lstEventNames = new ArrayList<String>();
-        final List<Deck> lstGauntletDecks = new ArrayList<Deck>();
-        Deck tempDeck;
-
-        for (int i = 0; i < numOpponents; i++) {
-            int randType = (int)Math.floor(Math.random() * allowedDeckTypes.size());
-            switch (allowedDeckTypes.get(randType)) {
-            case COLOR_DECK:
-                tempDeck = DeckgenUtil.getRandomColorDeck(true);
-                lstEventNames.add("Random colors deck");
-                break;
-            case CUSTOM_DECK:
-                tempDeck = DeckgenUtil.getRandomCustomDeck();
-                lstEventNames.add(tempDeck.getName());
-                break;
-            case PRECONSTRUCTED_DECK:
-                tempDeck = DeckgenUtil.getRandomPreconDeck();
-                lstEventNames.add(tempDeck.getName());
-                break;
-            case QUEST_OPPONENT_DECK:
-                tempDeck = DeckgenUtil.getRandomQuestDeck();
-                lstEventNames.add(tempDeck.getName());
-                break;
-            case THEME_DECK:
-                tempDeck = DeckgenUtil.getRandomThemeDeck();
-                lstEventNames.add(tempDeck.getName());
-                break;
-            default:
-                continue;
-            }
-            lstGauntletDecks.add(tempDeck);
+        while (setNames.contains(prefix + num + GauntletIO.SUFFIX_DATA)) {
+            num++;
         }
-
-        gauntlet.setDecks(lstGauntletDecks);
-        gauntlet.setEventNames(lstEventNames);
-        gauntlet.setUserDeck(userDeck);
-
-        // Reset all variable fields to 0, stamps and saves automatically.
-        gauntlet.reset();
-        return gauntlet;
+        gauntlet.setName(prefix + num);
     }
 }
