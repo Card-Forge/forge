@@ -238,7 +238,7 @@ public class FOptionPane extends FDialog {
         float x = PADDING;
         float y = PADDING;
 
-        float maxPromptHeight = maxHeight - PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
+        float maxPromptHeight = maxHeight - 2 * PADDING - BUTTON_HEIGHT - GAP_BELOW_BUTTONS;
         if (displayObj != null) {
             maxPromptHeight -= displayObj.getHeight();
         }
