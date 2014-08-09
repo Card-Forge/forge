@@ -426,6 +426,7 @@ public class GauntletScreen extends LaunchScreen {
             if (selectedIndex == gauntlets.size()) {
                 selectedIndex--;
             }
+            revalidate();
             updateButtons();
         }
 

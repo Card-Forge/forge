@@ -223,7 +223,7 @@ public class LoadQuestScreen extends FScreen {
 
                 new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat").delete();
 
-                lstQuests.removeItem(quest);
+                lstQuests.removeQuest(quest);
             }
         });
     }
@@ -307,6 +307,14 @@ public class LoadQuestScreen extends FScreen {
                 }
             });
             setListData(sorted);
+        }
+
+        public void removeQuest(QuestData qd) {
+            removeItem(qd);
+            if (selectedIndex == getCount()) {
+                selectedIndex--;
+            }
+            revalidate();
         }
 
         public boolean setSelectedIndex(int i0) {
