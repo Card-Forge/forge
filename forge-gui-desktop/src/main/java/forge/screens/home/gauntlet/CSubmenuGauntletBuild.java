@@ -172,7 +172,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         final GauntletData gd;
 
         // Warn if no name
-        if (name.equals(GauntletIO.TXF_PROMPT) || name.isEmpty()) {
+        if (name.isEmpty()) {
             FOptionPane.showMessageDialog(
                     "Please name your gauntlet using the 'Gauntlet Name' box.",
                     "Save Error!",
@@ -241,7 +241,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     private boolean newGauntlet() {
         workingDecks.clear();
         dumpDecksIntoList();
-        view.getTxfFilename().setText(GauntletIO.TXF_PROMPT);
+        view.getTxfFilename().setText("");
         return true;
     }
 }

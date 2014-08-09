@@ -129,7 +129,7 @@ public class FTextField extends SkinnedTextField implements ITextField {
             g2d.setFont(this.getFont());
             FSkin.setGraphicsColor(g2d, ghostTextColor);
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.drawString(this.ghostText, margin.left + 2, margin.top + 15); //account for borders (TODO: why +15?)
+            g2d.drawString(this.ghostText, margin.left + 2, getBaseline(getWidth(), getHeight())); //account for borders (TODO: why +15?)
             g2d.dispose();
         }
     }

@@ -46,7 +46,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final FScrollPane scrRight  = new FScrollPane(lstRight, true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final FTextField txfFilename = new FTextField.Builder().text(GauntletIO.TXF_PROMPT).build();
+    private final FTextField txfFilename = new FTextField.Builder().ghostText(GauntletIO.TXF_PROMPT).showGhostTextWithFocus().build();
 
     private final FLabel lblDesc1 = new FLabel.Builder().text("Left/right arrows add or remove decks.").fontSize(12).build();
 
@@ -107,7 +107,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
 
     private VSubmenuGauntletBuild() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
 
         // File handling panel
         final FLabel lblFilename = new FLabel.Builder()
@@ -175,7 +174,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
      */
     @Override
     public void populate() {
-        
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
 
@@ -245,7 +243,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     }
 
     /** @return {@link javax.swing.JTextField} */
-    public JTextField getTxfFilename() {
+    public FTextField getTxfFilename() {
         return txfFilename;
     }
 
