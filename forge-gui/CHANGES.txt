@@ -14,7 +14,7 @@ We have added a branch to our SVN for the new cards that are currently being scr
 
 - Improved auto-yield support - 
 Pressing "End Turn" now properly skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You will still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will now be skipped properly
-To alleviate pressing this accidentally, as long as you're auto-yielding this way, you'll be able to press Escape or the Cancel button to cancel the auto-yield and being given the chance to act again
+To alleviate pressing this accidentally, as long as you're auto-yielding this way, you'll be able to press Escape or the Cancel button to cancel the auto-yield and be given the chance to act again. Phases with stops and spells/abilities resolving will be given a slight delay to allow you to see what's going on and give you the chance to regain control by cancelling the yield.
 
 
 - Improved Gauntlet Support - 
