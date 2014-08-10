@@ -12,6 +12,11 @@ Release Notes
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- Improved auto-yield support - 
+Pressing "End Turn" now properly skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You will still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will now be skipped properly
+To alleviate pressing this accidentally, as long as you're auto-yielding this way, you'll be able to press Escape or the Cancel button to cancel the auto-yield and being given the chance to act again
+
+
 - Improved Gauntlet Support - 
 Add column to Load Gauntlet screen to display your deck for the gauntlet.
 Fix so your deck is saved with a gauntlet when starting a quick gauntlet.
