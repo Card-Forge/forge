@@ -655,16 +655,28 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public SpellAbility chooseSpellAbilityToPlay() {
         if (mayAutoPass()) {
-            if (!game.getStack().isEmpty()) {
+            //avoid prompting for input if current phase is set to be auto-passed
+            //instead posing a short delay if needed to prevent the game jumping ahead too quick
+            int delay = 0;
+            if (game.getStack().isEmpty()) {
+                //make sure to briefly pause at phases your not set up to skip
+                if (!isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
+                    delay = FControlGamePlayback.phasesDelay;
+                }
+            }
+            else {
+                //pause slightly longer for spells and abilities on the stack resolving
+                delay = FControlGamePlayback.resolveDelay;
+            }
+            if (delay > 0) {
                 try {
-                    //pause briefly while spells and abilities on the stack resolve
-                    Thread.sleep(FControlGamePlayback.resolveDelay);
+                    Thread.sleep(delay);
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            return null; //avoid prompting for input if current phase is set to be auto-passed
+            return null;
         }
 
         if (game.getStack().isEmpty() && isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
