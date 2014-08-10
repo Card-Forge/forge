@@ -37,7 +37,7 @@ public abstract class FGestureAdapter extends InputAdapter {
 
     private final Task pressTask = new Task() {
         @Override
-        public void run () {
+        public void run() {
             if (!pressed) {
                 pressed = true;
                 press(pointer1.x, pointer1.y);
@@ -47,7 +47,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     };
     private final Task longPressTask = new Task() {
         @Override
-        public void run () {
+        public void run() {
             if (!longPressed) {
                 longPressed = true;
                 if (longPress(pointer1.x, pointer1.y)) {
@@ -62,7 +62,7 @@ public abstract class FGestureAdapter extends InputAdapter {
     };
     private final Task quickTapTask = new Task() {
         @Override
-        public void run () {
+        public void run() {
             if (quickTapped) {
                 quickTapped = false;
                 endPress(lastTapX, lastTapY);

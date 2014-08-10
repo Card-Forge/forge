@@ -11,6 +11,8 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.match.input.ButtonUtil;
+import forge.match.input.InputBase;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
@@ -131,6 +133,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
+                InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
+                GuiBase.getInterface().showPromptMessage(""); //clear prompt behind WinLose overlay
+                ButtonUtil.update("", "", false, false, false);
                 GuiBase.getInterface().finishGame();
             }
         });

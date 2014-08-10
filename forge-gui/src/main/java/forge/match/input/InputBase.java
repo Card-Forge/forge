@@ -17,6 +17,10 @@
  */
 package forge.match.input;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import forge.FThreads;
 import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -38,12 +42,50 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private static final long serialVersionUID = -6539552513871194081L;
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
-    protected final void setFinished() { finished = true; }
+    protected final void setFinished() {
+        finished = true;
+
+        //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
+        awaitNextInputTask = new TimerTask() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (awaitNextInputTimer) {
+                            if (awaitNextInputTask != null) {
+                                GuiBase.getInterface().showPromptMessage("Waiting for opponent...");
+                                ButtonUtil.update(false, false, false);
+                                awaitNextInputTask = null;
+                            }
+                        }
+                    }
+                });
+            }
+        };
+        awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+    }
+
+    private static final Timer awaitNextInputTimer = new Timer();
+    private static TimerTask awaitNextInputTask;
+
+    public static void cancelAwaitNextInput() {
+        synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block
+            if (awaitNextInputTask != null) {
+                try {
+                    awaitNextInputTask.cancel(); //cancel timer once next input shown if needed
+                }
+                catch (Exception ex) {} //suppress any exception thrown by cancel()
+                awaitNextInputTask = null;
+            }
+        }
+    }
 
     // showMessage() is always the first method called
     @Override
     public final void showMessageInitial() {
         finished = false;
+        cancelAwaitNextInput();
         showMessage();
     }
 

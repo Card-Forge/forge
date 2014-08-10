@@ -41,6 +41,8 @@ public class VPrompt extends FContainer {
         btnCancel.setSize(BTN_WIDTH, HEIGHT);
         btnOk.setCorner(Corner.BottomLeft);
         btnCancel.setCorner(Corner.BottomRight);
+        btnOk.setEnabled(false); //disable buttons until first input queued
+        btnCancel.setEnabled(false);
     }
 
     public FButton getBtnOk() {
