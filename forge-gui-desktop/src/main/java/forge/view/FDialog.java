@@ -2,6 +2,7 @@ package forge.view;
 
 import forge.Singletons;
 import forge.assets.FSkinProp;
+import forge.match.input.InputBase;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FPanel;
 import forge.toolbox.FSkin;
@@ -129,6 +130,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
 
         if (visible) {
             FMouseAdapter.forceMouseUp(); //ensure mouse up handled if dialog shown between mouse down and mouse up
+            InputBase.cancelAwaitNextInput(); //ensure "Waiting for opponent..." prompt doesn't appear while dialog awaiting input
 
             if (openModals.isEmpty()) {
                 setLocationRelativeTo(JOptionPane.getRootFrame());
