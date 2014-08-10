@@ -1131,11 +1131,6 @@ public class AiController {
             sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
             Log.debug(sb.toString());
         }
-
-        // ai is about to attack, cancel all phase skipping
-        for (Player p : game.getPlayers()) {
-            p.getController().autoPassCancel();
-        }
         return combat;
     }
 

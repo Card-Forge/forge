@@ -344,11 +344,6 @@ public class TriggerHandler implements IGameStateObject {
     private void runSingleTrigger(final Trigger regtrig, final Map<String, Object> runParams) {
         final Map<String, String> triggerParams = regtrig.getMapParams();
 
-        // Any trigger should cause the phase not to skip
-        for (Player p : game.getPlayers()) {
-            p.getController().autoPassCancel();
-        }
-
         regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.

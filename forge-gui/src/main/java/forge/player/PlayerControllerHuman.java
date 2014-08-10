@@ -617,6 +617,10 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public void declareAttackers(Player attacker, Combat combat) {
+        if (mayAutoPass()) {
+            return; //don't prompt to declare attackers if user chose to end the turn
+        }
+
         // This input should not modify combat object itself, but should return user choice
         InputAttack inpAttack = new InputAttack(attacker, combat);
         inpAttack.showAndWait();
@@ -631,14 +635,12 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public SpellAbility chooseSpellAbilityToPlay() {
-        PhaseType phase = game.getPhaseHandler().getPhase();
-
-        boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
-        if (game.getStack().isEmpty() && maySkipPriority) {
-            return null;
+        if (mayAutoPass()) {
+            return null; //avoid prompting for input if current phase is set to be auto-passed
         }
-        else {
-            autoPassCancel(); // probably cancel, since something has happened
+
+        if (game.getStack().isEmpty() && isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
+            return null; //avoid prompt for input if stack is empty and player is set to skip the current phase
         }
 
         InputPassPriority defaultInput = new InputPassPriority(player);

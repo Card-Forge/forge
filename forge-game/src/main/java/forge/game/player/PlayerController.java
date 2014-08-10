@@ -92,8 +92,8 @@ public abstract class PlayerController {
         autoPassUntilPhase = null;
     }
 
-    public boolean mayAutoPass(PhaseType phase) {
-        return phase.isBefore(autoPassUntilPhase);
+    public boolean mayAutoPass() {
+        return autoPassUntilPhase != null && game.getPhaseHandler().getPhase().isBefore(autoPassUntilPhase);
     }
 
     public boolean isAI() {
