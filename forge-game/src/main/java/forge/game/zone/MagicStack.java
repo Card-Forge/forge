@@ -802,9 +802,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public boolean addAllTirggeredAbilitiesToStack() {
         boolean result = false;
         Player playerTurn = game.getPhaseHandler().getPlayerTurn();
+
+        if (playerTurn.hasLost()) {
+            playerTurn = game.getNextPlayerAfter(playerTurn);
+        }
+
         Player whoAddsToStack = playerTurn;
         do {
             result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
+            // 2014-08-10 Fix infinite loop when a player dies during a multiplayer game during their turn
             whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
         } while( whoAddsToStack != null && whoAddsToStack != playerTurn);
         return result;

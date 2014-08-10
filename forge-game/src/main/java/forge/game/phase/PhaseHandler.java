@@ -285,13 +285,15 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
-                    combat = new Combat(playerTurn);
-                    game.getStack().freezeStack();
-                    declareAttackersTurnBasedAction();
-                    game.getStack().unfreezeStack();
+                    if (!playerTurn.hasLost()) {
+                        combat = new Combat(playerTurn);
+                        game.getStack().freezeStack();
+                        declareAttackersTurnBasedAction();
+                        game.getStack().unfreezeStack();
 
-                    if (combat != null && combat.getAttackers().isEmpty()) {
-                        combat = null;
+                        if (combat != null && combat.getAttackers().isEmpty()) {
+                            combat = null;
+                        }
                     }
 
                     givePriorityToPlayer = inCombat();
@@ -835,9 +837,9 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
      * <p>
      * is.
      * </p>
-     * 
-     * @param phase
-     *            a {@link java.lang.String} object.
+     *
+     * @param phase0
+     *            a {@link forge.game.phase.PhaseType} object.
      * @return a boolean.
      */
     public final synchronized boolean is(final PhaseType phase0) {
@@ -976,6 +978,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         // don't even offer priority, because it's untap of 1st turn now
         givePriorityToPlayer = false;
 
+        // MAIN GAME LOOP
         while (!game.isGameOver()) {
             
             if (givePriorityToPlayer) {
@@ -998,6 +1001,13 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
     
                         addedAnythingToStack = game.getStack().addAllTirggeredAbilitiesToStack();
                     } while(addedAnythingToStack);
+
+                    if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
+                        // If the active player has lost, and they have priority, set the next player to have priority
+                        System.out.println("Active player is no longer in the game...");
+                        pPlayerPriority = game.getNextPlayerAfter(this.getPriorityPlayer());
+                        pFirstPriority = pPlayerPriority;
+                    }
 
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
                     if( null == chosenSa )
@@ -1037,7 +1047,11 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                 System.out.println(String.format("%s %s: %s is active, previous was %s", playerTurn, phase, pPlayerPriority, nextPlayer));
             if (pFirstPriority == nextPlayer) {
                 if (game.getStack().isEmpty()) {
-                    this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
+                    if (playerTurn.hasLost()) {
+                        this.setPriority(game.getNextPlayerAfter(playerTurn));
+                    } else {
+                        this.setPriority(playerTurn);
+                    }
 
                     // end phase
                     this.givePriorityToPlayer = true;
@@ -1073,11 +1087,6 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
         combat = null; // not-null can be created only when declare attackers phase begins
     }
 
-    /**
-     * Sets the phase state.
-     *
-     * @param phaseID the new phase state
-     */
     public final void endTurnByEffect() {
         this.combat = null;
         this.extraPhases.clear();
