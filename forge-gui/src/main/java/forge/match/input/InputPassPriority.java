@@ -90,6 +90,11 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
     }
 
+    @Override
+    protected boolean allowAwaitNextInput() {
+        return !player.getController().mayAutoPass(); //don't allow awaiting next input if player chose to end the turn
+    }
+
     private void passPriority(final Runnable runnable) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)) {
             //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority

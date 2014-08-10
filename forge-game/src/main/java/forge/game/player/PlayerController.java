@@ -87,6 +87,10 @@ public abstract class PlayerController {
     public void autoPassUntil(PhaseType phase) {
         autoPassUntilPhase = phase;
     }
+    
+    protected PhaseType getAutoPassUntilPhase() {
+        return autoPassUntilPhase;
+    }
 
     public void autoPassCancel() {
         autoPassUntilPhase = null;

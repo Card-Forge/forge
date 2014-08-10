@@ -13,6 +13,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -631,6 +632,24 @@ public class PlayerControllerHuman extends PlayerController {
         // This input should not modify combat object itself, but should return user choice
         InputBlock inpBlock = new InputBlock(defender, combat);
         inpBlock.showAndWait();
+        updateAutoPassPrompt();
+    }
+
+    public void updateAutoPassPrompt() {
+        if (mayAutoPass()) {
+            //allow user to cancel auto-pass
+            InputBase.cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
+            PhaseType phase = getAutoPassUntilPhase();
+            GuiBase.getInterface().showPromptMessage("Yielding until " + (phase == PhaseType.CLEANUP ? "end of turn" : phase.nameForUi.toString()) +
+                    ".\nYou may cancel this yield to take an action.");
+            ButtonUtil.update(false, true, false);
+        }
+    }
+
+    @Override
+    public void autoPassUntil(PhaseType phase) {
+        super.autoPassUntil(phase);
+        updateAutoPassPrompt();
     }
 
     @Override
@@ -638,7 +657,8 @@ public class PlayerControllerHuman extends PlayerController {
         if (mayAutoPass()) {
             if (!game.getStack().isEmpty()) {
                 try {
-                    Thread.sleep(400); //pause briefly while spells and abilities on the stack resolve
+                    //pause briefly while spells and abilities on the stack resolve
+                    Thread.sleep(FControlGamePlayback.resolveDelay);
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();

@@ -23,10 +23,10 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) { ev.visit(this); }
 
-    private int phasesDelay = 200;
-    private int combatDelay = 400;
-    private int castDelay = 400;
-    private int resolveDelay = 400;
+    public static final int phasesDelay = 200;
+    public static final int combatDelay = 400;
+    public static final int castDelay = 400;
+    public static final int resolveDelay = 400;
 
     private boolean fasterPlayback = false;
 

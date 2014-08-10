@@ -2,6 +2,7 @@ package forge.match.input;
 
 import forge.FThreads;
 import forge.GuiBase;
+import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -73,5 +74,10 @@ public class InputLockUI implements Input  {
     }
     @Override
     public void selectButtonCancel() {
+        //cancel auto pass for all players
+        Game game = GuiBase.getInterface().getGame();
+        for (Player player : game.getPlayers()) {
+            player.getController().autoPassCancel();
+        }
     }
 }

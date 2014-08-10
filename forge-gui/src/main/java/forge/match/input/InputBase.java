@@ -45,25 +45,31 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected final void setFinished() {
         finished = true;
 
-        //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
-        awaitNextInputTask = new TimerTask() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized (awaitNextInputTimer) {
-                            if (awaitNextInputTask != null) {
-                                GuiBase.getInterface().showPromptMessage("Waiting for opponent...");
-                                ButtonUtil.update(false, false, false);
-                                awaitNextInputTask = null;
+        if (allowAwaitNextInput()) {
+            //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
+            awaitNextInputTask = new TimerTask() {
+                @Override
+                public void run() {
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            synchronized (awaitNextInputTimer) {
+                                if (awaitNextInputTask != null) {
+                                    GuiBase.getInterface().showPromptMessage("Waiting for opponent...");
+                                    ButtonUtil.update(false, false, false);
+                                    awaitNextInputTask = null;
+                                }
                             }
                         }
-                    }
-                });
-            }
-        };
-        awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+                    });
+                }
+            };
+            awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+        }
+    }
+
+    protected boolean allowAwaitNextInput() {
+        return true;
     }
 
     private static final Timer awaitNextInputTimer = new Timer();
