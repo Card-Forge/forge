@@ -24,21 +24,30 @@ import forge.util.Callback;
 public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;
     private final FButton btnOK;
+    private final Callback<List<PaperCard>> callback;
 
-    public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback) {
+    public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback0) {
         super("Update main deck from sideboard");
 
+        callback = callback0;
         tabs = add(new SideboardTabs(sideboard, main));
         btnOK = add(new FButton("OK"));
         btnOK.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
-                callback.run(tabs.getMainDeckPage().cardManager.getPool().toFlatList());
             }
         });
         if (sideboard.isEmpty()) { //show main deck by default if sideboard is empty
             tabs.setSelectedPage(tabs.getMainDeckPage());
+        }
+    }
+
+    @Override
+    public void setVisible(boolean visible0) {
+        super.setVisible(visible0);
+        if (!visible0) { //do callback when hidden to ensure you don't get stuck if Back pressed
+            callback.run(tabs.getMainDeckPage().cardManager.getPool().toFlatList());
         }
     }
 
