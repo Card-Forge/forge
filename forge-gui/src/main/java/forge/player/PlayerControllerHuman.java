@@ -636,6 +636,14 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public SpellAbility chooseSpellAbilityToPlay() {
         if (mayAutoPass()) {
+            if (!game.getStack().isEmpty()) {
+                try {
+                    Thread.sleep(400); //pause briefly while spells and abilities on the stack resolve
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             return null; //avoid prompting for input if current phase is set to be auto-passed
         }
 
