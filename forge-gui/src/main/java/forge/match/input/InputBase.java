@@ -46,25 +46,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
         finished = true;
 
         if (allowAwaitNextInput()) {
-            //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
-            awaitNextInputTask = new TimerTask() {
-                @Override
-                public void run() {
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            synchronized (awaitNextInputTimer) {
-                                if (awaitNextInputTask != null) {
-                                    GuiBase.getInterface().showPromptMessage("Waiting for opponent...");
-                                    ButtonUtil.update(false, false, false);
-                                    awaitNextInputTask = null;
-                                }
-                            }
-                        }
-                    });
-                }
-            };
-            awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+            awaitNextInput();
         }
     }
 
@@ -74,6 +56,28 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     private static final Timer awaitNextInputTimer = new Timer();
     private static TimerTask awaitNextInputTask;
+
+    public static void awaitNextInput() {
+        //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
+        awaitNextInputTask = new TimerTask() {
+            @Override
+            public void run() {
+                FThreads.invokeInEdtLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (awaitNextInputTimer) {
+                            if (awaitNextInputTask != null) {
+                                GuiBase.getInterface().showPromptMessage("Waiting for opponent...");
+                                ButtonUtil.update(false, false, false);
+                                awaitNextInputTask = null;
+                            }
+                        }
+                    }
+                });
+            }
+        };
+        awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+    }
 
     public static void cancelAwaitNextInput() {
         synchronized (awaitNextInputTimer) { //ensure task doesn't reset awaitNextInputTask during this block

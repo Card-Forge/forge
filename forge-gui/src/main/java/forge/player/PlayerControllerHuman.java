@@ -653,6 +653,17 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
+    public void autoPassCancel() {
+        if (getAutoPassUntilPhase() == null) { return; }
+        super.autoPassCancel();
+
+        //prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
+        GuiBase.getInterface().showPromptMessage("");
+        ButtonUtil.update(false, false, false);
+        InputBase.awaitNextInput();
+    }
+
+    @Override
     public SpellAbility chooseSpellAbilityToPlay() {
         if (mayAutoPass()) {
             //avoid prompting for input if current phase is set to be auto-passed
