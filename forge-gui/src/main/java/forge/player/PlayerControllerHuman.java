@@ -403,13 +403,19 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void reveal(Collection<Card> cards, ZoneType zone, Player owner, String message) {
         if (StringUtils.isBlank(message)) {
-            message = "Looking at cards in {player's} " + zone.name();
+            message = "Looking at cards in {player's} " + zone.name().toLowerCase();
+        }
+        else {
+            message += "{player's} " + zone.name().toLowerCase();
         }
         String fm = formatMessage(message, owner);
-        if (!cards.isEmpty())
+        if (!cards.isEmpty()) {
             SGuiChoose.reveal(fm, cards);
-        else
-            SGuiDialog.message("There are no cards in the named location", fm);
+        }
+        else {
+            SGuiDialog.message(formatMessage("There are no cards in {player's} " +
+                    zone.name().toLowerCase(), owner), fm);
+        }
     }
 
     @Override
