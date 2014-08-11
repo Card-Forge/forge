@@ -24,6 +24,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        final Long timestamp = Long.valueOf(game.getNextTimestamp());
         final boolean permanent = sa.hasParam("Permanent");
 
         final String changedColorWordOriginal, changedColorWordNew;
@@ -97,19 +98,8 @@ public class ChangeTextEffect extends SpellAbilityEffect {
 
         final List<Card> tgts = getTargetCards(sa);
         for (final Card c : tgts) {
-            final Long colorTimestamp;
-            if (changedColorWordNew != null) {
-                colorTimestamp = c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew);
-            } else {
-                colorTimestamp = null;
-            }
-
-            final Long typeTimestamp;
-            if (changedTypeWordNew != null) {
-                typeTimestamp = c.addChangedTextTypeWord(changedTypeWordOriginal, changedTypeWordNew);
-            } else {
-                typeTimestamp = null;
-            }
+            c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp);
+            c.addChangedTextTypeWord(changedTypeWordOriginal, changedTypeWordNew, timestamp);
 
             if (!permanent) {
                 final GameCommand revert = new GameCommand() {
@@ -117,10 +107,10 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         if (changedColorWordNew != null) {
-                            c.removeChangedTextColorWord(colorTimestamp);
+                            c.removeChangedTextColorWord(timestamp);
                         }
                         if (changedTypeWordNew != null) {
-                            c.removeChangedTextTypeWord(typeTimestamp);
+                            c.removeChangedTextTypeWord(timestamp);
                         }
                     }
                 };

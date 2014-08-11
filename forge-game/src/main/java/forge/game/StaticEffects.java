@@ -87,6 +87,8 @@ public class StaticEffects implements IGameStateObject {
         final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
         final Map<String, String> params = se.getParams();
 
+        String changeColorWordsTo = null;
+
         int powerBonus = 0;
         String addP = "";
         int toughnessBonus = 0;
@@ -96,6 +98,10 @@ public class StaticEffects implements IGameStateObject {
         String[] addKeywords = null;
         String[] addHiddenKeywords = null;
         String addColors = null;
+
+        if (params.containsKey("ChangeColorWordsTo")) {
+            changeColorWordsTo = params.get("ChangeColorWordsTo");
+        }
 
         if (params.containsKey("SetPower") || params.containsKey("SetToughness")) {
             setPT = true;
@@ -186,6 +192,11 @@ public class StaticEffects implements IGameStateObject {
             // Gain control
             if (params.containsKey("GainControl")) {
                 affectedCard.removeTempController(se.getTimestamp());
+            }
+
+            // Revert changed color words
+            if (changeColorWordsTo != null) {
+                affectedCard.removeChangedTextColorWord(se.getTimestamp());
             }
 
             // remove set P/T

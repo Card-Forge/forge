@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
@@ -79,6 +80,8 @@ public class StaticAbilityContinuous {
         se.setTimestamp(hostCard.getTimestamp());
         game.getStaticEffects().addStaticEffect(se);
 
+        String changeColorWordsTo = null;
+
         String addP = "";
         int powerBonus = 0;
         String addT = "";
@@ -111,6 +114,10 @@ public class StaticAbilityContinuous {
         if (params.containsKey("GlobalRule")) {
             final StaticEffects effects = game.getStaticEffects();
             effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
+        }
+
+        if (params.containsKey("ChangeColorWordsTo")) {
+            changeColorWordsTo = params.get("ChangeColorWordsTo");
         }
 
         if (params.containsKey("SetPower")) {
@@ -365,6 +372,25 @@ public class StaticAbilityContinuous {
             // Gain control
             if (params.containsKey("GainControl")) {
                 affectedCard.addTempController(hostCard.getController(), hostCard.getTimestamp());
+            }
+
+            // Change color words
+            if (changeColorWordsTo != null) {
+                final byte color;
+                if (changeColorWordsTo.equals("ChosenColor")) {
+                    if (hostCard.getChosenColor().size() > 0) {
+                        color = MagicColor.fromName(hostCard.getChosenColor().get(0));
+                    } else {
+                        color = 0;
+                    }
+                } else {
+                    color = MagicColor.fromName(changeColorWordsTo);
+                }
+
+                if (color != 0) {
+                    final String colorName = MagicColor.toLongString(color);
+                    affectedCard.addChangedTextColorWord("Any", colorName, se.getTimestamp());
+                }
             }
 
             // set P/T

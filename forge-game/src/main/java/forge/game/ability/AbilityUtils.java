@@ -1517,7 +1517,14 @@ public class AbilityUtils {
     public static final String applyTextChangeEffects(final String def, final Card hostCard) {
         String replaced = def;
         for (final Entry<String, String> e : hostCard.getChangedTextColorWords().entrySet()) {
-            replaced = replaced.replace(e.getKey(), e.getValue());
+            if (e.getKey().equals("Any")) {
+                for (final byte c : MagicColor.WUBRG) {
+                    replaced = replaced.replace(MagicColor.toLongString(c), e.getValue())
+                            .replace(StringUtils.capitalize(MagicColor.toLongString(c)), StringUtils.capitalize(e.getValue()));
+                }
+            } else {
+                replaced = replaced.replace(e.getKey(), e.getValue());
+            }
         }
         for (final Entry<String, String> e : hostCard.getChangedTextTypeWords().entrySet()) {
             replaced = replaced.replace(e.getKey(), e.getValue());

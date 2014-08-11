@@ -4544,14 +4544,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @throws RuntimeException if either of the strings is not a valid Magic
      *  color.
      */
-    public final Long addChangedTextColorWord(final String originalWord, final String newWord) {
+    public final void addChangedTextColorWord(final String originalWord, final String newWord, final Long timestamp) {
         if (MagicColor.fromName(newWord) == 0) {
             throw new RuntimeException("Not a color: " + newWord);
         }
-        final Long timestamp = this.changedTextColors.add(this.getGame().getNextTimestamp(), originalWord, newWord);
+        this.changedTextColors.add(timestamp, StringUtils.capitalize(originalWord), StringUtils.capitalize(newWord));
         this.updateKeywordsChangedText(originalWord, newWord, timestamp);
         this.updateChangedText();
-        return timestamp;
     }
 
     public final void removeChangedTextColorWord(final Long timestamp) {
@@ -4566,14 +4565,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param originalWord the original type word.
      * @param newWord the new type word.
      */
-    public final Long addChangedTextTypeWord(final String originalWord, final String newWord) {
-        final Long timestamp = this.changedTextTypes.add(this.getGame().getNextTimestamp(), originalWord, newWord);
+    public final void addChangedTextTypeWord(final String originalWord, final String newWord, final Long timestamp) {
+        this.changedTextTypes.add(timestamp, originalWord, newWord);
         if (this.getType().contains(originalWord)) {
             this.addChangedCardTypes(Lists.newArrayList(newWord), Lists.newArrayList(originalWord), false, false, false, false, timestamp);
         }
         this.updateKeywordsChangedText(originalWord, newWord, timestamp);
         this.updateChangedText();
-        return timestamp;
     }
 
     public final void removeChangedTextTypeWord(final Long timestamp) {

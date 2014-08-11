@@ -53,7 +53,9 @@ public final class CardChangedWords {
                 resultCache.put(ccw.getOriginalWord(), ccw.getNewWord());
             }
             for (final String key : ImmutableList.copyOf(resultCache.keySet())) {
-                resultCache.put(key.toLowerCase(), resultCache.get(key).toLowerCase());
+                if (!key.equals("Any")) {
+                    resultCache.put(key.toLowerCase(), resultCache.get(key).toLowerCase());
+                }
             }
             isDirty = false;
         }

@@ -111,7 +111,7 @@ public class StaticAbility extends CardTraitBase {
             return 2;
         }
 
-        if (this.mapParams.containsKey("ChangeText")) {
+        if (this.mapParams.containsKey("ChangeColorWordsTo")) {
             return 3;
         }
 
