@@ -1,0 +1,10 @@
+Name:Mind Bend
+ManaCost:U
+Types:Instant
+A:SP$ GenericChoice | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent | Choices$ ChangeColor,ChangeType | Defined$ You | SpellDescription$ Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another. (For example, you may change "nonblack creature" to "nongreen creature" or "forestwalk" to "islandwalk." This effect lasts indefinitely.)
+SVar:ChangeColor:DB$ ChangeText | Defined$ ParentTarget | ChangeColorWord$ Choose Choose | Permanent$ True | SpellDescription$ Change color
+SVar:ChangeType:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | Permanent$ True | SpellDescription$ Change type
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_bend.jpg
+Oracle:Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another. (For example, you may change "nonblack creature" to "nongreen creature" or "forestwalk" to "islandwalk." This effect lasts indefinitely.)

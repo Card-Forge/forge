@@ -1,0 +1,11 @@
+Name:Whim of Volrath
+ManaCost:U
+Types:Instant
+K:Buyback 2
+A:SP$ GenericChoice | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent | Choices$ ChangeColor,ChangeType | Defined$ You | StackDescription$ Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. | SpellDescription$ Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. (For example, you may change "nonred creature" to "nongreen creature" or "plainswalk" to "swampwalk.")
+SVar:ChangeColor:DB$ ChangeText | Defined$ ParentTarget | ChangeColorWord$ Choose Choose | SpellDescription$ Change color
+SVar:ChangeType:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | SpellDescription$ Change type
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whim_of_volrath.jpg
+Oracle:Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nChange the text of target permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. (For example, you may change "nonred creature" to "nongreen creature" or "plainswalk" to "swampwalk.")

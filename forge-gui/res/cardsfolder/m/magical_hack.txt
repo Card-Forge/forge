@@ -1,0 +1,8 @@
+Name:Magical Hack
+ManaCost:U
+Types:Instant
+A:SP$ ChangeText | Cost$ U | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | Permanent$ True | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one basic land type with another. (For example, you may change "swampwalk" to "plainswalk." This effect lasts indefinitely.)
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magical_hack.jpg
+Oracle:Change the text of target spell or permanent by replacing all instances of one basic land type with another. (For example, you may change "swampwalk" to "plainswalk." This effect lasts indefinitely.)
