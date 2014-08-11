@@ -2078,6 +2078,7 @@ forge-gui/res/cardsfolder/b/balduvian_frostwaker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_horde.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_hydra.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_rage.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/balduvian_shaman.txt -text
 forge-gui/res/cardsfolder/b/balduvian_trading_post.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balduvian_war_makers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/balefire_dragon.txt -text
