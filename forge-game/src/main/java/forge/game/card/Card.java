@@ -20,7 +20,9 @@ package forge.game.card;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -117,6 +119,12 @@ public class Card extends GameEntity implements Comparable<Card> {
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private Map<Long, CardType> changedCardTypes = new ConcurrentSkipListMap<Long, CardType>();
     private Map<Long, CardKeywords> changedCardKeywords = new ConcurrentSkipListMap<Long, CardKeywords>();
+
+    // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
+    private final CardChangedWords changedTextColors = new CardChangedWords();
+    private final CardChangedWords changedTextTypes = new CardChangedWords();
+    /** List of the keywords that have been added by text changes. */
+    private final List<String> keywordsGrantedByTextChanges = Lists.newArrayList();
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private final MapOfLists<GameEntity, Object> rememberMap = new HashMapOfLists<GameEntity, Object>(CollectionSuppliers.<Object>arrayLists());
@@ -2389,6 +2397,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        for (final Entry<String, String> e : Sets.union(this.changedTextColors.toMap().entrySet(),
+                this.changedTextTypes.toMap().entrySet())) {
+            // only the upper case ones, to avoid duplicity
+            if (Character.isUpperCase(e.getKey().charAt(0))) {
+                sb.append("Text changed: all instances of ");
+                sb.append(e.getKey());
+                sb.append(" are replaced by ");
+                sb.append(e.getValue());
+                sb.append(".\r\n");
+            }
+        }
+
         // NOTE:
         if (sb.toString().contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
@@ -2594,7 +2614,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return Collections.unmodifiableList(this.getCharacteristics().getManaAbility());
     }
 
-
     public final boolean canProduceSameManaTypeWith(final Card c) {
         final List<SpellAbility> manaAb = this.getManaAbility();
         if (manaAb.isEmpty()) {
@@ -2691,7 +2710,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void addSpellAbility(final SpellAbility a) {
-
         a.setHostCard(this);
         if (a.isManaAbility()) {
             this.getCharacteristics().getManaAbility().add(a);
@@ -2699,7 +2717,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.getCharacteristics().getSpellAbility().add(a);
         }
     }
-
 
     /**
      * <p>
@@ -2726,7 +2743,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SpellAbility> getSpellAbilities() {
+    public final List<SpellAbility> getSpellAbilities() {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(this.getManaAbility());
         res.addAll(this.getCharacteristics().getSpellAbility());
         return res;
@@ -4483,9 +4500,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @param timestamp
      *            the timestamp
+     * @return the removed {@link CardKeywords}.
      */
-    public final void removeChangedCardKeywords(final long timestamp) {
-        changedCardKeywords.remove(Long.valueOf(timestamp));
+    public final CardKeywords removeChangedCardKeywords(final long timestamp) {
+        return changedCardKeywords.remove(Long.valueOf(timestamp));
     }
 
     // Hidden keywords will be left out
@@ -4519,6 +4537,97 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * Replace all instances of one color word in this card's text by another.
+     * @param originalWord the original color word.
+     * @param newWord the new color word.
+     * @return the timestamp.
+     * @throws RuntimeException if either of the strings is not a valid Magic
+     *  color.
+     */
+    public final Long addChangedTextColorWord(final String originalWord, final String newWord) {
+        if (MagicColor.fromName(newWord) == 0) {
+            throw new RuntimeException("Not a color: " + newWord);
+        }
+        final Long timestamp = this.changedTextColors.add(this.getGame().getNextTimestamp(), originalWord, newWord);
+        this.updateKeywordsChangedText(originalWord, newWord, timestamp);
+        this.updateChangedText();
+        return timestamp;
+    }
+
+    public final void removeChangedTextColorWord(final Long timestamp) {
+        this.changedTextColors.remove(timestamp);
+        this.updateKeywordsOnRemoveChangedText(
+                this.removeChangedCardKeywords(timestamp.longValue()));
+        this.updateChangedText();
+    }
+
+    /**
+     * Replace all instances of one type in this card's text by another.
+     * @param originalWord the original type word.
+     * @param newWord the new type word.
+     */
+    public final Long addChangedTextTypeWord(final String originalWord, final String newWord) {
+        final Long timestamp = this.changedTextTypes.add(this.getGame().getNextTimestamp(), originalWord, newWord);
+        if (this.getType().contains(originalWord)) {
+            this.addChangedCardTypes(Lists.newArrayList(newWord), Lists.newArrayList(originalWord), false, false, false, false, timestamp);
+        }
+        this.updateKeywordsChangedText(originalWord, newWord, timestamp);
+        this.updateChangedText();
+        return timestamp;
+    }
+
+    public final void removeChangedTextTypeWord(final Long timestamp) {
+        this.changedTextTypes.remove(timestamp);
+        this.removeChangedCardTypes(timestamp);
+        this.updateKeywordsOnRemoveChangedText(
+                this.removeChangedCardKeywords(timestamp.longValue()));
+        this.updateChangedText();
+    }
+
+    private final void updateKeywordsChangedText(final String originalWord, final String newWord, final Long timestamp) {
+        final List<String> addKeywords = Lists.newArrayList(),
+                removeKeywords = Lists.newArrayList(this.keywordsGrantedByTextChanges);
+
+        for (final String kw : this.getIntrinsicKeyword()) {
+            final String newKw = AbilityUtils.applyTextChangeEffects(kw, this);
+            if (!newKw.equals(kw)) {
+                addKeywords.add(newKw);
+                removeKeywords.add(kw);
+                this.keywordsGrantedByTextChanges.add(newKw);
+            }
+        }
+        this.addChangedCardKeywords(addKeywords, removeKeywords, false, timestamp.longValue());
+    }
+
+    private final void updateKeywordsOnRemoveChangedText(final CardKeywords k) {
+        this.keywordsGrantedByTextChanges.removeAll(k.getKeywords());
+    }
+
+    /**
+     * Update the changed text of the intrinsic spell abilities and keywords.
+     */
+    private final void updateChangedText() {
+        final List<CardTraitBase> allAbs = Lists.newLinkedList();
+        allAbs.addAll(this.getSpellAbilities());
+        allAbs.addAll(this.getStaticAbilities());
+        allAbs.addAll(this.getReplacementEffects());
+        allAbs.addAll(this.getTriggers());
+        for (final CardTraitBase ctb : allAbs) {
+            if (ctb.isIntrinsic()) {
+                ctb.changeText();
+            }
+        }
+    }
+
+    public final ImmutableMap<String, String> getChangedTextColorWords() {
+        return ImmutableMap.copyOf(changedTextColors.toMap());
+    }
+
+    public final ImmutableMap<String, String> getChangedTextTypeWords() {
+        return ImmutableMap.copyOf(changedTextTypes.toMap());
+    }
+
+    /**
      * <p>
      * getIntrinsicAbilities.
      * </p>
@@ -4541,19 +4650,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         // Most of other code checks for contains, or creates copy by itself
         return this.getCharacteristics().getIntrinsicKeyword();
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>intrinsicKeyword</code>.
-     * </p>
-     * 
-     * @param a
-     *            a {@link java.util.ArrayList} object.
-     */
-    public final void setIntrinsicKeyword(final List<String> a) {
-        this.getCharacteristics().setIntrinsicKeyword(new ArrayList<String>(a));
-    }
-
 
     /**
      * <p>

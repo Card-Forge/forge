@@ -192,6 +192,10 @@ public class ReplacementHandler implements IGameStateObject {
             } while(tailend != null);
         }
 
+        if (effectSA.isIntrinsic()) {
+            effectSA.changeText();
+        }
+
         // Decider gets to choose whether or not to apply the replacement.
         if (replacementEffect.getMapParams().containsKey("Optional")) {
             Player optDecider = decider;

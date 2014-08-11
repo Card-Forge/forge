@@ -31,6 +31,7 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
@@ -288,11 +289,11 @@ public class CardFactory {
             card.setState(state);
             CardFactoryUtil.addAbilityFactoryAbilities(card);
             for (String stAb : card.getStaticAbilityStrings()) {
-                card.addStaticAbility(stAb);
+                final StaticAbility s = card.addStaticAbility(stAb);
+                s.setIntrinsic(true);
             }
 
-
-            if ( state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit )
+            if (state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit)
             {
                 CardCharacteristics original = card.getState(CardCharacteristicName.Original);
                 original.getSpellAbility().addAll(card.getCharacteristics().getSpellAbility());

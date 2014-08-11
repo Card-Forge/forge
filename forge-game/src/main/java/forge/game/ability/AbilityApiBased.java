@@ -20,6 +20,7 @@ public class AbilityApiBased extends AbilityActivated {
 
     public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
+        originalMapParams.putAll(params0);
         mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();

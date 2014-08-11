@@ -307,6 +307,7 @@ forge-game/src/main/java/forge/game/ability/effects/BecomesBlockedEffect.java -t
 forge-game/src/main/java/forge/game/ability/effects/BidLifeEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/BondEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeTargetsEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/ChangeTextEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeZoneAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ChangeZoneEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/CharmEffect.java -text
@@ -422,6 +423,8 @@ forge-game/src/main/java/forge/game/ability/effects/VoteEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/ZoneExchangeEffect.java -text
 forge-game/src/main/java/forge/game/ability/package-info.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/Card.java svneol=native#text/plain
+forge-game/src/main/java/forge/game/card/CardChangedWord.java -text
+forge-game/src/main/java/forge/game/card/CardChangedWords.java -text
 forge-game/src/main/java/forge/game/card/CardCharacteristics.java -text
 forge-game/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardDamageHistory.java -text

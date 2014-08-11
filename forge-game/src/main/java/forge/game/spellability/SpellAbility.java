@@ -1773,4 +1773,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setChosenList(List<AbilitySub> choices) {
         this.chosenList = choices;
     }
+
+    @Override
+    public void changeText() {
+        super.changeText();
+
+        if (this.targetRestricions != null) {
+            this.targetRestricions.applyTargetTextChanges(this);
+        }
+
+        if (this.subAbility != null) {
+            this.subAbility.changeText();
+        }
+    }
 }

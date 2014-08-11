@@ -681,8 +681,8 @@ public class CardFactoryUtil {
 
         return doXMath(n, m, source);
     }
-    
-    public static int playerXProperty(Player player, String s, Card source) {
+
+    public static int playerXProperty(final Player player, final String s, final Card source) {
         final String[] l = s.split("/");
         final String m = extractOperators(s);
         
@@ -824,7 +824,7 @@ public class CardFactoryUtil {
         final Player cc = c.getController();
         final Game game = c.getGame();
         final Player activePlayer = game.getPhaseHandler().getPlayerTurn();
-        
+
         final String[] l = expression.split("/");
         final String m = extractOperators(expression);
 
@@ -845,7 +845,7 @@ public class CardFactoryUtil {
         if (l[0].startsWith("SVar$")) {
             return doXMath(xCount(c, c.getSVar(l[0].substring(5))), m, c);
         }
-        
+
         if (l[0].startsWith("Controller$"))
             return playerXProperty(cc, l[0].substring(11), c);
         
@@ -1975,7 +1975,9 @@ public class CardFactoryUtil {
         // **************************************************
         // AbilityFactory cards
         for (String rawAbility : card.getUnparsedAbilities()) {
-            card.addSpellAbility(AbilityFactory.getAbility(rawAbility, card));
+            final SpellAbility intrinsicAbility = AbilityFactory.getAbility(rawAbility, card);
+            card.addSpellAbility(intrinsicAbility);
+            intrinsicAbility.setIntrinsic(true);
         }
     }
     /*

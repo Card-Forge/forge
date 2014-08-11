@@ -481,7 +481,7 @@ public class AiController {
     
                 // don't play the land if it has cycling and enough lands are
                 // available
-                final ArrayList<SpellAbility> spellAbilities = c.getSpellAbilities();
+                final List<SpellAbility> spellAbilities = c.getSpellAbilities();
     
                 final List<Card> hand = player.getCardsIn(ZoneType.Hand);
                 List<Card> lands = player.getCardsIn(ZoneType.Battlefield);

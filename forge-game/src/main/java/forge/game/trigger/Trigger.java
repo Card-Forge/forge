@@ -124,6 +124,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.intrinsic = intrinsic;
 
         this.setRunParams(new HashMap<String, Object>());
+        this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
         this.setHostCard(host);
     }
@@ -441,8 +442,8 @@ public abstract class Trigger extends TriggerReplacementBase {
     
 
     public final Trigger getCopyForHostCard(Card newHost) {
-        TriggerType tt = TriggerType.getTypeFor(this);
-        Trigger copy = tt.createTrigger(mapParams, newHost, intrinsic); 
+        final TriggerType tt = TriggerType.getTypeFor(this);
+        final Trigger copy = tt.createTrigger(originalMapParams, newHost, intrinsic); 
 
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());

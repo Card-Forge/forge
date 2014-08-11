@@ -390,6 +390,10 @@ public class TriggerHandler implements IGameStateObject {
             host.addRemembered(sa.getActivatingPlayer());
         }
 
+        if (regtrig.isIntrinsic()) {
+            sa.changeText();
+        }
+
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);

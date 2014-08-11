@@ -111,6 +111,10 @@ public class StaticAbility extends CardTraitBase {
             return 2;
         }
 
+        if (this.mapParams.containsKey("ChangeText")) {
+            return 3;
+        }
+
         if (this.mapParams.containsKey("AddType") || this.mapParams.containsKey("RemoveType")
                 || this.mapParams.containsKey("RemoveCardTypes") || this.mapParams.containsKey("RemoveSubTypes")
                 || this.mapParams.containsKey("RemoveSuperTypes") || this.mapParams.containsKey("RemoveCreatureTypes")) {
@@ -170,7 +174,9 @@ public class StaticAbility extends CardTraitBase {
      *            the host
      */
     public StaticAbility(final String params, final Card host) {
-        this.mapParams.putAll(this.parseParams(params, host));
+        final Map<String, String> parsedParams = this.parseParams(params, host);
+        this.originalMapParams.putAll(parsedParams);
+        this.mapParams.putAll(parsedParams);
         this.hostCard = host;
         this.layer = this.generateLayer();
     }
@@ -183,10 +189,9 @@ public class StaticAbility extends CardTraitBase {
      * @param host
      *            the host
      */
-    public StaticAbility(final HashMap<String, String> params, final Card host) {
-        for (final Map.Entry<String, String> entry : params.entrySet()) {
-            this.mapParams.put(entry.getKey(), entry.getValue());
-        }
+    public StaticAbility(final Map<String, String> params, final Card host) {
+        this.originalMapParams.putAll(params);
+        this.mapParams.putAll(params);
         this.layer = this.generateLayer();
         this.hostCard = host;
     }

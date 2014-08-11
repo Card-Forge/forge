@@ -25,6 +25,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -79,7 +80,7 @@ public class AbilityUtils {
     @SuppressWarnings("unchecked")
     public static List<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         final List<Card> cards = new ArrayList<Card>();
-        final String defined = (def == null) ? "Self" : def; // default to Self
+        final String defined = (def == null) ? "Self" : applyTextChangeEffects(def, hostCard); // default to Self
         final Game game = hostCard.getGame();
 
         Card c = null;
@@ -351,34 +352,37 @@ public class AbilityUtils {
         // return result soon for plain numbers
         if (StringUtils.isNumeric(amount)) { return Integer.parseInt(amount) * multiplier; }
 
+        // modify amount string for text changes
+        final String amount2 = AbilityUtils.applyTextChangeEffects(amount, card);
+
         // Try to fetch variable, try ability first, then card.
         String svarval = null;
-        if (amount.indexOf('$') > 0) { // when there is a dollar sign, it's not a reference, it's a raw value!
-            svarval = amount;
+        if (amount2.indexOf('$') > 0) { // when there is a dollar sign, it's not a reference, it's a raw value!
+            svarval = amount2;
         }
         else if (ability != null) {
-            svarval = ability.getSVar(amount);
+            svarval = ability.getSVar(amount2);
         }
         if (StringUtils.isBlank(svarval)) {
             if (ability != null) {
-                System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
+                System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount2, card.getName(), ability);
             }
-            svarval = card.getSVar(amount);
+            svarval = card.getSVar(amount2);
         }
 
         if (StringUtils.isBlank(svarval)) {
             // Some variables may be not chosen yet at this moment
             // So return 0 and don't issue an error.
-            if (amount.equals("ChosenX")) {
+            if (amount2.equals("ChosenX")) {
                 // isn't made yet
                 return 0;
             }
             // cost hasn't been paid yet
-            if (amount.startsWith("Cost")) {
+            if (amount2.startsWith("Cost")) {
                 return 0;
             }
             // Nothing to do here if value is missing or blank
-            System.err.printf("SVar '%s' not defined in Card (%s)%n", amount, card.getName());
+            System.err.printf("SVar '%s' not defined in Card (%s)%n", amount2, card.getName());
             return 0;
         }
 
@@ -394,6 +398,9 @@ public class AbilityUtils {
         if (calcX.length == 1 || calcX[1].equals("none")) {
             return 0;
         }
+
+        // modify amount string for text changes
+        calcX[1] = AbilityUtils.applyTextChangeEffects(calcX[1], card);
 
         if (calcX[0].startsWith("Count")) {
             return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
@@ -806,7 +813,7 @@ public class AbilityUtils {
      */
     public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         final List<Player> players = new ArrayList<Player>();
-        final String defined = (def == null) ? "You" : def;
+        final String defined = (def == null) ? "You" : applyTextChangeEffects(def, card);
         final Game game = card == null ? null : card.getGame();
 
         if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
@@ -1125,7 +1132,7 @@ public class AbilityUtils {
     public static ArrayList<SpellAbility> getDefinedSpellAbilities(final Card card, final String def,
             final SpellAbility sa) {
         final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-        final String defined = (def == null) ? "Self" : def; // default to Self
+        final String defined = (def == null) ? "Self" : applyTextChangeEffects(def, card); // default to Self
         final Game game = sa.getActivatingPlayer().getGame();
 
         SpellAbility s = null;
@@ -1398,9 +1405,9 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int xCount(final Card c, final String s, final SpellAbility sa) {
-
-        final String[] l = s.split("/");
-        final String expr = CardFactoryUtil.extractOperators(s);
+        final String s2 = AbilityUtils.applyTextChangeEffects(s, c);
+        final String[] l = s2.split("/");
+        final String expr = CardFactoryUtil.extractOperators(s2);
 
         final String[] sq;
         sq = l[0].split("\\.");
@@ -1459,7 +1466,7 @@ public class AbilityUtils {
                 }
             }
         }
-        return CardFactoryUtil.xCount(c, s);
+        return CardFactoryUtil.xCount(c, s2);
     }
 
     public static final void applyManaColorConversion(final Player p, final Map<String, String> params) {
@@ -1505,5 +1512,16 @@ public class AbilityUtils {
             }
         }
         return sas;
+    }
+
+    public static final String applyTextChangeEffects(final String def, final Card hostCard) {
+        String replaced = def;
+        for (final Entry<String, String> e : hostCard.getChangedTextColorWords().entrySet()) {
+            replaced = replaced.replace(e.getKey(), e.getValue());
+        }
+        for (final Entry<String, String> e : hostCard.getChangedTextTypeWords().entrySet()) {
+            replaced = replaced.replace(e.getKey(), e.getValue());
+        }
+        return replaced;
     }
 }

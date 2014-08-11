@@ -12,6 +12,8 @@ import forge.util.Expressions;
 
 import java.util.*;
 
+import com.google.common.collect.Maps;
+
 /** 
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  * 
@@ -22,7 +24,8 @@ public abstract class CardTraitBase extends GameObject {
     protected Card hostCard;
 
     /** The map params. */
-    protected final Map<String, String> mapParams = new HashMap<String, String>();
+    protected final Map<String, String> originalMapParams = Maps.newHashMap(),
+            mapParams = Maps.newHashMap();
 
     /** The is intrinsic. */
     protected boolean intrinsic;
@@ -64,11 +67,6 @@ public abstract class CardTraitBase extends GameObject {
      */
     public final Map<String, String> getMapParams() {
         return this.mapParams;
-    }
-
-    public final void setMapParams(Map<String,String> params) {
-        this.mapParams.clear();
-        this.mapParams.putAll(params);
     }
 
     /**
@@ -349,5 +347,16 @@ public abstract class CardTraitBase extends GameObject {
             }
         }
         return true;
+    }
+
+    public void changeText() {
+        for (final String key : this.mapParams.keySet()) {
+            // don't change literal SVar names!
+            if (!this.getHostCard().hasSVar(key)) {
+                final String value = this.originalMapParams.get(key),
+                        newValue = AbilityUtils.applyTextChangeEffects(value, this.getHostCard());
+                this.mapParams.put(key, newValue);
+            }
+        }
     }
 }

@@ -24,6 +24,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class TargetRestrictions {
 
     // What this Object is restricted to targeting
     private boolean tgtValid = false;
-    private String[] validTgts;
+    private String[] originalValidTgts,
+        validTgts;
     private String uiPrompt = "";
     private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
 
@@ -86,7 +88,8 @@ public class TargetRestrictions {
     public TargetRestrictions(final TargetRestrictions target) {
         this.tgtValid = true;
         this.uiPrompt = target.getVTSelection();
-        this.validTgts = target.getValidTgts();
+        this.originalValidTgts = target.getValidTgts();
+        this.validTgts = this.originalValidTgts.clone();
         this.minTargets = target.getMinTargets();
         this.maxTargets = target.getMaxTargets();
         this.tgtZone = target.getZone();
@@ -120,7 +123,8 @@ public class TargetRestrictions {
     public TargetRestrictions(final String prompt, final String[] valid, final String min, final String max) {
         this.tgtValid = true;
         this.uiPrompt = prompt;
-        this.validTgts = valid;
+        this.originalValidTgts = valid;
+        this.validTgts = this.originalValidTgts.clone();
         this.minTargets = min;
         this.maxTargets = max;
     }
@@ -418,7 +422,9 @@ public class TargetRestrictions {
                 return true;
             }
         }
-        
+
+        this.applyTargetTextChanges(sa);
+
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
             // Stack Zone targets are considered later
@@ -475,6 +481,8 @@ public class TargetRestrictions {
                 candidates.add(player);
             }
         }
+
+        this.applyTargetTextChanges(sa);
 
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
@@ -655,7 +663,7 @@ public class TargetRestrictions {
     public void setStillToDivide(final int remaining) {
         this.stillToDivide = remaining;
     }
-    
+
     public void calculateStillToDivide(String toDistribute, Card source, SpellAbility sa) {
         // Recalculate this value just in case it's variable
         if (!this.dividedAsYouChoose) {
@@ -696,6 +704,12 @@ public class TargetRestrictions {
 
     public HashMap<Object, Integer> getDividedMap() {
         return this.dividedMap;
+    }
+
+    public final void applyTargetTextChanges(final SpellAbility sa) {
+        for (int i = 0; i < validTgts.length; i++) {
+            validTgts[i] = AbilityUtils.applyTextChangeEffects(originalValidTgts[i], sa.getHostCard());
+        }
     }
 
 }

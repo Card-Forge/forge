@@ -178,4 +178,9 @@ public class TextUtil {
         }
         return builder.toString();
     }
+
+    public static String capitalize(final String s) {
+        return s.substring(0, 1).toUpperCase()
+                + s.substring(1);
+    }
 }

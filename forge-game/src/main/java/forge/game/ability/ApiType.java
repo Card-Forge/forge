@@ -25,9 +25,9 @@ public enum ApiType {
     BidLife (BidLifeEffect.class),
     Bond (BondEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
+    ChangeText (ChangeTextEffect.class),
     ChangeZone (ChangeZoneEffect.class),
     ChangeZoneAll (ChangeZoneAllEffect.class),
-
     Charm (CharmEffect.class),
     ChooseCard (ChooseCardEffect.class),
     ChooseColor (ChooseColorEffect.class),

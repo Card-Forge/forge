@@ -58,6 +58,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public ReplacementEffect(final Map<String, String> map, final Card host, final boolean intrinsic) {
         this.intrinsic = intrinsic;
+        originalMapParams.putAll(map);
         mapParams.putAll(map);
         this.setHostCard(host);
     }
