@@ -821,6 +821,9 @@ public class PlayerControllerAi extends PlayerController {
                 return ComputerUtilCard.getBestCreatureAI(player.getCardsIn(ZoneType.Library)).getName();
             } else if (logic.equals("RandomInComputerDeck")) {
                 return Aggregates.random(player.getCardsIn(ZoneType.Library)).getName();
+            } else if (logic.equals("MostProminentSpellInComputerDeck")) {
+                List<Card> cards = CardLists.getValidCards(player.getCardsIn(ZoneType.Library), "Card.Instant,Card.Sorcery", player, sa.getHostCard());
+                return ComputerUtilCard.getMostProminentCardName(cards);
             }
         } else {
             List<Card> list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponent());
