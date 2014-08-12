@@ -15,10 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.card;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /**
  * <p>
@@ -28,7 +30,7 @@ import java.util.List;
  * @author Forge
  * @version $Id$
  */
-public class CardKeywords {
+public class KeywordsChange {
     // takes care of individual card types
     private List<String> keywords = new ArrayList<String>();
     private List<String> removeKeywords = new ArrayList<String>();
@@ -47,9 +49,9 @@ public class CardKeywords {
      * @param stamp
      *            a long
      */
-    CardKeywords(final List<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
-        this.keywords = keywordList;
-        this.removeKeywords = removeKeywordList;
+    public KeywordsChange(final List<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
+        this.keywords = Lists.newArrayList(keywordList);
+        this.removeKeywords = Lists.newArrayList(removeKeywordList);
         this.removeAllKeywords = removeAll;
     }
 
@@ -81,5 +83,14 @@ public class CardKeywords {
      */
     public final boolean isRemoveAllKeywords() {
         return this.removeAllKeywords;
+    }
+
+    /**
+     * @return whether this KeywordsChange doesn't have any effect.
+     */
+    public final boolean isEmpty() {
+        return !this.removeAllKeywords
+                && this.keywords.isEmpty()
+                && this.removeKeywords.isEmpty();
     }
 }

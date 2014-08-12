@@ -95,7 +95,6 @@ public class StaticEffects implements IGameStateObject {
         String addT = "";
         int keywordMultiplier = 1;
         boolean setPT = false;
-        String[] addKeywords = null;
         String[] addHiddenKeywords = null;
         String addColors = null;
 
@@ -172,19 +171,7 @@ public class StaticEffects implements IGameStateObject {
         for (final Player p : affectedPlayers) {
             p.setUnlimitedHandSize(false);
             p.setMaxHandSize(p.getStartingHandSize());
-
-            if (params.containsKey("AddKeyword")) {
-                addKeywords = params.get("AddKeyword").split(" & ");
-            }
-
-            // add keywords
-            if (addKeywords != null) {
-                for (final String keyword : addKeywords) {
-                    for (int i = 0; i < keywordMultiplier; i++) {
-                        p.removeKeyword(keyword);
-                    }
-                }
-            }
+            p.removeChangedKeywords(se.getTimestamp());
         }
 
         // modify the affected card

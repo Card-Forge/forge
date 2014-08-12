@@ -118,7 +118,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // changes by AF animate and continuous static effects - timestamp is the key of maps
     private Map<Long, CardType> changedCardTypes = new ConcurrentSkipListMap<Long, CardType>();
-    private Map<Long, CardKeywords> changedCardKeywords = new ConcurrentSkipListMap<Long, CardKeywords>();
+    private Map<Long, KeywordsChange> changedCardKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
 
     // changes that say "replace each instance of one [color,type] by another - timestamp is the key of maps
     private final CardChangedWords changedTextColors = new CardChangedWords();
@@ -2402,7 +2402,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             // only the upper case ones, to avoid duplicity
             if (Character.isUpperCase(e.getKey().charAt(0))) {
                 sb.append("Text changed: all instances of ");
-                sb.append(e.getKey());
+                if (e.getKey().equals("Any")) {
+                    if (this.changedTextColors.toMap().containsKey(e.getKey())) {
+                        sb.append("color words");
+                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
+                        sb.append("basic land types");
+                    } else {
+                        sb.append("creature types");
+                    }
+                } else {
+                    sb.append(e.getKey());
+                }
                 sb.append(" are replaced by ");
                 sb.append(e.getValue());
                 sb.append(".\r\n");
@@ -4457,15 +4467,15 @@ public class Card extends GameEntity implements Comparable<Card> {
             List<String> kws = keywords;
             List<String> rkws = removeKeywords;
             boolean remAll = removeAllKeywords;
-            CardKeywords cks = changedCardKeywords.get(timestamp);
+            final KeywordsChange cks = changedCardKeywords.get(timestamp);
             kws.addAll(cks.getKeywords());
             rkws.addAll(cks.getRemoveKeywords());
             remAll |= cks.isRemoveAllKeywords();
-            this.changedCardKeywords.put(timestamp, new CardKeywords(kws, rkws, remAll));
+            this.changedCardKeywords.put(timestamp, new KeywordsChange(kws, rkws, remAll));
             return;
         }
 
-        this.changedCardKeywords.put(timestamp, new CardKeywords(keywords, removeKeywords, removeAllKeywords));
+        this.changedCardKeywords.put(timestamp, new KeywordsChange(keywords, removeKeywords, removeAllKeywords));
     }
 
     /**
@@ -4500,9 +4510,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @param timestamp
      *            the timestamp
-     * @return the removed {@link CardKeywords}.
+     * @return the removed {@link KeywordsChange}.
      */
-    public final CardKeywords removeChangedCardKeywords(final long timestamp) {
+    public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
         return changedCardKeywords.remove(Long.valueOf(timestamp));
     }
 
@@ -4520,7 +4530,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         keywords.addAll(this.getExtrinsicKeyword());
 
         // see if keyword changes are in effect
-        for (final CardKeywords ck : this.changedCardKeywords.values()) {
+        for (final KeywordsChange ck : this.changedCardKeywords.values()) {
 
             if (ck.isRemoveAllKeywords()) {
                 keywords.clear();
@@ -4597,7 +4607,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.addChangedCardKeywords(addKeywords, removeKeywords, false, timestamp.longValue());
     }
 
-    private final void updateKeywordsOnRemoveChangedText(final CardKeywords k) {
+    private final void updateKeywordsOnRemoveChangedText(final KeywordsChange k) {
         this.keywordsGrantedByTextChanges.removeAll(k.getKeywords());
     }
 

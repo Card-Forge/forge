@@ -44,14 +44,19 @@ public final class CardChangedWords {
         if (isDirty) {
             resultCache = Maps.newHashMap();
             for (final CardChangedWord ccw : this.map.values()) {
+                // changes because a->b and b->c (resulting in a->c)
+                final Map<String, String> toBeChanged = Maps.newHashMap();
                 for (final Entry<String, String> e : resultCache.entrySet()) {
                     if (e.getValue().equals(ccw.getOriginalWord())) {
-                        e.setValue(ccw.getNewWord());
+                        toBeChanged.put(e.getKey(), ccw.getNewWord());
                     }
                 }
+                resultCache.putAll(toBeChanged);
 
+                // the actual change (b->c)
                 resultCache.put(ccw.getOriginalWord(), ccw.getNewWord());
             }
+
             for (final String key : ImmutableList.copyOf(resultCache.keySet())) {
                 if (!key.equals("Any")) {
                     resultCache.put(key.toLowerCase(), resultCache.get(key).toLowerCase());

@@ -19,6 +19,7 @@ package forge.game.player;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -57,6 +58,8 @@ import forge.util.Lang;
 import forge.util.MyRandom;
 
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * <p>
@@ -135,7 +138,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private List<Card> inboundTokens = new ArrayList<Card>();
 
     /** The keywords. */
-    private ArrayList<String> keywords = new ArrayList<String>();
+    private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<Long, KeywordsChange>();
 
     /** The mana pool. */
     private ManaPool manaPool = new ManaPool(this);
@@ -1138,33 +1141,69 @@ public class Player extends GameEntity implements Comparable<Player> {
         return this.poisonCounters;
     }
 
-    /**
-     * Gets the keywords.
-     * 
-     * @return the keywords
-     */
-    public final ArrayList<String> getKeywords() {
-        return this.keywords;
+    public final void addChangedKeywords(final String[] addKeywords, final String[] removeKeywords, final Long timestamp) {
+        this.addChangedKeywords(ImmutableList.copyOf(addKeywords), ImmutableList.copyOf(removeKeywords), timestamp);
+    }
+
+    public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp) {
+        // if the key already exists - merge entries
+        if (changedKeywords.containsKey(timestamp)) {
+            List<String> kws = addKeywords;
+            List<String> rkws = removeKeywords;
+            KeywordsChange cks = changedKeywords.get(timestamp);
+            kws.addAll(cks.getKeywords());
+            rkws.addAll(cks.getRemoveKeywords());
+            this.changedKeywords.put(timestamp, new KeywordsChange(kws, rkws, cks.isRemoveAllKeywords()));
+            return;
+        }
+
+        this.changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false));
+    }
+
+    public final KeywordsChange removeChangedKeywords(final Long timestamp) {
+        return changedKeywords.remove(Long.valueOf(timestamp));
     }
 
     /**
-     * Adds the keyword.
-     * 
-     * @param keyword
-     *            the keyword
+     * Append a keyword change which adds the specified keyword.
+     * @param keyword the keyword to add.
      */
     public final void addKeyword(final String keyword) {
-        this.keywords.add(keyword);
+        this.addChangedKeywords(ImmutableList.of(keyword), ImmutableList.<String>of(), this.getGame().getNextTimestamp());
     }
 
     /**
-     * Removes the keyword.
-     * 
-     * @param keyword
-     *            the keyword
+     * Replace all instances of added keywords.
+     * @param oldKeyword the keyword to replace.
+     * @param newKeyword the keyword with which to replace.
+     */
+    private final void replaceAllKeywordInstances(final String oldKeyword, final String newKeyword) {
+        for (final KeywordsChange ck : this.changedKeywords.values()) {
+            if (ck.getKeywords().contains(oldKeyword)) {
+                ck.getKeywords().remove(oldKeyword);
+                ck.getKeywords().add(newKeyword);
+            }
+        }
+    }
+
+    /**
+     * Remove all keyword changes which grant this {@link Player} the specified
+     * keyword. 
+     * @param keyword the keyword to remove.
      */
     public final void removeKeyword(final String keyword) {
-        this.keywords.remove(keyword);
+        for (final KeywordsChange ck : this.changedKeywords.values()) {
+            if (ck.getKeywords().contains(keyword)) {
+                ck.getKeywords().remove(keyword);
+            }
+        }
+
+        // Remove the empty changes
+        for (final Entry<Long, KeywordsChange> ck : ImmutableList.copyOf(this.changedKeywords.entrySet())) {
+            if (ck.getValue().isEmpty()) {
+                this.changedKeywords.remove(ck.getKey());
+            }
+        }
     }
 
     /*
@@ -1181,7 +1220,29 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     @Override
     public final boolean hasKeyword(final String keyword) {
-        return this.keywords.contains(keyword);
+        return this.getKeywords().contains(keyword);
+    }
+
+    /**
+     * @return this player's keywords.
+     */
+    public final List<String> getKeywords() {
+        final ArrayList<String> keywords = Lists.newArrayList();
+
+        // see if keyword changes are in effect
+        for (final KeywordsChange ck : this.changedKeywords.values()) {
+            if (ck.isRemoveAllKeywords()) {
+                keywords.clear();
+            } else if (ck.getRemoveKeywords() != null) {
+                keywords.removeAll(ck.getRemoveKeywords());
+            }
+
+            if (ck.getKeywords() != null) {
+                keywords.addAll(ck.getKeywords());
+            }
+        }
+
+        return keywords;
     }
 
     /**
@@ -1209,7 +1270,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     @Override
     public boolean hasProtectionFrom(final Card source) {
         if (this.getKeywords() != null) {
-            final ArrayList<String> list = this.getKeywords();
+            final List<String> list = this.getKeywords();
 
             String kw = "";
             for (int i = 0; i < list.size(); i++) {
@@ -3041,8 +3102,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
         if (hasKeyword("Skip all combat phases of your next turn.")) {
-            removeKeyword("Skip all combat phases of your next turn.");
-            addKeyword("Skip all combat phases of this turn.");
+            replaceAllKeywordInstances("Skip all combat phases of your next turn.",
+                    "Skip all combat phases of this turn.");
             return true;
         }
         if (hasKeyword("Skip all combat phases of this turn.")) {

@@ -337,10 +337,8 @@ public class StaticAbilityContinuous {
 
             // add keywords
             if (addKeywords != null) {
-                for (final String keyword : addKeywords) {
-                    for (int i = 0; i < keywordMultiplier; i++) {
-                        p.addKeyword(keyword);
-                    }
+                for (int i = 0; i < keywordMultiplier; i++) {
+                    p.addChangedKeywords(addKeywords, removeKeywords == null ? new String[0] : removeKeywords, se.getTimestamp());
                 }
             }
 

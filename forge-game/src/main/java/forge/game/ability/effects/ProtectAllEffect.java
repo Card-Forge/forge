@@ -17,6 +17,8 @@ import forge.util.Lang;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 public class ProtectAllEffect extends SpellAbilityEffect {
 
     @Override
@@ -40,6 +42,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
+        final Long timestamp = Long.valueOf(game.getNextTimestamp());
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final List<String> choices = ProtectEffect.getProtectionList(sa);
@@ -117,25 +120,23 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(host, players, sa);
             for (final Player player : playerList) {
                 for (final String gain : gains) {
-                    player.addKeyword("Protection from " + gain);
+                    player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.<String>of(), timestamp);
                 }
 
                 if (!sa.hasParam("Permanent")) {
                     // If not Permanent, remove protection at EOT
-                    final GameCommand untilEOT = new GameCommand() {
+                    final GameCommand revokeCommand = new GameCommand() {
                         private static final long serialVersionUID = -6573962672873853565L;
 
                         @Override
                         public void run() {
-                            for (final String gain : gains) {
-                                player.removeKeyword("Protection from " + gain);
-                            }
+                            player.removeChangedKeywords(timestamp);
                         }
                     };
                     if (sa.hasParam("UntilEndOfCombat")) {
-                        game.getEndOfCombat().addUntil(untilEOT);
+                        game.getEndOfCombat().addUntil(revokeCommand);
                     } else {
-                        game.getEndOfTurn().addUntil(untilEOT);
+                        game.getEndOfTurn().addUntil(revokeCommand);
                     }
                 }
             }

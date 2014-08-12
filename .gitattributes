@@ -281,6 +281,7 @@ forge-game/src/main/java/forge/game/GameStage.java -text
 forge-game/src/main/java/forge/game/GameType.java -text
 forge-game/src/main/java/forge/game/GlobalRuleChange.java -text
 forge-game/src/main/java/forge/game/IHasGameType.java -text
+forge-game/src/main/java/forge/game/KeywordsChange.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/Match.java -text
 forge-game/src/main/java/forge/game/PlanarDice.java -text
 forge-game/src/main/java/forge/game/StaticEffect.java svneol=native#text/plain
@@ -430,7 +431,6 @@ forge-game/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardDamageHistory.java -text
 forge-game/src/main/java/forge/game/card/CardFactory.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardFactoryUtil.java svneol=native#text/plain
-forge-game/src/main/java/forge/game/card/CardKeywords.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/plain
