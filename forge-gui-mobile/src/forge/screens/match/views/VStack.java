@@ -28,6 +28,7 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputConfirm;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
+import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.match.FControl;
 import forge.screens.match.TargetingOverlay;
@@ -224,7 +225,7 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            if (localPlayer != null && x > CARD_WIDTH + PADDING + BORDER_THICKNESS) { //don't show menu if tapping on art
+            if (localPlayer != null) { //don't show menu if tapping on art
                 final SpellAbility ability = stackInstance.getSpellAbility();
                 if (ability.isAbility()) {
                     FPopupMenu menu = new FPopupMenu() {
@@ -284,6 +285,12 @@ public class VStack extends FDropDown {
                                     }
                                 }));
                             }
+                            addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    CardZoom.show(stackInstance.getSourceCard());
+                                }
+                            }));
                         };
                     };
 
