@@ -42,6 +42,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -665,11 +666,13 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public SpellAbility chooseSpellAbilityToPlay() {
+        MagicStack stack = game.getStack();
+
         if (mayAutoPass()) {
             //avoid prompting for input if current phase is set to be auto-passed
             //instead posing a short delay if needed to prevent the game jumping ahead too quick
             int delay = 0;
-            if (game.getStack().isEmpty()) {
+            if (stack.isEmpty()) {
                 //make sure to briefly pause at phases your not set up to skip
                 if (!isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
                     delay = FControlGamePlayback.phasesDelay;
@@ -690,8 +693,23 @@ public class PlayerControllerHuman extends PlayerController {
             return null;
         }
 
-        if (game.getStack().isEmpty() && isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
-            return null; //avoid prompt for input if stack is empty and player is set to skip the current phase
+        if (stack.isEmpty()) {
+            if (isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
+                return null; //avoid prompt for input if stack is empty and player is set to skip the current phase
+            }
+        }
+        else {
+            SpellAbility ability = stack.peekAbility();
+            if (ability != null && ability.isAbility() && shouldAutoYield(ability.toUnsuppressedString())) {
+                //avoid prompt for input if top ability of stack is set to auto-yield
+                try {
+                    Thread.sleep(FControlGamePlayback.resolveDelay);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
         }
 
         InputPassPriority defaultInput = new InputPassPriority(player);

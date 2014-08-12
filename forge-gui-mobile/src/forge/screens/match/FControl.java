@@ -143,7 +143,7 @@ public class FControl {
 
         game.subscribeToEvents(Forge.getSoundSystem());
 
-        LobbyPlayer humanLobbyPlayer = game.getRegisteredPlayers().get(0).getLobbyPlayer(); //FServer.instance.getLobby().getGuiPlayer();
+        Player humanLobbyPlayer = game.getRegisteredPlayers().get(0);
         // The UI controls should use these game data as models
         initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
 
@@ -223,7 +223,7 @@ public class FControl {
         }
     }
 
-    public static void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
+    public static void initMatch(final List<Player> players, Player localPlayer) {
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
         // Instantiate all required field slots (user at 0)
@@ -245,12 +245,12 @@ public class FControl {
         view = new MatchScreen(game, localPlayer, playerPanels);
     }
 
-    private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
+    private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, Player localPlayer) {
         // get an arranged list so that the first local player is at index 0
         List<Player> sortedPlayers = new ArrayList<Player>(players);
         int ixFirstHuman = -1;
         for (int i = 0; i < players.size(); i++) {
-            if (sortedPlayers.get(i).getLobbyPlayer() == localPlayer) {
+            if (sortedPlayers.get(i) == localPlayer) {
                 ixFirstHuman = i;
                 break;
             }

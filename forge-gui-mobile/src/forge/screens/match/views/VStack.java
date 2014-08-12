@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
 import forge.GuiBase;
-import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
@@ -21,14 +20,16 @@ import forge.card.CardDetailUtil.DetailColors;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
+import forge.match.input.InputConfirm;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
-import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
+import forge.screens.match.FControl;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -48,14 +49,14 @@ public class VStack extends FDropDown {
     private static final TextRenderer textRenderer = new TextRenderer(true);
 
     private final MagicStack stack;
-    private final LobbyPlayer localPlayer;
+    private final Player localPlayer;
     private StackInstanceDisplay activeItem;
     private SpellAbilityStackInstance activeStackInstance;
     private Map<Player, Object> playersWithValidTargets;
 
     private int stackSize;
 
-    public VStack(MagicStack stack0, LobbyPlayer localPlayer0) {
+    public VStack(MagicStack stack0, Player localPlayer0) {
         stack = stack0;
         localPlayer = localPlayer0;
     }
@@ -223,51 +224,74 @@ public class VStack extends FDropDown {
                 VStack.this.updateSizeAndPosition();
                 return true;
             }
-            final Player player = stackInstance.getSpellAbility().getActivatingPlayer();
-            final PlayerController controller = player.getController();
-            if (stackInstance.getSpellAbility().isOptionalTrigger() && player.getLobbyPlayer() == localPlayer && controller != null) {
-                FPopupMenu menu = new FPopupMenu() {
-                    @Override
-                    protected void buildMenu() {
-                        final int triggerID = stackInstance.getSpellAbility().getSourceTrigger();
-                        addItem(new FCheckBoxMenuItem("Always Yes",
-                                controller.shouldAlwaysAcceptTrigger(triggerID),
-                                new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                controller.setShouldAlwaysAcceptTrigger(triggerID);
+            if (localPlayer != null && x > CARD_WIDTH + PADDING + BORDER_THICKNESS) { //don't show menu if tapping on art
+                final SpellAbility ability = stackInstance.getSpellAbility();
+                if (ability.isAbility()) {
+                    FPopupMenu menu = new FPopupMenu() {
+                        @Override
+                        protected void buildMenu() {
+                            final PlayerController controller = localPlayer.getController();
+                            final String key = ability.toUnsuppressedString();
+                            final boolean autoYield = controller.shouldAutoYield(key);
+                            addItem(new FCheckBoxMenuItem("Auto-Yield",
+                                    autoYield,
+                                    new FEventHandler() {
+                                @Override
+                                public void handleEvent(FEvent e) {
+                                    controller.setShouldAutoYield(key, !autoYield);
+                                    if (!autoYield && stack.peekAbility() == ability) {
+                                        //auto-pass priority if ability is on top of stack
+                                        FControl.getInputProxy().passPriority();
+                                    }
+                                }
+                            }));
+                            if (ability.isOptionalTrigger() && ability.getActivatingPlayer() == localPlayer) {
+                                final int triggerID = ability.getSourceTrigger();
+                                addItem(new FCheckBoxMenuItem("Always Yes",
+                                        controller.shouldAlwaysAcceptTrigger(triggerID),
+                                        new FEventHandler() {
+                                    @Override
+                                    public void handleEvent(FEvent e) {
+                                        if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
+                                            controller.shouldAlwaysAskTrigger(triggerID);
+                                        }
+                                        else {
+                                            controller.setShouldAlwaysAcceptTrigger(triggerID);
+                                            if (stack.peekAbility() == ability &&
+                                                    FControl.getInputQueue().getInput() instanceof InputConfirm) {
+                                                //auto-yes if ability is on top of stack
+                                                FControl.getInputProxy().selectButtonOK();
+                                            }
+                                        }
+                                    }
+                                }));
+                                addItem(new FCheckBoxMenuItem("Always No",
+                                        controller.shouldAlwaysDeclineTrigger(triggerID),
+                                        new FEventHandler() {
+                                    @Override
+                                    public void handleEvent(FEvent e) {
+                                        if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
+                                            controller.shouldAlwaysAskTrigger(triggerID);
+                                        }
+                                        else {
+                                            controller.setShouldAlwaysDeclineTrigger(triggerID);
+                                            if (stack.peekAbility() == ability &&
+                                                    FControl.getInputQueue().getInput() instanceof InputConfirm) {
+                                                //auto-no if ability is on top of stack
+                                                FControl.getInputProxy().selectButtonOK();
+                                            }
+                                        }
+                                    }
+                                }));
                             }
-                        }));
-                        addItem(new FCheckBoxMenuItem("Always No",
-                                controller.shouldAlwaysDeclineTrigger(triggerID),
-                                new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                controller.setShouldAlwaysDeclineTrigger(triggerID);
-                            }
-                        }));
-                        addItem(new FCheckBoxMenuItem("Always Ask",
-                                controller.shouldAlwaysAskTrigger(triggerID),
-                                new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                controller.setShouldAlwaysAskTrigger(triggerID);
-                            }
-                        }));
-                        addItem(new FMenuItem("Zoom/Details", new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                CardZoom.show(stackInstance.getSourceCard());
-                            }
-                        }));
-                    }
-                };
+                        };
+                    };
 
-                menu.show(this, x, y);
+                    menu.show(this, x, y);
+                    return true;
+                }
             }
-            else {
-                CardZoom.show(stackInstance.getSourceCard());
-            }
+            CardZoom.show(stackInstance.getSourceCard());
             return true;
         }
 

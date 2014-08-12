@@ -799,7 +799,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.simultaneousStackEntryList.add(sa);
     }
 
-    public boolean addAllTirggeredAbilitiesToStack() {
+    public boolean addAllTriggeredAbilitiesToStack() {
         boolean result = false;
         Player playerTurn = game.getPhaseHandler().getPlayerTurn();
 

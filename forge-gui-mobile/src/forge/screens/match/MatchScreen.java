@@ -11,7 +11,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.badlogic.gdx.Input.Keys;
 
 import forge.Forge;
-import forge.LobbyPlayer;
 import forge.match.MatchUtil;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
@@ -57,7 +56,7 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
     private AbilityEffect activeEffect;
 
-    public MatchScreen(Game game, LobbyPlayer localPlayer, List<VPlayerPanel> playerPanels0) {
+    public MatchScreen(Game game, Player localPlayer, List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
 
         scroller = add(new FieldScroller());

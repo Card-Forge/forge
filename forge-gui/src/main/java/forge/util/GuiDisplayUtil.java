@@ -450,7 +450,7 @@ public final class GuiDisplayUtil {
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa, true);
                 }
-                game.getStack().addAllTirggeredAbilitiesToStack(); // playSa could fire some triggers
+                game.getStack().addAllTriggeredAbilitiesToStack(); // playSa could fire some triggers
             }
         });
     }

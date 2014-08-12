@@ -999,7 +999,7 @@ public class PhaseHandler implements java.io.Serializable, IGameStateObject {
                         if (game.isGameOver())
                             return; // state-based effects check could lead to game over
     
-                        addedAnythingToStack = game.getStack().addAllTirggeredAbilitiesToStack();
+                        addedAnythingToStack = game.getStack().addAllTriggeredAbilitiesToStack();
                     } while(addedAnythingToStack);
 
                     if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {

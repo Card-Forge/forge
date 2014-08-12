@@ -836,7 +836,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * @return the string
      */
     public String toUnsuppressedString() {
-
         final StringBuilder sb = new StringBuilder();
         SpellAbility node = this;
 
