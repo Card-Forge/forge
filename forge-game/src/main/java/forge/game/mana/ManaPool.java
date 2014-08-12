@@ -110,9 +110,16 @@ public class ManaPool implements Iterable<Mana> {
             return false;
         }
 
-        if (owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.") &&
-                getAmountOfColor(MagicColor.GREEN) == totalMana()) {
-            return false; //won't lose floating mana if all mana is green and green mana isn't going to be emptied
+        int safeMana = 0;
+        for (final byte c : MagicColor.WUBRG) {
+            final String captName = StringUtils.capitalize(MagicColor.toLongString(c));
+            if (owner.hasKeyword(captName + " mana doesn't empty from your mana pool as steps and phases end.")) {
+                safeMana += getAmountOfColor(c);
+            }
+        }
+
+        if (totalMana() == safeMana) {
+            return false; //won't lose floating mana if all mana is of colors that aren't going to be emptied
         }
 
         return true;
@@ -134,12 +141,16 @@ public class ManaPool implements Iterable<Mana> {
             return cleared;
         }
 
-        boolean keepGreenMana = isEndOfPhase && owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.");
-        boolean convertToColorless = owner.hasKeyword("Convert unused mana to Colorless");
+        final boolean convertToColorless = owner.hasKeyword("Convert unused mana to Colorless");
 
-        List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
-        if (keepGreenMana) {
-            keys.remove(Byte.valueOf(MagicColor.GREEN));
+        final List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
+        if (isEndOfPhase) {
+            for (final Byte c : Lists.newArrayList(keys)) {
+                final String captName = StringUtils.capitalize(MagicColor.toLongString(c));
+                if (owner.hasKeyword(captName + " mana doesn't empty from your mana pool as steps and phases end.")) {
+                    keys.remove(c);
+                }
+            }
         }
         if (convertToColorless) {
             keys.remove(Byte.valueOf(MagicColor.COLORLESS));
