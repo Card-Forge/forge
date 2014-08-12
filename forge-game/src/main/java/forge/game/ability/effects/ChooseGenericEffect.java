@@ -41,7 +41,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
-            if (tgt != null && !p.canBeTargetedBy(sa)) {
+            if (tgt != null && sa.getTargets().isTargeting(p) && !p.canBeTargetedBy(sa)) {
                 continue;
             }
 
