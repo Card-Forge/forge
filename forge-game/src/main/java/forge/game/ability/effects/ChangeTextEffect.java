@@ -98,8 +98,12 @@ public class ChangeTextEffect extends SpellAbilityEffect {
 
         final List<Card> tgts = getTargetCards(sa);
         for (final Card c : tgts) {
-            c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp);
-            c.addChangedTextTypeWord(changedTypeWordOriginal, changedTypeWordNew, timestamp);
+            if (changedColorWordOriginal != null && changedColorWordNew != null) {
+                c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp);
+            }
+            if (changedTypeWordOriginal != null && changedTypeWordNew != null ) {
+                c.addChangedTextTypeWord(changedTypeWordOriginal, changedTypeWordNew, timestamp);
+            }
 
             if (!permanent) {
                 final GameCommand revert = new GameCommand() {
