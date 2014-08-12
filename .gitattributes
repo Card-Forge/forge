@@ -4387,6 +4387,7 @@ forge-gui/res/cardsfolder/d/dosan_the_falling_leaf.txt -text
 forge-gui/res/cardsfolder/d/dosans_oldest_chant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/double_cleave.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/double_negative.txt -text
+forge-gui/res/cardsfolder/d/double_stroke.txt -text
 forge-gui/res/cardsfolder/d/doubling_chant.txt -text
 forge-gui/res/cardsfolder/d/doubling_cube.txt -text
 forge-gui/res/cardsfolder/d/doubling_season.txt svneol=native#text/plain
