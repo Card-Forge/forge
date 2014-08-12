@@ -7291,6 +7291,7 @@ forge-gui/res/cardsfolder/i/isperia_supreme_judge.txt -text
 forge-gui/res/cardsfolder/i/isperia_the_inscrutable.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/i/isperias_skywatch.txt -text
 forge-gui/res/cardsfolder/i/it_that_betrays.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/i/iterative_analysis.txt -text
 forge-gui/res/cardsfolder/i/ith_high_arcanist.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/ivory_charm.txt -text
 forge-gui/res/cardsfolder/i/ivory_crane_netsuke.txt svneol=native#text/plain
