@@ -195,50 +195,48 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         focusTarget.requestFocusInWindow();
     }
 
+	private final String constraints1 = "w 60px!, h 26px!";
+	private final String constraints2 = "w 200px!, h 26px!, gap 0 10px 0 0";
+
     private void populateRewards() {
         pnlRewards.setOpaque(false);
         pnlRewards.setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3"));
         pnlRewards.removeAll();
         pnlRewards.add(lblErrRewards, "w 100%!, h 30px!, span 2 1");
 
-        final String constraints1 = "w 60px, h 26px!";
-        final String constraints2 = "w 150px!, h 26px!";
-
-        pnlRewards.add(new FLabel.Builder().text("Base winnings").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Base Winnings").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         focusTarget = new PrefInput(QPref.REWARDS_BASE, QuestPreferencesErrType.REWARDS);
         pnlRewards.add(focusTarget, constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("No losses").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("No Losses").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_UNDEFEATED, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Poison win").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Poison Win").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_POISON, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Milling win").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Milling Win").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_MILLED, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Mulligan 0 win").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Mulligan 0 Win").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_MULLIGAN0, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Alternative win").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Alternative Win").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_ALTERNATIVE, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Win by turn 15").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Win by Turn 15").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN15, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Win by turn 10").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Win by Turn 10").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN10, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("Win by turn 5").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("Win by Turn 5").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN5, QuestPreferencesErrType.REWARDS), constraints1);
 
-        pnlRewards.add(new FLabel.Builder().text("First turn win").build(), constraints2);
+        pnlRewards.add(new FLabel.Builder().text("First Turn Win").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_TURN1, QuestPreferencesErrType.REWARDS), constraints1);
     }
 
     private void populateDifficulty() {
-        final String constraints1 = "w 60px!, h 26px!";
-        final String constraints2 = "w 150px!, h 26px!";
 
         pnlDifficulty.setOpaque(false);
         pnlDifficulty.setLayout(new MigLayout("insets 0, gap 0, wrap 5, hidemode 3"));
@@ -251,122 +249,126 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlDifficulty.add(new FLabel.Builder().text("Hard").build(), constraints1);
         pnlDifficulty.add(new FLabel.Builder().text("Expert").build(), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Wins For Booster").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins for Booster").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_BOOSTER_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Wins For Rank Increase").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins for Rank Increase").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_RANKUP_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Wins For Medium AI").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins for Medium AI").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_MEDIUMAI_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Wins For Hard AI").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins for Hard AI").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_HARDAI_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Wins For Expert AI").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Wins for Expert AI").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.WINS_EXPERTAI_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting commons").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting Commons").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_COMMONS_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting uncommons").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting Uncommons").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_UNCOMMONS_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting rares").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting Rares").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_RARES_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting credits").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting Credits").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_EASY, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_MEDIUM, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_HARD, QuestPreferencesErrType.DIFFICULTY), constraints1);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_CREDITS_EXPERT, QuestPreferencesErrType.DIFFICULTY), constraints1);
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting basic lands").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Starting Basic Lands").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_BASIC_LANDS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
 
-        pnlDifficulty.add(new FLabel.Builder().text("Starting snow lands").build(), constraints2);
+		pnlDifficulty.add(new FLabel.Builder().text("Wins for New Draft").fontAlign(SwingConstants.RIGHT).build(), constraints2);
+		pnlDifficulty.add(new PrefInput(QPref.WINS_NEW_DRAFT, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
+
+		pnlDifficulty.add(new FLabel.Builder().text("Wins per Draft Rotation").fontAlign(SwingConstants.RIGHT).build(), constraints2);
+		pnlDifficulty.add(new PrefInput(QPref.WINS_ROTATE_DRAFT, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
+
+        pnlDifficulty.add(new FLabel.Builder().text("Starting Snow Lands").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_SNOW_LANDS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
 
-        pnlDifficulty.add(new FLabel.Builder().text("Color bias (1-10)").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Color Bias (1-10)").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_POOL_COLOR_BIAS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
 
-        pnlDifficulty.add(new FLabel.Builder().text("Penalty for loss").build(), constraints2);
+        pnlDifficulty.add(new FLabel.Builder().text("Penalty for Loss").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.PENALTY_LOSS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
+		
     }
 
     private void populateBooster() {
-        final String constraints1 = "w 60px!, h 26px!";
-        final String constraints2 = "w 150px!, h 26px!";
 
         pnlBooster.setOpaque(false);
         pnlBooster.setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3"));
         pnlBooster.removeAll();
         pnlBooster.add(lblErrBooster, "w 100%!, h 30px!, span 2 1");
 
-        pnlBooster.add(new FLabel.Builder().text("Common").build(), constraints2);
+        pnlBooster.add(new FLabel.Builder().text("Common").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_COMMONS, QuestPreferencesErrType.BOOSTER), constraints1);
 
-        pnlBooster.add(new FLabel.Builder().text("Uncommon").build(), constraints2);
+        pnlBooster.add(new FLabel.Builder().text("Uncommon").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_UNCOMMONS, QuestPreferencesErrType.BOOSTER), constraints1);
 
-        pnlBooster.add(new FLabel.Builder().text("Rare").build(), constraints2);
+        pnlBooster.add(new FLabel.Builder().text("Rare").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlBooster.add(new PrefInput(QPref.BOOSTER_RARES, QuestPreferencesErrType.BOOSTER), constraints1);
 
     }
 
     private void populateShop() {
-        final String constraints1 = "w 60px, h 26px!";
-        final String constraints2 = "w 150px!, h 26px!";
 
         pnlShop.setOpaque(false);
         pnlShop.setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 3"));
         pnlShop.removeAll();
         pnlShop.add(lblErrShop, "w 100%!, h 30px!, span 2 1");
 
-        pnlShop.add(new FLabel.Builder().text("Maximum Packs").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Maximum Packs").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_MAX_PACKS, QuestPreferencesErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Starting Packs").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Starting Packs").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_STARTING_PACKS, QuestPreferencesErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Wins for Pack").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Wins for Pack").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK, QuestPreferencesErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Wins per Set Unlock").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Wins per Set Unlock").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.WINS_UNLOCK_SET, QuestPreferencesErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Common Singles").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Common Singles").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_COMMON, QuestPreferencesErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Uncommon Singles").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Uncommon Singles").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_UNCOMMON, QuestPreferencesErrType.SHOP), constraints1);
 
-        pnlShop.add(new FLabel.Builder().text("Rare Singles").build(), constraints2);
+        pnlShop.add(new FLabel.Builder().text("Rare Singles").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_SINGLES_RARE, QuestPreferencesErrType.SHOP), constraints1);
+		
     }
 
     /** */

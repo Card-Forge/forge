@@ -3,6 +3,7 @@ package forge.quest.data;
 import forge.model.FModel;
 import forge.quest.QuestEventDraft;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
+import forge.quest.data.QuestPreferences.QPref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class QuestAchievements {
             drafts.get(currentDraft).addWin();
         }
 
-        if (win % 5 == 0) {
+        if (win % FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_DRAFT) == 0) {
             draftsToGenerate++;
         }
         

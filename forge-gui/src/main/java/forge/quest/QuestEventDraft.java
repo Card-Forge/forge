@@ -32,6 +32,7 @@ import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
@@ -92,7 +93,7 @@ public class QuestEventDraft {
     private int[] aiIcons = new int[7];
     
     private boolean started = false;
-    private int age = 15;
+    private int age = FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_DRAFT);
     
     public QuestEventDraft(final String title) {
         this.title = title;

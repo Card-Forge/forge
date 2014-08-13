@@ -96,6 +96,10 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         STARTING_CREDITS_MEDIUM("200"),
         STARTING_CREDITS_HARD("150"),
         STARTING_CREDITS_EXPERT("100"),
+		
+		// Matches won per draft unlock
+		WINS_NEW_DRAFT("5"),
+		WINS_ROTATE_DRAFT("15"),
 
         // Matches won per booster award, by difficulty
         WINS_BOOSTER_EASY("1"),
