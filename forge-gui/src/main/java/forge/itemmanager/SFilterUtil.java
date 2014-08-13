@@ -214,8 +214,6 @@ public class SFilterUtil {
 			
 			Operation currentOperation = null;
 
-			System.out.println(evaluationStack);
-			
 			while (!evaluationStack.isEmpty()) {
 				
 				String stackItem = evaluationStack.pop();
