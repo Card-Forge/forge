@@ -124,7 +124,7 @@ public class SFilterUtil {
 			parse();
 		}
 		
-		private boolean parse() {
+		private void parse() {
 			
 			Tokenizer tokenizer = new Tokenizer(text);
 			
@@ -170,8 +170,6 @@ public class SFilterUtil {
 				stack.push(currentValue.trim());
 			}
 
-			return false;
-			
 		}
 		
 		private void pushTokenToStack(String token) {
@@ -234,7 +232,6 @@ public class SFilterUtil {
 						currentOperation = Operation.OR;
 					} else if (stackItem.equals(Operation.NOT.token)) {
 						if (outputRules == null) {
-							System.out.println("Could not parse");
 							return null;
 						}
 						outputRules = Predicates.not(outputRules);
