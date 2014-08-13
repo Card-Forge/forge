@@ -15,8 +15,6 @@ import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.*;
 
 /** 
@@ -26,6 +24,7 @@ import java.util.*;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SFilterUtil {
+	
     /**
      * builds a string search filter
      */
@@ -37,23 +36,18 @@ public class SFilterUtil {
             return Predicates.alwaysTrue();
         }
 		
-		if (BooleanExpression.isBooleanExpression(text)) {
-			BooleanExpression expression = new BooleanExpression(text);
-			try {
-				Predicate<CardRules> filter = expression.evaluate(inName, inType, inText, inCost);
-				if (filter != null) {
-					return Predicates.compose(filter, PaperCard.FN_GET_RULES);
-				} //The expression is not valid, let the regular filters work
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
+		
+		Predicate<CardRules> filter = expression.evaluate();
+		if (filter != null) {
+			return Predicates.compose(filter, PaperCard.FN_GET_RULES);
 		}
 		
         String[] splitText = text.replaceAll(",", "").replaceAll("  ", " ").split(" ");
 
-        List<Predicate<CardRules>> terms = new ArrayList<Predicate<CardRules>>();
+        List<Predicate<CardRules>> terms = new ArrayList<>();
         for (String s : splitText) {
-            List<Predicate<CardRules>> subands = new ArrayList<Predicate<CardRules>>();
+            List<Predicate<CardRules>> subands = new ArrayList<>();
 
             if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s));       }
             if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
@@ -67,118 +61,221 @@ public class SFilterUtil {
         return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
 		
     }
+
+	private static class Tokenizer implements Iterator<String> {
+
+		private String string;
+		private int index = 0;
+
+		private Tokenizer(String string) {
+			this.string = string;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return index < string.length();
+		}
+
+		@Override
+		public String next() {
+			return string.charAt(index++) + "";
+		}
+
+		public String lookAhead() {
+			if (hasNext()) {
+				return string.charAt(index) + "";
+			} else {
+				return "";
+			}
+		}
+
+	}
 	
 	private static class BooleanExpression {
-		
+
 		private static enum Operation {
-			
-			AND("&&"), OR("||"), OPEN_PAREN("("), CLOSE_PAREN(")"), VALUE("\""), ESCAPE("\\");
-			
+
+			AND("&&"), OR("||"), NOT("!"), OPEN_PAREN("("), CLOSE_PAREN(")"), ESCAPE("\\");
+
 			private final String token;
-			
+
 			private Operation(String token) {
 				this.token = token;
 			}
-			
+
 		}
 		
-		private Stack<StackItem> stack = new Stack<StackItem>();
-		private String expression;
+		private String text;
+		private Stack<String> stack = new Stack<>();
 		
-		private BooleanExpression(String expression) {
-			this.expression = expression;
+		private String currentValue = "";
+		
+		private boolean inName = false;
+		private boolean inType = false;
+		private boolean inText = false;
+		private boolean inCost = false;
+		
+		private BooleanExpression(String text, boolean inName, boolean inType, boolean inText, boolean inCost) {
+			this.text = text;
+			this.inName = inName;
+			this.inType = inType;
+			this.inText = inText;
+			this.inCost = inCost;
+			parse();
 		}
 		
-		private Predicate<CardRules> evaluate(boolean inName, boolean inType, boolean inText, boolean inCost) throws IOException {
+		private boolean parse() {
 			
-			StringReader reader = new StringReader(expression);
-			String currentItem = "";
+			Tokenizer tokenizer = new Tokenizer(text);
+			
+			String currentChar;
 			boolean escapeNext = false;
-			boolean gettingValue = false;
 			
-			int character;
-			
-			while ((character = reader.read()) != -1) {
+			while (tokenizer.hasNext()) {
 				
-				String token = Character.toString((char) character);
+				currentChar = tokenizer.next();
 				
-				if (token.equals(Operation.OPEN_PAREN.token)) {
-					StackOperation operation = new StackOperation();
-					operation.operation = Operation.OPEN_PAREN;
-					stack.push(operation);
-					continue;
-				}
-				
-				if (token.equals(Operation.CLOSE_PAREN.token)) {
-					character = reader.read();
-					if (character != -1) {
-						evaluateStack();
-						continue;
-					} else {
-						break;
-					}
-				}
-				
-				if (token.equals("&")) {
-					character = reader.read();
-					if (character != -1 && character == '&') {
-						StackOperation operation = new StackOperation();
-						operation.operation = Operation.AND;
-						stack.push(operation);
-						currentItem = "";
-					} else if (gettingValue) {
-						currentItem += token + Character.toString((char) character);
-						continue;
-					}
-				}
-
-				if (token.equals("|")) {
-					character = reader.read();
-					if (character != -1 && character == '|') {
-						StackOperation operation = new StackOperation();
-						operation.operation = Operation.OR;
-						stack.push(operation);
-						currentItem = "";
-					} else if (gettingValue) {
-						currentItem += token + Character.toString((char) character);
-						continue;
-					}
-				}
-				
-				if (token.equals(Operation.VALUE.token) && !escapeNext) {
-					if (gettingValue) {
-						StackValue stackValue = new StackValue();
-						stackValue.value = evaluateValue(currentItem.trim(), inName, inType, inText, inCost);
-						stack.push(stackValue);
-						currentItem = "";
-						gettingValue = false;
-					} else {
-						gettingValue = true;
-						continue; //Don't add the quotation mark
-					}
-				}
-
-				if (token.equals(Operation.ESCAPE.token) && !escapeNext) {
+				if (escapeNext) {
+					
+					currentValue += currentChar;
+					escapeNext = false;
+					
+				} else if (currentChar.equals(Operation.ESCAPE.token)) {
+					
 					escapeNext = true;
-				} else if (gettingValue) {
-					currentItem += token;
+					
+				} else {
+
+					if ((currentChar + tokenizer.lookAhead()).equals(Operation.AND.token)) {
+						tokenizer.next();
+						pushTokenToStack(Operation.AND.token);
+					} else if ((currentChar + tokenizer.lookAhead()).equals(Operation.OR.token)) {
+						tokenizer.next();
+						pushTokenToStack(Operation.OR.token);
+					} else if (currentChar.equals(Operation.OPEN_PAREN.token)) {
+						pushTokenToStack(Operation.OPEN_PAREN.token);
+					} else if (currentChar.equals(Operation.CLOSE_PAREN.token)) {
+						pushTokenToStack(Operation.CLOSE_PAREN.token);
+					} else if (currentChar.equals(Operation.NOT.token)) {
+						pushTokenToStack(Operation.NOT.token);
+					} else {
+						currentValue += currentChar;
+					}
+					
 				}
 				
 			}
 			
-			while (stack.size() > 1) {
-				evaluateStack();
+			if (!currentValue.trim().isEmpty()) {
+				stack.push(currentValue.trim());
 			}
 
-			if (stack.isEmpty()) {
-				return null; //The expression is not valid, let the regular filters work
-			}
-			
-			return ((StackValue) stack.pop()).value;
+			return false;
 			
 		}
 		
-		private Predicate<CardRules> evaluateValue(String value, boolean inName, boolean inType, boolean inText, boolean inCost) {
+		private void pushTokenToStack(String token) {
+			
+			currentValue = currentValue.trim();
+			
+			if (!currentValue.isEmpty()) {
+				stack.push(currentValue);
+				currentValue = "";
+			}
+			
+			stack.push(token);
+			
+		}
+		
+		private Predicate<CardRules> evaluate() {
+
+			Collections.reverse(stack); //Reverse the stack so we're popping off the start
+			Predicate<CardRules> rules = null;
+			
+			Stack<String> evaluationStack = new Stack<>();
+			
+			while (stack.size() > 0) {
+				
+				String stackItem = stack.pop();
+				
+				if (stackItem.equals(Operation.CLOSE_PAREN.token)) {
+					rules = evaluateUntilToken(evaluationStack, rules, Operation.OPEN_PAREN.token);
+				} else {
+					evaluationStack.push(stackItem);
+				}
+				
+			}
+			
+			return evaluateUntilToken(evaluationStack, rules, "");
+			
+		}
+		
+		private Predicate<CardRules> evaluateUntilToken(Stack<String> evaluationStack, Predicate<CardRules> rules, String token) {
+
+			Predicate<CardRules> outputRules = rules;
+			
+			Operation currentOperation = null;
+
+			System.out.println(evaluationStack);
+			
+			while (!evaluationStack.isEmpty()) {
+				
+				String stackItem = evaluationStack.pop();
+
+				if (!token.isEmpty() && token.equals(stackItem)) {
+					break;
+				}
+				
+				if (isOperation(stackItem)) {
+					
+					if (stackItem.equals(Operation.AND.token)) {
+						currentOperation = Operation.AND;
+					} else if (stackItem.equals(Operation.OR.token)) {
+						currentOperation = Operation.OR;
+					} else if (stackItem.equals(Operation.NOT.token)) {
+						if (outputRules == null) {
+							System.out.println("Could not parse");
+							return null;
+						}
+						outputRules = Predicates.not(outputRules);
+					}
+
+				} else {
+					
+					if (currentOperation == null) {
+						
+						if (outputRules == null) {
+							outputRules = evaluateValue(stackItem);
+						}
+						
+					} else {
+						
+						if (outputRules == null) {
+							return null;
+						}
+						
+						switch (currentOperation) {
+							case AND:
+								outputRules = Predicates.and(outputRules, evaluateValue(stackItem));
+								break;
+							case OR:
+								outputRules = Predicates.or(outputRules, evaluateValue(stackItem));
+								break;
+						}
+						
+						currentOperation = null;
+						
+					}
+					
+				}
+				
+			}
+			
+			return outputRules;
+			
+		}
+		
+		private Predicate<CardRules> evaluateValue(String value) {
 			if (inName) { return CardRulesPredicates.name(StringOp.CONTAINS_IC, value);       }
 			if (inType) { return CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, value); }
 			if (inText) { return CardRulesPredicates.rules(StringOp.CONTAINS_IC, value);      }
@@ -186,124 +283,14 @@ public class SFilterUtil {
 			return Predicates.alwaysTrue();
 		}
 		
-		private void evaluateStack() {
-
-			StackItem stackItem;
-			Predicate<CardRules> rules = null;
-			Operation operation = null;
-			
-			boolean finishedStack = false;
-			
-			while (stack.size() > 0) {
-				
-				stackItem = stack.pop();
-				
-				if (stackItem.isOperation()) {
-					
-					operation = ((StackOperation) stackItem).operation;
-					
-					if (operation.equals(Operation.OPEN_PAREN)) {
-						
-						if (rules != null) {
-							StackValue value = new StackValue();
-							value.value = rules;
-							stack.push(value);
-						}
-						
-						break;
-					}
-					
-				} else if (rules == null) {
-					rules = ((StackValue) stackItem).value;
-				} else {
-					
-					if (operation == null) {
-						return;
-					}
-					
-					StackValue value = new StackValue();
-					
-					if (operation.equals(Operation.AND)) {
-						value.value = Predicates.and(rules, ((StackValue) stackItem).value);
-					} else if (operation.equals(Operation.OR)) {
-						value.value = Predicates.or(rules, ((StackValue) stackItem).value);
-					} else {
-						return;
-					}
-					
-					if (stack.size() == 0) {
-						finishedStack = true;
-					}
-					
-					stack.push(value);
-					
-					rules = null;
-					
+		private boolean isOperation(String token) {
+			for (Operation o : Operation.values()) {
+				if (token.equals(o.token)) {
+					return true;
 				}
-				
-				if (finishedStack) {
-					return;
-				}
-				
 			}
-			
+			return false;
 		}
-		
-		private static boolean isBooleanExpression(String s) {
-			return s.contains(Operation.AND.token) || s.contains(Operation.OR.token);
-		}
-		
-		private static abstract class StackItem {
-			private boolean isOperation() {
-				return this instanceof StackOperation;
-			}
-		}
-		
-		private static class StackOperation extends StackItem {
-			private Operation operation;
-		}
-		
-		private static class StackValue extends StackItem {
-			private Predicate<CardRules> value;
-		}
-		
-		/*private static abstract class BooleanExpressionNode {
-			protected abstract Predicate<CardRules> evaluate(boolean inName, boolean inType, boolean inText, boolean inCost);
-		}
-		
-		private static class ExpressionNode extends BooleanExpressionNode {
-			
-			private BooleanExpressionNode left;
-			private BooleanExpressionNode right;
-			private Operation operation;
-
-			@Override
-			protected Predicate<CardRules> evaluate(boolean inName, boolean inType, boolean inText, boolean inCost) {
-				switch (operation) {
-					case AND:
-						return Predicates.and(left.evaluate(inName, inType, inText, inCost), right.evaluate(inName, inType, inText, inCost));
-					case OR:
-						return Predicates.or(left.evaluate(inName, inType, inText, inCost), right.evaluate(inName, inType, inText, inCost));
-				}
-				return Predicates.alwaysTrue();
-			}
-			
-		}
-		
-		private static class ValueNode extends BooleanExpressionNode {
-			
-			private String value;
-			
-			@Override
-			protected Predicate<CardRules> evaluate(boolean inName, boolean inType, boolean inText, boolean inCost) {
-				if (inName) { return CardRulesPredicates.name(StringOp.CONTAINS_IC, value);       }
-				if (inType) { return CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, value); }
-				if (inText) { return CardRulesPredicates.rules(StringOp.CONTAINS_IC, value);      }
-				if (inCost) { return CardRulesPredicates.cost(StringOp.CONTAINS_IC, value);       }
-				return Predicates.alwaysTrue();
-			}
-			
-		}*/
 		
 	}
     
@@ -312,7 +299,7 @@ public class SFilterUtil {
             return Predicates.alwaysTrue();
         }
 
-        return new ItemTextPredicate<T>(text);
+        return new ItemTextPredicate<>(text);
     }
 
     private static class ItemTextPredicate<T extends InventoryItem> implements Predicate<T> {
@@ -332,7 +319,7 @@ public class SFilterUtil {
             }
             return false;
         }
-    };
+    }
     
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
         byte colors = 0;
@@ -425,12 +412,9 @@ public class SFilterUtil {
                     colors |= MagicColor.GREEN;
                 }
 
-                if (colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
-                    return true;
-                }
+				return colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1 || (colorProfile & colors) == colorProfile;
 
-                return (colorProfile & colors) == colorProfile;
-            }
+			}
         };
     }
 
@@ -492,7 +476,7 @@ public class SFilterUtil {
     }
 
     public static Predicate<PaperCard> buildFormatFilter(Set<GameFormat> formats, boolean allowReprints) {
-        List<Predicate<PaperCard>> predicates = new ArrayList<Predicate<PaperCard>>();
+        List<Predicate<PaperCard>> predicates = new ArrayList<>();
         for (GameFormat f : formats) {
             predicates.add(allowReprints ? f.getFilterRules() : f.getFilterPrinted());
         }
