@@ -1,0 +1,22 @@
+[metadata]
+Code=V14
+Date=2014-08-22
+Name=From the Vault: Annihilation
+Type=From_the_Vault
+
+[cards]
+M Armageddon
+M Burning of Xinye
+M Cataclysm
+M Child of Alara
+M Decree of Annihilation
+M Firespout
+M Fracturing Gust
+M Living Death
+M Martial Coup
+M Rolling Earthquake
+M Smokestack
+M Terminus
+M Upheaval
+M Virtue's Ruin
+M Wrath of God
