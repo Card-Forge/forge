@@ -116,10 +116,12 @@ public class CostPartMana extends CostPart {
     }
 
     public ManaCost getManaCostFor(SpellAbility sa) {
-        if ( isExiledCreatureCost() && !sa.getPaidList(CostExile.HashLKIListKey).isEmpty()) // back from the brink
+        if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey)!= null && !sa.getPaidList(CostExile.HashLKIListKey).isEmpty()) {
+            // back from the brink
             return sa.getPaidList(CostExile.HashLKIListKey).get(0).getManaCost();
-        else
+        } else {
             return getManaToPay();
+        }
     }
     
     @Override
