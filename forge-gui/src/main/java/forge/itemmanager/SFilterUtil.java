@@ -80,6 +80,11 @@ public class SFilterUtil {
 		public String next() {
 			return string.charAt(index++) + "";
 		}
+		
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("remove");
+		}
 
 		public String lookAhead() {
 			if (hasNext()) {
