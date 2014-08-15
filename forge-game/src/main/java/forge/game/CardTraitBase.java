@@ -292,21 +292,21 @@ public abstract class CardTraitBase extends GameObject {
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, this);
             if (!Expressions.compare(playersize, svarOperator, operandValue)) {
                 return false;
             }
         }
     
         if (params.containsKey("CheckSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), params.get("CheckSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), params.get("CheckSVar"), this);
             String comparator = "GE1";
             if (params.containsKey("SVarCompare")) {
                 comparator = params.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(game.getCardState(this.getHostCard()), svarOperand, this);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -354,7 +354,7 @@ public abstract class CardTraitBase extends GameObject {
             // don't change literal SVar names!
             if (!this.getHostCard().hasSVar(key)) {
                 final String value = this.originalMapParams.get(key),
-                        newValue = AbilityUtils.applyTextChangeEffects(value, this.getHostCard());
+                        newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
                 this.mapParams.put(key, newValue);
             }
         }

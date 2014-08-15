@@ -1083,12 +1083,13 @@ public class CardFactoryUtil {
             return doXMath(c.getMonstrosityNum(), m, c);
         }
 
-        // Count$Chroma.<mana letter>
+        // Count$Chroma.<color name>
+        // Count$Devotion.<color name>
         if (sq[0].contains("Chroma") || sq[0].equals("Devotion")) {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
-            String colorAbb = sq[1];
-            if (colorAbb.contains("Chosen")) {
-                colorAbb = MagicColor.toShortString(c.getChosenColor().get(0));
+            String colorName = sq[1];
+            if (colorName.contains("Chosen")) {
+                colorName = MagicColor.toShortString(c.getChosenColor().get(0));
             }
             final List<Card> cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
@@ -1098,7 +1099,7 @@ public class CardFactoryUtil {
             }
             
             int colorOcurrencices = 0;
-            byte colorCode = MagicColor.fromName(colorAbb);
+            byte colorCode = MagicColor.fromName(colorName);
             for(Card c0 : cards) {
                 for(ManaCostShard sh : c0.getManaCost()){
                     if ((sh.getColorMask() & colorCode) != 0) 
@@ -1107,6 +1108,7 @@ public class CardFactoryUtil {
             }
             return doXMath(colorOcurrencices, m, c);
         }
+        // Count$DevotionDual.<color name>.<color name>
         if (sq[0].contains("DevotionDual")) {
             int colorOcurrencices = 0;
             byte color1 = MagicColor.fromName(sq[1]);

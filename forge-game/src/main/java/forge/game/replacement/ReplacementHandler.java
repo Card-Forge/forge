@@ -193,6 +193,7 @@ public class ReplacementHandler implements IGameStateObject {
         }
 
         if (effectSA.isIntrinsic()) {
+            effectSA.setIntrinsic(true);
             effectSA.changeText();
         }
 

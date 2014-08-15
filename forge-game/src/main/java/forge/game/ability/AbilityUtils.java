@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.*;
@@ -80,7 +81,7 @@ public class AbilityUtils {
     @SuppressWarnings("unchecked")
     public static List<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
         final List<Card> cards = new ArrayList<Card>();
-        final String defined = (def == null) ? "Self" : applyTextChangeEffects(def, hostCard); // default to Self
+        final String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final Game game = hostCard.getGame();
 
         Card c = null;
@@ -338,7 +339,7 @@ public class AbilityUtils {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a int.
      */
-    public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
+    public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
         final Game game = card.getController().getGame();
@@ -352,37 +353,34 @@ public class AbilityUtils {
         // return result soon for plain numbers
         if (StringUtils.isNumeric(amount)) { return Integer.parseInt(amount) * multiplier; }
 
-        // modify amount string for text changes
-        final String amount2 = AbilityUtils.applyTextChangeEffects(amount, card);
-
         // Try to fetch variable, try ability first, then card.
         String svarval = null;
-        if (amount2.indexOf('$') > 0) { // when there is a dollar sign, it's not a reference, it's a raw value!
-            svarval = amount2;
+        if (amount.indexOf('$') > 0) { // when there is a dollar sign, it's not a reference, it's a raw value!
+            svarval = amount;
         }
-        else if (ability != null) {
-            svarval = ability.getSVar(amount2);
+        else if (ability != null && ability instanceof SpellAbility) {
+            svarval = ((SpellAbility)ability).getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if (ability != null) {
-                System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount2, card.getName(), ability);
+            if (ability != null && ability instanceof SpellAbility) {
+                System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
-            svarval = card.getSVar(amount2);
+            svarval = card.getSVar(amount);
         }
 
         if (StringUtils.isBlank(svarval)) {
             // Some variables may be not chosen yet at this moment
             // So return 0 and don't issue an error.
-            if (amount2.equals("ChosenX")) {
+            if (amount.equals("ChosenX")) {
                 // isn't made yet
                 return 0;
             }
             // cost hasn't been paid yet
-            if (amount2.startsWith("Cost")) {
+            if (amount.startsWith("Cost")) {
                 return 0;
             }
             // Nothing to do here if value is missing or blank
-            System.err.printf("SVar '%s' not defined in Card (%s)%n", amount2, card.getName());
+            System.err.printf("SVar '%s' not defined in Card (%s)%n", amount, card.getName());
             return 0;
         }
 
@@ -400,7 +398,7 @@ public class AbilityUtils {
         }
 
         // modify amount string for text changes
-        calcX[1] = AbilityUtils.applyTextChangeEffects(calcX[1], card);
+        calcX[1] = AbilityUtils.applyAbilityTextChangeEffects(calcX[1], ability);
 
         if (calcX[0].startsWith("Count")) {
             return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
@@ -444,10 +442,10 @@ public class AbilityUtils {
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             }
-            else if (hType.startsWith("Property")) {
+            else if (hType.startsWith("Property") && ability instanceof SpellAbility) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
-                    if (p.hasProperty(defined, ability.getActivatingPlayer(), ability.getHostCard())) {
+                    if (p.hasProperty(defined, ((SpellAbility)ability).getActivatingPlayer(), ability.getHostCard())) {
                         players.add(p);
                     }
                 }
@@ -514,14 +512,16 @@ public class AbilityUtils {
             return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
         }
 
-        if (ability == null) {
+        // All the following only work for SpellAbilities
+        if (!(ability instanceof SpellAbility)) {
             return 0;
         }
 
+        final SpellAbility sa = (SpellAbility) ability;
         // Player attribute counting
         if (calcX[0].startsWith("TargetedPlayer")) {
             final ArrayList<Player> players = new ArrayList<Player>();
-            final SpellAbility saTargeting = ability.getSATargetingPlayer();
+            final SpellAbility saTargeting = sa.getSATargetingPlayer();
             if (null != saTargeting) {
                 Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
             }
@@ -530,14 +530,14 @@ public class AbilityUtils {
         if (calcX[0].startsWith("ThisTargetedPlayer")) {
             final ArrayList<Player> players = new ArrayList<Player>();
             if (null != ability) {
-                Iterables.addAll(players, ability.getTargets().getTargetPlayers());
+                Iterables.addAll(players, sa.getTargets().getTargetPlayers());
             }
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TargetedObjects")) {
             final List<GameObject> objects = new ArrayList<GameObject>();
             // Make list of all targeted objects starting with the root SpellAbility
-            SpellAbility loopSA = ability.getRootAbility();
+            SpellAbility loopSA = sa.getRootAbility();
             while (loopSA != null) {
                 if (loopSA.getTargetRestrictions() != null) {
                     Iterables.addAll(objects, loopSA.getTargets().getTargets());
@@ -548,8 +548,8 @@ public class AbilityUtils {
         }
         if (calcX[0].startsWith("TargetedController")) {
             final ArrayList<Player> players = new ArrayList<Player>();
-            final List<Card> list = getDefinedCards(card, "Targeted", ability);
-            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", ability);
+            final List<Card> list = getDefinedCards(card, "Targeted", sa);
+            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", sa);
 
             for (final Card c : list) {
                 final Player p = c.getController();
@@ -567,7 +567,7 @@ public class AbilityUtils {
         }
         if (calcX[0].startsWith("TargetedByTarget")) {
             final List<Card> tgtList = new ArrayList<Card>();
-            final List<SpellAbility> saList = getDefinedSpellAbilities(card, "Targeted", ability);
+            final List<SpellAbility> saList = getDefinedSpellAbilities(card, "Targeted", sa);
 
             for (final SpellAbility s : saList) {
                 tgtList.addAll(getDefinedCards(s.getHostCard(), "Targeted", s));
@@ -575,17 +575,17 @@ public class AbilityUtils {
             return CardFactoryUtil.handlePaid(tgtList, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             Object o = root.getTriggeringObject(calcX[0].substring(9));
             return o instanceof Player ? CardFactoryUtil.playerXProperty((Player) o, calcX[1], card) * multiplier : 0;
         }
         if (calcX[0].equals("TriggeredCardController")) {
             final ArrayList<Player> players = new ArrayList<Player>();
-            players.addAll(getDefinedPlayers(card, "TriggeredCardController", ability));
+            players.addAll(getDefinedPlayers(card, "TriggeredCardController", sa));
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].equals("TriggeredSpellAbility")) {
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             SpellAbility sat = (SpellAbility) root.getTriggeringObject("SpellAbility");
             return calculateAmount(sat.getHostCard(), calcX[1], sat);
         }
@@ -600,45 +600,45 @@ public class AbilityUtils {
 
         List<Card> list = new ArrayList<Card>();
         if (calcX[0].startsWith("Sacrificed")) {
-            list = ability.getRootAbility().getPaidList("Sacrificed");
+            list = sa.getRootAbility().getPaidList("Sacrificed");
         }
         else if (calcX[0].startsWith("Discarded")) {
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             list = root.getPaidList("Discarded");
             if ((null == list) && root.isTrigger()) {
                 list = root.getHostCard().getSpellPermanent().getPaidList("Discarded");
             }
         }
         else if (calcX[0].startsWith("Exiled")) {
-            list = ability.getRootAbility().getPaidList("Exiled");
+            list = sa.getRootAbility().getPaidList("Exiled");
         }
         else if (calcX[0].startsWith("Milled")) {
-            list = ability.getRootAbility().getPaidList("Milled");
+            list = sa.getRootAbility().getPaidList("Milled");
         }
         else if (calcX[0].startsWith("Tapped")) {
-            list = ability.getRootAbility().getPaidList("Tapped");
+            list = sa.getRootAbility().getPaidList("Tapped");
         }
         else if (calcX[0].startsWith("Revealed")) {
-            list = ability.getRootAbility().getPaidList("Revealed");
+            list = sa.getRootAbility().getPaidList("Revealed");
         }
         else if (calcX[0].startsWith("Targeted")) {
-            list = ability.findTargetedCards();
+            list = sa.findTargetedCards();
         }
         else if (calcX[0].startsWith("ParentTargeted")) {
-            SpellAbility parent = ability.getParentTargetingCard();
+            SpellAbility parent = sa.getParentTargetingCard();
             if (null != parent) {
                 list = parent.findTargetedCards();
             }
         }
         else if (calcX[0].startsWith("Triggered")) {
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             list = new ArrayList<Card>();
             list.add((Card) root.getTriggeringObject(calcX[0].substring(9)));
         }
         else if (calcX[0].startsWith("TriggerCount")) {
             // TriggerCount is similar to a regular Count, but just
             // pulls Integer Values from Trigger objects
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
             final int count = (Integer) root.getTriggeringObject(l[0]);
@@ -646,14 +646,14 @@ public class AbilityUtils {
             return CardFactoryUtil.doXMath(count, m, card) * multiplier;
         }
         else if (calcX[0].startsWith("Replaced")) {
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             list = new ArrayList<Card>();
             list.add((Card) root.getReplacingObject(calcX[0].substring(8)));
         }
         else if (calcX[0].startsWith("ReplaceCount")) {
             // ReplaceCount is similar to a regular Count, but just
             // pulls Integer Values from Replacement objects
-            final SpellAbility root = ability.getRootAbility();
+            final SpellAbility root = sa.getRootAbility();
             final String[] l = calcX[1].split("/");
             final String m = CardFactoryUtil.extractOperators(calcX[1]);
             final int count = (Integer) root.getReplacingObject(l[0]);
@@ -813,7 +813,7 @@ public class AbilityUtils {
      */
     public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         final List<Player> players = new ArrayList<Player>();
-        final String defined = (def == null) ? "You" : applyTextChangeEffects(def, card);
+        final String defined = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa);
         final Game game = card == null ? null : card.getGame();
 
         if (defined.equals("Targeted") || defined.equals("TargetedPlayer")) {
@@ -1132,7 +1132,7 @@ public class AbilityUtils {
     public static ArrayList<SpellAbility> getDefinedSpellAbilities(final Card card, final String def,
             final SpellAbility sa) {
         final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-        final String defined = (def == null) ? "Self" : applyTextChangeEffects(def, card); // default to Self
+        final String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final Game game = sa.getActivatingPlayer().getGame();
 
         SpellAbility s = null;
@@ -1400,69 +1400,72 @@ public class AbilityUtils {
      *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.lang.String} object.
-     * @param sa
+     * @param ctb
      *            a {@link forge.SpellAbility} object.
      * @return a int.
      */
-    public static int xCount(final Card c, final String s, final SpellAbility sa) {
-        final String s2 = AbilityUtils.applyTextChangeEffects(s, c);
+    public static int xCount(final Card c, final String s, final CardTraitBase ctb) {
+        final String s2 = AbilityUtils.applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
 
         final String[] sq;
         sq = l[0].split("\\.");
 
-        if (sa != null) {
-            // Count$Kicked.<numHB>.<numNotHB>
-            if (sq[0].startsWith("Kicked")) {
-                if (sa.isKicked()) {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), expr, c); // Kicked
-                }
-                else {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c); // not Kicked
-                }
-            }
-
-            //Count$SearchedLibrary.<DefinedPlayer>
-            if (sq[0].contains("SearchedLibrary")) {
-                int sum = 0;
-                for (Player p : AbilityUtils.getDefinedPlayers(c, sq[1], sa)) {
-                    sum += p.getLibrarySearched();
-                }
-
-                return sum;
-            }
-            if (sq[0].startsWith("TriggerRememberAmount")) {
-                final SpellAbility root = sa.getRootAbility();
-                int count = 0;
-                for (final Object o : root.getTriggerRemembered()) {
-                    if (o instanceof Integer) {
-                        count += (Integer) o;
-                    }
-                }
-                return count;
-            }
-            // Count$TriggeredPayingMana.<Color1>.<Color2>
-            if (sq[0].startsWith("TriggeredPayingMana")) {
-                final SpellAbility root = sa.getRootAbility();
-                String mana = (String) root.getTriggeringObject("PayingMana");
-                int count = 0;
-                Matcher mat = Pattern.compile(StringUtils.join(sq, "|", 1, sq.length)).matcher(mana);
-                while (mat.find()) {
-                    count++;
-                }
-                return count;
-            }
+        if (ctb != null) {
             // Count$Compare <int comparator value>.<True>.<False>
             if (sq[0].startsWith("Compare")) {
                 final String[] compString = sq[0].split(" ");
-                final int lhs = calculateAmount(c, compString[1], sa);
-                final int rhs =  calculateAmount(c, compString[2].substring(2), sa);
+                final int lhs = calculateAmount(c, compString[1], ctb);
+                final int rhs =  calculateAmount(c, compString[2].substring(2), ctb);
                 if (Expressions.compare(lhs, compString[2], rhs)) {
-                    return CardFactoryUtil.doXMath(calculateAmount(c, sq[1], sa), expr, c);
+                    return CardFactoryUtil.doXMath(calculateAmount(c, sq[1], ctb), expr, c);
                 }
                 else {
-                    return CardFactoryUtil.doXMath(calculateAmount(c, sq[2], sa), expr, c);
+                    return CardFactoryUtil.doXMath(calculateAmount(c, sq[2], ctb), expr, c);
+                }
+            }
+            if (ctb instanceof SpellAbility) {
+                final SpellAbility sa = (SpellAbility) ctb;
+                // Count$Kicked.<numHB>.<numNotHB>
+                if (sq[0].startsWith("Kicked")) {
+                    if (((SpellAbility)ctb).isKicked()) {
+                        return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), expr, c); // Kicked
+                    }
+                    else {
+                        return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c); // not Kicked
+                    }
+                }
+
+                //Count$SearchedLibrary.<DefinedPlayer>
+                if (sq[0].contains("SearchedLibrary")) {
+                    int sum = 0;
+                    for (Player p : AbilityUtils.getDefinedPlayers(c, sq[1], sa)) {
+                        sum += p.getLibrarySearched();
+                    }
+
+                    return sum;
+                }
+                if (sq[0].startsWith("TriggerRememberAmount")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    int count = 0;
+                    for (final Object o : root.getTriggerRemembered()) {
+                        if (o instanceof Integer) {
+                            count += (Integer) o;
+                        }
+                    }
+                    return count;
+                }
+                // Count$TriggeredPayingMana.<Color1>.<Color2>
+                if (sq[0].startsWith("TriggeredPayingMana")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    String mana = (String) root.getTriggeringObject("PayingMana");
+                    int count = 0;
+                    Matcher mat = Pattern.compile(StringUtils.join(sq, "|", 1, sq.length)).matcher(mana);
+                    while (mat.find()) {
+                        count++;
+                    }
+                    return count;
                 }
             }
         }
@@ -1514,9 +1517,23 @@ public class AbilityUtils {
         return sas;
     }
 
-    public static final String applyTextChangeEffects(final String def, final Card hostCard) {
+    public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {
+        if (!ability.isIntrinsic()) {
+            return def;
+        }
+        return applyTextChangeEffects(def, ability.getHostCard());
+    }
+
+    public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
+        if (!CardUtil.isKeywordModifiable(kw)) {
+            return kw;
+        }
+        return applyTextChangeEffects(kw, card);
+    }
+
+    private static final String applyTextChangeEffects(final String def, final Card card) {
         String replaced = def;
-        for (final Entry<String, String> e : hostCard.getChangedTextColorWords().entrySet()) {
+        for (final Entry<String, String> e : card.getChangedTextColorWords().entrySet()) {
             if (e.getKey().equals("Any")) {
                 for (final byte c : MagicColor.WUBRG) {
                     replaced = replaced.replace(MagicColor.toLongString(c), e.getValue())
@@ -1526,9 +1543,23 @@ public class AbilityUtils {
                 replaced = replaced.replace(e.getKey(), e.getValue());
             }
         }
-        for (final Entry<String, String> e : hostCard.getChangedTextTypeWords().entrySet()) {
+        for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
             replaced = replaced.replace(e.getKey(), e.getValue());
         }
         return replaced;
+    }
+
+    public static final String getSVar(final CardTraitBase ability, final String sVarName) {
+        String val = null;
+        if (ability instanceof SpellAbility) {
+            val = ((SpellAbility) ability).getSVar(sVarName);
+        }
+        if (StringUtils.isEmpty(val)) {
+            val = ability.getHostCard().getSVar(sVarName);
+        }
+        if (!ability.isIntrinsic() || StringUtils.isEmpty(val)) {
+            return val;
+        }
+        return applyAbilityTextChangeEffects(val, ability);
     }
 }

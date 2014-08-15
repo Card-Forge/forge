@@ -25,6 +25,9 @@ public class SpellApiBased extends Spell {
         api = api0;
         effect = api.getSpellEffect();
 
+        // A spell is always intrinsic
+        this.setIntrinsic(true);
+
         if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
             this.setManaPart(new AbilityManaPart(sourceCard, mapParams));
         }

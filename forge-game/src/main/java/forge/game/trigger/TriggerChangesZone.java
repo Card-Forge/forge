@@ -95,7 +95,7 @@ public class TriggerChangesZone extends Trigger {
 
             final Card host = hostCard.getGame().getCardState(hostCard);
             final String comparator = condition.length < 2 ? "GE1" : condition[1];
-            final int referenceValue = AbilityUtils.calculateAmount(host, comparator.substring(2), null);
+            final int referenceValue = AbilityUtils.calculateAmount(host, comparator.substring(2), this);
             final Card triggered = (Card)runParams2.get("Card"); 
             final int actualValue = CardFactoryUtil.xCount((Card)triggered, host.getSVar(condition[0]));
             if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {

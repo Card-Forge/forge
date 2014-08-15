@@ -1785,4 +1785,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             this.subAbility.changeText();
         }
     }
+
+    @Override
+    public void setIntrinsic(boolean i) {
+        super.setIntrinsic(i);
+        if (this.subAbility != null) {
+            this.subAbility.setIntrinsic(i);
+        }
+    }
 }

@@ -391,6 +391,7 @@ public class TriggerHandler implements IGameStateObject {
         }
 
         if (regtrig.isIntrinsic()) {
+            sa.setIntrinsic(true);
             sa.changeText();
         }
 

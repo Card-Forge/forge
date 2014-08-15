@@ -35,12 +35,42 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
+
 public final class CardUtil {
     // disable instantiation
     private CardUtil() { }
 
     public static final List<String> NON_STACKING_LIST = new ArrayList<String>();
-    
+
+    /** List of all keywords that could be modified by text changes.
+     *  Mostly this is caused by them having a variable, like a cost.
+     */
+    public static final List<String> modifiableKeywords = Lists.newArrayList(
+            "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
+            "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
+            "Affinity", "Entwine", "Splice", "Offering", "Ninjutsu",
+            "Transute", "Replicate", "Recover", "Suspend", "Aura swap",
+            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
+            "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
+            "Scavenge", "Bestow");
+    /** List of keyword endings of keywords that could be modified by text changes. */
+    public static final List<String> modifiableKeywordEndings = Lists.newArrayList("walk", "cycling");
+
+    public static final boolean isKeywordModifiable(final String kw) {
+        for (final String modKw : modifiableKeywords) {
+            if (kw.startsWith(modKw)) {
+                return true;
+            }
+        }
+        for (final String end : modifiableKeywordEndings) {
+            if (kw.endsWith(end)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ColorSet getColors(final Card c) {
         return c.determineColor();
     }

@@ -4559,7 +4559,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             throw new RuntimeException("Not a color: " + newWord);
         }
         this.changedTextColors.add(timestamp, StringUtils.capitalize(originalWord), StringUtils.capitalize(newWord));
-        this.updateKeywordsChangedText(originalWord, newWord, timestamp);
+        this.updateKeywordsChangedText(timestamp);
         this.updateChangedText();
     }
 
@@ -4580,7 +4580,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.getType().contains(originalWord)) {
             this.addChangedCardTypes(Lists.newArrayList(newWord), Lists.newArrayList(originalWord), false, false, false, false, timestamp);
         }
-        this.updateKeywordsChangedText(originalWord, newWord, timestamp);
+        this.updateKeywordsChangedText(timestamp);
         this.updateChangedText();
     }
 
@@ -4592,12 +4592,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.updateChangedText();
     }
 
-    private final void updateKeywordsChangedText(final String originalWord, final String newWord, final Long timestamp) {
+    private final void updateKeywordsChangedText(final Long timestamp) {
         final List<String> addKeywords = Lists.newArrayList(),
                 removeKeywords = Lists.newArrayList(this.keywordsGrantedByTextChanges);
 
         for (final String kw : this.getIntrinsicKeyword()) {
-            final String newKw = AbilityUtils.applyTextChangeEffects(kw, this);
+            final String newKw = AbilityUtils.applyKeywordTextChangeEffects(kw, this);
             if (!newKw.equals(kw)) {
                 addKeywords.add(newKw);
                 removeKeywords.add(kw);

@@ -708,7 +708,7 @@ public class TargetRestrictions {
 
     public final void applyTargetTextChanges(final SpellAbility sa) {
         for (int i = 0; i < validTgts.length; i++) {
-            validTgts[i] = AbilityUtils.applyTextChangeEffects(originalValidTgts[i], sa.getHostCard());
+            validTgts[i] = AbilityUtils.applyAbilityTextChangeEffects(originalValidTgts[i], sa);
         }
     }
 

@@ -495,14 +495,14 @@ public class StaticAbility extends CardTraitBase {
         }
 
         if (this.mapParams.containsKey("CheckSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSVar"), this);
             String comparator = "GE1";
             if (this.mapParams.containsKey("SVarCompare")) {
                 comparator = this.mapParams.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -511,14 +511,14 @@ public class StaticAbility extends CardTraitBase {
         }
 
         if (this.mapParams.containsKey("CheckSecondSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSecondSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckSecondSVar"), this);
             String comparator = "GE1";
             if (this.mapParams.containsKey("SecondSVarCompare")) {
                 comparator = this.mapParams.get("SecondSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -527,14 +527,14 @@ public class StaticAbility extends CardTraitBase {
         }
 
         if (this.mapParams.containsKey("CheckThirdSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckThirdSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckThirdSVar"), this);
             String comparator = "GE1";
             if (this.mapParams.containsKey("ThirdSVarCompare")) {
                 comparator = this.mapParams.get("ThirdSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -543,14 +543,14 @@ public class StaticAbility extends CardTraitBase {
         }
 
         if (this.mapParams.containsKey("CheckFourthSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckFourthSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.mapParams.get("CheckFourthSVar"), this);
             String comparator = "GE1";
             if (this.mapParams.containsKey("FourthSVarCompare")) {
                 comparator = this.mapParams.get("FourthSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, this);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }

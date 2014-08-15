@@ -122,17 +122,17 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("SetPower")) {
             setP = params.get("SetPower");
-            setPower = AbilityUtils.calculateAmount(hostCard, setP, null);
+            setPower = AbilityUtils.calculateAmount(hostCard, setP, stAb);
         }
 
         if (params.containsKey("SetToughness")) {
             setT = params.get("SetToughness");
-            setToughness = AbilityUtils.calculateAmount(hostCard, setT, null);
+            setToughness = AbilityUtils.calculateAmount(hostCard, setT, stAb);
         }
 
         if (params.containsKey("AddPower")) {
             addP = params.get("AddPower");
-            powerBonus = AbilityUtils.calculateAmount(hostCard, addP, null);
+            powerBonus = AbilityUtils.calculateAmount(hostCard, addP, stAb);
             if (!StringUtils.isNumeric(addP) && !addP.equals("AffectedX")) {
                 se.setXValue(powerBonus);
             }
@@ -140,7 +140,7 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("AddToughness")) {
             addT = params.get("AddToughness");
-            toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, null);
+            toughnessBonus = AbilityUtils.calculateAmount(hostCard, addT, stAb);
             if (!StringUtils.isNumeric(addT) && !addT.equals("AffectedX")) {
                 se.setYValue(toughnessBonus);
             }
@@ -149,8 +149,7 @@ public class StaticAbilityContinuous {
         if (params.containsKey("KeywordMultiplier")) {
             String multiplier = params.get("KeywordMultiplier");
             if (multiplier.equals("X")) {
-                keywordMultiplier = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-                se.setXValue(keywordMultiplier);
+                se.setXValue(AbilityUtils.calculateAmount(hostCard, "X", stAb));
             } else {
                 keywordMultiplier = Integer.valueOf(multiplier);
             }
@@ -347,14 +346,14 @@ public class StaticAbilityContinuous {
                 if (mhs.equals("Unlimited")) {
                     p.setUnlimitedHandSize(true);
                 } else {
-                    int max = AbilityUtils.calculateAmount(hostCard, mhs, null);
+                    int max = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.setMaxHandSize(max);
                 }
             }
 
             if (params.containsKey("RaiseMaxHandSize")) {
                 String rmhs = params.get("RaiseMaxHandSize");
-                int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, null);
+                int rmax = AbilityUtils.calculateAmount(hostCard, rmhs, stAb);
                 p.setMaxHandSize(p.getMaxHandSize() + rmax);
             }
 
@@ -402,21 +401,21 @@ public class StaticAbilityContinuous {
             } else // non CharacteristicDefining
             if ((setPower != -1) || (setToughness != -1)) {
                 if (setP.startsWith("AffectedX")) {
-                    setPower = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setP));
+                    setPower = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setP));
                 }
                 if (setT.startsWith("AffectedX")) {
-                    setToughness = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(setT));
+                    setToughness = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setT));
                 }
                 affectedCard.addNewPT(setPower, setToughness, hostCard.getTimestamp());
             }
 
             // add P/T bonus
             if (addP.startsWith("AffectedX")) {
-                powerBonus = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(addP));
+                powerBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addP));
                 se.addXMapValue(affectedCard, powerBonus);
             }
             if (addT.startsWith("AffectedX")) {
-                toughnessBonus = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(addT));
+                toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
                 se.addXMapValue(affectedCard, toughnessBonus);
             }
             affectedCard.addSemiPermanentAttackBoost(powerBonus);
