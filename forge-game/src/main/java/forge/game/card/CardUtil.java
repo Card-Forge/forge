@@ -49,13 +49,14 @@ public final class CardUtil {
     public static final List<String> modifiableKeywords = Lists.newArrayList(
             "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
-            "Affinity", "Entwine", "Splice", "Offering", "Ninjutsu",
+            "Affinity", "Entwine", "Splice", "Ninjutsu",
             "Transute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
             "Scavenge", "Bestow");
     /** List of keyword endings of keywords that could be modified by text changes. */
-    public static final List<String> modifiableKeywordEndings = Lists.newArrayList("walk", "cycling");
+    public static final List<String> modifiableKeywordEndings = Lists.newArrayList("walk", "cycling",
+            "offering");
 
     public static final boolean isKeywordModifiable(final String kw) {
         for (final String modKw : modifiableKeywords) {
