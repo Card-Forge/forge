@@ -107,16 +107,19 @@ public abstract class PlayerController {
     }
 
     // Abilities to auto-yield to
-    private Set<String> abilitiesAutoYield = new HashSet<String>();
+    private Set<String> autoYields = new HashSet<String>();
+    public Iterable<String> getAutoYields() {
+        return autoYields;
+    }
     public boolean shouldAutoYield(String key) {
-        return abilitiesAutoYield.contains(key);
+        return autoYields.contains(key);
     }
     public void setShouldAutoYield(String key, boolean autoYield) {
         if (autoYield) {
-            abilitiesAutoYield.add(key);
+            autoYields.add(key);
         }
         else {
-            abilitiesAutoYield.remove(key);
+            autoYields.remove(key);
         }
     }
 

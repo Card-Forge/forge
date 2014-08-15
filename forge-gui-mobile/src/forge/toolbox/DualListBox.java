@@ -90,12 +90,6 @@ public class DualListBox<T> extends FDialog {
         }
         sourceList = add(new ChoiceList(sourceElements, typeItem, onAdd));
         destList = add(new ChoiceList(destElements, typeItem, onRemove));
-        if (sourceList.getCount() > 0) { //select first items by default if possible
-            sourceList.addSelectedIndex(0);
-        }
-        if (destList.getCount() > 0) {
-            destList.addSelectedIndex(0);
-        }
 
         // Dual List control buttons
         addButton = add(new FButton(">", onAdd));

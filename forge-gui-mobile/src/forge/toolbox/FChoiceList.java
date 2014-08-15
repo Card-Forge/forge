@@ -35,13 +35,16 @@ public class FChoiceList<T> extends FList<T> {
     private final List<Integer> selectedIndices = new ArrayList<Integer>();
 
     public FChoiceList(Collection<T> items) {
-        this(items, 0, 1, null);
-    }
-    public FChoiceList(Collection<T> items, int minChoices0, int maxChoices0) {
-        this(items, minChoices0, maxChoices0, null);
+        this(items, null);
     }
     protected FChoiceList(Collection<T> items, T typeItem) {
         this(items, 0, 1, typeItem);
+        if (items.size() > 0) {
+            addSelectedIndex(0); //select first item by default
+        }
+    }
+    public FChoiceList(Collection<T> items, int minChoices0, int maxChoices0) {
+        this(items, minChoices0, maxChoices0, null);
     }
     protected FChoiceList(Collection<T> items, int minChoices0, int maxChoices0, T typeItem) {
         super(items);

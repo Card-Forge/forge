@@ -93,7 +93,7 @@ public class MatchScreen extends FScreen {
         players.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
-        menuBar.addTab("Game", new VGameMenu());
+        menuBar.addTab("Game", new VGameMenu(localPlayer));
         menuBar.addTab("Players (" + playerPanels.size() + ")", players);
         menuBar.addTab("Log", log);
         menuBar.addTab("Dev", devMenu);

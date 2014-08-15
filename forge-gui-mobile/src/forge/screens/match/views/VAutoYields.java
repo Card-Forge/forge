@@ -1,0 +1,91 @@
+package forge.screens.match.views;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
+
+import forge.game.Game;
+import forge.game.player.Player;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FChoiceList;
+import forge.toolbox.FDialog;
+import forge.toolbox.FEvent;
+import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FOptionPane;
+
+public class VAutoYields extends FDialog {
+    private final FButton btnOk = add(new FButton("OK", new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            hide();
+        }
+    }));
+    private final FButton btnRemove = add(new FButton("Remove", new FEventHandler() {
+        @Override
+        public void handleEvent(FEvent e) {
+            hide();
+        }
+    }));
+    private final FChoiceList<String> lstAutoYields;
+    private final FCheckBox chkDisableAll;
+
+    public VAutoYields(final Game game, final Player player) {
+        super("Auto-Yields");
+        List<String> autoYields = new ArrayList<String>();
+        for (String autoYield : player.getController().getAutoYields()) {
+            autoYields.add(autoYield);
+        }
+        lstAutoYields = add(new FChoiceList<String>(autoYields) {
+            @Override
+            protected void onCompactModeChange() {
+                VAutoYields.this.revalidate(); //revalidate entire dialog so height updated
+            }
+        });
+        chkDisableAll = add(new FCheckBox("Disable All Auto Yields", game.getDisableAutoYields()));
+        chkDisableAll.setCommand(new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                game.setDisableAutoYields(chkDisableAll.isSelected());
+            }
+        });
+        btnRemove.setEnabled(autoYields.size() > 0);
+    }
+
+    @Override
+    public void show() {
+        if (lstAutoYields.getCount() > 0) {
+            super.show();
+        }
+        else {
+            FOptionPane.showMessageDialog("There are no active auto-yields.", "No Auto-Yields", FOptionPane.INFORMATION_ICON);
+        }
+    }
+
+    @Override
+    protected float layoutAndGetHeight(float width, float maxHeight) {
+        float padding = FOptionPane.PADDING;
+        float x = padding;
+        float y = padding;
+        float w = width - 2 * padding;
+        float buttonWidth = (w - padding) / 2;
+        float buttonHeight = FOptionPane.BUTTON_HEIGHT;
+        TextBounds checkBoxSize = chkDisableAll.getAutoSizeBounds();
+
+        float listHeight = lstAutoYields.getListItemRenderer().getItemHeight() * lstAutoYields.getCount();
+        float maxListHeight = maxHeight - 3 * padding - checkBoxSize.height - buttonHeight - FOptionPane.GAP_BELOW_BUTTONS - padding;
+        if (listHeight > maxListHeight) {
+            listHeight = maxListHeight;
+        }
+
+        lstAutoYields.setBounds(x, y, w, listHeight);
+        y += listHeight + padding;
+        chkDisableAll.setBounds(x, y, Math.min(checkBoxSize.width, w), checkBoxSize.height);
+        y += checkBoxSize.height + padding;
+        btnOk.setBounds(x, y, buttonWidth, buttonHeight);
+        btnRemove.setBounds(x + buttonWidth + padding, y, buttonWidth, buttonHeight);
+
+        return y + buttonHeight + FOptionPane.GAP_BELOW_BUTTONS;
+    }
+}

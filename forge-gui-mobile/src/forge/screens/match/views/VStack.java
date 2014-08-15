@@ -234,8 +234,7 @@ public class VStack extends FDropDown {
                             final PlayerController controller = localPlayer.getController();
                             final String key = ability.toUnsuppressedString();
                             final boolean autoYield = controller.shouldAutoYield(key);
-                            addItem(new FCheckBoxMenuItem("Auto-Yield",
-                                    autoYield,
+                            addItem(new FCheckBoxMenuItem("Auto-Yield", autoYield,
                                     new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {

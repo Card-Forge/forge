@@ -98,6 +98,7 @@ public class Game implements IGameStateObject {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
+    private boolean disableAutoYields;
 
     @Override
     public void loadState(GameStateDeserializer gsd) {
@@ -680,6 +681,13 @@ public class Game implements IGameStateObject {
     public int nextCardId() {
         // TODO Auto-generated method stub
         return ++cardIdCounter;
+    }
+
+    public boolean getDisableAutoYields() {
+        return disableAutoYields;
+    }
+    public void setDisableAutoYields(boolean b0) {
+        disableAutoYields = b0;
     }
 
     public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {

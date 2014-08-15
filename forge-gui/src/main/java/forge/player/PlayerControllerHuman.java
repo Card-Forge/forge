@@ -698,7 +698,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return null; //avoid prompt for input if stack is empty and player is set to skip the current phase
             }
         }
-        else {
+        else if (!game.getDisableAutoYields()) {
             SpellAbility ability = stack.peekAbility();
             if (ability != null && ability.isAbility() && shouldAutoYield(ability.toUnsuppressedString())) {
                 //avoid prompt for input if top ability of stack is set to auto-yield
