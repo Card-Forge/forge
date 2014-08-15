@@ -16,18 +16,8 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 
 public class VAutoYields extends FDialog {
-    private final FButton btnOk = add(new FButton("OK", new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            hide();
-        }
-    }));
-    private final FButton btnRemove = add(new FButton("Remove", new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            hide();
-        }
-    }));
+    private final FButton btnOk;
+    private final FButton btnRemove;
     private final FChoiceList<String> lstAutoYields;
     private final FCheckBox chkDisableAll;
 
@@ -55,6 +45,24 @@ public class VAutoYields extends FDialog {
                 game.setDisableAutoYields(chkDisableAll.isSelected());
             }
         });
+        btnOk = add(new FButton("OK", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                hide();
+            }
+        }));
+        btnRemove = add(new FButton("Remove Yield", new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                String selected = lstAutoYields.getSelectedItem();
+                if (selected != null) {
+                    lstAutoYields.removeItem(selected);
+                    player.getController().setShouldAutoYield(selected, false);
+                    lstAutoYields.cleanUpSelections();
+                    VAutoYields.this.revalidate();
+                }
+            }
+        }));
         btnRemove.setEnabled(autoYields.size() > 0);
     }
 
