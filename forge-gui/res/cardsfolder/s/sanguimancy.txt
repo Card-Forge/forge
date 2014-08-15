@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Sorcery
 A:SP$ Draw | Cost$ 4 B | NumCards$ X | References$ X | SubAbility$ DBLoseLife | SpellDescription$ You draw X cards and you lose X life, where X is your devotion to black.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
-SVar:X:Count$Devotion.B
+SVar:X:Count$Devotion.Black
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguimancy.jpg
 Oracle:You draw X cards and you lose X life, where X is your devotion to black. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)

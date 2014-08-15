@@ -4,7 +4,7 @@ Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to green and blue is less than seven, CARDNAME isn't a creature.
-SVar:X:Count$DevotionDual.U.G
+SVar:X:Count$DevotionDual.Green.Blue
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Convert unused mana to Colorless | Description$ If unused mana would empty from your mana pool, that mana becomes colorless instead.
 SVar:BuffedBy:Permanent.Green,Permanent.Blue

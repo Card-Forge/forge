@@ -5,7 +5,7 @@ PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a number of 1/1 black Harpy creature tokens with flying onto the battlefield equal to your devotion to black.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Harpy | TokenTypes$ Creature,Harpy | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ b_1_1_harpy_ths
-SVar:X:Count$Devotion.B
+SVar:X:Count$Devotion.Black
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SacMessage$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abhorrent_overlord.jpg

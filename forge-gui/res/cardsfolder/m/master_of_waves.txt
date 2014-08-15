@@ -6,7 +6,7 @@ K:Protection from red
 S:Mode$ Continuous | Affected$ Creature.Elemental+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Elemental creatures you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a number of 1/0 blue Elemental creature tokens onto the battlefield equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 0 | References$ X | TokenImage$ u_1_0_elemental_ths
-SVar:X:Count$Devotion.U
+SVar:X:Count$Devotion.Blue
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_waves.jpg
 Oracle:Protection from red\nElemental creatures you control get +1/+1.\nWhen Master of Waves enters the battlefield, put a number of 1/0 blue Elemental creature tokens onto the battlefield equal to your devotion to blue. (Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)
