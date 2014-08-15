@@ -18,35 +18,16 @@
 
 package forge.toolbox;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.google.common.base.Function;
 
 import forge.FThreads;
-import forge.Graphics;
-import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.TextRenderer;
-import forge.assets.FSkinColor.Colors;
-import forge.card.CardRenderer;
-import forge.card.CardZoom;
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.item.PaperCard;
-import forge.screens.match.FControl;
-import forge.screens.match.views.VAvatar;
-import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FList.CompactModeHandler;
-import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-import forge.util.Utils;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -74,14 +55,7 @@ import java.util.List;
  * @version $Id: ListChooser.java 25183 2014-03-14 23:09:45Z drdev $
  */
 public class ListChooser<T> extends FContainer {
-    public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    public static final FSkinColor ALT_ITEM_COLOR = ITEM_COLOR.getContrastColor(-20);
-    public static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    public static final FSkinColor BORDER_COLOR = FList.FORE_COLOR;
-    public static final float DEFAULT_ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
-
     // Data and number of choices for the list
-    private int minChoices, maxChoices;
 
     // Flag: was the dialog already shown?
     private boolean called;
@@ -93,12 +67,9 @@ public class ListChooser<T> extends FContainer {
     private final Collection<T> list;
     private final Function<T, String> display;
     private final Callback<List<T>> callback;
-    private final CompactModeHandler compactModeHandler = new CompactModeHandler();
 
-    public ListChooser(final String title, final int minChoices0, final int maxChoices0, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
-        minChoices = minChoices0;
-        maxChoices = maxChoices0;
         list = list0;
         if (list.size() > 25) { //only show search field if more than 25 items
             txtSearch = add(new FTextField());
@@ -108,28 +79,27 @@ public class ListChooser<T> extends FContainer {
                 @Override
                 public void handleEvent(FEvent e) {
                     String pattern = txtSearch.getText().toLowerCase();
-                    lstChoices.selectedIndices.clear();
+                    lstChoices.clearSelection();
                     if (pattern.isEmpty()) {
                         lstChoices.setListData(list);
                     }
                     else {
                         List<T> filteredList = new ArrayList<T>();
                         for (T option : list) {
-                            if (getChoiceText(option).toLowerCase().contains(pattern)) {
+                            if (lstChoices.getChoiceText(option).toLowerCase().contains(pattern)) {
                                 filteredList.add(option);
                             }
                         }
                         lstChoices.setListData(filteredList);
                     }
                     if (!lstChoices.isEmpty() && maxChoices > 0) {
-                        lstChoices.selectedIndices.add(0);
+                        lstChoices.addSelectedIndex(0);
                     }
                     lstChoices.setScrollTop(0);
-                    onSelectionChange();
                 }
             });
         }
-        lstChoices = add(new ChoiceList(list));
+        lstChoices = add(new ChoiceList(list, minChoices, maxChoices));
         display = display0;
         callback = callback0;
 
@@ -148,11 +118,7 @@ public class ListChooser<T> extends FContainer {
             public void run(Integer result) {
                 called = false;
                 if (result == 0) {
-                    List<T> choices = new ArrayList<T>();
-                    for (int i : lstChoices.selectedIndices) {
-                        choices.add(lstChoices.getItemAt(i));
-                    }
-                    callback.run(choices);
+                    callback.run(lstChoices.getSelectedItems());
                 }
                 else if (minChoices > 0) {
                     show(); //show if user tries to cancel when input is mandatory
@@ -187,35 +153,25 @@ public class ListChooser<T> extends FContainer {
             throw new IllegalStateException("Already shown");
         }
         called = true;
-        lstChoices.selectedIndices.clear();
         if (item == null) {
             if (selectMax) {
-                int max = Math.min(maxChoices, list.size());
+                lstChoices.clearSelection();
+                int max = Math.min(lstChoices.getMaxChoices(), list.size());
                 for (int i = 0; i < max; i++) {
-                    lstChoices.selectedIndices.add(i);
+                    lstChoices.addSelectedIndex(i);
                 }
             }
-            else if (maxChoices == 1) { //select first item only if single-select
-                lstChoices.selectedIndices.add(0);
+            else if (lstChoices.getMaxChoices() == 1) { //select first item only if single-select
+                lstChoices.setSelectedIndex(0);
+            }
+            else {
+                lstChoices.clearSelection();
             }
         }
         else {
-            lstChoices.selectedIndices.add(lstChoices.getIndexOf(item));
+            lstChoices.setSelectedItem(item);
         }
-        onSelectionChange();
         optionPane.show();
-    }
-
-    private void onSelectionChange() {
-        final int num = lstChoices.selectedIndices.size();
-        optionPane.setButtonEnabled(0, (num >= minChoices) && (num <= maxChoices || maxChoices == -1));
-    }
-
-    private String getChoiceText(T choice) {
-        if (display == null) {
-            return choice.toString();
-        }
-        return display.apply(choice);
     }
 
     @Override
@@ -228,287 +184,35 @@ public class ListChooser<T> extends FContainer {
         lstChoices.setBounds(0, y, width, height - y);
     }
 
-    private abstract class ItemRenderer {
-        public abstract FSkinFont getDefaultFont();
-        public abstract float getItemHeight();
-        public abstract boolean tap(T value, float x, float y, int count);
-        public abstract boolean longPress(T value, float x, float y);
-        public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
-    }
-    private class DefaultItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(12);
+    private class ChoiceList extends FChoiceList<T> {
+        private ChoiceList(Collection<T> items, int minChoices0, int maxChoices0) {
+            super(items, minChoices0, maxChoices0);
         }
 
         @Override
-        public float getItemHeight() {
-            return DEFAULT_ITEM_HEIGHT;
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return false;
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            return false;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
-        }
-    }
-    //special renderer for cards
-    private class PaperCardItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(14);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count, compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show((PaperCard)value);
-            return true;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
-        }
-    }
-    //special renderer for cards
-    private class CardItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(14);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((Card)value, x, y, count, compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show((Card)value);
-            return true;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
-        }
-    }
-    //special renderer for SpellAbilities
-    private class SpellAbilityItemRenderer extends ItemRenderer {
-        private final TextRenderer textRenderer = new TextRenderer(true);
-
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(14);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return VStack.CARD_HEIGHT + 2 * FList.PADDING;
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((SpellAbility)value).getHostCard());
-                return true;
+        protected String getChoiceText(T choice) {
+            if (display == null) {
+                return choice.toString();
             }
-            return false;
+            return display.apply(choice);
         }
 
         @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show(((SpellAbility)value).getHostCard());
-            return true;
+        protected void onSelectionChange() {
+            final int num = getSelectionCount();
+            optionPane.setButtonEnabled(0, (num >= minChoices) && (num <= maxChoices || maxChoices == -1));
         }
 
         @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            SpellAbility spellAbility = (SpellAbility)value;
-            CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
-
-            float dx = VStack.CARD_WIDTH + FList.PADDING;
-            x += dx;
-            w -= dx;
-            textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
-        }
-    }
-    private class PlayerItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(18);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return VAvatar.HEIGHT;
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return false;
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            return false;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            Player player = (Player)value;
-            g.drawImage(FControl.getPlayerAvatar(player), x - FList.PADDING, y - FList.PADDING, VAvatar.WIDTH, VAvatar.HEIGHT);
-            x += VAvatar.WIDTH;
-            w -= VAvatar.WIDTH;
-            g.drawText(player.getName() + " (" + player.getLife() + ")", font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
-        }
-    }
-
-    private class ChoiceList extends FList<T> {
-        private List<Integer> selectedIndices = new ArrayList<Integer>();
-
-        private ChoiceList(Collection<T> items) {
-            super(items);
-
-            //determine renderer from item type
-            final ItemRenderer renderer;
-            T item = items.iterator().next();
-            if (item instanceof PaperCard) {
-                renderer = new PaperCardItemRenderer();
+        protected void onItemActivate(Integer index, T value) {
+            if (optionPane.isButtonEnabled(0)) {
+                optionPane.setResult(0);
             }
-            else if (item instanceof Card) {
-                renderer = new CardItemRenderer();
-            }
-            else if (item instanceof SpellAbility) {
-                renderer = new SpellAbilityItemRenderer();
-            }
-            else if (item instanceof Player) {
-                renderer = new PlayerItemRenderer();
-            }
-            else {
-                renderer = new DefaultItemRenderer();
-            }
-            setListItemRenderer(new ListItemRenderer<T>() {
-                private int prevTapIndex = -1;
-
-                @Override
-                public float getItemHeight() {
-                    return renderer.getItemHeight();
-                }
-
-                @Override
-                public boolean tap(Integer index, T value, float x, float y, int count) {
-                    if (maxChoices > 1) {
-                        if (selectedIndices.contains(index)) {
-                            selectedIndices.remove(index);
-                            onSelectionChange();
-                        }
-                        else if (selectedIndices.size() < maxChoices) {
-                            selectedIndices.add(index);
-                            Collections.sort(selectedIndices); //ensure selected indices are sorted
-                            onSelectionChange();
-                        }
-                    }
-                    else if (maxChoices > 0 && !selectedIndices.contains(index)) {
-                        selectedIndices.clear();
-                        selectedIndices.add(index);
-                        onSelectionChange();
-                    }
-                    if (renderer.tap(value, x, y, count)) {
-                        prevTapIndex = index;
-                        return true; //don't activate if renderer handles tap
-                    }
-                    if (count == 2 && index == prevTapIndex && optionPane.isButtonEnabled(0)) {
-                        optionPane.setResult(0);
-                    }
-                    prevTapIndex = index;
-                    return true;
-                }
-
-                @Override
-                public boolean showMenu(Integer index, T value, FDisplayObject owner, float x, float y) {
-                    return renderer.longPress(value, x, y);
-                }
-
-                @Override
-                public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                    if (maxChoices > 1) {
-                        if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
-                            g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
-                        }
-                        //draw checkbox, with it checked based on whether item is selected
-                        float checkBoxSize = h / 2;
-                        float padding = checkBoxSize / 2;
-                        w -= checkBoxSize + padding;
-                        FCheckBox.drawCheckBox(g, selectedIndices.contains(index), x + w, y + padding, checkBoxSize, checkBoxSize);
-                        w -= padding;
-                    }
-                    renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
-                }
-            });
-            setFont(renderer.getDefaultFont());
         }
 
         @Override
-        public boolean zoom(float x, float y, float amount) {
-            if (compactModeHandler.update(amount)) {
-                updateHeight(); //update height and scroll bounds based on compact mode change
-                if (selectedIndices.size() > 0) {
-                    scrollIntoView(selectedIndices.get(0)); //ensure selection remains in view
-                }
-            }
-            return true;
-        }
-
-        @Override
-        protected void drawBackground(Graphics g) {
-            //draw no background
-        }
-
-        @Override
-        public void drawOverlay(Graphics g) {
-            super.drawOverlay(g);
-            g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
-        }
-
-        @Override
-        protected FSkinColor getItemFillColor(int index) {
-            if (maxChoices == 1 && selectedIndices.contains(index)) {
-                return SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
-            }
-            if (index % 2 == 1) {
-                return ALT_ITEM_COLOR;
-            }
-            return ITEM_COLOR;
-        }
-
-        @Override
-        protected boolean drawLineSeparators() {
-            return false;
+        protected void onCompactModeChange() {
+            updateHeight(); //update height and scroll bounds based on compact mode change
         }
     }
 }

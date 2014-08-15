@@ -356,7 +356,7 @@ public class FFileChooser extends FDialog {
 
                 @Override
                 public float getItemHeight() {
-                    return ListChooser.DEFAULT_ITEM_HEIGHT;
+                    return FChoiceList.DEFAULT_ITEM_HEIGHT;
                 }
 
                 @Override
@@ -423,18 +423,18 @@ public class FFileChooser extends FDialog {
         @Override
         public void drawOverlay(Graphics g) {
             super.drawOverlay(g);
-            g.drawRect(1.5f, ListChooser.BORDER_COLOR, 0, 0, getWidth(), getHeight());
+            g.drawRect(1.5f, FChoiceList.BORDER_COLOR, 0, 0, getWidth(), getHeight());
         }
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
             if (getItemAt(index).getAbsolutePath().equals(getSelectedFilename())) {
-                return ListChooser.SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
+                return FChoiceList.SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
             }
             if (index % 2 == 1) {
-                return ListChooser.ALT_ITEM_COLOR;
+                return FChoiceList.ALT_ITEM_COLOR;
             }
-            return ListChooser.ITEM_COLOR;
+            return FChoiceList.ITEM_COLOR;
         }
 
         @Override

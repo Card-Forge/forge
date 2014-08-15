@@ -1,19 +1,8 @@
 package forge.toolbox;
 
-import forge.Graphics;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.TextRenderer;
-import forge.card.CardRenderer;
-import forge.card.CardZoom;
-import forge.game.card.Card;
-import forge.game.spellability.SpellAbility;
-import forge.item.PaperCard;
 import forge.screens.match.views.VPrompt;
-import forge.screens.match.views.VStack;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Callback;
 
 import java.util.ArrayList;
@@ -48,7 +37,6 @@ public class DualListBox<T> extends FDialog {
 
     private final int targetRemainingSourcesMin;
     private final int targetRemainingSourcesMax;
-    private final CompactModeHandler compactModeHandler = new CompactModeHandler();
 
     public DualListBox(String title, int remainingSources, List<T> sourceElements, List<T> destElements, final Callback<List<T>> callback) {
         this(title, remainingSources, remainingSources, sourceElements, destElements, callback);
@@ -64,14 +52,11 @@ public class DualListBox<T> extends FDialog {
             public void handleEvent(FEvent e) {
                 if (!addButton.isEnabled()) { return; }
 
-                List<T> selected = new ArrayList<T>();
-                for (int index : sourceList.selectedIndices) {
-                    selected.add(sourceList.getItemAt(index));
-                }
-                destList.selectedIndices.clear();
+                List<T> selected = sourceList.getSelectedItems();
+                destList.clearSelection();
                 for (T item : selected) {
                     sourceList.removeItem(item);
-                    destList.selectedIndices.add(destList.getCount());
+                    destList.addSelectedIndex(destList.getCount());
                     destList.addItem(item);
                 }
                 sourceList.cleanUpSelections();
@@ -84,14 +69,11 @@ public class DualListBox<T> extends FDialog {
             public void handleEvent(FEvent e) {
                 if (!removeButton.isEnabled()) { return; }
 
-                List<T> selected = new ArrayList<T>();
-                for (int index : destList.selectedIndices) {
-                    selected.add(destList.getItemAt(index));
-                }
-                sourceList.selectedIndices.clear();
+                List<T> selected = destList.getSelectedItems();
+                sourceList.clearSelection();
                 for (T item : selected) {
                     destList.removeItem(item);
-                    sourceList.selectedIndices.add(sourceList.getCount());
+                    sourceList.addSelectedIndex(sourceList.getCount());
                     sourceList.addItem(item);
                 }
                 destList.cleanUpSelections();
@@ -99,35 +81,20 @@ public class DualListBox<T> extends FDialog {
             }
         };
 
-        //determine renderer from item type
-        final ItemRenderer renderer;
-        T item = null;
+        T typeItem = null; //pass typeItem so both lists use same renderer
         if (sourceElements != null && sourceElements.size() > 0) {
-            item = sourceElements.get(0);
+            typeItem = sourceElements.get(0);
         }
         else if (destElements != null && destElements.size() > 0) {
-            item = destElements.get(0);
+            typeItem = destElements.get(0);
         }
-        if (item instanceof Card) {
-            renderer = new CardItemRenderer();
-        }
-        else if (item instanceof PaperCard) {
-            renderer = new PaperCardItemRenderer();
-        }
-        else if (item instanceof SpellAbility) {
-            renderer = new SpellAbilityItemRenderer();
-        }
-        else {
-            renderer = new DefaultItemRenderer();
-        }
-
-        sourceList = add(new ChoiceList(sourceElements, renderer, onAdd));
-        destList = add(new ChoiceList(destElements, renderer, onRemove));
+        sourceList = add(new ChoiceList(sourceElements, typeItem, onAdd));
+        destList = add(new ChoiceList(destElements, typeItem, onRemove));
         if (sourceList.getCount() > 0) { //select first items by default if possible
-            sourceList.selectedIndices.add(0);
+            sourceList.addSelectedIndex(0);
         }
         if (destList.getCount() > 0) {
-            destList.selectedIndices.add(0);
+            destList.addSelectedIndex(0);
         }
 
         // Dual List control buttons
@@ -218,24 +185,22 @@ public class DualListBox<T> extends FDialog {
     }
 
     private void addAll() {
-        destList.selectedIndices.clear();
+        destList.clearSelection();
         for (T item : sourceList) {
-            destList.selectedIndices.add(destList.getCount());
+            destList.addSelectedIndex(destList.getCount());
             destList.addItem(item);
         }
         sourceList.clear();
-        sourceList.selectedIndices.clear();
         setButtonState();
     }
 
     private void removeAll() {
-        sourceList.selectedIndices.clear();
+        sourceList.clearSelection();
         for (T item : destList) {
-            sourceList.selectedIndices.add(sourceList.getCount());
+            sourceList.addSelectedIndex(sourceList.getCount());
             sourceList.addItem(item);
         }
         destList.clear();
-        destList.selectedIndices.clear();
         setButtonState();
     }
 
@@ -254,224 +219,16 @@ public class DualListBox<T> extends FDialog {
         okButton.setEnabled(targetReached);
     }
 
-    private abstract class ItemRenderer {
-        public abstract FSkinFont getDefaultFont();
-        public abstract float getItemHeight();
-        public abstract boolean tap(T value, float x, float y, int count);
-        public abstract boolean longPress(T value, float x, float y);
-        public abstract void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h);
-    }
-    private class DefaultItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(12);
+    private class ChoiceList extends FChoiceList<T> {
+        private final FEventHandler onActivate;
+
+        private ChoiceList(Collection<T> items, final T typeItem, final FEventHandler onActivate0) {
+            super(items != null ? items : new ArrayList<T>(), typeItem); //handle null without crashing
+            onActivate = onActivate0;
         }
 
-        @Override
-        public float getItemHeight() {
-            return ListChooser.DEFAULT_ITEM_HEIGHT;
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return false;
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            return false;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(value.toString(), font, foreColor, x, y, w, h, true, HAlignment.LEFT, true);
-        }
-    }
-    //special renderer for SpellAbilities
-    private class SpellAbilityItemRenderer extends ItemRenderer {
-        private final TextRenderer textRenderer = new TextRenderer(true);
-
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(12);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return VStack.CARD_HEIGHT + 2 * FList.PADDING;
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            if (x <= VStack.CARD_WIDTH + 2 * FList.PADDING) {
-                CardZoom.show(((SpellAbility)value).getHostCard());
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show(((SpellAbility)value).getHostCard());
-            return true;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            SpellAbility spellAbility = (SpellAbility)value;
-            CardRenderer.drawCardWithOverlays(g, spellAbility.getHostCard(), x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT);
-
-            float dx = VStack.CARD_WIDTH + FList.PADDING;
-            x += dx;
-            w -= dx;
-            textRenderer.drawText(g, spellAbility.toString(), font, foreColor, x, y, w, h, y, h, true, HAlignment.LEFT, true);
-        }
-    }
-    //special renderer for cards
-    private class CardItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(14);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((Card)value, x, y, count, compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show((Card)value);
-            return true;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (Card)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
-        }
-    }
-    //special renderer for paper cards
-    private class PaperCardItemRenderer extends ItemRenderer {
-        @Override
-        public FSkinFont getDefaultFont() {
-            return FSkinFont.get(14);
-        }
-
-        @Override
-        public float getItemHeight() {
-            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean tap(T value, float x, float y, int count) {
-            return CardRenderer.cardListItemTap((PaperCard)value, x, y, count, compactModeHandler.isCompactMode());
-        }
-
-        @Override
-        public boolean longPress(T value, float x, float y) {
-            CardZoom.show((PaperCard)value);
-            return true;
-        }
-
-        @Override
-        public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
-        }
-    }
-
-    private class ChoiceList extends FList<T> {
-        private List<Integer> selectedIndices = new ArrayList<Integer>();
-
-        private ChoiceList(Collection<T> items, final ItemRenderer renderer, final FEventHandler dblTapCommand) {
-            super(items != null ? items : new ArrayList<T>()); //handle null without crashing
-
-            setListItemRenderer(new ListItemRenderer<T>() {
-                @Override
-                public float getItemHeight() {
-                    return renderer.getItemHeight();
-                }
-
-                @Override
-                public boolean tap(Integer index, T value, float x, float y, int count) {
-                    selectedIndices.clear();
-                    selectedIndices.add(index);
-                    if (renderer.tap(value, x, y, count)) {
-                        return true; //don't activate if renderer handles tap
-                    }
-                    if (count == 2) {
-                        dblTapCommand.handleEvent(new FEvent(ChoiceList.this, FEventType.ACTIVATE, index));
-                    }
-                    return true;
-                }
-
-                @Override
-                public boolean showMenu(Integer index, T value, FDisplayObject owner, float x, float y) {
-                    return renderer.longPress(value, x, y);
-                }
-
-                @Override
-                public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                    renderer.drawValue(g, value, font, foreColor, pressed, x, y, w, h);
-                }
-            });
-            setFont(renderer.getDefaultFont());
-        }
-
-        //remove any selected indices outside item range
-        public void cleanUpSelections() {
-            int count = getCount();
-            for (int i = 0; i < selectedIndices.size(); i++) {
-                if (selectedIndices.get(i) >= count) {
-                    selectedIndices.remove(i);
-                    i--;
-                }
-            }
-            if (selectedIndices.isEmpty() && count > 0) {
-                selectedIndices.add(count - 1); //select last item if nothing remains selected
-            }
-        }
-
-        @Override
-        public boolean zoom(float x, float y, float amount) {
-            if (compactModeHandler.update(amount)) {
-                revalidate();
-                if (selectedIndices.size() > 0) {
-                    scrollIntoView(selectedIndices.get(0)); //ensure selection remains in view
-                }
-            }
-            return true;
-        }
-
-        @Override
-        protected void drawBackground(Graphics g) {
-            //draw no background
-        }
-
-        @Override
-        public void drawOverlay(Graphics g) {
-            super.drawOverlay(g);
-            g.drawRect(1.5f, ListChooser.BORDER_COLOR, 0, 0, getWidth(), getHeight());
-        }
-
-        @Override
-        protected FSkinColor getItemFillColor(int index) {
-            if (selectedIndices.contains(index)) {
-                return ListChooser.SEL_COLOR;
-            }
-            if (index % 2 == 1) {
-                return ListChooser.ALT_ITEM_COLOR;
-            }
-            return ListChooser.ITEM_COLOR;
-        }
-
-        @Override
-        protected boolean drawLineSeparators() {
-            return false;
+        protected void onItemActivate(Integer index, T value) {
+            onActivate.handleEvent(new FEvent(this, FEventType.ACTIVATE, value));
         }
     }
 

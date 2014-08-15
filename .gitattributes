@@ -1240,6 +1240,7 @@ forge-gui-mobile/src/forge/toolbox/DualListBox.java -text
 forge-gui-mobile/src/forge/toolbox/FButton.java -text
 forge-gui-mobile/src/forge/toolbox/FCardPanel.java -text
 forge-gui-mobile/src/forge/toolbox/FCheckBox.java -text
+forge-gui-mobile/src/forge/toolbox/FChoiceList.java -text
 forge-gui-mobile/src/forge/toolbox/FComboBox.java -text
 forge-gui-mobile/src/forge/toolbox/FContainer.java -text
 forge-gui-mobile/src/forge/toolbox/FDialog.java -text

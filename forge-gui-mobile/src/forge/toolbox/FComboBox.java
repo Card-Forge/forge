@@ -13,23 +13,23 @@ import forge.menu.FMenuItem;
 import forge.screens.FScreen;
 import forge.toolbox.FEvent.*;
 
-public class FComboBox<E> extends FTextField implements IComboBox<E> {
-    private final List<E> items = new ArrayList<E>();
-    private E selectedItem;
+public class FComboBox<T> extends FTextField implements IComboBox<T> {
+    private final List<T> items = new ArrayList<T>();
+    private T selectedItem;
     private final DropDown dropDown = new DropDown();
     private FEventHandler dropDownChangeHandler;
 
     public FComboBox() {
         initialize();
     }
-    public FComboBox(E[] itemArray) {
-        for (E item : itemArray) {
+    public FComboBox(T[] itemArray) {
+        for (T item : itemArray) {
             items.add(item);
         }
         initialize();
     }
-    public FComboBox(Iterable<E> items0) {
-        for (E item : items0) {
+    public FComboBox(Iterable<T> items0) {
+        for (T item : items0) {
             items.add(item);
         }
         initialize();
@@ -41,14 +41,14 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
         }
     }
 
-    public void addItem(E item) {
+    public void addItem(T item) {
         items.add(item);
         if (items.size() == 1) {
             setSelectedItem(item); //select first item by default
         }
     }
 
-    public boolean removeItem(E item) {
+    public boolean removeItem(T item) {
         int restoreIndex = -1; 
         if (selectedItem == item) {
             restoreIndex = getSelectedIndex();
@@ -87,11 +87,11 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
         setSelectedItem(items.get(index));
     }
 
-    public E getSelectedItem() {
+    public T getSelectedItem() {
         return selectedItem;
     }
 
-    public void setSelectedItem(E item) {
+    public void setSelectedItem(T item) {
         if (selectedItem == item) { return; }
 
         if (item != null) {
@@ -113,7 +113,7 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
 
     @Override
     public void setText(String text0) {
-        for (E item : items) {
+        for (T item : items) {
             if (item.toString().equals(text0)) {
                 setSelectedItem(item);
                 return;
@@ -145,7 +145,7 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
     public float getAutoSizeWidth() {
         //use widest item width to determine auto-size width
         float maxTextWidth = 0;
-        for (E item : items) {
+        for (T item : items) {
             float width = font.getBounds(item.toString()).width;
             if (width > maxTextWidth) {
                 maxTextWidth = width;
@@ -184,7 +184,7 @@ public class FComboBox<E> extends FTextField implements IComboBox<E> {
     private class DropDown extends FDropDownMenu {
         @Override
         protected void buildMenu() {
-            for (final E item : FComboBox.this.items) {
+            for (final T item : FComboBox.this.items) {
                 FMenuItem menuItem = new FMenuItem(item.toString(), new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
