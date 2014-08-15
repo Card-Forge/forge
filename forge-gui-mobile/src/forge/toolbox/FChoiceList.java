@@ -227,6 +227,10 @@ public class FChoiceList<T> extends FList<T> {
         revalidate(); //update scroll bounds by default when compact mode changes
     }
 
+    protected boolean allowDefaultItemWrap() {
+        return false;
+    }
+
     @Override
     public boolean zoom(float x, float y, float amount) {
         if (compactModeHandler.update(amount)) {
@@ -280,6 +284,9 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public float getItemHeight() {
+            if (allowDefaultItemWrap()) {
+                return DEFAULT_ITEM_HEIGHT * 1.5f; //provide more height for wrapping
+            }
             return DEFAULT_ITEM_HEIGHT;
         }
 
@@ -295,7 +302,7 @@ public class FChoiceList<T> extends FList<T> {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, false, HAlignment.LEFT, true);
+            g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), HAlignment.LEFT, true);
         }
     }
     //special renderer for cards

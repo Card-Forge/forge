@@ -42,6 +42,11 @@ public class VAutoYields extends FDialog {
             protected void onCompactModeChange() {
                 VAutoYields.this.revalidate(); //revalidate entire dialog so height updated
             }
+
+            @Override
+            protected boolean allowDefaultItemWrap() {
+                return true;
+            }
         });
         chkDisableAll = add(new FCheckBox("Disable All Auto Yields", game.getDisableAutoYields()));
         chkDisableAll.setCommand(new FEventHandler() {
