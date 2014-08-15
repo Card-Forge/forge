@@ -73,6 +73,10 @@ Spectral Shift
 Trait Doctoring
 Whim of Volrath
 Balduvian Shaman
+Swirl the Mists
+Iterative Analysis
+Double Stroke
+Unexpected Potential
 
 
 -------------------------------
@@ -80,6 +84,7 @@ New Commander 2014 branch Cards
 -------------------------------
 
 Ghoulcaller Gisa
+Stitcher Geralf
 Teferi, Temporal Archmage
 
 
