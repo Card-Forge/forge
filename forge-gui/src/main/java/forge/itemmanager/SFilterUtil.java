@@ -39,7 +39,7 @@ public class SFilterUtil {
         
         Predicate<CardRules> filter = expression.evaluate();
         if (filter != null) {
-            return Predicates.compose(filter, PaperCard.FN_GET_RULES);
+            return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard.FN_GET_RULES);
         }
         
         String[] splitText = text.replaceAll(",", "").replaceAll("  ", " ").split(" ");
@@ -256,7 +256,7 @@ public class SFilterUtil {
         }
         
         private Predicate<CardRules> evaluateValue(String value) {
-            List<Predicate<CardRules>> predicates = new ArrayList<Predicate<CardRules>>();
+            List<Predicate<CardRules>> predicates = new ArrayList<>();
             if (inName) {
                 predicates.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, value));
             }
