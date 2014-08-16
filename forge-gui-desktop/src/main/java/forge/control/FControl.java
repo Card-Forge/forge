@@ -97,6 +97,7 @@ public enum FControl implements KeyEventDispatcher {
     private FScreen currentScreen;
     private boolean altKeyLastDown;
     private CloseAction closeAction;
+    private Player localPlayer;
 
     public static enum CloseAction {
         NONE,
@@ -387,6 +388,10 @@ public enum FControl implements KeyEventDispatcher {
         return game;
     }
 
+    public Player getLocalPlayer() {
+        return localPlayer;
+    }
+
     public final void stopGame() {
         List<Player> pp = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
@@ -476,7 +481,7 @@ public enum FControl implements KeyEventDispatcher {
         // The UI controls should use these game data as models
         CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
 
-        Player localPlayer = null;
+        localPlayer = null;
         for (Player p : game.getPlayers()) {
             if (p.getLobbyPlayer() == humanLobbyPlayer) {
                 localPlayer = p;

@@ -93,6 +93,15 @@ public class FList<E> extends SkinnedList<E> {
         return width;
     }
 
+    public int getCount() {
+        return getModel().getSize();
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void removeItem(E item) {
+        ((DefaultListModel)getModel()).removeElement(item);
+    }
+
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {
         private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 

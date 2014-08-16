@@ -925,6 +925,7 @@ forge-gui-desktop/src/main/java/forge/screens/match/QuestWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/QuestWinLoseCardViewer.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/TargetingOverlay.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/VAssignDamage.java -text
+forge-gui-desktop/src/main/java/forge/screens/match/VAutoYields.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/VMatchUI.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/ViewWinLose.java -text
 forge-gui-desktop/src/main/java/forge/screens/match/ZoneAction.java -text

@@ -1,0 +1,103 @@
+package forge.screens.match;
+
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import forge.Singletons;
+import forge.UiCommand;
+import forge.game.Game;
+import forge.game.player.Player;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FScrollPane;
+import forge.view.FDialog;
+
+@SuppressWarnings("serial")
+public class VAutoYields extends FDialog {
+    private static final int PADDING = 10;
+    private static final int BUTTON_WIDTH = 140;
+    private static final int BUTTON_HEIGHT = 26;
+
+    private final FButton btnOk;
+    private final FButton btnRemove;
+    private final FList<String> lstAutoYields;
+    private final FScrollPane listScroller;
+    private final FCheckBox chkDisableAll;
+
+    public VAutoYields(final Game game, final Player player) {
+        super(true);
+        setTitle("Auto-Yields");
+
+        List<String> autoYields = new ArrayList<String>();
+        for (String autoYield : player.getController().getAutoYields()) {
+            autoYields.add(autoYield);
+        }
+        lstAutoYields = new FList<String>(autoYields.toArray(new String[]{}));
+
+        int x = PADDING;
+        int y = PADDING;
+        int width = Singletons.getView().getFrame().getWidth() * 2 / 3;
+        int w = width - 2 * PADDING;
+
+        listScroller = new FScrollPane(lstAutoYields, true);
+
+        chkDisableAll = new FCheckBox("Disable All Auto Yields", game.getDisableAutoYields());
+        chkDisableAll.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                game.setDisableAutoYields(chkDisableAll.isSelected());
+            }
+        });
+
+        btnOk = new FButton("OK");
+        btnOk.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                setVisible(false);
+            }
+        });
+        btnRemove = new FButton("Remove Yield");
+        btnRemove.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                String selected = lstAutoYields.getSelectedValue();
+                if (selected != null) {
+                    lstAutoYields.removeItem(selected);
+                    player.getController().setShouldAutoYield(selected, false);
+                    VAutoYields.this.revalidate();
+                }
+            }
+        });
+        btnRemove.setEnabled(autoYields.size() > 0);
+
+        Dimension checkBoxSize = chkDisableAll.getPreferredSize();
+        int listHeight = lstAutoYields.getMinimumSize().height + 2 * PADDING;
+
+        add(listScroller, x, y, w, listHeight);
+        y += listHeight + PADDING;
+        add(chkDisableAll, x, y, checkBoxSize.width, checkBoxSize.height);
+        x = w - 2 * BUTTON_WIDTH - PADDING;
+        add(btnOk, x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        x += BUTTON_WIDTH + PADDING;
+        add(btnRemove, x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
+
+        this.pack();
+        this.setSize(width, getHeight());
+    }
+
+    public void showAutoYields() {
+        if (lstAutoYields.getCount() > 0) {
+            setVisible(true);
+            dispose();
+        }
+        else {
+            FOptionPane.showMessageDialog("There are no active auto-yields.", "No Auto-Yields", FOptionPane.INFORMATION_ICON);
+        }
+    }
+}

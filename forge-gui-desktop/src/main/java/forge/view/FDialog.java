@@ -205,7 +205,11 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         }
         super.add(popup);
     }
-    
+
+    public void add(Component comp, int x, int y, int w, int h) {
+        add(comp, "x " + x + ", y " + y + ", w " + w + ", h " + h);
+    }
+
     @Override
     public void add(Component comp, Object constraints) {
         if (innerPanel != null) {

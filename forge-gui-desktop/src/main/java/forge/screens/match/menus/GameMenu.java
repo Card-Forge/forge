@@ -1,12 +1,15 @@
 package forge.screens.match.menus;
 
+import forge.Singletons;
 import forge.assets.FSkinProp;
+import forge.control.FControl;
 import forge.match.MatchUtil;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock;
 import forge.toolbox.FSkin.*;
 
@@ -38,10 +41,11 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(CardOverlaysMenu.getMenu(showMenuIcons));
-        menu.addSeparator();
-        menu.add(getMenuItem_GameSoundEffects());
+        menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
+        menu.addSeparator();
+        menu.add(getMenuItem_GameSoundEffects());
         return menu;
     }
 
@@ -183,6 +187,24 @@ public final class GameMenu {
         menu.setIcon(item.getIcon());
     }
 
+    private static SkinnedMenuItem getMenuItem_AutoYields() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Auto-Yields");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_WARNING) : null));
+        menuItem.addActionListener(getAutoYieldsAction());
+        return menuItem;
+    }
+
+    private static ActionListener getAutoYieldsAction() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FControl control = Singletons.getControl();
+                VAutoYields autoYields = new VAutoYields(control.getObservedGame(), control.getLocalPlayer());
+                autoYields.showAutoYields();
+            }
+        };
+    }
+
     private static SkinnedMenuItem getMenuItem_ViewDeckList() {
         SkinnedMenuItem menuItem = new SkinnedMenuItem("Deck List");
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_DECKLIST) : null));
@@ -198,5 +220,4 @@ public final class GameMenu {
             }
         };
     }
-
 }
