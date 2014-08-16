@@ -107,7 +107,7 @@ public abstract class DeckGeneratorBase {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much, please try again -- Cr12");
             }
 
-            tDeck.add(cardDb.getCard(cp.getName()));
+            tDeck.add(cardDb.getCard(cp.getName(),cp.getEdition()));
 
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
@@ -141,8 +141,13 @@ public abstract class DeckGeneratorBase {
         }
         return res;
     }
+    
+    protected void addBasicLand(int cnt)
+    {
+    	addBasicLand(cnt, null);
+    }
 
-    protected void addBasicLand(int cnt) {
+    protected void addBasicLand(int cnt, String edition) {
         tmpDeck.append(cnt).append(" basic lands remain").append("\n");
         
         // attempt to optimize basic land counts according to colors of picked cards
@@ -168,7 +173,11 @@ public abstract class DeckGeneratorBase {
             // just to prevent a null exception by the deck size fixing code
             this.cardCounts.put(basicLandName, nLand);
 
-            PaperCard cp = cardDb.getCard(basicLandName);
+            PaperCard cp;
+            if(edition != null)
+            	cp = cardDb.getCard(basicLandName, edition);
+            else
+            	cp = cardDb.getCard(basicLandName);
             String basicLandSet = cp.getEdition();
 
             for (int i=0; i < nLand; i++) {

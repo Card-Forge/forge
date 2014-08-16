@@ -39,6 +39,7 @@ import java.util.Random;
  */
 public class DeckGeneratorTheme extends DeckGeneratorBase {
     private int basicLandPercentage = 0;
+    private String basicLandSet = null;
     private boolean testing = false;
 
     /**
@@ -96,6 +97,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
      */
     public final CardPool getThemeDeck(final String themeName, final int size, final StringBuilder errorBuilder) {
         String s = "";
+        String[] ss;
 
         // read theme file
         final String tFileName = ForgeConstants.THEMES_DIR + "/" + themeName + ".thm";
@@ -115,12 +117,14 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
 
             for (int j = 0; j < grpCnt; j++) {
                 s = g.cardnames.get(r.nextInt(cnSize));
-
+                ss = s.split("\\|");
+                
                 int lc = 0;
-                while ((cardCounts.get(s) >= g.maxCnt) || (lc > 999)) {
+                while ((cardCounts.get(ss[0]) >= g.maxCnt) || (lc > 999)) {
                     // looping
                     // forever
                     s = g.cardnames.get(r.nextInt(cnSize));
+                    ss = s.split("\\|");
                     lc++;
                 }
                 if (lc > 999) {
@@ -128,9 +132,12 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                             + tFileName);
                 }
 
-                final int n = cardCounts.get(s);
-                tDeck.add(cardDb.getCard(s));
-                cardCounts.put(s, n + 1);
+                final int n = cardCounts.get(ss[0]);
+                if(ss.length == 1)
+                	tDeck.add(cardDb.getCard(ss[0]));
+                else
+                	tDeck.add(cardDb.getCard(ss[0],ss[1]));
+                cardCounts.put(ss[0], n + 1);
                 errorBuilder.append(s + "\n");
             }
         }
@@ -145,7 +152,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
 
         errorBuilder.append("numBLands:" + numBLands + "\n");
 
-        addBasicLand(numBLands);
+        addBasicLand(numBLands,basicLandSet);
 
         errorBuilder.append("DeckSize:" + tDeck.countAll() + "\n");
 
@@ -202,14 +209,18 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
             }
 
             if (s.startsWith("BasicLandPercentage")) {
-                basicLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
+            	final String[] ss = s.split("\\|");
+                basicLandPercentage = Integer.parseInt(ss[0].substring("BasicLandPercentage".length() + 1));
+                if(ss.length > 1)
+                	basicLandSet = ss[1];
             }
             else if (s.equals("Testing")) {
                 testing = true;
             }
             else if (g != null) {
                 g.cardnames.add(s);
-                cardCounts.put(s, 0);
+                final String[] ss = s.split("\\|");
+                cardCounts.put(ss[0], 0);
             }
         }
         return groups;
