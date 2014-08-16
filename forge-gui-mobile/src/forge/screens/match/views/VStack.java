@@ -253,7 +253,7 @@ public class VStack extends FDropDown {
                                     @Override
                                     public void handleEvent(FEvent e) {
                                         if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                                            controller.shouldAlwaysAskTrigger(triggerID);
+                                            controller.setShouldAlwaysAskTrigger(triggerID);
                                         }
                                         else {
                                             controller.setShouldAlwaysAcceptTrigger(triggerID);
@@ -271,7 +271,7 @@ public class VStack extends FDropDown {
                                     @Override
                                     public void handleEvent(FEvent e) {
                                         if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                                            controller.shouldAlwaysAskTrigger(triggerID);
+                                            controller.setShouldAlwaysAskTrigger(triggerID);
                                         }
                                         else {
                                             controller.setShouldAlwaysDeclineTrigger(triggerID);
