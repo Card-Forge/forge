@@ -238,16 +238,18 @@ public class SFilterUtil {
 						if (outputRules == null) {
 							return null;
 						}
-						
+
 						switch (currentOperation) {
-							case AND:
-								outputRules = Predicates.and(outputRules, evaluateValue(stackItem));
-								break;
-							case OR:
-								outputRules = Predicates.or(outputRules, evaluateValue(stackItem));
-								break;
+						case AND:
+							outputRules = Predicates.and(outputRules, evaluateValue(stackItem));
+							break;
+						case OR:
+							outputRules = Predicates.or(outputRules, evaluateValue(stackItem));
+							break;
+                        default:
+                            break;
 						}
-						
+
 						currentOperation = null;
 					}
 				}
