@@ -12,6 +12,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseHandler;
@@ -1010,10 +1011,10 @@ public class ComputerUtilCard {
                 if (params.get("Mode").equals("Continuous") && "Creature.YouCtrl".equals(params.get("Affected"))) {
                     int bonusPT = 0;
                     if (params.containsKey("AddPower")) {
-                        bonusPT += Integer.valueOf(params.get("AddPower"));
+                        bonusPT += AbilityUtils.calculateAmount(c, params.get("AddPower"), stAb);
                     }
                     if (params.containsKey("AddToughness")) {
-                        bonusPT += Integer.valueOf(params.get("AddToughness"));
+                        bonusPT += AbilityUtils.calculateAmount(c, params.get("AddPower"), stAb);
                     }
                     String kws = params.get("AddKeyword");
                     if (kws != null) {
