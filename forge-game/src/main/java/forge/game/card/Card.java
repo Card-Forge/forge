@@ -4593,6 +4593,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     private final void updateKeywordsChangedText(final Long timestamp) {
+        if (this.hasSVar("LockInKeywords")) {
+            return;
+        }
+
         final List<String> addKeywords = Lists.newArrayList(),
                 removeKeywords = Lists.newArrayList(this.keywordsGrantedByTextChanges);
 
@@ -4608,7 +4612,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     private final void updateKeywordsOnRemoveChangedText(final KeywordsChange k) {
-        this.keywordsGrantedByTextChanges.removeAll(k.getKeywords());
+        if (k != null) {
+            this.keywordsGrantedByTextChanges.removeAll(k.getKeywords());
+        }
     }
 
     /**
@@ -8403,12 +8409,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if (this.getKeyword() != null) {
-            final List<String> list = this.getKeyword();
-
-            String kw = "";
-            for (int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
+        final List<String> keywords = this.getKeyword();
+        if (keywords != null) {
+            for (int i = 0; i < keywords.size(); i++) {
+                final String kw = keywords.get(i);
                 if (!kw.startsWith("Protection")) {
                     continue;
                 }

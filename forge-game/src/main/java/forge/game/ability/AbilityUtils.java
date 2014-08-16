@@ -1518,7 +1518,7 @@ public class AbilityUtils {
     }
 
     public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {
-        if (ability == null || !ability.isIntrinsic()) {
+        if (ability == null || !ability.isIntrinsic() || ability.getMapParams().containsKey("LockInText")) {
             return def;
         }
         return applyTextChangeEffects(def, ability.getHostCard());

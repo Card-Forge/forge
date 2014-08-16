@@ -8,5 +8,7 @@ K:Protection from blue
 K:Protection from black
 K:Protection from red
 K:Protection from green
+# Lock in keywords so can't change color words in "Protection from all colors"
+SVar:LockInKeywords:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iridescent_angel.jpg
 Oracle:Flying, protection from all colors
