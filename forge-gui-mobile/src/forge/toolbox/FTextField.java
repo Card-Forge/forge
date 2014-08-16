@@ -327,6 +327,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         while (textBounds.width > availableTextWidth || textBounds.height > h) {
             if (renderedFont.canShrink()) { //shrink font to fit if possible
                 renderedFont = renderedFont.shrink();
+                availableTextWidth = w - getLeftPadding() - getRightPadding();
                 textBounds = renderedFont.getMultiLineBounds(text);
             }
             else {
@@ -337,12 +338,6 @@ public class FTextField extends FDisplayObject implements ITextField {
         //draw selection if key input is active
         if (isEditing) {
             float selLeft = getTextLeft();
-            if (alignment == HAlignment.CENTER) {
-                
-            }
-            else if (alignment == HAlignment.RIGHT) {
-                
-            }
             if (selStart > 0) {
                 selLeft += renderedFont.getBounds(text.substring(0, selStart)).width;
             }

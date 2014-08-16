@@ -75,7 +75,6 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     public void setRatio(String ratio0) {
         txtSearch.ratio = ratio0;
-        txtSearch.ratioWidth = txtSearch.getFont().getBounds(ratio0).width;
     }
 
     public String getCaption() {
@@ -87,7 +86,6 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     protected class SearchField extends FTextField {
         private String ratio = "(0 / 0)";
-        private float ratioWidth;
 
         private SearchField() {
             setFont(FONT);
@@ -97,7 +95,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
         @Override
         protected float getRightPadding() {
-            return ratioWidth + 2 * PADDING;
+            return renderedFont.getBounds(ratio).width + 2 * PADDING;
         }
 
         @Override
