@@ -83,6 +83,13 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
         }
+        
+        if (sa.hasParam("AILogic")) {
+            if (sa.getParam("AILogic").equals("Never")) {
+            	return false;
+            }
+        }
+        
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
