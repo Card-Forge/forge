@@ -29,7 +29,6 @@ public class SFilterUtil {
      * builds a string search filter
      */
     public static Predicate<PaperCard> buildTextFilter(String text, boolean invert, boolean inName, boolean inType, boolean inText, boolean inCost) {
-		
 		text = text.trim();
 		
         if (text.isEmpty()) {
@@ -59,11 +58,9 @@ public class SFilterUtil {
         Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
 
         return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
-		
     }
 
 	private static class Tokenizer implements Iterator<String> {
-
 		private String string;
 		private int index = 0;
 
@@ -80,7 +77,7 @@ public class SFilterUtil {
 		public String next() {
 			return string.charAt(index++) + "";
 		}
-		
+
 		@Override
 		public void remove() {
 			throw new UnsupportedOperationException("remove");
@@ -89,17 +86,15 @@ public class SFilterUtil {
 		public String lookAhead() {
 			if (hasNext()) {
 				return string.charAt(index) + "";
-			} else {
+			}
+			else {
 				return "";
 			}
 		}
-
 	}
 	
 	private static class BooleanExpression {
-
 		private static enum Operation {
-
 			AND("&&"), OR("||"), NOT("!"), OPEN_PAREN("("), CLOSE_PAREN(")"), ESCAPE("\\");
 
 			private final String token;
@@ -107,7 +102,6 @@ public class SFilterUtil {
 			private Operation(String token) {
 				this.token = token;
 			}
-
 		}
 		
 		private String text;
@@ -130,55 +124,51 @@ public class SFilterUtil {
 		}
 		
 		private void parse() {
-			
 			Tokenizer tokenizer = new Tokenizer(text);
 			
 			String currentChar;
 			boolean escapeNext = false;
 			
 			while (tokenizer.hasNext()) {
-				
 				currentChar = tokenizer.next();
 				
 				if (escapeNext) {
-					
 					currentValue += currentChar;
 					escapeNext = false;
-					
-				} else if (currentChar.equals(Operation.ESCAPE.token)) {
-					
+				}
+				else if (currentChar.equals(Operation.ESCAPE.token)) {
 					escapeNext = true;
-					
-				} else {
-
+				}
+				else {
 					if ((currentChar + tokenizer.lookAhead()).equals(Operation.AND.token)) {
 						tokenizer.next();
 						pushTokenToStack(Operation.AND.token);
-					} else if ((currentChar + tokenizer.lookAhead()).equals(Operation.OR.token)) {
+					}
+					else if ((currentChar + tokenizer.lookAhead()).equals(Operation.OR.token)) {
 						tokenizer.next();
 						pushTokenToStack(Operation.OR.token);
-					} else if (currentChar.equals(Operation.OPEN_PAREN.token)) {
+					}
+					else if (currentChar.equals(Operation.OPEN_PAREN.token)) {
 						pushTokenToStack(Operation.OPEN_PAREN.token);
-					} else if (currentChar.equals(Operation.CLOSE_PAREN.token)) {
+					}
+					else if (currentChar.equals(Operation.CLOSE_PAREN.token)) {
 						pushTokenToStack(Operation.CLOSE_PAREN.token);
-					} else if (currentChar.equals(Operation.NOT.token)) {
+					}
+					else if (currentChar.equals(Operation.NOT.token)) {
 						pushTokenToStack(Operation.NOT.token);
-					} else {
+					}
+					else {
 						currentValue += currentChar;
 					}
-					
 				}
-				
 			}
 			
 			if (!currentValue.trim().isEmpty()) {
 				stack.push(currentValue.trim());
 			}
-
 		}
 		
 		private void pushTokenToStack(String token) {
-			
 			currentValue = currentValue.trim();
 			
 			if (!currentValue.isEmpty()) {
@@ -187,7 +177,6 @@ public class SFilterUtil {
 			}
 			
 			stack.push(token);
-			
 		}
 		
 		private Predicate<CardRules> evaluate() {
@@ -198,23 +187,20 @@ public class SFilterUtil {
 			Stack<String> evaluationStack = new Stack<>();
 			
 			while (stack.size() > 0) {
-				
 				String stackItem = stack.pop();
 				
 				if (stackItem.equals(Operation.CLOSE_PAREN.token)) {
 					rules = evaluateUntilToken(evaluationStack, rules, Operation.OPEN_PAREN.token);
-				} else {
+				}
+				else {
 					evaluationStack.push(stackItem);
 				}
-				
 			}
 			
 			return evaluateUntilToken(evaluationStack, rules, "");
-			
 		}
 		
 		private Predicate<CardRules> evaluateUntilToken(Stack<String> evaluationStack, Predicate<CardRules> rules, String token) {
-
 			Predicate<CardRules> outputRules = rules;
 			
 			Operation currentOperation = null;
@@ -231,25 +217,24 @@ public class SFilterUtil {
 					
 					if (stackItem.equals(Operation.AND.token)) {
 						currentOperation = Operation.AND;
-					} else if (stackItem.equals(Operation.OR.token)) {
+					}
+					else if (stackItem.equals(Operation.OR.token)) {
 						currentOperation = Operation.OR;
-					} else if (stackItem.equals(Operation.NOT.token)) {
+					}
+					else if (stackItem.equals(Operation.NOT.token)) {
 						if (outputRules == null) {
 							return null;
 						}
 						outputRules = Predicates.not(outputRules);
 					}
-
-				} else {
-					
+				}
+				else {
 					if (currentOperation == null) {
-						
 						if (outputRules == null) {
 							outputRules = evaluateValue(stackItem);
 						}
-						
-					} else {
-						
+					}
+					else {
 						if (outputRules == null) {
 							return null;
 						}
@@ -264,15 +249,11 @@ public class SFilterUtil {
 						}
 						
 						currentOperation = null;
-						
 					}
-					
 				}
-				
 			}
 			
 			return outputRules;
-			
 		}
 		
 		private Predicate<CardRules> evaluateValue(String value) {
@@ -291,9 +272,8 @@ public class SFilterUtil {
 			}
 			return false;
 		}
-		
 	}
-    
+
     public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
         if (text.trim().isEmpty()) {
             return Predicates.alwaysTrue();
