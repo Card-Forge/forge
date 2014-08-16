@@ -404,7 +404,6 @@ public class SFilterUtil {
                 }
 
                 return colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1 || (colorProfile & colors) == colorProfile;
-
             }
         };
     }
