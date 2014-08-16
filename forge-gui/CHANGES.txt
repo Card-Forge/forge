@@ -1,7 +1,7 @@
-Forge Beta: 08-15-2014 ver 1.5.24
+Forge Beta: 08-##-2014 ver 1.5.25
 
 
-14048 cards in total.
+##### cards in total.
 
 
 -------------
@@ -56,27 +56,7 @@ Existing draft tournaments will not be affected.
 New Cards
 ---------
 
-Alter Reality
-Artificial Evolution
-Balduvian Shaman
-Crystal Spray
-Cultural Exchange
-Double Stroke
-Drain Power
-Glamerdye
-Iterative Analysis
-Magical Hack
-Mind Bend
-North Star
-Panglacial Wurm
-Pygmy Hippo
-Sentinel Dispatch
-Sleight of Mind
-Spectral Shift
-Swirl the Mists
-Trait Doctoring
-Unexpected Potential
-Whim of Volrath
+
 
 
 -------------------------------
@@ -139,16 +119,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-DrDev
-elcnesh
-Gos
-KrazyTheFox
-Sloth
-Sol
-Swordshine
-Zirbert
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
