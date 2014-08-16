@@ -1,7 +1,7 @@
 package forge.screens.match.controllers;
 
-import forge.LobbyPlayer;
 import forge.UiCommand;
+import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
@@ -19,7 +19,7 @@ public enum CStack implements ICDoc {
     SINGLETON_INSTANCE;
 
     private MagicStack model;
-    private LobbyPlayer viewer;
+    private Player localPlayer;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -39,11 +39,11 @@ public enum CStack implements ICDoc {
     @Override
     public void update() {
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-        VStack.SINGLETON_INSTANCE.updateStack(model, viewer);
+        VStack.SINGLETON_INSTANCE.updateStack(model, localPlayer);
     }
 
-    public void setModel(MagicStack model, LobbyPlayer guiPlayer) { 
-        this.model = model;
-        this.viewer = guiPlayer;
+    public void setModel(MagicStack model0, Player localPlayer0) { 
+        model = model0;
+        localPlayer = localPlayer0;
     }
 }

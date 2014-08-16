@@ -475,8 +475,17 @@ public enum FControl implements KeyEventDispatcher {
         LobbyPlayer humanLobbyPlayer = getGuiPlayer();
         // The UI controls should use these game data as models
         CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
+
+        Player localPlayer = null;
+        for (Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() == humanLobbyPlayer) {
+                localPlayer = p;
+                break;
+            }
+        }
+
         CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
-        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
+        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), localPlayer);
         CPlayers.SINGLETON_INSTANCE.setModel(game);
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
 

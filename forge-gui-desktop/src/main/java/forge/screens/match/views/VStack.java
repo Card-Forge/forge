@@ -18,18 +18,22 @@
 package forge.screens.match.views;
 
 import forge.ImageCache;
+import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.LobbyPlayer;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.match.input.InputConfirm;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPanel;
@@ -66,7 +70,7 @@ public enum VStack implements IVDoc<CStack> {
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Other fields
-    private static OptionalTriggerMenu otMenu = new OptionalTriggerMenu();
+    private static AbilityMenu abilityMenu = new AbilityMenu();
 
     private VStack() {
     }
@@ -127,7 +131,7 @@ public enum VStack implements IVDoc<CStack> {
     /**
      * @param stack
      * @param viewer */
-    public void updateStack(final MagicStack stack, final LobbyPlayer viewer) {
+    public void updateStack(final MagicStack stack, final Player localPlayer) {
         tab.setText("Stack : " + stack.size());
 
         // No need to update the rest unless it's showing
@@ -137,7 +141,7 @@ public enum VStack implements IVDoc<CStack> {
 
         boolean isFirst = true;
         for (final SpellAbilityStackInstance spell : stack) {
-            StackInstanceTextArea tar = new StackInstanceTextArea(spell, viewer);
+            StackInstanceTextArea tar = new StackInstanceTextArea(stack, spell, localPlayer);
 
             scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
 
@@ -167,12 +171,12 @@ public enum VStack implements IVDoc<CStack> {
 
         private final Card sourceCard;
 
-        public StackInstanceTextArea(final SpellAbilityStackInstance spell, final LobbyPlayer viewer) {
+        public StackInstanceTextArea(final MagicStack stack, final SpellAbilityStackInstance spell, final Player localPlayer) {
             sourceCard = spell.getSourceCard();
 
             String txt = spell.getStackDescription();
             if (spell.getSpellAbility().isOptionalTrigger()
-                    && spell.getSourceCard().getController().getController().getLobbyPlayer().equals(viewer)) {
+                    && spell.getSourceCard().getController().equals(localPlayer)) {
                 txt = "(OPTIONAL) " + txt;
             }
             setText(txt);
@@ -195,12 +199,19 @@ public enum VStack implements IVDoc<CStack> {
                 }
             });
 
-            if (spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer().getLobbyPlayer() == viewer) {
+            if (spell.getSpellAbility().isAbility() && localPlayer != null) {
                 addMouseListener(new FMouseAdapter() {
                     @Override
+                    public void onLeftClick(MouseEvent e) {
+                        onClick(e);
+                    }
+                    @Override
                     public void onRightClick(MouseEvent e) {
-                        otMenu.setStackInstance(spell);
-                        otMenu.show(e.getComponent(), e.getX(), e.getY());
+                        onClick(e);
+                    }
+                    private void onClick(MouseEvent e) {
+                        abilityMenu.setStackInstance(stack, spell.getSpellAbility(), localPlayer);
+                        abilityMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 });
             }
@@ -226,68 +237,89 @@ public enum VStack implements IVDoc<CStack> {
 
     //========= Custom class handling
 
-    private final static class OptionalTriggerMenu extends JPopupMenu {
+    private final static class AbilityMenu extends JPopupMenu {
         private static final long serialVersionUID = 1548494191627807962L;
-        private final JCheckBoxMenuItem jmiAccept;
-        private final JCheckBoxMenuItem jmiDecline;
-        private final JCheckBoxMenuItem jmiAsk;
-        private PlayerController localPlayer;
+        private final JCheckBoxMenuItem jmiAutoYield;
+        private final JCheckBoxMenuItem jmiAlwaysYes;
+        private final JCheckBoxMenuItem jmiAlwaysNo;
+        private MagicStack stack;
+        private SpellAbility ability;
+        private PlayerController controller;
 
         private Integer triggerID = 0;
 
-        public OptionalTriggerMenu(){
-            jmiAccept = new JCheckBoxMenuItem("Always Yes");
-            jmiDecline = new JCheckBoxMenuItem("Always No");
-            jmiAsk = new JCheckBoxMenuItem("Always Ask");
-
-            jmiAccept.addActionListener(new ActionListener() {
+        public AbilityMenu(){
+            jmiAutoYield = new JCheckBoxMenuItem("Auto-Yield");
+            jmiAutoYield.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (localPlayer == null) { return; }
-                    localPlayer.setShouldAlwaysAcceptTrigger(triggerID);
+                    final String key = ability.toUnsuppressedString();
+                    final boolean autoYield = controller.shouldAutoYield(key);
+                    controller.setShouldAutoYield(key, !autoYield);
+                    if (!autoYield && stack.peekAbility() == ability) {
+                        //auto-pass priority if ability is on top of stack
+                        CPrompt.SINGLETON_INSTANCE.getInputControl().passPriority();
+                    }
                 }
             });
+            add(jmiAutoYield);
 
-            jmiDecline.addActionListener(new ActionListener() {
+            jmiAlwaysYes = new JCheckBoxMenuItem("Always Yes");
+            jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (localPlayer == null) { return; }
-                    localPlayer.setShouldAlwaysDeclineTrigger(triggerID);
+                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
+                        controller.setShouldAlwaysAskTrigger(triggerID);
+                    }
+                    else {
+                        controller.setShouldAlwaysAcceptTrigger(triggerID);
+                        if (stack.peekAbility() == ability &&
+                                Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
+                            //auto-yes if ability is on top of stack
+                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectButtonOK();
+                        }
+                    }
                 }
             });
+            add(jmiAlwaysYes);
 
-            jmiAsk.addActionListener(new ActionListener() {
+            jmiAlwaysNo = new JCheckBoxMenuItem("Always No");
+            jmiAlwaysNo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (localPlayer == null) { return; }
-                    localPlayer.setShouldAlwaysAskTrigger(triggerID);
+                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
+                        controller.setShouldAlwaysAskTrigger(triggerID);
+                    }
+                    else {
+                        controller.setShouldAlwaysDeclineTrigger(triggerID);
+                        if (stack.peekAbility() == ability &&
+                                Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
+                            //auto-no if ability is on top of stack
+                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectButtonOK();
+                        }
+                    }
                 }
             });
-
-            add(jmiAccept);
-            add(jmiDecline);
-            add(jmiAsk);
+            add(jmiAlwaysNo);
         }
 
-        public void setStackInstance(final SpellAbilityStackInstance SI) {
-            localPlayer = SI.getSpellAbility().getActivatingPlayer().getController();
+        public void setStackInstance(final MagicStack stack0, final SpellAbility ability0, final Player localPlayer) {
+            stack = stack0;
+            ability = ability0;
+            controller = localPlayer.getController();
+            triggerID = ability.getSourceTrigger();
 
-            triggerID = SI.getSpellAbility().getSourceTrigger();
+            jmiAutoYield.setSelected(controller.shouldAutoYield(ability.toUnsuppressedString()));
 
-            if (localPlayer.shouldAlwaysAcceptTrigger(triggerID)) {
-                jmiAccept.setSelected(true);
-                jmiDecline.setSelected(false);
-                jmiAsk.setSelected(false);
-            }
-            else if (localPlayer.shouldAlwaysDeclineTrigger(triggerID)) {
-                jmiDecline.setSelected(true);
-                jmiAccept.setSelected(false);
-                jmiAsk.setSelected(false);
+            if (ability.isOptionalTrigger() && ability.getActivatingPlayer() == localPlayer) {
+                jmiAlwaysYes.setSelected(controller.shouldAlwaysAcceptTrigger(triggerID));
+                jmiAlwaysNo.setSelected(controller.shouldAlwaysDeclineTrigger(triggerID));
+                jmiAlwaysYes.setVisible(true);
+                jmiAlwaysNo.setVisible(true);
             }
             else {
-                jmiAsk.setSelected(true);
-                jmiAccept.setSelected(false);
-                jmiDecline.setSelected(false);
+                jmiAlwaysYes.setVisible(false);
+                jmiAlwaysNo.setVisible(false);
             }
         }
     }
