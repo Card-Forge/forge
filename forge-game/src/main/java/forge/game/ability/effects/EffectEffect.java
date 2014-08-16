@@ -11,6 +11,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -121,6 +122,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
                 final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, eff);
                 eff.addSpellAbility(grantedAbility);
+                grantedAbility.setIntrinsic(true);
             }
         }
 
@@ -130,14 +132,16 @@ public class EffectEffect extends SpellAbilityEffect {
                 final String actualTrigger = hostCard.getSVar(s);
 
                 final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, eff, true);
-                eff.addTrigger(parsedTrigger);
+                final Trigger addedTrigger = eff.addTrigger(parsedTrigger);
+                addedTrigger.setIntrinsic(true);
             }
         }
 
         // Grant static abilities
         if (effectStaticAbilities != null) {
             for (final String s : effectStaticAbilities) {
-                eff.addStaticAbility(hostCard.getSVar(s));
+                final StaticAbility addedStaticAbility = eff.addStaticAbility(hostCard.getSVar(s));
+                addedStaticAbility.setIntrinsic(true);
             }
         }
 
@@ -147,7 +151,8 @@ public class EffectEffect extends SpellAbilityEffect {
                 final String actualReplacement = hostCard.getSVar(s);
 
                 final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
-                eff.addReplacementEffect(parsedReplacement);
+                final ReplacementEffect addedReplacement = eff.addReplacementEffect(parsedReplacement);
+                addedReplacement.setIntrinsic(true);
             }
         }
 
@@ -191,6 +196,11 @@ public class EffectEffect extends SpellAbilityEffect {
         // Set Chosen name
         if (!hostCard.getNamedCard().isEmpty()) {
             eff.setNamedCard(hostCard.getNamedCard());
+        }
+
+        // Copy text changes
+        if (sa.isIntrinsic()) {
+            eff.copyChangedTextFrom(hostCard);
         }
 
         // Duration

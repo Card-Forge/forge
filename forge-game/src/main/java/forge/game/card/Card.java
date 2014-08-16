@@ -4642,6 +4642,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
+     * Copy the color and type text changes from another {@link Card} to this
+     * one. The original changes of this Card are removed.
+     */
+    public final void copyChangedTextFrom(final Card other) {
+        this.changedTextColors.copyFrom(other.changedTextColors);
+        this.changedTextTypes.copyFrom(other.changedTextTypes);
+    }
+
+    /**
      * <p>
      * getIntrinsicAbilities.
      * </p>

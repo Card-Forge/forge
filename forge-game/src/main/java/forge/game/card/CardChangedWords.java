@@ -29,6 +29,12 @@ public final class CardChangedWords {
         isDirty = true;
     }
 
+    void copyFrom(final CardChangedWords other) {
+        map.clear();
+        map.putAll(other.map);
+        isDirty = true;
+    }
+
     /**
      * Converts this object to a {@link Map}.
      *
