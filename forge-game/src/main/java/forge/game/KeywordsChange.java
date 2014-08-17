@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -31,27 +30,21 @@ import com.google.common.collect.Lists;
  * @version $Id$
  */
 public class KeywordsChange {
-    // takes care of individual card types
-    private List<String> keywords = new ArrayList<String>();
-    private List<String> removeKeywords = new ArrayList<String>();
-    private boolean removeAllKeywords = false;
+    private final List<String> keywords;
+    private final List<String> removeKeywords;
+    private final boolean removeAllKeywords;
 
     /**
      * 
-     * Card_Keywords.
+     * Construct a new {@link KeywordsChange}.
      * 
-     * @param keywordList
-     *            an ArrayList<String>
-     * @param removeKeywordList
-     *            a ArrayList<String>
-     * @param removeAll
-     *            a boolean
-     * @param stamp
-     *            a long
+     * @param keywordList the list of keywords to add.
+     * @param removeKeywordList the list of keywords to remove.
+     * @param removeAll whether to remove all keywords.
      */
     public KeywordsChange(final List<String> keywordList, final List<String> removeKeywordList, final boolean removeAll) {
-        this.keywords = Lists.newArrayList(keywordList);
-        this.removeKeywords = Lists.newArrayList(removeKeywordList);
+        this.keywords = keywordList == null ? Lists.<String>newArrayList() : Lists.newArrayList(keywordList);
+        this.removeKeywords = removeKeywordList == null ? Lists.<String>newArrayList() : Lists.newArrayList(removeKeywordList);
         this.removeAllKeywords = removeAll;
     }
 
