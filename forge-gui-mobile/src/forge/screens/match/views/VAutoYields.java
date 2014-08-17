@@ -58,6 +58,7 @@ public class VAutoYields extends FDialog {
                 if (selected != null) {
                     lstAutoYields.removeItem(selected);
                     player.getController().setShouldAutoYield(selected, false);
+                    btnRemove.setEnabled(lstAutoYields.getCount() > 0);
                     lstAutoYields.cleanUpSelections();
                     VAutoYields.this.revalidate();
                 }
