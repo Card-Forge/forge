@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -21,7 +22,7 @@ import forge.view.FDialog;
 @SuppressWarnings("serial")
 public class VAutoYields extends FDialog {
     private static final int PADDING = 10;
-    private static final int BUTTON_WIDTH = 140;
+    private static final int BUTTON_WIDTH = 150;
     private static final int BUTTON_HEIGHT = 26;
 
     private final FButton btnOk;
@@ -29,16 +30,17 @@ public class VAutoYields extends FDialog {
     private final FList<String> lstAutoYields;
     private final FScrollPane listScroller;
     private final FCheckBox chkDisableAll;
+    private final List<String> autoYields;
 
     public VAutoYields(final Game game, final Player player) {
         super(true);
         setTitle("Auto-Yields");
 
-        List<String> autoYields = new ArrayList<String>();
+        autoYields = new ArrayList<String>();
         for (String autoYield : player.getController().getAutoYields()) {
             autoYields.add(autoYield);
         }
-        lstAutoYields = new FList<String>(autoYields.toArray(new String[]{}));
+        lstAutoYields = new FList<String>(new AutoYieldsListModel());
 
         int x = PADDING;
         int y = PADDING;
@@ -68,13 +70,20 @@ public class VAutoYields extends FDialog {
             public void run() {
                 String selected = lstAutoYields.getSelectedValue();
                 if (selected != null) {
-                    lstAutoYields.removeItem(selected);
+                    autoYields.remove(selected);
+                    btnRemove.setEnabled(autoYields.size() > 0);
                     player.getController().setShouldAutoYield(selected, false);
                     VAutoYields.this.revalidate();
+                    lstAutoYields.repaint();
                 }
             }
         });
-        btnRemove.setEnabled(autoYields.size() > 0);
+        if (autoYields.size() > 0) {
+            lstAutoYields.setSelectedIndex(0);
+        }
+        else {
+            btnRemove.setEnabled(false);
+        }
 
         Dimension checkBoxSize = chkDisableAll.getPreferredSize();
         int listHeight = lstAutoYields.getMinimumSize().height + 2 * PADDING;
@@ -89,6 +98,18 @@ public class VAutoYields extends FDialog {
 
         this.pack();
         this.setSize(width, getHeight());
+    }
+
+    private class AutoYieldsListModel extends AbstractListModel<String> {
+        @Override
+        public int getSize() {
+            return autoYields.size();
+        }
+
+        @Override
+        public String getElementAt(final int index) {
+            return autoYields.get(index);
+        }
     }
 
     public void showAutoYields() {
