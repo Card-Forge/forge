@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacUnless | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice a creature.
 SVar:TrigSacUnless:AB$ Sacrifice | Cost$ 0 | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaReplacement$ ProduceB | Description$ If a land is tapped for mana, it produces B instead of any other type and amount.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaReplacement$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type and amount.
 SVar:ProduceB:Any->B
 SVar:RemAIDeck:True
 SVar:NonStackingEffect:True

@@ -1,7 +1,7 @@
 Name:Reality Twist
 ManaCost:U U U
 Types:Enchantment
-Text:If tapped for mana, Plains produce R, Swamps produce G, Mountains produce W, and Forests produce B instead of any other type.
+Text:If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.
 K:Cumulative upkeep:1 U U
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ManaReplacement$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
 SVar:ProduceR:Colorless->R & B->R & U->R & G->R & W->R
