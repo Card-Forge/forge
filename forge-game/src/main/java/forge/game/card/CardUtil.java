@@ -17,6 +17,14 @@
  */
 package forge.game.card;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableList;
+
 import forge.ImageKeys;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
@@ -30,13 +38,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.google.common.collect.Lists;
-
 public final class CardUtil {
     // disable instantiation
     private CardUtil() { }
@@ -46,17 +47,34 @@ public final class CardUtil {
     /** List of all keywords that could be modified by text changes.
      *  Mostly this is caused by them having a variable, like a cost.
      */
-    public static final List<String> modifiableKeywords = Lists.newArrayList(
+    public static final ImmutableList<String> modifiableKeywords = ImmutableList.<String>builder().add(
             "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu",
             "Transute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
-            "Scavenge", "Bestow");
+            "Scavenge", "Bestow").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
-    public static final List<String> modifiableKeywordEndings = Lists.newArrayList("walk", "cycling",
-            "offering");
+    public static final ImmutableList<String> modifiableKeywordEndings = ImmutableList.<String>builder().add(
+            "walk", "cycling", "offering").build();
+
+    /**
+     * Map of plural type names to the corresponding singular form.
+     * So Clerics maps to Cleric, Demons to Demon, etc.
+     */
+    public static final ImmutableBiMap<String, String> singularTypes = ImmutableBiMap.<String, String>builder()
+            .put("Clerics", "Cleric")
+            .put("Demons", "Demon")
+            .put("Dragons", "Dragon")
+            .put("Goblins", "Goblin")
+            .put("Gorgons", "Gorgon")
+            .build();
+    /**
+     * Map of singular type names to the corresponding plural form.
+     * So Cleric maps to Clerics, Demon to Demons, etc.
+     */
+    public static final ImmutableBiMap<String, String> pluralTypes = singularTypes.inverse();
 
     public static final boolean isKeywordModifiable(final String kw) {
         for (final String modKw : modifiableKeywords) {
@@ -70,6 +88,32 @@ public final class CardUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * If the input is a plural type, return the corresponding singular form.
+     * Otherwise, simply return the input.
+     * @param type a String.
+     * @return the corresponding type.
+     */
+    public static final String getSingularType(final String type) {
+        if (singularTypes.containsKey(type)) {
+            return singularTypes.get(type);
+        }
+        return type;
+    }
+
+    /**
+     * If the input is a singular type, return the corresponding plural form.
+     * Otherwise, simply return the input.
+     * @param type a String.
+     * @return the corresponding type.
+     */
+    public static final String getPluralType(final String type) {
+        if (pluralTypes.containsKey(type)) {
+            return pluralTypes.get(type);
+        }
+        return type;
     }
 
     public static ColorSet getColors(final Card c) {

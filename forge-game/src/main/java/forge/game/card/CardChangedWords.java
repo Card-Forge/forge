@@ -61,6 +61,12 @@ public final class CardChangedWords {
 
                 // the actual change (b->c)
                 resultCache.put(ccw.getOriginalWord(), ccw.getNewWord());
+
+                // possible plural form
+                final String singular = CardUtil.getPluralType(ccw.getOriginalWord());
+                if (!singular.equals(ccw.getOriginalWord())) {
+                    resultCache.put(singular, ccw.getNewWord());
+                }
             }
 
             for (final String key : ImmutableList.copyOf(resultCache.keySet())) {

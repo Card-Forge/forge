@@ -2399,8 +2399,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         for (final Entry<String, String> e : Sets.union(this.changedTextColors.toMap().entrySet(),
                 this.changedTextTypes.toMap().entrySet())) {
-            // only the upper case ones, to avoid duplicity
-            if (Character.isUpperCase(e.getKey().charAt(0))) {
+            // ignore lower case and plural form keys, to avoid duplicity
+            if (Character.isUpperCase(e.getKey().charAt(0)) && 
+                    !CardUtil.singularTypes.containsKey(e.getKey())) {
                 sb.append("Text changed: all instances of ");
                 if (e.getKey().equals("Any")) {
                     if (this.changedTextColors.toMap().containsKey(e.getKey())) {
@@ -8472,28 +8473,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (source.isSpell() && !source.isColorless()) {
                         return true;
                     }
-                } else if (kw.equals("Protection from Dragons")) {
-                    if (source.isType("Dragon")) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from Demons")) {
-                    if (source.isType("Demon")) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from Goblins")) {
-                    if (source.isType("Goblin")) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from Clerics")) {
-                    if (source.isType("Cleric")) {
-                        return true;
-                    }
-                } else if (kw.equals("Protection from Gorgons")) {
-                    if (source.isType("Gorgon")) {
-                        return true;
-                    }
                 } else if (kw.equals("Protection from the chosen player")) {
                     if (source.getController().equals(this.chosenPlayer)) {
+                        return true;
+                    }
+                } else if (kw.startsWith("Protection from ")) {
+                    final String protectType = CardUtil.getSingularType(kw.substring("Protection from ".length()));
+                    if (source.isType(protectType)) {
                         return true;
                     }
                 }
