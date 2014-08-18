@@ -22,7 +22,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -2394,29 +2393,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (!sAbility.endsWith(this.getName())) {
                 sb.append(sAbility);
                 sb.append("\r\n");
-            }
-        }
-
-        for (final Entry<String, String> e : Sets.union(this.changedTextColors.toMap().entrySet(),
-                this.changedTextTypes.toMap().entrySet())) {
-            // ignore lower case and plural form keys, to avoid duplicity
-            if (Character.isUpperCase(e.getKey().charAt(0)) && 
-                    !CardUtil.singularTypes.containsKey(e.getKey())) {
-                sb.append("Text changed: all instances of ");
-                if (e.getKey().equals("Any")) {
-                    if (this.changedTextColors.toMap().containsKey(e.getKey())) {
-                        sb.append("color words");
-                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
-                        sb.append("basic land types");
-                    } else {
-                        sb.append("creature types");
-                    }
-                } else {
-                    sb.append(e.getKey());
-                }
-                sb.append(" are replaced by ");
-                sb.append(e.getValue());
-                sb.append(".\r\n");
             }
         }
 

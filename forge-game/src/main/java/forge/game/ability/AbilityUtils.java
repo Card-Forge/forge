@@ -1521,30 +1521,47 @@ public class AbilityUtils {
         if (ability == null || !ability.isIntrinsic() || ability.getMapParams().containsKey("LockInText")) {
             return def;
         }
-        return applyTextChangeEffects(def, ability.getHostCard());
+        return applyTextChangeEffects(def, ability.getHostCard(), false);
     }
 
     public static final String applyKeywordTextChangeEffects(final String kw, final Card card) {
         if (!CardUtil.isKeywordModifiable(kw)) {
             return kw;
         }
-        return applyTextChangeEffects(kw, card);
+        return applyTextChangeEffects(kw, card, false);
     }
 
-    private static final String applyTextChangeEffects(final String def, final Card card) {
+    public static final String applyDescriptionTextChangeEffects(final String def, final CardTraitBase ability) {
+        if (ability == null || !ability.isIntrinsic() || ability.getMapParams().containsKey("LockInText")) {
+            return def;
+        }
+        return applyTextChangeEffects(def, ability.getHostCard(), true);
+    }
+
+    private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
         String replaced = def;
         for (final Entry<String, String> e : card.getChangedTextColorWords().entrySet()) {
-            if (e.getKey().equals("Any")) {
+            final String key = e.getKey();
+            String value = e.getValue();
+            if (isDescriptive) {
+                value = "<strike>" + key + "</strike> " + value;
+            }
+            if (key.equals("Any")) {
                 for (final byte c : MagicColor.WUBRG) {
-                    replaced = replaced.replace(MagicColor.toLongString(c), e.getValue())
-                            .replace(StringUtils.capitalize(MagicColor.toLongString(c)), StringUtils.capitalize(e.getValue()));
+                    replaced = replaced.replace(MagicColor.toLongString(c).toLowerCase(), value.toLowerCase())
+                            .replace(StringUtils.capitalize(MagicColor.toLongString(c)), StringUtils.capitalize(value));
                 }
             } else {
-                replaced = replaced.replace(e.getKey(), e.getValue());
+                replaced = replaced.replace(key, value);
             }
         }
         for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
-            replaced = replaced.replace(e.getKey(), e.getValue());
+            final String key = e.getKey();
+            String value = e.getValue();
+            if (isDescriptive) {
+                value = "<strike>" + key + "</strike> " + value;
+            }
+            replaced = replaced.replace(key, value);
         }
         return replaced;
     }

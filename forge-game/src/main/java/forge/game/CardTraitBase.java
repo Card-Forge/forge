@@ -12,6 +12,7 @@ import forge.util.Expressions;
 
 import java.util.*;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 /** 
@@ -38,6 +39,10 @@ public abstract class CardTraitBase extends GameObject {
 
     /** The temporarily suppressed. */
     protected boolean temporarilySuppressed = false;
+
+    /** Keys of descriptive (text) parameters. */
+    private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
+            .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
 
     /**
      * Sets the temporary.
@@ -351,10 +356,19 @@ public abstract class CardTraitBase extends GameObject {
 
     public void changeText() {
         for (final String key : this.mapParams.keySet()) {
+            final String value = this.originalMapParams.get(key), newValue;
+            // change descriptions differently
+            if (descriptiveKeys.contains(key)) {
+                newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
+            }
             // don't change literal SVar names!
-            if (!this.getHostCard().hasSVar(key)) {
-                final String value = this.originalMapParams.get(key),
-                        newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
+            else if (!this.getHostCard().hasSVar(key)) {
+                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
+            } else {
+                newValue = null;
+            }
+
+            if (newValue != null) {
                 this.mapParams.put(key, newValue);
             }
         }

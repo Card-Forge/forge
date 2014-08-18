@@ -3,11 +3,16 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import com.google.common.collect.Sets;
 
 import forge.GuiBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -254,6 +259,36 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("Phased Out");
+        }
+
+        // text changes
+        final Map<String, String> changedColorWords = card.getChangedTextColorWords(),
+                changedTypes = card.getChangedTextTypeWords();
+        if (!(changedColorWords.isEmpty() && changedTypes.isEmpty())) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+        }
+        for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
+            // ignore lower case and plural form keys, to avoid duplicity
+            if (Character.isUpperCase(e.getKey().charAt(0)) && 
+                    !CardUtil.singularTypes.containsKey(e.getKey())) {
+                area.append("Text changed: all instances of ");
+                if (e.getKey().equals("Any")) {
+                    if (changedColorWords.containsKey(e.getKey())) {
+                        area.append("color words");
+                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
+                        area.append("basic land types");
+                    } else {
+                        area.append("creature types");
+                    }
+                } else {
+                    area.append(e.getKey());
+                }
+                area.append(" are replaced by ");
+                area.append(e.getValue());
+                area.append(".\n");
+            }
         }
 
         // counter text
