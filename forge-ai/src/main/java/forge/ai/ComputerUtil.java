@@ -19,6 +19,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ability.ProtectAi;
@@ -1704,6 +1705,10 @@ public class ComputerUtil {
     }
 
     public static String chooseSomeType(Player ai, String kindOfType, String logic, List<String> invalidTypes) {
+        if (invalidTypes == null) {
+            invalidTypes = ImmutableList.<String>of();
+        }
+
         final Game game = ai.getGame();
         String chosen = "";
         if( kindOfType.equals("Card")) {

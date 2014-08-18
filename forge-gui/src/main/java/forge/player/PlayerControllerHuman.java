@@ -588,9 +588,11 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseSomeType(java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String)
      */
     @Override
-    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+    public String chooseSomeType(final String kindOfType, final SpellAbility sa, final List<String> validTypes,  List<String> invalidTypes, final boolean isOptional) {
         final List<String> types = Lists.newArrayList(validTypes);
-        Iterables.removeAll(types, invalidTypes);
+        if (invalidTypes != null && !invalidTypes.isEmpty()) {
+            Iterables.removeAll(types, invalidTypes);
+        }
         if(isOptional)
             return SGuiChoose.oneOrNone("Choose a " + kindOfType.toLowerCase() + " type", types);
         else
