@@ -35,11 +35,15 @@ public class SFilterUtil {
             return Predicates.alwaysTrue();
         }
         
-        BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
-        
-        Predicate<CardRules> filter = expression.evaluate();
-        if (filter != null) {
-            return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard.FN_GET_RULES);
+        if (BooleanExpression.isExpression(text)) {
+
+            BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
+
+            Predicate<CardRules> filter = expression.evaluate();
+            if (filter != null) {
+                return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard.FN_GET_RULES);
+            }
+            
         }
         
         String[] splitText = text.replaceAll(",", "").replaceAll("  ", " ").split(" ");
@@ -121,6 +125,10 @@ public class SFilterUtil {
             this.inText = inText;
             this.inCost = inCost;
             parse();
+        }
+        
+        private static boolean isExpression(String text) {
+            return text.contains(Operation.AND.token) || text.contains(Operation.OR.token);
         }
         
         private void parse() {
