@@ -1538,32 +1538,54 @@ public class AbilityUtils {
         return applyTextChangeEffects(def, ability.getHostCard(), true);
     }
 
+    /**
+     * Apply description-based text changes of a {@link Card} to a String. No
+     * checks are made on traits being intrinsic.
+     *
+     * @param def a String.
+     * @param card a {@link Card}.
+     * @return a new String, taking text changes into account.
+     */
+    public static final String applyDescriptionTextChangeEffects(final String def, final Card card) {
+        return applyTextChangeEffects(def, card, true);
+    }
+
     private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
+        if (StringUtils.isEmpty(def)) {
+            return def;
+        }
+
         String replaced = def;
         for (final Entry<String, String> e : card.getChangedTextColorWords().entrySet()) {
             final String key = e.getKey();
-            String value = e.getValue();
-            if (isDescriptive) {
-                value = "<strike>" + key + "</strike> " + value;
-            }
+            String value;
             if (key.equals("Any")) {
                 for (final byte c : MagicColor.WUBRG) {
-                    replaced = replaced.replace(MagicColor.toLongString(c).toLowerCase(), value.toLowerCase())
-                            .replace(StringUtils.capitalize(MagicColor.toLongString(c)), StringUtils.capitalize(value));
+                    final String colorLowerCase = MagicColor.toLongString(c).toLowerCase(),
+                            colorCaptCase = StringUtils.capitalize(MagicColor.toLongString(c));
+                    value = getReplacedText(colorLowerCase, e.getValue(), isDescriptive);
+                    replaced = replaced.replace(colorLowerCase, value.toLowerCase());
+                    value = getReplacedText(colorCaptCase, e.getValue(), isDescriptive);
+                    replaced.replace(colorCaptCase, StringUtils.capitalize(value));
                 }
             } else {
+                value = getReplacedText(key, e.getValue(), isDescriptive);
                 replaced = replaced.replace(key, value);
             }
         }
         for (final Entry<String, String> e : card.getChangedTextTypeWords().entrySet()) {
             final String key = e.getKey();
-            String value = e.getValue();
-            if (isDescriptive) {
-                value = "<strike>" + key + "</strike> " + value;
-            }
+            final String value = getReplacedText(key, e.getValue(), isDescriptive);
             replaced = replaced.replace(key, value);
         }
         return replaced;
+    }
+
+    private static final String getReplacedText(final String originalWord, final String newWord, final boolean isDescriptive) {
+        if (isDescriptive) {
+            return "<strike>" + originalWord + "</strike> " + newWord;
+        }
+        return newWord;
     }
 
     public static final String getSVar(final CardTraitBase ability, final String sVarName) {

@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.CardTraitBase;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
@@ -739,6 +740,12 @@ public class Cost {
             }
         }
         return this;
+    }
+
+    public final void applyTextChangeEffects(final CardTraitBase trait) {
+        for (final CostPart part : this.getCostParts()) {
+            part.applyTextChangeEffects(trait);
+        }
     }
 
     public static final Cost Zero = new Cost(0);

@@ -65,8 +65,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     
     // choices for constructor isPermanent argument
-    private String description = "";
-    private String stackDescription = "";
+    private String originalDescription = "", description = "";
+    private String originalStackDescription = "", stackDescription = "";
     private ManaCost multiKickerManaCost = null;
     private Player activatingPlayer = null;
     private Player targetingPlayer = null;
@@ -774,9 +774,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      *            a {@link java.lang.String} object.
      */
     public void setStackDescription(final String s) {
-        this.stackDescription = s;
-        if ((this.description == "") && this.hostCard.getText().equals("")) {
-            this.description = s;
+        this.originalStackDescription = s;
+        this.stackDescription = this.originalStackDescription;
+        if (StringUtils.isEmpty(this.description) && StringUtils.isEmpty(this.hostCard.getText())) {
+            this.setDescription(s);
         }
     }
 
@@ -806,7 +807,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      *            a {@link java.lang.String} object.
      */
     public void setDescription(final String s) {
-        this.description = s;
+        this.originalDescription = s;
+        this.description = this.originalDescription;
     }
 
     /**
@@ -1780,6 +1782,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (this.targetRestricions != null) {
             this.targetRestricions.applyTargetTextChanges(this);
         }
+
+        if (this.getPayCosts() != null) {
+            this.getPayCosts().applyTextChangeEffects(this);
+        }
+
+        this.stackDescription = AbilityUtils.applyDescriptionTextChangeEffects(this.originalStackDescription, this);
+        this.description = AbilityUtils.applyDescriptionTextChangeEffects(this.originalDescription, this);
 
         if (this.subAbility != null) {
             this.subAbility.changeText();

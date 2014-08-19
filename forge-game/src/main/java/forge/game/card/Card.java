@@ -207,7 +207,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private long controllerTimestamp = 0;
     private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
 
-    private String text = "";
+    private String originalText = "", text = "";
     private String echoCost = "";
     private Cost miracleCost = null;
     private String chosenType = "";
@@ -1881,7 +1881,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setText(final String t) {
-        this.text = t;
+        this.originalText = t;
+        this.text = this.originalText;
     }
 
     // get the text that should be displayed
@@ -4598,16 +4599,18 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Update the changed text of the intrinsic spell abilities and keywords.
      */
     private final void updateChangedText() {
-        final List<CardTraitBase> allAbs = Lists.newLinkedList();
-        allAbs.addAll(this.getSpellAbilities());
-        allAbs.addAll(this.getStaticAbilities());
-        allAbs.addAll(this.getReplacementEffects());
-        allAbs.addAll(this.getTriggers());
+        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
+            .addAll(this.getSpellAbilities())
+            .addAll(this.getStaticAbilities())
+            .addAll(this.getReplacementEffects())
+            .addAll(this.getTriggers())
+            .build();
         for (final CardTraitBase ctb : allAbs) {
             if (ctb.isIntrinsic()) {
                 ctb.changeText();
             }
         }
+        this.text = AbilityUtils.applyDescriptionTextChangeEffects(this.originalText, this);
     }
 
     public final ImmutableMap<String, String> getChangedTextColorWords() {

@@ -18,25 +18,28 @@
 package forge.game.cost;
 
 
+import forge.game.CardTraitBase;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * The Class CostPart.
  */
 public abstract class CostPart {
-    private String amount = "1";
-    private final String type;
-    private final String typeDescription;
+    private String originalAmount;
+    private String amount;
+    private final String originalType, originalTypeDescription;
+    private String typeDescription, type;
 
     /**
      * Instantiates a new cost part.
      */
     public CostPart() {
-        type = "Card";
-        typeDescription = null;
+        this("1", "Card", null);
     }
 
     /**
@@ -51,8 +54,10 @@ public abstract class CostPart {
      */
     public CostPart(final String amount, final String type, final String description) {
         this.setAmount(amount);
-        this.type = type;
-        this.typeDescription = description;
+        this.originalType = type;
+        this.type = this.originalType;
+        this.originalTypeDescription = description;
+        this.typeDescription = originalTypeDescription;
     }
 
     /**
@@ -174,9 +179,15 @@ public abstract class CostPart {
      *            the amount to set
      */
     public void setAmount(final String amountIn) {
-        this.amount = amountIn;
+        this.originalAmount = amountIn;
+        this.amount = this.originalAmount;
     }
 
+    public final void applyTextChangeEffects(final CardTraitBase trait) {
+        this.amount = AbilityUtils.applyAbilityTextChangeEffects(this.originalAmount, trait);
+        this.type = AbilityUtils.applyAbilityTextChangeEffects(this.originalType, trait);
+        this.typeDescription = AbilityUtils.applyDescriptionTextChangeEffects(this.originalTypeDescription, trait);
+    }
 
     public abstract boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa);
 }
