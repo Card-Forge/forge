@@ -1566,7 +1566,7 @@ public class AbilityUtils {
                     value = getReplacedText(colorLowerCase, e.getValue(), isDescriptive);
                     replaced = replaced.replace(colorLowerCase, value.toLowerCase());
                     value = getReplacedText(colorCaptCase, e.getValue(), isDescriptive);
-                    replaced.replace(colorCaptCase, StringUtils.capitalize(value));
+                    replaced = replaced.replace(colorCaptCase, StringUtils.capitalize(value));
                 }
             } else {
                 value = getReplacedText(key, e.getValue(), isDescriptive);
