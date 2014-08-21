@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -2021,12 +2022,31 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sb = new StringBuilder();
         final StringBuilder sbLong = new StringBuilder();
 
+        // Prepare text changes
+        final Map<String, String> changedColorWords = this.getChangedTextColorWords(),
+                changedTypes = this.getChangedTextTypeWords();
+        final Set<Entry<String, String>> textChanges = Sets.union(
+                changedColorWords.entrySet(), changedTypes.entrySet());
+
         for (int i = 0; i < keywords.size(); i++) {
             String keyword = keywords.get(i);
             if (keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantEquip")
                     || keyword.startsWith("SpellCantTarget")) {
                 continue;
+            }
+            // format text changes
+            if (CardUtil.isKeywordModifiable(keyword)
+                    && this.keywordsGrantedByTextChanges.contains(keyword)) {
+                for (final Entry<String, String> e : textChanges) {
+                    final String value = e.getValue();
+                    if (keyword.contains(value)) {
+                        keyword = keyword.replace(value,
+                                "<strike>" + e.getKey() + "</strike> " + value);
+                        // assume (for now) max one change per keyword
+                        break;
+                    }
+                }
             }
             if (keyword.startsWith("etbCounter")) {
                 final String[] p = keyword.split(":");
