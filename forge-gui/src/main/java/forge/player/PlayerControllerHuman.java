@@ -17,6 +17,7 @@ import forge.control.FControlGamePlayback;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.events.UiEventAttackerDeclared;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
@@ -27,6 +28,7 @@ import forge.game.card.Card;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
@@ -620,13 +622,28 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public void declareAttackers(Player attacker, Combat combat) {
+    public void declareAttackers(Player attackingPlayer, Combat combat) {
         if (mayAutoPass()) {
+            List<Pair<Card, GameEntity>> mandatoryAttackers = CombatUtil.getMandatoryAttackers(attackingPlayer, combat, combat.getDefenders());
+            if (!mandatoryAttackers.isEmpty()) {
+                //even if auto-passing attack phase, if there are any mandatory attackers,
+                //ensure they're declared and then delay slightly so user can see as much
+                for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
+                    combat.addAttacker(attacker.getLeft(), attacker.getRight());
+                    GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(attacker.getLeft(), attacker.getRight()));
+                }
+                try {
+                    Thread.sleep(FControlGamePlayback.combatDelay);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             return; //don't prompt to declare attackers if user chose to end the turn
         }
 
         // This input should not modify combat object itself, but should return user choice
-        InputAttack inpAttack = new InputAttack(attacker, combat);
+        InputAttack inpAttack = new InputAttack(attackingPlayer, combat);
         inpAttack.showAndWait();
     }
 

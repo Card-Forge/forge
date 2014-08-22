@@ -17,7 +17,9 @@
  */
 package forge.game.combat;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -29,6 +31,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
@@ -41,7 +44,9 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1037,6 +1042,33 @@ public class CombatUtil {
 
             game.getStack().addSimultaneousStackEntry(ability);
         }
+    }
+
+    public static List<Pair<Card, GameEntity>> getMandatoryAttackers(Player attackingPlayer, Combat combat, List<GameEntity> defenders) {
+        List<Pair<Card, GameEntity>> attackers = new ArrayList<Pair<Card, GameEntity>>();
+        List<Card> possibleAttackers = attackingPlayer.getCardsIn(ZoneType.Battlefield);
+        for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
+            GameEntity mustAttack = c.getController().getMustAttackEntity() ;
+            if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+                final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
+                final String defined = c.getKeyword().get(i).split(":")[1];
+                mustAttack = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
+            }
+            if (mustAttack != null && CombatUtil.canAttack(c, mustAttack, combat)) {
+                attackers.add(Pair.of(c, mustAttack));
+                continue;
+            }
+            if (c.hasKeyword("CARDNAME attacks each combat if able.") || 
+                    (c.hasKeyword("CARDNAME attacks each turn if able.") && !c.getDamageHistory().getCreatureAttackedThisTurn())) {
+                for (GameEntity def : defenders) {
+                    if (CombatUtil.canAttack(c, def, combat)) {
+                        attackers.add(Pair.of(c, def));
+                        break;
+                    }
+                }
+            }
+        }
+        return attackers;
     }
 
 } // end class CombatUtil

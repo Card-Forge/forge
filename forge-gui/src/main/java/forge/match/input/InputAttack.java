@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 import forge.GuiBase;
 import forge.events.UiEventAttackerDeclared;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -36,6 +35,8 @@ import forge.util.ITriggerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * <p>
@@ -73,29 +74,10 @@ public class InputAttack extends InputSyncronizedBase {
             return; // should even throw here!
         }
 
-        List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
-        for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-            GameEntity mustAttack = c.getController().getMustAttackEntity() ;
-            if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-                final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
-                final String defined = c.getKeyword().get(i).split(":")[1];
-                mustAttack = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
-            }
-            if (mustAttack != null && CombatUtil.canAttack(c, mustAttack, combat)) {
-                combat.addAttacker(c, mustAttack);
-                GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, mustAttack));
-                continue;
-            }
-            if (c.hasKeyword("CARDNAME attacks each combat if able.") || 
-                    (c.hasKeyword("CARDNAME attacks each turn if able.") && !c.getDamageHistory().getCreatureAttackedThisTurn())) {
-                for (GameEntity def : defenders) {
-                    if (CombatUtil.canAttack(c, def, combat)) {
-                        combat.addAttacker(c, def);
-                        GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(c, currentDefender));
-                        break;
-                    }
-                }
-            }
+        List<Pair<Card, GameEntity>> mandatoryAttackers = CombatUtil.getMandatoryAttackers(playerAttacks, combat, defenders);
+        for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
+            combat.addAttacker(attacker.getLeft(), attacker.getRight());
+            GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(attacker.getLeft(), attacker.getRight()));
         }
         updateMessage();
     }
