@@ -311,6 +311,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
+        //cancel auto-pass for all opponents of activating player
+        //when a new non-triggered ability is put on the stack
+        if (!sp.isTrigger()) { 
+            for (Player p : activator.getOpponents()) {
+                p.getController().autoPassCancel();
+            }
+        }
+
         if (this.frozen) {
             si = new SpellAbilityStackInstance(sp);
             this.frozenStack.push(si);
