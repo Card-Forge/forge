@@ -675,7 +675,7 @@ public class PlayerControllerHuman extends PlayerController {
             //instead posing a short delay if needed to prevent the game jumping ahead too quick
             int delay = 0;
             if (stack.isEmpty()) {
-                //make sure to briefly pause at phases your not set up to skip
+                //make sure to briefly pause at phases you're not set up to skip
                 if (!isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase())) {
                     delay = FControlGamePlayback.phasesDelay;
                 }
