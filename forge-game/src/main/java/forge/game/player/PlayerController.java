@@ -99,7 +99,18 @@ public abstract class PlayerController {
     }
 
     public boolean mayAutoPass() {
-        return autoPassUntilPhase != null && game.getPhaseHandler().getPhase().isBefore(autoPassUntilPhase);
+        if (autoPassUntilPhase == null) { return false; }
+
+        PhaseType currentPhase = game.getPhaseHandler().getPhase();
+        if (currentPhase.isBefore(autoPassUntilPhase)) {
+            if (currentPhase == PhaseType.COMBAT_DECLARE_BLOCKERS && game.getPhaseHandler().isPlayerTurn(player)) {
+                if (!game.getCombat().getAllBlockers().isEmpty()) {
+                    return false; //prevent auto-passing on Declare Blockers phase if it's your turn and your opponent blocks a creature you attacked with
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public boolean isAI() {
