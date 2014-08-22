@@ -136,14 +136,14 @@ public class QuestSpellShop {
             return (int) (multiplier * getCardValue(from.getKey()));
         }
     };
-    public static  final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+    public static final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = decksUsingMyCards.count(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
-    public static  final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+    public static final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             final Integer iValue = decksUsingMyCards.count(from.getKey());
@@ -257,8 +257,8 @@ public class QuestSpellShop {
             }
         }
 
-        inventoryManager.addItems(itemsToAdd);
         shopManager.removeItems(itemsToBuy);
+        inventoryManager.addItems(itemsToAdd);
     }
 
     public static void sell(Iterable<Entry<InventoryItem, Integer>> items, IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager, boolean confirmSale) {
@@ -294,8 +294,8 @@ public class QuestSpellShop {
             FModel.getQuest().getCards().sellCard(card, qty, price);
         }
 
-        shopManager.addItems(itemsToSell);
         inventoryManager.removeItems(itemsToSell);
+        shopManager.addItems(itemsToSell);
     }
 
     public static void sellExtras(IItemManager<InventoryItem> shopManager, IItemManager<InventoryItem> inventoryManager) {
@@ -311,8 +311,8 @@ public class QuestSpellShop {
             }
         }
 
-        shopManager.addItems(cardsToRemove);
         inventoryManager.removeItems(cardsToRemove);
+        shopManager.addItems(cardsToRemove);
 
         for (Entry<InventoryItem, Integer> item : cardsToRemove) {
             if (!(item.getKey() instanceof PaperCard)) {

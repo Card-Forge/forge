@@ -53,6 +53,8 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
 
             @Override
             public void drawValue(Graphics g, Entry<InventoryItem, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
+                if (value.getValue() == null) { return; } //prevent crash after item removed on different thread
+
                 float totalHeight = h + 2 * FList.PADDING;
                 float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
 
