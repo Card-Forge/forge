@@ -31,6 +31,12 @@
                 </configuration>
             </plugin>
         </plugins>
+	    <resources>
+	        <resource>
+	            <directory>filters</directory>
+	            <filtering>true</filtering>
+	        </resource>
+	    </resources>
         <finalName>forge-android-${alpha-version}</finalName>
     </build>
 
@@ -348,6 +354,13 @@
                                             <fileset dir="${project.build.directory}">
                                                 <include name="${project.build.finalName}-signed-aligned.apk" />
                                                 <include name="assets.zip" />
+                                            </fileset>
+                                        </ftp>
+                                        <ftp password="${cardforge.pass}" server="ftp.cardforge.org"
+                                            userid="${cardforge.user}" passive="true"
+                                            remotedir="releases/forge/forge-gui-android/">
+                                            <fileset dir="${project.build.directory}/classes">
+                                                <include name="version.txt" />
                                             </fileset>
                                         </ftp>
                                     </target>
