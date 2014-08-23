@@ -1,5 +1,7 @@
 package forge.app;
 
+import java.io.File;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -49,16 +52,28 @@ public class Main extends AndroidApplication {
             @Override
             public void run(String runOnExit) {
                 if (runOnExit != null) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(runOnExit));
-                    startActivity(intent);  
+                    runFile(runOnExit);
                 }
 
                 //ensure process doesn't stick around after exiting
-                int pid = android.os.Process.myPid();
                 finish();
-                android.os.Process.killProcess(pid);
+                System.exit(0);
             }
         }));
+    }
+
+    private void runFile(String filename) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(new File(filename));
+            String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                    MimeTypeMap.getFileExtensionFromUrl(uri.toString()));
+            intent.setDataAndType(uri, type);
+            startActivity(intent);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //special clipboard that words on Android
