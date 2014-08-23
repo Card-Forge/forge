@@ -3,9 +3,11 @@ package forge.app;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 
 import forge.Forge;
 import forge.interfaces.INetworkConnection;
+import forge.util.Callback;
 import forge.util.FileUtil;
 
 public class Main extends AndroidApplication {
@@ -42,9 +45,14 @@ public class Main extends AndroidApplication {
         }
 
         initialize(Forge.getApp(new AndroidClipboard(), new AndroidNetworkConnection(),
-                assetsDir, new Runnable() {
+                assetsDir, new Callback<String>() {
             @Override
-            public void run() {
+            public void run(String runOnExit) {
+                if (runOnExit != null) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(runOnExit));
+                    startActivity(intent);  
+                }
+
                 //ensure process doesn't stick around after exiting
                 android.os.Process.killProcess(android.os.Process.myPid());
             }

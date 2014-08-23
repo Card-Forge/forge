@@ -42,17 +42,19 @@ public class Forge implements ApplicationListener {
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
     private static INetworkConnection networkConnection;
-    private static Runnable onExit;
+    private static Callback<String> onExit;
     private static int screenWidth;
     private static int screenHeight;
     private static Graphics graphics;
     private static FScreen currentScreen;
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
+    private static String runAfterExit;
+    private static boolean exited;
     private static final SoundSystem soundSystem = new SoundSystem();
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public static ApplicationListener getApp(Clipboard clipboard0, INetworkConnection networkConnection0, String assetDir0, Runnable onExit0) {
+    public static ApplicationListener getApp(Clipboard clipboard0, INetworkConnection networkConnection0, String assetDir0, Callback<String> onExit0) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
             networkConnection = networkConnection0;
@@ -88,10 +90,8 @@ public class Forge implements ApplicationListener {
             @Override
             public void run() {
                 //see if app or assets need updating
-                if (!AssetsDownloader.checkForUpdates(splashScreen)) {
-                    Gdx.app.exit(); //exit if user chose to exit or couldn't download required assets
-                    return;
-                }
+                AssetsDownloader.checkForUpdates(splashScreen);
+                if (exited) { return; } //don't continue if user chose to exit or couldn't download required assets
 
                 FModel.initialize(splashScreen.getProgressBar());
 
@@ -145,7 +145,7 @@ public class Forge implements ApplicationListener {
 
     public static void back() {
         if (screens.size() < 2) {
-            exit(); //prompt to exit if attempting to go back from home screen
+            exit(false, null); //prompt to exit if attempting to go back from home screen
             return;
         }
         currentScreen.onClose(new Callback<Boolean>() {
@@ -159,15 +159,25 @@ public class Forge implements ApplicationListener {
         });
     }
 
-    public static void exit() {
-        FOptionPane.showConfirmDialog("Are you sure you wish to exit Forge?", "Exit Forge", "Exit", "Cancel", new Callback<Boolean>() {
+    public static void exit(boolean silent, final String runAfterExit0) {
+        if (exited) { return; } //don't allow exiting multiple times
+
+        Callback<Boolean> callback = new Callback<Boolean>() {
             @Override
             public void run(Boolean result) {
                 if (result) {
+                    exited = true;
+                    runAfterExit = runAfterExit0;
                     Gdx.app.exit();
                 }
             }
-        });
+        };
+        if (silent) {
+            callback.run(true);
+        }
+        else {
+            FOptionPane.showConfirmDialog("Are you sure you wish to exit Forge?", "Exit Forge", "Exit", "Cancel", callback);
+        }
     }
 
     public static void openScreen(final FScreen screen0) {
@@ -283,7 +293,7 @@ public class Forge implements ApplicationListener {
         soundSystem.dispose();
 
         if (onExit != null) {
-            onExit.run();
+            onExit.run(runAfterExit);
         }
     }
 

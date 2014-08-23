@@ -1,6 +1,5 @@
 package forge.error;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 
@@ -63,7 +62,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
             btnExit.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    Gdx.app.exit();
+                    Forge.exit(true, null);
                 }
             });
         }

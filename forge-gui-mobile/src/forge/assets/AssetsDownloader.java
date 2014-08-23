@@ -28,11 +28,11 @@ import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public class AssetsDownloader {
-    public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version
+    public static final boolean SHARE_DESKTOP_ASSETS = false; //change to false to test downloading separate assets for desktop version
 
     //if not sharing desktop assets, check whether assets are up to date
-    public static boolean checkForUpdates(final SplashScreen splashScreen) {
-        if (Gdx.app.getType() == ApplicationType.Desktop && SHARE_DESKTOP_ASSETS) { return true; }
+    public static void checkForUpdates(final SplashScreen splashScreen) {
+        if (Gdx.app.getType() == ApplicationType.Desktop && SHARE_DESKTOP_ASSETS) { return; }
 
         splashScreen.getProgressBar().setDescription("Checking for updates...");
 
@@ -49,11 +49,18 @@ public class AssetsDownloader {
                             "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getNetworkConnection().isConnectedToWifi()) {
-                        message += " If so, you may want to connect to wifi first. The installer download is 6.5MB.";
+                        message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
-                        
-                        return false;
+                        String apkFile = downloadFile("update", "forge-android-" + version + "-signed-aligned.apk",
+                                "http://cardforge.org/android/releases/forge/forge-gui-android/" + version + "/",
+                                ForgeConstants.ASSETS_DIR, splashScreen.getProgressBar());
+                        if (apkFile != null) {
+                            Forge.exit(true, apkFile);
+                            return;
+                        }
+                        SOptionPane.showMessageDialog("Could not download update. " +
+                                "Press OK to proceed without update.", "Update Failed");
                     }
                 }
             }
@@ -70,11 +77,12 @@ public class AssetsDownloader {
             }
             catch (IOException e) {
                 e.printStackTrace();
-                return false; //can't continue if this fails
+                Forge.exit(true, null); //can't continue if this fails
+                return;
             }
         }
         else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getSkinDir() != null) {
-            return true; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
+            return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
         splashScreen.prepareForDialogs(); //ensure colors set up for showing message dialogs
@@ -90,7 +98,10 @@ public class AssetsDownloader {
                 message += "You cannot start the app since you haven't previously downloaded these files.";
             }
             SOptionPane.showMessageDialog(message, "No Internet Connection");
-            return canIgnoreDownload; //exit if can't ignore download
+            if (!canIgnoreDownload) {
+                Forge.exit(true, null); //exit if can't ignore download
+            }
+            return;
         }
 
         //prompt user whether they wish to download the updated resource files
@@ -115,9 +126,13 @@ public class AssetsDownloader {
         switch (SOptionPane.showOptionDialog(message, "Download Resource Files?",
                 null, options)) {
         case 1:
-            return canIgnoreDownload; //return true or false based on whether second option is Ignore vs. Exit
+            if (!canIgnoreDownload) {
+                Forge.exit(true, null); //exit if can't ignore download
+            }
+            return;
         case 2:
-            return false; //return false to indicate to exit application
+            Forge.exit(true, null);
+            return;
         }
 
         downloadAssets(splashScreen.getProgressBar());
@@ -136,7 +151,6 @@ public class AssetsDownloader {
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
-        return true;
     }
 
     private static String downloadFile(final String desc, final String filename, final String sourceFolder, final String destFolder, final FProgressBar progressBar) {
