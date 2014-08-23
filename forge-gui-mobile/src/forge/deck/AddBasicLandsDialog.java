@@ -85,7 +85,7 @@ public class AddBasicLandsDialog extends FDialog {
     private final LandPanel pnlMountain = scroller.add(new LandPanel("Mountain"));
     private final LandPanel pnlForest = scroller.add(new LandPanel("Forest"));
 
-    private final FTextArea lblDeckInfo = add(new FTextArea());
+    private final FTextArea lblDeckInfo = add(new FTextArea(true));
 
     private final FButton btnOK     = add(new FButton("OK"));
     private final FButton btnCancel = add(new FButton("Cancel"));

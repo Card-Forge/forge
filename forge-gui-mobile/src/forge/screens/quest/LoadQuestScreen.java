@@ -44,7 +44,7 @@ public class LoadQuestScreen extends FScreen {
     private static final FSkinColor OLD_QUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
-    private final FTextArea lblOldQuests = add(new FTextArea("Loading Existing Quests..."));
+    private final FTextArea lblOldQuests = add(new FTextArea(false, "Loading Existing Quests..."));
     private final QuestFileLister lstQuests = add(new QuestFileLister());
     private final FButton btnNewQuest = add(new FButton("New"));
     private final FButton btnRenameQuest = add(new FButton("Rename"));

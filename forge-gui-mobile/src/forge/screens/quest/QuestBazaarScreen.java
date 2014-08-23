@@ -56,7 +56,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
                 .align(HAlignment.CENTER).build());
         private final FLabel lblCredits = add(new FLabel.Builder().font(FSkinFont.get(15)).icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
         private final FLabel lblLife = add(new FLabel.Builder().font(lblCredits.getFont()).icon(FSkinImage.QUEST_LIFE).iconScaleFactor(1f).align(HAlignment.RIGHT).build());
-        private final FTextArea lblFluff = add(new FTextArea());
+        private final FTextArea lblFluff = add(new FTextArea(false));
         private final FScrollPane scroller = add(new FScrollPane() {
             @Override
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -142,7 +142,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
 
     private static class BazaarItemDisplay extends FContainer {
         private final FLabel lblName = add(new FLabel.Builder().font(FSkinFont.get(15)).insets(Vector2.Zero).build());
-        private final FTextArea lblDesc = add(new FTextArea());
+        private final FTextArea lblDesc = add(new FTextArea(false));
         private final FLabel lblIcon = add(new FLabel.Builder().iconInBackground().iconScaleFactor(1f).insets(Vector2.Zero).build());
         private final FLabel lblCost = add(new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).iconScaleFactor(1f).build());
         private final FLabel btnBuy = add(new FLabel.ButtonBuilder().text("Buy").font(FSkinFont.get(20)).build());

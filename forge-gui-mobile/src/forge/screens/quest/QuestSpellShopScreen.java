@@ -161,7 +161,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     }
 
     private static class SpellShopPage extends SpellShopBasePage {
-        private FTextArea lblSellPercentage = add(new FTextArea());
+        private FTextArea lblSellPercentage = add(new FTextArea(false));
 
         private SpellShopPage() {
             super("Cards for Sale", FSkinImage.QUEST_BOOK, true);

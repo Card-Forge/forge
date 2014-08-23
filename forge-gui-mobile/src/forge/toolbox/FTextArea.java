@@ -14,17 +14,18 @@ public class FTextArea extends FScrollPane {
     private HAlignment alignment;
     private Vector2 insets;
     private FSkinColor textColor;
-    private final TextRenderer renderer = new TextRenderer(true);
+    private final TextRenderer renderer;
 
-    public FTextArea() {
-        this("");
+    public FTextArea(boolean parseReminderText0) {
+        this(parseReminderText0, "");
     }
-    public FTextArea(String text0) {
+    public FTextArea(boolean parseReminderText0, String text0) {
         text = text0;
         font = FSkinFont.get(14);
         alignment = HAlignment.LEFT;
         insets = new Vector2(1, 1); //prevent text getting cut off by clip
         textColor = FLabel.DEFAULT_TEXT_COLOR;
+        renderer = new TextRenderer(parseReminderText0);
     }
 
     public String getText() {

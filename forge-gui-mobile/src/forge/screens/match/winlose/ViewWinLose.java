@@ -85,7 +85,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnContinue.setEnabled(!game0.getMatch().isMatchOver());
 
         lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).font(FSkinFont.get(18)).build());
-        txtLog = add(new FTextArea(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")) {
+        txtLog = add(new FTextArea(true, game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")) {
             @Override
             public boolean tap(float x, float y, int count) {
                 if (txtLog.getMaxScrollTop() > 0) {

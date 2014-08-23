@@ -13,6 +13,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
@@ -32,18 +34,26 @@ public class AssetsDownloader {
 
         splashScreen.getProgressBar().setDescription("Checking for updates...");
 
+        String message;
         boolean connectedToInternet = Forge.getNetworkConnection().isConnected();
         if (connectedToInternet) {
-            /*try {
+            try {
                 URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
                 String version = FileUtil.readFileToString(versionUrl);
                 if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
                     splashScreen.prepareForDialogs();
+
+                    message = "A new version of Forge is available (" + version + ").\n" + 
+                            "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
+                            "Would you like to update to the new version now?";
+                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
+                        return false;
+                    }
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
-            }*/
+            }
         }
 
         //see if assets need updating
@@ -65,7 +75,6 @@ public class AssetsDownloader {
 
         boolean canIgnoreDownload = FSkin.getAllSkins() != null; //don't allow ignoring download if resource files haven't been previously loaded
 
-        String message;
         if (!connectedToInternet) {
             message = "Updated resource files cannot be downloaded due to lack of internet connection.\n\n";
             if (canIgnoreDownload) {

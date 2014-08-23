@@ -30,7 +30,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         Forge.openScreen(new BugReportDialog(title, text, showExitAppBtn));
     }
 
-    private final FTextArea lblHeader = add(new FTextArea(BugReporter.HELP_TEXT));
+    private final FTextArea lblHeader = add(new FTextArea(false, BugReporter.HELP_TEXT));
     private final TemplateView tvDetails;
     private final FButton btnReport = add(new FButton(BugReporter.REPORT));
     private final FButton btnSave = add(new FButton(BugReporter.SAVE));
