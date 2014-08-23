@@ -472,7 +472,7 @@ public class QuestController {
             GameEventMulligan mev = (GameEventMulligan) ev;
             // First mulligan is free
             if (mev.player.getLobbyPlayer() == GuiBase.getInterface().getQuestPlayer()
-                    && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
+                    && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() < 7) {
                 mev.player.drawCard();
             }
         }
