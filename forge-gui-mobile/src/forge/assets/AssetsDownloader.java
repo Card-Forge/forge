@@ -28,9 +28,11 @@ import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public class AssetsDownloader {
-    //if not forge-gui-mobile-dev, check whether assets are up to date
+    public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version
+
+    //if not sharing desktop assets, check whether assets are up to date
     public static boolean checkForUpdates(final SplashScreen splashScreen) {
-        if (Gdx.app.getType() == ApplicationType.Desktop) { return true; }
+        if (Gdx.app.getType() == ApplicationType.Desktop && SHARE_DESKTOP_ASSETS) { return true; }
 
         splashScreen.getProgressBar().setDescription("Checking for updates...");
 
@@ -50,6 +52,7 @@ public class AssetsDownloader {
                         message += " If so, you may want to connect to wifi first. The installer download is 6.5MB.";
                     }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
+                        
                         return false;
                     }
                 }
@@ -136,15 +139,13 @@ public class AssetsDownloader {
         return true;
     }
 
-    private static void downloadAssets(final FProgressBar progressBar) {
-        final String destFile = ForgeConstants.ASSETS_DIR + "assets.zip";
-
+    private static String downloadFile(final String desc, final String filename, final String sourceFolder, final String destFolder, final FProgressBar progressBar) {
         progressBar.reset();
         progressBar.setPercentMode(true);
-        progressBar.setDescription("Downloading resource files");
+        progressBar.setDescription("Downloading " + desc);
 
         try {
-            URL url = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/assets.zip");
+            URL url = new URL(sourceFolder + filename);
             URLConnection conn = url.openConnection();
             conn.connect();
 
@@ -155,6 +156,7 @@ public class AssetsDownloader {
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
  
             // output stream to write file
+            String destFile = destFolder + filename;
             OutputStream output = new FileOutputStream(destFile);
  
             int count;
@@ -170,10 +172,19 @@ public class AssetsDownloader {
             output.flush();
             output.close();
             input.close();
+            return destFile;
         }
         catch (final Exception ex) {
-            Log.error("Assets", "Error downloading assets", ex);
+            Log.error("Downloading " + desc, "Error downloading " + desc, ex);
         }
+        return null;
+    }
+
+    private static void downloadAssets(final FProgressBar progressBar) {
+        String assetsFile = downloadFile("resource files", "assets.zip",
+                "http://cardforge.org/android/releases/forge/forge-gui-android/" + Forge.CURRENT_VERSION + "/",
+                ForgeConstants.ASSETS_DIR, progressBar);
+        if (assetsFile == null) { return; }
 
         //if assets.zip downloaded successfully, unzip into destination folder
         try {
@@ -185,7 +196,7 @@ public class AssetsDownloader {
                 FileUtil.deleteDirectory(resDir);
             }
 
-            ZipFile zipFile = new ZipFile(destFile);
+            ZipFile zipFile = new ZipFile(assetsFile);
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             progressBar.reset();
@@ -208,7 +219,7 @@ public class AssetsDownloader {
             }
 
             zipFile.close();
-            new File(destFile).delete();
+            new File(assetsFile).delete();
         }
         catch (Exception e) {
             e.printStackTrace();

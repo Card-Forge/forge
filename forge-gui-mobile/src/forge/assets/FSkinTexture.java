@@ -43,6 +43,10 @@ public enum FSkinTexture implements FImage {
                     return;
                 }
             }
+            else {
+                System.err.println("Failed to load skin file: " + defaultFile);
+                return;
+            }
         }
         if (repeat) {
             texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
