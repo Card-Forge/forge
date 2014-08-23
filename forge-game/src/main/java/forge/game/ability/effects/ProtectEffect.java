@@ -34,7 +34,7 @@ public class ProtectEffect extends SpellAbilityEffect {
         List<Card> tgtCards = getTargetCards(sa);
 
 
-        if (tgtCards.size() > 0) {
+        if (!tgtCards.isEmpty()) {
 
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
@@ -100,8 +100,13 @@ public class ProtectEffect extends SpellAbilityEffect {
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final List<String> choices = getProtectionList(sa);
         final List<String> gains = new ArrayList<String>();
+        final List<Card> tgtCards = getTargetCards(sa);
+        
         if (isChoice && !choices.isEmpty())  {
             Player choser = sa.getActivatingPlayer();
+            if (sa.hasParam("Choser") && sa.getParam("Choser").equals("Controller") && !tgtCards.isEmpty()) {
+            	choser = tgtCards.get(0).getController();
+            }
             final String choice = choser.getController().chooseProtectionType("Choose a protection", sa, choices);
             if( null == choice)
                 return;
@@ -117,7 +122,6 @@ public class ProtectEffect extends SpellAbilityEffect {
             }
         }
 
-        final List<Card> tgtCards = getTargetCards(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
