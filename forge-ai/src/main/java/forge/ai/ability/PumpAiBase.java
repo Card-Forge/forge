@@ -572,7 +572,16 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 chance += 1.0f * (pumpedDmg - dmg) / opp.getLife();
             }
             
-            //4. if the life of the computer is in danger, try to pump blockers blocking Tramplers
+            //4. lifelink
+            if (ai.canGainLife() && !c.hasKeyword("Lifelink") && keywords.contains("Lifelink")
+                    && (combat.isAttacking(c) || combat.isBlocking(c))) {
+                int dmg = pumped.getNetCombatDamage();
+                //The actual dmg inflicted should be the sum of ComputerUtilCombat.predictDamageTo() for opposing creature
+                //and trample damage (if any)
+                chance += 1.0f * dmg / ai.getLife();
+            }
+            
+            //5. if the life of the computer is in danger, try to pump blockers blocking Tramplers
             if (combat.isBlocking(c) && defense > 0 ) {
                 List<Card> blockedBy = combat.getAttackersBlockedBy(c);
                 boolean attackerHasTrample = false;
@@ -584,6 +593,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
         }
+        //TODO:how to consider repeatable pump abilities? This probably requires the AI to keep track of future decisions and/or
+        //plan a sequence of decisions.
         return MyRandom.getRandom().nextFloat() < chance;
     }
 
