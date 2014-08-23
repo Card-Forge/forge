@@ -1075,20 +1075,29 @@ public class AiAttackController {
         return false; // don't attack
     }
     
+    /**
+     * Find a protection type that will make an attacker unblockable.
+     * @param sa ability belonging to ApiType.Protection
+     * @return colour string or "artifacts", null if no possible choice exists
+     */
     public String toProtectAttacker(SpellAbility sa) {
+        //AiAttackController is created with the selected attacker as the only entry in "attackers"
         if (sa.getApi() != ApiType.Protection || oppList.isEmpty() || getPossibleBlockers(oppList, attackers).isEmpty()) {
-            return null;
+            return null;    //not protection sa or attacker is already unblockable
         }
         final List<String> choices = ProtectEffect.getProtectionList(sa);
-        String color = ComputerUtilCard.getMostProminentColor(oppList), artifact = null;
+        String color = ComputerUtilCard.getMostProminentColor(getPossibleBlockers(oppList, attackers)), artifact = null;
         if (choices.contains("artifacts")) {
-            artifact = "artifacts";
+            artifact = "artifacts"; //flag to indicate that protection from artifacts is available
         }
-        if (choices.contains(color)) {
-        	for (Card c : oppList) {
-        		if (!c.isArtifact()) {
-        			artifact = null;
-        		}
+        if (!choices.contains(color)) {
+            color = null;
+        }
+    	for (Card c : oppList) {   //find a blocker that ignores the currently selected protection
+    		if (artifact != null && !c.isArtifact()) {
+    			artifact = null;
+    		}
+    		if (color != null) {
         		switch (color) {
         		case "black":
         			if (!c.isBlack()) {
@@ -1116,12 +1125,10 @@ public class AiAttackController {
         			}
         			break;
         		}
-        		if (color == null && artifact == null) {
-        			return null;
-        		}
         	}
-        } else {
-        	color = null;
+    		if (color == null && artifact == null) {  //nothing can make the attacker unblockable
+                return null;
+            }
         }
         if (color != null) {
             return color;
@@ -1129,7 +1136,7 @@ public class AiAttackController {
         if (artifact != null) {
             return artifact;
         }
-        return null;
+        return null;    //should never get here
     }
 
 } // end class ComputerUtil_Attack2
