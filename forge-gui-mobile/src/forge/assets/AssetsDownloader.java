@@ -13,6 +13,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
 
 import forge.FThreads;
@@ -26,8 +28,8 @@ import forge.util.gui.SOptionPane;
 public class AssetsDownloader {
     //if not forge-gui-mobile-dev, check whether assets are up to date
     public static boolean checkForUpdates(final SplashScreen splashScreen) {
-        //if (Gdx.app.getType() == ApplicationType.Desktop) { return true; }
-        
+        if (Gdx.app.getType() == ApplicationType.Desktop) { return true; }
+
         boolean connectedToInternet = Forge.getNetworkConnection().isConnected();
         if (connectedToInternet) {
             /*splashScreen.getProgressBar().setDescription("Checking for updates...");
