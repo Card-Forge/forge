@@ -46,6 +46,9 @@ public class AssetsDownloader {
                     message = "A new version of Forge is available (" + version + ").\n" + 
                             "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
                             "Would you like to update to the new version now?";
+                    if (!Forge.getNetworkConnection().isConnectedToWifi()) {
+                        message += " If so, you may want to connect to wifi first. The installer download is 6.5MB.";
+                    }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
                         return false;
                     }
