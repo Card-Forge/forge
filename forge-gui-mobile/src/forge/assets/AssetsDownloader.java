@@ -13,9 +13,6 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
 
 import forge.FThreads;
@@ -38,7 +35,7 @@ public class AssetsDownloader {
                 URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
                 String version = FileUtil.readFileToString(versionUrl);
                 if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
-                    
+                    splashScreen.prepareForDialogs();
                 }
             }
             catch (Exception e) {
@@ -54,12 +51,14 @@ public class AssetsDownloader {
             }
             catch (IOException e) {
                 e.printStackTrace();
-                Gdx.app.exit(); //can't continue if this fails
+                return false; //can't continue if this fails
             }
         }
         else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getSkinDir() != null) {
             return true; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
+
+        splashScreen.prepareForDialogs(); //ensure colors set up for showing message dialogs
 
         if (!connectedToInternet) {
             SOptionPane.showMessageDialog("Updated assets files could not be downloaded due to lack of internet connection.",
@@ -68,7 +67,7 @@ public class AssetsDownloader {
         }
 
         //prompt user whether they wish to download the updated resource files
-        String message = "There are updated resource files to download." + 
+        String message = "There are updated resource files to download. " + 
                 "This download is around 80MB, ";
         if (Forge.getNetworkConnection().isConnectedToWifi()) {
             message += "which shouldn't take long if your wifi connection is good.";
@@ -87,7 +86,7 @@ public class AssetsDownloader {
             options = new String[] { "Download", "Ignore", "Exit" };
         }
         switch (SOptionPane.showOptionDialog(message, "Download Resource Files?",
-                null, new String[] { "Download", "Ignore", "Exit" })) {
+                null, options)) {
         case 1:
             return options.length == 3; //return true or false based on whether second option is Ignore vs. Exit
         case 2:

@@ -72,6 +72,7 @@ public class Forge implements ApplicationListener {
 
         graphics = new Graphics();
         splashScreen = new SplashScreen();
+        Gdx.input.setInputProcessor(new MainInputProcessor());
 
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
@@ -116,7 +117,6 @@ public class Forge implements ApplicationListener {
 
         soundSystem.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
 
-        Gdx.input.setInputProcessor(new MainInputProcessor());
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
         openScreen(new HomeScreen());
@@ -398,14 +398,14 @@ public class Forge implements ApplicationListener {
 
         private void updatePotentialListeners(int x, int y) {
             potentialListeners.clear();
-            if (currentScreen != null) { //base potential listeners on object containing touch down point
-                FOverlay overlay = FOverlay.getTopOverlay();
-                if (overlay != null) { //let top overlay handle gestures if any is open
-                    overlay.buildTouchListeners(x, y, potentialListeners);
-                }
-                else {
-                    currentScreen.buildTouchListeners(x, y, potentialListeners);
-                }
+
+            //base potential listeners on object containing touch down point
+            FOverlay overlay = FOverlay.getTopOverlay();
+            if (overlay != null) { //let top overlay handle gestures if any is open
+                overlay.buildTouchListeners(x, y, potentialListeners);
+            }
+            else if (currentScreen != null) {
+                currentScreen.buildTouchListeners(x, y, potentialListeners);
             }
         }
 

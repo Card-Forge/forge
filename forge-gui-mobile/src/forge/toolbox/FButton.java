@@ -181,7 +181,11 @@ public class FButton extends FDisplayObject implements IButton {
         //determine images to draw and text alignment based on which corner button is in (if any)
         switch (corner) {
         case None:
-            if (w > 2 * h) {
+            if (imgL.getTextureRegion() == null) {
+                //handle rendering buttons before textures loaded
+                FLabel.drawButtonBackground(g, w, h, imgL == FSkinImage.BTN_DOWN_LEFT);
+            }
+            else if (w > 2 * h) {
                 g.drawImage(imgL, 0, 0, h, h);
                 g.drawImage(imgM, h, 0, w - (2 * h), h);
                 g.drawImage(imgR, w - h, 0, h, h);

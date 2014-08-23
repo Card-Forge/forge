@@ -1,10 +1,12 @@
 package forge.screens;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FContainer;
@@ -14,6 +16,7 @@ public class SplashScreen extends FContainer {
     private TextureRegion background;
     private final FProgressBar progressBar;
     private FSkinFont disclaimerFont;
+    private boolean preparedForDialogs;
 
     public SplashScreen() {
         progressBar = new FProgressBar();
@@ -30,6 +33,34 @@ public class SplashScreen extends FContainer {
 
     @Override
     protected void doLayout(float width, float height) {
+    }
+
+    //prepare for showing dialogs on top of splash screen if needed
+    public void prepareForDialogs() {
+        if (preparedForDialogs) { return; }
+
+        //establish fallback colors for before actual colors are loaded
+        Color defaultColor = new Color(0, 0, 0, 0);
+        for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
+            switch (c) {
+            case CLR_BORDERS:
+            case CLR_TEXT:
+                c.setColor(FProgressBar.SEL_FORE_COLOR);
+                break;
+            case CLR_ACTIVE:
+            case CLR_THEME2:
+                c.setColor(FProgressBar.SEL_BACK_COLOR);
+                break;
+            case CLR_INACTIVE:
+                c.setColor(FSkinColor.stepColor(FProgressBar.SEL_BACK_COLOR, -80));
+                break;
+            default:
+                c.setColor(defaultColor);
+                break;
+            }
+        }
+        FSkinColor.updateAll();
+        preparedForDialogs = true;
     }
 
     @Override

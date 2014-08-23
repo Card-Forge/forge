@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import forge.Graphics;
 import forge.card.CardFaceSymbols;
 import forge.model.FModel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 //Encodes text for drawing with symbols and reminder text
@@ -88,7 +89,8 @@ public class TextRenderer {
             needClip = true;
         }
 
-        boolean hideReminderText = FModel.getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT);
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean hideReminderText = prefs != null && prefs.getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT);
 
         char ch;
         float x = 0;

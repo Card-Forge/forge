@@ -112,7 +112,9 @@ public abstract class FDialog extends FOverlay {
 
     private class Titlebar extends FLabel {
         private Titlebar(String title) {
-            super(new FLabel.Builder().text(title).icon(FSkinImage.FAVICON).font(TITLE_FONT).align(HAlignment.LEFT));
+            super(new FLabel.Builder().text(title)
+                    .icon(FSkinImage.FAVICON.getTextureRegion() != null ? FSkinImage.FAVICON : null) //don't show icon if on SplashScreen
+                    .font(TITLE_FONT).align(HAlignment.LEFT));
         }
 
         @Override

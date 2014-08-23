@@ -24,6 +24,7 @@ public class FOptionPane extends FDialog {
     public static final FSkinImage ERROR_ICON = FSkinImage.ERROR;
 
     public static final float PADDING = Utils.scaleMin(10);
+    public static final float GAP_BETWEEN_BUTTONS = Utils.scaleX(3);
     public static final float GAP_BELOW_BUTTONS = PADDING * 0.5f;
     public static final float BUTTON_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
     public static final float MIN_BUTTON_WIDTH = Utils.scaleX(120);
@@ -293,16 +294,15 @@ public class FOptionPane extends FDialog {
                 maxButtonWidth = buttonWidth;
             }
         }
-        float gapBetween = Utils.scaleX(-2); //use negative so buttons closer together
         float buttonWidth = Math.max(maxButtonWidth, MIN_BUTTON_WIDTH); //account for margins and enforce minimum width
-        float dx = buttonWidth + gapBetween;
-        float totalButtonWidth = dx * buttons.length - gapBetween;
+        float dx = buttonWidth + GAP_BETWEEN_BUTTONS;
+        float totalButtonWidth = dx * buttons.length - GAP_BETWEEN_BUTTONS;
 
         x = (width - totalButtonWidth) / 2;
         if (x < PADDING) { //reduce button width if not enough room for buttons
-            buttonWidth = (width - 2 * PADDING - (buttons.length - 1) * gapBetween) / (float)buttons.length;
+            buttonWidth = (width - 2 * PADDING - (buttons.length - 1) * GAP_BETWEEN_BUTTONS) / (float)buttons.length;
             x = PADDING;
-            dx = buttonWidth + gapBetween;
+            dx = buttonWidth + GAP_BETWEEN_BUTTONS;
         }
         for (FButton btn : buttons) {
             btn.setBounds(x, y, buttonWidth, BUTTON_HEIGHT);

@@ -71,6 +71,17 @@ public class FLabel extends FDisplayObject implements IButton {
         }
     }
 
+    public static void drawButtonBackground(Graphics g, float w, float h, boolean pressed) {
+        if (pressed) {
+            g.fillGradientRect(d50, d10, true, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, d50, 0, 0, w, h);
+        }
+        else {
+            g.fillGradientRect(d10, l20, true, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, d10, 0, 0, w, h);
+        }
+    }
+
     public static final FSkinColor DEFAULT_TEXT_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     public static final FSkinColor INLINE_LABEL_COLOR = DEFAULT_TEXT_COLOR.alphaColor(0.7f);
     private static final FSkinColor clrMain = FSkinColor.get(Colors.CLR_INACTIVE);
