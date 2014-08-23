@@ -19,7 +19,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
 import forge.Forge;
-import forge.interfaces.INetworkConnection;
+import forge.interfaces.IDeviceAdapter;
 import forge.util.Callback;
 import forge.util.FileUtil;
 
@@ -47,7 +47,7 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(Forge.getApp(new AndroidClipboard(), new AndroidNetworkConnection(),
+        initialize(Forge.getApp(new AndroidClipboard(), new AndroidAdapter(),
                 assetsDir, new Callback<String>() {
             @Override
             public void run(String runOnExit) {
@@ -99,11 +99,11 @@ public class Main extends AndroidApplication {
         }
     }
 
-    private class AndroidNetworkConnection implements INetworkConnection {
+    private class AndroidAdapter implements IDeviceAdapter {
         private final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         @Override
-        public boolean isConnected() {
+        public boolean isConnectedToInternet() {
             NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
             return activeNetworkInfo != null && activeNetworkInfo.isConnected();
         }
@@ -112,6 +112,11 @@ public class Main extends AndroidApplication {
         public boolean isConnectedToWifi() {
             NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             return wifi.isConnected();
+        }
+
+        @Override
+        public String getDownloadsDir() {
+            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
         }
     }
 }

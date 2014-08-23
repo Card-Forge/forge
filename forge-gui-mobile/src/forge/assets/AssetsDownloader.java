@@ -37,7 +37,7 @@ public class AssetsDownloader {
         splashScreen.getProgressBar().setDescription("Checking for updates...");
 
         String message;
-        boolean connectedToInternet = Forge.getNetworkConnection().isConnected();
+        boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             try {
                 URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
@@ -48,13 +48,13 @@ public class AssetsDownloader {
                     message = "A new version of Forge is available (" + version + ").\n" + 
                             "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
                             "Would you like to update to the new version now?";
-                    if (!Forge.getNetworkConnection().isConnectedToWifi()) {
+                    if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
                     }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later")) {
                         String apkFile = downloadFile("update", "forge-android-" + version + "-signed-aligned.apk",
                                 "http://cardforge.org/android/releases/forge/forge-gui-android/" + version + "/",
-                                ForgeConstants.ASSETS_DIR, splashScreen.getProgressBar());
+                                Forge.getDeviceAdapter().getDownloadsDir(), splashScreen.getProgressBar());
                         if (apkFile != null) {
                             Forge.exit(true, apkFile);
                             return;
@@ -107,7 +107,7 @@ public class AssetsDownloader {
         //prompt user whether they wish to download the updated resource files
         message = "There are updated resource files to download. " + 
                 "This download is around 80MB, ";
-        if (Forge.getNetworkConnection().isConnectedToWifi()) {
+        if (Forge.getDeviceAdapter().isConnectedToWifi()) {
             message += "which shouldn't take long if your wifi connection is good.";
         }
         else {
