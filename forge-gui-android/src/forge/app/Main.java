@@ -2,7 +2,10 @@ package forge.app;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
 import forge.Forge;
+import forge.interfaces.INetworkConnection;
 import forge.util.FileUtil;
 
 public class Main extends AndroidApplication {
@@ -37,7 +41,8 @@ public class Main extends AndroidApplication {
             return;
         }
 
-        initialize(Forge.getApp(new AndroidClipboard(), assetsDir, new Runnable() {
+        initialize(Forge.getApp(new AndroidClipboard(), new AndroidNetworkConnection(),
+                assetsDir, new Runnable() {
             @Override
             public void run() {
                 //ensure process doesn't stick around after exiting
@@ -66,6 +71,22 @@ public class Main extends AndroidApplication {
         @Override
         public void setContents(String contents0) {
             cm.setPrimaryClip(ClipData.newPlainText("Forge", contents0));
+        }
+    }
+
+    private class AndroidNetworkConnection implements INetworkConnection {
+        private final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        @Override
+        public boolean isConnected() {
+            NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+
+        @Override
+        public boolean isConnectedToWifi() {
+            NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            return wifi.isConnected();
         }
     }
 }

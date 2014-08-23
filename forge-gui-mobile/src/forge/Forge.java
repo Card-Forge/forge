@@ -16,6 +16,7 @@ import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
+import forge.interfaces.INetworkConnection;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -40,6 +41,7 @@ public class Forge implements ApplicationListener {
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
+    private static INetworkConnection networkConnection;
     private static Runnable onExit;
     private static int screenWidth;
     private static int screenHeight;
@@ -50,9 +52,10 @@ public class Forge implements ApplicationListener {
     private static final SoundSystem soundSystem = new SoundSystem();
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
-    public static ApplicationListener getApp(Clipboard clipboard0, String assetDir0, Runnable onExit0) {
+    public static ApplicationListener getApp(Clipboard clipboard0, INetworkConnection networkConnection0, String assetDir0, Runnable onExit0) {
         if (GuiBase.getInterface() == null) {
             clipboard = clipboard0;
+            networkConnection = networkConnection0;
             onExit = onExit0;
             GuiBase.setInterface(new GuiMobile(assetDir0));
         }
@@ -119,6 +122,10 @@ public class Forge implements ApplicationListener {
 
     public static Clipboard getClipboard() {
         return clipboard;
+    }
+
+    public static INetworkConnection getNetworkConnection() {
+        return networkConnection;
     }
 
     public static void showMenu() {

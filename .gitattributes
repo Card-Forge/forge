@@ -16674,6 +16674,7 @@ forge-gui/src/main/java/forge/interfaces/IButton.java -text
 forge-gui/src/main/java/forge/interfaces/ICheckBox.java -text
 forge-gui/src/main/java/forge/interfaces/IComboBox.java -text
 forge-gui/src/main/java/forge/interfaces/IGuiBase.java -text
+forge-gui/src/main/java/forge/interfaces/INetworkConnection.java -text
 forge-gui/src/main/java/forge/interfaces/IProgressBar.java -text
 forge-gui/src/main/java/forge/interfaces/ITextField.java -text
 forge-gui/src/main/java/forge/interfaces/IWinLoseView.java -text
