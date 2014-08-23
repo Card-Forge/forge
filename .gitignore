@@ -47,8 +47,10 @@ forge-gui-android/target
 forge-gui-desktop/*.iml
 forge-gui-desktop/target
 forge-gui-mobile-dev/bin
+forge-gui-mobile-dev/fallback_skin/Thumbs.db
 forge-gui-mobile-dev/res
 forge-gui-mobile-dev/target
+forge-gui-mobile-dev/testAssets
 forge-gui-mobile/bin
 forge-gui-mobile/target
 forge-gui/forge-gui.iml
