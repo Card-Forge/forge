@@ -13,7 +13,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import com.badlogic.gdx.Application.ApplicationType;
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.minlog.Log;
 
@@ -23,24 +24,27 @@ import forge.properties.ForgeConstants;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 import forge.util.FileUtil;
+import forge.util.gui.SOptionPane;
 
 public class AssetsDownloader {
     //if not forge-gui-mobile-dev, check whether assets are up to date
-    public static void checkForUpdates(final SplashScreen splashScreen) {
-        if (Gdx.app.getType() == ApplicationType.Desktop) { return; }
-
-        //TODO: see if app needs updating
-        /*splashScreen.getProgressBar().setDescription("Checking for updates...");
-        try {
-            URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
-            String version = FileUtil.readFileToString(versionUrl);
-            if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
-                
+    public static boolean checkForUpdates(final SplashScreen splashScreen) {
+        //if (Gdx.app.getType() == ApplicationType.Desktop) { return true; }
+        
+        boolean connectedToInternet = Forge.getNetworkConnection().isConnected();
+        if (connectedToInternet) {
+            /*splashScreen.getProgressBar().setDescription("Checking for updates...");
+            try {
+                URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
+                String version = FileUtil.readFileToString(versionUrl);
+                if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
+                    
+                }
             }
+            catch (Exception e) {
+                e.printStackTrace();
+            }*/
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
         //see if assets need updating
         File versionFile = new File(ForgeConstants.ASSETS_DIR + "version.txt");
@@ -54,14 +58,47 @@ public class AssetsDownloader {
             }
         }
         else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getSkinDir() != null) {
-            return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
+            return true; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
+        }
+
+        if (!connectedToInternet) {
+            SOptionPane.showMessageDialog("Updated assets files could not be downloaded due to lack of internet connection.",
+                    "No Internet Connection");
+            return true;
+        }
+
+        //prompt user whether they wish to download the updated resource files
+        String message = "There are updated resource files to download." + 
+                "This download is around 80MB, ";
+        if (Forge.getNetworkConnection().isConnectedToWifi()) {
+            message += "which shouldn't take long if your wifi connection is good.";
+        }
+        else {
+            message += "so it's highly recommended that you connect to wifi first.";
+        }
+        String[] options;
+        message += "\n\n";
+        if (FSkin.getAllSkins() == null) {
+            message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
+            options = new String[] { "Download", "Exit" };
+        }
+        else {
+            message += "If you choose to ignore this download, you may miss out on card fixes or experience other problems.";
+            options = new String[] { "Download", "Ignore", "Exit" };
+        }
+        switch (SOptionPane.showOptionDialog(message, "Download Resource Files?",
+                null, new String[] { "Download", "Ignore", "Exit" })) {
+        case 1:
+            return options.length == 3; //return true or false based on whether second option is Ignore vs. Exit
+        case 2:
+            return false; //return false to indicate to exit application
         }
 
         downloadAssets(splashScreen.getProgressBar());
 
         FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
 
-        //reload light version of skin of assets updated
+        //reload light version of skin after assets updated
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
@@ -73,6 +110,7 @@ public class AssetsDownloader {
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
         FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
+        return true;
     }
 
     private static void downloadAssets(final FProgressBar progressBar) {

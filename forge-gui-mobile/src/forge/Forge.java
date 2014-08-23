@@ -87,7 +87,10 @@ public class Forge implements ApplicationListener {
             @Override
             public void run() {
                 //see if app or assets need updating
-                AssetsDownloader.checkForUpdates(splashScreen);
+                if (!AssetsDownloader.checkForUpdates(splashScreen)) {
+                    Gdx.app.exit(); //exit if user chose to exit or couldn't download required assets
+                    return;
+                }
 
                 FModel.initialize(splashScreen.getProgressBar());
 
