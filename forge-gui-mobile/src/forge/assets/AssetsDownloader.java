@@ -30,10 +30,11 @@ public class AssetsDownloader {
     public static boolean checkForUpdates(final SplashScreen splashScreen) {
         if (Gdx.app.getType() == ApplicationType.Desktop) { return true; }
 
+        splashScreen.getProgressBar().setDescription("Checking for updates...");
+
         boolean connectedToInternet = Forge.getNetworkConnection().isConnected();
         if (connectedToInternet) {
-            /*splashScreen.getProgressBar().setDescription("Checking for updates...");
-            try {
+            /*try {
                 URL versionUrl = new URL("http://cardforge.org/android/releases/forge/forge-gui-android/version.txt");
                 String version = FileUtil.readFileToString(versionUrl);
                 if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
