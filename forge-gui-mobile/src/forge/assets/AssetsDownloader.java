@@ -63,14 +63,23 @@ public class AssetsDownloader {
 
         splashScreen.prepareForDialogs(); //ensure colors set up for showing message dialogs
 
+        boolean canIgnoreDownload = FSkin.getAllSkins() != null; //don't allow ignoring download if resource files haven't been previously loaded
+
+        String message;
         if (!connectedToInternet) {
-            SOptionPane.showMessageDialog("Updated assets files could not be downloaded due to lack of internet connection.",
-                    "No Internet Connection");
-            return true;
+            message = "Updated resource files cannot be downloaded due to lack of internet connection.\n\n";
+            if (canIgnoreDownload) {
+                message += "You can continue without this download, but you may miss out on card fixes or experience other problems.";
+            }
+            else {
+                message += "You cannot start the app since you haven't previously downloaded these files.";
+            }
+            SOptionPane.showMessageDialog(message, "No Internet Connection");
+            return canIgnoreDownload; //exit if can't ignore download
         }
 
         //prompt user whether they wish to download the updated resource files
-        String message = "There are updated resource files to download. " + 
+        message = "There are updated resource files to download. " + 
                 "This download is around 80MB, ";
         if (Forge.getNetworkConnection().isConnectedToWifi()) {
             message += "which shouldn't take long if your wifi connection is good.";
@@ -80,18 +89,18 @@ public class AssetsDownloader {
         }
         String[] options;
         message += "\n\n";
-        if (FSkin.getAllSkins() == null) {
-            message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
-            options = new String[] { "Download", "Exit" };
-        }
-        else {
+        if (canIgnoreDownload) {
             message += "If you choose to ignore this download, you may miss out on card fixes or experience other problems.";
             options = new String[] { "Download", "Ignore", "Exit" };
+        }
+        else {
+            message += "This download is mandatory to start the app since you haven't previously downloaded these files.";
+            options = new String[] { "Download", "Exit" };
         }
         switch (SOptionPane.showOptionDialog(message, "Download Resource Files?",
                 null, options)) {
         case 1:
-            return options.length == 3; //return true or false based on whether second option is Ignore vs. Exit
+            return canIgnoreDownload; //return true or false based on whether second option is Ignore vs. Exit
         case 2:
             return false; //return false to indicate to exit application
         }
