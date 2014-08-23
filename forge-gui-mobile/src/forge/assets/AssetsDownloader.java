@@ -28,7 +28,7 @@ import forge.util.FileUtil;
 import forge.util.gui.SOptionPane;
 
 public class AssetsDownloader {
-    public static final boolean SHARE_DESKTOP_ASSETS = false; //change to false to test downloading separate assets for desktop version
+    public static final boolean SHARE_DESKTOP_ASSETS = true; //change to false to test downloading separate assets for desktop version
 
     //if not sharing desktop assets, check whether assets are up to date
     public static void checkForUpdates(final SplashScreen splashScreen) {
