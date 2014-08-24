@@ -108,6 +108,7 @@ public class Main extends AndroidApplication {
         public boolean openFile(String filename) {
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //ensure this task isn't linked to this application
                 Uri uri = Uri.fromFile(new File(filename));
                 String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
                         MimeTypeMap.getFileExtensionFromUrl(uri.toString()));
