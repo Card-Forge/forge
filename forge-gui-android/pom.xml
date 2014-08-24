@@ -356,6 +356,13 @@
                                                 <include name="assets.zip" />
                                             </fileset>
                                         </ftp>
+                                        <ftp password="${cardforge.pass}" server="ftp.cardforge.org"
+                                            userid="${cardforge.user}" passive="true"
+                                            remotedir="releases/forge/forge-gui-android/">
+                                            <fileset dir="${project.build.directory}/classes">
+                                                <include name="version.txt" />
+                                            </fileset>
+                                        </ftp>
                                     </target>
                                 </configuration>
                                 <goals>
