@@ -56,7 +56,8 @@ public class AssetsDownloader {
                                 "http://cardforge.org/android/releases/forge/forge-gui-android/" + version + "/",
                                 Forge.getDeviceAdapter().getDownloadsDir(), splashScreen.getProgressBar());
                         if (apkFile != null) {
-                            Forge.exit(true, apkFile);
+                            Forge.getDeviceAdapter().openFile(apkFile);
+                            Forge.exit(true);
                             return;
                         }
                         SOptionPane.showMessageDialog("Could not download update. " +
@@ -77,7 +78,7 @@ public class AssetsDownloader {
             }
             catch (IOException e) {
                 e.printStackTrace();
-                Forge.exit(true, null); //can't continue if this fails
+                Forge.exit(true); //can't continue if this fails
                 return;
             }
         }
@@ -99,7 +100,7 @@ public class AssetsDownloader {
             }
             SOptionPane.showMessageDialog(message, "No Internet Connection");
             if (!canIgnoreDownload) {
-                Forge.exit(true, null); //exit if can't ignore download
+                Forge.exit(true); //exit if can't ignore download
             }
             return;
         }
@@ -127,11 +128,11 @@ public class AssetsDownloader {
                 null, options)) {
         case 1:
             if (!canIgnoreDownload) {
-                Forge.exit(true, null); //exit if can't ignore download
+                Forge.exit(true); //exit if can't ignore download
             }
             return;
         case 2:
-            Forge.exit(true, null);
+            Forge.exit(true);
             return;
         }
 

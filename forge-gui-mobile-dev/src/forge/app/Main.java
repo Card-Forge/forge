@@ -1,5 +1,10 @@
 package forge.app;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
 
@@ -17,7 +22,7 @@ public class Main {
         }
 
         new LwjglApplication(Forge.getApp(new LwjglClipboard(), new DesktopAdapter(),
-                assetsDir, null), "Forge", Utils.DEV_SCREEN_WIDTH, Utils.DEV_SCREEN_HEIGHT);
+                assetsDir), "Forge", Utils.DEV_SCREEN_WIDTH, Utils.DEV_SCREEN_HEIGHT);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {
@@ -35,6 +40,23 @@ public class Main {
         @Override
         public String getDownloadsDir() {
             return System.getProperty("user.home") + "/Downloads/";
+        }
+
+        @Override
+        public boolean openFile(String filename) {
+            try {
+                Desktop.getDesktop().open(new File(filename));
+                return true;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        public void exit() {
+            Gdx.app.exit(); //can just use Gdx.app.exit for desktop
         }
     }
 }

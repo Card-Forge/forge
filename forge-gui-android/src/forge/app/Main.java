@@ -1,7 +1,6 @@
 package forge.app;
 
 import java.io.File;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -20,7 +19,6 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
-import forge.util.Callback;
 import forge.util.FileUtil;
 
 public class Main extends AndroidApplication {
@@ -34,47 +32,34 @@ public class Main extends AndroidApplication {
             this.setRequestedOrientation(7);
         }
 
+        AndroidAdapter adapter = new AndroidAdapter();
+
         //establish assets directory
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             Gdx.app.error("Forge", "Can't access external storage");
-            Gdx.app.exit();
+            adapter.exit();
             return;
         }
         String assetsDir = Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(assetsDir)) {
             Gdx.app.error("Forge", "Can't access external storage");
-            Gdx.app.exit();
+            adapter.exit();
             return;
         }
 
-        initialize(Forge.getApp(new AndroidClipboard(), new AndroidAdapter(),
-                assetsDir, new Callback<String>() {
-            @Override
-            public void run(String runOnExit) {
-                if (runOnExit != null) {
-                    runFile(runOnExit);
-                }
-
-                //ensure process doesn't stick around after exiting
-                finish();
-                System.exit(0);
-            }
-        }));
+        initialize(Forge.getApp(new AndroidClipboard(), adapter, assetsDir));
     }
 
-    private void runFile(String filename) {
-        try {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            Uri uri = Uri.fromFile(new File(filename));
-            String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
-                    MimeTypeMap.getFileExtensionFromUrl(uri.toString()));
-            intent.setDataAndType(uri, type);
-            startActivity(intent);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    /*@Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //ensure app doesn't stick around
+        //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
+        //am.killBackgroundProcesses(getApplicationContext().getPackageName());
+
+        
+    }*/
 
     //special clipboard that words on Android
     private class AndroidClipboard implements com.badlogic.gdx.utils.Clipboard {
@@ -117,6 +102,35 @@ public class Main extends AndroidApplication {
         @Override
         public String getDownloadsDir() {
             return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+        }
+
+        @Override
+        public boolean openFile(String filename) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.fromFile(new File(filename));
+                String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                        MimeTypeMap.getFileExtensionFromUrl(uri.toString()));
+                intent.setDataAndType(uri, type);
+                startActivity(intent);
+                return true;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        public void exit() {
+            // Replace the current task with one that is excluded from the recent
+            // apps and that will finish itself immediately. It's critical that this
+            // activity get launched in the task that you want to hide.
+            final Intent relaunch = new Intent(Main.this, Exiter.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK // CLEAR_TASK requires this
+                            | Intent.FLAG_ACTIVITY_CLEAR_TASK // finish everything else in the task
+                            | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS); // hide (remove, in this case) task from recents
+            startActivity(relaunch);
         }
     }
 }

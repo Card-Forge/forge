@@ -690,6 +690,7 @@ forge-gui-android/res/drawable-xhdpi/ic_launcher.png -text
 forge-gui-android/res/drawable-xxhdpi/ic_launcher.png -text
 forge-gui-android/res/layout/main.xml -text
 forge-gui-android/res/values/strings.xml -text
+forge-gui-android/src/forge/app/Exiter.java -text
 forge-gui-android/src/forge/app/Main.java -text
 forge-gui-desktop/.classpath -text
 forge-gui-desktop/.project -text

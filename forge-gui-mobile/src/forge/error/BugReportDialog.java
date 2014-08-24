@@ -62,7 +62,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
             btnExit.setCommand(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    Forge.exit(true, null);
+                    Forge.exit(true);
                 }
             });
         }
