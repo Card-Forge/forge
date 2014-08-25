@@ -1,6 +1,8 @@
 package forge.app;
 
 import java.io.File;
+import java.util.concurrent.Callable;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -20,6 +22,7 @@ import com.badlogic.gdx.backends.android.AndroidApplication;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
+import forge.util.ThreadUtil;
 
 public class Main extends AndroidApplication {
     @Override
@@ -89,14 +92,24 @@ public class Main extends AndroidApplication {
 
         @Override
         public boolean isConnectedToInternet() {
-            NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
+                    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+                }
+            }, 2000)); //if can't determine Internet connection within two seconds, assume not connected
         }
 
         @Override
         public boolean isConnectedToWifi() {
-            NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            return wifi.isConnected();
+            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                    return wifi.isConnected();
+                }
+            }, 2000)); //if can't determine Internet connection within two seconds, assume not connected
         }
 
         @Override

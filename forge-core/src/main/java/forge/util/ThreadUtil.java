@@ -45,4 +45,21 @@ public class ThreadUtil {
     public static boolean isGameThread() {
         return Thread.currentThread().getName().startsWith("Game");
     }
+
+    public static <T> T executeWithTimeout(Callable<T> task, int milliseconds) {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Future<T> future = executor.submit(task);
+        T result;
+        try {
+            result = future.get(milliseconds, TimeUnit.MILLISECONDS); 
+        }
+        catch (Exception e) { //handle timeout and other exceptions
+            e.printStackTrace();
+            result = null;
+        }
+        finally {
+           future.cancel(true);
+        }
+        return result;
+    }
 }
