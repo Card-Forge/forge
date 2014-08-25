@@ -8,6 +8,10 @@ Forge Beta: 08-##-2014 ver 1.5.25
 Release Notes
 -------------
 
+- Auto-targeting support -
+When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.
+
+
 - New Commander 2014 and KTK cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
