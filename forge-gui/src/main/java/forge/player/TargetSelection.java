@@ -83,10 +83,12 @@ public class TargetSelection {
 
         boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
-        if (maxTargets == 0) return true;
+        if (maxTargets == 0) { return true; }
+
         // if not enough targets chosen, cancel Ability
-        if (this.bTargetingDone && !hasEnoughTargets)
+        if (this.bTargetingDone && !hasEnoughTargets) {
             return false;
+        }
 
         if (this.bTargetingDone && hasEnoughTargets || hasAllTargets || tgt.isDividedAsYouChoose() && tgt.getStillToDivide() == 0) {
             return true;
@@ -114,6 +116,15 @@ public class TargetSelection {
         }
         else {
             final List<Card> validTargets = this.getValidCardsToTarget();
+            if (validTargets.isEmpty()) {
+                //if no valid cards to target and only one valid non-card, auto-target the non-card
+                //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
+                //note that we don't handle auto-targeting cards this way since it's possible that the result will be undesirable
+                List<GameObject> nonCardTargets = tgt.getAllCandidates(this.ability, true);
+                if (nonCardTargets.size() == 1) {
+                    return ability.getTargets().add(nonCardTargets.get(0));
+                }
+            }
             final Map<Player, Object> playersWithValidTargets = new HashMap<Player, Object>();
             for (Card card : validTargets) {
                 playersWithValidTargets.put(card.getController(), null);
