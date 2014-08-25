@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 /**
@@ -248,17 +249,18 @@ public final class FileUtil {
     }
 
     public static List<String> readFile(final URL url) {
-        List<String> lines = new ArrayList<String>();
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-            String line;
-            while ((line = in.readLine()) != null) {
-                lines.add(line);
+        final List<String> lines = new ArrayList<String>();
+        ThreadUtil.executeWithTimeout(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                String line;
+                while ((line = in.readLine()) != null) {
+                    lines.add(line);
+                }
+                return null;
             }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        }, 5000); //abort reading file if it takes longer than 5 seconds
         return lines;
     }
 }
