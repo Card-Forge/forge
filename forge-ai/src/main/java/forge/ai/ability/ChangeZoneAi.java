@@ -793,20 +793,22 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 
-                // When bouncing opponents stuff, don't bounce cards with CMC 0
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        for (Card aura : c.getEnchantedBy()) {
-                            if (aura.getController().isOpponentOf(ai)) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                        return c.isToken() || c.getCMC() > 0;
-                    }
-                });
+                if (!CardLists.getNotType(list, "Land").isEmpty()) {
+	                // When bouncing opponents stuff other than lands, don't bounce cards with CMC 0
+	                list = CardLists.filter(list, new Predicate<Card>() {
+	                    @Override
+	                    public boolean apply(final Card c) {
+	                        for (Card aura : c.getEnchantedBy()) {
+	                            if (aura.getController().isOpponentOf(ai)) {
+	                                return true;
+	                            } else {
+	                                return false;
+	                            }
+	                        }
+	                        return c.isToken() || c.getCMC() > 0;
+	                    }
+	                });
+                }
                 // TODO: Blink permanents with ETB triggers
                 /*else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
