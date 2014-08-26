@@ -6,11 +6,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
-
 import forge.Graphics;
-import forge.TextureRenderer;
+import forge.assets.FBufferedImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -32,6 +30,7 @@ public class CardImageRenderer {
         //force static fields to be updated the next time a card image is rendered
         prevImageWidth = 0;
         prevImageHeight = 0;
+        forgeArt.clear();
     }
 
     private static void updateStaticFields(float w, float h) {
@@ -53,12 +52,6 @@ public class CardImageRenderer {
 
         prevImageWidth = w;
         prevImageHeight = h;
-    }
-
-    public static Texture createCardImage(Card card) {
-        TextureRenderer g = new TextureRenderer(BASE_IMAGE_WIDTH, BASE_IMAGE_HEIGHT);
-        drawCardImage(g, card, 0, 0, BASE_IMAGE_WIDTH, BASE_IMAGE_HEIGHT);
-        return g.finish();
     }
 
     public static void drawCardImage(Graphics g, Card card, float x, float y, float w, float h) {
@@ -182,12 +175,24 @@ public class CardImageRenderer {
         g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
     }
 
+    public static final FBufferedImage forgeArt;
+    static {
+        final float logoWidth = FSkinImage.LOGO.getWidth();
+        final float logoHeight = FSkinImage.LOGO.getHeight();
+        float h = logoHeight * 1.1f;
+        float w = h * CardRenderer.CARD_ART_RATIO;
+        forgeArt = new FBufferedImage(w, h) {
+            @Override
+            protected void draw(Graphics g, float w, float h) {
+                g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+                g.drawImage(FSkinImage.LOGO, (w - logoWidth) / 2, (h - logoHeight) / 2, logoWidth, logoHeight);
+            }
+        };
+    }
+
     private static void drawArt(Graphics g, float x, float y, float w, float h) {
-        float imageHeight = h * 0.9f;
-        float imageWidth = imageHeight * FSkinImage.LOGO.getWidth() / FSkinImage.LOGO.getHeight();
-        g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
-        g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, x, y, w, h);
-        g.drawImage(FSkinImage.LOGO, x + (w - imageWidth) / 2, y + (h - imageHeight) / 2, imageWidth, imageHeight);
+        g.drawImage(forgeArt, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 

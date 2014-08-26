@@ -1119,14 +1119,15 @@ forge-gui-mobile/pom.xml -text
 forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/Graphics.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
-forge-gui-mobile/src/forge/TextureRenderer.java -text
 forge-gui-mobile/src/forge/animation/AbilityEffect.java -text
 forge-gui-mobile/src/forge/animation/ForgeAnimation.java -text
 forge-gui-mobile/src/forge/animation/GifAnimation.java -text
 forge-gui-mobile/src/forge/animation/GifDecoder.java -text
 forge-gui-mobile/src/forge/assets/AssetsDownloader.java -text
 forge-gui-mobile/src/forge/assets/BitmapFontWriter.java -text
+forge-gui-mobile/src/forge/assets/FBufferedImage.java -text
 forge-gui-mobile/src/forge/assets/FImage.java -text
+forge-gui-mobile/src/forge/assets/FImageComplex.java -text
 forge-gui-mobile/src/forge/assets/FSkin.java -text
 forge-gui-mobile/src/forge/assets/FSkinBorder.java -text
 forge-gui-mobile/src/forge/assets/FSkinColor.java -text

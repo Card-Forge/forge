@@ -1,10 +1,11 @@
 package forge.assets;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Graphics;
 
-public class FTextureRegionImage implements FImage {
+public class FTextureRegionImage extends FImageComplex {
     private final TextureRegion textureRegion;
 
     public FTextureRegionImage(TextureRegion textureRegion0) {
@@ -19,6 +20,21 @@ public class FTextureRegionImage implements FImage {
     @Override
     public float getHeight() {
         return textureRegion.getRegionHeight();
+    }
+
+    @Override
+    public Texture getTexture() {
+        return textureRegion.getTexture();
+    }
+
+    @Override
+    public int getRegionX() {
+        return textureRegion.getRegionX();
+    }
+
+    @Override
+    public int getRegionY() {
+        return textureRegion.getRegionY();
     }
 
     @Override

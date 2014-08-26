@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import forge.Graphics;
 
-public class FTextureImage implements FImage {
+public class FTextureImage extends FImageComplex {
     private final Texture texture;
 
     public FTextureImage(Texture texture0) {
@@ -19,6 +19,21 @@ public class FTextureImage implements FImage {
     @Override
     public float getHeight() {
         return texture.getHeight();
+    }
+
+    @Override
+    public Texture getTexture() {
+        return texture;
+    }
+
+    @Override
+    public int getRegionX() {
+        return 0;
+    }
+
+    @Override
+    public int getRegionY() {
+        return 0;
     }
 
     @Override

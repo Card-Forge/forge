@@ -14,9 +14,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import forge.Graphics;
 import forge.ImageKeys;
+import forge.assets.FImageComplex;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
@@ -218,23 +220,23 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static final Map<String, TextureRegion> cardArtCache = new HashMap<String, TextureRegion>();
+    private static final Map<String, FImageComplex> cardArtCache = new HashMap<String, FImageComplex>();
     public static final float CARD_ART_RATIO = 1.302f;
 
     //extract card art from the given card
-    public static TextureRegion getCardArt(IPaperCard pc) {
+    public static FImageComplex getCardArt(IPaperCard pc) {
         return getCardArt(ImageKeys.getImageKey(pc, false), pc.getRules().getSplitType() == CardSplitType.Split);
     }
-    public static TextureRegion getCardArt(Card card) {
+    public static FImageComplex getCardArt(Card card) {
         return getCardArt(card.getImageKey(), card.isSplitCard());
     }
-    public static TextureRegion getCardArt(String imageKey, boolean isSplitCard) {
-        TextureRegion cardArt = cardArtCache.get(imageKey);
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard) {
+        FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = ImageCache.getImage(imageKey, true);
             if (image != null) {
                 if (image == ImageCache.defaultImage) {
-                    cardArt = FSkinImage.LOGO.getTextureRegion(); //use logo instead of cropping default image
+                    cardArt = CardImageRenderer.forgeArt;
                 }
                 else {
                     float x, y;
@@ -262,7 +264,7 @@ public class CardRenderer {
                             y += dh / 2;
                         }
                     }
-                    cardArt = new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+                    cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
                 cardArtCache.put(imageKey, cardArt);
             }
@@ -306,7 +308,7 @@ public class CardRenderer {
             g.drawText(name, font, foreColor, x, y, w, h, false, HAlignment.CENTER, true);
         }
     }
-    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, TextureRegion cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
+    public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, FImageComplex cardArt, CardRules cardRules, String set, CardRarity rarity, int power, int toughness, int loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
         if (cardArt != null) {
@@ -314,13 +316,13 @@ public class CardRenderer {
             float artY = y - FList.PADDING;
             if (cardRules.getSplitType() == CardSplitType.Split) {
                 //draw split art with proper orientation
-                float srcY = (float)cardArt.getRegionHeight() * 13f / 354f;
-                float srcHeight = (float)cardArt.getRegionHeight() * 150f / 354f;
-                float dh = srcHeight * (1 - (float)cardArt.getRegionWidth() / srcHeight / CARD_ART_RATIO);
+                float srcY = cardArt.getHeight() * 13f / 354f;
+                float srcHeight = cardArt.getHeight() * 150f / 354f;
+                float dh = srcHeight * (1 - cardArt.getWidth() / srcHeight / CARD_ART_RATIO);
                 srcHeight -= dh;
                 srcY += dh / 2;
-                g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)srcY, cardArt.getRegionWidth(), (int)srcHeight, -90);
-                g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtWidth / 2, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), cardArt.getRegionHeight() - (int)(srcY + srcHeight), cardArt.getRegionWidth(), (int)srcHeight, -90);
+                g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)srcY, (int)cardArt.getWidth(), (int)srcHeight, -90);
+                g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtWidth / 2, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int)cardArt.getHeight() - (int)(srcY + srcHeight), (int)cardArt.getWidth(), (int)srcHeight, -90);
             }
             else {
                 g.drawImage(cardArt, artX, artY, cardArtWidth, cardArtHeight);

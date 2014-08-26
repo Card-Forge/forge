@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -25,8 +26,8 @@ public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
-    protected final SpriteBatch batch = new SpriteBatch();
-    protected final ShapeRenderer shapeRenderer = new ShapeRenderer();
+    private final SpriteBatch batch = new SpriteBatch();
+    private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private float regionHeight;
     private Rectangle bounds;
     private Rectangle visibleBounds;
@@ -467,6 +468,16 @@ public class Graphics {
                     0, tilesH, tilesW, 0);
         }
         endClip();
+    }
+
+    //draw vertically flipped image
+    public void drawFlippedImage(Texture image, float x, float y, float w, float h) {
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h, 0, 0, image.getWidth(), image.getHeight(), false, true);
+    }
+
+    public void setProjectionMatrix(Matrix4 matrix) {
+        batch.setProjectionMatrix(matrix);
+        shapeRenderer.setProjectionMatrix(matrix);
     }
 
     private boolean isTransformed;
