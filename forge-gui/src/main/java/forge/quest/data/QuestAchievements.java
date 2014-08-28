@@ -79,7 +79,9 @@ public class QuestAchievements {
 
         if (drafts != null) {
 			for (QuestEventDraft questEventDraft : drafts) {
-				questEventDraft.addWin();
+				if (drafts.indexOf(questEventDraft) != currentDraft) { //Don't decrement the current draft
+					questEventDraft.addWin();
+				}
 			}
         }
 
