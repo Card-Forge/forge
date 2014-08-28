@@ -18,8 +18,8 @@ public class QuestAchievements {
     /** The challenges played. */
     private int challengesPlayed = 0;
 
-    private List<String> completedChallenges = new ArrayList<String>();
-    private List<String> currentChallenges = new ArrayList<String>();
+    private List<String> completedChallenges = new ArrayList<>();
+    private List<String> currentChallenges = new ArrayList<>();
     
     private QuestEventDraftContainer drafts = new QuestEventDraftContainer();
     private int currentDraft = -1;
@@ -39,6 +39,7 @@ public class QuestAchievements {
     // Difficulty - will store only index from now.
     private int difficulty;
 
+	@SuppressWarnings("unused")
     public QuestAchievements() { //needed for XML serialization
     }
 
@@ -72,11 +73,14 @@ public class QuestAchievements {
      * Adds the win.
      */
     public void addWin() { // changes getRank()
+		
         win++;
         winstreakCurrent++;
 
-        if (drafts != null && currentDraft != -1) {
-            drafts.get(currentDraft).addWin();
+        if (drafts != null) {
+			for (QuestEventDraft questEventDraft : drafts) {
+				questEventDraft.addWin();
+			}
         }
 
         if (win % FModel.getQuestPreferences().getPrefInt(QPref.WINS_NEW_DRAFT) == 0) {
@@ -86,6 +90,7 @@ public class QuestAchievements {
         if (winstreakCurrent > winstreakBest) {
             winstreakBest = winstreakCurrent;
         }
+		
     }
 
     // Challenge performance
@@ -134,7 +139,7 @@ public class QuestAchievements {
      */
     public List<String> getCurrentChallenges() {
         if (currentChallenges == null) {
-            currentChallenges = new ArrayList<String>();
+            currentChallenges = new ArrayList<>();
         }
 
         return currentChallenges;
