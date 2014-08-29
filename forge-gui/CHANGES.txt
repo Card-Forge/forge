@@ -1,7 +1,7 @@
-Forge Beta: 08-##-2014 ver 1.5.25
+Forge Beta: 08-29-2014 ver 1.5.25
 
 
-##### cards in total.
+14049 cards in total.
 
 
 -------------
@@ -77,9 +77,9 @@ Teferi, Temporal Archmage
 New KTK branch Cards
 --------------------
 
-Zurgo Helmsmasher
-Thousand Winds
 Jeskai Elder
+Thousand Winds
+Zurgo Helmsmasher
 
 
 ------------
@@ -126,7 +126,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+DrDev
+elcnesh
+excessum
+Gos
+KrazyTheFox
+rikimbo
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
