@@ -569,6 +569,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 if (pumpedDmg >= opp.getLife()) {
                     return true;
                 }
+                if (opposing.isEmpty() || !pumpedWillDie) {
+                    return true;
+                }
                 chance += 1.0f * (pumpedDmg - dmg) / opp.getLife();
             }
             
