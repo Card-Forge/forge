@@ -413,6 +413,15 @@ public class GuiDesktop implements IGuiBase {
         return FControl.instance.getObservedGame();
     }
 
+    public Object showManaPool(Player player) {
+        return null; //not needed since mana pool icons are always visible
+    }
+
+    @Override
+    public void hideManaPool(Player player, Object zoneToRestore) {
+        //not needed since mana pool icons are always visible
+    }
+
     @Override
     public boolean openZones(List<ZoneType> zones, Map<Player, Object> players) {
         if (zones.size() == 1) {

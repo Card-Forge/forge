@@ -76,6 +76,8 @@ public interface IGuiBase {
     void enableOverlay();
     void disableOverlay();
     void finishGame();
+    Object showManaPool(Player player);
+    void hideManaPool(Player player, Object zoneToRestore);
     boolean openZones(List<ZoneType> zones, Map<Player, Object> players);
     void restoreOldZones(Map<Player, Object> playersToRestoreZonesFor);
     void updateStack();

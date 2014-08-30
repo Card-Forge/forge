@@ -351,6 +351,26 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public Object showManaPool(Player player) {
+        VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
+        InfoTab oldSelectedTab = playerPanel.getSelectedTab();
+        playerPanel.setSelectedTab(playerPanel.getManaPoolTab());
+        return oldSelectedTab;
+    }
+
+    @Override
+    public void hideManaPool(Player player, Object zoneToRestore) {
+        VPlayerPanel playerPanel = FControl.getPlayerPanel(player);
+        if (zoneToRestore == playerPanel.getManaPoolTab()) {
+            return; //if mana pool was selected previously, we don't need to switch back to anything
+        }
+        if (playerPanel.getSelectedTab() != playerPanel.getManaPoolTab()) {
+            return; //if player switch away from mana pool already, don't change anything
+        }
+        playerPanel.setSelectedTab((InfoTab)zoneToRestore);
+    }
+
+    @Override
     public boolean openZones(List<ZoneType> zones, Map<Player, Object> players) {
         if (zones.size() == 1) {
             ZoneType zoneType = zones.get(0);

@@ -111,6 +111,10 @@ public class VPlayerPanel extends FContainer {
         }
     }
 
+    public InfoTab getManaPoolTab() {
+        return tabManaPool;
+    }
+
     public boolean isFlipped() {
         return field.isFlipped();
     }

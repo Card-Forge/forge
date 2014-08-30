@@ -261,7 +261,6 @@ public class ManaPool implements Iterable<Mana> {
         return result;
     }
 
-    
     public boolean tryPayCostWithMana(final SpellAbility sa, ManaCostBeingPaid manaCost, final Mana mana) {
         if (!manaCost.isNeeded(mana, this)) {
             return false;
@@ -306,6 +305,10 @@ public class ManaPool implements Iterable<Mana> {
             }
         }
         return true;
+    }
+
+    public final boolean isEmpty() {
+        return floatingMana.isEmpty();
     }
 
     /**

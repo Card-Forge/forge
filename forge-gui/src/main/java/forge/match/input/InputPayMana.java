@@ -1,6 +1,7 @@
 package forge.match.input;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
@@ -36,16 +37,29 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected final Game game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
+    private final boolean wasFloatingMana;
+    private final Object zoneToRestore;
 
     private boolean bPaid = false;
     private Boolean canPayManaCost = null;
 
     private boolean locked = false;
 
-    protected InputPayMana(SpellAbility saToPayFor, Player payer) {
-        this.player = payer;
-        this.game = player.getGame();
-        this.saPaidFor = saToPayFor;
+    protected InputPayMana(SpellAbility saPaidFor0, Player player0) {
+        player = player0;
+        game = player.getGame();
+        saPaidFor = saPaidFor0;
+
+        //if player is floating mana, show mana pool to make it easier to use that mana
+        wasFloatingMana = !player.getManaPool().isEmpty();
+        zoneToRestore = wasFloatingMana ? GuiBase.getInterface().showManaPool(player) : null;
+    }
+
+    @Override
+    protected void onStop() {
+        if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
+            GuiBase.getInterface().hideManaPool(player, zoneToRestore);
+        }
     }
 
     @Override
@@ -55,13 +69,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return false;
         }
         // only tap card if the mana is needed
-        return activateManaAbility(card, this.manaCost);
+        return activateManaAbility(card, manaCost);
     }
 
     @Override
     public void selectAbility(final SpellAbility ab) {
         if (ab != null && ab.isManaAbility()) {
-            activateManaAbility(ab.getHostCard(), this.manaCost, ab);
+            activateManaAbility(ab.getHostCard(), manaCost, ab);
         }
     }
 
@@ -329,7 +343,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     private void runAsAi(Runnable proc) {
-        this.player.runWithController(proc, new PlayerControllerAi(this.game, this.player, this.player.getOriginalLobbyPlayer()));
+        player.runWithController(proc, new PlayerControllerAi(game, player, player.getOriginalLobbyPlayer()));
     }
 
     /** {@inheritDoc} */
