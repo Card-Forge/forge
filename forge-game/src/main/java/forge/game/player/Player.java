@@ -1148,9 +1148,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp) {
         // if the key already exists - merge entries
         if (changedKeywords.containsKey(timestamp)) {
-            List<String> kws = addKeywords;
-            List<String> rkws = removeKeywords;
-            KeywordsChange cks = changedKeywords.get(timestamp);
+            final List<String> kws = addKeywords == null ? Lists.<String>newArrayList() : Lists.newArrayList(addKeywords);
+            final List<String> rkws = removeKeywords == null ? Lists.<String>newArrayList() : Lists.newArrayList(removeKeywords);
+            final KeywordsChange cks = changedKeywords.get(timestamp);
             kws.addAll(cks.getKeywords());
             rkws.addAll(cks.getRemoveKeywords());
             this.changedKeywords.put(timestamp, new KeywordsChange(kws, rkws, cks.isRemoveAllKeywords()));
