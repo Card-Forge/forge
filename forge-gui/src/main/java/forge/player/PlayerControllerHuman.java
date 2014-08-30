@@ -1165,4 +1165,7 @@ public class PlayerControllerHuman extends PlayerController {
         return chooseSingleEntityForEffect(fetchList, sa, selectPrompt, b, decider);
     }
 
+    public boolean isGuiPlayer() {
+        return lobbyPlayer == GuiBase.getInterface().getGuiPlayer();
+    }
 }

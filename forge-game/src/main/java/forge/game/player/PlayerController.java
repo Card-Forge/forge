@@ -280,6 +280,9 @@ public abstract class PlayerController {
     public abstract String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message);
 
     // better to have this odd method than those if playerType comparison in ChangeZone  
-    public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean b, Player decider);  
-    
+    public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, String selectPrompt, boolean b, Player decider);
+
+    public boolean isGuiPlayer() {
+        return false;
+    }
 }

@@ -288,8 +288,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             activator = sp.getActivatingPlayer();
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
-        
-        if (sp.isUndoable()) { //either push onto or clear undo stack based on where spell/ability is undoable
+
+        //either push onto or clear undo stack based on whether
+        //spell/ability is undoable and activator is the Gui player
+        if (sp.isUndoable() && activator.getController().isGuiPlayer()) {
         	undoStack.push(sp);
         }
         else {
