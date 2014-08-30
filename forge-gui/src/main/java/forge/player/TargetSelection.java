@@ -125,6 +125,12 @@ public class TargetSelection {
                     return ability.getTargets().add(nonCardTargets.get(0));
                 }
             }
+            else if (validTargets.size() == 1 && ability.isTrigger() && !tgt.canTgtPlayer()) {
+                //if only one valid target card for triggered ability, auto-target that card
+                //only do this for triggered abilities to prevent auto-targeting when user chooses
+                //to play a spell or activat an ability
+                return ability.getTargets().add(validTargets.get(0));
+            }
             final Map<Player, Object> playersWithValidTargets = new HashMap<Player, Object>();
             for (Card card : validTargets) {
                 playersWithValidTargets.put(card.getController(), null);
