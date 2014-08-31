@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz 2
+Title=Vanellope von Schweetz
+Difficulty=medium
+Description=WR Haste token deck with Assemble the Legion, Purphoros God of the Forge, Iroas God of Victory
+Icon=Vanellope von Schweetz.jpg
+Deck Type=constructed
+[Main]
+3 Assemble the Legion|GTC
+4 Battlefield Forge|M15
+1 Brimaz, King of Oreskos|BNG
+2 Cathars' Crusade|AVR
+2 Clifftop Retreat|ISD
+1 Gleam of Battle|DGM
+2 Goblin Assault|ALA
+3 Goblin Rabblemaster|M15
+1 Goblin Wardriver|MBS
+2 Hellrider|DKA
+1 Hero of Oxid Ridge|MBS
+2 Iroas, God of Victory|JOU
+3 Journey to Nowhere|ZEN
+4 Legion Loyalist|GTC
+1 Legion's Initiative|DGM
+1 Mountain|THS|1
+2 Mountain|THS|2
+2 Mountain|THS|3
+2 Mountain|THS|4
+4 Path to Exile|MMA
+1 Plains|THS|1
+1 Plains|THS|2
+2 Plains|THS|3
+2 Plains|THS|4
+2 Purphoros, God of the Forge|THS
+1 Righteous Cause|COM
+4 Sacred Foundry|GTC
+3 Slith Firewalker|MRD
+1 Thraben Doomsayer|DKA
+[sideboard]
+
