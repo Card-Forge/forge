@@ -201,11 +201,8 @@ public final class AbilityFactory {
         } else {
             spellAbility.setDescription("");
         }
-
-        if (mapParams.containsKey("NonBasicSpell")) {
-            spellAbility.setBasicSpell(false);
-        }
-
+        
+        initializeParams(spellAbility, mapParams);
         makeRestrictions(spellAbility, mapParams);
         makeConditions(spellAbility, mapParams);
 
@@ -268,6 +265,29 @@ public final class AbilityFactory {
 
     /**
      * <p>
+     * initializeParams.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @param mapParams
+     */
+    private static final void initializeParams(final SpellAbility sa, Map<String, String> mapParams) {
+        if (mapParams.containsKey("Flashback")) {
+            sa.setFlashBackAbility(true);
+        }
+
+        if (mapParams.containsKey("NonBasicSpell")) {
+            sa.setBasicSpell(false);
+        }
+
+        if (mapParams.containsKey("Outlast")) {
+            sa.setOutlast(true);
+        }
+    }
+
+    /**
+     * <p>
      * makeRestrictions.
      * </p>
      * 
@@ -278,9 +298,6 @@ public final class AbilityFactory {
     private static final void makeRestrictions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        if (mapParams.containsKey("Flashback")) {
-            sa.setFlashBackAbility(true);
-        }
         restrict.setRestrictions(mapParams);
     }
 
@@ -296,9 +313,6 @@ public final class AbilityFactory {
     private static final void makeConditions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
-        if (mapParams.containsKey("Flashback")) {
-            sa.setFlashBackAbility(true);
-        }
         condition.setConditions(mapParams);
     }
 

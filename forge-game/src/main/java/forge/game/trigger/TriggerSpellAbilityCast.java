@@ -166,6 +166,12 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+        if (this.mapParams.containsKey("Outlast")) {
+            if (!spellAbility.isOutlast()) {
+                return false;
+            }
+        }
+
         if (this.mapParams.containsKey("IsSingleTarget")) {
             int numTargeted = 0;
             for (TargetChoices tc : spellAbility.getAllTargetChoices()) {

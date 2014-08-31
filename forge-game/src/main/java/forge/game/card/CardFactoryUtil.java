@@ -2575,6 +2575,39 @@ public class CardFactoryUtil {
             card.getUnparsedAbilities().add(abilityStr.toString());
         }
 
+        if (card.hasStartOfKeyword("Outlast")) {
+            final int outlastPos = card.getKeywordPosition("Outlast");
+            final String outlastString = card.getKeyword().get(outlastPos).substring(7);
+            final String[] outlastExtras = outlastString.contains("|") ? outlastString.split("\\|", 2) : null;
+            // Get cost string
+            String outlastCost = "";
+            if (outlastExtras != null) {
+                outlastCost = outlastExtras[0].trim();
+            } else {
+                outlastCost = outlastString.trim();
+            }
+            // Create outlast ability string
+            final StringBuilder abilityStr = new StringBuilder();
+            abilityStr.append("AB$ PutCounter | Cost$ ");
+            abilityStr.append(outlastCost);
+            abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
+            abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
+            if (outlastExtras != null) {
+                abilityStr.append("| ").append(outlastExtras[1]).append(" ");
+            }
+            abilityStr.append("| PrecostDesc$ Outlast ");
+            Cost cost = new Cost(outlastCost, true);
+            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                abilityStr.append("- ");
+            }
+            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ", {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)");
+            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+            card.addSpellAbility(sa);
+            // add ability to instrinic strings so copies/clones create the ability also
+            card.getUnparsedAbilities().add(abilityStr.toString());
+        }
+
         if (card.hasStartOfKeyword("Fortify")) {
             final int equipPos = card.getKeywordPosition("Fortify");
             final String equipString = card.getKeyword().get(equipPos).substring(7);

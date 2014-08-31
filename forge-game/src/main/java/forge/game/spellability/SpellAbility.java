@@ -91,6 +91,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean offering = false;
     private boolean morphup = false;
     private boolean cumulativeupkeep = false;
+    private boolean outlast = false;
     private int totalManaSpent = 0;
 
     /** The pay costs. */
@@ -930,6 +931,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public boolean isFlashBackAbility() {
         return this.flashBackAbility;
+    }
+
+    public boolean isOutlast() {
+        return outlast;
+    }
+
+    public void setOutlast(boolean outlast) {
+        this.outlast = outlast;
     }
 
     /**
@@ -1802,4 +1811,5 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             this.subAbility.setIntrinsic(i);
         }
     }
+
 }

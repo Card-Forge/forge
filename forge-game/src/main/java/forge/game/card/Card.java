@@ -2178,7 +2178,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append("with another unpaired creature when either ");
                 sbLong.append("enters the battlefield. They remain paired for ");
                 sbLong.append("as long as you control both of them)");
-            } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify")) {
+            } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")) {
                 // keyword parsing takes care of adding a proper description
                 continue;
             } else if (keyword.startsWith("CantBeBlockedBy")) {
