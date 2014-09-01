@@ -191,7 +191,7 @@ public class FOptionPane extends FDialog {
         }
 
         if (message != null) {
-            prompt = add(new FTextArea(false, message));
+            prompt = add(new FTextArea(true, message));
             prompt.setFont(FSkinFont.get(12));
         }
         else {
