@@ -278,26 +278,6 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     protected abstract CardPanel getCardPanel(int x, int y);
 
     /**
-     * Must call from the Swing event thread.
-     * 
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.view.arcane.CardPanel} object.
-     */
-    public CardPanel addCard(final Card card) {
-        final CardPanel placeholder = new CardPanel(card);
-        placeholder.setDisplayEnabled(false);
-        this.getCardPanels().add(placeholder);
-        this.add(placeholder);
-        this.doLayout();
-        // int y = Math.min(placeholder.getHeight(),
-        // scrollPane.getVisibleRect().height);
-        this.scrollRectToVisible(new Rectangle(placeholder.getCardX(), placeholder.getCardY(), placeholder
-                .getCardWidth(), placeholder.getCardHeight()));
-        return placeholder;
-    }
-
-    /**
      * <p>
      * getCardPanel.
      * </p>

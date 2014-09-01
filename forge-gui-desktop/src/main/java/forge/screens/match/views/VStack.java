@@ -172,7 +172,7 @@ public enum VStack implements IVDoc<CStack> {
         private final Card sourceCard;
 
         public StackInstanceTextArea(final MagicStack stack, final SpellAbilityStackInstance spell, final Player localPlayer) {
-            sourceCard = spell.getSourceCard();
+            sourceCard = spell.getSourceCard().getCardForUi();
 
             String txt = spell.getStackDescription();
             if (spell.getSpellAbility().isOptionalTrigger()
@@ -216,7 +216,7 @@ public enum VStack implements IVDoc<CStack> {
                 });
             }
 
-            DetailColors color = CardDetailUtil.getBorderColor(spell.getSourceCard(), !spell.getStackDescription().startsWith("Morph "));
+            DetailColors color = CardDetailUtil.getBorderColor(sourceCard, !spell.getStackDescription().startsWith("Morph "));
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));
         }

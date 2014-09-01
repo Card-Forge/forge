@@ -70,11 +70,12 @@ public enum CPicture implements ICDoc {
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      */
-    public void showCard(final Card c, boolean showFlipped) {
-        if (null == c) {
+    public void showCard(Card c, boolean showFlipped) {
+        if (c == null) {
             return;
         }
 
+        c = c.getCardForUi();
         currentCard = c;
         displayedState = c.getCurState();
         boolean isFlippable = isCurrentCardFlippable();

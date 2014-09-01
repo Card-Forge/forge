@@ -19,10 +19,11 @@ public class CardZoom extends FOverlay {
     private static boolean zoomMode = true;
 
     public static <T> void show(final PaperCard pc0) {
-        show(Card.getCardForUi(pc0));
+        card = Card.getCardForUi(pc0);
+        cardZoom.show();
     }
     public static <T> void show(final Card card0) {
-        card = card0;
+        card = card0.getCardForUi();
         cardZoom.show();
     }
 

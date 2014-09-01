@@ -350,6 +350,7 @@ forge-game/src/main/java/forge/game/ability/effects/DeclareCombatantsEffect.java
 forge-game/src/main/java/forge/game/ability/effects/DelayedTriggerEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DestroyAllEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DestroyEffect.java -text
+forge-game/src/main/java/forge/game/ability/effects/DetachedCardEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DigEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DigUntilEffect.java -text
 forge-game/src/main/java/forge/game/ability/effects/DiscardEffect.java -text

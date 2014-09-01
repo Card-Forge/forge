@@ -156,7 +156,7 @@ public class CardDetailPanel extends SkinnedPanel {
     }
 
     /** {@inheritDoc} */
-    public final void setCard(final Card card) {
+    public final void setCard(Card card) {
         this.nameCostLabel.setText("");
         this.typeLabel.setVisible(true);
         this.typeLabel.setText("");
@@ -168,10 +168,12 @@ public class CardDetailPanel extends SkinnedPanel {
         this.setInfoLabel.setOpaque(false);
         this.setInfoLabel.setBorder(null);
         this.cdArea.setText("");
-        if( card == null ) {
+        if (card == null) {
             this.updateBorder(null, false);
             return;
         }
+
+        card = card.getCardForUi();
 
         boolean canShowThis = false;
 

@@ -141,6 +141,8 @@ public class CardRenderer {
     }
 
     public static void drawDetails(Graphics g, Card card, float width, float height) {
+        card = card.getCardForUi();
+
         float x = FDialog.INSETS;
         float y = FDialog.INSETS;
         float w = width - 2 * x;
@@ -273,6 +275,7 @@ public class CardRenderer {
     }
 
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, Card card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
+        card = card.getCardForUi();
         CardRules cardRules = card.getRules();
         if (cardRules != null) {
             drawCardListItem(g, font, foreColor, getCardArt(card), cardRules, card.getCurSetCode(),
@@ -544,6 +547,8 @@ public class CardRenderer {
     }
 
     public static void drawCardWithOverlays(Graphics g, Card card, float x, float y, float w, float h) {
+        card = card.getCardForUi();
+
         boolean canShow = FControl.mayShowCard(card);
         drawCard(g, card, canShow, x, y, w, h);
 

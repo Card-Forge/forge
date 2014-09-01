@@ -39,7 +39,7 @@ import java.awt.image.ColorModel;
 public final class FImageUtil {  
     private FImageUtil() {}
     
-    public static BufferedImage getImage(Card card, CardCharacteristicName state) {       
+    public static BufferedImage getImage(Card card, CardCharacteristicName state) {
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(state), true);
         int foilIndex = card.getFoil();
         if (image != null && foilIndex > 0) { 

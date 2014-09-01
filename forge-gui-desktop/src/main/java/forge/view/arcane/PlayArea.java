@@ -241,15 +241,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }*/
 
     @Override
-    public final CardPanel addCard(final Card card) {
-        final CardPanel placeholder = new CardPanel(card);
-        placeholder.setDisplayEnabled(false);
-        this.getCardPanels().add(placeholder);
-        this.add(placeholder);
-        return placeholder;
-    }
-
-    @Override
     public final void doLayout() {
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
@@ -612,17 +603,25 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         List<Card> toAdd = new ArrayList<Card>(model);
         toAdd.removeAll(oldCards);
         toAdd.addAll(toReplace);
-    
+
         List<CardPanel> newPanels = new ArrayList<CardPanel>();
         for (final Card card : toAdd) {
-            newPanels.add(addCard(card));
+            if (card.getCardForUi() == card) { //only include cards that are meant for display
+                final CardPanel placeholder = new CardPanel(card);
+                placeholder.setDisplayEnabled(false);
+                this.getCardPanels().add(placeholder);
+                this.add(placeholder);
+                newPanels.add(placeholder);
+            }
         }
-        if (!toAdd.isEmpty()) {
+
+        if (!newPanels.isEmpty()) {
             doLayout();
-        }
-        for (final CardPanel toPanel : newPanels) {
-            scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
-            Animation.moveCard(toPanel);
+
+            for (final CardPanel toPanel : newPanels) {
+                scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
+                Animation.moveCard(toPanel);
+            }
         }
     
         for (final Card card : model) {

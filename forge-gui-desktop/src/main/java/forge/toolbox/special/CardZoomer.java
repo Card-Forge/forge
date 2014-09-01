@@ -207,7 +207,7 @@ public enum CardZoomer {
     private void displayCard(Card card) {
         isMouseWheelEnabled = false;
         isImageFlipped = false;       
-        thisCard = card;
+        thisCard = card.getCardForUi();
         setLayout();
         setImage();         
         SOverlayUtils.showOverlay();

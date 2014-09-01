@@ -21,7 +21,8 @@ public class SGuiDialog {
         return SGuiDialog.confirm(c, question, true, options);
     }
 
-    public static boolean confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options) {
+    public static boolean confirm(Card c, final String question, final boolean defaultIsYes, final String[] options) {
+        c = Card.getCardForUi(c);
         final String title = c == null ? "Question" : c.getName() + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         String[] opts = options == null ? defaultConfirmOptions : options;

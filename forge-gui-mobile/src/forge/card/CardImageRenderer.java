@@ -55,6 +55,7 @@ public class CardImageRenderer {
     }
 
     public static void drawCardImage(Graphics g, Card card, float x, float y, float w, float h) {
+        card = card.getCardForUi();
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * CardRenderer.BLACK_BORDER_THICKNESS_RATIO;

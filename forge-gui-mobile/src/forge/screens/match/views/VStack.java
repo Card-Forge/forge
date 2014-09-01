@@ -198,7 +198,7 @@ public class VStack extends FDropDown {
 
         private StackInstanceDisplay(SpellAbilityStackInstance stackInstance0, float width) {
             stackInstance = stackInstance0;
-            Card card = stackInstance.getSourceCard();
+            Card card = stackInstance.getSourceCard().getCardForUi();
 
             text = stackInstance.getStackDescription();
             if (stackInstance.getSpellAbility().isOptionalTrigger() &&

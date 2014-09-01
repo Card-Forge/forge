@@ -1903,14 +1903,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\nLife Modifier: ").append(getRules().getLife());
             sb.append("\r\n\r\n");
         }
-        if (this.isCommander)
-        {
-            sb.append(getOwner() + "'s Commander\r\n\r\n");
-        }
-        if (this.getName().equals("Commander effect"))
-        {
-            sb.append("Zone: " + getOwner().getCommander().getZone().toString() + "\r\n");
-            sb.append(CardFactoryUtil.getCommanderInfo(getOwner()));
+        if (this.isCommander) {
+            sb.append(getOwner() + "'s Commander\r\n");
+            sb.append(CardFactoryUtil.getCommanderInfo(getOwner()) + "\r\n");
         }
         sb.append(this.getAbilityText());
 
@@ -8072,15 +8067,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public final void setImageKey(final String iFN) {
-        this.getCharacteristics().setImageKey(iFN);
+        this.getCardForUi().getCharacteristics().setImageKey(iFN);
     }
 
     public final String getImageKey() {
-        return this.getCharacteristics().getImageKey();
+        return this.getCardForUi().getCharacteristics().getImageKey();
     }
 
     public String getImageKey(CardCharacteristicName state) {
-        CardCharacteristics c = this.characteristicsMap.get(state);
+        CardCharacteristics c = this.getCardForUi().characteristicsMap.get(state);
         return (c != null ? c.getImageKey() : "");
     }
 
@@ -8235,7 +8230,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an int
      */
     public final int getFoil() {
-        final String foil = this.getCharacteristics().getSVar("Foil");
+        final String foil = this.getCardForUi().getCharacteristics().getSVar("Foil");
         if (!foil.isEmpty()) {
             return Integer.parseInt(foil);
         }
@@ -9114,6 +9109,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         return fromPaperCard(pc, null);
     }
 
+    //safe way to get card for ui if card may be null
+    public static Card getCardForUi(Card c) {
+        if (c == null) { return null; }
+        return c.getCardForUi();
+    }
+
     public IPaperCard getPaperCard() {
     	IPaperCard cp = this.paperCard;
     	if (cp != null) {
@@ -9150,5 +9151,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     /** return staticCommanderList */
     public void addStaticCommandList(Object[] objects) {
         this.staticCommandList.add(objects);
+    }
+
+    //allow special cards to override this function to return another card for the sake of UI logic
+    public Card getCardForUi() {
+        return this;
     }
 } // end Card class

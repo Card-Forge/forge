@@ -956,9 +956,9 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("CommanderCastFromCommandZone")) {
-            // Read SVar CommanderCostRaise from Commander effect
+            // Read SVar CommanderCostRaise from Commander Effect
             Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command),
-                    CardPredicates.nameEquals("Commander effect")).get(0);
+                    CardPredicates.nameEquals("Commander Effect")).get(0);
             return doXMath(xCount(commeff, commeff.getSVar("CommanderCostRaise")), "DivideEvenlyDown.2", c);
         }
         

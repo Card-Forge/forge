@@ -206,10 +206,11 @@ public class ReplacementHandler implements IGameStateObject {
                         mapParams.get("OptionalDecider"), effectSA).get(0);
             }
 
-            String effectDesc = replacementEffect.toString().replace("CARDNAME", replacementEffect.getHostCard().getName());
+            Card cardForUi = replacementEffect.getHostCard().getCardForUi();
+            String effectDesc = replacementEffect.toString().replace("CARDNAME", cardForUi.getName());
             final String question = replacementEffect instanceof ReplaceDiscard
-                ? String.format("Apply replacement effect of %s to %s?\r\n(%s)", replacementEffect.getHostCard(), runParams.get("Card").toString(), effectDesc)
-                : String.format("Apply replacement effect of %s?\r\n(%s)", replacementEffect.getHostCard(), effectDesc);
+                ? String.format("Apply replacement effect of %s to %s?\r\n(%s)", cardForUi, runParams.get("Card").toString(), effectDesc)
+                : String.format("Apply replacement effect of %s?\r\n(%s)", cardForUi, effectDesc);
             boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;

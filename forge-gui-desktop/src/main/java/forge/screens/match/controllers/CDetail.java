@@ -45,7 +45,10 @@ public enum CDetail implements ICDoc {
      * 
      * @param c &emsp; Card object
      */
-    public void showCard(final Card c) {
+    public void showCard(Card c) {
+        if (c != null) {
+            c = c.getCardForUi();
+        }
         view.getLblFlipcard().setVisible(c != null && CardDetailUtil.isCardFlippable(c) && Singletons.getControl().mayShowCard(c));
         view.getPnlDetail().setCard(c);
         if (view.getParentCell() != null) {

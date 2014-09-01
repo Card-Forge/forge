@@ -21,9 +21,9 @@ public class GuiDialog {
     public static void confirm(final Card c, final String question, String[] options, final Callback<Boolean> callback) {
         GuiDialog.confirm(c, question, true, options, callback);
     }
-    
+
     public static void confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options, final Callback<Boolean> callback) {
-        final String title = c == null ? "Question" : c.getName() + " - Ability";
+        final String title = c == null ? "Question" : c.getCardForUi().getName() + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         String[] opts = options == null ? defaultConfirmOptions : options;
         FOptionPane.showCardOptionDialog(c, questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {

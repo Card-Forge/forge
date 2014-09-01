@@ -33,10 +33,11 @@ public class GuiDialog {
         Callable<Boolean> confirmTask = new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                if ( null != c )
+                if (c != null) {
                     CMatchUI.SINGLETON_INSTANCE.setCard(c);
+                }
 
-                final String title = c == null ? "Question" : c.getName() + " - Ability";
+                final String title = c == null ? "Question" : c.getCardForUi().getName() + " - Ability";
                 String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
                 String[] opts = options == null ? defaultConfirmOptions : options;
                 int answer = FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
