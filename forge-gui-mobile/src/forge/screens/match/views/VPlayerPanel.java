@@ -210,7 +210,7 @@ public class VPlayerPanel extends FContainer {
         field.setBounds(0, 0, width, y);
 
         float commandZoneHeight = field.getRow2().getHeight();
-        float commandZoneWidth = commandZone.getCount() * commandZone.getCardWidth(commandZoneHeight);
+        float commandZoneWidth = Math.min(commandZone.getCount(), 2) * commandZone.getCardWidth(commandZoneHeight);
         commandZone.setBounds(width - commandZoneWidth, y - commandZoneHeight, commandZoneWidth, commandZoneHeight);
 
         if (isFlipped()) { //flip all positions across x-axis if needed
