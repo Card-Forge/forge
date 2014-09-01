@@ -121,6 +121,7 @@ public class ConstructedScreen extends LaunchScreen {
         cbVariants.setFont(VARIANTS_FONT);
         cbVariants.addItem("(None)");
         cbVariants.addItem(GameType.Vanguard);
+        cbVariants.addItem(GameType.MomirBasic);
         cbVariants.addItem(GameType.Commander);
         cbVariants.addItem(GameType.Planechase);
         cbVariants.addItem(GameType.Archenemy);
@@ -517,11 +518,12 @@ public class ConstructedScreen extends LaunchScreen {
             w = width - 2 * PADDING;
             if (btnCommanderDeck.isVisible()) {
                 btnCommanderDeck.setBounds(x, y, w, fieldHeight);
+                y += dy;
             }
-            else {
+            else if (btnDeck.isVisible()) {
                 btnDeck.setBounds(x, y, w, fieldHeight);
+                y += dy;
             }
-            y += dy;
             if (btnSchemeDeck.isVisible()) {
                 btnSchemeDeck.setBounds(x, y, w, fieldHeight);
                 y += dy;
@@ -538,6 +540,12 @@ public class ConstructedScreen extends LaunchScreen {
         private float getPreferredHeight() {
             int rows = 3;
             if (!appliedVariants.isEmpty()) {
+                if (!btnDeck.isVisible()) {
+                    rows--;
+                }
+                if (btnCommanderDeck.isVisible()) {
+                    rows++;
+                }
                 if (btnSchemeDeck.isVisible()) {
                     rows++;
                 }
@@ -600,7 +608,11 @@ public class ConstructedScreen extends LaunchScreen {
 
         public void updateVariantControlsVisibility() {
             boolean isCommanderApplied = appliedVariants.contains(GameType.Commander);
-            btnDeck.setVisible(!isCommanderApplied); // Commander deck replaces basic deck, so hide that
+            boolean isDeckBuildingAllowed = !appliedVariants.contains(GameType.MomirBasic);
+
+            // Commander deck replaces basic deck, so hide that
+            btnDeck.setVisible(isDeckBuildingAllowed && !isCommanderApplied);
+
             btnCommanderDeck.setVisible(isCommanderApplied);
 
             boolean isArchenemyApplied = appliedVariants.contains(GameType.Archenemy);
@@ -866,6 +878,7 @@ public class ConstructedScreen extends LaunchScreen {
 
             lstVariants.setListItemRenderer(new VariantRenderer());
             lstVariants.addItem(new Variant(GameType.Vanguard, "Each player has a special \"Avatar\" card that affects the game."));
+            lstVariants.addItem(new Variant(GameType.MomirBasic, "Each player has a deck containing 60 basic lands and the Momir Vig avatar."));
             lstVariants.addItem(new Variant(GameType.Commander, "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."));
             lstVariants.addItem(new Variant(GameType.Planechase, "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die."));
             lstVariants.addItem(new Variant(GameType.Archenemy, "One player is the Archenemy and can play scheme cards."));
@@ -900,11 +913,26 @@ public class ConstructedScreen extends LaunchScreen {
                     appliedVariants.add(gameType);
 
                     //only allow setting one of Archenemy or ArchenemyRumble
-                    if (gameType == GameType.Archenemy) {
+                    //don't allow setting MomirBasic along with Vanguard or Commander 
+                    switch (gameType) {
+                    case Archenemy:
                         appliedVariants.remove(GameType.ArchenemyRumble);
-                    }
-                    else if (gameType == GameType.ArchenemyRumble) {
+                        break;
+                    case ArchenemyRumble:
                         appliedVariants.remove(GameType.Archenemy);
+                        break;
+                    case Commander:
+                        appliedVariants.remove(GameType.MomirBasic);
+                        break;
+                    case Vanguard:
+                        appliedVariants.remove(GameType.MomirBasic);
+                        break;
+                    case MomirBasic:
+                        appliedVariants.remove(GameType.Commander);
+                        appliedVariants.remove(GameType.Vanguard);
+                        break;
+                    default:
+                        break;
                     }
                 }
                 updateVariantSelection();
