@@ -118,10 +118,6 @@ public class ComputerUtilMana {
 			
 		}
 		
-		private boolean producesMultipleManaColors() {
-			return manaCount > 1;
-		}
-		
 	}
 	
 	private static void sortManaAbilities(final ArrayListMultimap<ManaCostShard, SpellAbility> manaAbilityMap) {
@@ -155,20 +151,18 @@ public class ComputerUtilMana {
 				
 				int score = 0;
 				
-				if (card.producesMultipleManaColors()) {
-					score += 1;
-				}
+				score += card.manaCount * 2;
 				
 				switch (card.cardType) {
 					case Artifact:
 					case Enchantment:
 						score += 1;
 						break;
-					case Creature:
-						score += 3;
-						break;
 					case Land:
 						score += 2;
+						break;
+					case Creature:
+						score += 3;
 						break;
 					default:
 						score += 4;
