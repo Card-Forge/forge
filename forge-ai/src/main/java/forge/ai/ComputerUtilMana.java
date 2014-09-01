@@ -2,8 +2,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-
+import forge.card.CardType.CoreType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -29,18 +28,10 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -51,11 +42,11 @@ public class ComputerUtilMana {
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
         cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
-        return payManaCost(cost, sa, ai, true, 0, true);
+        return payManaCost(cost, sa, ai, true, true);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        return payManaCost(cost, sa, ai, false, 0, true);
+        return payManaCost(cost, sa, ai, false, true);
     }
 
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
@@ -85,10 +76,167 @@ public class ComputerUtilMana {
 
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
-        return payManaCost(cost, sa, ai, test, extraMana, checkPlayable);
+        return payManaCost(cost, sa, ai, test, checkPlayable);
     }
+	
+	private static class ManaProducingCard {
+		
+		private CoreType cardType;
+		private int manaCount;
+		
+		public ManaProducingCard(final SpellAbility ability) {
+			
+			Card hostCard = ability.getHostCard();
+			
+			for (SpellAbility spellAbility : hostCard.getSpellAbilities()) {
+				if (spellAbility.isManaAbility()) {
+					addAbility(spellAbility);
+				}
+			}
+			
+			if (hostCard.isCreature()) {
+				cardType = CoreType.Creature;
+			} else if (hostCard.isArtifact()) {
+				cardType = CoreType.Artifact;
+			} else if (hostCard.isEnchantment()) {
+				cardType = CoreType.Enchantment;
+			} else {
+				cardType = CoreType.Land;
+			}
+			
+		}
+		
+		private void addAbility(final SpellAbility ability) {
+			
+			String mana = ability.getManaPart().mana();
+			
+			if (!mana.equals("Any")) {
+				manaCount += mana.length();
+			} else {
+				manaCount += 6;
+			}
+			
+		}
+		
+		private boolean producesMultipleManaColors() {
+			return manaCount > 1;
+		}
+		
+	}
+	
+	private static void sortManaAbilities(final ArrayListMultimap<ManaCostShard, SpellAbility> manaAbilityMap) {
 
-    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
+		final Map<Card, ManaProducingCard> manaCardMap = new HashMap<>();
+		final List<Card> orderedCards = new ArrayList<>();
+		
+		for (final ManaCostShard shard : manaAbilityMap.keySet()) {
+			for (SpellAbility ability : manaAbilityMap.get(shard)) {
+				if (!manaCardMap.containsKey(ability.getHostCard())) {
+					ManaProducingCard manaProducingCard = new ManaProducingCard(ability);
+					manaCardMap.put(ability.getHostCard(), manaProducingCard);
+					orderedCards.add(ability.getHostCard());
+				}
+			}
+		}
+		
+		Collections.sort(orderedCards, new Comparator<Card>() {
+			
+			@Override
+			public int compare(final Card card1, final Card card2) {
+				
+				int card1Score = scoreCard(manaCardMap.get(card1));
+				int card2Score = scoreCard(manaCardMap.get(card2));
+				
+				return card1Score - card2Score;
+				
+			}
+			
+			private int scoreCard(final ManaProducingCard card) {
+				
+				int score = 0;
+				
+				if (card.producesMultipleManaColors()) {
+					score += 1;
+				}
+				
+				switch (card.cardType) {
+					case Artifact:
+					case Enchantment:
+						score += 1;
+						break;
+					case Creature:
+						score += 3;
+						break;
+					case Land:
+						score += 2;
+						break;
+					default:
+						score += 4;
+						break;
+				}
+				
+				return score;
+				
+			}
+			
+		});
+
+		if (DEBUG_MANA_PAYMENT) {
+			System.out.print("Ordered Cards: " + orderedCards.size());
+			for (Card card : orderedCards) {
+				System.out.print(card.getName() + ", ");
+			}
+			System.out.println();
+		}
+		
+		for (final ManaCostShard shard : manaAbilityMap.keySet()) {
+			
+			final List<SpellAbility> abilities = manaAbilityMap.get(shard);
+			final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
+			
+			if (DEBUG_MANA_PAYMENT) {
+				System.out.println("Unsorted Abilities: " + newAbilities);
+			}
+			
+			Collections.sort(newAbilities, new Comparator<SpellAbility>() {
+				@Override
+				public int compare(final SpellAbility ability1, final SpellAbility ability2) {
+					
+					int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
+					
+					if (preOrder == 0) {
+
+						String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
+
+						if (ability1.getManaPart().mana().contains(shardMana)
+								&& !ability2.getManaPart().mana().contains(shardMana)) {
+							return -1;
+						} else if (ability2.getManaPart().mana().contains(shardMana)
+								&& !ability1.getManaPart().mana().contains(shardMana)) {
+							return 1;
+						}
+						
+						return 0;
+						
+					} else {
+						return preOrder;
+					}
+					
+				}
+				
+			});
+
+			if (DEBUG_MANA_PAYMENT) {
+				System.out.println("Sorted Abilities: " + newAbilities);
+			}
+			
+			manaAbilityMap.replaceValues(shard, newAbilities);
+			
+		}
+		
+	}
+
+    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = test ? new ArrayList<Mana>() : sa.getPayingMana();
         
@@ -103,13 +251,10 @@ public class ComputerUtilMana {
 
                 // get a mana of this type from floating, bail if none available
                 final Mana mana = getMana(ai, part, sa, cost.getSourceRestriction());
-                if (mana == null) {
-                    continue; // no matching mana in the pool
-                }
-                else {
-                    if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
-                        manaSpentToPay.add(0, mana);
-                    }
+                if (mana != null) {
+					if (ai.getManaPool().tryPayCostWithMana(sa, cost, mana)) {
+						manaSpentToPay.add(0, mana);
+					}
                 }
             }
         }
@@ -139,16 +284,16 @@ public class ComputerUtilMana {
         // select which abilities may be used for each shard
         ArrayListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
+		sortManaAbilities(sourcesForShards);
+
         if (DEBUG_MANA_PAYMENT) {
         	System.out.println("DEBUG_MANA_PAYMENT: sourcesForShards = " + sourcesForShards);
         }
 
-        List<String> paymentPlan = new ArrayList<String>();
-
         ManaCostShard toPay = null;
         // Loop over mana needed
         while (!cost.isPaid()) {
-            toPay = getNextShardToPay(cost, sourcesForShards);
+            toPay = getNextShardToPay(cost);
 
             Collection<SpellAbility> saList = sourcesForShards.get(toPay);
             SpellAbility saPayment = null;
@@ -170,10 +315,6 @@ public class ComputerUtilMana {
                 }
             } else {
             	break;
-            }
-
-            if (DEBUG_MANA_PAYMENT) {
-                paymentPlan.add(String.format("%s : (%s) %s", toPay, saPayment == null ? "LIFE" : saPayment.getHostCard(), saPayment));
             }
 
             if (saPayment == null) {
@@ -273,7 +414,7 @@ public class ComputerUtilMana {
         }
 
         // select equal weight possibilities
-        List<Mana> manaChoices = new ArrayList<Mana>();
+        List<Mana> manaChoices = new ArrayList<>();
         int bestWeight = Integer.MIN_VALUE;
         for (Pair<Mana, Integer> option : weightedOptions) {
             int thisWeight = option.getRight();
@@ -309,7 +450,7 @@ public class ComputerUtilMana {
     }
 
     private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
-        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
+        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
         for (final Mana thisMana : manapool) {
             if (!manapool.canPayForShardWithColor(shard, thisMana.getColor())) {
                 continue;
@@ -422,17 +563,17 @@ public class ComputerUtilMana {
     }
 
 
-    private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
+    private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost) {
         // mind the priorities
         // * Pay mono-colored first,
         // * Pay 2/C with matching colors
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
         // * pay colorless
-
-        for (ManaCostShard s : cost.getDistinctShards()) { // should check in which order EnumMap enumerates keys. If it's same as enum member declaration, nothing else needs to be done.
-            return s;
-        }
+		Iterator<ManaCostShard> shards = cost.getDistinctShards().iterator();
+		if (shards.hasNext()) {
+			return shards.next();
+		}
         return null;
     }
 
@@ -456,13 +597,12 @@ public class ComputerUtilMana {
      * getComboManaChoice.
      * </p>
      * 
-     * @param abMana
-     *            a {@link forge.card.spellability.AbilityMana} object.
+     * @param manaAb
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param saRoot
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param cost
      *            a {@link forge.game.mana.ManaCostBeingPaid} object.
-     * @return String
      */
     private static void getComboManaChoice(final Player ai, final SpellAbility manaAb, final SpellAbility saRoot, final ManaCostBeingPaid cost) {
         final StringBuilder choiceString = new StringBuilder();
@@ -531,14 +671,12 @@ public class ComputerUtilMana {
      * <p>
      * payMultipleMana.
      * </p>
-     * @param testCost 
-     * 
      * @param mana
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    private final static String payMultipleMana(ManaCostBeingPaid testCost, String mana, final Player p) {
-        List<String> unused = new ArrayList<String>(4);
+    private static String payMultipleMana(ManaCostBeingPaid testCost, String mana, final Player p) {
+        List<String> unused = new ArrayList<>(4);
         for (String manaPart : TextUtil.split(mana, ' ')) {
             if (StringUtils.isNumeric(manaPart)) {
                 for (int i = Integer.parseInt(manaPart); i > 0; i--) {
@@ -562,11 +700,7 @@ public class ComputerUtilMana {
     
     /**
      * Find all mana sources.
-     * @param manaAbilityMap
-     * @param partSources
-     * @param partPriority
-     * @param costParts
-     * @param foundAllSources
+     * @param manaAbilityMap The map of SpellAbilities that produce mana.
      * @return Were all mana sources found?
      */
     private static ArrayListMultimap<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap,
@@ -588,7 +722,7 @@ public class ComputerUtilMana {
             }
 
             if (shard.isOr2Colorless()) {
-                Integer colorKey = Integer.valueOf(shard.getColorMask());
+                Integer colorKey = (int) shard.getColorMask();
                 if (manaAbilityMap.containsKey(colorKey))
                     res.putAll(shard, manaAbilityMap.get(colorKey));
                 if (manaAbilityMap.containsKey(ManaAtom.COLORLESS))
@@ -617,9 +751,9 @@ public class ComputerUtilMana {
 
     /**
      * Calculate the ManaCost for the given SpellAbility.
-     * @param sa
-     * @param test
-     * @param extraMana
+     * @param sa The SpellAbility to calculate for.
+     * @param test test
+     * @param extraMana extraMana
      * @return ManaCost
      */
     static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
@@ -678,7 +812,7 @@ public class ComputerUtilMana {
 
     //This method is currently used by AI to estimate available mana
     public static ArrayList<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
-        final ArrayList<Card> list = new ArrayList<Card>();
+        final ArrayList<Card> list = new ArrayList<>();
         list.addAll(ai.getCardsIn(ZoneType.Battlefield));
         list.addAll(ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
@@ -694,15 +828,15 @@ public class ComputerUtilMana {
             }
         }); // CardListFilter
 
-        final ArrayList<Card> sortedManaSources = new ArrayList<Card>();
-        final ArrayList<Card> otherManaSources = new ArrayList<Card>();
-        final ArrayList<Card> colorlessManaSources = new ArrayList<Card>();
-        final ArrayList<Card> oneManaSources = new ArrayList<Card>();
-        final ArrayList<Card> twoManaSources = new ArrayList<Card>();
-        final ArrayList<Card> threeManaSources = new ArrayList<Card>();
-        final ArrayList<Card> fourManaSources = new ArrayList<Card>();
-        final ArrayList<Card> fiveManaSources = new ArrayList<Card>();
-        final ArrayList<Card> anyColorManaSources = new ArrayList<Card>();
+        final ArrayList<Card> sortedManaSources = new ArrayList<>();
+        final ArrayList<Card> otherManaSources = new ArrayList<>();
+        final ArrayList<Card> colorlessManaSources = new ArrayList<>();
+        final ArrayList<Card> oneManaSources = new ArrayList<>();
+        final ArrayList<Card> twoManaSources = new ArrayList<>();
+        final ArrayList<Card> threeManaSources = new ArrayList<>();
+        final ArrayList<Card> fourManaSources = new ArrayList<>();
+        final ArrayList<Card> fiveManaSources = new ArrayList<>();
+        final ArrayList<Card> anyColorManaSources = new ArrayList<>();
 
         // Sort mana sources
         // 1. Use lands that can only produce colorless mana without
@@ -825,7 +959,7 @@ public class ComputerUtilMana {
                 AbilityManaPart mp = m.getManaPart();
 
                 // setup produce mana replacement effects
-                final Map<String, Object> repParams = new HashMap<String, Object>();
+                final Map<String, Object> repParams = new HashMap<>();
                 repParams.put("Event", "ProduceMana");
                 repParams.put("Mana", mp.getOrigProduced());
                 repParams.put("Affected", sourceCard);
@@ -848,8 +982,8 @@ public class ComputerUtilMana {
                         }
                     }
                 }
-
-                Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
+				
+				Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
                 if (mp.canProduce("W", m) || reflectedColors.contains(MagicColor.Constant.WHITE)) {
                     manaMap.get(ManaAtom.WHITE).add(manaMap.get(ManaAtom.WHITE).size(), m);
@@ -906,8 +1040,8 @@ public class ComputerUtilMana {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public static final ArrayList<SpellAbility> getAIPlayableMana(Card c) {
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+    public static ArrayList<SpellAbility> getAIPlayableMana(Card c) {
+        final ArrayList<SpellAbility> res = new ArrayList<>();
         for (final SpellAbility a : c.getManaAbility()) {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it
