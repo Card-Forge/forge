@@ -41,7 +41,6 @@ public enum DeckFormat {
     Limited     ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander   ( Range.is(99),                         Range.between(0, 10), 1),
     Vanguard    ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    MomirBasic  ( Range.is(60),                         Range.is(0), Integer.MAX_VALUE),
     Planechase  ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy   ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
 
@@ -117,19 +116,6 @@ public enum DeckFormat {
 
         if (deckSize > max) {
             return String.format("should not exceed a maximum of %d cards", max);
-        }
-
-        if (this == MomirBasic) { //Must have Momir Vig avatar and contain only basic, non-snow lands
-            final CardPool avatar = deck.get(DeckSection.Avatar);
-            if (avatar == null || avatar.isEmpty() || avatar.get(0).getName() != "Momir Vig, Simic Visionary Avatar") {
-                return "must have the Momir Vig avatar";
-            }
-            for (Entry<PaperCard, Integer> card : deck.getMain()) {
-                final CardType cardType = card.getKey().getRules().getType();
-                if (!cardType.isBasicLand() || cardType.isSnow()) {
-                    return "can only contain basic lands that aren't snow lands.";
-                }
-            }
         }
 
         if (this == Commander) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.

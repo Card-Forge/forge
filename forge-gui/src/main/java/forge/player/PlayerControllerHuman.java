@@ -127,8 +127,8 @@ public class PlayerControllerHuman extends PlayerController {
         int sbSize = sideboard.countAll();
         int combinedDeckSize = mainSize + sbSize;
 
-        int deckMinSize = Math.min(mainSize, gameType.getDecksFormat().getMainRange().getMinimum());
-        Range<Integer> sbRange = gameType.getDecksFormat().getSideRange();
+        int deckMinSize = Math.min(mainSize, gameType.getDeckFormat().getMainRange().getMinimum());
+        Range<Integer> sbRange = gameType.getDeckFormat().getSideRange();
         // Limited doesn't have a sideboard max, so let the Main min take care of things.
         int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximum();
 

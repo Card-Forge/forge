@@ -107,7 +107,7 @@ public enum CSubmenuWinston implements ICDoc {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck.getDeck());
+            String errorMessage = gameType.getDeckFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;

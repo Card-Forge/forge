@@ -107,7 +107,7 @@ public class SealedScreen extends LaunchScreen {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Sealed.getDecksFormat().getDeckConformanceProblem(human.getDeck());
+            String errorMessage = GameType.Sealed.getDeckFormat().getDeckConformanceProblem(human.getDeck());
             if (errorMessage != null) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + "\nPlease edit or choose a different deck.", "Invalid Deck");
                 return false;

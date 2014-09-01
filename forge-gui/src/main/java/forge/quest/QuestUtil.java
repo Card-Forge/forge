@@ -624,7 +624,7 @@ public class QuestUtil {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
+            String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
             if (null != errorMessage) {
                 SOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
                 return false;

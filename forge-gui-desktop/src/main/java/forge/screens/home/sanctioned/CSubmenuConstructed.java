@@ -200,7 +200,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         if (checkLegality && !variantTypes.contains(GameType.Commander)) { //Commander deck replaces regular deck and is checked later
         	for (final int i : view.getParticipants()) {
         		String name = view.getPlayerName(i);
-        		String errMsg = GameType.Constructed.getDecksFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getDeck());
+        		String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getDeck());
         		if (null != errMsg) {
         			FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
         			return;
@@ -238,7 +238,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     	deck = DeckgenUtil.generateCommanderDeck(view.isPlayerAI(i));
                     }
                     if (checkLegality) {
-                    	String errMsg = GameType.Commander.getDecksFormat().getDeckConformanceProblem(deck);
+                    	String errMsg = GameType.Commander.getDeckFormat().getDeckConformanceProblem(deck);
                         if (null != errMsg) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Commander Deck");
                             return;
@@ -278,7 +278,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     	schemePool = DeckgenUtil.generateSchemePool();
                     }
                     if (checkLegality) {
-                    	String errMsg = GameType.Archenemy.getDecksFormat().getSchemeSectionConformanceProblem(schemePool);
+                    	String errMsg = GameType.Archenemy.getDeckFormat().getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Scheme Deck");
                             return;
@@ -311,7 +311,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                     	planePool = DeckgenUtil.generatePlanarPool();
                     }
                     if (checkLegality) {
-                    	String errMsg = GameType.Planechase.getDecksFormat().getPlaneSectionConformanceProblem(planePool);
+                    	String errMsg = GameType.Planechase.getDeckFormat().getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
                             FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Planar Deck");
                             return;
