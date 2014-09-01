@@ -92,7 +92,7 @@ public class CField implements ICDoc {
         ZoneAction flashBackAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
             @Override
             protected List<Card> getCardsAsIterable() {
-                return player.getCardsActivableInExternalZones();
+                return player.getCardsActivableInExternalZones(true);
             }
 
             @Override

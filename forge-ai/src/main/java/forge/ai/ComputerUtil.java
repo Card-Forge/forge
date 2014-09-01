@@ -1203,7 +1203,7 @@ public class ComputerUtil {
             }
         }
         
-        all.addAll(ai.getCardsActivableInExternalZones());
+        all.addAll(ai.getCardsActivableInExternalZones(true));
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
         for (final Card c : all) {
@@ -1224,7 +1224,7 @@ public class ComputerUtil {
     public static int possibleNonCombatDamage(Player ai) {
         int damage = 0;
         final List<Card> all = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
-        all.addAll(ai.getCardsActivableInExternalZones());
+        all.addAll(ai.getCardsActivableInExternalZones(true));
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
         for (final Card c : all) {

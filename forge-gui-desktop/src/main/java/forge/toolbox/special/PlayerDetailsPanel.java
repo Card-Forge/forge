@@ -127,7 +127,7 @@ public class PlayerDetailsPanel extends JPanel {
         this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
         this.getLblGraveyard().setText("" + player.getZone(ZoneType.Graveyard).size());
         this.getLblLibrary().setText("" + player.getZone(ZoneType.Library).size());
-        this.getLblFlashback().setText("" + player.getCardsActivableInExternalZones().size());
+        this.getLblFlashback().setText("" + player.getCardsActivableInExternalZones(true).size());
         this.getLblExile().setText("" + player.getZone(ZoneType.Exile).size());
     }
 

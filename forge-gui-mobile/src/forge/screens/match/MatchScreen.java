@@ -335,6 +335,7 @@ public class MatchScreen extends FScreen {
                 }
                 backupHorzScrollPane(tab.getDisplayArea(), x, horzScrollPanes);
             }
+            backupHorzScrollPane(playerPanel.getCommandZone(), x, horzScrollPanes);
         }
         private void backupHorzScrollPane(FScrollPane scrollPane, float x, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
             horzScrollPanes.put(scrollPane, Pair.of(scrollPane.getScrollLeft(), scrollPane.getScrollWidth()));

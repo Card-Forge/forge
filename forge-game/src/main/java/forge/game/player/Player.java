@@ -1532,13 +1532,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.filter(this.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
-    public List<Card> getCardsActivableInExternalZones() {
+    public List<Card> getCardsActivableInExternalZones(boolean includeCommandZone) {
         final List<Card> cl = new ArrayList<Card>();
 
         cl.addAll(this.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
         cl.addAll(this.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
         cl.addAll(this.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
-        cl.addAll(this.getZone(ZoneType.Command).getCardsPlayerCanActivate(this));
+        if (includeCommandZone) {
+            cl.addAll(this.getZone(ZoneType.Command).getCardsPlayerCanActivate(this));
+        }
 
         //External activatables from all opponents
         for (final Player opponent : this.getOpponents()) {

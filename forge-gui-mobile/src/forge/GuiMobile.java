@@ -376,6 +376,7 @@ public class GuiMobile implements IGuiBase {
             ZoneType zoneType = zones.get(0);
             switch (zoneType) {
             case Battlefield:
+            case Command:
                 players.clear(); //clear since no zones need to be restored
                 return true; //Battlefield is always open
             default:

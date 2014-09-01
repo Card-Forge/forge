@@ -80,8 +80,9 @@ public class RegisteredPlayer {
      * @param function the cardsInCommand to set
      */
     public void addCardsInCommand(Iterable<? extends IPaperCard> function) {
-        for(IPaperCard pc : function)
+        for (IPaperCard pc : function) {
             this.cardsInCommand.add(pc);
+        }
     }
 
     public void addCardsInCommand(IPaperCard pc) {

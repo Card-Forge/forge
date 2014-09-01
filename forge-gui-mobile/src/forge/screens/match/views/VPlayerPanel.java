@@ -13,6 +13,7 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
@@ -35,6 +36,7 @@ public class VPlayerPanel extends FContainer {
     private final VPhaseIndicator phaseIndicator;
     private final VField field;
     private final VAvatar avatar;
+    private final VZoneDisplay commandZone;
     private final LifeLabel lblLife;
     private final InfoTab tabManaPool;
     private final InfoTab tabFlashbackZone;
@@ -61,7 +63,8 @@ public class VPlayerPanel extends FContainer {
         tabs.add(tabManaPool);
 
         addZoneDisplay(ZoneType.Exile, FSkinImage.EXILE);
-        addZoneDisplay(ZoneType.Command, FSkinImage.PLANESWALKER);
+
+        commandZone = add(new CommandZoneDisplay(player));
     }
 
     public Player getPlayer() {
@@ -134,6 +137,10 @@ public class VPlayerPanel extends FContainer {
         return avatar;
     }
 
+    public VZoneDisplay getCommandZone() {
+        return commandZone;
+    }
+
     public void updateLife() {
         lblLife.update();
     }
@@ -143,8 +150,11 @@ public class VPlayerPanel extends FContainer {
     }
 
     public void updateZone(ZoneType zoneType) {
-        if (zoneType == ZoneType.Battlefield) {
+        if (zoneType == ZoneType.Battlefield ) {
             field.update();
+        }
+        else if (zoneType == ZoneType.Command) {
+            commandZone.update();
         }
         else {
             InfoTab zoneTab = zoneTabs.get(zoneType);
@@ -199,6 +209,10 @@ public class VPlayerPanel extends FContainer {
         }
         field.setBounds(0, 0, width, y);
 
+        float commandZoneHeight = field.getRow2().getHeight();
+        float commandZoneWidth = commandZone.getCount() * commandZone.getCardWidth(commandZoneHeight);
+        commandZone.setBounds(width - commandZoneWidth, y - commandZoneHeight, commandZoneWidth, commandZoneHeight);
+
         if (isFlipped()) { //flip all positions across x-axis if needed
             for (FDisplayObject child : getChildren()) {
                 child.setTop(height - child.getBottom());
@@ -208,15 +222,25 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
+        float y;
         if (selectedTab != null) { //draw background and border for selected zone if needed 
             float w = getWidth();
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
             g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
-            float y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
+            y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
             //leave gap at selected zone tab
             g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, selectedTab.getLeft(), y);
             g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
+        }
+        if (commandZone.isVisible()) { //draw border for command zone if needed
+            float x = commandZone.getLeft();
+            y = commandZone.getTop();
+            g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, x, y + commandZone.getHeight());
+            if (isFlipped()) {
+                y += commandZone.getHeight();
+            }
+            g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, x + commandZone.getWidth(), y);
         }
     }
 
@@ -372,6 +396,23 @@ public class VPlayerPanel extends FContainer {
 
                 y += h + INFO_TAB_PADDING_Y;
                 g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, HAlignment.CENTER, false);
+            }
+        }
+    }
+
+    private class CommandZoneDisplay extends VZoneDisplay {
+        private CommandZoneDisplay(Player player0) {
+            super(player0, ZoneType.Command);
+        }
+
+        @Override
+        protected void refreshCardPanels(List<Card> model) {
+            int oldCount = getCount();
+            super.refreshCardPanels(model);
+            int newCount = getCount();
+            if (newCount != oldCount) {
+                setVisible(newCount > 0);
+                VPlayerPanel.this.revalidate(); //need to revalidated entire panel when command zone size changes
             }
         }
     }

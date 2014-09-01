@@ -18,7 +18,7 @@ public class VFlashbackZone extends VCardDisplayArea {
     private final Runnable updateRoutine = new Runnable() {
         @Override
         public void run() {
-            refreshCardPanels(player.getCardsActivableInExternalZones());
+            refreshCardPanels(player.getCardsActivableInExternalZones(false));
         }
     };
 }
