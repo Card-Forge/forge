@@ -262,7 +262,7 @@ public class Match {
             }
         }
 
-        if (!rAICards.isEmpty() && !rules.getGameType().isCardpoolLimited()) {
+        if (!rAICards.isEmpty() && !rules.getGameType().isCardPoolLimited()) {
             game.getAction().revealAnte("AI can't play these cards well", rAICards);
         }
 
@@ -348,7 +348,7 @@ public class Match {
                 outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
             }
 
-            if (rules.getGameType().canAddWonCardsMidgame()) {
+            if (rules.getGameType().canAddWonCardsMidGame()) {
                 // But only certain game types lets you swap midgame
                 List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses);
                 if (null != chosen) {

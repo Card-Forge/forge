@@ -17,23 +17,21 @@ public enum GameType {
     QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft"),
     Constructed     (DeckFormat.Constructed, false, true, true, "Constructed"),
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard"),
+    MomirBasic      (DeckFormat.MomirBasic, false, false, false, "Momir Basic"),
     Commander       (DeckFormat.Commander, false, false, false, "Commander"),
     Planechase      (DeckFormat.Planechase, false, false, true, "Planechase"),
-    MomirBasic      (DeckFormat.MomirBasic, false, false, false, "Momir Basic"),
     Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy"),
     ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble");
 
-    private final DeckFormat decksFormat;
-    private final boolean bCardpoolLimited;
-    private final boolean canSideboard;
-    private final boolean addWonCardsMidgame;
+    private final DeckFormat deckFormat;
+    private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame;
     private final String name;
 
-    GameType(DeckFormat formatType, boolean isDeckBuilderLimited, boolean sideboardingAllowed, boolean addAnteMidGame, String name0) {
-        bCardpoolLimited = isDeckBuilderLimited;
-        decksFormat = formatType;
-        canSideboard = sideboardingAllowed;
-        addWonCardsMidgame = addAnteMidGame;
+    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0) {
+        deckFormat = deckFormat0;
+        isCardPoolLimited = isCardPoolLimited0;
+        canSideboard = canSideboard0;
+        addWonCardsMidGame = addWonCardsMidgame0;
         name = name0;
     }
 
@@ -41,14 +39,14 @@ public enum GameType {
      * @return the decksFormat
      */
     public DeckFormat getDecksFormat() {
-        return decksFormat;
+        return deckFormat;
     }
 
     /**
      * @return the isCardpoolLimited
      */
-    public boolean isCardpoolLimited() {
-        return bCardpoolLimited;
+    public boolean isCardPoolLimited() {
+        return isCardPoolLimited;
     }
 
     /**
@@ -58,7 +56,9 @@ public enum GameType {
         return canSideboard;
     }
 
-    public boolean canAddWonCardsMidgame() { return addWonCardsMidgame; }
+    public boolean canAddWonCardsMidGame() {
+        return addWonCardsMidGame;
+    }
 
     public boolean isCommandZoneNeeded() {
     	return true; //TODO: Figure out way to move command zone into field so it can be hidden when empty

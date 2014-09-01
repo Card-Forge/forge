@@ -41,8 +41,8 @@ public enum DeckFormat {
     Limited     ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander   ( Range.is(99),                         Range.between(0, 10), 1),
     Vanguard    ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Planechase  ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     MomirBasic  ( Range.is(60),                         Range.is(0), Integer.MAX_VALUE),
+    Planechase  ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy   ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
 
     private final Range<Integer> mainRange;
