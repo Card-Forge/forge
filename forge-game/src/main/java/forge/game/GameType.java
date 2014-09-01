@@ -19,6 +19,7 @@ public enum GameType {
     Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard"),
     Commander       (DeckFormat.Commander, false, false, false, "Commander"),
     Planechase      (DeckFormat.Planechase, false, false, true, "Planechase"),
+    MomirBasic      (DeckFormat.MomirBasic, false, false, false, "Momir Basic"),
     Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy"),
     ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble");
 

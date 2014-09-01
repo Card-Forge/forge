@@ -38,18 +38,17 @@ public enum DeckFormat {
     //            Main board: allowed size             SB: restriction   Max distinct non basic cards
     Constructed ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
     QuestDeck   ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    Limited     ( Range.between(40, Integer.MAX_VALUE), null,             Integer.MAX_VALUE),
+    Limited     ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
     Commander   ( Range.is(99),                         Range.between(0, 10), 1),
     Vanguard    ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase  ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
+    MomirBasic  ( Range.is(60),                         Range.is(0), Integer.MAX_VALUE),
     Archenemy   ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
 
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
 
-
-    
     DeckFormat(Range<Integer> main, Range<Integer> side, int maxCopies) {
         mainRange = main;
         sideRange = side;
@@ -64,7 +63,7 @@ public enum DeckFormat {
      * @return the game type
      */
     public static DeckFormat smartValueOf(final String value, DeckFormat defaultValue) {
-        if (null == value) {
+        if (value == null) {
             return defaultValue;
         }
 
@@ -78,14 +77,12 @@ public enum DeckFormat {
         throw new IllegalArgumentException("No element named " + value + " in enum GameType");
     }
 
-
     /**
      * @return the sideRange
      */
     public Range<Integer> getSideRange() {
         return sideRange;
     }
-
 
     /**
      * @return the mainRange
@@ -94,7 +91,6 @@ public enum DeckFormat {
         return mainRange;
     }
 
-
     /**
      * @return the maxCardCopies
      */
@@ -102,10 +98,8 @@ public enum DeckFormat {
         return maxCardCopies;
     }
 
-
-
     public String getDeckConformanceProblem(Deck deck) {
-        if(deck == null) {
+        if (deck == null) {
             return "is not selected";
         }
 
@@ -125,10 +119,22 @@ public enum DeckFormat {
             return String.format("should not exceed a maximum of %d cards", max);
         }
 
-        if (this == Commander) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
+        if (this == MomirBasic) { //Must have Momir Vig avatar and contain only basic, non-snow lands
+            final CardPool avatar = deck.get(DeckSection.Avatar);
+            if (avatar == null || avatar.isEmpty() || avatar.get(0).getName() != "Momir Vig, Simic Visionary Avatar") {
+                return "must have the Momir Vig avatar";
+            }
+            for (Entry<PaperCard, Integer> card : deck.getMain()) {
+                final CardType cardType = card.getKey().getRules().getType();
+                if (!cardType.isBasicLand() || cardType.isSnow()) {
+                    return "can only contain basic lands that aren't snow lands.";
+                }
+            }
+        }
 
+        if (this == Commander) { //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
         	final CardPool cmd = deck.get(DeckSection.Commander);
-        	if (null == cmd || cmd.isEmpty()) {
+        	if (cmd == null || cmd.isEmpty()) {
         		return "is missing a commander";
         	}
         	if (!cmd.get(0).getRules().getOracleText().contains("can be your commander")
@@ -139,28 +145,23 @@ public enum DeckFormat {
         	ColorSet cmdCI = cmd.get(0).getRules().getColorIdentity();
         	List<PaperCard> erroneousCI = new ArrayList<PaperCard>();
 
-        	for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
-        		if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
-        		{
+        	for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
+        		if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
         			erroneousCI.add(cp.getKey());
         		}
         	}
-        	if(deck.has(DeckSection.Sideboard))
-        	{
-        		for(Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
-        			if(!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor()))
-        			{
+        	if (deck.has(DeckSection.Sideboard)) {
+        		for (Entry<PaperCard, Integer> cp : deck.get(DeckSection.Sideboard)) {
+        			if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI.getColor())) {
         				erroneousCI.add(cp.getKey());
         			}
         		}
         	}
 
-        	if(erroneousCI.size() > 0)
-        	{
+        	if (erroneousCI.size() > 0) {
         		StringBuilder sb = new StringBuilder("contains card that do not match the commanders color identity:");
 
-        		for(PaperCard cp : erroneousCI)
-        		{
+        		for (PaperCard cp : erroneousCI) {
         			sb.append("\n").append(cp.getName());
         		}
 
@@ -175,16 +176,17 @@ public enum DeckFormat {
             //basic lands, Shadowborn Apostle and Relentless Rats
 
             CardPool tmp = new CardPool(deck.getMain());
-            if ( deck.has(DeckSection.Sideboard))
+            if (deck.has(DeckSection.Sideboard)) {
                 tmp.addAll(deck.get(DeckSection.Sideboard));
-            if ( deck.has(DeckSection.Commander) && this == Commander)
+            }
+            if (deck.has(DeckSection.Commander) && this == Commander) {
                 tmp.addAll(deck.get(DeckSection.Commander));
+            }
 
             List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
 
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, PaperCard.FN_GET_NAME)) {
-
                 IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
                 boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
 
@@ -219,7 +221,6 @@ public enum DeckFormat {
     		if (cp.getValue() > 1) {
     			return "must not contain multiple copies of any Plane or Phenomena";
     		}
-
     	}
     	if (phenoms > 2) {
     		return "must not contain more than 2 Phenomena";

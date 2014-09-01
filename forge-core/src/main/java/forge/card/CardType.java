@@ -241,6 +241,10 @@ public final class CardType implements Comparable<CardType> {
         return this.superType.contains(CardType.SuperType.Legendary);
     }
 
+    public boolean isSnow() {
+        return this.superType.contains(CardType.SuperType.Snow);
+    }
+
     public boolean isBasicLand() {
         return this.isBasic() && this.isLand();
     }
