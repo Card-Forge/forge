@@ -727,14 +727,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Don't blink cards that will die.
             aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
 
-            // Removal on blocker to save my creature
+            // Combat bouncing
             if (tgt.getMinTargets(sa.getHostCard(), sa) <= 1) {
                 if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     Combat currCombat = game.getCombat();
-                    for (Card attacker : currCombat.getAttackers()) {
+                    List<Card> attackers =  currCombat.getAttackers();
+                    ComputerUtilCard.sortByEvaluateCreature(attackers);
+                    for (Card attacker : attackers) {
+                        List<Card> blockers = currCombat.getBlockers(attacker);
+                        // Save my attacker by bouncing a blocker
                         if (attacker.getShield().isEmpty() && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat) 
                                 && !currCombat.getBlockers(attacker).isEmpty()) {
-                            List<Card> blockers = currCombat.getBlockers(attacker);
                             ComputerUtilCard.sortByEvaluateCreature(blockers);
                             Combat combat = new Combat(ai);
                             combat.addAttacker(attacker, ai.getOpponent());
@@ -748,6 +751,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
                                     return true;
                                 } else {
                                     combat.addBlocker(attacker, blocker);
+                                }
+                            }
+                        }
+                        // Save my blocker by bouncing the attacker (cannot handle blocking multiple attackers)
+                        if (!attacker.getController().equals(ai) && !blockers.isEmpty()) {
+                            for (Card blocker : blockers) {
+                                if (ComputerUtilCombat.blockerWouldBeDestroyed(ai, blocker, currCombat)) {
+                                    sa.getTargets().add(attacker);
+                                    return true;
                                 }
                             }
                         }
