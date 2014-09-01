@@ -16,6 +16,7 @@ public class VField extends FContainer {
     private final Player player;
     private final FieldRow row1, row2;
     private boolean flipped;
+    private float commandZoneWidth;
 
     public VField(Player player0) {
         player = player0;
@@ -186,6 +187,10 @@ public class VField extends FContainer {
         return row2;
     }
 
+    void setCommandZoneWidth(float commandZoneWidth0) {
+        commandZoneWidth = commandZoneWidth0;
+    }
+
     @Override
     public void clear() {
         row1.clear(); //clear rows instead of removing the rows
@@ -205,7 +210,7 @@ public class VField extends FContainer {
             y2 = cardSize;
         }
         row1.setBounds(0, y1, width, cardSize);
-        row2.setBounds(0, y2, width, cardSize);
+        row2.setBounds(0, y2, width - commandZoneWidth, cardSize);
     }
 
     public class FieldRow extends VCardDisplayArea {

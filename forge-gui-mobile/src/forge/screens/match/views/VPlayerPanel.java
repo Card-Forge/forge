@@ -207,11 +207,21 @@ public class VPlayerPanel extends FContainer {
         if (selectedTab != null) {
             y -= displayAreaHeight;
         }
-        field.setBounds(0, 0, width, y);
 
-        float commandZoneHeight = field.getRow2().getHeight();
-        float commandZoneWidth = Math.min(commandZone.getCount(), 2) * commandZone.getCardWidth(commandZoneHeight);
-        commandZone.setBounds(width - commandZoneWidth, y - commandZoneHeight, commandZoneWidth, commandZoneHeight);
+        //account for command zone if needed
+        int commandZoneCount = commandZone.getCount();
+        if (commandZoneCount > 0) {
+            float commandZoneHeight = y / 2;
+            float commandZoneWidth = Math.min(commandZoneCount, 2) * commandZone.getCardWidth(commandZoneHeight);
+            commandZone.setBounds(width - commandZoneWidth, y - commandZoneHeight, commandZoneWidth, commandZoneHeight);
+
+            field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
+        }
+        else {
+            field.setCommandZoneWidth(0);
+        }
+
+        field.setBounds(0, 0, width, y);
 
         if (isFlipped()) { //flip all positions across x-axis if needed
             for (FDisplayObject child : getChildren()) {
