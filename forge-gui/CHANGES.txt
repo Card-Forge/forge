@@ -8,6 +8,11 @@ Forge Beta: 08-29-2014 ver 1.5.25
 Release Notes
 -------------
 
+- Improved Commander support -
+There will no longer be a black rectangle for "Commander effect" in the command zone
+The details previously available by hovering over that rectangle will now appear when hovering over the commander itself
+The dialog for the commander replacement effect will now display the commander's name
+
 - Auto-targeting support -
 When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.
 When triggered abilities have only one valid target, that target will now be auto-selected
