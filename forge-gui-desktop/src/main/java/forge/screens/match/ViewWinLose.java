@@ -11,13 +11,11 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
+import forge.LobbyPlayer;
 import forge.UiCommand;
-import forge.game.Game;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
-import forge.game.GameOutcome;
-import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
@@ -29,7 +27,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextArea;
-
+import forge.view.IGameView;
 
 public class ViewWinLose implements IWinLoseView<FButton> {
     private final FButton btnContinue, btnRestart, btnQuit;
@@ -39,12 +37,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
 
-    private final Game game;
+    private final IGameView game;
     
     @SuppressWarnings("serial")
-    public ViewWinLose(final Game game0) {
+    public ViewWinLose(final IGameView game0) {
 
-        game = game0;
+        this.game = game0;
 
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 
@@ -60,7 +58,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
-        switch (game0.getRules().getGameType()) {
+        switch (game0.getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
             break;
@@ -103,7 +101,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         btnRestart.setFont(FSkin.getFont(22));
         btnQuit.setText("Quit Match");
         btnQuit.setFont(FSkin.getFont(22));
-        btnContinue.setEnabled(!game0.getMatch().isMatchOver());
+        btnContinue.setEnabled(!game0.isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
@@ -180,20 +178,20 @@ public class ViewWinLose implements IWinLoseView<FButton> {
             }
         });
 
-        lblTitle.setText(composeTitle(game0.getOutcome()));
+        lblTitle.setText(composeTitle(game0));
 
         showGameOutcomeSummary();
         showPlayerScores();
 
     }
 
-    private String composeTitle(GameOutcome outcome) {
-        Player winner = outcome.getWinningPlayer();
-        int winningTeam = outcome.getWinningTeam();
+    private String composeTitle(final IGameView game) {
+        final LobbyPlayer winner = game.getWinningPlayer();
+        final int winningTeam = game.getWinningTeam();
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return "Team " + winner.getTeam() + " Won!";
+            return "Team " + winningTeam + " Won!";
         } else {
             return winner.getName() + " Won!";
         }

@@ -29,6 +29,7 @@ import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -80,6 +81,7 @@ public class ImageCache {
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
+    @Deprecated
     public static BufferedImage getImage(Card card, int width, int height) {
         final String key;
         if (!Singletons.getControl().mayShowCard(card) || card.isFaceDown()) {
@@ -89,7 +91,21 @@ public class ImageCache {
         }
         return scaleImage(key, width, height, true);
     }
-    
+
+    /**
+     * retrieve an image from the cache.  returns null if the image is not found in the cache
+     * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
+     */
+    public static BufferedImage getImage(final CardView card, final int width, final int height) {
+        final String key;
+        if (!Singletons.getControl().mayShowCard(card)) {
+            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
+        } else {
+            key = card.getOriginal().getImageKey();
+        }
+        return scaleImage(key, width, height, true);
+    }
+
     /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.

@@ -17,18 +17,20 @@ package forge.screens.match;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.awt.Color;
+import java.util.List;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
-import forge.game.Game;
 import forge.gauntlet.GauntletWinLoseController;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.util.List;
+import forge.view.IGameView;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -43,9 +45,9 @@ public class GauntletWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match
      */
-    public GauntletWinLose(final ViewWinLose view0, Game lastGame) {
-        super(view0, lastGame);
-        controller = new GauntletWinLoseController(view0, lastGame) {
+    public GauntletWinLose(final ViewWinLose view0, final IGameView game0) {
+        super(view0, game0);
+        controller = new GauntletWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(String message1, String message2, FSkinProp icon, List<String> lstEventNames, List<String> lstEventRecords, int len, int num) {
                 final JLabel lblTitle = new FLabel.Builder().text("Gauntlet Progress")

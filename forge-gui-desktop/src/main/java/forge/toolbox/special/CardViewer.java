@@ -56,7 +56,7 @@ public class CardViewer extends JPanel {
     public CardViewer(final List<PaperCard> list) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList<PaperCard>(new ChooserListModel());
-        this.detail = new CardDetailPanel(null);
+        this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
 
         this.add(new FScrollPane(this.jList, true));

@@ -36,7 +36,7 @@ public class FDeckViewer extends FDialog {
     private final CardManager cardManager;
     private DeckSection currentSection;
 
-    private final CardDetailPanel cardDetail = new CardDetailPanel(null);
+    private final CardDetailPanel cardDetail = new CardDetailPanel();
     private final CardPicturePanel cardPicture = new CardPicturePanel();
     private final FButton btnCopyToClipboard = new FButton("Copy to Clipboard");
     private final FButton btnChangeSection = new FButton("Change Section");

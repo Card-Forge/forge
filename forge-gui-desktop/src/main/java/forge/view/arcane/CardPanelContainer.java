@@ -17,20 +17,25 @@
  */
 package forge.view.arcane;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingUtilities;
+
 import forge.FThreads;
-import forge.game.card.Card;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.special.CardZoomer;
+import forge.view.CardView;
 import forge.view.arcane.util.CardPanelMouseListener;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Manages mouse events and common functionality for CardPanel containing
@@ -278,6 +283,29 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     protected abstract CardPanel getCardPanel(int x, int y);
 
     /**
+<<<<<<< .mine
+     * Must call from the Swing event thread.
+     * 
+     * @param card
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.view.arcane.CardPanel} object.
+     */
+    public CardPanel addCard(final CardView card) {
+        final CardPanel placeholder = new CardPanel(card);
+        placeholder.setDisplayEnabled(false);
+        this.getCardPanels().add(placeholder);
+        this.add(placeholder);
+        this.doLayout();
+        // int y = Math.min(placeholder.getHeight(),
+        // scrollPane.getVisibleRect().height);
+        this.scrollRectToVisible(new Rectangle(placeholder.getCardX(), placeholder.getCardY(), placeholder
+                .getCardWidth(), placeholder.getCardHeight()));
+        return placeholder;
+    }
+
+    /**
+=======
+>>>>>>> .r27195
      * <p>
      * getCardPanel.
      * </p>
@@ -288,7 +316,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      */
     public final CardPanel getCardPanel(final int gameCardID) {
         for (final CardPanel panel : this.getCardPanels()) {
-            if (panel.getCard().getUniqueNumber() == gameCardID) {
+            if (panel.getCard().getId() == gameCardID) {
                 return panel;
             }
         }
@@ -584,7 +612,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      * 
      * @return a {@link forge.game.card.Card} object.
      */
-    public final Card getHoveredCard(MouseEvent e) {
+    public final CardView getHoveredCard(final MouseEvent e) {
         // re-evaluate cursor position so if we hovered over a card, alt-tabbed out of the application, then
         // clicked back on the application somewhere else, the last hovered card won't register the click
         // this cannot protect against alt tabbing off then re-focusing on the application by clicking on

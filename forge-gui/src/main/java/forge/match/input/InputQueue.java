@@ -17,7 +17,8 @@
  */
 package forge.match.input;
 
-import forge.game.Game;
+import forge.view.IGameView;
+
 import java.util.Observable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -63,7 +64,7 @@ public class InputQueue extends Observable {
      * 
      * @return a {@link forge.gui.input.InputBase} object.
      */
-    public final Input getActualInput(Game game) {
+    public final Input getActualInput(IGameView game) {
         Input topMost = inputStack.peek(); // incoming input to Control
         if (topMost != null && !game.isGameOver()) {
             return topMost;

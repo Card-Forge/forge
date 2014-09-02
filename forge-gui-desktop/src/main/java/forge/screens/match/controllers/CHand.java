@@ -17,35 +17,36 @@
  */
 package forge.screens.match.controllers;
 
-import forge.UiCommand;
-import forge.FThreads;
-import forge.Singletons;
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
-import forge.gui.framework.ICDoc;
-import forge.screens.match.CMatchUI;
-import forge.screens.match.views.VField;
-import forge.screens.match.views.VHand;
-import forge.view.arcane.CardPanel;
-import forge.view.arcane.HandArea;
-import forge.view.arcane.util.Animation;
-import forge.view.arcane.util.CardPanelMouseAdapter;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
+
+import forge.FThreads;
+import forge.Singletons;
+import forge.UiCommand;
+import forge.gui.framework.ICDoc;
+import forge.screens.match.CMatchUI;
+import forge.screens.match.views.VField;
+import forge.screens.match.views.VHand;
+import forge.view.CardView;
+import forge.view.PlayerView;
+import forge.view.arcane.CardPanel;
+import forge.view.arcane.HandArea;
+import forge.view.arcane.util.Animation;
+import forge.view.arcane.util.CardPanelMouseAdapter;
 
 /**
  * Controls Swing components of a player's hand instance.
  * 
  */
 public class CHand implements ICDoc {
-    private final Player player;
+    private final PlayerView player;
     private final VHand view;
     private boolean initializedAlready = false;
 
@@ -55,15 +56,15 @@ public class CHand implements ICDoc {
      * @param p0 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.screens.match.views.VHand}
      */
-    public CHand(final Player p0, final VHand v0) {
+    public CHand(final PlayerView p0, final VHand v0) {
         this.player = p0;
         this.view = v0;
         v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
             @Override
             public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {
                 //update index of dragged card in hand zone to match new index within hand area
-                int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
-                CHand.this.player.getZone(ZoneType.Hand).reposition(dragPanel.getCard(), index);
+                //int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
+                //CHand.this.player.getZone(ZoneType.Hand).reposition(dragPanel.getCard(), index);
             }
         });
     }
@@ -103,12 +104,12 @@ public class CHand implements ICDoc {
         }
 
         //update card panels in hand area
-        final List<Card> cards = player.getZone(ZoneType.Hand).getCards();
+        final List<CardView> cards = player.getHandCards();
         final List<CardPanel> placeholders = new ArrayList<CardPanel>();
         final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
-        
-        for (Card card : cards) {
-            CardPanel cardPanel = p.getCardPanel(card.getUniqueNumber());
+
+        for (final CardView card : cards) {
+            CardPanel cardPanel = p.getCardPanel(card.getId());
             if (cardPanel == null) { //create placeholders for new cards
                 cardPanel = new CardPanel(card);
                 cardPanel.setDisplayEnabled(false);

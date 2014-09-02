@@ -24,8 +24,6 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.assets.FSkinProp;
-import forge.game.Game;
-import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.model.FModel;
@@ -37,6 +35,8 @@ import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 /**
  * <p>
@@ -58,8 +58,8 @@ public class QuestDraftWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestDraftWinLose(final ViewWinLose view0, Game lastGame) {
-        super(view0, lastGame);
+    public QuestDraftWinLose(final ViewWinLose view0, final IGameView game0) {
+        super(view0, game0);
         this.view = view0;
         qData = FModel.getQuest();
     }
@@ -79,18 +79,18 @@ public class QuestDraftWinLose extends ControlWinLose {
         QuestController quest = FModel.getQuest();
         
         final LobbyPlayer questLobbyPlayer = GuiBase.getInterface().getQuestPlayer();
-        List<Player> players = lastGame.getRegisteredPlayers();
+        final List<PlayerView> players = lastGame.getPlayers();
         boolean gameHadHumanPlayer = false;
-        for (Player p : players) {
+        for (final PlayerView p : players) {
             if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
                 gameHadHumanPlayer = true;
                 break;
             }
         }
         
-        if (lastGame.getMatch().isMatchOver()) {
+        if (lastGame.isMatchOver()) {
 
-            String winner = lastGame.getOutcome().getWinningPlayer().getName();
+            String winner = lastGame.getWinningPlayer().getName();
             
             quest.getAchievements().getCurrentDraft().setWinner(winner);
             quest.save();
@@ -99,7 +99,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         
         if (!gameHadHumanPlayer) {
             
-            if (lastGame.getMatch().isMatchOver()) {
+            if (lastGame.isMatchOver()) {
                 this.actionOnQuitMatch();
                 QuestDraftUtils.matchInProgress = false;
                 QuestDraftUtils.update();
@@ -114,7 +114,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         view.getBtnRestart().setEnabled(false);
         view.getBtnRestart().setVisible(false);
         
-        if (lastGame.getMatch().isMatchOver()) {
+        if (lastGame.isMatchOver()) {
             view.getBtnQuit().setEnabled(true);
             view.getBtnContinue().setEnabled(false);
             view.getBtnQuit().setText("Continue Tournament");

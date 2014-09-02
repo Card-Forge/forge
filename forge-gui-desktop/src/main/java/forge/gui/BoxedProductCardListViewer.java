@@ -99,7 +99,7 @@ public class BoxedProductCardListViewer extends FDialog {
     public BoxedProductCardListViewer(final String title, final String message, final List<PaperCard> list, final Icon dialogIcon) {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList<PaperCard>(new ChooserListModel());
-        this.detail = new CardDetailPanel(null);
+        this.detail = new CardDetailPanel();
         this.picture = new CardPicturePanel();
         this.picture.setOpaque(false);
 

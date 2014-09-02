@@ -1,23 +1,23 @@
 package forge.limited;
 
 import forge.GuiBase;
-import forge.game.Game;
 import forge.interfaces.IButton;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
+import forge.view.IGameView;
 
 public abstract class LimitedWinLoseController {
-    private final Game lastGame;
+    private final IGameView lastGame;
     private final boolean wonMatch;
     private final IWinLoseView<? extends IButton> view;
     private GauntletMini gauntlet;
     private boolean nextRound = false;
 
-    public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, Game lastGame0) {
+    public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
         view = view0;
-        lastGame = lastGame0;
+        lastGame = game0;
         gauntlet = FModel.getGauntletMini();
-        wonMatch = lastGame.getMatch().isWonBy(GuiBase.getInterface().getGuiPlayer());
+        wonMatch = lastGame.isMatchWonBy(GuiBase.getInterface().getGuiPlayer());
     }
 
     public void showOutcome() {
@@ -29,10 +29,9 @@ public abstract class LimitedWinLoseController {
         resetView();
         nextRound = false;
 
-        if (lastGame.getOutcome().isWinner(GuiBase.getInterface().getGuiPlayer())) {
+        if (lastGame.isWinner(GuiBase.getInterface().getGuiPlayer())) {
             gauntlet.addWin();
-        }
-        else {
+        } else {
             gauntlet.addLoss();
         }
 
@@ -41,7 +40,7 @@ public abstract class LimitedWinLoseController {
         showOutcome(new Runnable() {
             @Override
             public void run() {
-                if (!lastGame.getMatch().isMatchOver()) {
+                if (!lastGame.isMatchOver()) {
                     showTournamentInfo("Tournament Info");
                     return;
                 }

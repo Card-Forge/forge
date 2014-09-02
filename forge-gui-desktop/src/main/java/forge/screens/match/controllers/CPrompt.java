@@ -17,8 +17,18 @@
  */
 package forge.screens.match.controllers;
 
-import forge.UiCommand;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JButton;
+
 import forge.FThreads;
+import forge.Singletons;
+import forge.UiCommand;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.Match;
@@ -27,11 +37,6 @@ import forge.gui.framework.SDisplayUtil;
 import forge.match.input.InputProxy;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -114,8 +119,9 @@ public enum CPrompt implements ICDoc {
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
 
-    public void updateText(Game game) {
+    public void updateText() {
         FThreads.assertExecutedByEdt(true);
+        final Game game = Singletons.getControl().getObservedGame();
         final Match match = game.getMatch();
         final GameRules rules = game.getRules();
         final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), rules.getGameType());

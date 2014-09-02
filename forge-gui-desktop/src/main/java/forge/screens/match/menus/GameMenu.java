@@ -198,8 +198,8 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FControl control = Singletons.getControl();
-                VAutoYields autoYields = new VAutoYields(control.getObservedGame(), control.getLocalPlayer());
+                final FControl control = Singletons.getControl();
+                final VAutoYields autoYields = new VAutoYields(control.getGameView(), control.getLocalPlayer());
                 autoYields.showAutoYields();
             }
         };

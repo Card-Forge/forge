@@ -17,48 +17,64 @@
  */
 package forge.screens.match;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.swing.JMenu;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.testng.collections.Maps;
+
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-import forge.LobbyPlayer;
-import forge.UiCommand;
 import forge.FThreads;
 import forge.ImageCache;
+import forge.LobbyPlayer;
 import forge.Singletons;
+import forge.UiCommand;
 import forge.events.IUiEventVisitor;
 import forge.events.UiEvent;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
-import forge.game.GameEntity;
-import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.*;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SDisplayUtil;
 import forge.item.InventoryItem;
 import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestDraftUtils;
-import forge.screens.match.controllers.*;
+import forge.screens.match.controllers.CAntes;
+import forge.screens.match.controllers.CCombat;
+import forge.screens.match.controllers.CDetail;
+import forge.screens.match.controllers.CPicture;
+import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.menus.CMatchUIMenus;
-import forge.screens.match.views.*;
+import forge.screens.match.views.VCommand;
+import forge.screens.match.views.VField;
+import forge.screens.match.views.VHand;
+import forge.screens.match.views.VPlayers;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.PhaseLabel;
+import forge.view.CardView;
+import forge.view.GameEntityView;
+import forge.view.PlayerView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-
-import java.util.*;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -71,7 +87,7 @@ import java.util.*;
 public enum CMatchUI implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
-    private List<Player> sortedPlayers;
+    private List<PlayerView> sortedPlayers;
     private VMatchUI view;
 
     private EventBus uiEvents;
@@ -85,14 +101,12 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         uiEvents.register(visitor);
     }
 
-    private SkinImage getPlayerAvatar(final Player p, final int defaultIndex) {
-        LobbyPlayer lp = p.getLobbyPlayer();
-        
-        if (avatarImages.containsKey(lp)) {
-            return ImageCache.getIcon(avatarImages.get(lp));
+    private SkinImage getPlayerAvatar(final LobbyPlayer p, final int defaultIndex) {
+         if (avatarImages.containsKey(p)) {
+            return ImageCache.getIcon(avatarImages.get(p));
         }
 
-        int avatarIdx = lp.getAvatarIndex();
+        int avatarIdx = p.getAvatarIndex();
         return FSkin.getAvatars().get(avatarIdx >= 0 ? avatarIdx : defaultIndex);
     }
 
@@ -108,7 +122,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      * @param numFieldPanels int
      * @param numHandPanels int
      */
-    public void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
+    public void initMatch(final List<PlayerView> players, LobbyPlayer localPlayer) {
         view = VMatchUI.SINGLETON_INSTANCE;
         // TODO fix for use with multiplayer
 
@@ -121,7 +135,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         final List<VCommand> commands = new ArrayList<VCommand>();
 
         int i = 0;
-        for (Player p : sortedPlayers) {
+        for (final PlayerView p : sortedPlayers) {
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
             VField f = new VField(EDocID.Fields[i], p, localPlayer);
@@ -130,7 +144,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             commands.add(c);
 
             //setAvatar(f, new ImageIcon(FSkin.getAvatars().get()));
-            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i > 2 ? 1 : 0])));
+            setAvatar(f, getPlayerAvatar(p.getLobbyPlayer(), Integer.parseInt(indices[i > 2 ? 1 : 0])));
             f.getLayoutControl().initialize();
             c.getLayoutControl().initialize();
             i++;
@@ -149,7 +163,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         final List<VHand> hands = new ArrayList<VHand>();
 
         int i = 0;
-        for (Player p : sortedPlayers) {
+        for (final PlayerView p : sortedPlayers) {
             if (p.getLobbyPlayer() == localPlayer) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
@@ -166,9 +180,9 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         view.setHandViews(hands);
     }
 
-    private List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, LobbyPlayer localPlayer) {
+    private List<PlayerView> shiftPlayersPlaceLocalFirst(final List<PlayerView> players, final LobbyPlayer localPlayer) {
         // get an arranged list so that the first local player is at index 0
-        List<Player> sortedPlayers = Lists.newArrayList(players);
+        final List<PlayerView> sortedPlayers = Lists.newArrayList(players);
         int ixFirstHuman = -1;
         for (int i = 0; i < players.size(); i++) {
             if (sortedPlayers.get(i).getLobbyPlayer() == localPlayer) {
@@ -199,17 +213,17 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         CPrompt.SINGLETON_INSTANCE.setMessage(s0);
     }
 
-    public VField getFieldViewFor(Player p) {
+    public VField getFieldViewFor(PlayerView p) {
         int idx = getPlayerIndex(p);
         return idx < 0 ? null :view.getFieldViews().get(idx);
     }
 
-    public VCommand getCommandFor(Player p) {
+    public VCommand getCommandFor(PlayerView p) {
         int idx = getPlayerIndex(p);
         return idx < 0 ? null :view.getCommandViews().get(idx);
     }
 
-    public VHand getHandFor(Player p) {
+    public VHand getHandFor(PlayerView p) {
         int idx = getPlayerIndex(p);
         List<VHand> allHands = view.getHands();
         return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
@@ -226,15 +240,15 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      * @param overrideOrder overriding combatant order
      */
     @SuppressWarnings("unchecked")
-    public Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, final GameEntity defender, final boolean overrideOrder) {
+    public Map<CardView, Integer> getDamageToAssign(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         if (damage <= 0) {
-            return new HashMap<Card, Integer>();
+            return Maps.newHashMap();
         }
 
         // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
-        Card firstBlocker = blockers.get(0);
-        if (!overrideOrder && !attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
-            Map<Card, Integer> res = new HashMap<Card, Integer>();
+        final CardView firstBlocker = blockers.get(0);
+        if (!overrideOrder && !attacker.getState().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
+            final Map<CardView, Integer> res = Maps.newHashMap();
             res.put(firstBlocker, damage);
             return res;
         }
@@ -246,7 +260,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
                 VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
                 result[0] = v.getDamageMap();
             }});
-        return (Map<Card, Integer>)result[0];
+        return (Map<CardView, Integer>)result[0];
     }
 
     /**
@@ -257,20 +271,20 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      * @param phase &emsp; {@link java.lang.String}
      * @return boolean
      */
-    public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
+    public final boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
         PhaseLabel label = vf.getPhaseIndicator().getLabelFor(phase);
         return label == null || label.getEnabled();
     }
 
-    public void setCard(final Card c) {
-        FThreads.assertExecutedByEdt(true);
-        setCard(c, false);
+    public void setCard(final CardView c) {
+        this.setCard(c, c.isInAltState());
     }
 
-    public void setCard(final Card c, final boolean showFlipped) {
-        CDetail.SINGLETON_INSTANCE.showCard(c);
-        CPicture.SINGLETON_INSTANCE.showCard(c, showFlipped);
+    public void setCard(final CardView c, final boolean isInAltState) {
+        FThreads.assertExecutedByEdt(true);
+        CDetail.SINGLETON_INSTANCE.showCard(c, isInAltState);
+        CPicture.SINGLETON_INSTANCE.showCard(c, isInAltState);
     }
 
     public void setCard(final InventoryItem c) {
@@ -278,7 +292,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         CPicture.SINGLETON_INSTANCE.showImage(c);
     }
     
-    private int getPlayerIndex(Player player) {
+    private int getPlayerIndex(PlayerView player) {
         return sortedPlayers.indexOf(player);
     }
 
@@ -305,19 +319,19 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         CCombat.SINGLETON_INSTANCE.update();
     } // showBlockers()
 
-    Set<Player> highlightedPlayers = new HashSet<Player>();
-    public void setHighlighted(Player ge, boolean b) {
+    final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
+    public void setHighlighted(PlayerView ge, boolean b) {
         if (b) highlightedPlayers.add(ge);
         else highlightedPlayers.remove(ge);
     }
 
-    public boolean isHighlighted(Player player) {
+    public boolean isHighlighted(final PlayerView player) {
         return highlightedPlayers.contains(player);
     }
 
-    Set<Card> highlightedCards = new HashSet<Card>();
+    Set<CardView> highlightedCards = Sets.newHashSet();
     // used to highlight cards in UI
-    public void setUsedToPay(Card card, boolean value) {
+    public void setUsedToPay(CardView card, boolean value) {
         FThreads.assertExecutedByEdt(true);
 
         boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
@@ -326,14 +340,14 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         }
     }
 
-    public boolean isUsedToPay(Card card) {
+    public boolean isUsedToPay(CardView card) {
         return highlightedCards.contains(card);
     }
 
-    public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
+    public void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate) {
         //System.out.println("updateZones " + zonesToUpdate);
-        for (Pair<Player, ZoneType> kv : zonesToUpdate) {
-            Player owner = kv.getKey();
+        for (Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
+            PlayerView owner = kv.getKey();
             ZoneType zt = kv.getValue();
 
             if (zt == ZoneType.Command) {
@@ -355,41 +369,39 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     // Player's mana pool changes
-    public void updateManaPool(List<Player> manaPoolUpdate) {
-        for (Player p : manaPoolUpdate) {
+    public void updateManaPool(final List<PlayerView> manaPoolUpdate) {
+        for (final PlayerView p : manaPoolUpdate) {
             getFieldViewFor(p).getDetailsPanel().updateManaPool();
         }
 
     }
 
     // Player's lives and poison counters
-    public void updateLives(List<Player> livesUpdate) {
-        for (Player p : livesUpdate) {
+    public void updateLives(final List<PlayerView> livesUpdate) {
+        for (final PlayerView p : livesUpdate) {
             getFieldViewFor(p).updateDetails();
         }
 
     }
 
-    public void updateCards(Set<Card> cardsToUpdate) {
-        for (Card c : cardsToUpdate) {
+    public void updateCards(final Set<CardView> cardsToUpdate) {
+        for (final CardView c : cardsToUpdate) {
             updateSingleCard(c);
         }
     }
 
-    public void updateSingleCard(Card c) {
-        Zone zone = c.getZone();
-        if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
-            PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
+    public void updateSingleCard(final CardView c) {
+        if (ZoneType.Battlefield.equals(c.getZone())) {
+            final PlayArea pa = getFieldViewFor(c.getController()).getTabletop();
             pa.updateCard(c, false);
         }
     }
 
-    public void refreshCardDetails(Collection<Card> cards) {
-        for (Card c : cards) {
-            Zone zone = c.getZone();
-            if (zone != null && zone.getZoneType() == ZoneType.Battlefield) {
-                PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
-                CardPanel pnl = pa.getCardPanel(c.getUniqueNumber());
+    public void refreshCardDetails(final Iterable<CardView> cards) {
+        for (final CardView c : cards) {
+            if (ZoneType.Battlefield.equals(c.getZone())) {
+                PlayArea pa = getFieldViewFor(c.getController()).getTabletop();
+                CardPanel pnl = pa.getCardPanel(c.getId());
                 if (pnl != null) {
                     pnl.updatePTOverlay();
                 }

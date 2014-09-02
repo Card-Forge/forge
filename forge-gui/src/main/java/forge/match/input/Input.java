@@ -5,12 +5,11 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.ITriggerEvent;
 
-
 public interface Input {
     void showMessageInitial();
 
-    boolean selectCard(Card c, ITriggerEvent triggerEvent);
-    
+    boolean selectCard(Card card, ITriggerEvent triggerEvent);
+
     void selectAbility(SpellAbility ab);
 
     void selectPlayer(Player player, ITriggerEvent triggerEvent);

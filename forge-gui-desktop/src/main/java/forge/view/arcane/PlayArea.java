@@ -17,19 +17,25 @@
  */
 package forge.view.arcane;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import forge.FThreads;
-import forge.game.card.Card;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.List;
 
 /**
  * <p>
@@ -69,8 +75,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
     private int stackSpacingX, stackSpacingY;
 
-    private List<Card> model;
-    
+    private final List<CardView> model;
+
     /**
      * <p>
      * Constructor for PlayArea.
@@ -78,13 +84,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * 
      * @param scrollPane
      * @param mirror
-     * @param modelRef 
+     * @param list 
      */
-    public PlayArea(final FScrollPane scrollPane, final boolean mirror, List<Card> modelRef) {
+    public PlayArea(final FScrollPane scrollPane, final boolean mirror, final List<CardView> list) {
         super(scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
-        this.model = modelRef;
+        this.model = list;
     }
 
     private final CardStackRow collectAllLands() {
@@ -93,7 +99,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
-            if (!panel.getCard().isLand() || panel.getCard().isCreature()) {
+            final CardView card = panel.getCard();
+            final CardStateView state = card.getState();
+
+            if (!state.isLand() || state.isCreature()) {
                 continue;
             }
 
@@ -103,7 +112,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allLands.size(); i < n; i++) {
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getCard().getName().equals(panel.getCard().getName())) {
+                if (firstPanel.getCard().getState().getName().equals(state.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isEnchanted()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
@@ -139,7 +148,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
-            if (!panel.getCard().isToken()) {
+            final CardView card = panel.getCard();
+            final CardStateView state = card.getState();
+
+            if (!card.isToken()) {
                 continue;
             }
 
@@ -149,7 +161,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allTokens.size(); i < n; i++) {
                 final CardStack stack = allTokens.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getCard().getName().equals(panel.getCard().getName())) {
+                final CardView firstCard = firstPanel.getCard();
+                final CardStateView firstState = firstCard.getState();
+
+                if (firstPanel.getCard().getState().getName().equals(state.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this token to the left of tokens with the same
                         // name and attachments.
@@ -157,15 +172,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
-					Set<String> keywords = new HashSet<>(panel.getCard().getIntrinsicKeyword());
-					Set<String> firstKeywords = new HashSet<>(firstPanel.getCard().getIntrinsicKeyword());
-					
+                    final String text = state.getText();
+                    final String firstText = firstState.getText();
+
                     if (!panel.getAttachedPanels().isEmpty()
-                            || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
-                            || (panel.getCard().isSick() != firstPanel.getCard().isSick())
-                            || (panel.getCard().getNetAttack() != firstPanel.getCard().getNetAttack())
-                            || (panel.getCard().getNetDefense() != firstPanel.getCard().getNetDefense())
-							|| !(keywords.equals(firstKeywords))
+                            || !card.getCounters().equals(firstPanel.getCard().getCounters())
+                            || (card.isSick() != firstCard.isSick())
+                            || (state.getPower() != firstState.getPower())
+                            || (state.getToughness() != firstState.getToughness())
+                            || !(text.equals(firstText))
                             || (stack.size() == tokenStackMax)) {
                         // If this token has attachments or the stack is full,
                         // put it to the right.
@@ -239,6 +254,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         return allCreatures;
     }*/
+
+    @Override
+    public final CardPanel addCard(final CardView card) {
+        final CardPanel placeholder = new CardPanel(card);
+        placeholder.setDisplayEnabled(false);
+        this.getCardPanels().add(placeholder);
+        this.add(placeholder);
+        return placeholder;
+    }
 
     @Override
     public final void doLayout() {
@@ -323,7 +347,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (RowType.Other.isGoodFor(stack.get(0).getCard())) {
+                if (RowType.Other.isGoodFor(stack.get(0).getCard().getState())) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++) {
                         CardStack r = row.get(i);
@@ -570,20 +594,19 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         recalculateCardPanels(model);
     }
 
-    private void recalculateCardPanels(final List<Card> model) {
-        List<Card> oldCards, toDelete;
-        oldCards = new ArrayList<Card>();
+    private void recalculateCardPanels(final List<CardView> model) {
+        final List<CardView> oldCards = Lists.newArrayList();
         for (final CardPanel cpa : getCardPanels()) {
             oldCards.add(cpa.getCard());
         }
-        toDelete = new ArrayList<Card>(oldCards);
-        List<Card> toReplace = new ArrayList<Card>();
-        
+        final List<CardView> toDelete = Lists.newArrayList(oldCards);
+        final List<CardView> toReplace = Lists.newArrayList();
+
         // delete all cards that differ in timestamp (they have been blinked) 
-        for (final Card c : model) {
+        for (final CardView c : model) {
             for (int i = 0; i  < toDelete.size(); i++) {
-                final Card c2 = toDelete.get(i);
-                if (c.equals(c2)) {
+                final CardView c2 = toDelete.get(i);
+                if (c.getId() == c2.getId()) {
                     if (c.getTimestamp() == c2.getTimestamp()) {
                         toDelete.remove(i);
                     } else {
@@ -595,17 +618,17 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (toDelete.size() == getCardPanels().size()) {
             clear();
         } else {
-            for (final Card card : toDelete) {
-                removeCardPanel(getCardPanel(card.getUniqueNumber()));
+            for (final CardView card : toDelete) {
+                removeCardPanel(getCardPanel(card.getId()));
             }
         }
     
-        List<Card> toAdd = new ArrayList<Card>(model);
+        List<CardView> toAdd = new ArrayList<CardView>(model);
         toAdd.removeAll(oldCards);
         toAdd.addAll(toReplace);
 
         List<CardPanel> newPanels = new ArrayList<CardPanel>();
-        for (final Card card : toAdd) {
+        for (final CardView card : toAdd) {
             if (card.getCardForUi() == card) { //only include cards that are meant for display
                 final CardPanel placeholder = new CardPanel(card);
                 placeholder.setDisplayEnabled(false);
@@ -624,15 +647,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
     
-        for (final Card card : model) {
+        for (final CardView card : model) {
             updateCard(card, true);
         }
         invalidate();
         repaint();
     }
 
-    public void updateCard(final Card card, boolean fromRefresh) {
-        final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
+    public void updateCard(final CardView card, boolean fromRefresh) {
+        final CardPanel toPanel = getCardPanel(card.getId());
         if (null == toPanel) { return; }
 
         if (card.isTapped()) {
@@ -643,42 +666,37 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             toPanel.setTappedAngle(0);
         }
         toPanel.getAttachedPanels().clear();
-        if (card.isEnchanted()) {
-            final ArrayList<Card> enchants = card.getEnchantedBy();
-            for (final Card e : enchants) {
-                final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
-                if (cardE != null) {
-                    toPanel.getAttachedPanels().add(cardE);
-                }
-            }
-        }
-   
-        if (card.isEquipped()) {
-            final ArrayList<Card> enchants = card.getEquippedBy();
-            for (final Card e : enchants) {
-                final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
-                if (cardE != null) {
-                    toPanel.getAttachedPanels().add(cardE);
-                }
+
+        final Iterable<CardView> enchants = card.getEnchantedBy();
+        for (final CardView e : enchants) {
+            final CardPanel cardE = getCardPanel(e.getId());
+            if (cardE != null) {
+                toPanel.getAttachedPanels().add(cardE);
             }
         }
 
-        if (card.isFortified()) {
-            final ArrayList<Card> fortifications = card.getFortifiedBy();
-            for (final Card e : fortifications) {
-                final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
-                if (cardE != null) {
-                    toPanel.getAttachedPanels().add(cardE);
-                }
+        final Iterable<CardView> equips = card.getEquippedBy();
+        for (final CardView e : equips) {
+            final CardPanel cardE = getCardPanel(e.getId());
+            if (cardE != null) {
+                toPanel.getAttachedPanels().add(cardE);
             }
         }
 
-        if (card.isEnchantingCard()) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
-        } else if (card.isEquipping()) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
-        } else if (card.isFortifying()) {
-            toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().get(0).getUniqueNumber()));
+        final Iterable<CardView> fortifications = card.getFortifiedBy();
+        for (final CardView f : fortifications) {
+            final CardPanel cardE = getCardPanel(f.getId());
+            if (cardE != null) {
+                toPanel.getAttachedPanels().add(cardE);
+            }
+        }
+
+        if (card.getEnchantingCard() != null) {
+            toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getId()));
+        } else if (card.getEquipping() != null) {
+            toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().getId()));
+        } else if (card.getFortifying() != null) {
+            toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().getId()));
         } else {
             toPanel.setAttachedToPanel(null);
         }
@@ -695,12 +713,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         CreatureNonToken,
         Other;
 
-        public boolean isGoodFor(final Card card) {
+        public boolean isGoodFor(final CardStateView stateView) {
             switch (this) {
-            case Land:              return card.isLand();
-            case Creature:          return card.isCreature();
-            case CreatureNonToken:  return card.isCreature() && !card.isToken();
-            case Other:             return !card.isLand() && !card.isCreature();
+            case Land:              return stateView.isLand();
+            case Creature:          return stateView.isCreature();
+            case CreatureNonToken:  return stateView.isCreature() && !stateView.getCard().isToken();
+            case Other:             return !stateView.isLand() && !stateView.isCreature();
             default:                throw new RuntimeException("Unhandled type: " + this);
             }
         }
@@ -724,7 +742,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         private void addAll(final List<CardPanel> cardPanels, final RowType type) {
             for (final CardPanel panel : cardPanels) {
-                if (!type.isGoodFor(panel.getCard()) || (panel.getAttachedToPanel() != null)) {
+                if (!type.isGoodFor(panel.getCard().getState()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
                 final CardStack stack = new CardStack();
@@ -741,14 +759,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
          */
         private void addAllOthers(final List<CardPanel> cardPanels, final RowType type) {
             for (final CardPanel panel : cardPanels) {
-                if (!type.isGoodFor(panel.getCard()) || (panel.getAttachedToPanel() != null)) {
+                if (!type.isGoodFor(panel.getCard().getState()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
                 boolean stackable = false;
-                for (CardStack s : this) {
-                    Card otherCard = s.get(0).getCard();
-                    Card thisCard = panel.getCard();
-                    if (otherCard.getName().equals(thisCard.getName()) && s.size() < othersStackMax) {
+                for (final CardStack s : this) {
+                    final CardView otherCard = s.get(0).getCard();
+                    final CardStateView otherState = otherCard.getState();
+                    final CardView thisCard = panel.getCard();
+                    final CardStateView thisState = thisCard.getState();
+                    if (otherState.getName().equals(thisState.getName()) && s.size() < othersStackMax) {
                         if (panel.getAttachedPanels().isEmpty()
                             && thisCard.getCounters().equals(otherCard.getCounters())
                             && (thisCard.isSick() == otherCard.isSick())

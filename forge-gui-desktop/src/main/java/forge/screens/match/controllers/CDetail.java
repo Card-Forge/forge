@@ -27,6 +27,7 @@ import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
+import forge.view.CardView;
 
 import java.awt.event.MouseEvent;
 
@@ -45,6 +46,7 @@ public enum CDetail implements ICDoc {
      * 
      * @param c &emsp; Card object
      */
+    @Deprecated
     public void showCard(Card c) {
         if (c != null) {
             c = c.getCardForUi();
@@ -56,7 +58,15 @@ public enum CDetail implements ICDoc {
         }
     }
 
-    public void showCard(InventoryItem item) {
+    public void showCard(final CardView c, final boolean isInAltState) {
+        view.getLblFlipcard().setVisible(c != null && c.hasAltState() && Singletons.getControl().mayShowCard(c));
+        view.getPnlDetail().setCard(c, isInAltState);
+        if (view.getParentCell() != null) {
+            view.getParentCell().repaintSelf();
+        }
+    }
+
+    public void showCard(final InventoryItem item) {
         if (item instanceof IPaperCard) {
             showCard(Card.getCardForUi((IPaperCard)item));
         }

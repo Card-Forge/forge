@@ -1,7 +1,6 @@
 package forge.itemmanager.views;
 
 import forge.ImageCache;
-import forge.game.card.Card;
 import forge.assets.FSkinProp;
 import forge.deck.DeckProxy;
 import forge.gui.framework.ILocalRepaint;
@@ -20,6 +19,7 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
+import forge.view.CardView;
 import forge.view.arcane.CardPanel;
 
 import javax.swing.*;
@@ -232,7 +232,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 ItemInfo item = getItemAtPoint(e.getPoint());
                 if (item != null && item.item instanceof IPaperCard) {
                     setLockHoveredItem(true); //lock hoveredItem while zoomer open
-                    Card card = Card.getCardForUi((IPaperCard) item.item);
+                    final CardView card = CardView.getCardForUi((IPaperCard) item.item);
                     CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(card);
                 }
             }
@@ -1099,8 +1099,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (item instanceof IPaperCard) {
                 IPaperCard paperCard = (IPaperCard)item;
                 if (paperCard.isFoil()) {
-                    Card card = Card.getCardForUi(paperCard);
-                    if (card.getFoil() == 0) { //if foil finish not yet established, assign a random one
+                    final CardView card = CardView.getCardForUi(paperCard);
+                    if (card.getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
                         card.setRandomFoil();
                     }
                     CardPanel.drawFoilEffect(g, card, bounds.x, bounds.y, bounds.width, bounds.height, borderSize);

@@ -29,6 +29,7 @@ import forge.item.InventoryItem;
 import forge.screens.match.views.VPicture;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.special.CardZoomer;
+import forge.view.CardView;
 import forge.view.FDialog;
 
 import javax.swing.*;
@@ -57,8 +58,13 @@ public enum CPicture implements ICDoc {
     private final JLabel flipIndicator = this.view.getLblFlipcard();
     private final CardZoomer zoomer = CardZoomer.SINGLETON_INSTANCE;
 
+    @Deprecated
     private Card currentCard = null;
+    @Deprecated
     private CardCharacteristicName displayedState = CardCharacteristicName.Original;
+
+    private CardView currentView = null;
+    private boolean isDisplayAlt = false;
 
     private boolean mayShowCurrentCard() {
         if (currentCard == null) { return false; }
@@ -70,8 +76,9 @@ public enum CPicture implements ICDoc {
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      */
+    @Deprecated
     public void showCard(Card c, boolean showFlipped) {
-        if (c == null) {
+        if (null == c) {
             return;
         }
 
@@ -82,6 +89,24 @@ public enum CPicture implements ICDoc {
         flipIndicator.setVisible(isFlippable);
         picturePanel.setCard(c, mayShowCurrentCard());
         if (showFlipped && isFlippable) {
+            flipCard();
+        }
+    }
+
+    /**
+     * Shows card details and/or picture in sidebar cardview tabber.
+     * 
+     */
+    public void showCard(final CardView c, boolean showAlt) {
+        if (null == c) {
+            return;
+        }
+
+        currentView = c;
+        isDisplayAlt = false;
+        flipIndicator.setVisible(c.hasAltState());
+        picturePanel.setCard(c.getState(showAlt), mayShowCurrentCard());
+        if (showAlt && c.hasAltState()) {
             flipCard();
         }
     }
@@ -137,7 +162,7 @@ public enum CPicture implements ICDoc {
             @Override
             public void onMiddleMouseDown(MouseEvent e) {
                 if (isCardDisplayed()) {
-                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(currentCard, displayedState);
+                    CardZoomer.SINGLETON_INSTANCE.doMouseButtonZoom(currentView);
                 }
             }
 
@@ -162,7 +187,7 @@ public enum CPicture implements ICDoc {
             public void mouseWheelMoved(MouseWheelEvent arg0) {
                 if (isCardDisplayed()) {
                     if (arg0.getWheelRotation() < 0) {
-                        zoomer.doMouseWheelZoom(currentCard, displayedState);
+                        zoomer.doMouseWheelZoom(currentView);
                     }
                 }
             }
@@ -178,10 +203,9 @@ public enum CPicture implements ICDoc {
     }
 
     public void flipCard() {
-        if (isCurrentCardFlippable()) {
-            displayedState = CardDetailUtil.getAlternateState(currentCard, displayedState);
-            picturePanel.setCardImage(displayedState);
-            setCardDetailPanel();
+        if (currentView.hasAltState()) {
+            isDisplayAlt = !isDisplayAlt;
+            picturePanel.setCard(currentView.getState(isDisplayAlt), mayShowCurrentCard());
         }
     }
 
@@ -205,6 +229,7 @@ public enum CPicture implements ICDoc {
         currentCard.setState(temp);
     }
 
+    @Deprecated
     private boolean isCurrentCardFlippable() {
         if (!mayShowCurrentCard()) { return false; }
 

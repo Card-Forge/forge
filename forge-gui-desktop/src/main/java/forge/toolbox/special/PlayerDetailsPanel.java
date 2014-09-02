@@ -1,35 +1,36 @@
 package forge.toolbox.special;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 
 import forge.assets.FSkinProp;
 import forge.card.MagicColor;
-import forge.game.mana.ManaPool;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
 import forge.properties.ForgePreferences;
 import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
+import forge.view.PlayerView;
 
 
 public class PlayerDetailsPanel extends JPanel {
     private static final long serialVersionUID = 8444559244193214459L;
     
-    private Player player;
+    private PlayerView player;
     
     // Info labels
     private FLabel lblHand = getBuiltFLabel(FSkinProp.IMG_ZONE_HAND, "99", "Cards in hand");
@@ -47,8 +48,7 @@ public class PlayerDetailsPanel extends JPanel {
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
     }
 
-    public PlayerDetailsPanel(Player player) {
-        
+    public PlayerDetailsPanel(final PlayerView player) {
         this.player = player;
         
         manaLabels.add(Pair.of(getBuiltFLabel(FSkinProp.IMG_MANA_B, "99", "Black mana"), MagicColor.BLACK));
@@ -121,14 +121,14 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
-        this.getLblHand().setText("" + player.getZone(ZoneType.Hand).size());
-        final String handMaxToolTip = player.isUnlimitedHandSize()
+        this.getLblHand().setText("" + player.getHandCards().size());
+        final String handMaxToolTip = player.hasUnlimitedHandSize()
                 ? "no maximum hand size" : String.valueOf(player.getMaxHandSize());
         this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
-        this.getLblGraveyard().setText("" + player.getZone(ZoneType.Graveyard).size());
-        this.getLblLibrary().setText("" + player.getZone(ZoneType.Library).size());
-        this.getLblFlashback().setText("" + player.getCardsActivableInExternalZones(true).size());
-        this.getLblExile().setText("" + player.getZone(ZoneType.Exile).size());
+        this.getLblGraveyard().setText("" + player.getGraveCards().size());
+        this.getLblLibrary().setText("" + player.getLibraryCards().size());
+        this.getLblFlashback().setText("" + player.getFlashbackCards().size());
+        this.getLblExile().setText("" + player.getExileCards().size());
     }
 
     
@@ -158,9 +158,8 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateManaPool() {
-        ManaPool m = player.getManaPool();
-        for(Pair<FLabel, Byte> label : manaLabels)
-            label.getKey().setText(Integer.toString(m.getAmountOfColor(label.getRight())));
+        for (final Pair<FLabel, Byte> label : manaLabels)
+            label.getKey().setText(Integer.toString(player.getMana(label.getRight())));
     }
 
     public FLabel getLblHand() {

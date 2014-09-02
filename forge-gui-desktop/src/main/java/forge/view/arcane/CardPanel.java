@@ -17,30 +17,37 @@
  */
 package forge.view.arcane;
 
-import forge.ImageCache;
-import forge.Singletons;
-import forge.card.CardCharacteristicName;
-import forge.card.CardEdition;
-import forge.card.mana.ManaCost;
-import forge.game.card.Card;
-import forge.game.combat.Combat;
-import forge.gui.CardContainer;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.screens.match.CMatchUI;
-import forge.toolbox.CardFaceSymbols;
-import forge.toolbox.IDisposable;
-import forge.toolbox.FSkin.SkinnedPanel;
-import forge.view.arcane.util.OutlinedLabel;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
+import forge.ImageCache;
+import forge.Singletons;
+import forge.card.CardEdition;
+import forge.card.mana.ManaCost;
+import forge.gui.CardContainer;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
+import forge.screens.match.CMatchUI;
+import forge.toolbox.CardFaceSymbols;
+import forge.toolbox.FSkin.SkinnedPanel;
+import forge.toolbox.IDisposable;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
+import forge.view.arcane.util.OutlinedLabel;
 
 /**
  * <p>
@@ -85,7 +92,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      */
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
-    private Card card;
+    private CardView card;
     private CardPanel attachedToPanel;
     private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
     private boolean tapped;
@@ -110,7 +117,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @param newCard
      *            a {@link forge.game.card.Card} object.
      */
-    public CardPanel(final Card card0) {
+    public CardPanel(final CardView card0) {
         this.card = card0;
 
         this.setBackground(Color.black);
@@ -321,8 +328,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // White border if card is known to have it.
         if (this.getCard() != null && Singletons.getControl().mayShowCard(this.getCard()) && !this.getCard().isFaceDown()) {
-            CardEdition ed = FModel.getMagicDb().getEditions().get(this.getCard().getCurSetCode());
-            if (ed != null && ed.isWhiteBorder() && this.getCard().getFoil() == 0) {
+            CardEdition ed = FModel.getMagicDb().getEditions().get(this.getCard().getSetCode());
+            if (ed != null && ed.isWhiteBorder() && this.getCard().getFoilIndex() == 0) {
                 g2d.setColor(Color.white);
                 int ins = 1;
                 g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
@@ -351,12 +358,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         if (showCardManaCostOverlay() && this.cardWidth < 200) {
-            boolean showSplitMana = card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original;
+            final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
-                drawManaCost(g, card.getManaCost(), 0);
+                drawManaCost(g, card.getState().getManaCost(), 0);
             } else {
-                drawManaCost(g, card.getRules().getMainPart().getManaCost(), +12);
-                drawManaCost(g, card.getRules().getOtherPart().getManaCost(), -12);
+                drawManaCost(g, card.getOriginal().getManaCost(), +12);
+                drawManaCost(g, card.getAlternate().getManaCost(), -12);
             }
         }
 
@@ -382,17 +389,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int stateXSymbols = (this.cardXOffset + (this.cardWidth / 2)) - 16;
         final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16;
 
-        Combat combat = card.getGame().getCombat();
-        if (combat != null) {
-            if (combat.isAttacking(card)) {
-                CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
-            }
-            if (combat.isBlocking(card)) {
-                CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
-            }
+        if (card.isAttacking()) {
+            CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
+        }
+        if (card.isBlocking()) {
+            CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
         }
 
-        if (card.isSick() && card.isInPlay()) {
+        if (card.isSick()) {
             CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols);
         }
 
@@ -409,9 +413,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 this.cardWidth, this.cardHeight, Math.round(this.cardWidth * BLACK_BORDER_SIZE));
     }
 
-    public static void drawFoilEffect(Graphics g, Card card, int x, int y, int width, int height, int borderSize) {
+    public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
         if (isPreferenceEnabled(FPref.UI_OVERLAY_FOIL_EFFECT)) {
-            int foil = card.getFoil();
+            int foil = card2.getFoilIndex();
             if (foil > 0) {
                 CardFaceSymbols.drawOther(g, String.format("foil%02d", foil),
                         x + borderSize, y + borderSize, width - 2 * borderSize, height - 2 * borderSize);
@@ -479,7 +483,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final String toString() {
-        return this.getCard().getName();
+        return this.getCard().toString();
     }
 
     /**
@@ -610,27 +614,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             this.titleText.setText("");
         }
         else {
-            this.titleText.setText(card.getName());
+            this.titleText.setText(card.getState().getName());
         }
 
         int damage = card.getDamage();
         this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
         // Card Id overlay
-        this.cardIdText.setText(Integer.toString(card.getUniqueNumber()));
+        this.cardIdText.setText(Integer.toString(card.getId()));
     }
 
     public final void updatePTOverlay() {
         // P/T overlay
+        final CardStateView state = card.getState();
         String sPt = "";
-        if (card.isCreature() && card.isPlaneswalker()) {
-            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCurrentLoyalty());
+        if (state.isCreature() && state.isPlaneswalker()) {
+            sPt = String.format("%d/%d (%d)", state.getPower(), state.getToughness(), state.getLoyalty());
         }
-        else if (card.isCreature()) {
-            sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
+        else if (state.isCreature()) {
+            sPt = String.format("%d/%d", state.getPower(), state.getToughness());
         }
-        else if (card.isPlaneswalker()) {
-            sPt = String.valueOf(card.getCurrentLoyalty());
+        else if (state.isPlaneswalker()) {
+            sPt = String.valueOf(state.getLoyalty());
         }
         this.ptText.setText(sPt);
     }
@@ -641,28 +646,28 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @return the card
      */
     @Override
-    public final Card getCard() {
+    public final CardView getCard() {
         return this.card;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void setCard(final Card card) {
-        if ((this.getCard() != null) && this.getCard().equals(card) && this.isAnimationPanel
+    public final void setCard(final CardView cardView) {
+        if ((this.getCard() != null) && this.getCard().equals(cardView) && this.isAnimationPanel
                 && this.imagePanel.hasImage()) {
             return;
         }
 
-        if (this.card != card) {
+        if (this.card != cardView) {
             this.updatePTOverlay(); //update PT Overlay if card changes
         }
 
-        this.card = card;
+        this.card = cardView;
         if (!this.isShowing()) {
             return;
         }
 
-        final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
+        final BufferedImage image = cardView == null ? null : ImageCache.getImage(cardView, imagePanel.getWidth(), imagePanel.getHeight());
         this.updateText();
 
         this.setImage(image);

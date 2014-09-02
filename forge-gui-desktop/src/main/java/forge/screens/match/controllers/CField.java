@@ -17,14 +17,17 @@
  */
 package forge.screens.match.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
+
 import com.google.common.base.Function;
 
 import forge.LobbyPlayer;
-import forge.UiCommand;
 import forge.Singletons;
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
 import forge.match.input.Input;
@@ -33,19 +36,15 @@ import forge.properties.ForgePreferences;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
+import forge.view.CardView;
+import forge.view.PlayerView;
 
 /**
  * Controls Swing components of a player's field instance.
  */
 public class CField implements ICDoc {
     // The one who owns cards on this side of table
-    private final Player player;
+    private final PlayerView player;
     // Tho one who looks at screen and 'performs actions'
     private final LobbyPlayer viewer;
     private final VField view;
@@ -61,42 +60,44 @@ public class CField implements ICDoc {
     /**
      * Controls Swing components of a player's field instance.
      * 
-     * @param p0 &emsp; {@link forge.game.player.Player}
+     * @param player2 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.screens.match.views.VField}
      * @param playerViewer 
      */
     @SuppressWarnings("serial")
-    public CField(final Player p0, final VField v0, LobbyPlayer playerViewer) {
-        this.player = p0;
+    public CField(final PlayerView player2, final VField v0, LobbyPlayer playerViewer) {
+        this.player = player2;
         this.viewer = playerViewer;
         this.view = v0;
 
-        ZoneAction handAction = new ZoneAction(player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND) {
+        final ZoneAction handAction = new ZoneAction(player.getHandCards(), MatchConstants.HUMANHAND) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ( player.getLobbyPlayer() == viewer || ForgePreferences.DEV_MODE || player.hasKeyword("Play with your hand revealed."))
+                if (player.getLobbyPlayer() == viewer || ForgePreferences.DEV_MODE) {// || player.hasKeyword("Play with your hand revealed."))
                     super.actionPerformed(e);
+                }
             }
         };
-        
-        ZoneAction libraryAction = new ZoneAction(player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY) {
+
+        final ZoneAction libraryAction = new ZoneAction(player.getLibraryCards(), MatchConstants.HUMANLIBRARY) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (ForgePreferences.DEV_MODE)
+                if (ForgePreferences.DEV_MODE) {
                     super.actionPerformed(e);
+                }
             }
         };
-        
-        ZoneAction exileAction = new ZoneAction(player.getZone(ZoneType.Exile), MatchConstants.HUMANEXILED);
-        ZoneAction graveAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANGRAVEYARD);
-        ZoneAction flashBackAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
+
+        final ZoneAction exileAction = new ZoneAction(player.getExileCards(), MatchConstants.HUMANEXILED);
+        final ZoneAction graveAction = new ZoneAction(player.getGraveCards(), MatchConstants.HUMANGRAVEYARD);
+        final ZoneAction flashBackAction = new ZoneAction(player.getFlashbackCards(), MatchConstants.HUMANFLASHBACK) {
             @Override
-            protected List<Card> getCardsAsIterable() {
-                return player.getCardsActivableInExternalZones(true);
+            protected List<CardView> getCardsAsIterable() {
+                return player.getFlashbackCards();
             }
 
             @Override
-            protected void doAction(final Card c) {
+            protected void doAction(final CardView c) {
                 // activate cards only via your own flashback button
                 if (player.getLobbyPlayer() != CField.this.viewer) {
                     return;
@@ -155,16 +156,6 @@ public class CField implements ICDoc {
 
     @Override
     public void update() {
-    }
-
-    /** @return {@link forge.game.player.Player} */
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    /** @return {@link forge.screens.match.views.VField} */
-    public VField getView() {
-        return this.view;
     }
 
     /* (non-Javadoc)

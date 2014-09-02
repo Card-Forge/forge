@@ -17,19 +17,25 @@
  */
 package forge.gui;
 
-import forge.game.card.Card;
-import forge.screens.match.VMatchUI;
-import forge.screens.match.views.VField;
-import forge.view.arcane.CardPanel;
-
-import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
+import javax.swing.KeyStroke;
+
+import forge.screens.match.VMatchUI;
+import forge.screens.match.views.VField;
+import forge.view.CardView;
+import forge.view.arcane.CardPanel;
 
 /**
  * <p>
@@ -81,15 +87,15 @@ public final class GuiUtils {
     /**
      * Highlight a card on the playfield.
      * 
-     * @param c
+     * @param card
      *           a card to be highlighted
      */
-    public static void setPanelSelection(final Card c) {
+    public static void setPanelSelection(final CardView card) {
         mainLoop:
-        for (VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            List<CardPanel> panels = v.getTabletop().getCardPanels();
-            for (CardPanel p : panels) {
-                if (p.getCard().equals(c)) {
+        for (final VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            final List<CardPanel> panels = v.getTabletop().getCardPanels();
+            for (final CardPanel p : panels) {
+                if (p.getCard().equals(card)) {
                     p.setSelected(true);
                     break mainLoop;
                 }

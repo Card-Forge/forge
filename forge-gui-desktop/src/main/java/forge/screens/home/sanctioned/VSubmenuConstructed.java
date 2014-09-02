@@ -321,7 +321,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, true,
         		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        CardDetailPanel vgdDetail = new CardDetailPanel(null);
+        CardDetailPanel vgdDetail = new CardDetailPanel();
         vgdAvatarDetails.add(vgdDetail);
 
         vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));

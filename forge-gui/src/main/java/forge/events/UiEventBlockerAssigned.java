@@ -1,19 +1,19 @@
 package forge.events;
 
-import forge.game.card.Card;
+import forge.view.CardView;
 
 public class UiEventBlockerAssigned extends UiEvent {
 
-    public final Card blocker;
-    public final Card attackerBeingBlocked; 
+    public final CardView blocker;
+    public final CardView attackerBeingBlocked; 
 
-    public UiEventBlockerAssigned(Card card, Card currentAttacker) {
+    public UiEventBlockerAssigned(final CardView card, final CardView currentAttacker) {
         blocker = card;
         attackerBeingBlocked = currentAttacker;
     }
 
     @Override
-    public <T> T visit(IUiEventVisitor<T> visitor) {
+    public <T> T visit(final IUiEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
     

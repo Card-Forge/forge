@@ -17,18 +17,18 @@
  */
 package forge.match.input;
 
-import forge.FThreads;
-import forge.GuiBase;
-import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.player.Player;
-import forge.game.spellability.SpellAbility;
-import forge.util.ITriggerEvent;
-import forge.util.gui.SOptionPane;
-
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
+
+import forge.FThreads;
+import forge.GuiBase;
+import forge.game.spellability.SpellAbility;
+import forge.util.ITriggerEvent;
+import forge.util.gui.SOptionPane;
+import forge.view.CardView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 /**
  * <p>
@@ -42,11 +42,11 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private Game game = null;
+    private IGameView game = null;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
     
-    public void setGame(Game game0) {
+    public void setGame(IGameView game0) {
         game = game0;
         GuiBase.getInterface().getInputQueue().addObserver(this);
     }
@@ -120,8 +120,8 @@ public class InputProxy implements Observer {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public final void selectPlayer(final Player player, final ITriggerEvent triggerEvent) {
-        Input inp = getInput();
+    public final void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
+        final Input inp = getInput();
         if (inp != null) {
             inp.selectPlayer(player, triggerEvent);
         }
@@ -132,20 +132,20 @@ public class InputProxy implements Observer {
      * selectCard.
      * </p>
      * 
-     * @param card
+     * @param cardView
      *            a {@link forge.game.card.Card} object.
      * @param triggerEvent
      */
-    public final boolean selectCard(final Card card, final ITriggerEvent triggerEvent) {
-        Input inp = getInput();
+    public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
+        final Input inp = getInput();
         if (inp != null) {
-            return inp.selectCard(card, triggerEvent);
+            return inp.selectCard(cardView, triggerEvent);
         }
         return false;
     }
 
-    public final void selectAbility(SpellAbility ab) {
-    	Input inp = getInput();
+    public final void selectAbility(final SpellAbility ab) {
+    	final Input inp = getInput();
         if (inp != null) {
             inp.selectAbility(ab);
         }

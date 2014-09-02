@@ -1,17 +1,16 @@
 package forge.screens.match;
 
-import forge.Singletons;
-import forge.card.CardCharacteristicName;
-import forge.game.card.Card;
-import forge.game.card.CardFactory;
-import forge.game.zone.PlayerZone;
+import java.awt.event.ActionEvent;
+import java.util.List;
+
+import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Iterables;
+
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;
 import forge.match.MatchConstants;
-
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 
 /**
  * Receives click and programmatic requests for viewing data stacks in the
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class ZoneAction extends ForgeAction {
     private static final long serialVersionUID = -5822976087772388839L;
-    private final PlayerZone zone;
+    private final Iterable<CardView> cards;
     private final String title;
 
     /**
@@ -33,10 +32,10 @@ public class ZoneAction extends ForgeAction {
      * @param property
      *            &emsp; String obj
      */
-    public ZoneAction(final PlayerZone zone, MatchConstants property) {
+    public ZoneAction(final Iterable<CardView> cards, final MatchConstants property) {
         super(property);
         this.title = property.title;
-        this.zone = zone;
+        this.cards = Iterables.unmodifiableIterable(cards);
     }
 
     /**
@@ -45,37 +44,33 @@ public class ZoneAction extends ForgeAction {
      */
     @Override
     public void actionPerformed(final ActionEvent e) {
-        final List<Card> choices = this.getCardsAsIterable();
-        if (choices.isEmpty()) {
+        final Iterable<CardView> choices = this.getCardsAsIterable();
+        if (!choices.iterator().hasNext()) {
             GuiChoose.reveal(this.title, "no cards");
             return;
         } 
 
-        final ArrayList<Card> choices2 = new ArrayList<Card>();
-        for (Card crd : choices) {
-            Card toAdd = crd;
-            if (crd.isFaceDown()) {
-                if (Singletons.getControl().mayShowCard(crd)) {
-                    toAdd = CardFactory.copyCard(crd, false);
-                    toAdd.setState(CardCharacteristicName.Original);
-                } else {
-                    toAdd = new Card(0);
-                    toAdd.setName("Face Down");
-                }
-            } 
+        final List<CardStateView> choices2 = Lists.newLinkedList();
+        for (final CardView crd : choices) {
+            final CardStateView toAdd;
+            if (crd.isFaceDown() && crd.hasAltState()) {
+                toAdd = crd.getAlternate();
+            } else {
+                toAdd = crd.getState();
+            }
             choices2.add(toAdd);
         }
 
-        final Card choice = GuiChoose.oneOrNone(this.title, choices2);
+        final CardStateView choice = GuiChoose.oneOrNone(this.title, choices2);
         if (choice != null) {
-            this.doAction(choice);
+            this.doAction(choice.getCard());
         }
     }
 
-    protected List<Card> getCardsAsIterable() {
-        return this.zone.getCards();
+    protected Iterable<CardView> getCardsAsIterable() {
+        return cards;
     }
 
-    protected void doAction(final Card c) {
+    protected void doAction(final CardView c) {
     }
 } // End ZoneAction

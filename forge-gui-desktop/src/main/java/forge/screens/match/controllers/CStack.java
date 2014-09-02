@@ -1,12 +1,12 @@
 package forge.screens.match.controllers;
 
 import forge.UiCommand;
-import forge.game.player.Player;
-import forge.game.zone.MagicStack;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.screens.match.views.VStack;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 /** 
  * Controls the combat panel in the match UI.
@@ -18,8 +18,8 @@ public enum CStack implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private MagicStack model;
-    private Player localPlayer;
+    private IGameView model;
+    private PlayerView localPlayer;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -42,8 +42,9 @@ public enum CStack implements ICDoc {
         VStack.SINGLETON_INSTANCE.updateStack(model, localPlayer);
     }
 
-    public void setModel(MagicStack model0, Player localPlayer0) { 
-        model = model0;
-        localPlayer = localPlayer0;
+    public void setModel(final IGameView game0, final PlayerView localPlayer) { 
+        model = game0;
+        this.localPlayer = localPlayer;
     }
+
 }

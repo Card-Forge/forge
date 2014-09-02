@@ -14,7 +14,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GuiBase;
-import forge.game.card.Card;
+import forge.view.CardView;
 
 public class SGuiChoose {
     /**
@@ -181,17 +181,17 @@ public class SGuiChoose {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, final CardView referenceCard) {
         return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, final CardView referenceCard) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
     }
 
-    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, Card referenceCard) {
+    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView referenceCard) {
         return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
     }
 
@@ -215,10 +215,9 @@ public class SGuiChoose {
     }
 
     private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
         return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
     }
-
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOneOrNone(final String message, final T[] choices, Comparator<T> comparer) {

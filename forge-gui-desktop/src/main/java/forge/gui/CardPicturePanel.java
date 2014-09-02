@@ -18,21 +18,21 @@
 
 package forge.gui;
 
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
+
 import forge.ImageCache;
 import forge.ImageKeys;
-import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.item.InventoryItem;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.imaging.FImagePanel;
-import forge.toolbox.imaging.FImageUtil;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import forge.toolbox.imaging.FImageUtil;
+import forge.view.CardView.CardStateView;
 
 /**
  * Displays image associated with a card or inventory item.
@@ -48,7 +48,7 @@ public final class CardPicturePanel extends JPanel {
 
     private final FImagePanel panel;
     private BufferedImage currentImage;
-    private boolean mayShowCard;
+    private boolean mayShowObject;
 
     public CardPicturePanel() {
         super(new BorderLayout());
@@ -59,23 +59,21 @@ public final class CardPicturePanel extends JPanel {
 
     public void setCard(final InventoryItem cp) {
         this.displayed = cp;
-        this.mayShowCard = true;
+        this.mayShowObject = true;
         this.setImage();
     }
 
-    //@Override
+    @Deprecated
     public void setCard(final Card c, boolean mayShowCard) {
         this.displayed = c;
-        this.mayShowCard = mayShowCard;
+        this.mayShowObject = mayShowCard;
         this.setImage();
     }
 
-    public void setCardImage(CardCharacteristicName flipState) {
-        BufferedImage image = FImageUtil.getImage((Card)displayed, flipState);
-        if (image != null && image != this.currentImage) {
-            this.currentImage = image;
-            this.panel.setImage(image, getAutoSizeImageMode());
-        }
+    public void setCard(final CardStateView c, final boolean mayShowCard) {
+        this.displayed = c;
+        this.mayShowObject = mayShowCard;
+        this.setImage();
     }
 
     public void setImage() {
@@ -88,12 +86,17 @@ public final class CardPicturePanel extends JPanel {
 
     public BufferedImage getImage() {
         if (displayed instanceof InventoryItem) {
-            InventoryItem item = (InventoryItem) displayed;
+            final InventoryItem item = (InventoryItem) displayed;
             return ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);
         }
         else if (displayed instanceof Card) {
-            if (mayShowCard) {
+            if (mayShowObject) {
                 return FImageUtil.getImage((Card)displayed);
+            }
+            return ImageCache.getOriginalImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
+        } else if (displayed instanceof CardStateView) {
+            if (mayShowObject) {
+                return FImageUtil.getImage((CardStateView)displayed);
             }
             return ImageCache.getOriginalImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
         }

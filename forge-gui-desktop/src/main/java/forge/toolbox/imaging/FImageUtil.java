@@ -18,6 +18,10 @@
 
 package forge.toolbox.imaging;
 
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+
 import forge.ImageCache;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
@@ -25,10 +29,7 @@ import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin.SkinIcon;
-
-import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
+import forge.view.CardView.CardStateView;
 
 /**
  * Common image-related routines specific to Forge images. 
@@ -38,7 +39,8 @@ import java.awt.image.ColorModel;
  */
 public final class FImageUtil {  
     private FImageUtil() {}
-    
+
+    @Deprecated
     public static BufferedImage getImage(Card card, CardCharacteristicName state) {
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(state), true);
         int foilIndex = card.getFoil();
@@ -56,6 +58,7 @@ public final class FImageUtil {
      * For double-sided cards, returns the front-side image.<br>
      * For flip cards, returns the un-flipped image. 
      */
+    @Deprecated
     public static BufferedImage getImage(Card card) {
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
         int foilIndex = card.getFoil();
@@ -64,7 +67,24 @@ public final class FImageUtil {
         }
         return image;
     }
-        
+
+    /**
+     * Gets the image associated with a card.
+     * <p>
+     * Adds a random foil effect if enabled.
+     * <p>
+     * For double-sided cards, returns the front-side image.<br>
+     * For flip cards, returns the un-flipped image. 
+     */
+    public static BufferedImage getImage(final CardStateView card) {
+        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
+        final int foilIndex = card.getCard().getFoilIndex();
+        if (image != null && foilIndex > 0) { 
+            image = getImageWithFoilEffect(image, foilIndex);
+        }
+        return image;
+    }
+
     /**
      * Applies a foil effect to a card image.
      */

@@ -21,12 +21,12 @@ import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
 
-import forge.game.Game;
 import forge.limited.LimitedWinLoseController;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
+import forge.view.IGameView;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -46,9 +46,9 @@ public class LimitedWinLose extends ControlWinLose {
      * @param view0 {@link forge.screens.match.ViewWinLose}
      * @param match {@link forge.game.Match}
      */
-    public LimitedWinLose(final ViewWinLose view0, Game lastGame) {
-        super(view0, lastGame);
-        controller = new LimitedWinLoseController(view0, lastGame) {
+    public LimitedWinLose(final ViewWinLose view0, final IGameView game0) {
+        super(view0, game0);
+        controller = new LimitedWinLoseController(view0, game0) {
             @Override
             protected void showOutcome(Runnable runnable) {
                 runnable.run(); //just run on GUI thread

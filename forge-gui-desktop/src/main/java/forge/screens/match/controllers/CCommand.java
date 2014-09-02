@@ -18,24 +18,25 @@
 package forge.screens.match.controllers;
 
 import forge.UiCommand;
-import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VCommand;
+import forge.view.PlayerView;
+
 /**
  * Controls Swing components of a player's command instance.
  */
 public class CCommand implements ICDoc {
-    private final Player player;
+    private final PlayerView player;
     private final VCommand view;
 
     /**
      * Controls Swing components of a player's command instance.
      * 
-     * @param p0 &emsp; {@link forge.game.player.Player}
+     * @param player2 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.screens.match.views.VCommand}
      */
-    public CCommand(final Player p0, final VCommand v0) {
-        this.player = p0;
+    public CCommand(final PlayerView player2, final VCommand v0) {
+        this.player = player2;
         this.view = v0;
     }
 
@@ -48,7 +49,7 @@ public class CCommand implements ICDoc {
     }
 
     /** @return {@link forge.game.player.Player} */
-    public Player getPlayer() {
+    public PlayerView getPlayer() {
         return this.player;
     }
 

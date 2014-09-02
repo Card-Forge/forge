@@ -1,14 +1,30 @@
 package forge.player;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import forge.LobbyPlayer;
 import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -20,11 +36,14 @@ import forge.deck.DeckSection;
 import forge.events.UiEventAttackerDeclared;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameLog;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
+import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -37,6 +56,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
+import forge.game.player.RegisteredPlayer;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -48,7 +68,17 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.match.input.*;
+import forge.match.input.ButtonUtil;
+import forge.match.input.InputAttack;
+import forge.match.input.InputBase;
+import forge.match.input.InputBlock;
+import forge.match.input.InputConfirm;
+import forge.match.input.InputConfirmMulligan;
+import forge.match.input.InputPassPriority;
+import forge.match.input.InputProliferate;
+import forge.match.input.InputSelectCardsForConvoke;
+import forge.match.input.InputSelectCardsFromList;
+import forge.match.input.InputSelectEntitiesFromList;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
@@ -57,13 +87,12 @@ import forge.util.TextUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
 import forge.util.gui.SOptionPane;
-
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
+import forge.view.CardView;
+import forge.view.GameEntityView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
+import forge.view.StackItemView;
+import forge.view.ViewUtil;
 
 
 /** 
@@ -71,13 +100,21 @@ import java.util.*;
  * 
  * Handles phase skips for now.
  */
-public class PlayerControllerHuman extends PlayerController {
+public class PlayerControllerHuman extends PlayerController implements IGameView {
     public PlayerControllerHuman(Game game0, Player p, LobbyPlayer lp) {
         super(game0, p, lp);
+        // aggressively cache a view for each player
+        for (final Player player : game.getRegisteredPlayers()) {
+            getPlayerView(player);
+        }
+        // aggressively cache a view for each card
+        for (final Card c : game.getCardsInGame()) {
+            getCardView(c);
+        }
     }
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        return !GuiBase.getInterface().stopAtPhase(turn, phase);
+        return !GuiBase.getInterface().stopAtPhase(getPlayerView(turn), phase);
     }
 
     /**
@@ -162,27 +199,31 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#assignCombatDamage()
      */
     @Override
-    public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender, boolean overrideOrder) {
+    public Map<Card, Integer> assignCombatDamage(final Card attacker,
+            final List<Card> blockers, final int damageDealt,
+            final GameEntity defender, final boolean overrideOrder) {
         // Attacker is a poor name here, since the creature assigning damage
         // could just as easily be the blocker.
-        Map<Card, Integer> map;
+        final Map<Card, Integer> map = Maps.newHashMap();
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
-            map = new HashMap<Card, Integer>();
             map.put(null, damageDealt);
-        }
-        else {
+        } else {
+            final List<CardView> vBlockers = Lists.transform(blockers, FN_GET_CARD_VIEW);
             if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
-                map = GuiBase.getInterface().getDamageToAssign(attacker, blockers, damageDealt, defender, overrideOrder);
-            }
-            else {
-                map = new HashMap<Card, Integer>();
+                final CardView vAttacker = getCardView(attacker);
+                final GameEntityView vDefender = getGameEntityView(defender);
+                final Map<CardView, Integer> result = GuiBase.getInterface().getDamageToAssign(vAttacker, vBlockers, damageDealt, vDefender, overrideOrder);
+                for (final Entry<CardView, Integer> e : result.entrySet()) {
+                    map.put(getCard(e.getKey()), e.getValue());
+                }
+            } else {
                 map.put(blockers.get(0), damageDealt);
             }
         }
         return map;
     }
 
-    private final boolean assignDamageAsIfNotBlocked(Card attacker) {
+    private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
         return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                 && SGuiDialog.confirm(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
@@ -235,8 +276,9 @@ public class PlayerControllerHuman extends PlayerController {
             Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional);
             return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
         }
-        GuiBase.getInterface().setPanelSelection(sa.getHostCard());
-        
+
+        GuiBase.getInterface().setPanelSelection(getCardView(sa.getHostCard()));
+
         // try to use InputSelectCardsFromList when possible 
         boolean cardsAreInMyHandOrBattlefield = true;
         for(Card c : sourceList) {
@@ -255,7 +297,7 @@ public class PlayerControllerHuman extends PlayerController {
             return Lists.newArrayList(sc.getSelected());
         }
 
-        return SGuiChoose.many(title, "Chosen Cards", min, max, sourceList, sa.getHostCard());
+        return SGuiChoose.many(title, "Chosen Cards", min, max, sourceList, getCardView(sa.getHostCard()));
     }
 
     @Override
@@ -384,21 +426,27 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
-        GuiBase.getInterface().setPanelSelection(attacker);
-        return SGuiChoose.order("Choose Damage Order for " + attacker, "Damaged First", blockers, attacker);
-    }
-    
-    @Override
-    public List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
-    	GuiBase.getInterface().setPanelSelection(attacker);
-    	return SGuiChoose.insertInList("Choose blocker after which to place " + attacker + " in damage order; cancel to place it first", blocker, oldBlockers);
+    public List<Card> orderBlockers(final Card attacker, final List<Card> blockers) {
+        final CardView vAttacker = getCardView(attacker);
+        GuiBase.getInterface().setPanelSelection(vAttacker);
+        final List<CardView> choices = SGuiChoose.order("Choose Damage Order for " + vAttacker, "Damaged First", getCardViews(blockers), vAttacker);
+        return getCards(choices);
     }
 
     @Override
-    public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
-        GuiBase.getInterface().setPanelSelection(blocker);
-        return SGuiChoose.order("Choose Damage Order for " + blocker, "Damaged First", attackers, blocker);
+    public List<Card> orderBlocker(final Card attacker, final Card blocker, final List<Card> oldBlockers) {
+        final CardView vAttacker = getCardView(attacker);
+        GuiBase.getInterface().setPanelSelection(vAttacker);
+        final List<CardView> choices = SGuiChoose.insertInList("Choose blocker after which to place " + vAttacker + " in damage order; cancel to place it first", getCardView(blocker), getCardViews(oldBlockers));
+        return getCards(choices);
+    }
+
+    @Override
+    public List<Card> orderAttackers(final Card blocker, final List<Card> attackers) {
+        final CardView vBlocker = getCardView(blocker);
+        GuiBase.getInterface().setPanelSelection(vBlocker);
+        final List<CardView> choices = SGuiChoose.order("Choose Damage Order for " + vBlocker, "Damaged First", getCardViews(attackers), vBlocker);
+        return getCards(choices);
     }
 
     /* (non-Javadoc)
@@ -630,7 +678,7 @@ public class PlayerControllerHuman extends PlayerController {
                 //ensure they're declared and then delay slightly so user can see as much
                 for (Pair<Card, GameEntity> attacker : mandatoryAttackers) {
                     combat.addAttacker(attacker.getLeft(), attacker.getRight());
-                    GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(attacker.getLeft(), attacker.getRight()));
+                    GuiBase.getInterface().fireEvent(new UiEventAttackerDeclared(getCardView(attacker.getLeft()), getGameEntityView(attacker.getRight())));
                 }
                 try {
                     Thread.sleep(FControlGamePlayback.combatDelay);
@@ -1167,5 +1215,343 @@ public class PlayerControllerHuman extends PlayerController {
 
     public boolean isGuiPlayer() {
         return lobbyPlayer == GuiBase.getInterface().getGuiPlayer();
+    }
+
+    /*
+     * What follows are the View methods.
+     */
+
+    /** Cache of players. */
+    private final BiMap<Player, PlayerView> players
+        = HashBiMap.create();
+    /** Cache of cards. */
+    private final BiMap<Card, CardView> cards
+        = HashBiMap.create();
+    /** Cache of stack items. */
+    private final BiMap<SpellAbilityStackInstance, StackItemView> stackItems
+        = HashBiMap.create();
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#isCommander()
+     */
+    @Override
+    public boolean isCommander() {
+        return game.getRules().hasAppliedVariant(GameType.Commander);
+    }
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#getGameType()
+     */
+    @Override
+    public GameType getGameType() {
+        return this.game.getMatch().getRules().getGameType();
+    }
+
+    @Override
+    public boolean isWinner(final LobbyPlayer p) {
+        return game.getOutcome() == null ? null : game.getOutcome().isWinner(p);
+    }
+
+    @Override
+    public LobbyPlayer getWinningPlayer() {
+        return game.getOutcome() == null ? null : game.getOutcome().getWinningLobbyPlayer();
+    }
+
+    @Override
+    public int getWinningTeam() {
+        return game.getOutcome() == null ? -1 : game.getOutcome().getWinningTeam();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#isFirstGameInMatch()
+     */
+    @Override
+    public boolean isFirstGameInMatch() {
+        return this.game.getMatch().getPlayedGames().isEmpty();
+    }
+
+    @Override
+    public boolean isMatchOver() {
+        return this.game.getMatch().isMatchOver();
+    }
+
+    @Override
+    public int getNumPlayedGamesInMatch() {
+        return this.game.getMatch().getPlayedGames().size();
+    }
+
+    @Override
+    public boolean isMatchWonBy(final LobbyPlayer p) {
+        return this.game.getMatch().isWonBy(p);
+    }
+
+    @Override
+    public int getGamesWonBy(LobbyPlayer p) {
+        return this.game.getMatch().getGamesWonBy(p);
+    }
+
+    @Override
+    public GameOutcome.AnteResult getAnteResult() {
+        return this.game.getOutcome().anteResult.get(player);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#isCombatDeclareAttackers()
+     */
+    @Override
+    public boolean isCombatDeclareAttackers() {
+        return game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && game.getCombat() != null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#isGameOver()
+     */
+    @Override
+    public boolean isGameOver() {
+        return game.isGameOver();
+    }
+
+    @Override
+    public int getPoisonCountersToLose() {
+        return game.getRules().getPoisonCountersToLose();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#subscribeToEvents(java.lang.Object)
+     */
+    @Override
+    public void subscribeToEvents(final Object subscriber) {
+        game.subscribeToEvents(subscriber);
+    }
+
+    // the following methods should eventually be replaced by methods returning
+    // View classes
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#getCombat()
+     */
+    @Override
+    public Combat getCombat() {
+        return game.getCombat();
+    }
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#getGameLog()
+     */
+    @Override
+    public GameLog getGameLog() {
+        return game.getGameLog();
+    }
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#getGuiRegisteredPlayer(forge.LobbyPlayer)
+     */
+    @Override
+    public RegisteredPlayer getGuiRegisteredPlayer(final LobbyPlayer p) {
+        for (final RegisteredPlayer player : game.getMatch().getPlayers()) {
+            if (player.getPlayer() == p) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#getRegisteredPlayers()
+     */
+    @Override
+    public List<PlayerView> getPlayers() {
+        return Lists.transform(game.getRegisteredPlayers(), FN_GET_PLAYER_VIEW);
+    }
+
+    @Override
+    public PlayerView getPlayerTurn() {
+        return getPlayerView(game.getPhaseHandler().getPlayerTurn());
+    }
+
+    @Override
+    public PhaseType getPhase() {
+        return game.getPhaseHandler().getPhase();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#getStack()
+     */
+    @Override
+    public List<StackItemView> getStack() {
+        final List<StackItemView> items = Collections.unmodifiableList(getStack(game.getStack()));
+        // clear the cache
+        stackItems.keySet().retainAll(items);
+        return items;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.IGameView#peekStack()
+     */
+    @Override
+    public StackItemView peekStack() {
+        final SpellAbilityStackInstance top =
+                Iterables.getFirst(game.getStack(), null);
+        if (top == null) {
+            return null;
+        }
+        return getStack(Lists.newArrayList(top)).iterator().next();
+    }
+
+    private List<StackItemView> getStack(final Iterable<SpellAbilityStackInstance> stack) {
+        final List<StackItemView> items = Lists.newLinkedList();
+        for (final SpellAbilityStackInstance si : stack) {
+            if (stackItems.containsKey(si)) {
+                items.add(stackItems.get(si));
+            } else {
+                final StackItemView newItem = new StackItemView(
+                        si.getSpellAbility().toUnsuppressedString(),
+                        si.getSpellAbility().getSourceTrigger(),
+                        si.getStackDescription(), getCardView(si.getSourceCard()),
+                        getPlayerView(si.getActivator()), si.isAbility(),
+                        si.isOptionalTrigger());
+                items.add(newItem);
+                stackItems.put(si, newItem);
+            }
+        }
+        return items;
+    }
+
+    private GameEntityView getGameEntityView(final GameEntity e) {
+        if (e instanceof Card) {
+            return getCardView((Card)e);
+        } else if (e instanceof Player) {
+            return getPlayerView((Player)e);
+        }
+        return null;
+    }
+
+    private PlayerView getPlayerView(final Player p) {
+        if (p == null) {
+            return null;
+        }
+
+        final PlayerView view;
+        if (players.containsKey(p)) {
+            view = players.get(p);
+            getPlayerView(p, view);
+        } else {
+            view = new PlayerView(p.getLobbyPlayer(), p.getController());
+            getPlayerView(p, view);
+            players.put(p, view);
+        }
+        return view;
+    }
+
+    private final Function<Player, PlayerView> FN_GET_PLAYER_VIEW = new Function<Player, PlayerView>() {
+        @Override
+        public PlayerView apply(final Player input) {
+            return getPlayerView(input);
+        }
+    };
+
+    private Player getPlayer(final PlayerView p) {
+        return players.inverse().get(p);
+    }
+
+    private void getPlayerView(final Player p, final PlayerView view) {
+        view.setCommanderInfo(CardFactoryUtil.getCommanderInfo(p).trim().replace("\r\n", "; "));
+        view.setKeywords(p.getKeywords());
+        view.setLife(p.getLife());
+        view.setMaxHandSize(p.getMaxHandSize());
+        view.setNumDrawnThisTurn(p.getNumDrawnThisTurn());
+        view.setPoisonCounters(p.getPoisonCounters());
+        view.setPreventNextDamage(p.getPreventNextDamageTotalShields());
+        view.setHasUnlimitedHandSize(p.isUnlimitedHandSize());
+        view.setAnteCards(getCardViews(p.getCardsIn(ZoneType.Ante)));
+        view.setBfCards(getCardViews(p.getCardsIn(ZoneType.Battlefield)));
+        view.setExileCards(getCardViews(p.getCardsIn(ZoneType.Exile)));
+        view.setFlashbackCards(getCardViews(p.getCardsActivableInExternalZones(false)));
+        view.setGraveCards(getCardViews(p.getCardsIn(ZoneType.Graveyard)));
+        view.setHandCards(getCardViews(p.getCardsIn(ZoneType.Hand)));
+        view.setLibraryCards(getCardViews(p.getCardsIn(ZoneType.Library)));
+    }
+
+    private CardView getCardView(final Card c) {
+        if (c == null) {
+            return null;
+        }
+
+        final CardView view;
+        if (cards.containsKey(c)) {
+            view = cards.get(c);
+            writeCardToView(c, view);
+        } else {
+            view = new CardView(c, c.getUniqueNumber());
+            writeCardToView(c, view);
+            cards.put(c, view);
+        }
+        return view;
+    }
+
+    private final Function<Card, CardView> FN_GET_CARD_VIEW = new Function<Card, CardView>() {
+        @Override
+        public CardView apply(final Card input) {
+            return getCardView(input);
+        }
+    };
+
+    private List<CardView> getCardViews(final List<Card> cards) {
+        return Lists.transform(cards, FN_GET_CARD_VIEW);
+    }
+
+    private Card getCard(final CardView c) {
+        return cards.inverse().get(c);
+    }
+
+    private final Function<CardView, Card> FN_GET_CARD = new Function<CardView, Card>() {
+        @Override
+        public Card apply(final CardView input) {
+            return getCard(input);
+        }
+    };
+
+    private List<Card> getCards(final List<CardView> cards) {
+        return Lists.transform(cards, FN_GET_CARD);
+    }
+
+    private void writeCardToView(final Card c, final CardView view) {
+        if (!c.canBeShownTo(player)) {
+            view.getOriginal().reset();
+            view.getAlternate().reset();
+            return;
+        }
+
+        // First, write the values independent of other views.
+        ViewUtil.writeNonDependentCardViewProperties(c, view);
+        // Next, write the values that depend on other views.
+        view.setOwner(getPlayerView(c.getOwner()));
+        view.setController(getPlayerView(c.getController()));
+        view.setAttacking(game.getCombat() != null && game.getCombat().isAttacking(c));
+        view.setBlocking(game.getCombat() != null && game.getCombat().isBlocking(c));
+        view.setChosenPlayer(getPlayerView(c.getChosenPlayer()));
+        view.setEquipping(getCardView(Iterables.getFirst(c.getEquipping(), null)));
+        view.setEquippedBy(getCardViews(c.getEquippedBy()));
+        view.setEnchantingCard(getCardView(c.getEnchantingCard()));
+        view.setEnchantingPlayer(getPlayerView(c.getEnchantingPlayer()));
+        view.setEnchantedBy(getCardViews(c.getEnchantedBy()));
+        view.setFortifiedBy(getCardViews(c.getFortifiedBy()));
+        view.setGainControlTargets(getCardViews(c.getGainControlTargets()));
+        view.setCloneOrigin(getCardView(c.getCloneOrigin()));
+        view.setImprinted(getCardViews(c.getImprinted()));
+        view.setHauntedBy(getCardViews(c.getHauntedBy()));
+        view.setHaunting(getCardView(c.getHaunting()));
+        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : Iterables.transform(c.getMustBlockCards(), FN_GET_CARD_VIEW));
+    }
+
+    @Override
+    public boolean mayShowCard(final CardView c, final Player viewer) {
+        return cards.inverse().get(c).canBeShownTo(viewer);
+    }
+
+    @Override
+    public boolean getDisableAutoYields() {
+        return this.game.getDisableAutoYields();
+    }
+    @Override
+    public void setDisableAutoYields(final boolean b) {
+        this.game.setDisableAutoYields(b);
     }
 }

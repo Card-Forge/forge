@@ -17,6 +17,26 @@
  */
 package forge.control;
 
+import java.awt.Component;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.FThreads;
 import forge.GuiBase;
 import forge.ImageCache;
@@ -35,15 +55,21 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
-import forge.gui.framework.*;
-import forge.player.GamePlayerUtil;
-import forge.player.LobbyPlayerHuman;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
+import forge.gui.framework.InvalidLayoutFileException;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SLayoutIO;
+import forge.gui.framework.SOverflowUtil;
+import forge.gui.framework.SResizingUtil;
 import forge.match.input.InputQueue;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
+import forge.player.LobbyPlayerHuman;
+import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
@@ -66,19 +92,11 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
+import forge.view.CardView;
 import forge.view.FFrame;
 import forge.view.FView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 /**
  * <p>
@@ -97,7 +115,7 @@ public enum FControl implements KeyEventDispatcher {
     private FScreen currentScreen;
     private boolean altKeyLastDown;
     private CloseAction closeAction;
-    private Player localPlayer;
+    private PlayerView localPlayer;
 
     public static enum CloseAction {
         NONE,
@@ -352,6 +370,7 @@ public enum FControl implements KeyEventDispatcher {
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 
+    @Deprecated
     public Player getCurrentPlayer() {
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
@@ -369,8 +388,12 @@ public enum FControl implements KeyEventDispatcher {
         return null;
     }
 
+    @Deprecated
     public boolean mayShowCard(Card c) {
         return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
+    }
+    public boolean mayShowCard(final CardView c) {
+        return gameView == null || !gameHasHumanPlayer || gameView.mayShowCard(c, getCurrentPlayer());
     }
 
     /**
@@ -382,13 +405,19 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     private Game game;
+    private IGameView gameView;
     private boolean gameHasHumanPlayer;
 
+    @Deprecated
     public Game getObservedGame() {
         return game;
     }
 
-    public Player getLocalPlayer() {
+    public IGameView getGameView() {
+        return this.gameView;
+    }
+
+    public PlayerView getLocalPlayer() {
         return localPlayer;
     }
 
@@ -428,6 +457,14 @@ public enum FControl implements KeyEventDispatcher {
         return inputQueue;
     }
 
+    public final void startGameInSameMatch() {
+        this.startGameWithUi(game.getMatch());
+    }
+    public final void startGameAndClearMatch() {
+        game.getMatch().clearGamesPlayed();
+        startGameInSameMatch();
+    }
+
     public final void startGameWithUi(final Match match) {
         if (this.game != null) {
             this.setCurrentScreen(FScreen.MATCH_SCREEN);
@@ -436,15 +473,23 @@ public enum FControl implements KeyEventDispatcher {
             return; //TODO: See if it's possible to run multiple games at once without crashing
         }
         setPlayerName(match.getPlayers());
-        final Game newGame = match.createGame();
-        attachToGame(newGame);
-        
+        this.game = match.createGame();
+        final LobbyPlayer me = getGuiPlayer();
+        for (final Player p : this.game.getPlayers()) {
+            if (p.getLobbyPlayer().equals(me)) {
+                this.gameView = (IGameView) p.getController();
+                break;
+            }
+        }
+
+        attachToGame(this.gameView);
+
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                match.startGame(newGame);
+                match.startGame(game);
             }
         });
         SOverlayUtils.hideOverlay();
@@ -459,11 +504,11 @@ public enum FControl implements KeyEventDispatcher {
 
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
     private final FControlGamePlayback playbackControl = new FControlGamePlayback();
-    private void attachToGame(Game game0) {
-        if (game0.getRules().getGameType() == GameType.Quest) {
+    private void attachToGame(final IGameView game0) {
+        if (game0.getGameType().equals(GameType.Quest)) {
             QuestController qc = FModel.getQuest();
             // Reset new list when the Match round starts, not when each game starts
-            if (game0.getMatch().getPlayedGames().isEmpty()) {
+            if (game0.isFirstGameInMatch()) {
                 qc.getCards().resetNewList();
             }
             game0.subscribeToEvents(qc); // this one listens to player's mulligans ATM
@@ -471,49 +516,45 @@ public enum FControl implements KeyEventDispatcher {
 
         inputQueue = new InputQueue();
 
-        this.game = game0;
-        game.subscribeToEvents(Singletons.getControl().getSoundSystem());
+        game0.subscribeToEvents(Singletons.getControl().getSoundSystem());
 
         //switch back to match screen music
         Singletons.getControl().getSoundSystem().setBackgroundMusic(MusicPlaylist.MATCH);
 
-        LobbyPlayer humanLobbyPlayer = getGuiPlayer();
+        final LobbyPlayer humanLobbyPlayer = getGuiPlayer();
         // The UI controls should use these game data as models
-        CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
+        final List<PlayerView> players = game0.getPlayers();
+        CMatchUI.SINGLETON_INSTANCE.initMatch(players, humanLobbyPlayer);
 
         localPlayer = null;
-        for (Player p : game.getPlayers()) {
+        gameHasHumanPlayer = false;
+        for (final PlayerView p : players) {
             if (p.getLobbyPlayer() == humanLobbyPlayer) {
                 localPlayer = p;
+                gameHasHumanPlayer = true;
                 break;
             }
         }
 
-        CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
-        CStack.SINGLETON_INSTANCE.setModel(game.getStack(), localPlayer);
-        CPlayers.SINGLETON_INSTANCE.setModel(game);
-        CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
+        CDock.SINGLETON_INSTANCE.setModel(game0, humanLobbyPlayer);
+        CStack.SINGLETON_INSTANCE.setModel(game0, localPlayer);
+        CPlayers.SINGLETON_INSTANCE.setModel(game0);
+        CLog.SINGLETON_INSTANCE.setModel(game0.getGameLog());
 
         actuateMatchPreferences();
-        VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
+        VAntes.SINGLETON_INSTANCE.setModel(players);
         
         setCurrentScreen(FScreen.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-        CPrompt.SINGLETON_INSTANCE.getInputControl().setGame(game);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().setGame(game0);
 
         // Listen to DuelOutcome event to show ViewWinLose
-        game.subscribeToEvents(fcVisitor);
+        game0.subscribeToEvents(fcVisitor);
 
         // Add playback controls to match if needed
-        gameHasHumanPlayer = false;
-        for (Player p :  game.getPlayers()) {
-            if (p.getController().getLobbyPlayer() == getGuiPlayer())
-                gameHasHumanPlayer = true;
-        }
-
-        if (!gameHasHumanPlayer) {
-            game.subscribeToEvents(playbackControl);
+        if (localPlayer != null) {
+            game0.subscribeToEvents(playbackControl);
         }
 
         for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
@@ -522,7 +563,7 @@ public enum FControl implements KeyEventDispatcher {
 
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
         //Set Field shown to current player.
-        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
+        final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(localPlayer);
         SDisplayUtil.showTab(nextField);
     }
 

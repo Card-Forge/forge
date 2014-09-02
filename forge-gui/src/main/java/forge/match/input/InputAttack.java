@@ -248,9 +248,9 @@ public class InputAttack extends InputSyncronizedBase {
         return false;
     }
 
-    private final void setCurrentDefender(GameEntity def) {
+    private final void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
-        for (GameEntity ge : defenders) {
+        for (final GameEntity ge : defenders) {
             if (ge instanceof Card) {
                 GuiBase.getInterface().setUsedToPay((Card)ge, ge == def);
             }
@@ -262,16 +262,16 @@ public class InputAttack extends InputSyncronizedBase {
         updateMessage();
     }
 
-    private final void activateBand(AttackingBand band) {
+    private final void activateBand(final AttackingBand band) {
         if (activeBand != null) {
-            for (Card card : activeBand.getAttackers()) {
+            for (final Card card : activeBand.getAttackers()) {
                 GuiBase.getInterface().setUsedToPay(card, false);
             }
         }
         activeBand = band;
 
         if (activeBand != null) {
-            for(Card card : activeBand.getAttackers()) {
+            for (final Card card : activeBand.getAttackers()) {
                 GuiBase.getInterface().setUsedToPay(card, true);
             }
         }
@@ -279,8 +279,8 @@ public class InputAttack extends InputSyncronizedBase {
 
     //only enable banding message and actions if a creature that can attack has banding
     private boolean isBandingPossible() {
-        List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
-        for (Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
+        final List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
+        for (final Card c : Iterables.filter(possibleAttackers, CardPredicates.hasKeyword("Banding"))) {
             if (c.isCreature() && CombatUtil.canAttack(c, currentDefender, combat)) {
                 return true;
             }

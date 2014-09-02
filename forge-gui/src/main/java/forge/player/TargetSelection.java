@@ -34,6 +34,8 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 import forge.util.gui.SGuiChoose;
+import forge.view.CardView;
+import forge.view.SpellAbilityView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,9 +53,8 @@ import java.util.Map;
 public class TargetSelection {
     private final SpellAbility ability;
 
-
-    public TargetSelection(final SpellAbility sa) {
-        this.ability = sa;
+    public TargetSelection(final SpellAbility currentAbility) {
+        this.ability = currentAbility;
     }
 
     private final TargetRestrictions getTgt() {
@@ -70,7 +71,7 @@ public class TargetSelection {
      */
 
     public final boolean chooseTargets(Integer numTargets) {
-        TargetRestrictions tgt = getTgt();
+        final TargetRestrictions tgt = getTgt();
         final boolean canTarget = tgt != null && tgt.doesTarget();
         if (!canTarget) {
             throw new RuntimeException("TargetSelection.chooseTargets called for ability that does not target - " + ability);
@@ -81,8 +82,8 @@ public class TargetSelection {
         final int maxTargets = numTargets != null ? numTargets.intValue() : tgt.getMaxTargets(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().getNumTargeted();
 
-        boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
-        boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
+        final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
+        final boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
         if (maxTargets == 0) { return true; }
 
         // if not enough targets chosen, cancel Ability
@@ -105,8 +106,8 @@ public class TargetSelection {
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();
         if (random) {
-            List<GameObject> candidates = tgt.getAllCandidates(this.ability, true);
-            GameObject choice = Aggregates.random(candidates);
+            final List<GameObject> candidates = tgt.getAllCandidates(this.ability, true);
+            final GameObject choice = Aggregates.random(candidates);
             return ability.getTargets().add(choice);
         }
         else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
@@ -115,7 +116,7 @@ public class TargetSelection {
             return this.chooseCardFromStack(mandatory);
         }
         else {
-            final List<Card> validTargets = this.getValidCardsToTarget();
+            final List<CardView> validTargets = this.getValidCardsToTarget();
             if (validTargets.isEmpty()) {
                 //if no valid cards to target and only one valid non-card, auto-target the non-card
                 //this handles "target opponent" cards, along with any other cards that can only target a single non-card game entity
@@ -162,7 +163,7 @@ public class TargetSelection {
      * </p>
      * @return 
      */
-    private final List<Card> getValidCardsToTarget() {
+    private final List<CardView> getValidCardsToTarget() {
         final TargetRestrictions tgt = this.getTgt();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();

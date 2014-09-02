@@ -8,22 +8,21 @@ import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.Deck;
-import forge.game.Game;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
+import forge.view.IGameView;
 
 public abstract class GauntletWinLoseController {
-    private final Game lastGame;
+    private final IGameView lastGame;
     private final IWinLoseView<? extends IButton> view;
 
-    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, Game lastGame0) {
+    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
         view = view0;
-        lastGame = lastGame0;
+        lastGame = game0;
     }
 
     public void showOutcome() {
@@ -43,8 +42,6 @@ public abstract class GauntletWinLoseController {
         // Generic event record.
         lstEventRecords.set(gd.getCompleted(), "Ongoing");
 
-        final Match match = lastGame.getMatch();
-
         // Match won't be saved until it is over. This opens up a cheat
         // or failsafe mechanism (depending on your perspective) in which
         // the player can restart Forge to replay a match.
@@ -53,14 +50,14 @@ public abstract class GauntletWinLoseController {
         LobbyPlayer questPlayer = GuiBase.getInterface().getQuestPlayer();
 
         // In all cases, update stats.
-        lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
-                + (match.getPlayedGames().size() - match.getGamesWonBy(questPlayer)));
+        lstEventRecords.set(gd.getCompleted(), lastGame.getGamesWonBy(questPlayer) + " - "
+                + (lastGame.getNumPlayedGamesInMatch() - lastGame.getGamesWonBy(questPlayer)));
         
-        if (match.isMatchOver()) {
+        if (lastGame.isMatchOver()) {
             gd.setCompleted(gd.getCompleted() + 1);
 
             // Win match case
-            if (match.isWonBy(questPlayer)) {
+            if (lastGame.isMatchWonBy(questPlayer)) {
                 // Gauntlet complete: Remove save file
                 if (gd.getCompleted() == lstDecks.size()) {
                     icon = FSkinProp.ICO_QUEST_COIN;
@@ -112,7 +109,7 @@ public abstract class GauntletWinLoseController {
     }
 
     public final boolean actionOnContinue() {
-        if (lastGame.getMatch().isMatchOver()) {
+        if (lastGame.isMatchOver()) {
             // To change the AI deck, we have to create a new match.
             GauntletData gd = FModel.getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());

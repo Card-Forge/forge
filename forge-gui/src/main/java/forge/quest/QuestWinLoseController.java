@@ -37,19 +37,21 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
 import forge.util.gui.SGuiChoose;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 public abstract class QuestWinLoseController {
-    private final Game lastGame;
+    private final IGameView lastGame;
     private final transient boolean wonMatch;
     private final transient boolean isAnte;
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
-    public QuestWinLoseController(Game lastGame0) {
-        lastGame = lastGame0;
+    public QuestWinLoseController(final IGameView game0) {
+        lastGame = game0;
         qData = FModel.getQuest();
         qEvent = qData.getCurrentEvent();
-        wonMatch = lastGame.getMatch().isWonBy(GuiBase.getInterface().getQuestPlayer());
+        wonMatch = lastGame.isMatchWonBy(GuiBase.getInterface().getQuestPlayer());
         isAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -58,21 +60,21 @@ public abstract class QuestWinLoseController {
         final QuestController qc = FModel.getQuest();
 
         // After the first game, reset the card shop pool to be able to buy back anted cards
-        if (lastGame.getMatch().getPlayedGames().size() == 1) {
+        if (lastGame.getNumPlayedGamesInMatch() == 1) {
             qc.getCards().clearShopList();
             qc.getCards().getShopList();
         }
 
         final LobbyPlayer questLobbyPlayer = GuiBase.getInterface().getQuestPlayer();
-        Player player = null;
-        for (Player p : lastGame.getRegisteredPlayers()) {
+        PlayerView player = null;
+        for (final PlayerView p : lastGame.getPlayers()) {
             if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
                 player = p;
             }
         }
-        final Player questPlayer = player;
+        final PlayerView questPlayer = player;
 
-        final boolean matchIsNotOver = !lastGame.getMatch().isMatchOver();
+        final boolean matchIsNotOver = !lastGame.isMatchOver();
         if (matchIsNotOver) {
             view.getBtnQuit().setText("Quit (-15 Credits)");
         }
@@ -91,11 +93,8 @@ public abstract class QuestWinLoseController {
             @Override
             public void run() {
                 if (isAnte) {
-                    //do per-game actions
-                    GameOutcome outcome = lastGame.getOutcome();
-
                     // Won/lost cards should already be calculated (even in a draw)
-                    GameOutcome.AnteResult anteResult = outcome.anteResult.get(questPlayer);
+                    GameOutcome.AnteResult anteResult = lastGame.getAnteResult();
                     if (anteResult != null) {
                         if (anteResult.wonCards != null) {
                             qc.getCards().addAllCards(anteResult.wonCards);
@@ -103,7 +102,7 @@ public abstract class QuestWinLoseController {
                         if (anteResult.lostCards != null) {
                             qc.getCards().loseCards(anteResult.lostCards);
                         }
-                        anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
+                        anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.getLobbyPlayer().equals(lastGame.getWinningPlayer()));
                     }
                 }
 
@@ -223,21 +222,14 @@ public abstract class QuestWinLoseController {
 
         // Basic win bonus
         final int base = FModel.getQuestPreferences().getPrefInt(QPref.REWARDS_BASE);
-        double multiplier = 1;
-
-        switch (qEvent.getDifficulty()) {
-            case EASY: multiplier = 1; break;
-            case MEDIUM: multiplier = 1.5; break;
-            case HARD: multiplier = 2; break;
-            case EXPERT: multiplier = 3; break;
-        }
+        final double multiplier = qEvent.getDifficulty().getMultiplier();
 
         credBase = (int) (base * multiplier);
         
         sb.append(StringUtils.capitalize(qEvent.getDifficulty().getTitle()));
         sb.append(" opponent: ").append(credBase).append(" credits.\n");
 
-        int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
+        final int creditsForPreviousWins = (int) ((Double.parseDouble(FModel.getQuestPreferences()
                 .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
         credBase += creditsForPreviousWins;
         
@@ -247,8 +239,8 @@ public abstract class QuestWinLoseController {
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
         int lifeDifferenceCredits = 0;
-        
-        LobbyPlayer localHuman = GuiBase.getInterface().getQuestPlayer();
+
+        final LobbyPlayer localHuman = GuiBase.getInterface().getQuestPlayer();
         for (final GameOutcome game : lastGame.getMatch().getPlayedGames()) {
             if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;

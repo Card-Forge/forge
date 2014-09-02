@@ -1,5 +1,6 @@
 package forge.control;
 
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
@@ -18,6 +19,7 @@ import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
+import forge.view.CardView;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -76,12 +78,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         
         if (turnUpdPlanned.getAndSet(true)) { return null; }
 
-        final Game game = GuiBase.getInterface().getGame(); // to make sure control gets a correct game instance
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
                 turnUpdPlanned.set(false);
-                GuiBase.getInterface().updateTurn(event, game);
+                GuiBase.getInterface().updateTurn(event);
             }
         });
         return null;
@@ -225,7 +226,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    private final Set<Card> cardsToUpdate = new HashSet<Card>();
+    private final Set<CardView> cardsToUpdate = Sets.newHashSet();
     private final Runnable updCards = new Runnable() {
         @Override
         public void run() {
@@ -288,7 +289,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
 
-    private Void updateSingleCard(Card c) {
+    private Void updateSingleCard(final CardView c) {
         boolean needUpdate = false;
         synchronized (cardsToUpdate) {
             needUpdate = cardsToUpdate.isEmpty();

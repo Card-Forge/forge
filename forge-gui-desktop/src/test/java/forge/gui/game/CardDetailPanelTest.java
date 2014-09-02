@@ -16,7 +16,7 @@ public class CardDetailPanelTest {
     @Test(groups = { "UnitTest", "fast" }, enabled = false)
     public void cardDetailPanelTest1() {
         try {
-            CardDetailPanel dialog = new CardDetailPanel(null);
+            CardDetailPanel dialog = new CardDetailPanel();
             // dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
             Assert.assertNotNull(dialog);

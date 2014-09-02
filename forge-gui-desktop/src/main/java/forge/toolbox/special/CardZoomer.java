@@ -18,23 +18,29 @@
 
 package forge.toolbox.special;
 
-import forge.Singletons;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import net.miginfocom.swing.MigLayout;
 import forge.assets.FSkinProp;
-import forge.card.CardCharacteristicName;
-import forge.card.CardDetailUtil;
-import forge.game.card.Card;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.imaging.FImagePanel;
-import forge.toolbox.imaging.FImageUtil;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-
-import java.awt.event.*;
+import forge.toolbox.imaging.FImageUtil;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 
 /** 
  * Displays card image at its original size and correct orientation.
@@ -46,30 +52,28 @@ import java.awt.event.*;
  * 
  */
 public enum CardZoomer {
-    SINGLETON_INSTANCE;    
+    SINGLETON_INSTANCE;
 
     // Gui controls
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
     private JPanel pnlMain;
     private FImagePanel imagePanel;
     private SkinnedLabel lblFlipcard = new SkinnedLabel();    
-        
+
     // Details about the current card being displayed.
-    private Card thisCard;
-    private CardCharacteristicName cardState = CardCharacteristicName.Original;
-    private boolean isImageFlipped = false;
-    private boolean isFaceDownCard = false;
-     
+    private CardView thisCard;
+    private boolean isInAltState;
+
     // The zoomer is in button mode when it is activated by holding down the
     // middle mouse button or left and right mouse buttons simultaneously.
     private boolean isButtonMode = false;    
     private boolean isOpen = false;
     private long lastClosedTime;
-                           
+
     // Used to ignore mouse wheel rotation for a short period of time.
     private Timer mouseWheelCoolDownTimer;
     private boolean isMouseWheelEnabled = false;    
-    
+
     // ctr
     private CardZoomer() {
         lblFlipcard.setIcon(FSkin.getIcon(FSkinProp.ICO_FLIPCARD));
@@ -77,7 +81,7 @@ public enum CardZoomer {
         setMouseWheelListener();
         setKeyListeners();
     }
-    
+
     /**
      * Creates listener for keys that are recognised by zoomer.
      * <p><ul>
@@ -103,30 +107,33 @@ public enum CardZoomer {
     /**
      * Creates listener for mouse button events.
      * <p>
-     *  NOTE: Needed even if ButtonMode to prevent Zoom getting stuck open on certain systems.
+     * NOTE: Needed even if ButtonMode to prevent Zoom getting stuck open on
+     * certain systems.
      */
     private void setMouseButtonListener() {
-        overlay.addMouseListener(new MouseAdapter() {            
+        overlay.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 closeZoomer();
             }
         });
     }
-    
+
     /**
      * Creates listener for mouse wheel events.
      * <p>
-     * If the zoomer is opened using the mouse wheel then additional
-     * actions can be performed dependent on the card type -
-     * <p><ul>
+     * If the zoomer is opened using the mouse wheel then additional actions can
+     * be performed dependent on the card type -
+     * <p>
+     * <ul>
      * <li>If mouse wheel is rotated back then close zoomer.
-     * <li>If mouse wheel is rotated forward and...<ul>
-     *   <li>if image is a flip card then rotate 180 degrees.
-     *   <li>if image is a double-sided card then show other side. 
+     * <li>If mouse wheel is rotated forward and...
+     * <ul>
+     * <li>if image is a flip card then rotate 180 degrees.
+     * <li>if image is a double-sided card then show other side.
      */
     private void setMouseWheelListener() {
-        overlay.addMouseWheelListener(new MouseWheelListener() {                        
+        overlay.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 if (!isButtonMode) {
@@ -136,111 +143,86 @@ public enum CardZoomer {
                             closeZoomer();
                         } else {
                             toggleCardImage();
-                            startMouseWheelCoolDownTimer(250);                        
-                        }                                                        
-                    }                                    
+                            startMouseWheelCoolDownTimer(250);
+                        }
+                    }
                 }
-            }                                    
+            }
         });
     }
-    
+
     /**
      * Opens zoomer in mouse wheel mode and displays the image associated with
-     * the given card based on its current {@code CardCharacteristicName} state.
+     * the given card based.
      * <p>
-     * This method should be called if the zoomer is activated by rotating the mouse wheel.
+     * This method should be called if the zoomer is activated by rotating the
+     * mouse wheel.
      */
-    public void doMouseWheelZoom(Card newCard) {
-        doMouseWheelZoom(newCard, newCard.getCurState());
-    }
-    
-    /**
-     * Opens zoomer in mouse wheel mode and displays the image associated with
-     * the given card based on the specified {@code CardCharacteristicName} state.
-     * <p>
-     * This method should be called if the zoomer is activated by rotating the mouse wheel. 
-     */
-    public void doMouseWheelZoom(Card newCard, CardCharacteristicName state) {
+    public void doMouseWheelZoom(final CardView card) {
         isButtonMode = false;
-        isFaceDownCard = (state == CardCharacteristicName.FaceDown);
-        cardState = state;
-        displayCard(newCard);
-        startMouseWheelCoolDownTimer(200);          
+        displayCard(card);
+        startMouseWheelCoolDownTimer(200);
     }
 
     /**
      * Opens zoomer in mouse button mode and displays the image associated with
-     * the given card based on its current {@code CardCharacteristicName} state.
-     * <p>
-     * This method should be called if the zoomer is activated by holding down
-     * the middle mouse button or left and right mouse buttons simultaneously.
-     */
-    public void doMouseButtonZoom(Card newCard) {
-        doMouseButtonZoom(newCard, newCard.getCurState());
-    }
-    
-    /**
-     * Opens zoomer in mouse button mode and displays the image associated with
-     * the given card based on the specified {@code CardCharacteristicName} state.
+     * the given card.
      * <p>
      * This method should be called if the zoomer is activated by holding down
      * the middle mouse button or left and right mouse buttons simultaneously.
      */    
-    public void doMouseButtonZoom(Card newCard, CardCharacteristicName state) {        
-        
+    public void doMouseButtonZoom(final CardView newCard) {
+
         // don't display zoom if already zoomed or just closed zoom 
         // (handles mouse wheeling while middle clicking)
         if (isOpen || System.currentTimeMillis() - lastClosedTime < 250) {
             return;
-        }        
-        
+        }
+
         isButtonMode = true;        
-        isFaceDownCard = (state == CardCharacteristicName.FaceDown);
-        cardState = state;                
         displayCard(newCard);        
     }
-    
+
     public boolean isZoomerOpen() {
         return isOpen;
     }
-    
-    private void displayCard(Card card) {
+
+    private void displayCard(final CardView newCard) {
         isMouseWheelEnabled = false;
-        isImageFlipped = false;       
-        thisCard = card.getCardForUi();
+        thisCard = newCard;
+        isInAltState = false;
         setLayout();
         setImage();         
         SOverlayUtils.showOverlay();
         isOpen = true;
     }
-    
+
     /**
      * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
      */
     private void setFlipIndicator() {
-        boolean isFaceDownFlippable = (isFaceDownCard && Singletons.getControl().mayShowCard(thisCard)); 
-        if (thisCard.isFlipCard() || thisCard.isDoubleFaced() || isFaceDownFlippable ) {
+        if (thisCard.hasAltState()) {
             imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
             imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
-        }                    
+        }
     }
-    
+
     /**
      * Needs to be called whenever the source image changes.
      */
     private void setImage() {
         imagePanel = new FImagePanel();
-        imagePanel.setImage(FImageUtil.getImage(thisCard, cardState), getInitialRotation(), AutoSizeImageMode.SOURCE);
+        imagePanel.setImage(FImageUtil.getImage(getState()), getInitialRotation(), AutoSizeImageMode.SOURCE);
         pnlMain.removeAll();
         pnlMain.add(imagePanel, "w 80%!, h 80%!");
         pnlMain.validate();
         setFlipIndicator();
     }
-        
+
     private int getInitialRotation() {
-        return (thisCard.isSplitCard() || thisCard.isPlane() || thisCard.isPhenomenon() ? 90 : 0);
+        return (thisCard.isSplitCard() || getState().isPlane() || getState().isPhenomenon() ? 90 : 0);
     }   
-    
+
     private void setLayout() {
         overlay.removeAll();
         pnlMain = new JPanel();
@@ -283,53 +265,35 @@ public enum CardZoomer {
             });
         }
     }
-    
+
     private void stopMouseWheelCoolDownTimer() {
         if (mouseWheelCoolDownTimer != null && mouseWheelCoolDownTimer.isRunning()) {
             mouseWheelCoolDownTimer.stop();
         }        
     }
-        
+
     /**
      * Toggles between primary and alternate image associated with card if applicable.
      */
     private void toggleCardImage() {
-        if (thisCard.isFlipCard()) {
+        if (thisCard.hasAltState()) {
             toggleFlipCard();
-        } else if (thisCard.isDoubleFaced()) {
-            toggleDoubleFacedCard();
-        } else if (isFaceDownCard) {                           
-            toggleFaceDownCard();
         }
     }
-            
+
     /**
      * Flips image by rotating 180 degrees each time.
      * <p>
      * No need to get the alternate card image from cache.
      * Can simply rotate current card image in situ to get same effect.
      */
-    private void toggleFlipCard() {                
-        isImageFlipped = !isImageFlipped;               
-        imagePanel.setRotation(isImageFlipped ? 180 : 0);        
-    }
-    
-    /**
-     * Toggles between the front and back image of a card that can be
-     * played face-down (eg. morph).
-     * <p>
-     * Uses constraint that prevents a player from identifying opponent's face-down cards.
-     */
-    private void toggleFaceDownCard() {
-        cardState = CardDetailUtil.getAlternateState(thisCard, cardState);        
+    private void toggleFlipCard() {
+        isInAltState = !isInAltState;
+        imagePanel.setRotation(thisCard.isFlipCard() && isInAltState ? 180 : 0);
         setImage();
     }
-            
-    /**
-     * Toggles between the front and back image of a double-sided card.
-     */
-    private void toggleDoubleFacedCard() {
-        cardState = CardDetailUtil.getAlternateState(thisCard, cardState);
-        setImage();
+
+    private CardStateView getState() {
+        return thisCard.getState(isButtonMode);
     }
 }
