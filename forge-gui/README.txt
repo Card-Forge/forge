@@ -1170,6 +1170,47 @@ will find all humans or cats that are also warriors, clerics, or soldiers.
 More improvements are on their way in the next version of Forge, including removing the need for quotation marks and adding NOT operators. 
 
 
+- Improved auto-yield support - 
+Pressing "End Turn" now properly skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You will still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will now be skipped properly.
+To alleviate pressing this accidentally, as long as you're auto-yielding this way, you'll be able to press Escape or the Cancel button to cancel the auto-yield and be given the chance to act again. Phases with stops and spells/abilities resolving will be given a slight delay to allow you to see what's going on and give you the chance to regain control by cancelling the yield.
+Added support for auto-yielding abilities on the stack so you don't have to press OK each time.
+
+
+- Improved Gauntlet Support - 
+Add column to Load Gauntlet screen to display your deck for the gauntlet.
+Fix so your deck is saved with a gauntlet when starting a quick gauntlet.
+Instead of crashing, prompt user to select a deck if attempting to load a gauntlet that doesn't have one saved.
+Make it so Last Activity column isn't cut off and is formatted properly.
+Make it so double-clicking a gauntlet on the Load Gauntlet screen will launch it.
+Support renaming gauntlets.
+Support sorting gauntlets (and quests) case insensitive.
+
+
+- Fixed loading overlay to show logo properly and have some transparency -
+
+
+- Vastly Improved Boolean Expressions -
+Boolean expressions no longer require the use of quotation marks around your search terms, making it a far more useful
+feature. Boolean expressions been rewritten from the ground up to be faster and better at parsing your search terms.
+With the new parsing also comes NOT operators (!). Place these before things to negate them. For example:
+
+!r
+
+will find all cards that don't have red in their mana costs (when searching by cost). These can be a bit finicky at
+times since there's no order of operations yet. This will possibly be implemented in a future update. For now, be sure
+to put all possibly ambiguous NOT operators within parenthesis:
+
+!(r || g) instead of !r && !g
+
+Unfortunately I did not have time to implement an order of operations for this release, but rest assured it's on its
+way... eventually.
+
+
+- Quest Draft Preferences -
+You can now set how long you want quest draft tournaments to be available and how often you want them to be generated.
+Existing draft tournaments will not be affected.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
