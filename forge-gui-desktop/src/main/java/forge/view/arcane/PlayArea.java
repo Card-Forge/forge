@@ -623,13 +623,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
     
-        List<CardView> toAdd = new ArrayList<CardView>(model);
+        final List<CardView> toAdd = new ArrayList<CardView>(model);
         toAdd.removeAll(oldCards);
         toAdd.addAll(toReplace);
 
-        List<CardPanel> newPanels = new ArrayList<CardPanel>();
+        final List<CardPanel> newPanels = new ArrayList<CardPanel>();
         for (final CardView card : toAdd) {
-            if (card.getCardForUi() == card) { //only include cards that are meant for display
+            if (card.isUiDisplayable()) { //only include cards that are meant for display
                 final CardPanel placeholder = new CardPanel(card);
                 placeholder.setDisplayEnabled(false);
                 this.getCardPanels().add(placeholder);

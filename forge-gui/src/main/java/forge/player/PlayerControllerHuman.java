@@ -88,6 +88,7 @@ import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
 import forge.util.gui.SOptionPane;
 import forge.view.CardView;
+import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.IGameView;
 import forge.view.PlayerView;
@@ -226,7 +227,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
         return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                && SGuiDialog.confirm(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
+                && SGuiDialog.confirm(getCardView(attacker), "Do you want to assign its combat damage as though it weren't blocked?"));
     }
 
     /* (non-Javadoc)
@@ -359,18 +360,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
      */
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        return SGuiDialog.confirm(sa.getHostCard(), message);
+        return SGuiDialog.confirm(getCardView(sa.getHostCard()), message);
     }
 
     @Override
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife,
             String string, int bid, Player winner) {
-        return SGuiDialog.confirm(sa.getHostCard(), string + " Highest Bidder " + winner);
+        return SGuiDialog.confirm(getCardView(sa.getHostCard()), string + " Highest Bidder " + winner);
     }
 
     @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        return SGuiDialog.confirm(hostCard, message);
+        return SGuiDialog.confirm(getCardView(hostCard), message);
     }
 
     @Override
@@ -500,10 +501,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     }
 
     @Override
-    public boolean willPutCardOnTop(Card c) {
-        PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(c.getName());
-        Card c1 = (pc != null ? Card.fromPaperCard(pc, null) : c);
-        return SGuiDialog.confirm(c1, "Put " + c1.getName() + " on the top or bottom of your library?", new String[]{"Top", "Bottom"});
+    public boolean willPutCardOnTop(final Card c) {
+        final PaperCard pc = FModel.getMagicDb().getCommonCards().getCard(c.getName());
+        final Card c1 = (pc != null ? Card.fromPaperCard(pc, null) : c);
+        final CardView view = getCardView(c1);
+        return SGuiDialog.confirm(view, "Put " + view + " on the top or bottom of your library?", new String[]{"Top", "Bottom"});
     }
 
     @Override
@@ -542,8 +544,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     }
 
     @Override
-    public void playMiracle(SpellAbility miracle, Card card) {
-        if (SGuiDialog.confirm(card, card + " - Drawn. Play for Miracle Cost?")) {
+    public void playMiracle(final SpellAbility miracle, final Card card) {
+        final CardView view = getCardView(card);
+        if (SGuiDialog.confirm(view, view + " - Drawn. Play for Miracle Cost?")) {
             HumanPlay.playSpellAbility(player, miracle);
         }
     }
@@ -659,7 +662,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
      */
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
-        return SGuiDialog.confirm(replacementEffect.getHostCard(), question);
+        return SGuiDialog.confirm(getCardView(replacementEffect.getHostCard()), question);
     }
 
     @Override
@@ -870,7 +873,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
             default:            labels = kindOfChoice.toString().split("Or");
 
         }
-        return SGuiDialog.confirm(sa.getHostCard(), question, defaultVal == null || defaultVal.booleanValue(), labels);
+        return SGuiDialog.confirm(getCardView(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
     }
 
     @Override
@@ -1040,7 +1043,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
         if (colorNames.length > 2) {
             return MagicColor.fromName(SGuiChoose.one(message, colorNames));
         }
-        int idxChosen = SGuiDialog.confirm(c, message, colorNames) ? 0 : 1;
+        int idxChosen = SGuiDialog.confirm(getCardView(c), message, colorNames) ? 0 : 1;
         return MagicColor.fromName(colorNames[idxChosen]);
     }
 
@@ -1136,7 +1139,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
             final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
             final String[] possibleValues = { p1Str , p2Str };
-            return SGuiDialog.confirm(sa.getHostCard(), "Choose a Pile", possibleValues);
+            return SGuiDialog.confirm(getCardView(sa.getHostCard()), "Choose a Pile", possibleValues);
         } else {
             final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
             disp[0] = new Card(-1);
@@ -1230,6 +1233,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     /** Cache of stack items. */
     private final BiMap<SpellAbilityStackInstance, StackItemView> stackItems
         = HashBiMap.create();
+    /** Combat view. */
+    private final CombatView combatView = new CombatView();
 
     /* (non-Javadoc)
      * @see forge.view.IGameView#isCommander()
@@ -1324,15 +1329,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
         game.subscribeToEvents(subscriber);
     }
 
-    // the following methods should eventually be replaced by methods returning
-    // View classes
     /* (non-Javadoc)
      * @see forge.view.IGameView#getCombat()
      */
     @Override
-    public Combat getCombat() {
-        return game.getCombat();
+    public CombatView getCombat() {
+        updateCombatView(game.getCombat());
+        return combatView;
     }
+
+    private final void updateCombatView(final Combat combat) {
+        for (final Card c : combat.getAttackers()) {
+            final GameEntity defender = combat.getDefenderByAttacker(c);
+            final List<Card> blockers = combat.getBlockers(c);
+            combatView.addAttacker(getCardView(c), getGameEntityView(defender), getCardViews(blockers));
+        }
+    }
+
     /* (non-Javadoc)
      * @see forge.view.IGameView#getGameLog()
      */
@@ -1474,14 +1487,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
             return null;
         }
 
+        final Card cUi = c.getCardForUi();
         final CardView view;
-        if (cards.containsKey(c)) {
-            view = cards.get(c);
-            writeCardToView(c, view);
+        if (cards.containsKey(cUi)) {
+            view = cards.get(cUi);
+            writeCardToView(cUi, view);
         } else {
-            view = new CardView(c, c.getUniqueNumber());
-            writeCardToView(c, view);
-            cards.put(c, view);
+            view = new CardView(cUi, cUi.getUniqueNumber(), cUi == c);
+            writeCardToView(cUi, view);
+            cards.put(cUi, view);
         }
         return view;
     }
@@ -1539,6 +1553,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
         view.setHauntedBy(getCardViews(c.getHauntedBy()));
         view.setHaunting(getCardView(c.getHaunting()));
         view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : Iterables.transform(c.getMustBlockCards(), FN_GET_CARD_VIEW));
+        view.setPairedWith(getCardView(c.getPairedWith()));
     }
 
     @Override

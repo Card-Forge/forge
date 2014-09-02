@@ -17,11 +17,28 @@
  */
 package forge.screens.match;
 
+import java.awt.Dialog.ModalityType;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.testng.collections.Lists;
+
+import com.google.common.collect.Maps;
+
 import forge.control.FControl;
-import forge.game.GameEntity;
-import forge.game.card.Card;
-import forge.game.card.CounterType;
-import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
@@ -33,25 +50,6 @@ import forge.view.FDialog;
 import forge.view.GameEntityView;
 import forge.view.PlayerView;
 import forge.view.arcane.CardPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-
-import org.testng.collections.Lists;
-
-import com.google.common.collect.Maps;
-
-import java.awt.Dialog.ModalityType;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Assembles Swing components of assign damage dialog.
@@ -200,13 +198,13 @@ public class VAssignDamage {
             if (defender instanceof CardView) 
                 fakeCard = (CardView)defender;
             else if (defender instanceof PlayerView) { 
-                fakeCard = new CardView(null, -1);
+                fakeCard = new CardView(null, -1, true);
                 fakeCard.getState().setName(this.defender.toString());
                 final PlayerView p = (PlayerView)defender;
-                fakeCard.getState().setOwner(p);
+                fakeCard.setOwner(p);
                 fakeCard.getState().setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
             } else {
-                fakeCard = new CardView(null, -2);
+                fakeCard = new CardView(null, -2, true);
                 fakeCard.getState().setName(this.defender.toString());
             }
             addPanelForDefender(pnlDefenders, fakeCard);

@@ -1,8 +1,8 @@
 package forge.util.gui;
 
-import forge.game.card.Card;
-
 import org.apache.commons.lang3.StringUtils;
+
+import forge.view.CardView;
 
 /** 
  * Holds player interactions using standard windows 
@@ -11,19 +11,18 @@ import org.apache.commons.lang3.StringUtils;
 public class SGuiDialog {
     private static final String[] defaultConfirmOptions = { "Yes", "No" };
 
-    public static boolean confirm(final Card c, final String question) {
+    public static boolean confirm(final CardView c, final String question) {
         return SGuiDialog.confirm(c, question, true, null);
     }
-    public static boolean confirm(final Card c, final String question, final boolean defaultChoice) {
+    public static boolean confirm(final CardView c, final String question, final boolean defaultChoice) {
         return SGuiDialog.confirm(c, question, defaultChoice, null);
     }
-    public static boolean confirm(final Card c, final String question, String[] options) {
+    public static boolean confirm(final CardView c, final String question, String[] options) {
         return SGuiDialog.confirm(c, question, true, options);
     }
 
-    public static boolean confirm(Card c, final String question, final boolean defaultIsYes, final String[] options) {
-        c = Card.getCardForUi(c);
-        final String title = c == null ? "Question" : c.getName() + " - Ability";
+    public static boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options) {
+        final String title = c == null ? "Question" : c + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         String[] opts = options == null ? defaultConfirmOptions : options;
         int answer = SOptionPane.showCardOptionDialog(c, questionToUse, title, SOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
