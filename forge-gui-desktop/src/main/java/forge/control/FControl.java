@@ -501,7 +501,7 @@ public enum FControl implements KeyEventDispatcher {
         final LobbyPlayer humanLobbyPlayer = getGuiPlayer();
         // The UI controls should use these game data as models
         final List<PlayerView> players = game0.getPlayers();
-        CMatchUI.SINGLETON_INSTANCE.initMatch(players, humanLobbyPlayer);
+        CMatchUI.SINGLETON_INSTANCE.initMatch(game0, players, humanLobbyPlayer);
 
         localPlayer = null;
         gameHasHumanPlayer = false;

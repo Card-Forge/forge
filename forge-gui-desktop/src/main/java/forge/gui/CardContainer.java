@@ -22,7 +22,7 @@ import forge.view.CardView;
 
 /**
  * The class CardContainer. A card container is an object that references a
- * card.
+ * {@link CardView}.
  * 
  * @author Clemens Koza
  * @version V0.0 17.02.2010
@@ -34,7 +34,7 @@ public interface CardContainer {
      * </p>
      * 
      * @param card
-     *            a {@link forge.game.card.Card} object.
+     *            a {@link CardView} object.
      */
     void setCard(CardView card);
 
@@ -43,7 +43,7 @@ public interface CardContainer {
      * getCard.
      * </p>
      * 
-     * @return a {@link forge.game.card.Card} object.
+     * @return a {@link CardView} object.
      */
     CardView getCard();
 

@@ -25,7 +25,6 @@ import javax.swing.JPanel;
 
 import forge.ImageCache;
 import forge.ImageKeys;
-import forge.game.card.Card;
 import forge.item.InventoryItem;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
@@ -58,12 +57,6 @@ public final class CardPicturePanel extends JPanel {
 
     public void setCard(final InventoryItem cp) {
         this.displayed = cp;
-        this.setImage();
-    }
-
-    @Deprecated
-    public void setCard(final Card c) {
-        this.displayed = c;
         this.setImage();
     }
 

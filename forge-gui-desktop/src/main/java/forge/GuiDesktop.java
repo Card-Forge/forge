@@ -33,7 +33,6 @@ import forge.error.BugReportDialog;
 import forge.events.UiEvent;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
 import forge.game.player.RegisteredPlayer;
@@ -76,6 +75,7 @@ import forge.toolbox.special.PhaseLabel;
 import forge.util.BuildInfo;
 import forge.util.ITriggerEvent;
 import forge.view.CardView;
+import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.IGameView;
 import forge.view.PlayerView;
@@ -378,7 +378,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void showCombat(Combat combat) {
+    public void showCombat(final CombatView combat) {
         CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
 

@@ -47,6 +47,7 @@ import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
+import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -1355,10 +1356,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     }
 
     private final void updateCombatView(final Combat combat) {
-        for (final Card c : combat.getAttackers()) {
-            final GameEntity defender = combat.getDefenderByAttacker(c);
-            final List<Card> blockers = combat.getBlockers(c);
-            combatView.addAttacker(getCardView(c), getGameEntityView(defender), getCardViews(blockers));
+        combatView.reset();
+        for (final AttackingBand b : combat.getAttackingBands()) {
+            final GameEntity defender = combat.getDefenderByAttacker(b);
+            final List<Card> blockers = b.isBlocked() ? combat.getBlockers(b) : null;
+            combatView.addAttackingBand(getCardViews(b.getAttackers()), getGameEntityView(defender), getCardViews(blockers));
         }
     }
 

@@ -42,7 +42,6 @@ import forge.events.IUiEventVisitor;
 import forge.events.UiEvent;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
-import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.EDocID;
@@ -71,7 +70,9 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.PhaseLabel;
 import forge.view.CardView;
+import forge.view.CombatView;
 import forge.view.GameEntityView;
+import forge.view.IGameView;
 import forge.view.PlayerView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
@@ -87,6 +88,7 @@ import forge.view.arcane.PlayArea;
 public enum CMatchUI implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
+    private IGameView game;
     private List<PlayerView> sortedPlayers;
     private VMatchUI view;
 
@@ -122,7 +124,8 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      * @param numFieldPanels int
      * @param numHandPanels int
      */
-    public void initMatch(final List<PlayerView> players, LobbyPlayer localPlayer) {
+    public void initMatch(final IGameView game, final List<PlayerView> players, LobbyPlayer localPlayer) {
+        this.game = game;
         view = VMatchUI.SINGLETON_INSTANCE;
         // TODO fix for use with multiplayer
 
@@ -291,33 +294,33 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showImage(c);
     }
-    
+
     private int getPlayerIndex(PlayerView player) {
         return sortedPlayers.indexOf(player);
     }
 
-    public void showCombat(Combat combat) {
-        if (combat != null && combat.getAttackers().size() > 0 && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
-        	if (selectedDocBeforeCombat == null) {
-	        	IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
-	        	if (combatDoc.getParentCell() != null) {
-	            	selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
-	            	if (selectedDocBeforeCombat != combatDoc) {
-	            		SDisplayUtil.showTab(combatDoc);
-	            	}
-	            	else {
-	            		selectedDocBeforeCombat = null; //don't need to cache combat doc this way
-	            	}
-	        	}
-        	}
+    public void showCombat(final CombatView combat) {
+        if (combat != null && combat.getNumAttackers() > 0 && game.peekStack() == null) {
+            if (selectedDocBeforeCombat == null) {
+                IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
+                if (combatDoc.getParentCell() != null) {
+                    selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
+                    if (selectedDocBeforeCombat != combatDoc) {
+                        SDisplayUtil.showTab(combatDoc);
+                    }
+                    else {
+                        selectedDocBeforeCombat = null; //don't need to cache combat doc this way
+                    }
+                }
+            }
         }
         else if (selectedDocBeforeCombat != null) { //re-select doc that was selected before once combat finished
-        	SDisplayUtil.showTab(selectedDocBeforeCombat);
-        	selectedDocBeforeCombat = null;
+            SDisplayUtil.showTab(selectedDocBeforeCombat);
+            selectedDocBeforeCombat = null;
         }
         CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();
-    } // showBlockers()
+    } // showCombat(CombatView)
 
     final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
     public void setHighlighted(PlayerView ge, boolean b) {
