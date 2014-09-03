@@ -1252,6 +1252,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     }
 
     @Override
+    public int getTurnNumber() {
+        return this.game.getPhaseHandler().getTurn();
+    }
+
+    @Override
+    public boolean isCommandZoneNeeded() {
+        return this.game.getMatch().getRules().getGameType().isCommandZoneNeeded();
+    }
+
+    @Override
     public boolean isWinner(final LobbyPlayer p) {
         return game.getOutcome() == null ? null : game.getOutcome().isWinner(p);
     }
@@ -1277,6 +1287,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     @Override
     public boolean isMatchOver() {
         return this.game.getMatch().isMatchOver();
+    }
+
+    @Override
+    public int getNumGamesInMatch() {
+        return this.game.getMatch().getRules().getGamesPerMatch();
     }
 
     @Override
@@ -1557,8 +1572,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     }
 
     @Override
-    public boolean mayShowCard(final CardView c, final Player viewer) {
-        return cards.inverse().get(c).canBeShownTo(viewer);
+    public boolean mayShowCard(final CardView c) {
+        return cards.inverse().get(c).canBeShownTo(player);
     }
 
     @Override

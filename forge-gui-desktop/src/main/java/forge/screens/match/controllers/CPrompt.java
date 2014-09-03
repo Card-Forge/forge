@@ -29,14 +29,12 @@ import javax.swing.JButton;
 import forge.FThreads;
 import forge.Singletons;
 import forge.UiCommand;
-import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.Match;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.match.input.InputProxy;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FSkin;
+import forge.view.IGameView;
 
 /**
  * Controls the prompt panel in the match UI.
@@ -121,12 +119,10 @@ public enum CPrompt implements ICDoc {
 
     public void updateText() {
         FThreads.assertExecutedByEdt(true);
-        final Game game = Singletons.getControl().getObservedGame();
-        final Match match = game.getMatch();
-        final GameRules rules = game.getRules();
-        final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), rules.getGameType());
+        final IGameView game = Singletons.getControl().getGameView();
+        final String text = String.format("T:%d G:%d/%d [%s]", game.getTurnNumber(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getGameType());
         view.getLblGames().setText(text);
-        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", rules.getGameType(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), game.getPhaseHandler().getTurn()));
+        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", game.getGameType(), game.getNumPlayedGamesInMatch() + 1, game.getNumGamesInMatch(), game.getTurnNumber()));
     }
 
     @Override

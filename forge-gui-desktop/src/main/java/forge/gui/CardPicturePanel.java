@@ -48,7 +48,6 @@ public final class CardPicturePanel extends JPanel {
 
     private final FImagePanel panel;
     private BufferedImage currentImage;
-    private boolean mayShowObject;
 
     public CardPicturePanel() {
         super(new BorderLayout());
@@ -59,20 +58,17 @@ public final class CardPicturePanel extends JPanel {
 
     public void setCard(final InventoryItem cp) {
         this.displayed = cp;
-        this.mayShowObject = true;
         this.setImage();
     }
 
     @Deprecated
-    public void setCard(final Card c, boolean mayShowCard) {
+    public void setCard(final Card c) {
         this.displayed = c;
-        this.mayShowObject = mayShowCard;
         this.setImage();
     }
 
-    public void setCard(final CardStateView c, final boolean mayShowCard) {
+    public void setCard(final CardStateView c) {
         this.displayed = c;
-        this.mayShowObject = mayShowCard;
         this.setImage();
     }
 
@@ -88,17 +84,8 @@ public final class CardPicturePanel extends JPanel {
         if (displayed instanceof InventoryItem) {
             final InventoryItem item = (InventoryItem) displayed;
             return ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);
-        }
-        else if (displayed instanceof Card) {
-            if (mayShowObject) {
-                return FImageUtil.getImage((Card)displayed);
-            }
-            return ImageCache.getOriginalImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
         } else if (displayed instanceof CardStateView) {
-            if (mayShowObject) {
-                return FImageUtil.getImage((CardStateView)displayed);
-            }
-            return ImageCache.getOriginalImage(ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE, true);
+            return FImageUtil.getImage((CardStateView)displayed);
         }
         return null;
     }

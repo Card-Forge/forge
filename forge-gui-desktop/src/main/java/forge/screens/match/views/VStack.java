@@ -38,7 +38,6 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
-import forge.game.player.PlayerController;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -248,7 +247,6 @@ public enum VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAlwaysNo;
         private IGameView game;
         private StackItemView item;
-        private PlayerController controller;
 
         private Integer triggerID = 0;
 
@@ -258,8 +256,8 @@ public enum VStack implements IVDoc<CStack> {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     final String key = item.getKey();
-                    final boolean autoYield = controller.shouldAutoYield(key);
-                    controller.setShouldAutoYield(key, !autoYield);
+                    final boolean autoYield = game.shouldAutoYield(key);
+                    game.setShouldAutoYield(key, !autoYield);
                     if (!autoYield && game.peekStack() == item) {
                         //auto-pass priority if ability is on top of stack
                         CPrompt.SINGLETON_INSTANCE.getInputControl().passPriority();
@@ -272,11 +270,11 @@ public enum VStack implements IVDoc<CStack> {
             jmiAlwaysYes.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
+                    if (game.shouldAlwaysAcceptTrigger(triggerID)) {
+                        game.setShouldAlwaysAskTrigger(triggerID);
                     }
                     else {
-                        controller.setShouldAlwaysAcceptTrigger(triggerID);
+                        game.setShouldAlwaysAcceptTrigger(triggerID);
                         if (game.peekStack() == item &&
                                 Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
                             //auto-yes if ability is on top of stack
@@ -291,11 +289,11 @@ public enum VStack implements IVDoc<CStack> {
             jmiAlwaysNo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
+                    if (game.shouldAlwaysDeclineTrigger(triggerID)) {
+                        game.setShouldAlwaysAskTrigger(triggerID);
                     }
                     else {
-                        controller.setShouldAlwaysDeclineTrigger(triggerID);
+                        game.setShouldAlwaysDeclineTrigger(triggerID);
                         if (game.peekStack() == item &&
                                 Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
                             //auto-no if ability is on top of stack
@@ -310,14 +308,13 @@ public enum VStack implements IVDoc<CStack> {
         public void setStackInstance(final IGameView game, final StackItemView item, final PlayerView localPlayer) {
             this.game = game;
             this.item = item;
-            controller = localPlayer.getController();
             triggerID = Integer.valueOf(item.getSourceTrigger());
 
-            jmiAutoYield.setSelected(controller.shouldAutoYield(item.getKey()));
+            jmiAutoYield.setSelected(game.shouldAutoYield(item.getKey()));
 
             if (item.isOptionalTrigger() && item.getActivatingPlayer().equals(localPlayer)) {
-                jmiAlwaysYes.setSelected(controller.shouldAlwaysAcceptTrigger(triggerID));
-                jmiAlwaysNo.setSelected(controller.shouldAlwaysDeclineTrigger(triggerID));
+                jmiAlwaysYes.setSelected(game.shouldAlwaysAcceptTrigger(triggerID));
+                jmiAlwaysNo.setSelected(game.shouldAlwaysDeclineTrigger(triggerID));
                 jmiAlwaysYes.setVisible(true);
                 jmiAlwaysNo.setVisible(true);
             }

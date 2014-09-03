@@ -199,7 +199,7 @@ public final class GameMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final FControl control = Singletons.getControl();
-                final VAutoYields autoYields = new VAutoYields(control.getGameView(), control.getLocalPlayer());
+                final VAutoYields autoYields = new VAutoYields(control.getGameView());
                 autoYields.showAutoYields();
             }
         };

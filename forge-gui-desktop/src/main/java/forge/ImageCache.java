@@ -17,6 +17,16 @@
  */
 package forge;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
@@ -24,22 +34,11 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.assets.FSkinProp;
 import forge.assets.ImageUtil;
-import forge.game.card.Card;
 import forge.item.InventoryItem;
 import forge.properties.ForgeConstants;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.view.CardView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.imageio.ImageIO;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -75,21 +74,6 @@ public class ImageCache {
     public static void clear() {
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
-    }
-    
-    /**
-     * retrieve an image from the cache.  returns null if the image is not found in the cache
-     * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
-     */
-    @Deprecated
-    public static BufferedImage getImage(Card card, int width, int height) {
-        final String key;
-        if (!Singletons.getControl().mayShowCard(card) || card.isFaceDown()) {
-            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
-        } else {
-            key = card.getImageKey();
-        }
-        return scaleImage(key, width, height, true);
     }
 
     /**

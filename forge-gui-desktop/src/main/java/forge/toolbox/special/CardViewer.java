@@ -93,7 +93,7 @@ public class CardViewer extends JPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardViewer.this.list.size())) {
                 final PaperCard cp = CardViewer.this.list.get(row);
-                CardViewer.this.detail.setCard(CardView.getCardForUi(cp), false);
+                CardViewer.this.detail.setCard(CardView.getCardForUi(cp));
                 CardViewer.this.picture.setCard(cp);
             }
         }

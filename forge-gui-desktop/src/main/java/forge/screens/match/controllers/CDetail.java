@@ -17,10 +17,10 @@
  */
 package forge.screens.match.controllers;
 
-import forge.UiCommand;
+import java.awt.event.MouseEvent;
+
 import forge.Singletons;
-import forge.card.CardDetailUtil;
-import forge.game.card.Card;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -28,8 +28,6 @@ import forge.item.InventoryItemFromSet;
 import forge.screens.match.views.VDetail;
 import forge.toolbox.FMouseAdapter;
 import forge.view.CardView;
-
-import java.awt.event.MouseEvent;
 
 /**
  * Controls the card detail area in the match UI.
@@ -44,18 +42,10 @@ public enum CDetail implements ICDoc {
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
-     * @param c &emsp; Card object
+     * @param c &emsp; {@link CardView} object
      */
-    @Deprecated
-    public void showCard(Card c) {
-        if (c != null) {
-            c = c.getCardForUi();
-        }
-        view.getLblFlipcard().setVisible(c != null && CardDetailUtil.isCardFlippable(c) && Singletons.getControl().mayShowCard(c));
-        view.getPnlDetail().setCard(c);
-        if (view.getParentCell() != null) {
-            view.getParentCell().repaintSelf();
-        }
+    public void showCard(final CardView c) {
+        this.showCard(c, false);
     }
 
     public void showCard(final CardView c, final boolean isInAltState) {
@@ -68,15 +58,13 @@ public enum CDetail implements ICDoc {
 
     public void showCard(final InventoryItem item) {
         if (item instanceof IPaperCard) {
-            showCard(Card.getCardForUi((IPaperCard)item));
-        }
-        else if (item instanceof InventoryItemFromSet) {
+            showCard(CardView.getCardForUi((IPaperCard)item));
+        } else if (item instanceof InventoryItemFromSet) {
             view.getLblFlipcard().setVisible(false);
             view.getPnlDetail().setItem((InventoryItemFromSet)item);
             view.getParentCell().repaintSelf();
-        }
-        else {
-            showCard((Card)null);
+        } else {
+            showCard((CardView)null);
         }
     }
 

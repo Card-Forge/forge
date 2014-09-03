@@ -1,19 +1,46 @@
 package forge.screens.home.sanctioned;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 
-import forge.UiCommand;
 import forge.Singletons;
+import forge.UiCommand;
 import forge.assets.FSkinProp;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.deck.DeckType;
-import forge.game.GameType;
-import forge.game.card.Card;
-import forge.gui.CardDetailPanel;
-import forge.deck.DeckProxy;
 import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
 import forge.deckchooser.IDecksComboBoxListener;
+import forge.game.GameType;
+import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -25,25 +52,30 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorCommander;
 import forge.screens.deckeditor.controllers.CEditorVariant;
-import forge.screens.home.*;
-import forge.toolbox.*;
+import forge.screens.home.EMenuGroup;
+import forge.screens.home.IVSubmenu;
+import forge.screens.home.LblHeader;
+import forge.screens.home.StartButton;
+import forge.screens.home.VHomeUI;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FComboBoxWrapper;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FMouseAdapter;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FPanel;
+import forge.toolbox.FRadioButton;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FScrollPanel;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
+import forge.toolbox.FTextField;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
+import forge.view.CardView;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -1196,7 +1228,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             if (obj instanceof PaperCard) {
                 pp.setVanguardButtonText(((PaperCard) obj).getName());
-                cdp.setCard(Card.getCardForUi((PaperCard) obj));
+                cdp.setCard(CardView.getCardForUi((PaperCard) obj));
                 cdp.setVisible(true);
                 refreshPanels(false, true);
             }

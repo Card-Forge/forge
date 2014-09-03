@@ -50,7 +50,6 @@ import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
@@ -370,30 +369,8 @@ public enum FControl implements KeyEventDispatcher {
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 
-    @Deprecated
-    public Player getCurrentPlayer() {
-        // try current priority
-        Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if (null != currentPriority && currentPriority.getLobbyPlayer() == getGuiPlayer()) {
-            return currentPriority;
-        }
-
-        // otherwise find just any player, belonging to this lobbyplayer
-        for (Player p : game.getPlayers()) {
-            if (p.getLobbyPlayer() == getGuiPlayer()) {
-                return p;
-            }
-        }
-
-        return null;
-    }
-
-    @Deprecated
-    public boolean mayShowCard(Card c) {
-        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
-    }
     public boolean mayShowCard(final CardView c) {
-        return gameView == null || !gameHasHumanPlayer || gameView.mayShowCard(c, getCurrentPlayer());
+        return gameView == null || !gameHasHumanPlayer || gameView.mayShowCard(c);
     }
 
     /**

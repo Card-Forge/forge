@@ -17,7 +17,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.view.FDialog;
 import forge.view.IGameView;
-import forge.view.PlayerView;
 
 @SuppressWarnings("serial")
 public class VAutoYields extends FDialog {
@@ -32,12 +31,12 @@ public class VAutoYields extends FDialog {
     private final FCheckBox chkDisableAll;
     private final List<String> autoYields;
 
-    public VAutoYields(final IGameView game, final PlayerView playerView) {
+    public VAutoYields(final IGameView game) {
         super(true);
         setTitle("Auto-Yields");
 
         autoYields = new ArrayList<String>();
-        for (final String autoYield : playerView.getController().getAutoYields()) {
+        for (final String autoYield : game.getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = new FList<String>(new AutoYieldsListModel());
@@ -72,7 +71,7 @@ public class VAutoYields extends FDialog {
                 if (selected != null) {
                     autoYields.remove(selected);
                     btnRemove.setEnabled(autoYields.size() > 0);
-                    playerView.getController().setShouldAutoYield(selected, false);
+                    game.setShouldAutoYield(selected, false);
                     VAutoYields.this.revalidate();
                     lstAutoYields.repaint();
                 }

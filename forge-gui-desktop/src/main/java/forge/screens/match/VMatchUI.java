@@ -93,24 +93,23 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
-        if (Singletons.getControl().getObservedGame().getRules().getGameType().isCommandZoneNeeded()) {
-	        // Add extra players alternatively to existing user/AI field panels.
-	        for (int i = 2; i < lstCommands.size(); i++) {
-	            // If already in layout, no need to add again.
-	            VCommand cmdView = lstCommands.get(i);
-	            if (cmdView.getParentCell() == null) {
-	                lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
-	            }
-	        }
-        }
-        else {
-        	//If game goesn't need command zone, remove it from existing field panels
-        	for (int i = 0; i < 2; i++) {
-	            VCommand cmdView = lstCommands.get(i);
-	            if (cmdView.getParentCell() != null) {
-	            	cmdView.getParentCell().removeDoc(cmdView);
-	            }
-	        }
+        if (Singletons.getControl().getGameView().isCommandZoneNeeded()) {
+            // Add extra players alternatively to existing user/AI field panels.
+            for (int i = 2; i < lstCommands.size(); i++) {
+                // If already in layout, no need to add again.
+                VCommand cmdView = lstCommands.get(i);
+                if (cmdView.getParentCell() == null) {
+                    lstCommands.get(i % 2).getParentCell().addDoc(cmdView);
+                }
+            }
+        } else {
+            //If game goesn't need command zone, remove it from existing field panels
+            for (int i = 0; i < 2; i++) {
+                VCommand cmdView = lstCommands.get(i);
+                if (cmdView.getParentCell() != null) {
+                    cmdView.getParentCell().removeDoc(cmdView);
+                }
+            }
         }
 
         // Add extra hands to existing hand panel.
@@ -206,7 +205,7 @@ public enum VMatchUI implements IVTopLevelUI {
      */
     @Override
     public boolean onClosing(FScreen screen) {
-        if (!Singletons.getControl().getObservedGame().isGameOver()) {
+        if (!Singletons.getControl().getGameView().isGameOver()) {
             CMatchUI.SINGLETON_INSTANCE.concede();
             return false; //delay hiding tab even if concede successful
         }

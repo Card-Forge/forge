@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
+import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -188,6 +189,10 @@ public class CardView extends GameEntityView {
      */
     public void setFoilIndex(final int foilIndex) {
         this.foilIndex = foilIndex;
+    }
+
+    public void setRandomFoil() {
+        this.setFoilIndex(CardEdition.getRandomFoil(getSetCode()));
     }
 
     /**

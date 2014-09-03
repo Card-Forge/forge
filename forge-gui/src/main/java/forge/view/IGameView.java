@@ -7,7 +7,6 @@ import forge.game.GameLog;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 
 public interface IGameView {
@@ -16,12 +15,17 @@ public interface IGameView {
 
     public abstract GameType getGameType();
 
+    // Game-related methods
+    public abstract int getTurnNumber();
+    public abstract boolean isCommandZoneNeeded();
     public abstract boolean isWinner(LobbyPlayer p);
     public abstract LobbyPlayer getWinningPlayer();
     public abstract int getWinningTeam();
 
+    // Match-related methods
     public abstract boolean isFirstGameInMatch();
     public abstract boolean isMatchOver();
+    public abstract int getNumGamesInMatch();
     public abstract int getNumPlayedGamesInMatch();
     public abstract boolean isMatchWonBy(LobbyPlayer p);
     public abstract int getGamesWonBy(LobbyPlayer p);
@@ -53,10 +57,22 @@ public interface IGameView {
     public abstract List<StackItemView> getStack();
     public abstract StackItemView peekStack();
 
-    public abstract boolean mayShowCard(CardView c, Player viewer);
+    public abstract boolean mayShowCard(CardView c);
 
+    // Auto-yield related methods
+    public abstract Iterable<String> getAutoYields();
+    public abstract boolean shouldAutoYield(String key);
+    public abstract void setShouldAutoYield(String key, boolean autoYield);
     public abstract boolean getDisableAutoYields();
     public abstract void setDisableAutoYields(boolean b);
+
+    public abstract boolean shouldAlwaysAcceptTrigger(Integer trigger);
+    public abstract boolean shouldAlwaysDeclineTrigger(Integer trigger);
+    public abstract boolean shouldAlwaysAskTrigger(Integer trigger);
+
+    public abstract void setShouldAlwaysAcceptTrigger(Integer trigger);
+    public abstract void setShouldAlwaysDeclineTrigger(Integer trigger);
+    public abstract void setShouldAlwaysAskTrigger(Integer trigger);
 
     public abstract void autoPassUntilEndOfTurn();
     public abstract void autoPassCancel();

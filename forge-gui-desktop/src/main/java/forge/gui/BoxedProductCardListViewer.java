@@ -18,25 +18,27 @@
 
 package forge.gui;
 
-import forge.game.card.Card;
-import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
-import forge.toolbox.FButton;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
-import forge.view.FDialog;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Collections;
 import java.util.List;
+
+import javax.swing.AbstractListModel;
+import javax.swing.Icon;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.properties.ForgePreferences.FPref;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
+import forge.view.CardView;
+import forge.view.FDialog;
 
 /**
  * A simple class that shows a list of cards in a dialog with preview in its
@@ -187,7 +189,7 @@ public class BoxedProductCardListViewer extends FDialog {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < BoxedProductCardListViewer.this.list.size())) {
                 final PaperCard cp = BoxedProductCardListViewer.this.list.get(row);
-                BoxedProductCardListViewer.this.detail.setCard(Card.getCardForUi(cp));
+                BoxedProductCardListViewer.this.detail.setCard(CardView.getCardForUi(cp));
                 BoxedProductCardListViewer.this.picture.setCard(cp);
             }
         }
