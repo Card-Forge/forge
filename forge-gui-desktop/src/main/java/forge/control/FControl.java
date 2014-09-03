@@ -536,7 +536,7 @@ public enum FControl implements KeyEventDispatcher {
             }
         }
 
-        CDock.SINGLETON_INSTANCE.setModel(game0, humanLobbyPlayer);
+        CDock.SINGLETON_INSTANCE.setModel(game0);
         CStack.SINGLETON_INSTANCE.setModel(game0, localPlayer);
         CPlayers.SINGLETON_INSTANCE.setModel(game0);
         CLog.SINGLETON_INSTANCE.setModel(game0.getGameLog());

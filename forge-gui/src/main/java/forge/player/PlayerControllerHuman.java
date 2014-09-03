@@ -81,6 +81,7 @@ import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.DevModeUtil;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -94,7 +95,6 @@ import forge.view.IGameView;
 import forge.view.PlayerView;
 import forge.view.StackItemView;
 import forge.view.ViewUtil;
-
 
 /** 
  * A prototype for player controller class
@@ -718,8 +718,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     }
 
     @Override
-    public void autoPassUntil(PhaseType phase) {
-        super.autoPassUntil(phase);
+    public void autoPassUntilEndOfTurn() {
+        super.autoPassUntilEndOfTurn();
         updateAutoPassPrompt();
     }
 
@@ -1568,5 +1568,59 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
     @Override
     public void setDisableAutoYields(final boolean b) {
         this.game.setDisableAutoYields(b);
+    }
+
+    // Dev mode functions
+    @Override
+    public void devTogglePlayManyLands(final boolean b) {
+        player.canCheatPlayUnlimitedLands = b;
+    }
+    @Override
+    public void devGenerateMana() {
+        DevModeUtil.devModeGenerateMana(game);
+    }
+    @Override
+    public void devSetupGameState() {
+        DevModeUtil.devSetupGameState(game);
+    }
+    @Override
+    public void devTutorForCard() {
+        DevModeUtil.devModeTutor(game);
+    }
+    @Override
+    public void devAddCardToHand() {
+        DevModeUtil.devModeCardToHand(game);
+    }
+    @Override
+    public void devAddCounterToPermanent() {
+        DevModeUtil.devModeAddCounter(game);
+    }
+    @Override
+    public void devTapPermanent() {
+        DevModeUtil.devModeTapPerm(game);
+    }
+    @Override
+    public void devUntapPermanent() {
+        DevModeUtil.devModeUntapPerm(game);
+    }
+    @Override
+    public void devSetPlayerLife() {
+        DevModeUtil.devModeSetLife(game);
+    }
+    @Override
+    public void devWinGame() {
+        DevModeUtil.devModeWinGame(game, player.getLobbyPlayer());
+    }
+    @Override
+    public void devAddCardToBattlefield() {
+        DevModeUtil.devModeCardToBattlefield(game);
+    }
+    @Override
+    public void devRiggedPlanerRoll() {
+        DevModeUtil.devModeRiggedPlanarRoll(game);
+    }
+    @Override
+    public void devPlaneswalkTo() {
+        DevModeUtil.devModeRiggedPlanarRoll(game);
     }
 }

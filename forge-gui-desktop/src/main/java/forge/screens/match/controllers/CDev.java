@@ -1,19 +1,16 @@
 package forge.screens.match.controllers;
 
-import forge.GuiBase;
-import forge.UiCommand;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import forge.Singletons;
-import forge.game.player.Player;
+import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.views.VDev;
-import forge.util.GuiDisplayUtil;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Controls the combat panel in the match UI.
@@ -44,13 +41,8 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled();
         boolean newValue = VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled();
         FModel.getPreferences().setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(newValue));
-        
-        for(Player p : Singletons.getControl().getObservedGame().getPlayers()) {
-            if( p.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer() )
-                p.canCheatPlayUnlimitedLands = newValue;
-        }
+        Singletons.getControl().getGameView().devTogglePlayManyLands(newValue);
         // probably will need to call a synchronized method to have the game thread see changed value of the variable 
-        
         FModel.getPreferences().save();
     }
 
@@ -59,7 +51,7 @@ public enum CDev implements ICDoc {
         generateMana(); }
     };
     public void generateMana() {
-        GuiDisplayUtil.devModeGenerateMana();
+        Singletons.getControl().getGameView().devGenerateMana();
     }
 
     private final MouseListener madSetup = new MouseAdapter() { @Override
@@ -67,7 +59,7 @@ public enum CDev implements ICDoc {
         setupGameState(); }
     };
     public void setupGameState() {
-        GuiDisplayUtil.devSetupGameState();
+        Singletons.getControl().getGameView().devSetupGameState();
     }
 
     private final MouseListener madTutor = new MouseAdapter() { @Override
@@ -75,7 +67,7 @@ public enum CDev implements ICDoc {
         tutorForCard(); }
     };
     public void tutorForCard() {
-        GuiDisplayUtil.devModeTutor();
+        Singletons.getControl().getGameView().devTutorForCard();
     }
 
     private final MouseListener madCardToHand = new MouseAdapter() { @Override
@@ -83,7 +75,7 @@ public enum CDev implements ICDoc {
         addCardToHand(); }
     };
     public void addCardToHand() {
-        GuiDisplayUtil.devModeCardToHand();
+        Singletons.getControl().getGameView().devAddCardToHand();
     }
 
     private final MouseListener madCounter = new MouseAdapter() { @Override
@@ -91,7 +83,7 @@ public enum CDev implements ICDoc {
         addCounterToPermanent(); }
     };
     public void addCounterToPermanent() {
-        GuiDisplayUtil.devModeAddCounter();
+        Singletons.getControl().getGameView().devAddCounterToPermanent();
     }
 
     private final MouseListener madTap = new MouseAdapter() { @Override
@@ -99,7 +91,7 @@ public enum CDev implements ICDoc {
         tapPermanent(); }
     };
     public void tapPermanent() {
-        GuiDisplayUtil.devModeTapPerm();
+        Singletons.getControl().getGameView().devTapPermanent();
     }
 
     private final MouseListener madUntap = new MouseAdapter() { @Override
@@ -107,7 +99,7 @@ public enum CDev implements ICDoc {
         untapPermanent(); }
     };
     public void untapPermanent() {
-        GuiDisplayUtil.devModeUntapPerm();
+        Singletons.getControl().getGameView().devUntapPermanent();
     }
 
     private final MouseListener madLife = new MouseAdapter() { @Override
@@ -115,7 +107,7 @@ public enum CDev implements ICDoc {
         setPlayerLife(); }
     };
     public void setPlayerLife() {
-        GuiDisplayUtil.devModeSetLife();
+        Singletons.getControl().getGameView().devSetPlayerLife();
     }
 
     private final MouseListener madWinGame = new MouseAdapter() { @Override
@@ -123,15 +115,15 @@ public enum CDev implements ICDoc {
         winGame(); }
     };
     public void winGame() {
-        GuiDisplayUtil.devModeWinGame();
+        Singletons.getControl().getGameView().devWinGame();
     }
 
     private final MouseListener madCardToBattlefield = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-        addCardToPlay(); }
+        addCardToBattlefield(); }
     };
-    public void addCardToPlay() {
-        GuiDisplayUtil.devModeCardToBattlefield();
+    public void addCardToBattlefield() {
+        Singletons.getControl().getGameView().devAddCardToBattlefield();
     }
 
     private final MouseListener madRiggedRoll = new MouseAdapter() { @Override
@@ -139,7 +131,7 @@ public enum CDev implements ICDoc {
         riggedPlanerRoll(); }
     };
     public void riggedPlanerRoll() {
-        GuiDisplayUtil.devModeRiggedPlanarRoll();
+        Singletons.getControl().getGameView().devRiggedPlanerRoll();
     }
 
     private final MouseListener madWalkToPlane = new MouseAdapter() { @Override
@@ -147,7 +139,7 @@ public enum CDev implements ICDoc {
         planeswalkTo(); }
     };
     public void planeswalkTo() {
-        GuiDisplayUtil.devModePlaneswalkTo();
+        Singletons.getControl().getGameView().devPlaneswalkTo();
     }
 
     //========== End mouse listener inits

@@ -20,7 +20,6 @@ package forge.match.input;
 import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.match.MatchUtil;
@@ -83,7 +82,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             passPriority(new Runnable() {
                 @Override
                 public void run() {
-                    player.getController().autoPassUntil(PhaseType.CLEANUP);
+                    player.getController().autoPassUntilEndOfTurn();
                     stop();
                 }
             });

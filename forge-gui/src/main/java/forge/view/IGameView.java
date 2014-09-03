@@ -58,4 +58,20 @@ public interface IGameView {
     public abstract boolean getDisableAutoYields();
     public abstract void setDisableAutoYields(boolean b);
 
+    public abstract void autoPassUntilEndOfTurn();
+    public abstract void autoPassCancel();
+
+    public abstract void devTogglePlayManyLands(boolean b);
+    public abstract void devGenerateMana();
+    public abstract void devSetupGameState();
+    public abstract void devTutorForCard();
+    public abstract void devAddCardToHand();
+    public abstract void devAddCounterToPermanent();
+    public abstract void devTapPermanent();
+    public abstract void devUntapPermanent();
+    public abstract void devSetPlayerLife();
+    public abstract void devWinGame();
+    public abstract void devAddCardToBattlefield();
+    public abstract void devRiggedPlanerRoll();
+    public abstract void devPlaneswalkTo();
 }
