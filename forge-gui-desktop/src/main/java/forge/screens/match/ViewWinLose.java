@@ -11,9 +11,11 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.LobbyPlayer;
 import forge.UiCommand;
-import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.gui.SOverlayUtils;
@@ -105,7 +107,7 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        txtLog.setText(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]"));
+        txtLog.setText(StringUtils.join(game.getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]"));
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
@@ -218,14 +220,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     private void showGameOutcomeSummary() {
-        GameLog log = game.getGameLog();
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
+        for (final GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
     }
 
     private void showPlayerScores() {
-        GameLog log = game.getGameLog();
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
+        for (final GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
             lblStats.setText(removePlayerTypeFromLogMessage(o.message));
         }
     }

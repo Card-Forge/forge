@@ -1,9 +1,11 @@
 package forge.view;
 
 import java.util.List;
+import java.util.Observer;
 
 import forge.LobbyPlayer;
-import forge.game.GameLog;
+import forge.game.GameLogEntry;
+import forge.game.GameLogEntryType;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
@@ -41,10 +43,12 @@ public interface IGameView {
 
     public abstract CombatView getCombat();
 
-    // the following methods should eventually be replaced by methods returning
+    public abstract void addLogObserver(Observer o);
+    public abstract List<GameLogEntry> getLogEntries(final GameLogEntryType maxLogLevel);
+    public abstract List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel);
+
+    // the following method should eventually be replaced by methods returning
     // View classes
-    @Deprecated
-    public abstract GameLog getGameLog();
     @Deprecated
     public abstract RegisteredPlayer getGuiRegisteredPlayer(LobbyPlayer p);
 

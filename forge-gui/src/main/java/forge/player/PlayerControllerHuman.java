@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Observer;
 
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +37,7 @@ import forge.deck.DeckSection;
 import forge.events.UiEventAttackerDeclared;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameLog;
+import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.GameOutcome;
@@ -1175,13 +1176,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
         }
     }
 
-	@Override
-	public CardShields chooseRegenerationShield(Card c) {
-		if (c.getShield().size() < 2) {
+    @Override
+    public CardShields chooseRegenerationShield(Card c) {
+        if (c.getShield().size() < 2) {
             return Iterables.getFirst(c.getShield(), null);
-		}
-		return SGuiChoose.one("Choose a regeneration shield:", c.getShield());
-	}
+        }
+        return SGuiChoose.one("Choose a regeneration shield:", c.getShield());
+    }
 
     @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
@@ -1361,13 +1362,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameView
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.view.IGameView#getGameLog()
-     */
     @Override
-    public GameLog getGameLog() {
-        return game.getGameLog();
+    public void addLogObserver(final Observer o) {
+        game.getGameLog().addObserver(o);
     }
+
+    @Override
+    public List<GameLogEntry> getLogEntries(final GameLogEntryType maxLogLevel) {
+        return game.getGameLog().getLogEntries(maxLogLevel);
+    }
+
+    @Override
+    public List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel) {
+        return game.getGameLog().getLogEntriesExact(logLevel);
+    }
+
     /* (non-Javadoc)
      * @see forge.view.IGameView#getGuiRegisteredPlayer(forge.LobbyPlayer)
      */

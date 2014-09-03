@@ -516,7 +516,7 @@ public enum FControl implements KeyEventDispatcher {
         CDock.SINGLETON_INSTANCE.setModel(game0);
         CStack.SINGLETON_INSTANCE.setModel(game0, localPlayer);
         CPlayers.SINGLETON_INSTANCE.setModel(game0);
-        CLog.SINGLETON_INSTANCE.setModel(game0.getGameLog());
+        CLog.SINGLETON_INSTANCE.setModel(game0);
 
         actuateMatchPreferences();
         VAntes.SINGLETON_INSTANCE.setModel(players);

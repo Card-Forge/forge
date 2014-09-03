@@ -2,9 +2,9 @@ package forge.screens.match.controllers;
 
 import forge.UiCommand;
 import forge.FThreads;
-import forge.game.GameLog;
 import forge.gui.framework.ICDoc;
 import forge.screens.match.views.VLog;
+import forge.view.IGameView;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -19,7 +19,8 @@ public enum CLog implements ICDoc, Observer {
     /** */
     SINGLETON_INSTANCE;
 
-    private GameLog model;
+    private IGameView model;
+
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
@@ -45,18 +46,18 @@ public enum CLog implements ICDoc, Observer {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param gameLog
+     * @param game0
      */
-    public void setModel(GameLog gameLog) {
-        model = gameLog;
-        model.addObserver(this);
+    public void setModel(final IGameView game0) {
+        model = game0;
+        model.addLogObserver(this);
     }
 
     /* (non-Javadoc)
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(final Observable o, final Object arg) {
         update();
     }
 
