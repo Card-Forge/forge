@@ -114,15 +114,15 @@ public class BugReporter {
     /**
      * Alias for reportException(ex, null).
      */
-    public static void reportException(final Throwable ex) {
-        reportException(ex, null);
+    public static void reportException(final Throwable ex, final IGuiBase gui) {
+        reportException(ex, gui, null);
     }
 
     /**
      * Alias for reportException(ex, String.format(format, args)).
      */
-    public static void reportException(final Throwable ex, final String format, final Object... args) {
-        reportException(ex, String.format(format, args));
+    public static void reportException(final Throwable ex, final IGuiBase gui, final String format, final Object... args) {
+        reportException(ex, gui, String.format(format, args));
     }
 
     /**

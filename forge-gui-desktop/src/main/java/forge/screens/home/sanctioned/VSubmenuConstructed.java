@@ -75,7 +75,7 @@ import forge.toolbox.FTextField;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import forge.view.CardView;
+import forge.view.ViewUtil;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -1228,7 +1228,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             if (obj instanceof PaperCard) {
                 pp.setVanguardButtonText(((PaperCard) obj).getName());
-                cdp.setCard(CardView.getCardForUi((PaperCard) obj));
+                cdp.setCard(ViewUtil.getCardForUi((PaperCard) obj));
                 cdp.setVisible(true);
                 refreshPanels(false, true);
             }

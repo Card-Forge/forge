@@ -5,6 +5,7 @@ import java.util.Collections;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.game.card.CardCharacteristics;
+import forge.item.IPaperCard;
 import forge.view.CardView.CardStateView;
 
 public final class ViewUtil {
@@ -23,7 +24,7 @@ public final class ViewUtil {
      */
     public static void writeNonDependentCardViewProperties(final Card c, final CardView view) {
         final boolean hasAltState = c.isDoubleFaced() || c.isFlipCard() || c.isFaceDown();
-        view.setZone(c.getZone().getZoneType());
+        view.setZone(c.getZone() == null ? null : c.getZone().getZoneType());
         view.setHasAltState(hasAltState);
         view.setFaceDown(c.isFaceDown());
         view.setFoilIndex(c.getFoil());
@@ -86,5 +87,12 @@ public final class ViewUtil {
         if (altState == null) {
             altView.reset();
         }
+    }
+
+    public static CardView getCardForUi(final IPaperCard pc) {
+        final Card c = Card.getCardForUi(pc);
+        final CardView view = new CardView(-1, true);
+        writeNonDependentCardViewProperties(c, view);
+        return view;
     }
 }

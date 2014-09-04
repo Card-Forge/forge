@@ -121,8 +121,12 @@ public enum CCombat implements ICDoc {
                 }
             }
 
-            for (final CardView blocker : blockers) {
-                display.append("     < ").append(combatantToString(blocker)).append("\n");
+            if (blockers != null) {
+                for (final CardView blocker : blockers) {
+                    display.append("     < ")
+                           .append(combatantToString(blocker))
+                           .append("\n");
+                }
             }
             previousBand = isBand;
         }

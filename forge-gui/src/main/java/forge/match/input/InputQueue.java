@@ -22,8 +22,8 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import forge.game.Game;
-import forge.interfaces.IGuiBase;
-import forge.view.IGameView;
+import forge.game.player.Player;
+import forge.player.PlayerControllerHuman;
 
 /**
  * <p>
@@ -37,8 +37,13 @@ public class InputQueue extends Observable {
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
 
-    public InputQueue(final IGuiBase gui, final Game game) {
-        inputLock = new InputLockUI(gui, game, this);
+    public InputQueue(final Game game) {
+        inputLock = new InputLockUI(game, this);
+        for (final Player p : game.getPlayers()) {
+            if (p.getController() instanceof PlayerControllerHuman) {
+                this.addObserver(((PlayerControllerHuman) p.getController()).getInputProxy());
+            }
+        }
     }
 
     public final void updateObservers() {
@@ -66,7 +71,7 @@ public class InputQueue extends Observable {
      * 
      * @return a {@link forge.gui.input.InputBase} object.
      */
-    public final Input getActualInput(IGameView game) {
+    public final Input getActualInput(final Game game) {
         Input topMost = inputStack.peek(); // incoming input to Control
         if (topMost != null && !game.isGameOver()) {
             return topMost;
@@ -79,8 +84,9 @@ public class InputQueue extends Observable {
         return inputStack.toString();
     }
 
-    public void setInput(InputSynchronized input) {
+    public void setInput(final InputSynchronized input) {
         this.inputStack.push(input);
+        inputLock.setGui(input.getGui());
         syncPoint();
         this.updateObservers();
     }

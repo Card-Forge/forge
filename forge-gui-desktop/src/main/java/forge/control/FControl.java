@@ -124,7 +124,7 @@ public enum FControl implements KeyEventDispatcher {
         EXIT_FORGE
     }
 
-    private final SoundSystem soundSystem = new SoundSystem(GuiBase.getInterface());
+    private SoundSystem soundSystem;
 
     /**
      * <p>
@@ -218,6 +218,8 @@ public enum FControl implements KeyEventDispatcher {
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
+
+        this.soundSystem = new SoundSystem(GuiBase.getInterface());
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
@@ -423,7 +425,9 @@ public enum FControl implements KeyEventDispatcher {
             inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
         }
 
-        playbackControl.onGameStopRequested();
+        if (playbackControl != null) {
+            playbackControl.onGameStopRequested();
+        }
     }
 
     private InputQueue inputQueue;
@@ -447,7 +451,9 @@ public enum FControl implements KeyEventDispatcher {
             return; //TODO: See if it's possible to run multiple games at once without crashing
         }
         setPlayerName(match.getPlayers());
-        final Game game = match.createGame();
+        this.game = match.createGame();
+        inputQueue = new InputQueue(game);
+
         final LobbyPlayer me = getGuiPlayer();
         for (final Player p : game.getPlayers()) {
             if (p.getLobbyPlayer().equals(me)) {
@@ -457,7 +463,6 @@ public enum FControl implements KeyEventDispatcher {
             }
         }
 
-        inputQueue = new InputQueue(GuiBase.getInterface(), game);
         attachToGame(this.gameView);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
@@ -526,7 +531,7 @@ public enum FControl implements KeyEventDispatcher {
         game0.subscribeToEvents(fcVisitor);
 
         // Add playback controls to match if needed
-        if (localPlayer != null) {
+        if (localPlayer == null) {
             // Create dummy controller
             final PlayerControllerHuman controller =
                     new PlayerControllerLocal(game, null, humanLobbyPlayer, GuiBase.getInterface());

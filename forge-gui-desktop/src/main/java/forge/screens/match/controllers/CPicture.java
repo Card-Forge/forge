@@ -32,6 +32,7 @@ import forge.screens.match.views.VPicture;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.special.CardZoomer;
 import forge.view.CardView;
+import forge.view.ViewUtil;
 
 /**
  * Singleton controller for VPicture.
@@ -81,7 +82,7 @@ public enum CPicture implements ICDoc {
     public void showImage(final InventoryItem item) {
         if (item instanceof IPaperCard) {
             final IPaperCard paperCard = ((IPaperCard)item);
-            final CardView c = CardView.getCardForUi(paperCard);
+            final CardView c = ViewUtil.getCardForUi(paperCard);
             if (paperCard.isFoil() && c.getFoilIndex() == 0) {
                 c.setRandomFoil();
             }

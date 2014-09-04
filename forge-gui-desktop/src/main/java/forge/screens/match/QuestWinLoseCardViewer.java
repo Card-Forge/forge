@@ -35,7 +35,7 @@ import forge.toolbox.FList;
 import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
-import forge.view.CardView;
+import forge.view.ViewUtil;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -112,7 +112,7 @@ public class QuestWinLoseCardViewer extends FPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < QuestWinLoseCardViewer.this.list.size())) {
                 final PaperCard cp = QuestWinLoseCardViewer.this.list.get(row);
-                QuestWinLoseCardViewer.this.detail.setCard(CardView.getCardForUi(cp));
+                QuestWinLoseCardViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 QuestWinLoseCardViewer.this.picture.setCard(cp);
             }
         }

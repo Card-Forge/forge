@@ -32,6 +32,7 @@ import forge.toolbox.FScrollPane;
 import forge.view.CardView;
 import forge.view.FDialog;
 import forge.view.SpellAbilityView;
+import forge.view.ViewUtil;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -330,7 +331,7 @@ public class DualListBox<T> extends FDialog {
         } else if (obj instanceof SpellAbilityView) {
             card = ((SpellAbilityView) obj).getHostCard();
         } else if (obj instanceof PaperCard) {
-            card = CardView.getCardForUi((IPaperCard) obj);
+            card = ViewUtil.getCardForUi((IPaperCard) obj);
         }
 
         GuiUtils.clearPanelSelections();

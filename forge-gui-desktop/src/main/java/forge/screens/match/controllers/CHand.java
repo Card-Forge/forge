@@ -27,6 +27,8 @@ import java.util.Observable;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.FThreads;
 import forge.GuiBase;
 import forge.Singletons;
@@ -105,7 +107,11 @@ public class CHand implements ICDoc {
         }
 
         //update card panels in hand area
-        final List<CardView> cards = player.getHandCards();
+        
+        final List<CardView> cards;
+        synchronized (player) {
+            cards = ImmutableList.copyOf(player.getHandCards());
+        }
         final List<CardPanel> placeholders = new ArrayList<CardPanel>();
         final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
 

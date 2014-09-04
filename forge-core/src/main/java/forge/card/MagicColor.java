@@ -21,7 +21,8 @@ public class MagicColor {
     public static final byte ALL_COLORS = BLACK | BLUE | WHITE | RED | GREEN;
     public static final int NUMBER_OR_COLORS = 5;
 
-    public static final byte[] WUBRG = new byte[] { WHITE, BLUE, BLACK, RED, GREEN }; 
+    public static final byte[] WUBRG  = new byte[] { WHITE, BLUE, BLACK, RED, GREEN }; 
+    public static final byte[] WUBRGC = new byte[] { WHITE, BLUE, BLACK, RED, GREEN, COLORLESS }; 
     
     public static byte fromName(String s) {
         if( s == null ) return 0;

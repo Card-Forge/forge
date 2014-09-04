@@ -37,8 +37,8 @@ import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.view.CardView;
 import forge.view.FDialog;
+import forge.view.ViewUtil;
 
 /**
  * A simple class that shows a list of cards in a dialog with preview in its
@@ -189,7 +189,7 @@ public class BoxedProductCardListViewer extends FDialog {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < BoxedProductCardListViewer.this.list.size())) {
                 final PaperCard cp = BoxedProductCardListViewer.this.list.get(row);
-                BoxedProductCardListViewer.this.detail.setCard(CardView.getCardForUi(cp));
+                BoxedProductCardListViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 BoxedProductCardListViewer.this.picture.setCard(cp);
             }
         }

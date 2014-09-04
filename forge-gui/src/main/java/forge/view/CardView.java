@@ -15,10 +15,8 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
-import forge.item.IPaperCard;
 
 public class CardView extends GameEntityView {
 
@@ -59,11 +57,7 @@ public class CardView extends GameEntityView {
     private Iterable<CardView> mustBlock;
     private CardView pairedWith;
 
-    @Deprecated
-    public final Card card;
-
-    public CardView(@Deprecated final Card card, final int id, final boolean isUiDisplayable) {
-        this.card = card;
+    public CardView(final int id, final boolean isUiDisplayable) {
         this.id = id;
         this.isUiDisplayable = isUiDisplayable;
         this.reset();
@@ -755,7 +749,7 @@ public class CardView extends GameEntityView {
 
     @Override
     public final String toString() {
-        return this.getState().getName() + " (" + this.getId() + ")";
+        return this.getState().toString();
     }
 
     public class CardStateView {
@@ -789,6 +783,11 @@ public class CardView extends GameEntityView {
             this.hasInfect = false;
             this.hasStorm = false;
             this.hasTrample = false;
+        }
+
+        @Override
+        public String toString() {
+            return this.getName() + " (" + this.getCard().getId() + ")";
         }
 
         public CardView getCard() {
@@ -1021,12 +1020,5 @@ public class CardView extends GameEntityView {
         public boolean isPlaneswalker() {
             return this.type.contains("Planeswalker");
         }
-    }
-
-    public static CardView getCardForUi(final IPaperCard pc) {
-        final Card c = Card.getCardForUi(pc);
-        final CardView view = new CardView(c, -1, true);
-        ViewUtil.writeNonDependentCardViewProperties(c, view);
-        return view;
     }
 }

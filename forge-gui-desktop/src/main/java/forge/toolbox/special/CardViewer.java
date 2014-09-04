@@ -30,7 +30,7 @@ import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
 import forge.toolbox.FScrollPane;
-import forge.view.CardView;
+import forge.view.ViewUtil;
 
 /**
  * A simple JPanel that shows three columns: card list, pic, and description..
@@ -93,7 +93,7 @@ public class CardViewer extends JPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardViewer.this.list.size())) {
                 final PaperCard cp = CardViewer.this.list.get(row);
-                CardViewer.this.detail.setCard(CardView.getCardForUi(cp));
+                CardViewer.this.detail.setCard(ViewUtil.getCardForUi(cp));
                 CardViewer.this.picture.setCard(cp);
             }
         }

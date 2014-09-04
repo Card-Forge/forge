@@ -17,6 +17,35 @@
  */
 package forge.quest.io;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -29,38 +58,29 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.error.BugReporter;
-import forge.item.*;
+import forge.item.BoosterBox;
+import forge.item.BoosterPack;
+import forge.item.FatPack;
+import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.item.PreconDeck;
+import forge.item.TournamentPack;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDraft;
 import forge.quest.QuestMode;
 import forge.quest.bazaar.QuestItemType;
-import forge.quest.data.*;
+import forge.quest.data.GameFormatQuest;
+import forge.quest.data.QuestAchievements;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestData;
+import forge.quest.data.QuestEventDraftContainer;
+import forge.quest.data.QuestItemCondition;
 import forge.util.FileUtil;
 import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 import forge.util.XmlUtil;
-
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.*;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import java.io.*;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * <p>
@@ -130,14 +150,15 @@ public class QuestDataIO {
                     QuestDataIO.updateSaveFile(data, bigXML, xmlSaveFile.getName().replace(".dat", ""));
                 }
                 catch (final Exception e) {
-                    BugReporter.reportException(e);
+                    //BugReporter.reportException(e);
+                    throw new RuntimeException(e);
                 }
             }
 
             return data;
         }
         catch (final Exception ex) {
-            BugReporter.reportException(ex, "Error loading Quest Data");
+            //BugReporter.reportException(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
     }
@@ -371,7 +392,7 @@ public class QuestDataIO {
 
         }
         catch (final Exception ex) {
-            BugReporter.reportException(ex, "Error saving Quest Data.");
+            //BugReporter.reportException(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }
     }

@@ -46,10 +46,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
     public InputBase(final PlayerControllerHuman controller) {
         this.controller = controller;
     }
-    protected final PlayerControllerHuman getController() {
+    public final PlayerControllerHuman getController() {
         return this.controller;
     }
-    protected IGuiBase getGui() {
+    public IGuiBase getGui() {
         return getController().getGui();
     }
 

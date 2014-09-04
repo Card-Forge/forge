@@ -41,7 +41,7 @@ public final class Main {
         GuiBase.setInterface(new GuiDesktop());
 
         //install our error handler
-        ExceptionHandler.registerErrorHandling();
+        ExceptionHandler.registerErrorHandling(GuiBase.getInterface());
 
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {

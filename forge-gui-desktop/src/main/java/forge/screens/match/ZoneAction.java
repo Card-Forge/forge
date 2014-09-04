@@ -3,8 +3,8 @@ package forge.screens.match;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-import com.beust.jcommander.internal.Lists;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;

@@ -16,6 +16,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.interfaces.IGuiBase;
+import forge.match.input.InputProxy;
 import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
@@ -26,14 +27,20 @@ import forge.view.StackItemView;
 public abstract class PlayerControllerHuman extends PlayerController {
 
     private final IGuiBase gui;
+    private final InputProxy inputProxy;
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp);
         this.gui = gui;
+        this.inputProxy = new InputProxy(this, game0);
     }
 
     public final IGuiBase getGui() {
         return this.gui;
+    }
+
+    public final InputProxy getInputProxy() {
+        return this.inputProxy;
     }
 
     public abstract boolean canUndoLastAction();

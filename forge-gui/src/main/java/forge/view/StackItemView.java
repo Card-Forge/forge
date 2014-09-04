@@ -47,4 +47,8 @@ public class StackItemView {
         return optionalTrigger;
     }
 
+    @Override
+    public String toString() {
+        return this.getText();
+    }
 }

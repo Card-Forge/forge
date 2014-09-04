@@ -45,6 +45,7 @@ import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.CardView;
 import forge.view.CardView.CardStateView;
 import forge.view.FDialog;
+import forge.view.ViewUtil;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -131,7 +132,7 @@ public class CardDetailPanel extends SkinnedPanel {
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");
         cdArea.setText(CardDetailUtil.getItemDescription(item));
-        this.updateBorder(item instanceof IPaperCard ? CardView.getCardForUi((IPaperCard)item).getState() : null, false);
+        this.updateBorder(item instanceof IPaperCard ? ViewUtil.getCardForUi((IPaperCard)item).getState() : null, false);
 
         String set = item.getEdition();
         setInfoLabel.setText(set);

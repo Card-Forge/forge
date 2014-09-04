@@ -22,7 +22,7 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         control = fControlGamePlayback;
     }
     @Override
-    protected IGuiBase getGui() {
+    public IGuiBase getGui() {
         return gui;
     }
 

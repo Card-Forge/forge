@@ -198,13 +198,13 @@ public class VAssignDamage {
             if (defender instanceof CardView) 
                 fakeCard = (CardView)defender;
             else if (defender instanceof PlayerView) { 
-                fakeCard = new CardView(null, -1, true);
+                fakeCard = new CardView(-1, true);
                 fakeCard.getState().setName(this.defender.toString());
                 final PlayerView p = (PlayerView)defender;
                 fakeCard.setOwner(p);
                 fakeCard.getState().setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
             } else {
-                fakeCard = new CardView(null, -2, true);
+                fakeCard = new CardView(-2, true);
                 fakeCard.getState().setName(this.defender.toString());
             }
             addPanelForDefender(pnlDefenders, fakeCard);

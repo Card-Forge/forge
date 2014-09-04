@@ -14,15 +14,18 @@ import forge.util.ThreadUtil;
 public class InputLockUI implements Input  {
     private final AtomicInteger iCall = new AtomicInteger();
 
-    private final IGuiBase gui;
+    private IGuiBase gui;
     private final Game game;
-    public InputLockUI(final IGuiBase gui, final Game game, final InputQueue inputQueue) {
-        this.gui = gui;
+    public InputLockUI(final Game game, final InputQueue inputQueue) {
         this.game = game;
     }
 
     private IGuiBase getGui() {
         return gui;
+    }
+
+    public void setGui(final IGuiBase gui) {
+        this.gui = gui;
     }
 
     public void showMessageInitial() {

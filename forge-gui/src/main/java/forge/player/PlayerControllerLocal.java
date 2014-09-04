@@ -78,7 +78,6 @@ import forge.match.input.InputConfirm;
 import forge.match.input.InputConfirmMulligan;
 import forge.match.input.InputPassPriority;
 import forge.match.input.InputProliferate;
-import forge.match.input.InputProxy;
 import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
@@ -106,17 +105,11 @@ import forge.view.ViewUtil;
  * Handles phase skips for now.
  */
 public class PlayerControllerLocal extends PlayerControllerHuman implements IGameView {
-    private final InputProxy inputProxy;
     public PlayerControllerLocal(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp, gui);
-        this.inputProxy = new InputProxy(this);
-        // aggressively cache a view for each player
+        // aggressively cache a view for each player (also caches cards)
         for (final Player player : game.getRegisteredPlayers()) {
             getPlayerView(player);
-        }
-        // aggressively cache a view for each card
-        for (final Card c : game.getCardsInGame()) {
-            getCardView(c);
         }
     }
 
@@ -126,7 +119,7 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
 
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
-     */
+     */ 
     public SpellAbility getAbilityToPlay(final List<SpellAbility> abilities, final ITriggerEvent triggerEvent) {
         final SpellAbilityView choice = getGui().getAbilityToPlay(getSpellAbilityViews(abilities), triggerEvent);
         return getSpellAbility(choice);
@@ -1354,6 +1347,9 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
      */
     @Override
     public CombatView getCombat(final Combat c) {
+        if (c == null) {
+            return null;
+        }
         updateCombatView(c);
         return combatView;
     }
@@ -1361,9 +1357,10 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     private final void updateCombatView(final Combat combat) {
         combatView.reset();
         for (final AttackingBand b : combat.getAttackingBands()) {
+            if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);
-            final List<Card> blockers = b.isBlocked() ? combat.getBlockers(b) : null;
-            combatView.addAttackingBand(getCardViews(b.getAttackers()), getGameEntityView(defender), getCardViews(blockers));
+            final List<Card> blockers = b.isBlocked() == null ? null : combat.getBlockers(b);
+            combatView.addAttackingBand(getCardViews(b.getAttackers()), getGameEntityView(defender), blockers == null ? null : getCardViews(blockers));
         }
     }
 
@@ -1411,32 +1408,32 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
 
     @Override
     public void selectButtonOk() {
-        inputProxy.selectButtonOK();
+        getInputProxy().selectButtonOK();
     }
 
     @Override
     public void selectButtonCancel() {
-        inputProxy.selectButtonCancel();
+        getInputProxy().selectButtonCancel();
     }
 
     @Override
     public boolean passPriority() {
-        return inputProxy.passPriority();
+        return getInputProxy().passPriority();
     }
 
     @Override
     public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
-        inputProxy.selectPlayer(player, triggerEvent);
+        getInputProxy().selectPlayer(player, triggerEvent);
     }
 
     @Override
     public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        inputProxy.selectCard(card, triggerEvent);
+        getInputProxy().selectCard(card, triggerEvent);
     }
 
     @Override
     public void selectAbility(final SpellAbilityView sa) {
-        inputProxy.selectAbility(sa);
+        getInputProxy().selectAbility(sa);
     }
 
     /* (non-Javadoc)
@@ -1538,10 +1535,14 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
             getPlayerView(p, view);
         } else {
             view = new PlayerView(p.getLobbyPlayer(), p.getController());
-            getPlayerView(p, view);
             players.put(p, view);
+            getPlayerView(p, view);
         }
         return view;
+    }
+
+    private PlayerView getPlayerViewFast(final Player p) {
+        return players.get(p);
     }
 
     @Override
@@ -1565,6 +1566,10 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
         view.setGraveCards(getCardViews(p.getCardsIn(ZoneType.Graveyard)));
         view.setHandCards(getCardViews(p.getCardsIn(ZoneType.Hand)));
         view.setLibraryCards(getCardViews(p.getCardsIn(ZoneType.Library)));
+
+        for (final byte b : MagicColor.WUBRGC) {
+            view.setMana(b, p.getManaPool().getAmountOfColor(b));
+        }
     }
 
     public CardView getCardView(final Card c) {
@@ -1578,11 +1583,26 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
             view = cards.get(cUi);
             writeCardToView(cUi, view);
         } else {
-            view = new CardView(cUi, cUi.getUniqueNumber(), cUi == c);
-            writeCardToView(cUi, view);
+            view = new CardView(cUi.getUniqueNumber(), cUi == c);
             cards.put(cUi, view);
+            writeCardToView(cUi, view);
         }
         return view;
+    }
+
+    private CardView getCardViewFast(final Card c) {
+        return cards.get(c);
+    }
+
+    private final Function<Card, CardView> FN_GET_CARDVIEW_FAST = new Function<Card, CardView>() {
+        @Override
+        public CardView apply(Card input) {
+            return getCardViewFast(input);
+        }
+    };
+
+    private Iterable<CardView> getCardViewsFast(final Iterable<Card> cards) {
+        return Iterables.transform(cards, FN_GET_CARDVIEW_FAST);
     }
 
     public Card getCard(final CardView c) {
@@ -1599,29 +1619,30 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
         // First, write the values independent of other views.
         ViewUtil.writeNonDependentCardViewProperties(c, view);
         // Next, write the values that depend on other views.
-        view.setOwner(getPlayerView(c.getOwner()));
-        view.setController(getPlayerView(c.getController()));
+        view.setOwner(getPlayerViewFast(c.getOwner()));
+        view.setController(getPlayerViewFast(c.getController()));
         view.setAttacking(game.getCombat() != null && game.getCombat().isAttacking(c));
         view.setBlocking(game.getCombat() != null && game.getCombat().isBlocking(c));
-        view.setChosenPlayer(getPlayerView(c.getChosenPlayer()));
-        view.setEquipping(getCardView(Iterables.getFirst(c.getEquipping(), null)));
-        view.setEquippedBy(getCardViews(c.getEquippedBy()));
-        view.setEnchantingCard(getCardView(c.getEnchantingCard()));
-        view.setEnchantingPlayer(getPlayerView(c.getEnchantingPlayer()));
-        view.setEnchantedBy(getCardViews(c.getEnchantedBy()));
-        view.setFortifiedBy(getCardViews(c.getFortifiedBy()));
-        view.setGainControlTargets(getCardViews(c.getGainControlTargets()));
-        view.setCloneOrigin(getCardView(c.getCloneOrigin()));
-        view.setImprinted(getCardViews(c.getImprinted()));
-        view.setHauntedBy(getCardViews(c.getHauntedBy()));
-        view.setHaunting(getCardView(c.getHaunting()));
-        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViews(c.getMustBlockCards()));
-        view.setPairedWith(getCardView(c.getPairedWith()));
+        view.setChosenPlayer(getPlayerViewFast(c.getChosenPlayer()));
+        view.setEquipping(getCardViewFast(Iterables.getFirst(c.getEquipping(), null)));
+        view.setEquippedBy(getCardViewsFast(c.getEquippedBy()));
+        view.setEnchantingCard(getCardViewFast(c.getEnchantingCard()));
+        view.setEnchantingPlayer(getPlayerViewFast(c.getEnchantingPlayer()));
+        view.setEnchantedBy(getCardViewsFast(c.getEnchantedBy()));
+        view.setFortifiedBy(getCardViewsFast(c.getFortifiedBy()));
+        view.setGainControlTargets(getCardViewsFast(c.getGainControlTargets()));
+        view.setCloneOrigin(getCardViewFast(c.getCloneOrigin()));
+        view.setImprinted(getCardViewsFast(c.getImprinted()));
+        view.setHauntedBy(getCardViewsFast(c.getHauntedBy()));
+        view.setHaunting(getCardViewFast(c.getHaunting()));
+        view.setMustBlock(c.getMustBlockCards() == null ? Collections.<CardView>emptySet() : getCardViewsFast(c.getMustBlockCards()));
+        view.setPairedWith(getCardViewFast(c.getPairedWith()));
     }
 
     @Override
     public boolean mayShowCard(final CardView c) {
-        return cards.inverse().get(c).canBeShownTo(player);
+        final Card card = cards.inverse().get(c);
+        return card == null || card.canBeShownTo(player);
     }
 
     @Override
@@ -1649,6 +1670,7 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
 
     private void writeSpellAbilityToView(final SpellAbility sa, final SpellAbilityView view) {
         view.setHostCard(getCardView(sa.getHostCard()));
+        view.setDescription(sa.getDescription());
         view.setCanPlay(sa.canPlay());
         view.setPromptIfOnlyPossibleAbility(sa.promptIfOnlyPossibleAbility());
     }

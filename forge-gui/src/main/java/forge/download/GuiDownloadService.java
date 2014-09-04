@@ -227,7 +227,7 @@ public abstract class GuiDownloadService implements Runnable {
                 p = new Proxy(TYPES[type], new InetSocketAddress(txtAddress.getText(), Integer.parseInt(txtPort.getText())));
             }
             catch (final Exception ex) {
-                BugReporter.reportException(ex,
+                BugReporter.reportException(ex, gui,
                         "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
                         txtAddress.getText(), txtPort.getText());
                 return;

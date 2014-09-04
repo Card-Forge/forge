@@ -35,6 +35,7 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
 import forge.view.CardView;
 import forge.view.CardView.CardStateView;
+import forge.view.PlayerView;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -76,7 +77,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
     private int stackSpacingX, stackSpacingY;
 
-    private final List<CardView> model;
+    private final PlayerView model;
 
     /**
      * <p>
@@ -85,13 +86,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * 
      * @param scrollPane
      * @param mirror
-     * @param list 
+     * @param player 
      */
-    public PlayArea(final FScrollPane scrollPane, final boolean mirror, final List<CardView> list) {
+    public PlayArea(final FScrollPane scrollPane, final boolean mirror, final PlayerView player) {
         super(scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
-        this.model = list;
+        this.model = player;
     }
 
     private final CardStackRow collectAllLands() {
@@ -577,7 +578,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         super.mouseLeftClicked(panel, evt);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
@@ -595,7 +596,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         recalculateCardPanels(model);
     }
 
-    private void recalculateCardPanels(final List<CardView> model) {
+    private void recalculateCardPanels(final PlayerView model) {
+        final List<CardView> modelCopy;
+        synchronized (model) {
+            modelCopy = Lists.newArrayList(model.getBfCards());
+        }
+
         final List<CardView> oldCards = Lists.newArrayList();
         for (final CardPanel cpa : getCardPanels()) {
             oldCards.add(cpa.getCard());
@@ -604,7 +610,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         final List<CardView> toReplace = Lists.newArrayList();
 
         // delete all cards that differ in timestamp (they have been blinked) 
-        for (final CardView c : model) {
+        for (final CardView c : modelCopy) {
             for (int i = 0; i  < toDelete.size(); i++) {
                 final CardView c2 = toDelete.get(i);
                 if (c.getId() == c2.getId()) {
@@ -623,8 +629,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 removeCardPanel(getCardPanel(card.getId()));
             }
         }
-    
-        final List<CardView> toAdd = new ArrayList<CardView>(model);
+
+        final List<CardView> toAdd = new ArrayList<CardView>(modelCopy);
         toAdd.removeAll(oldCards);
         toAdd.addAll(toReplace);
 
@@ -648,7 +654,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
         }
     
-        for (final CardView card : model) {
+        for (final CardView card : modelCopy) {
             updateCard(card, true);
         }
         invalidate();

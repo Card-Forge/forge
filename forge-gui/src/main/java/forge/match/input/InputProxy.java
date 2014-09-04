@@ -22,12 +22,12 @@ import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
+import forge.game.Game;
 import forge.interfaces.IGuiBase;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SOptionPane;
 import forge.view.CardView;
-import forge.view.IGameView;
 import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
 
@@ -43,22 +43,18 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private AtomicReference<Input> input = new AtomicReference<Input>();
-    private IGameView game = null;
+    private final Game game;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
 
     private final PlayerControllerHuman controller;
-    public InputProxy(final PlayerControllerHuman controller) {
+    public InputProxy(final PlayerControllerHuman controller, final Game game) {
         this.controller = controller;
+        this.game = game;
     }
 
     private IGuiBase getGui() {
-        return controller.getGui();
-    }
-
-    public void setGame(IGameView game0) {
-        game = game0;
-        getGui().getInputQueue().addObserver(this);
+        return this.controller.getGui();
     }
 
     public boolean passPriority() {
@@ -80,7 +76,6 @@ public class InputProxy implements Observer {
     @Override
     public final void update(final Observable observable, final Object obj) {
         final Input nextInput = getGui().getInputQueue().getActualInput(game);
-        
 /*        if(DEBUG_INPUT) 
             System.out.printf("%s ... \t%s on %s, \tstack = %s%n", 
                     FThreads.debugGetStackTraceItem(6, true), nextInput == null ? "null" : nextInput.getClass().getSimpleName(), 

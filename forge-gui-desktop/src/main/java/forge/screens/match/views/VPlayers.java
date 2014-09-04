@@ -24,10 +24,9 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
 
+import com.google.common.collect.Maps;
+
 import net.miginfocom.swing.MigLayout;
-
-import org.testng.collections.Maps;
-
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

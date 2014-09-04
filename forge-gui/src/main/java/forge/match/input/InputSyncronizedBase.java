@@ -21,7 +21,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
             cdlDone.await();
         }
         catch (InterruptedException e) {
-            BugReporter.reportException(e);
+            BugReporter.reportException(e, getGui());
         }
     }
 

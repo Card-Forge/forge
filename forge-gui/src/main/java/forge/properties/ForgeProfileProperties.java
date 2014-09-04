@@ -150,7 +150,7 @@ public class ForgeProfileProperties {
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> getDefaultDirs() {
         if (isRunningOnDesktop) { //special case for mobile devices
-            String assetsDir = ForgeConstants.ASSETS_DIR();
+            String assetsDir = ForgeConstants.ASSETS_DIR;
             return Pair.of(assetsDir + "data" + File.separator, assetsDir + "cache" + File.separator);
         }
 

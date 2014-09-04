@@ -32,7 +32,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import org.testng.collections.Lists;
+import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.gui.framework.FScreen;
@@ -245,6 +245,7 @@ public enum TargetingOverlay {
             }
             for (final CardView attackingCard : combat.getAttackers()) {
                 final Iterable<CardView> cards = combat.getBlockers(attackingCard);
+                if (cards == null) continue;
                 for (final CardView blockingCard : cards) {
                     if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
                     arcsCombat.add(new Point[] {

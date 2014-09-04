@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.LobbyPlayer;
@@ -18,7 +19,14 @@ public class PlayerView extends GameEntityView {
     private int life, poisonCounters, maxHandSize, numDrawnThisTurn, preventNextDamage;
     private List<String> keywords;
     private String commanderInfo;
-    private List<CardView> anteCards, bfCards, commandCards, exileCards, flashbackCards, graveCards, handCards, libraryCards;
+    private List<CardView> anteCards = Lists.newArrayList(),
+            bfCards = Lists.newArrayList(),
+            commandCards = Lists.newArrayList(),
+            exileCards = Lists.newArrayList(),
+            flashbackCards = Lists.newArrayList(),
+            graveCards = Lists.newArrayList(),
+            handCards = Lists.newArrayList(),
+            libraryCards = Lists.newArrayList();
     private boolean hasUnlimitedHandSize;
     private Map<Byte, Integer> mana = Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1);
 
@@ -160,7 +168,8 @@ public class PlayerView extends GameEntityView {
      * @param anteCards the anteCards to set
      */
     public void setAnteCards(final List<CardView> anteCards) {
-        this.anteCards = ImmutableList.copyOf(anteCards);
+        this.anteCards.clear();
+        this.anteCards.addAll(anteCards);
     }
 
     /**
@@ -174,7 +183,8 @@ public class PlayerView extends GameEntityView {
      * @param bfCards the bfCards to set
      */
     public void setBfCards(final List<CardView> bfCards) {
-        this.bfCards = ImmutableList.copyOf(bfCards);
+        this.bfCards.clear();
+        this.bfCards.addAll(bfCards);
     }
 
     /**
@@ -188,7 +198,8 @@ public class PlayerView extends GameEntityView {
      * @param commandCards the commandCards to set
      */
     public void setCommandCards(List<CardView> commandCards) {
-        this.commandCards = commandCards;
+        this.commandCards.clear();
+        this.commandCards.addAll(commandCards);
     }
 
     /**
@@ -202,7 +213,8 @@ public class PlayerView extends GameEntityView {
      * @param exileCards the exileCards to set
      */
     public void setExileCards(final List<CardView> exileCards) {
-        this.exileCards = ImmutableList.copyOf(exileCards);
+        this.exileCards.clear();
+        this.exileCards.addAll(exileCards);
     }
 
     /**
@@ -216,7 +228,8 @@ public class PlayerView extends GameEntityView {
      * @param flashbackCards the flashbackCards to set
      */
     public void setFlashbackCards(final List<CardView> flashbackCards) {
-        this.flashbackCards = ImmutableList.copyOf(flashbackCards);
+        this.flashbackCards.clear();
+        this.flashbackCards.addAll(flashbackCards);
     }
 
     /**
@@ -230,7 +243,8 @@ public class PlayerView extends GameEntityView {
      * @param graveCards the graveCards to set
      */
     public void setGraveCards(final List<CardView> graveCards) {
-        this.graveCards = ImmutableList.copyOf(graveCards);
+        this.graveCards.clear();
+        this.graveCards.addAll(graveCards);
     }
 
     /**
@@ -244,7 +258,8 @@ public class PlayerView extends GameEntityView {
      * @param handCards the handCards to set
      */
     public void setHandCards(final List<CardView> handCards) {
-        this.handCards = ImmutableList.copyOf(handCards);
+        this.handCards.clear();
+        this.handCards.addAll(handCards);
     }
 
     /**
@@ -258,7 +273,8 @@ public class PlayerView extends GameEntityView {
      * @param libraryCards the libraryCards to set
      */
     public void setLibraryCards(final List<CardView> libraryCards) {
-        this.libraryCards = ImmutableList.copyOf(libraryCards);
+        this.libraryCards.clear();
+        this.libraryCards.addAll(libraryCards);
     }
 
     /**
@@ -276,10 +292,10 @@ public class PlayerView extends GameEntityView {
     }
 
     public int getMana(final Byte color) {
-        return this.mana.get(color).intValue();
+        return this.mana.containsKey(color) ? this.mana.get(color).intValue() : 0;
     }
 
-    private void setMana(final byte color, final int mana) {
+    public void setMana(final byte color, final int mana) {
         this.mana.put(Byte.valueOf(color), Integer.valueOf(mana));
     }
     public void setWhiteMana(final int mana) {
