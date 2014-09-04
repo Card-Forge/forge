@@ -21,7 +21,6 @@ package forge.ai;
 import forge.game.card.Card;
 import forge.game.player.Player;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -35,19 +34,15 @@ import java.util.Set;
  * too, for instance as revealed from the opponent's hand) and assign them to different memory sets in order to help
  * make somewhat more "educated" decisions to attack with certain cards or play certain spell abilities. Each 
  * AiController has its own memory that is created when the AI player is spawned. The card memory is accessible 
- * via AiController.getCardMemory. AiCardMemory can memorize cards belonging to different players. For example, 
- * it's possible to distinctly store cards revealed by different players in a single AiCardMemory.
- * Methods without the Player parameter operate on the "default" memory sets that belong directly to the owner
- * of the card memory (the AI player itself).
+ * via AiController.getCardMemory. 
  * 
  * @author Forge
  */
 public class AiCardMemory {
 
-    private HashMap<Player, HashSet<Card>> mapMandatoryAttackers = new HashMap<Player, HashSet<Card>>();
-    private HashMap<Player, HashSet<Card>> mapHeldManaSources = new HashMap<Player, HashSet<Card>>();
-    private HashMap<Player, HashSet<Card>> mapRevealedCards = new HashMap<Player, HashSet<Card>>();
-    private Player self = null;
+    private HashSet<Card> memMandatoryAttackers = new HashSet<Card>();
+    private HashSet<Card> memHeldManaSources = new HashSet<Card>();
+    private HashSet<Card> memRevealedCards = new HashSet<Card>();
 
     /**
      * Defines the memory set in which the card is remembered
@@ -60,59 +55,21 @@ public class AiCardMemory {
         REVEALED_CARDS; // stub, not linked to AI code yet
     }
 
-    public AiCardMemory(Player self) {
-        this.self = self;
-    }
-
-    private Set<Card> getMemorySet(Player p, MemorySet set) {
-        if (p == null) {
-            return null;
-        }
-
+    private Set<Card> getMemorySet(MemorySet set) {
         switch (set) {
             case MANDATORY_ATTACKERS:
-                if (!mapMandatoryAttackers.containsKey(p)) {
-                    mapMandatoryAttackers.put(p, new HashSet<Card>());
-                }
-                return mapMandatoryAttackers.get(p);
+                return memMandatoryAttackers;
             case HELD_MANA_SOURCES:
-                if (!mapHeldManaSources.containsKey(p)) {
-                    mapHeldManaSources.put(p, new HashSet<Card>());
-                }
-                return mapHeldManaSources.get(p);
+                return memHeldManaSources;
             case REVEALED_CARDS:
-                if (!mapRevealedCards.containsKey(p)) {
-                    mapRevealedCards.put(p, new HashSet<Card>());
-                }
-                return mapRevealedCards.get(p);
+                return memRevealedCards;
             default:
                 return null;
         }
     }
 
     /**
-     * Checks if the given card was remembered in a certain memory set that stores cards
-     * memorized from a particular player.
-     * 
-     * @param p
-     *            player that was the controller of the card at the time the card was remembered
-     * @param c
-     *            the card
-     * @param set the memory set that is to be checked 
-     * @return true, if the card is remembered in the given memory set
-     */
-    public boolean isRememberedCard(Player p, Card c, MemorySet set) {
-        if (c == null || p == null) {
-            return false;
-        }
-
-        Set<Card> memorySet = getMemorySet(p, set);
-
-        return memorySet == null ? false : memorySet.contains(c);
-    }
-    
-    /**
-     * Checks if the given card was remembered in a certain memory set for the default player (owner of this card memory).
+     * Checks if the given card was remembered in the given memory set. 
      * 
      * @param c
      *            the card
@@ -120,26 +77,25 @@ public class AiCardMemory {
      * @return true, if the card is remembered in the given memory set
      */
     public boolean isRememberedCard(Card c, MemorySet set) {
-        return isRememberedCard(self, c, set);
+        if (c == null) {
+            return false;
+        }
+
+        Set<Card> memorySet = getMemorySet(set);
+
+        return memorySet == null ? false : memorySet.contains(c);
     }
 
     /**
-     * Checks if at least one card of the given name was remembered in a certain memory set
-     * that stores cards memorized from a particular player.
+     * Checks if at least one card of the given name was remembered in the given memory set.
      * 
-     * @param p
-     *            player that was the controller of the card at the time the card was remembered
      * @param cardName
      *            the card name
      * @param set the memory set that is to be checked 
      * @return true, if at least one card with the given name is remembered in the given memory set
      */
-    public boolean isRememberedCardByName(Player p, String cardName, MemorySet set) {
-        if (p == null) {
-            return false;
-        }
-
-        Set<Card> memorySet = getMemorySet(p, set);
+    public boolean isRememberedCardByName(String cardName, MemorySet set) {
+        Set<Card> memorySet = getMemorySet(set);
         Iterator<Card> it = memorySet.iterator();
 
         while (it.hasNext()) {
@@ -153,102 +109,78 @@ public class AiCardMemory {
     }
 
     /**
-     * Checks if at least one card of the given name was remembered in a certain memory set for the default player (owner of this card memory).
+     * Checks if at least one card of the given name was remembered in the given memory set such
+     * that its owner is the given player.
      * 
      * @param cardName
      *            the card name
      * @param set the memory set that is to be checked 
+     * @param owner the owner of the card
      * @return true, if at least one card with the given name is remembered in the given memory set
      */
-    public boolean isRememberedCardByName(String cardName, MemorySet set) {
-        return isRememberedCardByName(self, cardName, set);
+    public boolean isRememberedCardByName(String cardName, MemorySet set, Player owner) {
+        Set<Card> memorySet = getMemorySet(set);
+        Iterator<Card> it = memorySet.iterator();
+
+        while (it.hasNext()) {
+            Card c = it.next();
+            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
-     * Remembers the given card in the given memory set that stores cards memorized from a particular player.
-     * @param p
-     *            player that is the controller of the card at the time the card is remembered
-     * @param c
-     *            the card
-     * @param set the memory set to remember the card in
-     * @return true, if the card is successfully stored in the given memory set 
-     */
-    public boolean rememberCard(Player p, Card c, MemorySet set) {
-        if (c == null || p == null)
-            return false;
-
-        //System.out.println ("AiCardMemory: remembering card " + c.getName() + "(ID=" + c.getUniqueNumber() + ")" + " for player " + p.getName() + ", set = " + set.name() + ".");
-
-        getMemorySet(p, set).add(c);
-        return true;
-    }
-
-    /**
-     * Remembers the given card in the given memory set for the default player (owner of this card memory).
+     * Remembers the given card in the given memory set.
      * @param c
      *            the card
      * @param set the memory set to remember the card in
      * @return true, if the card is successfully stored in the given memory set 
      */
     public boolean rememberCard(Card c, MemorySet set) {
-        return rememberCard(self, c, set);
-    }
-
-    /**
-     * Forgets the given card in the given memory set that stores cards memorized from a particular player.
-     * @param p
-     *            player that is the controller of the card at the time the card is remembered
-     * @param c
-     *            the card
-     * @param set the memory set to forget the card in
-     * @return true, if the card was previously remembered in the given memory set and was successfully forgotten
-     */
-    public boolean forgetCard(Player p, Card c, MemorySet set) {
-        if (c == null || p == null) {
+        if (c == null)
             return false;
-        }
-        if (!isRememberedCard(p, c, set)) {
-            return false;
-        }
 
-        //System.out.println ("AiCardMemory: forgetting card " + c.getName() + "(ID=" + c.getUniqueNumber() + ")" + " for player " + p.getName() + ", set = " + set.name() + ".");
-
-        getMemorySet(p, set).remove(c);
+        getMemorySet(set).add(c);
         return true;
     }
 
     /**
-     * Forgets the given card in the given memory set for the default player (owner of this card memory).
+     * Forgets the given card in the given memory set.
      * @param c
      *            the card
      * @param set the memory set to forget the card in
      * @return true, if the card was previously remembered in the given memory set and was successfully forgotten
      */
     public boolean forgetCard(Card c, MemorySet set) {
-        return forgetCard(self, c, set);
+        if (c == null) {
+            return false;
+        }
+        if (!isRememberedCard(c, set)) {
+            return false;
+        }
+
+        getMemorySet(set).remove(c);
+        return true;
     }
 
     /**
-     * Forgets a single card with the given name in the given memory set that stores cards memorized from a particular player.
-     * @param p
-     *            player that is the controller of the card at the time the card is remembered
+     * Forgets a single card with the given name in the given memory set.
      * @param cardName
      *            the card name
      * @param set the memory set to forget the card in
      * @return true, if at least one card with the given name was previously remembered in the given memory set and was successfully forgotten
      */
-    public boolean forgetAnyCardWithName(Player p, String cardName, MemorySet set) {
-        if (p == null) {
-            return false;
-        }
-
-        Set<Card> memorySet = getMemorySet(p, set);
+    public boolean forgetAnyCardWithName(String cardName, MemorySet set) {
+        Set<Card> memorySet = getMemorySet(set);
         Iterator<Card> it = memorySet.iterator();
 
         while (it.hasNext()) { 
             Card c = it.next();
             if (c.getName().equals(cardName)) {
-                return forgetCard(p, c, set);
+                return forgetCard(c, set);
             }
         }
         
@@ -256,89 +188,54 @@ public class AiCardMemory {
     }
 
     /**
-     * Forgets a single card with the given name in the given memory set for the default player (owner of this card memory).
-     * 
+     * Forgets a single card with the given name owned by the given player in the given memory set.
      * @param cardName
      *            the card name
      * @param set the memory set to forget the card in
+     * @param owner the owner of the card
      * @return true, if at least one card with the given name was previously remembered in the given memory set and was successfully forgotten
      */
-    public boolean forgetAnyCardWithName(String cardName, MemorySet set) {
-        return forgetAnyCardWithName(self, cardName, set);
+    public boolean forgetAnyCardWithName(String cardName, MemorySet set, Player owner) {
+        Set<Card> memorySet = getMemorySet(set);
+        Iterator<Card> it = memorySet.iterator();
+
+        while (it.hasNext()) { 
+            Card c = it.next();
+            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
+                return forgetCard(c, set);
+            }
+        }
+        
+        return false;
     }
 
     /**
      * Clears the "remembered attackers" memory set stored in this card memory for the given player.
-     * @param p
-     *            player for whom the remembered attackers are to be cleared
-     */
-    public void clearRememberedAttackers(Player p) {
-        getMemorySet(p, MemorySet.MANDATORY_ATTACKERS).clear();
-    }
-
-    /**
-     * Clears the "remembered attackers" memory set for the default player (owner of this card memory).
      */
     public void clearRememberedAttackers() {
-        clearRememberedAttackers(self);
+        getMemorySet(MemorySet.MANDATORY_ATTACKERS).clear();
     }
 
     /**
      * Clears the "remembered mana sources" memory set stored in this card memory for the given player.
-     * @param p
-     *            player for whom the remembered attackers are to be cleared
-     */
-    public void clearRememberedManaSources(Player p) {
-        getMemorySet(p, MemorySet.HELD_MANA_SOURCES).clear();
-    }
-
-    /**
-     * Clears the "remembered mana sources" memory set for the default player (owner of this card memory).
      */
     public void clearRememberedManaSources() {
-        clearRememberedManaSources(self);
+        getMemorySet(MemorySet.HELD_MANA_SOURCES).clear();
     }
 
     /**
      * Clears the "remembered revealed cards" memory set stored in this card memory for the given player.
-     * @param p
-     *            player for whom the remembered attackers are to be cleared
-     */
-    public void clearRememberedRevealedCards(Player p) {
-        getMemorySet(p, MemorySet.REVEALED_CARDS).clear();
-    }
-
-    /**
-     * Clears the "remembered revealed cards" memory set for the default player (owner of this card memory).
      */
     public void clearRememberedRevealedCards() {
-        clearRememberedRevealedCards(self);
+        getMemorySet(MemorySet.REVEALED_CARDS).clear();
     }
 
     /**
      * Clears all memory sets stored in this card memory for the given player.
-     * @param p
-     *            player for whom the remembered attackers are to be cleared
-     */
-    public void clearAllRemembered(Player p) {
-        clearRememberedAttackers(p);
-        clearRememberedManaSources(p);
-        clearRememberedRevealedCards(p);
-    }
-
-    /**
-     * Clears all memory sets stored for the default player (owner of this card memory).
      */
     public void clearAllRemembered() {
-        clearAllRemembered(self);
-    }
-
-    /**
-     * Clears all memory sets stored for all players in this card memory.
-     */
-    public void wipeMemory() {
-        mapMandatoryAttackers.clear();
-        mapHeldManaSources.clear();
-        mapRevealedCards.clear();
+        clearRememberedAttackers();
+        clearRememberedManaSources();
+        clearRememberedRevealedCards();
     }
 }

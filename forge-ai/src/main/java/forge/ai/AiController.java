@@ -127,7 +127,7 @@ public class AiController {
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
-        memory = new AiCardMemory(player);
+        memory = new AiCardMemory();
     }
 
     /**
