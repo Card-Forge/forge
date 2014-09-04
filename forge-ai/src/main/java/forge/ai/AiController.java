@@ -94,6 +94,7 @@ public class AiController {
 
     private final Player player;
     private final Game game;
+    private final AiCardMemory memory;
     public boolean bCheatShuffle;
 
     public boolean canCheatShuffle() {
@@ -114,6 +115,10 @@ public class AiController {
         return player;
     }
 
+    public AiCardMemory getCardMemory() {
+        return memory;
+    }
+
     /**
      * <p>
      * Constructor for ComputerAI_General.
@@ -122,6 +127,7 @@ public class AiController {
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
+        memory = new AiCardMemory(player);
     }
 
     /**
@@ -1146,18 +1152,18 @@ public class AiController {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
             if( counter != null ) return counter;
     
-            SpellAbility counterETB = chooseSpellAbilyToPlay(this.getPossibleETBCounters(), false);
+            SpellAbility counterETB = chooseSpellAbilityToPlay(this.getPossibleETBCounters(), false);
             if( counterETB != null )
                 return counterETB;
         }
     
-        SpellAbility result = chooseSpellAbilyToPlay(getSpellAbilities(cards), true);
+        SpellAbility result = chooseSpellAbilityToPlay(getSpellAbilities(cards), true);
         if( null == result) 
             return null;
         return result;
     }
     
-    private SpellAbility chooseSpellAbilyToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
+    private SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
         if ( all == null || all.isEmpty() )
             return null;
 

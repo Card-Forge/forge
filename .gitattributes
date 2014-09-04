@@ -15,6 +15,7 @@ forge-ai/.settings/org.eclipse.m2e.core.prefs -text
 forge-ai/pom.xml -text
 forge-ai/src/main/java/forge/ai/AiAttackController.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/AiBlockController.java svneol=native#text/plain
+forge-ai/src/main/java/forge/ai/AiCardMemory.java -text
 forge-ai/src/main/java/forge/ai/AiController.java svneol=native#text/plain
 forge-ai/src/main/java/forge/ai/AiCostDecision.java -text
 forge-ai/src/main/java/forge/ai/AiPlayDecision.java -text

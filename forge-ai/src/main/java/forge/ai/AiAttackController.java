@@ -607,6 +607,16 @@ public class AiAttackController {
             return;
         }
 
+        // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
+        AiCardMemory aiMemory = ((PlayerControllerAi)ai.getController()).getAi().getCardMemory();
+        for (Card attacker : this.attackers) {
+            if (aiMemory.isRememberedCard(attacker, AiCardMemory.MemorySet.MANDATORY_ATTACKERS)) {
+                combat.addAttacker(attacker, defender);
+                attackersLeft.remove(attacker);
+            }
+        }
+        aiMemory.clearRememberedAttackers(); // avoid "leaking" remembered cards over to the next turn
+        
         // Exalted
         if (combat.getAttackers().isEmpty()) {
             boolean exalted = false;
