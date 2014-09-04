@@ -39,7 +39,6 @@ public class QuestAchievements {
     // Difficulty - will store only index from now.
     private int difficulty;
 
-	@SuppressWarnings("unused")
     public QuestAchievements() { //needed for XML serialization
     }
 

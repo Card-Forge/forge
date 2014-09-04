@@ -10,6 +10,7 @@ import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.RegisteredPlayer;
+import forge.util.ITriggerEvent;
 
 public interface IGameView {
 
@@ -45,10 +46,18 @@ public interface IGameView {
     public abstract CombatView getCombat();
 
     public abstract void addLogObserver(Observer o);
-    public abstract List<GameLogEntry> getLogEntries(final GameLogEntryType maxLogLevel);
-    public abstract List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel);
+    public abstract List<GameLogEntry> getLogEntries(GameLogEntryType maxLogLevel);
+    public abstract List<GameLogEntry> getLogEntriesExact(GameLogEntryType logLevel);
 
+    // Input controls
     public abstract boolean tryUndoLastAction();
+
+    public abstract void selectButtonOk();
+    public abstract void selectButtonCancel();
+    public abstract boolean passPriority();
+    public abstract void selectPlayer(PlayerView player, ITriggerEvent triggerEvent);
+    public abstract void selectCard(CardView card, ITriggerEvent triggerEvent);
+    public abstract void selectAbility(SpellAbilityView sa);
 
     // the following method should eventually be replaced by methods returning
     // View classes

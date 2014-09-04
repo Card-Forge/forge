@@ -332,7 +332,7 @@ public class GuiDesktop implements IGuiBase {
                     new Runnable() {
                         @Override
                         public void run() {
-                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
+                            CPrompt.SINGLETON_INSTANCE.selectAbility(ab);
                         }
                     }, enabled);
             if (shortcut > 0) {

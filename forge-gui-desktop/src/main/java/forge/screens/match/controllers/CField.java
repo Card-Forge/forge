@@ -53,7 +53,7 @@ public class CField implements ICDoc {
     private final MouseListener madAvatar = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
-            CPrompt.SINGLETON_INSTANCE.getInputControl().selectPlayer(player, new MouseTriggerEvent(e));
+            CPrompt.SINGLETON_INSTANCE.selectPlayer(player, new MouseTriggerEvent(e));
         }
     };
 
@@ -103,7 +103,7 @@ public class CField implements ICDoc {
                     return;
                 }
 
-                CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(c, null);
+                CPrompt.SINGLETON_INSTANCE.selectCard(c, null);
                 // Temporarily commenting out the below to route, Flashback cards through the InputProxy
                 /*
                 final Game game = player.getGame();

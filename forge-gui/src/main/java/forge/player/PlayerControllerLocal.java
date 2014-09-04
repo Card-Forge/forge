@@ -78,6 +78,7 @@ import forge.match.input.InputConfirm;
 import forge.match.input.InputConfirmMulligan;
 import forge.match.input.InputPassPriority;
 import forge.match.input.InputProliferate;
+import forge.match.input.InputProxy;
 import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
@@ -105,8 +106,10 @@ import forge.view.ViewUtil;
  * Handles phase skips for now.
  */
 public class PlayerControllerLocal extends PlayerControllerHuman implements IGameView {
+    private final InputProxy inputProxy;
     public PlayerControllerLocal(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp, gui);
+        this.inputProxy = new InputProxy(this);
         // aggressively cache a view for each player
         for (final Player player : game.getRegisteredPlayers()) {
             getPlayerView(player);
@@ -1406,6 +1409,36 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
         return false;
     }
 
+    @Override
+    public void selectButtonOk() {
+        inputProxy.selectButtonOK();
+    }
+
+    @Override
+    public void selectButtonCancel() {
+        inputProxy.selectButtonCancel();
+    }
+
+    @Override
+    public boolean passPriority() {
+        return inputProxy.passPriority();
+    }
+
+    @Override
+    public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
+        inputProxy.selectPlayer(player, triggerEvent);
+    }
+
+    @Override
+    public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
+        inputProxy.selectCard(card, triggerEvent);
+    }
+
+    @Override
+    public void selectAbility(final SpellAbilityView sa) {
+        inputProxy.selectAbility(sa);
+    }
+
     /* (non-Javadoc)
      * @see forge.view.IGameView#getGuiRegisteredPlayer(forge.LobbyPlayer)
      */
@@ -1682,4 +1715,5 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     public void devPlaneswalkTo() {
         DevModeUtil.devModeRiggedPlanarRoll(game, this);
     }
+
 }

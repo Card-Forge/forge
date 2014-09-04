@@ -81,7 +81,6 @@ import forge.screens.match.VMatchUI;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPlayers;
-import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.views.VAntes;
 import forge.screens.match.views.VDev;
@@ -522,8 +521,6 @@ public enum FControl implements KeyEventDispatcher {
         
         setCurrentScreen(FScreen.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-
-        CPrompt.SINGLETON_INSTANCE.getInputControl().setGame(game0);
 
         // Listen to DuelOutcome event to show ViewWinLose
         game0.subscribeToEvents(fcVisitor);

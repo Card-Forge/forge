@@ -260,7 +260,7 @@ public enum VStack implements IVDoc<CStack> {
                     game.setShouldAutoYield(key, !autoYield);
                     if (!autoYield && game.peekStack() == item) {
                         //auto-pass priority if ability is on top of stack
-                        CPrompt.SINGLETON_INSTANCE.getInputControl().passPriority();
+                        CPrompt.SINGLETON_INSTANCE.passPriority();
                     }
                 }
             });
@@ -278,7 +278,7 @@ public enum VStack implements IVDoc<CStack> {
                         if (game.peekStack() == item &&
                                 Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
                             //auto-yes if ability is on top of stack
-                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectButtonOK();
+                            CPrompt.SINGLETON_INSTANCE.selectButtonOk();
                         }
                     }
                 }
@@ -297,7 +297,7 @@ public enum VStack implements IVDoc<CStack> {
                         if (game.peekStack() == item &&
                                 Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
                             //auto-no if ability is on top of stack
-                            CPrompt.SINGLETON_INSTANCE.getInputControl().selectButtonOK();
+                            CPrompt.SINGLETON_INSTANCE.selectButtonOk();
                         }
                     }
                 }
