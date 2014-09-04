@@ -114,11 +114,11 @@ public enum CSubmenuDraft implements ICDoc {
             }
         }
 
-        FModel.getGauntletMini().resetGauntletDraft();
+        FModel.getGauntletMini(GuiBase.getInterface()).resetGauntletDraft();
 
         if (gauntlet) {
             int rounds = FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
+            FModel.getGauntletMini(GuiBase.getInterface()).launch(rounds, humanDeck.getDeck(), gameType);
             return;
         }
 
@@ -152,7 +152,7 @@ public enum CSubmenuDraft implements ICDoc {
         final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
         if (poolType == null) { return; }
 
-        BoosterDraft draft = BoosterDraft.createDraft(poolType);
+        BoosterDraft draft = BoosterDraft.createDraft(GuiBase.getInterface(), poolType);
         if (draft == null) { return; }
 
         final CEditorDraftingProcess draftController = new CEditorDraftingProcess();

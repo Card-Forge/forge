@@ -17,17 +17,22 @@
  */
 package forge.properties;
 
-import forge.GuiBase;
-
 import java.util.Collections;
 import java.util.Map;
 
+import forge.interfaces.IGuiBase;
+
 public final class ForgeConstants {
-    public static final String ASSETS_DIR            = GuiBase.getInterface().getAssetsDir();
-    public static final String PROFILE_FILE          = ASSETS_DIR + "forge.profile.properties";
+    public static void init(final IGuiBase gui) {
+        ASSETS_DIR = gui.getAssetsDir();
+    }
+
+    private static String ASSETS_DIR;
+    public static String ASSETS_DIR() { return ASSETS_DIR; }
+    public static final String PROFILE_FILE          = ASSETS_DIR() + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
-    public static final String RES_DIR = ASSETS_DIR + "res/";
+    public static final String RES_DIR = ASSETS_DIR() + "res/";
     public static final String LISTS_DIR = RES_DIR + "lists/";
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
@@ -41,9 +46,9 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = LISTS_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = LISTS_DIR + "tournamentpack-images.txt";
 
-    public static final String CHANGES_FILE = ASSETS_DIR + "CHANGES.txt";
-    public static final String LICENSE_FILE = ASSETS_DIR + "LICENSE.txt";
-    public static final String README_FILE  = ASSETS_DIR + "README.txt";
+    public static final String CHANGES_FILE = ASSETS_DIR() + "CHANGES.txt";
+    public static final String LICENSE_FILE = ASSETS_DIR() + "LICENSE.txt";
+    public static final String README_FILE  = ASSETS_DIR() + "README.txt";
     public static final String HOWTO_FILE   = RES_DIR + "howto.txt";
 
     public static final String DRAFT_DIR           = RES_DIR + "draft/";

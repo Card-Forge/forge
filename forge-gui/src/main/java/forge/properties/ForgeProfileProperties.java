@@ -17,18 +17,18 @@
  */
 package forge.properties;
 
-import forge.GuiBase;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import forge.interfaces.IGuiBase;
+import forge.util.FileSection;
+import forge.util.FileUtil;
 
 /**
  * Determines the user data and cache dirs, first looking at the specified file for overrides
@@ -36,6 +36,7 @@ import java.util.Properties;
  * so they can be easily appended with further path elements.
  */
 public class ForgeProfileProperties {
+    private static boolean isRunningOnDesktop;
     private static String userDir;
     private static String cacheDir;
     private static String cardPicsDir;
@@ -50,6 +51,10 @@ public class ForgeProfileProperties {
 
     private ForgeProfileProperties() {
         //prevent initializing static class
+    }
+
+    public static void init(final IGuiBase gui) {
+        isRunningOnDesktop = gui.isRunningOnDesktop();
     }
 
     public static void load() {
@@ -144,8 +149,8 @@ public class ForgeProfileProperties {
 
     // returns a pair <userDir, cacheDir>
     private static Pair<String, String> getDefaultDirs() {
-        if (!GuiBase.getInterface().isRunningOnDesktop()) { //special case for mobile devices
-            String assetsDir = ForgeConstants.ASSETS_DIR;
+        if (isRunningOnDesktop) { //special case for mobile devices
+            String assetsDir = ForgeConstants.ASSETS_DIR();
             return Pair.of(assetsDir + "data" + File.separator, assetsDir + "cache" + File.separator);
         }
 

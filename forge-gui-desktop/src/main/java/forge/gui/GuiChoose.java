@@ -20,6 +20,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.Singletons;
 import forge.item.InventoryItem;
 import forge.screens.match.CMatchUI;
@@ -237,7 +238,7 @@ public class GuiChoose {
         };
 
         FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
-        FThreads.invokeInEdtAndWait(future);
+        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), future);
         try {
             return future.get();
         } catch (Exception e) { // should be no exception here
@@ -296,7 +297,7 @@ public class GuiChoose {
         };
 
         FutureTask<List<T>> ft = new FutureTask<List<T>>(callable);
-        FThreads.invokeInEdtAndWait(ft);
+        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), ft);
         try {
             return ft.get();
         } catch (Exception e) { // we have waited enough

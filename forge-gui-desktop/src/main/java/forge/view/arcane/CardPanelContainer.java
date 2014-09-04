@@ -30,6 +30,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin.SkinnedPanel;
@@ -332,7 +333,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      *            a {@link forge.view.arcane.CardPanel} object.
      */
     public final void removeCardPanel(final CardPanel fromPanel) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         if (CardPanelContainer.this.getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
             CardPanel.getDragAnimationPanel().repaint();
@@ -384,7 +385,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      * </p>
      */
     public final void clear() {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         for (CardPanel p : CardPanelContainer.this.getCardPanels()) {
             p.dispose();
         }

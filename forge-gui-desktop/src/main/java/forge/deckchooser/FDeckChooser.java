@@ -1,6 +1,7 @@
 package forge.deckchooser;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.deck.ColorDeckGenerator;
 import forge.deck.Deck;
@@ -50,7 +51,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     //Show dialog to select a deck
     public static Deck promptForDeck(String title, DeckType defaultDeckType, boolean forAi) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         final FDeckChooser chooser = new FDeckChooser(forAi);
         chooser.initialize(defaultDeckType);
         chooser.populate();
@@ -130,7 +131,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 "White", "Blue", "Black", "Red", "Green" };
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (int i = 0; i < colors.length; i++) {
-            decks.add(new ColorDeckGenerator(colors[i], i, lstDecks, isAi));
+            decks.add(new ColorDeckGenerator(GuiBase.getInterface(), colors[i], i, lstDecks, isAi));
         }
 
         lstDecks.setPool(decks);

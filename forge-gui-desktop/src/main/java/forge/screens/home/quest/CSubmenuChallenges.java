@@ -1,5 +1,6 @@
 package forge.screens.home.quest;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
@@ -42,29 +43,29 @@ public enum CSubmenuChallenges implements ICDoc {
 
         view.getBtnSpellShop().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.showSpellShop(); } });
+                    public void run() { QuestUtil.showSpellShop(GuiBase.getInterface()); } });
 
         view.getBtnBazaar().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.showBazaar(); } });
+                    public void run() { QuestUtil.showBazaar(GuiBase.getInterface()); } });
 
         view.getBtnUnlock().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
+                    public void run() { QuestUtil.chooseAndUnlockEdition(GuiBase.getInterface()); CSubmenuChallenges.this.update(); } });
 
         view.getBtnTravel().setCommand(
                 new UiCommand() { @Override
-                    public void run() { QuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
+                    public void run() { QuestUtil.travelWorld(GuiBase.getInterface()); CSubmenuChallenges.this.update(); } });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(); } });
+            public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(GuiBase.getInterface()); } });
 
         ((FLabel) view.getLblZep()).setCommand(
                 new UiCommand() {
                     @Override
                     public void run() {
-                        if (!QuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
+                        if (!QuestUtil.checkActiveQuest(GuiBase.getInterface(), "Launch a Zeppelin.")) {
                             return;
                         }
                         FModel.getQuest().getAchievements().setCurrentChallenges(null);

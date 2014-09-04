@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
@@ -30,9 +31,11 @@ import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IItemReader;
+import forge.util.MyRandom;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -483,5 +486,20 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return true;
             };
         };
-    }    
+    }
+
+    public static int getRandomFoil(final String setCode) {
+        FoilType foilType = FoilType.NOT_SUPPORTED;
+        if (setCode != null
+                && StaticData.instance().getEditions().get(setCode) != null) {
+            foilType = StaticData.instance().getEditions().get(setCode)
+                    .getFoilType();
+        }
+        if (foilType != FoilType.NOT_SUPPORTED) {
+            return foilType == FoilType.MODERN
+                    ? MyRandom.getRandom().nextInt(9) +  1
+                    : MyRandom.getRandom().nextInt(9) + 11;
+        }
+        return 0;
+    }
 }

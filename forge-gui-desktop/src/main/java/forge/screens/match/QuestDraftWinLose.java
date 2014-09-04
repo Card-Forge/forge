@@ -102,10 +102,10 @@ public class QuestDraftWinLose extends ControlWinLose {
             if (lastGame.isMatchOver()) {
                 this.actionOnQuitMatch();
                 QuestDraftUtils.matchInProgress = false;
-                QuestDraftUtils.update();
+                QuestDraftUtils.update(GuiBase.getInterface());
             } else {
                 this.actionOnContinue();
-                QuestDraftUtils.update();
+                QuestDraftUtils.update(GuiBase.getInterface());
             }
             return false;
             
@@ -126,7 +126,7 @@ public class QuestDraftWinLose extends ControlWinLose {
                 public void actionPerformed(final ActionEvent e) {
                     GuiBase.getInterface().endCurrentGame();
                     QuestDraftUtils.matchInProgress = false;
-                    QuestDraftUtils.continueMatches();
+                    QuestDraftUtils.continueMatches(GuiBase.getInterface());
                 }
             });
         } else {
@@ -141,7 +141,7 @@ public class QuestDraftWinLose extends ControlWinLose {
                     if (FOptionPane.showOptionDialog("Quitting the match now will forfeit the tournament!\n\nReally quit?", "Really Quit Tournament?", FSkin.getImage(FSkinProp.ICO_WARNING).scale(2), new String[] { "Yes", "No" }, 1) == 0) {
                         GuiBase.getInterface().endCurrentGame();
                         QuestDraftUtils.matchInProgress = false;
-                        QuestDraftUtils.continueMatches();
+                        QuestDraftUtils.continueMatches(GuiBase.getInterface());
                     }
                 }
             });

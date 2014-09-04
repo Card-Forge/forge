@@ -1,7 +1,8 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
-import forge.game.GameObject;
+
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -94,7 +95,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             if (targetedSA == null) {
             	return;
             }
-            List<GameObject> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+            final List<GameEntity> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
             if (sa.hasParam("CanTargetPlayer")) {
                 // Radiate
                 // Remove targeted players because getAllCandidates include all the valid players
@@ -102,7 +103,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     candidates.remove(p);
                 
                 mayChoseNewTargets = false;
-                for (GameObject o : candidates) {
+                for (GameEntity o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getHostCard(), chosenSA, true);
                     copy.resetFirstTarget(o, targetedSA);
                     copies.add(copy);
@@ -110,7 +111,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             } else {// Precursor Golem, Ink-Treader Nephilim
                 final String type = sa.getParam("CopyForEachCanTarget");
                 List<Card> valid = new ArrayList<Card>();
-                for (final Object o : candidates) {
+                for (final GameEntity o : candidates) {
                     if (o instanceof Card) {
                         valid.add((Card) o);
                     }

@@ -28,6 +28,7 @@ import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.game.card.CardUtil;
 import forge.gauntlet.GauntletData;
+import forge.interfaces.IGuiBase;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
@@ -74,7 +75,7 @@ public class FModel {
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
 
-    public static void initialize(final IProgressBar progressBar) {
+    public static void initialize(final IGuiBase gui, final IProgressBar progressBar) {
 
 		// Instantiate preferences: quest and regular
 		//Preferences are initialized first so that the splash screen can be translated.
@@ -92,7 +93,7 @@ public class FModel {
                 ProgressObserver.emptyObserver : new ProgressObserver() {
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(gui, new Runnable() {
                     @Override
                     public void run() {
                         progressBar.setDescription(name);
@@ -103,7 +104,7 @@ public class FModel {
 
             @Override
             public void report(final int current, final int total) {
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(gui, new Runnable() {
                     @Override
                     public void run() {
                         progressBar.setMaximum(total);
@@ -140,7 +141,7 @@ public class FModel {
         loadDynamicGamedata();
 
         if (progressBar != null) {
-            FThreads.invokeInEdtLater(new Runnable() {
+            FThreads.invokeInEdtLater(gui, new Runnable() {
                 @Override
                 public void run() {
                     progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks"));
@@ -148,8 +149,8 @@ public class FModel {
             });
         }
 
-        decks = new CardCollections();
-        quest = new QuestController();
+        decks = new CardCollections(gui);
+        quest = new QuestController(gui);
 
         CardPreferences.load();
         DeckPreferences.load();
@@ -264,9 +265,9 @@ public class FModel {
         gauntletData = data0;
     }
 
-    public static GauntletMini getGauntletMini() {
+    public static GauntletMini getGauntletMini(final IGuiBase gui) {
         if (gauntlet == null) {
-            gauntlet = new GauntletMini();
+            gauntlet = new GauntletMini(gui);
         }
         return gauntlet;
     }

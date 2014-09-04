@@ -22,13 +22,14 @@ import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
-import forge.GuiBase;
-import forge.game.spellability.SpellAbility;
+import forge.interfaces.IGuiBase;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.gui.SOptionPane;
 import forge.view.CardView;
 import forge.view.IGameView;
 import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 /**
  * <p>
@@ -45,23 +46,32 @@ public class InputProxy implements Observer {
     private IGameView game = null;
 
 //    private static final boolean DEBUG_INPUT = true; // false;
-    
+
+    private final PlayerControllerHuman controller;
+    public InputProxy(final PlayerControllerHuman controller) {
+        this.controller = controller;
+    }
+
+    private IGuiBase getGui() {
+        return controller.getGui();
+    }
+
     public void setGame(IGameView game0) {
         game = game0;
-        GuiBase.getInterface().getInputQueue().addObserver(this);
+        getGui().getInputQueue().addObserver(this);
     }
 
     public boolean passPriority() {
-        Input inp = getInput();
-        if (inp != null && inp instanceof InputPassPriority) {
+        final Input inp = getInput();
+        if (inp instanceof InputPassPriority) {
             inp.selectButtonOK();
             return true;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
+        FThreads.invokeInEdtNowOrLater(getGui(), new Runnable() {
             @Override
             public void run() {
-                SOptionPane.showMessageDialog("Cannot pass priority at this time.");
+                SOptionPane.showMessageDialog(getGui(), "Cannot pass priority at this time.");
             }
         });
         return false;
@@ -69,7 +79,7 @@ public class InputProxy implements Observer {
 
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input nextInput = GuiBase.getInterface().getInputQueue().getActualInput(game);
+        final Input nextInput = getGui().getInputQueue().getActualInput(game);
         
 /*        if(DEBUG_INPUT) 
             System.out.printf("%s ... \t%s on %s, \tstack = %s%n", 
@@ -80,13 +90,13 @@ public class InputProxy implements Observer {
         Runnable showMessage = new Runnable() {
             @Override public void run() { 
                 Input current = getInput(); 
-                GuiBase.getInterface().getInputQueue().syncPoint();
+                getGui().getInputQueue().syncPoint();
                 //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
                 current.showMessageInitial(); 
             }
         };
         
-        FThreads.invokeInEdtLater(showMessage);
+        FThreads.invokeInEdtLater(getGui(), showMessage);
     }
     /**
      * <p>
@@ -123,7 +133,7 @@ public class InputProxy implements Observer {
     public final void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            inp.selectPlayer(player, triggerEvent);
+            inp.selectPlayer(controller.getPlayer(player), triggerEvent);
         }
     }
 
@@ -139,15 +149,15 @@ public class InputProxy implements Observer {
     public final boolean selectCard(final CardView cardView, final ITriggerEvent triggerEvent) {
         final Input inp = getInput();
         if (inp != null) {
-            return inp.selectCard(cardView, triggerEvent);
+            return inp.selectCard(controller.getCard(cardView), triggerEvent);
         }
         return false;
     }
 
-    public final void selectAbility(final SpellAbility ab) {
+    public final void selectAbility(final SpellAbilityView ab) {
     	final Input inp = getInput();
         if (inp != null) {
-            inp.selectAbility(ab);
+            inp.selectAbility(controller.getSpellAbility(ab));
         }
     }
 

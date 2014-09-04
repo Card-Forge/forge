@@ -36,7 +36,7 @@ import forge.game.Match;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.SpellAbility;
+//import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
@@ -79,6 +79,7 @@ import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.IGameView;
 import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 public class GuiDesktop implements IGuiBase {
     
@@ -153,7 +154,7 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public int showCardOptionDialog(final CardView card, String message, String title, FSkinProp skinIcon, String[] options, int defaultOption) {
         if (card != null) {
-            FThreads.invokeInEdtAndWait(new Runnable() {
+            FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() {
                     GuiBase.getInterface().setCard(card);
@@ -213,7 +214,7 @@ public class GuiDesktop implements IGuiBase {
     public void focusButton(final IButton button) {
         // ensure we don't steal focus from an overlay
         if (!SOverlayUtils.overlayHasFocus()) {
-            FThreads.invokeInEdtLater(new Runnable() {
+            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() {
                     ((FButton)button).requestFocusInWindow();
@@ -294,7 +295,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent) {
+    public SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent) {
         if (triggerEvent == null) {
             if (abilities.isEmpty()) {
                 return null;
@@ -308,7 +309,7 @@ public class GuiDesktop implements IGuiBase {
         if (abilities.isEmpty()) {
             return null;
         }
-        if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
+        if (abilities.size() == 1 && !abilities.get(0).isPromptIfOnlyPossibleAbility()) {
             if (abilities.get(0).canPlay()) {
                 return abilities.get(0); //only return ability if it's playable, otherwise return null
             }
@@ -321,7 +322,7 @@ public class GuiDesktop implements IGuiBase {
         boolean enabled;
         boolean hasEnabled = false;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
-        for (final SpellAbility ab : abilities) {
+        for (final SpellAbilityView ab : abilities) {
             enabled = ab.canPlay();
             if (enabled) {
                 hasEnabled = true;
@@ -451,7 +452,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void refreshCardDetails(final Collection<CardView> cards) {
+    public void refreshCardDetails(final Iterable<CardView> cards) {
         CMatchUI.SINGLETON_INSTANCE.refreshCardDetails(cards);
     }
 

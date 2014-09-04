@@ -58,7 +58,6 @@ import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
 import forge.util.Expressions;
 import forge.util.Lang;
-import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -1632,29 +1631,15 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @param globalChanges
-     *            an ArrayList<CardColor>
-     * @return a CardColor
+     * @return a {@link ColorSet}.
+     * @see CardCharacteristics#determineColor()
      */
     public final ColorSet determineColor() {
         if (this.isImmutable()) {
             return ColorSet.getNullColor();
         }
 
-        List<CardColor> colorList = this.getCharacteristics().getCardColor();
-
-        byte colors = 0;
-        for (int i = colorList.size() - 1;i >= 0;i--) {
-            final CardColor cc = colorList.get(i);
-            colors |= cc.getColorMask();
-            if (!cc.isAdditional()) {
-                return ColorSet.fromMask(colors);
-            }
-        }
-        return ColorSet.fromMask(colors);
+        return this.getCharacteristics().determineColor();
     }
 
     /**
@@ -8244,13 +8229,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * removed.
      */
     public final void setRandomFoil() {
-        CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
-        if (this.getCurSetCode() != null && StaticData.instance().getEditions().get(this.getCurSetCode()) != null) {
-            foilType = StaticData.instance().getEditions().get(this.getCurSetCode()).getFoilType();
-        }
-        if (foilType != CardEdition.FoilType.NOT_SUPPORTED) {
-            this.setFoil(foilType == CardEdition.FoilType.MODERN ? MyRandom.getRandom().nextInt(9) + 1 : MyRandom.getRandom().nextInt(9) + 11);
-        }
+        this.setFoil(CardEdition.getRandomFoil(this.getCurSetCode()));
     }
 
     /**

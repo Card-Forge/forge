@@ -28,6 +28,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
@@ -79,7 +80,7 @@ public class CHand implements ICDoc {
     }
 
     public void update(final Observable a, final Object b) {
-        FThreads.invokeInEdtNowOrLater(updateRoutine);
+        FThreads.invokeInEdtNowOrLater(GuiBase.getInterface(), updateRoutine);
     }
 
     private final Runnable updateRoutine = new Runnable() {
@@ -87,7 +88,7 @@ public class CHand implements ICDoc {
     };
 
     public void updateHand() {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
 
         final HandArea p = view.getHandArea();
 

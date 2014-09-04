@@ -17,14 +17,12 @@
  */
 package forge.quest.bazaar;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
 import forge.quest.data.QuestAssets;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
@@ -170,8 +168,8 @@ public class QuestItemBasic implements IQuestBazaarItem {
      * 
      */
     @Override
-    public ISkinImage getIcon(QuestAssets qA) {
-        return GuiBase.getInterface().getSkinIcon(icon);
+    public String getIcon(final QuestAssets qA) {
+        return icon.name();
     }
 
     /**

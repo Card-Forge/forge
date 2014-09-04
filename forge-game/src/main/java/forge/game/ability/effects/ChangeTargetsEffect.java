@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
+
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
@@ -9,6 +11,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
 import forge.util.Aggregates;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -87,8 +90,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
                     if (sa.hasParam("RandomTarget")){
                         changingTgtSA.resetTargets();
-                        List<GameObject> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
-                        GameObject choice = Aggregates.random(candidates);
+                        List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
+                        GameEntity choice = Aggregates.random(candidates);
                         changingTgtSA.getTargets().add(choice);
                         changingTgtSI.updateTarget(changingTgtSA.getTargets());
                     } else if (sa.hasParam("DefinedMagnet")){

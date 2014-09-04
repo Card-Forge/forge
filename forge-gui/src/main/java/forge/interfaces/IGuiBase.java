@@ -20,7 +20,6 @@ import forge.game.Match;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
 import forge.game.player.RegisteredPlayer;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
@@ -32,6 +31,7 @@ import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.IGameView;
 import forge.view.PlayerView;
+import forge.view.SpellAbilityView;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();
@@ -81,7 +81,7 @@ public interface IGuiBase {
     void updateStack();
     void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate);
     void updateCards(Set<CardView> cardsToUpdate);
-    void refreshCardDetails(Collection<CardView> cards);
+    void refreshCardDetails(Iterable<CardView> cards);
     void updateManaPool(List<PlayerView> manaPoolUpdate);
     void updateLives(List<PlayerView> livesUpdate);
     void endCurrentGame();
@@ -89,7 +89,7 @@ public interface IGuiBase {
     void setPanelSelection(CardView hostCard);
     Map<CardView, Integer> getDamageToAssign(CardView attacker, List<CardView> blockers,
             int damageDealt, GameEntityView defender, boolean overrideOrder);
-    SpellAbility getAbilityToPlay(List<SpellAbility> abilities, ITriggerEvent triggerEvent);
+    SpellAbilityView getAbilityToPlay(List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
     void hear(LobbyPlayer player, String message);
     int getAvatarCount();
     void copyToClipboard(String text);

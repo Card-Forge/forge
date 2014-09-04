@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.deck.Deck;
@@ -19,10 +18,12 @@ import forge.view.IGameView;
 public abstract class GauntletWinLoseController {
     private final IGameView lastGame;
     private final IWinLoseView<? extends IButton> view;
+    private final IGuiBase gui;
 
-    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
+    public GauntletWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0, final IGuiBase gui) {
         view = view0;
         lastGame = game0;
+        this.gui = gui;
     }
 
     public void showOutcome() {
@@ -47,7 +48,7 @@ public abstract class GauntletWinLoseController {
         // the player can restart Forge to replay a match.
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
-        LobbyPlayer questPlayer = GuiBase.getInterface().getQuestPlayer();
+        LobbyPlayer questPlayer = gui.getQuestPlayer();
 
         // In all cases, update stats.
         lstEventRecords.set(gd.getCompleted(), lastGame.getGamesWonBy(questPlayer) + " - "
@@ -114,15 +115,14 @@ public abstract class GauntletWinLoseController {
             GauntletData gd = FModel.getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
-            IGuiBase fc = GuiBase.getInterface();
-            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(fc.getGuiPlayer()));
-            players.add(new RegisteredPlayer(aiDeck).setPlayer(fc.createAiPlayer()));
+            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(gui.getGuiPlayer()));
+            players.add(new RegisteredPlayer(aiDeck).setPlayer(gui.createAiPlayer()));
 
             view.hide();
             saveOptions();
-            GuiBase.getInterface().endCurrentGame();
+            gui.endCurrentGame();
 
-            GuiBase.getInterface().startMatch(GameType.Gauntlet, players);
+            gui.startMatch(GameType.Gauntlet, players);
             return true;
         }
         return false;

@@ -17,16 +17,15 @@
  */
 package forge.limited;
 
-import forge.GuiBase;
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.util.Aggregates;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -39,6 +38,7 @@ import java.util.List;
  */
 public class GauntletMini {
 
+    private final IGuiBase gui;
     private int rounds;
     private Deck humanDeck;
     private int currentRound;
@@ -47,6 +47,10 @@ public class GauntletMini {
     private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
     private GameType gauntletType;
     private List<RegisteredPlayer> aiOpponents = new ArrayList<RegisteredPlayer>();
+
+    public GauntletMini(IGuiBase gui) {
+        this.gui = gui;
+    }
 
     // private final String humanName;
     /**
@@ -81,7 +85,7 @@ public class GauntletMini {
         }
 
         currentRound++;
-        GuiBase.getInterface().endCurrentGame();
+        gui.endCurrentGame();
         startRound();
     }
 
@@ -135,11 +139,10 @@ public class GauntletMini {
      */
     private void startRound() {
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        IGuiBase fc = GuiBase.getInterface();
-        starter.add(new RegisteredPlayer(humanDeck).setPlayer(fc.getGuiPlayer()));
-        starter.add(aiOpponents.get(currentRound - 1).setPlayer(fc.createAiPlayer()));
+        starter.add(new RegisteredPlayer(humanDeck).setPlayer(gui.getGuiPlayer()));
+        starter.add(aiOpponents.get(currentRound - 1).setPlayer(gui.createAiPlayer()));
 
-        fc.startMatch(gauntletType, starter);
+        gui.startMatch(gauntletType, starter);
     }
 
     /**

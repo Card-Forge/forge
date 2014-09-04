@@ -1,22 +1,48 @@
 package forge.sound;
 
-import forge.GuiBase;
+import java.util.Collection;
+
+import forge.LobbyPlayer;
 import forge.events.IUiEventVisitor;
 import forge.events.UiEventAttackerDeclared;
 import forge.events.UiEventBlockerAssigned;
 import forge.game.card.Card;
-import forge.game.event.*;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventBlockersDeclared;
+import forge.game.event.GameEventCardAttachment;
+import forge.game.event.GameEventCardChangeZone;
+import forge.game.event.GameEventCardCounters;
+import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardDestroyed;
+import forge.game.event.GameEventCardPhased;
+import forge.game.event.GameEventCardRegenerated;
+import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventFlipCoin;
+import forge.game.event.GameEventGameOutcome;
+import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventPlayerLivesChanged;
+import forge.game.event.GameEventPlayerPoisoned;
+import forge.game.event.GameEventShuffle;
+import forge.game.event.GameEventSpellResolved;
+import forge.game.event.GameEventTokenCreated;
+import forge.game.event.GameEventTurnEnded;
+import forge.game.event.IGameEventVisitor;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.interfaces.IGuiBase;
 import forge.util.maps.MapOfLists;
-
-import java.util.Collection;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
  */
 public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> implements IUiEventVisitor<SoundEffectType> {
+
+    final LobbyPlayer player;
+    public EventVisualizer(final IGuiBase gui) {
+        this.player = gui.getGuiPlayer();
+    }
 
     public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
@@ -41,7 +67,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
     public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }
     public SoundEffectType visit(GameEventBlockersDeclared event) {
-        boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer();
+        final boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == player;
         if (isLocalHuman)
             return null; // already played sounds in interactive mode
         
@@ -60,7 +86,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
      * Plays the sound corresponding to the outcome of the duel.
      */
     public SoundEffectType visit(GameEventGameOutcome event) {
-        boolean humanWonTheDuel = event.result.getWinningLobbyPlayer() == GuiBase.getInterface().getGuiPlayer();
+        boolean humanWonTheDuel = event.result.getWinningLobbyPlayer() == player;
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }
 

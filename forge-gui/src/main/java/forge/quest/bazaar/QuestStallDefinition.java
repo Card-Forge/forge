@@ -17,15 +17,13 @@
  */
 package forge.quest.bazaar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.assets.ISkinImage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -89,8 +87,8 @@ public class QuestStallDefinition {
      * 
      * @return the icon
      */
-    public ISkinImage getIcon() {
-        return GuiBase.getInterface().getSkinIcon(icon);
+    public FSkinProp getIcon() {
+        return icon;
     }
 
     /**

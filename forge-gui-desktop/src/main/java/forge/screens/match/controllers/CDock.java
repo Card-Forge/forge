@@ -71,7 +71,7 @@ public enum CDock implements ICDoc {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
 
-        FThreads.invokeInEdtLater(new Runnable(){
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable(){
             @Override public void run() {
                 SLayoutIO.loadLayout(null);
                 SOverlayUtils.hideOverlay();
@@ -101,7 +101,7 @@ public enum CDock implements ICDoc {
             FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
             // let it redraw everything first
 
-            FThreads.invokeInEdtLater(new Runnable() {
+            FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                 @Override
                 public void run() {
                     if (loadFile != null) {

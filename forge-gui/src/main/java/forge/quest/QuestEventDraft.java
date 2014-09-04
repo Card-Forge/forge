@@ -17,8 +17,17 @@
  */
 package forge.quest;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.base.Function;
-import forge.GuiBase;
+
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
@@ -26,6 +35,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
+import forge.interfaces.IGuiBase;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
@@ -36,9 +46,6 @@ import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
 import forge.util.storage.IStorage;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * <p>
@@ -657,18 +664,18 @@ public class QuestEventDraft {
         return output;
 
     }
-    
-	public boolean canEnter() {
-		long creditsAvailable = FModel.getQuest().getAssets().getCredits();
-		return creditsAvailable < getEntryFee();
-	}
-	
-	public BoosterDraft enter() {
-		FModel.getQuest().getAchievements().setCurrentDraft(this);
-		FModel.getQuest().getAssets().subtractCredits(getEntryFee());
-		return BoosterDraft.createDraft(LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration());
-	}
-	
+
+    public boolean canEnter() {
+        long creditsAvailable = FModel.getQuest().getAssets().getCredits();
+        return creditsAvailable < getEntryFee();
+    }
+
+    public BoosterDraft enter(final IGuiBase gui) {
+        FModel.getQuest().getAchievements().setCurrentDraft(this);
+        FModel.getQuest().getAssets().subtractCredits(getEntryFee());
+        return BoosterDraft.createDraft(gui, LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration());
+    }
+
     public boolean isStarted() {
         return started;
     }
@@ -790,14 +797,14 @@ public class QuestEventDraft {
         }
         
         List<String> usedNames = new ArrayList<String>();
-        usedNames.add(GuiBase.getInterface().getGuiPlayer().getName());
+        usedNames.add(quest.getGui().getGuiPlayer().getName());
         
         for (int i = 0; i < 7; i++) {
             event.aiNames[i] = NameGenerator.getRandomName("Any", "Any", usedNames);
             usedNames.add(event.aiNames[i]);
         }
         
-        int numberOfIcons = GuiBase.getInterface().getAvatarCount();
+        int numberOfIcons = quest.getGui().getAvatarCount();
         List<Integer> usedIcons = new ArrayList<Integer>();
         
         for (int i = 0; i < 7; i++) {

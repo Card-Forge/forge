@@ -18,8 +18,10 @@
 package forge.game.card;
 
 import com.google.common.collect.Lists;
+
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -432,7 +434,6 @@ public class CardCharacteristics {
         }
     }
 
-
     public CardRarity getRarity() {
         return rarity;
     }
@@ -452,4 +453,22 @@ public class CardCharacteristics {
         this.curSetCode = curSetCode; 
     }
 
+
+    /**
+     * Determine the colors.
+     * 
+     * @return a {@link ColorSet}.
+     */
+    public final ColorSet determineColor() {
+        final List<CardColor> colorList = this.getCardColor();
+        byte colors = 0;
+        for (int i = colorList.size() - 1;i >= 0;i--) {
+            final CardColor cc = colorList.get(i);
+            colors |= cc.getColorMask();
+            if (!cc.isAdditional()) {
+                return ColorSet.fromMask(colors);
+            }
+        }
+        return ColorSet.fromMask(colors);
+    }
 }

@@ -1,23 +1,25 @@
 package forge.limited;
 
-import forge.GuiBase;
 import forge.interfaces.IButton;
+import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
 import forge.view.IGameView;
 
 public abstract class LimitedWinLoseController {
-    private final IGameView lastGame;
-    private final boolean wonMatch;
     private final IWinLoseView<? extends IButton> view;
+    private final IGameView lastGame;
+    private final IGuiBase gui;
+    private final boolean wonMatch;
     private GauntletMini gauntlet;
     private boolean nextRound = false;
 
-    public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0) {
+    public LimitedWinLoseController(IWinLoseView<? extends IButton> view0, final IGameView game0, final IGuiBase gui) {
         view = view0;
         lastGame = game0;
-        gauntlet = FModel.getGauntletMini();
-        wonMatch = lastGame.isMatchWonBy(GuiBase.getInterface().getGuiPlayer());
+        this.gui = gui;
+        gauntlet = FModel.getGauntletMini(gui);
+        wonMatch = lastGame.isMatchWonBy(gui.getGuiPlayer());
     }
 
     public void showOutcome() {
@@ -29,7 +31,7 @@ public abstract class LimitedWinLoseController {
         resetView();
         nextRound = false;
 
-        if (lastGame.isWinner(GuiBase.getInterface().getGuiPlayer())) {
+        if (lastGame.isWinner(gui.getGuiPlayer())) {
             gauntlet.addWin();
         } else {
             gauntlet.addLoss();

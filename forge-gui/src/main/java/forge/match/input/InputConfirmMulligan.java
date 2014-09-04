@@ -17,18 +17,19 @@
  */
 package forge.match.input;
 
-import forge.GuiBase;
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 import forge.util.gui.SGuiDialog;
-
-import java.util.ArrayList;
-import java.util.List;
+import forge.view.CardView;
  
 /**
   * <p>
@@ -49,7 +50,8 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     private final Player player;
     private final Player startingPlayer;
 
-    public InputConfirmMulligan(Player humanPlayer, Player startsGame, boolean commander) {
+    public InputConfirmMulligan(final PlayerControllerHuman controller, final Player humanPlayer, final Player startsGame, final boolean commander) {
+        super(controller);
         player = humanPlayer;
         isCommander = commander;
         startingPlayer = startsGame;
@@ -70,11 +72,11 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         }
 
         if (isCommander) {
-            ButtonUtil.update("Keep", "Exile", true, false, true);
+            ButtonUtil.update(getGui(), "Keep", "Exile", true, false, true);
             sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
         }
         else {
-            ButtonUtil.update("Keep", "Mulligan", true, true, true);
+            ButtonUtil.update(getGui(), "Keep", "Mulligan", true, true, true);
             sb.append("Do you want to keep your hand?");
         }
 
@@ -98,8 +100,8 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     private void done() {
         if (isCommander) {
             // Clear the "selected" icon after clicking the done button
-            for (Card c : this.selected) {
-                GuiBase.getInterface().setUsedToPay(c, false);
+            for (final Card c : this.selected) {
+                getGui().setUsedToPay(getController().getCardView(c), false);
             }
         }
         stop();
@@ -117,7 +119,8 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             return false;
         }
 
-        if (isSerumPowder && SGuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
+        final CardView cView = getController().getCardView(c0);
+        if (isSerumPowder && SGuiDialog.confirm(getGui(), cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
             ThreadUtil.invokeInGameThread(new Runnable() {
                 public void run() {
@@ -134,14 +137,14 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         if (isCommander) { // allow to choose cards for partial paris
             if (selected.contains(c0)) {
-                GuiBase.getInterface().setUsedToPay(c0, false);
+                getGui().setUsedToPay(getController().getCardView(c0), false);
                 selected.remove(c0);
             }
             else {
-                GuiBase.getInterface().setUsedToPay(c0, true);
+                getGui().setUsedToPay(getController().getCardView(c0), true);
                 selected.add(c0);
             }
-            ButtonUtil.update("Keep", "Exile", true, !selected.isEmpty(), true);
+            ButtonUtil.update(getGui(), "Keep", "Exile", true, !selected.isEmpty(), true);
         }
         return true;
     }

@@ -17,7 +17,6 @@ import java.util.Map.Entry;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
@@ -40,6 +39,7 @@ import forge.match.input.InputPassPriority;
 import forge.match.input.InputSelectCardsFromList;
 import forge.model.FModel;
 import forge.player.HumanPlay;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgeConstants;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
@@ -50,10 +50,10 @@ public final class DevModeUtil {
     private DevModeUtil() {
     }
 
-    public static void devModeGenerateMana(final Game game) {
+    public static void devModeGenerateMana(final Game game, final PlayerControllerHuman controller) {
         Player pPriority = game.getPhaseHandler().getPriorityPlayer();
         if (pPriority == null) {
-            SGuiDialog.message("No player has priority at the moment, so mana cannot be added to their pool.");
+            SGuiDialog.message(controller.getGui(), "No player has priority at the moment, so mana cannot be added to their pool.");
             return;
         }
 
@@ -67,7 +67,7 @@ public final class DevModeUtil {
         });
     }
 
-    public static void devSetupGameState(final Game game) {
+    public static void devSetupGameState(final Game game, final PlayerControllerHuman controller) {
         int humanLife = -1;
         int computerLife = -1;
 
@@ -82,7 +82,7 @@ public final class DevModeUtil {
             gamesDir.mkdir();
         }
         
-        String filename = GuiBase.getInterface().showFileDialog("Select Game State File", ForgeConstants.USER_GAMES_DIR);
+        String filename = controller.getGui().showFileDialog("Select Game State File", ForgeConstants.USER_GAMES_DIR);
         if (filename == null) {
             return;
         }
@@ -125,22 +125,22 @@ public final class DevModeUtil {
             in.close();
         }
         catch (final FileNotFoundException fnfe) {
-            SOptionPane.showErrorDialog("File not found: " + filename);
+            SOptionPane.showErrorDialog(controller.getGui(), "File not found: " + filename);
         }
         catch (final Exception e) {
-            SOptionPane.showErrorDialog("Error loading battle setup file!");
+            SOptionPane.showErrorDialog(controller.getGui(), "Error loading battle setup file!");
             return;
         }
 
-        setupGameState(game, humanLife, computerLife, humanCardTexts, aiCardTexts, tChangePlayer, tChangePhase);
+        setupGameState(game, humanLife, computerLife, humanCardTexts, aiCardTexts, tChangePlayer, tChangePhase, controller);
     }
 
     private static void setupGameState(final Game game, final int humanLife, final int computerLife, final Map<ZoneType, String> humanCardTexts,
-            final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
+            final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase, final PlayerControllerHuman controller) {
 
         Player pPriority = game.getPhaseHandler().getPriorityPlayer();
         if (pPriority == null) {
-            SGuiDialog.message("No player has priority at the moment, so game state cannot be setup.");
+            SGuiDialog.message(controller.getGui(), "No player has priority at the moment, so game state cannot be setup.");
             return;
         }
         game.getAction().invoke(new Runnable() {
@@ -239,15 +239,15 @@ public final class DevModeUtil {
      * 
      * @since 1.0.15
      */
-    public static void devModeTutor(final Game game) {
+    public static void devModeTutor(final Game game, final PlayerControllerHuman controller) {
         Player pPriority = game.getPhaseHandler().getPriorityPlayer();
         if (pPriority == null) {
-            SGuiDialog.message("No player has priority at the moment, so their deck can't be tutored from.");
+            SGuiDialog.message(controller.getGui(), "No player has priority at the moment, so their deck can't be tutored from.");
             return;
         }
 
         final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
-        final Card card = SGuiChoose.oneOrNone("Choose a card", lib);
+        final Card card = SGuiChoose.oneOrNone(controller.getGui(), "Choose a card", lib);
         if (card == null) { return; }
 
         game.getAction().invoke(new Runnable() {
@@ -265,14 +265,14 @@ public final class DevModeUtil {
      * 
      * @since 1.0.15
      */
-    public static void devModeAddCounter(final Game game) {
-        final Card card = SGuiChoose.oneOrNone("Add counters to which card?", game.getCardsIn(ZoneType.Battlefield));
+    public static void devModeAddCounter(final Game game, final PlayerControllerHuman controller) {
+        final Card card = SGuiChoose.oneOrNone(controller.getGui(), "Add counters to which card?", game.getCardsIn(ZoneType.Battlefield));
         if (card == null) { return; }
 
-        final CounterType counter = SGuiChoose.oneOrNone("Which type of counter?", CounterType.values());
+        final CounterType counter = SGuiChoose.oneOrNone(controller.getGui(), "Which type of counter?", CounterType.values());
         if (counter == null) { return; }
 
-        final Integer count = SGuiChoose.getInteger("How many counters?", 1, Integer.MAX_VALUE, 10);
+        final Integer count = SGuiChoose.getInteger(controller.getGui(), "How many counters?", 1, Integer.MAX_VALUE, 10);
         if (count == null) { return; }
         
         card.addCounter(counter, count, false);
@@ -285,12 +285,12 @@ public final class DevModeUtil {
      * 
      * @since 1.0.15
      */
-    public static void devModeTapPerm(final Game game) {
+    public static void devModeTapPerm(final Game game, final PlayerControllerHuman controller) {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 final List<Card> untapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Predicates.not(CardPredicates.Presets.TAPPED));
-                InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, untapped);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 0, Integer.MAX_VALUE, untapped);
                 inp.setCancelAllowed(true);
                 inp.setMessage("Choose permanents to tap");
                 inp.showAndWait();
@@ -310,12 +310,12 @@ public final class DevModeUtil {
      * 
      * @since 1.0.15
      */
-    public static void devModeUntapPerm(final Game game) {
+    public static void devModeUntapPerm(final Game game, final PlayerControllerHuman controller) {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 final List<Card> tapped = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
-                InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, tapped);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 0, Integer.MAX_VALUE, tapped);
                 inp.setCancelAllowed(true);
                 inp.setMessage("Choose permanents to untap");
                 inp.showAndWait();
@@ -333,12 +333,12 @@ public final class DevModeUtil {
      * 
      * @since 1.1.3
      */
-    public static void devModeSetLife(final Game game) {
+    public static void devModeSetLife(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player player = SGuiChoose.oneOrNone("Set life for which player?", players);
+        final Player player = SGuiChoose.oneOrNone(controller.getGui(), "Set life for which player?", players);
         if (player == null) { return; }
 
-        final Integer life = SGuiChoose.getInteger("Set life to what?", 0);
+        final Integer life = SGuiChoose.getInteger(controller.getGui(), "Set life to what?", 0);
         if (life == null) { return; }
 
         player.setLife(life, null);
@@ -351,14 +351,15 @@ public final class DevModeUtil {
      * 
      * @since 1.5.23
      */
-    public static void devModeWinGame(final Game game, final LobbyPlayer guiPlayer) {
-        Input input = GuiBase.getInterface().getInputQueue().getInput();
+    public static void devModeWinGame(final Game game, final PlayerControllerHuman controller) {
+        Input input = controller.getGui().getInputQueue().getInput();
         if (!(input instanceof InputPassPriority)) {
-            SOptionPane.showMessageDialog("You must have priority to use this feature.", "Win Game", SOptionPane.INFORMATION_ICON);
+            SOptionPane.showMessageDialog(controller.getGui(), "You must have priority to use this feature.", "Win Game", SOptionPane.INFORMATION_ICON);
             return;
         }
 
         //set life of all other players to 0
+        final LobbyPlayer guiPlayer = controller.getLobbyPlayer();
         final List<Player> players = game.getPlayers();
         for (Player player : players) {
             if (player.getLobbyPlayer() != guiPlayer) {
@@ -377,9 +378,9 @@ public final class DevModeUtil {
      * 
      * @since 1.2.7
      */
-    public static void devModeCardToHand(final Game game) {
+    public static void devModeCardToHand(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player p = SGuiChoose.oneOrNone("Put card in hand for which player?", players);
+        final Player p = SGuiChoose.oneOrNone(controller.getGui(), "Put card in hand for which player?", players);
         if (null == p) {
             return;
         }
@@ -388,7 +389,7 @@ public final class DevModeUtil {
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
-        final IPaperCard c = SGuiChoose.oneOrNone("Name the card", cards);
+        final IPaperCard c = SGuiChoose.oneOrNone(controller.getGui(), "Name the card", cards);
         if (c == null) {
             return;
         }
@@ -398,9 +399,9 @@ public final class DevModeUtil {
         }});
     }
 
-    public static void devModeCardToBattlefield(final Game game) {
+    public static void devModeCardToBattlefield(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player p = SGuiChoose.oneOrNone("Put card in play for which player?", players);
+        final Player p = SGuiChoose.oneOrNone(controller.getGui(), "Put card in play for which player?", players);
         if (null == p) {
             return;
         }
@@ -409,7 +410,7 @@ public final class DevModeUtil {
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
-        final IPaperCard c = SGuiChoose.oneOrNone("Name the card", cards);
+        final IPaperCard c = SGuiChoose.oneOrNone(controller.getGui(), "Name the card", cards);
         if (c == null) {
             return;
         }
@@ -426,7 +427,7 @@ public final class DevModeUtil {
                         return; // when would it happen?
                     }
 
-                    final SpellAbility sa = choices.size() == 1 ? choices.get(0) : SGuiChoose.oneOrNone("Choose", choices);
+                    final SpellAbility sa = choices.size() == 1 ? choices.get(0) : SGuiChoose.oneOrNone(controller.getGui(), "Choose", choices);
                     if (sa == null) {
                         return; // happens if cancelled
                     }
@@ -434,19 +435,19 @@ public final class DevModeUtil {
                     game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least)
                     // Human player is choosing targets for an ability controlled by chosen player.
                     sa.setActivatingPlayer(p);
-                    HumanPlay.playSaWithoutPayingManaCost(game, sa, true);
+                    HumanPlay.playSaWithoutPayingManaCost(controller, game, sa, true);
                 }
                 game.getStack().addAllTriggeredAbilitiesToStack(); // playSa could fire some triggers
             }
         });
     }
 
-    public static void devModeRiggedPlanarRoll(final Game game) {
+    public static void devModeRiggedPlanarRoll(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player player = SGuiChoose.oneOrNone("Which player should roll?", players);
+        final Player player = SGuiChoose.oneOrNone(controller.getGui(), "Which player should roll?", players);
         if (player == null) { return; }
 
-        final PlanarDice res = SGuiChoose.oneOrNone("Choose result", PlanarDice.values());
+        final PlanarDice res = SGuiChoose.oneOrNone(controller.getGui(), "Choose result", PlanarDice.values());
         if (res == null) { return; }
 
         System.out.println("Rigging planar dice roll: " + res.toString());
@@ -465,7 +466,7 @@ public final class DevModeUtil {
         });
     }
 
-    public static void devModePlaneswalkTo(final Game game) {
+    public static void devModePlaneswalkTo(final Game game, final PlayerControllerHuman controller) {
         if (!game.getRules().hasAppliedVariant(GameType.Planechase)) { return; }
         final Player p = game.getPhaseHandler().getPlayerTurn();
 
@@ -478,7 +479,7 @@ public final class DevModeUtil {
         Collections.sort(allPlanars);
 
         // use standard forge's list selection dialog
-        final IPaperCard c = SGuiChoose.oneOrNone("Name the card", allPlanars);
+        final IPaperCard c = SGuiChoose.oneOrNone(controller.getGui(), "Name the card", allPlanars);
         if (c == null) { return; }
         final Card forgeCard = Card.fromPaperCard(c, p);
 

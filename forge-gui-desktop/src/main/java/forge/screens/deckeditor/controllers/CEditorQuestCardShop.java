@@ -17,6 +17,7 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
 import forge.deck.DeckBase;
@@ -148,7 +149,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
 
-        QuestSpellShop.buy(items, this.getCatalogManager(), this.getDeckManager(), true);
+        QuestSpellShop.buy(GuiBase.getInterface(), items, this.getCatalogManager(), this.getDeckManager(), true);
         updateCreditsLabel();
     }
 
@@ -159,7 +160,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     protected void onRemoveItems(Iterable<Entry<InventoryItem, Integer>> items, boolean toAlternate) {
         if (showingFullCatalog || toAlternate) { return; }
 
-        QuestSpellShop.sell(items, this.getCatalogManager(), this.getDeckManager(), true);
+        QuestSpellShop.sell(GuiBase.getInterface(), items, this.getCatalogManager(), this.getDeckManager(), true);
         updateCreditsLabel();
     }
 

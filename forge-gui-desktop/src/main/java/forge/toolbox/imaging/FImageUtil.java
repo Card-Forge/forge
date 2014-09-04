@@ -23,8 +23,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
 import forge.ImageCache;
-import forge.card.CardCharacteristicName;
-import forge.game.card.Card;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
 import forge.toolbox.CardFaceSymbols;
@@ -37,36 +35,9 @@ import forge.view.CardView.CardStateView;
  * @version $Id: FImageUtil.java 25265 2014-03-27 02:18:47Z drdev $
  * 
  */
-public final class FImageUtil {  
-    private FImageUtil() {}
+public final class FImageUtil {
 
-    @Deprecated
-    public static BufferedImage getImage(Card card, CardCharacteristicName state) {
-        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(state), true);
-        int foilIndex = card.getFoil();
-        if (image != null && foilIndex > 0) { 
-            image = getImageWithFoilEffect(image, foilIndex);
-        }
-        return image;
-    }
-    
-    /**
-     * Gets the image associated with a card.
-     * <p>
-     * Adds a random foil effect if enabled.
-     * <p>
-     * For double-sided cards, returns the front-side image.<br>
-     * For flip cards, returns the un-flipped image. 
-     */
-    @Deprecated
-    public static BufferedImage getImage(Card card) {
-        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
-        int foilIndex = card.getFoil();
-        if (image != null && foilIndex > 0) { 
-            image = getImageWithFoilEffect(image, foilIndex);
-        }
-        return image;
-    }
+    private FImageUtil() {}
 
     /**
      * Gets the image associated with a card.

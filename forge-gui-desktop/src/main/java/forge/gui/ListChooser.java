@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
@@ -75,7 +76,7 @@ public class ListChooser<T> {
     private FOptionPane optionPane;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
         this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);

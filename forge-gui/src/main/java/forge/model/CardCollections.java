@@ -22,9 +22,11 @@ import forge.deck.DeckGroup;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckStorage;
 import forge.deck.io.OldDeckParser;
+import forge.interfaces.IGuiBase;
 import forge.properties.ForgeConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.File;
@@ -48,7 +50,7 @@ public class CardCollections {
      *
      * @param file the file
      */
-    public CardCollections() {
+    public CardCollections(final IGuiBase gui) {
         StopWatch sw = new StopWatch();
         sw.start();
         this.constructed = new StorageImmediatelySerialized<Deck>("Constructed decks", new DeckStorage(new File(ForgeConstants.DECK_CONSTRUCTED_DIR), true), true);
@@ -64,7 +66,7 @@ public class CardCollections {
 //        int sum = constructed.size() + sealed.size() + draft.size() + cube.size() + scheme.size() + plane.size();
 //        FSkin.setProgessBarMessage(String.format("Loaded %d decks in %f sec", sum, sw.getTime() / 1000f ));
         // remove this after most people have been switched to new layout
-        final OldDeckParser oldParser = new OldDeckParser(this.constructed, this.draft, this.sealed, this.cube);
+        final OldDeckParser oldParser = new OldDeckParser(gui, this.constructed, this.draft, this.sealed, this.cube);
         oldParser.tryParse();
     }
 

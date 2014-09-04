@@ -17,11 +17,13 @@
  */
 package forge.match.input;
 
-import forge.view.IGameView;
-
 import java.util.Observable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
+
+import forge.game.Game;
+import forge.interfaces.IGuiBase;
+import forge.view.IGameView;
 
 /**
  * <p>
@@ -35,8 +37,8 @@ public class InputQueue extends Observable {
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
 
-    public InputQueue() {
-        inputLock = new InputLockUI(this);
+    public InputQueue(final IGuiBase gui, final Game game) {
+        inputLock = new InputLockUI(gui, game, this);
     }
 
     public final void updateObservers() {

@@ -1,9 +1,16 @@
 package forge.screens.match.menus;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+
 import forge.Singletons;
 import forge.assets.FSkinProp;
 import forge.control.FControl;
-import forge.match.MatchUtil;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -11,13 +18,11 @@ import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
 import forge.screens.match.controllers.CDock;
-import forge.toolbox.FSkin.*;
-
-import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import forge.toolbox.FSkin.SkinIcon;
+import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
+import forge.toolbox.FSkin.SkinnedMenu;
+import forge.toolbox.FSkin.SkinnedMenuItem;
+import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
 
 /**
  * Returns a JMenu containing options associated with current game.
@@ -80,7 +85,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MatchUtil.undoLastAction();
+                Singletons.getControl().getGameView().tryUndoLastAction();
             }
         };
     }

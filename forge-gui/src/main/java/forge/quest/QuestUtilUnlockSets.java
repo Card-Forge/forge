@@ -17,13 +17,22 @@
  */
 package forge.quest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
+import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
@@ -31,10 +40,6 @@ import forge.quest.io.ReadPriceList;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
 import forge.util.storage.IStorage;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.util.*;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -77,7 +82,7 @@ public class QuestUtilUnlockSets {
             options.add(String.format("%s [PRICE: %d credits]",  ee.left.getName(), ee.right));
         }
 
-        int index = options.indexOf(SGuiChoose.oneOrNone(setPrompt, options));
+        int index = options.indexOf(SGuiChoose.oneOrNone(qData.getGui(), setPrompt, options));
         if (index < 0 || index >= options.size()) {
             return null;
         }
@@ -88,7 +93,8 @@ public class QuestUtilUnlockSets {
         CardEdition choosenEdition = toBuy.left;
 
         if (qData.getAssets().getCredits() < price) {
-            SOptionPane.showMessageDialog("Unfortunately, you cannot afford that set yet.\n"
+            SOptionPane.showMessageDialog(qData.getGui(),
+                    "Unfortunately, you cannot afford that set yet.\n"
                     + "To unlock " + choosenEdition.getName() + ", you need " + price + " credits.\n"
                     + "You have only " + qData.getAssets().getCredits() + " credits.",
                     "Failed to unlock " + choosenEdition.getName(),
@@ -96,7 +102,7 @@ public class QuestUtilUnlockSets {
             return null;
         }
 
-        if (!SOptionPane.showConfirmDialog(
+        if (!SOptionPane.showConfirmDialog(qData.getGui(),
                 "Unlocking " + choosenEdition.getName() + " will cost you " + price + " credits.\n"
                 + "You have " + qData.getAssets().getCredits() + " credits.\n\n"
                 + "Are you sure you want to unlock " + choosenEdition.getName() + "?",
@@ -173,7 +179,7 @@ public class QuestUtilUnlockSets {
      * @param qData the quest controller
      * @param unlockedSet the edition to unlock
      */
-    public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
+    public static void doUnlock(final IGuiBase gui, final QuestController qData, final CardEdition unlockedSet) {
         IStorage<SealedProduct.Template> starters = FModel.getMagicDb().getTournamentPacks();
         IStorage<SealedProduct.Template> boosters = FModel.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
@@ -192,7 +198,7 @@ public class QuestUtilUnlockSets {
         }
 
         qData.getCards().addAllCards(cardsWon);
-        GuiBase.getInterface().showCardList(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
+        gui.showCardList(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
         qData.save();
     }
 }

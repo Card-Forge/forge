@@ -51,6 +51,7 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.Player;
+//import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -66,6 +67,8 @@ import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
+import forge.player.PlayerControllerHuman;
+import forge.player.PlayerControllerLocal;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -122,7 +125,7 @@ public enum FControl implements KeyEventDispatcher {
         EXIT_FORGE
     }
 
-    private final SoundSystem soundSystem = new SoundSystem();
+    private final SoundSystem soundSystem = new SoundSystem(GuiBase.getInterface());
 
     /**
      * <p>
@@ -190,10 +193,10 @@ public enum FControl implements KeyEventDispatcher {
     public boolean canExitForge(boolean forRestart) {
         String action = (forRestart ? "Restart" : "Exit");
         String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
-        if (this.game != null) {
+        if (this.gameView != null) {
             userPrompt = "A game is currently active. " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", this.game == null)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, "Cancel", this.gameView == null)) { //default Yes if no game active
             return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {
@@ -385,11 +388,6 @@ public enum FControl implements KeyEventDispatcher {
     private IGameView gameView;
     private boolean gameHasHumanPlayer;
 
-    @Deprecated
-    public Game getObservedGame() {
-        return game;
-    }
-
     public IGameView getGameView() {
         return this.gameView;
     }
@@ -443,22 +441,24 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public final void startGameWithUi(final Match match) {
-        if (this.game != null) {
+        if (this.gameView != null) {
             this.setCurrentScreen(FScreen.MATCH_SCREEN);
             SOverlayUtils.hideOverlay();
             FOptionPane.showMessageDialog("Cannot start a new game while another game is already in progress.");
             return; //TODO: See if it's possible to run multiple games at once without crashing
         }
         setPlayerName(match.getPlayers());
-        this.game = match.createGame();
+        final Game game = match.createGame();
         final LobbyPlayer me = getGuiPlayer();
-        for (final Player p : this.game.getPlayers()) {
+        for (final Player p : game.getPlayers()) {
             if (p.getLobbyPlayer().equals(me)) {
                 this.gameView = (IGameView) p.getController();
+                fcVisitor = new FControlGameEventHandler((PlayerControllerHuman) p.getController());
                 break;
             }
         }
 
+        inputQueue = new InputQueue(GuiBase.getInterface(), game);
         attachToGame(this.gameView);
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
@@ -473,14 +473,15 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public final void endCurrentGame() {
-        if (this.game == null) { return; }
+        if (this.gameView == null) { return; }
 
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
         this.game = null;
+        this.gameView = null;
     }
 
-    private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler();
-    private final FControlGamePlayback playbackControl = new FControlGamePlayback();
+    private FControlGameEventHandler fcVisitor;
+    private FControlGamePlayback playbackControl;// = new FControlGamePlayback();
     private void attachToGame(final IGameView game0) {
         if (game0.getGameType().equals(GameType.Quest)) {
             QuestController qc = FModel.getQuest();
@@ -490,8 +491,6 @@ public enum FControl implements KeyEventDispatcher {
             }
             game0.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
-
-        inputQueue = new InputQueue();
 
         game0.subscribeToEvents(Singletons.getControl().getSoundSystem());
 
@@ -531,6 +530,11 @@ public enum FControl implements KeyEventDispatcher {
 
         // Add playback controls to match if needed
         if (localPlayer != null) {
+            // Create dummy controller
+            final PlayerControllerHuman controller =
+                    new PlayerControllerLocal(game, null, humanLobbyPlayer, GuiBase.getInterface());
+            playbackControl = new FControlGamePlayback(controller);
+            playbackControl.setGame(game);
             game0.subscribeToEvents(playbackControl);
         }
 
@@ -590,7 +594,7 @@ public enum FControl implements KeyEventDispatcher {
             boolean isPlayerOneHuman = players.get(0).getPlayer() instanceof LobbyPlayerHuman;
             boolean isPlayerTwoComputer = players.get(1).getPlayer() instanceof LobbyPlayerAi;
             if (isPlayerOneHuman && isPlayerTwoComputer) {
-                GamePlayerUtil.setPlayerName();
+                GamePlayerUtil.setPlayerName(GuiBase.getInterface());
             }
         }
     }
@@ -616,7 +620,7 @@ public enum FControl implements KeyEventDispatcher {
         final Match mc = new Match(rules, players);
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
-        FThreads.invokeInEdtLater(new Runnable(){
+        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable(){
             @Override
             public void run() {
                 startGameWithUi(mc);
@@ -740,7 +744,7 @@ public enum FControl implements KeyEventDispatcher {
         return player;
     }
 
-    private final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
+    private final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human", GuiBase.getInterface());
     public final LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }

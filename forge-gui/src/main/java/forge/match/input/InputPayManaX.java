@@ -1,5 +1,10 @@
 package forge.match.input;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -7,12 +12,8 @@ import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
+import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class InputPayManaX extends InputPayMana {
     private static final long serialVersionUID = -6900234444347364050L;
@@ -23,8 +24,8 @@ public class InputPayManaX extends InputPayMana {
     private final boolean xCanBe0;
     private boolean canceled = false;
 
-    public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0) {
-        super(sa0, sa0.getActivatingPlayer());
+    public InputPayManaX(final PlayerControllerHuman controller, final SpellAbility sa0, final int amountX, final boolean xCanBe0) {
+        super(controller, sa0, sa0.getActivatingPlayer());
         xPaid = 0;
         
         if (saPaidFor.hasParam("XColor")) {
@@ -82,7 +83,7 @@ public class InputPayManaX extends InputPayMana {
 
         // Enable just cancel is full X value hasn't been paid for multiple X values
         // or X is 0, and x can't be 0
-        ButtonUtil.update(isPaid(), true, true);
+        ButtonUtil.update(getGui(), isPaid(), true, true);
 
         return msg.toString();
     }

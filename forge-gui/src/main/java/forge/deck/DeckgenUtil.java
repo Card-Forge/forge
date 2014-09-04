@@ -12,6 +12,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.generation.*;
+import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 import forge.model.FModel;
@@ -186,18 +187,18 @@ public class DeckgenUtil {
      * @param colors0 String[]
      * @return boolean
      */
-    public static boolean colorCheck(final List<String> colors0) {
+    public static boolean colorCheck(final IGuiBase gui, final List<String> colors0) {
         boolean result = true;
 
         if (colors0.size() == 4) {
-            SOptionPane.showMessageDialog(
+            SOptionPane.showMessageDialog(gui,
                     "Sorry, four color generated decks aren't supported yet."
                     + "\n\rPlease use 2, 3, or 5 colors for this deck.",
                     "Generate deck: 4 colors", SOptionPane.ERROR_ICON);
             result = false;
         }
         else if (colors0.size() > 5) {
-            SOptionPane.showMessageDialog(
+            SOptionPane.showMessageDialog(gui,
                     "Generate deck: maximum five colors!",
                     "Generate deck: too many colors", SOptionPane.ERROR_ICON);
             result = false;

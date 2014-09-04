@@ -34,6 +34,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
@@ -257,7 +258,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         }
 
         final Object[] result = { null }; // how else can I extract a value from EDT thread?
-        FThreads.invokeInEdtAndWait(new Runnable() {
+        FThreads.invokeInEdtAndWait(GuiBase.getInterface(), new Runnable() {
             @Override
             public void run() {
                 VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender, overrideOrder);
@@ -285,7 +286,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     public void setCard(final CardView c, final boolean isInAltState) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         CDetail.SINGLETON_INSTANCE.showCard(c, isInAltState);
         CPicture.SINGLETON_INSTANCE.showCard(c, isInAltState);
     }
@@ -335,7 +336,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     Set<CardView> highlightedCards = Sets.newHashSet();
     // used to highlight cards in UI
     public void setUsedToPay(CardView card, boolean value) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
 
         boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
         if (hasChanged) { // since we are in UI thread, may redraw the card right now
@@ -417,7 +418,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     // UI-related events should arrive here
     public void fireEvent(UiEvent uiEvent) {
         if (LOG_UIEVENTS) {
-            System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
+            System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(GuiBase.getInterface(), 4, true));
         }
         uiEvents.post(uiEvent);
     }

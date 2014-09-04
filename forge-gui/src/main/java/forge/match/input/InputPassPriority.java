@@ -17,19 +17,18 @@
  */
 package forge.match.input;
 
-import forge.GuiBase;
+import java.util.List;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.match.MatchUtil;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
 import forge.util.ThreadUtil;
 import forge.util.gui.SOptionPane;
-
-import java.util.List;
 
 /**
  * <p>
@@ -46,7 +45,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     
     private SpellAbility chosenSa;
     
-    public InputPassPriority(Player human) {
+    public InputPassPriority(final PlayerControllerHuman controller, final Player human) {
+        super(controller);
         player = human;
     }
 
@@ -55,11 +55,11 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
-        if (MatchUtil.canUndoLastAction()) { //allow undoing with cancel button if can undo last action
-            ButtonUtil.update("OK", "Undo", true, true, true);
+        if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
+            ButtonUtil.update(getGui(), "OK", "Undo", true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
-            ButtonUtil.update("OK", "End Turn", true, true, true);
+            ButtonUtil.update(getGui(), "OK", "End Turn", true, true, true);
         }
     }
 
@@ -77,7 +77,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        if (!MatchUtil.undoLastAction()) { //undo if possible
+        if (!getController().tryUndoLastAction()) { //undo if possible
             //otherwise end turn
             passPriority(new Runnable() {
                 @Override
@@ -97,10 +97,10 @@ public class InputPassPriority extends InputSyncronizedBase {
     private void passPriority(final Runnable runnable) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)) {
             //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority
-            Game game = GuiBase.getInterface().getGame();
+            final Game game = player.getGame();
             if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
                 Player player = game.getPhaseHandler().getPriorityPlayer();
-                if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+                if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == getGui().getGuiPlayer()) {
                     ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
                         @Override
                         public void run() {
@@ -108,7 +108,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                             if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
                                 message += " You will take mana burn damage equal to the amount of floating mana lost this way.";
                             }
-                            if (SOptionPane.showOptionDialog(message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
+                            if (SOptionPane.showOptionDialog(getGui(), message, "Mana Floating", SOptionPane.WARNING_ICON, new String[]{"OK", "Cancel"}) == 0) {
                                 runnable.run();
                             }
                         }

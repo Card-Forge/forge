@@ -1,5 +1,6 @@
 package forge.screens.home.sanctioned;
 
+import forge.GuiBase;
 import forge.UiCommand;
 import forge.Singletons;
 import forge.deck.*;
@@ -16,6 +17,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CEditorLimited;
 import forge.toolbox.FOptionPane;
+
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
@@ -108,12 +110,12 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        FModel.getGauntletMini().launch(matches, human.getDeck(), gameType);
+        FModel.getGauntletMini(GuiBase.getInterface()).launch(matches, human.getDeck(), gameType);
     }
 
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
-        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(true);
+        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(GuiBase.getInterface(), true);
         if (sealed == null) { return; }
 
         final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(

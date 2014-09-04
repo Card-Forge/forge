@@ -29,6 +29,7 @@ public interface IGameView {
     public abstract boolean isMatchOver();
     public abstract int getNumGamesInMatch();
     public abstract int getNumPlayedGamesInMatch();
+    public abstract Iterable<GameOutcome> getOutcomesOfMatch();
     public abstract boolean isMatchWonBy(LobbyPlayer p);
     public abstract int getGamesWonBy(LobbyPlayer p);
     public abstract GameOutcome.AnteResult getAnteResult();
@@ -46,6 +47,8 @@ public interface IGameView {
     public abstract void addLogObserver(Observer o);
     public abstract List<GameLogEntry> getLogEntries(final GameLogEntryType maxLogLevel);
     public abstract List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel);
+
+    public abstract boolean tryUndoLastAction();
 
     // the following method should eventually be replaced by methods returning
     // View classes
@@ -94,4 +97,5 @@ public interface IGameView {
     public abstract void devAddCardToBattlefield();
     public abstract void devRiggedPlanerRoll();
     public abstract void devPlaneswalkTo();
+
 }

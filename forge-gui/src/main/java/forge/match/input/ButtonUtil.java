@@ -17,29 +17,29 @@
  */
 package forge.match.input;
 
-import forge.GuiBase;
 import forge.interfaces.IButton;
+import forge.interfaces.IGuiBase;
 
 /**
  * Manages match UI OK/Cancel button enabling and focus
  */
 public class ButtonUtil {
-    public static void update(boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-        update("OK", "Cancel", okEnabled, cancelEnabled, focusOk);
+    public static void update(final IGuiBase gui, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        update(gui, "OK", "Cancel", okEnabled, cancelEnabled, focusOk);
     }
-    public static void update(String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
-        IButton btnOk = GuiBase.getInterface().getBtnOK();
-        IButton btnCancel = GuiBase.getInterface().getBtnCancel();
+    public static void update(final IGuiBase gui, String okLabel, String cancelLabel, boolean okEnabled, boolean cancelEnabled, boolean focusOk) {
+        IButton btnOk = gui.getBtnOK();
+        IButton btnCancel = gui.getBtnCancel();
 
         btnOk.setText(okLabel);
         btnCancel.setText(cancelLabel);
         btnOk.setEnabled(okEnabled);
         btnCancel.setEnabled(cancelEnabled);
         if (okEnabled && focusOk) {
-            GuiBase.getInterface().focusButton(btnOk);
+            gui.focusButton(btnOk);
         }
         else if (cancelEnabled) {
-            GuiBase.getInterface().focusButton(btnCancel);
+            gui.focusButton(btnCancel);
         }
     }
 }

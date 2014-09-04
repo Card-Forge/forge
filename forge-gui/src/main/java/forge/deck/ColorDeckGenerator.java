@@ -3,17 +3,20 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.interfaces.IGuiBase;
 import forge.itemmanager.IItemManager;
 
 
 public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
+    private final IGuiBase gui;
     private String name;
     private int index;
     private final IItemManager<DeckProxy> lstDecks;
     private final boolean isAi;
 
-    public ColorDeckGenerator(String name0, int index0, IItemManager<DeckProxy> lstDecks0, boolean isAi0) {
+    public ColorDeckGenerator(final IGuiBase gui, String name0, int index0, IItemManager<DeckProxy> lstDecks0, boolean isAi0) {
         super();
+        this.gui = gui;
         name = name0;
         index = index0;
         lstDecks = lstDecks0;
@@ -42,7 +45,7 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
         for (DeckProxy deck : lstDecks.getSelectedItems()) {
             selection.add(deck.getName());
         }
-        if (DeckgenUtil.colorCheck(selection)) {
+        if (DeckgenUtil.colorCheck(gui, selection)) {
             return DeckgenUtil.buildColorDeck(selection, isAi);
         }
         return null;

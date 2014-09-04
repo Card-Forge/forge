@@ -23,12 +23,9 @@ import forge.game.io.GameStateDeserializer;
 import forge.game.io.GameStateSerializer;
 import forge.game.io.IGameStateObject;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
 
 /**
  * <p>
@@ -64,7 +61,6 @@ public class GameLog extends Observable implements IGameStateObject {
      * Instantiates a new game log.
      */
     public GameLog() {
-
     }
 
     /**
@@ -82,11 +78,6 @@ public class GameLog extends Observable implements IGameStateObject {
         log.add(entry);
         this.setChanged();
         this.notifyObservers();
-    }    
-    
-    public String getLogText(final GameLogEntryType logLevel) { 
-        List<GameLogEntry> filteredAndReversed = getLogEntries(logLevel);
-        return StringUtils.join(filteredAndReversed, "\r\n");
     }
 
     /**

@@ -1,9 +1,9 @@
 package forge;
 
-import forge.util.ThreadUtil;
-
 import java.io.PrintStream;
 
+import forge.interfaces.IGuiBase;
+import forge.util.ThreadUtil;
 
 public class FThreads {
     private FThreads() { } // no instances supposed
@@ -15,8 +15,8 @@ public class FThreads {
      * @param methodName &emsp; String, part of the custom exception message.
      * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
      */
-    public static void assertExecutedByEdt(final boolean mustBeEDT) {
-        if (isGuiThread() != mustBeEDT) {
+    public static void assertExecutedByEdt(final IGuiBase gui, final boolean mustBeEDT) {
+        if (isGuiThread(gui) != mustBeEDT) {
             StackTraceElement[] trace = Thread.currentThread().getStackTrace();
             final String methodName = trace[2].getClassName() + "." + trace[2].getMethodName();
             String modalOperator = mustBeEDT ? " must be" : " may not be";
@@ -24,16 +24,16 @@ public class FThreads {
         }
     }
 
-    public static void invokeInEdtLater(Runnable runnable) {
-        GuiBase.getInterface().invokeInEdtLater(runnable);
+    public static void invokeInEdtLater(final IGuiBase gui, final Runnable runnable) {
+        gui.invokeInEdtLater(runnable);
     }
 
-    public static void invokeInEdtNowOrLater(Runnable proc) {
-        if (isGuiThread()) {
+    public static void invokeInEdtNowOrLater(final IGuiBase gui, final Runnable proc) {
+        if (isGuiThread(gui)) {
             proc.run();
         }
         else {
-            invokeInEdtLater(proc);
+            invokeInEdtLater(gui, proc);
         }
     }
 
@@ -49,8 +49,8 @@ public class FThreads {
      *            the Runnable to run
      * @see fgd.SwingUtilities#invokeLater(Runnable)
      */
-    public static void invokeInEdtAndWait(final Runnable proc) {
-        GuiBase.getInterface().invokeInEdtAndWait(proc);
+    public static void invokeInEdtAndWait(final IGuiBase gui, final Runnable proc) {
+        gui.invokeInEdtAndWait(proc);
     }
 
     private static int backgroundThreadCount;
@@ -60,31 +60,31 @@ public class FThreads {
         backgroundThreadCount++;
     }
 
-    public static boolean isGuiThread() {
-        return GuiBase.getInterface().isGuiThread();
+    public static boolean isGuiThread(IGuiBase gui) {
+        return gui.isGuiThread();
     }
 
-    public static void delayInEDT(int milliseconds, final Runnable inputUpdater) {
+    public static void delayInEDT(final IGuiBase gui, final int milliseconds, final Runnable inputUpdater) {
         Runnable runInEdt = new Runnable() {
             @Override
             public void run() {
-                FThreads.invokeInEdtNowOrLater(inputUpdater);
+                FThreads.invokeInEdtNowOrLater(gui, inputUpdater);
             }
         };
         ThreadUtil.delay(milliseconds, runInEdt);
     }
 
-    public static String debugGetCurrThreadId() {
-        return isGuiThread() ? "EDT" : Thread.currentThread().getName();
+    public static String debugGetCurrThreadId(final IGuiBase gui) {
+        return isGuiThread(gui) ? "EDT" : Thread.currentThread().getName();
     }
 
-    public static String prependThreadId(String message) {
-        return debugGetCurrThreadId() + " > " + message;
+    public static String prependThreadId(final IGuiBase gui, String message) {
+        return debugGetCurrThreadId(gui) + " > " + message;
     }
 
-    public static void dumpStackTrace(PrintStream stream) {
+    public static void dumpStackTrace(final IGuiBase gui, final PrintStream stream) {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-        stream.printf("%s > %s called from %s%n", debugGetCurrThreadId(),
+        stream.printf("%s > %s called from %s%n", debugGetCurrThreadId(gui),
                 trace[2].getClassName() + "." + trace[2].getMethodName(), trace[3].toString());
         int i = 0;
         for (StackTraceElement se : trace) {
@@ -93,7 +93,7 @@ public class FThreads {
         }
     }
 
-    public static String debugGetStackTraceItem(int depth, boolean shorter) {
+    public static String debugGetStackTraceItem(final IGuiBase gui, final int depth, final boolean shorter) {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         String lastItem = trace[depth].toString();
         if (shorter) {
@@ -101,13 +101,13 @@ public class FThreads {
             lastPeriod = lastItem.lastIndexOf('.', lastPeriod-1);
             lastPeriod = lastItem.lastIndexOf('.', lastPeriod-1);
             lastItem = lastItem.substring(lastPeriod+1);
-            return String.format("%s > from %s", debugGetCurrThreadId(), lastItem);
+            return String.format("%s > from %s", debugGetCurrThreadId(gui), lastItem);
         }
-        return String.format("%s > %s called from %s", debugGetCurrThreadId(),
+        return String.format("%s > %s called from %s", debugGetCurrThreadId(gui),
                 trace[2].getClassName() + "." + trace[2].getMethodName(), lastItem);
     }
 
-    public static String debugGetStackTraceItem(int depth) {
-        return debugGetStackTraceItem(depth, false);
+    public static String debugGetStackTraceItem(final IGuiBase gui, final int depth) {
+        return debugGetStackTraceItem(gui, depth, false);
     }
 }

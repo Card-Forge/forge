@@ -142,7 +142,7 @@ public enum CSubmenuWinston implements ICDoc {
         final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
         if (poolType == null) { return; }
 
-        WinstonDraft draft = WinstonDraft.createDraft(poolType);
+        WinstonDraft draft = WinstonDraft.createDraft(GuiBase.getInterface(), poolType);
         if (draft == null) { return; }
 
         final CEditorWinstonProcess draftController = new CEditorWinstonProcess();

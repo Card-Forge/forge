@@ -3,6 +3,7 @@ package forge.game.player;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
@@ -38,11 +39,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 
 /** 
  * A prototype for player controller class
@@ -83,11 +82,11 @@ public abstract class PlayerController {
     }
 
     /**
-     * Automatically pass priority until reaching the given phase of the current turn
-     * @param phase
+     * Automatically pass priority until reaching the Cleanup phase of the
+     * current turn.
      */
-    public void autoPassUntil(PhaseType phase) {
-        autoPassUntilPhase = phase;
+    public void autoPassUntilEndOfTurn() {
+        autoPassUntilPhase = PhaseType.CLEANUP;
     }
     
     protected PhaseType getAutoPassUntilPhase() {
@@ -118,14 +117,14 @@ public abstract class PlayerController {
     }
 
     // Abilities to auto-yield to
-    private Set<String> autoYields = new HashSet<String>();
+    private final Set<String> autoYields = Sets.newHashSet();
     public Iterable<String> getAutoYields() {
         return autoYields;
     }
-    public boolean shouldAutoYield(String key) {
+    public boolean shouldAutoYield(final String key) {
         return autoYields.contains(key);
     }
-    public void setShouldAutoYield(String key, boolean autoYield) {
+    public void setShouldAutoYield(final String key, final boolean autoYield) {
         if (autoYield) {
             autoYields.add(key);
         }
