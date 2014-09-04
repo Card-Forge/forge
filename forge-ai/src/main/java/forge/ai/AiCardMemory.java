@@ -42,7 +42,7 @@ public class AiCardMemory {
 
     private HashSet<Card> memMandatoryAttackers = new HashSet<Card>();
     private HashSet<Card> memHeldManaSources = new HashSet<Card>();
-    private HashSet<Card> memRevealedCards = new HashSet<Card>();
+    //private HashSet<Card> memRevealedCards = new HashSet<Card>();
 
     /**
      * Defines the memory set in which the card is remembered
@@ -52,7 +52,7 @@ public class AiCardMemory {
     public enum MemorySet {
         MANDATORY_ATTACKERS,
         HELD_MANA_SOURCES, // stub, not linked to AI code yet
-        REVEALED_CARDS; // stub, not linked to AI code yet
+        //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
@@ -61,8 +61,8 @@ public class AiCardMemory {
                 return memMandatoryAttackers;
             case HELD_MANA_SOURCES:
                 return memHeldManaSources;
-            case REVEALED_CARDS:
-                return memRevealedCards;
+            //case REVEALED_CARDS:
+            //    return memRevealedCards;
             default:
                 return null;
         }
@@ -226,9 +226,9 @@ public class AiCardMemory {
     /**
      * Clears the "remembered revealed cards" memory set stored in this card memory for the given player.
      */
-    public void clearRememberedRevealedCards() {
-        getMemorySet(MemorySet.REVEALED_CARDS).clear();
-    }
+    //public void clearRememberedRevealedCards() {
+    //    getMemorySet(MemorySet.REVEALED_CARDS).clear();
+    //}
 
     /**
      * Clears all memory sets stored in this card memory for the given player.
@@ -236,6 +236,6 @@ public class AiCardMemory {
     public void clearAllRemembered() {
         clearRememberedAttackers();
         clearRememberedManaSources();
-        clearRememberedRevealedCards();
+        //clearRememberedRevealedCards();
     }
 }
