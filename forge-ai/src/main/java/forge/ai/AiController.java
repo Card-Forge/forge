@@ -32,12 +32,14 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -60,6 +62,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -634,6 +637,33 @@ public class AiController {
         return bestSA;
     } // playCounterSpell()
 
+    public SpellAbility evaluateSpellInMain2(ApiType exceptSA) {
+        final List<Card> cards = getAvailableCards();
+    
+        ArrayList<SpellAbility> all = getSpellAbilities(cards);
+        Collections.sort(all, saComparator); // put best spells first
+        
+        for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
+            if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
+                continue;
+            }
+            sa.setActivatingPlayer(player);
+            if (sa.canPlay() && !ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+                return sa;
+            }
+        }
+
+        return null;
+    }
+
+    public void reserveManaSourcesForMain2(SpellAbility sa) {
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+        ArrayList<Card> manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+        for (Card c : manaSources) {
+            ((PlayerControllerAi)player.getController()).getAi().getCardMemory().rememberCard(c, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
+        }
+    }
+    
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         if (!sa.canPlay()) {

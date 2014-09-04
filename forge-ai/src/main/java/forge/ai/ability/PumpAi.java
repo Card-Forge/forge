@@ -5,6 +5,7 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
@@ -48,6 +49,11 @@ public class PumpAi extends PumpAiBase {
          */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        SpellAbility futureSpell = ((PlayerControllerAi)ai.getController()).getAi().evaluateSpellInMain2(ApiType.Pump);
+        if (futureSpell != null && futureSpell.getHostCard() != null) {
+            ((PlayerControllerAi)ai.getController()).getAi().reserveManaSourcesForMain2(futureSpell);
+        }
+
         final Cost cost = sa.getPayCosts();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
