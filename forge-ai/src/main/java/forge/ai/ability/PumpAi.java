@@ -49,7 +49,7 @@ public class PumpAi extends PumpAiBase {
          */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        SpellAbility futureSpell = ((PlayerControllerAi)ai.getController()).getAi().predictSpellToCastForMain2(ApiType.Pump);
+        SpellAbility futureSpell = ((PlayerControllerAi)ai.getController()).getAi().predictSpellToCastInMain2(ApiType.Pump);
         if (futureSpell != null && futureSpell.getHostCard() != null) {
             ((PlayerControllerAi)ai.getController()).getAi().reserveManaSourcesForMain2(futureSpell);
         }
