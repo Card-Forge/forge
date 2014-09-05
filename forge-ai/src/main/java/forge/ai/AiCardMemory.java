@@ -210,6 +210,15 @@ public class AiCardMemory {
     }
 
     /**
+     * Determines if the memory set is empty.
+     * @param set the memory set to inspect.
+     * @return true, if the given memory set contains no remembered cards.
+     */
+    public boolean isMemorySetEmpty(MemorySet set) {
+        return getMemorySet(set).isEmpty();
+    }
+    
+    /**
      * Clears the "remembered attackers" memory set stored in this card memory for the given player.
      */
     public void clearRememberedAttackers() {
