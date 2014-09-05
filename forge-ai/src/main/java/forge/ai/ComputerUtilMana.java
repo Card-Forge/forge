@@ -236,8 +236,7 @@ public class ComputerUtilMana {
 
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
         List<Mana> manaSpentToPay = new ArrayList<Mana>();
-        
-        final ManaPool manapool = ai.getManaPool();
+
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
         Collections.sort(unpaidShards); // most difficult shards must come first
         for (ManaCostShard part : unpaidShards) {
@@ -364,9 +363,9 @@ public class ComputerUtilMana {
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            if(test)
+            if (test) {
                 refundMana(manaSpentToPay, ai, sa);
-
+            }
             handleOfferingsAI(sa, test, cost.isPaid());
             return true;
         }
@@ -416,7 +415,8 @@ public class ComputerUtilMana {
                         break;
                     }
                 }
-            } else {
+            }
+            else {
             	break;
             }
 
@@ -490,9 +490,9 @@ public class ComputerUtilMana {
             }
         }
 
-        if (test)
+        if (test) {
             refundMana(manaSpentToPay, ai, sa);
-        
+        }
         sa.getHostCard().setColorsPaid(cost.getColorsPaid());
         // if (sa instanceof Spell_Permanent) // should probably add this
         sa.getHostCard().setSunburstValue(cost.getSunburst());
@@ -594,8 +594,9 @@ public class ComputerUtilMana {
             ManaCostShard toPay, SpellAbility saPayment) {
 
         AbilityManaPart m = saPayment.getManaPart();
-        if (m.isComboMana())
+        if (m.isComboMana()) {
             getComboManaChoice(ai, saPayment, sa, cost);
+        }
         else if (saPayment.getApi() == ApiType.ManaReflected) {
             System.out.println("Evaluate reflected mana of: " + saPayment.getHostCard());
             Set<String> reflected = CardUtil.getReflectableManaColors(saPayment);
@@ -606,7 +607,8 @@ public class ComputerUtilMana {
                     return;
                 }
             }
-        } else if (m.isAnyMana()) {
+        }
+        else if (m.isAnyMana()) {
             byte colorChoice = 0;
             if (toPay.isOr2Colorless())
                 colorChoice = toPay.getColorMask();
@@ -629,7 +631,9 @@ public class ComputerUtilMana {
             return false;
         }
         
-        if (toPay.isSnow() && !sourceCard.isSnow()) { return false; }
+        if (toPay.isSnow() && !sourceCard.isSnow()) {
+            return false;
+        }
 
         AbilityManaPart m = ma.getManaPart();
         if (!m.meetsManaRestrictions(sa)) {
@@ -643,7 +647,8 @@ public class ComputerUtilMana {
                 if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
                     return false;
                 }
-            } else if (sourceCard.isTapped()) {
+            }
+            else if (sourceCard.isTapped()) {
                 return false;
             }
         }
@@ -654,8 +659,9 @@ public class ComputerUtilMana {
                     return true;
             }
             return false;
+        }
 
-        } else if (ma.getApi() == ApiType.ManaReflected) {
+        if (ma.getApi() == ApiType.ManaReflected) {
             Set<String> reflected = CardUtil.getReflectableManaColors(ma);
 
             for (byte c : MagicColor.WUBRG) {
@@ -690,7 +696,8 @@ public class ComputerUtilMana {
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
             ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearRememberedManaSources();
-        } else {
+        }
+        else {
             if (((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCard(sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
                 // This mana source is held elsewhere for a Main Phase 2 spell.
                 return true;
