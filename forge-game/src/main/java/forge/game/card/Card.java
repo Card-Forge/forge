@@ -148,7 +148,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
-    private boolean copiedToken = false;
+    private Card copiedPermanent = null;
     private boolean copiedSpell = false;
 
     private ArrayList<Card> mustBlockCards = null;
@@ -2921,25 +2921,25 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter for the field <code>copiedToken</code>.
+     * Getter for the field <code>copiedPermanent</code>.
      * </p>
      * 
-     * @param b
-     *            a boolean.
+     * @return a Card.
      */
-    public final void setCopiedToken(final boolean b) {
-        this.copiedToken = b;
+    public final Card getCopiedPermanent() {
+        return this.copiedPermanent;
     }
 
     /**
      * <p>
-     * isCopiedToken.
+     * Setter for the field <code>copiedPermanent</code>.
      * </p>
      * 
-     * @return a boolean.
+     * @param c
+     *            a Card.
      */
-    public final boolean isCopiedToken() {
-        return this.copiedToken;
+    public final void setCopiedPermanent(final Card c) {
+        this.copiedPermanent = c;
     }
 
     /**
@@ -8939,7 +8939,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public int getCMC(SplitCMCMode mode) {
-        if (isToken() && !isCopiedToken()) {
+        if (isToken() && getCopiedPermanent() == null) {
             return 0;
         }
 
@@ -9156,5 +9156,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     //allow special cards to override this function to return another card for the sake of UI logic
     public Card getCardForUi() {
         return this;
+    }
+
+    public String getOracleText() {
+        CardRules rules = cardRules;
+        if (copiedPermanent != null) { //return oracle text of copied permanent if applicable
+            rules = copiedPermanent.getRules();
+        }
+        return rules != null ? rules.getOracleText() : "";
     }
 } // end Card class

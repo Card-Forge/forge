@@ -152,7 +152,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 for (int i = 0; i < multiplier; i++) {
                     final Card copy = CardFactory.copyCopiableCharacteristics(c, sa.getActivatingPlayer());
                     copy.setToken(true);
-                    copy.setCopiedToken(true);
+                    copy.setCopiedPermanent(c);
                     CardFactory.copyCopiableAbilities(c, copy);
                     // add keywords from sa
                     for (final String kw : keywords) {

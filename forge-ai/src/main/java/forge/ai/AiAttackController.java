@@ -116,7 +116,7 @@ public class AiAttackController {
             }
         };
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-        	if (c.isToken() && !c.isCopiedToken()) {
+        	if (c.isToken() && c.getCopiedPermanent() == null) {
         		continue;
         	}
             for (SpellAbility sa : c.getSpellAbilities()) {
