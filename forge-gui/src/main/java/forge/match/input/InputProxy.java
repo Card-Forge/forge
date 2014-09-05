@@ -21,6 +21,7 @@ import forge.FThreads;
 import forge.GuiBase;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.ITriggerEvent;
@@ -52,8 +53,14 @@ public class InputProxy implements Observer {
     }
 
     public boolean passPriority() {
+        return passPriority(null, null);
+    }
+    public boolean passPriority(Player p, PhaseType autoPassUntilPhase) {
         Input inp = getInput();
         if (inp != null && inp instanceof InputPassPriority) {
+            if (p != null && autoPassUntilPhase != null) {
+                p.getController().autoPassUntil(autoPassUntilPhase);
+            }
             inp.selectButtonOK();
             return true;
         }

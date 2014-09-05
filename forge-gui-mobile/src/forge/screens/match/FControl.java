@@ -216,10 +216,7 @@ public class FControl {
         Player p = getCurrentPlayer();
 
         if (p != null) {
-            p.getController().autoPassUntil(PhaseType.CLEANUP);
-            if (!inputProxy.passPriority()) {
-                p.getController().autoPassCancel();
-            }
+            inputProxy.passPriority(p, PhaseType.CLEANUP);
         }
     }
 
