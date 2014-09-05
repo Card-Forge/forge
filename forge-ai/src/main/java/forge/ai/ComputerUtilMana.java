@@ -231,13 +231,6 @@ public class ComputerUtilMana {
 		
 	}
 
-    public static ArrayListMultimap<ManaCostShard, SpellAbility> getManaSourcesToPayCost(final Player ai, final ManaCostBeingPaid cost) {
-        final ArrayListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, true);
-        ArrayListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
-		sortManaAbilities(sourcesForShards);
-        return sourcesForShards;
-    }
-
     public static ArrayList<Card> getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
         ArrayList<Card> manaSources = new ArrayList<Card>();
 
@@ -283,7 +276,7 @@ public class ComputerUtilMana {
         // select which abilities may be used for each shard
         ArrayListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
-		sortManaAbilities(sourcesForShards);
+        sortManaAbilities(sourcesForShards);
 
         ManaCostShard toPay = null;
         // Loop over mana needed
@@ -630,7 +623,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, boolean checkCosts) {
-        Card sourceCard = ma.getHostCard();
+        final Card sourceCard = ma.getHostCard();
 
         if (isManaSourceReserved(ai, sourceCard)) {
             return false;
@@ -677,7 +670,11 @@ public class ComputerUtilMana {
     }
 
     private static boolean isManaSourceReserved(Player ai, Card sourceCard) {
-        if (ai.getGame().getPhaseHandler().getPhase() == PhaseType.MAIN2) {
+        if (!(ai.getController() instanceof PlayerControllerAi)) {
+            return false;
+        }
+        PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
+        if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
             ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearRememberedManaSources();
         } else {
             if (((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCard(sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
@@ -691,7 +688,7 @@ public class ComputerUtilMana {
 
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost) {
         // mind the priorities
-        // * Pay mono-colored first,
+        // * Pay mono-colored first,curPhase == PhaseType.CLEANUP
         // * Pay 2/C with matching colors
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
