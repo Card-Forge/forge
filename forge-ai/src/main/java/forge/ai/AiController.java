@@ -637,7 +637,7 @@ public class AiController {
         return bestSA;
     } // playCounterSpell()
 
-    public SpellAbility evaluateSpellInMain2(ApiType exceptSA) {
+    public SpellAbility predictSpellToCastForMain2(ApiType exceptSA) {
         final List<Card> cards = getAvailableCards();
     
         ArrayList<SpellAbility> all = getSpellAbilities(cards);
