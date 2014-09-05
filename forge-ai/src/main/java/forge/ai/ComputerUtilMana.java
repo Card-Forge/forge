@@ -625,7 +625,7 @@ public class ComputerUtilMana {
     private static boolean canPayShardWithSpellAbility(ManaCostShard toPay, Player ai, SpellAbility ma, SpellAbility sa, boolean checkCosts) {
         final Card sourceCard = ma.getHostCard();
 
-        if (isManaSourceReserved(ai, sourceCard)) {
+        if (isManaSourceReserved(ai, sourceCard, sa)) {
             return false;
         }
         
@@ -669,10 +669,24 @@ public class ComputerUtilMana {
         return true;
     }
 
-    private static boolean isManaSourceReserved(Player ai, Card sourceCard) {
+    // isManaSourceReserved returns true if sourceCard is reserved as a mana source for payment
+    // for the future spell to be cast in Mana 2. However, if "sa" (the spell ability that is
+    // being considered for casting) is high priority, then mana source reservation will be
+    // ignored.
+    private static boolean isManaSourceReserved(Player ai, Card sourceCard, SpellAbility sa) {
+        if (sa == null) {
+            return false;
+        }
         if (!(ai.getController() instanceof PlayerControllerAi)) {
             return false;
         }
+
+        // If the spell ability being considered is high priority, ignore mana source reservations.
+        // TODO: currently the only "low priority" spell abilities are +X/+X pumps.
+        if (!(sa.getApi() == ApiType.Pump && (sa.hasParam("NumAtk") || (sa.hasParam("NumDef"))))) {
+            return false;
+        }
+
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
             ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearRememberedManaSources();
