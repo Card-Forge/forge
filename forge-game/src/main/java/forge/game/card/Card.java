@@ -6453,6 +6453,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 	return false;
                 }
             }
+        } else if (property.startsWith("hasKeyword")) {
+            // "withFlash" would find Flashback cards, add this to fix Mystical Teachings
+            if (!this.hasKeyword(property.substring(10))) {
+                return false;
+            }
         } else if (property.startsWith("withFlashback")) {
             boolean fb = false;
             if (this.hasStartOfUnHiddenKeyword("Flashback")) {
