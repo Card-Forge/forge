@@ -1,0 +1,88 @@
+[metadata]
+Code=DDN
+Date=2014-09-05
+Name=Duel Decks: Speed vs. Cunning
+Type=Duel_Decks
+
+[cards]
+M Zurgo Helmsmasher
+U Frenzied Goblin
+C Infantry Veteran
+C Leonin Snarecaster
+C Dregscape Zombie
+C Goblin Deathraiders
+U Hellraiser Goblin
+U Fleshbag Marauder
+U Goblin Warchief
+R Hell's Thunder
+C Kathari Bomber
+U Shambling Remains
+U Mardu Heart-Piercer
+U Beetleback Chief
+R Krenko, Mob Boss
+R Ogre Battledriver
+U Flame-Kin Zealot
+U Scourge Devil
+U Oni of Wild Places
+C Reckless Abandon
+C Shock
+C Bone Splinters
+U Arc Trail
+U Goblin Bombardment
+C Krenko's Command
+C Act of Treason
+U Dauntless Onslaught
+C Orcish Cannonade
+C Fiery Fall
+R Fury of the Horde
+R Banefire
+C Evolving Wilds
+U Ghitu Encampment
+U Nomad Outpost
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Plains
+L Plains
+L Plains
+L Plains
+L Swamp
+L Swamp
+L Swamp
+M Arcanis the Omnipotent
+U Faerie Impostor
+C Coral Trickster
+C Fathom Seer
+U Jeskai Elder
+U Willbender
+C Sparkmage Apprentice
+C Lone Missionary
+C Master Decoy
+C Echo Tracer
+C Kor Hookmaster
+U Stonecloaker
+C Aquamorph Entity
+C Hussar Patrol
+R Lightning Angel
+C Faerie Invaders
+R Thousand Winds
+R Sphinx of Uthuun
+C Fleeting Distraction
+C Stave Off
+C Swift Justice
+C Impulse
+C Mana Leak
+U Lightning Helix
+R Hold the Line
+U Inferno Trap
+R Steam Augury
+C Traumatic Visions
+C Whiplash Trap
+U Arrow Volley Trap
+C Repeal
+U Mystic Monastery
+C Terramorphic Expanse
+L Island
+L Island
+L Island
