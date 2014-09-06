@@ -8869,6 +8869,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     public boolean canBeShownTo(final Player viewer) {
+        if (viewer == null) { return false; }
+
         Zone zone = this.getZone();
         if (zone == null) { return true; } //cards outside any zone are visible to all
 

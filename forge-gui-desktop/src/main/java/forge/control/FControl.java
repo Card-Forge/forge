@@ -370,7 +370,7 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public boolean mayShowCard(Card c) {
-        return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
+        return game == null || !gameHasHumanPlayer || ForgePreferences.DEV_MODE || c.canBeShownTo(getCurrentPlayer());
     }
 
     /**
