@@ -54,7 +54,6 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
      */
     @Override
     public void update() {
-
         MenuUtil.setMenuProvider(this);
 
         SwingUtilities.invokeLater(new Runnable() {

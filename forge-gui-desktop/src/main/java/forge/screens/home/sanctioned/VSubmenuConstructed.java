@@ -426,6 +426,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             container.validate();
             container.repaint();
         }
+
+        changePlayerFocus(playerWithFocus, currentGameMode);
     }
 
     /** @return {@link javax.swing.JButton} */
@@ -779,7 +781,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         public void toggleIsPlayerArchenemy() {
         	if (appliedVariants.contains(GameType.Archenemy)) {
         		playerIsArchenemy = lastArchenemy == index;
-        	} else {
+        	}
+        	else {
         		playerIsArchenemy = appliedVariants.contains(GameType.ArchenemyRumble);
         	}
     		updateVariantControlsVisibility();
@@ -1203,7 +1206,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             for (PlayerPanel pp : playerPanels) {
         		pp.toggleIsPlayerArchenemy();
-                pp.updateVariantControlsVisibility();
             }
             changePlayerFocus(playerWithFocus, currentGameMode);
         }
