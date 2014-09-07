@@ -46,6 +46,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Callback;
+import forge.util.GuiDisplayUtil;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.Utils;
@@ -935,12 +936,12 @@ public class ConstructedScreen extends LaunchScreen {
             super("Select Variants");
 
             lstVariants.setListItemRenderer(new VariantRenderer());
-            lstVariants.addItem(new Variant(GameType.Vanguard, "Each player has a special \"Avatar\" card that affects the game."));
-            lstVariants.addItem(new Variant(GameType.MomirBasic, "Each player has a deck containing 60 basic lands and the Momir Vig avatar."));
-            lstVariants.addItem(new Variant(GameType.Commander, "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors."));
-            lstVariants.addItem(new Variant(GameType.Planechase, "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die."));
-            lstVariants.addItem(new Variant(GameType.Archenemy, "One player is the Archenemy and can play scheme cards."));
-            lstVariants.addItem(new Variant(GameType.ArchenemyRumble, "All players are Archenemies and can play scheme cards."));
+            lstVariants.addItem(new Variant(GameType.Vanguard));
+            lstVariants.addItem(new Variant(GameType.MomirBasic));
+            lstVariants.addItem(new Variant(GameType.Commander));
+            lstVariants.addItem(new Variant(GameType.Planechase));
+            lstVariants.addItem(new Variant(GameType.Archenemy));
+            lstVariants.addItem(new Variant(GameType.ArchenemyRumble));
         }
 
         @Override
@@ -951,10 +952,10 @@ public class ConstructedScreen extends LaunchScreen {
         private class Variant {
             private final GameType gameType;
             private final String description;
-            
-            private Variant(GameType gameType0, String description0) {
+
+            private Variant(GameType gameType0) {
                 gameType = gameType0;
-                description = description0;
+                description = GuiDisplayUtil.getVariantDescription(gameType0);
             }
 
             private void draw(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {

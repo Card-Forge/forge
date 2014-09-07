@@ -29,6 +29,7 @@ import forge.screens.home.*;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
+import forge.util.GuiDisplayUtil;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
@@ -78,12 +79,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     // Variants frame and variables
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
 	private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
-    private final FCheckBox vntVanguard = new FCheckBox("Vanguard");
-    private final FCheckBox vntMomirBasic = new FCheckBox("Momir Basic");
-    private final FCheckBox vntCommander = new FCheckBox("Commander");
-    private final FCheckBox vntPlanechase = new FCheckBox("Planechase");
-    private final FCheckBox vntArchenemy = new FCheckBox("Archenemy");
-    private final FCheckBox vntArchenemyRumble = new FCheckBox("Archenemy Rumble");
+    private final VariantCheckBox vntVanguard = new VariantCheckBox(GameType.Vanguard);
+    private final VariantCheckBox vntMomirBasic = new VariantCheckBox(GameType.MomirBasic);
+    private final VariantCheckBox vntCommander = new VariantCheckBox(GameType.Commander);
+    private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
+    private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
+    private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -126,14 +127,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
-
-        // Populate and add variants panel
-        vntVanguard.addItemListener(iListenerVariants);
-        vntMomirBasic.addItemListener(iListenerVariants);
-        vntCommander.addItemListener(iListenerVariants);
-        vntPlanechase.addItemListener(iListenerVariants);
-        vntArchenemy.addItemListener(iListenerVariants);
-        vntArchenemyRumble.addItemListener(iListenerVariants);
 
         variantsPanel.setOpaque(false);
         variantsPanel.add(newLabel("Variants:"));
@@ -1142,74 +1135,61 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /////////////////////////////////////////////
     //========== Various listeners in build order
 
-    /** This listener unlocks the relevant buttons for players
-     * and enables/disables archenemy combobox as appropriate. */
-    private ItemListener iListenerVariants = new ItemListener() {
-        @Override
-        public void itemStateChanged(ItemEvent arg0) {
-            FCheckBox cb = (FCheckBox) arg0.getSource();
-            GameType variantType = null;
+    @SuppressWarnings("serial")
+    private class VariantCheckBox extends FCheckBox {
+        private final GameType variantType;
 
-            if (cb == vntVanguard) {
-                variantType = GameType.Vanguard;
-            }
-            else if (cb == vntMomirBasic) {
-                variantType = GameType.MomirBasic;
-            }
-            else if (cb == vntCommander) {
-                variantType = GameType.Commander;
-            }
-            else if (cb == vntPlanechase) {
-                variantType = GameType.Planechase;
-            }
-            else if (cb == vntArchenemy) {
-                variantType = GameType.Archenemy;
-            }
-            else if (cb == vntArchenemyRumble) {
-                variantType = GameType.ArchenemyRumble;
-            }
+        private VariantCheckBox(GameType variantType0) {
+            super(variantType0.toString());
 
-            if (variantType != null) {
-                if (arg0.getStateChange() == ItemEvent.SELECTED) {
-                    appliedVariants.add(variantType);
-                    currentGameMode = variantType;
+            variantType = variantType0;
 
-                    //ensure other necessary variants are unchecked
-                    switch (variantType) {
-                    case Archenemy:
-                        vntArchenemyRumble.setSelected(false);
-                        break;
-                    case ArchenemyRumble:
-                        vntArchenemy.setSelected(false);
-                        break;
-                    case Commander:
-                        vntMomirBasic.setSelected(false);
-                        break;
-                    case Vanguard:
-                        vntMomirBasic.setSelected(false);
-                        break;
-                    case MomirBasic:
-                        vntCommander.setSelected(false);
-                        vntVanguard.setSelected(false);
-                        break;
-                    default:
-                        break;
+            setToolTipText(GuiDisplayUtil.getVariantDescription(variantType0));
+
+            addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
+                        appliedVariants.add(variantType);
+                        currentGameMode = variantType;
+
+                        //ensure other necessary variants are unchecked
+                        switch (variantType) {
+                        case Archenemy:
+                            vntArchenemyRumble.setSelected(false);
+                            break;
+                        case ArchenemyRumble:
+                            vntArchenemy.setSelected(false);
+                            break;
+                        case Commander:
+                            vntMomirBasic.setSelected(false);
+                            break;
+                        case Vanguard:
+                            vntMomirBasic.setSelected(false);
+                            break;
+                        case MomirBasic:
+                            vntCommander.setSelected(false);
+                            vntVanguard.setSelected(false);
+                            break;
+                        default:
+                            break;
+                        }
                     }
-                }
-                else {
-                    appliedVariants.remove(variantType);
-                    if (currentGameMode == variantType) {
-                    	currentGameMode = GameType.Constructed;
+                    else {
+                        appliedVariants.remove(variantType);
+                        if (currentGameMode == variantType) {
+                            currentGameMode = GameType.Constructed;
+                        }
                     }
-                }
-            }
 
-            for (PlayerPanel pp : playerPanels) {
-        		pp.toggleIsPlayerArchenemy();
-            }
-            changePlayerFocus(playerWithFocus, currentGameMode);
+                    for (PlayerPanel pp : playerPanels) {
+                        pp.toggleIsPlayerArchenemy();
+                    }
+                    changePlayerFocus(playerWithFocus, currentGameMode);
+                }
+            });
         }
-    };
+    }
 
     private ActionListener nameListener = new ActionListener() {
     	@Override

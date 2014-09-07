@@ -520,5 +520,22 @@ public final class GuiDisplayUtil {
         return text.replaceAll("(?i)human", playerName);
     }
 
-
+    public static String getVariantDescription(GameType variant) {
+        switch (variant) {
+        case Archenemy:
+            return "One player is the Archenemy and can play scheme cards.";
+        case ArchenemyRumble:
+            return "All players are Archenemies and can play scheme cards.";
+        case Commander:
+            return "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors.";
+        case MomirBasic:
+            return "Each player has a deck containing 60 basic lands and the Momir Vig avatar.";
+        case Planechase:
+            return "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die.";
+        case Vanguard:
+            return "Each player has a special \"Avatar\" card that affects the game.";
+        default:
+            return ""; //other game types don't need descriptions
+        }
+    }
 } // end class GuiDisplayUtil
