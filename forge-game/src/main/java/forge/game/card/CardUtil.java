@@ -51,7 +51,7 @@ public final class CardUtil {
             "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu",
-            "Transute", "Replicate", "Recover", "Suspend", "Aura swap",
+            "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload",
             "Scavenge", "Bestow", "Outlast").build();
