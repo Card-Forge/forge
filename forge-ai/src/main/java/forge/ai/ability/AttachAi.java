@@ -1085,6 +1085,12 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAIHighestEvaluationPreference(prefList);
         }
 
+        // Consider exceptional cases which break the normal evaluation rules
+        // (e.g. do not waste Equipment on a creature that can neither attack nor block)
+        if (!isUsefulAttachAction(c, sa)) {
+            return null;
+        }
+
         return c;
     }
 
@@ -1263,6 +1269,38 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         }
+        return true;
+    }
+
+    /**
+     * Checks if it is useful to execute the attach action given the current context.
+     * 
+     * @param card
+     *            the card
+     * @param sa SpellAbility
+     * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility) 
+     */
+    private static boolean isUsefulAttachAction(Card c, SpellAbility sa) {
+        if (c == null) {
+            return false; 
+        }
+        if (sa.getHostCard() == null) {
+            // FIXME: Not sure what should the resolution be if a SpellAbility has no host card. This should
+            // not happen normally. Possibly remove this block altogether? (if it's an impossible condition).
+            System.out.println("AttachAi: isUsefulAttachAction unexpectedly called with SpellAbility with no host card. Assuming it's a determined useful action.");
+            return true;
+        }
+
+        ArrayList<String> cardTypes = sa.getHostCard().getType();
+
+        if (cardTypes.contains("Equipment") && c.hasKeyword("CARDNAME can't attack or block.")) {
+            // useless to equip a creature that can't attack or block.
+            return false;
+        } else if (cardTypes.contains("Equipment") && c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
+            // useless to equip a creature that won't untap and is tapped.
+            return false;
+        }
+
         return true;
     }
 
