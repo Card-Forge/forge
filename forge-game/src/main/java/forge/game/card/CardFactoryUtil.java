@@ -363,7 +363,6 @@ public class CardFactoryUtil {
         card.setSVar(playSvar.toString(),playWithoutCost.toString());
     }
 
-
     /**
      * <p>
      * multiplyCost.
@@ -392,7 +391,8 @@ public class CardFactoryUtil {
             cost = multiplier * cost;
             tokenized[0] = "" + cost;
             sb.append(tokenized[0]);
-        } else {
+        }
+        else {
             if (tokenized[0].contains("<")) {
                 final String[] advCostPart = tokenized[0].split("<");
                 final String costVariable = advCostPart[1].split(">")[0];
@@ -406,7 +406,8 @@ public class CardFactoryUtil {
                 }
                 tokenized[0] = tokenized[0] + ">";
                 sb.append(tokenized[0]);
-            } else {
+            }
+            else {
                 for (int i = 0; i < multiplier; i++) {
                     // tokenized[0] = tokenized[0] + " " + tokenized[0];
                     sb.append((" "));
@@ -430,7 +431,8 @@ public class CardFactoryUtil {
                 tokenized[i] = tokenized[i] + ">";
                 sb.append((" "));
                 sb.append(tokenized[i]);
-            } else {
+            }
+            else {
                 for (int j = 0; j < multiplier; j++) {
                     // tokenized[i] = tokenized[i] + " " + tokenized[i];
                     sb.append((" "));
@@ -457,7 +459,6 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isTargetStillValid(final SpellAbility ability, final Card target) {
-
         Zone zone = target.getGame().getZoneOf(target);
         if (zone == null) {
             return false; // for tokens that disappeared
@@ -477,7 +478,8 @@ public class CardFactoryUtil {
             if (!tgt.getZone().contains(zone.getZoneType())) {
                 return false;
             }
-        } else {
+        }
+        else {
             // If an Aura's target is removed before it resolves, the Aura
             // fizzles
             if (source.isAura() && !target.isInZone(ZoneType.Battlefield)) {
@@ -561,7 +563,6 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int countOccurrences(final String arg1, final String arg2) {
-
         int count = 0;
         int index = 0;
         while ((index = arg1.indexOf(arg2, index)) != -1) {
@@ -650,7 +651,9 @@ public class CardFactoryUtil {
             }
 
             return doXMath(n, m, source);
-        } else if (l[0].startsWith("Lowest")) {
+        }
+
+        if (l[0].startsWith("Lowest")) {
             n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
             for (final Player player : players) {
                 final int current = playerXProperty(player, s.replace("Lowest", ""), source);
@@ -669,6 +672,7 @@ public class CardFactoryUtil {
         if (sq[0].equals("Amount")) {
             return doXMath(players.size(), m, source);
         }
+
         if (sq[0].contains("DamageThisTurn")) {
             int totDmg = 0;
             for (Player p : players) {
@@ -677,8 +681,9 @@ public class CardFactoryUtil {
             return doXMath(totDmg, m, source);
         }
 
-        if(players.size() > 0)
+        if (players.size() > 0) {
             return playerXProperty(players.get(0), s, source);
+        }
 
         return doXMath(n, m, source);
     }
@@ -699,6 +704,7 @@ public class CardFactoryUtil {
             cards = CardLists.getValidCards(cards, rest, player, source);
             return doXMath(cards.size(), m, source);
         }
+
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
@@ -819,8 +825,12 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int xCount(final Card c, final String expression) {
-        if (StringUtils.isBlank(expression)) return 0;
-        if (StringUtils.isNumeric(expression)) return Integer.parseInt(expression);
+        if (StringUtils.isBlank(expression)) {
+            return 0;
+        }
+        if (StringUtils.isNumeric(expression)) {
+            return Integer.parseInt(expression);
+        }
 
         final Player cc = c.getController();
         final Game game = c.getGame();
@@ -834,9 +844,8 @@ public class CardFactoryUtil {
             final String number = l[0].substring(7);
             if (number.equals("ChosenNumber")) {
                 return doXMath(c.getChosenNumber(), m, c);
-            } else {
-                return doXMath(Integer.parseInt(number), m, c);
             }
+            return doXMath(Integer.parseInt(number), m, c);
         }
 
         if (l[0].startsWith("Count$")) {
@@ -847,18 +856,17 @@ public class CardFactoryUtil {
             return doXMath(xCount(c, c.getSVar(l[0].substring(5))), m, c);
         }
 
-        if (l[0].startsWith("Controller$"))
+        if (l[0].startsWith("Controller$")) {
             return playerXProperty(cc, l[0].substring(11), c);
-        
+        }
 
         // Manapool
         if (l[0].startsWith("ManaPool")) {
             final String color = l[0].split(":")[1];
             if (color.equals("All")) {
                 return cc.getManaPool().totalMana();
-            } else {
-                return cc.getManaPool().getAmountOfColor(MagicColor.fromName(color));
             }
+            return cc.getManaPool().getAmountOfColor(MagicColor.fromName(color));
         }
 
         // count valid cards in any specified zone/s
@@ -874,7 +882,9 @@ public class CardFactoryUtil {
             return doXMath(cards.size(), m, c);
         }
 
-        if (l[0].startsWith("ImprintedCardManaCost") && !c.getImprinted().isEmpty())    return c.getImprinted().get(0).getCMC();
+        if (l[0].startsWith("ImprintedCardManaCost") && !c.getImprinted().isEmpty()) {
+            return c.getImprinted().get(0).getCMC();
+        }
 
         if (l[0].startsWith("GreatestPower_")) {
             final String restriction = l[0].substring(14);
@@ -903,7 +913,8 @@ public class CardFactoryUtil {
                     if (crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > highest) {
                         highest = crd.getCMC(Card.SplitCMCMode.RightSplitCMC);
                     }
-                } else {
+                }
+                else {
                     if (crd.getCMC() > highest) {
                         highest = crd.getCMC();
                     }
@@ -983,7 +994,10 @@ public class CardFactoryUtil {
         final String[] sq;
         sq = l[0].split("\\.");
 
-        if (sq[0].contains("xPaid"))            return doXMath(c.getXManaCostPaid(), m, c);
+        if (sq[0].contains("xPaid")) {
+            return doXMath(c.getXManaCostPaid(), m, c);
+        }
+
         if (sq[0].contains("xColorPaid")) {
             String[] attrs = sq[0].split(" ");
             String colors = "";
@@ -994,21 +1008,41 @@ public class CardFactoryUtil {
         }
 
 
-        if (sq[0].equals("YouDrewThisTurn"))    return doXMath(c.getController().getNumDrawnThisTurn(), m, c);
+        if (sq[0].equals("YouDrewThisTurn")) {
+            return doXMath(c.getController().getNumDrawnThisTurn(), m, c);
+        }
 
-        if (sq[0].equals("FirstSpellTotalManaSpent"))     return doXMath(c.getFirstSpellAbility().getTotalManaSpent(), m, c);
-        if (sq[0].equals("StormCount"))         return doXMath(game.getStack().getCardsCastThisTurn().size() - 1, m, c);
-        if (sq[0].equals("DamageDoneThisTurn")) return doXMath(c.getDamageDoneThisTurn(), m, c);
-        if (sq[0].equals("BloodthirstAmount"))  return doXMath(c.getController().getBloodthirstAmount(), m, c);
-        if (sq[0].equals("RegeneratedThisTurn")) return doXMath(c.getRegeneratedThisTurn(), m, c);
+        if (sq[0].equals("FirstSpellTotalManaSpent")) {
+            return doXMath(c.getFirstSpellAbility().getTotalManaSpent(), m, c);
+        }
+        if (sq[0].equals("StormCount")) {
+            return doXMath(game.getStack().getCardsCastThisTurn().size() - 1, m, c);
+        }
+        if (sq[0].equals("DamageDoneThisTurn")) {
+            return doXMath(c.getDamageDoneThisTurn(), m, c);
+        }
+        if (sq[0].equals("BloodthirstAmount")) {
+            return doXMath(c.getController().getBloodthirstAmount(), m, c);
+        }
+        if (sq[0].equals("RegeneratedThisTurn")) {
+            return doXMath(c.getRegeneratedThisTurn(), m, c);
+        }
         
         // TriggeringObjects
-        if (sq[0].startsWith("Triggered"))      return doXMath(xCount((Card) c.getTriggeringObject("Card"), sq[0].substring(9)), m, c);
+        if (sq[0].startsWith("Triggered")) {
+            return doXMath(xCount((Card) c.getTriggeringObject("Card"), sq[0].substring(9)), m, c);
+        }
 
-        if (sq[0].contains("YourStartingLife"))     return doXMath(cc.getStartingLife(), m, c);
+        if (sq[0].contains("YourStartingLife")) {
+            return doXMath(cc.getStartingLife(), m, c);
+        }
 
-        if (sq[0].contains("YourLifeTotal"))        return doXMath(cc.getLife(), m, c);
-        if (sq[0].contains("OppGreatestLifeTotal")) return doXMath(cc.getOpponentsGreatestLifeTotal(), m, c);
+        if (sq[0].contains("YourLifeTotal")) {
+            return doXMath(cc.getLife(), m, c);
+        }
+        if (sq[0].contains("OppGreatestLifeTotal")) {
+            return doXMath(cc.getOpponentsGreatestLifeTotal(), m, c);
+        }
         if (sq[0].contains("OppsAtLifeTotal")) {
         	final int lifeTotal = xCount(c, sq[1]);
         	int number = 0;
@@ -1032,8 +1066,12 @@ public class CardFactoryUtil {
             }
         }
 
-        if (sq[0].contains("LifeYouLostThisTurn"))  return doXMath(cc.getLifeLostThisTurn(), m, c);
-        if (sq[0].contains("LifeYouGainedThisTurn"))  return doXMath(cc.getLifeGainedThisTurn(), m, c);
+        if (sq[0].contains("LifeYouLostThisTurn")) {
+            return doXMath(cc.getLifeLostThisTurn(), m, c);
+        }
+        if (sq[0].contains("LifeYouGainedThisTurn")) {
+            return doXMath(cc.getLifeGainedThisTurn(), m, c);
+        }
         if (sq[0].contains("LifeOppsLostThisTurn")) {
             int lost = 0;
             for (Player opp : cc.getOpponents()) {
@@ -1042,18 +1080,34 @@ public class CardFactoryUtil {
             return doXMath(lost, m, c);
         }
 
-        if (sq[0].equals("TotalDamageDoneByThisTurn"))      return doXMath(c.getTotalDamageDoneBy(), m, c);
-        if (sq[0].equals("TotalDamageReceivedThisTurn"))    return doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
+        if (sq[0].equals("TotalDamageDoneByThisTurn")) {
+            return doXMath(c.getTotalDamageDoneBy(), m, c);
+        }
+        if (sq[0].equals("TotalDamageReceivedThisTurn")) {
+            return doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
+        }
 
-        if (sq[0].contains("YourPoisonCounters"))           return doXMath(cc.getPoisonCounters(), m, c);
-        if (sq[0].contains("TotalOppPoisonCounters"))       return doXMath(cc.getOpponentsTotalPoisonCounters(), m, c);
+        if (sq[0].contains("YourPoisonCounters")) {
+            return doXMath(cc.getPoisonCounters(), m, c);
+        }
+        if (sq[0].contains("TotalOppPoisonCounters")) {
+            return doXMath(cc.getOpponentsTotalPoisonCounters(), m, c);
+        }
 
-        if (sq[0].contains("YourDamageThisTurn"))           return doXMath(cc.getAssignedDamage(), m, c);
-        if (sq[0].contains("TotalOppDamageThisTurn"))       return doXMath(cc.getOpponentsAssignedDamage(), m, c);
-        if (sq[0].contains("MaxOppDamageThisTurn"))         return doXMath(cc.getMaxOpponentAssignedDamage(), m, c);
+        if (sq[0].contains("YourDamageThisTurn")) {
+            return doXMath(cc.getAssignedDamage(), m, c);
+        }
+        if (sq[0].contains("TotalOppDamageThisTurn")) {
+            return doXMath(cc.getOpponentsAssignedDamage(), m, c);
+        }
+        if (sq[0].contains("MaxOppDamageThisTurn")) {
+            return doXMath(cc.getMaxOpponentAssignedDamage(), m, c);
+        }
 
         // Count$YourTypeDamageThisTurn Type
-        if (sq[0].contains("YourTypeDamageThisTurn"))       return doXMath(cc.getAssignedDamage(sq[0].split(" ")[1]), m, c);
+        if (sq[0].contains("YourTypeDamageThisTurn")) {
+            return doXMath(cc.getAssignedDamage(sq[0].split(" ")[1]), m, c);
+        }
         if (sq[0].contains("YourDamageSourcesThisTurn")) {
             Iterable<Card> allSrc = cc.getAssignedDamageSources();
             String restriction = sq[0].split(" ")[1];
@@ -1061,7 +1115,9 @@ public class CardFactoryUtil {
             return doXMath(filtered.size(), m, c);
         }
         
-        if (sq[0].contains("YourLandsPlayed"))              return doXMath(cc.getNumLandsPlayed(), m, c);
+        if (sq[0].contains("YourLandsPlayed")) {
+            return doXMath(cc.getNumLandsPlayed(), m, c);
+        }
 
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
@@ -1095,14 +1151,15 @@ public class CardFactoryUtil {
             final List<Card> cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = Lists.newArrayList(c);
-            } else {
+            }
+            else {
                 cards = cc.getCardsIn(sourceZone);
             }
             
             int colorOcurrencices = 0;
             byte colorCode = MagicColor.fromName(colorName);
-            for(Card c0 : cards) {
-                for(ManaCostShard sh : c0.getManaCost()){
+            for (Card c0 : cards) {
+                for (ManaCostShard sh : c0.getManaCost()){
                     if ((sh.getColorMask() & colorCode) != 0) 
                         colorOcurrencices++;
                 }
@@ -1114,7 +1171,7 @@ public class CardFactoryUtil {
             int colorOcurrencices = 0;
             byte color1 = MagicColor.fromName(sq[1]);
             byte color2 = MagicColor.fromName(sq[2]);
-            for(Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
+            for (Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
                 for (ManaCostShard sh : c0.getManaCost()) {
                     if ((sh.getColorMask() & (color1 | color2)) != 0) {
                         colorOcurrencices++;
@@ -1124,14 +1181,28 @@ public class CardFactoryUtil {
             return doXMath(colorOcurrencices, m, c);
         }
 
-        if (sq[0].contains("Hellbent"))         return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
-        if (sq[0].contains("Metalcraft"))       return doXMath(Integer.parseInt(sq[cc.hasMetalcraft() ? 1 : 2]), m, c);
-        if (sq[0].contains("FatefulHour"))      return doXMath(Integer.parseInt(sq[cc.getLife() <= 5 ? 1 : 2]), m, c);
+        if (sq[0].contains("Hellbent")) {
+            return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
+        }
+        if (sq[0].contains("Metalcraft")) {
+            return doXMath(Integer.parseInt(sq[cc.hasMetalcraft() ? 1 : 2]), m, c);
+        }
+        if (sq[0].contains("FatefulHour")) {
+            return doXMath(Integer.parseInt(sq[cc.getLife() <= 5 ? 1 : 2]), m, c);
+        }
 
-        if (sq[0].contains("Landfall"))         return doXMath(Integer.parseInt(sq[cc.hasLandfall() ? 1 : 2]), m, c);
-        if (sq[0].contains("Threshold"))        return doXMath(Integer.parseInt(sq[cc.hasThreshold() ? 1 : 2]), m, c);
-        if (sq[0].startsWith("Kicked"))         return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
-        if (sq[0].startsWith("AltCost"))        return doXMath(Integer.parseInt(sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2]), m, c);
+        if (sq[0].contains("Landfall")) {
+            return doXMath(Integer.parseInt(sq[cc.hasLandfall() ? 1 : 2]), m, c);
+        }
+        if (sq[0].contains("Threshold")) {
+            return doXMath(Integer.parseInt(sq[cc.hasThreshold() ? 1 : 2]), m, c);
+        }
+        if (sq[0].startsWith("Kicked")) {
+            return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
+        }
+        if (sq[0].startsWith("AltCost")) {
+            return doXMath(Integer.parseInt(sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2]), m, c);
+        }
 
         // Count$wasCastFrom<Zone>.<true>.<false>
         if (sq[0].startsWith("wasCastFrom")) {
@@ -1145,9 +1216,15 @@ public class CardFactoryUtil {
             return doXMath(cl.size(), m, c);
         }
 
-        if (sq[0].contains("CardPower"))        return doXMath(c.getNetAttack(), m, c);
-        if (sq[0].contains("CardToughness"))    return doXMath(c.getNetDefense(), m, c);
-        if (sq[0].contains("CardSumPT"))        return doXMath((c.getNetAttack() + c.getNetDefense()), m, c);
+        if (sq[0].contains("CardPower")) {
+            return doXMath(c.getNetAttack(), m, c);
+        }
+        if (sq[0].contains("CardToughness")) {
+            return doXMath(c.getNetDefense(), m, c);
+        }
+        if (sq[0].contains("CardSumPT")) {
+            return doXMath((c.getNetAttack() + c.getNetDefense()), m, c);
+        }
 
         // Count$SumPower_valid
         if (sq[0].contains("SumPower")) {
@@ -1161,9 +1238,11 @@ public class CardFactoryUtil {
             Card ce;
             if (sq[0].contains("Equipped") && c.isEquipping()) {
                 ce = c.getEquipping().get(0);
-            } else if (sq[0].contains("Remembered")) {
+            }
+            else if (sq[0].contains("Remembered")) {
                 ce = (Card) c.getRemembered().get(0);
-            } else {
+            }
+            else {
                 ce = c;
             }
             return doXMath(ce.getCMC(), m, c);
@@ -1177,18 +1256,23 @@ public class CardFactoryUtil {
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
 
-        if (sq[0].contains("CardNumColors"))    return doXMath(CardUtil.getColors(c).countColors(), m, c);
-        if (sq[0].contains("ChosenNumber"))     return doXMath(c.getChosenNumber(), m, c);
+        if (sq[0].contains("CardNumColors")) {
+            return doXMath(CardUtil.getColors(c).countColors(), m, c);
+        }
+        if (sq[0].contains("ChosenNumber")) {
+            return doXMath(c.getChosenNumber(), m, c);
+        }
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
             if (sq[1].equals("ALL")) {
-                for(Integer i : c.getCounters().values()) {
+                for (Integer i : c.getCounters().values()) {
                     if (i != null && i > 0) {
                         count += i;
                     }
                 }
-            } else {
+            }
+            else {
                 count = c.getCounters(CounterType.getType(sq[1]));
             }
             return doXMath(count, m, c);
@@ -1208,12 +1292,19 @@ public class CardFactoryUtil {
             return doXMath(cCount, m, c);
         }
 
-        if (sq[0].contains("CardTypes"))    return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
+        if (sq[0].contains("CardTypes")) {
+            return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
+        }
 
-        if (sq[0].contains("BushidoPoint"))     return doXMath(c.getKeywordMagnitude("Bushido"), m, c);
-        if (sq[0].contains("TimesKicked"))      return doXMath(c.getKickerMagnitude(), m, c);
-        if (sq[0].contains("NumCounters"))      return doXMath(c.getCounters(CounterType.getType(sq[1])), m, c);
-
+        if (sq[0].contains("BushidoPoint")) {
+            return doXMath(c.getKeywordMagnitude("Bushido"), m, c);
+        }
+        if (sq[0].contains("TimesKicked")) {
+            return doXMath(c.getKickerMagnitude(), m, c);
+        }
+        if (sq[0].contains("NumCounters")) {
+            return doXMath(c.getCounters(CounterType.getType(sq[1])), m, c);
+        }
 
         // Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase")) {
@@ -1272,7 +1363,8 @@ public class CardFactoryUtil {
 
             if (workingCopy[0].contains("This")) {
                 res = CardUtil.getThisTurnCast(validFilter, c);
-            } else {
+            }
+            else {
                 res = CardUtil.getLastTurnCast(validFilter, c);
             }
 
@@ -1285,9 +1377,8 @@ public class CardFactoryUtil {
             final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c);
             if (res.size() > 0) {
                 return doXMath(Integer.parseInt(sq[1]), m, c);
-            } else {
-                return doXMath(Integer.parseInt(sq[2]), m, c);
             }
+            return doXMath(Integer.parseInt(sq[2]), m, c);
         }
 
         if (sq[0].equals("YourTurns")) {
@@ -1489,8 +1580,8 @@ public class CardFactoryUtil {
         // if (sq[0].contains("Tapped")) { someCards = CardLists.filter(someCards, Presets.TAPPED); }
 
 //        String sq0 = sq[0].toLowerCase();
-//        for(String color : MagicColor.Constant.ONLY_COLORS) {
-//            if( sq0.contains(color) )
+//        for (String color : MagicColor.Constant.ONLY_COLORS) {
+//            if (sq0.contains(color))
 //                someCards = someCards.filter(CardListFilter.WHITE);
 //        }
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
@@ -1658,24 +1749,24 @@ public class CardFactoryUtil {
     public static byte getMostProminentColors(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final Integer[] map = new Integer[cntColors];
-        for(int i = 0; i < cntColors; i++) {
+        for (int i = 0; i < cntColors; i++) {
             map[i] = 0;
         }
 
         for (final Card crd : list) {
             ColorSet color = CardUtil.getColors(crd);
-            for(int i = 0; i < cntColors; i++) {
-                if( color.hasAnyColor(MagicColor.WUBRG[i]))
+            for (int i = 0; i < cntColors; i++) {
+                if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
             }
         } // for
 
         byte mask = 0;
         int nMax = -1;
-        for(int i = 0; i < cntColors; i++) { 
-            if ( map[i] > nMax )
+        for (int i = 0; i < cntColors; i++) { 
+            if (map[i] > nMax)
                 mask = MagicColor.WUBRG[i];
-            else if ( map[i] == nMax )
+            else if (map[i] == nMax)
                 mask |= MagicColor.WUBRG[i];
             else 
                 continue;
@@ -1696,14 +1787,14 @@ public class CardFactoryUtil {
     public static int[] SortColorsFromList(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final int[] map = new int[cntColors];
-        for(int i = 0; i < cntColors; i++) {
+        for (int i = 0; i < cntColors; i++) {
             map[i] = 0;
         }
 
         for (final Card crd : list) {
             ColorSet color = CardUtil.getColors(crd);
-            for(int i = 0; i < cntColors; i++) {
-                if( color.hasAnyColor(MagicColor.WUBRG[i]))
+            for (int i = 0; i < cntColors; i++) {
+                if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
             }
         } // for
@@ -1727,7 +1818,7 @@ public class CardFactoryUtil {
         }
         int cntColors = colorRestrictions.size();
         final Integer[] map = new Integer[cntColors];
-        for(int i = 0; i < cntColors; i++) {
+        for (int i = 0; i < cntColors; i++) {
             map[i] = 0;
         }
 
@@ -1742,10 +1833,10 @@ public class CardFactoryUtil {
 
         byte mask = 0;
         int nMax = -1;
-        for(int i = 0; i < cntColors; i++) { 
-            if ( map[i] > nMax )
+        for (int i = 0; i < cntColors; i++) { 
+            if (map[i] > nMax)
                 mask = colorRestrictions.get(i);
-            else if ( map[i] == nMax )
+            else if (map[i] == nMax)
                 mask |= colorRestrictions.get(i);
             else 
                 continue;
@@ -1928,7 +2019,7 @@ public class CardFactoryUtil {
                 String description = String.format("Bushido %d (When this blocks or becomes blocked, it gets +%d/+%d until end of turn).", magnitude, magnitude, magnitude);
                 String regularPart = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | StackDescription$ %s", c.getUniqueNumber(), magnitude, magnitude, description);
                 
-                SpellAbility ability = AbilityFactory.getAbility( regularPart, c);
+                SpellAbility ability = AbilityFactory.getAbility(regularPart, c);
                 ability.setDescription(ability.getStackDescription());
                 ability.setTrigger(true); // can be copied by Strionic Resonator
                 list.add(ability);
@@ -1990,7 +2081,7 @@ public class CardFactoryUtil {
                 "Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.",
                 cmd, true);
         cmd.addReplacementEffect(re);
-        if(StringUtils.isBlank(cmd.getSVar("CommanderCostRaise"))) // why condition check is needed?
+        if (StringUtils.isBlank(cmd.getSVar("CommanderCostRaise"))) // why condition check is needed?
             cmd.setSVar("CommanderCostRaise", "Number$0");
 
         String cmdManaCost = cmd.getManaCost().toString();
@@ -2003,18 +2094,19 @@ public class CardFactoryUtil {
         cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
     }
     */
-    public static final String getCommanderInfo(final Player originPlayer ) {
+    public static final String getCommanderInfo(final Player originPlayer) {
         StringBuilder sb = new StringBuilder();
-        for(Player p : originPlayer.getGame().getPlayers()) {
+        for (Player p : originPlayer.getGame().getPlayers()) {
         	final String text;
-            if(p.equals(originPlayer)) {
+            if (p.equals(originPlayer)) {
             	text = "Commander Damage from own Commander: ";
-            } else {
+            }
+            else {
             	text = "Commander Damage to " + p.getName() + ": ";
             }
             
             final Map<Card,Integer> map = p.getCommanderDamage();
-            if(map.containsKey(originPlayer.getCommander())) {
+            if (map.containsKey(originPlayer.getCommander())) {
                 sb.append(text + map.get(originPlayer.getCommander()) + "\r\n");
             }
         }
@@ -2047,7 +2139,7 @@ public class CardFactoryUtil {
             }
         }
         
-        if(hasKeyword(card, "Fuse") != -1) {
+        if (hasKeyword(card, "Fuse") != -1) {
             card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
         }
 
@@ -3363,15 +3455,15 @@ public class CardFactoryUtil {
         boolean hasKw = c.hasKeyword("Totem armor");
 
         List<ReplacementEffect> res = c.getReplacementEffects();
-        for ( int ix = 0; ix < res.size(); ix++ ) {
+        for (int ix = 0; ix < res.size(); ix++) {
             ReplacementEffect re = res.get(ix);
-            if( re.getMapParams().containsKey("TotemArmor") ) {
-                if(hasKw) return; // has re and kw - nothing to do here 
+            if (re.getMapParams().containsKey("TotemArmor")) {
+                if (hasKw) return; // has re and kw - nothing to do here 
                 res.remove(ix--);
             }
         }
 
-        if( hasKw ) { 
+        if (hasKw) { 
             ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ReplaceWith$ RegenTA | Secondary$ True | TotemArmor$ True | Description$ Totem armor - " + c, c, true);
             c.getSVars().put("RegenTA", "AB$ DealDamage | Cost$ 0 | Defined$ ReplacedCard | Remove$ All | SubAbility$ DestroyMe");
             c.getSVars().put("DestroyMe", "DB$ Destroy | Defined$ Self");
