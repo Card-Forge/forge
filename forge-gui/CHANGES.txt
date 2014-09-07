@@ -14,6 +14,12 @@ The details previously available by hovering over that rectangle will now appear
 The dialog for the commander replacement effect will now display the commander's name.
 
 
+- Auto-pay support for X mana costs -
+When prompted to choose a value for X when paying a mana cost, the left button will now as display "Auto" until you manually click a mana source
+If you press Auto, you'll be prompted to pick a value for X, with it defaulting to the maximum value you can afford.
+If you press OK on that prompt, Forge will use AI logic to automatically pay whatever value for X you chose.
+
+
 - Auto-targeting support -
 When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.
 When triggered abilities have only one valid target, that target will now be auto-selected.
