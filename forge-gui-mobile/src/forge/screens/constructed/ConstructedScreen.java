@@ -46,7 +46,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Callback;
-import forge.util.GuiDisplayUtil;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.Utils;
@@ -951,11 +950,9 @@ public class ConstructedScreen extends LaunchScreen {
 
         private class Variant {
             private final GameType gameType;
-            private final String description;
 
             private Variant(GameType gameType0) {
                 gameType = gameType0;
-                description = GuiDisplayUtil.getVariantDescription(gameType0);
             }
 
             private void draw(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
@@ -1026,7 +1023,7 @@ public class ConstructedScreen extends LaunchScreen {
                 g.drawText(text, font, foreColor, x, y, w, h, false, HAlignment.LEFT, false);
                 value.draw(g, font, foreColor, x, y, w, h);
                 h += SettingsScreen.SETTING_PADDING;
-                g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);            
+                g.drawText(value.gameType.getDescription(), SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + w * SettingsScreen.INSETS_FACTOR, true, HAlignment.LEFT, false);            
             }
         }
     }

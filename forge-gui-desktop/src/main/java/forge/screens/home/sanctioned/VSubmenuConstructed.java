@@ -29,7 +29,6 @@ import forge.screens.home.*;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinImage;
-import forge.util.GuiDisplayUtil;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
@@ -1144,7 +1143,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             variantType = variantType0;
 
-            setToolTipText(GuiDisplayUtil.getVariantDescription(variantType0));
+            setToolTipText(variantType.getDescription());
 
             addItemListener(new ItemListener() {
                 @Override
