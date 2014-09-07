@@ -13,16 +13,15 @@ There will no longer be a black rectangle for "Commander effect" in the command 
 The details previously available by hovering over that rectangle will now appear when hovering over the commander itself.
 The dialog for the commander replacement effect will now display the commander's name.
 
+
 - Momir Basic variant type -
 Momir Basic is now available as its own variant option on the Constructed screen
 For this format. each player will automatically be given a deck with 12 of each basic land and the Momir Vig avatar
 
 
-- Auto-pay support for X mana costs -
-When prompted to choose a value for X when paying a mana cost, the left button will now as display "Auto" until you manually click a mana source
-If you press Auto, you'll be prompted to pick a value for X, with it defaulting to the maximum value you can afford.
-If you press OK on that prompt, Forge will use AI logic to automatically pay whatever value for X you chose.
-
+- Choose value for X mana costs -
+Now, when playing spells/abilities with X in its mana cost, you will now be prompted for a value for X prior to mana payment, ensuring the final mana cost is calculated properly from cost adjustment effects and allowing using the "Auto" button to pay the entire cost.
+This also applies to spells with Replicate and Multikicker to allow picking the Replicate or Multikicker amount prior to paying the final mana cost.
 
 - Auto-targeting support -
 When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.

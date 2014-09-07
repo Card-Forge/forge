@@ -31,6 +31,8 @@ import forge.util.maps.MapToAmount;
 import java.util.*;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * <p>
  * ManaCostBeingPaid class.
@@ -213,6 +215,20 @@ public class ManaCostBeingPaid {
 
     public final boolean isPaid() {
         return unpaidShards.isEmpty();
+    }
+
+    public final void setXManaCostPaid(final int xPaid, final String xColor) {
+        int xCost = xPaid * cntX;
+        cntX = 0;
+
+        ManaCostShard increaseShard;
+        if (StringUtils.isEmpty(xColor)) {
+            increaseShard = ManaCostShard.COLORLESS;
+        }
+        else {
+            increaseShard = ManaCostShard.valueOf(MagicColor.fromName(xColor)); 
+        }
+        unpaidShards.add(increaseShard, xCost);
     }
 
     public final void increaseColorlessMana(final int manaToAdd) {

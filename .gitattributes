@@ -16734,7 +16734,6 @@ forge-gui/src/main/java/forge/match/input/InputPassPriority.java -text
 forge-gui/src/main/java/forge/match/input/InputPayMana.java -text
 forge-gui/src/main/java/forge/match/input/InputPayManaOfCostPayment.java -text
 forge-gui/src/main/java/forge/match/input/InputPayManaSimple.java -text
-forge-gui/src/main/java/forge/match/input/InputPayManaX.java -text
 forge-gui/src/main/java/forge/match/input/InputPlaybackControl.java -text
 forge-gui/src/main/java/forge/match/input/InputProliferate.java -text
 forge-gui/src/main/java/forge/match/input/InputProxy.java -text

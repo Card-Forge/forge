@@ -195,20 +195,22 @@ public class HumanPlaySpellAbility {
 
     private boolean announceValuesLikeX() {
         if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+        
+        boolean needX = true;
+        boolean allowZero = !ability.hasParam("XCantBe0");
+        CostPartMana manaCost = ability.getPayCosts().getCostMana();
+        PlayerController controller = ability.getActivatingPlayer().getController();
+        Card card = ability.getHostCard();
 
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");
         if (announce != null) {
-            PlayerController controller = ability.getActivatingPlayer().getController();
-            Card card = ability.getHostCard();
-            boolean allowZero = !ability.hasParam("XCantBe0");
-            CostPartMana manaCost = ability.getPayCosts().getCostMana();
-
             for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
 
                 boolean isX = "X".equalsIgnoreCase(varName);
+                if (isX) { needX = false; }
 
                 Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
                 if (value == null) {
@@ -223,6 +225,16 @@ public class HumanPlaySpellAbility {
                     card.setSVar(varName, value.toString());
                 }
             }
+        }
+
+        if (needX && manaCost != null && manaCost.getAmountOfX() > 0) {
+            Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+            if (value == null) {
+                return false;
+            }
+
+            ability.setSVar("X", value.toString());
+            card.setSVar("X", value.toString());
         }
         return true;
     }
