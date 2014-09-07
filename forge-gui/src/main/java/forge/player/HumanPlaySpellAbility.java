@@ -198,7 +198,7 @@ public class HumanPlaySpellAbility {
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");
         if (announce != null) {
-            for(String aVar : announce.split(",")) {
+            for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
 
                 boolean isX = "X".equalsIgnoreCase(varName);
@@ -222,12 +222,12 @@ public class HumanPlaySpellAbility {
         return true;
     }
 
+    // Announcing Requirements like choosing creature type or number
     private boolean announceType() {
-     // Announcing Requirements like choosing creature type or number
         String announce = ability.getParam("AnnounceType");
         PlayerController pc = ability.getActivatingPlayer().getController();
         if (announce != null) {
-            for(String aVar : announce.split(",")) {
+            for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
                     String choice = pc.chooseSomeType("Creature", ability, CardType.getCreatureTypes(), new ArrayList<String>());
