@@ -1086,7 +1086,6 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         // Consider exceptional cases which break the normal evaluation rules
-        // (e.g. do not waste Equipment on a creature that can neither attack nor block)
         if (!isUsefulAttachAction(c, sa)) {
             return null;
         }
