@@ -2128,56 +2128,43 @@ public class CardFactoryUtil {
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
 
-        if (hasKeyword(card, "Multikicker") != -1) {
-            final int n = hasKeyword(card, "Multikicker");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                final String[] k = parse.split("kicker ");
+        for (String keyword : card.getKeyword()) {
+            if (keyword.startsWith("Multikicker")) {
+                final String[] k = keyword.split("kicker ");
 
                 final SpellAbility sa = card.getFirstSpellAbility();
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
                 sa.addAnnounceVar("Multikicker");
             }
-        }
+            else if (keyword.startsWith("Fuse")) {
+                card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
+            }
+            else if (keyword.startsWith("Evoke")) {
+                card.addSpellAbility(makeEvokeSpell(card, keyword));
+            }
+            else if (keyword.startsWith("Monstrosity")) {
+                final String[] k = keyword.split(":");
+                final String magnitude = k[0].substring(12);
+                final String manacost = k[1];
+                card.removeIntrinsicKeyword(keyword);
 
-        if (hasKeyword(card, "Fuse") != -1) {
-            card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
-        }
+                String ref = "X".equals(magnitude) ? " | References$ X" : "";
+                String counters = StringUtils.isNumeric(magnitude) 
+                        ? Lang.nounWithNumeral(Integer.parseInt(magnitude), "+1/+1 counter"): "X +1/+1 counters";
+                String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ " +
+                        "Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
+                        magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
+                        magnitude + " (If this creature isn't monstrous, put " + 
+                        counters + " on it and it becomes monstrous.) | StackDescription$ SpellDescription" + ref;
 
-        final int evokePos = hasKeyword(card, "Evoke");
-        if (evokePos != -1) {
-            card.addSpellAbility(makeEvokeSpell(card, card.getKeyword().get(evokePos)));
-        }
-        final int monstrousPos = hasKeyword(card, "Monstrosity");
-        if (monstrousPos != -1) {
-            final String parse = card.getKeyword().get(monstrousPos).toString();
-            final String[] k = parse.split(":");
-            final String magnitude = k[0].substring(12);
-            final String manacost = k[1];
-            card.removeIntrinsicKeyword(parse);
+                card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getUnparsedAbilities().add(effect);
+            }
+            else if (keyword.startsWith("Unearth")) {
+                card.removeIntrinsicKeyword(keyword);
 
-            String ref = "X".equals(magnitude) ? " | References$ X" : "";
-            String counters = StringUtils.isNumeric(magnitude) 
-                    ? Lang.nounWithNumeral(Integer.parseInt(magnitude), "+1/+1 counter"): "X +1/+1 counters";
-            String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ " +
-            		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
-                    magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
-            		magnitude + " (If this creature isn't monstrous, put " + 
-                    counters + " on it and it becomes monstrous.) | StackDescription$ SpellDescription" + ref;
-
-            card.addSpellAbility(AbilityFactory.getAbility(effect, card));
-            // add ability to instrinic strings so copies/clones create the ability also
-            card.getUnparsedAbilities().add(effect);
-        }
-
-        if (hasKeyword(card, "Unearth") != -1) {
-            final int n = hasKeyword(card, "Unearth");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-
+                final String[] k = keyword.split(":");
                 final String manacost = k[1];
 
                 String effect = "AB$ ChangeZone | Cost$ " + manacost + " | Defined$ Self" +
@@ -2203,63 +2190,44 @@ public class CardFactoryUtil {
                 // add ability to instrinic strings so copies/clones create the ability also
                 card.getUnparsedAbilities().add(effect);
             }
-        } // unearth
+            else if (keyword.startsWith("Level up")) {
+                final String strMaxLevel = card.getSVar("maxLevel");
+                card.removeIntrinsicKeyword(keyword);
 
-        final int iLvlUp = hasKeyword(card, "Level up");
-        
-        if (iLvlUp != -1) {
-            final String strLevelCost = card.getKeyword().get(iLvlUp);
-            final String strMaxLevel = card.getSVar("maxLevel");
-            card.removeIntrinsicKeyword(strLevelCost);
+                final String[] k = keyword.split(":");
+                final String manacost = k[1];
 
-            final String[] k = strLevelCost.split(":");
-            final String manacost = k[1];
+                String effect = "AB$ PutCounter | Cost$ " + manacost + " | " +
+                        "SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1" +
+                        " | CounterType$ LEVEL | PrecostDesc$ Level Up | MaxLevel$ " +
+                        strMaxLevel + " | SpellDescription$ (Put a level counter on" +
+                        " this permanent. Activate this ability only any time you" +
+                        " could cast a sorcery.)";
 
-            String effect = "AB$ PutCounter | Cost$ " + manacost + " | " +
-            		"SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1" +
-            		" | CounterType$ LEVEL | PrecostDesc$ Level Up | MaxLevel$ " +
-            		strMaxLevel + " | SpellDescription$ (Put a level counter on" +
-            		" this permanent. Activate this ability only any time you" +
-            		" could cast a sorcery.)";
+                card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getUnparsedAbilities().add(effect);
+            }
+            else if (keyword.startsWith("Cycling")) {
+                card.removeIntrinsicKeyword(keyword);
 
-            card.addSpellAbility(AbilityFactory.getAbility(effect, card));
-            // add ability to instrinic strings so copies/clones create the ability also
-            card.getUnparsedAbilities().add(effect);
-        } // level up
-
-        if (hasKeyword(card, "Cycling") != -1) {
-            final int n = hasKeyword(card, "Cycling");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
+                final String[] k = keyword.split(":");
                 final String manacost = k[1];
 
                 card.addSpellAbility(abilityCycle(card, manacost));
             }
-        } // Cycling
+            else if (keyword.startsWith("TypeCycling")) {
+                card.removeIntrinsicKeyword(keyword);
 
-        while (hasKeyword(card, "TypeCycling") != -1) {
-            final int n = hasKeyword(card, "TypeCycling");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
+                final String[] k = keyword.split(":");
                 final String type = k[1];
                 final String manacost = k[2];
 
                 card.addSpellAbility(abilityTypecycle(card, manacost, type));
             }
-        } // TypeCycling
-
-        if (hasKeyword(card, "Transmute") != -1) {
-            final int n = hasKeyword(card, "Transmute");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n);
-                card.removeIntrinsicKeyword(parse);
-                final String manacost = parse.split(":")[1];
+            else if (keyword.startsWith("Transmute")) {
+                card.removeIntrinsicKeyword(keyword);
+                final String manacost = keyword.split(":")[1];
                 final String sbTransmute = "AB$ ChangeZone | Cost$ " + manacost + " Discard<1/CARDNAME>"
                         + " | CostDesc$ Transmute " + ManaCostParser.parse(manacost)+ " | ActivationZone$ Hand"
                         + " | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ" + card.getManaCost().getCMC()
@@ -2272,114 +2240,95 @@ public class CardFactoryUtil {
                 card.addSpellAbility(abTransmute);
                 card.getUnparsedAbilities().add(sbTransmute);
             }
-        } // transmute
+            else if (keyword.startsWith("Soulshift")) {
+                final String[] k = keyword.split(" ");
+                final int manacost = Integer.parseInt(k[1]);
 
-        int shiftPos = hasKeyword(card, "Soulshift");
-        while (shiftPos != -1) {
-            final int n = shiftPos;
-            final String parse = card.getKeyword().get(n);
-            final String[] k = parse.split(" ");
-            final int manacost = Integer.parseInt(k[1]);
-
-            final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
-                    + "| OptionalDecider$ You | ValidCard$ Card.Self | Execute$ SoulshiftAbility"
-                    + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + parse
-                    + " (When this creature dies, you may return target Spirit card with converted mana cost "
-                    + manacost + " or less from your graveyard to your hand.)";
-            final String abString = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
-                    + "| ValidTgts$ Spirit.YouOwn+cmcLE" + manacost;
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
-            card.addTrigger(parsedTrigger);
-            card.setSVar("SoulshiftAbility", abString);
-            shiftPos = hasKeyword(card, "Soulshift", n + 1);
-        } // Soulshift
-
-        final int championPos = hasKeyword(card, "Champion");
-        if (championPos != -1) {
-            String parse = card.getKeyword().get(championPos);
-            card.removeIntrinsicKeyword(parse);
-
-            final String[] k = parse.split(":");
-            final String[] valid = k[1].split(",");
-            String desc = k.length > 2 ? k[2] : k[1];
-            String article = Lang.startsWithVowel(desc) ? "an" : "a";
-            if (desc.equals("Creature")) {
-                desc = "creature"; //use lowercase for "Champion a creature"
+                final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
+                        + "| OptionalDecider$ You | ValidCard$ Card.Self | Execute$ SoulshiftAbility"
+                        + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + keyword
+                        + " (When this creature dies, you may return target Spirit card with converted mana cost "
+                        + manacost + " or less from your graveyard to your hand.)";
+                final String abString = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
+                        + "| ValidTgts$ Spirit.YouOwn+cmcLE" + manacost;
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+                card.addTrigger(parsedTrigger);
+                card.setSVar("SoulshiftAbility", abString);
             }
+            else if (keyword.startsWith("Champion")) {
+                card.removeIntrinsicKeyword(keyword);
 
-            StringBuilder changeType = new StringBuilder();
-            for (String v : valid) {
-                if (changeType.length() != 0) {
-                    changeType.append(",");
+                final String[] k = keyword.split(":");
+                final String[] valid = k[1].split(",");
+                String desc = k.length > 2 ? k[2] : k[1];
+                String article = Lang.startsWithVowel(desc) ? "an" : "a";
+                if (desc.equals("Creature")) {
+                    desc = "creature"; //use lowercase for "Champion a creature"
                 }
-                changeType.append(v).append(".YouCtrl+Other");
+
+                StringBuilder changeType = new StringBuilder();
+                for (String v : valid) {
+                    if (changeType.length() != 0) {
+                        changeType.append(",");
+                    }
+                    changeType.append(v).append(".YouCtrl+Other");
+                }
+
+                StringBuilder trig = new StringBuilder();
+                trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
+                trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion ").append(article + " ");
+                trig.append(desc).append(" (When this enters the battlefield, sacrifice it unless you exile another ");
+                trig.append(desc).append(" you control. When this leaves the battlefield, that card returns to the battlefield.)");
+
+                StringBuilder trigReturn = new StringBuilder();
+                trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | ");
+                trigReturn.append("Execute$ ChampionReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+
+                StringBuilder ab = new StringBuilder();
+                ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Champion$ True | ");
+                ab.append("Hidden$ True | Optional$ True | SubAbility$ ChampionSacrifice | ChangeType$ ").append(changeType);
+
+                StringBuilder subAb = new StringBuilder();
+                subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
+
+                String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
+                final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, true);
+                card.addTrigger(parsedTrigger);
+                card.addTrigger(parsedTrigReturn);
+                card.setSVar("ChampionAbility", ab.toString());
+                card.setSVar("ChampionReturn", returnChampion);
+                card.setSVar("ChampionSacrifice", subAb.toString());
             }
+            else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
+                    + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
+                String replacement = "Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ GraveyardToLibrary";
+                String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
 
-            StringBuilder trig = new StringBuilder();
-            trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
-            trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion ").append(article + " ");
-            trig.append(desc).append(" (When this enters the battlefield, sacrifice it unless you exile another ");
-            trig.append(desc).append(" you control. When this leaves the battlefield, that card returns to the battlefield.)");
+                card.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
+                card.setSVar("GraveyardToLibrary", ab);
+            }
+            else if (keyword.startsWith("Echo")) {
+                final String[] k = keyword.split(":");
+                final String manacost = k[1];
 
-            StringBuilder trigReturn = new StringBuilder();
-            trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | ");
-            trigReturn.append("Execute$ ChampionReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+                card.setEchoCost(manacost);
 
-            StringBuilder ab = new StringBuilder();
-            ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Champion$ True | ");
-            ab.append("Hidden$ True | Optional$ True | SubAbility$ ChampionSacrifice | ChangeType$ ").append(changeType);
+                final GameCommand intoPlay = new GameCommand() {
 
-            StringBuilder subAb = new StringBuilder();
-            subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
+                    private static final long serialVersionUID = -7913835645603984242L;
 
-            String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
-            final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, true);
-            card.addTrigger(parsedTrigger);
-            card.addTrigger(parsedTrigReturn);
-            card.setSVar("ChampionAbility", ab.toString());
-            card.setSVar("ChampionReturn", returnChampion);
-            card.setSVar("ChampionSacrifice", subAb.toString());
-        }
-        
-        if (card.hasKeyword("If CARDNAME would be put into a graveyard "
-                + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-
-            String replacement = "Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ GraveyardToLibrary";
-            String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
-
-            card.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
-            card.setSVar("GraveyardToLibrary", ab);
-        }
-
-        final int echoPos = hasKeyword(card, "Echo");
-        if (echoPos != -1) {
-            // card.removeIntrinsicKeyword(parse);
-            final String[] k = card.getKeyword().get(echoPos).split(":");
-            final String manacost = k[1];
-
-            card.setEchoCost(manacost);
-
-            final GameCommand intoPlay = new GameCommand() {
-
-                private static final long serialVersionUID = -7913835645603984242L;
-
-                @Override
-                public void run() {
-                    card.addExtrinsicKeyword("(Echo unpaid)");
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        } // echo
-
-        if (hasKeyword(card, "Suspend") != -1) {
-            // Suspend:<TimeCounters>:<Cost>
-            final int n = hasKeyword(card, "Suspend");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n);
-                card.removeIntrinsicKeyword(parse);
+                    @Override
+                    public void run() {
+                        card.addExtrinsicKeyword("(Echo unpaid)");
+                    }
+                };
+                card.addComesIntoPlayCommand(intoPlay);
+            }
+            else if (keyword.startsWith("Suspend")) {
+                card.removeIntrinsicKeyword(keyword);
                 card.setSuspend(true);
-                final String[] k = parse.split(":");
+                final String[] k = keyword.split(":");
 
                 final String timeCounters = k[1];
                 final String cost = k[2];
@@ -2387,12 +2336,8 @@ public class CardFactoryUtil {
                 addSuspendUpkeepTrigger(card);
                 addSuspendPlayTrigger(card);
             }
-        } // Suspend
-
-        if (hasKeyword(card, "Fading") != -1) {
-            final int n = hasKeyword(card, "Fading");
-            if (n != -1) {
-                final String[] k = card.getKeyword().get(n).split(":");
+            else if (keyword.startsWith("Fading")) {
+                final String[] k = keyword.split(":");
 
                 card.addIntrinsicKeyword("etbCounter:FADE:" + k[1] + ":no Condition:no desc");
 
@@ -2401,43 +2346,323 @@ public class CardFactoryUtil {
                         "your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
 
                 card.setSVar("TrigUpkeepFading", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ FADE" +
-                		" | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBUpkeepFadingSac");
+                        " | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBUpkeepFadingSac");
                 card.setSVar("DBUpkeepFadingSac","DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar" +
-                		" | ConditionSVarCompare$ EQ0 | References$ FadingCheckSVar | SubAbility$ FadingCleanup");
+                        " | ConditionSVarCompare$ EQ0 | References$ FadingCheckSVar | SubAbility$ FadingCleanup");
                 card.setSVar("FadingCleanup","DB$ Cleanup | ClearRemembered$ True");
                 card.setSVar("FadingCheckSVar","Count$RememberedSize");
                 final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
                 card.addTrigger(parsedUpkeepTrig);
             }
-        } // Fading
-
-        if (hasKeyword(card, "Vanishing") != -1) {
-            final int n = hasKeyword(card, "Vanishing");
-            if (n != -1) {
-                final String[] k = card.getKeyword().get(n).split(":");
+            else if (keyword.startsWith("Vanishing")) {
+                final String[] k = keyword.split(":");
                 // etbcounter
                 card.addIntrinsicKeyword("etbCounter:TIME:" + k[1] + ":no Condition:no desc");
                 // Remove Time counter trigger
                 String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
-                		"TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
-                		" | Execute$ TrigUpkeepVanishing | TriggerDescription$ At the " +
-                		"beginning of your upkeep, if CARDNAME has a time counter on it, " +
-                		"remove a time counter from it. | Secondary$ True";
+                        "TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
+                        " | Execute$ TrigUpkeepVanishing | TriggerDescription$ At the " +
+                        "beginning of your upkeep, if CARDNAME has a time counter on it, " +
+                        "remove a time counter from it. | Secondary$ True";
                 card.setSVar("TrigUpkeepVanishing", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self" +
-                		" | CounterType$ TIME | CounterNum$ 1");
+                        " | CounterType$ TIME | CounterNum$ 1");
                 final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
                 card.addTrigger(parsedUpkeepTrig);
                 // sacrifice trigger
                 String sacTrig = "Mode$ CounterRemoved | TriggerZones$ Battlefield | ValidCard$" +
-                		" Card.Self | NewCounterAmount$ 0 | Secondary$ True | CounterType$ TIME |" +
-                		" Execute$ TrigVanishingSac | TriggerDescription$ When the last time " +
-                		"counter is removed from CARDNAME, sacrifice it.";
+                        " Card.Self | NewCounterAmount$ 0 | Secondary$ True | CounterType$ TIME |" +
+                        " Execute$ TrigVanishingSac | TriggerDescription$ When the last time " +
+                        "counter is removed from CARDNAME, sacrifice it.";
                 card.setSVar("TrigVanishingSac", "AB$ Sacrifice | Cost$ 0 | SacValid$ Self");
 
                 final Trigger parsedSacTrigger = TriggerHandler.parseTrigger(sacTrig, card, true);
                 card.addTrigger(parsedSacTrigger);
             }
-        } // Vanishing
+            else if (keyword.equals("Delve")) {
+                card.getSpellAbilities().get(0).setDelve(true);
+            }
+            else if (keyword.startsWith("Haunt")) {
+                setupHauntSpell(card);
+            }
+            else if (keyword.equals("Provoke")) {
+                final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | "
+                        + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "
+                        + "When this attacks, you may have target creature defending player "
+                        + "controls untap and block it if able.";
+                final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
+                        + "TgtPrompt$ Select target creature defending player controls | SubAbility$ ProvokeUntap";
+                final String dbString = "DB$ Untap | Defined$ Targeted";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+                card.addTrigger(parsedTrigger);
+                card.setSVar("ProvokeAbility", abString);
+                card.setSVar("ProvokeUntap", dbString);
+            }
+            else if (keyword.equals("Living Weapon")) {
+                card.removeIntrinsicKeyword(keyword);
+
+                final StringBuilder sbTrig = new StringBuilder();
+                sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
+                sbTrig.append("ValidCard$ Card.Self | Execute$ TrigGerm | TriggerDescription$ ");
+                sbTrig.append("Living Weapon (When this Equipment enters the battlefield, ");
+                sbTrig.append("put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)");
+
+                final StringBuilder sbGerm = new StringBuilder();
+                sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
+                sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ | SubAbility$ DBGermAttach");
+
+                final StringBuilder sbAttach = new StringBuilder();
+                sbAttach.append("DB$ Attach | Defined$ Remembered | SubAbility$ DBGermClear");
+
+                final StringBuilder sbClear = new StringBuilder();
+                sbClear.append("DB$ Cleanup | ClearRemembered$ True");
+
+                card.setSVar("TrigGerm", sbGerm.toString());
+                card.setSVar("DBGermAttach", sbAttach.toString());
+                card.setSVar("DBGermClear", sbClear.toString());
+
+                final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
+                card.addTrigger(etbTrigger);
+            }
+            else if (keyword.equals("Epic")) {
+                makeEpic(card);
+            }
+            else if (keyword.equals("Soulbond")) {
+             // Setup ETB trigger for card with Soulbond keyword
+                final String actualTriggerSelf = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                        + "ValidCard$ Card.Self | Execute$ TrigBondOther | OptionalDecider$ You | "
+                        + "IsPresent$ Creature.Other+YouCtrl+NotPaired | Secondary$ True | "
+                        + "TriggerDescription$ When CARDNAME enters the battlefield, "
+                        + "you may pair CARDNAME with another unpaired creature you control";
+                final String abStringSelf = "AB$ Bond | Cost$ 0 | Defined$ Self | ValidCards$ Creature.Other+YouCtrl+NotPaired";
+                final Trigger parsedTriggerSelf = TriggerHandler.parseTrigger(actualTriggerSelf, card, true);
+                card.addTrigger(parsedTriggerSelf);
+                card.setSVar("TrigBondOther", abStringSelf);
+                // Setup ETB trigger for other creatures you control
+                final String actualTriggerOther = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                        + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | "
+                        + "Execute$ TrigBondSelf | IsPresent$ Creature.Self+NotPaired | Secondary$ True | "
+                        + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
+                        + "you may pair it with CARDNAME";
+                final String abStringOther = "AB$ Bond | Cost$ 0 | Defined$ TriggeredCard | ValidCards$ Creature.Self+NotPaired";
+                final Trigger parsedTriggerOther = TriggerHandler.parseTrigger(actualTriggerOther, card, true);
+                card.addTrigger(parsedTriggerOther);
+                card.setSVar("TrigBondSelf", abStringOther);
+            }
+            else if (keyword.equals("Extort")) {
+                final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
+                        + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
+                        + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay W/B. If you do, "
+                        + "each opponent loses 1 life and you gain that much life.)";
+                final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
+                        + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
+                final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, true);
+                card.addTrigger(parsedTrigger);
+                card.setSVar("ExtortOpps", abString);
+                card.setSVar("ExtortGainLife", dbString);
+                card.setSVar("AFLifeLost", "Number$0");
+            }
+            else if (keyword.equals("Evolve")) {
+                final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                        + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
+                        + "TriggerZones$ Battlefield | Execute$ EvolveAddCounter | Secondary$ True | "
+                        + "TriggerDescription$ Evolve (Whenever a creature enters the battlefield under your "
+                        + "control, if that creature has greater power or toughness than this creature, put a "
+                        + "+1/+1 counter on this creature.)";
+                final String abString = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | "
+                        + "CounterNum$ 1 | Evolve$ True";
+                final Trigger parsedTrigger = TriggerHandler.parseTrigger(evolveTrigger, card, true);
+                card.addTrigger(parsedTrigger);
+                card.setSVar("EvolveAddCounter", abString);
+            }
+            else if (keyword.startsWith("Dredge")) {
+                final int dredgeAmount = card.getKeywordMagnitude("Dredge");
+
+                final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
+                        + "ReplaceWith$ DredgeCards | Secondary$ True | Optional$ True | CheckSVar$ "
+                        + "DredgeCheckLib | SVarCompare$ GE" + dredgeAmount + " | References$ "
+                        + "DredgeCheckLib | AICheckDredge$ True | Description$ " + card.getName()
+                        +  " - Dredge " + dredgeAmount;
+                final String abString = "DB$ Mill | Defined$ You | NumCards$ " + dredgeAmount + " | "
+                        + "SubAbility$ DredgeMoveToPlay";
+                final String moveToPlay = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | "
+                        + "Defined$ Self";
+                final String checkSVar = "Count$ValidLibrary Card.YouOwn";
+                card.setSVar("DredgeCards", abString);
+                card.setSVar("DredgeMoveToPlay", moveToPlay);
+                card.setSVar("DredgeCheckLib", checkSVar);
+                card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
+            }
+            else if (keyword.startsWith("Tribute")) {
+                final int tributeAmount = card.getKeywordMagnitude("Tribute");
+
+                final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
+                        + " ReplaceWith$ TributeAddCounter | Secondary$ True | Description$ Tribute "
+                        + tributeAmount + " (As this creature enters the battlefield, an opponent of your"
+                        + " choice may place " + tributeAmount + " +1/+1 counter on it.)";
+                final String abString = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
+                        + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
+                        + " | SubAbility$ TributeMoveToPlay";
+                final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
+                        + "Defined$ ReplacedCard | Hidden$ True";
+                card.setSVar("TributeAddCounter", abString);
+                card.setSVar("TributeMoveToPlay", moveToPlay);
+                card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
+            }
+            else if (keyword.startsWith("Amplify")) {
+                // find position of Amplify keyword
+                final int ampPos = card.getKeywordPosition("Amplify");
+                final String[] ampString = card.getKeyword().get(ampPos).split(":");
+                final String amplifyMagnitude = ampString[1];
+                final String suffix = !amplifyMagnitude.equals("1") ? "s" : "";
+                final String ampTypes = ampString[2];
+                String[] refinedTypes = ampTypes.split(",");
+                final StringBuilder types = new StringBuilder();
+                for (int i = 0; i < refinedTypes.length; i++) {
+                    types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
+                    if (i + 1 != refinedTypes.length) {
+                        types.append(",");
+                    }
+                }
+                // Setup ETB replacement effects
+                final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
+                        + " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
+                        + "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
+                        + " on it for each " + ampTypes.replace(",", " and/or ") 
+                        + " card you reveal in your hand.)";
+                final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
+                        + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
+                final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
+                        + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$"
+                        + " AmplifyMoveToPlay";
+                final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
+                        + "Defined$ ReplacedCard | Hidden$ True | SubAbility$ DBCleanup";
+                card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
+                card.setSVar("AmplifyReveal", abString);
+                card.setSVar("AmplifyMoveToPlay", moveToPlay);
+                card.setSVar("Amplify", dbString);
+                card.setSVar("DBCleanup", "DB$ Cleanup | ClearRemembered$ True");
+                card.setSVar("AmpMagnitude", "SVar$Revealed/Times." + amplifyMagnitude);
+                card.setSVar("Revealed", "Remembered$Amount");
+            }
+            else if (keyword.startsWith("Equip")) {
+                // Check for additional params such as preferred AI targets
+                final String equipString = keyword.substring(5);
+                final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
+                // Get cost string
+                String equipCost = "";
+                if (equipExtras != null) {
+                    equipCost = equipExtras[0].trim();
+                } else {
+                    equipCost = equipString.trim();
+                }
+                // Create attach ability string
+                final StringBuilder abilityStr = new StringBuilder();
+                abilityStr.append("AB$ Attach | Cost$ ");
+                abilityStr.append(equipCost);
+                abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+                if (equipExtras != null) {
+                    abilityStr.append("| ").append(equipExtras[1]).append(" ");
+                }
+                abilityStr.append("| PrecostDesc$ Equip ");
+                Cost cost = new Cost(equipCost, true);
+                if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                    abilityStr.append("- ");
+                }
+                abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+                abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
+                // instantiate attach ability
+                final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+                card.addSpellAbility(sa);
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getUnparsedAbilities().add(abilityStr.toString());
+            }
+            else if (keyword.startsWith("Outlast")) {
+                final String outlastString = keyword.substring(7);
+                final String[] outlastExtras = outlastString.contains("|") ? outlastString.split("\\|", 2) : null;
+                // Get cost string
+                String outlastCost = "";
+                if (outlastExtras != null) {
+                    outlastCost = outlastExtras[0].trim();
+                } else {
+                    outlastCost = outlastString.trim();
+                }
+                // Create outlast ability string
+                final StringBuilder abilityStr = new StringBuilder();
+                abilityStr.append("AB$ PutCounter | Cost$ ");
+                abilityStr.append(outlastCost);
+                abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
+                abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
+                if (outlastExtras != null) {
+                    abilityStr.append("| ").append(outlastExtras[1]).append(" ");
+                }
+                abilityStr.append("| PrecostDesc$ Outlast ");
+                Cost cost = new Cost(outlastCost, true);
+                if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                    abilityStr.append("- ");
+                }
+                abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+                abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ", {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)");
+                final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+                card.addSpellAbility(sa);
+                // add ability to instrinic strings so copies/clones create the ability also
+                card.getUnparsedAbilities().add(abilityStr.toString());
+            }
+            else if (keyword.startsWith("Fortify")) {
+                final String equipString = keyword.substring(7);
+                final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
+                // Get cost string
+                String equipCost = "";
+                if (equipExtras != null) {
+                    equipCost = equipExtras[0].trim();
+                } else {
+                    equipCost = equipString.trim();
+                }
+                // Create attach ability string
+                final StringBuilder abilityStr = new StringBuilder();
+                abilityStr.append("AB$ Attach | Cost$ ");
+                abilityStr.append(equipCost);
+                abilityStr.append(" | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control ");
+                abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
+                if (equipExtras != null) {
+                    abilityStr.append("| ").append(equipExtras[1]).append(" ");
+                }
+                abilityStr.append("| PrecostDesc$ Fortify ");
+                Cost cost = new Cost(equipCost, true);
+                if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                    abilityStr.append("- ");
+                }
+                abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+                abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target land you control. Fortify only as a sorcery.)");
+     
+                // instantiate attach ability
+                final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
+                card.addSpellAbility(sa);
+                // add ability to intrinsic strings so copies/clones create the ability also
+                card.getUnparsedAbilities().add(abilityStr.toString());
+            }
+            else if (keyword.startsWith("Bestow")) {
+                final String[] params = keyword.split(":");
+                final String cost = params[1];
+                card.removeIntrinsicKeyword(keyword);       
+
+                final StringBuilder sbAttach = new StringBuilder();
+                sbAttach.append("SP$ Attach | Cost$ ");
+                sbAttach.append(cost);
+                sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
+                sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
+                final SpellAbility bestow = AbilityFactory.getAbility(sbAttach.toString(), card);
+
+                bestow.setDescription("Bestow " + ManaCostParser.parse(cost) + " (If you cast this"
+                        + " card for its bestow cost, it's an Aura spell with enchant creature. It"
+                        + " becomes a creature again if it's not attached to a creature.)");
+                bestow.setStackDescription("Bestow - " + card.getName());
+                bestow.setBasicSpell(false);
+                card.addSpellAbility(bestow);
+                card.getUnparsedAbilities().add(sbAttach.toString());
+            }
+        }
 
         // AddCost
         if (card.hasSVar("FullCost")) {
@@ -2454,310 +2679,6 @@ public class CardFactoryUtil {
             if (sa1 != null && sa1.isSpell()) {
                 card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
             }
-        }
-        if (card.hasKeyword("Delve")) {
-            card.getSpellAbilities().get(0).setDelve(true);
-        }
-
-        if (card.hasStartOfKeyword("Haunt")) {
-            setupHauntSpell(card);
-        }
-
-        if (card.hasKeyword("Provoke")) {
-            final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | "
-                    + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "
-                    + "When this attacks, you may have target creature defending player "
-                    + "controls untap and block it if able.";
-            final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
-                    + "TgtPrompt$ Select target creature defending player controls | SubAbility$ ProvokeUntap";
-            final String dbString = "DB$ Untap | Defined$ Targeted";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
-            card.addTrigger(parsedTrigger);
-            card.setSVar("ProvokeAbility", abString);
-            card.setSVar("ProvokeUntap", dbString);
-        }
-
-        if (card.hasKeyword("Living Weapon")) {
-            card.removeIntrinsicKeyword("Living Weapon");
-
-            final StringBuilder sbTrig = new StringBuilder();
-            sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ");
-            sbTrig.append("ValidCard$ Card.Self | Execute$ TrigGerm | TriggerDescription$ ");
-            sbTrig.append("Living Weapon (When this Equipment enters the battlefield, ");
-            sbTrig.append("put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)");
-
-            final StringBuilder sbGerm = new StringBuilder();
-            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenName$ Germ | TokenTypes$ Creature,Germ | RememberTokens$ True | ");
-            sbGerm.append("TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 0 | TokenImage$ B 0 0 Germ | SubAbility$ DBGermAttach");
-
-            final StringBuilder sbAttach = new StringBuilder();
-            sbAttach.append("DB$ Attach | Defined$ Remembered | SubAbility$ DBGermClear");
-
-            final StringBuilder sbClear = new StringBuilder();
-            sbClear.append("DB$ Cleanup | ClearRemembered$ True");
-
-            card.setSVar("TrigGerm", sbGerm.toString());
-            card.setSVar("DBGermAttach", sbAttach.toString());
-            card.setSVar("DBGermClear", sbClear.toString());
-
-            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
-            card.addTrigger(etbTrigger);
-        }
-        
-        if (card.hasKeyword("Epic")) {
-            makeEpic(card);
-        }
-
-        if (card.hasKeyword("Soulbond")) {
-            // Setup ETB trigger for card with Soulbond keyword
-            final String actualTriggerSelf = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                    + "ValidCard$ Card.Self | Execute$ TrigBondOther | OptionalDecider$ You | "
-                    + "IsPresent$ Creature.Other+YouCtrl+NotPaired | Secondary$ True | "
-                    + "TriggerDescription$ When CARDNAME enters the battlefield, "
-                    + "you may pair CARDNAME with another unpaired creature you control";
-            final String abStringSelf = "AB$ Bond | Cost$ 0 | Defined$ Self | ValidCards$ Creature.Other+YouCtrl+NotPaired";
-            final Trigger parsedTriggerSelf = TriggerHandler.parseTrigger(actualTriggerSelf, card, true);
-            card.addTrigger(parsedTriggerSelf);
-            card.setSVar("TrigBondOther", abStringSelf);
-            // Setup ETB trigger for other creatures you control
-            final String actualTriggerOther = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                    + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | "
-                    + "Execute$ TrigBondSelf | IsPresent$ Creature.Self+NotPaired | Secondary$ True | "
-                    + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
-                    + "you may pair it with CARDNAME";
-            final String abStringOther = "AB$ Bond | Cost$ 0 | Defined$ TriggeredCard | ValidCards$ Creature.Self+NotPaired";
-            final Trigger parsedTriggerOther = TriggerHandler.parseTrigger(actualTriggerOther, card, true);
-            card.addTrigger(parsedTriggerOther);
-            card.setSVar("TrigBondSelf", abStringOther);
-        }
-
-        if (card.hasKeyword("Extort")) {
-            final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
-                    + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
-                    + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay W/B. If you do, "
-                    + "each opponent loses 1 life and you gain that much life.)";
-            final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
-                    + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
-            final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, true);
-            card.addTrigger(parsedTrigger);
-            card.setSVar("ExtortOpps", abString);
-            card.setSVar("ExtortGainLife", dbString);
-            card.setSVar("AFLifeLost", "Number$0");
-        }
-
-        if (card.hasKeyword("Evolve")) {
-            final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                    + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
-                    + "TriggerZones$ Battlefield | Execute$ EvolveAddCounter | Secondary$ True | "
-                    + "TriggerDescription$ Evolve (Whenever a creature enters the battlefield under your "
-                    + "control, if that creature has greater power or toughness than this creature, put a "
-                    + "+1/+1 counter on this creature.)";
-            final String abString = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | "
-                    + "CounterNum$ 1 | Evolve$ True";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(evolveTrigger, card, true);
-            card.addTrigger(parsedTrigger);
-            card.setSVar("EvolveAddCounter", abString);
-        }
-
-        if (card.hasStartOfKeyword("Dredge")) {
-            final int dredgeAmount = card.getKeywordMagnitude("Dredge");
-
-            final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
-                    + "ReplaceWith$ DredgeCards | Secondary$ True | Optional$ True | CheckSVar$ "
-                    + "DredgeCheckLib | SVarCompare$ GE" + dredgeAmount + " | References$ "
-                    + "DredgeCheckLib | AICheckDredge$ True | Description$ " + card.getName()
-                    +  " - Dredge " + dredgeAmount;
-            final String abString = "DB$ Mill | Defined$ You | NumCards$ " + dredgeAmount + " | "
-                    + "SubAbility$ DredgeMoveToPlay";
-            final String moveToPlay = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | "
-                    + "Defined$ Self";
-            final String checkSVar = "Count$ValidLibrary Card.YouOwn";
-            card.setSVar("DredgeCards", abString);
-            card.setSVar("DredgeMoveToPlay", moveToPlay);
-            card.setSVar("DredgeCheckLib", checkSVar);
-            card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
-        }
-
-        if (card.hasStartOfKeyword("Tribute")) {
-            final int tributeAmount = card.getKeywordMagnitude("Tribute");
-
-            final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-                    + " ReplaceWith$ TributeAddCounter | Secondary$ True | Description$ Tribute "
-                    + tributeAmount + " (As this creature enters the battlefield, an opponent of your"
-                    + " choice may place " + tributeAmount + " +1/+1 counter on it.)";
-            final String abString = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
-                    + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
-                    + " | SubAbility$ TributeMoveToPlay";
-            final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
-                    + "Defined$ ReplacedCard | Hidden$ True";
-            card.setSVar("TributeAddCounter", abString);
-            card.setSVar("TributeMoveToPlay", moveToPlay);
-            card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
-        }
-
-        if (card.hasStartOfKeyword("Amplify")) {
-            // find position of Amplify keyword
-            final int ampPos = card.getKeywordPosition("Amplify");
-            final String[] ampString = card.getKeyword().get(ampPos).split(":");
-            final String amplifyMagnitude = ampString[1];
-            final String suffix = !amplifyMagnitude.equals("1") ? "s" : "";
-            final String ampTypes = ampString[2];
-            String[] refinedTypes = ampTypes.split(",");
-            final StringBuilder types = new StringBuilder();
-            for (int i = 0; i < refinedTypes.length; i++) {
-                types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
-                if (i + 1 != refinedTypes.length) {
-                    types.append(",");
-                }
-            }
-            // Setup ETB replacement effects
-            final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-                    + " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
-                    + "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
-                    + " on it for each " + ampTypes.replace(",", " and/or ") 
-                    + " card you reveal in your hand.)";
-            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
-                    + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
-            final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
-                    + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$"
-                    + " AmplifyMoveToPlay";
-            final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
-                    + "Defined$ ReplacedCard | Hidden$ True | SubAbility$ DBCleanup";
-            card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
-            card.setSVar("AmplifyReveal", abString);
-            card.setSVar("AmplifyMoveToPlay", moveToPlay);
-            card.setSVar("Amplify", dbString);
-            card.setSVar("DBCleanup", "DB$ Cleanup | ClearRemembered$ True");
-            card.setSVar("AmpMagnitude", "SVar$Revealed/Times." + amplifyMagnitude);
-            card.setSVar("Revealed", "Remembered$Amount");
-        }
-
-        if (card.hasStartOfKeyword("Equip")) {
-            // find position of Equip keyword
-            final int equipPos = card.getKeywordPosition("Equip");
-            // Check for additional params such as preferred AI targets
-            final String equipString = card.getKeyword().get(equipPos).substring(5);
-            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
-            // Get cost string
-            String equipCost = "";
-            if (equipExtras != null) {
-                equipCost = equipExtras[0].trim();
-            } else {
-                equipCost = equipString.trim();
-            }
-            // Create attach ability string
-            final StringBuilder abilityStr = new StringBuilder();
-            abilityStr.append("AB$ Attach | Cost$ ");
-            abilityStr.append(equipCost);
-            abilityStr.append(" | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control ");
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
-            if (equipExtras != null) {
-                abilityStr.append("| ").append(equipExtras[1]).append(" ");
-            }
-            abilityStr.append("| PrecostDesc$ Equip ");
-            Cost cost = new Cost(equipCost, true);
-            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                abilityStr.append("- ");
-            }
-            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
-            // instantiate attach ability
-            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-            card.addSpellAbility(sa);
-            // add ability to instrinic strings so copies/clones create the ability also
-            card.getUnparsedAbilities().add(abilityStr.toString());
-        }
-
-        if (card.hasStartOfKeyword("Outlast")) {
-            final int outlastPos = card.getKeywordPosition("Outlast");
-            final String outlastString = card.getKeyword().get(outlastPos).substring(7);
-            final String[] outlastExtras = outlastString.contains("|") ? outlastString.split("\\|", 2) : null;
-            // Get cost string
-            String outlastCost = "";
-            if (outlastExtras != null) {
-                outlastCost = outlastExtras[0].trim();
-            } else {
-                outlastCost = outlastString.trim();
-            }
-            // Create outlast ability string
-            final StringBuilder abilityStr = new StringBuilder();
-            abilityStr.append("AB$ PutCounter | Cost$ ");
-            abilityStr.append(outlastCost);
-            abilityStr.append(" T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 ");
-            abilityStr.append("| SorcerySpeed$ True | Outlast$ True ");
-            if (outlastExtras != null) {
-                abilityStr.append("| ").append(outlastExtras[1]).append(" ");
-            }
-            abilityStr.append("| PrecostDesc$ Outlast ");
-            Cost cost = new Cost(outlastCost, true);
-            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                abilityStr.append("- ");
-            }
-            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ", {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)");
-            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-            card.addSpellAbility(sa);
-            // add ability to instrinic strings so copies/clones create the ability also
-            card.getUnparsedAbilities().add(abilityStr.toString());
-        }
-
-        if (card.hasStartOfKeyword("Fortify")) {
-            final int equipPos = card.getKeywordPosition("Fortify");
-            final String equipString = card.getKeyword().get(equipPos).substring(7);
-            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
-            // Get cost string
-            String equipCost = "";
-            if (equipExtras != null) {
-                equipCost = equipExtras[0].trim();
-            } else {
-                equipCost = equipString.trim();
-            }
-            // Create attach ability string
-            final StringBuilder abilityStr = new StringBuilder();
-            abilityStr.append("AB$ Attach | Cost$ ");
-            abilityStr.append(equipCost);
-            abilityStr.append(" | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control ");
-            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature ");
-            if (equipExtras != null) {
-                abilityStr.append("| ").append(equipExtras[1]).append(" ");
-            }
-            abilityStr.append("| PrecostDesc$ Fortify ");
-            Cost cost = new Cost(equipCost, true);
-            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
-                abilityStr.append("- ");
-            }
-            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
-            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target land you control. Fortify only as a sorcery.)");
- 
-            // instantiate attach ability
-            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
-            card.addSpellAbility(sa);
-            // add ability to intrinsic strings so copies/clones create the ability also
-            card.getUnparsedAbilities().add(abilityStr.toString());
-        }
-
-        if (card.hasStartOfKeyword("Bestow")) {
-            final int bestowPos = card.getKeywordPosition("Bestow");
-            final String[] params = card.getKeyword().get(bestowPos).split(":");
-            final String cost = params[1];
-            card.removeIntrinsicKeyword(card.getKeyword().get(bestowPos));       
-
-            final StringBuilder sbAttach = new StringBuilder();
-            sbAttach.append("SP$ Attach | Cost$ ");
-            sbAttach.append(cost);
-            sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
-            sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
-            final SpellAbility bestow = AbilityFactory.getAbility(sbAttach.toString(), card);
-
-            bestow.setDescription("Bestow " + ManaCostParser.parse(cost) + " (If you cast this"
-                    + " card for its bestow cost, it's an Aura spell with enchant creature. It"
-                    + " becomes a creature again if it's not attached to a creature.)");
-            bestow.setStackDescription("Bestow - " + card.getName());
-            bestow.setBasicSpell(false);
-            card.addSpellAbility(bestow);
-            card.getUnparsedAbilities().add(sbAttach.toString());
-
         }
 
         setupEtbKeywords(card);

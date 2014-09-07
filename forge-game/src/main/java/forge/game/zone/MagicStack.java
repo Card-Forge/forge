@@ -332,7 +332,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // TODO: make working triggered ability
             sp.setTotalManaSpent(totManaSpent);
             AbilityUtils.resolve(sp);
-        } else {
+        }
+        else {
             for (OptionalCost s : sp.getOptionalCosts()) {
                 source.addOptionalCostPaid(s);
             }
@@ -403,7 +404,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     sa.setTrigger(true);
                     addSimultaneousStackEntry(sa);
                 }
-
             }
         }
 
