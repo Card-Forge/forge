@@ -64,7 +64,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     protected boolean allowAwaitNextInput() {
-        return true;
+        return false;
     }
 
     private static final Timer awaitNextInputTimer = new Timer();

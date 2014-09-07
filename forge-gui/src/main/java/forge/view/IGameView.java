@@ -55,6 +55,7 @@ public interface IGameView {
     public abstract void selectButtonOk();
     public abstract void selectButtonCancel();
     public abstract boolean passPriority();
+    public abstract boolean passPriorityUntilEndOfTurn();
     public abstract void selectPlayer(PlayerView player, ITriggerEvent triggerEvent);
     public abstract void selectCard(CardView card, ITriggerEvent triggerEvent);
     public abstract void selectAbility(SpellAbilityView sa);

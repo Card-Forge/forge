@@ -19,8 +19,10 @@ package forge.ai.ability;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import forge.ai.AiCardMemory;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -168,6 +170,10 @@ public class ControlGainAi extends SpellAbilityAi {
 
             if (hasCreature) {
                 t = ComputerUtilCard.getBestCreatureAI(list);
+                if (lose != null && lose.contains("EOT")) {
+                    // Remember to always attack with this creature since it'll bounce back to its owner at end of turn anyway
+                    ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().rememberCard(t, AiCardMemory.MemorySet.MANDATORY_ATTACKERS);
+                }
             } else if (hasArtifact) {
                 t = ComputerUtilCard.getBestArtifactAI(list);
             } else if (hasLand) {

@@ -172,7 +172,7 @@ public class Combat {
                 return ab;
         }
         CombatLki lki = lkiCache.get(c); 
-        return lki == null ? null : lki.getFirstBand();
+        return lki == null || lki.isAttacker ? null : lki.getFirstBand();
     }
 
     public final List<AttackingBand> getAttackingBands() {

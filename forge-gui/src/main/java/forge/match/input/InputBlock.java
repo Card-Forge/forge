@@ -28,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
+import forge.util.ThreadUtil;
 import forge.util.gui.SGuiDialog;
 import forge.view.CardView;
 
@@ -90,14 +91,20 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void onOk() {
-        String blockErrors = CombatUtil.validateBlocks(combat, defender);
+        final String blockErrors = CombatUtil.validateBlocks(combat, defender);
         if (blockErrors == null) {
             // Done blocking
             setCurrentAttacker(null);
             stop();
         }
         else {
-            SGuiDialog.message(getGui(), blockErrors);
+            //must run in game thread to prevent problems for mobile game
+            ThreadUtil.invokeInGameThread(new Runnable() {
+                @Override
+                public void run() {
+                    SGuiDialog.message(getGui(), blockErrors);
+                }
+            });
         }
     }
 

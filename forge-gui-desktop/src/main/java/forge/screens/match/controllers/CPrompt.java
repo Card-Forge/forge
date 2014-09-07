@@ -101,6 +101,10 @@ public enum CPrompt implements ICDoc {
         return Singletons.getControl().getGameView().passPriority();
     }
 
+    public boolean passPriorityUntilEndOfTurn() {
+        return Singletons.getControl().getGameView().passPriorityUntilEndOfTurn();
+    }
+
     public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
         Singletons.getControl().getGameView().selectPlayer(player, triggerEvent);
     }

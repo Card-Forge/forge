@@ -34,7 +34,7 @@ public enum GameType {
             mainDeck.add("Island", 12);
             mainDeck.add("Swamp", 12);
             mainDeck.add("Mountain", 12);
-            mainDeck.add("Swamp", 12);
+            mainDeck.add("Forest", 12);
             deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                     .getCard("Momir Vig, Simic Visionary Avatar"), 1);
             return deck;

@@ -60,6 +60,7 @@ import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -94,6 +95,7 @@ public class AiController {
 
     private final Player player;
     private final Game game;
+    private final AiCardMemory memory;
     public boolean bCheatShuffle;
 
     public boolean canCheatShuffle() {
@@ -114,6 +116,10 @@ public class AiController {
         return player;
     }
 
+    public AiCardMemory getCardMemory() {
+        return memory;
+    }
+
     /**
      * <p>
      * Constructor for ComputerAI_General.
@@ -122,6 +128,7 @@ public class AiController {
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
+        memory = new AiCardMemory();
     }
 
     /**
@@ -628,6 +635,33 @@ public class AiController {
         return bestSA;
     } // playCounterSpell()
 
+    public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
+        final List<Card> cards = getAvailableCards();
+    
+        ArrayList<SpellAbility> all = getSpellAbilities(cards);
+        Collections.sort(all, saComparator); // put best spells first
+        
+        for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
+            if (sa.getApi() == ApiType.Counter || sa.getApi() == exceptSA) {
+                continue;
+            }
+            sa.setActivatingPlayer(player);
+            if (sa.canPlay() && !ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+                return sa;
+            }
+        }
+
+        return null;
+    }
+
+    public void reserveManaSourcesForMain2(SpellAbility sa) {
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+        ArrayList<Card> manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
+        for (Card c : manaSources) {
+            ((PlayerControllerAi)player.getController()).getAi().getCardMemory().rememberCard(c, AiCardMemory.MemorySet.HELD_MANA_SOURCES);
+        }
+    }
+    
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         if (!sa.canPlay()) {
@@ -1146,18 +1180,18 @@ public class AiController {
             SpellAbility counter = chooseCounterSpell(getPlayableCounters(cards));
             if( counter != null ) return counter;
     
-            SpellAbility counterETB = chooseSpellAbilyToPlay(this.getPossibleETBCounters(), false);
+            SpellAbility counterETB = chooseSpellAbilityToPlay(this.getPossibleETBCounters(), false);
             if( counterETB != null )
                 return counterETB;
         }
     
-        SpellAbility result = chooseSpellAbilyToPlay(getSpellAbilities(cards), true);
+        SpellAbility result = chooseSpellAbilityToPlay(getSpellAbilities(cards), true);
         if( null == result) 
             return null;
         return result;
     }
     
-    private SpellAbility chooseSpellAbilyToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
+    private SpellAbility chooseSpellAbilityToPlay(final ArrayList<SpellAbility> all, boolean skipCounter) {
         if ( all == null || all.isEmpty() )
             return null;
 

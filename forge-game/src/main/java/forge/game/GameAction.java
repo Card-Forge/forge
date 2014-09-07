@@ -176,6 +176,7 @@ public class GameAction {
             HashMap<String, Object> repParams = new HashMap<String, Object>();
             repParams.put("Event", "Moved");
             repParams.put("Affected", copied);
+            repParams.put("CardLKI", lastKnownInfo);
             repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
             repParams.put("Destination", zoneTo.getZoneType());
 

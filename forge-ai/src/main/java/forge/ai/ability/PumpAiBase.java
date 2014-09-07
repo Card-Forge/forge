@@ -3,13 +3,17 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import forge.ai.AiCardMemory;
+import forge.ai.AiController;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
@@ -439,6 +443,16 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
+        // determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+            // only hold mana sources once
+            SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Pump);
+            if (futureSpell != null && futureSpell.getHostCard() != null) {
+                aic.reserveManaSourcesForMain2(futureSpell);
+            }
+        }
+
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
@@ -448,7 +462,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return true;
         }
 
-        // buff attacker/blocker using using triggered pump
+        // buff attacker/blocker using triggered pump
         if (sa.isTrigger() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             if (phase.isPlayerTurn(ai)) {
                 if (CombatUtil.canAttack(c)) {

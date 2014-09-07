@@ -61,10 +61,7 @@ public enum CDock implements ICDoc {
      * End turn.
      */
     public void endTurn() {
-        game.autoPassUntilEndOfTurn();
-        if (!CPrompt.SINGLETON_INSTANCE.passPriority()) {
-            game.autoPassCancel();
-        }
+        CPrompt.SINGLETON_INSTANCE.passPriorityUntilEndOfTurn();
     }
 
     public void revertLayout() {

@@ -1422,6 +1422,11 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     }
 
     @Override
+    public boolean passPriorityUntilEndOfTurn() {
+        return getInputProxy().passPriorityUntilEndOfTurn();
+    }
+
+    @Override
     public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
         getInputProxy().selectPlayer(player, triggerEvent);
     }

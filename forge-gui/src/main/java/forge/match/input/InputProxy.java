@@ -58,8 +58,17 @@ public class InputProxy implements Observer {
     }
 
     public boolean passPriority() {
+        return passPriority(false);
+    }
+    public boolean passPriorityUntilEndOfTurn() {
+        return passPriority(true);
+    }
+    private boolean passPriority(final boolean passUntilEndOfTurn) {
         final Input inp = getInput();
         if (inp instanceof InputPassPriority) {
+            if (passUntilEndOfTurn) {
+                controller.autoPassUntilEndOfTurn();
+            }
             inp.selectButtonOK();
             return true;
         }
