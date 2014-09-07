@@ -302,18 +302,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
 
-
-     /**
-     * <p>
-     * isMultiKicker.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isMultiKicker() {
-        return this.multiKickerManaCost != null && !this.isAnnouncing("Multikicker");
-    }
-
     /**
      * <p>
      * setIsMorphUp.
@@ -384,14 +372,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public String getParamOrDefault(String key, String defaultValue) {
-        return mapParams == null || !mapParams.containsKey(key) ? defaultValue : mapParams.get(key);
+        return mapParams.containsKey(key) ? mapParams.get(key) : defaultValue;
     }
 
     public String getParam(String key) {
-        return mapParams == null ? null : mapParams.get(key);
+        return mapParams.get(key);
     }
     public boolean hasParam(String key) {
-        return mapParams == null ? false : mapParams.containsKey(key);
+        return mapParams.containsKey(key);
     }
 
     /**
@@ -399,9 +387,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * @param mapParams
      */
     public void copyParamsToMap(Map<String, String> mapParams) {
-        if (null != this.mapParams) {
-            mapParams.putAll(this.mapParams);
-        }
+        mapParams.putAll(this.mapParams);
     }
 
     // If this is not null, then ability was made in a factory
@@ -1355,7 +1341,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public boolean isAnnouncing(String variable) {
         String announce = getParam("Announce");
-        if (StringUtils.isBlank(announce)) return false;
+        if (StringUtils.isBlank(announce)) { return false; }
+
         String[] announcedOnes = TextUtil.split(announce, ',');
         for (String a : announcedOnes) {
             if (a.trim().equalsIgnoreCase(variable)) {
@@ -1363,6 +1350,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         return false;
+    }
+
+    public void addAnnounceVar(String variable) {
+        String announce = getParam("Announce");
+        if (StringUtils.isBlank(announce)) {
+            mapParams.put("Announce", variable);
+            return;
+        }
+        String[] announcedOnes = TextUtil.split(announce, ',');
+        for (String a : announcedOnes) {
+            if (a.trim().equalsIgnoreCase(variable)) {
+                return; //don't add announce variable that already exists
+            }
+        }
+        mapParams.put("Announce", announce + ";" + variable);
     }
 
     public boolean isXCost() {

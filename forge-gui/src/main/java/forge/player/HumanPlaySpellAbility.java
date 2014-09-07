@@ -198,24 +198,27 @@ public class HumanPlaySpellAbility {
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");
         if (announce != null) {
+            PlayerController controller = ability.getActivatingPlayer().getController();
+            Card card = ability.getHostCard();
+            boolean allowZero = !ability.hasParam("XCantBe0");
+            CostPartMana manaCost = ability.getPayCosts().getCostMana();
+
             for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
 
                 boolean isX = "X".equalsIgnoreCase(varName);
-                CostPartMana manaCost = ability.getPayCosts().getCostMana();
-                boolean allowZero = !ability.hasParam("XCantBe0") && (!isX || manaCost == null || manaCost.canXbe0());
 
-                Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, varName, allowZero);
+                Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
                 if (value == null) {
                     return false;
                 }
 
                 ability.setSVar(varName, value.toString());
                 if ("Multikicker".equals(varName)) {
-                    ability.getHostCard().setKickerMagnitude(value);
+                    card.setKickerMagnitude(value);
                 }
                 else {
-                    ability.getHostCard().setSVar(varName, value.toString());
+                    card.setSVar(varName, value.toString());
                 }
             }
         }

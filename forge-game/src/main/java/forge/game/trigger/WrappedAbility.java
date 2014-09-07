@@ -244,11 +244,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public boolean isMultiKicker() {
-        return sa.isMultiKicker();
-    }
-
-    @Override
     public boolean isSpell() {
         return sa.isSpell();
     }

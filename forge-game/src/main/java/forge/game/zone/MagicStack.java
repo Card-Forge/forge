@@ -340,20 +340,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 si = this.push(sp);
             }
             else {
-                if (sp.isMultiKicker()) {
-                    final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
-                    boolean hasPaid = false;
-                    do {
-                        int mkMagnitude = source.getKickerMagnitude();
-                        String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", source, mkMagnitude );
-                        hasPaid = activator.getController().payManaOptional(source, costMultikicker, sp, prompt, ManaPaymentPurpose.Multikicker);
-                        if  (hasPaid) {
-                            source.addMultiKickerMagnitude(1);
-                            totManaSpent += sp.getPayingMana().size();
-                            // TODO: paying mana is replaced by multikicker cost, this should be fixed in the future
-                        }
-                    } while( hasPaid );
-                }
                 if (sp.isSpell() && source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
                         CardPredicates.hasKeyword("As an additional cost to cast creature spells," +
                         		" you may pay any amount of mana. If you do, that creature enters " +

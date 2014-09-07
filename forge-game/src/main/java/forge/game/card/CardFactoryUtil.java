@@ -2136,9 +2136,10 @@ public class CardFactoryUtil {
 
                 final SpellAbility sa = card.getFirstSpellAbility();
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
+                sa.addAnnounceVar("Multikicker");
             }
         }
-        
+
         if (hasKeyword(card, "Fuse") != -1) {
             card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
         }
@@ -2732,7 +2733,7 @@ public class CardFactoryUtil {
             // instantiate attach ability
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             card.addSpellAbility(sa);
-            // add ability to instrinic strings so copies/clones create the ability also
+            // add ability to intrinsic strings so copies/clones create the ability also
             card.getUnparsedAbilities().add(abilityStr.toString());
         }
 
