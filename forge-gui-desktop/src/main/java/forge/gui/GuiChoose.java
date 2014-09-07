@@ -21,11 +21,11 @@ import com.google.common.collect.Iterables;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.Singletons;
 import forge.item.InventoryItem;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -207,14 +207,10 @@ public class GuiChoose {
                 list.addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(final ListSelectionEvent ev) {
-                        if (list.getSelectedValue() instanceof CardView) {
-                            final CardView card = (CardView) list.getSelectedValue();
-                            if (card.isFaceDown() && Singletons.getControl().mayShowCard(card)) {
-                                CMatchUI.SINGLETON_INSTANCE.setCard(card, true);
-                            }
-                            else {
-                                CMatchUI.SINGLETON_INSTANCE.setCard(card);
-                            }
+                        final T sel = list.getSelectedValue();
+                        if (sel instanceof CardStateView) {
+                            final CardView card = ((CardStateView) sel).getCard();
+                            CMatchUI.SINGLETON_INSTANCE.setCard(card);
 
                             GuiUtils.clearPanelSelections();
                             GuiUtils.setPanelSelection(card);

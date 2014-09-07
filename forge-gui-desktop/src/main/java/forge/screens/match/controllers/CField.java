@@ -17,11 +17,9 @@
  */
 package forge.screens.match.controllers;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 
 import com.google.common.base.Function;
 
@@ -32,7 +30,6 @@ import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
 import forge.match.input.Input;
 import forge.match.input.InputPayMana;
-import forge.properties.ForgePreferences;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
@@ -64,38 +61,17 @@ public class CField implements ICDoc {
      * @param v0 &emsp; {@link forge.screens.match.views.VField}
      * @param playerViewer 
      */
-    @SuppressWarnings("serial")
     public CField(final PlayerView player2, final VField v0, LobbyPlayer playerViewer) {
         this.player = player2;
         this.viewer = playerViewer;
         this.view = v0;
 
-        final ZoneAction handAction = new ZoneAction(player.getHandCards(), MatchConstants.HUMANHAND) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (player.getLobbyPlayer() == viewer || ForgePreferences.DEV_MODE) {// || player.hasKeyword("Play with your hand revealed."))
-                    super.actionPerformed(e);
-                }
-            }
-        };
-
-        final ZoneAction libraryAction = new ZoneAction(player.getLibraryCards(), MatchConstants.HUMANLIBRARY) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (ForgePreferences.DEV_MODE) {
-                    super.actionPerformed(e);
-                }
-            }
-        };
-
-        final ZoneAction exileAction = new ZoneAction(player.getExileCards(), MatchConstants.HUMANEXILED);
-        final ZoneAction graveAction = new ZoneAction(player.getGraveCards(), MatchConstants.HUMANGRAVEYARD);
+        final ZoneAction handAction      = new ZoneAction(player.getHandCards(),      MatchConstants.HUMANHAND);
+        final ZoneAction libraryAction   = new ZoneAction(player.getLibraryCards(),   MatchConstants.HUMANLIBRARY);
+        final ZoneAction exileAction     = new ZoneAction(player.getExileCards(),     MatchConstants.HUMANEXILED);
+        final ZoneAction graveAction     = new ZoneAction(player.getGraveCards(),     MatchConstants.HUMANGRAVEYARD);
+        @SuppressWarnings("serial")
         final ZoneAction flashBackAction = new ZoneAction(player.getFlashbackCards(), MatchConstants.HUMANFLASHBACK) {
-            @Override
-            protected List<CardView> getCardsAsIterable() {
-                return player.getFlashbackCards();
-            }
-
             @Override
             protected void doAction(final CardView c) {
                 // activate cards only via your own flashback button
@@ -104,21 +80,6 @@ public class CField implements ICDoc {
                 }
 
                 CPrompt.SINGLETON_INSTANCE.selectCard(c, null);
-                // Temporarily commenting out the below to route, Flashback cards through the InputProxy
-                /*
-                final Game game = player.getGame();
-                // TODO: "can play" check needed!
-
-                // should I check for who owns these cards? Are there any abilities to be played from opponent's graveyard? 
-                final SpellAbility ab = player.getController().getAbilityToPlay(c.getAllPossibleAbilities(player, true));
-                if ( null != ab) {
-                    game.getAction().invoke(new Runnable(){ 
-                    	@Override public void run() {
-                    		HumanPlay.playSpellAbility(player, ab);
-                    		game.getStack().addAllTirggeredAbilitiesToStack();
-                    }});
-                }
-                */
             }
         };
 
@@ -143,12 +104,7 @@ public class CField implements ICDoc {
     public void initialize() {
         if (initializedAlready) { return; }
         initializedAlready = true;
-    
-        // Observers
-//        CField.this.player.getZone(ZoneType.Hand).addObserver(observerZones);
-//        CField.this.player.getZone(ZoneType.Battlefield).addObserver(observerPlay);
-//        CField.this.player.addObserver(observerDetails);
-    
+
         // Listeners
         // Player select
         this.view.getAvatarArea().addMouseListener(madAvatar);

@@ -30,7 +30,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
@@ -44,7 +43,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.CardView;
 import forge.view.CardView.CardStateView;
-import forge.view.FDialog;
 import forge.view.ViewUtil;
 
 /**
@@ -132,7 +130,7 @@ public class CardDetailPanel extends SkinnedPanel {
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");
         cdArea.setText(CardDetailUtil.getItemDescription(item));
-        this.updateBorder(item instanceof IPaperCard ? ViewUtil.getCardForUi((IPaperCard)item).getState() : null, false);
+        this.updateBorder(item instanceof IPaperCard ? ViewUtil.getCardForUi((IPaperCard)item).getOriginal() : null, false);
 
         String set = item.getEdition();
         setInfoLabel.setText(set);
@@ -186,61 +184,60 @@ public class CardDetailPanel extends SkinnedPanel {
 
         boolean canShowThis = false;
 
-        if (Singletons.getControl().mayShowCard(card) || FDialog.isModalOpen()) { //allow showing cards while modal open to account for revealing, picking, and ordering cards
-            canShowThis = true;
+        //if (Singletons.getControl().mayShowCard(card) || FDialog.isModalOpen()) { //allow showing cards while modal open to account for revealing, picking, and ordering cards
+        canShowThis = true;
 
-            if (state.getManaCost().isNoCost()) {
-                this.nameCostLabel.setText(state.getName());
-            } else {
-                String manaCost = state.getManaCost().toString();
-                //if (state.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
-                //    manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
-                //}
-                this.nameCostLabel.setText(FSkin.encodeSymbols(state.getName() + " - " + manaCost, true));
+        if (state.getManaCost().isNoCost()) {
+            this.nameCostLabel.setText(state.getName());
+        } else {
+            String manaCost = state.getManaCost().toString();
+            //if (state.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
+            //    manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
+            //}
+            this.nameCostLabel.setText(FSkin.encodeSymbols(state.getName() + " - " + manaCost, true));
+        }
+        this.typeLabel.setText(CardDetailUtil.formatCardType(state));
+
+        String set = card.getSetCode();
+        this.setInfoLabel.setText(set);
+        if (null != set && !set.isEmpty()) {
+            CardEdition edition = FModel.getMagicDb().getEditions().get(set);
+            if (null == edition) {
+                setInfoLabel.setToolTipText(card.getRarity().name());
             }
-            this.typeLabel.setText(CardDetailUtil.formatCardType(state));
-            
-            String set = card.getSetCode();
-            this.setInfoLabel.setText(set);
-            if (null != set && !set.isEmpty()) {
-                CardEdition edition = FModel.getMagicDb().getEditions().get(set);
-                if (null == edition) {
-                    setInfoLabel.setToolTipText(card.getRarity().name());
-                }
-                else {
-                    setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), card.getRarity().name()));
-                }
-
-                this.setInfoLabel.setOpaque(true);
-
-                Color backColor;
-                switch(card.getRarity()) {
-                case Uncommon:
-                    backColor = fromDetailColor(DetailColors.UNCOMMON);
-                    break;
-
-                case Rare:
-                    backColor = fromDetailColor(DetailColors.RARE);
-                    break;
-
-                case MythicRare:
-                    backColor = fromDetailColor(DetailColors.MYTHIC);
-                    break; 
-
-                case Special: //"Timeshifted" or other Special Rarity Cards
-                    backColor = fromDetailColor(DetailColors.SPECIAL);
-                    break;
-
-                default: //case BasicLand: + case Common:
-                    backColor = fromDetailColor(DetailColors.COMMON);
-                    break;
-                }
-
-                Color foreColor = FSkin.getHighContrastColor(backColor);
-                this.setInfoLabel.setBackground(backColor);
-                this.setInfoLabel.setForeground(foreColor);
-                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(foreColor));
+            else {
+                setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), card.getRarity().name()));
             }
+
+            this.setInfoLabel.setOpaque(true);
+
+            Color backColor;
+            switch(card.getRarity()) {
+            case Uncommon:
+                backColor = fromDetailColor(DetailColors.UNCOMMON);
+                break;
+
+            case Rare:
+                backColor = fromDetailColor(DetailColors.RARE);
+                break;
+
+            case MythicRare:
+                backColor = fromDetailColor(DetailColors.MYTHIC);
+                break; 
+
+            case Special: //"Timeshifted" or other Special Rarity Cards
+                backColor = fromDetailColor(DetailColors.SPECIAL);
+                break;
+
+            default: //case BasicLand: + case Common:
+                backColor = fromDetailColor(DetailColors.COMMON);
+                break;
+            }
+
+            Color foreColor = FSkin.getHighContrastColor(backColor);
+            this.setInfoLabel.setBackground(backColor);
+            this.setInfoLabel.setForeground(foreColor);
+            this.setInfoLabel.setBorder(BorderFactory.createLineBorder(foreColor));
         }
 
         this.updateBorder(state, canShowThis);

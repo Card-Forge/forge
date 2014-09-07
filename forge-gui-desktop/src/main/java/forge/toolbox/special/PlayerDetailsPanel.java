@@ -19,13 +19,11 @@ import com.google.common.base.Function;
 import forge.assets.FSkinProp;
 import forge.card.MagicColor;
 import forge.gui.ForgeAction;
-import forge.properties.ForgePreferences;
 import forge.screens.match.controllers.CPlayers;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.view.PlayerView;
-
 
 public class PlayerDetailsPanel extends JPanel {
     private static final long serialVersionUID = 8444559244193214459L;
@@ -209,10 +207,8 @@ public class PlayerDetailsPanel extends JPanel {
         lblExile.setHoverable(true);
         lblExile.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } } );
     
-        if (ForgePreferences.DEV_MODE) {
-            lblLibrary.setHoverable(true);
-            lblLibrary.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { libraryAction.actionPerformed(null); } } );
-        }
+        lblLibrary.setHoverable(true);
+        lblLibrary.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { libraryAction.actionPerformed(null); } } );
     
         lblHand.setHoverable(true);
         lblHand.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { handAction.actionPerformed(null); } } );

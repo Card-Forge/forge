@@ -8859,9 +8859,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         case Graveyard:
         case Stack:
             //cards in these zones are visible to all
-            if (isFaceDown() && getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
-                break; //exception is face down cards controlled by opponents
-            }
             return true;
         case Hand:
             if (getController().hasKeyword("Play with your hand revealed.")) {
@@ -8904,6 +8901,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         return false;
+    }
+
+    public boolean canCardFaceBeShownTo(final Player viewer) {
+        if (!this.isFaceDown()) {
+            return true;
+        }
+        return !getController().isOpponentOf(viewer) || hasKeyword("Your opponent may look at this card.");
     }
 
     /**

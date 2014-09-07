@@ -145,7 +145,7 @@ public enum CCombat implements ICDoc {
      */
     private static String combatantToString(final CardView c) {
         final StringBuilder sb = new StringBuilder();
-        final CardStateView state = c.getState();
+        final CardStateView state = c.getOriginal();
 
         final String name = state.getName();
 

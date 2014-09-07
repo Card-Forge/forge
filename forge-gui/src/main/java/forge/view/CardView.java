@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
+import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ColorSet;
@@ -26,7 +27,7 @@ public class CardView extends GameEntityView {
 
     private boolean hasAltState;
 
-    private final int id;
+    private int id;
     /** Will be false for {@link forge.game.ability.effects.DetachedCardEffect}. */
     private final boolean isUiDisplayable;
     private PlayerView owner, controller;
@@ -57,14 +58,14 @@ public class CardView extends GameEntityView {
     private Iterable<CardView> mustBlock;
     private CardView pairedWith;
 
-    public CardView(final int id, final boolean isUiDisplayable) {
-        this.id = id;
+    public CardView(final boolean isUiDisplayable) {
         this.isUiDisplayable = isUiDisplayable;
         this.reset();
     }
 
     public void reset() {
         final Iterable<CardView> emptyIterable = ImmutableSet.of();
+        this.id = 0;
         this.hasAltState = false;
         this.owner = null;
         this.controller = null;
@@ -98,6 +99,9 @@ public class CardView extends GameEntityView {
         this.hauntedBy = emptyIterable;
         this.haunting = null;
         this.mustBlock = emptyIterable;
+
+        this.original.reset();
+        this.alternate.reset();
     }
 
     /**
@@ -105,6 +109,10 @@ public class CardView extends GameEntityView {
      */
     public int getId() {
         return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public boolean isUiDisplayable() {
@@ -165,10 +173,6 @@ public class CardView extends GameEntityView {
      */
     public void setHasAltState(final boolean hasAltState) {
         this.hasAltState = hasAltState;
-    }
-
-    public boolean isInAltState() {
-        return this.isFaceDown || this.isFlipped || this.isTransformed;
     }
 
     /**
@@ -435,7 +439,7 @@ public class CardView extends GameEntityView {
     }
 
     public int getLethalDamage() {
-        return this.getState().getToughness() - this.getDamage() - this.getAssignedDamage();
+        return this.getOriginal().getToughness() - this.getDamage() - this.getAssignedDamage();
     }
 
     /**
@@ -743,13 +747,9 @@ public class CardView extends GameEntityView {
         return alternate ? this.alternate : this.original;
     }
 
-    public CardStateView getState() {
-        return this.getState(this.isInAltState());
-    }
-
     @Override
-    public final String toString() {
-        return this.getState().toString();
+    public String toString() {
+        return this.getOriginal().toString();
     }
 
     public class CardStateView {
@@ -769,10 +769,11 @@ public class CardView extends GameEntityView {
         }
 
         public void reset() {
+            this.name = StringUtils.EMPTY;
             this.colors = ColorSet.getNullColor();
-            this.imageKey = StringUtils.EMPTY;
+            this.imageKey = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
             this.type = Collections.emptyList();
-            this.manaCost = null;
+            this.manaCost = ManaCost.NO_COST;
             this.power = 0;
             this.toughness = 0;
             this.loyalty = 0;
@@ -787,6 +788,9 @@ public class CardView extends GameEntityView {
 
         @Override
         public String toString() {
+            if (StringUtils.isEmpty(this.getName()) && this.getCard().getId() <= 0) {
+                return "(Unknown card)";
+            }
             return this.getName() + " (" + this.getCard().getId() + ")";
         }
 

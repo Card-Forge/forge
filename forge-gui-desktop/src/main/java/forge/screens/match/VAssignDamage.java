@@ -152,9 +152,9 @@ public class VAssignDamage {
         // Set damage storage vars
         this.totalDamageToAssign = damage0;
         this.defender = defender;
-        this.attackerHasDeathtouch = attacker.getState().hasDeathtouch();
-        this.attackerHasInfect = attacker.getState().hasInfect();
-        this.attackerHasTrample = defender != null && attacker.getState().hasTrample();
+        this.attackerHasDeathtouch = attacker.getOriginal().hasDeathtouch();
+        this.attackerHasInfect = attacker.getOriginal().hasInfect();
+        this.attackerHasTrample = defender != null && attacker.getOriginal().hasTrample();
         this.overrideCombatantOrder = overrideOrder;
 
         // Top-level UI stuff
@@ -198,14 +198,14 @@ public class VAssignDamage {
             if (defender instanceof CardView) 
                 fakeCard = (CardView)defender;
             else if (defender instanceof PlayerView) { 
-                fakeCard = new CardView(-1, true);
-                fakeCard.getState().setName(this.defender.toString());
+                fakeCard = new CardView(true);
+                fakeCard.getOriginal().setName(this.defender.toString());
                 final PlayerView p = (PlayerView)defender;
                 fakeCard.setOwner(p);
-                fakeCard.getState().setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
+                fakeCard.getOriginal().setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
             } else {
-                fakeCard = new CardView(-2, true);
-                fakeCard.getState().setName(this.defender.toString());
+                fakeCard = new CardView(true);
+                fakeCard.getOriginal().setName(this.defender.toString());
             }
             addPanelForDefender(pnlDefenders, fakeCard);
         }        
@@ -450,7 +450,7 @@ public class VAssignDamage {
                 lethalDamage = attackerHasInfect ? FControl.instance.getGameView().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
             } else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;
-                lethalDamage = pw.getState().getLoyalty();
+                lethalDamage = pw.getOriginal().getLoyalty();
             }
         } else {
             lethalDamage = VAssignDamage.this.attackerHasDeathtouch ? 1 : Math.max(0, card.getLethalDamage());

@@ -67,7 +67,7 @@ public enum CPicture implements ICDoc {
         }
 
         currentView = c;
-        isDisplayAlt = false;
+        isDisplayAlt = showAlt;
         flipIndicator.setVisible(c.hasAltState());
         picturePanel.setCard(c.getState(showAlt));
         if (showAlt && c.hasAltState()) {
@@ -167,6 +167,7 @@ public enum CPicture implements ICDoc {
         if (currentView.hasAltState()) {
             isDisplayAlt = !isDisplayAlt;
             picturePanel.setCard(currentView.getState(isDisplayAlt));
+            CDetail.SINGLETON_INSTANCE.showCard(currentView, isDisplayAlt);
         }
     }
 

@@ -19,7 +19,6 @@ package forge.screens.match.controllers;
 
 import java.awt.event.MouseEvent;
 
-import forge.Singletons;
 import forge.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.IPaperCard;
@@ -50,7 +49,7 @@ public enum CDetail implements ICDoc {
     }
 
     public void showCard(final CardView c, final boolean isInAltState) {
-        view.getLblFlipcard().setVisible(c != null && c.hasAltState() && Singletons.getControl().mayShowCard(c));
+        view.getLblFlipcard().setVisible(c != null && c.hasAltState());
         view.getPnlDetail().setCard(c, isInAltState);
         if (view.getParentCell() != null) {
             view.getParentCell().repaintSelf();

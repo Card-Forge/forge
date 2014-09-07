@@ -29,7 +29,6 @@ import forge.util.ITriggerEvent;
 import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
-import forge.view.IGameView;
 import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
 
@@ -40,7 +39,6 @@ public interface IGuiBase {
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();
     String getAssetsDir();
-    boolean mayShowCard(CardView card);
     ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
@@ -63,7 +61,6 @@ public interface IGuiBase {
     void showPromptMessage(String message);
     boolean stopAtPhase(PlayerView playerTurn, PhaseType phase);
     InputQueue getInputQueue();
-    IGameView getGame();
     IButton getBtnOK();
     IButton getBtnCancel();
     void focusButton(IButton button);

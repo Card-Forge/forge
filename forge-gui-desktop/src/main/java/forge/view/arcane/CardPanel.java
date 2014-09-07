@@ -35,7 +35,6 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.ImageCache;
-import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
 import forge.gui.CardContainer;
@@ -327,7 +326,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (this.getCard() != null && Singletons.getControl().mayShowCard(this.getCard()) && !this.getCard().isFaceDown()) {
+        if (this.getCard() != null && !this.getCard().isFaceDown()) {
             CardEdition ed = FModel.getMagicDb().getEditions().get(this.getCard().getSetCode());
             if (ed != null && ed.isWhiteBorder() && this.getCard().getFoilIndex() == 0) {
                 g2d.setColor(Color.white);
@@ -360,7 +359,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (showCardManaCostOverlay() && this.cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard();
             if (!showSplitMana) {
-                drawManaCost(g, card.getState().getManaCost(), 0);
+                drawManaCost(g, card.getOriginal().getManaCost(), 0);
             } else {
                 drawManaCost(g, card.getOriginal().getManaCost(), +12);
                 drawManaCost(g, card.getAlternate().getManaCost(), -12);
@@ -610,23 +609,18 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Card name overlay
-        if (card.isFaceDown()) {
-            this.titleText.setText("");
-        }
-        else {
-            this.titleText.setText(card.getState().getName());
-        }
+        this.titleText.setText(card.getOriginal().getName());
 
         int damage = card.getDamage();
         this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
         // Card Id overlay
         this.cardIdText.setText(Integer.toString(card.getId()));
-    }
+    } 
 
     public final void updatePTOverlay() {
         // P/T overlay
-        final CardStateView state = card.getState();
+        final CardStateView state = card.getOriginal();
         String sPt = "";
         if (state.isCreature() && state.isPlaneswalker()) {
             sPt = String.format("%d/%d (%d)", state.getPower(), state.getToughness(), state.getLoyalty());
@@ -790,7 +784,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private boolean isShowingOverlays() {
-        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS) && this.card != null && Singletons.getControl().mayShowCard(this.card);
+        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS) && this.card != null;
     }
 
     private boolean showCardNameOverlay() {

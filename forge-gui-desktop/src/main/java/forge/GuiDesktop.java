@@ -36,7 +36,6 @@ import forge.game.Match;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
 import forge.game.player.RegisteredPlayer;
-//import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.BoxedProductCardListViewer;
 import forge.gui.CardListViewer;
@@ -77,7 +76,6 @@ import forge.util.ITriggerEvent;
 import forge.view.CardView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
-import forge.view.IGameView;
 import forge.view.PlayerView;
 import forge.view.SpellAbilityView;
 
@@ -128,11 +126,6 @@ public class GuiDesktop implements IGuiBase {
     public String getAssetsDir() {
         return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
                 "../forge-gui/" : "";
-    }
-
-    @Override
-    public boolean mayShowCard(CardView card) {
-        return Singletons.getControl().mayShowCard(card);
     }
 
     @Override
@@ -406,12 +399,6 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public InputQueue getInputQueue() {
         return FControl.instance.getInputQueue();
-    }
-
-    @Override
-    @Deprecated
-    public IGameView getGame() {
-        return FControl.instance.getGameView();
     }
 
     public Object showManaPool(final PlayerView player) {

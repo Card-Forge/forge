@@ -5,6 +5,7 @@ import java.util.Collections;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.game.card.CardCharacteristics;
+import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.view.CardView.CardStateView;
 
@@ -22,12 +23,13 @@ public final class ViewUtil {
      * @param view
      *            the {@link CardView} to write to.
      */
-    public static void writeNonDependentCardViewProperties(final Card c, final CardView view) {
-        final boolean hasAltState = c.isDoubleFaced() || c.isFlipCard() || c.isFaceDown();
+    public static void writeNonDependentCardViewProperties(final Card c, final CardView view, final Player viewer) {
+        final boolean hasAltState = c.isDoubleFaced() || c.isFlipCard() || c.isSplitCard() || (c.isFaceDown() && (viewer == null || c.canCardFaceBeShownTo(viewer)));
+        view.setId(c.getUniqueNumber());
         view.setZone(c.getZone() == null ? null : c.getZone().getZoneType());
         view.setHasAltState(hasAltState);
         view.setFaceDown(c.isFaceDown());
-        view.setFoilIndex(c.getFoil());
+        view.setFoilIndex(c.getFoil()); 
         view.setCloned(c.isCloned());
         view.setFlipCard(c.isFlipCard());
         view.setFlipped(c.getCurState().equals(CardCharacteristicName.Flipped));
@@ -48,11 +50,17 @@ public final class ViewUtil {
         view.setChosenType(c.getChosenType());
         view.setChosenColors(c.getChosenColor());
         view.setNamedCard(c.getNamedCard());
-    
+
+        if (c.isSplitCard()) {
+            writeCardStateViewProperties(c, view.getOriginal(), CardCharacteristicName.LeftSplit);
+            writeCardStateViewProperties(c, view.getAlternate(), CardCharacteristicName.RightSplit);
+            return;
+        }
+
         final CardStateView origView = view.getOriginal();
         origView.setName(c.getName());
         origView.setColors(c.determineColor());
-        origView.setImageKey(c.getImageKey());
+        origView.setImageKey(c.getImageKey() );
         origView.setType(Collections.unmodifiableList(c.getType()));
         origView.setManaCost(c.getManaCost());
         origView.setPower(c.getNetAttack());
@@ -62,25 +70,20 @@ public final class ViewUtil {
         origView.setChangedColorWords(c.getChangedTextColorWords());
         origView.setChangedTypes(c.getChangedTextTypeWords());
         origView.setManaCost(c.getManaCost());
-    
+
         final CardStateView altView = view.getAlternate();
         CardCharacteristicName altState = null;
         if (hasAltState) {
-            for (final CardCharacteristicName s : c.getStates()) {
-                if (!s.equals(CardCharacteristicName.Original) && !s.equals(CardCharacteristicName.FaceDown)) {
-                    altState = s;
-                }
+            if (c.isFlipCard() && !c.getCurState().equals(CardCharacteristicName.Flipped)) {
+                altState = CardCharacteristicName.Flipped;
+            } else if (c.isDoubleFaced() && !c.getCurState().equals(CardCharacteristicName.Transformed)) {
+                altState = CardCharacteristicName.Transformed;
+            } else {
+                altState = CardCharacteristicName.Original;
             }
+
             if (altState != null) {
-                final CardCharacteristics alt = c.getState(altState);
-                altView.setName(alt.getName());
-                altView.setColors(alt.determineColor());
-                altView.setImageKey(alt.getImageKey());
-                altView.setType(Collections.unmodifiableList(alt.getType()));
-                altView.setManaCost(alt.getManaCost());
-                altView.setPower(alt.getBaseAttack());
-                altView.setPower(alt.getBaseDefense());
-                altView.setLoyalty(0); // FIXME why is loyalty not a property of CardCharacteristic?
+                writeCardStateViewProperties(c, altView, altState);
             }
         }
 
@@ -89,10 +92,23 @@ public final class ViewUtil {
         }
     }
 
+    private static void writeCardStateViewProperties(final Card c, final CardStateView view, final CardCharacteristicName state) {
+        final CardCharacteristics chars = c.getState(state);
+        view.setName(chars.getName());
+        view.setColors(chars.determineColor());
+        view.setImageKey(chars.getImageKey());
+        view.setType(Collections.unmodifiableList(chars.getType()));
+        view.setManaCost(chars.getManaCost());
+        view.setPower(chars.getBaseAttack());
+        view.setToughness(chars.getBaseDefense());
+        view.setLoyalty(0); // FIXME why is loyalty not a property of CardCharacteristic?
+        view.setText(chars.getOracleText());
+    }
+
     public static CardView getCardForUi(final IPaperCard pc) {
         final Card c = Card.getCardForUi(pc);
-        final CardView view = new CardView(-1, true);
-        writeNonDependentCardViewProperties(c, view);
+        final CardView view = new CardView(true);
+        writeNonDependentCardViewProperties(c, view, null);
         return view;
     }
 }

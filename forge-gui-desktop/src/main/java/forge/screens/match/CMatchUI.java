@@ -251,7 +251,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
         // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
         final CardView firstBlocker = blockers.get(0);
-        if (!overrideOrder && !attacker.getState().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
+        if (!overrideOrder && !attacker.getOriginal().hasDeathtouch() && firstBlocker.getLethalDamage() >= damage) {
             final Map<CardView, Integer> res = Maps.newHashMap();
             res.put(firstBlocker, damage);
             return res;
@@ -282,7 +282,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     public void setCard(final CardView c) {
-        this.setCard(c, c.isInAltState());
+        this.setCard(c, false);
     }
 
     public void setCard(final CardView c, final boolean isInAltState) {

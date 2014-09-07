@@ -43,6 +43,7 @@ public class CardCharacteristics {
     private List<String> type = new CopyOnWriteArrayList<String>();
     private ManaCost manaCost = ManaCost.NO_COST;
     private List<CardColor> cardColor = new ArrayList<CardColor>();
+    private String oracleText = "";
     private int baseAttack = 0;
     private int baseDefense = 0;
     private List<String> intrinsicKeyword = new ArrayList<String>();
@@ -143,6 +144,20 @@ public class CardCharacteristics {
         if (!this.cardColor.isEmpty()) {
             this.cardColor = Lists.newArrayList(this.cardColor.subList(0, 1));
         }
+    }
+
+    /**
+     * @return the oracleText
+     */
+    public String getOracleText() {
+        return oracleText;
+    }
+
+    /**
+     * @param oracleText the oracleText to set
+     */
+    public void setOracleText(final String oracleText) {
+        this.oracleText = oracleText;
     }
 
     /**

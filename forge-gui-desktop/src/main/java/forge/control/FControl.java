@@ -51,7 +51,6 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.Player;
-//import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -93,7 +92,6 @@ import forge.toolbox.special.PhaseIndicator;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
-import forge.view.CardView;
 import forge.view.FFrame;
 import forge.view.FView;
 import forge.view.IGameView;
@@ -373,10 +371,6 @@ public enum FControl implements KeyEventDispatcher {
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 
-    public boolean mayShowCard(final CardView c) {
-        return gameView == null || !gameHasHumanPlayer || gameView.mayShowCard(c);
-    }
-
     /**
      * TODO: Write javadoc for this method.
      * @return
@@ -387,7 +381,6 @@ public enum FControl implements KeyEventDispatcher {
 
     private Game game;
     private IGameView gameView;
-    private boolean gameHasHumanPlayer;
 
     public IGameView getGameView() {
         return this.gameView;
@@ -436,10 +429,12 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public final void startGameInSameMatch() {
-        this.startGameWithUi(game.getMatch());
+        this.startGameWithUi(this.game.getMatch());
     }
     public final void startGameAndClearMatch() {
-        game.getMatch().clearGamesPlayed();
+        if (this.game != null) {
+            this.game.getMatch().clearGamesPlayed();
+        }
         startGameInSameMatch();
     }
 
@@ -480,7 +475,7 @@ public enum FControl implements KeyEventDispatcher {
         if (this.gameView == null) { return; }
 
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
-        this.game = null;
+
         this.gameView = null;
     }
 
@@ -507,11 +502,9 @@ public enum FControl implements KeyEventDispatcher {
         CMatchUI.SINGLETON_INSTANCE.initMatch(game0, players, humanLobbyPlayer);
 
         localPlayer = null;
-        gameHasHumanPlayer = false;
         for (final PlayerView p : players) {
             if (p.getLobbyPlayer() == humanLobbyPlayer) {
                 localPlayer = p;
-                gameHasHumanPlayer = true;
                 break;
             }
         }
@@ -538,10 +531,6 @@ public enum FControl implements KeyEventDispatcher {
             playbackControl = new FControlGamePlayback(controller);
             playbackControl.setGame(game);
             game0.subscribeToEvents(playbackControl);
-        }
-
-        for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            field.getDetailsPanel().getLblLibrary().setHoverable(ForgePreferences.DEV_MODE);
         }
 
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch

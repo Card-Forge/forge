@@ -70,7 +70,7 @@ public class ImageCache {
             _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
         }
     }
-    
+
     public static void clear() {
         _CACHE.invalidateAll();
         _missingIconKeys.clear();
@@ -81,12 +81,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(final CardView card, final int width, final int height) {
-        final String key;
-        if (!Singletons.getControl().mayShowCard(card)) {
-            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
-        } else {
-            key = card.getOriginal().getImageKey();
-        }
+        final String key = card.getOriginal().getImageKey();
         return scaleImage(key, width, height, true);
     }
 

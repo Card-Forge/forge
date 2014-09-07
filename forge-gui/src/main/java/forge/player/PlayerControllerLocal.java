@@ -1581,17 +1581,26 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
         final CardView view;
         if (cards.containsKey(cUi)) {
             view = cards.get(cUi);
+        } else {
+            view = new CardView(cUi == c);
+            cards.put(cUi, view);
+        }
+
+        if (mayShowCard(view)) {
             writeCardToView(cUi, view);
         } else {
-            view = new CardView(cUi.getUniqueNumber(), cUi == c);
-            cards.put(cUi, view);
-            writeCardToView(cUi, view);
+            view.reset();
         }
+
         return view;
     }
 
     private CardView getCardViewFast(final Card c) {
-        return cards.get(c);
+        final CardView view = cards.get(c);
+        if (!mayShowCard(view)) {
+            view.reset();
+        }
+        return view;
     }
 
     private final Function<Card, CardView> FN_GET_CARDVIEW_FAST = new Function<Card, CardView>() {
@@ -1610,14 +1619,8 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     }
 
     private void writeCardToView(final Card c, final CardView view) {
-        if (!c.canBeShownTo(player)) {
-            view.getOriginal().reset();
-            view.getAlternate().reset();
-            return;
-        }
-
         // First, write the values independent of other views.
-        ViewUtil.writeNonDependentCardViewProperties(c, view);
+        ViewUtil.writeNonDependentCardViewProperties(c, view, player);
         // Next, write the values that depend on other views.
         view.setOwner(getPlayerViewFast(c.getOwner()));
         view.setController(getPlayerViewFast(c.getController()));
@@ -1641,8 +1644,9 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
 
     @Override
     public boolean mayShowCard(final CardView c) {
-        final Card card = cards.inverse().get(c);
+        final Card card = getCard(c);
         return card == null || card.canBeShownTo(player);
+
     }
 
     @Override

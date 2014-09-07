@@ -52,12 +52,7 @@ public class ZoneAction extends ForgeAction {
 
         final List<CardStateView> choices2 = Lists.newLinkedList();
         for (final CardView crd : choices) {
-            final CardStateView toAdd;
-            if (crd.isFaceDown() && crd.hasAltState()) {
-                toAdd = crd.getAlternate();
-            } else {
-                toAdd = crd.getState();
-            }
+            final CardStateView toAdd = crd.getOriginal();
             choices2.add(toAdd);
         }
 

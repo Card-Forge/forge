@@ -138,7 +138,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventPlayerControl ev) {
-        if (gui.getGame().isGameOver()) {
+        if (ev.player.getGame().isGameOver()) {
             return null;
         }
 
@@ -231,9 +231,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventCardAttachment event) {
-        // TODO Auto-generated method stub
-        Game game = event.equipment.getGame();
-        PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
+        final Game game = event.equipment.getGame();
+        final PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
             updateZone(game.getZoneOf((Card)event.oldEntiy));
         }
