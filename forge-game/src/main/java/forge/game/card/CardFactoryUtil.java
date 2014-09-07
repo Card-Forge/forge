@@ -38,6 +38,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPayment;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -137,7 +138,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && sourceCard.isInPlay();
+                        && sourceCard.isInPlay() && CostPayment.canPayAdditionalCosts(cost, this);
             }
 
         }; // morph_up
