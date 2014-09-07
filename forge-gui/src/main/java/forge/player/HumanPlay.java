@@ -636,8 +636,9 @@ public class HumanPlay {
             prompt = source + "\n" + promptCurrent;
         }
         
-        if( sourceAbility != null )
+        if (sourceAbility != null) {
             sourceAbility.clearManaPaid();
+        }
         boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, false);
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
@@ -703,14 +704,16 @@ public class HumanPlay {
             xWasBilled = true;
         }
         int timesMultikicked = ability.getHostCard().getKickerMagnitude();
-        if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
+        if (timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
             ManaCost mkCost = ability.getMultiKickerManaCost();
-            for(int i = 0; i < timesMultikicked; i++)
+            for (int i = 0; i < timesMultikicked; i++) {
                 toPay.addManaCost(mkCost);
+            }
         }
 
-        if( isActivatedSa )
+        if (isActivatedSa) {
            ManaCostAdjustment.adjust(toPay, ability, false);
+        }
         
         InputPayMana inpPayment;
         if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
