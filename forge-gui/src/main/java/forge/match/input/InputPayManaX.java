@@ -151,11 +151,16 @@ public class InputPayManaX extends InputPayMana {
                         xPaid = value;
                         saPaidFor.getHostCard().setXManaCostPaid(xPaid);
                         if (xPaid > 0) {
-                            ManaCostBeingPaid cost = new ManaCostBeingPaid(manaCostPerX);
+                            final ManaCostBeingPaid cost = new ManaCostBeingPaid(manaCostPerX);
                             for (int i = 1; i < xPaid; i++) {
                                 cost.addManaCost(manaCostPerX);
                             }
-                            ComputerUtilMana.payManaCost(cost, saPaidFor, player);
+                            runAsAi(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ComputerUtilMana.payManaCost(cost, saPaidFor, player);
+                                }
+                            });
                         }
                         stop();
                     }
