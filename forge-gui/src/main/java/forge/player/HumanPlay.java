@@ -712,7 +712,7 @@ public class HumanPlay {
         }
 
         if (isActivatedSa) {
-           ManaCostAdjustment.adjust(toPay, ability, false);
+            ManaCostAdjustment.adjust(toPay, ability, false);
         }
         
         InputPayMana inpPayment;

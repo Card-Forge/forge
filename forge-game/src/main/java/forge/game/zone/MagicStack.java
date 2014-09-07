@@ -338,7 +338,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
             if (sp.isCopied()) {
                 si = this.push(sp);
-            } else {
+            }
+            else {
                 if (sp.isMultiKicker()) {
                     final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
                     boolean hasPaid = false;

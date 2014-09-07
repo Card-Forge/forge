@@ -1353,9 +1353,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         String announce = getParam("Announce");
         if (StringUtils.isBlank(announce)) return false;
         String[] announcedOnes = TextUtil.split(announce, ',');
-        for(String a : announcedOnes) {
-            if( a.trim().equalsIgnoreCase(variable))
+        for (String a : announcedOnes) {
+            if (a.trim().equalsIgnoreCase(variable)) {
                 return true;
+            }
         }
         return false;
     }
