@@ -692,7 +692,6 @@ public class HumanPlay {
 
         String xInCard = source.getSVar("X");
         if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
-            // this currently only works for things about Targeted object
             int xPaid = AbilityUtils.calculateAmount(source, "X", ability);
             toPay.setXManaCostPaid(xPaid, ability.getParam("XColor"));
             source.setXManaCostPaid(xPaid);
