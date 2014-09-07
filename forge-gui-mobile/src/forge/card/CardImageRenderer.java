@@ -255,8 +255,7 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            if (card.getRules() == null) { return; } //this can happen with certain tokens
-            String text = card.getRules().getOracleText();
+            String text = card.getOracleText();
             if (StringUtils.isEmpty(text)) { return; }
 
             text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
