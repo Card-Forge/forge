@@ -378,30 +378,32 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                 // The ability is added to stack HERE
                 si = this.push(sp);
-                
+
                 if (sp.isSpell() && (source.hasStartOfKeyword("Replicate")
                         || ((source.isInstant() || source.isSorcery()) && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
                                 CardPredicates.hasKeyword("Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost."))))) {
-                    int magnitude = 0;
-                    // TODO: convert multikicker/replicate support in abCost so this
-                    // doesn't happen here
-                    
-                    final Cost costReplicate = new Cost(source.getManaCost(), false);
-                    boolean hasPaid = false;
-                    int replicateCMC = source.getManaCost().getCMC();
-                    do {
-                        String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", source, magnitude);
-                        hasPaid = activator.getController().payManaOptional(source, costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
-                        if (hasPaid) {
-                            magnitude++;
-                            totManaSpent += replicateCMC;
-                        }
-                    } while( hasPaid );
+                    Integer magnitude = sp.getSVarInt("Replicate");
+                    if (magnitude == null) {
+                        magnitude = 0;
+                        final Cost costReplicate = new Cost(source.getManaCost(), false);
+                        boolean hasPaid = false;
+                        int replicateCMC = source.getManaCost().getCMC();
+                        do {
+                            String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", source, magnitude);
+                            hasPaid = activator.getController().payManaOptional(source, costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
+                            if (hasPaid) {
+                                magnitude++;
+                                totManaSpent += replicateCMC;
+                            }
+                        } while (hasPaid);
+                    }
+
                     // Replicate Trigger
                     String effect = String.format("AB$ CopySpellAbility | Cost$ 0 | Defined$ SourceFirstSpell | Amount$ %d", magnitude);
                     SpellAbility sa = AbilityFactory.getAbility(effect, source);
                     sa.setDescription("Replicate - " + source);
                     sa.setTrigger(true);
+                    sa.setCopied(true);
                     addSimultaneousStackEntry(sa);
                 }
             }

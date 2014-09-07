@@ -161,7 +161,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final String getSVar(final String name) {
-        return sVars.get(name) != null ? sVars.get(name) : "";
+        String var = sVars.get(name);
+        if (var == null) {
+            var = "";
+        }
+        return var;
+    }
+
+    public final Integer getSVarInt(final String name) {
+        String var = sVars.get(name);
+        if (var != null) {
+            try {
+                return Integer.parseInt(var);
+            }
+            catch (Exception e) {}
+        }
+        return null;
     }
 
     public final void setSVar(final String name, final String value) {

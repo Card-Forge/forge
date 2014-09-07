@@ -2136,6 +2136,9 @@ public class CardFactoryUtil {
                 sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
                 sa.addAnnounceVar("Multikicker");
             }
+            else if (keyword.startsWith("Replicate")) {
+                card.getFirstSpellAbility().addAnnounceVar("Replicate");
+            }
             else if (keyword.startsWith("Fuse")) {
                 card.getState(CardCharacteristicName.Original).getSpellAbility().add(AbilityFactory.buildFusedAbility(card));
             }

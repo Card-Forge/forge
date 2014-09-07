@@ -194,6 +194,8 @@ public class HumanPlaySpellAbility {
     }
 
     private boolean announceValuesLikeX() {
+        if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");
@@ -227,6 +229,8 @@ public class HumanPlaySpellAbility {
 
     // Announcing Requirements like choosing creature type or number
     private boolean announceType() {
+        if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+
         String announce = ability.getParam("AnnounceType");
         PlayerController pc = ability.getActivatingPlayer().getController();
         if (announce != null) {

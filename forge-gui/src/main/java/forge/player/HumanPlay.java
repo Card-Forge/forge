@@ -703,11 +703,20 @@ public class HumanPlay {
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
             xWasBilled = true;
         }
-        int timesMultikicked = ability.getHostCard().getKickerMagnitude();
+
+        int timesMultikicked = source.getKickerMagnitude();
         if (timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
             ManaCost mkCost = ability.getMultiKickerManaCost();
             for (int i = 0; i < timesMultikicked; i++) {
                 toPay.addManaCost(mkCost);
+            }
+        }
+
+        Integer replicate = ability.getSVarInt("Replicate");
+        if (replicate != null) {
+            ManaCost rCost = source.getManaCost();
+            for (int i = 0; i < replicate; i++) {
+                toPay.addManaCost(rCost);
             }
         }
 

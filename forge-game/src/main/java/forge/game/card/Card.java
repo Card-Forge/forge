@@ -4196,8 +4196,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addMultiKickerMagnitude(final int n) { this.multiKickerMagnitude += n; }
     public final void setKickerMagnitude(final int n) { this.multiKickerMagnitude = n; }
     public final int getKickerMagnitude() {
-        if (this.multiKickerMagnitude > 0)
+        if (this.multiKickerMagnitude > 0) {
             return multiKickerMagnitude;
+        }
         boolean hasK1 = costsPaid.contains(OptionalCost.Kicker1);
         return hasK1 == costsPaid.contains(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
