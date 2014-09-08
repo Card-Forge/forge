@@ -351,6 +351,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlShop.add(new FLabel.Builder().text("Maximum Packs").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_MAX_PACKS, QuestPreferencesErrType.SHOP), constraints1);
 
+        pnlShop.add(new FLabel.Builder().text("Minimum Packs").fontAlign(SwingConstants.RIGHT).build(), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_MIN_PACKS, QuestPreferencesErrType.SHOP), constraints1);
+
         pnlShop.add(new FLabel.Builder().text("Starting Packs").fontAlign(SwingConstants.RIGHT).build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_STARTING_PACKS, QuestPreferencesErrType.SHOP), constraints1);
 

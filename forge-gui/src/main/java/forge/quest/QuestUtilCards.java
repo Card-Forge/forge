@@ -665,11 +665,12 @@ public final class QuestUtilCards {
         final int startPacks = this.qpref.getPrefInt(QPref.SHOP_STARTING_PACKS);
         final int winsForPack = this.qpref.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
         final int maxPacks = this.qpref.getPrefInt(QPref.SHOP_MAX_PACKS);
+        final int minPacks = this.qpref.getPrefInt(QPref.SHOP_MIN_PACKS);
 
         int level = this.qc.getAchievements().getLevel();
         final int levelPacks = level > 0 ? startPacks / level : startPacks;
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
-        final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
+        final int totalPacks = Math.min(Math.max(levelPacks + winPacks, minPacks), maxPacks);
 
 
         SealedProduct.Template tpl = getShopBoosterTemplate();

@@ -135,7 +135,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_UNLOCK_SET("20"),
 
         // Maximum amount of "Packs" opened by the Shop and available as singles
-        SHOP_MAX_PACKS("6"),
+        SHOP_MAX_PACKS("7"),
+        SHOP_MIN_PACKS("3"),
 
         // Rarity distribution of Singles in an Opened Shop Pack
         SHOP_SINGLES_COMMON("7"),
@@ -145,7 +146,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         // How many wins it takes to open an additional pack in the shop
         SHOP_WINS_FOR_ADDITIONAL_PACK("10"),
         // How many packs the shop start with. 
-        SHOP_STARTING_PACKS("4");
+        SHOP_STARTING_PACKS("5");
 
         private final String strDefaultVal;
 
@@ -313,7 +314,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                     return "Value too large (maximum 15).";
                 }
                 break;
-            case SHOP_WINS_FOR_ADDITIONAL_PACK: case SHOP_MAX_PACKS:
+            case SHOP_WINS_FOR_ADDITIONAL_PACK: case SHOP_MAX_PACKS: case SHOP_MIN_PACKS:
                 if (val < 1) {
                     return "Value too small (minimum 1).";
                 } else if (val > 25) {
