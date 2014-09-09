@@ -3,6 +3,7 @@ package forge.util;
 import com.badlogic.gdx.Gdx;
 
 import forge.FThreads;
+import forge.GuiBase;
 
 public abstract class WaitRunnable implements Runnable {
     public class Lock {
@@ -11,7 +12,7 @@ public abstract class WaitRunnable implements Runnable {
     private final Lock lock = new Lock();
 
     public void invokeAndWait() {
-        FThreads.assertExecutedByEdt(false);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), false);
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {

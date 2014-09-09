@@ -19,12 +19,13 @@ package forge.screens.match.winlose;
 import java.util.List;
 
 import forge.FThreads;
+import forge.GuiBase;
 import forge.assets.FSkinProp;
-import forge.game.Game;
 import forge.item.PaperCard;
-import forge.quest.*;
+import forge.quest.QuestWinLoseController;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SOptionPane;
+import forge.view.IGameView;
 
 /**
  * <p>
@@ -44,9 +45,9 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, Game lastGame) {
+    public QuestWinLose(final ViewWinLose view0, IGameView lastGame) {
         super(view0, lastGame);
-        controller = new QuestWinLoseController(lastGame) {
+        controller = new QuestWinLoseController(lastGame, GuiBase.getInterface()) {
             @Override
             protected void showRewards(Runnable runnable) {
                 //invoke reward logic in background thread so dialogs can be shown
@@ -55,12 +56,12 @@ public class QuestWinLose extends ControlWinLose {
 
             @Override
             protected void showCards(String title, List<PaperCard> cards) {
-                SGuiChoose.reveal(title, cards);
+                SGuiChoose.reveal(gui, title, cards);
             }
 
             @Override
             protected void showMessage(String message, String title, FSkinProp icon) {
-                SOptionPane.showMessageDialog(message, title, icon);
+                SOptionPane.showMessageDialog(gui, message, title, icon);
             }
         };
     }

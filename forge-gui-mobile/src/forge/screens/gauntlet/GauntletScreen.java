@@ -284,14 +284,14 @@ public class GauntletScreen extends LaunchScreen {
                 String gauntletName;
                 String oldGauntletName = gauntlet.getName();
                 while (true) {
-                    gauntletName = SOptionPane.showInputDialog("Enter new name for gauntlet:", "Rename Gauntlet", null, oldGauntletName);
+                    gauntletName = SOptionPane.showInputDialog(GuiBase.getInterface(), "Enter new name for gauntlet:", "Rename Gauntlet", null, oldGauntletName);
                     if (gauntletName == null) { return; }
 
                     gauntletName = QuestUtil.cleanString(gauntletName);
                     if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
 
                     if (gauntletName.isEmpty()) {
-                        SOptionPane.showMessageDialog("Please specify a gauntlet name.");
+                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "Please specify a gauntlet name.");
                         continue;
                     }
 
@@ -303,13 +303,13 @@ public class GauntletScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog("A gauntlet already exists with that name. Please pick another gauntlet name.");
+                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "A gauntlet already exists with that name. Please pick another gauntlet name.");
                         continue;
                     }
                     break;
                 }
                 final String newGauntletName = gauntletName;
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                     @Override
                     public void run() {
                         gauntlet.rename(newGauntletName);
@@ -327,7 +327,7 @@ public class GauntletScreen extends LaunchScreen {
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
-                if (!SOptionPane.showConfirmDialog(
+                if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(), 
                         "Are you sure you want to delete '" + gauntlet.getName() + "'?",
                         "Delete Gauntlet", "Delete", "Cancel")) {
                     return;

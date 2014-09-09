@@ -2,6 +2,7 @@ package forge.screens.sealed;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.assets.FSkinFont;
 import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
@@ -46,10 +47,10 @@ public class SealedScreen extends LaunchScreen {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
-                        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
+                        final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(GuiBase.getInterface(), false);
                         if (sealed == null) { return; }
 
-                        FThreads.invokeInEdtLater(new Runnable() {
+                        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                             @Override
                             public void run() {
                                 DeckPreferences.setSealedDeck(sealed.getName());
@@ -115,7 +116,7 @@ public class SealedScreen extends LaunchScreen {
         }
 
         int matches = FModel.getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        FModel.getGauntletMini().launch(matches, human.getDeck(), GameType.Sealed);
+        FModel.getGauntletMini(GuiBase.getInterface()).launch(matches, human.getDeck(), GameType.Sealed);
         return false; //prevent launching via launch screen since gauntlet handles it
     }
 }

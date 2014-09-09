@@ -9,19 +9,20 @@ import com.badlogic.gdx.math.Vector2;
 
 import forge.FThreads;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.card.CardZoom;
-import forge.game.card.Card;
 import forge.screens.match.FControl;
 import forge.toolbox.FCardPanel;
 import forge.util.ThreadUtil;
+import forge.view.CardView;
 
 public abstract class VCardDisplayArea extends VDisplayArea {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
-    protected final List<Card> orderedCards = new ArrayList<Card>();
+    protected final List<CardView> orderedCards = new ArrayList<CardView>();
     protected final List<CardAreaPanel> cardPanels = new ArrayList<CardAreaPanel>();
 
-    public Iterable<Card> getOrderedCards() {
+    public Iterable<CardView> getOrderedCards() {
         return orderedCards;
     }
 
@@ -34,12 +35,12 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         return cardPanels.size();
     }
 
-    protected void refreshCardPanels(List<Card> model) {
+    protected void refreshCardPanels(List<CardView> model) {
         clear();
 
         CardAreaPanel newCardPanel = null;
-        for (Card card : model) {
-            if (card.getCardForUi() == card) { //only include cards that are meant for display
+        for (CardView card : model) {
+            if (card.isUiDisplayable()) { //only include cards that are meant for display
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
                 addCardPanelToDisplayArea(cardPanel);
                 cardPanels.add(cardPanel);
@@ -73,7 +74,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     }
 
     public final void removeCardPanel(final CardAreaPanel fromPanel) {
-        FThreads.assertExecutedByEdt(true);
+        FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
         /*if (CardPanelContainer.this.getMouseDragPanel() != null) {
             CardPanel.getDragAnimationPanel().setVisible(false);
             CardPanel.getDragAnimationPanel().repaint();
@@ -152,11 +153,11 @@ public abstract class VCardDisplayArea extends VDisplayArea {
     public static class CardAreaPanel extends FCardPanel {
         private static final Map<Integer, CardAreaPanel> allCardPanels = new HashMap<Integer, CardAreaPanel>();
 
-        public static CardAreaPanel get(Card card0) {
-            CardAreaPanel cardPanel = allCardPanels.get(card0.getUniqueNumber());
+        public static CardAreaPanel get(CardView card0) {
+            CardAreaPanel cardPanel = allCardPanels.get(card0.getId());
             if (cardPanel == null || cardPanel.getCard() != card0) { //replace card panel if card copied
                 cardPanel = new CardAreaPanel(card0);
-                allCardPanels.put(card0.getUniqueNumber(), cardPanel);
+                allCardPanels.put(card0.getId(), cardPanel);
             }
             return cardPanel;
         }
@@ -178,7 +179,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         private CardAreaPanel nextPanelInStack, prevPanelInStack;
 
         //use static get(card) function instead
-        private CardAreaPanel(Card card0) {
+        private CardAreaPanel(CardView card0) {
             super(card0);
         }
 
@@ -244,7 +245,7 @@ public abstract class VCardDisplayArea extends VDisplayArea {
         }
 
         public boolean selectCard() {
-            if (FControl.getInputProxy().selectCard(getCard(), null)) {
+            if (FControl.getGameView().selectCard(getCard(), null)) {
                 return true;
             }
             //if panel can't do anything with card selection, try selecting previous panel in stack

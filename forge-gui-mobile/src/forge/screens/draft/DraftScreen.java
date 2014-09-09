@@ -2,6 +2,7 @@ package forge.screens.draft;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
@@ -48,13 +49,13 @@ public class DraftScreen extends LaunchScreen {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
                     @Override
                     public void run() {
-                        final LimitedPoolType poolType = SGuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
+                        final LimitedPoolType poolType = SGuiChoose.oneOrNone(GuiBase.getInterface(), "Choose Draft Format", LimitedPoolType.values());
                         if (poolType == null) { return; }
 
-                        final BoosterDraft draft = BoosterDraft.createDraft(poolType);
+                        final BoosterDraft draft = BoosterDraft.createDraft(GuiBase.getInterface(), poolType);
                         if (draft == null) { return; }
 
-                        FThreads.invokeInEdtLater(new Runnable() {
+                        FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                             @Override
                             public void run() {
                                 LoadingOverlay.show("Loading new draft...", new Runnable() {
@@ -131,21 +132,21 @@ public class DraftScreen extends LaunchScreen {
                     }
                 }
 
-                final Integer rounds = SGuiChoose.getInteger("How many opponents are you willing to face?",
+                final Integer rounds = SGuiChoose.getInteger(GuiBase.getInterface(), "How many opponents are you willing to face?",
                         1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
                 if (rounds == null) {
                     creatingMatch = false;
                     return;
                 }
 
-                FThreads.invokeInEdtLater(new Runnable() {
+                FThreads.invokeInEdtLater(GuiBase.getInterface(), new Runnable() {
                     @Override
                     public void run() {
                         LoadingOverlay.show("Loading new game...", new Runnable() {
                             @Override
                             public void run() {
-                                FModel.getGauntletMini().resetGauntletDraft();
-                                FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
+                                FModel.getGauntletMini(GuiBase.getInterface()).resetGauntletDraft();
+                                FModel.getGauntletMini(GuiBase.getInterface()).launch(rounds, humanDeck.getDeck(), GameType.Draft);
                                 creatingMatch = false;
                             }
                         });

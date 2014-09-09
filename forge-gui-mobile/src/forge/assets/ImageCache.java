@@ -24,12 +24,11 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 
 import forge.ImageKeys;
-import forge.game.card.Card;
 import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.properties.ForgeConstants;
-import forge.screens.match.FControl;
+import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -80,14 +79,8 @@ public class ImageCache {
         missingIconKeys.clear();
     }
 
-    public static Texture getImage(Card card) {
-        final String key;
-        if (!FControl.mayShowCard(card) || card.isFaceDown()) {
-            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
-        }
-        else {
-            key = card.getImageKey();
-        }
+    public static Texture getImage(CardView card) {
+        final String key = card.getOriginal().getImageKey();
         return getImage(key, true);
     }
 

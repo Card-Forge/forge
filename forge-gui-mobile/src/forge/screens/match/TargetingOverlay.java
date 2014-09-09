@@ -20,10 +20,10 @@ package forge.screens.match;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
-import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.util.Utils;
+import forge.view.CardView;
+import forge.view.PlayerView;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
@@ -49,17 +49,17 @@ public class TargetingOverlay {
     private TargetingOverlay() {
     }
 
-    public static void drawArrow(Graphics g, Card startCard, Card endCard) {
+    public static void drawArrow(Graphics g, CardView startCard, CardView endCard) {
         drawArrow(g, CardAreaPanel.get(startCard).getTargetingArrowOrigin(),
                     CardAreaPanel.get(endCard).getTargetingArrowOrigin(),
                     startCard.getOwner().isOpponentOf(endCard.getOwner()));
     }
-    public static void drawArrow(Graphics g, Vector2 start, Card targetCard, boolean connectsFoes) {
+    public static void drawArrow(Graphics g, Vector2 start, CardView targetCard, boolean connectsFoes) {
         drawArrow(g, start,
                 CardAreaPanel.get(targetCard).getTargetingArrowOrigin(),
                 connectsFoes);
     }
-    public static void drawArrow(Graphics g, Vector2 start, Player targetPlayer, boolean connectsFoes) {
+    public static void drawArrow(Graphics g, Vector2 start, PlayerView targetPlayer, boolean connectsFoes) {
         drawArrow(g, start,
                 FControl.getPlayerPanel(targetPlayer).getAvatar().getTargetingArrowOrigin(),
                 connectsFoes);

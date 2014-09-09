@@ -9,9 +9,9 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
+import com.google.common.collect.Maps;
 
 import forge.Forge;
-import forge.match.MatchUtil;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
 import forge.properties.ForgePreferences;
@@ -34,20 +34,22 @@ import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinTexture;
 import forge.assets.FSkinColor.Colors;
-import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.combat.Combat;
-import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
+import forge.view.CardView;
+import forge.view.CombatView;
+import forge.view.GameEntityView;
+import forge.view.IGameView;
+import forge.view.PlayerView;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
-    private final Map<Player, VPlayerPanel> playerPanels = new HashMap<Player, VPlayerPanel>();
+    private final IGameView gameView;
+    private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
     private final VPrompt prompt;
     private final VLog log;
     private final VStack stack;
@@ -56,8 +58,9 @@ public class MatchScreen extends FScreen {
     private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
     private AbilityEffect activeEffect;
 
-    public MatchScreen(Game game, Player localPlayer, List<VPlayerPanel> playerPanels0) {
+    public MatchScreen(final IGameView game, PlayerView localPlayer, List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
+        this.gameView = game;
 
         scroller = add(new FieldScroller());
         for (VPlayerPanel playerPanel : playerPanels0) {
@@ -72,19 +75,19 @@ public class MatchScreen extends FScreen {
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        FControl.getInputProxy().selectButtonOK();
+                        game.selectButtonOk();
                     }
                 },
                 new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        FControl.getInputProxy().selectButtonCancel();
+                        game.selectButtonCancel();
                     }
                 }));
 
-        log = new VLog(game.getGameLog());
+        log = new VLog(game);
         log.setDropDownContainer(this);
-        stack = new VStack(game.getStack(), localPlayer);
+        stack = new VStack(game, localPlayer);
         stack.setDropDownContainer(this);
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);
@@ -93,7 +96,7 @@ public class MatchScreen extends FScreen {
         players.setDropDownContainer(this);
 
         FMenuBar menuBar = (FMenuBar)getHeader();
-        menuBar.addTab("Game", new VGameMenu(localPlayer));
+        menuBar.addTab("Game", new VGameMenu());
         menuBar.addTab("Players (" + playerPanels.size() + ")", players);
         menuBar.addTab("Log", log);
         menuBar.addTab("Dev", devMenu);
@@ -126,7 +129,7 @@ public class MatchScreen extends FScreen {
         return bottomPlayerPanel;
     }
 
-    public Map<Player, VPlayerPanel> getPlayerPanels() {
+    public Map<PlayerView, VPlayerPanel> getPlayerPanels() {
         return playerPanels;
     }
 
@@ -146,12 +149,12 @@ public class MatchScreen extends FScreen {
     @Override
     protected void drawOverlay(Graphics g) {
         //draw arrows for paired cards
-        HashSet<Card> pairedCards = new HashSet<Card>();
+        HashSet<CardView> pairedCards = new HashSet<CardView>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {
-            for (Card card : playerPanel.getField().getRow1().getOrderedCards()) {
+            for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
                 if (pairedCards.contains(card)) { continue; } //prevent arrows going both ways
 
-                Card paired = card.getPairedWith();
+                CardView paired = card.getPairedWith();
                 if (paired != null) {
                     TargetingOverlay.drawArrow(g, card, paired);
                 }
@@ -159,18 +162,16 @@ public class MatchScreen extends FScreen {
         }
 
         //draw arrows for combat
-        final Combat combat = FControl.getGame().getCombat();
+        final CombatView combat = gameView.getCombat();
         if (combat != null) {
-            //connect each attacker with planeswalker it's attacking if applicable
-            for (Card planeswalker : combat.getDefendingPlaneswalkers()) {
-                for (Card attacker : combat.getAttackersOf(planeswalker)) {
-                    TargetingOverlay.drawArrow(g, attacker, planeswalker);
+            for (final CardView attacker : combat.getAttackers()) {
+                //connect each attacker with planeswalker it's attacking if applicable
+                final GameEntityView defender = combat.getDefender(attacker);
+                if (defender instanceof CardView) {
+                    TargetingOverlay.drawArrow(g, attacker, (CardView) defender);
                 }
-            }
-
-            //connect each blocker with the attacker it's blocking
-            for (Card blocker : combat.getAllBlockers()) {
-                for (Card attacker : combat.getAttackersBlockedBy(blocker)) {
+                //connect each blocker with the attacker it's blocking
+                for (final CardView blocker : combat.getBlockers(attacker)) {
                     TargetingOverlay.drawArrow(g, blocker, attacker);
                 }
             }
@@ -214,7 +215,7 @@ public class MatchScreen extends FScreen {
             break;
         case Keys.Z: //undo on Ctrl+Z
             if (KeyInputAdapter.isCtrlKeyDown()) {
-                MatchUtil.undoLastAction();
+                gameView.tryUndoLastAction();
                 return true;
             }
             break;

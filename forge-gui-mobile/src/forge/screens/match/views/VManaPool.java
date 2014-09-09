@@ -12,22 +12,19 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinColor.Colors;
 import forge.card.MagicColor;
-import forge.game.mana.ManaPool;
-import forge.game.player.Player;
-import forge.match.input.Input;
-import forge.match.input.InputPayMana;
 import forge.screens.match.FControl;
 import forge.toolbox.FDisplayObject;
+import forge.view.PlayerView;
 
 public class VManaPool extends VDisplayArea {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
     private static final FSkinFont FONT = FSkinFont.get(16);
 
-    private final Player player;
+    private final PlayerView player;
     private final List<ManaLabel> manaLabels = new ArrayList<ManaLabel>();
     private int totalMana;
 
-    public VManaPool(Player player0) {
+    public VManaPool(PlayerView player0) {
         player = player0;
 
         addManaLabel(FSkinImage.MANA_COLORLESS, MagicColor.COLORLESS);
@@ -50,9 +47,8 @@ public class VManaPool extends VDisplayArea {
     @Override
     public void update() {
         totalMana = 0;
-        ManaPool m = player.getManaPool();
         for (ManaLabel label : manaLabels) {
-            int colorCount = m.getAmountOfColor(label.colorCode);
+            int colorCount = player.getMana(label.colorCode);
             totalMana += colorCount;
             label.text = Integer.toString(colorCount);
         }
@@ -86,11 +82,7 @@ public class VManaPool extends VDisplayArea {
         @Override
         public boolean tap(float x, float y, int count) {
             if (player.getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
-                final Input input = FControl.getInputQueue().getInput();
-                if (input instanceof InputPayMana) {
-                    // Do something
-                    ((InputPayMana) input).useManaFromPool(colorCode);
-                }
+                FControl.getGameView().useMana(colorCode);
             }
             return true;
         }

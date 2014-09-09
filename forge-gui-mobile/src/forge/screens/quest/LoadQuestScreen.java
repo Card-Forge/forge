@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import forge.FThreads;
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiBase;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -179,14 +180,14 @@ public class LoadQuestScreen extends FScreen {
                 String questName;
                 String oldQuestName = quest.getName();
                 while (true) {
-                    questName = SOptionPane.showInputDialog("Enter new name for quest:", "Rename Quest", null, oldQuestName);
+                    questName = SOptionPane.showInputDialog(GuiBase.getInterface(), "Enter new name for quest:", "Rename Quest", null, oldQuestName);
                     if (questName == null) { return; }
 
                     questName = QuestUtil.cleanString(questName);
                     if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
                     if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog("Please specify a quest name.");
+                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "Please specify a quest name.");
                         continue;
                     }
 
@@ -198,7 +199,7 @@ public class LoadQuestScreen extends FScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                        SOptionPane.showMessageDialog(GuiBase.getInterface(), "A quest already exists with that name. Please pick another quest name.");
                         continue;
                     }
                     break;
@@ -215,7 +216,7 @@ public class LoadQuestScreen extends FScreen {
         ThreadUtil.invokeInGameThread(new Runnable() {
             @Override
             public void run() {
-                if (!SOptionPane.showConfirmDialog(
+                if (!SOptionPane.showConfirmDialog(GuiBase.getInterface(), 
                         "Are you sure you want to delete '" + quest.getName() + "'?",
                         "Delete Quest", "Delete", "Cancel")) {
                     return;

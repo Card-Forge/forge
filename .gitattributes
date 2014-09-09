@@ -1122,6 +1122,7 @@ forge-gui-mobile/libs/gdx.jar -text
 forge-gui-mobile/pom.xml -text
 forge-gui-mobile/src/forge/Forge.java -text
 forge-gui-mobile/src/forge/Graphics.java -text
+forge-gui-mobile/src/forge/GuiBase.java -text
 forge-gui-mobile/src/forge/GuiMobile.java -text
 forge-gui-mobile/src/forge/animation/AbilityEffect.java -text
 forge-gui-mobile/src/forge/animation/ForgeAnimation.java -text
@@ -1280,6 +1281,7 @@ forge-gui-mobile/src/forge/toolbox/ListChooser.java -text
 forge-gui-mobile/src/forge/util/LayoutHelper.java -text
 forge-gui-mobile/src/forge/util/PhysicsObject.java -text
 forge-gui-mobile/src/forge/util/Utils.java -text
+forge-gui-mobile/src/forge/util/WaitCallback.java -text
 forge-gui-mobile/src/forge/util/WaitRunnable.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text

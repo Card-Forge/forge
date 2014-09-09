@@ -1,18 +1,18 @@
 package forge.screens.match.winlose;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 
 import forge.Forge;
+import forge.GuiBase;
+import forge.LobbyPlayer;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
-import forge.game.Game;
-import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
-import forge.game.GameOutcome;
-import forge.game.player.Player;
 import forge.interfaces.IWinLoseView;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
@@ -25,6 +25,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
 import forge.util.Utils;
+import forge.view.IGameView;
 
 public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float INSETS_FACTOR = 0.025f;
@@ -34,9 +35,9 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private final FLabel lblTitle, lblLog, lblStats, btnCopyLog;
     private final FTextArea txtLog;
     private final OutcomesPanel pnlOutcomes;
-    private final Game game;
+    private final IGameView game;
 
-    public ViewWinLose(final Game game0) {
+    public ViewWinLose(final IGameView game0) {
         super(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(0.75f));
 
         game = game0;
@@ -52,7 +53,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
-        switch (game0.getRules().getGameType()) {
+        switch (game0.getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
             break;
@@ -60,7 +61,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             //control = new QuestDraftWinLose(this, game0);
             break;
         case Draft:
-            if (!FModel.getGauntletMini().isGauntletDraft()) {
+            if (!FModel.getGauntletMini(GuiBase.getInterface()).isGauntletDraft()) {
                 break;
             }
         case Sealed:
@@ -82,10 +83,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         btnRestart.setFont(btnContinue.getFont());
         btnQuit.setText("Quit Match");
         btnQuit.setFont(btnContinue.getFont());
-        btnContinue.setEnabled(!game0.getMatch().isMatchOver());
+        btnContinue.setEnabled(!game0.isMatchOver());
 
         lblLog = add(new FLabel.Builder().text("Game Log").align(HAlignment.CENTER).font(FSkinFont.get(18)).build());
-        txtLog = add(new FTextArea(true, game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]")) {
+        txtLog = add(new FTextArea(true, StringUtils.join(game.getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
             @Override
             public boolean tap(float x, float y, int count) {
                 if (txtLog.getMaxScrollTop() > 0) {
@@ -103,20 +104,20 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             }
         }).build());
 
-        lblTitle.setText(composeTitle(game0.getOutcome()));
+        lblTitle.setText(composeTitle(game0));
 
         showGameOutcomeSummary();
         showPlayerScores();
         control.showRewards();
     }
 
-    private String composeTitle(GameOutcome outcome) {
-        Player winner = outcome.getWinningPlayer();
-        int winningTeam = outcome.getWinningTeam();
+    private String composeTitle(final IGameView game) {
+        final LobbyPlayer winner = game.getWinningPlayer();
+        final int winningTeam = game.getWinningTeam();
         if (winner == null) {
             return "It's a draw!";
         } else if (winningTeam != -1) {
-            return "Team " + winner.getTeam() + " Won!";
+            return "Team " + winningTeam + " Won!";
         } else {
             return winner.getName() + " Won!";
         }
@@ -135,15 +136,13 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     }
 
     private void showGameOutcomeSummary() {
-        GameLog log = game.getGameLog();
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
+        for (GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
             pnlOutcomes.add(new FLabel.Builder().text(o.message).font(FSkinFont.get(14)).build());
         }
     }
 
     private void showPlayerScores() {
-        GameLog log = game.getGameLog();
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
+        for (GameLogEntry o : game.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
             lblStats.setText(removePlayerTypeFromLogMessage(o.message));
         }
     }

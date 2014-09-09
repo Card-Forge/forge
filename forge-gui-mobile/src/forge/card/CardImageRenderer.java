@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
+
 import forge.Graphics;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkinColor;
@@ -16,8 +17,9 @@ import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.mana.ManaCost;
-import forge.game.card.Card;
 import forge.screens.FScreen;
+import forge.view.CardView;
+import forge.view.CardView.CardStateView;
 
 public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
@@ -54,9 +56,9 @@ public class CardImageRenderer {
         prevImageHeight = h;
     }
 
-    public static void drawCardImage(Graphics g, Card card, float x, float y, float w, float h) {
-        card = card.getCardForUi();
+    public static void drawCardImage(Graphics g, CardView card, float x, float y, float w, float h) {
         updateStaticFields(w, h);
+        final CardStateView state = card.getOriginal();
 
         float blackBorderThickness = w * CardRenderer.BLACK_BORDER_THICKNESS_RATIO;
         g.fillRect(Color.BLACK, x, y, w, h);
@@ -66,7 +68,7 @@ public class CardImageRenderer {
         h -= 2 * blackBorderThickness;
 
         //determine colors for borders
-        List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card, true, true);
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(card.getOriginal());
         DetailColors borderColor = borderColors.get(0);
         Color color1 = FSkinColor.fromRGB(borderColor.r, borderColor.g, borderColor.b);
         Color color2 = null;
@@ -99,7 +101,7 @@ public class CardImageRenderer {
         float typeBoxHeight = 2 * TYPE_FONT.getCapHeight();
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
-        if (card.isCreature() || card.isPlaneswalker()) {
+        if (state.isCreature() || state.isPlaneswalker()) {
             //if P/T box needed, make room for it
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
             textBoxHeight -= ptBoxHeight;
@@ -143,7 +145,7 @@ public class CardImageRenderer {
         }
     }
 
-    private static void drawHeader(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawHeader(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -154,13 +156,14 @@ public class CardImageRenderer {
 
         float padding = h / 8;
 
+        final CardStateView state = card.getOriginal();
         //draw mana cost for card
         float manaCostWidth = 0;
-        ManaCost mainManaCost = card.getManaCost();
-        if (card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
+        ManaCost mainManaCost = state.getManaCost();
+        if (card.isSplitCard() && card.hasAltState()) {
             //handle rendering both parts of split card
-            mainManaCost = card.getRules().getMainPart().getManaCost();
-            ManaCost otherManaCost = card.getRules().getOtherPart().getManaCost();
+            mainManaCost = state.getManaCost();
+            ManaCost otherManaCost = card.getAlternate().getManaCost();
             manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
             CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
             //draw "//" between two parts of mana cost
@@ -173,7 +176,7 @@ public class CardImageRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        g.drawText(card.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
+        g.drawText(state.getName(), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, HAlignment.LEFT, true);
     }
 
     public static final FBufferedImage forgeArt;
@@ -197,7 +200,7 @@ public class CardImageRenderer {
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawTypeLine(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -216,13 +219,13 @@ public class CardImageRenderer {
 
         //draw type
         x += padding;
-        g.drawText(CardDetailUtil.formatCardType(card), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
+        g.drawText(CardDetailUtil.formatCardType(card.getOriginal()), TYPE_FONT, Color.BLACK, x, y, w, h, false, HAlignment.LEFT, true);
     }
 
     //use text g to handle mana symbols and reminder text
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
-    private static void drawTextBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawTextBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
         if (color2 == null) {
             g.fillRect(color1, x, y, w, h);
         }
@@ -231,10 +234,11 @@ public class CardImageRenderer {
         }
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
-        if (card.isBasicLand()) {
+        final CardStateView state = card.getOriginal();
+        if (state.isBasicLand()) {
             //draw icons for basic lands
             FSkinImage image;
-            switch (card.getName()) {
+            switch (state.getName()) {
             case "Plains":
                 image = FSkinImage.MANA_W;
                 break;
@@ -255,10 +259,8 @@ public class CardImageRenderer {
             g.drawImage(image, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize, iconSize);
         }
         else {
-            String text = card.getOracleText();
+            final String text = card.getOriginal().getText();
             if (StringUtils.isEmpty(text)) { return; }
-
-            text = text.replace("\\n", "\n"); //replace new line placeholders with actual new line characters
 
             float padding = TEXT_FONT.getCapHeight() * 0.75f;
             x += padding;
@@ -269,15 +271,16 @@ public class CardImageRenderer {
         }
     }
 
-    private static void drawPtBox(Graphics g, Card card, Color color1, Color color2, float x, float y, float w, float h) {
+    private static void drawPtBox(Graphics g, CardView card, Color color1, Color color2, float x, float y, float w, float h) {
+        final CardStateView state = card.getOriginal();
         List<String> pieces = new ArrayList<String>();
-        if (card.isCreature()) {
-            pieces.add(String.valueOf(card.getBaseAttack()));
+        if (state.isCreature()) {
+            pieces.add(String.valueOf(state.getPower()));
             pieces.add("/");
-            pieces.add(String.valueOf(card.getBaseDefense()));
+            pieces.add(String.valueOf(state.getToughness()));
         }
-        else if (card.isPlaneswalker()) {
-            pieces.add(String.valueOf(card.getBaseLoyalty()));
+        else if (state.isPlaneswalker()) {
+            pieces.add(String.valueOf(state.getLoyalty()));
         }
         else { return; }
 

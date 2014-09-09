@@ -6,6 +6,7 @@ import java.util.ConcurrentModificationException;
 import com.badlogic.gdx.math.Vector2;
 
 import forge.Graphics;
+import forge.GuiBase;
 import forge.error.BugReporter;
 
 public abstract class FContainer extends FDisplayObject {
@@ -74,7 +75,7 @@ public abstract class FContainer extends FDisplayObject {
             //ignore concurrent modification exceptions during render
         }
         catch (Exception ex) {
-            BugReporter.reportException(ex);
+            BugReporter.reportException(ex, GuiBase.getInterface());
         }
     }
 

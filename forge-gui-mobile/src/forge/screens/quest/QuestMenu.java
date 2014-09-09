@@ -4,6 +4,7 @@ import java.io.File;
 
 import forge.FThreads;
 import forge.Forge;
+import forge.GuiBase;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
 import forge.deck.FDeckEditor.DeckController;
@@ -11,6 +12,7 @@ import forge.deck.FDeckEditor.EditorType;
 import forge.interfaces.IButton;
 import forge.interfaces.ICheckBox;
 import forge.interfaces.IComboBox;
+import forge.interfaces.IGuiBase;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
@@ -79,13 +81,14 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         }
     });
     private static final FMenuItem unlockSetsItem = new FMenuItem("Unlock Sets", FSkinImage.QUEST_MAP, new FEventHandler() {
+        final IGuiBase gui = GuiBase.getInterface();
         @Override
         public void handleEvent(FEvent e) {
             ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
                 @Override
                 public void run() {
-                    QuestUtil.chooseAndUnlockEdition();
-                    FThreads.invokeInEdtLater(new Runnable() {
+                    QuestUtil.chooseAndUnlockEdition(gui);
+                    FThreads.invokeInEdtLater(gui, new Runnable() {
                         @Override
                         public void run() {
                             updateCurrentQuestScreen();
@@ -96,13 +99,14 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         }
     });
     private static final FMenuItem travelItem = new FMenuItem("Travel", FSkinImage.QUEST_MAP, new FEventHandler() {
+        final IGuiBase gui = GuiBase.getInterface();
         @Override
         public void handleEvent(FEvent e) {
             ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
                 @Override
                 public void run() {
-                    QuestUtil.travelWorld();
-                    FThreads.invokeInEdtLater(new Runnable() {
+                    QuestUtil.travelWorld(gui);
+                    FThreads.invokeInEdtLater(gui, new Runnable() {
                         @Override
                         public void run() {
                             updateCurrentQuestScreen();

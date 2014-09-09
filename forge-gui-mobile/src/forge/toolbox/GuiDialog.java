@@ -1,7 +1,7 @@
 package forge.toolbox;
 
-import forge.game.card.Card;
 import forge.util.Callback;
+import forge.view.CardView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,18 +12,18 @@ import org.apache.commons.lang3.StringUtils;
 public class GuiDialog {
     private static final String[] defaultConfirmOptions = { "Yes", "No" };
 
-    public static void confirm(final Card c, final String question, final Callback<Boolean> callback) {
+    public static void confirm(final CardView c, final String question, final Callback<Boolean> callback) {
         GuiDialog.confirm(c, question, true, null, callback);
     }
-    public static void confirm(final Card c, final String question, final boolean defaultChoice, final Callback<Boolean> callback) {
+    public static void confirm(final CardView c, final String question, final boolean defaultChoice, final Callback<Boolean> callback) {
         GuiDialog.confirm(c, question, defaultChoice, null, callback);
     }
-    public static void confirm(final Card c, final String question, String[] options, final Callback<Boolean> callback) {
+    public static void confirm(final CardView c, final String question, String[] options, final Callback<Boolean> callback) {
         GuiDialog.confirm(c, question, true, options, callback);
     }
 
-    public static void confirm(final Card c, final String question, final boolean defaultIsYes, final String[] options, final Callback<Boolean> callback) {
-        final String title = c == null ? "Question" : c.getCardForUi().getName() + " - Ability";
+    public static void confirm(final CardView c, final String question, final boolean defaultIsYes, final String[] options, final Callback<Boolean> callback) {
+        final String title = c == null ? "Question" : c + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         String[] opts = options == null ? defaultConfirmOptions : options;
         FOptionPane.showCardOptionDialog(c, questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {

@@ -18,6 +18,7 @@
 package forge.card;
 
 import forge.Graphics;
+import forge.GuiBase;
 import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -178,7 +179,7 @@ public class CardFaceSymbols {
             String symbol = tok.nextToken();
             FSkinImage image = MANA_IMAGES.get(symbol);
             if (image == null) {
-                BugReporter.reportBug("Symbol not recognized \"" + symbol + "\" in string: " + s);
+                BugReporter.reportBug(GuiBase.getInterface(), "Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
             }
             g.drawImage(image, x, y, w, h);

@@ -2,8 +2,8 @@ package forge.toolbox;
 
 import forge.Graphics;
 import forge.card.CardRenderer;
-import forge.game.card.Card;
 import forge.util.Utils;
+import forge.view.CardView;
 
 public class FCardPanel extends FDisplayObject {
     public static final float TAPPED_ANGLE = -90;
@@ -12,7 +12,7 @@ public class FCardPanel extends FDisplayObject {
     public static final float TARGET_ORIGIN_FACTOR_X = 0.15f;
     public static final float TARGET_ORIGIN_FACTOR_Y = 0.5f;
 
-    private Card card;
+    private CardView card;
     private boolean tapped;
     private float tappedAngle = 0;
     private boolean highlighted;
@@ -20,14 +20,14 @@ public class FCardPanel extends FDisplayObject {
     public FCardPanel() {
         this(null);
     }
-    public FCardPanel(Card card0) {
+    public FCardPanel(CardView card0) {
         card = card0;
     }
 
-    public Card getCard() {
+    public CardView getCard() {
         return card;
     }
-    public void setCard(Card card0) {
+    public void setCard(CardView card0) {
         card = card0;
     }
 
