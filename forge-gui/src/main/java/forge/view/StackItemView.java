@@ -2,19 +2,28 @@ package forge.view;
 
 public class StackItemView {
 
-    final String key;
-    final int sourceTrigger;
-    final String text;
-    final CardView source;
-    final PlayerView activatingPlayer;
-    final boolean ability, optionalTrigger;
+    private final String key;
+    private final int sourceTrigger;
+    private final String text;
+    private final CardView source;
+    private final PlayerView activatingPlayer;
+    private final Iterable<CardView> targetCards;
+    private final Iterable<PlayerView> targetPlayers;
+    private final boolean ability, optionalTrigger;
 
-    public StackItemView(final String key, final int sourceTrigger, final String text, final CardView source, final PlayerView activatingPlayer, final boolean isAbility, final boolean isOptionalTrigger) {
+    public StackItemView(final String key, final int sourceTrigger,
+            final String text, final CardView source,
+            final PlayerView activatingPlayer,
+            final Iterable<CardView> targetCards,
+            final Iterable<PlayerView> targetPlayers, final boolean isAbility,
+            final boolean isOptionalTrigger) {
         this.key = key;
         this.sourceTrigger = sourceTrigger;
         this.text = text;
         this.source = source;
         this.activatingPlayer = activatingPlayer;
+        this.targetCards = targetCards;
+        this.targetPlayers = targetPlayers;
         this.ability = isAbility;
         this.optionalTrigger = isOptionalTrigger;
     }
@@ -37,6 +46,14 @@ public class StackItemView {
 
     public PlayerView getActivatingPlayer() {
         return activatingPlayer;
+    }
+
+    public Iterable<CardView> getTargetCards() {
+        return targetCards;
+    }
+
+    public Iterable<PlayerView> getTargetPlayers() {
+        return targetPlayers;
     }
 
     public boolean isAbility() {

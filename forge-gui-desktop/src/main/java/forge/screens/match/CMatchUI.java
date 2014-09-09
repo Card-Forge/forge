@@ -26,9 +26,9 @@ import java.util.Set;
 import javax.swing.JMenu;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.testng.collections.Maps;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;

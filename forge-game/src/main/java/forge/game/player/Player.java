@@ -1159,9 +1159,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         this.changedKeywords.put(timestamp, new KeywordsChange(addKeywords, removeKeywords, false));
+        game.fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     public final KeywordsChange removeChangedKeywords(final Long timestamp) {
+        game.fireEvent(new GameEventPlayerStatsChanged(this));
         return changedKeywords.remove(Long.valueOf(timestamp));
     }
 
@@ -1205,6 +1207,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.changedKeywords.remove(ck.getKey());
             }
         }
+
+        game.fireEvent(new GameEventPlayerStatsChanged(this));
     }
 
     /*

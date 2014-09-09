@@ -34,8 +34,7 @@ import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.testng.collections.Lists;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.control.FControl;

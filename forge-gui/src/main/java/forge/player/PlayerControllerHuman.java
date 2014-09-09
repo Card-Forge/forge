@@ -96,6 +96,10 @@ public abstract class PlayerControllerHuman extends PlayerController {
         return Lists.transform(players, FN_GET_PLAYER_VIEW);
     }
 
+    public final Iterable<PlayerView> getPlayerViews(final Iterable<Player> players) {
+        return Iterables.transform(players, FN_GET_PLAYER_VIEW);
+    }
+
     public abstract Player getPlayer(PlayerView p);
 
     public abstract SpellAbilityView getSpellAbilityView(SpellAbility sa);

@@ -47,16 +47,25 @@ public class CardDetailUtil {
         }
     }
 
-    public static DetailColors getBorderColor(final CardStateView card, final boolean canShow) {
-        return getBorderColors(card.getColors(), card.isLand(), canShow, false).iterator().next();
+    public static DetailColors getBorderColor(final CardStateView card) {
+        if (card == null) {
+            return getBorderColors(null, false, false, false).iterator().next();
+        }
+        return getBorderColors(card.getColors(), card.isLand(), card.getCard().isUiDisplayable(), false).iterator().next();
     }
     public static DetailColors getBorderColor(final ColorSet cardColors, final boolean isLand, boolean canShow) {
         return getBorderColors(cardColors, isLand, canShow, false).get(0);
     }
-    public static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
+    public static List<DetailColors> getBorderColors(final CardStateView card) {
+        if (card == null) {
+            return getBorderColors(null, false, false, true);
+        }
+        return getBorderColors(card.getColors(), card.isLand(), card.getCard().isUiDisplayable(), true);
+    }
+    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, boolean canShow, boolean supportMultiple) {
         List<DetailColors> borderColors = new ArrayList<DetailColors>();
 
-        if (!canShow) {
+        if (cardColors == null || !canShow) {
             borderColors.add(DetailColors.FACE_DOWN);
         }
         else if (cardColors.isColorless()) {
@@ -218,7 +227,7 @@ public class CardDetailUtil {
         return id > 0 ? "[" + id + "]" : "";
     }
 
-    public static String composeCardText(final CardStateView state, final boolean canShow) {
+    public static String composeCardText(final CardStateView state) {
         final CardView card = state.getCard();
         final StringBuilder area = new StringBuilder();
 
@@ -227,27 +236,25 @@ public class CardDetailUtil {
             area.append("Token");
         }
 
-        if (canShow) {
-            // card text
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            String text = state.getText();
-            // LEVEL [0-9]+-[0-9]+
-            // LEVEL [0-9]+\+
-
-            String regex = "LEVEL [0-9]+-[0-9]+ ";
-            text = text.replaceAll(regex, "$0\r\n");
-
-            regex = "LEVEL [0-9]+\\+ ";
-            text = text.replaceAll(regex, "\r\n$0\r\n");
-
-            // displays keywords that have dots in them a little better:
-            regex = "\\., ";
-            text = text.replaceAll(regex, ".\r\n");
-
-            area.append(text);
+        // card text
+        if (area.length() != 0) {
+            area.append("\n");
         }
+        String text = state.getText();
+        // LEVEL [0-9]+-[0-9]+
+        // LEVEL [0-9]+\+
+
+        String regex = "LEVEL [0-9]+-[0-9]+ ";
+        text = text.replaceAll(regex, "$0\r\n");
+
+        regex = "LEVEL [0-9]+\\+ ";
+        text = text.replaceAll(regex, "\r\n$0\r\n");
+
+        // displays keywords that have dots in them a little better:
+        regex = "\\., ";
+        text = text.replaceAll(regex, ".\r\n");
+
+        area.append(text);
 
         if (card.isPhasedOut()) {
             if (area.length() != 0) {

@@ -615,7 +615,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardView c2 = toDelete.get(i);
                 if (c.getId() == c2.getId()) {
                     if (c.getTimestamp() == c2.getTimestamp()) {
-                        toDelete.remove(i);
+                        toDelete.remove(c2);
                     } else {
                         toReplace.add(c);
                     }

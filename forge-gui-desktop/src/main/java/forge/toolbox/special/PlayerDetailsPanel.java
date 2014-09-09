@@ -214,7 +214,7 @@ public class PlayerDetailsPanel extends JPanel {
         lblHand.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { handAction.actionPerformed(null); } } );
     
         lblFlashback.setHoverable(true);
-        lblFlashback.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) {flashBackAction.actionPerformed(null); } } );
+        lblFlashback.addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { flashBackAction.actionPerformed(null); } } );
     
         for(final Pair<FLabel, Byte> labelPair : getManaLabels()) {
             labelPair.getLeft().setHoverable(true);

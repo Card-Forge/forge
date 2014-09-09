@@ -2,20 +2,24 @@ package forge.view;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.player.PlayerController;
+import forge.game.zone.ZoneType;
 
 public class PlayerView extends GameEntityView {
 
     private final LobbyPlayer lobbyPlayer;
     private final PlayerController controller;
 
+    private Set<PlayerView> opponents;
     private int life, poisonCounters, maxHandSize, numDrawnThisTurn, preventNextDamage;
     private List<String> keywords;
     private String commanderInfo;
@@ -40,6 +44,14 @@ public class PlayerView extends GameEntityView {
      */
     public LobbyPlayer getLobbyPlayer() {
         return lobbyPlayer;
+    }
+
+    public void setOpponents(final Iterable<PlayerView> opponents) {
+        this.opponents = Sets.newHashSet(opponents);
+    }
+
+    public boolean isOpponentOf(final PlayerView other) {
+        return opponents.contains(other);
     }
 
     /**
@@ -168,8 +180,7 @@ public class PlayerView extends GameEntityView {
      * @param anteCards the anteCards to set
      */
     public void setAnteCards(final List<CardView> anteCards) {
-        this.anteCards.clear();
-        this.anteCards.addAll(anteCards);
+        this.anteCards = ImmutableList.copyOf(anteCards);
     }
 
     /**
@@ -183,8 +194,7 @@ public class PlayerView extends GameEntityView {
      * @param bfCards the bfCards to set
      */
     public void setBfCards(final List<CardView> bfCards) {
-        this.bfCards.clear();
-        this.bfCards.addAll(bfCards);
+        this.bfCards = ImmutableList.copyOf(bfCards);
     }
 
     /**
@@ -198,8 +208,7 @@ public class PlayerView extends GameEntityView {
      * @param commandCards the commandCards to set
      */
     public void setCommandCards(List<CardView> commandCards) {
-        this.commandCards.clear();
-        this.commandCards.addAll(commandCards);
+        this.commandCards = ImmutableList.copyOf(commandCards);
     }
 
     /**
@@ -213,8 +222,7 @@ public class PlayerView extends GameEntityView {
      * @param exileCards the exileCards to set
      */
     public void setExileCards(final List<CardView> exileCards) {
-        this.exileCards.clear();
-        this.exileCards.addAll(exileCards);
+        this.exileCards = ImmutableList.copyOf(exileCards);
     }
 
     /**
@@ -228,8 +236,7 @@ public class PlayerView extends GameEntityView {
      * @param flashbackCards the flashbackCards to set
      */
     public void setFlashbackCards(final List<CardView> flashbackCards) {
-        this.flashbackCards.clear();
-        this.flashbackCards.addAll(flashbackCards);
+        this.flashbackCards = ImmutableList.copyOf(flashbackCards);
     }
 
     /**
@@ -243,8 +250,7 @@ public class PlayerView extends GameEntityView {
      * @param graveCards the graveCards to set
      */
     public void setGraveCards(final List<CardView> graveCards) {
-        this.graveCards.clear();
-        this.graveCards.addAll(graveCards);
+        this.graveCards = ImmutableList.copyOf(graveCards);
     }
 
     /**
@@ -258,8 +264,7 @@ public class PlayerView extends GameEntityView {
      * @param handCards the handCards to set
      */
     public void setHandCards(final List<CardView> handCards) {
-        this.handCards.clear();
-        this.handCards.addAll(handCards);
+        this.handCards = ImmutableList.copyOf(handCards);
     }
 
     /**
@@ -273,8 +278,28 @@ public class PlayerView extends GameEntityView {
      * @param libraryCards the libraryCards to set
      */
     public void setLibraryCards(final List<CardView> libraryCards) {
-        this.libraryCards.clear();
-        this.libraryCards.addAll(libraryCards);
+        this.libraryCards = ImmutableList.copyOf(libraryCards);
+    }
+
+    public List<CardView> getCards(final ZoneType zone) {
+        switch (zone) {
+        case Ante:
+            return getAnteCards();
+        case Battlefield:
+            return getBfCards();
+        case Command:
+            return getCommandCards();
+        case Exile:
+            return getExileCards();
+        case Graveyard:
+            return getGraveCards();
+        case Hand:
+            return getHandCards();
+        case Library:
+            return getLibraryCards();
+        default:
+            return ImmutableList.of();
+        }
     }
 
     /**
@@ -298,22 +323,5 @@ public class PlayerView extends GameEntityView {
     public void setMana(final byte color, final int mana) {
         this.mana.put(Byte.valueOf(color), Integer.valueOf(mana));
     }
-    public void setWhiteMana(final int mana) {
-        this.setMana(MagicColor.WHITE, mana);
-    }
-    public void setBlueMana(final int mana) {
-        this.setMana(MagicColor.BLUE, mana);
-    }
-    public void setBlackMana(final int mana) {
-        this.setMana(MagicColor.BLACK, mana);
-    }
-    public void setRedMana(final int mana) {
-        this.setMana(MagicColor.RED, mana);
-    }
-    public void setGreenMana(final int mana) {
-        this.setMana(MagicColor.GREEN, mana);
-    }
-    public void setColorlessMana(final int mana) {
-        this.setMana(MagicColor.COLORLESS, mana);
-    }
+
 }

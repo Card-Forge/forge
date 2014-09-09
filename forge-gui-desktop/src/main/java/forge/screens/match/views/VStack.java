@@ -35,14 +35,12 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
-import forge.Singletons;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.match.input.InputConfirm;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
@@ -219,7 +217,7 @@ public enum VStack implements IVDoc<CStack> {
                 });
             }
 
-            DetailColors color = CardDetailUtil.getBorderColor(item.getSource().getOriginal(), !txt.startsWith("Morph "));
+            final DetailColors color = CardDetailUtil.getBorderColor(item.getSource().getOriginal());
             setBackground(new Color(color.r, color.g, color.b));
             setForeground(FSkin.getHighContrastColor(getBackground()));
         }
@@ -275,10 +273,9 @@ public enum VStack implements IVDoc<CStack> {
                     }
                     else {
                         game.setShouldAlwaysAcceptTrigger(triggerID);
-                        if (game.peekStack() == item &&
-                                Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
+                        if (game.peekStack() == item) {
                             //auto-yes if ability is on top of stack
-                            CPrompt.SINGLETON_INSTANCE.selectButtonOk();
+                            game.confirm();
                         }
                     }
                 }
@@ -294,10 +291,9 @@ public enum VStack implements IVDoc<CStack> {
                     }
                     else {
                         game.setShouldAlwaysDeclineTrigger(triggerID);
-                        if (game.peekStack() == item &&
-                                Singletons.getControl().getInputQueue().getInput() instanceof InputConfirm) {
+                        if (game.peekStack() == item) {
                             //auto-no if ability is on top of stack
-                            CPrompt.SINGLETON_INSTANCE.selectButtonOk();
+                            game.confirm();
                         }
                     }
                 }

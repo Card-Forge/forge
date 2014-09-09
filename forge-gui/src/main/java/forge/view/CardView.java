@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -14,6 +15,7 @@ import com.google.common.collect.Iterables;
 import forge.ImageKeys;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.card.CounterType;
@@ -1009,6 +1011,9 @@ public class CardView extends GameEntityView {
             this.hasTrample = hasTrample;
         }
 
+        public boolean isBasicLand() {
+            return this.isLand() && Iterables.any(type, Predicates.in(CardType.getBasicTypes()));
+        }
         public boolean isCreature() {
             return this.type.contains("Creature");
         }

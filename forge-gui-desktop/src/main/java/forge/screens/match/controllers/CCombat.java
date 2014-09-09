@@ -98,8 +98,8 @@ public enum CCombat implements ICDoc {
             }
 
             final Iterable<CardView> blockers = localCombat.getBlockers(band); 
-            boolean blocked = (blockers == null);
-            boolean isBand = bandSize > 1;
+            final boolean blocked = (blockers != null);
+            final boolean isBand = bandSize > 1;
             if (isBand) {
                 // Only print Band data if it's actually a band
                 display.append(" > BAND");

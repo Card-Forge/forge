@@ -77,6 +77,7 @@ import forge.match.input.InputBlock;
 import forge.match.input.InputConfirm;
 import forge.match.input.InputConfirmMulligan;
 import forge.match.input.InputPassPriority;
+import forge.match.input.InputPayMana;
 import forge.match.input.InputProliferate;
 import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
@@ -1417,6 +1418,13 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     }
 
     @Override
+    public void confirm() {
+        if (getGui().getInputQueue().getInput() instanceof InputConfirm) {
+            selectButtonOk();
+        }
+    }
+
+    @Override
     public boolean passPriority() {
         return getInputProxy().passPriority();
     }
@@ -1427,13 +1435,21 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     }
 
     @Override
+    public void useMana(final byte mana) {
+        final Input input = getGui().getInputQueue().getInput();
+        if (input instanceof InputPayMana) {
+            ((InputPayMana) input).useManaFromPool(mana);
+        }
+    }
+
+    @Override
     public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
         getInputProxy().selectPlayer(player, triggerEvent);
     }
 
     @Override
-    public void selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        getInputProxy().selectCard(card, triggerEvent);
+    public boolean selectCard(final CardView card, final ITriggerEvent triggerEvent) {
+        return getInputProxy().selectCard(card, triggerEvent);
     }
 
     @Override
@@ -1517,8 +1533,8 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
                 si.getSpellAbility().toUnsuppressedString(),
                 si.getSpellAbility().getSourceTrigger(),
                 si.getStackDescription(), getCardView(si.getSourceCard()),
-                getPlayerView(si.getActivator()), si.isAbility(),
-                si.isOptionalTrigger());
+                getPlayerView(si.getActivator()), getCardViews(si.getTargetChoices().getTargetCards()),
+                getPlayerViews(si.getTargetChoices().getTargetPlayers()), si.isAbility(), si.isOptionalTrigger());
         stackItems.put(si, newItem);
         return newItem;
     }
@@ -1542,6 +1558,7 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
             view = new PlayerView(p.getLobbyPlayer(), p.getController());
             players.put(p, view);
             getPlayerView(p, view);
+            view.setOpponents(getPlayerViews(p.getOpponents()));
         }
         return view;
     }
@@ -1601,6 +1618,10 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     }
 
     private CardView getCardViewFast(final Card c) {
+        if (c == null) {
+            return null;
+        }
+
         final CardView view = cards.get(c);
         if (!mayShowCard(view)) {
             view.reset();
@@ -1651,7 +1672,6 @@ public class PlayerControllerLocal extends PlayerControllerHuman implements IGam
     public boolean mayShowCard(final CardView c) {
         final Card card = getCard(c);
         return card == null || card.canBeShownTo(player);
-
     }
 
     @Override

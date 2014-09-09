@@ -26,10 +26,9 @@ import com.google.common.base.Function;
 import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.UiCommand;
+import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.match.MatchConstants;
-import forge.match.input.Input;
-import forge.match.input.InputPayMana;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
@@ -57,21 +56,21 @@ public class CField implements ICDoc {
     /**
      * Controls Swing components of a player's field instance.
      * 
-     * @param player2 &emsp; {@link forge.game.player.Player}
+     * @param player0 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.screens.match.views.VField}
      * @param playerViewer 
      */
-    public CField(final PlayerView player2, final VField v0, LobbyPlayer playerViewer) {
-        this.player = player2;
+    public CField(final PlayerView player0, final VField v0, LobbyPlayer playerViewer) {
+        this.player = player0;
         this.viewer = playerViewer;
         this.view = v0;
 
-        final ZoneAction handAction      = new ZoneAction(player.getHandCards(),      MatchConstants.HUMANHAND);
-        final ZoneAction libraryAction   = new ZoneAction(player.getLibraryCards(),   MatchConstants.HUMANLIBRARY);
-        final ZoneAction exileAction     = new ZoneAction(player.getExileCards(),     MatchConstants.HUMANEXILED);
-        final ZoneAction graveAction     = new ZoneAction(player.getGraveCards(),     MatchConstants.HUMANGRAVEYARD);
+        final ZoneAction handAction      = new ZoneAction(player, ZoneType.Hand,      MatchConstants.HUMANHAND);
+        final ZoneAction libraryAction   = new ZoneAction(player, ZoneType.Library,   MatchConstants.HUMANLIBRARY);
+        final ZoneAction exileAction     = new ZoneAction(player, ZoneType.Exile,     MatchConstants.HUMANEXILED);
+        final ZoneAction graveAction     = new ZoneAction(player, ZoneType.Graveyard, MatchConstants.HUMANGRAVEYARD);
         @SuppressWarnings("serial")
-        final ZoneAction flashBackAction = new ZoneAction(player.getFlashbackCards(), MatchConstants.HUMANFLASHBACK) {
+        final ZoneAction flashBackAction = new ZoneAction(player, null,               MatchConstants.HUMANFLASHBACK) {
             @Override
             protected void doAction(final CardView c) {
                 // activate cards only via your own flashback button
@@ -81,16 +80,16 @@ public class CField implements ICDoc {
 
                 CPrompt.SINGLETON_INSTANCE.selectCard(c, null);
             }
+            @Override
+            protected Iterable<CardView> getCardsAsIterable() {
+                return player.getFlashbackCards();
+            }
         };
 
         Function<Byte, Void> manaAction = new Function<Byte, Void>() {
             public Void apply(Byte colorCode) {
                 if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
-                    final Input in = Singletons.getControl().getInputQueue().getInput();
-                    if (in instanceof InputPayMana) {
-                        // Do something
-                        ((InputPayMana) in).useManaFromPool(colorCode);
-                    }
+                    Singletons.getControl().getGameView().useMana(colorCode.byteValue());
                 }
                 return null;
             }

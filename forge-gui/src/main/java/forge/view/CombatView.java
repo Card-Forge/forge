@@ -3,6 +3,7 @@ package forge.view;
 import java.util.Map;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -20,6 +21,10 @@ public class CombatView {
         return attackersWithDefenders.size();
     }
 
+    public boolean isAttacking(final CardView card) {
+        return attackersWithDefenders.containsKey(card);
+    }
+
     public Iterable<CardView> getAttackers() {
         return attackersWithDefenders.keySet();
     }
@@ -32,6 +37,14 @@ public class CombatView {
         return attackersWithDefenders.get(attacker);
     }
 
+    public boolean isBlocking(final CardView card) {
+        for (final Iterable<CardView> blockers : attackersWithBlockers.values()) {
+            if (Iterables.contains(blockers, card)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public Iterable<CardView> getBlockers(final CardView attacker) {
         return attackersWithBlockers.get(attacker);
     }

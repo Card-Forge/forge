@@ -223,9 +223,6 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void updatePhase() {
-        //PhaseHandler pH = Singletons.getControl().getObservedGame().getPhaseHandler();
-        //PhaseType ph = pH.getPhase();
-
         final PlayerView p = Singletons.getControl().getGameView().getPlayerTurn();
         final PhaseType ph = Singletons.getControl().getGameView().getPhase();
         final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
@@ -411,9 +408,9 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public boolean openZones(final List<ZoneType> zones, final Map<PlayerView, Object> players) {
+    public boolean openZones(final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
         if (zones.size() == 1) {
-            switch (zones.get(0)) {
+            switch (zones.iterator().next()) {
             case Battlefield:
             case Hand:
                 return true; //don't actually need to open anything, but indicate that zone can be opened

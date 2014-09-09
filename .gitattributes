@@ -509,6 +509,7 @@ forge-game/src/main/java/forge/game/event/GameEventPlayerDamaged.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerLivesChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerPoisoned.java -text
 forge-game/src/main/java/forge/game/event/GameEventPlayerPriority.java -text
+forge-game/src/main/java/forge/game/event/GameEventPlayerStatsChanged.java -text
 forge-game/src/main/java/forge/game/event/GameEventShuffle.java -text
 forge-game/src/main/java/forge/game/event/GameEventSpellAbilityCast.java -text
 forge-game/src/main/java/forge/game/event/GameEventSpellRemovedFromStack.java -text

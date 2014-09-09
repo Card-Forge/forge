@@ -3,14 +3,15 @@ package forge.screens.match;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;
 import forge.match.MatchConstants;
 import forge.view.CardView;
 import forge.view.CardView.CardStateView;
+import forge.view.PlayerView;
 
 /**
  * Receives click and programmatic requests for viewing data stacks in the
@@ -19,7 +20,8 @@ import forge.view.CardView.CardStateView;
  */
 public class ZoneAction extends ForgeAction {
     private static final long serialVersionUID = -5822976087772388839L;
-    private final Iterable<CardView> cards;
+    private final PlayerView player;
+    private final ZoneType zone;
     private final String title;
 
     /**
@@ -32,10 +34,11 @@ public class ZoneAction extends ForgeAction {
      * @param property
      *            &emsp; String obj
      */
-    public ZoneAction(final Iterable<CardView> cards, final MatchConstants property) {
+    public ZoneAction(final PlayerView player, final ZoneType zone, final MatchConstants property) {
         super(property);
         this.title = property.title;
-        this.cards = Iterables.unmodifiableIterable(cards);
+        this.player = player;
+        this.zone = zone;
     }
 
     /**
@@ -63,7 +66,7 @@ public class ZoneAction extends ForgeAction {
     }
 
     protected Iterable<CardView> getCardsAsIterable() {
-        return cards;
+        return player.getCards(zone);
     }
 
     protected void doAction(final CardView c) {

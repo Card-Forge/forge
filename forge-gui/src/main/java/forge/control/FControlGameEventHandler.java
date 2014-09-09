@@ -35,6 +35,8 @@ import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventPlayerPriority;
+import forge.game.event.GameEventPlayerStatsChanged;
+import forge.game.event.GameEventShuffle;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
@@ -125,9 +127,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
-        List<Card> options = new ArrayList<Card>();
-        for (final Entry<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards.entries()) {
-            Card fakeCard = new Card(-1); //use fake card so real cards appear with proper formatting
+        final List<Card> options = new ArrayList<Card>();
+        for (final Entry<Player, Card> kv : ev.cards.entries()) {
+            final Card fakeCard = new Card(-1); //use fake card so real cards appear with proper formatting
             fakeCard.setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
             options.add(kv.getValue());
@@ -357,6 +359,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         final Iterable<CardView> cardViews = controller.getCardViews(event.cards);
         gui.refreshCardDetails(cardViews);
         return updateManyCards(cardViews);
+    }
+
+    @Override
+    public Void visit(GameEventPlayerStatsChanged event) {
+        for (final Player p : event.players) {
+            gui.refreshCardDetails(controller.getCardViews(p.getAllCards()));
+        }
+        return null;
+    }
+
+    @Override
+    public Void visit(GameEventShuffle event) {
+        updateZone(event.player.getZone(ZoneType.Library));
+        return null;
     }
 
     // Update manapool

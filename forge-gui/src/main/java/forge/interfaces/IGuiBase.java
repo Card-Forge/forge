@@ -73,7 +73,7 @@ public interface IGuiBase {
     void finishGame();
     Object showManaPool(PlayerView player);
     void hideManaPool(PlayerView player, Object zoneToRestore);
-    boolean openZones(List<ZoneType> zones, Map<PlayerView, Object> players);
+    boolean openZones(Collection<ZoneType> zones, Map<PlayerView, Object> players);
     void restoreOldZones(Map<PlayerView, Object> playersToRestoreZonesFor);
     void updateStack();
     void updateZones(List<Pair<PlayerView, ZoneType>> zonesToUpdate);

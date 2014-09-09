@@ -54,10 +54,12 @@ public interface IGameView {
 
     public abstract void selectButtonOk();
     public abstract void selectButtonCancel();
+    public abstract void confirm();
     public abstract boolean passPriority();
     public abstract boolean passPriorityUntilEndOfTurn();
+    public abstract void useMana(byte mana);
     public abstract void selectPlayer(PlayerView player, ITriggerEvent triggerEvent);
-    public abstract void selectCard(CardView card, ITriggerEvent triggerEvent);
+    public abstract boolean selectCard(CardView card, ITriggerEvent triggerEvent);
     public abstract void selectAbility(SpellAbilityView sa);
 
     // the following method should eventually be replaced by methods returning

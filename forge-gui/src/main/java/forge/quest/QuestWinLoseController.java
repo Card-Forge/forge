@@ -40,7 +40,7 @@ import forge.view.PlayerView;
 
 public abstract class QuestWinLoseController {
     private final IGameView lastGame;
-    private final IGuiBase gui;
+    protected final IGuiBase gui;
     private final transient boolean wonMatch;
     private final transient boolean isAnte;
     private final transient QuestController qData;
