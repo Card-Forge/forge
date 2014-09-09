@@ -20,7 +20,6 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -120,12 +119,6 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public boolean isGuiThread() {
         return SwingUtilities.isEventDispatchThread();
-    }
-
-    @Override
-    public String getAssetsDir() {
-        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ?
-                "../forge-gui/" : "";
     }
 
     @Override

@@ -17,11 +17,15 @@
  */
 package forge.view;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.GuiBase;
 import forge.GuiDesktop;
 import forge.Singletons;
 import forge.card.CardReaderExperiments;
 import forge.error.ExceptionHandler;
+import forge.properties.ForgeConstants;
+import forge.util.BuildInfo;
 
 /**
  * Main class for Forge's swing application view.
@@ -31,6 +35,10 @@ public final class Main {
      * Main entrypoint for Forge
      */
     public static void main(final String[] args) {
+        // Init ForgeConstants
+        final String assetsDir = StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "svn") ? "../forge-gui/" : "";
+        ForgeConstants.init(assetsDir);
+
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 

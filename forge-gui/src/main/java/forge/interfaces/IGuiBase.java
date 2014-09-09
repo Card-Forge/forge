@@ -38,7 +38,6 @@ public interface IGuiBase {
     void invokeInEdtLater(Runnable runnable);
     void invokeInEdtAndWait(final Runnable proc);
     boolean isGuiThread();
-    String getAssetsDir();
     ISkinImage getSkinIcon(FSkinProp skinProp);
     ISkinImage getUnskinnedIcon(String path);
     void showBugReportDialog(String title, String text, boolean showExitAppBtn);
