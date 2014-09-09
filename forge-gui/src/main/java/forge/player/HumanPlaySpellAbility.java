@@ -196,40 +196,59 @@ public class HumanPlaySpellAbility {
     }
 
     private boolean announceValuesLikeX() {
+        if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+        
+        boolean needX = true;
+        boolean allowZero = !ability.hasParam("XCantBe0");
+        CostPartMana manaCost = ability.getPayCosts().getCostMana();
+        PlayerController controller = ability.getActivatingPlayer().getController();
+        Card card = ability.getHostCard();
+
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         String announce = ability.getParam("Announce");
         if (announce != null) {
-            for(String aVar : announce.split(",")) {
+            for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
 
                 boolean isX = "X".equalsIgnoreCase(varName);
-                CostPartMana manaCost = ability.getPayCosts().getCostMana();
-                boolean allowZero = !ability.hasParam("XCantBe0") && (!isX || manaCost == null || manaCost.canXbe0());
+                if (isX) { needX = false; }
 
-                Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, varName, allowZero);
+                Integer value = controller.announceRequirements(ability, varName, allowZero && (!isX || manaCost == null || manaCost.canXbe0()));
                 if (value == null) {
                     return false;
                 }
 
                 ability.setSVar(varName, value.toString());
                 if ("Multikicker".equals(varName)) {
-                    ability.getHostCard().setKickerMagnitude(value);
+                    card.setKickerMagnitude(value);
                 }
                 else {
-                    ability.getHostCard().setSVar(varName, value.toString());
+                    card.setSVar(varName, value.toString());
                 }
             }
+        }
+
+        if (needX && manaCost != null && manaCost.getAmountOfX() > 0) {
+            Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+            if (value == null) {
+                return false;
+            }
+
+            ability.setSVar("X", value.toString());
+            card.setSVar("X", value.toString());
         }
         return true;
     }
 
+    // Announcing Requirements like choosing creature type or number
     private boolean announceType() {
-     // Announcing Requirements like choosing creature type or number
+        if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+
         String announce = ability.getParam("AnnounceType");
         PlayerController pc = ability.getActivatingPlayer().getController();
         if (announce != null) {
-            for(String aVar : announce.split(",")) {
+            for (String aVar : announce.split(",")) {
                 String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
                     String choice = pc.chooseSomeType("Creature", ability, CardType.getCreatureTypes(), new ArrayList<String>());

@@ -41,7 +41,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     private final Object zoneToRestore;
 
     private boolean bPaid = false;
-    private Boolean canPayManaCost = null;
+    protected Boolean canPayManaCost = null;
 
     private boolean locked = false;
 
@@ -343,7 +343,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return true;
     }
 
-    private void runAsAi(Runnable proc) {
+    protected void runAsAi(Runnable proc) {
         player.runWithController(proc, new PlayerControllerAi(game, player, player.getOriginalLobbyPlayer()));
     }
 

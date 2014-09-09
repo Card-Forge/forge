@@ -13,19 +13,19 @@ import forge.game.player.RegisteredPlayer;
 public enum GameType {
 
     //            deck composition rules, isPoolRestricted, can sideboard between matches
-    Sealed          (DeckFormat.Limited, true, true, true, "Sealed", null),
-    Draft           (DeckFormat.Limited, true, true, true, "Draft", null),
-    Winston         (DeckFormat.Limited, true, true, true, "Winston", null),
-    Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet", null),
-    Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", null),
-    QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", null),
-    Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", null),
-    Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", null),
-    Commander       (DeckFormat.Commander, false, false, false, "Commander", null),
-    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", null),
-    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", null),
-    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", null),
-    MomirBasic      (DeckFormat.Constructed, false, false, false, "Momir Basic", new Function<RegisteredPlayer, Deck>() {
+    Sealed          (DeckFormat.Limited, true, true, true, "Sealed", "", null),
+    Draft           (DeckFormat.Limited, true, true, true, "Draft", "", null),
+    Winston         (DeckFormat.Limited, true, true, true, "Winston", "", null),
+    Gauntlet        (DeckFormat.Limited, true, true, true, "Gauntlet", "", null),
+    Quest           (DeckFormat.QuestDeck, true, true, false, "Quest", "", null),
+    QuestDraft      (DeckFormat.Limited, true, true, true, "Quest Draft", "", null),
+    Constructed     (DeckFormat.Constructed, false, true, true, "Constructed", "", null),
+    Vanguard        (DeckFormat.Vanguard, true, true, true, "Vanguard", "Each player has a special \"Avatar\" card that affects the game.", null),
+    Commander       (DeckFormat.Commander, false, false, false, "Commander", "Each player has a legendary \"General\" card which can be cast at any time and determines deck colors.", null),
+    Planechase      (DeckFormat.Planechase, false, false, true, "Planechase", "Plane cards apply global effects. Plane card changed when a player rolls \"Chaos\" on the planar die.", null),
+    Archenemy       (DeckFormat.Archenemy, false, false, true, "Archenemy", "One player is the Archenemy and can play scheme cards.", null),
+    ArchenemyRumble (DeckFormat.Archenemy, false, false, true, "Archenemy Rumble", "All players are Archenemies and can play scheme cards.", null),
+    MomirBasic      (DeckFormat.Constructed, false, false, false, "Momir Basic", "Each player has a deck containing 60 basic lands and the Momir Vig avatar.", new Function<RegisteredPlayer, Deck>() {
         @Override
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
@@ -43,15 +43,16 @@ public enum GameType {
 
     private final DeckFormat deckFormat;
     private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame;
-    private final String name;
+    private final String name, description;
     private final Function<RegisteredPlayer, Deck> deckAutoGenerator;
 
-    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
+    GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {
         deckFormat = deckFormat0;
         isCardPoolLimited = isCardPoolLimited0;
         canSideboard = canSideboard0;
         addWonCardsMidGame = addWonCardsMidgame0;
         name = name0;
+        description = description0;
         deckAutoGenerator = deckAutoGenerator0;
     }
 
@@ -103,5 +104,9 @@ public enum GameType {
 
     public String toString() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

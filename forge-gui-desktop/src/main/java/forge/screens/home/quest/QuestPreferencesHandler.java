@@ -213,6 +213,9 @@ public class QuestPreferencesHandler extends SkinnedPanel {
         pnlShop.add(new FLabel.Builder().text("Maximum Packs").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_MAX_PACKS, ErrType.SHOP), constraints1);
 
+        pnlShop.add(new FLabel.Builder().text("Minimum Packs").build(), constraints2);
+        pnlShop.add(new PrefInput(QPref.SHOP_MIN_PACKS, ErrType.SHOP), constraints1);
+
         pnlShop.add(new FLabel.Builder().text("Starting Packs").build(), constraints2);
         pnlShop.add(new PrefInput(QPref.SHOP_STARTING_PACKS, ErrType.SHOP), constraints1);
 

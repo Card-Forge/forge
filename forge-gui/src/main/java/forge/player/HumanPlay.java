@@ -4,9 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.FThreads;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameLogEntryType;
@@ -27,7 +25,6 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputPayMana;
 import forge.match.input.InputPayManaOfCostPayment;
 import forge.match.input.InputPayManaSimple;
-import forge.match.input.InputPayManaX;
 import forge.match.input.InputSelectCardsFromList;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -635,8 +632,9 @@ public class HumanPlay {
             prompt = source + "\n" + promptCurrent;
         }
         
-        if( sourceAbility != null )
+        if (sourceAbility != null) {
             sourceAbility.clearManaPaid();
+        }
         boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, false);
         if (!paid) {
             p.getManaPool().refundManaPaid(sourceAbility);
@@ -692,24 +690,32 @@ public class HumanPlay {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
-        boolean xWasBilled = false;
         String xInCard = source.getSVar("X");
         if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
-            // this currently only works for things about Targeted object
-            int xCost = AbilityUtils.calculateAmount(source, "X", ability) * mc.getAmountOfX();
-            byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
-            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
-            xWasBilled = true;
-        }
-        int timesMultikicked = ability.getHostCard().getKickerMagnitude();
-        if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = ability.getMultiKickerManaCost();
-            for(int i = 0; i < timesMultikicked; i++)
-                toPay.addManaCost(mkCost);
+            int xPaid = AbilityUtils.calculateAmount(source, "X", ability);
+            toPay.setXManaCostPaid(xPaid, ability.getParam("XColor"));
+            source.setXManaCostPaid(xPaid);
         }
 
-        if( isActivatedSa )
-           ManaCostAdjustment.adjust(toPay, ability, false);
+        int timesMultikicked = source.getKickerMagnitude();
+        if (timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
+            ManaCost mkCost = ability.getMultiKickerManaCost();
+            for (int i = 0; i < timesMultikicked; i++) {
+                toPay.addManaCost(mkCost);
+            }
+        }
+
+        Integer replicate = ability.getSVarInt("Replicate");
+        if (replicate != null) {
+            ManaCost rCost = source.getManaCost();
+            for (int i = 0; i < replicate; i++) {
+                toPay.addManaCost(rCost);
+            }
+        }
+
+        if (isActivatedSa) {
+            ManaCostAdjustment.adjust(toPay, ability, false);
+        }
         
         InputPayMana inpPayment;
         if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
@@ -726,19 +732,6 @@ public class HumanPlay {
 
             source.setColorsPaid(toPay.getColorsPaid());
             source.setSunburstValue(toPay.getSunburst());
-        }
-        if (mc.getAmountOfX() > 0) {
-            if (!ability.isAnnouncing("X") && !xWasBilled) {
-                source.setXManaCostPaid(0);
-                inpPayment = new InputPayManaX(controller, ability, mc.getAmountOfX(), mc.canXbe0());
-                inpPayment.showAndWait();
-                if (!inpPayment.isPaid()) {
-                    return false;
-                }
-            } else {
-                int x = AbilityUtils.calculateAmount(source, "X", ability);
-                source.setXManaCostPaid(x);
-            }
         }
 
         // Handle convoke and offerings

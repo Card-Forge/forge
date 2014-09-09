@@ -2535,7 +2535,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                             sb.indexOf("Storm (When you cast this spell, copy it for each spell cast before it this turn.") + 81,
                             " You may choose new targets for the copies.");
                 }
-            } else if (keyword.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+            } else if (keyword.startsWith("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
                 if (sb.toString().endsWith("\r\n\r\n")) {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n") + 3);
                 }
@@ -4181,8 +4181,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addMultiKickerMagnitude(final int n) { this.multiKickerMagnitude += n; }
     public final void setKickerMagnitude(final int n) { this.multiKickerMagnitude = n; }
     public final int getKickerMagnitude() {
-        if (this.multiKickerMagnitude > 0)
+        if (this.multiKickerMagnitude > 0) {
             return multiKickerMagnitude;
+        }
         boolean hasK1 = costsPaid.contains(OptionalCost.Kicker1);
         return hasK1 == costsPaid.contains(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }

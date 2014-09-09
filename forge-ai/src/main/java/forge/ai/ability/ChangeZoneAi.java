@@ -1133,6 +1133,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if( fetchList.isEmpty() )
             return null;
+
+        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeverBounceItself")) {
+            Card source = sa.getHostCard();
+            if (fetchList.contains(source)) {
+                // For cards that should never be bounced back to hand with their own [e.g. triggered] abilities, such as guild lands.
+                fetchList.remove(source);
+            }
+        }
         
         String type = sa.getParam("ChangeType");
         if (type == null) {

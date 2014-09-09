@@ -73,7 +73,6 @@ public class ComputerUtilMana {
         }
         manaSpent.clear();
     }
-    
 
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
@@ -81,7 +80,6 @@ public class ComputerUtilMana {
     }
 	
 	private static class ManaProducingCard {
-		
 		private CoreType cardType;
 		private int manaCount;
 		
@@ -1169,10 +1167,11 @@ public class ComputerUtilMana {
      * @since 1.0.15
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player) {
-        for (int i = 1; i < 100; i++)
-            if (!canPayManaCost(sa, player, i))
+        for (int i = 1; i < 100; i++) {
+            if (!canPayManaCost(sa, player, i)) {
                 return i - 1;
-
+            }
+        }
         return 99;
     }
 

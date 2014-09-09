@@ -99,12 +99,15 @@ public class SGuiChoose {
 
     // Get Integer in range
     public static Integer getInteger(final IGuiBase gui, final String message) {
-        return getInteger(gui, message, 0, Integer.MAX_VALUE);
+        return getInteger(gui, message, 0, Integer.MAX_VALUE, false);
     }
     public static Integer getInteger(final IGuiBase gui, final String message, int min) {
-        return getInteger(gui, message, min, Integer.MAX_VALUE);
+        return getInteger(gui, message, min, Integer.MAX_VALUE, false);
     }
     public static Integer getInteger(final IGuiBase gui, final String message, int min, int max) {
+        return getInteger(gui, message, min, max, false);
+    }
+    public static Integer getInteger(final IGuiBase gui, final String message, int min, int max, boolean sortDesc) {
         if (max <= min) { return min; } //just return min if max <= min
 
         //force cutting off after 100 numbers at most
@@ -117,8 +120,15 @@ public class SGuiChoose {
         }
 
         final Integer[] choices = new Integer[count];
-        for (int i = 0; i < count; i++) {
-            choices[i] = Integer.valueOf(i + min);
+        if (sortDesc) {
+            for (int i = 0; i < count; i++) {
+                choices[count - i - 1] = Integer.valueOf(i + min);
+            }
+        }
+        else {
+            for (int i = 0; i < count; i++) {
+                choices[i] = Integer.valueOf(i + min);
+            }
         }
         return SGuiChoose.oneOrNone(gui, message, choices);
     }

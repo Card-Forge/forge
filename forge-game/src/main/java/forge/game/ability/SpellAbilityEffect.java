@@ -78,7 +78,7 @@ import java.util.StringTokenizer;
             if (abSub != null) {
                 sb.append(abSub.getStackDescription());
             }
-            
+
             if (sa.hasParam("Announce")) {
                 String svar = sa.getParam("Announce");
                 int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar(svar));

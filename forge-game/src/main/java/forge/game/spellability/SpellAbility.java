@@ -131,8 +131,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final AbilityManaPart getManaPartRecursive() {
         SpellAbility tail = this;
         while (tail != null) {
-            if(tail.manaPart != null)
+            if (tail.manaPart != null) {
                 return tail.manaPart;
+            }
             tail = tail.getSubAbility();
         }
         return null;
@@ -140,14 +141,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isManaAbility() {
         // Check whether spell or ability first
-        if (this.isSpell())
+        if (this.isSpell()) {
             return false;
+        }
         // without a target
-        if (this.usesTargeting()) return false;
-        if (getRestrictions() != null && getRestrictions().getPlaneswalker())
+        if (this.usesTargeting()) { return false; }
+        if (getRestrictions() != null && getRestrictions().getPlaneswalker()) {
             return false; //Loyalty ability, not a mana ability.
-        if (this.isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana)
+        }
+        if (this.isWrapper() && ((WrappedAbility) this).getTrigger().getMode() != TriggerType.TapsForMana) {
             return false;
+        }
 
         return getManaPartRecursive() != null;
     }
@@ -157,7 +161,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final String getSVar(final String name) {
-        return sVars.get(name) != null ? sVars.get(name) : "";
+        String var = sVars.get(name);
+        if (var == null) {
+            var = "";
+        }
+        return var;
+    }
+
+    public final Integer getSVarInt(final String name) {
+        String var = sVars.get(name);
+        if (var != null) {
+            try {
+                return Integer.parseInt(var);
+            }
+            catch (Exception e) {}
+        }
+        return null;
     }
 
     public final void setSVar(final String name, final String value) {
@@ -298,18 +317,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
 
-
-     /**
-     * <p>
-     * isMultiKicker.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isMultiKicker() {
-        return this.multiKickerManaCost != null && !this.isAnnouncing("Multikicker");
-    }
-
     /**
      * <p>
      * setIsMorphUp.
@@ -380,14 +387,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public String getParamOrDefault(String key, String defaultValue) {
-        return mapParams == null || !mapParams.containsKey(key) ? defaultValue : mapParams.get(key);
+        return mapParams.containsKey(key) ? mapParams.get(key) : defaultValue;
     }
 
     public String getParam(String key) {
-        return mapParams == null ? null : mapParams.get(key);
+        return mapParams.get(key);
     }
     public boolean hasParam(String key) {
-        return mapParams == null ? false : mapParams.containsKey(key);
+        return mapParams.containsKey(key);
     }
 
     /**
@@ -395,9 +402,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      * @param mapParams
      */
     public void copyParamsToMap(Map<String, String> mapParams) {
-        if (null != this.mapParams) {
-            mapParams.putAll(this.mapParams);
-        }
+        mapParams.putAll(this.mapParams);
     }
 
     // If this is not null, then ability was made in a factory
@@ -1127,8 +1132,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             String[] validTgt = tr.getValidTgts();
-            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, this.getActivatingPlayer(), this.getHostCard()))
+            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, this.getActivatingPlayer(), this.getHostCard())) {
                return false;
+            }
         }
 
         // Restrictions coming from target
@@ -1298,7 +1304,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         while (null != parent.getParent()) {
             parent = parent.getParent();
         }
-
         return parent;
     }
 
@@ -1351,13 +1356,30 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
      */
     public boolean isAnnouncing(String variable) {
         String announce = getParam("Announce");
-        if (StringUtils.isBlank(announce)) return false;
+        if (StringUtils.isBlank(announce)) { return false; }
+
         String[] announcedOnes = TextUtil.split(announce, ',');
-        for(String a : announcedOnes) {
-            if( a.trim().equalsIgnoreCase(variable))
+        for (String a : announcedOnes) {
+            if (a.trim().equalsIgnoreCase(variable)) {
                 return true;
+            }
         }
         return false;
+    }
+
+    public void addAnnounceVar(String variable) {
+        String announce = getParam("Announce");
+        if (StringUtils.isBlank(announce)) {
+            mapParams.put("Announce", variable);
+            return;
+        }
+        String[] announcedOnes = TextUtil.split(announce, ',');
+        for (String a : announcedOnes) {
+            if (a.trim().equalsIgnoreCase(variable)) {
+                return; //don't add announce variable that already exists
+            }
+        }
+        mapParams.put("Announce", announce + ";" + variable);
     }
 
     public boolean isXCost() {
@@ -1486,10 +1508,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         targetChosen.add(card);
 
         final String desc;
-
         if (!card.isFaceDown()) {
             desc = this.getHostCard().getName() + " - targeting " + card;
-        } else {
+        }
+        else {
             desc = this.getHostCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
         }
         this.setStackDescription(desc);
@@ -1532,7 +1554,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return ImmutableList.<Card>of();
     }
 
-
     public SpellAbility getSATargetingCard() {
         return targetChosen.isTargetingAnyCard() ? this : getParentTargetingCard();
     }
@@ -1543,8 +1564,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             parent = ((WrappedAbility) parent).getWrappedAbility();
         }
         while (parent != null) {
-            if (parent.targetChosen.isTargetingAnyCard())
+            if (parent.targetChosen.isTargetingAnyCard()) {
                 return parent;
+            }
             parent = parent.getParent();
         }
         return null;
@@ -1674,15 +1696,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final String[] incR = restriction.split("\\.", 2);
 
         if (incR[0].equals("Spell")) {
-            if (!this.isSpell())
+            if (!this.isSpell()) {
                 return false;
-        } else if (incR[0].equals("Triggered")) {
-            if (!this.isTrigger())
+            }
+        }
+        else if (incR[0].equals("Triggered")) {
+            if (!this.isTrigger()) {
                 return false;
-        } else if (incR[0].equals("Activated")) {
-            if (!(this instanceof AbilityActivated))
+            }
+        }
+        else if (incR[0].equals("Activated")) {
+            if (!(this instanceof AbilityActivated)) {
                 return false;
-        } else { //not a spell/ability type
+            }
+        }
+        else { //not a spell/ability type
             return false;
         }
 
@@ -1811,5 +1839,4 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             this.subAbility.setIntrinsic(i);
         }
     }
-
 }
