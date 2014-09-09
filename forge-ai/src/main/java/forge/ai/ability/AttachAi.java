@@ -985,8 +985,8 @@ public class AttachAi extends SpellAbilityAi {
         // TODO AttachSource is currently set for the Source of the Spell, but
         // at some point can support attaching a different card
 
-        // Don't equip if already equipping
-        if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController() == aiPlayer || attachSource.hasSVar("DontEquip")) {
+        // Don't equip if DontEquip SVar is set
+        if (attachSource.hasSVar("DontEquip")) {
             return null;
         }
         // Don't fortify if already fortifying
@@ -1016,6 +1016,22 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
+
+        if (c != null && attachSource.getType().contains("Equipment")) {
+            if (c.equals(attachSource.getEquippingCard())) {
+                // Do not equip if equipping the same card already
+                return null;
+            } else {
+                // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
+                AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
+                if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+                    SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);
+                    if (futureSpell != null && futureSpell.getHostCard() != null) {
+                        aic.reserveManaSourcesForMain2(futureSpell);
+                    }
+                }
+            }
+        }
 
         if ((c == null) && mandatory) {
             CardLists.shuffle(list);
