@@ -1017,18 +1017,31 @@ public class AttachAi extends SpellAbilityAi {
 
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
-        if (c != null && attachSource.getType().contains("Equipment")) {
+        AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
+        if (c != null && attachSource.getType().contains("Equipment") 
+                && attachSource.getEquippingCard() != null 
+                && attachSource.getEquippingCard().getController() == aiPlayer) {
             if (c.equals(attachSource.getEquippingCard())) {
                 // Do not equip if equipping the same card already
                 return null;
-            } else {
-                // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
-                AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
-                if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
-                    SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);
-                    if (futureSpell != null && futureSpell.getHostCard() != null) {
-                        aic.reserveManaSourcesForMain2(futureSpell);
-                    }
+            }
+
+            if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("never")) {
+                // Do not equip other creatures if the AI profile does not allow moving equipment around
+                return null;
+            } else if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("from_useless_only")) {
+                // Do not equip other creatures if the AI profile only allows moving equipment from useless creatures
+                // and the equipped creature is still useful (not non-untapping+tapped and not set to can't attack/block)
+                if (!isUselessCreature(attachSource.getEquippingCard())) {
+                    return null;
+                }
+            }
+            
+            // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
+            if (aic.getCardMemory().isMemorySetEmpty(AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {
+                SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);
+                if (futureSpell != null && futureSpell.getHostCard() != null) {
+                    aic.reserveManaSourcesForMain2(futureSpell);
                 }
             }
         }
@@ -1308,17 +1321,23 @@ public class AttachAi extends SpellAbilityAi {
 
         ArrayList<String> cardTypes = sa.getHostCard().getType();
 
-        if (cardTypes.contains("Equipment") && c.hasKeyword("CARDNAME can't attack or block.")) {
+        if (cardTypes.contains("Equipment") && isUselessCreature(c)) {
             // useless to equip a creature that can't attack or block.
-            return false;
-        } else if (cardTypes.contains("Equipment") && c.isTapped() && c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
-            // useless to equip a creature that won't untap and is tapped.
             return false;
         }
 
         return true;
     }
 
+    private static boolean isUselessCreature(Card c) {
+        if (c.hasKeyword("CARDNAME can't attack or block.")
+                || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped())) {
+            return true;
+        }
+
+        return false;
+    }
+    
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;

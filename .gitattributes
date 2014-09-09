@@ -1291,6 +1291,7 @@ forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Reckless.ai -text
+forge-gui/res/ai/Tricky.ai -text
 forge-gui/res/blockdata/blocks.txt svneol=native#text/plain
 forge-gui/res/blockdata/boosterboxes.txt -text
 forge-gui/res/blockdata/boosters-special.txt -text
