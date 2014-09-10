@@ -19,7 +19,7 @@ import forge.util.gui.SOptionPane;
 
 public enum Achievement {
     WinStreak("Win Streak", true,
-            "Win 10 games in a row.", 1,
+            "Win 10 games in a row.", 10,
             "Win 25 games in a row.", 25,
             "Win 50 games in a row.", 50,
             new Evaluator() {
