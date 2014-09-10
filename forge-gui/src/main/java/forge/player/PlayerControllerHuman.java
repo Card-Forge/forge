@@ -1392,7 +1392,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
         @Override
         public void devPlaneswalkTo() {
-            DevModeUtil.devModeRiggedPlanarRoll(game, PlayerControllerHuman.this);
+            DevModeUtil.devModePlaneswalkTo(game, PlayerControllerHuman.this);
         }
 
     }

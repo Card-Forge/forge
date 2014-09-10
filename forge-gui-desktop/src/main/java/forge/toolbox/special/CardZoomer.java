@@ -192,7 +192,7 @@ public enum CardZoomer {
         thisCard = newCard;
         isInAltState = false;
         setLayout();
-        setImage();         
+        setImage();
         SOverlayUtils.showOverlay();
         isOpen = true;
     }
@@ -220,7 +220,7 @@ public enum CardZoomer {
     }
 
     private int getInitialRotation() {
-        return (thisCard.isSplitCard() || getState().isPlane() || getState().isPhenomenon() ? 90 : 0);
+        return (thisCard.isSplitCard() ? 90 : 0);
     }   
 
     private void setLayout() {

@@ -8881,7 +8881,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         case Library:
         case PlanarDeck:
-        case SchemeDeck:
             //cards in these zones are hidden to all unless they specify otherwise
             if (getController() == viewer && hasKeyword("You may look at this card.")) {
                 return true;
@@ -8890,6 +8889,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return true;
             }
             break;
+        case SchemeDeck:
+            // true for now, to actually see the Scheme cards (can't see deck anyway)
+            return true;
         }
 
         //one last check to see if card can be shown
@@ -8913,6 +8915,10 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public boolean canCardFaceBeShownTo(final Player viewer) {
         if (!this.isFaceDown()) {
+            return true;
+        }
+        //if viewer is controlled by another player, also check if face can be shown to that player
+        if (viewer.isMindSlaved() && canCardFaceBeShownTo(viewer.getMindSlaveMaster())) {
             return true;
         }
         return !getController().isOpponentOf(viewer) || hasKeyword("Your opponent may look at this card.");
