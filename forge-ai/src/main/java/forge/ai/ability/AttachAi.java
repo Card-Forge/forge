@@ -1032,7 +1032,7 @@ public class AttachAi extends SpellAbilityAi {
             } else if (aic.getProperty(AiProps.MOVE_EQUIPMENT_TO_BETTER_CREATURES).equals("from_useless_only")) {
                 // Do not equip other creatures if the AI profile only allows moving equipment from useless creatures
                 // and the equipped creature is still useful (not non-untapping+tapped and not set to can't attack/block)
-                if (!isUselessCreature(attachSource.getEquippingCard())) {
+                if (!isUselessCreature(aiPlayer, attachSource.getEquippingCard())) {
                     return null;
                 }
             }
@@ -1115,7 +1115,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         // Consider exceptional cases which break the normal evaluation rules
-        if (!isUsefulAttachAction(c, sa)) {
+        if (!isUsefulAttachAction(ai, c, sa)) {
             return null;
         }
 
@@ -1308,7 +1308,7 @@ public class AttachAi extends SpellAbilityAi {
      * @param sa SpellAbility
      * @return true, if the action is useful (beneficial) in the current minimal context (Card vs. Attach SpellAbility) 
      */
-    private static boolean isUsefulAttachAction(Card c, SpellAbility sa) {
+    private static boolean isUsefulAttachAction(Player ai, Card c, SpellAbility sa) {
         if (c == null) {
             return false; 
         }
@@ -1321,7 +1321,7 @@ public class AttachAi extends SpellAbilityAi {
 
         ArrayList<String> cardTypes = sa.getHostCard().getType();
 
-        if (cardTypes.contains("Equipment") && isUselessCreature(c)) {
+        if (cardTypes.contains("Equipment") && isUselessCreature(ai, c)) {
             // useless to equip a creature that can't attack or block.
             return false;
         }
@@ -1329,13 +1329,14 @@ public class AttachAi extends SpellAbilityAi {
         return true;
     }
 
-    private static boolean isUselessCreature(Card c) {
+    private static boolean isUselessCreature(Player ai, Card c) {
         if (c == null) {
             return true;
         }
 
         if (c.hasKeyword("CARDNAME can't attack or block.")
-                || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped())) {
+                || (c.hasKeyword("CARDNAME doesn't untap during your untap step.") && c.isTapped())
+                || (c.getOwner() == ai && ai.getOpponents().contains(c.getController()))) {
             return true;
         }
 
