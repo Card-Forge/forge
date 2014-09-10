@@ -61,9 +61,9 @@ public enum Achievement {
                 }
             }),
     LifeToSpare("Life to Spare", true,
-            "Win game with 20 life more than you started with.", 25,
-            "Win game with 40 life more than you started with.", 50,
-            "Win game with 80 life more than you started with.", 100,
+            "Win game with 20 life more than you started with.", 20,
+            "Win game with 40 life more than you started with.", 40,
+            "Win game with 80 life more than you started with.", 80,
             new Evaluator() {
                 @Override
                 public int evaluate(Player player, Game game, int current) {
