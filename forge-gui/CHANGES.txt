@@ -67,6 +67,38 @@ Mardu Skullhunter
 Heir of the Wilds
 Ivorytusk Fortress
 Sagu Mauler
+Ghostfire Blade
+Abzan Ascendancy
+Flying Crane Technique
+Temur Charger
+Utter End
+Clever Impersonator
+End Hostilities
+Ugin's Nexus
+Anafenza, the Foremost
+Crater's Claws
+Hardened Scales
+See the Unwritten
+Sarkhan, the Dragonspeaker
+Sorin, Solemn Visitor
+Frontier Bivouac
+Mystic Monastery
+Nomad Outpost
+Opulent Palace
+Sandsteppe Citadel
+Dragon's Eye Savants
+Horde Ambusher
+Ruthless Ripper
+Watcher of the Roost
+Abzan Guide
+Jeering Instigator
+Ankle Shanker
+Jeskai Windscout
+Mantis Rider
+Murderous Cut
+Rakshasa Deathdealer
+Savage Knuckleblade
+Shambling Attendants
 
 
 ------------
