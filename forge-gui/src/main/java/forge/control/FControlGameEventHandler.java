@@ -13,9 +13,11 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
+import forge.model.Achievement;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
+import forge.util.ThreadUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.maps.MapOfLists;
 
@@ -137,6 +139,18 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 GuiBase.getInterface().showPromptMessage(""); //clear prompt behind WinLose overlay
                 ButtonUtil.update("", "", false, false, false);
                 GuiBase.getInterface().finishGame();
+
+                //update all achievements for GUI player after game finished
+                ThreadUtil.invokeInGameThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Player p : GuiBase.getInterface().getGame().getOutcome().getPlayers()) {
+                            if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+                                Achievement.updateAll(p);
+                            }
+                        }
+                    }
+                });
             }
         });
         return null;
