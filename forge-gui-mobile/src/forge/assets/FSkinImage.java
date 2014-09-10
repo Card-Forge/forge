@@ -105,6 +105,11 @@ public enum FSkinImage implements FImage {
     ARCSON       (FSkinProp.ICO_ARCSON, SourceFile.ICONS),
     ARCSHOVER    (FSkinProp.ICO_ARCSHOVER, SourceFile.ICONS),
 
+    //Achievement Trophies
+    BRONZE_TROPHY (FSkinProp.IMG_BRONZE_TROPHY, SourceFile.ICONS),
+    SILVER_TROPHY (FSkinProp.IMG_SILVER_TROPHY, SourceFile.ICONS),
+    GOLD_TROPHY   (FSkinProp.IMG_GOLD_TROPHY, SourceFile.ICONS),
+
     //Quest Icons
     QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),
     QUEST_GEAR        (FSkinProp.ICO_QUEST_GEAR, SourceFile.ICONS),

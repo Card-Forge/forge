@@ -170,21 +170,21 @@ public enum Achievement {
             if (earnedGold()) {
                 if (oldBest < goldThreshold) {
                     type = "Gold";
-                    image = FSkinProp.ICO_QUEST_GOLD;
+                    image = FSkinProp.IMG_GOLD_TROPHY;
                     desc = goldDesc;
                 }
             }
             else if (earnedSilver()) {
                 if (oldBest < silverThreshold) {
                     type = "Silver";
-                    image = FSkinProp.ICO_QUEST_GOLD;
+                    image = FSkinProp.IMG_SILVER_TROPHY;
                     desc = silverDesc;
                 }
             }
             else if (earnedBronze()) {
                 if (oldBest < bronzeThreshold) {
                     type = "Bronze";
-                    image = FSkinProp.ICO_QUEST_GOLD;
+                    image = FSkinProp.IMG_BRONZE_TROPHY;
                     desc = bronzeDesc;
                 }
             }
