@@ -144,7 +144,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        for (Player p : GuiBase.getInterface().getGame().getOutcome().getPlayers()) {
+                        for (Player p : GuiBase.getInterface().getGame().getRegisteredPlayers()) {
                             if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
                                 Achievement.updateAll(p);
                             }

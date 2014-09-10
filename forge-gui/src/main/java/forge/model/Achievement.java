@@ -44,6 +44,38 @@ public enum Achievement {
                     return current;
                 }
             }),
+    Overkill("Overkill", true,
+            "Win game with opponent at -25 life or less.", 25,
+            "Win game with opponent at -50 life or less.", 50,
+            "Win game with opponent at -100 life or less.", 100,
+            new Evaluator() {
+                @Override
+                public int evaluate(Player player, Game game, int current) {
+                    if (player.getOutcome().hasWon()) {
+                        Player opponent = getSingleOpponent(player);
+                        if (opponent != null && opponent.getLife() < 0) {
+                            return -opponent.getLife();
+                        }
+                    }
+                    return 0;
+                }
+            }),
+    LifeToSpare("Life to Spare", true,
+            "Win game with 20 life more than you started with.", 25,
+            "Win game with 40 life more than you started with.", 50,
+            "Win game with 80 life more than you started with.", 100,
+            new Evaluator() {
+                @Override
+                public int evaluate(Player player, Game game, int current) {
+                    if (player.getOutcome().hasWon()) {
+                        int gainedLife = player.getLife() - player.getStartingLife();
+                        if (gainedLife > 0) {
+                            return gainedLife;
+                        }
+                    }
+                    return 0;
+                }
+            }),
     Hellbent("Hellbent", false,
             "Win game with no cards in hand.", 1,
             "Win game with no cards in hand or library.", 2,
@@ -223,7 +255,19 @@ public enum Achievement {
         }
     }
 
-    private interface Evaluator {
-        int evaluate(Player player, Game game, int current);
+    private static abstract class Evaluator {
+        public abstract int evaluate(Player player, Game game, int current);
+
+        //get single opponent of player
+        protected Player getSingleOpponent(Player player) {
+            if (player.getGame().getRegisteredPlayers().size() == 2) {
+                for (Player p : player.getGame().getRegisteredPlayers()) {
+                    if (p.isOpponentOf(player)) {
+                        return p;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
