@@ -29,7 +29,7 @@ public class SoundSystem {
 
     public SoundSystem(final IGuiBase gui) {
         this.gui = gui;
-        this.visualizer = new EventVisualizer(gui);
+        this.visualizer = new EventVisualizer(gui.getGuiPlayer());
     }
     private boolean isUsingAltSystem() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);

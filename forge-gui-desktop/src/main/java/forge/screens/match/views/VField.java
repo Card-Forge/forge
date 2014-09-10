@@ -29,6 +29,7 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.LobbyPlayer;
+import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -95,7 +96,7 @@ public class VField implements IVDoc<CField> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1, player);
+        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1, player, ZoneType.Battlefield);
 
         control = new CField(player, this, playerViewer);
 

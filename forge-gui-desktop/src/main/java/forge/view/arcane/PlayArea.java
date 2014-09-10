@@ -29,6 +29,7 @@ import com.google.common.collect.Lists;
 
 import forge.FThreads;
 import forge.GuiBase;
+import forge.game.zone.ZoneType;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FScrollPane;
@@ -78,6 +79,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int stackSpacingX, stackSpacingY;
 
     private final PlayerView model;
+    private final ZoneType zone;
 
     /**
      * <p>
@@ -88,11 +90,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * @param mirror
      * @param player 
      */
-    public PlayArea(final FScrollPane scrollPane, final boolean mirror, final PlayerView player) {
+    public PlayArea(final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
         this.model = player;
+        this.zone = zone;
     }
 
     private final CardStackRow collectAllLands() {
@@ -593,13 +596,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      */
     public void setupPlayZone() {
         FThreads.assertExecutedByEdt(GuiBase.getInterface(), true);
-        recalculateCardPanels(model);
+        recalculateCardPanels(model, zone);
     }
 
-    private void recalculateCardPanels(final PlayerView model) {
+    private void recalculateCardPanels(final PlayerView model, final ZoneType zone) {
         final List<CardView> modelCopy;
         synchronized (model) {
-            modelCopy = Lists.newArrayList(model.getBfCards());
+            modelCopy = Lists.newArrayList(model.getCards(zone));
         }
 
         final List<CardView> oldCards = Lists.newArrayList();

@@ -17,6 +17,7 @@ import forge.assets.ImageCache;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.interfaces.IDeviceAdapter;
+import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
@@ -49,7 +50,7 @@ public class Forge implements ApplicationListener {
     private static SplashScreen splashScreen;
     private static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
-    private static final SoundSystem soundSystem = new SoundSystem(GuiBase.getInterface());
+    private static SoundSystem soundSystem;
     private static final Stack<FScreen> screens = new Stack<FScreen>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0) {
@@ -57,7 +58,9 @@ public class Forge implements ApplicationListener {
             ForgeConstants.init(assetDir0);
             clipboard = clipboard0;
             deviceAdapter = deviceAdapter0;
-            GuiBase.setInterface(new GuiMobile());
+            final IGuiBase gui = new GuiMobile();
+            GuiBase.setInterface(gui);
+            soundSystem = new SoundSystem(gui);
         }
         return app;
     }

@@ -67,7 +67,6 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
-import forge.player.PlayerControllerLocal;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -95,6 +94,7 @@ import forge.util.NameGenerator;
 import forge.view.FFrame;
 import forge.view.FView;
 import forge.view.IGameView;
+import forge.view.LocalGameView;
 import forge.view.PlayerView;
 
 /**
@@ -452,10 +452,21 @@ public enum FControl implements KeyEventDispatcher {
         final LobbyPlayer me = getGuiPlayer();
         for (final Player p : game.getPlayers()) {
             if (p.getLobbyPlayer().equals(me)) {
-                this.gameView = (IGameView) p.getController();
-                fcVisitor = new FControlGameEventHandler((PlayerControllerHuman) p.getController());
+                final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
+                this.gameView = controller.getGameView();
+                this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), controller.getGameView());
                 break;
             }
+        }
+
+        if (this.gameView == null) {
+            // Watch game but do not participate
+            final LocalGameView gameView = new LocalGameView(game);
+            this.gameView = gameView;
+            this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), gameView);
+            this.playbackControl = new FControlGamePlayback(GuiBase.getInterface(), gameView);
+            this.playbackControl.setGame(game);
+            this.game.subscribeToEvents(playbackControl);
         }
 
         attachToGame(this.gameView);
@@ -523,20 +534,12 @@ public enum FControl implements KeyEventDispatcher {
         // Listen to DuelOutcome event to show ViewWinLose
         game0.subscribeToEvents(fcVisitor);
 
-        // Add playback controls to match if needed
-        if (localPlayer == null) {
-            // Create dummy controller
-            final PlayerControllerHuman controller =
-                    new PlayerControllerLocal(game, null, humanLobbyPlayer, GuiBase.getInterface());
-            playbackControl = new FControlGamePlayback(controller);
-            playbackControl.setGame(game);
-            game0.subscribeToEvents(playbackControl);
-        }
-
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
         //Set Field shown to current player.
-        final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(localPlayer);
-        SDisplayUtil.showTab(nextField);
+        if (localPlayer != null) {
+            final VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(localPlayer);
+            SDisplayUtil.showTab(nextField);
+        }
     }
 
     /* (non-Javadoc)

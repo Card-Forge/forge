@@ -108,7 +108,7 @@ public final class ForgeConstants {
         EDITOR_LAYOUT_FILE   = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
         GAUNTLET_DIR         = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet/");
 
-        PICS_DIR                     = CACHE_DIR + "pics/";
+        PICS_DIR                      = CACHE_DIR + "pics/";
         DB_DIR                        = CACHE_DIR + "db/";
         FONTS_DIR                     = CACHE_DIR + "fonts/";
         CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens/";
@@ -119,6 +119,7 @@ public final class ForgeConstants {
         CACHE_BOOSTERBOX_PICS_DIR     = PICS_DIR + "boosterboxes/";
         CACHE_PRECON_PICS_DIR         = PICS_DIR + "precons/";
         CACHE_TOURNAMENTPACK_PICS_DIR = PICS_DIR + "tournamentpacks/";
+        QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";;
 
         PROFILE_DIRS = new String[] {
             USER_DIR,

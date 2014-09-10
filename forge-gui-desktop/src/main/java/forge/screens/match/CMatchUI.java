@@ -168,7 +168,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (p.getLobbyPlayer() == localPlayer) {
+            if (localPlayer == null || p.getLobbyPlayer() == localPlayer) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);
@@ -176,11 +176,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             i++;
         }
 
-        if (hands.isEmpty()) { // add empty hand for matches without human
-            VHand newHand = new VHand(EDocID.Hands[0], null);
-            newHand.getLayoutControl().initialize();
-            hands.add(newHand);
-        }
         view.setHandViews(hands);
     }
 
@@ -277,7 +272,8 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      */
     public final boolean stopAtPhase(final PlayerView turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
-        PhaseLabel label = vf.getPhaseIndicator().getLabelFor(phase);
+        PhaseLabel label = vf.getPhaseIndicator()
+                .getLabelFor(phase);
         return label == null || label.getEnabled();
     }
 
@@ -367,7 +363,10 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             } else if (zt == ZoneType.Ante) {
                 CAntes.SINGLETON_INSTANCE.update();
             } else {
-                getFieldViewFor(owner).getDetailsPanel().updateZones();
+                final VField vf = getFieldViewFor(owner);
+                if (vf != null) {
+                    vf.getDetailsPanel().updateZones();
+                }
             }
         }
     }

@@ -18,8 +18,9 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
+import forge.interfaces.IGuiBase;
 import forge.match.input.InputPlaybackControl;
-import forge.player.PlayerControllerHuman;
+import forge.view.LocalGameView;
 
 public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private InputPlaybackControl inputPlayback;
@@ -27,9 +28,11 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     private final CyclicBarrier gameThreadPauser = new CyclicBarrier(2);
 
-    private final PlayerControllerHuman controller;
-    public FControlGamePlayback(final PlayerControllerHuman controller) {
-        this.controller = controller;
+    private final IGuiBase gui;
+    private final LocalGameView gameView;
+    public FControlGamePlayback(final IGuiBase gui, final LocalGameView gameView) {
+        this.gui = gui;
+        this.gameView = gameView;
     }
 
     private Game game;
@@ -40,7 +43,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     public void setGame(Game game) {
         this.game = game;
-        this.inputPlayback = new InputPlaybackControl(controller.getGui(), game, this);
+        this.inputPlayback = new InputPlaybackControl(gui, game, this);
     }
 
     @Subscribe
@@ -73,8 +76,8 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventTurnPhase ev) {
-        boolean isUiToStop = controller.getGui().stopAtPhase(
-                controller.getPlayerView(ev.playerTurn), ev.phase);
+        boolean isUiToStop = gui.stopAtPhase(
+                gameView.getPlayerView(ev.playerTurn), ev.phase);
 
         switch(ev.phase) {
             case COMBAT_END:
@@ -99,13 +102,13 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(GameEventGameFinished event) {
-        controller.getGui().getInputQueue().removeInput(inputPlayback);
+        gui.getInputQueue().removeInput(inputPlayback);
         return null;
     }
 
     @Override
     public Void visit(GameEventGameStarted event) {
-        controller.getGui().getInputQueue().setInput(inputPlayback);
+        gui.getInputQueue().setInput(inputPlayback);
         return null;
     }
 
@@ -117,11 +120,10 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(controller.getGui(), new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
-                controller.getGui().setCard(
-                        controller.getCardView(event.spell.getHostCard()));
+                gui.setCard(gameView.getCardView(event.spell.getHostCard()));
                 }
             });
         pauseForEvent(resolveDelay);
@@ -133,11 +135,10 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(controller.getGui(), new Runnable() {
+        FThreads.invokeInEdtNowOrLater(gui, new Runnable() {
             @Override
             public void run() {
-                controller.getGui().setCard(
-                        controller.getCardView(event.sa.getHostCard()));
+                gui.setCard(gameView.getCardView(event.sa.getHostCard()));
                 }
             });
         pauseForEvent(castDelay);

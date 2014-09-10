@@ -21,13 +21,13 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
 
     @Override
     public PlayerController createControllerFor(Player human) {
-        return new PlayerControllerLocal(human.getGame(), human, this, gui);
+        return new PlayerControllerHuman(human.getGame(), human, this, gui);
     }
-    
+
     @Override
     public Player createIngamePlayer(Game game) {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
-        player.setFirstController(new PlayerControllerLocal(game, player, this, gui));
+        player.setFirstController(new PlayerControllerHuman(game, player, this, gui));
 
         if (ForgePreferences.DEV_MODE && FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
             player.canCheatPlayUnlimitedLands = true;

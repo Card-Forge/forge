@@ -193,7 +193,7 @@ public class VAssignDamage {
             DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             this.damage.put(null, dt);
             this.defenders.add(dt);
-            final CardView fakeCard; 
+            CardView fakeCard = null;
             if (defender instanceof CardView) 
                 fakeCard = (CardView)defender;
             else if (defender instanceof PlayerView) { 
@@ -201,11 +201,10 @@ public class VAssignDamage {
                 fakeCard.getOriginal().setName(this.defender.toString());
                 final PlayerView p = (PlayerView)defender;
                 fakeCard.setOwner(p);
+                fakeCard.setController(p);
                 fakeCard.getOriginal().setImageKey(CMatchUI.SINGLETON_INSTANCE.avatarImages.get(p.getLobbyPlayer()));
-            } else {
-                fakeCard = new CardView(true);
-                fakeCard.getOriginal().setName(this.defender.toString());
             }
+
             addPanelForDefender(pnlDefenders, fakeCard);
         }        
 

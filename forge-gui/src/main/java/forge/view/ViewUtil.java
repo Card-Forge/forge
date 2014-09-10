@@ -5,7 +5,6 @@ import java.util.Collections;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.game.card.CardCharacteristics;
-import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.view.CardView.CardStateView;
 
@@ -23,8 +22,8 @@ public final class ViewUtil {
      * @param view
      *            the {@link CardView} to write to.
      */
-    public static void writeNonDependentCardViewProperties(final Card c, final CardView view, final Player viewer) {
-        final boolean hasAltState = c.isDoubleFaced() || c.isFlipCard() || c.isSplitCard() || (c.isFaceDown() && (viewer == null || c.canCardFaceBeShownTo(viewer)));
+    public static void writeNonDependentCardViewProperties(final Card c, final CardView view, final boolean mayShowCardFace) {
+        final boolean hasAltState = c.isDoubleFaced() || c.isFlipCard() || c.isSplitCard() || (c.isFaceDown() && mayShowCardFace);
         view.setId(c.getUniqueNumber());
         view.setZone(c.getZone() == null ? null : c.getZone().getZoneType());
         view.setHasAltState(hasAltState);
@@ -70,6 +69,10 @@ public final class ViewUtil {
         origView.setChangedColorWords(c.getChangedTextColorWords());
         origView.setChangedTypes(c.getChangedTextTypeWords());
         origView.setManaCost(c.getManaCost());
+        origView.setHasDeathtouch(c.hasKeyword("Deathtouch"));
+        origView.setHasInfect(c.hasKeyword("Infect"));
+        origView.setHasStorm(c.hasKeyword("Storm"));
+        origView.setHasTrample(c.hasKeyword("Trample"));
 
         final CardStateView altView = view.getAlternate();
         CardCharacteristicName altState = null;
@@ -108,7 +111,7 @@ public final class ViewUtil {
     public static CardView getCardForUi(final IPaperCard pc) {
         final Card c = Card.getCardForUi(pc);
         final CardView view = new CardView(true);
-        writeNonDependentCardViewProperties(c, view, null);
+        writeNonDependentCardViewProperties(c, view, c.getCardForUi() == c);
         return view;
     }
 }

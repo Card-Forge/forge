@@ -77,6 +77,7 @@ public interface IGameView {
     public abstract StackItemView peekStack();
 
     public abstract boolean mayShowCard(CardView c);
+    public abstract boolean mayShowCardFace(CardView c);
 
     // Auto-yield related methods
     public abstract Iterable<String> getAutoYields();

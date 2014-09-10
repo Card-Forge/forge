@@ -30,7 +30,6 @@ import forge.game.event.GameEventTurnEnded;
 import forge.game.event.IGameEventVisitor;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.interfaces.IGuiBase;
 import forge.util.maps.MapOfLists;
 
 /** 
@@ -40,8 +39,8 @@ import forge.util.maps.MapOfLists;
 public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> implements IUiEventVisitor<SoundEffectType> {
 
     final LobbyPlayer player;
-    public EventVisualizer(final IGuiBase gui) {
-        this.player = gui.getGuiPlayer();
+    public EventVisualizer(final LobbyPlayer lobbyPlayer) {
+        this.player = lobbyPlayer;
     }
 
     public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }

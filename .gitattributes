@@ -16762,7 +16762,6 @@ forge-gui/src/main/java/forge/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/player/HumanPlaySpellAbility.java -text
 forge-gui/src/main/java/forge/player/LobbyPlayerHuman.java -text
 forge-gui/src/main/java/forge/player/PlayerControllerHuman.java -text
-forge-gui/src/main/java/forge/player/PlayerControllerLocal.java -text
 forge-gui/src/main/java/forge/player/TargetSelection.java -text
 forge-gui/src/main/java/forge/player/package-info.java -text
 forge-gui/src/main/java/forge/properties/ForgeConstants.java -text
@@ -16847,10 +16846,12 @@ forge-gui/src/main/java/forge/util/gui/SGuiChoose.java -text
 forge-gui/src/main/java/forge/util/gui/SGuiDialog.java -text
 forge-gui/src/main/java/forge/util/gui/SOptionPane.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
+forge-gui/src/main/java/forge/view/Cache.java -text
 forge-gui/src/main/java/forge/view/CardView.java -text
 forge-gui/src/main/java/forge/view/CombatView.java -text
 forge-gui/src/main/java/forge/view/GameEntityView.java -text
 forge-gui/src/main/java/forge/view/IGameView.java -text
+forge-gui/src/main/java/forge/view/LocalGameView.java -text
 forge-gui/src/main/java/forge/view/PlayerView.java -text
 forge-gui/src/main/java/forge/view/SpellAbilityView.java -text
 forge-gui/src/main/java/forge/view/StackItemView.java -text

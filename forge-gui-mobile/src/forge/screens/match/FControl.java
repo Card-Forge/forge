@@ -54,7 +54,6 @@ import forge.game.zone.ZoneType;
 import forge.match.input.InputPlaybackControl;
 import forge.match.input.InputQueue;
 import forge.model.FModel;
-import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -79,6 +78,7 @@ import forge.view.CardView.CardStateView;
 import forge.view.CombatView;
 import forge.view.GameEntityView;
 import forge.view.IGameView;
+import forge.view.LocalGameView;
 import forge.view.PlayerView;
 
 public class FControl {
@@ -247,14 +247,14 @@ public class FControl {
         }
 
         final PlayerControllerHuman humanController = (PlayerControllerHuman) localPlayer.getController();
-        gameView = (IGameView) humanController;
-        fcVisitor = new FControlGameEventHandler(humanController);
-        playbackControl = new FControlGamePlayback(humanController);
+        final LocalGameView localGameView = humanController.getGameView(); 
+        gameView = localGameView; 
+        fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
 
         for (Player p : sortedPlayers) {
             playerPanels.add(new VPlayerPanel(humanController.getPlayerView(p)));
         }
-        view = new MatchScreen(gameView, humanController.getPlayerView(localPlayer), playerPanels);
+        view = new MatchScreen(localGameView, humanController.getPlayerView(localPlayer), playerPanels);
     }
 
     private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, Player localPlayer) {
@@ -533,7 +533,9 @@ public class FControl {
             inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
         }
 
-        playbackControl.onGameStopRequested();
+        if (playbackControl != null) {
+            playbackControl.onGameStopRequested();
+        }
     }
 
     public static void endCurrentGame() {
@@ -852,9 +854,8 @@ public class FControl {
         return player;
     }
 
-    private final static LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human", GuiBase.getInterface());
     public final static LobbyPlayer getGuiPlayer() {
-        return guiPlayer;
+        return GuiBase.getInterface().getGuiPlayer();
     }
 
     public static FImage getPlayerAvatar(final PlayerView p) {
