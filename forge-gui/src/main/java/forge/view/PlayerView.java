@@ -11,32 +11,35 @@ import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
-import forge.game.player.PlayerController;
 import forge.game.zone.ZoneType;
 
 public class PlayerView extends GameEntityView {
 
     private final LobbyPlayer lobbyPlayer;
-    private final PlayerController controller;
+    private final int id;
 
     private Set<PlayerView> opponents;
     private int life, poisonCounters, maxHandSize, numDrawnThisTurn, preventNextDamage;
     private List<String> keywords;
     private String commanderInfo;
-    private List<CardView> anteCards = Lists.newArrayList(),
-            bfCards = Lists.newArrayList(),
-            commandCards = Lists.newArrayList(),
-            exileCards = Lists.newArrayList(),
+    private List<CardView>
+            anteCards      = Lists.newArrayList(),
+            bfCards        = Lists.newArrayList(),
+            commandCards   = Lists.newArrayList(),
+            exileCards     = Lists.newArrayList(),
             flashbackCards = Lists.newArrayList(),
-            graveCards = Lists.newArrayList(),
-            handCards = Lists.newArrayList(),
-            libraryCards = Lists.newArrayList();
+            graveCards     = Lists.newArrayList(),
+            handCards      = Lists.newArrayList(),
+            libraryCards   = Lists.newArrayList();
+    private int
+            nHandCards,
+            nLibraryCards;
     private boolean hasUnlimitedHandSize;
     private Map<Byte, Integer> mana = Maps.newHashMapWithExpectedSize(MagicColor.NUMBER_OR_COLORS + 1);
 
-    public PlayerView(final LobbyPlayer lobbyPlayer, final PlayerController controller) {
+    public PlayerView(final LobbyPlayer lobbyPlayer, final int id) {
         this.lobbyPlayer = lobbyPlayer;
-        this.controller = controller;
+        this.id = id;
     }
 
     /**
@@ -46,20 +49,26 @@ public class PlayerView extends GameEntityView {
         return lobbyPlayer;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        return obj instanceof PlayerView && this.getId() == ((PlayerView) obj).getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
     public void setOpponents(final Iterable<PlayerView> opponents) {
         this.opponents = Sets.newHashSet(opponents);
     }
 
     public boolean isOpponentOf(final PlayerView other) {
         return opponents.contains(other);
-    }
-
-    /**
-     * @return the controller
-     */
-    @Deprecated
-    public PlayerController getController() {
-        return controller;
     }
 
     public String getName() {
@@ -300,6 +309,34 @@ public class PlayerView extends GameEntityView {
         default:
             return ImmutableList.of();
         }
+    }
+
+    /**
+     * @return the nHandCards
+     */
+    public int getnHandCards() {
+        return nHandCards;
+    }
+
+    /**
+     * @param nHandCards the nHandCards to set
+     */
+    public void setnHandCards(int nHandCards) {
+        this.nHandCards = nHandCards;
+    }
+
+    /**
+     * @return the nLibraryCards
+     */
+    public int getnLibraryCards() {
+        return nLibraryCards;
+    }
+
+    /**
+     * @param nLibraryCards the nLibraryCards to set
+     */
+    public void setnLibraryCards(int nLibraryCards) {
+        this.nLibraryCards = nLibraryCards;
     }
 
     /**

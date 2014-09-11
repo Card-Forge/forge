@@ -119,12 +119,12 @@ public class PlayerDetailsPanel extends JPanel {
      * @param p0 &emsp; {@link forge.game.player.Player}
      */
     public void updateZones() {
-        this.getLblHand().setText("" + player.getHandCards().size());
+        this.getLblHand().setText("" + player.getnHandCards());
         final String handMaxToolTip = player.hasUnlimitedHandSize()
                 ? "no maximum hand size" : String.valueOf(player.getMaxHandSize());
         this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
         this.getLblGraveyard().setText("" + player.getGraveCards().size());
-        this.getLblLibrary().setText("" + player.getLibraryCards().size());
+        this.getLblLibrary().setText("" + player.getnLibraryCards());
         this.getLblFlashback().setText("" + player.getFlashbackCards().size());
         this.getLblExile().setText("" + player.getExileCards().size());
     }

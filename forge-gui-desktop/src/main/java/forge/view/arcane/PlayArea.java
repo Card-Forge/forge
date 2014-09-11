@@ -609,22 +609,19 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         for (final CardPanel cpa : getCardPanels()) {
             oldCards.add(cpa.getCard());
         }
-        final List<CardView> toDelete = Lists.newArrayList(oldCards);
-        final List<CardView> toReplace = Lists.newArrayList();
 
-        // delete all cards that differ in timestamp (they have been blinked) 
+        final List<CardView> toDelete = Lists.newArrayList(oldCards);
+        final List<CardView> notToDelete = Lists.newLinkedList();
         for (final CardView c : modelCopy) {
             for (int i = 0; i  < toDelete.size(); i++) {
                 final CardView c2 = toDelete.get(i);
                 if (c.getId() == c2.getId()) {
-                    if (c.getTimestamp() == c2.getTimestamp()) {
-                        toDelete.remove(c2);
-                    } else {
-                        toReplace.add(c);
-                    }
+                    notToDelete.add(c2);
                 }
             }
         }
+        toDelete.removeAll(notToDelete);
+
         if (toDelete.size() == getCardPanels().size()) {
             clear();
         } else {
@@ -635,7 +632,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         final List<CardView> toAdd = new ArrayList<CardView>(modelCopy);
         toAdd.removeAll(oldCards);
-        toAdd.addAll(toReplace);
 
         final List<CardPanel> newPanels = new ArrayList<CardPanel>();
         for (final CardView card : toAdd) {

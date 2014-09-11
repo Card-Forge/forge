@@ -14,8 +14,6 @@ import forge.assets.TextRenderer;
 import forge.assets.FSkinColor.Colors;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
-import forge.game.card.Card;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
 import forge.screens.match.FControl;
@@ -60,13 +58,13 @@ public class FChoiceList<T> extends FList<T> {
         if (item instanceof PaperCard) {
             renderer = new PaperCardItemRenderer();
         }
-        else if (item instanceof Card) {
+        else if (item instanceof CardView) {
             renderer = new CardItemRenderer();
         }
         else if (item instanceof SpellAbility) {
             renderer = new SpellAbilityItemRenderer();
         }
-        else if (item instanceof Player) {
+        else if (item instanceof PlayerView) {
             renderer = new PlayerItemRenderer();
         }
         else {

@@ -35,8 +35,6 @@ public interface IGameView {
     public abstract int getGamesWonBy(LobbyPlayer p);
     public abstract GameOutcome.AnteResult getAnteResult();
 
-    public abstract boolean isCombatDeclareAttackers();
-
     public abstract boolean isGameOver();
 
     public abstract int getPoisonCountersToLose();
@@ -61,6 +59,7 @@ public interface IGameView {
     public abstract void selectPlayer(PlayerView player, ITriggerEvent triggerEvent);
     public abstract boolean selectCard(CardView card, ITriggerEvent triggerEvent);
     public abstract void selectAbility(SpellAbilityView sa);
+    public abstract void alphaStrike();
 
     // the following method should eventually be replaced by methods returning
     // View classes

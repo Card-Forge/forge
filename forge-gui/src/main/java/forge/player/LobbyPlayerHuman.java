@@ -25,8 +25,8 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     }
 
     @Override
-    public Player createIngamePlayer(Game game) {
-        Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
+    public Player createIngamePlayer(Game game, final int id) {
+        Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game, id);
         player.setFirstController(new PlayerControllerHuman(game, player, this, gui));
 
         if (ForgePreferences.DEV_MODE && FModel.getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {

@@ -208,8 +208,15 @@ public class GuiChoose {
                     @Override
                     public void valueChanged(final ListSelectionEvent ev) {
                         final T sel = list.getSelectedValue();
+                        final CardView card;
                         if (sel instanceof CardStateView) {
-                            final CardView card = ((CardStateView) sel).getCard();
+                            card = ((CardStateView) sel).getCard();
+                        } else if (sel instanceof CardView) {
+                            card = (CardView) sel;
+                        } else {
+                            card = null;
+                        }
+                        if (card != null) {
                             CMatchUI.SINGLETON_INSTANCE.setCard(card);
 
                             GuiUtils.clearPanelSelections();

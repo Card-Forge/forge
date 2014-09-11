@@ -71,6 +71,8 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @version $Id$
  */
 public class Player extends GameEntity implements Comparable<Player> {
+    private final int id;
+
     private final Map<Card,Integer> commanderDamage = new HashMap<Card,Integer>();
 
     /** The poison counters. */
@@ -206,7 +208,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(String name, Game game0) {
+    public Player(String name, Game game0, final int id) {
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
@@ -214,6 +216,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         
         this.setName(chooseName(name));
+        this.id = id;
     }
 
     private String chooseName(String originalName) {
@@ -232,6 +235,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             nameCandidate = Lang.getOrdinal(i) + " " + originalName;
         }
         return nameCandidate;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     @Override

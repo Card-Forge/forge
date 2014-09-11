@@ -1,18 +1,20 @@
 package forge.view;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 public class CombatView {
 
-    private Map<CardView, GameEntityView> attackersWithDefenders;
-    private Map<CardView, Iterable<CardView>> attackersWithBlockers;
-    private Map<Iterable<CardView>, GameEntityView> bandsWithDefenders;
-    private Map<Iterable<CardView>, Iterable<CardView>> bandsWithBlockers;
+    private Map<CardView, GameEntityView> attackersWithDefenders = Maps.newHashMap();
+    private Map<CardView, Iterable<CardView>> attackersWithBlockers = Maps.newHashMap();
+    private Map<Iterable<CardView>, GameEntityView> bandsWithDefenders = Maps.newHashMap();
+    private Map<Iterable<CardView>, Iterable<CardView>> bandsWithBlockers = Maps.newHashMap();
 
     public CombatView() {
     }
@@ -39,6 +41,9 @@ public class CombatView {
 
     public boolean isBlocking(final CardView card) {
         for (final Iterable<CardView> blockers : attackersWithBlockers.values()) {
+            if (blockers == null) {
+                continue;
+            }
             if (Iterables.contains(blockers, card)) {
                 return true;
             }
@@ -69,18 +74,20 @@ public class CombatView {
     }
 
     public void addAttackingBand(final Iterable<CardView> attackingBand, final GameEntityView defender, final Iterable<CardView> blockers) {
-        for (final CardView attacker : attackingBand) {
-            this.attackersWithDefenders.put(attacker, defender);
-            this.attackersWithBlockers.put(attacker, blockers);
+        final List<CardView> attackingBandCopy = Lists.newArrayList(attackingBand),
+                blockersCopy;
+        if (blockers == null) {
+            blockersCopy = null;
+        } else {
+            blockersCopy = Lists.newArrayList(blockers);
         }
-        this.bandsWithDefenders.put(attackingBand, defender);
-        this.bandsWithBlockers.put(attackingBand, blockers);
+
+        for (final CardView attacker : attackingBandCopy) {
+            this.attackersWithDefenders.put(attacker, defender);
+            this.attackersWithBlockers.put(attacker, blockersCopy);
+        }
+        this.bandsWithDefenders.put(attackingBandCopy, defender);
+        this.bandsWithBlockers.put(attackingBandCopy, blockersCopy);
     }
 
-    public void reset() {
-        this.attackersWithDefenders = Maps.newHashMap();
-        this.attackersWithBlockers = Maps.newHashMap();
-        this.bandsWithDefenders = Maps.newHashMap();
-        this.bandsWithBlockers = Maps.newHashMap();
-    }
 }

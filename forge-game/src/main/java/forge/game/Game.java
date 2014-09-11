@@ -168,9 +168,10 @@ public class Game implements IGameStateObject {
             }
         }
 
+        int plId = 0;
         for (RegisteredPlayer psc : players0) {
         	IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
-            Player pl = factory.createIngamePlayer(this);
+            Player pl = factory.createIngamePlayer(this, plId++);
             players.add(pl);
             ingamePlayers.add(pl);
 

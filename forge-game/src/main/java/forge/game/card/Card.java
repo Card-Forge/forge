@@ -8859,6 +8859,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         Zone zone = this.getZone();
         if (zone == null) { return true; } //cards outside any zone are visible to all
 
+        final Player controller = this.getController();
         switch (zone.getZoneType()) {
         case Ante:
         case Command:
@@ -8869,23 +8870,23 @@ public class Card extends GameEntity implements Comparable<Card> {
             //cards in these zones are visible to all
             return true;
         case Hand:
-            if (getController().hasKeyword("Play with your hand revealed.")) {
+            if (controller.hasKeyword("Play with your hand revealed.")) {
                 return true;
             }
             //fall through
         case Sideboard:
             //face-up cards in these zones are hidden to opponents unless they specify otherwise
-            if (getController().isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
+            if (controller.isOpponentOf(viewer) && !hasKeyword("Your opponent may look at this card.")) {
                 break;
             }
             return true;
         case Library:
         case PlanarDeck:
             //cards in these zones are hidden to all unless they specify otherwise
-            if (getController() == viewer && hasKeyword("You may look at this card.")) {
+            if (controller == viewer && hasKeyword("You may look at this card.")) {
                 return true;
             }
-            if (getController().isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
+            if (controller.isOpponentOf(viewer) && hasKeyword("Your opponent may look at this card.")) {
                 return true;
             }
             break;
@@ -8906,8 +8907,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         //if viewer is controlled by another player, also check if card can be shown to that player
-        if (viewer.isMindSlaved()) {
-            return canBeShownTo(viewer.getMindSlaveMaster());
+        if (controller.isMindSlaved() && viewer == controller.getMindSlaveMaster()) {
+            return canBeShownTo(controller);
         }
 
         return false;

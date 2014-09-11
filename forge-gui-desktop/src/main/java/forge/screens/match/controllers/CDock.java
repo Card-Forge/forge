@@ -158,6 +158,7 @@ public enum CDock implements ICDoc {
 
     /** Attack with everyone. */
     public void alphaStrike() {
+        game.alphaStrike();
         /* TODO: rewrite this!
         final Player p = this.findAffectedPlayer();
         final Combat combat = FControl.instance.getObservedGame().getCombat();

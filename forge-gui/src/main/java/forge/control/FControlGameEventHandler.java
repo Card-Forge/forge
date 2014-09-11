@@ -355,8 +355,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventCardChangeZone event) {
-        updateZone(event.from);
-        updateZone(event.to);
+        if (event.from != null) {
+            updateZone(event.from);
+        }
+        if (event.to != null) {
+            updateZone(event.to);
+        }
         return null;
     }
 

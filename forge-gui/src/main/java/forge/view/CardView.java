@@ -117,6 +117,17 @@ public class CardView extends GameEntityView {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(final Object obj) {
+        return obj instanceof CardView && this.getId() == ((CardView) obj).getId()
+                && (this.getId() > 0 || this == obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return id > 0 ? id : super.hashCode();
+    }
+
     public boolean isUiDisplayable() {
         return isUiDisplayable;
     }

@@ -1,6 +1,10 @@
 package forge.view;
 
 import java.util.Collections;
+import java.util.List;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
@@ -51,8 +55,17 @@ public final class ViewUtil {
         view.setNamedCard(c.getNamedCard());
 
         if (c.isSplitCard()) {
-            writeCardStateViewProperties(c, view.getOriginal(), CardCharacteristicName.LeftSplit);
-            writeCardStateViewProperties(c, view.getAlternate(), CardCharacteristicName.RightSplit);
+            final CardCharacteristicName orig, alt;
+            if (c.getCurState() == CardCharacteristicName.RightSplit) {
+                // If right half on stack, place it first
+                orig = CardCharacteristicName.RightSplit;
+                alt = CardCharacteristicName.LeftSplit;
+            } else {
+                orig = CardCharacteristicName.LeftSplit;
+                alt = CardCharacteristicName.RightSplit;
+            }
+            writeCardStateViewProperties(c, view.getOriginal(), orig);
+            writeCardStateViewProperties(c, view.getAlternate(), alt);
             return;
         }
 
@@ -113,5 +126,16 @@ public final class ViewUtil {
         final CardView view = new CardView(true);
         writeNonDependentCardViewProperties(c, view, c.getCardForUi() == c);
         return view;
+    }
+
+    public static <T,V> List<V> transformIfNotNull(final Iterable<T> input, final Function<T, V> transformation) {
+        final List<V> ret = Lists.newLinkedList();
+        for (final T t : input) {
+            final V v = transformation.apply(t);
+            if (v != null) {
+                ret.add(v);
+            }
+        }
+        return ret;
     }
 }

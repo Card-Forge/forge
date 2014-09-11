@@ -47,8 +47,6 @@ public class LocalGameView implements IGameView {
     private final Cache<SpellAbility, SpellAbilityView> spabs = new Cache<>();
     /** Cache of stack items. */
     private final Cache<SpellAbilityStackInstance, StackItemView> stackItems = new Cache<>();
-    /** Combat view. */
-    private final CombatView combatView = new CombatView();
 
     /* (non-Javadoc)
      * @see forge.view.IGameView#isCommander()
@@ -134,15 +132,6 @@ public class LocalGameView implements IGameView {
     }
 
     /* (non-Javadoc)
-     * @see forge.view.IGameView#isCombatDeclareAttackers()
-     */
-    @Override
-    public boolean isCombatDeclareAttackers() {
-        return game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && game.getCombat() != null;
-    }
-
-    /* (non-Javadoc)
      * @see forge.view.IGameView#isGameOver()
      */
     @Override
@@ -171,22 +160,19 @@ public class LocalGameView implements IGameView {
     /* (non-Javadoc)
      * @see forge.view.IGameView#getCombat()
      */
-    public CombatView getCombat(final Combat c) {
-        if (c == null) {
+    public CombatView getCombat(final Combat combat) {
+        if (combat == null) {
             return null;
         }
-        updateCombatView(c);
-        return combatView;
-    }
 
-    private final void updateCombatView(final Combat combat) {
-        combatView.reset();
+        final CombatView combatView = new CombatView();
         for (final AttackingBand b : combat.getAttackingBands()) {
             if (b == null) continue;
             final GameEntity defender = combat.getDefenderByAttacker(b);
-            final List<Card> blockers = b.isBlocked() == null ? null : combat.getBlockers(b);
+            final List<Card> blockers = (b.isBlocked() != null && b.isBlocked()) ? combat.getBlockers(b) : null;
             combatView.addAttackingBand(getCardViews(b.getAttackers()), getGameEntityView(defender), blockers == null ? null : getCardViews(blockers));
         }
+        return combatView;
     }
 
     @Override
@@ -254,6 +240,10 @@ public class LocalGameView implements IGameView {
 
     @Override
     public void selectAbility(final SpellAbilityView sa) {
+    }
+
+    @Override
+    public void alphaStrike() {
     }
 
     /* (non-Javadoc)
@@ -351,6 +341,26 @@ public class LocalGameView implements IGameView {
         return null;
     }
 
+    private final Function<GameEntity, GameEntityView> FN_GET_GAME_ENTITY_VIEW = new Function<GameEntity, GameEntityView>() {
+        @Override
+        public GameEntityView apply(GameEntity input) {
+            return getGameEntityView(input);
+        }
+    };
+
+    public final List<GameEntityView> getGameEntityViews(final Iterable<GameEntity> entities) {
+        return ViewUtil.transformIfNotNull(entities, FN_GET_GAME_ENTITY_VIEW);
+    }
+
+    public final GameEntity getGameEntity(final GameEntityView view) {
+        if (view instanceof CardView) {
+            return getCard((CardView) view);
+        } else if (view instanceof PlayerView) {
+            return getPlayer((PlayerView) view);
+        }
+        return null;
+    }
+
     private final Function<Player, PlayerView> FN_GET_PLAYER_VIEW = new Function<Player, PlayerView>() {
         @Override
         public PlayerView apply(final Player input) {
@@ -358,12 +368,8 @@ public class LocalGameView implements IGameView {
         }
     };
 
-    public final List<PlayerView> getPlayerViews(final List<Player> players) {
-        return Lists.transform(players, FN_GET_PLAYER_VIEW);
-    }
-
-    public final Iterable<PlayerView> getPlayerViews(final Iterable<Player> players) {
-        return Iterables.transform(players, FN_GET_PLAYER_VIEW);
+    public final List<PlayerView> getPlayerViews(final Iterable<Player> players) {
+        return ViewUtil.transformIfNotNull(players, FN_GET_PLAYER_VIEW);
     }
 
     public PlayerView getPlayerView(final Player p) {
@@ -376,7 +382,7 @@ public class LocalGameView implements IGameView {
             view = players.get(p);
             getPlayerView(p, view);
         } else {
-            view = new PlayerView(p.getLobbyPlayer(), p.getController());
+            view = new PlayerView(p.getLobbyPlayer(), p.getId());
             players.put(p, view);
             getPlayerView(p, view);
             view.setOpponents(getPlayerViews(p.getOpponents()));
@@ -407,8 +413,12 @@ public class LocalGameView implements IGameView {
         view.setExileCards(getCardViews(p.getCardsIn(ZoneType.Exile)));
         view.setFlashbackCards(getCardViews(p.getCardsActivableInExternalZones(false)));
         view.setGraveCards(getCardViews(p.getCardsIn(ZoneType.Graveyard)));
-        view.setHandCards(getCardViews(p.getCardsIn(ZoneType.Hand)));
-        view.setLibraryCards(getCardViews(p.getCardsIn(ZoneType.Library)));
+        final List<Card> handCards = p.getCardsIn(ZoneType.Hand),
+                libraryCards = p.getCardsIn(ZoneType.Library);
+        view.setHandCards(getCardViews(handCards));
+        view.setLibraryCards(getCardViews(libraryCards));
+        view.setnHandCards(handCards.size());
+        view.setnLibraryCards(libraryCards.size());
 
         for (final byte b : MagicColor.WUBRGC) {
             view.setMana(b, p.getManaPool().getAmountOfColor(b));
@@ -421,7 +431,8 @@ public class LocalGameView implements IGameView {
         }
 
         final Card cUi = c.getCardForUi();
-        final boolean isDisplayable = cUi == c;
+        final boolean isDisplayable = cUi == c &&
+                !(c.isInZone(ZoneType.Hand) || c.isInZone(ZoneType.Library));
 
         CardView view = cards.get(c);
         final boolean mayShow;
@@ -438,10 +449,12 @@ public class LocalGameView implements IGameView {
             }
         }
 
-        if (isDisplayable && mayShow) {
+        if (mayShow) {
             writeCardToView(cUi, view);
-        } else {
+        } else if (isDisplayable) {
             view.reset();
+        } else {
+            return null;
         }
 
         return view;
@@ -454,11 +467,8 @@ public class LocalGameView implements IGameView {
         }
     };
 
-    public final List<CardView> getCardViews(final List<Card> cards) {
-        return Lists.transform(cards, FN_GET_CARD_VIEW);
-    }
-    public final Iterable<CardView> getCardViews(final Iterable<Card> cards) {
-        return Iterables.transform(cards, FN_GET_CARD_VIEW);
+    public final List<CardView> getCardViews(final Iterable<Card> cards) {
+        return ViewUtil.transformIfNotNull(cards, FN_GET_CARD_VIEW);
     }
 
     private CardView getCardViewFast(final Card c) {
@@ -467,10 +477,14 @@ public class LocalGameView implements IGameView {
         }
 
         final CardView view = cards.get(c);
-        if (!mayShowCard(view)) {
+        if (mayShowCard(view)) {
+            return view;
+        } else if (view.isUiDisplayable()) {
             view.reset();
+            return view;
         }
-        return view;
+
+        return null;
     }
 
     private final Function<Card, CardView> FN_GET_CARDVIEW_FAST = new Function<Card, CardView>() {
@@ -480,8 +494,8 @@ public class LocalGameView implements IGameView {
         }
     };
 
-    private Iterable<CardView> getCardViewsFast(final Iterable<Card> cards) {
-        return Iterables.transform(cards, FN_GET_CARDVIEW_FAST);
+    private List<CardView> getCardViewsFast(final Iterable<Card> cards) {
+        return ViewUtil.transformIfNotNull(cards, FN_GET_CARDVIEW_FAST);
     }
 
     public Card getCard(final CardView c) {
@@ -496,7 +510,7 @@ public class LocalGameView implements IGameView {
     };
 
     public final List<Card> getCards(final List<CardView> cards) {
-        return Lists.transform(cards, FN_GET_CARD);
+        return ViewUtil.transformIfNotNull(cards, FN_GET_CARD);
     }
 
     private void writeCardToView(final Card c, final CardView view) {
@@ -558,7 +572,7 @@ public class LocalGameView implements IGameView {
     };
 
     public final List<SpellAbilityView> getSpellAbilityViews(final List<SpellAbility> cards) {
-        return Lists.transform(cards, FN_GET_SPAB_VIEW);
+        return ViewUtil.transformIfNotNull(cards, FN_GET_SPAB_VIEW);
     }
 
     public SpellAbility getSpellAbility(final SpellAbilityView c) {
@@ -573,7 +587,7 @@ public class LocalGameView implements IGameView {
     };
 
     public final List<SpellAbility> getSpellAbilities(final List<SpellAbilityView> cards) {
-        return Lists.transform(cards, FN_GET_SPAB);
+        return ViewUtil.transformIfNotNull(cards, FN_GET_SPAB);
     }
 
     private void writeSpellAbilityToView(final SpellAbility sa, final SpellAbilityView view) {

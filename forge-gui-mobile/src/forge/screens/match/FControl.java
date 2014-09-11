@@ -40,12 +40,7 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.game.card.CounterType;
-import forge.game.card.CardPredicates.Presets;
-import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -324,29 +319,7 @@ public class FControl {
     }
 
     public static void alphaStrike() {
-        final PhaseHandler ph = game.getPhaseHandler();
-
-        final Player p = getCurrentPlayer();
-        final Game game = p.getGame();
-        Combat combat = game.getCombat();
-        if (combat == null) { return; }
-
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p)) {
-            List<Player> defenders = p.getOpponents();
-
-            for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (combat.isAttacking(c)) {
-                    continue;
-                }
-
-                for (Player defender : defenders) {
-                    if (CombatUtil.canAttack(c, defender, combat)) {
-                        combat.addAttacker(c, defender);
-                        break;
-                    }
-                }
-            }
-        }
+        gameView.alphaStrike();
     }
 
     public static void showCombat(CombatView combat) {
@@ -421,6 +394,9 @@ public class FControl {
         for (Pair<PlayerView, ZoneType> kv : zonesToUpdate) {
             PlayerView owner = kv.getKey();
             ZoneType zt = kv.getValue();
+            if (owner == null || zt == null) {
+                continue;
+            }
             getPlayerPanel(owner).updateZone(zt);
         }
     }

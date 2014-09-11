@@ -168,7 +168,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (localPlayer == null || p.getLobbyPlayer() == localPlayer) {
+            if (p.getLobbyPlayer().equals(localPlayer) || !p.getHandCards().isEmpty()) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
                 hands.add(newHand);

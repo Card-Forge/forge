@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Sets;
 
 import forge.game.card.CardUtil;
@@ -159,6 +161,11 @@ public class CardDetailUtil {
         return item.getName(); 
     }
 
+    public static String formatCardName(final CardStateView card) {
+        final String name = card.getName();
+        return StringUtils.isEmpty(name) ? "(no name)" : name.trim();
+    }
+
     public static String formatCardType(final CardStateView card) {
         final List<String> list = card.getType();
         final StringBuilder sb = new StringBuilder();
@@ -199,7 +206,7 @@ public class CardDetailUtil {
             sb.append(type).append(" ");
         }
     
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     public static String formatPowerToughness(final CardStateView card) {

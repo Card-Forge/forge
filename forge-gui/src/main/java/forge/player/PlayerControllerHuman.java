@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
@@ -39,6 +41,8 @@ import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -101,9 +105,14 @@ import forge.view.StackItemView;
  */
 public class PlayerControllerHuman extends PlayerController {
 
-    private final IGuiBase gui;
+    private IGuiBase gui;
     private final InputProxy inputProxy;
     private final GameView gameView;
+    /**
+     * Cards this player may look at right now, for example when searching a
+     * library.
+     */
+    private final Set<Card> mayLookAt = Sets.newHashSet();
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp);
@@ -304,9 +313,11 @@ public class PlayerControllerHuman extends PlayerController {
             return Lists.newArrayList(sc.getSelected());
         }
 
-        return SGuiChoose.many(getGui(), title, "Chosen Cards", min, max, sourceList, gameView.getCardView(sa.getHostCard()));
+        final List<CardView> choices = SGuiChoose.many(getGui(), title, "Chosen Cards", min, max, gameView.getCardViews(sourceList), gameView.getCardView(sa.getHostCard()));
+        return getCards(choices);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         // Human is supposed to read the message and understand from it what to choose
@@ -338,9 +349,17 @@ public class PlayerControllerHuman extends PlayerController {
             return Iterables.getFirst(input.getSelected(), null);
         }
 
-        return isOptional ? SGuiChoose.oneOrNone(getGui(), title, options) : SGuiChoose.one(getGui(), title, options);
+        for (final T t : options) {
+            if (t instanceof Card) {
+                // assume you may see any card passed through here
+                mayLookAt.add((Card) t);
+            }
+        }
+        final GameEntityView result = isOptional ? SGuiChoose.oneOrNone(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options)) : SGuiChoose.one(getGui(), title, gameView.getGameEntityViews((Iterable<GameEntity>) options));
+        mayLookAt.clear();
+        return (T) gameView.getGameEntity(result);
     }
-    
+
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         final Integer[] choices = new Integer[max + 1 - min];
@@ -357,8 +376,13 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title) {
+        if (spells.size() < 2) {
+            return spells.get(0);
+        }
+
         // Human is supposed to read the message and understand from it what to choose
-        return spells.size() < 2 ? spells.get(0) : SGuiChoose.one(getGui(), title, spells);
+        final SpellAbilityView choice = SGuiChoose.one(getGui(), title, gameView.getSpellAbilityViews(spells));
+        return gameView.getSpellAbility(choice);
     }
 
     /* (non-Javadoc)
@@ -469,7 +493,9 @@ public class PlayerControllerHuman extends PlayerController {
         }
         String fm = formatMessage(message, owner);
         if (!cards.isEmpty()) {
-            SGuiChoose.reveal(getGui(), fm, cards);
+            mayLookAt.addAll(cards);
+            SGuiChoose.reveal(getGui(), fm, gameView.getCardViews(cards));
+            mayLookAt.clear();
         }
         else {
             SGuiDialog.message(getGui(), formatMessage("There are no cards in {player's} " +
@@ -539,8 +565,9 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if (p != player) {
-            return SGuiChoose.many(getGui(), "Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
-                    "Discarded", min, min, valid, null);
+            final List<CardView> choices = SGuiChoose.many(getGui(), "Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
+                    "Discarded", min, min, gameView.getCardViews(valid), null);
+            return getCards(choices);
         }
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
@@ -570,7 +597,7 @@ public class PlayerControllerHuman extends PlayerController {
         System.out.println("Delve for " + chosenAmount);
 
         for (int i = 0; i < chosenAmount; i++) {
-            final Card nowChosen = SGuiChoose.oneOrNone(getGui(), "Exile which card?", grave);
+            final CardView nowChosen = SGuiChoose.oneOrNone(getGui(), "Exile which card?", gameView.getCardViews(grave));
 
             if (nowChosen == null) {
                 // User canceled,abort delving.
@@ -579,7 +606,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
 
             grave.remove(nowChosen);
-            toExile.add(nowChosen);
+            toExile.add(gameView.getCard(nowChosen));
         }
         return toExile;
     }
@@ -849,8 +876,9 @@ public class PlayerControllerHuman extends PlayerController {
         if (srcCards.isEmpty()) {
             return result;
         }
-        List<Card> chosen = SGuiChoose.many(getGui(), "Choose cards to activate from opening hand and their order", "Activate first", -1, srcCards, null);
-        for (Card c : chosen) {
+        final List<CardView> chosen = SGuiChoose.many(getGui(), "Choose cards to activate from opening hand and their order", "Activate first", -1, gameView.getCardViews(srcCards), null);
+        for (final CardView view : chosen) {
+            final Card c = getCard(view);
             for (SpellAbility sa : usableFromOpeningHand) {
                 if (sa.getHostCard() == c) {
                     result.add(sa);
@@ -939,7 +967,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (sa.isManaAbility()) {
             game.getGameLog().add(GameLogEntryType.LAND, message);
         } else {
-            SGuiDialog.message(getGui(), message, sa.getHostCard() == null ? "" : sa.getHostCard().getName());
+            SGuiDialog.message(getGui(), message, sa.getHostCard() == null ? "" : getCardView(sa.getHostCard()).toString());
         }
     }
 
@@ -1098,7 +1126,8 @@ public class PlayerControllerHuman extends PlayerController {
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
-            orderedSAs = SGuiChoose.order(getGui(), "Select order for Simultaneous Spell Abilities", "Resolve first", activePlayerSAs, null);
+            final List<SpellAbilityView> orderedSAViews = SGuiChoose.order(getGui(), "Select order for Simultaneous Spell Abilities", "Resolve first", gameView.getSpellAbilityViews(activePlayerSAs), null);
+            orderedSAs = getSpellAbilities(orderedSAViews);
         }
         int size = orderedSAs.size();
         for (int i = size - 1; i >= 0; i--) {
@@ -1320,9 +1349,34 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         @Override
+        public void alphaStrike() {
+            final Combat combat = game.getCombat();
+            if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    || combat == null
+                    || game.getPhaseHandler().getPlayerTurn() != player
+                    || !(getGui().getInputQueue().getInput() instanceof InputAttack)) {
+                return;
+            }
+
+            final List<Player> defenders = player.getOpponents();
+
+            for (final Card c : CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+                if (combat.isAttacking(c))
+                    continue;
+
+                for (final Player defender : defenders) {
+                    if (CombatUtil.canAttack(c, defender, combat)) {
+                        combat.addAttacker(c, defender);
+                        break;
+                    }
+                }
+            }
+        }
+
+        @Override
         public boolean mayShowCard(final CardView c) {
             final Card card = getCard(c);
-            return card == null || card.canBeShownTo(player);
+            return card == null || mayLookAt.contains(card) || card.canBeShownTo(player);
         }
 
         @Override
@@ -1460,18 +1514,9 @@ public class PlayerControllerHuman extends PlayerController {
     /**
      * @param players
      * @return
-     * @see forge.view.LocalGameView#getPlayerViews(java.util.List)
-     */
-    public final List<PlayerView> getPlayerViews(List<Player> players) {
-        return gameView.getPlayerViews(players);
-    }
-
-    /**
-     * @param players
-     * @return
      * @see forge.view.LocalGameView#getPlayerViews(java.lang.Iterable)
      */
-    public final Iterable<PlayerView> getPlayerViews(Iterable<Player> players) {
+    public final List<PlayerView> getPlayerViews(Iterable<Player> players) {
         return gameView.getPlayerViews(players);
     }
 
@@ -1516,7 +1561,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @return
      * @see forge.view.LocalGameView#getCardViews(java.lang.Iterable)
      */
-    public final Iterable<CardView> getCardViews(Iterable<Card> cards) {
+    public final List<CardView> getCardViews(Iterable<Card> cards) {
         return gameView.getCardViews(cards);
     }
 
