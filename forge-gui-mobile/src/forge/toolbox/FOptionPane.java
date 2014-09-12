@@ -8,7 +8,6 @@ import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
-import forge.assets.ImageUtil;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.screens.match.views.VPrompt;
@@ -246,11 +245,7 @@ public class FOptionPane extends FDialog {
 
         float promptHeight = 0;
         if (lblIcon != null) {
-            float maxLabelWidth = Utils.AVG_FINGER_WIDTH * 0.8f;
-            float labelWidth = ImageUtil.getNearestHQSize(maxLabelWidth, lblIcon.getIcon().getWidth());
-            if (labelWidth > maxLabelWidth) {
-                labelWidth /= 2;
-            }
+            float labelWidth = Utils.scaleX(lblIcon.getIcon().getWidth());
             promptHeight = lblIcon.getIcon().getHeight() * labelWidth / lblIcon.getIcon().getWidth();
             if (promptHeight > maxPromptHeight) {
                 promptHeight = maxPromptHeight;

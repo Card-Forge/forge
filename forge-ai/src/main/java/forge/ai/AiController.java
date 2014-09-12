@@ -68,6 +68,7 @@ import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.Ability;
 import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
@@ -740,6 +741,7 @@ public class AiController {
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.WaitForMain2;
             }
+            
             // save cards with flash for surprise blocking
             if (card.hasKeyword("Flash")
                     && (player.isUnlimitedHandSize() || player.getCardsIn(ZoneType.Hand).size() <= player.getMaxHandSize())
@@ -750,6 +752,20 @@ public class AiController {
                     && !ComputerUtil.castPermanentInMain1(player, sa)) {
                 return AiPlayDecision.AnotherTime;
             }
+            
+            // don't play cards without being able to pay the upkeep for
+            for (String ability : card.getKeyword()) {
+                if (ability.startsWith("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) {
+                    final String[] k = ability.split(" pay ");
+                    final String costs = k[1].replaceAll("[{]", "").replaceAll("[}]", " ");
+                    Cost cost = new Cost(costs, true);
+                    final Ability emptyAbility = new AbilityStatic(card, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
+                    emptyAbility.setActivatingPlayer(player);
+                    if (!ComputerUtilCost.canPayCost(emptyAbility, player)) {
+                    	return AiPlayDecision.AnotherTime;
+                    }
+                }
+            }
 
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         } else if( sa instanceof Spell ) {
@@ -759,7 +775,7 @@ public class AiController {
     }
 
     private AiPlayDecision canPlaySpellBasic(final Card card) {
-        if (card.getSVar("NeedsToPlay").length() > 0) {
+        if (card.hasSVar("NeedsToPlay")) {
             final String needsToPlay = card.getSVar("NeedsToPlay");
             List<Card> list = game.getCardsIn(ZoneType.Battlefield);
 

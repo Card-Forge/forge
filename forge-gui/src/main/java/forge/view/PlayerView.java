@@ -311,6 +311,17 @@ public class PlayerView extends GameEntityView {
         }
     }
 
+    public int getNCards(final ZoneType zone) {
+        switch (zone) {
+        case Hand:
+            return getnHandCards();
+        case Library:
+            return getnLibraryCards();
+        default:
+            return getCards(zone).size();
+        }
+    }
+
     /**
      * @return the nHandCards
      */

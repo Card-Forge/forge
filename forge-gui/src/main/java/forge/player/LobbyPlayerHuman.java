@@ -38,4 +38,8 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     public void hear(LobbyPlayer player, String message) {
         gui.hear(player, message);
     }
+
+    public IGuiBase getGui() {
+        return this.gui;
+    }
 }

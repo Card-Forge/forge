@@ -27,6 +27,15 @@ This also applies to spells with Replicate and Multikicker to allow picking the 
 When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.
 When triggered abilities have only one valid target, that target will now be auto-selected.
 
+- AI improvements -
+Some artificial intelligence improvements were made in this version of Forge.
+The AI will now always attack with creatures that it has temporarily gained control of until end of turn in order not to miss the opportunity and thus waste the gain control spell. 
+The AI will no longer bounce guild lands back to hand right after playing them, which sometimes caused the AI to lock itself on land drops completely.
+The AI will now try to predict if it wants to cast a spell in Main 2 and reserve some mana for it instead of aggressively pumping creatures with all available mana. 
+The AI will now also consider pumping a creature if it can predict that this creature will deal more damage to the opponent with its increased power, which should eliminate the senseless attacks with 0/1 creatures that do not get pumped even when they do not get blocked. 
+The AI will no longer waste equipment on cards that are useless (e.g. are tapped and do not normally untap, or can't attack or block anymore, etc.). 
+The AI can now optionally move equipment from one creature to another. For this purpose, a new AI profile variable was added: MOVE_EQUIPMENT_TO_BETTER_CREATURES. It defines whether the AI will always move equipment to better creatures if it has mana ('always'), will only move if the currently equipped creature becomes useless as defined above or because the AI loses control of the creature ('from_useless_only'), or will never move equipment around ('never'). The "Default" profile is set to only move the equipment to other creatures if the currently equipped creatures become useless for the AI, while the "Reckless" AI profile always moves equipment to better creatures when given a chance to (if it has mana and if it doesn't need to reserve mana for a future spell in Main 2).
+
 
 - New Commander 2014 and Khans of Tarkir cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
@@ -64,6 +73,38 @@ Mardu Skullhunter
 Heir of the Wilds
 Ivorytusk Fortress
 Sagu Mauler
+Ghostfire Blade
+Abzan Ascendancy
+Flying Crane Technique
+Temur Charger
+Utter End
+Clever Impersonator
+End Hostilities
+Ugin's Nexus
+Anafenza, the Foremost
+Crater's Claws
+Hardened Scales
+See the Unwritten
+Sarkhan, the Dragonspeaker
+Sorin, Solemn Visitor
+Frontier Bivouac
+Mystic Monastery
+Nomad Outpost
+Opulent Palace
+Sandsteppe Citadel
+Dragon's Eye Savants
+Horde Ambusher
+Ruthless Ripper
+Watcher of the Roost
+Abzan Guide
+Jeering Instigator
+Ankle Shanker
+Jeskai Windscout
+Mantis Rider
+Murderous Cut
+Rakshasa Deathdealer
+Savage Knuckleblade
+Shambling Attendants
 
 
 ------------

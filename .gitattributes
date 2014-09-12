@@ -16749,6 +16749,7 @@ forge-gui/src/main/java/forge/match/input/InputSelectTargets.java -text
 forge-gui/src/main/java/forge/match/input/InputSynchronized.java -text
 forge-gui/src/main/java/forge/match/input/InputSyncronizedBase.java -text
 forge-gui/src/main/java/forge/match/input/package-info.java -text
+forge-gui/src/main/java/forge/model/Achievement.java -text
 forge-gui/src/main/java/forge/model/CardBlock.java -text
 forge-gui/src/main/java/forge/model/CardCollections.java -text
 forge-gui/src/main/java/forge/model/FModel.java svneol=native#text/plain

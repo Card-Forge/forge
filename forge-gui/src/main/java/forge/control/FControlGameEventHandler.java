@@ -53,6 +53,7 @@ import forge.interfaces.IGuiBase;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
 import forge.model.FModel;
+import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -177,6 +178,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 gui.showPromptMessage(""); //clear prompt behind WinLose overlay
                 ButtonUtil.update(gui, "", "", false, false, false);
                 gui.finishGame();
+                if (gui.getGuiPlayer() instanceof LobbyPlayerHuman) {
+                    gameView.updateAchievements((LobbyPlayerHuman) gui.getGuiPlayer());
+                }
             }
         });
         return null;

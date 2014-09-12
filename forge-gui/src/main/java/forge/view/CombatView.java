@@ -50,6 +50,12 @@ public class CombatView {
         }
         return false;
     }
+
+    /**
+     * @param attacker
+     * @return the blockers associated with an attacker, or {@code null} if the
+     *         attacker is unblocked.
+     */
     public Iterable<CardView> getBlockers(final CardView attacker) {
         return attackersWithBlockers.get(attacker);
     }

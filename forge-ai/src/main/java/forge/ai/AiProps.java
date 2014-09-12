@@ -29,7 +29,8 @@ public enum AiProps { /** */
     DEFAULT_PLANAR_DIE_ROLL_CHANCE ("50"), /** */
     MULLIGAN_THRESHOLD ("5"), /** */
     PLANAR_DIE_ROLL_HESITATION_CHANCE ("10"),
-    CHEAT_WITH_MANA_ON_SHUFFLE ("FALSE"); /** */
+    CHEAT_WITH_MANA_ON_SHUFFLE ("false"),
+    MOVE_EQUIPMENT_TO_BETTER_CREATURES ("always"); /** */
 
     private final String strDefaultVal;
 

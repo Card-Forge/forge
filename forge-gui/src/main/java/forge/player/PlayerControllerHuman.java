@@ -508,6 +508,7 @@ public class PlayerControllerHuman extends PlayerController {
         List<Card> toBottom = null;
         List<Card> toTop = null;
 
+        mayLookAt.addAll(topN);
         if (topN.size() == 1) {
             if (willPutCardOnTop(topN.get(0))) {
                 toTop = topN;
@@ -517,7 +518,8 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
         else {
-            toBottom = SGuiChoose.many(getGui(), "Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null);
+            final List<CardView> toBottomViews = SGuiChoose.many(getGui(), "Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, gameView.getCardViews(topN), null); 
+            toBottom = gameView.getCards(toBottomViews);
             topN.removeAll(toBottom);
             if (topN.isEmpty()) {
                 toTop = null;
@@ -526,9 +528,11 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = topN;
             }
             else {
-                toTop = SGuiChoose.order(getGui(), "Arrange cards to be put on top of your library", "Cards arranged", topN, null);
+                final List<CardView> toTopViews = SGuiChoose.order(getGui(), "Arrange cards to be put on top of your library", "Cards arranged", gameView.getCardViews(topN), null); 
+                toTop = gameView.getCards(toTopViews);
             }
         }
+        mayLookAt.clear();
         return ImmutablePair.of(toTop, toBottom);
     }
 
@@ -565,8 +569,10 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if (p != player) {
+            mayLookAt.addAll(valid);
             final List<CardView> choices = SGuiChoose.many(getGui(), "Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
                     "Discarded", min, min, gameView.getCardViews(valid), null);
+            mayLookAt.clear();
             return getCards(choices);
         }
 

@@ -155,6 +155,7 @@ public class FModel {
         CardPreferences.load();
         DeckPreferences.load();
         ItemManagerConfig.load();
+        Achievement.load();
         
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);

@@ -10,6 +10,7 @@ import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.RegisteredPlayer;
+import forge.player.LobbyPlayerHuman;
 import forge.util.ITriggerEvent;
 
 public interface IGameView {
@@ -36,6 +37,7 @@ public interface IGameView {
     public abstract GameOutcome.AnteResult getAnteResult();
 
     public abstract boolean isGameOver();
+    public abstract void updateAchievements(LobbyPlayerHuman player);
 
     public abstract int getPoisonCountersToLose();
 

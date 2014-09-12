@@ -26,7 +26,10 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.model.Achievement;
+import forge.player.LobbyPlayerHuman;
 import forge.util.ITriggerEvent;
+import forge.util.ThreadUtil;
 
 public class LocalGameView implements IGameView {
 
@@ -137,6 +140,24 @@ public class LocalGameView implements IGameView {
     @Override
     public boolean isGameOver() {
         return game.isGameOver();
+    }
+
+    @Override
+    public void updateAchievements(final LobbyPlayerHuman player) {
+        //update all achievements for GUI player after game finished
+        ThreadUtil.invokeInGameThread(new Runnable() {
+            @Override
+            public void run() {
+                if (game == null) {
+                    return;
+                }
+                for (final Player p : game.getRegisteredPlayers()) {
+                    if (p.getController().getLobbyPlayer() == player) {
+                        Achievement.updateAll(player.getGui(), p);
+                    }
+                }
+            }
+        });
     }
 
     @Override

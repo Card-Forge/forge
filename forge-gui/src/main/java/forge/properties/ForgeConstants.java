@@ -98,6 +98,7 @@ public final class ForgeConstants {
         DECK_PREFS_FILE      = USER_PREFS_DIR + "deck.preferences";
         QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
         ITEM_VIEW_PREFS_FILE = USER_PREFS_DIR + "item_view.preferences";
+        ACHIEVEMENTS_FILE    = USER_PREFS_DIR + "achievements.xml";
 
         _DEFAULTS_DIR = RES_DIR + "defaults/";
         NO_CARD_FILE  = _DEFAULTS_DIR + "no_card.jpg";
@@ -228,6 +229,7 @@ public final class ForgeConstants {
     public static String DECK_PREFS_FILE;
     public static String QUEST_PREFS_FILE;
     public static String ITEM_VIEW_PREFS_FILE;
+    public static String ACHIEVEMENTS_FILE;
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static String _DEFAULTS_DIR;
