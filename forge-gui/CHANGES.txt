@@ -105,6 +105,36 @@ Murderous Cut
 Rakshasa Deathdealer
 Savage Knuckleblade
 Shambling Attendants
+Abzan Banner
+Jeskai Banner
+Mardu Banner
+Sultai Banner
+Temur Banner
+Bloodfell Caves
+Blossoming Sands
+Dismal Backwater
+Jungle Hollow
+Rugged Highlands
+Scoured Barrens
+Swiftwater Cliffs
+Thornwood Falls
+Tranquil Cove
+Wind-Scarred Crag
+Bear's Companion
+Pearl Lake Ancient
+Siege Rhino
+Witness of the Ages
+Master of Pearls
+Disdainful Stroke
+Grim Haruspex
+Sidisi's Pet
+Surrak Dragonclaw
+Abzan Battle Priest
+Abzan Falconer
+Alabaster Kirin
+Brave the Sands
+Dazzling Ramparts
+Defiant Strike
 
 
 ------------
