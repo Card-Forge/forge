@@ -51,7 +51,7 @@ public class AiCardMemory {
      */
     public enum MemorySet {
         MANDATORY_ATTACKERS,
-        HELD_MANA_SOURCES, // stub, not linked to AI code yet
+        HELD_MANA_SOURCES, 
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
