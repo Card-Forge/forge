@@ -106,6 +106,11 @@ public class ComputerUtilMana {
 		}
 		
 		private void addAbility(final SpellAbility ability) {
+
+			if (ability.getManaPart() == null) {
+				manaCount += 1; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
+				return;
+			}
 			
 			String mana = ability.getManaPart().mana();
 			
@@ -230,10 +235,10 @@ public class ComputerUtilMana {
 	}
 
     public static ArrayList<Card> getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        ArrayList<Card> manaSources = new ArrayList<Card>();
+        ArrayList<Card> manaSources = new ArrayList<>();
 
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
-        List<Mana> manaSpentToPay = new ArrayList<Mana>();
+        List<Mana> manaSpentToPay = new ArrayList<>();
 
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();
         Collections.sort(unpaidShards); // most difficult shards must come first
@@ -275,7 +280,7 @@ public class ComputerUtilMana {
 
         sortManaAbilities(sourcesForShards);
 
-        ManaCostShard toPay = null;
+        ManaCostShard toPay;
         // Loop over mana needed
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost);
