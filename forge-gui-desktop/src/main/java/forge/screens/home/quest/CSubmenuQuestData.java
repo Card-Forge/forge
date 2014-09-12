@@ -235,7 +235,7 @@ public enum CSubmenuQuestData implements ICDoc {
         // } else {
         //    fmtPrizes = worldFormat;
         // }
-        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor());
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor(), view.startWithCompleteSet());
 
         String questName;
         while (true) {
@@ -254,7 +254,7 @@ public enum CSubmenuQuestData implements ICDoc {
             }
             break;
         }
-
+		
         QuestController qc = FModel.getQuest();
 
         qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs);

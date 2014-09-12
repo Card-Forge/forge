@@ -28,6 +28,7 @@ public final class StartingPoolPreferences {
 
     private final boolean randomPool;
     private final byte preferredColor;
+	private final boolean completeSet;
 
     /**
      * The constructor.
@@ -37,9 +38,10 @@ public final class StartingPoolPreferences {
      * @param preference
      *  preferred color/COLORLESS (ALL_COLORS = no preference)
      */
-    public StartingPoolPreferences(final boolean random, final byte preference) {
+    public StartingPoolPreferences(final boolean random, final byte preference, final boolean completeSet) {
         randomPool = random;
         preferredColor = preference;
+		this.completeSet = completeSet;
     }
 
     /**
@@ -58,4 +60,9 @@ public final class StartingPoolPreferences {
     public byte getPreferredColor() {
         return preferredColor;
     }
+	
+	public boolean grantCompleteSet() {
+		return completeSet;
+	}
+	
 }

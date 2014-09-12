@@ -192,7 +192,8 @@
         <module>forge-net</module>
         <module>forge-gui</module>
         <module>forge-gui-desktop</module>
-        
+        <module>Forge Game Rewrite</module>
+
     </modules>
 
     <distributionManagement>
