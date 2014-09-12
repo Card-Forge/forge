@@ -449,6 +449,14 @@ public enum FControl implements KeyEventDispatcher {
         this.game = match.createGame();
         inputQueue = new InputQueue(game);
 
+        boolean anyPlayerIsAi = false;
+        for (final Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() instanceof LobbyPlayerAi) {
+                anyPlayerIsAi = true;
+                break;
+            }
+        }
+
         final LobbyPlayer me = getGuiPlayer();
         for (final Player p : game.getPlayers()) {
             if (p.getLobbyPlayer().equals(me)) {
@@ -456,6 +464,17 @@ public enum FControl implements KeyEventDispatcher {
                 this.gameView = controller.getGameView();
                 this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), controller.getGameView());
                 break;
+            }
+        }
+
+        if (!anyPlayerIsAi) {
+            // If there are no AI's, allow all players to see all cards (hotseat
+            // mode).
+            for (final Player p : game.getPlayers()) {
+                if (p.getController() instanceof PlayerControllerHuman) {
+                    final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
+                    controller.setMayLookAtAllCards(true);
+                }
             }
         }
 

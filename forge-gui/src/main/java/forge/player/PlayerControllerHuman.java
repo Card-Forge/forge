@@ -113,6 +113,7 @@ public class PlayerControllerHuman extends PlayerController {
      * library.
      */
     private final Set<Card> mayLookAt = Sets.newHashSet();
+    private boolean mayLookAtAllCards = false;
 
     public PlayerControllerHuman(final Game game0, final Player p, final LobbyPlayer lp, final IGuiBase gui) {
         super(game0, p, lp);
@@ -136,6 +137,24 @@ public class PlayerControllerHuman extends PlayerController {
 
     public LocalGameView getGameView() {
         return gameView;
+    }
+
+    /**
+     * @return the mayLookAtAllCards
+     */
+    public boolean mayLookAtAllCards() {
+        return mayLookAtAllCards;
+    }
+
+    /**
+     * Set this to {@code true} to enable this player to see all cards any other
+     * player can see.
+     *
+     * @param mayLookAtAllCards
+     *            the mayLookAtAllCards to set
+     */
+    public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
+        this.mayLookAtAllCards = mayLookAtAllCards;
     }
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
@@ -1379,18 +1398,31 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
 
+        /**
+         * Check whether a card may be shown. If {@code mayLookAtAllCards} is
+         * {@code true}, any card may be shown.
+         * 
+         * @param c a card.
+         * @return whether the card may be shown.
+         * @see GameView#mayShowCardNoRedirect(CardView)
+         */
         @Override
         public boolean mayShowCard(final CardView c) {
+            if (mayLookAtAllCards()) {
+                return true;
+            }
             final Card card = getCard(c);
             return card == null || mayLookAt.contains(card) || card.canBeShownTo(player);
         }
 
         @Override
         public boolean mayShowCardFace(final CardView c) {
+            if (mayLookAtAllCards()) {
+                return true;
+            }
             final Card card = getCard(c);
             return card == null || !c.isFaceDown() || card.canCardFaceBeShownTo(player);
         }
-
 
         @Override
         public boolean getDisableAutoYields() {
@@ -1626,6 +1658,5 @@ public class PlayerControllerHuman extends PlayerController {
             List<SpellAbilityView> cards) {
         return gameView.getSpellAbilities(cards);
     }
-
 
 }

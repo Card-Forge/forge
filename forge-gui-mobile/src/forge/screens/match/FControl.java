@@ -118,15 +118,15 @@ public class FControl {
     }
 
     public static void startGameInSameMatch() {
+        final Match match = game.getMatch();
         endCurrentGame();
-        startGame(game.getMatch());
+        startGame(match);
     }
 
     public static void startGameInNewMatch() {
-        endCurrentGame();
         final Match match = game.getMatch();
+        endCurrentGame();
         match.clearGamesPlayed();
-        FControl.endCurrentGame();
         startGame(match);
     }
 
@@ -162,9 +162,12 @@ public class FControl {
 
         // Add playback controls to match if needed
         gameHasHumanPlayer = false;
+        boolean gameHasAiPlayer = false;
         for (Player p :  game.getPlayers()) {
             if (p.getController().getLobbyPlayer() == getGuiPlayer()) {
                 gameHasHumanPlayer = true;
+            } else if (p.getLobbyPlayer() instanceof LobbyPlayerAi) {
+                gameHasAiPlayer = true;
             }
         }
         if (!gameHasHumanPlayer) {
@@ -184,6 +187,17 @@ public class FControl {
                     }
                 }
             });
+        }
+
+        if (!gameHasAiPlayer) {
+            // If there are no AI's, allow all players to see all cards (hotseat
+            // mode).
+            for (final Player p : game.getPlayers()) {
+                if (p.getController() instanceof PlayerControllerHuman) {
+                    final PlayerControllerHuman controller = (PlayerControllerHuman) p.getController();
+                    controller.setMayLookAtAllCards(true);
+                }
+            }
         }
 
         Forge.openScreen(view);
