@@ -200,24 +200,28 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> valid, String message) {
-        String outerMessage = "Select %d " + message + "(s) to sacrifice";
-        return choosePermanentsTo(min, max, valid, outerMessage);
+        return choosePermanentsTo(min, max, valid, message, "sacrifice");
     }
 
     @Override
     public List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> valid, String message) {
-        String outerMessage = "Select %d " + message + "(s) to be destroyed";
-        return choosePermanentsTo(min, max, valid, outerMessage);
+        return choosePermanentsTo(min, max, valid, message, "destroy");
     }
 
-    private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String outerMessage) {
+    private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String message, String action) {
         max = Math.min(max, valid.size());
         if (max <= 0) {
             return new ArrayList<Card>();
         }
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(min == 0 ? 1 : min, max, valid);
-        inp.setMessage(outerMessage);
+        StringBuilder builder = new StringBuilder("Select ");
+        if (min == 0) {
+            builder.append("up to ");
+        }
+        builder.append("%d " + message + "(s) to " + action + ".");
+
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
+        inp.setMessage(builder.toString());
         inp.setCancelAllowed(min == 0);
         inp.showAndWait();
         return Lists.newArrayList(inp.getSelected());

@@ -19,9 +19,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         super(Math.min(min, validChoices.size()), Math.min(max, validChoices.size()));
         this.validChoices = validChoices;
 
-        if ( min > validChoices.size() )
+        if (min > validChoices.size()) {
             System.out.println(String.format("Trying to choose at least %d cards from a list with only %d cards!", min, validChoices.size()));
-
+        }
     }
  
     @Override
@@ -69,14 +69,10 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     protected String getMessage() {
         return max == Integer.MAX_VALUE
-            ? String.format(message, selected.size())
-            : String.format(message, max - selected.size());
+                ? String.format(message, selected.size())
+                : String.format(message, max - selected.size());
     }
         
 }
