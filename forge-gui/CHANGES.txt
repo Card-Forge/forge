@@ -1,7 +1,7 @@
-Forge Beta: 09-##-2014 ver 1.5.26
+Forge Beta: 09-12-2014 ver 1.5.26
 
 
-# cards in total.
+14049 cards in total.
 
 
 -------------
@@ -15,17 +15,19 @@ The dialog for the commander replacement effect will now display the commander's
 
 
 - Momir Basic variant type -
-Momir Basic is now available as its own variant option on the Constructed screen
-For this format. each player will automatically be given a deck with 12 of each basic land and the Momir Vig avatar
+Momir Basic is now available as its own variant option on the Constructed screen.
+For this format. each player will automatically be given a deck with 12 of each basic land and the Momir Vig avatar.
 
 
 - Choose value for X mana costs -
 Now, when playing spells/abilities with X in its mana cost, you will now be prompted for a value for X prior to mana payment, ensuring the final mana cost is calculated properly from cost adjustment effects and allowing using the "Auto" button to pay the entire cost.
 This also applies to spells with Replicate and Multikicker to allow picking the Replicate or Multikicker amount prior to paying the final mana cost.
 
+
 - Auto-targeting support -
 When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.
 When triggered abilities have only one valid target, that target will now be auto-selected.
+
 
 - AI improvements -
 Some artificial intelligence improvements were made in this version of Forge.
@@ -41,13 +43,6 @@ The AI can now optionally move equipment from one creature to another. For this 
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
----------
-New Cards
----------
-
-
-
-
 -------------------------------
 New Commander 2014 branch Cards
 -------------------------------
@@ -61,80 +56,80 @@ Teferi, Temporal Archmage
 New Khans of Tarkir branch Cards
 --------------------------------
 
-Jeskai Elder
-Thousand Winds
-Zurgo Helmsmasher
-Dragon-Style Twins
-Herald of Anafenza
-Rattleclaw Mystic
-Temur Ascendancy
-Ainok Bond-Kin
-Mardu Skullhunter
-Heir of the Wilds
-Ivorytusk Fortress
-Sagu Mauler
-Ghostfire Blade
 Abzan Ascendancy
-Flying Crane Technique
-Temur Charger
-Utter End
-Clever Impersonator
-End Hostilities
-Ugin's Nexus
+Abzan Banner
+Abzan Battle Priest
+Abzan Falconer
+Abzan Guide
+Ainok Bond-Kin
+Alabaster Kirin
 Anafenza, the Foremost
+Ankle Shanker
+Bear's Companion
+Bloodfell Caves
+Blossoming Sands
+Brave the Sands
+Clever Impersonator
 Crater's Claws
-Hardened Scales
-See the Unwritten
-Sarkhan, the Dragonspeaker
-Sorin, Solemn Visitor
+Dazzling Ramparts
+Defiant Strike
+Disdainful Stroke
+Dismal Backwater
+Dragon's Eye Savants
+Dragon-Style Twins
+End Hostilities
+Flying Crane Technique
 Frontier Bivouac
+Ghostfire Blade
+Grim Haruspex
+Hardened Scales
+Heir of the Wilds
+Herald of Anafenza
+Horde Ambusher
+Ivorytusk Fortress
+Jeering Instigator
+Jeskai Banner
+Jeskai Elder
+Jeskai Windscout
+Jungle Hollow
+Mantis Rider
+Mardu Banner
+Mardu Skullhunter
+Master of Pearls
+Murderous Cut
 Mystic Monastery
 Nomad Outpost
 Opulent Palace
-Sandsteppe Citadel
-Dragon's Eye Savants
-Horde Ambusher
-Ruthless Ripper
-Watcher of the Roost
-Abzan Guide
-Jeering Instigator
-Ankle Shanker
-Jeskai Windscout
-Mantis Rider
-Murderous Cut
-Rakshasa Deathdealer
-Savage Knuckleblade
-Shambling Attendants
-Abzan Banner
-Jeskai Banner
-Mardu Banner
-Sultai Banner
-Temur Banner
-Bloodfell Caves
-Blossoming Sands
-Dismal Backwater
-Jungle Hollow
-Rugged Highlands
-Scoured Barrens
-Swiftwater Cliffs
-Thornwood Falls
-Tranquil Cove
-Wind-Scarred Crag
-Bear's Companion
 Pearl Lake Ancient
-Siege Rhino
-Witness of the Ages
-Master of Pearls
-Disdainful Stroke
-Grim Haruspex
+Rakshasa Deathdealer
+Rattleclaw Mystic
+Rugged Highlands
+Ruthless Ripper
+Sagu Mauler
+Sandsteppe Citadel
+Sarkhan, the Dragonspeaker
+Savage Knuckleblade
+Scoured Barrens
+See the Unwritten
+Shambling Attendants
 Sidisi's Pet
+Siege Rhino
+Sorin, Solemn Visitor
+Sultai Banner
 Surrak Dragonclaw
-Abzan Battle Priest
-Abzan Falconer
-Alabaster Kirin
-Brave the Sands
-Dazzling Ramparts
-Defiant Strike
+Swiftwater Cliffs
+Temur Ascendancy
+Temur Banner
+Temur Charger
+Thornwood Falls
+Thousand Winds
+Tranquil Cove
+Ugin's Nexus
+Utter End
+Watcher of the Roost
+Wind-Scarred Crag
+Witness of the Ages
+Zurgo Helmsmasher
 
 
 ------------
@@ -186,8 +181,8 @@ DrDev
 elcnesh
 excessum
 Gos
+Kapoue
 KrazyTheFox
-rikimbo
 Sloth
 Sol
 Swordshine
