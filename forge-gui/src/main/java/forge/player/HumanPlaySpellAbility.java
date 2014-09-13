@@ -234,14 +234,13 @@ public class HumanPlaySpellAbility {
             }
 
             ability.setSVar("X", value.toString());
-            
-            // announce to subabilities
-            SpellAbility sub = ability.getSubAbility();
-            do {
-                sub.setSVar("X", value.toString());
-            } while ((sub = sub.getSubAbility()) != null);
-
             card.setSVar("X", value.toString());
+
+            // announce to subabilities
+            SpellAbility sub = ability;
+            while ((sub = sub.getSubAbility()) != null) {
+                sub.setSVar("X", value.toString());
+            };
         }
         return true;
     }
