@@ -910,10 +910,12 @@ forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuDraft.java
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuSealed.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/VSubmenuWinston.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/sanctioned/package-info.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuAchievements.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuAvatars.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuDownloaders.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuPreferences.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/CSubmenuReleaseNotes.java -text
+forge-gui-desktop/src/main/java/forge/screens/home/settings/VSubmenuAchievements.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/VSubmenuAvatars.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/VSubmenuDownloaders.java -text
 forge-gui-desktop/src/main/java/forge/screens/home/settings/VSubmenuPreferences.java -text
