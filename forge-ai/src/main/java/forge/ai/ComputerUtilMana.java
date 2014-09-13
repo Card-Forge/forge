@@ -2,7 +2,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
-import forge.card.CardType.CoreType;
+
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -14,7 +14,9 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.mana.Mana;
@@ -29,6 +31,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -77,45 +80,51 @@ public class ComputerUtilMana {
     }
 
     private static class ManaProducingCard {
-        private CoreType cardType;
-        private int manaCount;
+        private int score;
 
-        public ManaProducingCard(final SpellAbility ability) {
-            Card hostCard = ability.getHostCard();
+        public ManaProducingCard(final Card card) {
+            score = 0;
 
-            for (SpellAbility spellAbility : hostCard.getSpellAbilities()) {
-                if (spellAbility.isManaAbility()) {
-                    addAbility(spellAbility);
+            for (SpellAbility ability : card.getSpellAbilities()) {
+                if (ability.isManaAbility()) {
+                    if (ability.getManaPart() == null) {
+                        score++; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
+                    }
+                    else {
+                        String mana = ability.getManaPart().mana();
+                        if (!mana.equals("Any")) {
+                            score += mana.length();
+                        }
+                        else {
+                            score += 6;
+                        }
+                    }
+                    //increase score if any part of ability's cost is not reusable or renewable (such as paying life)
+                    for (CostPart costPart : ability.getPayCosts().getCostParts()) {
+                        if (!costPart.isReusable()) {
+                            score += 3;
+                        }
+                        if (!costPart.isRenewable()) {
+                            score += 3;
+                        }
+                    }
+                    if (!ability.isUndoable()) {
+                        score += 50; //only use non-undoable mana abilities as a last resort
+                    }
+                }
+                else if (!ability.isTrigger() && ability.isPossible()) {
+                    score += 13; //add 13 for any non-mana activated abilities
                 }
             }
 
-            if (hostCard.isCreature()) {
-                cardType = CoreType.Creature;
-            }
-            else if (hostCard.isArtifact()) {
-                cardType = CoreType.Artifact;
-            }
-            else if (hostCard.isEnchantment()) {
-                cardType = CoreType.Enchantment;
-            }
-            else {
-                cardType = CoreType.Land;
-            }
-        }
-        
-        private void addAbility(final SpellAbility ability) {
-            if (ability.getManaPart() == null) {
-                manaCount += 1; //Assume a mana ability can generate at least 1 mana if the amount of mana can't be determined now.
-                return;
-            }
-            
-            String mana = ability.getManaPart().mana();
-            
-            if (!mana.equals("Any")) {
-                manaCount += mana.length();
-            }
-            else {
-                manaCount += 6;
+            if (card.isCreature()) {
+                //treat attacking and blocking as though they're non-mana abilities
+                if (CombatUtil.canAttack(card)) {
+                    score += 13;
+                }
+                if (CombatUtil.canBlock(card)) {
+                    score += 13;
+                }
             }
         }
     }
@@ -127,7 +136,7 @@ public class ComputerUtilMana {
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
             for (SpellAbility ability : manaAbilityMap.get(shard)) {
                 if (!manaCardMap.containsKey(ability.getHostCard())) {
-                    ManaProducingCard manaProducingCard = new ManaProducingCard(ability);
+                    ManaProducingCard manaProducingCard = new ManaProducingCard(ability.getHostCard());
                     manaCardMap.put(ability.getHostCard(), manaProducingCard);
                     orderedCards.add(ability.getHostCard());
                 }
@@ -136,34 +145,7 @@ public class ComputerUtilMana {
         Collections.sort(orderedCards, new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
-                int card1Score = scoreCard(manaCardMap.get(card1));
-                int card2Score = scoreCard(manaCardMap.get(card2));
-                
-                return card1Score - card2Score;
-            }
-
-            private int scoreCard(final ManaProducingCard card) {
-                int score = 0;
-
-                score += card.manaCount * 2;
-
-                switch (card.cardType) {
-                    case Artifact:
-                    case Enchantment:
-                        score += 1;
-                        break;
-                    case Land:
-                        score += 2;
-                        break;
-                    case Creature:
-                        score += 3;
-                        break;
-                    default:
-                        score += 4;
-                        break;
-                }
-                
-                return score;
+                return Integer.compare(manaCardMap.get(card1).score, manaCardMap.get(card2).score);
             }
         });
 
