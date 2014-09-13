@@ -99,6 +99,72 @@ Watcher of the Roost
 Wind-Scarred Crag
 Witness of the Ages
 Zurgo Helmsmasher
+Awaken the Bear
+Debilitating Injury
+Dutiful Return
+Kill Shot
+Siegecraft
+Throttle
+Weave Fate
+Abzan Charm
+Ainok Tracker
+Armament Corps
+Bloodfire Expert
+Bloodfire Mentor
+Canyon Lukers
+Chief of the Edge
+Chief of the Scale
+Disowned Ancestor
+Goblinslide
+Gurmag Swiftwing
+Highspire Mantis
+Hordeling Outburst
+Krumar Bond-Kin
+Leaping Master
+Mardu Blazebringer
+Mer-Ek Nightblade
+Monastery Flock
+Monastery Swiftspear
+Ponyback Brigade
+Riverwheel Aerialists
+Rotting Mastodon
+Sagu Archer
+Scout the Borders
+Snowhorn Rider
+Sultai Flayer
+Sultai Scavenger
+Summit Prowler
+Swift Kick
+Take Up Arms
+Tormenting Voice
+Trumpet Blast
+Tusked Colossodon
+Tuskguard Captain
+Valley Dasher
+Venerable Lammasu
+Wetland Sambar
+Whirlwind Adept
+Woolly Loxodon
+Firehoof Cavalry
+Jeskai Student
+Mardu Hateblade
+Mardu Hordechief
+Rush of Battle
+Sage-Eye Harrier
+Salt Road Patrol
+Seeker of the Way
+Dead Drop
+Tomb of the Spirit Dragon
+Altar of the Brood
+Briber's Purse
+Cranial Archive
+Dragon Throne of Tarkir
+Heart-Piercer Bow
+Secret Plans
+Warden of the Eye
+Roar of Challenge
+Barrage of Boulders
+Bring Low
 
 
 ------------
