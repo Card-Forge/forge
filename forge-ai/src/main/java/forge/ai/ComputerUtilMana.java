@@ -119,7 +119,7 @@ public class ComputerUtilMana {
 
             if (card.isCreature()) {
                 //treat attacking and blocking as though they're non-mana abilities
-                if (CombatUtil.canAttack(card)) {
+                if (CombatUtil.canAttack(card, card.getController().getOpponent())) {
                     score += 13;
                 }
                 if (CombatUtil.canBlock(card)) {
