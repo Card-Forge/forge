@@ -75,6 +75,7 @@ import forge.view.GameEntityView;
 import forge.view.IGameView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
+import forge.view.WatchLocalGame;
 
 public class FControl {
     private FControl() { } //don't allow creating instance
@@ -255,15 +256,26 @@ public class FControl {
             p.getLobbyPlayer().setAvatarIndex(avatarIndex);
         }
 
-        final PlayerControllerHuman humanController = (PlayerControllerHuman) localPlayer.getController();
-        final LocalGameView localGameView = humanController.getGameView(); 
-        gameView = localGameView; 
-        fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
+        final LocalGameView localGameView;
+        if (localPlayer.getController() instanceof PlayerControllerHuman) {
+            final PlayerControllerHuman controller = (PlayerControllerHuman) localPlayer.getController();
+            localGameView = controller.getGameView(); 
+            gameView = localGameView; 
+            fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
+        } else {
+            // Watch game but do not participate
+            localGameView = new WatchLocalGame(game, inputQueue);
+            gameView = localGameView;
+            fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), localGameView);
+            playbackControl = new FControlGamePlayback(GuiBase.getInterface(), localGameView);
+            playbackControl.setGame(game);
+            game.subscribeToEvents(playbackControl);
+        }
 
         for (Player p : sortedPlayers) {
-            playerPanels.add(new VPlayerPanel(humanController.getPlayerView(p)));
+            playerPanels.add(new VPlayerPanel(localGameView.getPlayerView(p)));
         }
-        view = new MatchScreen(localGameView, humanController.getPlayerView(localPlayer), playerPanels);
+        view = new MatchScreen(localGameView, localGameView.getPlayerView(localPlayer), playerPanels);
     }
 
     private static List<Player> shiftPlayersPlaceLocalFirst(final List<Player> players, Player localPlayer) {

@@ -81,12 +81,14 @@ import forge.match.input.InputProxy;
 import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
+import forge.model.Achievement;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.DevModeUtil;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.ThreadUtil;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
 import forge.util.gui.SOptionPane;
@@ -1295,6 +1297,19 @@ public class PlayerControllerHuman extends PlayerController {
             return this.getGame().getOutcome().anteResult.get(player);
         }
 
+        public void updateAchievements() {
+            //update all achievements for GUI player after game finished
+            ThreadUtil.invokeInGameThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (game == null) {
+                        return;
+                    }
+                    Achievement.updateAll(getGui(), player);
+                }
+            });
+        }
+
         @Override
         public boolean canUndoLastAction() {
             if (!game.stack.canUndo()) {
@@ -1313,7 +1328,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return false;
             }
 
-            if (game.getStack().undo()) {//canUndoLastAction(gui) && GuiBase.getInterface().getGame().stack.undo()) {
+            if (game.getStack().undo()) {
                 final Input currentInput = getGui().getInputQueue().getInput();
                 if (currentInput instanceof InputPassPriority) {
                     currentInput.showMessageInitial(); //ensure prompt updated if needed
@@ -1424,15 +1439,6 @@ public class PlayerControllerHuman extends PlayerController {
             return card == null || !c.isFaceDown() || card.canCardFaceBeShownTo(player);
         }
 
-        @Override
-        public boolean getDisableAutoYields() {
-            return this.getGame().getDisableAutoYields();
-        }
-        @Override
-        public void setDisableAutoYields(final boolean b) {
-            this.getGame().setDisableAutoYields(b);
-        }
-
         // Dev mode functions
         @Override
         public void devTogglePlayManyLands(final boolean b) {
@@ -1487,30 +1493,63 @@ public class PlayerControllerHuman extends PlayerController {
             DevModeUtil.devModePlaneswalkTo(game, PlayerControllerHuman.this);
         }
 
-    }
+        @Override
+        public Iterable<String> getAutoYields() {
+            return PlayerControllerHuman.this.getAutoYields();
+        }
 
-    /**
-     * @return
-     * @see forge.view.LocalGameView#getPlayers()
-     */
-    public List<PlayerView> getPlayers() {
-        return gameView.getPlayers();
-    }
+        @Override
+        public boolean shouldAutoYield(final String key) {
+            return PlayerControllerHuman.this.shouldAutoYield(key);
+        }
 
-    /**
-     * @return
-     * @see forge.view.LocalGameView#getPlayerTurn()
-     */
-    public PlayerView getPlayerTurn() {
-        return gameView.getPlayerTurn();
-    }
+        @Override
+        public void setShouldAutoYield(String key, boolean autoYield) {
+            PlayerControllerHuman.this.setShouldAutoYield(key, autoYield);
+        }
 
-    /**
-     * @return
-     * @see forge.view.LocalGameView#getCombat()
-     */
-    public CombatView getCombat() {
-        return gameView.getCombat();
+        @Override
+        public boolean getDisableAutoYields() {
+            return this.getGame().getDisableAutoYields();
+        }
+        @Override
+        public void setDisableAutoYields(final boolean b) {
+            this.getGame().setDisableAutoYields(b);
+        }
+
+        @Override
+        public boolean shouldAlwaysAcceptTrigger(final Integer trigger) {
+            return PlayerControllerHuman.this.shouldAlwaysAcceptTrigger(trigger);
+        }
+
+        @Override
+        public boolean shouldAlwaysDeclineTrigger(final Integer trigger) {
+            return PlayerControllerHuman.this.shouldAlwaysDeclineTrigger(trigger);
+        }
+
+        public boolean shouldAlwaysAskTrigger(final Integer trigger) {
+            return PlayerControllerHuman.this.shouldAlwaysAskTrigger(trigger);
+        }
+
+        @Override
+        public void setShouldAlwaysAcceptTrigger(final Integer trigger) {
+            PlayerControllerHuman.this.setShouldAlwaysAcceptTrigger(trigger);
+        }
+
+        @Override
+        public void setShouldAlwaysDeclineTrigger(final Integer trigger) {
+            PlayerControllerHuman.this.setShouldAlwaysDeclineTrigger(trigger);
+        }
+
+        @Override
+        public void setShouldAlwaysAskTrigger(final Integer trigger) {
+            PlayerControllerHuman.this.setShouldAlwaysAskTrigger(trigger);
+        }
+
+        @Override
+        public void autoPassCancel() {
+            PlayerControllerHuman.this.autoPassCancel();
+        }
     }
 
     /**
@@ -1654,9 +1693,17 @@ public class PlayerControllerHuman extends PlayerController {
      * @return
      * @see forge.view.LocalGameView#getSpellAbilities(java.util.List)
      */
-    public final List<SpellAbility> getSpellAbilities(
-            List<SpellAbilityView> cards) {
+    public final List<SpellAbility> getSpellAbilities(List<SpellAbilityView> cards) {
         return gameView.getSpellAbilities(cards);
     }
+
+    public boolean canUndoLastAction() {
+        return gameView.canUndoLastAction();
+    }
+
+    public boolean tryUndoLastAction() {
+        return gameView.tryUndoLastAction();
+    }
+
 
 }

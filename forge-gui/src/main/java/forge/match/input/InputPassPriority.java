@@ -55,7 +55,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     public final void showMessage() {
         showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
-        if (getController().getGameView().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
+        if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
             ButtonUtil.update(getGui(), "OK", "Undo", true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
@@ -77,7 +77,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        if (!getController().getGameView().tryUndoLastAction()) { //undo if possible
+        if (!getController().tryUndoLastAction()) { //undo if possible
             //otherwise end turn
             passPriority(new Runnable() {
                 @Override

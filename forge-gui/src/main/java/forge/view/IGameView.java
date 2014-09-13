@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Observer;
 
 import forge.LobbyPlayer;
+import forge.deck.Deck;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.RegisteredPlayer;
-import forge.player.LobbyPlayerHuman;
 import forge.util.ITriggerEvent;
 
 public interface IGameView {
@@ -35,9 +35,10 @@ public interface IGameView {
     public abstract boolean isMatchWonBy(LobbyPlayer p);
     public abstract int getGamesWonBy(LobbyPlayer p);
     public abstract GameOutcome.AnteResult getAnteResult();
+    public abstract Deck getDeck(LobbyPlayer player);
 
     public abstract boolean isGameOver();
-    public abstract void updateAchievements(LobbyPlayerHuman player);
+    public abstract void updateAchievements();
 
     public abstract int getPoisonCountersToLose();
 
@@ -50,6 +51,7 @@ public interface IGameView {
     public abstract List<GameLogEntry> getLogEntriesExact(GameLogEntryType logLevel);
 
     // Input controls
+    public abstract boolean canUndoLastAction();
     public abstract boolean tryUndoLastAction();
 
     public abstract void selectButtonOk();
@@ -95,7 +97,6 @@ public interface IGameView {
     public abstract void setShouldAlwaysDeclineTrigger(Integer trigger);
     public abstract void setShouldAlwaysAskTrigger(Integer trigger);
 
-    public abstract void autoPassUntilEndOfTurn();
     public abstract void autoPassCancel();
 
     public abstract void devTogglePlayManyLands(boolean b);

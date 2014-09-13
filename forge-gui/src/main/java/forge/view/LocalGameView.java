@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 
 import forge.LobbyPlayer;
 import forge.card.MagicColor;
+import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntry;
@@ -26,12 +27,8 @@ import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-import forge.model.Achievement;
-import forge.player.LobbyPlayerHuman;
-import forge.util.ITriggerEvent;
-import forge.util.ThreadUtil;
 
-public class LocalGameView implements IGameView {
+public abstract class LocalGameView implements IGameView {
 
     private final Game game;
     public LocalGameView(final Game game) {
@@ -125,12 +122,22 @@ public class LocalGameView implements IGameView {
     }
 
     @Override
-    public int getGamesWonBy(LobbyPlayer p) {
+    public int getGamesWonBy(final LobbyPlayer p) {
         return this.game.getMatch().getGamesWonBy(p);
     }
 
     @Override
     public GameOutcome.AnteResult getAnteResult() {
+        return null;
+    }
+
+    @Override
+    public Deck getDeck(final LobbyPlayer player) {
+        for (final RegisteredPlayer rp : this.game.getMatch().getPlayers()) {
+            if (rp.getPlayer().equals(player)) {
+                return rp.getDeck();
+            }
+        }
         return null;
     }
 
@@ -140,24 +147,6 @@ public class LocalGameView implements IGameView {
     @Override
     public boolean isGameOver() {
         return game.isGameOver();
-    }
-
-    @Override
-    public void updateAchievements(final LobbyPlayerHuman player) {
-        //update all achievements for GUI player after game finished
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                if (game == null) {
-                    return;
-                }
-                for (final Player p : game.getRegisteredPlayers()) {
-                    if (p.getController().getLobbyPlayer() == player) {
-                        Achievement.updateAll(player.getGui(), p);
-                    }
-                }
-            }
-        });
     }
 
     @Override
@@ -209,62 +198,6 @@ public class LocalGameView implements IGameView {
     @Override
     public List<GameLogEntry> getLogEntriesExact(final GameLogEntryType logLevel) {
         return game.getGameLog().getLogEntriesExact(logLevel);
-    }
-
-    public boolean canUndoLastAction() {
-        return false;
-    }
-
-    @Override
-    public boolean tryUndoLastAction() {
-        return false;
-    }
-
-    @Override
-    public void selectButtonOk() {
-    }
-
-    @Override
-    public void selectButtonCancel() {
-    }
-
-    @Override
-    public void confirm() {
-    }
-
-    @Override
-    public boolean passPriority() {
-        return false;
-    }
-
-    @Override
-    public boolean passPriorityUntilEndOfTurn() {
-        return false;
-    }
-
-    @Override
-    public void autoPassUntilEndOfTurn() {
-    }
-
-    @Override
-    public void useMana(final byte mana) {
-    }
-
-    @Override
-    public void selectPlayer(final PlayerView player, final ITriggerEvent triggerEvent) {
-    }
-
-    @Override
-    public boolean selectCard(final CardView card, final ITriggerEvent triggerEvent) {
-        return false;
-    }
-
-    @Override
-    public void selectAbility(final SpellAbilityView sa) {
-    }
-
-    @Override
-    public void alphaStrike() {
     }
 
     /* (non-Javadoc)
@@ -558,16 +491,6 @@ public class LocalGameView implements IGameView {
         view.setPairedWith(getCardViewFast(c.getPairedWith()));
     }
 
-    @Override
-    public boolean mayShowCard(final CardView c) {
-        return true;
-    }
-
-    @Override
-    public boolean mayShowCardFace(final CardView c) {
-        return true;
-    }
-
     public SpellAbilityView getSpellAbilityView(final SpellAbility sa) {
         if (sa == null) {
             return null;
@@ -627,80 +550,4 @@ public class LocalGameView implements IGameView {
         this.game.setDisableAutoYields(b);
     }
 
-    // Dev mode functions
-    @Override
-    public void devTogglePlayManyLands(final boolean b) {
-    }
-    @Override
-    public void devGenerateMana() {
-    }
-    @Override
-    public void devSetupGameState() {
-    }
-    @Override
-    public void devTutorForCard() {
-    }
-    @Override
-    public void devAddCardToHand() {
-    }
-    @Override
-    public void devAddCounterToPermanent() {
-    }
-    @Override
-    public void devTapPermanent() {
-    }
-    @Override
-    public void devUntapPermanent() {
-    }
-    @Override
-    public void devSetPlayerLife() {
-    }
-    @Override
-    public void devWinGame() {
-    }
-    @Override
-    public void devAddCardToBattlefield() {
-    }
-    @Override
-    public void devRiggedPlanerRoll() {
-    }
-    @Override
-    public void devPlaneswalkTo() {
-    }
-
-    @Override
-    public Iterable<String> getAutoYields() {
-        return null;
-    }
-    @Override
-    public boolean shouldAutoYield(String key) {
-        return false;
-    }
-    @Override
-    public void setShouldAutoYield(String key, boolean autoYield) {
-    }
-    @Override
-    public boolean shouldAlwaysAcceptTrigger(Integer trigger) {
-        return false;
-    }
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(Integer trigger) {
-        return false;
-    }
-    @Override
-    public boolean shouldAlwaysAskTrigger(Integer trigger) {
-        return false;
-    }
-    @Override
-    public void setShouldAlwaysAcceptTrigger(Integer trigger) {
-    }
-    @Override
-    public void setShouldAlwaysDeclineTrigger(Integer trigger) {
-    }
-    @Override
-    public void setShouldAlwaysAskTrigger(Integer trigger) {
-    }
-    @Override
-    public void autoPassCancel() {
-    }
 }

@@ -21,12 +21,12 @@ import java.io.File;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.UiCommand;
 import forge.assets.FSkinProp;
+import forge.control.FControl;
+import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
-import forge.game.player.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
@@ -115,10 +115,9 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     public void viewDeckList() {
-        final LobbyPlayer guiPlayer = GuiBase.getInterface().getGuiPlayer();
-        final RegisteredPlayer player = game.getGuiRegisteredPlayer(guiPlayer);
-        if (player != null) {
-            FDeckViewer.show(player.getDeck());
+        final Deck deck = FControl.instance.getGameView().getDeck(GuiBase.getInterface().getGuiPlayer());
+        if (deck != null) {
+            FDeckViewer.show(deck);
         }
     }
 

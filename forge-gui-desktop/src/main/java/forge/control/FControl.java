@@ -96,6 +96,7 @@ import forge.view.FView;
 import forge.view.IGameView;
 import forge.view.LocalGameView;
 import forge.view.PlayerView;
+import forge.view.WatchLocalGame;
 
 /**
  * <p>
@@ -480,7 +481,7 @@ public enum FControl implements KeyEventDispatcher {
 
         if (this.gameView == null) {
             // Watch game but do not participate
-            final LocalGameView gameView = new LocalGameView(game);
+            final LocalGameView gameView = new WatchLocalGame(game, inputQueue);
             this.gameView = gameView;
             this.fcVisitor = new FControlGameEventHandler(GuiBase.getInterface(), gameView);
             this.playbackControl = new FControlGamePlayback(GuiBase.getInterface(), gameView);
