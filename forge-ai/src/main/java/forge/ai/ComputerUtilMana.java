@@ -144,9 +144,9 @@ public class ComputerUtilMana {
 
             private int scoreCard(final ManaProducingCard card) {
                 int score = 0;
-                
+
                 score += card.manaCount * 2;
-                
+
                 switch (card.cardType) {
                     case Artifact:
                     case Enchantment:
@@ -164,9 +164,7 @@ public class ComputerUtilMana {
                 }
                 
                 return score;
-                
             }
-            
         });
 
         if (DEBUG_MANA_PAYMENT) {
@@ -176,52 +174,46 @@ public class ComputerUtilMana {
             }
             System.out.println();
         }
-        
+
         for (final ManaCostShard shard : manaAbilityMap.keySet()) {
-            
             final List<SpellAbility> abilities = manaAbilityMap.get(shard);
             final List<SpellAbility> newAbilities = new ArrayList<>(abilities);
-            
+
             if (DEBUG_MANA_PAYMENT) {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
-            
+
             Collections.sort(newAbilities, new Comparator<SpellAbility>() {
                 @Override
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
-                    
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
-                    
-                    if (preOrder == 0) {
 
+                    if (preOrder == 0) {
                         String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
 
                         if (ability1.getManaPart().mana().contains(shardMana)
                                 && !ability2.getManaPart().mana().contains(shardMana)) {
                             return -1;
-                        } else if (ability2.getManaPart().mana().contains(shardMana)
+                        }
+                        if (ability2.getManaPart().mana().contains(shardMana)
                                 && !ability1.getManaPart().mana().contains(shardMana)) {
                             return 1;
                         }
-                        
+
                         return 0;
-                        
-                    } else {
+                    }
+                    else {
                         return preOrder;
                     }
-                    
                 }
-                
             });
 
             if (DEBUG_MANA_PAYMENT) {
                 System.out.println("Sorted Abilities: " + newAbilities);
             }
-            
+
             manaAbilityMap.replaceValues(shard, newAbilities);
-            
         }
-        
     }
 
     public static ArrayList<Card> getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
@@ -294,7 +286,8 @@ public class ComputerUtilMana {
                         break;
                     }
                 }
-            } else {
+            }
+            else {
                 break;
             }
 
