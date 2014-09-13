@@ -1904,8 +1904,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\n\r\n");
         }
         if (this.isCommander) {
-            sb.append(getOwner() + "'s Commander\r\n");
-            sb.append(CardFactoryUtil.getCommanderInfo(getOwner()) + "\r\n");
+            sb.append(getOwner()).append("'s Commander\r\n");
+            sb.append(CardFactoryUtil.getCommanderInfo(getOwner())).append("\r\n");
         }
         sb.append(this.getAbilityText());
 
@@ -2442,10 +2442,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     private StringBuilder abilityTextInstantSorcery() {
         final String s = this.getSpellText();
         final StringBuilder sb = new StringBuilder();
+		
 
         // Give spellText line breaks for easier reading
         sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
-
+		
         // NOTE:
         if (sb.toString().contains(" (NOTE: ")) {
             sb.insert(sb.indexOf("(NOTE: "), "\r\n");
@@ -2457,7 +2458,36 @@ public class Card extends GameEntity implements Comparable<Card> {
         // I think SpellAbilities should be displayed after Keywords
         // Add SpellAbilities
         for (final SpellAbility element : this.getSpellAbilities()) {
-            sb.append(element.toString() + "\r\n");
+			
+			String elementText = element.toString();
+
+			//Determine if a card has multiple choices, then format it in an easier to read list.
+			if (element.getApi().equals(ApiType.Charm)) {
+				
+				String chooseText = elementText.split("-")[0].trim();
+				sb.append(chooseText).append("&#151;\r\n");
+				
+				String[] choices = elementText.split("-")[1].split(";");
+
+				for (int i = 0; i < choices.length; i++) {
+					String choice = choices[i].trim();
+					
+					if (choice.startsWith("Or ") || choice.startsWith("or ")) {
+						choice = choice.substring(3);
+					}
+					
+					sb.append("&#32;&#32;&#32;&#32;&#149; ").append(Character.toUpperCase(choice.charAt(0)))
+							.append(choice.substring(1));
+					if (i < choices.length - 1) {
+						sb.append(".");
+					}
+					sb.append("\r\n");
+				}
+				
+			} else {
+				sb.append(elementText).append("\r\n");
+			}
+			
         }
 
         // Add Keywords
