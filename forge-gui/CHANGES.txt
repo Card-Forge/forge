@@ -12,6 +12,10 @@ Release Notes
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
+- There will not be a 1.5.27 beta version -
+We will not be releasing a 1.5.27 beta version and the next beta version will be numbered 1.5.28. Beta 1.5.27 was an internal test version in an effort on our part to improve the build and deploy process.
+
+
 -------------------------------
 New Commander 2014 branch Cards
 -------------------------------
@@ -165,6 +169,8 @@ Warden of the Eye
 Roar of Challenge
 Barrage of Boulders
 Bring Low
+Dig Through Time
+Embodiment of Spring
 
 
 ------------
