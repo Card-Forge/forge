@@ -67,6 +67,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FRadioButton radHard = new FRadioButton("Hard");
     private final FRadioButton radExpert = new FRadioButton("Expert");
     private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
+	private final FCheckBox boxCompleteSet = new FCheckBox("Start with all cards in selected sets");
 
     private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
@@ -204,6 +205,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         difficultyPanel.add(radExpert, difficulty_constraints);
         radEasy.setSelected(true);
 
+		boxCompleteSet.setToolTipText("You will start the quest with 4 of each card in the sets you have selected.");
+
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Rotating);
         cbxStartingPool.addItem(StartingPoolType.CustomFormat);
@@ -284,6 +287,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         // Fantasy box enabled by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
+		boxCompleteSet.setEnabled(true);
 
         cbxPreferredColor.setEnabled(true);
 
@@ -336,6 +340,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
 
         pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
+		pnlRestrictions.add(boxCompleteSet, constraints + "spanx 2, ax right");
 
 
         pnlRestrictions.add(lblPreferredColor,  constraints + lblWidthStart);
@@ -491,6 +496,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     public boolean isFantasy() {
         return boxFantasy.isSelected();
     }
+	
+	public boolean startWithCompleteSet() {
+		return boxCompleteSet.isSelected();
+	}
 
     public boolean randomizeColorDistribution() {
         return stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem());

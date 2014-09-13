@@ -6,7 +6,9 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -230,17 +232,17 @@ public class QuestAchievements {
             draftsToGenerate = 1;
         }
 
-        QuestEventDraft toRemove = null;
+        Set<QuestEventDraft> toRemove = new HashSet<>();
         for (QuestEventDraft draft : drafts) {
             if (draft.getAge() <= 0
                     && !(currentDraft != -1 && drafts.get(currentDraft) == draft)) {
-                toRemove = draft;
+                toRemove.add(draft);
                 break;
             }
         }
 
-        if (toRemove != null) {
-            drafts.remove(toRemove);
+        if (!toRemove.isEmpty()) {
+            drafts.removeAll(toRemove);
         }
 
         for (int i = 0; i < draftsToGenerate; i++) {

@@ -104,17 +104,26 @@ public final class BoosterUtils {
             }
 
         }
-
         // This will save CPU time when sets are limited
         final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter));
 
+		if (userPrefs.grantCompleteSet()) {
+			for (PaperCard card : cardpool) {
+				cards.add(card);
+				cards.add(card);
+				cards.add(card);
+				cards.add(card);
+			}
+			return cards;
+		}
+		
         final Predicate<PaperCard> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, biasAdjustedCommons, colorFilters));
 
         final Predicate<PaperCard> pUncommon = IPaperCard.Predicates.Presets.IS_UNCOMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, biasAdjustedUncommons, colorFilters));
 
-        int nRares = biasAdjustedRares, nMythics = 0;
+		int nRares = biasAdjustedRares, nMythics = 0;
         final Predicate<PaperCard> filterMythics = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {

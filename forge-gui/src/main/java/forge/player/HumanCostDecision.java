@@ -847,7 +847,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
 
             int tc = getTimesSelected(c);
-            cardsChosen.put(c, tc+1);
+            cardsChosen.put(c, tc + 1);
 
             onSelectStateChanged(c, true);
             refresh();
@@ -1099,7 +1099,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             int i = Integer.parseInt(totalP);
             InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 0, typeList.size(), typeList);
             inp.setMessage("Select a card to tap.");
-            inp.setUnselectAllowed(true);
             inp.setCancelAllowed(true);
             inp.showAndWait();
 

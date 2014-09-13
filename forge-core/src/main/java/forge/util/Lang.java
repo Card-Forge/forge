@@ -100,7 +100,7 @@ public class Lang {
     }
 
     public static <T> String nounWithNumeral(int cnt, String noun) {
-        String countedForm = cnt <= 1 ? noun : getPlural(noun);
+        String countedForm = cnt == 1 ? noun : getPlural(noun);
         return getNumeral(cnt) + " " + countedForm;
     }
 
@@ -130,8 +130,9 @@ public class Lang {
     public static String getNumeral(int n) {
         String prefix = n < 0 ? "minus " : "";
         n = Math.abs(n);
-        if (n >= 0 && n < 20)
+        if (n >= 0 && n < 20) {
             return prefix + numbers0[n];
+        }
         if (n < 100) {
             int n1 = n % 10;
             String ones = n1 == 0 ? "" : numbers0[n1];

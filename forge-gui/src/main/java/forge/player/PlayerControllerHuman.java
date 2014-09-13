@@ -278,24 +278,28 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> valid, String message) {
-        String outerMessage = "Select %d " + message + "(s) to sacrifice";
-        return choosePermanentsTo(min, max, valid, outerMessage);
+        return choosePermanentsTo(min, max, valid, message, "sacrifice");
     }
 
     @Override
     public List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> valid, String message) {
-        String outerMessage = "Select %d " + message + "(s) to be destroyed";
-        return choosePermanentsTo(min, max, valid, outerMessage);
+        return choosePermanentsTo(min, max, valid, message, "destroy");
     }
 
-    private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String outerMessage) {
+    private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String message, String action) {
         max = Math.min(max, valid.size());
         if (max <= 0) {
             return new ArrayList<Card>();
         }
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min == 0 ? 1 : min, max, valid);
-        inp.setMessage(outerMessage);
+        StringBuilder builder = new StringBuilder("Select ");
+        if (min == 0) {
+            builder.append("up to ");
+        }
+        builder.append("%d " + message + "(s) to " + action + ".");
+
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid);
+        inp.setMessage(builder.toString());
         inp.setCancelAllowed(min == 0);
         inp.showAndWait();
         return Lists.newArrayList(inp.getSelected());
@@ -318,15 +322,16 @@ public class PlayerControllerHuman extends PlayerController {
 
         // try to use InputSelectCardsFromList when possible 
         boolean cardsAreInMyHandOrBattlefield = true;
-        for(Card c : sourceList) {
+        for (Card c : sourceList) {
             Zone z = c.getZone();
-            if (z != null && (z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player)))
+            if (z != null && (z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player))) {
                 continue;
+            }
             cardsAreInMyHandOrBattlefield = false;
             break;
         }
-        
-        if(cardsAreInMyHandOrBattlefield) {
+
+        if (cardsAreInMyHandOrBattlefield) {
             InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
@@ -351,8 +356,9 @@ public class PlayerControllerHuman extends PlayerController {
 
         boolean canUseSelectCardsInput = true;
         for (GameEntity c : options) {
-            if (c instanceof Player) 
+            if (c instanceof Player) {
                 continue;
+            }
             Zone cz = ((Card)c).getZone(); 
             // can point at cards in own hand and anyone's battlefield
             boolean canUiPointAtCards = cz != null && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
@@ -467,7 +473,8 @@ public class PlayerControllerHuman extends PlayerController {
             final InputConfirm inp = new InputConfirm(this, prompt, "Play", "Draw");
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
-        } else {
+        }
+        else {
             final String prompt = String.format("%s, you %s\n\nWho would you like to start this game?", 
                     player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game.");
             final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(this, 1, 1, game.getPlayersInTurnOrder());
@@ -706,10 +713,10 @@ public class PlayerControllerHuman extends PlayerController {
         if (invalidTypes != null && !invalidTypes.isEmpty()) {
             Iterables.removeAll(types, invalidTypes);
         }
-        if(isOptional)
+        if (isOptional) {
             return SGuiChoose.oneOrNone(getGui(), "Choose a " + kindOfType.toLowerCase() + " type", types);
-        else
-            return SGuiChoose.one(getGui(), "Choose a " + kindOfType.toLowerCase() + " type", types);
+        }
+        return SGuiChoose.one(getGui(), "Choose a " + kindOfType.toLowerCase() + " type", types);
     }
 
     @Override
@@ -884,9 +891,9 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         if (sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
-                && !FModel.getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS))
+                && !FModel.getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)) {
             return true;
-        
+        }
         return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);
     }
 
@@ -924,7 +931,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         String[] labels = new String[]{"Option1", "Option2"};
-        switch(kindOfChoice) {
+        switch (kindOfChoice) {
             case HeadsOrTails:  labels = new String[]{"Heads", "Tails"}; break;
             case TapOrUntap:    labels = new String[]{"Tap", "Untap"}; break;
             case OddsOrEvens:   labels = new String[]{"Odds", "Evens"}; break;
@@ -932,7 +939,6 @@ public class PlayerControllerHuman extends PlayerController {
             case UntapTimeVault: labels = new String[]{"Untap (and skip this turn)", "Leave tapped"}; break;
             case PlayOrDraw:    labels = new String[]{"Play", "Draw"}; break;
             default:            labels = kindOfChoice.toString().split("Or");
-
         }
         return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), question, defaultVal == null || defaultVal.booleanValue(), labels);
     }
@@ -993,15 +999,16 @@ public class PlayerControllerHuman extends PlayerController {
         String message = formatNotificationMessage(sa, realtedTarget, value);
         if (sa.isManaAbility()) {
             game.getGameLog().add(GameLogEntryType.LAND, message);
-        } else {
+        }
+        else {
             SGuiDialog.message(getGui(), message, sa.getHostCard() == null ? "" : getCardView(sa.getHostCard()).toString());
         }
     }
 
     private String formatMessage(String message, Object related) {
-        if(related instanceof Player && message.indexOf("{player") >= 0)
+        if (related instanceof Player && message.indexOf("{player") >= 0) {
             message = message.replace("{player}", mayBeYou(related)).replace("{player's}", Lang.getPossesive(mayBeYou(related)));
-        
+        }
         return message;
     }
 
@@ -1057,7 +1064,7 @@ public class PlayerControllerHuman extends PlayerController {
             else {
                 a = SGuiChoose.oneOrNone(getGui(), modeTitle, choices);
             }
-            if (null == a) {
+            if (a == null) {
                 break;
             }
 
@@ -1096,8 +1103,9 @@ public class PlayerControllerHuman extends PlayerController {
         if(withColorless) cntColors++;
         String[] colorNames = new String[cntColors];
         int i = 0;
-        if(withColorless)
+        if (withColorless) {
             colorNames[i++] = MagicColor.toLongString((byte)0);
+        }
         for (byte b : colors) {
             colorNames[i++] = MagicColor.toLongString(b);
         }
@@ -1133,8 +1141,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams) {
-        if(possibleReplacers.size() == 1)
+        if (possibleReplacers.size() == 1) {
             return possibleReplacers.get(0);
+        }
         return SGuiChoose.one(getGui(), prompt, possibleReplacers);
     }
 
@@ -1161,7 +1170,8 @@ public class PlayerControllerHuman extends PlayerController {
             SpellAbility next = orderedSAs.get(i);
             if (next.isTrigger()) {
                 HumanPlay.playSpellAbility(this, player, next);
-            } else {
+            }
+            else {
                 player.getGame().getStack().add(next);
             }
         }
@@ -1202,7 +1212,8 @@ public class PlayerControllerHuman extends PlayerController {
             final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
             final String[] possibleValues = { p1Str , p2Str };
             return SGuiDialog.confirm(getGui(), gameView.getCardView(sa.getHostCard()), "Choose a Pile", possibleValues);
-        } else {
+        }
+        else {
             final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
             disp[0] = new Card(-1);
             disp[0].setName("Pile 1");
@@ -1264,12 +1275,12 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message) {
-        PaperCard cp = null;
-        while(true) {
-            cp = chooseSinglePaperCard(sa, message, cpp, sa.getHostCard().getName());
+        while (true) {
+            PaperCard cp = chooseSinglePaperCard(sa, message, cpp, sa.getHostCard().getName());
             Card instanceForPlayer = Card.fromPaperCard(cp, player); // the Card instance for test needs a game to be tested
-            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard()))
+            if (instanceForPlayer.isValid(valid, sa.getHostCard().getController(), sa.getHostCard())) {
                 return cp.getName();
+            }
         }
     }
 

@@ -24,7 +24,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
             System.out.println(String.format("Trying to choose at least %d cards from a list with only %d cards!", min, validChoices.size()));
         }
     }
- 
+
     @Override
     protected boolean onCardSelected(final Card c, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
@@ -41,11 +41,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         }
         refresh();
     }
-    
+
     public final Collection<T> getSelected() {
         return selected;
     }    
-    
+
     @SuppressWarnings("unchecked")
     protected boolean selectEntity(GameEntity c) {
         if (!validChoices.contains(c)) {
@@ -54,8 +54,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
         boolean entityWasSelected = selected.contains(c);
         if (entityWasSelected) {
-            if (!allowUnselect)
-                return false;
             this.selected.remove(c);
         }
         else {
@@ -65,19 +63,14 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
         return true;
     }
-    
+
     // might re-define later
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     protected String getMessage() {
         return max == Integer.MAX_VALUE
-            ? String.format(message, selected.size())
-            : String.format(message, max - selected.size());
+                ? String.format(message, selected.size())
+                : String.format(message, max - selected.size());
     }
-        
 }

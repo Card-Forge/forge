@@ -14,7 +14,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected boolean bCancelled = false;
     protected final int min;
     protected final int max;
-    protected boolean allowUnselect = false;
     protected boolean allowCancel = false;
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
@@ -51,9 +50,9 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     @Override
     protected final void onCancel() {
         bCancelled = true;
+        resetUsedToPay();
         this.getSelected().clear();
         this.stop();
-        afterStop();
     }
 
     public final boolean hasCancelled() {
@@ -62,11 +61,11 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     public abstract Collection<T> getSelected();
     public T getFirstSelected() { return Iterables.getFirst(getSelected(), null); }
-    
+
     @Override
     protected final void onOk() {
+        resetUsedToPay();
         this.stop();
-        afterStop();
     }
 
     public void setMessage(String message0) {
@@ -79,16 +78,13 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         }
     }
 
-    protected void afterStop() {
+    private void resetUsedToPay() {
         for (final GameEntity c : getSelected()) {
             if (c instanceof Card) {
                 getGui().setUsedToPay(getController().getCardView((Card) c), false);
             }
         }
     }
-
-    public final boolean isUnselectAllowed() { return allowUnselect; }
-    public final void setUnselectAllowed(boolean allow) { this.allowUnselect = allow; }
 
     public final void setCancelAllowed(boolean allow) { this.allowCancel = allow ; }
 }

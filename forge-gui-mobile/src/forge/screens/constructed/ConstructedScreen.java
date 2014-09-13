@@ -406,7 +406,7 @@ public class ConstructedScreen extends LaunchScreen {
             index = index0;
             playerIsArchenemy = index == 0;
             btnDeck.setEnabled(false); //disable deck button until done loading decks
-            boolean isAi = isPlayerAI();
+            boolean isAi = index != 0;
             deckChooser = new FDeckChooser(GameType.Constructed, isAi, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
@@ -450,7 +450,7 @@ public class ConstructedScreen extends LaunchScreen {
             nameRandomiser = createNameRandomizer();
             add(nameRandomiser);
 
-            humanAiSwitch.setToggled(index != 0);
+            humanAiSwitch.setToggled(isAi);
             humanAiSwitch.setChangedHandler(humanAiSwitched);
             add(humanAiSwitch);
 
@@ -598,7 +598,12 @@ public class ConstructedScreen extends LaunchScreen {
         private final FEventHandler humanAiSwitched = new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                lstVanguardAvatars.setIsAi(isPlayerAI());
+                boolean isAi = isPlayerAI();
+                deckChooser.setIsAi(isAi);
+                lstCommanderDecks.setIsAi(isAi);
+                lstPlanarDecks.setIsAi(isAi);
+                lstSchemeDecks.setIsAi(isAi);
+                lstVanguardAvatars.setIsAi(isAi);
             }
         };
 

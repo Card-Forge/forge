@@ -1,13 +1,5 @@
 package forge.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.LobbyPlayer;
 import forge.assets.FSkinProp;
 import forge.card.CardEdition;
@@ -22,11 +14,7 @@ import forge.game.player.PlayerStatistics;
 import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
-import forge.item.BoosterPack;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
@@ -37,6 +25,14 @@ import forge.util.MyRandom;
 import forge.util.gui.SGuiChoose;
 import forge.view.IGameView;
 import forge.view.PlayerView;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map.Entry;
 
 public abstract class QuestWinLoseController {
     private final IGameView lastGame;
@@ -356,7 +352,7 @@ public abstract class QuestWinLoseController {
         }
         if (estateValue > 0) {
             credEstates = (int) (estateValue * credTotal);
-            sb.append("Estates bonus: ").append((int) (100 * estateValue)).append("%.\n");
+            sb.append("Estates bonus (").append((int) (100 * estateValue)).append("%): ").append(credEstates).append(" credits.\n");
             credTotal += credEstates;
         }
 
@@ -678,8 +674,7 @@ public abstract class QuestWinLoseController {
      * </p>
      * Retrieves credits for win under special conditions.
      * 
-     * @param GameLossReason
-     *            why AI lost
+     * @param whyAiLost GameLossReason
      * @return int
      */
     private int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
@@ -708,7 +703,7 @@ public abstract class QuestWinLoseController {
      * </p>
      * Retrieves credits for win on or under turn count.
      * 
-     * @param int turn count
+     * @param iTurn int - turn count 
      * @return int credits won
      */
     private int getCreditsRewardForWinByTurn(final int iTurn) {

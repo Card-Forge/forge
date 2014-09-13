@@ -125,7 +125,7 @@ public class SFilterUtil {
             this.inText = inText;
             this.inCost = inCost;
             parse();
-        }
+		}
         
         private static boolean isExpression(String text) {
             return text.contains(Operation.AND.token) || text.contains(Operation.OR.token);
@@ -135,6 +135,7 @@ public class SFilterUtil {
             Tokenizer tokenizer = new Tokenizer(text);
             
             String currentChar;
+
             boolean escapeNext = false;
             
             while (tokenizer.hasNext()) {
@@ -188,7 +189,7 @@ public class SFilterUtil {
         }
         
         private Predicate<CardRules> evaluate() {
-            Collections.reverse(stack); //Reverse the stack so we're popping off the start
+            //Collections.reverse(stack); //Reverse the stack so we're popping off the start
             Predicate<CardRules> rules = null;
             
             Stack<String> evaluationStack = new Stack<>();

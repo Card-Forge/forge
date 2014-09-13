@@ -84,20 +84,32 @@ public enum CSubmenuQuestDraft implements ICDoc {
         FModel.getQuest().getDraftDecks();
         
         if (achievements == null) {
+			
             view.setMode(Mode.EMPTY);
+			
         } else if (achievements.getDraftEvents() == null || achievements.getDraftEvents().isEmpty()) {
+			
             achievements.generateDrafts();
+			
             if (achievements.getDraftEvents().isEmpty()) {
                 view.setMode(Mode.EMPTY);
             } else {
                 view.setMode(Mode.SELECT_TOURNAMENT);
             }
+			
         } else if (FModel.getQuest().getDraftDecks() == null || !FModel.getQuest().getDraftDecks().contains(QuestEventDraft.DECK_NAME)) {
+
+			achievements.generateDrafts();
             view.setMode(Mode.SELECT_TOURNAMENT);
+			
         } else if (!achievements.getCurrentDraft().isStarted()) {
+			
             view.setMode(Mode.PREPARE_DECK);
+			
         } else {
+			
             view.setMode(Mode.TOURNAMENT_ACTIVE);
+			
         }
         
     }

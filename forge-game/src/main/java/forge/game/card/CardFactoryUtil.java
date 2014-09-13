@@ -3164,8 +3164,8 @@ public class CardFactoryUtil {
                 String abStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
                         + " | Defined$ ReplacedCard | SubAbility$ DevourCleanup";
                 String dbStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
-                        + "References$ DevourSacX | SacValid$ Creature.Other | SacMessage$ creature (Devour "
-                        + magnitude + ") | RememberSacrificed$ True | Optional$ True | "
+                        + "References$ DevourSacX | SacValid$ Creature.Other | SacMessage$ creature | "
+                        + "RememberSacrificed$ True | Optional$ True | "
                         + "Devour$ True | SubAbility$ DevourCounters";
                 String counterStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX"
                         + " | References$ DevourX,DevourSize | SubAbility$ DevourETB";
