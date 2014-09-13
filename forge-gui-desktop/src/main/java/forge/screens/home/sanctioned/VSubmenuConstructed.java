@@ -807,7 +807,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                    		new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_PLANECHASE));
+                    		new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_ARCHENEMY));
                 }
             });
 
