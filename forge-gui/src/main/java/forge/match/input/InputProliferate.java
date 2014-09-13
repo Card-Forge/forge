@@ -17,10 +17,8 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
 
     public InputProliferate() {
         super(1, Integer.MAX_VALUE);
-        allowUnselect = true;
     }
 
-    
     protected String getMessage() {
         StringBuilder sb = new StringBuilder("Choose permanents and/or players with counters on them to add one more counter of that type.");
         sb.append("\n\nYou've selected so far:\n");

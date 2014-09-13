@@ -28,11 +28,9 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
         super(0, Math.min(cost.getCMC(), untapped.size()));
         remainingCost = new ManaCostBeingPaid(cost);
         player = p;
-        allowUnselect = true;
         availableCreatures = untapped;
     }
 
-    
     protected String getMessage() {
         return "Choose creatures to tap for convoke.\nRemaining mana cost is " + remainingCost.toString();
     }

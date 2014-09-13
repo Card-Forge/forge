@@ -14,7 +14,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected boolean bCancelled = false;
     protected final int min;
     protected final int max;
-    protected boolean allowUnselect = false;
     protected boolean allowCancel = false;
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
@@ -85,9 +84,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
             }
         }
     }
-
-    public final boolean isUnselectAllowed() { return allowUnselect; }
-    public final void setUnselectAllowed(boolean allow) { this.allowUnselect = allow; }
 
     public final void setCancelAllowed(boolean allow) { this.allowCancel = allow ; }
 }

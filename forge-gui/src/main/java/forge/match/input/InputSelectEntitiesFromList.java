@@ -53,8 +53,6 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
         boolean entityWasSelected = selected.contains(c);
         if (entityWasSelected) {
-            if (!allowUnselect)
-                return false;
             this.selected.remove(c);
         }
         else {
