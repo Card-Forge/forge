@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.GuiBase;
+import forge.achievement.AchievementCollection;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.*;
@@ -13,7 +14,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
-import forge.model.Achievement;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
@@ -144,12 +144,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 ThreadUtil.invokeInGameThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (GuiBase.getInterface().getGame() == null) {
+                        Game game = GuiBase.getInterface().getGame();
+                        if (game == null) {
                             return;
                         }
-                        for (Player p : GuiBase.getInterface().getGame().getRegisteredPlayers()) {
-                            if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
-                                Achievement.updateAll(p);
+                        AchievementCollection achievements = FModel.getAchievements(game.getRules().getGameType());
+                        if (achievements != null) {
+                            for (Player p : game.getRegisteredPlayers()) {
+                                if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+                                    achievements.updateAll(p);
+                                }
                             }
                         }
                     }
