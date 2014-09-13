@@ -265,6 +265,19 @@ public class FModel {
     }
 
     public static AchievementCollection getAchievements(GameType gameType) {
+        switch (gameType) { //translate gameType to appropriate type if needed
+        case Constructed:
+        case Draft:
+        case Sealed:
+        case Quest:
+            break;
+        case QuestDraft:
+            gameType = GameType.Quest;
+            break;
+        default:
+            gameType = GameType.Constructed;
+            break;
+        }
         return achievements.get(gameType);
     }
 

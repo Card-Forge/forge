@@ -4,7 +4,6 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.GuiBase;
-import forge.achievement.AchievementCollection;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.event.*;
@@ -148,12 +147,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                         if (game == null) {
                             return;
                         }
-                        AchievementCollection achievements = FModel.getAchievements(game.getRules().getGameType());
-                        if (achievements != null) {
-                            for (Player p : game.getRegisteredPlayers()) {
-                                if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
-                                    achievements.updateAll(p);
-                                }
+                        for (Player p : game.getRegisteredPlayers()) {
+                            if (p.getController().getLobbyPlayer() == GuiBase.getInterface().getGuiPlayer()) {
+                                FModel.getAchievements(game.getRules().getGameType()).updateAll(p);
                             }
                         }
                     }
