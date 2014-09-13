@@ -1105,6 +1105,10 @@ public class FSkin {
             if (f != null) {
                 FSkin.defaultFontSize = f.getSize();
             }
+
+            //only need to initialize trophy case images once
+            SkinIcon.setIcon(FSkinProp.BG_TROPHY_CASE_TOP, defaultDir + ForgeConstants.TROPHY_CASE_TOP_FILE);
+            SkinIcon.setIcon(FSkinProp.BG_TROPHY_CASE_SHELF, defaultDir + ForgeConstants.TROPHY_CASE_SHELF_FILE);
         }
         SkinFont.setBaseFont(GuiUtils.newFont(preferredDir + ForgeConstants.FONT_FILE));
 

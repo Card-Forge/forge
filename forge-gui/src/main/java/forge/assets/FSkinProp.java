@@ -22,12 +22,13 @@ package forge.assets;
  * hashtable, access using .get(settingName) method.
  * 
  */
-
 public enum FSkinProp {
     //backgrounds
     BG_SPLASH (null, PropType.BACKGROUND),
     BG_TEXTURE (null, PropType.BACKGROUND),
     BG_MATCH (null, PropType.BACKGROUND),
+    BG_TROPHY_CASE_TOP (null, PropType.BACKGROUND),
+    BG_TROPHY_CASE_SHELF (null, PropType.BACKGROUND),
 
     //colors
     CLR_THEME                   (new int[] {70, 10}, PropType.COLOR),

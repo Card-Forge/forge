@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class DraftAchievements extends AchievementCollection {
     public DraftAchievements() {
-        super(ForgeConstants.ACHIEVEMENTS_DIR + "draft.xml");
+        super("Booster Draft", ForgeConstants.ACHIEVEMENTS_DIR + "draft.xml");
     }
 
     @Override

@@ -3,6 +3,7 @@ package forge.achievement;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,15 +19,16 @@ import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.XmlUtil;
 
-public abstract class AchievementCollection {
+public abstract class AchievementCollection implements Iterable<Achievement> {
     private final Map<String, Achievement> achievements = new HashMap<String, Achievement>();
-    private final String filename;
+    private final String name, filename;
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.ACHIEVEMENTS_DIR);
     }
 
-    protected AchievementCollection(String filename0) {
+    protected AchievementCollection(String name0, String filename0) {
+        name = name0;
         filename = filename0;
         buildAchievementList();
         load();
@@ -90,5 +92,22 @@ public abstract class AchievementCollection {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int getCount() {
+        return achievements.size();
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Iterable#iterator()
+     */
+    @Override
+    public Iterator<Achievement> iterator() {
+        return achievements.values().iterator();
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

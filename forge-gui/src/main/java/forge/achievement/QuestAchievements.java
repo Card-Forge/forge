@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class QuestAchievements extends AchievementCollection {
     public QuestAchievements() {
-        super(ForgeConstants.ACHIEVEMENTS_DIR + "quest.xml");
+        super("Quest Mode", ForgeConstants.ACHIEVEMENTS_DIR + "quest.xml");
     }
 
     @Override

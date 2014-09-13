@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class ConstructedAchievements extends AchievementCollection {
     public ConstructedAchievements() {
-        super(ForgeConstants.ACHIEVEMENTS_DIR + "constructed.xml");
+        super("Constructed", ForgeConstants.ACHIEVEMENTS_DIR + "constructed.xml");
     }
 
     @Override

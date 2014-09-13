@@ -4,7 +4,7 @@ import forge.properties.ForgeConstants;
 
 public class SealedAchievements extends AchievementCollection {
     public SealedAchievements() {
-        super(ForgeConstants.ACHIEVEMENTS_DIR + "sealed.xml");
+        super("Sealed Deck", ForgeConstants.ACHIEVEMENTS_DIR + "sealed.xml");
     }
 
     @Override
