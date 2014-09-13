@@ -177,10 +177,10 @@ public class CardDetailPanel extends SkinnedPanel {
 
         boolean canShowThis = false;
 
-        if (card.isFaceDown()) {
+        if (card.isFaceDown() && !Singletons.getControl().maySeeFaceDownCard(card)) {
             if (card.isInZone(ZoneType.Battlefield)) {
-                this.nameCostLabel.setText("???");
-                this.typeLabel.setText("Creature");
+				this.nameCostLabel.setText("???");
+				this.typeLabel.setText("Creature");
             }
         }
         else if (Singletons.getControl().mayShowCard(card) || FDialog.isModalOpen()) { //allow showing cards while modal open to account for revealing, picking, and ordering cards

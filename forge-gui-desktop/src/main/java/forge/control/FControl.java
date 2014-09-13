@@ -194,8 +194,7 @@ public enum FControl implements KeyEventDispatcher {
         return true;
     }
 
-    /** After view and model have been initialized, control can start.
-     * @param isHeadlessMode */
+    /** After view and model have been initialized, control can start.*/
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
@@ -372,6 +371,10 @@ public enum FControl implements KeyEventDispatcher {
     public boolean mayShowCard(Card c) {
         return game == null || !gameHasHumanPlayer || ForgePreferences.DEV_MODE || c.canBeShownTo(getCurrentPlayer());
     }
+	
+	public boolean maySeeFaceDownCard(Card c) {
+		return game == null || !gameHasHumanPlayer || ForgePreferences.DEV_MODE || c.isVisibleToWhileFaceDown(getCurrentPlayer());
+	}
 
     /**
      * TODO: Write javadoc for this method.
