@@ -65,6 +65,8 @@ public class NewQuestScreen extends FScreen {
             float right = visibleWidth - PADDING;
             float h = cbxStartingWorld.getHeight();
 
+            float gapY = PADDING / 2;
+
             for (FDisplayObject obj : getChildren()) {
                 if (!obj.isVisible()) { continue; }
 
@@ -77,14 +79,14 @@ public class NewQuestScreen extends FScreen {
                         continue;
                     }
                     else if (lbl.getAlignment() == HAlignment.RIGHT) {
-                        y -= PADDING; //remove most of the padding above description text
+                        y -= gapY; //remove most of the padding above description text
                     }
                 }
 
                 //other objects should take up remainder of current line
                 obj.setBounds(x, y, right - x, h);
                 x = PADDING;
-                y += h + PADDING;
+                y += h + gapY;
             }
             return new ScrollBounds(visibleWidth, y);
         }
@@ -134,6 +136,7 @@ public class NewQuestScreen extends FScreen {
     private final FLabel btnPrizeDefineCustomFormat = scroller.add(new FLabel.ButtonBuilder().text("Define custom format").build());
 
     private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox("Allow unlock of additional editions"));
+    private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox("Start with all cards in selected sets"));
     private final FCheckBox cbFantasy = scroller.add(new FCheckBox("Fantasy Mode"));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
@@ -367,6 +370,10 @@ public class NewQuestScreen extends FScreen {
         return cbAllowUnlocks.isSelected();
     }
 
+    public boolean startWithCompleteSet() {
+        return cbCompleteSet.isSelected();
+    }
+
     public StartingPoolType getStartingPoolType() {
         return (StartingPoolType) cbxStartingPool.getSelectedItem();
     }
@@ -528,7 +535,7 @@ public class NewQuestScreen extends FScreen {
                     @Override
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
-                        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor());
+                        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(randomizeColorDistribution(), getPreferredColor(), startWithCompleteSet());
                         QuestController qc = FModel.getQuest();
                         qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs);
                         qc.save();
