@@ -696,6 +696,9 @@ public class HumanPlay {
             toPay.setXManaCostPaid(xPaid, ability.getParam("XColor"));
             source.setXManaCostPaid(xPaid);
         }
+        else if (source.getXManaCostPaid() > 0) { //ensure pre-announced X value retained
+            toPay.setXManaCostPaid(source.getXManaCostPaid(), ability.getParam("XColor"));
+        }
 
         int timesMultikicked = source.getKickerMagnitude();
         if (timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
@@ -716,7 +719,7 @@ public class HumanPlay {
         if (isActivatedSa) {
             ManaCostAdjustment.adjust(toPay, ability, false);
         }
-        
+
         InputPayMana inpPayment;
         if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
             System.out.println("Sacrifice input for Offering cancelled");

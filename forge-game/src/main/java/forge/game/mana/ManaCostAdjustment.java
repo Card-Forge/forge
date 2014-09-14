@@ -29,11 +29,7 @@ public class ManaCostAdjustment {
 
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
-        // Beached
         final Card originalCard = sa.getHostCard();
-        if (sa.isXCost() && !originalCard.isCopiedSpell()) {
-            originalCard.setXManaCostPaid(0);
-        }
     
         if (sa.isTrigger()) {
             return;

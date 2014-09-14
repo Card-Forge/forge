@@ -132,14 +132,13 @@ public class CostPayment {
     }
 
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {
-        
     	final List<CostPart> costParts = this.getCost().getCostPartsWithZeroMana();
         for (final CostPart part : costParts) {
             PaymentDecision pd = part.accept(decisionMaker);
-            
-            if ( null == pd || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability))
-                return false;
 
+            if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability)) {
+                return false;
+            }
             this.paidCostParts.add(part);
         }
     
