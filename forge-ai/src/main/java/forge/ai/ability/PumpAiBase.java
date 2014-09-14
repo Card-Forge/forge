@@ -754,6 +754,23 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         for(CounterType ct : types) {
             pumped.addCounter(ct, c.getCounters(ct), true);
         }
+        //Copies tap-state and extra keywords (auras, equipment, etc.) 
+        if (c.isTapped()) {
+            pumped.tap();
+        }
+        final List<String> copiedKeywords = pumped.getKeyword();
+        List<String> toCopy = new ArrayList<String>();
+        for (String kw : c.getKeyword()) {
+            if (!copiedKeywords.contains(kw)) {
+                if (kw.startsWith("HIDDEN")) {
+                    pumped.addHiddenExtrinsicKeyword(kw);
+                } else {
+                    toCopy.add(kw);
+                }
+            }
+        }
+        final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
+        pumped.addChangedCardKeywords(toCopy, new ArrayList<String>(), false, timestamp2);
         return pumped;
     }
 }
