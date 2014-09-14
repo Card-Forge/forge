@@ -192,7 +192,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 					
 				} else {
 					
-					List<PaperCard> cards = new ArrayList<PaperCard>();
+					List<PaperCard> cards = new ArrayList<>();
 					
 					while (prizes.boosterPacks.size() > 0) {
 						BoosterPack pack = prizes.boosterPacks.remove(0);
@@ -427,18 +427,22 @@ public enum CSubmenuQuestDraft implements ICDoc {
             String playerID = FModel.getQuest().getAchievements().getCurrentDraft().getStandings()[i];
 
             int iconID = 0;
-            
-            if (playerID.equals(QuestEventDraft.HUMAN)) {
-                playerID = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
-                if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
-                    iconID = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
-                }
-            } else if (playerID.equals(QuestEventDraft.UNDETERMINED)) {
-                playerID = "Undetermined";
-                iconID = GuiBase.getInterface().getAvatarCount() - 1;
-            } else {
-                iconID = FModel.getQuest().getAchievements().getCurrentDraft().getAIIcons()[Integer.parseInt(playerID) - 1];
-                playerID = FModel.getQuest().getAchievements().getCurrentDraft().getAINames()[Integer.parseInt(playerID) - 1];
+
+            switch (playerID) {
+                case QuestEventDraft.HUMAN:
+                    playerID = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+                    if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
+                        iconID = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
+                    }
+                    break;
+                case QuestEventDraft.UNDETERMINED:
+                    playerID = "Undetermined";
+                    iconID = GuiBase.getInterface().getAvatarCount() - 1;
+                    break;
+                default:
+                    iconID = FModel.getQuest().getAchievements().getCurrentDraft().getAIIcons()[Integer.parseInt(playerID) - 1];
+                    playerID = FModel.getQuest().getAchievements().getCurrentDraft().getAINames()[Integer.parseInt(playerID) - 1];
+                    break;
             }
             
             boolean first = i % 2 == 0;

@@ -17,8 +17,11 @@ We will not be releasing a 1.5.27 beta version and the next beta version will be
 
 
 - Quest Draft Improvements -
-Alongside bug fixes, quest drafts have been updated to be more valuable to your quest! Now, when you place first or second, you will get to pick a rare in the drafted block's pool to keep. This is in addition to the already existing prizes.
+Quest drafts have been updated to be more valuable to your quest! 
+Bug fixes: Drafts now correctly rotate based on wins and quest preferences. Booster pack prices are now correctly calculated when presenting awards. No more 500+ alpha booster packs. Sorry! Other misc. fixes as well.
+Now, when you place first or second, you will get to pick a rare in the drafted block's pool to keep. This is in addition to the already existing prizes.
 Additionally, when you spend draft tokens, you no longer receive a random draft. Instead, you get to pick which block the new draft will be (but you still have to pay for it!), completely eliminating the game of chance.
+
 
 -------------------------------
 New Commander 2014 branch Cards

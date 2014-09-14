@@ -306,7 +306,7 @@ public class QuestEventDraft {
             
             int value;
             String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
-            
+
             if (MAP_PRICES.containsKey(boosterName)) {
                 value = MAP_PRICES.get(boosterName);
             } else {
@@ -316,7 +316,7 @@ public class QuestEventDraft {
             boosterPrices += value;
         
         }
-        
+
         prizePool -= boosterPrices * 8;
 
 		QuestDraftPrizes prizes = null;
@@ -373,7 +373,7 @@ public class QuestEventDraft {
         while (true) {
             BoosterPack pack = getBoosterPack();
             int price = getBoosterPrice(pack);
-            if (price > creditsForPacks + 150) { //Add a little room for near-same price packs.
+            if (price > creditsForPacks + creditsForPacks * 0.1f) { //Add a little room for near-same price packs.
                 break;
             }
             creditsForPacks -= price;
@@ -405,7 +405,7 @@ public class QuestEventDraft {
         while (true) {
             BoosterPack pack = getBoosterPack();
             int price = getBoosterPrice(pack);
-            if (price > creditsForPacks + 50) { //Add a little room for near-same price packs.
+            if (price > creditsForPacks + creditsForPacks * 0.1f) { //Add a little room for near-same price packs.
                 break;
             }
             creditsForPacks -= price;
@@ -533,8 +533,9 @@ public class QuestEventDraft {
     private int getBoosterPrice(final BoosterPack booster) {
         
         int value;
-        String boosterName = booster.getName() + " Booster Pack";
         
+        String boosterName = booster.getName();
+
         if (MAP_PRICES.containsKey(boosterName)) {
             value = MAP_PRICES.get(boosterName);
         } else {
