@@ -34,8 +34,9 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     /** */
     SINGLETON_INSTANCE;
 
-    private static final int MIN_SHELVES = 4;
+    private static final int MIN_SHELVES = 3;
     private static final int TROPHIES_PER_SHELVE = 4;
+    private static final int IMAGE_SCALE = 3;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -51,7 +52,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private VSubmenuAchievements() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        trophyCase.setMinimumSize(new Dimension(532, 0));
+        trophyCase.setMinimumSize(new Dimension(266 * IMAGE_SCALE, 0));
         
         cbCollections.addItem(FModel.getAchievements(GameType.Constructed));
         cbCollections.addItem(FModel.getAchievements(GameType.Draft));
@@ -163,7 +164,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             trophyCase.shelfCount = MIN_SHELVES;
         }
 
-        trophyCase.setMinimumSize(new Dimension(trophyCase.getMinimumSize().width, 28 + trophyCase.shelfCount * 172));
+        trophyCase.setMinimumSize(new Dimension(trophyCase.getMinimumSize().width, IMAGE_SCALE * (14 + trophyCase.shelfCount * 86)));
         trophyCase.setPreferredSize(trophyCase.getMinimumSize());
         scroller.revalidate();
         scroller.repaint();
@@ -171,11 +172,11 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
     @SuppressWarnings("serial")
     private static class TrophyCase extends JPanel {
-        private static SkinImage imgTop = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_TOP).scale(2);
-        private static SkinImage imgShelf = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_SHELF).scale(2);
-        private static SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(2);
-        private static SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(2);
-        private static SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(2);
+        private static SkinImage imgTop = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_TOP).scale(IMAGE_SCALE);
+        private static SkinImage imgShelf = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_SHELF).scale(IMAGE_SCALE);
+        private static SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(IMAGE_SCALE);
+        private static SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(IMAGE_SCALE);
+        private static SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(IMAGE_SCALE);
 
         private AchievementCollection achievements;
         int shelfCount;
@@ -208,7 +209,7 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             Dimension trophySize = imgBronzeTrophy.getSizeForPaint(g2d);
 
             x += (w - TROPHIES_PER_SHELVE * trophySize.width) / 2;
-            y = imgTopSize.height + (h - trophySize.height - 24) / 2;
+            y = imgTopSize.height + (h - trophySize.height - 12 * IMAGE_SCALE) / 2;
 
             int trophyCount = 0;
             int startX = x;
