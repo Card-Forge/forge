@@ -6,7 +6,7 @@ import forge.game.zone.ZoneType;
 
 public class Hellbent extends Achievement {
     public Hellbent() {
-        super("Hellbent", false,
+        super("Hellbent", false, false,
                 "Win game with no cards in hand.", 1,
                 "Win game with no cards in hand or library.", 2,
                 "Win game with no cards in hand, library, or graveyard.", 3);

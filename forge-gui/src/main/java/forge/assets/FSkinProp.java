@@ -236,6 +236,7 @@ public enum FSkinProp {
     IMG_BRONZE_TROPHY   (new int[] {0, 880, 60, 80}, PropType.IMAGE),
     IMG_SILVER_TROPHY   (new int[] {60, 880, 60, 80}, PropType.IMAGE),
     IMG_GOLD_TROPHY     (new int[] {120, 880, 60, 80}, PropType.IMAGE),
+    IMG_TROPHY_PLATE    (new int[] {180, 880, 160, 40}, PropType.IMAGE),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),

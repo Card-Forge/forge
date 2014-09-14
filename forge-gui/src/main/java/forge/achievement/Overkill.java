@@ -5,7 +5,7 @@ import forge.game.player.Player;
 
 public class Overkill extends Achievement {
     public Overkill(int bronze0, int silver0, int gold0) {
-        super("Overkill", true,
+        super("Overkill", true, false,
             String.format("Win game with opponent at -%d life or less.", bronze0), bronze0,
             String.format("Win game with opponent at -%d life or less.", silver0), silver0,
             String.format("Win game with opponent at -%d life or less.", gold0), gold0);
@@ -20,5 +20,13 @@ public class Overkill extends Achievement {
             }
         }
         return 0;
+    }
+
+    @Override
+    public String getSubTitle() {
+        if (getBest() > 0) {
+            return "Best: -" + getBest() + " life";
+        }
+        return null;
     }
 }

@@ -2,10 +2,10 @@ package forge.achievement;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,7 +20,7 @@ import forge.util.FileUtil;
 import forge.util.XmlUtil;
 
 public abstract class AchievementCollection implements Iterable<Achievement> {
-    private final Map<String, Achievement> achievements = new HashMap<String, Achievement>();
+    private final Map<String, Achievement> achievements = new TreeMap<String, Achievement>();
     private final String name, filename;
 
     static {

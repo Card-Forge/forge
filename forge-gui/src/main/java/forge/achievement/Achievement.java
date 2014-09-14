@@ -10,15 +10,17 @@ import forge.util.gui.SOptionPane;
 public abstract class Achievement {
     private final String displayName, bronzeDesc, silverDesc, goldDesc;
     private final int bronzeThreshold, silverThreshold, goldThreshold;
-    private final boolean showBest;
+    private final boolean showBest, showCurrent;
     private int best, current;
 
-    public Achievement(String displayName0, boolean showBest0,
+    public Achievement(String displayName0,
+            boolean showBest0, boolean showCurrent0,
             String bronzeDesc0, int bronzeThreshold0,
             String silverDesc0, int silverThreshold0,
             String goldDesc0, int goldThreshold0) {
         displayName = displayName0;
         showBest = showBest0;
+        showCurrent = showCurrent0;
         bronzeDesc = bronzeDesc0;
         bronzeThreshold = bronzeThreshold0;
         silverDesc = silverDesc0;
@@ -41,9 +43,6 @@ public abstract class Achievement {
     }
     public int getBest() {
         return best;
-    }
-    public boolean showBest() {
-        return showBest;
     }
     public boolean earnedGold() {
         return best >= goldThreshold;
@@ -128,5 +127,18 @@ public abstract class Achievement {
             catch (Exception ex) {}
         }
         return 0;
+    }
+
+    public String getSubTitle() {
+        if (showBest) {
+            if (showCurrent) {
+                return "Best: " + best + " Current: " + current;
+            }
+            return "Best: " + best;
+        }
+        else if (showCurrent) {
+            return "Current: " + current;
+        }
+        return null;
     }
 }

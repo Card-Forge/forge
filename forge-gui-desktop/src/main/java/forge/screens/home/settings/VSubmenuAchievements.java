@@ -1,6 +1,9 @@
 package forge.screens.home.settings;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -172,11 +175,15 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
 
     @SuppressWarnings("serial")
     private static class TrophyCase extends JPanel {
-        private static SkinImage imgTop = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_TOP).scale(IMAGE_SCALE);
-        private static SkinImage imgShelf = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_SHELF).scale(IMAGE_SCALE);
-        private static SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(IMAGE_SCALE);
-        private static SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(IMAGE_SCALE);
-        private static SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(IMAGE_SCALE);
+        private static final SkinImage imgTop = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_TOP).scale(IMAGE_SCALE);
+        private static final SkinImage imgShelf = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_SHELF).scale(IMAGE_SCALE);
+        private static final SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(IMAGE_SCALE);
+        private static final SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(IMAGE_SCALE);
+        private static final SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(IMAGE_SCALE);
+        private static final SkinImage imgTrophyPlate = FSkin.getImage(FSkinProp.IMG_TROPHY_PLATE);
+        private static final Font font = FSkin.getFixedFont(14).deriveFont(Font.BOLD);
+        private static final Font subFont = FSkin.getFixedFont(12);
+        private static final Color foreColor = new Color(239, 220, 144);
 
         private AchievementCollection achievements;
         int shelfCount;
@@ -207,20 +214,27 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
             }
 
             Dimension trophySize = imgBronzeTrophy.getSizeForPaint(g2d);
+            Dimension trophyPlateSize = imgTrophyPlate.getSizeForPaint(g2d);
 
             x += (w - TROPHIES_PER_SHELVE * trophySize.width) / 2;
             y = imgTopSize.height + (h - trophySize.height - 12 * IMAGE_SCALE) / 2;
 
+            FontMetrics fm;
+            String label;
             int trophyCount = 0;
             int startX = x;
+            int plateY = imgTopSize.height + imgShelfSize.height - trophyPlateSize.height;
+            int textY;
             int dy = h;
             w = trophySize.width;
             h = trophySize.height;
+            int plateOffset = (w - trophyPlateSize.width) / 2;
 
             for (Achievement achievement : achievements) {
                 if (trophyCount == TROPHIES_PER_SHELVE) {
                     trophyCount = 0;
                     y += dy;
+                    plateY += dy;
                     x = startX;
                 }
                 if (achievement.earnedGold()) {
@@ -232,9 +246,24 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 else if (achievement.earnedBronze()) {
                     FSkin.drawImage(g2d, imgBronzeTrophy, x, y, w, h);
                 }
-                else {
-                    FSkin.drawImage(g2d, imgGoldTrophy, x, y, w, h);
+                FSkin.drawImage(g2d, imgTrophyPlate, x + plateOffset, plateY, trophyPlateSize.width, trophyPlateSize.height);
+
+                g2d.setColor(foreColor);
+                g2d.setFont(font);
+
+                fm = g2d.getFontMetrics();
+                label = achievement.getDisplayName();
+                textY = plateY + (trophyPlateSize.height * 2 / 3 - fm.getHeight()) / 2 + fm.getAscent();
+                g2d.drawString(label, x + plateOffset + (trophyPlateSize.width - fm.stringWidth(label)) / 2, textY);
+
+                label = achievement.getSubTitle();
+                if (label != null) {
+                    textY += fm.getAscent();
+                    g2d.setFont(subFont);
+                    fm = g2d.getFontMetrics();
+                    g2d.drawString(label, x + plateOffset + (trophyPlateSize.width - fm.stringWidth(label)) / 2, textY);
                 }
+
                 trophyCount++;
                 x += w;
             }

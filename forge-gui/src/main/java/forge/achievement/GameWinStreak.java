@@ -5,7 +5,7 @@ import forge.game.player.Player;
 
 public class GameWinStreak extends Achievement {
     public GameWinStreak(int bronze0, int silver0, int gold0) {
-        super("Game Win Streak", true,
+        super("Game Win Streak", true, true,
             String.format("Win %d games in a row.", bronze0), bronze0,
             String.format("Win %d games in a row.", silver0), silver0,
             String.format("Win %d games in a row.", gold0), gold0);
