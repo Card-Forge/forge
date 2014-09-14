@@ -177,9 +177,9 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
     private static class TrophyCase extends JPanel {
         private static final SkinImage imgTop = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_TOP).scale(IMAGE_SCALE);
         private static final SkinImage imgShelf = FSkin.getImage(FSkinProp.BG_TROPHY_CASE_SHELF).scale(IMAGE_SCALE);
-        private static final SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(IMAGE_SCALE);
-        private static final SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(IMAGE_SCALE);
-        private static final SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(IMAGE_SCALE);
+        private static final SkinImage imgBronzeTrophy = FSkin.getImage(FSkinProp.IMG_BRONZE_TROPHY).scale(1.8);
+        private static final SkinImage imgSilverTrophy = FSkin.getImage(FSkinProp.IMG_SILVER_TROPHY).scale(1.8);
+        private static final SkinImage imgGoldTrophy = FSkin.getImage(FSkinProp.IMG_GOLD_TROPHY).scale(1.8);
         private static final SkinImage imgTrophyPlate = FSkin.getImage(FSkinProp.IMG_TROPHY_PLATE);
         private static final Font font = FSkin.getFixedFont(14).deriveFont(Font.BOLD);
         private static final Font subFont = FSkin.getFixedFont(12);
