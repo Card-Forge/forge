@@ -20,7 +20,9 @@ public class InputPlaybackControl extends InputSyncronizedBase implements InputS
         this.gui = gui;
         this.game = game;
         control = fControlGamePlayback;
+        setPause(false);
     }
+
     @Override
     public IGuiBase getGui() {
         return gui;

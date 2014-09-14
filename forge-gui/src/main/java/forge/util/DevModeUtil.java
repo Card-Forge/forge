@@ -44,6 +44,8 @@ import forge.properties.ForgeConstants;
 import forge.util.gui.SGuiChoose;
 import forge.util.gui.SGuiDialog;
 import forge.util.gui.SOptionPane;
+import forge.view.CardView;
+import forge.view.PlayerView;
 
 public final class DevModeUtil {
 
@@ -247,7 +249,8 @@ public final class DevModeUtil {
         }
 
         final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
-        final Card card = SGuiChoose.oneOrNone(controller.getGui(), "Choose a card", lib);
+        final CardView cardView = SGuiChoose.oneOrNone(controller.getGui(), "Choose a card", controller.getCardViews(lib));
+        final Card card = controller.getCard(cardView);
         if (card == null) { return; }
 
         game.getAction().invoke(new Runnable() {
@@ -266,7 +269,9 @@ public final class DevModeUtil {
      * @since 1.0.15
      */
     public static void devModeAddCounter(final Game game, final PlayerControllerHuman controller) {
-        final Card card = SGuiChoose.oneOrNone(controller.getGui(), "Add counters to which card?", game.getCardsIn(ZoneType.Battlefield));
+        final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);
+        final CardView cardView = SGuiChoose.oneOrNone(controller.getGui(), "Add counters to which card?", controller.getCardViews(cards));
+        final Card card = controller.getCard(cardView);
         if (card == null) { return; }
 
         final CounterType counter = SGuiChoose.oneOrNone(controller.getGui(), "Which type of counter?", CounterType.values());
@@ -335,7 +340,8 @@ public final class DevModeUtil {
      */
     public static void devModeSetLife(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player player = SGuiChoose.oneOrNone(controller.getGui(), "Set life for which player?", players);
+        final PlayerView playerView = SGuiChoose.oneOrNone(controller.getGui(), "Set life for which player?", controller.getPlayerViews(players));
+        final Player player = controller.getPlayer(playerView);
         if (player == null) { return; }
 
         final Integer life = SGuiChoose.getInteger(controller.getGui(), "Set life to what?", 0);
@@ -380,7 +386,8 @@ public final class DevModeUtil {
      */
     public static void devModeCardToHand(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player p = SGuiChoose.oneOrNone(controller.getGui(), "Put card in hand for which player?", players);
+        final PlayerView pView = SGuiChoose.oneOrNone(controller.getGui(), "Put card in hand for which player?", controller.getPlayerViews(players));
+        final Player p = controller.getPlayer(pView);
         if (null == p) {
             return;
         }
@@ -401,7 +408,8 @@ public final class DevModeUtil {
 
     public static void devModeCardToBattlefield(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player p = SGuiChoose.oneOrNone(controller.getGui(), "Put card in play for which player?", players);
+        final PlayerView pView = SGuiChoose.oneOrNone(controller.getGui(), "Put card in play for which player?", controller.getPlayerViews(players));
+        final Player p = controller.getPlayer(pView);
         if (null == p) {
             return;
         }
@@ -444,19 +452,14 @@ public final class DevModeUtil {
 
     public static void devModeRiggedPlanarRoll(final Game game, final PlayerControllerHuman controller) {
         final List<Player> players = game.getPlayers();
-        final Player player = SGuiChoose.oneOrNone(controller.getGui(), "Which player should roll?", players);
+        final PlayerView playerView = SGuiChoose.oneOrNone(controller.getGui(), "Which player should roll?", controller.getPlayerViews(players));
+        final Player player = controller.getPlayer(playerView);
         if (player == null) { return; }
 
         final PlanarDice res = SGuiChoose.oneOrNone(controller.getGui(), "Choose result", PlanarDice.values());
         if (res == null) { return; }
 
         System.out.println("Rigging planar dice roll: " + res.toString());
-
-        //DBG
-        //System.out.println("ActivePlanes: " + getGame().getActivePlanes());
-        //System.out.println("CommandPlanes: " + getGame().getCardsIn(ZoneType.Command));
-
-        
 
         game.getAction().invoke(new Runnable() {
             @Override

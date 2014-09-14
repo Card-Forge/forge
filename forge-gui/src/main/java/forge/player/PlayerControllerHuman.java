@@ -1640,16 +1640,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @return
      * @see forge.view.LocalGameView#getCardViews(java.util.List)
      */
-    public final List<CardView> getCardViews(List<Card> cards) {
-        return gameView.getCardViews(cards);
-    }
-
-    /**
-     * @param cards
-     * @return
-     * @see forge.view.LocalGameView#getCardViews(java.lang.Iterable)
-     */
-    public final List<CardView> getCardViews(Iterable<Card> cards) {
+    public final List<CardView> getCardViews(final Iterable<Card> cards) {
         return gameView.getCardViews(cards);
     }
 

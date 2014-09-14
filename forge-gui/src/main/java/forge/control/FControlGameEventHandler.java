@@ -1,6 +1,5 @@
 package forge.control;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,6 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 
@@ -129,12 +129,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
-        final List<Card> options = new ArrayList<Card>();
+        final List<CardView> options = Lists.newArrayList();
         for (final Entry<Player, Card> kv : ev.cards.entries()) {
-            final Card fakeCard = new Card(-1); //use fake card so real cards appear with proper formatting
-            fakeCard.setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            final CardView fakeCard = new CardView(true); //use fake card so real cards appear with proper formatting
+            fakeCard.getOriginal().setName("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
-            options.add(kv.getValue());
+            options.add(gameView.getCardView(kv.getValue()));
         }
         SGuiChoose.reveal(gui, "These cards were chosen to ante", options);
         return null;

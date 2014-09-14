@@ -30,9 +30,9 @@ import forge.control.FControl;
 import forge.deck.CardPool;
 import forge.error.BugReportDialog;
 import forge.events.UiEvent;
+import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.IHasIcon;
 import forge.game.player.RegisteredPlayer;
@@ -153,8 +153,8 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public <T> T showInputDialog(String message, String title, FSkinProp icon, T initialInput, T[] inputOptions) {
-        if (initialInput instanceof Card || (inputOptions != null && inputOptions.length > 0 && inputOptions[0] instanceof Card)) {
-            System.err.println("Warning: Cards passed to GUI! Printing stack trace.");
+        if (initialInput instanceof GameObject || (inputOptions != null && inputOptions.length > 0 && inputOptions[0] instanceof GameObject)) {
+            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
         }
         return FOptionPane.showInputDialog(message, title, icon == null ? null : FSkin.getImage(icon), initialInput, inputOptions);
@@ -162,8 +162,8 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
-        if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof Card) || selected instanceof Card) {
-            System.err.println("Warning: Cards passed to GUI! Printing stack trace.");
+        if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof GameObject) || selected instanceof GameObject) {
+            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
         }
         return GuiChoose.getChoices(message, min, max, choices, selected, display);
@@ -172,9 +172,9 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof Card)
-                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof Card)) {
-            System.err.println("Warning: Cards passed to GUI! Printing stack trace.");
+        if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof GameObject)
+                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof GameObject)) {
+            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
         }
         return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
