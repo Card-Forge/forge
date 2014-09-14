@@ -637,7 +637,11 @@ public class AiController {
     } // playCounterSpell()
 
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
-        final List<Card> cards = getAvailableCards();
+        return predictSpellToCastInMain2(exceptSA, true);
+    }
+
+    public SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
+        final List<Card> cards = handOnly ? player.getCardsIn(ZoneType.Hand) : getAvailableCards();
     
         ArrayList<SpellAbility> all = getSpellAbilities(cards);
         Collections.sort(all, saComparator); // put best spells first
@@ -647,7 +651,7 @@ public class AiController {
                 continue;
             }
             sa.setActivatingPlayer(player);
-            if (sa.canPlay() && !ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
+            if (!ComputerUtil.castPermanentInMain1(player, sa) && sa.getHostCard() != null && !sa.getHostCard().getType().contains("Land") && ComputerUtilCost.canPayCost(sa, player)) {
                 return sa;
             }
         }

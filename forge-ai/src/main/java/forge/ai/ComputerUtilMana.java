@@ -663,7 +663,7 @@ public class ComputerUtilMana {
 
         PhaseType curPhase = ai.getGame().getPhaseHandler().getPhase();
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
-            ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearRememberedManaSources();
+            ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES);
         }
         else {
             if (((PlayerControllerAi)ai.getController()).getAi().getCardMemory().isRememberedCard(sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES)) {

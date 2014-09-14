@@ -223,40 +223,18 @@ public class AiCardMemory {
     }
     
     /**
-     * Clears the "remembered attackers" memory set stored in this card memory for the given player.
+     * Clears the given memory set.
      */
-    public void clearRememberedAttackers() {
-        getMemorySet(MemorySet.MANDATORY_ATTACKERS).clear();
+    public void clearMemorySet(MemorySet set) {
+        getMemorySet(set).clear();
     }
-
-    /**
-     * Clears the "remembered mana sources" memory set stored in this card memory for the given player.
-     */
-    public void clearRememberedManaSources() {
-        getMemorySet(MemorySet.HELD_MANA_SOURCES).clear();
-    }
-
-    /**
-     * Clears the "remembered moved equipment" memory set stored in this card memory for the given player.
-     */
-    public void clearRememberedMovedEquipment() {
-        getMemorySet(MemorySet.MOVED_EQUIPMENT).clear();
-    }
-
-    /**
-     * Clears the "remembered revealed cards" memory set stored in this card memory for the given player.
-     */
-    //public void clearRememberedRevealedCards() {
-    //    getMemorySet(MemorySet.REVEALED_CARDS).clear();
-    //}
 
     /**
      * Clears all memory sets stored in this card memory for the given player.
      */
     public void clearAllRemembered() {
-        clearRememberedAttackers();
-        clearRememberedManaSources();
-        clearRememberedMovedEquipment();
-        //clearRememberedRevealedCards();
+        clearMemorySet(MemorySet.MANDATORY_ATTACKERS);
+        clearMemorySet(MemorySet.HELD_MANA_SOURCES);
+        clearMemorySet(MemorySet.MOVED_EQUIPMENT);
     }
 }
