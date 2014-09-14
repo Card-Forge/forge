@@ -846,7 +846,6 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void resetAtEndOfTurn() {
         // TODO - if card memory is ever used to remember something for longer than a turn, make sure it's not reset here.
-        System.out.println("Clearing memory.");
         getAi().getCardMemory().clearAllRemembered();
     }
 
