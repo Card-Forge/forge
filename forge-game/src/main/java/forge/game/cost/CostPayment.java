@@ -141,7 +141,7 @@ public class CostPayment {
             }
             this.paidCostParts.add(part);
         }
-    
+
         // this clears lists used for undo. 
         for (final CostPart part1 : this.paidCostParts) {
             if (part1 instanceof CostPartWithList) {

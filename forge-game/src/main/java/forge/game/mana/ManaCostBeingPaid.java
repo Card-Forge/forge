@@ -126,7 +126,8 @@ public class ManaCostBeingPaid {
         for (ManaCostShard shard : manaCost) {
             if (shard == ManaCostShard.X) {
                 cntX++;
-            } else {
+            }
+            else {
                 unpaidShards.add(shard);
             }
         }
@@ -322,8 +323,9 @@ public class ManaCostBeingPaid {
                 priority = toPayPriority;
                 choice.clear();
             }
-            if ( toPayPriority == priority )
+            if (toPayPriority == priority) {
                 choice.add(toPay);
+            }
         } // for
         if (choice.isEmpty()) {
             return false;
