@@ -1357,7 +1357,7 @@ public class ComputerUtil {
                     topStack.getParam("NumDmg"), topStack);
             final SpellAbility sub = topStack.getSubAbility();
             boolean noRegen = false;
-            if (sub.getApi() == ApiType.Pump) {
+            if (sub != null && sub.getApi() == ApiType.Pump) {
                 final List<String> keywords = sub.hasParam("KW") ? Arrays.asList(sub.getParam("KW").split(" & ")) : new ArrayList<String>();
                 for (String kw : keywords) {
                     if (kw.contains("can't be regenerated")) {
