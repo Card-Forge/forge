@@ -1242,9 +1242,9 @@ forge-gui-mobile/src/forge/screens/quest/QuestSpellShopScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestStatsScreen.java -text
 forge-gui-mobile/src/forge/screens/quest/QuestTournamentsScreen.java -text
 forge-gui-mobile/src/forge/screens/sealed/SealedScreen.java -text
+forge-gui-mobile/src/forge/screens/settings/AchievementsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/FilesPage.java -text
 forge-gui-mobile/src/forge/screens/settings/GuiDownloader.java -text
-forge-gui-mobile/src/forge/screens/settings/HelpPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsPage.java -text
 forge-gui-mobile/src/forge/screens/settings/SettingsScreen.java -text
 forge-gui-mobile/src/forge/sound/AudioClip.java -text

@@ -109,6 +109,7 @@ public enum FSkinImage implements FImage {
     BRONZE_TROPHY (FSkinProp.IMG_BRONZE_TROPHY, SourceFile.ICONS),
     SILVER_TROPHY (FSkinProp.IMG_SILVER_TROPHY, SourceFile.ICONS),
     GOLD_TROPHY   (FSkinProp.IMG_GOLD_TROPHY, SourceFile.ICONS),
+    TROPHY_PLATE   (FSkinProp.IMG_TROPHY_PLATE, SourceFile.ICONS),
 
     //Quest Icons
     QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),

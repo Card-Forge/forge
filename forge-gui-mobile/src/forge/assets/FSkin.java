@@ -203,7 +203,11 @@ public class FSkin {
             for (FSkinImage image : FSkinImage.values()) {
                 image.load(textures, preferredIcons);
             }
-            FSkinTexture.BG_MATCH.load();
+            for (FSkinTexture texture : FSkinTexture.values()) {
+                if (texture != FSkinTexture.BG_TEXTURE) {
+                    texture.load();
+                }
+            }
 
             //assemble avatar textures
             int counter = 0;

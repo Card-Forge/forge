@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -13,7 +14,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import forge.game.GameType;
 import forge.game.player.Player;
+import forge.interfaces.IComboBox;
+import forge.model.FModel;
 import forge.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.XmlUtil;
@@ -24,6 +28,13 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.ACHIEVEMENTS_DIR);
+    }
+
+    public static void buildComboBox(IComboBox<AchievementCollection> cb) {
+        cb.addItem(FModel.getAchievements(GameType.Constructed));
+        cb.addItem(FModel.getAchievements(GameType.Draft));
+        cb.addItem(FModel.getAchievements(GameType.Sealed));
+        cb.addItem(FModel.getAchievements(GameType.Quest));
     }
 
     protected AchievementCollection(String name0, String filename0) {
