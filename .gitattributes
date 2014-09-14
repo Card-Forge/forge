@@ -737,6 +737,7 @@ forge-gui-desktop/src/main/java/forge/error/package-info.java -text
 forge-gui-desktop/src/main/java/forge/gui/BoxedProductCardListViewer.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardContainer.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardDetailPanel.java -text
+forge-gui-desktop/src/main/java/forge/gui/CardListChooser.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardListViewer.java -text
 forge-gui-desktop/src/main/java/forge/gui/CardPicturePanel.java -text
 forge-gui-desktop/src/main/java/forge/gui/DualListBox.java -text

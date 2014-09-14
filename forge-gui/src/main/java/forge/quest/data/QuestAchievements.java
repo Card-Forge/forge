@@ -1,5 +1,6 @@
 package forge.quest.data;
 
+import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.quest.QuestEventDraft;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
@@ -40,7 +41,10 @@ public class QuestAchievements {
     
     // Difficulty - will store only index from now.
     private int difficulty;
+    
+    private transient CardBlock nextDraftBlock;
 
+    @SuppressWarnings("unused")
     public QuestAchievements() { //needed for XML serialization
     }
 
@@ -227,6 +231,7 @@ public class QuestAchievements {
     }
 
     public void generateDrafts() {
+        
         if (drafts == null) {
             drafts = new QuestEventDraftContainer();
             draftsToGenerate = 1;
@@ -246,7 +251,13 @@ public class QuestAchievements {
         }
 
         for (int i = 0; i < draftsToGenerate; i++) {
-            QuestEventDraft draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());
+            QuestEventDraft draft;
+            if (nextDraftBlock != null) {
+                draft = QuestEventDraft.getDraftOrNull(nextDraftBlock);
+                nextDraftBlock = null;
+            } else {
+                draft = QuestEventDraft.getRandomDraftOrNull(FModel.getQuest());
+            }
             if (draft != null) {
                 drafts.add(draft);
                 draftsToGenerate--;
@@ -254,6 +265,7 @@ public class QuestAchievements {
         }
 
         FModel.getQuest().save();
+        
     }
 
     public void addDraftToken() {
@@ -316,11 +328,13 @@ public class QuestAchievements {
         return draftTokens;
     }
 
-    public void spendDraftToken() {
+    public void spendDraftToken(final CardBlock block) {
         if (draftTokens > 0) {
             draftTokens--;
             draftsToGenerate++;
-			FModel.getQuest().save();
+            nextDraftBlock = block;
+            generateDrafts();
         }
     }
+    
 }

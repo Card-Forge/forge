@@ -7,7 +7,9 @@ import forge.assets.FSkinProp;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.gui.BoxedProductCardListViewer;
+import forge.gui.CardListChooser;
 import forge.gui.CardListViewer;
+import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -15,6 +17,7 @@ import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.limited.BoosterDraft;
+import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -204,6 +207,19 @@ public enum CSubmenuQuestDraft implements ICDoc {
                 
             }
             
+            if (prizes.selectRareFromSets()) {
+                
+                FOptionPane.showMessageDialog("For placing " + placement  + ", you may select a rare or mythic rare card from the drafted block.", "Rare Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_STAKES));
+
+                CardListChooser cardListChooser = new CardListChooser("Select a Card", "Select a card to keep:", prizes.selectRareCards);
+                cardListChooser.setVisible(true);
+                cardListChooser.dispose();
+                prizes.addSelectedCard(cardListChooser.getSelectedCard());
+                
+                FOptionPane.showMessageDialog("'" + cardListChooser.getSelectedCard().getName() + "' has been added to your collection!", "Card Added", FSkin.getImage(FSkinProp.ICO_QUEST_STAKES));
+                
+            }
+            
             if (draft.getPlayerPlacement() == 1) {
                 FOptionPane.showMessageDialog("For placing " + placement + ", you have been awarded a token!\nUse tokens to create new drafts to play.", "Bonus Token", FSkin.getImage(FSkinProp.ICO_QUEST_NOTES));
                 FModel.getQuest().getAchievements().addDraftToken();
@@ -225,6 +241,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
         view.populate();
         
     }
+    
+    
     
     private final ActionListener selectTournamentStart = new ActionListener() {
         @Override
@@ -270,8 +288,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         QuestAchievements achievements = FModel.getQuest().getAchievements();
         
         if (achievements != null) {
+
+            final CardBlock block = GuiChoose.oneOrNone("Choose Draft Format", QuestEventDraft.getAvailableBlocks(FModel.getQuest()));
             
-            achievements.spendDraftToken();
+            achievements.spendDraftToken(block);
             
             update();
             VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();

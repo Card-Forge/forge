@@ -17,7 +17,6 @@
  */
 package forge.quest;
 
-import com.google.common.base.Function;
 import forge.GuiBase;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
@@ -55,6 +54,7 @@ public class QuestEventDraft {
 		public int credits;
 		public List<BoosterPack> boosterPacks;
 		public List<PaperCard> individualCards;
+        public List<PaperCard> selectRareCards;
 		
 		public boolean hasCredits() {
 			return credits > 0;
@@ -67,16 +67,18 @@ public class QuestEventDraft {
 		public boolean hasIndividualCards() {
 			return individualCards != null && individualCards.size() > 0;
 		}
+        
+        public boolean selectRareFromSets() { return selectRareCards != null && selectRareCards.size() > 0; }
+        
+        public void addSelectedCard(final PaperCard card) {
+            FModel.getQuest().getCards().addSingleCard(card, 1);
+        }
 		
 	}
 	
     public static final String UNDETERMINED = "quest_draft_undetermined_place";
     public static final String HUMAN = "quest_draft_human_place";
     public static final String DECK_NAME = "Tournament Deck";
-    
-    public static final Function<QuestEventDraft, String> FN_GET_NAME = new Function<QuestEventDraft, String>() {
-        @Override public final String apply(QuestEventDraft qe) { return qe.title; }  
-    };
 
     private static transient final ReadPriceList PRICE_LIST_READER = new ReadPriceList();
     private static transient final Map<String, Integer> MAP_PRICES = PRICE_LIST_READER.getPriceList();
@@ -129,10 +131,6 @@ public class QuestEventDraft {
     
     public void setTitle(final String title0) {
         this.title = title0;
-    }
-    
-    public void setStanding(int position, String player) {
-        standings[position] = player;
     }
     
     public void setStandings(String[] standings) {
@@ -221,25 +219,6 @@ public class QuestEventDraft {
 		return outputDeck;
 
 	}
-	
-    public int getHumanLatestStanding() {
-        int humanIndex = 0;
-        for (int i = getStandings().length - 1; i >= 0; i--) {
-            if (getStandings()[i].equals(HUMAN)) {
-                humanIndex = i;
-                break;
-            }
-        }
-        return humanIndex;
-    }
-    
-    public int getOpponentIndex(int playerIndex) {
-        int result = (playerIndex % 2 == 0) ? playerIndex + 1 : playerIndex - 1;
-        if (result == 15) {
-            result = -1;
-        }
-        return result;
-    }
     
     public void setWinner(String playerName) {
         
@@ -325,7 +304,7 @@ public class QuestEventDraft {
         
         for (String boosterSet : boosterConfiguration.split("/")) {
             
-            int value = 0;
+            int value;
             String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
             
             if (MAP_PRICES.containsKey(boosterName)) {
@@ -350,10 +329,10 @@ public class QuestEventDraft {
 				prizes = generateSecondPlacePrizes(prizePool);
 				break;
             case 3:
-				prizes = generateThirdPlacePrizes(prizePool);
+				prizes = generateThirdPlacePrizes();
 				break;
             case 4:
-				prizes = generateFourthPlacePrizes(prizePool);
+				prizes = generateFourthPlacePrizes();
 				break;
         }
 		
@@ -384,8 +363,8 @@ public class QuestEventDraft {
     private QuestDraftPrizes generateFirstPlacePrizes(final int prizePool) {
         
         int credits = 2 * (prizePool / 3); //First place gets 2/3 the total prize pool
-        List<PaperCard> cards = new ArrayList<PaperCard>();
-        List<BoosterPack> boosters = new ArrayList<BoosterPack>();
+        List<PaperCard> cards = new ArrayList<>();
+        List<BoosterPack> boosters = new ArrayList<>();
         
         cards.add(getPromoCard());
 
@@ -407,6 +386,7 @@ public class QuestEventDraft {
 		prizes.credits = credits;
 		prizes.boosterPacks = boosters;
 		prizes.individualCards = cards;
+        awardSelectedRare(prizes);
 		
         return prizes;
         
@@ -415,8 +395,8 @@ public class QuestEventDraft {
     private QuestDraftPrizes generateSecondPlacePrizes(final int prizePool) {
         
         int credits = prizePool / 3; //Second place gets 1/3 the total prize pool
-        List<PaperCard> cards = new ArrayList<PaperCard>();
-        List<BoosterPack> boosters = new ArrayList<BoosterPack>();
+        List<PaperCard> cards = new ArrayList<>();
+        List<BoosterPack> boosters = new ArrayList<>();
         
         cards.add(getPromoCard());
 
@@ -438,19 +418,20 @@ public class QuestEventDraft {
 		prizes.credits = credits;
 		prizes.boosterPacks = boosters;
 		prizes.individualCards = cards;
+        awardSelectedRare(prizes);
 
 		return prizes;
         
     }
     
-    private QuestDraftPrizes generateThirdPlacePrizes(final int prizePool) {
+    private QuestDraftPrizes generateThirdPlacePrizes() {
         
         int credits = 0;
-        List<PaperCard> cards = new ArrayList<PaperCard>();
+        List<PaperCard> cards = new ArrayList<>();
         
         cards.add(getPromoCard());
         
-        List<BoosterPack> boosters = new ArrayList<BoosterPack>();
+        List<BoosterPack> boosters = new ArrayList<>();
         boosters.add(getBoosterPack());
 
 		QuestDraftPrizes prizes = new QuestDraftPrizes();
@@ -462,10 +443,10 @@ public class QuestEventDraft {
         
     }
     
-    private QuestDraftPrizes generateFourthPlacePrizes(final int prizePool) {
+    private QuestDraftPrizes generateFourthPlacePrizes() {
         
         int credits = 0;
-        List<PaperCard> cards = new ArrayList<PaperCard>();
+        List<PaperCard> cards = new ArrayList<>();
         
         cards.add(getPromoCard());
 
@@ -476,6 +457,22 @@ public class QuestEventDraft {
 		return prizes;
         
     }
+
+    private void awardSelectedRare(final QuestDraftPrizes prizes) {
+        
+        List<PaperCard> possibleCards = new ArrayList<>();
+    
+        for (CardEdition edition : getAllEditions()) {
+            for (CardInSet card : edition.getCards()) {
+                if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
+                    possibleCards.add(FModel.getMagicDb().getCommonCards().getCard(card.name, edition.getCode()));
+                }
+            }
+        }
+        
+        prizes.selectRareCards = possibleCards;
+        
+    }
     
     private BoosterPack getBoosterPack() {
         return BoosterPack.FN_FROM_SET.apply(getRandomEdition());
@@ -484,7 +481,7 @@ public class QuestEventDraft {
     private PaperCard getPromoCard() {
         
         CardEdition randomEdition = getRandomEdition();
-        List<CardInSet> cardsInEdition = new ArrayList<CardInSet>();
+        List<CardInSet> cardsInEdition = new ArrayList<>();
         
         for (CardInSet card : randomEdition.getCards()) {
             if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
@@ -504,8 +501,7 @@ public class QuestEventDraft {
         }
         
         if (promo == null) {
-            final PaperCard c = FModel.getQuest().getCards().addRandomRare();
-            return c;
+            return FModel.getQuest().getCards().addRandomRare();
         }
         
         return promo;
@@ -514,7 +510,7 @@ public class QuestEventDraft {
     
     private CardEdition getRandomEdition() {
         
-        List<CardEdition> editions = new ArrayList<CardEdition>();
+        List<CardEdition> editions = new ArrayList<>();
         for (String booster : boosterConfiguration.split("/")) {
             editions.add(FModel.getMagicDb().getEditions().get(booster));
         }
@@ -522,8 +518,19 @@ public class QuestEventDraft {
         return editions.get((int) (Math.random() * editions.size()));
         
     }
+
+    private List<CardEdition> getAllEditions() {
+
+        List<CardEdition> editions = new ArrayList<>();
+        for (String booster : boosterConfiguration.split("/")) {
+            editions.add(FModel.getMagicDb().getEditions().get(booster));
+        }
+
+        return editions;
+
+    }
     
-    private int getBoosterPrice(BoosterPack booster) {
+    private int getBoosterPrice(final BoosterPack booster) {
         
         int value;
         String boosterName = booster.getName() + " Booster Pack";
@@ -548,7 +555,7 @@ public class QuestEventDraft {
             }
         }
         
-        int nextMatchIndex = -1;
+        int nextMatchIndex;
         
         switch (playerIndex) {
         
@@ -586,18 +593,9 @@ public class QuestEventDraft {
                 break;
                 
         }
-        
-        if (nextMatchIndex == -1) {
-            //No matches left in tournament
-            return false;
-        }
-        
-        if (!standings[nextMatchIndex].equals(UNDETERMINED)) {
-            return false;
-        }
-        
-        return true;
-        
+
+        return nextMatchIndex != -1 && standings[nextMatchIndex].equals(UNDETERMINED);
+
     }
     
     public int getPlayerPlacement() {
@@ -687,89 +685,95 @@ public class QuestEventDraft {
         return title;
     }
     
-    /**
-     * Generates a random draft event based on the provided quest's limitations.
-     * Returns null in the event no draft could be created.
-     * @param quest
-     * @return
-     */
-    public static QuestEventDraft getRandomDraftOrNull(final QuestController quest) {
-        
-        List<CardBlock> possibleBlocks = new ArrayList<CardBlock>();
-        List<CardEdition> allowedQuestSets = new ArrayList<CardEdition>();
-        
+    public static List<CardBlock> getAvailableBlocks(final QuestController quest) {
+
+        List<CardBlock> possibleBlocks = new ArrayList<>();
+        List<CardEdition> allowedQuestSets = new ArrayList<>();
+
         boolean questUsesLimitedCardPool = quest.getFormat() != null;
-        
+
         if (questUsesLimitedCardPool) {
-            
+
             List<String> allowedSetCodes = quest.getFormat().getAllowedSetCodes();
-            
+
             for (String setCode : allowedSetCodes) {
                 allowedQuestSets.add(FModel.getMagicDb().getEditions().get(setCode));
             }
-            
+
         }
-        
-        LimitedPoolType draftType = LimitedPoolType.Block;
-        
-        List<CardBlock> blocks = new ArrayList<CardBlock>();
-        IStorage<CardBlock> storage = draftType == LimitedPoolType.Block ? FModel.getBlocks() : FModel.getFantasyBlocks();
+
+        List<CardBlock> blocks = new ArrayList<>();
+        IStorage<CardBlock> storage = FModel.getBlocks();
 
         for (CardBlock b : storage) {
             if (b.getCntBoostersDraft() > 0) {
                 blocks.add(b);
             }
         }
-        
+
         if (questUsesLimitedCardPool) {
             for (CardBlock block : blocks) {
-                
+
                 boolean blockAllowed = true;
-                
+
                 for (CardEdition set : block.getSets()) {
                     if (!allowedQuestSets.contains(set)) {
                         blockAllowed = false;
                         break;
                     }
                 }
-                
+
                 if (blockAllowed) {
                     possibleBlocks.add(block);
                 }
-                
+
             }
         } else {
             possibleBlocks.addAll(blocks);
         }
+
+        return possibleBlocks.isEmpty() ? null : possibleBlocks;
         
-        if (possibleBlocks.isEmpty()) {
-            return null;
-        }
-        
+    }
+    
+    /**
+     * Generates a random draft event based on the provided quest's limitations.
+     * @param quest The quest used to determine set availability.
+     * @return The created draft or null in the event no draft could be created.
+     */
+    public static QuestEventDraft getRandomDraftOrNull(final QuestController quest) {
+        List<CardBlock> possibleBlocks = getAvailableBlocks(quest);
         Collections.shuffle(possibleBlocks);
-        CardBlock selectedBlock = possibleBlocks.get(0);
+        return getDraftOrNull(possibleBlocks.get(0));
+    }
+
+    /**
+     * Generates a  draft event based on the provided block.
+     * @return The created draft or null in the event no draft could be created.
+     */
+    public static QuestEventDraft getDraftOrNull(final CardBlock block) {
         
-        QuestEventDraft event = new QuestEventDraft(selectedBlock.getName());
+        QuestEventDraft event = new QuestEventDraft(block.getName());
         
-        if (selectedBlock.getNumberSets() == 1) {
+        if (block.getNumberSets() == 1) {
             String boosterConfiguration = "";
-            for (int i = 0; i < selectedBlock.getCntBoostersDraft(); i++) {
-                boosterConfiguration += selectedBlock.getSets()[0].getCode();
-                if (i != selectedBlock.getCntBoostersDraft() - 1) {
+            for (int i = 0; i < block.getCntBoostersDraft(); i++) {
+                boosterConfiguration += block.getSets()[0].getCode();
+                if (i != block.getCntBoostersDraft() - 1) {
                     boosterConfiguration += "/";
                 }
                 event.boosterConfiguration = boosterConfiguration;
             }
         } else {
-            List<String> possibleSetCombinations = getSetCombos(selectedBlock);
+            List<String> possibleSetCombinations = getSetCombos(block);
             Collections.shuffle(possibleSetCombinations);
             event.boosterConfiguration = possibleSetCombinations.get(0);
         }
         
-        event.block = selectedBlock.getName();
+        event.block = block.getName();
         event.entryFee = calculateEntryFee(event.boosterConfiguration.split("/"));
         
-        List<String> players = new ArrayList<String>();
+        List<String> players = new ArrayList<>();
         players.add(HUMAN);
         players.add("1");
         players.add("2");
@@ -789,7 +793,7 @@ public class QuestEventDraft {
             event.standings[i] = UNDETERMINED;
         }
         
-        List<String> usedNames = new ArrayList<String>();
+        List<String> usedNames = new ArrayList<>();
         usedNames.add(GuiBase.getInterface().getGuiPlayer().getName());
         
         for (int i = 0; i < 7; i++) {
@@ -798,11 +802,11 @@ public class QuestEventDraft {
         }
         
         int numberOfIcons = GuiBase.getInterface().getAvatarCount();
-        List<Integer> usedIcons = new ArrayList<Integer>();
+        List<Integer> usedIcons = new ArrayList<>();
         
         for (int i = 0; i < 7; i++) {
             
-            int icon = -1;
+            int icon;
             int attempts = 50;
             
             do {
@@ -811,6 +815,7 @@ public class QuestEventDraft {
             
             event.aiIcons[i] = icon;
             usedNames.add(event.aiNames[i]);
+            usedIcons.add(icon);
             
         }
         
@@ -824,7 +829,7 @@ public class QuestEventDraft {
         
         for (String boosterSet : boosters) {
             
-            int value = 0;
+            int value;
             String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
             
             if (MAP_PRICES.containsKey(boosterName)) {
@@ -843,7 +848,7 @@ public class QuestEventDraft {
     
     private static List<String> getSetCombos(final CardBlock block) {
 
-        List<String> setCombos = new ArrayList<String>();
+        List<String> setCombos = new ArrayList<>();
         CardEdition[] sets = block.getSets();
         
         Arrays.sort(sets, new Comparator<CardEdition>() {

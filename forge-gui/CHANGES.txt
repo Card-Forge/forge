@@ -16,6 +16,10 @@ We have added a branch to our SVN for the new cards that are currently being scr
 We will not be releasing a 1.5.27 beta version and the next beta version will be numbered 1.5.28. Beta 1.5.27 was an internal test version in an effort on our part to improve the build and deploy process.
 
 
+- Quest Draft Improvements -
+Alongside bug fixes, quest drafts have been updated to be more valuable to your quest! Now, when you place first or second, you will get to pick a rare in the drafted block's pool to keep. This is in addition to the already existing prizes.
+Additionally, when you spend draft tokens, you no longer receive a random draft. Instead, you get to pick which block the new draft will be (but you still have to pay for it!), completely eliminating the game of chance.
+
 -------------------------------
 New Commander 2014 branch Cards
 -------------------------------
