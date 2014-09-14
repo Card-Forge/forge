@@ -44,7 +44,6 @@ public class QuestAchievements {
     
     private transient CardBlock nextDraftBlock;
 
-    @SuppressWarnings("unused")
     public QuestAchievements() { //needed for XML serialization
     }
 

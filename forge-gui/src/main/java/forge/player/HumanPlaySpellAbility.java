@@ -61,7 +61,7 @@ public class HumanPlaySpellAbility {
     public final void playAbility(boolean mayChooseTargets, boolean isFree, boolean skipStack) {
         final Player human = ability.getActivatingPlayer();
         final Game game = ability.getActivatingPlayer().getGame();
-        
+
         // used to rollback
         Zone fromZone = null;
         int zonePosition = 0;
