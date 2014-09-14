@@ -197,8 +197,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         Player activator = sa.getActivatingPlayer();
-        Zone cardZone = activator.getGame().getZoneOf(c);
+        if (activator == null) {
+            return true;
+        }
 
+        Zone cardZone = activator.getGame().getZoneOf(c);
         if (cardZone == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
