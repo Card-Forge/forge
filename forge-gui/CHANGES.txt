@@ -1,4 +1,4 @@
-Forge Beta: 09-##-2014 ver 1.5.27
+Forge Beta: 09-##-2014 ver 1.5.28
 
 
 # cards in total.
@@ -10,6 +10,17 @@ Release Notes
 
 - New Commander 2014 and Khans of Tarkir cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+
+
+- There will not be a 1.5.27 beta version -
+We will not be releasing a 1.5.27 beta version and the next beta version will be numbered 1.5.28. Beta 1.5.27 was an internal test version in an effort on our part to improve the build and deploy process.
+
+
+- Quest Draft Improvements -
+Quest drafts have been updated to be more valuable to your quest! 
+Bug fixes: Drafts now correctly rotate based on wins and quest preferences. Booster pack prices are now correctly calculated when presenting awards. No more 500+ alpha booster packs. Sorry! Other misc. fixes as well.
+Now, when you place first or second, you will get to pick a rare in the drafted block's pool to keep. This is in addition to the already existing prizes.
+Additionally, when you spend draft tokens, you no longer receive a random draft. Instead, you get to pick which block the new draft will be (but you still have to pay for it!), completely eliminating the game of chance.
 
 
 -------------------------------
@@ -99,6 +110,74 @@ Watcher of the Roost
 Wind-Scarred Crag
 Witness of the Ages
 Zurgo Helmsmasher
+Awaken the Bear
+Debilitating Injury
+Dutiful Return
+Kill Shot
+Siegecraft
+Throttle
+Weave Fate
+Abzan Charm
+Ainok Tracker
+Armament Corps
+Bloodfire Expert
+Bloodfire Mentor
+Canyon Lukers
+Chief of the Edge
+Chief of the Scale
+Disowned Ancestor
+Goblinslide
+Gurmag Swiftwing
+Highspire Mantis
+Hordeling Outburst
+Krumar Bond-Kin
+Leaping Master
+Mardu Blazebringer
+Mer-Ek Nightblade
+Monastery Flock
+Monastery Swiftspear
+Ponyback Brigade
+Riverwheel Aerialists
+Rotting Mastodon
+Sagu Archer
+Scout the Borders
+Snowhorn Rider
+Sultai Flayer
+Sultai Scavenger
+Summit Prowler
+Swift Kick
+Take Up Arms
+Tormenting Voice
+Trumpet Blast
+Tusked Colossodon
+Tuskguard Captain
+Valley Dasher
+Venerable Lammasu
+Wetland Sambar
+Whirlwind Adept
+Woolly Loxodon
+Firehoof Cavalry
+Jeskai Student
+Mardu Hateblade
+Mardu Hordechief
+Rush of Battle
+Sage-Eye Harrier
+Salt Road Patrol
+Seeker of the Way
+Dead Drop
+Tomb of the Spirit Dragon
+Altar of the Brood
+Briber's Purse
+Cranial Archive
+Dragon Throne of Tarkir
+Heart-Piercer Bow
+Secret Plans
+Warden of the Eye
+Roar of Challenge
+Barrage of Boulders
+Bring Low
+Dig Through Time
+Embodiment of Spring
 
 
 ------------

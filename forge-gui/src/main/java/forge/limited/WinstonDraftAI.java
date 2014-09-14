@@ -1,7 +1,5 @@
 package forge.limited;
 
-import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
@@ -33,7 +31,7 @@ public class WinstonDraftAI extends BoosterDraftAI{
 
     public void determineDeckColor() {
         // Turn colorPreference into playerColors
-        int count[] = tallyDeckColors();
+        //int count[] = tallyDeckColors();
         // Just take the three best colors, but maybe sometimes only take best two
         this.playerColors.get(0).setColorsByList(colorPreference.subList(0, 3));
     }
@@ -67,7 +65,7 @@ public class WinstonDraftAI extends BoosterDraftAI{
         }
     }
 
-    private int[] tallyDeckColors() {
+    /*private int[] tallyDeckColors() {
         int[] colorCount = new int[5];
 
         for(PaperCard pc : this.deck.get(0)) {
@@ -102,7 +100,7 @@ public class WinstonDraftAI extends BoosterDraftAI{
         }
         // Is this the right order?
         return colorCount;
-    }
+    }*/
 
     public int getAIDraftSize() {
         return this.deck.get(0).size();

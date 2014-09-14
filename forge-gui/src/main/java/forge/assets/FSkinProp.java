@@ -22,12 +22,13 @@ package forge.assets;
  * hashtable, access using .get(settingName) method.
  * 
  */
-
 public enum FSkinProp {
     //backgrounds
     BG_SPLASH (null, PropType.BACKGROUND),
     BG_TEXTURE (null, PropType.BACKGROUND),
     BG_MATCH (null, PropType.BACKGROUND),
+    BG_TROPHY_CASE_TOP (null, PropType.BACKGROUND),
+    BG_TROPHY_CASE_SHELF (null, PropType.BACKGROUND),
 
     //colors
     CLR_THEME                   (new int[] {70, 10}, PropType.COLOR),
@@ -232,9 +233,10 @@ public enum FSkinProp {
     IMG_SORCERY         (new int[] {160, 720, 40, 40}, PropType.IMAGE),
 
     //achievement trophies
-    IMG_BRONZE_TROPHY   (new int[] {0, 880, 60, 80}, PropType.IMAGE),
-    IMG_SILVER_TROPHY   (new int[] {60, 880, 60, 80}, PropType.IMAGE),
-    IMG_GOLD_TROPHY     (new int[] {120, 880, 60, 80}, PropType.IMAGE),
+    IMG_BRONZE_TROPHY   (new int[] {0, 880, 100, 120}, PropType.IMAGE),
+    IMG_SILVER_TROPHY   (new int[] {100, 880, 100, 120}, PropType.IMAGE),
+    IMG_GOLD_TROPHY     (new int[] {200, 880, 100, 120}, PropType.IMAGE),
+    IMG_TROPHY_PLATE    (new int[] {300, 880, 160, 40}, PropType.IMAGE),
 
     //button images
     IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}, PropType.ICON),

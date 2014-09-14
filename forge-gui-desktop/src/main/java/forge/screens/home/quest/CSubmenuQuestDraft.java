@@ -7,7 +7,9 @@ import forge.assets.FSkinProp;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.gui.BoxedProductCardListViewer;
+import forge.gui.CardListChooser;
 import forge.gui.CardListViewer;
+import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -15,6 +17,7 @@ import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.itemmanager.DeckManager;
 import forge.limited.BoosterDraft;
+import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -189,7 +192,7 @@ public enum CSubmenuQuestDraft implements ICDoc {
 					
 				} else {
 					
-					List<PaperCard> cards = new ArrayList<PaperCard>();
+					List<PaperCard> cards = new ArrayList<>();
 					
 					while (prizes.boosterPacks.size() > 0) {
 						BoosterPack pack = prizes.boosterPacks.remove(0);
@@ -201,6 +204,19 @@ public enum CSubmenuQuestDraft implements ICDoc {
 					c.dispose();
 					
 				}
+                
+            }
+            
+            if (prizes.selectRareFromSets()) {
+                
+                FOptionPane.showMessageDialog("For placing " + placement  + ", you may select a rare or mythic rare card from the drafted block.", "Rare Awarded", FSkin.getImage(FSkinProp.ICO_QUEST_STAKES));
+
+                CardListChooser cardListChooser = new CardListChooser("Select a Card", "Select a card to keep:", prizes.selectRareCards);
+                cardListChooser.setVisible(true);
+                cardListChooser.dispose();
+                prizes.addSelectedCard(cardListChooser.getSelectedCard());
+                
+                FOptionPane.showMessageDialog("'" + cardListChooser.getSelectedCard().getName() + "' has been added to your collection!", "Card Added", FSkin.getImage(FSkinProp.ICO_QUEST_STAKES));
                 
             }
             
@@ -225,6 +241,8 @@ public enum CSubmenuQuestDraft implements ICDoc {
         view.populate();
         
     }
+    
+    
     
     private final ActionListener selectTournamentStart = new ActionListener() {
         @Override
@@ -270,8 +288,10 @@ public enum CSubmenuQuestDraft implements ICDoc {
         QuestAchievements achievements = FModel.getQuest().getAchievements();
         
         if (achievements != null) {
+
+            final CardBlock block = GuiChoose.oneOrNone("Choose Draft Format", QuestEventDraft.getAvailableBlocks(FModel.getQuest()));
             
-            achievements.spendDraftToken();
+            achievements.spendDraftToken(block);
             
             update();
             VSubmenuQuestDraft.SINGLETON_INSTANCE.populate();
@@ -407,18 +427,22 @@ public enum CSubmenuQuestDraft implements ICDoc {
             String playerID = FModel.getQuest().getAchievements().getCurrentDraft().getStandings()[i];
 
             int iconID = 0;
-            
-            if (playerID.equals(QuestEventDraft.HUMAN)) {
-                playerID = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
-                if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
-                    iconID = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
-                }
-            } else if (playerID.equals(QuestEventDraft.UNDETERMINED)) {
-                playerID = "Undetermined";
-                iconID = GuiBase.getInterface().getAvatarCount() - 1;
-            } else {
-                iconID = FModel.getQuest().getAchievements().getCurrentDraft().getAIIcons()[Integer.parseInt(playerID) - 1];
-                playerID = FModel.getQuest().getAchievements().getCurrentDraft().getAINames()[Integer.parseInt(playerID) - 1];
+
+            switch (playerID) {
+                case QuestEventDraft.HUMAN:
+                    playerID = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
+                    if (FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",").length > 0) {
+                        iconID = Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]);
+                    }
+                    break;
+                case QuestEventDraft.UNDETERMINED:
+                    playerID = "Undetermined";
+                    iconID = GuiBase.getInterface().getAvatarCount() - 1;
+                    break;
+                default:
+                    iconID = FModel.getQuest().getAchievements().getCurrentDraft().getAIIcons()[Integer.parseInt(playerID) - 1];
+                    playerID = FModel.getQuest().getAchievements().getCurrentDraft().getAINames()[Integer.parseInt(playerID) - 1];
+                    break;
             }
             
             boolean first = i % 2 == 0;

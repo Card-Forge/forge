@@ -85,6 +85,7 @@ public final class ForgeConstants {
         USER_GAMES_DIR       = USER_DIR + "games/";
         LOG_FILE             = USER_DIR + "forge.log";
         DECK_BASE_DIR        = USER_DIR + "decks/";
+        ACHIEVEMENTS_DIR     = USER_DIR + "achievements/";
         DECK_CONSTRUCTED_DIR = DECK_BASE_DIR + "constructed/";
         DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft/";
         DECK_WINSTON_DIR     = DECK_BASE_DIR + "winston/";
@@ -193,15 +194,17 @@ public final class ForgeConstants {
     public static String SKINS_DIR;
     public static String DEFAULT_SKINS_DIR;
     //don't associate these skin files with a directory since skin directory will be determined later
-    public static final String SPRITE_ICONS_FILE     = "sprite_icons.png"; 
-    public static final String SPRITE_FOILS_FILE     = "sprite_foils.png";
-    public static final String SPRITE_OLD_FOILS_FILE = "sprite_old_foils.png";
-    public static final String SPRITE_AVATARS_FILE   = "sprite_avatars.png";
-    public static final String FONT_FILE             = "font1.ttf";
-    public static final String SPLASH_BG_FILE        = "bg_splash.png";
-    public static final String MATCH_BG_FILE         = "bg_match.jpg";
-    public static final String TEXTURE_BG_FILE       = "bg_texture.jpg";
-    public static final String DRAFT_DECK_IMG_FILE   = "bg_draft_deck.png";
+    public static final String SPRITE_ICONS_FILE      = "sprite_icons.png"; 
+    public static final String SPRITE_FOILS_FILE      = "sprite_foils.png";
+    public static final String SPRITE_OLD_FOILS_FILE  = "sprite_old_foils.png";
+    public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
+    public static final String FONT_FILE              = "font1.ttf";
+    public static final String SPLASH_BG_FILE         = "bg_splash.png";
+    public static final String MATCH_BG_FILE          = "bg_match.jpg";
+    public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
+    public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
+    public static final String TROPHY_CASE_TOP_FILE   = "bg_trophy_case_top.png";
+    public static final String TROPHY_CASE_SHELF_FILE = "bg_trophy_case_shelf.png";
 
     // data tree roots
     public static String USER_DIR;
@@ -216,6 +219,7 @@ public final class ForgeConstants {
     public static String USER_GAMES_DIR;
     public static String LOG_FILE;
     public static String DECK_BASE_DIR;
+    public static String ACHIEVEMENTS_DIR;
     public static String DECK_CONSTRUCTED_DIR;
     public static String DECK_DRAFT_DIR;
     public static String DECK_WINSTON_DIR;

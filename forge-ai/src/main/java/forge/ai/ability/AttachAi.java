@@ -1044,6 +1044,13 @@ public class AttachAi extends SpellAbilityAi {
                     aic.reserveManaSourcesForMain2(futureSpell);
                 }
             }
+
+            // avoid randomly moving the equipment back and forth between several creatures in one turn
+            if (aic.getCardMemory().isRememberedCard(sa.getHostCard(), AiCardMemory.MemorySet.MOVED_EQUIPMENT)) {
+                return null;
+            } else {
+                aic.getCardMemory().rememberCard(sa.getHostCard(), AiCardMemory.MemorySet.MOVED_EQUIPMENT);
+            }
         }
 
         if ((c == null) && mandatory) {

@@ -102,6 +102,8 @@ public enum CounterType {
 
     FUSE(),
 
+    GEM(),
+
     GLYPH(),
 
     GOLD(),

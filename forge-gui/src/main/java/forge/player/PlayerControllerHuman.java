@@ -81,7 +81,6 @@ import forge.match.input.InputProxy;
 import forge.match.input.InputSelectCardsForConvoke;
 import forge.match.input.InputSelectCardsFromList;
 import forge.match.input.InputSelectEntitiesFromList;
-import forge.model.Achievement;
 import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.DevModeUtil;
@@ -1313,10 +1312,7 @@ public class PlayerControllerHuman extends PlayerController {
             ThreadUtil.invokeInGameThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (game == null) {
-                        return;
-                    }
-                    Achievement.updateAll(getGui(), player);
+                    FModel.getAchievements(game.getRules().getGameType()).updateAll(gui, player);
                 }
             });
         }

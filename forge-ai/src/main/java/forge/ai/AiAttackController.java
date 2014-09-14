@@ -615,7 +615,6 @@ public class AiAttackController {
                 attackersLeft.remove(attacker);
             }
         }
-        aiMemory.clearRememberedAttackers(); // avoid "leaking" remembered cards over to the next turn
         
         // Exalted
         if (combat.getAttackers().isEmpty()) {

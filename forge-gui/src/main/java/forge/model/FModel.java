@@ -21,11 +21,17 @@ import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
 import forge.FThreads;
 import forge.StaticData;
+import forge.achievement.AchievementCollection;
+import forge.achievement.ConstructedAchievements;
+import forge.achievement.DraftAchievements;
+import forge.achievement.QuestAchievements;
+import forge.achievement.SealedAchievements;
 import forge.ai.AiProfileUtil;
 import forge.card.CardPreferences;
 import forge.card.CardType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.game.card.CardUtil;
 import forge.gauntlet.GauntletData;
 import forge.interfaces.IGuiBase;
@@ -44,7 +50,9 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The default Model implementation for Forge.
@@ -62,6 +70,8 @@ public class FModel {
 
     private static QuestPreferences questPreferences;
     private static ForgePreferences preferences;
+
+    private static Map<GameType, AchievementCollection> achievements;
 
     // Someone should take care of 2 gauntlets here
     private static GauntletData gauntletData;
@@ -155,8 +165,13 @@ public class FModel {
         CardPreferences.load();
         DeckPreferences.load();
         ItemManagerConfig.load();
-        Achievement.load();
-        
+
+        achievements = new HashMap<GameType, AchievementCollection>();
+        achievements.put(GameType.Constructed, new ConstructedAchievements());
+        achievements.put(GameType.Draft, new DraftAchievements());
+        achievements.put(GameType.Sealed, new SealedAchievements());
+        achievements.put(GameType.Quest, new QuestAchievements());
+
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
     }
@@ -248,6 +263,23 @@ public class FModel {
 
     public static ForgePreferences getPreferences() {
         return preferences;
+    }
+
+    public static AchievementCollection getAchievements(GameType gameType) {
+        switch (gameType) { //translate gameType to appropriate type if needed
+        case Constructed:
+        case Draft:
+        case Sealed:
+        case Quest:
+            break;
+        case QuestDraft:
+            gameType = GameType.Quest;
+            break;
+        default:
+            gameType = GameType.Constructed;
+            break;
+        }
+        return achievements.get(gameType);
     }
 
     public static IStorage<CardBlock> getBlocks() {

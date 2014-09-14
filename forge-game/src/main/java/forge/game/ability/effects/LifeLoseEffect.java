@@ -48,6 +48,13 @@ public class LifeLoseEffect extends SpellAbilityEffect {
             }
         }
         sa.getHostCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
+
+        // Exceptional case for Extort: must propagate the amount of life lost to subability, 
+        // otherwise the first Extort trigger per game won't work
+        if (sa.getHostCard().hasKeyword("Extort") && sa.getSubAbility() != null) {
+            sa.getSubAbility().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
+        }
+        
     }
 
 }

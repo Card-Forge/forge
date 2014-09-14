@@ -42,6 +42,7 @@ public class AiCardMemory {
 
     private HashSet<Card> memMandatoryAttackers = new HashSet<Card>();
     private HashSet<Card> memHeldManaSources = new HashSet<Card>();
+    private HashSet<Card> memMovedEquipment = new HashSet<Card>();
     //private HashSet<Card> memRevealedCards = new HashSet<Card>();
 
     /**
@@ -52,6 +53,7 @@ public class AiCardMemory {
     public enum MemorySet {
         MANDATORY_ATTACKERS,
         HELD_MANA_SOURCES, 
+        MOVED_EQUIPMENT,
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
@@ -61,6 +63,8 @@ public class AiCardMemory {
                 return memMandatoryAttackers;
             case HELD_MANA_SOURCES:
                 return memHeldManaSources;
+            case MOVED_EQUIPMENT:
+                return memMovedEquipment;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -233,6 +237,13 @@ public class AiCardMemory {
     }
 
     /**
+     * Clears the "remembered moved equipment" memory set stored in this card memory for the given player.
+     */
+    public void clearRememberedMovedEquipment() {
+        getMemorySet(MemorySet.MOVED_EQUIPMENT).clear();
+    }
+
+    /**
      * Clears the "remembered revealed cards" memory set stored in this card memory for the given player.
      */
     //public void clearRememberedRevealedCards() {
@@ -245,6 +256,7 @@ public class AiCardMemory {
     public void clearAllRemembered() {
         clearRememberedAttackers();
         clearRememberedManaSources();
+        clearRememberedMovedEquipment();
         //clearRememberedRevealedCards();
     }
 }

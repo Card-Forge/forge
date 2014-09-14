@@ -212,8 +212,7 @@ public enum FControl implements KeyEventDispatcher {
         return true;
     }
 
-    /** After view and model have been initialized, control can start.
-     * @param isHeadlessMode */
+    /** After view and model have been initialized, control can start.*/
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);

@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.CardDetailUtil;
 import forge.card.CardDetailUtil.DetailColors;
 import forge.card.CardEdition;
+import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.model.FModel;
@@ -100,28 +101,28 @@ public class CardDetailPanel extends SkinnedPanel {
 
     @Override
     public void doLayout() {
-    	int insets = 3;
-    	int setInfoWidth = 40;
-    	int x = insets;
-    	int y = insets;
-    	int lineWidth = getWidth() - 2 * insets;
-    	int lineHeight = this.nameCostLabel.getPreferredSize().height;
-    	int dy = lineHeight + 1;
+        int insets = 3;
+        int setInfoWidth = 40;
+        int x = insets;
+        int y = insets;
+        int lineWidth = getWidth() - 2 * insets;
+        int lineHeight = this.nameCostLabel.getPreferredSize().height;
+        int dy = lineHeight + 1;
 
-    	this.nameCostLabel.setBounds(x, y, lineWidth, lineHeight);
-    	y += dy;
+        this.nameCostLabel.setBounds(x, y, lineWidth, lineHeight);
+        y += dy;
 
-    	this.typeLabel.setBounds(x, y, lineWidth, lineHeight);
-    	y += dy;
+        this.typeLabel.setBounds(x, y, lineWidth, lineHeight);
+        y += dy;
 
-    	this.idLabel.setBounds(x, y, this.idLabel.getAutoSizeWidth(), lineHeight);
-    	this.powerToughnessLabel.setBounds(x, y, lineWidth, lineHeight);
+        this.idLabel.setBounds(x, y, this.idLabel.getAutoSizeWidth(), lineHeight);
+        this.powerToughnessLabel.setBounds(x, y, lineWidth, lineHeight);
 
-    	//+1 to x,y so set info label right up against border and the baseline matches ID and P/T
-    	this.setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, lineHeight);
-    	y += dy;
+        //+1 to x,y so set info label right up against border and the baseline matches ID and P/T
+        this.setInfoLabel.setBounds(x + lineWidth - setInfoWidth + 1, y + 1, setInfoWidth, lineHeight);
+        y += dy;
 
-    	this.scrArea.setBounds(0, y, getWidth(), getHeight() - y);
+        this.scrArea.setBounds(0, y, getWidth(), getHeight() - y);
     }
 
     public final void setItem(final InventoryItemFromSet item) {
@@ -193,7 +194,7 @@ public class CardDetailPanel extends SkinnedPanel {
             this.nameCostLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatCardName(state) + " - " + manaCost, true));
         }
         this.typeLabel.setText(CardDetailUtil.formatCardType(state));
-
+            
         String set = card.getSetCode();
         this.setInfoLabel.setText(set);
         if (null != set && !set.isEmpty()) {
@@ -244,6 +245,12 @@ public class CardDetailPanel extends SkinnedPanel {
 
         // fill the card text
         this.cdArea.setText(FSkin.encodeSymbols(CardDetailUtil.composeCardText(state), true));
+
+        if (card.isFaceDown() && card.getZone() == ZoneType.Battlefield) {
+            this.nameCostLabel.setText("???");
+            this.typeLabel.setText("Creature");
+            this.cdArea.setText(FSkin.encodeSymbols("(You may look at this card.)", true));
+        }
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

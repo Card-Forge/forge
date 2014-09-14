@@ -13,6 +13,7 @@ import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.screens.home.sanctioned.VSubmenuDraft;
 import forge.screens.home.sanctioned.VSubmenuSealed;
 import forge.screens.home.sanctioned.VSubmenuWinston;
+import forge.screens.home.settings.VSubmenuAchievements;
 import forge.screens.home.settings.VSubmenuAvatars;
 import forge.screens.home.settings.VSubmenuDownloaders;
 import forge.screens.home.settings.VSubmenuPreferences;
@@ -55,6 +56,7 @@ public enum EDocID { /** */
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
+    HOME_ACHIEVEMENTS (VSubmenuAchievements.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
     HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE), /** */
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
