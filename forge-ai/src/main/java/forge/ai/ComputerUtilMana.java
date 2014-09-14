@@ -334,6 +334,9 @@ public class ComputerUtilMana {
             if (test) {
                 refundMana(manaSpentToPay, ai, sa);
             }
+            else {
+                manaSpentToPay.clear(); //prevent mana spent to pay sticking around such that it can cause an improper refund later
+            }
             handleOfferingsAI(sa, test, cost.isPaid());
             return true;
         }
@@ -460,6 +463,9 @@ public class ComputerUtilMana {
 
         if (test) {
             refundMana(manaSpentToPay, ai, sa);
+        }
+        else {
+            manaSpentToPay.clear(); //prevent mana spent to pay sticking around such that it can cause an improper refund later
         }
         sa.getHostCard().setColorsPaid(cost.getColorsPaid());
         // if (sa instanceof Spell_Permanent) // should probably add this
