@@ -2462,7 +2462,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 			String elementText = element.toString();
 
 			//Determine if a card has multiple choices, then format it in an easier to read list.
-			if (element.getApi().equals(ApiType.Charm)) {
+			if (element.getApi() != null && element.getApi().equals(ApiType.Charm)) {
 				
 				String chooseText = elementText.split("-")[0].trim();
 				sb.append(chooseText).append("&#151;\r\n");
