@@ -41,7 +41,6 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
@@ -198,7 +197,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int semiPermanentDefenseBoost = 0;
 
     private int xManaCostPaid = 0;
-    private ArrayList<Mana> xManaCostPaidByColor = new ArrayList<>();
+    private Map<String, Integer> xManaCostPaidByColor;
 
     private int sunburstValue = 0;
     private byte colorsPaid = 0;
@@ -892,18 +891,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addXManaCostPaid.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void addXManaCostPaid(final int n) {
-        this.xManaCostPaid += n;
-    }
-
-    /**
-     * <p>
      * Setter or the field <code>xManaCostPaid</code>.
      * </p>
      * 
@@ -919,10 +906,22 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Getter for the field <code>xManaCostPaidByColor</code>.
      * </p>
      * 
-     * @return an ArrayList<Mana>.
+     * @return an Map<String, Integer><Mana>.
      */
-    public final ArrayList<Mana> getXManaCostPaidByColor() {
+    public final Map<String, Integer> getXManaCostPaidByColor() {
         return this.xManaCostPaidByColor;
+    }
+
+    /**
+     * <p>
+     * setXManaCostPaidByColor.
+     * </p>
+     * 
+     * @param xByColor
+     *            an ArrayList<Mana>.
+     */
+    public final void setXManaCostPaidByColor(final Map<String, Integer> xByColor) {
+        this.xManaCostPaidByColor = xByColor;
     }
 
     /**
@@ -934,26 +933,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getXManaCostPaidCount(final String colors) {
         int count = 0;
-
-        for (Mana m : this.xManaCostPaidByColor) {
-            if (colors.contains(m.toString())) {
-                count++;
+        if (xManaCostPaidByColor != null) {
+            for (Entry<String, Integer> m : xManaCostPaidByColor.entrySet()) {
+                if (colors.contains(m.getKey())) {
+                    count += m.getValue();
+                }
             }
         }
-
         return count;
-    }
-
-    /**
-     * <p>
-     * addXManaCostPaidByColor.
-     * </p>
-     * 
-     * @param xByColor
-     *            an ArrayList<Mana>.
-     */
-    public final void addXManaCostPaidByColor(final ArrayList<Mana> xByColor) {
-        this.xManaCostPaidByColor.addAll(xByColor);
     }
 
     /**

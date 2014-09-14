@@ -199,8 +199,8 @@ public class CardFactory {
         copySA.setActivatingPlayer(controller);
 
         if (bCopyDetails) {
-            c.addXManaCostPaid(original.getXManaCostPaid());
-            c.addXManaCostPaidByColor(original.getXManaCostPaidByColor());
+            c.setXManaCostPaid(original.getXManaCostPaid());
+            c.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
             c.setKickerMagnitude(original.getKickerMagnitude());
 
             for (OptionalCost cost : original.getOptionalCostsPaid()) {

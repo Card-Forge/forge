@@ -733,6 +733,7 @@ public class HumanPlay {
                 return handleOfferingAndConvoke(ability, true, false);
             }
 
+            source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
             source.setColorsPaid(toPay.getColorsPaid());
             source.setSunburstValue(toPay.getSunburst());
         }
