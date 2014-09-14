@@ -1146,14 +1146,8 @@ public class AiController {
         return canPlaySpellBasic(card);
     }
 
-    public SpellAbility choooseSpellAbilityToPlay() {
+    public SpellAbility chooseSpellAbilityToPlay() {
         final PhaseType phase = game.getPhaseHandler().getPhase();
-
-        if (phase == PhaseType.END_OF_TURN) {
-            // for the next turn, make sure the decision to play SAs won't be affected by previously remembered decisions
-            // TODO: if the card memory is ever used for anything that should be remembered for more than a turn, make sure it's not cleared here.
-            getCardMemory().clearAllRemembered();
-        }
 
         if (game.getStack().isEmpty() && phase.isMain()) {
             Log.debug("Computer " + phase.nameForUi);

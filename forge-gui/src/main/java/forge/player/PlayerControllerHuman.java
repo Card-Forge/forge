@@ -1179,4 +1179,9 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean isGuiPlayer() {
         return lobbyPlayer == GuiBase.getInterface().getGuiPlayer();
     }
+
+    @Override
+    public void resetAtEndOfTurn() {
+        // Not used by the human controller
+    }
 }

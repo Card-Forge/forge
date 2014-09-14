@@ -270,6 +270,8 @@ public abstract class PlayerController {
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
+    public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
+
     public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean isActivatedAbility) {
         return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, isActivatedAbility);
     }
