@@ -584,7 +584,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     return true;
                 }
                 if (opposing.isEmpty() || !pumpedWillDie) {
-                    if (pumpedDmg > c.getBaseAttack()) {
+                    if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").contains("+")) {
                         return true;
                     }
                 }
