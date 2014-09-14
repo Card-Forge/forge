@@ -234,10 +234,10 @@ public class HumanPlaySpellAbility {
                 if (value == null) {
                     return false;
                 }
-    
+
                 ability.setSVar("X", value.toString());
                 card.setSVar("X", value.toString());
-    
+
                 // announce to sub-abilities
                 SpellAbility sub = ability;
                 while ((sub = sub.getSubAbility()) != null) {
