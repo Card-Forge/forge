@@ -228,7 +228,9 @@ public class CardCharacteristics {
 
     public final void setSpellAbility(SpellAbility sa) {
     	this.spellAbility.clear();
-    	this.spellAbility.add(sa);
+    	if (sa != null) {
+    	    this.spellAbility.add(sa);
+    	}
     }
 
     /**
