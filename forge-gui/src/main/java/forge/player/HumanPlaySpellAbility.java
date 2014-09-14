@@ -229,7 +229,7 @@ public class HumanPlaySpellAbility {
 
         if (needX && manaCost != null && manaCost.getAmountOfX() > 0) {
             String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
-            if ("Count$xPaid".equals(sVar) || StringUtils.isNumeric(sVar)) {
+            if ("Count$xPaid".equals(sVar) || StringUtils.isNumeric(sVar) || sVar.isEmpty()) {
                 Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
                 if (value == null) {
                     return false;
