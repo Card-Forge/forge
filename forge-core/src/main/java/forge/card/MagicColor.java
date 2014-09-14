@@ -24,27 +24,46 @@ public class MagicColor {
     public static final byte[] WUBRG = new byte[] { WHITE, BLUE, BLACK, RED, GREEN }; 
     
     public static byte fromName(String s) {
-        if( s == null ) return 0;
-        if (s.equalsIgnoreCase(Constant.WHITE) || s.equalsIgnoreCase("w")) {
-            return MagicColor.WHITE;
+        if (s == null) {
+            return 0;
         }
-        if (s.equalsIgnoreCase(Constant.BLUE) || s.equalsIgnoreCase("u")) {
-            return MagicColor.BLUE;
+        if (s.length() == 2) { //if name is two characters, check for combination of two colors
+            return (byte)(fromName(s.charAt(0)) | fromName(s.charAt(1)));
         }
-        if (s.equalsIgnoreCase(Constant.BLACK) || s.equalsIgnoreCase("b")) {
-            return MagicColor.BLACK;
+        s = s.toLowerCase();
+        if (s.length() == 1) {
+            switch (s) {
+            case "w":
+                return MagicColor.WHITE;
+            case "u":
+                return MagicColor.BLUE;
+            case "b":
+                return MagicColor.BLACK;
+            case "r":
+                return MagicColor.RED;
+            case "g":
+                return MagicColor.GREEN;
+            }
         }
-        if (s.equalsIgnoreCase(Constant.RED) || s.equalsIgnoreCase("r")) {
-            return MagicColor.RED;
-        }
-        if (s.equalsIgnoreCase(Constant.GREEN) || s.equalsIgnoreCase("g")) {
-            return MagicColor.GREEN;
+        else {
+            switch (s) {
+            case Constant.WHITE:
+                return MagicColor.WHITE;
+            case Constant.BLUE:
+                return MagicColor.BLUE;
+            case Constant.BLACK:
+                return MagicColor.BLACK;
+            case Constant.RED:
+                return MagicColor.RED;
+            case Constant.GREEN:
+                return MagicColor.GREEN;
+            }
         }
         return 0; // colorless
     }
     
     public static byte fromName(char c) {
-        switch(Character.toLowerCase(c)) {
+        switch (Character.toLowerCase(c)) {
             case 'w': return MagicColor.WHITE;
             case 'u': return MagicColor.BLUE;
             case 'b': return MagicColor.BLACK;
@@ -55,17 +74,17 @@ public class MagicColor {
     }
 
     public static String toShortString(String color) {
-        if (color.equalsIgnoreCase(Constant.SNOW)) return "S"; // compatibility
+        if (color.equalsIgnoreCase(Constant.SNOW)) { return "S"; } // compatibility
         return toShortString(fromName(color));
     }
     
     public static String toLongString(String color) {
-        if (color.equalsIgnoreCase("s")) return Constant.SNOW; // compatibility
+        if (color.equalsIgnoreCase("s")) { return Constant.SNOW; } // compatibility
         return toLongString(fromName(color));
     }
         
     public static String toShortString(byte color) {
-        switch(color){
+        switch (color){
             case GREEN: return "G";
             case RED: return "R";
             case BLUE: return "U";
@@ -87,9 +106,10 @@ public class MagicColor {
     }
     
     public static int getIndexOfFirstColor(byte color){
-        for(int i = 0; i < NUMBER_OR_COLORS; i++) {
-            if ((color & WUBRG[i]) != 0)
+        for (int i = 0; i < NUMBER_OR_COLORS; i++) {
+            if ((color & WUBRG[i]) != 0) {
                 return i;
+            }
         }
         return -1; // colorless
     }

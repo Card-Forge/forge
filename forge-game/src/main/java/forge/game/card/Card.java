@@ -946,18 +946,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter or the field <code>xManaCostPaidByColor</code>.
-     * </p>
-     * 
-     * @param n
-     *            an ArrayList<Mana>.
-     */
-    public final void setXManaCostPaidByColor(final ArrayList<Mana> xByColor) {
-        this.xManaCostPaidByColor = xByColor;
-    }
-
-    /**
-     * <p>
      * addXManaCostPaidByColor.
      * </p>
      * 
