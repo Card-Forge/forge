@@ -228,19 +228,22 @@ public class HumanPlaySpellAbility {
         }
 
         if (needX && manaCost != null && manaCost.getAmountOfX() > 0) {
-            Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
-            if (value == null) {
-                return false;
+            String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
+            if ("Count$xPaid".equals(sVar) || StringUtils.isNumeric(sVar)) {
+                Integer value = controller.announceRequirements(ability, "X", allowZero && manaCost.canXbe0());
+                if (value == null) {
+                    return false;
+                }
+    
+                ability.setSVar("X", value.toString());
+                card.setSVar("X", value.toString());
+    
+                // announce to sub-abilities
+                SpellAbility sub = ability;
+                while ((sub = sub.getSubAbility()) != null) {
+                    sub.setSVar("X", value.toString());
+                }
             }
-
-            ability.setSVar("X", value.toString());
-            card.setSVar("X", value.toString());
-
-            // announce to subabilities
-            SpellAbility sub = ability;
-            while ((sub = sub.getSubAbility()) != null) {
-                sub.setSVar("X", value.toString());
-            };
         }
         return true;
     }
