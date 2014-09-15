@@ -25,6 +25,8 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
 
+import com.beust.jcommander.internal.Lists;
+
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -153,7 +155,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
             temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
             temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
             temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
-            List<String> keywords = p0.getKeywords();
+            List<String> keywords = Lists.newArrayList(p0.getKeywords());
             while (keywords.indexOf("CanSeeOpponentsFaceDownCards") != -1) {
                 keywords.remove("CanSeeOpponentsFaceDownCards");
             }
