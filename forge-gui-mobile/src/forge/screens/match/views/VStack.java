@@ -56,8 +56,8 @@ public class VStack extends FDropDown {
 
     private int stackSize;
 
-    public VStack(IGameView stack0, PlayerView localPlayer0) {
-        gameView = stack0;
+    public VStack(IGameView gameView0, PlayerView localPlayer0) {
+        gameView = gameView0;
         localPlayer = localPlayer0;
     }
 
