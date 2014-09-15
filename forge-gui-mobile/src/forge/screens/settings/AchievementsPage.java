@@ -190,7 +190,7 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
             }
             y += topHeight;
 
-            while (true) {
+            for (int i = 0; i < shelfCount; i++) {
                 if (y + shelfHeight > 0) {
                     g.drawImage(FSkinTexture.BG_TROPHY_CASE_SHELF, x, y, w, shelfHeight);
                 }
