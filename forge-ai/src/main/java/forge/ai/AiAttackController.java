@@ -196,7 +196,7 @@ public class AiAttackController {
         }
 
         final Player opp = this.defendingOpponent;
-        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat) > 0) {
+        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, false) > 0) {
             return true;
         }
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
@@ -401,7 +401,7 @@ public class AiAttackController {
                 blockersLeft--;
                 continue;
             }
-            totalAttack += ComputerUtilCombat.damageIfUnblocked(attacker, ai, null);
+            totalAttack += ComputerUtilCombat.damageIfUnblocked(attacker, ai, null, false);
             totalPoison += ComputerUtilCombat.poisonIfUnblocked(attacker, ai);
         }
 
@@ -696,7 +696,7 @@ public class AiAttackController {
             if (ComputerUtil.canAttackNextTurn(pCard)) {
                 candidateAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
-                    candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null);
+                    candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
                     computerForces += 1;
                 }
             }
@@ -784,7 +784,7 @@ public class AiAttackController {
                 }
             }
             if (isUnblockableCreature) {
-                unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat);
+                unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, false);
             }
         }
         for (final Card attacker : nextTurnAttackers) {
@@ -798,7 +798,7 @@ public class AiAttackController {
                 }
             }
             if (isUnblockableCreature) {
-                nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, null);
+                nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, null, false);
             }
         }
         if (unblockableDamage > 0 && !opp.cantLoseForZeroOrLessLife()
@@ -872,7 +872,7 @@ public class AiAttackController {
                     CardLists.sortByPowerAsc(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers, combat)) {
-                            damage += ComputerUtilCombat.damageIfUnblocked(atta, opp, null);
+                            damage += ComputerUtilCombat.damageIfUnblocked(atta, opp, null, false);
                         } else if (CombatUtil.canBeBlocked(attacker, this.blockers, combat)) {
                             attackNum++;
                         }

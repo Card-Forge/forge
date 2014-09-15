@@ -1002,7 +1002,7 @@ public class ComputerUtilCard {
         float threat = 0;
         if (c.isCreature()) {
             Combat combat = ai.getGame().getCombat();
-            threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat) / ai.getLife();
+            threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
             //TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
         } else {
             for (final StaticAbility stAb : c.getStaticAbilities()) {

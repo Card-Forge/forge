@@ -118,13 +118,13 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat) {
+    public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat, boolean withoutAbilities) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
         if (!attacked.canLoseLife()) {
             return 0;
         }
-        damage += ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, null, combat, false);
+        damage += ComputerUtilCombat.predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
         if (!attacker.hasKeyword("Infect")) {
             sum = ComputerUtilCombat.predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasKeyword("Double Strike")) {
@@ -179,7 +179,7 @@ public class ComputerUtilCombat {
     public static int sumDamageIfUnblocked(final List<Card> attackers, final Player attacked) {
         int sum = 0;
         for (final Card attacker : attackers) {
-            sum += ComputerUtilCombat.damageIfUnblocked(attacker, attacked, null);
+            sum += ComputerUtilCombat.damageIfUnblocked(attacker, attacked, null, false);
         }
         return sum;
     }
@@ -293,7 +293,7 @@ public class ComputerUtilCombat {
         for(Card c : combat.getAttackers()) {
             if(c.isCommander()) {
                 int currentCommanderDamage = ai.getCommanderDamage().containsKey(c) ? ai.getCommanderDamage().get(c) : 0;                
-                if (damageIfUnblocked(c, ai, combat) + currentCommanderDamage >= 21)
+                if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= 21)
                     res.add(c);
             }
         }

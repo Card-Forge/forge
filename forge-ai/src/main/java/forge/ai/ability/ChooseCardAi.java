@@ -81,7 +81,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                             return false;
                         }
                         int ref = host.getName().equals("Forcefield") ? 1 : 0;
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > ref;
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
                     }
                 });
                 if (choices.isEmpty()) {
@@ -157,7 +157,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                         return false;
                     }
                     int ref = host.getName().equals("Forcefield") ? 1 : 0; 
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > ref;
+                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
                 }
             });
             if (!better.isEmpty()) {

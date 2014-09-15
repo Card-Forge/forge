@@ -109,7 +109,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                         if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                             return false;
                         }
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
                     }
                 });
                 if (choices.isEmpty()) {
@@ -144,7 +144,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     		|| combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
+                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
                 }
             });
             return ComputerUtilCard.getBestCreatureAI(permanentSources);

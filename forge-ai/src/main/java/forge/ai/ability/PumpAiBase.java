@@ -484,7 +484,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
             //1. become attacker for whatever reason
             if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat) / opp.getLife();
+                float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
                     threat *= 2;
                 }
@@ -495,7 +495,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (keywords.contains("Haste") && c.hasSickness() && !c.isTapped()) {
                 chance += 0.5f;
                 if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat) / opp.getLife();
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 }
             }
             
@@ -503,7 +503,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
                 if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
                         && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
-                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat) / opp.getLife();
+                    chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 }
             }
         }
@@ -566,8 +566,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             
             //3. buff attacker
             if (combat.isAttacking(c)) {
-                int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat);
-                int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat);
+                int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
+                int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
                 if (combat.isBlocked(c)) {
                     if (!c.hasKeyword("Trample")) {
                         dmg = 0;
