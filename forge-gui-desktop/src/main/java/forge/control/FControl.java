@@ -42,7 +42,6 @@ import forge.GuiBase;
 import forge.ImageCache;
 import forge.LobbyPlayer;
 import forge.Singletons;
-import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
 import forge.assets.FSkinProp;
 import forge.control.KeyboardShortcuts.Shortcut;
@@ -88,9 +87,6 @@ import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.special.PhaseIndicator;
-import forge.util.GuiDisplayUtil;
-import forge.util.MyRandom;
-import forge.util.NameGenerator;
 import forge.view.FFrame;
 import forge.view.FView;
 import forge.view.IGameView;
@@ -730,38 +726,8 @@ public enum FControl implements KeyEventDispatcher {
         //Singletons.getView().getViewMatch().setLayoutParams(prefs.getPref(FPref.UI_LAYOUT_PARAMS));
     }
 
-    // Ai player creation, will stay here for a while 
-    
-    /** Returns a random name from the supplied list. */
-    public String getRandomName() {
-        String playerName = GuiDisplayUtil.getPlayerName();
-        String aiName = NameGenerator.getRandomName("Any", "Generic", playerName);
-        return aiName;
-    }
-    
-    public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
-    public final LobbyPlayer getAiPlayer(String name) {
-        int avatarCount = GuiBase.getInterface().getAvatarCount();
-        return getAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount));
-    }
-    public final LobbyPlayer getAiPlayer(String name, int avatarIndex) {
-        LobbyPlayerAi player = new LobbyPlayerAi(name);
-
-        // TODO: implement specific AI profiles for quest mode.
-        String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
-        player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
-        if(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
-            lastProfileChosen = AiProfileUtil.getRandomProfile();
-            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
-        }
-        player.setAiProfile(lastProfileChosen);
-        player.setAvatarIndex(avatarIndex);
-        return player;
-    }
-
-    private final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human", GuiBase.getInterface());
     public final LobbyPlayer getGuiPlayer() {
-        return guiPlayer;
+        return GamePlayerUtil.getGuiPlayer();
     }
 }
 

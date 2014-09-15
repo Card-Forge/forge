@@ -1,6 +1,5 @@
 package forge.screens.match.views;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
@@ -10,6 +9,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.player.GamePlayerUtil;
 import forge.screens.match.FControl;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
@@ -48,7 +48,7 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem("Deck List", FSkinImage.DECKLIST, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final LobbyPlayer guiPlayer = GuiBase.getInterface().getGuiPlayer();
+                final LobbyPlayer guiPlayer = GamePlayerUtil.getGuiPlayer();
                 final Deck deck = FControl.getGameView().getDeck(guiPlayer);
                 if (deck != null) {
                     FDeckViewer.show(deck);

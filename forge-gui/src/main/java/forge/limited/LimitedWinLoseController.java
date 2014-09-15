@@ -4,6 +4,7 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.view.IGameView;
 
 public abstract class LimitedWinLoseController {
@@ -19,7 +20,7 @@ public abstract class LimitedWinLoseController {
         lastGame = game0;
         this.gui = gui;
         gauntlet = FModel.getGauntletMini(gui);
-        wonMatch = lastGame.isMatchWonBy(gui.getGuiPlayer());
+        wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getGuiPlayer());
     }
 
     public void showOutcome() {
@@ -31,7 +32,7 @@ public abstract class LimitedWinLoseController {
         resetView();
         nextRound = false;
 
-        if (lastGame.isWinner(gui.getGuiPlayer())) {
+        if (lastGame.isWinner(GamePlayerUtil.getGuiPlayer())) {
             gauntlet.addWin();
         } else {
             gauntlet.addLoss();

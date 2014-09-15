@@ -53,6 +53,7 @@ import forge.interfaces.IGuiBase;
 import forge.match.input.ButtonUtil;
 import forge.match.input.InputBase;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.gui.SGuiChoose;
@@ -309,7 +310,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventAttackersDeclared event) {
         // Skip redraw for GUI player?
-        if (event.player.getLobbyPlayer() == gui.getGuiPlayer()) {
+        if (event.player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
             return null;
         }
 

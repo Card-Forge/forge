@@ -13,6 +13,7 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.view.IGameView;
 
 public abstract class GauntletWinLoseController {
@@ -48,7 +49,7 @@ public abstract class GauntletWinLoseController {
         // the player can restart Forge to replay a match.
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
-        LobbyPlayer questPlayer = gui.getQuestPlayer();
+        LobbyPlayer questPlayer = GamePlayerUtil.getGuiPlayer();
 
         // In all cases, update stats.
         lstEventRecords.set(gd.getCompleted(), lastGame.getGamesWonBy(questPlayer) + " - "
@@ -115,8 +116,8 @@ public abstract class GauntletWinLoseController {
             GauntletData gd = FModel.getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
-            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(gui.getGuiPlayer()));
-            players.add(new RegisteredPlayer(aiDeck).setPlayer(gui.createAiPlayer()));
+            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+            players.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
             view.hide();
             saveOptions();

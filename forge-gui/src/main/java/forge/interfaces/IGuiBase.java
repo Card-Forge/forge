@@ -90,11 +90,6 @@ public interface IGuiBase {
     int getAvatarCount();
     void copyToClipboard(String text);
     void browseToUrl(String url) throws Exception;
-	LobbyPlayer getGuiPlayer();
-    LobbyPlayer getAiPlayer(String name);
-	LobbyPlayer createAiPlayer();
-	LobbyPlayer createAiPlayer(String name, int avatarIndex);
-	LobbyPlayer getQuestPlayer();
     IAudioClip createAudioClip(String filename);
     IAudioMusic createAudioMusic(String filename);
     void startAltSoundSystem(String filename, boolean isSynchronized);

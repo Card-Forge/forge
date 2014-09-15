@@ -51,6 +51,7 @@ import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.match.CMatchUI;
@@ -250,7 +251,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public void updatePlayerControl() {
-        CMatchUI.SINGLETON_INSTANCE.initHandViews(getGuiPlayer());
+        CMatchUI.SINGLETON_INSTANCE.initHandViews(GamePlayerUtil.getGuiPlayer());
         SLayoutIO.loadLayout(null);
         VMatchUI.SINGLETON_INSTANCE.populate();
         for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
@@ -503,31 +504,6 @@ public class GuiDesktop implements IGuiBase {
     public void browseToUrl(String url) throws Exception {
         Desktop.getDesktop().browse(new URI(url));
     }
-
-	@Override
-	public LobbyPlayer getGuiPlayer() {
-		return FControl.instance.getGuiPlayer();
-	}
-
-    @Override
-    public LobbyPlayer getAiPlayer(String name) {
-        return FControl.instance.getAiPlayer(name);
-    }
-
-	@Override
-	public LobbyPlayer createAiPlayer() {
-		return FControl.instance.getAiPlayer();
-	}
-
-	@Override
-	public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
-		return FControl.instance.getAiPlayer(name, avatarIndex);
-	}
-
-	@Override
-	public LobbyPlayer getQuestPlayer() {
-		return getGuiPlayer();
-	}
 
     @Override
     public IAudioClip createAudioClip(String filename) {

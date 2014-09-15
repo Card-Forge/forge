@@ -10,6 +10,7 @@ import forge.events.UiEvent;
 import forge.game.event.GameEvent;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences.FPref;
 
@@ -29,7 +30,7 @@ public class SoundSystem {
 
     public SoundSystem(final IGuiBase gui) {
         this.gui = gui;
-        this.visualizer = new EventVisualizer(gui.getGuiPlayer());
+        this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
     }
     private boolean isUsingAltSystem() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_SOUND_SYSTEM);

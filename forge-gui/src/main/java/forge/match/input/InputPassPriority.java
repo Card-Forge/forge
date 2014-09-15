@@ -24,6 +24,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
@@ -100,7 +101,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             final Game game = player.getGame();
             if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
                 Player player = game.getPhaseHandler().getPriorityPlayer();
-                if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == getGui().getGuiPlayer()) {
+                if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
                     ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread so dialog can be shown on mobile game
                         @Override
                         public void run() {

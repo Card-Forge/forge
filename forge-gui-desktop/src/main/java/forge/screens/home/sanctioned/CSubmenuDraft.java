@@ -16,6 +16,7 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
@@ -137,13 +138,13 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GuiBase.getInterface().getGuiPlayer()));
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GuiBase.getInterface().createAiPlayer()));
+        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
         for (RegisteredPlayer pl : starter) {
             pl.assignConspiracies();
         }
 
-        GuiBase.getInterface().startMatch(GameType.Draft, starter);
+        Singletons.getControl().startMatch(GameType.Draft, starter);
     }
 
     /** */

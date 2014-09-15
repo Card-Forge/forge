@@ -1,5 +1,7 @@
 package forge;
 
+import org.apache.commons.lang3.StringUtils;
+
 /** 
  * This means a player's part unchanged for all games.
  * 
@@ -7,10 +9,8 @@ package forge;
  *
  */
 public abstract class LobbyPlayer {
-    
-    protected final String name;
+    protected String name;
     private int avatarIndex = -1;
-
 
     public LobbyPlayer(String name) {
         this.name = name;
@@ -18,6 +18,10 @@ public abstract class LobbyPlayer {
 
     public String getName() {
         return name;
+    }
+    public void setName(String name0) {
+        if (StringUtils.isEmpty(name0)) { return; } //don't allow setting name to nothing
+        name = name0;
     }
 
     @Override

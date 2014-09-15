@@ -27,6 +27,7 @@ import forge.assets.FSkinProp;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.quest.QuestController;
 import forge.quest.QuestDraftUtils;
 import forge.screens.home.quest.CSubmenuChallenges;
@@ -78,7 +79,7 @@ public class QuestDraftWinLose extends ControlWinLose {
         
         QuestController quest = FModel.getQuest();
         
-        final LobbyPlayer questLobbyPlayer = GuiBase.getInterface().getQuestPlayer();
+        final LobbyPlayer questLobbyPlayer = GamePlayerUtil.getQuestPlayer();
         final List<PlayerView> players = lastGame.getPlayers();
         boolean gameHadHumanPlayer = false;
         for (final PlayerView p : players) {

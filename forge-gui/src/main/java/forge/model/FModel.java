@@ -38,6 +38,7 @@ import forge.interfaces.IGuiBase;
 import forge.interfaces.IProgressBar;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.GauntletMini;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgeConstants;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -91,6 +92,7 @@ public class FModel {
 		//Preferences are initialized first so that the splash screen can be translated.
 		try {
 			preferences = new ForgePreferences();
+			GamePlayerUtil.getGuiPlayer().setName(preferences.getPref(FPref.PLAYER_NAME));
 		}
 		catch (final Exception exn) {
 			throw new RuntimeException(exn);

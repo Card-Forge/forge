@@ -17,6 +17,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.util.Lang;
 
 public class SimulateMatch {
@@ -44,12 +45,13 @@ public class SimulateMatch {
         System.out.println(String.format("Ai-%s vs Ai_%s - %s", d1.getName(), d2.getName(), Lang.nounWithNumeral(nGames, "game")));
         
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
-        pp.add(new RegisteredPlayer(d1).setPlayer(GuiBase.getInterface().createAiPlayer("Ai-" + d1.getName(), 0)));
-        pp.add(new RegisteredPlayer(d2).setPlayer(GuiBase.getInterface().createAiPlayer("Ai_" + d2.getName(), 1)));
+        pp.add(new RegisteredPlayer(d1).setPlayer(GamePlayerUtil.createAiPlayer("Ai-" + d1.getName(), 0)));
+        pp.add(new RegisteredPlayer(d2).setPlayer(GamePlayerUtil.createAiPlayer("Ai_" + d2.getName(), 1)));
         GameRules rules = new GameRules(GameType.Constructed);
         Match mc = new Match(rules, pp);
-        for(int iGame = 0; iGame < nGames; iGame++)
+        for (int iGame = 0; iGame < nGames; iGame++) {
             simulateSingleMatch(mc, iGame);
+        }
         System.out.flush();
     }
     /**

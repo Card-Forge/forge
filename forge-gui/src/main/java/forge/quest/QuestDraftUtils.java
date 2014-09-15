@@ -14,6 +14,7 @@ import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.interfaces.IGuiBase;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.storage.IStorage;
 
@@ -145,12 +146,12 @@ public class QuestDraftUtils {
         if (humanIndex > -1) {
             
             matchup.hasHumanPlayer = true;
-            matchup.matchStarter.add(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(gui.getGuiPlayer()));
+            matchup.matchStarter.add(new RegisteredPlayer(decks.getHumanDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
 
             int aiName = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
             
             int aiDeckIndex = Integer.parseInt(draft.getStandings()[aiIndex]) - 1;
-            matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(gui.createAiPlayer(draft.getAINames()[aiName], draft.getAIIcons()[aiName])));
+            matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName], draft.getAIIcons()[aiName])));
             
         } else {
 
@@ -158,10 +159,10 @@ public class QuestDraftUtils {
             int aiName2 = Integer.parseInt(draft.getStandings()[player2]) - 1;
             
             int aiDeckIndex = Integer.parseInt(draft.getStandings()[player1]) - 1;
-            matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(gui.createAiPlayer(draft.getAINames()[aiName1], draft.getAIIcons()[aiName1])));
+            matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName1], draft.getAIIcons()[aiName1])));
 
             aiDeckIndex = Integer.parseInt(draft.getStandings()[player2]) - 1;
-            matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(gui.createAiPlayer(draft.getAINames()[aiName2], draft.getAIIcons()[aiName2])));
+            matchup.matchStarter.add(new RegisteredPlayer(decks.getAiDecks().get(aiDeckIndex)).setPlayer(GamePlayerUtil.createAiPlayer(draft.getAINames()[aiName2], draft.getAIIcons()[aiName2])));
             
         }
         

@@ -35,7 +35,6 @@ import forge.interfaces.IButton;
 import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.match.input.InputQueue;
-import forge.player.LobbyPlayerHuman;
 import forge.properties.ForgeConstants;
 import forge.screens.match.FControl;
 import forge.screens.match.views.VPlayerPanel;
@@ -441,32 +440,6 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void browseToUrl(String url) throws Exception {
         Gdx.net.openURI(url);
-    }
-
-    private final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human", this);
-    @Override
-    public LobbyPlayer getGuiPlayer() {
-        return guiPlayer;
-    }
-
-    @Override
-    public LobbyPlayer getAiPlayer(String name) {
-        return FControl.getAiPlayer(name);
-    }
-
-    @Override
-    public LobbyPlayer createAiPlayer() {
-        return FControl.getAiPlayer();
-    }
-
-    @Override
-    public LobbyPlayer createAiPlayer(String name, int avatarIndex) {
-        return FControl.getAiPlayer(name, avatarIndex);
-    }
-
-    @Override
-    public LobbyPlayer getQuestPlayer() {
-        return getGuiPlayer();
     }
 
     @Override

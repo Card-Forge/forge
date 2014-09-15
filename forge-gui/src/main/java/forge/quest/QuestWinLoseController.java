@@ -16,6 +16,7 @@ import forge.interfaces.IGuiBase;
 import forge.interfaces.IWinLoseView;
 import forge.item.*;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
@@ -47,7 +48,7 @@ public abstract class QuestWinLoseController {
         this.gui = gui;
         qData = FModel.getQuest();
         qEvent = qData.getCurrentEvent();
-        wonMatch = lastGame.isMatchWonBy(gui.getQuestPlayer());
+        wonMatch = lastGame.isMatchWonBy(GamePlayerUtil.getQuestPlayer());
         isAnte = FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -61,7 +62,7 @@ public abstract class QuestWinLoseController {
             qc.getCards().getShopList();
         }
 
-        final LobbyPlayer questLobbyPlayer = gui.getQuestPlayer();
+        final LobbyPlayer questLobbyPlayer = GamePlayerUtil.getQuestPlayer();
         PlayerView player = null;
         for (final PlayerView p : lastGame.getPlayers()) {
             if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
@@ -236,7 +237,7 @@ public abstract class QuestWinLoseController {
         boolean hasNeverLost = true;
         int lifeDifferenceCredits = 0;
 
-        final LobbyPlayer localHuman = gui.getQuestPlayer();
+        final LobbyPlayer localHuman = GamePlayerUtil.getQuestPlayer();
         for (final GameOutcome game : lastGame.getOutcomesOfMatch()) {
             if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;

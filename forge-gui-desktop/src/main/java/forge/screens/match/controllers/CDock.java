@@ -31,6 +31,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.match.CMatchUI;
@@ -115,7 +116,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     public void viewDeckList() {
-        final Deck deck = FControl.instance.getGameView().getDeck(GuiBase.getInterface().getGuiPlayer());
+        final Deck deck = FControl.instance.getGameView().getDeck(GamePlayerUtil.getGuiPlayer());
         if (deck != null) {
             FDeckViewer.show(deck);
         }

@@ -9,7 +9,6 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
-import forge.interfaces.IGuiBase;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.deck.DeckProxy;
@@ -20,6 +19,7 @@ import forge.toolbox.FOptionPane;
 import forge.itemmanager.ItemManagerConfig;
 import forge.limited.LimitedPoolType;
 import forge.limited.WinstonDraft;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 
 import javax.swing.*;
@@ -128,10 +128,9 @@ public enum CSubmenuWinston implements ICDoc {
             throw new IllegalStateException("Draft: Computer deck is null!");
         }
 
-        IGuiBase fc = GuiBase.getInterface();
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(fc.getGuiPlayer()));
-        starter.add(new RegisteredPlayer(aiDeck).setPlayer(fc.createAiPlayer()));
+        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
 
         Singletons.getControl().startMatch(GameType.Winston, starter);
     }

@@ -39,6 +39,7 @@ import forge.interfaces.IGuiBase;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestItemType;
@@ -564,9 +565,9 @@ public class QuestUtil {
         }
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        starter.add(humanStart.setPlayer(gui.getQuestPlayer()));
+        starter.add(humanStart.setPlayer(GamePlayerUtil.getQuestPlayer()));
 
-        LobbyPlayer aiPlayer = gui.getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
+        LobbyPlayer aiPlayer = GamePlayerUtil.createAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         gui.setPlayerAvatar(aiPlayer, event);
         starter.add(aiStart.setPlayer(aiPlayer));
 

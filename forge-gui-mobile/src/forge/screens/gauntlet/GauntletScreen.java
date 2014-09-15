@@ -26,6 +26,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gauntlet.GauntletUtil;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.quest.QuestUtil;
 import forge.screens.LaunchScreen;
 import forge.screens.settings.SettingsScreen;
@@ -270,8 +271,8 @@ public class GauntletScreen extends LaunchScreen {
     protected boolean buildLaunchParams(LaunchParams launchParams) {
         final GauntletData gauntlet = FModel.getGauntletData();
         launchParams.gameType = GameType.Gauntlet;
-        launchParams.players.add(new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GuiBase.getInterface().getGuiPlayer()));
-        launchParams.players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GuiBase.getInterface().createAiPlayer()));
+        launchParams.players.add(new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer()));
+        launchParams.players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
         return true;
     }
 

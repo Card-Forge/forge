@@ -1299,7 +1299,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     public boolean isGuiPlayer() {
-        return lobbyPlayer == getGui().getGuiPlayer();
+        return lobbyPlayer == GamePlayerUtil.getGuiPlayer();
     }
 
     /*

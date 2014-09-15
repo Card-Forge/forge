@@ -40,6 +40,7 @@ import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.NameGenerator;
@@ -801,7 +802,7 @@ public class QuestEventDraft {
         }
         
         List<String> usedNames = new ArrayList<>();
-        usedNames.add(quest.getGui().getGuiPlayer().getName());
+        usedNames.add(GamePlayerUtil.getGuiPlayer().getName());
         
         for (int i = 0; i < 7; i++) {
             event.aiNames[i] = NameGenerator.getRandomName("Any", "Any", usedNames);

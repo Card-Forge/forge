@@ -34,4 +34,8 @@ public final class GuiDisplayUtil {
         return text.replaceAll("(?i)human", playerName);
     }
 
+    public static String getRandomAiName() {
+        return NameGenerator.getRandomName("Any", "Generic", getPlayerName());
+    }
+
 } // end class GuiDisplayUtil

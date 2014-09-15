@@ -29,6 +29,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.DeckManager;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.screens.FScreen;
@@ -294,8 +295,8 @@ public class ConstructedScreen extends LaunchScreen {
         for (int i = 0; i < getNumPlayers(); i++) {
             PlayerPanel playerPanel = playerPanels.get(i);
             String name = getPlayerName(i);
-            LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? GuiBase.getInterface().createAiPlayer(name,
-                    getPlayerAvatar(i)) : GuiBase.getInterface().getGuiPlayer();
+            LobbyPlayer lobbyPlayer = playerPanel.isPlayerAI() ? GamePlayerUtil.createAiPlayer(name,
+                    getPlayerAvatar(i)) : GamePlayerUtil.getGuiPlayer(name, i);
             RegisteredPlayer rp = playerPanel.deckChooser.getPlayer();
 
             if (appliedVariants.isEmpty()) {

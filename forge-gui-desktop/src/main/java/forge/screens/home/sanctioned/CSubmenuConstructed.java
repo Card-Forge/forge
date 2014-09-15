@@ -1,6 +1,5 @@
 package forge.screens.home.sanctioned;
 
-import forge.GuiBase;
 import forge.LobbyPlayer;
 import forge.UiCommand;
 import forge.Singletons;
@@ -13,12 +12,12 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.framework.ICDoc;
-import forge.interfaces.IGuiBase;
 import forge.item.PaperCard;
 import forge.menus.IMenuProvider;
 import forge.menus.MenuUtil;
 import forge.model.CardCollections;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.toolbox.FList;
@@ -224,13 +223,12 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             }
         }
 
-        IGuiBase fc = GuiBase.getInterface();
         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
         for (final int i : view.getParticipants()) {
             String name = view.getPlayerName(i);
             LobbyPlayer lobbyPlayer = view.isPlayerAI(i) 
-                    ? fc.createAiPlayer(name, view.getPlayerAvatar(i)) 
-                    : fc.getGuiPlayer();
+                    ? GamePlayerUtil.createAiPlayer(name, view.getPlayerAvatar(i)) 
+                    : GamePlayerUtil.getGuiPlayer(name, i);
             RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
 
             if (variantTypes.isEmpty()) {
