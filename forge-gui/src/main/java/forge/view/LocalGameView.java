@@ -384,8 +384,7 @@ public abstract class LocalGameView implements IGameView {
         }
 
         final Card cUi = c.getCardForUi();
-        final boolean isDisplayable = cUi == c &&
-                !(c.isInZone(ZoneType.Hand) || c.isInZone(ZoneType.Library));
+        final boolean isDisplayable = cUi == c;
 
         CardView view = cards.get(c);
         final boolean mayShow;
