@@ -123,6 +123,8 @@ public class AchievementsPage extends TabPage<SettingsScreen> {
 
         @Override
         public boolean zoom(float x, float y, float amount) {
+            selectedAchievement = null; //unselect when zooming
+
             float oldScrollLeft = getScrollLeft();
             float oldScrollTop = getScrollTop();
             float oldScrollWidth = getScrollWidth();
